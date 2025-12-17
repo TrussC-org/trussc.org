@@ -26,7 +26,7 @@
                 <li><a href="#features">特徴</a></li>
                 <li><a href="#code">コード例</a></li>
                 <li><a href="#tech">技術スタック</a></li>
-                <li><a href="#comparison">oFユーザーへ</a></li>
+                <li><a href="guide.html">oFユーザーへ</a></li>
                 <li><a href="#start" class="nav-cta">始める</a></li>
             </ul>
         </div>
@@ -114,23 +114,6 @@
                     </p>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="5" r="3"/>
-                            <line x1="12" y1="8" x2="12" y2="12"/>
-                            <circle cx="6" cy="17" r="3"/>
-                            <circle cx="18" cy="17" r="3"/>
-                            <line x1="12" y1="12" x2="6" y2="14"/>
-                            <line x1="12" y1="12" x2="18" y2="14"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">シーングラフ標準装備</h3>
-                    <p class="feature-description">
-                        親子関係とローカル座標を標準サポート。
-                        複雑な階層構造も直感的に扱える。
-                    </p>
-                </div>
             </div>
         </div>
     </section>
@@ -345,8 +328,22 @@
                     <div class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div>
-                            <strong>親子関係を標準サポート</strong>
-                            <p>tc::Nodeによるシーングラフで、回転した親の中のボタンも簡単に判定できる。</p>
+                            <strong>シーングラフ標準装備</strong>
+                            <p>tc::Nodeで親子関係を管理。回転した親の中のボタンも簡単に判定できる。</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <div>
+                            <strong>ローカル座標でイベント</strong>
+                            <p>マウス座標が自動変換され、各ノードのローカル座標で届く。</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <div>
+                            <strong>安全な同期タイマー</strong>
+                            <p>callAfter / callEvery でメインスレッドから安全に遅延実行。</p>
                         </div>
                     </div>
                     <div class="benefit-item">
@@ -360,10 +357,16 @@
                         <span class="benefit-icon">✓</span>
                         <div>
                             <strong>ネイティブGPU対応</strong>
-                            <p>Metal / DirectX 12 / Vulkan に対応し、最新ハードウェアの性能を引き出す。</p>
+                            <p>Metal / DirectX 12 / Vulkan で最新ハードウェアの性能を引き出す。</p>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="guide-link-wrapper">
+                <a href="guide.html" class="btn btn-secondary btn-large">
+                    openFrameworksからの移行ガイド
+                </a>
             </div>
         </div>
     </section>

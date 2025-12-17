@@ -718,6 +718,19 @@ img {
     margin: 0;
 }
 
+.comparison-section .guide-link-wrapper {
+    display: block;
+    width: 100%;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.comparison-section .guide-link-wrapper .btn {
+    display: inline-flex;
+    margin: 0 auto;
+}
+
 /* ===================================
    Getting Started Section
    =================================== */

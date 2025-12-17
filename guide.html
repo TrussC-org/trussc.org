@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>openFrameworksジャンキーのためのTrussC入門 | TrussC</title>
+    <meta name="description" content="oFユーザーがTrussCにスムーズに移行するためのガイド。共通点、相違点、API対応表を詳しく解説。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="guide.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-text">TrussC</span>
+            </a>
+            <button class="nav-toggle" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">トップ</a></li>
+                <li><a href="#same">共通点</a></li>
+                <li><a href="#solutions">解決策</a></li>
+                <li><a href="#api">API対応表</a></li>
+                <li><a href="https://github.com/tettou771/TrussC" class="nav-cta" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="guide-hero">
+        <div class="container">
+            <p class="guide-hero-label">For openFrameworks Users</p>
+            <h1 class="guide-hero-title">
+                openFrameworks<br>ジャンキーのための<br>
+                <span class="guide-hero-accent">TrussC入門</span>
+            </h1>
+            <p class="guide-hero-description">
+                oFが好きなあなたなら、TrussCも気に入るはず。<br>
+                同じ楽しさを、現代の技術で。
+            </p>
+        </div>
+    </header>
+
+    <!-- Intro Section -->
+    <section class="section guide-intro">
+        <div class="container">
+            <div class="intro-message">
+                <p>
+                    TrussCは、openFrameworksが築き上げた<strong>「クリエイティブコーディングの楽しさ」</strong>を深くリスペクトしています。
+                </p>
+                <p>
+                    でも、oFが設計された2000年代と今では、ハードウェアもC++も大きく変わりました。<br>
+                    TrussCは、oFの精神を継承しながら、現代の環境に最適化した「次の10年の足場」です。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Same DNA Section -->
+    <section id="same" class="section same-section">
+        <div class="container">
+            <h2 class="section-title">変わらないもの</h2>
+            <p class="section-subtitle">oFユーザーなら、違和感なく書き始められます</p>
+
+            <div class="same-grid">
+                <div class="same-card">
+                    <div class="same-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="4 17 10 11 4 5"/>
+                            <line x1="12" y1="19" x2="20" y2="19"/>
+                        </svg>
+                    </div>
+                    <h3>setup, update, draw</h3>
+                    <p>クリエイティブコーディングの基本リズム。この構造は不変です。</p>
+                    <div class="same-compare">
+                        <code class="of">ofApp</code>
+                        <span class="arrow">→</span>
+                        <code class="tc">tcApp</code>
+                    </div>
+                </div>
+
+                <div class="same-card">
+                    <div class="same-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                        </svg>
+                    </div>
+                    <h3>見たことあるメソッド名</h3>
+                    <p>使い心地を極力変えないように、手に馴染んだメソッド名を踏襲しています。</p>
+                    <div class="same-compare">
+                        <code class="of">ofDrawCircle(x, y, r)</code>
+                        <span class="arrow">→</span>
+                        <code class="tc">tc::drawCircle(x, y, r)</code>
+                    </div>
+                </div>
+
+                <div class="same-card">
+                    <div class="same-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M9 3v18"/>
+                        </svg>
+                    </div>
+                    <h3>VSCode 対応</h3>
+                    <p>今となっては標準ですよね。Cursor派ですか？もちろん大丈夫です。</p>
+                    <div class="same-compare">
+                        <span class="label">CMake</span>
+                        <span class="arrow">+</span>
+                        <span class="label">clangd</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="section solutions-section">
+        <div class="container">
+            <h2 class="section-title">oFで困っていたこと、解決しました</h2>
+            <p class="section-subtitle">長年のペインポイントに対するTrussCの回答</p>
+
+            <!-- Solution 1: 太線 -->
+            <div class="solution-card">
+                <div class="solution-problem">
+                    <div class="solution-label problem-label">困っていたこと</div>
+                    <h3>太線が描けない問題</h3>
+                    <p>
+                        <code>ofSetLineWidth()</code> はOpenGLの制限で太さ1px以上が保証されない。<br>
+                        macOS / Metal環境では完全に無視される。太い線を描くには自前でメッシュを生成するしかなかった。
+                    </p>
+                </div>
+                <div class="solution-answer">
+                    <div class="solution-label answer-label">TrussCの解決策</div>
+                    <h3>StrokeMesh で美しい太線</h3>
+                    <p>
+                        oFでは太い線を描くと角や終端がプッツリ切れた見た目になっていました。<br>
+                        tc::StrokeMesh を使えば美しいエッジを持った幅のある線を描画できます。
+                    </p>
+                    <pre><code><span class="code-comment">// StrokeMesh で任意の太さの線が描ける</span>
+tc::StrokeMesh stroke;
+stroke.setStrokeWidth(<span class="code-number">5.0f</span>);  <span class="code-comment">// 5px の太線</span>
+stroke.moveTo(<span class="code-number">0</span>, <span class="code-number">0</span>);
+stroke.lineTo(<span class="code-number">100</span>, <span class="code-number">100</span>);
+stroke.draw();
+
+<span class="code-comment">// Polyline からも生成可能</span>
+tc::Polyline line;
+line.addVertex(<span class="code-number">0</span>, <span class="code-number">0</span>);
+line.addVertex(<span class="code-number">100</span>, <span class="code-number">50</span>);
+tc::StrokeMesh stroke2(line, <span class="code-number">3.0f</span>);
+stroke2.draw();</code></pre>
+                </div>
+            </div>
+
+            <!-- Solution 2: シーングラフ (親子関係) -->
+            <div class="solution-card">
+                <div class="solution-problem">
+                    <div class="solution-label problem-label">困っていたこと</div>
+                    <h3>親子関係の管理が面倒</h3>
+                    <p>
+                        <code>ofNode</code> はあるが、親子関係の管理が手動。<br>
+                        子ノードの追加・削除でメモリ管理が複雑。<br>
+                        親が消えても子が残ってしまう問題も。
+                    </p>
+                </div>
+                <div class="solution-answer">
+                    <div class="solution-label answer-label">TrussCの解決策</div>
+                    <h3>shared_ptr ベースで自動管理</h3>
+                    <pre><code><span class="code-comment">// shared_ptr ベースで自動管理</span>
+<span class="code-keyword">auto</span> parent = tc::Node::create();
+<span class="code-keyword">auto</span> child = tc::Node::create();
+parent->addChild(child);
+
+<span class="code-comment">// 親を破棄すれば子も自動的に解放される</span>
+<span class="code-comment">// 循環参照も weak_ptr で安全に回避</span></code></pre>
+                </div>
+            </div>
+
+            <!-- Solution 3: ローカル座標 -->
+            <div class="solution-card">
+                <div class="solution-problem">
+                    <div class="solution-label problem-label">困っていたこと</div>
+                    <h3>回転したオブジェクトのクリック判定が地獄</h3>
+                    <p>
+                        マウス座標は常にスクリーン座標（左上原点）。<br>
+                        回転・スケールしたオブジェクト上のクリック判定は複雑な計算が必要。<br>
+                        <code>ofNode</code> を使っても座標変換は自分で計算するしかなかった。
+                    </p>
+                </div>
+                <div class="solution-answer">
+                    <div class="solution-label answer-label">TrussCの解決策</div>
+                    <h3>自動でローカル座標に変換</h3>
+                    <pre><code><span class="code-comment">// RectNode は自動的にローカル座標に変換</span>
+<span class="code-keyword">class</span> MyButton : <span class="code-keyword">public</span> tc::RectNode {
+    <span class="code-keyword">void</span> onMousePressed(<span class="code-keyword">const</span> tc::Vec2& localPos, <span class="code-keyword">int</span> button) <span class="code-keyword">override</span> {
+        <span class="code-comment">// localPos は「このノードにとっての」座標</span>
+        <span class="code-comment">// 親が回転していても、自分のローカル座標で届く！</span>
+        <span class="code-keyword">if</span> (localPos.x < width/<span class="code-number">2</span>) {
+            <span class="code-comment">// 左半分をクリック</span>
+        }
+    }
+};</code></pre>
+                </div>
+            </div>
+
+            <!-- Solution 4: ヒットテスト -->
+            <div class="solution-card">
+                <div class="solution-problem">
+                    <div class="solution-label problem-label">困っていたこと</div>
+                    <h3>重なったオブジェクトの判定が面倒</h3>
+                    <p>
+                        複数のオブジェクトが重なっているときの判定が面倒。<br>
+                        Zオーダー（描画順）を考慮した判定は自前実装するしかなかった。
+                    </p>
+                </div>
+                <div class="solution-answer">
+                    <div class="solution-label answer-label">TrussCの解決策</div>
+                    <h3>Zオーダー考慮 & イベント消費</h3>
+                    <pre><code><span class="code-comment">// RectNode は自動的に Z オーダーを考慮</span>
+<span class="code-comment">// 手前のノードが優先的にイベントを受け取る</span>
+
+<span class="code-keyword">void</span> onMousePressed(<span class="code-keyword">const</span> tc::Vec2& pos, <span class="code-keyword">int</span> button) <span class="code-keyword">override</span> {
+    <span class="code-comment">// このノードで処理したら、後ろのノードには届かない</span>
+    consumeEvent();
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Solution 5: タイマー -->
+            <div class="solution-card">
+                <div class="solution-problem">
+                    <div class="solution-label problem-label">困っていたこと</div>
+                    <h3>「3秒後に実行」を安全にやる方法がない</h3>
+                    <p>
+                        <code>ofThread</code> はデータ競合を起こしやすい。<br>
+                        「3秒後に実行」を安全にやる標準的な方法がなく、<br>
+                        update内で時間計測してif文を書くとコードが汚くなる。
+                    </p>
+                </div>
+                <div class="solution-answer">
+                    <div class="solution-label answer-label">TrussCの解決策</div>
+                    <h3>メインスレッドで安全な同期タイマー</h3>
+                    <pre><code><span class="code-comment">// メインスレッドで安全に遅延実行</span>
+node->callAfter(<span class="code-number">3.0f</span>, []() {
+    <span class="code-comment">// 3秒後にメインスレッドで実行</span>
+    <span class="code-comment">// Mutex 不要、データ競合の心配なし</span>
+});
+
+<span class="code-comment">// 繰り返し実行も簡単</span>
+node->callEvery(<span class="code-number">1.0f</span>, []() {
+    <span class="code-comment">// 1秒ごとに実行</span>
+});</code></pre>
+                </div>
+            </div>
+
+            <!-- Solution 6: バックエンド -->
+            <div class="solution-card">
+                <div class="solution-problem">
+                    <div class="solution-label problem-label">困っていたこと</div>
+                    <h3>OpenGLがmacOSで非推奨に</h3>
+                    <p>
+                        AppleがOpenGLを非推奨にし、Metalへ移行。<br>
+                        将来的な動作保証やパフォーマンス最適化が困難に。<br>
+                        いつサポートが切れるかわからない不安。
+                    </p>
+                </div>
+                <div class="solution-answer">
+                    <div class="solution-label answer-label">TrussCの解決策</div>
+                    <h3>Sokolでネイティブバックエンド</h3>
+                    <p>
+                        <strong>Metal / DirectX 12 / Vulkan / WebGPU</strong> に対応。<br>
+                        OSが推奨する最新のネイティブAPI上で動作するため、高速かつ省電力。<br>
+                        WebAssembly + WebGPU でブラウザへの移植性も高い。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Solution 7: ライセンス -->
+            <div class="solution-card">
+                <div class="solution-problem">
+                    <div class="solution-label problem-label">困っていたこと</div>
+                    <h3>商用利用でのライセンス問題</h3>
+                    <p>
+                        oF本体はMITだが、依存ライブラリにGPLが混在。<br>
+                        FFmpegやFreeTypeなど、ライセンスを確認するのが大変。<br>
+                        クライアントワークで使うときに不安が残る。
+                    </p>
+                </div>
+                <div class="solution-answer">
+                    <div class="solution-label answer-label">TrussCの解決策</div>
+                    <h3>MIT / zlib / Public Domain のみ</h3>
+                    <p>
+                        <strong>GPL汚染ゼロ</strong>を徹底。<br>
+                        すべての依存ライブラリが商用利用フレンドリー。<br>
+                        安心してクライアントワークに使える。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Solution 8: Update/Draw サイクル -->
+            <div class="solution-card">
+                <div class="solution-problem">
+                    <div class="solution-label problem-label">困っていたこと</div>
+                    <h3>UpdateとDrawが常に連動する問題</h3>
+                    <p>
+                        <code>ofSetFrameRate()</code> はDrawとUpdateが常に連動。<br>
+                        物理シミュレーションを固定タイムステップで回したいときに困る。<br>
+                        イベント駆動型アプリ（ボタンを押したときだけ再描画）も作りにくかった。
+                    </p>
+                </div>
+                <div class="solution-answer">
+                    <div class="solution-label answer-label">TrussCの解決策</div>
+                    <h3>Update と Draw を独立制御</h3>
+                    <p>
+                        デフォルトでは今まで通りupdate, drawを交互に呼び出すこともできますが、イベント駆動型のUIアプリを作るときに無駄なdrawを避けるためにupdateとは別のタイミング（クリック時など）で実行できます。<br>
+                        また、描画負荷が重いアプリでもupdateを固定周期にすることも可能です。
+                    </p>
+                    <pre><code><span class="code-comment">// Draw と Update を独立制御</span>
+tc::setDrawVsync(<span class="code-keyword">true</span>);    <span class="code-comment">// 描画は VSync (60Hz)</span>
+tc::setUpdateFps(<span class="code-number">120</span>);      <span class="code-comment">// 物理更新は 120Hz</span>
+
+<span class="code-comment">// イベント駆動型（省電力モード）</span>
+tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-comment">// 自動描画を停止</span>
+<span class="code-comment">// mousePressed 等で tc::redraw() を呼ぶと描画される</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Reference Section -->
+    <section id="api" class="section api-section">
+        <div class="container">
+            <h2 class="section-title">API対応表</h2>
+            <p class="section-subtitle">oFの関数、TrussCではこう書く</p>
+
+            <!-- Filter -->
+            <div class="api-filter">
+                <input type="text" id="api-search" placeholder="検索... (例: drawCircle, Vec3, Sound)">
+            </div>
+
+            <!-- App Structure -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="app">
+                    <span>アプリ構造</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="app">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofApp : public ofBaseApp</code></td><td><code>tcApp : public tc::App</code></td><td></td></tr>
+                            <tr><td><code>ofRunApp(new ofApp())</code></td><td><code>tc::runApp&lt;tcApp&gt;()</code></td><td>テンプレート形式</td></tr>
+                            <tr><td><code>setup()</code></td><td><code>setup()</code></td><td>同じ</td></tr>
+                            <tr><td><code>update()</code></td><td><code>update()</code></td><td>同じ</td></tr>
+                            <tr><td><code>draw()</code></td><td><code>draw()</code></td><td>同じ</td></tr>
+                            <tr><td><code>keyPressed(int key)</code></td><td><code>keyPressed(int key)</code></td><td>同じ</td></tr>
+                            <tr><td><code>mousePressed(x, y, button)</code></td><td><code>mousePressed(x, y, button)</code></td><td>同じ</td></tr>
+                            <tr><td><code>ofSetFrameRate(60)</code></td><td><code>tc::setFps(60)</code></td><td></td></tr>
+                            <tr><td><code>ofSetVerticalSync(true)</code></td><td><code>tc::setVsync(true)</code></td><td></td></tr>
+                            <tr><td><code>ofGetElapsedTimef()</code></td><td><code>tc::getElapsedTime()</code></td><td></td></tr>
+                            <tr><td><code>ofGetFrameRate()</code></td><td><code>tc::getFrameRate()</code></td><td></td></tr>
+                            <tr><td><code>ofGetWidth()</code></td><td><code>tc::getWindowWidth()</code></td><td></td></tr>
+                            <tr><td><code>ofGetHeight()</code></td><td><code>tc::getWindowHeight()</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Graphics -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="graphics">
+                    <span>描画（Graphics）</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="graphics">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofBackground(r, g, b)</code></td><td><code>tc::clear(r, g, b)</code></td><td>0.0-1.0</td></tr>
+                            <tr><td><code>ofSetColor(r, g, b, a)</code></td><td><code>tc::setColor(r, g, b, a)</code></td><td>0.0-1.0</td></tr>
+                            <tr><td><code>ofSetColor(ofColor::red)</code></td><td><code>tc::setColor(tc::colors::red)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawRectangle(x, y, w, h)</code></td><td><code>tc::drawRect(x, y, w, h)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawCircle(x, y, r)</code></td><td><code>tc::drawCircle(x, y, r)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawEllipse(x, y, w, h)</code></td><td><code>tc::drawEllipse(x, y, w, h)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawLine(x1, y1, x2, y2)</code></td><td><code>tc::drawLine(x1, y1, x2, y2)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawTriangle(...)</code></td><td><code>tc::drawTriangle(...)</code></td><td></td></tr>
+                            <tr><td><code>ofNoFill()</code></td><td><code>tc::noFill()</code></td><td></td></tr>
+                            <tr><td><code>ofFill()</code></td><td><code>tc::fill()</code></td><td></td></tr>
+                            <tr><td><code>ofSetLineWidth(w)</code></td><td><code>tc::setLineWidth(w)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawBitmapString(s, x, y)</code></td><td><code>tc::drawBitmapString(s, x, y)</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Transform -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="transform">
+                    <span>変換（Transform）</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="transform">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofPushMatrix()</code></td><td><code>tc::pushMatrix()</code></td><td></td></tr>
+                            <tr><td><code>ofPopMatrix()</code></td><td><code>tc::popMatrix()</code></td><td></td></tr>
+                            <tr><td><code>ofTranslate(x, y, z)</code></td><td><code>tc::translate(x, y, z)</code></td><td></td></tr>
+                            <tr><td><code>ofRotateDeg(deg)</code></td><td><code>tc::rotateDeg(deg)</code></td><td></td></tr>
+                            <tr><td><code>ofRotateRad(rad)</code></td><td><code>tc::rotateRad(rad)</code></td><td></td></tr>
+                            <tr><td><code>ofScale(x, y, z)</code></td><td><code>tc::scale(x, y, z)</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Math -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="math">
+                    <span>数学（Math）</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="math">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>glm::vec2 / ofVec2f</code></td><td><code>tc::Vec2</code></td><td></td></tr>
+                            <tr><td><code>glm::vec3 / ofVec3f</code></td><td><code>tc::Vec3</code></td><td></td></tr>
+                            <tr><td><code>glm::vec4 / ofVec4f</code></td><td><code>tc::Vec4</code></td><td></td></tr>
+                            <tr><td><code>glm::mat4 / ofMatrix4x4</code></td><td><code>tc::Mat4</code></td><td></td></tr>
+                            <tr><td><code>ofMap(v, a, b, c, d)</code></td><td><code>tc::map(v, a, b, c, d)</code></td><td></td></tr>
+                            <tr><td><code>ofClamp(v, min, max)</code></td><td><code>tc::clamp(v, min, max)</code></td><td></td></tr>
+                            <tr><td><code>ofLerp(a, b, t)</code></td><td><code>tc::lerp(a, b, t)</code></td><td></td></tr>
+                            <tr><td><code>ofNoise(x)</code></td><td><code>tc::noise(x)</code></td><td>Perlin noise</td></tr>
+                            <tr><td><code>ofSignedNoise(x)</code></td><td><code>tc::signedNoise(x)</code></td><td></td></tr>
+                            <tr><td><code>ofRandom(min, max)</code></td><td><code>tc::random(min, max)</code></td><td></td></tr>
+                            <tr><td><code>ofDegToRad(deg)</code></td><td><code>tc::radians(deg)</code></td><td></td></tr>
+                            <tr><td><code>ofRadToDeg(rad)</code></td><td><code>tc::degrees(rad)</code></td><td></td></tr>
+                            <tr><td><code>PI</code></td><td><code>tc::PI</code></td><td></td></tr>
+                            <tr><td><code>TWO_PI</code></td><td><code>tc::TAU</code></td><td>τ = 2π</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Color -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="color">
+                    <span>色（Color）</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="color">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofColor(r, g, b, a)</code></td><td><code>tc::Color(r, g, b, a)</code></td><td>0.0-1.0</td></tr>
+                            <tr><td><code>ofColor::fromHsb(h, s, b)</code></td><td><code>tc::Color::fromHSB(h, s, b)</code></td><td>0.0-1.0</td></tr>
+                            <tr><td>-</td><td><code>tc::Color::fromOKLab(L, a, b)</code></td><td>OKLab色空間</td></tr>
+                            <tr><td>-</td><td><code>tc::Color::fromOKLCH(L, C, h)</code></td><td>OKLCH色空間</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Image -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="image">
+                    <span>画像（Image）</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="image">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofImage</code></td><td><code>tc::Image</code></td><td></td></tr>
+                            <tr><td><code>img.load("path")</code></td><td><code>img.load("path")</code></td><td>同じ</td></tr>
+                            <tr><td><code>img.draw(x, y)</code></td><td><code>img.draw(x, y)</code></td><td>同じ</td></tr>
+                            <tr><td><code>img.draw(x, y, w, h)</code></td><td><code>img.draw(x, y, w, h)</code></td><td>同じ</td></tr>
+                            <tr><td><code>img.save("path")</code></td><td><code>img.save("path")</code></td><td>同じ</td></tr>
+                            <tr><td><code>img.getWidth()</code></td><td><code>img.getWidth()</code></td><td>同じ</td></tr>
+                            <tr><td><code>img.getHeight()</code></td><td><code>img.getHeight()</code></td><td>同じ</td></tr>
+                            <tr><td>-</td><td><code>img.setFilter(Nearest/Linear)</code></td><td>テクスチャフィルター</td></tr>
+                            <tr><td>-</td><td><code>img.setWrap(Repeat/Clamp/...)</code></td><td>テクスチャラップ</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3D -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="3d">
+                    <span>3D</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="3d">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofPlanePrimitive</code></td><td><code>tc::createPlane(w, h)</code></td><td>Meshを返す</td></tr>
+                            <tr><td><code>ofBoxPrimitive</code></td><td><code>tc::createBox(size)</code></td><td></td></tr>
+                            <tr><td><code>ofSpherePrimitive</code></td><td><code>tc::createSphere(r, res)</code></td><td></td></tr>
+                            <tr><td><code>ofIcoSpherePrimitive</code></td><td><code>tc::createIcoSphere(r, res)</code></td><td></td></tr>
+                            <tr><td><code>ofCylinderPrimitive</code></td><td><code>tc::createCylinder(r, h, res)</code></td><td></td></tr>
+                            <tr><td><code>ofConePrimitive</code></td><td><code>tc::createCone(r, h, res)</code></td><td></td></tr>
+                            <tr><td><code>ofEasyCam</code></td><td><code>tc::EasyCam</code></td><td></td></tr>
+                            <tr><td><code>cam.begin()</code></td><td><code>cam.begin()</code></td><td>同じ</td></tr>
+                            <tr><td><code>cam.end()</code></td><td><code>cam.end()</code></td><td>同じ</td></tr>
+                            <tr><td><code>ofEnableLighting()</code></td><td><code>tc::enableLighting()</code></td><td></td></tr>
+                            <tr><td><code>ofLight</code></td><td><code>tc::Light</code></td><td></td></tr>
+                            <tr><td><code>ofMaterial</code></td><td><code>tc::Material</code></td><td></td></tr>
+                            <tr><td>-</td><td><code>tc::Material::gold()</code></td><td>プリセット</td></tr>
+                            <tr><td>-</td><td><code>tc::Material::silver()</code></td><td>プリセット</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Sound -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="sound">
+                    <span>サウンド</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="sound">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofSoundPlayer</code></td><td><code>tc::Sound</code></td><td></td></tr>
+                            <tr><td><code>sound.load("file.wav")</code></td><td><code>sound.load("file.wav")</code></td><td></td></tr>
+                            <tr><td><code>sound.play()</code></td><td><code>sound.play()</code></td><td></td></tr>
+                            <tr><td><code>sound.stop()</code></td><td><code>sound.stop()</code></td><td></td></tr>
+                            <tr><td><code>sound.setVolume(v)</code></td><td><code>sound.setVolume(v)</code></td><td></td></tr>
+                            <tr><td><code>sound.setLoop(true)</code></td><td><code>sound.setLoop(true)</code></td><td></td></tr>
+                            <tr><td><code>ofSoundStream</code></td><td><code>tc::MicInput</code></td><td>マイク入力</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Video -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="video">
+                    <span>ビデオ</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="video">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofVideoGrabber</code></td><td><code>tc::VideoGrabber</code></td><td></td></tr>
+                            <tr><td><code>grabber.setup(w, h)</code></td><td><code>grabber.setup(w, h)</code></td><td></td></tr>
+                            <tr><td><code>grabber.update()</code></td><td><code>grabber.update()</code></td><td></td></tr>
+                            <tr><td><code>grabber.draw(x, y)</code></td><td><code>grabber.draw(x, y)</code></td><td></td></tr>
+                            <tr><td><code>grabber.isFrameNew()</code></td><td><code>grabber.isFrameNew()</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- IO -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="io">
+                    <span>入出力・ネットワーク</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="io">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofSystemLoadDialog()</code></td><td><code>tc::systemLoadDialog()</code></td><td></td></tr>
+                            <tr><td><code>ofSystemSaveDialog()</code></td><td><code>tc::systemSaveDialog()</code></td><td></td></tr>
+                            <tr><td><code>ofLoadJson(path)</code></td><td><code>tc::loadJson(path)</code></td><td>nlohmann/json</td></tr>
+                            <tr><td>-</td><td><code>tc::loadXml(path)</code></td><td>pugixml</td></tr>
+                            <tr><td><code>ofxTCPClient</code></td><td><code>tc::TcpClient</code></td><td></td></tr>
+                            <tr><td><code>ofxTCPServer</code></td><td><code>tc::TcpServer</code></td><td></td></tr>
+                            <tr><td><code>ofxUDPManager</code></td><td><code>tc::UdpSocket</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Scene Graph -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="scene">
+                    <span>シーングラフ・イベント</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="scene">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofNode</code></td><td><code>tc::Node</code></td><td>shared_ptrベース</td></tr>
+                            <tr><td><code>node.setPosition(x, y, z)</code></td><td><code>node->setPosition(x, y, z)</code></td><td></td></tr>
+                            <tr><td><code>node.setParent(parent)</code></td><td><code>parent->addChild(child)</code></td><td></td></tr>
+                            <tr><td>-</td><td><code>tc::RectNode</code></td><td>2D UI用、ヒットテスト対応</td></tr>
+                            <tr><td><code>ofEvent&lt;T&gt;</code></td><td><code>tc::Event&lt;T&gt;</code></td><td></td></tr>
+                            <tr><td><code>ofAddListener(...)</code></td><td><code>tc::EventListener</code></td><td>RAII形式</td></tr>
+                            <tr><td><code>ofLog()</code></td><td><code>tc::tcLogNotice()</code></td><td></td></tr>
+                            <tr><td><code>ofLogWarning()</code></td><td><code>tc::tcLogWarning()</code></td><td></td></tr>
+                            <tr><td><code>ofLogError()</code></td><td><code>tc::tcLogError()</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta-section">
+        <div class="container">
+            <h2>さあ、始めよう</h2>
+            <p>oFで培った経験は、そのまま活きる。</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/tettou771/TrussC" class="btn btn-primary btn-large" target="_blank">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    GitHubで見る
+                </a>
+                <a href="index.html" class="btn btn-secondary btn-large">トップに戻る</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 TrussC. Released under the MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="guide.js"></script>
+</body>
+</html>
