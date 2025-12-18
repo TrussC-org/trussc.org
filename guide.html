@@ -97,7 +97,7 @@
                     <div class="same-compare">
                         <code class="of">ofDrawCircle(x, y, r)</code>
                         <span class="arrow">→</span>
-                        <code class="tc">tc::drawCircle(x, y, r)</code>
+                        <code class="tc">drawCircle(x, y, r)</code>
                     </div>
                 </div>
 
@@ -141,20 +141,20 @@
                     <h3>StrokeMesh で美しい太線</h3>
                     <p>
                         oFでは太い線を描くと角や終端がプッツリ切れた見た目になっていました。<br>
-                        tc::StrokeMesh を使えば美しいエッジを持った幅のある線を描画できます。
+                        StrokeMesh を使えば美しいエッジを持った幅のある線を描画できます。
                     </p>
                     <pre><code><span class="code-comment">// StrokeMesh で任意の太さの線が描ける</span>
-tc::StrokeMesh stroke;
+StrokeMesh stroke;
 stroke.setStrokeWidth(<span class="code-number">5.0f</span>);  <span class="code-comment">// 5px の太線</span>
 stroke.moveTo(<span class="code-number">0</span>, <span class="code-number">0</span>);
 stroke.lineTo(<span class="code-number">100</span>, <span class="code-number">100</span>);
 stroke.draw();
 
 <span class="code-comment">// Polyline からも生成可能</span>
-tc::Polyline line;
+Polyline line;
 line.addVertex(<span class="code-number">0</span>, <span class="code-number">0</span>);
 line.addVertex(<span class="code-number">100</span>, <span class="code-number">50</span>);
-tc::StrokeMesh stroke2(line, <span class="code-number">3.0f</span>);
+StrokeMesh stroke2(line, <span class="code-number">3.0f</span>);
 stroke2.draw();</code></pre>
                 </div>
             </div>
@@ -174,8 +174,8 @@ stroke2.draw();</code></pre>
                     <div class="solution-label answer-label">TrussCの解決策</div>
                     <h3>shared_ptr ベースで自動管理</h3>
                     <pre><code><span class="code-comment">// shared_ptr ベースで自動管理</span>
-<span class="code-keyword">auto</span> parent = tc::Node::create();
-<span class="code-keyword">auto</span> child = tc::Node::create();
+<span class="code-keyword">auto</span> parent = Node::create();
+<span class="code-keyword">auto</span> child = Node::create();
 parent->addChild(child);
 
 <span class="code-comment">// 親を破棄すれば子も自動的に解放される</span>
@@ -198,8 +198,8 @@ parent->addChild(child);
                     <div class="solution-label answer-label">TrussCの解決策</div>
                     <h3>自動でローカル座標に変換</h3>
                     <pre><code><span class="code-comment">// RectNode は自動的にローカル座標に変換</span>
-<span class="code-keyword">class</span> MyButton : <span class="code-keyword">public</span> tc::RectNode {
-    <span class="code-keyword">void</span> onMousePressed(<span class="code-keyword">const</span> tc::Vec2& localPos, <span class="code-keyword">int</span> button) <span class="code-keyword">override</span> {
+<span class="code-keyword">class</span> MyButton : <span class="code-keyword">public</span> RectNode {
+    <span class="code-keyword">void</span> onMousePressed(<span class="code-keyword">const</span> Vec2& localPos, <span class="code-keyword">int</span> button) <span class="code-keyword">override</span> {
         <span class="code-comment">// localPos は「このノードにとっての」座標</span>
         <span class="code-comment">// 親が回転していても、自分のローカル座標で届く！</span>
         <span class="code-keyword">if</span> (localPos.x < width/<span class="code-number">2</span>) {
@@ -226,7 +226,7 @@ parent->addChild(child);
                     <pre><code><span class="code-comment">// RectNode は自動的に Z オーダーを考慮</span>
 <span class="code-comment">// 手前のノードが優先的にイベントを受け取る</span>
 
-<span class="code-keyword">void</span> onMousePressed(<span class="code-keyword">const</span> tc::Vec2& pos, <span class="code-keyword">int</span> button) <span class="code-keyword">override</span> {
+<span class="code-keyword">void</span> onMousePressed(<span class="code-keyword">const</span> Vec2& pos, <span class="code-keyword">int</span> button) <span class="code-keyword">override</span> {
     <span class="code-comment">// このノードで処理したら、後ろのノードには届かない</span>
     consumeEvent();
 }</code></pre>
@@ -323,12 +323,12 @@ node->callEvery(<span class="code-number">1.0f</span>, []() {
                         また、描画負荷が重いアプリでもupdateを固定周期にすることも可能です。
                     </p>
                     <pre><code><span class="code-comment">// Draw と Update を独立制御</span>
-tc::setDrawVsync(<span class="code-keyword">true</span>);    <span class="code-comment">// 描画は VSync (60Hz)</span>
-tc::setUpdateFps(<span class="code-number">120</span>);      <span class="code-comment">// 物理更新は 120Hz</span>
+setDrawVsync(<span class="code-keyword">true</span>);    <span class="code-comment">// 描画は VSync (60Hz)</span>
+setUpdateFps(<span class="code-number">120</span>);      <span class="code-comment">// 物理更新は 120Hz</span>
 
 <span class="code-comment">// イベント駆動型（省電力モード）</span>
-tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-comment">// 自動描画を停止</span>
-<span class="code-comment">// mousePressed 等で tc::redraw() を呼ぶと描画される</span></code></pre>
+setDrawFps(<span class="code-number">0</span>);          <span class="code-comment">// 自動描画を停止</span>
+<span class="code-comment">// mousePressed 等で redraw() を呼ぶと描画される</span></code></pre>
                 </div>
             </div>
         </div>
@@ -361,19 +361,19 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>ofApp : public ofBaseApp</code></td><td><code>tcApp : public tc::App</code></td><td></td></tr>
-                            <tr><td><code>ofRunApp(new ofApp())</code></td><td><code>tc::runApp&lt;tcApp&gt;()</code></td><td>テンプレート形式</td></tr>
+                            <tr><td><code>ofApp : public ofBaseApp</code></td><td><code>tcApp : public App</code></td><td></td></tr>
+                            <tr><td><code>ofRunApp(new ofApp())</code></td><td><code>runApp&lt;tcApp&gt;()</code></td><td>テンプレート形式</td></tr>
                             <tr><td><code>setup()</code></td><td><code>setup()</code></td><td>同じ</td></tr>
                             <tr><td><code>update()</code></td><td><code>update()</code></td><td>同じ</td></tr>
                             <tr><td><code>draw()</code></td><td><code>draw()</code></td><td>同じ</td></tr>
                             <tr><td><code>keyPressed(int key)</code></td><td><code>keyPressed(int key)</code></td><td>同じ</td></tr>
                             <tr><td><code>mousePressed(x, y, button)</code></td><td><code>mousePressed(x, y, button)</code></td><td>同じ</td></tr>
-                            <tr><td><code>ofSetFrameRate(60)</code></td><td><code>tc::setFps(60)</code></td><td></td></tr>
-                            <tr><td><code>ofSetVerticalSync(true)</code></td><td><code>tc::setVsync(true)</code></td><td></td></tr>
-                            <tr><td><code>ofGetElapsedTimef()</code></td><td><code>tc::getElapsedTime()</code></td><td></td></tr>
-                            <tr><td><code>ofGetFrameRate()</code></td><td><code>tc::getFrameRate()</code></td><td></td></tr>
-                            <tr><td><code>ofGetWidth()</code></td><td><code>tc::getWindowWidth()</code></td><td></td></tr>
-                            <tr><td><code>ofGetHeight()</code></td><td><code>tc::getWindowHeight()</code></td><td></td></tr>
+                            <tr><td><code>ofSetFrameRate(60)</code></td><td><code>setFps(60)</code></td><td></td></tr>
+                            <tr><td><code>ofSetVerticalSync(true)</code></td><td><code>setVsync(true)</code></td><td></td></tr>
+                            <tr><td><code>ofGetElapsedTimef()</code></td><td><code>getElapsedTime()</code></td><td></td></tr>
+                            <tr><td><code>ofGetFrameRate()</code></td><td><code>getFrameRate()</code></td><td></td></tr>
+                            <tr><td><code>ofGetWidth()</code></td><td><code>getWindowWidth()</code></td><td></td></tr>
+                            <tr><td><code>ofGetHeight()</code></td><td><code>getWindowHeight()</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -395,18 +395,18 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>ofBackground(r, g, b)</code></td><td><code>tc::clear(r, g, b)</code></td><td>0.0-1.0</td></tr>
-                            <tr><td><code>ofSetColor(r, g, b, a)</code></td><td><code>tc::setColor(r, g, b, a)</code></td><td>0.0-1.0</td></tr>
-                            <tr><td><code>ofSetColor(ofColor::red)</code></td><td><code>tc::setColor(tc::colors::red)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawRectangle(x, y, w, h)</code></td><td><code>tc::drawRect(x, y, w, h)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawCircle(x, y, r)</code></td><td><code>tc::drawCircle(x, y, r)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawEllipse(x, y, w, h)</code></td><td><code>tc::drawEllipse(x, y, w, h)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawLine(x1, y1, x2, y2)</code></td><td><code>tc::drawLine(x1, y1, x2, y2)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawTriangle(...)</code></td><td><code>tc::drawTriangle(...)</code></td><td></td></tr>
-                            <tr><td><code>ofNoFill()</code></td><td><code>tc::noFill()</code></td><td></td></tr>
-                            <tr><td><code>ofFill()</code></td><td><code>tc::fill()</code></td><td></td></tr>
-                            <tr><td><code>ofSetLineWidth(w)</code></td><td><code>tc::setLineWidth(w)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawBitmapString(s, x, y)</code></td><td><code>tc::drawBitmapString(s, x, y)</code></td><td></td></tr>
+                            <tr><td><code>ofBackground(r, g, b)</code></td><td><code>clear(r, g, b)</code></td><td>0.0-1.0</td></tr>
+                            <tr><td><code>ofSetColor(r, g, b, a)</code></td><td><code>setColor(r, g, b, a)</code></td><td>0.0-1.0</td></tr>
+                            <tr><td><code>ofSetColor(ofColor::red)</code></td><td><code>setColor(colors::red)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawRectangle(x, y, w, h)</code></td><td><code>drawRect(x, y, w, h)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawCircle(x, y, r)</code></td><td><code>drawCircle(x, y, r)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawEllipse(x, y, w, h)</code></td><td><code>drawEllipse(x, y, w, h)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawLine(x1, y1, x2, y2)</code></td><td><code>drawLine(x1, y1, x2, y2)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawTriangle(...)</code></td><td><code>drawTriangle(...)</code></td><td></td></tr>
+                            <tr><td><code>ofNoFill()</code></td><td><code>noFill()</code></td><td></td></tr>
+                            <tr><td><code>ofFill()</code></td><td><code>fill()</code></td><td></td></tr>
+                            <tr><td><code>ofSetLineWidth(w)</code></td><td><code>setLineWidth(w)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawBitmapString(s, x, y)</code></td><td><code>drawBitmapString(s, x, y)</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -428,12 +428,12 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>ofPushMatrix()</code></td><td><code>tc::pushMatrix()</code></td><td></td></tr>
-                            <tr><td><code>ofPopMatrix()</code></td><td><code>tc::popMatrix()</code></td><td></td></tr>
-                            <tr><td><code>ofTranslate(x, y, z)</code></td><td><code>tc::translate(x, y, z)</code></td><td></td></tr>
-                            <tr><td><code>ofRotateDeg(deg)</code></td><td><code>tc::rotateDeg(deg)</code></td><td></td></tr>
-                            <tr><td><code>ofRotateRad(rad)</code></td><td><code>tc::rotateRad(rad)</code></td><td></td></tr>
-                            <tr><td><code>ofScale(x, y, z)</code></td><td><code>tc::scale(x, y, z)</code></td><td></td></tr>
+                            <tr><td><code>ofPushMatrix()</code></td><td><code>pushMatrix()</code></td><td></td></tr>
+                            <tr><td><code>ofPopMatrix()</code></td><td><code>popMatrix()</code></td><td></td></tr>
+                            <tr><td><code>ofTranslate(x, y, z)</code></td><td><code>translate(x, y, z)</code></td><td></td></tr>
+                            <tr><td><code>ofRotateDeg(deg)</code></td><td><code>rotateDeg(deg)</code></td><td></td></tr>
+                            <tr><td><code>ofRotateRad(rad)</code></td><td><code>rotateRad(rad)</code></td><td></td></tr>
+                            <tr><td><code>ofScale(x, y, z)</code></td><td><code>scale(x, y, z)</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -455,20 +455,20 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>glm::vec2 / ofVec2f</code></td><td><code>tc::Vec2</code></td><td></td></tr>
-                            <tr><td><code>glm::vec3 / ofVec3f</code></td><td><code>tc::Vec3</code></td><td></td></tr>
-                            <tr><td><code>glm::vec4 / ofVec4f</code></td><td><code>tc::Vec4</code></td><td></td></tr>
-                            <tr><td><code>glm::mat4 / ofMatrix4x4</code></td><td><code>tc::Mat4</code></td><td></td></tr>
-                            <tr><td><code>ofMap(v, a, b, c, d)</code></td><td><code>tc::map(v, a, b, c, d)</code></td><td></td></tr>
-                            <tr><td><code>ofClamp(v, min, max)</code></td><td><code>tc::clamp(v, min, max)</code></td><td></td></tr>
-                            <tr><td><code>ofLerp(a, b, t)</code></td><td><code>tc::lerp(a, b, t)</code></td><td></td></tr>
-                            <tr><td><code>ofNoise(x)</code></td><td><code>tc::noise(x)</code></td><td>Perlin noise</td></tr>
-                            <tr><td><code>ofSignedNoise(x)</code></td><td><code>tc::signedNoise(x)</code></td><td></td></tr>
-                            <tr><td><code>ofRandom(min, max)</code></td><td><code>tc::random(min, max)</code></td><td></td></tr>
-                            <tr><td><code>ofDegToRad(deg)</code></td><td><code>tc::radians(deg)</code></td><td></td></tr>
-                            <tr><td><code>ofRadToDeg(rad)</code></td><td><code>tc::degrees(rad)</code></td><td></td></tr>
-                            <tr><td><code>PI</code></td><td><code>tc::PI</code></td><td></td></tr>
-                            <tr><td><code>TWO_PI</code></td><td><code>tc::TAU</code></td><td>τ = 2π</td></tr>
+                            <tr><td><code>glm::vec2 / ofVec2f</code></td><td><code>Vec2</code></td><td></td></tr>
+                            <tr><td><code>glm::vec3 / ofVec3f</code></td><td><code>Vec3</code></td><td></td></tr>
+                            <tr><td><code>glm::vec4 / ofVec4f</code></td><td><code>Vec4</code></td><td></td></tr>
+                            <tr><td><code>glm::mat4 / ofMatrix4x4</code></td><td><code>Mat4</code></td><td></td></tr>
+                            <tr><td><code>ofMap(v, a, b, c, d)</code></td><td><code>map(v, a, b, c, d)</code></td><td></td></tr>
+                            <tr><td><code>ofClamp(v, min, max)</code></td><td><code>clamp(v, min, max)</code></td><td></td></tr>
+                            <tr><td><code>ofLerp(a, b, t)</code></td><td><code>lerp(a, b, t)</code></td><td></td></tr>
+                            <tr><td><code>ofNoise(x)</code></td><td><code>noise(x)</code></td><td>Perlin noise</td></tr>
+                            <tr><td><code>ofSignedNoise(x)</code></td><td><code>signedNoise(x)</code></td><td></td></tr>
+                            <tr><td><code>ofRandom(min, max)</code></td><td><code>random(min, max)</code></td><td></td></tr>
+                            <tr><td><code>ofDegToRad(deg)</code></td><td><code>radians(deg)</code></td><td></td></tr>
+                            <tr><td><code>ofRadToDeg(rad)</code></td><td><code>degrees(rad)</code></td><td></td></tr>
+                            <tr><td><code>PI</code></td><td><code>PI</code></td><td></td></tr>
+                            <tr><td><code>TWO_PI</code></td><td><code>TAU</code></td><td>τ = 2π</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -490,10 +490,10 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>ofColor(r, g, b, a)</code></td><td><code>tc::Color(r, g, b, a)</code></td><td>0.0-1.0</td></tr>
-                            <tr><td><code>ofColor::fromHsb(h, s, b)</code></td><td><code>tc::Color::fromHSB(h, s, b)</code></td><td>0.0-1.0</td></tr>
-                            <tr><td>-</td><td><code>tc::Color::fromOKLab(L, a, b)</code></td><td>OKLab色空間</td></tr>
-                            <tr><td>-</td><td><code>tc::Color::fromOKLCH(L, C, h)</code></td><td>OKLCH色空間</td></tr>
+                            <tr><td><code>ofColor(r, g, b, a)</code></td><td><code>Color(r, g, b, a)</code></td><td>0.0-1.0</td></tr>
+                            <tr><td><code>ofColor::fromHsb(h, s, b)</code></td><td><code>Color::fromHSB(h, s, b)</code></td><td>0.0-1.0</td></tr>
+                            <tr><td>-</td><td><code>Color::fromOKLab(L, a, b)</code></td><td>OKLab色空間</td></tr>
+                            <tr><td>-</td><td><code>Color::fromOKLCH(L, C, h)</code></td><td>OKLCH色空間</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -515,7 +515,7 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>ofImage</code></td><td><code>tc::Image</code></td><td></td></tr>
+                            <tr><td><code>ofImage</code></td><td><code>Image</code></td><td></td></tr>
                             <tr><td><code>img.load("path")</code></td><td><code>img.load("path")</code></td><td>同じ</td></tr>
                             <tr><td><code>img.draw(x, y)</code></td><td><code>img.draw(x, y)</code></td><td>同じ</td></tr>
                             <tr><td><code>img.draw(x, y, w, h)</code></td><td><code>img.draw(x, y, w, h)</code></td><td>同じ</td></tr>
@@ -545,20 +545,20 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>ofPlanePrimitive</code></td><td><code>tc::createPlane(w, h)</code></td><td>Meshを返す</td></tr>
-                            <tr><td><code>ofBoxPrimitive</code></td><td><code>tc::createBox(size)</code></td><td></td></tr>
-                            <tr><td><code>ofSpherePrimitive</code></td><td><code>tc::createSphere(r, res)</code></td><td></td></tr>
-                            <tr><td><code>ofIcoSpherePrimitive</code></td><td><code>tc::createIcoSphere(r, res)</code></td><td></td></tr>
-                            <tr><td><code>ofCylinderPrimitive</code></td><td><code>tc::createCylinder(r, h, res)</code></td><td></td></tr>
-                            <tr><td><code>ofConePrimitive</code></td><td><code>tc::createCone(r, h, res)</code></td><td></td></tr>
-                            <tr><td><code>ofEasyCam</code></td><td><code>tc::EasyCam</code></td><td></td></tr>
+                            <tr><td><code>ofPlanePrimitive</code></td><td><code>createPlane(w, h)</code></td><td>Meshを返す</td></tr>
+                            <tr><td><code>ofBoxPrimitive</code></td><td><code>createBox(size)</code></td><td></td></tr>
+                            <tr><td><code>ofSpherePrimitive</code></td><td><code>createSphere(r, res)</code></td><td></td></tr>
+                            <tr><td><code>ofIcoSpherePrimitive</code></td><td><code>createIcoSphere(r, res)</code></td><td></td></tr>
+                            <tr><td><code>ofCylinderPrimitive</code></td><td><code>createCylinder(r, h, res)</code></td><td></td></tr>
+                            <tr><td><code>ofConePrimitive</code></td><td><code>createCone(r, h, res)</code></td><td></td></tr>
+                            <tr><td><code>ofEasyCam</code></td><td><code>EasyCam</code></td><td></td></tr>
                             <tr><td><code>cam.begin()</code></td><td><code>cam.begin()</code></td><td>同じ</td></tr>
                             <tr><td><code>cam.end()</code></td><td><code>cam.end()</code></td><td>同じ</td></tr>
-                            <tr><td><code>ofEnableLighting()</code></td><td><code>tc::enableLighting()</code></td><td></td></tr>
-                            <tr><td><code>ofLight</code></td><td><code>tc::Light</code></td><td></td></tr>
-                            <tr><td><code>ofMaterial</code></td><td><code>tc::Material</code></td><td></td></tr>
-                            <tr><td>-</td><td><code>tc::Material::gold()</code></td><td>プリセット</td></tr>
-                            <tr><td>-</td><td><code>tc::Material::silver()</code></td><td>プリセット</td></tr>
+                            <tr><td><code>ofEnableLighting()</code></td><td><code>enableLighting()</code></td><td></td></tr>
+                            <tr><td><code>ofLight</code></td><td><code>Light</code></td><td></td></tr>
+                            <tr><td><code>ofMaterial</code></td><td><code>Material</code></td><td></td></tr>
+                            <tr><td>-</td><td><code>Material::gold()</code></td><td>プリセット</td></tr>
+                            <tr><td>-</td><td><code>Material::silver()</code></td><td>プリセット</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -580,13 +580,13 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>ofSoundPlayer</code></td><td><code>tc::Sound</code></td><td></td></tr>
+                            <tr><td><code>ofSoundPlayer</code></td><td><code>Sound</code></td><td></td></tr>
                             <tr><td><code>sound.load("file.wav")</code></td><td><code>sound.load("file.wav")</code></td><td></td></tr>
                             <tr><td><code>sound.play()</code></td><td><code>sound.play()</code></td><td></td></tr>
                             <tr><td><code>sound.stop()</code></td><td><code>sound.stop()</code></td><td></td></tr>
                             <tr><td><code>sound.setVolume(v)</code></td><td><code>sound.setVolume(v)</code></td><td></td></tr>
                             <tr><td><code>sound.setLoop(true)</code></td><td><code>sound.setLoop(true)</code></td><td></td></tr>
-                            <tr><td><code>ofSoundStream</code></td><td><code>tc::MicInput</code></td><td>マイク入力</td></tr>
+                            <tr><td><code>ofSoundStream</code></td><td><code>MicInput</code></td><td>マイク入力</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -608,7 +608,7 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>ofVideoGrabber</code></td><td><code>tc::VideoGrabber</code></td><td></td></tr>
+                            <tr><td><code>ofVideoGrabber</code></td><td><code>VideoGrabber</code></td><td></td></tr>
                             <tr><td><code>grabber.setup(w, h)</code></td><td><code>grabber.setup(w, h)</code></td><td></td></tr>
                             <tr><td><code>grabber.update()</code></td><td><code>grabber.update()</code></td><td></td></tr>
                             <tr><td><code>grabber.draw(x, y)</code></td><td><code>grabber.draw(x, y)</code></td><td></td></tr>
@@ -634,13 +634,13 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>ofSystemLoadDialog()</code></td><td><code>tc::systemLoadDialog()</code></td><td></td></tr>
-                            <tr><td><code>ofSystemSaveDialog()</code></td><td><code>tc::systemSaveDialog()</code></td><td></td></tr>
-                            <tr><td><code>ofLoadJson(path)</code></td><td><code>tc::loadJson(path)</code></td><td>nlohmann/json</td></tr>
-                            <tr><td>-</td><td><code>tc::loadXml(path)</code></td><td>pugixml</td></tr>
-                            <tr><td><code>ofxTCPClient</code></td><td><code>tc::TcpClient</code></td><td></td></tr>
-                            <tr><td><code>ofxTCPServer</code></td><td><code>tc::TcpServer</code></td><td></td></tr>
-                            <tr><td><code>ofxUDPManager</code></td><td><code>tc::UdpSocket</code></td><td></td></tr>
+                            <tr><td><code>ofSystemLoadDialog()</code></td><td><code>systemLoadDialog()</code></td><td></td></tr>
+                            <tr><td><code>ofSystemSaveDialog()</code></td><td><code>systemSaveDialog()</code></td><td></td></tr>
+                            <tr><td><code>ofLoadJson(path)</code></td><td><code>loadJson(path)</code></td><td>nlohmann/json</td></tr>
+                            <tr><td>-</td><td><code>loadXml(path)</code></td><td>pugixml</td></tr>
+                            <tr><td><code>ofxTCPClient</code></td><td><code>TcpClient</code></td><td></td></tr>
+                            <tr><td><code>ofxTCPServer</code></td><td><code>TcpServer</code></td><td></td></tr>
+                            <tr><td><code>ofxUDPManager</code></td><td><code>UdpSocket</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -662,15 +662,15 @@ tc::setDrawFps(<span class="code-number">0</span>);          <span class="code-c
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>ofNode</code></td><td><code>tc::Node</code></td><td>shared_ptrベース</td></tr>
+                            <tr><td><code>ofNode</code></td><td><code>Node</code></td><td>shared_ptrベース</td></tr>
                             <tr><td><code>node.setPosition(x, y, z)</code></td><td><code>node->setPosition(x, y, z)</code></td><td></td></tr>
                             <tr><td><code>node.setParent(parent)</code></td><td><code>parent->addChild(child)</code></td><td></td></tr>
-                            <tr><td>-</td><td><code>tc::RectNode</code></td><td>2D UI用、ヒットテスト対応</td></tr>
-                            <tr><td><code>ofEvent&lt;T&gt;</code></td><td><code>tc::Event&lt;T&gt;</code></td><td></td></tr>
-                            <tr><td><code>ofAddListener(...)</code></td><td><code>tc::EventListener</code></td><td>RAII形式</td></tr>
-                            <tr><td><code>ofLog()</code></td><td><code>tc::tcLogNotice()</code></td><td></td></tr>
-                            <tr><td><code>ofLogWarning()</code></td><td><code>tc::tcLogWarning()</code></td><td></td></tr>
-                            <tr><td><code>ofLogError()</code></td><td><code>tc::tcLogError()</code></td><td></td></tr>
+                            <tr><td>-</td><td><code>RectNode</code></td><td>2D UI用、ヒットテスト対応</td></tr>
+                            <tr><td><code>ofEvent&lt;T&gt;</code></td><td><code>Event&lt;T&gt;</code></td><td></td></tr>
+                            <tr><td><code>ofAddListener(...)</code></td><td><code>EventListener</code></td><td>RAII形式</td></tr>
+                            <tr><td><code>ofLog()</code></td><td><code>tcLogNotice()</code></td><td></td></tr>
+                            <tr><td><code>ofLogWarning()</code></td><td><code>tcLogWarning()</code></td><td></td></tr>
+                            <tr><td><code>ofLogError()</code></td><td><code>tcLogError()</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>

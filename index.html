@@ -144,10 +144,10 @@
 
 <span class="code-keyword">void</span> tcApp::<span class="code-function">setup</span>() {
     <span class="code-comment">// ループモード設定</span>
-    tc::setLoopMode(tc::LoopMode::Game);
+    setLoopMode(LoopMode::Game);
 
     <span class="code-comment">// 画像を読み込む</span>
-    image = make_shared&lt;tc::Texture&gt;(<span class="code-string">"test.png"</span>);
+    image = make_shared&lt;Texture&gt;(<span class="code-string">"test.png"</span>);
 }
 
 <span class="code-keyword">void</span> tcApp::<span class="code-function">update</span>() {
@@ -155,13 +155,13 @@
 }
 
 <span class="code-keyword">void</span> tcApp::<span class="code-function">draw</span>() {
-    tc::clear(<span class="code-number">0.1f</span>, <span class="code-number">0.1f</span>, <span class="code-number">0.1f</span>);
+    clear(<span class="code-number">0.1f</span>, <span class="code-number">0.1f</span>, <span class="code-number">0.1f</span>);
 
-    tc::pushMatrix();
-    tc::translate(<span class="code-number">640</span>, <span class="code-number">360</span>);
-    tc::rotate(angle);
+    pushMatrix();
+    translate(<span class="code-number">640</span>, <span class="code-number">360</span>);
+    rotate(angle);
     image-&gt;draw(<span class="code-number">-50</span>, <span class="code-number">-50</span>, <span class="code-number">100</span>, <span class="code-number">100</span>);
-    tc::popMatrix();
+    popMatrix();
 }</code></pre>
                 </div>
 
@@ -284,12 +284,12 @@
                         <tr>
                             <td>即時描画</td>
                             <td>ofDrawCircle(x, y, r)</td>
-                            <td>tc::drawCircle(x, y, r) <span class="same-badge">同じ</span></td>
+                            <td>drawCircle(x, y, r) <span class="same-badge">同じ</span></td>
                         </tr>
                         <tr>
                             <td>ステート管理</td>
                             <td>ofSetColor, ofPushMatrix</td>
-                            <td>tc::setColor, tc::pushMatrix <span class="same-badge">同じ</span></td>
+                            <td>setColor, pushMatrix <span class="same-badge">同じ</span></td>
                         </tr>
                         <tr>
                             <td>座標系</td>
@@ -329,7 +329,7 @@
                         <span class="benefit-icon">✓</span>
                         <div>
                             <strong>シーングラフ標準装備</strong>
-                            <p>tc::Nodeで親子関係を管理。回転した親の中のボタンも簡単に判定できる。</p>
+                            <p>Nodeで親子関係を管理。回転した親の中のボタンも簡単に判定できる。</p>
                         </div>
                     </div>
                     <div class="benefit-item">
