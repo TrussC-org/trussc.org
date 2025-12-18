@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrussC - Thin, Modern, and Native Creative Coding</title>
-    <meta name="description" content="TrussC is a lightweight creative coding framework optimized for modern GPUs. Inspired by openFrameworks, built for today's hardware.">
+    <meta name="description" content="TrussC は GPUネイティブ時代に最適化された、商用利用可能な軽量クリエイティブコーディング環境です。openFrameworksの精神を継承しつつ、現代のハードウェアに最適化。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -17,18 +17,18 @@
             <a href="#" class="nav-logo">
                 <span class="logo-text">TrussC</span>
             </a>
-            <button class="nav-toggle" aria-label="Open menu">
+            <button class="nav-toggle" aria-label="メニューを開く">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#code">Code</a></li>
-                <li><a href="#tech">Tech Stack</a></li>
-                <li><a href="guide.html">For oF Users</a></li>
-                <li><a href="#start" class="nav-cta">Get Started</a></li>
-                <li><a href="/ja/" class="nav-lang">日本語</a></li>
+                <li><a href="#features">特徴</a></li>
+                <li><a href="#code">コード例</a></li>
+                <li><a href="#tech">技術スタック</a></li>
+                <li><a href="guide.html">oFユーザーへ</a></li>
+                <li><a href="#start" class="nav-cta">始める</a></li>
+                <li><a href="/" class="nav-lang">EN</a></li>
             </ul>
         </div>
     </nav>
@@ -39,14 +39,14 @@
             <div class="hero-grid"></div>
         </div>
         <div class="container hero-content">
-            <p class="hero-label">Creative Coding Framework for C++</p>
+            <p class="hero-label">Creative Coding Framework for C++ <span class="hero-reading">/ トラスシー</span></p>
             <h1 class="hero-title">
                 <span class="hero-title-main">Thin, Modern,</span>
                 <span class="hero-title-accent">and Native.</span>
             </h1>
             <p class="hero-description">
-                Inspired by openFrameworks.<br class="hero-br">
-                Built for modern GPUs.
+                openFrameworksの精神を受け継ぎ、<br class="hero-br">
+                現代のGPUに最適化した軽量クリエイティブコーディング環境。
             </p>
             <div class="hero-actions">
                 <a href="#start" class="btn btn-primary">Get Started</a>
@@ -69,7 +69,7 @@
     <section id="features" class="section features">
         <div class="container">
             <h2 class="section-title">Philosophy</h2>
-            <p class="section-subtitle">A new foundation (Truss) for the next decade</p>
+            <p class="section-subtitle">次の10年を戦うための、新しい足場（Truss）</p>
 
             <div class="features-grid">
                 <div class="feature-card">
@@ -80,10 +80,10 @@
                             <line x1="12" y1="22.08" x2="12" y2="12"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Minimal Footprint</h3>
+                    <h3 class="feature-title">脱・肥大化</h3>
                     <p class="feature-description">
-                        Carefully selected features keep binary size tiny.
-                        Lightning-fast compilation and lightweight executables.
+                        必要な機能だけを厳選し、バイナリサイズを極小に保つ。
+                        コンパイルが爆速で、実行ファイルも軽量。
                     </p>
                 </div>
 
@@ -94,10 +94,10 @@
                             <path d="M9 12l2 2 4-4"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">GPL-Free</h3>
+                    <h3 class="feature-title">脱・GPL</h3>
                     <p class="feature-description">
-                        Built for commercial use with MIT / zlib / Public Domain licenses only.
-                        No GPL contamination risk.
+                        商用利用を前提とし、MIT / Zlib / Public Domain ライセンスのみで構成。
+                        GPL汚染のリスクがない。
                     </p>
                 </div>
 
@@ -108,10 +108,10 @@
                             <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">No Black Box</h3>
+                    <h3 class="feature-title">脱・ブラックボックス</h3>
                     <p class="feature-description">
-                        A thin abstraction layer that exposes native APIs.
-                        Direct access to Metal / DX12 / Vulkan when you need it.
+                        重厚なラッパーで隠蔽せず、OSネイティブAPIへのアクセスを容易にする「薄い」設計。
+                        Metal / DX12 / Vulkan を直接触れる。
                     </p>
                 </div>
 
@@ -123,7 +123,7 @@
     <section id="code" class="section code-section">
         <div class="container">
             <h2 class="section-title">Simple & Intuitive</h2>
-            <p class="section-subtitle">One line of code, instant visuals. The magic remains.</p>
+            <p class="section-subtitle">1行書けば、絵が出る。その魔法は変わらない。</p>
 
             <div class="code-tabs">
                 <button class="code-tab active" data-tab="app">tcApp.cpp</button>
@@ -134,7 +134,7 @@
                 <div class="code-block active" id="code-app">
                     <div class="code-header">
                         <span class="code-filename">tcApp.cpp</span>
-                        <button class="code-copy" aria-label="Copy code">
+                        <button class="code-copy" aria-label="コードをコピー">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -144,10 +144,10 @@
 <pre><code><span class="code-preprocessor">#include</span> <span class="code-string">"tcApp.h"</span>
 
 <span class="code-keyword">void</span> tcApp::<span class="code-function">setup</span>() {
-    <span class="code-comment">// Set loop mode</span>
+    <span class="code-comment">// ループモード設定</span>
     setLoopMode(LoopMode::Game);
 
-    <span class="code-comment">// Load an image</span>
+    <span class="code-comment">// 画像を読み込む</span>
     image = make_shared&lt;Texture&gt;(<span class="code-string">"test.png"</span>);
 }
 
@@ -169,7 +169,7 @@
                 <div class="code-block" id="code-main">
                     <div class="code-header">
                         <span class="code-filename">main.cpp</span>
-                        <button class="code-copy" aria-label="Copy code">
+                        <button class="code-copy" aria-label="コードをコピー">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -179,11 +179,11 @@
 <pre><code><span class="code-preprocessor">#include</span> <span class="code-string">"TrussC.h"</span>
 <span class="code-preprocessor">#include</span> <span class="code-string">"tcApp.h"</span>
 
-<span class="code-comment">// Define backend implementation</span>
+<span class="code-comment">// バックエンド実装定義</span>
 <span class="code-preprocessor">#define</span> SOKOL_IMPL
 <span class="code-preprocessor">#include</span> <span class="code-string">"sokol_app.h"</span>
 
-<span class="code-comment">// That's it!</span>
+<span class="code-comment">// これだけで起動！</span>
 <span class="code-function">TC_MAIN</span>(tcApp)</code></pre>
                 </div>
             </div>
@@ -194,55 +194,55 @@
     <section id="tech" class="section tech-section">
         <div class="container">
             <h2 class="section-title">Tech Stack</h2>
-            <p class="section-subtitle">A hybrid of custom implementations and high-quality lightweight libraries</p>
+            <p class="section-subtitle">「自前実装」と「高品質な軽量ライブラリ」のハイブリッド構成</p>
 
             <div class="tech-grid">
                 <div class="tech-card">
                     <div class="tech-category">Core</div>
                     <h3 class="tech-name">sokol_app</h3>
-                    <p class="tech-desc">Window, input & context management</p>
+                    <p class="tech-desc">ウィンドウ・入力・コンテキスト管理</p>
                     <span class="tech-license">zlib</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Graphics</div>
                     <h3 class="tech-name">sokol_gfx</h3>
-                    <p class="tech-desc">Metal / DX12 / Vulkan backend</p>
+                    <p class="tech-desc">Metal / DX12 / Vulkan バックエンド</p>
                     <span class="tech-license">zlib</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Scene</div>
                     <h3 class="tech-name">Node System</h3>
-                    <p class="tech-desc">Scene graph & event propagation</p>
-                    <span class="tech-license">Custom</span>
+                    <p class="tech-desc">シーングラフ・イベント伝播</p>
+                    <span class="tech-license">自前実装</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Math</div>
                     <h3 class="tech-name">C++20 Template</h3>
-                    <p class="tech-desc">Vector & matrix operations</p>
+                    <p class="tech-desc">ベクトル・行列演算</p>
                     <span class="tech-license">Public Domain</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Image</div>
                     <h3 class="tech-name">stb_image</h3>
-                    <p class="tech-desc">Image loading & saving</p>
+                    <p class="tech-desc">画像読み込み・書き出し</p>
                     <span class="tech-license">Public Domain</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Font</div>
                     <h3 class="tech-name">stb_truetype</h3>
-                    <p class="tech-desc">Font rendering</p>
+                    <p class="tech-desc">フォントレンダリング</p>
                     <span class="tech-license">Public Domain</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Audio</div>
                     <h3 class="tech-name">sokol_audio + dr_libs</h3>
-                    <p class="tech-desc">Audio I/O & file playback</p>
+                    <p class="tech-desc">音声入出力・ファイル再生</p>
                     <span class="tech-license">zlib / PD</span>
                 </div>
 
@@ -250,7 +250,7 @@
                     <div class="tech-category">Video</div>
                     <h3 class="tech-name">Native Wrapper</h3>
                     <p class="tech-desc">AVFoundation / Media Foundation</p>
-                    <span class="tech-license">Custom</span>
+                    <span class="tech-license">自前実装</span>
                 </div>
             </div>
         </div>
@@ -260,105 +260,105 @@
     <section id="comparison" class="section comparison-section">
         <div class="container">
             <h2 class="section-title">For oF Users</h2>
-            <p class="section-subtitle">Built on the joy of creative coding that openFrameworks pioneered</p>
+            <p class="section-subtitle">openFrameworksが築いたクリエイティブコーディングの楽しさを継承しています</p>
 
             <div class="respect-note">
-                <p>TrussC deeply respects the magical "one line of code, instant visuals" experience that oF created.<br>
-                If you know oF, you'll feel right at home.</p>
+                <p>TrussCは、oFが生み出した「1行書けば絵が出る」という魔法のような体験を深くリスペクトしています。<br>
+                oFユーザーなら、違和感なく書き始められるはずです。</p>
             </div>
 
             <div class="comparison-table-wrapper">
                 <table class="comparison-table">
                     <thead>
                         <tr>
-                            <th>Feature</th>
+                            <th>項目</th>
                             <th>openFrameworks</th>
                             <th>TrussC</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Lifecycle</td>
+                            <td>ライフサイクル</td>
                             <td>setup, update, draw</td>
-                            <td>setup, update, draw <span class="same-badge">Same</span></td>
+                            <td>setup, update, draw <span class="same-badge">同じ</span></td>
                         </tr>
                         <tr>
-                            <td>Immediate Drawing</td>
+                            <td>即時描画</td>
                             <td>ofDrawCircle(x, y, r)</td>
-                            <td>drawCircle(x, y, r) <span class="same-badge">Same</span></td>
+                            <td>drawCircle(x, y, r) <span class="same-badge">同じ</span></td>
                         </tr>
                         <tr>
-                            <td>State Management</td>
+                            <td>ステート管理</td>
                             <td>ofSetColor, ofPushMatrix</td>
-                            <td>setColor, pushMatrix <span class="same-badge">Same</span></td>
+                            <td>setColor, pushMatrix <span class="same-badge">同じ</span></td>
                         </tr>
                         <tr>
-                            <td>Coordinate System</td>
-                            <td>Global coordinates</td>
-                            <td>Scene graph + local coordinates</td>
+                            <td>座標系</td>
+                            <td>グローバル座標</td>
+                            <td>シーングラフ + ローカル座標</td>
                         </tr>
                         <tr>
-                            <td>Graphics Backend</td>
+                            <td>描画バックエンド</td>
                             <td>OpenGL</td>
                             <td>Metal / DX12 / Vulkan</td>
                         </tr>
                         <tr>
-                            <td>Memory Management</td>
-                            <td>ofPtr / raw pointers</td>
+                            <td>メモリ管理</td>
+                            <td>ofPtr / 生ポインタ</td>
                             <td>std::shared_ptr</td>
                         </tr>
                         <tr>
-                            <td>Delayed Execution</td>
-                            <td>ofThread / DIY</td>
-                            <td>callAfter, callEvery (sync timers)</td>
+                            <td>遅延実行</td>
+                            <td>ofThread / 自前実装</td>
+                            <td>callAfter, callEvery (同期タイマー)</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="trussc-benefits">
-                <h3>What TrussC Offers</h3>
+                <h3>TrussCが提供するもの</h3>
                 <div class="benefits-grid">
                     <div class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div>
-                            <strong>Commercial-Friendly</strong>
-                            <p>MIT / zlib / Public Domain only. No GPL concerns.</p>
+                            <strong>商用利用に安心</strong>
+                            <p>MIT / zlib / Public Domain のみで構成。GPL汚染の心配がない。</p>
                         </div>
                     </div>
                     <div class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div>
-                            <strong>Built-in Scene Graph</strong>
-                            <p>Node-based hierarchy. Easy hit testing even on rotated elements.</p>
+                            <strong>シーングラフ標準装備</strong>
+                            <p>Nodeで親子関係を管理。回転した親の中のボタンも簡単に判定できる。</p>
                         </div>
                     </div>
                     <div class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div>
-                            <strong>Local Coordinate Events</strong>
-                            <p>Mouse coordinates auto-transformed to each node's local space.</p>
+                            <strong>ローカル座標でイベント</strong>
+                            <p>マウス座標が自動変換され、各ノードのローカル座標で届く。</p>
                         </div>
                     </div>
                     <div class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div>
-                            <strong>Safe Sync Timers</strong>
-                            <p>callAfter / callEvery for safe main-thread delayed execution.</p>
+                            <strong>安全な同期タイマー</strong>
+                            <p>callAfter / callEvery でメインスレッドから安全に遅延実行。</p>
                         </div>
                     </div>
                     <div class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div>
-                            <strong>Blazing Fast Builds</strong>
-                            <p>Minimal dependencies mean fast compile times and tiny binaries.</p>
+                            <strong>ビルドが爆速</strong>
+                            <p>必要最小限の構成で、コンパイル時間もバイナリサイズも極小。</p>
                         </div>
                     </div>
                     <div class="benefit-item">
                         <span class="benefit-icon">✓</span>
                         <div>
-                            <strong>Native GPU Support</strong>
-                            <p>Metal / DirectX 12 / Vulkan for maximum hardware performance.</p>
+                            <strong>ネイティブGPU対応</strong>
+                            <p>Metal / DirectX 12 / Vulkan で最新ハードウェアの性能を引き出す。</p>
                         </div>
                     </div>
                 </div>
@@ -366,7 +366,7 @@
 
             <div class="guide-link-wrapper">
                 <a href="guide.html" class="btn btn-secondary btn-large">
-                    Migration Guide for oF Users
+                    openFrameworksからの移行ガイド
                 </a>
             </div>
         </div>
@@ -376,13 +376,13 @@
     <section id="start" class="section start-section">
         <div class="container">
             <h2 class="section-title">Get Started</h2>
-            <p class="section-subtitle">Up and running in 3 steps</p>
+            <p class="section-subtitle">3ステップで始めるTrussC</p>
 
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h3>Clone the repository</h3>
+                        <h3>リポジトリをクローン</h3>
                         <div class="step-code">
                             <code>git clone https://github.com/tettou771/TrussC.git</code>
                         </div>
@@ -392,7 +392,7 @@
                 <div class="step">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <h3>Build with CMake</h3>
+                        <h3>CMakeでビルド</h3>
                         <div class="step-code">
                             <code>cd TrussC && mkdir build && cd build<br>cmake .. && make</code>
                         </div>
@@ -402,7 +402,7 @@
                 <div class="step">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <h3>Run an example</h3>
+                        <h3>サンプルを実行</h3>
                         <div class="step-code">
                             <code>./examples/hello_world</code>
                         </div>
@@ -427,7 +427,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span class="logo-text">TrussC</span>
-                    <p>A new foundation for the next decade.</p>
+                    <p>次の10年を戦うための、新しい足場。</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
@@ -453,6 +453,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>
