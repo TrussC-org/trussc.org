@@ -224,6 +224,13 @@ img {
     margin-bottom: var(--space-lg);
 }
 
+.hero-reading {
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+}
+
 .hero-title {
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 700;
