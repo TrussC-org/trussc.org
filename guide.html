@@ -369,12 +369,18 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>draw()</code></td><td><code>draw()</code></td><td>Same</td></tr>
                             <tr><td><code>keyPressed(int key)</code></td><td><code>keyPressed(int key)</code></td><td>Same</td></tr>
                             <tr><td><code>mousePressed(x, y, button)</code></td><td><code>mousePressed(x, y, button)</code></td><td>Same</td></tr>
+                            <tr><td><code>windowResized(w, h)</code></td><td><code>windowResized(w, h)</code></td><td>Same</td></tr>
+                            <tr><td><code>dragEvent(ofDragInfo&)</code></td><td><code>filesDropped(paths, x, y)</code></td><td></td></tr>
                             <tr><td><code>ofSetFrameRate(60)</code></td><td><code>setFps(60)</code></td><td></td></tr>
                             <tr><td><code>ofSetVerticalSync(true)</code></td><td><code>setVsync(true)</code></td><td></td></tr>
+                            <tr><td><code>-</code></td><td><code>setDrawFps(fps)</code></td><td>Independent draw rate</td></tr>
+                            <tr><td><code>-</code></td><td><code>setUpdateFps(fps)</code></td><td>Independent update rate</td></tr>
                             <tr><td><code>ofGetElapsedTimef()</code></td><td><code>getElapsedTime()</code></td><td></td></tr>
                             <tr><td><code>ofGetFrameRate()</code></td><td><code>getFrameRate()</code></td><td></td></tr>
+                            <tr><td><code>ofGetFrameNum()</code></td><td><code>getFrameCount()</code></td><td></td></tr>
                             <tr><td><code>ofGetWidth()</code></td><td><code>getWindowWidth()</code></td><td></td></tr>
                             <tr><td><code>ofGetHeight()</code></td><td><code>getWindowHeight()</code></td><td></td></tr>
+                            <tr><td><code>ofExit()</code></td><td><code>exitApp()</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -408,6 +414,10 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>ofFill()</code></td><td><code>fill()</code></td><td></td></tr>
                             <tr><td><code>ofSetLineWidth(w)</code></td><td><code>setLineWidth(w)</code></td><td></td></tr>
                             <tr><td><code>ofDrawBitmapString(s, x, y)</code></td><td><code>drawBitmapString(s, x, y)</code></td><td></td></tr>
+                            <tr><td><code>ofPath</code></td><td><code>Path</code></td><td></td></tr>
+                            <tr><td><code>-</code></td><td><code>StrokeMesh</code></td><td>Thick lines with proper edges</td></tr>
+                            <tr><td><code>ofEnableBlendMode(...)</code></td><td><code>setBlendMode(...)</code></td><td></td></tr>
+                            <tr><td><code>glScissor(...)</code></td><td><code>setScissor(...)</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -500,6 +510,33 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                 </div>
             </div>
 
+            <!-- Font -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="font">
+                    <span>Font</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="font">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofTrueTypeFont</code></td><td><code>Font</code></td><td></td></tr>
+                            <tr><td><code>font.load("font.ttf", size)</code></td><td><code>font.load("font.ttf", size)</code></td><td>Same</td></tr>
+                            <tr><td><code>font.drawString(text, x, y)</code></td><td><code>font.drawString(text, x, y)</code></td><td>Same</td></tr>
+                            <tr><td><code>font.stringWidth(text)</code></td><td><code>font.getStringWidth(text)</code></td><td></td></tr>
+                            <tr><td><code>font.stringHeight(text)</code></td><td><code>font.getStringHeight(text)</code></td><td></td></tr>
+                            <tr><td><code>font.getLineHeight()</code></td><td><code>font.getLineHeight()</code></td><td>Same</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <!-- Image -->
             <div class="api-category">
                 <h3 class="api-category-title" data-toggle="image">
@@ -530,13 +567,95 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                 </div>
             </div>
 
-            <!-- 3D -->
+            <!-- FBO -->
             <div class="api-category">
-                <h3 class="api-category-title" data-toggle="3d">
-                    <span>3D</span>
+                <h3 class="api-category-title" data-toggle="fbo">
+                    <span>FBO</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </h3>
-                <div class="api-table-wrapper" id="3d">
+                <div class="api-table-wrapper" id="fbo">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofFbo</code></td><td><code>Fbo</code></td><td></td></tr>
+                            <tr><td><code>fbo.allocate(w, h)</code></td><td><code>fbo.allocate(w, h)</code></td><td>Same</td></tr>
+                            <tr><td><code>fbo.begin()</code></td><td><code>fbo.begin()</code></td><td>Same</td></tr>
+                            <tr><td><code>fbo.end()</code></td><td><code>fbo.end()</code></td><td>Same</td></tr>
+                            <tr><td><code>fbo.draw(x, y)</code></td><td><code>fbo.draw(x, y)</code></td><td>Same</td></tr>
+                            <tr><td><code>fbo.clear()</code></td><td><code>fbo.clear()</code></td><td>Same</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Shader -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="shader">
+                    <span>Shader</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="shader">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofShader</code></td><td><code>Shader</code></td><td></td></tr>
+                            <tr><td><code>shader.load(vert, frag)</code></td><td><code>shader.load(vert, frag)</code></td><td>Same</td></tr>
+                            <tr><td><code>shader.begin()</code></td><td><code>shader.begin()</code></td><td>Same</td></tr>
+                            <tr><td><code>shader.end()</code></td><td><code>shader.end()</code></td><td>Same</td></tr>
+                            <tr><td><code>shader.setUniform1f(name, v)</code></td><td><code>shader.setUniform(name, v)</code></td><td></td></tr>
+                            <tr><td><code>shader.setUniformTexture(...)</code></td><td><code>shader.setUniformTexture(...)</code></td><td>Same</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Mesh -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="mesh">
+                    <span>Mesh</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="mesh">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofMesh</code></td><td><code>Mesh</code></td><td></td></tr>
+                            <tr><td><code>mesh.addVertex(v)</code></td><td><code>mesh.addVertex(v)</code></td><td>Same</td></tr>
+                            <tr><td><code>mesh.addColor(c)</code></td><td><code>mesh.addColor(c)</code></td><td>Same</td></tr>
+                            <tr><td><code>mesh.addTexCoord(t)</code></td><td><code>mesh.addTexCoord(t)</code></td><td>Same</td></tr>
+                            <tr><td><code>mesh.addIndex(i)</code></td><td><code>mesh.addIndex(i)</code></td><td>Same</td></tr>
+                            <tr><td><code>mesh.draw()</code></td><td><code>mesh.draw()</code></td><td>Same</td></tr>
+                            <tr><td><code>mesh.setMode(OF_PRIMITIVE_...)</code></td><td><code>mesh.setMode(PrimitiveType::...)</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3D Primitives -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="3d-primitives">
+                    <span>3D Primitives</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="3d-primitives">
                     <table class="api-table">
                         <thead>
                             <tr>
@@ -552,9 +671,54 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>ofIcoSpherePrimitive</code></td><td><code>createIcoSphere(r, res)</code></td><td></td></tr>
                             <tr><td><code>ofCylinderPrimitive</code></td><td><code>createCylinder(r, h, res)</code></td><td></td></tr>
                             <tr><td><code>ofConePrimitive</code></td><td><code>createCone(r, h, res)</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3D Camera -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="3d-camera">
+                    <span>3D Camera</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="3d-camera">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr><td><code>ofEasyCam</code></td><td><code>EasyCam</code></td><td></td></tr>
+                            <tr><td><code>ofCamera</code></td><td><code>Camera</code></td><td></td></tr>
                             <tr><td><code>cam.begin()</code></td><td><code>cam.begin()</code></td><td>Same</td></tr>
                             <tr><td><code>cam.end()</code></td><td><code>cam.end()</code></td><td>Same</td></tr>
+                            <tr><td><code>cam.setPosition(x, y, z)</code></td><td><code>cam.setPosition(x, y, z)</code></td><td>Same</td></tr>
+                            <tr><td><code>cam.lookAt(target)</code></td><td><code>cam.lookAt(target)</code></td><td>Same</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Lighting & Material -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="lighting">
+                    <span>Lighting & Material</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="lighting">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr><td><code>ofEnableLighting()</code></td><td><code>enableLighting()</code></td><td></td></tr>
                             <tr><td><code>ofLight</code></td><td><code>Light</code></td><td></td></tr>
                             <tr><td><code>ofMaterial</code></td><td><code>Material</code></td><td></td></tr>
@@ -587,7 +751,7 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>sound.stop()</code></td><td><code>sound.stop()</code></td><td></td></tr>
                             <tr><td><code>sound.setVolume(v)</code></td><td><code>sound.setVolume(v)</code></td><td></td></tr>
                             <tr><td><code>sound.setLoop(true)</code></td><td><code>sound.setLoop(true)</code></td><td></td></tr>
-                            <tr><td><code>ofSoundStream</code></td><td><code>MicInput</code></td><td>Microphone input</td></tr>
+                            <tr><td><code>ofSoundStream</code></td><td><code>SoundStream</code></td><td>Audio I/O</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -619,10 +783,33 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                 </div>
             </div>
 
-            <!-- IO -->
+            <!-- GUI -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="gui">
+                    <span>GUI</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="gui">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofxGui / ofxImGui</code></td><td><code>ImGui (built-in)</code></td><td>Included by default</td></tr>
+                            <tr><td><code>ofParameter&lt;T&gt;</code></td><td><code>ImGui::SliderFloat etc.</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- I/O -->
             <div class="api-category">
                 <h3 class="api-category-title" data-toggle="io">
-                    <span>I/O & Network</span>
+                    <span>I/O</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </h3>
                 <div class="api-table-wrapper" id="io">
@@ -639,9 +826,31 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>ofSystemSaveDialog()</code></td><td><code>systemSaveDialog()</code></td><td></td></tr>
                             <tr><td><code>ofLoadJson(path)</code></td><td><code>loadJson(path)</code></td><td>nlohmann/json</td></tr>
                             <tr><td>-</td><td><code>loadXml(path)</code></td><td>pugixml</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Network -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="network">
+                    <span>Network</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="network">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr><td><code>ofxTCPClient</code></td><td><code>TcpClient</code></td><td></td></tr>
                             <tr><td><code>ofxTCPServer</code></td><td><code>TcpServer</code></td><td></td></tr>
                             <tr><td><code>ofxUDPManager</code></td><td><code>UdpSocket</code></td><td></td></tr>
+                            <tr><td><code>ofxOsc</code></td><td><code>OscReceiver / OscSender</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -650,7 +859,7 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
             <!-- Scene Graph -->
             <div class="api-category">
                 <h3 class="api-category-title" data-toggle="scene">
-                    <span>Scene Graph & Events</span>
+                    <span>Scene Graph</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </h3>
                 <div class="api-table-wrapper" id="scene">
@@ -667,11 +876,124 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>node.setPosition(x, y, z)</code></td><td><code>node->setPosition(x, y, z)</code></td><td></td></tr>
                             <tr><td><code>node.setParent(parent)</code></td><td><code>parent->addChild(child)</code></td><td></td></tr>
                             <tr><td>-</td><td><code>RectNode</code></td><td>2D UI, hit test support</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Events -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="events">
+                    <span>Events</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="events">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr><td><code>ofEvent&lt;T&gt;</code></td><td><code>Event&lt;T&gt;</code></td><td></td></tr>
                             <tr><td><code>ofAddListener(...)</code></td><td><code>EventListener</code></td><td>RAII style</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Log -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="log">
+                    <span>Log</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="log">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr><td><code>ofLog()</code></td><td><code>tcLogNotice()</code></td><td></td></tr>
                             <tr><td><code>ofLogWarning()</code></td><td><code>tcLogWarning()</code></td><td></td></tr>
                             <tr><td><code>ofLogError()</code></td><td><code>tcLogError()</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Thread -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="thread">
+                    <span>Thread</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="thread">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofThread</code></td><td><code>std::thread + MainThreadRunner</code></td><td>Safe sync</td></tr>
+                            <tr><td>-</td><td><code>MainThreadRunner::run(func)</code></td><td>Execute on main thread</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Serial -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="serial">
+                    <span>Serial</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="serial">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofSerial</code></td><td><code>Serial</code></td><td></td></tr>
+                            <tr><td><code>serial.setup(port, baud)</code></td><td><code>serial.setup(port, baud)</code></td><td>Same</td></tr>
+                            <tr><td><code>serial.readBytes(...)</code></td><td><code>serial.readBytes(...)</code></td><td>Same</td></tr>
+                            <tr><td><code>serial.writeBytes(...)</code></td><td><code>serial.writeBytes(...)</code></td><td>Same</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Timer -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="timer">
+                    <span>Timer</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="timer">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>-</td><td><code>node->callAfter(sec, func)</code></td><td>Delayed execution</td></tr>
+                            <tr><td>-</td><td><code>node->callEvery(sec, func)</code></td><td>Repeating execution</td></tr>
                         </tbody>
                     </table>
                 </div>

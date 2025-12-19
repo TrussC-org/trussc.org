@@ -369,12 +369,18 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>draw()</code></td><td><code>draw()</code></td><td>同じ</td></tr>
                             <tr><td><code>keyPressed(int key)</code></td><td><code>keyPressed(int key)</code></td><td>同じ</td></tr>
                             <tr><td><code>mousePressed(x, y, button)</code></td><td><code>mousePressed(x, y, button)</code></td><td>同じ</td></tr>
+                            <tr><td><code>windowResized(w, h)</code></td><td><code>windowResized(w, h)</code></td><td>同じ</td></tr>
+                            <tr><td><code>dragEvent(ofDragInfo)</code></td><td><code>filesDropped(paths)</code></td><td></td></tr>
                             <tr><td><code>ofSetFrameRate(60)</code></td><td><code>setFps(60)</code></td><td></td></tr>
                             <tr><td><code>ofSetVerticalSync(true)</code></td><td><code>setVsync(true)</code></td><td></td></tr>
+                            <tr><td>-</td><td><code>setDrawFps(fps)</code></td><td>描画レート個別設定</td></tr>
+                            <tr><td>-</td><td><code>setUpdateFps(fps)</code></td><td>更新レート個別設定</td></tr>
                             <tr><td><code>ofGetElapsedTimef()</code></td><td><code>getElapsedTime()</code></td><td></td></tr>
                             <tr><td><code>ofGetFrameRate()</code></td><td><code>getFrameRate()</code></td><td></td></tr>
+                            <tr><td><code>ofGetFrameNum()</code></td><td><code>getFrameCount()</code></td><td></td></tr>
                             <tr><td><code>ofGetWidth()</code></td><td><code>getWindowWidth()</code></td><td></td></tr>
                             <tr><td><code>ofGetHeight()</code></td><td><code>getWindowHeight()</code></td><td></td></tr>
+                            <tr><td><code>OF_EXIT_APP()</code></td><td><code>exitApp()</code></td><td>アプリ終了</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -408,6 +414,10 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>ofFill()</code></td><td><code>fill()</code></td><td></td></tr>
                             <tr><td><code>ofSetLineWidth(w)</code></td><td><code>setLineWidth(w)</code></td><td></td></tr>
                             <tr><td><code>ofDrawBitmapString(s, x, y)</code></td><td><code>drawBitmapString(s, x, y)</code></td><td></td></tr>
+                            <tr><td><code>ofPolyline</code></td><td><code>Path</code></td><td></td></tr>
+                            <tr><td>-</td><td><code>StrokeMesh</code></td><td>太線描画</td></tr>
+                            <tr><td><code>ofEnableBlendMode()</code></td><td><code>setBlendMode()</code></td><td></td></tr>
+                            <tr><td><code>ofScissor()</code></td><td><code>setScissor()</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -523,6 +533,8 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>img.save("path")</code></td><td><code>img.save("path")</code></td><td>同じ</td></tr>
                             <tr><td><code>img.getWidth()</code></td><td><code>img.getWidth()</code></td><td>同じ</td></tr>
                             <tr><td><code>img.getHeight()</code></td><td><code>img.getHeight()</code></td><td>同じ</td></tr>
+                            <tr><td><code>img.setColor(x, y, c)</code></td><td><code>img.setColor(x, y, c)</code></td><td>同じ</td></tr>
+                            <tr><td><code>img.getColor(x, y)</code></td><td><code>img.getColor(x, y)</code></td><td>同じ</td></tr>
                             <tr><td>-</td><td><code>img.setFilter(Nearest/Linear)</code></td><td>テクスチャフィルター</td></tr>
                             <tr><td>-</td><td><code>img.setWrap(Repeat/Clamp/...)</code></td><td>テクスチャラップ</td></tr>
                         </tbody>
@@ -530,13 +542,38 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                 </div>
             </div>
 
-            <!-- 3D -->
+            <!-- Font -->
             <div class="api-category">
-                <h3 class="api-category-title" data-toggle="3d">
-                    <span>3D</span>
+                <h3 class="api-category-title" data-toggle="font">
+                    <span>フォント（Font）</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </h3>
-                <div class="api-table-wrapper" id="3d">
+                <div class="api-table-wrapper" id="font">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofTrueTypeFont</code></td><td><code>TrueTypeFont</code></td><td></td></tr>
+                            <tr><td><code>font.load("font.ttf", size)</code></td><td><code>font.load("font.ttf", size)</code></td><td></td></tr>
+                            <tr><td><code>font.drawString(s, x, y)</code></td><td><code>font.drawString(s, x, y)</code></td><td></td></tr>
+                            <tr><td>-</td><td><code>drawBitmapString(s, x, y)</code></td><td>組み込みフォント</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3D Primitives -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="3d-primitives">
+                    <span>3Dプリミティブ</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="3d-primitives">
                     <table class="api-table">
                         <thead>
                             <tr>
@@ -552,14 +589,143 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>ofIcoSpherePrimitive</code></td><td><code>createIcoSphere(r, res)</code></td><td></td></tr>
                             <tr><td><code>ofCylinderPrimitive</code></td><td><code>createCylinder(r, h, res)</code></td><td></td></tr>
                             <tr><td><code>ofConePrimitive</code></td><td><code>createCone(r, h, res)</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3D Camera -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="3d-camera">
+                    <span>3Dカメラ</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="3d-camera">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr><td><code>ofEasyCam</code></td><td><code>EasyCam</code></td><td></td></tr>
                             <tr><td><code>cam.begin()</code></td><td><code>cam.begin()</code></td><td>同じ</td></tr>
                             <tr><td><code>cam.end()</code></td><td><code>cam.end()</code></td><td>同じ</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Lighting & Material -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="lighting">
+                    <span>ライティング・マテリアル</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="lighting">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr><td><code>ofEnableLighting()</code></td><td><code>enableLighting()</code></td><td></td></tr>
+                            <tr><td><code>ofDisableLighting()</code></td><td><code>disableLighting()</code></td><td></td></tr>
                             <tr><td><code>ofLight</code></td><td><code>Light</code></td><td></td></tr>
+                            <tr><td><code>light.setDirectional(dir)</code></td><td><code>light.setDirectional(dir)</code></td><td></td></tr>
+                            <tr><td><code>light.setPointLight()</code></td><td><code>light.setPoint(pos)</code></td><td></td></tr>
+                            <tr><td><code>light.setAmbientColor(c)</code></td><td><code>light.setAmbient(c)</code></td><td></td></tr>
+                            <tr><td><code>light.setDiffuseColor(c)</code></td><td><code>light.setDiffuse(c)</code></td><td></td></tr>
+                            <tr><td><code>light.setSpecularColor(c)</code></td><td><code>light.setSpecular(c)</code></td><td></td></tr>
                             <tr><td><code>ofMaterial</code></td><td><code>Material</code></td><td></td></tr>
                             <tr><td>-</td><td><code>Material::gold()</code></td><td>プリセット</td></tr>
                             <tr><td>-</td><td><code>Material::silver()</code></td><td>プリセット</td></tr>
+                            <tr><td>-</td><td><code>Material::plastic(color)</code></td><td>プリセット</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Mesh -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="mesh">
+                    <span>メッシュ（Mesh）</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="mesh">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofMesh</code></td><td><code>Mesh</code></td><td></td></tr>
+                            <tr><td><code>mesh.addVertex(v)</code></td><td><code>mesh.addVertex(v)</code></td><td></td></tr>
+                            <tr><td><code>mesh.addColor(c)</code></td><td><code>mesh.addColor(c)</code></td><td></td></tr>
+                            <tr><td><code>mesh.addNormal(n)</code></td><td><code>mesh.addNormal(n)</code></td><td></td></tr>
+                            <tr><td><code>mesh.addIndex(i)</code></td><td><code>mesh.addIndex(i)</code></td><td></td></tr>
+                            <tr><td><code>mesh.draw()</code></td><td><code>mesh.draw()</code></td><td></td></tr>
+                            <tr><td><code>mesh.drawWireframe()</code></td><td><code>mesh.drawWireframe()</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- FBO -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="fbo">
+                    <span>FBO</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="fbo">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofFbo</code></td><td><code>Fbo</code></td><td></td></tr>
+                            <tr><td><code>fbo.allocate(w, h)</code></td><td><code>fbo.allocate(w, h)</code></td><td></td></tr>
+                            <tr><td><code>fbo.begin()</code></td><td><code>fbo.begin()</code></td><td></td></tr>
+                            <tr><td><code>fbo.end()</code></td><td><code>fbo.end()</code></td><td></td></tr>
+                            <tr><td><code>fbo.draw(x, y)</code></td><td><code>fbo.draw(x, y)</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Shader -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="shader">
+                    <span>シェーダー（Shader）</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="shader">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofShader</code></td><td><code>Shader</code></td><td></td></tr>
+                            <tr><td><code>shader.load(vert, frag)</code></td><td><code>shader.load(vert, frag)</code></td><td></td></tr>
+                            <tr><td><code>shader.begin()</code></td><td><code>shader.begin()</code></td><td></td></tr>
+                            <tr><td><code>shader.end()</code></td><td><code>shader.end()</code></td><td></td></tr>
+                            <tr><td><code>shader.setUniform*()</code></td><td><code>shader.setUniform*()</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -587,7 +753,7 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>sound.stop()</code></td><td><code>sound.stop()</code></td><td></td></tr>
                             <tr><td><code>sound.setVolume(v)</code></td><td><code>sound.setVolume(v)</code></td><td></td></tr>
                             <tr><td><code>sound.setLoop(true)</code></td><td><code>sound.setLoop(true)</code></td><td></td></tr>
-                            <tr><td><code>ofSoundStream</code></td><td><code>MicInput</code></td><td>マイク入力</td></tr>
+                            <tr><td><code>ofSoundStream</code></td><td><code>SoundStream</code></td><td>マイク入力</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -622,7 +788,7 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
             <!-- IO -->
             <div class="api-category">
                 <h3 class="api-category-title" data-toggle="io">
-                    <span>入出力・ネットワーク</span>
+                    <span>入出力</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </h3>
                 <div class="api-table-wrapper" id="io">
@@ -637,8 +803,32 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                         <tbody>
                             <tr><td><code>ofSystemLoadDialog()</code></td><td><code>systemLoadDialog()</code></td><td></td></tr>
                             <tr><td><code>ofSystemSaveDialog()</code></td><td><code>systemSaveDialog()</code></td><td></td></tr>
+                            <tr><td><code>ofToDataPath("file")</code></td><td><code>getDataPath() + "file"</code></td><td></td></tr>
                             <tr><td><code>ofLoadJson(path)</code></td><td><code>loadJson(path)</code></td><td>nlohmann/json</td></tr>
+                            <tr><td><code>ofSaveJson(path, json)</code></td><td><code>saveJson(path, json)</code></td><td></td></tr>
                             <tr><td>-</td><td><code>loadXml(path)</code></td><td>pugixml</td></tr>
+                            <tr><td>-</td><td><code>saveXml(path, xml)</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Network -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="network">
+                    <span>ネットワーク</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="network">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr><td><code>ofxTCPClient</code></td><td><code>TcpClient</code></td><td></td></tr>
                             <tr><td><code>ofxTCPServer</code></td><td><code>TcpServer</code></td><td></td></tr>
                             <tr><td><code>ofxUDPManager</code></td><td><code>UdpSocket</code></td><td></td></tr>
@@ -647,10 +837,32 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                 </div>
             </div>
 
+            <!-- GUI -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="gui">
+                    <span>GUI</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="gui">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofxGui / ofxImGui</code></td><td>Dear ImGui（組み込み）</td><td>imgui::Begin() 等</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <!-- Scene Graph -->
             <div class="api-category">
                 <h3 class="api-category-title" data-toggle="scene">
-                    <span>シーングラフ・イベント</span>
+                    <span>シーングラフ</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </h3>
                 <div class="api-table-wrapper" id="scene">
@@ -667,11 +879,122 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>node.setPosition(x, y, z)</code></td><td><code>node->setPosition(x, y, z)</code></td><td></td></tr>
                             <tr><td><code>node.setParent(parent)</code></td><td><code>parent->addChild(child)</code></td><td></td></tr>
                             <tr><td>-</td><td><code>RectNode</code></td><td>2D UI用、ヒットテスト対応</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Events -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="events">
+                    <span>イベント</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="events">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr><td><code>ofEvent&lt;T&gt;</code></td><td><code>Event&lt;T&gt;</code></td><td></td></tr>
                             <tr><td><code>ofAddListener(...)</code></td><td><code>EventListener</code></td><td>RAII形式</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Log -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="log">
+                    <span>ログ</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="log">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr><td><code>ofLog()</code></td><td><code>tcLogNotice()</code></td><td></td></tr>
+                            <tr><td><code>ofLogVerbose()</code></td><td><code>tcLogVerbose()</code></td><td></td></tr>
                             <tr><td><code>ofLogWarning()</code></td><td><code>tcLogWarning()</code></td><td></td></tr>
                             <tr><td><code>ofLogError()</code></td><td><code>tcLogError()</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Thread -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="thread">
+                    <span>スレッド</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="thread">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofThread</code></td><td><code>Thread</code></td><td></td></tr>
+                            <tr><td>-</td><td><code>ThreadChannel</code></td><td>スレッドセーフなキュー</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Serial -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="serial">
+                    <span>シリアル通信</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="serial">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>ofSerial</code></td><td><code>Serial</code></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Timer -->
+            <div class="api-category">
+                <h3 class="api-category-title" data-toggle="timer">
+                    <span>タイマー</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </h3>
+                <div class="api-table-wrapper" id="timer">
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>openFrameworks</th>
+                                <th>TrussC</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>-</td><td><code>node->callAfter(sec, func)</code></td><td>遅延実行</td></tr>
+                            <tr><td>-</td><td><code>node->callEvery(sec, func)</code></td><td>繰り返し実行</td></tr>
                         </tbody>
                     </table>
                 </div>
