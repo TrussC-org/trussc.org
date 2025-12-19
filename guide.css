@@ -310,6 +310,7 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9rem;
+    table-layout: fixed;
 }
 
 .api-table th,
@@ -317,6 +318,21 @@
     padding: var(--space-sm) var(--space-lg);
     text-align: left;
     border-bottom: 1px solid var(--color-border);
+}
+
+.api-table th:first-child,
+.api-table td:first-child {
+    width: 40%;
+}
+
+.api-table th:nth-child(2),
+.api-table td:nth-child(2) {
+    width: 40%;
+}
+
+.api-table th:nth-child(3),
+.api-table td:nth-child(3) {
+    width: 20%;
 }
 
 .api-table th {
@@ -355,6 +371,53 @@
 
 .api-table tbody tr.highlight td {
     background: rgba(99, 102, 241, 0.1);
+}
+
+/* License Table - 3列均等 */
+.license-table th:first-child,
+.license-table td:first-child {
+    width: 33%;
+}
+
+.license-table th:nth-child(2),
+.license-table td:nth-child(2) {
+    width: 34%;
+}
+
+.license-table th:nth-child(3),
+.license-table td:nth-child(3) {
+    width: 33%;
+}
+
+.license-table a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.license-table a:hover {
+    text-decoration: underline;
+}
+
+/* License Block */
+.license-block {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-top: var(--space-md);
+}
+
+.license-block pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.license-block code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
 }
 
 /* CTA Section */
