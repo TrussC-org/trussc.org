@@ -398,6 +398,36 @@
     text-decoration: underline;
 }
 
+/* License Table - 4列 */
+.license-table-4col th:first-child,
+.license-table-4col td:first-child {
+    width: 20%;
+}
+
+.license-table-4col th:nth-child(2),
+.license-table-4col td:nth-child(2) {
+    width: 35%;
+}
+
+.license-table-4col th:nth-child(3),
+.license-table-4col td:nth-child(3) {
+    width: 20%;
+}
+
+.license-table-4col th:nth-child(4),
+.license-table-4col td:nth-child(4) {
+    width: 25%;
+}
+
+.license-table-4col a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.license-table-4col a:hover {
+    text-decoration: underline;
+}
+
 /* License Block */
 .license-block {
     background: var(--color-bg-card);
