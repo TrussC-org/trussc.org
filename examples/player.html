@@ -141,10 +141,18 @@
                 iframe.className = 'player-frame';
                 iframe.src = `${WASM_BASE_URL}/${example.wasm}`;
                 iframe.allow = 'autoplay; fullscreen';
+                iframe.tabIndex = 0;  // Make iframe focusable
 
                 iframe.onload = () => {
                     document.getElementById('player-loading').style.display = 'none';
+                    // Focus iframe for keyboard input
+                    iframe.focus();
                 };
+
+                // Focus iframe on click
+                wrapper.addEventListener('click', () => {
+                    iframe.focus();
+                });
 
                 wrapper.appendChild(iframe);
 

@@ -145,7 +145,7 @@ get_category() {
     local parent="$(basename "$(dirname "$dir")")"
 
     case "$parent" in
-        3d|graphics|sound|video|input_output|communication|utils|threads|windowing|tools)
+        3d|graphics|sound|video|input_output|communication|utils|threads|windowing|tools|events|gui|math|network|templates)
             echo "$parent"
             ;;
         *)
@@ -374,12 +374,17 @@ main() {
             bin_path="$sample_dir/bin/${name}.app/Contents/MacOS/$name"
         fi
 
-        # Take screenshot
+        # Take screenshot (skip if thumbnail already exists)
         mkdir -p /tmp/tcdebug
-        local shot_path="/tmp/tcdebug/${name}_shot.png"
-        if take_screenshot "$name" "$bin_path" "$shot_path"; then
-            # Generate thumbnail
-            generate_thumbnail "$shot_path" "$SAMPLES_DIR/thumbs/$name.png"
+        local thumb_path="$SAMPLES_DIR/thumbs/$name.png"
+        if [ -f "$thumb_path" ]; then
+            log_info "Thumbnail already exists, skipping: $name"
+        else
+            local shot_path="/tmp/tcdebug/${name}_shot.png"
+            if take_screenshot "$name" "$bin_path" "$shot_path"; then
+                # Generate thumbnail
+                generate_thumbnail "$shot_path" "$thumb_path"
+            fi
         fi
 
         # Copy WASM files
