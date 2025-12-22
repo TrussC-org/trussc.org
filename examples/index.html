@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examples | TrussC</title>
+    <meta name="description" content="TrussC interactive examples running in WebAssembly. Try them in your browser.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="examples.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-text">TrussC</span>
+            </a>
+            <button class="nav-toggle" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../guide.html">For oF Users</a></li>
+                <li><a href="index.html" class="active">Examples</a></li>
+                <li><a href="https://github.com/TrussC-org/TrussC" class="nav-cta" target="_blank">GitHub</a></li>
+                <li><a href="/ja/" class="nav-lang">日本語</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="examples-hero">
+        <div class="container">
+            <h1 class="examples-hero-title">Examples</h1>
+            <p class="examples-hero-description">
+                Interactive demos running in your browser via WebAssembly.<br>
+                Click any example to try it live.
+            </p>
+        </div>
+    </header>
+
+    <!-- Category Tabs -->
+    <section class="section">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">All</button>
+                <button class="tab-btn" data-category="examples">Core Examples</button>
+                <button class="tab-btn" data-category="addons">Addon Examples</button>
+            </div>
+
+            <!-- Examples Grid -->
+            <div class="examples-grid" id="examples-grid">
+                <!-- Populated by JavaScript -->
+                <div class="loading">Loading examples...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 TrussC. Released under the <a href="../license.html">MIT License</a>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        const WASM_BASE_URL = 'https://wasm.trussc.org';
+
+        async function loadExamples() {
+            try {
+                const response = await fetch(`${WASM_BASE_URL}/samples.json`);
+                if (!response.ok) throw new Error('Failed to load samples.json');
+                const data = await response.json();
+                renderExamples(data);
+            } catch (error) {
+                console.error('Error loading examples:', error);
+                document.getElementById('examples-grid').innerHTML = `
+                    <div class="error-message">
+                        <p>Failed to load examples. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderExamples(data) {
+            const grid = document.getElementById('examples-grid');
+            const allExamples = [
+                ...data.examples.map(e => ({ ...e, type: 'examples' })),
+                ...data.addons.map(e => ({ ...e, type: 'addons' }))
+            ];
+
+            grid.innerHTML = allExamples.map(example => `
+                <a href="player.html?name=${example.name}" class="example-card" data-category="${example.type}">
+                    <div class="example-thumb">
+                        <img src="${WASM_BASE_URL}/${example.thumb}" alt="${example.title}" loading="lazy">
+                    </div>
+                    <div class="example-info">
+                        <h3 class="example-title">${example.title}</h3>
+                        ${example.category ? `<span class="example-category">${example.category}</span>` : ''}
+                        ${example.addon ? `<span class="example-addon">${example.addon}</span>` : ''}
+                        ${example.description ? `<p class="example-desc">${example.description}</p>` : ''}
+                    </div>
+                </a>
+            `).join('');
+
+            // Store data for filtering
+            window.examplesData = allExamples;
+        }
+
+        // Category filtering
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.dataset.category;
+                document.querySelectorAll('.example-card').forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Load examples on page load
+        loadExamples();
+    </script>
+</body>
+</html>

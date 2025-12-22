@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example | TrussC</title>
+    <meta name="description" content="TrussC interactive example running in WebAssembly.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="examples.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+    <div class="player-page">
+        <!-- Header -->
+        <header class="player-header">
+            <div class="container">
+                <div class="player-header-content">
+                    <a href="index.html" class="player-back">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                        Back to Examples
+                    </a>
+                    <h1 class="player-title" id="player-title">Loading...</h1>
+                    <div class="player-info">
+                        <span class="example-category" id="player-category" style="display: none;"></span>
+                        <span class="example-addon" id="player-addon" style="display: none;"></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="player-content">
+            <div class="container">
+                <!-- Description -->
+                <p class="player-description" id="player-description"></p>
+
+                <!-- WASM Player -->
+                <section class="player-section">
+                    <div class="player-wrapper" id="player-wrapper">
+                        <div class="player-loading" id="player-loading">
+                            <p>Loading WebAssembly...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Source Code -->
+                <section class="source-section" id="source-section" style="display: none;">
+                    <div class="source-header">
+                        <h2 class="source-title">Source Code</h2>
+                        <div class="source-tabs" id="source-tabs">
+                            <button class="source-tab active" data-file="tcApp.cpp">tcApp.cpp</button>
+                            <button class="source-tab" data-file="tcApp.h">tcApp.h</button>
+                        </div>
+                        <a href="#" class="source-github" id="source-github" target="_blank">
+                            View on GitHub
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="source-content">
+                        <pre><code class="language-cpp" id="source-code">Loading source code...</code></pre>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2025 TrussC. Released under the <a href="../license.html">MIT License</a>.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+    <script src="../script.js"></script>
+    <script>
+        const WASM_BASE_URL = 'https://wasm.trussc.org';
+        const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/TrussC-org/TrussC/main';
+
+        let currentExample = null;
+
+        async function initPlayer() {
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('name');
+
+            if (!name) {
+                showError('No example specified. Please select an example from the list.');
+                return;
+            }
+
+            try {
+                // Load samples.json to get example info
+                const response = await fetch(`${WASM_BASE_URL}/samples.json`);
+                if (!response.ok) throw new Error('Failed to load samples.json');
+                const data = await response.json();
+
+                // Find the example
+                const example = [...data.examples, ...data.addons].find(e => e.name === name);
+                if (!example) {
+                    showError(`Example "${name}" not found.`);
+                    return;
+                }
+
+                currentExample = example;
+
+                // Update page info
+                document.title = `${example.title} | TrussC`;
+                document.getElementById('player-title').textContent = example.title;
+
+                if (example.description) {
+                    document.getElementById('player-description').textContent = example.description;
+                }
+
+                if (example.category) {
+                    const cat = document.getElementById('player-category');
+                    cat.textContent = example.category;
+                    cat.style.display = '';
+                }
+
+                if (example.addon) {
+                    const addon = document.getElementById('player-addon');
+                    addon.textContent = example.addon;
+                    addon.style.display = '';
+                }
+
+                // Create iframe for WASM
+                const wrapper = document.getElementById('player-wrapper');
+                const iframe = document.createElement('iframe');
+                iframe.className = 'player-frame';
+                iframe.src = `${WASM_BASE_URL}/${example.wasm}`;
+                iframe.allow = 'autoplay; fullscreen';
+
+                iframe.onload = () => {
+                    document.getElementById('player-loading').style.display = 'none';
+                };
+
+                wrapper.appendChild(iframe);
+
+                // Load source code
+                loadSourceCode(example);
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Failed to load example. Please try again later.');
+            }
+        }
+
+        async function loadSourceCode(example) {
+            const sourceSection = document.getElementById('source-section');
+            const sourceCode = document.getElementById('source-code');
+            const sourceGithub = document.getElementById('source-github');
+
+            // Determine source path
+            let basePath;
+            if (example.addon) {
+                basePath = `addons/${example.addon}/${example.name}`;
+            } else if (example.category) {
+                basePath = `examples/${example.category}/${example.name}`;
+            } else {
+                basePath = `examples/${example.name}`;
+            }
+
+            // Set GitHub link
+            sourceGithub.href = `https://github.com/TrussC-org/TrussC/tree/main/${basePath}/src`;
+
+            // Load tcApp.cpp
+            try {
+                const cppUrl = `${GITHUB_RAW_BASE}/${basePath}/src/tcApp.cpp`;
+                const response = await fetch(cppUrl);
+                if (response.ok) {
+                    const code = await response.text();
+                    sourceCode.textContent = code;
+                    hljs.highlightElement(sourceCode);
+                    sourceSection.style.display = '';
+
+                    // Setup tab switching
+                    setupSourceTabs(basePath);
+                }
+            } catch (error) {
+                console.error('Failed to load source:', error);
+            }
+        }
+
+        function setupSourceTabs(basePath) {
+            const tabs = document.querySelectorAll('.source-tab');
+            const sourceCode = document.getElementById('source-code');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', async () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const file = tab.dataset.file;
+                    const url = `${GITHUB_RAW_BASE}/${basePath}/src/${file}`;
+
+                    try {
+                        sourceCode.textContent = 'Loading...';
+                        const response = await fetch(url);
+                        if (response.ok) {
+                            const code = await response.text();
+                            sourceCode.textContent = code;
+                            hljs.highlightElement(sourceCode);
+                        } else {
+                            sourceCode.textContent = `// ${file} not found`;
+                        }
+                    } catch (error) {
+                        sourceCode.textContent = `// Failed to load ${file}`;
+                    }
+                });
+            });
+        }
+
+        function showError(message) {
+            document.getElementById('player-title').textContent = 'Error';
+            document.getElementById('player-loading').innerHTML = `
+                <div class="error-message">
+                    <p>${message}</p>
+                    <p><a href="index.html">Return to Examples</a></p>
+                </div>
+            `;
+        }
+
+        // Initialize on load
+        initPlayer();
+    </script>
+</body>
+</html>
