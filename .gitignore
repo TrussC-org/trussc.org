@@ -15,3 +15,7 @@ Desktop.ini
 *~
 .vscode/
 .idea/
+
+# Node.js / Wrangler
+node_modules/
+.wrangler/
