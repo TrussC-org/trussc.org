@@ -141,6 +141,15 @@
                 // webSupportedが明示的にfalseの場合は非対応表示
                 if (example.webSupported === false) {
                     loading.style.display = 'none';
+
+                    // サムネイル画像を背景に表示
+                    const thumbImg = document.createElement('img');
+                    thumbImg.className = 'player-thumb-bg';
+                    thumbImg.src = `${WASM_BASE_URL}/${example.thumb}`;
+                    thumbImg.alt = example.title;
+                    wrapper.appendChild(thumbImg);
+
+                    // オーバーレイ
                     const unsupported = document.createElement('div');
                     unsupported.className = 'player-unsupported';
                     unsupported.innerHTML = `
