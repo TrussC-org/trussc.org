@@ -27,7 +27,7 @@
                 <li><a href="#code">Code</a></li>
                 <li><a href="#tech">Tech Stack</a></li>
                 <li><a href="guide.html">For oF Users</a></li>
-                <li><a href="#start" class="nav-cta">Get Started</a></li>
+                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED.md" class="nav-cta" target="_blank" rel="noopener">Get Started</a></li>
                 <li><a href="/ja/" class="nav-lang">日本語</a></li>
             </ul>
         </div>
@@ -49,7 +49,7 @@
                 Built for modern GPUs.
             </p>
             <div class="hero-actions">
-                <a href="#start" class="btn btn-primary">Get Started</a>
+                <a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED.md" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
                 <a href="https://github.com/TrussC-org/TrussC" class="btn btn-secondary" target="_blank" rel="noopener">
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
@@ -252,171 +252,6 @@
                     <p class="tech-desc">AVFoundation / Media Foundation</p>
                     <span class="tech-license">Custom</span>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Comparison Section -->
-    <section id="comparison" class="section comparison-section">
-        <div class="container">
-            <h2 class="section-title">For oF Users</h2>
-            <p class="section-subtitle">Built on the joy of creative coding that openFrameworks pioneered</p>
-
-            <div class="respect-note">
-                <p>TrussC deeply respects the magical "one line of code, instant visuals" experience that oF created.<br>
-                If you know oF, you'll feel right at home.</p>
-            </div>
-
-            <div class="comparison-table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>openFrameworks</th>
-                            <th>TrussC</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Lifecycle</td>
-                            <td>setup, update, draw</td>
-                            <td>setup, update, draw <span class="same-badge">Same</span></td>
-                        </tr>
-                        <tr>
-                            <td>Immediate Drawing</td>
-                            <td>ofDrawCircle(x, y, r)</td>
-                            <td>drawCircle(x, y, r) <span class="same-badge">Same</span></td>
-                        </tr>
-                        <tr>
-                            <td>State Management</td>
-                            <td>ofSetColor, ofPushMatrix</td>
-                            <td>setColor, pushMatrix <span class="same-badge">Same</span></td>
-                        </tr>
-                        <tr>
-                            <td>Coordinate System</td>
-                            <td>Global coordinates</td>
-                            <td>Scene graph + local coordinates</td>
-                        </tr>
-                        <tr>
-                            <td>Graphics Backend</td>
-                            <td>OpenGL</td>
-                            <td>Metal / DX12 / Vulkan</td>
-                        </tr>
-                        <tr>
-                            <td>Memory Management</td>
-                            <td>ofPtr / raw pointers</td>
-                            <td>std::shared_ptr</td>
-                        </tr>
-                        <tr>
-                            <td>Delayed Execution</td>
-                            <td>ofThread / DIY</td>
-                            <td>callAfter, callEvery (sync timers)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="trussc-benefits">
-                <h3>What TrussC Offers</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>Commercial-Friendly</strong>
-                            <p>MIT / zlib / Public Domain only. No GPL concerns.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>Built-in Scene Graph</strong>
-                            <p>Node-based hierarchy. Easy hit testing even on rotated elements.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>Local Coordinate Events</strong>
-                            <p>Mouse coordinates auto-transformed to each node's local space.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>Safe Sync Timers</strong>
-                            <p>callAfter / callEvery for safe main-thread delayed execution.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>Blazing Fast Builds</strong>
-                            <p>Minimal dependencies mean fast compile times and tiny binaries.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>Native GPU Support</strong>
-                            <p>Metal / DirectX 12 / Vulkan for maximum hardware performance.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="guide-link-wrapper">
-                <a href="guide.html" class="btn btn-secondary btn-large">
-                    Migration Guide for oF Users
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Getting Started Section -->
-    <section id="start" class="section start-section">
-        <div class="container">
-            <h2 class="section-title">Get Started</h2>
-            <p class="section-subtitle">Up and running in 3 steps</p>
-
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Clone the repository</h3>
-                        <div class="step-code">
-                            <code>git clone https://github.com/TrussC-org/TrussC.git</code>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Build with CMake</h3>
-                        <div class="step-code">
-                            <code>cd TrussC && mkdir build && cd build<br>cmake .. && make</code>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Run an example</h3>
-                        <div class="step-code">
-                            <code>./examples/hello_world</code>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="start-cta">
-                <a href="https://github.com/TrussC-org/TrussC" class="btn btn-primary btn-large" target="_blank" rel="noopener">
-                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                    </svg>
-                    View on GitHub
-                </a>
             </div>
         </div>
     </section>

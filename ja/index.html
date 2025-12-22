@@ -27,7 +27,7 @@
                 <li><a href="#code">コード例</a></li>
                 <li><a href="#tech">技術スタック</a></li>
                 <li><a href="guide.html">oFユーザーへ</a></li>
-                <li><a href="#start" class="nav-cta">始める</a></li>
+                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED_jp.md" class="nav-cta" target="_blank" rel="noopener">始める</a></li>
                 <li><a href="/" class="nav-lang">EN</a></li>
             </ul>
         </div>
@@ -49,7 +49,7 @@
                 現代のGPUに最適化した軽量クリエイティブコーディング環境。
             </p>
             <div class="hero-actions">
-                <a href="#start" class="btn btn-primary">Get Started</a>
+                <a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED_jp.md" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
                 <a href="https://github.com/TrussC-org/TrussC" class="btn btn-secondary" target="_blank" rel="noopener">
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
@@ -252,171 +252,6 @@
                     <p class="tech-desc">AVFoundation / Media Foundation</p>
                     <span class="tech-license">自前実装</span>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Comparison Section -->
-    <section id="comparison" class="section comparison-section">
-        <div class="container">
-            <h2 class="section-title">For oF Users</h2>
-            <p class="section-subtitle">openFrameworksが築いたクリエイティブコーディングの楽しさを継承しています</p>
-
-            <div class="respect-note">
-                <p>TrussCは、oFが生み出した「1行書けば絵が出る」という魔法のような体験を深くリスペクトしています。<br>
-                oFユーザーなら、違和感なく書き始められるはずです。</p>
-            </div>
-
-            <div class="comparison-table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>項目</th>
-                            <th>openFrameworks</th>
-                            <th>TrussC</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>ライフサイクル</td>
-                            <td>setup, update, draw</td>
-                            <td>setup, update, draw <span class="same-badge">同じ</span></td>
-                        </tr>
-                        <tr>
-                            <td>即時描画</td>
-                            <td>ofDrawCircle(x, y, r)</td>
-                            <td>drawCircle(x, y, r) <span class="same-badge">同じ</span></td>
-                        </tr>
-                        <tr>
-                            <td>ステート管理</td>
-                            <td>ofSetColor, ofPushMatrix</td>
-                            <td>setColor, pushMatrix <span class="same-badge">同じ</span></td>
-                        </tr>
-                        <tr>
-                            <td>座標系</td>
-                            <td>グローバル座標</td>
-                            <td>シーングラフ + ローカル座標</td>
-                        </tr>
-                        <tr>
-                            <td>描画バックエンド</td>
-                            <td>OpenGL</td>
-                            <td>Metal / DX12 / Vulkan</td>
-                        </tr>
-                        <tr>
-                            <td>メモリ管理</td>
-                            <td>ofPtr / 生ポインタ</td>
-                            <td>std::shared_ptr</td>
-                        </tr>
-                        <tr>
-                            <td>遅延実行</td>
-                            <td>ofThread / 自前実装</td>
-                            <td>callAfter, callEvery (同期タイマー)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="trussc-benefits">
-                <h3>TrussCが提供するもの</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>商用利用に安心</strong>
-                            <p>MIT / zlib / Public Domain のみで構成。GPL汚染の心配がない。</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>シーングラフ標準装備</strong>
-                            <p>Nodeで親子関係を管理。回転した親の中のボタンも簡単に判定できる。</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>ローカル座標でイベント</strong>
-                            <p>マウス座標が自動変換され、各ノードのローカル座標で届く。</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>安全な同期タイマー</strong>
-                            <p>callAfter / callEvery でメインスレッドから安全に遅延実行。</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>ビルドが爆速</strong>
-                            <p>必要最小限の構成で、コンパイル時間もバイナリサイズも極小。</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <div>
-                            <strong>ネイティブGPU対応</strong>
-                            <p>Metal / DirectX 12 / Vulkan で最新ハードウェアの性能を引き出す。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="guide-link-wrapper">
-                <a href="guide.html" class="btn btn-secondary btn-large">
-                    openFrameworksからの移行ガイド
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Getting Started Section -->
-    <section id="start" class="section start-section">
-        <div class="container">
-            <h2 class="section-title">Get Started</h2>
-            <p class="section-subtitle">3ステップで始めるTrussC</p>
-
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>リポジトリをクローン</h3>
-                        <div class="step-code">
-                            <code>git clone https://github.com/TrussC-org/TrussC.git</code>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>CMakeでビルド</h3>
-                        <div class="step-code">
-                            <code>cd TrussC && mkdir build && cd build<br>cmake .. && make</code>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>サンプルを実行</h3>
-                        <div class="step-code">
-                            <code>./examples/hello_world</code>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="start-cta">
-                <a href="https://github.com/TrussC-org/TrussC" class="btn btn-primary btn-large" target="_blank" rel="noopener">
-                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                    </svg>
-                    View on GitHub
-                </a>
             </div>
         </div>
     </section>

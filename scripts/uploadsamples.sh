@@ -9,7 +9,7 @@
 #   ./uploadsamples.sh /path sample_name    # Process specific sample only
 # =============================================================================
 
-set -e
+# set -e  # Disabled: errors are handled per-sample
 
 # Colored output
 RED='\033[0;31m'
@@ -64,7 +64,7 @@ show_help() {
     echo ""
     echo "Arguments:"
     echo "  TC_ROOT      Path to TrussC root directory"
-    echo "               If not specified, reads from ~/.trussc"
+    echo "               If not specified, reads from ~/.trussc/config.json"
     echo "  SAMPLE_NAME  Process only this specific sample"
     echo ""
     echo "Examples:"
@@ -73,19 +73,24 @@ show_help() {
     echo "  ./uploadsamples.sh --dry-run easyCamExample"
 }
 
-# Get TC_ROOT from ~/.trussc or argument
+# Get TC_ROOT from ~/.trussc/config.json or argument
 resolve_tc_root() {
     if [ -n "$TC_ROOT" ]; then
         return
     fi
 
-    local config_file="$HOME/.trussc"
+    local config_file="$HOME/.trussc/config.json"
     if [ -f "$config_file" ]; then
-        TC_ROOT=$(cat "$config_file" | tr -d '\n')
-        log_info "Using TC_ROOT from ~/.trussc: $TC_ROOT"
+        TC_ROOT=$(jq -r '.tc_root' "$config_file")
+        if [ -n "$TC_ROOT" ] && [ "$TC_ROOT" != "null" ]; then
+            log_info "Using TC_ROOT from ~/.trussc/config.json: $TC_ROOT"
+        else
+            log_error "tc_root not found in ~/.trussc/config.json"
+            exit 1
+        fi
     else
-        log_error "TC_ROOT not specified and ~/.trussc not found"
-        echo "Create ~/.trussc with the path to your TrussC directory, or pass it as an argument"
+        log_error "TC_ROOT not specified and ~/.trussc/config.json not found"
+        echo "Run projectGenerator to create config, or pass TC_ROOT as an argument"
         exit 1
     fi
 
@@ -174,23 +179,42 @@ take_screenshot() {
 
     log_info "Starting $name for screenshot..."
 
-    # Launch in background
-    "$bin_path" &
+    # Create named pipe for stdin
+    mkdir -p /tmp/tcdebug
+    local fifo="/tmp/tcdebug/${name}_stdin"
+    rm -f "$fifo"
+    mkfifo "$fifo"
+
+    # Launch app with stdin from FIFO
+    "$bin_path" < "$fifo" &
     local pid=$!
+
+    # Keep FIFO open (prevent EOF)
+    exec 3>"$fifo"
 
     # Wait for app to initialize
     sleep "$SCREENSHOT_DELAY"
 
-    # Capture screenshot
-    if tcdebug screenshot "$output" 2>/dev/null; then
-        log_success "Screenshot saved: $output"
-    else
-        log_warn "Failed to take screenshot for $name"
-    fi
+    # Send screenshot command via stdin
+    echo "tcdebug screenshot $output" >&3
 
-    # Terminate process
+    # Wait for screenshot to be saved
+    sleep 0.5
+
+    # Close FIFO and terminate
+    exec 3>&-
+    rm -f "$fifo"
     kill "$pid" 2>/dev/null || true
     wait "$pid" 2>/dev/null || true
+
+    # Check if screenshot was created
+    if [ -f "$output" ]; then
+        log_success "Screenshot saved: $output"
+        return 0
+    else
+        log_warn "Failed to take screenshot for $name"
+        return 1
+    fi
 }
 
 # Generate thumbnail from screenshot
@@ -219,11 +243,12 @@ generate_thumbnail() {
 # Copy WASM build artifacts
 copy_wasm_files() {
     local name="$1"
-    local build_dir="$2"
+    local sample_dir="$2"
 
-    local html_file="$build_dir/bin/$name.html"
-    local js_file="$build_dir/bin/$name.js"
-    local wasm_file="$build_dir/bin/$name.wasm"
+    # WASM files are in bin/ directory (same as native build)
+    local html_file="$sample_dir/bin/$name.html"
+    local js_file="$sample_dir/bin/$name.js"
+    local wasm_file="$sample_dir/bin/$name.wasm"
 
     if [ -f "$html_file" ] && [ -f "$js_file" ] && [ -f "$wasm_file" ]; then
         cp "$html_file" "$SAMPLES_DIR/wasm/"
@@ -350,14 +375,15 @@ main() {
         fi
 
         # Take screenshot
-        local shot_path="/tmp/${name}_shot.png"
+        mkdir -p /tmp/tcdebug
+        local shot_path="/tmp/tcdebug/${name}_shot.png"
         if take_screenshot "$name" "$bin_path" "$shot_path"; then
             # Generate thumbnail
             generate_thumbnail "$shot_path" "$SAMPLES_DIR/thumbs/$name.png"
         fi
 
         # Copy WASM files
-        copy_wasm_files "$name" "$sample_dir/build-web"
+        copy_wasm_files "$name" "$sample_dir"
     done
 
     # Generate samples.json
