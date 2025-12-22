@@ -149,7 +149,12 @@
                     iframe.focus();
                 };
 
-                // Focus iframe on click
+                // Focus iframe when mouse enters the player area
+                wrapper.addEventListener('mouseenter', () => {
+                    iframe.focus();
+                });
+
+                // Also focus on click (for touch devices)
                 wrapper.addEventListener('click', () => {
                     iframe.focus();
                 });
