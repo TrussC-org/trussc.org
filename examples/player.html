@@ -135,31 +135,45 @@
                     addon.style.display = '';
                 }
 
-                // Create iframe for WASM
                 const wrapper = document.getElementById('player-wrapper');
-                const iframe = document.createElement('iframe');
-                iframe.className = 'player-frame';
-                iframe.src = `${WASM_BASE_URL}/${example.wasm}`;
-                iframe.allow = 'autoplay; fullscreen';
-                iframe.tabIndex = 0;  // Make iframe focusable
+                const loading = document.getElementById('player-loading');
 
-                iframe.onload = () => {
-                    document.getElementById('player-loading').style.display = 'none';
-                    // Focus iframe for keyboard input
-                    iframe.focus();
-                };
+                // webSupportedが明示的にfalseの場合は非対応表示
+                if (example.webSupported === false) {
+                    loading.style.display = 'none';
+                    const unsupported = document.createElement('div');
+                    unsupported.className = 'player-unsupported';
+                    unsupported.innerHTML = `
+                        <p class="unsupported-title">Not Available in WebAssembly</p>
+                        <p class="unsupported-desc">This example requires features not supported in the browser.<br>Please run it locally with the native build.</p>
+                    `;
+                    wrapper.appendChild(unsupported);
+                } else {
+                    // Create iframe for WASM
+                    const iframe = document.createElement('iframe');
+                    iframe.className = 'player-frame';
+                    iframe.src = `${WASM_BASE_URL}/${example.wasm}`;
+                    iframe.allow = 'autoplay; fullscreen';
+                    iframe.tabIndex = 0;  // Make iframe focusable
 
-                // Focus iframe when mouse enters the player area
-                wrapper.addEventListener('mouseenter', () => {
-                    iframe.focus();
-                });
+                    iframe.onload = () => {
+                        loading.style.display = 'none';
+                        // Focus iframe for keyboard input
+                        iframe.focus();
+                    };
 
-                // Also focus on click (for touch devices)
-                wrapper.addEventListener('click', () => {
-                    iframe.focus();
-                });
+                    // Focus iframe when mouse enters the player area
+                    wrapper.addEventListener('mouseenter', () => {
+                        iframe.focus();
+                    });
 
-                wrapper.appendChild(iframe);
+                    // Also focus on click (for touch devices)
+                    wrapper.addEventListener('click', () => {
+                        iframe.focus();
+                    });
+
+                    wrapper.appendChild(iframe);
+                }
 
                 // Load source code
                 loadSourceCode(example);

@@ -97,10 +97,14 @@
                 ...data.addons.map(e => ({ ...e, type: 'addons' }))
             ];
 
+            // webSupported が明示的にfalseでない場合はtrue扱い
+            const isWebSupported = (example) => example.webSupported !== false;
+
             grid.innerHTML = allExamples.map(example => `
-                <a href="player.html?name=${example.name}" class="example-card" data-category="${example.type}">
+                <a href="player.html?name=${example.name}" class="example-card${isWebSupported(example) ? '' : ' not-web-supported'}" data-category="${example.type}">
                     <div class="example-thumb">
                         <img src="${WASM_BASE_URL}/${example.thumb}" alt="${example.title}" loading="lazy">
+                        ${isWebSupported(example) ? '' : '<div class="example-unsupported-overlay">Not available in WebAssembly</div>'}
                     </div>
                     <div class="example-info">
                         <h3 class="example-title">${example.title}</h3>
