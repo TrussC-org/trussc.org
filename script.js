@@ -169,6 +169,8 @@ let lastScrollY = 0;
 
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('.nav');
+    if (!nav) return;  // player.htmlなど、navがないページでは何もしない
+
     const scrollY = window.scrollY;
 
     if (scrollY > 100) {
