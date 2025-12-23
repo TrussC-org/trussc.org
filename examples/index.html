@@ -44,18 +44,10 @@
         </div>
     </header>
 
-    <!-- Category Tabs -->
+    <!-- Examples by Category -->
     <section class="section">
         <div class="container">
-            <div class="category-tabs">
-                <button class="tab-btn active" data-category="all">All</button>
-                <button class="tab-btn" data-category="examples">Core Examples</button>
-                <button class="tab-btn" data-category="addons">Addon Examples</button>
-            </div>
-
-            <!-- Examples Grid -->
-            <div class="examples-grid" id="examples-grid">
-                <!-- Populated by JavaScript -->
+            <div id="examples-container">
                 <div class="loading">Loading examples...</div>
             </div>
         </div>
@@ -74,6 +66,28 @@
     <script>
         const WASM_BASE_URL = 'https://wasm.trussc.org';
 
+        // カテゴリー表示名
+        const categoryNames = {
+            '3d': '3D',
+            'events': 'Events',
+            'graphics': 'Graphics',
+            'gui': 'GUI',
+            'input_output': 'Input / Output',
+            'math': 'Math',
+            'network': 'Network',
+            'templates': 'Templates',
+            'threads': 'Threads',
+            'utils': 'Utilities',
+            'video': 'Video',
+            'windowing': 'Windowing'
+        };
+
+        // カテゴリー表示順
+        const categoryOrder = [
+            'graphics', '3d', 'input_output', 'events', 'gui',
+            'math', 'utils', 'video', 'network', 'threads', 'windowing', 'templates'
+        ];
+
         async function loadExamples() {
             try {
                 const response = await fetch(`${WASM_BASE_URL}/samples.json`);
@@ -82,7 +96,7 @@
                 renderExamples(data);
             } catch (error) {
                 console.error('Error loading examples:', error);
-                document.getElementById('examples-grid').innerHTML = `
+                document.getElementById('examples-container').innerHTML = `
                     <div class="error-message">
                         <p>Failed to load examples. Please try again later.</p>
                     </div>
@@ -91,52 +105,75 @@
         }
 
         function renderExamples(data) {
-            const grid = document.getElementById('examples-grid');
-            const allExamples = [
-                ...data.examples.map(e => ({ ...e, type: 'examples' })),
-                ...data.addons.map(e => ({ ...e, type: 'addons' }))
-            ];
-
-            // webSupported が明示的にfalseでない場合はtrue扱い
+            const container = document.getElementById('examples-container');
             const isWebSupported = (example) => example.webSupported !== false;
 
-            grid.innerHTML = allExamples.map(example => `
-                <a href="player.html?name=${example.name}" class="example-card${isWebSupported(example) ? '' : ' not-web-supported'}" data-category="${example.type}">
+            // カテゴリーごとにグループ化
+            const byCategory = {};
+            data.examples.forEach(e => {
+                const cat = e.category || 'other';
+                if (!byCategory[cat]) byCategory[cat] = [];
+                byCategory[cat].push(e);
+            });
+
+            // カード生成関数
+            const renderCard = (example) => `
+                <a href="player.html?name=${example.name}" class="example-card${isWebSupported(example) ? '' : ' not-web-supported'}">
                     <div class="example-thumb">
                         <img src="${WASM_BASE_URL}/${example.thumb}" alt="${example.title}" loading="lazy">
-                        ${isWebSupported(example) ? '' : '<div class="example-unsupported-overlay">Not available in WebAssembly</div>'}
+                        ${isWebSupported(example) ? '' : '<div class="example-unsupported-overlay">Native only</div>'}
                     </div>
                     <div class="example-info">
                         <h3 class="example-title">${example.title}</h3>
-                        ${example.category ? `<span class="example-category">${example.category}</span>` : ''}
-                        ${example.addon ? `<span class="example-addon">${example.addon}</span>` : ''}
-                        ${example.description ? `<p class="example-desc">${example.description}</p>` : ''}
                     </div>
                 </a>
-            `).join('');
+            `;
 
-            // Store data for filtering
-            window.examplesData = allExamples;
+            // カテゴリーセクション生成
+            let html = '';
+            categoryOrder.forEach(cat => {
+                if (byCategory[cat] && byCategory[cat].length > 0) {
+                    html += `
+                        <div class="category-section">
+                            <h2 class="category-title">${categoryNames[cat] || cat}</h2>
+                            <div class="examples-grid">
+                                ${byCategory[cat].map(renderCard).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            // Addonsセクション
+            if (data.addons && data.addons.length > 0) {
+                // addonごとにグループ化
+                const byAddon = {};
+                data.addons.forEach(e => {
+                    const addon = e.addon || 'other';
+                    if (!byAddon[addon]) byAddon[addon] = [];
+                    byAddon[addon].push(e);
+                });
+
+                html += `<div class="category-section addons-section">
+                    <h2 class="category-title">Addons</h2>`;
+
+                Object.keys(byAddon).forEach(addon => {
+                    html += `
+                        <div class="addon-group">
+                            <h3 class="addon-title">${addon}</h3>
+                            <div class="examples-grid">
+                                ${byAddon[addon].map(renderCard).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
         }
 
-        // Category filtering
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const category = btn.dataset.category;
-                document.querySelectorAll('.example-card').forEach(card => {
-                    if (category === 'all' || card.dataset.category === category) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Load examples on page load
         loadExamples();
     </script>
 </body>
