@@ -234,7 +234,10 @@
             const sourceCode = document.getElementById('source-code');
 
             tabs.forEach(tab => {
-                tab.addEventListener('click', async () => {
+                tab.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const scrollY = window.scrollY;
+
                     tabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
 
@@ -254,6 +257,8 @@
                     } catch (error) {
                         sourceCode.textContent = `// Failed to load ${file}`;
                     }
+
+                    window.scrollTo(0, scrollY);
                 });
             });
         }

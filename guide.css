@@ -450,6 +450,130 @@
     line-height: 1.6;
 }
 
+/* Getting Started Section */
+.getting-started-section {
+    background: var(--color-bg);
+}
+
+.guide-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.guide-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: var(--space-3xl);
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+}
+
+.guide-content h3:first-child {
+    margin-top: 0;
+}
+
+.guide-content p {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+}
+
+.guide-content code {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+}
+
+.guide-content pre {
+    padding: var(--space-lg);
+    background: var(--color-bg-code);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    margin-bottom: var(--space-xl);
+}
+
+.guide-content pre code {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    background: none;
+    padding: 0;
+}
+
+/* Directory Compare - 横並び */
+.directory-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+.directory-tree {
+    background: var(--color-bg-code);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.directory-tree h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+.directory-tree pre {
+    margin: 0;
+    padding: var(--space-md) var(--space-lg);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    border-radius: 0;
+}
+
+/* Guide Image */
+.guide-image {
+    margin: var(--space-xl) 0;
+    text-align: center;
+}
+
+.guide-image img {
+    max-width: 60%;
+    height: auto;
+    border-radius: var(--radius-md);
+}
+
+/* Guide Conclusion */
+.guide-conclusion {
+    font-size: 1.1rem !important;
+    color: var(--color-text) !important;
+    text-align: center;
+    padding: var(--space-xl);
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: var(--radius-md);
+    margin-top: var(--space-xl);
+}
+
+@media (max-width: 768px) {
+    .directory-compare {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* CTA Section */
 .cta-section {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%);

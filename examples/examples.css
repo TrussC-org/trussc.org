@@ -363,7 +363,7 @@
     margin: 0;
     padding: var(--space-lg);
     overflow-x: auto;
-    max-height: 500px;
+    max-height: 800px;
 }
 
 .source-content code {

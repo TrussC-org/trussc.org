@@ -24,12 +24,11 @@
                 <span></span>
             </button>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#same">Similarities</a></li>
-                <li><a href="#solutions">Solutions</a></li>
-                <li><a href="#api">API Reference</a></li>
-                <li><a href="https://github.com/TrussC-org/TrussC" class="nav-cta" target="_blank">GitHub</a></li>
-                <li><a href="/ja/guide.html" class="nav-lang">日本語</a></li>
+                <li><a href="examples/">Examples</a></li>
+                <li><a href="for-of-users.html" class="active">For oF Users</a></li>
+                <li><a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">Ask AI</a></li>
+                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED.md" class="nav-cta" target="_blank" rel="noopener">Get Started</a></li>
+                <li><a href="/ja/for-of-users.html" class="nav-lang">日本語</a></li>
             </ul>
         </div>
     </nav>
@@ -43,8 +42,7 @@
                 <span class="guide-hero-accent">oF Users</span>
             </h1>
             <p class="guide-hero-description">
-                If you love oF, you'll love TrussC.<br>
-                Same joy, modern tech.
+                If you love oF, you'll love TrussC.
             </p>
         </div>
     </header>
@@ -109,8 +107,8 @@
                             <path d="M9 3v18"/>
                         </svg>
                     </div>
-                    <h3>VSCode Support</h3>
-                    <p>It's the standard now. Cursor user? Of course that works too.</p>
+                    <h3>XCode / VS / VSCode Support</h3>
+                    <p>Choose your favorite IDE. Works with Cursor too, of course.</p>
                     <div class="same-compare">
                         <span class="label">CMake</span>
                         <span class="arrow">+</span>
@@ -127,40 +125,51 @@
             <h2 class="section-title">Pain Points Solved</h2>
             <p class="section-subtitle">TrussC's answers to long-standing oF frustrations</p>
 
-            <!-- Solution 1: Thick Lines -->
+            <!-- Solution 1: Backend -->
             <div class="solution-card">
                 <div class="solution-problem">
                     <div class="solution-label problem-label">The Problem</div>
-                    <h3>Can't Draw Thick Lines</h3>
+                    <h3>OpenGL Deprecated on macOS</h3>
                     <p>
-                        <code>ofSetLineWidth()</code> isn't guaranteed above 1px due to OpenGL limitations.<br>
-                        On macOS / Metal, it's completely ignored. Drawing thick lines meant generating meshes manually.
+                        Apple deprecated OpenGL in favor of Metal.<br>
+                        Future compatibility and performance optimization became uncertain.<br>
+                        The looming question: when will support be dropped?
                     </p>
                 </div>
                 <div class="solution-answer">
                     <div class="solution-label answer-label">TrussC's Solution</div>
-                    <h3>Beautiful Strokes with StrokeMesh</h3>
+                    <h3>Native Backends via Sokol</h3>
                     <p>
-                        In oF, thick lines had ugly clipped corners and endpoints.<br>
-                        StrokeMesh gives you beautiful strokes with proper edges.
+                        <strong>Metal / DirectX 12 / Vulkan / WebGPU</strong> support.<br>
+                        Runs on OS-recommended native APIs for optimal speed and power efficiency.<br>
+                        WebAssembly + WebGPU provides excellent browser portability.
                     </p>
-                    <pre><code><span class="code-comment">// Draw lines of any thickness with StrokeMesh</span>
-StrokeMesh stroke;
-stroke.setStrokeWidth(<span class="code-number">5.0f</span>);  <span class="code-comment">// 5px thick line</span>
-stroke.moveTo(<span class="code-number">0</span>, <span class="code-number">0</span>);
-stroke.lineTo(<span class="code-number">100</span>, <span class="code-number">100</span>);
-stroke.draw();
-
-<span class="code-comment">// Can also create from Polyline</span>
-Polyline line;
-line.addVertex(<span class="code-number">0</span>, <span class="code-number">0</span>);
-line.addVertex(<span class="code-number">100</span>, <span class="code-number">50</span>);
-StrokeMesh stroke2(line, <span class="code-number">3.0f</span>);
-stroke2.draw();</code></pre>
                 </div>
             </div>
 
-            <!-- Solution 2: Scene Graph -->
+            <!-- Solution 2: License -->
+            <div class="solution-card">
+                <div class="solution-problem">
+                    <div class="solution-label problem-label">The Problem</div>
+                    <h3>License Concerns for Commercial Use</h3>
+                    <p>
+                        oF itself is MIT, but dependencies include GPL libraries.<br>
+                        Checking licenses for FFmpeg, FreeType, etc. is tedious.<br>
+                        Uncertainty when using for client work.
+                    </p>
+                </div>
+                <div class="solution-answer">
+                    <div class="solution-label answer-label">TrussC's Solution</div>
+                    <h3>MIT / zlib / Public Domain Only</h3>
+                    <p>
+                        <strong>Zero GPL contamination</strong> guaranteed.<br>
+                        All dependencies are commercial-use friendly.<br>
+                        Use with confidence for client projects.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Solution 3: Scene Graph -->
             <div class="solution-card">
                 <div class="solution-problem">
                     <div class="solution-label problem-label">The Problem</div>
@@ -181,56 +190,6 @@ parent->addChild(child);
 
 <span class="code-comment">// When parent is destroyed, children are automatically released</span>
 <span class="code-comment">// Circular references safely avoided with weak_ptr</span></code></pre>
-                </div>
-            </div>
-
-            <!-- Solution 3: Local Coordinates -->
-            <div class="solution-card">
-                <div class="solution-problem">
-                    <div class="solution-label problem-label">The Problem</div>
-                    <h3>Hit Testing Rotated Objects is Painful</h3>
-                    <p>
-                        Mouse coordinates are always in screen space (top-left origin).<br>
-                        Hit testing on rotated/scaled objects requires complex calculations.<br>
-                        Even with <code>ofNode</code>, coordinate transforms had to be done manually.
-                    </p>
-                </div>
-                <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussC's Solution</div>
-                    <h3>Automatic Local Coordinate Transform</h3>
-                    <pre><code><span class="code-comment">// RectNode automatically transforms to local coordinates</span>
-<span class="code-keyword">class</span> MyButton : <span class="code-keyword">public</span> RectNode {
-    <span class="code-keyword">void</span> onMousePressed(<span class="code-keyword">const</span> Vec2& localPos, <span class="code-keyword">int</span> button) <span class="code-keyword">override</span> {
-        <span class="code-comment">// localPos is in THIS node's coordinate space</span>
-        <span class="code-comment">// Even if parent is rotated, you get local coords!</span>
-        <span class="code-keyword">if</span> (localPos.x < width/<span class="code-number">2</span>) {
-            <span class="code-comment">// Left half clicked</span>
-        }
-    }
-};</code></pre>
-                </div>
-            </div>
-
-            <!-- Solution 4: Hit Testing -->
-            <div class="solution-card">
-                <div class="solution-problem">
-                    <div class="solution-label problem-label">The Problem</div>
-                    <h3>Overlapping Object Hit Testing is Tedious</h3>
-                    <p>
-                        Hit testing overlapping objects is cumbersome.<br>
-                        Z-order aware hit testing had to be implemented from scratch.
-                    </p>
-                </div>
-                <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussC's Solution</div>
-                    <h3>Z-Order Aware Event Consumption</h3>
-                    <pre><code><span class="code-comment">// RectNode automatically respects Z-order</span>
-<span class="code-comment">// Front nodes receive events first</span>
-
-<span class="code-keyword">void</span> onMousePressed(<span class="code-keyword">const</span> Vec2& pos, <span class="code-keyword">int</span> button) <span class="code-keyword">override</span> {
-    <span class="code-comment">// Handle here, and nodes behind won't receive it</span>
-    consumeEvent();
-}</code></pre>
                 </div>
             </div>
 
@@ -261,77 +220,32 @@ node->callEvery(<span class="code-number">1.0f</span>, []() {
                 </div>
             </div>
 
-            <!-- Solution 6: Backend -->
+            <!-- Solution 6: Thick Lines -->
             <div class="solution-card">
                 <div class="solution-problem">
                     <div class="solution-label problem-label">The Problem</div>
-                    <h3>OpenGL Deprecated on macOS</h3>
+                    <h3>Can't Draw Thick Lines</h3>
                     <p>
-                        Apple deprecated OpenGL in favor of Metal.<br>
-                        Future compatibility and performance optimization became uncertain.<br>
-                        The looming question: when will support be dropped?
+                        <code>ofSetLineWidth()</code> isn't guaranteed above 1px due to OpenGL limitations.<br>
+                        On macOS / Metal, it's completely ignored. Drawing thick lines meant generating meshes manually.
                     </p>
                 </div>
                 <div class="solution-answer">
                     <div class="solution-label answer-label">TrussC's Solution</div>
-                    <h3>Native Backends via Sokol</h3>
+                    <h3>Beautiful Strokes with StrokeMesh</h3>
                     <p>
-                        <strong>Metal / DirectX 12 / Vulkan / WebGPU</strong> support.<br>
-                        Runs on OS-recommended native APIs for optimal speed and power efficiency.<br>
-                        WebAssembly + WebGPU provides excellent browser portability.
+                        In oF, thick lines had ugly clipped corners and endpoints.<br>
+                        StrokeMesh gives you beautiful strokes with proper edges.
                     </p>
+                    <pre><code><span class="code-comment">// Draw lines of any thickness with StrokeMesh</span>
+StrokeMesh stroke;
+stroke.setStrokeWidth(<span class="code-number">5.0f</span>);  <span class="code-comment">// 5px thick line</span>
+stroke.moveTo(<span class="code-number">0</span>, <span class="code-number">0</span>);
+stroke.lineTo(<span class="code-number">100</span>, <span class="code-number">100</span>);
+stroke.draw();</code></pre>
                 </div>
             </div>
 
-            <!-- Solution 7: License -->
-            <div class="solution-card">
-                <div class="solution-problem">
-                    <div class="solution-label problem-label">The Problem</div>
-                    <h3>License Concerns for Commercial Use</h3>
-                    <p>
-                        oF itself is MIT, but dependencies include GPL libraries.<br>
-                        Checking licenses for FFmpeg, FreeType, etc. is tedious.<br>
-                        Uncertainty when using for client work.
-                    </p>
-                </div>
-                <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussC's Solution</div>
-                    <h3>MIT / zlib / Public Domain Only</h3>
-                    <p>
-                        <strong>Zero GPL contamination</strong> guaranteed.<br>
-                        All dependencies are commercial-use friendly.<br>
-                        Use with confidence for client projects.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Solution 8: Update/Draw Cycle -->
-            <div class="solution-card">
-                <div class="solution-problem">
-                    <div class="solution-label problem-label">The Problem</div>
-                    <h3>Update and Draw Always Coupled</h3>
-                    <p>
-                        <code>ofSetFrameRate()</code> couples Draw and Update together.<br>
-                        Problematic when you need fixed timestep for physics simulation.<br>
-                        Hard to build event-driven apps (redraw only on button press).
-                    </p>
-                </div>
-                <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussC's Solution</div>
-                    <h3>Independent Update & Draw Control</h3>
-                    <p>
-                        By default, update and draw alternate as usual. But for event-driven UI apps, you can avoid unnecessary draws by triggering them separately (e.g., on click).<br>
-                        For render-heavy apps, you can also run update at a fixed rate.
-                    </p>
-                    <pre><code><span class="code-comment">// Independent control of Draw and Update</span>
-setDrawVsync(<span class="code-keyword">true</span>);    <span class="code-comment">// Draw at VSync (60Hz)</span>
-setUpdateFps(<span class="code-number">120</span>);      <span class="code-comment">// Physics update at 120Hz</span>
-
-<span class="code-comment">// Event-driven mode (power-saving)</span>
-setDrawFps(<span class="code-number">0</span>);          <span class="code-comment">// Disable auto-draw</span>
-<span class="code-comment">// Call redraw() in mousePressed etc. to trigger draw</span></code></pre>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -368,19 +282,22 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>update()</code></td><td><code>update()</code></td><td>Same</td></tr>
                             <tr><td><code>draw()</code></td><td><code>draw()</code></td><td>Same</td></tr>
                             <tr><td><code>keyPressed(int key)</code></td><td><code>keyPressed(int key)</code></td><td>Same</td></tr>
-                            <tr><td><code>mousePressed(x, y, button)</code></td><td><code>mousePressed(x, y, button)</code></td><td>Same</td></tr>
+                            <tr><td><code>mousePressed(x, y, button)</code></td><td><code>mousePressed(Vec2 pos, button)</code></td><td>Vec2 style</td></tr>
+                            <tr><td><code>mouseMoved(x, y)</code></td><td><code>mouseMoved(Vec2 pos)</code></td><td>Vec2 style</td></tr>
+                            <tr><td><code>mouseDragged(x, y, button)</code></td><td><code>mouseDragged(Vec2 pos, button)</code></td><td>Vec2 style</td></tr>
+                            <tr><td><code>mouseScrolled(x, y, sX, sY)</code></td><td><code>mouseScrolled(Vec2 delta)</code></td><td>Vec2 style</td></tr>
                             <tr><td><code>windowResized(w, h)</code></td><td><code>windowResized(w, h)</code></td><td>Same</td></tr>
-                            <tr><td><code>dragEvent(ofDragInfo&)</code></td><td><code>filesDropped(paths, x, y)</code></td><td></td></tr>
+                            <tr><td><code>dragEvent(ofDragInfo)</code></td><td><code>filesDropped(paths)</code></td><td></td></tr>
                             <tr><td><code>ofSetFrameRate(60)</code></td><td><code>setFps(60)</code></td><td></td></tr>
-                            <tr><td><code>ofSetVerticalSync(true)</code></td><td><code>setVsync(true)</code></td><td></td></tr>
-                            <tr><td><code>-</code></td><td><code>setDrawFps(fps)</code></td><td>Independent draw rate</td></tr>
-                            <tr><td><code>-</code></td><td><code>setUpdateFps(fps)</code></td><td>Independent update rate</td></tr>
-                            <tr><td><code>ofGetElapsedTimef()</code></td><td><code>getElapsedTime()</code></td><td></td></tr>
+                            <tr><td><code>ofSetVerticalSync(true)</code></td><td><code>setFps(VSYNC)</code></td><td>VSync mode</td></tr>
+                            <tr><td><code>-</code></td><td><code>setFps(EVENT_DRIVEN)</code></td><td>Event-driven mode</td></tr>
+                            <tr><td><code>-</code></td><td><code>setIndependentFps(u, d)</code></td><td>Independent rates</td></tr>
+                            <tr><td><code>ofGetElapsedTimef()</code></td><td><code>getElapsedTimef()</code></td><td></td></tr>
                             <tr><td><code>ofGetFrameRate()</code></td><td><code>getFrameRate()</code></td><td></td></tr>
                             <tr><td><code>ofGetFrameNum()</code></td><td><code>getFrameCount()</code></td><td></td></tr>
                             <tr><td><code>ofGetWidth()</code></td><td><code>getWindowWidth()</code></td><td></td></tr>
                             <tr><td><code>ofGetHeight()</code></td><td><code>getWindowHeight()</code></td><td></td></tr>
-                            <tr><td><code>ofExit()</code></td><td><code>exitApp()</code></td><td></td></tr>
+                            <tr><td><code>OF_EXIT_APP()</code></td><td><code>exitApp()</code></td><td></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -405,17 +322,17 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>ofBackground(r, g, b)</code></td><td><code>clear(r, g, b)</code></td><td>0.0-1.0</td></tr>
                             <tr><td><code>ofSetColor(r, g, b, a)</code></td><td><code>setColor(r, g, b, a)</code></td><td>0.0-1.0</td></tr>
                             <tr><td><code>ofSetColor(ofColor::red)</code></td><td><code>setColor(colors::red)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawRectangle(x, y, w, h)</code></td><td><code>drawRect(x, y, w, h)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawCircle(x, y, r)</code></td><td><code>drawCircle(x, y, r)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawEllipse(x, y, w, h)</code></td><td><code>drawEllipse(x, y, w, h)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawLine(x1, y1, x2, y2)</code></td><td><code>drawLine(x1, y1, x2, y2)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawTriangle(...)</code></td><td><code>drawTriangle(...)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawRectangle(x, y, w, h)</code></td><td><code>drawRect(Vec3, Vec2)</code></td><td>Vec2 OK</td></tr>
+                            <tr><td><code>ofDrawCircle(x, y, r)</code></td><td><code>drawCircle(Vec3, r)</code></td><td>Vec2 OK</td></tr>
+                            <tr><td><code>ofDrawEllipse(x, y, w, h)</code></td><td><code>drawEllipse(Vec3, Vec2)</code></td><td>Vec2 OK</td></tr>
+                            <tr><td><code>ofDrawLine(x1, y1, x2, y2)</code></td><td><code>drawLine(Vec3, Vec3)</code></td><td>Vec2 OK</td></tr>
+                            <tr><td><code>ofDrawTriangle(...)</code></td><td><code>drawTriangle(Vec3, Vec3, Vec3)</code></td><td>Vec2 OK</td></tr>
                             <tr><td><code>ofNoFill()</code></td><td><code>noFill()</code></td><td></td></tr>
                             <tr><td><code>ofFill()</code></td><td><code>fill()</code></td><td></td></tr>
                             <tr><td><code>ofSetLineWidth(w)</code></td><td><code>setLineWidth(w)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawBitmapString(s, x, y)</code></td><td><code>drawBitmapString(s, x, y)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawBitmapString(s, x, y)</code></td><td><code>drawBitmapString(s, Vec3)</code></td><td>Vec2 OK</td></tr>
                             <tr><td><code>ofPath</code></td><td><code>Path</code></td><td></td></tr>
-                            <tr><td><code>-</code></td><td><code>StrokeMesh</code></td><td>Thick lines with proper edges</td></tr>
+                            <tr><td><code>-</code></td><td><code>StrokeMesh</code></td><td>Thick lines</td></tr>
                             <tr><td><code>ofEnableBlendMode(...)</code></td><td><code>setBlendMode(...)</code></td><td></td></tr>
                             <tr><td><code>glScissor(...)</code></td><td><code>setScissor(...)</code></td><td></td></tr>
                         </tbody>
@@ -441,7 +358,7 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                         <tbody>
                             <tr><td><code>ofPushMatrix()</code></td><td><code>pushMatrix()</code></td><td></td></tr>
                             <tr><td><code>ofPopMatrix()</code></td><td><code>popMatrix()</code></td><td></td></tr>
-                            <tr><td><code>ofTranslate(x, y, z)</code></td><td><code>translate(x, y, z)</code></td><td></td></tr>
+                            <tr><td><code>ofTranslate(x, y, z)</code></td><td><code>translate(Vec3)</code></td><td>Vec2 OK</td></tr>
                             <tr><td><code>ofRotateDeg(deg)</code></td><td><code>rotateDeg(deg)</code></td><td></td></tr>
                             <tr><td><code>ofRotateRad(rad)</code></td><td><code>rotateRad(rad)</code></td><td></td></tr>
                             <tr><td><code>ofScale(x, y, z)</code></td><td><code>scale(x, y, z)</code></td><td></td></tr>

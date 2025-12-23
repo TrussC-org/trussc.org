@@ -24,12 +24,11 @@
                 <span></span>
             </button>
             <ul class="nav-links">
-                <li><a href="index.html">トップ</a></li>
-                <li><a href="#same">共通点</a></li>
-                <li><a href="#solutions">解決策</a></li>
-                <li><a href="#api">API対応表</a></li>
-                <li><a href="https://github.com/TrussC-org/TrussC" class="nav-cta" target="_blank">GitHub</a></li>
-                <li><a href="/guide.html" class="nav-lang">EN</a></li>
+                <li><a href="../examples/">サンプル</a></li>
+                <li><a href="for-of-users.html" class="active">oFユーザーへ</a></li>
+                <li><a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">AIに聞く</a></li>
+                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED_jp.md" class="nav-cta" target="_blank" rel="noopener">始める</a></li>
+                <li><a href="/for-of-users.html" class="nav-lang">EN</a></li>
             </ul>
         </div>
     </nav>
@@ -43,8 +42,7 @@
                 <span class="guide-hero-accent">TrussC入門</span>
             </h1>
             <p class="guide-hero-description">
-                oFが好きなあなたなら、TrussCも気に入るはず。<br>
-                同じ楽しさを、現代の技術で。
+                oFが好きなあなたなら、TrussCも気に入るはず。
             </p>
         </div>
     </header>
@@ -109,8 +107,8 @@
                             <path d="M9 3v18"/>
                         </svg>
                     </div>
-                    <h3>VSCode 対応</h3>
-                    <p>今となっては標準ですよね。Cursor派ですか？もちろん大丈夫です。</p>
+                    <h3>XCode / VS / VSCode に対応</h3>
+                    <p>あなたの好きなIDEを選べます。もちろんCursorでも。</p>
                     <div class="same-compare">
                         <span class="label">CMake</span>
                         <span class="arrow">+</span>
@@ -127,40 +125,51 @@
             <h2 class="section-title">oFで困っていたこと、解決しました</h2>
             <p class="section-subtitle">長年のペインポイントに対するTrussCの回答</p>
 
-            <!-- Solution 1: 太線 -->
+            <!-- Solution 1: バックエンド -->
             <div class="solution-card">
                 <div class="solution-problem">
                     <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>太線が描けない問題</h3>
+                    <h3>OpenGLがmacOSで非推奨に</h3>
                     <p>
-                        <code>ofSetLineWidth()</code> はOpenGLの制限で太さ1px以上が保証されない。<br>
-                        macOS / Metal環境では完全に無視される。太い線を描くには自前でメッシュを生成するしかなかった。
+                        AppleがOpenGLを非推奨にし、Metalへ移行。<br>
+                        将来的な動作保証やパフォーマンス最適化が困難に。<br>
+                        いつサポートが切れるかわからない不安。
                     </p>
                 </div>
                 <div class="solution-answer">
                     <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>StrokeMesh で美しい太線</h3>
+                    <h3>Sokolでネイティブバックエンド</h3>
                     <p>
-                        oFでは太い線を描くと角や終端がプッツリ切れた見た目になっていました。<br>
-                        StrokeMesh を使えば美しいエッジを持った幅のある線を描画できます。
+                        <strong>Metal / DirectX 12 / Vulkan / WebGPU</strong> に対応。<br>
+                        OSが推奨する最新のネイティブAPI上で動作するため、高速かつ省電力。<br>
+                        WebAssembly + WebGPU でブラウザへの移植性も高い。
                     </p>
-                    <pre><code><span class="code-comment">// StrokeMesh で任意の太さの線が描ける</span>
-StrokeMesh stroke;
-stroke.setStrokeWidth(<span class="code-number">5.0f</span>);  <span class="code-comment">// 5px の太線</span>
-stroke.moveTo(<span class="code-number">0</span>, <span class="code-number">0</span>);
-stroke.lineTo(<span class="code-number">100</span>, <span class="code-number">100</span>);
-stroke.draw();
-
-<span class="code-comment">// Polyline からも生成可能</span>
-Polyline line;
-line.addVertex(<span class="code-number">0</span>, <span class="code-number">0</span>);
-line.addVertex(<span class="code-number">100</span>, <span class="code-number">50</span>);
-StrokeMesh stroke2(line, <span class="code-number">3.0f</span>);
-stroke2.draw();</code></pre>
                 </div>
             </div>
 
-            <!-- Solution 2: シーングラフ (親子関係) -->
+            <!-- Solution 2: ライセンス -->
+            <div class="solution-card">
+                <div class="solution-problem">
+                    <div class="solution-label problem-label">困っていたこと</div>
+                    <h3>商用利用でのライセンス問題</h3>
+                    <p>
+                        oF本体はMITだが、依存ライブラリにGPLが混在。<br>
+                        FFmpegやFreeTypeなど、ライセンスを確認するのが大変。<br>
+                        クライアントワークで使うときに不安が残る。
+                    </p>
+                </div>
+                <div class="solution-answer">
+                    <div class="solution-label answer-label">TrussCの解決策</div>
+                    <h3>MIT / zlib / Public Domain のみ</h3>
+                    <p>
+                        <strong>GPL汚染ゼロ</strong>を徹底。<br>
+                        すべての依存ライブラリが商用利用フレンドリー。<br>
+                        安心してクライアントワークに使える。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Solution 3: シーングラフ (親子関係) -->
             <div class="solution-card">
                 <div class="solution-problem">
                     <div class="solution-label problem-label">困っていたこと</div>
@@ -181,56 +190,6 @@ parent->addChild(child);
 
 <span class="code-comment">// 親を破棄すれば子も自動的に解放される</span>
 <span class="code-comment">// 循環参照も weak_ptr で安全に回避</span></code></pre>
-                </div>
-            </div>
-
-            <!-- Solution 3: ローカル座標 -->
-            <div class="solution-card">
-                <div class="solution-problem">
-                    <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>回転したオブジェクトのクリック判定が地獄</h3>
-                    <p>
-                        マウス座標は常にスクリーン座標（左上原点）。<br>
-                        回転・スケールしたオブジェクト上のクリック判定は複雑な計算が必要。<br>
-                        <code>ofNode</code> を使っても座標変換は自分で計算するしかなかった。
-                    </p>
-                </div>
-                <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>自動でローカル座標に変換</h3>
-                    <pre><code><span class="code-comment">// RectNode は自動的にローカル座標に変換</span>
-<span class="code-keyword">class</span> MyButton : <span class="code-keyword">public</span> RectNode {
-    <span class="code-keyword">void</span> onMousePressed(<span class="code-keyword">const</span> Vec2& localPos, <span class="code-keyword">int</span> button) <span class="code-keyword">override</span> {
-        <span class="code-comment">// localPos は「このノードにとっての」座標</span>
-        <span class="code-comment">// 親が回転していても、自分のローカル座標で届く！</span>
-        <span class="code-keyword">if</span> (localPos.x < width/<span class="code-number">2</span>) {
-            <span class="code-comment">// 左半分をクリック</span>
-        }
-    }
-};</code></pre>
-                </div>
-            </div>
-
-            <!-- Solution 4: ヒットテスト -->
-            <div class="solution-card">
-                <div class="solution-problem">
-                    <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>重なったオブジェクトの判定が面倒</h3>
-                    <p>
-                        複数のオブジェクトが重なっているときの判定が面倒。<br>
-                        Zオーダー（描画順）を考慮した判定は自前実装するしかなかった。
-                    </p>
-                </div>
-                <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>Zオーダー考慮 & イベント消費</h3>
-                    <pre><code><span class="code-comment">// RectNode は自動的に Z オーダーを考慮</span>
-<span class="code-comment">// 手前のノードが優先的にイベントを受け取る</span>
-
-<span class="code-keyword">void</span> onMousePressed(<span class="code-keyword">const</span> Vec2& pos, <span class="code-keyword">int</span> button) <span class="code-keyword">override</span> {
-    <span class="code-comment">// このノードで処理したら、後ろのノードには届かない</span>
-    consumeEvent();
-}</code></pre>
                 </div>
             </div>
 
@@ -261,76 +220,112 @@ node->callEvery(<span class="code-number">1.0f</span>, []() {
                 </div>
             </div>
 
-            <!-- Solution 6: バックエンド -->
+            <!-- Solution 6: 太線 -->
             <div class="solution-card">
                 <div class="solution-problem">
                     <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>OpenGLがmacOSで非推奨に</h3>
+                    <h3>太線が描けない問題</h3>
                     <p>
-                        AppleがOpenGLを非推奨にし、Metalへ移行。<br>
-                        将来的な動作保証やパフォーマンス最適化が困難に。<br>
-                        いつサポートが切れるかわからない不安。
+                        <code>ofSetLineWidth()</code> はOpenGLの制限で太さ1px以上が保証されない。<br>
+                        macOS / Metal環境では完全に無視される。太い線を描くには自前でメッシュを生成するしかなかった。
                     </p>
                 </div>
                 <div class="solution-answer">
                     <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>Sokolでネイティブバックエンド</h3>
+                    <h3>StrokeMesh で美しい太線</h3>
                     <p>
-                        <strong>Metal / DirectX 12 / Vulkan / WebGPU</strong> に対応。<br>
-                        OSが推奨する最新のネイティブAPI上で動作するため、高速かつ省電力。<br>
-                        WebAssembly + WebGPU でブラウザへの移植性も高い。
+                        oFでは太い線を描くと角や終端がプッツリ切れた見た目になっていました。<br>
+                        StrokeMesh を使えば美しいエッジを持った幅のある線を描画できます。
                     </p>
+                    <pre><code><span class="code-comment">// StrokeMesh で任意の太さの線が描ける</span>
+StrokeMesh stroke;
+stroke.setStrokeWidth(<span class="code-number">5.0f</span>);  <span class="code-comment">// 5px の太線</span>
+stroke.moveTo(<span class="code-number">0</span>, <span class="code-number">0</span>);
+stroke.lineTo(<span class="code-number">100</span>, <span class="code-number">100</span>);
+stroke.draw();</code></pre>
                 </div>
             </div>
 
-            <!-- Solution 7: ライセンス -->
-            <div class="solution-card">
-                <div class="solution-problem">
-                    <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>商用利用でのライセンス問題</h3>
-                    <p>
-                        oF本体はMITだが、依存ライブラリにGPLが混在。<br>
-                        FFmpegやFreeTypeなど、ライセンスを確認するのが大変。<br>
-                        クライアントワークで使うときに不安が残る。
-                    </p>
-                </div>
-                <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>MIT / zlib / Public Domain のみ</h3>
-                    <p>
-                        <strong>GPL汚染ゼロ</strong>を徹底。<br>
-                        すべての依存ライブラリが商用利用フレンドリー。<br>
-                        安心してクライアントワークに使える。
-                    </p>
-                </div>
-            </div>
+        </div>
+    </section>
 
-            <!-- Solution 8: Update/Draw サイクル -->
-            <div class="solution-card">
-                <div class="solution-problem">
-                    <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>UpdateとDrawが常に連動する問題</h3>
-                    <p>
-                        <code>ofSetFrameRate()</code> はDrawとUpdateが常に連動。<br>
-                        物理シミュレーションを固定タイムステップで回したいときに困る。<br>
-                        イベント駆動型アプリ（ボタンを押したときだけ再描画）も作りにくかった。
-                    </p>
-                </div>
-                <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>Update と Draw を独立制御</h3>
-                    <p>
-                        デフォルトでは今まで通りupdate, drawを交互に呼び出すこともできますが、イベント駆動型のUIアプリを作るときに無駄なdrawを避けるためにupdateとは別のタイミング（クリック時など）で実行できます。<br>
-                        また、描画負荷が重いアプリでもupdateを固定周期にすることも可能です。
-                    </p>
-                    <pre><code><span class="code-comment">// Draw と Update を独立制御</span>
-setDrawVsync(<span class="code-keyword">true</span>);    <span class="code-comment">// 描画は VSync (60Hz)</span>
-setUpdateFps(<span class="code-number">120</span>);      <span class="code-comment">// 物理更新は 120Hz</span>
+    <!-- Getting Started Section -->
+    <section id="getting-started" class="section getting-started-section">
+        <div class="container">
+            <h2 class="section-title">開発の流れ</h2>
+            <p class="section-subtitle">oFユーザーなら、すぐに馴染めるはず</p>
 
-<span class="code-comment">// イベント駆動型（省電力モード）</span>
-setDrawFps(<span class="code-number">0</span>);          <span class="code-comment">// 自動描画を停止</span>
-<span class="code-comment">// mousePressed 等で redraw() を呼ぶと描画される</span></code></pre>
+            <div class="guide-content">
+                <h3>フォルダ構成</h3>
+                <p>
+                    TrussCのディレクトリ構成は、oFとよく似ています。<br>
+                    本体、examples、addonsなど、見覚えのある構成になっているはずです。
+                </p>
+
+                <div class="directory-compare">
+                    <div class="directory-tree">
+                        <h4>openFrameworks</h4>
+                        <pre>
+of_v0.12.0/
+├── addons/
+├── apps/
+│   └── myApps/
+│       └── myProject/
+├── examples/
+├── libs/
+├── projectGenerator/
+└── scripts/</pre>
+                    </div>
+                    <div class="directory-tree">
+                        <h4>TrussC</h4>
+                        <pre>
+TrussC/
+├── addons/
+├── apps/
+│   └── myApps/
+│       └── myProject/
+├── examples/
+├── trussc/
+├── projectGenerator/
+└── scripts/</pre>
+                    </div>
                 </div>
+
+                <h3>projectGenerator</h3>
+                <p>
+                    oFと同じように、projectGeneratorでプロジェクトを作成できます。<br>
+                    見た目は昔のoFのようですが、機能は負けていません。
+                </p>
+
+                <div class="guide-image">
+                    <img src="../images/projectGenerator_generate.png" alt="TrussC projectGenerator">
+                </div>
+
+                <h3>あとは書くだけ</h3>
+                <p>
+                    プロジェクトを作ったら、いつもどおり setup / update / draw を書くだけ。<br>
+                    <code>ofApp</code> が <code>tcApp</code> に、<code>ofDrawCircle</code> が <code>drawCircle</code> に変わるくらいで、<br>
+                    書き心地はほとんど同じです。
+                </p>
+
+                <pre><code><span class="code-keyword">void</span> tcApp::setup() {
+    <span class="code-comment">// いつもどおりのsetup</span>
+}
+
+<span class="code-keyword">void</span> tcApp::update() {
+    <span class="code-comment">// いつもどおりのupdate</span>
+}
+
+<span class="code-keyword">void</span> tcApp::draw() {
+    clear(<span class="code-number">0.1</span>, <span class="code-number">0.1</span>, <span class="code-number">0.1</span>);
+    setColor(<span class="code-number">1</span>, <span class="code-number">0.5</span>, <span class="code-number">0</span>);
+    drawCircle(getWindowWidth()/<span class="code-number">2</span>, getWindowHeight()/<span class="code-number">2</span>, <span class="code-number">100</span>);
+}</code></pre>
+
+                <p class="guide-conclusion">
+                    結構同じですよね？<br>
+                    oFで培った経験は、そのままTrussCでも活きます。
+                </p>
             </div>
         </div>
     </section>
@@ -368,14 +363,17 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>update()</code></td><td><code>update()</code></td><td>同じ</td></tr>
                             <tr><td><code>draw()</code></td><td><code>draw()</code></td><td>同じ</td></tr>
                             <tr><td><code>keyPressed(int key)</code></td><td><code>keyPressed(int key)</code></td><td>同じ</td></tr>
-                            <tr><td><code>mousePressed(x, y, button)</code></td><td><code>mousePressed(x, y, button)</code></td><td>同じ</td></tr>
+                            <tr><td><code>mousePressed(x, y, button)</code></td><td><code>mousePressed(Vec2 pos, button)</code></td><td>Vec2形式</td></tr>
+                            <tr><td><code>mouseMoved(x, y)</code></td><td><code>mouseMoved(Vec2 pos)</code></td><td>Vec2形式</td></tr>
+                            <tr><td><code>mouseDragged(x, y, button)</code></td><td><code>mouseDragged(Vec2 pos, button)</code></td><td>Vec2形式</td></tr>
+                            <tr><td><code>mouseScrolled(x, y, sX, sY)</code></td><td><code>mouseScrolled(Vec2 delta)</code></td><td>Vec2形式</td></tr>
                             <tr><td><code>windowResized(w, h)</code></td><td><code>windowResized(w, h)</code></td><td>同じ</td></tr>
                             <tr><td><code>dragEvent(ofDragInfo)</code></td><td><code>filesDropped(paths)</code></td><td></td></tr>
                             <tr><td><code>ofSetFrameRate(60)</code></td><td><code>setFps(60)</code></td><td></td></tr>
-                            <tr><td><code>ofSetVerticalSync(true)</code></td><td><code>setVsync(true)</code></td><td></td></tr>
-                            <tr><td>-</td><td><code>setDrawFps(fps)</code></td><td>描画レート個別設定</td></tr>
-                            <tr><td>-</td><td><code>setUpdateFps(fps)</code></td><td>更新レート個別設定</td></tr>
-                            <tr><td><code>ofGetElapsedTimef()</code></td><td><code>getElapsedTime()</code></td><td></td></tr>
+                            <tr><td><code>ofSetVerticalSync(true)</code></td><td><code>setFps(VSYNC)</code></td><td>VSync モード</td></tr>
+                            <tr><td>-</td><td><code>setFps(EVENT_DRIVEN)</code></td><td>イベント駆動モード</td></tr>
+                            <tr><td>-</td><td><code>setIndependentFps(u, d)</code></td><td>更新/描画独立</td></tr>
+                            <tr><td><code>ofGetElapsedTimef()</code></td><td><code>getElapsedTimef()</code></td><td></td></tr>
                             <tr><td><code>ofGetFrameRate()</code></td><td><code>getFrameRate()</code></td><td></td></tr>
                             <tr><td><code>ofGetFrameNum()</code></td><td><code>getFrameCount()</code></td><td></td></tr>
                             <tr><td><code>ofGetWidth()</code></td><td><code>getWindowWidth()</code></td><td></td></tr>
@@ -405,15 +403,15 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                             <tr><td><code>ofBackground(r, g, b)</code></td><td><code>clear(r, g, b)</code></td><td>0.0-1.0</td></tr>
                             <tr><td><code>ofSetColor(r, g, b, a)</code></td><td><code>setColor(r, g, b, a)</code></td><td>0.0-1.0</td></tr>
                             <tr><td><code>ofSetColor(ofColor::red)</code></td><td><code>setColor(colors::red)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawRectangle(x, y, w, h)</code></td><td><code>drawRect(x, y, w, h)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawCircle(x, y, r)</code></td><td><code>drawCircle(x, y, r)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawEllipse(x, y, w, h)</code></td><td><code>drawEllipse(x, y, w, h)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawLine(x1, y1, x2, y2)</code></td><td><code>drawLine(x1, y1, x2, y2)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawTriangle(...)</code></td><td><code>drawTriangle(...)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawRectangle(x, y, w, h)</code></td><td><code>drawRect(Vec3, Vec2)</code></td><td>Vec2も可</td></tr>
+                            <tr><td><code>ofDrawCircle(x, y, r)</code></td><td><code>drawCircle(Vec3, r)</code></td><td>Vec2も可</td></tr>
+                            <tr><td><code>ofDrawEllipse(x, y, w, h)</code></td><td><code>drawEllipse(Vec3, Vec2)</code></td><td>Vec2も可</td></tr>
+                            <tr><td><code>ofDrawLine(x1, y1, x2, y2)</code></td><td><code>drawLine(Vec3, Vec3)</code></td><td>Vec2も可</td></tr>
+                            <tr><td><code>ofDrawTriangle(...)</code></td><td><code>drawTriangle(Vec3, Vec3, Vec3)</code></td><td>Vec2も可</td></tr>
                             <tr><td><code>ofNoFill()</code></td><td><code>noFill()</code></td><td></td></tr>
                             <tr><td><code>ofFill()</code></td><td><code>fill()</code></td><td></td></tr>
                             <tr><td><code>ofSetLineWidth(w)</code></td><td><code>setLineWidth(w)</code></td><td></td></tr>
-                            <tr><td><code>ofDrawBitmapString(s, x, y)</code></td><td><code>drawBitmapString(s, x, y)</code></td><td></td></tr>
+                            <tr><td><code>ofDrawBitmapString(s, x, y)</code></td><td><code>drawBitmapString(s, Vec3)</code></td><td>Vec2も可</td></tr>
                             <tr><td><code>ofPolyline</code></td><td><code>Path</code></td><td></td></tr>
                             <tr><td>-</td><td><code>StrokeMesh</code></td><td>太線描画</td></tr>
                             <tr><td><code>ofEnableBlendMode()</code></td><td><code>setBlendMode()</code></td><td></td></tr>
@@ -441,7 +439,7 @@ setDrawFps(<span class="code-number">0</span>);          <span class="code-comme
                         <tbody>
                             <tr><td><code>ofPushMatrix()</code></td><td><code>pushMatrix()</code></td><td></td></tr>
                             <tr><td><code>ofPopMatrix()</code></td><td><code>popMatrix()</code></td><td></td></tr>
-                            <tr><td><code>ofTranslate(x, y, z)</code></td><td><code>translate(x, y, z)</code></td><td></td></tr>
+                            <tr><td><code>ofTranslate(x, y, z)</code></td><td><code>translate(Vec3)</code></td><td>Vec2も可</td></tr>
                             <tr><td><code>ofRotateDeg(deg)</code></td><td><code>rotateDeg(deg)</code></td><td></td></tr>
                             <tr><td><code>ofRotateRad(rad)</code></td><td><code>rotateRad(rad)</code></td><td></td></tr>
                             <tr><td><code>ofScale(x, y, z)</code></td><td><code>scale(x, y, z)</code></td><td></td></tr>
