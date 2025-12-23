@@ -249,12 +249,20 @@ copy_wasm_files() {
     local html_file="$sample_dir/bin/$name.html"
     local js_file="$sample_dir/bin/$name.js"
     local wasm_file="$sample_dir/bin/$name.wasm"
+    local data_file="$sample_dir/bin/$name.data"
 
     if [ -f "$html_file" ] && [ -f "$js_file" ] && [ -f "$wasm_file" ]; then
         cp "$html_file" "$SAMPLES_DIR/wasm/"
         cp "$js_file" "$SAMPLES_DIR/wasm/"
         cp "$wasm_file" "$SAMPLES_DIR/wasm/"
-        log_success "WASM files copied: $name"
+
+        # .dataファイルがある場合はそれもコピー（プリロードアセット用）
+        if [ -f "$data_file" ]; then
+            cp "$data_file" "$SAMPLES_DIR/wasm/"
+            log_success "WASM files copied (with .data): $name"
+        else
+            log_success "WASM files copied: $name"
+        fi
         return 0
     else
         log_warn "WASM files not found for: $name"
@@ -326,22 +334,40 @@ upload_to_r2() {
 
     log_info "Uploading to Cloudflare R2..."
 
-    # Upload WASM files
+    # Upload WASM files (with proper Content-Type)
     for file in "$SAMPLES_DIR"/wasm/*; do
         [ -f "$file" ] || continue
         local filename=$(basename "$file")
-        wrangler r2 object put "$WASM_BUCKET/wasm/$filename" --file "$file" --remote
+        local ext="${filename##*.}"
+
+        case "$ext" in
+            html)
+                wrangler r2 object put "$WASM_BUCKET/wasm/$filename" --file "$file" --content-type "text/html" --remote
+                ;;
+            js)
+                wrangler r2 object put "$WASM_BUCKET/wasm/$filename" --file "$file" --content-type "application/javascript" --remote
+                ;;
+            wasm)
+                wrangler r2 object put "$WASM_BUCKET/wasm/$filename" --file "$file" --content-type "application/wasm" --remote
+                ;;
+            data)
+                wrangler r2 object put "$WASM_BUCKET/wasm/$filename" --file "$file" --content-type "application/octet-stream" --remote
+                ;;
+            *)
+                wrangler r2 object put "$WASM_BUCKET/wasm/$filename" --file "$file" --remote
+                ;;
+        esac
     done
 
     # Upload thumbnails
     for file in "$SAMPLES_DIR"/thumbs/*; do
         [ -f "$file" ] || continue
         local filename=$(basename "$file")
-        wrangler r2 object put "$WASM_BUCKET/thumbs/$filename" --file "$file" --remote
+        wrangler r2 object put "$WASM_BUCKET/thumbs/$filename" --file "$file" --content-type "image/png" --remote
     done
 
     # Upload samples.json
-    wrangler r2 object put "$WASM_BUCKET/samples.json" --file "$SAMPLES_DIR/samples.json" --remote
+    wrangler r2 object put "$WASM_BUCKET/samples.json" --file "$SAMPLES_DIR/samples.json" --content-type "application/json" --remote
 
     log_success "Upload complete!"
 }

@@ -40,12 +40,11 @@
         <div class="container hero-content">
             <p class="hero-label">Creative Coding Framework for C++</p>
             <h1 class="hero-title">
-                <span class="hero-title-main">Thin, Modern,</span>
-                <span class="hero-title-accent">and Native.</span>
+                <span class="hero-title-main">TrussC</span>
             </h1>
             <p class="hero-description">
-                Inspired by openFrameworks.<br class="hero-br">
-                Built for modern GPUs.
+                Post-OpenGL Creative Coding.<br class="hero-br">
+                Built on sokol.
             </p>
             <div class="hero-actions">
                 <a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED.md" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
@@ -63,60 +62,6 @@
             </div>
         </div>
     </header>
-
-    <!-- Features Section -->
-    <section id="features" class="section features">
-        <div class="container">
-            <h2 class="section-title">Philosophy</h2>
-            <p class="section-subtitle">A new foundation (Truss) for the next decade</p>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                            <line x1="12" y1="22.08" x2="12" y2="12"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Minimal Footprint</h3>
-                    <p class="feature-description">
-                        Carefully selected features keep binary size tiny.
-                        Lightning-fast compilation and lightweight executables.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            <path d="M9 12l2 2 4-4"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">GPL-Free</h3>
-                    <p class="feature-description">
-                        Built for commercial use with MIT / zlib / Public Domain licenses only.
-                        No GPL contamination risk.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">No Black Box</h3>
-                    <p class="feature-description">
-                        A thin abstraction layer that exposes native APIs.
-                        Direct access to Metal / DX12 / Vulkan when you need it.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
 
     <!-- Code Example Section -->
     <section id="code" class="section code-section">
@@ -151,7 +96,7 @@
 }
 
 <span class="code-keyword">void</span> tcApp::<span class="code-function">update</span>() {
-    angle += <span class="code-number">1.0f</span>;
+    angle += TAU * <span class="code-number">0.005f</span>;
 }
 
 <span class="code-keyword">void</span> tcApp::<span class="code-function">draw</span>() {
@@ -185,6 +130,113 @@
 <span class="code-comment">// That's it!</span>
 <span class="code-function">TC_MAIN</span>(tcApp)</code></pre>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Section -->
+    <section id="design" class="section features">
+        <div class="container">
+            <h2 class="section-title">Design</h2>
+            <p class="section-subtitle">Concrete choices, not abstract principles</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Modern Graphics</h3>
+                    <p class="feature-description">
+                        sokol_gfx powers Metal, DX12, and Vulkan.
+                        No OpenGL dependency.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">GPL-Free</h3>
+                    <p class="feature-description">
+                        MIT / zlib / Public Domain only.
+                        No FFmpeg—video uses AVFoundation & Media Foundation.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Cross-Platform</h3>
+                    <p class="feature-description">
+                        macOS, Windows, and Web. Linux and iOS planned.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Friendly Section -->
+    <section id="friendly" class="section features">
+        <div class="container">
+            <h2 class="section-title">Friendly</h2>
+            <p class="section-subtitle">Tools and resources to help you get started</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Project Generator</h3>
+                    <p class="feature-description">
+                        GUI tool to create new projects and manage addons.
+                        No command line required.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Ask AI</h3>
+                    <p class="feature-description">
+                        Got questions? Our AI assistant knows TrussC inside and out.
+                        <a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">Try it →</a>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">30+ Examples</h3>
+                    <p class="feature-description">
+                        Graphics, sound, video, networking, and more.
+                        <a href="examples/">Run them in your browser →</a>
+                    </p>
+                </div>
+
             </div>
         </div>
     </section>
@@ -261,7 +313,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span class="logo-text">TrussC</span>
-                    <p>A new foundation for the next decade.</p>
+                    <p>Post-OpenGL creative coding.</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">

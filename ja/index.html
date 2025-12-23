@@ -40,12 +40,11 @@
         <div class="container hero-content">
             <p class="hero-label">Creative Coding Framework for C++ <span class="hero-reading">/ トラスシー</span></p>
             <h1 class="hero-title">
-                <span class="hero-title-main">Thin, Modern,</span>
-                <span class="hero-title-accent">and Native.</span>
+                <span class="hero-title-main">TrussC</span>
             </h1>
             <p class="hero-description">
-                openFrameworksの精神を受け継ぎ、<br class="hero-br">
-                現代のGPUに最適化した軽量クリエイティブコーディング環境。
+                脱OpenGL クリエイティブコーディング。<br class="hero-br">
+                sokolベース。
             </p>
             <div class="hero-actions">
                 <a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED_jp.md" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
@@ -64,65 +63,11 @@
         </div>
     </header>
 
-    <!-- Features Section -->
-    <section id="features" class="section features">
-        <div class="container">
-            <h2 class="section-title">Philosophy</h2>
-            <p class="section-subtitle">次の10年を戦うための、新しい足場（Truss）</p>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                            <line x1="12" y1="22.08" x2="12" y2="12"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">脱・肥大化</h3>
-                    <p class="feature-description">
-                        必要な機能だけを厳選し、バイナリサイズを極小に保つ。
-                        コンパイルが爆速で、実行ファイルも軽量。
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            <path d="M9 12l2 2 4-4"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">脱・GPL</h3>
-                    <p class="feature-description">
-                        商用利用を前提とし、MIT / Zlib / Public Domain ライセンスのみで構成。
-                        GPL汚染のリスクがない。
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">脱・ブラックボックス</h3>
-                    <p class="feature-description">
-                        重厚なラッパーで隠蔽せず、OSネイティブAPIへのアクセスを容易にする「薄い」設計。
-                        Metal / DX12 / Vulkan を直接触れる。
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
     <!-- Code Example Section -->
     <section id="code" class="section code-section">
         <div class="container">
             <h2 class="section-title">Simple & Intuitive</h2>
-            <p class="section-subtitle">1行書けば、絵が出る。その魔法は変わらない。</p>
+            <p class="section-subtitle">updateしてdraw。他のやつとだいたい一緒です。</p>
 
             <div class="code-tabs">
                 <button class="code-tab active" data-tab="app">tcApp.cpp</button>
@@ -151,7 +96,7 @@
 }
 
 <span class="code-keyword">void</span> tcApp::<span class="code-function">update</span>() {
-    angle += <span class="code-number">1.0f</span>;
+    angle += TAU * <span class="code-number">0.005f</span>;
 }
 
 <span class="code-keyword">void</span> tcApp::<span class="code-function">draw</span>() {
@@ -185,6 +130,113 @@
 <span class="code-comment">// これだけで起動！</span>
 <span class="code-function">TC_MAIN</span>(tcApp)</code></pre>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Section -->
+    <section id="design" class="section features">
+        <div class="container">
+            <h2 class="section-title">Design</h2>
+            <p class="section-subtitle">結構困ってたので、解決しました。</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">モダングラフィックス</h3>
+                    <p class="feature-description">
+                        sokol_gfxがMetal、DX12、Vulkanを駆動。
+                        OpenGL依存なし。
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">GPLフリー</h3>
+                    <p class="feature-description">
+                        MIT / zlib / Public Domain のみ。
+                        FFmpeg不要—動画はAVFoundation & Media Foundation。
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">クロスプラットフォーム</h3>
+                    <p class="feature-description">
+                        macOS、Windows、Web対応。Linux・iOSは計画中。
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Friendly Section -->
+    <section id="friendly" class="section features">
+        <div class="container">
+            <h2 class="section-title">カンタン</h2>
+            <p class="section-subtitle">クリックで新規作成できるし、AIにも聞ける。サンプルもいっぱいある。</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">プロジェクトジェネレーター</h3>
+                    <p class="feature-description">
+                        GUIでプロジェクト作成・アドオン管理。
+                        コマンドライン不要。
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">AIに聞く</h3>
+                    <p class="feature-description">
+                        質問はTrussC Assistantへ。聞きながら始めればつまづかない。コード生成もわりとできます。
+                        <a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">試してみる →</a>
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">30以上のサンプル</h3>
+                    <p class="feature-description">
+                        グラフィックス、サウンド、動画、ネットワークなど。
+                        <a href="../examples/">ブラウザで試す →</a>
+                    </p>
+                </div>
+
             </div>
         </div>
     </section>
@@ -261,7 +313,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span class="logo-text">TrussC</span>
-                    <p>次の10年を戦うための、新しい足場。</p>
+                    <p>脱OpenGLのクリエイティブコーディング。</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">

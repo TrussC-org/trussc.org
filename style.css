@@ -256,6 +256,9 @@ img {
 .hero-title-main {
     display: block;
     color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: clamp(4rem, 15vw, 8rem);
+    letter-spacing: -0.05em;
 }
 
 .hero-title-accent {
