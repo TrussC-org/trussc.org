@@ -270,6 +270,29 @@ copy_wasm_files() {
     fi
 }
 
+# Samples that don't work in WebAssembly (native only)
+# These will have webSupported: false in samples.json
+WEB_UNSUPPORTED_SAMPLES=(
+    "tcpExample"
+    "udpExample"
+    "videoPlayerExample"
+    "threadExample"
+    "threadChannelExample"
+    "consoleExample"
+    "screenshotExample"
+)
+
+# Check if sample is web-supported
+is_web_supported() {
+    local name="$1"
+    for unsupported in "${WEB_UNSUPPORTED_SAMPLES[@]}"; do
+        if [ "$name" = "$unsupported" ]; then
+            return 1
+        fi
+    done
+    return 0
+}
+
 # Generate samples.json metadata file
 generate_samples_json() {
     log_info "Generating samples.json..."
@@ -298,6 +321,11 @@ generate_samples_json() {
     "wasm": "wasm/$name.html"
 EOF
 )
+
+        # Add webSupported: false for unsupported samples
+        if ! is_web_supported "$name"; then
+            json_obj+=",\"webSupported\": false"
+        fi
 
         if [ -n "$addon" ]; then
             json_obj+=",\"addon\": \"$addon\""
