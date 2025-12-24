@@ -141,6 +141,22 @@ img {
     background-clip: text;
 }
 
+/* Typing animation */
+.typing-cursor {
+    display: inline-block;
+    width: 0.08em;
+    height: 0.9em;
+    background: var(--color-accent);
+    margin-left: 0.02em;
+    vertical-align: baseline;
+    animation: blink 1.5s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;

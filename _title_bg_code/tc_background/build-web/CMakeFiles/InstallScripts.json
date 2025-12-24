@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/toru/Nextcloud/Make/TrussC/tc_v0.0.1/examples/templates/emptyExample/build-web/cmake_install.cmake",
+		"/Users/toru/Nextcloud/Make/TrussC/tc_v0.0.1/examples/templates/emptyExample/build-web/TrussC/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

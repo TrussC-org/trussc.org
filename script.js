@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // スムーズスクロール
     initSmoothScroll();
+
+    // タイピングアニメーション
+    initTypingAnimation();
 });
 
 /**
@@ -181,3 +184,68 @@ window.addEventListener('scroll', () => {
 
     lastScrollY = scrollY;
 }, { passive: true });
+
+/**
+ * Typing animation for hero title
+ * C -> Code -> C -> Creative -> C (loop)
+ */
+function initTypingAnimation() {
+    const typingText = document.querySelector('.hero-title-main .typing-text');
+    if (!typingText) return;
+
+    // Suffixes to add after 'C' (alternating serious/joke)
+    const suffixes = [
+        'ode',       // Code (serious)
+        'afe',       // Cafe (joke)
+        'reative',   // Creative (serious)
+        'rash',      // Crash (joke)
+        'ore',       // Core (serious)
+        '++',        // C++ (meta)
+        'anvas',     // Canvas (serious)
+        'ast',       // Cast (joke)
+        'onnect',    // Connect (serious)
+        'raft',      // Craft (serious)
+        'ontext',    // Context (serious)
+        'onstruct',  // Construct (serious)
+    ];
+    const typeSpeed = 144;      // 1.2x slower
+    const deleteSpeed = 96;     // 1.2x slower
+    const pauseAfterWord = 3000; // 2x longer
+    const pauseAfterC = 1600;    // 2x longer
+
+    let suffixIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+        const currentSuffix = suffixes[suffixIndex];
+
+        if (isDeleting) {
+            charIndex--;
+            typingText.textContent = 'C' + currentSuffix.substring(0, charIndex);
+
+            if (charIndex <= 0) {
+                // Back to just 'C'
+                isDeleting = false;
+                suffixIndex = (suffixIndex + 1) % suffixes.length;
+                setTimeout(type, pauseAfterC);
+                return;
+            }
+            setTimeout(type, deleteSpeed);
+        } else {
+            charIndex++;
+            typingText.textContent = 'C' + currentSuffix.substring(0, charIndex);
+
+            if (charIndex >= currentSuffix.length) {
+                // Finished typing
+                isDeleting = true;
+                setTimeout(type, pauseAfterWord);
+                return;
+            }
+            setTimeout(type, typeSpeed);
+        }
+    }
+
+    // Start after initial delay
+    setTimeout(type, 2000);
+}

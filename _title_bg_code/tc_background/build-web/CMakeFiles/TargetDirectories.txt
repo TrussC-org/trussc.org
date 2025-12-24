@@ -1,0 +1,6 @@
+/Users/toru/Nextcloud/Make/TrussC/tc_v0.0.1/examples/templates/emptyExample/build-web/CMakeFiles/emptyExample.dir
+/Users/toru/Nextcloud/Make/TrussC/tc_v0.0.1/examples/templates/emptyExample/build-web/CMakeFiles/edit_cache.dir
+/Users/toru/Nextcloud/Make/TrussC/tc_v0.0.1/examples/templates/emptyExample/build-web/CMakeFiles/rebuild_cache.dir
+/Users/toru/Nextcloud/Make/TrussC/tc_v0.0.1/examples/templates/emptyExample/build-web/TrussC/CMakeFiles/TrussC.dir
+/Users/toru/Nextcloud/Make/TrussC/tc_v0.0.1/examples/templates/emptyExample/build-web/TrussC/CMakeFiles/edit_cache.dir
+/Users/toru/Nextcloud/Make/TrussC/tc_v0.0.1/examples/templates/emptyExample/build-web/TrussC/CMakeFiles/rebuild_cache.dir
