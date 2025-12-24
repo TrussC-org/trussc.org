@@ -27,6 +27,7 @@
     /* Typography */
     --font-sans: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+    --font-logo: 'Ubuntu', 'Inter', sans-serif;
 
     /* Spacing */
     --space-xs: 0.25rem;
@@ -126,11 +127,18 @@ img {
 }
 
 .logo-text {
-    font-family: var(--font-mono);
+    font-family: var(--font-logo);
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-text);
     letter-spacing: -0.02em;
+}
+
+.logo-c {
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .nav-toggle {
@@ -256,9 +264,10 @@ img {
 .hero-title-main {
     display: block;
     color: var(--color-text);
-    font-family: var(--font-mono);
+    font-family: var(--font-logo);
     font-size: clamp(4rem, 15vw, 8rem);
-    letter-spacing: -0.05em;
+    font-weight: 500;
+    letter-spacing: 0;
 }
 
 .hero-title-accent {
