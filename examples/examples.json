@@ -1,62 +1,403 @@
 {
-  "examples": [
-    { "name": "3DPrimitivesExample", "category": "3d", "width": 960, "height": 600, "webSupported": true },
-    { "name": "easyCamExample", "category": "3d", "width": 960, "height": 600, "webSupported": true },
-
-    { "name": "serialExample", "category": "communication", "width": 960, "height": 600, "webSupported": false },
-
-    { "name": "eventsExample", "category": "events", "width": 960, "height": 600, "webSupported": true },
-
-    { "name": "blendingExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
-    { "name": "clippingExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
-    { "name": "colorExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
-    { "name": "fboExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
-    { "name": "fontExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
-    { "name": "graphicsExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
-    { "name": "polylinesExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
-    { "name": "shaderExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
-    { "name": "strokeMeshExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
-    { "name": "textureExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
-
-    { "name": "imguiExample", "category": "ImGui", "width": 960, "height": 800, "webSupported": true },
-
-    { "name": "dragDropExample", "category": "input_output", "width": 960, "height": 600, "webSupported": true },
-    { "name": "fileDialogExample", "category": "input_output", "width": 960, "height": 600, "webSupported": false },
-    { "name": "imageLoaderExample", "category": "input_output", "width": 960, "height": 600, "webSupported": true },
-    { "name": "jsonXmlExample", "category": "input_output", "width": 960, "height": 600, "webSupported": true },
-    { "name": "keyboardExample", "category": "input_output", "width": 960, "height": 600, "webSupported": true },
-    { "name": "mouseExample", "category": "input_output", "width": 960, "height": 600, "webSupported": true },
-    { "name": "screenshotExample", "category": "input_output", "width": 960, "height": 600, "webSupported": false },
-
-    { "name": "noiseField2dExample", "category": "math", "width": 960, "height": 600, "webSupported": true },
-    { "name": "vectorMathExample", "category": "math", "width": 960, "height": 600, "webSupported": true },
-
-    { "name": "tcpExample", "category": "network", "width": 960, "height": 600, "webSupported": false },
-    { "name": "udpExample", "category": "network", "width": 960, "height": 600, "webSupported": false },
-
-    { "name": "hitTestExample", "category": "node", "width": 960, "height": 600, "webSupported": true },
-    { "name": "nodeExample", "category": "node", "width": 960, "height": 600, "webSupported": true },
-    { "name": "uiExample", "category": "node", "width": 960, "height": 600, "webSupported": true },
-
-    { "name": "chipSoundExample", "category": "sound", "width": 960, "height": 600, "webSupported": true },
-    { "name": "micInputExample", "category": "sound", "width": 960, "height": 600, "webSupported": true },
-    { "name": "soundPlayerExample", "category": "sound", "width": 960, "height": 600, "webSupported": true },
-    { "name": "soundPlayerFFTExample", "category": "sound", "width": 960, "height": 600, "webSupported": true },
-
-    { "name": "emptyExample", "category": "templates", "width": 960, "height": 600, "webSupported": true },
-
-    { "name": "threadChannelExample", "category": "threads", "width": 580, "height": 380, "webSupported": false },
-    { "name": "threadExample", "category": "threads", "width": 640, "height": 480, "webSupported": false },
-
-    { "name": "clipboardExample", "category": "utils", "width": 960, "height": 600, "webSupported": true },
-    { "name": "consoleExample", "category": "utils", "width": 960, "height": 600, "webSupported": false },
-    { "name": "timerExample", "category": "utils", "width": 960, "height": 600, "webSupported": true },
-    { "name": "utilsExample", "category": "utils", "width": 960, "height": 600, "webSupported": true },
-
-    { "name": "videoGrabberExample", "category": "video", "width": 800, "height": 600, "webSupported": true, "autoScreenshot": false },
-    { "name": "videoPlayerExample", "category": "video", "width": 960, "height": 600, "webSupported": false },
-    { "name": "videoPlayerWebExample", "category": "video", "width": 960, "height": 600, "webSupported": true, "autoScreenshot": false },
-
-    { "name": "loopModeExample", "category": "windowing", "width": 960, "height": 600, "webSupported": true }
-  ]
+  "examples": {
+    "3d": {
+      "visible": true,
+      "items": [
+        {
+          "name": "3DPrimitivesExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "easyCamExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "communication": {
+      "visible": true,
+      "items": [
+        {
+          "name": "serialExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        }
+      ]
+    },
+    "events": {
+      "visible": true,
+      "items": [
+        {
+          "name": "eventsExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "graphics": {
+      "visible": true,
+      "items": [
+        {
+          "name": "blendingExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "clippingExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "colorExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "fboExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "fontExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "graphicsExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "polylinesExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "shaderExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "strokeMeshExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "textureExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "ImGui": {
+      "visible": true,
+      "items": [
+        {
+          "name": "imguiExample",
+          "width": 960,
+          "height": 800,
+          "webSupported": true
+        }
+      ]
+    },
+    "input_output": {
+      "visible": true,
+      "items": [
+        {
+          "name": "dragDropExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "fileDialogExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "imageLoaderExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "jsonXmlExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "keyboardExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "mouseExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "screenshotExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        }
+      ]
+    },
+    "math": {
+      "visible": true,
+      "items": [
+        {
+          "name": "noiseField2dExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "vectorMathExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "network": {
+      "visible": true,
+      "items": [
+        {
+          "name": "tcpExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "udpExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        }
+      ]
+    },
+    "node": {
+      "visible": true,
+      "items": [
+        {
+          "name": "hitTestExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "nodeExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "uiExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "sound": {
+      "visible": true,
+      "items": [
+        {
+          "name": "chipSoundExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "micInputExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "soundPlayerExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "soundPlayerFFTExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "templates": {
+      "visible": true,
+      "items": [
+        {
+          "name": "emptyExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "threads": {
+      "visible": true,
+      "items": [
+        {
+          "name": "threadChannelExample",
+          "width": 580,
+          "height": 380,
+          "webSupported": false
+        },
+        {
+          "name": "threadExample",
+          "width": 640,
+          "height": 480,
+          "webSupported": false
+        }
+      ]
+    },
+    "utils": {
+      "visible": true,
+      "items": [
+        {
+          "name": "clipboardExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "consoleExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "timerExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "utilsExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "video": {
+      "visible": true,
+      "items": [
+        {
+          "name": "videoGrabberExample",
+          "width": 800,
+          "height": 600,
+          "webSupported": true,
+          "autoScreenshot": false
+        },
+        {
+          "name": "videoPlayerExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "videoPlayerWebExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true,
+          "autoScreenshot": false
+        }
+      ]
+    },
+    "windowing": {
+      "visible": true,
+      "items": [
+        {
+          "name": "loopModeExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "tools": {
+      "visible": false,
+      "items": [
+        {
+          "name": "projectGenerator",
+          "width": 800,
+          "height": 600,
+          "webSupported": false
+        }
+      ]
+    }
+  },
+  "addons": {
+    "tcxBox2d": {
+      "visible": true,
+      "items": [
+        {
+          "name": "example-basic",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "example-node",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "tcxOsc": {
+      "visible": true,
+      "items": [
+        {
+          "name": "example-osc-event",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "example-osc-polling",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        }
+      ]
+    },
+    "tcxTls": {
+      "visible": true,
+      "items": [
+        {
+          "name": "example-tls",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        }
+      ]
+    }
+  }
 }

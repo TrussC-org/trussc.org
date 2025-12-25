@@ -10,15 +10,62 @@ source "$SCRIPT_DIR/common.sh"
 # examples.json path
 EXAMPLES_JSON="$SCRIPT_DIR/../examples/examples.json"
 
-# Check if auto screenshot is enabled for a sample (returns 0 if enabled, 1 if disabled)
+# Get sample info from examples.json
+# Returns: type|group (e.g., "examples|graphics" or "addons|tcxBox2d")
+get_sample_info() {
+    local name="$1"
+    if [[ ! -f "$EXAMPLES_JSON" ]]; then
+        echo ""
+        return
+    fi
+
+    # Search in examples
+    local result=$(jq -r "
+        .examples | to_entries[] |
+        select(.value.items[]? | .name == \"$name\") |
+        \"examples|\" + .key
+    " "$EXAMPLES_JSON" | head -1)
+
+    if [[ -n "$result" ]]; then
+        echo "$result"
+        return
+    fi
+
+    # Search in addons
+    result=$(jq -r "
+        .addons | to_entries[] |
+        select(.value.items[]? | .name == \"$name\") |
+        \"addons|\" + .key
+    " "$EXAMPLES_JSON" | head -1)
+
+    echo "$result"
+}
+
+# Check if auto screenshot is enabled for a sample
 is_auto_screenshot_enabled() {
     local name="$1"
-    if [[ -f "$EXAMPLES_JSON" ]]; then
-        local val=$(jq -r ".examples[] | select(.name == \"$name\") | .autoScreenshot" "$EXAMPLES_JSON")
-        if [[ "$val" == "false" ]]; then
-            return 1
-        fi
+    if [[ ! -f "$EXAMPLES_JSON" ]]; then
+        return 0
     fi
+
+    # Check in examples
+    local val=$(jq -r "
+        .examples[]?.items[]? | select(.name == \"$name\") | .autoScreenshot
+    " "$EXAMPLES_JSON" | head -1)
+
+    if [[ "$val" == "false" ]]; then
+        return 1
+    fi
+
+    # Check in addons
+    val=$(jq -r "
+        .addons[]?.items[]? | select(.name == \"$name\") | .autoScreenshot
+    " "$EXAMPLES_JSON" | head -1)
+
+    if [[ "$val" == "false" ]]; then
+        return 1
+    fi
+
     return 0
 }
 
@@ -51,6 +98,17 @@ for sample in "${samples[@]}"; do
         continue
     fi
 
+    # Get sample type and group from examples.json
+    sample_info=$(get_sample_info "$sample")
+    if [[ -z "$sample_info" ]]; then
+        log_warn "$sample: examples.jsonに登録されていません"
+        ((fail_count++))
+        continue
+    fi
+
+    sample_type="${sample_info%%|*}"
+    sample_group="${sample_info##*|}"
+
     sample_dir=$(find_sample_dir "$sample")
 
     if [[ -z "$sample_dir" ]]; then
@@ -75,10 +133,13 @@ for sample in "${samples[@]}"; do
         continue
     fi
 
-    log_info "$sample: スクショ撮影中..."
+    log_info "$sample: スクショ撮影中... ($sample_type/$sample_group)"
 
-    screenshot_path="$SAMPLES_DIR/thumbs/${sample}.png"
-    thumb_path="$SAMPLES_DIR/thumbs/${sample}_thumb.png"
+    # Local paths
+    local_dir="$SAMPLES_DIR/thumbs/$sample_type/$sample_group"
+    mkdir -p "$local_dir"
+    screenshot_path="$local_dir/${sample}.png"
+    thumb_path="$local_dir/${sample}_thumb.png"
 
     # tcdebug用のFIFOを作成
     fifo_path="/tmp/trussc_${sample}_$$"
@@ -108,9 +169,10 @@ for sample in "${samples[@]}"; do
         sips -z 175 280 "$screenshot_path" --out "$thumb_path" >/dev/null 2>&1 || \
             cp "$screenshot_path" "$thumb_path"
 
-        # R2にアップロード
-        log_info "$sample: サムネイルをR2にアップロード..."
-        if wrangler r2 object put "$WASM_BUCKET/thumbs/${sample}.png" --file "$thumb_path" --remote >/dev/null 2>&1; then
+        # R2にアップロード (thumbs/{type}/{group}/{name}.png)
+        r2_path="thumbs/$sample_type/$sample_group/${sample}.png"
+        log_info "$sample: R2にアップロード ($r2_path)..."
+        if wrangler r2 object put "$WASM_BUCKET/$r2_path" --file "$thumb_path" --remote >/dev/null 2>&1; then
             log_success "$sample: スクショ完了"
             ((success_count++))
         else

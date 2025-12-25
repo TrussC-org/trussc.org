@@ -87,17 +87,21 @@
         const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/TrussC-org/TrussC/main';
 
         let currentExample = null;
+        let currentType = null;
+        let currentGroup = null;
 
         // Generate title from name (e.g., "graphicsExample" -> "Graphics")
         function nameToTitle(name) {
-            return name.replace(/Example$/, '').replace(/([a-z])([A-Z])/g, '$1 $2');
+            return name.replace(/Example$/, '').replace(/^example-/, '').replace(/([a-z])([A-Z])/g, '$1 $2');
         }
 
         async function initPlayer() {
             const params = new URLSearchParams(window.location.search);
+            const type = params.get('type') || 'examples';
+            const group = params.get('group');
             const name = params.get('name');
 
-            if (!name) {
+            if (!name || !group) {
                 showError('No example specified. Please select an example from the list.');
                 return;
             }
@@ -109,13 +113,21 @@
                 const data = await response.json();
 
                 // Find the example
-                const example = data.examples.find(e => e.name === name);
+                let example = null;
+                if (type === 'addons' && data.addons[group]) {
+                    example = data.addons[group].items.find(e => e.name === name);
+                } else if (data.examples[group]) {
+                    example = data.examples[group].items.find(e => e.name === name);
+                }
+
                 if (!example) {
                     showError(`Example "${name}" not found.`);
                     return;
                 }
 
                 currentExample = example;
+                currentType = type;
+                currentGroup = group;
                 const title = nameToTitle(example.name);
 
                 // Set player size
@@ -132,15 +144,14 @@
                 document.title = `${title} | TrussC`;
                 document.getElementById('player-title').textContent = title;
 
-                if (example.category) {
-                    const cat = document.getElementById('player-category');
-                    cat.textContent = example.category;
-                    cat.style.display = '';
-                }
+                const cat = document.getElementById('player-category');
+                cat.textContent = group;
+                cat.style.display = '';
 
                 const loading = document.getElementById('player-loading');
-                const thumb = `${WASM_BASE_URL}/thumbs/${example.name}.png`;
-                const wasm = `${WASM_BASE_URL}/wasm/${example.name}.html`;
+                const basePath = type === 'examples' ? `examples/${group}` : `addons/${group}`;
+                const thumb = `${WASM_BASE_URL}/thumbs/${basePath}/${example.name}.png`;
+                const wasm = `${WASM_BASE_URL}/wasm/${basePath}/${example.name}.html`;
 
                 // webSupportedが明示的にfalseの場合は非対応表示
                 if (example.webSupported === false) {
@@ -202,14 +213,12 @@
             const sourceCode = document.getElementById('source-code');
             const sourceGithub = document.getElementById('source-github');
 
-            // Determine source path
+            // Determine source path based on type and group
             let basePath;
-            if (example.addon) {
-                basePath = `addons/${example.addon}/${example.name}`;
-            } else if (example.category) {
-                basePath = `examples/${example.category}/${example.name}`;
+            if (currentType === 'addons') {
+                basePath = `addons/${currentGroup}/${example.name}`;
             } else {
-                basePath = `examples/${example.name}`;
+                basePath = `examples/${currentGroup}/${example.name}`;
             }
 
             // Set GitHub link

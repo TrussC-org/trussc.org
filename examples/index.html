@@ -90,9 +90,16 @@
             'math', 'sound', 'utils', 'video', 'communication', 'network', 'threads', 'windowing', 'templates'
         ];
 
+        // Addon display names
+        const addonNames = {
+            'tcxBox2d': 'Box2D Physics',
+            'tcxOsc': 'OSC',
+            'tcxTls': 'TLS / HTTPS'
+        };
+
         // Generate title from name (e.g., "graphicsExample" -> "Graphics")
         function nameToTitle(name) {
-            return name.replace(/Example$/, '').replace(/([a-z])([A-Z])/g, '$1 $2');
+            return name.replace(/Example$/, '').replace(/^example-/, '').replace(/([a-z])([A-Z])/g, '$1 $2');
         }
 
         async function loadExamples() {
@@ -115,20 +122,16 @@
             const container = document.getElementById('examples-container');
             const isWebSupported = (example) => example.webSupported !== false;
 
-            // カテゴリーごとにグループ化
-            const byCategory = {};
-            data.examples.forEach(e => {
-                const cat = e.category || 'other';
-                if (!byCategory[cat]) byCategory[cat] = [];
-                byCategory[cat].push(e);
-            });
-
-            // カード生成関数
-            const renderCard = (example) => {
+            // Card generator for examples
+            const renderCard = (example, type, group) => {
                 const title = nameToTitle(example.name);
-                const thumb = `${WASM_BASE_URL}/thumbs/${example.name}.png`;
+                const thumbPath = type === 'examples'
+                    ? `thumbs/examples/${group}/${example.name}.png`
+                    : `thumbs/addons/${group}/${example.name}.png`;
+                const thumb = `${WASM_BASE_URL}/${thumbPath}`;
+                const playerUrl = `player.html?type=${type}&group=${group}&name=${example.name}`;
                 return `
-                <a href="player.html?name=${example.name}" class="example-card${isWebSupported(example) ? '' : ' not-web-supported'}">
+                <a href="${playerUrl}" class="example-card${isWebSupported(example) ? '' : ' not-web-supported'}">
                     <div class="example-thumb">
                         <img src="${thumb}" alt="${title}" loading="lazy">
                         ${isWebSupported(example) ? '' : '<div class="example-unsupported-overlay">Native only</div>'}
@@ -140,20 +143,44 @@
             `;
             };
 
-            // カテゴリーセクション生成
             let html = '';
+
+            // Render examples by category
             categoryOrder.forEach(cat => {
-                if (byCategory[cat] && byCategory[cat].length > 0) {
-                    html += `
-                        <div class="category-section">
-                            <h2 class="category-title">${categoryNames[cat] || cat}</h2>
-                            <div class="examples-grid">
-                                ${byCategory[cat].map(renderCard).join('')}
+                const catData = data.examples[cat];
+                if (catData && catData.visible !== false && catData.items && catData.items.length > 0) {
+                    const visibleItems = catData.items.filter(e => e.visible !== false);
+                    if (visibleItems.length > 0) {
+                        html += `
+                            <div class="category-section">
+                                <h2 class="category-title">${categoryNames[cat] || cat}</h2>
+                                <div class="examples-grid">
+                                    ${visibleItems.map(e => renderCard(e, 'examples', cat)).join('')}
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
+                    }
                 }
             });
+
+            // Render addons
+            if (data.addons) {
+                for (const [addon, addonData] of Object.entries(data.addons)) {
+                    if (addonData.visible !== false && addonData.items && addonData.items.length > 0) {
+                        const visibleItems = addonData.items.filter(e => e.visible !== false);
+                        if (visibleItems.length > 0) {
+                            html += `
+                                <div class="category-section addon-section">
+                                    <h2 class="category-title">${addonNames[addon] || addon}</h2>
+                                    <div class="examples-grid">
+                                        ${visibleItems.map(e => renderCard(e, 'addons', addon)).join('')}
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }
+                }
+            }
 
             container.innerHTML = html;
         }
