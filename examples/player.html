@@ -27,7 +27,6 @@
                     <h1 class="player-title" id="player-title">Loading...</h1>
                     <div class="player-info">
                         <span class="example-category" id="player-category" style="display: none;"></span>
-                        <span class="example-addon" id="player-addon" style="display: none;"></span>
                     </div>
                 </div>
             </div>
@@ -36,9 +35,6 @@
         <!-- Main Content -->
         <main class="player-content">
             <div class="container">
-                <!-- Description -->
-                <p class="player-description" id="player-description"></p>
-
                 <!-- WASM Player -->
                 <section class="player-section">
                     <div class="player-wrapper" id="player-wrapper">
@@ -92,6 +88,11 @@
 
         let currentExample = null;
 
+        // Generate title from name (e.g., "graphicsExample" -> "Graphics")
+        function nameToTitle(name) {
+            return name.replace(/Example$/, '').replace(/([a-z])([A-Z])/g, '$1 $2');
+        }
+
         async function initPlayer() {
             const params = new URLSearchParams(window.location.search);
             const name = params.get('name');
@@ -102,27 +103,34 @@
             }
 
             try {
-                // Load samples.json to get example info
-                const response = await fetch(`${WASM_BASE_URL}/samples.json`);
-                if (!response.ok) throw new Error('Failed to load samples.json');
+                // Load examples.json
+                const response = await fetch('examples.json');
+                if (!response.ok) throw new Error('Failed to load examples.json');
                 const data = await response.json();
 
                 // Find the example
-                const example = [...data.examples, ...data.addons].find(e => e.name === name);
+                const example = data.examples.find(e => e.name === name);
                 if (!example) {
                     showError(`Example "${name}" not found.`);
                     return;
                 }
 
                 currentExample = example;
+                const title = nameToTitle(example.name);
+
+                // Set player size
+                const wrapper = document.getElementById('player-wrapper');
+                if (example.width && example.height) {
+                    wrapper.style.width = example.width + 'px';
+                    wrapper.style.height = example.height + 'px';
+                    wrapper.style.maxWidth = example.width + 'px';
+                    wrapper.style.maxHeight = example.height + 'px';
+                    wrapper.style.aspectRatio = 'unset';
+                }
 
                 // Update page info
-                document.title = `${example.title} | TrussC`;
-                document.getElementById('player-title').textContent = example.title;
-
-                if (example.description) {
-                    document.getElementById('player-description').textContent = example.description;
-                }
+                document.title = `${title} | TrussC`;
+                document.getElementById('player-title').textContent = title;
 
                 if (example.category) {
                     const cat = document.getElementById('player-category');
@@ -130,14 +138,9 @@
                     cat.style.display = '';
                 }
 
-                if (example.addon) {
-                    const addon = document.getElementById('player-addon');
-                    addon.textContent = example.addon;
-                    addon.style.display = '';
-                }
-
-                const wrapper = document.getElementById('player-wrapper');
                 const loading = document.getElementById('player-loading');
+                const thumb = `${WASM_BASE_URL}/thumbs/${example.name}.png`;
+                const wasm = `${WASM_BASE_URL}/wasm/${example.name}.html`;
 
                 // webSupportedが明示的にfalseの場合は非対応表示
                 if (example.webSupported === false) {
@@ -146,8 +149,8 @@
                     // サムネイル画像を背景に表示
                     const thumbImg = document.createElement('img');
                     thumbImg.className = 'player-thumb-bg';
-                    thumbImg.src = `${WASM_BASE_URL}/${example.thumb}`;
-                    thumbImg.alt = example.title;
+                    thumbImg.src = thumb;
+                    thumbImg.alt = title;
                     wrapper.appendChild(thumbImg);
 
                     // オーバーレイ
@@ -162,7 +165,7 @@
                     // Create iframe for WASM
                     const iframe = document.createElement('iframe');
                     iframe.className = 'player-frame';
-                    iframe.src = `${WASM_BASE_URL}/${example.wasm}`;
+                    iframe.src = wasm;
                     iframe.allow = 'autoplay; fullscreen; microphone; camera';
                     iframe.tabIndex = 0;  // Make iframe focusable
 
@@ -234,13 +237,15 @@
             const tabsContainer = document.getElementById('source-tabs');
             const sourceCode = document.getElementById('source-code');
 
-            // Add shader tab for shaderExample
-            if (currentExample && currentExample.name === 'shaderExample') {
-                const shaderTab = document.createElement('button');
-                shaderTab.className = 'source-tab';
-                shaderTab.dataset.file = 'shaders/effects.glsl';
-                shaderTab.textContent = 'effects.glsl';
-                tabsContainer.appendChild(shaderTab);
+            // Add additional file tabs from config
+            if (currentExample && currentExample.additionalFiles) {
+                currentExample.additionalFiles.forEach(file => {
+                    const tab = document.createElement('button');
+                    tab.className = 'source-tab';
+                    tab.dataset.file = file;
+                    tab.textContent = file.split('/').pop(); // Show filename only
+                    tabsContainer.appendChild(tab);
+                });
             }
 
             const tabs = document.querySelectorAll('.source-tab');

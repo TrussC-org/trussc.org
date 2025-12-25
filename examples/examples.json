@@ -1,0 +1,62 @@
+{
+  "examples": [
+    { "name": "3DPrimitivesExample", "category": "3d", "width": 960, "height": 600, "webSupported": true },
+    { "name": "easyCamExample", "category": "3d", "width": 960, "height": 600, "webSupported": true },
+
+    { "name": "serialExample", "category": "communication", "width": 960, "height": 600, "webSupported": false },
+
+    { "name": "eventsExample", "category": "events", "width": 960, "height": 600, "webSupported": true },
+
+    { "name": "blendingExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
+    { "name": "clippingExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
+    { "name": "colorExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
+    { "name": "fboExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
+    { "name": "fontExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
+    { "name": "graphicsExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
+    { "name": "polylinesExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
+    { "name": "shaderExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
+    { "name": "strokeMeshExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
+    { "name": "textureExample", "category": "graphics", "width": 960, "height": 600, "webSupported": true },
+
+    { "name": "imguiExample", "category": "ImGui", "width": 960, "height": 800, "webSupported": true },
+
+    { "name": "dragDropExample", "category": "input_output", "width": 960, "height": 600, "webSupported": true },
+    { "name": "fileDialogExample", "category": "input_output", "width": 960, "height": 600, "webSupported": false },
+    { "name": "imageLoaderExample", "category": "input_output", "width": 960, "height": 600, "webSupported": true },
+    { "name": "jsonXmlExample", "category": "input_output", "width": 960, "height": 600, "webSupported": true },
+    { "name": "keyboardExample", "category": "input_output", "width": 960, "height": 600, "webSupported": true },
+    { "name": "mouseExample", "category": "input_output", "width": 960, "height": 600, "webSupported": true },
+    { "name": "screenshotExample", "category": "input_output", "width": 960, "height": 600, "webSupported": false },
+
+    { "name": "noiseField2dExample", "category": "math", "width": 960, "height": 600, "webSupported": true },
+    { "name": "vectorMathExample", "category": "math", "width": 960, "height": 600, "webSupported": true },
+
+    { "name": "tcpExample", "category": "network", "width": 960, "height": 600, "webSupported": false },
+    { "name": "udpExample", "category": "network", "width": 960, "height": 600, "webSupported": false },
+
+    { "name": "hitTestExample", "category": "node", "width": 960, "height": 600, "webSupported": true },
+    { "name": "nodeExample", "category": "node", "width": 960, "height": 600, "webSupported": true },
+    { "name": "uiExample", "category": "node", "width": 960, "height": 600, "webSupported": true },
+
+    { "name": "chipSoundExample", "category": "sound", "width": 960, "height": 600, "webSupported": true },
+    { "name": "micInputExample", "category": "sound", "width": 960, "height": 600, "webSupported": true },
+    { "name": "soundPlayerExample", "category": "sound", "width": 960, "height": 600, "webSupported": true },
+    { "name": "soundPlayerFFTExample", "category": "sound", "width": 960, "height": 600, "webSupported": true },
+
+    { "name": "emptyExample", "category": "templates", "width": 960, "height": 600, "webSupported": true },
+
+    { "name": "threadChannelExample", "category": "threads", "width": 580, "height": 380, "webSupported": false },
+    { "name": "threadExample", "category": "threads", "width": 640, "height": 480, "webSupported": false },
+
+    { "name": "clipboardExample", "category": "utils", "width": 960, "height": 600, "webSupported": true },
+    { "name": "consoleExample", "category": "utils", "width": 960, "height": 600, "webSupported": false },
+    { "name": "timerExample", "category": "utils", "width": 960, "height": 600, "webSupported": true },
+    { "name": "utilsExample", "category": "utils", "width": 960, "height": 600, "webSupported": true },
+
+    { "name": "videoGrabberExample", "category": "video", "width": 800, "height": 600, "webSupported": true },
+    { "name": "videoPlayerExample", "category": "video", "width": 960, "height": 600, "webSupported": false },
+    { "name": "videoPlayerWebExample", "category": "video", "width": 960, "height": 600, "webSupported": true },
+
+    { "name": "loopModeExample", "category": "windowing", "width": 960, "height": 600, "webSupported": true }
+  ]
+}

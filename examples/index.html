@@ -68,12 +68,14 @@
         // カテゴリー表示名
         const categoryNames = {
             '3d': '3D',
+            'communication': 'Communication',
             'events': 'Events',
             'graphics': 'Graphics',
-            'gui': 'GUI',
+            'ImGui': 'ImGui',
             'input_output': 'Input / Output',
             'math': 'Math',
             'network': 'Network',
+            'node': 'Node',
             'sound': 'Sound',
             'templates': 'Templates',
             'threads': 'Threads',
@@ -84,14 +86,19 @@
 
         // カテゴリー表示順
         const categoryOrder = [
-            'graphics', '3d', 'input_output', 'events', 'gui',
-            'math', 'sound', 'utils', 'video', 'network', 'threads', 'windowing', 'templates'
+            'graphics', '3d', 'node', 'input_output', 'events', 'ImGui',
+            'math', 'sound', 'utils', 'video', 'communication', 'network', 'threads', 'windowing', 'templates'
         ];
+
+        // Generate title from name (e.g., "graphicsExample" -> "Graphics")
+        function nameToTitle(name) {
+            return name.replace(/Example$/, '').replace(/([a-z])([A-Z])/g, '$1 $2');
+        }
 
         async function loadExamples() {
             try {
-                const response = await fetch(`${WASM_BASE_URL}/samples.json`);
-                if (!response.ok) throw new Error('Failed to load samples.json');
+                const response = await fetch('examples.json');
+                if (!response.ok) throw new Error('Failed to load examples.json');
                 const data = await response.json();
                 renderExamples(data);
             } catch (error) {
@@ -117,17 +124,21 @@
             });
 
             // カード生成関数
-            const renderCard = (example) => `
+            const renderCard = (example) => {
+                const title = nameToTitle(example.name);
+                const thumb = `${WASM_BASE_URL}/thumbs/${example.name}.png`;
+                return `
                 <a href="player.html?name=${example.name}" class="example-card${isWebSupported(example) ? '' : ' not-web-supported'}">
                     <div class="example-thumb">
-                        <img src="${WASM_BASE_URL}/${example.thumb}" alt="${example.title}" loading="lazy">
+                        <img src="${thumb}" alt="${title}" loading="lazy">
                         ${isWebSupported(example) ? '' : '<div class="example-unsupported-overlay">Native only</div>'}
                     </div>
                     <div class="example-info">
-                        <h3 class="example-title">${example.title}</h3>
+                        <h3 class="example-title">${title}</h3>
                     </div>
                 </a>
             `;
+            };
 
             // カテゴリーセクション生成
             let html = '';
@@ -143,33 +154,6 @@
                     `;
                 }
             });
-
-            // Addonsセクション
-            if (data.addons && data.addons.length > 0) {
-                // addonごとにグループ化
-                const byAddon = {};
-                data.addons.forEach(e => {
-                    const addon = e.addon || 'other';
-                    if (!byAddon[addon]) byAddon[addon] = [];
-                    byAddon[addon].push(e);
-                });
-
-                html += `<div class="category-section addons-section">
-                    <h2 class="category-title">Addons</h2>`;
-
-                Object.keys(byAddon).forEach(addon => {
-                    html += `
-                        <div class="addon-group">
-                            <h3 class="addon-title">${addon}</h3>
-                            <div class="examples-grid">
-                                ${byAddon[addon].map(renderCard).join('')}
-                            </div>
-                        </div>
-                    `;
-                });
-
-                html += '</div>';
-            }
 
             container.innerHTML = html;
         }
