@@ -53,9 +53,9 @@
     { "name": "timerExample", "category": "utils", "width": 960, "height": 600, "webSupported": true },
     { "name": "utilsExample", "category": "utils", "width": 960, "height": 600, "webSupported": true },
 
-    { "name": "videoGrabberExample", "category": "video", "width": 800, "height": 600, "webSupported": true },
+    { "name": "videoGrabberExample", "category": "video", "width": 800, "height": 600, "webSupported": true, "autoScreenshot": false },
     { "name": "videoPlayerExample", "category": "video", "width": 960, "height": 600, "webSupported": false },
-    { "name": "videoPlayerWebExample", "category": "video", "width": 960, "height": 600, "webSupported": true },
+    { "name": "videoPlayerWebExample", "category": "video", "width": 960, "height": 600, "webSupported": true, "autoScreenshot": false },
 
     { "name": "loopModeExample", "category": "windowing", "width": 960, "height": 600, "webSupported": true }
   ]

@@ -7,6 +7,21 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$SCRIPT_DIR/common.sh"
 
+# examples.json path
+EXAMPLES_JSON="$SCRIPT_DIR/../examples/examples.json"
+
+# Check if auto screenshot is enabled for a sample (returns 0 if enabled, 1 if disabled)
+is_auto_screenshot_enabled() {
+    local name="$1"
+    if [[ -f "$EXAMPLES_JSON" ]]; then
+        local val=$(jq -r ".examples[] | select(.name == \"$name\") | .autoScreenshot" "$EXAMPLES_JSON")
+        if [[ "$val" == "false" ]]; then
+            return 1
+        fi
+    fi
+    return 0
+}
+
 if [[ $# -eq 0 ]]; then
     echo "使い方: $0 [sample1] [sample2] ... [--all]"
     echo "例: $0 graphicsExample colorExample"
@@ -30,6 +45,12 @@ success_count=0
 fail_count=0
 
 for sample in "${samples[@]}"; do
+    # Check if auto screenshot is disabled in examples.json
+    if ! is_auto_screenshot_enabled "$sample"; then
+        log_warn "$sample: 自動スクショ無効（autoScreenshot: false）"
+        continue
+    fi
+
     sample_dir=$(find_sample_dir "$sample")
 
     if [[ -z "$sample_dir" ]]; then
