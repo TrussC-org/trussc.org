@@ -195,18 +195,16 @@ function initTypingAnimation() {
 
     // Suffixes to add after 'C' (alternating serious/joke)
     const suffixes = [
-        'ode',       // Code (serious)
-        'afe',       // Cafe (joke)
-        'reative',   // Creative (serious)
-        'rash',      // Crash (joke)
-        'ore',       // Core (serious)
-        '++',        // C++ (meta)
-        'anvas',     // Canvas (serious)
-        'ast',       // Cast (joke)
-        'onnect',    // Connect (serious)
-        'raft',      // Craft (serious)
-        'ontext',    // Context (serious)
-        'onstruct',  // Construct (serious)
+        'ode',       // Code
+        'afe',       // Cafe
+        'reative',   // Creative
+        'haos',      // Chaos
+        'ore',       // Core
+        '++',        // C++
+        'anvas',     // Canvas
+        'ast',       // Cast
+        'onnect',    // Connect
+        'raft',      // Craft
     ];
     const typeSpeed = 144;      // 1.2x slower
     const deleteSpeed = 96;     // 1.2x slower

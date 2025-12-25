@@ -84,6 +84,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/glsl.min.js"></script>
     <script src="../script.js"></script>
     <script>
         const WASM_BASE_URL = 'https://wasm.trussc.org';
@@ -230,8 +231,19 @@
         }
 
         function setupSourceTabs(basePath) {
-            const tabs = document.querySelectorAll('.source-tab');
+            const tabsContainer = document.getElementById('source-tabs');
             const sourceCode = document.getElementById('source-code');
+
+            // Add shader tab for shaderExample
+            if (currentExample && currentExample.name === 'shaderExample') {
+                const shaderTab = document.createElement('button');
+                shaderTab.className = 'source-tab';
+                shaderTab.dataset.file = 'shaders/effects.glsl';
+                shaderTab.textContent = 'effects.glsl';
+                tabsContainer.appendChild(shaderTab);
+            }
+
+            const tabs = document.querySelectorAll('.source-tab');
 
             tabs.forEach(tab => {
                 tab.addEventListener('click', async (e) => {
@@ -250,6 +262,7 @@
                         if (response.ok) {
                             const code = await response.text();
                             sourceCode.textContent = code;
+                            sourceCode.className = file.endsWith('.glsl') ? 'language-glsl' : 'language-cpp';
                             hljs.highlightElement(sourceCode);
                         } else {
                             sourceCode.textContent = `// ${file} not found`;

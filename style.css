@@ -146,7 +146,7 @@ img {
     display: inline-block;
     width: 0.08em;
     height: 0.9em;
-    background: var(--color-accent);
+    background: var(--color-text-subtle);
     margin-left: 0.02em;
     vertical-align: baseline;
     animation: blink 1.5s step-end infinite;
