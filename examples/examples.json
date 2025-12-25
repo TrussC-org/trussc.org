@@ -64,7 +64,7 @@
           "name": "fboExample",
           "width": 960,
           "height": 600,
-          "webSupported": true
+          "webSupported": false
         },
         {
           "name": "fontExample",
