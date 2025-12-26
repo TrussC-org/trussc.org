@@ -148,7 +148,7 @@ img {
 }
 
 .logo-hero-img {
-    max-width: min(420px, 80vw);
+    max-width: min(420px, 70vw);
     height: auto;
     margin: var(--space-xl) 0;
 }
