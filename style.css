@@ -141,6 +141,25 @@ img {
     background-clip: text;
 }
 
+/* Logo images */
+.logo-img {
+    height: 1.25rem;
+    width: auto;
+}
+
+.logo-hero-img {
+    max-width: min(420px, 80vw);
+    height: auto;
+    margin: var(--space-xl) 0;
+}
+
+.footer-logo {
+    height: 1.25rem;
+    width: auto;
+    display: block;
+    margin-bottom: var(--space-md);
+}
+
 /* Typing animation */
 .typing-cursor {
     display: inline-block;
