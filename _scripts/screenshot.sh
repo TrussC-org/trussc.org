@@ -165,8 +165,8 @@ for sample in "${samples[@]}"; do
     rm -f "$fifo_path"
 
     if [[ -f "$screenshot_path" ]]; then
-        # サムネイル生成（280x175）
-        sips -z 175 280 "$screenshot_path" --out "$thumb_path" >/dev/null 2>&1 || \
+        # サムネイル生成（幅280、アスペクト比維持）
+        sips --resampleWidth 280 "$screenshot_path" --out "$thumb_path" >/dev/null 2>&1 || \
             cp "$screenshot_path" "$thumb_path"
 
         # R2にアップロード (thumbs/{type}/{group}/{name}.png)
