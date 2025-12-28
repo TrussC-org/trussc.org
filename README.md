@@ -4,7 +4,7 @@ Official website for [TrussC](https://github.com/TrussC-org/TrussC) - a lightwei
 
 ## Hosting
 
-Hosted on Cloudflare Pages at https://trussc.org
+Hosted on GitHub Pages at https://TrussC.org
 
 ## Local Development
 
