@@ -36,7 +36,9 @@ for sample in "${samples[@]}"; do
 
     log_info "$sample: ビルド開始..."
 
-    if (cd "$sample_dir" && cmake --preset macos && cmake --build --preset macos); then
+    build_dir="$sample_dir/build-macos"
+    mkdir -p "$build_dir"
+    if (cd "$build_dir" && cmake .. && cmake --build .); then
         log_success "$sample: ビルド完了"
         ((success_count++))
     else
