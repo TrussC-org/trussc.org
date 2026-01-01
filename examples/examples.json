@@ -23,6 +23,17 @@
         }
       ]
     },
+    "animation": {
+      "visible": true,
+      "items": [
+        {
+          "name": "tweenExample",
+          "width": 960,
+          "height": 800,
+          "webSupported": true
+        }
+      ]
+    },
     "communication": {
       "visible": true,
       "items": [
