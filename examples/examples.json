@@ -381,6 +381,12 @@
           "webSupported": true
         },
         {
+          "name": "example-collision",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
           "name": "example-node",
           "width": 960,
           "height": 600,
