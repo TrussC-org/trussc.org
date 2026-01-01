@@ -69,6 +69,7 @@
         // カテゴリー表示名
         const categoryNames = {
             '3d': '3D',
+            'animation': 'Animation',
             'communication': 'Communication',
             'events': 'Events',
             'graphics': 'Graphics',
@@ -84,12 +85,6 @@
             'video': 'Video',
             'windowing': 'Windowing'
         };
-
-        // カテゴリー表示順
-        const categoryOrder = [
-            'graphics', '3d', 'node', 'input_output', 'events', 'ImGui',
-            'math', 'sound', 'utils', 'video', 'communication', 'network', 'threads', 'windowing', 'templates'
-        ];
 
         // Addon display names
         const addonNames = {
@@ -146,8 +141,8 @@
 
             let html = '';
 
-            // Render examples by category
-            categoryOrder.forEach(cat => {
+            // Render examples by category (uses JSON key order)
+            Object.keys(data.examples).forEach(cat => {
                 const catData = data.examples[cat];
                 if (catData && catData.visible !== false && catData.items && catData.items.length > 0) {
                     const visibleItems = catData.items.filter(e => e.visible !== false);
