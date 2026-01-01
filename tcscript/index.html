@@ -104,8 +104,6 @@
         }
 
         #canvas {
-            width: 600px;
-            height: 600px;
             outline: none;
         }
 
@@ -230,7 +228,7 @@
                     <div class="loading-spinner"></div>
                     <span>Loading tcScript engine...</span>
                 </div>
-                <canvas id="canvas" tabindex="-1" style="display:none;"></canvas>
+                <canvas id="canvas" tabindex="-1" style="display:none; width:600px; height:600px;"></canvas>
             </div>
             <div class="resizer-h" id="resizerH"></div>
             <div class="console" id="console"></div>
@@ -507,7 +505,11 @@ def mousePressed(x, y, button) {
             keyboardListeningElement: document.getElementById('canvas'),
             onRuntimeInitialized: function() {
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('canvas').style.display = 'block';
+                const canvas = document.getElementById('canvas');
+                canvas.style.display = 'block';
+                // Immediately resize to prevent 2x flash
+                resizeCanvas();
+                requestAnimationFrame(resizeCanvas);
                 setStatus('Ready', 'ready');
                 logToConsole('tcScript engine ready!', 'success');
                 // Auto-run script, then focus editor
@@ -530,6 +532,38 @@ def mousePressed(x, y, button) {
                 }
             }
         };
+
+        // Resize canvas to fit container while maintaining aspect ratio
+        function resizeCanvas() {
+            const canvas = document.getElementById('canvas');
+            const container = document.getElementById('canvasContainer');
+            if (!canvas || !container || canvas.style.display === 'none') return;
+
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+            const canvasRatio = 1; // 600x600 = 1:1
+
+            let width, height;
+            if (containerWidth / containerHeight > canvasRatio) {
+                // Container is wider than canvas ratio
+                height = containerHeight;
+                width = height * canvasRatio;
+            } else {
+                // Container is taller than canvas ratio
+                width = containerWidth;
+                height = width / canvasRatio;
+            }
+
+            // Apply CSS size (not internal resolution)
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+        }
+
+        // Call on load and resize
+        window.addEventListener('resize', resizeCanvas);
+        // Also call when resizers are used
+        const originalResizeCanvas = resizeCanvas;
+        setInterval(resizeCanvas, 500); // Fallback for resizer changes
 
         // Resizable panel dividers
         (function() {
