@@ -20,6 +20,12 @@
           "width": 960,
           "height": 600,
           "webSupported": true
+        },
+        {
+          "name": "meshAppendExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
         }
       ]
     },
