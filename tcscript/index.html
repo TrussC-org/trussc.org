@@ -214,6 +214,7 @@
             <button class="btn btn-stop" onclick="saveScript()">Save</button>
             <button class="btn btn-stop" onclick="loadScript()">Load</button>
             <button class="btn btn-stop" onclick="shareScript()">Share</button>
+            <button class="btn btn-stop" onclick="toggleFullscreen()">Fullscreen</button>
         </div>
     </div>
 
@@ -483,6 +484,18 @@ def mousePressed(x, y, button) {
             }).catch(() => {
                 logToConsole('Share URL: ' + url, 'notice');
             });
+        }
+
+        // Toggle fullscreen for canvas
+        function toggleFullscreen() {
+            const canvas = document.getElementById('canvas');
+            if (!document.fullscreenElement) {
+                canvas.requestFullscreen().catch(err => {
+                    logToConsole('Fullscreen error: ' + err.message, 'error');
+                });
+            } else {
+                document.exitFullscreen();
+            }
         }
 
         // Initialize Emscripten Module
