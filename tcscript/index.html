@@ -377,6 +377,36 @@ def keyPressed(key) {
             status.className = 'status ' + type;
         }
 
+        // Clear error markers from editor
+        function clearErrorMarkers() {
+            if (editor && monaco) {
+                monaco.editor.setModelMarkers(editor.getModel(), 'tcscript', []);
+            }
+        }
+
+        // Set error marker at specific line
+        function setErrorMarker(line, column, message) {
+            if (editor && monaco) {
+                monaco.editor.setModelMarkers(editor.getModel(), 'tcscript', [{
+                    startLineNumber: line,
+                    startColumn: column,
+                    endLineNumber: line,
+                    endColumn: column + 10,
+                    message: message,
+                    severity: monaco.MarkerSeverity.Error
+                }]);
+            }
+        }
+
+        // Parse error message for line/column info
+        function parseErrorLocation(errorMsg) {
+            const match = errorMsg.match(/at \((\d+),\s*(\d+)\)/);
+            if (match) {
+                return { line: parseInt(match[1]), column: parseInt(match[2]) };
+            }
+            return null;
+        }
+
         // Run script
         function runScript() {
             if (!editor) {
@@ -390,11 +420,23 @@ def keyPressed(key) {
 
             const code = editor.getValue();
             clearConsole();
+            clearErrorMarkers();
             logToConsole('Running script...', 'notice');
 
             try {
                 Module.ccall('updateScriptCode', null, ['string'], [code]);
-                logToConsole('Script loaded successfully!', 'success');
+
+                // Check for script errors
+                const error = Module.ccall('getScriptError', 'string', [], []);
+                if (error && error.length > 0) {
+                    logToConsole('Error: ' + error, 'error');
+                    const loc = parseErrorLocation(error);
+                    if (loc) {
+                        setErrorMarker(loc.line, loc.column, error);
+                    }
+                } else {
+                    logToConsole('Script loaded successfully!', 'success');
+                }
             } catch (e) {
                 logToConsole('Error: ' + e.message, 'error');
             }
