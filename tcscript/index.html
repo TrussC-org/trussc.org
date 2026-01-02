@@ -237,33 +237,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
     <script>
-        // Prevent Emscripten/sokol from capturing keyboard events when editor is focused
-        // Must be registered BEFORE Emscripten loads
-        (function() {
-            const editorEl = document.getElementById('editor');
-
-            function isEditorFocused() {
-                return editorEl && editorEl.contains(document.activeElement);
-            }
-
-            // Intercept at window level before sokol can get it
-            window.addEventListener('keydown', function(e) {
-                if (isEditorFocused()) {
-                    e.stopImmediatePropagation();
-                }
-            }, true);
-            window.addEventListener('keyup', function(e) {
-                if (isEditorFocused()) {
-                    e.stopImmediatePropagation();
-                }
-            }, true);
-            window.addEventListener('keypress', function(e) {
-                if (isEditorFocused()) {
-                    e.stopImmediatePropagation();
-                }
-            }, true);
-        })();
-
         let editor;
 
         const defaultCode = `// Welcome to tcScript!
@@ -272,7 +245,7 @@
 global hue = 0.0
 
 def setup() {
-    print("Hello from tcScript!")
+    logNotice("Hello from tcScript!")
 }
 
 def update() {
@@ -300,11 +273,15 @@ def draw() {
 
     // FPS display
     setColor(0.4, 0.4, 0.4)
-    drawText("FPS: " + to_string(getFrameRate()), 10.0, 20.0)
+    drawBitmapString("FPS: " + to_string(getFrameRate()), 10.0, 20.0)
 }
 
 def mousePressed(x, y, button) {
-    print("Click at " + to_string(x) + ", " + to_string(y))
+    logNotice("Click at " + to_string(x) + ", " + to_string(y))
+}
+
+def keyPressed(key) {
+    logNotice("Key pressed: " + to_string(key))
 }
 `;
 
@@ -374,6 +351,8 @@ def mousePressed(x, y, button) {
                 scrollBeyondLastLine: false,
                 automaticLayout: true,
                 tabSize: 4,
+                insertSpaces: true,
+                detectIndentation: false,
             });
 
         });
@@ -501,7 +480,7 @@ def mousePressed(x, y, button) {
             canvas: (function() {
                 return document.getElementById('canvas');
             })(),
-            // Only capture keyboard events on the canvas, not globally
+            // Required for direct character input to work properly
             keyboardListeningElement: document.getElementById('canvas'),
             onRuntimeInitialized: function() {
                 document.getElementById('loading').style.display = 'none';
@@ -512,6 +491,8 @@ def mousePressed(x, y, button) {
                 requestAnimationFrame(resizeCanvas);
                 setStatus('Ready', 'ready');
                 logToConsole('tcScript engine ready!', 'success');
+                // Focus canvas when clicked (required for keyboard input)
+                canvas.addEventListener('mousedown', () => canvas.focus());
                 // Auto-run script, then focus editor
                 setTimeout(function() {
                     runScript();
