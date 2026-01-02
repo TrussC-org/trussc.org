@@ -379,6 +379,10 @@ def keyPressed(key) {
 
         // Run script
         function runScript() {
+            if (!editor) {
+                logToConsole('Editor not ready yet!', 'error');
+                return;
+            }
             if (!Module || !Module.ccall) {
                 logToConsole('Engine not ready yet!', 'error');
                 return;
