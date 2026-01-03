@@ -650,7 +650,8 @@ def keyPressed(key) {
             }
 
             // Fallback for browsers without File System Access API
-            const blob = new Blob([code], { type: 'text/plain' });
+            // Use octet-stream to prevent iOS from adding .txt extension
+            const blob = new Blob([code], { type: 'application/octet-stream' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
