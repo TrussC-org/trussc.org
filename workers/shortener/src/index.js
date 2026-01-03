@@ -3,14 +3,18 @@
 
 const SKETCH_URL = 'https://trussc.org/sketch/';
 
-// Generate a random short ID (URL-safe, auto-increase length on collision)
-function generateId(length = 6) {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let id = '';
-    for (let i = 0; i < length; i++) {
-        id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
+// Generate deterministic ID from content hash (same code = same URL)
+async function generateHashId(content) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(content);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = new Uint8Array(hashBuffer);
+    // Convert to URL-safe base64 and take first 8 chars
+    const base64 = btoa(String.fromCharCode(...hashArray))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=/g, '');
+    return base64.substring(0, 8);
 }
 
 // CORS headers for API requests
@@ -41,29 +45,11 @@ export default {
                     });
                 }
 
-                // Generate unique ID (auto-increase length on collision)
-                let id;
-                let attempts = 0;
-                let length = 6;
-                do {
-                    // Increase length after several collisions
-                    if (attempts >= 5) length = 7;
-                    if (attempts >= 8) length = 8;
-
-                    id = generateId(length);
-                    const existing = await env.SKETCHES.get(id);
-                    if (!existing) break;
-                    attempts++;
-                } while (attempts < 12);
-
-                if (attempts >= 12) {
-                    return new Response(JSON.stringify({ error: 'Failed to generate ID' }), {
-                        status: 500,
-                        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-                    });
-                }
+                // Generate deterministic ID from content hash
+                const id = await generateHashId(code);
 
                 // Store in KV (expire after 10 years)
+                // Same content will overwrite with same data, which is fine
                 await env.SKETCHES.put(id, code, { expirationTtl: 10 * 365 * 24 * 60 * 60 });
 
                 return new Response(JSON.stringify({ id, url: `https://trussc.org/s/${id}` }), {

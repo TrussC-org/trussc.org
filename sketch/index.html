@@ -275,11 +275,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        @keyframes fadeOut {
-            0% { opacity: 1; transform: translateY(0); }
-            70% { opacity: 1; transform: translateY(-5px); }
-            100% { opacity: 0; transform: translateY(-10px); }
-        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -302,7 +297,7 @@
             <!-- File controls -->
             <button class="btn" onclick="saveScript()">Save</button>
             <button class="btn" onclick="loadScript()">Load</button>
-            <button class="btn" onclick="shareScript(event)">Share</button>
+            <button class="btn" id="shareBtn" onclick="shareScript()">Share</button>
             <a href="reference/" class="btn btn-help" style="text-decoration:none;" title="API Reference">?</a>
         </div>
     </div>
@@ -690,29 +685,21 @@ def keyPressed(key) {
             input.click();
         }
 
-        // Show "Copied!" tooltip near cursor
-        function showCopiedTooltip(event) {
-            const tooltip = document.createElement('div');
-            tooltip.textContent = 'Copied!';
-            tooltip.style.cssText = `
-                position: fixed;
-                left: ${event.clientX + 10}px;
-                top: ${event.clientY - 10}px;
-                background: #2ea043;
-                color: white;
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 12px;
-                pointer-events: none;
-                z-index: 10000;
-                animation: fadeOut 1s forwards;
-            `;
-            document.body.appendChild(tooltip);
-            setTimeout(() => tooltip.remove(), 1000);
-        }
-
         // Share script via short URL (with fallback to long URL)
-        async function shareScript(event) {
+        async function shareScript() {
+            const btn = document.getElementById('shareBtn');
+            const originalText = btn.textContent;
+
+            // Immediately show "Copied!" feedback
+            btn.textContent = 'Copied!';
+            btn.style.background = '#2ea043';
+
+            // Revert after 2 seconds
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+            }, 2000);
+
             const code = editor.getValue();
             const compressed = LZString.compressToEncodedURIComponent(code);
 
@@ -728,7 +715,6 @@ def keyPressed(key) {
                     const { url } = await response.json();
                     await navigator.clipboard.writeText(url);
                     logToConsole('Short URL copied! ' + url, 'success');
-                    if (event) showCopiedTooltip(event);
                     return;
                 } else {
                     logToConsole('Shortener API error: ' + response.status, 'error');
@@ -742,7 +728,6 @@ def keyPressed(key) {
             try {
                 await navigator.clipboard.writeText(url);
                 logToConsole('Long URL copied (' + compressed.length + ' chars)', 'success');
-                if (event) showCopiedTooltip(event);
             } catch (e) {
                 logToConsole('Share URL: ' + url, 'notice');
             }
