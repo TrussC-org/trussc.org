@@ -1,0 +1,14 @@
+name = "trussc-shortener"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# Routes - handle /s/* and /api/shorten
+routes = [
+  { pattern = "trussc.org/s/*", zone_name = "trussc.org" },
+  { pattern = "trussc.org/api/shorten", zone_name = "trussc.org" }
+]
+
+# KV namespace for storing short URLs
+[[kv_namespaces]]
+binding = "SKETCHES"
+id = "046aae5c8ae24a98bee3dc67196d5033"
