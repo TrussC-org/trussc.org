@@ -321,6 +321,7 @@
     </div>
 
     <script src="trusssketch-api.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
     <script>
         let editor;
@@ -383,14 +384,14 @@ def keyPressed(key) {
 }
 `;
 
-        // Load code from URL hash
+        // Load code from URL hash (LZString compressed)
         function loadFromHash() {
             const hash = window.location.hash;
-            if (hash.startsWith('#code=')) {
+            if (hash.startsWith('#')) {
                 try {
-                    const encoded = hash.substring(6);
-                    const code = decodeURIComponent(escape(atob(encoded)));
-                    return code;
+                    const compressed = hash.substring(1);
+                    const code = LZString.decompressFromEncodedURIComponent(compressed);
+                    if (code) return code;
                 } catch (e) {
                     console.error('Failed to decode URL:', e);
                 }
@@ -683,13 +684,13 @@ def keyPressed(key) {
             input.click();
         }
 
-        // Share script via URL
+        // Share script via URL (LZString compressed)
         function shareScript() {
             const code = editor.getValue();
-            const encoded = btoa(unescape(encodeURIComponent(code)));
-            const url = window.location.origin + window.location.pathname + '#code=' + encoded;
+            const compressed = LZString.compressToEncodedURIComponent(code);
+            const url = window.location.origin + window.location.pathname + '#' + compressed;
             navigator.clipboard.writeText(url).then(() => {
-                logToConsole('Share URL copied to clipboard!', 'success');
+                logToConsole('Share URL copied to clipboard! (' + compressed.length + ' chars)', 'success');
             }).catch(() => {
                 logToConsole('Share URL: ' + url, 'notice');
             });
