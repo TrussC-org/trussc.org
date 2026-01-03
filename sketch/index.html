@@ -324,6 +324,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
     <script>
         let editor;
+        let isModified = false;
+        let savedContent = '';
+
+        // Warn before leaving if there are unsaved changes
+        window.addEventListener('beforeunload', (e) => {
+            if (isModified) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
 
         const defaultCode = `// Welcome to TrussSketch!
 // Write C++-like code and click Run to see it in action.
@@ -494,6 +504,12 @@ def keyPressed(key) {
                 detectIndentation: false,
             });
 
+            // Track changes for unsaved warning
+            savedContent = initialCode;
+            editor.onDidChangeModelContent(() => {
+                isModified = editor.getValue() !== savedContent;
+            });
+
         });
 
         // Console logging
@@ -623,6 +639,8 @@ def keyPressed(key) {
                     await writable.write(code);
                     await writable.close();
                     logToConsole('Script saved: ' + handle.name, 'success');
+                    savedContent = code;
+                    isModified = false;
                     return;
                 } catch (e) {
                     if (e.name === 'AbortError') return; // User cancelled
@@ -638,6 +656,8 @@ def keyPressed(key) {
             a.click();
             URL.revokeObjectURL(url);
             logToConsole('Script saved to file!', 'success');
+            savedContent = code;
+            isModified = false;
         }
 
         // Load script from file
@@ -650,7 +670,10 @@ def keyPressed(key) {
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        editor.setValue(e.target.result);
+                        const content = e.target.result;
+                        editor.setValue(content);
+                        savedContent = content;
+                        isModified = false;
                         logToConsole('Script loaded from file: ' + file.name, 'success');
                         runScript();
                     };
