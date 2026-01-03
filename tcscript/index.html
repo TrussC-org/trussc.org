@@ -244,12 +244,14 @@
 // Write C++-like code and click Run to see it in action.
 
 global hue = 0.0
+global time = 0.0
 
 def setup() {
     logNotice("Hello from tcScript!")
 }
 
 def update() {
+    time = time + getDeltaTime()
     hue = hue + 0.005
     if (hue > 1.0) { hue = 0.0 }
 }
@@ -259,7 +261,7 @@ def draw() {
 
     // Draw rotating circles
     for (var i = 0; i < 8; ++i) {
-        var angle = TAU * i / 8.0 + getElapsedTime()
+        var angle = TAU * i / 8.0 + time
         var x = getWindowWidth() / 2.0 + cos(angle) * 120.0
         var y = getWindowHeight() / 2.0 + sin(angle) * 120.0
 
