@@ -154,14 +154,14 @@
     <span class="function">logNotice</span>(<span class="string">"Key: "</span> + <span class="function">to_string</span>(key))
 }</div>
 
-    <script src="../tcscript-api.js"></script>
+    <script src="../trusssketch-api.js"></script>
     <script>
         function renderReference() {
             const content = document.getElementById('content');
             let html = '';
 
             // Render categories
-            for (const cat of tcScriptAPI.categories) {
+            for (const cat of TrussSketchAPI.categories) {
                 html += `<h2>${cat.name}</h2>\n<div class="section">\n`;
 
                 // Group by unique function name (for overloads)
@@ -184,7 +184,7 @@
 
             // Render constants
             html += `<h2>Constants</h2>\n<div class="constants">\n`;
-            for (const c of tcScriptAPI.constants) {
+            for (const c of TrussSketchAPI.constants) {
                 html += `<div class="const">${c.name} = ${c.value}</div>\n`;
             }
             html += `</div>\n`;

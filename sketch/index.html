@@ -236,7 +236,7 @@
         </div>
     </div>
 
-    <script src="tcscript-api.js"></script>
+    <script src="trusssketch-api.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
     <script>
         let editor;
@@ -307,9 +307,9 @@ def keyPressed(key) {
         // Initialize Monaco Editor
         require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' }});
         require(['vs/editor/editor.main'], function() {
-            // Define tcScript language (similar to C++)
-            monaco.languages.register({ id: 'tcscript' });
-            monaco.languages.setMonarchTokensProvider('tcscript', {
+            // Define TrussSketch language (similar to C++)
+            monaco.languages.register({ id: 'trusssketch' });
+            monaco.languages.setMonarchTokensProvider('trusssketch', {
                 keywords: ['def', 'var', 'global', 'if', 'else', 'for', 'while', 'return', 'true', 'false'],
                 typeKeywords: ['int', 'float', 'string', 'bool'],
                 operators: ['+', '-', '*', '/', '%', '=', '==', '!=', '<', '>', '<=', '>=', '&&', '||', '!'],
@@ -326,7 +326,7 @@ def keyPressed(key) {
                 }
             });
 
-            monaco.editor.defineTheme('tcscript-dark', {
+            monaco.editor.defineTheme('trusssketch-dark', {
                 base: 'vs-dark',
                 inherit: true,
                 rules: [
@@ -341,12 +341,12 @@ def keyPressed(key) {
                 }
             });
 
-            // Register autocomplete provider from tcscript-api.js
+            // Register autocomplete provider from trusssketch-api.js
             function buildCompletions() {
                 const completions = [];
 
                 // Add functions
-                for (const cat of tcScriptAPI.categories) {
+                for (const cat of TrussSketchAPI.categories) {
                     for (const fn of cat.functions) {
                         completions.push({
                             label: fn.name,
@@ -360,7 +360,7 @@ def keyPressed(key) {
                 }
 
                 // Add constants
-                for (const c of tcScriptAPI.constants) {
+                for (const c of TrussSketchAPI.constants) {
                     completions.push({
                         label: c.name,
                         kind: monaco.languages.CompletionItemKind.Constant,
@@ -372,9 +372,9 @@ def keyPressed(key) {
                 return completions;
             }
 
-            const tcscriptCompletions = buildCompletions();
+            const trusssketchCompletions = buildCompletions();
 
-            monaco.languages.registerCompletionItemProvider('tcscript', {
+            monaco.languages.registerCompletionItemProvider('trusssketch', {
                 provideCompletionItems: function(model, position) {
                     const word = model.getWordUntilPosition(position);
                     const range = {
@@ -384,7 +384,7 @@ def keyPressed(key) {
                         endColumn: word.endColumn
                     };
                     return {
-                        suggestions: tcscriptCompletions.map(item => ({
+                        suggestions: trusssketchCompletions.map(item => ({
                             ...item,
                             range: range
                         }))
@@ -398,8 +398,8 @@ def keyPressed(key) {
 
             editor = monaco.editor.create(document.getElementById('editor'), {
                 value: initialCode,
-                language: 'tcscript',
-                theme: 'tcscript-dark',
+                language: 'trusssketch',
+                theme: 'trusssketch-dark',
                 fontSize: 14,
                 fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
                 minimap: { enabled: false },
@@ -435,14 +435,14 @@ def keyPressed(key) {
         // Clear error markers from editor
         function clearErrorMarkers() {
             if (editor && monaco) {
-                monaco.editor.setModelMarkers(editor.getModel(), 'tcscript', []);
+                monaco.editor.setModelMarkers(editor.getModel(), 'trusssketch', []);
             }
         }
 
         // Set error marker at specific line
         function setErrorMarker(line, column, message) {
             if (editor && monaco) {
-                monaco.editor.setModelMarkers(editor.getModel(), 'tcscript', [{
+                monaco.editor.setModelMarkers(editor.getModel(), 'trusssketch', [{
                     startLineNumber: line,
                     startColumn: column,
                     endLineNumber: line,

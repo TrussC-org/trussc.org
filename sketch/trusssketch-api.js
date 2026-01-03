@@ -1,11 +1,11 @@
-// tcScript API Definition
-// This is the single source of truth for all tcScript functions.
+// TrussSketch API Definition
+// This is the single source of truth for all TrussSketch functions.
 // Used by: autocomplete, reference page, REFERENCE.md generation
 //
 // AUTO-GENERATED from api-definition.yaml
 // Do not edit directly - edit api-definition.yaml instead
 
-const tcScriptAPI = {
+const TrussSketchAPI = {
     "categories": [
         {
             "name": "Lifecycle",
@@ -824,5 +824,5 @@ const tcScriptAPI = {
 
 // Export for different environments
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = tcScriptAPI;
+    module.exports = TrussSketchAPI;
 }
