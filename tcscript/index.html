@@ -236,6 +236,7 @@
         </div>
     </div>
 
+    <script src="tcscript-api.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
     <script>
         let editor;
@@ -340,82 +341,38 @@ def keyPressed(key) {
                 }
             });
 
-            // Register autocomplete provider
-            const tcscriptCompletions = [
-                // Lifecycle
-                { label: 'setup', kind: monaco.languages.CompletionItemKind.Function, insertText: 'setup() {\n\t$0\n}', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Called once at start' },
-                { label: 'update', kind: monaco.languages.CompletionItemKind.Function, insertText: 'update() {\n\t$0\n}', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Called every frame before draw' },
-                { label: 'draw', kind: monaco.languages.CompletionItemKind.Function, insertText: 'draw() {\n\t$0\n}', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Called every frame after update' },
-                // Events
-                { label: 'mousePressed', kind: monaco.languages.CompletionItemKind.Function, insertText: 'mousePressed(x, y, button) {\n\t$0\n}', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Mouse button pressed' },
-                { label: 'mouseReleased', kind: monaco.languages.CompletionItemKind.Function, insertText: 'mouseReleased(x, y, button) {\n\t$0\n}', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Mouse button released' },
-                { label: 'mouseMoved', kind: monaco.languages.CompletionItemKind.Function, insertText: 'mouseMoved(x, y) {\n\t$0\n}', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Mouse moved' },
-                { label: 'mouseDragged', kind: monaco.languages.CompletionItemKind.Function, insertText: 'mouseDragged(x, y, button) {\n\t$0\n}', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Mouse dragged' },
-                { label: 'keyPressed', kind: monaco.languages.CompletionItemKind.Function, insertText: 'keyPressed(key) {\n\t$0\n}', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Key pressed' },
-                { label: 'keyReleased', kind: monaco.languages.CompletionItemKind.Function, insertText: 'keyReleased(key) {\n\t$0\n}', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Key released' },
-                { label: 'windowResized', kind: monaco.languages.CompletionItemKind.Function, insertText: 'windowResized(width, height) {\n\t$0\n}', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Window resized' },
-                // Graphics - Color
-                { label: 'clear', kind: monaco.languages.CompletionItemKind.Function, insertText: 'clear(${1:0.0})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Clear background' },
-                { label: 'setColor', kind: monaco.languages.CompletionItemKind.Function, insertText: 'setColor(${1:1.0}, ${2:1.0}, ${3:1.0})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Set draw color (r, g, b)' },
-                // Graphics - Shapes
-                { label: 'drawRect', kind: monaco.languages.CompletionItemKind.Function, insertText: 'drawRect(${1:x}, ${2:y}, ${3:w}, ${4:h})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Draw rectangle' },
-                { label: 'drawCircle', kind: monaco.languages.CompletionItemKind.Function, insertText: 'drawCircle(${1:x}, ${2:y}, ${3:radius})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Draw circle' },
-                { label: 'drawEllipse', kind: monaco.languages.CompletionItemKind.Function, insertText: 'drawEllipse(${1:x}, ${2:y}, ${3:w}, ${4:h})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Draw ellipse' },
-                { label: 'drawLine', kind: monaco.languages.CompletionItemKind.Function, insertText: 'drawLine(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Draw line' },
-                { label: 'drawTriangle', kind: monaco.languages.CompletionItemKind.Function, insertText: 'drawTriangle(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2}, ${5:x3}, ${6:y3})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Draw triangle' },
-                { label: 'drawBitmapString', kind: monaco.languages.CompletionItemKind.Function, insertText: 'drawBitmapString(${1:"text"}, ${2:x}, ${3:y})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Draw text' },
-                // Graphics - Style
-                { label: 'fill', kind: monaco.languages.CompletionItemKind.Function, insertText: 'fill()', detail: 'Enable fill' },
-                { label: 'noFill', kind: monaco.languages.CompletionItemKind.Function, insertText: 'noFill()', detail: 'Disable fill' },
-                { label: 'stroke', kind: monaco.languages.CompletionItemKind.Function, insertText: 'stroke()', detail: 'Enable stroke' },
-                { label: 'noStroke', kind: monaco.languages.CompletionItemKind.Function, insertText: 'noStroke()', detail: 'Disable stroke' },
-                { label: 'setStrokeWeight', kind: monaco.languages.CompletionItemKind.Function, insertText: 'setStrokeWeight(${1:1.0})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Set stroke width' },
-                // Transform
-                { label: 'translate', kind: monaco.languages.CompletionItemKind.Function, insertText: 'translate(${1:x}, ${2:y})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Move origin' },
-                { label: 'rotate', kind: monaco.languages.CompletionItemKind.Function, insertText: 'rotate(${1:radians})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Rotate by radians' },
-                { label: 'rotateDeg', kind: monaco.languages.CompletionItemKind.Function, insertText: 'rotateDeg(${1:degrees})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Rotate by degrees' },
-                { label: 'scale', kind: monaco.languages.CompletionItemKind.Function, insertText: 'scale(${1:s})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Scale' },
-                { label: 'pushMatrix', kind: monaco.languages.CompletionItemKind.Function, insertText: 'pushMatrix()', detail: 'Save transform state' },
-                { label: 'popMatrix', kind: monaco.languages.CompletionItemKind.Function, insertText: 'popMatrix()', detail: 'Restore transform state' },
-                // Window & Input
-                { label: 'getWindowWidth', kind: monaco.languages.CompletionItemKind.Function, insertText: 'getWindowWidth()', detail: 'Get canvas width' },
-                { label: 'getWindowHeight', kind: monaco.languages.CompletionItemKind.Function, insertText: 'getWindowHeight()', detail: 'Get canvas height' },
-                { label: 'getMouseX', kind: monaco.languages.CompletionItemKind.Function, insertText: 'getMouseX()', detail: 'Get mouse X position' },
-                { label: 'getMouseY', kind: monaco.languages.CompletionItemKind.Function, insertText: 'getMouseY()', detail: 'Get mouse Y position' },
-                { label: 'isMousePressed', kind: monaco.languages.CompletionItemKind.Function, insertText: 'isMousePressed()', detail: 'Is mouse button pressed' },
-                // Time
-                { label: 'getElapsedTime', kind: monaco.languages.CompletionItemKind.Function, insertText: 'getElapsedTime()', detail: 'Seconds since start' },
-                { label: 'getDeltaTime', kind: monaco.languages.CompletionItemKind.Function, insertText: 'getDeltaTime()', detail: 'Seconds since last frame' },
-                { label: 'getFrameRate', kind: monaco.languages.CompletionItemKind.Function, insertText: 'getFrameRate()', detail: 'Current FPS' },
-                { label: 'getFrameCount', kind: monaco.languages.CompletionItemKind.Function, insertText: 'getFrameCount()', detail: 'Total frames rendered' },
-                // Math
-                { label: 'random', kind: monaco.languages.CompletionItemKind.Function, insertText: 'random(${1:min}, ${2:max})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Random float' },
-                { label: 'noise', kind: monaco.languages.CompletionItemKind.Function, insertText: 'noise(${1:x})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Perlin noise' },
-                { label: 'lerp', kind: monaco.languages.CompletionItemKind.Function, insertText: 'lerp(${1:a}, ${2:b}, ${3:t})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Linear interpolation' },
-                { label: 'clamp', kind: monaco.languages.CompletionItemKind.Function, insertText: 'clamp(${1:v}, ${2:min}, ${3:max})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Clamp value to range' },
-                { label: 'map', kind: monaco.languages.CompletionItemKind.Function, insertText: 'map(${1:v}, ${2:inMin}, ${3:inMax}, ${4:outMin}, ${5:outMax})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Map value between ranges' },
-                { label: 'sin', kind: monaco.languages.CompletionItemKind.Function, insertText: 'sin(${1:x})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Sine' },
-                { label: 'cos', kind: monaco.languages.CompletionItemKind.Function, insertText: 'cos(${1:x})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Cosine' },
-                { label: 'tan', kind: monaco.languages.CompletionItemKind.Function, insertText: 'tan(${1:x})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Tangent' },
-                { label: 'abs', kind: monaco.languages.CompletionItemKind.Function, insertText: 'abs(${1:x})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Absolute value' },
-                { label: 'sqrt', kind: monaco.languages.CompletionItemKind.Function, insertText: 'sqrt(${1:x})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Square root' },
-                { label: 'pow', kind: monaco.languages.CompletionItemKind.Function, insertText: 'pow(${1:x}, ${2:y})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Power (x^y)' },
-                { label: 'min', kind: monaco.languages.CompletionItemKind.Function, insertText: 'min(${1:a}, ${2:b})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Minimum of two values' },
-                { label: 'max', kind: monaco.languages.CompletionItemKind.Function, insertText: 'max(${1:a}, ${2:b})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Maximum of two values' },
-                { label: 'floor', kind: monaco.languages.CompletionItemKind.Function, insertText: 'floor(${1:x})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Round down' },
-                { label: 'ceil', kind: monaco.languages.CompletionItemKind.Function, insertText: 'ceil(${1:x})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Round up' },
-                { label: 'fmod', kind: monaco.languages.CompletionItemKind.Function, insertText: 'fmod(${1:x}, ${2:y})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Floating-point modulo' },
-                { label: 'deg2rad', kind: monaco.languages.CompletionItemKind.Function, insertText: 'deg2rad(${1:degrees})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Convert degrees to radians' },
-                { label: 'rad2deg', kind: monaco.languages.CompletionItemKind.Function, insertText: 'rad2deg(${1:radians})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Convert radians to degrees' },
-                // Utility
-                { label: 'logNotice', kind: monaco.languages.CompletionItemKind.Function, insertText: 'logNotice(${1:"message"})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Print to console' },
-                { label: 'to_string', kind: monaco.languages.CompletionItemKind.Function, insertText: 'to_string(${1:value})', insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet, detail: 'Convert to string' },
-                // Constants
-                { label: 'TAU', kind: monaco.languages.CompletionItemKind.Constant, insertText: 'TAU', detail: '6.283... (2*PI)' },
-                { label: 'HALF_TAU', kind: monaco.languages.CompletionItemKind.Constant, insertText: 'HALF_TAU', detail: '3.141... (PI)' },
-                { label: 'QUARTER_TAU', kind: monaco.languages.CompletionItemKind.Constant, insertText: 'QUARTER_TAU', detail: '1.570... (PI/2)' },
-                { label: 'PI', kind: monaco.languages.CompletionItemKind.Constant, insertText: 'PI', detail: '3.141...' },
-            ];
+            // Register autocomplete provider from tcscript-api.js
+            function buildCompletions() {
+                const completions = [];
+
+                // Add functions
+                for (const cat of tcScriptAPI.categories) {
+                    for (const fn of cat.functions) {
+                        completions.push({
+                            label: fn.name,
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            insertText: fn.snippet,
+                            insertTextRules: fn.snippet.includes('$') ?
+                                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet : undefined,
+                            detail: fn.desc
+                        });
+                    }
+                }
+
+                // Add constants
+                for (const c of tcScriptAPI.constants) {
+                    completions.push({
+                        label: c.name,
+                        kind: monaco.languages.CompletionItemKind.Constant,
+                        insertText: c.name,
+                        detail: `${c.value} - ${c.desc}`
+                    });
+                }
+
+                return completions;
+            }
+
+            const tcscriptCompletions = buildCompletions();
 
             monaco.languages.registerCompletionItemProvider('tcscript', {
                 provideCompletionItems: function(model, position) {

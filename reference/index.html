@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrussC API Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #569cd6;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        h1 a {
+            color: #569cd6;
+            text-decoration: none;
+        }
+
+        h1 a:hover {
+            text-decoration: underline;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .subtitle a {
+            color: #4ec9b0;
+        }
+
+        .nav-links {
+            margin-bottom: 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid #3c3c3c;
+        }
+
+        .nav-links a {
+            color: #9cdcfe;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-links a.active {
+            color: #4ec9b0;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: #4ec9b0;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 1px solid #3c3c3c;
+            padding-bottom: 5px;
+        }
+
+        .section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .func {
+            background: #252526;
+            padding: 10px 14px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 13px;
+        }
+
+        .func-signature {
+            color: #d4d4d4;
+        }
+
+        .func-return {
+            color: #4ec9b0;
+        }
+
+        .func-name {
+            color: #dcdcaa;
+        }
+
+        .func-params {
+            color: #9cdcfe;
+        }
+
+        .func-type {
+            color: #4ec9b0;
+        }
+
+        .func-desc {
+            color: #6a9955;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .func-of {
+            color: #808080;
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        .constants {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .const {
+            background: #252526;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 13px;
+            color: #b5cea8;
+        }
+
+        .example {
+            background: #252526;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.4;
+        }
+
+        .keyword { color: #c586c0; }
+        .function { color: #dcdcaa; }
+        .number { color: #b5cea8; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+        .type { color: #4ec9b0; }
+
+        @media (max-width: 600px) {
+            .section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1><a href="../">TrussC</a> API Reference</h1>
+    <p class="subtitle">C++ API reference. See also: <a href="../tcscript/reference/">tcScript Reference</a></p>
+
+    <div class="nav-links">
+        <a href="../">Home</a>
+        <a href="../examples/">Examples</a>
+        <a href="./" class="active">Reference</a>
+        <a href="../for-of-users.html">For oF Users</a>
+    </div>
+
+    <div id="content"></div>
+
+    <script src="../tcscript/tcscript-api.js"></script>
+    <script>
+        function renderReference() {
+            const content = document.getElementById('content');
+            let html = '';
+
+            // Render categories
+            for (const cat of tcScriptAPI.categories) {
+                // Skip lifecycle and events for C++ reference (these are class methods)
+                if (cat.name === 'Lifecycle' || cat.name === 'Events') {
+                    html += `<h2>${cat.name} (Override in tcApp)</h2>\n<div class="section">\n`;
+                } else {
+                    html += `<h2>${cat.name}</h2>\n<div class="section">\n`;
+                }
+
+                // Group by unique function name (for overloads)
+                const seen = new Set();
+                for (const fn of cat.functions) {
+                    const key = fn.name + '(' + fn.params + ')';
+                    if (seen.has(key)) continue;
+                    seen.add(key);
+
+                    // Build C++ signature from params
+                    let cppParams = fn.params;
+                    if (cppParams) {
+                        // Add float types to simple params
+                        cppParams = cppParams.split(', ').map(p => {
+                            if (p === 'text' || p === 'message' || p === 'format') return 'const string& ' + p;
+                            if (p === 'key' || p === 'button' || p === 'width' || p === 'height') return 'int ' + p;
+                            if (p === 'value') return 'T ' + p;
+                            return 'float ' + p;
+                        }).join(', ');
+                    }
+
+                    // Determine return type
+                    let returnType = 'void';
+                    if (fn.name.startsWith('get') || fn.name.startsWith('is')) {
+                        if (fn.name.includes('Width') || fn.name.includes('Height') ||
+                            fn.name.includes('Count') || fn.name.includes('Seconds') ||
+                            fn.name.includes('Minutes') || fn.name.includes('Hours') ||
+                            fn.name.includes('Year') || fn.name.includes('Month') ||
+                            fn.name.includes('Day') || fn.name.includes('Weekday')) {
+                            returnType = 'int';
+                        } else if (fn.name.includes('Millis') || fn.name.includes('Micros')) {
+                            returnType = 'int64_t';
+                        } else if (fn.name === 'getTimestampString') {
+                            returnType = 'string';
+                        } else if (fn.name === 'isMousePressed') {
+                            returnType = 'bool';
+                        } else {
+                            returnType = 'float';
+                        }
+                    } else if (['sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'atan2',
+                                'abs', 'sqrt', 'sq', 'pow', 'log', 'exp', 'min', 'max',
+                                'floor', 'ceil', 'round', 'fmod', 'sign', 'fract',
+                                'lerp', 'clamp', 'map', 'random', 'noise',
+                                'deg2rad', 'rad2deg', 'dist', 'distSquared'].includes(fn.name)) {
+                        returnType = 'float';
+                    } else if (fn.name === 'to_string') {
+                        returnType = 'string';
+                    }
+
+                    html += `<div class="func">`;
+                    html += `<div class="func-signature">`;
+                    html += `<span class="func-return">${returnType}</span> `;
+                    html += `<span class="func-name">${fn.name}</span>(`;
+                    if (cppParams) {
+                        html += `<span class="func-params">${cppParams}</span>`;
+                    }
+                    html += `)`;
+                    html += `</div>`;
+                    if (fn.desc) {
+                        html += `<div class="func-desc">// ${fn.desc}</div>`;
+                    }
+                    html += `</div>\n`;
+                }
+
+                html += `</div>\n`;
+            }
+
+            // Render constants
+            html += `<h2>Constants</h2>\n<div class="constants">\n`;
+            for (const c of tcScriptAPI.constants) {
+                html += `<div class="const">${c.name} = ${c.value}</div>\n`;
+            }
+            html += `</div>\n`;
+
+            content.innerHTML = html;
+        }
+
+        renderReference();
+    </script>
+</body>
+</html>

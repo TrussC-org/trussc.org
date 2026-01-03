@@ -127,111 +127,7 @@
     <h1><a href="../">tcScript</a> Quick Reference</h1>
     <p class="subtitle">All functions mapped from <a href="https://github.com/TrussC-org/TrussC">TrussC</a></p>
 
-    <h2>Lifecycle</h2>
-    <div class="section">
-        <div class="func"><span class="func-name">setup</span>()<div class="func-desc">Called once at start</div></div>
-        <div class="func"><span class="func-name">update</span>()<div class="func-desc">Called every frame before draw</div></div>
-        <div class="func"><span class="func-name">draw</span>()<div class="func-desc">Called every frame after update</div></div>
-    </div>
-
-    <h2>Events</h2>
-    <div class="section">
-        <div class="func"><span class="func-name">mousePressed</span>(<span class="func-params">x, y, button</span>)</div>
-        <div class="func"><span class="func-name">mouseReleased</span>(<span class="func-params">x, y, button</span>)</div>
-        <div class="func"><span class="func-name">mouseMoved</span>(<span class="func-params">x, y</span>)</div>
-        <div class="func"><span class="func-name">mouseDragged</span>(<span class="func-params">x, y, button</span>)</div>
-        <div class="func"><span class="func-name">keyPressed</span>(<span class="func-params">key</span>)</div>
-        <div class="func"><span class="func-name">keyReleased</span>(<span class="func-params">key</span>)</div>
-        <div class="func"><span class="func-name">windowResized</span>(<span class="func-params">width, height</span>)</div>
-    </div>
-
-    <h2>Graphics - Color</h2>
-    <div class="section">
-        <div class="func"><span class="func-name">clear</span>(<span class="func-params">gray</span>)</div>
-        <div class="func"><span class="func-name">clear</span>(<span class="func-params">r, g, b</span>)</div>
-        <div class="func"><span class="func-name">setColor</span>(<span class="func-params">gray</span>)</div>
-        <div class="func"><span class="func-name">setColor</span>(<span class="func-params">r, g, b</span>)</div>
-        <div class="func"><span class="func-name">setColor</span>(<span class="func-params">r, g, b, a</span>)</div>
-    </div>
-
-    <h2>Graphics - Shapes</h2>
-    <div class="section">
-        <div class="func"><span class="func-name">drawRect</span>(<span class="func-params">x, y, w, h</span>)</div>
-        <div class="func"><span class="func-name">drawCircle</span>(<span class="func-params">x, y, radius</span>)</div>
-        <div class="func"><span class="func-name">drawEllipse</span>(<span class="func-params">x, y, w, h</span>)</div>
-        <div class="func"><span class="func-name">drawLine</span>(<span class="func-params">x1, y1, x2, y2</span>)</div>
-        <div class="func"><span class="func-name">drawTriangle</span>(<span class="func-params">x1, y1, x2, y2, x3, y3</span>)</div>
-        <div class="func"><span class="func-name">drawBitmapString</span>(<span class="func-params">text, x, y</span>)</div>
-    </div>
-
-    <h2>Graphics - Style</h2>
-    <div class="section">
-        <div class="func"><span class="func-name">fill</span>()</div>
-        <div class="func"><span class="func-name">noFill</span>()</div>
-        <div class="func"><span class="func-name">stroke</span>()</div>
-        <div class="func"><span class="func-name">noStroke</span>()</div>
-        <div class="func"><span class="func-name">setStrokeWeight</span>(<span class="func-params">weight</span>)</div>
-    </div>
-
-    <h2>Transform</h2>
-    <div class="section">
-        <div class="func"><span class="func-name">translate</span>(<span class="func-params">x, y</span>)</div>
-        <div class="func"><span class="func-name">rotate</span>(<span class="func-params">radians</span>)</div>
-        <div class="func"><span class="func-name">rotateDeg</span>(<span class="func-params">degrees</span>)</div>
-        <div class="func"><span class="func-name">scale</span>(<span class="func-params">s</span>)</div>
-        <div class="func"><span class="func-name">scale</span>(<span class="func-params">sx, sy</span>)</div>
-        <div class="func"><span class="func-name">pushMatrix</span>()</div>
-        <div class="func"><span class="func-name">popMatrix</span>()</div>
-    </div>
-
-    <h2>Window & Input</h2>
-    <div class="section">
-        <div class="func"><span class="func-name">getWindowWidth</span>()</div>
-        <div class="func"><span class="func-name">getWindowHeight</span>()</div>
-        <div class="func"><span class="func-name">getMouseX</span>()</div>
-        <div class="func"><span class="func-name">getMouseY</span>()</div>
-        <div class="func"><span class="func-name">isMousePressed</span>()</div>
-    </div>
-
-    <h2>Time</h2>
-    <div class="section">
-        <div class="func"><span class="func-name">getElapsedTime</span>()<div class="func-desc">Seconds since start</div></div>
-        <div class="func"><span class="func-name">getDeltaTime</span>()<div class="func-desc">Seconds since last frame</div></div>
-        <div class="func"><span class="func-name">getFrameRate</span>()<div class="func-desc">Current FPS</div></div>
-        <div class="func"><span class="func-name">getFrameCount</span>()<div class="func-desc">Total frames rendered</div></div>
-    </div>
-
-    <h2>Math</h2>
-    <div class="section">
-        <div class="func"><span class="func-name">random</span>()<div class="func-desc">0.0 - 1.0</div></div>
-        <div class="func"><span class="func-name">random</span>(<span class="func-params">max</span>)</div>
-        <div class="func"><span class="func-name">random</span>(<span class="func-params">min, max</span>)</div>
-        <div class="func"><span class="func-name">noise</span>(<span class="func-params">x</span>)</div>
-        <div class="func"><span class="func-name">noise</span>(<span class="func-params">x, y</span>)</div>
-        <div class="func"><span class="func-name">lerp</span>(<span class="func-params">a, b, t</span>)</div>
-        <div class="func"><span class="func-name">clamp</span>(<span class="func-params">v, min, max</span>)</div>
-        <div class="func"><span class="func-name">map</span>(<span class="func-params">v, inMin, inMax, outMin, outMax</span>)</div>
-        <div class="func"><span class="func-name">sin</span>, <span class="func-name">cos</span>, <span class="func-name">tan</span></div>
-        <div class="func"><span class="func-name">abs</span>, <span class="func-name">sqrt</span>, <span class="func-name">pow</span></div>
-        <div class="func"><span class="func-name">min</span>, <span class="func-name">max</span>, <span class="func-name">floor</span>, <span class="func-name">ceil</span></div>
-        <div class="func"><span class="func-name">fmod</span>(<span class="func-params">x, y</span>)</div>
-        <div class="func"><span class="func-name">deg2rad</span>(<span class="func-params">deg</span>)</div>
-        <div class="func"><span class="func-name">rad2deg</span>(<span class="func-params">rad</span>)</div>
-    </div>
-
-    <h2>Utility</h2>
-    <div class="section">
-        <div class="func"><span class="func-name">logNotice</span>(<span class="func-params">message</span>)<div class="func-desc">Print to console</div></div>
-        <div class="func"><span class="func-name">to_string</span>(<span class="func-params">value</span>)<div class="func-desc">Convert to string</div></div>
-    </div>
-
-    <h2>Constants</h2>
-    <div class="constants">
-        <div class="const">TAU = 6.283...</div>
-        <div class="const">HALF_TAU = 3.141...</div>
-        <div class="const">QUARTER_TAU = 1.570...</div>
-        <div class="const">PI = 3.141...</div>
-    </div>
+    <div id="content"></div>
 
     <h2>Example</h2>
     <div class="example"><span class="keyword">global</span> angle = <span class="number">0.0</span>
@@ -258,5 +154,45 @@
     <span class="function">logNotice</span>(<span class="string">"Key: "</span> + <span class="function">to_string</span>(key))
 }</div>
 
+    <script src="../tcscript-api.js"></script>
+    <script>
+        function renderReference() {
+            const content = document.getElementById('content');
+            let html = '';
+
+            // Render categories
+            for (const cat of tcScriptAPI.categories) {
+                html += `<h2>${cat.name}</h2>\n<div class="section">\n`;
+
+                // Group by unique function name (for overloads)
+                const seen = new Set();
+                for (const fn of cat.functions) {
+                    const key = fn.name + '(' + fn.params + ')';
+                    if (seen.has(key)) continue;
+                    seen.add(key);
+
+                    const params = fn.params ? `<span class="func-params">${fn.params}</span>` : '';
+                    html += `<div class="func"><span class="func-name">${fn.name}</span>(${params})`;
+                    if (fn.desc) {
+                        html += `<div class="func-desc">${fn.desc}</div>`;
+                    }
+                    html += `</div>\n`;
+                }
+
+                html += `</div>\n`;
+            }
+
+            // Render constants
+            html += `<h2>Constants</h2>\n<div class="constants">\n`;
+            for (const c of tcScriptAPI.constants) {
+                html += `<div class="const">${c.name} = ${c.value}</div>\n`;
+            }
+            html += `</div>\n`;
+
+            content.innerHTML = html;
+        }
+
+        renderReference();
+    </script>
 </body>
 </html>
