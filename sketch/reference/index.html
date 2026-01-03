@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrussSketch Quick Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #569cd6;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        h1 a {
+            color: #569cd6;
+            text-decoration: none;
+        }
+
+        h1 a:hover {
+            text-decoration: underline;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .subtitle a {
+            color: #4ec9b0;
+        }
+
+        h2 {
+            color: #4ec9b0;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 1px solid #3c3c3c;
+            padding-bottom: 5px;
+        }
+
+        .section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .func {
+            background: #252526;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 13px;
+        }
+
+        .func-name {
+            color: #dcdcaa;
+        }
+
+        .func-params {
+            color: #9cdcfe;
+        }
+
+        .func-desc {
+            color: #6a9955;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .constants {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .const {
+            background: #252526;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 13px;
+            color: #b5cea8;
+        }
+
+        .example {
+            background: #252526;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.4;
+        }
+
+        .keyword { color: #c586c0; }
+        .function { color: #dcdcaa; }
+        .number { color: #b5cea8; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+
+        @media (max-width: 600px) {
+            .section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1><a href="../">TrussSketch</a> Quick Reference</h1>
+    <p class="subtitle">All functions mapped from <a href="https://github.com/TrussC-org/TrussC">TrussC</a></p>
+
+    <div id="content"></div>
+
+    <h2>Example</h2>
+    <div class="example"><span class="keyword">global</span> angle = <span class="number">0.0</span>
+
+<span class="keyword">def</span> <span class="function">setup</span>() {
+    <span class="function">logNotice</span>(<span class="string">"Starting!"</span>)
+}
+
+<span class="keyword">def</span> <span class="function">update</span>() {
+    angle = angle + <span class="function">getDeltaTime</span>()
+}
+
+<span class="keyword">def</span> <span class="function">draw</span>() {
+    <span class="function">clear</span>(<span class="number">0.1</span>)
+    <span class="function">pushMatrix</span>()
+    <span class="function">translate</span>(<span class="function">getWindowWidth</span>() / <span class="number">2.0</span>, <span class="function">getWindowHeight</span>() / <span class="number">2.0</span>)
+    <span class="function">rotate</span>(angle)
+    <span class="function">setColor</span>(<span class="number">1.0</span>, <span class="number">0.5</span>, <span class="number">0.2</span>)
+    <span class="function">drawRect</span>(-<span class="number">50.0</span>, -<span class="number">50.0</span>, <span class="number">100.0</span>, <span class="number">100.0</span>)
+    <span class="function">popMatrix</span>()
+}
+
+<span class="keyword">def</span> <span class="function">keyPressed</span>(key) {
+    <span class="function">logNotice</span>(<span class="string">"Key: "</span> + <span class="function">to_string</span>(key))
+}</div>
+
+    <script src="../tcscript-api.js"></script>
+    <script>
+        function renderReference() {
+            const content = document.getElementById('content');
+            let html = '';
+
+            // Render categories
+            for (const cat of tcScriptAPI.categories) {
+                html += `<h2>${cat.name}</h2>\n<div class="section">\n`;
+
+                // Group by unique function name (for overloads)
+                const seen = new Set();
+                for (const fn of cat.functions) {
+                    const key = fn.name + '(' + fn.params + ')';
+                    if (seen.has(key)) continue;
+                    seen.add(key);
+
+                    const params = fn.params ? `<span class="func-params">${fn.params}</span>` : '';
+                    html += `<div class="func"><span class="func-name">${fn.name}</span>(${params})`;
+                    if (fn.desc) {
+                        html += `<div class="func-desc">${fn.desc}</div>`;
+                    }
+                    html += `</div>\n`;
+                }
+
+                html += `</div>\n`;
+            }
+
+            // Render constants
+            html += `<h2>Constants</h2>\n<div class="constants">\n`;
+            for (const c of tcScriptAPI.constants) {
+                html += `<div class="const">${c.name} = ${c.value}</div>\n`;
+            }
+            html += `</div>\n`;
+
+            content.innerHTML = html;
+        }
+
+        renderReference();
+    </script>
+</body>
+</html>

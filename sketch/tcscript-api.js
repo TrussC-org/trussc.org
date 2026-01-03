@@ -667,6 +667,123 @@ const tcScriptAPI = {
                     "snippet": "to_string(${1:value})"
                 }
             ]
+        },
+        {
+            "name": "Types - Vec2",
+            "functions": [
+                {
+                    "name": "Vec2",
+                    "params": "",
+                    "desc": "Create 2D vector",
+                    "snippet": "Vec2(${1:x}, ${2:y})"
+                },
+                {
+                    "name": "Vec2",
+                    "params": "x, y",
+                    "desc": "Create 2D vector",
+                    "snippet": "Vec2(${1:x}, ${2:y})"
+                },
+                {
+                    "name": "Vec2",
+                    "params": "v",
+                    "desc": "Create 2D vector",
+                    "snippet": "Vec2(${1:x}, ${2:y})"
+                },
+                {
+                    "name": "Vec2_fromAngle",
+                    "params": "radians",
+                    "desc": "Create Vec2 from angle",
+                    "snippet": "Vec2_fromAngle(${1:radians})"
+                },
+                {
+                    "name": "Vec2_fromAngle",
+                    "params": "radians, length",
+                    "desc": "Create Vec2 from angle",
+                    "snippet": "Vec2_fromAngle(${1:radians})"
+                }
+            ]
+        },
+        {
+            "name": "Types - Vec3",
+            "functions": [
+                {
+                    "name": "Vec3",
+                    "params": "",
+                    "desc": "Create 3D vector",
+                    "snippet": "Vec3(${1:x}, ${2:y}, ${3:z})"
+                },
+                {
+                    "name": "Vec3",
+                    "params": "x, y, z",
+                    "desc": "Create 3D vector",
+                    "snippet": "Vec3(${1:x}, ${2:y}, ${3:z})"
+                },
+                {
+                    "name": "Vec3",
+                    "params": "v",
+                    "desc": "Create 3D vector",
+                    "snippet": "Vec3(${1:x}, ${2:y}, ${3:z})"
+                }
+            ]
+        },
+        {
+            "name": "Types - Color",
+            "functions": [
+                {
+                    "name": "Color",
+                    "params": "",
+                    "desc": "Create color (0.0-1.0)",
+                    "snippet": "Color(${1:r}, ${2:g}, ${3:b})"
+                },
+                {
+                    "name": "Color",
+                    "params": "r, g, b",
+                    "desc": "Create color (0.0-1.0)",
+                    "snippet": "Color(${1:r}, ${2:g}, ${3:b})"
+                },
+                {
+                    "name": "Color",
+                    "params": "r, g, b, a",
+                    "desc": "Create color (0.0-1.0)",
+                    "snippet": "Color(${1:r}, ${2:g}, ${3:b})"
+                },
+                {
+                    "name": "Color_fromHSB",
+                    "params": "h, s, b",
+                    "desc": "Create Color from HSB",
+                    "snippet": "Color_fromHSB(${1:h}, ${2:s}, ${3:b})"
+                },
+                {
+                    "name": "Color_fromHSB",
+                    "params": "h, s, b, a",
+                    "desc": "Create Color from HSB",
+                    "snippet": "Color_fromHSB(${1:h}, ${2:s}, ${3:b})"
+                },
+                {
+                    "name": "Color_fromOKLCH",
+                    "params": "L, C, H",
+                    "desc": "Create Color from OKLCH",
+                    "snippet": "Color_fromOKLCH(${1:L}, ${2:C}, ${3:H})"
+                },
+                {
+                    "name": "Color_fromOKLCH",
+                    "params": "L, C, H, a",
+                    "desc": "Create Color from OKLCH",
+                    "snippet": "Color_fromOKLCH(${1:L}, ${2:C}, ${3:H})"
+                },
+                {
+                    "name": "Color_fromOKLab",
+                    "params": "L, a, b",
+                    "desc": "Create Color from OKLab",
+                    "snippet": "Color_fromOKLab(${1:L}, ${2:a}, ${3:b})"
+                },
+                {
+                    "name": "Color_fromOKLab",
+                    "params": "L, a, b, alpha",
+                    "desc": "Create Color from OKLab",
+                    "snippet": "Color_fromOKLab(${1:L}, ${2:a}, ${3:b})"
+                }
+            ]
         }
     ],
     "constants": [
