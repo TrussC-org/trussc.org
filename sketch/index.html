@@ -563,6 +563,8 @@ def keyPressed(key) {
             logToConsole('Running script...', 'notice');
 
             try {
+                // Resume engine if it was paused
+                Module.ccall('resumeEngine', null, [], []);
                 Module.ccall('updateScriptCode', null, ['string'], [code]);
 
                 // Check for script errors
@@ -584,7 +586,7 @@ def keyPressed(key) {
             }
         }
 
-        // Stop script (load empty script)
+        // Stop script (pause engine for power saving)
         function stopScript() {
             if (!Module || !Module.ccall) {
                 logToConsole('Engine not ready yet!', 'error');
@@ -592,11 +594,9 @@ def keyPressed(key) {
             }
 
             try {
-                // Load minimal script that clears screen and does nothing
-                const emptyScript = `def setup() {}\ndef update() {}\ndef draw() { clear(0.1) }`;
-                Module.ccall('updateScriptCode', null, ['string'], [emptyScript]);
+                Module.ccall('pauseEngine', null, [], []);
                 clearErrorMarkers();
-                logToConsole('Script stopped.', 'notice');
+                logToConsole('Engine paused.', 'notice');
                 // Clear running state
                 document.getElementById('runBtn').classList.remove('running');
                 document.getElementById('stopBtn').classList.remove('running');
