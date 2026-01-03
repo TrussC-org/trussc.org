@@ -274,6 +274,12 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: translateY(0); }
+            70% { opacity: 1; transform: translateY(-5px); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -296,7 +302,7 @@
             <!-- File controls -->
             <button class="btn" onclick="saveScript()">Save</button>
             <button class="btn" onclick="loadScript()">Load</button>
-            <button class="btn" onclick="shareScript()">Share</button>
+            <button class="btn" onclick="shareScript(event)">Share</button>
             <a href="reference/" class="btn btn-help" style="text-decoration:none;" title="API Reference">?</a>
         </div>
     </div>
@@ -684,16 +690,62 @@ def keyPressed(key) {
             input.click();
         }
 
-        // Share script via URL (LZString compressed)
-        function shareScript() {
+        // Show "Copied!" tooltip near cursor
+        function showCopiedTooltip(event) {
+            const tooltip = document.createElement('div');
+            tooltip.textContent = 'Copied!';
+            tooltip.style.cssText = `
+                position: fixed;
+                left: ${event.clientX + 10}px;
+                top: ${event.clientY - 10}px;
+                background: #2ea043;
+                color: white;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 12px;
+                pointer-events: none;
+                z-index: 10000;
+                animation: fadeOut 1s forwards;
+            `;
+            document.body.appendChild(tooltip);
+            setTimeout(() => tooltip.remove(), 1000);
+        }
+
+        // Share script via short URL (with fallback to long URL)
+        async function shareScript(event) {
             const code = editor.getValue();
             const compressed = LZString.compressToEncodedURIComponent(code);
+
+            // Try to create short URL first
+            try {
+                const response = await fetch('/api/shorten', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: compressed })
+                });
+
+                if (response.ok) {
+                    const { url } = await response.json();
+                    await navigator.clipboard.writeText(url);
+                    logToConsole('Short URL copied! ' + url, 'success');
+                    if (event) showCopiedTooltip(event);
+                    return;
+                } else {
+                    logToConsole('Shortener API error: ' + response.status, 'error');
+                }
+            } catch (e) {
+                logToConsole('Shortener error: ' + e.message, 'error');
+            }
+
+            // Fallback to long URL
             const url = window.location.origin + window.location.pathname + '#' + compressed;
-            navigator.clipboard.writeText(url).then(() => {
-                logToConsole('Share URL copied to clipboard! (' + compressed.length + ' chars)', 'success');
-            }).catch(() => {
+            try {
+                await navigator.clipboard.writeText(url);
+                logToConsole('Long URL copied (' + compressed.length + ' chars)', 'success');
+                if (event) showCopiedTooltip(event);
+            } catch (e) {
                 logToConsole('Share URL: ' + url, 'notice');
-            });
+            }
         }
 
         // Toggle fullscreen for canvas
