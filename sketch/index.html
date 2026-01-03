@@ -41,35 +41,109 @@
 
         .controls {
             display: flex;
-            gap: 8px;
+            gap: 6px;
+            align-items: center;
         }
 
+        .controls-spacer {
+            width: 16px;
+        }
+
+        /* Icon buttons (play, stop, fullscreen) */
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-icon:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-icon:active {
+            transform: scale(0.95);
+        }
+
+        .btn-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        .btn-play svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Stopped state (default) */
+        .btn-play {
+            background: #6e7681;
+        }
+
+        .btn-play:hover {
+            background: #848d97;
+        }
+
+        .btn-stop-icon {
+            background: #9e4a4a;
+        }
+
+        .btn-stop-icon:hover {
+            background: #b35a5a;
+        }
+
+        /* Running state */
+        .btn-play.running {
+            background: #2ea043;
+        }
+
+        .btn-play.running:hover {
+            background: #3fb950;
+        }
+
+        .btn-stop-icon.running {
+            background: #6e7681;
+        }
+
+        .btn-stop-icon.running:hover {
+            background: #848d97;
+        }
+
+        .btn-fullscreen {
+            background: #6e7681;
+        }
+
+        .btn-fullscreen:hover {
+            background: #848d97;
+        }
+
+        /* Text buttons (save, load, share, help) */
         .btn {
-            padding: 6px 16px;
+            padding: 6px 12px;
             border: none;
             border-radius: 4px;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             font-family: inherit;
             transition: background 0.2s;
+            background: #3c3c3c;
+            color: #cccccc;
         }
 
-        .btn-run {
-            background: #0e639c;
-            color: white;
+        .btn:hover {
+            background: #4a4a4a;
         }
 
-        .btn-run:hover {
-            background: #1177bb;
-        }
-
-        .btn-stop {
-            background: #5a5a5a;
-            color: white;
-        }
-
-        .btn-stop:hover {
-            background: #6a6a6a;
+        .btn-help {
+            padding: 6px 10px;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .main {
@@ -208,12 +282,22 @@
     <div class="header">
         <h1>Truss<span>Sketch</span></h1>
         <div class="controls">
-            <button class="btn btn-run" id="runBtn" onclick="runScript()">Run</button>
-            <button class="btn btn-stop" onclick="saveScript()">Save</button>
-            <button class="btn btn-stop" onclick="loadScript()">Load</button>
-            <button class="btn btn-stop" onclick="shareScript()">Share</button>
-            <button class="btn btn-stop" onclick="toggleFullscreen()">Fullscreen</button>
-            <a href="reference/" class="btn btn-stop" style="text-decoration:none;">Reference</a>
+            <!-- Playback controls -->
+            <button class="btn-icon btn-play" id="runBtn" onclick="runScript()" title="Run">
+                <svg viewBox="0 0 24 24"><polygon points="7,4 20,12 7,20" transform="translate(0.7,0)"/></svg>
+            </button>
+            <button class="btn-icon btn-stop-icon" id="stopBtn" onclick="stopScript()" title="Stop">
+                <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>
+            </button>
+            <button class="btn-icon btn-fullscreen" onclick="toggleFullscreen()" title="Fullscreen">
+                <svg viewBox="0 0 24 24"><path d="M2 2h7v2H4v5H2V2zm13 0h7v7h-2V4h-5V2zM2 15h2v5h5v2H2v-7zm18 0h2v7h-7v-2h5v-5z"/></svg>
+            </button>
+            <div class="controls-spacer"></div>
+            <!-- File controls -->
+            <button class="btn" onclick="saveScript()">Save</button>
+            <button class="btn" onclick="loadScript()">Load</button>
+            <button class="btn" onclick="shareScript()">Share</button>
+            <a href="reference/" class="btn btn-help" style="text-decoration:none;" title="API Reference">?</a>
         </div>
     </div>
 
@@ -491,7 +575,31 @@ def keyPressed(key) {
                     }
                 } else {
                     logToConsole('Script loaded successfully!', 'success');
+                    // Set running state
+                    document.getElementById('runBtn').classList.add('running');
+                    document.getElementById('stopBtn').classList.add('running');
                 }
+            } catch (e) {
+                logToConsole('Error: ' + e.message, 'error');
+            }
+        }
+
+        // Stop script (load empty script)
+        function stopScript() {
+            if (!Module || !Module.ccall) {
+                logToConsole('Engine not ready yet!', 'error');
+                return;
+            }
+
+            try {
+                // Load minimal script that clears screen and does nothing
+                const emptyScript = `def setup() {}\ndef update() {}\ndef draw() { clear(0.1) }`;
+                Module.ccall('updateScriptCode', null, ['string'], [emptyScript]);
+                clearErrorMarkers();
+                logToConsole('Script stopped.', 'notice');
+                // Clear running state
+                document.getElementById('runBtn').classList.remove('running');
+                document.getElementById('stopBtn').classList.remove('running');
             } catch (e) {
                 logToConsole('Error: ' + e.message, 'error');
             }
