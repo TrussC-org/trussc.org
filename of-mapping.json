@@ -11,79 +11,92 @@
           "of": "ofGetWidth",
           "tc": "getWindowWidth()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetHeight",
           "tc": "getWindowHeight()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetWindowSize",
           "tc": "getWindowSize()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofExit",
           "tc": "requestExitApp()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSystemLoadDialog",
           "tc": "loadDialog(title, message, defaultPath, folderSelection)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSystemSaveDialog",
           "tc": "saveDialog(title, message, defaultPath, defaultName)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSystemAlertDialog",
           "tc": "alertDialog(title, message)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetMouseX",
           "tc": "getMouseX()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetMouseY",
           "tc": "getMouseY()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetMousePressed",
           "tc": "isMousePressed()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetKeyPressed",
           "tc": "isKeyPressed(key)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofShowCursor",
           "tc": "showCursor()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofHideCursor",
           "tc": "hideCursor()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         }
       ]
     },
@@ -91,139 +104,162 @@
       "id": "graphics",
       "name": "Graphics",
       "name_ja": "グラフィックス",
+      "name_ko": "그래픽스",
       "order": 2,
       "mappings": [
         {
           "of": "ofClear / ofBackground",
           "tc": "clear(gray)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSetColor",
           "tc": "setColor(gray)",
           "notes": "Range 0-1 instead of 0-255",
-          "notes_ja": "Range 0-1 instead of 0-255"
+          "notes_ja": "Range 0-1 instead of 0-255",
+          "notes_ko": ""
         },
         {
           "of": "ofDrawRectangle",
           "tc": "drawRect(x, y, w, h)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDrawRectRounded",
           "tc": "drawRectRounded(x, y, w, h, radius)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDrawCircle",
           "tc": "drawCircle(x, y, radius)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDrawEllipse",
           "tc": "drawEllipse(x, y, w, h)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDrawLine",
           "tc": "drawLine(x1, y1, x2, y2)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDrawTriangle",
           "tc": "drawTriangle(x1, y1, x2, y2, x3, y3)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDrawBox",
           "tc": "drawBox(size)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDrawSphere",
           "tc": "drawSphere(radius)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDrawCone",
           "tc": "drawCone(radius, height)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofBeginShape",
           "tc": "beginShape()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofVertex",
           "tc": "vertex(x, y)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofEndShape",
           "tc": "endShape(close)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDrawBitmapString",
           "tc": "drawBitmapString(text, x, y)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSetFrameRate",
           "tc": "setFps(fps)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofFill",
           "tc": "fill()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofNoFill",
           "tc": "noFill()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSetLineWidth",
           "tc": "setStrokeWeight(weight)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSetCircleResolution",
           "tc": "setCircleResolution(resolution)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofPushStyle",
           "tc": "pushStyle()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofPopStyle",
           "tc": "popStyle()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         }
       ]
     },
@@ -231,43 +267,50 @@
       "id": "transform",
       "name": "Transform",
       "name_ja": "変換",
+      "name_ko": "좌표변환",
       "order": 3,
       "mappings": [
         {
           "of": "ofTranslate",
           "tc": "translate(x, y)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofRotateRad",
           "tc": "rotate(radians)",
           "notes": "Always radians (not degrees like oF default)",
-          "notes_ja": "Always radians (not degrees like oF default)"
+          "notes_ja": "Always radians (not degrees like oF default)",
+          "notes_ko": ""
         },
         {
           "of": "ofRotateDeg",
           "tc": "rotateDeg(degrees)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofScale",
           "tc": "scale(s)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofPushMatrix",
           "tc": "pushMatrix()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofPopMatrix",
           "tc": "popMatrix()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         }
       ]
     },
@@ -275,97 +318,113 @@
       "id": "math",
       "name": "Math",
       "name_ja": "수학",
+      "name_ko": "수학",
       "order": 4,
       "mappings": [
         {
           "of": "ofRandom",
           "tc": "random()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSeedRandom",
           "tc": "randomSeed(seed)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofNoise",
           "tc": "noise(x)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSignedNoise",
           "tc": "signedNoise(x)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofLerp",
           "tc": "lerp(a, b, t)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofClamp",
           "tc": "clamp(v, min, max)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofMap",
           "tc": "remap(v, inMin, inMax, outMin, outMax)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDegToRad",
           "tc": "deg2rad(degrees)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofRadToDeg",
           "tc": "rad2deg(radians)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSign",
           "tc": "sign(x)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofWrap",
           "tc": "wrap(value, min, max)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofAngleDifferenceRadians",
           "tc": "angleDifference(angle1, angle2)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofAngleDifferenceDegrees",
           "tc": "angleDifferenceDeg(deg1, deg2)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDist",
           "tc": "dist(x1, y1, x2, y2)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofDistSquared",
           "tc": "distSquared(x1, y1, x2, y2)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         }
       ]
     },
@@ -373,25 +432,29 @@
       "id": "font",
       "name": "Font",
       "name_ja": "フォント",
+      "name_ko": "서체",
       "order": 7.5,
       "mappings": [
         {
           "of": "ofTrueTypeFont",
           "tc": "Font",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "font.load(\"font.ttf\", size)",
           "tc": "font.load(\"font.ttf\", size)",
           "notes": "Same",
-          "notes_ja": "Same"
+          "notes_ja": "Same",
+          "notes_ko": ""
         },
         {
           "of": "font.drawString(text, x, y)",
           "tc": "font.drawString(text, x, y)",
           "notes": "Same",
-          "notes_ja": "Same"
+          "notes_ja": "Same",
+          "notes_ko": ""
         }
       ]
     },
@@ -399,19 +462,22 @@
       "id": "3d-primitives",
       "name": "3D Primitives",
       "name_ja": "3Dプリミティブ",
+      "name_ko": "3D Primitives",
       "order": 11,
       "mappings": [
         {
           "of": "ofSetupScreenPerspective",
           "tc": "setupScreenPerspective()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSetupScreenOrtho",
           "tc": "setupScreenOrtho()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         }
       ]
     },
@@ -419,37 +485,43 @@
       "id": "video",
       "name": "Video",
       "name_ja": "ビデオ",
+      "name_ko": "비디오",
       "order": 13.5,
       "mappings": [
         {
           "of": "ofVideoGrabber",
           "tc": "VideoGrabber",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "grabber.setup(w, h)",
           "tc": "grabber.setup(w, h)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "grabber.update()",
           "tc": "grabber.update()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "grabber.draw(x, y)",
           "tc": "grabber.draw(x, y)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "grabber.isFrameNew()",
           "tc": "grabber.isFrameNew()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         }
       ]
     },
@@ -457,103 +529,120 @@
       "id": "time",
       "name": "Time",
       "name_ja": "時間",
+      "name_ko": "시간",
       "order": 16,
       "mappings": [
         {
           "of": "ofGetLastFrameTime",
           "tc": "getDeltaTime()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetFrameRate",
           "tc": "getFrameRate()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetFrameNum",
           "tc": "getFrameCount()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetElapsedTimef",
           "tc": "getElapsedTimef()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetElapsedTimeMillis",
           "tc": "getElapsedTimeMillis()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetElapsedTimeMicros",
           "tc": "getElapsedTimeMicros()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofResetElapsedTimeCounter",
           "tc": "resetElapsedTimeCounter()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetSystemTimeMillis",
           "tc": "getSystemTimeMillis()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetTimestampString",
           "tc": "getTimestampString()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetSeconds",
           "tc": "getSeconds()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetMinutes",
           "tc": "getMinutes()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetHours",
           "tc": "getHours()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetYear",
           "tc": "getYear()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetMonth",
           "tc": "getMonth()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetDay",
           "tc": "getDay()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofGetWeekday",
           "tc": "getWeekday()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         }
       ]
     },
@@ -561,61 +650,71 @@
       "id": "utility",
       "name": "Utility",
       "name_ja": "ユーティリティ",
+      "name_ko": "유틸리티",
       "order": 17,
       "mappings": [
         {
           "of": "ofLog",
           "tc": "logNotice(message)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofToString",
           "tc": "toString(value)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofToInt",
           "tc": "toInt(str)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofToFloat",
           "tc": "toFloat(str)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSplitString",
           "tc": "splitString(source, delimiter)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofJoinString",
           "tc": "joinString(elements, delimiter)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofStringReplace",
           "tc": "stringReplace(input, search, replace)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofToLower",
           "tc": "toLower(src)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofToUpper",
           "tc": "toUpper(src)",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         }
       ]
     },
@@ -623,13 +722,15 @@
       "id": "gui",
       "name": "GUI",
       "name_ja": "GUI",
+      "name_ko": "GUI",
       "order": 18,
       "mappings": [
         {
           "of": "ofxGui / ofxImGui",
           "tc": "ImGui (built-in)",
           "notes": "Included by default",
-          "notes_ja": "Included by default"
+          "notes_ja": "Included by default",
+          "notes_ko": ""
         }
       ]
     },
@@ -637,31 +738,36 @@
       "id": "io",
       "name": "I/O",
       "name_ja": "I/O",
+      "name_ko": "I/O",
       "order": 19,
       "mappings": [
         {
           "of": "ofSystemLoadDialog()",
           "tc": "systemLoadDialog()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofSystemSaveDialog()",
           "tc": "systemSaveDialog()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofLoadJson(path)",
           "tc": "loadJson(path)",
           "notes": "nlohmann/json",
-          "notes_ja": "nlohmann/json"
+          "notes_ja": "nlohmann/json",
+          "notes_ko": ""
         },
         {
           "of": "-",
           "tc": "loadXml(path)",
           "notes": "pugixml",
-          "notes_ja": "pugixml"
+          "notes_ja": "pugixml",
+          "notes_ko": ""
         }
       ]
     },
@@ -669,31 +775,36 @@
       "id": "network",
       "name": "Network",
       "name_ja": "ネットワーク",
+      "name_ko": "네트워크",
       "order": 20,
       "mappings": [
         {
           "of": "ofxTCPClient",
           "tc": "TcpClient",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofxTCPServer",
           "tc": "TcpServer",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofxUDPManager",
           "tc": "UdpSocket",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofxOsc",
           "tc": "OscReceiver / OscSender",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         }
       ]
     },
@@ -701,25 +812,29 @@
       "id": "log",
       "name": "Log",
       "name_ja": "ログ",
+      "name_ko": "로그",
       "order": 21,
       "mappings": [
         {
           "of": "ofLog()",
           "tc": "logNotice()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofLogWarning()",
           "tc": "logWarning()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "ofLogError()",
           "tc": "logError()",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         }
       ]
     },
@@ -727,19 +842,22 @@
       "id": "thread",
       "name": "Thread",
       "name_ja": "スレッド",
+      "name_ko": "스레드",
       "order": 22,
       "mappings": [
         {
           "of": "ofThread",
           "tc": "std::thread + MainThreadRunner",
           "notes": "Safe sync",
-          "notes_ja": "Safe sync"
+          "notes_ja": "Safe sync",
+          "notes_ko": ""
         },
         {
           "of": "-",
           "tc": "MainThreadRunner::run(func)",
           "notes": "Execute on main thread",
-          "notes_ja": "Execute on main thread"
+          "notes_ja": "Execute on main thread",
+          "notes_ko": ""
         }
       ]
     },
@@ -747,31 +865,36 @@
       "id": "serial",
       "name": "Serial",
       "name_ja": "シリアル",
+      "name_ko": "시리얼통신",
       "order": 23,
       "mappings": [
         {
           "of": "ofSerial",
           "tc": "Serial",
           "notes": "",
-          "notes_ja": ""
+          "notes_ja": "",
+          "notes_ko": ""
         },
         {
           "of": "serial.setup(port, baud)",
           "tc": "serial.setup(port, baud)",
           "notes": "Same",
-          "notes_ja": "Same"
+          "notes_ja": "Same",
+          "notes_ko": ""
         },
         {
           "of": "serial.readBytes(...)",
           "tc": "serial.readBytes(...)",
           "notes": "Same",
-          "notes_ja": "Same"
+          "notes_ja": "Same",
+          "notes_ko": ""
         },
         {
           "of": "serial.writeBytes(...)",
           "tc": "serial.writeBytes(...)",
           "notes": "Same",
-          "notes_ja": "Same"
+          "notes_ja": "Same",
+          "notes_ko": ""
         }
       ]
     }
