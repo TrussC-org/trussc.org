@@ -4,6 +4,7 @@
       "id": "app",
       "name": "App Structure",
       "name_ja": "アプリ構造",
+      "name_ko": "앱 구조",
       "order": 1,
       "mappings": [
         {
@@ -273,7 +274,7 @@
     {
       "id": "math",
       "name": "Math",
-      "name_ja": "数学",
+      "name_ja": "수학",
       "order": 4,
       "mappings": [
         {

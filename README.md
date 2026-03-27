@@ -20,5 +20,6 @@ open http://localhost:8000
 
 - `index.html` - Main page (EN)
 - `ja/` - Japanese pages
+- `ko/` - Korean pages
 - `examples/` - Interactive WASM examples
 - `assets/` - Images and logos

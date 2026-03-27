@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrussC - Thin, Modern, and Native Creative Coding</title>
     <link rel="icon" type="image/png" href="/favicon.png">
-    <meta name="description" content="TrussC is a lightweight creative coding framework optimized for modern GPUs. Inspired by openFrameworks, built for today's hardware.">
+    <meta name="description" content="TrussC 는 GPU 네이티브 시대에 최적화된 경량 크리에이티브 코딩 프레임워크입니다. 오픈프레임웍스의 정신을 계승하면서 동시에 현대의 하드웨어에 최적화 되어있습니다.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -17,25 +17,25 @@
         <div class="nav-container">
             <a href="#" class="nav-logo">
                 <!-- <span class="logo-text">Truss<span class="logo-c">C</span></span> -->
-                <img src="assets/images/logo-navigator.svg" alt="TrussC" class="logo-img">
+                <img src="../assets/images/logo-navigator.svg" alt="TrussC" class="logo-img">
             </a>
-            <button class="nav-toggle" aria-label="Open menu">
+            <button class="nav-toggle" aria-label="メニューを開く">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <ul class="nav-links">
-                <li><a href="reference/">Reference</a></li>
-                <li><a href="examples/">Examples</a></li>
-                <li><a href="for-of-users.html">For oF Users</a></li>
-                <li><a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">Ask AI</a></li>
-                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED.md" class="nav-cta" target="_blank" rel="noopener">Get Started</a></li>
+                <li><a href="../reference/">레퍼런스</a></li>
+                <li><a href="../examples/">예제</a></li>
+                <li><a href="for-of-users.html">oF사용자에게</a></li>
+                <li><a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">AI에게 물어보기</a></li>
+                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED_jp.md" class="nav-cta" target="_blank" rel="noopener">시작하기</a></li>
                 <li class="lang-dropdown">
                     <button class="nav-lang" onclick="this.parentElement.classList.toggle('open')">🌐 ▾</button>
                     <ul class="lang-menu">
-                        <li><a href="/" class="active">EN</a></li>
+                        <li><a href="/">EN</a></li>
                         <li><a href="/ja/">日本語</a></li>
-                        <li><a href="/ko/">한국어</a></li>
+                        <li><a href="/ko/" class="active">한국어</a></li>
                     </ul>
                 </li>
             </ul>
@@ -48,17 +48,17 @@
             <div class="hero-grid"></div>
         </div>
         <div class="container hero-content">
-            <p class="hero-label">Creative Coding Framework for C++</p>
+            <p class="hero-label">Creative Coding Framework for C++ <span class="hero-reading">/ TrussC</span></p>
             <h1 class="hero-title">
-                <!-- <span class="hero-title-main">Truss<span class="logo-c"><span class="typing-text">C</span><span class="typing-cursor"></span></span></span> -->
-                <img src="assets/images/logo-title.svg" alt="TrussC" class="logo-hero-img">
+                <!-- <span class="hero-title-main">Truss<span class="logo-c">C</span></span> -->
+                <img src="../assets/images/logo-title.svg" alt="TrussC" class="logo-hero-img">
             </h1>
             <p class="hero-description">
-                Post-OpenGL Creative Coding.<br class="hero-br">
-                Built on sokol.
+                GPU 네이티브 크리에이티브 코딩.<br class="hero-br">
+                sokol 기반.
             </p>
             <div class="hero-actions">
-                <a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED.md" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
+                <a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED_jp.md" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
                 <a href="https://github.com/TrussC-org/TrussC" class="btn btn-secondary" target="_blank" rel="noopener">
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
@@ -78,7 +78,7 @@
     <section id="code" class="section code-section">
         <div class="container">
             <h2 class="section-title">Simple & Intuitive</h2>
-            <p class="section-subtitle">One line of code, instant visuals. The magic remains.</p>
+            <p class="section-subtitle">짧은 코드, 즉각적인 비주얼.</p>
 
             <div class="code-tabs">
                 <button class="code-tab active" data-tab="app">tcApp.cpp</button>
@@ -89,7 +89,7 @@
                 <div class="code-block active" id="code-app">
                     <div class="code-header">
                         <span class="code-filename">tcApp.cpp</span>
-                        <button class="code-copy" aria-label="Copy code">
+                        <button class="code-copy" aria-label="코드복사">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -99,10 +99,10 @@
 <pre><code><span class="code-preprocessor">#include</span> <span class="code-string">"tcApp.h"</span>
 
 <span class="code-keyword">void</span> tcApp::<span class="code-function">setup</span>() {
-    <span class="code-comment">// Set loop mode</span>
+    <span class="code-comment">// 반복 모드 설정</span>
     setLoopMode(LoopMode::Game);
 
-    <span class="code-comment">// Load an image</span>
+    <span class="code-comment">// 이미지 로드</span>
     image = make_shared&lt;Texture&gt;(<span class="code-string">"test.png"</span>);
 }
 
@@ -124,7 +124,7 @@
                 <div class="code-block" id="code-main">
                     <div class="code-header">
                         <span class="code-filename">main.cpp</span>
-                        <button class="code-copy" aria-label="Copy code">
+                        <button class="code-copy" aria-label="코드복사">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -134,11 +134,11 @@
 <pre><code><span class="code-preprocessor">#include</span> <span class="code-string">"TrussC.h"</span>
 <span class="code-preprocessor">#include</span> <span class="code-string">"tcApp.h"</span>
 
-<span class="code-comment">// Define backend implementation</span>
+<span class="code-comment">// 백엔드 구현 정의</span>
 <span class="code-preprocessor">#define</span> SOKOL_IMPL
 <span class="code-preprocessor">#include</span> <span class="code-string">"sokol_app.h"</span>
 
-<span class="code-comment">// That's it!</span>
+<span class="code-comment">// 이것으로 끝！</span>
 <span class="code-function">TC_MAIN</span>(tcApp)</code></pre>
                 </div>
             </div>
@@ -149,7 +149,7 @@
     <section id="design" class="section features">
         <div class="container">
             <h2 class="section-title">Design</h2>
-            <p class="section-subtitle">Concrete choices, not abstract principles</p>
+            <p class="section-subtitle">추상적인 원칙보다는 구체적인 선택을.</p>
 
             <div class="features-grid">
                 <div class="feature-card">
@@ -160,10 +160,10 @@
                             <polyline points="2 12 12 17 22 12"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Modern Graphics</h3>
+                    <h3 class="feature-title">모던 그래픽</h3>
                     <p class="feature-description">
-                        sokol_gfx powers Metal, DX11, and OpenGL.
-                        WebGPU on the web.
+                        sokol_gfx은 Metal, DX12, Vulkan을 기반으로 구동됩니다.
+                        OpenGL의존성이 없습니다.
                     </p>
                 </div>
 
@@ -174,10 +174,10 @@
                             <path d="M9 12l2 2 4-4"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">GPL-Free</h3>
+                    <h3 class="feature-title">GPL 프리</h3>
                     <p class="feature-description">
-                        MIT / zlib / Public Domain only.
-                        No FFmpeg—video uses AVFoundation & Media Foundation.
+                        MIT / zlib / Public Domain 라이선스만으로 구성되어있습니다.
+                        FFmpeg는 필요하지 않습니다. 동영상은 AVFoundation 과 Media Foundation을 사용합니다.
                     </p>
                 </div>
 
@@ -189,9 +189,9 @@
                             <line x1="12" y1="17" x2="12" y2="21"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Cross-Platform</h3>
+                    <h3 class="feature-title">크로스플랫폼</h3>
                     <p class="feature-description">
-                        macOS, Windows, Linux, and Web. iOS planned.
+                        macOS, Windows, Linux 그리고 Web에서 구동됩니다. iOS는 아직 지원 예정입니다.
                     </p>
                 </div>
 
@@ -202,8 +202,8 @@
     <!-- Friendly Section -->
     <section id="friendly" class="section features">
         <div class="container">
-            <h2 class="section-title">Friendly</h2>
-            <p class="section-subtitle">Tools and resources to help you get started</p>
+            <h2 class="section-title">간단함</h2>
+            <p class="section-subtitle">시작을 도와주는 도구들과 자원들</p>
 
             <div class="features-grid">
                 <div class="feature-card">
@@ -212,10 +212,10 @@
                             <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Project Generator</h3>
+                    <h3 class="feature-title">프로젝트 생성기</h3>
                     <p class="feature-description">
-                        GUI tool to create new projects and manage addons.
-                        No command line required.
+                        GUI 도구로 새 프로젝트를 생성하거나 애드온을 관리할 수 있습니다.
+                        명령어 도구가 필요하지 않습니다.
                     </p>
                 </div>
 
@@ -225,10 +225,10 @@
                             <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Ask AI</h3>
+                    <h3 class="feature-title">AI에게 물어보세요</h3>
                     <p class="feature-description">
-                        Got questions? Our AI assistant knows TrussC inside and out.
-                        <a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">Try it →</a>
+                        질문이 있다면 TrussC 어시스턴스에게 물어보세요. 
+                        <a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">코드생성도 해줍니다 →</a>
                     </p>
                 </div>
 
@@ -241,10 +241,10 @@
                             <rect x="3" y="14" width="7" height="7"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">50+ Examples</h3>
+                    <h3 class="feature-title">50개 이상의 예제들</h3>
                     <p class="feature-description">
-                        Graphics, sound, video, networking, and more.
-                        <a href="examples/">Run them in your browser →</a>
+                        그래픽, 사운드, 동영상, 네크워크.. 등.
+                        <a href="../examples/">웹 브라우저에서 둘러보세요 →</a>
                     </p>
                 </div>
 
@@ -256,77 +256,63 @@
     <section id="tech" class="section tech-section">
         <div class="container">
             <h2 class="section-title">Tech Stack</h2>
-            <p class="section-subtitle">A hybrid of custom implementations and high-quality lightweight libraries</p>
+            <p class="section-subtitle">커스텀 구현된 코드와 고품질의 경량 라이브러리의 조합</p>
 
             <div class="tech-grid">
                 <div class="tech-card">
                     <div class="tech-category">Core</div>
                     <h3 class="tech-name">sokol_app</h3>
-                    <p class="tech-desc">Window, input & context management</p>
+                    <p class="tech-desc">창, 입력, 그리고 컨텍스트 관리</p>
                     <span class="tech-license">zlib</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Graphics</div>
                     <h3 class="tech-name">sokol_gfx</h3>
-                    <p class="tech-desc">Metal / DX11 / OpenGL / WebGPU backend</p>
+                    <p class="tech-desc">Metal / DX12 / Vulkan 백엔드</p>
                     <span class="tech-license">zlib</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Scene</div>
                     <h3 class="tech-name">Node System</h3>
-                    <p class="tech-desc">Scene graph & event propagation</p>
-                    <span class="tech-license">Custom</span>
+                    <p class="tech-desc">씬 그래프와 이벤트 전파</p>
+                    <span class="tech-license">커스텀 구현</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Math</div>
                     <h3 class="tech-name">C++20 Template</h3>
-                    <p class="tech-desc">Vector & matrix operations</p>
+                    <p class="tech-desc">벡터 및 행렬 연산</p>
                     <span class="tech-license">Public Domain</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Image</div>
                     <h3 class="tech-name">stb_image</h3>
-                    <p class="tech-desc">Image loading & saving</p>
+                    <p class="tech-desc">이미지 로드, 저장</p>
                     <span class="tech-license">Public Domain</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Font</div>
                     <h3 class="tech-name">stb_truetype</h3>
-                    <p class="tech-desc">Font rendering</p>
+                    <p class="tech-desc">폰트 렌더링</p>
                     <span class="tech-license">Public Domain</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Audio</div>
-                    <h3 class="tech-name">miniaudio + dr_libs</h3>
-                    <p class="tech-desc">Audio I/O & file playback</p>
-                    <span class="tech-license">PD / MIT-0</span>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-category">GUI</div>
-                    <h3 class="tech-name">Dear ImGui</h3>
-                    <p class="tech-desc">Immediate mode GUI</p>
-                    <span class="tech-license">MIT</span>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-category">Network</div>
-                    <h3 class="tech-name">cpp-httplib</h3>
-                    <p class="tech-desc">HTTP client & server</p>
-                    <span class="tech-license">MIT</span>
+                    <h3 class="tech-name">sokol_audio + dr_libs</h3>
+                    <p class="tech-desc">오디오 입출력 및 파일 재생</p>
+                    <span class="tech-license">zlib / PD</span>
                 </div>
 
                 <div class="tech-card">
                     <div class="tech-category">Video</div>
                     <h3 class="tech-name">Native Wrapper</h3>
                     <p class="tech-desc">AVFoundation / Media Foundation</p>
-                    <span class="tech-license">Custom</span>
+                    <span class="tech-license">커스텀 구현</span>
                 </div>
             </div>
         </div>
@@ -338,8 +324,8 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <!-- <span class="logo-text">Truss<span class="logo-c">C</span></span> -->
-                    <img src="assets/images/logo-navigator.svg" alt="TrussC" class="logo-img footer-logo">
-                    <p>Post-OpenGL creative coding.</p>
+                    <img src="../assets/images/logo-navigator.svg" alt="TrussC" class="logo-img footer-logo">
+                    <p>GPU 네이티브 크리에이티브 코딩.</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
@@ -360,11 +346,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 TrussC. Released under the <a href="license.html">MIT License</a>.</p>
+                <p>&copy; 2025 TrussC. Released under the <a href="../license.html">MIT License</a>.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>

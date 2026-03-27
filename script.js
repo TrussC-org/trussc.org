@@ -13,12 +13,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // スクロールアニメーション
     initScrollAnimations();
 
+    // 言語ドロップダウン
+    initLangDropdown();
+
     // スムーズスクロール
     initSmoothScroll();
 
     // タイピングアニメーション
     initTypingAnimation();
 });
+
+/**
+ * 言語ドロップダウンの初期化
+ */
+function initLangDropdown() {
+    document.addEventListener('click', (e) => {
+        document.querySelectorAll('.lang-dropdown.open').forEach(dropdown => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('open');
+            }
+        });
+    });
+}
 
 /**
  * モバイルナビゲーションの初期化

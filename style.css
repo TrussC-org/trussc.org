@@ -224,6 +224,10 @@ img {
     transform: translateY(-1px);
 }
 
+.lang-dropdown {
+    position: relative;
+}
+
 .nav-lang {
     padding: var(--space-xs) var(--space-sm) !important;
     font-size: 0.8rem;
@@ -231,11 +235,53 @@ img {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     transition: all var(--transition-fast) !important;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .nav-lang:hover {
     color: var(--color-text) !important;
     border-color: var(--color-text-muted);
+}
+
+.lang-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: var(--space-xs);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-xs) 0;
+    z-index: 1000;
+    list-style: none;
+}
+
+.lang-dropdown.open .lang-menu {
+    display: block;
+}
+
+.lang-menu a {
+    display: block;
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.lang-menu a:hover {
+    color: var(--color-text);
+    background: var(--color-bg-alt);
+}
+
+.lang-menu a.active {
+    color: var(--color-primary-light);
+    pointer-events: none;
 }
 
 /* ===================================
@@ -986,6 +1032,30 @@ img {
     .nav-cta {
         margin: var(--space-md) var(--space-lg) !important;
         text-align: center;
+    }
+
+    .lang-dropdown {
+        width: 100%;
+    }
+
+    .nav-lang {
+        display: block;
+        width: calc(100% - var(--space-lg) * 2);
+        margin: var(--space-xs) var(--space-lg) !important;
+        text-align: center;
+    }
+
+    .lang-menu {
+        position: static;
+        margin-top: 0;
+        border: none;
+        border-top: 1px solid var(--color-border);
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .lang-menu a {
+        padding: var(--space-sm) var(--space-lg);
     }
 
     .hero {

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>openFrameworksジャンキーのためのTrussC入門 | TrussC</title>
+    <title>openFrameworks 사용자를 위한 TrussC 가이드| TrussC</title>
     <link rel="icon" type="image/png" href="/favicon.png">
-    <meta name="description" content="oFユーザーがTrussCにスムーズに移行するためのガイド。共通点、相違点、API対応表を詳しく解説。">
+    <meta name="description" content="oF에서 TrussC로의 전환을 위한 가이드입니다. 유사점, 차이점 그리고 API 매핑에 대해 알아봅니다.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,23 +20,23 @@
                 <!-- <span class="logo-text">TrussC</span> -->
                 <img src="../assets/images/logo-navigator.svg" alt="TrussC" class="logo-img">
             </a>
-            <button class="nav-toggle" aria-label="メニューを開く">
+            <button class="nav-toggle" aria-label="메뉴 열기">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <ul class="nav-links">
-                <li><a href="../reference/">リファレンス</a></li>
-                <li><a href="../examples/">サンプル</a></li>
-                <li><a href="for-of-users.html" class="active">oFユーザーへ</a></li>
-                <li><a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">AIに聞く</a></li>
-                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED_jp.md" class="nav-cta" target="_blank" rel="noopener">始める</a></li>
+                <li><a href="../reference/">레퍼런스</a></li>
+                <li><a href="../examples/">예제</a></li>
+                <li><a href="for-of-users.html" class="active">oF 사용자에게</a></li>
+                <li><a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">AI에게 물어보기</a></li>
+                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED_jp.md" class="nav-cta" target="_blank" rel="noopener">시작하기</a></li>
                 <li class="lang-dropdown">
                     <button class="nav-lang" onclick="this.parentElement.classList.toggle('open')">🌐 ▾</button>
                     <ul class="lang-menu">
                         <li><a href="/for-of-users.html">EN</a></li>
-                        <li><a href="/ja/for-of-users.html" class="active">日本語</a></li>
-                        <li><a href="/ko/for-of-users.html">한국어</a></li>
+                        <li><a href="/ja/for-of-users.html">日本語</a></li>
+                        <li><a href="/ko/for-of-users.html" class="active">한국어</a></li>
                     </ul>
                 </li>
             </ul>
@@ -48,11 +48,11 @@
         <div class="container">
             <p class="guide-hero-label">For openFrameworks Users</p>
             <h1 class="guide-hero-title">
-                openFrameworks<br>ジャンキーのための<br>
-                <span class="guide-hero-accent">TrussC入門</span>
+                openFrameworks<br>사용자 위한<br>
+                <span class="guide-hero-accent">TrussC 입문</span>
             </h1>
             <p class="guide-hero-description">
-                oFが好きなあなたなら、TrussCも気に入るはず。
+                oF를 좋아하셨다면, TrussC도 좋아할 것입니다.
             </p>
         </div>
     </header>
@@ -62,11 +62,11 @@
         <div class="container">
             <div class="intro-message">
                 <p>
-                    TrussCは、openFrameworksが築き上げた<strong>「クリエイティブコーディングの楽しさ」</strong>を深くリスペクトしています。
+                    TrussC는, openFrameworks가 개척한 <strong>&lt;크리에이티브 코딩의 즐거움&gt;</strong>을 깊이 존중합니다.
                 </p>
                 <p>
-                    でも、oFが設計された2000年代と今では、ハードウェアもC++も大きく変わりました。<br>
-                    TrussCは、oFの精神を継承しながら、現代の環境に最適化した「次の10年の足場」です。
+                    하지만 oF가 설계된2000년대와 지금은, 하드웨어도 C++도 크게 변했습니다.<br>
+                    TrussC는 oF의 정신을 계승하면서도 오늘날의 환경에 최적화된, 앞으로의 10년을 위한 발판입니다.
                 </p>
             </div>
         </div>
@@ -75,8 +75,8 @@
     <!-- Same DNA Section -->
     <section id="same" class="section same-section">
         <div class="container">
-            <h2 class="section-title">変わらないもの</h2>
-            <p class="section-subtitle">oFユーザーなら、違和感なく書き始められます</p>
+            <h2 class="section-title">변하지 않는 것</h2>
+            <p class="section-subtitle">oF사용자라면 익숙하게 시작할 수 있습니다.</p>
 
             <div class="same-grid">
                 <div class="same-card">
@@ -87,7 +87,7 @@
                         </svg>
                     </div>
                     <h3>setup, update, draw</h3>
-                    <p>クリエイティブコーディングの基本リズム。この構造は不変です。</p>
+                    <p>크리에이티브 코딩의 기본 리듬, 이 구조는 그대로 유지합니다.</p>
                     <div class="same-compare">
                         <code class="of">ofApp</code>
                         <span class="arrow">→</span>
@@ -101,8 +101,8 @@
                             <circle cx="12" cy="12" r="10"/>
                         </svg>
                     </div>
-                    <h3>見たことあるメソッド名</h3>
-                    <p>使い心地を極力変えないように、手に馴染んだメソッド名を踏襲しています。</p>
+                    <h3>익숙한 메소드명</h3>
+                    <p>학습곡선을 최소화 하기 위해, 메소드명을 유지했습니다.</p>
                     <div class="same-compare">
                         <code class="of">ofDrawCircle(x, y, r)</code>
                         <span class="arrow">→</span>
@@ -117,8 +117,8 @@
                             <path d="M9 3v18"/>
                         </svg>
                     </div>
-                    <h3>XCode / VS / VSCode に対応</h3>
-                    <p>あなたの好きなIDEを選べます。もちろんCursorでも。</p>
+                    <h3>XCode / VS / VSCode 지원</h3>
+                    <p>여러분의 최고의 IDE를 고르세요. 물론, Cursor도 지원합니다.</p>
                     <div class="same-compare">
                         <span class="label">CMake</span>
                         <span class="arrow">+</span>
@@ -132,27 +132,27 @@
     <!-- Solutions Section -->
     <section id="solutions" class="section solutions-section">
         <div class="container">
-            <h2 class="section-title">oFで困っていたこと、解決しました</h2>
-            <p class="section-subtitle">長年のペインポイントに対するTrussCの回答</p>
+            <h2 class="section-title">oF에서의 불편한 지점을 해결했습니다.</h2>
+            <p class="section-subtitle">오랫동안 괴롭혔던 문제들에 대한 TrussC의 해결책.</p>
 
             <!-- Solution 1: バックエンド -->
             <div class="solution-card">
                 <div class="solution-problem">
-                    <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>OpenGLがmacOSで非推奨に</h3>
+                    <div class="solution-label problem-label">문제들</div>
+                    <h3>OpenGL은 macOS에서 더이상 지원되지 않습니다.</h3>
                     <p>
-                        AppleがOpenGLを非推奨にし、Metalへ移行。<br>
-                        将来的な動作保証やパフォーマンス最適化が困難に。<br>
-                        いつサポートが切れるかわからない不安。
+                        Apple은 OpenGL을 버리고 Metal로 전환했습니다.<br>
+                        앞으로의 호환성과 성능 최적화는 불투명해졌습니다.<br>
+                        가장 중요한 질문은 이겁니다 - 언제 지원이 완전히 끊길것인가?
                     </p>
                 </div>
                 <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>Sokolでネイティブバックエンド</h3>
+                    <div class="solution-label answer-label">TrussC의 해결책</div>
+                    <h3>Sokol를 통한 네이티브 백엔드</h3>
                     <p>
-                        <strong>Metal / DirectX 12 / Vulkan / WebGPU</strong> に対応。<br>
-                        OSが推奨する最新のネイティブAPI上で動作するため、高速かつ省電力。<br>
-                        WebAssembly + WebGPU でブラウザへの移植性も高い。
+                        <strong>Metal / DirectX 12 / Vulkan / WebGPU</strong>을 사용합니다.<br>
+                        각 OS의 네이티브 API 위에서 구동되므로 고성능과 고효율이 보장됩니다. <br>
+                        WebAssembly + WebGPU를 지원하기 때문에 브라우저로의 이식률도 높습니다.
                     </p>
                 </div>
             </div>
@@ -160,21 +160,21 @@
             <!-- Solution 2: ライセンス -->
             <div class="solution-card">
                 <div class="solution-problem">
-                    <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>商用利用でのライセンス問題</h3>
+                    <div class="solution-label problem-label">문제점</div>
+                    <h3>상업용도일 경우 라이선스에 대한 고민</h3>
                     <p>
-                        oF本体はMITだが、依存ライブラリにGPLが混在。<br>
-                        FFmpegやFreeTypeなど、ライセンスを確認するのが大変。<br>
-                        クライアントワークで使うときに不安が残る。
+                        oF 자체는 MIT라이선스이지만, 의존 라이브러리 중에는 GPL이 포함되어있습니다.<br>
+                        FFmpeg, FreeType 등의 라이선스를 일일히 확인하는것은 번거롭습니다.<br>
+                        클라이언트 작업에 사용할 때 라이선스 리스크가 불분명합니다.
                     </p>
                 </div>
                 <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>MIT / zlib / Public Domain のみ</h3>
+                    <div class="solution-label answer-label">TrussC의 해결책</div>
+                    <h3>MIT / zlib / Public Domain만 사용</h3>
                     <p>
-                        <strong>GPL汚染ゼロ</strong>を徹底。<br>
-                        すべての依存ライブラリが商用利用フレンドリー。<br>
-                        安心してクライアントワークに使える。
+                        철저한 <strong>GPL 프리</strong>.<br>
+                        모든 종속 라이브러리는 상업적 사용에 친화적입니다.<br>
+                        안심하고 클라이언트 작업에 사용할 수 있습니다.
                     </p>
                 </div>
             </div>
@@ -182,50 +182,50 @@
             <!-- Solution 3: シーングラフ (親子関係) -->
             <div class="solution-card">
                 <div class="solution-problem">
-                    <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>親子関係の管理が面倒</h3>
+                    <div class="solution-label problem-label">문제점</div>
+                    <h3>수동 부모-자식 관리</h3>
                     <p>
-                        <code>ofNode</code> はあるが、親子関係の管理が手動。<br>
-                        子ノードの追加・削除でメモリ管理が複雑。<br>
-                        親が消えても子が残ってしまう問題も。
+                        <code>ofNode</code>는 있지만, 부모-자식 관계를 수동으로 관리해야 합니다.<br>
+                        자식 노드를 추가/제거할 때 메모리 관리가 복잡해집니다.<br>
+                        부모가 삭제되었지만, 자식이 남아버리는 문제가 생기기도 합니다.
                     </p>
                 </div>
                 <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>shared_ptr ベースで自動管理</h3>
+                    <div class="solution-label answer-label">TrussC의 해결책</div>
+                    <h3>shared_ptr 기반으로 자동 관리</h3>
                     <pre><code><span class="code-comment">// shared_ptr ベースで自動管理</span>
 <span class="code-keyword">auto</span> parent = Node::create();
 <span class="code-keyword">auto</span> child = Node::create();
 parent->addChild(child);
 
-<span class="code-comment">// 親を破棄すれば子も自動的に解放される</span>
-<span class="code-comment">// 循環参照も weak_ptr で安全に回避</span></code></pre>
+<span class="code-comment">// 부모를 삭제하면, 자식이 자동으로 해제됩니다.</span>
+<span class="code-comment">// 순환 참조도 weak_ptr를 사용해 안전하게 회피합니다.</span></code></pre>
                 </div>
             </div>
 
             <!-- Solution 5: タイマー -->
             <div class="solution-card">
                 <div class="solution-problem">
-                    <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>「3秒後に実行」を安全にやる方法がない</h3>
+                    <div class="solution-label problem-label">문제점</div>
+                    <h3>"3초 뒤 실행" 을 안전하게 할 방법이 없습니다</h3>
                     <p>
-                        <code>ofThread</code> はデータ競合を起こしやすい。<br>
-                        「3秒後に実行」を安全にやる標準的な方法がなく、<br>
-                        update内で時間計測してif文を書くとコードが汚くなる。
+                        <code>ofThread</code>는 데이터 경쟁(data race)을 일으키기 쉽습니다.<br>
+                        "N초 뒤 실행" 을 안전하게 수행하는 표준화된 방법이 없으며,<br>
+                        update() 내에서 시간을 측정해 if문을 쓰면 코드가 지저분해 집니다.
                     </p>
                 </div>
                 <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>メインスレッドで安全な同期タイマー</h3>
-                    <pre><code><span class="code-comment">// メインスレッドで安全に遅延実行</span>
+                    <div class="solution-label answer-label">TrussC의 해결책</div>
+                    <h3>메인 스레드에서의 안전한 동기화 타이머</h3>
+                    <pre><code><span class="code-comment">// 메인 스레드에서 안전하게 딜레이를 실행</span>
 node->callAfter(<span class="code-number">3.0f</span>, []() {
-    <span class="code-comment">// 3秒後にメインスレッドで実行</span>
-    <span class="code-comment">// Mutex 不要、データ競合の心配なし</span>
+    <span class="code-comment">// 메인 스레드 위에서 3초 후 수행됨</span>
+    <span class="code-comment">// Mutex가 필요하지 않고, 데이터 경쟁에 대한 걱정도 없습니다.</span>
 });
 
-<span class="code-comment">// 繰り返し実行も簡単</span>
+<span class="code-comment">// 반복 실행도 역시 쉽습니다.</span>
 node->callEvery(<span class="code-number">1.0f</span>, []() {
-    <span class="code-comment">// 1秒ごとに実行</span>
+    <span class="code-comment">// 매 1초마다 실행됨</span>
 });</code></pre>
                 </div>
             </div>
@@ -233,27 +233,27 @@ node->callEvery(<span class="code-number">1.0f</span>, []() {
             <!-- Solution 6: 太線 -->
             <div class="solution-card">
                 <div class="solution-problem">
-                    <div class="solution-label problem-label">困っていたこと</div>
-                    <h3>太線が描けない問題</h3>
+                    <div class="solution-label problem-label">문제점</div>
+                    <h3>그릴 수 없는 굵은 선</h3>
                     <p>
-                        <code>ofSetLineWidth()</code> はOpenGLの制限で太さ1px以上が保証されない。<br>
-                        macOS / Metal環境では完全に無視される。太い線を描くには自前でメッシュを生成するしかなかった。
+                        <code>ofSetLineWidth()</code>는 OpenGL의 한계로 1px 이상의 두꼐는 보장되지 않습니다.<br>
+                        macOS / Metal에서는 완전히 무시됩니다. 굵은 선을 그리려면 메시를 직접 생성해야 했습니다.
                     </p>
                 </div>
                 <div class="solution-answer">
-                    <div class="solution-label answer-label">TrussCの解決策</div>
-                    <h3>標準で美しい太線</h3>
+                    <div class="solution-label answer-label">TrussC의 해결책</div>
+                    <h3>내장된 굵은 선 그리기</h3>
                     <p>
-                        <code>beginStroke()</code> / <code>endStroke()</code> を使うだけ。<br>
-                        ラインキャップやジョインも自動で綺麗に処理される。
+                        간단히 <code>beginStroke()</code> / <code>endStroke()</code>을 사용하면 됩니다.<br>
+                        line cap과 join도 자동으로 깔끔하게 처리됩니다.
                     </p>
-                    <pre><code><span class="code-comment">// beginStroke/endStroke で美しい太線</span>
-setStrokeWeight(<span class="code-number">5.0f</span>);  <span class="code-comment">// 5px の太線</span>
+                    <pre><code><span class="code-comment">// beginStroke/endStroke 을 사용해 아름다운 굵은선을 그린다.</span>
+setStrokeWeight(<span class="code-number">5.0f</span>);  <span class="code-comment">// 5px의 굵은 선</span>
 beginStroke();
 vertex(<span class="code-number">0</span>, <span class="code-number">0</span>);
 vertex(<span class="code-number">100</span>, <span class="code-number">50</span>);
 vertex(<span class="code-number">200</span>, <span class="code-number">0</span>);
-endStroke();  <span class="code-comment">// キャップとジョインは自動</span></code></pre>
+endStroke();  <span class="code-comment">// cap과 join은 자동</span></code></pre>
                 </div>
             </div>
 
@@ -263,14 +263,14 @@ endStroke();  <span class="code-comment">// キャップとジョインは自動
     <!-- Getting Started Section -->
     <section id="getting-started" class="section getting-started-section">
         <div class="container">
-            <h2 class="section-title">開発の流れ</h2>
-            <p class="section-subtitle">oFユーザーなら、すぐに馴染めるはず</p>
+            <h2 class="section-title">시작하기</h2>
+            <p class="section-subtitle">oF사용자라면, 익숙합니다.</p>
 
             <div class="guide-content">
-                <h3>フォルダ構成</h3>
+                <h3>폴더 구조</h3>
                 <p>
-                    TrussCのディレクトリ構成は、oFとよく似ています。<br>
-                    本体、examples、addonsなど、見覚えのある構成になっているはずです。
+                    TrussC의 디렉토리 구조는 oF와 아주 비슷합니다.<br>
+                    예제, 애드온 등등 익숙한 구성을 갖추고 있습니다.
                 </p>
 
                 <div class="directory-compare">
@@ -304,27 +304,27 @@ TrussC/
 
                 <h3>projectGenerator</h3>
                 <p>
-                    oFと同じように、projectGeneratorでプロジェクトを作成できます。<br>
-                    見た目は昔のoFのようですが、機能は負けていません。
+                    oF와 마찬가지로, projectGenerator를 사용해 프로젝트를 생성할 수 있습니다.<br>
+                    클래식한 oF처럼 보일 수 있지만, 기능은 완전히 최신입니다.
                 </p>
 
                 <div class="guide-image">
                     <img src="../images/projectGenerator_generate.png" alt="TrussC projectGenerator">
                 </div>
 
-                <h3>あとは書くだけ</h3>
+                <h3>작성만 하면 됩니다.</h3>
                 <p>
-                    プロジェクトを作ったら、いつもどおり setup / update / draw を書くだけ。<br>
-                    <code>ofApp</code> が <code>tcApp</code> に、<code>ofDrawCircle</code> が <code>drawCircle</code> に変わるくらいで、<br>
-                    書き心地はほとんど同じです。
+                    프로젝트를 생성하고 나면, 이전처럼 setup / update / draw 를 작성하면 됩니다.<br>
+                    <code>ofApp</code>은 <code>tcApp</code>로, <code>ofDrawCircle</code>은 <code>drawCircle</code>로 이름만 바꼈을 뿐,<br>
+                    코딩 작성은 거의 동일합니다.
                 </p>
 
                 <pre><code><span class="code-keyword">void</span> tcApp::setup() {
-    <span class="code-comment">// いつもどおりのsetup</span>
+    <span class="code-comment">// 평소처럼 setup</span>
 }
 
 <span class="code-keyword">void</span> tcApp::update() {
-    <span class="code-comment">// いつもどおりのupdate</span>
+    <span class="code-comment">// 평소처럼 update</span>
 }
 
 <span class="code-keyword">void</span> tcApp::draw() {
@@ -334,8 +334,8 @@ TrussC/
 }</code></pre>
 
                 <p class="guide-conclusion">
-                    結構同じですよね？<br>
-                    oFで培った経験は、そのままTrussCでも活きます。
+                    별 차이 없죠?<br>
+                    oF에서의 코딩방식은 TrussC에서도 다르지 않습니다.
                 </p>
             </div>
         </div>
@@ -344,17 +344,17 @@ TrussC/
     <!-- API Reference Section -->
     <section id="api" class="section api-section">
         <div class="container">
-            <h2 class="section-title">API対応表</h2>
-            <p class="section-subtitle">oFの関数、TrussCではこう書く</p>
+            <h2 class="section-title">API 레퍼런스</h2>
+            <p class="section-subtitle">oF의 함수, TrussC에서는 이렇게 씁니다.</p>
 
             <!-- Filter -->
             <div class="api-filter">
-                <input type="text" id="api-search" placeholder="検索... (例: drawCircle, Vec3, Sound)">
+                <input type="text" id="api-search" placeholder="검색... (예: drawCircle, Vec3, Sound)">
             </div>
 
             <!-- API Tables (dynamically loaded from of-mapping.json) -->
             <div id="api-tables">
-                <p>API対応表を読み込み中...</p>
+                <p>API 레퍼런스를 불러오는 중...</p>
             </div>
 
         </div>
@@ -363,16 +363,16 @@ TrussC/
     <!-- CTA Section -->
     <section class="section cta-section">
         <div class="container">
-            <h2>さあ、始めよう</h2>
-            <p>oFで培った経験は、そのまま活きる。</p>
+            <h2>준비됐나요?</h2>
+            <p>oF에서의 경험은 그대로 유지됩니다.</p>
             <div class="cta-buttons">
                 <a href="https://github.com/TrussC-org/TrussC" class="btn btn-primary btn-large" target="_blank">
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                     </svg>
-                    GitHubで見る
+                    GitHub에서 보기
                 </a>
-                <a href="index.html" class="btn btn-secondary btn-large">トップに戻る</a>
+                <a href="index.html" class="btn btn-secondary btn-large">홈으로 돌아가기</a>
             </div>
         </div>
     </section>

@@ -15,14 +15,15 @@ async function loadApiMapping() {
     const container = document.getElementById('api-tables');
     if (!container) return;
 
-    // Detect Japanese version
-    const isJapanese = window.location.pathname.includes('/ja/');
-    const jsonPath = isJapanese ? '../of-mapping.json' : 'of-mapping.json';
+    // Detect language from URL path
+    const path = window.location.pathname;
+    const lang = path.includes('/ja/') ? 'ja' : path.includes('/ko/') ? 'ko' : 'en';
+    const jsonPath = lang !== 'en' ? '../of-mapping.json' : 'of-mapping.json';
 
     try {
         const response = await fetch(jsonPath);
         const data = await response.json();
-        renderApiTables(data, isJapanese, container);
+        renderApiTables(data, lang, container);
     } catch (error) {
         console.error('Failed to load of-mapping.json:', error);
         container.innerHTML = '<p>Failed to load API mapping data.</p>';
@@ -32,11 +33,12 @@ async function loadApiMapping() {
 /**
  * Render API tables from JSON data
  */
-function renderApiTables(data, isJapanese, container) {
+function renderApiTables(data, lang, container) {
+    const notesLabel = { en: 'Notes', ja: '備考', ko: '비고' };
     const html = data.categories.map(cat => {
-        const categoryName = isJapanese ? cat.name_ja : cat.name;
+        const categoryName = lang === 'ja' ? cat.name_ja : lang === 'ko' ? (cat.name_ko || cat.name) : cat.name;
         const rows = cat.mappings.map(m => {
-            const notes = isJapanese ? (m.notes_ja || m.notes) : m.notes;
+            const notes = lang === 'ja' ? (m.notes_ja || m.notes) : lang === 'ko' ? (m.notes_ko || m.notes) : m.notes;
             return `<tr><td><code>${escapeHtml(m.of)}</code></td><td><code>${escapeHtml(m.tc)}</code></td><td>${escapeHtml(notes)}</td></tr>`;
         }).join('\n');
 
@@ -52,7 +54,7 @@ function renderApiTables(data, isJapanese, container) {
                             <tr>
                                 <th>openFrameworks</th>
                                 <th>TrussC</th>
-                                <th>${isJapanese ? '備考' : 'Notes'}</th>
+                                <th>${notesLabel[lang] || 'Notes'}</th>
                             </tr>
                         </thead>
                         <tbody>
