@@ -5,250 +5,789 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrussC API Reference</title>
     <link rel="icon" type="image/png" href="/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background: #1e1e1e;
             color: #d4d4d4;
             line-height: 1.6;
-            padding: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        h1 {
+        /* Top bar */
+        .topbar {
+            background: #252526;
+            border-bottom: 1px solid #3c3c3c;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .topbar h1 {
             color: #569cd6;
-            margin-bottom: 10px;
-            font-size: 28px;
+            font-size: 20px;
+            white-space: nowrap;
         }
 
-        h1 a {
-            color: #569cd6;
-            text-decoration: none;
-        }
+        .topbar h1 a { color: #569cd6; text-decoration: none; }
+        .topbar h1 a:hover { text-decoration: underline; }
 
-        h1 a:hover {
-            text-decoration: underline;
-        }
-
-        .subtitle {
+        .topbar .subtitle {
             color: #888;
-            margin-bottom: 30px;
+            font-size: 13px;
         }
 
-        .subtitle a {
-            color: #4ec9b0;
-        }
+        .topbar .subtitle a { color: #4ec9b0; }
 
         .nav-links {
-            margin-bottom: 20px;
-            padding: 10px 0;
-            border-bottom: 1px solid #3c3c3c;
+            margin-left: auto;
+            display: flex;
+            gap: 16px;
         }
 
         .nav-links a {
             color: #9cdcfe;
             text-decoration: none;
-            margin-right: 20px;
-        }
-
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
-
-        .nav-links a.active {
-            color: #4ec9b0;
-            font-weight: 600;
-        }
-
-        h2 {
-            color: #4ec9b0;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 18px;
-            border-bottom: 1px solid #3c3c3c;
-            padding-bottom: 5px;
-        }
-
-        .section {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .func {
-            background: #252526;
-            padding: 10px 14px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
             font-size: 13px;
         }
 
-        .func-signature {
+        .nav-links a:hover { text-decoration: underline; }
+        .nav-links a.active { color: #4ec9b0; font-weight: 600; }
+
+        /* Main layout */
+        .main {
+            display: flex;
+            height: calc(100vh - 50px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: #252526;
+            border-right: 1px solid #3c3c3c;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .search-box {
+            padding: 10px;
+            border-bottom: 1px solid #3c3c3c;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 6px 10px;
+            background: #3c3c3c;
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: #d4d4d4;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .search-box input:focus { border-color: #569cd6; }
+        .search-box input::placeholder { color: #888; }
+
+        .sidebar-list {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        .sidebar-list::-webkit-scrollbar { width: 6px; }
+        .sidebar-list::-webkit-scrollbar-thumb { background: #555; border-radius: 3px; }
+
+        .sidebar-group-title {
+            padding: 10px 14px 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #569cd6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+
+        .sidebar-group-title:hover { color: #7cb8f0; }
+
+        .sidebar-group-title svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.15s;
+        }
+
+        .sidebar-group.collapsed .sidebar-group-title svg {
+            transform: rotate(-90deg);
+        }
+
+        .sidebar-group.collapsed .sidebar-group-items {
+            display: none;
+        }
+
+        .sidebar-cat-title {
+            padding: 6px 14px 2px 20px;
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .sidebar-item {
+            padding: 3px 14px 3px 28px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             color: #d4d4d4;
         }
 
-        .func-return {
+        .sidebar-item:hover { background: #2a2d2e; }
+        .sidebar-item.active { background: #094771; color: #fff; }
+
+        .sidebar-item.type-item { color: #4ec9b0; }
+        .sidebar-item.const-item { color: #b5cea8; }
+
+        .sidebar-item .item-kind {
+            font-size: 9px;
+            color: #888;
+            margin-left: 6px;
+        }
+
+        /* Detail panel */
+        .detail {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px 40px;
+        }
+
+        .detail::-webkit-scrollbar { width: 8px; }
+        .detail::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+
+        .detail-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #666;
+            font-size: 15px;
+        }
+
+        .detail-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
             color: #4ec9b0;
+            margin-bottom: 4px;
         }
 
-        .func-name {
-            color: #dcdcaa;
+        .detail-desc {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 24px;
         }
 
-        .func-params {
-            color: #9cdcfe;
+        .detail-section {
+            margin-bottom: 24px;
         }
 
-        .func-type {
-            color: #4ec9b0;
+        .detail-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #569cd6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #3c3c3c;
+            margin-bottom: 10px;
         }
 
-        .func-desc {
+        .detail-entry {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            padding: 6px 0;
+            border-bottom: 1px solid #2d2d30;
+        }
+
+        .detail-entry:last-child { border-bottom: none; }
+
+        .detail-sig {
+            color: #d4d4d4;
+        }
+
+        .detail-sig .ret { color: #4ec9b0; }
+        .detail-sig .name { color: #dcdcaa; }
+        .detail-sig .params { color: #9cdcfe; }
+        .detail-sig .type { color: #4ec9b0; }
+        .detail-sig .prop-name { color: #9cdcfe; }
+
+        .detail-entry-desc {
             color: #6a9955;
             font-size: 11px;
-            margin-top: 4px;
-        }
-
-        .func-of {
-            color: #808080;
-            font-size: 10px;
             margin-top: 2px;
         }
 
-        .constants {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        .detail-overloads {
+            padding-left: 0;
         }
 
-        .const {
+        .detail-overload {
+            color: #d4d4d4;
+            padding: 2px 0;
+        }
+
+        /* Overview grid */
+        .overview-section {
+            margin-bottom: 28px;
+        }
+
+        .overview-section-title {
+            color: #4ec9b0;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #3c3c3c;
+        }
+
+        .overview-cat-title {
+            color: #569cd6;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 14px;
+            margin-bottom: 6px;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 6px;
+        }
+
+        .overview-item {
             background: #252526;
-            padding: 6px 12px;
+            padding: 7px 12px;
             border-radius: 4px;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 13px;
-            color: #b5cea8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.15s;
         }
 
-        .example {
-            background: #252526;
-            padding: 15px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        .overview-item:hover { background: #2a2d2e; }
+
+        .overview-item .ov-ret { color: #4ec9b0; }
+        .overview-item .ov-name { color: #dcdcaa; }
+        .overview-item .ov-params { color: #9cdcfe; }
+        .overview-item .ov-desc { color: #6a9955; font-size: 11px; display: block; margin-top: 2px; }
+
+        .overview-item.ov-type .ov-name { color: #4ec9b0; }
+        .overview-item.ov-type .ov-desc { color: #888; display: block; margin-top: 2px; }
+
+        .overview-item.ov-const .ov-name { color: #b5cea8; }
+        .overview-item.ov-const .ov-val { color: #888; margin-left: 4px; }
+
+        .detail-back {
+            color: #569cd6;
             font-size: 13px;
-            overflow-x: auto;
-            white-space: pre;
-            line-height: 1.4;
+            cursor: pointer;
+            margin-bottom: 16px;
+            display: inline-block;
         }
 
-        .keyword { color: #c586c0; }
-        .function { color: #dcdcaa; }
-        .number { color: #b5cea8; }
-        .string { color: #ce9178; }
-        .comment { color: #6a9955; }
-        .type { color: #4ec9b0; }
+        .detail-back:hover { text-decoration: underline; }
 
-        @media (max-width: 600px) {
-            .section {
-                grid-template-columns: 1fr;
-            }
+        /* Tooltip */
+        .tooltip {
+            position: fixed;
+            background: #1e1e1e;
+            border: 1px solid #569cd6;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            display: none;
+        }
+
+        .tooltip .tt-ret { color: #4ec9b0; }
+        .tooltip .tt-name { color: #dcdcaa; }
+        .tooltip .tt-params { color: #9cdcfe; }
+        .tooltip .tt-desc { color: #6a9955; display: block; font-size: 11px; margin-top: 2px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main { flex-direction: column; }
+            .sidebar { width: 100%; min-width: auto; height: 40vh; border-right: none; border-bottom: 1px solid #3c3c3c; }
+            .detail { padding: 20px; }
+            .nav-links { display: none; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1><a href="../">TrussC</a> API Reference</h1>
-    <p class="subtitle">C++ API reference. See also: <a href="../sketch/reference/">TrussSketch Reference</a></p>
-
-    <div class="nav-links">
-        <a href="../">Home</a>
-        <a href="../examples/">Examples</a>
-        <a href="./" class="active">Reference</a>
-        <a href="../for-of-users.html">For oF Users</a>
+    <div class="topbar">
+        <h1><a href="../">TrussC</a> API Reference</h1>
+        <span class="subtitle">See also: <a href="../sketch/reference/">TrussSketch Reference</a></span>
+        <div class="nav-links">
+            <a href="../">Home</a>
+            <a href="../examples/">Examples</a>
+            <a href="./" class="active">Reference</a>
+            <a href="../for-of-users.html">For oF Users</a>
+        </div>
     </div>
 
-    <div id="content"></div>
+    <div class="main">
+        <div class="sidebar">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Search functions, types..." autofocus>
+            </div>
+            <div class="sidebar-list" id="sidebar-list"></div>
+        </div>
+        <div class="detail" id="detail"></div>
+        <div class="tooltip" id="tooltip"></div>
+    </div>
 
     <script src="../sketch/trusssketch-api.js"></script>
     <script>
-        function renderReference() {
-            const content = document.getElementById('content');
+        const sidebar = document.getElementById('sidebar-list');
+        const detail = document.getElementById('detail');
+        const searchInput = document.getElementById('search');
+
+        // Build flat index of all items for search and detail rendering
+        const items = [];
+
+        // Functions (grouped by category)
+        for (const cat of TrussSketchAPI.categories) {
+            for (const fn of cat.functions) {
+                items.push({
+                    kind: 'function',
+                    category: cat.name,
+                    name: fn.name,
+                    data: fn
+                });
+            }
+        }
+
+        // Types
+        for (const t of TrussSketchAPI.types) {
+            items.push({
+                kind: 'type',
+                category: 'Types',
+                name: t.name,
+                data: t
+            });
+        }
+
+        // Constants
+        for (const c of TrussSketchAPI.constants) {
+            items.push({
+                kind: 'constant',
+                category: 'Constants',
+                name: c.name,
+                data: c
+            });
+        }
+
+        /**
+         * Render sidebar list, optionally filtered by query
+         */
+        function renderSidebar(query) {
+            query = (query || '').toLowerCase().trim();
             let html = '';
 
-            // Render categories
-            for (const cat of TrussSketchAPI.categories) {
-                // Skip lifecycle and events for C++ reference (these are class methods)
-                if (cat.name === 'Lifecycle' || cat.name === 'Events') {
-                    html += `<h2>${cat.name} (Override in tcApp)</h2>\n<div class="section">\n`;
-                } else {
-                    html += `<h2>${cat.name}</h2>\n<div class="section">\n`;
-                }
+            // Group: Functions by category
+            const funcCats = {};
+            for (const item of items) {
+                if (item.kind !== 'function') continue;
+                if (query && !matchItem(item, query)) continue;
+                if (!funcCats[item.category]) funcCats[item.category] = [];
+                funcCats[item.category].push(item);
+            }
 
-                // Group by unique function name (for overloads)
+            const hasFuncs = Object.keys(funcCats).length > 0;
+            if (hasFuncs) {
+                html += `<div class="sidebar-group" id="group-functions">`;
+                html += `<div class="sidebar-group-title" onclick="toggleGroup('group-functions')">`;
+                html += `Functions <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
+                for (const [catName, catItems] of Object.entries(funcCats)) {
+                    html += `<div class="sidebar-group-items">`;
+                    html += `<div class="sidebar-cat-title">${esc(catName)}</div>`;
+                    // Deduplicate by name within category
+                    const seen = new Set();
+                    for (const item of catItems) {
+                        if (seen.has(item.name)) continue;
+                        seen.add(item.name);
+                        const _ret = item.data.return_type || 'void';
+                        const _params = item.data.params_typed || item.data.params || '';
+                        const _desc = item.data.desc || '';
+                        html += `<div class="sidebar-item" data-kind="${item.kind}" data-name="${esc(item.name)}" data-cat="${esc(item.category)}" data-ret="${esc(_ret)}" data-params="${esc(_params)}" data-desc="${esc(_desc)}" onclick="selectItem(this)">${esc(item.name)}()</div>`;
+                    }
+                    html += `</div>`;
+                }
+                html += `</div>`;
+            }
+
+            // Group: Types
+            const typeItems = items.filter(i => i.kind === 'type' && (!query || matchItem(i, query)));
+            if (typeItems.length > 0) {
+                html += `<div class="sidebar-group" id="group-types">`;
+                html += `<div class="sidebar-group-title" onclick="toggleGroup('group-types')">`;
+                html += `Types <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
+                html += `<div class="sidebar-group-items">`;
+                for (const item of typeItems) {
+                    html += `<div class="sidebar-item type-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)">${esc(item.name)}</div>`;
+                }
+                html += `</div></div>`;
+            }
+
+            // Group: Constants
+            const constItems = items.filter(i => i.kind === 'constant' && (!query || matchItem(i, query)));
+            if (constItems.length > 0) {
+                html += `<div class="sidebar-group" id="group-constants">`;
+                html += `<div class="sidebar-group-title" onclick="toggleGroup('group-constants')">`;
+                html += `Constants <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
+                html += `<div class="sidebar-group-items">`;
+                for (const item of constItems) {
+                    html += `<div class="sidebar-item const-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)">${esc(item.name)}<span class="item-kind">= ${esc(String(item.data.value))}</span></div>`;
+                }
+                html += `</div></div>`;
+            }
+
+            sidebar.innerHTML = html || '<div style="padding:20px;color:#666;">No results</div>';
+        }
+
+        function matchItem(item, query) {
+            if (item.name.toLowerCase().includes(query)) return true;
+            if (item.category && item.category.toLowerCase().includes(query)) return true;
+            // Search in type methods/properties too
+            if (item.kind === 'type') {
+                const t = item.data;
+                if (t.desc && t.desc.toLowerCase().includes(query)) return true;
+                if (t.methods) {
+                    for (const m of t.methods) {
+                        if (m.name.toLowerCase().includes(query)) return true;
+                    }
+                }
+                if (t.properties) {
+                    for (const p of t.properties) {
+                        if (p.name.toLowerCase().includes(query)) return true;
+                    }
+                }
+            }
+            if (item.kind === 'function') {
+                const fn = item.data;
+                if (fn.desc && fn.desc.toLowerCase().includes(query)) return true;
+            }
+            return false;
+        }
+
+        /**
+         * Select an item and render detail
+         */
+        function selectItem(el) {
+            // Update active state
+            document.querySelectorAll('.sidebar-item.active').forEach(e => e.classList.remove('active'));
+            el.classList.add('active');
+
+            const kind = el.dataset.kind;
+            const name = el.dataset.name;
+            const cat = el.dataset.cat || '';
+
+            if (kind === 'function') {
+                renderFunctionDetail(name, cat);
+            } else if (kind === 'type') {
+                renderTypeDetail(name);
+            } else if (kind === 'constant') {
+                renderConstantDetail(name);
+            }
+        }
+
+        /**
+         * Render function detail — collects all overloads across categories
+         */
+        function renderFunctionDetail(name, category) {
+            // Collect all overloads of this function name
+            const overloads = [];
+            for (const cat of TrussSketchAPI.categories) {
+                for (const fn of cat.functions) {
+                    if (fn.name === name) {
+                        overloads.push({ ...fn, category: cat.name });
+                    }
+                }
+            }
+
+            if (overloads.length === 0) return;
+            const first = overloads[0];
+
+            let html = backButton();
+            html += `<div class="detail-title">${esc(name)}</div>`;
+            html += `<div class="detail-desc">${esc(first.desc || '')}</div>`;
+
+            // Signatures
+            html += `<div class="detail-section">`;
+            html += `<div class="detail-section-title">Signatures</div>`;
+
+            const seen = new Set();
+            for (const fn of overloads) {
+                const params = fn.params_typed || fn.params || '';
+                const retType = fn.return_type !== undefined && fn.return_type !== null ? fn.return_type : 'void';
+                const key = retType + name + '(' + params + ')';
+                if (seen.has(key)) continue;
+                seen.add(key);
+
+                html += `<div class="detail-entry">`;
+                html += `<div class="detail-sig"><span class="ret">${esc(retType)}</span> <span class="name">${esc(name)}</span>(<span class="params">${esc(params)}</span>)</div>`;
+                if (fn.desc) html += `<div class="detail-entry-desc">// ${esc(fn.desc)}</div>`;
+                html += `</div>`;
+            }
+            html += `</div>`;
+
+            // Category
+            html += `<div class="detail-section">`;
+            html += `<div class="detail-section-title">Category</div>`;
+            html += `<div style="color:#888;font-size:13px;">${esc(category || first.category)}</div>`;
+            html += `</div>`;
+
+            detail.innerHTML = html;
+        }
+
+        /**
+         * Render type detail — constructor, properties, methods, statics
+         */
+        function renderTypeDetail(name) {
+            const t = TrussSketchAPI.types.find(t => t.name === name);
+            if (!t) return;
+
+            let html = backButton();
+            html += `<div class="detail-title">${esc(t.name)}</div>`;
+            html += `<div class="detail-desc">${esc(t.desc || '')}</div>`;
+
+            // Constructor
+            if (t.constructor && t.constructor.signatures) {
+                html += `<div class="detail-section">`;
+                html += `<div class="detail-section-title">Constructor</div>`;
+                for (const sig of t.constructor.signatures) {
+                    html += `<div class="detail-entry">`;
+                    html += `<div class="detail-sig"><span class="name">${esc(t.name)}</span>(<span class="params">${esc(sig)}</span>)</div>`;
+                    html += `</div>`;
+                }
+                html += `</div>`;
+            }
+
+            // Properties
+            if (t.properties && t.properties.length > 0) {
+                html += `<div class="detail-section">`;
+                html += `<div class="detail-section-title">Properties</div>`;
+                for (const p of t.properties) {
+                    html += `<div class="detail-entry">`;
+                    html += `<div class="detail-sig"><span class="type">${esc(p.type)}</span> <span class="prop-name">${esc(p.name)}</span></div>`;
+                    if (p.desc) html += `<div class="detail-entry-desc">// ${esc(p.desc)}</div>`;
+                    html += `</div>`;
+                }
+                html += `</div>`;
+            }
+
+            // Methods
+            if (t.methods && t.methods.length > 0) {
+                html += `<div class="detail-section">`;
+                html += `<div class="detail-section-title">Methods</div>`;
+                for (const m of t.methods) {
+                    html += `<div class="detail-entry">`;
+                    if (m.signatures.length === 1) {
+                        html += `<div class="detail-sig"><span class="ret">${esc(m.return || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(m.signatures[0])}</span>)</div>`;
+                    } else {
+                        // Multiple overloads
+                        for (const sig of m.signatures) {
+                            html += `<div class="detail-sig"><span class="ret">${esc(m.return || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig)}</span>)</div>`;
+                        }
+                    }
+                    if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
+                    html += `</div>`;
+                }
+                html += `</div>`;
+            }
+
+            // Static methods
+            if (t.static_methods && t.static_methods.length > 0) {
+                html += `<div class="detail-section">`;
+                html += `<div class="detail-section-title">Static Methods</div>`;
+                for (const m of t.static_methods) {
+                    html += `<div class="detail-entry">`;
+                    for (const sig of m.signatures) {
+                        html += `<div class="detail-sig"><span class="ret">${esc(m.return || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig)}</span>)</div>`;
+                    }
+                    if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
+                    html += `</div>`;
+                }
+                html += `</div>`;
+            }
+
+            detail.innerHTML = html;
+        }
+
+        /**
+         * Render constant detail
+         */
+        function renderConstantDetail(name) {
+            const c = TrussSketchAPI.constants.find(c => c.name === name);
+            if (!c) return;
+
+            let html = backButton();
+            html += `<div class="detail-title">${esc(c.name)}</div>`;
+            html += `<div class="detail-desc">Constant value</div>`;
+            html += `<div class="detail-section">`;
+            html += `<div class="detail-section-title">Value</div>`;
+            html += `<div class="detail-entry"><div class="detail-sig" style="color:#b5cea8;font-size:16px;">${esc(String(c.value))}</div></div>`;
+            html += `</div>`;
+
+            detail.innerHTML = html;
+        }
+
+        /**
+         * Render overview grid (default view)
+         */
+        function renderOverview() {
+            let html = '';
+
+            // Functions by category
+            html += `<div class="overview-section">`;
+            html += `<div class="overview-section-title">Functions</div>`;
+            for (const cat of TrussSketchAPI.categories) {
+                html += `<div class="overview-cat-title">${esc(cat.name)}</div>`;
+                html += `<div class="overview-grid">`;
                 const seen = new Set();
                 for (const fn of cat.functions) {
-                    const key = fn.name + '(' + fn.params + ')';
+                    const key = fn.name + '(' + (fn.params || '') + ')';
                     if (seen.has(key)) continue;
                     seen.add(key);
 
-                    // Build C++ signature from params
-                    let cppParams = fn.params_typed;
-                    
-                    if (!cppParams && fn.params) {
-                        // Fallback: Add float types to simple params
-                        cppParams = fn.params.split(', ').map(p => {
-                            if (p === 'text' || p === 'message' || p === 'format') return 'const string& ' + p;
-                            if (p === 'key' || p === 'button' || p === 'width' || p === 'height') return 'int ' + p;
-                            if (p === 'value') return 'T ' + p;
-                            return 'float ' + p;
-                        }).join(', ');
-                    }
+                    const retType = fn.return_type !== undefined && fn.return_type !== null ? fn.return_type : '';
+                    const params = fn.params_typed || fn.params || '';
 
-                    // Determine return type
-                    let returnType = fn.return_type;
-                    if (returnType === null || returnType === undefined) {
-                        returnType = '<span style="color:#f44747" title="Return type missing in definition">?</span>';
-                    } else if (returnType === '') {
-                        returnType = ''; // Constructor
-                    }
-
-                    html += `<div class="func">`;
-                    html += `<div class="func-signature">`;
-                    html += `<span class="func-return">${returnType}</span> `;
-                    html += `<span class="func-name">${fn.name}</span>(`;
-                    if (cppParams) {
-                        html += `<span class="func-params">${cppParams}</span>`;
-                    }
-                    html += `)`;
+                    html += `<div class="overview-item" onclick="navTo('function','${esc(fn.name)}','${esc(cat.name)}')">`;
+                    if (retType) html += `<span class="ov-ret">${esc(retType)}</span> `;
+                    html += `<span class="ov-name">${esc(fn.name)}</span>(<span class="ov-params">${esc(params)}</span>)`;
+                    if (fn.desc) html += `<span class="ov-desc">// ${esc(fn.desc)}</span>`;
                     html += `</div>`;
-                    if (fn.desc) {
-                        html += `<div class="func-desc">// ${fn.desc}</div>`;
-                    }
-                    html += `</div>\n`;
                 }
-
-                html += `</div>\n`;
+                html += `</div>`;
             }
+            html += `</div>`;
 
-            // Render constants
-            html += `<h2>Constants</h2>\n<div class="constants">\n`;
+            // Types
+            html += `<div class="overview-section">`;
+            html += `<div class="overview-section-title">Types</div>`;
+            html += `<div class="overview-grid">`;
+            for (const t of TrussSketchAPI.types) {
+                html += `<div class="overview-item ov-type" onclick="navTo('type','${esc(t.name)}')">`;
+                html += `<span class="ov-name">${esc(t.name)}</span>`;
+                if (t.desc) html += `<span class="ov-desc">${esc(t.desc)}</span>`;
+                html += `</div>`;
+            }
+            html += `</div></div>`;
+
+            // Constants
+            html += `<div class="overview-section">`;
+            html += `<div class="overview-section-title">Constants</div>`;
+            html += `<div class="overview-grid">`;
             for (const c of TrussSketchAPI.constants) {
-                html += `<div class="const">${c.name} = ${c.value}</div>\n`;
+                html += `<div class="overview-item ov-const" onclick="navTo('constant','${esc(c.name)}')">`;
+                html += `<span class="ov-name">${esc(c.name)}</span>`;
+                html += `<span class="ov-val">= ${esc(String(c.value))}</span>`;
+                html += `</div>`;
             }
-            html += `</div>\n`;
+            html += `</div></div>`;
 
-            content.innerHTML = html;
+            detail.innerHTML = html;
         }
 
-        renderReference();
+        function navTo(kind, name, cat) {
+            // Highlight sidebar item
+            document.querySelectorAll('.sidebar-item.active').forEach(e => e.classList.remove('active'));
+            const el = document.querySelector(`.sidebar-item[data-kind="${kind}"][data-name="${name}"]`);
+            if (el) el.classList.add('active');
+
+            if (kind === 'function') renderFunctionDetail(name, cat);
+            else if (kind === 'type') renderTypeDetail(name);
+            else if (kind === 'constant') renderConstantDetail(name);
+        }
+
+        function backButton() {
+            return `<div class="detail-back" onclick="showOverview()">&larr; Back to overview</div>`;
+        }
+
+        function showOverview() {
+            document.querySelectorAll('.sidebar-item.active').forEach(e => e.classList.remove('active'));
+            renderOverview();
+        }
+
+        function toggleGroup(id) {
+            document.getElementById(id).classList.toggle('collapsed');
+        }
+
+        function esc(str) {
+            if (!str) return '';
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        // Tooltip
+        const tooltip = document.getElementById('tooltip');
+
+        sidebar.addEventListener('mouseover', (e) => {
+            const item = e.target.closest('.sidebar-item');
+            if (!item || item.dataset.kind !== 'function') {
+                tooltip.style.display = 'none';
+                return;
+            }
+            const ret = item.dataset.ret || '';
+            const params = item.dataset.params || '';
+            const desc = item.dataset.desc || '';
+            let html = `<span class="tt-ret">${esc(ret)}</span> <span class="tt-name">${esc(item.dataset.name)}</span>(<span class="tt-params">${esc(params)}</span>)`;
+            if (desc) html += `<span class="tt-desc">// ${esc(desc)}</span>`;
+            tooltip.innerHTML = html;
+            tooltip.style.display = 'block';
+
+            const rect = item.getBoundingClientRect();
+            tooltip.style.left = (rect.right + 8) + 'px';
+            tooltip.style.top = rect.top + 'px';
+        });
+
+        sidebar.addEventListener('mouseout', (e) => {
+            const item = e.target.closest('.sidebar-item');
+            if (!item || !e.relatedTarget || !item.contains(e.relatedTarget)) {
+                tooltip.style.display = 'none';
+            }
+        });
+
+        // Search
+        searchInput.addEventListener('input', () => {
+            renderSidebar(searchInput.value);
+        });
+
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                renderSidebar('');
+                searchInput.blur();
+            }
+        });
+
+        // Initial render
+        renderSidebar('');
+        renderOverview();
     </script>
 </body>
 </html>
