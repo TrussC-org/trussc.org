@@ -6,13 +6,13 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$SCRIPT_DIR/common.sh"
 
-# Path to ProjectGenerator (macOS)
+# Path to trusscli (macOS)
 TRUSSC_REPO_DIR="$SCRIPT_DIR/../../TrussC"
-PG_BIN="$TRUSSC_REPO_DIR/projectGenerator/projectGenerator.app/Contents/MacOS/projectGenerator"
+TRUSSCLI_BIN="$TRUSSC_REPO_DIR/tools/bin/trusscli.app/Contents/MacOS/trusscli"
 
-if [ ! -f "$PG_BIN" ]; then
-    log_error "ProjectGenerator not found at: $PG_BIN"
-    log_error "Please build ProjectGenerator first."
+if [ ! -f "$TRUSSCLI_BIN" ]; then
+    log_error "trusscli not found at: $TRUSSCLI_BIN"
+    log_error "Please build trusscli first: ./tools/build_mac.command"
     exit 1
 fi
 
@@ -35,17 +35,18 @@ log_info "ビルド対象: ${samples[*]}"
 success_count=0
 fail_count=0
 
-for sample in "${samples[@]}"; do
-    sample_dir=$(find_sample_dir "$sample")
+for sample_input in "${samples[@]}"; do
+    sample=$(sample_basename "$sample_input")
+    sample_dir=$(resolve_sample_dir "$sample_input")
 
     if [[ -z "$sample_dir" ]]; then
-        log_error "$sample: ディレクトリが見つかりません"
+        log_error "$sample_input: ディレクトリが見つかりません"
         ((fail_count++))
         continue
     fi
 
     log_info "$sample: プロジェクト更新..."
-    if ! "$PG_BIN" --update "$sample_dir" --tc-root "$TRUSSC_REPO_DIR"; then
+    if ! "$TRUSSCLI_BIN" update -p "$sample_dir" --tc-root "$TRUSSC_REPO_DIR"; then
         log_error "$sample: プロジェクト更新失敗"
         ((fail_count++))
         continue

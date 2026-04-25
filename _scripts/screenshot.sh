@@ -11,20 +11,36 @@ source "$SCRIPT_DIR/common.sh"
 EXAMPLES_JSON="$SCRIPT_DIR/../examples/examples.json"
 
 # Get sample info from examples.json
+# Args:
+#   $1 sample basename (e.g. "example-basic")
+#   $2 (optional) addon hint to disambiguate when name is duplicated
 # Returns: type|group (e.g., "examples|graphics" or "addons|tcxBox2d")
 get_sample_info() {
     local name="$1"
+    local addon_hint="${2:-}"
     if [[ ! -f "$EXAMPLES_JSON" ]]; then
         echo ""
         return
     fi
 
+    # Addon-disambiguated lookup
+    if [[ -n "$addon_hint" ]]; then
+        local result=$(jq -r --arg name "$name" --arg addon "$addon_hint" '
+            .addons | to_entries[] |
+            select(.key == $addon) |
+            select(.value.items[]? | .name == $name) |
+            "addons|" + .key
+        ' "$EXAMPLES_JSON" | head -1)
+        echo "$result"
+        return
+    fi
+
     # Search in examples
-    local result=$(jq -r "
+    local result=$(jq -r --arg name "$name" '
         .examples | to_entries[] |
-        select(.value.items[]? | .name == \"$name\") |
-        \"examples|\" + .key
-    " "$EXAMPLES_JSON" | head -1)
+        select(.value.items[]? | .name == $name) |
+        "examples|" + .key
+    ' "$EXAMPLES_JSON" | head -1)
 
     if [[ -n "$result" ]]; then
         echo "$result"
@@ -32,35 +48,51 @@ get_sample_info() {
     fi
 
     # Search in addons
-    result=$(jq -r "
+    result=$(jq -r --arg name "$name" '
         .addons | to_entries[] |
-        select(.value.items[]? | .name == \"$name\") |
-        \"addons|\" + .key
-    " "$EXAMPLES_JSON" | head -1)
+        select(.value.items[]? | .name == $name) |
+        "addons|" + .key
+    ' "$EXAMPLES_JSON" | head -1)
 
     echo "$result"
 }
 
 # Check if auto screenshot is enabled for a sample
+# Args:
+#   $1 sample basename
+#   $2 (optional) addon hint
 is_auto_screenshot_enabled() {
     local name="$1"
+    local addon_hint="${2:-}"
     if [[ ! -f "$EXAMPLES_JSON" ]]; then
         return 0
     fi
 
+    if [[ -n "$addon_hint" ]]; then
+        local val=$(jq -r --arg name "$name" --arg addon "$addon_hint" '
+            .addons | to_entries[] |
+            select(.key == $addon) | .value.items[]? |
+            select(.name == $name) | .autoScreenshot
+        ' "$EXAMPLES_JSON" | head -1)
+        if [[ "$val" == "false" ]]; then
+            return 1
+        fi
+        return 0
+    fi
+
     # Check in examples
-    local val=$(jq -r "
-        .examples[]?.items[]? | select(.name == \"$name\") | .autoScreenshot
-    " "$EXAMPLES_JSON" | head -1)
+    local val=$(jq -r --arg name "$name" '
+        .examples[]?.items[]? | select(.name == $name) | .autoScreenshot
+    ' "$EXAMPLES_JSON" | head -1)
 
     if [[ "$val" == "false" ]]; then
         return 1
     fi
 
     # Check in addons
-    val=$(jq -r "
-        .addons[]?.items[]? | select(.name == \"$name\") | .autoScreenshot
-    " "$EXAMPLES_JSON" | head -1)
+    val=$(jq -r --arg name "$name" '
+        .addons[]?.items[]? | select(.name == $name) | .autoScreenshot
+    ' "$EXAMPLES_JSON" | head -1)
 
     if [[ "$val" == "false" ]]; then
         return 1
@@ -91,17 +123,21 @@ log_info "スクショ対象: ${samples[*]}"
 success_count=0
 fail_count=0
 
-for sample in "${samples[@]}"; do
+for sample_input in "${samples[@]}"; do
+    # Allow "addon/name" form to disambiguate duplicate sample names
+    sample=$(sample_basename "$sample_input")
+    addon_hint=$(sample_addon_hint "$sample_input")
+
     # Check if auto screenshot is disabled in examples.json
-    if ! is_auto_screenshot_enabled "$sample"; then
-        log_warn "$sample: 自動スクショ無効（autoScreenshot: false）"
+    if ! is_auto_screenshot_enabled "$sample" "$addon_hint"; then
+        log_warn "$sample_input: 自動スクショ無効（autoScreenshot: false）"
         continue
     fi
 
     # Get sample type and group from examples.json
-    sample_info=$(get_sample_info "$sample")
+    sample_info=$(get_sample_info "$sample" "$addon_hint")
     if [[ -z "$sample_info" ]]; then
-        log_warn "$sample: examples.jsonに登録されていません"
+        log_warn "$sample_input: examples.jsonに登録されていません"
         ((fail_count++))
         continue
     fi
@@ -109,7 +145,7 @@ for sample in "${samples[@]}"; do
     sample_type="${sample_info%%|*}"
     sample_group="${sample_info##*|}"
 
-    sample_dir=$(find_sample_dir "$sample")
+    sample_dir=$(resolve_sample_dir "$sample_input")
 
     if [[ -z "$sample_dir" ]]; then
         log_error "$sample: ディレクトリが見つかりません"
@@ -141,35 +177,37 @@ for sample in "${samples[@]}"; do
     screenshot_path="$local_dir/${sample}.png"
     thumb_path="$local_dir/${sample}_thumb.png"
 
-    # tcdebug用のFIFOを作成
-    fifo_path="/tmp/trussc_${sample}_$$"
-    mkfifo "$fifo_path" 2>/dev/null || true
+    # MCP port (毎サンプルでランダム化、前回プロセスの残骸との衝突を避ける)
+    mcp_port=$((8700 + RANDOM % 100))
 
-    # アプリを起動（FIFOをfd 3に接続）
+    # アプリを起動し MCP HTTP 経由でスクショを撮る
     (
         cd "$sample_dir"
         export TRUSSC_MCP=1
-        exec 3<>"$fifo_path"
-        "$app_path" <&3 &
+        export TRUSSC_MCP_PORT=$mcp_port
+        "$app_path" >/dev/null 2>&1 &
         app_pid=$!
 
-        # 起動待ち & Initialize
-        sleep 1
-        echo '{"jsonrpc":"2.0","method":"initialize","id":1,"params":{}}' >&3
+        # HTTP サーバの立ち上がり待ち
+        sleep 2
 
-        # 1秒待ってスクショ
-        sleep 1
-        # JSON string construction using printf to safely handle path
-        # Note: We assume path doesn't contain double quotes for simplicity in this script
-        echo "{\"jsonrpc\":\"2.0\",\"method\":\"tools/call\",\"id\":2,\"params\":{\"name\":\"save_screenshot\",\"arguments\":{\"path\":\"$screenshot_path\"}}}" >&3
-        sleep 1
+        # Initialize (short timeout; don't abort script on curl failure)
+        curl -s --max-time 5 -X POST "http://localhost:${mcp_port}/mcp" \
+            -H "Content-Type: application/json" \
+            -d '{"jsonrpc":"2.0","method":"initialize","id":1,"params":{}}' >/dev/null || true
 
-        # 終了
-        kill $app_pid 2>/dev/null || true
+        # save_screenshot (path に特殊文字が無い前提)
+        curl -s --max-time 10 -X POST "http://localhost:${mcp_port}/mcp" \
+            -H "Content-Type: application/json" \
+            -d "{\"jsonrpc\":\"2.0\",\"method\":\"tools/call\",\"id\":2,\"params\":{\"name\":\"save_screenshot\",\"arguments\":{\"path\":\"$screenshot_path\"}}}" >/dev/null || true
+
+        sleep 0.5
+
+        # 終了 (強制kill で確実に止める。ポート解放まで少し待つ)
+        kill -9 $app_pid 2>/dev/null || true
         wait $app_pid 2>/dev/null || true
+        sleep 0.3
     )
-
-    rm -f "$fifo_path"
 
     if [[ -f "$screenshot_path" ]]; then
         # サムネイル生成（幅280、アスペクト比維持）

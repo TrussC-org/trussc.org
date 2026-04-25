@@ -6,13 +6,13 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$SCRIPT_DIR/common.sh"
 
-# Path to ProjectGenerator (macOS)
+# Path to trusscli (macOS)
 TRUSSC_REPO_DIR="$SCRIPT_DIR/../../TrussC"
-PG_BIN="$TRUSSC_REPO_DIR/projectGenerator/projectGenerator.app/Contents/MacOS/projectGenerator"
+TRUSSCLI_BIN="$TRUSSC_REPO_DIR/tools/bin/trusscli.app/Contents/MacOS/trusscli"
 
-if [ ! -f "$PG_BIN" ]; then
-    log_error "ProjectGenerator not found at: $PG_BIN"
-    log_error "Please build ProjectGenerator first."
+if [ ! -f "$TRUSSCLI_BIN" ]; then
+    log_error "trusscli not found at: $TRUSSCLI_BIN"
+    log_error "Please build trusscli first: ./tools/build_mac.command"
     exit 1
 fi
 
@@ -20,20 +20,35 @@ fi
 EXAMPLES_JSON="$SCRIPT_DIR/../examples/examples.json"
 
 # Get sample info from examples.json
+# Args:
+#   $1 sample basename
+#   $2 (optional) addon hint to disambiguate duplicate names
 # Returns: type|group (e.g., "examples|graphics" or "addons|tcxBox2d")
 get_sample_info() {
     local name="$1"
+    local addon_hint="${2:-}"
     if [[ ! -f "$EXAMPLES_JSON" ]]; then
         echo ""
         return
     fi
 
+    if [[ -n "$addon_hint" ]]; then
+        local result=$(jq -r --arg name "$name" --arg addon "$addon_hint" '
+            .addons | to_entries[] |
+            select(.key == $addon) |
+            select(.value.items[]? | .name == $name) |
+            "addons|" + .key
+        ' "$EXAMPLES_JSON" | head -1)
+        echo "$result"
+        return
+    fi
+
     # Search in examples
-    local result=$(jq -r "
+    local result=$(jq -r --arg name "$name" '
         .examples | to_entries[] |
-        select(.value.items[]? | .name == \"$name\") |
-        \"examples|\" + .key
-    " "$EXAMPLES_JSON" | head -1)
+        select(.value.items[]? | .name == $name) |
+        "examples|" + .key
+    ' "$EXAMPLES_JSON" | head -1)
 
     if [[ -n "$result" ]]; then
         echo "$result"
@@ -41,11 +56,11 @@ get_sample_info() {
     fi
 
     # Search in addons
-    result=$(jq -r "
+    result=$(jq -r --arg name "$name" '
         .addons | to_entries[] |
-        select(.value.items[]? | .name == \"$name\") |
-        \"addons|\" + .key
-    " "$EXAMPLES_JSON" | head -1)
+        select(.value.items[]? | .name == $name) |
+        "addons|" + .key
+    ' "$EXAMPLES_JSON" | head -1)
 
     echo "$result"
 }
@@ -69,18 +84,39 @@ log_info "WASMビルド対象: ${samples[*]}"
 success_count=0
 fail_count=0
 
-for sample in "${samples[@]}"; do
+for sample_input in "${samples[@]}"; do
+    sample=$(sample_basename "$sample_input")
+    addon_hint=$(sample_addon_hint "$sample_input")
+
     # Get sample type and group from examples.json
-    sample_info=$(get_sample_info "$sample")
+    sample_info=$(get_sample_info "$sample" "$addon_hint")
     if [[ -z "$sample_info" ]]; then
-        log_warn "$sample: examples.jsonに登録されていません（スキップ）"
+        log_warn "$sample_input: examples.jsonに登録されていません（スキップ）"
         continue
     fi
 
     sample_type="${sample_info%%|*}"
     sample_group="${sample_info##*|}"
 
-    sample_dir=$(find_sample_dir "$sample")
+    # Skip when webSupported is explicitly false in examples.json
+    if [[ -n "$addon_hint" ]]; then
+        web_supported=$(jq -r --arg name "$sample" --arg addon "$addon_hint" '
+            .addons | to_entries[] |
+            select(.key == $addon) | .value.items[]? |
+            select(.name == $name) | .webSupported
+        ' "$EXAMPLES_JSON" | head -1)
+    else
+        web_supported=$(jq -r --arg name "$sample" '
+            (.examples[]?.items[]?, .addons[]?.items[]?) |
+            select(.name == $name) | .webSupported
+        ' "$EXAMPLES_JSON" | head -1)
+    fi
+    if [[ "$web_supported" == "false" ]]; then
+        log_warn "$sample_input: webSupported=false のためスキップ"
+        continue
+    fi
+
+    sample_dir=$(resolve_sample_dir "$sample_input")
 
     if [[ -z "$sample_dir" ]]; then
         log_error "$sample: ディレクトリが見つかりません"
@@ -89,7 +125,7 @@ for sample in "${samples[@]}"; do
     fi
 
     log_info "$sample: プロジェクト更新 (Web)..."
-    if ! "$PG_BIN" --update "$sample_dir" --web --tc-root "$TRUSSC_REPO_DIR"; then
+    if ! "$TRUSSCLI_BIN" update -p "$sample_dir" --web --tc-root "$TRUSSC_REPO_DIR"; then
         log_error "$sample: プロジェクト更新失敗"
         ((fail_count++))
         continue

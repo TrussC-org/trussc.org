@@ -32,6 +32,37 @@ find_sample_dir() {
     return 1
 }
 
+# 引数を解決してサンプルディレクトリを取得
+# - "name"          : 既存の find_sample_dir で検索（最初にヒットしたものを返す）
+# - "addon/name"    : addons/<addon>/<name> を直接指定（重複名の対策）
+resolve_sample_dir() {
+    local input="$1"
+    if [[ "$input" == */* ]]; then
+        local full_path="$ADDONS_DIR/$input"
+        if [[ -d "$full_path" ]]; then
+            echo "$full_path"
+            return 0
+        fi
+        return 1
+    fi
+    find_sample_dir "$input"
+}
+
+# 入力からサンプルのベース名（basename）を取り出す
+sample_basename() {
+    basename "$1"
+}
+
+# 入力から addon ヒント（含まれていれば addon 名、なければ空）を返す
+sample_addon_hint() {
+    local input="$1"
+    if [[ "$input" == */* ]]; then
+        dirname "$input"
+    else
+        echo ""
+    fi
+}
+
 # サンプルのカテゴリを取得
 get_sample_category() {
     local sample_dir="$1"
