@@ -32,6 +32,24 @@
           "width": 960,
           "height": 600,
           "webSupported": true
+        },
+        {
+          "name": "normalMapExample",
+          "width": 960,
+          "height": 720,
+          "webSupported": true
+        },
+        {
+          "name": "pbrSpheresExample",
+          "width": 960,
+          "height": 720,
+          "webSupported": true
+        },
+        {
+          "name": "projectorSimulationExample",
+          "width": 1280,
+          "height": 720,
+          "webSupported": true
         }
       ]
     },
@@ -160,20 +178,16 @@
         }
       ]
     },
-    "ImGui": {
-      "visible": true,
-      "items": [
-        {
-          "name": "imguiExample",
-          "width": 960,
-          "height": 800,
-          "webSupported": true
-        }
-      ]
-    },
     "input_output": {
       "visible": true,
       "items": [
+        {
+          "name": "asyncDialogExample",
+          "width": 480,
+          "height": 800,
+          "webSupported": false,
+          "autoScreenshot": false
+        },
         {
           "name": "cursorExample",
           "width": 960,
@@ -402,6 +416,18 @@
           "width": 800,
           "height": 600,
           "webSupported": true
+        },
+        {
+          "name": "platformInfoExample",
+          "width": 640,
+          "height": 560,
+          "webSupported": true
+        },
+        {
+          "name": "systemInfoExample",
+          "width": 480,
+          "height": 800,
+          "webSupported": true
         }
       ]
     },
@@ -575,6 +601,91 @@
           "height": 600,
           "webSupported": false,
           "autoScreenshot": false
+        }
+      ]
+    },
+    "tcxImGui": {
+      "visible": true,
+      "items": [
+        {
+          "name": "example-basic",
+          "width": 960,
+          "height": 800,
+          "webSupported": true
+        }
+      ]
+    },
+    "tcxCurl": {
+      "visible": true,
+      "items": [
+        {
+          "name": "example-curl",
+          "width": 640,
+          "height": 320,
+          "webSupported": false
+        }
+      ]
+    },
+    "tcxGltf": {
+      "visible": true,
+      "items": [
+        {
+          "name": "example-gltf",
+          "width": 1280,
+          "height": 720,
+          "webSupported": true
+        }
+      ]
+    },
+    "tcxObj": {
+      "visible": true,
+      "items": [
+        {
+          "name": "example-basic",
+          "width": 800,
+          "height": 600,
+          "webSupported": true
+        }
+      ]
+    },
+    "tcxLua": {
+      "visible": false,
+      "items": [
+        {
+          "name": "example-basic",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "example-simple",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "example-math",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "example-types",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "example-easycam",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "example-json-xml",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
         }
       ]
     }
