@@ -978,6 +978,20 @@
           "notes_ko": "3D 정수 벡터 (x, y, z)"
         },
         {
+          "of": "-",
+          "tc": "IVec2",
+          "notes": "2D integer vector (x, y)",
+          "notes_ja": "2D整数ベクトル (x, y)",
+          "notes_ko": ""
+        },
+        {
+          "of": "-",
+          "tc": "IVec3",
+          "notes": "3D integer vector (x, y, z)",
+          "notes_ja": "3D整数ベクトル (x, y, z)",
+          "notes_ko": ""
+        },
+        {
           "of": "glm::mat4 / ofMatrix4x4",
           "tc": "Mat4",
           "notes": "4x4 matrix for 3D transformations",

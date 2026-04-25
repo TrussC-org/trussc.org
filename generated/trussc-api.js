@@ -5,7 +5,7 @@
 // Do not edit directly - edit api-definition.yaml instead
 
 const TrussCAPI = {
-    "version": "v0.4.1",
+    "version": "v0.4.4",
     "categories": [
         {
             "name": "Lifecycle",
@@ -1761,6 +1761,297 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "Platform",
+            "name_ja": "プラットフォーム",
+            "name_ko": "플랫폼",
+            "functions": [
+                {
+                    "name": "Platform::isWeb",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on Web (Emscripten / WASM)",
+                    "desc_ja": "Web (Emscripten / WASM) で true",
+                    "desc_ko": "Web (Emscripten / WASM)에서 true",
+                    "snippet": "Platform::isWeb()"
+                },
+                {
+                    "name": "Platform::isMacOS",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on macOS",
+                    "desc_ja": "macOSで true",
+                    "desc_ko": "macOS에서 true",
+                    "snippet": "Platform::isMacOS()"
+                },
+                {
+                    "name": "Platform::isIOS",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on iOS",
+                    "desc_ja": "iOSで true",
+                    "desc_ko": "iOS에서 true",
+                    "snippet": "Platform::isIOS()"
+                },
+                {
+                    "name": "Platform::isWindows",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on Windows",
+                    "desc_ja": "Windowsで true",
+                    "desc_ko": "Windows에서 true",
+                    "snippet": "Platform::isWindows()"
+                },
+                {
+                    "name": "Platform::isAndroid",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on Android",
+                    "desc_ja": "Androidで true",
+                    "desc_ko": "Android에서 true",
+                    "snippet": "Platform::isAndroid()"
+                },
+                {
+                    "name": "Platform::isLinux",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on Linux (desktop, excludes Android)",
+                    "desc_ja": "Linux (デスクトップ、Android除く) で true",
+                    "desc_ko": "Linux (데스크톱, Android 제외)에서 true",
+                    "snippet": "Platform::isLinux()"
+                },
+                {
+                    "name": "Platform::isApple",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on any Apple platform (macOS or iOS)",
+                    "desc_ja": "Apple系 (macOS または iOS) で true",
+                    "desc_ko": "Apple 플랫폼 (macOS 또는 iOS)에서 true",
+                    "snippet": "Platform::isApple()"
+                },
+                {
+                    "name": "Platform::isMobile",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on mobile (iOS or Android)",
+                    "desc_ja": "モバイル (iOS または Android) で true",
+                    "desc_ko": "모바일 (iOS 또는 Android)에서 true",
+                    "snippet": "Platform::isMobile()"
+                },
+                {
+                    "name": "Platform::isDesktop",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on desktop (macOS, Windows, or Linux)",
+                    "desc_ja": "デスクトップ (macOS, Windows, Linux) で true",
+                    "desc_ko": "데스크톱 (macOS, Windows, Linux)에서 true",
+                    "snippet": "Platform::isDesktop()"
+                },
+                {
+                    "name": "Platform::name",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "const char*",
+                    "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"",
+                    "desc_ja": "短いプラットフォーム名: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"",
+                    "desc_ko": "짧은 플랫폼 이름: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"",
+                    "snippet": "Platform::name()"
+                }
+            ]
+        },
+        {
+            "name": "Graphics Backend",
+            "name_ja": "グラフィックスバックエンド",
+            "name_ko": "그래픽스 백엔드",
+            "functions": [
+                {
+                    "name": "GraphicsBackend::isOpenGL",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on OpenGL (core or GLES3)",
+                    "desc_ja": "OpenGL (coreまたはGLES3) で動作中なら true",
+                    "desc_ko": "OpenGL (core 또는 GLES3)에서 실행 중이면 true",
+                    "snippet": "GraphicsBackend::isOpenGL()"
+                },
+                {
+                    "name": "GraphicsBackend::isMetal",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on Apple Metal",
+                    "desc_ja": "Apple Metalで動作中なら true",
+                    "desc_ko": "Apple Metal에서 실행 중이면 true",
+                    "snippet": "GraphicsBackend::isMetal()"
+                },
+                {
+                    "name": "GraphicsBackend::isD3D11",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on Direct3D 11",
+                    "desc_ja": "Direct3D 11で動作中なら true",
+                    "desc_ko": "Direct3D 11에서 실행 중이면 true",
+                    "snippet": "GraphicsBackend::isD3D11()"
+                },
+                {
+                    "name": "GraphicsBackend::isWebGPU",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on WebGPU",
+                    "desc_ja": "WebGPUで動作中なら true",
+                    "desc_ko": "WebGPU에서 실행 중이면 true",
+                    "snippet": "GraphicsBackend::isWebGPU()"
+                },
+                {
+                    "name": "GraphicsBackend::isWebGL2",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on WebGL2 (GLES3 under Emscripten)",
+                    "desc_ja": "WebGL2 (EmscriptenのGLES3) で動作中なら true",
+                    "desc_ko": "WebGL2 (Emscripten의 GLES3)에서 실행 중이면 true",
+                    "snippet": "GraphicsBackend::isWebGL2()"
+                },
+                {
+                    "name": "GraphicsBackend::isVulkan",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on Vulkan",
+                    "desc_ja": "Vulkanで動作中なら true",
+                    "desc_ko": "Vulkan에서 실행 중이면 true",
+                    "snippet": "GraphicsBackend::isVulkan()"
+                },
+                {
+                    "name": "GraphicsBackend::name",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "const char*",
+                    "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"",
+                    "desc_ja": "短いバックエンド名: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"",
+                    "desc_ko": "짧은 백엔드 이름: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"",
+                    "snippet": "GraphicsBackend::name()"
+                }
+            ]
+        },
+        {
+            "name": "Build Info",
+            "name_ja": "ビルド情報",
+            "name_ko": "빌드 정보",
+            "functions": [
+                {
+                    "name": "BuildInfo::date",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "const char*",
+                    "desc": "Build date in \"YYYY-MM-DD\" form (local time, CMake configure time)",
+                    "desc_ja": "ビルド日 \"YYYY-MM-DD\" 形式 (ローカル時刻、CMake configure 時点)",
+                    "desc_ko": "빌드 날짜 \"YYYY-MM-DD\" 형식 (로컬 시간, CMake 구성 시점)",
+                    "snippet": "BuildInfo::date()"
+                },
+                {
+                    "name": "BuildInfo::time",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "const char*",
+                    "desc": "Build time in \"HH:MM:SS\" form (local time)",
+                    "desc_ja": "ビルド時刻 \"HH:MM:SS\" 形式 (ローカル時刻)",
+                    "desc_ko": "빌드 시간 \"HH:MM:SS\" 형식 (로컬 시간)",
+                    "snippet": "BuildInfo::time()"
+                },
+                {
+                    "name": "BuildInfo::dateTime",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "const char*",
+                    "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)",
+                    "desc_ja": "ビルド日時 \"YYYY-MM-DD HH:MM:SS\" 形式 (ローカル時刻)",
+                    "desc_ko": "빌드 날짜와 시간 \"YYYY-MM-DD HH:MM:SS\" 형식 (로컬 시간)",
+                    "snippet": "BuildInfo::dateTime()"
+                },
+                {
+                    "name": "BuildInfo::timestamp",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int64_t",
+                    "desc": "Build timestamp as Unix seconds (UTC)",
+                    "desc_ja": "ビルド時刻のUnix秒 (UTC)",
+                    "desc_ko": "빌드 타임스탬프 Unix 초 (UTC)",
+                    "snippet": "BuildInfo::timestamp()"
+                },
+                {
+                    "name": "BuildInfo::year",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build year (e.g. 2026)",
+                    "desc_ja": "ビルド年 (例: 2026)",
+                    "desc_ko": "빌드 연도 (예: 2026)",
+                    "snippet": "BuildInfo::year()"
+                },
+                {
+                    "name": "BuildInfo::month",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build month (1-12)",
+                    "desc_ja": "ビルド月 (1-12)",
+                    "desc_ko": "빌드 월 (1-12)",
+                    "snippet": "BuildInfo::month()"
+                },
+                {
+                    "name": "BuildInfo::day",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build day of month (1-31)",
+                    "desc_ja": "ビルド日 (1-31)",
+                    "desc_ko": "빌드 일 (1-31)",
+                    "snippet": "BuildInfo::day()"
+                },
+                {
+                    "name": "BuildInfo::hour",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build hour (0-23)",
+                    "desc_ja": "ビルド時 (0-23)",
+                    "desc_ko": "빌드 시 (0-23)",
+                    "snippet": "BuildInfo::hour()"
+                },
+                {
+                    "name": "BuildInfo::minute",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build minute (0-59)",
+                    "desc_ja": "ビルド分 (0-59)",
+                    "desc_ko": "빌드 분 (0-59)",
+                    "snippet": "BuildInfo::minute()"
+                },
+                {
+                    "name": "BuildInfo::second",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build second (0-59)",
+                    "desc_ja": "ビルド秒 (0-59)",
+                    "desc_ko": "빌드 초 (0-59)",
+                    "snippet": "BuildInfo::second()"
+                }
+            ]
+        },
+        {
             "name": "Time - Elapsed",
             "name_ja": "時間 - 経過",
             "name_ko": "시간 - 경과",
@@ -2570,6 +2861,26 @@ const TrussCAPI = {
                     "desc_ja": "画面の向きを設定（モバイル用）。Orientation::Portrait, Landscape, All",
                     "desc_ko": "허용되는 화면 방향을 설정 (모바일). 값: Orientation::Portrait, Landscape, All",
                     "snippet": "setOrientation(${1:Orientation::All})"
+                },
+                {
+                    "name": "setKeepScreenOn",
+                    "params": "enabled",
+                    "params_typed": "bool enabled",
+                    "return_type": "void",
+                    "desc": "Prevent display sleep / auto-lock while the app is running. Supported: Android, iOS, macOS, Windows. Linux / Web: no-op",
+                    "desc_ja": "アプリ実行中に画面スリープ/自動ロックを抑止。対応: Android, iOS, macOS, Windows。Linux / Web は no-op",
+                    "desc_ko": "앱 실행 중 화면 절전/자동 잠금을 방지. 지원: Android, iOS, macOS, Windows. Linux / Web는 동작하지 않음",
+                    "snippet": "setKeepScreenOn(${1:true})"
+                },
+                {
+                    "name": "getKeepScreenOn",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check whether keep-screen-on is currently enabled",
+                    "desc_ja": "現在 keep-screen-on が有効かどうかを取得",
+                    "desc_ko": "현재 keep-screen-on이 활성화되어 있는지 확인",
+                    "snippet": "getKeepScreenOn()"
                 },
                 {
                     "name": "setIndependentFps",
@@ -4699,6 +5010,133 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "Lighting & PBR",
+            "name_ja": "照明・PBR",
+            "name_ko": "조명 및 PBR",
+            "functions": [
+                {
+                    "name": "addLight",
+                    "params": "light",
+                    "params_typed": "Light& light",
+                    "return_type": "void",
+                    "desc": "Add a light to the scene",
+                    "desc_ja": "シーンにlightを追加",
+                    "desc_ko": "씬에 조명을 추가",
+                    "snippet": "addLight(${1:light})"
+                },
+                {
+                    "name": "removeLight",
+                    "params": "light",
+                    "params_typed": "Light& light",
+                    "return_type": "void",
+                    "desc": "Remove a light from the scene",
+                    "desc_ja": "シーンからlightを削除",
+                    "desc_ko": "씬에서 조명을 제거",
+                    "snippet": "removeLight(${1:light})"
+                },
+                {
+                    "name": "clearLights",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Remove all lights from the scene",
+                    "desc_ja": "全てのlightを削除",
+                    "desc_ko": "모든 조명을 제거",
+                    "snippet": "clearLights()"
+                },
+                {
+                    "name": "setMaterial",
+                    "params": "material",
+                    "params_typed": "Material& material",
+                    "return_type": "void",
+                    "desc": "Set material for subsequent mesh draws (activates PBR)",
+                    "desc_ja": "以降のmesh描画に使うmaterialを設定（PBR有効化）",
+                    "desc_ko": "이후 메쉬 렌더링에 사용할 재질을 설정 (PBR 활성화)",
+                    "snippet": "setMaterial(${1:material})"
+                },
+                {
+                    "name": "clearMaterial",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Clear material (return to default rendering)",
+                    "desc_ja": "materialをクリア（デフォルトに戻す）",
+                    "desc_ko": "재질을 해제 (기본 렌더링으로 복귀)",
+                    "snippet": "clearMaterial()"
+                },
+                {
+                    "name": "setCameraPosition",
+                    "params": "pos",
+                    "params_typed": "const Vec3& pos",
+                    "return_type": "void",
+                    "desc": "Set camera position for specular calculation",
+                    "desc_ja": "specular計算用のcamera位置を設定",
+                    "desc_ko": "스페큘러 계산을 위한 카메라 위치를 설정",
+                    "snippet": "setCameraPosition(${1:cam.getPosition()})"
+                },
+                {
+                    "name": "setCameraPosition",
+                    "params": "x, y, z",
+                    "params_typed": "float x, float y, float z",
+                    "return_type": "void",
+                    "desc": "Set camera position for specular calculation",
+                    "desc_ja": "specular計算用のcamera位置を設定",
+                    "desc_ko": "스페큘러 계산을 위한 카메라 위치를 설정",
+                    "snippet": "setCameraPosition(${1:cam.getPosition()})"
+                },
+                {
+                    "name": "setEnvironment",
+                    "params": "env",
+                    "params_typed": "Environment& env",
+                    "return_type": "void",
+                    "desc": "Set IBL environment for PBR ambient lighting",
+                    "desc_ja": "PBR ambient用のIBL environment mapを設定",
+                    "desc_ko": "PBR 앰비언트용 IBL 환경맵을 설정",
+                    "snippet": "setEnvironment(${1:env})"
+                },
+                {
+                    "name": "clearEnvironment",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Clear IBL environment",
+                    "desc_ja": "IBL environment mapをクリア",
+                    "desc_ko": "IBL 환경맵을 해제",
+                    "snippet": "clearEnvironment()"
+                },
+                {
+                    "name": "beginShadowPass",
+                    "params": "light",
+                    "params_typed": "Light& light",
+                    "return_type": "void",
+                    "desc": "Begin shadow depth pass from the light's point of view",
+                    "desc_ja": "light視点のshadow depth passを開始",
+                    "desc_ko": "조명 시점의 섀도우 뎁스 패스를 시작",
+                    "snippet": "beginShadowPass(${1:light})"
+                },
+                {
+                    "name": "endShadowPass",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "End shadow depth pass",
+                    "desc_ja": "shadow depth passを終了",
+                    "desc_ko": "섀도우 뎁스 패스를 종료",
+                    "snippet": "endShadowPass()"
+                },
+                {
+                    "name": "shadowDraw",
+                    "params": "mesh",
+                    "params_typed": "const Mesh& mesh",
+                    "return_type": "void",
+                    "desc": "Draw a mesh into the shadow depth pass (depth only)",
+                    "desc_ja": "shadow depth passにmeshを描画（depthのみ）",
+                    "desc_ko": "섀도우 뎁스 패스에 메쉬를 렌더링 (뎁스 전용)",
+                    "snippet": "shadowDraw(${1:mesh})"
+                }
+            ]
+        },
+        {
             "name": "Math - 3D",
             "name_ja": "数学 - 3D",
             "name_ko": "수학 - 3D",
@@ -5189,54 +5627,81 @@ const TrussCAPI = {
                     "params": "slot, value",
                     "params_typed": "int slot, float value",
                     "return_type": "void",
-                    "desc": "Set uniform variable by slot",
-                    "desc_ja": "スロット番号でUniform変数を設定",
-                    "desc_ko": "슬롯별로 유니폼 변수를 설정"
+                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)",
+                    "desc_ja": "スロット番号でUniform変数を設定 (vector版は配列送信、Vec3配列はstd140に合わせて内部でVec4にパディング)",
+                    "desc_ko": "슬롯별로 유니폼 변수를 설정 (vector 오버로드는 배열 전송, Vec3 배열은 std140에 맞춰 내부적으로 Vec4로 패딩)"
                 },
                 {
                     "name": "setUniform",
                     "params": "slot, v",
                     "params_typed": "int slot, const Vec2& v",
                     "return_type": "void",
-                    "desc": "Set uniform variable by slot",
-                    "desc_ja": "スロット番号でUniform変数を設定",
-                    "desc_ko": "슬롯별로 유니폼 변수를 설정"
+                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)",
+                    "desc_ja": "スロット番号でUniform変数を設定 (vector版は配列送信、Vec3配列はstd140に合わせて内部でVec4にパディング)",
+                    "desc_ko": "슬롯별로 유니폼 변수를 설정 (vector 오버로드는 배열 전송, Vec3 배열은 std140에 맞춰 내부적으로 Vec4로 패딩)"
                 },
                 {
                     "name": "setUniform",
                     "params": "slot, v",
                     "params_typed": "int slot, const Vec3& v",
                     "return_type": "void",
-                    "desc": "Set uniform variable by slot",
-                    "desc_ja": "スロット番号でUniform変数を設定",
-                    "desc_ko": "슬롯별로 유니폼 변수를 설정"
+                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)",
+                    "desc_ja": "スロット番号でUniform変数を設定 (vector版は配列送信、Vec3配列はstd140に合わせて内部でVec4にパディング)",
+                    "desc_ko": "슬롯별로 유니폼 변수를 설정 (vector 오버로드는 배열 전송, Vec3 배열은 std140에 맞춰 내부적으로 Vec4로 패딩)"
                 },
                 {
                     "name": "setUniform",
                     "params": "slot, v",
                     "params_typed": "int slot, const Vec4& v",
                     "return_type": "void",
-                    "desc": "Set uniform variable by slot",
-                    "desc_ja": "スロット番号でUniform変数を設定",
-                    "desc_ko": "슬롯별로 유니폼 변수를 설정"
+                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)",
+                    "desc_ja": "スロット番号でUniform変数を設定 (vector版は配列送信、Vec3配列はstd140に合わせて内部でVec4にパディング)",
+                    "desc_ko": "슬롯별로 유니폼 변수를 설정 (vector 오버로드는 배열 전송, Vec3 배열은 std140에 맞춰 내부적으로 Vec4로 패딩)"
                 },
                 {
                     "name": "setUniform",
                     "params": "slot, c",
                     "params_typed": "int slot, const Color& c",
                     "return_type": "void",
-                    "desc": "Set uniform variable by slot",
-                    "desc_ja": "スロット番号でUniform変数を設定",
-                    "desc_ko": "슬롯별로 유니폼 변수를 설정"
+                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)",
+                    "desc_ja": "スロット番号でUniform変数を設定 (vector版は配列送信、Vec3配列はstd140に合わせて内部でVec4にパディング)",
+                    "desc_ko": "슬롯별로 유니폼 변수를 설정 (vector 오버로드는 배열 전송, Vec3 배열은 std140에 맞춰 내부적으로 Vec4로 패딩)"
                 },
                 {
                     "name": "setUniform",
                     "params": "slot, v",
                     "params_typed": "int slot, const vector<float>& v",
                     "return_type": "void",
-                    "desc": "Set uniform variable by slot",
-                    "desc_ja": "スロット番号でUniform変数を設定",
-                    "desc_ko": "슬롯별로 유니폼 변수를 설정"
+                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)",
+                    "desc_ja": "スロット番号でUniform変数を設定 (vector版は配列送信、Vec3配列はstd140に合わせて内部でVec4にパディング)",
+                    "desc_ko": "슬롯별로 유니폼 변수를 설정 (vector 오버로드는 배열 전송, Vec3 배열은 std140에 맞춰 내부적으로 Vec4로 패딩)"
+                },
+                {
+                    "name": "setUniform",
+                    "params": "slot, v",
+                    "params_typed": "int slot, const vector<Vec2>& v",
+                    "return_type": "void",
+                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)",
+                    "desc_ja": "スロット番号でUniform変数を設定 (vector版は配列送信、Vec3配列はstd140に合わせて内部でVec4にパディング)",
+                    "desc_ko": "슬롯별로 유니폼 변수를 설정 (vector 오버로드는 배열 전송, Vec3 배열은 std140에 맞춰 내부적으로 Vec4로 패딩)"
+                },
+                {
+                    "name": "setUniform",
+                    "params": "slot, v",
+                    "params_typed": "int slot, const vector<Vec3>& v",
+                    "return_type": "void",
+                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)",
+                    "desc_ja": "スロット番号でUniform変数を設定 (vector版は配列送信、Vec3配列はstd140に合わせて内部でVec4にパディング)",
+                    "desc_ko": "슬롯별로 유니폼 변수를 설정 (vector 오버로드는 배열 전송, Vec3 배열은 std140에 맞춰 내부적으로 Vec4로 패딩)"
+                },
+                {
+                    "name": "setUniform",
+                    "params": "slot, v",
+                    "params_typed": "int slot, const vector<Vec4>& v",
+                    "return_type": "void",
+                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)",
+                    "desc_ja": "スロット番号でUniform変数を設定 (vector版は配列送信、Vec3配列はstd140に合わせて内部でVec4にパディング)",
+                    "desc_ko": "슬롯별로 유니폼 변수를 설정 (vector 오버로드는 배열 전송, Vec3 배열은 std140에 맞춰 내부적으로 Vec4로 패딩)"
                 },
                 {
                     "name": "setTexture",
@@ -5722,6 +6187,463 @@ const TrussCAPI = {
                     "desc_ja": "ストロークメッシュを描画",
                     "desc_ko": "스트로크 메쉬를 그림",
                     "snippet": "draw()"
+                }
+            ]
+        },
+        {
+            "name": "Video",
+            "name_ja": "ビデオ",
+            "name_ko": "비디오",
+            "functions": [
+                {
+                    "name": "VideoPlayer",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "",
+                    "desc": "Create a video player",
+                    "desc_ja": "ビデオプレイヤーを作成",
+                    "desc_ko": "비디오 플레이어를 생성",
+                    "snippet": "VideoPlayer()"
+                },
+                {
+                    "name": "createVideoPlayer",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "VideoPlayer@",
+                    "desc": "Create a video player (TrussSketch factory)",
+                    "desc_ja": "ビデオプレイヤーを作成（TrussSketch用ファクトリ）",
+                    "desc_ko": "비디오 플레이어를 생성 (TrussSketch 팩토리)",
+                    "snippet": "VideoPlayer@ vid = createVideoPlayer();"
+                },
+                {
+                    "name": "load",
+                    "params": "path",
+                    "params_typed": "const string& path",
+                    "return_type": "bool",
+                    "desc": "Load a video file",
+                    "desc_ja": "ビデオファイルを読み込む",
+                    "desc_ko": "비디오 파일을 로드",
+                    "snippet": "load(${1:\"video.mp4\"})"
+                },
+                {
+                    "name": "close",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Close the video and release resources",
+                    "desc_ja": "ビデオを閉じてリソースを解放",
+                    "desc_ko": "비디오를 닫고 리소스를 해제",
+                    "snippet": "close()"
+                },
+                {
+                    "name": "isLoaded",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if a video is loaded",
+                    "desc_ja": "ビデオが読み込まれているか確認",
+                    "desc_ko": "비디오가 로드되었는지 확인",
+                    "snippet": "isLoaded()"
+                },
+                {
+                    "name": "play",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Start or resume playback",
+                    "desc_ja": "再生を開始または再開",
+                    "desc_ko": "재생을 시작하거나 재개",
+                    "snippet": "play()"
+                },
+                {
+                    "name": "stop",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Stop playback and reset to beginning",
+                    "desc_ja": "再生を停止して先頭に戻す",
+                    "desc_ko": "재생을 중지하고 처음으로 되돌림",
+                    "snippet": "stop()"
+                },
+                {
+                    "name": "setPaused",
+                    "params": "paused",
+                    "params_typed": "bool paused",
+                    "return_type": "void",
+                    "desc": "Pause or resume playback",
+                    "desc_ja": "一時停止または再開",
+                    "desc_ko": "일시정지 또는 재개",
+                    "snippet": "setPaused(${1:true})"
+                },
+                {
+                    "name": "togglePause",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Toggle pause state",
+                    "desc_ja": "一時停止を切り替え",
+                    "desc_ko": "일시정지 상태를 전환",
+                    "snippet": "togglePause()"
+                },
+                {
+                    "name": "update",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Update the video frame. Call once per frame in update()",
+                    "desc_ja": "ビデオフレームを更新。update()内で毎フレーム呼ぶ",
+                    "desc_ko": "비디오 프레임을 업데이트. update()에서 매 프레임 호출",
+                    "snippet": "update()"
+                },
+                {
+                    "name": "isPlaying",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if video is currently playing (not paused)",
+                    "desc_ja": "再生中か確認（一時停止中は false）",
+                    "desc_ko": "현재 재생 중인지 확인 (일시정지 시 false)",
+                    "snippet": "isPlaying()"
+                },
+                {
+                    "name": "isPaused",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if video is paused",
+                    "desc_ja": "一時停止中か確認",
+                    "desc_ko": "일시정지 상태인지 확인",
+                    "snippet": "isPaused()"
+                },
+                {
+                    "name": "isFrameNew",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if a new frame is available since last update",
+                    "desc_ja": "前回のupdate以降に新しいフレームがあるか確認",
+                    "desc_ko": "마지막 업데이트 이후 새 프레임이 있는지 확인",
+                    "snippet": "isFrameNew()"
+                },
+                {
+                    "name": "isDone",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if playback has reached the end",
+                    "desc_ja": "再生が末尾に達したか確認",
+                    "desc_ko": "재생이 끝에 도달했는지 확인",
+                    "snippet": "isDone()"
+                },
+                {
+                    "name": "getWidth",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get video width in pixels",
+                    "desc_ja": "ビデオの幅をピクセル単位で取得",
+                    "desc_ko": "비디오 너비를 픽셀 단위로 가져옴",
+                    "snippet": "getWidth()"
+                },
+                {
+                    "name": "getHeight",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get video height in pixels",
+                    "desc_ja": "ビデオの高さをピクセル単位で取得",
+                    "desc_ko": "비디오 높이를 픽셀 단위로 가져옴",
+                    "snippet": "getHeight()"
+                },
+                {
+                    "name": "getDuration",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get total duration in seconds",
+                    "desc_ja": "総再生時間を秒単位で取得",
+                    "desc_ko": "전체 재생 시간을 초 단위로 가져옴",
+                    "snippet": "getDuration()"
+                },
+                {
+                    "name": "getPosition",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current position (0.0 to 1.0)",
+                    "desc_ja": "現在の再生位置を取得（0.0〜1.0）",
+                    "desc_ko": "현재 재생 위치를 가져옴 (0.0~1.0)",
+                    "snippet": "getPosition()"
+                },
+                {
+                    "name": "setPosition",
+                    "params": "pct",
+                    "params_typed": "float pct",
+                    "return_type": "void",
+                    "desc": "Seek to position (0.0 to 1.0)",
+                    "desc_ja": "指定位置にシーク（0.0〜1.0）",
+                    "desc_ko": "지정된 위치로 이동 (0.0~1.0)",
+                    "snippet": "setPosition(${1:0.5})"
+                },
+                {
+                    "name": "getCurrentTime",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current playback time in seconds",
+                    "desc_ja": "現在の再生時間を秒単位で取得",
+                    "desc_ko": "현재 재생 시간을 초 단위로 가져옴",
+                    "snippet": "getCurrentTime()"
+                },
+                {
+                    "name": "setCurrentTime",
+                    "params": "seconds",
+                    "params_typed": "float seconds",
+                    "return_type": "void",
+                    "desc": "Seek to a specific time in seconds",
+                    "desc_ja": "指定した秒数にシーク",
+                    "desc_ko": "지정된 시간(초)으로 이동",
+                    "snippet": "setCurrentTime(${1:10.0})"
+                },
+                {
+                    "name": "setVolume",
+                    "params": "vol",
+                    "params_typed": "float vol",
+                    "return_type": "void",
+                    "desc": "Set audio volume (0.0 to 1.0)",
+                    "desc_ja": "音量を設定（0.0〜1.0）",
+                    "desc_ko": "음량을 설정 (0.0~1.0)",
+                    "snippet": "setVolume(${1:0.8})"
+                },
+                {
+                    "name": "getVolume",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current volume",
+                    "desc_ja": "現在の音量を取得",
+                    "desc_ko": "현재 음량을 가져옴",
+                    "snippet": "getVolume()"
+                },
+                {
+                    "name": "setSpeed",
+                    "params": "speed",
+                    "params_typed": "float speed",
+                    "return_type": "void",
+                    "desc": "Set playback speed (1.0 = normal, 2.0 = double speed)",
+                    "desc_ja": "再生速度を設定（1.0=通常、2.0=2倍速）",
+                    "desc_ko": "재생 속도를 설정 (1.0=보통, 2.0=2배속)",
+                    "snippet": "setSpeed(${1:1.0})"
+                },
+                {
+                    "name": "getSpeed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current playback speed",
+                    "desc_ja": "現在の再生速度を取得",
+                    "desc_ko": "현재 재생 속도를 가져옴",
+                    "snippet": "getSpeed()"
+                },
+                {
+                    "name": "setPan",
+                    "params": "pan",
+                    "params_typed": "float pan",
+                    "return_type": "void",
+                    "desc": "Set stereo pan (-1.0 left, 0.0 center, 1.0 right)",
+                    "desc_ja": "ステレオパンを設定（-1.0=左、0.0=中央、1.0=右）",
+                    "desc_ko": "스테레오 팬을 설정 (-1.0=좌, 0.0=중앙, 1.0=우)",
+                    "snippet": "setPan(${1:0.0})"
+                },
+                {
+                    "name": "getPan",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current stereo pan",
+                    "desc_ja": "現在のステレオパンを取得",
+                    "desc_ko": "현재 스테레오 팬을 가져옴",
+                    "snippet": "getPan()"
+                },
+                {
+                    "name": "setLoop",
+                    "params": "loop",
+                    "params_typed": "bool loop",
+                    "return_type": "void",
+                    "desc": "Enable/disable looping",
+                    "desc_ja": "ループ再生を設定",
+                    "desc_ko": "반복 재생을 활성/비활성",
+                    "snippet": "setLoop(${1:true})"
+                },
+                {
+                    "name": "isLoop",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if looping is enabled",
+                    "desc_ja": "ループ再生が有効か確認",
+                    "desc_ko": "반복 재생이 활성화되었는지 확인",
+                    "snippet": "isLoop()"
+                },
+                {
+                    "name": "getCurrentFrame",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Get current frame number",
+                    "desc_ja": "現在のフレーム番号を取得",
+                    "desc_ko": "현재 프레임 번호를 가져옴",
+                    "snippet": "getCurrentFrame()"
+                },
+                {
+                    "name": "getTotalFrames",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Get total number of frames",
+                    "desc_ja": "総フレーム数を取得",
+                    "desc_ko": "전체 프레임 수를 가져옴",
+                    "snippet": "getTotalFrames()"
+                },
+                {
+                    "name": "setFrame",
+                    "params": "frame",
+                    "params_typed": "int frame",
+                    "return_type": "void",
+                    "desc": "Seek to a specific frame number",
+                    "desc_ja": "指定フレームにシーク",
+                    "desc_ko": "지정된 프레임으로 이동",
+                    "snippet": "setFrame(${1:0})"
+                },
+                {
+                    "name": "nextFrame",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Advance to the next frame",
+                    "desc_ja": "次のフレームに進む",
+                    "desc_ko": "다음 프레임으로 이동",
+                    "snippet": "nextFrame()"
+                },
+                {
+                    "name": "previousFrame",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Go back to the previous frame",
+                    "desc_ja": "前のフレームに戻る",
+                    "desc_ko": "이전 프레임으로 이동",
+                    "snippet": "previousFrame()"
+                },
+                {
+                    "name": "firstFrame",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Go to the first frame",
+                    "desc_ja": "最初のフレームに移動",
+                    "desc_ko": "첫 프레임으로 이동",
+                    "snippet": "firstFrame()"
+                },
+                {
+                    "name": "setGammaCorrection",
+                    "params": "gamma",
+                    "params_typed": "float gamma",
+                    "return_type": "void",
+                    "desc": "Set gamma correction (1.0 = none). Use ~0.45 to brighten on platforms with dark output (e.g. macOS AVFoundation)",
+                    "desc_ja": "ガンマ補正を設定（1.0=補正なし）。macOS等で暗くなる場合に~0.45で明るくする",
+                    "desc_ko": "감마 보정을 설정 (1.0=보정 없음). macOS 등에서 어둡게 나오면 ~0.45로 밝게",
+                    "snippet": "setGammaCorrection(${1:1.0})"
+                },
+                {
+                    "name": "getGammaCorrection",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current gamma correction value",
+                    "desc_ja": "現在のガンマ補正値を取得",
+                    "desc_ko": "현재 감마 보정 값을 가져옴",
+                    "snippet": "getGammaCorrection()"
+                },
+                {
+                    "name": "setUseHwAccel",
+                    "params": "enable",
+                    "params_typed": "bool enable",
+                    "return_type": "void",
+                    "desc": "Enable/disable hardware decoding. Must be called before load(). Default: true. When enabled, the player probes available HW backends (VAAPI, V4L2M2M, CUDA, etc.) and falls back to software if none are available. Currently affects the Linux backend only.",
+                    "desc_ja": "ハードウェアデコードの有効/無効。load()の前に呼ぶ。デフォルト: true。有効時はHWバックエンド（VAAPI, V4L2M2M, CUDA等）を自動検出し、なければソフトウェアにフォールバック。現在Linuxのみ対応",
+                    "desc_ko": "하드웨어 디코딩 활성/비활성. load() 전에 호출. 기본값: true. 활성화 시 HW 백엔드(VAAPI, V4L2M2M, CUDA 등)를 자동 탐색하고, 없으면 소프트웨어로 폴백. 현재 Linux만 지원",
+                    "snippet": "setUseHwAccel(${1:true})"
+                },
+                {
+                    "name": "getUseHwAccel",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Get HW accel preference (not the actual backend — use isUsingHwAccel() for that)",
+                    "desc_ja": "HWアクセル設定を取得（実際のバックエンドはisUsingHwAccel()で確認）",
+                    "desc_ko": "HW 가속 설정을 가져옴 (실제 백엔드는 isUsingHwAccel()로 확인)",
+                    "snippet": "getUseHwAccel()"
+                },
+                {
+                    "name": "isUsingHwAccel",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if hardware decoding is currently active (after load)",
+                    "desc_ja": "ハードウェアデコードが現在有効か確認（load後に使用）",
+                    "desc_ko": "하드웨어 디코딩이 현재 활성 상태인지 확인 (load 후 사용)",
+                    "snippet": "isUsingHwAccel()"
+                },
+                {
+                    "name": "getHwAccelName",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "string",
+                    "desc": "Get the name of the active decode backend. Returns 'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', or 'none'",
+                    "desc_ja": "使用中のデコードバックエンド名を取得。'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', 'none' のいずれか",
+                    "desc_ko": "사용 중인 디코드 백엔드 이름을 가져옴. 'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', 'none' 중 하나",
+                    "snippet": "getHwAccelName()"
+                },
+                {
+                    "name": "setResyncThreshold",
+                    "params": "seconds",
+                    "params_typed": "float seconds",
+                    "return_type": "void",
+                    "desc": "Set the maximum video/audio drift before hard re-sync. When drift exceeds this threshold, video seeks to match audio position instead of catching up frame-by-frame. Set to 0 to disable. Default: 0.5s. Primarily affects Linux (FFmpeg) backend.",
+                    "desc_ja": "映像/音声のズレが許容値を超えた場合にハードリシンクする閾値を設定。ズレがこの値を超えるとフレーム送りではなくシークで同期。0で無効。デフォルト: 0.5秒。主にLinux(FFmpeg)で有効",
+                    "desc_ko": "비디오/오디오 드리프트가 임계값을 초과하면 하드 리싱크하는 값을 설정. 드리프트가 이 값을 초과하면 프레임 추적 대신 시크로 동기화. 0이면 비활성. 기본값: 0.5초. 주로 Linux(FFmpeg)에서 유효",
+                    "snippet": "setResyncThreshold(${1:0.5})"
+                },
+                {
+                    "name": "getResyncThreshold",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get the current resync threshold in seconds",
+                    "desc_ja": "現在のリシンク閾値を秒単位で取得",
+                    "desc_ko": "현재 리싱크 임계값을 초 단위로 가져옴",
+                    "snippet": "getResyncThreshold()"
+                },
+                {
+                    "name": "hasAudio",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if the loaded video has an audio track",
+                    "desc_ja": "読み込んだビデオに音声トラックがあるか確認",
+                    "desc_ko": "로드된 비디오에 오디오 트랙이 있는지 확인",
+                    "snippet": "hasAudio()"
+                },
+                {
+                    "name": "extractFrame",
+                    "params": "path, outPixels, timeSec",
+                    "params_typed": "const string& path, Pixels& outPixels, float timeSec",
+                    "return_type": "bool",
+                    "desc": "Extract a single frame from a video file without loading the full video. Useful for thumbnails",
+                    "desc_ja": "ビデオファイルから1フレームを抽出（全体を読み込まずに）。サムネイル生成に便利",
+                    "desc_ko": "비디오 파일에서 전체를 로드하지 않고 단일 프레임을 추출. 썸네일 생성에 유용",
+                    "snippet": "VideoPlayer::extractFrame(${1:\"video.mp4\"}, pixels, ${2:0.0})"
                 }
             ]
         },
@@ -6593,6 +7515,95 @@ const TrussCAPI = {
             "desc": "3D integer vector (x, y, z)",
             "desc_ja": "3D整数ベクトル (x, y, z)",
             "desc_ko": "3D 정수 벡터 (x, y, z)",
+            "constructor": {
+                "signatures": [
+                    "",
+                    "int x, int y, int z",
+                    "int v",
+                    "IVec2 v, int z"
+                ],
+                "snippet": "IVec3(${1:x}, ${2:y}, ${3:z})"
+            },
+            "properties": [
+                {
+                    "name": "x",
+                    "type": "int",
+                    "desc": "X component"
+                },
+                {
+                    "name": "y",
+                    "type": "int",
+                    "desc": "Y component"
+                },
+                {
+                    "name": "z",
+                    "type": "int",
+                    "desc": "Z component"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "toVec3",
+                    "return": "Vec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Convert to Vec3 (float)",
+                    "snippet": "toVec3()"
+                },
+                {
+                    "name": "xy",
+                    "return": "IVec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get XY components as IVec2",
+                    "snippet": "xy()"
+                }
+            ]
+        },
+        {
+            "name": "IVec2",
+            "desc": "2D integer vector (x, y)",
+            "desc_ja": "2D整数ベクトル (x, y)",
+            "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    "",
+                    "int x, int y",
+                    "int v"
+                ],
+                "snippet": "IVec2(${1:x}, ${2:y})"
+            },
+            "properties": [
+                {
+                    "name": "x",
+                    "type": "int",
+                    "desc": "X component"
+                },
+                {
+                    "name": "y",
+                    "type": "int",
+                    "desc": "Y component"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "toVec2",
+                    "return": "Vec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Convert to Vec2 (float)",
+                    "snippet": "toVec2()"
+                }
+            ]
+        },
+        {
+            "name": "IVec3",
+            "desc": "3D integer vector (x, y, z)",
+            "desc_ja": "3D整数ベクトル (x, y, z)",
+            "desc_ko": "",
             "constructor": {
                 "signatures": [
                     "",
@@ -8844,10 +9855,1162 @@ const TrussCAPI = {
             "desc_ko": "칩/합성 사운드 생성"
         },
         {
+            "name": "Light",
+            "desc": "Light source for 3D PBR rendering (directional, point, or spot)",
+            "desc_ja": "3D PBR用light（directional, point, spot）",
+            "desc_ko": "3D PBR 렌더링용 광원 (평행광, 점광, 스포트라이트)",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "Light()"
+            },
+            "methods": [
+                {
+                    "name": "setDirectional",
+                    "return": "void",
+                    "signatures": [
+                        "const Vec3& direction",
+                        "float dx, float dy, float dz"
+                    ],
+                    "desc": "Set as directional light",
+                    "snippet": "setDirectional(${1:Vec3(0, -1, 0)})"
+                },
+                {
+                    "name": "setPoint",
+                    "return": "void",
+                    "signatures": [
+                        "const Vec3& position",
+                        "float x, float y, float z"
+                    ],
+                    "desc": "Set as point light",
+                    "snippet": "setPoint(${1:Vec3(0, 100, 0)})"
+                },
+                {
+                    "name": "setSpot",
+                    "return": "void",
+                    "signatures": [
+                        "const Vec3& position, const Vec3& direction, float innerHalfAngle, float outerHalfAngle",
+                        "float px, float py, float pz, float dx, float dy, float dz, float innerHalfAngle, float outerHalfAngle"
+                    ],
+                    "desc": "Set as spot light with cone angles",
+                    "snippet": "setSpot(${1:pos}, ${2:dir}, ${3:0.0f}, ${4:0.45f})"
+                },
+                {
+                    "name": "setAmbient",
+                    "return": "void",
+                    "signatures": [
+                        "const Color& c",
+                        "float r, float g, float b, float a"
+                    ],
+                    "desc": "Set ambient light color",
+                    "snippet": "setAmbient(${1:0.1f}, ${2:0.1f}, ${3:0.1f})"
+                },
+                {
+                    "name": "setDiffuse",
+                    "return": "void",
+                    "signatures": [
+                        "const Color& c",
+                        "float r, float g, float b, float a"
+                    ],
+                    "desc": "Set diffuse (main) light color",
+                    "snippet": "setDiffuse(${1:1.0f}, ${2:1.0f}, ${3:1.0f})"
+                },
+                {
+                    "name": "setSpecular",
+                    "return": "void",
+                    "signatures": [
+                        "const Color& c",
+                        "float r, float g, float b, float a"
+                    ],
+                    "desc": "Set specular light color",
+                    "snippet": "setSpecular(${1:1.0f}, ${2:1.0f}, ${3:1.0f})"
+                },
+                {
+                    "name": "setIntensity",
+                    "return": "void",
+                    "signatures": [
+                        "float intensity"
+                    ],
+                    "desc": "Set light intensity multiplier",
+                    "snippet": "setIntensity(${1:1.0f})"
+                },
+                {
+                    "name": "setAttenuation",
+                    "return": "void",
+                    "signatures": [
+                        "float constant, float linear, float quadratic"
+                    ],
+                    "desc": "Set distance attenuation factors",
+                    "snippet": "setAttenuation(${1:1.0f}, ${2:0.0f}, ${3:0.0f})"
+                },
+                {
+                    "name": "setProjectionTexture",
+                    "return": "void",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set texture for projector-style light (gobo)",
+                    "snippet": "setProjectionTexture(${1:&texture})"
+                },
+                {
+                    "name": "setLensShift",
+                    "return": "void",
+                    "signatures": [
+                        "float sx, float sy"
+                    ],
+                    "desc": "Set projector lens shift (-1 to 1, normalized)",
+                    "snippet": "setLensShift(${1:0.0f}, ${2:1.0f})"
+                },
+                {
+                    "name": "setProjectorAspect",
+                    "return": "void",
+                    "signatures": [
+                        "float aspect"
+                    ],
+                    "desc": "Set projector aspect ratio",
+                    "snippet": "setProjectorAspect(${1:16.0f / 9.0f})"
+                },
+                {
+                    "name": "setIesProfile",
+                    "return": "void",
+                    "signatures": [
+                        "const IesProfile* ies"
+                    ],
+                    "desc": "Attach IES photometric profile for angular intensity",
+                    "snippet": "setIesProfile(${1:&iesProfile})"
+                },
+                {
+                    "name": "enableShadow",
+                    "return": "void",
+                    "signatures": [
+                        "int resolution"
+                    ],
+                    "desc": "Enable shadow casting (depth map at given resolution)",
+                    "snippet": "enableShadow(${1:1024})"
+                },
+                {
+                    "name": "disableShadow",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Disable shadow casting",
+                    "snippet": "disableShadow()"
+                },
+                {
+                    "name": "enable",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Enable this light",
+                    "snippet": "enable()"
+                },
+                {
+                    "name": "disable",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Disable this light",
+                    "snippet": "disable()"
+                },
+                {
+                    "name": "setShadowBias",
+                    "return": "void",
+                    "signatures": [
+                        "float bias"
+                    ],
+                    "desc": "Set shadow depth bias in world units",
+                    "snippet": "setShadowBias(${1:1.0f})"
+                },
+                {
+                    "name": "getType",
+                    "return": "LightType",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light type (Directional, Point, or Spot)",
+                    "snippet": "getType()"
+                },
+                {
+                    "name": "getPosition",
+                    "return": "const Vec3&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light position",
+                    "snippet": "getPosition()"
+                },
+                {
+                    "name": "getDirection",
+                    "return": "const Vec3&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light direction",
+                    "snippet": "getDirection()"
+                },
+                {
+                    "name": "getIntensity",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light intensity",
+                    "snippet": "getIntensity()"
+                },
+                {
+                    "name": "getAmbient",
+                    "return": "const Color&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get ambient light color",
+                    "snippet": "getAmbient()"
+                },
+                {
+                    "name": "getDiffuse",
+                    "return": "const Color&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get diffuse (main) light color",
+                    "snippet": "getDiffuse()"
+                },
+                {
+                    "name": "getSpecular",
+                    "return": "const Color&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get specular light color",
+                    "snippet": "getSpecular()"
+                },
+                {
+                    "name": "getConstantAttenuation",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get constant attenuation factor",
+                    "snippet": "getConstantAttenuation()"
+                },
+                {
+                    "name": "getLinearAttenuation",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get linear attenuation factor",
+                    "snippet": "getLinearAttenuation()"
+                },
+                {
+                    "name": "getQuadraticAttenuation",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get quadratic attenuation factor",
+                    "snippet": "getQuadraticAttenuation()"
+                },
+                {
+                    "name": "isEnabled",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if light is enabled",
+                    "snippet": "isEnabled()"
+                },
+                {
+                    "name": "isShadowEnabled",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if shadow casting is enabled",
+                    "snippet": "isShadowEnabled()"
+                },
+                {
+                    "name": "getShadowResolution",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get shadow map resolution",
+                    "snippet": "getShadowResolution()"
+                },
+                {
+                    "name": "getShadowBias",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get shadow depth bias",
+                    "snippet": "getShadowBias()"
+                },
+                {
+                    "name": "getSpotInnerCos",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get spot light inner cone cosine",
+                    "snippet": "getSpotInnerCos()"
+                },
+                {
+                    "name": "getSpotOuterCos",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get spot light outer cone cosine",
+                    "snippet": "getSpotOuterCos()"
+                },
+                {
+                    "name": "getProjectionTexture",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projection texture (gobo)",
+                    "snippet": "getProjectionTexture()"
+                },
+                {
+                    "name": "hasProjectionTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if a projection texture is set",
+                    "snippet": "hasProjectionTexture()"
+                },
+                {
+                    "name": "getLensShiftX",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projector horizontal lens shift",
+                    "snippet": "getLensShiftX()"
+                },
+                {
+                    "name": "getLensShiftY",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projector vertical lens shift",
+                    "snippet": "getLensShiftY()"
+                },
+                {
+                    "name": "getProjectorAspect",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projector aspect ratio",
+                    "snippet": "getProjectorAspect()"
+                },
+                {
+                    "name": "getIesProfile",
+                    "return": "const IesProfile*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get attached IES photometric profile",
+                    "snippet": "getIesProfile()"
+                },
+                {
+                    "name": "hasIesProfile",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if an IES profile is attached",
+                    "snippet": "hasIesProfile()"
+                }
+            ]
+        },
+        {
+            "name": "Material",
+            "desc": "PBR material (metallic-roughness workflow, glTF 2.0 compatible)",
+            "desc_ja": "PBR material（metallic-roughness、glTF 2.0互換）",
+            "desc_ko": "PBR 재질 (메탈릭-러프니스 워크플로우, glTF 2.0 호환)",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "Material()"
+            },
+            "methods": [
+                {
+                    "name": "setBaseColor",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Color& c",
+                        "float r, float g, float b, float a"
+                    ],
+                    "desc": "Set base color (albedo)",
+                    "snippet": "setBaseColor(${1:0.8f}, ${2:0.8f}, ${3:0.8f})"
+                },
+                {
+                    "name": "setMetallic",
+                    "return": "Material&",
+                    "signatures": [
+                        "float m"
+                    ],
+                    "desc": "Set metallic factor (0=dielectric, 1=metal)",
+                    "snippet": "setMetallic(${1:0.0f})"
+                },
+                {
+                    "name": "setRoughness",
+                    "return": "Material&",
+                    "signatures": [
+                        "float r"
+                    ],
+                    "desc": "Set roughness factor (0=mirror, 1=matte)",
+                    "snippet": "setRoughness(${1:0.5f})"
+                },
+                {
+                    "name": "setEmissive",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Color& c",
+                        "float r, float g, float b"
+                    ],
+                    "desc": "Set emissive color",
+                    "snippet": "setEmissive(${1:0.0f}, ${2:0.0f}, ${3:0.0f})"
+                },
+                {
+                    "name": "setEmissiveStrength",
+                    "return": "Material&",
+                    "signatures": [
+                        "float s"
+                    ],
+                    "desc": "Set emissive strength multiplier",
+                    "snippet": "setEmissiveStrength(${1:1.0f})"
+                },
+                {
+                    "name": "setAo",
+                    "return": "Material&",
+                    "signatures": [
+                        "float ao"
+                    ],
+                    "desc": "Set ambient occlusion factor",
+                    "snippet": "setAo(${1:1.0f})"
+                },
+                {
+                    "name": "setNormalMap",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set normal map texture for bump mapping",
+                    "snippet": "setNormalMap(${1:&normalTex})"
+                },
+                {
+                    "name": "setBaseColorTexture",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set base color (albedo) texture map",
+                    "snippet": "setBaseColorTexture(${1:&tex})"
+                },
+                {
+                    "name": "setMetallicRoughnessTexture",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set metallic-roughness texture (glTF: G=roughness, B=metallic)",
+                    "snippet": "setMetallicRoughnessTexture(${1:&tex})"
+                },
+                {
+                    "name": "setEmissiveTexture",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set emissive texture map",
+                    "snippet": "setEmissiveTexture(${1:&tex})"
+                },
+                {
+                    "name": "setOcclusionTexture",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set occlusion texture map",
+                    "snippet": "setOcclusionTexture(${1:&tex})"
+                },
+                {
+                    "name": "getBaseColor",
+                    "return": "const Color&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get base color (albedo)",
+                    "snippet": "getBaseColor()"
+                },
+                {
+                    "name": "getMetallic",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get metallic factor",
+                    "snippet": "getMetallic()"
+                },
+                {
+                    "name": "getRoughness",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get roughness factor",
+                    "snippet": "getRoughness()"
+                },
+                {
+                    "name": "getAo",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get ambient occlusion factor",
+                    "snippet": "getAo()"
+                },
+                {
+                    "name": "getEmissive",
+                    "return": "const Color&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get emissive color",
+                    "snippet": "getEmissive()"
+                },
+                {
+                    "name": "getEmissiveStrength",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get emissive strength multiplier",
+                    "snippet": "getEmissiveStrength()"
+                },
+                {
+                    "name": "getNormalMap",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get normal map texture",
+                    "snippet": "getNormalMap()"
+                },
+                {
+                    "name": "hasNormalMap",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if a normal map is set",
+                    "snippet": "hasNormalMap()"
+                },
+                {
+                    "name": "getBaseColorTexture",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get base color texture",
+                    "snippet": "getBaseColorTexture()"
+                },
+                {
+                    "name": "hasBaseColorTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if a base color texture is set",
+                    "snippet": "hasBaseColorTexture()"
+                },
+                {
+                    "name": "getMetallicRoughnessTexture",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get metallic-roughness texture",
+                    "snippet": "getMetallicRoughnessTexture()"
+                },
+                {
+                    "name": "hasMetallicRoughnessTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if a metallic-roughness texture is set",
+                    "snippet": "hasMetallicRoughnessTexture()"
+                },
+                {
+                    "name": "getEmissiveTexture",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get emissive texture",
+                    "snippet": "getEmissiveTexture()"
+                },
+                {
+                    "name": "hasEmissiveTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if an emissive texture is set",
+                    "snippet": "hasEmissiveTexture()"
+                },
+                {
+                    "name": "getOcclusionTexture",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get occlusion texture",
+                    "snippet": "getOcclusionTexture()"
+                },
+                {
+                    "name": "hasOcclusionTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if an occlusion texture is set",
+                    "snippet": "hasOcclusionTexture()"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "gold",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Gold material preset",
+                    "snippet": "Material::gold()"
+                },
+                {
+                    "name": "silver",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Silver material preset",
+                    "snippet": "Material::silver()"
+                },
+                {
+                    "name": "copper",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Copper material preset",
+                    "snippet": "Material::copper()"
+                },
+                {
+                    "name": "iron",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Iron material preset",
+                    "snippet": "Material::iron()"
+                },
+                {
+                    "name": "plastic",
+                    "return": "Material",
+                    "signatures": [
+                        "const Color& baseColor, float roughness"
+                    ],
+                    "desc": "Plastic material preset",
+                    "snippet": "Material::plastic(${1:Color(0.8f, 0.2f, 0.2f)})"
+                },
+                {
+                    "name": "rubber",
+                    "return": "Material",
+                    "signatures": [
+                        "const Color& baseColor"
+                    ],
+                    "desc": "Rubber material preset",
+                    "snippet": "Material::rubber(${1:Color(0.1f, 0.1f, 0.1f)})"
+                },
+                {
+                    "name": "bronze",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Bronze material preset",
+                    "snippet": "Material::bronze()"
+                },
+                {
+                    "name": "emerald",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Emerald material preset",
+                    "snippet": "Material::emerald()"
+                },
+                {
+                    "name": "ruby",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Ruby material preset",
+                    "snippet": "Material::ruby()"
+                },
+                {
+                    "name": "fromPhong",
+                    "return": "Material",
+                    "signatures": [
+                        "const Color& diffuse, const Color& specular, float shininess, const Color& emissive"
+                    ],
+                    "desc": "Convert Phong material parameters to PBR (roughness from shininess, metallic estimated from specular luminance)",
+                    "snippet": "Material::fromPhong(${1:diffuse}, ${2:specular}, ${3:32.0f})"
+                }
+            ]
+        },
+        {
+            "name": "IesProfile",
+            "desc": "IESNA LM-63 photometric profile for angular light intensity",
+            "desc_ja": "IESNA LM-63配光profile（角度別の光強度分布）",
+            "desc_ko": "IESNA LM-63 배광 프로파일 (각도별 조명 강도)",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "IesProfile()"
+            },
+            "methods": [
+                {
+                    "name": "load",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Load IES profile from file",
+                    "snippet": "load(${1:\"spotlight.ies\"})"
+                },
+                {
+                    "name": "loadFromString",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& data"
+                    ],
+                    "desc": "Load IES profile from inline string data",
+                    "snippet": "loadFromString(${1:data})"
+                },
+                {
+                    "name": "isLoaded",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if profile is loaded",
+                    "snippet": "isLoaded()"
+                },
+                {
+                    "name": "getMaxVerticalAngle",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get maximum vertical angle in the profile (radians)",
+                    "snippet": "getMaxVerticalAngle()"
+                },
+                {
+                    "name": "getMaxCandela",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get maximum candela value in the profile",
+                    "snippet": "getMaxCandela()"
+                },
+                {
+                    "name": "getTextureWidth",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get width of the generated 1D lookup texture",
+                    "snippet": "getTextureWidth()"
+                }
+            ]
+        },
+        {
+            "name": "Environment",
+            "desc": "IBL environment map for PBR ambient lighting (irradiance + prefilter + BRDF LUT)",
+            "desc_ja": "PBR ambient用IBL environment map（irradiance + prefilter + BRDF LUT）",
+            "desc_ko": "PBR 앰비언트용 IBL 환경맵 (이래디언스 + 프리필터 + BRDF LUT)",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "Environment()"
+            },
+            "methods": [
+                {
+                    "name": "loadFromHDR",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Load environment from HDR image file",
+                    "snippet": "loadFromHDR(${1:\"env.hdr\"})"
+                },
+                {
+                    "name": "loadProcedural",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Generate a simple procedural sky environment",
+                    "snippet": "loadProcedural()"
+                },
+                {
+                    "name": "isLoaded",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if environment is loaded",
+                    "snippet": "isLoaded()"
+                },
+                {
+                    "name": "release",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Release GPU resources",
+                    "snippet": "release()"
+                },
+                {
+                    "name": "getIrradianceMap",
+                    "return": "const Texture&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get irradiance cubemap for diffuse IBL",
+                    "snippet": "getIrradianceMap()"
+                },
+                {
+                    "name": "getPrefilterMap",
+                    "return": "const Texture&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get prefiltered environment cubemap for specular IBL",
+                    "snippet": "getPrefilterMap()"
+                },
+                {
+                    "name": "getBrdfLut",
+                    "return": "const Texture&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get BRDF integration lookup texture",
+                    "snippet": "getBrdfLut()"
+                },
+                {
+                    "name": "getPrefilterMipLevels",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get number of mip levels in the prefilter map",
+                    "snippet": "getPrefilterMipLevels()"
+                }
+            ]
+        },
+        {
             "name": "EasyCam",
             "desc": "3D camera with mouse control",
             "desc_ja": "マウス操作対応3Dカメラ",
             "desc_ko": "마우스 조작 가능한 3D 카메라"
+        },
+        {
+            "name": "Platform",
+            "desc": "Compile-time OS detection. All methods are constexpr and resolve at compile time based on the target platform.",
+            "desc_ja": "コンパイル時のOS判定。全メソッドはconstexprで、ターゲットプラットフォームに応じてコンパイル時に解決される",
+            "desc_ko": "컴파일 타임 OS 감지. 모든 메서드는 constexpr이며 대상 플랫폼에 따라 컴파일 타임에 결정됨",
+            "static_methods": [
+                {
+                    "name": "isWeb",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on Web (Emscripten / WASM)",
+                    "snippet": "Platform::isWeb()"
+                },
+                {
+                    "name": "isMacOS",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on macOS",
+                    "snippet": "Platform::isMacOS()"
+                },
+                {
+                    "name": "isIOS",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on iOS",
+                    "snippet": "Platform::isIOS()"
+                },
+                {
+                    "name": "isWindows",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on Windows",
+                    "snippet": "Platform::isWindows()"
+                },
+                {
+                    "name": "isAndroid",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on Android",
+                    "snippet": "Platform::isAndroid()"
+                },
+                {
+                    "name": "isLinux",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on Linux (desktop, excludes Android)",
+                    "snippet": "Platform::isLinux()"
+                },
+                {
+                    "name": "isApple",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on any Apple platform (macOS or iOS)",
+                    "snippet": "Platform::isApple()"
+                },
+                {
+                    "name": "isMobile",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on mobile (iOS or Android)",
+                    "snippet": "Platform::isMobile()"
+                },
+                {
+                    "name": "isDesktop",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on desktop (macOS, Windows, or Linux)",
+                    "snippet": "Platform::isDesktop()"
+                },
+                {
+                    "name": "name",
+                    "return": "const char*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"",
+                    "snippet": "Platform::name()"
+                }
+            ]
+        },
+        {
+            "name": "GraphicsBackend",
+            "desc": "Runtime sokol_gfx backend query. Values are meaningful only after sg_setup() has completed (i.e. after the first setup() call).",
+            "desc_ja": "sokol_gfxのバックエンドを実行時に判定。値はsg_setup()完了後 (最初のsetup()以降) のみ有効",
+            "desc_ko": "sokol_gfx 백엔드의 런타임 쿼리. 값은 sg_setup() 완료 후 (첫 setup() 이후) 에만 유효",
+            "static_methods": [
+                {
+                    "name": "isOpenGL",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on OpenGL (core or GLES3)",
+                    "snippet": "GraphicsBackend::isOpenGL()"
+                },
+                {
+                    "name": "isMetal",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on Apple Metal",
+                    "snippet": "GraphicsBackend::isMetal()"
+                },
+                {
+                    "name": "isD3D11",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on Direct3D 11",
+                    "snippet": "GraphicsBackend::isD3D11()"
+                },
+                {
+                    "name": "isWebGPU",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on WebGPU",
+                    "snippet": "GraphicsBackend::isWebGPU()"
+                },
+                {
+                    "name": "isWebGL2",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on WebGL2 (GLES3 under Emscripten)",
+                    "snippet": "GraphicsBackend::isWebGL2()"
+                },
+                {
+                    "name": "isVulkan",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on Vulkan",
+                    "snippet": "GraphicsBackend::isVulkan()"
+                },
+                {
+                    "name": "name",
+                    "return": "const char*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"",
+                    "snippet": "GraphicsBackend::name()"
+                }
+            ]
+        },
+        {
+            "name": "BuildInfo",
+            "desc": "Build timestamp info injected as compile definitions by trussc_app() at CMake configure time. Refreshes when cmake reconfigures. Date/time fields are local time; timestamp is UTC Unix seconds.",
+            "desc_ja": "trussc_app() がCMake configure 時にコンパイル定義として注入するビルド時刻情報。cmake 再実行で更新される。date/time系フィールドは configure マシンのローカル時刻、timestamp は UTC Unix秒",
+            "desc_ko": "trussc_app()이 CMake 구성 시점에 컴파일 정의로 주입하는 빌드 타임스탬프. cmake 재구성 시 갱신됨. date/time 필드는 로컬 시간, timestamp는 UTC Unix 초",
+            "static_methods": [
+                {
+                    "name": "date",
+                    "return": "const char*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build date in \"YYYY-MM-DD\" form (local time)",
+                    "snippet": "BuildInfo::date()"
+                },
+                {
+                    "name": "time",
+                    "return": "const char*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build time in \"HH:MM:SS\" form (local time)",
+                    "snippet": "BuildInfo::time()"
+                },
+                {
+                    "name": "dateTime",
+                    "return": "const char*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)",
+                    "snippet": "BuildInfo::dateTime()"
+                },
+                {
+                    "name": "timestamp",
+                    "return": "int64_t",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build timestamp as Unix seconds (UTC)",
+                    "snippet": "BuildInfo::timestamp()"
+                },
+                {
+                    "name": "year",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build year (e.g. 2026)",
+                    "snippet": "BuildInfo::year()"
+                },
+                {
+                    "name": "month",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build month (1-12)",
+                    "snippet": "BuildInfo::month()"
+                },
+                {
+                    "name": "day",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build day of month (1-31)",
+                    "snippet": "BuildInfo::day()"
+                },
+                {
+                    "name": "hour",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build hour (0-23)",
+                    "snippet": "BuildInfo::hour()"
+                },
+                {
+                    "name": "minute",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build minute (0-59)",
+                    "snippet": "BuildInfo::minute()"
+                },
+                {
+                    "name": "second",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build second (0-59)",
+                    "snippet": "BuildInfo::second()"
+                }
+            ]
         }
     ]
 };

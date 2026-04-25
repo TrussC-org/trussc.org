@@ -1122,6 +1122,210 @@
             ]
         },
         {
+            "name": "Platform",
+            "functions": [
+                {
+                    "name": "Platform::isWeb",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on Web (Emscripten / WASM)",
+                    "snippet": "Platform::isWeb()"
+                },
+                {
+                    "name": "Platform::isMacOS",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on macOS",
+                    "snippet": "Platform::isMacOS()"
+                },
+                {
+                    "name": "Platform::isIOS",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on iOS",
+                    "snippet": "Platform::isIOS()"
+                },
+                {
+                    "name": "Platform::isWindows",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on Windows",
+                    "snippet": "Platform::isWindows()"
+                },
+                {
+                    "name": "Platform::isAndroid",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on Android",
+                    "snippet": "Platform::isAndroid()"
+                },
+                {
+                    "name": "Platform::isLinux",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on Linux (desktop, excludes Android)",
+                    "snippet": "Platform::isLinux()"
+                },
+                {
+                    "name": "Platform::isApple",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on any Apple platform (macOS or iOS)",
+                    "snippet": "Platform::isApple()"
+                },
+                {
+                    "name": "Platform::isMobile",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on mobile (iOS or Android)",
+                    "snippet": "Platform::isMobile()"
+                },
+                {
+                    "name": "Platform::isDesktop",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True on desktop (macOS, Windows, or Linux)",
+                    "snippet": "Platform::isDesktop()"
+                },
+                {
+                    "name": "Platform::name",
+                    "params_typed": "",
+                    "return_type": "const char*",
+                    "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"",
+                    "snippet": "Platform::name()"
+                }
+            ]
+        },
+        {
+            "name": "Graphics Backend",
+            "functions": [
+                {
+                    "name": "GraphicsBackend::isOpenGL",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on OpenGL (core or GLES3)",
+                    "snippet": "GraphicsBackend::isOpenGL()"
+                },
+                {
+                    "name": "GraphicsBackend::isMetal",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on Apple Metal",
+                    "snippet": "GraphicsBackend::isMetal()"
+                },
+                {
+                    "name": "GraphicsBackend::isD3D11",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on Direct3D 11",
+                    "snippet": "GraphicsBackend::isD3D11()"
+                },
+                {
+                    "name": "GraphicsBackend::isWebGPU",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on WebGPU",
+                    "snippet": "GraphicsBackend::isWebGPU()"
+                },
+                {
+                    "name": "GraphicsBackend::isWebGL2",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on WebGL2 (GLES3 under Emscripten)",
+                    "snippet": "GraphicsBackend::isWebGL2()"
+                },
+                {
+                    "name": "GraphicsBackend::isVulkan",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when running on Vulkan",
+                    "snippet": "GraphicsBackend::isVulkan()"
+                },
+                {
+                    "name": "GraphicsBackend::name",
+                    "params_typed": "",
+                    "return_type": "const char*",
+                    "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"",
+                    "snippet": "GraphicsBackend::name()"
+                }
+            ]
+        },
+        {
+            "name": "Build Info",
+            "functions": [
+                {
+                    "name": "BuildInfo::date",
+                    "params_typed": "",
+                    "return_type": "const char*",
+                    "desc": "Build date in \"YYYY-MM-DD\" form (local time, CMake configure time)",
+                    "snippet": "BuildInfo::date()"
+                },
+                {
+                    "name": "BuildInfo::time",
+                    "params_typed": "",
+                    "return_type": "const char*",
+                    "desc": "Build time in \"HH:MM:SS\" form (local time)",
+                    "snippet": "BuildInfo::time()"
+                },
+                {
+                    "name": "BuildInfo::dateTime",
+                    "params_typed": "",
+                    "return_type": "const char*",
+                    "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)",
+                    "snippet": "BuildInfo::dateTime()"
+                },
+                {
+                    "name": "BuildInfo::timestamp",
+                    "params_typed": "",
+                    "return_type": "int64_t",
+                    "desc": "Build timestamp as Unix seconds (UTC)",
+                    "snippet": "BuildInfo::timestamp()"
+                },
+                {
+                    "name": "BuildInfo::year",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build year (e.g. 2026)",
+                    "snippet": "BuildInfo::year()"
+                },
+                {
+                    "name": "BuildInfo::month",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build month (1-12)",
+                    "snippet": "BuildInfo::month()"
+                },
+                {
+                    "name": "BuildInfo::day",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build day of month (1-31)",
+                    "snippet": "BuildInfo::day()"
+                },
+                {
+                    "name": "BuildInfo::hour",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build hour (0-23)",
+                    "snippet": "BuildInfo::hour()"
+                },
+                {
+                    "name": "BuildInfo::minute",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build minute (0-59)",
+                    "snippet": "BuildInfo::minute()"
+                },
+                {
+                    "name": "BuildInfo::second",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Build second (0-59)",
+                    "snippet": "BuildInfo::second()"
+                }
+            ]
+        },
+        {
             "name": "Time - Elapsed",
             "functions": [
                 {
@@ -2819,6 +3023,107 @@
             ]
         },
         {
+            "name": "Lighting & PBR",
+            "functions": [
+                {
+                    "name": "addLight",
+                    "params": "light",
+                    "params_typed": "Light& light",
+                    "return_type": "void",
+                    "desc": "Add a light to the scene",
+                    "snippet": "addLight(${1:light})"
+                },
+                {
+                    "name": "removeLight",
+                    "params": "light",
+                    "params_typed": "Light& light",
+                    "return_type": "void",
+                    "desc": "Remove a light from the scene",
+                    "snippet": "removeLight(${1:light})"
+                },
+                {
+                    "name": "clearLights",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Remove all lights from the scene",
+                    "snippet": "clearLights()"
+                },
+                {
+                    "name": "setMaterial",
+                    "params": "material",
+                    "params_typed": "Material& material",
+                    "return_type": "void",
+                    "desc": "Set material for subsequent mesh draws (activates PBR)",
+                    "snippet": "setMaterial(${1:material})"
+                },
+                {
+                    "name": "clearMaterial",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Clear material (return to default rendering)",
+                    "snippet": "clearMaterial()"
+                },
+                {
+                    "name": "setCameraPosition",
+                    "params": "pos",
+                    "params_typed": "const Vec3& pos",
+                    "return_type": "void",
+                    "desc": "Set camera position for specular calculation",
+                    "snippet": "setCameraPosition(${1:cam.getPosition()})"
+                },
+                {
+                    "name": "setCameraPosition",
+                    "params": "x, y, z",
+                    "params_typed": "float x, float y, float z",
+                    "return_type": "void",
+                    "desc": "Set camera position for specular calculation",
+                    "snippet": "setCameraPosition(${1:cam.getPosition()})"
+                },
+                {
+                    "name": "setEnvironment",
+                    "params": "env",
+                    "params_typed": "Environment& env",
+                    "return_type": "void",
+                    "desc": "Set IBL environment for PBR ambient lighting",
+                    "snippet": "setEnvironment(${1:env})"
+                },
+                {
+                    "name": "clearEnvironment",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Clear IBL environment",
+                    "snippet": "clearEnvironment()"
+                },
+                {
+                    "name": "beginShadowPass",
+                    "params": "light",
+                    "params_typed": "Light& light",
+                    "return_type": "void",
+                    "desc": "Begin shadow depth pass from the light's point of view",
+                    "snippet": "beginShadowPass(${1:light})"
+                },
+                {
+                    "name": "endShadowPass",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "End shadow depth pass",
+                    "snippet": "endShadowPass()"
+                },
+                {
+                    "name": "shadowDraw",
+                    "params": "mesh",
+                    "params_typed": "const Mesh& mesh",
+                    "return_type": "void",
+                    "desc": "Draw a mesh into the shadow depth pass (depth only)",
+                    "snippet": "shadowDraw(${1:mesh})"
+                }
+            ]
+        },
+        {
             "name": "Math - 3D",
             "functions": [
                 {
@@ -3457,6 +3762,355 @@
                     "snippet": "draw()"
                 }
             ]
+        },
+        {
+            "name": "Video",
+            "functions": [
+                {
+                    "name": "createVideoPlayer",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "VideoPlayer@",
+                    "desc": "Create a video player (TrussSketch factory)",
+                    "snippet": "VideoPlayer@ vid = createVideoPlayer();"
+                },
+                {
+                    "name": "load",
+                    "params": "path",
+                    "params_typed": "const string& path",
+                    "return_type": "bool",
+                    "desc": "Load a video file",
+                    "snippet": "load(${1:\"video.mp4\"})"
+                },
+                {
+                    "name": "close",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Close the video and release resources",
+                    "snippet": "close()"
+                },
+                {
+                    "name": "isLoaded",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if a video is loaded",
+                    "snippet": "isLoaded()"
+                },
+                {
+                    "name": "play",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Start or resume playback",
+                    "snippet": "play()"
+                },
+                {
+                    "name": "stop",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Stop playback and reset to beginning",
+                    "snippet": "stop()"
+                },
+                {
+                    "name": "setPaused",
+                    "params": "paused",
+                    "params_typed": "bool paused",
+                    "return_type": "void",
+                    "desc": "Pause or resume playback",
+                    "snippet": "setPaused(${1:true})"
+                },
+                {
+                    "name": "togglePause",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Toggle pause state",
+                    "snippet": "togglePause()"
+                },
+                {
+                    "name": "update",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Update the video frame. Call once per frame in update()",
+                    "snippet": "update()"
+                },
+                {
+                    "name": "isPlaying",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if video is currently playing (not paused)",
+                    "snippet": "isPlaying()"
+                },
+                {
+                    "name": "isPaused",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if video is paused",
+                    "snippet": "isPaused()"
+                },
+                {
+                    "name": "isFrameNew",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if a new frame is available since last update",
+                    "snippet": "isFrameNew()"
+                },
+                {
+                    "name": "isDone",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if playback has reached the end",
+                    "snippet": "isDone()"
+                },
+                {
+                    "name": "getWidth",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get video width in pixels",
+                    "snippet": "getWidth()"
+                },
+                {
+                    "name": "getHeight",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get video height in pixels",
+                    "snippet": "getHeight()"
+                },
+                {
+                    "name": "getDuration",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get total duration in seconds",
+                    "snippet": "getDuration()"
+                },
+                {
+                    "name": "getPosition",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current position (0.0 to 1.0)",
+                    "snippet": "getPosition()"
+                },
+                {
+                    "name": "setPosition",
+                    "params": "pct",
+                    "params_typed": "float pct",
+                    "return_type": "void",
+                    "desc": "Seek to position (0.0 to 1.0)",
+                    "snippet": "setPosition(${1:0.5})"
+                },
+                {
+                    "name": "getCurrentTime",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current playback time in seconds",
+                    "snippet": "getCurrentTime()"
+                },
+                {
+                    "name": "setCurrentTime",
+                    "params": "seconds",
+                    "params_typed": "float seconds",
+                    "return_type": "void",
+                    "desc": "Seek to a specific time in seconds",
+                    "snippet": "setCurrentTime(${1:10.0})"
+                },
+                {
+                    "name": "setVolume",
+                    "params": "vol",
+                    "params_typed": "float vol",
+                    "return_type": "void",
+                    "desc": "Set audio volume (0.0 to 1.0)",
+                    "snippet": "setVolume(${1:0.8})"
+                },
+                {
+                    "name": "getVolume",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current volume",
+                    "snippet": "getVolume()"
+                },
+                {
+                    "name": "setSpeed",
+                    "params": "speed",
+                    "params_typed": "float speed",
+                    "return_type": "void",
+                    "desc": "Set playback speed (1.0 = normal, 2.0 = double speed)",
+                    "snippet": "setSpeed(${1:1.0})"
+                },
+                {
+                    "name": "getSpeed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current playback speed",
+                    "snippet": "getSpeed()"
+                },
+                {
+                    "name": "setPan",
+                    "params": "pan",
+                    "params_typed": "float pan",
+                    "return_type": "void",
+                    "desc": "Set stereo pan (-1.0 left, 0.0 center, 1.0 right)",
+                    "snippet": "setPan(${1:0.0})"
+                },
+                {
+                    "name": "getPan",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current stereo pan",
+                    "snippet": "getPan()"
+                },
+                {
+                    "name": "setLoop",
+                    "params": "loop",
+                    "params_typed": "bool loop",
+                    "return_type": "void",
+                    "desc": "Enable/disable looping",
+                    "snippet": "setLoop(${1:true})"
+                },
+                {
+                    "name": "isLoop",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if looping is enabled",
+                    "snippet": "isLoop()"
+                },
+                {
+                    "name": "getCurrentFrame",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Get current frame number",
+                    "snippet": "getCurrentFrame()"
+                },
+                {
+                    "name": "getTotalFrames",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Get total number of frames",
+                    "snippet": "getTotalFrames()"
+                },
+                {
+                    "name": "setFrame",
+                    "params": "frame",
+                    "params_typed": "int frame",
+                    "return_type": "void",
+                    "desc": "Seek to a specific frame number",
+                    "snippet": "setFrame(${1:0})"
+                },
+                {
+                    "name": "nextFrame",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Advance to the next frame",
+                    "snippet": "nextFrame()"
+                },
+                {
+                    "name": "previousFrame",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Go back to the previous frame",
+                    "snippet": "previousFrame()"
+                },
+                {
+                    "name": "firstFrame",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Go to the first frame",
+                    "snippet": "firstFrame()"
+                },
+                {
+                    "name": "setGammaCorrection",
+                    "params": "gamma",
+                    "params_typed": "float gamma",
+                    "return_type": "void",
+                    "desc": "Set gamma correction (1.0 = none). Use ~0.45 to brighten on platforms with dark output (e.g. macOS AVFoundation)",
+                    "snippet": "setGammaCorrection(${1:1.0})"
+                },
+                {
+                    "name": "getGammaCorrection",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current gamma correction value",
+                    "snippet": "getGammaCorrection()"
+                },
+                {
+                    "name": "setUseHwAccel",
+                    "params": "enable",
+                    "params_typed": "bool enable",
+                    "return_type": "void",
+                    "desc": "Enable/disable hardware decoding. Must be called before load(). Default: true. When enabled, the player probes available HW backends (VAAPI, V4L2M2M, CUDA, etc.) and falls back to software if none are available. Currently affects the Linux backend only.",
+                    "snippet": "setUseHwAccel(${1:true})"
+                },
+                {
+                    "name": "getUseHwAccel",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Get HW accel preference (not the actual backend — use isUsingHwAccel() for that)",
+                    "snippet": "getUseHwAccel()"
+                },
+                {
+                    "name": "isUsingHwAccel",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if hardware decoding is currently active (after load)",
+                    "snippet": "isUsingHwAccel()"
+                },
+                {
+                    "name": "getHwAccelName",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "string",
+                    "desc": "Get the name of the active decode backend. Returns 'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', or 'none'",
+                    "snippet": "getHwAccelName()"
+                },
+                {
+                    "name": "setResyncThreshold",
+                    "params": "seconds",
+                    "params_typed": "float seconds",
+                    "return_type": "void",
+                    "desc": "Set the maximum video/audio drift before hard re-sync. When drift exceeds this threshold, video seeks to match audio position instead of catching up frame-by-frame. Set to 0 to disable. Default: 0.5s. Primarily affects Linux (FFmpeg) backend.",
+                    "snippet": "setResyncThreshold(${1:0.5})"
+                },
+                {
+                    "name": "getResyncThreshold",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get the current resync threshold in seconds",
+                    "snippet": "getResyncThreshold()"
+                },
+                {
+                    "name": "hasAudio",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check if the loaded video has an audio track",
+                    "snippet": "hasAudio()"
+                }
+            ]
         }
     ],
     "constants": [
@@ -4089,6 +4743,91 @@
                         ""
                     ],
                     "desc": "Get XY components as Vec2",
+                    "snippet": "xy()"
+                }
+            ]
+        },
+        {
+            "name": "IVec2",
+            "desc": "2D integer vector (x, y)",
+            "constructor": {
+                "signatures": [
+                    "",
+                    "int x, int y",
+                    "int v"
+                ],
+                "snippet": "IVec2(${1:x}, ${2:y})"
+            },
+            "properties": [
+                {
+                    "name": "x",
+                    "type": "int",
+                    "desc": "X component"
+                },
+                {
+                    "name": "y",
+                    "type": "int",
+                    "desc": "Y component"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "toVec2",
+                    "return": "Vec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Convert to Vec2 (float)",
+                    "snippet": "toVec2()"
+                }
+            ]
+        },
+        {
+            "name": "IVec3",
+            "desc": "3D integer vector (x, y, z)",
+            "constructor": {
+                "signatures": [
+                    "",
+                    "int x, int y, int z",
+                    "int v",
+                    "IVec2 v, int z"
+                ],
+                "snippet": "IVec3(${1:x}, ${2:y}, ${3:z})"
+            },
+            "properties": [
+                {
+                    "name": "x",
+                    "type": "int",
+                    "desc": "X component"
+                },
+                {
+                    "name": "y",
+                    "type": "int",
+                    "desc": "Y component"
+                },
+                {
+                    "name": "z",
+                    "type": "int",
+                    "desc": "Z component"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "toVec3",
+                    "return": "Vec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Convert to Vec3 (float)",
+                    "snippet": "toVec3()"
+                },
+                {
+                    "name": "xy",
+                    "return": "IVec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get XY components as IVec2",
                     "snippet": "xy()"
                 }
             ]
@@ -6332,6 +7071,1144 @@
                     ],
                     "desc": "Get remaining bytes",
                     "snippet": "remaining()"
+                }
+            ]
+        },
+        {
+            "name": "Light",
+            "desc": "Light source for 3D PBR rendering (directional, point, or spot)",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "Light()"
+            },
+            "methods": [
+                {
+                    "name": "setDirectional",
+                    "return": "void",
+                    "signatures": [
+                        "const Vec3& direction",
+                        "float dx, float dy, float dz"
+                    ],
+                    "desc": "Set as directional light",
+                    "snippet": "setDirectional(${1:Vec3(0, -1, 0)})"
+                },
+                {
+                    "name": "setPoint",
+                    "return": "void",
+                    "signatures": [
+                        "const Vec3& position",
+                        "float x, float y, float z"
+                    ],
+                    "desc": "Set as point light",
+                    "snippet": "setPoint(${1:Vec3(0, 100, 0)})"
+                },
+                {
+                    "name": "setSpot",
+                    "return": "void",
+                    "signatures": [
+                        "const Vec3& position, const Vec3& direction, float innerHalfAngle, float outerHalfAngle",
+                        "float px, float py, float pz, float dx, float dy, float dz, float innerHalfAngle, float outerHalfAngle"
+                    ],
+                    "desc": "Set as spot light with cone angles",
+                    "snippet": "setSpot(${1:pos}, ${2:dir}, ${3:0.0f}, ${4:0.45f})"
+                },
+                {
+                    "name": "setAmbient",
+                    "return": "void",
+                    "signatures": [
+                        "const Color& c",
+                        "float r, float g, float b, float a"
+                    ],
+                    "desc": "Set ambient light color",
+                    "snippet": "setAmbient(${1:0.1f}, ${2:0.1f}, ${3:0.1f})"
+                },
+                {
+                    "name": "setDiffuse",
+                    "return": "void",
+                    "signatures": [
+                        "const Color& c",
+                        "float r, float g, float b, float a"
+                    ],
+                    "desc": "Set diffuse (main) light color",
+                    "snippet": "setDiffuse(${1:1.0f}, ${2:1.0f}, ${3:1.0f})"
+                },
+                {
+                    "name": "setSpecular",
+                    "return": "void",
+                    "signatures": [
+                        "const Color& c",
+                        "float r, float g, float b, float a"
+                    ],
+                    "desc": "Set specular light color",
+                    "snippet": "setSpecular(${1:1.0f}, ${2:1.0f}, ${3:1.0f})"
+                },
+                {
+                    "name": "setIntensity",
+                    "return": "void",
+                    "signatures": [
+                        "float intensity"
+                    ],
+                    "desc": "Set light intensity multiplier",
+                    "snippet": "setIntensity(${1:1.0f})"
+                },
+                {
+                    "name": "setAttenuation",
+                    "return": "void",
+                    "signatures": [
+                        "float constant, float linear, float quadratic"
+                    ],
+                    "desc": "Set distance attenuation factors",
+                    "snippet": "setAttenuation(${1:1.0f}, ${2:0.0f}, ${3:0.0f})"
+                },
+                {
+                    "name": "setProjectionTexture",
+                    "return": "void",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set texture for projector-style light (gobo)",
+                    "snippet": "setProjectionTexture(${1:&texture})"
+                },
+                {
+                    "name": "setLensShift",
+                    "return": "void",
+                    "signatures": [
+                        "float sx, float sy"
+                    ],
+                    "desc": "Set projector lens shift (-1 to 1, normalized)",
+                    "snippet": "setLensShift(${1:0.0f}, ${2:1.0f})"
+                },
+                {
+                    "name": "setProjectorAspect",
+                    "return": "void",
+                    "signatures": [
+                        "float aspect"
+                    ],
+                    "desc": "Set projector aspect ratio",
+                    "snippet": "setProjectorAspect(${1:16.0f / 9.0f})"
+                },
+                {
+                    "name": "setIesProfile",
+                    "return": "void",
+                    "signatures": [
+                        "const IesProfile* ies"
+                    ],
+                    "desc": "Attach IES photometric profile for angular intensity",
+                    "snippet": "setIesProfile(${1:&iesProfile})"
+                },
+                {
+                    "name": "enableShadow",
+                    "return": "void",
+                    "signatures": [
+                        "int resolution"
+                    ],
+                    "desc": "Enable shadow casting (depth map at given resolution)",
+                    "snippet": "enableShadow(${1:1024})"
+                },
+                {
+                    "name": "disableShadow",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Disable shadow casting",
+                    "snippet": "disableShadow()"
+                },
+                {
+                    "name": "enable",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Enable this light",
+                    "snippet": "enable()"
+                },
+                {
+                    "name": "disable",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Disable this light",
+                    "snippet": "disable()"
+                },
+                {
+                    "name": "setShadowBias",
+                    "return": "void",
+                    "signatures": [
+                        "float bias"
+                    ],
+                    "desc": "Set shadow depth bias in world units",
+                    "snippet": "setShadowBias(${1:1.0f})"
+                },
+                {
+                    "name": "getType",
+                    "return": "LightType",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light type (Directional, Point, or Spot)",
+                    "snippet": "getType()"
+                },
+                {
+                    "name": "getPosition",
+                    "return": "const Vec3&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light position",
+                    "snippet": "getPosition()"
+                },
+                {
+                    "name": "getDirection",
+                    "return": "const Vec3&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light direction",
+                    "snippet": "getDirection()"
+                },
+                {
+                    "name": "getIntensity",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light intensity",
+                    "snippet": "getIntensity()"
+                },
+                {
+                    "name": "getAmbient",
+                    "return": "const Color&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get ambient light color",
+                    "snippet": "getAmbient()"
+                },
+                {
+                    "name": "getDiffuse",
+                    "return": "const Color&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get diffuse (main) light color",
+                    "snippet": "getDiffuse()"
+                },
+                {
+                    "name": "getSpecular",
+                    "return": "const Color&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get specular light color",
+                    "snippet": "getSpecular()"
+                },
+                {
+                    "name": "getConstantAttenuation",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get constant attenuation factor",
+                    "snippet": "getConstantAttenuation()"
+                },
+                {
+                    "name": "getLinearAttenuation",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get linear attenuation factor",
+                    "snippet": "getLinearAttenuation()"
+                },
+                {
+                    "name": "getQuadraticAttenuation",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get quadratic attenuation factor",
+                    "snippet": "getQuadraticAttenuation()"
+                },
+                {
+                    "name": "isEnabled",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if light is enabled",
+                    "snippet": "isEnabled()"
+                },
+                {
+                    "name": "isShadowEnabled",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if shadow casting is enabled",
+                    "snippet": "isShadowEnabled()"
+                },
+                {
+                    "name": "getShadowResolution",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get shadow map resolution",
+                    "snippet": "getShadowResolution()"
+                },
+                {
+                    "name": "getShadowBias",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get shadow depth bias",
+                    "snippet": "getShadowBias()"
+                },
+                {
+                    "name": "getSpotInnerCos",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get spot light inner cone cosine",
+                    "snippet": "getSpotInnerCos()"
+                },
+                {
+                    "name": "getSpotOuterCos",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get spot light outer cone cosine",
+                    "snippet": "getSpotOuterCos()"
+                },
+                {
+                    "name": "getProjectionTexture",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projection texture (gobo)",
+                    "snippet": "getProjectionTexture()"
+                },
+                {
+                    "name": "hasProjectionTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if a projection texture is set",
+                    "snippet": "hasProjectionTexture()"
+                },
+                {
+                    "name": "getLensShiftX",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projector horizontal lens shift",
+                    "snippet": "getLensShiftX()"
+                },
+                {
+                    "name": "getLensShiftY",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projector vertical lens shift",
+                    "snippet": "getLensShiftY()"
+                },
+                {
+                    "name": "getProjectorAspect",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projector aspect ratio",
+                    "snippet": "getProjectorAspect()"
+                },
+                {
+                    "name": "getIesProfile",
+                    "return": "const IesProfile*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get attached IES photometric profile",
+                    "snippet": "getIesProfile()"
+                },
+                {
+                    "name": "hasIesProfile",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if an IES profile is attached",
+                    "snippet": "hasIesProfile()"
+                }
+            ]
+        },
+        {
+            "name": "Material",
+            "desc": "PBR material (metallic-roughness workflow, glTF 2.0 compatible)",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "Material()"
+            },
+            "methods": [
+                {
+                    "name": "setBaseColor",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Color& c",
+                        "float r, float g, float b, float a"
+                    ],
+                    "desc": "Set base color (albedo)",
+                    "snippet": "setBaseColor(${1:0.8f}, ${2:0.8f}, ${3:0.8f})"
+                },
+                {
+                    "name": "setMetallic",
+                    "return": "Material&",
+                    "signatures": [
+                        "float m"
+                    ],
+                    "desc": "Set metallic factor (0=dielectric, 1=metal)",
+                    "snippet": "setMetallic(${1:0.0f})"
+                },
+                {
+                    "name": "setRoughness",
+                    "return": "Material&",
+                    "signatures": [
+                        "float r"
+                    ],
+                    "desc": "Set roughness factor (0=mirror, 1=matte)",
+                    "snippet": "setRoughness(${1:0.5f})"
+                },
+                {
+                    "name": "setEmissive",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Color& c",
+                        "float r, float g, float b"
+                    ],
+                    "desc": "Set emissive color",
+                    "snippet": "setEmissive(${1:0.0f}, ${2:0.0f}, ${3:0.0f})"
+                },
+                {
+                    "name": "setEmissiveStrength",
+                    "return": "Material&",
+                    "signatures": [
+                        "float s"
+                    ],
+                    "desc": "Set emissive strength multiplier",
+                    "snippet": "setEmissiveStrength(${1:1.0f})"
+                },
+                {
+                    "name": "setAo",
+                    "return": "Material&",
+                    "signatures": [
+                        "float ao"
+                    ],
+                    "desc": "Set ambient occlusion factor",
+                    "snippet": "setAo(${1:1.0f})"
+                },
+                {
+                    "name": "setNormalMap",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set normal map texture for bump mapping",
+                    "snippet": "setNormalMap(${1:&normalTex})"
+                },
+                {
+                    "name": "setBaseColorTexture",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set base color (albedo) texture map",
+                    "snippet": "setBaseColorTexture(${1:&tex})"
+                },
+                {
+                    "name": "setMetallicRoughnessTexture",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set metallic-roughness texture (glTF: G=roughness, B=metallic)",
+                    "snippet": "setMetallicRoughnessTexture(${1:&tex})"
+                },
+                {
+                    "name": "setEmissiveTexture",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set emissive texture map",
+                    "snippet": "setEmissiveTexture(${1:&tex})"
+                },
+                {
+                    "name": "setOcclusionTexture",
+                    "return": "Material&",
+                    "signatures": [
+                        "const Texture* tex"
+                    ],
+                    "desc": "Set occlusion texture map",
+                    "snippet": "setOcclusionTexture(${1:&tex})"
+                },
+                {
+                    "name": "getBaseColor",
+                    "return": "const Color&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get base color (albedo)",
+                    "snippet": "getBaseColor()"
+                },
+                {
+                    "name": "getMetallic",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get metallic factor",
+                    "snippet": "getMetallic()"
+                },
+                {
+                    "name": "getRoughness",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get roughness factor",
+                    "snippet": "getRoughness()"
+                },
+                {
+                    "name": "getAo",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get ambient occlusion factor",
+                    "snippet": "getAo()"
+                },
+                {
+                    "name": "getEmissive",
+                    "return": "const Color&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get emissive color",
+                    "snippet": "getEmissive()"
+                },
+                {
+                    "name": "getEmissiveStrength",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get emissive strength multiplier",
+                    "snippet": "getEmissiveStrength()"
+                },
+                {
+                    "name": "getNormalMap",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get normal map texture",
+                    "snippet": "getNormalMap()"
+                },
+                {
+                    "name": "hasNormalMap",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if a normal map is set",
+                    "snippet": "hasNormalMap()"
+                },
+                {
+                    "name": "getBaseColorTexture",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get base color texture",
+                    "snippet": "getBaseColorTexture()"
+                },
+                {
+                    "name": "hasBaseColorTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if a base color texture is set",
+                    "snippet": "hasBaseColorTexture()"
+                },
+                {
+                    "name": "getMetallicRoughnessTexture",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get metallic-roughness texture",
+                    "snippet": "getMetallicRoughnessTexture()"
+                },
+                {
+                    "name": "hasMetallicRoughnessTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if a metallic-roughness texture is set",
+                    "snippet": "hasMetallicRoughnessTexture()"
+                },
+                {
+                    "name": "getEmissiveTexture",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get emissive texture",
+                    "snippet": "getEmissiveTexture()"
+                },
+                {
+                    "name": "hasEmissiveTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if an emissive texture is set",
+                    "snippet": "hasEmissiveTexture()"
+                },
+                {
+                    "name": "getOcclusionTexture",
+                    "return": "const Texture*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get occlusion texture",
+                    "snippet": "getOcclusionTexture()"
+                },
+                {
+                    "name": "hasOcclusionTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if an occlusion texture is set",
+                    "snippet": "hasOcclusionTexture()"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "gold",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Gold material preset",
+                    "snippet": "Material::gold()"
+                },
+                {
+                    "name": "silver",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Silver material preset",
+                    "snippet": "Material::silver()"
+                },
+                {
+                    "name": "copper",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Copper material preset",
+                    "snippet": "Material::copper()"
+                },
+                {
+                    "name": "iron",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Iron material preset",
+                    "snippet": "Material::iron()"
+                },
+                {
+                    "name": "plastic",
+                    "return": "Material",
+                    "signatures": [
+                        "const Color& baseColor, float roughness"
+                    ],
+                    "desc": "Plastic material preset",
+                    "snippet": "Material::plastic(${1:Color(0.8f, 0.2f, 0.2f)})"
+                },
+                {
+                    "name": "rubber",
+                    "return": "Material",
+                    "signatures": [
+                        "const Color& baseColor"
+                    ],
+                    "desc": "Rubber material preset",
+                    "snippet": "Material::rubber(${1:Color(0.1f, 0.1f, 0.1f)})"
+                },
+                {
+                    "name": "bronze",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Bronze material preset",
+                    "snippet": "Material::bronze()"
+                },
+                {
+                    "name": "emerald",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Emerald material preset",
+                    "snippet": "Material::emerald()"
+                },
+                {
+                    "name": "ruby",
+                    "return": "Material",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Ruby material preset",
+                    "snippet": "Material::ruby()"
+                },
+                {
+                    "name": "fromPhong",
+                    "return": "Material",
+                    "signatures": [
+                        "const Color& diffuse, const Color& specular, float shininess, const Color& emissive"
+                    ],
+                    "desc": "Convert Phong material parameters to PBR (roughness from shininess, metallic estimated from specular luminance)",
+                    "snippet": "Material::fromPhong(${1:diffuse}, ${2:specular}, ${3:32.0f})"
+                }
+            ]
+        },
+        {
+            "name": "IesProfile",
+            "desc": "IESNA LM-63 photometric profile for angular light intensity",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "IesProfile()"
+            },
+            "methods": [
+                {
+                    "name": "load",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Load IES profile from file",
+                    "snippet": "load(${1:\"spotlight.ies\"})"
+                },
+                {
+                    "name": "loadFromString",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& data"
+                    ],
+                    "desc": "Load IES profile from inline string data",
+                    "snippet": "loadFromString(${1:data})"
+                },
+                {
+                    "name": "isLoaded",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if profile is loaded",
+                    "snippet": "isLoaded()"
+                },
+                {
+                    "name": "getMaxVerticalAngle",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get maximum vertical angle in the profile (radians)",
+                    "snippet": "getMaxVerticalAngle()"
+                },
+                {
+                    "name": "getMaxCandela",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get maximum candela value in the profile",
+                    "snippet": "getMaxCandela()"
+                },
+                {
+                    "name": "getTextureWidth",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get width of the generated 1D lookup texture",
+                    "snippet": "getTextureWidth()"
+                }
+            ]
+        },
+        {
+            "name": "Environment",
+            "desc": "IBL environment map for PBR ambient lighting (irradiance + prefilter + BRDF LUT)",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "Environment()"
+            },
+            "methods": [
+                {
+                    "name": "loadFromHDR",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Load environment from HDR image file",
+                    "snippet": "loadFromHDR(${1:\"env.hdr\"})"
+                },
+                {
+                    "name": "loadProcedural",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Generate a simple procedural sky environment",
+                    "snippet": "loadProcedural()"
+                },
+                {
+                    "name": "isLoaded",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if environment is loaded",
+                    "snippet": "isLoaded()"
+                },
+                {
+                    "name": "release",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Release GPU resources",
+                    "snippet": "release()"
+                },
+                {
+                    "name": "getIrradianceMap",
+                    "return": "const Texture&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get irradiance cubemap for diffuse IBL",
+                    "snippet": "getIrradianceMap()"
+                },
+                {
+                    "name": "getPrefilterMap",
+                    "return": "const Texture&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get prefiltered environment cubemap for specular IBL",
+                    "snippet": "getPrefilterMap()"
+                },
+                {
+                    "name": "getBrdfLut",
+                    "return": "const Texture&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get BRDF integration lookup texture",
+                    "snippet": "getBrdfLut()"
+                },
+                {
+                    "name": "getPrefilterMipLevels",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get number of mip levels in the prefilter map",
+                    "snippet": "getPrefilterMipLevels()"
+                }
+            ]
+        },
+        {
+            "name": "Platform",
+            "desc": "Compile-time OS detection. All methods are constexpr and resolve at compile time based on the target platform.",
+            "static_methods": [
+                {
+                    "name": "isWeb",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on Web (Emscripten / WASM)",
+                    "snippet": "Platform::isWeb()"
+                },
+                {
+                    "name": "isMacOS",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on macOS",
+                    "snippet": "Platform::isMacOS()"
+                },
+                {
+                    "name": "isIOS",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on iOS",
+                    "snippet": "Platform::isIOS()"
+                },
+                {
+                    "name": "isWindows",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on Windows",
+                    "snippet": "Platform::isWindows()"
+                },
+                {
+                    "name": "isAndroid",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on Android",
+                    "snippet": "Platform::isAndroid()"
+                },
+                {
+                    "name": "isLinux",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on Linux (desktop, excludes Android)",
+                    "snippet": "Platform::isLinux()"
+                },
+                {
+                    "name": "isApple",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on any Apple platform (macOS or iOS)",
+                    "snippet": "Platform::isApple()"
+                },
+                {
+                    "name": "isMobile",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on mobile (iOS or Android)",
+                    "snippet": "Platform::isMobile()"
+                },
+                {
+                    "name": "isDesktop",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True on desktop (macOS, Windows, or Linux)",
+                    "snippet": "Platform::isDesktop()"
+                },
+                {
+                    "name": "name",
+                    "return": "const char*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"",
+                    "snippet": "Platform::name()"
+                }
+            ]
+        },
+        {
+            "name": "GraphicsBackend",
+            "desc": "Runtime sokol_gfx backend query. Values are meaningful only after sg_setup() has completed (i.e. after the first setup() call).",
+            "static_methods": [
+                {
+                    "name": "isOpenGL",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on OpenGL (core or GLES3)",
+                    "snippet": "GraphicsBackend::isOpenGL()"
+                },
+                {
+                    "name": "isMetal",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on Apple Metal",
+                    "snippet": "GraphicsBackend::isMetal()"
+                },
+                {
+                    "name": "isD3D11",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on Direct3D 11",
+                    "snippet": "GraphicsBackend::isD3D11()"
+                },
+                {
+                    "name": "isWebGPU",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on WebGPU",
+                    "snippet": "GraphicsBackend::isWebGPU()"
+                },
+                {
+                    "name": "isWebGL2",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on WebGL2 (GLES3 under Emscripten)",
+                    "snippet": "GraphicsBackend::isWebGL2()"
+                },
+                {
+                    "name": "isVulkan",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True when running on Vulkan",
+                    "snippet": "GraphicsBackend::isVulkan()"
+                },
+                {
+                    "name": "name",
+                    "return": "const char*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"",
+                    "snippet": "GraphicsBackend::name()"
+                }
+            ]
+        },
+        {
+            "name": "BuildInfo",
+            "desc": "Build timestamp info injected as compile definitions by trussc_app() at CMake configure time. Refreshes when cmake reconfigures. Date/time fields are local time; timestamp is UTC Unix seconds.",
+            "static_methods": [
+                {
+                    "name": "date",
+                    "return": "const char*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build date in \"YYYY-MM-DD\" form (local time)",
+                    "snippet": "BuildInfo::date()"
+                },
+                {
+                    "name": "time",
+                    "return": "const char*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build time in \"HH:MM:SS\" form (local time)",
+                    "snippet": "BuildInfo::time()"
+                },
+                {
+                    "name": "dateTime",
+                    "return": "const char*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)",
+                    "snippet": "BuildInfo::dateTime()"
+                },
+                {
+                    "name": "timestamp",
+                    "return": "int64_t",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build timestamp as Unix seconds (UTC)",
+                    "snippet": "BuildInfo::timestamp()"
+                },
+                {
+                    "name": "year",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build year (e.g. 2026)",
+                    "snippet": "BuildInfo::year()"
+                },
+                {
+                    "name": "month",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build month (1-12)",
+                    "snippet": "BuildInfo::month()"
+                },
+                {
+                    "name": "day",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build day of month (1-31)",
+                    "snippet": "BuildInfo::day()"
+                },
+                {
+                    "name": "hour",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build hour (0-23)",
+                    "snippet": "BuildInfo::hour()"
+                },
+                {
+                    "name": "minute",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build minute (0-59)",
+                    "snippet": "BuildInfo::minute()"
+                },
+                {
+                    "name": "second",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build second (0-59)",
+                    "snippet": "BuildInfo::second()"
                 }
             ]
         }
