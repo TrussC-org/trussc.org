@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애드온 | TrussC</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="description" content="TrussC의 번들 및 커뮤니티 애드온을 둘러보세요. 물리, 네트워크, GUI, 컴퓨터 비전 등.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../addons/addons.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <img src="../../assets/images/logo-navigator.svg" alt="TrussC" class="logo-img">
+            </a>
+            <button class="nav-toggle" aria-label="메뉴 열기">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="../../reference/">레퍼런스</a></li>
+                <li><a href="../../examples/">예제</a></li>
+                <li><a href="./" class="active">애드온</a></li>
+                <li><a href="../for-of-users.html">oF 사용자에게</a></li>
+                <li><a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">AI에게 물어보기</a></li>
+                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED.md" class="nav-cta" target="_blank" rel="noopener">시작하기</a></li>
+                <li class="lang-dropdown">
+                    <button class="nav-lang" onclick="this.parentElement.classList.toggle('open')"><img src="../../assets/images/globe.svg" alt="" class="lang-icon"> ▾</button>
+                    <ul class="lang-menu">
+                        <li><a href="/addons/">EN</a></li>
+                        <li><a href="/ja/addons/">日本語</a></li>
+                        <li><a href="/ko/addons/" class="active">한국어</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="addons-hero">
+        <div class="container">
+            <p class="addons-hero-label">Addons</p>
+            <h1 class="addons-hero-title">
+                애드온으로<br>
+                <span class="addons-hero-accent">TrussC 확장하기</span>
+            </h1>
+            <p class="addons-hero-description">
+                번들 모듈과 커뮤니티 기여 애드온.
+                물리, 네트워크, GUI, 컴퓨터 비전, 스크립팅 등.
+            </p>
+        </div>
+    </header>
+
+    <!-- Addons grid -->
+    <section class="section addons-section">
+        <div class="container">
+            <div class="addons-toolbar">
+                <input id="addons-search" type="search" class="addons-search" placeholder="검색...">
+                <div id="addons-bundle-filter" class="addons-filter-group" role="group" aria-label="번들 필터">
+                    <button class="addons-filter-btn active" data-value="all">전체</button>
+                    <button class="addons-filter-btn" data-value="bundled">번들</button>
+                    <button class="addons-filter-btn" data-value="community">커뮤니티</button>
+                </div>
+            </div>
+            <div class="addons-toolbar">
+                <div id="addons-platform-filter" class="addons-filter-group" role="group" aria-label="플랫폼 필터">
+                    <button class="addons-filter-btn active" data-value="all">전체</button>
+                </div>
+                <div id="addons-count" class="addons-meta"></div>
+            </div>
+            <div id="addons-meta" class="addons-meta"></div>
+
+            <div id="addons-status" class="addons-status">애드온을 불러오는 중...</div>
+            <div id="addons-empty" class="addons-empty" style="display:none;"></div>
+            <div id="addons-grid" class="addons-grid" style="display:none;"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 TrussC. <a href="../../license.html">MIT 라이선스</a>로 공개되었습니다.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.ADDONS_I18N = {
+            loading: '애드온을 불러오는 중...',
+            errorTitle: '애드온 레지스트리를 불러올 수 없습니다',
+            errorBody: '네트워크 연결을 확인하고 다시 시도해 주세요.',
+            emptyResult: '조건과 일치하는 애드온이 없습니다.',
+            countLabel: (n, total) => `${n} / ${total} 개`,
+            lastUpdated: '마지막 업데이트',
+            searchPlaceholder: '이름, 설명, 키워드로 검색...',
+            filterAll: '전체',
+            filterBundled: '번들',
+            filterCommunity: '커뮤니티',
+            bundledTag: '번들',
+            communityTag: '커뮤니티',
+            licenseUnknown: '알 수 없음',
+            platformsNotDeclared: '플랫폼 미지정',
+            author: '제작자',
+            version: '버전',
+            license: '라이선스',
+            trusscVersion: 'TrussC 버전',
+            dependencies: '의존성',
+            keywords: '키워드',
+            longDescription: '설명',
+            sourceLink: '소스',
+            demoLink: '데모',
+            detailsToggleOpen: '상세',
+            detailsToggleClose: '상세 닫기',
+            descMissing: '설명이 제공되지 않았습니다.'
+        };
+    </script>
+    <script src="../../script.js"></script>
+    <script src="../../addons/addons.js"></script>
+</body>
+</html>

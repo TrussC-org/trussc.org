@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addons | TrussC</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="description" content="Browse bundled and community addons for TrussC. Physics, networking, GUI, computer vision, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="addons.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <img src="../assets/images/logo-navigator.svg" alt="TrussC" class="logo-img">
+            </a>
+            <button class="nav-toggle" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="../reference/">Reference</a></li>
+                <li><a href="../examples/">Examples</a></li>
+                <li><a href="./" class="active">Addons</a></li>
+                <li><a href="../for-of-users.html">For oF Users</a></li>
+                <li><a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">Ask AI</a></li>
+                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED.md" class="nav-cta" target="_blank" rel="noopener">Get Started</a></li>
+                <li class="lang-dropdown">
+                    <button class="nav-lang" onclick="this.parentElement.classList.toggle('open')"><img src="../assets/images/globe.svg" alt="" class="lang-icon"> ▾</button>
+                    <ul class="lang-menu">
+                        <li><a href="/addons/" class="active">EN</a></li>
+                        <li><a href="/ja/addons/">日本語</a></li>
+                        <li><a href="/ko/addons/">한국어</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="addons-hero">
+        <div class="container">
+            <p class="addons-hero-label">Addons</p>
+            <h1 class="addons-hero-title">
+                Extend TrussC with<br>
+                <span class="addons-hero-accent">Addons</span>
+            </h1>
+            <p class="addons-hero-description">
+                Bundled modules and community contributions.
+                Physics, networking, GUI, computer vision, scripting, and more.
+            </p>
+        </div>
+    </header>
+
+    <!-- Addons grid -->
+    <section class="section addons-section">
+        <div class="container">
+            <div class="addons-toolbar">
+                <input id="addons-search" type="search" class="addons-search" placeholder="Search...">
+                <div id="addons-bundle-filter" class="addons-filter-group" role="group" aria-label="Bundle filter">
+                    <button class="addons-filter-btn active" data-value="all">All</button>
+                    <button class="addons-filter-btn" data-value="bundled">Bundled</button>
+                    <button class="addons-filter-btn" data-value="community">Community</button>
+                </div>
+            </div>
+            <div class="addons-toolbar">
+                <div id="addons-platform-filter" class="addons-filter-group" role="group" aria-label="Platform filter">
+                    <button class="addons-filter-btn active" data-value="all">All</button>
+                </div>
+                <div id="addons-count" class="addons-meta"></div>
+            </div>
+            <div id="addons-meta" class="addons-meta"></div>
+
+            <div id="addons-status" class="addons-status">Loading addons...</div>
+            <div id="addons-empty" class="addons-empty" style="display:none;"></div>
+            <div id="addons-grid" class="addons-grid" style="display:none;"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 TrussC. Released under the <a href="../license.html">MIT License</a>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.ADDONS_I18N = {
+            loading: 'Loading addons...',
+            errorTitle: 'Could not load addon registry',
+            errorBody: 'Please check your network connection and try again.',
+            emptyResult: 'No addons match your filters.',
+            countLabel: (n, total) => `${n} / ${total} addons`,
+            lastUpdated: 'Last updated',
+            searchPlaceholder: 'Search by name, description, keyword...',
+            filterAll: 'All',
+            filterBundled: 'Bundled',
+            filterCommunity: 'Community',
+            bundledTag: 'Bundled',
+            communityTag: 'Community',
+            licenseUnknown: 'Unknown',
+            platformsNotDeclared: 'Platforms: not declared',
+            author: 'Author',
+            version: 'Version',
+            license: 'License',
+            trusscVersion: 'TrussC version',
+            dependencies: 'Dependencies',
+            keywords: 'Keywords',
+            longDescription: 'Description',
+            sourceLink: 'Source',
+            demoLink: 'Demo',
+            detailsToggleOpen: 'Details',
+            detailsToggleClose: 'Hide details',
+            descMissing: 'No description provided.'
+        };
+    </script>
+    <script src="../script.js"></script>
+    <script src="addons.js"></script>
+</body>
+</html>

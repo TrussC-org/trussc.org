@@ -1,0 +1,445 @@
+/* ===================================
+   Addons Page - Specific Styles
+   =================================== */
+
+/* Addons hero (reuses .guide-hero from guide.css conceptually, defined here standalone) */
+.addons-hero {
+    padding: calc(80px + var(--space-3xl)) 0 var(--space-2xl);
+    background: var(--color-bg);
+    text-align: center;
+}
+
+.addons-hero-label {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-lg);
+}
+
+.addons-hero-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-lg);
+}
+
+.addons-hero-accent {
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.addons-hero-description {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+/* Filter bar */
+.addons-section {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-4xl);
+    background: var(--color-bg);
+}
+
+.addons-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.addons-search {
+    flex: 1 1 280px;
+    min-width: 0;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-bg-card);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast);
+}
+
+.addons-search:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.addons-filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.addons-filter-btn {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg-card);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.addons-filter-btn:hover {
+    color: var(--color-text);
+    border-color: var(--color-border-light);
+}
+
+.addons-filter-btn.active {
+    color: white;
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.addons-meta {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-subtle);
+    margin-bottom: var(--space-lg);
+}
+
+/* Status messages */
+.addons-status {
+    text-align: center;
+    padding: var(--space-3xl) var(--space-lg);
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+.addons-status.error {
+    color: #f87171;
+}
+
+.addons-empty {
+    text-align: center;
+    padding: var(--space-3xl) var(--space-lg);
+    color: var(--color-text-subtle);
+    font-size: 0.95rem;
+}
+
+/* Grid */
+.addons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-xl);
+}
+
+/* Card */
+.addon-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.addon-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.3);
+}
+
+.addon-thumb {
+    aspect-ratio: 16 / 9;
+    background: var(--color-bg-alt);
+    overflow: hidden;
+    position: relative;
+}
+
+.addon-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.addon-thumb-placeholder,
+.addon-thumb.addon-thumb-failed::before {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(34, 211, 238, 0.08) 100%),
+        var(--color-bg-alt);
+    color: var(--color-text-subtle);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+}
+
+.addon-thumb.addon-thumb-failed::before {
+    content: 'no preview';
+    position: absolute;
+    inset: 0;
+}
+
+.addon-body {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    flex: 1;
+}
+
+.addon-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.addon-name {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+    word-break: break-all;
+    line-height: 1.3;
+}
+
+.addon-name .addon-owner {
+    color: var(--color-text-subtle);
+    font-weight: 400;
+}
+
+.addon-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+}
+
+.addon-tag-bundled {
+    color: var(--color-accent);
+    background: rgba(34, 211, 238, 0.12);
+    border: 1px solid rgba(34, 211, 238, 0.25);
+}
+
+.addon-tag-community {
+    color: var(--color-primary-light);
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.addon-description {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    min-height: 2.6em;
+}
+
+.addon-description.empty {
+    color: var(--color-text-subtle);
+    font-style: italic;
+}
+
+.addon-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+}
+
+.addon-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    padding: 2px 8px;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+}
+
+.addon-badge-license {
+    color: var(--color-accent);
+    background: rgba(34, 211, 238, 0.08);
+    border-color: rgba(34, 211, 238, 0.2);
+}
+
+.addon-badge-platform {
+    color: var(--color-text-muted);
+}
+
+.addon-badge-platform.empty {
+    color: var(--color-text-subtle);
+    font-style: italic;
+}
+
+.addon-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    font-size: 0.8rem;
+    color: var(--color-text-subtle);
+    margin-top: var(--space-xs);
+}
+
+.addon-author {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.addon-version {
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+}
+
+.addon-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+}
+
+.addon-btn {
+    flex: 1 1 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.addon-btn:hover {
+    color: var(--color-text);
+    border-color: var(--color-border-light);
+    background: var(--color-bg-alt);
+}
+
+.addon-btn-primary {
+    color: var(--color-text);
+    border-color: var(--color-primary);
+    background: rgba(99, 102, 241, 0.08);
+}
+
+.addon-btn-primary:hover {
+    background: rgba(99, 102, 241, 0.18);
+    border-color: var(--color-primary-light);
+    color: white;
+}
+
+.addon-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Details (expanded panel) */
+.addon-details {
+    display: none;
+    padding: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+}
+
+.addon-card.expanded .addon-details {
+    display: block;
+}
+
+.addon-details h4 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: var(--space-sm) 0 var(--space-xs);
+}
+
+.addon-details h4:first-child {
+    margin-top: 0;
+}
+
+.addon-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.addon-details li {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    padding: 2px 0;
+}
+
+.addon-details a {
+    color: var(--color-primary-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.addon-details a:hover {
+    color: var(--color-accent);
+}
+
+.addon-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.addon-keyword {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-subtle);
+    padding: 2px 8px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+}
+
+@media (max-width: 768px) {
+    .addons-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .addons-filter-group {
+        justify-content: flex-start;
+    }
+
+    .addons-grid {
+        grid-template-columns: 1fr;
+    }
+}
