@@ -34,9 +34,9 @@
                 <li class="lang-dropdown">
                     <button class="nav-lang" onclick="this.parentElement.classList.toggle('open')"><img src="../assets/images/globe.svg" alt="" class="lang-icon"> ▾</button>
                     <ul class="lang-menu">
-                        <li><a href="/addons/" class="active">EN</a></li>
-                        <li><a href="/ja/addons/">日本語</a></li>
-                        <li><a href="/ko/addons/">한국어</a></li>
+                        <li><a href="/" class="active">EN</a></li>
+                        <li><a href="/ja/">日本語</a></li>
+                        <li><a href="/ko/">한국어</a></li>
                     </ul>
                 </li>
             </ul>
@@ -63,15 +63,29 @@
         <div class="container">
             <div class="addons-toolbar">
                 <input id="addons-search" type="search" class="addons-search" placeholder="Search...">
-                <div id="addons-bundle-filter" class="addons-filter-group" role="group" aria-label="Bundle filter">
-                    <button class="addons-filter-btn active" data-value="all">All</button>
-                    <button class="addons-filter-btn" data-value="bundled">Bundled</button>
-                    <button class="addons-filter-btn" data-value="community">Community</button>
+                <div class="addons-filter-row">
+                    <span class="addons-filter-label">Show</span>
+                    <div id="addons-bundle-filter" class="addons-filter-group" role="group" aria-label="Bundle filter">
+                        <button class="addons-filter-btn active" data-value="all">All</button>
+                        <button class="addons-filter-btn" data-value="bundled">Bundled</button>
+                        <button class="addons-filter-btn" data-value="community">Community</button>
+                    </div>
                 </div>
             </div>
             <div class="addons-toolbar">
-                <div id="addons-platform-filter" class="addons-filter-group" role="group" aria-label="Platform filter">
-                    <button class="addons-filter-btn active" data-value="all">All</button>
+                <div class="addons-filter-row">
+                    <span class="addons-filter-label">Category</span>
+                    <div id="addons-category-filter" class="addons-filter-group" role="group" aria-label="Category filter">
+                        <button class="addons-filter-btn active" data-value="all">All</button>
+                    </div>
+                </div>
+            </div>
+            <div class="addons-toolbar">
+                <div class="addons-filter-row">
+                    <span class="addons-filter-label">Platform</span>
+                    <div id="addons-platform-filter" class="addons-filter-group" role="group" aria-label="Platform filter">
+                        <button class="addons-filter-btn active" data-value="all">All</button>
+                    </div>
                 </div>
                 <div id="addons-count" class="addons-meta"></div>
             </div>
@@ -104,22 +118,49 @@
             filterAll: 'All',
             filterBundled: 'Bundled',
             filterCommunity: 'Community',
-            bundledTag: 'Bundled',
-            communityTag: 'Community',
             licenseUnknown: 'Unknown',
-            platformsNotDeclared: 'Platforms: not declared',
+            platformsNotDeclared: 'No platforms declared',
             author: 'Author',
             version: 'Version',
             license: 'License',
             trusscVersion: 'TrussC version',
+            category: 'Category',
             dependencies: 'Dependencies',
             keywords: 'Keywords',
-            longDescription: 'Description',
             sourceLink: 'Source',
             demoLink: 'Demo',
-            detailsToggleOpen: 'Details',
-            detailsToggleClose: 'Hide details',
-            descMissing: 'No description provided.'
+            detailsToggleOpen: 'More',
+            detailsToggleClose: 'Less',
+            descMissing: '',
+            platformLabels: {
+                macos: 'macOS',
+                win: 'Windows',
+                linux: 'Linux',
+                web: 'Web',
+                android: 'Android',
+                ios: 'iOS'
+            },
+            categoryLabels: {
+                '3d': '3D',
+                'ai': 'AI',
+                'algorithms': 'Algorithms',
+                'animation': 'Animation',
+                'bridges': 'Bridges',
+                'computer-vision': 'Computer Vision',
+                'game': 'Game',
+                'graphics': 'Graphics',
+                'gui': 'GUI',
+                'hardware': 'Hardware',
+                'machine-learning': 'ML',
+                'network': 'Network',
+                'physics': 'Physics',
+                'sound': 'Sound',
+                'typography': 'Typography',
+                'utilities': 'Utilities',
+                'video': 'Video',
+                'web': 'Web',
+                'misc': 'Misc'
+            }
         };
     </script>
     <script src="../script.js"></script>

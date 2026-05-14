@@ -2,7 +2,7 @@
    Addons Page - Specific Styles
    =================================== */
 
-/* Addons hero (reuses .guide-hero from guide.css conceptually, defined here standalone) */
+/* Hero */
 .addons-hero {
     padding: calc(80px + var(--space-3xl)) 0 var(--space-2xl);
     background: var(--color-bg);
@@ -56,7 +56,7 @@
     gap: var(--space-md);
     align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-md);
 }
 
 .addons-search {
@@ -77,6 +77,23 @@
     border-color: var(--color-primary);
 }
 
+.addons-filter-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.addons-filter-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 70px;
+}
+
 .addons-filter-group {
     display: flex;
     flex-wrap: wrap;
@@ -85,13 +102,13 @@
 
 .addons-filter-btn {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    padding: var(--space-sm) var(--space-md);
+    padding: 4px 10px;
     background: var(--color-bg-card);
     color: var(--color-text-muted);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all var(--transition-fast);
 }
@@ -109,8 +126,11 @@
 
 .addons-meta {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--color-text-subtle);
+}
+
+#addons-meta {
     margin-bottom: var(--space-lg);
 }
 
@@ -133,32 +153,48 @@
     font-size: 0.95rem;
 }
 
-/* Grid */
-.addons-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: var(--space-xl);
+/* Grid — JS-driven masonry. Cards are absolutely positioned; column
+   assignment is sticky after initial layout so expanding a card pushes
+   the cards below in the same column down (instead of letting items
+   flow to the next column as native CSS multicol would). */
+:root {
+    --masonry-col-width: 200px;
+    --masonry-gap: 12px;
 }
 
-/* Card */
+.addons-grid {
+    position: relative;
+}
+
 .addon-card {
+    position: absolute;
     display: flex;
     flex-direction: column;
     background: var(--color-bg-card);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     overflow: hidden;
-    transition: all var(--transition-normal);
+    /* No `top` transition: JS retargets each ResizeObserver tick so
+       cards slide in lockstep with the expanding neighbour. CSS easing
+       on top would lag behind the live updates and look jittery.
+       transform is fair game — only used by :hover lift. */
+    transition: border-color var(--transition-fast),
+                box-shadow var(--transition-fast),
+                transform var(--transition-fast);
 }
 
 .addon-card:hover {
     border-color: var(--color-primary);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
+/* Thumbnail — natural aspect ratio for wide/square images, capped at 1:1
+   (square) for portrait so abusively tall screenshots get cropped instead
+   of taking over the whole column. Uses CSS container queries to make
+   max-height track the actual column width. */
 .addon-thumb {
-    aspect-ratio: 16 / 9;
+    container-type: inline-size;
     background: var(--color-bg-alt);
     overflow: hidden;
     position: relative;
@@ -166,170 +202,112 @@
 
 .addon-thumb img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 100cqw;
     object-fit: cover;
     display: block;
 }
 
-.addon-thumb-placeholder,
-.addon-thumb.addon-thumb-failed::before {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background:
-        linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(34, 211, 238, 0.08) 100%),
-        var(--color-bg-alt);
-    color: var(--color-text-subtle);
-    font-family: var(--font-mono);
-    font-size: 1.1rem;
-    letter-spacing: 0.05em;
+/* Cards with a screenshot stand out subtly via a slightly stronger card
+   background — the screenshot itself does most of the work visually. */
+.addon-card.has-thumb {
+    background: var(--color-bg-card);
 }
 
-.addon-thumb.addon-thumb-failed::before {
-    content: 'no preview';
-    position: absolute;
-    inset: 0;
-}
-
+/* Body */
 .addon-body {
-    padding: var(--space-lg);
+    padding: var(--space-md);
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
     flex: 1;
 }
 
 .addon-header {
     display: flex;
-    align-items: flex-start;
+    align-items: baseline;
     justify-content: space-between;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
     flex-wrap: wrap;
 }
 
 .addon-name {
     font-family: var(--font-mono);
-    font-size: 1.05rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--color-text);
     word-break: break-all;
-    line-height: 1.3;
+    line-height: 1.25;
+    margin: 0;
 }
 
 .addon-name .addon-owner {
     color: var(--color-text-subtle);
     font-weight: 400;
+    font-size: 0.78rem;
 }
 
-.addon-tag {
+/* Category pill — small, neutral */
+.addon-category {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 2px 8px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    padding: 1px 6px;
     border-radius: var(--radius-sm);
-    white-space: nowrap;
-    letter-spacing: 0.03em;
-}
-
-.addon-tag-bundled {
     color: var(--color-accent);
-    background: rgba(34, 211, 238, 0.12);
-    border: 1px solid rgba(34, 211, 238, 0.25);
-}
-
-.addon-tag-community {
-    color: var(--color-primary-light);
-    background: rgba(99, 102, 241, 0.12);
-    border: 1px solid rgba(99, 102, 241, 0.25);
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
 }
 
 .addon-description {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     color: var(--color-text-muted);
-    line-height: 1.6;
-    min-height: 2.6em;
+    line-height: 1.5;
+    margin: 0;
+    /* Clip to 3 lines max */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.addon-description.empty {
-    color: var(--color-text-subtle);
-    font-style: italic;
-}
-
-.addon-badges {
+/* Footer row: license + action icons */
+.addon-footer {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     gap: var(--space-xs);
-    margin-top: var(--space-xs);
+    margin-top: auto;
+    padding-top: var(--space-sm);
 }
 
-.addon-badge {
-    display: inline-block;
+.addon-license {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    color: var(--color-text-muted);
-    padding: 2px 8px;
+    color: var(--color-text-subtle);
+    padding: 1px 6px;
     background: var(--color-bg-alt);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
 }
 
-.addon-badge-license {
-    color: var(--color-accent);
-    background: rgba(34, 211, 238, 0.08);
-    border-color: rgba(34, 211, 238, 0.2);
-}
-
-.addon-badge-platform {
-    color: var(--color-text-muted);
-}
-
-.addon-badge-platform.empty {
-    color: var(--color-text-subtle);
-    font-style: italic;
-}
-
-.addon-meta-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-sm);
-    font-size: 0.8rem;
-    color: var(--color-text-subtle);
-    margin-top: var(--space-xs);
-}
-
-.addon-author {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.addon-version {
-    font-family: var(--font-mono);
-    color: var(--color-text-muted);
-}
-
 .addon-actions {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-top: var(--space-md);
-    padding-top: var(--space-md);
-    border-top: 1px solid var(--color-border);
+    gap: 4px;
 }
 
-.addon-btn {
-    flex: 1 1 auto;
+/* Icon-only buttons */
+.addon-iconbtn {
+    width: 26px;
+    height: 26px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-xs);
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: var(--space-sm) var(--space-md);
+    padding: 0;
     border-radius: var(--radius-sm);
     border: 1px solid var(--color-border);
     background: transparent;
@@ -339,94 +317,128 @@
     transition: all var(--transition-fast);
 }
 
-.addon-btn:hover {
+.addon-iconbtn:hover {
     color: var(--color-text);
     border-color: var(--color-border-light);
     background: var(--color-bg-alt);
 }
 
-.addon-btn-primary {
+.addon-iconbtn-primary {
     color: var(--color-text);
     border-color: var(--color-primary);
-    background: rgba(99, 102, 241, 0.08);
+    background: rgba(99, 102, 241, 0.1);
 }
 
-.addon-btn-primary:hover {
-    background: rgba(99, 102, 241, 0.18);
+.addon-iconbtn-primary:hover {
+    background: rgba(99, 102, 241, 0.2);
     border-color: var(--color-primary-light);
     color: white;
 }
 
-.addon-btn svg {
-    width: 14px;
-    height: 14px;
+.addon-iconbtn svg {
+    width: 13px;
+    height: 13px;
 }
 
-/* Details (expanded panel) */
+.addon-toggle-details svg {
+    transition: transform var(--transition-fast);
+}
+
+.addon-card.expanded .addon-toggle-details svg {
+    transform: rotate(180deg);
+}
+
+/* Details (expanded panel) — key/value table-like.
+   Collapsed state animates max-height + padding + border for a smooth
+   reveal. The ResizeObserver in addons.js picks up the height change
+   and re-flows neighboring cards in the same column. */
 .addon-details {
-    display: none;
-    padding: var(--space-lg);
-    border-top: 1px solid var(--color-border);
+    max-height: 0;
+    padding: 0 var(--space-md);
+    border-top: 0 solid var(--color-border);
     background: var(--color-bg-alt);
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     color: var(--color-text-muted);
-    line-height: 1.7;
+    line-height: 1.5;
+    overflow: hidden;
+    /* easeInOutQuint — slow start and end, fast middle. */
+    transition: max-height 0.36s cubic-bezier(0.83, 0, 0.17, 1),
+                padding-top 0.36s cubic-bezier(0.83, 0, 0.17, 1),
+                padding-bottom 0.36s cubic-bezier(0.83, 0, 0.17, 1),
+                border-top-width 0.36s cubic-bezier(0.83, 0, 0.17, 1);
 }
 
 .addon-card.expanded .addon-details {
-    display: block;
+    max-height: 600px;
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-md);
+    border-top-width: 1px;
 }
 
-.addon-details h4 {
-    font-size: 0.75rem;
+.addon-detail-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: var(--space-xs);
+    padding: 4px 0;
+    align-items: baseline;
+}
+
+.addon-detail-row + .addon-detail-row {
+    border-top: 1px solid var(--color-border);
+}
+
+.addon-detail-key {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
     font-weight: 600;
     color: var(--color-text);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: var(--space-sm) 0 var(--space-xs);
+    letter-spacing: 0.04em;
 }
 
-.addon-details h4:first-child {
-    margin-top: 0;
+.addon-detail-val {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    word-break: break-word;
 }
 
-.addon-details ul {
+.addon-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.addon-pill {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-subtle);
+    padding: 1px 6px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+}
+
+.addon-deplist {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.addon-details li {
+.addon-deplist li {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--color-text-muted);
     padding: 2px 0;
 }
 
-.addon-details a {
+.addon-deplist a {
     color: var(--color-primary-light);
     text-decoration: underline;
     text-underline-offset: 2px;
 }
 
-.addon-details a:hover {
+.addon-deplist a:hover {
     color: var(--color-accent);
-}
-
-.addon-keywords {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-}
-
-.addon-keyword {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--color-text-subtle);
-    padding: 2px 8px;
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
 }
 
 @media (max-width: 768px) {
@@ -439,7 +451,13 @@
         justify-content: flex-start;
     }
 
-    .addons-grid {
-        grid-template-columns: 1fr;
+    :root {
+        --masonry-col-width: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --masonry-col-width: 140px;
     }
 }
