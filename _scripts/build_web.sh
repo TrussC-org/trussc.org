@@ -84,6 +84,17 @@ log_info "WASMビルド対象: ${samples[*]}"
 success_count=0
 fail_count=0
 
+content_type_for_ext() {
+    local ext="$1"
+    case "$ext" in
+        html) echo "text/html; charset=utf-8" ;;
+        js) echo "application/javascript; charset=utf-8" ;;
+        wasm) echo "application/wasm" ;;
+        data) echo "application/octet-stream" ;;
+        *) echo "application/octet-stream" ;;
+    esac
+}
+
 for sample_input in "${samples[@]}"; do
     sample=$(sample_basename "$sample_input")
     addon_hint=$(sample_addon_hint "$sample_input")
@@ -151,7 +162,8 @@ for sample_input in "${samples[@]}"; do
         for ext in html js wasm data; do
             file="$bin_dir/${sample}.${ext}"
             if [[ -f "$file" ]]; then
-                if ! wrangler r2 object put "$WASM_BUCKET/$r2_base/${sample}.${ext}" --file "$file" --remote >/dev/null 2>&1; then
+                content_type=$(content_type_for_ext "$ext")
+                if ! wrangler r2 object put "$WASM_BUCKET/$r2_base/${sample}.${ext}" --file "$file" --remote --content-type "$content_type" >/dev/null 2>&1; then
                     log_error "$sample: ${sample}.${ext} のアップロード失敗"
                     upload_success=false
                 fi
