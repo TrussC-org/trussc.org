@@ -138,6 +138,18 @@
           "webSupported": true
         },
         {
+          "name": "curvesExample",
+          "width": 1100,
+          "height": 700,
+          "webSupported": true
+        },
+        {
+          "name": "curveVariationsExample",
+          "width": 1200,
+          "height": 760,
+          "webSupported": true
+        },
+        {
           "name": "roundedRectExample",
           "width": 960,
           "height": 600,
