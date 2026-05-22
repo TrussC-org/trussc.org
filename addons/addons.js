@@ -291,6 +291,13 @@ function renderCard(a) {
 
     const license = (a.license && a.license.trim()) ? a.license : I18N.licenseUnknown;
 
+    // Star pill — only when the source repo actually has stars (bundled
+    // addons live in the TrussC monorepo and report 0, so they stay clean).
+    const starCount = Number(a.stars) || 0;
+    const starsPill = starCount > 0
+        ? `<span class="addon-stars" title="${escapeAttr(starCount + ' GitHub stars')}"><span class="addon-star-icon" aria-hidden="true">★</span>${formatStars(starCount)}</span>`
+        : '';
+
     const thumbBlock = hasThumb
         ? `<div class="addon-thumb">
               <img src="${escapeAttr(a.screenshot)}"
@@ -346,7 +353,10 @@ function renderCard(a) {
                 </div>
                 ${description}
                 <div class="addon-footer">
-                    <span class="addon-license">${escapeHtml(license)}</span>
+                    <div class="addon-meta">
+                        <span class="addon-license">${escapeHtml(license)}</span>
+                        ${starsPill}
+                    </div>
                     <div class="addon-actions">
                         ${demoBtn}
                         ${sourceBtn}
@@ -523,6 +533,15 @@ window.addEventListener('resize', () => {
     const grid = document.getElementById('addons-grid');
     if (grid) scheduleRelayout(grid);
 });
+
+// Compact star count: 1234 -> "1.2k", below 1000 stays as-is.
+function formatStars(n) {
+    if (n >= 1000) {
+        const k = n / 1000;
+        return (k >= 10 ? Math.round(k) : k.toFixed(1).replace(/\.0$/, '')) + 'k';
+    }
+    return String(n);
+}
 
 function escapeHtml(s) {
     if (s == null) return '';

@@ -285,6 +285,14 @@
     padding-top: var(--space-sm);
 }
 
+/* Left side of the footer: license + optional star pill */
+.addon-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-width: 0;
+}
+
 .addon-license {
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -293,6 +301,27 @@
     background: var(--color-bg-alt);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
+}
+
+/* Star pill — deliberately quiet; only the star glyph carries colour. */
+.addon-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-subtle);
+    padding: 1px 6px;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+}
+
+.addon-star-icon {
+    color: #e3b341;
+    font-size: 0.72rem;
+    line-height: 1;
 }
 
 .addon-actions {
