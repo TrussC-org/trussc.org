@@ -250,6 +250,22 @@
                     "snippet": "drawCircle(${1:x}, ${2:y}, ${3:radius})"
                 },
                 {
+                    "name": "drawArc",
+                    "params": "x, y, radius, angleBegin, angleEnd",
+                    "params_typed": "float x, float y, float radius, float angleBegin, float angleEnd",
+                    "return_type": "void",
+                    "desc": "Draw arc (partial circle, angles in radians)",
+                    "snippet": "drawArc(${1:x}, ${2:y}, ${3:radius}, ${4:0}, ${5:TAU})"
+                },
+                {
+                    "name": "drawArc",
+                    "params": "center, radius, angleBegin, angleEnd",
+                    "params_typed": "Vec3 center, float radius, float angleBegin, float angleEnd",
+                    "return_type": "void",
+                    "desc": "Draw arc (partial circle, angles in radians)",
+                    "snippet": "drawArc(${1:x}, ${2:y}, ${3:radius}, ${4:0}, ${5:TAU})"
+                },
+                {
                     "name": "drawEllipse",
                     "params": "x, y, w, h",
                     "params_typed": "float x, float y, float w, float h",
@@ -312,6 +328,54 @@
                     "return_type": "void",
                     "desc": "Draw line (2D or 3D)",
                     "snippet": "drawLine(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})"
+                },
+                {
+                    "name": "drawBezier",
+                    "params": "p0, p1, p2, p3",
+                    "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3",
+                    "return_type": "void",
+                    "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)",
+                    "snippet": "drawBezier(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
+                },
+                {
+                    "name": "drawBezier",
+                    "params": "p0, p1, p2",
+                    "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2",
+                    "return_type": "void",
+                    "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)",
+                    "snippet": "drawBezier(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
+                },
+                {
+                    "name": "drawBezier",
+                    "params": "controlPoints",
+                    "params_typed": "const vector<Vec3>& controlPoints",
+                    "return_type": "void",
+                    "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)",
+                    "snippet": "drawBezier(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
+                },
+                {
+                    "name": "drawCurve",
+                    "params": "p0, p1, p2, p3",
+                    "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3",
+                    "return_type": "void",
+                    "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)",
+                    "snippet": "drawCurve(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
+                },
+                {
+                    "name": "drawCurve",
+                    "params": "points",
+                    "params_typed": "const vector<Vec3>& points",
+                    "return_type": "void",
+                    "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)",
+                    "snippet": "drawCurve(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
+                },
+                {
+                    "name": "drawCurve",
+                    "params": "points, closed",
+                    "params_typed": "const vector<Vec3>& points, bool closed",
+                    "return_type": "void",
+                    "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)",
+                    "snippet": "drawCurve(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
                 },
                 {
                     "name": "drawTriangle",
@@ -472,6 +536,38 @@
                     "return_type": "void",
                     "desc": "End drawing a shape",
                     "snippet": "endShape()"
+                },
+                {
+                    "name": "appendArc",
+                    "params": "cx, cy, radius, angleBegin, angleEnd",
+                    "params_typed": "float cx, float cy, float radius, float angleBegin, float angleEnd",
+                    "return_type": "void",
+                    "desc": "Append arc vertices to the current shape (use between beginShape/endShape)",
+                    "snippet": "appendArc(${1:cx}, ${2:cy}, ${3:radius}, ${4:0}, ${5:TAU})"
+                },
+                {
+                    "name": "appendArc",
+                    "params": "center, radius, angleBegin, angleEnd",
+                    "params_typed": "const Vec2& center, float radius, float angleBegin, float angleEnd",
+                    "return_type": "void",
+                    "desc": "Append arc vertices to the current shape (use between beginShape/endShape)",
+                    "snippet": "appendArc(${1:cx}, ${2:cy}, ${3:radius}, ${4:0}, ${5:TAU})"
+                },
+                {
+                    "name": "appendCurve",
+                    "params": "points",
+                    "params_typed": "const vector<Vec3>& points",
+                    "return_type": "void",
+                    "desc": "Append Catmull-Rom curve vertices to the current shape (use between beginShape/endShape; needs >=4 points, closed=true wraps around)",
+                    "snippet": "appendCurve(${1:points})"
+                },
+                {
+                    "name": "appendCurve",
+                    "params": "points, closed",
+                    "params_typed": "const vector<Vec3>& points, bool closed",
+                    "return_type": "void",
+                    "desc": "Append Catmull-Rom curve vertices to the current shape (use between beginShape/endShape; needs >=4 points, closed=true wraps around)",
+                    "snippet": "appendCurve(${1:points})"
                 },
                 {
                     "name": "beginStroke",
@@ -703,20 +799,36 @@
                     "snippet": "isStrokeEnabled()"
                 },
                 {
-                    "name": "setCircleResolution",
-                    "params": "resolution",
-                    "params_typed": "int resolution",
+                    "name": "setCurveTolerance",
+                    "params": "pixels",
+                    "params_typed": "float pixels",
                     "return_type": "void",
-                    "desc": "Set circle segment count",
-                    "snippet": "setCircleResolution(${1:32})"
+                    "desc": "Set adaptive curve tessellation tolerance in pixels (smaller = smoother, scale-aware)",
+                    "snippet": "setCurveTolerance(${1:0.5})"
                 },
                 {
-                    "name": "getCircleResolution",
+                    "name": "getCurveTolerance",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current curve tessellation tolerance (in pixels)",
+                    "snippet": "getCurveTolerance()"
+                },
+                {
+                    "name": "setCurveResolution",
+                    "params": "n",
+                    "params_typed": "int n",
+                    "return_type": "void",
+                    "desc": "Set fixed curve segment count (switches off adaptive tolerance mode)",
+                    "snippet": "setCurveResolution(${1:32})"
+                },
+                {
+                    "name": "getCurveResolution",
                     "params": "",
                     "params_typed": "",
                     "return_type": "int",
-                    "desc": "Get circle segment count",
-                    "snippet": "getCircleResolution()"
+                    "desc": "Get current curve resolution",
+                    "snippet": "getCurveResolution()"
                 },
                 {
                     "name": "pushStyle",
@@ -2132,7 +2244,7 @@
                     "params": "path",
                     "params_typed": "const string& path",
                     "return_type": "bool",
-                    "desc": "Load sound file",
+                    "desc": "Load sound file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a",
                     "snippet": "load(${1:\"sound.wav\"})"
                 },
                 {
@@ -6113,44 +6225,45 @@
                     "name": "bezierTo",
                     "return": "void",
                     "signatures": [
-                        "float cx1, float cy1, float cx2, float cy2, float x, float y",
-                        "Vec2 cp1, Vec2 cp2, Vec2 to",
-                        "Vec3 cp1, Vec3 cp2, Vec3 to"
+                        "float cx1, float cy1, float cx2, float cy2, float x, float y, int resolution = -1",
+                        "Vec2 cp1, Vec2 cp2, Vec2 to, int resolution = -1",
+                        "Vec3 cp1, Vec3 cp2, Vec3 to, int resolution = -1"
                     ],
-                    "desc": "Add cubic bezier curve",
+                    "desc": "Add cubic bezier curve (resolution=-1 uses current curve style)",
                     "snippet": "bezierTo(${1:cx1}, ${2:cy1}, ${3:cx2}, ${4:cy2}, ${5:x}, ${6:y})"
                 },
                 {
                     "name": "quadBezierTo",
                     "return": "void",
                     "signatures": [
-                        "float cx, float cy, float x, float y",
-                        "Vec2 cp, Vec2 to",
-                        "Vec3 cp, Vec3 to"
+                        "float cx, float cy, float x, float y, int resolution = -1",
+                        "Vec2 cp, Vec2 to, int resolution = -1",
+                        "Vec3 cp, Vec3 to, int resolution = -1"
                     ],
-                    "desc": "Add quadratic bezier curve",
+                    "desc": "Add quadratic bezier curve (resolution=-1 uses current curve style)",
                     "snippet": "quadBezierTo(${1:cx}, ${2:cy}, ${3:x}, ${4:y})"
                 },
                 {
                     "name": "curveTo",
                     "return": "void",
                     "signatures": [
-                        "float x, float y",
-                        "Vec2 to",
-                        "Vec3 to"
+                        "float x, float y, float z = 0, int resolution = -1",
+                        "Vec2 to, int resolution = -1",
+                        "Vec3 to, int resolution = -1"
                     ],
-                    "desc": "Add Catmull-Rom curve segment",
+                    "desc": "Add Catmull-Rom curve segment (needs >=4 consecutive calls; resolution=-1 uses current curve style)",
                     "snippet": "curveTo(${1:x}, ${2:y})"
                 },
                 {
                     "name": "arc",
                     "return": "void",
                     "signatures": [
-                        "float x, float y, float radiusX, float radiusY, float angleBegin, float angleEnd",
-                        "Vec2 center, float radiusX, float radiusY, float angleBegin, float angleEnd"
+                        "float x, float y, float radius, float angleBegin, float angleEnd, bool clockwise = true",
+                        "Vec2 center, float radius, float angleBegin, float angleEnd, bool clockwise = true",
+                        "Vec3 center, float radius, float angleBegin, float angleEnd, bool clockwise = true"
                     ],
-                    "desc": "Add an arc",
-                    "snippet": "arc(${1:x}, ${2:y}, ${3:radiusX}, ${4:radiusY}, ${5:0}, ${6:360})"
+                    "desc": "Add an arc (angles in radians)",
+                    "snippet": "arc(${1:x}, ${2:y}, ${3:radius}, ${4:0}, ${5:TAU})"
                 },
                 {
                     "name": "close",
@@ -6642,7 +6755,7 @@
                     "signatures": [
                         "string path"
                     ],
-                    "desc": "Load audio file",
+                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a",
                     "snippet": "load(${1:\"path\"})"
                 },
                 {

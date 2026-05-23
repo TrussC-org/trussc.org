@@ -262,13 +262,6 @@
           "notes_ko": ""
         },
         {
-          "of": "ofSetCircleResolution",
-          "tc": "setCircleResolution(resolution)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
           "of": "ofPushStyle",
           "tc": "pushStyle()",
           "notes": "",

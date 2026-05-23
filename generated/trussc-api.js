@@ -5,7 +5,7 @@
 // Do not edit directly - edit api-definition.yaml instead
 
 const TrussCAPI = {
-    "version": "v0.4.4",
+    "version": "v0.5.2",
     "categories": [
         {
             "name": "Lifecycle",
@@ -334,6 +334,26 @@ const TrussCAPI = {
                     "snippet": "drawCircle(${1:x}, ${2:y}, ${3:radius})"
                 },
                 {
+                    "name": "drawArc",
+                    "params": "x, y, radius, angleBegin, angleEnd",
+                    "params_typed": "float x, float y, float radius, float angleBegin, float angleEnd",
+                    "return_type": "void",
+                    "desc": "Draw arc (partial circle, angles in radians)",
+                    "desc_ja": "円弧を描画（角度はradian）",
+                    "desc_ko": "호 그리기 (각도는 radian)",
+                    "snippet": "drawArc(${1:x}, ${2:y}, ${3:radius}, ${4:0}, ${5:TAU})"
+                },
+                {
+                    "name": "drawArc",
+                    "params": "center, radius, angleBegin, angleEnd",
+                    "params_typed": "Vec3 center, float radius, float angleBegin, float angleEnd",
+                    "return_type": "void",
+                    "desc": "Draw arc (partial circle, angles in radians)",
+                    "desc_ja": "円弧を描画（角度はradian）",
+                    "desc_ko": "호 그리기 (각도는 radian)",
+                    "snippet": "drawArc(${1:x}, ${2:y}, ${3:radius}, ${4:0}, ${5:TAU})"
+                },
+                {
                     "name": "drawEllipse",
                     "params": "x, y, w, h",
                     "params_typed": "float x, float y, float w, float h",
@@ -412,6 +432,66 @@ const TrussCAPI = {
                     "desc_ja": "線を描画（2Dまたは3D）",
                     "desc_ko": "선 그리기 (2D 또는 3D)",
                     "snippet": "drawLine(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})"
+                },
+                {
+                    "name": "drawBezier",
+                    "params": "p0, p1, p2, p3",
+                    "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3",
+                    "return_type": "void",
+                    "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)",
+                    "desc_ja": "ベジェ曲線を描画（4点で3次、3点で2次、vectorでN次）",
+                    "desc_ko": "베지어 곡선 그리기 (4점은 3차, 3점은 2차, vector는 N차)",
+                    "snippet": "drawBezier(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
+                },
+                {
+                    "name": "drawBezier",
+                    "params": "p0, p1, p2",
+                    "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2",
+                    "return_type": "void",
+                    "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)",
+                    "desc_ja": "ベジェ曲線を描画（4点で3次、3点で2次、vectorでN次）",
+                    "desc_ko": "베지어 곡선 그리기 (4점은 3차, 3점은 2차, vector는 N차)",
+                    "snippet": "drawBezier(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
+                },
+                {
+                    "name": "drawBezier",
+                    "params": "controlPoints",
+                    "params_typed": "const vector<Vec3>& controlPoints",
+                    "return_type": "void",
+                    "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)",
+                    "desc_ja": "ベジェ曲線を描画（4点で3次、3点で2次、vectorでN次）",
+                    "desc_ko": "베지어 곡선 그리기 (4점은 3차, 3점은 2차, vector는 N차)",
+                    "snippet": "drawBezier(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
+                },
+                {
+                    "name": "drawCurve",
+                    "params": "p0, p1, p2, p3",
+                    "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3",
+                    "return_type": "void",
+                    "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)",
+                    "desc_ja": "Catmull-Rom曲線を描画（4点でp1→p2を描画、vectorで内部点を通る連結、closed=trueで閉曲線）",
+                    "desc_ko": "Catmull-Rom 곡선 그리기 (4점은 p1→p2 그리기, vector는 내부 점들을 통과하는 연결, closed=true는 닫힌 곡선)",
+                    "snippet": "drawCurve(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
+                },
+                {
+                    "name": "drawCurve",
+                    "params": "points",
+                    "params_typed": "const vector<Vec3>& points",
+                    "return_type": "void",
+                    "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)",
+                    "desc_ja": "Catmull-Rom曲線を描画（4点でp1→p2を描画、vectorで内部点を通る連結、closed=trueで閉曲線）",
+                    "desc_ko": "Catmull-Rom 곡선 그리기 (4점은 p1→p2 그리기, vector는 내부 점들을 통과하는 연결, closed=true는 닫힌 곡선)",
+                    "snippet": "drawCurve(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
+                },
+                {
+                    "name": "drawCurve",
+                    "params": "points, closed",
+                    "params_typed": "const vector<Vec3>& points, bool closed",
+                    "return_type": "void",
+                    "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)",
+                    "desc_ja": "Catmull-Rom曲線を描画（4点でp1→p2を描画、vectorで内部点を通る連結、closed=trueで閉曲線）",
+                    "desc_ko": "Catmull-Rom 곡선 그리기 (4점은 p1→p2 그리기, vector는 내부 점들을 통과하는 연결, closed=true는 닫힌 곡선)",
+                    "snippet": "drawCurve(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})"
                 },
                 {
                     "name": "drawTriangle",
@@ -612,6 +692,46 @@ const TrussCAPI = {
                     "desc_ja": "図形の描画を終了",
                     "desc_ko": "도형 그리기 종료",
                     "snippet": "endShape()"
+                },
+                {
+                    "name": "appendArc",
+                    "params": "cx, cy, radius, angleBegin, angleEnd",
+                    "params_typed": "float cx, float cy, float radius, float angleBegin, float angleEnd",
+                    "return_type": "void",
+                    "desc": "Append arc vertices to the current shape (use between beginShape/endShape)",
+                    "desc_ja": "現在の図形に円弧の頂点を追加（beginShape/endShape間で使用）",
+                    "desc_ko": "현재 도형에 호 정점을 추가 (beginShape/endShape 사이에서 사용)",
+                    "snippet": "appendArc(${1:cx}, ${2:cy}, ${3:radius}, ${4:0}, ${5:TAU})"
+                },
+                {
+                    "name": "appendArc",
+                    "params": "center, radius, angleBegin, angleEnd",
+                    "params_typed": "const Vec2& center, float radius, float angleBegin, float angleEnd",
+                    "return_type": "void",
+                    "desc": "Append arc vertices to the current shape (use between beginShape/endShape)",
+                    "desc_ja": "現在の図形に円弧の頂点を追加（beginShape/endShape間で使用）",
+                    "desc_ko": "현재 도형에 호 정점을 추가 (beginShape/endShape 사이에서 사용)",
+                    "snippet": "appendArc(${1:cx}, ${2:cy}, ${3:radius}, ${4:0}, ${5:TAU})"
+                },
+                {
+                    "name": "appendCurve",
+                    "params": "points",
+                    "params_typed": "const vector<Vec3>& points",
+                    "return_type": "void",
+                    "desc": "Append Catmull-Rom curve vertices to the current shape (use between beginShape/endShape; needs >=4 points, closed=true wraps around)",
+                    "desc_ja": "現在の図形にCatmull-Rom曲線の頂点を追加（beginShape/endShape間で使用、4点以上必要、closed=trueで閉曲線）",
+                    "desc_ko": "현재 도형에 Catmull-Rom 곡선 정점을 추가 (beginShape/endShape 사이에서 사용, 4점 이상 필요, closed=true는 닫힌 곡선)",
+                    "snippet": "appendCurve(${1:points})"
+                },
+                {
+                    "name": "appendCurve",
+                    "params": "points, closed",
+                    "params_typed": "const vector<Vec3>& points, bool closed",
+                    "return_type": "void",
+                    "desc": "Append Catmull-Rom curve vertices to the current shape (use between beginShape/endShape; needs >=4 points, closed=true wraps around)",
+                    "desc_ja": "現在の図形にCatmull-Rom曲線の頂点を追加（beginShape/endShape間で使用、4点以上必要、closed=trueで閉曲線）",
+                    "desc_ko": "현재 도형에 Catmull-Rom 곡선 정점을 추가 (beginShape/endShape 사이에서 사용, 4점 이상 필요, closed=true는 닫힌 곡선)",
+                    "snippet": "appendCurve(${1:points})"
                 },
                 {
                     "name": "beginStroke",
@@ -921,24 +1041,44 @@ const TrussCAPI = {
                     "snippet": "isStrokeEnabled()"
                 },
                 {
-                    "name": "setCircleResolution",
-                    "params": "resolution",
-                    "params_typed": "int resolution",
+                    "name": "setCurveTolerance",
+                    "params": "pixels",
+                    "params_typed": "float pixels",
                     "return_type": "void",
-                    "desc": "Set circle segment count",
-                    "desc_ja": "円の分割数を設定",
-                    "desc_ko": "원의 분할 개수를 설정",
-                    "snippet": "setCircleResolution(${1:32})"
+                    "desc": "Set adaptive curve tessellation tolerance in pixels (smaller = smoother, scale-aware)",
+                    "desc_ja": "曲線の適応的分割の許容誤差をピクセル単位で設定（小さいほど滑らか、スケール対応）",
+                    "desc_ko": "곡선의 적응형 분할 허용 오차를 픽셀 단위로 설정 (작을수록 부드러움, 스케일 대응)",
+                    "snippet": "setCurveTolerance(${1:0.5})"
                 },
                 {
-                    "name": "getCircleResolution",
+                    "name": "getCurveTolerance",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current curve tessellation tolerance (in pixels)",
+                    "desc_ja": "現在の曲線分割の許容誤差を取得（ピクセル単位）",
+                    "desc_ko": "현재 곡선 분할 허용 오차를 얻음 (픽셀 단위)",
+                    "snippet": "getCurveTolerance()"
+                },
+                {
+                    "name": "setCurveResolution",
+                    "params": "n",
+                    "params_typed": "int n",
+                    "return_type": "void",
+                    "desc": "Set fixed curve segment count (switches off adaptive tolerance mode)",
+                    "desc_ja": "曲線の固定分割数を設定（適応的tolerance modeをオフ）",
+                    "desc_ko": "곡선의 고정 분할 개수를 설정 (적응형 tolerance 모드 끔)",
+                    "snippet": "setCurveResolution(${1:32})"
+                },
+                {
+                    "name": "getCurveResolution",
                     "params": "",
                     "params_typed": "",
                     "return_type": "int",
-                    "desc": "Get circle segment count",
-                    "desc_ja": "円の分割数を取得",
-                    "desc_ko": "원의 분할 개수를 얻음",
-                    "snippet": "getCircleResolution()"
+                    "desc": "Get current curve resolution",
+                    "desc_ja": "現在の曲線分割数を取得",
+                    "desc_ko": "현재 곡선 분할 개수를 얻음",
+                    "snippet": "getCurveResolution()"
                 },
                 {
                     "name": "pushStyle",
@@ -3288,9 +3428,9 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "const string& path",
                     "return_type": "bool",
-                    "desc": "Load sound file",
-                    "desc_ja": "サウンドファイルを読み込む",
-                    "desc_ko": "사운드 파일을 로드",
+                    "desc": "Load sound file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a",
+                    "desc_ja": "サウンドファイルを読み込む。拡張子で自動判別: .wav .mp3 .ogg .flac .aac .m4a",
+                    "desc_ko": "사운드 파일을 로드. 확장자로 자동 판별: .wav .mp3 .ogg .flac .aac .m4a",
                     "snippet": "load(${1:\"sound.wav\"})"
                 },
                 {
@@ -4342,6 +4482,26 @@ const TrussCAPI = {
                     "desc_ja": "子ノードを追加（C++のみ）",
                     "desc_ko": "자식 노드를 추가 (C++ 전용)",
                     "snippet": "addChild(${1:child})"
+                },
+                {
+                    "name": "moveToFront",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Move this node to the end of its parent's child list — drawn last, on top of siblings. No-op if no parent or already last (C++ only)",
+                    "desc_ja": "親の子リストの末尾へ移動。最後に描画され、兄弟の最前面に表示される。親がない / すでに末尾の場合は何もしない（C++のみ）",
+                    "desc_ko": "이 노드를 부모의 자식 리스트 끝으로 이동 — 마지막에 그려지므로 형제들 위에 표시됨. 부모가 없거나 이미 마지막이면 동작 안 함 (C++ 전용)",
+                    "snippet": "moveToFront()"
+                },
+                {
+                    "name": "moveToBack",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Move this node to the beginning of its parent's child list — drawn first, beneath siblings. No-op if no parent or already first (C++ only)",
+                    "desc_ja": "親の子リストの先頭へ移動。最初に描画され、兄弟の最背面に表示される。親がない / すでに先頭の場合は何もしない（C++のみ）",
+                    "desc_ko": "이 노드를 부모의 자식 리스트 처음으로 이동 — 먼저 그려지므로 형제들 아래에 표시됨. 부모가 없거나 이미 처음이면 동작 안 함 (C++ 전용)",
+                    "snippet": "moveToBack()"
                 },
                 {
                     "name": "destroy",
@@ -8865,44 +9025,45 @@ const TrussCAPI = {
                     "name": "bezierTo",
                     "return": "void",
                     "signatures": [
-                        "float cx1, float cy1, float cx2, float cy2, float x, float y",
-                        "Vec2 cp1, Vec2 cp2, Vec2 to",
-                        "Vec3 cp1, Vec3 cp2, Vec3 to"
+                        "float cx1, float cy1, float cx2, float cy2, float x, float y, int resolution = -1",
+                        "Vec2 cp1, Vec2 cp2, Vec2 to, int resolution = -1",
+                        "Vec3 cp1, Vec3 cp2, Vec3 to, int resolution = -1"
                     ],
-                    "desc": "Add cubic bezier curve",
+                    "desc": "Add cubic bezier curve (resolution=-1 uses current curve style)",
                     "snippet": "bezierTo(${1:cx1}, ${2:cy1}, ${3:cx2}, ${4:cy2}, ${5:x}, ${6:y})"
                 },
                 {
                     "name": "quadBezierTo",
                     "return": "void",
                     "signatures": [
-                        "float cx, float cy, float x, float y",
-                        "Vec2 cp, Vec2 to",
-                        "Vec3 cp, Vec3 to"
+                        "float cx, float cy, float x, float y, int resolution = -1",
+                        "Vec2 cp, Vec2 to, int resolution = -1",
+                        "Vec3 cp, Vec3 to, int resolution = -1"
                     ],
-                    "desc": "Add quadratic bezier curve",
+                    "desc": "Add quadratic bezier curve (resolution=-1 uses current curve style)",
                     "snippet": "quadBezierTo(${1:cx}, ${2:cy}, ${3:x}, ${4:y})"
                 },
                 {
                     "name": "curveTo",
                     "return": "void",
                     "signatures": [
-                        "float x, float y",
-                        "Vec2 to",
-                        "Vec3 to"
+                        "float x, float y, float z = 0, int resolution = -1",
+                        "Vec2 to, int resolution = -1",
+                        "Vec3 to, int resolution = -1"
                     ],
-                    "desc": "Add Catmull-Rom curve segment",
+                    "desc": "Add Catmull-Rom curve segment (needs >=4 consecutive calls; resolution=-1 uses current curve style)",
                     "snippet": "curveTo(${1:x}, ${2:y})"
                 },
                 {
                     "name": "arc",
                     "return": "void",
                     "signatures": [
-                        "float x, float y, float radiusX, float radiusY, float angleBegin, float angleEnd",
-                        "Vec2 center, float radiusX, float radiusY, float angleBegin, float angleEnd"
+                        "float x, float y, float radius, float angleBegin, float angleEnd, bool clockwise = true",
+                        "Vec2 center, float radius, float angleBegin, float angleEnd, bool clockwise = true",
+                        "Vec3 center, float radius, float angleBegin, float angleEnd, bool clockwise = true"
                     ],
-                    "desc": "Add an arc",
-                    "snippet": "arc(${1:x}, ${2:y}, ${3:radiusX}, ${4:radiusY}, ${5:0}, ${6:360})"
+                    "desc": "Add an arc (angles in radians)",
+                    "snippet": "arc(${1:x}, ${2:y}, ${3:radius}, ${4:0}, ${5:TAU})"
                 },
                 {
                     "name": "close",
@@ -9398,7 +9559,7 @@ const TrussCAPI = {
                     "signatures": [
                         "string path"
                     ],
-                    "desc": "Load audio file",
+                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a",
                     "snippet": "load(${1:\"path\"})"
                 },
                 {
