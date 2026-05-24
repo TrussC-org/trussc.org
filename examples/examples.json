@@ -363,6 +363,13 @@
           "width": 960,
           "height": 600,
           "webSupported": true
+        },
+        {
+          "name": "soundStreamExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false,
+          "visible": false
         }
       ]
     },
