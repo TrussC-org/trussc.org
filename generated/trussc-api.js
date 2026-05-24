@@ -1705,6 +1705,46 @@ const TrussCAPI = {
                     "snippet": "isKeyPressed(${1:key})"
                 },
                 {
+                    "name": "isShiftPressed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while either Shift key (left or right) is held",
+                    "desc_ja": "Shift キー (左右どちらでも) が押されているか",
+                    "desc_ko": "Shift 키 (좌우 어느 쪽이든) 가 눌려 있는지",
+                    "snippet": "isShiftPressed()"
+                },
+                {
+                    "name": "isControlPressed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while either Control key (left or right) is held",
+                    "desc_ja": "Control キー (左右どちらでも) が押されているか",
+                    "desc_ko": "Control 키 (좌우 어느 쪽이든) 가 눌려 있는지",
+                    "snippet": "isControlPressed()"
+                },
+                {
+                    "name": "isAltPressed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while either Alt / Option key (left or right) is held",
+                    "desc_ja": "Alt / Option キー (左右どちらでも) が押されているか",
+                    "desc_ko": "Alt / Option 키 (좌우 어느 쪽이든) 가 눌려 있는지",
+                    "snippet": "isAltPressed()"
+                },
+                {
+                    "name": "isSuperPressed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while either Super / Cmd / Win key (left or right) is held",
+                    "desc_ja": "Super / Cmd / Win キー (左右どちらでも) が押されているか",
+                    "desc_ko": "Super / Cmd / Win 키 (좌우 어느 쪽이든) 가 눌려 있는지",
+                    "snippet": "isSuperPressed()"
+                },
+                {
                     "name": "showCursor",
                     "params": "",
                     "params_typed": "",

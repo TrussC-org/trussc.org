@@ -1121,6 +1121,38 @@
                     "snippet": "isKeyPressed(${1:key})"
                 },
                 {
+                    "name": "isShiftPressed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while either Shift key (left or right) is held",
+                    "snippet": "isShiftPressed()"
+                },
+                {
+                    "name": "isControlPressed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while either Control key (left or right) is held",
+                    "snippet": "isControlPressed()"
+                },
+                {
+                    "name": "isAltPressed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while either Alt / Option key (left or right) is held",
+                    "snippet": "isAltPressed()"
+                },
+                {
+                    "name": "isSuperPressed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while either Super / Cmd / Win key (left or right) is held",
+                    "snippet": "isSuperPressed()"
+                },
+                {
                     "name": "showCursor",
                     "params": "",
                     "params_typed": "",
