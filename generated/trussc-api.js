@@ -904,6 +904,56 @@ const TrussCAPI = {
                     "snippet": "getBitmapStringBBox(${1:\"text\"}, ${2:x}, ${3:y})"
                 },
                 {
+                    "name": "bitmapfont::registerGlyph",
+                    "params": "glyph",
+                    "params_typed": "const bitmapfont::Glyph& g",
+                    "return_type": "void",
+                    "desc": "Register a bitmap glyph for a Unicode codepoint (extends drawBitmapString)",
+                    "desc_ja": "Unicode コードポイントにビットマップグリフを登録 (drawBitmapString を拡張)",
+                    "desc_ko": "유니코드 코드포인트에 비트맵 글리프 등록 (drawBitmapString 확장)",
+                    "snippet": "bitmapfont::registerGlyph({${1:cp}, ${2:data}, bitmapfont::Width::${3:Fullwidth}})"
+                },
+                {
+                    "name": "bitmapfont::registerGlyphs",
+                    "params": "glyphs[]",
+                    "params_typed": "const bitmapfont::Glyph (&glyphs)[N]",
+                    "return_type": "void",
+                    "desc": "Register a batch of bitmap glyphs at once",
+                    "desc_ja": "複数のビットマップグリフを一括登録",
+                    "desc_ko": "여러 비트맵 글리프를 한 번에 등록",
+                    "snippet": "bitmapfont::registerGlyphs(${1:GLYPHS})"
+                },
+                {
+                    "name": "bitmapfont::updateGlyph",
+                    "params": "codepoint, data",
+                    "params_typed": "uint32_t cp, const uint8_t* newData",
+                    "return_type": "void",
+                    "desc": "Swap an already-registered glyph's pixel data (atlas cell unchanged). Useful for per-frame animation.",
+                    "desc_ja": "登録済みグリフのピクセルデータだけ差し替え（アトラス位置は維持）。フレームごとのアニメーションに便利",
+                    "desc_ko": "이미 등록된 글리프의 픽셀 데이터만 교체 (아틀라스 위치 유지). 프레임 애니메이션에 유용",
+                    "snippet": "bitmapfont::updateGlyph(${1:0xE000}, ${2:newData})"
+                },
+                {
+                    "name": "bitmapfont::compile8x13",
+                    "params": "rows",
+                    "params_typed": "const char* const (&rows)[13]",
+                    "return_type": "std::array<uint8_t, 13>",
+                    "desc": "Compile-time ASCII art -> packed halfwidth (8x13) glyph bytes. '#' = lit, '.' = empty.",
+                    "desc_ja": "ASCII アートをコンパイル時に半角 (8x13) パックバイトに変換。'#' = 描画、'.' = 透明",
+                    "desc_ko": "ASCII 아트를 컴파일 타임에 반각 (8x13) 패킹된 바이트로 변환. '#' = 채움, '.' = 빈 칸",
+                    "snippet": "bitmapfont::compile8x13({${1:rows}})"
+                },
+                {
+                    "name": "bitmapfont::compile16x13",
+                    "params": "rows",
+                    "params_typed": "const char* const (&rows)[13]",
+                    "return_type": "std::array<uint8_t, 26>",
+                    "desc": "Compile-time ASCII art -> packed fullwidth (16x13) glyph bytes. '#' = lit, '.' = empty.",
+                    "desc_ja": "ASCII アートをコンパイル時に全角 (16x13) パックバイトに変換。'#' = 描画、'.' = 透明",
+                    "desc_ko": "ASCII 아트를 컴파일 타임에 전각 (16x13) 패킹된 바이트로 변환. '#' = 채움, '.' = 빈 칸",
+                    "snippet": "bitmapfont::compile16x13({${1:rows}})"
+                },
+                {
                     "name": "setBitmapLineHeight",
                     "params": "height",
                     "params_typed": "float height",
@@ -3474,6 +3524,26 @@ const TrussCAPI = {
                     "snippet": "load(${1:\"sound.wav\"})"
                 },
                 {
+                    "name": "loadStream",
+                    "params": "path, maxPolyphony",
+                    "params_typed": "const string& path, int maxPolyphony = 1",
+                    "return_type": "bool",
+                    "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count.",
+                    "desc_ja": "ディスクからストリーミング再生 (WAV/MP3/FLAC)。長尺ファイル向け、メモリ節約。maxPolyphony は同時再生数",
+                    "desc_ko": "디스크에서 스트리밍 재생 (WAV/MP3/FLAC). 긴 파일 적합, 메모리 절약. maxPolyphony는 동시 재생 수",
+                    "snippet": "loadStream(${1:\"music.wav\"})"
+                },
+                {
+                    "name": "isStreaming",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True if this Sound was loaded via loadStream() (vs eager load())",
+                    "desc_ja": "loadStream() で読み込んでいれば true",
+                    "desc_ko": "loadStream()으로 로드되었으면 true",
+                    "snippet": "isStreaming()"
+                },
+                {
                     "name": "play",
                     "params": "",
                     "params_typed": "",
@@ -3494,6 +3564,86 @@ const TrussCAPI = {
                     "snippet": "stop()"
                 },
                 {
+                    "name": "pause",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Pause playback (resume() to continue)",
+                    "desc_ja": "再生を一時停止 (resume() で再開)",
+                    "desc_ko": "재생을 일시 정지 (resume()로 재개)",
+                    "snippet": "pause()"
+                },
+                {
+                    "name": "resume",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Resume paused playback",
+                    "desc_ja": "一時停止していた再生を再開",
+                    "desc_ko": "일시 정지된 재생을 재개",
+                    "snippet": "resume()"
+                },
+                {
+                    "name": "isPlaying",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while playing (false if stopped, paused, or never played)",
+                    "desc_ja": "再生中なら true (停止/一時停止/未再生なら false)",
+                    "desc_ko": "재생 중이면 true (정지/일시정지/미재생이면 false)",
+                    "snippet": "isPlaying()"
+                },
+                {
+                    "name": "isPaused",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while paused",
+                    "desc_ja": "一時停止中なら true",
+                    "desc_ko": "일시 정지 중이면 true",
+                    "snippet": "isPaused()"
+                },
+                {
+                    "name": "isLoaded",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True after a successful load() / loadStream() / loadTestTone()",
+                    "desc_ja": "load() / loadStream() / loadTestTone() に成功していれば true",
+                    "desc_ko": "load() / loadStream() / loadTestTone()이 성공했으면 true",
+                    "snippet": "isLoaded()"
+                },
+                {
+                    "name": "getPosition",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current playback position in seconds",
+                    "desc_ja": "現在の再生位置を秒で取得",
+                    "desc_ko": "현재 재생 위치를 초로 가져옴",
+                    "snippet": "getPosition()"
+                },
+                {
+                    "name": "setPosition",
+                    "params": "seconds",
+                    "params_typed": "float seconds",
+                    "return_type": "void",
+                    "desc": "Seek to a specific time in seconds. On streams, costs ~10 ms blackout while the ring refills.",
+                    "desc_ja": "指定秒数にシーク。ストリームでは ring 補充に ~10ms 無音",
+                    "desc_ko": "지정 시간(초)으로 시크. 스트림은 링 재충전에 ~10ms 무음",
+                    "snippet": "setPosition(${1:5.0})"
+                },
+                {
+                    "name": "getDuration",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get total duration of the loaded sound in seconds",
+                    "desc_ja": "読み込まれたサウンドの全体長を秒で取得",
+                    "desc_ko": "로드된 사운드의 전체 길이를 초로 가져옴",
+                    "snippet": "getDuration()"
+                },
+                {
                     "name": "setVolume",
                     "params": "vol",
                     "params_typed": "float vol",
@@ -3504,6 +3654,56 @@ const TrussCAPI = {
                     "snippet": "setVolume(${1:0.8})"
                 },
                 {
+                    "name": "getVolume",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current volume",
+                    "desc_ja": "現在の音量を取得",
+                    "desc_ko": "현재 음량을 가져옴",
+                    "snippet": "getVolume()"
+                },
+                {
+                    "name": "setPan",
+                    "params": "pan",
+                    "params_typed": "float pan",
+                    "return_type": "void",
+                    "desc": "Set stereo balance (-1.0 left ~ 0 center ~ +1.0 right). On multi-ch devices only affects ch0/ch1.",
+                    "desc_ja": "ステレオバランス (-1.0=L, 0=中央, +1.0=R) を設定。多 ch デバイスでは ch0/ch1 のみに作用",
+                    "desc_ko": "스테레오 밸런스 (-1.0=좌, 0=중앙, +1.0=우) 설정. 다채널 장치는 ch0/ch1만 적용",
+                    "snippet": "setPan(${1:0.0})"
+                },
+                {
+                    "name": "getPan",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current pan value",
+                    "desc_ja": "現在の pan を取得",
+                    "desc_ko": "현재 pan을 가져옴",
+                    "snippet": "getPan()"
+                },
+                {
+                    "name": "setSpeed",
+                    "params": "speed",
+                    "params_typed": "float speed",
+                    "return_type": "void",
+                    "desc": "Playback speed [-10, 10]. Negative = reverse (eager only). Streams clamp to [0, 10]. 0 = freeze.",
+                    "desc_ja": "再生速度 [-10, 10]。負=逆再生 (eager のみ)。stream は [0, 10] にクランプ。0=フリーズ",
+                    "desc_ko": "재생 속도 [-10, 10]. 음수=역재생 (eager만). 스트림은 [0, 10]으로 클램프. 0=프리즈",
+                    "snippet": "setSpeed(${1:1.0})"
+                },
+                {
+                    "name": "getSpeed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current playback speed",
+                    "desc_ja": "現在の再生速度を取得",
+                    "desc_ko": "현재 재생 속도를 가져옴",
+                    "snippet": "getSpeed()"
+                },
+                {
                     "name": "setLoop",
                     "params": "loop",
                     "params_typed": "bool loop",
@@ -3512,6 +3712,213 @@ const TrussCAPI = {
                     "desc_ja": "ループ再生を設定",
                     "desc_ko": "반복 재생을 활성/비활성",
                     "snippet": "setLoop(${1:true})"
+                },
+                {
+                    "name": "isLoop",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True if looping is enabled",
+                    "desc_ja": "ループ再生が有効なら true",
+                    "desc_ko": "반복 재생이 활성화되어 있으면 true",
+                    "snippet": "isLoop()"
+                },
+                {
+                    "name": "setMixMode",
+                    "params": "mode",
+                    "params_typed": "MixMode m",
+                    "return_type": "void",
+                    "desc": "Channel routing preset. Auto (default) = mono broadcasts / multi 1:1. DownmixMono = average src to all out ch.",
+                    "desc_ja": "チャンネルルーティング preset。Auto (デフォ)=mono は broadcast / multi は 1:1、DownmixMono=全 src を平均して全 out ch に同じ音",
+                    "desc_ko": "채널 라우팅 프리셋. Auto=mono는 broadcast / multi는 1:1, DownmixMono=모든 소스를 평균하여 모든 출력 채널로",
+                    "snippet": "setMixMode(MixMode::DownmixMono)"
+                },
+                {
+                    "name": "setChannelMap",
+                    "params": "map",
+                    "params_typed": "const vector<int>& map",
+                    "return_type": "void",
+                    "desc": "Per-output-channel routing. 1D: each entry is a src ch index (-1 = silent). 2D: each entry lists src ch indices that sum into that output.",
+                    "desc_ja": "出力 ch ごとのルーティング。1D 版は各要素が src ch index (-1=無音)、2D 版は各要素が sum 対象の src ch リスト",
+                    "desc_ko": "출력 채널별 라우팅. 1D는 각 항목이 src ch 인덱스 (-1=무음), 2D는 각 항목이 합산할 src ch 리스트",
+                    "snippet": "setChannelMap({0, 1})"
+                },
+                {
+                    "name": "setChannelMap",
+                    "params": "map",
+                    "params_typed": "vector<vector<int>> map",
+                    "return_type": "void",
+                    "desc": "Per-output-channel routing. 1D: each entry is a src ch index (-1 = silent). 2D: each entry lists src ch indices that sum into that output.",
+                    "desc_ja": "出力 ch ごとのルーティング。1D 版は各要素が src ch index (-1=無音)、2D 版は各要素が sum 対象の src ch リスト",
+                    "desc_ko": "출력 채널별 라우팅. 1D는 각 항목이 src ch 인덱스 (-1=무음), 2D는 각 항목이 합산할 src ch 리스트",
+                    "snippet": "setChannelMap({0, 1})"
+                },
+                {
+                    "name": "setChannelGains",
+                    "params": "gains",
+                    "params_typed": "const vector<float>& gains",
+                    "return_type": "void",
+                    "desc": "Per-output-channel gain multiplier. Entries beyond .size() default to 1.0. No internal normalization (setVolume is the overall gain).",
+                    "desc_ja": "出力 ch ごとのゲイン倍率。.size() を超える ch は 1.0、内部正規化なし (setVolume が全体ゲイン)",
+                    "desc_ko": "출력 채널별 게인 배율. .size()를 넘는 채널은 1.0, 내부 정규화 없음 (setVolume이 전체 게인)",
+                    "snippet": "setChannelGains({1.0, 1.0})"
+                },
+                {
+                    "name": "clearChannelMap",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Clear the explicit channel map; routing falls back to setMixMode rules.",
+                    "desc_ja": "ChannelMap を解除して MixMode ルールに戻す",
+                    "desc_ko": "채널 맵을 해제하고 MixMode 규칙으로 복귀",
+                    "snippet": "clearChannelMap()"
+                },
+                {
+                    "name": "clearChannelGains",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Clear per-channel gains (back to uniform 1.0).",
+                    "desc_ja": "ChannelGains を解除して uniform 1.0 に戻す",
+                    "desc_ko": "채널 게인을 해제하고 uniform 1.0으로 복귀",
+                    "snippet": "clearChannelGains()"
+                }
+            ]
+        },
+        {
+            "name": "AudioEngine",
+            "name_ja": "オーディオエンジン",
+            "name_ko": "오디오 엔진",
+            "functions": [
+                {
+                    "name": "getInstance",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "AudioEngine&",
+                    "desc": "Get the global AudioEngine singleton",
+                    "desc_ja": "AudioEngine シングルトンを取得",
+                    "desc_ko": "AudioEngine 싱글톤을 가져옴",
+                    "snippet": "AudioEngine::getInstance()"
+                },
+                {
+                    "name": "init",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Initialize / re-initialize audio engine. Re-entrant: calling on a running engine stops the device, migrates active voices to new settings, restarts. ~30-100 ms gap; voices keep playback position.",
+                    "desc_ja": "オーディオエンジンを初期化 / 再初期化。再 init で active な voice を移行しつつデバイス再起動 (~30-100ms 無音)",
+                    "desc_ko": "오디오 엔진 초기화 / 재초기화. 재 init 시 활성 voice를 이전하며 장치 재시작 (~30-100ms 무음)",
+                    "snippet": "AudioEngine::getInstance().init()"
+                },
+                {
+                    "name": "init",
+                    "params": "settings",
+                    "params_typed": "const AudioSettings& settings",
+                    "return_type": "bool",
+                    "desc": "Initialize / re-initialize audio engine. Re-entrant: calling on a running engine stops the device, migrates active voices to new settings, restarts. ~30-100 ms gap; voices keep playback position.",
+                    "desc_ja": "オーディオエンジンを初期化 / 再初期化。再 init で active な voice を移行しつつデバイス再起動 (~30-100ms 無音)",
+                    "desc_ko": "오디오 엔진 초기화 / 재초기화. 재 init 시 활성 voice를 이전하며 장치 재시작 (~30-100ms 무음)",
+                    "snippet": "AudioEngine::getInstance().init()"
+                },
+                {
+                    "name": "shutdown",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Shut down the audio device. Usually called automatically at program exit.",
+                    "desc_ja": "オーディオデバイスを停止。通常はプログラム終了時に自動呼出",
+                    "desc_ko": "오디오 장치를 종료. 일반적으로 프로그램 종료 시 자동 호출",
+                    "snippet": "AudioEngine::getInstance().shutdown()"
+                },
+                {
+                    "name": "listDevices",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "vector<AudioDeviceInfo>",
+                    "desc": "Enumerate available playback devices. Returns name + isDefault for each.",
+                    "desc_ja": "利用可能な再生デバイスを列挙。各 device の name + isDefault を返す",
+                    "desc_ko": "사용 가능한 재생 장치 열거. 각 장치의 name + isDefault 반환",
+                    "snippet": "AudioEngine::listDevices()"
+                },
+                {
+                    "name": "getSampleRate",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Current engine sample rate (Hz). Returns default (48000) if not yet initialized.",
+                    "desc_ja": "現在のエンジン sample rate (Hz)。未 init なら default (48000)",
+                    "desc_ko": "현재 엔진 sample rate (Hz). 미 init이면 default (48000)",
+                    "snippet": "AudioEngine::getInstance().getSampleRate()"
+                },
+                {
+                    "name": "getChannels",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Current engine output channel count",
+                    "desc_ja": "現在のエンジン出力 ch 数",
+                    "desc_ko": "현재 엔진 출력 채널 수",
+                    "snippet": "AudioEngine::getInstance().getChannels()"
+                },
+                {
+                    "name": "getMaxPolyphony",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Max simultaneously-playing Sound voices",
+                    "desc_ja": "同時再生可能な Sound voice 数",
+                    "desc_ko": "동시 재생 가능한 Sound voice 수",
+                    "snippet": "AudioEngine::getInstance().getMaxPolyphony()"
+                },
+                {
+                    "name": "getBufferSize",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Current device buffer size in frames (0 = miniaudio default)",
+                    "desc_ja": "現在のデバイス buffer サイズ (frames)、0 は miniaudio おまかせ",
+                    "desc_ko": "현재 장치 버퍼 크기 (frames), 0은 miniaudio 기본값",
+                    "snippet": "AudioEngine::getInstance().getBufferSize()"
+                },
+                {
+                    "name": "isInitialized",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True after a successful init()",
+                    "desc_ja": "init() に成功していれば true",
+                    "desc_ko": "init()이 성공했으면 true",
+                    "snippet": "AudioEngine::getInstance().isInitialized()"
+                },
+                {
+                    "name": "audioOut",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Event<AudioOutBuffer>",
+                    "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe.",
+                    "desc_ja": "リアルタイム再生コールバック event。listen() でシンセ / 処理用 listener を追加。各バッファごとに audio thread で発火、RT-safe を維持",
+                    "desc_ko": "실시간 재생 콜백 이벤트. listen()으로 신스 / 처리 리스너 추가. 버퍼별로 오디오 스레드에서 발화, RT-safe 유지",
+                    "snippet": "AudioEngine::getInstance().audioOut.listen([](AudioOutBuffer& buf){ /* ... */ })"
+                },
+                {
+                    "name": "audioIn",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Event<AudioInBuffer>",
+                    "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut.",
+                    "desc_ja": "リアルタイム入力コールバック event (マイク入力)。RT-safe 要件は audioOut と同様",
+                    "desc_ko": "실시간 캡처 콜백 이벤트 (마이크 입력). RT-safe 요건은 audioOut과 동일",
+                    "snippet": "AudioEngine::getInstance().audioIn.listen([](AudioInBuffer& buf){ /* ... */ })"
+                },
+                {
+                    "name": "audioDeviceChanged",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Event<AudioDeviceChangedArgs>",
+                    "desc": "Fires after every successful init() (initial AND re-init). Args carry the resolved device's real name, isDefaultDevice flag, sampleRate, channels, bufferSize, maxPolyphony. Listener runs on the thread that called init() (main), not the audio thread.",
+                    "desc_ja": "成功した init() (初回 / 再 init) 後に発火。args は解決済みデバイス名、isDefaultDevice、sampleRate、channels、bufferSize、maxPolyphony。listener は init() を呼んだスレッド (通常 main) で実行",
+                    "desc_ko": "성공한 init() (초기 / 재 init) 후 발화. args는 해결된 장치명, isDefaultDevice, sampleRate, channels, bufferSize, maxPolyphony. listener는 init()을 호출한 스레드 (보통 main)에서 실행",
+                    "snippet": "AudioEngine::getInstance().audioDeviceChanged.listen([](AudioDeviceChangedArgs& a){ /* ... */ })"
                 }
             ]
         },
@@ -3718,6 +4125,16 @@ const TrussCAPI = {
                     "snippet": "drawString(${1:\"Hello\"}, ${2:100}, ${3:100})"
                 },
                 {
+                    "name": "getStringPath",
+                    "params": "text, x, y",
+                    "params_typed": "const string& text, float x, float y",
+                    "return_type": "Path",
+                    "desc": "Get text outline as a Path (one subpath per contour). Stays crisp under scale / rotation; use drawStroke / drawFill (holes auto-detected for e, a, O, 日, etc.).",
+                    "desc_ja": "テキストの輪郭を Path で取得 (1 contour = 1 subpath)。拡大・回転に強く、drawStroke / drawFill (e, a, O, 日 等の穴は自動検出) で描画。",
+                    "desc_ko": "텍스트 윤곽을 Path로 가져오기 (1 contour = 1 subpath). 확대 / 회전에 강함. drawStroke / drawFill (구멍 자동 검출).",
+                    "snippet": "getStringPath(${1:\"Hello\"}, ${2:100}, ${3:100})"
+                },
+                {
                     "name": "getWidth",
                     "params": "text",
                     "params_typed": "const string& text",
@@ -3756,6 +4173,26 @@ const TrussCAPI = {
                     "desc_ja": "フォントサイズを取得",
                     "desc_ko": "폰트 크기를 얻음",
                     "snippet": "getSize()"
+                },
+                {
+                    "name": "systemFontPath",
+                    "params": "name",
+                    "params_typed": "const string& name",
+                    "return_type": "string",
+                    "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS uses CoreText; Linux/Windows currently stub.",
+                    "desc_ja": "システムフォント名（PostScript 名や family 名）をファイルパスに解決。見つからなければ空文字を返す。macOS は CoreText、Linux/Win は現状スタブ",
+                    "desc_ko": "시스템 폰트 이름을 파일 경로로 변환",
+                    "snippet": "systemFontPath(${1:\"HiraginoSans-W3\"})"
+                },
+                {
+                    "name": "listSystemFonts",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "vector<string>",
+                    "desc": "Enumerate names of all fonts known to the OS",
+                    "desc_ja": "OS が認識している全フォント名を取得",
+                    "desc_ko": "시스템에 설치된 모든 폰트 이름을 나열",
+                    "snippet": "listSystemFonts()"
                 }
             ]
         },
@@ -7087,6 +7524,31 @@ const TrussCAPI = {
             "desc": "Beveled corner join"
         },
         {
+            "name": "WritingMode::Horizontal",
+            "value": "0",
+            "desc": "Left-to-right horizontal text (default)"
+        },
+        {
+            "name": "WritingMode::VerticalRL",
+            "value": "1",
+            "desc": "Top-to-bottom columns, columns flow right-to-left (Japanese tategaki)"
+        },
+        {
+            "name": "TcyMode::Rotate",
+            "value": "0",
+            "desc": "Rotate the whole Latin / digit run 90 degrees CW so it reads top-to-bottom"
+        },
+        {
+            "name": "TcyMode::Upright",
+            "value": "1",
+            "desc": "Each glyph upright, one per CJK-sized cell (一文字ずつ正立)"
+        },
+        {
+            "name": "TcyMode::Combine",
+            "value": "2",
+            "desc": "Squeeze a Latin / digit run into a single CJK cell (true 縦中横)"
+        },
+        {
             "name": "FONT_SANS",
             "value": "string",
             "desc": "System sans-serif font path (CDN URL on Web)"
@@ -7100,6 +7562,16 @@ const TrussCAPI = {
             "name": "FONT_MONO",
             "value": "string",
             "desc": "System monospace font path (CDN URL on Web)"
+        },
+        {
+            "name": "FONT_SANS_JA",
+            "value": "string",
+            "desc": "Japanese sans-serif font (Hiragino Sans on macOS, Yu Gothic on Win, Noto Sans CJK JP on Linux/Android, Google Fonts CDN URL on Web)"
+        },
+        {
+            "name": "FONT_SERIF_JA",
+            "value": "string",
+            "desc": "Japanese serif font (Hiragino Mincho on macOS, Yu Mincho on Win, Noto Serif CJK JP on Linux/Android, Google Fonts CDN URL on Web)"
         },
         {
             "name": "Wave::Sin",
@@ -8337,6 +8809,60 @@ const TrussCAPI = {
                     "snippet": "setColor(${1:x}, ${2:y}, ${3:color})"
                 },
                 {
+                    "name": "halve",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8.",
+                    "snippet": "halve()"
+                },
+                {
+                    "name": "resize",
+                    "return": "void",
+                    "signatures": [
+                        "int newWidth, int newHeight"
+                    ],
+                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8.",
+                    "snippet": "resize(${1:newWidth}, ${2:newHeight})"
+                },
+                {
+                    "name": "crop",
+                    "return": "void",
+                    "signatures": [
+                        "int x, int y, int w, int h"
+                    ],
+                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge.",
+                    "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})"
+                },
+                {
+                    "name": "mirror",
+                    "return": "void",
+                    "signatures": [
+                        "bool horizontal, bool vertical"
+                    ],
+                    "desc": "Flip in place. Both true is 180°.",
+                    "snippet": "mirror(${1:horizontal}, ${2:vertical})"
+                },
+                {
+                    "name": "mirrorH",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mirror horizontally (alias for mirror(true, false))",
+                    "snippet": "mirrorH()"
+                },
+                {
+                    "name": "mirrorV",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mirror vertically (alias for mirror(false, true))",
+                    "snippet": "mirrorV()"
+                },
+                {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
@@ -8456,18 +8982,20 @@ const TrussCAPI = {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "string path"
+                        "string path",
+                        "string path, bool mipmaps"
                     ],
-                    "desc": "Load image from file",
+                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface).",
                     "snippet": "load(${1:\"path\"})"
                 },
                 {
                     "name": "loadFromMemory",
                     "return": "bool",
                     "signatures": [
-                        "const uint8_t* buffer, int len"
+                        "const uint8_t* buffer, int len",
+                        "const uint8_t* buffer, int len, bool mipmaps"
                     ],
-                    "desc": "Load image from memory",
+                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain.",
                     "snippet": "loadFromMemory(${1:buffer}, ${2:len})"
                 },
                 {
@@ -8484,9 +9012,10 @@ const TrussCAPI = {
                     "return": "void",
                     "signatures": [
                         "int width, int height",
-                        "int width, int height, int channels"
+                        "int width, int height, int channels",
+                        "int width, int height, int channels, bool mipmaps"
                     ],
-                    "desc": "Allocate empty image for dynamic updates",
+                    "desc": "Allocate empty image for dynamic updates. `mipmaps=true` builds a chain refreshed on every update().",
                     "snippet": "allocate(${1:width}, ${2:height})"
                 },
                 {
@@ -8497,6 +9026,60 @@ const TrussCAPI = {
                     ],
                     "desc": "Release image resources",
                     "snippet": "clear()"
+                },
+                {
+                    "name": "halve",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8.",
+                    "snippet": "halve()"
+                },
+                {
+                    "name": "resize",
+                    "return": "void",
+                    "signatures": [
+                        "int newWidth, int newHeight"
+                    ],
+                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8. Use FBO sampling for fast paths.",
+                    "snippet": "resize(${1:newWidth}, ${2:newHeight})"
+                },
+                {
+                    "name": "crop",
+                    "return": "void",
+                    "signatures": [
+                        "int x, int y, int w, int h"
+                    ],
+                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge.",
+                    "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})"
+                },
+                {
+                    "name": "mirror",
+                    "return": "void",
+                    "signatures": [
+                        "bool horizontal, bool vertical"
+                    ],
+                    "desc": "Flip the image. `horizontal=true` mirrors left-right; `vertical=true` mirrors top-bottom; both true is 180°.",
+                    "snippet": "mirror(${1:horizontal}, ${2:vertical})"
+                },
+                {
+                    "name": "mirrorH",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mirror horizontally (alias for mirror(true, false))",
+                    "snippet": "mirrorH()"
+                },
+                {
+                    "name": "mirrorV",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mirror vertically (alias for mirror(false, true))",
+                    "snippet": "mirrorV()"
                 },
                 {
                     "name": "isAllocated",
@@ -8860,9 +9443,12 @@ const TrussCAPI = {
                     "name": "allocate",
                     "return": "void",
                     "signatures": [
-                        "int width, int height"
+                        "int width, int height",
+                        "int width, int height, int sampleCount",
+                        "int width, int height, int sampleCount, TextureFormat format",
+                        "int width, int height, int sampleCount, TextureFormat format, bool mipmaps"
                     ],
-                    "desc": "Allocate framebuffer",
+                    "desc": "Allocate framebuffer. `mipmaps=true` builds a full mip chain that is refreshed automatically at end().",
                     "snippet": "allocate(${1:width}, ${2:height})"
                 },
                 {
@@ -9050,6 +9636,18 @@ const TrussCAPI = {
                     "snippet": "clear()"
                 },
                 {
+                    "name": "moveTo",
+                    "return": "void",
+                    "signatures": [
+                        "float x, float y",
+                        "float x, float y, float z",
+                        "Vec2 p",
+                        "Vec3 p"
+                    ],
+                    "desc": "Start a new subpath at (x, y). A single Path can hold multiple disjoint contours (think SVG `<path>` with `M ... M ...`) — used by Font::getGlyphPath to keep an outer ring and its holes in one Path so drawFill can detect holes.",
+                    "snippet": "moveTo(${1:x}, ${2:y})"
+                },
+                {
                     "name": "lineTo",
                     "return": "void",
                     "signatures": [
@@ -9138,8 +9736,26 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Draw the polyline",
+                    "desc": "Draw the polyline (fill + 1px stroke based on current style — fill uses triangle fan, convex only). For concave shapes / holes use drawFill.",
                     "snippet": "draw()"
+                },
+                {
+                    "name": "drawFill",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Fill the path as a concave polygon with holes (earcut tessellation). Subpaths are grouped by spatial containment — outer ring + direct children become holes, grandchildren become separate filled islands. Use this for glyphs with holes (e, a, O, 日 ...) and any shape that drawString-style fill can't handle.",
+                    "snippet": "drawFill()"
+                },
+                {
+                    "name": "drawStroke",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Thick stroke via StrokeMesh (respects strokeWeight / strokeCap / strokeJoin), per-subpath. Use draw() for 1-pixel lines.",
+                    "snippet": "drawStroke()"
                 },
                 {
                     "name": "getBounds",
@@ -9788,6 +10404,25 @@ const TrussCAPI = {
                     "snippet": "drawString(${1:\"text\"}, ${2:x}, ${3:y})"
                 },
                 {
+                    "name": "getGlyphPath",
+                    "return": "Path",
+                    "signatures": [
+                        "uint32_t codepoint"
+                    ],
+                    "desc": "Vector outline of a single glyph as one Path with one subpath per contour. Em-normalized (1.0 = em), screen Y-down, baseline at y=0, pen at x=0. Use Path::drawFill() for filled rendering — holes (e, a, O, 日 ...) are auto-detected via earcut.",
+                    "snippet": "getGlyphPath(${1:codepoint})"
+                },
+                {
+                    "name": "getStringPath",
+                    "return": "Path",
+                    "signatures": [
+                        "string text, float x, float y",
+                        "string text, float x, float y, Direction h, Direction v"
+                    ],
+                    "desc": "Vector outline of the whole string at (x, y) as one Path containing every glyph's contours (one subpath each). Uses the same layout pipeline as drawString (writing mode, alignment, wrap, kinsoku, TCY). Logical pixels — drawStroke / drawFill / transform freely.",
+                    "snippet": "getStringPath(${1:\"text\"}, ${2:x}, ${3:y})"
+                },
+                {
                     "name": "getWidth",
                     "return": "float",
                     "signatures": [
@@ -9858,6 +10493,42 @@ const TrussCAPI = {
                     ],
                     "desc": "Get number of atlas pages",
                     "snippet": "getAtlasCount()"
+                },
+                {
+                    "name": "setWritingMode",
+                    "return": "void",
+                    "signatures": [
+                        "WritingMode mode"
+                    ],
+                    "desc": "Switch between horizontal and vertical (tategaki) writing. Default is Horizontal (existing behavior unchanged).",
+                    "snippet": "setWritingMode(${1:WritingMode::VerticalRL})"
+                },
+                {
+                    "name": "getWritingMode",
+                    "return": "WritingMode",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Current writing mode",
+                    "snippet": "getWritingMode()"
+                },
+                {
+                    "name": "setTcyDigits",
+                    "return": "void",
+                    "signatures": [
+                        "int maxDigits, TcyMode inMode, TcyMode overflowMode"
+                    ],
+                    "desc": "Tate-chu-yoko config for ASCII digit runs in vertical text. Runs with <= maxDigits use inMode (typically Combine — squeezed into one cell); longer runs fall back to overflowMode (typically Rotate).",
+                    "snippet": "setTcyDigits(${1:2}, ${2:TcyMode::Combine}, ${3:TcyMode::Rotate})"
+                },
+                {
+                    "name": "setTcyLatin",
+                    "return": "void",
+                    "signatures": [
+                        "TcyMode mode"
+                    ],
+                    "desc": "Tate-chu-yoko mode for Latin letter runs in vertical text. Default is Rotate (whole run rotated 90 CW).",
+                    "snippet": "setTcyLatin(${1:TcyMode::Rotate})"
                 }
             ]
         },

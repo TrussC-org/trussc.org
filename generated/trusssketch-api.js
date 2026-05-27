@@ -2280,6 +2280,22 @@
                     "snippet": "load(${1:\"sound.wav\"})"
                 },
                 {
+                    "name": "loadStream",
+                    "params": "path, maxPolyphony",
+                    "params_typed": "const string& path, int maxPolyphony = 1",
+                    "return_type": "bool",
+                    "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count.",
+                    "snippet": "loadStream(${1:\"music.wav\"})"
+                },
+                {
+                    "name": "isStreaming",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True if this Sound was loaded via loadStream() (vs eager load())",
+                    "snippet": "isStreaming()"
+                },
+                {
                     "name": "play",
                     "params": "",
                     "params_typed": "",
@@ -2296,6 +2312,70 @@
                     "snippet": "stop()"
                 },
                 {
+                    "name": "pause",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Pause playback (resume() to continue)",
+                    "snippet": "pause()"
+                },
+                {
+                    "name": "resume",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Resume paused playback",
+                    "snippet": "resume()"
+                },
+                {
+                    "name": "isPlaying",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while playing (false if stopped, paused, or never played)",
+                    "snippet": "isPlaying()"
+                },
+                {
+                    "name": "isPaused",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True while paused",
+                    "snippet": "isPaused()"
+                },
+                {
+                    "name": "isLoaded",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True after a successful load() / loadStream() / loadTestTone()",
+                    "snippet": "isLoaded()"
+                },
+                {
+                    "name": "getPosition",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current playback position in seconds",
+                    "snippet": "getPosition()"
+                },
+                {
+                    "name": "setPosition",
+                    "params": "seconds",
+                    "params_typed": "float seconds",
+                    "return_type": "void",
+                    "desc": "Seek to a specific time in seconds. On streams, costs ~10 ms blackout while the ring refills.",
+                    "snippet": "setPosition(${1:5.0})"
+                },
+                {
+                    "name": "getDuration",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get total duration of the loaded sound in seconds",
+                    "snippet": "getDuration()"
+                },
+                {
                     "name": "setVolume",
                     "params": "vol",
                     "params_typed": "float vol",
@@ -2304,12 +2384,60 @@
                     "snippet": "setVolume(${1:0.8})"
                 },
                 {
+                    "name": "getVolume",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current volume",
+                    "snippet": "getVolume()"
+                },
+                {
+                    "name": "setPan",
+                    "params": "pan",
+                    "params_typed": "float pan",
+                    "return_type": "void",
+                    "desc": "Set stereo balance (-1.0 left ~ 0 center ~ +1.0 right). On multi-ch devices only affects ch0/ch1.",
+                    "snippet": "setPan(${1:0.0})"
+                },
+                {
+                    "name": "getPan",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current pan value",
+                    "snippet": "getPan()"
+                },
+                {
+                    "name": "setSpeed",
+                    "params": "speed",
+                    "params_typed": "float speed",
+                    "return_type": "void",
+                    "desc": "Playback speed [-10, 10]. Negative = reverse (eager only). Streams clamp to [0, 10]. 0 = freeze.",
+                    "snippet": "setSpeed(${1:1.0})"
+                },
+                {
+                    "name": "getSpeed",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get current playback speed",
+                    "snippet": "getSpeed()"
+                },
+                {
                     "name": "setLoop",
                     "params": "loop",
                     "params_typed": "bool loop",
                     "return_type": "void",
                     "desc": "Enable/disable looping",
                     "snippet": "setLoop(${1:true})"
+                },
+                {
+                    "name": "isLoop",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True if looping is enabled",
+                    "snippet": "isLoop()"
                 }
             ]
         },
@@ -2464,6 +2592,14 @@
                     "return_type": "void",
                     "desc": "Draw text at position",
                     "snippet": "drawString(${1:\"Hello\"}, ${2:100}, ${3:100})"
+                },
+                {
+                    "name": "getStringPath",
+                    "params": "text, x, y",
+                    "params_typed": "const string& text, float x, float y",
+                    "return_type": "Path",
+                    "desc": "Get text outline as a Path (one subpath per contour). Stays crisp under scale / rotation; use drawStroke / drawFill (holes auto-detected for e, a, O, 日, etc.).",
+                    "snippet": "getStringPath(${1:\"Hello\"}, ${2:100}, ${3:100})"
                 },
                 {
                     "name": "getWidth",
@@ -4309,6 +4445,31 @@
             "desc": "Beveled corner join"
         },
         {
+            "name": "WritingMode::Horizontal",
+            "value": "0",
+            "desc": "Left-to-right horizontal text (default)"
+        },
+        {
+            "name": "WritingMode::VerticalRL",
+            "value": "1",
+            "desc": "Top-to-bottom columns, columns flow right-to-left (Japanese tategaki)"
+        },
+        {
+            "name": "TcyMode::Rotate",
+            "value": "0",
+            "desc": "Rotate the whole Latin / digit run 90 degrees CW so it reads top-to-bottom"
+        },
+        {
+            "name": "TcyMode::Upright",
+            "value": "1",
+            "desc": "Each glyph upright, one per CJK-sized cell (一文字ずつ正立)"
+        },
+        {
+            "name": "TcyMode::Combine",
+            "value": "2",
+            "desc": "Squeeze a Latin / digit run into a single CJK cell (true 縦中横)"
+        },
+        {
             "name": "FONT_SANS",
             "value": "string",
             "desc": "System sans-serif font path (CDN URL on Web)"
@@ -4322,6 +4483,16 @@
             "name": "FONT_MONO",
             "value": "string",
             "desc": "System monospace font path (CDN URL on Web)"
+        },
+        {
+            "name": "FONT_SANS_JA",
+            "value": "string",
+            "desc": "Japanese sans-serif font (Hiragino Sans on macOS, Yu Gothic on Win, Noto Sans CJK JP on Linux/Android, Google Fonts CDN URL on Web)"
+        },
+        {
+            "name": "FONT_SERIF_JA",
+            "value": "string",
+            "desc": "Japanese serif font (Hiragino Mincho on macOS, Yu Mincho on Win, Noto Serif CJK JP on Linux/Android, Google Fonts CDN URL on Web)"
         },
         {
             "name": "Wave::Sin",
@@ -5537,6 +5708,60 @@
                     "snippet": "setColor(${1:x}, ${2:y}, ${3:color})"
                 },
                 {
+                    "name": "halve",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8.",
+                    "snippet": "halve()"
+                },
+                {
+                    "name": "resize",
+                    "return": "void",
+                    "signatures": [
+                        "int newWidth, int newHeight"
+                    ],
+                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8.",
+                    "snippet": "resize(${1:newWidth}, ${2:newHeight})"
+                },
+                {
+                    "name": "crop",
+                    "return": "void",
+                    "signatures": [
+                        "int x, int y, int w, int h"
+                    ],
+                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge.",
+                    "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})"
+                },
+                {
+                    "name": "mirror",
+                    "return": "void",
+                    "signatures": [
+                        "bool horizontal, bool vertical"
+                    ],
+                    "desc": "Flip in place. Both true is 180°.",
+                    "snippet": "mirror(${1:horizontal}, ${2:vertical})"
+                },
+                {
+                    "name": "mirrorH",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mirror horizontally (alias for mirror(true, false))",
+                    "snippet": "mirrorH()"
+                },
+                {
+                    "name": "mirrorV",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mirror vertically (alias for mirror(false, true))",
+                    "snippet": "mirrorV()"
+                },
+                {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
@@ -5654,18 +5879,20 @@
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "string path"
+                        "string path",
+                        "string path, bool mipmaps"
                     ],
-                    "desc": "Load image from file",
+                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface).",
                     "snippet": "load(${1:\"path\"})"
                 },
                 {
                     "name": "loadFromMemory",
                     "return": "bool",
                     "signatures": [
-                        "const uint8_t* buffer, int len"
+                        "const uint8_t* buffer, int len",
+                        "const uint8_t* buffer, int len, bool mipmaps"
                     ],
-                    "desc": "Load image from memory",
+                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain.",
                     "snippet": "loadFromMemory(${1:buffer}, ${2:len})"
                 },
                 {
@@ -5682,9 +5909,10 @@
                     "return": "void",
                     "signatures": [
                         "int width, int height",
-                        "int width, int height, int channels"
+                        "int width, int height, int channels",
+                        "int width, int height, int channels, bool mipmaps"
                     ],
-                    "desc": "Allocate empty image for dynamic updates",
+                    "desc": "Allocate empty image for dynamic updates. `mipmaps=true` builds a chain refreshed on every update().",
                     "snippet": "allocate(${1:width}, ${2:height})"
                 },
                 {
@@ -5695,6 +5923,60 @@
                     ],
                     "desc": "Release image resources",
                     "snippet": "clear()"
+                },
+                {
+                    "name": "halve",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8.",
+                    "snippet": "halve()"
+                },
+                {
+                    "name": "resize",
+                    "return": "void",
+                    "signatures": [
+                        "int newWidth, int newHeight"
+                    ],
+                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8. Use FBO sampling for fast paths.",
+                    "snippet": "resize(${1:newWidth}, ${2:newHeight})"
+                },
+                {
+                    "name": "crop",
+                    "return": "void",
+                    "signatures": [
+                        "int x, int y, int w, int h"
+                    ],
+                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge.",
+                    "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})"
+                },
+                {
+                    "name": "mirror",
+                    "return": "void",
+                    "signatures": [
+                        "bool horizontal, bool vertical"
+                    ],
+                    "desc": "Flip the image. `horizontal=true` mirrors left-right; `vertical=true` mirrors top-bottom; both true is 180°.",
+                    "snippet": "mirror(${1:horizontal}, ${2:vertical})"
+                },
+                {
+                    "name": "mirrorH",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mirror horizontally (alias for mirror(true, false))",
+                    "snippet": "mirrorH()"
+                },
+                {
+                    "name": "mirrorV",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mirror vertically (alias for mirror(false, true))",
+                    "snippet": "mirrorV()"
                 },
                 {
                     "name": "isAllocated",
@@ -6054,9 +6336,12 @@
                     "name": "allocate",
                     "return": "void",
                     "signatures": [
-                        "int width, int height"
+                        "int width, int height",
+                        "int width, int height, int sampleCount",
+                        "int width, int height, int sampleCount, TextureFormat format",
+                        "int width, int height, int sampleCount, TextureFormat format, bool mipmaps"
                     ],
-                    "desc": "Allocate framebuffer",
+                    "desc": "Allocate framebuffer. `mipmaps=true` builds a full mip chain that is refreshed automatically at end().",
                     "snippet": "allocate(${1:width}, ${2:height})"
                 },
                 {
@@ -6242,6 +6527,18 @@
                     "snippet": "clear()"
                 },
                 {
+                    "name": "moveTo",
+                    "return": "void",
+                    "signatures": [
+                        "float x, float y",
+                        "float x, float y, float z",
+                        "Vec2 p",
+                        "Vec3 p"
+                    ],
+                    "desc": "Start a new subpath at (x, y). A single Path can hold multiple disjoint contours (think SVG `<path>` with `M ... M ...`) — used by Font::getGlyphPath to keep an outer ring and its holes in one Path so drawFill can detect holes.",
+                    "snippet": "moveTo(${1:x}, ${2:y})"
+                },
+                {
                     "name": "lineTo",
                     "return": "void",
                     "signatures": [
@@ -6330,8 +6627,26 @@
                     "signatures": [
                         ""
                     ],
-                    "desc": "Draw the polyline",
+                    "desc": "Draw the polyline (fill + 1px stroke based on current style — fill uses triangle fan, convex only). For concave shapes / holes use drawFill.",
                     "snippet": "draw()"
+                },
+                {
+                    "name": "drawFill",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Fill the path as a concave polygon with holes (earcut tessellation). Subpaths are grouped by spatial containment — outer ring + direct children become holes, grandchildren become separate filled islands. Use this for glyphs with holes (e, a, O, 日 ...) and any shape that drawString-style fill can't handle.",
+                    "snippet": "drawFill()"
+                },
+                {
+                    "name": "drawStroke",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Thick stroke via StrokeMesh (respects strokeWeight / strokeCap / strokeJoin), per-subpath. Use draw() for 1-pixel lines.",
+                    "snippet": "drawStroke()"
                 },
                 {
                     "name": "getBounds",
@@ -6974,6 +7289,25 @@
                     "snippet": "drawString(${1:\"text\"}, ${2:x}, ${3:y})"
                 },
                 {
+                    "name": "getGlyphPath",
+                    "return": "Path",
+                    "signatures": [
+                        "uint32_t codepoint"
+                    ],
+                    "desc": "Vector outline of a single glyph as one Path with one subpath per contour. Em-normalized (1.0 = em), screen Y-down, baseline at y=0, pen at x=0. Use Path::drawFill() for filled rendering — holes (e, a, O, 日 ...) are auto-detected via earcut.",
+                    "snippet": "getGlyphPath(${1:codepoint})"
+                },
+                {
+                    "name": "getStringPath",
+                    "return": "Path",
+                    "signatures": [
+                        "string text, float x, float y",
+                        "string text, float x, float y, Direction h, Direction v"
+                    ],
+                    "desc": "Vector outline of the whole string at (x, y) as one Path containing every glyph's contours (one subpath each). Uses the same layout pipeline as drawString (writing mode, alignment, wrap, kinsoku, TCY). Logical pixels — drawStroke / drawFill / transform freely.",
+                    "snippet": "getStringPath(${1:\"text\"}, ${2:x}, ${3:y})"
+                },
+                {
                     "name": "getWidth",
                     "return": "float",
                     "signatures": [
@@ -7044,6 +7378,42 @@
                     ],
                     "desc": "Get number of atlas pages",
                     "snippet": "getAtlasCount()"
+                },
+                {
+                    "name": "setWritingMode",
+                    "return": "void",
+                    "signatures": [
+                        "WritingMode mode"
+                    ],
+                    "desc": "Switch between horizontal and vertical (tategaki) writing. Default is Horizontal (existing behavior unchanged).",
+                    "snippet": "setWritingMode(${1:WritingMode::VerticalRL})"
+                },
+                {
+                    "name": "getWritingMode",
+                    "return": "WritingMode",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Current writing mode",
+                    "snippet": "getWritingMode()"
+                },
+                {
+                    "name": "setTcyDigits",
+                    "return": "void",
+                    "signatures": [
+                        "int maxDigits, TcyMode inMode, TcyMode overflowMode"
+                    ],
+                    "desc": "Tate-chu-yoko config for ASCII digit runs in vertical text. Runs with <= maxDigits use inMode (typically Combine — squeezed into one cell); longer runs fall back to overflowMode (typically Rotate).",
+                    "snippet": "setTcyDigits(${1:2}, ${2:TcyMode::Combine}, ${3:TcyMode::Rotate})"
+                },
+                {
+                    "name": "setTcyLatin",
+                    "return": "void",
+                    "signatures": [
+                        "TcyMode mode"
+                    ],
+                    "desc": "Tate-chu-yoko mode for Latin letter runs in vertical text. Default is Rotate (whole run rotated 90 CW).",
+                    "snippet": "setTcyLatin(${1:TcyMode::Rotate})"
                 }
             ]
         },
