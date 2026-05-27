@@ -50,6 +50,12 @@
           "width": 1280,
           "height": 720,
           "webSupported": true
+        },
+        {
+          "name": "fboMipmapExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
         }
       ]
     },
@@ -92,6 +98,41 @@
         }
       ]
     },
+    "font": {
+      "visible": true,
+      "items": [
+        {
+          "name": "fontExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "fontPathExample",
+          "width": 1200,
+          "height": 760,
+          "webSupported": true
+        },
+        {
+          "name": "fontWrapExample",
+          "width": 1200,
+          "height": 820,
+          "webSupported": true
+        },
+        {
+          "name": "fontTategakiExample",
+          "width": 1100,
+          "height": 720,
+          "webSupported": true
+        },
+        {
+          "name": "bitmapStringExtendedExample",
+          "width": 1280,
+          "height": 800,
+          "webSupported": true
+        }
+      ]
+    },
     "graphics": {
       "visible": true,
       "items": [
@@ -115,12 +156,6 @@
         },
         {
           "name": "fboExample",
-          "width": 960,
-          "height": 600,
-          "webSupported": true
-        },
-        {
-          "name": "fontExample",
           "width": 960,
           "height": 600,
           "webSupported": true
@@ -186,6 +221,12 @@
           "name": "textureExample",
           "width": 960,
           "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "imageOpsExample",
+          "width": 960,
+          "height": 760,
           "webSupported": true
         }
       ]
@@ -334,6 +375,18 @@
     "sound": {
       "visible": true,
       "items": [
+        {
+          "name": "audioDeviceExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "audioSynthExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
         {
           "name": "beepSoundExample",
           "width": 960,
@@ -508,6 +561,12 @@
           "width": 960,
           "height": 600,
           "webSupported": true
+        },
+        {
+          "name": "HotReloadExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
         }
       ]
     }
