@@ -5,7 +5,7 @@
 // Do not edit directly - edit api-definition.yaml instead
 
 const TrussCAPI = {
-    "version": "v0.5.2",
+    "version": "v0.5.4",
     "categories": [
         {
             "name": "Lifecycle",
@@ -3178,6 +3178,46 @@ const TrussCAPI = {
                     "desc_ja": "コンソールに出力",
                     "desc_ko": "콘솔에 출력",
                     "snippet": "logNotice(${1:\"message\"})"
+                },
+                {
+                    "name": "compress",
+                    "params": "src, nbytes, out, codec",
+                    "params_typed": "const void* src, size_t nbytes, vector<uint8_t>& out, Codec codec",
+                    "return_type": "bool",
+                    "desc": "Compress a byte buffer with the given codec (Codec::None or Codec::LZ4). The vector form resizes out and returns bool; the raw form writes into dst (capacity dstCapacity) and returns the number of bytes written (or -1), useful for compressing into a region of a buffer / parallel chunks",
+                    "desc_ja": "バイト列を指定コーデック（Codec::None / Codec::LZ4）で圧縮する。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込み、書き込みバイト数（失敗 -1）を返す（バッファの一部への圧縮・並列チャンク向け）",
+                    "desc_ko": "지정한 코덱(Codec::None / Codec::LZ4)으로 바이트 버퍼를 압축. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환 (버퍼 일부 압축·병렬 청크용)",
+                    "snippet": "compress(${1:src}, ${2:nbytes}, ${3:out}, ${4:Codec::LZ4})"
+                },
+                {
+                    "name": "compress",
+                    "params": "src, nbytes, dst, dstCapacity, codec",
+                    "params_typed": "const void* src, size_t nbytes, void* dst, size_t dstCapacity, Codec codec",
+                    "return_type": "bool",
+                    "desc": "Compress a byte buffer with the given codec (Codec::None or Codec::LZ4). The vector form resizes out and returns bool; the raw form writes into dst (capacity dstCapacity) and returns the number of bytes written (or -1), useful for compressing into a region of a buffer / parallel chunks",
+                    "desc_ja": "バイト列を指定コーデック（Codec::None / Codec::LZ4）で圧縮する。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込み、書き込みバイト数（失敗 -1）を返す（バッファの一部への圧縮・並列チャンク向け）",
+                    "desc_ko": "지정한 코덱(Codec::None / Codec::LZ4)으로 바이트 버퍼를 압축. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환 (버퍼 일부 압축·병렬 청크용)",
+                    "snippet": "compress(${1:src}, ${2:nbytes}, ${3:out}, ${4:Codec::LZ4})"
+                },
+                {
+                    "name": "decompress",
+                    "params": "src, nbytes, out, decompressedSize, codec",
+                    "params_typed": "const void* src, size_t nbytes, vector<uint8_t>& out, size_t decompressedSize, Codec codec",
+                    "return_type": "bool",
+                    "desc": "Decompress a byte buffer; decompressedSize is the known original byte count. The vector form resizes out and returns bool; the raw form writes into dst (capacity dstCapacity) and returns bytes written (or -1) - it can write into a region of an existing buffer (dst + offset), enabling parallel per-chunk decompression",
+                    "desc_ja": "バイト列を展開する。decompressedSize は元の（展開後）バイト数。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込みバイト数（失敗 -1）を返し、既存バッファの途中（dst + offset）にも書ける（並列チャンク展開向け）",
+                    "desc_ko": "바이트 버퍼를 해제. decompressedSize는 원본 바이트 수. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환하며 기존 버퍼 일부(dst + offset)에도 쓸 수 있음 (병렬 청크 해제용)",
+                    "snippet": "decompress(${1:src}, ${2:nbytes}, ${3:out}, ${4:decompressedSize}, ${5:Codec::LZ4})"
+                },
+                {
+                    "name": "decompress",
+                    "params": "src, nbytes, dst, dstCapacity, codec",
+                    "params_typed": "const void* src, size_t nbytes, void* dst, size_t dstCapacity, Codec codec",
+                    "return_type": "bool",
+                    "desc": "Decompress a byte buffer; decompressedSize is the known original byte count. The vector form resizes out and returns bool; the raw form writes into dst (capacity dstCapacity) and returns bytes written (or -1) - it can write into a region of an existing buffer (dst + offset), enabling parallel per-chunk decompression",
+                    "desc_ja": "バイト列を展開する。decompressedSize は元の（展開後）バイト数。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込みバイト数（失敗 -1）を返し、既存バッファの途中（dst + offset）にも書ける（並列チャンク展開向け）",
+                    "desc_ko": "바이트 버퍼를 해제. decompressedSize는 원본 바이트 수. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환하며 기존 버퍼 일부(dst + offset)에도 쓸 수 있음 (병렬 청크 해제용)",
+                    "snippet": "decompress(${1:src}, ${2:nbytes}, ${3:out}, ${4:decompressedSize}, ${5:Codec::LZ4})"
                 },
                 {
                     "name": "toString",
@@ -7468,6 +7508,93 @@ const TrussCAPI = {
                     "desc": "Draw subsection with LUT applied",
                     "desc_ja": "LUTを適用して部分描画",
                     "desc_ko": "LUT를 적용하여 부분을 그림"
+                }
+            ]
+        },
+        {
+            "name": "Timers",
+            "name_ja": "タイマー",
+            "name_ko": "타이머",
+            "functions": [
+                {
+                    "name": "callAfter",
+                    "params": "delay, callback",
+                    "params_typed": "double delay, std::function<void()> callback",
+                    "return_type": "uint64_t",
+                    "desc": "Run callback once after delay seconds. Fired from the update loop (frame-quantized). Returns a timer id.",
+                    "desc_ja": "delay秒後にcallbackを1回実行。更新ループから発火（フレーム単位）。タイマーidを返す",
+                    "desc_ko": "delay초 후 callback을 한 번 실행. 업데이트 루프에서 발생(프레임 단위). 타이머 id를 반환",
+                    "snippet": "callAfter(1.0, [this]() {\n\t$0\n});"
+                },
+                {
+                    "name": "callEvery",
+                    "params": "interval, callback",
+                    "params_typed": "double interval, std::function<void()> callback",
+                    "return_type": "uint64_t",
+                    "desc": "Run callback repeatedly every interval seconds. Fired from the update loop (frame-quantized). Returns a timer id.",
+                    "desc_ja": "interval秒ごとにcallbackを繰り返し実行。更新ループから発火（フレーム単位）。タイマーidを返す",
+                    "desc_ko": "interval초마다 callback을 반복 실행. 업데이트 루프에서 발생(프레임 단위). 타이머 id를 반환",
+                    "snippet": "callEvery(0.5, [this]() {\n\t$0\n});"
+                },
+                {
+                    "name": "callAfterAsync",
+                    "params": "delay, callback",
+                    "params_typed": "double delay, std::function<void()> callback",
+                    "return_type": "uint64_t",
+                    "desc": "Like callAfter, but fired by a precise background scheduler thread (no frame jitter). The callback runs OFF the main thread: guard shared state with a mutex, never draw from it, and don't cancel while holding that mutex. Native only (uses a real thread). Returns a timer id.",
+                    "desc_ja": "callAfterの精密版。バックグラウンドのスケジューラスレッドが正確な時刻に発火（フレームジッタなし）。コールバックはメインスレッド外で走る：共有状態はmutexで保護、描画は禁止、そのmutexを保持したままcancelしない。ネイティブ専用（実スレッド使用）。タイマーidを返す",
+                    "desc_ko": "callAfter의 정밀 버전. 백그라운드 스케줄러 스레드가 정확한 시각에 실행(프레임 지터 없음). 콜백은 메인 스레드 밖에서 실행됨: 공유 상태는 mutex로 보호, 그리기 금지, 해당 mutex를 들고 cancel하지 말 것. 네이티브 전용(실제 스레드 사용). 타이머 id를 반환",
+                    "snippet": "callAfterAsync(1.0, [this]() {\n\t$0\n});"
+                },
+                {
+                    "name": "callEveryAsync",
+                    "params": "interval, callback",
+                    "params_typed": "double interval, std::function<void()> callback",
+                    "return_type": "uint64_t",
+                    "desc": "Like callEvery, but fired by a precise background scheduler thread with no drift (reschedules at absolute times). Ideal for sequencer clocks and LED/MIDI output timing. Same threading rules as callAfterAsync. Native only. Returns a timer id.",
+                    "desc_ja": "callEveryの精密版。バックグラウンドのスケジューラスレッドがドリフトなく発火（絶対時刻で再スケジュール）。シーケンサのクロックやLED/MIDI出力のタイミングに最適。スレッドの注意点はcallAfterAsyncと同じ。ネイティブ専用。タイマーidを返す",
+                    "desc_ko": "callEvery의 정밀 버전. 백그라운드 스케줄러 스레드가 드리프트 없이 실행(절대 시각으로 재예약). 시퀀서 클럭이나 LED/MIDI 출력 타이밍에 적합. 스레드 주의사항은 callAfterAsync와 동일. 네이티브 전용. 타이머 id를 반환",
+                    "snippet": "callEveryAsync(0.5, [this]() {\n\t$0\n});"
+                },
+                {
+                    "name": "cancelTimer",
+                    "params": "id",
+                    "params_typed": "uint64_t id",
+                    "return_type": "void",
+                    "desc": "Cancel a frame timer (callAfter/callEvery) by id.",
+                    "desc_ja": "id指定でフレームタイマー（callAfter/callEvery）をキャンセル",
+                    "desc_ko": "id로 프레임 타이머(callAfter/callEvery)를 취소",
+                    "snippet": "cancelTimer(id);"
+                },
+                {
+                    "name": "cancelAllTimers",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Cancel all frame timers on this node.",
+                    "desc_ja": "このノードのフレームタイマーを全てキャンセル",
+                    "desc_ko": "이 노드의 모든 프레임 타이머를 취소",
+                    "snippet": "cancelAllTimers();"
+                },
+                {
+                    "name": "cancelAsyncTimer",
+                    "params": "id",
+                    "params_typed": "uint64_t id",
+                    "return_type": "void",
+                    "desc": "Cancel an async timer by id. Blocks until its callback finishes if it is running now (unless called from inside the callback). Do not call while holding the mutex the callback uses.",
+                    "desc_ja": "id指定で非同期タイマーをキャンセル。実行中なら完了を待つ（コールバック内から呼ぶ場合を除く）。コールバックが使うmutexを保持したまま呼ばないこと",
+                    "desc_ko": "id로 비동기 타이머를 취소. 실행 중이면 완료를 기다림(콜백 내부에서 호출하는 경우 제외). 콜백이 쓰는 mutex를 들고 호출하지 말 것",
+                    "snippet": "cancelAsyncTimer(id);"
+                },
+                {
+                    "name": "cancelAllAsyncTimers",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock.",
+                    "desc_ja": "このノードの非同期タイマーを全てキャンセル（モード変更時など）。実行中のコールバックの完了を待つ。デッドロック回避のため、コールバックのmutexを保持せずに呼ぶこと",
+                    "desc_ko": "이 노드의 모든 비동기 타이머를 취소(모드 전환 등). 실행 중인 콜백의 완료를 기다림. 데드락 방지를 위해 콜백의 mutex를 들지 않고 호출할 것",
+                    "snippet": "cancelAllAsyncTimers();"
                 }
             ]
         }
