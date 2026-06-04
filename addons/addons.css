@@ -189,10 +189,11 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Thumbnail — natural aspect ratio for wide/square images, capped at 1:1
-   (square) for portrait so abusively tall screenshots get cropped instead
-   of taking over the whole column. Uses CSS container queries to make
-   max-height track the actual column width. */
+/* Thumbnail — natural aspect ratio for wide images, capped at 2:1 (w:h)
+   so square/portrait screenshots don't take over the whole column. Taller
+   images are shown in full (letterboxed) inside the 2:1 area rather than
+   cropped. Uses CSS container queries to make max-height track the actual
+   column width (half width = 2:1). */
 .addon-thumb {
     container-type: inline-size;
     background: var(--color-bg-alt);
@@ -203,8 +204,8 @@
 .addon-thumb img {
     width: 100%;
     height: auto;
-    max-height: 100cqw;
-    object-fit: cover;
+    max-height: 50cqw;
+    object-fit: contain;
     display: block;
 }
 
