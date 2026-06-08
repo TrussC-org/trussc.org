@@ -5,7 +5,7 @@
 // Do not edit directly - edit api-definition.yaml instead
 
 const TrussCAPI = {
-    "version": "v0.5.4",
+    "version": "v0.6.0",
     "categories": [
         {
             "name": "Lifecycle",
@@ -5503,6 +5503,46 @@ const TrussCAPI = {
                     "desc_ja": "注視点からの距離を取得",
                     "desc_ko": "타겟으로부터의 거리를 얻음",
                     "snippet": "getDistance()"
+                },
+                {
+                    "name": "setAzimuth",
+                    "params": "radians",
+                    "params_typed": "float radians",
+                    "return_type": "void",
+                    "desc": "Set orbit azimuth (horizontal angle, radians)",
+                    "desc_ja": "周回の方位角（水平角・ラジアン）を設定",
+                    "desc_ko": "궤도 방위각(수평각, 라디안)을 설정",
+                    "snippet": "setAzimuth(${1:0.7})"
+                },
+                {
+                    "name": "getAzimuth",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get orbit azimuth (horizontal angle, radians)",
+                    "desc_ja": "周回の方位角（水平角・ラジアン）を取得",
+                    "desc_ko": "궤도 방위각(수평각, 라디안)을 얻음",
+                    "snippet": "getAzimuth()"
+                },
+                {
+                    "name": "setElevation",
+                    "params": "radians",
+                    "params_typed": "float radians",
+                    "return_type": "void",
+                    "desc": "Set orbit elevation (vertical angle, radians; clamped to ~±80°)",
+                    "desc_ja": "周回の仰角（垂直角・ラジアン、約±80°でクランプ）を設定",
+                    "desc_ko": "궤도 고도각(수직각, 라디안; 약 ±80°로 제한)을 설정",
+                    "snippet": "setElevation(${1:0.5})"
+                },
+                {
+                    "name": "getElevation",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get orbit elevation (vertical angle, radians)",
+                    "desc_ja": "周回の仰角（垂直角・ラジアン）を取得",
+                    "desc_ko": "궤도 고도각(수직각, 라디안)을 얻음",
+                    "snippet": "getElevation()"
                 },
                 {
                     "name": "setFov",

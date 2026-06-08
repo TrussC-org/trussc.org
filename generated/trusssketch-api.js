@@ -3173,6 +3173,38 @@
                     "snippet": "getDistance()"
                 },
                 {
+                    "name": "setAzimuth",
+                    "params": "radians",
+                    "params_typed": "float radians",
+                    "return_type": "void",
+                    "desc": "Set orbit azimuth (horizontal angle, radians)",
+                    "snippet": "setAzimuth(${1:0.7})"
+                },
+                {
+                    "name": "getAzimuth",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get orbit azimuth (horizontal angle, radians)",
+                    "snippet": "getAzimuth()"
+                },
+                {
+                    "name": "setElevation",
+                    "params": "radians",
+                    "params_typed": "float radians",
+                    "return_type": "void",
+                    "desc": "Set orbit elevation (vertical angle, radians; clamped to ~±80°)",
+                    "snippet": "setElevation(${1:0.5})"
+                },
+                {
+                    "name": "getElevation",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get orbit elevation (vertical angle, radians)",
+                    "snippet": "getElevation()"
+                },
+                {
                     "name": "setFov",
                     "params": "radians",
                     "params_typed": "float radians",
