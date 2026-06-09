@@ -3612,6 +3612,14 @@
                     "snippet": "createSphere(${1:radius})"
                 },
                 {
+                    "name": "createCapsule",
+                    "params": "radius, cylinderHeight, res",
+                    "params_typed": "float radius, float cylinderHeight, int res = 16",
+                    "return_type": "Mesh",
+                    "desc": "Create a capsule mesh (Y-up: cylinder capped by two hemispheres)",
+                    "snippet": "createCapsule(${1:radius}, ${2:cylinderHeight})"
+                },
+                {
                     "name": "drawTexture",
                     "params": "tex, x, y",
                     "params_typed": "const Texture& tex, float x, float y",

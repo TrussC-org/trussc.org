@@ -6076,6 +6076,16 @@ const TrussCAPI = {
                     "snippet": "createSphere(${1:radius})"
                 },
                 {
+                    "name": "createCapsule",
+                    "params": "radius, cylinderHeight, res",
+                    "params_typed": "float radius, float cylinderHeight, int res = 16",
+                    "return_type": "Mesh",
+                    "desc": "Create a capsule mesh (Y-up: cylinder capped by two hemispheres)",
+                    "desc_ja": "カプセルメッシュを作成（Y軸、円柱の両端を半球で閉じた形）",
+                    "desc_ko": "캡슐 메쉬를 생성 (Y축, 원기둥 양 끝을 반구로 막은 형태)",
+                    "snippet": "createCapsule(${1:radius}, ${2:cylinderHeight})"
+                },
+                {
                     "name": "drawTexture",
                     "params": "tex, x, y",
                     "params_typed": "const Texture& tex, float x, float y",
