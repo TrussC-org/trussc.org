@@ -6662,6 +6662,16 @@
                     "snippet": "isClosed()"
                 },
                 {
+                    "name": "reverseWinding",
+                    "return": "Path&",
+                    "signatures": [
+                        "",
+                        "size_t subpath"
+                    ],
+                    "desc": "Reverse the winding direction (vertex order) of all subpaths, or of one subpath. Under drawFill's non-zero winding rule, reversing a subpath toggles it between filling and cutting — e.g. build a circle contour, then reverseWinding(i) it into a hole punch. Reversing ALL subpaths leaves the render unchanged (only relative direction matters) — handy for imported outlines using the opposite convention.",
+                    "snippet": "reverseWinding(${1:1})"
+                },
+                {
                     "name": "draw",
                     "return": "void",
                     "signatures": [
@@ -6676,7 +6686,7 @@
                     "signatures": [
                         ""
                     ],
-                    "desc": "Fill the path as a concave polygon with holes (earcut tessellation). Subpaths are grouped by spatial containment — outer ring + direct children become holes, grandchildren become separate filled islands. Use this for glyphs with holes (e, a, O, 日 ...) and any shape that drawString-style fill can't handle.",
+                    "desc": "Fill the path as a concave polygon with holes (earcut tessellation). Subpaths follow the non-zero winding rule (SVG / PostScript default): a subpath wound opposite to its enclosing ring becomes a hole; same-direction subpaths union (never punch holes). Handles glyphs with holes (e, a, O, 日 ...), overlapping contours, and both TrueType / CFF winding conventions. To cut a hole in a hand-built Path, wind the inner subpath opposite (see reverseWinding).",
                     "snippet": "drawFill()"
                 },
                 {
