@@ -227,14 +227,7 @@ img {
 .nav-links .nav-sponsor {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-}
-
-.nav-heart {
-    width: 14px;
-    height: 14px;
-    color: #db61a2;
-    flex-shrink: 0;
+    gap: 5px;
 }
 
 .lang-dropdown {
