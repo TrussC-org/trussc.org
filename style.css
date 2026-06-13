@@ -224,6 +224,19 @@ img {
     transform: translateY(-1px);
 }
 
+.nav-links .nav-sponsor {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-heart {
+    width: 14px;
+    height: 14px;
+    color: #db61a2;
+    flex-shrink: 0;
+}
+
 .lang-dropdown {
     position: relative;
 }
@@ -450,6 +463,35 @@ img {
 .btn-large {
     font-size: 1.05rem;
     padding: var(--space-lg) var(--space-2xl);
+}
+
+.btn-discord {
+    background: #5865F2;
+    color: white;
+}
+
+.btn-discord:hover {
+    background: #6b78f5;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(88, 101, 242, 0.3);
+}
+
+.sponsor-heart {
+    color: #db61a2;
+}
+
+/* ===================================
+   Community Section
+   =================================== */
+.community-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.community-section .section-subtitle {
+    margin-bottom: var(--space-xl);
 }
 
 /* ===================================
