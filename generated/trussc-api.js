@@ -5,7 +5,7 @@
 // Do not edit directly - edit api-definition.yaml instead
 
 const TrussCAPI = {
-    "version": "v0.6.0",
+    "version": "v0.6.1",
     "categories": [
         {
             "name": "Lifecycle",
@@ -3133,6 +3133,36 @@ const TrussCAPI = {
                     "snippet": "grabScreen(${1:pixels})"
                 },
                 {
+                    "name": "startRecording",
+                    "params": "path, settings",
+                    "params_typed": "const string& path, const VideoRecordSettings& settings = {}",
+                    "return_type": "bool",
+                    "desc": "Start recording the window to a video file (native encoder, no ffmpeg)",
+                    "desc_ja": "ウィンドウを動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）",
+                    "desc_ko": "윈도우를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요)",
+                    "snippet": "startRecording(${1:\"out.mp4\"})"
+                },
+                {
+                    "name": "stopRecording",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Stop the current recording and finalize the file",
+                    "desc_ja": "録画を停止してファイルを確定",
+                    "desc_ko": "녹화를 중지하고 파일을 마무리",
+                    "snippet": "stopRecording()"
+                },
+                {
+                    "name": "isRecording",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Check whether a recording is in progress",
+                    "desc_ja": "録画中かどうか確認",
+                    "desc_ko": "녹화 중인지 확인",
+                    "snippet": "isRecording()"
+                },
+                {
                     "name": "isFullscreen",
                     "params": "",
                     "params_typed": "",
@@ -3328,6 +3358,16 @@ const TrussCAPI = {
                     "desc_ja": "2つの矩形の交差部分を計算",
                     "desc_ko": "두 사각형의 교차 영역을 계산",
                     "snippet": "intersectRect(${1:x1}, ${2:y1}, ${3:w1}, ${4:h1}, ${5:x2}, ${6:y2}, ${7:w2}, ${8:h2}, ${9:ox}, ${10:oy}, ${11:ow}, ${12:oh})"
+                },
+                {
+                    "name": "mcp::registerDebuggerTools",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Opt in to the MCP debugger tools, letting an AI agent drive the app: input injection (mouse_click, key_press, mouse_move, scroll) plus node selection and scene mutation (select_node, set_node_members). Call once in setup(); calling it IS the opt-in (there is no separate enable step). The tools do nothing unless the MCP server is running (TRUSSC_MCP=1), so it is safe to leave in. Read-only inspection — screenshots and the node tree — needs no opt-in and is always available when MCP is on.",
+                    "desc_ja": "MCP のデバッガツールを有効化し、AI エージェントがアプリを操作できるようにする：入力注入（mouse_click, key_press, mouse_move, scroll）に加え、ノード選択・シーン書き換え（select_node, set_node_members）。setup() で一度呼ぶだけで opt-in 完了（別途の有効化呼び出しは不要）。MCP サーバ起動時（TRUSSC_MCP=1）以外は何もしないので、入れっぱなしでも安全。スクリーンショットやノードツリーの読み取りは opt-in 不要で、MCP が有効なら常に使える。",
+                    "desc_ko": "MCP 디버거 도구를 활성화하여 AI 에이전트가 앱을 조작할 수 있게 한다: 입력 주입(mouse_click, key_press, mouse_move, scroll)과 노드 선택·씬 변경(select_node, set_node_members). setup()에서 한 번 호출하면 그것이 곧 opt-in이다(별도의 활성화 단계 없음). MCP 서버가 실행 중(TRUSSC_MCP=1)이 아니면 아무 동작도 하지 않으므로 그대로 두어도 안전하다. 스크린샷과 노드 트리 같은 읽기 전용 조회는 opt-in이 필요 없으며 MCP가 켜져 있으면 항상 사용할 수 있다.",
+                    "snippet": "mcp::registerDebuggerTools()"
                 }
             ]
         },
@@ -7371,6 +7411,116 @@ const TrussCAPI = {
                     "desc_ja": "ビデオファイルから1フレームを抽出（全体を読み込まずに）。サムネイル生成に便利",
                     "desc_ko": "비디오 파일에서 전체를 로드하지 않고 단일 프레임을 추출. 썸네일 생성에 유용",
                     "snippet": "VideoPlayer::extractFrame(${1:\"video.mp4\"}, pixels, ${2:0.0})"
+                },
+                {
+                    "name": "ScreenRecorder",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "",
+                    "desc": "Live screen recorder: captures the window (or an Fbo) every frame to a video file (native encoder, no ffmpeg)",
+                    "desc_ja": "ライブ画面録画：ウィンドウ（またはFbo）を毎フレーム動画ファイルに録画（ネイティブエンコーダ、ffmpeg不要）",
+                    "desc_ko": "라이브 화면 녹화: 윈도우(또는 Fbo)를 매 프레임 동영상 파일로 녹화 (네이티브 인코더, ffmpeg 불필요)",
+                    "snippet": "ScreenRecorder()"
+                },
+                {
+                    "name": "start",
+                    "params": "path, settings",
+                    "params_typed": "const string& path, const VideoRecordSettings& settings = {}",
+                    "return_type": "bool",
+                    "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically",
+                    "desc_ja": "ライブ録画開始（ウィンドウ、またはGUIなしのクリーン出力はFbo）。サイズは自動取得",
+                    "desc_ko": "라이브 녹화 시작 (윈도우, 또는 GUI 없는 클린 출력은 Fbo); 크기는 자동 취득",
+                    "snippet": "start(${1:\"out.mp4\"})"
+                },
+                {
+                    "name": "start",
+                    "params": "fbo, path, settings",
+                    "params_typed": "const Fbo& fbo, const string& path, const VideoRecordSettings& settings = {}",
+                    "return_type": "bool",
+                    "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically",
+                    "desc_ja": "ライブ録画開始（ウィンドウ、またはGUIなしのクリーン出力はFbo）。サイズは自動取得",
+                    "desc_ko": "라이브 녹화 시작 (윈도우, 또는 GUI 없는 클린 출력은 Fbo); 크기는 자동 취득",
+                    "snippet": "start(${1:\"out.mp4\"})"
+                },
+                {
+                    "name": "stop",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Stop live capture and finalize the file",
+                    "desc_ja": "ライブ録画を停止してファイルを確定",
+                    "desc_ko": "라이브 녹화를 중지하고 파일을 마무리",
+                    "snippet": "stop()"
+                },
+                {
+                    "name": "VideoWriter",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "",
+                    "desc": "Low-level video encoder: you feed it frames (deterministic, fixed-rate offline render)",
+                    "desc_ja": "低レベル動画エンコーダ：フレームを自分で渡す（決定論的・固定レートのオフライン書き出し）",
+                    "desc_ko": "저수준 동영상 인코더: 프레임을 직접 공급 (결정론적·고정 레이트 오프라인 렌더)",
+                    "snippet": "VideoWriter()"
+                },
+                {
+                    "name": "open",
+                    "params": "path, width, height, settings",
+                    "params_typed": "const string& path, int width, int height, const VideoRecordSettings& settings = {}",
+                    "return_type": "bool",
+                    "desc": "Open the encoder at the given size (path resolved via getDataPath)",
+                    "desc_ja": "指定サイズでエンコーダを開く（パスはgetDataPathで解決）",
+                    "desc_ko": "지정 크기로 인코더를 엽니다 (경로는 getDataPath로 해석)",
+                    "snippet": "open(${1:\"out.mp4\"}, ${2:1280}, ${3:720})"
+                },
+                {
+                    "name": "addFrame",
+                    "params": "fbo",
+                    "params_typed": "const Fbo& fbo",
+                    "return_type": "bool",
+                    "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)",
+                    "desc_ja": "1フレームを固定レート（frameIndex/fps）で追加",
+                    "desc_ko": "한 프레임을 고정 레이트(frameIndex/fps)로 추가",
+                    "snippet": "addFrame(${1:fbo})"
+                },
+                {
+                    "name": "addFrame",
+                    "params": "pixels",
+                    "params_typed": "const Pixels& pixels",
+                    "return_type": "bool",
+                    "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)",
+                    "desc_ja": "1フレームを固定レート（frameIndex/fps）で追加",
+                    "desc_ko": "한 프레임을 고정 레이트(frameIndex/fps)로 추가",
+                    "snippet": "addFrame(${1:fbo})"
+                },
+                {
+                    "name": "addFrameAt",
+                    "params": "fbo, timeSec",
+                    "params_typed": "const Fbo& fbo, double timeSec",
+                    "return_type": "bool",
+                    "desc": "Append one frame at an explicit presentation time (seconds)",
+                    "desc_ja": "1フレームを明示的な表示時刻（秒）で追加",
+                    "desc_ko": "한 프레임을 명시적 표시 시각(초)으로 추가",
+                    "snippet": "addFrameAt(${1:fbo}, ${2:t})"
+                },
+                {
+                    "name": "addFrameAt",
+                    "params": "pixels, timeSec",
+                    "params_typed": "const Pixels& pixels, double timeSec",
+                    "return_type": "bool",
+                    "desc": "Append one frame at an explicit presentation time (seconds)",
+                    "desc_ja": "1フレームを明示的な表示時刻（秒）で追加",
+                    "desc_ko": "한 프레임을 명시적 표시 시각(초)으로 추가",
+                    "snippet": "addFrameAt(${1:fbo}, ${2:t})"
+                },
+                {
+                    "name": "close",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Finalize and flush the video file",
+                    "desc_ja": "動画ファイルを確定してフラッシュ",
+                    "desc_ko": "동영상 파일을 마무리하고 플러시",
+                    "snippet": "close()"
                 }
             ]
         },
