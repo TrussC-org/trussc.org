@@ -30,6 +30,8 @@
             for (const m of (t.methods || []).concat(t.static_methods || [])) pick(m, 'desc');
         }
         for (const c of api.constants || []) pick(c, 'desc');
+        for (const e of api.enums || []) { pick(e, 'desc'); for (const v of e.values || []) pick(v, 'desc'); }
+        for (const m of api.macros || []) pick(m, 'desc');
     }
     localizeData(TrussCAPI);
 
@@ -38,6 +40,8 @@
         subtitle: 'C++ API Reference',
         groupFunctions: 'Functions',
         groupTypes: 'Types',
+        groupEnums: 'Enums',
+        groupMacros: 'Macros',
         groupConstants: 'Constants',
         searchPlaceholder: 'Search functions, types...',
         backToOverview: '← Back to overview',
@@ -49,6 +53,7 @@
         category: 'Category',
         related: 'Related',
         examples: 'Examples',
+        values: 'Values',
         value: 'Value',
         constantValue: 'Constant value',
         noResults: 'No results'
@@ -81,6 +86,14 @@
     // Types
     for (const t of TrussCAPI.types) {
         items.push({ kind: 'type', category: UI.groupTypes, name: t.name, data: t });
+    }
+    // Enums
+    for (const e of TrussCAPI.enums || []) {
+        items.push({ kind: 'enum', category: UI.groupEnums, name: e.name, data: e });
+    }
+    // Macros
+    for (const m of TrussCAPI.macros || []) {
+        items.push({ kind: 'macro', category: UI.groupMacros, name: m.name, data: m });
     }
     // Constants
     for (const c of TrussCAPI.constants) {
@@ -186,6 +199,9 @@
             if (Array.isArray(d.methods)) for (const m of d.methods) if (m.name) idents.push(m.name);
             if (Array.isArray(d.properties)) for (const p of d.properties) if (p.name) idents.push(p.name);
         }
+        if (item.kind === 'enum' && Array.isArray(d.values)) {
+            for (const v of d.values) if (v.name) idents.push(v.name);
+        }
         if (d.desc) prose.push(d.desc);
         return { idents, prose };
     }
@@ -254,6 +270,32 @@
             html += `</div></div>`;
         }
 
+        // Group: Enums
+        const enumItems = items.filter(i => i.kind === 'enum' && (!query || matchItem(i, query)));
+        if (enumItems.length > 0) {
+            html += `<div class="sidebar-group" id="group-enums">`;
+            html += `<div class="sidebar-group-title" onclick="toggleGroup('group-enums')">`;
+            html += `${esc(UI.groupEnums)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
+            html += `<div class="sidebar-group-items">`;
+            for (const item of enumItems) {
+                html += `<div class="sidebar-item type-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)">${esc(item.name)}</div>`;
+            }
+            html += `</div></div>`;
+        }
+
+        // Group: Macros
+        const macroItems = items.filter(i => i.kind === 'macro' && (!query || matchItem(i, query)));
+        if (macroItems.length > 0) {
+            html += `<div class="sidebar-group" id="group-macros">`;
+            html += `<div class="sidebar-group-title" onclick="toggleGroup('group-macros')">`;
+            html += `${esc(UI.groupMacros)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
+            html += `<div class="sidebar-group-items">`;
+            for (const item of macroItems) {
+                html += `<div class="sidebar-item const-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)">${esc(item.name)}</div>`;
+            }
+            html += `</div></div>`;
+        }
+
         // Group: Constants
         const constItems = items.filter(i => i.kind === 'constant' && (!query || matchItem(i, query)));
         if (constItems.length > 0) {
@@ -280,6 +322,8 @@
 
         if (kind === 'function') renderFunctionDetail(name, cat);
         else if (kind === 'type') renderTypeDetail(name);
+        else if (kind === 'enum') renderEnumDetail(name);
+        else if (kind === 'macro') renderMacroDetail(name);
         else if (kind === 'constant') renderConstantDetail(name);
     }
 
@@ -427,6 +471,38 @@
         detail.innerHTML = html;
     }
 
+    function renderEnumDetail(name) {
+        const e = (TrussCAPI.enums || []).find(e => e.name === name);
+        if (!e) return;
+        let html = backButton();
+        html += `<div class="detail-title">${esc(e.name)}</div>`;
+        html += `<div class="detail-desc">${esc(e.desc || '')}</div>`;
+        html += `<div class="detail-section">`;
+        html += `<div class="detail-section-title">${esc(UI.values)}</div>`;
+        for (const v of e.values || []) {
+            const val = (v.value !== undefined && v.value !== null) ? ` <span class="ov-val">= ${esc(String(v.value))}</span>` : '';
+            html += `<div class="detail-entry">`;
+            html += `<div class="detail-sig"><span class="name" style="color:#4ec9b0;">${esc(e.name)}::${esc(v.name)}</span>${val}</div>`;
+            if (v.desc) html += `<div class="detail-entry-desc">// ${esc(v.desc)}</div>`;
+            html += `</div>`;
+        }
+        html += `</div>`;
+        detail.innerHTML = html;
+    }
+
+    function renderMacroDetail(name) {
+        const m = (TrussCAPI.macros || []).find(m => m.name === name);
+        if (!m) return;
+        let html = backButton();
+        html += `<div class="detail-title">${esc(m.name)}</div>`;
+        html += `<div class="detail-desc">${esc(m.desc || '')}</div>`;
+        html += `<div class="detail-section">`;
+        html += `<div class="detail-section-title">${esc(UI.signatures)}</div>`;
+        html += `<div class="detail-entry"><div class="detail-sig"><span class="name" style="color:#dcdcaa;">${esc(m.signature || m.name)}</span></div></div>`;
+        html += `</div>`;
+        detail.innerHTML = html;
+    }
+
     function renderConstantDetail(name) {
         const c = TrussCAPI.constants.find(c => c.name === name);
         if (!c) return;
@@ -480,6 +556,32 @@
         }
         html += `</div></div>`;
 
+        if ((TrussCAPI.enums || []).length) {
+            html += `<div class="overview-section">`;
+            html += `<div class="overview-section-title">${esc(UI.groupEnums)}</div>`;
+            html += `<div class="overview-grid">`;
+            for (const e of TrussCAPI.enums) {
+                html += `<div class="overview-item ov-type" onclick="navTo('enum','${esc(e.name)}')">`;
+                html += `<span class="ov-name">${esc(e.name)}</span>`;
+                if (e.desc) html += `<span class="ov-desc">${esc(e.desc)}</span>`;
+                html += `</div>`;
+            }
+            html += `</div></div>`;
+        }
+
+        if ((TrussCAPI.macros || []).length) {
+            html += `<div class="overview-section">`;
+            html += `<div class="overview-section-title">${esc(UI.groupMacros)}</div>`;
+            html += `<div class="overview-grid">`;
+            for (const m of TrussCAPI.macros) {
+                html += `<div class="overview-item ov-const" onclick="navTo('macro','${esc(m.name)}')">`;
+                html += `<span class="ov-name">${esc(m.name)}</span>`;
+                if (m.desc) html += `<span class="ov-desc">${esc(m.desc)}</span>`;
+                html += `</div>`;
+            }
+            html += `</div></div>`;
+        }
+
         html += `<div class="overview-section">`;
         html += `<div class="overview-section-title">${esc(UI.groupConstants)}</div>`;
         html += `<div class="overview-grid">`;
@@ -501,6 +603,8 @@
 
         if (kind === 'function') renderFunctionDetail(name, cat);
         else if (kind === 'type') renderTypeDetail(name);
+        else if (kind === 'enum') renderEnumDetail(name);
+        else if (kind === 'macro') renderMacroDetail(name);
         else if (kind === 'constant') renderConstantDetail(name);
     }
 

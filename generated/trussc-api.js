@@ -10903,72 +10903,6 @@ const TrussCAPI = {
             "keywords": []
         },
         {
-            "name": "StrokeCap::Butt",
-            "value": "0",
-            "desc": "Flat line cap (no extension)",
-            "keywords": []
-        },
-        {
-            "name": "StrokeCap::Round",
-            "value": "1",
-            "desc": "Rounded line cap",
-            "keywords": []
-        },
-        {
-            "name": "StrokeCap::Square",
-            "value": "2",
-            "desc": "Square line cap (extends by half stroke width)",
-            "keywords": []
-        },
-        {
-            "name": "StrokeJoin::Miter",
-            "value": "0",
-            "desc": "Sharp corner join",
-            "keywords": []
-        },
-        {
-            "name": "StrokeJoin::Round",
-            "value": "1",
-            "desc": "Rounded corner join",
-            "keywords": []
-        },
-        {
-            "name": "StrokeJoin::Bevel",
-            "value": "2",
-            "desc": "Beveled corner join",
-            "keywords": []
-        },
-        {
-            "name": "WritingMode::Horizontal",
-            "value": "0",
-            "desc": "Left-to-right horizontal text (default)",
-            "keywords": []
-        },
-        {
-            "name": "WritingMode::VerticalRL",
-            "value": "1",
-            "desc": "Top-to-bottom columns, columns flow right-to-left (Japanese tategaki)",
-            "keywords": []
-        },
-        {
-            "name": "TcyMode::Rotate",
-            "value": "0",
-            "desc": "Rotate the whole Latin / digit run 90 degrees CW so it reads top-to-bottom",
-            "keywords": []
-        },
-        {
-            "name": "TcyMode::Upright",
-            "value": "1",
-            "desc": "Each glyph upright, one per CJK-sized cell (一文字ずつ正立)",
-            "keywords": []
-        },
-        {
-            "name": "TcyMode::Combine",
-            "value": "2",
-            "desc": "Squeeze a Latin / digit run into a single CJK cell (true 縦中横)",
-            "keywords": []
-        },
-        {
             "name": "FONT_SANS",
             "value": "string",
             "desc": "System sans-serif font path (CDN URL on Web)",
@@ -10996,138 +10930,6 @@ const TrussCAPI = {
             "name": "FONT_SERIF_JA",
             "value": "string",
             "desc": "Japanese serif font (Hiragino Mincho on macOS, Yu Mincho on Win, Noto Serif CJK JP on Linux/Android, Google Fonts CDN URL on Web)",
-            "keywords": []
-        },
-        {
-            "name": "Wave::Sin",
-            "value": "0",
-            "desc": "Sine wave (smooth, pure tone)",
-            "keywords": []
-        },
-        {
-            "name": "Wave::Square",
-            "value": "1",
-            "desc": "Square wave (harsh, 8-bit style)",
-            "keywords": []
-        },
-        {
-            "name": "Wave::Triangle",
-            "value": "2",
-            "desc": "Triangle wave (softer than square)",
-            "keywords": []
-        },
-        {
-            "name": "Wave::Sawtooth",
-            "value": "3",
-            "desc": "Sawtooth wave (bright, buzzy)",
-            "keywords": []
-        },
-        {
-            "name": "Wave::Noise",
-            "value": "4",
-            "desc": "White noise",
-            "keywords": []
-        },
-        {
-            "name": "Wave::PinkNoise",
-            "value": "5",
-            "desc": "Pink noise (1/f noise, more natural)",
-            "keywords": []
-        },
-        {
-            "name": "Wave::Silent",
-            "value": "6",
-            "desc": "Silent (no sound)",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::Default",
-            "value": "0",
-            "desc": "System default cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::Arrow",
-            "value": "1",
-            "desc": "Arrow cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::IBeam",
-            "value": "2",
-            "desc": "Text input cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::Crosshair",
-            "value": "3",
-            "desc": "Crosshair cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::Hand",
-            "value": "4",
-            "desc": "Pointing hand cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::ResizeEW",
-            "value": "5",
-            "desc": "East-west resize cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::ResizeNS",
-            "value": "6",
-            "desc": "North-south resize cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::ResizeNWSE",
-            "value": "7",
-            "desc": "NW-SE diagonal resize cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::ResizeNESW",
-            "value": "8",
-            "desc": "NE-SW diagonal resize cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::ResizeAll",
-            "value": "9",
-            "desc": "Move/resize all directions cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::NotAllowed",
-            "value": "10",
-            "desc": "Not allowed cursor",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::Custom0",
-            "value": "11",
-            "desc": "Custom cursor slot 0 (bind image first)",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::Custom1",
-            "value": "12",
-            "desc": "Custom cursor slot 1",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::Custom2",
-            "value": "13",
-            "desc": "Custom cursor slot 2",
-            "keywords": []
-        },
-        {
-            "name": "Cursor::Custom3",
-            "value": "14",
-            "desc": "Custom cursor slot 3",
             "keywords": []
         },
         {
@@ -11254,30 +11056,6 @@ const TrussCAPI = {
             "name": "MOUSE_BUTTON_MIDDLE",
             "value": "2",
             "desc": "Middle mouse button",
-            "keywords": []
-        },
-        {
-            "name": "VideoCodec::H264",
-            "value": "0",
-            "desc": "H.264 / AVC — broad compatibility (default)",
-            "keywords": []
-        },
-        {
-            "name": "VideoCodec::HEVC",
-            "value": "1",
-            "desc": "H.265 / HEVC — smaller files, hardware-encoded",
-            "keywords": []
-        },
-        {
-            "name": "VideoCodec::ProRes422",
-            "value": "2",
-            "desc": "Apple ProRes 422 — editing-grade, macOS/iOS only (.mov)",
-            "keywords": []
-        },
-        {
-            "name": "VideoCodec::ProRes4444",
-            "value": "3",
-            "desc": "Apple ProRes 4444 — highest quality + alpha, macOS/iOS only (.mov)",
             "keywords": []
         }
     ],
@@ -16806,6 +16584,1109 @@ const TrussCAPI = {
                     "snippet": "getDeviceName()"
                 }
             ]
+        }
+    ],
+    "enums": [
+        {
+            "name": "BlendMode",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Alpha",
+                    "value": 0,
+                    "desc": "Normal alpha blending (default)"
+                },
+                {
+                    "name": "Add",
+                    "value": 1,
+                    "desc": "Additive blending"
+                },
+                {
+                    "name": "Multiply",
+                    "value": 2,
+                    "desc": "Multiply blending"
+                },
+                {
+                    "name": "Screen",
+                    "value": 3,
+                    "desc": "Screen blending"
+                },
+                {
+                    "name": "Subtract",
+                    "value": 4,
+                    "desc": "Subtractive blending"
+                },
+                {
+                    "name": "Disabled",
+                    "value": 5,
+                    "desc": "No blending (overwrite)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "TextureFilter",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Nearest",
+                    "value": 0,
+                    "desc": "Nearest neighbor (for pixel art)"
+                },
+                {
+                    "name": "Linear",
+                    "value": 1,
+                    "desc": "Bilinear interpolation (default)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "TextureWrap",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Repeat",
+                    "value": 0,
+                    "desc": "Repeat"
+                },
+                {
+                    "name": "ClampToEdge",
+                    "value": 1,
+                    "desc": "Clamp to edge pixel (default)"
+                },
+                {
+                    "name": "MirroredRepeat",
+                    "value": 2,
+                    "desc": "Mirrored repeat"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "Cursor",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Default",
+                    "value": 0,
+                    "desc": "System default cursor"
+                },
+                {
+                    "name": "Arrow",
+                    "value": 1,
+                    "desc": "Arrow cursor"
+                },
+                {
+                    "name": "IBeam",
+                    "value": 2,
+                    "desc": "Text input cursor"
+                },
+                {
+                    "name": "Crosshair",
+                    "value": 3,
+                    "desc": "Crosshair cursor"
+                },
+                {
+                    "name": "Hand",
+                    "value": 4,
+                    "desc": "Pointing hand cursor"
+                },
+                {
+                    "name": "ResizeEW",
+                    "value": 5,
+                    "desc": "East-west resize cursor"
+                },
+                {
+                    "name": "ResizeNS",
+                    "value": 6,
+                    "desc": "North-south resize cursor"
+                },
+                {
+                    "name": "ResizeNWSE",
+                    "value": 7,
+                    "desc": "NW-SE diagonal resize cursor"
+                },
+                {
+                    "name": "ResizeNESW",
+                    "value": 8,
+                    "desc": "NE-SW diagonal resize cursor"
+                },
+                {
+                    "name": "ResizeAll",
+                    "value": 9,
+                    "desc": "Move/resize all directions cursor"
+                },
+                {
+                    "name": "NotAllowed",
+                    "value": 10,
+                    "desc": "Not allowed cursor"
+                },
+                {
+                    "name": "Custom0",
+                    "value": 11,
+                    "desc": "Custom cursor slot 0 (bind image first)"
+                },
+                {
+                    "name": "Custom1",
+                    "value": 12,
+                    "desc": "Custom cursor slot 1"
+                },
+                {
+                    "name": "Custom2",
+                    "value": 13,
+                    "desc": "Custom cursor slot 2"
+                },
+                {
+                    "name": "Custom3",
+                    "value": 14,
+                    "desc": "Custom cursor slot 3"
+                },
+                {
+                    "name": "Custom4",
+                    "value": 15
+                },
+                {
+                    "name": "Custom5",
+                    "value": 16
+                },
+                {
+                    "name": "Custom6",
+                    "value": 17
+                },
+                {
+                    "name": "Custom7",
+                    "value": 18
+                },
+                {
+                    "name": "Custom8",
+                    "value": 19
+                },
+                {
+                    "name": "Custom9",
+                    "value": 20
+                },
+                {
+                    "name": "Custom10",
+                    "value": 21
+                },
+                {
+                    "name": "Custom11",
+                    "value": 22
+                },
+                {
+                    "name": "Custom12",
+                    "value": 23
+                },
+                {
+                    "name": "Custom13",
+                    "value": 24
+                },
+                {
+                    "name": "Custom14",
+                    "value": 25
+                },
+                {
+                    "name": "Custom15",
+                    "value": 26
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "Modifier",
+            "desc": "",
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0
+                },
+                {
+                    "name": "Shift",
+                    "value": 1
+                },
+                {
+                    "name": "Ctrl",
+                    "value": 2
+                },
+                {
+                    "name": "Alt",
+                    "value": 3
+                },
+                {
+                    "name": "Super",
+                    "value": 4
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "LightType",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Directional",
+                    "value": 0,
+                    "desc": "Parallel light (sunlight)"
+                },
+                {
+                    "name": "Point",
+                    "value": 1,
+                    "desc": "Point light"
+                },
+                {
+                    "name": "Spot",
+                    "value": 2,
+                    "desc": "Spot light (point + cone)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "EaseType",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Linear",
+                    "value": 0,
+                    "desc": "No easing"
+                },
+                {
+                    "name": "Quad",
+                    "value": 1,
+                    "desc": "Quadratic (t^2)"
+                },
+                {
+                    "name": "Cubic",
+                    "value": 2,
+                    "desc": "Cubic (t^3)"
+                },
+                {
+                    "name": "Quart",
+                    "value": 3,
+                    "desc": "Quartic (t^4)"
+                },
+                {
+                    "name": "Quint",
+                    "value": 4,
+                    "desc": "Quintic (t^5)"
+                },
+                {
+                    "name": "Sine",
+                    "value": 5,
+                    "desc": "Sinusoidal"
+                },
+                {
+                    "name": "Expo",
+                    "value": 6,
+                    "desc": "Exponential"
+                },
+                {
+                    "name": "Circ",
+                    "value": 7,
+                    "desc": "Circular"
+                },
+                {
+                    "name": "Back",
+                    "value": 8,
+                    "desc": "Overshoot"
+                },
+                {
+                    "name": "Elastic",
+                    "value": 9,
+                    "desc": "Elastic spring"
+                },
+                {
+                    "name": "Bounce",
+                    "value": 10,
+                    "desc": "Bouncing"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "EaseMode",
+            "desc": "",
+            "values": [
+                {
+                    "name": "In",
+                    "value": 0,
+                    "desc": "Accelerate"
+                },
+                {
+                    "name": "Out",
+                    "value": 1,
+                    "desc": "Decelerate"
+                },
+                {
+                    "name": "InOut",
+                    "value": 2,
+                    "desc": "Accelerate then decelerate"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "Deliver",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Inline",
+                    "value": 0
+                },
+                {
+                    "name": "Main",
+                    "value": 1
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "MouseButton",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Left",
+                    "value": 0,
+                    "desc": "SAPP_MOUSEBUTTON_LEFT"
+                },
+                {
+                    "name": "Right",
+                    "value": 1,
+                    "desc": "SAPP_MOUSEBUTTON_RIGHT"
+                },
+                {
+                    "name": "Middle",
+                    "value": 2,
+                    "desc": "SAPP_MOUSEBUTTON_MIDDLE"
+                },
+                {
+                    "name": "None",
+                    "value": 256,
+                    "desc": "SAPP_MOUSEBUTTON_INVALID (no button; e.g. during a plain move)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "TextureFormat",
+            "desc": "",
+            "values": [
+                {
+                    "name": "RGBA8",
+                    "value": 0,
+                    "desc": "4ch, 8-bit/ch (default)"
+                },
+                {
+                    "name": "RGBA16F",
+                    "value": 1,
+                    "desc": "4ch, 16-bit float/ch"
+                },
+                {
+                    "name": "RGBA32F",
+                    "value": 2,
+                    "desc": "4ch, 32-bit float/ch"
+                },
+                {
+                    "name": "R8",
+                    "value": 3,
+                    "desc": "1ch, 8-bit"
+                },
+                {
+                    "name": "R16F",
+                    "value": 4,
+                    "desc": "1ch, 16-bit float"
+                },
+                {
+                    "name": "R32F",
+                    "value": 5,
+                    "desc": "1ch, 32-bit float"
+                },
+                {
+                    "name": "RG8",
+                    "value": 6,
+                    "desc": "2ch, 8-bit/ch"
+                },
+                {
+                    "name": "RG16F",
+                    "value": 7,
+                    "desc": "2ch, 16-bit float/ch"
+                },
+                {
+                    "name": "RG32F",
+                    "value": 8,
+                    "desc": "2ch, 32-bit float/ch"
+                },
+                {
+                    "name": "BGRA8",
+                    "value": 9,
+                    "desc": "4ch, 8-bit/ch, B-G-R-A byte order (swapchain / Syphon / video interop)"
+                },
+                {
+                    "name": "RGBA16",
+                    "value": 10,
+                    "desc": "4ch, 16-bit unorm/ch (high-precision integer; texture-sharing interop)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "TextureUsage",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Immutable",
+                    "value": 0,
+                    "desc": "Set once, cannot update (for Image::load)"
+                },
+                {
+                    "name": "Dynamic",
+                    "value": 1,
+                    "desc": "Update periodically from CPU (for Image::allocate)"
+                },
+                {
+                    "name": "Stream",
+                    "value": 2,
+                    "desc": "Update every frame (for VideoGrabber)"
+                },
+                {
+                    "name": "RenderTarget",
+                    "value": 3,
+                    "desc": "For FBO color attachment"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "WritingMode",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Horizontal",
+                    "value": 0,
+                    "desc": "Left-to-right horizontal text (default)"
+                },
+                {
+                    "name": "VerticalRL",
+                    "value": 1,
+                    "desc": "Top-to-bottom columns, columns flow right-to-left (Japanese tategaki)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "ImageType",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Color",
+                    "value": 0,
+                    "desc": "RGBA"
+                },
+                {
+                    "name": "Grayscale",
+                    "value": 1,
+                    "desc": "Grayscale"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "PrimitiveMode",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Triangles",
+                    "value": 0
+                },
+                {
+                    "name": "TriangleStrip",
+                    "value": 1
+                },
+                {
+                    "name": "TriangleFan",
+                    "value": 2
+                },
+                {
+                    "name": "Lines",
+                    "value": 3
+                },
+                {
+                    "name": "LineStrip",
+                    "value": 4
+                },
+                {
+                    "name": "LineLoop",
+                    "value": 5
+                },
+                {
+                    "name": "Points",
+                    "value": 6
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "PixelFormat",
+            "desc": "",
+            "values": [
+                {
+                    "name": "U8",
+                    "value": 0
+                },
+                {
+                    "name": "F32",
+                    "value": 1
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "StrokeCap",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Butt",
+                    "value": 0,
+                    "desc": "Flat line cap (no extension)"
+                },
+                {
+                    "name": "Round",
+                    "value": 1,
+                    "desc": "Rounded line cap"
+                },
+                {
+                    "name": "Square",
+                    "value": 2,
+                    "desc": "Square line cap (extends by half stroke width)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "StrokeJoin",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Miter",
+                    "value": 0,
+                    "desc": "Sharp corner join"
+                },
+                {
+                    "name": "Round",
+                    "value": 1,
+                    "desc": "Rounded corner join"
+                },
+                {
+                    "name": "Bevel",
+                    "value": 2,
+                    "desc": "Beveled corner join"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "PrimitiveType",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Points",
+                    "value": 0
+                },
+                {
+                    "name": "Lines",
+                    "value": 1
+                },
+                {
+                    "name": "LineStrip",
+                    "value": 2
+                },
+                {
+                    "name": "Triangles",
+                    "value": 3
+                },
+                {
+                    "name": "TriangleStrip",
+                    "value": 4
+                },
+                {
+                    "name": "Quads",
+                    "value": 5
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "WindowType",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Rect",
+                    "value": 0,
+                    "desc": "Rectangular window (no window)"
+                },
+                {
+                    "name": "Hanning",
+                    "value": 1,
+                    "desc": "Hanning window"
+                },
+                {
+                    "name": "Hamming",
+                    "value": 2,
+                    "desc": "Hamming window"
+                },
+                {
+                    "name": "Blackman",
+                    "value": 3,
+                    "desc": "Blackman window"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "Wave",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Sin",
+                    "value": 0,
+                    "desc": "Sine wave (smooth, pure tone)"
+                },
+                {
+                    "name": "Square",
+                    "value": 1,
+                    "desc": "Square wave (harsh, 8-bit style)"
+                },
+                {
+                    "name": "Triangle",
+                    "value": 2,
+                    "desc": "Triangle wave (softer than square)"
+                },
+                {
+                    "name": "Sawtooth",
+                    "value": 3,
+                    "desc": "Sawtooth wave (bright, buzzy)"
+                },
+                {
+                    "name": "Noise",
+                    "value": 4,
+                    "desc": "White noise"
+                },
+                {
+                    "name": "PinkNoise",
+                    "value": 5,
+                    "desc": "Pink noise (1/f noise, more natural)"
+                },
+                {
+                    "name": "Silent",
+                    "value": 6,
+                    "desc": "Silent (no sound)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "MixMode",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Auto",
+                    "value": 0
+                },
+                {
+                    "name": "DownmixMono",
+                    "value": 1
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "Direction",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Left",
+                    "value": 0
+                },
+                {
+                    "name": "Center",
+                    "value": 1
+                },
+                {
+                    "name": "Right",
+                    "value": 2
+                },
+                {
+                    "name": "Top",
+                    "value": 3
+                },
+                {
+                    "name": "Bottom",
+                    "value": 4
+                },
+                {
+                    "name": "Baseline",
+                    "value": 5,
+                    "desc": "Text-specific: character baseline"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "LayoutDirection",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Vertical",
+                    "value": 0,
+                    "desc": "VStack: top to bottom"
+                },
+                {
+                    "name": "Horizontal",
+                    "value": 1,
+                    "desc": "HStack: left to right"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "AxisMode",
+            "desc": "",
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0,
+                    "desc": "Don't change size (default)"
+                },
+                {
+                    "name": "Fill",
+                    "value": 1,
+                    "desc": "Stretch children to fill parent"
+                },
+                {
+                    "name": "Content",
+                    "value": 2,
+                    "desc": "Resize parent to fit children"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "Codec",
+            "desc": "",
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0,
+                    "desc": "store verbatim (identity copy) - the \"no compression\" option"
+                },
+                {
+                    "name": "LZ4",
+                    "value": 1,
+                    "desc": "LZ4 block compression (fast, lossless)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "LogLevel",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Verbose",
+                    "value": 0,
+                    "desc": "Detailed info (for debugging)"
+                },
+                {
+                    "name": "Notice",
+                    "value": 1,
+                    "desc": "Normal info"
+                },
+                {
+                    "name": "Warning",
+                    "value": 2,
+                    "desc": "Warning"
+                },
+                {
+                    "name": "Error",
+                    "value": 3,
+                    "desc": "Error"
+                },
+                {
+                    "name": "Fatal",
+                    "value": 4,
+                    "desc": "Fatal error"
+                },
+                {
+                    "name": "Silent",
+                    "value": 5,
+                    "desc": "No output (for filtering)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "Beep",
+            "desc": "",
+            "values": [
+                {
+                    "name": "ping",
+                    "value": 0,
+                    "desc": "Single beep (default)"
+                },
+                {
+                    "name": "success",
+                    "value": 1,
+                    "desc": "Two-tone rising (pico)"
+                },
+                {
+                    "name": "complete",
+                    "value": 2,
+                    "desc": "Task completion fanfare"
+                },
+                {
+                    "name": "coin",
+                    "value": 3,
+                    "desc": "Game item pickup (sparkly)"
+                },
+                {
+                    "name": "error",
+                    "value": 4,
+                    "desc": "Low buzz (boo)"
+                },
+                {
+                    "name": "warning",
+                    "value": 5,
+                    "desc": "Attention (two short beeps)"
+                },
+                {
+                    "name": "cancel",
+                    "value": 6,
+                    "desc": "Cancel/back"
+                },
+                {
+                    "name": "click",
+                    "value": 7,
+                    "desc": "UI selection click"
+                },
+                {
+                    "name": "typing",
+                    "value": 8,
+                    "desc": "Key input feedback"
+                },
+                {
+                    "name": "notify",
+                    "value": 9,
+                    "desc": "Two-tone notification"
+                },
+                {
+                    "name": "sweep",
+                    "value": 10,
+                    "desc": "Screen transition whoosh"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "VideoCodec",
+            "desc": "",
+            "values": [
+                {
+                    "name": "H264",
+                    "value": 0,
+                    "desc": "H.264 / AVC — broad compatibility (default)"
+                },
+                {
+                    "name": "HEVC",
+                    "value": 1,
+                    "desc": "H.265 / HEVC — smaller files, hardware-encoded"
+                },
+                {
+                    "name": "ProRes422",
+                    "value": 2,
+                    "desc": "Apple ProRes 422 — editing-grade, macOS/iOS only (.mov)"
+                },
+                {
+                    "name": "ProRes4444",
+                    "value": 3,
+                    "desc": "Apple ProRes 4444 — highest quality + alpha, macOS/iOS only (.mov)"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "Source",
+            "desc": "",
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0
+                },
+                {
+                    "name": "Swapchain",
+                    "value": 1
+                },
+                {
+                    "name": "Fbo",
+                    "value": 2
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "ThermalState",
+            "desc": "",
+            "values": [
+                {
+                    "name": "Nominal",
+                    "value": 0,
+                    "desc": "Normal operation"
+                },
+                {
+                    "name": "Fair",
+                    "value": 1,
+                    "desc": "Slightly elevated, performance may be reduced"
+                },
+                {
+                    "name": "Serious",
+                    "value": 2,
+                    "desc": "High temperature, should reduce workload"
+                },
+                {
+                    "name": "Critical",
+                    "value": 3,
+                    "desc": "Thermal throttling active, risk of shutdown"
+                }
+            ],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "TcyMode",
+            "desc": "Tate-chu-yoko: how Latin / digit runs are laid out within vertical text",
+            "values": [
+                {
+                    "name": "Rotate",
+                    "value": 0,
+                    "desc": "Rotate the whole Latin / digit run 90 degrees CW so it reads top-to-bottom"
+                },
+                {
+                    "name": "Upright",
+                    "value": 1,
+                    "desc": "Each glyph upright, one per CJK-sized cell (一文字ずつ正立)"
+                },
+                {
+                    "name": "Combine",
+                    "value": 2,
+                    "desc": "Squeeze a Latin / digit run into a single CJK cell (true 縦中横)"
+                }
+            ],
+            "desc_ja": "縦中横: 縦書き内の Latin / 数字の連続の配置方法",
+            "desc_ko": ""
+        },
+        {
+            "name": "KinsokuLevel",
+            "desc": "Line-breaking (kinsoku) strictness for vertical / Japanese text",
+            "values": [
+                {
+                    "name": "Off",
+                    "value": 0,
+                    "desc": "No line-break prohibition rules"
+                },
+                {
+                    "name": "PunctuationOnly",
+                    "value": 1,
+                    "desc": "Only punctuation kinsoku rules"
+                },
+                {
+                    "name": "Standard",
+                    "value": 2,
+                    "desc": "Standard kinsoku rules"
+                }
+            ],
+            "desc_ja": "縦書き / 日本語の禁則処理レベル",
+            "desc_ko": ""
+        }
+    ],
+    "macros": [
+        {
+            "name": "TC_RUN_APP",
+            "signature": "TC_RUN_APP(AppClass, settings)",
+            "desc": "Application entry-point macro. Expands to main() and runs AppClass. Required to enable hot reload.",
+            "desc_ja": "アプリのエントリポイントマクロ。main() を展開し AppClass を実行する。ホットリロードを使うには必須。",
+            "desc_ko": ""
+        },
+        {
+            "name": "TC_HOT_RELOAD",
+            "signature": "TC_HOT_RELOAD(AppClass)",
+            "desc": "Opt the app into hot reload. Place in the app's .cpp; triggers a CMake reconfigure on next build.",
+            "desc_ja": "アプリをホットリロード対応にする。アプリの .cpp に置く。次回ビルドで CMake が再構成される。",
+            "desc_ko": ""
+        },
+        {
+            "name": "TC_REFLECT",
+            "signature": "TC_REFLECT(Self, ...Bases) { TC_VALUE(...) ... }",
+            "desc": "Declare reflected members inside a class (exposed to the inspector, serialization, and MCP). Bases are the direct base classes.",
+            "desc_ja": "クラス内で反映メンバーを宣言する（インスペクタ・シリアライズ・MCP に公開）。Bases は直接の基底クラス。",
+            "desc_ko": ""
+        },
+        {
+            "name": "TC_REFLECT_ROOT",
+            "signature": "TC_REFLECT_ROOT(Self) { TC_VALUE(...) ... }",
+            "desc": "Like TC_REFLECT but for a root type with no reflected base classes.",
+            "desc_ja": "TC_REFLECT と同じだが、反映する基底クラスを持たないルート型向け。",
+            "desc_ko": ""
+        },
+        {
+            "name": "TC_REFLECT_FREE",
+            "signature": "TC_REFLECT_FREE(Type) { TC_VALUE(...) ... }",
+            "desc": "Reflect a non-member / external type at namespace scope (for types you can't add TC_REFLECT inside).",
+            "desc_ja": "メンバー外・外部の型を名前空間スコープで反映する（TC_REFLECT をクラス内に書けない型向け）。",
+            "desc_ko": ""
+        },
+        {
+            "name": "TC_VALUE",
+            "signature": "TC_VALUE(member) | TC_VALUE(name, getter) | TC_VALUE(name, getter, setter)",
+            "desc": "Declare one reflected member inside a TC_REFLECT body. 1 arg = in-place, 2 = read-only, 3 = getter/setter.",
+            "desc_ja": "TC_REFLECT 本体内で反映メンバーを1つ宣言する。引数1=直接、2=読み取り専用、3=getter/setter。",
+            "desc_ko": ""
+        },
+        {
+            "name": "TC_ENUM_LABELS",
+            "signature": "TC_ENUM_LABELS(EnumType, \"Label0\", \"Label1\", ...)",
+            "desc": "Declare string labels for an enum (labels[(int)value] == name), used by the inspector and serialization.",
+            "desc_ja": "enum の文字列ラベルを宣言する（labels[(int)value] == name）。インスペクタやシリアライズで使われる。",
+            "desc_ko": ""
         }
     ]
 };
