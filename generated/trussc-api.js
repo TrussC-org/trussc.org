@@ -590,8 +590,8 @@ const TrussCAPI = {
                         "color space",
                         "convert"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "単一のsRGBチャンネル値をリニアRGBに変換",
+                    "desc_ko": "단일 sRGB 채널 값을 linear RGB로 변환",
                     "related": [
                         "setGammaCorrection"
                     ]
@@ -609,8 +609,8 @@ const TrussCAPI = {
                         "color space",
                         "convert"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "単一のリニアRGBチャンネル値をsRGBに変換",
+                    "desc_ko": "단일 linear RGB 채널 값을 sRGB로 변환",
                     "related": [
                         "setGammaCorrection"
                     ]
@@ -3159,8 +3159,8 @@ const TrussCAPI = {
                         "segments",
                         "smoothness"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "現在の曲線テッセレーションモード（固定セグメント数 vs. 適応許容誤差）",
+                    "desc_ko": "현재 곡선 tessellation 모드 (고정 세그먼트 수 vs. 적응형 허용오차)"
                 }
             ],
             "name_ja": "グラフィックス - スタイル",
@@ -4762,8 +4762,8 @@ const TrussCAPI = {
                         "subscribe",
                         "hook"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "全フレームワークイベント（setup, update, draw, keyPressed, mousePressed など）を保持するグローバルなCoreEventsハブを取得。events().eventName.listen(callback) で購読",
+                    "desc_ko": "모든 프레임워크 이벤트(setup, update, draw, keyPressed, mousePressed 등)를 보유하는 전역 CoreEvents 허브를 얻음. events().eventName.listen(callback) 으로 구독",
                     "related": [
                         "CoreEvents",
                         "setup",
@@ -4796,8 +4796,8 @@ const TrussCAPI = {
                         "panel",
                         "gui"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "オーバーレイ上にポインタがあるとき true（例: tcxImGui パネル上のカーソル）。UIパネルへのクリックがアプリ側でも処理されないよう生のマウス入力をガードする",
+                    "desc_ko": "오버레이 위에 포인터가 있을 때 true (예: tcxImGui 패널 위의 커서). UI 패널 클릭이 앱에서도 처리되지 않도록 raw 마우스 입력을 가드함",
                     "related": [
                         "isOverlayFocused",
                         "isMousePressed"
@@ -4818,8 +4818,8 @@ const TrussCAPI = {
                         "input",
                         "gui"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "オーバーレイがキーボードフォーカスを持つとき true（例: テキスト入力がアクティブ）。UIフィールドへの入力がアプリ側でも処理されないよう生のキー入力をガードする",
+                    "desc_ko": "오버레이가 키보드 포커스를 가질 때 true (예: 텍스트 입력이 활성). UI 필드 입력이 앱에서도 처리되지 않도록 raw 키 입력을 가드함",
                     "related": [
                         "isOverlayHovered",
                         "isKeyPressed"
@@ -4961,8 +4961,8 @@ const TrussCAPI = {
                         "block",
                         "milliseconds"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "指定したミリ秒だけ現在のスレッドをブロック",
+                    "desc_ko": "지정한 밀리초만큼 현재 스레드를 블록"
                 },
                 {
                     "name": "sleepMicros",
@@ -4979,8 +4979,8 @@ const TrussCAPI = {
                         "block",
                         "microseconds"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "指定したマイクロ秒だけ現在のスレッドをブロック",
+                    "desc_ko": "지정한 마이크로초만큼 현재 스레드를 블록"
                 },
                 {
                     "name": "getUpdateCount",
@@ -4997,8 +4997,8 @@ const TrussCAPI = {
                         "number",
                         "total"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "アプリ開始からの update() 呼び出し回数を取得",
+                    "desc_ko": "앱 시작 이후 update() 호출 횟수를 얻음",
                     "examples": [
                         {
                             "name": "utilsExample",
@@ -5021,8 +5021,8 @@ const TrussCAPI = {
                         "number",
                         "total"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "アプリ開始からの draw() 呼び出し回数を取得",
+                    "desc_ko": "앱 시작 이후 draw() 호출 횟수를 얻음",
                     "examples": [
                         {
                             "name": "utilsExample",
@@ -5045,8 +5045,8 @@ const TrussCAPI = {
                         "vsync",
                         "target"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "現在のFPS設定（update/draw 目標レート、実際のVSyncレート、syncフラグ）を取得",
+                    "desc_ko": "현재 FPS 설정(update/draw 목표 레이트, 실제 VSync 레이트, sync 플래그)을 얻음",
                     "related": [
                         "FpsSettings"
                     ],
@@ -5439,8 +5439,8 @@ const TrussCAPI = {
                         "kiosk",
                         "edge to edge"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "没入型フルスクリーンのためシステムUIを非表示。Android: sticky immersive（ステータス＋ナビゲーションバー）。iOS: ステータスバー＋ホームインジケータを非表示。Desktop: no-op",
+                    "desc_ko": "몰입형 전체화면을 위해 시스템 UI를 숨김. Android: sticky immersive (상태 + 내비게이션 바). iOS: 상태 바 + 홈 인디케이터 숨김. Desktop: no-op",
                     "related": [
                         "getImmersiveMode",
                         "setKeepScreenOn",
@@ -5472,8 +5472,8 @@ const TrussCAPI = {
                         "kiosk",
                         "status bar"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "没入モードが現在有効かどうかを返す",
+                    "desc_ko": "몰입 모드가 현재 활성화되어 있는지 반환",
                     "related": [
                         "setImmersiveMode"
                     ],
@@ -5504,8 +5504,8 @@ const TrussCAPI = {
                         "pixels",
                         "framebuffer"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "現在のウィンドウ内容を Pixels オブジェクトにキャプチャ。成功時 true を返す",
+                    "desc_ko": "현재 윈도우 내용을 Pixels 객체로 캡처. 성공 시 true 반환",
                     "related": [
                         "Pixels",
                         "grabScreen",
@@ -5534,8 +5534,8 @@ const TrussCAPI = {
                         "loudness",
                         "speaker"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "システム出力音量を取得（0.0-1.0）",
+                    "desc_ko": "시스템 출력 볼륨을 얻음 (0.0-1.0)",
                     "related": [
                         "setSystemVolume",
                         "setBeepVolume"
@@ -5568,8 +5568,8 @@ const TrussCAPI = {
                         "speaker",
                         "mute"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "システム出力音量を設定（0.0-1.0）。iOS: OSが非対応（警告をログ出力）",
+                    "desc_ko": "시스템 출력 볼륨을 설정 (0.0-1.0). iOS: OS가 미지원 (경고 로그 출력)",
                     "related": [
                         "getSystemVolume"
                     ],
@@ -5593,8 +5593,8 @@ const TrussCAPI = {
                         "backlight",
                         "luminance"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "画面の明るさを取得（0.0-1.0）。iOS: リニア。Android: ガンマ補正済み（知覚的）。Desktop: -1 を返す（非対応）",
+                    "desc_ko": "화면 밝기를 얻음 (0.0-1.0). iOS: 선형. Android: 감마 보정됨 (지각적). Desktop: -1 반환 (미지원)",
                     "related": [
                         "setSystemBrightness",
                         "setKeepScreenOn"
@@ -5627,8 +5627,8 @@ const TrussCAPI = {
                         "dim",
                         "luminance"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "画面の明るさを設定（0.0-1.0）。値の意味はプラットフォームで異なる（iOS リニア、Android 知覚的）。Desktop: 非対応",
+                    "desc_ko": "화면 밝기를 설정 (0.0-1.0). 값의 의미는 플랫폼마다 다름 (iOS 선형, Android 지각적). Desktop: 미지원",
                     "related": [
                         "getSystemBrightness"
                     ],
@@ -5652,8 +5652,8 @@ const TrussCAPI = {
                         "overheat",
                         "throttle"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "デバイスの粗い熱状態を取得（Nominal / Fair / Serious / Critical）",
+                    "desc_ko": "디바이스의 대략적인 열 상태를 얻음 (Nominal / Fair / Serious / Critical)",
                     "related": [
                         "ThermalState",
                         "getThermalTemperature",
@@ -5687,8 +5687,8 @@ const TrussCAPI = {
                         "overheat",
                         "sensor"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "デバイス温度を摂氏で取得、取得不可なら -1",
+                    "desc_ko": "디바이스 온도를 섭씨로 얻음, 불가하면 -1",
                     "related": [
                         "getThermalState"
                     ],
@@ -5713,8 +5713,8 @@ const TrussCAPI = {
                         "energy",
                         "percent"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "バッテリー残量を取得（0.0-1.0）、取得不可なら -1（例: バッテリーのないデスクトップ）",
+                    "desc_ko": "배터리 충전 레벨을 얻음 (0.0-1.0), 불가하면 -1 (예: 배터리 없는 데스크톱)",
                     "related": [
                         "isBatteryCharging",
                         "getThermalState"
@@ -5747,8 +5747,8 @@ const TrussCAPI = {
                         "plugged",
                         "ac"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "バッテリーが現在充電中なら true を返す",
+                    "desc_ko": "배터리가 현재 충전 중이면 true 반환",
                     "related": [
                         "getBatteryLevel"
                     ],
@@ -5780,8 +5780,8 @@ const TrussCAPI = {
                         "imu",
                         "gforce"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "加速度センサーの値をG単位で取得（1.0 = 地球重力）。モバイルのみ、デスクトップは 0 を返す",
+                    "desc_ko": "가속도계 값을 G 단위로 얻음 (1.0 = 지구 중력). 모바일 전용, 데스크톱은 0 반환",
                     "related": [
                         "getGyroscope",
                         "getDeviceOrientation"
@@ -5813,8 +5813,8 @@ const TrussCAPI = {
                         "imu",
                         "motion"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ジャイロの角速度を rad/s で取得。モバイルのみ、デスクトップは 0 を返す",
+                    "desc_ko": "자이로스코프 각속도를 rad/s로 얻음. 모바일 전용, 데스크톱은 0 반환",
                     "related": [
                         "getAccelerometer",
                         "getDeviceOrientation"
@@ -5846,8 +5846,8 @@ const TrussCAPI = {
                         "quaternion",
                         "pose"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "融合されたデバイス姿勢（加速度＋ジャイロ＋磁気センサー）をクォータニオンで取得。モバイルのみ",
+                    "desc_ko": "융합된 디바이스 자세(가속도계 + 자이로스코프 + 자력계)를 quaternion으로 얻음. 모바일 전용",
                     "related": [
                         "Quaternion",
                         "getAccelerometer",
@@ -5881,8 +5881,8 @@ const TrussCAPI = {
                         "direction",
                         "azimuth"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "コンパス方位をラジアンで取得（0 = 北、時計回り）。モバイルのみ",
+                    "desc_ko": "나침반 방위를 라디안으로 얻음 (0 = 북쪽, 시계 방향). 모바일 전용",
                     "related": [
                         "getDeviceOrientation",
                         "getLocation"
@@ -5914,8 +5914,8 @@ const TrussCAPI = {
                         "ear",
                         "distance"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "近接センサーが近くの物体を検知したとき true を返す（例: 耳に当てた電話）",
+                    "desc_ko": "근접 센서가 가까운 물체를 감지하면 true 반환 (예: 귀에 댄 전화)",
                     "related": [
                         "getAccelerometer"
                     ],
@@ -5946,8 +5946,8 @@ const TrussCAPI = {
                         "position",
                         "latitude"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "最新の GPS / WiFi 位置情報を取得。初回呼び出しで位置更新を開始",
+                    "desc_ko": "가장 최근의 GPS / WiFi 위치 정보를 얻음. 첫 호출 시 위치 업데이트 시작",
                     "related": [
                         "Location",
                         "getCompassHeading"
@@ -7873,8 +7873,8 @@ const TrussCAPI = {
                         "taper",
                         "leakage"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "FFT 前のスペクトル漏れを抑えるため信号に窓関数を適用（インプレース）",
+                    "desc_ko": "FFT 전 스펙트럼 누설을 줄이기 위해 신호에 윈도우 함수를 적용 (in-place)",
                     "related": [
                         "WindowType"
                     ]
@@ -7894,8 +7894,8 @@ const TrussCAPI = {
                         "taper",
                         "leakage"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "FFT 前のスペクトル漏れを抑えるため信号に窓関数を適用（インプレース）",
+                    "desc_ko": "FFT 전 스펙트럼 누설을 줄이기 위해 신호에 윈도우 함수를 적용 (in-place)",
                     "related": [
                         "WindowType"
                     ]
@@ -7913,8 +7913,8 @@ const TrussCAPI = {
                         "binary",
                         "bit"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "n が正の2のべき乗なら true を返す",
+                    "desc_ko": "n이 양의 2의 거듭제곱이면 true 반환"
                 },
                 {
                     "name": "nextPowerOfTwo",
@@ -7929,8 +7929,8 @@ const TrussCAPI = {
                         "round up",
                         "binary"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "n 以上で最小の2のべき乗を返す",
+                    "desc_ko": "n 이상인 가장 작은 2의 거듭제곱을 반환"
                 },
                 {
                     "name": "fft",
@@ -7946,8 +7946,8 @@ const TrussCAPI = {
                         "transform",
                         "dft"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "インプレースの順方向FFT（Cooley-Tukey radix-2）。データサイズは2のべき乗でなければならない",
+                    "desc_ko": "in-place 정방향 FFT (Cooley-Tukey radix-2). 데이터 크기는 2의 거듭제곱이어야 함"
                 },
                 {
                     "name": "ifft",
@@ -7962,8 +7962,8 @@ const TrussCAPI = {
                         "spectrum",
                         "transform"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "インプレースの逆FFT。データサイズは2のべき乗でなければならない",
+                    "desc_ko": "in-place 역 FFT. 데이터 크기는 2의 거듭제곱이어야 함"
                 },
                 {
                     "name": "toComplex",
@@ -7978,8 +7978,8 @@ const TrussCAPI = {
                         "real",
                         "convert"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "実数信号を虚部0の複素数配列に変換",
+                    "desc_ko": "실수 신호를 허수부가 0인 복소수 배열로 변환"
                 },
                 {
                     "name": "fftReal",
@@ -7995,8 +7995,8 @@ const TrussCAPI = {
                         "real",
                         "signal"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "実数信号のFFTを計算。必要に応じて先に窓関数を適用",
+                    "desc_ko": "실수 신호의 FFT를 계산. 선택적으로 먼저 윈도우 함수를 적용",
                     "related": [
                         "WindowType"
                     ],
@@ -8025,8 +8025,8 @@ const TrussCAPI = {
                         "real",
                         "signal"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "実数信号のFFTを計算。必要に応じて先に窓関数を適用",
+                    "desc_ko": "실수 신호의 FFT를 계산. 선택적으로 먼저 윈도우 함수를 적용",
                     "related": [
                         "WindowType"
                     ],
@@ -8054,8 +8054,8 @@ const TrussCAPI = {
                         "frequency",
                         "bins"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "スペクトルの各ビンの大きさ（振幅）を返す",
+                    "desc_ko": "스펙트럼의 각 bin의 크기(진폭)를 반환",
                     "related": [
                         "fftMagnitudeDb"
                     ]
@@ -8074,8 +8074,8 @@ const TrussCAPI = {
                         "loudness",
                         "db"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "各ビンの大きさをデシベルで返す、minDb にクランプ",
+                    "desc_ko": "각 bin의 크기를 데시벨로 반환, minDb로 clamp"
                 },
                 {
                     "name": "fftPhase",
@@ -8090,8 +8090,8 @@ const TrussCAPI = {
                         "spectrum",
                         "frequency"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "スペクトルの各ビンの位相角（ラジアン）を返す",
+                    "desc_ko": "스펙트럼의 각 bin의 위상각(라디안)을 반환"
                 },
                 {
                     "name": "fftPower",
@@ -8106,8 +8106,8 @@ const TrussCAPI = {
                         "energy",
                         "frequency"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "各ビンのパワースペクトル（大きさの2乗）を返す",
+                    "desc_ko": "각 bin의 파워 스펙트럼(크기의 제곱)을 반환"
                 },
                 {
                     "name": "binToFrequency",
@@ -8123,8 +8123,8 @@ const TrussCAPI = {
                         "convert",
                         "spectrum"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "FFT のビンインデックスを Hz の周波数に変換",
+                    "desc_ko": "FFT bin 인덱스를 Hz 주파수로 변환"
                 },
                 {
                     "name": "frequencyToBin",
@@ -8140,8 +8140,8 @@ const TrussCAPI = {
                         "convert",
                         "spectrum"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "Hz の周波数を最も近い FFT ビンインデックスに変換",
+                    "desc_ko": "Hz 주파수를 가장 가까운 FFT bin 인덱스로 변환"
                 },
                 {
                     "name": "windowFunction",
@@ -8158,8 +8158,8 @@ const TrussCAPI = {
                         "taper",
                         "coefficient"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "指定した窓タイプにおける n 個中 i 番目サンプルの窓係数を返す",
+                    "desc_ko": "지정한 윈도우 타입에서 n개 중 i번째 샘플의 윈도우 계수를 반환",
                     "related": [
                         "WindowType"
                     ]
@@ -8836,8 +8836,8 @@ const TrussCAPI = {
                         "d3d11",
                         "opengl"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "現在のグラフィックスバックエンド名を取得（例: \"Metal (macOS)\", \"D3D11\", \"OpenGL\", \"WebGPU\"）",
+                    "desc_ko": "현재 그래픽스 백엔드 이름을 얻음 (예: \"Metal (macOS)\", \"D3D11\", \"OpenGL\", \"WebGPU\")",
                     "related": [
                         "GraphicsBackend::name",
                         "Platform::name"
@@ -8857,8 +8857,8 @@ const TrussCAPI = {
                         "foreground",
                         "topmost"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "アプリケーションウィンドウをアクティブにして前面に出しフォーカスを与える。デスクトップのみ、モバイル/web では no-op",
+                    "desc_ko": "애플리케이션 윈도우를 활성화하고 앞으로 올려 포커스를 줌. 데스크톱 전용, 모바일/web에서는 no-op",
                     "related": [
                         "setWindowPosition",
                         "setFullscreen"
@@ -8885,8 +8885,8 @@ const TrussCAPI = {
                         "scale",
                         "monitor"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "メインディスプレイのDPIスケールを取得（ウィンドウ生成前に利用可能）。macOS: 1.0 または 2.0（Retina）、他のプラットフォーム: 1.0",
+                    "desc_ko": "메인 디스플레이의 DPI 스케일을 얻음 (윈도우 생성 전에 사용 가능). macOS: 1.0 또는 2.0 (Retina), 다른 플랫폼: 1.0",
                     "related": [
                         "getDpiScale",
                         "getWindowPosition"
@@ -8906,8 +8906,8 @@ const TrussCAPI = {
                         "frame",
                         "decoration"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ウィンドウの標準装飾（タイトルバー、枠、ボタン）を切り替え。false = ボーダーレスだがフォーカス・クローズは可能。デスクトップのみ",
+                    "desc_ko": "윈도우의 표준 장식(타이틀 바, 테두리, 버튼)을 토글. false = 테두리 없음이지만 포커스와 닫기는 가능. 데스크톱 전용",
                     "related": [
                         "setFullscreen",
                         "setWindowSize"
@@ -8933,8 +8933,8 @@ const TrussCAPI = {
                         "points",
                         "dimensions"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ウィンドウを指定した論理サイズ（論理ピクセル）にリサイズ",
+                    "desc_ko": "윈도우를 지정한 논리 크기(논리 픽셀)로 리사이즈",
                     "related": [
                         "setWindowSize",
                         "getDpiScale"
@@ -8961,8 +8961,8 @@ const TrussCAPI = {
                         "cli",
                         "server"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ウィンドウやグラフィックスコンテキストなしでアプリクラスを実行（update ループのみ）。アプリ型をテンプレート引数に取り、プロセスの終了コードを返す",
+                    "desc_ko": "윈도우나 그래픽스 컨텍스트 없이 앱 클래스를 실행 (update 루프만). 앱 타입을 템플릿 인자로 받고 프로세스 종료 코드를 반환",
                     "related": [
                         "HeadlessSettings",
                         "runApp"
@@ -9405,8 +9405,8 @@ const TrussCAPI = {
                         "debug",
                         "print"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ストリームベースの verbose レベルログ出力",
+                    "desc_ko": "스트림 기반 verbose 레벨 로그 출력",
                     "related": [
                         "logNotice",
                         "setConsoleLogLevel"
@@ -9435,8 +9435,8 @@ const TrussCAPI = {
                         "warning",
                         "print"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ストリームベースの warning レベルログ出力",
+                    "desc_ko": "스트림 기반 warning 레벨 로그 출력",
                     "related": [
                         "logNotice",
                         "logError",
@@ -9462,8 +9462,8 @@ const TrussCAPI = {
                         "err",
                         "print"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ストリームベースの error レベルログ出力",
+                    "desc_ko": "스트림 기반 error 레벨 로그 출력",
                     "related": [
                         "logWarning",
                         "logFatal",
@@ -9494,8 +9494,8 @@ const TrussCAPI = {
                         "critical",
                         "print"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ストリームベースの fatal レベルログ出力",
+                    "desc_ko": "스트림 기반 fatal 레벨 로그 출력",
                     "related": [
                         "logError",
                         "logWarning"
@@ -9514,8 +9514,8 @@ const TrussCAPI = {
                         "print",
                         "severity"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "実行時に選択したレベルでのストリームベースログ出力",
+                    "desc_ko": "런타임에 선택한 레벨로 스트림 기반 로그 출력",
                     "related": [
                         "LogLevel",
                         "getLogger",
@@ -9534,8 +9534,8 @@ const TrussCAPI = {
                         "logger",
                         "logging"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "グローバルなロガーインスタンスにアクセス",
+                    "desc_ko": "전역 logger 인스턴스에 접근",
                     "related": [
                         "Logger",
                         "setConsoleLogLevel",
@@ -9557,8 +9557,8 @@ const TrussCAPI = {
                         "verbosity",
                         "filter"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "コンソールに出力する最小ログレベルを設定",
+                    "desc_ko": "콘솔에 출력할 최소 로그 레벨을 설정",
                     "related": [
                         "LogLevel",
                         "setFileLogLevel",
@@ -9586,8 +9586,8 @@ const TrussCAPI = {
                         "verbosity",
                         "filter"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ログファイルに書き込む最小ログレベルを設定",
+                    "desc_ko": "로그 파일에 기록할 최소 로그 레벨을 설정",
                     "related": [
                         "LogLevel",
                         "setConsoleLogLevel",
@@ -9608,8 +9608,8 @@ const TrussCAPI = {
                         "write",
                         "path"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ログ出力を受けるファイルを開く",
+                    "desc_ko": "로그 출력을 받을 파일을 엶",
                     "related": [
                         "closeLogFile",
                         "setFileLogLevel"
@@ -9628,8 +9628,8 @@ const TrussCAPI = {
                         "close",
                         "flush"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "現在のログファイルを閉じる",
+                    "desc_ko": "현재 로그 파일을 닫음",
                     "related": [
                         "setLogFile"
                     ]
@@ -9648,8 +9648,8 @@ const TrussCAPI = {
                         "capacity",
                         "compress"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "宛先バッファのサイズ確保用の最悪ケースの圧縮サイズ",
+                    "desc_ko": "대상 버퍼 크기 산정용 최악의 경우 압축 크기",
                     "related": [
                         "Codec",
                         "compress",
@@ -9670,8 +9670,8 @@ const TrussCAPI = {
                         "convert",
                         "number"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "文字列を64ビット整数にパース",
+                    "desc_ko": "문자열을 64비트 정수로 파싱",
                     "related": [
                         "toInt",
                         "hexToInt"
@@ -9691,8 +9691,8 @@ const TrussCAPI = {
                         "number",
                         "float"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "文字列を double にパース",
+                    "desc_ko": "문자열을 double로 파싱",
                     "related": [
                         "toFloat",
                         "toString"
@@ -9711,8 +9711,8 @@ const TrussCAPI = {
                         "true false",
                         "convert"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "文字列を bool にパース",
+                    "desc_ko": "문자열을 bool로 파싱",
                     "related": [
                         "toInt",
                         "toString"
@@ -9731,8 +9731,8 @@ const TrussCAPI = {
                         "base2",
                         "convert"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "整数を2進文字列に変換",
+                    "desc_ko": "정수를 2진 문자열로 변환",
                     "related": [
                         "hexToInt",
                         "toBase64"
@@ -9758,8 +9758,8 @@ const TrussCAPI = {
                         "base16",
                         "convert"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "16進文字列を符号付き int にパース",
+                    "desc_ko": "16진 문자열을 부호 있는 int로 파싱",
                     "related": [
                         "hexToUInt",
                         "toInt",
@@ -9786,8 +9786,8 @@ const TrussCAPI = {
                         "base16",
                         "parse"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "16進文字列を符号なし int にパース",
+                    "desc_ko": "16진 문자열을 부호 없는 int로 파싱",
                     "related": [
                         "hexToInt",
                         "toInt"
@@ -9806,8 +9806,8 @@ const TrussCAPI = {
                         "encoding",
                         "bytes"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "生バイトを Base64 文字列にエンコード",
+                    "desc_ko": "raw 바이트를 Base64 문자열로 인코딩",
                     "related": [
                         "compress",
                         "toBinary"
@@ -9827,8 +9827,8 @@ const TrussCAPI = {
                         "substring",
                         "includes"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ある文字列が別の文字列を含むか確認",
+                    "desc_ko": "한 문자열이 다른 문자열을 포함하는지 확인",
                     "related": [
                         "stringTimesInString",
                         "stringReplace"
@@ -9854,8 +9854,8 @@ const TrussCAPI = {
                         "tally",
                         "substring"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "文字列中の部分文字列の出現回数を数える",
+                    "desc_ko": "문자열 내 부분 문자열의 출현 횟수를 셈",
                     "related": [
                         "isStringInString",
                         "splitString"
@@ -9880,8 +9880,8 @@ const TrussCAPI = {
                         "clean",
                         "trim"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "文字列の両端の空白を除去",
+                    "desc_ko": "문자열 양 끝의 공백을 제거",
                     "related": [
                         "trimFront",
                         "trimBack",
@@ -9908,8 +9908,8 @@ const TrussCAPI = {
                         "ltrim",
                         "whitespace"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "文字列の先頭の空白を除去",
+                    "desc_ko": "문자열 앞쪽의 공백을 제거",
                     "related": [
                         "trimBack",
                         "trim"
@@ -9929,8 +9929,8 @@ const TrussCAPI = {
                         "rtrim",
                         "whitespace"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "文字列の末尾の空白を除去",
+                    "desc_ko": "문자열 뒤쪽의 공백을 제거",
                     "related": [
                         "trimFront",
                         "trim"
@@ -9949,8 +9949,8 @@ const TrussCAPI = {
                         "deserialize",
                         "decode"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "JSON 文字列を Json オブジェクトにパース。パースエラー時は空の Json を返す",
+                    "desc_ko": "JSON 문자열을 Json 객체로 파싱. 파싱 오류 시 빈 Json 반환",
                     "related": [
                         "Json",
                         "toJsonString",
@@ -9971,8 +9971,8 @@ const TrussCAPI = {
                         "encode",
                         "dump"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "Json オブジェクトを文字列にシリアライズ。indent は整形出力の幅を指定（負値でコンパクト）",
+                    "desc_ko": "Json 객체를 문자열로 직렬화. indent는 pretty-print 폭을 지정 (음수면 compact)",
                     "related": [
                         "Json",
                         "parseJson",
@@ -9998,8 +9998,8 @@ const TrussCAPI = {
                         "deserialize",
                         "decode"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "XML 文字列を Xml オブジェクトにパース",
+                    "desc_ko": "XML 문자열을 Xml 객체로 파싱",
                     "related": [
                         "Xml",
                         "loadXml"
@@ -10019,8 +10019,8 @@ const TrussCAPI = {
                         "members",
                         "json"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "objのreflect済み(TC_REFLECT)メンバをすべてJsonオブジェクトとして返す。NodeやModなど任意のreflected型で動作",
+                    "desc_ko": "obj의 reflect된(TC_REFLECT) 멤버를 모두 Json 객체로 반환. Node나 Mod 등 임의의 reflected 타입에서 동작",
                     "related": [
                         "Json",
                         "reflectFromJson",
@@ -10041,8 +10041,8 @@ const TrussCAPI = {
                         "load",
                         "json"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "Jsonオブジェクトのキーをobjのreflect済み(TC_REFLECT)メンバに適用する。reflectorを返すので、どのメンバがapplied/skipped/read-only/unknownだったか確認できる",
+                    "desc_ko": "Json 객체의 키를 obj의 reflect된(TC_REFLECT) 멤버에 적용. reflector를 반환하므로 어떤 멤버가 applied/skipped/read-only/unknown이었는지 확인 가능",
                     "related": [
                         "Json",
                         "reflectToJson",
@@ -10062,8 +10062,8 @@ const TrussCAPI = {
                         "concurrency",
                         "ui thread"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "呼び出しスレッドがメイン(シーン)スレッドかどうか。メインスレッドIDはgetMainThreadId()の初回呼び出しで記録される",
+                    "desc_ko": "호출 스레드가 메인(scene) 스레드인지 여부. 메인 스레드 ID는 getMainThreadId()의 첫 호출 시 기록됨",
                     "related": [
                         "getMainThreadId"
                     ]
@@ -10081,8 +10081,8 @@ const TrussCAPI = {
                         "id",
                         "concurrency"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "メインスレッドIDを取得。初回呼び出しで現在のスレッドIDを記録するため、最初はメインスレッドから呼ぶ必要がある",
+                    "desc_ko": "메인 스레드 ID를 얻음. 첫 호출 시 현재 스레드 ID를 기록하므로 처음에는 반드시 메인 스레드에서 호출해야 함",
                     "related": [
                         "isMainThread"
                     ]
@@ -10606,8 +10606,8 @@ const TrussCAPI = {
                         "load",
                         "parse"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "JSONファイルを読み込みJsonオブジェクトとして返す。相対パスはgetDataPathで解決され、エラー時は空のJsonを返す",
+                    "desc_ko": "JSON 파일을 읽어 Json 객체로 반환. 상대 경로는 getDataPath로 해석되며, 오류 시 빈 Json을 반환",
                     "related": [
                         "Json",
                         "saveJson",
@@ -10635,8 +10635,8 @@ const TrussCAPI = {
                         "store",
                         "serialize"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決。indentはpretty-print幅を指定(負の値でcompact)。成功時trueを返す",
+                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석. indent는 pretty-print 폭을 지정(음수면 compact). 성공 시 true 반환",
                     "related": [
                         "Json",
                         "loadJson",
@@ -10664,8 +10664,8 @@ const TrussCAPI = {
                         "load",
                         "parse"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "XMLファイルを読み込みXmlオブジェクトとして返す。相対パスはgetDataPathで解決される",
+                    "desc_ko": "XML 파일을 읽어 Xml 객체로 반환. 상대 경로는 getDataPath로 해석됨",
                     "related": [
                         "Xml",
                         "parseXml"
@@ -10691,8 +10691,8 @@ const TrussCAPI = {
                         "directory",
                         "base"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "相対データパスの解決に使うルートディレクトリを設定。相対パスは実行ファイルのディレクトリ基準で解決され、絶対パス(/始まり)はそのまま使われる。末尾のスラッシュは自動で付加される",
+                    "desc_ko": "상대 데이터 경로 해석에 사용할 루트 디렉터리를 설정. 상대 경로는 실행 파일 디렉터리 기준으로 해석되고, 절대 경로(/로 시작)는 그대로 사용됨. 끝의 슬래시는 자동으로 추가됨",
                     "related": [
                         "getDataPathRoot",
                         "setDataPathToResources",
@@ -10713,8 +10713,8 @@ const TrussCAPI = {
                         "directory",
                         "base"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "現在のデータパスルートを取得(末尾スラッシュ付き)",
+                    "desc_ko": "현재 데이터 경로 루트를 얻음(끝 슬래시 포함)",
                     "related": [
                         "setDataPathRoot",
                         "getDataPath"
@@ -10734,8 +10734,8 @@ const TrussCAPI = {
                         "app",
                         "data"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "配布用にデータパスルートをmacOSアプリバンドルのContents/Resources/dataフォルダに向ける。macOS以外のプラットフォームでは何もしない",
+                    "desc_ko": "배포용으로 데이터 경로 루트를 macOS 앱 번들의 Contents/Resources/data 폴더로 지정. macOS 외 플랫폼에서는 동작하지 않음",
                     "related": [
                         "setDataPathRoot",
                         "getExecutableDir"
@@ -10755,8 +10755,8 @@ const TrussCAPI = {
                         "app path",
                         "self"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "実行中の実行ファイルの絶対パスを取得",
+                    "desc_ko": "실행 중인 실행 파일의 절대 경로를 얻음",
                     "related": [
                         "getExecutableDir",
                         "getAbsolutePath"
@@ -10784,8 +10784,8 @@ const TrussCAPI = {
                         "app folder",
                         "directory"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "実行中の実行ファイルを含むディレクトリを取得(末尾スラッシュ付き)",
+                    "desc_ko": "실행 중인 실행 파일이 있는 디렉터리를 얻음(끝 슬래시 포함)",
                     "related": [
                         "getExecutablePath",
                         "setDataPathToResources"
@@ -11376,8 +11376,8 @@ const TrussCAPI = {
                         "level",
                         "alert"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "beep()の出力音量を設定(0.0-1.0)",
+                    "desc_ko": "beep()의 출력 볼륨을 설정(0.0-1.0)",
                     "related": [
                         "getBeepVolume",
                         "beep"
@@ -11402,8 +11402,8 @@ const TrussCAPI = {
                         "gain",
                         "level"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "現在のbeep()出力音量を取得(0.0-1.0)",
+                    "desc_ko": "현재 beep() 출력 볼륨을 얻음(0.0-1.0)",
                     "related": [
                         "setBeepVolume",
                         "beep"
@@ -11729,8 +11729,8 @@ const TrussCAPI = {
                         "setup",
                         "open"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "グローバルなAudioEngineを初期化。Sound::load() / play()から自動的に呼ばれるため、手動使用はオーディオを早期に開始したい場合(例: audioOut合成リスナーの前)のみ必要",
+                    "desc_ko": "전역 AudioEngine을 초기화. Sound::load() / play()에서 자동 호출되므로, 수동 사용은 오디오를 일찍 시작하려는 경우(예: audioOut 합성 리스너 이전)에만 필요",
                     "related": [
                         "getInstance",
                         "shutdownAudio",
@@ -11751,8 +11751,8 @@ const TrussCAPI = {
                         "release",
                         "deinit"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "グローバルなAudioEngineをシャットダウンしオーディオデバイスを閉じる。通常は不要(プログラム終了時に実行される)",
+                    "desc_ko": "전역 AudioEngine을 종료하고 오디오 장치를 닫음. 보통 불필요(프로그램 종료 시 실행됨)",
                     "related": [
                         "initAudio"
                     ]
@@ -11772,8 +11772,8 @@ const TrussCAPI = {
                         "visualization",
                         "analysis"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "FFT / 可視化用に最新のミックス出力サンプル(モノ、L+R平均)をoutBufferにコピー。numSamplesは解析バッファサイズ(4096)で上限される。書き込んだサンプル数を返す",
+                    "desc_ko": "FFT / 시각화용으로 최신 믹스 출력 샘플(모노, L+R 평균)을 outBuffer에 복사. numSamples는 분석 버퍼 크기(4096)로 제한됨. 기록한 샘플 수를 반환",
                     "related": [
                         "fftReal",
                         "fftMagnitude",
@@ -11800,8 +11800,8 @@ const TrussCAPI = {
                         "input",
                         "record"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "グローバルなMicInputシングルトン(マイク入力)を取得。start()を呼ぶとデバイスを開く",
+                    "desc_ko": "전역 MicInput 싱글턴(마이크 캡처)을 얻음. start()를 호출하면 장치를 엶",
                     "related": [
                         "MicInput",
                         "getMicAnalysisBuffer",
@@ -11829,8 +11829,8 @@ const TrussCAPI = {
                         "waveform",
                         "analysis"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "最新のマイク入力サンプルをoutBufferにコピー。getMicInput().getBuffer()の便利ラッパー。numSamplesはマイクバッファサイズ(4096)で上限される。書き込んだサンプル数を返す",
+                    "desc_ko": "최신 마이크 입력 샘플을 outBuffer에 복사. getMicInput().getBuffer()의 편의 래퍼. numSamples는 마이크 버퍼 크기(4096)로 제한됨. 기록한 샘플 수를 반환",
                     "related": [
                         "getMicInput",
                         "fftReal",
@@ -12388,8 +12388,8 @@ const TrussCAPI = {
                         "custom char",
                         "atlas"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "drawBitmapStringがそのcodepointを描画できるようビットマップグリフを1つ登録。同じcodepointに既存のグリフがあれば置き換え、atlasをdirtyにして再アップロードを促す",
+                    "desc_ko": "drawBitmapString이 해당 codepoint를 그릴 수 있도록 비트맵 글리프 하나를 등록. 같은 codepoint에 이미 등록된 글리프가 있으면 교체하고 atlas를 dirty로 표시해 재업로드를 유발",
                     "related": [
                         "Glyph",
                         "drawBitmapString",
@@ -12411,8 +12411,8 @@ const TrussCAPI = {
                         "atlas",
                         "custom chars"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "固定長配列のビットマップグリフを一度に登録(配列サイズをテンプレート化)",
+                    "desc_ko": "고정 크기 배열의 비트맵 글리프를 한 번에 등록(배열 크기를 템플릿화)",
                     "related": [
                         "Glyph"
                     ],
@@ -12437,8 +12437,8 @@ const TrussCAPI = {
                         "swap",
                         "pixels"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "登録済みグリフのatlas位置を変えずにピクセルデータを差し替える。毎フレームデータを更新してグリフをアニメーションさせるのに便利",
+                    "desc_ko": "이미 등록된 글리프의 atlas 위치를 바꾸지 않고 픽셀 데이터를 교체. 매 프레임 데이터를 갱신해 글리프를 애니메이션할 때 유용",
                     "examples": [
                         {
                             "name": "bitmapStringExtendedExample",
@@ -14764,8 +14764,8 @@ const TrussCAPI = {
                         "current",
                         "inspector"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "現在選択中のノード(最後にクリックされたノード、Nodeシステムが保持。なければnull)を取得。inspectorなどのツールがこれを読み取り、setSelectedNode()で操作できる",
+                    "desc_ko": "현재 선택된 노드(마지막으로 클릭된 노드, Node 시스템이 보유. 없으면 null)를 얻음. inspector 같은 도구가 이를 읽고 setSelectedNode()로 조작 가능",
                     "related": [
                         "setSelectedNode",
                         "getRootNode",
@@ -14786,8 +14786,8 @@ const TrussCAPI = {
                         "set active",
                         "inspector"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "現在選択中のノードを設定。nullptrを渡すと選択を解除",
+                    "desc_ko": "현재 선택된 노드를 설정. nullptr을 전달하면 선택을 해제",
                     "related": [
                         "getSelectedNode"
                     ]
@@ -14806,8 +14806,8 @@ const TrussCAPI = {
                         "top",
                         "hierarchy"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "実行中のAppをノードツリーのルートとして取得(アプリ生存中はフレームワークが設定、それ以外はnull)。アプリが自身を渡し回さずともツールがツリー全体を辿れる",
+                    "desc_ko": "실행 중인 App을 노드 트리의 루트로 얻음(앱이 살아있는 동안 프레임워크가 설정, 그 외에는 null). 앱이 자신을 넘기지 않아도 도구가 트리 전체를 순회 가능",
                     "related": [
                         "getSelectedNode",
                         "Node"
@@ -15736,8 +15736,8 @@ const TrussCAPI = {
                         "viewpoint",
                         "query"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "specular/PBRの視線ベクトルに使う現在のカメラ位置",
+                    "desc_ko": "specular/PBR 시선 벡터에 사용하는 현재 카메라 위치",
                     "related": [
                         "setCameraPosition",
                         "setMaterial"
@@ -16132,8 +16132,8 @@ const TrussCAPI = {
                         "active lights",
                         "query"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ja": "現在アクティブなライトの数",
+                    "desc_ko": "현재 활성화된 light 개수"
                 },
                 {
                     "name": "getEnvironment",
@@ -16150,8 +16150,8 @@ const TrussCAPI = {
                         "query",
                         "ambient"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "現在の環境(IBL/skybox)を取得、未設定ならnullptr",
+                    "desc_ko": "현재 환경(IBL/skybox)을 얻음, 설정되지 않았으면 nullptr",
                     "related": [
                         "Environment",
                         "setEnvironment"
@@ -16172,8 +16172,8 @@ const TrussCAPI = {
                         "illumination",
                         "normal"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "ワールド座標と法線に対するCPU側のライティング結果。指定したマテリアルで全アクティブライトを合算",
+                    "desc_ko": "월드 좌표와 법선에 대한 CPU 측 라이팅 결과. 지정한 material로 모든 활성 light를 합산",
                     "related": [
                         "Material",
                         "Light",
@@ -17117,8 +17117,8 @@ const TrussCAPI = {
                         "format",
                         "count"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "TextureFormatのカラーチャンネル数(1、2、または4)",
+                    "desc_ko": "TextureFormat의 컬러 채널 수(1, 2 또는 4)",
                     "related": [
                         "TextureFormat",
                         "PixelFormat"
@@ -17138,8 +17138,8 @@ const TrussCAPI = {
                         "format",
                         "byte"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "TextureFormatの1ピクセルあたりのバイト数",
+                    "desc_ko": "TextureFormat의 픽셀당 바이트 수",
                     "related": [
                         "TextureFormat",
                         "PixelFormat"
@@ -17159,8 +17159,8 @@ const TrussCAPI = {
                         "format",
                         "type"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "TextureFormatが浮動小数点成分を使うかどうか",
+                    "desc_ko": "TextureFormat이 부동소수점 성분을 사용하는지 여부",
                     "related": [
                         "TextureFormat"
                     ]
@@ -19735,8 +19735,8 @@ const TrussCAPI = {
                         "prores",
                         "format"
                     ],
-                    "desc_ja": "",
-                    "desc_ko": "",
+                    "desc_ja": "VideoCodec値の人間が読める名前を返す(例: \"H.264\"、\"HEVC\"、\"ProRes 422\")",
+                    "desc_ko": "VideoCodec 값의 사람이 읽을 수 있는 이름을 반환(예: \"H.264\", \"HEVC\", \"ProRes 422\")",
                     "related": [
                         "VideoCodec",
                         "VideoWriter"
@@ -27044,8 +27044,8 @@ const TrussCAPI = {
                 "playable",
                 "base sound"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "Sound::play()が扱えるものの抽象基底。具象サブクラスは2つ: SoundBuffer(eager、全PCMをRAMに保持)とSoundStream(ディスクからオンデマンドにデコード)。共有のchannels / sampleRateフィールドとkind() / getDuration()インターフェースを保持",
+            "desc_ko": "Sound::play()가 다룰 수 있는 것의 추상 기반. 구체 서브클래스 2개: SoundBuffer(eager, 전체 PCM을 RAM에 보유)와 SoundStream(디스크에서 on-demand 디코딩). 공유 channels / sampleRate 필드와 kind() / getDuration() 인터페이스를 보유",
             "related": [
                 "SoundBuffer",
                 "SoundStream",
@@ -27094,8 +27094,8 @@ const TrussCAPI = {
                 "waveform",
                 "procedural audio"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "Eagerなサウンドソース: ファイル全体をinterleaved float PCMにデコードしRAMに保持。SoundSourceから派生(channels / sampleRate / kind() / getDuration()を継承)。波形ジェネレータ、ADSRエンベロープ、ミキシングヘルパーも備え、procedural-audioのスクラッチバッファも兼ねる。短いSFXやゼロレイテンシなplay / seek / マルチインスタンスに最適",
+            "desc_ko": "Eager 사운드 소스: 파일 전체를 interleaved float PCM으로 디코딩해 RAM에 보유. SoundSource에서 파생(channels / sampleRate / kind() / getDuration() 상속). 파형 제너레이터, ADSR 엔벨로프, 믹싱 헬퍼도 제공해 procedural-audio 스크래치 버퍼 역할도 겸함. 짧은 SFX와 zero-latency play / seek / 다중 인스턴스에 최적",
             "examples": [
                 {
                     "name": "AllFeaturesExample",
@@ -27383,8 +27383,8 @@ const TrussCAPI = {
                 "disk audio",
                 "on demand"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "ストリーミングなサウンドソース: ファイルを開いたままにし、全PCMをRAMに置く代わりにvoiceごとの小さなring bufferへオンデマンドにデコードする。SoundSourceから派生(channels / sampleRate / kind() / getDuration()を継承)。長尺ファイル(BGM、ポッドキャスト)に最適。SoundBufferとのトレードオフ: setSpeed()は1.0として扱われ、setPosition()は約10 msのrefillでseekし、polyphonyスロットごとにopenファイルハンドル+デコーダ+ring bufferのコストがかかる",
+            "desc_ko": "스트리밍 사운드 소스: 파일을 열어둔 채로, 전체 PCM을 RAM에 두는 대신 voice별 작은 ring buffer로 on-demand 디코딩. SoundSource에서 파생(channels / sampleRate / kind() / getDuration() 상속). 긴 파일(BGM, 팟캐스트)에 최적. SoundBuffer 대비 트레이드오프: setSpeed()는 1.0으로 처리되고, setPosition()은 약 10 ms의 refill로 seek하며, polyphony 슬롯마다 open 파일 핸들 + 디코더 + ring buffer 비용이 듦",
             "related": [
                 "SoundBuffer",
                 "SoundSource",
@@ -27454,8 +27454,8 @@ const TrussCAPI = {
                 "sound engine",
                 "output"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "miniaudio ベースのシングルトンミキサーエンジン。出力デバイスを所有し、再生中の全 Sound ボイスをミックスし、リアルタイムの audioOut / audioIn / audioDeviceChanged イベントと FFT 解析リングバッファを公開する。AudioEngine::getInstance() でアクセス。多くのアプリは Sound クラスとグローバルの initAudio() / shutdownAudio() ヘルパー経由で間接的に利用する",
+            "desc_ko": "miniaudio 기반 싱글톤 믹서 엔진. 출력 디바이스를 소유하고, 재생 중인 모든 Sound 보이스를 믹스하며, 실시간 audioOut / audioIn / audioDeviceChanged 이벤트와 FFT 분석 링 버퍼를 노출한다. AudioEngine::getInstance() 로 접근. 대부분의 앱은 Sound 클래스와 전역 initAudio() / shutdownAudio() 헬퍼를 통해 간접적으로 사용한다",
             "examples": [
                 {
                     "name": "audioDeviceExample",
@@ -27579,8 +27579,8 @@ const TrussCAPI = {
                 "capture",
                 "recording input"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "マイク入力 (miniaudio)。入力デバイスを開き、最新サンプルをリングバッファ経由で公開する。共有インスタンスはグローバルの getMicInput() で取得し、start() する。getMicAnalysisBuffer() は getBuffer() の簡易ラッパー",
+            "desc_ko": "마이크 입력 (miniaudio). 입력 디바이스를 열고 최신 샘플을 링 버퍼를 통해 노출한다. 공유 인스턴스는 전역 getMicInput() 으로 접근한 뒤 start() 한다. getMicAnalysisBuffer() 는 getBuffer() 의 편의 래퍼",
             "related": [
                 "getMicInput",
                 "AudioEngine",
@@ -27650,8 +27650,8 @@ const TrussCAPI = {
                 "channels",
                 "init options"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "AudioEngine::init() に渡してエンジンのデフォルト (サンプルレート、チャンネル、バッファサイズ、ポリフォニー、デバイス) を上書きする設定。deviceName が空ならシステム既定の再生デバイスを選択する",
+            "desc_ko": "AudioEngine::init() 에 전달하여 엔진 기본값 (샘플레이트, 채널, 버퍼 크기, 폴리포니, 디바이스) 을 오버라이드하는 설정. deviceName 이 비어 있으면 시스템 기본 재생 디바이스를 선택",
             "examples": [
                 {
                     "name": "audioSynthExample",
@@ -27705,8 +27705,8 @@ const TrussCAPI = {
                 "output",
                 "playback"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "AudioEngine::listDevices() が返すリストの 1 エントリ",
+            "desc_ko": "AudioEngine::listDevices() 가 반환하는 목록의 한 항목",
             "examples": [
                 {
                     "name": "audioSynthExample",
@@ -27745,8 +27745,8 @@ const TrussCAPI = {
                 "switch",
                 "reinit"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "AudioEngine::audioDeviceChanged イベントの引数型。init() 成功ごと (初回・再初期化とも) に発火する。解決されたデバイスの実名を報告する (空にはならない)",
+            "desc_ko": "AudioEngine::audioDeviceChanged 이벤트의 인자 타입. init() 성공 시마다 (최초·재초기화 모두) 발생. 해석된 디바이스의 실제 이름을 보고 (비지 않음)",
             "examples": [
                 {
                     "name": "audioDeviceExample",
@@ -27801,8 +27801,8 @@ const TrussCAPI = {
                 "dsp",
                 "callback"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "AudioEngine::audioOut イベントの引数型。1 回のオーディオコールバック分のインターリーブされた可変出力バッファを保持する。リスナーは data に自分の寄与を加算すること (ボイスは既にミックス済み)。ここからエンジン API を呼ばないこと",
+            "desc_ko": "AudioEngine::audioOut 이벤트의 인자 타입. 한 번의 오디오 콜백 분량의 인터리브된 가변 출력 버퍼를 보유. 리스너는 data 에 자신의 기여분을 더해야 함 (보이스는 이미 믹스됨). 여기서 엔진 API 를 호출하지 말 것",
             "examples": [
                 {
                     "name": "audioSynthExample",
@@ -27857,8 +27857,8 @@ const TrussCAPI = {
                 "capture",
                 "buffer"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "AudioEngine::audioIn イベントの引数型。1 回のキャプチャコールバック分のインターリーブされた読み取り専用マイク入力を保持する。処理は素早く済ませて返すこと。ここからエンジン API を呼ばないこと",
+            "desc_ko": "AudioEngine::audioIn 이벤트의 인자 타입. 한 번의 캡처 콜백 분량의 인터리브된 읽기 전용 마이크 입력을 보유. 처리를 빠르게 끝내고 반환할 것. 여기서 엔진 API 를 호출하지 말 것",
             "related": [
                 "audioIn",
                 "MicInput",
@@ -27903,8 +27903,8 @@ const TrussCAPI = {
                 "notes",
                 "chip"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "チップチューンノート (ChipSoundNote + 開始時刻) のタイムラインで、1 つのミックス済み Sound にビルドする。時刻ごとにノートを追加し、build() を呼んで ADSR とクリッピングを適用したミックスをレンダリングする",
+            "desc_ko": "칩튠 노트 (ChipSoundNote + 시작 시각) 의 타임라인으로, 하나의 믹스된 Sound 로 빌드한다. 시각마다 노트를 추가한 뒤 build() 를 호출해 ADSR 과 클리핑을 적용한 믹스를 렌더링한다",
             "examples": [
                 {
                     "name": "chipSoundExample",
@@ -27988,8 +27988,8 @@ const TrussCAPI = {
                 "output",
                 "trace"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "コンソール・ファイル出力と onLog イベントを備えたロギングコア。グローバルインスタンスは getLogger() でアクセス",
+            "desc_ko": "콘솔·파일 출력과 onLog 이벤트를 갖춘 로깅 코어. 전역 인스턴스는 getLogger() 로 접근",
             "related": [
                 "getLogger",
                 "LogLevel",
@@ -28090,8 +28090,8 @@ const TrussCAPI = {
                 "listeners",
                 "signals"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "フレームワークの全コアイベントのハブ。各メンバーは .listen(callback) で購読する Event。グローバルインスタンスは events() でアクセス",
+            "desc_ko": "프레임워크의 모든 코어 이벤트 허브. 각 멤버는 .listen(callback) 으로 구독하는 Event. 전역 인스턴스는 events() 로 접근",
             "related": [
                 "events",
                 "Event",
@@ -28221,8 +28221,8 @@ const TrussCAPI = {
                 "notify",
                 "delegate"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "listen(callback) で購読し notify(arg) で発火する汎用イベント。テンプレートパラメータはリスナーに参照で渡される引数の型。Event<void> は引数なしの特殊化(callback も notify も引数なし)。listen() は破棄時に切断する EventListener RAII トークンを返す",
+            "desc_ko": "listen(callback)으로 구독하고 notify(arg)로 발생시키는 범용 이벤트. 템플릿 파라미터는 리스너에 참조로 전달되는 인자 타입. Event<void>는 인자 없는 특수화(callback과 notify 모두 인자 없음). listen()은 파괴 시 연결을 끊는 EventListener RAII 토큰을 반환",
             "related": [
                 "audioOut",
                 "audioIn",
@@ -28282,8 +28282,8 @@ const TrussCAPI = {
                 "disconnect",
                 "handle"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "Event::listen() が返す RAII トークン。このトークンが破棄または再代入されるとリスナーは自動的に切断される。ムーブのみ可",
+            "desc_ko": "Event::listen()이 반환하는 RAII 토큰. 이 토큰이 파괴되거나 재할당되면 리스너는 자동으로 연결이 끊김. 이동 전용",
             "examples": [
                 {
                     "name": "eventsExample",
@@ -28325,8 +28325,8 @@ const TrussCAPI = {
                 "input",
                 "args"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "keyPressed / keyReleased イベントの引数",
+            "desc_ko": "keyPressed / keyReleased 이벤트의 인자",
             "examples": [
                 {
                     "name": "eventsExample",
@@ -28386,8 +28386,8 @@ const TrussCAPI = {
                 "press",
                 "pointer"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "mousePressed / mouseReleased イベントの引数。pos はローカル空間、globalPos はスクリーン空間(アプリレベルでは一致)",
+            "desc_ko": "mousePressed / mouseReleased 이벤트의 인자. pos는 로컬 공간, globalPos는 스크린 공간(앱 레벨에서는 동일)",
             "related": [
                 "mousePressed",
                 "MouseMoveEventArgs",
@@ -28457,8 +28457,8 @@ const TrussCAPI = {
                 "cursor",
                 "pointer"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "mouseMoved の引数(ボタンを押さずにカーソルが移動)",
+            "desc_ko": "mouseMoved의 인자(버튼을 누르지 않고 커서가 이동)",
             "examples": [
                 {
                     "name": "emptyExample",
@@ -28552,8 +28552,8 @@ const TrussCAPI = {
                 "cursor",
                 "pointer"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "mouseDragged の引数(ボタンを押しながらカーソルが移動)",
+            "desc_ko": "mouseDragged의 인자(버튼을 누른 채 커서가 이동)",
             "examples": [
                 {
                     "name": "emptyExample",
@@ -28652,8 +28652,8 @@ const TrussCAPI = {
                 "zoom",
                 "trackpad"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "mouseScrolled イベントの引数",
+            "desc_ko": "mouseScrolled 이벤트의 인자",
             "examples": [
                 {
                     "name": "emptyExample",
@@ -28730,8 +28730,8 @@ const TrussCAPI = {
                 "size",
                 "viewport"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "windowResized イベントの引数",
+            "desc_ko": "windowResized 이벤트의 인자",
             "related": [
                 "windowResized"
             ],
@@ -28758,8 +28758,8 @@ const TrussCAPI = {
                 "dropped",
                 "import"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "filesDropped イベントの引数",
+            "desc_ko": "filesDropped 이벤트의 인자",
             "related": [
                 "ClipboardPastedEventArgs"
             ],
@@ -28790,8 +28790,8 @@ const TrussCAPI = {
                 "copy",
                 "text"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "clipboardPasted イベントの引数。Web プラットフォームでクリップボードを読む唯一の確実な方法",
+            "desc_ko": "clipboardPasted 이벤트의 인자. Web 플랫폼에서 클립보드를 읽는 유일하게 확실한 방법",
             "examples": [
                 {
                     "name": "clipboardExample",
@@ -28820,8 +28820,8 @@ const TrussCAPI = {
                 "multitouch",
                 "gesture"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "TouchEventArgs 内の単一の指",
+            "desc_ko": "TouchEventArgs 내의 단일 손가락",
             "related": [
                 "TouchEventArgs"
             ],
@@ -28864,8 +28864,8 @@ const TrussCAPI = {
                 "gesture",
                 "mobile"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "touchPressed / touchMoved / touchReleased イベントの引数(マルチタッチ、Android/iOS)",
+            "desc_ko": "touchPressed / touchMoved / touchReleased 이벤트의 인자(멀티터치, Android/iOS)",
             "examples": [
                 {
                     "name": "systemInfoExample",
@@ -28903,8 +28903,8 @@ const TrussCAPI = {
                 "close",
                 "shutdown"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "exitRequested イベントの引数",
+            "desc_ko": "exitRequested 이벤트의 인자",
             "related": [
                 "requestExitApp",
                 "events"
@@ -28927,8 +28927,8 @@ const TrussCAPI = {
                 "console",
                 "onlog"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "各ログメッセージで渡される引数(level、text、timestamp)",
+            "desc_ko": "각 로그 메시지마다 전달되는 인자(level, text, timestamp)",
             "related": [
                 "Logger",
                 "LogLevel",
@@ -28962,8 +28962,8 @@ const TrussCAPI = {
                 "terminal",
                 "input"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "console イベントの引数(stdin から受け取ったコマンドライン)",
+            "desc_ko": "console 이벤트의 인자(stdin에서 수신한 명령줄)",
             "related": [
                 "events"
             ],
@@ -28991,8 +28991,8 @@ const TrussCAPI = {
                 "quad",
                 "filter"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "フルスクリーンのポストプロセスエフェクト用 Shader 特殊化(position + texcoord クアッド)。setParams で uniform を設定し、draw でフルスクリーンクアッドを描画",
+            "desc_ko": "전체 화면 포스트 프로세싱 효과용 Shader 특수화(position + texcoord 쿼드). setParams로 uniform을 설정한 뒤 draw로 전체 화면 쿼드를 렌더링",
             "examples": [
                 {
                     "name": "fullscreenShaderExample",
@@ -29042,8 +29042,8 @@ const TrussCAPI = {
                 "line",
                 "direction"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "原点と正規化された方向を持つ Ray。統一されたヒットテストとピッキングに使用",
+            "desc_ko": "원점과 정규화된 방향을 가진 Ray. 통합된 히트 테스트와 피킹에 사용",
             "related": [
                 "HitResult",
                 "EasyCam",
@@ -29072,8 +29072,8 @@ const TrussCAPI = {
                 "lineargamma",
                 "colorspace"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "リニアRGB空間の色（ガンマエンコードなし）、各チャンネル0.0-1.0のfloat",
+            "desc_ko": "선형 RGB 공간의 색상(감마 인코딩 없음), 채널당 0.0-1.0 float",
             "related": [
                 "Color",
                 "ColorOKLab",
@@ -29112,8 +29112,8 @@ const TrussCAPI = {
                 "colorspace",
                 "lab"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "OKLab知覚色空間の色（明度＋2つの反対色軸）",
+            "desc_ko": "OKLab 지각 색공간의 색상(명도 + 두 개의 반대색 축)",
             "related": [
                 "toOKLab",
                 "ColorOKLCH",
@@ -29154,8 +29154,8 @@ const TrussCAPI = {
                 "nlohmann",
                 "serialize"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "nlohmann::json のエイリアス（using Json = nlohmann::json）。loadJson、saveJson、parseJson、toJsonString がインメモリのJSON値型として使用する。完全なAPIは nlohmann/json のドキュメントを参照",
+            "desc_ko": "nlohmann::json의 별칭(using Json = nlohmann::json). loadJson, saveJson, parseJson, toJsonString가 인메모리 JSON 값 타입으로 사용. 전체 API는 nlohmann/json 문서 참조",
             "examples": [
                 {
                     "name": "jsonXmlExample",
@@ -29182,8 +29182,8 @@ const TrussCAPI = {
                 "pugixml",
                 "markup"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "pugixml をラップしたXMLドキュメント。XMLの読み込み・保存・問い合わせを行う。ノード単位のアクセスは root() と child() が返す XmlNode 経由",
+            "desc_ko": "pugixml을 감싼 XML 문서. XML 로드, 저장, 질의 수행. 노드 단위 접근은 root()와 child()가 반환하는 XmlNode를 통함",
             "examples": [
                 {
                     "name": "jsonXmlExample",
@@ -29305,8 +29305,8 @@ const TrussCAPI = {
                 "root",
                 "tree"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "pugi::xml_document のエイリアス。Xml ラッパーの基盤となる、所有権を持つXMLドキュメント型。完全なAPIは pugixml のドキュメントを参照",
+            "desc_ko": "pugi::xml_document의 별칭. Xml 래퍼의 기반이 되는 소유 XML 문서 타입. 전체 API는 pugixml 문서 참조",
             "related": [
                 "Xml",
                 "XmlNode"
@@ -29322,8 +29322,8 @@ const TrussCAPI = {
                 "pugixml",
                 "tag"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "pugi::xml_node のエイリアス。XMLドキュメント内の単一の要素/ノードで、Xml::root() と Xml::child() が返す。ノードの問い合わせ・操作メソッドは pugixml のドキュメントを参照",
+            "desc_ko": "pugi::xml_node의 별칭. XML 문서 내 단일 요소/노드로, Xml::root()와 Xml::child()가 반환. 노드 질의 및 조작 메서드는 pugixml 문서 참조",
             "related": [
                 "Xml",
                 "XmlAttribute",
@@ -29340,8 +29340,8 @@ const TrussCAPI = {
                 "pugixml",
                 "name value"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "pugi::xml_attribute のエイリアス。XmlNode 上の名前/値の属性。APIは pugixml のドキュメントを参照",
+            "desc_ko": "pugi::xml_attribute의 별칭. XmlNode의 이름/값 속성. API는 pugixml 문서 참조",
             "related": [
                 "XmlNode",
                 "Xml"
@@ -29357,8 +29357,8 @@ const TrussCAPI = {
                 "error",
                 "status"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "pugi::xml_parse_result のエイリアス。XMLパース操作の結果で、成功ステータス・エラー説明・オフセットを保持する",
+            "desc_ko": "pugi::xml_parse_result의 별칭. XML 파싱 작업의 결과로, 성공 상태, 오류 설명, 오프셋을 담음",
             "related": [
                 "Xml",
                 "parseXml"
@@ -29375,8 +29375,8 @@ const TrussCAPI = {
                 "attach",
                 "plugin"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "Node にアタッチできる振る舞いの基底クラス。サブクラス化してライフサイクルと入力フックをオーバーライドし、node->addMod<T>() でアタッチする。ライフサイクル: アタッチ時に setup()、以降毎フレーム earlyUpdate() -> Node::update() -> update() -> draw()、削除時に onDestroy()。isExclusive() をオーバーライドすると Node ごとに1インスタンスのみ許可、canAttachTo() でアタッチ先を制限できる",
+            "desc_ko": "Node에 부착 가능한 동작 기반 클래스. 서브클래싱하여 라이프사이클과 입력 훅을 오버라이드하고 node->addMod<T>()로 부착. 라이프사이클: 부착 시 setup(), 이후 매 프레임 earlyUpdate() -> Node::update() -> update() -> draw(), 제거 시 onDestroy(). isExclusive()를 오버라이드하면 Node당 한 인스턴스만 허용, canAttachTo()로 부착 대상을 제한",
             "related": [
                 "Node",
                 "LayoutMod",
@@ -29568,8 +29568,8 @@ const TrussCAPI = {
                 "press",
                 "control"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "シンプルなクリック可能ボタンノード（RectNode のサブクラス）。normalColor/hoverColor/pressColor と label を設定すると、ホバー/押下で色が変わる塗りつぶし矩形と中央寄せのラベルを描画する。イベントは生成時に有効化される。クリックは継承した mousePressed/mouseReleased イベントで受け取る",
+            "desc_ko": "간단한 클릭 가능 버튼 노드(RectNode 서브클래스). normalColor/hoverColor/pressColor와 label을 설정하면 호버/누름 시 색이 바뀌는 채워진 사각형과 가운데 정렬 라벨을 그림. 이벤트는 생성 시 활성화됨. 클릭은 상속된 mousePressed/mouseReleased 이벤트로 수신",
             "related": [
                 "RectNode",
                 "Node",
@@ -29635,8 +29635,8 @@ const TrussCAPI = {
                 "concurrent",
                 "ofthread"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "バックグラウンドスレッドの基底クラス（ofThread 互換）。サブクラス化して protected の純粋仮想 threadedFunction() を while (isThreadRunning()) { ... } ループでオーバーライドし、startThread()/stopThread()/waitForThread() で制御する。データ共有用に protected の mutex dataMutex_ が利用できる",
+            "desc_ko": "백그라운드 스레드의 기반 클래스(ofThread 호환). 서브클래싱하여 protected 순수 가상 threadedFunction()을 while (isThreadRunning()) { ... } 루프로 오버라이드한 뒤 startThread()/stopThread()/waitForThread()로 제어. 데이터 공유용 protected mutex dataMutex_가 제공됨",
             "related": [
                 "ThreadChannel",
                 "isMainThread"
@@ -29753,8 +29753,8 @@ const TrussCAPI = {
                 "producer consumer",
                 "pipe"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "スレッド間の一方向通信用のスレッドセーフなFIFOキュー（ofThreadChannel 互換）、template<typename T>。Producer-Consumer パターン: ワーカースレッドが値を send() し、別のスレッドが receive() する。双方向通信には2つのチャンネルを使う",
+            "desc_ko": "스레드 간 단방향 통신용 스레드 안전 FIFO 큐(ofThreadChannel 호환), template<typename T>. Producer-Consumer 패턴: 워커 스레드가 값을 send()하고 다른 스레드가 receive()함. 양방향 통신에는 채널 두 개를 사용",
             "related": [
                 "Thread"
             ],
@@ -29852,8 +29852,8 @@ const TrussCAPI = {
                 "test",
                 "select"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "ノードのヒットテスト結果 (Node::HitResult)。Node::findHitNode() / findHitNodeFromScreen() が返す。何かにヒットしたかは hit() で確認",
+            "desc_ko": "노드 히트 테스트 결과 (Node::HitResult). Node::findHitNode() / findHitNodeFromScreen()가 반환. 무언가에 맞았는지는 hit()으로 확인",
             "related": [
                 "Ray",
                 "Node"
@@ -29898,8 +29898,8 @@ const TrussCAPI = {
                 "node",
                 "nonowning"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "weak_ptr<Node> のエイリアス (using NodeWeakPtr = weak_ptr<Node>)。Node への非所有の弱参照。ノードがまだ存在すれば lock() で NodePtr を取得",
+            "desc_ko": "weak_ptr<Node>의 별칭 (using NodeWeakPtr = weak_ptr<Node>). Node에 대한 비소유 약한 참조. 노드가 아직 존재하면 lock()으로 NodePtr를 얻음",
             "related": [
                 "Node",
                 "getRootNode"
@@ -29916,8 +29916,8 @@ const TrussCAPI = {
                 "position",
                 "latitude"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "getLocation() が返す GPS / WiFi 位置情報",
+            "desc_ko": "getLocation()이 반환하는 GPS / WiFi 위치 정보",
             "related": [
                 "getLocation"
             ],
@@ -29954,8 +29954,8 @@ const TrussCAPI = {
                 "timing",
                 "refresh"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "getFpsSettings() が返す FPS 設定。レートは VSYNC (-1)、EVENT_DRIVEN (0) のセンチネル、または固定 fps",
+            "desc_ko": "getFpsSettings()가 반환하는 FPS 설정. 레이트는 VSYNC (-1), EVENT_DRIVEN (0) 센티넬 또는 고정 fps",
             "related": [
                 "getFpsSettings",
                 "setFps",
@@ -29995,8 +29995,8 @@ const TrussCAPI = {
                 "fullscreen",
                 "startup"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "起動時にアプリへ渡すウィンドウ設定 (サイズ、タイトル、DPI、MSAA、フルスクリーン、装飾、VSync)。セッターはチェイン可能",
+            "desc_ko": "시작 시 앱에 전달되는 윈도우 설정 (크기, 제목, DPI, MSAA, 풀스크린, 장식, VSync). 세터는 체인 가능",
             "related": [
                 "runApp",
                 "setWindowSize",
@@ -30149,8 +30149,8 @@ const TrussCAPI = {
                 "server",
                 "config"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "runHeadlessApp() 用の設定 (ウィンドウ/グラフィックスなし)。現状は目標 update レートのみ",
+            "desc_ko": "runHeadlessApp()용 설정 (윈도우/그래픽 없음). 현재는 목표 update 레이트만",
             "related": [
                 "runHeadlessApp",
                 "WindowSettings"
@@ -30185,8 +30185,8 @@ const TrussCAPI = {
                 "picker",
                 "browse"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "ロード/セーブのファイルダイアログの結果",
+            "desc_ko": "불러오기/저장 파일 대화상자의 결과",
             "examples": [
                 {
                     "name": "fileDialogExample",
@@ -30228,8 +30228,8 @@ const TrussCAPI = {
                 "homogeneous",
                 "xyzw"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "4D ベクトル (x, y, z, w)。同次座標や RGBA 形式のデータに使用",
+            "desc_ko": "4D 벡터 (x, y, z, w). 동차 좌표 및 RGBA 형식 데이터에 사용",
             "related": [
                 "Vec3",
                 "Vec2",
@@ -30363,8 +30363,8 @@ const TrussCAPI = {
                 "affine",
                 "2d"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "2D アフィン/ホモグラフィ変換用の 3x3 行列 (行優先)。静的ファクトリとホモグラフィソルバを含む",
+            "desc_ko": "2D 아핀/호모그래피 변환용 3x3 행렬 (행 우선). 정적 팩토리와 호모그래피 솔버 포함",
             "related": [
                 "Mat4",
                 "Vec2"
@@ -30476,8 +30476,8 @@ const TrussCAPI = {
                 "grabber",
                 "live"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "Webカメラのキャプチャソース。setup() を一度呼び、毎フレーム update()。getTexture() (HasTexture 経由) でライブフレームを取得。ムーブのみ。macOS ではカメラ権限を自動でリクエスト",
+            "desc_ko": "웹캠 캡처 소스. setup()을 한 번 호출하고 매 프레임 update(). getTexture() (HasTexture 경유)로 라이브 프레임을 얻음. 이동 전용. macOS에서는 카메라 권한을 자동으로 요청",
             "examples": [
                 {
                     "name": "videoGrabberExample",
@@ -30710,8 +30710,8 @@ const TrussCAPI = {
                 "transition",
                 "motion"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "型 T の値をイージング付きでアニメーション。lerp 可能な任意の型（float, Vec2, Vec3, Vec4, Color など）にテンプレート化。start() を呼ぶと events().update で毎フレーム自動更新。チェイン可能なセッターで設定する",
+            "desc_ko": "T 타입 값을 이징과 함께 애니메이션. lerp 가능한 임의 타입(float, Vec2, Vec3, Vec4, Color 등)으로 템플릿화. start() 호출 시 events().update로 매 프레임 자동 갱신. 체이닝 가능한 세터로 설정",
             "examples": [
                 {
                     "name": "tweenExample",
@@ -30942,8 +30942,8 @@ const TrussCAPI = {
                 "video",
                 "info"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "利用可能なカメラデバイスの情報。VideoGrabber::listDevices() が返す",
+            "desc_ko": "사용 가능한 카메라 디바이스 정보. VideoGrabber::listDevices()가 반환",
             "related": [
                 "VideoGrabber",
                 "listDevices"
@@ -30977,8 +30977,8 @@ const TrussCAPI = {
                 "codec",
                 "export"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "VideoWriter::open()、ScreenRecorder::start()、startRecording() に渡すエンコーダ設定",
+            "desc_ko": "VideoWriter::open(), ScreenRecorder::start(), startRecording()에 전달하는 인코더 설정",
             "related": [
                 "startRecording",
                 "start",
@@ -31020,8 +31020,8 @@ const TrussCAPI = {
                 "pixels",
                 "codepoint"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "registerGlyph() で登録するビットマップグリフ。codepoint とパックされた 1-bit ピクセル行。data ポインタはすべての drawBitmapString 呼び出しより長く生存する必要がある",
+            "desc_ko": "registerGlyph()로 등록하는 비트맵 글리프. codepoint와 패킹된 1-bit 픽셀 행. data 포인터는 모든 drawBitmapString 호출보다 오래 살아 있어야 함",
             "examples": [
                 {
                     "name": "bitmapStringExtendedExample",
@@ -31065,8 +31065,8 @@ const TrussCAPI = {
                 "character",
                 "typeset"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "Font::forEachGlyph が出力するレイアウト済みグリフ 1 個（Font::PlacedGlyph としてネスト）。最終的な codepoint とペン位置を持ち、ビジターがレイアウトパスとは独立に quad 描画・ベクターパス生成・ヒットテストを行える",
+            "desc_ko": "Font::forEachGlyph가 출력하는 배치 완료된 글리프 하나(Font::PlacedGlyph로 중첩). 최종 codepoint와 펜 위치를 담아, 비지터가 레이아웃 패스와 독립적으로 quad 렌더링, 벡터 경로 생성, 히트 테스트를 수행 가능",
             "related": [
                 "GlyphVisitor",
                 "Font",
@@ -31120,8 +31120,8 @@ const TrussCAPI = {
                 "font",
                 "iterate"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "function<void(const Font::PlacedGlyph&)> のエイリアス（Font::GlyphVisitor としてネスト）。Font::forEachGlyph が受け取るグリフごとのコールバック型",
+            "desc_ko": "function<void(const Font::PlacedGlyph&)>의 별칭(Font::GlyphVisitor로 중첩). Font::forEachGlyph가 받는 글리프별 콜백 타입",
             "related": [
                 "PlacedGlyph",
                 "Font"
@@ -31138,8 +31138,8 @@ const TrussCAPI = {
                 "caps",
                 "joins"
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "キャップ・ジョイン・マイターリミットを持つ可変幅ポリラインのストロークジオメトリ。点列または Path から構築し、update() と draw() を行う",
+            "desc_ko": "캡, 조인, 마이터 리미트를 가진 가변 폭 폴리라인 스트로크 지오메트리. 점들 또는 Path로 구축한 뒤 update()와 draw() 수행",
             "examples": [
                 {
                     "name": "strokeMeshExample",
@@ -32739,7 +32739,7 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "縦中横: 縦書き内の Latin / 数字の連続の配置方法",
-            "desc_ko": "",
+            "desc_ko": "세로쓰기 안 가로쓰기(縦中横): 세로 텍스트 내에서 Latin / 숫자 연속을 배치하는 방식",
             "related": [
                 "WritingMode",
                 "KinsokuLevel"
@@ -32775,7 +32775,7 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "縦書き / 日本語の禁則処理レベル",
-            "desc_ko": "",
+            "desc_ko": "세로쓰기 / 일본어 텍스트의 줄바꿈(금칙) 엄격도",
             "related": [
                 "WritingMode",
                 "TcyMode"
@@ -32830,8 +32830,8 @@ const TrussCAPI = {
                     "desc": "All orientations except portrait-upside-down"
                 }
             ],
-            "desc_ja": "",
-            "desc_ko": "",
+            "desc_ja": "setOrientationに渡す画面向きマスク(iOS/Android)。値はビットフラグで|で組み合わせ可能",
+            "desc_ko": "setOrientation에 전달하는 화면 방향 마스크(iOS/Android). 값은 비트 플래그이며 |로 조합 가능",
             "related": [
                 "setOrientation"
             ]
