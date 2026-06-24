@@ -82,7 +82,13 @@ const TrussCAPI = {
                     "snippet": "void mousePressed(float x, float y, int button) {\n\t$0\n}",
                     "keywords": [],
                     "desc_ja": "マウスボタンが押された",
-                    "desc_ko": "마우스 버튼이 눌렸을 때"
+                    "desc_ko": "마우스 버튼이 눌렸을 때",
+                    "examples": [
+                        {
+                            "name": "mouseExample",
+                            "group": "input_output"
+                        }
+                    ]
                 },
                 {
                     "name": "mouseReleased",
@@ -93,7 +99,13 @@ const TrussCAPI = {
                     "snippet": "void mouseReleased(float x, float y, int button) {\n\t$0\n}",
                     "keywords": [],
                     "desc_ja": "マウスボタンが離された",
-                    "desc_ko": "마우스 버튼이 떼졌을 때"
+                    "desc_ko": "마우스 버튼이 떼졌을 때",
+                    "examples": [
+                        {
+                            "name": "mouseExample",
+                            "group": "input_output"
+                        }
+                    ]
                 },
                 {
                     "name": "mouseMoved",
@@ -104,7 +116,13 @@ const TrussCAPI = {
                     "snippet": "void mouseMoved(float x, float y) {\n\t$0\n}",
                     "keywords": [],
                     "desc_ja": "マウスが移動した",
-                    "desc_ko": "마우스가 움직였을 때"
+                    "desc_ko": "마우스가 움직였을 때",
+                    "examples": [
+                        {
+                            "name": "mouseExample",
+                            "group": "input_output"
+                        }
+                    ]
                 },
                 {
                     "name": "mouseDragged",
@@ -115,7 +133,13 @@ const TrussCAPI = {
                     "snippet": "void mouseDragged(float x, float y, int button) {\n\t$0\n}",
                     "keywords": [],
                     "desc_ja": "マウスがドラッグされた",
-                    "desc_ko": "마우스가 드래그되었을 때"
+                    "desc_ko": "마우스가 드래그되었을 때",
+                    "examples": [
+                        {
+                            "name": "mouseExample",
+                            "group": "input_output"
+                        }
+                    ]
                 },
                 {
                     "name": "keyPressed",
@@ -126,7 +150,13 @@ const TrussCAPI = {
                     "snippet": "void keyPressed(int key) {\n\t$0\n}",
                     "keywords": [],
                     "desc_ja": "キーが押された。特殊キーはKEY_*定数、印字可能キーは大文字リテラル（例: key == 'A', key == '1'）で比較",
-                    "desc_ko": "키가 눌렸을 때. 특수 키는 KEY_* 상수, 출력 가능한 키는 대문자 리터럴(예: key == 'A', key == '1')로 비교"
+                    "desc_ko": "키가 눌렸을 때. 특수 키는 KEY_* 상수, 출력 가능한 키는 대문자 리터럴(예: key == 'A', key == '1')로 비교",
+                    "examples": [
+                        {
+                            "name": "keyboardExample",
+                            "group": "input_output"
+                        }
+                    ]
                 },
                 {
                     "name": "keyReleased",
@@ -137,7 +167,13 @@ const TrussCAPI = {
                     "snippet": "void keyReleased(int key) {\n\t$0\n}",
                     "keywords": [],
                     "desc_ja": "キーが離された",
-                    "desc_ko": "키가 떼졌을 때"
+                    "desc_ko": "키가 떼졌을 때",
+                    "examples": [
+                        {
+                            "name": "keyboardExample",
+                            "group": "input_output"
+                        }
+                    ]
                 },
                 {
                     "name": "windowResized",
@@ -199,7 +235,17 @@ const TrussCAPI = {
                     "snippet": "setColor(${1:1.0}, ${2:1.0}, ${3:1.0})",
                     "keywords": [],
                     "desc_ja": "描画色を設定 (0.0-1.0)",
-                    "desc_ko": "그리기 색상을 설정 (0.0-1.0)"
+                    "desc_ko": "그리기 색상을 설정 (0.0-1.0)",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        },
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "setColor",
@@ -210,7 +256,17 @@ const TrussCAPI = {
                     "snippet": "setColor(${1:1.0}, ${2:1.0}, ${3:1.0})",
                     "keywords": [],
                     "desc_ja": "描画色を設定 (0.0-1.0)",
-                    "desc_ko": "그리기 색상을 설정 (0.0-1.0)"
+                    "desc_ko": "그리기 색상을 설정 (0.0-1.0)",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        },
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "setColor",
@@ -221,7 +277,17 @@ const TrussCAPI = {
                     "snippet": "setColor(${1:1.0}, ${2:1.0}, ${3:1.0})",
                     "keywords": [],
                     "desc_ja": "描画色を設定 (0.0-1.0)",
-                    "desc_ko": "그리기 색상을 설정 (0.0-1.0)"
+                    "desc_ko": "그리기 색상을 설정 (0.0-1.0)",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        },
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "setColorHSB",
@@ -299,7 +365,13 @@ const TrussCAPI = {
                         "drawRectSquircle"
                     ],
                     "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.\n",
-                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n"
+                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        }
+                    ]
                 },
                 {
                     "name": "drawRect",
@@ -316,7 +388,13 @@ const TrussCAPI = {
                         "drawRectSquircle"
                     ],
                     "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.\n",
-                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n"
+                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        }
+                    ]
                 },
                 {
                     "name": "drawRect",
@@ -335,7 +413,13 @@ const TrussCAPI = {
                         "drawRectSquircle"
                     ],
                     "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.\n",
-                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n"
+                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        }
+                    ]
                 },
                 {
                     "name": "drawRectRounded",
@@ -432,7 +516,13 @@ const TrussCAPI = {
                         "dot"
                     ],
                     "desc_ja": "円を描画",
-                    "desc_ko": "원 그리기"
+                    "desc_ko": "원 그리기",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        }
+                    ]
                 },
                 {
                     "name": "drawCircle",
@@ -449,7 +539,13 @@ const TrussCAPI = {
                         "dot"
                     ],
                     "desc_ja": "円を描画",
-                    "desc_ko": "원 그리기"
+                    "desc_ko": "원 그리기",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        }
+                    ]
                 },
                 {
                     "name": "drawArc",
@@ -567,7 +663,13 @@ const TrussCAPI = {
                     "snippet": "drawLine(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
                     "keywords": [],
                     "desc_ja": "線を描画（2Dまたは3D）",
-                    "desc_ko": "선 그리기 (2D 또는 3D)"
+                    "desc_ko": "선 그리기 (2D 또는 3D)",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        }
+                    ]
                 },
                 {
                     "name": "drawLine",
@@ -578,7 +680,13 @@ const TrussCAPI = {
                     "snippet": "drawLine(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
                     "keywords": [],
                     "desc_ja": "線を描画（2Dまたは3D）",
-                    "desc_ko": "선 그리기 (2D 또는 3D)"
+                    "desc_ko": "선 그리기 (2D 또는 3D)",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        }
+                    ]
                 },
                 {
                     "name": "drawLine",
@@ -589,7 +697,13 @@ const TrussCAPI = {
                     "snippet": "drawLine(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
                     "keywords": [],
                     "desc_ja": "線を描画（2Dまたは3D）",
-                    "desc_ko": "선 그리기 (2D 또는 3D)"
+                    "desc_ko": "선 그리기 (2D 또는 3D)",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        }
+                    ]
                 },
                 {
                     "name": "drawBezier",
@@ -1272,7 +1386,17 @@ const TrussCAPI = {
                     "snippet": "drawBitmapString(${1:\"text\"}, ${2:x}, ${3:y})",
                     "keywords": [],
                     "desc_ja": "テキストを描画",
-                    "desc_ko": "비트맵 텍스트 그리기"
+                    "desc_ko": "비트맵 텍스트 그리기",
+                    "examples": [
+                        {
+                            "name": "fontExample",
+                            "group": "font"
+                        },
+                        {
+                            "name": "bitmapStringExtendedExample",
+                            "group": "font"
+                        }
+                    ]
                 },
                 {
                     "name": "drawBitmapStringHighlight",
@@ -1553,7 +1677,13 @@ const TrussCAPI = {
                     "snippet": "noFill()",
                     "keywords": [],
                     "desc_ja": "ストロークモードを有効化（シェイプは輪郭のみ）",
-                    "desc_ko": "stroke 모드 활성화 (도형은 외곽선만 표시)"
+                    "desc_ko": "stroke 모드 활성화 (도형은 외곽선만 표시)",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        }
+                    ]
                 },
                 {
                     "name": "setStrokeWeight",
@@ -1977,7 +2107,21 @@ const TrussCAPI = {
                     "snippet": "translate(${1:x}, ${2:y})",
                     "keywords": [],
                     "desc_ja": "原点を移動",
-                    "desc_ko": "원점을 이동"
+                    "desc_ko": "원점을 이동",
+                    "examples": [
+                        {
+                            "name": "easyCamExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "meshAppendExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "translate",
@@ -1988,7 +2132,21 @@ const TrussCAPI = {
                     "snippet": "translate(${1:x}, ${2:y})",
                     "keywords": [],
                     "desc_ja": "原点を移動",
-                    "desc_ko": "원점을 이동"
+                    "desc_ko": "원점을 이동",
+                    "examples": [
+                        {
+                            "name": "easyCamExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "meshAppendExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "rotate",
@@ -2236,7 +2394,21 @@ const TrussCAPI = {
                     "snippet": "pushMatrix()",
                     "keywords": [],
                     "desc_ja": "変換状態を保存",
-                    "desc_ko": "변환 상태를 저장"
+                    "desc_ko": "변환 상태를 저장",
+                    "examples": [
+                        {
+                            "name": "easyCamExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "meshAppendExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "popMatrix",
@@ -2247,7 +2419,21 @@ const TrussCAPI = {
                     "snippet": "popMatrix()",
                     "keywords": [],
                     "desc_ja": "変換状態を復元",
-                    "desc_ko": "변환 상태를 복원"
+                    "desc_ko": "변환 상태를 복원",
+                    "examples": [
+                        {
+                            "name": "easyCamExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "meshAppendExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "getCurrentMatrix",
@@ -3903,7 +4089,13 @@ const TrussCAPI = {
                     "snippet": "sin(${1:x})",
                     "keywords": [],
                     "desc_ja": "正弦",
-                    "desc_ko": "사인"
+                    "desc_ko": "사인",
+                    "examples": [
+                        {
+                            "name": "vectorMathExample",
+                            "group": "math"
+                        }
+                    ]
                 },
                 {
                     "name": "cos",
@@ -7851,7 +8043,13 @@ const TrussCAPI = {
                     "snippet": "mousePressed(${1:x}, ${2:y}, ${3:button})",
                     "keywords": [],
                     "desc_ja": "マウス押下イベントを処理",
-                    "desc_ko": "마우스 누름 이벤트 처리"
+                    "desc_ko": "마우스 누름 이벤트 처리",
+                    "examples": [
+                        {
+                            "name": "mouseExample",
+                            "group": "input_output"
+                        }
+                    ]
                 },
                 {
                     "name": "mouseReleased",
@@ -7862,7 +8060,13 @@ const TrussCAPI = {
                     "snippet": "mouseReleased(${1:x}, ${2:y}, ${3:button})",
                     "keywords": [],
                     "desc_ja": "マウス離上イベントを処理",
-                    "desc_ko": "마우스 떼기 이벤트 처리"
+                    "desc_ko": "마우스 떼기 이벤트 처리",
+                    "examples": [
+                        {
+                            "name": "mouseExample",
+                            "group": "input_output"
+                        }
+                    ]
                 },
                 {
                     "name": "mouseDragged",
@@ -7873,7 +8077,13 @@ const TrussCAPI = {
                     "snippet": "mouseDragged(${1:x}, ${2:y}, ${3:button})",
                     "keywords": [],
                     "desc_ja": "マウスドラッグイベントを処理",
-                    "desc_ko": "마우스 드래그 이벤트 처리"
+                    "desc_ko": "마우스 드래그 이벤트 처리",
+                    "examples": [
+                        {
+                            "name": "mouseExample",
+                            "group": "input_output"
+                        }
+                    ]
                 },
                 {
                     "name": "mouseScrolled",
@@ -9034,7 +9244,17 @@ const TrussCAPI = {
                     "snippet": "setColor(${1:x}, ${2:y}, ${3:color})",
                     "keywords": [],
                     "desc_ja": "指定座標の色を設定",
-                    "desc_ko": "픽셀의 색상을 설정"
+                    "desc_ko": "픽셀의 색상을 설정",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        },
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "save",
@@ -9368,7 +9588,17 @@ const TrussCAPI = {
                     "snippet": "setColor(${1:color})",
                     "keywords": [],
                     "desc_ja": "線の色を設定（メソッドチェーン対応）",
-                    "desc_ko": "스트로크 색상을 설정 (메서드 체이닝)"
+                    "desc_ko": "스트로크 색상을 설정 (메서드 체이닝)",
+                    "examples": [
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        },
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "setCapType",
@@ -11592,6 +11822,16 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "RGBAカラー (0.0-1.0範囲)",
             "desc_ko": "RGBA 색상 (0.0-1.0 범위)",
+            "examples": [
+                {
+                    "name": "graphicsExample",
+                    "group": "graphics"
+                },
+                {
+                    "name": "colorExample",
+                    "group": "graphics"
+                }
+            ],
             "constructor": {
                 "signatures": [
                     "",
