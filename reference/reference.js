@@ -22,7 +22,7 @@
         const pick = (o, base) => { if (o && o[base + suf] != null) o[base] = o[base + suf]; };
         for (const cat of api.categories || []) {
             pick(cat, 'name');
-            for (const fn of cat.functions || []) pick(fn, 'desc');
+            for (const fn of cat.functions || []) { pick(fn, 'desc'); pick(fn, 'details'); pick(fn, 'sigDesc'); }
         }
         for (const t of api.types || []) {
             pick(t, 'desc');
@@ -47,6 +47,7 @@
         methods: 'Methods',
         staticMethods: 'Static Methods',
         category: 'Category',
+        related: 'Related',
         value: 'Value',
         constantValue: 'Constant value',
         noResults: 'No results'
@@ -295,6 +296,12 @@
         html += `<div class="detail-title">${esc(name)}</div>`;
         html += `<div class="detail-desc">${esc(first.desc || '')}</div>`;
 
+        // Optional long-form details (multi-line), shown only here in the detail pane.
+        const details = (overloads.find(o => o.details) || {}).details;
+        if (details) {
+            html += `<div class="detail-details" style="white-space:pre-wrap;color:#bbb;font-size:13px;line-height:1.7;margin:6px 0 4px;">${esc(details)}</div>`;
+        }
+
         html += `<div class="detail-section">`;
         html += `<div class="detail-section-title">${esc(UI.signatures)}</div>`;
 
@@ -308,12 +315,23 @@
 
             html += `<div class="detail-entry">`;
             html += `<div class="detail-sig"><span class="ret">${esc(retType)}</span> <span class="name">${esc(name)}</span>(<span class="params">${esc(params)}</span>)</div>`;
-            // Only annotate a signature when its description differs from the shared
-            // top-level one — avoids repeating the same line under every overload.
-            if (fn.desc && fn.desc !== first.desc) html += `<div class="detail-entry-desc">// ${esc(fn.desc)}</div>`;
+            // Annotate a signature only when this overload carries its own description.
+            if (fn.sigDesc) html += `<div class="detail-entry-desc">// ${esc(fn.sigDesc)}</div>`;
             html += `</div>`;
         }
         html += `</div>`;
+
+        // Optional related symbols → clickable links.
+        const related = (overloads.find(o => Array.isArray(o.related)) || {}).related;
+        if (related && related.length) {
+            html += `<div class="detail-section">`;
+            html += `<div class="detail-section-title">${esc(UI.related)}</div>`;
+            html += `<div style="font-size:13px;line-height:1.8;">`;
+            html += related.map(r =>
+                `<a href="#" onclick="navTo('function','${esc(r)}');return false;" style="color:#4ec9b0;text-decoration:none;">${esc(r)}</a>`
+            ).join(' · ');
+            html += `</div></div>`;
+        }
 
         html += `<div class="detail-section">`;
         html += `<div class="detail-section-title">${esc(UI.category)}</div>`;

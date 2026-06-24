@@ -279,7 +279,13 @@ const TrussCAPI = {
                     "snippet": "drawRect(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [],
                     "desc_ja": "矩形を描画",
-                    "desc_ko": "사각형 그리기"
+                    "desc_ko": "사각형 그리기",
+                    "related": [
+                        "drawRectRounded",
+                        "drawRectSquircle"
+                    ],
+                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.\n",
+                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n"
                 },
                 {
                     "name": "drawRect",
@@ -290,7 +296,13 @@ const TrussCAPI = {
                     "snippet": "drawRect(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [],
                     "desc_ja": "矩形を描画",
-                    "desc_ko": "사각형 그리기"
+                    "desc_ko": "사각형 그리기",
+                    "related": [
+                        "drawRectRounded",
+                        "drawRectSquircle"
+                    ],
+                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.\n",
+                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n"
                 },
                 {
                     "name": "drawRect",
@@ -301,7 +313,15 @@ const TrussCAPI = {
                     "snippet": "drawRect(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [],
                     "desc_ja": "矩形を描画",
-                    "desc_ko": "사각형 그리기"
+                    "desc_ko": "사각형 그리기",
+                    "sigDesc": "Size given as a Vec2 (width, height).",
+                    "sigDesc_ja": "サイズを Vec2（幅・高さ）で指定。",
+                    "related": [
+                        "drawRectRounded",
+                        "drawRectSquircle"
+                    ],
+                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.\n",
+                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n"
                 },
                 {
                     "name": "drawRectRounded",
