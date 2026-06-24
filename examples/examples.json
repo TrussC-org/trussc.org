@@ -322,6 +322,12 @@
           "width": 960,
           "height": 600,
           "webSupported": false
+        },
+        {
+          "name": "networkInterfaceExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
         }
       ]
     },
@@ -524,6 +530,18 @@
           "height": 600,
           "webSupported": true,
           "autoScreenshot": false
+        },
+        {
+          "name": "videoRecExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "videoRecAdvancedExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
         }
       ]
     },
