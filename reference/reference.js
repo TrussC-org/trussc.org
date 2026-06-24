@@ -48,6 +48,7 @@
         staticMethods: 'Static Methods',
         category: 'Category',
         related: 'Related',
+        examples: 'Examples',
         value: 'Value',
         constantValue: 'Constant value',
         noResults: 'No results'
@@ -282,6 +283,20 @@
         else if (kind === 'constant') renderConstantDetail(name);
     }
 
+    // "drawRectSquircleExample" -> "Draw Rect Squircle"
+    function exampleLabel(name) {
+        return name.replace(/Example$/, '').replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+            .replace(/^./, c => c.toUpperCase()).trim();
+    }
+    function renderExamples(list) {
+        if (!list || !list.length) return '';
+        let h = `<div class="detail-section"><div class="detail-section-title">${esc(UI.examples)}</div>`;
+        h += `<div style="font-size:13px;line-height:1.8;">`;
+        h += list.map(e => `<a href="/examples/player.html?type=examples&group=${encodeURIComponent(e.group)}&name=${encodeURIComponent(e.name)}" style="color:#4ec9b0;text-decoration:none;">${esc(exampleLabel(e.name))}</a>`).join(' · ');
+        h += `</div></div>`;
+        return h;
+    }
+
     function renderFunctionDetail(name, category) {
         const overloads = [];
         for (const cat of TrussCAPI.categories) {
@@ -332,6 +347,9 @@
             ).join(' · ');
             html += `</div></div>`;
         }
+
+        // Optional example links.
+        html += renderExamples((overloads.find(o => Array.isArray(o.examples)) || {}).examples);
 
         html += `<div class="detail-section">`;
         html += `<div class="detail-section-title">${esc(UI.category)}</div>`;
@@ -403,6 +421,8 @@
             }
             html += `</div>`;
         }
+
+        html += renderExamples(t.examples);
 
         detail.innerHTML = html;
     }
@@ -553,4 +573,15 @@
     // Initial render
     renderSidebar('');
     renderOverview();
+
+    // Deep linking: "#function:drawRect", "#type:EasyCam", or "#drawRect" (fn fallback).
+    function applyHash() {
+        const raw = decodeURIComponent(location.hash.slice(1));
+        if (!raw) return;
+        const [a, b] = raw.split(':');
+        if (b) navTo(a, b);
+        else navTo('function', a);
+    }
+    window.addEventListener('hashchange', applyHash);
+    applyHash();
 })();
