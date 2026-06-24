@@ -814,32 +814,11 @@
       "order": 20,
       "mappings": [
         {
-          "of": "ofxTCPClient",
-          "tc": "TcpClient",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofxTCPServer",
-          "tc": "TcpServer",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofxUDPManager",
-          "tc": "UdpSocket",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
           "of": "ofxOsc",
           "tc": "OscReceiver / OscSender",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
+          "notes": "tcxOsc addon",
+          "notes_ja": "tcxOsc アドオン",
+          "notes_ko": "tcxOsc 애드온"
         }
       ]
     },
@@ -892,43 +871,6 @@
           "tc": "MainThreadRunner::run(func)",
           "notes": "Execute on main thread",
           "notes_ja": "Execute on main thread",
-          "notes_ko": ""
-        }
-      ]
-    },
-    {
-      "id": "serial",
-      "name": "Serial",
-      "name_ja": "シリアル",
-      "name_ko": "시리얼통신",
-      "order": 23,
-      "mappings": [
-        {
-          "of": "ofSerial",
-          "tc": "Serial",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "serial.setup(port, baud)",
-          "tc": "serial.setup(port, baud)",
-          "notes": "Same",
-          "notes_ja": "Same",
-          "notes_ko": ""
-        },
-        {
-          "of": "serial.readBytes(...)",
-          "tc": "serial.readBytes(...)",
-          "notes": "Same",
-          "notes_ja": "Same",
-          "notes_ko": ""
-        },
-        {
-          "of": "serial.writeBytes(...)",
-          "tc": "serial.writeBytes(...)",
-          "notes": "Same",
-          "notes_ja": "Same",
           "notes_ko": ""
         }
       ]
@@ -1172,6 +1114,143 @@
           "notes": "3D camera with mouse control",
           "notes_ja": "マウス操作対応3Dカメラ",
           "notes_ko": "마우스 조작 가능한 3D 카메라"
+        }
+      ]
+    },
+    {
+      "id": "network-types",
+      "name": "Network",
+      "name_ja": "ネットワーク",
+      "name_ko": "네트워크",
+      "order": 9,
+      "mappings": [
+        {
+          "of": "-",
+          "tc": "NetworkInterface",
+          "notes": "One address entry of a network interface (returned by listNetworkInterfaces)",
+          "notes_ja": "ネットワークインターフェースの1アドレスエントリ（listNetworkInterfacesが返す）",
+          "notes_ko": "네트워크 인터페이스의 주소 항목 하나 (listNetworkInterfaces가 반환)"
+        },
+        {
+          "of": "ofxUDPManager",
+          "tc": "UdpSocket",
+          "notes": "UDP socket (send/receive datagrams, broadcast, multicast)",
+          "notes_ja": "UDPソケット（データグラム送受信・ブロードキャスト・マルチキャスト）",
+          "notes_ko": "UDP 소켓 (데이터그램 송수신, 브로드캐스트, 멀티캐스트)"
+        },
+        {
+          "of": "-",
+          "tc": "UdpReceiveEventArgs",
+          "notes": "Event args for UdpSocket::onReceive",
+          "notes_ja": "UdpSocket::onReceiveのイベント引数",
+          "notes_ko": "UdpSocket::onReceive의 이벤트 인자"
+        },
+        {
+          "of": "-",
+          "tc": "UdpErrorEventArgs",
+          "notes": "Event args for UdpSocket::onError",
+          "notes_ja": "UdpSocket::onErrorのイベント引数",
+          "notes_ko": "UdpSocket::onError의 이벤트 인자"
+        },
+        {
+          "of": "ofxTCPClient",
+          "tc": "TcpClient",
+          "notes": "TCP client connection (connect, send/receive a stream)",
+          "notes_ja": "TCPクライアント接続（接続・ストリーム送受信）",
+          "notes_ko": "TCP 클라이언트 연결 (연결, 스트림 송수신)"
+        },
+        {
+          "of": "-",
+          "tc": "TcpConnectEventArgs",
+          "notes": "Event args for TcpClient::onConnect",
+          "notes_ja": "TcpClient::onConnectのイベント引数",
+          "notes_ko": "TcpClient::onConnect의 이벤트 인자"
+        },
+        {
+          "of": "-",
+          "tc": "TcpReceiveEventArgs",
+          "notes": "Event args for TcpClient::onReceive",
+          "notes_ja": "TcpClient::onReceiveのイベント引数",
+          "notes_ko": "TcpClient::onReceive의 이벤트 인자"
+        },
+        {
+          "of": "-",
+          "tc": "TcpDisconnectEventArgs",
+          "notes": "Event args for TcpClient::onDisconnect",
+          "notes_ja": "TcpClient::onDisconnectのイベント引数",
+          "notes_ko": "TcpClient::onDisconnect의 이벤트 인자"
+        },
+        {
+          "of": "-",
+          "tc": "TcpErrorEventArgs",
+          "notes": "Event args for TcpClient::onError",
+          "notes_ja": "TcpClient::onErrorのイベント引数",
+          "notes_ko": "TcpClient::onError의 이벤트 인자"
+        },
+        {
+          "of": "ofxTCPServer",
+          "tc": "TcpServer",
+          "notes": "TCP server (accept clients, send/broadcast)",
+          "notes_ja": "TCPサーバ（クライアント受け入れ・送信/ブロードキャスト）",
+          "notes_ko": "TCP 서버 (클라이언트 수락, 전송/브로드캐스트)"
+        },
+        {
+          "of": "-",
+          "tc": "TcpServerClient",
+          "notes": "A client connected to a TcpServer (read-only handle)",
+          "notes_ja": "TcpServerに接続したクライアント（読み取り専用ハンドル）",
+          "notes_ko": "TcpServer에 연결된 클라이언트 (읽기 전용 핸들)"
+        },
+        {
+          "of": "-",
+          "tc": "TcpClientConnectEventArgs",
+          "notes": "Event args for TcpServer::onClientConnect",
+          "notes_ja": "TcpServer::onClientConnectのイベント引数",
+          "notes_ko": "TcpServer::onClientConnect의 이벤트 인자"
+        },
+        {
+          "of": "-",
+          "tc": "TcpServerReceiveEventArgs",
+          "notes": "Event args for TcpServer::onReceive",
+          "notes_ja": "TcpServer::onReceiveのイベント引数",
+          "notes_ko": "TcpServer::onReceive의 이벤트 인자"
+        },
+        {
+          "of": "-",
+          "tc": "TcpClientDisconnectEventArgs",
+          "notes": "Event args for TcpServer::onClientDisconnect",
+          "notes_ja": "TcpServer::onClientDisconnectのイベント引数",
+          "notes_ko": "TcpServer::onClientDisconnect의 이벤트 인자"
+        },
+        {
+          "of": "-",
+          "tc": "TcpServerErrorEventArgs",
+          "notes": "Event args for TcpServer::onError",
+          "notes_ja": "TcpServer::onErrorのイベント引数",
+          "notes_ko": "TcpServer::onError의 이벤트 인자"
+        }
+      ]
+    },
+    {
+      "id": "serial-types",
+      "name": "Serial",
+      "name_ja": "シリアル",
+      "name_ko": "시리얼",
+      "order": 10,
+      "mappings": [
+        {
+          "of": "ofSerial",
+          "tc": "Serial",
+          "notes": "Cross-platform serial port (USB/COM): connect, read/write bytes",
+          "notes_ja": "クロスプラットフォームのシリアルポート（USB/COM）：接続・バイト読み書き",
+          "notes_ko": "크로스플랫폼 시리얼 포트 (USB/COM): 연결, 바이트 읽기/쓰기"
+        },
+        {
+          "of": "ofSerialDeviceInfo",
+          "tc": "SerialDeviceInfo",
+          "notes": "Info for one serial device (from Serial::listDevices)",
+          "notes_ja": "1シリアルデバイスの情報（Serial::listDevicesが返す）",
+          "notes_ko": "시리얼 장치 하나의 정보 (Serial::listDevices가 반환)"
         }
       ]
     }

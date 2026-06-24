@@ -3133,6 +3133,16 @@ const TrussCAPI = {
                     "snippet": "grabScreen(${1:pixels})"
                 },
                 {
+                    "name": "saveScreenshot",
+                    "params": "path",
+                    "params_typed": "const std::filesystem::path& path",
+                    "return_type": "bool",
+                    "desc": "Save a screenshot of the rendered frame (png/jpg/bmp). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written.",
+                    "desc_ja": "描画済みフレームのスクショを保存（png/jpg/bmp）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueは「保存先を準備しキューに積めた（親フォルダ生成・書き込み可）」の意味で、ファイル書き込み完了ではない",
+                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(png/jpg/bmp). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 '대상 준비 및 캡처 큐 등록 성공(상위 폴더 생성·쓰기 가능)'을 의미하며 파일 기록 완료가 아님",
+                    "snippet": "saveScreenshot(${1:\"shot.png\"})"
+                },
+                {
                     "name": "startRecording",
                     "params": "path, settings",
                     "params_typed": "const string& path, const VideoRecordSettings& settings = {}",
@@ -3161,6 +3171,26 @@ const TrussCAPI = {
                     "desc_ja": "録画中かどうか確認",
                     "desc_ko": "녹화 중인지 확인",
                     "snippet": "isRecording()"
+                },
+                {
+                    "name": "recordingFrameCount",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Number of frames captured so far in the current recording",
+                    "desc_ja": "現在の録画でこれまでにキャプチャしたフレーム数",
+                    "desc_ko": "현재 녹화에서 지금까지 캡처한 프레임 수",
+                    "snippet": "recordingFrameCount()"
+                },
+                {
+                    "name": "recordingPath",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "const string&",
+                    "desc": "Output file path of the current recording",
+                    "desc_ja": "現在の録画の出力ファイルパス",
+                    "desc_ko": "현재 녹화의 출력 파일 경로",
+                    "snippet": "recordingPath()"
                 },
                 {
                     "name": "isFullscreen",
@@ -7797,6 +7827,113 @@ const TrussCAPI = {
                     "snippet": "cancelAllAsyncTimers();"
                 }
             ]
+        },
+        {
+            "name": "Network",
+            "name_ja": "ネットワーク",
+            "name_ko": "네트워크",
+            "functions": [
+                {
+                    "name": "listNetworkInterfaces",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "std::vector<NetworkInterface>",
+                    "desc": "List all network interface address entries (IPv4/IPv6, loopback, up or down)",
+                    "desc_ja": "全ネットワークインターフェースのアドレスを列挙（IPv4/IPv6・ループバック・up/down含む）",
+                    "desc_ko": "모든 네트워크 인터페이스 주소를 나열 (IPv4/IPv6, 루프백, up/down 포함)",
+                    "snippet": "listNetworkInterfaces()"
+                },
+                {
+                    "name": "printNetworkInterfaces",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Log the interface list (one line per entry)",
+                    "desc_ja": "インターフェース一覧をログ出力（1エントリ1行）",
+                    "desc_ko": "인터페이스 목록을 로그로 출력 (항목당 한 줄)",
+                    "snippet": "printNetworkInterfaces()"
+                },
+                {
+                    "name": "getLocalIp",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "std::string",
+                    "desc": "The most likely LAN address (skips loopback/down, IPv4 preferred). \"\" if none",
+                    "desc_ja": "一番それっぽいLANアドレス（ループバック/downを除外、IPv4優先）。無ければ\"\"",
+                    "desc_ko": "가장 적합한 LAN 주소 (루프백/down 제외, IPv4 우선). 없으면 \"\"",
+                    "snippet": "getLocalIp()"
+                },
+                {
+                    "name": "getLocalIps",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "std::vector<std::string>",
+                    "desc": "Every non-loopback address (one per interface entry)",
+                    "desc_ja": "ループバック以外の全アドレス（インターフェースごと）",
+                    "desc_ko": "루프백이 아닌 모든 주소 (인터페이스 항목별)",
+                    "snippet": "getLocalIps()"
+                },
+                {
+                    "name": "isLoopback",
+                    "params": "addr",
+                    "params_typed": "const std::string& addr",
+                    "return_type": "bool",
+                    "desc": "True if addr is a loopback address (127.0.0.0/8 or ::1)",
+                    "desc_ja": "addrがループバックアドレスならtrue（127.0.0.0/8 または ::1）",
+                    "desc_ko": "addr이 루프백 주소이면 true (127.0.0.0/8 또는 ::1)",
+                    "snippet": "isLoopback(${1:addr})"
+                },
+                {
+                    "name": "isPrivate",
+                    "params": "addr",
+                    "params_typed": "const std::string& addr",
+                    "return_type": "bool",
+                    "desc": "True if addr is a private IPv4 (10/8, 172.16/12, 192.168/16)",
+                    "desc_ja": "addrがプライベートIPv4ならtrue（10/8, 172.16/12, 192.168/16）",
+                    "desc_ko": "addr이 사설 IPv4이면 true (10/8, 172.16/12, 192.168/16)",
+                    "snippet": "isPrivate(${1:addr})"
+                },
+                {
+                    "name": "isLinkLocal",
+                    "params": "addr",
+                    "params_typed": "const std::string& addr",
+                    "return_type": "bool",
+                    "desc": "True if addr is link-local (169.254/16 or fe80::/10)",
+                    "desc_ja": "addrがリンクローカルならtrue（169.254/16 または fe80::/10）",
+                    "desc_ko": "addr이 링크-로컬이면 true (169.254/16 또는 fe80::/10)",
+                    "snippet": "isLinkLocal(${1:addr})"
+                },
+                {
+                    "name": "sameSubnet",
+                    "params": "a, b, netmask",
+                    "params_typed": "const std::string& a, const std::string& b, const std::string& netmask",
+                    "return_type": "bool",
+                    "desc": "True if IPv4 a and b are on the same subnet under netmask",
+                    "desc_ja": "IPv4のaとbがnetmask下で同じサブネットならtrue",
+                    "desc_ko": "IPv4 a와 b가 netmask 하에서 같은 서브넷이면 true",
+                    "snippet": "sameSubnet(${1:a}, ${2:b}, ${3:netmask})"
+                },
+                {
+                    "name": "getOui",
+                    "params": "mac",
+                    "params_typed": "const std::string& mac",
+                    "return_type": "std::string",
+                    "desc": "The OUI (first 3 bytes) of a MAC, uppercase \"A4:83:E7\". \"\" if unparseable",
+                    "desc_ja": "MACのOUI（先頭3バイト）を大文字で返す \"A4:83:E7\"。解析不能なら\"\"",
+                    "desc_ko": "MAC의 OUI(앞 3바이트)를 대문자로 \"A4:83:E7\". 해석 불가 시 \"\"",
+                    "snippet": "getOui(${1:mac})"
+                },
+                {
+                    "name": "isLocallyAdministered",
+                    "params": "mac",
+                    "params_typed": "const std::string& mac",
+                    "return_type": "bool",
+                    "desc": "True if the MAC's locally-administered bit is set (randomized/virtual MAC)",
+                    "desc_ja": "MACのlocally-administeredビットが立っていればtrue（ランダム化/仮想MAC）",
+                    "desc_ko": "MAC의 locally-administered 비트가 설정되어 있으면 true (랜덤/가상 MAC)",
+                    "snippet": "isLocallyAdministered(${1:mac})"
+                }
+            ]
         }
     ],
     "constants": [
@@ -8114,6 +8251,26 @@ const TrussCAPI = {
             "name": "MOUSE_BUTTON_MIDDLE",
             "value": "2",
             "desc": "Middle mouse button"
+        },
+        {
+            "name": "VideoCodec::H264",
+            "value": "0",
+            "desc": "H.264 / AVC — broad compatibility (default)"
+        },
+        {
+            "name": "VideoCodec::HEVC",
+            "value": "1",
+            "desc": "H.265 / HEVC — smaller files, hardware-encoded"
+        },
+        {
+            "name": "VideoCodec::ProRes422",
+            "value": "2",
+            "desc": "Apple ProRes 422 — editing-grade, macOS/iOS only (.mov)"
+        },
+        {
+            "name": "VideoCodec::ProRes4444",
+            "value": "3",
+            "desc": "Apple ProRes 4444 — highest quality + alpha, macOS/iOS only (.mov)"
         }
     ],
     "keywords": [
@@ -12218,6 +12375,1107 @@ const TrussCAPI = {
                     ],
                     "desc": "Build second (0-59)",
                     "snippet": "BuildInfo::second()"
+                }
+            ]
+        },
+        {
+            "name": "NetworkInterface",
+            "desc": "One address entry of a network interface (returned by listNetworkInterfaces)",
+            "desc_ja": "ネットワークインターフェースの1アドレスエントリ（listNetworkInterfacesが返す）",
+            "desc_ko": "네트워크 인터페이스의 주소 항목 하나 (listNetworkInterfaces가 반환)",
+            "properties": [
+                {
+                    "name": "name",
+                    "type": "std::string",
+                    "desc": "Interface name (en0 / Ethernet / wlan0)"
+                },
+                {
+                    "name": "address",
+                    "type": "std::string",
+                    "desc": "IP address (IPv4 dotted-quad or IPv6 textual)"
+                },
+                {
+                    "name": "netmask",
+                    "type": "std::string",
+                    "desc": "Subnet mask (IPv4)"
+                },
+                {
+                    "name": "mac",
+                    "type": "std::string",
+                    "desc": "Hardware MAC address (empty if unavailable)"
+                },
+                {
+                    "name": "isIPv4",
+                    "type": "bool",
+                    "desc": "True for IPv4, false for IPv6"
+                },
+                {
+                    "name": "isLoopback",
+                    "type": "bool",
+                    "desc": "True if a loopback interface"
+                },
+                {
+                    "name": "isUp",
+                    "type": "bool",
+                    "desc": "True if the interface link is up"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getName",
+                    "return": "const std::string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Interface name",
+                    "snippet": "getName()"
+                },
+                {
+                    "name": "getAddress",
+                    "return": "const std::string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "IP address",
+                    "snippet": "getAddress()"
+                },
+                {
+                    "name": "getNetmask",
+                    "return": "const std::string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Subnet mask",
+                    "snippet": "getNetmask()"
+                },
+                {
+                    "name": "getMac",
+                    "return": "const std::string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "MAC address",
+                    "snippet": "getMac()"
+                },
+                {
+                    "name": "getIsIPv4",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the address is IPv4",
+                    "snippet": "getIsIPv4()"
+                },
+                {
+                    "name": "getIsLoopback",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether this is a loopback interface",
+                    "snippet": "getIsLoopback()"
+                },
+                {
+                    "name": "getIsUp",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the link is up",
+                    "snippet": "getIsUp()"
+                }
+            ]
+        },
+        {
+            "name": "UdpSocket",
+            "desc": "UDP socket (send/receive datagrams, broadcast, multicast)",
+            "desc_ja": "UDPソケット（データグラム送受信・ブロードキャスト・マルチキャスト）",
+            "desc_ko": "UDP 소켓 (데이터그램 송수신, 브로드캐스트, 멀티캐스트)",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "UdpSocket"
+            },
+            "properties": [
+                {
+                    "name": "onReceive",
+                    "type": "Event<UdpReceiveEventArgs>",
+                    "desc": "Fired when data is received"
+                },
+                {
+                    "name": "onError",
+                    "type": "Event<UdpErrorEventArgs>",
+                    "desc": "Fired on error"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "create",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Create the socket explicitly (usually auto-created by bind/connect)",
+                    "snippet": "create()"
+                },
+                {
+                    "name": "bind",
+                    "return": "bool",
+                    "signatures": [
+                        "int port, bool startReceiving = true"
+                    ],
+                    "desc": "Bind a port for receiving (startReceiving auto-starts the receive thread)",
+                    "snippet": "bind(${1:port})"
+                },
+                {
+                    "name": "connect",
+                    "return": "bool",
+                    "signatures": [
+                        "const std::string& host, int port"
+                    ],
+                    "desc": "Set the destination for send()",
+                    "snippet": "connect(${1:host}, ${2:port})"
+                },
+                {
+                    "name": "close",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Close the socket",
+                    "snippet": "close()"
+                },
+                {
+                    "name": "sendTo",
+                    "return": "bool",
+                    "signatures": [
+                        "const std::string& host, int port, const void* data, size_t size",
+                        "const std::string& host, int port, const std::string& message"
+                    ],
+                    "desc": "Send data to a specific host and port",
+                    "snippet": "sendTo(${1:host}, ${2:port}, ${3:message})"
+                },
+                {
+                    "name": "send",
+                    "return": "bool",
+                    "signatures": [
+                        "const void* data, size_t size",
+                        "const std::string& message"
+                    ],
+                    "desc": "Send to the destination set by connect()",
+                    "snippet": "send(${1:message})"
+                },
+                {
+                    "name": "receive",
+                    "return": "int",
+                    "signatures": [
+                        "void* buffer, size_t bufferSize",
+                        "void* buffer, size_t bufferSize, std::string& remoteHost, int& remotePort"
+                    ],
+                    "desc": "Blocking receive (for non-event use); returns byte count or -1",
+                    "snippet": "receive(${1:buffer}, ${2:bufferSize})"
+                },
+                {
+                    "name": "startReceiving",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Start the receive thread (auto-called after bind)",
+                    "snippet": "startReceiving()"
+                },
+                {
+                    "name": "stopReceiving",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Stop the receive thread",
+                    "snippet": "stopReceiving()"
+                },
+                {
+                    "name": "isReceiving",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the receive thread is active",
+                    "snippet": "isReceiving()"
+                },
+                {
+                    "name": "setNonBlocking",
+                    "return": "bool",
+                    "signatures": [
+                        "bool nonBlocking"
+                    ],
+                    "desc": "Set non-blocking mode",
+                    "snippet": "setNonBlocking(${1:nonBlocking})"
+                },
+                {
+                    "name": "setBroadcast",
+                    "return": "bool",
+                    "signatures": [
+                        "bool enable"
+                    ],
+                    "desc": "Allow broadcast sending",
+                    "snippet": "setBroadcast(${1:enable})"
+                },
+                {
+                    "name": "setReuseAddress",
+                    "return": "bool",
+                    "signatures": [
+                        "bool enable"
+                    ],
+                    "desc": "Allow address reuse (set before bind)",
+                    "snippet": "setReuseAddress(${1:enable})"
+                },
+                {
+                    "name": "setReusePort",
+                    "return": "bool",
+                    "signatures": [
+                        "bool enable"
+                    ],
+                    "desc": "Allow multiple sockets on the same port (multicast receivers; set before bind)",
+                    "snippet": "setReusePort(${1:enable})"
+                },
+                {
+                    "name": "setReceiveBufferSize",
+                    "return": "bool",
+                    "signatures": [
+                        "int size"
+                    ],
+                    "desc": "Set the receive buffer size",
+                    "snippet": "setReceiveBufferSize(${1:size})"
+                },
+                {
+                    "name": "setSendBufferSize",
+                    "return": "bool",
+                    "signatures": [
+                        "int size"
+                    ],
+                    "desc": "Set the send buffer size",
+                    "snippet": "setSendBufferSize(${1:size})"
+                },
+                {
+                    "name": "setReceiveTimeout",
+                    "return": "bool",
+                    "signatures": [
+                        "int timeoutMs"
+                    ],
+                    "desc": "Set the receive timeout (0 = infinite)",
+                    "snippet": "setReceiveTimeout(${1:timeoutMs})"
+                },
+                {
+                    "name": "setUseThread",
+                    "return": "void",
+                    "signatures": [
+                        "bool useThread"
+                    ],
+                    "desc": "Whether to use a receive thread (must be false on Wasm)",
+                    "snippet": "setUseThread(${1:useThread})"
+                },
+                {
+                    "name": "joinMulticastGroup",
+                    "return": "bool",
+                    "signatures": [
+                        "const std::string& groupAddr, const std::string& interfaceAddr = \"\""
+                    ],
+                    "desc": "Join a multicast group for receiving (call after bind; \"\" = default route)",
+                    "snippet": "joinMulticastGroup(${1:groupAddr})"
+                },
+                {
+                    "name": "leaveMulticastGroup",
+                    "return": "bool",
+                    "signatures": [
+                        "const std::string& groupAddr, const std::string& interfaceAddr = \"\""
+                    ],
+                    "desc": "Leave a previously joined multicast group",
+                    "snippet": "leaveMulticastGroup(${1:groupAddr})"
+                },
+                {
+                    "name": "setMulticastTTL",
+                    "return": "bool",
+                    "signatures": [
+                        "int ttl"
+                    ],
+                    "desc": "Hop limit for outgoing multicast (default 1 = local subnet)",
+                    "snippet": "setMulticastTTL(${1:ttl})"
+                },
+                {
+                    "name": "setMulticastLoopback",
+                    "return": "bool",
+                    "signatures": [
+                        "bool enable"
+                    ],
+                    "desc": "Whether outgoing multicast loops back to local listeners (default on)",
+                    "snippet": "setMulticastLoopback(${1:enable})"
+                },
+                {
+                    "name": "setMulticastInterface",
+                    "return": "bool",
+                    "signatures": [
+                        "const std::string& interfaceAddr"
+                    ],
+                    "desc": "Pick the NIC for outgoing multicast (\"\" = default route)",
+                    "snippet": "setMulticastInterface(${1:interfaceAddr})"
+                },
+                {
+                    "name": "getLocalPort",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "The bound local port",
+                    "snippet": "getLocalPort()"
+                },
+                {
+                    "name": "isValid",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the socket is valid",
+                    "snippet": "isValid()"
+                },
+                {
+                    "name": "getConnectedHost",
+                    "return": "const std::string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Destination host from connect()",
+                    "snippet": "getConnectedHost()"
+                },
+                {
+                    "name": "getConnectedPort",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Destination port from connect()",
+                    "snippet": "getConnectedPort()"
+                }
+            ]
+        },
+        {
+            "name": "UdpReceiveEventArgs",
+            "desc": "Event args for UdpSocket::onReceive",
+            "desc_ja": "UdpSocket::onReceiveのイベント引数",
+            "desc_ko": "UdpSocket::onReceive의 이벤트 인자",
+            "properties": [
+                {
+                    "name": "data",
+                    "type": "std::vector<char>",
+                    "desc": "Received data"
+                },
+                {
+                    "name": "remoteHost",
+                    "type": "std::string",
+                    "desc": "Source host"
+                },
+                {
+                    "name": "remotePort",
+                    "type": "int",
+                    "desc": "Source port"
+                }
+            ]
+        },
+        {
+            "name": "UdpErrorEventArgs",
+            "desc": "Event args for UdpSocket::onError",
+            "desc_ja": "UdpSocket::onErrorのイベント引数",
+            "desc_ko": "UdpSocket::onError의 이벤트 인자",
+            "properties": [
+                {
+                    "name": "message",
+                    "type": "std::string",
+                    "desc": "Error message"
+                },
+                {
+                    "name": "errorCode",
+                    "type": "int",
+                    "desc": "Error code"
+                }
+            ]
+        },
+        {
+            "name": "TcpClient",
+            "desc": "TCP client connection (connect, send/receive a stream)",
+            "desc_ja": "TCPクライアント接続（接続・ストリーム送受信）",
+            "desc_ko": "TCP 클라이언트 연결 (연결, 스트림 송수신)",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "TcpClient"
+            },
+            "properties": [
+                {
+                    "name": "onConnect",
+                    "type": "Event<TcpConnectEventArgs>",
+                    "desc": "Fired when the connection completes"
+                },
+                {
+                    "name": "onReceive",
+                    "type": "Event<TcpReceiveEventArgs>",
+                    "desc": "Fired when data is received"
+                },
+                {
+                    "name": "onDisconnect",
+                    "type": "Event<TcpDisconnectEventArgs>",
+                    "desc": "Fired when disconnected"
+                },
+                {
+                    "name": "onError",
+                    "type": "Event<TcpErrorEventArgs>",
+                    "desc": "Fired on error"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "connect",
+                    "return": "bool",
+                    "signatures": [
+                        "const std::string& host, int port"
+                    ],
+                    "desc": "Connect to a server (blocking)",
+                    "snippet": "connect(${1:host}, ${2:port})"
+                },
+                {
+                    "name": "connectAsync",
+                    "return": "void",
+                    "signatures": [
+                        "const std::string& host, int port"
+                    ],
+                    "desc": "Connect asynchronously (notifies via onConnect)",
+                    "snippet": "connectAsync(${1:host}, ${2:port})"
+                },
+                {
+                    "name": "disconnect",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Disconnect",
+                    "snippet": "disconnect()"
+                },
+                {
+                    "name": "isConnected",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether currently connected",
+                    "snippet": "isConnected()"
+                },
+                {
+                    "name": "send",
+                    "return": "bool",
+                    "signatures": [
+                        "const void* data, size_t size",
+                        "const std::vector<char>& data",
+                        "const std::string& message"
+                    ],
+                    "desc": "Send data to the server",
+                    "snippet": "send(${1:message})"
+                },
+                {
+                    "name": "setReceiveBufferSize",
+                    "return": "void",
+                    "signatures": [
+                        "size_t size"
+                    ],
+                    "desc": "Set the receive buffer size",
+                    "snippet": "setReceiveBufferSize(${1:size})"
+                },
+                {
+                    "name": "setBlocking",
+                    "return": "void",
+                    "signatures": [
+                        "bool blocking"
+                    ],
+                    "desc": "Set blocking mode",
+                    "snippet": "setBlocking(${1:blocking})"
+                },
+                {
+                    "name": "setUseThread",
+                    "return": "void",
+                    "signatures": [
+                        "bool useThread"
+                    ],
+                    "desc": "Whether to use threads (must be false on Wasm)",
+                    "snippet": "setUseThread(${1:useThread})"
+                },
+                {
+                    "name": "isUsingThread",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether threading is in use",
+                    "snippet": "isUsingThread()"
+                },
+                {
+                    "name": "getRemoteHost",
+                    "return": "std::string",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Remote host name",
+                    "snippet": "getRemoteHost()"
+                },
+                {
+                    "name": "getRemotePort",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Remote port",
+                    "snippet": "getRemotePort()"
+                }
+            ]
+        },
+        {
+            "name": "TcpConnectEventArgs",
+            "desc": "Event args for TcpClient::onConnect",
+            "desc_ja": "TcpClient::onConnectのイベント引数",
+            "desc_ko": "TcpClient::onConnect의 이벤트 인자",
+            "properties": [
+                {
+                    "name": "success",
+                    "type": "bool",
+                    "desc": "Whether the connection succeeded"
+                },
+                {
+                    "name": "message",
+                    "type": "std::string",
+                    "desc": "Connection message"
+                }
+            ]
+        },
+        {
+            "name": "TcpReceiveEventArgs",
+            "desc": "Event args for TcpClient::onReceive",
+            "desc_ja": "TcpClient::onReceiveのイベント引数",
+            "desc_ko": "TcpClient::onReceive의 이벤트 인자",
+            "properties": [
+                {
+                    "name": "data",
+                    "type": "std::vector<char>",
+                    "desc": "Received data"
+                }
+            ]
+        },
+        {
+            "name": "TcpDisconnectEventArgs",
+            "desc": "Event args for TcpClient::onDisconnect",
+            "desc_ja": "TcpClient::onDisconnectのイベント引数",
+            "desc_ko": "TcpClient::onDisconnect의 이벤트 인자",
+            "properties": [
+                {
+                    "name": "reason",
+                    "type": "std::string",
+                    "desc": "Disconnect reason"
+                },
+                {
+                    "name": "wasClean",
+                    "type": "bool",
+                    "desc": "Whether it was a clean disconnect"
+                }
+            ]
+        },
+        {
+            "name": "TcpErrorEventArgs",
+            "desc": "Event args for TcpClient::onError",
+            "desc_ja": "TcpClient::onErrorのイベント引数",
+            "desc_ko": "TcpClient::onError의 이벤트 인자",
+            "properties": [
+                {
+                    "name": "message",
+                    "type": "std::string",
+                    "desc": "Error message"
+                },
+                {
+                    "name": "errorCode",
+                    "type": "int",
+                    "desc": "Error code"
+                }
+            ]
+        },
+        {
+            "name": "TcpServer",
+            "desc": "TCP server (accept clients, send/broadcast)",
+            "desc_ja": "TCPサーバ（クライアント受け入れ・送信/ブロードキャスト）",
+            "desc_ko": "TCP 서버 (클라이언트 수락, 전송/브로드캐스트)",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "TcpServer"
+            },
+            "properties": [
+                {
+                    "name": "onClientConnect",
+                    "type": "Event<TcpClientConnectEventArgs>",
+                    "desc": "Fired when a client connects"
+                },
+                {
+                    "name": "onReceive",
+                    "type": "Event<TcpServerReceiveEventArgs>",
+                    "desc": "Fired when data is received from a client"
+                },
+                {
+                    "name": "onClientDisconnect",
+                    "type": "Event<TcpClientDisconnectEventArgs>",
+                    "desc": "Fired when a client disconnects"
+                },
+                {
+                    "name": "onError",
+                    "type": "Event<TcpServerErrorEventArgs>",
+                    "desc": "Fired on a server or per-client error"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "start",
+                    "return": "bool",
+                    "signatures": [
+                        "int port, int maxClients = 10"
+                    ],
+                    "desc": "Start listening on a port",
+                    "snippet": "start(${1:port})"
+                },
+                {
+                    "name": "stop",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Stop the server",
+                    "snippet": "stop()"
+                },
+                {
+                    "name": "isRunning",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the server is running",
+                    "snippet": "isRunning()"
+                },
+                {
+                    "name": "disconnectClient",
+                    "return": "void",
+                    "signatures": [
+                        "int clientId"
+                    ],
+                    "desc": "Disconnect a specific client",
+                    "snippet": "disconnectClient(${1:clientId})"
+                },
+                {
+                    "name": "disconnectAllClients",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Disconnect all clients",
+                    "snippet": "disconnectAllClients()"
+                },
+                {
+                    "name": "getClientCount",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Number of connected clients",
+                    "snippet": "getClientCount()"
+                },
+                {
+                    "name": "getClientIds",
+                    "return": "std::vector<int>",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "IDs of all connected clients",
+                    "snippet": "getClientIds()"
+                },
+                {
+                    "name": "getClient",
+                    "return": "const TcpServerClient*",
+                    "signatures": [
+                        "int clientId"
+                    ],
+                    "desc": "Client info (nullptr if not found)",
+                    "snippet": "getClient(${1:clientId})"
+                },
+                {
+                    "name": "send",
+                    "return": "bool",
+                    "signatures": [
+                        "int clientId, const void* data, size_t size",
+                        "int clientId, const std::vector<char>& data",
+                        "int clientId, const std::string& message"
+                    ],
+                    "desc": "Send data to a specific client",
+                    "snippet": "send(${1:clientId}, ${2:message})"
+                },
+                {
+                    "name": "broadcast",
+                    "return": "void",
+                    "signatures": [
+                        "const void* data, size_t size",
+                        "const std::vector<char>& data",
+                        "const std::string& message"
+                    ],
+                    "desc": "Broadcast data to all clients",
+                    "snippet": "broadcast(${1:message})"
+                },
+                {
+                    "name": "setReceiveBufferSize",
+                    "return": "void",
+                    "signatures": [
+                        "size_t size"
+                    ],
+                    "desc": "Set the receive buffer size",
+                    "snippet": "setReceiveBufferSize(${1:size})"
+                },
+                {
+                    "name": "getPort",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "The listening port",
+                    "snippet": "getPort()"
+                }
+            ]
+        },
+        {
+            "name": "TcpServerClient",
+            "desc": "A client connected to a TcpServer (read-only handle)",
+            "desc_ja": "TcpServerに接続したクライアント（読み取り専用ハンドル）",
+            "desc_ko": "TcpServer에 연결된 클라이언트 (읽기 전용 핸들)",
+            "methods": [
+                {
+                    "name": "getId",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Client ID assigned by the server",
+                    "snippet": "getId()"
+                },
+                {
+                    "name": "getHost",
+                    "return": "const std::string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Client IP address",
+                    "snippet": "getHost()"
+                },
+                {
+                    "name": "getPort",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Client port",
+                    "snippet": "getPort()"
+                }
+            ]
+        },
+        {
+            "name": "TcpClientConnectEventArgs",
+            "desc": "Event args for TcpServer::onClientConnect",
+            "desc_ja": "TcpServer::onClientConnectのイベント引数",
+            "desc_ko": "TcpServer::onClientConnect의 이벤트 인자",
+            "properties": [
+                {
+                    "name": "clientId",
+                    "type": "int",
+                    "desc": "Client ID"
+                },
+                {
+                    "name": "host",
+                    "type": "std::string",
+                    "desc": "Client IP address"
+                },
+                {
+                    "name": "port",
+                    "type": "int",
+                    "desc": "Client port"
+                }
+            ]
+        },
+        {
+            "name": "TcpServerReceiveEventArgs",
+            "desc": "Event args for TcpServer::onReceive",
+            "desc_ja": "TcpServer::onReceiveのイベント引数",
+            "desc_ko": "TcpServer::onReceive의 이벤트 인자",
+            "properties": [
+                {
+                    "name": "clientId",
+                    "type": "int",
+                    "desc": "Client ID"
+                },
+                {
+                    "name": "data",
+                    "type": "std::vector<char>",
+                    "desc": "Received data"
+                }
+            ]
+        },
+        {
+            "name": "TcpClientDisconnectEventArgs",
+            "desc": "Event args for TcpServer::onClientDisconnect",
+            "desc_ja": "TcpServer::onClientDisconnectのイベント引数",
+            "desc_ko": "TcpServer::onClientDisconnect의 이벤트 인자",
+            "properties": [
+                {
+                    "name": "clientId",
+                    "type": "int",
+                    "desc": "Client ID"
+                },
+                {
+                    "name": "reason",
+                    "type": "std::string",
+                    "desc": "Disconnect reason"
+                },
+                {
+                    "name": "wasClean",
+                    "type": "bool",
+                    "desc": "Whether the disconnect was clean"
+                }
+            ]
+        },
+        {
+            "name": "TcpServerErrorEventArgs",
+            "desc": "Event args for TcpServer::onError",
+            "desc_ja": "TcpServer::onErrorのイベント引数",
+            "desc_ko": "TcpServer::onError의 이벤트 인자",
+            "properties": [
+                {
+                    "name": "message",
+                    "type": "std::string",
+                    "desc": "Error message"
+                },
+                {
+                    "name": "errorCode",
+                    "type": "int",
+                    "desc": "Error code"
+                },
+                {
+                    "name": "clientId",
+                    "type": "int",
+                    "desc": "Client ID (-1 = server-level error, not a specific client)"
+                }
+            ]
+        },
+        {
+            "name": "Serial",
+            "desc": "Cross-platform serial port (USB/COM): connect, read/write bytes",
+            "desc_ja": "クロスプラットフォームのシリアルポート（USB/COM）：接続・バイト読み書き",
+            "desc_ko": "크로스플랫폼 시리얼 포트 (USB/COM): 연결, 바이트 읽기/쓰기",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "Serial"
+            },
+            "methods": [
+                {
+                    "name": "setup",
+                    "return": "bool",
+                    "signatures": [
+                        "const std::string& portName, int baudRate",
+                        "int deviceIndex, int baudRate"
+                    ],
+                    "desc": "Connect to a port by path or by index from listDevices()",
+                    "snippet": "setup(${1:portName}, ${2:baudRate})"
+                },
+                {
+                    "name": "close",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Disconnect and release resources",
+                    "snippet": "close()"
+                },
+                {
+                    "name": "isInitialized",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether currently connected",
+                    "snippet": "isInitialized()"
+                },
+                {
+                    "name": "getDevicePath",
+                    "return": "const std::string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Current device path",
+                    "snippet": "getDevicePath()"
+                },
+                {
+                    "name": "available",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Number of bytes available to read",
+                    "snippet": "available()"
+                },
+                {
+                    "name": "readBytes",
+                    "return": "int",
+                    "signatures": [
+                        "void* buffer, int length",
+                        "std::string& buffer, int length"
+                    ],
+                    "desc": "Read bytes; returns actual count (>=0) or -1 on error",
+                    "snippet": "readBytes(${1:buffer}, ${2:length})"
+                },
+                {
+                    "name": "readByte",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error",
+                    "snippet": "readByte()"
+                },
+                {
+                    "name": "writeBytes",
+                    "return": "int",
+                    "signatures": [
+                        "const void* buffer, int length",
+                        "const std::string& buffer"
+                    ],
+                    "desc": "Write bytes; returns actual count or -1 on error",
+                    "snippet": "writeBytes(${1:buffer}, ${2:length})"
+                },
+                {
+                    "name": "writeByte",
+                    "return": "bool",
+                    "signatures": [
+                        "unsigned char byte"
+                    ],
+                    "desc": "Write a single byte; true on success",
+                    "snippet": "writeByte(${1:byte})"
+                },
+                {
+                    "name": "flushInput",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Clear the input buffer",
+                    "snippet": "flushInput()"
+                },
+                {
+                    "name": "flushOutput",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Clear the output buffer",
+                    "snippet": "flushOutput()"
+                },
+                {
+                    "name": "flush",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Clear both input and output buffers",
+                    "snippet": "flush()"
+                },
+                {
+                    "name": "drain",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Wait until output transmission completes",
+                    "snippet": "drain()"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "listDevices",
+                    "return": "std::vector<SerialDeviceInfo>",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "List available serial devices",
+                    "snippet": "Serial::listDevices()"
+                },
+                {
+                    "name": "printDevices",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Log all available serial devices",
+                    "snippet": "Serial::printDevices()"
+                }
+            ]
+        },
+        {
+            "name": "SerialDeviceInfo",
+            "desc": "Info for one serial device (from Serial::listDevices)",
+            "desc_ja": "1シリアルデバイスの情報（Serial::listDevicesが返す）",
+            "desc_ko": "시리얼 장치 하나의 정보 (Serial::listDevices가 반환)",
+            "properties": [
+                {
+                    "name": "deviceId",
+                    "type": "int",
+                    "desc": "Device index"
+                },
+                {
+                    "name": "devicePath",
+                    "type": "std::string",
+                    "desc": "Device path (e.g. COM3, /dev/tty.usbserial-*)"
+                },
+                {
+                    "name": "deviceName",
+                    "type": "std::string",
+                    "desc": "Device name"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getDeviceID",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Device index",
+                    "snippet": "getDeviceID()"
+                },
+                {
+                    "name": "getDevicePath",
+                    "return": "const std::string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Device path",
+                    "snippet": "getDevicePath()"
+                },
+                {
+                    "name": "getDeviceName",
+                    "return": "const std::string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Device name",
+                    "snippet": "getDeviceName()"
                 }
             ]
         }
