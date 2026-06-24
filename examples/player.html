@@ -83,6 +83,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/glsl.min.js"></script>
     <script src="../script.js"></script>
+    <script src="code-reference.js"></script>
     <script>
         const WASM_BASE_URL = 'https://wasm.trussc.org';
         const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/TrussC-org/TrussC/main';
@@ -240,6 +241,9 @@
                     sourceCode.removeAttribute('data-highlighted');
                     hljs.highlightElement(sourceCode);
                     sourceSection.style.display = '';
+
+                    // Enable hover-to-reference dictionary on the code (lazy-loads API data)
+                    if (window.CodeRef) window.CodeRef.enable(sourceCode);
 
                     // Setup tab switching
                     setupSourceTabs(basePath);

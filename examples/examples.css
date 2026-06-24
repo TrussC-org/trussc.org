@@ -396,6 +396,75 @@
     line-height: 1.6;
 }
 
+/* Hover-to-reference popup (code-reference.js) */
+.code-ref-popup {
+    position: fixed;
+    z-index: 1000;
+    max-width: 420px;
+    padding: 10px 12px;
+    background: #0d0d10;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--color-text);
+    pointer-events: auto;
+}
+
+.code-ref-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    color: #dcdcaa;
+    text-decoration: none;
+}
+
+.code-ref-title:hover { text-decoration: underline; }
+
+.code-ref-title .code-ref-go {
+    font-size: 0.72rem;
+    color: var(--color-text-subtle);
+}
+
+.code-ref-kind {
+    margin-top: 4px;
+    color: #4ec9b0;
+}
+
+.code-ref-sigs {
+    margin-top: 6px;
+}
+
+.code-ref-sig {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.code-ref-sig .cr-ret { color: #4ec9b0; }
+.code-ref-sig .cr-name { color: #dcdcaa; }
+.code-ref-sig .cr-params { color: #9cdcfe; }
+.code-ref-sig .cr-val { color: #b5cea8; }
+
+.code-ref-desc {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-family: var(--font-sans, 'Inter', sans-serif);
+    font-size: 0.8rem;
+    line-height: 1.55;
+}
+
+/* Underline only symbols that resolve to a reference entry (tagged in JS) */
+.source-content code .code-ref-known:hover {
+    text-decoration: underline dotted;
+    text-decoration-color: var(--color-text-muted);
+    text-underline-offset: 3px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .examples-grid {
