@@ -45,7 +45,11 @@ const TrussCAPI = {
                         "advance"
                     ],
                     "desc_ja": "毎フレーム、drawの前に呼ばれる",
-                    "desc_ko": "매 프레임 draw 이전에 호출됨"
+                    "desc_ko": "매 프레임 draw 이전에 호출됨",
+                    "related": [
+                        "updateGlyph",
+                        "updateLayout"
+                    ]
                 },
                 {
                     "name": "draw",
@@ -98,7 +102,10 @@ const TrussCAPI = {
                         "entry"
                     ],
                     "desc_ja": "アプリケーションのメインループを開始。main()から呼ぶ",
-                    "desc_ko": "어플리케이션 메인 루프 시작. main()에서 호출"
+                    "desc_ko": "어플리케이션 메인 루프 시작. main()에서 호출",
+                    "related": [
+                        "WindowSettings"
+                    ]
                 }
             ],
             "name_ja": "ライフサイクル",
@@ -285,7 +292,11 @@ const TrussCAPI = {
                         "delete"
                     ],
                     "desc_ja": "画面をクリア。引数なし = 透明黒 (0,0,0,0)",
-                    "desc_ko": "화면을 지움. 인자 없음 = 투명한 검정 (0,0,0,0)"
+                    "desc_ko": "화면을 지움. 인자 없음 = 투명한 검정 (0,0,0,0)",
+                    "related": [
+                        "ChipSoundBundle",
+                        "StrokeMesh"
+                    ]
                 },
                 {
                     "name": "clear",
@@ -301,7 +312,11 @@ const TrussCAPI = {
                         "delete"
                     ],
                     "desc_ja": "画面をクリア。引数なし = 透明黒 (0,0,0,0)",
-                    "desc_ko": "화면을 지움. 인자 없음 = 투명한 검정 (0,0,0,0)"
+                    "desc_ko": "화면을 지움. 인자 없음 = 투명한 검정 (0,0,0,0)",
+                    "related": [
+                        "ChipSoundBundle",
+                        "StrokeMesh"
+                    ]
                 },
                 {
                     "name": "clear",
@@ -317,7 +332,11 @@ const TrussCAPI = {
                         "delete"
                     ],
                     "desc_ja": "画面をクリア。引数なし = 透明黒 (0,0,0,0)",
-                    "desc_ko": "화면을 지움. 인자 없음 = 투명한 검정 (0,0,0,0)"
+                    "desc_ko": "화면을 지움. 인자 없음 = 투명한 검정 (0,0,0,0)",
+                    "related": [
+                        "ChipSoundBundle",
+                        "StrokeMesh"
+                    ]
                 },
                 {
                     "name": "setColor",
@@ -334,6 +353,13 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "描画色を設定 (0.0-1.0)",
                     "desc_ko": "그리기 색상을 설정 (0.0-1.0)",
+                    "related": [
+                        "StrokeMesh",
+                        "getColor",
+                        "setColorHSB",
+                        "setColorOKLCH",
+                        "setColorOKLab"
+                    ],
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -360,6 +386,13 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "描画色を設定 (0.0-1.0)",
                     "desc_ko": "그리기 색상을 설정 (0.0-1.0)",
+                    "related": [
+                        "StrokeMesh",
+                        "getColor",
+                        "setColorHSB",
+                        "setColorOKLCH",
+                        "setColorOKLab"
+                    ],
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -386,6 +419,13 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "描画色を設定 (0.0-1.0)",
                     "desc_ko": "그리기 색상을 설정 (0.0-1.0)",
+                    "related": [
+                        "StrokeMesh",
+                        "getColor",
+                        "setColorHSB",
+                        "setColorOKLCH",
+                        "setColorOKLab"
+                    ],
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -1406,6 +1446,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "図形の描画を開始",
                     "desc_ko": "도형 그리기 시작",
+                    "related": [
+                        "endShape"
+                    ],
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -1556,6 +1599,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "図形の描画を終了",
                     "desc_ko": "도형 그리기 종료",
+                    "related": [
+                        "beginShape"
+                    ],
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -1662,6 +1708,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ストローク描画を開始（内部でStrokeMeshを使用）",
                     "desc_ko": "stroke 그리기 시작 (내부적으로 StrokeMesh 사용)",
+                    "related": [
+                        "endStroke"
+                    ],
                     "examples": [
                         {
                             "name": "grabExample",
@@ -1691,6 +1740,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ストローク描画を終了",
                     "desc_ko": "stroke 그리기 종료",
+                    "related": [
+                        "beginStroke"
+                    ],
                     "examples": [
                         {
                             "name": "grabExample",
@@ -1720,7 +1772,10 @@ const TrussCAPI = {
                         "multiple lines"
                     ],
                     "desc_ja": "バッチ線描画を開始。vertex()で頂点ペアを追加し、endLines()で描画。2頂点で1本の独立した線分。setColor()で頂点ごとに色を変更可能",
-                    "desc_ko": "배치 선 그리기 시작. vertex()로 정점 쌍을 추가한 뒤 endLines()를 호출. 각 정점 쌍이 독립적인 선분 하나를 그림. 정점 사이에 setColor()로 선마다 색상 지정 가능"
+                    "desc_ko": "배치 선 그리기 시작. vertex()로 정점 쌍을 추가한 뒤 endLines()를 호출. 각 정점 쌍이 독립적인 선분 하나를 그림. 정점 사이에 setColor()로 선마다 색상 지정 가능",
+                    "related": [
+                        "endLines"
+                    ]
                 },
                 {
                     "name": "endLines",
@@ -1736,7 +1791,10 @@ const TrussCAPI = {
                         "flush"
                     ],
                     "desc_ja": "バッチ線描画を終了し、蓄積された全線分を描画",
-                    "desc_ko": "배치 선 그리기 종료. 누적된 모든 선을 렌더링"
+                    "desc_ko": "배치 선 그리기 종료. 누적된 모든 선을 렌더링",
+                    "related": [
+                        "beginLines"
+                    ]
                 },
                 {
                     "name": "drawStroke",
@@ -1786,6 +1844,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "テキストを描画",
                     "desc_ko": "비트맵 텍스트 그리기",
+                    "related": [
+                        "drawBitmapStringHighlight"
+                    ],
                     "examples": [
                         {
                             "name": "fontExample",
@@ -2002,7 +2063,10 @@ const TrussCAPI = {
                         "codepoint"
                     ],
                     "desc_ja": "Unicode コードポイントにビットマップグリフを登録 (drawBitmapString を拡張)",
-                    "desc_ko": "유니코드 코드포인트에 비트맵 글리프 등록 (drawBitmapString 확장)"
+                    "desc_ko": "유니코드 코드포인트에 비트맵 글리프 등록 (drawBitmapString 확장)",
+                    "related": [
+                        "Glyph"
+                    ]
                 },
                 {
                     "name": "bitmapfont::registerGlyphs",
@@ -2018,7 +2082,10 @@ const TrussCAPI = {
                         "custom font"
                     ],
                     "desc_ja": "複数のビットマップグリフを一括登録",
-                    "desc_ko": "여러 비트맵 글리프를 한 번에 등록"
+                    "desc_ko": "여러 비트맵 글리프를 한 번에 등록",
+                    "related": [
+                        "Glyph"
+                    ]
                 },
                 {
                     "name": "bitmapfont::updateGlyph",
@@ -2084,7 +2151,10 @@ const TrussCAPI = {
                         "text"
                     ],
                     "desc_ja": "ビットマップ文字列の改行時の行の高さを設定（デフォルト: 16）",
-                    "desc_ko": "비트맵 문자열 개행 시의 줄 높이를 설정 (기본값: 16)"
+                    "desc_ko": "비트맵 문자열 개행 시의 줄 높이를 설정 (기본값: 16)",
+                    "related": [
+                        "getBitmapLineHeight"
+                    ]
                 },
                 {
                     "name": "getBitmapLineHeight",
@@ -2100,7 +2170,10 @@ const TrussCAPI = {
                         "text"
                     ],
                     "desc_ja": "ビットマップ文字列の改行時の行の高さを取得",
-                    "desc_ko": "비트맵 문자열 개행 시의 줄 높이를 얻음"
+                    "desc_ko": "비트맵 문자열 개행 시의 줄 높이를 얻음",
+                    "related": [
+                        "setBitmapLineHeight"
+                    ]
                 },
                 {
                     "name": "setFps",
@@ -2118,6 +2191,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ターゲットフレームレートを設定 (VSYNC = -1.0)",
                     "desc_ko": "목표 프레임레이트를 설정 (VSYNC = -1.0)",
+                    "related": [
+                        "getFps"
+                    ],
                     "examples": [
                         {
                             "name": "loopModeExample",
@@ -2203,6 +2279,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ストロークの太さを設定",
                     "desc_ko": "stroke 두께를 설정",
+                    "related": [
+                        "getStrokeWeight"
+                    ],
                     "examples": [
                         {
                             "name": "fontPathExample",
@@ -2231,7 +2310,10 @@ const TrussCAPI = {
                         "weight"
                     ],
                     "desc_ja": "現在のストロークの太さを取得",
-                    "desc_ko": "현재 storke 두께를 얻음"
+                    "desc_ko": "현재 storke 두께를 얻음",
+                    "related": [
+                        "setStrokeWeight"
+                    ]
                 },
                 {
                     "name": "setStrokeCap",
@@ -2249,6 +2331,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ストローク端点のスタイルを設定",
                     "desc_ko": "stroke 끝점 스타일을 설정 (Butt, Round, Square)",
+                    "related": [
+                        "StrokeCap",
+                        "getStrokeCap"
+                    ],
                     "examples": [
                         {
                             "name": "strokeExample",
@@ -2277,7 +2363,11 @@ const TrussCAPI = {
                         "ending"
                     ],
                     "desc_ja": "現在のストローク端点スタイルを取得",
-                    "desc_ko": "현재 stroke 끝점 스타일을 얻음"
+                    "desc_ko": "현재 stroke 끝점 스타일을 얻음",
+                    "related": [
+                        "StrokeCap",
+                        "setStrokeCap"
+                    ]
                 },
                 {
                     "name": "setStrokeJoin",
@@ -2295,6 +2385,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ストローク結合部のスタイルを設定",
                     "desc_ko": "stroke 결합부 스타일을 설정 (Miter, Round, Bevel)",
+                    "related": [
+                        "StrokeJoin",
+                        "getStrokeJoin"
+                    ],
                     "examples": [
                         {
                             "name": "strokeExample",
@@ -2323,7 +2417,11 @@ const TrussCAPI = {
                         "miter"
                     ],
                     "desc_ja": "現在のストローク結合部スタイルを取得",
-                    "desc_ko": "현재 stroke 결합부 스타일을 얻음"
+                    "desc_ko": "현재 stroke 결합부 스타일을 얻음",
+                    "related": [
+                        "StrokeJoin",
+                        "setStrokeJoin"
+                    ]
                 },
                 {
                     "name": "isFillEnabled",
@@ -2370,6 +2468,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "曲線の適応的分割の許容誤差をピクセル単位で設定（小さいほど滑らか、スケール対応）",
                     "desc_ko": "곡선의 적응형 분할 허용 오차를 픽셀 단위로 설정 (작을수록 부드러움, 스케일 대응)",
+                    "related": [
+                        "getCurveTolerance"
+                    ],
                     "examples": [
                         {
                             "name": "curvesExample",
@@ -2398,7 +2499,10 @@ const TrussCAPI = {
                         "resolution"
                     ],
                     "desc_ja": "現在の曲線分割の許容誤差を取得（ピクセル単位）",
-                    "desc_ko": "현재 곡선 분할 허용 오차를 얻음 (픽셀 단위)"
+                    "desc_ko": "현재 곡선 분할 허용 오차를 얻음 (픽셀 단위)",
+                    "related": [
+                        "setCurveTolerance"
+                    ]
                 },
                 {
                     "name": "setCurveResolution",
@@ -2415,6 +2519,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "曲線の固定分割数を設定（適応的tolerance modeをオフ）",
                     "desc_ko": "곡선의 고정 분할 개수를 설정 (적응형 tolerance 모드 끔)",
+                    "related": [
+                        "getCurveResolution"
+                    ],
                     "examples": [
                         {
                             "name": "curvesExample",
@@ -2435,7 +2542,10 @@ const TrussCAPI = {
                         "smoothness"
                     ],
                     "desc_ja": "現在の曲線分割数を取得",
-                    "desc_ko": "현재 곡선 분할 개수를 얻음"
+                    "desc_ko": "현재 곡선 분할 개수를 얻음",
+                    "related": [
+                        "setCurveResolution"
+                    ]
                 },
                 {
                     "name": "pushStyle",
@@ -2452,6 +2562,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "現在のスタイル状態を保存（色、ストローク、塗りつぶし）",
                     "desc_ko": "현재 스타일 상태를 저장 (색상, 스트로크, 채우기)",
+                    "related": [
+                        "popStyle"
+                    ],
                     "examples": [
                         {
                             "name": "fontExample",
@@ -2478,6 +2591,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "保存したスタイル状態を復元",
                     "desc_ko": "이전 스타일 상태를 복원",
+                    "related": [
+                        "pushStyle"
+                    ],
                     "examples": [
                         {
                             "name": "fontExample",
@@ -2520,6 +2636,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "現在の塗りつぶし色を取得",
                     "desc_ko": "현재 채우기 색상을 얻음",
+                    "related": [
+                        "setColor"
+                    ],
                     "examples": [
                         {
                             "name": "easyCamExample",
@@ -2574,7 +2693,10 @@ const TrussCAPI = {
                         "save"
                     ],
                     "desc_ja": "シザー矩形をスタックにプッシュ",
-                    "desc_ko": "시저 사각형을 스택에 푸시"
+                    "desc_ko": "시저 사각형을 스택에 푸시",
+                    "related": [
+                        "popScissor"
+                    ]
                 },
                 {
                     "name": "popScissor",
@@ -2590,7 +2712,10 @@ const TrussCAPI = {
                         "restore"
                     ],
                     "desc_ja": "シザー矩形をスタックからポップ",
-                    "desc_ko": "시저 사각형을 스택에서 복원"
+                    "desc_ko": "시저 사각형을 스택에서 복원",
+                    "related": [
+                        "pushScissor"
+                    ]
                 },
                 {
                     "name": "setBlendMode",
@@ -2609,6 +2734,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ブレンドモードを設定。BlendMode::Alpha（デフォルト）, Add, Multiply, Screen, Subtract, Disabled",
                     "desc_ko": "블렌드 모드를 설정. BlendMode::Alpha (기본값), Add, Multiply, Screen, Subtract, Disabled",
+                    "related": [
+                        "BlendMode",
+                        "getBlendMode"
+                    ],
                     "examples": [
                         {
                             "name": "blendingExample",
@@ -2629,7 +2758,11 @@ const TrussCAPI = {
                         "current"
                     ],
                     "desc_ja": "現在のブレンドモードを取得",
-                    "desc_ko": "현재 블렌드 모드를 얻음"
+                    "desc_ko": "현재 블렌드 모드를 얻음",
+                    "related": [
+                        "BlendMode",
+                        "setBlendMode"
+                    ]
                 },
                 {
                     "name": "resetBlendMode",
@@ -2820,6 +2953,16 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ラジアンで回転（単軸、オイラー角、またはクォータニオン）",
                     "desc_ko": "라디안으로 회전 (단일 축, 오일러 각도 또는 쿼터니언)",
+                    "related": [
+                        "Quaternion",
+                        "rotateDeg",
+                        "rotateX",
+                        "rotateY",
+                        "rotateZ",
+                        "rotateXDeg",
+                        "rotateYDeg",
+                        "rotateZDeg"
+                    ],
                     "examples": [
                         {
                             "name": "emptyExample",
@@ -2842,6 +2985,16 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ラジアンで回転（単軸、オイラー角、またはクォータニオン）",
                     "desc_ko": "라디안으로 회전 (단일 축, 오일러 각도 또는 쿼터니언)",
+                    "related": [
+                        "Quaternion",
+                        "rotateDeg",
+                        "rotateX",
+                        "rotateY",
+                        "rotateZ",
+                        "rotateXDeg",
+                        "rotateYDeg",
+                        "rotateZDeg"
+                    ],
                     "examples": [
                         {
                             "name": "emptyExample",
@@ -2864,6 +3017,16 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ラジアンで回転（単軸、オイラー角、またはクォータニオン）",
                     "desc_ko": "라디안으로 회전 (단일 축, 오일러 각도 또는 쿼터니언)",
+                    "related": [
+                        "Quaternion",
+                        "rotateDeg",
+                        "rotateX",
+                        "rotateY",
+                        "rotateZ",
+                        "rotateXDeg",
+                        "rotateYDeg",
+                        "rotateZDeg"
+                    ],
                     "examples": [
                         {
                             "name": "emptyExample",
@@ -2886,6 +3049,16 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ラジアンで回転（単軸、オイラー角、またはクォータニオン）",
                     "desc_ko": "라디안으로 회전 (단일 축, 오일러 각도 또는 쿼터니언)",
+                    "related": [
+                        "Quaternion",
+                        "rotateDeg",
+                        "rotateX",
+                        "rotateY",
+                        "rotateZ",
+                        "rotateXDeg",
+                        "rotateYDeg",
+                        "rotateZDeg"
+                    ],
                     "examples": [
                         {
                             "name": "emptyExample",
@@ -2956,6 +3129,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "X軸周りに回転",
                     "desc_ko": "X축을 중심으로 회전",
+                    "related": [
+                        "rotateXDeg"
+                    ],
                     "examples": [
                         {
                             "name": "fboMipmapExample",
@@ -2986,6 +3162,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "Y軸周りに回転",
                     "desc_ko": "Y축을 중심으로 회전",
+                    "related": [
+                        "rotateYDeg"
+                    ],
                     "examples": [
                         {
                             "name": "fboMipmapExample",
@@ -3015,7 +3194,10 @@ const TrussCAPI = {
                         "rotation"
                     ],
                     "desc_ja": "Z軸周りに回転",
-                    "desc_ko": "Z축을 중심으로 회전"
+                    "desc_ko": "Z축을 중심으로 회전",
+                    "related": [
+                        "rotateZDeg"
+                    ]
                 },
                 {
                     "name": "rotateXDeg",
@@ -3134,6 +3316,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "変換状態を保存",
                     "desc_ko": "변환 상태를 저장",
+                    "related": [
+                        "popMatrix"
+                    ],
                     "examples": [
                         {
                             "name": "easyCamExample",
@@ -3164,6 +3349,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "変換状態を復元",
                     "desc_ko": "변환 상태를 복원",
+                    "related": [
+                        "pushMatrix"
+                    ],
                     "examples": [
                         {
                             "name": "easyCamExample",
@@ -3193,7 +3381,10 @@ const TrussCAPI = {
                         "current"
                     ],
                     "desc_ja": "現在の変換行列を取得",
-                    "desc_ko": "현재 변환 행렬을 얻음"
+                    "desc_ko": "현재 변환 행렬을 얻음",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "resetMatrix",
@@ -3224,7 +3415,10 @@ const TrussCAPI = {
                         "load"
                     ],
                     "desc_ja": "変換行列を直接設定",
-                    "desc_ko": "변환 행렬을 직접 설정"
+                    "desc_ko": "변환 행렬을 직접 설정",
+                    "related": [
+                        "Mat4"
+                    ]
                 }
             ],
             "name_ja": "変換",
@@ -3282,7 +3476,10 @@ const TrussCAPI = {
                         "resolution"
                     ],
                     "desc_ja": "キャンバスのサイズをVec2で取得",
-                    "desc_ko": "캔버스 크기를 Vec2로 얻음"
+                    "desc_ko": "캔버스 크기를 Vec2로 얻음",
+                    "related": [
+                        "setWindowSize"
+                    ]
                 },
                 {
                     "name": "requestExitApp",
@@ -3334,6 +3531,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ファイル選択ダイアログを表示。FileDialogResult（filePath, fileName, success）を返す",
                     "desc_ko": "파일 열기 대화상자 표시. filePath, fileName, success가 담긴 FileDialogResult 반환",
+                    "related": [
+                        "FileDialogResult",
+                        "loadDialogAsync"
+                    ],
                     "examples": [
                         {
                             "name": "fileDialogExample",
@@ -3364,6 +3565,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ファイル保存ダイアログを表示。FileDialogResult（filePath, fileName, success）を返す",
                     "desc_ko": "파일 저장 대화상자 표시. filePath, fileName, success가 담긴 FileDialogResult 반환",
+                    "related": [
+                        "FileDialogResult",
+                        "saveDialogAsync"
+                    ],
                     "examples": [
                         {
                             "name": "fileDialogExample",
@@ -3394,6 +3599,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "OKボタン付きのアラートダイアログを表示",
                     "desc_ko": "OK 버튼이 있는 알림 대화상자 표시",
+                    "related": [
+                        "alertDialogAsync"
+                    ],
                     "examples": [
                         {
                             "name": "fileDialogExample",
@@ -3425,6 +3633,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "Yes/No確認ダイアログを表示。Yesが押されたらtrueを返す",
                     "desc_ko": "Yes/No 확인 대화상자 표시. Yes를 누르면 true 반환",
+                    "related": [
+                        "confirmDialogAsync"
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -3450,6 +3661,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ファイル選択ダイアログを非同期で表示。コールバックにFileDialogResultが渡される",
                     "desc_ko": "파일 열기 대화상자를 비동기로 표시. 콜백에 FileDialogResult가 전달됨",
+                    "related": [
+                        "FileDialogResult"
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -3475,6 +3689,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ファイル保存ダイアログを非同期で表示。コールバックにFileDialogResultが渡される",
                     "desc_ko": "파일 저장 대화상자를 비동기로 표시. 콜백에 FileDialogResult가 전달됨",
+                    "related": [
+                        "FileDialogResult"
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -3781,7 +3998,10 @@ const TrussCAPI = {
                         "emulate"
                     ],
                     "desc_ja": "タッチイベントをマウスイベントとして発火させるか設定（Android/iOS用）",
-                    "desc_ko": "터치 이벤트를 마우스 이벤트로 발생시킬지 설정 (Android/iOS용)"
+                    "desc_ko": "터치 이벤트를 마우스 이벤트로 발생시킬지 설정 (Android/iOS용)",
+                    "related": [
+                        "getTouchAsMouse"
+                    ]
                 },
                 {
                     "name": "getTouchAsMouse",
@@ -3799,7 +4019,10 @@ const TrussCAPI = {
                         "finger"
                     ],
                     "desc_ja": "touchAsMouseの状態を取得",
-                    "desc_ko": "touchAsMouse 상태를 얻음"
+                    "desc_ko": "touchAsMouse 상태를 얻음",
+                    "related": [
+                        "setTouchAsMouse"
+                    ]
                 },
                 {
                     "name": "isMousePressed",
@@ -3938,7 +4161,10 @@ const TrussCAPI = {
                         "unhide"
                     ],
                     "desc_ja": "マウスカーソルを表示（デフォルト）",
-                    "desc_ko": "마우스 커서를 표시 (기본값)"
+                    "desc_ko": "마우스 커서를 표시 (기본값)",
+                    "related": [
+                        "hideCursor"
+                    ]
                 },
                 {
                     "name": "hideCursor",
@@ -3956,7 +4182,10 @@ const TrussCAPI = {
                         "conceal"
                     ],
                     "desc_ja": "マウスカーソルを隠す",
-                    "desc_ko": "마우스 커서를 숨김"
+                    "desc_ko": "마우스 커서를 숨김",
+                    "related": [
+                        "showCursor"
+                    ]
                 },
                 {
                     "name": "setCursor",
@@ -3975,6 +4204,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "マウスカーソルの形状を設定",
                     "desc_ko": "마우스 커서 모양을 설정",
+                    "related": [
+                        "Cursor",
+                        "getCursor"
+                    ],
                     "examples": [
                         {
                             "name": "cursorExample",
@@ -3998,7 +4231,11 @@ const TrussCAPI = {
                         "current"
                     ],
                     "desc_ja": "現在のマウスカーソル形状を取得",
-                    "desc_ko": "현재 마우스 커서 모양을 얻음"
+                    "desc_ko": "현재 마우스 커서 모양을 얻음",
+                    "related": [
+                        "Cursor",
+                        "setCursor"
+                    ]
                 },
                 {
                     "name": "bindCursorImage",
@@ -4017,6 +4254,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "カスタム画像をカーソルスロットにバインド（RGBAピクセルまたはImage）",
                     "desc_ko": "커서 슬롯에 커스텀 이미지를 바인딩 (RGBA 픽셀 또는 Image)",
+                    "related": [
+                        "Cursor",
+                        "Image"
+                    ],
                     "examples": [
                         {
                             "name": "cursorExample",
@@ -4041,6 +4282,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "カスタム画像をカーソルスロットにバインド（RGBAピクセルまたはImage）",
                     "desc_ko": "커서 슬롯에 커스텀 이미지를 바인딩 (RGBA 픽셀 또는 Image)",
+                    "related": [
+                        "Cursor",
+                        "Image"
+                    ],
                     "examples": [
                         {
                             "name": "cursorExample",
@@ -4064,7 +4309,10 @@ const TrussCAPI = {
                         "restore"
                     ],
                     "desc_ja": "カスタムカーソル画像を解除し、システムデフォルトに戻す",
-                    "desc_ko": "커스텀 커서 이미지를 해제하고 시스템 기본값으로 복원"
+                    "desc_ko": "커스텀 커서 이미지를 해제하고 시스템 기본값으로 복원",
+                    "related": [
+                        "Cursor"
+                    ]
                 },
                 {
                     "name": "events",
@@ -4083,6 +4331,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "CoreEvents"
+                    ],
                     "examples": [
                         {
                             "name": "eventsExample",
@@ -4218,6 +4469,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "現在のFPSを取得（getFrameRateのエイリアス）",
                     "desc_ko": "현재 FPS를 얻음 (getFrameRate의 별칭)",
+                    "related": [
+                        "setFps",
+                        "getFpsSettings"
+                    ],
                     "examples": [
                         {
                             "name": "bitmapStringExtendedExample",
@@ -4348,6 +4603,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "FpsSettings"
+                    ],
                     "examples": [
                         {
                             "name": "loopModeExample",
@@ -4672,6 +4930,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "getImmersiveMode"
+                    ],
                     "examples": [
                         {
                             "name": "systemInfoExample",
@@ -4700,6 +4961,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "setImmersiveMode"
+                    ],
                     "examples": [
                         {
                             "name": "systemInfoExample",
@@ -4729,6 +4993,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "Pixels"
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -4754,6 +5021,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "setSystemVolume"
+                    ],
                     "examples": [
                         {
                             "name": "systemInfoExample",
@@ -4784,6 +5054,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "getSystemVolume"
+                    ],
                     "platforms": [
                         "macos",
                         "android"
@@ -4806,6 +5079,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "setSystemBrightness"
+                    ],
                     "examples": [
                         {
                             "name": "systemInfoExample",
@@ -4836,6 +5112,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "getSystemBrightness"
+                    ],
                     "platforms": [
                         "macos",
                         "ios"
@@ -4858,6 +5137,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "ThermalState"
+                    ],
                     "examples": [
                         {
                             "name": "systemInfoExample",
@@ -5029,6 +5311,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "Quaternion"
+                    ],
                     "examples": [
                         {
                             "name": "systemInfoExample",
@@ -5116,6 +5401,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "Location"
+                    ],
                     "examples": [
                         {
                             "name": "systemInfoExample",
@@ -5275,7 +5563,10 @@ const TrussCAPI = {
                         "when built"
                     ],
                     "desc_ja": "ビルド日 \"YYYY-MM-DD\" 形式 (ローカル時刻、CMake configure 時点)",
-                    "desc_ko": "빌드 날짜 \"YYYY-MM-DD\" 형식 (로컬 시간, CMake 구성 시점)"
+                    "desc_ko": "빌드 날짜 \"YYYY-MM-DD\" 형식 (로컬 시간, CMake 구성 시점)",
+                    "related": [
+                        "BuildInfo::dateTime"
+                    ]
                 },
                 {
                     "name": "BuildInfo::time",
@@ -5471,6 +5762,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "経過秒数（getElapsedTimefのエイリアス）",
                     "desc_ko": "경과 시간(초, getElapsedTimef의 별칭)",
+                    "related": [
+                        "getElapsedTimeMillis",
+                        "getElapsedTimeMicros"
+                    ],
                     "examples": [
                         {
                             "name": "vectorMathExample",
@@ -5853,6 +6148,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "乱数",
                     "desc_ko": "난수",
+                    "related": [
+                        "randomInt",
+                        "randomSeed"
+                    ],
                     "examples": [
                         {
                             "name": "timerExample",
@@ -5876,6 +6175,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "乱数",
                     "desc_ko": "난수",
+                    "related": [
+                        "randomInt",
+                        "randomSeed"
+                    ],
                     "examples": [
                         {
                             "name": "timerExample",
@@ -5899,6 +6202,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "乱数",
                     "desc_ko": "난수",
+                    "related": [
+                        "randomInt",
+                        "randomSeed"
+                    ],
                     "examples": [
                         {
                             "name": "timerExample",
@@ -6165,6 +6472,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "線形補間",
                     "desc_ko": "선형 보간",
+                    "related": [
+                        "ColorHSB",
+                        "ColorOKLCH"
+                    ],
                     "examples": [
                         {
                             "name": "timerExample",
@@ -6730,7 +7041,10 @@ const TrussCAPI = {
                         "rotation"
                     ],
                     "desc_ja": "最短角度差（ラジアン）[-TAU/2, TAU/2]",
-                    "desc_ko": "최단 각도 차이(라디안) [-TAU/2, TAU/2]"
+                    "desc_ko": "최단 각도 차이(라디안) [-TAU/2, TAU/2]",
+                    "related": [
+                        "angleDifferenceDeg"
+                    ]
                 },
                 {
                     "name": "angleDifferenceDeg",
@@ -6765,7 +7079,10 @@ const TrussCAPI = {
                         "leakage"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "WindowType"
+                    ]
                 },
                 {
                     "name": "applyWindow",
@@ -6783,7 +7100,10 @@ const TrussCAPI = {
                         "leakage"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "WindowType"
+                    ]
                 },
                 {
                     "name": "isPowerOfTwo",
@@ -6882,6 +7202,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "WindowType"
+                    ],
                     "examples": [
                         {
                             "name": "micInputExample",
@@ -6909,6 +7232,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "WindowType"
+                    ],
                     "examples": [
                         {
                             "name": "micInputExample",
@@ -6934,7 +7260,10 @@ const TrussCAPI = {
                         "bins"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "fftMagnitudeDb"
+                    ]
                 },
                 {
                     "name": "fftMagnitudeDb",
@@ -7035,7 +7364,10 @@ const TrussCAPI = {
                         "coefficient"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "WindowType"
+                    ]
                 }
             ],
             "name_ja": "数学 - 一般",
@@ -7115,7 +7447,11 @@ const TrussCAPI = {
                         "resolution"
                     ],
                     "desc_ja": "ウィンドウのサイズを設定",
-                    "desc_ko": "윈도우 크기를 설정"
+                    "desc_ko": "윈도우 크기를 설정",
+                    "related": [
+                        "getWindowSize",
+                        "setWindowSizeLogical"
+                    ]
                 },
                 {
                     "name": "getWindowPosition",
@@ -7133,6 +7469,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "スクリーン座標でのウィンドウ位置を取得（左上原点）。macOS/Windowsのみ対応、他は(-1, -1)を返す",
                     "desc_ko": "윈도우 위치를 스크린 좌표(좌상단 원점)로 얻음. macOS/Windows만 지원, 그 외 플랫폼은 (-1, -1) 반환",
+                    "related": [
+                        "setWindowPosition"
+                    ],
                     "platforms": [
                         "macos",
                         "windows"
@@ -7156,6 +7495,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "スクリーン座標でウィンドウ位置を設定（左上原点）。macOS/Windowsのみ対応、他はno-op",
                     "desc_ko": "윈도우 위치를 스크린 좌표(좌상단 원점)로 설정. macOS/Windows만 지원, 그 외 플랫폼은 동작하지 않음",
+                    "related": [
+                        "getWindowPosition"
+                    ],
                     "platforms": [
                         "macos",
                         "windows"
@@ -7200,6 +7542,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "クリップボードにコピー",
                     "desc_ko": "텍스트를 클립보드에 복사",
+                    "related": [
+                        "getClipboardString"
+                    ],
                     "examples": [
                         {
                             "name": "clipboardExample",
@@ -7222,6 +7567,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "クリップボードから取得",
                     "desc_ko": "클립보드에서 텍스트를 얻음",
+                    "related": [
+                        "setClipboardString"
+                    ],
                     "examples": [
                         {
                             "name": "clipboardExample",
@@ -7312,6 +7660,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "画面の向きを設定（モバイル用）。Orientation::Portrait, Landscape, All",
                     "desc_ko": "허용되는 화면 방향을 설정 (모바일). 값: Orientation::Portrait, Landscape, All",
+                    "related": [
+                        "Orientation"
+                    ],
                     "platforms": [
                         "ios",
                         "android"
@@ -7335,6 +7686,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "アプリ実行中に画面スリープ/自動ロックを抑止。対応: Android, iOS, macOS, Windows。Linux / Web は no-op",
                     "desc_ko": "앱 실행 중 화면 절전/자동 잠금을 방지. 지원: Android, iOS, macOS, Windows. Linux / Web는 동작하지 않음",
+                    "related": [
+                        "getKeepScreenOn"
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -7359,6 +7713,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "現在 keep-screen-on が有効かどうかを取得",
                     "desc_ko": "현재 keep-screen-on이 활성화되어 있는지 확인",
+                    "related": [
+                        "setKeepScreenOn"
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -7413,7 +7770,10 @@ const TrussCAPI = {
                         "readback"
                     ],
                     "desc_ja": "現在の画面をPixelsにキャプチャ",
-                    "desc_ko": "현재 화면을 Pixels에 캡처"
+                    "desc_ko": "현재 화면을 Pixels에 캡처",
+                    "related": [
+                        "Pixels"
+                    ]
                 },
                 {
                     "name": "saveScreenshot",
@@ -7448,6 +7808,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ウィンドウを動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）",
                     "desc_ko": "윈도우를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요)",
+                    "related": [
+                        "VideoRecordSettings"
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -7699,7 +8062,10 @@ const TrussCAPI = {
                         "server"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "HeadlessSettings"
+                    ]
                 }
             ],
             "name_ja": "ウィンドウとシステム",
@@ -7740,7 +8106,11 @@ const TrussCAPI = {
                         "shrink"
                     ],
                     "desc_ja": "バイト列を指定コーデック（Codec::None / Codec::LZ4）で圧縮する。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込み、書き込みバイト数（失敗 -1）を返す（バッファの一部への圧縮・並列チャンク向け）",
-                    "desc_ko": "지정한 코덱(Codec::None / Codec::LZ4)으로 바이트 버퍼를 압축. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환 (버퍼 일부 압축·병렬 청크용)"
+                    "desc_ko": "지정한 코덱(Codec::None / Codec::LZ4)으로 바이트 버퍼를 압축. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환 (버퍼 일부 압축·병렬 청크용)",
+                    "related": [
+                        "Codec",
+                        "compressBound"
+                    ]
                 },
                 {
                     "name": "compress",
@@ -7757,7 +8127,11 @@ const TrussCAPI = {
                         "shrink"
                     ],
                     "desc_ja": "バイト列を指定コーデック（Codec::None / Codec::LZ4）で圧縮する。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込み、書き込みバイト数（失敗 -1）を返す（バッファの一部への圧縮・並列チャンク向け）",
-                    "desc_ko": "지정한 코덱(Codec::None / Codec::LZ4)으로 바이트 버퍼를 압축. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환 (버퍼 일부 압축·병렬 청크용)"
+                    "desc_ko": "지정한 코덱(Codec::None / Codec::LZ4)으로 바이트 버퍼를 압축. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환 (버퍼 일부 압축·병렬 청크용)",
+                    "related": [
+                        "Codec",
+                        "compressBound"
+                    ]
                 },
                 {
                     "name": "decompress",
@@ -7774,7 +8148,10 @@ const TrussCAPI = {
                         "extract"
                     ],
                     "desc_ja": "バイト列を展開する。decompressedSize は元の（展開後）バイト数。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込みバイト数（失敗 -1）を返し、既存バッファの途中（dst + offset）にも書ける（並列チャンク展開向け）",
-                    "desc_ko": "바이트 버퍼를 해제. decompressedSize는 원본 바이트 수. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환하며 기존 버퍼 일부(dst + offset)에도 쓸 수 있음 (병렬 청크 해제용)"
+                    "desc_ko": "바이트 버퍼를 해제. decompressedSize는 원본 바이트 수. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환하며 기존 버퍼 일부(dst + offset)에도 쓸 수 있음 (병렬 청크 해제용)",
+                    "related": [
+                        "Codec"
+                    ]
                 },
                 {
                     "name": "decompress",
@@ -7791,7 +8168,10 @@ const TrussCAPI = {
                         "extract"
                     ],
                     "desc_ja": "バイト列を展開する。decompressedSize は元の（展開後）バイト数。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込みバイト数（失敗 -1）を返し、既存バッファの途中（dst + offset）にも書ける（並列チャンク展開向け）",
-                    "desc_ko": "바이트 버퍼를 해제. decompressedSize는 원본 바이트 수. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환하며 기존 버퍼 일부(dst + offset)에도 쓸 수 있음 (병렬 청크 해제용)"
+                    "desc_ko": "바이트 버퍼를 해제. decompressedSize는 원본 바이트 수. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환하며 기존 버퍼 일부(dst + offset)에도 쓸 수 있음 (병렬 청크 해제용)",
+                    "related": [
+                        "Codec"
+                    ]
                 },
                 {
                     "name": "toString",
@@ -8149,7 +8529,10 @@ const TrussCAPI = {
                         "severity"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "LogLevel"
+                    ]
                 },
                 {
                     "name": "getLogger",
@@ -8164,7 +8547,10 @@ const TrussCAPI = {
                         "logging"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "Logger"
+                    ]
                 },
                 {
                     "name": "setConsoleLogLevel",
@@ -8182,6 +8568,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "LogLevel"
+                    ],
                     "examples": [
                         {
                             "name": "jsonXmlExample",
@@ -8204,7 +8593,10 @@ const TrussCAPI = {
                         "filter"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "LogLevel"
+                    ]
                 },
                 {
                     "name": "setLogFile",
@@ -8254,7 +8646,10 @@ const TrussCAPI = {
                         "compress"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "Codec"
+                    ]
                 },
                 {
                     "name": "toInt64",
@@ -8500,7 +8895,10 @@ const TrussCAPI = {
                         "decode"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "Json"
+                    ]
                 },
                 {
                     "name": "toJsonString",
@@ -8518,6 +8916,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "Json"
+                    ],
                     "examples": [
                         {
                             "name": "jsonXmlExample",
@@ -8539,7 +8940,10 @@ const TrussCAPI = {
                         "decode"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "Xml"
+                    ]
                 },
                 {
                     "name": "reflectToJson",
@@ -8556,7 +8960,10 @@ const TrussCAPI = {
                         "json"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "Json"
+                    ]
                 },
                 {
                     "name": "reflectFromJson",
@@ -8573,7 +8980,10 @@ const TrussCAPI = {
                         "json"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "Json"
+                    ]
                 },
                 {
                     "name": "isMainThread",
@@ -8630,6 +9040,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "データディレクトリからの相対パスを取得",
                     "desc_ko": "데이터 디렉토리 기준의 전체 경로를 얻음",
+                    "related": [
+                        "getDataPathRoot"
+                    ],
                     "examples": [
                         {
                             "name": "imageLoaderExample",
@@ -9015,7 +9428,10 @@ const TrussCAPI = {
                         "writer"
                     ],
                     "desc_ja": "ファイルライターを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "파일 라이터를 생성 (TrussSketch 팩토리)"
+                    "desc_ko": "파일 라이터를 생성 (TrussSketch 팩토리)",
+                    "related": [
+                        "FileWriter"
+                    ]
                 },
                 {
                     "name": "createFileReader",
@@ -9032,7 +9448,10 @@ const TrussCAPI = {
                         "reader"
                     ],
                     "desc_ja": "ファイルリーダーを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "파일 리더를 생성 (TrussSketch 팩토리)"
+                    "desc_ko": "파일 리더를 생성 (TrussSketch 팩토리)",
+                    "related": [
+                        "FileReader"
+                    ]
                 },
                 {
                     "name": "loadJson",
@@ -9050,6 +9469,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "Json"
+                    ],
                     "examples": [
                         {
                             "name": "jsonXmlExample",
@@ -9073,6 +9495,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "Json"
+                    ],
                     "examples": [
                         {
                             "name": "jsonXmlExample",
@@ -9096,6 +9521,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "Xml"
+                    ],
                     "examples": [
                         {
                             "name": "jsonXmlExample",
@@ -9118,7 +9546,10 @@ const TrussCAPI = {
                         "base"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "getDataPathRoot"
+                    ]
                 },
                 {
                     "name": "getDataPathRoot",
@@ -9135,7 +9566,10 @@ const TrussCAPI = {
                         "base"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "setDataPathRoot"
+                    ]
                 },
                 {
                     "name": "setDataPathToResources",
@@ -9255,7 +9689,10 @@ const TrussCAPI = {
                         "instantiate"
                     ],
                     "desc_ja": "サウンドプレイヤーを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "사운드 플레이어를 생성 (TrussSketch 팩토리)"
+                    "desc_ko": "사운드 플레이어를 생성 (TrussSketch 팩토리)",
+                    "related": [
+                        "Sound"
+                    ]
                 },
                 {
                     "name": "load",
@@ -9361,7 +9798,10 @@ const TrussCAPI = {
                         "freeze"
                     ],
                     "desc_ja": "再生を一時停止 (resume() で再開)",
-                    "desc_ko": "재생을 일시 정지 (resume()로 재개)"
+                    "desc_ko": "재생을 일시 정지 (resume()로 재개)",
+                    "related": [
+                        "Tween"
+                    ]
                 },
                 {
                     "name": "resume",
@@ -9376,7 +9816,10 @@ const TrussCAPI = {
                         "restart"
                     ],
                     "desc_ja": "一時停止していた再生を再開",
-                    "desc_ko": "일시 정지된 재생을 재개"
+                    "desc_ko": "일시 정지된 재생을 재개",
+                    "related": [
+                        "Tween"
+                    ]
                 },
                 {
                     "name": "isPlaying",
@@ -9440,7 +9883,10 @@ const TrussCAPI = {
                         "seek"
                     ],
                     "desc_ja": "現在の再生位置を秒で取得",
-                    "desc_ko": "현재 재생 위치를 초로 가져옴"
+                    "desc_ko": "현재 재생 위치를 초로 가져옴",
+                    "related": [
+                        "setPosition"
+                    ]
                 },
                 {
                     "name": "setPosition",
@@ -9457,7 +9903,10 @@ const TrussCAPI = {
                         "normalized"
                     ],
                     "desc_ja": "指定秒数にシーク。ストリームでは ring 補充に ~10ms 無音",
-                    "desc_ko": "지정 시간(초)으로 시크. 스트림은 링 재충전에 ~10ms 무음"
+                    "desc_ko": "지정 시간(초)으로 시크. 스트림은 링 재충전에 ~10ms 무음",
+                    "related": [
+                        "getPosition"
+                    ]
                 },
                 {
                     "name": "getDuration",
@@ -9489,7 +9938,10 @@ const TrussCAPI = {
                         "level"
                     ],
                     "desc_ja": "音量を設定",
-                    "desc_ko": "음량을 설정 (0.0-1.0)"
+                    "desc_ko": "음량을 설정 (0.0-1.0)",
+                    "related": [
+                        "getVolume"
+                    ]
                 },
                 {
                     "name": "getVolume",
@@ -9505,7 +9957,10 @@ const TrussCAPI = {
                         "level"
                     ],
                     "desc_ja": "現在の音量を取得",
-                    "desc_ko": "현재 음량을 가져옴"
+                    "desc_ko": "현재 음량을 가져옴",
+                    "related": [
+                        "setVolume"
+                    ]
                 },
                 {
                     "name": "setPan",
@@ -9521,7 +9976,11 @@ const TrussCAPI = {
                         "audio"
                     ],
                     "desc_ja": "ステレオバランス (-1.0=L, 0=中央, +1.0=R) を設定。多 ch デバイスでは ch0/ch1 のみに作用",
-                    "desc_ko": "스테레오 밸런스 (-1.0=좌, 0=중앙, +1.0=우) 설정. 다채널 장치는 ch0/ch1만 적용"
+                    "desc_ko": "스테레오 밸런스 (-1.0=좌, 0=중앙, +1.0=우) 설정. 다채널 장치는 ch0/ch1만 적용",
+                    "related": [
+                        "getPan",
+                        "setPanSensitivity"
+                    ]
                 },
                 {
                     "name": "getPan",
@@ -9537,7 +9996,10 @@ const TrussCAPI = {
                         "audio"
                     ],
                     "desc_ja": "現在の pan を取得",
-                    "desc_ko": "현재 pan을 가져옴"
+                    "desc_ko": "현재 pan을 가져옴",
+                    "related": [
+                        "setPan"
+                    ]
                 },
                 {
                     "name": "setSpeed",
@@ -9554,7 +10016,10 @@ const TrussCAPI = {
                         "playback rate"
                     ],
                     "desc_ja": "再生速度 [-10, 10]。負=逆再生 (eager のみ)。stream は [0, 10] にクランプ。0=フリーズ",
-                    "desc_ko": "재생 속도 [-10, 10]. 음수=역재생 (eager만). 스트림은 [0, 10]으로 클램프. 0=프리즈"
+                    "desc_ko": "재생 속도 [-10, 10]. 음수=역재생 (eager만). 스트림은 [0, 10]으로 클램프. 0=프리즈",
+                    "related": [
+                        "getSpeed"
+                    ]
                 },
                 {
                     "name": "getSpeed",
@@ -9569,7 +10034,10 @@ const TrussCAPI = {
                         "playback rate"
                     ],
                     "desc_ja": "現在の再生速度を取得",
-                    "desc_ko": "현재 재생 속도를 가져옴"
+                    "desc_ko": "현재 재생 속도를 가져옴",
+                    "related": [
+                        "setSpeed"
+                    ]
                 },
                 {
                     "name": "setLoop",
@@ -9616,7 +10084,10 @@ const TrussCAPI = {
                         "mapping"
                     ],
                     "desc_ja": "チャンネルルーティング preset。Auto (デフォ)=mono は broadcast / multi は 1:1、DownmixMono=全 src を平均して全 out ch に同じ音",
-                    "desc_ko": "채널 라우팅 프리셋. Auto=mono는 broadcast / multi는 1:1, DownmixMono=모든 소스를 평균하여 모든 출력 채널로"
+                    "desc_ko": "채널 라우팅 프리셋. Auto=mono는 broadcast / multi는 1:1, DownmixMono=모든 소스를 평균하여 모든 출력 채널로",
+                    "related": [
+                        "MixMode"
+                    ]
                 },
                 {
                     "name": "setChannelMap",
@@ -9719,6 +10190,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "getBeepVolume"
+                    ],
                     "examples": [
                         {
                             "name": "beepSoundExample",
@@ -9741,6 +10215,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "setBeepVolume"
+                    ],
                     "examples": [
                         {
                             "name": "beepSoundExample",
@@ -9771,6 +10248,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "AudioEngine シングルトンを取得",
                     "desc_ko": "AudioEngine 싱글톤을 가져옴",
+                    "related": [
+                        "AudioEngine"
+                    ],
                     "examples": [
                         {
                             "name": "audioDeviceExample",
@@ -9797,7 +10277,10 @@ const TrussCAPI = {
                         "setup"
                     ],
                     "desc_ja": "オーディオエンジンを初期化 / 再初期化。再 init で active な voice を移行しつつデバイス再起動 (~30-100ms 無音)",
-                    "desc_ko": "오디오 엔진 초기화 / 재초기화. 재 init 시 활성 voice를 이전하며 장치 재시작 (~30-100ms 무음)"
+                    "desc_ko": "오디오 엔진 초기화 / 재초기화. 재 init 시 활성 voice를 이전하며 장치 재시작 (~30-100ms 무음)",
+                    "related": [
+                        "AudioSettings"
+                    ]
                 },
                 {
                     "name": "init",
@@ -9814,7 +10297,10 @@ const TrussCAPI = {
                         "setup"
                     ],
                     "desc_ja": "オーディオエンジンを初期化 / 再初期化。再 init で active な voice を移行しつつデバイス再起動 (~30-100ms 無音)",
-                    "desc_ko": "오디오 엔진 초기화 / 재초기화. 재 init 시 활성 voice를 이전하며 장치 재시작 (~30-100ms 무음)"
+                    "desc_ko": "오디오 엔진 초기화 / 재초기화. 재 init 시 활성 voice를 이전하며 장치 재시작 (~30-100ms 무음)",
+                    "related": [
+                        "AudioSettings"
+                    ]
                 },
                 {
                     "name": "shutdown",
@@ -9831,7 +10317,10 @@ const TrussCAPI = {
                         "deinit"
                     ],
                     "desc_ja": "オーディオデバイスを停止。通常はプログラム終了時に自動呼出",
-                    "desc_ko": "오디오 장치를 종료. 일반적으로 프로그램 종료 시 자동 호출"
+                    "desc_ko": "오디오 장치를 종료. 일반적으로 프로그램 종료 시 자동 호출",
+                    "related": [
+                        "shutdownAudio"
+                    ]
                 },
                 {
                     "name": "listDevices",
@@ -9849,6 +10338,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "利用可能な再生デバイスを列挙。各 device の name + isDefault を返す",
                     "desc_ko": "사용 가능한 재생 장치 열거. 각 장치의 name + isDefault 반환",
+                    "related": [
+                        "AudioDeviceInfo"
+                    ],
                     "examples": [
                         {
                             "name": "audioSynthExample",
@@ -9961,6 +10453,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "リアルタイム再生コールバック event。listen() でシンセ / 処理用 listener を追加。各バッファごとに audio thread で発火、RT-safe を維持",
                     "desc_ko": "실시간 재생 콜백 이벤트. listen()으로 신스 / 처리 리스너 추가. 버퍼별로 오디오 스레드에서 발화, RT-safe 유지",
+                    "related": [
+                        "Event",
+                        "AudioOutBuffer"
+                    ],
                     "examples": [
                         {
                             "name": "audioSynthExample",
@@ -9988,7 +10484,11 @@ const TrussCAPI = {
                         "callback"
                     ],
                     "desc_ja": "リアルタイム入力コールバック event (マイク入力)。RT-safe 要件は audioOut と同様",
-                    "desc_ko": "실시간 캡처 콜백 이벤트 (마이크 입력). RT-safe 요건은 audioOut과 동일"
+                    "desc_ko": "실시간 캡처 콜백 이벤트 (마이크 입력). RT-safe 요건은 audioOut과 동일",
+                    "related": [
+                        "Event",
+                        "AudioInBuffer"
+                    ]
                 },
                 {
                     "name": "audioDeviceChanged",
@@ -10005,7 +10505,11 @@ const TrussCAPI = {
                         "changed"
                     ],
                     "desc_ja": "成功した init() (初回 / 再 init) 後に発火。args は解決済みデバイス名、isDefaultDevice、sampleRate、channels、bufferSize、maxPolyphony。listener は init() を呼んだスレッド (通常 main) で実行",
-                    "desc_ko": "성공한 init() (초기 / 재 init) 후 발화. args는 해결된 장치명, isDefaultDevice, sampleRate, channels, bufferSize, maxPolyphony. listener는 init()을 호출한 스레드 (보통 main)에서 실행"
+                    "desc_ko": "성공한 init() (초기 / 재 init) 후 발화. args는 해결된 장치명, isDefaultDevice, sampleRate, channels, bufferSize, maxPolyphony. listener는 init()을 호출한 스레드 (보통 main)에서 실행",
+                    "related": [
+                        "Event",
+                        "AudioDeviceChangedArgs"
+                    ]
                 },
                 {
                     "name": "initAudio",
@@ -10081,6 +10585,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "MicInput"
+                    ],
                     "examples": [
                         {
                             "name": "micInputExample",
@@ -10153,7 +10660,10 @@ const TrussCAPI = {
                         "shape"
                     ],
                     "desc_ja": "波形タイプを設定",
-                    "desc_ko": "파형 타입을 설정 (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise)"
+                    "desc_ko": "파형 타입을 설정 (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise)",
+                    "related": [
+                        "Wave"
+                    ]
                 },
                 {
                     "name": "hz",
@@ -10186,7 +10696,10 @@ const TrussCAPI = {
                         "span"
                     ],
                     "desc_ja": "ノートの長さを設定（秒）",
-                    "desc_ko": "노트 길이를 초 단위로 설정"
+                    "desc_ko": "노트 길이를 초 단위로 설정",
+                    "related": [
+                        "Tween"
+                    ]
                 },
                 {
                     "name": "volume",
@@ -10268,7 +10781,10 @@ const TrussCAPI = {
                         "fall"
                     ],
                     "desc_ja": "リリース時間を設定",
-                    "desc_ko": "릴리스 시간을 설정 (ADSR 엔벨로프)"
+                    "desc_ko": "릴리스 시간을 설정 (ADSR 엔벨로프)",
+                    "related": [
+                        "releaseSglBuffers"
+                    ]
                 },
                 {
                     "name": "adsr",
@@ -10302,7 +10818,10 @@ const TrussCAPI = {
                         "compile"
                     ],
                     "desc_ja": "ノートからSoundオブジェクトを生成",
-                    "desc_ko": "노트로부터 Sound 객체를 생성하여 반환"
+                    "desc_ko": "노트로부터 Sound 객체를 생성하여 반환",
+                    "related": [
+                        "Sound"
+                    ]
                 },
                 {
                     "name": "createChipBundle",
@@ -10320,7 +10839,10 @@ const TrussCAPI = {
                         "melody"
                     ],
                     "desc_ja": "複数ノートのシーケンス用バンドルを作成",
-                    "desc_ko": "여러 노트를 시퀀싱하기 위한 칩 사운드 번들을 생성"
+                    "desc_ko": "여러 노트를 시퀀싱하기 위한 칩 사운드 번들을 생성",
+                    "related": [
+                        "ChipSoundBundle"
+                    ]
                 },
                 {
                     "name": "add",
@@ -10337,7 +10859,10 @@ const TrussCAPI = {
                         "schedule"
                     ],
                     "desc_ja": "指定時間にノートを追加",
-                    "desc_ko": "지정한 시간(초)에 노트를 추가"
+                    "desc_ko": "지정한 시간(초)에 노트를 추가",
+                    "related": [
+                        "ChipSoundBundle"
+                    ]
                 },
                 {
                     "name": "clear",
@@ -10393,7 +10918,10 @@ const TrussCAPI = {
                         "new"
                     ],
                     "desc_ja": "TrueTypeフォントを作成",
-                    "desc_ko": "TrueType 폰트를 생성"
+                    "desc_ko": "TrueType 폰트를 생성",
+                    "related": [
+                        "Font"
+                    ]
                 },
                 {
                     "name": "load",
@@ -10461,7 +10989,10 @@ const TrussCAPI = {
                         "glyph"
                     ],
                     "desc_ja": "テキストの輪郭を Path で取得 (1 contour = 1 subpath)。拡大・回転に強く、drawStroke / drawFill (e, a, O, 日 等の穴は自動検出) で描画。",
-                    "desc_ko": "텍스트 윤곽을 Path로 가져오기 (1 contour = 1 subpath). 확대 / 회전에 강함. drawStroke / drawFill (구멍 자동 검출)."
+                    "desc_ko": "텍스트 윤곽을 Path로 가져오기 (1 contour = 1 subpath). 확대 / 회전에 강함. drawStroke / drawFill (구멍 자동 검출).",
+                    "related": [
+                        "Path"
+                    ]
                 },
                 {
                     "name": "getWidth",
@@ -10477,7 +11008,10 @@ const TrussCAPI = {
                         "dimension"
                     ],
                     "desc_ja": "テキストの幅を取得",
-                    "desc_ko": "텍스트 너비를 픽셀로 얻음"
+                    "desc_ko": "텍스트 너비를 픽셀로 얻음",
+                    "related": [
+                        "setWidth"
+                    ]
                 },
                 {
                     "name": "getHeight",
@@ -10525,7 +11059,10 @@ const TrussCAPI = {
                         "px"
                     ],
                     "desc_ja": "フォントサイズを取得",
-                    "desc_ko": "폰트 크기를 얻음"
+                    "desc_ko": "폰트 크기를 얻음",
+                    "related": [
+                        "setSize"
+                    ]
                 },
                 {
                     "name": "systemFontPath",
@@ -10592,7 +11129,10 @@ const TrussCAPI = {
                         "atlas"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "Glyph"
+                    ]
                 },
                 {
                     "name": "registerGlyphs",
@@ -10610,6 +11150,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "",
                     "desc_ko": "",
+                    "related": [
+                        "Glyph"
+                    ],
                     "examples": [
                         {
                             "name": "bitmapStringExtendedExample",
@@ -10663,6 +11206,11 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "イージングを適用 (0-1)",
                     "desc_ko": "값에 easing 적용 (0-1)",
+                    "related": [
+                        "EaseType",
+                        "EaseMode",
+                        "Tween"
+                    ],
                     "examples": [
                         {
                             "name": "tweenExample",
@@ -10685,7 +11233,11 @@ const TrussCAPI = {
                         "smooth"
                     ],
                     "desc_ja": "イーズインを適用 (0-1)",
-                    "desc_ko": "값에 ease-in 적용 (0-1)"
+                    "desc_ko": "값에 ease-in 적용 (0-1)",
+                    "related": [
+                        "EaseType",
+                        "easeInOut"
+                    ]
                 },
                 {
                     "name": "easeOut",
@@ -10702,7 +11254,10 @@ const TrussCAPI = {
                         "smooth"
                     ],
                     "desc_ja": "イーズアウトを適用 (0-1)",
-                    "desc_ko": "값에 ease-out 적용 (0-1)"
+                    "desc_ko": "값에 ease-out 적용 (0-1)",
+                    "related": [
+                        "EaseType"
+                    ]
                 },
                 {
                     "name": "easeInOut",
@@ -10718,7 +11273,10 @@ const TrussCAPI = {
                         "interpolation"
                     ],
                     "desc_ja": "イーズインアウトを適用 (0-1)",
-                    "desc_ko": "값에 ease-in-out 적용 (0-1)"
+                    "desc_ko": "값에 ease-in-out 적용 (0-1)",
+                    "related": [
+                        "EaseType"
+                    ]
                 },
                 {
                     "name": "createTween",
@@ -10735,7 +11293,10 @@ const TrussCAPI = {
                         "transition"
                     ],
                     "desc_ja": "トゥイーンを作成",
-                    "desc_ko": "tween 객체를 생성"
+                    "desc_ko": "tween 객체를 생성",
+                    "related": [
+                        "Tween"
+                    ]
                 },
                 {
                     "name": "from",
@@ -10752,7 +11313,10 @@ const TrussCAPI = {
                         "initial"
                     ],
                     "desc_ja": "開始値を設定",
-                    "desc_ko": "시작 값을 설정"
+                    "desc_ko": "시작 값을 설정",
+                    "related": [
+                        "Tween"
+                    ]
                 },
                 {
                     "name": "to",
@@ -10769,7 +11333,10 @@ const TrussCAPI = {
                         "goal"
                     ],
                     "desc_ja": "終了値を設定",
-                    "desc_ko": "끝 값을 설정"
+                    "desc_ko": "끝 값을 설정",
+                    "related": [
+                        "Tween"
+                    ]
                 },
                 {
                     "name": "duration",
@@ -10825,6 +11392,11 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "開始（チェーン可能）",
                     "desc_ko": "애니메이션 시작 (체이닝 가능)",
+                    "related": [
+                        "Tween",
+                        "VideoRecordSettings",
+                        "Fbo"
+                    ],
                     "examples": [
                         {
                             "name": "vectorMathExample",
@@ -10876,7 +11448,10 @@ const TrussCAPI = {
                         "zero"
                     ],
                     "desc_ja": "リセット（チェーン可能）",
-                    "desc_ko": "애니메이션 리셋 (체이닝 가능)"
+                    "desc_ko": "애니메이션 리셋 (체이닝 가능)",
+                    "related": [
+                        "Tween"
+                    ]
                 },
                 {
                     "name": "finish",
@@ -10893,7 +11468,10 @@ const TrussCAPI = {
                         "done"
                     ],
                     "desc_ja": "終了位置にジャンプ（チェーン可能）",
-                    "desc_ko": "끝 위치로 점프 (체이닝 가능)"
+                    "desc_ko": "끝 위치로 점프 (체이닝 가능)",
+                    "related": [
+                        "Tween"
+                    ]
                 },
                 {
                     "name": "loop",
@@ -10910,7 +11488,10 @@ const TrussCAPI = {
                         "again"
                     ],
                     "desc_ja": "ループ回数を設定 (-1=無限, 0=なし, N=N回繰り返し)",
-                    "desc_ko": "반복 횟수 설정 (-1=무한, 0=없음, N=N번 반복)"
+                    "desc_ko": "반복 횟수 설정 (-1=무한, 0=없음, N=N번 반복)",
+                    "related": [
+                        "Tween"
+                    ]
                 },
                 {
                     "name": "yoyo",
@@ -10927,7 +11508,10 @@ const TrussCAPI = {
                         "alternate"
                     ],
                     "desc_ja": "ヨーヨー（ループごとに方向反転）を有効化",
-                    "desc_ko": "요요 활성화 (반복마다 방향 반전)"
+                    "desc_ko": "요요 활성화 (반복마다 방향 반전)",
+                    "related": [
+                        "Tween"
+                    ]
                 },
                 {
                     "name": "getValue",
@@ -10982,7 +11566,13 @@ const TrussCAPI = {
                         "running time"
                     ],
                     "desc_ja": "経過時間を取得",
-                    "desc_ko": "경과 시간을 얻음"
+                    "desc_ko": "경과 시간을 얻음",
+                    "related": [
+                        "getElapsedTimef",
+                        "getElapsedTime",
+                        "getElapsedTimeMillis",
+                        "getElapsedTimeMicros"
+                    ]
                 },
                 {
                     "name": "getDuration",
@@ -11520,7 +12110,10 @@ const TrussCAPI = {
                         "convert"
                     ],
                     "desc_ja": "HSB色空間に変換 (H: 0-1, S: 0-1, B: 0-1)",
-                    "desc_ko": "HSB 색공간으로 변환 (H: 0-1, S: 0-1, B: 0-1)"
+                    "desc_ko": "HSB 색공간으로 변환 (H: 0-1, S: 0-1, B: 0-1)",
+                    "related": [
+                        "ColorHSB"
+                    ]
                 },
                 {
                     "name": "toOKLab",
@@ -11537,7 +12130,10 @@ const TrussCAPI = {
                         "uniform"
                     ],
                     "desc_ja": "OKLab色空間に変換（知覚的に均一）",
-                    "desc_ko": "OKLab 색공간으로 변환 (지각적으로 균일)"
+                    "desc_ko": "OKLab 색공간으로 변환 (지각적으로 균일)",
+                    "related": [
+                        "ColorOKLab"
+                    ]
                 },
                 {
                     "name": "toOKLCH",
@@ -11554,7 +12150,10 @@ const TrussCAPI = {
                         "chroma"
                     ],
                     "desc_ja": "OKLCH色空間に変換 (L: 0-1, C: 0-0.4, H: 0-1)",
-                    "desc_ko": "OKLCH 색공간으로 변환 (L: 0-1, C: 0-0.4, H: 0-1)"
+                    "desc_ko": "OKLCH 색공간으로 변환 (L: 0-1, C: 0-0.4, H: 0-1)",
+                    "related": [
+                        "ColorOKLCH"
+                    ]
                 },
                 {
                     "name": "Color_fromHSB",
@@ -12226,6 +12825,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "サイズを設定（C++のみ）",
                     "desc_ko": "크기를 설정 (C++ 전용)",
+                    "related": [
+                        "getSize"
+                    ],
                     "examples": [
                         {
                             "name": "uiExample",
@@ -12365,7 +12967,10 @@ const TrussCAPI = {
                         "track"
                     ],
                     "desc_ja": "ScrollContainer用のスクロールバー表示（C++のみ）",
-                    "desc_ko": "ScrollContainer용 시각적 스크롤 인디케이터 (C++ 전용)"
+                    "desc_ko": "ScrollContainer용 시각적 스크롤 인디케이터 (C++ 전용)",
+                    "related": [
+                        "Direction"
+                    ]
                 },
                 {
                     "name": "LayoutMod",
@@ -12382,7 +12987,10 @@ const TrussCAPI = {
                         "align"
                     ],
                     "desc_ja": "子ノードの自動配置用レイアウトMod（C++のみ）",
-                    "desc_ko": "자식 노드 자동 배치를 위한 레이아웃 모디파이어 (C++ 전용)"
+                    "desc_ko": "자식 노드 자동 배치를 위한 레이아웃 모디파이어 (C++ 전용)",
+                    "related": [
+                        "LayoutDirection"
+                    ]
                 },
                 {
                     "name": "updateLayout",
@@ -12432,7 +13040,11 @@ const TrussCAPI = {
                         "tween move"
                     ],
                     "desc_ja": "位置を目標値へアニメーション（TweenModメソッド）（C++のみ）",
-                    "desc_ko": "위치를 목표값으로 애니메이션 (TweenMod 메서드) (C++ 전용)"
+                    "desc_ko": "위치를 목표값으로 애니메이션 (TweenMod 메서드) (C++ 전용)",
+                    "related": [
+                        "moveToFront",
+                        "moveToBack"
+                    ]
                 },
                 {
                     "name": "moveTo",
@@ -12448,7 +13060,11 @@ const TrussCAPI = {
                         "tween move"
                     ],
                     "desc_ja": "位置を目標値へアニメーション（TweenModメソッド）（C++のみ）",
-                    "desc_ko": "위치를 목표값으로 애니메이션 (TweenMod 메서드) (C++ 전용)"
+                    "desc_ko": "위치를 목표값으로 애니메이션 (TweenMod 메서드) (C++ 전용)",
+                    "related": [
+                        "moveToFront",
+                        "moveToBack"
+                    ]
                 },
                 {
                     "name": "moveBy",
@@ -12532,7 +13148,10 @@ const TrussCAPI = {
                         "angle"
                     ],
                     "desc_ja": "回転を目標角度またはクォータニオンへアニメーション（TweenModメソッド）（C++のみ）",
-                    "desc_ko": "회전을 목표 각도 또는 쿼터니언으로 애니메이션 (TweenMod 메서드) (C++ 전용)"
+                    "desc_ko": "회전을 목표 각도 또는 쿼터니언으로 애니메이션 (TweenMod 메서드) (C++ 전용)",
+                    "related": [
+                        "Quaternion"
+                    ]
                 },
                 {
                     "name": "rotateTo",
@@ -12549,7 +13168,10 @@ const TrussCAPI = {
                         "angle"
                     ],
                     "desc_ja": "回転を目標角度またはクォータニオンへアニメーション（TweenModメソッド）（C++のみ）",
-                    "desc_ko": "회전을 목표 각도 또는 쿼터니언으로 애니메이션 (TweenMod 메서드) (C++ 전용)"
+                    "desc_ko": "회전을 목표 각도 또는 쿼터니언으로 애니메이션 (TweenMod 메서드) (C++ 전용)",
+                    "related": [
+                        "Quaternion"
+                    ]
                 },
                 {
                     "name": "rotateBy",
@@ -12638,7 +13260,10 @@ const TrussCAPI = {
                         "inspector"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "setSelectedNode"
+                    ]
                 },
                 {
                     "name": "setSelectedNode",
@@ -12655,7 +13280,10 @@ const TrussCAPI = {
                         "inspector"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "getSelectedNode"
+                    ]
                 },
                 {
                     "name": "getRootNode",
@@ -12804,7 +13432,10 @@ const TrussCAPI = {
                         "perspective"
                     ],
                     "desc_ja": "デフォルトのスクリーンFOVを設定（フレーム開始時に適用）",
-                    "desc_ko": "기본 스크린 FOV를 설정 (프레임 시작 시 적용)"
+                    "desc_ko": "기본 스크린 FOV를 설정 (프레임 시작 시 적용)",
+                    "related": [
+                        "getDefaultScreenFov"
+                    ]
                 },
                 {
                     "name": "getDefaultScreenFov",
@@ -12821,7 +13452,10 @@ const TrussCAPI = {
                         "query"
                     ],
                     "desc_ja": "現在のデフォルトスクリーンFOVを取得",
-                    "desc_ko": "현재 기본 스크린 FOV를 얻음"
+                    "desc_ko": "현재 기본 스크린 FOV를 얻음",
+                    "related": [
+                        "setDefaultScreenFov"
+                    ]
                 },
                 {
                     "name": "worldToScreen",
@@ -12918,7 +13552,10 @@ const TrussCAPI = {
                         "viewport"
                     ],
                     "desc_ja": "EasyCamインスタンスを作成",
-                    "desc_ko": "EasyCam 인스턴스를 생성"
+                    "desc_ko": "EasyCam 인스턴스를 생성",
+                    "related": [
+                        "EasyCam"
+                    ]
                 },
                 {
                     "name": "begin",
@@ -12984,7 +13621,10 @@ const TrussCAPI = {
                         "target"
                     ],
                     "desc_ja": "カメラの注視点を設定",
-                    "desc_ko": "카메라의 look-at 타겟을 설정"
+                    "desc_ko": "카메라의 look-at 타겟을 설정",
+                    "related": [
+                        "getTarget"
+                    ]
                 },
                 {
                     "name": "setTarget",
@@ -13002,7 +13642,10 @@ const TrussCAPI = {
                         "target"
                     ],
                     "desc_ja": "カメラの注視点を設定",
-                    "desc_ko": "카메라의 look-at 타겟을 설정"
+                    "desc_ko": "카메라의 look-at 타겟을 설정",
+                    "related": [
+                        "getTarget"
+                    ]
                 },
                 {
                     "name": "getTarget",
@@ -13020,7 +13663,10 @@ const TrussCAPI = {
                         "query"
                     ],
                     "desc_ja": "カメラの注視点を取得",
-                    "desc_ko": "카메라의 look-at 타겟을 얻음"
+                    "desc_ko": "카메라의 look-at 타겟을 얻음",
+                    "related": [
+                        "setTarget"
+                    ]
                 },
                 {
                     "name": "setDistance",
@@ -13037,7 +13683,10 @@ const TrussCAPI = {
                         "range"
                     ],
                     "desc_ja": "注視点からの距離を設定",
-                    "desc_ko": "타겟으로부터의 거리를 설정"
+                    "desc_ko": "타겟으로부터의 거리를 설정",
+                    "related": [
+                        "getDistance"
+                    ]
                 },
                 {
                     "name": "getDistance",
@@ -13054,7 +13703,10 @@ const TrussCAPI = {
                         "query"
                     ],
                     "desc_ja": "注視点からの距離を取得",
-                    "desc_ko": "타겟으로부터의 거리를 얻음"
+                    "desc_ko": "타겟으로부터의 거리를 얻음",
+                    "related": [
+                        "setDistance"
+                    ]
                 },
                 {
                     "name": "setAzimuth",
@@ -13072,7 +13724,10 @@ const TrussCAPI = {
                         "rotation"
                     ],
                     "desc_ja": "周回の方位角（水平角・ラジアン）を設定",
-                    "desc_ko": "궤도 방위각(수평각, 라디안)을 설정"
+                    "desc_ko": "궤도 방위각(수평각, 라디안)을 설정",
+                    "related": [
+                        "getAzimuth"
+                    ]
                 },
                 {
                     "name": "getAzimuth",
@@ -13089,7 +13744,10 @@ const TrussCAPI = {
                         "query"
                     ],
                     "desc_ja": "周回の方位角（水平角・ラジアン）を取得",
-                    "desc_ko": "궤도 방위각(수평각, 라디안)을 얻음"
+                    "desc_ko": "궤도 방위각(수평각, 라디안)을 얻음",
+                    "related": [
+                        "setAzimuth"
+                    ]
                 },
                 {
                     "name": "setElevation",
@@ -13107,7 +13765,10 @@ const TrussCAPI = {
                         "rotation"
                     ],
                     "desc_ja": "周回の仰角（垂直角・ラジアン、約±80°でクランプ）を設定",
-                    "desc_ko": "궤도 고도각(수직각, 라디안; 약 ±80°로 제한)을 설정"
+                    "desc_ko": "궤도 고도각(수직각, 라디안; 약 ±80°로 제한)을 설정",
+                    "related": [
+                        "getElevation"
+                    ]
                 },
                 {
                     "name": "getElevation",
@@ -13125,7 +13786,10 @@ const TrussCAPI = {
                         "query"
                     ],
                     "desc_ja": "周回の仰角（垂直角・ラジアン）を取得",
-                    "desc_ko": "궤도 고도각(수직각, 라디안)을 얻음"
+                    "desc_ko": "궤도 고도각(수직각, 라디안)을 얻음",
+                    "related": [
+                        "setElevation"
+                    ]
                 },
                 {
                     "name": "setFov",
@@ -13143,7 +13807,11 @@ const TrussCAPI = {
                         "fov"
                     ],
                     "desc_ja": "視野角をラジアンで設定",
-                    "desc_ko": "시야각을 라디안으로 설정"
+                    "desc_ko": "시야각을 라디안으로 설정",
+                    "related": [
+                        "getFov",
+                        "setFovDeg"
+                    ]
                 },
                 {
                     "name": "getFov",
@@ -13160,7 +13828,10 @@ const TrussCAPI = {
                         "query"
                     ],
                     "desc_ja": "視野角をラジアンで取得",
-                    "desc_ko": "시야각을 라디안으로 얻음"
+                    "desc_ko": "시야각을 라디안으로 얻음",
+                    "related": [
+                        "setFov"
+                    ]
                 },
                 {
                     "name": "setFovDeg",
@@ -13194,7 +13865,10 @@ const TrussCAPI = {
                         "z near"
                     ],
                     "desc_ja": "近クリップ面を設定",
-                    "desc_ko": "근평면(near clip plane)을 설정"
+                    "desc_ko": "근평면(near clip plane)을 설정",
+                    "related": [
+                        "getNearClip"
+                    ]
                 },
                 {
                     "name": "setFarClip",
@@ -13211,7 +13885,10 @@ const TrussCAPI = {
                         "z far"
                     ],
                     "desc_ja": "遠クリップ面を設定",
-                    "desc_ko": "원평면(far clip plane)을 설정"
+                    "desc_ko": "원평면(far clip plane)을 설정",
+                    "related": [
+                        "getFarClip"
+                    ]
                 },
                 {
                     "name": "getNearClip",
@@ -13228,7 +13905,10 @@ const TrussCAPI = {
                         "query"
                     ],
                     "desc_ja": "近クリップ面の距離を取得",
-                    "desc_ko": "근평면 거리를 얻음"
+                    "desc_ko": "근평면 거리를 얻음",
+                    "related": [
+                        "setNearClip"
+                    ]
                 },
                 {
                     "name": "getFarClip",
@@ -13245,7 +13925,10 @@ const TrussCAPI = {
                         "query"
                     ],
                     "desc_ja": "遠クリップ面の距離を取得",
-                    "desc_ko": "원평면 거리를 얻음"
+                    "desc_ko": "원평면 거리를 얻음",
+                    "related": [
+                        "setFarClip"
+                    ]
                 },
                 {
                     "name": "enableMouseInput",
@@ -13263,7 +13946,10 @@ const TrussCAPI = {
                         "input"
                     ],
                     "desc_ja": "マウス入力によるカメラ操作を有効化",
-                    "desc_ko": "카메라 조작을 위한 마우스 입력 활성화"
+                    "desc_ko": "카메라 조작을 위한 마우스 입력 활성화",
+                    "related": [
+                        "disableMouseInput"
+                    ]
                 },
                 {
                     "name": "disableMouseInput",
@@ -13280,7 +13966,10 @@ const TrussCAPI = {
                         "no drag"
                     ],
                     "desc_ja": "マウス入力によるカメラ操作を無効化",
-                    "desc_ko": "카메라 조작을 위한 마우스 입력 비활성화"
+                    "desc_ko": "카메라 조작을 위한 마우스 입력 비활성화",
+                    "related": [
+                        "enableMouseInput"
+                    ]
                 },
                 {
                     "name": "isMouseInputEnabled",
@@ -13480,7 +14169,10 @@ const TrussCAPI = {
                         "query"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "setCameraPosition"
+                    ]
                 }
             ],
             "name_ja": "3Dカメラ",
@@ -13506,6 +14198,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "シーンにlightを追加",
                     "desc_ko": "씬에 조명을 추가",
+                    "related": [
+                        "Light"
+                    ],
                     "examples": [
                         {
                             "name": "projectorSimulationExample",
@@ -13536,7 +14231,10 @@ const TrussCAPI = {
                         "lamp"
                     ],
                     "desc_ja": "シーンからlightを削除",
-                    "desc_ko": "씬에서 조명을 제거"
+                    "desc_ko": "씬에서 조명을 제거",
+                    "related": [
+                        "Light"
+                    ]
                 },
                 {
                     "name": "clearLights",
@@ -13586,6 +14284,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "以降のmesh描画に使うmaterialを設定（PBR有効化）",
                     "desc_ko": "이후 메쉬 렌더링에 사용할 재질을 설정 (PBR 활성화)",
+                    "related": [
+                        "Material"
+                    ],
                     "examples": [
                         {
                             "name": "easyCamExample",
@@ -13648,6 +14349,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "specular計算用のcamera位置を設定",
                     "desc_ko": "스페큘러 계산을 위한 카메라 위치를 설정",
+                    "related": [
+                        "getCameraPosition"
+                    ],
                     "examples": [
                         {
                             "name": "pbrSpheresExample",
@@ -13679,6 +14383,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "specular計算用のcamera位置を設定",
                     "desc_ko": "스페큘러 계산을 위한 카메라 위치를 설정",
+                    "related": [
+                        "getCameraPosition"
+                    ],
                     "examples": [
                         {
                             "name": "pbrSpheresExample",
@@ -13711,6 +14418,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "PBR ambient用のIBL environment mapを設定",
                     "desc_ko": "PBR 앰비언트용 IBL 환경맵을 설정",
+                    "related": [
+                        "Environment",
+                        "getEnvironment"
+                    ],
                     "examples": [
                         {
                             "name": "pbrSpheresExample",
@@ -13759,6 +14470,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "light視点のshadow depth passを開始",
                     "desc_ko": "조명 시점의 섀도우 뎁스 패스를 시작",
+                    "related": [
+                        "Light",
+                        "endShadowPass"
+                    ],
                     "examples": [
                         {
                             "name": "projectorSimulationExample",
@@ -13782,6 +14497,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "shadow depth passを終了",
                     "desc_ko": "섀도우 뎁스 패스를 종료",
+                    "related": [
+                        "beginShadowPass"
+                    ],
                     "examples": [
                         {
                             "name": "projectorSimulationExample",
@@ -13805,6 +14523,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "shadow depth passにmeshを描画（depthのみ）",
                     "desc_ko": "섀도우 뎁스 패스에 메쉬를 렌더링 (뎁스 전용)",
+                    "related": [
+                        "Mesh"
+                    ],
                     "examples": [
                         {
                             "name": "projectorSimulationExample",
@@ -13845,7 +14566,11 @@ const TrussCAPI = {
                         "ambient"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "Environment",
+                        "setEnvironment"
+                    ]
                 },
                 {
                     "name": "calculateLighting",
@@ -13863,7 +14588,10 @@ const TrussCAPI = {
                         "normal"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "Material"
+                    ]
                 }
             ],
             "name_ja": "照明・PBR",
@@ -13887,7 +14615,10 @@ const TrussCAPI = {
                         "reset"
                     ],
                     "desc_ja": "単位行列を作成",
-                    "desc_ko": "단위 행렬을 생성"
+                    "desc_ko": "단위 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Mat4_translate",
@@ -13904,7 +14635,10 @@ const TrussCAPI = {
                         "position"
                     ],
                     "desc_ja": "平行移動行列を作成",
-                    "desc_ko": "이동 행렬을 생성"
+                    "desc_ko": "이동 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Mat4_translate",
@@ -13921,7 +14655,10 @@ const TrussCAPI = {
                         "position"
                     ],
                     "desc_ja": "平行移動行列を作成",
-                    "desc_ko": "이동 행렬을 생성"
+                    "desc_ko": "이동 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Mat4_rotateX",
@@ -13938,7 +14675,10 @@ const TrussCAPI = {
                         "x axis"
                     ],
                     "desc_ja": "X軸回転行列を作成",
-                    "desc_ko": "X축 회전 행렬을 생성"
+                    "desc_ko": "X축 회전 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Mat4_rotateY",
@@ -13955,7 +14695,10 @@ const TrussCAPI = {
                         "y axis"
                     ],
                     "desc_ja": "Y軸回転行列を作成",
-                    "desc_ko": "Y축 회전 행렬을 생성"
+                    "desc_ko": "Y축 회전 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Mat4_rotateZ",
@@ -13972,7 +14715,10 @@ const TrussCAPI = {
                         "z axis"
                     ],
                     "desc_ja": "Z軸回転行列を作成",
-                    "desc_ko": "Z축 회전 행렬을 생성"
+                    "desc_ko": "Z축 회전 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Mat4_scale",
@@ -13989,7 +14735,10 @@ const TrussCAPI = {
                         "zoom"
                     ],
                     "desc_ja": "スケーリング行列を作成",
-                    "desc_ko": "스케일 행렬을 생성"
+                    "desc_ko": "스케일 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Mat4_scale",
@@ -14006,7 +14755,10 @@ const TrussCAPI = {
                         "zoom"
                     ],
                     "desc_ja": "スケーリング行列を作成",
-                    "desc_ko": "스케일 행렬을 생성"
+                    "desc_ko": "스케일 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Mat4_lookAt",
@@ -14023,7 +14775,10 @@ const TrussCAPI = {
                         "eye target"
                     ],
                     "desc_ja": "ビュー行列を作成",
-                    "desc_ko": "뷰 행렬을 생성"
+                    "desc_ko": "뷰 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Mat4_ortho",
@@ -14040,7 +14795,10 @@ const TrussCAPI = {
                         "flat"
                     ],
                     "desc_ja": "正投影行列を作成",
-                    "desc_ko": "정사영 투영 행렬을 생성"
+                    "desc_ko": "정사영 투영 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Mat4_perspective",
@@ -14058,7 +14816,10 @@ const TrussCAPI = {
                         "camera"
                     ],
                     "desc_ja": "透視投影行列を作成",
-                    "desc_ko": "원근 투영 행렬을 생성"
+                    "desc_ko": "원근 투영 행렬을 생성",
+                    "related": [
+                        "Mat4"
+                    ]
                 },
                 {
                     "name": "Quaternion_identity",
@@ -14075,7 +14836,10 @@ const TrussCAPI = {
                         "quat"
                     ],
                     "desc_ja": "単位クォータニオンを作成",
-                    "desc_ko": "단위 쿼터니언을 생성"
+                    "desc_ko": "단위 쿼터니언을 생성",
+                    "related": [
+                        "Quaternion"
+                    ]
                 },
                 {
                     "name": "Quaternion_fromAxisAngle",
@@ -14092,7 +14856,10 @@ const TrussCAPI = {
                         "spin"
                     ],
                     "desc_ja": "軸-角度からクォータニオンを作成",
-                    "desc_ko": "축-각도로부터 쿼터니언을 생성"
+                    "desc_ko": "축-각도로부터 쿼터니언을 생성",
+                    "related": [
+                        "Quaternion"
+                    ]
                 },
                 {
                     "name": "Quaternion_fromEuler",
@@ -14109,7 +14876,10 @@ const TrussCAPI = {
                         "quat"
                     ],
                     "desc_ja": "オイラー角からクォータニオンを作成",
-                    "desc_ko": "오일러 각도로부터 쿼터니언을 생성"
+                    "desc_ko": "오일러 각도로부터 쿼터니언을 생성",
+                    "related": [
+                        "Quaternion"
+                    ]
                 },
                 {
                     "name": "Quaternion_fromEuler",
@@ -14126,7 +14896,10 @@ const TrussCAPI = {
                         "quat"
                     ],
                     "desc_ja": "オイラー角からクォータニオンを作成",
-                    "desc_ko": "오일러 각도로부터 쿼터니언을 생성"
+                    "desc_ko": "오일러 각도로부터 쿼터니언을 생성",
+                    "related": [
+                        "Quaternion"
+                    ]
                 },
                 {
                     "name": "Quaternion_slerp",
@@ -14144,7 +14917,10 @@ const TrussCAPI = {
                         "smooth"
                     ],
                     "desc_ja": "球面線形補間",
-                    "desc_ko": "구면 선형 보간"
+                    "desc_ko": "구면 선형 보간",
+                    "related": [
+                        "Quaternion"
+                    ]
                 }
             ],
             "name_ja": "数学 - 3D",
@@ -14170,6 +14946,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "メッシュを描画",
                     "desc_ko": "메쉬를 그림",
+                    "related": [
+                        "Mesh"
+                    ],
                     "examples": [
                         {
                             "name": "meshTextureExample",
@@ -14212,6 +14991,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ボックスメッシュを作成",
                     "desc_ko": "박스 메쉬를 생성",
+                    "related": [
+                        "Mesh"
+                    ],
                     "examples": [
                         {
                             "name": "meshAppendExample",
@@ -14244,6 +15026,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ボックスメッシュを作成",
                     "desc_ko": "박스 메쉬를 생성",
+                    "related": [
+                        "Mesh"
+                    ],
                     "examples": [
                         {
                             "name": "meshAppendExample",
@@ -14276,6 +15061,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "平面メッシュを作成（XY平面上の分割された四角形）",
                     "desc_ko": "평면 메쉬를 생성 (XY 평면의 분할된 사각형)",
+                    "related": [
+                        "Mesh"
+                    ],
                     "examples": [
                         {
                             "name": "projectorSimulationExample",
@@ -14307,6 +15095,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "円柱メッシュを作成",
                     "desc_ko": "원기둥 메쉬를 생성",
+                    "related": [
+                        "Mesh"
+                    ],
                     "examples": [
                         {
                             "name": "meshAppendExample",
@@ -14338,6 +15129,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "円錐メッシュを作成",
                     "desc_ko": "원뿔 메쉬를 생성",
+                    "related": [
+                        "Mesh"
+                    ],
                     "examples": [
                         {
                             "name": "meshAppendExample",
@@ -14370,6 +15164,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "アイコスフィアメッシュを作成（三角形が均一な測地球）",
                     "desc_ko": "아이코스피어 메쉬를 생성 (삼각형이 균일한 측지구)",
+                    "related": [
+                        "Mesh"
+                    ],
                     "examples": [
                         {
                             "name": "3DPrimitivesExample",
@@ -14393,6 +15190,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "トーラス（ドーナツ）メッシュを作成",
                     "desc_ko": "토러스(도넛) 메쉬를 생성",
+                    "related": [
+                        "Mesh"
+                    ],
                     "examples": [
                         {
                             "name": "meshAppendExample",
@@ -14421,6 +15221,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "球体メッシュを作成",
                     "desc_ko": "구 메쉬를 생성",
+                    "related": [
+                        "Mesh"
+                    ],
                     "examples": [
                         {
                             "name": "coordinateConversionExample",
@@ -14451,7 +15254,10 @@ const TrussCAPI = {
                         "primitive"
                     ],
                     "desc_ja": "カプセルメッシュを作成（Y軸、円柱の両端を半球で閉じた形）",
-                    "desc_ko": "캡슐 메쉬를 생성 (Y축, 원기둥 양 끝을 반구로 막은 형태)"
+                    "desc_ko": "캡슐 메쉬를 생성 (Y축, 원기둥 양 끝을 반구로 막은 형태)",
+                    "related": [
+                        "Mesh"
+                    ]
                 },
                 {
                     "name": "drawTexture",
@@ -14469,7 +15275,10 @@ const TrussCAPI = {
                         "quad"
                     ],
                     "desc_ja": "テクスチャを描画",
-                    "desc_ko": "텍스처를 그림"
+                    "desc_ko": "텍스처를 그림",
+                    "related": [
+                        "Texture"
+                    ]
                 },
                 {
                     "name": "drawTexture",
@@ -14487,7 +15296,10 @@ const TrussCAPI = {
                         "quad"
                     ],
                     "desc_ja": "テクスチャを描画",
-                    "desc_ko": "텍스처를 그림"
+                    "desc_ko": "텍스처를 그림",
+                    "related": [
+                        "Texture"
+                    ]
                 }
             ],
             "name_ja": "グラフィックス - 高度",
@@ -14538,7 +15350,10 @@ const TrussCAPI = {
                         "factory"
                     ],
                     "desc_ja": "テクスチャを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "텍스처를 생성 (TrussSketch 팩토리)"
+                    "desc_ko": "텍스처를 생성 (TrussSketch 팩토리)",
+                    "related": [
+                        "Texture"
+                    ]
                 },
                 {
                     "name": "load",
@@ -14571,7 +15386,10 @@ const TrussCAPI = {
                         "memory"
                     ],
                     "desc_ja": "ピクセルデータから読み込む",
-                    "desc_ko": "픽셀 데이터에서 로드"
+                    "desc_ko": "픽셀 데이터에서 로드",
+                    "related": [
+                        "Pixels"
+                    ]
                 },
                 {
                     "name": "bind",
@@ -14603,7 +15421,10 @@ const TrussCAPI = {
                         "deselect"
                     ],
                     "desc_ja": "テクスチャのバインド解除",
-                    "desc_ko": "텍스처 바인딩을 해제"
+                    "desc_ko": "텍스처 바인딩을 해제",
+                    "related": [
+                        "unbindCursorImage"
+                    ]
                 },
                 {
                     "name": "getWidth",
@@ -14652,7 +15473,10 @@ const TrussCAPI = {
                         "count"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "TextureFormat"
+                    ]
                 },
                 {
                     "name": "bytesPerPixel",
@@ -14669,7 +15493,10 @@ const TrussCAPI = {
                         "byte"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "TextureFormat"
+                    ]
                 },
                 {
                     "name": "isFloatFormat",
@@ -14686,7 +15513,10 @@ const TrussCAPI = {
                         "type"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "TextureFormat"
+                    ]
                 }
             ],
             "name_ja": "グラフィックス - テクスチャとGPU",
@@ -14737,7 +15567,10 @@ const TrussCAPI = {
                         "factory"
                     ],
                     "desc_ja": "FBOを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "FBO를 생성 (TrussSketch 팩토리)"
+                    "desc_ko": "FBO를 생성 (TrussSketch 팩토리)",
+                    "related": [
+                        "Fbo"
+                    ]
                 },
                 {
                     "name": "allocate",
@@ -14818,7 +15651,12 @@ const TrussCAPI = {
                         "surface"
                     ],
                     "desc_ja": "内部テクスチャを取得",
-                    "desc_ko": "내부 텍스처를 얻음"
+                    "desc_ko": "내부 텍스처를 얻음",
+                    "related": [
+                        "Texture",
+                        "setTexture",
+                        "getTextureCount"
+                    ]
                 },
                 {
                     "name": "readToPixels",
@@ -14835,7 +15673,10 @@ const TrussCAPI = {
                         "capture"
                     ],
                     "desc_ja": "ピクセルをCPUメモリに読み出す",
-                    "desc_ko": "픽셀을 CPU 메모리로 읽음"
+                    "desc_ko": "픽셀을 CPU 메모리로 읽음",
+                    "related": [
+                        "Pixels"
+                    ]
                 }
             ],
             "name_ja": "グラフィックス - FBO",
@@ -14934,6 +15775,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "シェーダーをスタックにプッシュ（以降の描画にこのシェーダーを使用）",
                     "desc_ko": "셰이더를 스택에 푸시 (이후 드로우에 사용)",
+                    "related": [
+                        "popShader"
+                    ],
                     "examples": [
                         {
                             "name": "shaderExample",
@@ -14955,6 +15799,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "シェーダーをスタックからポップ",
                     "desc_ko": "셰이더를 스택에서 꺼냄",
+                    "related": [
+                        "pushShader"
+                    ],
                     "examples": [
                         {
                             "name": "shaderExample",
@@ -15120,7 +15967,10 @@ const TrussCAPI = {
                         "input"
                     ],
                     "desc_ja": "スロットにテクスチャをバインド",
-                    "desc_ko": "슬롯에 텍스처를 바인딩"
+                    "desc_ko": "슬롯에 텍스처를 바인딩",
+                    "related": [
+                        "getTexture"
+                    ]
                 }
             ],
             "name_ja": "グラフィックス - シェーダー",
@@ -15171,7 +16021,10 @@ const TrussCAPI = {
                         "raw"
                     ],
                     "desc_ja": "ピクセルバッファを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "픽셀 버퍼를 생성 (TrussSketch 팩토리)"
+                    "desc_ko": "픽셀 버퍼를 생성 (TrussSketch 팩토리)",
+                    "related": [
+                        "Pixels"
+                    ]
                 },
                 {
                     "name": "allocate",
@@ -15204,7 +16057,11 @@ const TrussCAPI = {
                         "memory"
                     ],
                     "desc_ja": "生データポインタを取得",
-                    "desc_ko": "원본 데이터 포인터를 얻음"
+                    "desc_ko": "원본 데이터 포인터를 얻음",
+                    "related": [
+                        "getDataPath",
+                        "getDataPathRoot"
+                    ]
                 },
                 {
                     "name": "getColor",
@@ -15293,7 +16150,10 @@ const TrussCAPI = {
                         "factory"
                     ],
                     "desc_ja": "メッシュを作成",
-                    "desc_ko": "새 Mesh를 생성"
+                    "desc_ko": "새 Mesh를 생성",
+                    "related": [
+                        "Mesh"
+                    ]
                 },
                 {
                     "name": "Mesh",
@@ -15359,7 +16219,11 @@ const TrussCAPI = {
                         "push"
                     ],
                     "desc_ja": "頂点を追加",
-                    "desc_ko": "정점을 추가"
+                    "desc_ko": "정점을 추가",
+                    "related": [
+                        "StrokeMesh",
+                        "addVertexWithWidth"
+                    ]
                 },
                 {
                     "name": "addVertex",
@@ -15376,7 +16240,11 @@ const TrussCAPI = {
                         "push"
                     ],
                     "desc_ja": "頂点を追加",
-                    "desc_ko": "정점을 추가"
+                    "desc_ko": "정점을 추가",
+                    "related": [
+                        "StrokeMesh",
+                        "addVertexWithWidth"
+                    ]
                 },
                 {
                     "name": "addColor",
@@ -15530,7 +16398,10 @@ const TrussCAPI = {
                         "vector"
                     ],
                     "desc_ja": "パスを作成",
-                    "desc_ko": "새 Path를 생성"
+                    "desc_ko": "새 Path를 생성",
+                    "related": [
+                        "Path"
+                    ]
                 },
                 {
                     "name": "Path",
@@ -15699,7 +16570,10 @@ const TrussCAPI = {
                         "polyline"
                     ],
                     "desc_ja": "StrokeMeshインスタンスを作成",
-                    "desc_ko": "새 StrokeMesh 인스턴스를 생성"
+                    "desc_ko": "새 StrokeMesh 인스턴스를 생성",
+                    "related": [
+                        "StrokeMesh"
+                    ]
                 },
                 {
                     "name": "setWidth",
@@ -15715,7 +16589,11 @@ const TrussCAPI = {
                         "line width"
                     ],
                     "desc_ja": "線の太さを設定（メソッドチェーン対応）",
-                    "desc_ko": "스트로크 너비를 설정 (메서드 체이닝)"
+                    "desc_ko": "스트로크 너비를 설정 (메서드 체이닝)",
+                    "related": [
+                        "StrokeMesh",
+                        "getWidth"
+                    ]
                 },
                 {
                     "name": "setColor",
@@ -15758,7 +16636,10 @@ const TrussCAPI = {
                         "square"
                     ],
                     "desc_ja": "端点の形状を設定（メソッドチェーン対応）",
-                    "desc_ko": "캡 타입 설정: Butt, Round, Square (메서드 체이닝)"
+                    "desc_ko": "캡 타입 설정: Butt, Round, Square (메서드 체이닝)",
+                    "related": [
+                        "StrokeMesh"
+                    ]
                 },
                 {
                     "name": "setJoinType",
@@ -15775,7 +16656,10 @@ const TrussCAPI = {
                         "round"
                     ],
                     "desc_ja": "結合部の形状を設定（メソッドチェーン対応）",
-                    "desc_ko": "조인 타입 설정: Miter, Round, Bevel (메서드 체이닝)"
+                    "desc_ko": "조인 타입 설정: Miter, Round, Bevel (메서드 체이닝)",
+                    "related": [
+                        "StrokeMesh"
+                    ]
                 },
                 {
                     "name": "setMiterLimit",
@@ -15791,7 +16675,10 @@ const TrussCAPI = {
                         "limit"
                     ],
                     "desc_ja": "マイター結合の限界値を設定（メソッドチェーン対応）",
-                    "desc_ko": "날카로운 모서리의 미터 한계를 설정 (메서드 체이닝)"
+                    "desc_ko": "날카로운 모서리의 미터 한계를 설정 (메서드 체이닝)",
+                    "related": [
+                        "StrokeMesh"
+                    ]
                 },
                 {
                     "name": "addVertex",
@@ -15875,7 +16762,10 @@ const TrussCAPI = {
                         "thickness"
                     ],
                     "desc_ja": "可変幅で頂点を追加（メソッドチェーン対応）",
-                    "desc_ko": "가변 너비를 가진 정점을 추가 (메서드 체이닝)"
+                    "desc_ko": "가변 너비를 가진 정점을 추가 (메서드 체이닝)",
+                    "related": [
+                        "StrokeMesh"
+                    ]
                 },
                 {
                     "name": "setShape",
@@ -15891,7 +16781,11 @@ const TrussCAPI = {
                         "from path"
                     ],
                     "desc_ja": "Pathから形状を設定（メソッドチェーン対応）",
-                    "desc_ko": "Path로부터 도형을 설정 (메서드 체이닝)"
+                    "desc_ko": "Path로부터 도형을 설정 (메서드 체이닝)",
+                    "related": [
+                        "StrokeMesh",
+                        "Path"
+                    ]
                 },
                 {
                     "name": "setClosed",
@@ -15907,7 +16801,10 @@ const TrussCAPI = {
                         "join"
                     ],
                     "desc_ja": "閉じたストロークかどうかを設定（メソッドチェーン対応）",
-                    "desc_ko": "스트로크가 닫혀 있는지 설정 (메서드 체이닝)"
+                    "desc_ko": "스트로크가 닫혀 있는지 설정 (메서드 체이닝)",
+                    "related": [
+                        "StrokeMesh"
+                    ]
                 },
                 {
                     "name": "clear",
@@ -16297,7 +17194,10 @@ const TrussCAPI = {
                         "time"
                     ],
                     "desc_ja": "現在の再生時間を秒単位で取得",
-                    "desc_ko": "현재 재생 시간을 초 단위로 가져옴"
+                    "desc_ko": "현재 재생 시간을 초 단위로 가져옴",
+                    "related": [
+                        "setCurrentTime"
+                    ]
                 },
                 {
                     "name": "setCurrentTime",
@@ -16314,7 +17214,10 @@ const TrussCAPI = {
                         "seconds"
                     ],
                     "desc_ja": "指定した秒数にシーク",
-                    "desc_ko": "지정된 시간(초)으로 이동"
+                    "desc_ko": "지정된 시간(초)으로 이동",
+                    "related": [
+                        "getCurrentTime"
+                    ]
                 },
                 {
                     "name": "setVolume",
@@ -16551,7 +17454,10 @@ const TrussCAPI = {
                         "color correction"
                     ],
                     "desc_ja": "ガンマ補正を設定（1.0=補正なし）。macOS等で暗くなる場合に~0.45で明るくする",
-                    "desc_ko": "감마 보정을 설정 (1.0=보정 없음). macOS 등에서 어둡게 나오면 ~0.45로 밝게"
+                    "desc_ko": "감마 보정을 설정 (1.0=보정 없음). macOS 등에서 어둡게 나오면 ~0.45로 밝게",
+                    "related": [
+                        "getGammaCorrection"
+                    ]
                 },
                 {
                     "name": "getGammaCorrection",
@@ -16567,7 +17473,10 @@ const TrussCAPI = {
                         "color correction"
                     ],
                     "desc_ja": "現在のガンマ補正値を取得",
-                    "desc_ko": "현재 감마 보정 값을 가져옴"
+                    "desc_ko": "현재 감마 보정 값을 가져옴",
+                    "related": [
+                        "setGammaCorrection"
+                    ]
                 },
                 {
                     "name": "setUseHwAccel",
@@ -16584,7 +17493,10 @@ const TrussCAPI = {
                         "acceleration"
                     ],
                     "desc_ja": "ハードウェアデコードの有効/無効。load()の前に呼ぶ。デフォルト: true。有効時はHWバックエンド（VAAPI, V4L2M2M, CUDA等）を自動検出し、なければソフトウェアにフォールバック。現在Linuxのみ対応",
-                    "desc_ko": "하드웨어 디코딩 활성/비활성. load() 전에 호출. 기본값: true. 활성화 시 HW 백엔드(VAAPI, V4L2M2M, CUDA 등)를 자동 탐색하고, 없으면 소프트웨어로 폴백. 현재 Linux만 지원"
+                    "desc_ko": "하드웨어 디코딩 활성/비활성. load() 전에 호출. 기본값: true. 활성화 시 HW 백엔드(VAAPI, V4L2M2M, CUDA 등)를 자동 탐색하고, 없으면 소프트웨어로 폴백. 현재 Linux만 지원",
+                    "related": [
+                        "getUseHwAccel"
+                    ]
                 },
                 {
                     "name": "getUseHwAccel",
@@ -16600,7 +17512,10 @@ const TrussCAPI = {
                         "preference"
                     ],
                     "desc_ja": "HWアクセル設定を取得（実際のバックエンドはisUsingHwAccel()で確認）",
-                    "desc_ko": "HW 가속 설정을 가져옴 (실제 백엔드는 isUsingHwAccel()로 확인)"
+                    "desc_ko": "HW 가속 설정을 가져옴 (실제 백엔드는 isUsingHwAccel()로 확인)",
+                    "related": [
+                        "setUseHwAccel"
+                    ]
                 },
                 {
                     "name": "isUsingHwAccel",
@@ -16649,7 +17564,10 @@ const TrussCAPI = {
                         "lag"
                     ],
                     "desc_ja": "映像/音声のズレが許容値を超えた場合にハードリシンクする閾値を設定。ズレがこの値を超えるとフレーム送りではなくシークで同期。0で無効。デフォルト: 0.5秒。主にLinux(FFmpeg)で有効",
-                    "desc_ko": "비디오/오디오 드리프트가 임계값을 초과하면 하드 리싱크하는 값을 설정. 드리프트가 이 값을 초과하면 프레임 추적 대신 시크로 동기화. 0이면 비활성. 기본값: 0.5초. 주로 Linux(FFmpeg)에서 유효"
+                    "desc_ko": "비디오/오디오 드리프트가 임계값을 초과하면 하드 리싱크하는 값을 설정. 드리프트가 이 값을 초과하면 프레임 추적 대신 시크로 동기화. 0이면 비활성. 기본값: 0.5초. 주로 Linux(FFmpeg)에서 유효",
+                    "related": [
+                        "getResyncThreshold"
+                    ]
                 },
                 {
                     "name": "getResyncThreshold",
@@ -16665,7 +17583,10 @@ const TrussCAPI = {
                         "lag"
                     ],
                     "desc_ja": "現在のリシンク閾値を秒単位で取得",
-                    "desc_ko": "현재 리싱크 임계값을 초 단위로 가져옴"
+                    "desc_ko": "현재 리싱크 임계값을 초 단위로 가져옴",
+                    "related": [
+                        "setResyncThreshold"
+                    ]
                 },
                 {
                     "name": "hasAudio",
@@ -16699,6 +17620,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ビデオファイルから1フレームを抽出（全体を読み込まずに）。サムネイル生成に便利",
                     "desc_ko": "비디오 파일에서 전체를 로드하지 않고 단일 프레임을 추출. 썸네일 생성에 유용",
+                    "related": [
+                        "Pixels"
+                    ],
                     "platforms": [
                         "macos"
                     ],
@@ -16831,7 +17755,10 @@ const TrussCAPI = {
                         "encoder"
                     ],
                     "desc_ja": "指定サイズでエンコーダを開く（パスはgetDataPathで解決）",
-                    "desc_ko": "지정 크기로 인코더를 엽니다 (경로는 getDataPath로 해석)"
+                    "desc_ko": "지정 크기로 인코더를 엽니다 (경로는 getDataPath로 해석)",
+                    "related": [
+                        "VideoRecordSettings"
+                    ]
                 },
                 {
                     "name": "addFrame",
@@ -16847,7 +17774,12 @@ const TrussCAPI = {
                         "feed"
                     ],
                     "desc_ja": "1フレームを固定レート（frameIndex/fps）で追加",
-                    "desc_ko": "한 프레임을 고정 레이트(frameIndex/fps)로 추가"
+                    "desc_ko": "한 프레임을 고정 레이트(frameIndex/fps)로 추가",
+                    "related": [
+                        "Fbo",
+                        "Pixels",
+                        "addFrameAt"
+                    ]
                 },
                 {
                     "name": "addFrame",
@@ -16863,7 +17795,12 @@ const TrussCAPI = {
                         "feed"
                     ],
                     "desc_ja": "1フレームを固定レート（frameIndex/fps）で追加",
-                    "desc_ko": "한 프레임을 고정 레이트(frameIndex/fps)로 추가"
+                    "desc_ko": "한 프레임을 고정 레이트(frameIndex/fps)로 추가",
+                    "related": [
+                        "Fbo",
+                        "Pixels",
+                        "addFrameAt"
+                    ]
                 },
                 {
                     "name": "addFrameAt",
@@ -16879,7 +17816,11 @@ const TrussCAPI = {
                         "presentation time"
                     ],
                     "desc_ja": "1フレームを明示的な表示時刻（秒）で追加",
-                    "desc_ko": "한 프레임을 명시적 표시 시각(초)으로 추가"
+                    "desc_ko": "한 프레임을 명시적 표시 시각(초)으로 추가",
+                    "related": [
+                        "Fbo",
+                        "Pixels"
+                    ]
                 },
                 {
                     "name": "addFrameAt",
@@ -16895,7 +17836,11 @@ const TrussCAPI = {
                         "presentation time"
                     ],
                     "desc_ja": "1フレームを明示的な表示時刻（秒）で追加",
-                    "desc_ko": "한 프레임을 명시적 표시 시각(초)으로 추가"
+                    "desc_ko": "한 프레임을 명시적 표시 시각(초)으로 추가",
+                    "related": [
+                        "Fbo",
+                        "Pixels"
+                    ]
                 },
                 {
                     "name": "close",
@@ -16928,7 +17873,10 @@ const TrussCAPI = {
                         "format"
                     ],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "related": [
+                        "VideoCodec"
+                    ]
                 }
             ],
             "name_ja": "ビデオ",
@@ -17205,7 +18153,10 @@ const TrussCAPI = {
                         "strength"
                     ],
                     "desc_ja": "ブレンド量を設定（0=元画像, 1=LUT全適用）",
-                    "desc_ko": "블렌드 양 설정 (0=원본, 1=LUT 완전 적용)"
+                    "desc_ko": "블렌드 양 설정 (0=원본, 1=LUT 완전 적용)",
+                    "related": [
+                        "setBlendMode"
+                    ]
                 },
                 {
                     "name": "draw",
@@ -17278,6 +18229,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "delay秒後にcallbackを1回実行。更新ループから発火（フレーム単位）。タイマーidを返す",
                     "desc_ko": "delay초 후 callback을 한 번 실행. 업데이트 루프에서 발생(프레임 단위). 타이머 id를 반환",
+                    "related": [
+                        "callAfterAsync"
+                    ],
                     "examples": [
                         {
                             "name": "timerExample",
@@ -17301,6 +18255,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "interval秒ごとにcallbackを繰り返し実行。更新ループから発火（フレーム単位）。タイマーidを返す",
                     "desc_ko": "interval초마다 callback을 반복 실행. 업데이트 루프에서 발생(프레임 단위). 타이머 id를 반환",
+                    "related": [
+                        "callEveryAsync"
+                    ],
                     "examples": [
                         {
                             "name": "timerExample",
@@ -17439,6 +18396,9 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "全ネットワークインターフェースのアドレスを列挙（IPv4/IPv6・ループバック・up/down含む）",
                     "desc_ko": "모든 네트워크 인터페이스 주소를 나열 (IPv4/IPv6, 루프백, up/down 포함)",
+                    "related": [
+                        "NetworkInterface"
+                    ],
                     "platforms": [
                         "windows",
                         "macos",
@@ -18935,6 +19895,16 @@ const TrussCAPI = {
             ],
             "desc_ja": "3D変換用4x4行列",
             "desc_ko": "3D 변환용 4x4 행렬",
+            "related": [
+                "getCurrentMatrix",
+                "setMatrix",
+                "Mat4_identity",
+                "Mat4_translate",
+                "Mat4_rotateX",
+                "Mat4_rotateY",
+                "Mat4_rotateZ",
+                "Mat4_scale"
+            ],
             "constructor": {
                 "signatures": [
                     ""
@@ -18979,6 +19949,15 @@ const TrussCAPI = {
                     "name": "systemInfoExample",
                     "group": "utils"
                 }
+            ],
+            "related": [
+                "rotate",
+                "getDeviceOrientation",
+                "rotateTo",
+                "Quaternion_identity",
+                "Quaternion_fromAxisAngle",
+                "Quaternion_fromEuler",
+                "Quaternion_slerp"
             ],
             "constructor": {
                 "signatures": [
@@ -19087,6 +20066,16 @@ const TrussCAPI = {
                     "name": "AllFeaturesExample",
                     "group": "tests"
                 }
+            ],
+            "related": [
+                "captureWindow",
+                "grabScreen",
+                "loadFromPixels",
+                "readToPixels",
+                "createPixels",
+                "extractFrame",
+                "addFrame",
+                "addFrameAt"
             ],
             "constructor": {
                 "signatures": [
@@ -19312,6 +20301,9 @@ const TrussCAPI = {
                     "name": "textureExample",
                     "group": "graphics"
                 }
+            ],
+            "related": [
+                "bindCursorImage"
             ],
             "methods": [
                 {
@@ -19562,6 +20554,11 @@ const TrussCAPI = {
                     "group": "tests"
                 }
             ],
+            "related": [
+                "drawTexture",
+                "createTexture",
+                "getTexture"
+            ],
             "constructor": {
                 "signatures": [
                     ""
@@ -19802,6 +20799,12 @@ const TrussCAPI = {
                     "group": "graphics"
                 }
             ],
+            "related": [
+                "start",
+                "createFbo",
+                "addFrame",
+                "addFrameAt"
+            ],
             "constructor": {
                 "signatures": [
                     ""
@@ -19959,6 +20962,11 @@ const TrussCAPI = {
                     "name": "strokeMeshExample",
                     "group": "graphics"
                 }
+            ],
+            "related": [
+                "getStringPath",
+                "createPath",
+                "setShape"
             ],
             "constructor": {
                 "signatures": [
@@ -20205,6 +21213,17 @@ const TrussCAPI = {
                     "name": "3DPrimitivesExample",
                     "group": "3d"
                 }
+            ],
+            "related": [
+                "createMesh",
+                "shadowDraw",
+                "drawMesh",
+                "createBox",
+                "createPlane",
+                "createCylinder",
+                "createCone",
+                "createIcoSphere",
+                "createTorus"
             ],
             "constructor": {
                 "signatures": [
@@ -20652,6 +21671,10 @@ const TrussCAPI = {
                     "group": "sound"
                 }
             ],
+            "related": [
+                "createSound",
+                "build"
+            ],
             "constructor": {
                 "signatures": [
                     ""
@@ -20841,6 +21864,9 @@ const TrussCAPI = {
                     "group": "font"
                 }
             ],
+            "related": [
+                "createFont"
+            ],
             "constructor": {
                 "signatures": [
                     ""
@@ -21026,6 +22052,9 @@ const TrussCAPI = {
                     "group": "tests"
                 }
             ],
+            "related": [
+                "createFileWriter"
+            ],
             "constructor": {
                 "signatures": [
                     ""
@@ -21114,6 +22143,9 @@ const TrussCAPI = {
                     "name": "AllFeaturesExample",
                     "group": "tests"
                 }
+            ],
+            "related": [
+                "createFileReader"
             ],
             "constructor": {
                 "signatures": [
@@ -21235,6 +22267,10 @@ const TrussCAPI = {
                     "name": "mouseExample",
                     "group": "input_output"
                 }
+            ],
+            "related": [
+                "lerp",
+                "toHSB"
             ]
         },
         {
@@ -21254,6 +22290,10 @@ const TrussCAPI = {
                     "name": "colorExample",
                     "group": "graphics"
                 }
+            ],
+            "related": [
+                "lerp",
+                "toOKLCH"
             ]
         },
         {
@@ -21295,6 +22335,11 @@ const TrussCAPI = {
                     "name": "normalMapExample",
                     "group": "3d"
                 }
+            ],
+            "related": [
+                "addLight",
+                "removeLight",
+                "beginShadowPass"
             ],
             "constructor": {
                 "signatures": [
@@ -21696,6 +22741,10 @@ const TrussCAPI = {
                     "name": "AllFeaturesExample",
                     "group": "tests"
                 }
+            ],
+            "related": [
+                "setMaterial",
+                "calculateLighting"
             ],
             "constructor": {
                 "signatures": [
@@ -22155,6 +23204,10 @@ const TrussCAPI = {
                     "group": "3d"
                 }
             ],
+            "related": [
+                "setEnvironment",
+                "getEnvironment"
+            ],
             "constructor": {
                 "signatures": [
                     ""
@@ -22261,6 +23314,9 @@ const TrussCAPI = {
                     "name": "fboMipmapExample",
                     "group": "3d"
                 }
+            ],
+            "related": [
+                "createEasyCam"
             ]
         },
         {
@@ -22582,6 +23638,9 @@ const TrussCAPI = {
             ],
             "desc_ja": "ネットワークインターフェースの1アドレスエントリ（listNetworkInterfacesが返す）",
             "desc_ko": "네트워크 인터페이스의 주소 항목 하나 (listNetworkInterfaces가 반환)",
+            "related": [
+                "listNetworkInterfaces"
+            ],
             "properties": [
                 {
                     "name": "name",
@@ -24227,6 +25286,9 @@ const TrussCAPI = {
                     "group": "sound"
                 }
             ],
+            "related": [
+                "getInstance"
+            ],
             "methods": [
                 {
                     "name": "init",
@@ -24335,6 +25397,9 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "getMicInput"
+            ],
             "constructor": {
                 "signatures": [
                     ""
@@ -24411,6 +25476,9 @@ const TrussCAPI = {
                     "group": "sound"
                 }
             ],
+            "related": [
+                "init"
+            ],
             "properties": [
                 {
                     "name": "sampleRate",
@@ -24461,6 +25529,9 @@ const TrussCAPI = {
                     "group": "sound"
                 }
             ],
+            "related": [
+                "listDevices"
+            ],
             "properties": [
                 {
                     "name": "name",
@@ -24491,6 +25562,9 @@ const TrussCAPI = {
                     "name": "audioDeviceExample",
                     "group": "sound"
                 }
+            ],
+            "related": [
+                "audioDeviceChanged"
             ],
             "properties": [
                 {
@@ -24548,6 +25622,9 @@ const TrussCAPI = {
                     "group": "sound"
                 }
             ],
+            "related": [
+                "audioOut"
+            ],
             "properties": [
                 {
                     "name": "data",
@@ -24589,6 +25666,9 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "audioIn"
+            ],
             "properties": [
                 {
                     "name": "data",
@@ -24635,6 +25715,11 @@ const TrussCAPI = {
                     "name": "chipSoundExample",
                     "group": "sound"
                 }
+            ],
+            "related": [
+                "clear",
+                "createChipBundle",
+                "add"
             ],
             "constructor": {
                 "signatures": [
@@ -24707,6 +25792,9 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "getLogger"
+            ],
             "methods": [
                 {
                     "name": "log",
@@ -24803,6 +25891,9 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "events"
+            ],
             "properties": [
                 {
                     "name": "setup",
@@ -24929,6 +26020,11 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "audioOut",
+                "audioIn",
+                "audioDeviceChanged"
+            ],
             "methods": [
                 {
                     "name": "listen",
@@ -25739,6 +26835,9 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "toOKLab"
+            ],
             "properties": [
                 {
                     "name": "L",
@@ -25780,6 +26879,14 @@ const TrussCAPI = {
                     "name": "jsonXmlExample",
                     "group": "input_output"
                 }
+            ],
+            "related": [
+                "parseJson",
+                "toJsonString",
+                "reflectToJson",
+                "reflectFromJson",
+                "loadJson",
+                "saveJson"
             ]
         },
         {
@@ -25799,6 +26906,10 @@ const TrussCAPI = {
                     "name": "jsonXmlExample",
                     "group": "input_output"
                 }
+            ],
+            "related": [
+                "parseXml",
+                "loadXml"
             ],
             "constructor": {
                 "signatures": [
@@ -26479,6 +27590,9 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "getLocation"
+            ],
             "properties": [
                 {
                     "name": "latitude",
@@ -26514,6 +27628,9 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "getFpsSettings"
+            ],
             "properties": [
                 {
                     "name": "updateFps",
@@ -26550,6 +27667,9 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "runApp"
+            ],
             "properties": [
                 {
                     "name": "width",
@@ -26698,6 +27818,9 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "runHeadlessApp"
+            ],
             "properties": [
                 {
                     "name": "targetFps",
@@ -26735,6 +27858,12 @@ const TrussCAPI = {
                     "name": "fileDialogExample",
                     "group": "input_output"
                 }
+            ],
+            "related": [
+                "loadDialog",
+                "saveDialog",
+                "loadDialogAsync",
+                "saveDialogAsync"
             ],
             "properties": [
                 {
@@ -27244,6 +28373,16 @@ const TrussCAPI = {
                     "group": "tests"
                 }
             ],
+            "related": [
+                "pause",
+                "resume",
+                "duration",
+                "ease",
+                "createTween",
+                "from",
+                "to",
+                "start"
+            ],
             "constructor": {
                 "signatures": [
                     "",
@@ -27487,6 +28626,11 @@ const TrussCAPI = {
             ],
             "desc_ja": "",
             "desc_ko": "",
+            "related": [
+                "startRecording",
+                "start",
+                "open"
+            ],
             "properties": [
                 {
                     "name": "codec",
@@ -27528,6 +28672,12 @@ const TrussCAPI = {
                     "name": "bitmapStringExtendedExample",
                     "group": "font"
                 }
+            ],
+            "related": [
+                "bitmapfont::registerGlyph",
+                "bitmapfont::registerGlyphs",
+                "registerGlyph",
+                "registerGlyphs"
             ],
             "properties": [
                 {
@@ -27629,6 +28779,16 @@ const TrussCAPI = {
                     "name": "strokeMeshExample",
                     "group": "graphics"
                 }
+            ],
+            "related": [
+                "clear",
+                "setColor",
+                "addVertex",
+                "createStrokeMesh",
+                "setWidth",
+                "setCapType",
+                "setJoinType",
+                "setMiterLimit"
             ],
             "constructor": {
                 "signatures": [
@@ -27807,7 +28967,11 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "setBlendMode",
+                "getBlendMode"
+            ]
         },
         {
             "name": "TextureFilter",
@@ -28006,7 +29170,13 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "setCursor",
+                "getCursor",
+                "bindCursorImage",
+                "unbindCursorImage"
+            ]
         },
         {
             "name": "Modifier",
@@ -28147,7 +29317,13 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "ease",
+                "easeIn",
+                "easeOut",
+                "easeInOut"
+            ]
         },
         {
             "name": "EaseMode",
@@ -28179,7 +29355,10 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "ease"
+            ]
         },
         {
             "name": "Deliver",
@@ -28312,7 +29491,12 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "channelCount",
+                "bytesPerPixel",
+                "isFloatFormat"
+            ]
         },
         {
             "name": "TextureUsage",
@@ -28505,7 +29689,11 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "setStrokeCap",
+                "getStrokeCap"
+            ]
         },
         {
             "name": "StrokeJoin",
@@ -28537,7 +29725,11 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "setStrokeJoin",
+                "getStrokeJoin"
+            ]
         },
         {
             "name": "PrimitiveType",
@@ -28614,7 +29806,12 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "applyWindow",
+                "fftReal",
+                "windowFunction"
+            ]
         },
         {
             "name": "Wave",
@@ -28666,7 +29863,10 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "wave"
+            ]
         },
         {
             "name": "MixMode",
@@ -28691,7 +29891,10 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "setMixMode"
+            ]
         },
         {
             "name": "Direction",
@@ -28733,7 +29936,10 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "ScrollBar"
+            ]
         },
         {
             "name": "LayoutDirection",
@@ -28760,7 +29966,10 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "LayoutMod"
+            ]
         },
         {
             "name": "AxisMode",
@@ -28819,7 +30028,12 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "compress",
+                "decompress",
+                "compressBound"
+            ]
         },
         {
             "name": "LogLevel",
@@ -28866,7 +30080,12 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "logAt",
+                "setConsoleLogLevel",
+                "setFileLogLevel"
+            ]
         },
         {
             "name": "Beep",
@@ -28974,7 +30193,10 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "videoCodecName"
+            ]
         },
         {
             "name": "Source",
@@ -29038,7 +30260,10 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "getThermalState"
+            ]
         },
         {
             "name": "TcyMode",
@@ -29154,7 +30379,10 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "related": [
+                "setOrientation"
+            ]
         }
     ],
     "macros": [

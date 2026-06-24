@@ -367,6 +367,30 @@
         return h;
     }
 
+    // Resolve a related symbol name to its kind so links navigate correctly
+    // (a related entry may be a function, type, enum or macro). Built once.
+    let _kindIndex = null;
+    function kindOf(name) {
+        if (!_kindIndex) {
+            _kindIndex = new Map();
+            for (const c of TrussCAPI.categories || []) for (const f of c.functions || []) if (!_kindIndex.has(f.name)) _kindIndex.set(f.name, 'function');
+            for (const t of TrussCAPI.types || []) if (!_kindIndex.has(t.name)) _kindIndex.set(t.name, 'type');
+            for (const e of TrussCAPI.enums || []) if (!_kindIndex.has(e.name)) _kindIndex.set(e.name, 'enum');
+            for (const m of TrussCAPI.macros || []) if (!_kindIndex.has(m.name)) _kindIndex.set(m.name, 'macro');
+        }
+        return _kindIndex.get(name) || 'function';
+    }
+    function renderRelated(list) {
+        if (!list || !list.length) return '';
+        let h = `<div class="detail-section"><div class="detail-section-title">${esc(UI.related)}</div>`;
+        h += `<div style="font-size:13px;line-height:1.8;">`;
+        h += list.map(r =>
+            `<a href="#" onclick="navTo('${kindOf(r)}','${esc(r)}');return false;" style="color:#4ec9b0;text-decoration:none;">${esc(r)}</a>`
+        ).join(' · ');
+        h += `</div></div>`;
+        return h;
+    }
+
     function renderFunctionDetail(name, category) {
         const overloads = [];
         for (const cat of TrussCAPI.categories) {
@@ -409,17 +433,8 @@
         }
         html += `</div>`;
 
-        // Optional related symbols → clickable links.
-        const related = (overloads.find(o => Array.isArray(o.related)) || {}).related;
-        if (related && related.length) {
-            html += `<div class="detail-section">`;
-            html += `<div class="detail-section-title">${esc(UI.related)}</div>`;
-            html += `<div style="font-size:13px;line-height:1.8;">`;
-            html += related.map(r =>
-                `<a href="#" onclick="navTo('function','${esc(r)}');return false;" style="color:#4ec9b0;text-decoration:none;">${esc(r)}</a>`
-            ).join(' · ');
-            html += `</div></div>`;
-        }
+        // Optional related symbols → kind-aware clickable links.
+        html += renderRelated((overloads.find(o => Array.isArray(o.related)) || {}).related);
 
         // Optional example links.
         html += renderExamples((overloads.find(o => Array.isArray(o.examples)) || {}).examples);
@@ -498,6 +513,7 @@
             html += `</div>`;
         }
 
+        html += renderRelated(t.related);
         html += renderExamples(t.examples);
 
         detail.innerHTML = html;
@@ -519,6 +535,7 @@
             html += `</div>`;
         }
         html += `</div>`;
+        html += renderRelated(e.related);
         detail.innerHTML = html;
     }
 
