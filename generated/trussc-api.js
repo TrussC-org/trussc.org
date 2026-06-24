@@ -2575,7 +2575,14 @@ const TrussCAPI = {
                             "name": "fileDialogExample",
                             "group": "input_output"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ],
+                    "platformNote": "Sync file/folder open. iOS no-ops (use loadDialogAsync); Android returns empty result (no JNI Intent yet); Web/WASM logs a warning and returns empty.",
+                    "platformNote_ja": "同期のファイル/フォルダ選択。iOS はスタブ（loadDialogAsync を使う）、Android は空の結果を返す（JNI Intent 未実装）、Web/WASM は警告を出して空を返す。"
                 },
                 {
                     "name": "saveDialog",
@@ -2591,7 +2598,14 @@ const TrussCAPI = {
                             "name": "fileDialogExample",
                             "group": "input_output"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ],
+                    "platformNote": "Sync file save. iOS no-ops (use saveDialogAsync); Android returns empty result (no JNI Intent yet); Web/WASM logs a warning and returns empty.",
+                    "platformNote_ja": "同期のファイル保存。iOS はスタブ（saveDialogAsync を使う）、Android は空の結果を返す（JNI Intent 未実装）、Web/WASM は警告を出して空を返す。"
                 },
                 {
                     "name": "alertDialog",
@@ -2607,7 +2621,15 @@ const TrussCAPI = {
                             "name": "fileDialogExample",
                             "group": "input_output"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "wasm"
+                    ],
+                    "platformNote": "Sync alert. iOS logs an error and no-ops (use alertDialogAsync); Android only prints to logcat, no UI dialog.",
+                    "platformNote_ja": "同期アラート。iOS はエラーログを出すだけのスタブ（alertDialogAsync を使う）、Android は logcat 出力のみで UI ダイアログは出ない。"
                 },
                 {
                     "name": "confirmDialog",
@@ -2617,7 +2639,15 @@ const TrussCAPI = {
                     "desc": "Show Yes/No confirmation dialog. Returns true if Yes clicked",
                     "keywords": [],
                     "desc_ja": "Yes/No確認ダイアログを表示。Yesが押されたらtrueを返す",
-                    "desc_ko": "Yes/No 확인 대화상자 표시. Yes를 누르면 true 반환"
+                    "desc_ko": "Yes/No 확인 대화상자 표시. Yes를 누르면 true 반환",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "wasm"
+                    ],
+                    "platformNote": "Sync confirm. iOS logs an error and returns false (use confirmDialogAsync); Android logs to logcat and always returns false.",
+                    "platformNote_ja": "同期確認。iOS はエラーログを出して false を返すスタブ（confirmDialogAsync を使う）、Android は logcat に出すだけで常に false を返す。"
                 },
                 {
                     "name": "loadDialogAsync",
@@ -2627,7 +2657,15 @@ const TrussCAPI = {
                     "desc": "Show file open dialog asynchronously. Callback receives FileDialogResult",
                     "keywords": [],
                     "desc_ja": "ファイル選択ダイアログを非同期で表示。コールバックにFileDialogResultが渡される",
-                    "desc_ko": "파일 열기 대화상자를 비동기로 표시. 콜백에 FileDialogResult가 전달됨"
+                    "desc_ko": "파일 열기 대화상자를 비동기로 표시. 콜백에 FileDialogResult가 전달됨",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios"
+                    ],
+                    "platformNote": "Async file/folder open. Real on iOS via UIDocumentPickerViewController. Android calls back with empty result (no JNI Intent); Web/WASM calls back with empty (warning logged).",
+                    "platformNote_ja": "非同期のファイル/フォルダ選択。iOS は UIDocumentPickerViewController で実装あり。Android は空の結果でコールバック（JNI Intent 未実装）、Web/WASM も空でコールバック（警告ログ）。"
                 },
                 {
                     "name": "saveDialogAsync",
@@ -2637,7 +2675,15 @@ const TrussCAPI = {
                     "desc": "Show file save dialog asynchronously. Callback receives FileDialogResult",
                     "keywords": [],
                     "desc_ja": "ファイル保存ダイアログを非同期で表示。コールバックにFileDialogResultが渡される",
-                    "desc_ko": "파일 저장 대화상자를 비동기로 표시. 콜백에 FileDialogResult가 전달됨"
+                    "desc_ko": "파일 저장 대화상자를 비동기로 표시. 콜백에 FileDialogResult가 전달됨",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios"
+                    ],
+                    "platformNote": "Async file save. Real on iOS via UIDocumentPickerViewController export. Android calls back with empty result (no JNI Intent); Web/WASM calls back with empty (warning logged).",
+                    "platformNote_ja": "非同期のファイル保存。iOS は UIDocumentPickerViewController のエクスポートで実装あり。Android は空の結果でコールバック（JNI Intent 未実装）、Web/WASM も空でコールバック（警告ログ）。"
                 },
                 {
                     "name": "alertDialogAsync",
@@ -2647,7 +2693,16 @@ const TrussCAPI = {
                     "desc": "Show alert dialog asynchronously. Callback is called when dismissed",
                     "keywords": [],
                     "desc_ja": "アラートダイアログを非同期で表示。閉じた時にコールバックが呼ばれる",
-                    "desc_ko": "알림 대화상자를 비동기로 표시. 닫힐 때 콜백 호출"
+                    "desc_ko": "알림 대화상자를 비동기로 표시. 닫힐 때 콜백 호출",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "wasm"
+                    ],
+                    "platformNote": "Async alert. Real on iOS via UIAlertController. Android only prints to logcat then fires the callback (no UI dialog).",
+                    "platformNote_ja": "非同期アラート。iOS は UIAlertController で実装あり。Android は logcat 出力後にコールバックを呼ぶだけで UI ダイアログは出ない。"
                 },
                 {
                     "name": "confirmDialogAsync",
@@ -2657,7 +2712,16 @@ const TrussCAPI = {
                     "desc": "Show Yes/No dialog asynchronously. Callback receives true if Yes clicked",
                     "keywords": [],
                     "desc_ja": "Yes/No確認ダイアログを非同期で表示。Yesが押されたらコールバックにtrueが渡される",
-                    "desc_ko": "Yes/No 대화상자를 비동기로 표시. Yes를 누르면 콜백에 true 전달"
+                    "desc_ko": "Yes/No 대화상자를 비동기로 표시. Yes를 누르면 콜백에 true 전달",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "wasm"
+                    ],
+                    "platformNote": "Async confirm. Real on iOS via UIAlertController Yes/No. Android immediately calls back with false (no dialog).",
+                    "platformNote_ja": "非同期確認。iOS は UIAlertController の Yes/No で実装あり。Android はダイアログを出さず即座に false でコールバックする。"
                 },
                 {
                     "name": "getMouseX",
@@ -3450,7 +3514,13 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Mobile-only. No-op on macOS, Windows, Linux and Web.",
+                    "platformNote_ja": "モバイル専用。macOS / Windows / Linux / Web では no-op。"
                 },
                 {
                     "name": "getImmersiveMode",
@@ -3467,7 +3537,13 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Mobile-only. Returns false on macOS, Windows, Linux and Web.",
+                    "platformNote_ja": "モバイル専用。macOS / Windows / Linux / Web では false を返す。"
                 },
                 {
                     "name": "captureWindow",
@@ -3478,7 +3554,16 @@ const TrussCAPI = {
                     "snippet": "captureWindow(${1:outPixels})",
                     "keywords": [],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Web is unimplemented (logs warning, returns false). All native backends read back the framebuffer.",
+                    "platformNote_ja": "Web は未実装（警告を出して false）。ネイティブは全てフレームバッファを読み戻す。"
                 },
                 {
                     "name": "getSystemVolume",
@@ -3495,7 +3580,14 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "macos",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Returns -1 on Windows, Linux and Web (no implementation).",
+                    "platformNote_ja": "Windows / Linux / Web では未実装で -1 を返す。"
                 },
                 {
                     "name": "setSystemVolume",
@@ -3506,7 +3598,13 @@ const TrussCAPI = {
                     "snippet": "setSystemVolume(${1:volume})",
                     "keywords": [],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "platforms": [
+                        "macos",
+                        "android"
+                    ],
+                    "platformNote": "No-op on iOS (explicitly unsupported), Windows, Linux and Web.",
+                    "platformNote_ja": "iOS（明示的に非対応）/ Windows / Linux / Web では no-op。"
                 },
                 {
                     "name": "getSystemBrightness",
@@ -3523,7 +3621,14 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "macos",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Returns -1 on Windows, Linux and Web. macOS uses a private CoreDisplay API.",
+                    "platformNote_ja": "Windows / Linux / Web では -1。macOS は非公開 CoreDisplay API 使用。"
                 },
                 {
                     "name": "setSystemBrightness",
@@ -3534,7 +3639,13 @@ const TrussCAPI = {
                     "snippet": "setSystemBrightness(${1:brightness})",
                     "keywords": [],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "platforms": [
+                        "macos",
+                        "ios"
+                    ],
+                    "platformNote": "No-op on Android (needs WRITE_SETTINGS, TODO), Windows, Linux and Web.",
+                    "platformNote_ja": "Android（WRITE_SETTINGS 必要、TODO）/ Windows / Linux / Web では no-op。"
                 },
                 {
                     "name": "getThermalState",
@@ -3551,7 +3662,14 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "macos",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Returns ThermalState::Nominal stub on Windows, Linux and Web; Android needs NDK API 30+.",
+                    "platformNote_ja": "Windows / Linux / Web では Nominal スタブ。Android は NDK API 30+ が必要。"
                 },
                 {
                     "name": "getThermalTemperature",
@@ -3585,7 +3703,14 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "macos",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Returns -1 on Windows, Linux and Web (no implementation).",
+                    "platformNote_ja": "Windows / Linux / Web では未実装で -1 を返す。"
                 },
                 {
                     "name": "isBatteryCharging",
@@ -3602,7 +3727,14 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "macos",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Returns false on Windows, Linux and Web (no implementation).",
+                    "platformNote_ja": "Windows / Linux / Web では未実装で false を返す。"
                 },
                 {
                     "name": "getAccelerometer",
@@ -3619,7 +3751,13 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Mobile-only. Returns Vec3(0,0,0) on macOS, Windows, Linux and Web.",
+                    "platformNote_ja": "モバイル専用。macOS / Windows / Linux / Web では Vec3(0,0,0)。"
                 },
                 {
                     "name": "getGyroscope",
@@ -3636,7 +3774,13 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Mobile-only. Returns Vec3(0,0,0) on macOS, Windows, Linux and Web.",
+                    "platformNote_ja": "モバイル専用。macOS / Windows / Linux / Web では Vec3(0,0,0)。"
                 },
                 {
                     "name": "getDeviceOrientation",
@@ -3653,7 +3797,13 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Mobile-only. Returns identity Quaternion(1,0,0,0) on macOS, Windows, Linux and Web.",
+                    "platformNote_ja": "モバイル専用。macOS / Windows / Linux / Web では単位 Quaternion(1,0,0,0)。"
                 },
                 {
                     "name": "getCompassHeading",
@@ -3670,7 +3820,13 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Mobile-only. Returns 0 on macOS, Windows, Linux and Web.",
+                    "platformNote_ja": "モバイル専用。macOS / Windows / Linux / Web では 0。"
                 },
                 {
                     "name": "isProximityClose",
@@ -3687,7 +3843,13 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Mobile-only. Returns false on macOS, Windows, Linux and Web.",
+                    "platformNote_ja": "モバイル専用。macOS / Windows / Linux / Web では false。"
                 },
                 {
                     "name": "getLocation",
@@ -3704,7 +3866,13 @@ const TrussCAPI = {
                             "name": "systemInfoExample",
                             "group": "utils"
                         }
-                    ]
+                    ],
+                    "platforms": [
+                        "macos",
+                        "ios"
+                    ],
+                    "platformNote": "CoreLocation only. Android is a stub (returns empty Location, needs runtime permission); Windows, Linux and Web return empty.",
+                    "platformNote_ja": "CoreLocation のみ。Android はスタブ（空の Location、ランタイム権限が必要）。Windows / Linux / Web も空を返す。"
                 }
             ],
             "name_ja": "プラットフォーム",
@@ -5160,7 +5328,13 @@ const TrussCAPI = {
                     "snippet": "getWindowPosition()",
                     "keywords": [],
                     "desc_ja": "スクリーン座標でのウィンドウ位置を取得（左上原点）。macOS/Windowsのみ対応、他は(-1, -1)を返す",
-                    "desc_ko": "윈도우 위치를 스크린 좌표(좌상단 원점)로 얻음. macOS/Windows만 지원, 그 외 플랫폼은 (-1, -1) 반환"
+                    "desc_ko": "윈도우 위치를 스크린 좌표(좌상단 원점)로 얻음. macOS/Windows만 지원, 그 외 플랫폼은 (-1, -1) 반환",
+                    "platforms": [
+                        "macos",
+                        "windows"
+                    ],
+                    "platformNote": "Stub returning (-1,-1) on Linux (not yet implemented), iOS, Android and Web.",
+                    "platformNote_ja": "Linux（未実装）/ iOS / Android / Web ではスタブで (-1,-1) を返す。"
                 },
                 {
                     "name": "setWindowPosition",
@@ -5171,7 +5345,13 @@ const TrussCAPI = {
                     "snippet": "setWindowPosition(${1:100}, ${2:100})",
                     "keywords": [],
                     "desc_ja": "スクリーン座標でウィンドウ位置を設定（左上原点）。macOS/Windowsのみ対応、他はno-op",
-                    "desc_ko": "윈도우 위치를 스크린 좌표(좌상단 원점)로 설정. macOS/Windows만 지원, 그 외 플랫폼은 동작하지 않음"
+                    "desc_ko": "윈도우 위치를 스크린 좌표(좌상단 원점)로 설정. macOS/Windows만 지원, 그 외 플랫폼은 동작하지 않음",
+                    "platforms": [
+                        "macos",
+                        "windows"
+                    ],
+                    "platformNote": "No-op (warns) on Linux (not yet implemented), iOS, Android and Web.",
+                    "platformNote_ja": "Linux（未実装）/ iOS / Android / Web では警告のみで no-op。"
                 },
                 {
                     "name": "toggleFullscreen",
@@ -5277,7 +5457,13 @@ const TrussCAPI = {
                     "snippet": "setOrientation(${1:Orientation::All})",
                     "keywords": [],
                     "desc_ja": "画面の向きを設定（モバイル用）。Orientation::Portrait, Landscape, All",
-                    "desc_ko": "허용되는 화면 방향을 설정 (모바일). 값: Orientation::Portrait, Landscape, All"
+                    "desc_ko": "허용되는 화면 방향을 설정 (모바일). 값: Orientation::Portrait, Landscape, All",
+                    "platforms": [
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Mobile-only. No-op on macOS, Windows, Linux and Web.",
+                    "platformNote_ja": "モバイル専用。デスクトップ / Web では no-op。"
                 },
                 {
                     "name": "setKeepScreenOn",
@@ -5288,7 +5474,15 @@ const TrussCAPI = {
                     "snippet": "setKeepScreenOn(${1:true})",
                     "keywords": [],
                     "desc_ja": "アプリ実行中に画面スリープ/自動ロックを抑止。対応: Android, iOS, macOS, Windows。Linux / Web は no-op",
-                    "desc_ko": "앱 실행 중 화면 절전/자동 잠금을 방지. 지원: Android, iOS, macOS, Windows. Linux / Web는 동작하지 않음"
+                    "desc_ko": "앱 실행 중 화면 절전/자동 잠금을 방지. 지원: Android, iOS, macOS, Windows. Linux / Web는 동작하지 않음",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "No-op on Linux and Web (TODO: xdg-screensaver / Wake Lock API).",
+                    "platformNote_ja": "Linux / Web では no-op（xdg-screensaver / Wake Lock API は未実装）。"
                 },
                 {
                     "name": "getKeepScreenOn",
@@ -5299,7 +5493,15 @@ const TrussCAPI = {
                     "snippet": "getKeepScreenOn()",
                     "keywords": [],
                     "desc_ja": "現在 keep-screen-on が有効かどうかを取得",
-                    "desc_ko": "현재 keep-screen-on이 활성화되어 있는지 확인"
+                    "desc_ko": "현재 keep-screen-on이 활성화되어 있는지 확인",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Always false on Linux and Web (setter is a no-op there).",
+                    "platformNote_ja": "Linux / Web では常に false（setter が no-op のため）。"
                 },
                 {
                     "name": "setIndependentFps",
@@ -5357,7 +5559,16 @@ const TrussCAPI = {
                     "snippet": "startRecording(${1:\"out.mp4\"})",
                     "keywords": [],
                     "desc_ja": "ウィンドウを動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）",
-                    "desc_ko": "윈도우를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요)"
+                    "desc_ko": "윈도우를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요)",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter stub returns false).",
+                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter スタブが false）。"
                 },
                 {
                     "name": "stopRecording",
@@ -5462,7 +5673,14 @@ const TrussCAPI = {
                     "snippet": "bringWindowToFront()",
                     "keywords": [],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ],
+                    "platformNote": "Desktop-only. No-op on iOS, Android and Web (always foreground / no window mgmt).",
+                    "platformNote_ja": "デスクトップ専用。iOS / Android / Web では no-op（常に前面 / ウィンドウ管理なし）。"
                 },
                 {
                     "name": "getDisplayScaleFactor",
@@ -5484,7 +5702,14 @@ const TrussCAPI = {
                     "snippet": "setWindowDecorated(${1:true})",
                     "keywords": [],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ],
+                    "platformNote": "Desktop-only (toggles WM frame). No-op on iOS, Android and Web.",
+                    "platformNote_ja": "デスクトップ専用（WM フレーム切替）。iOS / Android / Web では no-op。"
                 },
                 {
                     "name": "setWindowSizeLogical",
@@ -5495,7 +5720,14 @@ const TrussCAPI = {
                     "snippet": "setWindowSizeLogical(${1:width}, ${2:height})",
                     "keywords": [],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "wasm"
+                    ],
+                    "platformNote": "No-op on Linux (not yet implemented), iOS and Android (fixed fullscreen). Web resizes the canvas.",
+                    "platformNote_ja": "Linux（未実装）/ iOS / Android（全画面固定）では no-op。Web は canvas をリサイズ。"
                 },
                 {
                     "name": "runHeadlessApp",
@@ -6563,7 +6795,15 @@ const TrussCAPI = {
                     "snippet": "getExecutablePath()",
                     "keywords": [],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios"
+                    ],
+                    "platformNote": "Android returns \"\" (assets via AAssetManager); Web returns hardcoded \"/\".",
+                    "platformNote_ja": "Android は \"\" を返す（アセットは AAssetManager 経由）。Web はハードコードの \"/\"。"
                 },
                 {
                     "name": "getExecutableDir",
@@ -6574,7 +6814,16 @@ const TrussCAPI = {
                     "snippet": "getExecutableDir()",
                     "keywords": [],
                     "desc_ja": "",
-                    "desc_ko": ""
+                    "desc_ko": "",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Real directory on all native platforms (android = internalDataPath). Web returns hardcoded \"/\".",
+                    "platformNote_ja": "ネイティブは全て実ディレクトリを返す（android は internalDataPath）。Web はハードコードの \"/\"。"
                 }
             ],
             "name_ja": "ファイル",
@@ -6635,7 +6884,16 @@ const TrussCAPI = {
                     "snippet": "loadStream(${1:\"music.wav\"})",
                     "keywords": [],
                     "desc_ja": "ディスクからストリーミング再生 (WAV/MP3/FLAC)。長尺ファイル向け、メモリ節約。maxPolyphony は同時再生数",
-                    "desc_ko": "디스크에서 스트리밍 재생 (WAV/MP3/FLAC). 긴 파일 적합, 메모리 절약. maxPolyphony는 동시 재생 수"
+                    "desc_ko": "디스크에서 스트리밍 재생 (WAV/MP3/FLAC). 긴 파일 적합, 메모리 절약. maxPolyphony는 동시 재생 수",
+                    "platforms": [
+                        "windows",
+                        "macos",
+                        "linux",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Streaming audio (Sound::loadStream / SoundStream). On wasm it is unsupported (needs std::thread + on-disk file I/O, neither available in the default browser build); Sound::loadStream() logs a warning and silently falls back to eager load(). So you always get a Sound, but it is never actually streamed on web — branch on isStreaming() / __EMSCRIPTEN__ if it matters.",
+                    "platformNote_ja": "ストリーミング再生 (Sound::loadStream / SoundStream)。wasm では非対応 (std::thread + ディスクI/O が必要、ブラウザの既定ビルドにはどちらも無い)。Sound::loadStream() は警告を出して eager load() に静かにフォールバックする。Sound 自体は得られるが web では決してストリームされない — 必要なら isStreaming() / __EMSCRIPTEN__ で分岐する。"
                 },
                 {
                     "name": "isStreaming",
@@ -7486,7 +7744,15 @@ const TrussCAPI = {
                     "snippet": "systemFontPath(${1:\"HiraginoSans-W3\"})",
                     "keywords": [],
                     "desc_ja": "システムフォント名（PostScript 名や family 名）をファイルパスに解決。見つからなければ空文字を返す。macOS は CoreText、Linux/Win は現状スタブ",
-                    "desc_ko": "시스템 폰트 이름을 파일 경로로 변환"
+                    "desc_ko": "시스템 폰트 이름을 파일 경로로 변환",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios"
+                    ],
+                    "platformNote": "Resolve a font name to a file path. Stub on Android and Web/WASM (always returns \"\").",
+                    "platformNote_ja": "フォント名をファイルパスに解決する。Android と Web/WASM ではスタブで常に \"\" を返す。"
                 },
                 {
                     "name": "listSystemFonts",
@@ -7497,7 +7763,15 @@ const TrussCAPI = {
                     "snippet": "listSystemFonts()",
                     "keywords": [],
                     "desc_ja": "OS が認識している全フォント名を取得",
-                    "desc_ko": "시스템에 설치된 모든 폰트 이름을 나열"
+                    "desc_ko": "시스템에 설치된 모든 폰트 이름을 나열",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios"
+                    ],
+                    "platformNote": "Enumerate installed font names. Stub on Android and Web/WASM (always returns empty vector).",
+                    "platformNote_ja": "インストール済みフォント名を列挙する。Android と Web/WASM ではスタブで常に空ベクタを返す。"
                 },
                 {
                     "name": "registerGlyph",
@@ -11264,7 +11538,16 @@ const TrussCAPI = {
                     "snippet": "VideoPlayer()",
                     "keywords": [],
                     "desc_ja": "ビデオプレイヤーを作成",
-                    "desc_ko": "비디오 플레이어를 생성"
+                    "desc_ko": "비디오 플레이어를 생성",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "wasm"
+                    ],
+                    "platformNote": "Video playback is a stub on Android: loadPlatform() logs \"Not yet implemented on Android\" and returns false; every platform hook is no-op (MediaCodec NDK TODO). Real backends: macOS/iOS AVFoundation, Windows Media Foundation, Linux FFmpeg, web HTML5 <video>.",
+                    "platformNote_ja": "Android はスタブ。loadPlatform() が false を返し全フックが no-op（MediaCodec NDK 未実装）。他は実装あり（mac/ios AVFoundation, win MediaFoundation, linux FFmpeg, web HTML5 video）。"
                 },
                 {
                     "name": "createVideoPlayer",
@@ -11748,7 +12031,12 @@ const TrussCAPI = {
                     "snippet": "VideoPlayer::extractFrame(${1:\"video.mp4\"}, pixels, ${2:0.0})",
                     "keywords": [],
                     "desc_ja": "ビデオファイルから1フレームを抽出（全体を読み込まずに）。サムネイル生成に便利",
-                    "desc_ko": "비디오 파일에서 전체를 로드하지 않고 단일 프레임을 추출. 썸네일 생성에 유용"
+                    "desc_ko": "비디오 파일에서 전체를 로드하지 않고 단일 프레임을 추출. 썸네일 생성에 유용",
+                    "platforms": [
+                        "macos"
+                    ],
+                    "platformNote": "Static single-frame extraction is fully implemented only on macOS (AVAssetImageGenerator). Windows/Linux/Android stub it (`return false`, TODO); iOS and web have no extractFramePlatform() definition at all.",
+                    "platformNote_ja": "静止フレーム抽出が実装されているのは macOS のみ（AVAssetImageGenerator）。win/linux/android は false を返すスタブ、ios/web は extractFramePlatform() の定義自体が存在しない。"
                 },
                 {
                     "name": "ScreenRecorder",
@@ -11759,7 +12047,16 @@ const TrussCAPI = {
                     "snippet": "ScreenRecorder()",
                     "keywords": [],
                     "desc_ja": "ライブ画面録画：ウィンドウ（またはFbo）を毎フレーム動画ファイルに録画（ネイティブエンコーダ、ffmpeg不要）",
-                    "desc_ko": "라이브 화면 녹화: 윈도우(또는 Fbo)를 매 프레임 동영상 파일로 녹화 (네이티브 인코더, ffmpeg 불필요)"
+                    "desc_ko": "라이브 화면 녹화: 윈도우(또는 Fbo)를 매 프레임 동영상 파일로 녹화 (네이티브 인코더, ffmpeg 불필요)",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Built on VideoWriter, so it is non-functional on web (writer.open() fails). Works on all native platforms. macOS additionally uses an async zero-copy swapchain capture path (TC_ASYNC_SCREEN_CAPTURE / lockFrame+submitFrame); others fall back to synchronous grabScreen().",
+                    "platformNote_ja": "VideoWriter 上に構築されるため web では機能しない（writer.open 失敗）。ネイティブ全対応。macOS のみ非同期ゼロコピー capture（lockFrame/submitFrame）、他は同期 grabScreen フォールバック。"
                 },
                 {
                     "name": "start",
@@ -11815,7 +12112,16 @@ const TrussCAPI = {
                     "snippet": "VideoWriter()",
                     "keywords": [],
                     "desc_ja": "低レベル動画エンコーダ：フレームを自分で渡す（決定論的・固定レートのオフライン書き出し）",
-                    "desc_ko": "저수준 동영상 인코더: 프레임을 직접 공급 (결정론적·고정 레이트 오프라인 렌더)"
+                    "desc_ko": "저수준 동영상 인코더: 프레임을 직접 공급 (결정론적·고정 레이트 오프라인 렌더)",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Video encoding is a stub on web: openPlatform() logs 'not implemented on web yet' and returns false (WebGPU can't sync-read pixels; a future JS MediaRecorder backend is noted). Real backends: macOS/iOS AVAssetWriter, Windows IMFSinkWriter, Linux GStreamer, Android MediaCodec.",
+                    "platformNote_ja": "web はスタブ。openPlatform() が「not implemented」を出して false を返す（WebGPU が同期 pixel readback 不可）。他は実装あり（mac/ios AVAssetWriter, win IMFSinkWriter, linux GStreamer, android MediaCodec）。"
                 },
                 {
                     "name": "open",
@@ -12230,7 +12536,16 @@ const TrussCAPI = {
                     "snippet": "listNetworkInterfaces()",
                     "keywords": [],
                     "desc_ja": "全ネットワークインターフェースのアドレスを列挙（IPv4/IPv6・ループバック・up/down含む）",
-                    "desc_ko": "모든 네트워크 인터페이스 주소를 나열 (IPv4/IPv6, 루프백, up/down 포함)"
+                    "desc_ko": "모든 네트워크 인터페이스 주소를 나열 (IPv4/IPv6, 루프백, up/down 포함)",
+                    "platforms": [
+                        "windows",
+                        "macos",
+                        "linux",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Enumerate NICs (IP/MAC/netmask/up/loopback). Windows uses GetAdaptersAddresses; macOS/iOS/Linux/Android use getifaddrs (+ AF_LINK on Apple, AF_PACKET elsewhere). On wasm it is an explicit stub: logs 'listNetworkInterfaces() is not available on the web backend' and returns {}. Its consumers getLocalIp() / getLocalIps() / printNetworkInterfaces() therefore also yield nothing on wasm.",
+                    "platformNote_ja": "NIC 列挙 (IP/MAC/netmask/up/loopback)。Windows は GetAdaptersAddresses、macOS/iOS/Linux/Android は getifaddrs (Apple は AF_LINK、他は AF_PACKET)。wasm は明示スタブで 'listNetworkInterfaces() is not available on the web backend' を出して {} を返す。よって getLocalIp() / getLocalIps() / printNetworkInterfaces() も wasm では何も返さない。"
                 },
                 {
                     "name": "printNetworkInterfaces",
@@ -17044,6 +17359,15 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "UDPソケット（データグラム送受信・ブロードキャスト・マルチキャスト）",
             "desc_ko": "UDP 소켓 (데이터그램 송수신, 브로드캐스트, 멀티캐스트)",
+            "platforms": [
+                "windows",
+                "macos",
+                "linux",
+                "ios",
+                "android"
+            ],
+            "platformNote": "UDP via raw BSD/Winsock sockets — full support on the 5 native platforms (send/recv, broadcast, multicast join/leave/TTL/loopback/interface, reuse-addr/port). The .cpp DOES compile for wasm and the API exists, but raw UDP is not functional in a browser: Emscripten only emulates sockets tunneled over a WebSocket proxy server, and there is no native UDP datagram path. Additionally on wasm threading is disabled (useThread_ forced false; the receive loop must run via processNetwork() on the update event, and setUseThread(true) warns + no-ops). Treat UdpSocket as native-only in practice.",
+            "platformNote_ja": "生 BSD/Winsock ソケットによる UDP — ネイティブ5プラットフォームで完全対応 (送受信、ブロードキャスト、マルチキャスト join/leave/TTL/loopback/interface、reuse-addr/port)。.cpp は wasm でもコンパイルされ API も存在するが、ブラウザでは生 UDP は機能しない: Emscripten はソケットを WebSocket プロキシ経由でしかエミュレートせず、ネイティブ UDP データグラム経路が無い。さらに wasm ではスレッド無効 (useThread_ は強制 false、受信は update イベントの processNetwork() で回す、setUseThread(true) は警告して no-op)。実用上はネイティブ専用とみなす。",
             "constructor": {
                 "signatures": [
                     ""
@@ -17360,6 +17684,15 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "TCPクライアント接続（接続・ストリーム送受信）",
             "desc_ko": "TCP 클라이언트 연결 (연결, 스트림 송수신)",
+            "platforms": [
+                "windows",
+                "macos",
+                "linux",
+                "ios",
+                "android"
+            ],
+            "platformNote": "TCP client via raw BSD/Winsock sockets (connect/connectAsync/send/receive, sync or threaded). Fully functional on the 5 native platforms. Compiles for wasm but raw TCP only works tunneled over Emscripten's WebSocket socket emulation (a proxy server), not as a native browser socket. On wasm threading is disabled (useThread_ forced false), so connectAsync() degrades to a non-blocking connect driven by processNetwork() instead of a background thread.",
+            "platformNote_ja": "生 BSD/Winsock ソケットによる TCP クライアント (connect/connectAsync/send/receive、同期/スレッド両対応)。ネイティブ5プラットフォームで完全動作。wasm でもコンパイルされるが、生 TCP は Emscripten の WebSocket ソケットエミュレーション (プロキシサーバ) 経由でのみ動作し、ブラウザのネイティブソケットとしては動かない。wasm はスレッド無効 (useThread_ 強制 false) のため connectAsync() はバックグラウンドスレッドではなく processNetwork() 駆動のノンブロッキング connect に縮退する。",
             "constructor": {
                 "signatures": [
                     ""
@@ -17569,6 +17902,15 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "TCPサーバ（クライアント受け入れ・送信/ブロードキャスト）",
             "desc_ko": "TCP 서버 (클라이언트 수락, 전송/브로드캐스트)",
+            "platforms": [
+                "windows",
+                "macos",
+                "linux",
+                "ios",
+                "android"
+            ],
+            "platformNote": "TCP server (socket/bind/listen/accept on a background accept thread). Real on the 5 native platforms. Effectively unavailable on wasm: a browser cannot listen()/accept() incoming connections, and the accept thread needs std::thread which the default web build lacks. Not documented in api-definition.yaml.",
+            "platformNote_ja": "TCP サーバ (socket/bind/listen/accept をバックグラウンド accept スレッドで)。ネイティブ5プラットフォームで実装。wasm では実質利用不可: ブラウザは着信を listen()/accept() できず、accept スレッドに必要な std::thread も web 既定ビルドに無い。api-definition.yaml には未記載。",
             "constructor": {
                 "signatures": [
                     ""
@@ -17851,6 +18193,14 @@ const TrussCAPI = {
                     "group": "tests"
                 }
             ],
+            "platforms": [
+                "windows",
+                "macos",
+                "linux",
+                "android"
+            ],
+            "platformNote": "Real backends only on Windows (Win32 COM), macOS/Linux (POSIX termios), and Android (USB Host CDC-ACM via JNI+usbfs, CDC-ACM class devices only, first connect needs an async USB permission dialog). No serial on iOS (sandbox has no /dev/tty access — the macOS __APPLE__ enumeration branch compiles but never lists/opens a device) or wasm (Emscripten has no serial device; setup() falls into the POSIX open()/termios path against the virtual FS and fails).",
+            "platformNote_ja": "実バックエンドは Windows (Win32 COM)、macOS/Linux (POSIX termios)、Android (USB Host CDC-ACM、JNI+usbfs、CDC-ACMクラス機器のみ、初回接続は非同期のUSB許可ダイアログが必要) のみ。iOS はサンドボックスで /dev/tty にアクセスできず実質不可 (__APPLE__ の列挙分岐はコンパイルされるが機器を列挙/オープンできない)、wasm はシリアルデバイスが存在せず setup() が POSIX open()/termios 経路に落ちて失敗。",
             "constructor": {
                 "signatures": [
                     ""
@@ -18175,7 +18525,16 @@ const TrussCAPI = {
                         "const string& path"
                     ],
                     "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms).",
-                    "snippet": "loadAac(${1:path})"
+                    "snippet": "loadAac(${1:path})",
+                    "platforms": [
+                        "macos",
+                        "ios",
+                        "windows",
+                        "linux",
+                        "wasm"
+                    ],
+                    "platformNote": "AAC/M4A decoding (reached via Sound::load() on .aac/.m4a, or SoundBuffer::loadAac). macOS/iOS use AVFoundation (AVAssetReader), Windows uses Media Foundation, Linux uses GStreamer, wasm uses Web Audio decodeAudioData (deferred until play(), placeholder samples until then). STUBBED on Android: logs 'AAC loading not yet implemented' and returns false (TODO MediaCodec). All other audio formats (WAV/MP3/FLAC via miniaudio, OGG via stb_vorbis) work on all 6 platforms.",
+                    "platformNote_ja": "AAC/M4A デコード (.aac/.m4a を Sound::load()、または SoundBuffer::loadAac で到達)。macOS/iOS は AVFoundation (AVAssetReader)、Windows は Media Foundation、Linux は GStreamer、wasm は Web Audio decodeAudioData (play() まで遅延、それまではプレースホルダ)。Android のみスタブで 'AAC loading not yet implemented' を出して false を返す (TODO MediaCodec)。他フォーマット (WAV/MP3/FLAC=miniaudio、OGG=stb_vorbis) は全6プラットフォームで動作。"
                 },
                 {
                     "name": "loadWavFromMemory",
@@ -18220,7 +18579,15 @@ const TrussCAPI = {
                         "const void* data, size_t dataSize"
                     ],
                     "desc": "Decode AAC data from a memory buffer (platform-specific; returns false on unsupported platforms).",
-                    "snippet": "loadAacFromMemory(${1:data}, ${2:dataSize})"
+                    "snippet": "loadAacFromMemory(${1:data}, ${2:dataSize})",
+                    "platforms": [
+                        "macos",
+                        "ios",
+                        "windows",
+                        "linux"
+                    ],
+                    "platformNote": "Memory-based AAC decode. Real impls on macOS/iOS (AVFoundation), Windows (Media Foundation), Linux (GStreamer). STUBBED on Android (returns false) and on wasm (logs 'loadAacFromMemory() not yet implemented for Web (use file path instead)' and returns false). Not documented in api-definition.yaml.",
+                    "platformNote_ja": "メモリからの AAC デコード。macOS/iOS (AVFoundation)、Windows (Media Foundation)、Linux (GStreamer) は実装あり。Android はスタブで false、wasm も 'loadAacFromMemory() not yet implemented for Web' を出して false。api-definition.yaml には未記載。"
                 },
                 {
                     "name": "loadPcmFromMemory",
@@ -18372,7 +18739,16 @@ const TrussCAPI = {
                         "const string& path, int maxPolyphony = 1"
                     ],
                     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported.",
-                    "snippet": "loadStream(${1:path})"
+                    "snippet": "loadStream(${1:path})",
+                    "platforms": [
+                        "windows",
+                        "macos",
+                        "linux",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Streaming audio (Sound::loadStream / SoundStream). On wasm it is unsupported (needs std::thread + on-disk file I/O, neither available in the default browser build); Sound::loadStream() logs a warning and silently falls back to eager load(). So you always get a Sound, but it is never actually streamed on web — branch on isStreaming() / __EMSCRIPTEN__ if it matters.",
+                    "platformNote_ja": "ストリーミング再生 (Sound::loadStream / SoundStream)。wasm では非対応 (std::thread + ディスクI/O が必要、ブラウザの既定ビルドにはどちらも無い)。Sound::loadStream() は警告を出して eager load() に静かにフォールバックする。Sound 自体は得られるが web では決してストリームされない — 必要なら isStreaming() / __EMSCRIPTEN__ で分岐する。"
                 },
                 {
                     "name": "getDuration",
@@ -20897,6 +21273,15 @@ const TrussCAPI = {
                     "group": "video"
                 }
             ],
+            "platforms": [
+                "macos",
+                "windows",
+                "linux",
+                "ios",
+                "wasm"
+            ],
+            "platformNote": "Webcam capture is a stub on Android: setupPlatform() logs \"Not yet implemented on Android\" and returns false (Camera2 NDK TODO). Real backends: macOS/iOS AVFoundation, Windows Media Foundation, Linux V4L2, web getUserMedia.",
+            "platformNote_ja": "Android はスタブ。setupPlatform() が「Not yet implemented」を出して false を返す（Camera2 NDK 未実装）。他は実装あり（mac/ios AVFoundation, win MediaFoundation, linux V4L2, web getUserMedia）。",
             "constructor": {
                 "signatures": [
                     ""

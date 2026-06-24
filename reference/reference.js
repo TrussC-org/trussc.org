@@ -22,12 +22,12 @@
         const pick = (o, base) => { if (o && o[base + suf] != null) o[base] = o[base + suf]; };
         for (const cat of api.categories || []) {
             pick(cat, 'name');
-            for (const fn of cat.functions || []) { pick(fn, 'desc'); pick(fn, 'details'); pick(fn, 'sigDesc'); }
+            for (const fn of cat.functions || []) { pick(fn, 'desc'); pick(fn, 'details'); pick(fn, 'sigDesc'); pick(fn, 'platformNote'); }
         }
         for (const t of api.types || []) {
-            pick(t, 'desc');
+            pick(t, 'desc'); pick(t, 'platformNote');
             for (const p of t.properties || []) pick(p, 'desc');
-            for (const m of (t.methods || []).concat(t.static_methods || [])) pick(m, 'desc');
+            for (const m of (t.methods || []).concat(t.static_methods || [])) { pick(m, 'desc'); pick(m, 'platformNote'); }
         }
         for (const c of api.constants || []) pick(c, 'desc');
         for (const e of api.enums || []) { pick(e, 'desc'); for (const v of e.values || []) pick(v, 'desc'); }
@@ -53,6 +53,7 @@
         category: 'Category',
         related: 'Related',
         examples: 'Examples',
+        platforms: 'Platforms',
         values: 'Values',
         value: 'Value',
         constantValue: 'Constant value',
@@ -341,6 +342,31 @@
         return h;
     }
 
+    // Platform-support badges. Absent `platforms` = universal → render nothing.
+    // `platforms: []` (supported nowhere, e.g. a not-yet-implemented stub) renders
+    // all-dimmed, which is the honest signal.
+    const PLAT_ORDER = ['linux', 'windows', 'macos', 'ios', 'android', 'wasm'];
+    const PLAT_LABEL = { linux: 'Linux', windows: 'Windows', macos: 'macOS', ios: 'iOS', android: 'Android', wasm: 'WASM' };
+    function platBadges(list) {
+        const on = new Set(list);
+        return PLAT_ORDER.map(p =>
+            `<span class="plat-badge ${on.has(p) ? 'plat-on' : 'plat-off'}">${esc(PLAT_LABEL[p])}</span>`
+        ).join('');
+    }
+    function renderPlatforms(d, inline) {
+        if (!d || !Array.isArray(d.platforms)) return '';
+        if (inline) {
+            let h = `<div class="plat-row plat-inline">${platBadges(d.platforms)}</div>`;
+            if (d.platformNote) h += `<div class="plat-note">${esc(d.platformNote)}</div>`;
+            return h;
+        }
+        let h = `<div class="detail-section"><div class="detail-section-title">${esc(UI.platforms)}</div>`;
+        h += `<div class="plat-row">${platBadges(d.platforms)}</div>`;
+        if (d.platformNote) h += `<div class="plat-note">${esc(d.platformNote)}</div>`;
+        h += `</div>`;
+        return h;
+    }
+
     function renderFunctionDetail(name, category) {
         const overloads = [];
         for (const cat of TrussCAPI.categories) {
@@ -360,6 +386,9 @@
         if (details) {
             html += `<div class="detail-details" style="white-space:pre-wrap;color:#bbb;font-size:13px;line-height:1.7;margin:6px 0 4px;">${esc(details)}</div>`;
         }
+
+        // Platform support (only when the symbol is restricted on some platform).
+        html += renderPlatforms(overloads.find(o => Array.isArray(o.platforms)) || {});
 
         html += `<div class="detail-section">`;
         html += `<div class="detail-section-title">${esc(UI.signatures)}</div>`;
@@ -410,6 +439,7 @@
         let html = backButton();
         html += `<div class="detail-title">${esc(t.name)}</div>`;
         html += `<div class="detail-desc">${esc(t.desc || '')}</div>`;
+        html += renderPlatforms(t);
 
         if (t.constructor && t.constructor.signatures) {
             html += `<div class="detail-section">`;
@@ -447,6 +477,7 @@
                     }
                 }
                 if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
+                html += renderPlatforms(m, true);
                 html += `</div>`;
             }
             html += `</div>`;
@@ -461,6 +492,7 @@
                     html += `<div class="detail-sig"><span class="ret">${esc(m.return || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig)}</span>)</div>`;
                 }
                 if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
+                html += renderPlatforms(m, true);
                 html += `</div>`;
             }
             html += `</div>`;

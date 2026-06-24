@@ -237,6 +237,40 @@
             margin-top: 2px;
         }
 
+        /* Platform support badges */
+        .plat-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .plat-row.plat-inline { margin: 4px 0 2px; }
+        .plat-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            line-height: 1.4;
+            padding: 1px 7px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            user-select: none;
+        }
+        .plat-on {
+            color: #4ec9b0;
+            border-color: #3a6b5c;
+            background: rgba(78, 201, 176, 0.12);
+        }
+        .plat-off {
+            color: #5a5a5a;
+            border-color: #3a3a3a;
+            background: transparent;
+            text-decoration: line-through;
+        }
+        .plat-note {
+            color: #999;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 6px;
+        }
+
         .detail-overloads {
             padding-left: 0;
         }
