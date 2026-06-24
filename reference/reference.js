@@ -104,71 +104,99 @@
         return i === needle.length;
     }
 
-    function levenshtein(a, b) {
+    // Damerau-Levenshtein (optimal string alignment): adjacent transpositions
+    // cost 1, so "curev" -> "curve" is distance 1 (a common typo class).
+    function editDistance(a, b) {
         const al = a.length, bl = b.length;
         if (al === 0) return bl;
         if (bl === 0) return al;
-        let prev = new Array(bl + 1);
-        let cur = new Array(bl + 1);
-        for (let j = 0; j <= bl; j++) prev[j] = j;
+        // d[i][j] over three rolling rows (need i-2 for transposition).
+        let row0 = new Array(bl + 1), row1 = new Array(bl + 1), row2 = new Array(bl + 1);
+        for (let j = 0; j <= bl; j++) row1[j] = j;
         for (let i = 1; i <= al; i++) {
-            cur[0] = i;
-            const ca = a.charCodeAt(i - 1);
+            row2[0] = i;
             for (let j = 1; j <= bl; j++) {
-                const cost = ca === b.charCodeAt(j - 1) ? 0 : 1;
-                cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+                const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+                let v = Math.min(row1[j] + 1, row2[j - 1] + 1, row1[j - 1] + cost);
+                if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+                    v = Math.min(v, row0[j - 2] + 1); // transposition
+                }
+                row2[j] = v;
             }
-            const tmp = prev; prev = cur; cur = tmp;
+            const tmp = row0; row0 = row1; row1 = row2; row2 = tmp;
         }
-        return prev[bl];
+        return row1[bl];
     }
 
-    // Does a single query token fuzzily match a single haystack string?
-    function tokenMatches(token, haystack) {
+    // Split an identifier into lowercase sub-words on non-alphanumeric AND
+    // camelCase / letter-digit boundaries: "drawCurve" -> ["draw","curve"].
+    function subWords(s) {
+        return s
+            .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+            .replace(/([A-Za-z])([0-9])/g, '$1 $2')
+            .split(/[^A-Za-z0-9]+/)
+            .filter(Boolean)
+            .map(w => w.toLowerCase());
+    }
+
+    // Edit distance allowed for a typo, scaled to token length so short tokens
+    // don't match wildly different words (e.g. a 4-char token allows 1 edit).
+    function maxEditDist(token) {
+        if (token.length >= 8) return 2;
+        if (token.length >= 4) return 1;
+        return 0;
+    }
+
+    // Fuzzy match against an IDENTIFIER-like string (name, keyword, method name):
+    // substring, dense subsequence, or bounded Levenshtein. These are short, so
+    // subsequence/edit-distance stay meaningful.
+    function identMatches(token, haystack) {
         if (!haystack) return false;
-        haystack = haystack.toLowerCase();
-        if (haystack.indexOf(token) !== -1) return true;
-        if (isSubsequence(token, haystack)) return true;
-        if (token.length >= 4) {
-            const maxDist = 2;
-            const words = haystack.split(/[^a-z0-9]+/);
-            for (const w of words) {
-                if (!w) continue;
-                // Only bother if lengths are comparable (cheap prune).
-                if (Math.abs(w.length - token.length) > maxDist) continue;
-                if (levenshtein(token, w) <= maxDist) return true;
-            }
+        const lower = haystack.toLowerCase();
+        if (lower.indexOf(token) !== -1) return true;
+        const maxDist = maxEditDist(token);
+        // Match against the whole identifier AND each camelCase sub-word, so both a
+        // full-name typo ("drawCurev"->drawCurve) and a fragment typo ("curev"->curve) hit.
+        for (const w of [lower, ...subWords(haystack)]) {
+            // Dense subsequence (sub-word not much longer than the token).
+            if (token.length >= 3 && w.length <= token.length + 3 &&
+                isSubsequence(token, w)) return true;
+            if (maxDist > 0 && Math.abs(w.length - token.length) <= maxDist &&
+                editDistance(token, w) <= maxDist) return true;
         }
         return false;
     }
 
-    // Collect the searchable text fragments for an item.
+    // Match against PROSE (descriptions): substring only — never fuzz a sentence,
+    // that is what produced far-fetched hits.
+    function proseMatches(token, haystack) {
+        return !!haystack && haystack.toLowerCase().indexOf(token) !== -1;
+    }
+
+    // Collect searchable fragments, split by how strictly to match them.
     function searchableFields(item) {
-        const fields = [];
-        if (item.name) fields.push(item.name);
-        if (item.category) fields.push(item.category);
+        const idents = [], prose = [];
+        if (item.name) idents.push(item.name);
+        if (item.category) idents.push(item.category);
         const d = item.data || {};
-        if (d.desc) fields.push(d.desc);
-        if (Array.isArray(d.keywords)) {
-            for (const kw of d.keywords) if (kw) fields.push(kw);
-        }
+        if (Array.isArray(d.keywords)) for (const kw of d.keywords) if (kw) idents.push(kw);
         if (item.kind === 'type') {
-            if (Array.isArray(d.methods)) for (const m of d.methods) if (m.name) fields.push(m.name);
-            if (Array.isArray(d.properties)) for (const p of d.properties) if (p.name) fields.push(p.name);
+            if (Array.isArray(d.methods)) for (const m of d.methods) if (m.name) idents.push(m.name);
+            if (Array.isArray(d.properties)) for (const p of d.properties) if (p.name) idents.push(p.name);
         }
-        return fields;
+        if (d.desc) prose.push(d.desc);
+        return { idents, prose };
     }
 
     function matchItem(item, query) {
         const tokens = query.split(/\s+/).filter(Boolean);
         if (tokens.length === 0) return true;
-        const fields = searchableFields(item);
-        // Every token must match at least one field.
+        const { idents, prose } = searchableFields(item);
+        // Every token must match at least one field (fuzzy on idents, substring on prose).
         for (const token of tokens) {
             let hit = false;
-            for (const f of fields) {
-                if (tokenMatches(token, f)) { hit = true; break; }
-            }
+            for (const f of idents) { if (identMatches(token, f)) { hit = true; break; } }
+            if (!hit) for (const f of prose) { if (proseMatches(token, f)) { hit = true; break; } }
             if (!hit) return false;
         }
         return true;
