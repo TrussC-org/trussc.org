@@ -3604,6 +3604,46 @@
                     "snippet": "createBox(${1:size})"
                 },
                 {
+                    "name": "createPlane",
+                    "params": "width, height, cols, rows",
+                    "params_typed": "float width, float height, int cols = 2, int rows = 2",
+                    "return_type": "Mesh",
+                    "desc": "Create a plane mesh (subdivided quad on the XY plane)",
+                    "snippet": "createPlane(${1:width}, ${2:height})"
+                },
+                {
+                    "name": "createCylinder",
+                    "params": "radius, height, resolution",
+                    "params_typed": "float radius, float height, int resolution = 16",
+                    "return_type": "Mesh",
+                    "desc": "Create a cylinder mesh",
+                    "snippet": "createCylinder(${1:radius}, ${2:height})"
+                },
+                {
+                    "name": "createCone",
+                    "params": "radius, height, resolution",
+                    "params_typed": "float radius, float height, int resolution = 16",
+                    "return_type": "Mesh",
+                    "desc": "Create a cone mesh",
+                    "snippet": "createCone(${1:radius}, ${2:height})"
+                },
+                {
+                    "name": "createIcoSphere",
+                    "params": "radius, subdivisions",
+                    "params_typed": "float radius, int subdivisions = 2",
+                    "return_type": "Mesh",
+                    "desc": "Create an icosphere mesh (geodesic sphere with uniform triangles)",
+                    "snippet": "createIcoSphere(${1:radius})"
+                },
+                {
+                    "name": "createTorus",
+                    "params": "radius, tubeRadius, sides, rings",
+                    "params_typed": "float radius, float tubeRadius, int sides = 24, int rings = 16",
+                    "return_type": "Mesh",
+                    "desc": "Create a torus (donut) mesh",
+                    "snippet": "createTorus(${1:radius}, ${2:tubeRadius})"
+                },
+                {
                     "name": "createSphere",
                     "params": "radius, res",
                     "params_typed": "float radius, int res = 20",

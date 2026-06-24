@@ -2290,11 +2290,11 @@ const TrussCAPI = {
                             "group": "3d"
                         },
                         {
-                            "name": "meshAppendExample",
+                            "name": "projectorSimulationExample",
                             "group": "3d"
                         },
                         {
-                            "name": "projectorSimulationExample",
+                            "name": "meshAppendExample",
                             "group": "3d"
                         }
                     ]
@@ -2841,8 +2841,8 @@ const TrussCAPI = {
                             "group": "input_output"
                         },
                         {
-                            "name": "3DPrimitivesExample",
-                            "group": "3d"
+                            "name": "graphicsExample",
+                            "group": "graphics"
                         }
                     ]
                 },
@@ -3023,8 +3023,8 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "polylinesExample",
-                            "group": "graphics"
+                            "name": "hitTestExample",
+                            "group": "node"
                         }
                     ]
                 },
@@ -6149,21 +6149,7 @@ const TrussCAPI = {
                     "snippet": "getWidth(${1:\"text\"})",
                     "keywords": [],
                     "desc_ja": "テキストの幅を取得",
-                    "desc_ko": "텍스트 너비를 픽셀로 얻음",
-                    "examples": [
-                        {
-                            "name": "scrollContainerExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "uiExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "layoutModExample",
-                            "group": "node"
-                        }
-                    ]
+                    "desc_ko": "텍스트 너비를 픽셀로 얻음"
                 },
                 {
                     "name": "getHeight",
@@ -6174,21 +6160,7 @@ const TrussCAPI = {
                     "snippet": "getHeight(${1:\"text\"})",
                     "keywords": [],
                     "desc_ja": "テキストの高さを取得",
-                    "desc_ko": "텍스트 높이를 픽셀로 얻음",
-                    "examples": [
-                        {
-                            "name": "scrollContainerExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "uiExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "layoutModExample",
-                            "group": "node"
-                        }
-                    ]
+                    "desc_ko": "텍스트 높이를 픽셀로 얻음"
                 },
                 {
                     "name": "getLineHeight",
@@ -8674,6 +8646,119 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "createPlane",
+                    "params": "width, height, cols, rows",
+                    "params_typed": "float width, float height, int cols = 2, int rows = 2",
+                    "return_type": "Mesh",
+                    "desc": "Create a plane mesh (subdivided quad on the XY plane)",
+                    "snippet": "createPlane(${1:width}, ${2:height})",
+                    "keywords": [],
+                    "desc_ja": "平面メッシュを作成（XY平面上の分割された四角形）",
+                    "desc_ko": "평면 메쉬를 생성 (XY 평면의 분할된 사각형)",
+                    "examples": [
+                        {
+                            "name": "projectorSimulationExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "meshTextureExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
+                },
+                {
+                    "name": "createCylinder",
+                    "params": "radius, height, resolution",
+                    "params_typed": "float radius, float height, int resolution = 16",
+                    "return_type": "Mesh",
+                    "desc": "Create a cylinder mesh",
+                    "snippet": "createCylinder(${1:radius}, ${2:height})",
+                    "keywords": [],
+                    "desc_ja": "円柱メッシュを作成",
+                    "desc_ko": "원기둥 메쉬를 생성",
+                    "examples": [
+                        {
+                            "name": "meshAppendExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "meshTextureExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "easyCamExample",
+                            "group": "3d"
+                        }
+                    ]
+                },
+                {
+                    "name": "createCone",
+                    "params": "radius, height, resolution",
+                    "params_typed": "float radius, float height, int resolution = 16",
+                    "return_type": "Mesh",
+                    "desc": "Create a cone mesh",
+                    "snippet": "createCone(${1:radius}, ${2:height})",
+                    "keywords": [],
+                    "desc_ja": "円錐メッシュを作成",
+                    "desc_ko": "원뿔 메쉬를 생성",
+                    "examples": [
+                        {
+                            "name": "meshAppendExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "meshTextureExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "easyCamExample",
+                            "group": "3d"
+                        }
+                    ]
+                },
+                {
+                    "name": "createIcoSphere",
+                    "params": "radius, subdivisions",
+                    "params_typed": "float radius, int subdivisions = 2",
+                    "return_type": "Mesh",
+                    "desc": "Create an icosphere mesh (geodesic sphere with uniform triangles)",
+                    "snippet": "createIcoSphere(${1:radius})",
+                    "keywords": [],
+                    "desc_ja": "アイコスフィアメッシュを作成（三角形が均一な測地球）",
+                    "desc_ko": "아이코스피어 메쉬를 생성 (삼각형이 균일한 측지구)",
+                    "examples": [
+                        {
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
+                        }
+                    ]
+                },
+                {
+                    "name": "createTorus",
+                    "params": "radius, tubeRadius, sides, rings",
+                    "params_typed": "float radius, float tubeRadius, int sides = 24, int rings = 16",
+                    "return_type": "Mesh",
+                    "desc": "Create a torus (donut) mesh",
+                    "snippet": "createTorus(${1:radius}, ${2:tubeRadius})",
+                    "keywords": [],
+                    "desc_ja": "トーラス（ドーナツ）メッシュを作成",
+                    "desc_ko": "토러스(도넛) 메쉬를 생성",
+                    "examples": [
+                        {
+                            "name": "meshAppendExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "meshTextureExample",
+                            "group": "3d"
+                        }
+                    ]
+                },
+                {
                     "name": "createSphere",
                     "params": "radius, res",
                     "params_typed": "float radius, int res = 20",
@@ -8685,15 +8770,15 @@ const TrussCAPI = {
                     "desc_ko": "구 메쉬를 생성",
                     "examples": [
                         {
-                            "name": "meshAppendExample",
-                            "group": "3d"
-                        },
-                        {
                             "name": "coordinateConversionExample",
                             "group": "3d"
                         },
                         {
-                            "name": "meshTextureExample",
+                            "name": "meshAppendExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "pbrSpheresExample",
                             "group": "3d"
                         }
                     ]
@@ -8823,21 +8908,7 @@ const TrussCAPI = {
                     "snippet": "getWidth()",
                     "keywords": [],
                     "desc_ja": "幅を取得",
-                    "desc_ko": "너비를 얻음",
-                    "examples": [
-                        {
-                            "name": "scrollContainerExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "uiExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "layoutModExample",
-                            "group": "node"
-                        }
-                    ]
+                    "desc_ko": "너비를 얻음"
                 },
                 {
                     "name": "getHeight",
@@ -8848,21 +8919,7 @@ const TrussCAPI = {
                     "snippet": "getHeight()",
                     "keywords": [],
                     "desc_ja": "高さを取得",
-                    "desc_ko": "높이를 얻음",
-                    "examples": [
-                        {
-                            "name": "scrollContainerExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "uiExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "layoutModExample",
-                            "group": "node"
-                        }
-                    ]
+                    "desc_ko": "높이를 얻음"
                 }
             ],
             "name_ja": "グラフィックス - テクスチャとGPU",
@@ -9913,21 +9970,7 @@ const TrussCAPI = {
                     "snippet": "getWidth()",
                     "keywords": [],
                     "desc_ja": "ビデオの幅をピクセル単位で取得",
-                    "desc_ko": "비디오 너비를 픽셀 단위로 가져옴",
-                    "examples": [
-                        {
-                            "name": "scrollContainerExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "uiExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "layoutModExample",
-                            "group": "node"
-                        }
-                    ]
+                    "desc_ko": "비디오 너비를 픽셀 단위로 가져옴"
                 },
                 {
                     "name": "getHeight",
@@ -9938,21 +9981,7 @@ const TrussCAPI = {
                     "snippet": "getHeight()",
                     "keywords": [],
                     "desc_ja": "ビデオの高さをピクセル単位で取得",
-                    "desc_ko": "비디오 높이를 픽셀 단위로 가져옴",
-                    "examples": [
-                        {
-                            "name": "scrollContainerExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "uiExample",
-                            "group": "node"
-                        },
-                        {
-                            "name": "layoutModExample",
-                            "group": "node"
-                        }
-                    ]
+                    "desc_ko": "비디오 높이를 픽셀 단위로 가져옴"
                 },
                 {
                     "name": "getDuration",
