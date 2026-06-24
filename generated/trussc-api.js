@@ -312,12 +312,12 @@ const TrussCAPI = {
                             "group": "math"
                         },
                         {
-                            "name": "soundPlayerFFTExample",
-                            "group": "sound"
-                        },
-                        {
                             "name": "polylinesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "noiseField2dExample",
+                            "group": "math"
                         }
                     ]
                 },
@@ -342,6 +342,28 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "OKLabで色を設定",
                     "desc_ko": "OKLab으로 색상을 설정"
+                },
+                {
+                    "name": "srgbToLinear",
+                    "params": "x",
+                    "params_typed": "float x",
+                    "return_type": "float",
+                    "desc": "Convert a single sRGB channel value to linear RGB",
+                    "snippet": "srgbToLinear(${1:x})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "linearToSrgb",
+                    "params": "x",
+                    "params_typed": "float x",
+                    "return_type": "float",
+                    "desc": "Convert a single linear RGB channel value to sRGB",
+                    "snippet": "linearToSrgb(${1:x})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "グラフィックス - 色",
@@ -1631,7 +1653,7 @@ const TrussCAPI = {
                             "group": "windowing"
                         },
                         {
-                            "name": "bitmapStringExtendedExample",
+                            "name": "fontTategakiExample",
                             "group": "font"
                         }
                     ]
@@ -2090,6 +2112,17 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "全スタイル設定をデフォルトにリセット",
                     "desc_ko": "모든 스타일 설정을 기본값으로 초기화"
+                },
+                {
+                    "name": "getCurveMode",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "CurveStyle::Mode",
+                    "desc": "Current curve tessellation mode (fixed segment count vs. adaptive tolerance)",
+                    "snippet": "getCurveMode()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "グラフィックス - スタイル",
@@ -2642,12 +2675,12 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "nodeExample",
-                            "group": "node"
-                        },
-                        {
                             "name": "cursorExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "nodeExample",
+                            "group": "node"
                         }
                     ]
                 },
@@ -2667,12 +2700,12 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "nodeExample",
-                            "group": "node"
-                        },
-                        {
                             "name": "cursorExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "nodeExample",
+                            "group": "node"
                         }
                     ]
                 },
@@ -2995,6 +3028,49 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "カスタムカーソル画像を解除し、システムデフォルトに戻す",
                     "desc_ko": "커스텀 커서 이미지를 해제하고 시스템 기본값으로 복원"
+                },
+                {
+                    "name": "events",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "CoreEvents&",
+                    "desc": "Get the global CoreEvents hub holding all framework events (setup, update, draw, keyPressed, mousePressed, etc.); use events().eventName.listen(callback) to subscribe",
+                    "snippet": "events()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "eventsExample",
+                            "group": "events"
+                        },
+                        {
+                            "name": "clipboardExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "isOverlayHovered",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when an overlay currently has the pointer over it (e.g. cursor over a tcxImGui panel); guard raw mouse input so clicks on UI panels are not also handled by the app",
+                    "snippet": "isOverlayHovered()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "isOverlayFocused",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "True when an overlay currently owns keyboard focus (e.g. a text input is active); guard raw key input so typing into a UI field is not also handled by the app",
+                    "snippet": "isOverlayFocused()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "ウィンドウと入力",
@@ -3023,8 +3099,8 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "hitTestExample",
-                            "group": "node"
+                            "name": "polylinesExample",
+                            "group": "graphics"
                         }
                     ]
                 },
@@ -3084,6 +3160,79 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "描画されたフレーム数",
                     "desc_ko": "렌더링된 총 프레임 수"
+                },
+                {
+                    "name": "sleepMillis",
+                    "params": "millis",
+                    "params_typed": "int millis",
+                    "return_type": "void",
+                    "desc": "Block the current thread for the given number of milliseconds",
+                    "snippet": "sleepMillis(${1:millis})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "sleepMicros",
+                    "params": "micros",
+                    "params_typed": "int micros",
+                    "return_type": "void",
+                    "desc": "Block the current thread for the given number of microseconds",
+                    "snippet": "sleepMicros(${1:micros})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getUpdateCount",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "uint64_t",
+                    "desc": "Get the number of update() calls since the app started",
+                    "snippet": "getUpdateCount()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "utilsExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "getDrawCount",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "uint64_t",
+                    "desc": "Get the number of draw() calls since the app started",
+                    "snippet": "getDrawCount()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "utilsExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "getFpsSettings",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "FpsSettings",
+                    "desc": "Get the current FPS configuration (update/draw target rates, actual VSync rate, sync flag)",
+                    "snippet": "getFpsSettings()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "loopModeExample",
+                            "group": "windowing"
+                        }
+                    ]
                 }
             ],
             "name_ja": "時間 - フレーム",
@@ -3285,6 +3434,277 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "短いプラットフォーム名: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"",
                     "desc_ko": "짧은 플랫폼 이름: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\""
+                },
+                {
+                    "name": "setImmersiveMode",
+                    "params": "enabled",
+                    "params_typed": "bool enabled",
+                    "return_type": "void",
+                    "desc": "Hide system UI for immersive fullscreen. Android: sticky immersive (status + navigation bars). iOS: hides status bar + home indicator. Desktop: no-op",
+                    "snippet": "setImmersiveMode(${1:true})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "getImmersiveMode",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Return whether immersive mode is currently enabled",
+                    "snippet": "getImmersiveMode()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "captureWindow",
+                    "params": "outPixels",
+                    "params_typed": "Pixels& outPixels",
+                    "return_type": "bool",
+                    "desc": "Capture the current window contents into a Pixels object. Returns true on success",
+                    "snippet": "captureWindow(${1:outPixels})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getSystemVolume",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get system output volume (0.0-1.0)",
+                    "snippet": "getSystemVolume()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "setSystemVolume",
+                    "params": "volume",
+                    "params_typed": "float volume",
+                    "return_type": "void",
+                    "desc": "Set system output volume (0.0-1.0). iOS: not supported by the OS (logs a warning)",
+                    "snippet": "setSystemVolume(${1:volume})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getSystemBrightness",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get screen brightness (0.0-1.0). iOS: linear. Android: gamma-corrected (perceptual). Desktop: returns -1 (not supported)",
+                    "snippet": "getSystemBrightness()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "setSystemBrightness",
+                    "params": "brightness",
+                    "params_typed": "float brightness",
+                    "return_type": "void",
+                    "desc": "Set screen brightness (0.0-1.0). Meaning of the value differs by platform (iOS linear, Android perceptual). Desktop: not supported",
+                    "snippet": "setSystemBrightness(${1:brightness})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getThermalState",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "ThermalState",
+                    "desc": "Get the coarse-grained device thermal state (Nominal / Fair / Serious / Critical)",
+                    "snippet": "getThermalState()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "getThermalTemperature",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get device temperature in Celsius, or -1 if unavailable",
+                    "snippet": "getThermalTemperature()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "getBatteryLevel",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get battery charge level (0.0-1.0), or -1 if unavailable (e.g. desktop without a battery)",
+                    "snippet": "getBatteryLevel()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "isBatteryCharging",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Return true if the battery is currently charging",
+                    "snippet": "isBatteryCharging()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "getAccelerometer",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Vec3",
+                    "desc": "Get accelerometer reading in g-force (1.0 = Earth gravity). Mobile only; desktop returns zero",
+                    "snippet": "getAccelerometer()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "getGyroscope",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Vec3",
+                    "desc": "Get gyroscope angular velocity in rad/s. Mobile only; desktop returns zero",
+                    "snippet": "getGyroscope()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "getDeviceOrientation",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Quaternion",
+                    "desc": "Get the fused device attitude (accelerometer + gyroscope + magnetometer) as a quaternion. Mobile only",
+                    "snippet": "getDeviceOrientation()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "getCompassHeading",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get compass heading in radians (0 = north, clockwise). Mobile only",
+                    "snippet": "getCompassHeading()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "isProximityClose",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Return true when the proximity sensor detects a nearby object (e.g. phone held to the ear)",
+                    "snippet": "isProximityClose()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "getLocation",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Location",
+                    "desc": "Get the most recent GPS / WiFi location fix. Starts location updates on the first call",
+                    "snippet": "getLocation()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "systemInfoExample",
+                            "group": "utils"
+                        }
+                    ]
                 }
             ],
             "name_ja": "プラットフォーム",
@@ -3523,8 +3943,8 @@ const TrussCAPI = {
                     "desc_ko": "경과 시간(초, getElapsedTimef의 별칭)",
                     "examples": [
                         {
-                            "name": "chipSoundExample",
-                            "group": "sound"
+                            "name": "vectorMathExample",
+                            "group": "math"
                         }
                     ]
                 },
@@ -4117,7 +4537,7 @@ const TrussCAPI = {
                             "group": "3d"
                         },
                         {
-                            "name": "graphicsExample",
+                            "name": "curveVariationsExample",
                             "group": "graphics"
                         }
                     ]
@@ -4328,8 +4748,8 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "videoGrabberExample",
-                            "group": "video"
+                            "name": "curvesExample",
+                            "group": "graphics"
                         }
                     ]
                 },
@@ -4417,8 +4837,8 @@ const TrussCAPI = {
                             "group": "math"
                         },
                         {
-                            "name": "mouseExample",
-                            "group": "input_output"
+                            "name": "vectorMathExample",
+                            "group": "math"
                         }
                     ]
                 },
@@ -4476,6 +4896,202 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "最短角度差（度）[-180, 180]",
                     "desc_ko": "최단 각도 차이(도) [-180, 180]"
+                },
+                {
+                    "name": "applyWindow",
+                    "params": "signal, type",
+                    "params_typed": "vector<float>& signal, WindowType type",
+                    "return_type": "void",
+                    "desc": "Apply a window function (in place) to a signal to reduce spectral leakage before FFT",
+                    "snippet": "applyWindow(${1:signal}, ${2:type})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "applyWindow",
+                    "params": "signal, type",
+                    "params_typed": "vector<complex<float>>& signal, WindowType type",
+                    "return_type": "void",
+                    "desc": "Apply a window function (in place) to a signal to reduce spectral leakage before FFT",
+                    "snippet": "applyWindow(${1:signal}, ${2:type})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "isPowerOfTwo",
+                    "params": "n",
+                    "params_typed": "int n",
+                    "return_type": "bool",
+                    "desc": "Return true if n is a positive power of two",
+                    "snippet": "isPowerOfTwo(${1:n})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "nextPowerOfTwo",
+                    "params": "n",
+                    "params_typed": "int n",
+                    "return_type": "int",
+                    "desc": "Return the smallest power of two greater than or equal to n",
+                    "snippet": "nextPowerOfTwo(${1:n})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "fft",
+                    "params": "data",
+                    "params_typed": "vector<complex<float>>& data",
+                    "return_type": "void",
+                    "desc": "In-place forward FFT (Cooley-Tukey radix-2); the data size must be a power of two",
+                    "snippet": "fft(${1:data})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "ifft",
+                    "params": "data",
+                    "params_typed": "vector<complex<float>>& data",
+                    "return_type": "void",
+                    "desc": "In-place inverse FFT; the data size must be a power of two",
+                    "snippet": "ifft(${1:data})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "toComplex",
+                    "params": "real",
+                    "params_typed": "const vector<float>& real",
+                    "return_type": "vector<complex<float>>",
+                    "desc": "Convert a real-valued signal into a complex array with zero imaginary parts",
+                    "snippet": "toComplex(${1:real})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "fftReal",
+                    "params": "signal",
+                    "params_typed": "const vector<float>& signal",
+                    "return_type": "vector<complex<float>>",
+                    "desc": "Compute the FFT of a real-valued signal, optionally applying a window function first",
+                    "snippet": "fftReal(${1:signal})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "micInputExample",
+                            "group": "sound"
+                        },
+                        {
+                            "name": "soundPlayerFFTExample",
+                            "group": "sound"
+                        }
+                    ]
+                },
+                {
+                    "name": "fftReal",
+                    "params": "signal, window",
+                    "params_typed": "const vector<float>& signal, WindowType window",
+                    "return_type": "vector<complex<float>>",
+                    "desc": "Compute the FFT of a real-valued signal, optionally applying a window function first",
+                    "snippet": "fftReal(${1:signal})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "micInputExample",
+                            "group": "sound"
+                        },
+                        {
+                            "name": "soundPlayerFFTExample",
+                            "group": "sound"
+                        }
+                    ]
+                },
+                {
+                    "name": "fftMagnitude",
+                    "params": "spectrum",
+                    "params_typed": "const vector<complex<float>>& spectrum",
+                    "return_type": "vector<float>",
+                    "desc": "Return the magnitude (amplitude) of each bin in a spectrum",
+                    "snippet": "fftMagnitude(${1:spectrum})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "fftMagnitudeDb",
+                    "params": "spectrum, minDb",
+                    "params_typed": "const vector<complex<float>>& spectrum, float minDb = -100.0f",
+                    "return_type": "vector<float>",
+                    "desc": "Return the magnitude of each bin in decibels, clamped to minDb",
+                    "snippet": "fftMagnitudeDb(${1:spectrum})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "fftPhase",
+                    "params": "spectrum",
+                    "params_typed": "const vector<complex<float>>& spectrum",
+                    "return_type": "vector<float>",
+                    "desc": "Return the phase angle (radians) of each bin in a spectrum",
+                    "snippet": "fftPhase(${1:spectrum})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "fftPower",
+                    "params": "spectrum",
+                    "params_typed": "const vector<complex<float>>& spectrum",
+                    "return_type": "vector<float>",
+                    "desc": "Return the power spectrum (magnitude squared) of each bin",
+                    "snippet": "fftPower(${1:spectrum})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "binToFrequency",
+                    "params": "bin, fftSize, sampleRate",
+                    "params_typed": "int bin, int fftSize, int sampleRate",
+                    "return_type": "float",
+                    "desc": "Convert an FFT bin index to its frequency in Hz",
+                    "snippet": "binToFrequency(${1:bin}, ${2:fftSize}, ${3:sampleRate})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "frequencyToBin",
+                    "params": "freq, fftSize, sampleRate",
+                    "params_typed": "float freq, int fftSize, int sampleRate",
+                    "return_type": "int",
+                    "desc": "Convert a frequency in Hz to the nearest FFT bin index",
+                    "snippet": "frequencyToBin(${1:freq}, ${2:fftSize}, ${3:sampleRate})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "windowFunction",
+                    "params": "type, i, n",
+                    "params_typed": "WindowType type, int i, int n",
+                    "return_type": "float",
+                    "desc": "Return the window coefficient for sample i of n for the given window type",
+                    "snippet": "windowFunction(${1:type}, ${2:i}, ${3:n})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "数学 - 一般",
@@ -4825,6 +5441,72 @@ const TrussCAPI = {
                             "group": "windowing"
                         }
                     ]
+                },
+                {
+                    "name": "getBackendName",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "string",
+                    "desc": "Get the active graphics backend name (e.g. \"Metal (macOS)\", \"D3D11\", \"OpenGL\", \"WebGPU\")",
+                    "snippet": "getBackendName()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "bringWindowToFront",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Activate and raise the application window, giving it focus. Desktop only; no-op on mobile/web",
+                    "snippet": "bringWindowToFront()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getDisplayScaleFactor",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get the DPI scale of the main display (available before window creation). macOS: 1.0 or 2.0 (Retina); other platforms: 1.0",
+                    "snippet": "getDisplayScaleFactor()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "setWindowDecorated",
+                    "params": "decorated",
+                    "params_typed": "bool decorated",
+                    "return_type": "void",
+                    "desc": "Toggle the window's standard decorations (title bar, borders, buttons). false = borderless but still focusable and closable. Desktop only",
+                    "snippet": "setWindowDecorated(${1:true})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "setWindowSizeLogical",
+                    "params": "width, height",
+                    "params_typed": "int width, int height",
+                    "return_type": "void",
+                    "desc": "Resize the window to the given logical size (logical pixels)",
+                    "snippet": "setWindowSizeLogical(${1:width}, ${2:height})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "runHeadlessApp",
+                    "params": "settings",
+                    "params_typed": "const HeadlessSettings& settings = HeadlessSettings()",
+                    "return_type": "int",
+                    "desc": "Run an app class without a window or graphics context (update loop only). Template on the app type; returns the process exit code",
+                    "snippet": "runHeadlessApp<${1:AppClass}>()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "ウィンドウとシステム",
@@ -5069,6 +5751,404 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "MCP のデバッガツールを有効化し、AI エージェントがアプリを操作できるようにする：入力注入（mouse_click, key_press, mouse_move, scroll）に加え、ノード選択・シーン書き換え（select_node, set_node_members）。setup() で一度呼ぶだけで opt-in 完了（別途の有効化呼び出しは不要）。MCP サーバ起動時（TRUSSC_MCP=1）以外は何もしないので、入れっぱなしでも安全。スクリーンショットやノードツリーの読み取りは opt-in 不要で、MCP が有効なら常に使える。",
                     "desc_ko": "MCP 디버거 도구를 활성화하여 AI 에이전트가 앱을 조작할 수 있게 한다: 입력 주입(mouse_click, key_press, mouse_move, scroll)과 노드 선택·씬 변경(select_node, set_node_members). setup()에서 한 번 호출하면 그것이 곧 opt-in이다(별도의 활성화 단계 없음). MCP 서버가 실행 중(TRUSSC_MCP=1)이 아니면 아무 동작도 하지 않으므로 그대로 두어도 안전하다. 스크린샷과 노드 트리 같은 읽기 전용 조회는 opt-in이 필요 없으며 MCP가 켜져 있으면 항상 사용할 수 있다."
+                },
+                {
+                    "name": "logVerbose",
+                    "params": "module",
+                    "params_typed": "const string& module = \"\"",
+                    "return_type": "LogStream",
+                    "desc": "Stream-based verbose-level log output",
+                    "snippet": "logVerbose() << ${1:value}",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "nodeExample",
+                            "group": "node"
+                        },
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
+                        }
+                    ]
+                },
+                {
+                    "name": "logWarning",
+                    "params": "module",
+                    "params_typed": "const string& module = \"\"",
+                    "return_type": "LogStream",
+                    "desc": "Stream-based warning-level log output",
+                    "snippet": "logWarning() << ${1:value}",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "imageLoaderExample",
+                            "group": "input_output"
+                        }
+                    ]
+                },
+                {
+                    "name": "logError",
+                    "params": "module",
+                    "params_typed": "const string& module = \"\"",
+                    "return_type": "LogStream",
+                    "desc": "Stream-based error-level log output",
+                    "snippet": "logError() << ${1:value}",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "fileExample",
+                            "group": "utils"
+                        },
+                        {
+                            "name": "fullscreenShaderExample",
+                            "group": "graphics"
+                        }
+                    ]
+                },
+                {
+                    "name": "logFatal",
+                    "params": "module",
+                    "params_typed": "const string& module = \"\"",
+                    "return_type": "LogStream",
+                    "desc": "Stream-based fatal-level log output",
+                    "snippet": "logFatal() << ${1:value}",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "logAt",
+                    "params": "level",
+                    "params_typed": "LogLevel level = LogLevel::Notice",
+                    "return_type": "LogStream",
+                    "desc": "Stream-based log output at a runtime-selected level",
+                    "snippet": "logAt(${1:LogLevel::Warning}) << ${2:value}",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getLogger",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Logger&",
+                    "desc": "Access the global logger instance",
+                    "snippet": "getLogger()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "setConsoleLogLevel",
+                    "params": "level",
+                    "params_typed": "LogLevel level",
+                    "return_type": "void",
+                    "desc": "Set the minimum log level printed to the console",
+                    "snippet": "setConsoleLogLevel(${1:LogLevel::Notice})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "jsonXmlExample",
+                            "group": "input_output"
+                        }
+                    ]
+                },
+                {
+                    "name": "setFileLogLevel",
+                    "params": "level",
+                    "params_typed": "LogLevel level",
+                    "return_type": "void",
+                    "desc": "Set the minimum log level written to the log file",
+                    "snippet": "setFileLogLevel(${1:LogLevel::Notice})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "setLogFile",
+                    "params": "path",
+                    "params_typed": "const string& path",
+                    "return_type": "bool",
+                    "desc": "Open a file to receive log output",
+                    "snippet": "setLogFile(${1:\"log.txt\"})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "closeLogFile",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Close the current log file",
+                    "snippet": "closeLogFile()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "compressBound",
+                    "params": "nbytes, codec",
+                    "params_typed": "size_t nbytes, Codec codec",
+                    "return_type": "size_t",
+                    "desc": "Worst-case compressed size, for sizing a destination buffer",
+                    "snippet": "compressBound(${1:nbytes}, ${2:Codec::LZ4})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "toInt64",
+                    "params": "str",
+                    "params_typed": "const string& str",
+                    "return_type": "int64_t",
+                    "desc": "Parse a string into a 64-bit integer",
+                    "snippet": "toInt64(${1:str})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "toDouble",
+                    "params": "str",
+                    "params_typed": "const string& str",
+                    "return_type": "double",
+                    "desc": "Parse a string into a double",
+                    "snippet": "toDouble(${1:str})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "toBool",
+                    "params": "str",
+                    "params_typed": "const string& str",
+                    "return_type": "bool",
+                    "desc": "Parse a string into a bool",
+                    "snippet": "toBool(${1:str})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "toBinary",
+                    "params": "value",
+                    "params_typed": "int value",
+                    "return_type": "string",
+                    "desc": "Convert an integer to a binary string",
+                    "snippet": "toBinary(${1:value})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "utilsExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "hexToInt",
+                    "params": "hexStr",
+                    "params_typed": "const string& hexStr",
+                    "return_type": "int",
+                    "desc": "Parse a hex string into a signed int",
+                    "snippet": "hexToInt(${1:hexStr})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "utilsExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "hexToUInt",
+                    "params": "hexStr",
+                    "params_typed": "const string& hexStr",
+                    "return_type": "unsigned int",
+                    "desc": "Parse a hex string into an unsigned int",
+                    "snippet": "hexToUInt(${1:hexStr})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "toBase64",
+                    "params": "bytes, len",
+                    "params_typed": "const unsigned char* bytes, size_t len",
+                    "return_type": "string",
+                    "desc": "Encode raw bytes as a Base64 string",
+                    "snippet": "toBase64(${1:bytes}, ${2:len})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "isStringInString",
+                    "params": "haystack, needle",
+                    "params_typed": "const string& haystack, const string& needle",
+                    "return_type": "bool",
+                    "desc": "Check whether one string contains another",
+                    "snippet": "isStringInString(${1:haystack}, ${2:needle})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "utilsExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "stringTimesInString",
+                    "params": "haystack, needle",
+                    "params_typed": "const string& haystack, const string& needle",
+                    "return_type": "size_t",
+                    "desc": "Count occurrences of a substring in a string",
+                    "snippet": "stringTimesInString(${1:haystack}, ${2:needle})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "utilsExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "trim",
+                    "params": "src",
+                    "params_typed": "const string& src",
+                    "return_type": "string",
+                    "desc": "Trim whitespace from both ends of a string",
+                    "snippet": "trim(${1:src})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "utilsExample",
+                            "group": "utils"
+                        }
+                    ]
+                },
+                {
+                    "name": "trimFront",
+                    "params": "src",
+                    "params_typed": "const string& src",
+                    "return_type": "string",
+                    "desc": "Trim leading whitespace from a string",
+                    "snippet": "trimFront(${1:src})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "trimBack",
+                    "params": "src",
+                    "params_typed": "const string& src",
+                    "return_type": "string",
+                    "desc": "Trim trailing whitespace from a string",
+                    "snippet": "trimBack(${1:src})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "parseJson",
+                    "params": "str",
+                    "params_typed": "const string& str",
+                    "return_type": "Json",
+                    "desc": "Parse a JSON string into a Json object; returns an empty Json on parse error.",
+                    "snippet": "parseJson(${1:str})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "toJsonString",
+                    "params": "j, indent",
+                    "params_typed": "const Json& j, int indent = 2",
+                    "return_type": "string",
+                    "desc": "Serialize a Json object to a string. indent sets the pretty-print width (negative for compact).",
+                    "snippet": "toJsonString(${1:j})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "jsonXmlExample",
+                            "group": "input_output"
+                        }
+                    ]
+                },
+                {
+                    "name": "parseXml",
+                    "params": "str",
+                    "params_typed": "const string& str",
+                    "return_type": "Xml",
+                    "desc": "Parse an XML string into an Xml object.",
+                    "snippet": "parseXml(${1:str})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "reflectToJson",
+                    "params": "obj",
+                    "params_typed": "T& obj",
+                    "return_type": "Json",
+                    "desc": "Return all reflected (TC_REFLECT) members of obj as a Json object. Works on any reflected type such as a Node or Mod.",
+                    "snippet": "reflectToJson(${1:obj})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "reflectFromJson",
+                    "params": "obj, j",
+                    "params_typed": "T& obj, const Json& j",
+                    "return_type": "JsonReadReflector",
+                    "desc": "Apply the keys of a Json object onto obj's reflected (TC_REFLECT) members. Returns the reflector so callers can inspect which members were applied, skipped, read-only, or unknown.",
+                    "snippet": "reflectFromJson(${1:obj}, ${2:json})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "isMainThread",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Whether the calling thread is the main (scene) thread. The main thread ID is recorded on the first call to getMainThreadId().",
+                    "snippet": "isMainThread()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getMainThreadId",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "thread::id",
+                    "desc": "Get the main thread ID. Records the current thread's ID on the first call, so it must first be called from the main thread.",
+                    "snippet": "getMainThreadId()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "ユーティリティ",
@@ -5389,6 +6469,112 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "ファイルリーダーを作成（TrussSketch用ファクトリ）",
                     "desc_ko": "파일 리더를 생성 (TrussSketch 팩토리)"
+                },
+                {
+                    "name": "loadJson",
+                    "params": "path",
+                    "params_typed": "const string& path",
+                    "return_type": "Json",
+                    "desc": "Load a JSON file and return it as a Json object. Relative paths are resolved via getDataPath; returns an empty Json on error.",
+                    "snippet": "loadJson(${1:path})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "jsonXmlExample",
+                            "group": "input_output"
+                        }
+                    ]
+                },
+                {
+                    "name": "saveJson",
+                    "params": "j, path, indent",
+                    "params_typed": "const Json& j, const string& path, int indent = 2",
+                    "return_type": "bool",
+                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath. indent sets the pretty-print width (negative for compact). Returns true on success.",
+                    "snippet": "saveJson(${1:j}, ${2:path})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "jsonXmlExample",
+                            "group": "input_output"
+                        }
+                    ]
+                },
+                {
+                    "name": "loadXml",
+                    "params": "path",
+                    "params_typed": "const string& path",
+                    "return_type": "Xml",
+                    "desc": "Load an XML file and return it as an Xml object. Relative paths are resolved via getDataPath.",
+                    "snippet": "loadXml(${1:path})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "jsonXmlExample",
+                            "group": "input_output"
+                        }
+                    ]
+                },
+                {
+                    "name": "setDataPathRoot",
+                    "params": "path",
+                    "params_typed": "const string& path",
+                    "return_type": "void",
+                    "desc": "Set the root directory used to resolve relative data paths. A relative path is resolved against the executable directory; an absolute path (starting with /) is used as-is. A trailing slash is added automatically.",
+                    "snippet": "setDataPathRoot(${1:path})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getDataPathRoot",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "string",
+                    "desc": "Get the current data path root (with trailing slash).",
+                    "snippet": "getDataPathRoot()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "setDataPathToResources",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms.",
+                    "snippet": "setDataPathToResources()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getExecutablePath",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "string",
+                    "desc": "Get the absolute path of the running executable.",
+                    "snippet": "getExecutablePath()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getExecutableDir",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "string",
+                    "desc": "Get the directory containing the running executable (with trailing slash).",
+                    "snippet": "getExecutableDir()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "ファイル",
@@ -5725,6 +6911,40 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "ChannelGains を解除して uniform 1.0 に戻す",
                     "desc_ko": "채널 게인을 해제하고 uniform 1.0으로 복귀"
+                },
+                {
+                    "name": "setBeepVolume",
+                    "params": "vol",
+                    "params_typed": "float vol",
+                    "return_type": "void",
+                    "desc": "Set the output volume for beep() (0.0-1.0).",
+                    "snippet": "setBeepVolume(${1:vol})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "beepSoundExample",
+                            "group": "sound"
+                        }
+                    ]
+                },
+                {
+                    "name": "getBeepVolume",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get the current beep() output volume (0.0-1.0).",
+                    "snippet": "getBeepVolume()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "beepSoundExample",
+                            "group": "sound"
+                        }
+                    ]
                 }
             ],
             "name_ja": "サウンド",
@@ -5799,11 +7019,11 @@ const TrussCAPI = {
                     "desc_ko": "사용 가능한 재생 장치 열거. 각 장치의 name + isDefault 반환",
                     "examples": [
                         {
-                            "name": "audioDeviceExample",
+                            "name": "audioSynthExample",
                             "group": "sound"
                         },
                         {
-                            "name": "audioSynthExample",
+                            "name": "audioDeviceExample",
                             "group": "sound"
                         }
                     ]
@@ -5875,11 +7095,11 @@ const TrussCAPI = {
                     "desc_ko": "실시간 재생 콜백 이벤트. listen()으로 신스 / 처리 리스너 추가. 버퍼별로 오디오 스레드에서 발화, RT-safe 유지",
                     "examples": [
                         {
-                            "name": "audioDeviceExample",
+                            "name": "audioSynthExample",
                             "group": "sound"
                         },
                         {
-                            "name": "audioSynthExample",
+                            "name": "audioDeviceExample",
                             "group": "sound"
                         }
                     ]
@@ -5905,6 +7125,79 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "成功した init() (初回 / 再 init) 後に発火。args は解決済みデバイス名、isDefaultDevice、sampleRate、channels、bufferSize、maxPolyphony。listener は init() を呼んだスレッド (通常 main) で実行",
                     "desc_ko": "성공한 init() (초기 / 재 init) 후 발화. args는 해결된 장치명, isDefaultDevice, sampleRate, channels, bufferSize, maxPolyphony. listener는 init()을 호출한 스레드 (보통 main)에서 실행"
+                },
+                {
+                    "name": "initAudio",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Initialize the global AudioEngine. Called automatically by Sound::load() / play(), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener).",
+                    "snippet": "initAudio()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "shutdownAudio",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Shut down the global AudioEngine and close the audio device. Usually unnecessary (runs at program exit).",
+                    "snippet": "shutdownAudio()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getAudioAnalysisBuffer",
+                    "params": "outBuffer, numSamples",
+                    "params_typed": "float* outBuffer, size_t numSamples",
+                    "return_type": "size_t",
+                    "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer for FFT / visualization. numSamples is capped at the analysis buffer size (4096). Returns the number of samples written.",
+                    "snippet": "getAudioAnalysisBuffer(${1:outBuffer}, ${2:numSamples})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "soundPlayerFFTExample",
+                            "group": "sound"
+                        }
+                    ]
+                },
+                {
+                    "name": "getMicInput",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "MicInput&",
+                    "desc": "Get the global MicInput singleton (microphone capture). Call start() on it to open the device.",
+                    "snippet": "getMicInput()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "micInputExample",
+                            "group": "sound"
+                        }
+                    ]
+                },
+                {
+                    "name": "getMicAnalysisBuffer",
+                    "params": "outBuffer, numSamples",
+                    "params_typed": "float* outBuffer, size_t numSamples",
+                    "return_type": "size_t",
+                    "desc": "Copy the latest microphone input samples into outBuffer. Convenience wrapper over getMicInput().getBuffer(). numSamples is capped at the mic buffer size (4096). Returns the number of samples written.",
+                    "snippet": "getMicAnalysisBuffer(${1:outBuffer}, ${2:numSamples})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "micInputExample",
+                            "group": "sound"
+                        }
+                    ]
                 }
             ],
             "name_ja": "オーディオエンジン",
@@ -6205,6 +7498,51 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "OS が認識している全フォント名を取得",
                     "desc_ko": "시스템에 설치된 모든 폰트 이름을 나열"
+                },
+                {
+                    "name": "registerGlyph",
+                    "params": "g",
+                    "params_typed": "const Glyph &g",
+                    "return_type": "void",
+                    "desc": "Register one bitmap glyph so drawBitmapString can render its codepoint. Replaces any glyph already registered at the same codepoint and marks the atlas dirty for re-upload",
+                    "snippet": "registerGlyph(${1:glyph})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "registerGlyphs",
+                    "params": "glyphs",
+                    "params_typed": "const Glyph (&glyphs)[N]",
+                    "return_type": "void",
+                    "desc": "Register a fixed-size array of bitmap glyphs in one call (template over the array size)",
+                    "snippet": "registerGlyphs(${1:glyphs})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "bitmapStringExtendedExample",
+                            "group": "font"
+                        }
+                    ]
+                },
+                {
+                    "name": "updateGlyph",
+                    "params": "cp, newData",
+                    "params_typed": "uint32_t cp, const uint8_t *newData",
+                    "return_type": "void",
+                    "desc": "Swap the pixel data of an already-registered glyph without changing its atlas position. Useful for animating a glyph by updating its data each frame",
+                    "snippet": "updateGlyph(${1:codepoint}, ${2:newData})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": "",
+                    "examples": [
+                        {
+                            "name": "bitmapStringExtendedExample",
+                            "group": "font"
+                        }
+                    ]
                 }
             ],
             "name_ja": "フォント",
@@ -7599,6 +8937,39 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "アニメーション開始前の遅延を設定（TweenModメソッド）（C++のみ）",
                     "desc_ko": "애니메이션 시작 전 지연을 설정 (TweenMod 메서드) (C++ 전용)"
+                },
+                {
+                    "name": "getSelectedNode",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Node*",
+                    "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none). A tool such as an inspector can read it and drive it via setSelectedNode().",
+                    "snippet": "getSelectedNode()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "setSelectedNode",
+                    "params": "n",
+                    "params_typed": "Node* n",
+                    "return_type": "void",
+                    "desc": "Set the currently selected node. Pass nullptr to clear the selection.",
+                    "snippet": "setSelectedNode(${1:n})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getRootNode",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Node*",
+                    "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around.",
+                    "snippet": "getRootNode()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "シーングラフ",
@@ -8121,6 +9492,17 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "パン感度を設定",
                     "desc_ko": "팬 감도를 설정"
+                },
+                {
+                    "name": "getCameraPosition",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "const Vec3&",
+                    "desc": "Current camera position used for specular/PBR view vector",
+                    "snippet": "getCameraPosition()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "3Dカメラ",
@@ -8376,6 +9758,39 @@ const TrussCAPI = {
                             "group": "3d"
                         }
                     ]
+                },
+                {
+                    "name": "getNumLights",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Number of currently active lights",
+                    "snippet": "getNumLights()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "getEnvironment",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Environment*",
+                    "desc": "Get the current environment (IBL/skybox), or nullptr if none is set",
+                    "snippet": "getEnvironment()",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "calculateLighting",
+                    "params": "worldPos, worldNormal, material",
+                    "params_typed": "const Vec3& worldPos, const Vec3& worldNormal, const Material& material",
+                    "return_type": "Color",
+                    "desc": "CPU-side lighting result for a world position and normal, summing all active lights with the given material",
+                    "snippet": "calculateLighting(${1:worldPos}, ${2:worldNormal}, ${3:material})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "照明・PBR",
@@ -8920,6 +10335,39 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "高さを取得",
                     "desc_ko": "높이를 얻음"
+                },
+                {
+                    "name": "channelCount",
+                    "params": "fmt",
+                    "params_typed": "TextureFormat fmt",
+                    "return_type": "int",
+                    "desc": "Number of color channels for a TextureFormat (1, 2, or 4)",
+                    "snippet": "channelCount(${1:fmt})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "bytesPerPixel",
+                    "params": "fmt",
+                    "params_typed": "TextureFormat fmt",
+                    "return_type": "int",
+                    "desc": "Bytes per pixel for a TextureFormat",
+                    "snippet": "bytesPerPixel(${1:fmt})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "isFloatFormat",
+                    "params": "fmt",
+                    "params_typed": "TextureFormat fmt",
+                    "return_type": "bool",
+                    "desc": "Whether a TextureFormat uses floating-point components",
+                    "snippet": "isFloatFormat(${1:fmt})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "グラフィックス - テクスチャとGPU",
@@ -10434,6 +11882,17 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "動画ファイルを確定してフラッシュ",
                     "desc_ko": "동영상 파일을 마무리하고 플러시"
+                },
+                {
+                    "name": "videoCodecName",
+                    "params": "c",
+                    "params_typed": "VideoCodec c",
+                    "return_type": "const char *",
+                    "desc": "Return a human-readable name for a VideoCodec value (e.g. \"H.264\", \"HEVC\", \"ProRes 422\")",
+                    "snippet": "videoCodecName(${1:codec})",
+                    "keywords": [],
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "name_ja": "ビデオ",
@@ -13612,6 +15071,15 @@ const TrussCAPI = {
                     ],
                     "desc": "Draw mesh as wireframe",
                     "snippet": "drawWireframe()"
+                },
+                {
+                    "name": "drawGpuPbr",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Draw the mesh through the GPU PBR pipeline (uploads to GPU buffers as needed, then renders using active lights, material and environment)",
+                    "snippet": "drawGpuPbr()"
                 }
             ]
         },
@@ -16584,6 +18052,3542 @@ const TrussCAPI = {
                     "snippet": "getDeviceName()"
                 }
             ]
+        },
+        {
+            "name": "SoundSource",
+            "desc": "Abstract base for anything Sound::play() can consume. Two concrete subclasses: SoundBuffer (eager, full PCM in RAM) and SoundStream (decoded on demand from disk). Holds the shared channels / sampleRate fields and the kind() / getDuration() interface.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "channels",
+                    "type": "int",
+                    "desc": "Channel count of the source (1 = mono, 2 = stereo, ...)"
+                },
+                {
+                    "name": "sampleRate",
+                    "type": "int",
+                    "desc": "Source sample rate in Hz"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "kind",
+                    "return": "SoundSource::Kind",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Source kind (Eager for SoundBuffer, Stream for SoundStream). Lets the mixer dispatch without a virtual call per frame.",
+                    "snippet": "kind()"
+                },
+                {
+                    "name": "getDuration",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Duration in seconds. numSamples/sampleRate for buffers; the decoded file's duration for streams.",
+                    "snippet": "getDuration()"
+                }
+            ]
+        },
+        {
+            "name": "SoundBuffer",
+            "desc": "Eager sound source: the full file decoded into interleaved float PCM held in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Also provides waveform generators, an ADSR envelope, and mixing helpers, so it doubles as a procedural-audio scratch buffer. Best for short SFX and zero-latency play / seek / multi-instance.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "SoundBuffer()"
+            },
+            "properties": [
+                {
+                    "name": "samples",
+                    "type": "vector<float>",
+                    "desc": "Interleaved PCM samples (channels interleaved per frame)"
+                },
+                {
+                    "name": "numSamples",
+                    "type": "size_t",
+                    "desc": "Number of samples per channel (frame count)"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "load",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Decode a file into PCM, auto-detecting format from the extension (.wav .mp3 .ogg .flac .aac .m4a, case-insensitive). Returns false on failure.",
+                    "snippet": "load(${1:path})"
+                },
+                {
+                    "name": "loadWav",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Decode a WAV file into PCM.",
+                    "snippet": "loadWav(${1:path})"
+                },
+                {
+                    "name": "loadMp3",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Decode an MP3 file into PCM.",
+                    "snippet": "loadMp3(${1:path})"
+                },
+                {
+                    "name": "loadOgg",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis).",
+                    "snippet": "loadOgg(${1:path})"
+                },
+                {
+                    "name": "loadFlac",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Decode a FLAC file into PCM.",
+                    "snippet": "loadFlac(${1:path})"
+                },
+                {
+                    "name": "loadAac",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms).",
+                    "snippet": "loadAac(${1:path})"
+                },
+                {
+                    "name": "loadWavFromMemory",
+                    "return": "bool",
+                    "signatures": [
+                        "const void* data, size_t dataSize"
+                    ],
+                    "desc": "Decode WAV data from a memory buffer.",
+                    "snippet": "loadWavFromMemory(${1:data}, ${2:dataSize})"
+                },
+                {
+                    "name": "loadMp3FromMemory",
+                    "return": "bool",
+                    "signatures": [
+                        "const void* data, size_t dataSize"
+                    ],
+                    "desc": "Decode MP3 data from a memory buffer.",
+                    "snippet": "loadMp3FromMemory(${1:data}, ${2:dataSize})"
+                },
+                {
+                    "name": "loadOggFromMemory",
+                    "return": "bool",
+                    "signatures": [
+                        "const void* data, size_t dataSize"
+                    ],
+                    "desc": "Decode OGG Vorbis data from a memory buffer.",
+                    "snippet": "loadOggFromMemory(${1:data}, ${2:dataSize})"
+                },
+                {
+                    "name": "loadFlacFromMemory",
+                    "return": "bool",
+                    "signatures": [
+                        "const void* data, size_t dataSize"
+                    ],
+                    "desc": "Decode FLAC data from a memory buffer.",
+                    "snippet": "loadFlacFromMemory(${1:data}, ${2:dataSize})"
+                },
+                {
+                    "name": "loadAacFromMemory",
+                    "return": "bool",
+                    "signatures": [
+                        "const void* data, size_t dataSize"
+                    ],
+                    "desc": "Decode AAC data from a memory buffer (platform-specific; returns false on unsupported platforms).",
+                    "snippet": "loadAacFromMemory(${1:data}, ${2:dataSize})"
+                },
+                {
+                    "name": "loadPcmFromMemory",
+                    "return": "bool",
+                    "signatures": [
+                        "const void* data, size_t dataSize, int numChannels, int rate, int bitsPerSample = 16, bool bigEndian = false"
+                    ],
+                    "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths.",
+                    "snippet": "loadPcmFromMemory(${1:data}, ${2:dataSize}, ${3:numChannels}, ${4:rate})"
+                },
+                {
+                    "name": "getDuration",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Duration in seconds (numSamples / sampleRate).",
+                    "snippet": "getDuration()"
+                },
+                {
+                    "name": "generateSineWave",
+                    "return": "void",
+                    "signatures": [
+                        "float frequency, float duration, float volume = 0.5f, int sr = 44100"
+                    ],
+                    "desc": "Fill the buffer with a mono sine wave of the given frequency (Hz) and duration (seconds).",
+                    "snippet": "generateSineWave(${1:frequency}, ${2:duration})"
+                },
+                {
+                    "name": "generateSquareWave",
+                    "return": "void",
+                    "signatures": [
+                        "float frequency, float duration, float volume = 0.5f, int sr = 44100"
+                    ],
+                    "desc": "Fill the buffer with a mono square wave.",
+                    "snippet": "generateSquareWave(${1:frequency}, ${2:duration})"
+                },
+                {
+                    "name": "generateTriangleWave",
+                    "return": "void",
+                    "signatures": [
+                        "float frequency, float duration, float volume = 0.5f, int sr = 44100"
+                    ],
+                    "desc": "Fill the buffer with a mono triangle wave.",
+                    "snippet": "generateTriangleWave(${1:frequency}, ${2:duration})"
+                },
+                {
+                    "name": "generateSawtoothWave",
+                    "return": "void",
+                    "signatures": [
+                        "float frequency, float duration, float volume = 0.5f, int sr = 44100"
+                    ],
+                    "desc": "Fill the buffer with a mono sawtooth wave.",
+                    "snippet": "generateSawtoothWave(${1:frequency}, ${2:duration})"
+                },
+                {
+                    "name": "generateNoise",
+                    "return": "void",
+                    "signatures": [
+                        "float duration, float volume = 0.5f, int sr = 44100"
+                    ],
+                    "desc": "Fill the buffer with mono white noise.",
+                    "snippet": "generateNoise(${1:duration})"
+                },
+                {
+                    "name": "generatePinkNoise",
+                    "return": "void",
+                    "signatures": [
+                        "float duration, float volume = 0.5f, int sr = 44100"
+                    ],
+                    "desc": "Fill the buffer with mono pink noise (1/f spectrum, Paul Kellet's method).",
+                    "snippet": "generatePinkNoise(${1:duration})"
+                },
+                {
+                    "name": "generateSilence",
+                    "return": "void",
+                    "signatures": [
+                        "float duration, int sr = 44100"
+                    ],
+                    "desc": "Fill the buffer with silence of the given duration (useful as a base for mixFrom).",
+                    "snippet": "generateSilence(${1:duration})"
+                },
+                {
+                    "name": "applyADSR",
+                    "return": "void",
+                    "signatures": [
+                        "float attack, float decay, float sustainLevel, float release"
+                    ],
+                    "desc": "Apply an ADSR amplitude envelope to the buffer in place (attack / decay / release in seconds, sustainLevel 0-1).",
+                    "snippet": "applyADSR(${1:attack}, ${2:decay}, ${3:sustainLevel}, ${4:release})"
+                },
+                {
+                    "name": "mixFrom",
+                    "return": "void",
+                    "signatures": [
+                        "const SoundBuffer& other, size_t offsetSamples, float volume = 1.0f"
+                    ],
+                    "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed.",
+                    "snippet": "mixFrom(${1:other}, ${2:offsetSamples})"
+                },
+                {
+                    "name": "clip",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Hard-clip all samples into the -1.0 .. 1.0 range.",
+                    "snippet": "clip()"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "SoundBuffer_getAdtsSampleRateIndex",
+                    "return": "int",
+                    "signatures": [
+                        "int sampleRate"
+                    ],
+                    "desc": "ADTS sample-rate index for the given rate (AAC-in-MOV container helper).",
+                    "snippet": "SoundBuffer::getAdtsSampleRateIndex(${1:sampleRate})"
+                },
+                {
+                    "name": "SoundBuffer_createAdtsHeader",
+                    "return": "void",
+                    "signatures": [
+                        "uint8_t* header, int frameLength, int sampleRate, int channels, int profile = 2"
+                    ],
+                    "desc": "Write a 7-byte ADTS header for one raw AAC frame into header (AAC-in-MOV container helper).",
+                    "snippet": "SoundBuffer::createAdtsHeader(${1:header}, ${2:frameLength}, ${3:sampleRate}, ${4:channels})"
+                }
+            ]
+        },
+        {
+            "name": "SoundStream",
+            "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a ~10 ms refill, and each polyphony slot costs one open file handle + decoder + ring buffer.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "SoundStream()"
+            },
+            "methods": [
+                {
+                    "name": "loadStream",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path, int maxPolyphony = 1"
+                    ],
+                    "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported.",
+                    "snippet": "loadStream(${1:path})"
+                },
+                {
+                    "name": "getDuration",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Decoded file duration in seconds.",
+                    "snippet": "getDuration()"
+                },
+                {
+                    "name": "getPath",
+                    "return": "const string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Path the stream was opened from.",
+                    "snippet": "getPath()"
+                },
+                {
+                    "name": "getMaxPolyphony",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Number of concurrent decoder slots reserved at loadStream().",
+                    "snippet": "getMaxPolyphony()"
+                }
+            ]
+        },
+        {
+            "name": "AudioEngine",
+            "desc": "Singleton miniaudio-based mixer engine. Owns the output device, mixes all playing Sound voices, exposes real-time audioOut / audioIn / audioDeviceChanged events, and an FFT analysis ring buffer. Access via AudioEngine::getInstance(); most apps drive it indirectly through the Sound class and the global initAudio() / shutdownAudio() helpers.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "audioDeviceExample",
+                    "group": "sound"
+                },
+                {
+                    "name": "audioSynthExample",
+                    "group": "sound"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "init",
+                    "return": "bool",
+                    "signatures": [
+                        "",
+                        "const AudioSettings& settings"
+                    ],
+                    "desc": "Initialize the engine with defaults, or with an AudioSettings override. Re-init on a running engine migrates active voices to the new settings. Returns true on success.",
+                    "snippet": "AudioEngine::getInstance().init()"
+                },
+                {
+                    "name": "shutdown",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Stop and close the audio device.",
+                    "snippet": "AudioEngine::getInstance().shutdown()"
+                },
+                {
+                    "name": "getSampleRate",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Current engine output sample rate (Hz). Returns the default (48000) before init().",
+                    "snippet": "AudioEngine::getInstance().getSampleRate()"
+                },
+                {
+                    "name": "getChannels",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Current engine output channel count.",
+                    "snippet": "AudioEngine::getInstance().getChannels()"
+                },
+                {
+                    "name": "getMaxPolyphony",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Maximum number of simultaneously-playing Sound voices.",
+                    "snippet": "AudioEngine::getInstance().getMaxPolyphony()"
+                },
+                {
+                    "name": "getBufferSize",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Current device buffer size in frames (0 = miniaudio default).",
+                    "snippet": "AudioEngine::getInstance().getBufferSize()"
+                },
+                {
+                    "name": "isInitialized",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True after a successful init().",
+                    "snippet": "AudioEngine::getInstance().isInitialized()"
+                },
+                {
+                    "name": "getAnalysisBuffer",
+                    "return": "size_t",
+                    "signatures": [
+                        "float* outBuffer, size_t numSamples"
+                    ],
+                    "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096. Returns the number of samples written. (Global wrapper: getAudioAnalysisBuffer.)",
+                    "snippet": "AudioEngine::getInstance().getAnalysisBuffer(${1:outBuffer}, ${2:numSamples})"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "AudioEngine_getInstance",
+                    "return": "AudioEngine&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the global AudioEngine singleton.",
+                    "snippet": "AudioEngine::getInstance()"
+                },
+                {
+                    "name": "AudioEngine_listDevices",
+                    "return": "vector<AudioDeviceInfo>",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Enumerate available playback devices (name + isDefault). Empty if unsupported on the platform.",
+                    "snippet": "AudioEngine::listDevices()"
+                }
+            ]
+        },
+        {
+            "name": "MicInput",
+            "desc": "Microphone capture (miniaudio). Opens an input device and exposes the latest samples through a ring buffer. Use the global getMicInput() to access the shared instance, then start() it; getMicAnalysisBuffer() is a convenience wrapper over getBuffer().",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "MicInput()"
+            },
+            "methods": [
+                {
+                    "name": "start",
+                    "return": "bool",
+                    "signatures": [
+                        "int sampleRate = 44100"
+                    ],
+                    "desc": "Open the microphone device at the given sample rate and begin capturing. Returns false on failure.",
+                    "snippet": "start()"
+                },
+                {
+                    "name": "stop",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Stop capture and close the microphone device.",
+                    "snippet": "stop()"
+                },
+                {
+                    "name": "getBuffer",
+                    "return": "size_t",
+                    "signatures": [
+                        "float* outBuffer, size_t numSamples"
+                    ],
+                    "desc": "Copy the latest captured samples into outBuffer. numSamples is capped at the ring buffer size (4096). Returns the number of samples written.",
+                    "snippet": "getBuffer(${1:outBuffer}, ${2:numSamples})"
+                },
+                {
+                    "name": "isRunning",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True while the microphone device is open and capturing.",
+                    "snippet": "isRunning()"
+                },
+                {
+                    "name": "getSampleRate",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Sample rate the microphone was opened at.",
+                    "snippet": "getSampleRate()"
+                }
+            ]
+        },
+        {
+            "name": "AudioSettings",
+            "desc": "Configuration passed to AudioEngine::init() to override engine defaults (sample rate, channels, buffer size, polyphony, device). Empty deviceName selects the system default playback device.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "audioSynthExample",
+                    "group": "sound"
+                },
+                {
+                    "name": "audioDeviceExample",
+                    "group": "sound"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "sampleRate",
+                    "type": "int",
+                    "desc": "Engine output sample rate in Hz (default 96000)"
+                },
+                {
+                    "name": "channels",
+                    "type": "int",
+                    "desc": "Output channel count (1 = mono, 2 = stereo; default 2)"
+                },
+                {
+                    "name": "bufferSize",
+                    "type": "int",
+                    "desc": "Requested device buffer size in frames; 0 = let miniaudio choose"
+                },
+                {
+                    "name": "maxPolyphony",
+                    "type": "int",
+                    "desc": "Max simultaneously-playing Sound voices (default 32)"
+                },
+                {
+                    "name": "deviceName",
+                    "type": "string",
+                    "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate."
+                }
+            ]
+        },
+        {
+            "name": "AudioDeviceInfo",
+            "desc": "One entry in the list returned by AudioEngine::listDevices().",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "audioSynthExample",
+                    "group": "sound"
+                },
+                {
+                    "name": "audioDeviceExample",
+                    "group": "sound"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "name",
+                    "type": "string",
+                    "desc": "Device name (pass to AudioSettings::deviceName)"
+                },
+                {
+                    "name": "isDefault",
+                    "type": "bool",
+                    "desc": "True if this is the system default playback device"
+                }
+            ]
+        },
+        {
+            "name": "AudioDeviceChangedArgs",
+            "desc": "Argument type for the AudioEngine::audioDeviceChanged event, fired after every successful init() (initial and re-init). Reports the resolved device's real name (never empty).",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "audioDeviceExample",
+                    "group": "sound"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "deviceName",
+                    "type": "string",
+                    "desc": "Actual device name now active (resolved, never empty)"
+                },
+                {
+                    "name": "isDefaultDevice",
+                    "type": "bool",
+                    "desc": "True when the opened device is the OS's current default playback device"
+                },
+                {
+                    "name": "sampleRate",
+                    "type": "int",
+                    "desc": "Active engine sample rate in Hz"
+                },
+                {
+                    "name": "channels",
+                    "type": "int",
+                    "desc": "Active output channel count"
+                },
+                {
+                    "name": "bufferSize",
+                    "type": "int",
+                    "desc": "Active device buffer size in frames"
+                },
+                {
+                    "name": "maxPolyphony",
+                    "type": "int",
+                    "desc": "Active max polyphony"
+                }
+            ]
+        },
+        {
+            "name": "AudioOutBuffer",
+            "desc": "Argument type for the AudioEngine::audioOut event. Holds the interleaved mutable output buffer for a single audio callback. Listeners should ADD their contribution to data (voices are already mixed in); do not call engine APIs from here.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "audioSynthExample",
+                    "group": "sound"
+                },
+                {
+                    "name": "audioDeviceExample",
+                    "group": "sound"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "data",
+                    "type": "float*",
+                    "desc": "Interleaved mutable output, frameCount * channels samples"
+                },
+                {
+                    "name": "frameCount",
+                    "type": "int",
+                    "desc": "Number of frames in this callback"
+                },
+                {
+                    "name": "channels",
+                    "type": "int",
+                    "desc": "Channel count (floats per frame)"
+                },
+                {
+                    "name": "sampleRate",
+                    "type": "int",
+                    "desc": "Engine output sample rate in Hz"
+                },
+                {
+                    "name": "framePosition",
+                    "type": "uint64_t",
+                    "desc": "Monotonic count of output frames emitted since engine init (sample-accurate time/phase reference)"
+                }
+            ]
+        },
+        {
+            "name": "AudioInBuffer",
+            "desc": "Argument type for the AudioEngine::audioIn event. Holds the interleaved read-only microphone input for a single capture callback. Process and return quickly; do not call engine APIs from here.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "data",
+                    "type": "const float*",
+                    "desc": "Interleaved read-only mic input, frameCount * channels samples"
+                },
+                {
+                    "name": "frameCount",
+                    "type": "int",
+                    "desc": "Number of frames in this callback"
+                },
+                {
+                    "name": "channels",
+                    "type": "int",
+                    "desc": "Channel count (floats per frame)"
+                },
+                {
+                    "name": "sampleRate",
+                    "type": "int",
+                    "desc": "Input sample rate in Hz"
+                },
+                {
+                    "name": "framePosition",
+                    "type": "uint64_t",
+                    "desc": "Monotonic count of input frames received since capture start"
+                }
+            ]
+        },
+        {
+            "name": "ChipSoundBundle",
+            "desc": "A timeline of chiptune notes (ChipSoundNote + start time) that builds into a single mixed Sound. Add notes at times, then call build() to render the mix with ADSR and clipping applied.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "chipSoundExample",
+                    "group": "sound"
+                }
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "ChipSoundBundle()"
+            },
+            "properties": [
+                {
+                    "name": "entries",
+                    "type": "vector<ChipSoundBundle::Entry>",
+                    "desc": "The scheduled notes (each Entry pairs a ChipSoundNote with its start time in seconds)"
+                },
+                {
+                    "name": "volume",
+                    "type": "float",
+                    "desc": "Master volume multiplier applied when mixing (default 1.0)"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "add",
+                    "return": "void",
+                    "signatures": [
+                        "const ChipSoundNote& note, float time",
+                        "ChipSoundNote::Wave wave, float hz, float duration, float time, float vol = 0.5f"
+                    ],
+                    "desc": "Schedule a note to start at the given time (seconds). The second overload constructs the note inline from wave / frequency / duration.",
+                    "snippet": "add(${1:note}, ${2:time})"
+                },
+                {
+                    "name": "clear",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Remove all scheduled notes.",
+                    "snippet": "clear()"
+                },
+                {
+                    "name": "getDuration",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Total duration in seconds, auto-computed from the last note's end.",
+                    "snippet": "getDuration()"
+                },
+                {
+                    "name": "build",
+                    "return": "Sound",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Render all scheduled notes into a single mixed, clipped Sound ready to play.",
+                    "snippet": "build()"
+                }
+            ]
+        },
+        {
+            "name": "Logger",
+            "desc": "Logging core with console and file output and an onLog event; access the global instance via getLogger()",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "methods": [
+                {
+                    "name": "log",
+                    "return": "void",
+                    "signatures": [
+                        "LogLevel level, const string& message"
+                    ],
+                    "desc": "Emit a log message at the given level",
+                    "snippet": "log(${1:LogLevel::Notice}, ${2:message})"
+                },
+                {
+                    "name": "setConsoleLogLevel",
+                    "return": "void",
+                    "signatures": [
+                        "LogLevel level"
+                    ],
+                    "desc": "Set the minimum console log level",
+                    "snippet": "setConsoleLogLevel(${1:LogLevel::Notice})"
+                },
+                {
+                    "name": "getConsoleLogLevel",
+                    "return": "LogLevel",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the current console log level",
+                    "snippet": "getConsoleLogLevel()"
+                },
+                {
+                    "name": "setLogFile",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Open a file to receive log output",
+                    "snippet": "setLogFile(${1:path})"
+                },
+                {
+                    "name": "closeFile",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Close the current log file",
+                    "snippet": "closeFile()"
+                },
+                {
+                    "name": "setFileLogLevel",
+                    "return": "void",
+                    "signatures": [
+                        "LogLevel level"
+                    ],
+                    "desc": "Set the minimum file log level",
+                    "snippet": "setFileLogLevel(${1:LogLevel::Notice})"
+                },
+                {
+                    "name": "getFileLogLevel",
+                    "return": "LogLevel",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the current file log level",
+                    "snippet": "getFileLogLevel()"
+                },
+                {
+                    "name": "getLogFilePath",
+                    "return": "const string&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the path of the current log file",
+                    "snippet": "getLogFilePath()"
+                },
+                {
+                    "name": "isFileOpen",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check whether a log file is currently open",
+                    "snippet": "isFileOpen()"
+                }
+            ]
+        },
+        {
+            "name": "CoreEvents",
+            "desc": "Hub of all framework core events. Each member is an Event you subscribe to with .listen(callback); access the global instance via events()",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "setup",
+                    "type": "Event<void>",
+                    "desc": "Fired after app setup completes"
+                },
+                {
+                    "name": "update",
+                    "type": "Event<void>",
+                    "desc": "Fired before update each frame"
+                },
+                {
+                    "name": "draw",
+                    "type": "Event<void>",
+                    "desc": "Fired before draw each frame"
+                },
+                {
+                    "name": "onRender",
+                    "type": "Event<void>",
+                    "desc": "Fired after sokol_gl flush, while the render pass is still active"
+                },
+                {
+                    "name": "afterFrame",
+                    "type": "Event<void>",
+                    "desc": "Fired after present() (swapchain committed, outside any pass)"
+                },
+                {
+                    "name": "exit",
+                    "type": "Event<void>",
+                    "desc": "Fired on app exit"
+                },
+                {
+                    "name": "exitRequested",
+                    "type": "Event<ExitRequestEventArgs>",
+                    "desc": "Fired when an exit is requested; set args.cancel = true to cancel it"
+                },
+                {
+                    "name": "keyPressed",
+                    "type": "Event<KeyEventArgs>",
+                    "desc": "Fired when a key is pressed"
+                },
+                {
+                    "name": "keyReleased",
+                    "type": "Event<KeyEventArgs>",
+                    "desc": "Fired when a key is released"
+                },
+                {
+                    "name": "mousePressed",
+                    "type": "Event<MouseEventArgs>",
+                    "desc": "Fired when a mouse button is pressed"
+                },
+                {
+                    "name": "mouseReleased",
+                    "type": "Event<MouseEventArgs>",
+                    "desc": "Fired when a mouse button is released"
+                },
+                {
+                    "name": "mouseMoved",
+                    "type": "Event<MouseMoveEventArgs>",
+                    "desc": "Fired when the mouse moves with no button held"
+                },
+                {
+                    "name": "mouseDragged",
+                    "type": "Event<MouseDragEventArgs>",
+                    "desc": "Fired when the mouse moves with a button held"
+                },
+                {
+                    "name": "mouseScrolled",
+                    "type": "Event<ScrollEventArgs>",
+                    "desc": "Fired when the mouse wheel / trackpad scrolls"
+                },
+                {
+                    "name": "windowResized",
+                    "type": "Event<ResizeEventArgs>",
+                    "desc": "Fired when the window is resized"
+                },
+                {
+                    "name": "filesDropped",
+                    "type": "Event<DragDropEventArgs>",
+                    "desc": "Fired when files are dropped onto the window"
+                },
+                {
+                    "name": "clipboardPasted",
+                    "type": "Event<ClipboardPastedEventArgs>",
+                    "desc": "Fired on a paste gesture (Cmd+V / Ctrl+V / browser paste); args.text holds the content"
+                },
+                {
+                    "name": "console",
+                    "type": "Event<ConsoleEventArgs>",
+                    "desc": "Fired when a command line is received from stdin"
+                },
+                {
+                    "name": "touchPressed",
+                    "type": "Event<TouchEventArgs>",
+                    "desc": "Fired when a touch begins (Android/iOS, multi-touch)"
+                },
+                {
+                    "name": "touchMoved",
+                    "type": "Event<TouchEventArgs>",
+                    "desc": "Fired when a touch moves (Android/iOS, multi-touch)"
+                },
+                {
+                    "name": "touchReleased",
+                    "type": "Event<TouchEventArgs>",
+                    "desc": "Fired when a touch ends or is cancelled (check args.cancelled)"
+                },
+                {
+                    "name": "rawEvent",
+                    "type": "Event<const sapp_event>",
+                    "desc": "Fired for every raw sokol_app event (for addons needing the full sapp_event)"
+                }
+            ]
+        },
+        {
+            "name": "Event",
+            "desc": "Generic event you subscribe to with listen(callback) and fire with notify(arg). The template parameter is the argument type passed to listeners by reference; Event<void> is the no-argument specialization (callbacks and notify take no argument). listen() returns an EventListener RAII token that disconnects when destroyed",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "methods": [
+                {
+                    "name": "listen",
+                    "return": "EventListener",
+                    "signatures": [
+                        "Callback callback, int priority = EventPriority::App",
+                        "Callback callback, Deliver deliver, int priority = EventPriority::App"
+                    ],
+                    "desc": "Register a listener callback and return an EventListener token; lower priority runs first, and Deliver::Main runs the callback on the main thread",
+                    "snippet": "listen(${1:callback})"
+                },
+                {
+                    "name": "notify",
+                    "return": "void",
+                    "signatures": [
+                        "T& arg"
+                    ],
+                    "desc": "Fire the event, calling all listeners in priority order (no argument for Event<void>); stops early if a listener marks an input arg consumed",
+                    "snippet": "notify(${1:arg})"
+                },
+                {
+                    "name": "listenerCount",
+                    "return": "size_t",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Number of currently registered listeners",
+                    "snippet": "listenerCount()"
+                },
+                {
+                    "name": "clear",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Remove all listeners",
+                    "snippet": "clear()"
+                }
+            ]
+        },
+        {
+            "name": "EventListener",
+            "desc": "RAII token returned by Event::listen(); the listener is automatically disconnected when this token is destroyed or reassigned. Move-only",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "eventsExample",
+                    "group": "events"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "disconnect",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction)",
+                    "snippet": "disconnect()"
+                },
+                {
+                    "name": "isConnected",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True while the listener is still connected to its event",
+                    "snippet": "isConnected()"
+                }
+            ]
+        },
+        {
+            "name": "KeyEventArgs",
+            "desc": "Arguments for keyPressed / keyReleased events",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "eventsExample",
+                    "group": "events"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "key",
+                    "type": "int",
+                    "desc": "Key code (KEY_* / SAPP_KEYCODE_*)"
+                },
+                {
+                    "name": "isRepeat",
+                    "type": "bool",
+                    "desc": "True if this is a repeat from holding the key"
+                },
+                {
+                    "name": "shift",
+                    "type": "bool",
+                    "desc": "Shift modifier held"
+                },
+                {
+                    "name": "ctrl",
+                    "type": "bool",
+                    "desc": "Ctrl modifier held"
+                },
+                {
+                    "name": "alt",
+                    "type": "bool",
+                    "desc": "Alt modifier held"
+                },
+                {
+                    "name": "super",
+                    "type": "bool",
+                    "desc": "Super / Command modifier held"
+                },
+                {
+                    "name": "consumed",
+                    "type": "bool",
+                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+                }
+            ]
+        },
+        {
+            "name": "MouseEventArgs",
+            "desc": "Arguments for mousePressed / mouseReleased events. pos is local space, globalPos is screen space (equal at app level)",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "pos",
+                    "type": "Vec2",
+                    "desc": "Cursor position in the receiving node's local space (== globalPos at app level)"
+                },
+                {
+                    "name": "globalPos",
+                    "type": "Vec2",
+                    "desc": "Cursor position in screen space"
+                },
+                {
+                    "name": "button",
+                    "type": "int",
+                    "desc": "Mouse button (MOUSE_BUTTON_LEFT / RIGHT / MIDDLE)"
+                },
+                {
+                    "name": "x",
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.x (removed at v1.0)"
+                },
+                {
+                    "name": "y",
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.y (removed at v1.0)"
+                },
+                {
+                    "name": "shift",
+                    "type": "bool",
+                    "desc": "Shift modifier held"
+                },
+                {
+                    "name": "ctrl",
+                    "type": "bool",
+                    "desc": "Ctrl modifier held"
+                },
+                {
+                    "name": "alt",
+                    "type": "bool",
+                    "desc": "Alt modifier held"
+                },
+                {
+                    "name": "super",
+                    "type": "bool",
+                    "desc": "Super / Command modifier held"
+                },
+                {
+                    "name": "consumed",
+                    "type": "bool",
+                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+                }
+            ]
+        },
+        {
+            "name": "MouseMoveEventArgs",
+            "desc": "Arguments for mouseMoved (cursor moving with no button held)",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "emptyExample",
+                    "group": "templates"
+                },
+                {
+                    "name": "platformInfoExample",
+                    "group": "utils"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "pos",
+                    "type": "Vec2",
+                    "desc": "Cursor position in local space (== globalPos at app level)"
+                },
+                {
+                    "name": "globalPos",
+                    "type": "Vec2",
+                    "desc": "Cursor position in screen space"
+                },
+                {
+                    "name": "delta",
+                    "type": "Vec2",
+                    "desc": "Movement since the last event, in local space"
+                },
+                {
+                    "name": "globalDelta",
+                    "type": "Vec2",
+                    "desc": "Movement since the last event, in screen space"
+                },
+                {
+                    "name": "x",
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.x (removed at v1.0)"
+                },
+                {
+                    "name": "y",
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.y (removed at v1.0)"
+                },
+                {
+                    "name": "deltaX",
+                    "type": "float",
+                    "desc": "Legacy mirror of delta.x (removed at v1.0)"
+                },
+                {
+                    "name": "deltaY",
+                    "type": "float",
+                    "desc": "Legacy mirror of delta.y (removed at v1.0)"
+                },
+                {
+                    "name": "shift",
+                    "type": "bool",
+                    "desc": "Shift modifier held"
+                },
+                {
+                    "name": "ctrl",
+                    "type": "bool",
+                    "desc": "Ctrl modifier held"
+                },
+                {
+                    "name": "alt",
+                    "type": "bool",
+                    "desc": "Alt modifier held"
+                },
+                {
+                    "name": "super",
+                    "type": "bool",
+                    "desc": "Super / Command modifier held"
+                },
+                {
+                    "name": "consumed",
+                    "type": "bool",
+                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+                }
+            ]
+        },
+        {
+            "name": "MouseDragEventArgs",
+            "desc": "Arguments for mouseDragged (cursor moving with a button held)",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "emptyExample",
+                    "group": "templates"
+                },
+                {
+                    "name": "platformInfoExample",
+                    "group": "utils"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "pos",
+                    "type": "Vec2",
+                    "desc": "Cursor position in local space (== globalPos at app level)"
+                },
+                {
+                    "name": "globalPos",
+                    "type": "Vec2",
+                    "desc": "Cursor position in screen space"
+                },
+                {
+                    "name": "delta",
+                    "type": "Vec2",
+                    "desc": "Movement since the last event, in local space"
+                },
+                {
+                    "name": "globalDelta",
+                    "type": "Vec2",
+                    "desc": "Movement since the last event, in screen space"
+                },
+                {
+                    "name": "button",
+                    "type": "int",
+                    "desc": "Mouse button being dragged (MOUSE_BUTTON_*)"
+                },
+                {
+                    "name": "x",
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.x (removed at v1.0)"
+                },
+                {
+                    "name": "y",
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.y (removed at v1.0)"
+                },
+                {
+                    "name": "deltaX",
+                    "type": "float",
+                    "desc": "Legacy mirror of delta.x (removed at v1.0)"
+                },
+                {
+                    "name": "deltaY",
+                    "type": "float",
+                    "desc": "Legacy mirror of delta.y (removed at v1.0)"
+                },
+                {
+                    "name": "shift",
+                    "type": "bool",
+                    "desc": "Shift modifier held"
+                },
+                {
+                    "name": "ctrl",
+                    "type": "bool",
+                    "desc": "Ctrl modifier held"
+                },
+                {
+                    "name": "alt",
+                    "type": "bool",
+                    "desc": "Alt modifier held"
+                },
+                {
+                    "name": "super",
+                    "type": "bool",
+                    "desc": "Super / Command modifier held"
+                },
+                {
+                    "name": "consumed",
+                    "type": "bool",
+                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+                }
+            ]
+        },
+        {
+            "name": "ScrollEventArgs",
+            "desc": "Arguments for mouseScrolled events",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "emptyExample",
+                    "group": "templates"
+                },
+                {
+                    "name": "platformInfoExample",
+                    "group": "utils"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "pos",
+                    "type": "Vec2",
+                    "desc": "Cursor position in local space (== globalPos at app level)"
+                },
+                {
+                    "name": "globalPos",
+                    "type": "Vec2",
+                    "desc": "Cursor position in screen space"
+                },
+                {
+                    "name": "scroll",
+                    "type": "Vec2",
+                    "desc": "Scroll amount (x: horizontal, y: vertical)"
+                },
+                {
+                    "name": "scrollX",
+                    "type": "float",
+                    "desc": "Legacy mirror of scroll.x (removed at v1.0)"
+                },
+                {
+                    "name": "scrollY",
+                    "type": "float",
+                    "desc": "Legacy mirror of scroll.y (removed at v1.0)"
+                },
+                {
+                    "name": "shift",
+                    "type": "bool",
+                    "desc": "Shift modifier held"
+                },
+                {
+                    "name": "ctrl",
+                    "type": "bool",
+                    "desc": "Ctrl modifier held"
+                },
+                {
+                    "name": "alt",
+                    "type": "bool",
+                    "desc": "Alt modifier held"
+                },
+                {
+                    "name": "super",
+                    "type": "bool",
+                    "desc": "Super / Command modifier held"
+                },
+                {
+                    "name": "consumed",
+                    "type": "bool",
+                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+                }
+            ]
+        },
+        {
+            "name": "ResizeEventArgs",
+            "desc": "Arguments for windowResized events",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "width",
+                    "type": "int",
+                    "desc": "New window width in pixels"
+                },
+                {
+                    "name": "height",
+                    "type": "int",
+                    "desc": "New window height in pixels"
+                }
+            ]
+        },
+        {
+            "name": "DragDropEventArgs",
+            "desc": "Arguments for filesDropped events",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "files",
+                    "type": "vector<string>",
+                    "desc": "Paths of the dropped files"
+                },
+                {
+                    "name": "x",
+                    "type": "float",
+                    "desc": "Drop position x"
+                },
+                {
+                    "name": "y",
+                    "type": "float",
+                    "desc": "Drop position y"
+                }
+            ]
+        },
+        {
+            "name": "ClipboardPastedEventArgs",
+            "desc": "Arguments for clipboardPasted events; the only reliable way to read the clipboard on the Web platform",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "clipboardExample",
+                    "group": "utils"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "text",
+                    "type": "string",
+                    "desc": "Pasted clipboard content (already read for you)"
+                }
+            ]
+        },
+        {
+            "name": "TouchPoint",
+            "desc": "A single finger within a TouchEventArgs",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "int",
+                    "desc": "Touch ID, persistent across move events"
+                },
+                {
+                    "name": "x",
+                    "type": "float",
+                    "desc": "Touch x position"
+                },
+                {
+                    "name": "y",
+                    "type": "float",
+                    "desc": "Touch y position"
+                },
+                {
+                    "name": "pressure",
+                    "type": "float",
+                    "desc": "Touch pressure (0.0-1.0; not yet reported by sokol, defaults to 1.0)"
+                },
+                {
+                    "name": "changed",
+                    "type": "bool",
+                    "desc": "True if this touch was part of the current action"
+                }
+            ]
+        },
+        {
+            "name": "TouchEventArgs",
+            "desc": "Arguments for touchPressed / touchMoved / touchReleased events (multi-touch, Android/iOS)",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "systemInfoExample",
+                    "group": "utils"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "touches",
+                    "type": "TouchPoint[8]",
+                    "desc": "Array of active touch points (up to MAX_TOUCHES = 8)"
+                },
+                {
+                    "name": "numTouches",
+                    "type": "int",
+                    "desc": "Number of valid entries in touches"
+                },
+                {
+                    "name": "cancelled",
+                    "type": "bool",
+                    "desc": "True when touchReleased fires due to system cancellation (incoming call, system gesture)"
+                }
+            ]
+        },
+        {
+            "name": "ExitRequestEventArgs",
+            "desc": "Arguments for the exitRequested event",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "cancel",
+                    "type": "bool",
+                    "desc": "Set true in a listener to cancel the requested exit"
+                }
+            ]
+        },
+        {
+            "name": "LogEventArgs",
+            "desc": "Arguments delivered for each log message (level, text, and timestamp)",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "level",
+                    "type": "LogLevel",
+                    "desc": "Severity of the log message"
+                },
+                {
+                    "name": "message",
+                    "type": "string",
+                    "desc": "The log message text"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "string",
+                    "desc": "Timestamp string (HH:MM:SS.mmm) generated when the message was logged"
+                }
+            ]
+        },
+        {
+            "name": "ConsoleEventArgs",
+            "desc": "Arguments for the console event (a command line received from stdin)",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "raw",
+                    "type": "string",
+                    "desc": "Raw input line (e.g. \"tcdebug screenshot /tmp/a.png\")"
+                },
+                {
+                    "name": "args",
+                    "type": "vector<string>",
+                    "desc": "Input line split on whitespace (e.g. [\"tcdebug\", \"screenshot\", \"/tmp/a.png\"])"
+                }
+            ]
+        },
+        {
+            "name": "FullscreenShader",
+            "desc": "Shader specialization for fullscreen post-processing effects (position + texcoord quad). Set uniforms via setParams, then call draw to render a fullscreen quad.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "fullscreenShaderExample",
+                    "group": "graphics"
+                }
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "FullscreenShader()"
+            },
+            "methods": [
+                {
+                    "name": "setParams",
+                    "return": "void",
+                    "signatures": [
+                        "const T& params"
+                    ],
+                    "desc": "Set uniform parameter block (template; copies the struct bytes). Call before draw.",
+                    "snippet": "setParams(${1:params})"
+                },
+                {
+                    "name": "draw",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Draw a fullscreen quad with this shader applied",
+                    "snippet": "draw()"
+                }
+            ]
+        },
+        {
+            "name": "Ray",
+            "desc": "A ray with an origin and a normalized direction, used for unified hit testing and picking",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "origin",
+                    "type": "Vec3",
+                    "desc": "Ray origin point"
+                },
+                {
+                    "name": "direction",
+                    "type": "Vec3",
+                    "desc": "Ray direction (normalized)"
+                }
+            ]
+        },
+        {
+            "name": "ColorLinear",
+            "desc": "A color in linear RGB space (no gamma encoding), 0.0-1.0 float per channel",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "r",
+                    "type": "float",
+                    "desc": "Red component (linear, 0.0-1.0)"
+                },
+                {
+                    "name": "g",
+                    "type": "float",
+                    "desc": "Green component (linear, 0.0-1.0)"
+                },
+                {
+                    "name": "b",
+                    "type": "float",
+                    "desc": "Blue component (linear, 0.0-1.0)"
+                },
+                {
+                    "name": "a",
+                    "type": "float",
+                    "desc": "Alpha component (0.0-1.0)"
+                }
+            ]
+        },
+        {
+            "name": "ColorOKLab",
+            "desc": "A color in the OKLab perceptual color space (lightness + two opponent axes)",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "L",
+                    "type": "float",
+                    "desc": "Lightness (0.0-1.0)"
+                },
+                {
+                    "name": "a",
+                    "type": "float",
+                    "desc": "Green-Red opponent axis (approx -0.4 to 0.4)"
+                },
+                {
+                    "name": "b",
+                    "type": "float",
+                    "desc": "Blue-Yellow opponent axis (approx -0.4 to 0.4)"
+                },
+                {
+                    "name": "alpha",
+                    "type": "float",
+                    "desc": "Alpha component (0.0-1.0)"
+                }
+            ]
+        },
+        {
+            "name": "Json",
+            "desc": "Alias for nlohmann::json (using Json = nlohmann::json). Used as the in-memory JSON value type by loadJson, saveJson, parseJson and toJsonString. See the nlohmann/json documentation for its full API.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "jsonXmlExample",
+                    "group": "input_output"
+                }
+            ]
+        },
+        {
+            "name": "Xml",
+            "desc": "XML document wrapper around pugixml. Loads, saves and queries XML; node-level access is via XmlNode returned from root() and child().",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "jsonXmlExample",
+                    "group": "input_output"
+                }
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "Xml()"
+            },
+            "methods": [
+                {
+                    "name": "load",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path"
+                    ],
+                    "desc": "Load an XML document from a file. Relative paths are resolved via getDataPath. Returns true on success.",
+                    "snippet": "load(${1:path})"
+                },
+                {
+                    "name": "parse",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& str"
+                    ],
+                    "desc": "Parse an XML document from a string. Returns true on success.",
+                    "snippet": "parse(${1:str})"
+                },
+                {
+                    "name": "save",
+                    "return": "bool",
+                    "signatures": [
+                        "const string& path, const string& indent = \"  \""
+                    ],
+                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath. indent sets the per-level indentation string. Returns true on success.",
+                    "snippet": "save(${1:path})"
+                },
+                {
+                    "name": "toString",
+                    "return": "string",
+                    "signatures": [
+                        "const string& indent = \"  \""
+                    ],
+                    "desc": "Serialize the document to an XML string. indent sets the per-level indentation string.",
+                    "snippet": "toString()"
+                },
+                {
+                    "name": "root",
+                    "return": "XmlNode",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the document's root element node.",
+                    "snippet": "root()"
+                },
+                {
+                    "name": "addRoot",
+                    "return": "XmlNode",
+                    "signatures": [
+                        "const string& name"
+                    ],
+                    "desc": "Append a new root element with the given name and return it.",
+                    "snippet": "addRoot(${1:name})"
+                },
+                {
+                    "name": "child",
+                    "return": "XmlNode",
+                    "signatures": [
+                        "const string& name"
+                    ],
+                    "desc": "Find a direct child node of the document by name.",
+                    "snippet": "child(${1:name})"
+                },
+                {
+                    "name": "document",
+                    "return": "XmlDocument&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Access the underlying pugixml document for advanced operations.",
+                    "snippet": "document()"
+                },
+                {
+                    "name": "empty",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return true if the document has no content.",
+                    "snippet": "empty()"
+                },
+                {
+                    "name": "addDeclaration",
+                    "return": "void",
+                    "signatures": [
+                        "const string& version = \"1.0\", const string& encoding = \"UTF-8\""
+                    ],
+                    "desc": "Prepend an XML declaration (<?xml ...?>) with the given version and encoding.",
+                    "snippet": "addDeclaration()"
+                }
+            ]
+        },
+        {
+            "name": "XmlDocument",
+            "desc": "Alias for pugi::xml_document. The owning XML document type underlying the Xml wrapper; see the pugixml documentation for its full API.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "XmlNode",
+            "desc": "Alias for pugi::xml_node. A single element/node within an XML document, returned by Xml::root() and Xml::child(); see the pugixml documentation for node query and manipulation methods.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "XmlAttribute",
+            "desc": "Alias for pugi::xml_attribute. A name/value attribute on an XmlNode; see the pugixml documentation for its API.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "XmlParseResult",
+            "desc": "Alias for pugi::xml_parse_result. Result of an XML parse operation, carrying success status, error description and offset.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "Mod",
+            "desc": "Attachable behavior base class for Node. Subclass it, override the lifecycle and input hooks, and attach with node->addMod<T>(). Lifecycle: setup() on attach, then each frame earlyUpdate() -> Node::update() -> update() -> draw(), and onDestroy() on removal. Override isExclusive() to allow only one instance per Node, and canAttachTo() to restrict attachment.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "methods": [
+                {
+                    "name": "getOwner",
+                    "return": "Node*",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the owner Node this Mod is attached to.",
+                    "snippet": "getOwner()"
+                },
+                {
+                    "name": "removeSelf",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Remove this Mod from its owner (no need to name its own type). Safe to call from inside the Mod's own update/draw/event handler; destruction is deferred until the current dispatch finishes. (protected)",
+                    "snippet": "removeSelf()"
+                },
+                {
+                    "name": "setup",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Override: called once when the Mod is attached to the Node. (protected, virtual)",
+                    "snippet": "setup()"
+                },
+                {
+                    "name": "earlyUpdate",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Override: called every frame BEFORE Node::update(). Use for applying transforms, tweens, physics. (protected, virtual)",
+                    "snippet": "earlyUpdate()"
+                },
+                {
+                    "name": "update",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Override: called every frame AFTER Node::update(). Use for reactions to node state changes. (protected, virtual)",
+                    "snippet": "update()"
+                },
+                {
+                    "name": "draw",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Override: called during the draw phase, after Node::draw(). (protected, virtual)",
+                    "snippet": "draw()"
+                },
+                {
+                    "name": "onDestroy",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Override: called when the Mod is removed or the Node is destroyed. (protected, virtual)",
+                    "snippet": "onDestroy()"
+                },
+                {
+                    "name": "onMousePress",
+                    "return": "bool",
+                    "signatures": [
+                        "const MouseEventArgs& e"
+                    ],
+                    "desc": "Override: mouse press on the hit node. Return true to consume the event (counts as the node consuming it). (protected, virtual)",
+                    "snippet": "onMousePress(${1:e})"
+                },
+                {
+                    "name": "onMouseRelease",
+                    "return": "bool",
+                    "signatures": [
+                        "const MouseEventArgs& e"
+                    ],
+                    "desc": "Override: mouse release on the hit node. Return true to consume. (protected, virtual)",
+                    "snippet": "onMouseRelease(${1:e})"
+                },
+                {
+                    "name": "onMouseMove",
+                    "return": "bool",
+                    "signatures": [
+                        "const MouseMoveEventArgs& e"
+                    ],
+                    "desc": "Override: mouse move over the hit node. Return true to consume. (protected, virtual)",
+                    "snippet": "onMouseMove(${1:e})"
+                },
+                {
+                    "name": "onMouseDrag",
+                    "return": "bool",
+                    "signatures": [
+                        "const MouseDragEventArgs& e"
+                    ],
+                    "desc": "Override: mouse drag on the hit node. Return true to consume. (protected, virtual)",
+                    "snippet": "onMouseDrag(${1:e})"
+                },
+                {
+                    "name": "onMouseScroll",
+                    "return": "bool",
+                    "signatures": [
+                        "const ScrollEventArgs& e"
+                    ],
+                    "desc": "Override: mouse scroll over the hit node. Return true to consume. (protected, virtual)",
+                    "snippet": "onMouseScroll(${1:e})"
+                },
+                {
+                    "name": "onKeyPress",
+                    "return": "bool",
+                    "signatures": [
+                        "const KeyEventArgs& e"
+                    ],
+                    "desc": "Override: key press (broadcast to mods on every node). Return true to consume. (protected, virtual)",
+                    "snippet": "onKeyPress(${1:e})"
+                },
+                {
+                    "name": "onKeyRelease",
+                    "return": "bool",
+                    "signatures": [
+                        "const KeyEventArgs& e"
+                    ],
+                    "desc": "Override: key release (broadcast to mods on every node). Return true to consume. (protected, virtual)",
+                    "snippet": "onKeyRelease(${1:e})"
+                },
+                {
+                    "name": "onMouseEnter",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Override: pointer entered the owner node. (protected, virtual)",
+                    "snippet": "onMouseEnter()"
+                },
+                {
+                    "name": "onMouseLeave",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Override: pointer left the owner node. (protected, virtual)",
+                    "snippet": "onMouseLeave()"
+                },
+                {
+                    "name": "hitTest",
+                    "return": "bool",
+                    "signatures": [
+                        "const Ray& localRay, float& outDistance"
+                    ],
+                    "desc": "Override: screen-space pointer picking (NOT physics collision). Define a hit shape in the node's LOCAL space; if the node's own test OR any mod's returns true, the node is the hit. (protected, virtual)",
+                    "snippet": "hitTest(${1:localRay}, ${2:outDistance})"
+                },
+                {
+                    "name": "isExclusive",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Override to return true if only one instance of this Mod type may be attached per Node (e.g. LayoutMod). Default false. (protected, virtual)",
+                    "snippet": "isExclusive()"
+                },
+                {
+                    "name": "canAttachTo",
+                    "return": "bool",
+                    "signatures": [
+                        "Node* node"
+                    ],
+                    "desc": "Override to restrict which Node types this Mod can attach to. Return false to reject attachment. Default true. (protected, virtual)",
+                    "snippet": "canAttachTo(${1:node})"
+                }
+            ]
+        },
+        {
+            "name": "RectNodeButton",
+            "desc": "Simple clickable button node (a RectNode subclass). Set normalColor/hoverColor/pressColor and label; it draws a filled rect that changes color on hover/press and a centered label. Events are enabled on construction. Listen on its inherited mousePressed/mouseReleased events for clicks.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "RectNodeButton()"
+            },
+            "properties": [
+                {
+                    "name": "normalColor",
+                    "type": "Color",
+                    "desc": "Fill color when idle (default dark grey)."
+                },
+                {
+                    "name": "hoverColor",
+                    "type": "Color",
+                    "desc": "Fill color when the pointer is over the button."
+                },
+                {
+                    "name": "pressColor",
+                    "type": "Color",
+                    "desc": "Fill color while pressed."
+                },
+                {
+                    "name": "label",
+                    "type": "string",
+                    "desc": "Text drawn centered on the button (skipped if empty)."
+                }
+            ],
+            "methods": [
+                {
+                    "name": "isPressed",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the button is currently pressed.",
+                    "snippet": "isPressed()"
+                },
+                {
+                    "name": "draw",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Draw the button: fills the rect with the state-dependent color and draws the centered label. (override)",
+                    "snippet": "draw()"
+                }
+            ]
+        },
+        {
+            "name": "Thread",
+            "desc": "Base class for background threads (ofThread compatible). Subclass it, override the protected pure-virtual threadedFunction() with a while (isThreadRunning()) { ... } loop, then control it with startThread()/stopThread()/waitForThread(). A protected mutex dataMutex_ is available for sharing data.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "Thread()"
+            },
+            "methods": [
+                {
+                    "name": "startThread",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Start the background thread (runs threadedFunction). No-op if already running.",
+                    "snippet": "startThread()"
+                },
+                {
+                    "name": "stopThread",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Send the stop signal: isThreadRunning() returns false inside threadedFunction so a while-loop can exit. Does not block.",
+                    "snippet": "stopThread()"
+                },
+                {
+                    "name": "waitForThread",
+                    "return": "void",
+                    "signatures": [
+                        "bool callStopThread = true"
+                    ],
+                    "desc": "Wait (join) for the thread to finish. If callStopThread is true (default), calls stopThread() first.",
+                    "snippet": "waitForThread()"
+                },
+                {
+                    "name": "isThreadRunning",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the thread is currently running.",
+                    "snippet": "isThreadRunning()"
+                },
+                {
+                    "name": "getThreadId",
+                    "return": "thread::id",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the underlying thread's ID.",
+                    "snippet": "getThreadId()"
+                },
+                {
+                    "name": "threadedFunction",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Override this with the work to run on the thread; recommended pattern is while (isThreadRunning()) { ... }. (protected, pure virtual)",
+                    "snippet": "threadedFunction()"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "Thread_sleep",
+                    "return": "void",
+                    "signatures": [
+                        "unsigned long milliseconds"
+                    ],
+                    "desc": "Pause the current thread for the given number of milliseconds.",
+                    "snippet": "Thread::sleep(${1:milliseconds})"
+                },
+                {
+                    "name": "Thread_yield",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Yield execution to other threads.",
+                    "snippet": "Thread::yield()"
+                },
+                {
+                    "name": "Thread_isCurrentThreadTheMainThread",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the current thread is the main thread. The main thread ID must be recorded first (call getMainThreadId() from the main thread).",
+                    "snippet": "Thread::isCurrentThreadTheMainThread()"
+                },
+                {
+                    "name": "Thread_getMainThreadId",
+                    "return": "thread::id",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the main thread ID, recording the current thread's ID on the first call.",
+                    "snippet": "Thread::getMainThreadId()"
+                }
+            ]
+        },
+        {
+            "name": "ThreadChannel",
+            "desc": "Thread-safe FIFO queue for one-way inter-thread communication (ofThreadChannel compatible), template<typename T>. Producer-Consumer pattern: a worker thread send()s values and another thread receive()s them. Use two channels for bidirectional communication.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "ThreadChannel<T>()"
+            },
+            "methods": [
+                {
+                    "name": "send",
+                    "return": "bool",
+                    "signatures": [
+                        "const T& value",
+                        "T&& value"
+                    ],
+                    "desc": "Send a value onto the queue (copy or move overload). Returns false if the channel is closed (with the move overload the value is invalidated even on failure).",
+                    "snippet": "send(${1:value})"
+                },
+                {
+                    "name": "receive",
+                    "return": "bool",
+                    "signatures": [
+                        "T& value"
+                    ],
+                    "desc": "Receive a value (blocking): waits until data arrives, writing it into value. Returns false if the channel is closed.",
+                    "snippet": "receive(${1:value})"
+                },
+                {
+                    "name": "tryReceive",
+                    "return": "bool",
+                    "signatures": [
+                        "T& value",
+                        "T& value, int64_t timeoutMs"
+                    ],
+                    "desc": "Receive a value without blocking, or waiting at most timeoutMs milliseconds (timeout overload). Returns false immediately/after the timeout if no data.",
+                    "snippet": "tryReceive(${1:value})"
+                },
+                {
+                    "name": "close",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Close the channel, waking all waiting threads. After closing, send/receive return false.",
+                    "snippet": "close()"
+                },
+                {
+                    "name": "clear",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Clear the queue, discarding all pending values.",
+                    "snippet": "clear()"
+                },
+                {
+                    "name": "empty",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the queue is empty (approximate).",
+                    "snippet": "empty()"
+                },
+                {
+                    "name": "size",
+                    "return": "size_t",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Number of queued values (approximate).",
+                    "snippet": "size()"
+                },
+                {
+                    "name": "isClosed",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the channel has been closed.",
+                    "snippet": "isClosed()"
+                }
+            ]
+        },
+        {
+            "name": "HitResult",
+            "desc": "Result of a node hit test (this is Node::HitResult). Returned by Node::findHitNode() / findHitNodeFromScreen(); call hit() to check whether anything was hit.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "node",
+                    "type": "Node::Ptr",
+                    "desc": "The hit node (shared_ptr), or null if nothing was hit."
+                },
+                {
+                    "name": "distance",
+                    "type": "float",
+                    "desc": "Distance from the ray origin to the hit point."
+                },
+                {
+                    "name": "localPoint",
+                    "type": "Vec3",
+                    "desc": "Hit position in the hit node's local coordinates."
+                }
+            ],
+            "methods": [
+                {
+                    "name": "hit",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether a node was hit (node is non-null).",
+                    "snippet": "hit()"
+                }
+            ]
+        },
+        {
+            "name": "NodeWeakPtr",
+            "desc": "Alias for weak_ptr<Node> (using NodeWeakPtr = weak_ptr<Node>). A non-owning weak reference to a Node; lock() it to obtain a NodePtr if the node still exists.",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "Location",
+            "desc": "GPS / WiFi location fix returned by getLocation()",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "latitude",
+                    "type": "double",
+                    "desc": "Latitude in degrees"
+                },
+                {
+                    "name": "longitude",
+                    "type": "double",
+                    "desc": "Longitude in degrees"
+                },
+                {
+                    "name": "altitude",
+                    "type": "double",
+                    "desc": "Altitude in meters"
+                },
+                {
+                    "name": "accuracy",
+                    "type": "float",
+                    "desc": "Horizontal accuracy in meters; -1 if not available yet"
+                }
+            ]
+        },
+        {
+            "name": "FpsSettings",
+            "desc": "FPS configuration returned by getFpsSettings(). Rates use VSYNC (-1) and EVENT_DRIVEN (0) sentinels, or a fixed fps",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "updateFps",
+                    "type": "float",
+                    "desc": "Target update rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
+                },
+                {
+                    "name": "drawFps",
+                    "type": "float",
+                    "desc": "Target draw rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
+                },
+                {
+                    "name": "actualVsyncFps",
+                    "type": "float",
+                    "desc": "Actual monitor refresh rate (0 if unknown)"
+                },
+                {
+                    "name": "synced",
+                    "type": "bool",
+                    "desc": "true when update and draw run in sync (1:1)"
+                }
+            ]
+        },
+        {
+            "name": "WindowSettings",
+            "desc": "Window configuration passed to the app at startup (size, title, DPI, MSAA, fullscreen, decoration, VSync). Setters chain",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "width",
+                    "type": "int",
+                    "desc": "Window width (default 1280)"
+                },
+                {
+                    "name": "height",
+                    "type": "int",
+                    "desc": "Window height (default 720)"
+                },
+                {
+                    "name": "title",
+                    "type": "string",
+                    "desc": "Window title (default \"TrussC App\")"
+                },
+                {
+                    "name": "highDpi",
+                    "type": "bool",
+                    "desc": "High DPI support for sharp rendering on Retina (default true)"
+                },
+                {
+                    "name": "pixelPerfect",
+                    "type": "bool",
+                    "desc": "true: coords match framebuffer size; false: coords use logical size (default false)"
+                },
+                {
+                    "name": "sampleCount",
+                    "type": "int",
+                    "desc": "MSAA sample count (default 4)"
+                },
+                {
+                    "name": "fullscreen",
+                    "type": "bool",
+                    "desc": "Start in fullscreen (default false)"
+                },
+                {
+                    "name": "decorated",
+                    "type": "bool",
+                    "desc": "false: borderless/chromeless window with no title bar (default true)"
+                },
+                {
+                    "name": "clipboardSize",
+                    "type": "int",
+                    "desc": "Clipboard buffer size in bytes (default 65536)"
+                },
+                {
+                    "name": "swapInterval",
+                    "type": "int",
+                    "desc": "VSync present interval: 1 = on (default), 0 = off, N = every Nth refresh"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "setSize",
+                    "return": "WindowSettings&",
+                    "signatures": [
+                        "int w, int h"
+                    ],
+                    "desc": "Set window size (chainable)",
+                    "snippet": "setSize(${1:w}, ${2:h})"
+                },
+                {
+                    "name": "setTitle",
+                    "return": "WindowSettings&",
+                    "signatures": [
+                        "const string& t"
+                    ],
+                    "desc": "Set window title (chainable)",
+                    "snippet": "setTitle(${1:title})"
+                },
+                {
+                    "name": "setHighDpi",
+                    "return": "WindowSettings&",
+                    "signatures": [
+                        "bool enabled"
+                    ],
+                    "desc": "Enable/disable high DPI support (chainable)",
+                    "snippet": "setHighDpi(${1:true})"
+                },
+                {
+                    "name": "setPixelPerfect",
+                    "return": "WindowSettings&",
+                    "signatures": [
+                        "bool enabled"
+                    ],
+                    "desc": "Set pixel-perfect mode: true = framebuffer-size coords, false = logical-size coords (chainable)",
+                    "snippet": "setPixelPerfect(${1:true})"
+                },
+                {
+                    "name": "setSampleCount",
+                    "return": "WindowSettings&",
+                    "signatures": [
+                        "int count"
+                    ],
+                    "desc": "Set MSAA sample count (chainable)",
+                    "snippet": "setSampleCount(${1:count})"
+                },
+                {
+                    "name": "setFullscreen",
+                    "return": "WindowSettings&",
+                    "signatures": [
+                        "bool enabled"
+                    ],
+                    "desc": "Enable/disable fullscreen at startup (chainable)",
+                    "snippet": "setFullscreen(${1:true})"
+                },
+                {
+                    "name": "setDecorated",
+                    "return": "WindowSettings&",
+                    "signatures": [
+                        "bool enabled"
+                    ],
+                    "desc": "false = borderless/chromeless window that can still take focus and be closed programmatically (chainable)",
+                    "snippet": "setDecorated(${1:true})"
+                },
+                {
+                    "name": "setClipboardSize",
+                    "return": "WindowSettings&",
+                    "signatures": [
+                        "int size"
+                    ],
+                    "desc": "Set clipboard buffer size in bytes (chainable)",
+                    "snippet": "setClipboardSize(${1:size})"
+                },
+                {
+                    "name": "setSwapInterval",
+                    "return": "WindowSettings&",
+                    "signatures": [
+                        "int interval"
+                    ],
+                    "desc": "Set VSync present interval: 1 = on, 0 = off, N = every Nth refresh (chainable)",
+                    "snippet": "setSwapInterval(${1:interval})"
+                }
+            ]
+        },
+        {
+            "name": "HeadlessSettings",
+            "desc": "Settings for runHeadlessApp() (no window / graphics). Currently just the target update rate",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "targetFps",
+                    "type": "float",
+                    "desc": "Target update rate (default 60)"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "setFps",
+                    "return": "HeadlessSettings&",
+                    "signatures": [
+                        "float fps"
+                    ],
+                    "desc": "Set the target update rate (chainable)",
+                    "snippet": "setFps(${1:fps})"
+                }
+            ]
+        },
+        {
+            "name": "FileDialogResult",
+            "desc": "Result of a load/save file dialog",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "fileDialogExample",
+                    "group": "input_output"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "filePath",
+                    "type": "string",
+                    "desc": "Full path to the chosen file"
+                },
+                {
+                    "name": "fileName",
+                    "type": "string",
+                    "desc": "Filename only (no directory)"
+                },
+                {
+                    "name": "success",
+                    "type": "bool",
+                    "desc": "true if a file was chosen, false if the dialog was cancelled"
+                }
+            ]
+        },
+        {
+            "name": "Vec4",
+            "desc": "4D vector (x, y, z, w). Used for homogeneous coordinates and RGBA-style data",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    "",
+                    "float x, float y, float z, float w",
+                    "float v",
+                    "const Vec3& v, float w = 1.0f",
+                    "const Vec2& v, float z = 0.0f, float w = 1.0f"
+                ],
+                "snippet": "Vec4(${1:x}, ${2:y}, ${3:z}, ${4:w})"
+            },
+            "properties": [
+                {
+                    "name": "x",
+                    "type": "float",
+                    "desc": "X component"
+                },
+                {
+                    "name": "y",
+                    "type": "float",
+                    "desc": "Y component"
+                },
+                {
+                    "name": "z",
+                    "type": "float",
+                    "desc": "Z component"
+                },
+                {
+                    "name": "w",
+                    "type": "float",
+                    "desc": "W component"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "set",
+                    "return": "Vec4&",
+                    "signatures": [
+                        "float x, float y, float z, float w",
+                        "const Vec4& v"
+                    ],
+                    "desc": "Set all components (chainable)",
+                    "snippet": "set(${1:x}, ${2:y}, ${3:z}, ${4:w})"
+                },
+                {
+                    "name": "length",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the vector's magnitude",
+                    "snippet": "length()"
+                },
+                {
+                    "name": "lengthSquared",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the squared magnitude (cheaper than length())",
+                    "snippet": "lengthSquared()"
+                },
+                {
+                    "name": "normalized",
+                    "return": "Vec4",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return a unit-length copy of this vector",
+                    "snippet": "normalized()"
+                },
+                {
+                    "name": "normalize",
+                    "return": "Vec4&",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Normalize this vector in place (chainable)",
+                    "snippet": "normalize()"
+                },
+                {
+                    "name": "dot",
+                    "return": "float",
+                    "signatures": [
+                        "const Vec4& v"
+                    ],
+                    "desc": "Dot product with another vector",
+                    "snippet": "dot(${1:v})"
+                },
+                {
+                    "name": "lerp",
+                    "return": "Vec4",
+                    "signatures": [
+                        "const Vec4& v, float t"
+                    ],
+                    "desc": "Linearly interpolate toward v by t (0..1)",
+                    "snippet": "lerp(${1:v}, ${2:t})"
+                },
+                {
+                    "name": "xy",
+                    "return": "Vec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the (x, y) components as a Vec2",
+                    "snippet": "xy()"
+                },
+                {
+                    "name": "xyz",
+                    "return": "Vec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the (x, y, z) components as a Vec3",
+                    "snippet": "xyz()"
+                }
+            ]
+        },
+        {
+            "name": "Mat3",
+            "desc": "3x3 matrix for 2D affine / homography transforms (row-major). Includes static factories and a homography solver",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    "",
+                    "float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22"
+                ],
+                "snippet": "Mat3()"
+            },
+            "methods": [
+                {
+                    "name": "at",
+                    "return": "float&",
+                    "signatures": [
+                        "int row, int col"
+                    ],
+                    "desc": "Access the element at (row, col)",
+                    "snippet": "at(${1:row}, ${2:col})"
+                },
+                {
+                    "name": "transposed",
+                    "return": "Mat3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the transpose of this matrix",
+                    "snippet": "transposed()"
+                },
+                {
+                    "name": "determinant",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Compute the determinant",
+                    "snippet": "determinant()"
+                },
+                {
+                    "name": "inverted",
+                    "return": "Mat3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the inverse matrix (identity if singular)",
+                    "snippet": "inverted()"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "Mat3_identity",
+                    "return": "Mat3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the identity matrix",
+                    "snippet": "Mat3::identity()"
+                },
+                {
+                    "name": "Mat3_translate",
+                    "return": "Mat3",
+                    "signatures": [
+                        "float tx, float ty",
+                        "const Vec2& t"
+                    ],
+                    "desc": "Build a 2D translation matrix",
+                    "snippet": "Mat3::translate(${1:tx}, ${2:ty})"
+                },
+                {
+                    "name": "Mat3_rotate",
+                    "return": "Mat3",
+                    "signatures": [
+                        "float radians"
+                    ],
+                    "desc": "Build a 2D rotation matrix (radians)",
+                    "snippet": "Mat3::rotate(${1:radians})"
+                },
+                {
+                    "name": "Mat3_scale",
+                    "return": "Mat3",
+                    "signatures": [
+                        "float sx, float sy",
+                        "float s",
+                        "const Vec2& s"
+                    ],
+                    "desc": "Build a 2D scale matrix",
+                    "snippet": "Mat3::scale(${1:sx}, ${2:sy})"
+                },
+                {
+                    "name": "Mat3_getHomography",
+                    "return": "Mat3",
+                    "signatures": [
+                        "const Vec2 src[4], const Vec2 dst[4]"
+                    ],
+                    "desc": "Compute the homography matrix mapping 4 source points to 4 destination points (solves H * src = dst)",
+                    "snippet": "Mat3::getHomography(${1:src}, ${2:dst})"
+                }
+            ]
+        },
+        {
+            "name": "VideoGrabber",
+            "desc": "Webcam capture source. Call setup() once, then update() every frame; getTexture() (via HasTexture) gives the live frame. Move-only. Camera permission is requested automatically on macOS",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "videoGrabberExample",
+                    "group": "video"
+                }
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "VideoGrabber()"
+            },
+            "methods": [
+                {
+                    "name": "listDevices",
+                    "return": "vector<VideoDeviceInfo>",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the list of available camera devices",
+                    "snippet": "listDevices()"
+                },
+                {
+                    "name": "setDeviceID",
+                    "return": "void",
+                    "signatures": [
+                        "int deviceId"
+                    ],
+                    "desc": "Select which camera to use; call before setup()",
+                    "snippet": "setDeviceID(${1:deviceId})"
+                },
+                {
+                    "name": "getDeviceID",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the selected device ID",
+                    "snippet": "getDeviceID()"
+                },
+                {
+                    "name": "setDesiredFrameRate",
+                    "return": "void",
+                    "signatures": [
+                        "int fps"
+                    ],
+                    "desc": "Request a capture frame rate; call before setup()",
+                    "snippet": "setDesiredFrameRate(${1:fps})"
+                },
+                {
+                    "name": "getDesiredFrameRate",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the requested frame rate (-1 if unspecified)",
+                    "snippet": "getDesiredFrameRate()"
+                },
+                {
+                    "name": "setVerbose",
+                    "return": "void",
+                    "signatures": [
+                        "bool verbose"
+                    ],
+                    "desc": "Enable or disable verbose logging",
+                    "snippet": "setVerbose(${1:verbose})"
+                },
+                {
+                    "name": "isVerbose",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return whether verbose logging is enabled",
+                    "snippet": "isVerbose()"
+                },
+                {
+                    "name": "setup",
+                    "return": "bool",
+                    "signatures": [
+                        "int width = 640, int height = 480"
+                    ],
+                    "desc": "Start the camera at the requested size. Returns false if permission is not yet granted (it is requested asynchronously); keep calling update() and capture begins once granted",
+                    "snippet": "setup(${1:width}, ${2:height})"
+                },
+                {
+                    "name": "close",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Stop the camera and release its resources",
+                    "snippet": "close()"
+                },
+                {
+                    "name": "update",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Poll for a new frame and upload it to the texture. Call every frame; also completes a setup() that was waiting on permission",
+                    "snippet": "update()"
+                },
+                {
+                    "name": "isFrameNew",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return true if a new frame arrived during the most recent update()",
+                    "snippet": "isFrameNew()"
+                },
+                {
+                    "name": "isInitialized",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return true once the camera is set up and capturing",
+                    "snippet": "isInitialized()"
+                },
+                {
+                    "name": "isPendingPermission",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return true while waiting for camera permission to be granted",
+                    "snippet": "isPendingPermission()"
+                },
+                {
+                    "name": "getWidth",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the captured frame width in pixels",
+                    "snippet": "getWidth()"
+                },
+                {
+                    "name": "getHeight",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the captured frame height in pixels",
+                    "snippet": "getHeight()"
+                },
+                {
+                    "name": "getDeviceName",
+                    "return": "const string &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the name of the active capture device",
+                    "snippet": "getDeviceName()"
+                },
+                {
+                    "name": "getPixels",
+                    "return": "unsigned char *",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return a pointer to the current RGBA pixel buffer",
+                    "snippet": "getPixels()"
+                },
+                {
+                    "name": "copyToImage",
+                    "return": "void",
+                    "signatures": [
+                        "Image &image"
+                    ],
+                    "desc": "Copy the current frame into an Image (allocating/updating it as needed)",
+                    "snippet": "copyToImage(${1:image})"
+                },
+                {
+                    "name": "getTexture",
+                    "return": "Texture &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the texture holding the live camera frame (HasTexture override)",
+                    "snippet": "getTexture()"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "VideoGrabber_checkCameraPermission",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return whether camera access has been granted (macOS 10.14+)",
+                    "snippet": "VideoGrabber::checkCameraPermission()"
+                },
+                {
+                    "name": "VideoGrabber_requestCameraPermission",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Request camera access asynchronously (macOS)",
+                    "snippet": "VideoGrabber::requestCameraPermission()"
+                }
+            ]
+        },
+        {
+            "name": "Tween",
+            "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "tweenExample",
+                    "group": "animation"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "T start, T end, float duration, EaseType type = EaseType::Cubic, EaseMode mode = EaseMode::InOut"
+                ],
+                "snippet": "Tween<${1:T}>(${2:start}, ${3:end}, ${4:duration})"
+            },
+            "methods": [
+                {
+                    "name": "from",
+                    "return": "Tween &",
+                    "signatures": [
+                        "T value"
+                    ],
+                    "desc": "Set the start value (chainable)",
+                    "snippet": "from(${1:value})"
+                },
+                {
+                    "name": "to",
+                    "return": "Tween &",
+                    "signatures": [
+                        "T value"
+                    ],
+                    "desc": "Set the end value (chainable)",
+                    "snippet": "to(${1:value})"
+                },
+                {
+                    "name": "duration",
+                    "return": "Tween &",
+                    "signatures": [
+                        "float seconds"
+                    ],
+                    "desc": "Set the animation duration in seconds (chainable)",
+                    "snippet": "duration(${1:seconds})"
+                },
+                {
+                    "name": "ease",
+                    "return": "Tween &",
+                    "signatures": [
+                        "EaseType type, EaseMode mode = EaseMode::InOut",
+                        "EaseType inType, EaseType outType"
+                    ],
+                    "desc": "Set the easing curve; the two-type overload uses an asymmetric ease (one curve in, another out)",
+                    "snippet": "ease(${1:type})"
+                },
+                {
+                    "name": "loop",
+                    "return": "Tween &",
+                    "signatures": [
+                        "int count = -1"
+                    ],
+                    "desc": "Repeat the animation: -1 = infinite, 0 = no loop, N = repeat N times (chainable)",
+                    "snippet": "loop(${1:count})"
+                },
+                {
+                    "name": "yoyo",
+                    "return": "Tween &",
+                    "signatures": [
+                        "bool enable = true"
+                    ],
+                    "desc": "Reverse direction on each loop iteration (chainable)",
+                    "snippet": "yoyo(${1:enable})"
+                },
+                {
+                    "name": "delay",
+                    "return": "Tween &",
+                    "signatures": [
+                        "float seconds"
+                    ],
+                    "desc": "Delay before the animation starts, in seconds (chainable)",
+                    "snippet": "delay(${1:seconds})"
+                },
+                {
+                    "name": "start",
+                    "return": "Tween &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Start (or restart) the animation and begin auto-updating each frame",
+                    "snippet": "start()"
+                },
+                {
+                    "name": "pause",
+                    "return": "Tween &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Pause the animation, keeping its current progress",
+                    "snippet": "pause()"
+                },
+                {
+                    "name": "resume",
+                    "return": "Tween &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Resume a paused animation",
+                    "snippet": "resume()"
+                },
+                {
+                    "name": "reset",
+                    "return": "Tween &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Stop the animation and reset progress to the start",
+                    "snippet": "reset()"
+                },
+                {
+                    "name": "finish",
+                    "return": "Tween &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Jump immediately to the end value and fire the complete event",
+                    "snippet": "finish()"
+                },
+                {
+                    "name": "getValue",
+                    "return": "T",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the current eased value",
+                    "snippet": "getValue()"
+                },
+                {
+                    "name": "getProgress",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return normalized progress through the current iteration (0.0-1.0)",
+                    "snippet": "getProgress()"
+                },
+                {
+                    "name": "getElapsed",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return elapsed time in seconds within the current iteration",
+                    "snippet": "getElapsed()"
+                },
+                {
+                    "name": "getDuration",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the configured duration in seconds",
+                    "snippet": "getDuration()"
+                },
+                {
+                    "name": "isPlaying",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return true while the animation is actively playing",
+                    "snippet": "isPlaying()"
+                },
+                {
+                    "name": "isComplete",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return true once the animation (all loops) has finished",
+                    "snippet": "isComplete()"
+                },
+                {
+                    "name": "getStart",
+                    "return": "T",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the start value",
+                    "snippet": "getStart()"
+                },
+                {
+                    "name": "getEnd",
+                    "return": "T",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the end value",
+                    "snippet": "getEnd()"
+                },
+                {
+                    "name": "getLoopCount",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return how many loop iterations have completed so far",
+                    "snippet": "getLoopCount()"
+                }
+            ]
+        },
+        {
+            "name": "VideoDeviceInfo",
+            "desc": "Information about an available camera device, returned by VideoGrabber::listDevices()",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "deviceId",
+                    "type": "int",
+                    "desc": "Numeric device ID (pass to setDeviceID); -1 if unknown"
+                },
+                {
+                    "name": "deviceName",
+                    "type": "string",
+                    "desc": "Human-readable device name"
+                },
+                {
+                    "name": "uniqueId",
+                    "type": "string",
+                    "desc": "Stable unique identifier for the device"
+                }
+            ]
+        },
+        {
+            "name": "VideoRecordSettings",
+            "desc": "Encoder settings passed to VideoWriter::open(), ScreenRecorder::start(), and startRecording()",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "codec",
+                    "type": "VideoCodec",
+                    "desc": "Output codec (default H264)"
+                },
+                {
+                    "name": "fps",
+                    "type": "float",
+                    "desc": "Capture/output frame rate. For ScreenRecorder this is the capture ceiling; for VideoWriter it is the exact output rate (default 60)"
+                },
+                {
+                    "name": "bitrate",
+                    "type": "int",
+                    "desc": "Target bits/sec for H.264/HEVC; 0 = auto. Ignored by ProRes"
+                },
+                {
+                    "name": "keyframeInterval",
+                    "type": "int",
+                    "desc": "Frames between keyframes; 0 = encoder default"
+                }
+            ]
+        },
+        {
+            "name": "Glyph",
+            "desc": "A bitmap glyph to register via registerGlyph(): a codepoint plus packed 1-bit pixel rows. The data pointer must outlive every drawBitmapString call",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "bitmapStringExtendedExample",
+                    "group": "font"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "codepoint",
+                    "type": "uint32_t",
+                    "desc": "Unicode codepoint this glyph renders"
+                },
+                {
+                    "name": "data",
+                    "type": "const uint8_t *",
+                    "desc": "Packed bitmap rows (MSB first); must outlive all draw calls"
+                },
+                {
+                    "name": "width",
+                    "type": "Width",
+                    "desc": "Glyph width: Halfwidth (8x13) or Fullwidth (16x13)"
+                }
+            ]
+        },
+        {
+            "name": "PlacedGlyph",
+            "desc": "One laid-out glyph emitted by Font::forEachGlyph (nested as Font::PlacedGlyph). Carries the final codepoint and pen position so visitors can render quads, build vector paths, or hit-test independently of the layout pass",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "properties": [
+                {
+                    "name": "codepoint",
+                    "type": "uint32_t",
+                    "desc": "Final codepoint after vertical-form mapping"
+                },
+                {
+                    "name": "drawX",
+                    "type": "float",
+                    "desc": "Pen X position; the glyph's own xoffset is added on top"
+                },
+                {
+                    "name": "baselineY",
+                    "type": "float",
+                    "desc": "Baseline Y position; the glyph's own yoffset is added on top"
+                },
+                {
+                    "name": "rotationCw",
+                    "type": "float",
+                    "desc": "Clockwise rotation in radians: 0 (upright) or TAU/4 (90 degrees, vertical text)"
+                },
+                {
+                    "name": "pivotX",
+                    "type": "float",
+                    "desc": "Rotation center X (used only when rotationCw is non-zero)"
+                },
+                {
+                    "name": "pivotY",
+                    "type": "float",
+                    "desc": "Rotation center Y (used only when rotationCw is non-zero)"
+                },
+                {
+                    "name": "scaleX",
+                    "type": "float",
+                    "desc": "Horizontal scale (1.0 normally, less than 1 for TCY combine)"
+                }
+            ]
+        },
+        {
+            "name": "GlyphVisitor",
+            "desc": "Alias for function<void(const Font::PlacedGlyph&)> (nested as Font::GlyphVisitor). The per-glyph callback type accepted by Font::forEachGlyph",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": ""
+        },
+        {
+            "name": "StrokeMesh",
+            "desc": "Variable-width polyline stroke geometry with caps, joins and miter limit; build it from points or a Path, then update() and draw()",
+            "keywords": [],
+            "desc_ja": "",
+            "desc_ko": "",
+            "examples": [
+                {
+                    "name": "strokeMeshExample",
+                    "group": "graphics"
+                }
+            ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "const Path& polyline"
+                ],
+                "snippet": "StrokeMesh()"
+            },
+            "methods": [
+                {
+                    "name": "setWidth",
+                    "return": "void",
+                    "signatures": [
+                        "float width"
+                    ],
+                    "desc": "Set the stroke width",
+                    "snippet": "setWidth(${1:5.0})"
+                },
+                {
+                    "name": "setColor",
+                    "return": "void",
+                    "signatures": [
+                        "const Color& color"
+                    ],
+                    "desc": "Set the stroke color",
+                    "snippet": "setColor(${1:color})"
+                },
+                {
+                    "name": "setCapType",
+                    "return": "void",
+                    "signatures": [
+                        "CapType type"
+                    ],
+                    "desc": "Set the line cap shape (StrokeMesh::CapType: Butt, Round, Square)",
+                    "snippet": "setCapType(${1:StrokeMesh::CapType::Round})"
+                },
+                {
+                    "name": "setJoinType",
+                    "return": "void",
+                    "signatures": [
+                        "JoinType type"
+                    ],
+                    "desc": "Set the line join shape (StrokeMesh::JoinType: Miter, Round, Bevel)",
+                    "snippet": "setJoinType(${1:StrokeMesh::JoinType::Round})"
+                },
+                {
+                    "name": "setMiterLimit",
+                    "return": "void",
+                    "signatures": [
+                        "float limit"
+                    ],
+                    "desc": "Set the miter limit for sharp corners",
+                    "snippet": "setMiterLimit(${1:10.0})"
+                },
+                {
+                    "name": "addVertex",
+                    "return": "void",
+                    "signatures": [
+                        "float x, float y, float z = 0",
+                        "const Vec2& p",
+                        "const Vec3& p"
+                    ],
+                    "desc": "Append a vertex to the stroke path",
+                    "snippet": "addVertex(${1:x}, ${2:y})"
+                },
+                {
+                    "name": "addVertexWithWidth",
+                    "return": "void",
+                    "signatures": [
+                        "float x, float y, float width",
+                        "const Vec3& p, float width"
+                    ],
+                    "desc": "Append a vertex with a per-vertex width",
+                    "snippet": "addVertexWithWidth(${1:x}, ${2:y}, ${3:width})"
+                },
+                {
+                    "name": "setWidths",
+                    "return": "void",
+                    "signatures": [
+                        "const vector<float>& w"
+                    ],
+                    "desc": "Set per-vertex widths from a list",
+                    "snippet": "setWidths(${1:widths})"
+                },
+                {
+                    "name": "setShape",
+                    "return": "void",
+                    "signatures": [
+                        "const Path& polyline"
+                    ],
+                    "desc": "Set the stroke shape from a Path",
+                    "snippet": "setShape(${1:path})"
+                },
+                {
+                    "name": "setClosed",
+                    "return": "void",
+                    "signatures": [
+                        "bool closed"
+                    ],
+                    "desc": "Set whether the stroke forms a closed loop",
+                    "snippet": "setClosed(${1:true})"
+                },
+                {
+                    "name": "clear",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Remove all vertices",
+                    "snippet": "clear()"
+                },
+                {
+                    "name": "update",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Rebuild the internal triangle mesh (call before draw after edits)",
+                    "snippet": "update()"
+                },
+                {
+                    "name": "draw",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Draw the stroke mesh",
+                    "snippet": "draw()"
+                }
+            ]
         }
     ],
     "enums": [
@@ -17635,6 +22639,49 @@ const TrussCAPI = {
                 }
             ],
             "desc_ja": "縦書き / 日本語の禁則処理レベル",
+            "desc_ko": ""
+        },
+        {
+            "name": "Orientation",
+            "desc": "Screen orientation mask passed to setOrientation (iOS/Android); values are bit flags and can be combined with |",
+            "values": [
+                {
+                    "name": "Portrait",
+                    "value": 2,
+                    "desc": "Portrait, home button at bottom"
+                },
+                {
+                    "name": "PortraitUpsideDown",
+                    "value": 4,
+                    "desc": "Portrait, home button at top"
+                },
+                {
+                    "name": "LandscapeLeft",
+                    "value": 16,
+                    "desc": "Landscape, home button on the left"
+                },
+                {
+                    "name": "LandscapeRight",
+                    "value": 8,
+                    "desc": "Landscape, home button on the right"
+                },
+                {
+                    "name": "Landscape",
+                    "value": 24,
+                    "desc": "Either landscape orientation"
+                },
+                {
+                    "name": "All",
+                    "value": 30,
+                    "desc": "All four orientations"
+                },
+                {
+                    "name": "AllButUpsideDown",
+                    "value": 26,
+                    "desc": "All orientations except portrait-upside-down"
+                }
+            ],
+            "desc_ja": "",
             "desc_ko": ""
         }
     ],

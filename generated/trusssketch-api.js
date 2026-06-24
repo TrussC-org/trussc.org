@@ -7008,6 +7008,15 @@
                     ],
                     "desc": "Draw mesh as wireframe",
                     "snippet": "drawWireframe()"
+                },
+                {
+                    "name": "drawGpuPbr",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Draw the mesh through the GPU PBR pipeline (uploads to GPU buffers as needed, then renders using active lights, material and environment)",
+                    "snippet": "drawGpuPbr()"
                 }
             ]
         },
