@@ -308,7 +308,9 @@
 
             html += `<div class="detail-entry">`;
             html += `<div class="detail-sig"><span class="ret">${esc(retType)}</span> <span class="name">${esc(name)}</span>(<span class="params">${esc(params)}</span>)</div>`;
-            if (fn.desc) html += `<div class="detail-entry-desc">// ${esc(fn.desc)}</div>`;
+            // Only annotate a signature when its description differs from the shared
+            // top-level one — avoids repeating the same line under every overload.
+            if (fn.desc && fn.desc !== first.desc) html += `<div class="detail-entry-desc">// ${esc(fn.desc)}</div>`;
             html += `</div>`;
         }
         html += `</div>`;
