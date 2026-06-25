@@ -28,9 +28,10 @@
             pick(t, 'desc'); pick(t, 'platformNote');
             for (const p of t.properties || []) pick(p, 'desc');
             for (const m of (t.methods || []).concat(t.static_methods || [])) { pick(m, 'desc'); pick(m, 'platformNote'); }
+            for (const o of t.operators || []) pick(o, 'desc');
         }
         for (const c of api.constants || []) pick(c, 'desc');
-        for (const e of api.enums || []) { pick(e, 'desc'); for (const v of e.values || []) pick(v, 'desc'); }
+        for (const e of api.enums || []) { pick(e, 'desc'); for (const v of e.values || []) pick(v, 'desc'); for (const o of e.operators || []) pick(o, 'desc'); }
         for (const m of api.macros || []) pick(m, 'desc');
     }
     localizeData(TrussCAPI);
@@ -50,6 +51,7 @@
         properties: 'Properties',
         methods: 'Methods',
         staticMethods: 'Static Methods',
+        operators: 'Operators',
         category: 'Category',
         related: 'Related',
         examples: 'Examples',
@@ -391,6 +393,24 @@
         return h;
     }
 
+    // Operators: each carries a human-readable `signature` ("Vec2 + Vec2 → Vec2"),
+    // the exact C++ `cpp` decl ("Vec2 operator+(const Vec2&) const"), and a desc.
+    function renderOperators(list) {
+        if (!list || !list.length) return '';
+        let h = `<div class="detail-section"><div class="detail-section-title">${esc(UI.operators)}</div>`;
+        for (const o of list) {
+            h += `<div class="detail-entry">`;
+            h += `<div class="detail-sig"><span class="name" style="color:#4ec9b0;">${esc(o.signature || o.cpp)}</span></div>`;
+            if (o.cpp && o.cpp !== o.signature) {
+                h += `<div class="detail-entry-desc" style="color:#888;">${esc(o.cpp)}</div>`;
+            }
+            if (o.desc) h += `<div class="detail-entry-desc">// ${esc(o.desc)}</div>`;
+            h += `</div>`;
+        }
+        h += `</div>`;
+        return h;
+    }
+
     function renderFunctionDetail(name, category) {
         const overloads = [];
         for (const cat of TrussCAPI.categories) {
@@ -513,6 +533,8 @@
             html += `</div>`;
         }
 
+        html += renderOperators(t.operators);
+
         html += renderRelated(t.related);
         html += renderExamples(t.examples);
 
@@ -535,6 +557,7 @@
             html += `</div>`;
         }
         html += `</div>`;
+        html += renderOperators(e.operators);
         html += renderRelated(e.related);
         detail.innerHTML = html;
     }
