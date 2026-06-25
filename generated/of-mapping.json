@@ -123,14 +123,14 @@
       "mappings": [
         {
           "of": "ofClear / ofBackground",
-          "tc": "clear(gray)",
+          "tc": "clear(gray, [a])",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
         },
         {
           "of": "ofSetColor",
-          "tc": "setColor(gray)",
+          "tc": "setColor(gray, [a])",
           "notes": "Range 0-1 instead of 0-255",
           "notes_ja": "Range 0-1 instead of 0-255",
           "notes_ko": ""
@@ -186,14 +186,14 @@
         },
         {
           "of": "ofDrawSphere",
-          "tc": "drawSphere(radius)",
+          "tc": "drawSphere(radius, [resolution])",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
         },
         {
           "of": "ofDrawCone",
-          "tc": "drawCone(radius, height)",
+          "tc": "drawCone(radius, height, [resolution])",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -502,7 +502,7 @@
       "mappings": [
         {
           "of": "ofSetupScreenPerspective",
-          "tc": "setupScreenPerspective()",
+          "tc": "setupScreenPerspective([fovDeg], [nearDist], [farDist])",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -690,7 +690,7 @@
       "mappings": [
         {
           "of": "ofLog",
-          "tc": "logNotice(message)",
+          "tc": "logNotice([module])",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -718,7 +718,7 @@
         },
         {
           "of": "ofSplitString",
-          "tc": "splitString(source, delimiter)",
+          "tc": "splitString(source, delimiter, [ignoreEmpty], [trim])",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""

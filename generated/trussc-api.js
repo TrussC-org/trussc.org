@@ -5,7 +5,7 @@
 // Do not edit directly - edit api-definition.yaml instead
 
 const TrussCAPI = {
-    "version": "v0.6.1",
+    "version": "v0.6.2",
     "lang": "all",
     "categories": [
         {
@@ -17,7 +17,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Called once at start",
-                    "snippet": "void setup() {\n\t$0\n}",
                     "keywords": [
                         "init",
                         "start",
@@ -39,7 +38,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Called every frame before draw",
-                    "snippet": "void update() {\n\t$0\n}",
                     "keywords": [
                         "tick",
                         "step",
@@ -64,7 +62,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Called every frame after update",
-                    "snippet": "void draw() {\n\t$0\n}",
                     "keywords": [
                         "render",
                         "paint",
@@ -87,7 +84,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Called once before exit (optional user callback for cleanup)",
-                    "snippet": "void cleanup() {\n\t$0\n}",
                     "keywords": [
                         "exit",
                         "shutdown",
@@ -109,7 +105,6 @@ const TrussCAPI = {
                     "params_typed": "const WindowSettings& settings = WindowSettings()",
                     "return_type": "int",
                     "desc": "Start the application main loop. Called from main()",
-                    "snippet": "runApp(${1:settings})",
                     "keywords": [
                         "main",
                         "start",
@@ -135,11 +130,10 @@ const TrussCAPI = {
             "functions": [
                 {
                     "name": "mousePressed",
-                    "params": "x, y, button",
-                    "params_typed": "float x, float y, int button",
+                    "params": "pos, button",
+                    "params_typed": "Vec2 pos, int button",
                     "return_type": "void",
                     "desc": "Mouse button pressed",
-                    "snippet": "void mousePressed(float x, float y, int button) {\n\t$0\n}",
                     "keywords": [
                         "click",
                         "press",
@@ -165,11 +159,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mouseReleased",
-                    "params": "x, y, button",
-                    "params_typed": "float x, float y, int button",
+                    "params": "pos, button",
+                    "params_typed": "Vec2 pos, int button",
                     "return_type": "void",
                     "desc": "Mouse button released",
-                    "snippet": "void mouseReleased(float x, float y, int button) {\n\t$0\n}",
                     "keywords": [
                         "release",
                         "mouseup",
@@ -192,11 +185,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mouseMoved",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
+                    "params": "pos",
+                    "params_typed": "Vec2 pos",
                     "return_type": "void",
                     "desc": "Mouse moved",
-                    "snippet": "void mouseMoved(float x, float y) {\n\t$0\n}",
                     "keywords": [
                         "move",
                         "hover",
@@ -219,11 +211,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mouseDragged",
-                    "params": "x, y, button",
-                    "params_typed": "float x, float y, int button",
+                    "params": "pos, button",
+                    "params_typed": "Vec2 pos, int button",
                     "return_type": "void",
                     "desc": "Mouse dragged",
-                    "snippet": "void mouseDragged(float x, float y, int button) {\n\t$0\n}",
                     "keywords": [
                         "drag",
                         "swipe",
@@ -250,7 +241,6 @@ const TrussCAPI = {
                     "params_typed": "int key",
                     "return_type": "void",
                     "desc": "Key pressed. Use KEY_* constants for special keys, or uppercase char literals for printable keys (e.g. key == 'A', key == '1')",
-                    "snippet": "void keyPressed(int key) {\n\t$0\n}",
                     "keywords": [
                         "key",
                         "keydown",
@@ -279,7 +269,6 @@ const TrussCAPI = {
                     "params_typed": "int key",
                     "return_type": "void",
                     "desc": "Key released",
-                    "snippet": "void keyReleased(int key) {\n\t$0\n}",
                     "keywords": [
                         "key",
                         "keyup",
@@ -306,7 +295,6 @@ const TrussCAPI = {
                     "params_typed": "int width, int height",
                     "return_type": "void",
                     "desc": "Window resized",
-                    "snippet": "void windowResized(int width, int height) {\n\t$0\n}",
                     "keywords": [
                         "resize",
                         "resized",
@@ -334,7 +322,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Clear screen. No args = transparent black (0,0,0,0)",
-                    "snippet": "clear(${1:0.0})",
                     "keywords": [
                         "reset",
                         "empty",
@@ -352,11 +339,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "clear",
-                    "params": "gray",
-                    "params_typed": "float gray",
+                    "params": "gray, [a]",
+                    "params_typed": "float gray, float a = 1.0f",
                     "return_type": "void",
                     "desc": "Clear screen. No args = transparent black (0,0,0,0)",
-                    "snippet": "clear(${1:0.0})",
                     "keywords": [
                         "reset",
                         "empty",
@@ -374,11 +360,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "clear",
-                    "params": "r, g, b",
-                    "params_typed": "float r, float g, float b",
+                    "params": "r, g, b, [a]",
+                    "params_typed": "float r, float g, float b, float a = 1.0f",
                     "return_type": "void",
                     "desc": "Clear screen. No args = transparent black (0,0,0,0)",
-                    "snippet": "clear(${1:0.0})",
                     "keywords": [
                         "reset",
                         "empty",
@@ -396,11 +381,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setColor",
-                    "params": "gray",
-                    "params_typed": "float gray",
+                    "params": "gray, [a]",
+                    "params_typed": "float gray, float a = 1.0f",
                     "return_type": "void",
                     "desc": "Set drawing color (0.0-1.0)",
-                    "snippet": "setColor(${1:1.0}, ${2:1.0}, ${3:1.0})",
                     "keywords": [
                         "color",
                         "tint",
@@ -432,11 +416,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setColor",
-                    "params": "r, g, b",
-                    "params_typed": "float r, float g, float b",
+                    "params": "r, g, b, [a]",
+                    "params_typed": "float r, float g, float b, float a = 1.0f",
                     "return_type": "void",
                     "desc": "Set drawing color (0.0-1.0)",
-                    "snippet": "setColor(${1:1.0}, ${2:1.0}, ${3:1.0})",
                     "keywords": [
                         "color",
                         "tint",
@@ -472,7 +455,6 @@ const TrussCAPI = {
                     "params_typed": "float r, float g, float b, float a",
                     "return_type": "void",
                     "desc": "Set drawing color (0.0-1.0)",
-                    "snippet": "setColor(${1:1.0}, ${2:1.0}, ${3:1.0})",
                     "keywords": [
                         "color",
                         "tint",
@@ -504,11 +486,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setColorHSB",
-                    "params": "h, s, b",
-                    "params_typed": "float h, float s, float b",
+                    "params": "h, s, b, [a]",
+                    "params_typed": "float h, float s, float b, float a = 1.0f",
                     "return_type": "void",
                     "desc": "Set color from HSB (H: 0-1)",
-                    "snippet": "setColorHSB(${1:0.0}, ${2:1.0}, ${3:1.0})",
                     "keywords": [
                         "hsb",
                         "hsv",
@@ -540,11 +521,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setColorOKLCH",
-                    "params": "L, C, H",
-                    "params_typed": "float L, float C, float H",
+                    "params": "L, C, H, [alpha]",
+                    "params_typed": "float L, float C, float H, float alpha = 1.0f",
                     "return_type": "void",
                     "desc": "Set color from OKLCH",
-                    "snippet": "setColorOKLCH(${1:0.7}, ${2:0.15}, ${3:0.0})",
                     "keywords": [
                         "oklch",
                         "perceptual",
@@ -560,11 +540,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setColorOKLab",
-                    "params": "L, a, b",
-                    "params_typed": "float L, float a, float b",
+                    "params": "L, a_lab, b_lab, [alpha]",
+                    "params_typed": "float L, float a_lab, float b_lab, float alpha = 1.0f",
                     "return_type": "void",
                     "desc": "Set color from OKLab",
-                    "snippet": "setColorOKLab(${1:0.7}, ${2:0.0}, ${3:0.0})",
                     "keywords": [
                         "oklab",
                         "perceptual",
@@ -583,7 +562,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Convert a single sRGB channel value to linear RGB",
-                    "snippet": "srgbToLinear(${1:x})",
                     "keywords": [
                         "gamma",
                         "linear",
@@ -602,7 +580,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Convert a single linear RGB channel value to sRGB",
-                    "snippet": "linearToSrgb(${1:x})",
                     "keywords": [
                         "gamma",
                         "linear",
@@ -628,7 +605,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float w, float h",
                     "return_type": "void",
                     "desc": "Draw rectangle",
-                    "snippet": "drawRect(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "rectangle",
                         "box",
@@ -658,7 +634,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 pos, float w, float h",
                     "return_type": "void",
                     "desc": "Draw rectangle",
-                    "snippet": "drawRect(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "rectangle",
                         "box",
@@ -688,7 +663,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 pos, Vec2 size",
                     "return_type": "void",
                     "desc": "Draw rectangle",
-                    "snippet": "drawRect(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "rectangle",
                         "box",
@@ -720,7 +694,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float w, float h, float radius",
                     "return_type": "void",
                     "desc": "Draw rounded rectangle (circular arc corners)",
-                    "snippet": "drawRectRounded(${1:x}, ${2:y}, ${3:w}, ${4:h}, ${5:radius})",
                     "keywords": [
                         "rounded",
                         "corner",
@@ -746,7 +719,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 pos, Vec2 size, float radius",
                     "return_type": "void",
                     "desc": "Draw rounded rectangle (circular arc corners)",
-                    "snippet": "drawRectRounded(${1:x}, ${2:y}, ${3:w}, ${4:h}, ${5:radius})",
                     "keywords": [
                         "rounded",
                         "corner",
@@ -772,7 +744,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float w, float h, float radius",
                     "return_type": "void",
                     "desc": "Draw squircle rectangle (curvature-continuous corners, iOS-style)",
-                    "snippet": "drawRectSquircle(${1:x}, ${2:y}, ${3:w}, ${4:h}, ${5:radius})",
                     "keywords": [
                         "squircle",
                         "rounded",
@@ -795,7 +766,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 pos, Vec2 size, float radius",
                     "return_type": "void",
                     "desc": "Draw squircle rectangle (curvature-continuous corners, iOS-style)",
-                    "snippet": "drawRectSquircle(${1:x}, ${2:y}, ${3:w}, ${4:h}, ${5:radius})",
                     "keywords": [
                         "squircle",
                         "rounded",
@@ -818,7 +788,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float radius",
                     "return_type": "void",
                     "desc": "Draw circle",
-                    "snippet": "drawCircle(${1:x}, ${2:y}, ${3:radius})",
                     "keywords": [
                         "circle",
                         "round",
@@ -845,7 +814,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 center, float radius",
                     "return_type": "void",
                     "desc": "Draw circle",
-                    "snippet": "drawCircle(${1:x}, ${2:y}, ${3:radius})",
                     "keywords": [
                         "circle",
                         "round",
@@ -872,7 +840,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float radius, float angleBegin, float angleEnd",
                     "return_type": "void",
                     "desc": "Draw arc (partial circle, angles in radians)",
-                    "snippet": "drawArc(${1:x}, ${2:y}, ${3:radius}, ${4:0}, ${5:TAU})",
                     "keywords": [
                         "pie",
                         "wedge",
@@ -898,7 +865,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 center, float radius, float angleBegin, float angleEnd",
                     "return_type": "void",
                     "desc": "Draw arc (partial circle, angles in radians)",
-                    "snippet": "drawArc(${1:x}, ${2:y}, ${3:radius}, ${4:0}, ${5:TAU})",
                     "keywords": [
                         "pie",
                         "wedge",
@@ -924,7 +890,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float w, float h",
                     "return_type": "void",
                     "desc": "Draw ellipse",
-                    "snippet": "drawEllipse(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "circle",
                         "oval",
@@ -950,7 +915,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 center, float rx, float ry",
                     "return_type": "void",
                     "desc": "Draw ellipse",
-                    "snippet": "drawEllipse(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "circle",
                         "oval",
@@ -976,7 +940,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 center, Vec2 radii",
                     "return_type": "void",
                     "desc": "Draw ellipse",
-                    "snippet": "drawEllipse(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "circle",
                         "oval",
@@ -1002,7 +965,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "void",
                     "desc": "Draw a single point",
-                    "snippet": "drawPoint(${1:x}, ${2:y})",
                     "keywords": [
                         "dot",
                         "pixel",
@@ -1018,7 +980,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 pos",
                     "return_type": "void",
                     "desc": "Draw a single point",
-                    "snippet": "drawPoint(${1:x}, ${2:y})",
                     "keywords": [
                         "dot",
                         "pixel",
@@ -1034,7 +995,6 @@ const TrussCAPI = {
                     "params_typed": "float x1, float y1, float x2, float y2",
                     "return_type": "void",
                     "desc": "Draw line (2D or 3D)",
-                    "snippet": "drawLine(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
                     "keywords": [
                         "segment",
                         "edge",
@@ -1045,7 +1005,6 @@ const TrussCAPI = {
                     "desc_ko": "선 그리기 (2D 또는 3D)",
                     "related": [
                         "drawStroke",
-                        "drawPolyline",
                         "beginLines"
                     ],
                     "examples": [
@@ -1061,7 +1020,6 @@ const TrussCAPI = {
                     "params_typed": "float x1, float y1, float z1, float x2, float y2, float z2",
                     "return_type": "void",
                     "desc": "Draw line (2D or 3D)",
-                    "snippet": "drawLine(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
                     "keywords": [
                         "segment",
                         "edge",
@@ -1072,7 +1030,6 @@ const TrussCAPI = {
                     "desc_ko": "선 그리기 (2D 또는 3D)",
                     "related": [
                         "drawStroke",
-                        "drawPolyline",
                         "beginLines"
                     ],
                     "examples": [
@@ -1088,7 +1045,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 p1, Vec3 p2",
                     "return_type": "void",
                     "desc": "Draw line (2D or 3D)",
-                    "snippet": "drawLine(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
                     "keywords": [
                         "segment",
                         "edge",
@@ -1099,7 +1055,6 @@ const TrussCAPI = {
                     "desc_ko": "선 그리기 (2D 또는 3D)",
                     "related": [
                         "drawStroke",
-                        "drawPolyline",
                         "beginLines"
                     ],
                     "examples": [
@@ -1115,7 +1070,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3",
                     "return_type": "void",
                     "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)",
-                    "snippet": "drawBezier(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})",
                     "keywords": [
                         "curve",
                         "spline",
@@ -1148,7 +1102,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2",
                     "return_type": "void",
                     "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)",
-                    "snippet": "drawBezier(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})",
                     "keywords": [
                         "curve",
                         "spline",
@@ -1181,7 +1134,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<Vec3>& controlPoints",
                     "return_type": "void",
                     "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)",
-                    "snippet": "drawBezier(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})",
                     "keywords": [
                         "curve",
                         "spline",
@@ -1214,7 +1166,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3",
                     "return_type": "void",
                     "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)",
-                    "snippet": "drawCurve(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})",
                     "keywords": [
                         "catmull-rom",
                         "spline",
@@ -1246,7 +1197,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<Vec3>& points",
                     "return_type": "void",
                     "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)",
-                    "snippet": "drawCurve(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})",
                     "keywords": [
                         "catmull-rom",
                         "spline",
@@ -1278,7 +1228,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<Vec3>& points, bool closed",
                     "return_type": "void",
                     "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)",
-                    "snippet": "drawCurve(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})",
                     "keywords": [
                         "catmull-rom",
                         "spline",
@@ -1310,7 +1259,6 @@ const TrussCAPI = {
                     "params_typed": "float x1, float y1, float x2, float y2, float x3, float y3",
                     "return_type": "void",
                     "desc": "Draw triangle",
-                    "snippet": "drawTriangle(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2}, ${5:x3}, ${6:y3})",
                     "keywords": [
                         "tri",
                         "polygon",
@@ -1335,7 +1283,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 p1, Vec3 p2, Vec3 p3",
                     "return_type": "void",
                     "desc": "Draw triangle",
-                    "snippet": "drawTriangle(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2}, ${5:x3}, ${6:y3})",
                     "keywords": [
                         "tri",
                         "polygon",
@@ -1360,7 +1307,6 @@ const TrussCAPI = {
                     "params_typed": "float size",
                     "return_type": "void",
                     "desc": "Draw 3D box (respects fill/noFill)",
-                    "snippet": "drawBox(${1:size})",
                     "keywords": [
                         "cube",
                         "box",
@@ -1387,7 +1333,6 @@ const TrussCAPI = {
                     "params_typed": "float w, float h, float d",
                     "return_type": "void",
                     "desc": "Draw 3D box (respects fill/noFill)",
-                    "snippet": "drawBox(${1:size})",
                     "keywords": [
                         "cube",
                         "box",
@@ -1414,7 +1359,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z, float size",
                     "return_type": "void",
                     "desc": "Draw 3D box (respects fill/noFill)",
-                    "snippet": "drawBox(${1:size})",
                     "keywords": [
                         "cube",
                         "box",
@@ -1441,7 +1385,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z, float w, float h, float d",
                     "return_type": "void",
                     "desc": "Draw 3D box (respects fill/noFill)",
-                    "snippet": "drawBox(${1:size})",
                     "keywords": [
                         "cube",
                         "box",
@@ -1468,7 +1411,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 pos, float size",
                     "return_type": "void",
                     "desc": "Draw 3D box (respects fill/noFill)",
-                    "snippet": "drawBox(${1:size})",
                     "keywords": [
                         "cube",
                         "box",
@@ -1495,7 +1437,6 @@ const TrussCAPI = {
                     "params_typed": "Vec3 pos, float w, float h, float d",
                     "return_type": "void",
                     "desc": "Draw 3D box (respects fill/noFill)",
-                    "snippet": "drawBox(${1:size})",
                     "keywords": [
                         "cube",
                         "box",
@@ -1518,11 +1459,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawSphere",
-                    "params": "radius",
-                    "params_typed": "float radius",
+                    "params": "radius, [resolution]",
+                    "params_typed": "float radius, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D sphere (respects fill/noFill)",
-                    "snippet": "drawSphere(${1:radius})",
                     "keywords": [
                         "ball",
                         "globe",
@@ -1539,11 +1479,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawSphere",
-                    "params": "x, y, z, radius",
-                    "params_typed": "float x, float y, float z, float radius",
+                    "params": "x, y, z, radius, [resolution]",
+                    "params_typed": "float x, float y, float z, float radius, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D sphere (respects fill/noFill)",
-                    "snippet": "drawSphere(${1:radius})",
                     "keywords": [
                         "ball",
                         "globe",
@@ -1560,11 +1499,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawSphere",
-                    "params": "pos, radius",
-                    "params_typed": "Vec3 pos, float radius",
+                    "params": "pos, radius, [resolution]",
+                    "params_typed": "Vec3 pos, float radius, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D sphere (respects fill/noFill)",
-                    "snippet": "drawSphere(${1:radius})",
                     "keywords": [
                         "ball",
                         "globe",
@@ -1581,11 +1519,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawCone",
-                    "params": "radius, height",
-                    "params_typed": "float radius, float height",
+                    "params": "radius, height, [resolution]",
+                    "params_typed": "float radius, float height, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
-                    "snippet": "drawCone(${1:radius}, ${2:height})",
                     "keywords": [
                         "cone",
                         "pyramid",
@@ -1600,11 +1537,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawCone",
-                    "params": "x, y, z, radius, height",
-                    "params_typed": "float x, float y, float z, float radius, float height",
+                    "params": "x, y, z, radius, height, [resolution]",
+                    "params_typed": "float x, float y, float z, float radius, float height, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
-                    "snippet": "drawCone(${1:radius}, ${2:height})",
                     "keywords": [
                         "cone",
                         "pyramid",
@@ -1619,11 +1555,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawCone",
-                    "params": "pos, radius, height",
-                    "params_typed": "Vec3 pos, float radius, float height",
+                    "params": "pos, radius, height, [resolution]",
+                    "params_typed": "Vec3 pos, float radius, float height, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
-                    "snippet": "drawCone(${1:radius}, ${2:height})",
                     "keywords": [
                         "cone",
                         "pyramid",
@@ -1642,7 +1577,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Begin drawing a shape",
-                    "snippet": "beginShape()",
                     "keywords": [
                         "polygon",
                         "path",
@@ -1679,7 +1613,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "void",
                     "desc": "Add a vertex",
-                    "snippet": "vertex(${1:x}, ${2:y})",
                     "keywords": [
                         "point",
                         "node",
@@ -1713,7 +1646,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "void",
                     "desc": "Add a vertex",
-                    "snippet": "vertex(${1:x}, ${2:y})",
                     "keywords": [
                         "point",
                         "node",
@@ -1747,7 +1679,6 @@ const TrussCAPI = {
                     "params_typed": "const Vec2& v",
                     "return_type": "void",
                     "desc": "Add a vertex",
-                    "snippet": "vertex(${1:x}, ${2:y})",
                     "keywords": [
                         "point",
                         "node",
@@ -1781,7 +1712,6 @@ const TrussCAPI = {
                     "params_typed": "const Vec3& v",
                     "return_type": "void",
                     "desc": "Add a vertex",
-                    "snippet": "vertex(${1:x}, ${2:y})",
                     "keywords": [
                         "point",
                         "node",
@@ -1815,7 +1745,6 @@ const TrussCAPI = {
                     "params_typed": "bool close = false",
                     "return_type": "void",
                     "desc": "End drawing a shape",
-                    "snippet": "endShape()",
                     "keywords": [
                         "close",
                         "finish shape",
@@ -1850,7 +1779,6 @@ const TrussCAPI = {
                     "params_typed": "float cx, float cy, float radius, float angleBegin, float angleEnd",
                     "return_type": "void",
                     "desc": "Append arc vertices to the current shape (use between beginShape/endShape)",
-                    "snippet": "appendArc(${1:cx}, ${2:cy}, ${3:radius}, ${4:0}, ${5:TAU})",
                     "keywords": [
                         "arc",
                         "curve",
@@ -1875,7 +1803,6 @@ const TrussCAPI = {
                     "params_typed": "const Vec2& center, float radius, float angleBegin, float angleEnd",
                     "return_type": "void",
                     "desc": "Append arc vertices to the current shape (use between beginShape/endShape)",
-                    "snippet": "appendArc(${1:cx}, ${2:cy}, ${3:radius}, ${4:0}, ${5:TAU})",
                     "keywords": [
                         "arc",
                         "curve",
@@ -1900,7 +1827,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<Vec3>& points",
                     "return_type": "void",
                     "desc": "Append Catmull-Rom curve vertices to the current shape (use between beginShape/endShape; needs >=4 points, closed=true wraps around)",
-                    "snippet": "appendCurve(${1:points})",
                     "keywords": [
                         "catmull-rom",
                         "spline",
@@ -1919,7 +1845,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<Vec3>& points, bool closed",
                     "return_type": "void",
                     "desc": "Append Catmull-Rom curve vertices to the current shape (use between beginShape/endShape; needs >=4 points, closed=true wraps around)",
-                    "snippet": "appendCurve(${1:points})",
                     "keywords": [
                         "catmull-rom",
                         "spline",
@@ -1938,7 +1863,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Begin drawing a stroke (uses StrokeMesh internally)",
-                    "snippet": "beginStroke()",
                     "keywords": [
                         "thick line",
                         "polyline",
@@ -1975,7 +1899,6 @@ const TrussCAPI = {
                     "params_typed": "bool close = false",
                     "return_type": "void",
                     "desc": "End drawing a stroke",
-                    "snippet": "endStroke()",
                     "keywords": [
                         "thick line",
                         "finish",
@@ -2007,7 +1930,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Begin batch line drawing. Add vertex pairs with vertex(), then call endLines(). Each pair of vertices draws one independent line segment. Use setColor() between vertices for per-line colors.",
-                    "snippet": "beginLines()",
                     "keywords": [
                         "batch",
                         "segments",
@@ -2028,7 +1950,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "End batch line drawing and render all accumulated line segments",
-                    "snippet": "endLines()",
                     "keywords": [
                         "batch",
                         "segments",
@@ -2047,7 +1968,6 @@ const TrussCAPI = {
                     "params_typed": "float x1, float y1, float x2, float y2",
                     "return_type": "void",
                     "desc": "Draw a single stroke segment (thick line with cap/join)",
-                    "snippet": "drawStroke(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
                     "keywords": [
                         "thick line",
                         "cap",
@@ -2069,7 +1989,6 @@ const TrussCAPI = {
                     "params_typed": "const Vec2& p1, const Vec2& p2",
                     "return_type": "void",
                     "desc": "Draw a single stroke segment (thick line with cap/join)",
-                    "snippet": "drawStroke(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
                     "keywords": [
                         "thick line",
                         "cap",
@@ -2088,10 +2007,9 @@ const TrussCAPI = {
                 {
                     "name": "drawBitmapString",
                     "params": "text, x, y",
-                    "params_typed": "const string& text, float x, float y",
+                    "params_typed": "const string& text, float x, float y, bool screenFixed = true",
                     "return_type": "void",
                     "desc": "Draw text",
-                    "snippet": "drawBitmapString(${1:\"text\"}, ${2:x}, ${3:y})",
                     "keywords": [
                         "text",
                         "string",
@@ -2123,7 +2041,6 @@ const TrussCAPI = {
                     "params_typed": "const string& text, float x, float y, const Color& background = Color(0,0,0), const Color& foreground = Color(1,1,1)",
                     "return_type": "void",
                     "desc": "Draw text with background highlight",
-                    "snippet": "drawBitmapStringHighlight(${1:\"text\"}, ${2:x}, ${3:y})",
                     "keywords": [
                         "text",
                         "label",
@@ -2149,7 +2066,6 @@ const TrussCAPI = {
                     "params_typed": "const string& text, float& width, float& height",
                     "return_type": "void",
                     "desc": "Get bitmap string bounding box size",
-                    "snippet": "getBitmapStringBounds(${1:\"text\"}, ${2:w}, ${3:h})",
                     "keywords": [
                         "text size",
                         "bounding box",
@@ -2161,11 +2077,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setTextAlign",
-                    "params": "horizontal",
-                    "params_typed": "TextAlign horizontal",
+                    "params": "h, v",
+                    "params_typed": "Direction h, Direction v",
                     "return_type": "void",
                     "desc": "Set text alignment",
-                    "snippet": "setTextAlign(TextAlign::${1:Left})",
                     "keywords": [
                         "alignment",
                         "justify",
@@ -2191,11 +2106,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setTextAlign",
-                    "params": "horizontal, vertical",
-                    "params_typed": "TextAlign horizontal, TextAlign vertical",
+                    "params": "h, v",
+                    "params_typed": "Direction h, Direction v",
                     "return_type": "void",
                     "desc": "Set text alignment",
-                    "snippet": "setTextAlign(TextAlign::${1:Left})",
                     "keywords": [
                         "alignment",
                         "justify",
@@ -2223,9 +2137,8 @@ const TrussCAPI = {
                     "name": "getTextAlignH",
                     "params": "",
                     "params_typed": "",
-                    "return_type": "TextAlign",
+                    "return_type": "Direction",
                     "desc": "Get horizontal text alignment",
-                    "snippet": "getTextAlignH()",
                     "keywords": [
                         "horizontal",
                         "alignment",
@@ -2239,9 +2152,8 @@ const TrussCAPI = {
                     "name": "getTextAlignV",
                     "params": "",
                     "params_typed": "",
-                    "return_type": "TextAlign",
+                    "return_type": "Direction",
                     "desc": "Get vertical text alignment",
-                    "snippet": "getTextAlignV()",
                     "keywords": [
                         "vertical",
                         "alignment",
@@ -2257,7 +2169,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get bitmap font height",
-                    "snippet": "getBitmapFontHeight()",
                     "keywords": [
                         "text height",
                         "line",
@@ -2273,7 +2184,6 @@ const TrussCAPI = {
                     "params_typed": "const string& text",
                     "return_type": "float",
                     "desc": "Get text width",
-                    "snippet": "getBitmapStringWidth(${1:\"text\"})",
                     "keywords": [
                         "text width",
                         "measure",
@@ -2289,7 +2199,6 @@ const TrussCAPI = {
                     "params_typed": "const string& text",
                     "return_type": "float",
                     "desc": "Get text height",
-                    "snippet": "getBitmapStringHeight(${1:\"text\"})",
                     "keywords": [
                         "text height",
                         "measure",
@@ -2301,11 +2210,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "getBitmapStringBBox",
-                    "params": "text, x, y",
-                    "params_typed": "const string& text, float x, float y",
+                    "params": "text",
+                    "params_typed": "const std::string & text",
                     "return_type": "Rect",
                     "desc": "Get text bounding box",
-                    "snippet": "getBitmapStringBBox(${1:\"text\"}, ${2:x}, ${3:y})",
                     "keywords": [
                         "bounding box",
                         "extent",
@@ -2321,7 +2229,6 @@ const TrussCAPI = {
                     "params_typed": "const bitmapfont::Glyph& g",
                     "return_type": "void",
                     "desc": "Register a bitmap glyph for a Unicode codepoint (extends drawBitmapString)",
-                    "snippet": "bitmapfont::registerGlyph({${1:cp}, ${2:data}, bitmapfont::Width::${3:Fullwidth}})",
                     "keywords": [
                         "glyph",
                         "character",
@@ -2341,7 +2248,6 @@ const TrussCAPI = {
                     "params_typed": "const bitmapfont::Glyph (&glyphs)[N]",
                     "return_type": "void",
                     "desc": "Register a batch of bitmap glyphs at once",
-                    "snippet": "bitmapfont::registerGlyphs(${1:GLYPHS})",
                     "keywords": [
                         "glyphs",
                         "characters",
@@ -2360,7 +2266,6 @@ const TrussCAPI = {
                     "params_typed": "uint32_t cp, const uint8_t* newData",
                     "return_type": "void",
                     "desc": "Swap an already-registered glyph's pixel data (atlas cell unchanged). Useful for per-frame animation.",
-                    "snippet": "bitmapfont::updateGlyph(${1:0xE000}, ${2:newData})",
                     "keywords": [
                         "glyph",
                         "animate",
@@ -2376,7 +2281,6 @@ const TrussCAPI = {
                     "params_typed": "const char* const (&rows)[13]",
                     "return_type": "std::array<uint8_t, 13>",
                     "desc": "Compile-time ASCII art -> packed halfwidth (8x13) glyph bytes. '#' = lit, '.' = empty.",
-                    "snippet": "bitmapfont::compile8x13({${1:rows}})",
                     "keywords": [
                         "ascii art",
                         "glyph",
@@ -2393,7 +2297,6 @@ const TrussCAPI = {
                     "params_typed": "const char* const (&rows)[13]",
                     "return_type": "std::array<uint8_t, 26>",
                     "desc": "Compile-time ASCII art -> packed fullwidth (16x13) glyph bytes. '#' = lit, '.' = empty.",
-                    "snippet": "bitmapfont::compile16x13({${1:rows}})",
                     "keywords": [
                         "ascii art",
                         "glyph",
@@ -2410,7 +2313,6 @@ const TrussCAPI = {
                     "params_typed": "float height",
                     "return_type": "void",
                     "desc": "Set line height for bitmap string newlines (default: 16)",
-                    "snippet": "setBitmapLineHeight(${1:16})",
                     "keywords": [
                         "line spacing",
                         "leading",
@@ -2429,7 +2331,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get line height for bitmap string newlines",
-                    "snippet": "getBitmapLineHeight()",
                     "keywords": [
                         "line spacing",
                         "leading",
@@ -2448,7 +2349,6 @@ const TrussCAPI = {
                     "params_typed": "float fps",
                     "return_type": "void",
                     "desc": "Set target frame rate (VSYNC = -1.0)",
-                    "snippet": "setFps(${1:60.0})",
                     "keywords": [
                         "frame rate",
                         "framerate",
@@ -2485,7 +2385,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Enable fill mode (shapes are solid, no outline)",
-                    "snippet": "fill()",
                     "keywords": [
                         "solid",
                         "filled",
@@ -2518,7 +2417,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Enable stroke mode (shapes show outline only)",
-                    "snippet": "noFill()",
                     "keywords": [
                         "outline",
                         "stroke only",
@@ -2544,7 +2442,6 @@ const TrussCAPI = {
                     "params_typed": "float weight",
                     "return_type": "void",
                     "desc": "Set stroke width",
-                    "snippet": "setStrokeWeight(${1:1.0})",
                     "keywords": [
                         "line width",
                         "thickness",
@@ -2579,7 +2476,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current stroke width",
-                    "snippet": "getStrokeWeight()",
                     "keywords": [
                         "line width",
                         "thickness",
@@ -2597,7 +2493,6 @@ const TrussCAPI = {
                     "params_typed": "StrokeCap cap",
                     "return_type": "void",
                     "desc": "Set stroke cap style (Butt, Round, Square)",
-                    "snippet": "setStrokeCap(StrokeCap::${1:Round})",
                     "keywords": [
                         "line cap",
                         "end cap",
@@ -2634,7 +2529,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "StrokeCap",
                     "desc": "Get current stroke cap style",
-                    "snippet": "getStrokeCap()",
                     "keywords": [
                         "line cap",
                         "end cap",
@@ -2653,7 +2547,6 @@ const TrussCAPI = {
                     "params_typed": "StrokeJoin join",
                     "return_type": "void",
                     "desc": "Set stroke join style (Miter, Round, Bevel)",
-                    "snippet": "setStrokeJoin(StrokeJoin::${1:Round})",
                     "keywords": [
                         "line join",
                         "corner",
@@ -2691,7 +2584,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "StrokeJoin",
                     "desc": "Get current stroke join style",
-                    "snippet": "getStrokeJoin()",
                     "keywords": [
                         "line join",
                         "corner",
@@ -2710,7 +2602,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if fill mode is enabled",
-                    "snippet": "isFillEnabled()",
                     "keywords": [
                         "fill",
                         "solid",
@@ -2725,7 +2616,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if stroke mode is enabled",
-                    "snippet": "isStrokeEnabled()",
                     "keywords": [
                         "stroke",
                         "outline",
@@ -2740,7 +2630,6 @@ const TrussCAPI = {
                     "params_typed": "float pixels",
                     "return_type": "void",
                     "desc": "Set adaptive curve tessellation tolerance in pixels (smaller = smoother, scale-aware)",
-                    "snippet": "setCurveTolerance(${1:0.5})",
                     "keywords": [
                         "smoothness",
                         "tessellation",
@@ -2776,7 +2665,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current curve tessellation tolerance (in pixels)",
-                    "snippet": "getCurveTolerance()",
                     "keywords": [
                         "smoothness",
                         "tessellation",
@@ -2794,7 +2682,6 @@ const TrussCAPI = {
                     "params_typed": "int n",
                     "return_type": "void",
                     "desc": "Set fixed curve segment count (switches off adaptive tolerance mode)",
-                    "snippet": "setCurveResolution(${1:32})",
                     "keywords": [
                         "segments",
                         "subdivisions",
@@ -2820,7 +2707,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get current curve resolution",
-                    "snippet": "getCurveResolution()",
                     "keywords": [
                         "segments",
                         "subdivisions",
@@ -2838,7 +2724,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Save current style state (color, stroke, fill)",
-                    "snippet": "pushStyle()",
                     "keywords": [
                         "save",
                         "state",
@@ -2868,7 +2753,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Restore previous style state",
-                    "snippet": "popStyle()",
                     "keywords": [
                         "restore",
                         "state",
@@ -2898,7 +2782,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Reset style to default values (white color, fill enabled, stroke disabled)",
-                    "snippet": "resetStyle()",
                     "keywords": [
                         "default",
                         "reset",
@@ -2913,7 +2796,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Color",
                     "desc": "Get current fill color",
-                    "snippet": "getColor()",
                     "keywords": [
                         "pixel",
                         "read",
@@ -2940,7 +2822,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float w, float h",
                     "return_type": "void",
                     "desc": "Set scissor clipping rectangle. Also available via RectNode::setClipping(true)",
-                    "snippet": "setScissor(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "clip",
                         "clipping",
@@ -2961,7 +2842,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Reset (disable) scissor clipping",
-                    "snippet": "resetScissor()",
                     "keywords": [
                         "clip",
                         "clipping",
@@ -2977,7 +2857,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float w, float h",
                     "return_type": "void",
                     "desc": "Push scissor clipping rectangle onto stack",
-                    "snippet": "pushScissor(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "clip",
                         "clipping",
@@ -2996,7 +2875,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Pop scissor clipping rectangle from stack",
-                    "snippet": "popScissor()",
                     "keywords": [
                         "clip",
                         "clipping",
@@ -3015,7 +2893,6 @@ const TrussCAPI = {
                     "params_typed": "BlendMode mode",
                     "return_type": "void",
                     "desc": "Set blend mode. BlendMode::Alpha (default), Add, Multiply, Screen, Subtract, Disabled",
-                    "snippet": "setBlendMode(${1:BlendMode::Add})",
                     "keywords": [
                         "blend",
                         "additive",
@@ -3044,7 +2921,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "BlendMode",
                     "desc": "Get current blend mode",
-                    "snippet": "getBlendMode()",
                     "keywords": [
                         "blend",
                         "compositing",
@@ -3063,7 +2939,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Reset blend mode to Alpha (default)",
-                    "snippet": "resetBlendMode()",
                     "keywords": [
                         "blend",
                         "default",
@@ -3085,7 +2960,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Push current style (color, fill, stroke, blend) onto stack",
-                    "snippet": "pushStyle()",
                     "keywords": [
                         "save",
                         "state",
@@ -3111,7 +2985,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Pop style from stack, restoring previous state",
-                    "snippet": "popStyle()",
                     "keywords": [
                         "restore",
                         "state",
@@ -3137,7 +3010,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Reset all style settings to defaults",
-                    "snippet": "resetStyle()",
                     "keywords": [
                         "default",
                         "reset",
@@ -3152,7 +3024,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "CurveStyle::Mode",
                     "desc": "Current curve tessellation mode (fixed segment count vs. adaptive tolerance)",
-                    "snippet": "getCurveMode()",
                     "keywords": [
                         "tessellation",
                         "adaptive",
@@ -3175,7 +3046,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "void",
                     "desc": "Move origin",
-                    "snippet": "translate(${1:x}, ${2:y})",
                     "keywords": [
                         "move",
                         "offset",
@@ -3211,7 +3081,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "void",
                     "desc": "Move origin",
-                    "snippet": "translate(${1:x}, ${2:y})",
                     "keywords": [
                         "move",
                         "offset",
@@ -3247,7 +3116,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "void",
                     "desc": "Rotate by radians (single axis, euler angles, or quaternion)",
-                    "snippet": "rotate(${1:radians})",
                     "keywords": [
                         "spin",
                         "turn",
@@ -3279,7 +3147,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "void",
                     "desc": "Rotate by radians (single axis, euler angles, or quaternion)",
-                    "snippet": "rotate(${1:radians})",
                     "keywords": [
                         "spin",
                         "turn",
@@ -3307,11 +3174,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rotate",
-                    "params": "euler",
-                    "params_typed": "Vec3 euler",
+                    "params": "x, y, z",
+                    "params_typed": "float x, float y, float z",
                     "return_type": "void",
                     "desc": "Rotate by radians (single axis, euler angles, or quaternion)",
-                    "snippet": "rotate(${1:radians})",
                     "keywords": [
                         "spin",
                         "turn",
@@ -3340,10 +3206,9 @@ const TrussCAPI = {
                 {
                     "name": "rotate",
                     "params": "quat",
-                    "params_typed": "Quaternion quat",
+                    "params_typed": "const Quaternion& quat",
                     "return_type": "void",
                     "desc": "Rotate by radians (single axis, euler angles, or quaternion)",
-                    "snippet": "rotate(${1:radians})",
                     "keywords": [
                         "spin",
                         "turn",
@@ -3375,7 +3240,6 @@ const TrussCAPI = {
                     "params_typed": "float degrees",
                     "return_type": "void",
                     "desc": "Rotate by degrees",
-                    "snippet": "rotateDeg(${1:degrees})",
                     "keywords": [
                         "spin",
                         "turn",
@@ -3391,7 +3255,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "void",
                     "desc": "Rotate by degrees",
-                    "snippet": "rotateDeg(${1:degrees})",
                     "keywords": [
                         "spin",
                         "turn",
@@ -3403,11 +3266,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rotateDeg",
-                    "params": "euler",
-                    "params_typed": "Vec3 euler",
+                    "params": "x, y, z",
+                    "params_typed": "float x, float y, float z",
                     "return_type": "void",
                     "desc": "Rotate by degrees",
-                    "snippet": "rotateDeg(${1:degrees})",
                     "keywords": [
                         "spin",
                         "turn",
@@ -3423,7 +3285,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "void",
                     "desc": "Rotate around X axis",
-                    "snippet": "rotateX(${1:radians})",
                     "keywords": [
                         "spin",
                         "pitch",
@@ -3456,7 +3317,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "void",
                     "desc": "Rotate around Y axis",
-                    "snippet": "rotateY(${1:radians})",
                     "keywords": [
                         "spin",
                         "yaw",
@@ -3489,7 +3349,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "void",
                     "desc": "Rotate around Z axis",
-                    "snippet": "rotateZ(${1:radians})",
                     "keywords": [
                         "spin",
                         "roll",
@@ -3508,7 +3367,6 @@ const TrussCAPI = {
                     "params_typed": "float degrees",
                     "return_type": "void",
                     "desc": "Rotate around X axis (degrees)",
-                    "snippet": "rotateXDeg(${1:degrees})",
                     "keywords": [
                         "spin",
                         "pitch",
@@ -3524,7 +3382,6 @@ const TrussCAPI = {
                     "params_typed": "float degrees",
                     "return_type": "void",
                     "desc": "Rotate around Y axis (degrees)",
-                    "snippet": "rotateYDeg(${1:degrees})",
                     "keywords": [
                         "spin",
                         "yaw",
@@ -3540,7 +3397,6 @@ const TrussCAPI = {
                     "params_typed": "float degrees",
                     "return_type": "void",
                     "desc": "Rotate around Z axis (degrees)",
-                    "snippet": "rotateZDeg(${1:degrees})",
                     "keywords": [
                         "spin",
                         "roll",
@@ -3556,7 +3412,6 @@ const TrussCAPI = {
                     "params_typed": "float s",
                     "return_type": "void",
                     "desc": "Scale",
-                    "snippet": "scale(${1:s})",
                     "keywords": [
                         "zoom",
                         "resize",
@@ -3587,7 +3442,6 @@ const TrussCAPI = {
                     "params_typed": "float sx, float sy",
                     "return_type": "void",
                     "desc": "Scale",
-                    "snippet": "scale(${1:s})",
                     "keywords": [
                         "zoom",
                         "resize",
@@ -3618,7 +3472,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Save transform state",
-                    "snippet": "pushMatrix()",
                     "keywords": [
                         "save",
                         "transform",
@@ -3653,7 +3506,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Restore transform state",
-                    "snippet": "popMatrix()",
                     "keywords": [
                         "restore",
                         "transform",
@@ -3687,7 +3539,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Mat4",
                     "desc": "Get current transformation matrix",
-                    "snippet": "getCurrentMatrix()",
                     "keywords": [
                         "transform",
                         "matrix",
@@ -3707,7 +3558,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Reset transformation matrix to identity",
-                    "snippet": "resetMatrix()",
                     "keywords": [
                         "identity",
                         "reset",
@@ -3725,7 +3575,6 @@ const TrussCAPI = {
                     "params_typed": "const Mat4& mat",
                     "return_type": "void",
                     "desc": "Set transformation matrix directly",
-                    "snippet": "setMatrix(${1:mat})",
                     "keywords": [
                         "transform",
                         "matrix",
@@ -3752,7 +3601,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get canvas width",
-                    "snippet": "getWindowWidth()",
                     "keywords": [
                         "width",
                         "canvas",
@@ -3773,7 +3621,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get canvas height",
-                    "snippet": "getWindowHeight()",
                     "keywords": [
                         "height",
                         "canvas",
@@ -3794,7 +3641,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Vec2",
                     "desc": "Get canvas size as Vec2",
-                    "snippet": "getWindowSize()",
                     "keywords": [
                         "size",
                         "dimensions",
@@ -4113,7 +3959,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get mouse X position",
-                    "snippet": "getMouseX()",
                     "keywords": [
                         "mouse",
                         "cursor",
@@ -4148,7 +3993,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get mouse Y position",
-                    "snippet": "getMouseY()",
                     "keywords": [
                         "mouse",
                         "cursor",
@@ -4183,7 +4027,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Vec2",
                     "desc": "Get mouse position as Vec2",
-                    "snippet": "getMousePos()",
                     "keywords": [
                         "mouse",
                         "cursor",
@@ -4205,7 +4048,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Vec2",
                     "desc": "Get global mouse position as Vec2",
-                    "snippet": "getGlobalMousePos()",
                     "keywords": [
                         "mouse",
                         "screen",
@@ -4228,7 +4070,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get global mouse X (screen coordinates, not window-relative)",
-                    "snippet": "getGlobalMouseX()",
                     "keywords": [
                         "mouse",
                         "screen",
@@ -4264,7 +4105,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get global mouse Y (screen coordinates, not window-relative)",
-                    "snippet": "getGlobalMouseY()",
                     "keywords": [
                         "mouse",
                         "screen",
@@ -4300,7 +4140,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get previous frame global mouse X",
-                    "snippet": "getGlobalPMouseX()",
                     "keywords": [
                         "mouse",
                         "previous",
@@ -4327,7 +4166,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get previous frame global mouse Y",
-                    "snippet": "getGlobalPMouseY()",
                     "keywords": [
                         "mouse",
                         "previous",
@@ -4354,7 +4192,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get currently pressed mouse button",
-                    "snippet": "getMouseButton()",
                     "keywords": [
                         "mouse",
                         "button",
@@ -4382,7 +4219,6 @@ const TrussCAPI = {
                     "params_typed": "bool enabled",
                     "return_type": "void",
                     "desc": "Enable/disable touch events firing as mouse events (for Android/iOS)",
-                    "snippet": "setTouchAsMouse(${1:true})",
                     "keywords": [
                         "touch",
                         "tap",
@@ -4403,7 +4239,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Get touchAsMouse state",
-                    "snippet": "getTouchAsMouse()",
                     "keywords": [
                         "touch",
                         "tap",
@@ -4424,7 +4259,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Is mouse button pressed",
-                    "snippet": "isMousePressed()",
                     "keywords": [
                         "mouse",
                         "click",
@@ -4460,7 +4294,6 @@ const TrussCAPI = {
                     "params_typed": "int key",
                     "return_type": "bool",
                     "desc": "Is specific key currently pressed",
-                    "snippet": "isKeyPressed(${1:key})",
                     "keywords": [
                         "key",
                         "keyboard",
@@ -4483,7 +4316,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True while either Shift key (left or right) is held",
-                    "snippet": "isShiftPressed()",
                     "keywords": [
                         "shift",
                         "modifier",
@@ -4505,7 +4337,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True while either Control key (left or right) is held",
-                    "snippet": "isControlPressed()",
                     "keywords": [
                         "control",
                         "ctrl",
@@ -4528,7 +4359,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True while either Alt / Option key (left or right) is held",
-                    "snippet": "isAltPressed()",
                     "keywords": [
                         "alt",
                         "option",
@@ -4551,7 +4381,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True while either Super / Cmd / Win key (left or right) is held",
-                    "snippet": "isSuperPressed()",
                     "keywords": [
                         "super",
                         "cmd",
@@ -4574,7 +4403,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Show the mouse cursor (default)",
-                    "snippet": "showCursor()",
                     "keywords": [
                         "cursor",
                         "mouse",
@@ -4596,7 +4424,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Hide the mouse cursor",
-                    "snippet": "hideCursor()",
                     "keywords": [
                         "cursor",
                         "mouse",
@@ -4618,7 +4445,6 @@ const TrussCAPI = {
                     "params_typed": "Cursor cursor",
                     "return_type": "void",
                     "desc": "Set the mouse cursor shape",
-                    "snippet": "setCursor(${1:Cursor::Hand})",
                     "keywords": [
                         "cursor",
                         "mouse",
@@ -4648,7 +4474,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Cursor",
                     "desc": "Get the current mouse cursor shape",
-                    "snippet": "getCursor()",
                     "keywords": [
                         "cursor",
                         "mouse",
@@ -4670,7 +4495,6 @@ const TrussCAPI = {
                     "params_typed": "Cursor cursor, int width, int height, const unsigned char* pixels, int hotspotX = 0, int hotspotY = 0",
                     "return_type": "void",
                     "desc": "Bind a custom image to a cursor slot (RGBA pixels or Image)",
-                    "snippet": "bindCursorImage(${1:Cursor::Custom0}, ${2:image})",
                     "keywords": [
                         "cursor",
                         "custom",
@@ -4700,7 +4524,6 @@ const TrussCAPI = {
                     "params_typed": "Cursor cursor, const Image& image, int hotspotX = 0, int hotspotY = 0",
                     "return_type": "void",
                     "desc": "Bind a custom image to a cursor slot (RGBA pixels or Image)",
-                    "snippet": "bindCursorImage(${1:Cursor::Custom0}, ${2:image})",
                     "keywords": [
                         "cursor",
                         "custom",
@@ -4730,7 +4553,6 @@ const TrussCAPI = {
                     "params_typed": "Cursor cursor",
                     "return_type": "void",
                     "desc": "Unbind a custom cursor image, restoring the system default",
-                    "snippet": "unbindCursorImage(${1:Cursor::Custom0})",
                     "keywords": [
                         "cursor",
                         "custom",
@@ -4753,7 +4575,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "CoreEvents&",
                     "desc": "Get the global CoreEvents hub holding all framework events (setup, update, draw, keyPressed, mousePressed, etc.); use events().eventName.listen(callback) to subscribe",
-                    "snippet": "events()",
                     "keywords": [
                         "event",
                         "callback",
@@ -4787,7 +4608,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True when an overlay currently has the pointer over it (e.g. cursor over a tcxImGui panel); guard raw mouse input so clicks on UI panels are not also handled by the app",
-                    "snippet": "isOverlayHovered()",
                     "keywords": [
                         "overlay",
                         "ui",
@@ -4809,7 +4629,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True when an overlay currently owns keyboard focus (e.g. a text input is active); guard raw key input so typing into a UI field is not also handled by the app",
-                    "snippet": "isOverlayFocused()",
                     "keywords": [
                         "overlay",
                         "ui",
@@ -4838,7 +4657,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "double",
                     "desc": "Seconds since last frame",
-                    "snippet": "getDeltaTime()",
                     "keywords": [
                         "delta",
                         "dt",
@@ -4870,7 +4688,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "double",
                     "desc": "Current FPS",
-                    "snippet": "getFrameRate()",
                     "keywords": [
                         "fps",
                         "framerate",
@@ -4902,7 +4719,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current FPS (alias for getFrameRate)",
-                    "snippet": "getFps()",
                     "keywords": [
                         "fps",
                         "framerate",
@@ -4934,7 +4750,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "uint64_t",
                     "desc": "Total frames rendered",
-                    "snippet": "getFrameCount()",
                     "keywords": [
                         "frame",
                         "count",
@@ -4952,7 +4767,6 @@ const TrussCAPI = {
                     "params_typed": "int millis",
                     "return_type": "void",
                     "desc": "Block the current thread for the given number of milliseconds",
-                    "snippet": "sleepMillis(${1:millis})",
                     "keywords": [
                         "sleep",
                         "wait",
@@ -4970,7 +4784,6 @@ const TrussCAPI = {
                     "params_typed": "int micros",
                     "return_type": "void",
                     "desc": "Block the current thread for the given number of microseconds",
-                    "snippet": "sleepMicros(${1:micros})",
                     "keywords": [
                         "sleep",
                         "wait",
@@ -4988,7 +4801,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "uint64_t",
                     "desc": "Get the number of update() calls since the app started",
-                    "snippet": "getUpdateCount()",
                     "keywords": [
                         "update",
                         "count",
@@ -5012,7 +4824,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "uint64_t",
                     "desc": "Get the number of draw() calls since the app started",
-                    "snippet": "getDrawCount()",
                     "keywords": [
                         "draw",
                         "count",
@@ -5036,7 +4847,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "FpsSettings",
                     "desc": "Get the current FPS configuration (update/draw target rates, actual VSync rate, sync flag)",
-                    "snippet": "getFpsSettings()",
                     "keywords": [
                         "fps",
                         "framerate",
@@ -5070,7 +4880,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Total bytes allocated by sokol libraries",
-                    "snippet": "getSokolMemoryBytes()",
                     "keywords": [
                         "ram",
                         "allocation",
@@ -5091,7 +4900,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Number of active allocations in sokol libraries",
-                    "snippet": "getSokolMemoryAllocs()",
                     "keywords": [
                         "allocation",
                         "count",
@@ -5112,7 +4920,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Release sokol_gl vertex/command buffers (auto re-allocated on next draw)",
-                    "snippet": "releaseSglBuffers()",
                     "keywords": [
                         "free",
                         "vertex buffer",
@@ -5132,7 +4939,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "size_t",
                     "desc": "Get process memory usage in bytes (platform-specific)",
-                    "snippet": "getMemoryUsage()",
                     "keywords": [
                         "ram",
                         "rss",
@@ -5153,7 +4959,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "size_t",
                     "desc": "Get number of active FBO objects",
-                    "snippet": "getFboCount()",
                     "keywords": [
                         "framebuffer",
                         "render target",
@@ -5174,7 +4979,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "size_t",
                     "desc": "Get number of active Texture objects",
-                    "snippet": "getTextureCount()",
                     "keywords": [
                         "texture",
                         "image",
@@ -5195,7 +4999,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "size_t",
                     "desc": "Get number of active Node objects in scene graph",
-                    "snippet": "getNodeCount()",
                     "keywords": [
                         "scene graph",
                         "objects",
@@ -5223,7 +5026,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True on Web (Emscripten / WASM)",
-                    "snippet": "Platform::isWeb()",
                     "keywords": [
                         "browser",
                         "wasm",
@@ -5244,7 +5046,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True on macOS",
-                    "snippet": "Platform::isMacOS()",
                     "keywords": [
                         "mac",
                         "osx",
@@ -5265,7 +5066,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True on iOS",
-                    "snippet": "Platform::isIOS()",
                     "keywords": [
                         "iphone",
                         "ipad",
@@ -5286,7 +5086,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True on Windows",
-                    "snippet": "Platform::isWindows()",
                     "keywords": [
                         "pc",
                         "win32",
@@ -5306,7 +5105,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True on Android",
-                    "snippet": "Platform::isAndroid()",
                     "keywords": [
                         "mobile",
                         "phone",
@@ -5327,7 +5125,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True on Linux (desktop, excludes Android)",
-                    "snippet": "Platform::isLinux()",
                     "keywords": [
                         "desktop",
                         "unix",
@@ -5347,7 +5144,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True on any Apple platform (macOS or iOS)",
-                    "snippet": "Platform::isApple()",
                     "keywords": [
                         "mac",
                         "ios",
@@ -5368,7 +5164,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True on mobile (iOS or Android)",
-                    "snippet": "Platform::isMobile()",
                     "keywords": [
                         "phone",
                         "ios",
@@ -5389,7 +5184,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True on desktop (macOS, Windows, or Linux)",
-                    "snippet": "Platform::isDesktop()",
                     "keywords": [
                         "pc",
                         "mac",
@@ -5410,7 +5204,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "const char*",
                     "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"",
-                    "snippet": "Platform::name()",
                     "keywords": [
                         "os",
                         "system",
@@ -5431,7 +5224,6 @@ const TrussCAPI = {
                     "params_typed": "bool enabled",
                     "return_type": "void",
                     "desc": "Hide system UI for immersive fullscreen. Android: sticky immersive (status + navigation bars). iOS: hides status bar + home indicator. Desktop: no-op",
-                    "snippet": "setImmersiveMode(${1:true})",
                     "keywords": [
                         "fullscreen",
                         "hide ui",
@@ -5465,7 +5257,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Return whether immersive mode is currently enabled",
-                    "snippet": "getImmersiveMode()",
                     "keywords": [
                         "fullscreen",
                         "hide ui",
@@ -5496,7 +5287,6 @@ const TrussCAPI = {
                     "params_typed": "Pixels& outPixels",
                     "return_type": "bool",
                     "desc": "Capture the current window contents into a Pixels object. Returns true on success",
-                    "snippet": "captureWindow(${1:outPixels})",
                     "keywords": [
                         "screenshot",
                         "grab",
@@ -5527,7 +5317,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get system output volume (0.0-1.0)",
-                    "snippet": "getSystemVolume()",
                     "keywords": [
                         "sound",
                         "audio",
@@ -5560,7 +5349,6 @@ const TrussCAPI = {
                     "params_typed": "float volume",
                     "return_type": "void",
                     "desc": "Set system output volume (0.0-1.0). iOS: not supported by the OS (logs a warning)",
-                    "snippet": "setSystemVolume(${1:volume})",
                     "keywords": [
                         "sound",
                         "audio",
@@ -5586,7 +5374,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get screen brightness (0.0-1.0). iOS: linear. Android: gamma-corrected (perceptual). Desktop: returns -1 (not supported)",
-                    "snippet": "getSystemBrightness()",
                     "keywords": [
                         "screen",
                         "display",
@@ -5619,7 +5406,6 @@ const TrussCAPI = {
                     "params_typed": "float brightness",
                     "return_type": "void",
                     "desc": "Set screen brightness (0.0-1.0). Meaning of the value differs by platform (iOS linear, Android perceptual). Desktop: not supported",
-                    "snippet": "setSystemBrightness(${1:brightness})",
                     "keywords": [
                         "screen",
                         "display",
@@ -5645,7 +5431,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "ThermalState",
                     "desc": "Get the coarse-grained device thermal state (Nominal / Fair / Serious / Critical)",
-                    "snippet": "getThermalState()",
                     "keywords": [
                         "heat",
                         "temperature",
@@ -5679,7 +5464,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get device temperature in Celsius, or -1 if unavailable",
-                    "snippet": "getThermalTemperature()",
                     "keywords": [
                         "heat",
                         "celsius",
@@ -5705,7 +5489,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get battery charge level (0.0-1.0), or -1 if unavailable (e.g. desktop without a battery)",
-                    "snippet": "getBatteryLevel()",
                     "keywords": [
                         "battery",
                         "power",
@@ -5739,7 +5522,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Return true if the battery is currently charging",
-                    "snippet": "isBatteryCharging()",
                     "keywords": [
                         "battery",
                         "power",
@@ -5772,7 +5554,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Vec3",
                     "desc": "Get accelerometer reading in g-force (1.0 = Earth gravity). Mobile only; desktop returns zero",
-                    "snippet": "getAccelerometer()",
                     "keywords": [
                         "motion",
                         "gravity",
@@ -5805,7 +5586,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Vec3",
                     "desc": "Get gyroscope angular velocity in rad/s. Mobile only; desktop returns zero",
-                    "snippet": "getGyroscope()",
                     "keywords": [
                         "rotation",
                         "angular",
@@ -5838,7 +5618,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Quaternion",
                     "desc": "Get the fused device attitude (accelerometer + gyroscope + magnetometer) as a quaternion. Mobile only",
-                    "snippet": "getDeviceOrientation()",
                     "keywords": [
                         "attitude",
                         "tilt",
@@ -5873,7 +5652,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get compass heading in radians (0 = north, clockwise). Mobile only",
-                    "snippet": "getCompassHeading()",
                     "keywords": [
                         "magnetometer",
                         "north",
@@ -5906,7 +5684,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Return true when the proximity sensor detects a nearby object (e.g. phone held to the ear)",
-                    "snippet": "isProximityClose()",
                     "keywords": [
                         "proximity",
                         "near",
@@ -5938,7 +5715,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Location",
                     "desc": "Get the most recent GPS / WiFi location fix. Starts location updates on the first call",
-                    "snippet": "getLocation()",
                     "keywords": [
                         "gps",
                         "geolocation",
@@ -5978,7 +5754,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True when running on OpenGL (core or GLES3)",
-                    "snippet": "GraphicsBackend::isOpenGL()",
                     "keywords": [
                         "gl",
                         "gles",
@@ -5998,7 +5773,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True when running on Apple Metal",
-                    "snippet": "GraphicsBackend::isMetal()",
                     "keywords": [
                         "apple",
                         "mtl",
@@ -6019,7 +5793,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True when running on Direct3D 11",
-                    "snippet": "GraphicsBackend::isD3D11()",
                     "keywords": [
                         "directx",
                         "direct3d",
@@ -6040,7 +5813,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True when running on WebGPU",
-                    "snippet": "GraphicsBackend::isWebGPU()",
                     "keywords": [
                         "wgpu",
                         "browser",
@@ -6061,7 +5833,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True when running on WebGL2 (GLES3 under Emscripten)",
-                    "snippet": "GraphicsBackend::isWebGL2()",
                     "keywords": [
                         "gles3",
                         "browser",
@@ -6082,7 +5853,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True when running on Vulkan",
-                    "snippet": "GraphicsBackend::isVulkan()",
                     "keywords": [
                         "vk",
                         "renderer",
@@ -6101,7 +5871,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "const char*",
                     "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"",
-                    "snippet": "GraphicsBackend::name()",
                     "keywords": [
                         "renderer",
                         "driver",
@@ -6129,7 +5898,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "const char*",
                     "desc": "Build date in \"YYYY-MM-DD\" form (local time, CMake configure time)",
-                    "snippet": "BuildInfo::date()",
                     "keywords": [
                         "compile",
                         "build",
@@ -6150,7 +5918,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "const char*",
                     "desc": "Build time in \"HH:MM:SS\" form (local time)",
-                    "snippet": "BuildInfo::time()",
                     "keywords": [
                         "compile",
                         "build",
@@ -6171,7 +5938,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "const char*",
                     "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)",
-                    "snippet": "BuildInfo::dateTime()",
                     "keywords": [
                         "compile",
                         "build",
@@ -6193,7 +5959,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int64_t",
                     "desc": "Build timestamp as Unix seconds (UTC)",
-                    "snippet": "BuildInfo::timestamp()",
                     "keywords": [
                         "compile",
                         "build",
@@ -6214,7 +5979,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Build year (e.g. 2026)",
-                    "snippet": "BuildInfo::year()",
                     "keywords": [
                         "compile",
                         "build",
@@ -6235,7 +5999,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Build month (1-12)",
-                    "snippet": "BuildInfo::month()",
                     "keywords": [
                         "compile",
                         "build",
@@ -6254,7 +6017,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Build day of month (1-31)",
-                    "snippet": "BuildInfo::day()",
                     "keywords": [
                         "compile",
                         "build",
@@ -6274,7 +6036,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Build hour (0-23)",
-                    "snippet": "BuildInfo::hour()",
                     "keywords": [
                         "compile",
                         "build",
@@ -6294,7 +6055,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Build minute (0-59)",
-                    "snippet": "BuildInfo::minute()",
                     "keywords": [
                         "compile",
                         "build",
@@ -6314,7 +6074,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Build second (0-59)",
-                    "snippet": "BuildInfo::second()",
                     "keywords": [
                         "compile",
                         "build",
@@ -6341,7 +6100,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Elapsed seconds (float)",
-                    "snippet": "getElapsedTimef()",
                     "keywords": [
                         "elapsed",
                         "time",
@@ -6363,9 +6121,8 @@ const TrussCAPI = {
                     "name": "getElapsedTime",
                     "params": "",
                     "params_typed": "",
-                    "return_type": "float",
+                    "return_type": "double",
                     "desc": "Elapsed seconds (alias for getElapsedTimef)",
-                    "snippet": "getElapsedTime()",
                     "keywords": [
                         "elapsed",
                         "time",
@@ -6393,7 +6150,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "uint64_t",
                     "desc": "Elapsed milliseconds (int64)",
-                    "snippet": "getElapsedTimeMillis()",
                     "keywords": [
                         "elapsed",
                         "time",
@@ -6417,7 +6173,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "uint64_t",
                     "desc": "Elapsed microseconds (int64)",
-                    "snippet": "getElapsedTimeMicros()",
                     "keywords": [
                         "elapsed",
                         "time",
@@ -6435,7 +6190,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Reset elapsed time",
-                    "snippet": "resetElapsedTimeCounter()",
                     "keywords": [
                         "reset",
                         "elapsed",
@@ -6460,7 +6214,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "uint64_t",
                     "desc": "Unix time in milliseconds",
-                    "snippet": "getSystemTimeMillis()",
                     "keywords": [
                         "unix",
                         "epoch",
@@ -6478,7 +6231,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "uint64_t",
                     "desc": "Unix time in microseconds",
-                    "snippet": "getSystemTimeMicros()",
                     "keywords": [
                         "unix",
                         "epoch",
@@ -6496,7 +6248,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "uint64_t",
                     "desc": "Current Unix timestamp in seconds",
-                    "snippet": "getUnixTime()",
                     "keywords": [
                         "unix",
                         "epoch",
@@ -6514,7 +6265,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "string",
                     "desc": "Formatted timestamp",
-                    "snippet": "getTimestampString()",
                     "keywords": [
                         "timestamp",
                         "datetime",
@@ -6542,7 +6292,6 @@ const TrussCAPI = {
                     "params_typed": "const string& format",
                     "return_type": "string",
                     "desc": "Formatted timestamp",
-                    "snippet": "getTimestampString()",
                     "keywords": [
                         "timestamp",
                         "datetime",
@@ -6577,7 +6326,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Current seconds (0-59)",
-                    "snippet": "getSeconds()",
                     "keywords": [
                         "seconds",
                         "clock",
@@ -6601,7 +6349,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Current minutes (0-59)",
-                    "snippet": "getMinutes()",
                     "keywords": [
                         "minutes",
                         "clock",
@@ -6625,7 +6372,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Current hours (0-23)",
-                    "snippet": "getHours()",
                     "keywords": [
                         "hours",
                         "clock",
@@ -6649,7 +6395,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Current year",
-                    "snippet": "getYear()",
                     "keywords": [
                         "year",
                         "date",
@@ -6673,7 +6418,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Current month (1-12)",
-                    "snippet": "getMonth()",
                     "keywords": [
                         "month",
                         "date",
@@ -6697,7 +6441,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Current day (1-31)",
-                    "snippet": "getDay()",
                     "keywords": [
                         "day",
                         "date",
@@ -6721,7 +6464,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Weekday (0=Sun, 6=Sat)",
-                    "snippet": "getWeekday()",
                     "keywords": [
                         "weekday",
                         "day",
@@ -6752,7 +6494,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Random number",
-                    "snippet": "random()",
                     "keywords": [
                         "rand",
                         "rng",
@@ -6780,7 +6521,6 @@ const TrussCAPI = {
                     "params_typed": "float max",
                     "return_type": "float",
                     "desc": "Random number",
-                    "snippet": "random()",
                     "keywords": [
                         "rand",
                         "rng",
@@ -6808,7 +6548,6 @@ const TrussCAPI = {
                     "params_typed": "float min, float max",
                     "return_type": "float",
                     "desc": "Random number",
-                    "snippet": "random()",
                     "keywords": [
                         "rand",
                         "rng",
@@ -6836,7 +6575,6 @@ const TrussCAPI = {
                     "params_typed": "int max",
                     "return_type": "int",
                     "desc": "Random integer",
-                    "snippet": "randomInt(${1:max})",
                     "keywords": [
                         "rand",
                         "rng",
@@ -6857,7 +6595,6 @@ const TrussCAPI = {
                     "params_typed": "int min, int max",
                     "return_type": "int",
                     "desc": "Random integer",
-                    "snippet": "randomInt(${1:max})",
                     "keywords": [
                         "rand",
                         "rng",
@@ -6878,7 +6615,6 @@ const TrussCAPI = {
                     "params_typed": "unsigned int seed",
                     "return_type": "void",
                     "desc": "Set random seed",
-                    "snippet": "randomSeed(${1:seed})",
                     "keywords": [
                         "seed",
                         "rng",
@@ -6898,7 +6634,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Perlin noise",
-                    "snippet": "noise(${1:x})",
                     "keywords": [
                         "perlin",
                         "simplex",
@@ -6926,7 +6661,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "float",
                     "desc": "Perlin noise",
-                    "snippet": "noise(${1:x})",
                     "keywords": [
                         "perlin",
                         "simplex",
@@ -6954,7 +6688,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "float",
                     "desc": "Perlin noise",
-                    "snippet": "noise(${1:x})",
                     "keywords": [
                         "perlin",
                         "simplex",
@@ -6982,7 +6715,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Perlin noise (-1.0 to 1.0)",
-                    "snippet": "signedNoise(${1:x})",
                     "keywords": [
                         "perlin",
                         "simplex",
@@ -7003,7 +6735,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "float",
                     "desc": "Perlin noise (-1.0 to 1.0)",
-                    "snippet": "signedNoise(${1:x})",
                     "keywords": [
                         "perlin",
                         "simplex",
@@ -7024,7 +6755,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "float",
                     "desc": "Perlin noise (-1.0 to 1.0)",
-                    "snippet": "signedNoise(${1:x})",
                     "keywords": [
                         "perlin",
                         "simplex",
@@ -7045,7 +6775,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z, float w",
                     "return_type": "float",
                     "desc": "Perlin noise (-1.0 to 1.0)",
-                    "snippet": "signedNoise(${1:x})",
                     "keywords": [
                         "perlin",
                         "simplex",
@@ -7066,7 +6795,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, int octaves = 4, float lacunarity = 2.0, float gain = 0.5",
                     "return_type": "float",
                     "desc": "Fractal Brownian Motion noise",
-                    "snippet": "fbm(${1:x}, ${2:y})",
                     "keywords": [
                         "fractal",
                         "perlin",
@@ -7094,7 +6822,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z, int octaves = 4, float lacunarity = 2.0, float gain = 0.5",
                     "return_type": "float",
                     "desc": "Fractal Brownian Motion noise",
-                    "snippet": "fbm(${1:x}, ${2:y})",
                     "keywords": [
                         "fractal",
                         "perlin",
@@ -7129,7 +6856,6 @@ const TrussCAPI = {
                     "params_typed": "float a, float b, float t",
                     "return_type": "float",
                     "desc": "Linear interpolation",
-                    "snippet": "lerp(${1:a}, ${2:b}, ${3:t})",
                     "keywords": [
                         "interpolate",
                         "mix",
@@ -7161,7 +6887,6 @@ const TrussCAPI = {
                     "params_typed": "float v, float min, float max",
                     "return_type": "float",
                     "desc": "Clamp value to range",
-                    "snippet": "clamp(${1:v}, ${2:min}, ${3:max})",
                     "keywords": [
                         "limit",
                         "constrain",
@@ -7197,7 +6922,6 @@ const TrussCAPI = {
                     "params_typed": "float v, float inMin, float inMax, float outMin, float outMax",
                     "return_type": "float",
                     "desc": "Remap value from one range to another",
-                    "snippet": "remap(${1:v}, ${2:inMin}, ${3:inMax}, ${4:outMin}, ${5:outMax})",
                     "keywords": [
                         "map",
                         "rescale",
@@ -7227,7 +6951,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Sine",
-                    "snippet": "sin(${1:x})",
                     "keywords": [
                         "sine",
                         "wave",
@@ -7256,7 +6979,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Cosine",
-                    "snippet": "cos(${1:x})",
                     "keywords": [
                         "cosine",
                         "wave",
@@ -7292,7 +7014,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Tangent",
-                    "snippet": "tan(${1:x})",
                     "keywords": [
                         "tangent",
                         "slope",
@@ -7312,7 +7033,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Arc sine",
-                    "snippet": "asin(${1:x})",
                     "keywords": [
                         "arcsine",
                         "inverse sine",
@@ -7331,7 +7051,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Arc cosine",
-                    "snippet": "acos(${1:x})",
                     "keywords": [
                         "arccosine",
                         "inverse cosine",
@@ -7350,7 +7069,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Arc tangent",
-                    "snippet": "atan(${1:x})",
                     "keywords": [
                         "arctangent",
                         "inverse tangent",
@@ -7369,7 +7087,6 @@ const TrussCAPI = {
                     "params_typed": "float y, float x",
                     "return_type": "float",
                     "desc": "Arc tangent of y/x",
-                    "snippet": "atan2(${1:y}, ${2:x})",
                     "keywords": [
                         "arctangent",
                         "angle",
@@ -7391,7 +7108,6 @@ const TrussCAPI = {
                     "params_typed": "float degrees",
                     "return_type": "float",
                     "desc": "Degrees to radians",
-                    "snippet": "deg2rad(${1:degrees})",
                     "keywords": [
                         "degrees",
                         "radians",
@@ -7411,7 +7127,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "float",
                     "desc": "Radians to degrees",
-                    "snippet": "rad2deg(${1:radians})",
                     "keywords": [
                         "radians",
                         "degrees",
@@ -7444,7 +7159,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Absolute value",
-                    "snippet": "abs(${1:x})",
                     "keywords": [
                         "absolute",
                         "magnitude",
@@ -7478,7 +7192,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Square root",
-                    "snippet": "sqrt(${1:x})",
                     "keywords": [
                         "square root",
                         "radical",
@@ -7508,7 +7221,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Square (x*x)",
-                    "snippet": "sq(${1:x})",
                     "keywords": [
                         "square",
                         "squared",
@@ -7528,7 +7240,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "float",
                     "desc": "Power (x^y)",
-                    "snippet": "pow(${1:x}, ${2:y})",
                     "keywords": [
                         "power",
                         "exponent",
@@ -7554,7 +7265,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Natural logarithm",
-                    "snippet": "log(${1:x})",
                     "keywords": [
                         "logarithm",
                         "ln",
@@ -7573,7 +7283,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Exponential (e^x)",
-                    "snippet": "exp(${1:x})",
                     "keywords": [
                         "exponential",
                         "euler",
@@ -7592,7 +7301,6 @@ const TrussCAPI = {
                     "params_typed": "float a, float b",
                     "return_type": "float",
                     "desc": "Minimum",
-                    "snippet": "min(${1:a}, ${2:b})",
                     "keywords": [
                         "minimum",
                         "smallest",
@@ -7626,7 +7334,6 @@ const TrussCAPI = {
                     "params_typed": "float a, float b",
                     "return_type": "float",
                     "desc": "Maximum",
-                    "snippet": "max(${1:a}, ${2:b})",
                     "keywords": [
                         "maximum",
                         "largest",
@@ -7656,7 +7363,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Round down",
-                    "snippet": "floor(${1:x})",
                     "keywords": [
                         "round down",
                         "truncate",
@@ -7686,7 +7392,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Round up",
-                    "snippet": "ceil(${1:x})",
                     "keywords": [
                         "ceiling",
                         "round up",
@@ -7705,7 +7410,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Round to nearest",
-                    "snippet": "round(${1:x})",
                     "keywords": [
                         "nearest",
                         "rounding",
@@ -7724,7 +7428,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "float",
                     "desc": "Floating-point modulo",
-                    "snippet": "fmod(${1:x}, ${2:y})",
                     "keywords": [
                         "modulo",
                         "remainder",
@@ -7759,7 +7462,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Sign (-1, 0, 1)",
-                    "snippet": "sign(${1:x})",
                     "keywords": [
                         "signum",
                         "negative",
@@ -7778,7 +7480,6 @@ const TrussCAPI = {
                     "params_typed": "float x",
                     "return_type": "float",
                     "desc": "Fractional part",
-                    "snippet": "fract(${1:x})",
                     "keywords": [
                         "fractional",
                         "decimal",
@@ -7799,7 +7500,6 @@ const TrussCAPI = {
                     "params_typed": "float value, float min, float max",
                     "return_type": "float",
                     "desc": "Wrap value within range [min, max)",
-                    "snippet": "wrap(${1:value}, ${2:min}, ${3:max})",
                     "keywords": [
                         "modulo",
                         "loop",
@@ -7821,7 +7521,6 @@ const TrussCAPI = {
                     "params_typed": "float angle1, float angle2",
                     "return_type": "float",
                     "desc": "Shortest angle difference in radians [-TAU/2, TAU/2]",
-                    "snippet": "angleDifference(${1:angle1}, ${2:angle2})",
                     "keywords": [
                         "angle",
                         "shortest",
@@ -7843,7 +7542,6 @@ const TrussCAPI = {
                     "params_typed": "float deg1, float deg2",
                     "return_type": "float",
                     "desc": "Shortest angle difference in degrees [-180, 180]",
-                    "snippet": "angleDifferenceDeg(${1:deg1}, ${2:deg2})",
                     "keywords": [
                         "angle",
                         "shortest",
@@ -7864,7 +7562,6 @@ const TrussCAPI = {
                     "params_typed": "vector<float>& signal, WindowType type",
                     "return_type": "void",
                     "desc": "Apply a window function (in place) to a signal to reduce spectral leakage before FFT",
-                    "snippet": "applyWindow(${1:signal}, ${2:type})",
                     "keywords": [
                         "windowing",
                         "hann",
@@ -7885,7 +7582,6 @@ const TrussCAPI = {
                     "params_typed": "vector<complex<float>>& signal, WindowType type",
                     "return_type": "void",
                     "desc": "Apply a window function (in place) to a signal to reduce spectral leakage before FFT",
-                    "snippet": "applyWindow(${1:signal}, ${2:type})",
                     "keywords": [
                         "windowing",
                         "hann",
@@ -7906,7 +7602,6 @@ const TrussCAPI = {
                     "params_typed": "int n",
                     "return_type": "bool",
                     "desc": "Return true if n is a positive power of two",
-                    "snippet": "isPowerOfTwo(${1:n})",
                     "keywords": [
                         "power of two",
                         "pow2",
@@ -7922,7 +7617,6 @@ const TrussCAPI = {
                     "params_typed": "int n",
                     "return_type": "int",
                     "desc": "Return the smallest power of two greater than or equal to n",
-                    "snippet": "nextPowerOfTwo(${1:n})",
                     "keywords": [
                         "power of two",
                         "pow2",
@@ -7938,7 +7632,6 @@ const TrussCAPI = {
                     "params_typed": "vector<complex<float>>& data",
                     "return_type": "void",
                     "desc": "In-place forward FFT (Cooley-Tukey radix-2); the data size must be a power of two",
-                    "snippet": "fft(${1:data})",
                     "keywords": [
                         "fourier",
                         "frequency",
@@ -7955,7 +7648,6 @@ const TrussCAPI = {
                     "params_typed": "vector<complex<float>>& data",
                     "return_type": "void",
                     "desc": "In-place inverse FFT; the data size must be a power of two",
-                    "snippet": "ifft(${1:data})",
                     "keywords": [
                         "inverse fourier",
                         "frequency",
@@ -7971,7 +7663,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<float>& real",
                     "return_type": "vector<complex<float>>",
                     "desc": "Convert a real-valued signal into a complex array with zero imaginary parts",
-                    "snippet": "toComplex(${1:real})",
                     "keywords": [
                         "complex",
                         "imaginary",
@@ -7987,7 +7678,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<float>& signal",
                     "return_type": "vector<complex<float>>",
                     "desc": "Compute the FFT of a real-valued signal, optionally applying a window function first",
-                    "snippet": "fftReal(${1:signal})",
                     "keywords": [
                         "fourier",
                         "frequency",
@@ -8017,7 +7707,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<float>& signal, WindowType window",
                     "return_type": "vector<complex<float>>",
                     "desc": "Compute the FFT of a real-valued signal, optionally applying a window function first",
-                    "snippet": "fftReal(${1:signal})",
                     "keywords": [
                         "fourier",
                         "frequency",
@@ -8047,7 +7736,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<complex<float>>& spectrum",
                     "return_type": "vector<float>",
                     "desc": "Return the magnitude (amplitude) of each bin in a spectrum",
-                    "snippet": "fftMagnitude(${1:spectrum})",
                     "keywords": [
                         "amplitude",
                         "spectrum",
@@ -8066,7 +7754,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<complex<float>>& spectrum, float minDb = -100.0f",
                     "return_type": "vector<float>",
                     "desc": "Return the magnitude of each bin in decibels, clamped to minDb",
-                    "snippet": "fftMagnitudeDb(${1:spectrum})",
                     "keywords": [
                         "decibel",
                         "amplitude",
@@ -8083,7 +7770,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<complex<float>>& spectrum",
                     "return_type": "vector<float>",
                     "desc": "Return the phase angle (radians) of each bin in a spectrum",
-                    "snippet": "fftPhase(${1:spectrum})",
                     "keywords": [
                         "phase",
                         "angle",
@@ -8099,7 +7785,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<complex<float>>& spectrum",
                     "return_type": "vector<float>",
                     "desc": "Return the power spectrum (magnitude squared) of each bin",
-                    "snippet": "fftPower(${1:spectrum})",
                     "keywords": [
                         "power",
                         "spectrum",
@@ -8115,7 +7800,6 @@ const TrussCAPI = {
                     "params_typed": "int bin, int fftSize, int sampleRate",
                     "return_type": "float",
                     "desc": "Convert an FFT bin index to its frequency in Hz",
-                    "snippet": "binToFrequency(${1:bin}, ${2:fftSize}, ${3:sampleRate})",
                     "keywords": [
                         "bin",
                         "frequency",
@@ -8132,7 +7816,6 @@ const TrussCAPI = {
                     "params_typed": "float freq, int fftSize, int sampleRate",
                     "return_type": "int",
                     "desc": "Convert a frequency in Hz to the nearest FFT bin index",
-                    "snippet": "frequencyToBin(${1:freq}, ${2:fftSize}, ${3:sampleRate})",
                     "keywords": [
                         "frequency",
                         "bin",
@@ -8149,7 +7832,6 @@ const TrussCAPI = {
                     "params_typed": "WindowType type, int i, int n",
                     "return_type": "float",
                     "desc": "Return the window coefficient for sample i of n for the given window type",
-                    "snippet": "windowFunction(${1:type}, ${2:i}, ${3:n})",
                     "keywords": [
                         "window",
                         "hann",
@@ -8177,7 +7859,6 @@ const TrussCAPI = {
                     "params_typed": "float x1, float y1, float x2, float y2",
                     "return_type": "float",
                     "desc": "Distance between points",
-                    "snippet": "dist(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
                     "keywords": [
                         "distance",
                         "length",
@@ -8198,7 +7879,6 @@ const TrussCAPI = {
                     "params_typed": "float x1, float y1, float x2, float y2",
                     "return_type": "float",
                     "desc": "Squared distance",
-                    "snippet": "distSquared(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
                     "keywords": [
                         "distance",
                         "squared",
@@ -8226,7 +7906,6 @@ const TrussCAPI = {
                     "params_typed": "const string& title",
                     "return_type": "void",
                     "desc": "Set window title",
-                    "snippet": "setWindowTitle(${1:\"title\"})",
                     "keywords": [
                         "caption",
                         "name",
@@ -8246,7 +7925,6 @@ const TrussCAPI = {
                     "params_typed": "int width, int height",
                     "return_type": "void",
                     "desc": "Set window size",
-                    "snippet": "setWindowSize(${1:800}, ${2:600})",
                     "keywords": [
                         "resize",
                         "dimensions",
@@ -8267,7 +7945,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "IVec2",
                     "desc": "Get window position in screen coordinates (top-left origin). macOS/Windows only; other platforms return (-1, -1)",
-                    "snippet": "getWindowPosition()",
                     "keywords": [
                         "location",
                         "screen",
@@ -8294,7 +7971,6 @@ const TrussCAPI = {
                     "params_typed": "int x, int y",
                     "return_type": "void",
                     "desc": "Set window position in screen coordinates (top-left origin). macOS/Windows only; no-op on other platforms",
-                    "snippet": "setWindowPosition(${1:100}, ${2:100})",
                     "keywords": [
                         "move",
                         "location",
@@ -8321,7 +7997,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Toggle fullscreen mode",
-                    "snippet": "toggleFullscreen()",
                     "keywords": [
                         "fullscreen",
                         "maximize",
@@ -8348,7 +8023,6 @@ const TrussCAPI = {
                     "params_typed": "const string& text",
                     "return_type": "void",
                     "desc": "Copy text to clipboard",
-                    "snippet": "setClipboardString(${1:\"text\"})",
                     "keywords": [
                         "copy",
                         "paste",
@@ -8373,7 +8047,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "string",
                     "desc": "Get text from clipboard",
-                    "snippet": "getClipboardString()",
                     "keywords": [
                         "paste",
                         "clipboard",
@@ -8398,7 +8071,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get display DPI scale factor (e.g. 2.0 for Retina)",
-                    "snippet": "getDpiScale()",
                     "keywords": [
                         "retina",
                         "hidpi",
@@ -8419,7 +8091,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get framebuffer width in pixels (window width * DPI scale)",
-                    "snippet": "getFramebufferWidth()",
                     "keywords": [
                         "pixels",
                         "retina",
@@ -8441,7 +8112,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get framebuffer height in pixels (window height * DPI scale)",
-                    "snippet": "getFramebufferHeight()",
                     "keywords": [
                         "pixels",
                         "retina",
@@ -8463,7 +8133,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get window aspect ratio (width / height)",
-                    "snippet": "getAspectRatio()",
                     "keywords": [
                         "ratio",
                         "proportion",
@@ -8483,7 +8152,6 @@ const TrussCAPI = {
                     "params_typed": "Orientation mask",
                     "return_type": "void",
                     "desc": "Set allowed screen orientations (mobile). Values: Orientation::Portrait, Landscape, All",
-                    "snippet": "setOrientation(${1:Orientation::All})",
                     "keywords": [
                         "portrait",
                         "landscape",
@@ -8511,7 +8179,6 @@ const TrussCAPI = {
                     "params_typed": "bool enabled",
                     "return_type": "void",
                     "desc": "Prevent display sleep / auto-lock while the app is running. Supported: Android, iOS, macOS, Windows. Linux / Web: no-op",
-                    "snippet": "setKeepScreenOn(${1:true})",
                     "keywords": [
                         "wake lock",
                         "no sleep",
@@ -8540,7 +8207,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check whether keep-screen-on is currently enabled",
-                    "snippet": "getKeepScreenOn()",
                     "keywords": [
                         "wake lock",
                         "no sleep",
@@ -8567,7 +8233,6 @@ const TrussCAPI = {
                     "params_typed": "float updateFps, float drawFps",
                     "return_type": "void",
                     "desc": "Set independent update and draw frame rates",
-                    "snippet": "setIndependentFps(${1:60}, ${2:30})",
                     "keywords": [
                         "framerate",
                         "update rate",
@@ -8601,7 +8266,6 @@ const TrussCAPI = {
                     "params_typed": "Pixels& outPixels",
                     "return_type": "bool",
                     "desc": "Capture current screen to Pixels",
-                    "snippet": "grabScreen(${1:pixels})",
                     "keywords": [
                         "screenshot",
                         "capture",
@@ -8623,7 +8287,6 @@ const TrussCAPI = {
                     "params_typed": "const std::filesystem::path& path",
                     "return_type": "bool",
                     "desc": "Save a screenshot of the rendered frame (png/jpg/bmp). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written.",
-                    "snippet": "saveScreenshot(${1:\"shot.png\"})",
                     "keywords": [
                         "screenshot",
                         "capture",
@@ -8645,7 +8308,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path, const VideoRecordSettings& settings = {}",
                     "return_type": "bool",
                     "desc": "Start recording the window to a video file (native encoder, no ffmpeg)",
-                    "snippet": "startRecording(${1:\"out.mp4\"})",
                     "keywords": [
                         "record",
                         "video",
@@ -8677,7 +8339,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Stop the current recording and finalize the file",
-                    "snippet": "stopRecording()",
                     "keywords": [
                         "record",
                         "video",
@@ -8699,7 +8360,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check whether a recording is in progress",
-                    "snippet": "isRecording()",
                     "keywords": [
                         "record",
                         "video",
@@ -8720,7 +8380,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Number of frames captured so far in the current recording",
-                    "snippet": "recordingFrameCount()",
                     "keywords": [
                         "record",
                         "frames",
@@ -8741,7 +8400,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "const string&",
                     "desc": "Output file path of the current recording",
-                    "snippet": "recordingPath()",
                     "keywords": [
                         "record",
                         "file",
@@ -8762,7 +8420,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if window is fullscreen",
-                    "snippet": "isFullscreen()",
                     "keywords": [
                         "fullscreen",
                         "maximized",
@@ -8782,7 +8439,6 @@ const TrussCAPI = {
                     "params_typed": "bool fullscreen",
                     "return_type": "void",
                     "desc": "Set fullscreen mode",
-                    "snippet": "setFullscreen(${1:true})",
                     "keywords": [
                         "fullscreen",
                         "maximize",
@@ -8802,7 +8458,6 @@ const TrussCAPI = {
                     "params_typed": "int count = 1",
                     "return_type": "void",
                     "desc": "Request extra redraws (useful for event-driven rendering)",
-                    "snippet": "redraw()",
                     "keywords": [
                         "repaint",
                         "refresh",
@@ -8828,7 +8483,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "string",
                     "desc": "Get the active graphics backend name (e.g. \"Metal (macOS)\", \"D3D11\", \"OpenGL\", \"WebGPU\")",
-                    "snippet": "getBackendName()",
                     "keywords": [
                         "renderer",
                         "graphics",
@@ -8849,7 +8503,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Activate and raise the application window, giving it focus. Desktop only; no-op on mobile/web",
-                    "snippet": "bringWindowToFront()",
                     "keywords": [
                         "focus",
                         "raise",
@@ -8877,7 +8530,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get the DPI scale of the main display (available before window creation). macOS: 1.0 or 2.0 (Retina); other platforms: 1.0",
-                    "snippet": "getDisplayScaleFactor()",
                     "keywords": [
                         "retina",
                         "hidpi",
@@ -8898,7 +8550,6 @@ const TrussCAPI = {
                     "params_typed": "bool decorated",
                     "return_type": "void",
                     "desc": "Toggle the window's standard decorations (title bar, borders, buttons). false = borderless but still focusable and closable. Desktop only",
-                    "snippet": "setWindowDecorated(${1:true})",
                     "keywords": [
                         "borderless",
                         "titlebar",
@@ -8926,7 +8577,6 @@ const TrussCAPI = {
                     "params_typed": "int width, int height",
                     "return_type": "void",
                     "desc": "Resize the window to the given logical size (logical pixels)",
-                    "snippet": "setWindowSizeLogical(${1:width}, ${2:height})",
                     "keywords": [
                         "resize",
                         "logical pixels",
@@ -8953,7 +8603,6 @@ const TrussCAPI = {
                     "params_typed": "const HeadlessSettings& settings = HeadlessSettings()",
                     "return_type": "int",
                     "desc": "Run an app class without a window or graphics context (update loop only). Template on the app type; returns the process exit code",
-                    "snippet": "runHeadlessApp<${1:AppClass}>()",
                     "keywords": [
                         "headless",
                         "no window",
@@ -8977,11 +8626,10 @@ const TrussCAPI = {
             "functions": [
                 {
                     "name": "logNotice",
-                    "params": "message",
-                    "params_typed": "const string& message",
-                    "return_type": "void",
+                    "params": "[module]",
+                    "params_typed": "const std::string & module = \"\"",
+                    "return_type": "LogStream",
                     "desc": "Print to console",
-                    "snippet": "logNotice(${1:\"message\"})",
                     "keywords": [
                         "log",
                         "print",
@@ -9002,8 +8650,7 @@ const TrussCAPI = {
                     "params": "src, nbytes, out, codec",
                     "params_typed": "const void* src, size_t nbytes, vector<uint8_t>& out, Codec codec",
                     "return_type": "bool",
-                    "desc": "Compress a byte buffer with the given codec (Codec::None or Codec::LZ4). The vector form resizes out and returns bool; the raw form writes into dst (capacity dstCapacity) and returns the number of bytes written (or -1), useful for compressing into a region of a buffer / parallel chunks",
-                    "snippet": "compress(${1:src}, ${2:nbytes}, ${3:out}, ${4:Codec::LZ4})",
+                    "desc": "Compress a byte buffer with the given codec (Codec::None or Codec::LZ4). Resizes out and returns true on success.",
                     "keywords": [
                         "zip",
                         "lz4",
@@ -9011,31 +8658,8 @@ const TrussCAPI = {
                         "pack",
                         "shrink"
                     ],
-                    "desc_ja": "バイト列を指定コーデック（Codec::None / Codec::LZ4）で圧縮する。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込み、書き込みバイト数（失敗 -1）を返す（バッファの一部への圧縮・並列チャンク向け）",
-                    "desc_ko": "지정한 코덱(Codec::None / Codec::LZ4)으로 바이트 버퍼를 압축. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환 (버퍼 일부 압축·병렬 청크용)",
-                    "related": [
-                        "Codec",
-                        "compressBound",
-                        "decompress",
-                        "toBase64"
-                    ]
-                },
-                {
-                    "name": "compress",
-                    "params": "src, nbytes, dst, dstCapacity, codec",
-                    "params_typed": "const void* src, size_t nbytes, void* dst, size_t dstCapacity, Codec codec",
-                    "return_type": "bool",
-                    "desc": "Compress a byte buffer with the given codec (Codec::None or Codec::LZ4). The vector form resizes out and returns bool; the raw form writes into dst (capacity dstCapacity) and returns the number of bytes written (or -1), useful for compressing into a region of a buffer / parallel chunks",
-                    "snippet": "compress(${1:src}, ${2:nbytes}, ${3:out}, ${4:Codec::LZ4})",
-                    "keywords": [
-                        "zip",
-                        "lz4",
-                        "deflate",
-                        "pack",
-                        "shrink"
-                    ],
-                    "desc_ja": "バイト列を指定コーデック（Codec::None / Codec::LZ4）で圧縮する。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込み、書き込みバイト数（失敗 -1）を返す（バッファの一部への圧縮・並列チャンク向け）",
-                    "desc_ko": "지정한 코덱(Codec::None / Codec::LZ4)으로 바이트 버퍼를 압축. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환 (버퍼 일부 압축·병렬 청크용)",
+                    "desc_ja": "バイト列を指定コーデック（Codec::None / Codec::LZ4）で圧縮する。out をリサイズして成功時 true を返す",
+                    "desc_ko": "지정한 코덱(Codec::None / Codec::LZ4)으로 바이트 버퍼를 압축. out을 리사이즈하고 성공 시 true 반환",
                     "related": [
                         "Codec",
                         "compressBound",
@@ -9048,8 +8672,7 @@ const TrussCAPI = {
                     "params": "src, nbytes, out, decompressedSize, codec",
                     "params_typed": "const void* src, size_t nbytes, vector<uint8_t>& out, size_t decompressedSize, Codec codec",
                     "return_type": "bool",
-                    "desc": "Decompress a byte buffer; decompressedSize is the known original byte count. The vector form resizes out and returns bool; the raw form writes into dst (capacity dstCapacity) and returns bytes written (or -1) - it can write into a region of an existing buffer (dst + offset), enabling parallel per-chunk decompression",
-                    "snippet": "decompress(${1:src}, ${2:nbytes}, ${3:out}, ${4:decompressedSize}, ${5:Codec::LZ4})",
+                    "desc": "Decompress a byte buffer; decompressedSize is the known original byte count. Resizes out and returns true on success (false / cleared out on size mismatch or failure).",
                     "keywords": [
                         "unzip",
                         "lz4",
@@ -9057,30 +8680,8 @@ const TrussCAPI = {
                         "unpack",
                         "extract"
                     ],
-                    "desc_ja": "バイト列を展開する。decompressedSize は元の（展開後）バイト数。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込みバイト数（失敗 -1）を返し、既存バッファの途中（dst + offset）にも書ける（並列チャンク展開向け）",
-                    "desc_ko": "바이트 버퍼를 해제. decompressedSize는 원본 바이트 수. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환하며 기존 버퍼 일부(dst + offset)에도 쓸 수 있음 (병렬 청크 해제용)",
-                    "related": [
-                        "Codec",
-                        "compress",
-                        "compressBound"
-                    ]
-                },
-                {
-                    "name": "decompress",
-                    "params": "src, nbytes, dst, dstCapacity, codec",
-                    "params_typed": "const void* src, size_t nbytes, void* dst, size_t dstCapacity, Codec codec",
-                    "return_type": "bool",
-                    "desc": "Decompress a byte buffer; decompressedSize is the known original byte count. The vector form resizes out and returns bool; the raw form writes into dst (capacity dstCapacity) and returns bytes written (or -1) - it can write into a region of an existing buffer (dst + offset), enabling parallel per-chunk decompression",
-                    "snippet": "decompress(${1:src}, ${2:nbytes}, ${3:out}, ${4:decompressedSize}, ${5:Codec::LZ4})",
-                    "keywords": [
-                        "unzip",
-                        "lz4",
-                        "inflate",
-                        "unpack",
-                        "extract"
-                    ],
-                    "desc_ja": "バイト列を展開する。decompressedSize は元の（展開後）バイト数。vector版は out をリサイズして bool を返す。raw版は dst（容量 dstCapacity）に書き込みバイト数（失敗 -1）を返し、既存バッファの途中（dst + offset）にも書ける（並列チャンク展開向け）",
-                    "desc_ko": "바이트 버퍼를 해제. decompressedSize는 원본 바이트 수. vector형은 out을 리사이즈하고 bool 반환, raw형은 dst(용량 dstCapacity)에 써서 바이트 수(실패 -1) 반환하며 기존 버퍼 일부(dst + offset)에도 쓸 수 있음 (병렬 청크 해제용)",
+                    "desc_ja": "バイト列を展開する。decompressedSize は元の（展開後）バイト数。out をリサイズして成功時 true を返す（サイズ不一致・失敗時は false で out をクリア）",
+                    "desc_ko": "바이트 버퍼를 해제. decompressedSize는 원본 바이트 수. out을 리사이즈하고 성공 시 true 반환 (크기 불일치·실패 시 false, out 비움)",
                     "related": [
                         "Codec",
                         "compress",
@@ -9093,7 +8694,6 @@ const TrussCAPI = {
                     "params_typed": "value",
                     "return_type": "string",
                     "desc": "Convert to string",
-                    "snippet": "toString(${1:value})",
                     "keywords": [
                         "stringify",
                         "format",
@@ -9124,7 +8724,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Play a beep sound",
-                    "snippet": "beep()",
                     "keywords": [
                         "sound",
                         "alert",
@@ -9151,7 +8750,6 @@ const TrussCAPI = {
                     "params_typed": "float frequency",
                     "return_type": "void",
                     "desc": "Play a beep sound",
-                    "snippet": "beep()",
                     "keywords": [
                         "sound",
                         "alert",
@@ -9178,7 +8776,6 @@ const TrussCAPI = {
                     "params_typed": "const string& str",
                     "return_type": "int",
                     "desc": "Convert string to int",
-                    "snippet": "toInt(${1:str})",
                     "keywords": [
                         "parse",
                         "integer",
@@ -9200,7 +8797,6 @@ const TrussCAPI = {
                     "params_typed": "const string& str",
                     "return_type": "float",
                     "desc": "Convert string to float",
-                    "snippet": "toFloat(${1:str})",
                     "keywords": [
                         "parse",
                         "atof",
@@ -9218,11 +8814,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "splitString",
-                    "params": "source, delimiter",
-                    "params_typed": "const string& source, const string& delimiter",
-                    "return_type": "vector<string>",
+                    "params": "source, delimiter, [ignoreEmpty], [trim]",
+                    "params_typed": "const std::string & source, const std::string & delimiter, bool ignoreEmpty = false, bool trim = false",
+                    "return_type": "std::vector<std::string>",
                     "desc": "Split string by delimiter",
-                    "snippet": "splitString(${1:str}, ${2:delimiter})",
                     "keywords": [
                         "tokenize",
                         "explode",
@@ -9250,7 +8845,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<string>& elements, const string& delimiter",
                     "return_type": "string",
                     "desc": "Join strings with delimiter",
-                    "snippet": "joinString(${1:elements}, ${2:delimiter})",
                     "keywords": [
                         "concat",
                         "implode",
@@ -9277,7 +8871,6 @@ const TrussCAPI = {
                     "params_typed": "string& input, const string& searchStr, const string& replaceStr",
                     "return_type": "void",
                     "desc": "Replace substring in place",
-                    "snippet": "stringReplace(${1:str}, ${2:search}, ${3:replace})",
                     "keywords": [
                         "substitute",
                         "find replace",
@@ -9298,7 +8891,6 @@ const TrussCAPI = {
                     "params_typed": "const string& src",
                     "return_type": "string",
                     "desc": "Convert to lower case",
-                    "snippet": "toLower(${1:str})",
                     "keywords": [
                         "lowercase",
                         "downcase",
@@ -9327,7 +8919,6 @@ const TrussCAPI = {
                     "params_typed": "const string& src",
                     "return_type": "string",
                     "desc": "Convert to upper case",
-                    "snippet": "toUpper(${1:str})",
                     "keywords": [
                         "uppercase",
                         "upcase",
@@ -9353,7 +8944,6 @@ const TrussCAPI = {
                     "params_typed": "float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2, float& ox, float& oy, float& ow, float& oh",
                     "return_type": "void",
                     "desc": "Compute intersection of two rectangles",
-                    "snippet": "intersectRect(${1:x1}, ${2:y1}, ${3:w1}, ${4:h1}, ${5:x2}, ${6:y2}, ${7:w2}, ${8:h2}, ${9:ox}, ${10:oy}, ${11:ow}, ${12:oh})",
                     "keywords": [
                         "overlap",
                         "rectangle",
@@ -9374,7 +8964,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Opt in to the MCP debugger tools, letting an AI agent drive the app: input injection (mouse_click, key_press, mouse_move, scroll) plus node selection and scene mutation (select_node, set_node_members). Call once in setup(); calling it IS the opt-in (there is no separate enable step). The tools do nothing unless the MCP server is running (TRUSSC_MCP=1), so it is safe to leave in. Read-only inspection — screenshots and the node tree — needs no opt-in and is always available when MCP is on.",
-                    "snippet": "mcp::registerDebuggerTools()",
                     "keywords": [
                         "mcp",
                         "ai",
@@ -9397,7 +8986,6 @@ const TrussCAPI = {
                     "params_typed": "const string& module = \"\"",
                     "return_type": "LogStream",
                     "desc": "Stream-based verbose-level log output",
-                    "snippet": "logVerbose() << ${1:value}",
                     "keywords": [
                         "log",
                         "verbose",
@@ -9428,7 +9016,6 @@ const TrussCAPI = {
                     "params_typed": "const string& module = \"\"",
                     "return_type": "LogStream",
                     "desc": "Stream-based warning-level log output",
-                    "snippet": "logWarning() << ${1:value}",
                     "keywords": [
                         "log",
                         "warn",
@@ -9455,7 +9042,6 @@ const TrussCAPI = {
                     "params_typed": "const string& module = \"\"",
                     "return_type": "LogStream",
                     "desc": "Stream-based error-level log output",
-                    "snippet": "logError() << ${1:value}",
                     "keywords": [
                         "log",
                         "error",
@@ -9486,7 +9072,6 @@ const TrussCAPI = {
                     "params_typed": "const string& module = \"\"",
                     "return_type": "LogStream",
                     "desc": "Stream-based fatal-level log output",
-                    "snippet": "logFatal() << ${1:value}",
                     "keywords": [
                         "log",
                         "fatal",
@@ -9507,7 +9092,6 @@ const TrussCAPI = {
                     "params_typed": "LogLevel level = LogLevel::Notice",
                     "return_type": "LogStream",
                     "desc": "Stream-based log output at a runtime-selected level",
-                    "snippet": "logAt(${1:LogLevel::Warning}) << ${2:value}",
                     "keywords": [
                         "log",
                         "level",
@@ -9528,7 +9112,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Logger&",
                     "desc": "Access the global logger instance",
-                    "snippet": "getLogger()",
                     "keywords": [
                         "log",
                         "logger",
@@ -9549,7 +9132,6 @@ const TrussCAPI = {
                     "params_typed": "LogLevel level",
                     "return_type": "void",
                     "desc": "Set the minimum log level printed to the console",
-                    "snippet": "setConsoleLogLevel(${1:LogLevel::Notice})",
                     "keywords": [
                         "log",
                         "level",
@@ -9578,7 +9160,6 @@ const TrussCAPI = {
                     "params_typed": "LogLevel level",
                     "return_type": "void",
                     "desc": "Set the minimum log level written to the log file",
-                    "snippet": "setFileLogLevel(${1:LogLevel::Notice})",
                     "keywords": [
                         "log",
                         "level",
@@ -9600,7 +9181,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "bool",
                     "desc": "Open a file to receive log output",
-                    "snippet": "setLogFile(${1:\"log.txt\"})",
                     "keywords": [
                         "log",
                         "file",
@@ -9621,7 +9201,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Close the current log file",
-                    "snippet": "closeLogFile()",
                     "keywords": [
                         "log",
                         "file",
@@ -9640,7 +9219,6 @@ const TrussCAPI = {
                     "params_typed": "size_t nbytes, Codec codec",
                     "return_type": "size_t",
                     "desc": "Worst-case compressed size, for sizing a destination buffer",
-                    "snippet": "compressBound(${1:nbytes}, ${2:Codec::LZ4})",
                     "keywords": [
                         "size",
                         "buffer",
@@ -9662,7 +9240,6 @@ const TrussCAPI = {
                     "params_typed": "const string& str",
                     "return_type": "int64_t",
                     "desc": "Parse a string into a 64-bit integer",
-                    "snippet": "toInt64(${1:str})",
                     "keywords": [
                         "parse",
                         "long",
@@ -9683,7 +9260,6 @@ const TrussCAPI = {
                     "params_typed": "const string& str",
                     "return_type": "double",
                     "desc": "Parse a string into a double",
-                    "snippet": "toDouble(${1:str})",
                     "keywords": [
                         "parse",
                         "convert",
@@ -9704,7 +9280,6 @@ const TrussCAPI = {
                     "params_typed": "const string& str",
                     "return_type": "bool",
                     "desc": "Parse a string into a bool",
-                    "snippet": "toBool(${1:str})",
                     "keywords": [
                         "parse",
                         "boolean",
@@ -9724,7 +9299,6 @@ const TrussCAPI = {
                     "params_typed": "int value",
                     "return_type": "string",
                     "desc": "Convert an integer to a binary string",
-                    "snippet": "toBinary(${1:value})",
                     "keywords": [
                         "binary",
                         "bits",
@@ -9750,7 +9324,6 @@ const TrussCAPI = {
                     "params_typed": "const string& hexStr",
                     "return_type": "int",
                     "desc": "Parse a hex string into a signed int",
-                    "snippet": "hexToInt(${1:hexStr})",
                     "keywords": [
                         "hex",
                         "hexadecimal",
@@ -9778,7 +9351,6 @@ const TrussCAPI = {
                     "params_typed": "const string& hexStr",
                     "return_type": "unsigned int",
                     "desc": "Parse a hex string into an unsigned int",
-                    "snippet": "hexToUInt(${1:hexStr})",
                     "keywords": [
                         "hex",
                         "hexadecimal",
@@ -9799,7 +9371,6 @@ const TrussCAPI = {
                     "params_typed": "const unsigned char* bytes, size_t len",
                     "return_type": "string",
                     "desc": "Encode raw bytes as a Base64 string",
-                    "snippet": "toBase64(${1:bytes}, ${2:len})",
                     "keywords": [
                         "base64",
                         "encode",
@@ -9819,7 +9390,6 @@ const TrussCAPI = {
                     "params_typed": "const string& haystack, const string& needle",
                     "return_type": "bool",
                     "desc": "Check whether one string contains another",
-                    "snippet": "isStringInString(${1:haystack}, ${2:needle})",
                     "keywords": [
                         "contains",
                         "find",
@@ -9846,7 +9416,6 @@ const TrussCAPI = {
                     "params_typed": "const string& haystack, const string& needle",
                     "return_type": "size_t",
                     "desc": "Count occurrences of a substring in a string",
-                    "snippet": "stringTimesInString(${1:haystack}, ${2:needle})",
                     "keywords": [
                         "count",
                         "occurrences",
@@ -9873,7 +9442,6 @@ const TrussCAPI = {
                     "params_typed": "const string& src",
                     "return_type": "string",
                     "desc": "Trim whitespace from both ends of a string",
-                    "snippet": "trim(${1:src})",
                     "keywords": [
                         "strip",
                         "whitespace",
@@ -9900,7 +9468,6 @@ const TrussCAPI = {
                     "params_typed": "const string& src",
                     "return_type": "string",
                     "desc": "Trim leading whitespace from a string",
-                    "snippet": "trimFront(${1:src})",
                     "keywords": [
                         "strip",
                         "leading",
@@ -9921,7 +9488,6 @@ const TrussCAPI = {
                     "params_typed": "const string& src",
                     "return_type": "string",
                     "desc": "Trim trailing whitespace from a string",
-                    "snippet": "trimBack(${1:src})",
                     "keywords": [
                         "strip",
                         "trailing",
@@ -9942,7 +9508,6 @@ const TrussCAPI = {
                     "params_typed": "const string& str",
                     "return_type": "Json",
                     "desc": "Parse a JSON string into a Json object; returns an empty Json on parse error.",
-                    "snippet": "parseJson(${1:str})",
                     "keywords": [
                         "json",
                         "parse",
@@ -9963,7 +9528,6 @@ const TrussCAPI = {
                     "params_typed": "const Json& j, int indent = 2",
                     "return_type": "string",
                     "desc": "Serialize a Json object to a string. indent sets the pretty-print width (negative for compact).",
-                    "snippet": "toJsonString(${1:j})",
                     "keywords": [
                         "json",
                         "serialize",
@@ -9991,7 +9555,6 @@ const TrussCAPI = {
                     "params_typed": "const string& str",
                     "return_type": "Xml",
                     "desc": "Parse an XML string into an Xml object.",
-                    "snippet": "parseXml(${1:str})",
                     "keywords": [
                         "xml",
                         "parse",
@@ -10011,7 +9574,6 @@ const TrussCAPI = {
                     "params_typed": "T& obj",
                     "return_type": "Json",
                     "desc": "Return all reflected (TC_REFLECT) members of obj as a Json object. Works on any reflected type such as a Node or Mod.",
-                    "snippet": "reflectToJson(${1:obj})",
                     "keywords": [
                         "serialize",
                         "reflection",
@@ -10033,7 +9595,6 @@ const TrussCAPI = {
                     "params_typed": "T& obj, const Json& j",
                     "return_type": "JsonReadReflector",
                     "desc": "Apply the keys of a Json object onto obj's reflected (TC_REFLECT) members. Returns the reflector so callers can inspect which members were applied, skipped, read-only, or unknown.",
-                    "snippet": "reflectFromJson(${1:obj}, ${2:json})",
                     "keywords": [
                         "deserialize",
                         "reflection",
@@ -10055,7 +9616,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Whether the calling thread is the main (scene) thread. The main thread ID is recorded on the first call to getMainThreadId().",
-                    "snippet": "isMainThread()",
                     "keywords": [
                         "thread",
                         "main",
@@ -10074,7 +9634,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "thread::id",
                     "desc": "Get the main thread ID. Records the current thread's ID on the first call, so it must first be called from the main thread.",
-                    "snippet": "getMainThreadId()",
                     "keywords": [
                         "thread",
                         "main",
@@ -10100,7 +9659,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "string",
                     "desc": "Get full path relative to data directory",
-                    "snippet": "getDataPath(${1:path})",
                     "keywords": [
                         "data",
                         "resource",
@@ -10132,7 +9690,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "string",
                     "desc": "Get absolute path",
-                    "snippet": "getAbsolutePath(${1:path})",
                     "keywords": [
                         "absolute",
                         "full path",
@@ -10152,7 +9709,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "string",
                     "desc": "Get filename from path",
-                    "snippet": "getFileName(${1:path})",
                     "keywords": [
                         "basename",
                         "filename",
@@ -10187,7 +9743,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "string",
                     "desc": "Get filename without extension",
-                    "snippet": "getBaseName(${1:path})",
                     "keywords": [
                         "stem",
                         "name",
@@ -10217,7 +9772,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "string",
                     "desc": "Get file extension without dot",
-                    "snippet": "getFileExtension(${1:path})",
                     "keywords": [
                         "extension",
                         "ext",
@@ -10252,7 +9806,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "string",
                     "desc": "Get parent directory",
-                    "snippet": "getParentDirectory(${1:path})",
                     "keywords": [
                         "parent",
                         "dirname",
@@ -10283,7 +9836,6 @@ const TrussCAPI = {
                     "params_typed": "const string& dir, const string& file",
                     "return_type": "string",
                     "desc": "Join directory and filename",
-                    "snippet": "joinPath(${1:dir}, ${2:file})",
                     "keywords": [
                         "combine",
                         "concat",
@@ -10314,7 +9866,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "string",
                     "desc": "Get absolute path",
-                    "snippet": "getAbsolutePath(${1:path})",
                     "keywords": [
                         "absolute",
                         "full path",
@@ -10330,7 +9881,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "bool",
                     "desc": "Check if file exists",
-                    "snippet": "fileExists(${1:path})",
                     "keywords": [
                         "exists",
                         "check",
@@ -10361,7 +9911,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "bool",
                     "desc": "Check if directory exists",
-                    "snippet": "directoryExists(${1:path})",
                     "keywords": [
                         "exists",
                         "folder",
@@ -10393,7 +9942,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "bool",
                     "desc": "Create directory (and parents)",
-                    "snippet": "createDirectory(${1:path})",
                     "keywords": [
                         "mkdir",
                         "make folder",
@@ -10419,7 +9967,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "vector<string>",
                     "desc": "List files in directory",
-                    "snippet": "listDirectory(${1:path})",
                     "keywords": [
                         "ls",
                         "readdir",
@@ -10450,7 +9997,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "bool",
                     "desc": "Remove file",
-                    "snippet": "removeFile(${1:path})",
                     "keywords": [
                         "delete",
                         "rm",
@@ -10470,7 +10016,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "int64_t",
                     "desc": "Get file size in bytes",
-                    "snippet": "getFileSize(${1:path})",
                     "keywords": [
                         "size",
                         "bytes",
@@ -10490,7 +10035,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "string",
                     "desc": "Load entire text file",
-                    "snippet": "loadTextFile(${1:path})",
                     "keywords": [
                         "read",
                         "open",
@@ -10512,7 +10056,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path, const string& content",
                     "return_type": "bool",
                     "desc": "Save string to text file",
-                    "snippet": "saveTextFile(${1:path}, ${2:content})",
                     "keywords": [
                         "write",
                         "save",
@@ -10534,7 +10077,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path, const string& content",
                     "return_type": "bool",
                     "desc": "Append string to file",
-                    "snippet": "appendToFile(${1:path}, ${2:content})",
                     "keywords": [
                         "append",
                         "write",
@@ -10549,56 +10091,11 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "createFileWriter",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "FileWriter@",
-                    "desc": "Create a file writer (TrussSketch factory)",
-                    "snippet": "FileWriter@ writer = createFileWriter();",
-                    "keywords": [
-                        "write",
-                        "stream",
-                        "output",
-                        "file",
-                        "writer"
-                    ],
-                    "desc_ja": "ファイルライターを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "파일 라이터를 생성 (TrussSketch 팩토리)",
-                    "related": [
-                        "FileWriter",
-                        "createFileReader",
-                        "saveTextFile"
-                    ]
-                },
-                {
-                    "name": "createFileReader",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "FileReader@",
-                    "desc": "Create a file reader (TrussSketch factory)",
-                    "snippet": "FileReader@ reader = createFileReader();",
-                    "keywords": [
-                        "read",
-                        "stream",
-                        "input",
-                        "file",
-                        "reader"
-                    ],
-                    "desc_ja": "ファイルリーダーを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "파일 리더를 생성 (TrussSketch 팩토리)",
-                    "related": [
-                        "FileReader",
-                        "createFileWriter",
-                        "loadTextFile"
-                    ]
-                },
-                {
                     "name": "loadJson",
                     "params": "path",
                     "params_typed": "const string& path",
                     "return_type": "Json",
                     "desc": "Load a JSON file and return it as a Json object. Relative paths are resolved via getDataPath; returns an empty Json on error.",
-                    "snippet": "loadJson(${1:path})",
                     "keywords": [
                         "json",
                         "read",
@@ -10627,7 +10124,6 @@ const TrussCAPI = {
                     "params_typed": "const Json& j, const string& path, int indent = 2",
                     "return_type": "bool",
                     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath. indent sets the pretty-print width (negative for compact). Returns true on success.",
-                    "snippet": "saveJson(${1:j}, ${2:path})",
                     "keywords": [
                         "json",
                         "write",
@@ -10656,7 +10152,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "Xml",
                     "desc": "Load an XML file and return it as an Xml object. Relative paths are resolved via getDataPath.",
-                    "snippet": "loadXml(${1:path})",
                     "keywords": [
                         "xml",
                         "read",
@@ -10683,7 +10178,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path",
                     "return_type": "void",
                     "desc": "Set the root directory used to resolve relative data paths. A relative path is resolved against the executable directory; an absolute path (starting with /) is used as-is. A trailing slash is added automatically.",
-                    "snippet": "setDataPathRoot(${1:path})",
                     "keywords": [
                         "data",
                         "root",
@@ -10705,7 +10199,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "string",
                     "desc": "Get the current data path root (with trailing slash).",
-                    "snippet": "getDataPathRoot()",
                     "keywords": [
                         "data",
                         "root",
@@ -10726,7 +10219,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms.",
-                    "snippet": "setDataPathToResources()",
                     "keywords": [
                         "bundle",
                         "resources",
@@ -10747,7 +10239,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "string",
                     "desc": "Get the absolute path of the running executable.",
-                    "snippet": "getExecutablePath()",
                     "keywords": [
                         "exe",
                         "executable",
@@ -10776,7 +10267,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "string",
                     "desc": "Get the directory containing the running executable (with trailing slash).",
-                    "snippet": "getExecutableDir()",
                     "keywords": [
                         "exe",
                         "executable",
@@ -10813,7 +10303,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create a sound player",
-                    "snippet": "Sound()",
                     "keywords": [
                         "audio",
                         "player",
@@ -10842,33 +10331,11 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "createSound",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Sound@",
-                    "desc": "Create a sound player (TrussSketch factory)",
-                    "snippet": "Sound@ snd = createSound();",
-                    "keywords": [
-                        "audio",
-                        "player",
-                        "factory",
-                        "new",
-                        "instantiate"
-                    ],
-                    "desc_ja": "サウンドプレイヤーを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "사운드 플레이어를 생성 (TrussSketch 팩토리)",
-                    "related": [
-                        "Sound",
-                        "createChipBundle"
-                    ]
-                },
-                {
                     "name": "load",
                     "params": "path",
                     "params_typed": "const string& path",
                     "return_type": "bool",
                     "desc": "Load sound file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a",
-                    "snippet": "load(${1:\"sound.wav\"})",
                     "keywords": [
                         "open",
                         "read",
@@ -10884,7 +10351,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path, int maxPolyphony = 1",
                     "return_type": "bool",
                     "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count.",
-                    "snippet": "loadStream(${1:\"music.wav\"})",
                     "keywords": [
                         "streaming",
                         "disk",
@@ -10914,7 +10380,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True if this Sound was loaded via loadStream() (vs eager load())",
-                    "snippet": "isStreaming()",
                     "keywords": [
                         "streaming",
                         "stream",
@@ -10930,7 +10395,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Play sound",
-                    "snippet": "play()",
                     "keywords": [
                         "start",
                         "resume",
@@ -10950,7 +10414,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Stop sound",
-                    "snippet": "stop()",
                     "keywords": [
                         "halt",
                         "end",
@@ -10966,7 +10429,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Pause playback (resume() to continue)",
-                    "snippet": "pause()",
                     "keywords": [
                         "hold",
                         "suspend",
@@ -10984,7 +10446,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Resume paused playback",
-                    "snippet": "resume()",
                     "keywords": [
                         "continue",
                         "unpause",
@@ -11002,7 +10463,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True while playing (false if stopped, paused, or never played)",
-                    "snippet": "isPlaying()",
                     "keywords": [
                         "playing",
                         "active",
@@ -11018,7 +10478,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True while paused",
-                    "snippet": "isPaused()",
                     "keywords": [
                         "paused",
                         "frozen",
@@ -11034,7 +10493,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True after a successful load() / loadStream() / loadTestTone()",
-                    "snippet": "isLoaded()",
                     "keywords": [
                         "ready",
                         "loaded",
@@ -11050,7 +10508,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current playback position in seconds",
-                    "snippet": "getPosition()",
                     "keywords": [
                         "progress",
                         "playhead",
@@ -11069,7 +10526,6 @@ const TrussCAPI = {
                     "params_typed": "float seconds",
                     "return_type": "void",
                     "desc": "Seek to a specific time in seconds. On streams, costs ~10 ms blackout while the ring refills.",
-                    "snippet": "setPosition(${1:5.0})",
                     "keywords": [
                         "seek",
                         "jump",
@@ -11089,7 +10545,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get total duration of the loaded sound in seconds",
-                    "snippet": "getDuration()",
                     "keywords": [
                         "length",
                         "total time",
@@ -11105,7 +10560,6 @@ const TrussCAPI = {
                     "params_typed": "float vol",
                     "return_type": "void",
                     "desc": "Set volume (0.0-1.0)",
-                    "snippet": "setVolume(${1:0.8})",
                     "keywords": [
                         "audio",
                         "loudness",
@@ -11124,7 +10578,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current volume",
-                    "snippet": "getVolume()",
                     "keywords": [
                         "audio",
                         "loudness",
@@ -11143,7 +10596,6 @@ const TrussCAPI = {
                     "params_typed": "float pan",
                     "return_type": "void",
                     "desc": "Set stereo balance (-1.0 left ~ 0 center ~ +1.0 right). On multi-ch devices only affects ch0/ch1.",
-                    "snippet": "setPan(${1:0.0})",
                     "keywords": [
                         "stereo",
                         "balance",
@@ -11163,7 +10615,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current pan value",
-                    "snippet": "getPan()",
                     "keywords": [
                         "stereo",
                         "balance",
@@ -11182,7 +10633,6 @@ const TrussCAPI = {
                     "params_typed": "float speed",
                     "return_type": "void",
                     "desc": "Playback speed [-10, 10]. Negative = reverse (eager only). Streams clamp to [0, 10]. 0 = freeze.",
-                    "snippet": "setSpeed(${1:1.0})",
                     "keywords": [
                         "rate",
                         "tempo",
@@ -11202,7 +10652,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current playback speed",
-                    "snippet": "getSpeed()",
                     "keywords": [
                         "rate",
                         "tempo",
@@ -11220,7 +10669,6 @@ const TrussCAPI = {
                     "params_typed": "bool loop",
                     "return_type": "void",
                     "desc": "Enable/disable looping",
-                    "snippet": "setLoop(${1:true})",
                     "keywords": [
                         "repeat",
                         "loop",
@@ -11235,7 +10683,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True if looping is enabled",
-                    "snippet": "isLoop()",
                     "keywords": [
                         "repeat",
                         "loop",
@@ -11250,7 +10697,6 @@ const TrussCAPI = {
                     "params_typed": "MixMode m",
                     "return_type": "void",
                     "desc": "Channel routing preset. Auto (default) = mono broadcasts / multi 1:1. DownmixMono = average src to all out ch.",
-                    "snippet": "setMixMode(MixMode::DownmixMono)",
                     "keywords": [
                         "routing",
                         "downmix",
@@ -11272,7 +10718,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<int>& map",
                     "return_type": "void",
                     "desc": "Per-output-channel routing. 1D: each entry is a src ch index (-1 = silent). 2D: each entry lists src ch indices that sum into that output.",
-                    "snippet": "setChannelMap({0, 1})",
                     "keywords": [
                         "routing",
                         "channel",
@@ -11293,7 +10738,6 @@ const TrussCAPI = {
                     "params_typed": "vector<vector<int>> map",
                     "return_type": "void",
                     "desc": "Per-output-channel routing. 1D: each entry is a src ch index (-1 = silent). 2D: each entry lists src ch indices that sum into that output.",
-                    "snippet": "setChannelMap({0, 1})",
                     "keywords": [
                         "routing",
                         "channel",
@@ -11314,7 +10758,6 @@ const TrussCAPI = {
                     "params_typed": "const vector<float>& gains",
                     "return_type": "void",
                     "desc": "Per-output-channel gain multiplier. Entries beyond .size() default to 1.0. No internal normalization (setVolume is the overall gain).",
-                    "snippet": "setChannelGains({1.0, 1.0})",
                     "keywords": [
                         "channel",
                         "gain",
@@ -11334,7 +10777,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Clear the explicit channel map; routing falls back to setMixMode rules.",
-                    "snippet": "clearChannelMap()",
                     "keywords": [
                         "reset",
                         "routing",
@@ -11351,7 +10793,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Clear per-channel gains (back to uniform 1.0).",
-                    "snippet": "clearChannelGains()",
                     "keywords": [
                         "reset",
                         "channel",
@@ -11368,7 +10809,6 @@ const TrussCAPI = {
                     "params_typed": "float vol",
                     "return_type": "void",
                     "desc": "Set the output volume for beep() (0.0-1.0).",
-                    "snippet": "setBeepVolume(${1:vol})",
                     "keywords": [
                         "beep",
                         "loudness",
@@ -11395,7 +10835,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get the current beep() output volume (0.0-1.0).",
-                    "snippet": "getBeepVolume()",
                     "keywords": [
                         "beep",
                         "loudness",
@@ -11428,7 +10867,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "AudioEngine&",
                     "desc": "Get the global AudioEngine singleton",
-                    "snippet": "AudioEngine::getInstance()",
                     "keywords": [
                         "singleton",
                         "global",
@@ -11460,7 +10898,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Initialize / re-initialize audio engine. Re-entrant: calling on a running engine stops the device, migrates active voices to new settings, restarts. ~30-100 ms gap; voices keep playback position.",
-                    "snippet": "AudioEngine::getInstance().init()",
                     "keywords": [
                         "initialize",
                         "start",
@@ -11483,7 +10920,6 @@ const TrussCAPI = {
                     "params_typed": "const AudioSettings& settings",
                     "return_type": "bool",
                     "desc": "Initialize / re-initialize audio engine. Re-entrant: calling on a running engine stops the device, migrates active voices to new settings, restarts. ~30-100 ms gap; voices keep playback position.",
-                    "snippet": "AudioEngine::getInstance().init()",
                     "keywords": [
                         "initialize",
                         "start",
@@ -11506,7 +10942,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Shut down the audio device. Usually called automatically at program exit.",
-                    "snippet": "AudioEngine::getInstance().shutdown()",
                     "keywords": [
                         "close",
                         "stop",
@@ -11526,7 +10961,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "vector<AudioDeviceInfo>",
                     "desc": "Enumerate available playback devices. Returns name + isDefault for each.",
-                    "snippet": "AudioEngine::listDevices()",
                     "keywords": [
                         "enumerate",
                         "devices",
@@ -11556,7 +10990,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Current engine sample rate (Hz). Returns default (48000) if not yet initialized.",
-                    "snippet": "AudioEngine::getInstance().getSampleRate()",
                     "keywords": [
                         "samplerate",
                         "hz",
@@ -11573,7 +11006,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Current engine output channel count",
-                    "snippet": "AudioEngine::getInstance().getChannels()",
                     "keywords": [
                         "channels",
                         "stereo",
@@ -11590,7 +11022,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Max simultaneously-playing Sound voices",
-                    "snippet": "AudioEngine::getInstance().getMaxPolyphony()",
                     "keywords": [
                         "polyphony",
                         "voices",
@@ -11607,7 +11038,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Current device buffer size in frames (0 = miniaudio default)",
-                    "snippet": "AudioEngine::getInstance().getBufferSize()",
                     "keywords": [
                         "buffer",
                         "frames",
@@ -11624,7 +11054,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "True after a successful init()",
-                    "snippet": "AudioEngine::getInstance().isInitialized()",
                     "keywords": [
                         "initialized",
                         "ready",
@@ -11635,47 +11064,11 @@ const TrussCAPI = {
                     "desc_ko": "init()이 성공했으면 true"
                 },
                 {
-                    "name": "audioOut",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Event<AudioOutBuffer>",
-                    "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe.",
-                    "snippet": "AudioEngine::getInstance().audioOut.listen([](AudioOutBuffer& buf){ /* ... */ })",
-                    "keywords": [
-                        "playback",
-                        "synthesis",
-                        "callback",
-                        "dsp",
-                        "render",
-                        "buffer"
-                    ],
-                    "desc_ja": "リアルタイム再生コールバック event。listen() でシンセ / 処理用 listener を追加。各バッファごとに audio thread で発火、RT-safe を維持",
-                    "desc_ko": "실시간 재생 콜백 이벤트. listen()으로 신스 / 처리 리스너 추가. 버퍼별로 오디오 스레드에서 발화, RT-safe 유지",
-                    "related": [
-                        "Event",
-                        "AudioOutBuffer",
-                        "audioIn",
-                        "getAudioAnalysisBuffer",
-                        "Wave"
-                    ],
-                    "examples": [
-                        {
-                            "name": "audioSynthExample",
-                            "group": "sound"
-                        },
-                        {
-                            "name": "audioDeviceExample",
-                            "group": "sound"
-                        }
-                    ]
-                },
-                {
                     "name": "audioIn",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Event<AudioInBuffer>",
+                    "params": "buf",
+                    "params_typed": "const AudioInBuffer & buf",
+                    "return_type": "void",
                     "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut.",
-                    "snippet": "AudioEngine::getInstance().audioIn.listen([](AudioInBuffer& buf){ /* ... */ })",
                     "keywords": [
                         "microphone",
                         "mic",
@@ -11695,33 +11088,11 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "audioDeviceChanged",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Event<AudioDeviceChangedArgs>",
-                    "desc": "Fires after every successful init() (initial AND re-init). Args carry the resolved device's real name, isDefaultDevice flag, sampleRate, channels, bufferSize, maxPolyphony. Listener runs on the thread that called init() (main), not the audio thread.",
-                    "snippet": "AudioEngine::getInstance().audioDeviceChanged.listen([](AudioDeviceChangedArgs& a){ /* ... */ })",
-                    "keywords": [
-                        "device",
-                        "callback",
-                        "event",
-                        "reinit",
-                        "changed"
-                    ],
-                    "desc_ja": "成功した init() (初回 / 再 init) 後に発火。args は解決済みデバイス名、isDefaultDevice、sampleRate、channels、bufferSize、maxPolyphony。listener は init() を呼んだスレッド (通常 main) で実行",
-                    "desc_ko": "성공한 init() (초기 / 재 init) 후 발화. args는 해결된 장치명, isDefaultDevice, sampleRate, channels, bufferSize, maxPolyphony. listener는 init()을 호출한 스레드 (보통 main)에서 실행",
-                    "related": [
-                        "Event",
-                        "AudioDeviceChangedArgs"
-                    ]
-                },
-                {
                     "name": "initAudio",
                     "params": "",
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Initialize the global AudioEngine. Called automatically by Sound::load() / play(), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener).",
-                    "snippet": "initAudio()",
                     "keywords": [
                         "initialize",
                         "start",
@@ -11743,7 +11114,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Shut down the global AudioEngine and close the audio device. Usually unnecessary (runs at program exit).",
-                    "snippet": "shutdownAudio()",
                     "keywords": [
                         "close",
                         "stop",
@@ -11763,7 +11133,6 @@ const TrussCAPI = {
                     "params_typed": "float* outBuffer, size_t numSamples",
                     "return_type": "size_t",
                     "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer for FFT / visualization. numSamples is capped at the analysis buffer size (4096). Returns the number of samples written.",
-                    "snippet": "getAudioAnalysisBuffer(${1:outBuffer}, ${2:numSamples})",
                     "keywords": [
                         "fft",
                         "spectrum",
@@ -11792,7 +11161,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "MicInput&",
                     "desc": "Get the global MicInput singleton (microphone capture). Call start() on it to open the device.",
-                    "snippet": "getMicInput()",
                     "keywords": [
                         "microphone",
                         "mic",
@@ -11820,7 +11188,6 @@ const TrussCAPI = {
                     "params_typed": "float* outBuffer, size_t numSamples",
                     "return_type": "size_t",
                     "desc": "Copy the latest microphone input samples into outBuffer. Convenience wrapper over getMicInput().getBuffer(). numSamples is capped at the mic buffer size (4096). Returns the number of samples written.",
-                    "snippet": "getMicAnalysisBuffer(${1:outBuffer}, ${2:numSamples})",
                     "keywords": [
                         "microphone",
                         "mic",
@@ -11856,7 +11223,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create a chip sound note (8-bit style sound)",
-                    "snippet": "ChipSoundNote note;",
                     "keywords": [
                         "chiptune",
                         "8bit",
@@ -11871,173 +11237,12 @@ const TrussCAPI = {
                         "createChipBundle",
                         "Sound",
                         "Wave"
-                    ]
-                },
-                {
-                    "name": "wave",
-                    "params": "type",
-                    "params_typed": "Wave type",
-                    "return_type": "ChipSoundNote&",
-                    "desc": "Set wave type (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise)",
-                    "snippet": "wave(Wave::Square)",
-                    "keywords": [
-                        "waveform",
-                        "oscillator",
-                        "square",
-                        "sine",
-                        "noise",
-                        "shape"
                     ],
-                    "desc_ja": "波形タイプを設定",
-                    "desc_ko": "파형 타입을 설정 (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise)",
-                    "related": [
-                        "Wave",
-                        "hz",
-                        "adsr"
-                    ]
-                },
-                {
-                    "name": "hz",
-                    "params": "frequency",
-                    "params_typed": "float frequency",
-                    "return_type": "ChipSoundNote&",
-                    "desc": "Set frequency in Hz",
-                    "snippet": "hz(${1:440})",
-                    "keywords": [
-                        "frequency",
-                        "pitch",
-                        "tone",
-                        "hertz",
-                        "note"
-                    ],
-                    "desc_ja": "周波数を設定（Hz）",
-                    "desc_ko": "주파수를 Hz로 설정"
-                },
-                {
-                    "name": "duration",
-                    "params": "seconds",
-                    "params_typed": "float seconds",
-                    "return_type": "ChipSoundNote&",
-                    "desc": "Set note duration in seconds",
-                    "snippet": "duration(${1:0.5})",
-                    "keywords": [
-                        "length",
-                        "time",
-                        "seconds",
-                        "span"
-                    ],
-                    "desc_ja": "ノートの長さを設定（秒）",
-                    "desc_ko": "노트 길이를 초 단위로 설정",
-                    "related": [
-                        "Tween"
-                    ]
-                },
-                {
-                    "name": "volume",
-                    "params": "vol",
-                    "params_typed": "float vol",
-                    "return_type": "ChipSoundNote&",
-                    "desc": "Set volume (0.0-1.0)",
-                    "snippet": "volume(${1:0.8})",
-                    "keywords": [
-                        "loudness",
-                        "gain",
-                        "amplitude",
-                        "level"
-                    ],
-                    "desc_ja": "音量を設定",
-                    "desc_ko": "음량을 설정 (0.0-1.0)"
-                },
-                {
-                    "name": "attack",
-                    "params": "seconds",
-                    "params_typed": "float seconds",
-                    "return_type": "ChipSoundNote&",
-                    "desc": "Set attack time (ADSR envelope)",
-                    "snippet": "attack(${1:0.01})",
-                    "keywords": [
-                        "envelope",
-                        "adsr",
-                        "fade in",
-                        "onset",
-                        "rise"
-                    ],
-                    "desc_ja": "アタック時間を設定",
-                    "desc_ko": "어택 시간을 설정 (ADSR 엔벨로프)"
-                },
-                {
-                    "name": "decay",
-                    "params": "seconds",
-                    "params_typed": "float seconds",
-                    "return_type": "ChipSoundNote&",
-                    "desc": "Set decay time (ADSR envelope)",
-                    "snippet": "decay(${1:0.1})",
-                    "keywords": [
-                        "envelope",
-                        "adsr",
-                        "falloff",
-                        "drop"
-                    ],
-                    "desc_ja": "ディケイ時間を設定",
-                    "desc_ko": "디케이 시간을 설정 (ADSR 엔벨로프)"
-                },
-                {
-                    "name": "sustain",
-                    "params": "level",
-                    "params_typed": "float level",
-                    "return_type": "ChipSoundNote&",
-                    "desc": "Set sustain level (0.0-1.0)",
-                    "snippet": "sustain(${1:0.7})",
-                    "keywords": [
-                        "envelope",
-                        "adsr",
-                        "hold",
-                        "level"
-                    ],
-                    "desc_ja": "サスティンレベルを設定",
-                    "desc_ko": "서스테인 레벨을 설정 (0.0-1.0)"
-                },
-                {
-                    "name": "release",
-                    "params": "seconds",
-                    "params_typed": "float seconds",
-                    "return_type": "ChipSoundNote&",
-                    "desc": "Set release time (ADSR envelope)",
-                    "snippet": "release(${1:0.2})",
-                    "keywords": [
-                        "envelope",
-                        "adsr",
-                        "fade out",
-                        "tail",
-                        "fall"
-                    ],
-                    "desc_ja": "リリース時間を設定",
-                    "desc_ko": "릴리스 시간을 설정 (ADSR 엔벨로프)",
-                    "related": [
-                        "releaseSglBuffers"
-                    ]
-                },
-                {
-                    "name": "adsr",
-                    "params": "a, d, s, r",
-                    "params_typed": "float a, float d, float s, float r",
-                    "return_type": "ChipSoundNote&",
-                    "desc": "Set ADSR envelope (attack, decay, sustain, release)",
-                    "snippet": "adsr(${1:0.01}, ${2:0.1}, ${3:0.7}, ${4:0.2})",
-                    "keywords": [
-                        "envelope",
-                        "attack",
-                        "decay",
-                        "sustain",
-                        "shape"
-                    ],
-                    "desc_ja": "ADSRエンベロープを設定",
-                    "desc_ko": "ADSR 엔벨로프 설정 (어택, 디케이, 서스테인, 릴리스)",
-                    "related": [
-                        "attack",
-                        "decay",
-                        "sustain",
-                        "release"
+                    "examples": [
+                        {
+                            "name": "chipSoundExample",
+                            "group": "sound"
+                        }
                     ]
                 },
                 {
@@ -12046,7 +11251,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Sound@",
                     "desc": "Build and return Sound object from note",
-                    "snippet": "build()",
                     "keywords": [
                         "create",
                         "make",
@@ -12062,35 +11266,11 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "createChipBundle",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "ChipSoundBundle@",
-                    "desc": "Create a chip sound bundle for sequencing multiple notes",
-                    "snippet": "ChipSoundBundle@ bundle = createChipBundle();",
-                    "keywords": [
-                        "sequence",
-                        "song",
-                        "track",
-                        "notes",
-                        "chiptune",
-                        "melody"
-                    ],
-                    "desc_ja": "複数ノートのシーケンス用バンドルを作成",
-                    "desc_ko": "여러 노트를 시퀀싱하기 위한 칩 사운드 번들을 생성",
-                    "related": [
-                        "ChipSoundBundle",
-                        "ChipSoundNote",
-                        "Sound"
-                    ]
-                },
-                {
                     "name": "add",
                     "params": "note, time",
                     "params_typed": "const ChipSoundNote& note, float time",
                     "return_type": "ChipSoundBundle&",
                     "desc": "Add a note at specified time (seconds)",
-                    "snippet": "add(${1:note}, ${2:0.0})",
                     "keywords": [
                         "append",
                         "insert",
@@ -12112,7 +11292,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "ChipSoundBundle&",
                     "desc": "Clear all notes from bundle",
-                    "snippet": "clear()",
                     "keywords": [
                         "reset",
                         "empty",
@@ -12128,7 +11307,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get the total duration of the bundle",
-                    "snippet": "getDuration()",
                     "keywords": [
                         "length",
                         "total time",
@@ -12146,34 +11324,11 @@ const TrussCAPI = {
             "name": "Font",
             "functions": [
                 {
-                    "name": "createFont",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Font@",
-                    "desc": "Create a TrueType font",
-                    "snippet": "Font@ font = createFont();",
-                    "keywords": [
-                        "truetype",
-                        "ttf",
-                        "typeface",
-                        "text",
-                        "new"
-                    ],
-                    "desc_ja": "TrueTypeフォントを作成",
-                    "desc_ko": "TrueType 폰트를 생성",
-                    "related": [
-                        "Font",
-                        "drawString",
-                        "drawBitmapString"
-                    ]
-                },
-                {
                     "name": "load",
                     "params": "path, size",
                     "params_typed": "const string& path, int size",
                     "return_type": "bool",
                     "desc": "Load TTF font file",
-                    "snippet": "load(FONT_SANS, ${1:24})",
                     "keywords": [
                         "open",
                         "read",
@@ -12189,7 +11344,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if font is loaded",
-                    "snippet": "isLoaded()",
                     "keywords": [
                         "ready",
                         "loaded",
@@ -12205,7 +11359,6 @@ const TrussCAPI = {
                     "params_typed": "const string& text, float x, float y",
                     "return_type": "void",
                     "desc": "Draw text at position",
-                    "snippet": "drawString(${1:\"Hello\"}, ${2:100}, ${3:100})",
                     "keywords": [
                         "text",
                         "render",
@@ -12228,7 +11381,6 @@ const TrussCAPI = {
                     "params_typed": "const string& text, float x, float y",
                     "return_type": "Path",
                     "desc": "Get text outline as a Path (one subpath per contour). Stays crisp under scale / rotation; use drawStroke / drawFill (holes auto-detected for e, a, O, 日, etc.).",
-                    "snippet": "getStringPath(${1:\"Hello\"}, ${2:100}, ${3:100})",
                     "keywords": [
                         "outline",
                         "vector",
@@ -12251,7 +11403,6 @@ const TrussCAPI = {
                     "params_typed": "const string& text",
                     "return_type": "float",
                     "desc": "Get text width in pixels",
-                    "snippet": "getWidth(${1:\"text\"})",
                     "keywords": [
                         "resolution",
                         "size",
@@ -12272,7 +11423,6 @@ const TrussCAPI = {
                     "params_typed": "const string& text",
                     "return_type": "float",
                     "desc": "Get text height in pixels",
-                    "snippet": "getHeight(${1:\"text\"})",
                     "keywords": [
                         "resolution",
                         "size",
@@ -12288,7 +11438,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get line height",
-                    "snippet": "getLineHeight()",
                     "keywords": [
                         "leading",
                         "spacing",
@@ -12304,7 +11453,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get font size",
-                    "snippet": "getSize()",
                     "keywords": [
                         "pointsize",
                         "scale",
@@ -12323,7 +11471,6 @@ const TrussCAPI = {
                     "params_typed": "const string& name",
                     "return_type": "string",
                     "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS uses CoreText; Linux/Windows currently stub.",
-                    "snippet": "systemFontPath(${1:\"HiraginoSans-W3\"})",
                     "keywords": [
                         "resolve",
                         "lookup",
@@ -12352,7 +11499,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "vector<string>",
                     "desc": "Enumerate names of all fonts known to the OS",
-                    "snippet": "listSystemFonts()",
                     "keywords": [
                         "enumerate",
                         "available",
@@ -12377,10 +11523,9 @@ const TrussCAPI = {
                 {
                     "name": "registerGlyph",
                     "params": "g",
-                    "params_typed": "const Glyph &g",
+                    "params_typed": "const bitmapfont::Glyph &",
                     "return_type": "void",
                     "desc": "Register one bitmap glyph so drawBitmapString can render its codepoint. Replaces any glyph already registered at the same codepoint and marks the atlas dirty for re-upload",
-                    "snippet": "registerGlyph(${1:glyph})",
                     "keywords": [
                         "bitmap",
                         "glyph",
@@ -12403,7 +11548,6 @@ const TrussCAPI = {
                     "params_typed": "const Glyph (&glyphs)[N]",
                     "return_type": "void",
                     "desc": "Register a fixed-size array of bitmap glyphs in one call (template over the array size)",
-                    "snippet": "registerGlyphs(${1:glyphs})",
                     "keywords": [
                         "bitmap",
                         "glyphs",
@@ -12429,7 +11573,6 @@ const TrussCAPI = {
                     "params_typed": "uint32_t cp, const uint8_t *newData",
                     "return_type": "void",
                     "desc": "Swap the pixel data of an already-registered glyph without changing its atlas position. Useful for animating a glyph by updating its data each frame",
-                    "snippet": "updateGlyph(${1:codepoint}, ${2:newData})",
                     "keywords": [
                         "bitmap",
                         "glyph",
@@ -12459,7 +11602,6 @@ const TrussCAPI = {
                     "params_typed": "float t, EaseType type, EaseMode mode",
                     "return_type": "float",
                     "desc": "Apply easing to value (0-1)",
-                    "snippet": "ease(${1:t}, EaseType::${2:Cubic}, EaseMode::${3:InOut})",
                     "keywords": [
                         "easing",
                         "interpolation",
@@ -12490,7 +11632,6 @@ const TrussCAPI = {
                     "params_typed": "float t, EaseType type",
                     "return_type": "float",
                     "desc": "Apply ease-in to value (0-1)",
-                    "snippet": "easeIn(${1:t}, EaseType::${2:Cubic})",
                     "keywords": [
                         "easing",
                         "accelerate",
@@ -12513,7 +11654,6 @@ const TrussCAPI = {
                     "params_typed": "float t, EaseType type",
                     "return_type": "float",
                     "desc": "Apply ease-out to value (0-1)",
-                    "snippet": "easeOut(${1:t}, EaseType::${2:Cubic})",
                     "keywords": [
                         "easing",
                         "decelerate",
@@ -12536,7 +11676,6 @@ const TrussCAPI = {
                     "params_typed": "float t, EaseType type",
                     "return_type": "float",
                     "desc": "Apply ease-in-out to value (0-1)",
-                    "snippet": "easeInOut(${1:t}, EaseType::${2:Cubic})",
                     "keywords": [
                         "easing",
                         "smoothstep",
@@ -12553,36 +11692,11 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "createTween",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Tween@",
-                    "desc": "Create a tween object",
-                    "snippet": "createTween()",
-                    "keywords": [
-                        "tween",
-                        "animate",
-                        "interpolate",
-                        "motion",
-                        "transition"
-                    ],
-                    "desc_ja": "トゥイーンを作成",
-                    "desc_ko": "tween 객체를 생성",
-                    "related": [
-                        "Tween",
-                        "TweenMod",
-                        "ease",
-                        "lerp",
-                        "getDeltaTime"
-                    ]
-                },
-                {
                     "name": "from",
                     "params": "value",
                     "params_typed": "float value",
                     "return_type": "Tween@",
                     "desc": "Set start value",
-                    "snippet": "from(${1:0.0})",
                     "keywords": [
                         "start",
                         "begin",
@@ -12605,7 +11719,6 @@ const TrussCAPI = {
                     "params_typed": "float value",
                     "return_type": "Tween@",
                     "desc": "Set end value",
-                    "snippet": "to(${1:1.0})",
                     "keywords": [
                         "end",
                         "target",
@@ -12628,7 +11741,6 @@ const TrussCAPI = {
                     "params_typed": "float seconds",
                     "return_type": "Tween@",
                     "desc": "Set animation duration",
-                    "snippet": "duration(${1:1.0})",
                     "keywords": [
                         "length",
                         "time",
@@ -12644,7 +11756,6 @@ const TrussCAPI = {
                     "params_typed": "EaseType type",
                     "return_type": "Tween@",
                     "desc": "Set easing type",
-                    "snippet": "ease(EaseType::${1:Cubic})",
                     "keywords": [
                         "easing",
                         "interpolation",
@@ -12667,7 +11778,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Tween@",
                     "desc": "Start animation (chainable)",
-                    "snippet": "start()",
                     "keywords": [
                         "begin",
                         "record",
@@ -12694,7 +11804,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Tween@",
                     "desc": "Pause animation (chainable)",
-                    "snippet": "pause()",
                     "keywords": [
                         "hold",
                         "suspend",
@@ -12709,7 +11818,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Tween@",
                     "desc": "Resume animation (chainable)",
-                    "snippet": "resume()",
                     "keywords": [
                         "continue",
                         "unpause",
@@ -12724,7 +11832,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Tween@",
                     "desc": "Reset animation (chainable)",
-                    "snippet": "reset()",
                     "keywords": [
                         "restart",
                         "rewind",
@@ -12743,7 +11850,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Tween@",
                     "desc": "Jump to end (chainable)",
-                    "snippet": "finish()",
                     "keywords": [
                         "complete",
                         "end",
@@ -12763,7 +11869,6 @@ const TrussCAPI = {
                     "params_typed": "int count = -1",
                     "return_type": "Tween@",
                     "desc": "Set loop count (-1=infinite, 0=none, N=repeat N times)",
-                    "snippet": "loop(${1:-1})",
                     "keywords": [
                         "repeat",
                         "cycle",
@@ -12785,7 +11890,6 @@ const TrussCAPI = {
                     "params_typed": "bool enable = true",
                     "return_type": "Tween@",
                     "desc": "Enable yoyo (reverse direction each loop)",
-                    "snippet": "yoyo()",
                     "keywords": [
                         "reverse",
                         "pingpong",
@@ -12806,7 +11910,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current tween value",
-                    "snippet": "getValue()",
                     "keywords": [
                         "current",
                         "output",
@@ -12832,7 +11935,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get progress (0-1)",
-                    "snippet": "getProgress()",
                     "keywords": [
                         "percent",
                         "fraction",
@@ -12853,7 +11955,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get elapsed time",
-                    "snippet": "getElapsed()",
                     "keywords": [
                         "time",
                         "passed",
@@ -12875,7 +11976,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get duration",
-                    "snippet": "getDuration()",
                     "keywords": [
                         "length",
                         "total time",
@@ -12891,7 +11991,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if playing",
-                    "snippet": "isPlaying()",
                     "keywords": [
                         "playing",
                         "active",
@@ -12907,7 +12006,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if complete",
-                    "snippet": "isComplete()",
                     "keywords": [
                         "finished",
                         "done",
@@ -12923,7 +12021,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get start value",
-                    "snippet": "getStart()",
                     "keywords": [
                         "from",
                         "begin",
@@ -12940,7 +12037,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get end value",
-                    "snippet": "getEnd()",
                     "keywords": [
                         "to",
                         "target",
@@ -12956,7 +12052,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get number of completed loop iterations",
-                    "snippet": "getLoopCount()",
                     "keywords": [
                         "repeats",
                         "iterations",
@@ -12979,7 +12074,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create 2D vector (type constructor)",
-                    "snippet": "Vec2(${1:x}, ${2:y})",
                     "keywords": [
                         "vector",
                         "point",
@@ -13013,7 +12107,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "",
                     "desc": "Create 2D vector (type constructor)",
-                    "snippet": "Vec2(${1:x}, ${2:y})",
                     "keywords": [
                         "vector",
                         "point",
@@ -13047,7 +12140,6 @@ const TrussCAPI = {
                     "params_typed": "float v",
                     "return_type": "",
                     "desc": "Create 2D vector (type constructor)",
-                    "snippet": "Vec2(${1:x}, ${2:y})",
                     "keywords": [
                         "vector",
                         "point",
@@ -13081,7 +12173,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "Vec2&",
                     "desc": "Set vector components (type method)",
-                    "snippet": "set(${1:x}, ${2:y})",
                     "keywords": [
                         "assign",
                         "components",
@@ -13095,10 +12186,9 @@ const TrussCAPI = {
                 {
                     "name": "set",
                     "params": "v",
-                    "params_typed": "Vec2 v",
+                    "params_typed": "float x_, float y_",
                     "return_type": "Vec2&",
                     "desc": "Set vector components (type method)",
-                    "snippet": "set(${1:x}, ${2:y})",
                     "keywords": [
                         "assign",
                         "components",
@@ -13112,10 +12202,9 @@ const TrussCAPI = {
                 {
                     "name": "Vec2_fromAngle",
                     "params": "radians",
-                    "params_typed": "float radians",
+                    "params_typed": "float, float",
                     "return_type": "Vec2",
                     "desc": "Create Vec2 from angle",
-                    "snippet": "Vec2_fromAngle(${1:radians})",
                     "keywords": [
                         "vector",
                         "angle",
@@ -13138,7 +12227,6 @@ const TrussCAPI = {
                     "params_typed": "float radians, float length",
                     "return_type": "Vec2",
                     "desc": "Create Vec2 from angle",
-                    "snippet": "Vec2_fromAngle(${1:radians})",
                     "keywords": [
                         "vector",
                         "angle",
@@ -13168,7 +12256,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create 3D vector (type constructor)",
-                    "snippet": "Vec3(${1:x}, ${2:y}, ${3:z})",
                     "keywords": [
                         "vector",
                         "point",
@@ -13206,7 +12293,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "",
                     "desc": "Create 3D vector (type constructor)",
-                    "snippet": "Vec3(${1:x}, ${2:y}, ${3:z})",
                     "keywords": [
                         "vector",
                         "point",
@@ -13244,7 +12330,6 @@ const TrussCAPI = {
                     "params_typed": "float v",
                     "return_type": "",
                     "desc": "Create 3D vector (type constructor)",
-                    "snippet": "Vec3(${1:x}, ${2:y}, ${3:z})",
                     "keywords": [
                         "vector",
                         "point",
@@ -13282,7 +12367,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "Vec3&",
                     "desc": "Set vector components (type method)",
-                    "snippet": "set(${1:x}, ${2:y}, ${3:z})",
                     "keywords": [
                         "assign",
                         "components",
@@ -13296,10 +12380,9 @@ const TrussCAPI = {
                 {
                     "name": "set",
                     "params": "v",
-                    "params_typed": "Vec3 v",
+                    "params_typed": "float x_, float y_, float z_",
                     "return_type": "Vec3&",
                     "desc": "Set vector components (type method)",
-                    "snippet": "set(${1:x}, ${2:y}, ${3:z})",
                     "keywords": [
                         "assign",
                         "components",
@@ -13323,7 +12406,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create color (type constructor)",
-                    "snippet": "Color(${1:r}, ${2:g}, ${3:b})",
                     "keywords": [
                         "rgb",
                         "rgba",
@@ -13347,7 +12429,6 @@ const TrussCAPI = {
                     "params_typed": "float r, float g, float b",
                     "return_type": "",
                     "desc": "Create color (type constructor)",
-                    "snippet": "Color(${1:r}, ${2:g}, ${3:b})",
                     "keywords": [
                         "rgb",
                         "rgba",
@@ -13371,7 +12452,6 @@ const TrussCAPI = {
                     "params_typed": "float r, float g, float b, float a",
                     "return_type": "",
                     "desc": "Create color (type constructor)",
-                    "snippet": "Color(${1:r}, ${2:g}, ${3:b})",
                     "keywords": [
                         "rgb",
                         "rgba",
@@ -13392,10 +12472,9 @@ const TrussCAPI = {
                 {
                     "name": "set",
                     "params": "r, g, b",
-                    "params_typed": "float r, float g, float b",
+                    "params_typed": "float r_, float g_, float b_, float a_ = 1.0f",
                     "return_type": "Color&",
                     "desc": "Set color components (type method)",
-                    "snippet": "set(${1:r}, ${2:g}, ${3:b})",
                     "keywords": [
                         "assign",
                         "components",
@@ -13412,7 +12491,6 @@ const TrussCAPI = {
                     "params_typed": "float r, float g, float b, float a",
                     "return_type": "Color&",
                     "desc": "Set color components (type method)",
-                    "snippet": "set(${1:r}, ${2:g}, ${3:b})",
                     "keywords": [
                         "assign",
                         "components",
@@ -13426,10 +12504,9 @@ const TrussCAPI = {
                 {
                     "name": "set",
                     "params": "gray",
-                    "params_typed": "float gray",
+                    "params_typed": "float gray, float a_ = 1.0f",
                     "return_type": "Color&",
                     "desc": "Set color components (type method)",
-                    "snippet": "set(${1:r}, ${2:g}, ${3:b})",
                     "keywords": [
                         "assign",
                         "components",
@@ -13443,10 +12520,9 @@ const TrussCAPI = {
                 {
                     "name": "set",
                     "params": "c",
-                    "params_typed": "Color c",
+                    "params_typed": "const Color& c",
                     "return_type": "Color&",
                     "desc": "Set color components (type method)",
-                    "snippet": "set(${1:r}, ${2:g}, ${3:b})",
                     "keywords": [
                         "assign",
                         "components",
@@ -13463,7 +12539,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "ColorHSB",
                     "desc": "Convert to HSB color space (H: 0-1, S: 0-1, B: 0-1)",
-                    "snippet": "toHSB()",
                     "keywords": [
                         "hsv",
                         "hue",
@@ -13486,7 +12561,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "ColorOKLab",
                     "desc": "Convert to OKLab color space (perceptually uniform)",
-                    "snippet": "toOKLab()",
                     "keywords": [
                         "perceptual",
                         "lab",
@@ -13509,7 +12583,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "ColorOKLCH",
                     "desc": "Convert to OKLCH color space (L: 0-1, C: 0-0.4, H: 0-1)",
-                    "snippet": "toOKLCH()",
                     "keywords": [
                         "lch",
                         "perceptual",
@@ -13529,10 +12602,9 @@ const TrussCAPI = {
                 {
                     "name": "Color_fromHSB",
                     "params": "h, s, b",
-                    "params_typed": "float h, float s, float b",
+                    "params_typed": "float, float, float, float",
                     "return_type": "Color",
                     "desc": "Create Color from HSB (H: 0-1, S: 0-1, B: 0-1)",
-                    "snippet": "Color_fromHSB(${1:h}, ${2:s}, ${3:b})",
                     "keywords": [
                         "hsv",
                         "hue",
@@ -13554,7 +12626,6 @@ const TrussCAPI = {
                     "params_typed": "float h, float s, float b, float a",
                     "return_type": "Color",
                     "desc": "Create Color from HSB (H: 0-1, S: 0-1, B: 0-1)",
-                    "snippet": "Color_fromHSB(${1:h}, ${2:s}, ${3:b})",
                     "keywords": [
                         "hsv",
                         "hue",
@@ -13572,11 +12643,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorFromHSB",
-                    "params": "h, s, b",
-                    "params_typed": "float h, float s, float b",
+                    "params": "h, s, b, [a]",
+                    "params_typed": "float h, float s, float b, float a = 1.0f",
                     "return_type": "Color",
                     "desc": "Create Color from HSB (alias for Color_fromHSB)",
-                    "snippet": "colorFromHSB(${1:h}, ${2:s}, ${3:b})",
                     "keywords": [
                         "hsv",
                         "hue",
@@ -13603,7 +12673,6 @@ const TrussCAPI = {
                     "params_typed": "float h, float s, float b, float a",
                     "return_type": "Color",
                     "desc": "Create Color from HSB (alias for Color_fromHSB)",
-                    "snippet": "colorFromHSB(${1:h}, ${2:s}, ${3:b})",
                     "keywords": [
                         "hsv",
                         "hue",
@@ -13627,10 +12696,9 @@ const TrussCAPI = {
                 {
                     "name": "Color_fromOKLCH",
                     "params": "L, C, H",
-                    "params_typed": "float L, float C, float H",
+                    "params_typed": "float, float, float, float",
                     "return_type": "Color",
                     "desc": "Create Color from OKLCH",
-                    "snippet": "Color_fromOKLCH(${1:L}, ${2:C}, ${3:H})",
                     "keywords": [
                         "lch",
                         "perceptual",
@@ -13647,7 +12715,6 @@ const TrussCAPI = {
                     "params_typed": "float L, float C, float H, float a",
                     "return_type": "Color",
                     "desc": "Create Color from OKLCH",
-                    "snippet": "Color_fromOKLCH(${1:L}, ${2:C}, ${3:H})",
                     "keywords": [
                         "lch",
                         "perceptual",
@@ -13661,10 +12728,9 @@ const TrussCAPI = {
                 {
                     "name": "Color_fromOKLab",
                     "params": "L, a, b",
-                    "params_typed": "float L, float a, float b",
+                    "params_typed": "float, float, float, float",
                     "return_type": "Color",
                     "desc": "Create Color from OKLab",
-                    "snippet": "Color_fromOKLab(${1:L}, ${2:a}, ${3:b})",
                     "keywords": [
                         "lab",
                         "perceptual",
@@ -13681,7 +12747,6 @@ const TrussCAPI = {
                     "params_typed": "float L, float a, float b, float alpha",
                     "return_type": "Color",
                     "desc": "Create Color from OKLab",
-                    "snippet": "Color_fromOKLab(${1:L}, ${2:a}, ${3:b})",
                     "keywords": [
                         "lab",
                         "perceptual",
@@ -13705,7 +12770,6 @@ const TrussCAPI = {
                     "params_typed": "float h, float s, float b",
                     "return_type": "",
                     "desc": "HSB color type (H: 0-1, S: 0-1, B: 0-1). Use toRGB() to convert to Color",
-                    "snippet": "ColorHSB(${1:h}, ${2:s}, ${3:b})",
                     "keywords": [
                         "hsv",
                         "hue",
@@ -13738,7 +12802,6 @@ const TrussCAPI = {
                     "params_typed": "float h, float s, float b, float a",
                     "return_type": "",
                     "desc": "HSB color type (H: 0-1, S: 0-1, B: 0-1). Use toRGB() to convert to Color",
-                    "snippet": "ColorHSB(${1:h}, ${2:s}, ${3:b})",
                     "keywords": [
                         "hsv",
                         "hue",
@@ -13771,7 +12834,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Color",
                     "desc": "Convert ColorHSB to Color (RGB)",
-                    "snippet": "toRGB()",
                     "keywords": [
                         "rgb",
                         "rgba",
@@ -13789,11 +12851,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "lerp",
-                    "params": "target, t",
-                    "params_typed": "ColorHSB target, float t",
+                    "params": "target, t, [shortestPath]",
+                    "params_typed": "const ColorHSB & target, float t, bool shortestPath = true",
                     "return_type": "ColorHSB",
                     "desc": "Interpolate in HSB space (shortest hue path)",
-                    "snippet": "lerp(${1:target}, ${2:t})",
                     "keywords": [
                         "interpolate",
                         "mix",
@@ -13824,7 +12885,6 @@ const TrussCAPI = {
                     "params_typed": "float L, float C, float H",
                     "return_type": "",
                     "desc": "OKLCH color type (L: 0-1, C: 0-0.4, H: 0-1). Perceptually uniform",
-                    "snippet": "ColorOKLCH(${1:L}, ${2:C}, ${3:H})",
                     "keywords": [
                         "lch",
                         "perceptual",
@@ -13854,7 +12914,6 @@ const TrussCAPI = {
                     "params_typed": "float L, float C, float H, float a",
                     "return_type": "",
                     "desc": "OKLCH color type (L: 0-1, C: 0-0.4, H: 0-1). Perceptually uniform",
-                    "snippet": "ColorOKLCH(${1:L}, ${2:C}, ${3:H})",
                     "keywords": [
                         "lch",
                         "perceptual",
@@ -13884,7 +12943,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Color",
                     "desc": "Convert ColorOKLCH to Color (RGB)",
-                    "snippet": "toRGB()",
                     "keywords": [
                         "rgb",
                         "rgba",
@@ -13897,11 +12955,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "lerp",
-                    "params": "target, t",
-                    "params_typed": "ColorOKLCH target, float t",
+                    "params": "target, t, [shortestPath]",
+                    "params_typed": "const ColorOKLCH & target, float t, bool shortestPath = true",
                     "return_type": "ColorOKLCH",
                     "desc": "Interpolate in OKLCH space (shortest hue path, perceptually uniform)",
-                    "snippet": "lerp(${1:target}, ${2:t})",
                     "keywords": [
                         "interpolate",
                         "mix",
@@ -13932,7 +12989,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create a rectangle (type constructor)",
-                    "snippet": "Rect(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "rectangle",
                         "box",
@@ -13965,7 +13021,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float w, float h",
                     "return_type": "",
                     "desc": "Create a rectangle (type constructor)",
-                    "snippet": "Rect(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "rectangle",
                         "box",
@@ -13998,7 +13053,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float w, float h",
                     "return_type": "Rect&",
                     "desc": "Set rectangle properties (type method)",
-                    "snippet": "set(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "assign",
                         "components",
@@ -14012,10 +13066,9 @@ const TrussCAPI = {
                 {
                     "name": "set",
                     "params": "pos, w, h",
-                    "params_typed": "Vec2 pos, float w, float h",
+                    "params_typed": "float x_, float y_, float w_, float h_",
                     "return_type": "Rect&",
                     "desc": "Set rectangle properties (type method)",
-                    "snippet": "set(${1:x}, ${2:y}, ${3:w}, ${4:h})",
                     "keywords": [
                         "assign",
                         "components",
@@ -14032,7 +13085,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "bool",
                     "desc": "Check if point is inside (type method)",
-                    "snippet": "contains(${1:x}, ${2:y})",
                     "keywords": [
                         "inside",
                         "hit",
@@ -14050,10 +13102,9 @@ const TrussCAPI = {
                 {
                     "name": "intersects",
                     "params": "other",
-                    "params_typed": "Rect other",
+                    "params_typed": "const Rect &",
                     "return_type": "bool",
                     "desc": "Check intersection (type method)",
-                    "snippet": "intersects(${1:other})",
                     "keywords": [
                         "overlap",
                         "collide",
@@ -14081,7 +13132,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create a base scene node (C++ only - uses shared_ptr)",
-                    "snippet": "Node()",
                     "keywords": [
                         "scene graph",
                         "object",
@@ -14101,10 +13151,9 @@ const TrussCAPI = {
                 {
                     "name": "addChild",
                     "params": "child",
-                    "params_typed": "shared_ptr<Node> child",
+                    "params_typed": "Node::Ptr, bool",
                     "return_type": "void",
                     "desc": "Add a child node (C++ only)",
-                    "snippet": "addChild(${1:child})",
                     "keywords": [
                         "parent",
                         "attach",
@@ -14122,16 +13171,16 @@ const TrussCAPI = {
                     ],
                     "examples": [
                         {
-                            "name": "chipSoundExample",
-                            "group": "sound"
-                        },
-                        {
                             "name": "timerExample",
                             "group": "utils"
                         },
                         {
                             "name": "tweenModExample",
                             "group": "node"
+                        },
+                        {
+                            "name": "chipSoundExample",
+                            "group": "sound"
                         }
                     ]
                 },
@@ -14141,7 +13190,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Move this node to the end of its parent's child list — drawn last, on top of siblings. No-op if no parent or already last (C++ only)",
-                    "snippet": "moveToFront()",
                     "keywords": [
                         "bring to front",
                         "top",
@@ -14158,7 +13206,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Move this node to the beginning of its parent's child list — drawn first, beneath siblings. No-op if no parent or already first (C++ only)",
-                    "snippet": "moveToBack()",
                     "keywords": [
                         "send to back",
                         "bottom",
@@ -14175,7 +13222,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Mark node for deferred removal from scene graph (C++ only)",
-                    "snippet": "destroy()",
                     "keywords": [
                         "delete",
                         "remove",
@@ -14196,7 +13242,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if node is marked for destruction (C++ only)",
-                    "snippet": "isDead()",
                     "keywords": [
                         "destroyed",
                         "removed",
@@ -14208,46 +13253,11 @@ const TrussCAPI = {
                     "desc_ko": "노드가 제거 대상으로 표시되었는지 확인 (C++ 전용)"
                 },
                 {
-                    "name": "setPosition",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "void",
-                    "desc": "Set position (C++ only)",
-                    "snippet": "setPosition(${1:x}, ${2:y})",
-                    "keywords": [
-                        "seek",
-                        "jump",
-                        "scrub",
-                        "playhead",
-                        "normalized"
-                    ],
-                    "desc_ja": "位置を設定（C++のみ）",
-                    "desc_ko": "위치를 설정 (C++ 전용)"
-                },
-                {
-                    "name": "setPosition",
-                    "params": "pos",
-                    "params_typed": "Vec3 pos",
-                    "return_type": "void",
-                    "desc": "Set position (C++ only)",
-                    "snippet": "setPosition(${1:x}, ${2:y})",
-                    "keywords": [
-                        "seek",
-                        "jump",
-                        "scrub",
-                        "playhead",
-                        "normalized"
-                    ],
-                    "desc_ja": "位置を設定（C++のみ）",
-                    "desc_ko": "위치를 설정 (C++ 전용)"
-                },
-                {
                     "name": "RectNode",
                     "params": "",
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create a 2D rectangle node (C++ only - uses shared_ptr)",
-                    "snippet": "RectNode()",
                     "keywords": [
                         "rectangle",
                         "panel",
@@ -14270,7 +13280,6 @@ const TrussCAPI = {
                     "params_typed": "float w, float h",
                     "return_type": "void",
                     "desc": "Set size (C++ only)",
-                    "snippet": "setSize(${1:w}, ${2:h})",
                     "keywords": [
                         "dimensions",
                         "width height",
@@ -14303,7 +13312,6 @@ const TrussCAPI = {
                     "params_typed": "bool enabled",
                     "return_type": "void",
                     "desc": "Enable/disable scissor clipping for RectNode (C++ only)",
-                    "snippet": "setClipping(${1:true})",
                     "keywords": [
                         "clip",
                         "scissor",
@@ -14334,7 +13342,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Enable mouse/key events for this node (C++ only)",
-                    "snippet": "enableEvents()",
                     "keywords": [
                         "interactive",
                         "clickable",
@@ -14369,7 +13376,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Scrollable container node with clipping (C++ only)",
-                    "snippet": "make_shared<ScrollContainer>()",
                     "keywords": [
                         "scroll",
                         "scrollable",
@@ -14388,11 +13394,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setContent",
-                    "params": "content",
-                    "params_typed": "shared_ptr<RectNode> content",
+                    "params": "newContent",
+                    "params_typed": "Node::Ptr newContent",
                     "return_type": "void",
                     "desc": "Set content node for ScrollContainer (C++ only)",
-                    "snippet": "setContent(${1:content})",
                     "keywords": [
                         "child",
                         "inner",
@@ -14409,7 +13414,6 @@ const TrussCAPI = {
                     "params_typed": "float y",
                     "return_type": "void",
                     "desc": "Set vertical scroll position (C++ only)",
-                    "snippet": "setScrollY(${1:0})",
                     "keywords": [
                         "scroll",
                         "vertical",
@@ -14426,7 +13430,6 @@ const TrussCAPI = {
                     "params_typed": "ScrollContainer* container, Direction dir = Vertical",
                     "return_type": "",
                     "desc": "Visual scroll indicator for ScrollContainer (C++ only)",
-                    "snippet": "make_shared<ScrollBar>(${1:container}, ScrollBar::Vertical)",
                     "keywords": [
                         "scroll",
                         "indicator",
@@ -14446,7 +13449,6 @@ const TrussCAPI = {
                     "params_typed": "LayoutDirection dir, float spacing = 0",
                     "return_type": "",
                     "desc": "Layout modifier for automatic child arrangement (C++ only)",
-                    "snippet": "addMod<LayoutMod>(LayoutDirection::Vertical, ${1:8.0f})",
                     "keywords": [
                         "layout",
                         "arrange",
@@ -14468,7 +13470,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Recalculate layout (call after adding/removing children) (C++ only)",
-                    "snippet": "updateLayout()",
                     "keywords": [
                         "relayout",
                         "recompute",
@@ -14485,7 +13486,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Animation modifier for Node properties (position, scale, rotation) with easing (C++ only)",
-                    "snippet": "addMod<TweenMod>()",
                     "keywords": [
                         "animate",
                         "tween",
@@ -14504,11 +13504,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "moveTo",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
+                    "params": "x, y, [z]",
+                    "params_typed": "float x, float y, float z = 0.0f",
                     "return_type": "TweenMod&",
                     "desc": "Animate position to target (TweenMod method) (C++ only)",
-                    "snippet": "moveTo(${1:x}, ${2:y})",
                     "keywords": [
                         "animate position",
                         "translate",
@@ -14530,10 +13529,9 @@ const TrussCAPI = {
                 {
                     "name": "moveTo",
                     "params": "pos",
-                    "params_typed": "Vec3 pos",
+                    "params_typed": "const Vec3& pos",
                     "return_type": "TweenMod&",
                     "desc": "Animate position to target (TweenMod method) (C++ only)",
-                    "snippet": "moveTo(${1:x}, ${2:y})",
                     "keywords": [
                         "animate position",
                         "translate",
@@ -14554,11 +13552,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "moveBy",
-                    "params": "dx, dy",
-                    "params_typed": "float dx, float dy",
+                    "params": "dx, dy, [dz]",
+                    "params_typed": "float dx, float dy, float dz = 0.0f",
                     "return_type": "TweenMod&",
                     "desc": "Animate position by relative amount (TweenMod method) (C++ only)",
-                    "snippet": "moveBy(${1:dx}, ${2:dy})",
                     "keywords": [
                         "animate offset",
                         "translate",
@@ -14577,7 +13574,6 @@ const TrussCAPI = {
                     "params_typed": "float uniform",
                     "return_type": "TweenMod&",
                     "desc": "Animate scale to target (TweenMod method) (C++ only)",
-                    "snippet": "scaleTo(${1:scale})",
                     "keywords": [
                         "animate scale",
                         "resize",
@@ -14599,7 +13595,6 @@ const TrussCAPI = {
                     "params_typed": "float sx, float sy, float sz = 1",
                     "return_type": "TweenMod&",
                     "desc": "Animate scale to target (TweenMod method) (C++ only)",
-                    "snippet": "scaleTo(${1:scale})",
                     "keywords": [
                         "animate scale",
                         "resize",
@@ -14621,7 +13616,6 @@ const TrussCAPI = {
                     "params_typed": "float factor",
                     "return_type": "TweenMod&",
                     "desc": "Animate scale by relative multiplier (TweenMod method) (C++ only)",
-                    "snippet": "scaleBy(${1:factor})",
                     "keywords": [
                         "animate scale",
                         "relative scale",
@@ -14638,7 +13632,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "TweenMod&",
                     "desc": "Animate rotation to target angle or quaternion (TweenMod method) (C++ only)",
-                    "snippet": "rotateTo(${1:radians})",
                     "keywords": [
                         "animate rotation",
                         "spin",
@@ -14658,10 +13651,9 @@ const TrussCAPI = {
                 {
                     "name": "rotateTo",
                     "params": "q",
-                    "params_typed": "Quaternion q",
+                    "params_typed": "const Quaternion& q",
                     "return_type": "TweenMod&",
                     "desc": "Animate rotation to target angle or quaternion (TweenMod method) (C++ only)",
-                    "snippet": "rotateTo(${1:radians})",
                     "keywords": [
                         "animate rotation",
                         "spin",
@@ -14684,7 +13676,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "TweenMod&",
                     "desc": "Animate rotation by relative angle (TweenMod method) (C++ only)",
-                    "snippet": "rotateBy(${1:radians})",
                     "keywords": [
                         "animate rotation",
                         "spin",
@@ -14700,7 +13691,6 @@ const TrussCAPI = {
                     "params_typed": "float seconds",
                     "return_type": "TweenMod&",
                     "desc": "Set animation duration (TweenMod method) (C++ only)",
-                    "snippet": "duration(${1:1.0f})",
                     "keywords": [
                         "length",
                         "time",
@@ -14716,7 +13706,6 @@ const TrussCAPI = {
                     "params_typed": "EaseType type, EaseMode mode = InOut",
                     "return_type": "TweenMod&",
                     "desc": "Set easing function (TweenMod method). Types: Linear, Quad, Cubic, Quart, Quint, Sine, Expo, Circ, Back, Elastic, Bounce. Modes: In, Out, InOut (C++ only)",
-                    "snippet": "ease(EaseType::${1:Cubic}, EaseMode::${2:InOut})",
                     "keywords": [
                         "easing",
                         "interpolation",
@@ -14739,7 +13728,6 @@ const TrussCAPI = {
                     "params_typed": "float seconds",
                     "return_type": "TweenMod&",
                     "desc": "Set delay before animation starts (TweenMod method) (C++ only)",
-                    "snippet": "delay(${1:0.5f})",
                     "keywords": [
                         "wait",
                         "defer",
@@ -14756,7 +13744,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Node*",
                     "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none). A tool such as an inspector can read it and drive it via setSelectedNode().",
-                    "snippet": "getSelectedNode()",
                     "keywords": [
                         "selection",
                         "active",
@@ -14778,7 +13765,6 @@ const TrussCAPI = {
                     "params_typed": "Node* n",
                     "return_type": "void",
                     "desc": "Set the currently selected node. Pass nullptr to clear the selection.",
-                    "snippet": "setSelectedNode(${1:n})",
                     "keywords": [
                         "select",
                         "selection",
@@ -14798,7 +13784,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Node*",
                     "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around.",
-                    "snippet": "getRootNode()",
                     "keywords": [
                         "root",
                         "tree",
@@ -14822,11 +13807,10 @@ const TrussCAPI = {
             "functions": [
                 {
                     "name": "setupScreenPerspective",
-                    "params": "",
-                    "params_typed": "",
+                    "params": "[fovDeg], [nearDist], [farDist]",
+                    "params_typed": "float fovDeg = 45.0f, float nearDist = 0.0f, float farDist = 0.0f",
                     "return_type": "void",
                     "desc": "Set up perspective projection (oF-style default 3D)",
-                    "snippet": "setupScreenPerspective()",
                     "keywords": [
                         "perspective",
                         "projection",
@@ -14845,11 +13829,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setupScreenPerspective",
-                    "params": "fovDeg",
-                    "params_typed": "float fovDeg",
+                    "params": "[fovDeg], [nearDist], [farDist]",
+                    "params_typed": "float fovDeg = 45.0f, float nearDist = 0.0f, float farDist = 0.0f",
                     "return_type": "void",
                     "desc": "Set up perspective projection (oF-style default 3D)",
-                    "snippet": "setupScreenPerspective()",
                     "keywords": [
                         "perspective",
                         "projection",
@@ -14872,7 +13855,6 @@ const TrussCAPI = {
                     "params_typed": "float fovDeg, float nearDist, float farDist",
                     "return_type": "void",
                     "desc": "Set up perspective projection (oF-style default 3D)",
-                    "snippet": "setupScreenPerspective()",
                     "keywords": [
                         "perspective",
                         "projection",
@@ -14895,7 +13877,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Set up orthographic projection (2D mode)",
-                    "snippet": "setupScreenOrtho()",
                     "keywords": [
                         "orthographic",
                         "projection",
@@ -14913,11 +13894,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setupScreenFov",
-                    "params": "fovDeg",
-                    "params_typed": "float fovDeg",
+                    "params": "fovDeg, [nearDist], [farDist]",
+                    "params_typed": "float fovDeg, float nearDist = 0.0f, float farDist = 0.0f",
                     "return_type": "void",
                     "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)",
-                    "snippet": "setupScreenFov(${1:45.0})",
                     "keywords": [
                         "fov",
                         "field of view",
@@ -14939,7 +13919,6 @@ const TrussCAPI = {
                     "params_typed": "float fovDeg, float nearDist, float farDist",
                     "return_type": "void",
                     "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)",
-                    "snippet": "setupScreenFov(${1:45.0})",
                     "keywords": [
                         "fov",
                         "field of view",
@@ -14961,7 +13940,6 @@ const TrussCAPI = {
                     "params_typed": "float fovDeg",
                     "return_type": "void",
                     "desc": "Set default screen FOV (applied at frame start)",
-                    "snippet": "setDefaultScreenFov(${1:45.0})",
                     "keywords": [
                         "fov",
                         "field of view",
@@ -14981,7 +13959,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current default screen FOV",
-                    "snippet": "getDefaultScreenFov()",
                     "keywords": [
                         "fov",
                         "field of view",
@@ -15001,7 +13978,6 @@ const TrussCAPI = {
                     "params_typed": "const Vec3& worldPos",
                     "return_type": "Vec3",
                     "desc": "Convert world coordinate to screen coordinate (x, y = screen pos, z = depth 0-1)",
-                    "snippet": "worldToScreen(${1:worldPos})",
                     "keywords": [
                         "project",
                         "world to screen",
@@ -15025,11 +14001,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "screenToWorld",
-                    "params": "screenPos",
-                    "params_typed": "const Vec2& screenPos",
+                    "params": "screenPos, [worldZ]",
+                    "params_typed": "const Vec2 & screenPos, float worldZ = 0.0f",
                     "return_type": "Vec3",
                     "desc": "Convert screen coordinate to world coordinate on Z plane",
-                    "snippet": "screenToWorld(${1:screenPos}, ${2:0.0f})",
                     "keywords": [
                         "unproject",
                         "screen to world",
@@ -15058,7 +14033,6 @@ const TrussCAPI = {
                     "params_typed": "const Vec2& screenPos, float worldZ",
                     "return_type": "Vec3",
                     "desc": "Convert screen coordinate to world coordinate on Z plane",
-                    "snippet": "screenToWorld(${1:screenPos}, ${2:0.0f})",
                     "keywords": [
                         "unproject",
                         "screen to world",
@@ -15089,36 +14063,11 @@ const TrussCAPI = {
             "name": "3D Camera",
             "functions": [
                 {
-                    "name": "createEasyCam",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "EasyCam@",
-                    "desc": "Create an EasyCam instance",
-                    "snippet": "createEasyCam()",
-                    "keywords": [
-                        "camera",
-                        "orbit",
-                        "easycam",
-                        "ofEasyCam",
-                        "navigate",
-                        "viewport"
-                    ],
-                    "desc_ja": "EasyCamインスタンスを作成",
-                    "desc_ko": "EasyCam 인스턴스를 생성",
-                    "related": [
-                        "EasyCam",
-                        "setupScreenPerspective",
-                        "begin",
-                        "enableMouseInput"
-                    ]
-                },
-                {
                     "name": "begin",
                     "params": "",
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Apply camera transform (start 3D mode)",
-                    "snippet": "begin()",
                     "keywords": [
                         "start",
                         "bind",
@@ -15138,7 +14087,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Restore previous transform (end 3D mode)",
-                    "snippet": "end()",
                     "keywords": [
                         "finish",
                         "stop",
@@ -15157,7 +14105,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Reset camera to default position",
-                    "snippet": "reset()",
                     "keywords": [
                         "restart",
                         "rewind",
@@ -15173,7 +14120,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "void",
                     "desc": "Set camera look-at target",
-                    "snippet": "setTarget(${1:0}, ${2:0}, ${3:0})",
                     "keywords": [
                         "look at",
                         "focus",
@@ -15192,10 +14138,9 @@ const TrussCAPI = {
                 {
                     "name": "setTarget",
                     "params": "target",
-                    "params_typed": "const Vec3 &in target",
+                    "params_typed": "const Vec3 &target",
                     "return_type": "void",
                     "desc": "Set camera look-at target",
-                    "snippet": "setTarget(${1:0}, ${2:0}, ${3:0})",
                     "keywords": [
                         "look at",
                         "focus",
@@ -15217,7 +14162,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Vec3",
                     "desc": "Get camera look-at target",
-                    "snippet": "getTarget()",
                     "keywords": [
                         "look at",
                         "focus",
@@ -15238,7 +14182,6 @@ const TrussCAPI = {
                     "params_typed": "float distance",
                     "return_type": "void",
                     "desc": "Set distance from target",
-                    "snippet": "setDistance(${1:400})",
                     "keywords": [
                         "zoom",
                         "distance",
@@ -15258,7 +14201,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get distance from target",
-                    "snippet": "getDistance()",
                     "keywords": [
                         "zoom",
                         "distance",
@@ -15278,7 +14220,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "void",
                     "desc": "Set orbit azimuth (horizontal angle, radians)",
-                    "snippet": "setAzimuth(${1:0.7})",
                     "keywords": [
                         "orbit",
                         "horizontal angle",
@@ -15299,7 +14240,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get orbit azimuth (horizontal angle, radians)",
-                    "snippet": "getAzimuth()",
                     "keywords": [
                         "orbit",
                         "horizontal angle",
@@ -15319,7 +14259,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "void",
                     "desc": "Set orbit elevation (vertical angle, radians; clamped to ~±80°)",
-                    "snippet": "setElevation(${1:0.5})",
                     "keywords": [
                         "orbit",
                         "vertical angle",
@@ -15340,7 +14279,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get orbit elevation (vertical angle, radians)",
-                    "snippet": "getElevation()",
                     "keywords": [
                         "orbit",
                         "vertical angle",
@@ -15361,7 +14299,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "void",
                     "desc": "Set field of view in radians",
-                    "snippet": "setFov(${1:0.785})",
                     "keywords": [
                         "field of view",
                         "zoom",
@@ -15385,7 +14322,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get field of view in radians",
-                    "snippet": "getFov()",
                     "keywords": [
                         "field of view",
                         "lens",
@@ -15405,7 +14341,6 @@ const TrussCAPI = {
                     "params_typed": "float degrees",
                     "return_type": "void",
                     "desc": "Set field of view in degrees",
-                    "snippet": "setFovDeg(${1:45})",
                     "keywords": [
                         "field of view",
                         "degrees",
@@ -15422,7 +14357,6 @@ const TrussCAPI = {
                     "params_typed": "float nearClip",
                     "return_type": "void",
                     "desc": "Set near clipping plane",
-                    "snippet": "setNearClip(${1:0.1})",
                     "keywords": [
                         "near plane",
                         "clipping",
@@ -15442,7 +14376,6 @@ const TrussCAPI = {
                     "params_typed": "float farClip",
                     "return_type": "void",
                     "desc": "Set far clipping plane",
-                    "snippet": "setFarClip(${1:10000})",
                     "keywords": [
                         "far plane",
                         "clipping",
@@ -15462,7 +14395,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get near clipping plane distance",
-                    "snippet": "getNearClip()",
                     "keywords": [
                         "near plane",
                         "clipping",
@@ -15482,7 +14414,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get far clipping plane distance",
-                    "snippet": "getFarClip()",
                     "keywords": [
                         "far plane",
                         "clipping",
@@ -15502,7 +14433,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Enable mouse input for camera control",
-                    "snippet": "enableMouseInput()",
                     "keywords": [
                         "mouse control",
                         "interactive",
@@ -15525,7 +14455,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Disable mouse input for camera control",
-                    "snippet": "disableMouseInput()",
                     "keywords": [
                         "mouse control",
                         "lock",
@@ -15545,7 +14474,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if mouse input is enabled",
-                    "snippet": "isMouseInputEnabled()",
                     "keywords": [
                         "mouse control",
                         "interactive",
@@ -15562,7 +14490,6 @@ const TrussCAPI = {
                     "params_typed": "int x, int y, int button",
                     "return_type": "void",
                     "desc": "Handle mouse press event",
-                    "snippet": "mousePressed(${1:x}, ${2:y}, ${3:button})",
                     "keywords": [
                         "click",
                         "press",
@@ -15586,7 +14513,6 @@ const TrussCAPI = {
                     "params_typed": "int x, int y, int button",
                     "return_type": "void",
                     "desc": "Handle mouse release event",
-                    "snippet": "mouseReleased(${1:x}, ${2:y}, ${3:button})",
                     "keywords": [
                         "release",
                         "mouseup",
@@ -15609,7 +14535,6 @@ const TrussCAPI = {
                     "params_typed": "int x, int y, int button",
                     "return_type": "void",
                     "desc": "Handle mouse drag event",
-                    "snippet": "mouseDragged(${1:x}, ${2:y}, ${3:button})",
                     "keywords": [
                         "drag",
                         "swipe",
@@ -15632,7 +14557,6 @@ const TrussCAPI = {
                     "params_typed": "float dx, float dy",
                     "return_type": "void",
                     "desc": "Handle mouse scroll event (for zoom)",
-                    "snippet": "mouseScrolled(${1:dx}, ${2:dy})",
                     "keywords": [
                         "scroll",
                         "wheel",
@@ -15660,7 +14584,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Vec3",
                     "desc": "Get camera position",
-                    "snippet": "getPosition()",
                     "keywords": [
                         "progress",
                         "playhead",
@@ -15676,7 +14599,6 @@ const TrussCAPI = {
                     "params_typed": "float sensitivity",
                     "return_type": "void",
                     "desc": "Set rotation sensitivity",
-                    "snippet": "setSensitivity(${1:1.0})",
                     "keywords": [
                         "rotation speed",
                         "sensitivity",
@@ -15693,7 +14615,6 @@ const TrussCAPI = {
                     "params_typed": "float sensitivity",
                     "return_type": "void",
                     "desc": "Set zoom sensitivity",
-                    "snippet": "setZoomSensitivity(${1:10.0})",
                     "keywords": [
                         "zoom speed",
                         "sensitivity",
@@ -15710,7 +14631,6 @@ const TrussCAPI = {
                     "params_typed": "float sensitivity",
                     "return_type": "void",
                     "desc": "Set pan sensitivity",
-                    "snippet": "setPanSensitivity(${1:1.0})",
                     "keywords": [
                         "pan speed",
                         "sensitivity",
@@ -15727,7 +14647,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "const Vec3&",
                     "desc": "Current camera position used for specular/PBR view vector",
-                    "snippet": "getCameraPosition()",
                     "keywords": [
                         "camera position",
                         "eye",
@@ -15756,7 +14675,6 @@ const TrussCAPI = {
                     "params_typed": "Light& light",
                     "return_type": "void",
                     "desc": "Add a light to the scene",
-                    "snippet": "addLight(${1:light})",
                     "keywords": [
                         "light",
                         "lamp",
@@ -15794,7 +14712,6 @@ const TrussCAPI = {
                     "params_typed": "Light& light",
                     "return_type": "void",
                     "desc": "Remove a light from the scene",
-                    "snippet": "removeLight(${1:light})",
                     "keywords": [
                         "light",
                         "delete light",
@@ -15814,7 +14731,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Remove all lights from the scene",
-                    "snippet": "clearLights()",
                     "keywords": [
                         "lights",
                         "remove all",
@@ -15845,7 +14761,6 @@ const TrussCAPI = {
                     "params_typed": "Material& material",
                     "return_type": "void",
                     "desc": "Set material for subsequent mesh draws (activates PBR)",
-                    "snippet": "setMaterial(${1:material})",
                     "keywords": [
                         "material",
                         "pbr",
@@ -15883,7 +14798,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Clear material (return to default rendering)",
-                    "snippet": "clearMaterial()",
                     "keywords": [
                         "material",
                         "reset",
@@ -15917,7 +14831,6 @@ const TrussCAPI = {
                     "params_typed": "const Vec3& pos",
                     "return_type": "void",
                     "desc": "Set camera position for specular calculation",
-                    "snippet": "setCameraPosition(${1:cam.getPosition()})",
                     "keywords": [
                         "camera position",
                         "eye",
@@ -15952,7 +14865,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "void",
                     "desc": "Set camera position for specular calculation",
-                    "snippet": "setCameraPosition(${1:cam.getPosition()})",
                     "keywords": [
                         "camera position",
                         "eye",
@@ -15987,7 +14899,6 @@ const TrussCAPI = {
                     "params_typed": "Environment& env",
                     "return_type": "void",
                     "desc": "Set IBL environment for PBR ambient lighting",
-                    "snippet": "setEnvironment(${1:env})",
                     "keywords": [
                         "ibl",
                         "environment",
@@ -16025,7 +14936,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Clear IBL environment",
-                    "snippet": "clearEnvironment()",
                     "keywords": [
                         "ibl",
                         "environment",
@@ -16042,7 +14952,6 @@ const TrussCAPI = {
                     "params_typed": "Light& light",
                     "return_type": "void",
                     "desc": "Begin shadow depth pass from the light's point of view",
-                    "snippet": "beginShadowPass(${1:light})",
                     "keywords": [
                         "shadow",
                         "depth pass",
@@ -16071,7 +14980,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "End shadow depth pass",
-                    "snippet": "endShadowPass()",
                     "keywords": [
                         "shadow",
                         "depth pass",
@@ -16097,7 +15005,6 @@ const TrussCAPI = {
                     "params_typed": "const Mesh& mesh",
                     "return_type": "void",
                     "desc": "Draw a mesh into the shadow depth pass (depth only)",
-                    "snippet": "shadowDraw(${1:mesh})",
                     "keywords": [
                         "shadow",
                         "depth",
@@ -16124,7 +15031,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Number of currently active lights",
-                    "snippet": "getNumLights()",
                     "keywords": [
                         "lights",
                         "count",
@@ -16141,7 +15047,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Environment*",
                     "desc": "Get the current environment (IBL/skybox), or nullptr if none is set",
-                    "snippet": "getEnvironment()",
                     "keywords": [
                         "ibl",
                         "environment",
@@ -16163,7 +15068,6 @@ const TrussCAPI = {
                     "params_typed": "const Vec3& worldPos, const Vec3& worldNormal, const Material& material",
                     "return_type": "Color",
                     "desc": "CPU-side lighting result for a world position and normal, summing all active lights with the given material",
-                    "snippet": "calculateLighting(${1:worldPos}, ${2:worldNormal}, ${3:material})",
                     "keywords": [
                         "lighting",
                         "cpu",
@@ -16193,7 +15097,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Mat4",
                     "desc": "Create an identity matrix",
-                    "snippet": "Mat4_identity()",
                     "keywords": [
                         "matrix",
                         "identity",
@@ -16213,7 +15116,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float z",
                     "return_type": "Mat4",
                     "desc": "Create a translation matrix",
-                    "snippet": "Mat4_translate(${1:x}, ${2:y}, ${3:z})",
                     "keywords": [
                         "matrix",
                         "translation",
@@ -16230,10 +15132,9 @@ const TrussCAPI = {
                 {
                     "name": "Mat4_translate",
                     "params": "v",
-                    "params_typed": "Vec3 v",
+                    "params_typed": "const Vec3& v",
                     "return_type": "Mat4",
                     "desc": "Create a translation matrix",
-                    "snippet": "Mat4_translate(${1:x}, ${2:y}, ${3:z})",
                     "keywords": [
                         "matrix",
                         "translation",
@@ -16253,7 +15154,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "Mat4",
                     "desc": "Create X-axis rotation matrix",
-                    "snippet": "Mat4_rotateX(${1:radians})",
                     "keywords": [
                         "matrix",
                         "rotation",
@@ -16273,7 +15173,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "Mat4",
                     "desc": "Create Y-axis rotation matrix",
-                    "snippet": "Mat4_rotateY(${1:radians})",
                     "keywords": [
                         "matrix",
                         "rotation",
@@ -16293,7 +15192,6 @@ const TrussCAPI = {
                     "params_typed": "float radians",
                     "return_type": "Mat4",
                     "desc": "Create Z-axis rotation matrix",
-                    "snippet": "Mat4_rotateZ(${1:radians})",
                     "keywords": [
                         "matrix",
                         "rotation",
@@ -16313,7 +15211,6 @@ const TrussCAPI = {
                     "params_typed": "float s",
                     "return_type": "Mat4",
                     "desc": "Create a scaling matrix",
-                    "snippet": "Mat4_scale(${1:s})",
                     "keywords": [
                         "matrix",
                         "scaling",
@@ -16333,7 +15230,6 @@ const TrussCAPI = {
                     "params_typed": "float sx, float sy, float sz",
                     "return_type": "Mat4",
                     "desc": "Create a scaling matrix",
-                    "snippet": "Mat4_scale(${1:s})",
                     "keywords": [
                         "matrix",
                         "scaling",
@@ -16350,10 +15246,9 @@ const TrussCAPI = {
                 {
                     "name": "Mat4_lookAt",
                     "params": "eye, target, up",
-                    "params_typed": "Vec3 eye, Vec3 target, Vec3 up",
+                    "params_typed": "const Vec3 &, const Vec3 &, const Vec3 &",
                     "return_type": "Mat4",
                     "desc": "Create a view matrix",
-                    "snippet": "Mat4_lookAt(${1:eye}, ${2:target}, ${3:up})",
                     "keywords": [
                         "view",
                         "camera",
@@ -16375,7 +15270,6 @@ const TrussCAPI = {
                     "params_typed": "float left, float right, float bottom, float top, float nearPlane, float farPlane",
                     "return_type": "Mat4",
                     "desc": "Create an orthographic projection matrix",
-                    "snippet": "Mat4_ortho(${1:left}, ${2:right}, ${3:bottom}, ${4:top}, ${5:near}, ${6:far})",
                     "keywords": [
                         "orthographic",
                         "projection",
@@ -16396,7 +15290,6 @@ const TrussCAPI = {
                     "params_typed": "float fovY, float aspect, float nearPlane, float farPlane",
                     "return_type": "Mat4",
                     "desc": "Create a perspective projection matrix",
-                    "snippet": "Mat4_perspective(${1:fov}, ${2:aspect}, ${3:near}, ${4:far})",
                     "keywords": [
                         "perspective",
                         "projection",
@@ -16420,7 +15313,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Quaternion",
                     "desc": "Create an identity quaternion",
-                    "snippet": "Quaternion_identity()",
                     "keywords": [
                         "quaternion",
                         "identity",
@@ -16437,10 +15329,9 @@ const TrussCAPI = {
                 {
                     "name": "Quaternion_fromAxisAngle",
                     "params": "axis, radians",
-                    "params_typed": "Vec3 axis, float radians",
+                    "params_typed": "const Vec3 &, float",
                     "return_type": "Quaternion",
                     "desc": "Create quaternion from axis-angle",
-                    "snippet": "Quaternion_fromAxisAngle(${1:axis}, ${2:radians})",
                     "keywords": [
                         "quaternion",
                         "axis angle",
@@ -16462,7 +15353,6 @@ const TrussCAPI = {
                     "params_typed": "float pitch, float yaw, float roll",
                     "return_type": "Quaternion",
                     "desc": "Create quaternion from Euler angles",
-                    "snippet": "Quaternion_fromEuler(${1:pitch}, ${2:yaw}, ${3:roll})",
                     "keywords": [
                         "quaternion",
                         "euler",
@@ -16480,10 +15370,9 @@ const TrussCAPI = {
                 {
                     "name": "Quaternion_fromEuler",
                     "params": "euler",
-                    "params_typed": "Vec3 euler",
+                    "params_typed": "const Vec3& euler",
                     "return_type": "Quaternion",
                     "desc": "Create quaternion from Euler angles",
-                    "snippet": "Quaternion_fromEuler(${1:pitch}, ${2:yaw}, ${3:roll})",
                     "keywords": [
                         "quaternion",
                         "euler",
@@ -16501,10 +15390,9 @@ const TrussCAPI = {
                 {
                     "name": "Quaternion_slerp",
                     "params": "a, b, t",
-                    "params_typed": "Quaternion a, Quaternion b, float t",
+                    "params_typed": "const Quaternion &, const Quaternion &, float",
                     "return_type": "Quaternion",
                     "desc": "Spherical linear interpolation",
-                    "snippet": "Quaternion_slerp(${1:a}, ${2:b}, ${3:t})",
                     "keywords": [
                         "slerp",
                         "interpolate",
@@ -16531,10 +15419,9 @@ const TrussCAPI = {
                 {
                     "name": "drawMesh",
                     "params": "mesh",
-                    "params_typed": "Mesh mesh",
+                    "params_typed": "const Mesh & mesh",
                     "return_type": "void",
                     "desc": "Draw a mesh",
-                    "snippet": "drawMesh(${1:mesh})",
                     "keywords": [
                         "mesh",
                         "model",
@@ -16560,35 +15447,11 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "drawPolyline",
-                    "params": "polyline",
-                    "params_typed": "Polyline polyline",
-                    "return_type": "void",
-                    "desc": "Draw a polyline",
-                    "snippet": "drawPolyline(${1:polyline})",
-                    "keywords": [
-                        "polyline",
-                        "line strip",
-                        "path",
-                        "curve",
-                        "ofPolyline",
-                        "outline"
-                    ],
-                    "desc_ja": "ポリラインを描画",
-                    "desc_ko": "폴리라인을 그림",
-                    "related": [
-                        "Path",
-                        "drawCurve",
-                        "beginShape"
-                    ]
-                },
-                {
                     "name": "createBox",
                     "params": "size",
                     "params_typed": "float size",
                     "return_type": "Mesh",
                     "desc": "Create a box mesh",
-                    "snippet": "createBox(${1:size})",
                     "keywords": [
                         "box",
                         "cube",
@@ -16625,7 +15488,6 @@ const TrussCAPI = {
                     "params_typed": "float w, float h, float d",
                     "return_type": "Mesh",
                     "desc": "Create a box mesh",
-                    "snippet": "createBox(${1:size})",
                     "keywords": [
                         "box",
                         "cube",
@@ -16662,7 +15524,6 @@ const TrussCAPI = {
                     "params_typed": "float width, float height, int cols = 2, int rows = 2",
                     "return_type": "Mesh",
                     "desc": "Create a plane mesh (subdivided quad on the XY plane)",
-                    "snippet": "createPlane(${1:width}, ${2:height})",
                     "keywords": [
                         "plane",
                         "quad",
@@ -16698,7 +15559,6 @@ const TrussCAPI = {
                     "params_typed": "float radius, float height, int resolution = 16",
                     "return_type": "Mesh",
                     "desc": "Create a cylinder mesh",
-                    "snippet": "createCylinder(${1:radius}, ${2:height})",
                     "keywords": [
                         "cylinder",
                         "tube",
@@ -16733,7 +15593,6 @@ const TrussCAPI = {
                     "params_typed": "float radius, float height, int resolution = 16",
                     "return_type": "Mesh",
                     "desc": "Create a cone mesh",
-                    "snippet": "createCone(${1:radius}, ${2:height})",
                     "keywords": [
                         "cone",
                         "pyramid",
@@ -16769,7 +15628,6 @@ const TrussCAPI = {
                     "params_typed": "float radius, int subdivisions = 2",
                     "return_type": "Mesh",
                     "desc": "Create an icosphere mesh (geodesic sphere with uniform triangles)",
-                    "snippet": "createIcoSphere(${1:radius})",
                     "keywords": [
                         "icosphere",
                         "geodesic",
@@ -16798,7 +15656,6 @@ const TrussCAPI = {
                     "params_typed": "float radius, float tubeRadius, int sides = 24, int rings = 16",
                     "return_type": "Mesh",
                     "desc": "Create a torus (donut) mesh",
-                    "snippet": "createTorus(${1:radius}, ${2:tubeRadius})",
                     "keywords": [
                         "torus",
                         "donut",
@@ -16829,7 +15686,6 @@ const TrussCAPI = {
                     "params_typed": "float radius, int res = 20",
                     "return_type": "Mesh",
                     "desc": "Create a sphere mesh",
-                    "snippet": "createSphere(${1:radius})",
                     "keywords": [
                         "sphere",
                         "ball",
@@ -16867,7 +15723,6 @@ const TrussCAPI = {
                     "params_typed": "float radius, float cylinderHeight, int res = 16",
                     "return_type": "Mesh",
                     "desc": "Create a capsule mesh (Y-up: cylinder capped by two hemispheres)",
-                    "snippet": "createCapsule(${1:radius}, ${2:cylinderHeight})",
                     "keywords": [
                         "capsule",
                         "pill",
@@ -16881,54 +15736,6 @@ const TrussCAPI = {
                         "Mesh",
                         "createCylinder",
                         "createSphere"
-                    ]
-                },
-                {
-                    "name": "drawTexture",
-                    "params": "tex, x, y",
-                    "params_typed": "const Texture& tex, float x, float y",
-                    "return_type": "void",
-                    "desc": "Draw a texture",
-                    "snippet": "drawTexture(${1:tex}, ${2:x}, ${3:y})",
-                    "keywords": [
-                        "texture",
-                        "image",
-                        "blit",
-                        "draw image",
-                        "ofTexture",
-                        "quad"
-                    ],
-                    "desc_ja": "テクスチャを描画",
-                    "desc_ko": "텍스처를 그림",
-                    "related": [
-                        "Texture",
-                        "createTexture",
-                        "Image",
-                        "drawSubsection"
-                    ]
-                },
-                {
-                    "name": "drawTexture",
-                    "params": "tex, x, y, w, h",
-                    "params_typed": "const Texture& tex, float x, float y, float w, float h",
-                    "return_type": "void",
-                    "desc": "Draw a texture",
-                    "snippet": "drawTexture(${1:tex}, ${2:x}, ${3:y})",
-                    "keywords": [
-                        "texture",
-                        "image",
-                        "blit",
-                        "draw image",
-                        "ofTexture",
-                        "quad"
-                    ],
-                    "desc_ja": "テクスチャを描画",
-                    "desc_ko": "텍스처를 그림",
-                    "related": [
-                        "Texture",
-                        "createTexture",
-                        "Image",
-                        "drawSubsection"
                     ]
                 }
             ],
@@ -16944,7 +15751,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create a texture",
-                    "snippet": "Texture()",
                     "keywords": [
                         "image",
                         "bitmap",
@@ -16958,7 +15764,6 @@ const TrussCAPI = {
                         "Image",
                         "Fbo",
                         "Pixels",
-                        "drawTexture",
                         "setTexture"
                     ],
                     "examples": [
@@ -16973,34 +15778,11 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "createTexture",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Texture@",
-                    "desc": "Create a texture (TrussSketch factory)",
-                    "snippet": "Texture@ tex = createTexture();",
-                    "keywords": [
-                        "image",
-                        "make",
-                        "new",
-                        "gpu",
-                        "factory"
-                    ],
-                    "desc_ja": "テクスチャを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "텍스처를 생성 (TrussSketch 팩토리)",
-                    "related": [
-                        "Texture",
-                        "createFbo",
-                        "createPixels"
-                    ]
-                },
-                {
                     "name": "load",
                     "params": "path",
-                    "params_typed": "const string& path",
+                    "params_typed": "const std::filesystem::path &, bool",
                     "return_type": "bool",
                     "desc": "Load image from file",
-                    "snippet": "load(${1:\"image.png\"})",
                     "keywords": [
                         "open",
                         "read",
@@ -17011,34 +15793,11 @@ const TrussCAPI = {
                     "desc_ko": "파일에서 이미지를 로드"
                 },
                 {
-                    "name": "loadFromPixels",
-                    "params": "pixels",
-                    "params_typed": "const Pixels& pixels",
-                    "return_type": "bool",
-                    "desc": "Load from pixel data",
-                    "snippet": "loadFromPixels(${1:pixels})",
-                    "keywords": [
-                        "upload",
-                        "buffer",
-                        "data",
-                        "raw",
-                        "memory"
-                    ],
-                    "desc_ja": "ピクセルデータから読み込む",
-                    "desc_ko": "픽셀 데이터에서 로드",
-                    "related": [
-                        "Pixels",
-                        "readToPixels",
-                        "Image"
-                    ]
-                },
-                {
                     "name": "bind",
                     "params": "slot",
-                    "params_typed": "int slot = 0",
+                    "params_typed": "",
                     "return_type": "void",
                     "desc": "Bind texture",
-                    "snippet": "bind(${1:0})",
                     "keywords": [
                         "attach",
                         "activate",
@@ -17055,10 +15814,9 @@ const TrussCAPI = {
                 {
                     "name": "unbind",
                     "params": "slot",
-                    "params_typed": "int slot = 0",
+                    "params_typed": "",
                     "return_type": "void",
                     "desc": "Unbind texture",
-                    "snippet": "unbind(${1:0})",
                     "keywords": [
                         "detach",
                         "release",
@@ -17077,7 +15835,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get width",
-                    "snippet": "getWidth()",
                     "keywords": [
                         "resolution",
                         "size",
@@ -17093,7 +15850,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get height",
-                    "snippet": "getHeight()",
                     "keywords": [
                         "resolution",
                         "size",
@@ -17109,7 +15865,6 @@ const TrussCAPI = {
                     "params_typed": "TextureFormat fmt",
                     "return_type": "int",
                     "desc": "Number of color channels for a TextureFormat (1, 2, or 4)",
-                    "snippet": "channelCount(${1:fmt})",
                     "keywords": [
                         "channels",
                         "components",
@@ -17130,7 +15885,6 @@ const TrussCAPI = {
                     "params_typed": "TextureFormat fmt",
                     "return_type": "int",
                     "desc": "Bytes per pixel for a TextureFormat",
-                    "snippet": "bytesPerPixel(${1:fmt})",
                     "keywords": [
                         "bpp",
                         "stride",
@@ -17151,7 +15905,6 @@ const TrussCAPI = {
                     "params_typed": "TextureFormat fmt",
                     "return_type": "bool",
                     "desc": "Whether a TextureFormat uses floating-point components",
-                    "snippet": "isFloatFormat(${1:fmt})",
                     "keywords": [
                         "float",
                         "hdr",
@@ -17178,7 +15931,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create an FBO",
-                    "snippet": "Fbo()",
                     "keywords": [
                         "framebuffer",
                         "rendertarget",
@@ -17206,33 +15958,11 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "createFbo",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Fbo@",
-                    "desc": "Create an FBO (TrussSketch factory)",
-                    "snippet": "Fbo@ fbo = createFbo();",
-                    "keywords": [
-                        "framebuffer",
-                        "rendertarget",
-                        "offscreen",
-                        "make",
-                        "factory"
-                    ],
-                    "desc_ja": "FBOを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "FBO를 생성 (TrussSketch 팩토리)",
-                    "related": [
-                        "Fbo",
-                        "createTexture"
-                    ]
-                },
-                {
                     "name": "allocate",
                     "params": "w, h",
-                    "params_typed": "int w, int h",
+                    "params_typed": "int, int, int, TextureFormat, bool",
                     "return_type": "void",
                     "desc": "Allocate buffer",
-                    "snippet": "allocate(${1:800}, ${2:600})",
                     "keywords": [
                         "alloc",
                         "create",
@@ -17253,7 +15983,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Begin drawing to FBO. No args = preserve previous content. With args = clear with specified color",
-                    "snippet": "begin()",
                     "keywords": [
                         "start",
                         "bind",
@@ -17269,7 +15998,6 @@ const TrussCAPI = {
                     "params_typed": "float r, float g, float b, float a = 1.0",
                     "return_type": "void",
                     "desc": "Begin drawing to FBO. No args = preserve previous content. With args = clear with specified color",
-                    "snippet": "begin()",
                     "keywords": [
                         "start",
                         "bind",
@@ -17285,7 +16013,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "End drawing to FBO",
-                    "snippet": "end()",
                     "keywords": [
                         "finish",
                         "stop",
@@ -17301,7 +16028,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "Texture&",
                     "desc": "Get internal texture",
-                    "snippet": "getTexture()",
                     "keywords": [
                         "image",
                         "result",
@@ -17314,31 +16040,7 @@ const TrussCAPI = {
                         "Texture",
                         "setTexture",
                         "getTextureCount",
-                        "drawTexture",
                         "drawMesh"
-                    ]
-                },
-                {
-                    "name": "readToPixels",
-                    "params": "pixels",
-                    "params_typed": "Pixels& pixels",
-                    "return_type": "void",
-                    "desc": "Read pixels to CPU memory",
-                    "snippet": "readToPixels(${1:pixels})",
-                    "keywords": [
-                        "readback",
-                        "download",
-                        "cpu",
-                        "grab",
-                        "capture"
-                    ],
-                    "desc_ja": "ピクセルをCPUメモリに読み出す",
-                    "desc_ko": "픽셀을 CPU 메모리로 읽음",
-                    "related": [
-                        "Pixels",
-                        "captureWindow",
-                        "grabScreen",
-                        "loadFromPixels"
                     ]
                 }
             ],
@@ -17708,7 +16410,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create pixel buffer",
-                    "snippet": "Pixels()",
                     "keywords": [
                         "bitmap",
                         "buffer",
@@ -17721,7 +16422,6 @@ const TrussCAPI = {
                     "related": [
                         "Image",
                         "Texture",
-                        "loadFromPixels",
                         "grabScreen",
                         "captureWindow"
                     ],
@@ -17737,33 +16437,11 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "createPixels",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Pixels@",
-                    "desc": "Create pixel buffer (TrussSketch factory)",
-                    "snippet": "Pixels@ px = createPixels();",
-                    "keywords": [
-                        "bitmap",
-                        "buffer",
-                        "make",
-                        "factory",
-                        "raw"
-                    ],
-                    "desc_ja": "ピクセルバッファを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "픽셀 버퍼를 생성 (TrussSketch 팩토리)",
-                    "related": [
-                        "Pixels",
-                        "createTexture"
-                    ]
-                },
-                {
                     "name": "allocate",
                     "params": "w, h, channels",
-                    "params_typed": "int w, int h, int channels",
+                    "params_typed": "int, int, int, PixelFormat",
                     "return_type": "void",
                     "desc": "Allocate memory",
-                    "snippet": "allocate(${1:800}, ${2:600}, ${3:4})",
                     "keywords": [
                         "alloc",
                         "create",
@@ -17792,8 +16470,7 @@ const TrussCAPI = {
                     "related": [
                         "getDataPath",
                         "getDataPathRoot",
-                        "getColor",
-                        "loadFromPixels"
+                        "getColor"
                     ]
                 },
                 {
@@ -17802,7 +16479,6 @@ const TrussCAPI = {
                     "params_typed": "int x, int y",
                     "return_type": "Color",
                     "desc": "Get color at pixel",
-                    "snippet": "getColor(${1:x}, ${2:y})",
                     "keywords": [
                         "pixel",
                         "read",
@@ -17825,7 +16501,6 @@ const TrussCAPI = {
                     "params_typed": "int x, int y, const Color& c",
                     "return_type": "void",
                     "desc": "Set color at pixel",
-                    "snippet": "setColor(${1:x}, ${2:y}, ${3:color})",
                     "keywords": [
                         "color",
                         "tint",
@@ -17848,7 +16523,7 @@ const TrussCAPI = {
                 {
                     "name": "save",
                     "params": "path",
-                    "params_typed": "const string& path",
+                    "params_typed": "const std::filesystem::path &",
                     "return_type": "bool",
                     "desc": "Save to file",
                     "keywords": [
@@ -17869,36 +16544,11 @@ const TrussCAPI = {
             "name": "Types - Mesh",
             "functions": [
                 {
-                    "name": "createMesh",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Mesh@",
-                    "desc": "Create a new Mesh",
-                    "snippet": "Mesh@ mesh = createMesh();",
-                    "keywords": [
-                        "geometry",
-                        "model",
-                        "vbo",
-                        "vertices",
-                        "factory"
-                    ],
-                    "desc_ja": "メッシュを作成",
-                    "desc_ko": "새 Mesh를 생성",
-                    "related": [
-                        "Mesh",
-                        "drawMesh",
-                        "createBox",
-                        "createSphere",
-                        "beginShape"
-                    ]
-                },
-                {
                     "name": "Mesh",
                     "params": "",
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create a new Mesh (constructor)",
-                    "snippet": "Mesh()",
                     "keywords": [
                         "geometry",
                         "model",
@@ -17934,10 +16584,9 @@ const TrussCAPI = {
                 {
                     "name": "setMode",
                     "params": "mode",
-                    "params_typed": "int mode",
-                    "return_type": "void",
+                    "params_typed": "PrimitiveMode",
+                    "return_type": "Mesh&",
                     "desc": "Set primitive mode (MESH_TRIANGLES, etc.)",
-                    "snippet": "setMode(${1:MESH_TRIANGLES})",
                     "keywords": [
                         "primitive",
                         "triangles",
@@ -17956,9 +16605,8 @@ const TrussCAPI = {
                     "name": "addVertex",
                     "params": "x, y, z",
                     "params_typed": "float x, float y, float z",
-                    "return_type": "void",
+                    "return_type": "Mesh&",
                     "desc": "Add a vertex",
-                    "snippet": "addVertex(${1:x}, ${2:y}, ${3:0})",
                     "keywords": [
                         "point",
                         "vert",
@@ -17981,10 +16629,9 @@ const TrussCAPI = {
                 {
                     "name": "addVertex",
                     "params": "v",
-                    "params_typed": "Vec3 v",
-                    "return_type": "void",
+                    "params_typed": "const Vec3& v",
+                    "return_type": "Mesh&",
                     "desc": "Add a vertex",
-                    "snippet": "addVertex(${1:x}, ${2:y}, ${3:0})",
                     "keywords": [
                         "point",
                         "vert",
@@ -18008,9 +16655,8 @@ const TrussCAPI = {
                     "name": "addColor",
                     "params": "r, g, b, a",
                     "params_typed": "float r, float g, float b, float a",
-                    "return_type": "void",
+                    "return_type": "Mesh&",
                     "desc": "Add a color for the vertex",
-                    "snippet": "addColor(${1:1}, ${2:1}, ${3:1}, ${4:1})",
                     "keywords": [
                         "vertex color",
                         "rgba",
@@ -18027,10 +16673,9 @@ const TrussCAPI = {
                 {
                     "name": "addColor",
                     "params": "c",
-                    "params_typed": "Color c",
-                    "return_type": "void",
+                    "params_typed": "const Color& c",
+                    "return_type": "Mesh&",
                     "desc": "Add a color for the vertex",
-                    "snippet": "addColor(${1:1}, ${2:1}, ${3:1}, ${4:1})",
                     "keywords": [
                         "vertex color",
                         "rgba",
@@ -18048,9 +16693,8 @@ const TrussCAPI = {
                     "name": "addTexCoord",
                     "params": "u, v",
                     "params_typed": "float u, float v",
-                    "return_type": "void",
+                    "return_type": "Mesh&",
                     "desc": "Add a texture coordinate",
-                    "snippet": "addTexCoord(${1:u}, ${2:v})",
                     "keywords": [
                         "uv",
                         "texture",
@@ -18068,9 +16712,8 @@ const TrussCAPI = {
                     "name": "addNormal",
                     "params": "x, y, z",
                     "params_typed": "float x, float y, float z",
-                    "return_type": "void",
+                    "return_type": "Mesh&",
                     "desc": "Add a normal vector",
-                    "snippet": "addNormal(${1:x}, ${2:y}, ${3:z})",
                     "keywords": [
                         "normal",
                         "lighting",
@@ -18087,10 +16730,9 @@ const TrussCAPI = {
                 {
                     "name": "addIndex",
                     "params": "index",
-                    "params_typed": "int index",
-                    "return_type": "void",
+                    "params_typed": "unsigned int",
+                    "return_type": "Mesh&",
                     "desc": "Add an index",
-                    "snippet": "addIndex(${1:index})",
                     "keywords": [
                         "index",
                         "element",
@@ -18108,10 +16750,9 @@ const TrussCAPI = {
                 {
                     "name": "addTriangle",
                     "params": "i1, i2, i3",
-                    "params_typed": "int i1, int i2, int i3",
-                    "return_type": "void",
+                    "params_typed": "unsigned int, unsigned int, unsigned int",
+                    "return_type": "Mesh&",
                     "desc": "Add a triangle (3 indices)",
-                    "snippet": "addTriangle(${1:i1}, ${2:i2}, ${3:i3})",
                     "keywords": [
                         "triangle",
                         "face",
@@ -18129,9 +16770,8 @@ const TrussCAPI = {
                     "name": "clear",
                     "params": "",
                     "params_typed": "",
-                    "return_type": "void",
+                    "return_type": "Mesh&",
                     "desc": "Clear all data",
-                    "snippet": "clear()",
                     "keywords": [
                         "reset",
                         "empty",
@@ -18147,7 +16787,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Draw the mesh",
-                    "snippet": "draw()",
                     "keywords": [
                         "render",
                         "paint",
@@ -18166,34 +16805,11 @@ const TrussCAPI = {
             "name": "Types - Path",
             "functions": [
                 {
-                    "name": "createPath",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Path@",
-                    "desc": "Create a new Path",
-                    "snippet": "Path@ path = createPath();",
-                    "keywords": [
-                        "shape",
-                        "outline",
-                        "contour",
-                        "factory",
-                        "vector"
-                    ],
-                    "desc_ja": "パスを作成",
-                    "desc_ko": "새 Path를 생성",
-                    "related": [
-                        "Path",
-                        "createStrokeMesh",
-                        "beginShape"
-                    ]
-                },
-                {
                     "name": "Path",
                     "params": "",
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create a new Path (constructor)",
-                    "snippet": "Path()",
                     "keywords": [
                         "shape",
                         "outline",
@@ -18232,7 +16848,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y",
                     "return_type": "void",
                     "desc": "Add a vertex",
-                    "snippet": "addVertex(${1:x}, ${2:y})",
                     "keywords": [
                         "point",
                         "vert",
@@ -18246,10 +16861,9 @@ const TrussCAPI = {
                 {
                     "name": "lineTo",
                     "params": "x, y",
-                    "params_typed": "float x, float y",
+                    "params_typed": "float x, float y, float z = 0",
                     "return_type": "void",
                     "desc": "Add a line segment to point",
-                    "snippet": "lineTo(${1:x}, ${2:y})",
                     "keywords": [
                         "line",
                         "segment",
@@ -18268,10 +16882,9 @@ const TrussCAPI = {
                 {
                     "name": "bezierTo",
                     "params": "cx1, cy1, cx2, cy2, x, y",
-                    "params_typed": "float cx1, float cy1, float cx2, float cy2, float x, float y",
+                    "params_typed": "float cx1, float cy1, float cx2, float cy2, float x, float y, int resolution = -1",
                     "return_type": "void",
                     "desc": "Add a cubic bezier curve",
-                    "snippet": "bezierTo(${1:cx1}, ${2:cy1}, ${3:cx2}, ${4:cy2}, ${5:x}, ${6:y})",
                     "keywords": [
                         "bezier",
                         "cubic",
@@ -18290,10 +16903,9 @@ const TrussCAPI = {
                 {
                     "name": "quadBezierTo",
                     "params": "cx, cy, x, y",
-                    "params_typed": "float cx, float cy, float x, float y",
+                    "params_typed": "float cx, float cy, float x, float y, int resolution = -1",
                     "return_type": "void",
                     "desc": "Add a quadratic bezier curve",
-                    "snippet": "quadBezierTo(${1:cx}, ${2:cy}, ${3:x}, ${4:y})",
                     "keywords": [
                         "bezier",
                         "quadratic",
@@ -18310,10 +16922,9 @@ const TrussCAPI = {
                 {
                     "name": "curveTo",
                     "params": "x, y",
-                    "params_typed": "float x, float y",
+                    "params_typed": "float x, float y, float z = 0, int resolution = -1",
                     "return_type": "void",
                     "desc": "Add a Catmull-Rom curve segment",
-                    "snippet": "curveTo(${1:x}, ${2:y})",
                     "keywords": [
                         "catmull",
                         "spline",
@@ -18331,10 +16942,9 @@ const TrussCAPI = {
                 {
                     "name": "arc",
                     "params": "x, y, rX, rY, start, end",
-                    "params_typed": "float x, float y, float rX, float rY, float angleBegin, float angleEnd",
+                    "params_typed": "float x, float y, float radiusX, float radiusY, float angleBegin, float angleEnd, int circleResolution = 20",
                     "return_type": "void",
                     "desc": "Add an arc",
-                    "snippet": "arc(${1:x}, ${2:y}, ${3:rX}, ${4:rY}, ${5:0}, ${6:360})",
                     "keywords": [
                         "circle",
                         "round",
@@ -18355,7 +16965,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Close the shape",
-                    "snippet": "close()",
                     "keywords": [
                         "close",
                         "loop",
@@ -18377,35 +16986,11 @@ const TrussCAPI = {
             "name": "Types - StrokeMesh",
             "functions": [
                 {
-                    "name": "createStrokeMesh",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "StrokeMesh@",
-                    "desc": "Create a new StrokeMesh instance",
-                    "snippet": "createStrokeMesh()",
-                    "keywords": [
-                        "stroke",
-                        "thick line",
-                        "outline",
-                        "factory",
-                        "polyline"
-                    ],
-                    "desc_ja": "StrokeMeshインスタンスを作成",
-                    "desc_ko": "새 StrokeMesh 인스턴스를 생성",
-                    "related": [
-                        "StrokeMesh",
-                        "beginStroke",
-                        "Path",
-                        "drawStroke"
-                    ]
-                },
-                {
                     "name": "setWidth",
                     "params": "width",
                     "params_typed": "float width",
                     "return_type": "StrokeMesh&",
                     "desc": "Set stroke width (method chaining)",
-                    "snippet": "setWidth(${1:5.0})",
                     "keywords": [
                         "thickness",
                         "weight",
@@ -18424,10 +17009,9 @@ const TrussCAPI = {
                 {
                     "name": "setColor",
                     "params": "color",
-                    "params_typed": "const Color &in color",
+                    "params_typed": "const Color &color",
                     "return_type": "StrokeMesh&",
                     "desc": "Set stroke color (method chaining)",
-                    "snippet": "setColor(${1:color})",
                     "keywords": [
                         "color",
                         "tint",
@@ -18450,10 +17034,9 @@ const TrussCAPI = {
                 {
                     "name": "setCapType",
                     "params": "type",
-                    "params_typed": "int type",
+                    "params_typed": "StrokeMesh::CapType",
                     "return_type": "StrokeMesh&",
                     "desc": "Set cap type: Butt, Round, Square (method chaining)",
-                    "snippet": "setCapType(${1:Round})",
                     "keywords": [
                         "cap",
                         "endcap",
@@ -18472,10 +17055,9 @@ const TrussCAPI = {
                 {
                     "name": "setJoinType",
                     "params": "type",
-                    "params_typed": "int type",
+                    "params_typed": "StrokeMesh::JoinType",
                     "return_type": "StrokeMesh&",
                     "desc": "Set join type: Miter, Round, Bevel (method chaining)",
-                    "snippet": "setJoinType(${1:Round})",
                     "keywords": [
                         "join",
                         "corner",
@@ -18498,7 +17080,6 @@ const TrussCAPI = {
                     "params_typed": "float limit",
                     "return_type": "StrokeMesh&",
                     "desc": "Set miter limit for sharp corners (method chaining)",
-                    "snippet": "setMiterLimit(${1:10.0})",
                     "keywords": [
                         "miter",
                         "corner",
@@ -18516,10 +17097,9 @@ const TrussCAPI = {
                 {
                     "name": "addVertex",
                     "params": "x, y",
-                    "params_typed": "float x, float y",
+                    "params_typed": "float x, float y, float z = 0",
                     "return_type": "StrokeMesh&",
                     "desc": "Add a vertex (method chaining)",
-                    "snippet": "addVertex(${1:x}, ${2:y})",
                     "keywords": [
                         "point",
                         "vert",
@@ -18533,10 +17113,9 @@ const TrussCAPI = {
                 {
                     "name": "addVertex",
                     "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
+                    "params_typed": "const Vec3& p",
                     "return_type": "StrokeMesh&",
                     "desc": "Add a vertex (method chaining)",
-                    "snippet": "addVertex(${1:x}, ${2:y})",
                     "keywords": [
                         "point",
                         "vert",
@@ -18550,10 +17129,9 @@ const TrussCAPI = {
                 {
                     "name": "addVertex",
                     "params": "v",
-                    "params_typed": "const Vec2 &in v",
+                    "params_typed": "float x, float y, float z = 0",
                     "return_type": "StrokeMesh&",
                     "desc": "Add a vertex (method chaining)",
-                    "snippet": "addVertex(${1:x}, ${2:y})",
                     "keywords": [
                         "point",
                         "vert",
@@ -18567,10 +17145,9 @@ const TrussCAPI = {
                 {
                     "name": "addVertex",
                     "params": "v",
-                    "params_typed": "const Vec3 &in v",
+                    "params_typed": "const Vec3& p",
                     "return_type": "StrokeMesh&",
                     "desc": "Add a vertex (method chaining)",
-                    "snippet": "addVertex(${1:x}, ${2:y})",
                     "keywords": [
                         "point",
                         "vert",
@@ -18587,7 +17164,6 @@ const TrussCAPI = {
                     "params_typed": "float x, float y, float width",
                     "return_type": "StrokeMesh&",
                     "desc": "Add a vertex with variable width (method chaining)",
-                    "snippet": "addVertexWithWidth(${1:x}, ${2:y}, ${3:width})",
                     "keywords": [
                         "variable width",
                         "taper",
@@ -18605,10 +17181,9 @@ const TrussCAPI = {
                 {
                     "name": "setShape",
                     "params": "path",
-                    "params_typed": "Path@ path",
+                    "params_typed": "const Path &",
                     "return_type": "StrokeMesh&",
                     "desc": "Set shape from Path (method chaining)",
-                    "snippet": "setShape(${1:path})",
                     "keywords": [
                         "path",
                         "outline",
@@ -18629,7 +17204,6 @@ const TrussCAPI = {
                     "params_typed": "bool closed",
                     "return_type": "StrokeMesh&",
                     "desc": "Set whether the stroke is closed (method chaining)",
-                    "snippet": "setClosed(${1:true})",
                     "keywords": [
                         "closed",
                         "loop",
@@ -18650,7 +17224,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "StrokeMesh&",
                     "desc": "Clear all vertices (method chaining)",
-                    "snippet": "clear()",
                     "keywords": [
                         "reset",
                         "empty",
@@ -18666,7 +17239,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Update the internal mesh (required before draw)",
-                    "snippet": "update()",
                     "keywords": [
                         "tick",
                         "step",
@@ -18684,7 +17256,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Draw the stroke mesh",
-                    "snippet": "draw()",
                     "keywords": [
                         "render",
                         "paint",
@@ -18708,7 +17279,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Create a video player",
-                    "snippet": "VideoPlayer()",
                     "keywords": [
                         "movie",
                         "video",
@@ -18734,32 +17304,11 @@ const TrussCAPI = {
                     "platformNote_ja": "Android はスタブ。loadPlatform() が false を返し全フックが no-op（MediaCodec NDK 未実装）。他は実装あり（mac/ios AVFoundation, win MediaFoundation, linux FFmpeg, web HTML5 video）。"
                 },
                 {
-                    "name": "createVideoPlayer",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "VideoPlayer@",
-                    "desc": "Create a video player (TrussSketch factory)",
-                    "snippet": "VideoPlayer@ vid = createVideoPlayer();",
-                    "keywords": [
-                        "movie",
-                        "video",
-                        "factory",
-                        "playback"
-                    ],
-                    "desc_ja": "ビデオプレイヤーを作成（TrussSketch用ファクトリ）",
-                    "desc_ko": "비디오 플레이어를 생성 (TrussSketch 팩토리)",
-                    "related": [
-                        "VideoPlayer",
-                        "getTexture"
-                    ]
-                },
-                {
                     "name": "load",
                     "params": "path",
                     "params_typed": "const string& path",
                     "return_type": "bool",
                     "desc": "Load a video file",
-                    "snippet": "load(${1:\"video.mp4\"})",
                     "keywords": [
                         "open",
                         "read",
@@ -18775,7 +17324,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Close the video and release resources",
-                    "snippet": "close()",
                     "keywords": [
                         "close",
                         "loop",
@@ -18791,7 +17339,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if a video is loaded",
-                    "snippet": "isLoaded()",
                     "keywords": [
                         "ready",
                         "loaded",
@@ -18807,7 +17354,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Start or resume playback",
-                    "snippet": "play()",
                     "keywords": [
                         "start",
                         "resume",
@@ -18823,7 +17369,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Stop playback and reset to beginning",
-                    "snippet": "stop()",
                     "keywords": [
                         "halt",
                         "end",
@@ -18839,7 +17384,6 @@ const TrussCAPI = {
                     "params_typed": "bool paused",
                     "return_type": "void",
                     "desc": "Pause or resume playback",
-                    "snippet": "setPaused(${1:true})",
                     "keywords": [
                         "pause",
                         "hold",
@@ -18854,7 +17398,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Toggle pause state",
-                    "snippet": "togglePause()",
                     "keywords": [
                         "pause",
                         "toggle",
@@ -18870,7 +17413,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Update the video frame. Call once per frame in update()",
-                    "snippet": "update()",
                     "keywords": [
                         "tick",
                         "step",
@@ -18888,7 +17430,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if video is currently playing (not paused)",
-                    "snippet": "isPlaying()",
                     "keywords": [
                         "playing",
                         "active",
@@ -18904,7 +17445,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if video is paused",
-                    "snippet": "isPaused()",
                     "keywords": [
                         "paused",
                         "frozen",
@@ -18920,7 +17460,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if a new frame is available since last update",
-                    "snippet": "isFrameNew()",
                     "keywords": [
                         "new frame",
                         "fresh",
@@ -18940,7 +17479,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if playback has reached the end",
-                    "snippet": "isDone()",
                     "keywords": [
                         "finished",
                         "ended",
@@ -18956,7 +17494,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get video width in pixels",
-                    "snippet": "getWidth()",
                     "keywords": [
                         "resolution",
                         "size",
@@ -18972,7 +17509,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get video height in pixels",
-                    "snippet": "getHeight()",
                     "keywords": [
                         "resolution",
                         "size",
@@ -18988,7 +17524,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get total duration in seconds",
-                    "snippet": "getDuration()",
                     "keywords": [
                         "length",
                         "total time",
@@ -19004,7 +17539,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current position (0.0 to 1.0)",
-                    "snippet": "getPosition()",
                     "keywords": [
                         "progress",
                         "playhead",
@@ -19020,7 +17554,6 @@ const TrussCAPI = {
                     "params_typed": "float pct",
                     "return_type": "void",
                     "desc": "Seek to position (0.0 to 1.0)",
-                    "snippet": "setPosition(${1:0.5})",
                     "keywords": [
                         "seek",
                         "jump",
@@ -19037,7 +17570,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current playback time in seconds",
-                    "snippet": "getCurrentTime()",
                     "keywords": [
                         "playhead",
                         "elapsed",
@@ -19056,7 +17588,6 @@ const TrussCAPI = {
                     "params_typed": "float seconds",
                     "return_type": "void",
                     "desc": "Seek to a specific time in seconds",
-                    "snippet": "setCurrentTime(${1:10.0})",
                     "keywords": [
                         "seek",
                         "jump",
@@ -19076,7 +17607,6 @@ const TrussCAPI = {
                     "params_typed": "float vol",
                     "return_type": "void",
                     "desc": "Set audio volume (0.0 to 1.0)",
-                    "snippet": "setVolume(${1:0.8})",
                     "keywords": [
                         "audio",
                         "loudness",
@@ -19092,7 +17622,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current volume",
-                    "snippet": "getVolume()",
                     "keywords": [
                         "audio",
                         "loudness",
@@ -19108,7 +17637,6 @@ const TrussCAPI = {
                     "params_typed": "float speed",
                     "return_type": "void",
                     "desc": "Set playback speed (1.0 = normal, 2.0 = double speed)",
-                    "snippet": "setSpeed(${1:1.0})",
                     "keywords": [
                         "rate",
                         "tempo",
@@ -19125,7 +17653,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current playback speed",
-                    "snippet": "getSpeed()",
                     "keywords": [
                         "rate",
                         "tempo",
@@ -19140,7 +17667,6 @@ const TrussCAPI = {
                     "params_typed": "float pan",
                     "return_type": "void",
                     "desc": "Set stereo pan (-1.0 left, 0.0 center, 1.0 right)",
-                    "snippet": "setPan(${1:0.0})",
                     "keywords": [
                         "stereo",
                         "balance",
@@ -19156,7 +17682,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current stereo pan",
-                    "snippet": "getPan()",
                     "keywords": [
                         "stereo",
                         "balance",
@@ -19172,7 +17697,6 @@ const TrussCAPI = {
                     "params_typed": "bool loop",
                     "return_type": "void",
                     "desc": "Enable/disable looping",
-                    "snippet": "setLoop(${1:true})",
                     "keywords": [
                         "repeat",
                         "loop",
@@ -19187,7 +17711,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if looping is enabled",
-                    "snippet": "isLoop()",
                     "keywords": [
                         "repeat",
                         "loop",
@@ -19202,7 +17725,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get current frame number",
-                    "snippet": "getCurrentFrame()",
                     "keywords": [
                         "frame number",
                         "playhead",
@@ -19217,7 +17739,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "int",
                     "desc": "Get total number of frames",
-                    "snippet": "getTotalFrames()",
                     "keywords": [
                         "frame count",
                         "length",
@@ -19233,7 +17754,6 @@ const TrussCAPI = {
                     "params_typed": "int frame",
                     "return_type": "void",
                     "desc": "Seek to a specific frame number",
-                    "snippet": "setFrame(${1:0})",
                     "keywords": [
                         "seek",
                         "jump",
@@ -19249,7 +17769,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Advance to the next frame",
-                    "snippet": "nextFrame()",
                     "keywords": [
                         "advance",
                         "step",
@@ -19265,7 +17784,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Go back to the previous frame",
-                    "snippet": "previousFrame()",
                     "keywords": [
                         "back",
                         "step",
@@ -19281,7 +17799,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Go to the first frame",
-                    "snippet": "firstFrame()",
                     "keywords": [
                         "start",
                         "beginning",
@@ -19297,7 +17814,6 @@ const TrussCAPI = {
                     "params_typed": "float gamma",
                     "return_type": "void",
                     "desc": "Set gamma correction (1.0 = none). Use ~0.45 to brighten on platforms with dark output (e.g. macOS AVFoundation)",
-                    "snippet": "setGammaCorrection(${1:1.0})",
                     "keywords": [
                         "gamma",
                         "brightness",
@@ -19316,7 +17832,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get current gamma correction value",
-                    "snippet": "getGammaCorrection()",
                     "keywords": [
                         "gamma",
                         "brightness",
@@ -19335,7 +17850,6 @@ const TrussCAPI = {
                     "params_typed": "bool enable",
                     "return_type": "void",
                     "desc": "Enable/disable hardware decoding. Must be called before load(). Default: true. When enabled, the player probes available HW backends (VAAPI, V4L2M2M, CUDA, etc.) and falls back to software if none are available. Currently affects the Linux backend only.",
-                    "snippet": "setUseHwAccel(${1:true})",
                     "keywords": [
                         "hardware",
                         "gpu decode",
@@ -19355,7 +17869,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Get HW accel preference (not the actual backend — use isUsingHwAccel() for that)",
-                    "snippet": "getUseHwAccel()",
                     "keywords": [
                         "hardware",
                         "gpu decode",
@@ -19374,7 +17887,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if hardware decoding is currently active (after load)",
-                    "snippet": "isUsingHwAccel()",
                     "keywords": [
                         "hardware",
                         "gpu decode",
@@ -19390,7 +17902,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "string",
                     "desc": "Get the name of the active decode backend. Returns 'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', or 'none'",
-                    "snippet": "getHwAccelName()",
                     "keywords": [
                         "hardware",
                         "backend",
@@ -19407,7 +17918,6 @@ const TrussCAPI = {
                     "params_typed": "float seconds",
                     "return_type": "void",
                     "desc": "Set the maximum video/audio drift before hard re-sync. When drift exceeds this threshold, video seeks to match audio position instead of catching up frame-by-frame. Set to 0 to disable. Default: 0.5s. Primarily affects Linux (FFmpeg) backend.",
-                    "snippet": "setResyncThreshold(${1:0.5})",
                     "keywords": [
                         "sync",
                         "drift",
@@ -19426,7 +17936,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "float",
                     "desc": "Get the current resync threshold in seconds",
-                    "snippet": "getResyncThreshold()",
                     "keywords": [
                         "sync",
                         "drift",
@@ -19445,7 +17954,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "bool",
                     "desc": "Check if the loaded video has an audio track",
-                    "snippet": "hasAudio()",
                     "keywords": [
                         "sound",
                         "audio track",
@@ -19457,11 +17965,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "extractFrame",
-                    "params": "path, outPixels, timeSec",
-                    "params_typed": "const string& path, Pixels& outPixels, float timeSec",
+                    "params": "path, outPixels, [timeSec], [outDuration]",
+                    "params_typed": "const std::string & path, Pixels & outPixels, float timeSec = 1.0f, float * outDuration = nullptr",
                     "return_type": "bool",
                     "desc": "Extract a single frame from a video file without loading the full video. Useful for thumbnails",
-                    "snippet": "VideoPlayer::extractFrame(${1:\"video.mp4\"}, pixels, ${2:0.0})",
                     "keywords": [
                         "thumbnail",
                         "snapshot",
@@ -19487,7 +17994,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Live screen recorder: captures the window (or an Fbo) every frame to a video file (native encoder, no ffmpeg)",
-                    "snippet": "ScreenRecorder()",
                     "keywords": [
                         "capture",
                         "record",
@@ -19518,7 +18024,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path, const VideoRecordSettings& settings = {}",
                     "return_type": "bool",
                     "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically",
-                    "snippet": "start(${1:\"out.mp4\"})",
                     "keywords": [
                         "begin",
                         "record",
@@ -19540,7 +18045,6 @@ const TrussCAPI = {
                     "params_typed": "const Fbo& fbo, const string& path, const VideoRecordSettings& settings = {}",
                     "return_type": "bool",
                     "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically",
-                    "snippet": "start(${1:\"out.mp4\"})",
                     "keywords": [
                         "begin",
                         "record",
@@ -19562,7 +18066,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Stop live capture and finalize the file",
-                    "snippet": "stop()",
                     "keywords": [
                         "halt",
                         "end",
@@ -19578,7 +18081,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "",
                     "desc": "Low-level video encoder: you feed it frames (deterministic, fixed-rate offline render)",
-                    "snippet": "VideoWriter()",
                     "keywords": [
                         "encode",
                         "export",
@@ -19608,7 +18110,6 @@ const TrussCAPI = {
                     "params_typed": "const string& path, int width, int height, const VideoRecordSettings& settings = {}",
                     "return_type": "bool",
                     "desc": "Open the encoder at the given size (path resolved via getDataPath)",
-                    "snippet": "open(${1:\"out.mp4\"}, ${2:1280}, ${3:720})",
                     "keywords": [
                         "create",
                         "begin",
@@ -19627,7 +18128,6 @@ const TrussCAPI = {
                     "params_typed": "const Fbo& fbo",
                     "return_type": "bool",
                     "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)",
-                    "snippet": "addFrame(${1:fbo})",
                     "keywords": [
                         "append",
                         "write",
@@ -19649,7 +18149,6 @@ const TrussCAPI = {
                     "params_typed": "const Pixels& pixels",
                     "return_type": "bool",
                     "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)",
-                    "snippet": "addFrame(${1:fbo})",
                     "keywords": [
                         "append",
                         "write",
@@ -19671,7 +18170,6 @@ const TrussCAPI = {
                     "params_typed": "const Fbo& fbo, double timeSec",
                     "return_type": "bool",
                     "desc": "Append one frame at an explicit presentation time (seconds)",
-                    "snippet": "addFrameAt(${1:fbo}, ${2:t})",
                     "keywords": [
                         "append",
                         "write",
@@ -19691,7 +18189,6 @@ const TrussCAPI = {
                     "params_typed": "const Pixels& pixels, double timeSec",
                     "return_type": "bool",
                     "desc": "Append one frame at an explicit presentation time (seconds)",
-                    "snippet": "addFrameAt(${1:fbo}, ${2:t})",
                     "keywords": [
                         "append",
                         "write",
@@ -19711,7 +18208,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Finalize and flush the video file",
-                    "snippet": "close()",
                     "keywords": [
                         "close",
                         "loop",
@@ -19727,7 +18223,6 @@ const TrussCAPI = {
                     "params_typed": "VideoCodec c",
                     "return_type": "const char *",
                     "desc": "Return a human-readable name for a VideoCodec value (e.g. \"H.264\", \"HEVC\", \"ProRes 422\")",
-                    "snippet": "videoCodecName(${1:codec})",
                     "keywords": [
                         "codec",
                         "h264",
@@ -19891,7 +18386,6 @@ const TrussCAPI = {
                     "desc_ja": "シネマティック（オレンジ/ティール）LUTを生成",
                     "desc_ko": "시네마틱 오렌지/틸 LUT를 생성",
                     "related": [
-                        "tcx::lut::createCyberpunk",
                         "tcx::lut::createWarm",
                         "tcx::lut::Lut3D"
                     ]
@@ -19952,28 +18446,7 @@ const TrussCAPI = {
                     "desc_ja": "寒色系LUTを生成",
                     "desc_ko": "차가운 색조 시프트 LUT를 생성",
                     "related": [
-                        "tcx::lut::createWarm",
-                        "tcx::lut::createCyberpunk"
-                    ]
-                },
-                {
-                    "name": "tcx::lut::createCyberpunk",
-                    "params": "size",
-                    "params_typed": "int size = 32",
-                    "return_type": "Lut3D",
-                    "desc": "Create cyberpunk neon pink/cyan LUT",
-                    "keywords": [
-                        "cyberpunk",
-                        "neon",
-                        "pink cyan",
-                        "synthwave",
-                        "lut"
-                    ],
-                    "desc_ja": "サイバーパンク（ネオンピンク/シアン）LUTを生成",
-                    "desc_ko": "사이버펑크 네온 핑크/시안 LUT를 생성",
-                    "related": [
-                        "tcx::lut::createCinematic",
-                        "tcx::lut::createCool"
+                        "tcx::lut::createWarm"
                     ]
                 },
                 {
@@ -20137,7 +18610,6 @@ const TrussCAPI = {
                     "params_typed": "double delay, std::function<void()> callback",
                     "return_type": "uint64_t",
                     "desc": "Run callback once after delay seconds. Fired from the update loop (frame-quantized). Returns a timer id.",
-                    "snippet": "callAfter(1.0, [this]() {\n\t$0\n});",
                     "keywords": [
                         "timer",
                         "delay",
@@ -20165,7 +18637,6 @@ const TrussCAPI = {
                     "params_typed": "double interval, std::function<void()> callback",
                     "return_type": "uint64_t",
                     "desc": "Run callback repeatedly every interval seconds. Fired from the update loop (frame-quantized). Returns a timer id.",
-                    "snippet": "callEvery(0.5, [this]() {\n\t$0\n});",
                     "keywords": [
                         "timer",
                         "interval",
@@ -20193,7 +18664,6 @@ const TrussCAPI = {
                     "params_typed": "double delay, std::function<void()> callback",
                     "return_type": "uint64_t",
                     "desc": "Like callAfter, but fired by a precise background scheduler thread (no frame jitter). The callback runs OFF the main thread: guard shared state with a mutex, never draw from it, and don't cancel while holding that mutex. Native only (uses a real thread). Returns a timer id.",
-                    "snippet": "callAfterAsync(1.0, [this]() {\n\t$0\n});",
                     "keywords": [
                         "timer",
                         "delay",
@@ -20215,7 +18685,6 @@ const TrussCAPI = {
                     "params_typed": "double interval, std::function<void()> callback",
                     "return_type": "uint64_t",
                     "desc": "Like callEvery, but fired by a precise background scheduler thread with no drift (reschedules at absolute times). Ideal for sequencer clocks and LED/MIDI output timing. Same threading rules as callAfterAsync. Native only. Returns a timer id.",
-                    "snippet": "callEveryAsync(0.5, [this]() {\n\t$0\n});",
                     "keywords": [
                         "timer",
                         "interval",
@@ -20237,7 +18706,6 @@ const TrussCAPI = {
                     "params_typed": "uint64_t id",
                     "return_type": "void",
                     "desc": "Cancel a frame timer (callAfter/callEvery) by id.",
-                    "snippet": "cancelTimer(id);",
                     "keywords": [
                         "timer",
                         "stop",
@@ -20265,7 +18733,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Cancel all frame timers on this node.",
-                    "snippet": "cancelAllTimers();",
                     "keywords": [
                         "timer",
                         "stop",
@@ -20286,7 +18753,6 @@ const TrussCAPI = {
                     "params_typed": "uint64_t id",
                     "return_type": "void",
                     "desc": "Cancel an async timer by id. Blocks until its callback finishes if it is running now (unless called from inside the callback). Do not call while holding the mutex the callback uses.",
-                    "snippet": "cancelAsyncTimer(id);",
                     "keywords": [
                         "timer",
                         "stop",
@@ -20308,7 +18774,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock.",
-                    "snippet": "cancelAllAsyncTimers();",
                     "keywords": [
                         "timer",
                         "stop",
@@ -20336,7 +18801,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "std::vector<NetworkInterface>",
                     "desc": "List all network interface address entries (IPv4/IPv6, loopback, up or down)",
-                    "snippet": "listNetworkInterfaces()",
                     "keywords": [
                         "network",
                         "interface",
@@ -20368,7 +18832,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Log the interface list (one line per entry)",
-                    "snippet": "printNetworkInterfaces()",
                     "keywords": [
                         "network",
                         "interface",
@@ -20389,7 +18852,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "std::string",
                     "desc": "The most likely LAN address (skips loopback/down, IPv4 preferred). \"\" if none",
-                    "snippet": "getLocalIp()",
                     "keywords": [
                         "ip",
                         "address",
@@ -20411,7 +18873,6 @@ const TrussCAPI = {
                     "params_typed": "",
                     "return_type": "std::vector<std::string>",
                     "desc": "Every non-loopback address (one per interface entry)",
-                    "snippet": "getLocalIps()",
                     "keywords": [
                         "ip",
                         "address",
@@ -20432,7 +18893,6 @@ const TrussCAPI = {
                     "params_typed": "const std::string& addr",
                     "return_type": "bool",
                     "desc": "True if addr is a loopback address (127.0.0.0/8 or ::1)",
-                    "snippet": "isLoopback(${1:addr})",
                     "keywords": [
                         "loopback",
                         "localhost",
@@ -20452,7 +18912,6 @@ const TrussCAPI = {
                     "params_typed": "const std::string& addr",
                     "return_type": "bool",
                     "desc": "True if addr is a private IPv4 (10/8, 172.16/12, 192.168/16)",
-                    "snippet": "isPrivate(${1:addr})",
                     "keywords": [
                         "private",
                         "lan",
@@ -20474,7 +18933,6 @@ const TrussCAPI = {
                     "params_typed": "const std::string& addr",
                     "return_type": "bool",
                     "desc": "True if addr is link-local (169.254/16 or fe80::/10)",
-                    "snippet": "isLinkLocal(${1:addr})",
                     "keywords": [
                         "link local",
                         "apipa",
@@ -20494,7 +18952,6 @@ const TrussCAPI = {
                     "params_typed": "const std::string& a, const std::string& b, const std::string& netmask",
                     "return_type": "bool",
                     "desc": "True if IPv4 a and b are on the same subnet under netmask",
-                    "snippet": "sameSubnet(${1:a}, ${2:b}, ${3:netmask})",
                     "keywords": [
                         "subnet",
                         "netmask",
@@ -20515,7 +18972,6 @@ const TrussCAPI = {
                     "params_typed": "const std::string& mac",
                     "return_type": "std::string",
                     "desc": "The OUI (first 3 bytes) of a MAC, uppercase \"A4:83:E7\". \"\" if unparseable",
-                    "snippet": "getOui(${1:mac})",
                     "keywords": [
                         "mac",
                         "oui",
@@ -20535,7 +18991,6 @@ const TrussCAPI = {
                     "params_typed": "const std::string& mac",
                     "return_type": "bool",
                     "desc": "True if the MAC's locally-administered bit is set (randomized/virtual MAC)",
-                    "snippet": "isLocallyAdministered(${1:mac})",
                     "keywords": [
                         "mac",
                         "random",
@@ -20963,8 +19418,7 @@ const TrussCAPI = {
                     "",
                     "float x, float y",
                     "float v"
-                ],
-                "snippet": "Vec2(${1:x}, ${2:y})"
+                ]
             },
             "properties": [
                 {
@@ -20984,10 +19438,9 @@ const TrussCAPI = {
                     "return": "Vec2&",
                     "signatures": [
                         "float x, float y",
-                        "Vec2 v"
+                        "float x_, float y_"
                     ],
-                    "desc": "Set vector components",
-                    "snippet": "set(${1:x}, ${2:y})"
+                    "desc": "Set vector components"
                 },
                 {
                     "name": "length",
@@ -20995,8 +19448,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get vector length",
-                    "snippet": "length()"
+                    "desc": "Get vector length"
                 },
                 {
                     "name": "lengthSquared",
@@ -21004,8 +19456,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get squared length (faster, no sqrt)",
-                    "snippet": "lengthSquared()"
+                    "desc": "Get squared length (faster, no sqrt)"
                 },
                 {
                     "name": "normalized",
@@ -21013,8 +19464,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get normalized copy",
-                    "snippet": "normalized()"
+                    "desc": "Get normalized copy"
                 },
                 {
                     "name": "normalize",
@@ -21022,8 +19472,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Normalize in place",
-                    "snippet": "normalize()"
+                    "desc": "Normalize in place"
                 },
                 {
                     "name": "limit",
@@ -21031,54 +19480,48 @@ const TrussCAPI = {
                     "signatures": [
                         "float max"
                     ],
-                    "desc": "Limit length to max",
-                    "snippet": "limit(${1:max})"
+                    "desc": "Limit length to max"
                 },
                 {
                     "name": "dot",
                     "return": "float",
                     "signatures": [
-                        "Vec2 v"
+                        "const Vec2 & v"
                     ],
-                    "desc": "Dot product",
-                    "snippet": "dot(${1:v})"
+                    "desc": "Dot product"
                 },
                 {
                     "name": "cross",
                     "return": "float",
                     "signatures": [
-                        "Vec2 v"
+                        "const Vec2 & v"
                     ],
-                    "desc": "Cross product (z component)",
-                    "snippet": "cross(${1:v})"
+                    "desc": "Cross product (z component)"
                 },
                 {
                     "name": "distance",
                     "return": "float",
                     "signatures": [
-                        "Vec2 v"
+                        "const Vec2 & v"
                     ],
-                    "desc": "Distance to another vector",
-                    "snippet": "distance(${1:v})"
+                    "desc": "Distance to another vector"
                 },
                 {
                     "name": "distanceSquared",
                     "return": "float",
                     "signatures": [
-                        "Vec2 v"
+                        "const Vec2 & v"
                     ],
-                    "desc": "Squared distance (faster)",
-                    "snippet": "distanceSquared(${1:v})"
+                    "desc": "Squared distance (faster)"
                 },
                 {
                     "name": "angle",
                     "return": "float",
                     "signatures": [
                         "",
-                        "Vec2 v"
+                        "const Vec2& v"
                     ],
-                    "desc": "Angle in radians",
-                    "snippet": "angle()"
+                    "desc": "Angle in radians"
                 },
                 {
                     "name": "rotated",
@@ -21086,8 +19529,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float radians"
                     ],
-                    "desc": "Get rotated copy",
-                    "snippet": "rotated(${1:radians})"
+                    "desc": "Get rotated copy"
                 },
                 {
                     "name": "rotate",
@@ -21095,17 +19537,15 @@ const TrussCAPI = {
                     "signatures": [
                         "float radians"
                     ],
-                    "desc": "Rotate in place",
-                    "snippet": "rotate(${1:radians})"
+                    "desc": "Rotate in place"
                 },
                 {
                     "name": "lerp",
                     "return": "Vec2",
                     "signatures": [
-                        "Vec2 target, float t"
+                        "const Vec2 & v, float t"
                     ],
-                    "desc": "Linear interpolation",
-                    "snippet": "lerp(${1:target}, ${2:t})"
+                    "desc": "Linear interpolation"
                 },
                 {
                     "name": "perpendicular",
@@ -21113,17 +19553,15 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get perpendicular vector",
-                    "snippet": "perpendicular()"
+                    "desc": "Get perpendicular vector"
                 },
                 {
                     "name": "reflected",
                     "return": "Vec2",
                     "signatures": [
-                        "Vec2 normal"
+                        "const Vec2 & normal"
                     ],
-                    "desc": "Get reflected vector",
-                    "snippet": "reflected(${1:normal})"
+                    "desc": "Get reflected vector"
                 }
             ],
             "static_methods": [
@@ -21134,8 +19572,162 @@ const TrussCAPI = {
                         "float radians",
                         "float radians, float length"
                     ],
-                    "desc": "Create Vec2 from angle",
-                    "snippet": "Vec2_fromAngle(${1:radians})"
+                    "desc": "Create Vec2 from angle"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "[]",
+                    "signature": "Vec2[int] → float&",
+                    "cpp": "float& operator[](int)",
+                    "free": false,
+                    "desc": "Component access by index",
+                    "desc_ja": "インデックスで成分アクセス",
+                    "desc_ko": "인덱스로 성분 접근"
+                },
+                {
+                    "symbol": "+",
+                    "signature": "Vec2 + Vec2 → Vec2",
+                    "cpp": "Vec2 operator+(const Vec2&) const",
+                    "free": false,
+                    "desc": "Component-wise addition",
+                    "desc_ja": "成分ごとの加算",
+                    "desc_ko": "성분별 덧셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "Vec2 - Vec2 → Vec2",
+                    "cpp": "Vec2 operator-(const Vec2&) const",
+                    "free": false,
+                    "desc": "Component-wise subtraction",
+                    "desc_ja": "成分ごとの減算",
+                    "desc_ko": "성분별 뺄셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Vec2 * float → Vec2",
+                    "cpp": "Vec2 operator*(float) const",
+                    "free": false,
+                    "desc": "Scalar multiplication",
+                    "desc_ja": "スカラー倍",
+                    "desc_ko": "스칼라 곱"
+                },
+                {
+                    "symbol": "/",
+                    "signature": "Vec2 / float → Vec2",
+                    "cpp": "Vec2 operator/(float) const",
+                    "free": false,
+                    "desc": "Scalar division",
+                    "desc_ja": "スカラー除算",
+                    "desc_ko": "스칼라 나눗셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Vec2 * Vec2 → Vec2",
+                    "cpp": "Vec2 operator*(const Vec2&) const",
+                    "free": false,
+                    "desc": "Component-wise multiplication",
+                    "desc_ja": "成分ごとの乗算",
+                    "desc_ko": "성분별 곱셈"
+                },
+                {
+                    "symbol": "/",
+                    "signature": "Vec2 / Vec2 → Vec2",
+                    "cpp": "Vec2 operator/(const Vec2&) const",
+                    "free": false,
+                    "desc": "Component-wise division",
+                    "desc_ja": "成分ごとの除算",
+                    "desc_ko": "성분별 나눗셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "-Vec2 → Vec2",
+                    "cpp": "Vec2 operator-() const",
+                    "free": false,
+                    "desc": "Negation",
+                    "desc_ja": "符号反転",
+                    "desc_ko": "부호 반전"
+                },
+                {
+                    "symbol": "+=",
+                    "signature": "Vec2 += Vec2 → Vec2&",
+                    "cpp": "Vec2& operator+=(const Vec2&)",
+                    "free": false,
+                    "desc": "In-place addition",
+                    "desc_ja": "加算代入",
+                    "desc_ko": "덧셈 대입"
+                },
+                {
+                    "symbol": "-=",
+                    "signature": "Vec2 -= Vec2 → Vec2&",
+                    "cpp": "Vec2& operator-=(const Vec2&)",
+                    "free": false,
+                    "desc": "In-place subtraction",
+                    "desc_ja": "減算代入",
+                    "desc_ko": "뺄셈 대입"
+                },
+                {
+                    "symbol": "*=",
+                    "signature": "Vec2 *= float → Vec2&",
+                    "cpp": "Vec2& operator*=(float)",
+                    "free": false,
+                    "desc": "In-place scalar multiplication",
+                    "desc_ja": "スカラー倍代入",
+                    "desc_ko": "스칼라 곱 대입"
+                },
+                {
+                    "symbol": "/=",
+                    "signature": "Vec2 /= float → Vec2&",
+                    "cpp": "Vec2& operator/=(float)",
+                    "free": false,
+                    "desc": "In-place scalar division",
+                    "desc_ja": "スカラー除算代入",
+                    "desc_ko": "스칼라 나눗셈 대입"
+                },
+                {
+                    "symbol": "*=",
+                    "signature": "Vec2 *= Vec2 → Vec2&",
+                    "cpp": "Vec2& operator*=(const Vec2&)",
+                    "free": false,
+                    "desc": "In-place component-wise multiplication",
+                    "desc_ja": "成分ごとの乗算代入",
+                    "desc_ko": "성분별 곱 대입"
+                },
+                {
+                    "symbol": "/=",
+                    "signature": "Vec2 /= Vec2 → Vec2&",
+                    "cpp": "Vec2& operator/=(const Vec2&)",
+                    "free": false,
+                    "desc": "In-place component-wise division",
+                    "desc_ja": "成分ごとの除算代入",
+                    "desc_ko": "성분별 나눗셈 대입"
+                },
+                {
+                    "symbol": "==",
+                    "signature": "Vec2 == Vec2 → bool",
+                    "cpp": "bool operator==(const Vec2&) const",
+                    "free": false,
+                    "desc": "Equality comparison",
+                    "desc_ja": "等価比較",
+                    "desc_ko": "같음 비교"
+                },
+                {
+                    "symbol": "!=",
+                    "signature": "Vec2 != Vec2 → bool",
+                    "cpp": "bool operator!=(const Vec2&) const",
+                    "free": false,
+                    "desc": "Inequality comparison",
+                    "desc_ja": "非等価比較",
+                    "desc_ko": "다름 비교"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "float * Vec2 → Vec2",
+                    "cpp": "Vec2 operator*(float, const Vec2&)",
+                    "free": true,
+                    "desc": "Component-wise multiplication",
+                    "desc_ja": "成分ごとの乗算",
+                    "desc_ko": "성분별 곱셈"
                 }
             ]
         },
@@ -21176,8 +19768,7 @@ const TrussCAPI = {
                     "",
                     "float x, float y, float z",
                     "float v"
-                ],
-                "snippet": "Vec3(${1:x}, ${2:y}, ${3:z})"
+                ]
             },
             "properties": [
                 {
@@ -21202,10 +19793,9 @@ const TrussCAPI = {
                     "return": "Vec3&",
                     "signatures": [
                         "float x, float y, float z",
-                        "Vec3 v"
+                        "float x_, float y_, float z_"
                     ],
-                    "desc": "Set vector components",
-                    "snippet": "set(${1:x}, ${2:y}, ${3:z})"
+                    "desc": "Set vector components"
                 },
                 {
                     "name": "length",
@@ -21213,8 +19803,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get vector length",
-                    "snippet": "length()"
+                    "desc": "Get vector length"
                 },
                 {
                     "name": "lengthSquared",
@@ -21222,8 +19811,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get squared length",
-                    "snippet": "lengthSquared()"
+                    "desc": "Get squared length"
                 },
                 {
                     "name": "normalized",
@@ -21231,8 +19819,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get normalized copy",
-                    "snippet": "normalized()"
+                    "desc": "Get normalized copy"
                 },
                 {
                     "name": "normalize",
@@ -21240,8 +19827,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Normalize in place",
-                    "snippet": "normalize()"
+                    "desc": "Normalize in place"
                 },
                 {
                     "name": "limit",
@@ -21249,62 +19835,55 @@ const TrussCAPI = {
                     "signatures": [
                         "float max"
                     ],
-                    "desc": "Limit length to max",
-                    "snippet": "limit(${1:max})"
+                    "desc": "Limit length to max"
                 },
                 {
                     "name": "dot",
                     "return": "float",
                     "signatures": [
-                        "Vec3 v"
+                        "const Vec3 & v"
                     ],
-                    "desc": "Dot product",
-                    "snippet": "dot(${1:v})"
+                    "desc": "Dot product"
                 },
                 {
                     "name": "cross",
                     "return": "Vec3",
                     "signatures": [
-                        "Vec3 v"
+                        "const Vec3 & v"
                     ],
-                    "desc": "Cross product",
-                    "snippet": "cross(${1:v})"
+                    "desc": "Cross product"
                 },
                 {
                     "name": "distance",
                     "return": "float",
                     "signatures": [
-                        "Vec3 v"
+                        "const Vec3 & v"
                     ],
-                    "desc": "Distance to another vector",
-                    "snippet": "distance(${1:v})"
+                    "desc": "Distance to another vector"
                 },
                 {
                     "name": "distanceSquared",
                     "return": "float",
                     "signatures": [
-                        "Vec3 v"
+                        "const Vec3 & v"
                     ],
-                    "desc": "Squared distance",
-                    "snippet": "distanceSquared(${1:v})"
+                    "desc": "Squared distance"
                 },
                 {
                     "name": "lerp",
                     "return": "Vec3",
                     "signatures": [
-                        "Vec3 target, float t"
+                        "const Vec3 & v, float t"
                     ],
-                    "desc": "Linear interpolation",
-                    "snippet": "lerp(${1:target}, ${2:t})"
+                    "desc": "Linear interpolation"
                 },
                 {
                     "name": "reflected",
                     "return": "Vec3",
                     "signatures": [
-                        "Vec3 normal"
+                        "const Vec3 & normal"
                     ],
-                    "desc": "Get reflected vector",
-                    "snippet": "reflected(${1:normal})"
+                    "desc": "Get reflected vector"
                 },
                 {
                     "name": "xy",
@@ -21312,8 +19891,162 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get XY components as Vec2",
-                    "snippet": "xy()"
+                    "desc": "Get XY components as Vec2"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "[]",
+                    "signature": "Vec3[int] → float&",
+                    "cpp": "float& operator[](int)",
+                    "free": false,
+                    "desc": "Component access by index",
+                    "desc_ja": "インデックスで成分アクセス",
+                    "desc_ko": "인덱스로 성분 접근"
+                },
+                {
+                    "symbol": "+",
+                    "signature": "Vec3 + Vec3 → Vec3",
+                    "cpp": "Vec3 operator+(const Vec3&) const",
+                    "free": false,
+                    "desc": "Component-wise addition",
+                    "desc_ja": "成分ごとの加算",
+                    "desc_ko": "성분별 덧셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "Vec3 - Vec3 → Vec3",
+                    "cpp": "Vec3 operator-(const Vec3&) const",
+                    "free": false,
+                    "desc": "Component-wise subtraction",
+                    "desc_ja": "成分ごとの減算",
+                    "desc_ko": "성분별 뺄셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Vec3 * float → Vec3",
+                    "cpp": "Vec3 operator*(float) const",
+                    "free": false,
+                    "desc": "Scalar multiplication",
+                    "desc_ja": "スカラー倍",
+                    "desc_ko": "스칼라 곱"
+                },
+                {
+                    "symbol": "/",
+                    "signature": "Vec3 / float → Vec3",
+                    "cpp": "Vec3 operator/(float) const",
+                    "free": false,
+                    "desc": "Scalar division",
+                    "desc_ja": "スカラー除算",
+                    "desc_ko": "스칼라 나눗셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Vec3 * Vec3 → Vec3",
+                    "cpp": "Vec3 operator*(const Vec3&) const",
+                    "free": false,
+                    "desc": "Component-wise multiplication",
+                    "desc_ja": "成分ごとの乗算",
+                    "desc_ko": "성분별 곱셈"
+                },
+                {
+                    "symbol": "/",
+                    "signature": "Vec3 / Vec3 → Vec3",
+                    "cpp": "Vec3 operator/(const Vec3&) const",
+                    "free": false,
+                    "desc": "Component-wise division",
+                    "desc_ja": "成分ごとの除算",
+                    "desc_ko": "성분별 나눗셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "-Vec3 → Vec3",
+                    "cpp": "Vec3 operator-() const",
+                    "free": false,
+                    "desc": "Negation",
+                    "desc_ja": "符号反転",
+                    "desc_ko": "부호 반전"
+                },
+                {
+                    "symbol": "+=",
+                    "signature": "Vec3 += Vec3 → Vec3&",
+                    "cpp": "Vec3& operator+=(const Vec3&)",
+                    "free": false,
+                    "desc": "In-place addition",
+                    "desc_ja": "加算代入",
+                    "desc_ko": "덧셈 대입"
+                },
+                {
+                    "symbol": "-=",
+                    "signature": "Vec3 -= Vec3 → Vec3&",
+                    "cpp": "Vec3& operator-=(const Vec3&)",
+                    "free": false,
+                    "desc": "In-place subtraction",
+                    "desc_ja": "減算代入",
+                    "desc_ko": "뺄셈 대입"
+                },
+                {
+                    "symbol": "*=",
+                    "signature": "Vec3 *= float → Vec3&",
+                    "cpp": "Vec3& operator*=(float)",
+                    "free": false,
+                    "desc": "In-place scalar multiplication",
+                    "desc_ja": "スカラー倍代入",
+                    "desc_ko": "스칼라 곱 대입"
+                },
+                {
+                    "symbol": "/=",
+                    "signature": "Vec3 /= float → Vec3&",
+                    "cpp": "Vec3& operator/=(float)",
+                    "free": false,
+                    "desc": "In-place scalar division",
+                    "desc_ja": "スカラー除算代入",
+                    "desc_ko": "스칼라 나눗셈 대입"
+                },
+                {
+                    "symbol": "*=",
+                    "signature": "Vec3 *= Vec3 → Vec3&",
+                    "cpp": "Vec3& operator*=(const Vec3&)",
+                    "free": false,
+                    "desc": "In-place component-wise multiplication",
+                    "desc_ja": "成分ごとの乗算代入",
+                    "desc_ko": "성분별 곱 대입"
+                },
+                {
+                    "symbol": "/=",
+                    "signature": "Vec3 /= Vec3 → Vec3&",
+                    "cpp": "Vec3& operator/=(const Vec3&)",
+                    "free": false,
+                    "desc": "In-place component-wise division",
+                    "desc_ja": "成分ごとの除算代入",
+                    "desc_ko": "성분별 나눗셈 대입"
+                },
+                {
+                    "symbol": "==",
+                    "signature": "Vec3 == Vec3 → bool",
+                    "cpp": "bool operator==(const Vec3&) const",
+                    "free": false,
+                    "desc": "Equality comparison",
+                    "desc_ja": "等価比較",
+                    "desc_ko": "같음 비교"
+                },
+                {
+                    "symbol": "!=",
+                    "signature": "Vec3 != Vec3 → bool",
+                    "cpp": "bool operator!=(const Vec3&) const",
+                    "free": false,
+                    "desc": "Inequality comparison",
+                    "desc_ja": "非等価比較",
+                    "desc_ko": "다름 비교"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "float * Vec3 → Vec3",
+                    "cpp": "Vec3 operator*(float, const Vec3&)",
+                    "free": true,
+                    "desc": "Component-wise multiplication",
+                    "desc_ja": "成分ごとの乗算",
+                    "desc_ko": "성분별 곱셈"
                 }
             ]
         },
@@ -21338,8 +20071,7 @@ const TrussCAPI = {
                     "",
                     "int x, int y",
                     "int v"
-                ],
-                "snippet": "IVec2(${1:x}, ${2:y})"
+                ]
             },
             "properties": [
                 {
@@ -21360,8 +20092,99 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to Vec2 (float)",
-                    "snippet": "toVec2()"
+                    "desc": "Convert to Vec2 (float)"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "+",
+                    "signature": "IVec2 + IVec2 → IVec2",
+                    "cpp": "IVec2 operator+(const IVec2&) const",
+                    "free": false,
+                    "desc": "Component-wise addition",
+                    "desc_ja": "成分ごとの加算",
+                    "desc_ko": "성분별 덧셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "IVec2 - IVec2 → IVec2",
+                    "cpp": "IVec2 operator-(const IVec2&) const",
+                    "free": false,
+                    "desc": "Component-wise subtraction",
+                    "desc_ja": "成分ごとの減算",
+                    "desc_ko": "성분별 뺄셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "IVec2 * int → IVec2",
+                    "cpp": "IVec2 operator*(int) const",
+                    "free": false,
+                    "desc": "Scalar multiplication",
+                    "desc_ja": "スカラー倍",
+                    "desc_ko": "스칼라 곱"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "-IVec2 → IVec2",
+                    "cpp": "IVec2 operator-() const",
+                    "free": false,
+                    "desc": "Negation",
+                    "desc_ja": "符号反転",
+                    "desc_ko": "부호 반전"
+                },
+                {
+                    "symbol": "+=",
+                    "signature": "IVec2 += IVec2 → IVec2&",
+                    "cpp": "IVec2& operator+=(const IVec2&)",
+                    "free": false,
+                    "desc": "In-place addition",
+                    "desc_ja": "加算代入",
+                    "desc_ko": "덧셈 대입"
+                },
+                {
+                    "symbol": "-=",
+                    "signature": "IVec2 -= IVec2 → IVec2&",
+                    "cpp": "IVec2& operator-=(const IVec2&)",
+                    "free": false,
+                    "desc": "In-place subtraction",
+                    "desc_ja": "減算代入",
+                    "desc_ko": "뺄셈 대입"
+                },
+                {
+                    "symbol": "*=",
+                    "signature": "IVec2 *= int → IVec2&",
+                    "cpp": "IVec2& operator*=(int)",
+                    "free": false,
+                    "desc": "In-place scalar multiplication",
+                    "desc_ja": "スカラー倍代入",
+                    "desc_ko": "스칼라 곱 대입"
+                },
+                {
+                    "symbol": "==",
+                    "signature": "IVec2 == IVec2 → bool",
+                    "cpp": "bool operator==(const IVec2&) const",
+                    "free": false,
+                    "desc": "Equality comparison",
+                    "desc_ja": "等価比較",
+                    "desc_ko": "같음 비교"
+                },
+                {
+                    "symbol": "!=",
+                    "signature": "IVec2 != IVec2 → bool",
+                    "cpp": "bool operator!=(const IVec2&) const",
+                    "free": false,
+                    "desc": "Inequality comparison",
+                    "desc_ja": "非等価比較",
+                    "desc_ko": "다름 비교"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "int * IVec2 → IVec2",
+                    "cpp": "IVec2 operator*(int, const IVec2&)",
+                    "free": true,
+                    "desc": "Component-wise multiplication",
+                    "desc_ja": "成分ごとの乗算",
+                    "desc_ko": "성분별 곱셈"
                 }
             ]
         },
@@ -21387,8 +20210,7 @@ const TrussCAPI = {
                     "int x, int y, int z",
                     "int v",
                     "IVec2 v, int z"
-                ],
-                "snippet": "IVec3(${1:x}, ${2:y}, ${3:z})"
+                ]
             },
             "properties": [
                 {
@@ -21414,8 +20236,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to Vec3 (float)",
-                    "snippet": "toVec3()"
+                    "desc": "Convert to Vec3 (float)"
                 },
                 {
                     "name": "xy",
@@ -21423,8 +20244,99 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get XY components as IVec2",
-                    "snippet": "xy()"
+                    "desc": "Get XY components as IVec2"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "+",
+                    "signature": "IVec3 + IVec3 → IVec3",
+                    "cpp": "IVec3 operator+(const IVec3&) const",
+                    "free": false,
+                    "desc": "Component-wise addition",
+                    "desc_ja": "成分ごとの加算",
+                    "desc_ko": "성분별 덧셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "IVec3 - IVec3 → IVec3",
+                    "cpp": "IVec3 operator-(const IVec3&) const",
+                    "free": false,
+                    "desc": "Component-wise subtraction",
+                    "desc_ja": "成分ごとの減算",
+                    "desc_ko": "성분별 뺄셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "IVec3 * int → IVec3",
+                    "cpp": "IVec3 operator*(int) const",
+                    "free": false,
+                    "desc": "Scalar multiplication",
+                    "desc_ja": "スカラー倍",
+                    "desc_ko": "스칼라 곱"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "-IVec3 → IVec3",
+                    "cpp": "IVec3 operator-() const",
+                    "free": false,
+                    "desc": "Negation",
+                    "desc_ja": "符号反転",
+                    "desc_ko": "부호 반전"
+                },
+                {
+                    "symbol": "+=",
+                    "signature": "IVec3 += IVec3 → IVec3&",
+                    "cpp": "IVec3& operator+=(const IVec3&)",
+                    "free": false,
+                    "desc": "In-place addition",
+                    "desc_ja": "加算代入",
+                    "desc_ko": "덧셈 대입"
+                },
+                {
+                    "symbol": "-=",
+                    "signature": "IVec3 -= IVec3 → IVec3&",
+                    "cpp": "IVec3& operator-=(const IVec3&)",
+                    "free": false,
+                    "desc": "In-place subtraction",
+                    "desc_ja": "減算代入",
+                    "desc_ko": "뺄셈 대입"
+                },
+                {
+                    "symbol": "*=",
+                    "signature": "IVec3 *= int → IVec3&",
+                    "cpp": "IVec3& operator*=(int)",
+                    "free": false,
+                    "desc": "In-place scalar multiplication",
+                    "desc_ja": "スカラー倍代入",
+                    "desc_ko": "스칼라 곱 대입"
+                },
+                {
+                    "symbol": "==",
+                    "signature": "IVec3 == IVec3 → bool",
+                    "cpp": "bool operator==(const IVec3&) const",
+                    "free": false,
+                    "desc": "Equality comparison",
+                    "desc_ja": "等価比較",
+                    "desc_ko": "같음 비교"
+                },
+                {
+                    "symbol": "!=",
+                    "signature": "IVec3 != IVec3 → bool",
+                    "cpp": "bool operator!=(const IVec3&) const",
+                    "free": false,
+                    "desc": "Inequality comparison",
+                    "desc_ja": "非等価比較",
+                    "desc_ko": "다름 비교"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "int * IVec3 → IVec3",
+                    "cpp": "IVec3 operator*(int, const IVec3&)",
+                    "free": true,
+                    "desc": "Component-wise multiplication",
+                    "desc_ja": "成分ごとの乗算",
+                    "desc_ko": "성분별 곱셈"
                 }
             ]
         },
@@ -21449,8 +20361,7 @@ const TrussCAPI = {
                     "",
                     "int x, int y",
                     "int v"
-                ],
-                "snippet": "IVec2(${1:x}, ${2:y})"
+                ]
             },
             "properties": [
                 {
@@ -21471,8 +20382,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to Vec2 (float)",
-                    "snippet": "toVec2()"
+                    "desc": "Convert to Vec2 (float)"
                 }
             ]
         },
@@ -21498,8 +20408,7 @@ const TrussCAPI = {
                     "int x, int y, int z",
                     "int v",
                     "IVec2 v, int z"
-                ],
-                "snippet": "IVec3(${1:x}, ${2:y}, ${3:z})"
+                ]
             },
             "properties": [
                 {
@@ -21525,8 +20434,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to Vec3 (float)",
-                    "snippet": "toVec3()"
+                    "desc": "Convert to Vec3 (float)"
                 },
                 {
                     "name": "xy",
@@ -21534,8 +20442,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get XY components as IVec2",
-                    "snippet": "xy()"
+                    "desc": "Get XY components as IVec2"
                 }
             ]
         },
@@ -21575,8 +20482,7 @@ const TrussCAPI = {
                     "float r, float g, float b, float a",
                     "float gray",
                     "float gray, float a"
-                ],
-                "snippet": "Color(${1:r}, ${2:g}, ${3:b})"
+                ]
             },
             "properties": [
                 {
@@ -21605,40 +20511,36 @@ const TrussCAPI = {
                     "name": "set",
                     "return": "Color&",
                     "signatures": [
-                        "float r, float g, float b",
+                        "float r_, float g_, float b_, float a_ = 1.0f",
                         "float r, float g, float b, float a",
-                        "float gray"
+                        "float gray, float a_ = 1.0f"
                     ],
-                    "desc": "Set color components",
-                    "snippet": "set(${1:r}, ${2:g}, ${3:b})"
+                    "desc": "Set color components"
                 },
                 {
                     "name": "toHex",
                     "return": "uint32_t",
                     "signatures": [
-                        "",
+                        "bool includeAlpha = false",
                         "bool includeAlpha"
                     ],
-                    "desc": "Convert to hex value",
-                    "snippet": "toHex()"
+                    "desc": "Convert to hex value"
                 },
                 {
                     "name": "lerp",
                     "return": "Color",
                     "signatures": [
-                        "Color target, float t"
+                        "const Color & target, float t"
                     ],
-                    "desc": "Interpolate in OKLab space",
-                    "snippet": "lerp(${1:target}, ${2:t})"
+                    "desc": "Interpolate in OKLab space"
                 },
                 {
                     "name": "lerpRGB",
                     "return": "Color",
                     "signatures": [
-                        "Color target, float t"
+                        "const Color & target, float t"
                     ],
-                    "desc": "Interpolate in RGB space",
-                    "snippet": "lerpRGB(${1:target}, ${2:t})"
+                    "desc": "Interpolate in RGB space"
                 },
                 {
                     "name": "clamped",
@@ -21646,8 +20548,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get clamped copy (0.0-1.0)",
-                    "snippet": "clamped()"
+                    "desc": "Get clamped copy (0.0-1.0)"
                 },
                 {
                     "name": "toLinear",
@@ -21655,8 +20556,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to linear RGB color space",
-                    "snippet": "toLinear()"
+                    "desc": "Convert to linear RGB color space"
                 },
                 {
                     "name": "toHSB",
@@ -21664,8 +20564,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to HSB (H: 0-1, S: 0-1, B: 0-1)",
-                    "snippet": "toHSB()"
+                    "desc": "Convert to HSB (H: 0-1, S: 0-1, B: 0-1)"
                 },
                 {
                     "name": "toOKLab",
@@ -21673,8 +20572,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to OKLab (perceptually uniform)",
-                    "snippet": "toOKLab()"
+                    "desc": "Convert to OKLab (perceptually uniform)"
                 },
                 {
                     "name": "toOKLCH",
@@ -21682,44 +20580,39 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to OKLCH (L: 0-1, C: 0-0.4, H: 0-1)",
-                    "snippet": "toOKLCH()"
+                    "desc": "Convert to OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
                 },
                 {
                     "name": "lerpLinear",
                     "return": "Color",
                     "signatures": [
-                        "Color target, float t"
+                        "const Color & target, float t"
                     ],
-                    "desc": "Interpolate in linear RGB space",
-                    "snippet": "lerpLinear(${1:target}, ${2:t})"
+                    "desc": "Interpolate in linear RGB space"
                 },
                 {
                     "name": "lerpHSB",
                     "return": "Color",
                     "signatures": [
-                        "Color target, float t"
+                        "const Color & target, float t"
                     ],
-                    "desc": "Interpolate in HSB space",
-                    "snippet": "lerpHSB(${1:target}, ${2:t})"
+                    "desc": "Interpolate in HSB space"
                 },
                 {
                     "name": "lerpOKLab",
                     "return": "Color",
                     "signatures": [
-                        "Color target, float t"
+                        "const Color & target, float t"
                     ],
-                    "desc": "Interpolate in OKLab space (perceptually uniform)",
-                    "snippet": "lerpOKLab(${1:target}, ${2:t})"
+                    "desc": "Interpolate in OKLab space (perceptually uniform)"
                 },
                 {
                     "name": "lerpOKLCH",
                     "return": "Color",
                     "signatures": [
-                        "Color target, float t"
+                        "const Color & target, float t"
                     ],
-                    "desc": "Interpolate in OKLCH space (shortest hue path)",
-                    "snippet": "lerpOKLCH(${1:target}, ${2:t})"
+                    "desc": "Interpolate in OKLCH space (shortest hue path)"
                 }
             ],
             "static_methods": [
@@ -21730,8 +20623,7 @@ const TrussCAPI = {
                         "uint hex",
                         "uint hex, bool hasAlpha"
                     ],
-                    "desc": "Create from hex value",
-                    "snippet": "Color_fromHex(${1:0xRRGGBB})"
+                    "desc": "Create from hex value"
                 },
                 {
                     "name": "Color_fromHSB",
@@ -21740,8 +20632,7 @@ const TrussCAPI = {
                         "float h, float s, float b",
                         "float h, float s, float b, float a"
                     ],
-                    "desc": "Create from HSB (H: 0-1)",
-                    "snippet": "Color_fromHSB(${1:h}, ${2:s}, ${3:b})"
+                    "desc": "Create from HSB (H: 0-1)"
                 },
                 {
                     "name": "Color_fromOKLab",
@@ -21750,8 +20641,7 @@ const TrussCAPI = {
                         "float L, float a, float b",
                         "float L, float a, float b, float alpha"
                     ],
-                    "desc": "Create from OKLab (L: 0-1, a: ~-0.4-0.4, b: ~-0.4-0.4)",
-                    "snippet": "Color_fromOKLab(${1:L}, ${2:a}, ${3:b})"
+                    "desc": "Create from OKLab (L: 0-1, a: ~-0.4-0.4, b: ~-0.4-0.4)"
                 },
                 {
                     "name": "Color_fromOKLCH",
@@ -21760,8 +20650,7 @@ const TrussCAPI = {
                         "float L, float C, float H",
                         "float L, float C, float H, float a"
                     ],
-                    "desc": "Create from OKLCH (L: 0-1, C: 0-0.4, H: 0-1)",
-                    "snippet": "Color_fromOKLCH(${1:L}, ${2:C}, ${3:H})"
+                    "desc": "Create from OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
                 },
                 {
                     "name": "Color_fromLinear",
@@ -21770,8 +20659,7 @@ const TrussCAPI = {
                         "float r, float g, float b",
                         "float r, float g, float b, float a"
                     ],
-                    "desc": "Create from linear RGB",
-                    "snippet": "Color_fromLinear(${1:r}, ${2:g}, ${3:b})"
+                    "desc": "Create from linear RGB"
                 },
                 {
                     "name": "Color_fromBytes",
@@ -21780,8 +20668,63 @@ const TrussCAPI = {
                         "int r, int g, int b",
                         "int r, int g, int b, int a"
                     ],
-                    "desc": "Create from 0-255 values",
-                    "snippet": "Color_fromBytes(${1:r}, ${2:g}, ${3:b})"
+                    "desc": "Create from 0-255 values"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "+",
+                    "signature": "Color + Color → Color",
+                    "cpp": "Color operator+(const Color&) const",
+                    "free": false,
+                    "desc": "Component-wise addition",
+                    "desc_ja": "成分ごとの加算",
+                    "desc_ko": "성분별 덧셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "Color - Color → Color",
+                    "cpp": "Color operator-(const Color&) const",
+                    "free": false,
+                    "desc": "Component-wise subtraction",
+                    "desc_ja": "成分ごとの減算",
+                    "desc_ko": "성분별 뺄셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Color * float → Color",
+                    "cpp": "Color operator*(float) const",
+                    "free": false,
+                    "desc": "Scalar multiplication",
+                    "desc_ja": "スカラー倍",
+                    "desc_ko": "스칼라 곱"
+                },
+                {
+                    "symbol": "/",
+                    "signature": "Color / float → Color",
+                    "cpp": "Color operator/(float) const",
+                    "free": false,
+                    "desc": "Scalar division",
+                    "desc_ja": "スカラー除算",
+                    "desc_ko": "스칼라 나눗셈"
+                },
+                {
+                    "symbol": "==",
+                    "signature": "Color == Color → bool",
+                    "cpp": "bool operator==(const Color&) const",
+                    "free": false,
+                    "desc": "Equality comparison",
+                    "desc_ja": "等価比較",
+                    "desc_ko": "같음 비교"
+                },
+                {
+                    "symbol": "!=",
+                    "signature": "Color != Color → bool",
+                    "cpp": "bool operator!=(const Color&) const",
+                    "free": false,
+                    "desc": "Inequality comparison",
+                    "desc_ja": "非等価比較",
+                    "desc_ko": "다름 비교"
                 }
             ]
         },
@@ -21817,8 +20760,7 @@ const TrussCAPI = {
                 "signatures": [
                     "",
                     "float x, float y, float width, float height"
-                ],
-                "snippet": "Rect(${1:x}, ${2:y}, ${3:width}, ${4:height})"
+                ]
             },
             "properties": [
                 {
@@ -21849,8 +20791,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float x, float y, float w, float h"
                     ],
-                    "desc": "Set rectangle bounds",
-                    "snippet": "set(${1:x}, ${2:y}, ${3:w}, ${4:h})"
+                    "desc": "Set rectangle bounds"
                 },
                 {
                     "name": "getRight",
@@ -21858,8 +20799,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get right edge (x + width)",
-                    "snippet": "getRight()"
+                    "desc": "Get right edge (x + width)"
                 },
                 {
                     "name": "getBottom",
@@ -21867,8 +20807,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get bottom edge (y + height)",
-                    "snippet": "getBottom()"
+                    "desc": "Get bottom edge (y + height)"
                 },
                 {
                     "name": "getCenterX",
@@ -21876,8 +20815,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get center X",
-                    "snippet": "getCenterX()"
+                    "desc": "Get center X"
                 },
                 {
                     "name": "getCenterY",
@@ -21885,8 +20823,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get center Y",
-                    "snippet": "getCenterY()"
+                    "desc": "Get center Y"
                 },
                 {
                     "name": "contains",
@@ -21894,17 +20831,15 @@ const TrussCAPI = {
                     "signatures": [
                         "float px, float py"
                     ],
-                    "desc": "Check if point is inside",
-                    "snippet": "contains(${1:px}, ${2:py})"
+                    "desc": "Check if point is inside"
                 },
                 {
                     "name": "intersects",
                     "return": "bool",
                     "signatures": [
-                        "Rect other"
+                        "const Rect & other"
                     ],
-                    "desc": "Check if intersects with another rect",
-                    "snippet": "intersects(${1:other})"
+                    "desc": "Check if intersects with another rect"
                 }
             ]
         },
@@ -21934,8 +20869,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Mat4()"
+                ]
             },
             "methods": [
                 {
@@ -21944,8 +20878,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get transposed matrix",
-                    "snippet": "transposed()"
+                    "desc": "Get transposed matrix"
                 },
                 {
                     "name": "inverted",
@@ -21953,8 +20886,36 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get inverse matrix",
-                    "snippet": "inverted()"
+                    "desc": "Get inverse matrix"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "*",
+                    "signature": "Mat4 * Mat4 → Mat4",
+                    "cpp": "Mat4 operator*(const Mat4&) const",
+                    "free": false,
+                    "desc": "Composition (matrix product)",
+                    "desc_ja": "合成（行列積）",
+                    "desc_ko": "합성(행렬 곱)"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Mat4 * Vec3 → Vec3",
+                    "cpp": "Vec3 operator*(const Vec3&) const",
+                    "free": false,
+                    "desc": "Transform vector by Mat4",
+                    "desc_ja": "Mat4でベクトルを変換",
+                    "desc_ko": "벡터 변환"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Mat4 * Vec4 → Vec4",
+                    "cpp": "Vec4 operator*(const Vec4&) const",
+                    "free": false,
+                    "desc": "Transform vector by Mat4",
+                    "desc_ja": "Mat4でベクトルを変換",
+                    "desc_ko": "벡터 변환"
                 }
             ]
         },
@@ -21990,8 +20951,7 @@ const TrussCAPI = {
                 "signatures": [
                     "",
                     "float w, float x, float y, float z"
-                ],
-                "snippet": "Quaternion()"
+                ]
             },
             "properties": [
                 {
@@ -22020,10 +20980,9 @@ const TrussCAPI = {
                     "name": "rotate",
                     "return": "Vec3",
                     "signatures": [
-                        "Vec3 v"
+                        "const Vec3 & v"
                     ],
-                    "desc": "Rotate a vector",
-                    "snippet": "rotate(${1:v})"
+                    "desc": "Rotate a vector"
                 },
                 {
                     "name": "toEuler",
@@ -22031,8 +20990,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to Euler angles",
-                    "snippet": "toEuler()"
+                    "desc": "Convert to Euler angles"
                 },
                 {
                     "name": "toMatrix",
@@ -22040,8 +20998,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to rotation matrix",
-                    "snippet": "toMatrix()"
+                    "desc": "Convert to rotation matrix"
                 },
                 {
                     "name": "normalized",
@@ -22049,8 +21006,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get normalized quaternion",
-                    "snippet": "normalized()"
+                    "desc": "Get normalized quaternion"
                 },
                 {
                     "name": "length",
@@ -22058,8 +21014,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get quaternion length",
-                    "snippet": "length()"
+                    "desc": "Get quaternion length"
                 },
                 {
                     "name": "conjugate",
@@ -22067,8 +21022,36 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get conjugate quaternion",
-                    "snippet": "conjugate()"
+                    "desc": "Get conjugate quaternion"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "==",
+                    "signature": "Quaternion == Quaternion → bool",
+                    "cpp": "bool operator==(const Quaternion&) const",
+                    "free": false,
+                    "desc": "Equality comparison",
+                    "desc_ja": "等価比較",
+                    "desc_ko": "같음 비교"
+                },
+                {
+                    "symbol": "!=",
+                    "signature": "Quaternion != Quaternion → bool",
+                    "cpp": "bool operator!=(const Quaternion&) const",
+                    "free": false,
+                    "desc": "Inequality comparison",
+                    "desc_ja": "非等価比較",
+                    "desc_ko": "다름 비교"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Quaternion * Quaternion → Quaternion",
+                    "cpp": "Quaternion operator*(const Quaternion&) const",
+                    "free": false,
+                    "desc": "Composition (matrix product)",
+                    "desc_ja": "合成（行列積）",
+                    "desc_ko": "합성(행렬 곱)"
                 }
             ]
         },
@@ -22097,8 +21080,6 @@ const TrussCAPI = {
             "related": [
                 "captureWindow",
                 "grabScreen",
-                "loadFromPixels",
-                "readToPixels",
                 "createPixels",
                 "extractFrame",
                 "addFrame",
@@ -22107,19 +21088,17 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Pixels()"
+                ]
             },
             "methods": [
                 {
                     "name": "allocate",
                     "return": "void",
                     "signatures": [
-                        "int width, int height",
-                        "int width, int height, int channels"
+                        "int width, int height, int channels = 4, PixelFormat format = PixelFormat::U8",
+                        "int width, int height, int channels = 4, PixelFormat format = PixelFormat::U8"
                     ],
-                    "desc": "Allocate pixel buffer",
-                    "snippet": "allocate(${1:width}, ${2:height})"
+                    "desc": "Allocate pixel buffer"
                 },
                 {
                     "name": "getColor",
@@ -22127,17 +21106,15 @@ const TrussCAPI = {
                     "signatures": [
                         "int x, int y"
                     ],
-                    "desc": "Get pixel color at position",
-                    "snippet": "getColor(${1:x}, ${2:y})"
+                    "desc": "Get pixel color at position"
                 },
                 {
                     "name": "setColor",
                     "return": "void",
                     "signatures": [
-                        "int x, int y, Color color"
+                        "int x, int y, const Color & c"
                     ],
-                    "desc": "Set pixel color at position",
-                    "snippet": "setColor(${1:x}, ${2:y}, ${3:color})"
+                    "desc": "Set pixel color at position"
                 },
                 {
                     "name": "halve",
@@ -22145,8 +21122,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8.",
-                    "snippet": "halve()"
+                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8."
                 },
                 {
                     "name": "resize",
@@ -22154,8 +21130,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int newWidth, int newHeight"
                     ],
-                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8.",
-                    "snippet": "resize(${1:newWidth}, ${2:newHeight})"
+                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8."
                 },
                 {
                     "name": "crop",
@@ -22163,8 +21138,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int x, int y, int w, int h"
                     ],
-                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge.",
-                    "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})"
+                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge."
                 },
                 {
                     "name": "mirror",
@@ -22172,8 +21146,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool horizontal, bool vertical"
                     ],
-                    "desc": "Flip in place. Both true is 180°.",
-                    "snippet": "mirror(${1:horizontal}, ${2:vertical})"
+                    "desc": "Flip in place. Both true is 180°."
                 },
                 {
                     "name": "mirrorH",
@@ -22181,8 +21154,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Mirror horizontally (alias for mirror(true, false))",
-                    "snippet": "mirrorH()"
+                    "desc": "Mirror horizontally (alias for mirror(true, false))"
                 },
                 {
                     "name": "mirrorV",
@@ -22190,26 +21162,23 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Mirror vertically (alias for mirror(false, true))",
-                    "snippet": "mirrorV()"
+                    "desc": "Mirror vertically (alias for mirror(false, true))"
                 },
                 {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "string path"
+                        "const std::filesystem::path &"
                     ],
-                    "desc": "Load image from file",
-                    "snippet": "load(${1:\"path\"})"
+                    "desc": "Load image from file"
                 },
                 {
                     "name": "save",
                     "return": "bool",
                     "signatures": [
-                        "string path"
+                        "const std::filesystem::path &"
                     ],
-                    "desc": "Save image to file",
-                    "snippet": "save(${1:\"path\"})"
+                    "desc": "Save image to file"
                 },
                 {
                     "name": "getWidth",
@@ -22217,8 +21186,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get width",
-                    "snippet": "getWidth()"
+                    "desc": "Get width"
                 },
                 {
                     "name": "getHeight",
@@ -22226,8 +21194,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get height",
-                    "snippet": "getHeight()"
+                    "desc": "Get height"
                 },
                 {
                     "name": "isAllocated",
@@ -22235,8 +21202,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if allocated",
-                    "snippet": "isAllocated()"
+                    "desc": "Check if allocated"
                 },
                 {
                     "name": "clear",
@@ -22244,8 +21210,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Release pixel buffer",
-                    "snippet": "clear()"
+                    "desc": "Release pixel buffer"
                 },
                 {
                     "name": "getChannels",
@@ -22253,17 +21218,15 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get number of channels",
-                    "snippet": "getChannels()"
+                    "desc": "Get number of channels"
                 },
                 {
                     "name": "getTotalBytes",
-                    "return": "int",
+                    "return": "size_t",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get total byte size",
-                    "snippet": "getTotalBytes()"
+                    "desc": "Get total byte size"
                 },
                 {
                     "name": "getData",
@@ -22271,8 +21234,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get raw data pointer",
-                    "snippet": "getData()"
+                    "desc": "Get raw data pointer"
                 },
                 {
                     "name": "loadFromMemory",
@@ -22280,8 +21242,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const uint8_t* buffer, int len"
                     ],
-                    "desc": "Load image from memory",
-                    "snippet": "loadFromMemory(${1:buffer}, ${2:len})"
+                    "desc": "Load image from memory"
                 },
                 {
                     "name": "setFromPixels",
@@ -22289,8 +21250,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const uint8_t* data, int width, int height, int channels"
                     ],
-                    "desc": "Copy from external pixel data",
-                    "snippet": "setFromPixels(${1:data}, ${2:width}, ${3:height}, ${4:channels})"
+                    "desc": "Copy from external pixel data"
                 },
                 {
                     "name": "copyTo",
@@ -22298,8 +21258,7 @@ const TrussCAPI = {
                     "signatures": [
                         "uint8_t* dst"
                     ],
-                    "desc": "Copy to external buffer",
-                    "snippet": "copyTo(${1:dst})"
+                    "desc": "Copy to external buffer"
                 }
             ]
         },
@@ -22332,50 +21291,44 @@ const TrussCAPI = {
             "related": [
                 "bindCursorImage",
                 "Texture",
-                "Pixels",
-                "drawTexture",
-                "loadFromPixels"
+                "Pixels"
             ],
             "methods": [
                 {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "string path",
-                        "string path, bool mipmaps"
+                        "const std::filesystem::path &, bool",
+                        "const std::filesystem::path &, bool"
                     ],
-                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface).",
-                    "snippet": "load(${1:\"path\"})"
+                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface)."
                 },
                 {
                     "name": "loadFromMemory",
                     "return": "bool",
                     "signatures": [
-                        "const uint8_t* buffer, int len",
+                        "const unsigned char * buffer, int len, bool mipmaps = false",
                         "const uint8_t* buffer, int len, bool mipmaps"
                     ],
-                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain.",
-                    "snippet": "loadFromMemory(${1:buffer}, ${2:len})"
+                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain."
                 },
                 {
                     "name": "save",
                     "return": "bool",
                     "signatures": [
-                        "string path"
+                        "const std::filesystem::path &"
                     ],
-                    "desc": "Save image to file",
-                    "snippet": "save(${1:\"path\"})"
+                    "desc": "Save image to file"
                 },
                 {
                     "name": "allocate",
                     "return": "void",
                     "signatures": [
-                        "int width, int height",
-                        "int width, int height, int channels",
+                        "int width, int height, int channels = 4, bool mipmaps = false",
+                        "int width, int height, int channels = 4, bool mipmaps = false",
                         "int width, int height, int channels, bool mipmaps"
                     ],
-                    "desc": "Allocate empty image for dynamic updates. `mipmaps=true` builds a chain refreshed on every update().",
-                    "snippet": "allocate(${1:width}, ${2:height})"
+                    "desc": "Allocate empty image for dynamic updates. `mipmaps=true` builds a chain refreshed on every update()."
                 },
                 {
                     "name": "clear",
@@ -22383,8 +21336,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Release image resources",
-                    "snippet": "clear()"
+                    "desc": "Release image resources"
                 },
                 {
                     "name": "halve",
@@ -22392,8 +21344,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8.",
-                    "snippet": "halve()"
+                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8."
                 },
                 {
                     "name": "resize",
@@ -22401,8 +21352,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int newWidth, int newHeight"
                     ],
-                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8. Use FBO sampling for fast paths.",
-                    "snippet": "resize(${1:newWidth}, ${2:newHeight})"
+                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8. Use FBO sampling for fast paths."
                 },
                 {
                     "name": "crop",
@@ -22410,8 +21360,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int x, int y, int w, int h"
                     ],
-                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge.",
-                    "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})"
+                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge."
                 },
                 {
                     "name": "mirror",
@@ -22419,8 +21368,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool horizontal, bool vertical"
                     ],
-                    "desc": "Flip the image. `horizontal=true` mirrors left-right; `vertical=true` mirrors top-bottom; both true is 180°.",
-                    "snippet": "mirror(${1:horizontal}, ${2:vertical})"
+                    "desc": "Flip the image. `horizontal=true` mirrors left-right; `vertical=true` mirrors top-bottom; both true is 180°."
                 },
                 {
                     "name": "mirrorH",
@@ -22428,8 +21376,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Mirror horizontally (alias for mirror(true, false))",
-                    "snippet": "mirrorH()"
+                    "desc": "Mirror horizontally (alias for mirror(true, false))"
                 },
                 {
                     "name": "mirrorV",
@@ -22437,8 +21384,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Mirror vertically (alias for mirror(false, true))",
-                    "snippet": "mirrorV()"
+                    "desc": "Mirror vertically (alias for mirror(false, true))"
                 },
                 {
                     "name": "isAllocated",
@@ -22446,8 +21392,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if allocated",
-                    "snippet": "isAllocated()"
+                    "desc": "Check if allocated"
                 },
                 {
                     "name": "getWidth",
@@ -22455,8 +21400,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get width",
-                    "snippet": "getWidth()"
+                    "desc": "Get width"
                 },
                 {
                     "name": "getHeight",
@@ -22464,8 +21408,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get height",
-                    "snippet": "getHeight()"
+                    "desc": "Get height"
                 },
                 {
                     "name": "getChannels",
@@ -22473,8 +21416,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get number of channels",
-                    "snippet": "getChannels()"
+                    "desc": "Get number of channels"
                 },
                 {
                     "name": "getPixels",
@@ -22482,8 +21424,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get pixels reference for direct manipulation",
-                    "snippet": "getPixels()"
+                    "desc": "Get pixels reference for direct manipulation"
                 },
                 {
                     "name": "getPixelsData",
@@ -22491,8 +21432,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get raw pixel data pointer",
-                    "snippet": "getPixelsData()"
+                    "desc": "Get raw pixel data pointer"
                 },
                 {
                     "name": "getColor",
@@ -22500,17 +21440,15 @@ const TrussCAPI = {
                     "signatures": [
                         "int x, int y"
                     ],
-                    "desc": "Get pixel color at position",
-                    "snippet": "getColor(${1:x}, ${2:y})"
+                    "desc": "Get pixel color at position"
                 },
                 {
                     "name": "setColor",
                     "return": "void",
                     "signatures": [
-                        "int x, int y, Color color"
+                        "int x, int y, const Color & c"
                     ],
-                    "desc": "Set pixel color at position (marks image as dirty)",
-                    "snippet": "setColor(${1:x}, ${2:y}, ${3:color})"
+                    "desc": "Set pixel color at position (marks image as dirty)"
                 },
                 {
                     "name": "update",
@@ -22518,8 +21456,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Apply pixel changes to GPU texture",
-                    "snippet": "update()"
+                    "desc": "Apply pixel changes to GPU texture"
                 },
                 {
                     "name": "setDirty",
@@ -22527,8 +21464,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Mark image as needing update",
-                    "snippet": "setDirty()"
+                    "desc": "Mark image as needing update"
                 },
                 {
                     "name": "getTexture",
@@ -22536,30 +21472,16 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get internal texture",
-                    "snippet": "getTexture()"
+                    "desc": "Get internal texture"
                 },
                 {
                     "name": "draw",
                     "return": "void",
                     "signatures": [
-                        "",
                         "float x, float y",
                         "float x, float y, float w, float h"
                     ],
-                    "desc": "Draw image",
-                    "snippet": "draw(${1:x}, ${2:y})"
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "createImage",
-                    "return": "Image@",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Create a new Image instance",
-                    "snippet": "createImage()"
+                    "desc": "Draw image"
                 }
             ]
         },
@@ -22586,7 +21508,6 @@ const TrussCAPI = {
                 }
             ],
             "related": [
-                "drawTexture",
                 "createTexture",
                 "getTexture",
                 "Image",
@@ -22595,28 +21516,25 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Texture()"
+                ]
             },
             "methods": [
                 {
                     "name": "allocate",
                     "return": "void",
                     "signatures": [
-                        "int width, int height",
-                        "Pixels pixels"
+                        "int width, int height, int channels = 4, TextureUsage usage = TextureUsage::Immutable, int sampleCount = 1",
+                        "const Pixels& pixels, TextureUsage usage = TextureUsage::Immutable, bool mipmaps = false"
                     ],
-                    "desc": "Allocate texture",
-                    "snippet": "allocate(${1:width}, ${2:height})"
+                    "desc": "Allocate texture"
                 },
                 {
                     "name": "loadData",
                     "return": "void",
                     "signatures": [
-                        "Pixels pixels"
+                        "const Pixels& pixels"
                     ],
-                    "desc": "Load pixel data to texture",
-                    "snippet": "loadData(${1:pixels})"
+                    "desc": "Load pixel data to texture"
                 },
                 {
                     "name": "bind",
@@ -22624,8 +21542,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Bind texture for rendering",
-                    "snippet": "bind()"
+                    "desc": "Bind texture for rendering"
                 },
                 {
                     "name": "unbind",
@@ -22633,8 +21550,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Unbind texture",
-                    "snippet": "unbind()"
+                    "desc": "Unbind texture"
                 },
                 {
                     "name": "getWidth",
@@ -22642,8 +21558,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get width",
-                    "snippet": "getWidth()"
+                    "desc": "Get width"
                 },
                 {
                     "name": "getHeight",
@@ -22651,8 +21566,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get height",
-                    "snippet": "getHeight()"
+                    "desc": "Get height"
                 },
                 {
                     "name": "isAllocated",
@@ -22660,8 +21574,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if allocated",
-                    "snippet": "isAllocated()"
+                    "desc": "Check if allocated"
                 },
                 {
                     "name": "draw",
@@ -22670,8 +21583,7 @@ const TrussCAPI = {
                         "float x, float y",
                         "float x, float y, float w, float h"
                     ],
-                    "desc": "Draw texture",
-                    "snippet": "draw(${1:x}, ${2:y})"
+                    "desc": "Draw texture"
                 },
                 {
                     "name": "drawSubsection",
@@ -22679,8 +21591,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float x, float y, float w, float h, float sx, float sy, float sw, float sh"
                     ],
-                    "desc": "Draw subsection of texture",
-                    "snippet": "drawSubsection(${1:x}, ${2:y}, ${3:w}, ${4:h}, ${5:sx}, ${6:sy}, ${7:sw}, ${8:sh})"
+                    "desc": "Draw subsection of texture"
                 },
                 {
                     "name": "clear",
@@ -22688,8 +21599,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Release texture resources",
-                    "snippet": "clear()"
+                    "desc": "Release texture resources"
                 },
                 {
                     "name": "getChannels",
@@ -22697,8 +21607,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get number of channels",
-                    "snippet": "getChannels()"
+                    "desc": "Get number of channels"
                 },
                 {
                     "name": "getUsage",
@@ -22706,8 +21615,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get texture usage mode",
-                    "snippet": "getUsage()"
+                    "desc": "Get texture usage mode"
                 },
                 {
                     "name": "getSampleCount",
@@ -22715,8 +21623,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get MSAA sample count",
-                    "snippet": "getSampleCount()"
+                    "desc": "Get MSAA sample count"
                 },
                 {
                     "name": "setMinFilter",
@@ -22724,8 +21631,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureFilter filter"
                     ],
-                    "desc": "Set minification filter",
-                    "snippet": "setMinFilter(${1:TextureFilter::Linear})"
+                    "desc": "Set minification filter"
                 },
                 {
                     "name": "setMagFilter",
@@ -22733,8 +21639,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureFilter filter"
                     ],
-                    "desc": "Set magnification filter",
-                    "snippet": "setMagFilter(${1:TextureFilter::Linear})"
+                    "desc": "Set magnification filter"
                 },
                 {
                     "name": "setFilter",
@@ -22742,8 +21647,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureFilter filter"
                     ],
-                    "desc": "Set both min and mag filters",
-                    "snippet": "setFilter(${1:TextureFilter::Linear})"
+                    "desc": "Set both min and mag filters"
                 },
                 {
                     "name": "getMinFilter",
@@ -22751,8 +21655,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get minification filter",
-                    "snippet": "getMinFilter()"
+                    "desc": "Get minification filter"
                 },
                 {
                     "name": "getMagFilter",
@@ -22760,8 +21663,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get magnification filter",
-                    "snippet": "getMagFilter()"
+                    "desc": "Get magnification filter"
                 },
                 {
                     "name": "setWrapU",
@@ -22769,8 +21671,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureWrap wrap"
                     ],
-                    "desc": "Set horizontal wrap mode",
-                    "snippet": "setWrapU(${1:TextureWrap::ClampToEdge})"
+                    "desc": "Set horizontal wrap mode"
                 },
                 {
                     "name": "setWrapV",
@@ -22778,8 +21679,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureWrap wrap"
                     ],
-                    "desc": "Set vertical wrap mode",
-                    "snippet": "setWrapV(${1:TextureWrap::ClampToEdge})"
+                    "desc": "Set vertical wrap mode"
                 },
                 {
                     "name": "setWrap",
@@ -22787,8 +21687,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureWrap wrap"
                     ],
-                    "desc": "Set both wrap modes",
-                    "snippet": "setWrap(${1:TextureWrap::ClampToEdge})"
+                    "desc": "Set both wrap modes"
                 },
                 {
                     "name": "getWrapU",
@@ -22796,8 +21695,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get horizontal wrap mode",
-                    "snippet": "getWrapU()"
+                    "desc": "Get horizontal wrap mode"
                 },
                 {
                     "name": "getWrapV",
@@ -22805,8 +21703,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get vertical wrap mode",
-                    "snippet": "getWrapV()"
+                    "desc": "Get vertical wrap mode"
                 }
             ]
         },
@@ -22844,21 +21741,19 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Fbo()"
+                ]
             },
             "methods": [
                 {
                     "name": "allocate",
                     "return": "void",
                     "signatures": [
-                        "int width, int height",
-                        "int width, int height, int sampleCount",
-                        "int width, int height, int sampleCount, TextureFormat format",
+                        "int w, int h, int sampleCount = 1, TextureFormat format = TextureFormat::RGBA8, bool mipmaps = false",
+                        "int w, int h, int sampleCount = 1, TextureFormat format = TextureFormat::RGBA8, bool mipmaps = false",
+                        "int w, int h, int sampleCount = 1, TextureFormat format = TextureFormat::RGBA8, bool mipmaps = false",
                         "int width, int height, int sampleCount, TextureFormat format, bool mipmaps"
                     ],
-                    "desc": "Allocate framebuffer. `mipmaps=true` builds a full mip chain that is refreshed automatically at end().",
-                    "snippet": "allocate(${1:width}, ${2:height})"
+                    "desc": "Allocate framebuffer. `mipmaps=true` builds a full mip chain that is refreshed automatically at end()."
                 },
                 {
                     "name": "begin",
@@ -22867,8 +21762,7 @@ const TrussCAPI = {
                         "",
                         "float r, float g, float b, float a"
                     ],
-                    "desc": "Begin rendering to FBO",
-                    "snippet": "begin()"
+                    "desc": "Begin rendering to FBO"
                 },
                 {
                     "name": "end",
@@ -22876,17 +21770,15 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "End rendering to FBO",
-                    "snippet": "end()"
+                    "desc": "End rendering to FBO"
                 },
                 {
                     "name": "getTexture",
-                    "return": "Texture",
+                    "return": "const Texture&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get FBO texture",
-                    "snippet": "getTexture()"
+                    "desc": "Get FBO texture"
                 },
                 {
                     "name": "getWidth",
@@ -22894,8 +21786,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get width",
-                    "snippet": "getWidth()"
+                    "desc": "Get width"
                 },
                 {
                     "name": "getHeight",
@@ -22903,8 +21794,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get height",
-                    "snippet": "getHeight()"
+                    "desc": "Get height"
                 },
                 {
                     "name": "isAllocated",
@@ -22912,8 +21802,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if allocated",
-                    "snippet": "isAllocated()"
+                    "desc": "Check if allocated"
                 },
                 {
                     "name": "draw",
@@ -22922,8 +21811,7 @@ const TrussCAPI = {
                         "float x, float y",
                         "float x, float y, float w, float h"
                     ],
-                    "desc": "Draw FBO contents",
-                    "snippet": "draw(${1:x}, ${2:y})"
+                    "desc": "Draw FBO contents"
                 },
                 {
                     "name": "getSampleCount",
@@ -22931,8 +21819,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get MSAA sample count",
-                    "snippet": "getSampleCount()"
+                    "desc": "Get MSAA sample count"
                 },
                 {
                     "name": "isActive",
@@ -22940,8 +21827,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if currently rendering to FBO",
-                    "snippet": "isActive()"
+                    "desc": "Check if currently rendering to FBO"
                 },
                 {
                     "name": "clear",
@@ -22949,26 +21835,23 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Release FBO resources",
-                    "snippet": "clear()"
+                    "desc": "Release FBO resources"
                 },
                 {
                     "name": "save",
                     "return": "bool",
                     "signatures": [
-                        "string path"
+                        "const std::filesystem::path &"
                     ],
-                    "desc": "Save FBO contents to file",
-                    "snippet": "save(${1:\"path\"})"
+                    "desc": "Save FBO contents to file"
                 },
                 {
                     "name": "copyTo",
                     "return": "bool",
                     "signatures": [
-                        "Image image"
+                        "Image & image"
                     ],
-                    "desc": "Copy FBO contents to Image",
-                    "snippet": "copyTo(${1:image})"
+                    "desc": "Copy FBO contents to Image"
                 }
             ]
         },
@@ -23012,8 +21895,7 @@ const TrussCAPI = {
                     "",
                     "vector<Vec2> verts",
                     "vector<Vec3> verts"
-                ],
-                "snippet": "Path()"
+                ]
             },
             "methods": [
                 {
@@ -23022,30 +21904,27 @@ const TrussCAPI = {
                     "signatures": [
                         "float x, float y",
                         "float x, float y, float z",
-                        "Vec2 v",
-                        "Vec3 v"
+                        "float x, float y",
+                        "float x, float y, float z"
                     ],
-                    "desc": "Add a vertex",
-                    "snippet": "addVertex(${1:x}, ${2:y})"
+                    "desc": "Add a vertex"
                 },
                 {
                     "name": "addVertices",
-                    "return": "Path@",
+                    "return": "void",
                     "signatures": [
-                        "array<Vec3>@ verts",
-                        "array<Vec2>@ verts"
+                        "const std::vector<Vec3>& verts",
+                        "const std::vector<Vec2>& verts"
                     ],
-                    "desc": "Add multiple vertices",
-                    "snippet": "addVertices(${1:verts})"
+                    "desc": "Add multiple vertices"
                 },
                 {
                     "name": "getVertices",
-                    "return": "vector<Vec3>",
+                    "return": "const std::vector<Vec3>&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get all vertices",
-                    "snippet": "getVertices()"
+                    "desc": "Get all vertices"
                 },
                 {
                     "name": "size",
@@ -23053,8 +21932,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get vertex count",
-                    "snippet": "size()"
+                    "desc": "Get vertex count"
                 },
                 {
                     "name": "empty",
@@ -23062,8 +21940,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if polyline is empty",
-                    "snippet": "empty()"
+                    "desc": "Check if polyline is empty"
                 },
                 {
                     "name": "clear",
@@ -23071,76 +21948,69 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear all vertices",
-                    "snippet": "clear()"
+                    "desc": "Clear all vertices"
                 },
                 {
                     "name": "moveTo",
                     "return": "void",
                     "signatures": [
-                        "float x, float y",
+                        "float x, float y, float z = 0",
                         "float x, float y, float z",
-                        "Vec2 p",
-                        "Vec3 p"
+                        "float x, float y, float z = 0",
+                        "const Vec3& p"
                     ],
-                    "desc": "Start a new subpath at (x, y). A single Path can hold multiple disjoint contours (think SVG `<path>` with `M ... M ...`) — used by Font::getGlyphPath to keep an outer ring and its holes in one Path so drawFill can detect holes.",
-                    "snippet": "moveTo(${1:x}, ${2:y})"
+                    "desc": "Start a new subpath at (x, y). A single Path can hold multiple disjoint contours (think SVG `<path>` with `M ... M ...`) — used by Font::getGlyphPath to keep an outer ring and its holes in one Path so drawFill can detect holes."
                 },
                 {
                     "name": "lineTo",
                     "return": "void",
                     "signatures": [
-                        "float x, float y",
+                        "float x, float y, float z = 0",
                         "float x, float y, float z",
-                        "Vec2 p",
-                        "Vec3 p"
+                        "float x, float y, float z = 0",
+                        "const Vec3& p"
                     ],
-                    "desc": "Add line segment to point",
-                    "snippet": "lineTo(${1:x}, ${2:y})"
+                    "desc": "Add line segment to point"
                 },
                 {
                     "name": "bezierTo",
                     "return": "void",
                     "signatures": [
                         "float cx1, float cy1, float cx2, float cy2, float x, float y, int resolution = -1",
-                        "Vec2 cp1, Vec2 cp2, Vec2 to, int resolution = -1",
-                        "Vec3 cp1, Vec3 cp2, Vec3 to, int resolution = -1"
+                        "float cx1, float cy1, float cx2, float cy2, float x, float y, int resolution = -1",
+                        "const Vec3& cp1, const Vec3& cp2, const Vec3& to, int resolution = -1"
                     ],
-                    "desc": "Add cubic bezier curve (resolution=-1 uses current curve style)",
-                    "snippet": "bezierTo(${1:cx1}, ${2:cy1}, ${3:cx2}, ${4:cy2}, ${5:x}, ${6:y})"
+                    "desc": "Add cubic bezier curve (resolution=-1 uses current curve style)"
                 },
                 {
                     "name": "quadBezierTo",
                     "return": "void",
                     "signatures": [
                         "float cx, float cy, float x, float y, int resolution = -1",
-                        "Vec2 cp, Vec2 to, int resolution = -1",
-                        "Vec3 cp, Vec3 to, int resolution = -1"
+                        "float cx, float cy, float x, float y, int resolution = -1",
+                        "const Vec3& cp, const Vec3& to, int resolution = -1"
                     ],
-                    "desc": "Add quadratic bezier curve (resolution=-1 uses current curve style)",
-                    "snippet": "quadBezierTo(${1:cx}, ${2:cy}, ${3:x}, ${4:y})"
+                    "desc": "Add quadratic bezier curve (resolution=-1 uses current curve style)"
                 },
                 {
                     "name": "curveTo",
                     "return": "void",
                     "signatures": [
                         "float x, float y, float z = 0, int resolution = -1",
-                        "Vec2 to, int resolution = -1",
-                        "Vec3 to, int resolution = -1"
+                        "const Vec2& to, int resolution = -1",
+                        "float x, float y, float z = 0, int resolution = -1"
                     ],
-                    "desc": "Add Catmull-Rom curve segment (needs >=4 consecutive calls; resolution=-1 uses current curve style)",
-                    "snippet": "curveTo(${1:x}, ${2:y})"
+                    "desc": "Add Catmull-Rom curve segment (needs >=4 consecutive calls; resolution=-1 uses current curve style)"
                 },
                 {
                     "name": "arc",
                     "return": "void",
                     "signatures": [
                         "float x, float y, float radius, float angleBegin, float angleEnd, bool clockwise = true",
-                        "Vec2 center, float radius, float angleBegin, float angleEnd, bool clockwise = true",
-                        "Vec3 center, float radius, float angleBegin, float angleEnd, bool clockwise = true"
+                        "float x, float y, float radius, float angleBegin, float angleEnd, bool clockwise = true",
+                        "const Vec3& center, float radius, float angleBegin, float angleEnd, bool clockwise = true"
                     ],
-                    "desc": "Add an arc (angles in radians)",
-                    "snippet": "arc(${1:x}, ${2:y}, ${3:radius}, ${4:0}, ${5:TAU})"
+                    "desc": "Add an arc (angles in radians)"
                 },
                 {
                     "name": "close",
@@ -23148,8 +22018,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Close the path",
-                    "snippet": "close()"
+                    "desc": "Close the path"
                 },
                 {
                     "name": "setClosed",
@@ -23157,8 +22026,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool closed"
                     ],
-                    "desc": "Set closed state",
-                    "snippet": "setClosed(${1:true})"
+                    "desc": "Set closed state"
                 },
                 {
                     "name": "isClosed",
@@ -23166,8 +22034,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if path is closed",
-                    "snippet": "isClosed()"
+                    "desc": "Check if path is closed"
                 },
                 {
                     "name": "reverseWinding",
@@ -23176,8 +22043,7 @@ const TrussCAPI = {
                         "",
                         "size_t subpath"
                     ],
-                    "desc": "Reverse the winding direction (vertex order) of all subpaths, or of one subpath. Under drawFill's non-zero winding rule, reversing a subpath toggles it between filling and cutting — e.g. build a circle contour, then reverseWinding(i) it into a hole punch. Reversing ALL subpaths leaves the render unchanged (only relative direction matters) — handy for imported outlines using the opposite convention.",
-                    "snippet": "reverseWinding(${1:1})"
+                    "desc": "Reverse the winding direction (vertex order) of all subpaths, or of one subpath. Under drawFill's non-zero winding rule, reversing a subpath toggles it between filling and cutting — e.g. build a circle contour, then reverseWinding(i) it into a hole punch. Reversing ALL subpaths leaves the render unchanged (only relative direction matters) — handy for imported outlines using the opposite convention."
                 },
                 {
                     "name": "draw",
@@ -23185,8 +22051,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Draw the polyline (fill + 1px stroke based on current style — fill uses triangle fan, convex only). For concave shapes / holes use drawFill.",
-                    "snippet": "draw()"
+                    "desc": "Draw the polyline (fill + 1px stroke based on current style — fill uses triangle fan, convex only). For concave shapes / holes use drawFill."
                 },
                 {
                     "name": "drawFill",
@@ -23194,8 +22059,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Fill the path as a concave polygon with holes (earcut tessellation). Subpaths follow the non-zero winding rule (SVG / PostScript default): a subpath wound opposite to its enclosing ring becomes a hole; same-direction subpaths union (never punch holes). Handles glyphs with holes (e, a, O, 日 ...), overlapping contours, and both TrueType / CFF winding conventions. To cut a hole in a hand-built Path, wind the inner subpath opposite (see reverseWinding).",
-                    "snippet": "drawFill()"
+                    "desc": "Fill the path as a concave polygon with holes (earcut tessellation). Subpaths follow the non-zero winding rule (SVG / PostScript default): a subpath wound opposite to its enclosing ring becomes a hole; same-direction subpaths union (never punch holes). Handles glyphs with holes (e, a, O, 日 ...), overlapping contours, and both TrueType / CFF winding conventions. To cut a hole in a hand-built Path, wind the inner subpath opposite (see reverseWinding)."
                 },
                 {
                     "name": "drawStroke",
@@ -23203,8 +22067,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Thick stroke via StrokeMesh (respects strokeWeight / strokeCap / strokeJoin), per-subpath. Use draw() for 1-pixel lines.",
-                    "snippet": "drawStroke()"
+                    "desc": "Thick stroke via StrokeMesh (respects strokeWeight / strokeCap / strokeJoin), per-subpath. Use draw() for 1-pixel lines."
                 },
                 {
                     "name": "getBounds",
@@ -23212,8 +22075,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get bounding box as Rect",
-                    "snippet": "getBounds()"
+                    "desc": "Get bounding box as Rect"
                 },
                 {
                     "name": "getPerimeter",
@@ -23221,8 +22083,18 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get total path length",
-                    "snippet": "getPerimeter()"
+                    "desc": "Get total path length"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "[]",
+                    "signature": "Path[int] → Vec3&",
+                    "cpp": "Vec3& operator[](int)",
+                    "free": false,
+                    "desc": "Component access by index",
+                    "desc_ja": "インデックスで成分アクセス",
+                    "desc_ko": "인덱스로 성분 접근"
                 }
             ]
         },
@@ -23266,18 +22138,16 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Mesh()"
+                ]
             },
             "methods": [
                 {
                     "name": "setMode",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
                         "PrimitiveMode mode"
                     ],
-                    "desc": "Set primitive mode (Triangles, Lines, Points, etc.)",
-                    "snippet": "setMode(${1:PrimitiveMode::Triangles})"
+                    "desc": "Set primitive mode (Triangles, Lines, Points, etc.)"
                 },
                 {
                     "name": "getMode",
@@ -23285,38 +22155,34 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get current primitive mode",
-                    "snippet": "getMode()"
+                    "desc": "Get current primitive mode"
                 },
                 {
                     "name": "addVertex",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
                         "float x, float y, float z",
-                        "Vec2 v",
-                        "Vec3 v"
+                        "float x, float y, float z = 0.0f",
+                        "const Vec3& v"
                     ],
-                    "desc": "Add a vertex",
-                    "snippet": "addVertex(${1:x}, ${2:y}, ${3:z})"
+                    "desc": "Add a vertex"
                 },
                 {
                     "name": "addVertices",
-                    "return": "Mesh@",
+                    "return": "Mesh&",
                     "signatures": [
-                        "array<Vec3>@ verts",
-                        "array<Vec2>@ verts"
+                        "const std::vector<Vec3> & verts",
+                        "const std::vector<Vec3> & verts"
                     ],
-                    "desc": "Add multiple vertices",
-                    "snippet": "addVertices(${1:verts})"
+                    "desc": "Add multiple vertices"
                 },
                 {
                     "name": "getVertices",
-                    "return": "vector<Vec3>",
+                    "return": "const std::vector<Vec3>&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get all vertices",
-                    "snippet": "getVertices()"
+                    "desc": "Get all vertices"
                 },
                 {
                     "name": "getNumVertices",
@@ -23324,36 +22190,32 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get vertex count",
-                    "snippet": "getNumVertices()"
+                    "desc": "Get vertex count"
                 },
                 {
                     "name": "addColor",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
-                        "Color c",
-                        "float r, float g, float b, float a"
+                        "const Color& c",
+                        "float r, float g, float b, float a = 1.0f"
                     ],
-                    "desc": "Add a vertex color",
-                    "snippet": "addColor(${1:color})"
+                    "desc": "Add a vertex color"
                 },
                 {
                     "name": "addColors",
-                    "return": "Mesh@",
+                    "return": "Mesh&",
                     "signatures": [
-                        "array<Color>@ cols"
+                        "const std::vector<Color> & cols"
                     ],
-                    "desc": "Add multiple vertex colors",
-                    "snippet": "addColors(${1:colors})"
+                    "desc": "Add multiple vertex colors"
                 },
                 {
                     "name": "getColors",
-                    "return": "vector<Color>",
+                    "return": "const std::vector<Color>&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get all vertex colors",
-                    "snippet": "getColors()"
+                    "desc": "Get all vertex colors"
                 },
                 {
                     "name": "getNumColors",
@@ -23361,8 +22223,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get vertex color count",
-                    "snippet": "getNumColors()"
+                    "desc": "Get vertex color count"
                 },
                 {
                     "name": "hasColors",
@@ -23370,44 +22231,39 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if mesh has vertex colors",
-                    "snippet": "hasColors()"
+                    "desc": "Check if mesh has vertex colors"
                 },
                 {
                     "name": "addIndex",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
-                        "int index"
+                        "unsigned int index"
                     ],
-                    "desc": "Add an index",
-                    "snippet": "addIndex(${1:index})"
+                    "desc": "Add an index"
                 },
                 {
                     "name": "addIndices",
-                    "return": "Mesh@",
+                    "return": "Mesh&",
                     "signatures": [
-                        "array<uint>@ indices"
+                        "const std::vector<unsigned int> & inds"
                     ],
-                    "desc": "Add multiple indices",
-                    "snippet": "addIndices(${1:indices})"
+                    "desc": "Add multiple indices"
                 },
                 {
                     "name": "addTriangle",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
-                        "int i0, int i1, int i2"
+                        "unsigned int i0, unsigned int i1, unsigned int i2"
                     ],
-                    "desc": "Add a triangle (3 indices)",
-                    "snippet": "addTriangle(${1:i0}, ${2:i1}, ${3:i2})"
+                    "desc": "Add a triangle (3 indices)"
                 },
                 {
                     "name": "getIndices",
-                    "return": "vector<int>",
+                    "return": "const std::vector<unsigned int>&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get all indices",
-                    "snippet": "getIndices()"
+                    "desc": "Get all indices"
                 },
                 {
                     "name": "getNumIndices",
@@ -23415,8 +22271,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get index count",
-                    "snippet": "getNumIndices()"
+                    "desc": "Get index count"
                 },
                 {
                     "name": "hasIndices",
@@ -23424,54 +22279,48 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if mesh has indices",
-                    "snippet": "hasIndices()"
+                    "desc": "Check if mesh has indices"
                 },
                 {
                     "name": "addNormal",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
                         "float nx, float ny, float nz",
-                        "Vec3 n"
+                        "float nx, float ny, float nz"
                     ],
-                    "desc": "Add a normal vector",
-                    "snippet": "addNormal(${1:nx}, ${2:ny}, ${3:nz})"
+                    "desc": "Add a normal vector"
                 },
                 {
                     "name": "addNormals",
-                    "return": "Mesh@",
+                    "return": "Mesh&",
                     "signatures": [
-                        "array<Vec3>@ normals"
+                        "const std::vector<Vec3> & norms"
                     ],
-                    "desc": "Add multiple normals",
-                    "snippet": "addNormals(${1:normals})"
+                    "desc": "Add multiple normals"
                 },
                 {
                     "name": "setNormal",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
-                        "int index, Vec3 n"
+                        "size_t index, const Vec3 & n"
                     ],
-                    "desc": "Set normal at index",
-                    "snippet": "setNormal(${1:index}, ${2:normal})"
+                    "desc": "Set normal at index"
                 },
                 {
                     "name": "getNormal",
                     "return": "Vec3",
                     "signatures": [
-                        "int index"
+                        "size_t index"
                     ],
-                    "desc": "Get normal at index",
-                    "snippet": "getNormal(${1:index})"
+                    "desc": "Get normal at index"
                 },
                 {
                     "name": "getNormals",
-                    "return": "vector<Vec3>",
+                    "return": "const std::vector<Vec3>&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get all normals",
-                    "snippet": "getNormals()"
+                    "desc": "Get all normals"
                 },
                 {
                     "name": "getNumNormals",
@@ -23479,8 +22328,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get normal count",
-                    "snippet": "getNumNormals()"
+                    "desc": "Get normal count"
                 },
                 {
                     "name": "hasNormals",
@@ -23488,27 +22336,24 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if mesh has normals",
-                    "snippet": "hasNormals()"
+                    "desc": "Check if mesh has normals"
                 },
                 {
                     "name": "addTexCoord",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
                         "float u, float v",
-                        "Vec2 t"
+                        "float u, float v"
                     ],
-                    "desc": "Add a texture coordinate",
-                    "snippet": "addTexCoord(${1:u}, ${2:v})"
+                    "desc": "Add a texture coordinate"
                 },
                 {
                     "name": "getTexCoords",
-                    "return": "vector<Vec2>",
+                    "return": "const std::vector<Vec2>&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get all texture coordinates",
-                    "snippet": "getTexCoords()"
+                    "desc": "Get all texture coordinates"
                 },
                 {
                     "name": "getNumTexCoords",
@@ -23516,8 +22361,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get texture coordinate count",
-                    "snippet": "getNumTexCoords()"
+                    "desc": "Get texture coordinate count"
                 },
                 {
                     "name": "hasTexCoords",
@@ -23525,8 +22369,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if mesh has texture coordinates",
-                    "snippet": "hasTexCoords()"
+                    "desc": "Check if mesh has texture coordinates"
                 },
                 {
                     "name": "hasValidTexCoords",
@@ -23534,138 +22377,123 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if texture coordinates match vertex count",
-                    "snippet": "hasValidTexCoords()"
+                    "desc": "Check if texture coordinates match vertex count"
                 },
                 {
                     "name": "clear",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear all mesh data",
-                    "snippet": "clear()"
+                    "desc": "Clear all mesh data"
                 },
                 {
                     "name": "clearVertices",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear vertices only",
-                    "snippet": "clearVertices()"
+                    "desc": "Clear vertices only"
                 },
                 {
                     "name": "clearColors",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear colors only",
-                    "snippet": "clearColors()"
+                    "desc": "Clear colors only"
                 },
                 {
                     "name": "clearIndices",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear indices only",
-                    "snippet": "clearIndices()"
+                    "desc": "Clear indices only"
                 },
                 {
                     "name": "clearNormals",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear normals only",
-                    "snippet": "clearNormals()"
+                    "desc": "Clear normals only"
                 },
                 {
                     "name": "clearTexCoords",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear texture coordinates only",
-                    "snippet": "clearTexCoords()"
+                    "desc": "Clear texture coordinates only"
                 },
                 {
                     "name": "translate",
-                    "return": "Mesh@",
+                    "return": "Mesh&",
                     "signatures": [
                         "float x, float y, float z",
-                        "Vec3 offset"
+                        "float x, float y, float z"
                     ],
-                    "desc": "Translate all vertices",
-                    "snippet": "translate(${1:x}, ${2:y}, ${3:z})"
+                    "desc": "Translate all vertices"
                 },
                 {
                     "name": "rotateX",
-                    "return": "Mesh@",
+                    "return": "Mesh&",
                     "signatures": [
                         "float radians"
                     ],
-                    "desc": "Rotate mesh around X axis",
-                    "snippet": "rotateX(${1:radians})"
+                    "desc": "Rotate mesh around X axis"
                 },
                 {
                     "name": "rotateY",
-                    "return": "Mesh@",
+                    "return": "Mesh&",
                     "signatures": [
                         "float radians"
                     ],
-                    "desc": "Rotate mesh around Y axis",
-                    "snippet": "rotateY(${1:radians})"
+                    "desc": "Rotate mesh around Y axis"
                 },
                 {
                     "name": "rotateZ",
-                    "return": "Mesh@",
+                    "return": "Mesh&",
                     "signatures": [
                         "float radians"
                     ],
-                    "desc": "Rotate mesh around Z axis",
-                    "snippet": "rotateZ(${1:radians})"
+                    "desc": "Rotate mesh around Z axis"
                 },
                 {
                     "name": "scale",
-                    "return": "Mesh@",
+                    "return": "Mesh&",
                     "signatures": [
                         "float s",
                         "float x, float y, float z"
                     ],
-                    "desc": "Scale mesh",
-                    "snippet": "scale(${1:s})"
+                    "desc": "Scale mesh"
                 },
                 {
                     "name": "transform",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
-                        "Mat4 matrix"
+                        "const Mat4 & m"
                     ],
-                    "desc": "Apply transformation matrix",
-                    "snippet": "transform(${1:matrix})"
+                    "desc": "Apply transformation matrix"
                 },
                 {
                     "name": "append",
-                    "return": "void",
+                    "return": "Mesh&",
                     "signatures": [
-                        "Mesh other"
+                        "const Mesh & other"
                     ],
-                    "desc": "Append another mesh",
-                    "snippet": "append(${1:other})"
+                    "desc": "Append another mesh"
                 },
                 {
                     "name": "draw",
                     "return": "void",
                     "signatures": [
                         "",
-                        "Texture texture",
-                        "Image image"
+                        "const Texture& texture",
+                        "const Image& image"
                     ],
-                    "desc": "Draw the mesh",
-                    "snippet": "draw()"
+                    "desc": "Draw the mesh"
                 },
                 {
                     "name": "drawWireframe",
@@ -23673,8 +22501,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Draw mesh as wireframe",
-                    "snippet": "drawWireframe()"
+                    "desc": "Draw mesh as wireframe"
                 },
                 {
                     "name": "drawGpuPbr",
@@ -23682,8 +22509,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Draw the mesh through the GPU PBR pipeline (uploads to GPU buffers as needed, then renders using active lights, material and environment)",
-                    "snippet": "drawGpuPbr()"
+                    "desc": "Draw the mesh through the GPU PBR pipeline (uploads to GPU buffers as needed, then renders using active lights, material and environment)"
                 }
             ]
         },
@@ -23720,18 +22546,16 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Sound()"
+                ]
             },
             "methods": [
                 {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "string path"
+                        "const std::string & path"
                     ],
-                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a",
-                    "snippet": "load(${1:\"path\"})"
+                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a"
                 },
                 {
                     "name": "play",
@@ -23739,8 +22563,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Play audio",
-                    "snippet": "play()"
+                    "desc": "Play audio"
                 },
                 {
                     "name": "stop",
@@ -23748,8 +22571,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Stop audio",
-                    "snippet": "stop()"
+                    "desc": "Stop audio"
                 },
                 {
                     "name": "isLoaded",
@@ -23757,8 +22579,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if loaded",
-                    "snippet": "isLoaded()"
+                    "desc": "Check if loaded"
                 },
                 {
                     "name": "isPlaying",
@@ -23766,8 +22587,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if playing",
-                    "snippet": "isPlaying()"
+                    "desc": "Check if playing"
                 },
                 {
                     "name": "setVolume",
@@ -23775,8 +22595,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float volume"
                     ],
-                    "desc": "Set volume (0.0-1.0)",
-                    "snippet": "setVolume(${1:1.0})"
+                    "desc": "Set volume (0.0-1.0)"
                 },
                 {
                     "name": "setLoop",
@@ -23784,8 +22603,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool loop"
                     ],
-                    "desc": "Set loop mode",
-                    "snippet": "setLoop(${1:true})"
+                    "desc": "Set loop mode"
                 },
                 {
                     "name": "isLoop",
@@ -23793,8 +22611,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if loop mode is enabled",
-                    "snippet": "isLoop()"
+                    "desc": "Check if loop mode is enabled"
                 },
                 {
                     "name": "setPan",
@@ -23802,8 +22619,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float pan"
                     ],
-                    "desc": "Set panning (-1.0=left, 0.0=center, 1.0=right)",
-                    "snippet": "setPan(${1:0.0})"
+                    "desc": "Set panning (-1.0=left, 0.0=center, 1.0=right)"
                 },
                 {
                     "name": "getPan",
@@ -23811,8 +22627,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get current panning",
-                    "snippet": "getPan()"
+                    "desc": "Get current panning"
                 },
                 {
                     "name": "setSpeed",
@@ -23820,8 +22635,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float speed"
                     ],
-                    "desc": "Set playback speed (1.0=normal)",
-                    "snippet": "setSpeed(${1:1.0})"
+                    "desc": "Set playback speed (1.0=normal)"
                 },
                 {
                     "name": "getSpeed",
@@ -23829,8 +22643,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get current playback speed",
-                    "snippet": "getSpeed()"
+                    "desc": "Get current playback speed"
                 },
                 {
                     "name": "pause",
@@ -23838,8 +22651,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Pause playback",
-                    "snippet": "pause()"
+                    "desc": "Pause playback"
                 },
                 {
                     "name": "resume",
@@ -23847,8 +22659,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Resume playback",
-                    "snippet": "resume()"
+                    "desc": "Resume playback"
                 },
                 {
                     "name": "isPaused",
@@ -23856,8 +22667,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if paused",
-                    "snippet": "isPaused()"
+                    "desc": "Check if paused"
                 },
                 {
                     "name": "getPosition",
@@ -23865,8 +22675,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get playback position in seconds",
-                    "snippet": "getPosition()"
+                    "desc": "Get playback position in seconds"
                 },
                 {
                     "name": "getDuration",
@@ -23874,8 +22683,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get total duration in seconds",
-                    "snippet": "getDuration()"
+                    "desc": "Get total duration in seconds"
                 }
             ]
         },
@@ -23915,18 +22723,16 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Font()"
+                ]
             },
             "methods": [
                 {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "string path, int size"
+                        "const std::string & nameOrPath, int size"
                     ],
-                    "desc": "Load font file",
-                    "snippet": "load(${1:\"path\"}, ${2:24})"
+                    "desc": "Load font file"
                 },
                 {
                     "name": "isLoaded",
@@ -23934,17 +22740,15 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if loaded",
-                    "snippet": "isLoaded()"
+                    "desc": "Check if loaded"
                 },
                 {
                     "name": "drawString",
                     "return": "void",
                     "signatures": [
-                        "string text, float x, float y"
+                        "const string& text, float x, float y"
                     ],
-                    "desc": "Draw text",
-                    "snippet": "drawString(${1:\"text\"}, ${2:x}, ${3:y})"
+                    "desc": "Draw text"
                 },
                 {
                     "name": "getGlyphPath",
@@ -23952,36 +22756,32 @@ const TrussCAPI = {
                     "signatures": [
                         "uint32_t codepoint"
                     ],
-                    "desc": "Vector outline of a single glyph as one Path with one subpath per contour. Em-normalized (1.0 = em), screen Y-down, baseline at y=0, pen at x=0. Use Path::drawFill() for filled rendering — holes (e, a, O, 日 ...) are auto-detected via earcut.",
-                    "snippet": "getGlyphPath(${1:codepoint})"
+                    "desc": "Vector outline of a single glyph as one Path with one subpath per contour. Em-normalized (1.0 = em), screen Y-down, baseline at y=0, pen at x=0. Use Path::drawFill() for filled rendering — holes (e, a, O, 日 ...) are auto-detected via earcut."
                 },
                 {
                     "name": "getStringPath",
                     "return": "Path",
                     "signatures": [
-                        "string text, float x, float y",
-                        "string text, float x, float y, Direction h, Direction v"
+                        "const string& text, float x, float y",
+                        "const string& text, float x, float y, Direction h, Direction v"
                     ],
-                    "desc": "Vector outline of the whole string at (x, y) as one Path containing every glyph's contours (one subpath each). Uses the same layout pipeline as drawString (writing mode, alignment, wrap, kinsoku, TCY). Logical pixels — drawStroke / drawFill / transform freely.",
-                    "snippet": "getStringPath(${1:\"text\"}, ${2:x}, ${3:y})"
+                    "desc": "Vector outline of the whole string at (x, y) as one Path containing every glyph's contours (one subpath each). Uses the same layout pipeline as drawString (writing mode, alignment, wrap, kinsoku, TCY). Logical pixels — drawStroke / drawFill / transform freely."
                 },
                 {
                     "name": "getWidth",
                     "return": "float",
                     "signatures": [
-                        "string text"
+                        "const std::string & text"
                     ],
-                    "desc": "Get text width",
-                    "snippet": "getWidth(${1:\"text\"})"
+                    "desc": "Get text width"
                 },
                 {
                     "name": "getHeight",
                     "return": "float",
                     "signatures": [
-                        "string text"
+                        "const std::string & text"
                     ],
-                    "desc": "Get text height",
-                    "snippet": "getHeight(${1:\"text\"})"
+                    "desc": "Get text height"
                 },
                 {
                     "name": "getLineHeight",
@@ -23989,8 +22789,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get line height",
-                    "snippet": "getLineHeight()"
+                    "desc": "Get line height"
                 },
                 {
                     "name": "getSize",
@@ -23998,8 +22797,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get font size",
-                    "snippet": "getSize()"
+                    "desc": "Get font size"
                 },
                 {
                     "name": "clearAtlas",
@@ -24007,8 +22805,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear font atlas (GPU memory freed, glyphs re-rasterized on next draw)",
-                    "snippet": "clearAtlas()"
+                    "desc": "Clear font atlas (GPU memory freed, glyphs re-rasterized on next draw)"
                 },
                 {
                     "name": "getMemoryUsage",
@@ -24016,8 +22813,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get atlas memory usage in bytes",
-                    "snippet": "getMemoryUsage()"
+                    "desc": "Get atlas memory usage in bytes"
                 },
                 {
                     "name": "getLoadedGlyphCount",
@@ -24025,8 +22821,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get number of loaded glyphs",
-                    "snippet": "getLoadedGlyphCount()"
+                    "desc": "Get number of loaded glyphs"
                 },
                 {
                     "name": "getAtlasCount",
@@ -24034,8 +22829,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get number of atlas pages",
-                    "snippet": "getAtlasCount()"
+                    "desc": "Get number of atlas pages"
                 },
                 {
                     "name": "setWritingMode",
@@ -24043,8 +22837,7 @@ const TrussCAPI = {
                     "signatures": [
                         "WritingMode mode"
                     ],
-                    "desc": "Switch between horizontal and vertical (tategaki) writing. Default is Horizontal (existing behavior unchanged).",
-                    "snippet": "setWritingMode(${1:WritingMode::VerticalRL})"
+                    "desc": "Switch between horizontal and vertical (tategaki) writing. Default is Horizontal (existing behavior unchanged)."
                 },
                 {
                     "name": "getWritingMode",
@@ -24052,8 +22845,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Current writing mode",
-                    "snippet": "getWritingMode()"
+                    "desc": "Current writing mode"
                 },
                 {
                     "name": "setTcyDigits",
@@ -24061,8 +22853,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int maxDigits, TcyMode inMode, TcyMode overflowMode"
                     ],
-                    "desc": "Tate-chu-yoko config for ASCII digit runs in vertical text. Runs with <= maxDigits use inMode (typically Combine — squeezed into one cell); longer runs fall back to overflowMode (typically Rotate).",
-                    "snippet": "setTcyDigits(${1:2}, ${2:TcyMode::Combine}, ${3:TcyMode::Rotate})"
+                    "desc": "Tate-chu-yoko config for ASCII digit runs in vertical text. Runs with <= maxDigits use inMode (typically Combine — squeezed into one cell); longer runs fall back to overflowMode (typically Rotate)."
                 },
                 {
                     "name": "setTcyLatin",
@@ -24070,8 +22861,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TcyMode mode"
                     ],
-                    "desc": "Tate-chu-yoko mode for Latin letter runs in vertical text. Default is Rotate (whole run rotated 90 CW).",
-                    "snippet": "setTcyLatin(${1:TcyMode::Rotate})"
+                    "desc": "Tate-chu-yoko mode for Latin letter runs in vertical text. Default is Rotate (whole run rotated 90 CW)."
                 }
             ]
         },
@@ -24105,19 +22895,17 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "FileWriter()"
+                ]
             },
             "methods": [
                 {
                     "name": "open",
                     "return": "bool",
                     "signatures": [
-                        "string path",
-                        "string path, bool append"
+                        "const std::string & path, bool append = false",
+                        "const std::string & path, bool append = false"
                     ],
-                    "desc": "Open file for writing",
-                    "snippet": "open(${1:\"path\"})"
+                    "desc": "Open file for writing"
                 },
                 {
                     "name": "close",
@@ -24125,8 +22913,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Close file",
-                    "snippet": "close()"
+                    "desc": "Close file"
                 },
                 {
                     "name": "isOpen",
@@ -24134,29 +22921,26 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if file is open",
-                    "snippet": "isOpen()"
+                    "desc": "Check if file is open"
                 },
                 {
                     "name": "write",
                     "return": "FileWriter&",
                     "signatures": [
-                        "string text",
+                        "const std::string& text",
                         "char c",
-                        "void* data, size_t size"
+                        "const void* data, size_t size"
                     ],
-                    "desc": "Write data to file",
-                    "snippet": "write(${1:text})"
+                    "desc": "Write data to file"
                 },
                 {
                     "name": "writeLine",
-                    "return": "FileWriter&",
+                    "return": "FileWriter &",
                     "signatures": [
-                        "",
-                        "string text"
+                        "const std::string & text = \"\"",
+                        "const std::string & text = \"\""
                     ],
-                    "desc": "Write line with newline",
-                    "snippet": "writeLine(${1:text})"
+                    "desc": "Write line with newline"
                 },
                 {
                     "name": "flush",
@@ -24164,8 +22948,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Flush buffer to disk",
-                    "snippet": "flush()"
+                    "desc": "Flush buffer to disk"
                 }
             ]
         },
@@ -24199,18 +22982,16 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "FileReader()"
+                ]
             },
             "methods": [
                 {
                     "name": "open",
                     "return": "bool",
                     "signatures": [
-                        "string path"
+                        "const std::string & path"
                     ],
-                    "desc": "Open file for reading",
-                    "snippet": "open(${1:\"path\"})"
+                    "desc": "Open file for reading"
                 },
                 {
                     "name": "close",
@@ -24218,8 +22999,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Close file",
-                    "snippet": "close()"
+                    "desc": "Close file"
                 },
                 {
                     "name": "isOpen",
@@ -24227,8 +23007,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if file is open",
-                    "snippet": "isOpen()"
+                    "desc": "Check if file is open"
                 },
                 {
                     "name": "eof",
@@ -24236,8 +23015,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if at end of file",
-                    "snippet": "eof()"
+                    "desc": "Check if at end of file"
                 },
                 {
                     "name": "readLine",
@@ -24245,8 +23023,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Read one line",
-                    "snippet": "readLine()"
+                    "desc": "Read one line"
                 },
                 {
                     "name": "readChar",
@@ -24254,8 +23031,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Read one character (-1 at EOF)",
-                    "snippet": "readChar()"
+                    "desc": "Read one character (-1 at EOF)"
                 },
                 {
                     "name": "read",
@@ -24263,8 +23039,7 @@ const TrussCAPI = {
                     "signatures": [
                         "void* buffer, size_t size"
                     ],
-                    "desc": "Read binary data",
-                    "snippet": "read(${1:buffer}, ${2:size})"
+                    "desc": "Read binary data"
                 },
                 {
                     "name": "seek",
@@ -24272,8 +23047,7 @@ const TrussCAPI = {
                     "signatures": [
                         "size_t pos"
                     ],
-                    "desc": "Seek to position",
-                    "snippet": "seek(${1:pos})"
+                    "desc": "Seek to position"
                 },
                 {
                     "name": "tell",
@@ -24281,8 +23055,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get current position",
-                    "snippet": "tell()"
+                    "desc": "Get current position"
                 },
                 {
                     "name": "remaining",
@@ -24290,8 +23063,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get remaining bytes",
-                    "snippet": "remaining()"
+                    "desc": "Get remaining bytes"
                 }
             ]
         },
@@ -24410,8 +23182,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Light()"
+                ]
             },
             "methods": [
                 {
@@ -24421,8 +23192,7 @@ const TrussCAPI = {
                         "const Vec3& direction",
                         "float dx, float dy, float dz"
                     ],
-                    "desc": "Set as directional light",
-                    "snippet": "setDirectional(${1:Vec3(0, -1, 0)})"
+                    "desc": "Set as directional light"
                 },
                 {
                     "name": "setPoint",
@@ -24431,8 +23201,7 @@ const TrussCAPI = {
                         "const Vec3& position",
                         "float x, float y, float z"
                     ],
-                    "desc": "Set as point light",
-                    "snippet": "setPoint(${1:Vec3(0, 100, 0)})"
+                    "desc": "Set as point light"
                 },
                 {
                     "name": "setSpot",
@@ -24441,8 +23210,7 @@ const TrussCAPI = {
                         "const Vec3& position, const Vec3& direction, float innerHalfAngle, float outerHalfAngle",
                         "float px, float py, float pz, float dx, float dy, float dz, float innerHalfAngle, float outerHalfAngle"
                     ],
-                    "desc": "Set as spot light with cone angles",
-                    "snippet": "setSpot(${1:pos}, ${2:dir}, ${3:0.0f}, ${4:0.45f})"
+                    "desc": "Set as spot light with cone angles"
                 },
                 {
                     "name": "setAmbient",
@@ -24451,8 +23219,7 @@ const TrussCAPI = {
                         "const Color& c",
                         "float r, float g, float b, float a"
                     ],
-                    "desc": "Set ambient light color",
-                    "snippet": "setAmbient(${1:0.1f}, ${2:0.1f}, ${3:0.1f})"
+                    "desc": "Set ambient light color"
                 },
                 {
                     "name": "setDiffuse",
@@ -24461,8 +23228,7 @@ const TrussCAPI = {
                         "const Color& c",
                         "float r, float g, float b, float a"
                     ],
-                    "desc": "Set diffuse (main) light color",
-                    "snippet": "setDiffuse(${1:1.0f}, ${2:1.0f}, ${3:1.0f})"
+                    "desc": "Set diffuse (main) light color"
                 },
                 {
                     "name": "setSpecular",
@@ -24471,8 +23237,7 @@ const TrussCAPI = {
                         "const Color& c",
                         "float r, float g, float b, float a"
                     ],
-                    "desc": "Set specular light color",
-                    "snippet": "setSpecular(${1:1.0f}, ${2:1.0f}, ${3:1.0f})"
+                    "desc": "Set specular light color"
                 },
                 {
                     "name": "setIntensity",
@@ -24480,8 +23245,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float intensity"
                     ],
-                    "desc": "Set light intensity multiplier",
-                    "snippet": "setIntensity(${1:1.0f})"
+                    "desc": "Set light intensity multiplier"
                 },
                 {
                     "name": "setAttenuation",
@@ -24489,8 +23253,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float constant, float linear, float quadratic"
                     ],
-                    "desc": "Set distance attenuation factors",
-                    "snippet": "setAttenuation(${1:1.0f}, ${2:0.0f}, ${3:0.0f})"
+                    "desc": "Set distance attenuation factors"
                 },
                 {
                     "name": "setProjectionTexture",
@@ -24498,8 +23261,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Texture* tex"
                     ],
-                    "desc": "Set texture for projector-style light (gobo)",
-                    "snippet": "setProjectionTexture(${1:&texture})"
+                    "desc": "Set texture for projector-style light (gobo)"
                 },
                 {
                     "name": "setLensShift",
@@ -24507,8 +23269,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float sx, float sy"
                     ],
-                    "desc": "Set projector lens shift (-1 to 1, normalized)",
-                    "snippet": "setLensShift(${1:0.0f}, ${2:1.0f})"
+                    "desc": "Set projector lens shift (-1 to 1, normalized)"
                 },
                 {
                     "name": "setProjectorAspect",
@@ -24516,8 +23277,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float aspect"
                     ],
-                    "desc": "Set projector aspect ratio",
-                    "snippet": "setProjectorAspect(${1:16.0f / 9.0f})"
+                    "desc": "Set projector aspect ratio"
                 },
                 {
                     "name": "setIesProfile",
@@ -24525,8 +23285,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const IesProfile* ies"
                     ],
-                    "desc": "Attach IES photometric profile for angular intensity",
-                    "snippet": "setIesProfile(${1:&iesProfile})"
+                    "desc": "Attach IES photometric profile for angular intensity"
                 },
                 {
                     "name": "enableShadow",
@@ -24534,8 +23293,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int resolution"
                     ],
-                    "desc": "Enable shadow casting (depth map at given resolution)",
-                    "snippet": "enableShadow(${1:1024})"
+                    "desc": "Enable shadow casting (depth map at given resolution)"
                 },
                 {
                     "name": "disableShadow",
@@ -24543,8 +23301,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Disable shadow casting",
-                    "snippet": "disableShadow()"
+                    "desc": "Disable shadow casting"
                 },
                 {
                     "name": "enable",
@@ -24552,8 +23309,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Enable this light",
-                    "snippet": "enable()"
+                    "desc": "Enable this light"
                 },
                 {
                     "name": "disable",
@@ -24561,8 +23317,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Disable this light",
-                    "snippet": "disable()"
+                    "desc": "Disable this light"
                 },
                 {
                     "name": "setShadowBias",
@@ -24570,8 +23325,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float bias"
                     ],
-                    "desc": "Set shadow depth bias in world units",
-                    "snippet": "setShadowBias(${1:1.0f})"
+                    "desc": "Set shadow depth bias in world units"
                 },
                 {
                     "name": "getType",
@@ -24579,8 +23333,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get light type (Directional, Point, or Spot)",
-                    "snippet": "getType()"
+                    "desc": "Get light type (Directional, Point, or Spot)"
                 },
                 {
                     "name": "getPosition",
@@ -24588,8 +23341,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get light position",
-                    "snippet": "getPosition()"
+                    "desc": "Get light position"
                 },
                 {
                     "name": "getDirection",
@@ -24597,8 +23349,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get light direction",
-                    "snippet": "getDirection()"
+                    "desc": "Get light direction"
                 },
                 {
                     "name": "getIntensity",
@@ -24606,8 +23357,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get light intensity",
-                    "snippet": "getIntensity()"
+                    "desc": "Get light intensity"
                 },
                 {
                     "name": "getAmbient",
@@ -24615,8 +23365,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get ambient light color",
-                    "snippet": "getAmbient()"
+                    "desc": "Get ambient light color"
                 },
                 {
                     "name": "getDiffuse",
@@ -24624,8 +23373,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get diffuse (main) light color",
-                    "snippet": "getDiffuse()"
+                    "desc": "Get diffuse (main) light color"
                 },
                 {
                     "name": "getSpecular",
@@ -24633,8 +23381,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get specular light color",
-                    "snippet": "getSpecular()"
+                    "desc": "Get specular light color"
                 },
                 {
                     "name": "getConstantAttenuation",
@@ -24642,8 +23389,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get constant attenuation factor",
-                    "snippet": "getConstantAttenuation()"
+                    "desc": "Get constant attenuation factor"
                 },
                 {
                     "name": "getLinearAttenuation",
@@ -24651,8 +23397,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get linear attenuation factor",
-                    "snippet": "getLinearAttenuation()"
+                    "desc": "Get linear attenuation factor"
                 },
                 {
                     "name": "getQuadraticAttenuation",
@@ -24660,8 +23405,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get quadratic attenuation factor",
-                    "snippet": "getQuadraticAttenuation()"
+                    "desc": "Get quadratic attenuation factor"
                 },
                 {
                     "name": "isEnabled",
@@ -24669,8 +23413,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if light is enabled",
-                    "snippet": "isEnabled()"
+                    "desc": "Check if light is enabled"
                 },
                 {
                     "name": "isShadowEnabled",
@@ -24678,8 +23421,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if shadow casting is enabled",
-                    "snippet": "isShadowEnabled()"
+                    "desc": "Check if shadow casting is enabled"
                 },
                 {
                     "name": "getShadowResolution",
@@ -24687,8 +23429,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get shadow map resolution",
-                    "snippet": "getShadowResolution()"
+                    "desc": "Get shadow map resolution"
                 },
                 {
                     "name": "getShadowBias",
@@ -24696,8 +23437,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get shadow depth bias",
-                    "snippet": "getShadowBias()"
+                    "desc": "Get shadow depth bias"
                 },
                 {
                     "name": "getSpotInnerCos",
@@ -24705,8 +23445,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get spot light inner cone cosine",
-                    "snippet": "getSpotInnerCos()"
+                    "desc": "Get spot light inner cone cosine"
                 },
                 {
                     "name": "getSpotOuterCos",
@@ -24714,8 +23453,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get spot light outer cone cosine",
-                    "snippet": "getSpotOuterCos()"
+                    "desc": "Get spot light outer cone cosine"
                 },
                 {
                     "name": "getProjectionTexture",
@@ -24723,8 +23461,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get projection texture (gobo)",
-                    "snippet": "getProjectionTexture()"
+                    "desc": "Get projection texture (gobo)"
                 },
                 {
                     "name": "hasProjectionTexture",
@@ -24732,8 +23469,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if a projection texture is set",
-                    "snippet": "hasProjectionTexture()"
+                    "desc": "Check if a projection texture is set"
                 },
                 {
                     "name": "getLensShiftX",
@@ -24741,8 +23477,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get projector horizontal lens shift",
-                    "snippet": "getLensShiftX()"
+                    "desc": "Get projector horizontal lens shift"
                 },
                 {
                     "name": "getLensShiftY",
@@ -24750,8 +23485,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get projector vertical lens shift",
-                    "snippet": "getLensShiftY()"
+                    "desc": "Get projector vertical lens shift"
                 },
                 {
                     "name": "getProjectorAspect",
@@ -24759,8 +23493,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get projector aspect ratio",
-                    "snippet": "getProjectorAspect()"
+                    "desc": "Get projector aspect ratio"
                 },
                 {
                     "name": "getIesProfile",
@@ -24768,8 +23501,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get attached IES photometric profile",
-                    "snippet": "getIesProfile()"
+                    "desc": "Get attached IES photometric profile"
                 },
                 {
                     "name": "hasIesProfile",
@@ -24777,8 +23509,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if an IES profile is attached",
-                    "snippet": "hasIesProfile()"
+                    "desc": "Check if an IES profile is attached"
                 }
             ]
         },
@@ -24818,8 +23549,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Material()"
+                ]
             },
             "methods": [
                 {
@@ -24829,8 +23559,7 @@ const TrussCAPI = {
                         "const Color& c",
                         "float r, float g, float b, float a"
                     ],
-                    "desc": "Set base color (albedo)",
-                    "snippet": "setBaseColor(${1:0.8f}, ${2:0.8f}, ${3:0.8f})"
+                    "desc": "Set base color (albedo)"
                 },
                 {
                     "name": "setMetallic",
@@ -24838,8 +23567,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float m"
                     ],
-                    "desc": "Set metallic factor (0=dielectric, 1=metal)",
-                    "snippet": "setMetallic(${1:0.0f})"
+                    "desc": "Set metallic factor (0=dielectric, 1=metal)"
                 },
                 {
                     "name": "setRoughness",
@@ -24847,8 +23575,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float r"
                     ],
-                    "desc": "Set roughness factor (0=mirror, 1=matte)",
-                    "snippet": "setRoughness(${1:0.5f})"
+                    "desc": "Set roughness factor (0=mirror, 1=matte)"
                 },
                 {
                     "name": "setEmissive",
@@ -24857,8 +23584,7 @@ const TrussCAPI = {
                         "const Color& c",
                         "float r, float g, float b"
                     ],
-                    "desc": "Set emissive color",
-                    "snippet": "setEmissive(${1:0.0f}, ${2:0.0f}, ${3:0.0f})"
+                    "desc": "Set emissive color"
                 },
                 {
                     "name": "setEmissiveStrength",
@@ -24866,8 +23592,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float s"
                     ],
-                    "desc": "Set emissive strength multiplier",
-                    "snippet": "setEmissiveStrength(${1:1.0f})"
+                    "desc": "Set emissive strength multiplier"
                 },
                 {
                     "name": "setAo",
@@ -24875,8 +23600,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float ao"
                     ],
-                    "desc": "Set ambient occlusion factor",
-                    "snippet": "setAo(${1:1.0f})"
+                    "desc": "Set ambient occlusion factor"
                 },
                 {
                     "name": "setNormalMap",
@@ -24884,8 +23608,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Texture* tex"
                     ],
-                    "desc": "Set normal map texture for bump mapping",
-                    "snippet": "setNormalMap(${1:&normalTex})"
+                    "desc": "Set normal map texture for bump mapping"
                 },
                 {
                     "name": "setBaseColorTexture",
@@ -24893,8 +23616,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Texture* tex"
                     ],
-                    "desc": "Set base color (albedo) texture map",
-                    "snippet": "setBaseColorTexture(${1:&tex})"
+                    "desc": "Set base color (albedo) texture map"
                 },
                 {
                     "name": "setMetallicRoughnessTexture",
@@ -24902,8 +23624,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Texture* tex"
                     ],
-                    "desc": "Set metallic-roughness texture (glTF: G=roughness, B=metallic)",
-                    "snippet": "setMetallicRoughnessTexture(${1:&tex})"
+                    "desc": "Set metallic-roughness texture (glTF: G=roughness, B=metallic)"
                 },
                 {
                     "name": "setEmissiveTexture",
@@ -24911,8 +23632,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Texture* tex"
                     ],
-                    "desc": "Set emissive texture map",
-                    "snippet": "setEmissiveTexture(${1:&tex})"
+                    "desc": "Set emissive texture map"
                 },
                 {
                     "name": "setOcclusionTexture",
@@ -24920,8 +23640,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Texture* tex"
                     ],
-                    "desc": "Set occlusion texture map",
-                    "snippet": "setOcclusionTexture(${1:&tex})"
+                    "desc": "Set occlusion texture map"
                 },
                 {
                     "name": "getBaseColor",
@@ -24929,8 +23648,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get base color (albedo)",
-                    "snippet": "getBaseColor()"
+                    "desc": "Get base color (albedo)"
                 },
                 {
                     "name": "getMetallic",
@@ -24938,8 +23656,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get metallic factor",
-                    "snippet": "getMetallic()"
+                    "desc": "Get metallic factor"
                 },
                 {
                     "name": "getRoughness",
@@ -24947,8 +23664,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get roughness factor",
-                    "snippet": "getRoughness()"
+                    "desc": "Get roughness factor"
                 },
                 {
                     "name": "getAo",
@@ -24956,8 +23672,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get ambient occlusion factor",
-                    "snippet": "getAo()"
+                    "desc": "Get ambient occlusion factor"
                 },
                 {
                     "name": "getEmissive",
@@ -24965,8 +23680,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get emissive color",
-                    "snippet": "getEmissive()"
+                    "desc": "Get emissive color"
                 },
                 {
                     "name": "getEmissiveStrength",
@@ -24974,8 +23688,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get emissive strength multiplier",
-                    "snippet": "getEmissiveStrength()"
+                    "desc": "Get emissive strength multiplier"
                 },
                 {
                     "name": "getNormalMap",
@@ -24983,8 +23696,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get normal map texture",
-                    "snippet": "getNormalMap()"
+                    "desc": "Get normal map texture"
                 },
                 {
                     "name": "hasNormalMap",
@@ -24992,8 +23704,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if a normal map is set",
-                    "snippet": "hasNormalMap()"
+                    "desc": "Check if a normal map is set"
                 },
                 {
                     "name": "getBaseColorTexture",
@@ -25001,8 +23712,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get base color texture",
-                    "snippet": "getBaseColorTexture()"
+                    "desc": "Get base color texture"
                 },
                 {
                     "name": "hasBaseColorTexture",
@@ -25010,8 +23720,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if a base color texture is set",
-                    "snippet": "hasBaseColorTexture()"
+                    "desc": "Check if a base color texture is set"
                 },
                 {
                     "name": "getMetallicRoughnessTexture",
@@ -25019,8 +23728,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get metallic-roughness texture",
-                    "snippet": "getMetallicRoughnessTexture()"
+                    "desc": "Get metallic-roughness texture"
                 },
                 {
                     "name": "hasMetallicRoughnessTexture",
@@ -25028,8 +23736,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if a metallic-roughness texture is set",
-                    "snippet": "hasMetallicRoughnessTexture()"
+                    "desc": "Check if a metallic-roughness texture is set"
                 },
                 {
                     "name": "getEmissiveTexture",
@@ -25037,8 +23744,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get emissive texture",
-                    "snippet": "getEmissiveTexture()"
+                    "desc": "Get emissive texture"
                 },
                 {
                     "name": "hasEmissiveTexture",
@@ -25046,8 +23752,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if an emissive texture is set",
-                    "snippet": "hasEmissiveTexture()"
+                    "desc": "Check if an emissive texture is set"
                 },
                 {
                     "name": "getOcclusionTexture",
@@ -25055,8 +23760,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get occlusion texture",
-                    "snippet": "getOcclusionTexture()"
+                    "desc": "Get occlusion texture"
                 },
                 {
                     "name": "hasOcclusionTexture",
@@ -25064,8 +23768,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if an occlusion texture is set",
-                    "snippet": "hasOcclusionTexture()"
+                    "desc": "Check if an occlusion texture is set"
                 }
             ],
             "static_methods": [
@@ -25075,8 +23778,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Gold material preset",
-                    "snippet": "Material::gold()"
+                    "desc": "Gold material preset"
                 },
                 {
                     "name": "silver",
@@ -25084,8 +23786,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Silver material preset",
-                    "snippet": "Material::silver()"
+                    "desc": "Silver material preset"
                 },
                 {
                     "name": "copper",
@@ -25093,8 +23794,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Copper material preset",
-                    "snippet": "Material::copper()"
+                    "desc": "Copper material preset"
                 },
                 {
                     "name": "iron",
@@ -25102,8 +23802,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Iron material preset",
-                    "snippet": "Material::iron()"
+                    "desc": "Iron material preset"
                 },
                 {
                     "name": "plastic",
@@ -25111,8 +23810,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Color& baseColor, float roughness"
                     ],
-                    "desc": "Plastic material preset",
-                    "snippet": "Material::plastic(${1:Color(0.8f, 0.2f, 0.2f)})"
+                    "desc": "Plastic material preset"
                 },
                 {
                     "name": "rubber",
@@ -25120,8 +23818,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Color& baseColor"
                     ],
-                    "desc": "Rubber material preset",
-                    "snippet": "Material::rubber(${1:Color(0.1f, 0.1f, 0.1f)})"
+                    "desc": "Rubber material preset"
                 },
                 {
                     "name": "bronze",
@@ -25129,8 +23826,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Bronze material preset",
-                    "snippet": "Material::bronze()"
+                    "desc": "Bronze material preset"
                 },
                 {
                     "name": "emerald",
@@ -25138,8 +23834,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Emerald material preset",
-                    "snippet": "Material::emerald()"
+                    "desc": "Emerald material preset"
                 },
                 {
                     "name": "ruby",
@@ -25147,8 +23842,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Ruby material preset",
-                    "snippet": "Material::ruby()"
+                    "desc": "Ruby material preset"
                 },
                 {
                     "name": "fromPhong",
@@ -25156,8 +23850,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Color& diffuse, const Color& specular, float shininess, const Color& emissive"
                     ],
-                    "desc": "Convert Phong material parameters to PBR (roughness from shininess, metallic estimated from specular luminance)",
-                    "snippet": "Material::fromPhong(${1:diffuse}, ${2:specular}, ${3:32.0f})"
+                    "desc": "Convert Phong material parameters to PBR (roughness from shininess, metallic estimated from specular luminance)"
                 }
             ]
         },
@@ -25190,8 +23883,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "IesProfile()"
+                ]
             },
             "methods": [
                 {
@@ -25200,8 +23892,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& path"
                     ],
-                    "desc": "Load IES profile from file",
-                    "snippet": "load(${1:\"spotlight.ies\"})"
+                    "desc": "Load IES profile from file"
                 },
                 {
                     "name": "loadFromString",
@@ -25209,8 +23900,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& data"
                     ],
-                    "desc": "Load IES profile from inline string data",
-                    "snippet": "loadFromString(${1:data})"
+                    "desc": "Load IES profile from inline string data"
                 },
                 {
                     "name": "isLoaded",
@@ -25218,8 +23908,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if profile is loaded",
-                    "snippet": "isLoaded()"
+                    "desc": "Check if profile is loaded"
                 },
                 {
                     "name": "getMaxVerticalAngle",
@@ -25227,8 +23916,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get maximum vertical angle in the profile (radians)",
-                    "snippet": "getMaxVerticalAngle()"
+                    "desc": "Get maximum vertical angle in the profile (radians)"
                 },
                 {
                     "name": "getMaxCandela",
@@ -25236,8 +23924,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get maximum candela value in the profile",
-                    "snippet": "getMaxCandela()"
+                    "desc": "Get maximum candela value in the profile"
                 },
                 {
                     "name": "getTextureWidth",
@@ -25245,8 +23932,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get width of the generated 1D lookup texture",
-                    "snippet": "getTextureWidth()"
+                    "desc": "Get width of the generated 1D lookup texture"
                 }
             ]
         },
@@ -25287,8 +23973,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Environment()"
+                ]
             },
             "methods": [
                 {
@@ -25297,8 +23982,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& path"
                     ],
-                    "desc": "Load environment from HDR image file",
-                    "snippet": "loadFromHDR(${1:\"env.hdr\"})"
+                    "desc": "Load environment from HDR image file"
                 },
                 {
                     "name": "loadProcedural",
@@ -25306,8 +23990,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Generate a simple procedural sky environment",
-                    "snippet": "loadProcedural()"
+                    "desc": "Generate a simple procedural sky environment"
                 },
                 {
                     "name": "isLoaded",
@@ -25315,8 +23998,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check if environment is loaded",
-                    "snippet": "isLoaded()"
+                    "desc": "Check if environment is loaded"
                 },
                 {
                     "name": "release",
@@ -25324,8 +24006,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Release GPU resources",
-                    "snippet": "release()"
+                    "desc": "Release GPU resources"
                 },
                 {
                     "name": "getIrradianceMap",
@@ -25333,8 +24014,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get irradiance cubemap for diffuse IBL",
-                    "snippet": "getIrradianceMap()"
+                    "desc": "Get irradiance cubemap for diffuse IBL"
                 },
                 {
                     "name": "getPrefilterMap",
@@ -25342,8 +24022,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get prefiltered environment cubemap for specular IBL",
-                    "snippet": "getPrefilterMap()"
+                    "desc": "Get prefiltered environment cubemap for specular IBL"
                 },
                 {
                     "name": "getBrdfLut",
@@ -25351,8 +24030,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get BRDF integration lookup texture",
-                    "snippet": "getBrdfLut()"
+                    "desc": "Get BRDF integration lookup texture"
                 },
                 {
                     "name": "getPrefilterMipLevels",
@@ -25360,8 +24038,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get number of mip levels in the prefilter map",
-                    "snippet": "getPrefilterMipLevels()"
+                    "desc": "Get number of mip levels in the prefilter map"
                 }
             ]
         },
@@ -25427,8 +24104,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True on Web (Emscripten / WASM)",
-                    "snippet": "Platform::isWeb()"
+                    "desc": "True on Web (Emscripten / WASM)"
                 },
                 {
                     "name": "isMacOS",
@@ -25436,8 +24112,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True on macOS",
-                    "snippet": "Platform::isMacOS()"
+                    "desc": "True on macOS"
                 },
                 {
                     "name": "isIOS",
@@ -25445,8 +24120,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True on iOS",
-                    "snippet": "Platform::isIOS()"
+                    "desc": "True on iOS"
                 },
                 {
                     "name": "isWindows",
@@ -25454,8 +24128,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True on Windows",
-                    "snippet": "Platform::isWindows()"
+                    "desc": "True on Windows"
                 },
                 {
                     "name": "isAndroid",
@@ -25463,8 +24136,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True on Android",
-                    "snippet": "Platform::isAndroid()"
+                    "desc": "True on Android"
                 },
                 {
                     "name": "isLinux",
@@ -25472,8 +24144,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True on Linux (desktop, excludes Android)",
-                    "snippet": "Platform::isLinux()"
+                    "desc": "True on Linux (desktop, excludes Android)"
                 },
                 {
                     "name": "isApple",
@@ -25481,8 +24152,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True on any Apple platform (macOS or iOS)",
-                    "snippet": "Platform::isApple()"
+                    "desc": "True on any Apple platform (macOS or iOS)"
                 },
                 {
                     "name": "isMobile",
@@ -25490,8 +24160,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True on mobile (iOS or Android)",
-                    "snippet": "Platform::isMobile()"
+                    "desc": "True on mobile (iOS or Android)"
                 },
                 {
                     "name": "isDesktop",
@@ -25499,8 +24168,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True on desktop (macOS, Windows, or Linux)",
-                    "snippet": "Platform::isDesktop()"
+                    "desc": "True on desktop (macOS, Windows, or Linux)"
                 },
                 {
                     "name": "name",
@@ -25508,8 +24176,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"",
-                    "snippet": "Platform::name()"
+                    "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\""
                 }
             ]
         },
@@ -25543,8 +24210,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True when running on OpenGL (core or GLES3)",
-                    "snippet": "GraphicsBackend::isOpenGL()"
+                    "desc": "True when running on OpenGL (core or GLES3)"
                 },
                 {
                     "name": "isMetal",
@@ -25552,8 +24218,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True when running on Apple Metal",
-                    "snippet": "GraphicsBackend::isMetal()"
+                    "desc": "True when running on Apple Metal"
                 },
                 {
                     "name": "isD3D11",
@@ -25561,8 +24226,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True when running on Direct3D 11",
-                    "snippet": "GraphicsBackend::isD3D11()"
+                    "desc": "True when running on Direct3D 11"
                 },
                 {
                     "name": "isWebGPU",
@@ -25570,8 +24234,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True when running on WebGPU",
-                    "snippet": "GraphicsBackend::isWebGPU()"
+                    "desc": "True when running on WebGPU"
                 },
                 {
                     "name": "isWebGL2",
@@ -25579,8 +24242,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True when running on WebGL2 (GLES3 under Emscripten)",
-                    "snippet": "GraphicsBackend::isWebGL2()"
+                    "desc": "True when running on WebGL2 (GLES3 under Emscripten)"
                 },
                 {
                     "name": "isVulkan",
@@ -25588,8 +24250,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True when running on Vulkan",
-                    "snippet": "GraphicsBackend::isVulkan()"
+                    "desc": "True when running on Vulkan"
                 },
                 {
                     "name": "name",
@@ -25597,8 +24258,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"",
-                    "snippet": "GraphicsBackend::name()"
+                    "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\""
                 }
             ]
         },
@@ -25630,8 +24290,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Build date in \"YYYY-MM-DD\" form (local time)",
-                    "snippet": "BuildInfo::date()"
+                    "desc": "Build date in \"YYYY-MM-DD\" form (local time)"
                 },
                 {
                     "name": "time",
@@ -25639,8 +24298,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Build time in \"HH:MM:SS\" form (local time)",
-                    "snippet": "BuildInfo::time()"
+                    "desc": "Build time in \"HH:MM:SS\" form (local time)"
                 },
                 {
                     "name": "dateTime",
@@ -25648,8 +24306,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)",
-                    "snippet": "BuildInfo::dateTime()"
+                    "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)"
                 },
                 {
                     "name": "timestamp",
@@ -25657,8 +24314,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Build timestamp as Unix seconds (UTC)",
-                    "snippet": "BuildInfo::timestamp()"
+                    "desc": "Build timestamp as Unix seconds (UTC)"
                 },
                 {
                     "name": "year",
@@ -25666,8 +24322,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Build year (e.g. 2026)",
-                    "snippet": "BuildInfo::year()"
+                    "desc": "Build year (e.g. 2026)"
                 },
                 {
                     "name": "month",
@@ -25675,8 +24330,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Build month (1-12)",
-                    "snippet": "BuildInfo::month()"
+                    "desc": "Build month (1-12)"
                 },
                 {
                     "name": "day",
@@ -25684,8 +24338,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Build day of month (1-31)",
-                    "snippet": "BuildInfo::day()"
+                    "desc": "Build day of month (1-31)"
                 },
                 {
                     "name": "hour",
@@ -25693,8 +24346,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Build hour (0-23)",
-                    "snippet": "BuildInfo::hour()"
+                    "desc": "Build hour (0-23)"
                 },
                 {
                     "name": "minute",
@@ -25702,8 +24354,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Build minute (0-59)",
-                    "snippet": "BuildInfo::minute()"
+                    "desc": "Build minute (0-59)"
                 },
                 {
                     "name": "second",
@@ -25711,8 +24362,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Build second (0-59)",
-                    "snippet": "BuildInfo::second()"
+                    "desc": "Build second (0-59)"
                 }
             ]
         },
@@ -25777,8 +24427,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Interface name",
-                    "snippet": "getName()"
+                    "desc": "Interface name"
                 },
                 {
                     "name": "getAddress",
@@ -25786,8 +24435,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "IP address",
-                    "snippet": "getAddress()"
+                    "desc": "IP address"
                 },
                 {
                     "name": "getNetmask",
@@ -25795,8 +24443,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Subnet mask",
-                    "snippet": "getNetmask()"
+                    "desc": "Subnet mask"
                 },
                 {
                     "name": "getMac",
@@ -25804,8 +24451,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "MAC address",
-                    "snippet": "getMac()"
+                    "desc": "MAC address"
                 },
                 {
                     "name": "getIsIPv4",
@@ -25813,8 +24459,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether the address is IPv4",
-                    "snippet": "getIsIPv4()"
+                    "desc": "Whether the address is IPv4"
                 },
                 {
                     "name": "getIsLoopback",
@@ -25822,8 +24467,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether this is a loopback interface",
-                    "snippet": "getIsLoopback()"
+                    "desc": "Whether this is a loopback interface"
                 },
                 {
                     "name": "getIsUp",
@@ -25831,8 +24475,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether the link is up",
-                    "snippet": "getIsUp()"
+                    "desc": "Whether the link is up"
                 }
             ]
         },
@@ -25865,8 +24508,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "UdpSocket"
+                ]
             },
             "properties": [
                 {
@@ -25887,8 +24529,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Create the socket explicitly (usually auto-created by bind/connect)",
-                    "snippet": "create()"
+                    "desc": "Create the socket explicitly (usually auto-created by bind/connect)"
                 },
                 {
                     "name": "bind",
@@ -25896,8 +24537,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int port, bool startReceiving = true"
                     ],
-                    "desc": "Bind a port for receiving (startReceiving auto-starts the receive thread)",
-                    "snippet": "bind(${1:port})"
+                    "desc": "Bind a port for receiving (startReceiving auto-starts the receive thread)"
                 },
                 {
                     "name": "connect",
@@ -25905,8 +24545,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const std::string& host, int port"
                     ],
-                    "desc": "Set the destination for send()",
-                    "snippet": "connect(${1:host}, ${2:port})"
+                    "desc": "Set the destination for send()"
                 },
                 {
                     "name": "close",
@@ -25914,8 +24553,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Close the socket",
-                    "snippet": "close()"
+                    "desc": "Close the socket"
                 },
                 {
                     "name": "sendTo",
@@ -25924,8 +24562,7 @@ const TrussCAPI = {
                         "const std::string& host, int port, const void* data, size_t size",
                         "const std::string& host, int port, const std::string& message"
                     ],
-                    "desc": "Send data to a specific host and port",
-                    "snippet": "sendTo(${1:host}, ${2:port}, ${3:message})"
+                    "desc": "Send data to a specific host and port"
                 },
                 {
                     "name": "send",
@@ -25934,8 +24571,7 @@ const TrussCAPI = {
                         "const void* data, size_t size",
                         "const std::string& message"
                     ],
-                    "desc": "Send to the destination set by connect()",
-                    "snippet": "send(${1:message})"
+                    "desc": "Send to the destination set by connect()"
                 },
                 {
                     "name": "receive",
@@ -25944,8 +24580,7 @@ const TrussCAPI = {
                         "void* buffer, size_t bufferSize",
                         "void* buffer, size_t bufferSize, std::string& remoteHost, int& remotePort"
                     ],
-                    "desc": "Blocking receive (for non-event use); returns byte count or -1",
-                    "snippet": "receive(${1:buffer}, ${2:bufferSize})"
+                    "desc": "Blocking receive (for non-event use); returns byte count or -1"
                 },
                 {
                     "name": "startReceiving",
@@ -25953,8 +24588,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Start the receive thread (auto-called after bind)",
-                    "snippet": "startReceiving()"
+                    "desc": "Start the receive thread (auto-called after bind)"
                 },
                 {
                     "name": "stopReceiving",
@@ -25962,8 +24596,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Stop the receive thread",
-                    "snippet": "stopReceiving()"
+                    "desc": "Stop the receive thread"
                 },
                 {
                     "name": "isReceiving",
@@ -25971,8 +24604,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether the receive thread is active",
-                    "snippet": "isReceiving()"
+                    "desc": "Whether the receive thread is active"
                 },
                 {
                     "name": "setNonBlocking",
@@ -25980,8 +24612,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool nonBlocking"
                     ],
-                    "desc": "Set non-blocking mode",
-                    "snippet": "setNonBlocking(${1:nonBlocking})"
+                    "desc": "Set non-blocking mode"
                 },
                 {
                     "name": "setBroadcast",
@@ -25989,8 +24620,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool enable"
                     ],
-                    "desc": "Allow broadcast sending",
-                    "snippet": "setBroadcast(${1:enable})"
+                    "desc": "Allow broadcast sending"
                 },
                 {
                     "name": "setReuseAddress",
@@ -25998,8 +24628,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool enable"
                     ],
-                    "desc": "Allow address reuse (set before bind)",
-                    "snippet": "setReuseAddress(${1:enable})"
+                    "desc": "Allow address reuse (set before bind)"
                 },
                 {
                     "name": "setReusePort",
@@ -26007,8 +24636,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool enable"
                     ],
-                    "desc": "Allow multiple sockets on the same port (multicast receivers; set before bind)",
-                    "snippet": "setReusePort(${1:enable})"
+                    "desc": "Allow multiple sockets on the same port (multicast receivers; set before bind)"
                 },
                 {
                     "name": "setReceiveBufferSize",
@@ -26016,8 +24644,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int size"
                     ],
-                    "desc": "Set the receive buffer size",
-                    "snippet": "setReceiveBufferSize(${1:size})"
+                    "desc": "Set the receive buffer size"
                 },
                 {
                     "name": "setSendBufferSize",
@@ -26025,8 +24652,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int size"
                     ],
-                    "desc": "Set the send buffer size",
-                    "snippet": "setSendBufferSize(${1:size})"
+                    "desc": "Set the send buffer size"
                 },
                 {
                     "name": "setReceiveTimeout",
@@ -26034,8 +24660,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int timeoutMs"
                     ],
-                    "desc": "Set the receive timeout (0 = infinite)",
-                    "snippet": "setReceiveTimeout(${1:timeoutMs})"
+                    "desc": "Set the receive timeout (0 = infinite)"
                 },
                 {
                     "name": "setUseThread",
@@ -26043,8 +24668,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool useThread"
                     ],
-                    "desc": "Whether to use a receive thread (must be false on Wasm)",
-                    "snippet": "setUseThread(${1:useThread})"
+                    "desc": "Whether to use a receive thread (must be false on Wasm)"
                 },
                 {
                     "name": "joinMulticastGroup",
@@ -26052,8 +24676,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const std::string& groupAddr, const std::string& interfaceAddr = \"\""
                     ],
-                    "desc": "Join a multicast group for receiving (call after bind; \"\" = default route)",
-                    "snippet": "joinMulticastGroup(${1:groupAddr})"
+                    "desc": "Join a multicast group for receiving (call after bind; \"\" = default route)"
                 },
                 {
                     "name": "leaveMulticastGroup",
@@ -26061,8 +24684,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const std::string& groupAddr, const std::string& interfaceAddr = \"\""
                     ],
-                    "desc": "Leave a previously joined multicast group",
-                    "snippet": "leaveMulticastGroup(${1:groupAddr})"
+                    "desc": "Leave a previously joined multicast group"
                 },
                 {
                     "name": "setMulticastTTL",
@@ -26070,8 +24692,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int ttl"
                     ],
-                    "desc": "Hop limit for outgoing multicast (default 1 = local subnet)",
-                    "snippet": "setMulticastTTL(${1:ttl})"
+                    "desc": "Hop limit for outgoing multicast (default 1 = local subnet)"
                 },
                 {
                     "name": "setMulticastLoopback",
@@ -26079,8 +24700,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool enable"
                     ],
-                    "desc": "Whether outgoing multicast loops back to local listeners (default on)",
-                    "snippet": "setMulticastLoopback(${1:enable})"
+                    "desc": "Whether outgoing multicast loops back to local listeners (default on)"
                 },
                 {
                     "name": "setMulticastInterface",
@@ -26088,8 +24708,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const std::string& interfaceAddr"
                     ],
-                    "desc": "Pick the NIC for outgoing multicast (\"\" = default route)",
-                    "snippet": "setMulticastInterface(${1:interfaceAddr})"
+                    "desc": "Pick the NIC for outgoing multicast (\"\" = default route)"
                 },
                 {
                     "name": "getLocalPort",
@@ -26097,8 +24716,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "The bound local port",
-                    "snippet": "getLocalPort()"
+                    "desc": "The bound local port"
                 },
                 {
                     "name": "isValid",
@@ -26106,8 +24724,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether the socket is valid",
-                    "snippet": "isValid()"
+                    "desc": "Whether the socket is valid"
                 },
                 {
                     "name": "getConnectedHost",
@@ -26115,8 +24732,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Destination host from connect()",
-                    "snippet": "getConnectedHost()"
+                    "desc": "Destination host from connect()"
                 },
                 {
                     "name": "getConnectedPort",
@@ -26124,8 +24740,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Destination port from connect()",
-                    "snippet": "getConnectedPort()"
+                    "desc": "Destination port from connect()"
                 }
             ]
         },
@@ -26219,8 +24834,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "TcpClient"
+                ]
             },
             "properties": [
                 {
@@ -26251,8 +24865,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const std::string& host, int port"
                     ],
-                    "desc": "Connect to a server (blocking)",
-                    "snippet": "connect(${1:host}, ${2:port})"
+                    "desc": "Connect to a server (blocking)"
                 },
                 {
                     "name": "connectAsync",
@@ -26260,8 +24873,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const std::string& host, int port"
                     ],
-                    "desc": "Connect asynchronously (notifies via onConnect)",
-                    "snippet": "connectAsync(${1:host}, ${2:port})"
+                    "desc": "Connect asynchronously (notifies via onConnect)"
                 },
                 {
                     "name": "disconnect",
@@ -26269,8 +24881,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Disconnect",
-                    "snippet": "disconnect()"
+                    "desc": "Disconnect"
                 },
                 {
                     "name": "isConnected",
@@ -26278,8 +24889,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether currently connected",
-                    "snippet": "isConnected()"
+                    "desc": "Whether currently connected"
                 },
                 {
                     "name": "send",
@@ -26289,8 +24899,7 @@ const TrussCAPI = {
                         "const std::vector<char>& data",
                         "const std::string& message"
                     ],
-                    "desc": "Send data to the server",
-                    "snippet": "send(${1:message})"
+                    "desc": "Send data to the server"
                 },
                 {
                     "name": "setReceiveBufferSize",
@@ -26298,8 +24907,7 @@ const TrussCAPI = {
                     "signatures": [
                         "size_t size"
                     ],
-                    "desc": "Set the receive buffer size",
-                    "snippet": "setReceiveBufferSize(${1:size})"
+                    "desc": "Set the receive buffer size"
                 },
                 {
                     "name": "setBlocking",
@@ -26307,8 +24915,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool blocking"
                     ],
-                    "desc": "Set blocking mode",
-                    "snippet": "setBlocking(${1:blocking})"
+                    "desc": "Set blocking mode"
                 },
                 {
                     "name": "setUseThread",
@@ -26316,8 +24923,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool useThread"
                     ],
-                    "desc": "Whether to use threads (must be false on Wasm)",
-                    "snippet": "setUseThread(${1:useThread})"
+                    "desc": "Whether to use threads (must be false on Wasm)"
                 },
                 {
                     "name": "isUsingThread",
@@ -26325,8 +24931,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether threading is in use",
-                    "snippet": "isUsingThread()"
+                    "desc": "Whether threading is in use"
                 },
                 {
                     "name": "getRemoteHost",
@@ -26334,8 +24939,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Remote host name",
-                    "snippet": "getRemoteHost()"
+                    "desc": "Remote host name"
                 },
                 {
                     "name": "getRemotePort",
@@ -26343,8 +24947,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Remote port",
-                    "snippet": "getRemotePort()"
+                    "desc": "Remote port"
                 }
             ]
         },
@@ -26482,8 +25085,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "TcpServer"
+                ]
             },
             "properties": [
                 {
@@ -26514,8 +25116,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int port, int maxClients = 10"
                     ],
-                    "desc": "Start listening on a port",
-                    "snippet": "start(${1:port})"
+                    "desc": "Start listening on a port"
                 },
                 {
                     "name": "stop",
@@ -26523,8 +25124,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Stop the server",
-                    "snippet": "stop()"
+                    "desc": "Stop the server"
                 },
                 {
                     "name": "isRunning",
@@ -26532,8 +25132,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether the server is running",
-                    "snippet": "isRunning()"
+                    "desc": "Whether the server is running"
                 },
                 {
                     "name": "disconnectClient",
@@ -26541,8 +25140,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int clientId"
                     ],
-                    "desc": "Disconnect a specific client",
-                    "snippet": "disconnectClient(${1:clientId})"
+                    "desc": "Disconnect a specific client"
                 },
                 {
                     "name": "disconnectAllClients",
@@ -26550,8 +25148,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Disconnect all clients",
-                    "snippet": "disconnectAllClients()"
+                    "desc": "Disconnect all clients"
                 },
                 {
                     "name": "getClientCount",
@@ -26559,8 +25156,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Number of connected clients",
-                    "snippet": "getClientCount()"
+                    "desc": "Number of connected clients"
                 },
                 {
                     "name": "getClientIds",
@@ -26568,8 +25164,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "IDs of all connected clients",
-                    "snippet": "getClientIds()"
+                    "desc": "IDs of all connected clients"
                 },
                 {
                     "name": "getClient",
@@ -26577,8 +25172,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int clientId"
                     ],
-                    "desc": "Client info (nullptr if not found)",
-                    "snippet": "getClient(${1:clientId})"
+                    "desc": "Client info (nullptr if not found)"
                 },
                 {
                     "name": "send",
@@ -26588,8 +25182,7 @@ const TrussCAPI = {
                         "int clientId, const std::vector<char>& data",
                         "int clientId, const std::string& message"
                     ],
-                    "desc": "Send data to a specific client",
-                    "snippet": "send(${1:clientId}, ${2:message})"
+                    "desc": "Send data to a specific client"
                 },
                 {
                     "name": "broadcast",
@@ -26599,8 +25192,7 @@ const TrussCAPI = {
                         "const std::vector<char>& data",
                         "const std::string& message"
                     ],
-                    "desc": "Broadcast data to all clients",
-                    "snippet": "broadcast(${1:message})"
+                    "desc": "Broadcast data to all clients"
                 },
                 {
                     "name": "setReceiveBufferSize",
@@ -26608,8 +25200,7 @@ const TrussCAPI = {
                     "signatures": [
                         "size_t size"
                     ],
-                    "desc": "Set the receive buffer size",
-                    "snippet": "setReceiveBufferSize(${1:size})"
+                    "desc": "Set the receive buffer size"
                 },
                 {
                     "name": "getPort",
@@ -26617,8 +25208,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "The listening port",
-                    "snippet": "getPort()"
+                    "desc": "The listening port"
                 }
             ]
         },
@@ -26644,8 +25234,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Client ID assigned by the server",
-                    "snippet": "getId()"
+                    "desc": "Client ID assigned by the server"
                 },
                 {
                     "name": "getHost",
@@ -26653,8 +25242,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Client IP address",
-                    "snippet": "getHost()"
+                    "desc": "Client IP address"
                 },
                 {
                     "name": "getPort",
@@ -26662,8 +25250,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Client port",
-                    "snippet": "getPort()"
+                    "desc": "Client port"
                 }
             ]
         },
@@ -26826,8 +25413,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Serial"
+                ]
             },
             "methods": [
                 {
@@ -26837,8 +25423,7 @@ const TrussCAPI = {
                         "const std::string& portName, int baudRate",
                         "int deviceIndex, int baudRate"
                     ],
-                    "desc": "Connect to a port by path or by index from listDevices()",
-                    "snippet": "setup(${1:portName}, ${2:baudRate})"
+                    "desc": "Connect to a port by path or by index from listDevices()"
                 },
                 {
                     "name": "close",
@@ -26846,8 +25431,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Disconnect and release resources",
-                    "snippet": "close()"
+                    "desc": "Disconnect and release resources"
                 },
                 {
                     "name": "isInitialized",
@@ -26855,8 +25439,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether currently connected",
-                    "snippet": "isInitialized()"
+                    "desc": "Whether currently connected"
                 },
                 {
                     "name": "getDevicePath",
@@ -26864,8 +25447,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Current device path",
-                    "snippet": "getDevicePath()"
+                    "desc": "Current device path"
                 },
                 {
                     "name": "available",
@@ -26873,8 +25455,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Number of bytes available to read",
-                    "snippet": "available()"
+                    "desc": "Number of bytes available to read"
                 },
                 {
                     "name": "readBytes",
@@ -26883,8 +25464,7 @@ const TrussCAPI = {
                         "void* buffer, int length",
                         "std::string& buffer, int length"
                     ],
-                    "desc": "Read bytes; returns actual count (>=0) or -1 on error",
-                    "snippet": "readBytes(${1:buffer}, ${2:length})"
+                    "desc": "Read bytes; returns actual count (>=0) or -1 on error"
                 },
                 {
                     "name": "readByte",
@@ -26892,8 +25472,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error",
-                    "snippet": "readByte()"
+                    "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error"
                 },
                 {
                     "name": "writeBytes",
@@ -26902,8 +25481,7 @@ const TrussCAPI = {
                         "const void* buffer, int length",
                         "const std::string& buffer"
                     ],
-                    "desc": "Write bytes; returns actual count or -1 on error",
-                    "snippet": "writeBytes(${1:buffer}, ${2:length})"
+                    "desc": "Write bytes; returns actual count or -1 on error"
                 },
                 {
                     "name": "writeByte",
@@ -26911,8 +25489,7 @@ const TrussCAPI = {
                     "signatures": [
                         "unsigned char byte"
                     ],
-                    "desc": "Write a single byte; true on success",
-                    "snippet": "writeByte(${1:byte})"
+                    "desc": "Write a single byte; true on success"
                 },
                 {
                     "name": "flushInput",
@@ -26920,8 +25497,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear the input buffer",
-                    "snippet": "flushInput()"
+                    "desc": "Clear the input buffer"
                 },
                 {
                     "name": "flushOutput",
@@ -26929,8 +25505,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear the output buffer",
-                    "snippet": "flushOutput()"
+                    "desc": "Clear the output buffer"
                 },
                 {
                     "name": "flush",
@@ -26938,8 +25513,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear both input and output buffers",
-                    "snippet": "flush()"
+                    "desc": "Clear both input and output buffers"
                 },
                 {
                     "name": "drain",
@@ -26947,8 +25521,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Wait until output transmission completes",
-                    "snippet": "drain()"
+                    "desc": "Wait until output transmission completes"
                 }
             ],
             "static_methods": [
@@ -26958,8 +25531,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "List available serial devices",
-                    "snippet": "Serial::listDevices()"
+                    "desc": "List available serial devices"
                 },
                 {
                     "name": "printDevices",
@@ -26967,8 +25539,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Log all available serial devices",
-                    "snippet": "Serial::printDevices()"
+                    "desc": "Log all available serial devices"
                 }
             ]
         },
@@ -27011,8 +25582,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Device index",
-                    "snippet": "getDeviceID()"
+                    "desc": "Device index"
                 },
                 {
                     "name": "getDevicePath",
@@ -27020,8 +25590,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Device path",
-                    "snippet": "getDevicePath()"
+                    "desc": "Device path"
                 },
                 {
                     "name": "getDeviceName",
@@ -27029,8 +25598,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Device name",
-                    "snippet": "getDeviceName()"
+                    "desc": "Device name"
                 }
             ]
         },
@@ -27070,8 +25638,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Source kind (Eager for SoundBuffer, Stream for SoundStream). Lets the mixer dispatch without a virtual call per frame.",
-                    "snippet": "kind()"
+                    "desc": "Source kind (Eager for SoundBuffer, Stream for SoundStream). Lets the mixer dispatch without a virtual call per frame."
                 },
                 {
                     "name": "getDuration",
@@ -27079,8 +25646,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Duration in seconds. numSamples/sampleRate for buffers; the decoded file's duration for streams.",
-                    "snippet": "getDuration()"
+                    "desc": "Duration in seconds. numSamples/sampleRate for buffers; the decoded file's duration for streams."
                 }
             ]
         },
@@ -27111,8 +25677,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "SoundBuffer()"
+                ]
             },
             "properties": [
                 {
@@ -27133,8 +25698,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& path"
                     ],
-                    "desc": "Decode a file into PCM, auto-detecting format from the extension (.wav .mp3 .ogg .flac .aac .m4a, case-insensitive). Returns false on failure.",
-                    "snippet": "load(${1:path})"
+                    "desc": "Decode a file into PCM, auto-detecting format from the extension (.wav .mp3 .ogg .flac .aac .m4a, case-insensitive). Returns false on failure."
                 },
                 {
                     "name": "loadWav",
@@ -27142,8 +25706,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& path"
                     ],
-                    "desc": "Decode a WAV file into PCM.",
-                    "snippet": "loadWav(${1:path})"
+                    "desc": "Decode a WAV file into PCM."
                 },
                 {
                     "name": "loadMp3",
@@ -27151,8 +25714,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& path"
                     ],
-                    "desc": "Decode an MP3 file into PCM.",
-                    "snippet": "loadMp3(${1:path})"
+                    "desc": "Decode an MP3 file into PCM."
                 },
                 {
                     "name": "loadOgg",
@@ -27160,8 +25722,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& path"
                     ],
-                    "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis).",
-                    "snippet": "loadOgg(${1:path})"
+                    "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis)."
                 },
                 {
                     "name": "loadFlac",
@@ -27169,8 +25730,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& path"
                     ],
-                    "desc": "Decode a FLAC file into PCM.",
-                    "snippet": "loadFlac(${1:path})"
+                    "desc": "Decode a FLAC file into PCM."
                 },
                 {
                     "name": "loadAac",
@@ -27179,7 +25739,6 @@ const TrussCAPI = {
                         "const string& path"
                     ],
                     "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms).",
-                    "snippet": "loadAac(${1:path})",
                     "platforms": [
                         "macos",
                         "ios",
@@ -27196,8 +25755,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const void* data, size_t dataSize"
                     ],
-                    "desc": "Decode WAV data from a memory buffer.",
-                    "snippet": "loadWavFromMemory(${1:data}, ${2:dataSize})"
+                    "desc": "Decode WAV data from a memory buffer."
                 },
                 {
                     "name": "loadMp3FromMemory",
@@ -27205,8 +25763,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const void* data, size_t dataSize"
                     ],
-                    "desc": "Decode MP3 data from a memory buffer.",
-                    "snippet": "loadMp3FromMemory(${1:data}, ${2:dataSize})"
+                    "desc": "Decode MP3 data from a memory buffer."
                 },
                 {
                     "name": "loadOggFromMemory",
@@ -27214,8 +25771,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const void* data, size_t dataSize"
                     ],
-                    "desc": "Decode OGG Vorbis data from a memory buffer.",
-                    "snippet": "loadOggFromMemory(${1:data}, ${2:dataSize})"
+                    "desc": "Decode OGG Vorbis data from a memory buffer."
                 },
                 {
                     "name": "loadFlacFromMemory",
@@ -27223,8 +25779,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const void* data, size_t dataSize"
                     ],
-                    "desc": "Decode FLAC data from a memory buffer.",
-                    "snippet": "loadFlacFromMemory(${1:data}, ${2:dataSize})"
+                    "desc": "Decode FLAC data from a memory buffer."
                 },
                 {
                     "name": "loadAacFromMemory",
@@ -27233,7 +25788,6 @@ const TrussCAPI = {
                         "const void* data, size_t dataSize"
                     ],
                     "desc": "Decode AAC data from a memory buffer (platform-specific; returns false on unsupported platforms).",
-                    "snippet": "loadAacFromMemory(${1:data}, ${2:dataSize})",
                     "platforms": [
                         "macos",
                         "ios",
@@ -27249,8 +25803,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const void* data, size_t dataSize, int numChannels, int rate, int bitsPerSample = 16, bool bigEndian = false"
                     ],
-                    "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths.",
-                    "snippet": "loadPcmFromMemory(${1:data}, ${2:dataSize}, ${3:numChannels}, ${4:rate})"
+                    "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths."
                 },
                 {
                     "name": "getDuration",
@@ -27258,8 +25811,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Duration in seconds (numSamples / sampleRate).",
-                    "snippet": "getDuration()"
+                    "desc": "Duration in seconds (numSamples / sampleRate)."
                 },
                 {
                     "name": "generateSineWave",
@@ -27267,8 +25819,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float frequency, float duration, float volume = 0.5f, int sr = 44100"
                     ],
-                    "desc": "Fill the buffer with a mono sine wave of the given frequency (Hz) and duration (seconds).",
-                    "snippet": "generateSineWave(${1:frequency}, ${2:duration})"
+                    "desc": "Fill the buffer with a mono sine wave of the given frequency (Hz) and duration (seconds)."
                 },
                 {
                     "name": "generateSquareWave",
@@ -27276,8 +25827,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float frequency, float duration, float volume = 0.5f, int sr = 44100"
                     ],
-                    "desc": "Fill the buffer with a mono square wave.",
-                    "snippet": "generateSquareWave(${1:frequency}, ${2:duration})"
+                    "desc": "Fill the buffer with a mono square wave."
                 },
                 {
                     "name": "generateTriangleWave",
@@ -27285,8 +25835,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float frequency, float duration, float volume = 0.5f, int sr = 44100"
                     ],
-                    "desc": "Fill the buffer with a mono triangle wave.",
-                    "snippet": "generateTriangleWave(${1:frequency}, ${2:duration})"
+                    "desc": "Fill the buffer with a mono triangle wave."
                 },
                 {
                     "name": "generateSawtoothWave",
@@ -27294,8 +25843,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float frequency, float duration, float volume = 0.5f, int sr = 44100"
                     ],
-                    "desc": "Fill the buffer with a mono sawtooth wave.",
-                    "snippet": "generateSawtoothWave(${1:frequency}, ${2:duration})"
+                    "desc": "Fill the buffer with a mono sawtooth wave."
                 },
                 {
                     "name": "generateNoise",
@@ -27303,8 +25851,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float duration, float volume = 0.5f, int sr = 44100"
                     ],
-                    "desc": "Fill the buffer with mono white noise.",
-                    "snippet": "generateNoise(${1:duration})"
+                    "desc": "Fill the buffer with mono white noise."
                 },
                 {
                     "name": "generatePinkNoise",
@@ -27312,8 +25859,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float duration, float volume = 0.5f, int sr = 44100"
                     ],
-                    "desc": "Fill the buffer with mono pink noise (1/f spectrum, Paul Kellet's method).",
-                    "snippet": "generatePinkNoise(${1:duration})"
+                    "desc": "Fill the buffer with mono pink noise (1/f spectrum, Paul Kellet's method)."
                 },
                 {
                     "name": "generateSilence",
@@ -27321,8 +25867,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float duration, int sr = 44100"
                     ],
-                    "desc": "Fill the buffer with silence of the given duration (useful as a base for mixFrom).",
-                    "snippet": "generateSilence(${1:duration})"
+                    "desc": "Fill the buffer with silence of the given duration (useful as a base for mixFrom)."
                 },
                 {
                     "name": "applyADSR",
@@ -27330,8 +25875,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float attack, float decay, float sustainLevel, float release"
                     ],
-                    "desc": "Apply an ADSR amplitude envelope to the buffer in place (attack / decay / release in seconds, sustainLevel 0-1).",
-                    "snippet": "applyADSR(${1:attack}, ${2:decay}, ${3:sustainLevel}, ${4:release})"
+                    "desc": "Apply an ADSR amplitude envelope to the buffer in place (attack / decay / release in seconds, sustainLevel 0-1)."
                 },
                 {
                     "name": "mixFrom",
@@ -27339,8 +25883,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const SoundBuffer& other, size_t offsetSamples, float volume = 1.0f"
                     ],
-                    "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed.",
-                    "snippet": "mixFrom(${1:other}, ${2:offsetSamples})"
+                    "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed."
                 },
                 {
                     "name": "clip",
@@ -27348,8 +25891,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Hard-clip all samples into the -1.0 .. 1.0 range.",
-                    "snippet": "clip()"
+                    "desc": "Hard-clip all samples into the -1.0 .. 1.0 range."
                 }
             ],
             "static_methods": [
@@ -27359,8 +25901,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int sampleRate"
                     ],
-                    "desc": "ADTS sample-rate index for the given rate (AAC-in-MOV container helper).",
-                    "snippet": "SoundBuffer::getAdtsSampleRateIndex(${1:sampleRate})"
+                    "desc": "ADTS sample-rate index for the given rate (AAC-in-MOV container helper)."
                 },
                 {
                     "name": "SoundBuffer_createAdtsHeader",
@@ -27368,8 +25909,7 @@ const TrussCAPI = {
                     "signatures": [
                         "uint8_t* header, int frameLength, int sampleRate, int channels, int profile = 2"
                     ],
-                    "desc": "Write a 7-byte ADTS header for one raw AAC frame into header (AAC-in-MOV container helper).",
-                    "snippet": "SoundBuffer::createAdtsHeader(${1:header}, ${2:frameLength}, ${3:sampleRate}, ${4:channels})"
+                    "desc": "Write a 7-byte ADTS header for one raw AAC frame into header (AAC-in-MOV container helper)."
                 }
             ]
         },
@@ -27393,8 +25933,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "SoundStream()"
+                ]
             },
             "methods": [
                 {
@@ -27404,7 +25943,6 @@ const TrussCAPI = {
                         "const string& path, int maxPolyphony = 1"
                     ],
                     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported.",
-                    "snippet": "loadStream(${1:path})",
                     "platforms": [
                         "windows",
                         "macos",
@@ -27421,8 +25959,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Decoded file duration in seconds.",
-                    "snippet": "getDuration()"
+                    "desc": "Decoded file duration in seconds."
                 },
                 {
                     "name": "getPath",
@@ -27430,8 +25967,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Path the stream was opened from.",
-                    "snippet": "getPath()"
+                    "desc": "Path the stream was opened from."
                 },
                 {
                     "name": "getMaxPolyphony",
@@ -27439,8 +25975,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Number of concurrent decoder slots reserved at loadStream().",
-                    "snippet": "getMaxPolyphony()"
+                    "desc": "Number of concurrent decoder slots reserved at loadStream()."
                 }
             ]
         },
@@ -27473,6 +26008,18 @@ const TrussCAPI = {
                 "AudioSettings",
                 "initAudio"
             ],
+            "properties": [
+                {
+                    "name": "audioOut",
+                    "type": "Event<AudioOutBuffer>",
+                    "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
+                },
+                {
+                    "name": "audioDeviceChanged",
+                    "type": "Event<AudioDeviceChangedArgs>",
+                    "desc": "Fires after every successful init() (initial AND re-init). Args carry the resolved device's real name, isDefaultDevice flag, sampleRate, channels, bufferSize, maxPolyphony. Listener runs on the thread that called init() (main), not the audio thread."
+                }
+            ],
             "methods": [
                 {
                     "name": "init",
@@ -27481,8 +26028,7 @@ const TrussCAPI = {
                         "",
                         "const AudioSettings& settings"
                     ],
-                    "desc": "Initialize the engine with defaults, or with an AudioSettings override. Re-init on a running engine migrates active voices to the new settings. Returns true on success.",
-                    "snippet": "AudioEngine::getInstance().init()"
+                    "desc": "Initialize the engine with defaults, or with an AudioSettings override. Re-init on a running engine migrates active voices to the new settings. Returns true on success."
                 },
                 {
                     "name": "shutdown",
@@ -27490,8 +26036,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Stop and close the audio device.",
-                    "snippet": "AudioEngine::getInstance().shutdown()"
+                    "desc": "Stop and close the audio device."
                 },
                 {
                     "name": "getSampleRate",
@@ -27499,8 +26044,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Current engine output sample rate (Hz). Returns the default (48000) before init().",
-                    "snippet": "AudioEngine::getInstance().getSampleRate()"
+                    "desc": "Current engine output sample rate (Hz). Returns the default (48000) before init()."
                 },
                 {
                     "name": "getChannels",
@@ -27508,8 +26052,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Current engine output channel count.",
-                    "snippet": "AudioEngine::getInstance().getChannels()"
+                    "desc": "Current engine output channel count."
                 },
                 {
                     "name": "getMaxPolyphony",
@@ -27517,8 +26060,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Maximum number of simultaneously-playing Sound voices.",
-                    "snippet": "AudioEngine::getInstance().getMaxPolyphony()"
+                    "desc": "Maximum number of simultaneously-playing Sound voices."
                 },
                 {
                     "name": "getBufferSize",
@@ -27526,8 +26068,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Current device buffer size in frames (0 = miniaudio default).",
-                    "snippet": "AudioEngine::getInstance().getBufferSize()"
+                    "desc": "Current device buffer size in frames (0 = miniaudio default)."
                 },
                 {
                     "name": "isInitialized",
@@ -27535,8 +26076,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True after a successful init().",
-                    "snippet": "AudioEngine::getInstance().isInitialized()"
+                    "desc": "True after a successful init()."
                 },
                 {
                     "name": "getAnalysisBuffer",
@@ -27544,8 +26084,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float* outBuffer, size_t numSamples"
                     ],
-                    "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096. Returns the number of samples written. (Global wrapper: getAudioAnalysisBuffer.)",
-                    "snippet": "AudioEngine::getInstance().getAnalysisBuffer(${1:outBuffer}, ${2:numSamples})"
+                    "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096. Returns the number of samples written. (Global wrapper: getAudioAnalysisBuffer.)"
                 }
             ],
             "static_methods": [
@@ -27555,8 +26094,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the global AudioEngine singleton.",
-                    "snippet": "AudioEngine::getInstance()"
+                    "desc": "Get the global AudioEngine singleton."
                 },
                 {
                     "name": "AudioEngine_listDevices",
@@ -27564,8 +26102,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Enumerate available playback devices (name + isDefault). Empty if unsupported on the platform.",
-                    "snippet": "AudioEngine::listDevices()"
+                    "desc": "Enumerate available playback devices (name + isDefault). Empty if unsupported on the platform."
                 }
             ]
         },
@@ -27589,8 +26126,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "MicInput()"
+                ]
             },
             "methods": [
                 {
@@ -27599,8 +26135,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int sampleRate = 44100"
                     ],
-                    "desc": "Open the microphone device at the given sample rate and begin capturing. Returns false on failure.",
-                    "snippet": "start()"
+                    "desc": "Open the microphone device at the given sample rate and begin capturing. Returns false on failure."
                 },
                 {
                     "name": "stop",
@@ -27608,8 +26143,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Stop capture and close the microphone device.",
-                    "snippet": "stop()"
+                    "desc": "Stop capture and close the microphone device."
                 },
                 {
                     "name": "getBuffer",
@@ -27617,8 +26151,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float* outBuffer, size_t numSamples"
                     ],
-                    "desc": "Copy the latest captured samples into outBuffer. numSamples is capped at the ring buffer size (4096). Returns the number of samples written.",
-                    "snippet": "getBuffer(${1:outBuffer}, ${2:numSamples})"
+                    "desc": "Copy the latest captured samples into outBuffer. numSamples is capped at the ring buffer size (4096). Returns the number of samples written."
                 },
                 {
                     "name": "isRunning",
@@ -27626,8 +26159,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True while the microphone device is open and capturing.",
-                    "snippet": "isRunning()"
+                    "desc": "True while the microphone device is open and capturing."
                 },
                 {
                     "name": "getSampleRate",
@@ -27635,8 +26167,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Sample rate the microphone was opened at.",
-                    "snippet": "getSampleRate()"
+                    "desc": "Sample rate the microphone was opened at."
                 }
             ]
         },
@@ -27893,6 +26424,92 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "ChipSoundNote",
+            "desc": "One 8-bit-style note: a plain aggregate of public fields (wave, hz, volume, duration, and the ADSR envelope attack/decay/sustain/release). Set fields directly via designated initializers ({ .wave = Wave::Square, .hz = 440, .duration = 0.2f }) or the constructor, then build() it into a Sound (or add() it to a ChipSoundBundle).",
+            "keywords": [
+                "chiptune",
+                "8bit",
+                "synth",
+                "note",
+                "retro",
+                "tone",
+                "adsr",
+                "envelope"
+            ],
+            "desc_ja": "8bit スタイルの 1 音。public フィールド (wave, hz, volume, duration, ADSR の attack/decay/sustain/release) の素の集約体。指定初期化子 ({ .wave = Wave::Square, .hz = 440, .duration = 0.2f }) かコンストラクタで直接設定し、build() で Sound 化 (または ChipSoundBundle に add())",
+            "desc_ko": "8비트 스타일 한 음. public 필드(wave, hz, volume, duration, ADSR의 attack/decay/sustain/release)의 단순 집합체. 지정 초기화자({ .wave = Wave::Square, .hz = 440, .duration = 0.2f })나 생성자로 직접 설정한 뒤 build()로 Sound화(또는 ChipSoundBundle에 add())",
+            "examples": [
+                {
+                    "name": "chipSoundExample",
+                    "group": "sound"
+                }
+            ],
+            "related": [
+                "ChipSoundBundle",
+                "Sound",
+                "Wave",
+                "createChipBundle"
+            ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "Wave w, float freq, float dur, float vol = 0.5f"
+                ]
+            },
+            "properties": [
+                {
+                    "name": "wave",
+                    "type": "Wave",
+                    "desc": "Waveform (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise, Silent)"
+                },
+                {
+                    "name": "hz",
+                    "type": "float",
+                    "desc": "Frequency in Hz (ignored for Noise / Silent)"
+                },
+                {
+                    "name": "volume",
+                    "type": "float",
+                    "desc": "Volume (0.0-1.0)"
+                },
+                {
+                    "name": "duration",
+                    "type": "float",
+                    "desc": "Note duration in seconds"
+                },
+                {
+                    "name": "attack",
+                    "type": "float",
+                    "desc": "ADSR attack time in seconds"
+                },
+                {
+                    "name": "decay",
+                    "type": "float",
+                    "desc": "ADSR decay time in seconds"
+                },
+                {
+                    "name": "sustain",
+                    "type": "float",
+                    "desc": "ADSR sustain level (0.0-1.0)"
+                },
+                {
+                    "name": "release",
+                    "type": "float",
+                    "desc": "ADSR release time in seconds"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "build",
+                    "return": "Sound",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Render this note (with its ADSR envelope) into a playable Sound"
+                }
+            ]
+        },
+        {
             "name": "ChipSoundBundle",
             "desc": "A timeline of chiptune notes (ChipSoundNote + start time) that builds into a single mixed Sound. Add notes at times, then call build() to render the mix with ADSR and clipping applied.",
             "keywords": [
@@ -27922,8 +26539,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "ChipSoundBundle()"
+                ]
             },
             "properties": [
                 {
@@ -27940,22 +26556,20 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "add",
-                    "return": "void",
+                    "return": "ChipSoundBundle&",
                     "signatures": [
                         "const ChipSoundNote& note, float time",
                         "ChipSoundNote::Wave wave, float hz, float duration, float time, float vol = 0.5f"
                     ],
-                    "desc": "Schedule a note to start at the given time (seconds). The second overload constructs the note inline from wave / frequency / duration.",
-                    "snippet": "add(${1:note}, ${2:time})"
+                    "desc": "Schedule a note to start at the given time (seconds). The second overload constructs the note inline from wave / frequency / duration."
                 },
                 {
                     "name": "clear",
-                    "return": "void",
+                    "return": "ChipSoundBundle&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Remove all scheduled notes.",
-                    "snippet": "clear()"
+                    "desc": "Remove all scheduled notes."
                 },
                 {
                     "name": "getDuration",
@@ -27963,8 +26577,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Total duration in seconds, auto-computed from the last note's end.",
-                    "snippet": "getDuration()"
+                    "desc": "Total duration in seconds, auto-computed from the last note's end."
                 },
                 {
                     "name": "build",
@@ -27972,8 +26585,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Render all scheduled notes into a single mixed, clipped Sound ready to play.",
-                    "snippet": "build()"
+                    "desc": "Render all scheduled notes into a single mixed, clipped Sound ready to play."
                 }
             ]
         },
@@ -28003,8 +26615,7 @@ const TrussCAPI = {
                     "signatures": [
                         "LogLevel level, const string& message"
                     ],
-                    "desc": "Emit a log message at the given level",
-                    "snippet": "log(${1:LogLevel::Notice}, ${2:message})"
+                    "desc": "Emit a log message at the given level"
                 },
                 {
                     "name": "setConsoleLogLevel",
@@ -28012,8 +26623,7 @@ const TrussCAPI = {
                     "signatures": [
                         "LogLevel level"
                     ],
-                    "desc": "Set the minimum console log level",
-                    "snippet": "setConsoleLogLevel(${1:LogLevel::Notice})"
+                    "desc": "Set the minimum console log level"
                 },
                 {
                     "name": "getConsoleLogLevel",
@@ -28021,8 +26631,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the current console log level",
-                    "snippet": "getConsoleLogLevel()"
+                    "desc": "Get the current console log level"
                 },
                 {
                     "name": "setLogFile",
@@ -28030,8 +26639,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& path"
                     ],
-                    "desc": "Open a file to receive log output",
-                    "snippet": "setLogFile(${1:path})"
+                    "desc": "Open a file to receive log output"
                 },
                 {
                     "name": "closeFile",
@@ -28039,8 +26647,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Close the current log file",
-                    "snippet": "closeFile()"
+                    "desc": "Close the current log file"
                 },
                 {
                     "name": "setFileLogLevel",
@@ -28048,8 +26655,7 @@ const TrussCAPI = {
                     "signatures": [
                         "LogLevel level"
                     ],
-                    "desc": "Set the minimum file log level",
-                    "snippet": "setFileLogLevel(${1:LogLevel::Notice})"
+                    "desc": "Set the minimum file log level"
                 },
                 {
                     "name": "getFileLogLevel",
@@ -28057,8 +26663,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the current file log level",
-                    "snippet": "getFileLogLevel()"
+                    "desc": "Get the current file log level"
                 },
                 {
                     "name": "getLogFilePath",
@@ -28066,8 +26671,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the path of the current log file",
-                    "snippet": "getLogFilePath()"
+                    "desc": "Get the path of the current log file"
                 },
                 {
                     "name": "isFileOpen",
@@ -28075,8 +26679,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Check whether a log file is currently open",
-                    "snippet": "isFileOpen()"
+                    "desc": "Check whether a log file is currently open"
                 }
             ]
         },
@@ -28239,8 +26842,7 @@ const TrussCAPI = {
                         "Callback callback, int priority = EventPriority::App",
                         "Callback callback, Deliver deliver, int priority = EventPriority::App"
                     ],
-                    "desc": "Register a listener callback and return an EventListener token; lower priority runs first, and Deliver::Main runs the callback on the main thread",
-                    "snippet": "listen(${1:callback})"
+                    "desc": "Register a listener callback and return an EventListener token; lower priority runs first, and Deliver::Main runs the callback on the main thread"
                 },
                 {
                     "name": "notify",
@@ -28248,8 +26850,7 @@ const TrussCAPI = {
                     "signatures": [
                         "T& arg"
                     ],
-                    "desc": "Fire the event, calling all listeners in priority order (no argument for Event<void>); stops early if a listener marks an input arg consumed",
-                    "snippet": "notify(${1:arg})"
+                    "desc": "Fire the event, calling all listeners in priority order (no argument for Event<void>); stops early if a listener marks an input arg consumed"
                 },
                 {
                     "name": "listenerCount",
@@ -28257,8 +26858,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Number of currently registered listeners",
-                    "snippet": "listenerCount()"
+                    "desc": "Number of currently registered listeners"
                 },
                 {
                     "name": "clear",
@@ -28266,8 +26866,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Remove all listeners",
-                    "snippet": "clear()"
+                    "desc": "Remove all listeners"
                 }
             ]
         },
@@ -28301,8 +26900,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction)",
-                    "snippet": "disconnect()"
+                    "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction)"
                 },
                 {
                     "name": "isConnected",
@@ -28310,8 +26908,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "True while the listener is still connected to its event",
-                    "snippet": "isConnected()"
+                    "desc": "True while the listener is still connected to its event"
                 }
             ]
         },
@@ -29007,8 +27604,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "FullscreenShader()"
+                ]
             },
             "methods": [
                 {
@@ -29017,8 +27613,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const T& params"
                     ],
-                    "desc": "Set uniform parameter block (template; copies the struct bytes). Call before draw.",
-                    "snippet": "setParams(${1:params})"
+                    "desc": "Set uniform parameter block (template; copies the struct bytes). Call before draw."
                 },
                 {
                     "name": "draw",
@@ -29026,8 +27621,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Draw a fullscreen quad with this shader applied",
-                    "snippet": "draw()"
+                    "desc": "Draw a fullscreen quad with this shader applied"
                 }
             ]
         },
@@ -29099,6 +27693,71 @@ const TrussCAPI = {
                     "name": "a",
                     "type": "float",
                     "desc": "Alpha component (0.0-1.0)"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "+",
+                    "signature": "ColorLinear + ColorLinear → ColorLinear",
+                    "cpp": "ColorLinear operator+(const ColorLinear&) const",
+                    "free": false,
+                    "desc": "Component-wise addition",
+                    "desc_ja": "成分ごとの加算",
+                    "desc_ko": "성분별 덧셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "ColorLinear - ColorLinear → ColorLinear",
+                    "cpp": "ColorLinear operator-(const ColorLinear&) const",
+                    "free": false,
+                    "desc": "Component-wise subtraction",
+                    "desc_ja": "成分ごとの減算",
+                    "desc_ko": "성분별 뺄셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "ColorLinear * float → ColorLinear",
+                    "cpp": "ColorLinear operator*(float) const",
+                    "free": false,
+                    "desc": "Scalar multiplication",
+                    "desc_ja": "スカラー倍",
+                    "desc_ko": "스칼라 곱"
+                },
+                {
+                    "symbol": "/",
+                    "signature": "ColorLinear / float → ColorLinear",
+                    "cpp": "ColorLinear operator/(float) const",
+                    "free": false,
+                    "desc": "Scalar division",
+                    "desc_ja": "スカラー除算",
+                    "desc_ko": "스칼라 나눗셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "ColorLinear * ColorLinear → ColorLinear",
+                    "cpp": "ColorLinear operator*(const ColorLinear&) const",
+                    "free": false,
+                    "desc": "Component-wise multiplication",
+                    "desc_ja": "成分ごとの乗算",
+                    "desc_ko": "성분별 곱셈"
+                },
+                {
+                    "symbol": "==",
+                    "signature": "ColorLinear == ColorLinear → bool",
+                    "cpp": "bool operator==(const ColorLinear&) const",
+                    "free": false,
+                    "desc": "Equality comparison",
+                    "desc_ja": "等価比較",
+                    "desc_ko": "같음 비교"
+                },
+                {
+                    "symbol": "!=",
+                    "signature": "ColorLinear != ColorLinear → bool",
+                    "cpp": "bool operator!=(const ColorLinear&) const",
+                    "free": false,
+                    "desc": "Inequality comparison",
+                    "desc_ja": "非等価比較",
+                    "desc_ko": "다름 비교"
                 }
             ]
         },
@@ -29199,8 +27858,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Xml()"
+                ]
             },
             "methods": [
                 {
@@ -29209,8 +27867,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& path"
                     ],
-                    "desc": "Load an XML document from a file. Relative paths are resolved via getDataPath. Returns true on success.",
-                    "snippet": "load(${1:path})"
+                    "desc": "Load an XML document from a file. Relative paths are resolved via getDataPath. Returns true on success."
                 },
                 {
                     "name": "parse",
@@ -29218,8 +27875,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& str"
                     ],
-                    "desc": "Parse an XML document from a string. Returns true on success.",
-                    "snippet": "parse(${1:str})"
+                    "desc": "Parse an XML document from a string. Returns true on success."
                 },
                 {
                     "name": "save",
@@ -29227,8 +27883,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& path, const string& indent = \"  \""
                     ],
-                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath. indent sets the per-level indentation string. Returns true on success.",
-                    "snippet": "save(${1:path})"
+                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath. indent sets the per-level indentation string. Returns true on success."
                 },
                 {
                     "name": "toString",
@@ -29236,8 +27891,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& indent = \"  \""
                     ],
-                    "desc": "Serialize the document to an XML string. indent sets the per-level indentation string.",
-                    "snippet": "toString()"
+                    "desc": "Serialize the document to an XML string. indent sets the per-level indentation string."
                 },
                 {
                     "name": "root",
@@ -29245,8 +27899,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the document's root element node.",
-                    "snippet": "root()"
+                    "desc": "Get the document's root element node."
                 },
                 {
                     "name": "addRoot",
@@ -29254,8 +27907,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& name"
                     ],
-                    "desc": "Append a new root element with the given name and return it.",
-                    "snippet": "addRoot(${1:name})"
+                    "desc": "Append a new root element with the given name and return it."
                 },
                 {
                     "name": "child",
@@ -29263,8 +27915,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& name"
                     ],
-                    "desc": "Find a direct child node of the document by name.",
-                    "snippet": "child(${1:name})"
+                    "desc": "Find a direct child node of the document by name."
                 },
                 {
                     "name": "document",
@@ -29272,8 +27923,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Access the underlying pugixml document for advanced operations.",
-                    "snippet": "document()"
+                    "desc": "Access the underlying pugixml document for advanced operations."
                 },
                 {
                     "name": "empty",
@@ -29281,8 +27931,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return true if the document has no content.",
-                    "snippet": "empty()"
+                    "desc": "Return true if the document has no content."
                 },
                 {
                     "name": "addDeclaration",
@@ -29290,8 +27939,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& version = \"1.0\", const string& encoding = \"UTF-8\""
                     ],
-                    "desc": "Prepend an XML declaration (<?xml ...?>) with the given version and encoding.",
-                    "snippet": "addDeclaration()"
+                    "desc": "Prepend an XML declaration (<?xml ...?>) with the given version and encoding."
                 }
             ]
         },
@@ -29390,8 +28038,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the owner Node this Mod is attached to.",
-                    "snippet": "getOwner()"
+                    "desc": "Get the owner Node this Mod is attached to."
                 },
                 {
                     "name": "removeSelf",
@@ -29399,8 +28046,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Remove this Mod from its owner (no need to name its own type). Safe to call from inside the Mod's own update/draw/event handler; destruction is deferred until the current dispatch finishes. (protected)",
-                    "snippet": "removeSelf()"
+                    "desc": "Remove this Mod from its owner (no need to name its own type). Safe to call from inside the Mod's own update/draw/event handler; destruction is deferred until the current dispatch finishes. (protected)"
                 },
                 {
                     "name": "setup",
@@ -29408,8 +28054,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Override: called once when the Mod is attached to the Node. (protected, virtual)",
-                    "snippet": "setup()"
+                    "desc": "Override: called once when the Mod is attached to the Node. (protected, virtual)"
                 },
                 {
                     "name": "earlyUpdate",
@@ -29417,8 +28062,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Override: called every frame BEFORE Node::update(). Use for applying transforms, tweens, physics. (protected, virtual)",
-                    "snippet": "earlyUpdate()"
+                    "desc": "Override: called every frame BEFORE Node::update(). Use for applying transforms, tweens, physics. (protected, virtual)"
                 },
                 {
                     "name": "update",
@@ -29426,8 +28070,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Override: called every frame AFTER Node::update(). Use for reactions to node state changes. (protected, virtual)",
-                    "snippet": "update()"
+                    "desc": "Override: called every frame AFTER Node::update(). Use for reactions to node state changes. (protected, virtual)"
                 },
                 {
                     "name": "draw",
@@ -29435,8 +28078,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Override: called during the draw phase, after Node::draw(). (protected, virtual)",
-                    "snippet": "draw()"
+                    "desc": "Override: called during the draw phase, after Node::draw(). (protected, virtual)"
                 },
                 {
                     "name": "onDestroy",
@@ -29444,8 +28086,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Override: called when the Mod is removed or the Node is destroyed. (protected, virtual)",
-                    "snippet": "onDestroy()"
+                    "desc": "Override: called when the Mod is removed or the Node is destroyed. (protected, virtual)"
                 },
                 {
                     "name": "onMousePress",
@@ -29453,8 +28094,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const MouseEventArgs& e"
                     ],
-                    "desc": "Override: mouse press on the hit node. Return true to consume the event (counts as the node consuming it). (protected, virtual)",
-                    "snippet": "onMousePress(${1:e})"
+                    "desc": "Override: mouse press on the hit node. Return true to consume the event (counts as the node consuming it). (protected, virtual)"
                 },
                 {
                     "name": "onMouseRelease",
@@ -29462,8 +28102,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const MouseEventArgs& e"
                     ],
-                    "desc": "Override: mouse release on the hit node. Return true to consume. (protected, virtual)",
-                    "snippet": "onMouseRelease(${1:e})"
+                    "desc": "Override: mouse release on the hit node. Return true to consume. (protected, virtual)"
                 },
                 {
                     "name": "onMouseMove",
@@ -29471,8 +28110,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const MouseMoveEventArgs& e"
                     ],
-                    "desc": "Override: mouse move over the hit node. Return true to consume. (protected, virtual)",
-                    "snippet": "onMouseMove(${1:e})"
+                    "desc": "Override: mouse move over the hit node. Return true to consume. (protected, virtual)"
                 },
                 {
                     "name": "onMouseDrag",
@@ -29480,8 +28118,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const MouseDragEventArgs& e"
                     ],
-                    "desc": "Override: mouse drag on the hit node. Return true to consume. (protected, virtual)",
-                    "snippet": "onMouseDrag(${1:e})"
+                    "desc": "Override: mouse drag on the hit node. Return true to consume. (protected, virtual)"
                 },
                 {
                     "name": "onMouseScroll",
@@ -29489,8 +28126,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const ScrollEventArgs& e"
                     ],
-                    "desc": "Override: mouse scroll over the hit node. Return true to consume. (protected, virtual)",
-                    "snippet": "onMouseScroll(${1:e})"
+                    "desc": "Override: mouse scroll over the hit node. Return true to consume. (protected, virtual)"
                 },
                 {
                     "name": "onKeyPress",
@@ -29498,8 +28134,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const KeyEventArgs& e"
                     ],
-                    "desc": "Override: key press (broadcast to mods on every node). Return true to consume. (protected, virtual)",
-                    "snippet": "onKeyPress(${1:e})"
+                    "desc": "Override: key press (broadcast to mods on every node). Return true to consume. (protected, virtual)"
                 },
                 {
                     "name": "onKeyRelease",
@@ -29507,8 +28142,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const KeyEventArgs& e"
                     ],
-                    "desc": "Override: key release (broadcast to mods on every node). Return true to consume. (protected, virtual)",
-                    "snippet": "onKeyRelease(${1:e})"
+                    "desc": "Override: key release (broadcast to mods on every node). Return true to consume. (protected, virtual)"
                 },
                 {
                     "name": "onMouseEnter",
@@ -29516,8 +28150,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Override: pointer entered the owner node. (protected, virtual)",
-                    "snippet": "onMouseEnter()"
+                    "desc": "Override: pointer entered the owner node. (protected, virtual)"
                 },
                 {
                     "name": "onMouseLeave",
@@ -29525,8 +28158,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Override: pointer left the owner node. (protected, virtual)",
-                    "snippet": "onMouseLeave()"
+                    "desc": "Override: pointer left the owner node. (protected, virtual)"
                 },
                 {
                     "name": "hitTest",
@@ -29534,8 +28166,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Ray& localRay, float& outDistance"
                     ],
-                    "desc": "Override: screen-space pointer picking (NOT physics collision). Define a hit shape in the node's LOCAL space; if the node's own test OR any mod's returns true, the node is the hit. (protected, virtual)",
-                    "snippet": "hitTest(${1:localRay}, ${2:outDistance})"
+                    "desc": "Override: screen-space pointer picking (NOT physics collision). Define a hit shape in the node's LOCAL space; if the node's own test OR any mod's returns true, the node is the hit. (protected, virtual)"
                 },
                 {
                     "name": "isExclusive",
@@ -29543,8 +28174,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Override to return true if only one instance of this Mod type may be attached per Node (e.g. LayoutMod). Default false. (protected, virtual)",
-                    "snippet": "isExclusive()"
+                    "desc": "Override to return true if only one instance of this Mod type may be attached per Node (e.g. LayoutMod). Default false. (protected, virtual)"
                 },
                 {
                     "name": "canAttachTo",
@@ -29552,8 +28182,7 @@ const TrussCAPI = {
                     "signatures": [
                         "Node* node"
                     ],
-                    "desc": "Override to restrict which Node types this Mod can attach to. Return false to reject attachment. Default true. (protected, virtual)",
-                    "snippet": "canAttachTo(${1:node})"
+                    "desc": "Override to restrict which Node types this Mod can attach to. Return false to reject attachment. Default true. (protected, virtual)"
                 }
             ]
         },
@@ -29578,8 +28207,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "RectNodeButton()"
+                ]
             },
             "properties": [
                 {
@@ -29610,8 +28238,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether the button is currently pressed.",
-                    "snippet": "isPressed()"
+                    "desc": "Whether the button is currently pressed."
                 },
                 {
                     "name": "draw",
@@ -29619,8 +28246,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Draw the button: fills the rect with the state-dependent color and draws the centered label. (override)",
-                    "snippet": "draw()"
+                    "desc": "Draw the button: fills the rect with the state-dependent color and draws the centered label. (override)"
                 }
             ]
         },
@@ -29644,8 +28270,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "Thread()"
+                ]
             },
             "methods": [
                 {
@@ -29654,8 +28279,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Start the background thread (runs threadedFunction). No-op if already running.",
-                    "snippet": "startThread()"
+                    "desc": "Start the background thread (runs threadedFunction). No-op if already running."
                 },
                 {
                     "name": "stopThread",
@@ -29663,8 +28287,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Send the stop signal: isThreadRunning() returns false inside threadedFunction so a while-loop can exit. Does not block.",
-                    "snippet": "stopThread()"
+                    "desc": "Send the stop signal: isThreadRunning() returns false inside threadedFunction so a while-loop can exit. Does not block."
                 },
                 {
                     "name": "waitForThread",
@@ -29672,8 +28295,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool callStopThread = true"
                     ],
-                    "desc": "Wait (join) for the thread to finish. If callStopThread is true (default), calls stopThread() first.",
-                    "snippet": "waitForThread()"
+                    "desc": "Wait (join) for the thread to finish. If callStopThread is true (default), calls stopThread() first."
                 },
                 {
                     "name": "isThreadRunning",
@@ -29681,8 +28303,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether the thread is currently running.",
-                    "snippet": "isThreadRunning()"
+                    "desc": "Whether the thread is currently running."
                 },
                 {
                     "name": "getThreadId",
@@ -29690,8 +28311,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the underlying thread's ID.",
-                    "snippet": "getThreadId()"
+                    "desc": "Get the underlying thread's ID."
                 },
                 {
                     "name": "threadedFunction",
@@ -29699,8 +28319,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Override this with the work to run on the thread; recommended pattern is while (isThreadRunning()) { ... }. (protected, pure virtual)",
-                    "snippet": "threadedFunction()"
+                    "desc": "Override this with the work to run on the thread; recommended pattern is while (isThreadRunning()) { ... }. (protected, pure virtual)"
                 }
             ],
             "static_methods": [
@@ -29710,8 +28329,7 @@ const TrussCAPI = {
                     "signatures": [
                         "unsigned long milliseconds"
                     ],
-                    "desc": "Pause the current thread for the given number of milliseconds.",
-                    "snippet": "Thread::sleep(${1:milliseconds})"
+                    "desc": "Pause the current thread for the given number of milliseconds."
                 },
                 {
                     "name": "Thread_yield",
@@ -29719,8 +28337,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Yield execution to other threads.",
-                    "snippet": "Thread::yield()"
+                    "desc": "Yield execution to other threads."
                 },
                 {
                     "name": "Thread_isCurrentThreadTheMainThread",
@@ -29728,8 +28345,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether the current thread is the main thread. The main thread ID must be recorded first (call getMainThreadId() from the main thread).",
-                    "snippet": "Thread::isCurrentThreadTheMainThread()"
+                    "desc": "Whether the current thread is the main thread. The main thread ID must be recorded first (call getMainThreadId() from the main thread)."
                 },
                 {
                     "name": "Thread_getMainThreadId",
@@ -29737,8 +28353,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the main thread ID, recording the current thread's ID on the first call.",
-                    "snippet": "Thread::getMainThreadId()"
+                    "desc": "Get the main thread ID, recording the current thread's ID on the first call."
                 }
             ]
         },
@@ -29761,8 +28376,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "ThreadChannel<T>()"
+                ]
             },
             "methods": [
                 {
@@ -29772,8 +28386,7 @@ const TrussCAPI = {
                         "const T& value",
                         "T&& value"
                     ],
-                    "desc": "Send a value onto the queue (copy or move overload). Returns false if the channel is closed (with the move overload the value is invalidated even on failure).",
-                    "snippet": "send(${1:value})"
+                    "desc": "Send a value onto the queue (copy or move overload). Returns false if the channel is closed (with the move overload the value is invalidated even on failure)."
                 },
                 {
                     "name": "receive",
@@ -29781,8 +28394,7 @@ const TrussCAPI = {
                     "signatures": [
                         "T& value"
                     ],
-                    "desc": "Receive a value (blocking): waits until data arrives, writing it into value. Returns false if the channel is closed.",
-                    "snippet": "receive(${1:value})"
+                    "desc": "Receive a value (blocking): waits until data arrives, writing it into value. Returns false if the channel is closed."
                 },
                 {
                     "name": "tryReceive",
@@ -29791,8 +28403,7 @@ const TrussCAPI = {
                         "T& value",
                         "T& value, int64_t timeoutMs"
                     ],
-                    "desc": "Receive a value without blocking, or waiting at most timeoutMs milliseconds (timeout overload). Returns false immediately/after the timeout if no data.",
-                    "snippet": "tryReceive(${1:value})"
+                    "desc": "Receive a value without blocking, or waiting at most timeoutMs milliseconds (timeout overload). Returns false immediately/after the timeout if no data."
                 },
                 {
                     "name": "close",
@@ -29800,8 +28411,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Close the channel, waking all waiting threads. After closing, send/receive return false.",
-                    "snippet": "close()"
+                    "desc": "Close the channel, waking all waiting threads. After closing, send/receive return false."
                 },
                 {
                     "name": "clear",
@@ -29809,8 +28419,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Clear the queue, discarding all pending values.",
-                    "snippet": "clear()"
+                    "desc": "Clear the queue, discarding all pending values."
                 },
                 {
                     "name": "empty",
@@ -29818,8 +28427,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether the queue is empty (approximate).",
-                    "snippet": "empty()"
+                    "desc": "Whether the queue is empty (approximate)."
                 },
                 {
                     "name": "size",
@@ -29827,8 +28435,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Number of queued values (approximate).",
-                    "snippet": "size()"
+                    "desc": "Number of queued values (approximate)."
                 },
                 {
                     "name": "isClosed",
@@ -29836,8 +28443,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether the channel has been closed.",
-                    "snippet": "isClosed()"
+                    "desc": "Whether the channel has been closed."
                 }
             ]
         },
@@ -29882,8 +28488,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Whether a node was hit (node is non-null).",
-                    "snippet": "hit()"
+                    "desc": "Whether a node was hit (node is non-null)."
                 }
             ]
         },
@@ -30062,8 +28667,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int w, int h"
                     ],
-                    "desc": "Set window size (chainable)",
-                    "snippet": "setSize(${1:w}, ${2:h})"
+                    "desc": "Set window size (chainable)"
                 },
                 {
                     "name": "setTitle",
@@ -30071,8 +28675,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const string& t"
                     ],
-                    "desc": "Set window title (chainable)",
-                    "snippet": "setTitle(${1:title})"
+                    "desc": "Set window title (chainable)"
                 },
                 {
                     "name": "setHighDpi",
@@ -30080,8 +28683,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool enabled"
                     ],
-                    "desc": "Enable/disable high DPI support (chainable)",
-                    "snippet": "setHighDpi(${1:true})"
+                    "desc": "Enable/disable high DPI support (chainable)"
                 },
                 {
                     "name": "setPixelPerfect",
@@ -30089,8 +28691,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool enabled"
                     ],
-                    "desc": "Set pixel-perfect mode: true = framebuffer-size coords, false = logical-size coords (chainable)",
-                    "snippet": "setPixelPerfect(${1:true})"
+                    "desc": "Set pixel-perfect mode: true = framebuffer-size coords, false = logical-size coords (chainable)"
                 },
                 {
                     "name": "setSampleCount",
@@ -30098,8 +28699,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int count"
                     ],
-                    "desc": "Set MSAA sample count (chainable)",
-                    "snippet": "setSampleCount(${1:count})"
+                    "desc": "Set MSAA sample count (chainable)"
                 },
                 {
                     "name": "setFullscreen",
@@ -30107,8 +28707,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool enabled"
                     ],
-                    "desc": "Enable/disable fullscreen at startup (chainable)",
-                    "snippet": "setFullscreen(${1:true})"
+                    "desc": "Enable/disable fullscreen at startup (chainable)"
                 },
                 {
                     "name": "setDecorated",
@@ -30116,8 +28715,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool enabled"
                     ],
-                    "desc": "false = borderless/chromeless window that can still take focus and be closed programmatically (chainable)",
-                    "snippet": "setDecorated(${1:true})"
+                    "desc": "false = borderless/chromeless window that can still take focus and be closed programmatically (chainable)"
                 },
                 {
                     "name": "setClipboardSize",
@@ -30125,8 +28723,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int size"
                     ],
-                    "desc": "Set clipboard buffer size in bytes (chainable)",
-                    "snippet": "setClipboardSize(${1:size})"
+                    "desc": "Set clipboard buffer size in bytes (chainable)"
                 },
                 {
                     "name": "setSwapInterval",
@@ -30134,8 +28731,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int interval"
                     ],
-                    "desc": "Set VSync present interval: 1 = on, 0 = off, N = every Nth refresh (chainable)",
-                    "snippet": "setSwapInterval(${1:interval})"
+                    "desc": "Set VSync present interval: 1 = on, 0 = off, N = every Nth refresh (chainable)"
                 }
             ]
         },
@@ -30169,8 +28765,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float fps"
                     ],
-                    "desc": "Set the target update rate (chainable)",
-                    "snippet": "setFps(${1:fps})"
+                    "desc": "Set the target update rate (chainable)"
                 }
             ]
         },
@@ -30242,8 +28837,7 @@ const TrussCAPI = {
                     "float v",
                     "const Vec3& v, float w = 1.0f",
                     "const Vec2& v, float z = 0.0f, float w = 1.0f"
-                ],
-                "snippet": "Vec4(${1:x}, ${2:y}, ${3:z}, ${4:w})"
+                ]
             },
             "properties": [
                 {
@@ -30275,8 +28869,7 @@ const TrussCAPI = {
                         "float x, float y, float z, float w",
                         "const Vec4& v"
                     ],
-                    "desc": "Set all components (chainable)",
-                    "snippet": "set(${1:x}, ${2:y}, ${3:z}, ${4:w})"
+                    "desc": "Set all components (chainable)"
                 },
                 {
                     "name": "length",
@@ -30284,8 +28877,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the vector's magnitude",
-                    "snippet": "length()"
+                    "desc": "Get the vector's magnitude"
                 },
                 {
                     "name": "lengthSquared",
@@ -30293,8 +28885,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the squared magnitude (cheaper than length())",
-                    "snippet": "lengthSquared()"
+                    "desc": "Get the squared magnitude (cheaper than length())"
                 },
                 {
                     "name": "normalized",
@@ -30302,8 +28893,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return a unit-length copy of this vector",
-                    "snippet": "normalized()"
+                    "desc": "Return a unit-length copy of this vector"
                 },
                 {
                     "name": "normalize",
@@ -30311,8 +28901,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Normalize this vector in place (chainable)",
-                    "snippet": "normalize()"
+                    "desc": "Normalize this vector in place (chainable)"
                 },
                 {
                     "name": "dot",
@@ -30320,8 +28909,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Vec4& v"
                     ],
-                    "desc": "Dot product with another vector",
-                    "snippet": "dot(${1:v})"
+                    "desc": "Dot product with another vector"
                 },
                 {
                     "name": "lerp",
@@ -30329,8 +28917,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Vec4& v, float t"
                     ],
-                    "desc": "Linearly interpolate toward v by t (0..1)",
-                    "snippet": "lerp(${1:v}, ${2:t})"
+                    "desc": "Linearly interpolate toward v by t (0..1)"
                 },
                 {
                     "name": "xy",
@@ -30338,8 +28925,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the (x, y) components as a Vec2",
-                    "snippet": "xy()"
+                    "desc": "Get the (x, y) components as a Vec2"
                 },
                 {
                     "name": "xyz",
@@ -30347,8 +28933,126 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get the (x, y, z) components as a Vec3",
-                    "snippet": "xyz()"
+                    "desc": "Get the (x, y, z) components as a Vec3"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "[]",
+                    "signature": "Vec4[int] → float&",
+                    "cpp": "float& operator[](int)",
+                    "free": false,
+                    "desc": "Component access by index",
+                    "desc_ja": "インデックスで成分アクセス",
+                    "desc_ko": "인덱스로 성분 접근"
+                },
+                {
+                    "symbol": "+",
+                    "signature": "Vec4 + Vec4 → Vec4",
+                    "cpp": "Vec4 operator+(const Vec4&) const",
+                    "free": false,
+                    "desc": "Component-wise addition",
+                    "desc_ja": "成分ごとの加算",
+                    "desc_ko": "성분별 덧셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "Vec4 - Vec4 → Vec4",
+                    "cpp": "Vec4 operator-(const Vec4&) const",
+                    "free": false,
+                    "desc": "Component-wise subtraction",
+                    "desc_ja": "成分ごとの減算",
+                    "desc_ko": "성분별 뺄셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Vec4 * float → Vec4",
+                    "cpp": "Vec4 operator*(float) const",
+                    "free": false,
+                    "desc": "Scalar multiplication",
+                    "desc_ja": "スカラー倍",
+                    "desc_ko": "스칼라 곱"
+                },
+                {
+                    "symbol": "/",
+                    "signature": "Vec4 / float → Vec4",
+                    "cpp": "Vec4 operator/(float) const",
+                    "free": false,
+                    "desc": "Scalar division",
+                    "desc_ja": "スカラー除算",
+                    "desc_ko": "스칼라 나눗셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "-Vec4 → Vec4",
+                    "cpp": "Vec4 operator-() const",
+                    "free": false,
+                    "desc": "Negation",
+                    "desc_ja": "符号反転",
+                    "desc_ko": "부호 반전"
+                },
+                {
+                    "symbol": "+=",
+                    "signature": "Vec4 += Vec4 → Vec4&",
+                    "cpp": "Vec4& operator+=(const Vec4&)",
+                    "free": false,
+                    "desc": "In-place addition",
+                    "desc_ja": "加算代入",
+                    "desc_ko": "덧셈 대입"
+                },
+                {
+                    "symbol": "-=",
+                    "signature": "Vec4 -= Vec4 → Vec4&",
+                    "cpp": "Vec4& operator-=(const Vec4&)",
+                    "free": false,
+                    "desc": "In-place subtraction",
+                    "desc_ja": "減算代入",
+                    "desc_ko": "뺄셈 대입"
+                },
+                {
+                    "symbol": "*=",
+                    "signature": "Vec4 *= float → Vec4&",
+                    "cpp": "Vec4& operator*=(float)",
+                    "free": false,
+                    "desc": "In-place scalar multiplication",
+                    "desc_ja": "スカラー倍代入",
+                    "desc_ko": "스칼라 곱 대입"
+                },
+                {
+                    "symbol": "/=",
+                    "signature": "Vec4 /= float → Vec4&",
+                    "cpp": "Vec4& operator/=(float)",
+                    "free": false,
+                    "desc": "In-place scalar division",
+                    "desc_ja": "スカラー除算代入",
+                    "desc_ko": "스칼라 나눗셈 대입"
+                },
+                {
+                    "symbol": "==",
+                    "signature": "Vec4 == Vec4 → bool",
+                    "cpp": "bool operator==(const Vec4&) const",
+                    "free": false,
+                    "desc": "Equality comparison",
+                    "desc_ja": "等価比較",
+                    "desc_ko": "같음 비교"
+                },
+                {
+                    "symbol": "!=",
+                    "signature": "Vec4 != Vec4 → bool",
+                    "cpp": "bool operator!=(const Vec4&) const",
+                    "free": false,
+                    "desc": "Inequality comparison",
+                    "desc_ja": "非等価比較",
+                    "desc_ko": "다름 비교"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "float * Vec4 → Vec4",
+                    "cpp": "Vec4 operator*(float, const Vec4&)",
+                    "free": true,
+                    "desc": "Component-wise multiplication",
+                    "desc_ja": "成分ごとの乗算",
+                    "desc_ko": "성분별 곱셈"
                 }
             ]
         },
@@ -30373,8 +29077,7 @@ const TrussCAPI = {
                 "signatures": [
                     "",
                     "float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22"
-                ],
-                "snippet": "Mat3()"
+                ]
             },
             "methods": [
                 {
@@ -30383,8 +29086,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int row, int col"
                     ],
-                    "desc": "Access the element at (row, col)",
-                    "snippet": "at(${1:row}, ${2:col})"
+                    "desc": "Access the element at (row, col)"
                 },
                 {
                     "name": "transposed",
@@ -30392,8 +29094,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the transpose of this matrix",
-                    "snippet": "transposed()"
+                    "desc": "Return the transpose of this matrix"
                 },
                 {
                     "name": "determinant",
@@ -30401,8 +29102,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Compute the determinant",
-                    "snippet": "determinant()"
+                    "desc": "Compute the determinant"
                 },
                 {
                     "name": "inverted",
@@ -30410,8 +29110,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the inverse matrix (identity if singular)",
-                    "snippet": "inverted()"
+                    "desc": "Return the inverse matrix (identity if singular)"
                 }
             ],
             "static_methods": [
@@ -30421,8 +29120,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the identity matrix",
-                    "snippet": "Mat3::identity()"
+                    "desc": "Return the identity matrix"
                 },
                 {
                     "name": "Mat3_translate",
@@ -30431,8 +29129,7 @@ const TrussCAPI = {
                         "float tx, float ty",
                         "const Vec2& t"
                     ],
-                    "desc": "Build a 2D translation matrix",
-                    "snippet": "Mat3::translate(${1:tx}, ${2:ty})"
+                    "desc": "Build a 2D translation matrix"
                 },
                 {
                     "name": "Mat3_rotate",
@@ -30440,8 +29137,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float radians"
                     ],
-                    "desc": "Build a 2D rotation matrix (radians)",
-                    "snippet": "Mat3::rotate(${1:radians})"
+                    "desc": "Build a 2D rotation matrix (radians)"
                 },
                 {
                     "name": "Mat3_scale",
@@ -30451,8 +29147,7 @@ const TrussCAPI = {
                         "float s",
                         "const Vec2& s"
                     ],
-                    "desc": "Build a 2D scale matrix",
-                    "snippet": "Mat3::scale(${1:sx}, ${2:sy})"
+                    "desc": "Build a 2D scale matrix"
                 },
                 {
                     "name": "Mat3_getHomography",
@@ -30460,8 +29155,36 @@ const TrussCAPI = {
                     "signatures": [
                         "const Vec2 src[4], const Vec2 dst[4]"
                     ],
-                    "desc": "Compute the homography matrix mapping 4 source points to 4 destination points (solves H * src = dst)",
-                    "snippet": "Mat3::getHomography(${1:src}, ${2:dst})"
+                    "desc": "Compute the homography matrix mapping 4 source points to 4 destination points (solves H * src = dst)"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "*",
+                    "signature": "Mat3 * Mat3 → Mat3",
+                    "cpp": "Mat3 operator*(const Mat3&) const",
+                    "free": false,
+                    "desc": "Composition (matrix product)",
+                    "desc_ja": "合成（行列積）",
+                    "desc_ko": "합성(행렬 곱)"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Mat3 * Vec2 → Vec2",
+                    "cpp": "Vec2 operator*(const Vec2&) const",
+                    "free": false,
+                    "desc": "Transform vector by Mat3",
+                    "desc_ja": "Mat3でベクトルを変換",
+                    "desc_ko": "벡터 변환"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Mat3 * Vec3 → Vec3",
+                    "cpp": "Vec3 operator*(const Vec3&) const",
+                    "free": false,
+                    "desc": "Transform vector by Mat3",
+                    "desc_ja": "Mat3でベクトルを変換",
+                    "desc_ko": "벡터 변환"
                 }
             ]
         },
@@ -30502,8 +29225,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     ""
-                ],
-                "snippet": "VideoGrabber()"
+                ]
             },
             "methods": [
                 {
@@ -30512,8 +29234,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the list of available camera devices",
-                    "snippet": "listDevices()"
+                    "desc": "Return the list of available camera devices"
                 },
                 {
                     "name": "setDeviceID",
@@ -30521,8 +29242,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int deviceId"
                     ],
-                    "desc": "Select which camera to use; call before setup()",
-                    "snippet": "setDeviceID(${1:deviceId})"
+                    "desc": "Select which camera to use; call before setup()"
                 },
                 {
                     "name": "getDeviceID",
@@ -30530,8 +29250,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the selected device ID",
-                    "snippet": "getDeviceID()"
+                    "desc": "Return the selected device ID"
                 },
                 {
                     "name": "setDesiredFrameRate",
@@ -30539,8 +29258,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int fps"
                     ],
-                    "desc": "Request a capture frame rate; call before setup()",
-                    "snippet": "setDesiredFrameRate(${1:fps})"
+                    "desc": "Request a capture frame rate; call before setup()"
                 },
                 {
                     "name": "getDesiredFrameRate",
@@ -30548,8 +29266,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the requested frame rate (-1 if unspecified)",
-                    "snippet": "getDesiredFrameRate()"
+                    "desc": "Return the requested frame rate (-1 if unspecified)"
                 },
                 {
                     "name": "setVerbose",
@@ -30557,8 +29274,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool verbose"
                     ],
-                    "desc": "Enable or disable verbose logging",
-                    "snippet": "setVerbose(${1:verbose})"
+                    "desc": "Enable or disable verbose logging"
                 },
                 {
                     "name": "isVerbose",
@@ -30566,8 +29282,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return whether verbose logging is enabled",
-                    "snippet": "isVerbose()"
+                    "desc": "Return whether verbose logging is enabled"
                 },
                 {
                     "name": "setup",
@@ -30575,8 +29290,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int width = 640, int height = 480"
                     ],
-                    "desc": "Start the camera at the requested size. Returns false if permission is not yet granted (it is requested asynchronously); keep calling update() and capture begins once granted",
-                    "snippet": "setup(${1:width}, ${2:height})"
+                    "desc": "Start the camera at the requested size. Returns false if permission is not yet granted (it is requested asynchronously); keep calling update() and capture begins once granted"
                 },
                 {
                     "name": "close",
@@ -30584,8 +29298,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Stop the camera and release its resources",
-                    "snippet": "close()"
+                    "desc": "Stop the camera and release its resources"
                 },
                 {
                     "name": "update",
@@ -30593,8 +29306,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Poll for a new frame and upload it to the texture. Call every frame; also completes a setup() that was waiting on permission",
-                    "snippet": "update()"
+                    "desc": "Poll for a new frame and upload it to the texture. Call every frame; also completes a setup() that was waiting on permission"
                 },
                 {
                     "name": "isFrameNew",
@@ -30602,8 +29314,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return true if a new frame arrived during the most recent update()",
-                    "snippet": "isFrameNew()"
+                    "desc": "Return true if a new frame arrived during the most recent update()"
                 },
                 {
                     "name": "isInitialized",
@@ -30611,8 +29322,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return true once the camera is set up and capturing",
-                    "snippet": "isInitialized()"
+                    "desc": "Return true once the camera is set up and capturing"
                 },
                 {
                     "name": "isPendingPermission",
@@ -30620,8 +29330,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return true while waiting for camera permission to be granted",
-                    "snippet": "isPendingPermission()"
+                    "desc": "Return true while waiting for camera permission to be granted"
                 },
                 {
                     "name": "getWidth",
@@ -30629,8 +29338,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the captured frame width in pixels",
-                    "snippet": "getWidth()"
+                    "desc": "Return the captured frame width in pixels"
                 },
                 {
                     "name": "getHeight",
@@ -30638,8 +29346,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the captured frame height in pixels",
-                    "snippet": "getHeight()"
+                    "desc": "Return the captured frame height in pixels"
                 },
                 {
                     "name": "getDeviceName",
@@ -30647,8 +29354,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the name of the active capture device",
-                    "snippet": "getDeviceName()"
+                    "desc": "Return the name of the active capture device"
                 },
                 {
                     "name": "getPixels",
@@ -30656,8 +29362,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return a pointer to the current RGBA pixel buffer",
-                    "snippet": "getPixels()"
+                    "desc": "Return a pointer to the current RGBA pixel buffer"
                 },
                 {
                     "name": "copyToImage",
@@ -30665,8 +29370,7 @@ const TrussCAPI = {
                     "signatures": [
                         "Image &image"
                     ],
-                    "desc": "Copy the current frame into an Image (allocating/updating it as needed)",
-                    "snippet": "copyToImage(${1:image})"
+                    "desc": "Copy the current frame into an Image (allocating/updating it as needed)"
                 },
                 {
                     "name": "getTexture",
@@ -30674,8 +29378,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the texture holding the live camera frame (HasTexture override)",
-                    "snippet": "getTexture()"
+                    "desc": "Return the texture holding the live camera frame (HasTexture override)"
                 }
             ],
             "static_methods": [
@@ -30685,8 +29388,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return whether camera access has been granted (macOS 10.14+)",
-                    "snippet": "VideoGrabber::checkCameraPermission()"
+                    "desc": "Return whether camera access has been granted (macOS 10.14+)"
                 },
                 {
                     "name": "VideoGrabber_requestCameraPermission",
@@ -30694,8 +29396,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Request camera access asynchronously (macOS)",
-                    "snippet": "VideoGrabber::requestCameraPermission()"
+                    "desc": "Request camera access asynchronously (macOS)"
                 }
             ]
         },
@@ -30736,8 +29437,7 @@ const TrussCAPI = {
                 "signatures": [
                     "",
                     "T start, T end, float duration, EaseType type = EaseType::Cubic, EaseMode mode = EaseMode::InOut"
-                ],
-                "snippet": "Tween<${1:T}>(${2:start}, ${3:end}, ${4:duration})"
+                ]
             },
             "methods": [
                 {
@@ -30746,8 +29446,7 @@ const TrussCAPI = {
                     "signatures": [
                         "T value"
                     ],
-                    "desc": "Set the start value (chainable)",
-                    "snippet": "from(${1:value})"
+                    "desc": "Set the start value (chainable)"
                 },
                 {
                     "name": "to",
@@ -30755,8 +29454,7 @@ const TrussCAPI = {
                     "signatures": [
                         "T value"
                     ],
-                    "desc": "Set the end value (chainable)",
-                    "snippet": "to(${1:value})"
+                    "desc": "Set the end value (chainable)"
                 },
                 {
                     "name": "duration",
@@ -30764,8 +29462,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float seconds"
                     ],
-                    "desc": "Set the animation duration in seconds (chainable)",
-                    "snippet": "duration(${1:seconds})"
+                    "desc": "Set the animation duration in seconds (chainable)"
                 },
                 {
                     "name": "ease",
@@ -30774,8 +29471,7 @@ const TrussCAPI = {
                         "EaseType type, EaseMode mode = EaseMode::InOut",
                         "EaseType inType, EaseType outType"
                     ],
-                    "desc": "Set the easing curve; the two-type overload uses an asymmetric ease (one curve in, another out)",
-                    "snippet": "ease(${1:type})"
+                    "desc": "Set the easing curve; the two-type overload uses an asymmetric ease (one curve in, another out)"
                 },
                 {
                     "name": "loop",
@@ -30783,8 +29479,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int count = -1"
                     ],
-                    "desc": "Repeat the animation: -1 = infinite, 0 = no loop, N = repeat N times (chainable)",
-                    "snippet": "loop(${1:count})"
+                    "desc": "Repeat the animation: -1 = infinite, 0 = no loop, N = repeat N times (chainable)"
                 },
                 {
                     "name": "yoyo",
@@ -30792,8 +29487,7 @@ const TrussCAPI = {
                     "signatures": [
                         "bool enable = true"
                     ],
-                    "desc": "Reverse direction on each loop iteration (chainable)",
-                    "snippet": "yoyo(${1:enable})"
+                    "desc": "Reverse direction on each loop iteration (chainable)"
                 },
                 {
                     "name": "delay",
@@ -30801,8 +29495,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float seconds"
                     ],
-                    "desc": "Delay before the animation starts, in seconds (chainable)",
-                    "snippet": "delay(${1:seconds})"
+                    "desc": "Delay before the animation starts, in seconds (chainable)"
                 },
                 {
                     "name": "start",
@@ -30810,8 +29503,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Start (or restart) the animation and begin auto-updating each frame",
-                    "snippet": "start()"
+                    "desc": "Start (or restart) the animation and begin auto-updating each frame"
                 },
                 {
                     "name": "pause",
@@ -30819,8 +29511,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Pause the animation, keeping its current progress",
-                    "snippet": "pause()"
+                    "desc": "Pause the animation, keeping its current progress"
                 },
                 {
                     "name": "resume",
@@ -30828,8 +29519,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Resume a paused animation",
-                    "snippet": "resume()"
+                    "desc": "Resume a paused animation"
                 },
                 {
                     "name": "reset",
@@ -30837,8 +29527,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Stop the animation and reset progress to the start",
-                    "snippet": "reset()"
+                    "desc": "Stop the animation and reset progress to the start"
                 },
                 {
                     "name": "finish",
@@ -30846,8 +29535,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Jump immediately to the end value and fire the complete event",
-                    "snippet": "finish()"
+                    "desc": "Jump immediately to the end value and fire the complete event"
                 },
                 {
                     "name": "getValue",
@@ -30855,8 +29543,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the current eased value",
-                    "snippet": "getValue()"
+                    "desc": "Return the current eased value"
                 },
                 {
                     "name": "getProgress",
@@ -30864,8 +29551,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return normalized progress through the current iteration (0.0-1.0)",
-                    "snippet": "getProgress()"
+                    "desc": "Return normalized progress through the current iteration (0.0-1.0)"
                 },
                 {
                     "name": "getElapsed",
@@ -30873,8 +29559,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return elapsed time in seconds within the current iteration",
-                    "snippet": "getElapsed()"
+                    "desc": "Return elapsed time in seconds within the current iteration"
                 },
                 {
                     "name": "getDuration",
@@ -30882,8 +29567,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the configured duration in seconds",
-                    "snippet": "getDuration()"
+                    "desc": "Return the configured duration in seconds"
                 },
                 {
                     "name": "isPlaying",
@@ -30891,8 +29575,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return true while the animation is actively playing",
-                    "snippet": "isPlaying()"
+                    "desc": "Return true while the animation is actively playing"
                 },
                 {
                     "name": "isComplete",
@@ -30900,8 +29583,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return true once the animation (all loops) has finished",
-                    "snippet": "isComplete()"
+                    "desc": "Return true once the animation (all loops) has finished"
                 },
                 {
                     "name": "getStart",
@@ -30909,8 +29591,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the start value",
-                    "snippet": "getStart()"
+                    "desc": "Return the start value"
                 },
                 {
                     "name": "getEnd",
@@ -30918,8 +29599,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the end value",
-                    "snippet": "getEnd()"
+                    "desc": "Return the end value"
                 },
                 {
                     "name": "getLoopCount",
@@ -30927,8 +29607,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return how many loop iterations have completed so far",
-                    "snippet": "getLoopCount()"
+                    "desc": "Return how many loop iterations have completed so far"
                 }
             ]
         },
@@ -31160,111 +29839,99 @@ const TrussCAPI = {
                 "signatures": [
                     "",
                     "const Path& polyline"
-                ],
-                "snippet": "StrokeMesh()"
+                ]
             },
             "methods": [
                 {
                     "name": "setWidth",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
-                        "float width"
+                        "float w"
                     ],
-                    "desc": "Set the stroke width",
-                    "snippet": "setWidth(${1:5.0})"
+                    "desc": "Set the stroke width"
                 },
                 {
                     "name": "setColor",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
-                        "const Color& color"
+                        "const Color& c"
                     ],
-                    "desc": "Set the stroke color",
-                    "snippet": "setColor(${1:color})"
+                    "desc": "Set the stroke color"
                 },
                 {
                     "name": "setCapType",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
-                        "CapType type"
+                        "StrokeMesh::CapType type"
                     ],
-                    "desc": "Set the line cap shape (StrokeMesh::CapType: Butt, Round, Square)",
-                    "snippet": "setCapType(${1:StrokeMesh::CapType::Round})"
+                    "desc": "Set the line cap shape (StrokeMesh::CapType: Butt, Round, Square)"
                 },
                 {
                     "name": "setJoinType",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
-                        "JoinType type"
+                        "StrokeMesh::JoinType type"
                     ],
-                    "desc": "Set the line join shape (StrokeMesh::JoinType: Miter, Round, Bevel)",
-                    "snippet": "setJoinType(${1:StrokeMesh::JoinType::Round})"
+                    "desc": "Set the line join shape (StrokeMesh::JoinType: Miter, Round, Bevel)"
                 },
                 {
                     "name": "setMiterLimit",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
                         "float limit"
                     ],
-                    "desc": "Set the miter limit for sharp corners",
-                    "snippet": "setMiterLimit(${1:10.0})"
+                    "desc": "Set the miter limit for sharp corners"
                 },
                 {
                     "name": "addVertex",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
                         "float x, float y, float z = 0",
-                        "const Vec2& p",
-                        "const Vec3& p"
+                        "const Vec2& v",
+                        "const Vec3& v"
                     ],
-                    "desc": "Append a vertex to the stroke path",
-                    "snippet": "addVertex(${1:x}, ${2:y})"
+                    "desc": "Append a vertex to the stroke path"
                 },
                 {
                     "name": "addVertexWithWidth",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
                         "float x, float y, float width",
                         "const Vec3& p, float width"
                     ],
-                    "desc": "Append a vertex with a per-vertex width",
-                    "snippet": "addVertexWithWidth(${1:x}, ${2:y}, ${3:width})"
+                    "desc": "Append a vertex with a per-vertex width"
                 },
                 {
                     "name": "setWidths",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
                         "const vector<float>& w"
                     ],
-                    "desc": "Set per-vertex widths from a list",
-                    "snippet": "setWidths(${1:widths})"
+                    "desc": "Set per-vertex widths from a list"
                 },
                 {
                     "name": "setShape",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
                         "const Path& polyline"
                     ],
-                    "desc": "Set the stroke shape from a Path",
-                    "snippet": "setShape(${1:path})"
+                    "desc": "Set the stroke shape from a Path"
                 },
                 {
                     "name": "setClosed",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
                         "bool closed"
                     ],
-                    "desc": "Set whether the stroke forms a closed loop",
-                    "snippet": "setClosed(${1:true})"
+                    "desc": "Set whether the stroke forms a closed loop"
                 },
                 {
                     "name": "clear",
-                    "return": "void",
+                    "return": "StrokeMesh&",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Remove all vertices",
-                    "snippet": "clear()"
+                    "desc": "Remove all vertices"
                 },
                 {
                     "name": "update",
@@ -31272,8 +29939,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Rebuild the internal triangle mesh (call before draw after edits)",
-                    "snippet": "update()"
+                    "desc": "Rebuild the internal triangle mesh (call before draw after edits)"
                 },
                 {
                     "name": "draw",
@@ -31281,8 +29947,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Draw the stroke mesh",
-                    "snippet": "draw()"
+                    "desc": "Draw the stroke mesh"
                 }
             ]
         }
@@ -32834,6 +31499,26 @@ const TrussCAPI = {
             "desc_ko": "setOrientation에 전달하는 화면 방향 마스크(iOS/Android). 값은 비트 플래그이며 |로 조합 가능",
             "related": [
                 "setOrientation"
+            ],
+            "operators": [
+                {
+                    "symbol": "|",
+                    "signature": "Orientation | Orientation → Orientation",
+                    "cpp": "Orientation operator|(Orientation, Orientation)",
+                    "free": false,
+                    "desc": "Combine flags",
+                    "desc_ja": "フラグ合成",
+                    "desc_ko": "플래그 결합"
+                },
+                {
+                    "symbol": "&",
+                    "signature": "Orientation & Orientation → Orientation",
+                    "cpp": "Orientation operator&(Orientation, Orientation)",
+                    "free": false,
+                    "desc": "Mask / test flags",
+                    "desc_ja": "フラグのマスク・判定",
+                    "desc_ko": "플래그 마스크"
+                }
             ]
         }
     ],
