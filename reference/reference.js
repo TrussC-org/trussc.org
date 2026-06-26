@@ -389,7 +389,7 @@
         if (!list || !list.length) return '';
         let h = `<div class="detail-section"><div class="detail-section-title">${esc(UI.examples)}</div>`;
         h += `<div style="font-size:13px;line-height:1.8;">`;
-        h += list.map(e => `<a href="/examples/player.html?type=examples&group=${encodeURIComponent(e.group)}&name=${encodeURIComponent(e.name)}" style="color:#4ec9b0;text-decoration:none;">${esc(exampleLabel(e.name))}</a>`).join(' · ');
+        h += list.map(e => `<a href="/examples/player.html?type=examples&group=${encodeURIComponent(e.group)}&name=${encodeURIComponent(e.name)}" style="color:var(--color-accent,#4ec9b0);text-decoration:none;">${esc(exampleLabel(e.name))}</a>`).join(' · ');
         h += `</div></div>`;
         return h;
     }
@@ -437,7 +437,7 @@
         let h = `<div class="detail-section"><div class="detail-section-title">${esc(UI.related)}</div>`;
         h += `<div style="font-size:13px;line-height:1.8;">`;
         h += list.map(r =>
-            `<a href="#" onclick="navTo('${kindOf(r)}','${esc(r)}');return false;" style="color:#4ec9b0;text-decoration:none;">${esc(r)}</a>`
+            `<a href="#" onclick="navTo('${kindOf(r)}','${esc(r)}');return false;" style="color:var(--color-accent,#4ec9b0);text-decoration:none;">${esc(r)}</a>`
         ).join(' · ');
         h += `</div></div>`;
         return h;
@@ -450,10 +450,10 @@
         const reason = typeof dep === 'string' ? dep : (dep.reason || '');
         let body = esc(reason);
         if (dep.replacement) {
-            body += ` ${esc(UI.deprecatedUse)} <a href="#" onclick="navTo('${kindOf(dep.replacement)}','${esc(dep.replacement)}');return false;" style="color:#4ec9b0;text-decoration:none;">${esc(dep.replacement)}</a>`;
+            body += ` ${esc(UI.deprecatedUse)} <a href="#" onclick="navTo('${kindOf(dep.replacement)}','${esc(dep.replacement)}');return false;" style="color:var(--color-accent,#4ec9b0);text-decoration:none;">${esc(dep.replacement)}</a>`;
         }
         if (dep.url) {
-            body += ` <a href="${esc(dep.url)}" target="_blank" rel="noopener" style="color:#4ec9b0;">↗</a>`;
+            body += ` <a href="${esc(dep.url)}" target="_blank" rel="noopener" style="color:var(--color-accent,#4ec9b0);">↗</a>`;
         }
         return `<div style="margin:10px 0;padding:8px 12px;border-left:3px solid #d7a657;background:rgba(215,166,87,0.12);color:#d7a657;font-size:13px;border-radius:0 4px 4px 0;">⚠ <b>${esc(UI.deprecated)}</b> — ${body}</div>`;
     }
@@ -465,7 +465,7 @@
         let h = `<div class="detail-section"><div class="detail-section-title">${esc(UI.operators)}</div>`;
         for (const o of list) {
             h += `<div class="detail-entry">`;
-            h += `<div class="detail-sig"><span class="name" style="color:#4ec9b0;">${esc(o.signature || o.cpp)}</span></div>`;
+            h += `<div class="detail-sig"><span class="name" style="color:var(--color-accent,#4ec9b0);">${esc(o.signature || o.cpp)}</span></div>`;
             if (o.cpp && o.cpp !== o.signature) {
                 h += `<div class="detail-entry-desc" style="color:#888;">${esc(o.cpp)}</div>`;
             }
@@ -619,7 +619,7 @@
         for (const v of e.values || []) {
             const val = (v.value !== undefined && v.value !== null) ? ` <span class="ov-val">= ${esc(String(v.value))}</span>` : '';
             html += `<div class="detail-entry">`;
-            html += `<div class="detail-sig"><span class="name" style="color:#4ec9b0;">${esc(e.name)}::${esc(v.name)}</span>${val}</div>`;
+            html += `<div class="detail-sig"><span class="name" style="color:var(--color-accent,#4ec9b0);">${esc(e.name)}::${esc(v.name)}</span>${val}</div>`;
             if (v.desc) html += `<div class="detail-entry-desc">// ${esc(v.desc)}</div>`;
             html += `</div>`;
         }

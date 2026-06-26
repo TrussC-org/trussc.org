@@ -5,72 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrussC API リファレンス</title>
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Shared site styles (nav, theme tokens). Reference's own inline <style> below overrides the app body. -->
+    <link rel="stylesheet" href="/style.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #1e1e1e;
-            color: #d4d4d4;
+            background: var(--color-bg);
+            color: var(--color-text);
             line-height: 1.6;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* Top bar */
-        .topbar {
-            background: #252526;
-            border-bottom: 1px solid #3c3c3c;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+        /* Shared site nav is provided by /style.css. Reference-only additions: a
+           version subtitle beside the wordmark, and a current-page marker. */
+        .nav-brand { display: flex; align-items: baseline; gap: var(--space-sm); }
+        .ref-subtitle { color: var(--color-text-muted); font-size: 0.8rem; white-space: nowrap; }
+        .ref-subtitle a { color: var(--color-accent); }
+        .nav-links a.active { color: var(--color-text); }
 
-        .topbar h1 {
-            color: #569cd6;
-            font-size: 20px;
-            white-space: nowrap;
-        }
-
-        .topbar h1 a { color: #569cd6; text-decoration: none; }
-        .topbar h1 a:hover { text-decoration: underline; }
-
-        .topbar .subtitle {
-            color: #888;
-            font-size: 13px;
-        }
-
-        .topbar .subtitle a { color: #4ec9b0; }
-
-        .nav-links {
-            margin-left: auto;
-            display: flex;
-            gap: 16px;
-        }
-
-        .nav-links a {
-            color: #9cdcfe;
-            text-decoration: none;
-            font-size: 13px;
-        }
-
-        .nav-links a:hover { text-decoration: underline; }
-        .nav-links a.active { color: #4ec9b0; font-weight: 600; }
-
-        /* Main layout */
+        /* Main layout. The shared nav is position:fixed (~53px tall incl. border),
+           so the app workspace sits below it. */
         .main {
             display: flex;
-            height: calc(100vh - 50px);
+            height: calc(100vh - 53px);
+            margin-top: 53px;
         }
 
         /* Sidebar */
         .sidebar {
             width: 280px;
             min-width: 280px;
-            background: #252526;
-            border-right: 1px solid #3c3c3c;
+            background: var(--color-bg-card);
+            border-right: 1px solid var(--color-border);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -78,22 +50,22 @@
 
         .search-box {
             padding: 10px;
-            border-bottom: 1px solid #3c3c3c;
+            border-bottom: 1px solid var(--color-border);
         }
 
         .search-box input {
             width: 100%;
             padding: 6px 10px;
-            background: #3c3c3c;
-            border: 1px solid #555;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border-light);
             border-radius: 4px;
-            color: #d4d4d4;
+            color: var(--color-text);
             font-size: 13px;
             outline: none;
         }
 
-        .search-box input:focus { border-color: #569cd6; }
-        .search-box input::placeholder { color: #888; }
+        .search-box input:focus { border-color: var(--color-primary); }
+        .search-box input::placeholder { color: var(--color-text-muted); }
 
         .sidebar-list {
             flex: 1;
@@ -102,13 +74,13 @@
         }
 
         .sidebar-list::-webkit-scrollbar { width: 6px; }
-        .sidebar-list::-webkit-scrollbar-thumb { background: #555; border-radius: 3px; }
+        .sidebar-list::-webkit-scrollbar-thumb { background: var(--color-border-light); border-radius: 3px; }
 
         .sidebar-group-title {
             padding: 10px 14px 4px;
             font-size: 11px;
             font-weight: 600;
-            color: #569cd6;
+            color: var(--color-primary-light);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             cursor: pointer;
@@ -118,7 +90,7 @@
             user-select: none;
         }
 
-        .sidebar-group-title:hover { color: #7cb8f0; }
+        .sidebar-group-title:hover { color: var(--color-primary); }
 
         .sidebar-group-title svg {
             width: 12px;
@@ -137,7 +109,7 @@
         .sidebar-cat-title {
             padding: 6px 14px 2px 20px;
             font-size: 10px;
-            color: #888;
+            color: var(--color-text-muted);
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
@@ -150,18 +122,18 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            color: #d4d4d4;
+            color: var(--color-text);
         }
 
-        .sidebar-item:hover { background: #2a2d2e; }
-        .sidebar-item.active { background: #094771; color: #fff; }
+        .sidebar-item:hover { background: var(--color-bg-alt); }
+        .sidebar-item.active { background: rgba(99,102,241,0.35); color: #fff; }
 
-        .sidebar-item.type-item { color: #4ec9b0; }
+        .sidebar-item.type-item { color: var(--color-accent); }
         .sidebar-item.const-item { color: #b5cea8; }
 
         .sidebar-item .item-kind {
             font-size: 9px;
-            color: #888;
+            color: var(--color-text-muted);
             margin-left: 6px;
         }
 
@@ -173,26 +145,26 @@
         }
 
         .detail::-webkit-scrollbar { width: 8px; }
-        .detail::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+        .detail::-webkit-scrollbar-thumb { background: var(--color-border-light); border-radius: 4px; }
 
         .detail-empty {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
-            color: #666;
+            color: var(--color-text-muted);
             font-size: 15px;
         }
 
         .detail-title {
             font-family: 'JetBrains Mono', monospace;
             font-size: 24px;
-            color: #4ec9b0;
+            color: var(--color-accent);
             margin-bottom: 4px;
         }
 
         .detail-desc {
-            color: #888;
+            color: var(--color-text-muted);
             font-size: 14px;
             margin-bottom: 24px;
         }
@@ -204,11 +176,11 @@
         .detail-section-title {
             font-size: 13px;
             font-weight: 600;
-            color: #569cd6;
+            color: var(--color-primary-light);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             padding-bottom: 6px;
-            border-bottom: 1px solid #3c3c3c;
+            border-bottom: 1px solid var(--color-border);
             margin-bottom: 10px;
         }
 
@@ -216,19 +188,19 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
             padding: 6px 0;
-            border-bottom: 1px solid #2d2d30;
+            border-bottom: 1px solid var(--color-border);
         }
 
         .detail-entry:last-child { border-bottom: none; }
 
         .detail-sig {
-            color: #d4d4d4;
+            color: var(--color-text);
         }
 
-        .detail-sig .ret { color: #4ec9b0; }
+        .detail-sig .ret { color: var(--color-accent); }
         .detail-sig .name { color: #dcdcaa; }
         .detail-sig .params { color: #9cdcfe; }
-        .detail-sig .type { color: #4ec9b0; }
+        .detail-sig .type { color: var(--color-accent); }
         .detail-sig .prop-name { color: #9cdcfe; }
 
         .detail-entry-desc {
@@ -254,18 +226,18 @@
             user-select: none;
         }
         .plat-on {
-            color: #4ec9b0;
-            border-color: #3a6b5c;
-            background: rgba(78, 201, 176, 0.12);
+            color: var(--color-accent);
+            border-color: var(--color-border-light);
+            background: rgba(34,211,238,0.12);
         }
         .plat-off {
-            color: #5a5a5a;
-            border-color: #3a3a3a;
+            color: var(--color-text-subtle);
+            border-color: var(--color-border);
             background: transparent;
             text-decoration: line-through;
         }
         .plat-note {
-            color: #999;
+            color: var(--color-text-muted);
             font-size: 12px;
             line-height: 1.6;
             margin-top: 6px;
@@ -276,7 +248,7 @@
         }
 
         .detail-overload {
-            color: #d4d4d4;
+            color: var(--color-text);
             padding: 2px 0;
         }
 
@@ -286,16 +258,16 @@
         }
 
         .overview-section-title {
-            color: #4ec9b0;
+            color: var(--color-accent);
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 12px;
             padding-bottom: 6px;
-            border-bottom: 1px solid #3c3c3c;
+            border-bottom: 1px solid var(--color-border);
         }
 
         .overview-cat-title {
-            color: #569cd6;
+            color: var(--color-primary-light);
             font-size: 12px;
             font-weight: 600;
             margin-top: 14px;
@@ -309,7 +281,7 @@
         }
 
         .overview-item {
-            background: #252526;
+            background: var(--color-bg-card);
             padding: 7px 12px;
             border-radius: 4px;
             font-family: 'JetBrains Mono', monospace;
@@ -318,21 +290,21 @@
             transition: background 0.15s;
         }
 
-        .overview-item:hover { background: #2a2d2e; }
+        .overview-item:hover { background: var(--color-bg-alt); }
 
-        .overview-item .ov-ret { color: #4ec9b0; }
+        .overview-item .ov-ret { color: var(--color-accent); }
         .overview-item .ov-name { color: #dcdcaa; }
         .overview-item .ov-params { color: #9cdcfe; }
         .overview-item .ov-desc { color: #6a9955; font-size: 11px; display: block; margin-top: 2px; }
 
-        .overview-item.ov-type .ov-name { color: #4ec9b0; }
-        .overview-item.ov-type .ov-desc { color: #888; display: block; margin-top: 2px; }
+        .overview-item.ov-type .ov-name { color: var(--color-accent); }
+        .overview-item.ov-type .ov-desc { color: var(--color-text-muted); display: block; margin-top: 2px; }
 
         .overview-item.ov-const .ov-name { color: #b5cea8; }
-        .overview-item.ov-const .ov-val { color: #888; margin-left: 4px; }
+        .overview-item.ov-const .ov-val { color: var(--color-text-muted); margin-left: 4px; }
 
         .detail-back {
-            color: #569cd6;
+            color: var(--color-primary-light);
             font-size: 13px;
             cursor: pointer;
             margin-bottom: 16px;
@@ -344,8 +316,8 @@
         /* Tooltip */
         .tooltip {
             position: fixed;
-            background: #1e1e1e;
-            border: 1px solid #569cd6;
+            background: var(--color-bg);
+            border: 1px solid var(--color-primary-light);
             border-radius: 4px;
             padding: 6px 10px;
             font-family: 'JetBrains Mono', monospace;
@@ -357,7 +329,7 @@
             display: none;
         }
 
-        .tooltip .tt-ret { color: #4ec9b0; }
+        .tooltip .tt-ret { color: var(--color-accent); }
         .tooltip .tt-name { color: #dcdcaa; }
         .tooltip .tt-params { color: #9cdcfe; }
         .tooltip .tt-desc { color: #6a9955; display: block; font-size: 11px; margin-top: 2px; }
@@ -374,16 +346,16 @@
         .sidebar-item .color-chip { width: 11px; height: 11px; margin-right: 7px; }
         .color-group { margin-bottom: 12px; }
         .color-group-title {
-            font-size: 13px; font-weight: 600; color: #569cd6;
+            font-size: 13px; font-weight: 600; color: var(--color-primary-light);
             cursor: pointer; user-select: none;
             display: flex; align-items: center; gap: 6px;
-            padding: 8px 0; border-bottom: 1px solid #3c3c3c; margin-bottom: 12px;
+            padding: 8px 0; border-bottom: 1px solid var(--color-border); margin-bottom: 12px;
         }
-        .color-group-title:hover { color: #7cb8f0; }
+        .color-group-title:hover { color: var(--color-primary); }
         .color-group-title svg { width: 12px; height: 12px; transition: transform 0.15s; }
         .color-group.collapsed .color-group-title svg { transform: rotate(-90deg); }
         .color-group.collapsed .color-grid { display: none; }
-        .color-group-count { color: #888; font-weight: 400; font-size: 11px; }
+        .color-group-count { color: var(--color-text-muted); font-weight: 400; font-size: 11px; }
         .color-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -391,13 +363,13 @@
         }
         .color-swatch {
             display: flex; align-items: center; gap: 8px;
-            background: #252526; padding: 6px 10px; border-radius: 4px;
+            background: var(--color-bg-card); padding: 6px 10px; border-radius: 4px;
             font-family: 'JetBrains Mono', monospace; font-size: 12px;
         }
         .color-swatch .color-chip { width: 34px; height: 17px; }
-        .color-swatch .color-name { color: #d4d4d4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .color-swatch .color-hex { color: #777; font-size: 10px; margin-left: auto; }
-        .color-swatch-hl { outline: 2px solid #4ec9b0; outline-offset: 1px; }
+        .color-swatch .color-name { color: var(--color-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .color-swatch .color-hex { color: var(--color-text-muted); font-size: 10px; margin-left: auto; }
+        .color-swatch-hl { outline: 2px solid var(--color-accent); outline-offset: 1px; }
         .overview-item .color-preview { display: inline-flex; gap: 3px; margin-left: 8px; vertical-align: middle; }
 
         /* Deprecated markers in the overview grid */
@@ -407,24 +379,44 @@
         /* Responsive */
         @media (max-width: 768px) {
             .main { flex-direction: column; }
-            .sidebar { width: 100%; min-width: auto; height: 40vh; border-right: none; border-bottom: 1px solid #3c3c3c; }
+            .sidebar { width: 100%; min-width: auto; height: 40vh; border-right: none; border-bottom: 1px solid var(--color-border); }
             .detail { padding: 20px; }
             .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="topbar">
-        <h1><a href="../../">TrussC</a> API リファレンス</h1>
-        <span class="subtitle" id="subtitle">C++ API リファレンス</span>
-        <div class="nav-links">
-            <a href="../../">ホーム</a>
-            <a href="../../examples/">サンプル</a>
-            <a href="./" class="active">リファレンス</a>
-            <a href="../../addons/">アドオン</a>
-            <a href="../../for-of-users.html">oF ユーザー向け</a>
+    <!-- Navigation (shared site nav from /style.css) -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/ja/" class="nav-logo"><img src="/assets/images/logo-navigator.svg" alt="TrussC" class="logo-img"></a>
+                <span class="ref-subtitle" id="subtitle">C++ API リファレンス</span>
+            </div>
+            <button class="nav-toggle" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="/ja/reference/" class="active">リファレンス</a></li>
+                <li><a href="/examples/">サンプル</a></li>
+                <li><a href="/addons/">Addons</a></li>
+                <li><a href="/ja/for-of-users.html">oFユーザーへ</a></li>
+                <li><a href="https://gemini.google.com/gem/16aq3ccVPl33j6xSMyE7MWXDjaZvauL0I" target="_blank" rel="noopener">AIに聞く</a></li>
+                <li><a href="https://github.com/sponsors/TrussC-org" class="nav-sponsor" target="_blank" rel="noopener">❤️ Sponsor</a></li>
+                <li><a href="https://github.com/TrussC-org/TrussC/blob/main/docs/GET_STARTED_jp.md" class="nav-cta" target="_blank" rel="noopener">始める</a></li>
+                <li class="lang-dropdown">
+                    <button class="nav-lang" onclick="this.parentElement.classList.toggle('open')"><img src="/assets/images/globe.svg" alt="" class="lang-icon"> ▾</button>
+                    <ul class="lang-menu">
+                        <li><a href="/reference/">EN</a></li>
+                        <li><a href="/ja/reference/" class="active">日本語</a></li>
+                        <li><a href="/ko/reference/">한국어</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </div>
+    </nav>
 
     <div class="main">
         <div class="sidebar">
@@ -470,5 +462,21 @@
         };
     </script>
     <script src="/reference/reference.js"></script>
+    <script>
+        // Mobile nav toggle + close the language dropdown on outside click.
+        (function () {
+            const toggle = document.querySelector('.nav-toggle');
+            const links = document.querySelector('.nav-links');
+            if (toggle && links) toggle.addEventListener('click', () => {
+                links.classList.toggle('active');
+                toggle.classList.toggle('active');
+            });
+            document.addEventListener('click', (e) => {
+                document.querySelectorAll('.lang-dropdown.open').forEach(d => {
+                    if (!d.contains(e.target)) d.classList.remove('open');
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
