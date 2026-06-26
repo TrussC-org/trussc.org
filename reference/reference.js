@@ -54,6 +54,8 @@
         operators: 'Operators',
         deprecated: 'Deprecated',
         deprecatedUse: 'Use',
+        colors: 'Colors',
+        colorsDesc: 'Named colors in the colors:: namespace. Values are 0–1 float RGBA; hex is the 0–255 form.',
         category: 'Category',
         related: 'Related',
         examples: 'Examples',
@@ -104,6 +106,26 @@
     for (const c of TrussCAPI.constants) {
         items.push({ kind: 'constant', category: UI.groupConstants, name: c.name, data: c });
     }
+    // Colors (palette) — each named color is individually searchable; the data
+    // carries its source group so selecting one opens the palette at that group.
+    for (const g of TrussCAPI.colors || []) {
+        for (const c of g.items || []) {
+            items.push({ kind: 'color', category: UI.colors, name: c.name, data: { name: c.name, hex: c.hex, rgba: c.rgba, group: g.group } });
+        }
+    }
+
+    // A function is deprecated if ANY of its overloads carries a `deprecated`
+    // marker; collect those names once so the sidebar/overview can flag them
+    // inline (deprecated symbols stay in their normal category — no separate group).
+    const deprecatedFns = new Set();
+    for (const cat of TrussCAPI.categories) {
+        for (const fn of cat.functions) if (fn.deprecated) deprecatedFns.add(fn.name);
+    }
+    function isDeprecated(item) {
+        if (item.kind === 'function') return deprecatedFns.has(item.name);
+        return !!(item.data && item.data.deprecated);
+    }
+    const DEPR_ATTR = ' style="text-decoration:line-through;opacity:0.6;" title="Deprecated"';
 
     // ---------------------------------------------------------------------
     // Fuzzy matching (no dependencies).
@@ -198,6 +220,9 @@
         const idents = [], prose = [];
         if (item.name) idents.push(item.name);
         if (item.category) idents.push(item.category);
+        // So `deprecated` as a query filters to deprecated symbols (they live in
+        // their normal category, not a dedicated group).
+        if (isDeprecated(item)) idents.push('deprecated');
         const d = item.data || {};
         if (Array.isArray(d.keywords)) for (const kw of d.keywords) if (kw) idents.push(kw);
         if (item.kind === 'type') {
@@ -255,7 +280,8 @@
                     const _ret = item.data.return_type || 'void';
                     const _params = item.data.params_typed || item.data.params || '';
                     const _desc = item.data.desc || '';
-                    html += `<div class="sidebar-item" data-kind="${item.kind}" data-name="${esc(item.name)}" data-cat="${esc(item.category)}" data-ret="${esc(_ret)}" data-params="${esc(_params)}" data-desc="${esc(_desc)}" onclick="selectItem(this)">${esc(item.name)}()</div>`;
+                    const _depr = isDeprecated(item);
+                    html += `<div class="sidebar-item" data-kind="${item.kind}" data-name="${esc(item.name)}" data-cat="${esc(item.category)}" data-ret="${esc(_ret)}" data-params="${esc(_params)}" data-desc="${esc(_desc)}" onclick="selectItem(this)"${_depr ? DEPR_ATTR : ''}>${esc(item.name)}()${_depr ? ' ⚠' : ''}</div>`;
                 }
                 html += `</div>`;
             }
@@ -270,21 +296,8 @@
             html += `${esc(UI.groupTypes)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
             html += `<div class="sidebar-group-items">`;
             for (const item of typeItems) {
-                html += `<div class="sidebar-item type-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)">${esc(item.name)}</div>`;
-            }
-            html += `</div></div>`;
-        }
-
-        // Group: Deprecated (cross-cutting — any symbol carrying a `deprecated` marker)
-        const deprItems = items.filter(i => i.data && i.data.deprecated && (!query || matchItem(i, query)));
-        if (deprItems.length > 0) {
-            html += `<div class="sidebar-group" id="group-deprecated">`;
-            html += `<div class="sidebar-group-title" onclick="toggleGroup('group-deprecated')">`;
-            html += `${esc(UI.deprecated)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
-            html += `<div class="sidebar-group-items">`;
-            for (const item of deprItems) {
-                const suffix = item.kind === 'function' ? '()' : '';
-                html += `<div class="sidebar-item" data-kind="${item.kind}" data-name="${esc(item.name)}" data-cat="${esc(item.category)}" onclick="selectItem(this)" style="text-decoration:line-through;opacity:0.65;">${esc(item.name)}${suffix}</div>`;
+                const _depr = isDeprecated(item);
+                html += `<div class="sidebar-item type-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)"${_depr ? DEPR_ATTR : ''}>${esc(item.name)}${_depr ? ' ⚠' : ''}</div>`;
             }
             html += `</div></div>`;
         }
@@ -297,7 +310,8 @@
             html += `${esc(UI.groupEnums)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
             html += `<div class="sidebar-group-items">`;
             for (const item of enumItems) {
-                html += `<div class="sidebar-item type-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)">${esc(item.name)}</div>`;
+                const _depr = isDeprecated(item);
+                html += `<div class="sidebar-item type-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)"${_depr ? DEPR_ATTR : ''}>${esc(item.name)}${_depr ? ' ⚠' : ''}</div>`;
             }
             html += `</div></div>`;
         }
@@ -310,7 +324,8 @@
             html += `${esc(UI.groupMacros)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
             html += `<div class="sidebar-group-items">`;
             for (const item of macroItems) {
-                html += `<div class="sidebar-item const-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)">${esc(item.name)}</div>`;
+                const _depr = isDeprecated(item);
+                html += `<div class="sidebar-item const-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)"${_depr ? DEPR_ATTR : ''}>${esc(item.name)}${_depr ? ' ⚠' : ''}</div>`;
             }
             html += `</div></div>`;
         }
@@ -324,6 +339,27 @@
             html += `<div class="sidebar-group-items">`;
             for (const item of constItems) {
                 html += `<div class="sidebar-item const-item" data-kind="${item.kind}" data-name="${esc(item.name)}" onclick="selectItem(this)">${esc(item.name)}<span class="item-kind">= ${esc(String(item.data.value))}</span></div>`;
+            }
+            html += `</div></div>`;
+        }
+
+        // Group: Colors (palette). With no query the group lists the 13 color
+        // sub-groups (compact); a query filters to matching individual colors,
+        // each shown with its swatch chip. Collapsed by default to stay tidy.
+        const colorItems = items.filter(i => i.kind === 'color' && (!query || matchItem(i, query)));
+        if (colorItems.length > 0) {
+            html += `<div class="sidebar-group collapsed" id="group-colors">`;
+            html += `<div class="sidebar-group-title" onclick="toggleGroup('group-colors')">`;
+            html += `${esc(UI.colors)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
+            html += `<div class="sidebar-group-items">`;
+            if (query) {
+                for (const item of colorItems) {
+                    html += `<div class="sidebar-item" data-kind="color" data-name="${esc(item.name)}" data-group="${esc(item.data.group)}" onclick="selectItem(this)"><span class="color-chip" style="background:${esc(item.data.hex)}"></span>${esc(item.name)}</div>`;
+                }
+            } else {
+                for (const g of TrussCAPI.colors || []) {
+                    html += `<div class="sidebar-item" data-kind="colorgroup" data-name="${esc(g.group)}" onclick="selectItem(this)">${esc(g.group)}<span class="item-kind">${g.items.length}</span></div>`;
+                }
             }
             html += `</div></div>`;
         }
@@ -344,6 +380,8 @@
         else if (kind === 'enum') renderEnumDetail(name);
         else if (kind === 'macro') renderMacroDetail(name);
         else if (kind === 'constant') renderConstantDetail(name);
+        else if (kind === 'color') renderColorsDetail(el.dataset.group, name);
+        else if (kind === 'colorgroup') renderColorsDetail(name);
     }
 
     // "drawRectSquircleExample" -> "Draw Rect Squircle"
@@ -623,6 +661,48 @@
         detail.innerHTML = html;
     }
 
+    // Slug a group name into a stable element id ("Basic" -> "colorgrp-Basic").
+    function colorGroupId(group) {
+        return 'colorgrp-' + String(group).replace(/[^A-Za-z0-9]+/g, '-');
+    }
+
+    // Render the whole palette as collapsible group sections of swatch cells.
+    // `expandGroup` (optional) opens that one group; the rest stay collapsed.
+    // `highlightName` (optional) rings a swatch and scrolls it into view.
+    function renderColorsDetail(expandGroup, highlightName) {
+        const groups = TrussCAPI.colors || [];
+        if (!groups.length) return;
+
+        let html = backButton();
+        html += `<div class="detail-title">${esc(UI.colors)}</div>`;
+        html += `<div class="detail-desc">${esc(UI.colorsDesc)}</div>`;
+
+        for (const g of groups) {
+            const gid = colorGroupId(g.group);
+            const open = expandGroup && g.group === expandGroup;
+            html += `<div class="color-group${open ? '' : ' collapsed'}" id="${gid}">`;
+            html += `<div class="color-group-title" onclick="toggleGroup('${gid}')">${esc(g.group)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg><span class="color-group-count">${(g.items || []).length}</span></div>`;
+            html += `<div class="color-grid">`;
+            for (const c of g.items || []) {
+                const rgb = Array.isArray(c.rgba) ? `rgb(${c.rgba.slice(0, 3).join(', ')})` : '';
+                const hl = highlightName && c.name === highlightName ? ' color-swatch-hl' : '';
+                html += `<div class="color-swatch${hl}" id="swatch-${esc(c.name)}" title="${esc(c.name)} — ${esc(c.hex)} — ${esc(rgb)}">`;
+                html += `<span class="color-chip" style="background:${esc(c.hex)}"></span>`;
+                html += `<span class="color-name">${esc(c.name)}</span>`;
+                html += `<span class="color-hex">${esc(c.hex)}</span>`;
+                html += `</div>`;
+            }
+            html += `</div></div>`;
+        }
+        detail.innerHTML = html;
+        detail.scrollTop = 0;
+
+        if (highlightName) {
+            const sw = document.getElementById('swatch-' + highlightName);
+            if (sw) sw.scrollIntoView({ block: 'center' });
+        }
+    }
+
     function renderOverview() {
         let html = '';
 
@@ -640,9 +720,11 @@
                 const retType = fn.return_type !== undefined && fn.return_type !== null ? fn.return_type : '';
                 const params = fn.params_typed || fn.params || '';
 
-                html += `<div class="overview-item" onclick="navTo('function','${esc(fn.name)}','${esc(cat.name)}')">`;
+                const depr = deprecatedFns.has(fn.name);
+                html += `<div class="overview-item${depr ? ' ov-deprecated' : ''}" onclick="navTo('function','${esc(fn.name)}','${esc(cat.name)}')">`;
                 if (retType) html += `<span class="ov-ret">${esc(retType)}</span> `;
                 html += `<span class="ov-name">${esc(fn.name)}</span>(<span class="ov-params">${esc(params)}</span>)`;
+                if (depr) html += ` <span class="ov-depr-tag">⚠ ${esc(UI.deprecated)}</span>`;
                 if (fn.desc) html += `<span class="ov-desc">// ${esc(fn.desc)}</span>`;
                 html += `</div>`;
             }
@@ -654,8 +736,10 @@
         html += `<div class="overview-section-title">${esc(UI.groupTypes)}</div>`;
         html += `<div class="overview-grid">`;
         for (const t of TrussCAPI.types) {
-            html += `<div class="overview-item ov-type" onclick="navTo('type','${esc(t.name)}')">`;
+            const depr = !!t.deprecated;
+            html += `<div class="overview-item ov-type${depr ? ' ov-deprecated' : ''}" onclick="navTo('type','${esc(t.name)}')">`;
             html += `<span class="ov-name">${esc(t.name)}</span>`;
+            if (depr) html += ` <span class="ov-depr-tag">⚠ ${esc(UI.deprecated)}</span>`;
             if (t.desc) html += `<span class="ov-desc">${esc(t.desc)}</span>`;
             html += `</div>`;
         }
@@ -698,6 +782,23 @@
         }
         html += `</div></div>`;
 
+        if ((TrussCAPI.colors || []).length) {
+            html += `<div class="overview-section">`;
+            html += `<div class="overview-section-title">${esc(UI.colors)}</div>`;
+            html += `<div class="overview-grid">`;
+            for (const g of TrussCAPI.colors) {
+                html += `<div class="overview-item ov-type" onclick="showColors('${esc(g.group)}')">`;
+                html += `<span class="ov-name">${esc(g.group)}</span>`;
+                html += `<span class="color-preview">`;
+                for (const c of (g.items || []).slice(0, 8)) {
+                    html += `<span class="color-chip" style="background:${esc(c.hex)}" title="${esc(c.name)}"></span>`;
+                }
+                html += `</span>`;
+                html += `</div>`;
+            }
+            html += `</div></div>`;
+        }
+
         detail.innerHTML = html;
     }
 
@@ -722,6 +823,19 @@
         renderOverview();
     }
 
+    function showColors(group) {
+        document.querySelectorAll('.sidebar-item.active').forEach(e => e.classList.remove('active'));
+        renderColorsDetail(group);
+    }
+
+    // Find which color group a color name belongs to (for #color:<name> links).
+    function colorGroupOf(name) {
+        for (const g of TrussCAPI.colors || []) {
+            if ((g.items || []).some(c => c.name === name)) return g.group;
+        }
+        return undefined;
+    }
+
     function toggleGroup(id) {
         document.getElementById(id).classList.toggle('collapsed');
     }
@@ -735,6 +849,7 @@
     window.selectItem = selectItem;
     window.navTo = navTo;
     window.showOverview = showOverview;
+    window.showColors = showColors;
     window.toggleGroup = toggleGroup;
 
     // Tooltip
@@ -767,13 +882,24 @@
         });
     }
 
+    // Reflect the current search into the URL (replaceState — no history spam) so
+    // a filtered view like "#search:deprecated" is shareable/bookmarkable.
+    function syncSearchHash(q) {
+        const h = q.trim() ? '#search:' + encodeURIComponent(q.trim()) : '';
+        history.replaceState(null, '', location.pathname + location.search + h);
+    }
+
     // Search
     if (searchInput) {
-        searchInput.addEventListener('input', () => renderSidebar(searchInput.value));
+        searchInput.addEventListener('input', () => {
+            renderSidebar(searchInput.value);
+            syncSearchHash(searchInput.value);
+        });
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 searchInput.value = '';
                 renderSidebar('');
+                syncSearchHash('');
                 searchInput.blur();
             }
         });
@@ -783,11 +909,23 @@
     renderSidebar('');
     renderOverview();
 
-    // Deep linking: "#function:drawRect", "#type:EasyCam", or "#drawRect" (fn fallback).
+    // Deep linking:
+    //   "#function:drawRect", "#type:EasyCam", "#drawRect" (fn fallback)
+    //   "#search:deprecated"  -> open the page with that search applied
+    //   "#colors"             -> open the palette; "#color:cornflowerBlue" -> at a swatch
     function applyHash() {
         const raw = decodeURIComponent(location.hash.slice(1));
         if (!raw) return;
-        const [a, b] = raw.split(':');
+        if (raw === 'colors') { showColors(); return; }
+        const ci = raw.indexOf(':');
+        const a = ci === -1 ? raw : raw.slice(0, ci);
+        const b = ci === -1 ? '' : raw.slice(ci + 1);
+        if (a === 'search') {
+            if (searchInput) searchInput.value = b;
+            renderSidebar(b);
+            return;
+        }
+        if (a === 'color') { renderColorsDetail(colorGroupOf(b), b); return; }
         if (b) navTo(a, b);
         else navTo('function', a);
     }
