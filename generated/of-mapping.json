@@ -123,14 +123,14 @@
       "mappings": [
         {
           "of": "ofClear / ofBackground",
-          "tc": "clear(gray, [a])",
+          "tc": "clear(gray, a)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
         },
         {
           "of": "ofSetColor",
-          "tc": "setColor(gray, [a])",
+          "tc": "setColor(gray, a)",
           "notes": "Range 0-1 instead of 0-255",
           "notes_ja": "Range 0-1 instead of 0-255",
           "notes_ko": ""
@@ -186,14 +186,14 @@
         },
         {
           "of": "ofDrawSphere",
-          "tc": "drawSphere(radius, [resolution])",
+          "tc": "drawSphere(radius, resolution)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
         },
         {
           "of": "ofDrawCone",
-          "tc": "drawCone(radius, height, [resolution])",
+          "tc": "drawCone(radius, height, resolution)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -221,7 +221,7 @@
         },
         {
           "of": "ofDrawBitmapString",
-          "tc": "drawBitmapString(text, x, y)",
+          "tc": "drawBitmapString(text, x, y, screenFixed)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -257,20 +257,6 @@
         {
           "of": "ofSetLineWidth",
           "tc": "setStrokeWeight(weight)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofPushStyle",
-          "tc": "pushStyle()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofPopStyle",
-          "tc": "popStyle()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -502,7 +488,7 @@
       "mappings": [
         {
           "of": "ofSetupScreenPerspective",
-          "tc": "setupScreenPerspective([fovDeg], [nearDist], [farDist])",
+          "tc": "setupScreenPerspective(fovDeg, nearDist, farDist)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -690,7 +676,7 @@
       "mappings": [
         {
           "of": "ofLog",
-          "tc": "logNotice([module])",
+          "tc": "logNotice(module)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -718,7 +704,7 @@
         },
         {
           "of": "ofSplitString",
-          "tc": "splitString(source, delimiter, [ignoreEmpty], [trim])",
+          "tc": "splitString(source, delimiter, ignoreEmpty, trim)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -732,7 +718,7 @@
         },
         {
           "of": "ofStringReplace",
-          "tc": "stringReplace(input, search, replace)",
+          "tc": "stringReplace(input, searchStr, replaceStr)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -911,20 +897,6 @@
           "notes": "3D integer vector (x, y, z)",
           "notes_ja": "3D整数ベクトル (x, y, z)",
           "notes_ko": "3D 정수 벡터 (x, y, z)"
-        },
-        {
-          "of": "-",
-          "tc": "IVec2",
-          "notes": "2D integer vector (x, y)",
-          "notes_ja": "2D整数ベクトル (x, y)",
-          "notes_ko": ""
-        },
-        {
-          "of": "-",
-          "tc": "IVec3",
-          "notes": "3D integer vector (x, y, z)",
-          "notes_ja": "3D整数ベクトル (x, y, z)",
-          "notes_ko": ""
         },
         {
           "of": "glm::mat4 / ofMatrix4x4",

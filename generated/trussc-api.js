@@ -331,7 +331,6 @@ const TrussCAPI = {
                     "desc_ja": "画面をクリア。引数なし = 透明黒 (0,0,0,0)",
                     "desc_ko": "화면을 지움. 인자 없음 = 투명한 검정 (0,0,0,0)",
                     "related": [
-                        "ChipSoundBundle",
                         "StrokeMesh",
                         "setColor",
                         "setBlendMode"
@@ -339,7 +338,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "clear",
-                    "params": "gray, [a]",
+                    "params": "gray, a",
                     "params_typed": "float gray, float a = 1.0f",
                     "return_type": "void",
                     "desc": "Clear screen. No args = transparent black (0,0,0,0)",
@@ -352,7 +351,6 @@ const TrussCAPI = {
                     "desc_ja": "画面をクリア。引数なし = 透明黒 (0,0,0,0)",
                     "desc_ko": "화면을 지움. 인자 없음 = 투명한 검정 (0,0,0,0)",
                     "related": [
-                        "ChipSoundBundle",
                         "StrokeMesh",
                         "setColor",
                         "setBlendMode"
@@ -360,7 +358,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "clear",
-                    "params": "r, g, b, [a]",
+                    "params": "r, g, b, a",
                     "params_typed": "float r, float g, float b, float a = 1.0f",
                     "return_type": "void",
                     "desc": "Clear screen. No args = transparent black (0,0,0,0)",
@@ -373,7 +371,6 @@ const TrussCAPI = {
                     "desc_ja": "画面をクリア。引数なし = 透明黒 (0,0,0,0)",
                     "desc_ko": "화면을 지움. 인자 없음 = 투명한 검정 (0,0,0,0)",
                     "related": [
-                        "ChipSoundBundle",
                         "StrokeMesh",
                         "setColor",
                         "setBlendMode"
@@ -381,7 +378,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setColor",
-                    "params": "gray, [a]",
+                    "params": "gray, a",
                     "params_typed": "float gray, float a = 1.0f",
                     "return_type": "void",
                     "desc": "Set drawing color (0.0-1.0)",
@@ -416,7 +413,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setColor",
-                    "params": "r, g, b, [a]",
+                    "params": "r, g, b, a",
                     "params_typed": "float r, float g, float b, float a = 1.0f",
                     "return_type": "void",
                     "desc": "Set drawing color (0.0-1.0)",
@@ -486,7 +483,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setColorHSB",
-                    "params": "h, s, b, [a]",
+                    "params": "h, s, b, a",
                     "params_typed": "float h, float s, float b, float a = 1.0f",
                     "return_type": "void",
                     "desc": "Set color from HSB (H: 0-1)",
@@ -521,7 +518,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setColorOKLCH",
-                    "params": "L, C, H, [alpha]",
+                    "params": "L, C, H, alpha",
                     "params_typed": "float L, float C, float H, float alpha = 1.0f",
                     "return_type": "void",
                     "desc": "Set color from OKLCH",
@@ -540,7 +537,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setColorOKLab",
-                    "params": "L, a_lab, b_lab, [alpha]",
+                    "params": "L, a_lab, b_lab, alpha",
                     "params_typed": "float L, float a_lab, float b_lab, float alpha = 1.0f",
                     "return_type": "void",
                     "desc": "Set color from OKLab",
@@ -1459,7 +1456,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawSphere",
-                    "params": "radius, [resolution]",
+                    "params": "radius, resolution",
                     "params_typed": "float radius, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D sphere (respects fill/noFill)",
@@ -1479,7 +1476,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawSphere",
-                    "params": "x, y, z, radius, [resolution]",
+                    "params": "x, y, z, radius, resolution",
                     "params_typed": "float x, float y, float z, float radius, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D sphere (respects fill/noFill)",
@@ -1499,7 +1496,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawSphere",
-                    "params": "pos, radius, [resolution]",
+                    "params": "pos, radius, resolution",
                     "params_typed": "Vec3 pos, float radius, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D sphere (respects fill/noFill)",
@@ -1519,7 +1516,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawCone",
-                    "params": "radius, height, [resolution]",
+                    "params": "radius, height, resolution",
                     "params_typed": "float radius, float height, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
@@ -1537,7 +1534,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawCone",
-                    "params": "x, y, z, radius, height, [resolution]",
+                    "params": "x, y, z, radius, height, resolution",
                     "params_typed": "float x, float y, float z, float radius, float height, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
@@ -1555,7 +1552,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawCone",
-                    "params": "pos, radius, height, [resolution]",
+                    "params": "pos, radius, height, resolution",
                     "params_typed": "Vec3 pos, float radius, float height, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
@@ -2006,7 +2003,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "drawBitmapString",
-                    "params": "text, x, y",
+                    "params": "text, x, y, screenFixed",
                     "params_typed": "const string& text, float x, float y, bool screenFixed = true",
                     "return_type": "void",
                     "desc": "Draw text",
@@ -2074,35 +2071,6 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ビットマップ文字列のバウンディングボックスサイズを取得",
                     "desc_ko": "비트맵 문자열의 바운딩 박스 크기를 얻음"
-                },
-                {
-                    "name": "setTextAlign",
-                    "params": "h, v",
-                    "params_typed": "Direction h, Direction v",
-                    "return_type": "void",
-                    "desc": "Set text alignment",
-                    "keywords": [
-                        "alignment",
-                        "justify",
-                        "center",
-                        "anchor"
-                    ],
-                    "desc_ja": "テキストの配置を設定",
-                    "desc_ko": "텍스트 정렬을 설정",
-                    "related": [
-                        "drawBitmapString",
-                        "getBitmapStringBounds"
-                    ],
-                    "examples": [
-                        {
-                            "name": "fontExample",
-                            "group": "font"
-                        },
-                        {
-                            "name": "bitmapStringExtendedExample",
-                            "group": "font"
-                        }
-                    ]
                 },
                 {
                     "name": "setTextAlign",
@@ -2225,7 +2193,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "bitmapfont::registerGlyph",
-                    "params": "glyph",
+                    "params": "g",
                     "params_typed": "const bitmapfont::Glyph& g",
                     "return_type": "void",
                     "desc": "Register a bitmap glyph for a Unicode codepoint (extends drawBitmapString)",
@@ -2244,8 +2212,8 @@ const TrussCAPI = {
                 },
                 {
                     "name": "bitmapfont::registerGlyphs",
-                    "params": "glyphs[]",
-                    "params_typed": "const bitmapfont::Glyph (&glyphs)[N]",
+                    "params": "glyphs",
+                    "params_typed": "const bitmapfont::Glyph (&glyphs)[N] glyphs[]",
                     "return_type": "void",
                     "desc": "Register a batch of bitmap glyphs at once",
                     "keywords": [
@@ -2262,7 +2230,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "bitmapfont::updateGlyph",
-                    "params": "codepoint, data",
+                    "params": "cp, newData",
                     "params_typed": "uint32_t cp, const uint8_t* newData",
                     "return_type": "void",
                     "desc": "Swap an already-registered glyph's pixel data (atlas cell unchanged). Useful for per-frame animation.",
@@ -2278,7 +2246,7 @@ const TrussCAPI = {
                 {
                     "name": "bitmapfont::compile8x13",
                     "params": "rows",
-                    "params_typed": "const char* const (&rows)[13]",
+                    "params_typed": "const char* const (&rows)[13] rows",
                     "return_type": "std::array<uint8_t, 13>",
                     "desc": "Compile-time ASCII art -> packed halfwidth (8x13) glyph bytes. '#' = lit, '.' = empty.",
                     "keywords": [
@@ -2294,7 +2262,7 @@ const TrussCAPI = {
                 {
                     "name": "bitmapfont::compile16x13",
                     "params": "rows",
-                    "params_typed": "const char* const (&rows)[13]",
+                    "params_typed": "const char* const (&rows)[13] rows",
                     "return_type": "std::array<uint8_t, 26>",
                     "desc": "Compile-time ASCII art -> packed fullwidth (16x13) glyph bytes. '#' = lit, '.' = empty.",
                     "keywords": [
@@ -2719,64 +2687,6 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "pushStyle",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Save current style state (color, stroke, fill)",
-                    "keywords": [
-                        "save",
-                        "state",
-                        "stack",
-                        "ofpushstyle"
-                    ],
-                    "desc_ja": "現在のスタイル状態を保存（色、ストローク、塗りつぶし）",
-                    "desc_ko": "현재 스타일 상태를 저장 (색상, 스트로크, 채우기)",
-                    "related": [
-                        "popStyle",
-                        "pushMatrix"
-                    ],
-                    "examples": [
-                        {
-                            "name": "fontExample",
-                            "group": "font"
-                        },
-                        {
-                            "name": "curvesExample",
-                            "group": "graphics"
-                        }
-                    ]
-                },
-                {
-                    "name": "popStyle",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Restore previous style state",
-                    "keywords": [
-                        "restore",
-                        "state",
-                        "stack",
-                        "ofpopstyle"
-                    ],
-                    "desc_ja": "保存したスタイル状態を復元",
-                    "desc_ko": "이전 스타일 상태를 복원",
-                    "related": [
-                        "pushStyle",
-                        "popMatrix"
-                    ],
-                    "examples": [
-                        {
-                            "name": "fontExample",
-                            "group": "font"
-                        },
-                        {
-                            "name": "curvesExample",
-                            "group": "graphics"
-                        }
-                    ]
-                },
-                {
                     "name": "resetStyle",
                     "params": "",
                     "params_typed": "",
@@ -2968,6 +2878,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "現在のスタイル（色、塗り、ストローク、ブレンド）をスタックにプッシュ",
                     "desc_ko": "현재 스타일(색상, 채우기, 스트로크, 블렌드)을 스택에 푸시",
+                    "related": [
+                        "popStyle",
+                        "pushMatrix"
+                    ],
                     "examples": [
                         {
                             "name": "fontExample",
@@ -2993,6 +2907,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "スタイルをスタックからポップし、前の状態を復元",
                     "desc_ko": "스택에서 스타일을 꺼내서 이전 상태로 복원",
+                    "related": [
+                        "pushStyle",
+                        "popMatrix"
+                    ],
                     "examples": [
                         {
                             "name": "fontExample",
@@ -3003,20 +2921,6 @@ const TrussCAPI = {
                             "group": "graphics"
                         }
                     ]
-                },
-                {
-                    "name": "resetStyle",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Reset all style settings to defaults",
-                    "keywords": [
-                        "default",
-                        "reset",
-                        "clear style"
-                    ],
-                    "desc_ja": "全スタイル設定をデフォルトにリセット",
-                    "desc_ko": "모든 스타일 설정을 기본값으로 초기화"
                 },
                 {
                     "name": "getCurveMode",
@@ -7073,8 +6977,7 @@ const TrussCAPI = {
                     "related": [
                         "cos",
                         "tan",
-                        "atan2",
-                        "fbm"
+                        "atan2"
                     ],
                     "examples": [
                         {
@@ -8736,7 +8639,7 @@ const TrussCAPI = {
             "functions": [
                 {
                     "name": "logNotice",
-                    "params": "[module]",
+                    "params": "module",
                     "params_typed": "const std::string & module = \"\"",
                     "return_type": "LogStream",
                     "desc": "Print to console",
@@ -8801,7 +8704,7 @@ const TrussCAPI = {
                 {
                     "name": "toString",
                     "params": "value",
-                    "params_typed": "value",
+                    "params_typed": "value value",
                     "return_type": "string",
                     "desc": "Convert to string",
                     "keywords": [
@@ -8924,7 +8827,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "splitString",
-                    "params": "source, delimiter, [ignoreEmpty], [trim]",
+                    "params": "source, delimiter, ignoreEmpty, trim",
                     "params_typed": "const std::string & source, const std::string & delimiter, bool ignoreEmpty = false, bool trim = false",
                     "return_type": "std::vector<std::string>",
                     "desc": "Split string by delimiter",
@@ -8977,7 +8880,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "stringReplace",
-                    "params": "input, search, replace",
+                    "params": "input, searchStr, replaceStr",
                     "params_typed": "string& input, const string& searchStr, const string& replaceStr",
                     "return_type": "void",
                     "desc": "Replace substring in place",
@@ -9971,21 +9874,6 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "getAbsolutePath",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "string",
-                    "desc": "Get absolute path",
-                    "keywords": [
-                        "absolute",
-                        "full path",
-                        "resolve",
-                        "canonical"
-                    ],
-                    "desc_ja": "絶対パスを取得",
-                    "desc_ko": "절대 경로를 얻음"
-                },
-                {
                     "name": "fileExists",
                     "params": "path",
                     "params_typed": "const string& path",
@@ -10449,8 +10337,7 @@ const TrussCAPI = {
                     "keywords": [
                         "open",
                         "read",
-                        "file",
-                        "movie"
+                        "file"
                     ],
                     "desc_ja": "サウンドファイルを読み込む。拡張子で自動判別: .wav .mp3 .ogg .flac .aac .m4a",
                     "desc_ko": "사운드 파일을 로드. 확장자로 자동 판별: .wav .mp3 .ogg .flac .aac .m4a"
@@ -10803,7 +10690,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setMixMode",
-                    "params": "mode",
+                    "params": "m",
                     "params_typed": "MixMode m",
                     "return_type": "void",
                     "desc": "Channel routing preset. Auto (default) = mono broadcasts / multi 1:1. DownmixMono = average src to all out ch.",
@@ -11442,8 +11329,7 @@ const TrussCAPI = {
                     "keywords": [
                         "open",
                         "read",
-                        "file",
-                        "movie"
+                        "file"
                     ],
                     "desc_ja": "TTFフォントを読み込む",
                     "desc_ko": "TTF 폰트 파일을 로드"
@@ -11633,7 +11519,7 @@ const TrussCAPI = {
                 {
                     "name": "registerGlyph",
                     "params": "g",
-                    "params_typed": "const bitmapfont::Glyph &",
+                    "params_typed": "const bitmapfont::Glyph & g",
                     "return_type": "void",
                     "desc": "Register one bitmap glyph so drawBitmapString can render its codepoint. Replaces any glyph already registered at the same codepoint and marks the atlas dirty for re-upload",
                     "keywords": [
@@ -11655,7 +11541,7 @@ const TrussCAPI = {
                 {
                     "name": "registerGlyphs",
                     "params": "glyphs",
-                    "params_typed": "const Glyph (&glyphs)[N]",
+                    "params_typed": "const Glyph (&glyphs)[N] glyphs",
                     "return_type": "void",
                     "desc": "Register a fixed-size array of bitmap glyphs in one call (template over the array size)",
                     "keywords": [
@@ -12295,7 +12181,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "set",
-                    "params": "v",
+                    "params": "x_, y_",
                     "params_typed": "float x_, float y_",
                     "return_type": "Vec2&",
                     "desc": "Set vector components (type method)",
@@ -12311,8 +12197,8 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Vec2_fromAngle",
-                    "params": "radians",
-                    "params_typed": "float, float",
+                    "params": "radians, length",
+                    "params_typed": "float radians, float length = 1.0f",
                     "return_type": "Vec2",
                     "desc": "Create Vec2 from angle",
                     "keywords": [
@@ -12489,7 +12375,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "set",
-                    "params": "v",
+                    "params": "x_, y_, z_",
                     "params_typed": "float x_, float y_, float z_",
                     "return_type": "Vec3&",
                     "desc": "Set vector components (type method)",
@@ -12581,7 +12467,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "set",
-                    "params": "r, g, b",
+                    "params": "r_, g_, b_, a_",
                     "params_typed": "float r_, float g_, float b_, float a_ = 1.0f",
                     "return_type": "Color&",
                     "desc": "Set color components (type method)",
@@ -12613,7 +12499,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "set",
-                    "params": "gray",
+                    "params": "gray, a_",
                     "params_typed": "float gray, float a_ = 1.0f",
                     "return_type": "Color&",
                     "desc": "Set color components (type method)",
@@ -12711,8 +12597,8 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Color_fromHSB",
-                    "params": "h, s, b",
-                    "params_typed": "float, float, float, float",
+                    "params": "h, s, b, a",
+                    "params_typed": "float h, float s, float b, float a = 1.0f",
                     "return_type": "Color",
                     "desc": "Create Color from HSB (H: 0-1, S: 0-1, B: 0-1)",
                     "keywords": [
@@ -12753,7 +12639,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorFromHSB",
-                    "params": "h, s, b, [a]",
+                    "params": "h, s, b, a",
                     "params_typed": "float h, float s, float b, float a = 1.0f",
                     "return_type": "Color",
                     "desc": "Create Color from HSB (alias for Color_fromHSB)",
@@ -12805,8 +12691,8 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Color_fromOKLCH",
-                    "params": "L, C, H",
-                    "params_typed": "float, float, float, float",
+                    "params": "L, C, H, a",
+                    "params_typed": "float L, float C, float H, float a = 1.0f",
                     "return_type": "Color",
                     "desc": "Create Color from OKLCH",
                     "keywords": [
@@ -12837,8 +12723,8 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Color_fromOKLab",
-                    "params": "L, a, b",
-                    "params_typed": "float, float, float, float",
+                    "params": "L, a_lab, b_lab, alpha",
+                    "params_typed": "float L, float a_lab, float b_lab, float alpha = 1.0f",
                     "return_type": "Color",
                     "desc": "Create Color from OKLab",
                     "keywords": [
@@ -12961,7 +12847,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "lerp",
-                    "params": "target, t, [shortestPath]",
+                    "params": "target, t, shortestPath",
                     "params_typed": "const ColorHSB & target, float t, bool shortestPath = true",
                     "return_type": "ColorHSB",
                     "desc": "Interpolate in HSB space (shortest hue path)",
@@ -13065,7 +12951,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "lerp",
-                    "params": "target, t, [shortestPath]",
+                    "params": "target, t, shortestPath",
                     "params_typed": "const ColorOKLCH & target, float t, bool shortestPath = true",
                     "return_type": "ColorOKLCH",
                     "desc": "Interpolate in OKLCH space (shortest hue path, perceptually uniform)",
@@ -13175,7 +13061,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "set",
-                    "params": "pos, w, h",
+                    "params": "x_, y_, w_, h_",
                     "params_typed": "float x_, float y_, float w_, float h_",
                     "return_type": "Rect&",
                     "desc": "Set rectangle properties (type method)",
@@ -13212,7 +13098,7 @@ const TrussCAPI = {
                 {
                     "name": "intersects",
                     "params": "other",
-                    "params_typed": "const Rect &",
+                    "params_typed": "const Rect & other",
                     "return_type": "bool",
                     "desc": "Check intersection (type method)",
                     "keywords": [
@@ -13260,8 +13146,8 @@ const TrussCAPI = {
                 },
                 {
                     "name": "addChild",
-                    "params": "child",
-                    "params_typed": "Node::Ptr, bool",
+                    "params": "child, keepGlobalPosition",
+                    "params_typed": "Node::Ptr child, bool keepGlobalPosition = false",
                     "return_type": "void",
                     "desc": "Add a child node (C++ only)",
                     "keywords": [
@@ -13614,7 +13500,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "moveTo",
-                    "params": "x, y, [z]",
+                    "params": "x, y, z",
                     "params_typed": "float x, float y, float z = 0.0f",
                     "return_type": "TweenMod&",
                     "desc": "Animate position to target (TweenMod method) (C++ only)",
@@ -13662,7 +13548,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "moveBy",
-                    "params": "dx, dy, [dz]",
+                    "params": "dx, dy, dz",
                     "params_typed": "float dx, float dy, float dz = 0.0f",
                     "return_type": "TweenMod&",
                     "desc": "Animate position by relative amount (TweenMod method) (C++ only)",
@@ -13917,7 +13803,7 @@ const TrussCAPI = {
             "functions": [
                 {
                     "name": "setupScreenPerspective",
-                    "params": "[fovDeg], [nearDist], [farDist]",
+                    "params": "fovDeg, nearDist, farDist",
                     "params_typed": "float fovDeg = 45.0f, float nearDist = 0.0f, float farDist = 0.0f",
                     "return_type": "void",
                     "desc": "Set up perspective projection (oF-style default 3D)",
@@ -13939,7 +13825,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setupScreenPerspective",
-                    "params": "[fovDeg], [nearDist], [farDist]",
+                    "params": "fovDeg, nearDist, farDist",
                     "params_typed": "float fovDeg = 45.0f, float nearDist = 0.0f, float farDist = 0.0f",
                     "return_type": "void",
                     "desc": "Set up perspective projection (oF-style default 3D)",
@@ -14004,7 +13890,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setupScreenFov",
-                    "params": "fovDeg, [nearDist], [farDist]",
+                    "params": "fovDeg, nearDist, farDist",
                     "params_typed": "float fovDeg, float nearDist = 0.0f, float farDist = 0.0f",
                     "return_type": "void",
                     "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)",
@@ -14111,7 +13997,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "screenToWorld",
-                    "params": "screenPos, [worldZ]",
+                    "params": "screenPos, worldZ",
                     "params_typed": "const Vec2 & screenPos, float worldZ = 0.0f",
                     "return_type": "Vec3",
                     "desc": "Convert screen coordinate to world coordinate on Z plane",
@@ -14695,10 +14581,10 @@ const TrussCAPI = {
                     "return_type": "Vec3",
                     "desc": "Get camera position",
                     "keywords": [
-                        "progress",
-                        "playhead",
-                        "normalized",
-                        "seek"
+                        "position",
+                        "location",
+                        "eye",
+                        "3d"
                     ],
                     "desc_ja": "カメラ位置を取得",
                     "desc_ko": "카메라 위치를 얻음"
@@ -15356,7 +15242,7 @@ const TrussCAPI = {
                 {
                     "name": "Mat4_lookAt",
                     "params": "eye, target, up",
-                    "params_typed": "const Vec3 &, const Vec3 &, const Vec3 &",
+                    "params_typed": "const Vec3 & eye, const Vec3 & target, const Vec3 & up",
                     "return_type": "Mat4",
                     "desc": "Create a view matrix",
                     "keywords": [
@@ -15376,7 +15262,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Mat4_ortho",
-                    "params": "left, right, bottom, top, near, far",
+                    "params": "left, right, bottom, top, nearPlane, farPlane",
                     "params_typed": "float left, float right, float bottom, float top, float nearPlane, float farPlane",
                     "return_type": "Mat4",
                     "desc": "Create an orthographic projection matrix",
@@ -15396,7 +15282,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Mat4_perspective",
-                    "params": "fov, aspect, near, far",
+                    "params": "fovY, aspect, nearPlane, farPlane",
                     "params_typed": "float fovY, float aspect, float nearPlane, float farPlane",
                     "return_type": "Mat4",
                     "desc": "Create a perspective projection matrix",
@@ -15439,7 +15325,7 @@ const TrussCAPI = {
                 {
                     "name": "Quaternion_fromAxisAngle",
                     "params": "axis, radians",
-                    "params_typed": "const Vec3 &, float",
+                    "params_typed": "const Vec3 & axis, float radians",
                     "return_type": "Quaternion",
                     "desc": "Create quaternion from axis-angle",
                     "keywords": [
@@ -15500,7 +15386,7 @@ const TrussCAPI = {
                 {
                     "name": "Quaternion_slerp",
                     "params": "a, b, t",
-                    "params_typed": "const Quaternion &, const Quaternion &, float",
+                    "params_typed": "const Quaternion & a, const Quaternion & b, float t",
                     "return_type": "Quaternion",
                     "desc": "Spherical linear interpolation",
                     "keywords": [
@@ -15889,8 +15775,8 @@ const TrussCAPI = {
                 },
                 {
                     "name": "load",
-                    "params": "path",
-                    "params_typed": "const std::filesystem::path &, bool",
+                    "params": "path, mipmaps",
+                    "params_typed": "const std::filesystem::path & path, bool mipmaps = false",
                     "return_type": "bool",
                     "desc": "Load image from file",
                     "keywords": [
@@ -15904,7 +15790,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "bind",
-                    "params": "slot",
+                    "params": "",
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Bind texture",
@@ -15923,7 +15809,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "unbind",
-                    "params": "slot",
+                    "params": "",
                     "params_typed": "",
                     "return_type": "void",
                     "desc": "Unbind texture",
@@ -16069,8 +15955,8 @@ const TrussCAPI = {
                 },
                 {
                     "name": "allocate",
-                    "params": "w, h",
-                    "params_typed": "int, int, int, TextureFormat, bool",
+                    "params": "w, h, sampleCount, format, mipmaps",
+                    "params_typed": "int w, int h, int sampleCount = 1, TextureFormat format = TextureFormat::RGBA8, bool mipmaps = false",
                     "return_type": "void",
                     "desc": "Allocate buffer",
                     "keywords": [
@@ -16186,7 +16072,7 @@ const TrussCAPI = {
                 {
                     "name": "load",
                     "params": "descFn",
-                    "params_typed": "const sg_shader_desc* (*descFn)(sg_backend)",
+                    "params_typed": "const sg_shader_desc* (*descFn)(sg_backend) descFn",
                     "return_type": "bool",
                     "desc": "Load from sokol-shdc generated function",
                     "keywords": [
@@ -16548,8 +16434,8 @@ const TrussCAPI = {
                 },
                 {
                     "name": "allocate",
-                    "params": "w, h, channels",
-                    "params_typed": "int, int, int, PixelFormat",
+                    "params": "width, height, channels, format",
+                    "params_typed": "int width, int height, int channels = 4, PixelFormat format = PixelFormat::U8",
                     "return_type": "void",
                     "desc": "Allocate memory",
                     "keywords": [
@@ -16633,7 +16519,7 @@ const TrussCAPI = {
                 {
                     "name": "save",
                     "params": "path",
-                    "params_typed": "const std::filesystem::path &",
+                    "params_typed": "const std::filesystem::path & path",
                     "return_type": "bool",
                     "desc": "Save to file",
                     "keywords": [
@@ -16694,7 +16580,7 @@ const TrussCAPI = {
                 {
                     "name": "setMode",
                     "params": "mode",
-                    "params_typed": "PrimitiveMode",
+                    "params_typed": "PrimitiveMode mode",
                     "return_type": "Mesh&",
                     "desc": "Set primitive mode (MESH_TRIANGLES, etc.)",
                     "keywords": [
@@ -16839,7 +16725,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "addIndex",
-                    "params": "index",
+                    "params": "int",
                     "params_typed": "unsigned int",
                     "return_type": "Mesh&",
                     "desc": "Add an index",
@@ -16859,7 +16745,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "addTriangle",
-                    "params": "i1, i2, i3",
+                    "params": "int, int, int",
                     "params_typed": "unsigned int, unsigned int, unsigned int",
                     "return_type": "Mesh&",
                     "desc": "Add a triangle (3 indices)",
@@ -16970,7 +16856,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "lineTo",
-                    "params": "x, y",
+                    "params": "x, y, z",
                     "params_typed": "float x, float y, float z = 0",
                     "return_type": "void",
                     "desc": "Add a line segment to point",
@@ -16991,7 +16877,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "bezierTo",
-                    "params": "cx1, cy1, cx2, cy2, x, y",
+                    "params": "cx1, cy1, cx2, cy2, x, y, resolution",
                     "params_typed": "float cx1, float cy1, float cx2, float cy2, float x, float y, int resolution = -1",
                     "return_type": "void",
                     "desc": "Add a cubic bezier curve",
@@ -17012,7 +16898,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "quadBezierTo",
-                    "params": "cx, cy, x, y",
+                    "params": "cx, cy, x, y, resolution",
                     "params_typed": "float cx, float cy, float x, float y, int resolution = -1",
                     "return_type": "void",
                     "desc": "Add a quadratic bezier curve",
@@ -17031,7 +16917,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "curveTo",
-                    "params": "x, y",
+                    "params": "x, y, z, resolution",
                     "params_typed": "float x, float y, float z = 0, int resolution = -1",
                     "return_type": "void",
                     "desc": "Add a Catmull-Rom curve segment",
@@ -17051,7 +16937,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "arc",
-                    "params": "x, y, rX, rY, start, end",
+                    "params": "x, y, radiusX, radiusY, angleBegin, angleEnd, circleResolution",
                     "params_typed": "float x, float y, float radiusX, float radiusY, float angleBegin, float angleEnd, int circleResolution = 20",
                     "return_type": "void",
                     "desc": "Add an arc",
@@ -17144,7 +17030,7 @@ const TrussCAPI = {
                 {
                     "name": "setCapType",
                     "params": "type",
-                    "params_typed": "StrokeMesh::CapType",
+                    "params_typed": "StrokeMesh::CapType type",
                     "return_type": "StrokeMesh&",
                     "desc": "Set cap type: Butt, Round, Square (method chaining)",
                     "keywords": [
@@ -17165,7 +17051,7 @@ const TrussCAPI = {
                 {
                     "name": "setJoinType",
                     "params": "type",
-                    "params_typed": "StrokeMesh::JoinType",
+                    "params_typed": "StrokeMesh::JoinType type",
                     "return_type": "StrokeMesh&",
                     "desc": "Set join type: Miter, Round, Bevel (method chaining)",
                     "keywords": [
@@ -17206,7 +17092,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "addVertex",
-                    "params": "x, y",
+                    "params": "x, y, z",
                     "params_typed": "float x, float y, float z = 0",
                     "return_type": "StrokeMesh&",
                     "desc": "Add a vertex (method chaining)",
@@ -17222,7 +17108,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "addVertex",
-                    "params": "x, y, z",
+                    "params": "p",
                     "params_typed": "const Vec3& p",
                     "return_type": "StrokeMesh&",
                     "desc": "Add a vertex (method chaining)",
@@ -17238,7 +17124,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "addVertex",
-                    "params": "v",
+                    "params": "x, y, z",
                     "params_typed": "float x, float y, float z = 0",
                     "return_type": "StrokeMesh&",
                     "desc": "Add a vertex (method chaining)",
@@ -17254,7 +17140,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "addVertex",
-                    "params": "v",
+                    "params": "p",
                     "params_typed": "const Vec3& p",
                     "return_type": "StrokeMesh&",
                     "desc": "Add a vertex (method chaining)",
@@ -17291,7 +17177,7 @@ const TrussCAPI = {
                 {
                     "name": "setShape",
                     "params": "path",
-                    "params_typed": "const Path &",
+                    "params_typed": "const Path & path",
                     "return_type": "StrokeMesh&",
                     "desc": "Set shape from Path (method chaining)",
                     "keywords": [
@@ -18075,7 +17961,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "extractFrame",
-                    "params": "path, outPixels, [timeSec], [outDuration]",
+                    "params": "path, outPixels, timeSec, outDuration",
                     "params_typed": "const std::string & path, Pixels & outPixels, float timeSec = 1.0f, float * outDuration = nullptr",
                     "return_type": "bool",
                     "desc": "Extract a single frame from a video file without loading the full video. Useful for thumbnails",
@@ -20451,112 +20337,6 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "IVec2",
-            "desc": "2D integer vector (x, y)",
-            "keywords": [
-                "integer vector",
-                "int point",
-                "pixel coord",
-                "grid",
-                "2d int"
-            ],
-            "desc_ja": "2D整数ベクトル (x, y)",
-            "desc_ko": "",
-            "related": [
-                "Vec2",
-                "IVec3"
-            ],
-            "constructor": {
-                "signatures": [
-                    "",
-                    "int x, int y",
-                    "int v"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "x",
-                    "type": "int",
-                    "desc": "X component"
-                },
-                {
-                    "name": "y",
-                    "type": "int",
-                    "desc": "Y component"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "toVec2",
-                    "return": "Vec2",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to Vec2 (float)"
-                }
-            ]
-        },
-        {
-            "name": "IVec3",
-            "desc": "3D integer vector (x, y, z)",
-            "keywords": [
-                "integer vector",
-                "int point",
-                "voxel",
-                "grid",
-                "3d int"
-            ],
-            "desc_ja": "3D整数ベクトル (x, y, z)",
-            "desc_ko": "",
-            "related": [
-                "Vec3",
-                "IVec2"
-            ],
-            "constructor": {
-                "signatures": [
-                    "",
-                    "int x, int y, int z",
-                    "int v",
-                    "IVec2 v, int z"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "x",
-                    "type": "int",
-                    "desc": "X component"
-                },
-                {
-                    "name": "y",
-                    "type": "int",
-                    "desc": "Y component"
-                },
-                {
-                    "name": "z",
-                    "type": "int",
-                    "desc": "Z component"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "toVec3",
-                    "return": "Vec3",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to Vec3 (float)"
-                },
-                {
-                    "name": "xy",
-                    "return": "IVec2",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get XY components as IVec2"
-                }
-            ]
-        },
-        {
             "name": "Color",
             "desc": "RGBA color (0.0-1.0 range)",
             "keywords": [
@@ -21278,7 +21058,7 @@ const TrussCAPI = {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "const std::filesystem::path &"
+                        "const std::filesystem::path & path"
                     ],
                     "desc": "Load image from file"
                 },
@@ -21286,7 +21066,7 @@ const TrussCAPI = {
                     "name": "save",
                     "return": "bool",
                     "signatures": [
-                        "const std::filesystem::path &"
+                        "const std::filesystem::path & path"
                     ],
                     "desc": "Save image to file"
                 },
@@ -21408,8 +21188,8 @@ const TrussCAPI = {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "const std::filesystem::path &, bool",
-                        "const std::filesystem::path &, bool"
+                        "const std::filesystem::path & path, bool mipmaps = false",
+                        "const std::filesystem::path & path, bool mipmaps = false"
                     ],
                     "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface)."
                 },
@@ -21426,7 +21206,7 @@ const TrussCAPI = {
                     "name": "save",
                     "return": "bool",
                     "signatures": [
-                        "const std::filesystem::path &"
+                        "const std::filesystem::path & path"
                     ],
                     "desc": "Save image to file"
                 },
@@ -21951,7 +21731,7 @@ const TrussCAPI = {
                     "name": "save",
                     "return": "bool",
                     "signatures": [
-                        "const std::filesystem::path &"
+                        "const std::filesystem::path & path"
                     ],
                     "desc": "Save FBO contents to file"
                 },
@@ -26123,6 +25903,11 @@ const TrussCAPI = {
                     "name": "audioOut",
                     "type": "Event<AudioOutBuffer>",
                     "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
+                },
+                {
+                    "name": "audioIn",
+                    "type": "Event<AudioInBuffer>",
+                    "desc": "Real-time capture callback event (microphone input). listen() to add an input-processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
                 },
                 {
                     "name": "audioDeviceChanged",
