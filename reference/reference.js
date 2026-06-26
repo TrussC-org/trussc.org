@@ -343,23 +343,19 @@
             html += `</div></div>`;
         }
 
-        // Group: Colors (palette). With no query the group lists the 13 color
-        // sub-groups (compact); a query filters to matching individual colors,
-        // each shown with its swatch chip. Collapsed by default to stay tidy.
+        // Group: Colors (palette). The sidebar only ever drills down to the color
+        // sub-groups (categories) — never individual colors. A query narrows the
+        // list to groups that contain a matching color. Collapsed by default.
         const colorItems = items.filter(i => i.kind === 'color' && (!query || matchItem(i, query)));
         if (colorItems.length > 0) {
+            const matchedGroups = query ? new Set(colorItems.map(i => i.data.group)) : null;
             html += `<div class="sidebar-group collapsed" id="group-colors">`;
             html += `<div class="sidebar-group-title" onclick="toggleGroup('group-colors')">`;
             html += `${esc(UI.colors)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
             html += `<div class="sidebar-group-items">`;
-            if (query) {
-                for (const item of colorItems) {
-                    html += `<div class="sidebar-item" data-kind="color" data-name="${esc(item.name)}" data-group="${esc(item.data.group)}" onclick="selectItem(this)"><span class="color-chip" style="background:${esc(item.data.hex)}"></span>${esc(item.name)}</div>`;
-                }
-            } else {
-                for (const g of TrussCAPI.colors || []) {
-                    html += `<div class="sidebar-item" data-kind="colorgroup" data-name="${esc(g.group)}" onclick="selectItem(this)">${esc(g.group)}<span class="item-kind">${g.items.length}</span></div>`;
-                }
+            for (const g of TrussCAPI.colors || []) {
+                if (matchedGroups && !matchedGroups.has(g.group)) continue;
+                html += `<div class="sidebar-item" data-kind="colorgroup" data-name="${esc(g.group)}" onclick="selectItem(this)">${esc(g.group)}<span class="item-kind">${g.items.length}</span></div>`;
             }
             html += `</div></div>`;
         }
@@ -666,10 +662,11 @@
         return 'colorgrp-' + String(group).replace(/[^A-Za-z0-9]+/g, '-');
     }
 
-    // Render the whole palette as collapsible group sections of swatch cells.
-    // `expandGroup` (optional) opens that one group; the rest stay collapsed.
-    // `highlightName` (optional) rings a swatch and scrolls it into view.
-    function renderColorsDetail(expandGroup, highlightName) {
+    // Render the whole palette as group sections of swatch cells. All groups are
+    // expanded by default (each is still collapsible via its header). `scrollGroup`
+    // (optional) scrolls that group's header into view; `highlightName` (optional)
+    // rings a swatch and scrolls it into view instead.
+    function renderColorsDetail(scrollGroup, highlightName) {
         const groups = TrussCAPI.colors || [];
         if (!groups.length) return;
 
@@ -679,8 +676,7 @@
 
         for (const g of groups) {
             const gid = colorGroupId(g.group);
-            const open = expandGroup && g.group === expandGroup;
-            html += `<div class="color-group${open ? '' : ' collapsed'}" id="${gid}">`;
+            html += `<div class="color-group" id="${gid}">`;
             html += `<div class="color-group-title" onclick="toggleGroup('${gid}')">${esc(g.group)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg><span class="color-group-count">${(g.items || []).length}</span></div>`;
             html += `<div class="color-grid">`;
             for (const c of g.items || []) {
@@ -700,6 +696,9 @@
         if (highlightName) {
             const sw = document.getElementById('swatch-' + highlightName);
             if (sw) sw.scrollIntoView({ block: 'center' });
+        } else if (scrollGroup) {
+            const gh = document.getElementById(colorGroupId(scrollGroup));
+            if (gh) gh.scrollIntoView({ block: 'start' });
         }
     }
 
