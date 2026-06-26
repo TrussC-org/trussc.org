@@ -3534,11 +3534,11 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "getCurrentMatrix",
+                    "name": "getMatrix",
                     "params": "",
                     "params_typed": "",
                     "return_type": "Mat4",
-                    "desc": "Get current transformation matrix",
+                    "desc": "Get the current transformation matrix",
                     "keywords": [
                         "transform",
                         "matrix",
@@ -3549,7 +3549,27 @@ const TrussCAPI = {
                     "desc_ko": "현재 변환 행렬을 얻음",
                     "related": [
                         "Mat4",
+                        "setMatrix",
                         "worldToScreen"
+                    ]
+                },
+                {
+                    "name": "getScale",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Effective uniform scale of the current matrix (max of x/y basis lengths)",
+                    "keywords": [
+                        "transform",
+                        "scale",
+                        "matrix",
+                        "zoom"
+                    ],
+                    "desc_ja": "現在の行列の実効スケール（x/y基底長の最大）",
+                    "desc_ko": "현재 행렬의 유효 스케일 (x/y 기저 길이의 최댓값)",
+                    "related": [
+                        "getMatrix",
+                        "scale"
                     ]
                 },
                 {
@@ -3570,23 +3590,113 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "multMatrix",
+                    "params": "mat",
+                    "params_typed": "const Mat4& mat",
+                    "return_type": "void",
+                    "desc": "Multiply the current matrix by mat (relative transform, like translate/rotate)",
+                    "keywords": [
+                        "transform",
+                        "matrix",
+                        "multiply",
+                        "apply",
+                        "modelview"
+                    ],
+                    "desc_ja": "現在の行列に mat を掛ける（translate/rotate のような相対変換）",
+                    "desc_ko": "현재 행렬에 mat를 곱함 (translate/rotate 같은 상대 변환)",
+                    "related": [
+                        "Mat4",
+                        "setMatrix",
+                        "translate"
+                    ]
+                },
+                {
                     "name": "setMatrix",
                     "params": "mat",
                     "params_typed": "const Mat4& mat",
                     "return_type": "void",
-                    "desc": "Set transformation matrix directly",
+                    "desc": "Replace the current matrix with mat (absolute - use with caution, may break camera setup)",
                     "keywords": [
                         "transform",
                         "matrix",
                         "modelview",
+                        "replace",
                         "load"
                     ],
-                    "desc_ja": "変換行列を直接設定",
-                    "desc_ko": "변환 행렬을 직접 설정",
+                    "desc_ja": "現在の行列を mat で置き換える（絶対・カメラ設定を壊す可能性があるので注意）",
+                    "desc_ko": "현재 행렬을 mat로 대체 (절대 - 카메라 설정을 깨뜨릴 수 있으므로 주의)",
                     "related": [
                         "Mat4",
+                        "multMatrix",
                         "resetMatrix"
                     ]
+                },
+                {
+                    "name": "getCurrentMatrix",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Mat4",
+                    "desc": "Deprecated alias for getMatrix()",
+                    "keywords": [
+                        "transform",
+                        "matrix",
+                        "modelview",
+                        "current",
+                        "deprecated"
+                    ],
+                    "desc_ja": "getMatrix() の非推奨エイリアス",
+                    "desc_ko": "getMatrix()의 deprecated 별칭",
+                    "related": [
+                        "getMatrix"
+                    ],
+                    "deprecated": {
+                        "reason": "Renamed to getMatrix(). Will be removed in v1.0.0.",
+                        "replacement": "getMatrix"
+                    }
+                },
+                {
+                    "name": "loadMatrix",
+                    "params": "mat",
+                    "params_typed": "const Mat4& mat",
+                    "return_type": "void",
+                    "desc": "Deprecated alias for setMatrix()",
+                    "keywords": [
+                        "transform",
+                        "matrix",
+                        "load",
+                        "replace",
+                        "deprecated"
+                    ],
+                    "desc_ja": "setMatrix() の非推奨エイリアス",
+                    "desc_ko": "setMatrix()의 deprecated 별칭",
+                    "related": [
+                        "setMatrix"
+                    ],
+                    "deprecated": {
+                        "reason": "Renamed to setMatrix() (it replaces the current matrix). Will be removed in v1.0.0.",
+                        "replacement": "setMatrix"
+                    }
+                },
+                {
+                    "name": "getCurrentScale",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Deprecated alias for getScale()",
+                    "keywords": [
+                        "transform",
+                        "scale",
+                        "deprecated"
+                    ],
+                    "desc_ja": "getScale() の非推奨エイリアス",
+                    "desc_ko": "getScale()의 deprecated 별칭",
+                    "related": [
+                        "getScale"
+                    ],
+                    "deprecated": {
+                        "reason": "Renamed to getScale(). Will be removed in v1.0.0.",
+                        "replacement": "getScale"
+                    }
                 }
             ],
             "name_ja": "変換",

@@ -52,6 +52,8 @@
         methods: 'Methods',
         staticMethods: 'Static Methods',
         operators: 'Operators',
+        deprecated: 'Deprecated',
+        deprecatedUse: 'Use',
         category: 'Category',
         related: 'Related',
         examples: 'Examples',
@@ -273,6 +275,20 @@
             html += `</div></div>`;
         }
 
+        // Group: Deprecated (cross-cutting — any symbol carrying a `deprecated` marker)
+        const deprItems = items.filter(i => i.data && i.data.deprecated && (!query || matchItem(i, query)));
+        if (deprItems.length > 0) {
+            html += `<div class="sidebar-group" id="group-deprecated">`;
+            html += `<div class="sidebar-group-title" onclick="toggleGroup('group-deprecated')">`;
+            html += `${esc(UI.deprecated)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>`;
+            html += `<div class="sidebar-group-items">`;
+            for (const item of deprItems) {
+                const suffix = item.kind === 'function' ? '()' : '';
+                html += `<div class="sidebar-item" data-kind="${item.kind}" data-name="${esc(item.name)}" data-cat="${esc(item.category)}" onclick="selectItem(this)" style="text-decoration:line-through;opacity:0.65;">${esc(item.name)}${suffix}</div>`;
+            }
+            html += `</div></div>`;
+        }
+
         // Group: Enums
         const enumItems = items.filter(i => i.kind === 'enum' && (!query || matchItem(i, query)));
         if (enumItems.length > 0) {
@@ -393,6 +409,21 @@
         return h;
     }
 
+    // Deprecation banner: reason + optional clickable replacement + optional url.
+    // `dep` is {reason, replacement?, url?} (or a bare string reason).
+    function renderDeprecated(dep) {
+        if (!dep) return '';
+        const reason = typeof dep === 'string' ? dep : (dep.reason || '');
+        let body = esc(reason);
+        if (dep.replacement) {
+            body += ` ${esc(UI.deprecatedUse)} <a href="#" onclick="navTo('${kindOf(dep.replacement)}','${esc(dep.replacement)}');return false;" style="color:#4ec9b0;text-decoration:none;">${esc(dep.replacement)}</a>`;
+        }
+        if (dep.url) {
+            body += ` <a href="${esc(dep.url)}" target="_blank" rel="noopener" style="color:#4ec9b0;">↗</a>`;
+        }
+        return `<div style="margin:10px 0;padding:8px 12px;border-left:3px solid #d7a657;background:rgba(215,166,87,0.12);color:#d7a657;font-size:13px;border-radius:0 4px 4px 0;">⚠ <b>${esc(UI.deprecated)}</b> — ${body}</div>`;
+    }
+
     // Operators: each carries a human-readable `signature` ("Vec2 + Vec2 → Vec2"),
     // the exact C++ `cpp` decl ("Vec2 operator+(const Vec2&) const"), and a desc.
     function renderOperators(list) {
@@ -424,6 +455,7 @@
         let html = backButton();
         html += `<div class="detail-title">${esc(name)}</div>`;
         html += `<div class="detail-desc">${esc(first.desc || '')}</div>`;
+        html += renderDeprecated((overloads.find(o => o.deprecated) || {}).deprecated);
 
         // Optional long-form details (multi-line), shown only here in the detail pane.
         const details = (overloads.find(o => o.details) || {}).details;
@@ -512,6 +544,7 @@
                     }
                 }
                 if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
+                if (m.deprecated) html += renderDeprecated(m.deprecated);
                 html += renderPlatforms(m, true);
                 html += `</div>`;
             }

@@ -897,11 +897,18 @@
                     "desc": "Restore transform state"
                 },
                 {
-                    "name": "getCurrentMatrix",
+                    "name": "getMatrix",
                     "params": "",
                     "params_typed": "",
                     "return_type": "Mat4",
-                    "desc": "Get current transformation matrix"
+                    "desc": "Get the current transformation matrix"
+                },
+                {
+                    "name": "getScale",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Effective uniform scale of the current matrix (max of x/y basis lengths)"
                 },
                 {
                     "name": "resetMatrix",
@@ -911,11 +918,18 @@
                     "desc": "Reset transformation matrix to identity"
                 },
                 {
+                    "name": "multMatrix",
+                    "params": "mat",
+                    "params_typed": "const Mat4& mat",
+                    "return_type": "void",
+                    "desc": "Multiply the current matrix by mat (relative transform, like translate/rotate)"
+                },
+                {
                     "name": "setMatrix",
                     "params": "mat",
                     "params_typed": "const Mat4& mat",
                     "return_type": "void",
-                    "desc": "Set transformation matrix directly"
+                    "desc": "Replace the current matrix with mat (absolute - use with caution, may break camera setup)"
                 }
             ]
         },
