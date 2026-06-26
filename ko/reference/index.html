@@ -20,21 +20,24 @@
             line-height: 1.6;
             height: 100vh;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Shared site nav is provided by /style.css. Reference-only additions: a
-           version subtitle beside the wordmark, and a current-page marker. */
+        /* Shared site nav is provided by /style.css. In the reference app it sits
+           in normal flow (not fixed) as the first flex child of <body>, and the
+           workspace below fills the rest — no magic-number height offset. */
+        .nav { position: static; }
         .nav-brand { display: flex; align-items: baseline; gap: var(--space-sm); }
         .ref-subtitle { color: var(--color-text-muted); font-size: 0.8rem; white-space: nowrap; }
         .ref-subtitle a { color: var(--color-accent); }
         .nav-links a.active { color: var(--color-text); }
 
-        /* Main layout. The shared nav is position:fixed (~53px tall incl. border),
-           so the app workspace sits below it. */
+        /* Main layout: fill the viewport below the nav; children scroll internally. */
         .main {
             display: flex;
-            height: calc(100vh - 53px);
-            margin-top: 53px;
+            flex: 1;
+            min-height: 0;
         }
 
         /* Sidebar */

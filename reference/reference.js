@@ -364,20 +364,12 @@
     }
 
     function selectItem(el) {
-        document.querySelectorAll('.sidebar-item.active').forEach(e => e.classList.remove('active'));
-        el.classList.add('active');
-
         const kind = el.dataset.kind;
         const name = el.dataset.name;
         const cat = el.dataset.cat || '';
-
-        if (kind === 'function') renderFunctionDetail(name, cat);
-        else if (kind === 'type') renderTypeDetail(name);
-        else if (kind === 'enum') renderEnumDetail(name);
-        else if (kind === 'macro') renderMacroDetail(name);
-        else if (kind === 'constant') renderConstantDetail(name);
-        else if (kind === 'color') renderColorsDetail(el.dataset.group, name);
-        else if (kind === 'colorgroup') renderColorsDetail(name);
+        if (kind === 'color') openColor(el.dataset.group, name);
+        else if (kind === 'colorgroup') showColors(name);
+        else navTo(kind, name, cat);
     }
 
     // "drawRectSquircleExample" -> "Draw Rect Squircle"
@@ -801,16 +793,42 @@
         detail.innerHTML = html;
     }
 
-    function navTo(kind, name, cat) {
+    // --- URL state -------------------------------------------------------
+    // Search lives in the query string (?q=...); the open item lives in the hash
+    // (#function:drawRect, #type:Color, #colors, #color:cornflowerBlue). The two
+    // coexist (e.g. /reference/?q=draw#function:drawRect) and update independently.
+    // replaceState keeps the address bar shareable without spamming history.
+    // The #kind:name hash is a contract the examples source-viewer links into
+    // (examples/code-reference.js) — keep it stable.
+    function setUrl(opts) {
+        const params = new URLSearchParams(location.search);
+        if (opts.q !== undefined) {
+            const q = opts.q.trim();
+            if (q) params.set('q', q); else params.delete('q');
+        }
+        const qs = params.toString();
+        const frag = opts.frag !== undefined ? opts.frag : location.hash.slice(1);
+        history.replaceState(null, '',
+            location.pathname + (qs ? '?' + qs : '') + (frag ? '#' + frag : ''));
+    }
+
+    // Render an item's detail pane and mark its sidebar entry active. Pure — does
+    // NOT touch the URL (used when applying state read FROM the URL).
+    function renderDetail(kind, name, cat) {
         document.querySelectorAll('.sidebar-item.active').forEach(e => e.classList.remove('active'));
         const el = document.querySelector(`.sidebar-item[data-kind="${kind}"][data-name="${name}"]`);
         if (el) el.classList.add('active');
-
         if (kind === 'function') renderFunctionDetail(name, cat);
         else if (kind === 'type') renderTypeDetail(name);
         else if (kind === 'enum') renderEnumDetail(name);
         else if (kind === 'macro') renderMacroDetail(name);
         else if (kind === 'constant') renderConstantDetail(name);
+    }
+
+    // Navigate to an item (user action): render it AND reflect it in the URL hash.
+    function navTo(kind, name, cat) {
+        renderDetail(kind, name, cat);
+        setUrl({ frag: kind + ':' + name });
     }
 
     function backButton() {
@@ -820,11 +838,20 @@
     function showOverview() {
         document.querySelectorAll('.sidebar-item.active').forEach(e => e.classList.remove('active'));
         renderOverview();
+        setUrl({ frag: '' });
     }
 
     function showColors(group) {
         document.querySelectorAll('.sidebar-item.active').forEach(e => e.classList.remove('active'));
         renderColorsDetail(group);
+        setUrl({ frag: group ? 'colors:' + group : 'colors' });
+    }
+
+    // Open the palette at a specific swatch (from a color search result).
+    function openColor(group, name) {
+        document.querySelectorAll('.sidebar-item.active').forEach(e => e.classList.remove('active'));
+        renderColorsDetail(group, name);
+        setUrl({ frag: 'color:' + name });
     }
 
     // Find which color group a color name belongs to (for #color:<name> links).
@@ -881,53 +908,59 @@
         });
     }
 
-    // Reflect the current search into the URL (replaceState — no history spam) so
-    // a filtered view like "#search:deprecated" is shareable/bookmarkable.
-    function syncSearchHash(q) {
-        const h = q.trim() ? '#search:' + encodeURIComponent(q.trim()) : '';
-        history.replaceState(null, '', location.pathname + location.search + h);
-    }
-
-    // Search
+    // Search → query string (?q=...), preserving the open item in the hash.
     if (searchInput) {
         searchInput.addEventListener('input', () => {
             renderSidebar(searchInput.value);
-            syncSearchHash(searchInput.value);
+            setUrl({ q: searchInput.value });
         });
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 searchInput.value = '';
                 renderSidebar('');
-                syncSearchHash('');
+                setUrl({ q: '' });
                 searchInput.blur();
             }
         });
     }
 
-    // Initial render
-    renderSidebar('');
-    renderOverview();
+    // Apply state FROM the URL: ?q= drives the sidebar filter, the #hash opens an
+    // item. Both are optional and independent, e.g. "?q=draw#function:drawRect".
+    //   #function:drawRect #type:Color #enum:… #macro:… #constant:…
+    //   #colors  #colors:Blues  #color:cornflowerBlue        (palette)
+    //   #drawRect                                             (bare → function)
+    //   #search:foo                                           (legacy → ?q=foo)
+    function applyState() {
+        const params = new URLSearchParams(location.search);
+        let q = params.get('q') || '';
 
-    // Deep linking:
-    //   "#function:drawRect", "#type:EasyCam", "#drawRect" (fn fallback)
-    //   "#search:deprecated"  -> open the page with that search applied
-    //   "#colors"             -> open the palette; "#color:cornflowerBlue" -> at a swatch
-    function applyHash() {
         const raw = decodeURIComponent(location.hash.slice(1));
-        if (!raw) return;
-        if (raw === 'colors') { showColors(); return; }
         const ci = raw.indexOf(':');
         const a = ci === -1 ? raw : raw.slice(0, ci);
         const b = ci === -1 ? '' : raw.slice(ci + 1);
+
+        // Legacy "#search:foo" — fold into ?q= and normalize the URL.
         if (a === 'search') {
-            if (searchInput) searchInput.value = b;
-            renderSidebar(b);
+            q = b;
+            if (searchInput) searchInput.value = q;
+            renderSidebar(q);
+            renderOverview();
+            setUrl({ q: q, frag: '' });
             return;
         }
+
+        if (searchInput) searchInput.value = q;
+        renderSidebar(q);
+
+        if (!raw) { renderOverview(); return; }
+        if (a === 'colors') { renderColorsDetail(b || undefined); return; }
         if (a === 'color') { renderColorsDetail(colorGroupOf(b), b); return; }
-        if (b) navTo(a, b);
-        else navTo('function', a);
+        if (b) renderDetail(a, b);
+        else renderDetail('function', a);
     }
-    window.addEventListener('hashchange', applyHash);
-    applyHash();
+    // replaceState (used by our writes) never fires these, so no feedback loop —
+    // they fire only for real navigation (manual URL edit, back/forward, deep link).
+    window.addEventListener('hashchange', applyState);
+    window.addEventListener('popstate', applyState);
+    applyState();
 })();
