@@ -161,17 +161,23 @@
   // it's a convenience, fine to lose.
   var STORE_KEY = 'trussc-chat-v2';
   var TTL_MS = 24 * 60 * 60 * 1000;
-  function loadConvo() {
+  function newId() {
+    return (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+      : 'c-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+  }
+  function loadStore() {
     try {
       var o = JSON.parse(localStorage.getItem(STORE_KEY));
-      if (!o || !Array.isArray(o.c) || (Date.now() - o.ts) > TTL_MS) { localStorage.removeItem(STORE_KEY); return []; }
-      return o.c;
-    } catch (e) { return []; }
+      if (!o || !Array.isArray(o.c) || (Date.now() - o.ts) > TTL_MS) { localStorage.removeItem(STORE_KEY); return null; }
+      return o;
+    } catch (e) { return null; }
   }
   function saveConvo() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ts: Date.now(), c: convo.slice(-40) })); } catch (e) {}
+    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ts: Date.now(), id: convId, c: convo.slice(-40) })); } catch (e) {}
   }
-  var convo = loadConvo();   // conversation history sent back each turn for follow-up chains
+  var _store = loadStore();
+  var convo = _store ? _store.c : [];     // history sent back each turn for follow-up chains
+  var convId = (_store && _store.id) || newId();   // stable per conversation → groups stat rows into threads
 
   // Health gate: only reveal on F1 if the server answers.
   fetch(API + '/health').then(function (r) { return r.json(); })
@@ -198,6 +204,7 @@
   function closePanel() { panel.classList.remove('open'); if (online) bubble.classList.add('show'); }
   function clearConvo() {
     convo = [];
+    convId = newId();   // a fresh thread
     try { localStorage.removeItem(STORE_KEY); } catch (e) {}
     msgs.innerHTML = '';
     var b = addBot(GREETING); var bl = b.el.querySelector('.cw-blink'); if (bl) bl.classList.remove('cw-blink');
@@ -255,7 +262,7 @@
     try {
       var r = await fetch(API + '/chat', {
         method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ question: q, history: convo }),
+        body: JSON.stringify({ question: q, history: convo, convId: convId }),
       });
       var reader = r.body.getReader(); var dec = new TextDecoder(); var buf = '';
       for (;;) {
