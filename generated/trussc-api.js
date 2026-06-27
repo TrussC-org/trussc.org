@@ -355,7 +355,13 @@ const TrussCAPI = {
                         "8x13"
                     ],
                     "desc_ja": "ASCII アートをコンパイル時に半角 (8x13) パックバイトに変換。'#' = 描画、'.' = 透明",
-                    "desc_ko": "ASCII 아트를 컴파일 타임에 반각 (8x13) 패킹된 바이트로 변환. '#' = 채움, '.' = 빈 칸"
+                    "desc_ko": "ASCII 아트를 컴파일 타임에 반각 (8x13) 패킹된 바이트로 변환. '#' = 채움, '.' = 빈 칸",
+                    "examples": [
+                        {
+                            "name": "bitmapStringExtendedExample",
+                            "group": "font"
+                        }
+                    ]
                 },
                 {
                     "name": "compile16x13",
@@ -371,7 +377,13 @@ const TrussCAPI = {
                         "16x13"
                     ],
                     "desc_ja": "ASCII アートをコンパイル時に全角 (16x13) パックバイトに変換。'#' = 描画、'.' = 透明",
-                    "desc_ko": "ASCII 아트를 컴파일 타임에 전각 (16x13) 패킹된 바이트로 변환. '#' = 채움, '.' = 빈 칸"
+                    "desc_ko": "ASCII 아트를 컴파일 타임에 전각 (16x13) 패킹된 바이트로 변환. '#' = 채움, '.' = 빈 칸",
+                    "examples": [
+                        {
+                            "name": "bitmapStringExtendedExample",
+                            "group": "font"
+                        }
+                    ]
                 },
                 {
                     "name": "registerGlyph",
@@ -457,8 +469,7 @@ const TrussCAPI = {
                         "drawRectSquircle",
                         "Rect"
                     ],
-                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.\n",
-                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n",
+                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.",
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -486,8 +497,7 @@ const TrussCAPI = {
                         "drawRectSquircle",
                         "Rect"
                     ],
-                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.\n",
-                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n",
+                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.",
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -510,15 +520,12 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "矩形を描画",
                     "desc_ko": "사각형 그리기",
-                    "sigDesc": "Size given as a Vec2 (width, height).",
-                    "sigDesc_ja": "サイズを Vec2（幅・高さ）で指定。",
                     "related": [
                         "drawRectRounded",
                         "drawRectSquircle",
                         "Rect"
                     ],
-                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.\n",
-                    "details_ja": "左上を原点に軸並行の矩形を描画する。\n現在の fill / noFill モードと描画色に従う。\nVec3 で位置を渡すと 3D モードで z が使われる。\n角を丸くしたい場合は drawRectRounded, drawRectSquircle を参照。\n",
+                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.",
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -1546,6 +1553,10 @@ const TrussCAPI = {
                         {
                             "name": "fontTategakiExample",
                             "group": "font"
+                        },
+                        {
+                            "name": "fontWrapExample",
+                            "group": "font"
                         }
                     ]
                 },
@@ -1748,12 +1759,12 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
-                        },
-                        {
                             "name": "grabExample",
                             "group": "node"
+                        },
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
                         }
                     ]
                 },
@@ -1781,12 +1792,12 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
-                        },
-                        {
                             "name": "grabExample",
                             "group": "node"
+                        },
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
                         }
                     ]
                 },
@@ -1814,12 +1825,12 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
-                        },
-                        {
                             "name": "grabExample",
                             "group": "node"
+                        },
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
                         }
                     ]
                 },
@@ -1847,12 +1858,12 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
-                        },
-                        {
                             "name": "grabExample",
                             "group": "node"
+                        },
+                        {
+                            "name": "graphicsExample",
+                            "group": "graphics"
                         }
                     ]
                 },
@@ -2376,12 +2387,12 @@ const TrussCAPI = {
                     ],
                     "examples": [
                         {
-                            "name": "curveVariationsExample",
-                            "group": "graphics"
-                        },
-                        {
                             "name": "hitTestExample",
                             "group": "node"
+                        },
+                        {
+                            "name": "curveVariationsExample",
+                            "group": "graphics"
                         },
                         {
                             "name": "uiExample",
@@ -2439,11 +2450,11 @@ const TrussCAPI = {
                             "group": "font"
                         },
                         {
-                            "name": "strokeExample",
-                            "group": "graphics"
+                            "name": "grabExample",
+                            "group": "node"
                         },
                         {
-                            "name": "curvesExample",
+                            "name": "strokeExample",
                             "group": "graphics"
                         }
                     ]
@@ -2859,8 +2870,7 @@ const TrussCAPI = {
                         "setCurveResolution"
                     ],
                     "deprecated": {
-                        "reason": "Use setCurveResolution(int), or setCurveTolerance(float) for adaptive quality. Will be removed in v1.0.0",
-                        "replacement": "setCurveResolution"
+                        "reason": "Use setCurveResolution(int), or setCurveTolerance(float) for adaptive quality. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setCurveResolution(int)`, or `setCurveTolerance(float)` for adaptive scale-aware quality. Scheduled for removal in v1.0.0."
                 },
@@ -2882,8 +2892,7 @@ const TrussCAPI = {
                         "getCurveResolution"
                     ],
                     "deprecated": {
-                        "reason": "Use getCurveResolution() instead. Will be removed in v1.0.0",
-                        "replacement": "getCurveResolution"
+                        "reason": "Use getCurveResolution() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `getCurveResolution()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -3519,8 +3528,7 @@ const TrussCAPI = {
                         "getMatrix"
                     ],
                     "deprecated": {
-                        "reason": "Use getMatrix() instead. Will be removed in v1.0.0",
-                        "replacement": "getMatrix"
+                        "reason": "Use getMatrix() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `getMatrix()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -3621,8 +3629,7 @@ const TrussCAPI = {
                         "setMatrix"
                     ],
                     "deprecated": {
-                        "reason": "Renamed to setMatrix() (it replaces the current matrix). Will be removed in v1.0.0",
-                        "replacement": "setMatrix"
+                        "reason": "Renamed to setMatrix() (it replaces the current matrix). Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setMatrix()` (same behavior — it replaces the current matrix). Scheduled for removal in v1.0.0."
                 },
@@ -3643,8 +3650,7 @@ const TrussCAPI = {
                         "getScale"
                     ],
                     "deprecated": {
-                        "reason": "Use getScale() instead. Will be removed in v1.0.0",
-                        "replacement": "getScale"
+                        "reason": "Use getScale() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `getScale()` (same behavior). Scheduled for removal in v1.0.0."
                 }
@@ -3744,13 +3750,6 @@ const TrussCAPI = {
                         "confirmDialogAsync",
                         "alertDialog"
                     ],
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "ios",
-                        "wasm"
-                    ],
                     "platformNote": "Async alert. Real on iOS via UIAlertController. Android only prints to logcat then fires the callback (no UI dialog).",
                     "platformNote_ja": "非同期アラート。iOS は UIAlertController で実装あり。Android は logcat 出力後にコールバックを呼ぶだけで UI ダイアログは出ない。"
                 },
@@ -3803,13 +3802,6 @@ const TrussCAPI = {
                     "related": [
                         "alertDialogAsync",
                         "confirmDialog"
-                    ],
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "ios",
-                        "wasm"
                     ],
                     "platformNote": "Async confirm. Real on iOS via UIAlertController Yes/No. Android immediately calls back with false (no dialog).",
                     "platformNote_ja": "非同期確認。iOS は UIAlertController の Yes/No で実装あり。Android はダイアログを出さず即座に false でコールバックする。"
@@ -3872,12 +3864,6 @@ const TrussCAPI = {
                         "saveDialogAsync",
                         "loadDialog"
                     ],
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "ios"
-                    ],
                     "platformNote": "Async file/folder open. Real on iOS via UIDocumentPickerViewController. Android calls back with empty result (no JNI Intent); Web/WASM calls back with empty (warning logged).",
                     "platformNote_ja": "非同期のファイル/フォルダ選択。iOS は UIDocumentPickerViewController で実装あり。Android は空の結果でコールバック（JNI Intent 未実装）、Web/WASM も空でコールバック（警告ログ）。"
                 },
@@ -3939,12 +3925,6 @@ const TrussCAPI = {
                         "loadDialogAsync",
                         "saveDialog"
                     ],
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "ios"
-                    ],
                     "platformNote": "Async file save. Real on iOS via UIDocumentPickerViewController export. Android calls back with empty result (no JNI Intent); Web/WASM calls back with empty (warning logged).",
                     "platformNote_ja": "非同期のファイル保存。iOS は UIDocumentPickerViewController のエクスポートで実装あり。Android は空の結果でコールバック（JNI Intent 未実装）、Web/WASM も空でコールバック（警告ログ）。"
                 },
@@ -3978,8 +3958,8 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
+                            "name": "hitTestExample",
+                            "group": "node"
                         }
                     ]
                 },
@@ -4013,8 +3993,8 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
+                            "name": "hitTestExample",
+                            "group": "node"
                         }
                     ]
                 },
@@ -4444,8 +4424,8 @@ const TrussCAPI = {
                             "group": "input_output"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
+                            "name": "3DPrimitivesExample",
+                            "group": "3d"
                         }
                     ]
                 },
@@ -4838,8 +4818,8 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "polylinesExample",
-                            "group": "graphics"
+                            "name": "hitTestExample",
+                            "group": "node"
                         }
                     ]
                 },
@@ -5201,11 +5181,6 @@ const TrussCAPI = {
                             "group": "utils"
                         }
                     ],
-                    "platforms": [
-                        "macos",
-                        "ios",
-                        "android"
-                    ],
                     "platformNote": "Returns -1 on Windows, Linux and Web (no implementation).",
                     "platformNote_ja": "Windows / Linux / Web では未実装で -1 を返す。"
                 },
@@ -5226,10 +5201,6 @@ const TrussCAPI = {
                     "desc_ko": "시스템 출력 볼륨을 설정 (0.0-1.0). iOS: OS가 미지원 (경고 로그 출력)",
                     "related": [
                         "getSystemVolume"
-                    ],
-                    "platforms": [
-                        "macos",
-                        "android"
                     ],
                     "platformNote": "No-op on iOS (explicitly unsupported), Windows, Linux and Web.",
                     "platformNote_ja": "iOS（明示的に非対応）/ Windows / Linux / Web では no-op。"
@@ -5626,20 +5597,20 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "void",
-                    "desc": "Called once at start",
+                    "desc": "Initialize sokol_gfx + sokol_gl (called for you by the app loop)",
                     "keywords": [
                         "init",
-                        "start",
-                        "begin",
-                        "load",
-                        "onload",
-                        "create"
+                        "sokol",
+                        "gfx",
+                        "backend",
+                        "initialize",
+                        "low-level"
                     ],
-                    "desc_ja": "開始時に一度呼ばれる",
-                    "desc_ko": "시작 시 한 번 호출됨",
+                    "desc_ja": "sokol_gfx + sokol_gl を初期化（通常はアプリループが自動で呼ぶ）",
+                    "desc_ko": "sokol_gfx + sokol_gl 초기화 (보통 앱 루프가 자동으로 호출)",
                     "related": [
-                        "runApp",
-                        "events"
+                        "cleanup",
+                        "runApp"
                     ]
                 },
                 {
@@ -5647,20 +5618,26 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "void",
-                    "desc": "Called once before exit (optional user callback for cleanup)",
+                    "desc": "Shut down sokol_gfx + sokol_gl (called for you by the app loop)",
                     "keywords": [
-                        "exit",
                         "shutdown",
-                        "destroy",
-                        "dispose",
+                        "sokol",
+                        "gfx",
+                        "backend",
                         "teardown",
-                        "quit"
+                        "low-level"
                     ],
-                    "desc_ja": "終了前に一度呼ばれる（オプショナルなクリーンアップコールバック）",
-                    "desc_ko": "종료 직전 한 번 호출됨 (선택적 정리용 콜백)",
+                    "desc_ja": "sokol_gfx + sokol_gl をシャットダウン（通常はアプリループが自動で呼ぶ）",
+                    "desc_ko": "sokol_gfx + sokol_gl 종료 (보통 앱 루프가 자동으로 호출)",
                     "related": [
-                        "requestExitApp",
-                        "destroy"
+                        "setup",
+                        "requestExitApp"
+                    ],
+                    "examples": [
+                        {
+                            "name": "colorExample",
+                            "group": "graphics"
+                        }
                     ]
                 }
             ],
@@ -6790,7 +6767,7 @@ const TrussCAPI = {
                             "group": "3d"
                         },
                         {
-                            "name": "graphicsExample",
+                            "name": "polylinesExample",
                             "group": "graphics"
                         }
                     ]
@@ -7456,8 +7433,8 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "curvesExample",
-                            "group": "graphics"
+                            "name": "videoGrabberExample",
+                            "group": "video"
                         }
                     ]
                 },
@@ -7580,12 +7557,12 @@ const TrussCAPI = {
                             "group": "math"
                         },
                         {
-                            "name": "vectorMathExample",
-                            "group": "math"
-                        },
-                        {
                             "name": "scrollContainerExample",
                             "group": "node"
+                        },
+                        {
+                            "name": "vectorMathExample",
+                            "group": "math"
                         }
                     ]
                 }
@@ -7742,11 +7719,6 @@ const TrussCAPI = {
                         "setWindowPosition",
                         "setFullscreen"
                     ],
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux"
-                    ],
                     "platformNote": "Desktop-only. No-op on iOS, Android and Web (always foreground / no window mgmt).",
                     "platformNote_ja": "デスクトップ専用。iOS / Android / Web では no-op（常に前面 / ウィンドウ管理なし）。"
                 },
@@ -7841,11 +7813,6 @@ const TrussCAPI = {
                         "setFullscreen",
                         "setWindowSize"
                     ],
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux"
-                    ],
                     "platformNote": "Desktop-only (toggles WM frame). No-op on iOS, Android and Web.",
                     "platformNote_ja": "デスクトップ専用（WM フレーム切替）。iOS / Android / Web では no-op。"
                 },
@@ -7866,11 +7833,6 @@ const TrussCAPI = {
                     "related": [
                         "setWindowSize",
                         "getDpiScale"
-                    ],
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "wasm"
                     ],
                     "platformNote": "No-op on Linux (not yet implemented), iOS and Android (fixed fullscreen). Web resizes the canvas.",
                     "platformNote_ja": "Linux（未実装）/ iOS / Android（全画面固定）では no-op。Web は canvas をリサイズ。"
@@ -8649,8 +8611,7 @@ const TrussCAPI = {
                         "getLogger"
                     ],
                     "deprecated": {
-                        "reason": "Use getLogger() instead. Will be removed in v1.0.0",
-                        "replacement": "getLogger"
+                        "reason": "Use getLogger() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `getLogger()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8672,8 +8633,7 @@ const TrussCAPI = {
                         "setConsoleLogLevel"
                     ],
                     "deprecated": {
-                        "reason": "Use setConsoleLogLevel() instead. Will be removed in v1.0.0",
-                        "replacement": "setConsoleLogLevel"
+                        "reason": "Use setConsoleLogLevel() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setConsoleLogLevel()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8695,8 +8655,7 @@ const TrussCAPI = {
                         "setFileLogLevel"
                     ],
                     "deprecated": {
-                        "reason": "Use setFileLogLevel() instead. Will be removed in v1.0.0",
-                        "replacement": "setFileLogLevel"
+                        "reason": "Use setFileLogLevel() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setFileLogLevel()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8718,8 +8677,7 @@ const TrussCAPI = {
                         "setLogFile"
                     ],
                     "deprecated": {
-                        "reason": "Use setLogFile() instead. Will be removed in v1.0.0",
-                        "replacement": "setLogFile"
+                        "reason": "Use setLogFile() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setLogFile()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8741,8 +8699,7 @@ const TrussCAPI = {
                         "closeLogFile"
                     ],
                     "deprecated": {
-                        "reason": "Use closeLogFile() instead. Will be removed in v1.0.0",
-                        "replacement": "closeLogFile"
+                        "reason": "Use closeLogFile() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `closeLogFile()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8910,8 +8867,7 @@ const TrussCAPI = {
                         "logAt"
                     ],
                     "deprecated": {
-                        "reason": "Use logAt() instead. Will be removed in v1.0.0",
-                        "replacement": "logAt"
+                        "reason": "Use logAt() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logAt()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8932,8 +8888,7 @@ const TrussCAPI = {
                         "logVerbose"
                     ],
                     "deprecated": {
-                        "reason": "Use logVerbose() instead. Will be removed in v1.0.0",
-                        "replacement": "logVerbose"
+                        "reason": "Use logVerbose() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logVerbose()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8954,8 +8909,7 @@ const TrussCAPI = {
                         "logNotice"
                     ],
                     "deprecated": {
-                        "reason": "Use logNotice() instead. Will be removed in v1.0.0",
-                        "replacement": "logNotice"
+                        "reason": "Use logNotice() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logNotice()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8976,8 +8930,7 @@ const TrussCAPI = {
                         "logWarning"
                     ],
                     "deprecated": {
-                        "reason": "Use logWarning() instead. Will be removed in v1.0.0",
-                        "replacement": "logWarning"
+                        "reason": "Use logWarning() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logWarning()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8998,8 +8951,7 @@ const TrussCAPI = {
                         "logError"
                     ],
                     "deprecated": {
-                        "reason": "Use logError() instead. Will be removed in v1.0.0",
-                        "replacement": "logError"
+                        "reason": "Use logError() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logError()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -9020,8 +8972,7 @@ const TrussCAPI = {
                         "logFatal"
                     ],
                     "deprecated": {
-                        "reason": "Use logFatal() instead. Will be removed in v1.0.0",
-                        "replacement": "logFatal"
+                        "reason": "Use logFatal() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logFatal()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -10273,14 +10224,8 @@ const TrussCAPI = {
                         "getExecutableDir",
                         "getAbsolutePath"
                     ],
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "ios"
-                    ],
-                    "platformNote": "Android returns \"\" (assets via AAssetManager); Web returns hardcoded \"/\".",
-                    "platformNote_ja": "Android は \"\" を返す（アセットは AAssetManager 経由）。Web はハードコードの \"/\"。"
+                    "platformNote": "Android returns \"\" (assets via AAssetManager); Web returns hardcoded \"/\".\n",
+                    "platformNote_ja": "Android は \"\" を返す（アセットは AAssetManager 経由）。Web はハードコードの \"/\"。\n"
                 },
                 {
                     "name": "getExecutableDir",
@@ -10301,15 +10246,8 @@ const TrussCAPI = {
                         "getExecutablePath",
                         "setDataPathToResources"
                     ],
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "ios",
-                        "android"
-                    ],
-                    "platformNote": "Real directory on all native platforms (android = internalDataPath). Web returns hardcoded \"/\".",
-                    "platformNote_ja": "ネイティブは全て実ディレクトリを返す（android は internalDataPath）。Web はハードコードの \"/\"。"
+                    "platformNote": "Real directory on all native platforms (android = internalDataPath). Web returns hardcoded \"/\".\n",
+                    "platformNote_ja": "ネイティブは全て実ディレクトリを返す（android は internalDataPath）。Web はハードコードの \"/\"。\n"
                 },
                 {
                     "name": "setDataPathRoot",
@@ -11100,8 +11038,8 @@ const TrussCAPI = {
                         "linux",
                         "ios"
                     ],
-                    "platformNote": "Resolve a font name to a file path. Stub on Android and Web/WASM (always returns \"\").",
-                    "platformNote_ja": "フォント名をファイルパスに解決する。Android と Web/WASM ではスタブで常に \"\" を返す。"
+                    "platformNote": "Resolve a font name to a file path. Stub on Android and Web/WASM (always returns \"\").\n",
+                    "platformNote_ja": "フォント名をファイルパスに解決する。Android と Web/WASM ではスタブで常に \"\" を返す。\n"
                 },
                 {
                     "name": "listSystemFonts",
@@ -11276,8 +11214,7 @@ const TrussCAPI = {
                     "desc_ja": "HSBからColorを作成（Color::fromHSBのエイリアス）",
                     "desc_ko": "HSB로부터 Color를 생성 (Color::fromHSB의 별칭)",
                     "deprecated": {
-                        "reason": "Use Color::fromHSB() instead. Will be removed in v1.0.0",
-                        "replacement": "Color::fromHSB"
+                        "reason": "Use Color::fromHSB() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `Color::fromHSB()` (same behavior). Scheduled for removal in v1.0.0.",
                     "examples": [
@@ -11288,6 +11225,10 @@ const TrussCAPI = {
                         {
                             "name": "clippingExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "timerExample",
+                            "group": "utils"
                         }
                     ]
                 },
@@ -11309,8 +11250,7 @@ const TrussCAPI = {
                         "Color::fromOKLCH"
                     ],
                     "deprecated": {
-                        "reason": "Use Color::fromOKLCH() instead. Will be removed in v1.0.0",
-                        "replacement": "Color::fromOKLCH"
+                        "reason": "Use Color::fromOKLCH() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `Color::fromOKLCH()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -11332,8 +11272,7 @@ const TrussCAPI = {
                         "Color::fromOKLab"
                     ],
                     "deprecated": {
-                        "reason": "Use Color::fromOKLab() instead. Will be removed in v1.0.0",
-                        "replacement": "Color::fromOKLab"
+                        "reason": "Use Color::fromOKLab() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `Color::fromOKLab()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -11355,8 +11294,7 @@ const TrussCAPI = {
                         "Color::fromLinear"
                     ],
                     "deprecated": {
-                        "reason": "Use Color::fromLinear() instead. Will be removed in v1.0.0",
-                        "replacement": "Color::fromLinear"
+                        "reason": "Use Color::fromLinear() instead. Will be removed in v1.0.0"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `Color::fromLinear()` (same behavior). Scheduled for removal in v1.0.0."
                 }
@@ -11452,8 +11390,7 @@ const TrussCAPI = {
                         "setupScreenPerspective"
                     ],
                     "deprecated": {
-                        "reason": "3D is now enabled by default. Use setupScreenPerspective() to change FOV.",
-                        "replacement": "setupScreenPerspective"
+                        "reason": "3D is now enabled by default. Use setupScreenPerspective() to change FOV."
                     },
                     "details": "No longer needed: 3D is enabled by default. Just delete the call, or use `setupScreenPerspective()` to change the FOV. Scheduled for removal in v1.0.0."
                 },
@@ -11476,8 +11413,7 @@ const TrussCAPI = {
                         "setupScreenFov"
                     ],
                     "deprecated": {
-                        "reason": "Use setupScreenPerspective(fovDeg) or setupScreenFov(fovDeg) instead. Note: FOV is now in degrees, not radians.",
-                        "replacement": "setupScreenPerspective"
+                        "reason": "Use setupScreenPerspective(fovDeg) or setupScreenFov(fovDeg) instead. Note: FOV is now in degrees, not radians."
                     },
                     "details": "Use `setupScreenPerspective(fovDeg)` or `setupScreenFov(fovDeg)`. WARNING: the FOV unit changed from radians to degrees, so a literal value must be converted (e.g. 0.785 rad ≈ 45 deg). Scheduled for removal in v1.0.0."
                 },
@@ -11700,8 +11636,7 @@ const TrussCAPI = {
                         "setupScreenOrtho"
                     ],
                     "deprecated": {
-                        "reason": "Use setupScreenOrtho() instead",
-                        "replacement": "setupScreenOrtho"
+                        "reason": "Use setupScreenOrtho() instead"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setupScreenOrtho()` (same behavior). Scheduled for removal in v1.0.0."
                 }
@@ -12262,11 +12197,11 @@ const TrussCAPI = {
                             "group": "3d"
                         },
                         {
-                            "name": "coordinateConversionExample",
+                            "name": "fboMipmapExample",
                             "group": "3d"
                         },
                         {
-                            "name": "fboMipmapExample",
+                            "name": "coordinateConversionExample",
                             "group": "3d"
                         }
                     ]
@@ -12298,11 +12233,11 @@ const TrussCAPI = {
                             "group": "3d"
                         },
                         {
-                            "name": "coordinateConversionExample",
+                            "name": "fboMipmapExample",
                             "group": "3d"
                         },
                         {
-                            "name": "fboMipmapExample",
+                            "name": "coordinateConversionExample",
                             "group": "3d"
                         }
                     ]
@@ -12331,11 +12266,11 @@ const TrussCAPI = {
                     ],
                     "examples": [
                         {
-                            "name": "coordinateConversionExample",
+                            "name": "meshAppendExample",
                             "group": "3d"
                         },
                         {
-                            "name": "meshAppendExample",
+                            "name": "coordinateConversionExample",
                             "group": "3d"
                         },
                         {
@@ -13285,6 +13220,82 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "",
                     "desc_ko": ""
+                },
+                {
+                    "name": "atanh",
+                    "params": "x",
+                    "params_typed": "float x",
+                    "return_type": "float",
+                    "desc": "Inverse hyperbolic tangent",
+                    "keywords": [],
+                    "desc_ja": "逆双曲線正接",
+                    "desc_ko": "역쌍곡탄젠트"
+                },
+                {
+                    "name": "tanh",
+                    "params": "x",
+                    "params_typed": "float x",
+                    "return_type": "float",
+                    "desc": "Hyperbolic tangent",
+                    "keywords": [],
+                    "desc_ja": "双曲線正接",
+                    "desc_ko": "쌍곡탄젠트"
+                },
+                {
+                    "name": "exp2",
+                    "params": "x",
+                    "params_typed": "float x",
+                    "return_type": "float",
+                    "desc": "Base-2 exponential (2^x)",
+                    "keywords": [],
+                    "desc_ja": "2 の累乗 (2^x)",
+                    "desc_ko": "2의 거듭제곱 (2^x)"
+                },
+                {
+                    "name": "log2",
+                    "params": "x",
+                    "params_typed": "float x",
+                    "return_type": "float",
+                    "desc": "Base-2 logarithm",
+                    "keywords": [],
+                    "desc_ja": "底 2 の対数",
+                    "desc_ko": "밑이 2인 로그"
+                },
+                {
+                    "name": "log10",
+                    "params": "x",
+                    "params_typed": "float x",
+                    "return_type": "float",
+                    "desc": "Base-10 (common) logarithm",
+                    "keywords": [],
+                    "desc_ja": "常用対数 (底 10)",
+                    "desc_ko": "상용로그 (밑 10)",
+                    "examples": [
+                        {
+                            "name": "soundPlayerFFTExample",
+                            "group": "sound"
+                        }
+                    ]
+                },
+                {
+                    "name": "trunc",
+                    "params": "x",
+                    "params_typed": "float x",
+                    "return_type": "float",
+                    "desc": "Truncate toward zero (drop the fractional part)",
+                    "keywords": [],
+                    "desc_ja": "ゼロ方向に切り捨て (小数部を捨てる)",
+                    "desc_ko": "0 방향으로 절삭 (소수부 버림)"
+                },
+                {
+                    "name": "remainder",
+                    "params": "x, y",
+                    "params_typed": "float x, float y",
+                    "return_type": "float",
+                    "desc": "IEEE floating-point remainder of x/y",
+                    "keywords": [],
+                    "desc_ja": "x/y の IEEE 浮動小数点剰余",
+                    "desc_ko": "x/y의 IEEE 부동소수점 나머지"
                 }
             ],
             "name_ja": "その他",
@@ -13423,14 +13434,8 @@ const TrussCAPI = {
         {
             "name": "EventPriority::App",
             "value": "100",
-            "desc": "Default app-level event priority (EventPriority::App)",
-            "keywords": [
-                "event",
-                "priority",
-                "listener",
-                "app",
-                "default"
-            ]
+            "desc": "",
+            "keywords": []
         },
         {
             "name": "EventPriority::AfterApp",
@@ -13483,751 +13488,6 @@ const TrussCAPI = {
                 "record",
                 "audioOut"
             ]
-        },
-        {
-            "name": "colors::white",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::black",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::red",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::green",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::blue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::yellow",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::cyan",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::magenta",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::transparent",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::gray",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::grey",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkGray",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkGrey",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::dimGray",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::dimGrey",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightGray",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightGrey",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::silver",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::gainsboro",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::whiteSmoke",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkRed",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::fireBrick",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::crimson",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::indianRed",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightCoral",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::salmon",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkSalmon",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightSalmon",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::orange",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkOrange",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::orangeRed",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::tomato",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::coral",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::gold",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::goldenRod",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkGoldenRod",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::paleGoldenRod",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightGoldenRodYellow",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::khaki",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkKhaki",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lime",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::limeGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::paleGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::forestGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::seaGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mediumSeaGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkSeaGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightSeaGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::springGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mediumSpringGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::greenYellow",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::yellowGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::chartreuse",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lawnGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::olive",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::oliveDrab",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkOliveGreen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::aqua",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::aquamarine",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mediumAquaMarine",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkCyan",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::teal",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightCyan",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::turquoise",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mediumTurquoise",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkTurquoise",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::paleTurquoise",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::navy",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mediumBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::royalBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::steelBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::blueSteel",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightSteelBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::dodgerBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::deepSkyBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::skyBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightSkyBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::powderBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::cornflowerBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::cadetBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::midnightBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::aliceBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::purple",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkMagenta",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkViolet",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::blueViolet",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::indigo",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::slateBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkSlateBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mediumSlateBlue",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mediumPurple",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkOrchid",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mediumOrchid",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::orchid",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::violet",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::plum",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::thistle",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lavender",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::fuchsia",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::pink",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightPink",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::hotPink",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::deepPink",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mediumVioletRed",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::paleVioletRed",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::brown",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::maroon",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::saddleBrown",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::sienna",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::chocolate",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::peru",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::sandyBrown",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::burlyWood",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::tan",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::rosyBrown",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::snow",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::honeyDew",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mintCream",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::azure",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::ghostWhite",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::floralWhite",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::ivory",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::antiqueWhite",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::linen",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lavenderBlush",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::mistyRose",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::oldLace",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::seaShell",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::beige",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::cornsilk",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lemonChiffon",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightYellow",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::wheat",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::moccasin",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::peachPuff",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::papayaWhip",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::blanchedAlmond",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::bisque",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::navajoWhite",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::slateGray",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::slateGrey",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightSlateGray",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::lightSlateGrey",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkSlateGray",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "colors::darkSlateGrey",
-            "desc": "",
-            "keywords": []
         },
         {
             "name": "bitmapfont::CHAR_HEIGHT",
@@ -14839,12 +14099,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "float",
+                    "type": "",
                     "desc": "X component"
                 },
                 {
                     "name": "y",
-                    "type": "float",
+                    "type": "",
                     "desc": "Y component"
                 }
             ],
@@ -14853,7 +14113,7 @@ const TrussCAPI = {
                     "name": "set",
                     "return": "Vec2 &",
                     "signatures": [
-                        "float x_, float y_",
+                        "float x, float y",
                         "const Vec2 & v"
                     ],
                     "desc": "Set vector components"
@@ -14993,8 +14253,8 @@ const TrussCAPI = {
             "operators": [
                 {
                     "symbol": "[]",
-                    "signature": "Vec2[int] → float&",
-                    "cpp": "float& operator[](int)",
+                    "signature": "Vec2[int] → float &",
+                    "cpp": "float & operator[](int)",
                     "free": false,
                     "desc": "Component access by index",
                     "desc_ja": "インデックスで成分アクセス",
@@ -15003,7 +14263,7 @@ const TrussCAPI = {
                 {
                     "symbol": "+",
                     "signature": "Vec2 + Vec2 → Vec2",
-                    "cpp": "Vec2 operator+(const Vec2&) const",
+                    "cpp": "Vec2 operator+(const Vec2 &) const",
                     "free": false,
                     "desc": "Component-wise addition",
                     "desc_ja": "成分ごとの加算",
@@ -15012,7 +14272,7 @@ const TrussCAPI = {
                 {
                     "symbol": "-",
                     "signature": "Vec2 - Vec2 → Vec2",
-                    "cpp": "Vec2 operator-(const Vec2&) const",
+                    "cpp": "Vec2 operator-(const Vec2 &) const",
                     "free": false,
                     "desc": "Component-wise subtraction",
                     "desc_ja": "成分ごとの減算",
@@ -15037,36 +14297,9 @@ const TrussCAPI = {
                     "desc_ko": "스칼라 나눗셈"
                 },
                 {
-                    "symbol": "*",
-                    "signature": "Vec2 * Vec2 → Vec2",
-                    "cpp": "Vec2 operator*(const Vec2&) const",
-                    "free": false,
-                    "desc": "Component-wise multiplication",
-                    "desc_ja": "成分ごとの乗算",
-                    "desc_ko": "성분별 곱셈"
-                },
-                {
-                    "symbol": "/",
-                    "signature": "Vec2 / Vec2 → Vec2",
-                    "cpp": "Vec2 operator/(const Vec2&) const",
-                    "free": false,
-                    "desc": "Component-wise division",
-                    "desc_ja": "成分ごとの除算",
-                    "desc_ko": "성분별 나눗셈"
-                },
-                {
-                    "symbol": "-",
-                    "signature": "-Vec2 → Vec2",
-                    "cpp": "Vec2 operator-() const",
-                    "free": false,
-                    "desc": "Negation",
-                    "desc_ja": "符号反転",
-                    "desc_ko": "부호 반전"
-                },
-                {
                     "symbol": "+=",
-                    "signature": "Vec2 += Vec2 → Vec2&",
-                    "cpp": "Vec2& operator+=(const Vec2&)",
+                    "signature": "Vec2 += Vec2 → Vec2 &",
+                    "cpp": "Vec2 & operator+=(const Vec2 &)",
                     "free": false,
                     "desc": "In-place addition",
                     "desc_ja": "加算代入",
@@ -15074,8 +14307,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "-=",
-                    "signature": "Vec2 -= Vec2 → Vec2&",
-                    "cpp": "Vec2& operator-=(const Vec2&)",
+                    "signature": "Vec2 -= Vec2 → Vec2 &",
+                    "cpp": "Vec2 & operator-=(const Vec2 &)",
                     "free": false,
                     "desc": "In-place subtraction",
                     "desc_ja": "減算代入",
@@ -15083,8 +14316,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "*=",
-                    "signature": "Vec2 *= float → Vec2&",
-                    "cpp": "Vec2& operator*=(float)",
+                    "signature": "Vec2 *= float → Vec2 &",
+                    "cpp": "Vec2 & operator*=(float)",
                     "free": false,
                     "desc": "In-place scalar multiplication",
                     "desc_ja": "スカラー倍代入",
@@ -15092,35 +14325,17 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "/=",
-                    "signature": "Vec2 /= float → Vec2&",
-                    "cpp": "Vec2& operator/=(float)",
+                    "signature": "Vec2 /= float → Vec2 &",
+                    "cpp": "Vec2 & operator/=(float)",
                     "free": false,
                     "desc": "In-place scalar division",
                     "desc_ja": "スカラー除算代入",
                     "desc_ko": "스칼라 나눗셈 대입"
                 },
                 {
-                    "symbol": "*=",
-                    "signature": "Vec2 *= Vec2 → Vec2&",
-                    "cpp": "Vec2& operator*=(const Vec2&)",
-                    "free": false,
-                    "desc": "In-place component-wise multiplication",
-                    "desc_ja": "成分ごとの乗算代入",
-                    "desc_ko": "성분별 곱 대입"
-                },
-                {
-                    "symbol": "/=",
-                    "signature": "Vec2 /= Vec2 → Vec2&",
-                    "cpp": "Vec2& operator/=(const Vec2&)",
-                    "free": false,
-                    "desc": "In-place component-wise division",
-                    "desc_ja": "成分ごとの除算代入",
-                    "desc_ko": "성분별 나눗셈 대입"
-                },
-                {
                     "symbol": "==",
                     "signature": "Vec2 == Vec2 → bool",
-                    "cpp": "bool operator==(const Vec2&) const",
+                    "cpp": "bool operator==(const Vec2 &) const",
                     "free": false,
                     "desc": "Equality comparison",
                     "desc_ja": "等価比較",
@@ -15129,7 +14344,7 @@ const TrussCAPI = {
                 {
                     "symbol": "!=",
                     "signature": "Vec2 != Vec2 → bool",
-                    "cpp": "bool operator!=(const Vec2&) const",
+                    "cpp": "bool operator!=(const Vec2 &) const",
                     "free": false,
                     "desc": "Inequality comparison",
                     "desc_ja": "非等価比較",
@@ -15138,7 +14353,7 @@ const TrussCAPI = {
                 {
                     "symbol": "*",
                     "signature": "float * Vec2 → Vec2",
-                    "cpp": "Vec2 operator*(float, const Vec2&)",
+                    "cpp": "Vec2 operator*(float, const Vec2 &)",
                     "free": true,
                     "desc": "Component-wise multiplication",
                     "desc_ja": "成分ごとの乗算",
@@ -15169,7 +14384,7 @@ const TrussCAPI = {
                     "group": "graphics"
                 },
                 {
-                    "name": "projectorSimulationExample",
+                    "name": "coordinateConversionExample",
                     "group": "3d"
                 }
             ],
@@ -15182,23 +14397,24 @@ const TrussCAPI = {
                 "signatures": [
                     "",
                     "float x, float y, float z",
-                    "float v"
+                    "float v",
+                    "const Vec2 & v, float z = …"
                 ]
             },
             "properties": [
                 {
                     "name": "x",
-                    "type": "float",
+                    "type": "",
                     "desc": "X component"
                 },
                 {
                     "name": "y",
-                    "type": "float",
+                    "type": "",
                     "desc": "Y component"
                 },
                 {
                     "name": "z",
-                    "type": "float",
+                    "type": "",
                     "desc": "Z component"
                 }
             ],
@@ -15207,7 +14423,7 @@ const TrussCAPI = {
                     "name": "set",
                     "return": "Vec3 &",
                     "signatures": [
-                        "float x_, float y_, float z_",
+                        "float x, float y, float z",
                         "const Vec3 & v"
                     ],
                     "desc": "Set vector components"
@@ -15312,8 +14528,8 @@ const TrussCAPI = {
             "operators": [
                 {
                     "symbol": "[]",
-                    "signature": "Vec3[int] → float&",
-                    "cpp": "float& operator[](int)",
+                    "signature": "Vec3[int] → float &",
+                    "cpp": "float & operator[](int)",
                     "free": false,
                     "desc": "Component access by index",
                     "desc_ja": "インデックスで成分アクセス",
@@ -15322,7 +14538,7 @@ const TrussCAPI = {
                 {
                     "symbol": "+",
                     "signature": "Vec3 + Vec3 → Vec3",
-                    "cpp": "Vec3 operator+(const Vec3&) const",
+                    "cpp": "Vec3 operator+(const Vec3 &) const",
                     "free": false,
                     "desc": "Component-wise addition",
                     "desc_ja": "成分ごとの加算",
@@ -15331,7 +14547,7 @@ const TrussCAPI = {
                 {
                     "symbol": "-",
                     "signature": "Vec3 - Vec3 → Vec3",
-                    "cpp": "Vec3 operator-(const Vec3&) const",
+                    "cpp": "Vec3 operator-(const Vec3 &) const",
                     "free": false,
                     "desc": "Component-wise subtraction",
                     "desc_ja": "成分ごとの減算",
@@ -15356,36 +14572,9 @@ const TrussCAPI = {
                     "desc_ko": "스칼라 나눗셈"
                 },
                 {
-                    "symbol": "*",
-                    "signature": "Vec3 * Vec3 → Vec3",
-                    "cpp": "Vec3 operator*(const Vec3&) const",
-                    "free": false,
-                    "desc": "Component-wise multiplication",
-                    "desc_ja": "成分ごとの乗算",
-                    "desc_ko": "성분별 곱셈"
-                },
-                {
-                    "symbol": "/",
-                    "signature": "Vec3 / Vec3 → Vec3",
-                    "cpp": "Vec3 operator/(const Vec3&) const",
-                    "free": false,
-                    "desc": "Component-wise division",
-                    "desc_ja": "成分ごとの除算",
-                    "desc_ko": "성분별 나눗셈"
-                },
-                {
-                    "symbol": "-",
-                    "signature": "-Vec3 → Vec3",
-                    "cpp": "Vec3 operator-() const",
-                    "free": false,
-                    "desc": "Negation",
-                    "desc_ja": "符号反転",
-                    "desc_ko": "부호 반전"
-                },
-                {
                     "symbol": "+=",
-                    "signature": "Vec3 += Vec3 → Vec3&",
-                    "cpp": "Vec3& operator+=(const Vec3&)",
+                    "signature": "Vec3 += Vec3 → Vec3 &",
+                    "cpp": "Vec3 & operator+=(const Vec3 &)",
                     "free": false,
                     "desc": "In-place addition",
                     "desc_ja": "加算代入",
@@ -15393,8 +14582,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "-=",
-                    "signature": "Vec3 -= Vec3 → Vec3&",
-                    "cpp": "Vec3& operator-=(const Vec3&)",
+                    "signature": "Vec3 -= Vec3 → Vec3 &",
+                    "cpp": "Vec3 & operator-=(const Vec3 &)",
                     "free": false,
                     "desc": "In-place subtraction",
                     "desc_ja": "減算代入",
@@ -15402,8 +14591,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "*=",
-                    "signature": "Vec3 *= float → Vec3&",
-                    "cpp": "Vec3& operator*=(float)",
+                    "signature": "Vec3 *= float → Vec3 &",
+                    "cpp": "Vec3 & operator*=(float)",
                     "free": false,
                     "desc": "In-place scalar multiplication",
                     "desc_ja": "スカラー倍代入",
@@ -15411,35 +14600,17 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "/=",
-                    "signature": "Vec3 /= float → Vec3&",
-                    "cpp": "Vec3& operator/=(float)",
+                    "signature": "Vec3 /= float → Vec3 &",
+                    "cpp": "Vec3 & operator/=(float)",
                     "free": false,
                     "desc": "In-place scalar division",
                     "desc_ja": "スカラー除算代入",
                     "desc_ko": "스칼라 나눗셈 대입"
                 },
                 {
-                    "symbol": "*=",
-                    "signature": "Vec3 *= Vec3 → Vec3&",
-                    "cpp": "Vec3& operator*=(const Vec3&)",
-                    "free": false,
-                    "desc": "In-place component-wise multiplication",
-                    "desc_ja": "成分ごとの乗算代入",
-                    "desc_ko": "성분별 곱 대입"
-                },
-                {
-                    "symbol": "/=",
-                    "signature": "Vec3 /= Vec3 → Vec3&",
-                    "cpp": "Vec3& operator/=(const Vec3&)",
-                    "free": false,
-                    "desc": "In-place component-wise division",
-                    "desc_ja": "成分ごとの除算代入",
-                    "desc_ko": "성분별 나눗셈 대입"
-                },
-                {
                     "symbol": "==",
                     "signature": "Vec3 == Vec3 → bool",
-                    "cpp": "bool operator==(const Vec3&) const",
+                    "cpp": "bool operator==(const Vec3 &) const",
                     "free": false,
                     "desc": "Equality comparison",
                     "desc_ja": "等価比較",
@@ -15448,20 +14619,11 @@ const TrussCAPI = {
                 {
                     "symbol": "!=",
                     "signature": "Vec3 != Vec3 → bool",
-                    "cpp": "bool operator!=(const Vec3&) const",
+                    "cpp": "bool operator!=(const Vec3 &) const",
                     "free": false,
                     "desc": "Inequality comparison",
                     "desc_ja": "非等価比較",
                     "desc_ko": "다름 비교"
-                },
-                {
-                    "symbol": "*",
-                    "signature": "float * Vec3 → Vec3",
-                    "cpp": "Vec3 operator*(float, const Vec3&)",
-                    "free": true,
-                    "desc": "Component-wise multiplication",
-                    "desc_ja": "成分ごとの乗算",
-                    "desc_ko": "성분별 곱셈"
                 }
             ]
         },
@@ -15491,12 +14653,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "int",
+                    "type": "",
                     "desc": "X component"
                 },
                 {
                     "name": "y",
-                    "type": "int",
+                    "type": "",
                     "desc": "Y component"
                 }
             ],
@@ -15514,7 +14676,7 @@ const TrussCAPI = {
                 {
                     "symbol": "+",
                     "signature": "IVec2 + IVec2 → IVec2",
-                    "cpp": "IVec2 operator+(const IVec2&) const",
+                    "cpp": "IVec2 operator+(const IVec2 &) const",
                     "free": false,
                     "desc": "Component-wise addition",
                     "desc_ja": "成分ごとの加算",
@@ -15523,7 +14685,7 @@ const TrussCAPI = {
                 {
                     "symbol": "-",
                     "signature": "IVec2 - IVec2 → IVec2",
-                    "cpp": "IVec2 operator-(const IVec2&) const",
+                    "cpp": "IVec2 operator-(const IVec2 &) const",
                     "free": false,
                     "desc": "Component-wise subtraction",
                     "desc_ja": "成分ごとの減算",
@@ -15539,18 +14701,9 @@ const TrussCAPI = {
                     "desc_ko": "스칼라 곱"
                 },
                 {
-                    "symbol": "-",
-                    "signature": "-IVec2 → IVec2",
-                    "cpp": "IVec2 operator-() const",
-                    "free": false,
-                    "desc": "Negation",
-                    "desc_ja": "符号反転",
-                    "desc_ko": "부호 반전"
-                },
-                {
                     "symbol": "+=",
-                    "signature": "IVec2 += IVec2 → IVec2&",
-                    "cpp": "IVec2& operator+=(const IVec2&)",
+                    "signature": "IVec2 += IVec2 → IVec2 &",
+                    "cpp": "IVec2 & operator+=(const IVec2 &)",
                     "free": false,
                     "desc": "In-place addition",
                     "desc_ja": "加算代入",
@@ -15558,8 +14711,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "-=",
-                    "signature": "IVec2 -= IVec2 → IVec2&",
-                    "cpp": "IVec2& operator-=(const IVec2&)",
+                    "signature": "IVec2 -= IVec2 → IVec2 &",
+                    "cpp": "IVec2 & operator-=(const IVec2 &)",
                     "free": false,
                     "desc": "In-place subtraction",
                     "desc_ja": "減算代入",
@@ -15567,8 +14720,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "*=",
-                    "signature": "IVec2 *= int → IVec2&",
-                    "cpp": "IVec2& operator*=(int)",
+                    "signature": "IVec2 *= int → IVec2 &",
+                    "cpp": "IVec2 & operator*=(int)",
                     "free": false,
                     "desc": "In-place scalar multiplication",
                     "desc_ja": "スカラー倍代入",
@@ -15577,7 +14730,7 @@ const TrussCAPI = {
                 {
                     "symbol": "==",
                     "signature": "IVec2 == IVec2 → bool",
-                    "cpp": "bool operator==(const IVec2&) const",
+                    "cpp": "bool operator==(const IVec2 &) const",
                     "free": false,
                     "desc": "Equality comparison",
                     "desc_ja": "等価比較",
@@ -15586,20 +14739,11 @@ const TrussCAPI = {
                 {
                     "symbol": "!=",
                     "signature": "IVec2 != IVec2 → bool",
-                    "cpp": "bool operator!=(const IVec2&) const",
+                    "cpp": "bool operator!=(const IVec2 &) const",
                     "free": false,
                     "desc": "Inequality comparison",
                     "desc_ja": "非等価比較",
                     "desc_ko": "다름 비교"
-                },
-                {
-                    "symbol": "*",
-                    "signature": "int * IVec2 → IVec2",
-                    "cpp": "IVec2 operator*(int, const IVec2&)",
-                    "free": true,
-                    "desc": "Component-wise multiplication",
-                    "desc_ja": "成分ごとの乗算",
-                    "desc_ko": "성분별 곱셈"
                 }
             ]
         },
@@ -15624,23 +14768,23 @@ const TrussCAPI = {
                     "",
                     "int x, int y, int z",
                     "int v",
-                    "IVec2 v, int z"
+                    "const IVec2 & v, int z = …"
                 ]
             },
             "properties": [
                 {
                     "name": "x",
-                    "type": "int",
+                    "type": "",
                     "desc": "X component"
                 },
                 {
                     "name": "y",
-                    "type": "int",
+                    "type": "",
                     "desc": "Y component"
                 },
                 {
                     "name": "z",
-                    "type": "int",
+                    "type": "",
                     "desc": "Z component"
                 }
             ],
@@ -15666,7 +14810,7 @@ const TrussCAPI = {
                 {
                     "symbol": "+",
                     "signature": "IVec3 + IVec3 → IVec3",
-                    "cpp": "IVec3 operator+(const IVec3&) const",
+                    "cpp": "IVec3 operator+(const IVec3 &) const",
                     "free": false,
                     "desc": "Component-wise addition",
                     "desc_ja": "成分ごとの加算",
@@ -15675,7 +14819,7 @@ const TrussCAPI = {
                 {
                     "symbol": "-",
                     "signature": "IVec3 - IVec3 → IVec3",
-                    "cpp": "IVec3 operator-(const IVec3&) const",
+                    "cpp": "IVec3 operator-(const IVec3 &) const",
                     "free": false,
                     "desc": "Component-wise subtraction",
                     "desc_ja": "成分ごとの減算",
@@ -15691,18 +14835,9 @@ const TrussCAPI = {
                     "desc_ko": "스칼라 곱"
                 },
                 {
-                    "symbol": "-",
-                    "signature": "-IVec3 → IVec3",
-                    "cpp": "IVec3 operator-() const",
-                    "free": false,
-                    "desc": "Negation",
-                    "desc_ja": "符号反転",
-                    "desc_ko": "부호 반전"
-                },
-                {
                     "symbol": "+=",
-                    "signature": "IVec3 += IVec3 → IVec3&",
-                    "cpp": "IVec3& operator+=(const IVec3&)",
+                    "signature": "IVec3 += IVec3 → IVec3 &",
+                    "cpp": "IVec3 & operator+=(const IVec3 &)",
                     "free": false,
                     "desc": "In-place addition",
                     "desc_ja": "加算代入",
@@ -15710,8 +14845,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "-=",
-                    "signature": "IVec3 -= IVec3 → IVec3&",
-                    "cpp": "IVec3& operator-=(const IVec3&)",
+                    "signature": "IVec3 -= IVec3 → IVec3 &",
+                    "cpp": "IVec3 & operator-=(const IVec3 &)",
                     "free": false,
                     "desc": "In-place subtraction",
                     "desc_ja": "減算代入",
@@ -15719,8 +14854,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "*=",
-                    "signature": "IVec3 *= int → IVec3&",
-                    "cpp": "IVec3& operator*=(int)",
+                    "signature": "IVec3 *= int → IVec3 &",
+                    "cpp": "IVec3 & operator*=(int)",
                     "free": false,
                     "desc": "In-place scalar multiplication",
                     "desc_ja": "スカラー倍代入",
@@ -15729,7 +14864,7 @@ const TrussCAPI = {
                 {
                     "symbol": "==",
                     "signature": "IVec3 == IVec3 → bool",
-                    "cpp": "bool operator==(const IVec3&) const",
+                    "cpp": "bool operator==(const IVec3 &) const",
                     "free": false,
                     "desc": "Equality comparison",
                     "desc_ja": "等価比較",
@@ -15738,20 +14873,11 @@ const TrussCAPI = {
                 {
                     "symbol": "!=",
                     "signature": "IVec3 != IVec3 → bool",
-                    "cpp": "bool operator!=(const IVec3&) const",
+                    "cpp": "bool operator!=(const IVec3 &) const",
                     "free": false,
                     "desc": "Inequality comparison",
                     "desc_ja": "非等価比較",
                     "desc_ko": "다름 비교"
-                },
-                {
-                    "symbol": "*",
-                    "signature": "int * IVec3 → IVec3",
-                    "cpp": "IVec3 operator*(int, const IVec3&)",
-                    "free": true,
-                    "desc": "Component-wise multiplication",
-                    "desc_ja": "成分ごとの乗算",
-                    "desc_ko": "성분별 곱셈"
                 }
             ]
         },
@@ -15778,29 +14904,29 @@ const TrussCAPI = {
                     "",
                     "float x, float y, float z, float w",
                     "float v",
-                    "const Vec3& v, float w = 1.0f",
-                    "const Vec2& v, float z = 0.0f, float w = 1.0f"
+                    "const Vec3 & v, float w = …",
+                    "const Vec2 & v, float z = …, float w = …"
                 ]
             },
             "properties": [
                 {
                     "name": "x",
-                    "type": "float",
+                    "type": "",
                     "desc": "X component"
                 },
                 {
                     "name": "y",
-                    "type": "float",
+                    "type": "",
                     "desc": "Y component"
                 },
                 {
                     "name": "z",
-                    "type": "float",
+                    "type": "",
                     "desc": "Z component"
                 },
                 {
                     "name": "w",
-                    "type": "float",
+                    "type": "",
                     "desc": "W component"
                 }
             ],
@@ -15809,7 +14935,7 @@ const TrussCAPI = {
                     "name": "set",
                     "return": "Vec4 &",
                     "signatures": [
-                        "float x_, float y_, float z_, float w_",
+                        "float x, float y, float z, float w",
                         "const Vec4 & v"
                     ],
                     "desc": "Set all components (chainable)"
@@ -15882,8 +15008,8 @@ const TrussCAPI = {
             "operators": [
                 {
                     "symbol": "[]",
-                    "signature": "Vec4[int] → float&",
-                    "cpp": "float& operator[](int)",
+                    "signature": "Vec4[int] → float &",
+                    "cpp": "float & operator[](int)",
                     "free": false,
                     "desc": "Component access by index",
                     "desc_ja": "インデックスで成分アクセス",
@@ -15892,7 +15018,7 @@ const TrussCAPI = {
                 {
                     "symbol": "+",
                     "signature": "Vec4 + Vec4 → Vec4",
-                    "cpp": "Vec4 operator+(const Vec4&) const",
+                    "cpp": "Vec4 operator+(const Vec4 &) const",
                     "free": false,
                     "desc": "Component-wise addition",
                     "desc_ja": "成分ごとの加算",
@@ -15901,7 +15027,7 @@ const TrussCAPI = {
                 {
                     "symbol": "-",
                     "signature": "Vec4 - Vec4 → Vec4",
-                    "cpp": "Vec4 operator-(const Vec4&) const",
+                    "cpp": "Vec4 operator-(const Vec4 &) const",
                     "free": false,
                     "desc": "Component-wise subtraction",
                     "desc_ja": "成分ごとの減算",
@@ -15926,18 +15052,9 @@ const TrussCAPI = {
                     "desc_ko": "스칼라 나눗셈"
                 },
                 {
-                    "symbol": "-",
-                    "signature": "-Vec4 → Vec4",
-                    "cpp": "Vec4 operator-() const",
-                    "free": false,
-                    "desc": "Negation",
-                    "desc_ja": "符号反転",
-                    "desc_ko": "부호 반전"
-                },
-                {
                     "symbol": "+=",
-                    "signature": "Vec4 += Vec4 → Vec4&",
-                    "cpp": "Vec4& operator+=(const Vec4&)",
+                    "signature": "Vec4 += Vec4 → Vec4 &",
+                    "cpp": "Vec4 & operator+=(const Vec4 &)",
                     "free": false,
                     "desc": "In-place addition",
                     "desc_ja": "加算代入",
@@ -15945,8 +15062,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "-=",
-                    "signature": "Vec4 -= Vec4 → Vec4&",
-                    "cpp": "Vec4& operator-=(const Vec4&)",
+                    "signature": "Vec4 -= Vec4 → Vec4 &",
+                    "cpp": "Vec4 & operator-=(const Vec4 &)",
                     "free": false,
                     "desc": "In-place subtraction",
                     "desc_ja": "減算代入",
@@ -15954,8 +15071,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "*=",
-                    "signature": "Vec4 *= float → Vec4&",
-                    "cpp": "Vec4& operator*=(float)",
+                    "signature": "Vec4 *= float → Vec4 &",
+                    "cpp": "Vec4 & operator*=(float)",
                     "free": false,
                     "desc": "In-place scalar multiplication",
                     "desc_ja": "スカラー倍代入",
@@ -15963,8 +15080,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "/=",
-                    "signature": "Vec4 /= float → Vec4&",
-                    "cpp": "Vec4& operator/=(float)",
+                    "signature": "Vec4 /= float → Vec4 &",
+                    "cpp": "Vec4 & operator/=(float)",
                     "free": false,
                     "desc": "In-place scalar division",
                     "desc_ja": "スカラー除算代入",
@@ -15973,7 +15090,7 @@ const TrussCAPI = {
                 {
                     "symbol": "==",
                     "signature": "Vec4 == Vec4 → bool",
-                    "cpp": "bool operator==(const Vec4&) const",
+                    "cpp": "bool operator==(const Vec4 &) const",
                     "free": false,
                     "desc": "Equality comparison",
                     "desc_ja": "等価比較",
@@ -15982,20 +15099,11 @@ const TrussCAPI = {
                 {
                     "symbol": "!=",
                     "signature": "Vec4 != Vec4 → bool",
-                    "cpp": "bool operator!=(const Vec4&) const",
+                    "cpp": "bool operator!=(const Vec4 &) const",
                     "free": false,
                     "desc": "Inequality comparison",
                     "desc_ja": "非等価比較",
                     "desc_ko": "다름 비교"
-                },
-                {
-                    "symbol": "*",
-                    "signature": "float * Vec4 → Vec4",
-                    "cpp": "Vec4 operator*(float, const Vec4&)",
-                    "free": true,
-                    "desc": "Component-wise multiplication",
-                    "desc_ja": "成分ごとの乗算",
-                    "desc_ko": "성분별 곱셈"
                 }
             ]
         },
@@ -16022,15 +15130,10 @@ const TrussCAPI = {
                 "rotateZ",
                 "scale"
             ],
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
             "properties": [
                 {
                     "name": "m",
-                    "type": "float[16]",
+                    "type": "",
                     "desc": "Raw row-major element storage (16 floats)"
                 }
             ],
@@ -16042,7 +15145,7 @@ const TrussCAPI = {
                         "int row, int col",
                         "int row, int col"
                     ],
-                    "desc": "Read the element at (row, col) (const overload)"
+                    "desc": "Access the element at (row, col)"
                 },
                 {
                     "name": "transposed",
@@ -16166,29 +15269,11 @@ const TrussCAPI = {
                 {
                     "symbol": "*",
                     "signature": "Mat4 * Mat4 → Mat4",
-                    "cpp": "Mat4 operator*(const Mat4&) const",
+                    "cpp": "Mat4 operator*(const Mat4 &) const",
                     "free": false,
                     "desc": "Composition (matrix product)",
                     "desc_ja": "合成（行列積）",
                     "desc_ko": "합성(행렬 곱)"
-                },
-                {
-                    "symbol": "*",
-                    "signature": "Mat4 * Vec3 → Vec3",
-                    "cpp": "Vec3 operator*(const Vec3&) const",
-                    "free": false,
-                    "desc": "Transform vector by Mat4",
-                    "desc_ja": "Mat4でベクトルを変換",
-                    "desc_ko": "벡터 변환"
-                },
-                {
-                    "symbol": "*",
-                    "signature": "Mat4 * Vec4 → Vec4",
-                    "cpp": "Vec4 operator*(const Vec4&) const",
-                    "free": false,
-                    "desc": "Transform vector by Mat4",
-                    "desc_ja": "Mat4でベクトルを変換",
-                    "desc_ko": "벡터 변환"
                 }
             ]
         },
@@ -16229,22 +15314,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "w",
-                    "type": "float",
+                    "type": "",
                     "desc": "W component"
                 },
                 {
                     "name": "x",
-                    "type": "float",
+                    "type": "",
                     "desc": "X component"
                 },
                 {
                     "name": "y",
-                    "type": "float",
+                    "type": "",
                     "desc": "Y component"
                 },
                 {
                     "name": "z",
-                    "type": "float",
+                    "type": "",
                     "desc": "Z component"
                 }
             ],
@@ -16353,7 +15438,7 @@ const TrussCAPI = {
                 {
                     "symbol": "==",
                     "signature": "Quaternion == Quaternion → bool",
-                    "cpp": "bool operator==(const Quaternion&) const",
+                    "cpp": "bool operator==(const Quaternion &) const",
                     "free": false,
                     "desc": "Equality comparison",
                     "desc_ja": "等価比較",
@@ -16362,7 +15447,7 @@ const TrussCAPI = {
                 {
                     "symbol": "!=",
                     "signature": "Quaternion != Quaternion → bool",
-                    "cpp": "bool operator!=(const Quaternion&) const",
+                    "cpp": "bool operator!=(const Quaternion &) const",
                     "free": false,
                     "desc": "Inequality comparison",
                     "desc_ja": "非等価比較",
@@ -16371,7 +15456,7 @@ const TrussCAPI = {
                 {
                     "symbol": "*",
                     "signature": "Quaternion * Quaternion → Quaternion",
-                    "cpp": "Quaternion operator*(const Quaternion&) const",
+                    "cpp": "Quaternion operator*(const Quaternion &) const",
                     "free": false,
                     "desc": "Composition (matrix product)",
                     "desc_ja": "合成（行列積）",
@@ -16405,7 +15490,7 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "m",
-                    "type": "float[9]",
+                    "type": "",
                     "desc": "Raw row-major element storage (9 floats)"
                 }
             ],
@@ -16417,7 +15502,7 @@ const TrussCAPI = {
                         "int row, int col",
                         "int row, int col"
                     ],
-                    "desc": "Read the element at (row, col) (const overload)"
+                    "desc": "Access the element at (row, col)"
                 },
                 {
                     "name": "transposed",
@@ -16493,29 +15578,11 @@ const TrussCAPI = {
                 {
                     "symbol": "*",
                     "signature": "Mat3 * Mat3 → Mat3",
-                    "cpp": "Mat3 operator*(const Mat3&) const",
+                    "cpp": "Mat3 operator*(const Mat3 &) const",
                     "free": false,
                     "desc": "Composition (matrix product)",
                     "desc_ja": "合成（行列積）",
                     "desc_ko": "합성(행렬 곱)"
-                },
-                {
-                    "symbol": "*",
-                    "signature": "Mat3 * Vec2 → Vec2",
-                    "cpp": "Vec2 operator*(const Vec2&) const",
-                    "free": false,
-                    "desc": "Transform vector by Mat3",
-                    "desc_ja": "Mat3でベクトルを変換",
-                    "desc_ko": "벡터 변환"
-                },
-                {
-                    "symbol": "*",
-                    "signature": "Mat3 * Vec3 → Vec3",
-                    "cpp": "Vec3 operator*(const Vec3&) const",
-                    "free": false,
-                    "desc": "Transform vector by Mat3",
-                    "desc_ja": "Mat3でベクトルを変換",
-                    "desc_ko": "벡터 변환"
                 }
             ]
         },
@@ -16548,34 +15615,25 @@ const TrussCAPI = {
                 "setColor",
                 "fromHSB"
             ],
-            "constructor": {
-                "signatures": [
-                    "",
-                    "float r, float g, float b",
-                    "float r, float g, float b, float a",
-                    "float gray",
-                    "float gray, float a"
-                ]
-            },
             "properties": [
                 {
                     "name": "r",
-                    "type": "float",
+                    "type": "",
                     "desc": "Red component (0.0-1.0)"
                 },
                 {
                     "name": "g",
-                    "type": "float",
+                    "type": "",
                     "desc": "Green component (0.0-1.0)"
                 },
                 {
                     "name": "b",
-                    "type": "float",
+                    "type": "",
                     "desc": "Blue component (0.0-1.0)"
                 },
                 {
                     "name": "a",
-                    "type": "float",
+                    "type": "",
                     "desc": "Alpha component (0.0-1.0)"
                 }
             ],
@@ -16584,8 +15642,8 @@ const TrussCAPI = {
                     "name": "set",
                     "return": "Color &",
                     "signatures": [
-                        "float r_, float g_, float b_, float a_ = …",
-                        "float gray, float a_ = …",
+                        "float r, float g, float b, float a = …",
+                        "float gray, float a = …",
                         "const Color & c"
                     ],
                     "desc": "Set color components"
@@ -16741,7 +15799,7 @@ const TrussCAPI = {
                 {
                     "symbol": "+",
                     "signature": "Color + Color → Color",
-                    "cpp": "Color operator+(const Color&) const",
+                    "cpp": "Color operator+(const Color &) const",
                     "free": false,
                     "desc": "Component-wise addition",
                     "desc_ja": "成分ごとの加算",
@@ -16750,7 +15808,7 @@ const TrussCAPI = {
                 {
                     "symbol": "-",
                     "signature": "Color - Color → Color",
-                    "cpp": "Color operator-(const Color&) const",
+                    "cpp": "Color operator-(const Color &) const",
                     "free": false,
                     "desc": "Component-wise subtraction",
                     "desc_ja": "成分ごとの減算",
@@ -16777,7 +15835,7 @@ const TrussCAPI = {
                 {
                     "symbol": "==",
                     "signature": "Color == Color → bool",
-                    "cpp": "bool operator==(const Color&) const",
+                    "cpp": "bool operator==(const Color &) const",
                     "free": false,
                     "desc": "Equality comparison",
                     "desc_ja": "等価比較",
@@ -16786,7 +15844,7 @@ const TrussCAPI = {
                 {
                     "symbol": "!=",
                     "signature": "Color != Color → bool",
-                    "cpp": "bool operator!=(const Color&) const",
+                    "cpp": "bool operator!=(const Color &) const",
                     "free": false,
                     "desc": "Inequality comparison",
                     "desc_ja": "非等価比較",
@@ -16908,28 +15966,31 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     "",
-                    "float x, float y, float width, float height"
+                    "float x, float y, float w, float h",
+                    "const Vec2 & pos, float w, float h",
+                    "const Vec3 & pos, float w, float h",
+                    "float x, float y, float z, float w, float h"
                 ]
             },
             "properties": [
                 {
                     "name": "x",
-                    "type": "float",
+                    "type": "",
                     "desc": "X position"
                 },
                 {
                     "name": "y",
-                    "type": "float",
+                    "type": "",
                     "desc": "Y position"
                 },
                 {
                     "name": "width",
-                    "type": "float",
+                    "type": "",
                     "desc": "Width"
                 },
                 {
                     "name": "height",
-                    "type": "float",
+                    "type": "",
                     "desc": "Height"
                 }
             ],
@@ -16938,8 +15999,8 @@ const TrussCAPI = {
                     "name": "set",
                     "return": "Rect &",
                     "signatures": [
-                        "float x_, float y_, float w_, float h_",
-                        "const Vec2 & pos, float w_, float h_"
+                        "float x, float y, float w, float h",
+                        "const Vec2 & pos, float w, float h"
                     ],
                     "desc": "Set rectangle bounds"
                 },
@@ -17019,15 +16080,21 @@ const TrussCAPI = {
                 "EasyCam",
                 "screenToWorld"
             ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "const Vec3 & o, const Vec3 & d"
+                ]
+            },
             "properties": [
                 {
                     "name": "origin",
-                    "type": "Vec3",
+                    "type": "",
                     "desc": "Ray origin point"
                 },
                 {
                     "name": "direction",
-                    "type": "Vec3",
+                    "type": "",
                     "desc": "Ray direction (normalized)"
                 }
             ],
@@ -17167,6 +16234,11 @@ const TrussCAPI = {
                 "Event",
                 "CoreEvents"
             ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "disconnect",
@@ -17183,6 +16255,17 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "True while the listener is still connected to its event"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "EventListener = EventListener & → EventListener &",
+                    "cpp": "EventListener & operator=(EventListener &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ]
         },
@@ -17298,6 +16381,17 @@ const TrussCAPI = {
                     ],
                     "desc": "Get the main thread ID, recording the current thread's ID on the first call."
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Thread = Thread & → Thread &",
+                    "cpp": "Thread & operator=(Thread &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -17411,6 +16505,11 @@ const TrussCAPI = {
                 "CoreEvents",
                 "Deliver"
             ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "listen",
@@ -17468,20 +16567,25 @@ const TrussCAPI = {
                 "LogLevel",
                 "logNotice"
             ],
+            "constructor": {
+                "signatures": [
+                    "LogLevel lvl, const std::string & msg"
+                ]
+            },
             "properties": [
                 {
                     "name": "level",
-                    "type": "LogLevel",
+                    "type": "",
                     "desc": "Severity of the log message"
                 },
                 {
                     "name": "message",
-                    "type": "string",
+                    "type": "",
                     "desc": "The log message text"
                 },
                 {
                     "name": "timestamp",
-                    "type": "string",
+                    "type": "",
                     "desc": "Timestamp string (HH:MM:SS.mmm) generated when the message was logged"
                 }
             ]
@@ -17505,10 +16609,15 @@ const TrussCAPI = {
                 "LogEventArgs",
                 "logNotice"
             ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "properties": [
                 {
                     "name": "onLog",
-                    "type": "Event<LogEventArgs>",
+                    "type": "",
                     "desc": "Event fired for every log message; listen to it to route logs (console/file/custom sink)"
                 }
             ],
@@ -17592,7 +16701,23 @@ const TrussCAPI = {
             "desc": "",
             "keywords": [],
             "desc_ja": "",
-            "desc_ko": ""
+            "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    "LogLevel level, const std::string & module = …"
+                ]
+            },
+            "operators": [
+                {
+                    "symbol": "<<",
+                    "signature": "LogStream << std::ostream &(*)(std::ostream &) → LogStream &",
+                    "cpp": "LogStream & operator<<(std::ostream &(*)(std::ostream &)) const",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ]
         },
         {
             "name": "ColorLinear",
@@ -17614,22 +16739,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "r",
-                    "type": "float",
+                    "type": "",
                     "desc": "Red component (linear, 0.0-1.0)"
                 },
                 {
                     "name": "g",
-                    "type": "float",
+                    "type": "",
                     "desc": "Green component (linear, 0.0-1.0)"
                 },
                 {
                     "name": "b",
-                    "type": "float",
+                    "type": "",
                     "desc": "Blue component (linear, 0.0-1.0)"
                 },
                 {
                     "name": "a",
-                    "type": "float",
+                    "type": "",
                     "desc": "Alpha component (0.0-1.0)"
                 }
             ],
@@ -17695,7 +16820,7 @@ const TrussCAPI = {
                 {
                     "symbol": "+",
                     "signature": "ColorLinear + ColorLinear → ColorLinear",
-                    "cpp": "ColorLinear operator+(const ColorLinear&) const",
+                    "cpp": "ColorLinear operator+(const ColorLinear &) const",
                     "free": false,
                     "desc": "Component-wise addition",
                     "desc_ja": "成分ごとの加算",
@@ -17704,7 +16829,7 @@ const TrussCAPI = {
                 {
                     "symbol": "-",
                     "signature": "ColorLinear - ColorLinear → ColorLinear",
-                    "cpp": "ColorLinear operator-(const ColorLinear&) const",
+                    "cpp": "ColorLinear operator-(const ColorLinear &) const",
                     "free": false,
                     "desc": "Component-wise subtraction",
                     "desc_ja": "成分ごとの減算",
@@ -17729,18 +16854,9 @@ const TrussCAPI = {
                     "desc_ko": "스칼라 나눗셈"
                 },
                 {
-                    "symbol": "*",
-                    "signature": "ColorLinear * ColorLinear → ColorLinear",
-                    "cpp": "ColorLinear operator*(const ColorLinear&) const",
-                    "free": false,
-                    "desc": "Component-wise multiplication",
-                    "desc_ja": "成分ごとの乗算",
-                    "desc_ko": "성분별 곱셈"
-                },
-                {
                     "symbol": "==",
                     "signature": "ColorLinear == ColorLinear → bool",
-                    "cpp": "bool operator==(const ColorLinear&) const",
+                    "cpp": "bool operator==(const ColorLinear &) const",
                     "free": false,
                     "desc": "Equality comparison",
                     "desc_ja": "等価比較",
@@ -17749,7 +16865,7 @@ const TrussCAPI = {
                 {
                     "symbol": "!=",
                     "signature": "ColorLinear != ColorLinear → bool",
-                    "cpp": "bool operator!=(const ColorLinear&) const",
+                    "cpp": "bool operator!=(const ColorLinear &) const",
                     "free": false,
                     "desc": "Inequality comparison",
                     "desc_ja": "非等価比較",
@@ -17790,22 +16906,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "h",
-                    "type": "float",
+                    "type": "",
                     "desc": "Hue (0.0-1.0)"
                 },
                 {
                     "name": "s",
-                    "type": "float",
+                    "type": "",
                     "desc": "Saturation (0.0-1.0)"
                 },
                 {
                     "name": "b",
-                    "type": "float",
+                    "type": "",
                     "desc": "Brightness (0.0-1.0)"
                 },
                 {
                     "name": "a",
-                    "type": "float",
+                    "type": "",
                     "desc": "Alpha component (0.0-1.0)"
                 }
             ],
@@ -17873,22 +16989,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "L",
-                    "type": "float",
+                    "type": "",
                     "desc": "Lightness (0.0-1.0)"
                 },
                 {
                     "name": "a",
-                    "type": "float",
+                    "type": "",
                     "desc": "Green-Red opponent axis (approx -0.4 to 0.4)"
                 },
                 {
                     "name": "b",
-                    "type": "float",
+                    "type": "",
                     "desc": "Blue-Yellow opponent axis (approx -0.4 to 0.4)"
                 },
                 {
                     "name": "alpha",
-                    "type": "float",
+                    "type": "",
                     "desc": "Alpha component (0.0-1.0)"
                 }
             ],
@@ -17964,22 +17080,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "L",
-                    "type": "float",
+                    "type": "",
                     "desc": "Lightness (0.0-1.0)"
                 },
                 {
                     "name": "C",
-                    "type": "float",
+                    "type": "",
                     "desc": "Chroma (0.0 - ~0.4)"
                 },
                 {
                     "name": "H",
-                    "type": "float",
+                    "type": "",
                     "desc": "Hue (0.0-1.0)"
                 },
                 {
                     "name": "alpha",
-                    "type": "float",
+                    "type": "",
                     "desc": "Alpha component (0.0-1.0)"
                 }
             ],
@@ -18056,17 +17172,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "codepoint",
-                    "type": "uint32_t",
+                    "type": "",
                     "desc": "Unicode codepoint this glyph renders"
                 },
                 {
                     "name": "data",
-                    "type": "const uint8_t *",
+                    "type": "",
                     "desc": "Packed bitmap rows (MSB first); must outlive all draw calls"
                 },
                 {
                     "name": "width",
-                    "type": "Width",
+                    "type": "",
                     "desc": "Glyph width: Halfwidth (8x13) or Fullwidth (16x13)"
                 }
             ]
@@ -18125,11 +17241,6 @@ const TrussCAPI = {
                 "addFrame",
                 "addFrameAt"
             ],
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
             "methods": [
                 {
                     "name": "allocate",
@@ -18366,6 +17477,17 @@ const TrussCAPI = {
                     ],
                     "desc": "Mirror vertically (alias for mirror(false, true))"
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Pixels = Pixels & → Pixels &",
+                    "cpp": "Pixels & operator=(Pixels &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -18492,22 +17614,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "latitude",
-                    "type": "double",
+                    "type": "",
                     "desc": "Latitude in degrees"
                 },
                 {
                     "name": "longitude",
-                    "type": "double",
+                    "type": "",
                     "desc": "Longitude in degrees"
                 },
                 {
                     "name": "altitude",
-                    "type": "double",
+                    "type": "",
                     "desc": "Altitude in meters"
                 },
                 {
                     "name": "accuracy",
-                    "type": "float",
+                    "type": "",
                     "desc": "Horizontal accuracy in meters; -1 if not available yet"
                 }
             ]
@@ -18724,37 +17846,37 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "key",
-                    "type": "int",
+                    "type": "",
                     "desc": "Key code (KEY_* / SAPP_KEYCODE_*)"
                 },
                 {
                     "name": "isRepeat",
-                    "type": "bool",
+                    "type": "",
                     "desc": "True if this is a repeat from holding the key"
                 },
                 {
                     "name": "shift",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Shift modifier held"
                 },
                 {
                     "name": "ctrl",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Ctrl modifier held"
                 },
                 {
                     "name": "alt",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Alt modifier held"
                 },
                 {
                     "name": "super",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Super / Command modifier held"
                 },
                 {
                     "name": "consumed",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Set true in a listener to stop propagation to lower-priority listeners"
                 }
             ]
@@ -18780,52 +17902,52 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of pos.x (removed at v1.0)"
                 },
                 {
                     "name": "y",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of pos.y (removed at v1.0)"
                 },
                 {
                     "name": "button",
-                    "type": "int",
+                    "type": "",
                     "desc": "Mouse button (MOUSE_BUTTON_LEFT / RIGHT / MIDDLE)"
                 },
                 {
                     "name": "shift",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Shift modifier held"
                 },
                 {
                     "name": "ctrl",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Ctrl modifier held"
                 },
                 {
                     "name": "alt",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Alt modifier held"
                 },
                 {
                     "name": "super",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Super / Command modifier held"
                 },
                 {
                     "name": "pos",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Cursor position in the receiving node's local space (== globalPos at app level)"
                 },
                 {
                     "name": "globalPos",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Cursor position in screen space"
                 },
                 {
                     "name": "consumed",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Set true in a listener to stop propagation to lower-priority listeners"
                 }
             ],
@@ -18870,67 +17992,67 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of pos.x (removed at v1.0)"
                 },
                 {
                     "name": "y",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of pos.y (removed at v1.0)"
                 },
                 {
                     "name": "deltaX",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of delta.x (removed at v1.0)"
                 },
                 {
                     "name": "deltaY",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of delta.y (removed at v1.0)"
                 },
                 {
                     "name": "shift",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Shift modifier held"
                 },
                 {
                     "name": "ctrl",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Ctrl modifier held"
                 },
                 {
                     "name": "alt",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Alt modifier held"
                 },
                 {
                     "name": "super",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Super / Command modifier held"
                 },
                 {
                     "name": "pos",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Cursor position in local space (== globalPos at app level)"
                 },
                 {
                     "name": "globalPos",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Cursor position in screen space"
                 },
                 {
                     "name": "delta",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Movement since the last event, in local space"
                 },
                 {
                     "name": "globalDelta",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Movement since the last event, in screen space"
                 },
                 {
                     "name": "consumed",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Set true in a listener to stop propagation to lower-priority listeners"
                 }
             ],
@@ -18975,72 +18097,72 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of pos.x (removed at v1.0)"
                 },
                 {
                     "name": "y",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of pos.y (removed at v1.0)"
                 },
                 {
                     "name": "deltaX",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of delta.x (removed at v1.0)"
                 },
                 {
                     "name": "deltaY",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of delta.y (removed at v1.0)"
                 },
                 {
                     "name": "button",
-                    "type": "int",
+                    "type": "",
                     "desc": "Mouse button being dragged (MOUSE_BUTTON_*)"
                 },
                 {
                     "name": "shift",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Shift modifier held"
                 },
                 {
                     "name": "ctrl",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Ctrl modifier held"
                 },
                 {
                     "name": "alt",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Alt modifier held"
                 },
                 {
                     "name": "super",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Super / Command modifier held"
                 },
                 {
                     "name": "pos",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Cursor position in local space (== globalPos at app level)"
                 },
                 {
                     "name": "globalPos",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Cursor position in screen space"
                 },
                 {
                     "name": "delta",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Movement since the last event, in local space"
                 },
                 {
                     "name": "globalDelta",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Movement since the last event, in screen space"
                 },
                 {
                     "name": "consumed",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Set true in a listener to stop propagation to lower-priority listeners"
                 }
             ],
@@ -19084,52 +18206,52 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "scrollX",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of scroll.x (removed at v1.0)"
                 },
                 {
                     "name": "scrollY",
-                    "type": "float",
+                    "type": "",
                     "desc": "Legacy mirror of scroll.y (removed at v1.0)"
                 },
                 {
                     "name": "shift",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Shift modifier held"
                 },
                 {
                     "name": "ctrl",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Ctrl modifier held"
                 },
                 {
                     "name": "alt",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Alt modifier held"
                 },
                 {
                     "name": "super",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Super / Command modifier held"
                 },
                 {
                     "name": "pos",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Cursor position in local space (== globalPos at app level)"
                 },
                 {
                     "name": "globalPos",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Cursor position in screen space"
                 },
                 {
                     "name": "scroll",
-                    "type": "Vec2",
+                    "type": "",
                     "desc": "Scroll amount (x: horizontal, y: vertical)"
                 },
                 {
                     "name": "consumed",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Set true in a listener to stop propagation to lower-priority listeners"
                 }
             ],
@@ -19161,12 +18283,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "width",
-                    "type": "int",
+                    "type": "",
                     "desc": "New window width in pixels"
                 },
                 {
                     "name": "height",
-                    "type": "int",
+                    "type": "",
                     "desc": "New window height in pixels"
                 }
             ]
@@ -19189,17 +18311,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "files",
-                    "type": "vector<string>",
+                    "type": "",
                     "desc": "Paths of the dropped files"
                 },
                 {
                     "name": "x",
-                    "type": "float",
+                    "type": "",
                     "desc": "Drop position x"
                 },
                 {
                     "name": "y",
-                    "type": "float",
+                    "type": "",
                     "desc": "Drop position y"
                 }
             ]
@@ -19228,7 +18350,7 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "text",
-                    "type": "string",
+                    "type": "",
                     "desc": "Pasted clipboard content (already read for you)"
                 }
             ]
@@ -19251,27 +18373,27 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "id",
-                    "type": "int",
+                    "type": "",
                     "desc": "Touch ID, persistent across move events"
                 },
                 {
                     "name": "x",
-                    "type": "float",
+                    "type": "",
                     "desc": "Touch x position"
                 },
                 {
                     "name": "y",
-                    "type": "float",
+                    "type": "",
                     "desc": "Touch y position"
                 },
                 {
                     "name": "pressure",
-                    "type": "float",
+                    "type": "",
                     "desc": "Touch pressure (0.0-1.0; not yet reported by sokol, defaults to 1.0)"
                 },
                 {
                     "name": "changed",
-                    "type": "bool",
+                    "type": "",
                     "desc": "True if this touch was part of the current action"
                 }
             ]
@@ -19302,17 +18424,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "touches",
-                    "type": "TouchPoint[8]",
+                    "type": "",
                     "desc": "Array of active touch points (up to MAX_TOUCHES = 8)"
                 },
                 {
                     "name": "numTouches",
-                    "type": "int",
+                    "type": "",
                     "desc": "Number of valid entries in touches"
                 },
                 {
                     "name": "cancelled",
-                    "type": "bool",
+                    "type": "",
                     "desc": "True when touchReleased fires due to system cancellation (incoming call, system gesture)"
                 }
             ],
@@ -19361,12 +18483,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "raw",
-                    "type": "string",
+                    "type": "",
                     "desc": "Raw input line (e.g. \"tcdebug screenshot /tmp/a.png\")"
                 },
                 {
                     "name": "args",
-                    "type": "vector<string>",
+                    "type": "",
                     "desc": "Input line split on whitespace (e.g. [\"tcdebug\", \"screenshot\", \"/tmp/a.png\"])"
                 }
             ]
@@ -19389,7 +18511,7 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "cancel",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Set true in a listener to cancel the requested exit"
                 }
             ]
@@ -19414,112 +18536,112 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "setup",
-                    "type": "Event<void>",
+                    "type": "",
                     "desc": "Fired after app setup completes"
                 },
                 {
                     "name": "update",
-                    "type": "Event<void>",
+                    "type": "",
                     "desc": "Fired before update each frame"
                 },
                 {
                     "name": "draw",
-                    "type": "Event<void>",
+                    "type": "",
                     "desc": "Fired before draw each frame"
                 },
                 {
                     "name": "onRender",
-                    "type": "Event<void>",
+                    "type": "",
                     "desc": "Fired after sokol_gl flush, while the render pass is still active"
                 },
                 {
                     "name": "afterFrame",
-                    "type": "Event<void>",
+                    "type": "",
                     "desc": "Fired after present() (swapchain committed, outside any pass)"
                 },
                 {
                     "name": "exit",
-                    "type": "Event<void>",
+                    "type": "",
                     "desc": "Fired on app exit"
                 },
                 {
                     "name": "exitRequested",
-                    "type": "Event<ExitRequestEventArgs>",
+                    "type": "",
                     "desc": "Fired when an exit is requested; set args.cancel = true to cancel it"
                 },
                 {
                     "name": "keyPressed",
-                    "type": "Event<KeyEventArgs>",
+                    "type": "",
                     "desc": "Fired when a key is pressed"
                 },
                 {
                     "name": "keyReleased",
-                    "type": "Event<KeyEventArgs>",
+                    "type": "",
                     "desc": "Fired when a key is released"
                 },
                 {
                     "name": "mousePressed",
-                    "type": "Event<MouseEventArgs>",
+                    "type": "",
                     "desc": "Fired when a mouse button is pressed"
                 },
                 {
                     "name": "mouseReleased",
-                    "type": "Event<MouseEventArgs>",
+                    "type": "",
                     "desc": "Fired when a mouse button is released"
                 },
                 {
                     "name": "mouseMoved",
-                    "type": "Event<MouseMoveEventArgs>",
+                    "type": "",
                     "desc": "Fired when the mouse moves with no button held"
                 },
                 {
                     "name": "mouseDragged",
-                    "type": "Event<MouseDragEventArgs>",
+                    "type": "",
                     "desc": "Fired when the mouse moves with a button held"
                 },
                 {
                     "name": "mouseScrolled",
-                    "type": "Event<ScrollEventArgs>",
+                    "type": "",
                     "desc": "Fired when the mouse wheel / trackpad scrolls"
                 },
                 {
                     "name": "windowResized",
-                    "type": "Event<ResizeEventArgs>",
+                    "type": "",
                     "desc": "Fired when the window is resized"
                 },
                 {
                     "name": "filesDropped",
-                    "type": "Event<DragDropEventArgs>",
+                    "type": "",
                     "desc": "Fired when files are dropped onto the window"
                 },
                 {
                     "name": "clipboardPasted",
-                    "type": "Event<ClipboardPastedEventArgs>",
+                    "type": "",
                     "desc": "Fired on a paste gesture (Cmd+V / Ctrl+V / browser paste); args.text holds the content"
                 },
                 {
                     "name": "console",
-                    "type": "Event<ConsoleEventArgs>",
+                    "type": "",
                     "desc": "Fired when a command line is received from stdin"
                 },
                 {
                     "name": "touchPressed",
-                    "type": "Event<TouchEventArgs>",
+                    "type": "",
                     "desc": "Fired when a touch begins (Android/iOS, multi-touch)"
                 },
                 {
                     "name": "touchMoved",
-                    "type": "Event<TouchEventArgs>",
+                    "type": "",
                     "desc": "Fired when a touch moves (Android/iOS, multi-touch)"
                 },
                 {
                     "name": "touchReleased",
-                    "type": "Event<TouchEventArgs>",
+                    "type": "",
                     "desc": "Fired when a touch ends or is cancelled (check args.cancelled)"
                 },
                 {
                     "name": "rawEvent",
-                    "type": "Event<const sapp_event>",
+                    "type": "",
                     "desc": "Fired for every raw sokol_app event (for addons needing the full sapp_event)"
                 }
             ]
@@ -19541,15 +18663,21 @@ const TrussCAPI = {
                 "SoundStream",
                 "Sound"
             ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "Kind k"
+                ]
+            },
             "properties": [
                 {
                     "name": "channels",
-                    "type": "int",
+                    "type": "",
                     "desc": "Channel count of the source (1 = mono, 2 = stereo, ...)"
                 },
                 {
                     "name": "sampleRate",
-                    "type": "int",
+                    "type": "",
                     "desc": "Source sample rate in Hz"
                 }
             ],
@@ -19604,12 +18732,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "samples",
-                    "type": "vector<float>",
+                    "type": "",
                     "desc": "Interleaved PCM samples (channels interleaved per frame)"
                 },
                 {
                     "name": "numSamples",
-                    "type": "size_t",
+                    "type": "",
                     "desc": "Number of samples per channel (frame count)"
                 }
             ],
@@ -19866,13 +18994,6 @@ const TrussCAPI = {
                         "const std::string & path, int maxPolyphony = …"
                     ],
                     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported.",
-                    "platforms": [
-                        "windows",
-                        "macos",
-                        "linux",
-                        "ios",
-                        "android"
-                    ],
                     "platformNote": "Streaming audio (Sound::loadStream / SoundStream). On wasm it is unsupported (needs std::thread + on-disk file I/O, neither available in the default browser build); Sound::loadStream() logs a warning and silently falls back to eager load(). So you always get a Sound, but it is never actually streamed on web — branch on isStreaming() / __EMSCRIPTEN__ if it matters.",
                     "platformNote_ja": "ストリーミング再生 (Sound::loadStream / SoundStream)。wasm では非対応 (std::thread + ディスクI/O が必要、ブラウザの既定ビルドにはどちらも無い)。Sound::loadStream() は警告を出して eager load() に静かにフォールバックする。Sound 自体は得られるが web では決してストリームされない — 必要なら isStreaming() / __EMSCRIPTEN__ で分岐する。"
                 },
@@ -19933,57 +19054,57 @@ const TrussCAPI = {
                 },
                 {
                     "name": "volume",
-                    "type": "float",
+                    "type": "",
                     "desc": "Playback volume (0.0-1.0). Stored as an atomic; safe to set from the UI thread while playing."
                 },
                 {
                     "name": "pan",
-                    "type": "float",
+                    "type": "",
                     "desc": "Stereo pan (-1.0 left, 0.0 center, 1.0 right). Atomic."
                 },
                 {
                     "name": "speed",
-                    "type": "float",
+                    "type": "",
                     "desc": "Playback speed (0.5 half, 1.0 normal, 2.0 double). Atomic."
                 },
                 {
                     "name": "loop",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Loop the voice when it reaches the end. Atomic."
                 },
                 {
                     "name": "playing",
-                    "type": "bool",
+                    "type": "",
                     "desc": "True while this voice is active in the mixer. Atomic."
                 },
                 {
                     "name": "paused",
-                    "type": "bool",
+                    "type": "",
                     "desc": "True while paused (still a live voice, but not advancing). Atomic."
                 },
                 {
                     "name": "mixMode",
-                    "type": "MixMode",
+                    "type": "",
                     "desc": "Channel mix policy when no explicit channelMap is set (Auto / DownmixMono). Stored as an atomic int holding the MixMode value."
                 },
                 {
                     "name": "channelMap",
-                    "type": "internal::AtomicSharedPtr<const std::vector<std::vector<int>>>",
+                    "type": "",
                     "desc": "Atomically-swappable per-output-channel source routing. Null means follow mixMode; non-null map is the source of truth. UI thread installs new versions, audio thread reads each callback."
                 },
                 {
                     "name": "channelGains",
-                    "type": "internal::AtomicSharedPtr<const std::vector<float>>",
+                    "type": "",
                     "desc": "Atomically-swappable per-output-channel gain multipliers. Entries beyond .size() default to 1.0. Orthogonal to channelMap / mixMode."
                 },
                 {
                     "name": "positionF",
-                    "type": "double",
+                    "type": "",
                     "desc": "Floating-point playback cursor in source samples; advances by speed * rateRatio each output frame."
                 },
                 {
                     "name": "rateRatio",
-                    "type": "float",
+                    "type": "",
                     "desc": "Source-to-engine sample-rate ratio (buffer sampleRate / engine sampleRate), set when queued so the voice plays at correct pitch regardless of engine rate."
                 }
             ]
@@ -20018,27 +19139,27 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "sampleRate",
-                    "type": "int",
+                    "type": "",
                     "desc": "Engine output sample rate in Hz (default 96000)"
                 },
                 {
                     "name": "channels",
-                    "type": "int",
+                    "type": "",
                     "desc": "Output channel count (1 = mono, 2 = stereo; default 2)"
                 },
                 {
                     "name": "bufferSize",
-                    "type": "int",
+                    "type": "",
                     "desc": "Requested device buffer size in frames; 0 = let miniaudio choose"
                 },
                 {
                     "name": "maxPolyphony",
-                    "type": "int",
+                    "type": "",
                     "desc": "Max simultaneously-playing Sound voices (default 32)"
                 },
                 {
                     "name": "deviceName",
-                    "type": "string",
+                    "type": "",
                     "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate."
                 }
             ]
@@ -20073,12 +19194,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "name",
-                    "type": "string",
+                    "type": "",
                     "desc": "Device name (pass to AudioSettings::deviceName)"
                 },
                 {
                     "name": "isDefault",
-                    "type": "bool",
+                    "type": "",
                     "desc": "True if this is the system default playback device"
                 }
             ]
@@ -20108,32 +19229,32 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "deviceName",
-                    "type": "string",
+                    "type": "",
                     "desc": "Actual device name now active (resolved, never empty)"
                 },
                 {
                     "name": "isDefaultDevice",
-                    "type": "bool",
+                    "type": "",
                     "desc": "True when the opened device is the OS's current default playback device"
                 },
                 {
                     "name": "sampleRate",
-                    "type": "int",
+                    "type": "",
                     "desc": "Active engine sample rate in Hz"
                 },
                 {
                     "name": "channels",
-                    "type": "int",
+                    "type": "",
                     "desc": "Active output channel count"
                 },
                 {
                     "name": "bufferSize",
-                    "type": "int",
+                    "type": "",
                     "desc": "Active device buffer size in frames"
                 },
                 {
                     "name": "maxPolyphony",
-                    "type": "int",
+                    "type": "",
                     "desc": "Active max polyphony"
                 }
             ]
@@ -20169,27 +19290,27 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "data",
-                    "type": "float*",
+                    "type": "",
                     "desc": "Interleaved mutable output, frameCount * channels samples"
                 },
                 {
                     "name": "frameCount",
-                    "type": "int",
+                    "type": "",
                     "desc": "Number of frames in this callback"
                 },
                 {
                     "name": "channels",
-                    "type": "int",
+                    "type": "",
                     "desc": "Channel count (floats per frame)"
                 },
                 {
                     "name": "sampleRate",
-                    "type": "int",
+                    "type": "",
                     "desc": "Engine output sample rate in Hz"
                 },
                 {
                     "name": "framePosition",
-                    "type": "uint64_t",
+                    "type": "",
                     "desc": "Monotonic count of output frames emitted since engine init (sample-accurate time/phase reference)"
                 }
             ]
@@ -20215,27 +19336,27 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "data",
-                    "type": "const float*",
+                    "type": "",
                     "desc": "Interleaved read-only mic input, frameCount * channels samples"
                 },
                 {
                     "name": "frameCount",
-                    "type": "int",
+                    "type": "",
                     "desc": "Number of frames in this callback"
                 },
                 {
                     "name": "channels",
-                    "type": "int",
+                    "type": "",
                     "desc": "Channel count (floats per frame)"
                 },
                 {
                     "name": "sampleRate",
-                    "type": "int",
+                    "type": "",
                     "desc": "Input sample rate in Hz"
                 },
                 {
                     "name": "framePosition",
-                    "type": "uint64_t",
+                    "type": "",
                     "desc": "Monotonic count of input frames received since capture start"
                 }
             ]
@@ -20272,17 +19393,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "audioOut",
-                    "type": "Event<AudioOutBuffer>",
+                    "type": "",
                     "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
                 },
                 {
                     "name": "audioIn",
-                    "type": "Event<AudioInBuffer>",
+                    "type": "",
                     "desc": "Real-time capture callback event (microphone input). listen() to add an input-processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
                 },
                 {
                     "name": "audioDeviceChanged",
-                    "type": "Event<AudioDeviceChangedArgs>",
+                    "type": "",
                     "desc": "Fires after every successful init() (initial AND re-init). Args carry the resolved device's real name, isDefaultDevice flag, sampleRate, channels, bufferSize, maxPolyphony. Listener runs on the thread that called init() (main), not the audio thread."
                 }
             ],
@@ -20446,7 +19567,9 @@ const TrussCAPI = {
                         "linux",
                         "android",
                         "ios"
-                    ]
+                    ],
+                    "platformNote": "Streaming audio (Sound::loadStream / SoundStream). On wasm it is unsupported (needs std::thread + on-disk file I/O, neither available in the default browser build); Sound::loadStream() logs a warning and silently falls back to eager load(). So you always get a Sound, but it is never actually streamed on web — branch on isStreaming() / __EMSCRIPTEN__ if it matters.",
+                    "platformNote_ja": "ストリーミング再生 (Sound::loadStream / SoundStream)。wasm では非対応 (std::thread + ディスクI/O が必要、ブラウザの既定ビルドにはどちらも無い)。Sound::loadStream() は警告を出して eager load() に静かにフォールバックする。Sound 自体は得られるが web では決してストリームされない — 必要なら isStreaming() / __EMSCRIPTEN__ で分岐する。"
                 },
                 {
                     "name": "loadTestTone",
@@ -20785,17 +19908,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "filePath",
-                    "type": "string",
+                    "type": "",
                     "desc": "Full path to the chosen file"
                 },
                 {
                     "name": "fileName",
-                    "type": "string",
+                    "type": "",
                     "desc": "Filename only (no directory)"
                 },
                 {
                     "name": "success",
-                    "type": "bool",
+                    "type": "",
                     "desc": "true if a file was chosen, false if the dialog was cancelled"
                 }
             ]
@@ -20853,6 +19976,11 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "",
             "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    "Json src"
+                ]
+            },
             "properties": [
                 {
                     "name": "applied",
@@ -21109,6 +20237,17 @@ const TrussCAPI = {
                     ],
                     "desc": "Flush buffer to disk"
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "FileWriter = FileWriter & → FileWriter &",
+                    "cpp": "FileWriter & operator=(FileWriter &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -21225,6 +20364,17 @@ const TrussCAPI = {
                     ],
                     "desc": "Get remaining bytes"
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "FileReader = FileReader & → FileReader &",
+                    "cpp": "FileReader & operator=(FileReader &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -21244,6 +20394,13 @@ const TrussCAPI = {
                     "name": "shaderExample",
                     "group": "graphics"
                 }
+            ],
+            "related": [
+                "FullscreenShader",
+                "setUniform",
+                "setTexture",
+                "pushShader",
+                "Fbo"
             ],
             "properties": [
                 {
@@ -21434,6 +20591,17 @@ const TrussCAPI = {
                     ],
                     "desc": ""
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Shader = Shader & → Shader &",
+                    "cpp": "Shader & operator=(Shader &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -21499,17 +20667,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "mode",
-                    "type": "CurveStyle::Mode",
+                    "type": "",
                     "desc": "Tessellation mode: adaptive Tolerance or fixed Resolution"
                 },
                 {
                     "name": "tolerance",
-                    "type": "float",
+                    "type": "",
                     "desc": "Maximum chord-to-curve error in screen pixels (Tolerance mode)"
                 },
                 {
                     "name": "resolution",
-                    "type": "int",
+                    "type": "",
                     "desc": "Fixed segment count used in Resolution mode (and as a fallback)"
                 }
             ]
@@ -21534,22 +20702,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "updateFps",
-                    "type": "float",
+                    "type": "",
                     "desc": "Target update rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
                 },
                 {
                     "name": "drawFps",
-                    "type": "float",
+                    "type": "",
                     "desc": "Target draw rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
                 },
                 {
                     "name": "actualVsyncFps",
-                    "type": "float",
+                    "type": "",
                     "desc": "Actual monitor refresh rate (0 if unknown)"
                 },
                 {
                     "name": "synced",
-                    "type": "bool",
+                    "type": "",
                     "desc": "true when update and draw run in sync (1:1)"
                 }
             ]
@@ -21576,52 +20744,52 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "width",
-                    "type": "int",
+                    "type": "",
                     "desc": "Window width (default 1280)"
                 },
                 {
                     "name": "height",
-                    "type": "int",
+                    "type": "",
                     "desc": "Window height (default 720)"
                 },
                 {
                     "name": "title",
-                    "type": "string",
+                    "type": "",
                     "desc": "Window title (default \"TrussC App\")"
                 },
                 {
                     "name": "highDpi",
-                    "type": "bool",
+                    "type": "",
                     "desc": "High DPI support for sharp rendering on Retina (default true)"
                 },
                 {
                     "name": "pixelPerfect",
-                    "type": "bool",
+                    "type": "",
                     "desc": "true: coords match framebuffer size; false: coords use logical size (default false)"
                 },
                 {
                     "name": "sampleCount",
-                    "type": "int",
+                    "type": "",
                     "desc": "MSAA sample count (default 4)"
                 },
                 {
                     "name": "fullscreen",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Start in fullscreen (default false)"
                 },
                 {
                     "name": "decorated",
-                    "type": "bool",
+                    "type": "",
                     "desc": "false: borderless/chromeless window with no title bar (default true)"
                 },
                 {
                     "name": "clipboardSize",
-                    "type": "int",
+                    "type": "",
                     "desc": "Clipboard buffer size in bytes (default 65536)"
                 },
                 {
                     "name": "swapInterval",
-                    "type": "int",
+                    "type": "",
                     "desc": "VSync present interval: 1 = on (default), 0 = off, N = every Nth refresh"
                 }
             ],
@@ -21737,11 +20905,6 @@ const TrussCAPI = {
                 "createCone",
                 "createIcoSphere"
             ],
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
             "methods": [
                 {
                     "name": "setMode",
@@ -22233,6 +21396,17 @@ const TrussCAPI = {
                     ],
                     "desc": "Number of indices currently uploaded to the GPU"
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Mesh = Mesh → Mesh &",
+                    "cpp": "Mesh & operator=(const Mesh &)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -22273,8 +21447,8 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     "",
-                    "vector<Vec2> verts",
-                    "vector<Vec3> verts"
+                    "const std::vector<Vec2> & verts",
+                    "const std::vector<Vec3> & verts"
                 ]
             },
             "methods": [
@@ -22511,8 +21685,8 @@ const TrussCAPI = {
             "operators": [
                 {
                     "symbol": "[]",
-                    "signature": "Path[int] → Vec3&",
-                    "cpp": "Vec3& operator[](int)",
+                    "signature": "Path[int] → Vec3 &",
+                    "cpp": "Vec3 & operator[](int)",
                     "free": false,
                     "desc": "Component access by index",
                     "desc_ja": "インデックスで成分アクセス",
@@ -22555,11 +21729,6 @@ const TrussCAPI = {
                 "LightType",
                 "Environment"
             ],
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
             "methods": [
                 {
                     "name": "setDirectional",
@@ -22938,11 +22107,6 @@ const TrussCAPI = {
                 "Mesh",
                 "Environment"
             ],
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
             "methods": [
                 {
                     "name": "setBaseColor",
@@ -23274,11 +22438,6 @@ const TrussCAPI = {
                 "Image",
                 "Fbo"
             ],
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
             "methods": [
                 {
                     "name": "allocate",
@@ -23621,6 +22780,17 @@ const TrussCAPI = {
                     ],
                     "desc": ""
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Texture = Texture & → Texture &",
+                    "cpp": "Texture & operator=(Texture &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -23718,6 +22888,17 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": ""
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "IesProfile = IesProfile & → IesProfile &",
+                    "cpp": "IesProfile & operator=(IesProfile &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ]
         },
@@ -23875,6 +23056,11 @@ const TrussCAPI = {
                 "Texture",
                 "Pixels"
             ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "load",
@@ -24055,6 +23241,17 @@ const TrussCAPI = {
                     ],
                     "desc": "Get internal texture"
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Image = Image & → Image &",
+                    "cpp": "Image & operator=(Image &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -24196,7 +23393,7 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     "",
-                    "const Path& polyline"
+                    "const Path & polyline"
                 ]
             },
             "methods": [
@@ -24841,37 +24038,37 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "codepoint",
-                    "type": "uint32_t",
+                    "type": "",
                     "desc": "Final codepoint after vertical-form mapping"
                 },
                 {
                     "name": "drawX",
-                    "type": "float",
+                    "type": "",
                     "desc": "Pen X position; the glyph's own xoffset is added on top"
                 },
                 {
                     "name": "baselineY",
-                    "type": "float",
+                    "type": "",
                     "desc": "Baseline Y position; the glyph's own yoffset is added on top"
                 },
                 {
                     "name": "rotationCw",
-                    "type": "float",
+                    "type": "",
                     "desc": "Clockwise rotation in radians: 0 (upright) or TAU/4 (90 degrees, vertical text)"
                 },
                 {
                     "name": "pivotX",
-                    "type": "float",
+                    "type": "",
                     "desc": "Rotation center X (used only when rotationCw is non-zero)"
                 },
                 {
                     "name": "pivotY",
-                    "type": "float",
+                    "type": "",
                     "desc": "Rotation center Y (used only when rotationCw is non-zero)"
                 },
                 {
                     "name": "scaleX",
-                    "type": "float",
+                    "type": "",
                     "desc": "Horizontal scale (1.0 normally, less than 1 for TCY combine)"
                 }
             ]
@@ -24907,11 +24104,6 @@ const TrussCAPI = {
                 "FullscreenShader",
                 "Shader"
             ],
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
             "methods": [
                 {
                     "name": "allocate",
@@ -25089,6 +24281,17 @@ const TrussCAPI = {
                     ],
                     "desc": ""
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Fbo = Fbo & → Fbo &",
+                    "cpp": "Fbo & operator=(Fbo &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -25166,17 +24369,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "deviceId",
-                    "type": "int",
+                    "type": "",
                     "desc": "Numeric device ID (pass to setDeviceID); -1 if unknown"
                 },
                 {
                     "name": "deviceName",
-                    "type": "string",
+                    "type": "",
                     "desc": "Human-readable device name"
                 },
                 {
                     "name": "uniqueId",
-                    "type": "string",
+                    "type": "",
                     "desc": "Stable unique identifier for the device"
                 }
             ],
@@ -25239,7 +24442,7 @@ const TrussCAPI = {
                 "ios",
                 "web"
             ],
-            "platformNote": "Webcam capture is a stub on Android: setupPlatform() logs \"Not yet implemented on Android\" and returns false (Camera2 NDK TODO). Real backends: macOS/iOS AVFoundation, Windows Media Foundation, Linux V4L2, web getUserMedia.",
+            "platformNote": "Webcam capture is a stub on Android: setupPlatform() logs \"Not yet implemented on Android\" and returns false (Camera2 NDK TODO). Real backends: macOS/iOS AVFoundation, Windows Media Foundation, Linux V4L2, web getUserMedia.\n",
             "platformNote_ja": "Android はスタブ。setupPlatform() が「Not yet implemented」を出して false を返す（Camera2 NDK 未実装）。他は実装あり（mac/ios AVFoundation, win MediaFoundation, linux V4L2, web getUserMedia）。",
             "constructor": {
                 "signatures": [
@@ -25419,6 +24622,17 @@ const TrussCAPI = {
                     ],
                     "desc": "Request camera access asynchronously (macOS)"
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "VideoGrabber = VideoGrabber & → VideoGrabber &",
+                    "cpp": "VideoGrabber & operator=(VideoGrabber &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -25427,6 +24641,11 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "",
             "desc_ko": "",
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "load",
@@ -25886,6 +25105,11 @@ const TrussCAPI = {
                     "group": "tests"
                 }
             ],
+            "related": [
+                "createVideoPlayer",
+                "Texture",
+                "Sound"
+            ],
             "platforms": [
                 "macos",
                 "windows",
@@ -25893,6 +25117,13 @@ const TrussCAPI = {
                 "ios",
                 "web"
             ],
+            "platformNote": "Video playback is a stub on Android: loadPlatform() logs \"Not yet implemented on Android\" and returns false; every platform hook is no-op (MediaCodec NDK TODO). Real backends: macOS/iOS AVFoundation, Windows Media Foundation, Linux FFmpeg, web HTML5 <video>.\n",
+            "platformNote_ja": "Android はスタブ。loadPlatform() が false を返し全フックが no-op（MediaCodec NDK 未実装）。他は実装あり（mac/ios AVFoundation, win MediaFoundation, linux FFmpeg, web HTML5 video）。",
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "load",
@@ -26193,11 +25424,19 @@ const TrussCAPI = {
                         "const std::string & path, Pixels & outPixels, float timeSec = …, float * outDuration = …"
                     ],
                     "desc": "Extract a single frame from a video file without loading the full video. Useful for thumbnails",
-                    "platforms": [
-                        "macos"
-                    ],
                     "platformNote": "Static single-frame extraction is fully implemented only on macOS (AVAssetImageGenerator). Windows/Linux/Android stub it (`return false`, TODO); iOS and web have no extractFramePlatform() definition at all.",
                     "platformNote_ja": "静止フレーム抽出が実装されているのは macOS のみ（AVAssetImageGenerator）。win/linux/android は false を返すスタブ、ios/web は extractFramePlatform() の定義自体が存在しない。"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "VideoPlayer = VideoPlayer & → VideoPlayer &",
+                    "cpp": "VideoPlayer & operator=(VideoPlayer &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ]
         },
@@ -26224,22 +25463,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "codec",
-                    "type": "VideoCodec",
+                    "type": "",
                     "desc": "Output codec (default H264)"
                 },
                 {
                     "name": "fps",
-                    "type": "float",
+                    "type": "",
                     "desc": "Capture/output frame rate. For ScreenRecorder this is the capture ceiling; for VideoWriter it is the exact output rate (default 60)"
                 },
                 {
                     "name": "bitrate",
-                    "type": "int",
+                    "type": "",
                     "desc": "Target bits/sec for H.264/HEVC; 0 = auto. Ignored by ProRes"
                 },
                 {
                     "name": "keyframeInterval",
-                    "type": "int",
+                    "type": "",
                     "desc": "Frames between keyframes; 0 = encoder default"
                 }
             ]
@@ -26256,6 +25495,10 @@ const TrussCAPI = {
             ],
             "desc_ja": "フレームを動画ファイルにエンコードする。パスを開いてフレームを書き込み、close でファイルを確定する",
             "desc_ko": "프레임을 비디오 파일로 인코딩: 경로를 열어 프레임을 기록한 뒤 close로 파일을 확정",
+            "related": [
+                "ScreenRecorder",
+                "videoCodecName"
+            ],
             "platforms": [
                 "macos",
                 "windows",
@@ -26263,6 +25506,13 @@ const TrussCAPI = {
                 "android",
                 "ios"
             ],
+            "platformNote": "Video encoding is a stub on web: openPlatform() logs 'not implemented on web yet' and returns false (WebGPU can't sync-read pixels; a future JS MediaRecorder backend is noted). Real backends: macOS/iOS AVAssetWriter, Windows IMFSinkWriter, Linux GStreamer, Android MediaCodec.",
+            "platformNote_ja": "web はスタブ。openPlatform() が「not implemented」を出して false を返す（WebGPU が同期 pixel readback 不可）。他は実装あり（mac/ios AVAssetWriter, win IMFSinkWriter, linux GStreamer, android MediaCodec）。",
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "open",
@@ -26385,6 +25635,11 @@ const TrussCAPI = {
             ],
             "desc_ja": "描画結果を動画ファイルにキャプチャする（画面フレームの録画開始/停止）",
             "desc_ko": "렌더링 출력을 비디오 파일로 캡처(화면 프레임의 녹화 시작/정지)",
+            "related": [
+                "VideoWriter",
+                "startRecording",
+                "Fbo"
+            ],
             "platforms": [
                 "macos",
                 "windows",
@@ -26392,6 +25647,13 @@ const TrussCAPI = {
                 "android",
                 "ios"
             ],
+            "platformNote": "Built on VideoWriter, so it is non-functional on web (writer.open() fails). Works on all native platforms. macOS additionally uses an async zero-copy swapchain capture path (TC_ASYNC_SCREEN_CAPTURE / lockFrame+submitFrame); others fall back to synchronous grabScreen().",
+            "platformNote_ja": "VideoWriter 上に構築されるため web では機能しない（writer.open 失敗）。ネイティブ全対応。macOS のみ非同期ゼロコピー capture（lockFrame/submitFrame）、他は同期 grabScreen フォールバック。",
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "start",
@@ -26462,11 +25724,11 @@ const TrussCAPI = {
                     "group": "3d"
                 },
                 {
-                    "name": "coordinateConversionExample",
+                    "name": "fboMipmapExample",
                     "group": "3d"
                 },
                 {
-                    "name": "fboMipmapExample",
+                    "name": "coordinateConversionExample",
                     "group": "3d"
                 }
             ],
@@ -26476,6 +25738,11 @@ const TrussCAPI = {
                 "worldToScreen",
                 "Ray"
             ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "begin",
@@ -26843,17 +26110,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "data",
-                    "type": "std::vector<char>",
+                    "type": "",
                     "desc": "Received data"
                 },
                 {
                     "name": "remoteHost",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Source host"
                 },
                 {
                     "name": "remotePort",
-                    "type": "int",
+                    "type": "",
                     "desc": "Source port"
                 }
             ]
@@ -26875,12 +26142,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "message",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Error message"
                 },
                 {
                     "name": "errorCode",
-                    "type": "int",
+                    "type": "",
                     "desc": "Error code"
                 }
             ]
@@ -26919,12 +26186,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "onReceive",
-                    "type": "Event<UdpReceiveEventArgs>",
+                    "type": "",
                     "desc": "Fired when data is received"
                 },
                 {
                     "name": "onError",
-                    "type": "Event<UdpErrorEventArgs>",
+                    "type": "",
                     "desc": "Fired on error"
                 }
             ],
@@ -27156,6 +26423,17 @@ const TrussCAPI = {
                     ],
                     "desc": "Destination port from connect()"
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "UdpSocket = UdpSocket & → UdpSocket &",
+                    "cpp": "UdpSocket & operator=(UdpSocket &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -27176,12 +26454,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "success",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Whether the connection succeeded"
                 },
                 {
                     "name": "message",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Connection message"
                 }
             ]
@@ -27203,7 +26481,7 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "data",
-                    "type": "std::vector<char>",
+                    "type": "",
                     "desc": "Received data"
                 }
             ]
@@ -27225,12 +26503,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "reason",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Disconnect reason"
                 },
                 {
                     "name": "wasClean",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Whether it was a clean disconnect"
                 }
             ]
@@ -27252,12 +26530,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "message",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Error message"
                 },
                 {
                     "name": "errorCode",
-                    "type": "int",
+                    "type": "",
                     "desc": "Error code"
                 }
             ]
@@ -27297,22 +26575,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "onConnect",
-                    "type": "Event<TcpConnectEventArgs>",
+                    "type": "",
                     "desc": "Fired when the connection completes"
                 },
                 {
                     "name": "onReceive",
-                    "type": "Event<TcpReceiveEventArgs>",
+                    "type": "",
                     "desc": "Fired when data is received"
                 },
                 {
                     "name": "onDisconnect",
-                    "type": "Event<TcpDisconnectEventArgs>",
+                    "type": "",
                     "desc": "Fired when disconnected"
                 },
                 {
                     "name": "onError",
-                    "type": "Event<TcpErrorEventArgs>",
+                    "type": "",
                     "desc": "Fired on error"
                 }
             ],
@@ -27423,6 +26701,17 @@ const TrussCAPI = {
                     ],
                     "desc": ""
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "TcpClient = TcpClient & → TcpClient &",
+                    "cpp": "TcpClient & operator=(TcpClient &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -27485,17 +26774,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "clientId",
-                    "type": "int",
+                    "type": "",
                     "desc": "Client ID"
                 },
                 {
                     "name": "host",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Client IP address"
                 },
                 {
                     "name": "port",
-                    "type": "int",
+                    "type": "",
                     "desc": "Client port"
                 }
             ]
@@ -27517,12 +26806,12 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "clientId",
-                    "type": "int",
+                    "type": "",
                     "desc": "Client ID"
                 },
                 {
                     "name": "data",
-                    "type": "std::vector<char>",
+                    "type": "",
                     "desc": "Received data"
                 }
             ]
@@ -27544,17 +26833,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "clientId",
-                    "type": "int",
+                    "type": "",
                     "desc": "Client ID"
                 },
                 {
                     "name": "reason",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Disconnect reason"
                 },
                 {
                     "name": "wasClean",
-                    "type": "bool",
+                    "type": "",
                     "desc": "Whether the disconnect was clean"
                 }
             ]
@@ -27576,17 +26865,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "message",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Error message"
                 },
                 {
                     "name": "errorCode",
-                    "type": "int",
+                    "type": "",
                     "desc": "Error code"
                 },
                 {
                     "name": "clientId",
-                    "type": "int",
+                    "type": "",
                     "desc": "Client ID (-1 = server-level error, not a specific client)"
                 }
             ]
@@ -27625,22 +26914,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "onClientConnect",
-                    "type": "Event<TcpClientConnectEventArgs>",
+                    "type": "",
                     "desc": "Fired when a client connects"
                 },
                 {
                     "name": "onReceive",
-                    "type": "Event<TcpServerReceiveEventArgs>",
+                    "type": "",
                     "desc": "Fired when data is received from a client"
                 },
                 {
                     "name": "onClientDisconnect",
-                    "type": "Event<TcpClientDisconnectEventArgs>",
+                    "type": "",
                     "desc": "Fired when a client disconnects"
                 },
                 {
                     "name": "onError",
-                    "type": "Event<TcpServerErrorEventArgs>",
+                    "type": "",
                     "desc": "Fired on a server or per-client error"
                 }
             ],
@@ -27767,37 +27056,37 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "name",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Interface name (en0 / Ethernet / wlan0)"
                 },
                 {
                     "name": "address",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "IP address (IPv4 dotted-quad or IPv6 textual)"
                 },
                 {
                     "name": "netmask",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Subnet mask (IPv4)"
                 },
                 {
                     "name": "mac",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Hardware MAC address (empty if unavailable)"
                 },
                 {
                     "name": "isIPv4",
-                    "type": "bool",
+                    "type": "",
                     "desc": "True for IPv4, false for IPv6"
                 },
                 {
                     "name": "isLoopback",
-                    "type": "bool",
+                    "type": "",
                     "desc": "True if a loopback interface"
                 },
                 {
                     "name": "isUp",
-                    "type": "bool",
+                    "type": "",
                     "desc": "True if the interface link is up"
                 }
             ],
@@ -27878,17 +27167,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "deviceId",
-                    "type": "int",
+                    "type": "",
                     "desc": "Device index"
                 },
                 {
                     "name": "devicePath",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Device path (e.g. COM3, /dev/tty.usbserial-*)"
                 },
                 {
                     "name": "deviceName",
-                    "type": "std::string",
+                    "type": "",
                     "desc": "Device name"
                 }
             ],
@@ -27965,8 +27254,7 @@ const TrussCAPI = {
                     ],
                     "desc": "Deprecated alias for listDevices()",
                     "deprecated": {
-                        "reason": "Use listDevices() instead. Will be removed in v1.0.0",
-                        "replacement": "listDevices"
+                        "reason": "Use listDevices() instead. Will be removed in v1.0.0"
                     }
                 },
                 {
@@ -28094,6 +27382,17 @@ const TrussCAPI = {
                     ],
                     "desc": "List available serial devices"
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Serial = Serial & → Serial &",
+                    "cpp": "Serial & operator=(Serial &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -28126,48 +27425,48 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     "",
-                    "Wave w, float freq, float dur, float vol = 0.5f"
+                    "Wave w, float freq, float dur, float vol = …"
                 ]
             },
             "properties": [
                 {
                     "name": "wave",
-                    "type": "Wave",
+                    "type": "",
                     "desc": "Waveform (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise, Silent)"
                 },
                 {
                     "name": "hz",
-                    "type": "float",
+                    "type": "",
                     "desc": "Frequency in Hz (ignored for Noise / Silent)"
                 },
                 {
                     "name": "volume",
-                    "type": "float",
+                    "type": "",
                     "desc": "Volume (0.0-1.0)"
                 },
                 {
                     "name": "duration",
-                    "type": "float",
+                    "type": "",
                     "desc": "Note duration in seconds"
                 },
                 {
                     "name": "attack",
-                    "type": "float",
+                    "type": "",
                     "desc": "ADSR attack time in seconds"
                 },
                 {
                     "name": "decay",
-                    "type": "float",
+                    "type": "",
                     "desc": "ADSR decay time in seconds"
                 },
                 {
                     "name": "sustain",
-                    "type": "float",
+                    "type": "",
                     "desc": "ADSR sustain level (0.0-1.0)"
                 },
                 {
                     "name": "release",
-                    "type": "float",
+                    "type": "",
                     "desc": "ADSR release time in seconds"
                 }
             ],
@@ -28225,20 +27524,15 @@ const TrussCAPI = {
                 "ChipSound",
                 "build"
             ],
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
             "properties": [
                 {
                     "name": "entries",
-                    "type": "vector<ChipSoundBundle::Entry>",
+                    "type": "",
                     "desc": "The scheduled notes (each Entry pairs a ChipSoundNote with its start time in seconds)"
                 },
                 {
                     "name": "volume",
-                    "type": "float",
+                    "type": "",
                     "desc": "Master volume multiplier applied when mixing (default 1.0)"
                 }
             ],
@@ -28333,13 +27627,13 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     "",
-                    "T start, T end, float duration, EaseType type = EaseType::Cubic, EaseMode mode = EaseMode::InOut"
+                    "T start, T end, float duration, EaseType type = …, EaseMode mode = …"
                 ]
             },
             "properties": [
                 {
                     "name": "complete",
-                    "type": "std::unique_ptr<Event<void>>",
+                    "type": "",
                     "desc": "Event fired once the tween finishes; subscribe with complete->listen(...)"
                 }
             ],
@@ -28513,6 +27807,17 @@ const TrussCAPI = {
                     ],
                     "desc": "Return how many loop iterations have completed so far"
                 }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Tween = Tween<T> & → Tween<T> &",
+                    "cpp": "Tween<T> & operator=(Tween<T> &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
             ]
         },
         {
@@ -28540,6 +27845,12 @@ const TrussCAPI = {
                     "name": "AllFeaturesExample",
                     "group": "tests"
                 }
+            ],
+            "related": [
+                "addChild",
+                "RectNode",
+                "getRootNode",
+                "Mod"
             ],
             "properties": [
                 {
@@ -29679,17 +28990,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "node",
-                    "type": "Node::Ptr",
+                    "type": "",
                     "desc": "The hit node (shared_ptr), or null if nothing was hit."
                 },
                 {
                     "name": "distance",
-                    "type": "float",
+                    "type": "",
                     "desc": "Distance from the ray origin to the hit point."
                 },
                 {
                     "name": "localPoint",
-                    "type": "Vec3",
+                    "type": "",
                     "desc": "Hit position in the hit node's local coordinates."
                 }
             ],
@@ -29726,29 +29037,35 @@ const TrussCAPI = {
                     "group": "node"
                 },
                 {
-                    "name": "chipSoundExample",
-                    "group": "sound"
+                    "name": "layoutModExample",
+                    "group": "node"
                 }
+            ],
+            "related": [
+                "setSize",
+                "setClipping",
+                "ScrollContainer",
+                "LayoutMod"
             ],
             "properties": [
                 {
                     "name": "mousePressed",
-                    "type": "Event<MouseEventArgs>",
+                    "type": "",
                     "desc": "Fired when a mouse button is pressed over this node (localized args)"
                 },
                 {
                     "name": "mouseReleased",
-                    "type": "Event<MouseEventArgs>",
+                    "type": "",
                     "desc": "Fired when a mouse button is released over this node (localized args)"
                 },
                 {
                     "name": "mouseDragged",
-                    "type": "Event<MouseDragEventArgs>",
+                    "type": "",
                     "desc": "Fired when the mouse is dragged on this node (localized args)"
                 },
                 {
                     "name": "mouseScrolled",
-                    "type": "Event<ScrollEventArgs>",
+                    "type": "",
                     "desc": "Fired when the mouse wheel / trackpad scrolls over this node (localized args)"
                 }
             ],
@@ -29992,22 +29309,22 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "normalColor",
-                    "type": "Color",
+                    "type": "",
                     "desc": "Fill color when idle (default dark grey)."
                 },
                 {
                     "name": "hoverColor",
-                    "type": "Color",
+                    "type": "",
                     "desc": "Fill color when the pointer is over the button."
                 },
                 {
                     "name": "pressColor",
-                    "type": "Color",
+                    "type": "",
                     "desc": "Fill color while pressed."
                 },
                 {
                     "name": "label",
-                    "type": "string",
+                    "type": "",
                     "desc": "Text drawn centered on the button (skipped if empty)."
                 }
             ],
@@ -30072,6 +29389,16 @@ const TrussCAPI = {
                     "group": "node"
                 }
             ],
+            "related": [
+                "LayoutDirection",
+                "updateLayout",
+                "addChild"
+            ],
+            "constructor": {
+                "signatures": [
+                    "LayoutDirection direction = …, float spacing = …"
+                ]
+            },
             "methods": [
                 {
                     "name": "getDirection",
@@ -30275,6 +29602,17 @@ const TrussCAPI = {
                     "group": "node"
                 }
             ],
+            "related": [
+                "setContent",
+                "setScrollY",
+                "ScrollBar",
+                "setClipping"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "setContent",
@@ -30469,6 +29807,14 @@ const TrussCAPI = {
                     "group": "node"
                 }
             ],
+            "related": [
+                "Direction"
+            ],
+            "constructor": {
+                "signatures": [
+                    "ScrollContainer * container, Direction dir = …"
+                ]
+            },
             "methods": [
                 {
                     "name": "getBarColor",
@@ -30618,10 +29964,21 @@ const TrussCAPI = {
                     "group": "node"
                 }
             ],
+            "related": [
+                "createTween",
+                "moveTo",
+                "ease",
+                "EaseType"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "properties": [
                 {
                     "name": "complete",
-                    "type": "Event<void>",
+                    "type": "",
                     "desc": "Fired once when all tweens finish; subscribe with complete.listen(callback)"
                 }
             ],
@@ -30907,6 +30264,11 @@ const TrussCAPI = {
             ],
             "desc_ja": "アプリケーションの基底クラス。サブクラス化して setup/update/draw や入力コールバック（mousePressed, keyPressed など）をオーバーライドして TrussC アプリを作る",
             "desc_ko": "기반 애플리케이션 클래스: 서브클래싱하여 setup/update/draw와 입력 콜백(mousePressed, keyPressed 등)을 오버라이드하여 TrussC 앱을 만듦",
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "setSize",
@@ -31160,7 +30522,7 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "targetFps",
-                    "type": "float",
+                    "type": "",
                     "desc": "Target update rate (default 60)"
                 }
             ],
@@ -31192,28 +30554,45 @@ const TrussCAPI = {
             "values": [
                 {
                     "name": "Left",
-                    "value": 0
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Center",
-                    "value": 1
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Right",
-                    "value": 2
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Top",
-                    "value": 3
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Bottom",
-                    "value": 4
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Baseline",
                     "value": 5,
-                    "desc": "Text-specific: character baseline"
+                    "desc": "Text-specific: character baseline",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31239,11 +30618,17 @@ const TrussCAPI = {
             "values": [
                 {
                     "name": "Inline",
-                    "value": 0
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Main",
-                    "value": 1
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31269,32 +30654,44 @@ const TrussCAPI = {
                 {
                     "name": "Verbose",
                     "value": 0,
-                    "desc": "Detailed info (for debugging)"
+                    "desc": "Detailed info (for debugging)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Notice",
                     "value": 1,
-                    "desc": "Normal info"
+                    "desc": "Normal info",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Warning",
                     "value": 2,
-                    "desc": "Warning"
+                    "desc": "Warning",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Error",
                     "value": 3,
-                    "desc": "Error"
+                    "desc": "Error",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Fatal",
                     "value": 4,
-                    "desc": "Fatal error"
+                    "desc": "Fatal error",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Silent",
                     "value": 5,
-                    "desc": "No output (for filtering)"
+                    "desc": "No output (for filtering)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31322,22 +30719,30 @@ const TrussCAPI = {
                 {
                     "name": "Rect",
                     "value": 0,
-                    "desc": "Rectangular window (no window)"
+                    "desc": "Rectangular window (no window)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Hanning",
                     "value": 1,
-                    "desc": "Hanning window"
+                    "desc": "Hanning window",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Hamming",
                     "value": 2,
-                    "desc": "Hamming window"
+                    "desc": "Hamming window",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Blackman",
                     "value": 3,
-                    "desc": "Blackman window"
+                    "desc": "Blackman window",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31356,13 +30761,17 @@ const TrussCAPI = {
             "values": [
                 {
                     "name": "Halfwidth",
-                    "value": 0,
-                    "desc": ""
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Fullwidth",
-                    "value": 1,
-                    "desc": ""
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31384,22 +30793,30 @@ const TrussCAPI = {
                 {
                     "name": "Nominal",
                     "value": 0,
-                    "desc": "Normal operation"
+                    "desc": "Normal operation",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Fair",
                     "value": 1,
-                    "desc": "Slightly elevated, performance may be reduced"
+                    "desc": "Slightly elevated, performance may be reduced",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Serious",
                     "value": 2,
-                    "desc": "High temperature, should reduce workload"
+                    "desc": "High temperature, should reduce workload",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Critical",
                     "value": 3,
-                    "desc": "Thermal throttling active, risk of shutdown"
+                    "desc": "Thermal throttling active, risk of shutdown",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31424,22 +30841,30 @@ const TrussCAPI = {
                 {
                     "name": "Left",
                     "value": 0,
-                    "desc": "SAPP_MOUSEBUTTON_LEFT"
+                    "desc": "SAPP_MOUSEBUTTON_LEFT",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Right",
                     "value": 1,
-                    "desc": "SAPP_MOUSEBUTTON_RIGHT"
+                    "desc": "SAPP_MOUSEBUTTON_RIGHT",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Middle",
                     "value": 2,
-                    "desc": "SAPP_MOUSEBUTTON_MIDDLE"
+                    "desc": "SAPP_MOUSEBUTTON_MIDDLE",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "None",
                     "value": 256,
-                    "desc": "SAPP_MOUSEBUTTON_INVALID (no button; e.g. during a plain move)"
+                    "desc": "SAPP_MOUSEBUTTON_INVALID (no button; e.g. during a plain move)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31463,16 +30888,25 @@ const TrussCAPI = {
                 {
                     "name": "Eager",
                     "value": 0,
-                    "desc": ""
+                    "desc": "Eager source (SoundBuffer): the whole file decoded into RAM.",
+                    "desc_ja": "Eager ソース (SoundBuffer): ファイル全体を RAM にデコード",
+                    "desc_ko": "Eager 소스 (SoundBuffer): 파일 전체를 RAM에 디코딩"
                 },
                 {
                     "name": "Stream",
                     "value": 1,
-                    "desc": ""
+                    "desc": "Streaming source (SoundStream): decoded on demand from disk.",
+                    "desc_ja": "ストリーミングソース (SoundStream): ディスクからオンデマンドにデコード",
+                    "desc_ko": "스트리밍 소스 (SoundStream): 디스크에서 on-demand 디코딩"
                 }
             ],
             "desc_ja": "SoundSource の種別タグ。ミキサーがフレームごとの仮想呼び出しなしにディスパッチできる: Eager (SoundBuffer、全 PCM を RAM 保持) と Stream (SoundStream、オンデマンドにデコード)",
-            "desc_ko": "SoundSource의 종류 태그. 믹서가 프레임마다의 가상 호출 없이 디스패치 가능: Eager (SoundBuffer, 전체 PCM을 RAM 보유) 와 Stream (SoundStream, on-demand 디코딩)"
+            "desc_ko": "SoundSource의 종류 태그. 믹서가 프레임마다의 가상 호출 없이 디스패치 가능: Eager (SoundBuffer, 전체 PCM을 RAM 보유) 와 Stream (SoundStream, on-demand 디코딩)",
+            "related": [
+                "SoundSource",
+                "SoundBuffer",
+                "SoundStream"
+            ]
         },
         {
             "name": "MixMode",
@@ -31489,11 +30923,17 @@ const TrussCAPI = {
             "values": [
                 {
                     "name": "Auto",
-                    "value": 0
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "DownmixMono",
-                    "value": 1
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31518,57 +30958,79 @@ const TrussCAPI = {
                 {
                     "name": "ping",
                     "value": 0,
-                    "desc": "Single beep (default)"
+                    "desc": "Single beep (default)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "success",
                     "value": 1,
-                    "desc": "Two-tone rising (pico)"
+                    "desc": "Two-tone rising (pico)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "complete",
                     "value": 2,
-                    "desc": "Task completion fanfare"
+                    "desc": "Task completion fanfare",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "coin",
                     "value": 3,
-                    "desc": "Game item pickup (sparkly)"
+                    "desc": "Game item pickup (sparkly)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "error",
                     "value": 4,
-                    "desc": "Low buzz (boo)"
+                    "desc": "Low buzz (boo)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "warning",
                     "value": 5,
-                    "desc": "Attention (two short beeps)"
+                    "desc": "Attention (two short beeps)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "cancel",
                     "value": 6,
-                    "desc": "Cancel/back"
+                    "desc": "Cancel/back",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "click",
                     "value": 7,
-                    "desc": "UI selection click"
+                    "desc": "UI selection click",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "typing",
                     "value": 8,
-                    "desc": "Key input feedback"
+                    "desc": "Key input feedback",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "notify",
                     "value": 9,
-                    "desc": "Two-tone notification"
+                    "desc": "Two-tone notification",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "sweep",
                     "value": 10,
-                    "desc": "Screen transition whoosh"
+                    "desc": "Screen transition whoosh",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31593,12 +31055,16 @@ const TrussCAPI = {
                 {
                     "name": "None",
                     "value": 0,
-                    "desc": "store verbatim (identity copy) - the \"no compression\" option"
+                    "desc": "store verbatim (identity copy) - the \"no compression\" option\n",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "LZ4",
                     "value": 1,
-                    "desc": "LZ4 block compression (fast, lossless)"
+                    "desc": "LZ4 block compression (fast, lossless)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31625,32 +31091,44 @@ const TrussCAPI = {
                 {
                     "name": "Alpha",
                     "value": 0,
-                    "desc": "Normal alpha blending (default)"
+                    "desc": "Normal alpha blending (default)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Add",
                     "value": 1,
-                    "desc": "Additive blending"
+                    "desc": "Additive blending",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Multiply",
                     "value": 2,
-                    "desc": "Multiply blending"
+                    "desc": "Multiply blending",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Screen",
                     "value": 3,
-                    "desc": "Screen blending"
+                    "desc": "Screen blending",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Subtract",
                     "value": 4,
-                    "desc": "Subtractive blending"
+                    "desc": "Subtractive blending",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Disabled",
                     "value": 5,
-                    "desc": "No blending (overwrite)"
+                    "desc": "No blending (overwrite)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31676,12 +31154,16 @@ const TrussCAPI = {
                 {
                     "name": "Nearest",
                     "value": 0,
-                    "desc": "Nearest neighbor (for pixel art)"
+                    "desc": "Nearest neighbor (for pixel art)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Linear",
                     "value": 1,
-                    "desc": "Bilinear interpolation (default)"
+                    "desc": "Bilinear interpolation (default)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31707,17 +31189,23 @@ const TrussCAPI = {
                 {
                     "name": "Repeat",
                     "value": 0,
-                    "desc": "Repeat"
+                    "desc": "Repeat",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "ClampToEdge",
                     "value": 1,
-                    "desc": "Clamp to edge pixel (default)"
+                    "desc": "Clamp to edge pixel (default)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "MirroredRepeat",
                     "value": 2,
-                    "desc": "Mirrored repeat"
+                    "desc": "Mirrored repeat",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31742,27 +31230,45 @@ const TrussCAPI = {
             "values": [
                 {
                     "name": "Points",
-                    "value": 0
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Lines",
-                    "value": 1
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "LineStrip",
-                    "value": 2
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Triangles",
-                    "value": 3
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "TriangleStrip",
-                    "value": 4
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Quads",
-                    "value": 5
+                    "value": 5,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -31787,12 +31293,16 @@ const TrussCAPI = {
                 {
                     "name": "Tolerance",
                     "value": 0,
-                    "desc": "Pick segment count so the chord-to-curve error stays under the tolerance (pixels)"
+                    "desc": "Pick segment count so the chord-to-curve error stays under the tolerance (pixels)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Resolution",
                     "value": 1,
-                    "desc": "Use a fixed segment count regardless of radius"
+                    "desc": "Use a fixed segment count regardless of radius",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "曲線テッセレーションモード: 適応トレランスまたは固定解像度",
@@ -31819,17 +31329,23 @@ const TrussCAPI = {
                 {
                     "name": "Butt",
                     "value": 0,
-                    "desc": "Flat line cap (no extension)"
+                    "desc": "Flat line cap (no extension)",
+                    "desc_ja": "フラットなラインキャップ（延長なし）",
+                    "desc_ko": "평평한 라인 캡 (확장 없음)"
                 },
                 {
                     "name": "Round",
                     "value": 1,
-                    "desc": "Rounded line cap"
+                    "desc": "Rounded line cap",
+                    "desc_ja": "丸いラインキャップ",
+                    "desc_ko": "둥근 라인 캡"
                 },
                 {
                     "name": "Square",
                     "value": 2,
-                    "desc": "Square line cap (extends by half stroke width)"
+                    "desc": "Square line cap (extends by half stroke width)",
+                    "desc_ja": "四角いラインキャップ（線幅の半分延長）",
+                    "desc_ko": "사각 라인 캡 (스트로크 너비의 절반만큼 확장)"
                 }
             ],
             "desc_ja": "",
@@ -31857,17 +31373,23 @@ const TrussCAPI = {
                 {
                     "name": "Miter",
                     "value": 0,
-                    "desc": "Sharp corner join"
+                    "desc": "Sharp corner join",
+                    "desc_ja": "尖った角のジョイン",
+                    "desc_ko": "날카로운 모서리 조인"
                 },
                 {
                     "name": "Round",
                     "value": 1,
-                    "desc": "Rounded corner join"
+                    "desc": "Rounded corner join",
+                    "desc_ja": "丸い角のジョイン",
+                    "desc_ko": "둥근 모서리 조인"
                 },
                 {
                     "name": "Bevel",
                     "value": 2,
-                    "desc": "Beveled corner join"
+                    "desc": "Beveled corner join",
+                    "desc_ja": "面取りされた角のジョイン",
+                    "desc_ko": "베벨 모서리 조인"
                 }
             ],
             "desc_ja": "",
@@ -31895,125 +31417,191 @@ const TrussCAPI = {
                 {
                     "name": "Default",
                     "value": 0,
-                    "desc": "System default cursor"
+                    "desc": "System default cursor",
+                    "desc_ja": "システムデフォルトカーソル",
+                    "desc_ko": "시스템 기본 커서"
                 },
                 {
                     "name": "Arrow",
                     "value": 1,
-                    "desc": "Arrow cursor"
+                    "desc": "Arrow cursor",
+                    "desc_ja": "矢印カーソル",
+                    "desc_ko": "화살표 커서"
                 },
                 {
                     "name": "IBeam",
                     "value": 2,
-                    "desc": "Text input cursor"
+                    "desc": "Text input cursor",
+                    "desc_ja": "テキスト入力カーソル",
+                    "desc_ko": "텍스트 입력 커서"
                 },
                 {
                     "name": "Crosshair",
                     "value": 3,
-                    "desc": "Crosshair cursor"
+                    "desc": "Crosshair cursor",
+                    "desc_ja": "十字カーソル",
+                    "desc_ko": "십자선 커서"
                 },
                 {
                     "name": "Hand",
                     "value": 4,
-                    "desc": "Pointing hand cursor"
+                    "desc": "Pointing hand cursor",
+                    "desc_ja": "指差しカーソル",
+                    "desc_ko": "포인팅 핸드 커서"
                 },
                 {
                     "name": "ResizeEW",
                     "value": 5,
-                    "desc": "East-west resize cursor"
+                    "desc": "East-west resize cursor",
+                    "desc_ja": "左右リサイズカーソル",
+                    "desc_ko": "동서 방향 리사이즈 커서"
                 },
                 {
                     "name": "ResizeNS",
                     "value": 6,
-                    "desc": "North-south resize cursor"
+                    "desc": "North-south resize cursor",
+                    "desc_ja": "上下リサイズカーソル",
+                    "desc_ko": "남북 방향 리사이즈 커서"
                 },
                 {
                     "name": "ResizeNWSE",
                     "value": 7,
-                    "desc": "NW-SE diagonal resize cursor"
+                    "desc": "NW-SE diagonal resize cursor",
+                    "desc_ja": "左上-右下リサイズカーソル",
+                    "desc_ko": "북서-남동 대각선 리사이즈 커서"
                 },
                 {
                     "name": "ResizeNESW",
                     "value": 8,
-                    "desc": "NE-SW diagonal resize cursor"
+                    "desc": "NE-SW diagonal resize cursor",
+                    "desc_ja": "右上-左下リサイズカーソル",
+                    "desc_ko": "북동-남서 대각선 리사이즈 커서"
                 },
                 {
                     "name": "ResizeAll",
                     "value": 9,
-                    "desc": "Move/resize all directions cursor"
+                    "desc": "Move/resize all directions cursor",
+                    "desc_ja": "全方向移動カーソル",
+                    "desc_ko": "모든 방향 이동/리사이즈 커서"
                 },
                 {
                     "name": "NotAllowed",
                     "value": 10,
-                    "desc": "Not allowed cursor"
+                    "desc": "Not allowed cursor",
+                    "desc_ja": "禁止カーソル",
+                    "desc_ko": "금지 커서"
                 },
                 {
                     "name": "Custom0",
                     "value": 11,
-                    "desc": "Custom cursor slot 0 (bind image first)"
+                    "desc": "Custom cursor slot 0 (bind image first)",
+                    "desc_ja": "カスタムカーソルスロット0（先に画像をバインド）",
+                    "desc_ko": "커스텀 커서 슬롯 0 (먼저 이미지 바인딩 필요)"
                 },
                 {
                     "name": "Custom1",
                     "value": 12,
-                    "desc": "Custom cursor slot 1"
+                    "desc": "Custom cursor slot 1",
+                    "desc_ja": "カスタムカーソルスロット1",
+                    "desc_ko": "커스텀 커서 슬롯 1"
                 },
                 {
                     "name": "Custom2",
                     "value": 13,
-                    "desc": "Custom cursor slot 2"
+                    "desc": "Custom cursor slot 2",
+                    "desc_ja": "カスタムカーソルスロット2",
+                    "desc_ko": "커스텀 커서 슬롯 2"
                 },
                 {
                     "name": "Custom3",
                     "value": 14,
-                    "desc": "Custom cursor slot 3"
+                    "desc": "Custom cursor slot 3",
+                    "desc_ja": "カスタムカーソルスロット3",
+                    "desc_ko": "커스텀 커서 슬롯 3"
                 },
                 {
                     "name": "Custom4",
-                    "value": 15
+                    "value": 15,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom5",
-                    "value": 16
+                    "value": 16,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom6",
-                    "value": 17
+                    "value": 17,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom7",
-                    "value": 18
+                    "value": 18,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom8",
-                    "value": 19
+                    "value": 19,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom9",
-                    "value": 20
+                    "value": 20,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom10",
-                    "value": 21
+                    "value": 21,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom11",
-                    "value": 22
+                    "value": 22,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom12",
-                    "value": 23
+                    "value": 23,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom13",
-                    "value": 24
+                    "value": 24,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom14",
-                    "value": 25
+                    "value": 25,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Custom15",
-                    "value": 26
+                    "value": 26,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32041,37 +31629,51 @@ const TrussCAPI = {
                 {
                     "name": "Portrait",
                     "value": 2,
-                    "desc": "Portrait, home button at bottom"
+                    "desc": "Portrait, home button at bottom",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "PortraitUpsideDown",
                     "value": 4,
-                    "desc": "Portrait, home button at top"
+                    "desc": "Portrait, home button at top",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "LandscapeLeft",
                     "value": 16,
-                    "desc": "Landscape, home button on the left"
+                    "desc": "Landscape, home button on the left",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "LandscapeRight",
                     "value": 8,
-                    "desc": "Landscape, home button on the right"
+                    "desc": "Landscape, home button on the right",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Landscape",
                     "value": 24,
-                    "desc": "Either landscape orientation"
+                    "desc": "Either landscape orientation",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "All",
                     "value": 30,
-                    "desc": "All four orientations"
+                    "desc": "All four orientations",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "AllButUpsideDown",
                     "value": 26,
-                    "desc": "All orientations except portrait-upside-down"
+                    "desc": "All orientations except portrait-upside-down",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "setOrientationに渡す画面向きマスク(iOS/Android)。値はビットフラグで|で組み合わせ可能",
@@ -32084,19 +31686,19 @@ const TrussCAPI = {
                     "symbol": "|",
                     "signature": "Orientation | Orientation → Orientation",
                     "cpp": "Orientation operator|(Orientation, Orientation)",
-                    "free": false,
-                    "desc": "Combine flags",
-                    "desc_ja": "フラグ合成",
-                    "desc_ko": "플래그 결합"
+                    "free": true,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "symbol": "&",
                     "signature": "Orientation & Orientation → Orientation",
                     "cpp": "Orientation operator&(Orientation, Orientation)",
-                    "free": false,
-                    "desc": "Mask / test flags",
-                    "desc_ja": "フラグのマスク・判定",
-                    "desc_ko": "플래그 마스크"
+                    "free": true,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ]
         },
@@ -32116,17 +31718,23 @@ const TrussCAPI = {
                 {
                     "name": "Directional",
                     "value": 0,
-                    "desc": "Parallel light (sunlight)"
+                    "desc": "Parallel light (sunlight)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Point",
                     "value": 1,
-                    "desc": "Point light"
+                    "desc": "Point light",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Spot",
                     "value": 2,
-                    "desc": "Spot light (point + cone)"
+                    "desc": "Spot light (point + cone)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32151,11 +31759,17 @@ const TrussCAPI = {
             "values": [
                 {
                     "name": "U8",
-                    "value": 0
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "F32",
-                    "value": 1
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32181,57 +31795,79 @@ const TrussCAPI = {
                 {
                     "name": "RGBA8",
                     "value": 0,
-                    "desc": "4ch, 8-bit/ch (default)"
+                    "desc": "4ch, 8-bit/ch (default)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "RGBA16F",
                     "value": 1,
-                    "desc": "4ch, 16-bit float/ch"
+                    "desc": "4ch, 16-bit float/ch",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "RGBA32F",
                     "value": 2,
-                    "desc": "4ch, 32-bit float/ch"
+                    "desc": "4ch, 32-bit float/ch",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "R8",
                     "value": 3,
-                    "desc": "1ch, 8-bit"
+                    "desc": "1ch, 8-bit",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "R16F",
                     "value": 4,
-                    "desc": "1ch, 16-bit float"
+                    "desc": "1ch, 16-bit float",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "R32F",
                     "value": 5,
-                    "desc": "1ch, 32-bit float"
+                    "desc": "1ch, 32-bit float",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "RG8",
                     "value": 6,
-                    "desc": "2ch, 8-bit/ch"
+                    "desc": "2ch, 8-bit/ch",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "RG16F",
                     "value": 7,
-                    "desc": "2ch, 16-bit float/ch"
+                    "desc": "2ch, 16-bit float/ch",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "RG32F",
                     "value": 8,
-                    "desc": "2ch, 32-bit float/ch"
+                    "desc": "2ch, 32-bit float/ch",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "BGRA8",
                     "value": 9,
-                    "desc": "4ch, 8-bit/ch, B-G-R-A byte order (swapchain / Syphon / video interop)"
+                    "desc": "4ch, 8-bit/ch, B-G-R-A byte order (swapchain / Syphon / video interop)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "RGBA16",
                     "value": 10,
-                    "desc": "4ch, 16-bit unorm/ch (high-precision integer; texture-sharing interop)"
+                    "desc": "4ch, 16-bit unorm/ch (high-precision integer; texture-sharing interop)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32261,22 +31897,30 @@ const TrussCAPI = {
                 {
                     "name": "Immutable",
                     "value": 0,
-                    "desc": "Set once, cannot update (for Image::load)"
+                    "desc": "Set once, cannot update (for Image::load)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Dynamic",
                     "value": 1,
-                    "desc": "Update periodically from CPU (for Image::allocate)"
+                    "desc": "Update periodically from CPU (for Image::allocate)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Stream",
                     "value": 2,
-                    "desc": "Update every frame (for VideoGrabber)"
+                    "desc": "Update every frame (for VideoGrabber)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "RenderTarget",
                     "value": 3,
-                    "desc": "For FBO color attachment"
+                    "desc": "For FBO color attachment",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32302,12 +31946,16 @@ const TrussCAPI = {
                 {
                     "name": "Color",
                     "value": 0,
-                    "desc": "RGBA"
+                    "desc": "RGBA",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Grayscale",
                     "value": 1,
-                    "desc": "Grayscale"
+                    "desc": "Grayscale",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32332,31 +31980,52 @@ const TrussCAPI = {
             "values": [
                 {
                     "name": "Triangles",
-                    "value": 0
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "TriangleStrip",
-                    "value": 1
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "TriangleFan",
-                    "value": 2
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Lines",
-                    "value": 3
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "LineStrip",
-                    "value": 4
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "LineLoop",
-                    "value": 5
+                    "value": 5,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Points",
-                    "value": 6
+                    "value": 6,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32382,17 +32051,23 @@ const TrussCAPI = {
                 {
                     "name": "CAP_BUTT",
                     "value": 0,
-                    "desc": "Butt cap (cut flat at the endpoint)"
+                    "desc": "Butt cap (cut flat at the endpoint)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "CAP_ROUND",
                     "value": 1,
-                    "desc": "Round cap (semicircle)"
+                    "desc": "Round cap (semicircle)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "CAP_SQUARE",
                     "value": 2,
-                    "desc": "Square cap (extend by half the width)"
+                    "desc": "Square cap (extend by half the width)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "開いたストロークの端のラインキャップ形状",
@@ -32418,17 +32093,23 @@ const TrussCAPI = {
                 {
                     "name": "JOIN_MITER",
                     "value": 0,
-                    "desc": "Miter join (sharp pointed corners)"
+                    "desc": "Miter join (sharp pointed corners)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "JOIN_ROUND",
                     "value": 1,
-                    "desc": "Round join (rounded corners)"
+                    "desc": "Round join (rounded corners)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "JOIN_BEVEL",
                     "value": 2,
-                    "desc": "Bevel join (flat cut corners)"
+                    "desc": "Bevel join (flat cut corners)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "ストロークのコーナーのラインジョイン形状",
@@ -32455,12 +32136,16 @@ const TrussCAPI = {
                 {
                     "name": "Horizontal",
                     "value": 0,
-                    "desc": "Left-to-right horizontal text (default)"
+                    "desc": "Left-to-right horizontal text (default)",
+                    "desc_ja": "左から右の横書き（デフォルト）",
+                    "desc_ko": "왼쪽에서 오른쪽 가로쓰기 (기본값)"
                 },
                 {
                     "name": "VerticalRL",
                     "value": 1,
-                    "desc": "Top-to-bottom columns, columns flow right-to-left (Japanese tategaki)"
+                    "desc": "Top-to-bottom columns, columns flow right-to-left (Japanese tategaki)",
+                    "desc_ja": "上から下に列、列は右から左へ流れる（縦書き）",
+                    "desc_ko": "위에서 아래로 열, 열은 오른쪽에서 왼쪽으로 (일본어 세로쓰기)"
                 }
             ],
             "desc_ja": "",
@@ -32486,17 +32171,23 @@ const TrussCAPI = {
                 {
                     "name": "Rotate",
                     "value": 0,
-                    "desc": "Rotate the whole Latin / digit run 90 degrees CW so it reads top-to-bottom"
+                    "desc": "Rotate the whole Latin / digit run 90 degrees CW so it reads top-to-bottom",
+                    "desc_ja": "Latin / 数字の連続を 90度 CW 回転して上から下に流す",
+                    "desc_ko": "라틴 / 숫자 연속을 90도 시계방향 회전"
                 },
                 {
                     "name": "Upright",
                     "value": 1,
-                    "desc": "Each glyph upright, one per CJK-sized cell (一文字ずつ正立)"
+                    "desc": "Each glyph upright, one per CJK-sized cell (一文字ずつ正立)",
+                    "desc_ja": "1文字ずつ正立で縦に並べる",
+                    "desc_ko": "각 글리프를 한 셀씩 정립으로 배치"
                 },
                 {
                     "name": "Combine",
                     "value": 2,
-                    "desc": "Squeeze a Latin / digit run into a single CJK cell (true 縦中横)"
+                    "desc": "Squeeze a Latin / digit run into a single CJK cell (true 縦中横)",
+                    "desc_ja": "Latin / 数字の連続を 1セルに圧縮して縦書きの中に埋め込む (縦中横)",
+                    "desc_ko": "라틴 / 숫자 연속을 한 셀에 압축 (다테추요코)"
                 }
             ],
             "desc_ja": "縦中横: 縦書き内の Latin / 数字の連続の配置方法",
@@ -32522,17 +32213,23 @@ const TrussCAPI = {
                 {
                     "name": "Off",
                     "value": 0,
-                    "desc": "No line-break prohibition rules"
+                    "desc": "No line-break prohibition rules",
+                    "desc_ja": "禁則処理なし",
+                    "desc_ko": ""
                 },
                 {
                     "name": "PunctuationOnly",
                     "value": 1,
-                    "desc": "Only punctuation kinsoku rules"
+                    "desc": "Only punctuation kinsoku rules",
+                    "desc_ja": "句読点のみの禁則",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Standard",
                     "value": 2,
-                    "desc": "Standard kinsoku rules"
+                    "desc": "Standard kinsoku rules",
+                    "desc_ja": "標準的な禁則処理",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "縦書き / 日本語の禁則処理レベル",
@@ -32558,22 +32255,30 @@ const TrussCAPI = {
                 {
                     "name": "H264",
                     "value": 0,
-                    "desc": "H.264 / AVC — broad compatibility (default)"
+                    "desc": "H.264 / AVC — broad compatibility (default)",
+                    "desc_ja": "H.264 / AVC — 互換性が広い（デフォルト）",
+                    "desc_ko": "H.264 / AVC — 폭넓은 호환성 (기본값)"
                 },
                 {
                     "name": "HEVC",
                     "value": 1,
-                    "desc": "H.265 / HEVC — smaller files, hardware-encoded"
+                    "desc": "H.265 / HEVC — smaller files, hardware-encoded",
+                    "desc_ja": "H.265 / HEVC — ファイルが小さい、ハードウェアエンコード",
+                    "desc_ko": "H.265 / HEVC — 더 작은 파일, 하드웨어 인코딩"
                 },
                 {
                     "name": "ProRes422",
                     "value": 2,
-                    "desc": "Apple ProRes 422 — editing-grade, macOS/iOS only (.mov)"
+                    "desc": "Apple ProRes 422 — editing-grade, macOS/iOS only (.mov)",
+                    "desc_ja": "Apple ProRes 422 — 編集向け高品質、macOS/iOSのみ（.mov）",
+                    "desc_ko": "Apple ProRes 422 — 편집용 고품질, macOS/iOS 전용 (.mov)"
                 },
                 {
                     "name": "ProRes4444",
                     "value": 3,
-                    "desc": "Apple ProRes 4444 — highest quality + alpha, macOS/iOS only (.mov)"
+                    "desc": "Apple ProRes 4444 — highest quality + alpha, macOS/iOS only (.mov)",
+                    "desc_ja": "Apple ProRes 4444 — 最高品質＋アルファ、macOS/iOSのみ（.mov）",
+                    "desc_ko": "Apple ProRes 4444 — 최고 품질 + 알파, macOS/iOS 전용 (.mov)"
                 }
             ],
             "desc_ja": "",
@@ -32599,23 +32304,38 @@ const TrussCAPI = {
             "values": [
                 {
                     "name": "None",
-                    "value": 0
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Shift",
-                    "value": 1
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Ctrl",
-                    "value": 2
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Alt",
-                    "value": 3
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Super",
-                    "value": 4
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32628,59 +32348,60 @@ const TrussCAPI = {
         {
             "name": "Wave",
             "desc": "",
-            "keywords": [
-                "waveform",
-                "oscillator",
-                "sine",
-                "square",
-                "triangle",
-                "sawtooth",
-                "noise"
-            ],
+            "keywords": [],
             "values": [
                 {
                     "name": "Sin",
                     "value": 0,
-                    "desc": "Sine wave (smooth, pure tone)"
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Square",
                     "value": 1,
-                    "desc": "Square wave (harsh, 8-bit style)"
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Triangle",
                     "value": 2,
-                    "desc": "Triangle wave (softer than square)"
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Sawtooth",
                     "value": 3,
-                    "desc": "Sawtooth wave (bright, buzzy)"
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Noise",
                     "value": 4,
-                    "desc": "White noise"
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "PinkNoise",
                     "value": 5,
-                    "desc": "Pink noise (1/f noise, more natural)"
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Silent",
                     "value": 6,
-                    "desc": "Silent (no sound)"
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
-            "desc_ko": "",
-            "related": [
-                "wave",
-                "ChipSound",
-                "ChipSoundNote"
-            ]
+            "desc_ko": ""
         },
         {
             "name": "EaseType",
@@ -32698,57 +32419,79 @@ const TrussCAPI = {
                 {
                     "name": "Linear",
                     "value": 0,
-                    "desc": "No easing"
+                    "desc": "No easing",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Quad",
                     "value": 1,
-                    "desc": "Quadratic (t^2)"
+                    "desc": "Quadratic (t^2)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Cubic",
                     "value": 2,
-                    "desc": "Cubic (t^3)"
+                    "desc": "Cubic (t^3)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Quart",
                     "value": 3,
-                    "desc": "Quartic (t^4)"
+                    "desc": "Quartic (t^4)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Quint",
                     "value": 4,
-                    "desc": "Quintic (t^5)"
+                    "desc": "Quintic (t^5)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Sine",
                     "value": 5,
-                    "desc": "Sinusoidal"
+                    "desc": "Sinusoidal",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Expo",
                     "value": 6,
-                    "desc": "Exponential"
+                    "desc": "Exponential",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Circ",
                     "value": 7,
-                    "desc": "Circular"
+                    "desc": "Circular",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Back",
                     "value": 8,
-                    "desc": "Overshoot"
+                    "desc": "Overshoot",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Elastic",
                     "value": 9,
-                    "desc": "Elastic spring"
+                    "desc": "Elastic spring",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Bounce",
                     "value": 10,
-                    "desc": "Bouncing"
+                    "desc": "Bouncing",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32778,17 +32521,23 @@ const TrussCAPI = {
                 {
                     "name": "In",
                     "value": 0,
-                    "desc": "Accelerate"
+                    "desc": "Accelerate",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Out",
                     "value": 1,
-                    "desc": "Decelerate"
+                    "desc": "Decelerate",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "InOut",
                     "value": 2,
-                    "desc": "Accelerate then decelerate"
+                    "desc": "Accelerate then decelerate",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32814,12 +32563,16 @@ const TrussCAPI = {
                 {
                     "name": "Vertical",
                     "value": 0,
-                    "desc": "VStack: top to bottom"
+                    "desc": "VStack: top to bottom",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Horizontal",
                     "value": 1,
-                    "desc": "HStack: left to right"
+                    "desc": "HStack: left to right",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32845,17 +32598,23 @@ const TrussCAPI = {
                 {
                     "name": "None",
                     "value": 0,
-                    "desc": "Don't change size (default)"
+                    "desc": "Don't change size (default)",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Fill",
                     "value": 1,
-                    "desc": "Stretch children to fill parent"
+                    "desc": "Stretch children to fill parent",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Content",
                     "value": 2,
-                    "desc": "Resize parent to fit children"
+                    "desc": "Resize parent to fit children",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
@@ -32868,34 +32627,25 @@ const TrussCAPI = {
         {
             "name": "Direction",
             "desc": "",
-            "keywords": [
-                "direction",
-                "horizontal",
-                "vertical",
-                "axis",
-                "orientation",
-                "row",
-                "column"
-            ],
+            "keywords": [],
             "values": [
                 {
                     "name": "Vertical",
                     "value": 0,
-                    "desc": ""
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "Horizontal",
                     "value": 1,
-                    "desc": ""
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "desc_ja": "",
-            "desc_ko": "",
-            "related": [
-                "ScrollBar",
-                "LayoutDirection",
-                "AxisMode"
-            ]
+            "desc_ko": ""
         }
     ],
     "macros": [
@@ -33052,9 +32802,9 @@ const TrussCAPI = {
                     "name": "gray",
                     "hex": "#808080",
                     "rgba": [
-                        0.501961,
-                        0.501961,
-                        0.501961,
+                        0.502,
+                        0.502,
+                        0.502,
                         1
                     ]
                 },
@@ -33062,9 +32812,9 @@ const TrussCAPI = {
                     "name": "grey",
                     "hex": "#808080",
                     "rgba": [
-                        0.501961,
-                        0.501961,
-                        0.501961,
+                        0.502,
+                        0.502,
+                        0.502,
                         1
                     ]
                 },
@@ -33072,9 +32822,9 @@ const TrussCAPI = {
                     "name": "darkGray",
                     "hex": "#A9A9A9",
                     "rgba": [
-                        0.662745,
-                        0.662745,
-                        0.662745,
+                        0.663,
+                        0.663,
+                        0.663,
                         1
                     ]
                 },
@@ -33082,9 +32832,9 @@ const TrussCAPI = {
                     "name": "darkGrey",
                     "hex": "#A9A9A9",
                     "rgba": [
-                        0.662745,
-                        0.662745,
-                        0.662745,
+                        0.663,
+                        0.663,
+                        0.663,
                         1
                     ]
                 },
@@ -33092,9 +32842,9 @@ const TrussCAPI = {
                     "name": "dimGray",
                     "hex": "#696969",
                     "rgba": [
-                        0.411765,
-                        0.411765,
-                        0.411765,
+                        0.412,
+                        0.412,
+                        0.412,
                         1
                     ]
                 },
@@ -33102,9 +32852,9 @@ const TrussCAPI = {
                     "name": "dimGrey",
                     "hex": "#696969",
                     "rgba": [
-                        0.411765,
-                        0.411765,
-                        0.411765,
+                        0.412,
+                        0.412,
+                        0.412,
                         1
                     ]
                 },
@@ -33112,9 +32862,9 @@ const TrussCAPI = {
                     "name": "lightGray",
                     "hex": "#D3D3D3",
                     "rgba": [
-                        0.827451,
-                        0.827451,
-                        0.827451,
+                        0.827,
+                        0.827,
+                        0.827,
                         1
                     ]
                 },
@@ -33122,9 +32872,9 @@ const TrussCAPI = {
                     "name": "lightGrey",
                     "hex": "#D3D3D3",
                     "rgba": [
-                        0.827451,
-                        0.827451,
-                        0.827451,
+                        0.827,
+                        0.827,
+                        0.827,
                         1
                     ]
                 },
@@ -33132,9 +32882,9 @@ const TrussCAPI = {
                     "name": "silver",
                     "hex": "#C0C0C0",
                     "rgba": [
-                        0.752941,
-                        0.752941,
-                        0.752941,
+                        0.753,
+                        0.753,
+                        0.753,
                         1
                     ]
                 },
@@ -33142,9 +32892,9 @@ const TrussCAPI = {
                     "name": "gainsboro",
                     "hex": "#DCDCDC",
                     "rgba": [
-                        0.862745,
-                        0.862745,
-                        0.862745,
+                        0.863,
+                        0.863,
+                        0.863,
                         1
                     ]
                 },
@@ -33152,9 +32902,9 @@ const TrussCAPI = {
                     "name": "whiteSmoke",
                     "hex": "#F5F5F5",
                     "rgba": [
-                        0.960784,
-                        0.960784,
-                        0.960784,
+                        0.961,
+                        0.961,
+                        0.961,
                         1
                     ]
                 }
@@ -33167,7 +32917,7 @@ const TrussCAPI = {
                     "name": "darkRed",
                     "hex": "#8B0000",
                     "rgba": [
-                        0.545098,
+                        0.545,
                         0,
                         0,
                         1
@@ -33177,9 +32927,9 @@ const TrussCAPI = {
                     "name": "fireBrick",
                     "hex": "#B22222",
                     "rgba": [
-                        0.698039,
-                        0.133333,
-                        0.133333,
+                        0.698,
+                        0.133,
+                        0.133,
                         1
                     ]
                 },
@@ -33187,9 +32937,9 @@ const TrussCAPI = {
                     "name": "crimson",
                     "hex": "#DC143C",
                     "rgba": [
-                        0.862745,
-                        0.0784314,
-                        0.235294,
+                        0.863,
+                        0.078,
+                        0.235,
                         1
                     ]
                 },
@@ -33197,9 +32947,9 @@ const TrussCAPI = {
                     "name": "indianRed",
                     "hex": "#CD5C5C",
                     "rgba": [
-                        0.803922,
-                        0.360784,
-                        0.360784,
+                        0.804,
+                        0.361,
+                        0.361,
                         1
                     ]
                 },
@@ -33207,9 +32957,9 @@ const TrussCAPI = {
                     "name": "lightCoral",
                     "hex": "#F08080",
                     "rgba": [
-                        0.941176,
-                        0.501961,
-                        0.501961,
+                        0.941,
+                        0.502,
+                        0.502,
                         1
                     ]
                 },
@@ -33217,9 +32967,9 @@ const TrussCAPI = {
                     "name": "salmon",
                     "hex": "#FA8072",
                     "rgba": [
-                        0.980392,
-                        0.501961,
-                        0.447059,
+                        0.98,
+                        0.502,
+                        0.447,
                         1
                     ]
                 },
@@ -33227,9 +32977,9 @@ const TrussCAPI = {
                     "name": "darkSalmon",
                     "hex": "#E9967A",
                     "rgba": [
-                        0.913725,
-                        0.588235,
-                        0.478431,
+                        0.914,
+                        0.588,
+                        0.478,
                         1
                     ]
                 },
@@ -33238,8 +32988,8 @@ const TrussCAPI = {
                     "hex": "#FFA07A",
                     "rgba": [
                         1,
-                        0.627451,
-                        0.478431,
+                        0.627,
+                        0.478,
                         1
                     ]
                 }
@@ -33253,7 +33003,7 @@ const TrussCAPI = {
                     "hex": "#FFA500",
                     "rgba": [
                         1,
-                        0.647059,
+                        0.647,
                         0,
                         1
                     ]
@@ -33263,7 +33013,7 @@ const TrussCAPI = {
                     "hex": "#FF8C00",
                     "rgba": [
                         1,
-                        0.54902,
+                        0.549,
                         0,
                         1
                     ]
@@ -33273,7 +33023,7 @@ const TrussCAPI = {
                     "hex": "#FF4500",
                     "rgba": [
                         1,
-                        0.270588,
+                        0.271,
                         0,
                         1
                     ]
@@ -33283,8 +33033,8 @@ const TrussCAPI = {
                     "hex": "#FF6347",
                     "rgba": [
                         1,
-                        0.388235,
-                        0.278431,
+                        0.388,
+                        0.278,
                         1
                     ]
                 },
@@ -33293,8 +33043,8 @@ const TrussCAPI = {
                     "hex": "#FF7F50",
                     "rgba": [
                         1,
-                        0.498039,
-                        0.313726,
+                        0.498,
+                        0.314,
                         1
                     ]
                 }
@@ -33308,7 +33058,7 @@ const TrussCAPI = {
                     "hex": "#FFD700",
                     "rgba": [
                         1,
-                        0.843137,
+                        0.843,
                         0,
                         1
                     ]
@@ -33317,9 +33067,9 @@ const TrussCAPI = {
                     "name": "goldenRod",
                     "hex": "#DAA520",
                     "rgba": [
-                        0.854902,
-                        0.647059,
-                        0.12549,
+                        0.855,
+                        0.647,
+                        0.125,
                         1
                     ]
                 },
@@ -33327,9 +33077,9 @@ const TrussCAPI = {
                     "name": "darkGoldenRod",
                     "hex": "#B8860B",
                     "rgba": [
-                        0.721569,
-                        0.52549,
-                        0.0431373,
+                        0.722,
+                        0.525,
+                        0.043,
                         1
                     ]
                 },
@@ -33337,9 +33087,9 @@ const TrussCAPI = {
                     "name": "paleGoldenRod",
                     "hex": "#EEE8AA",
                     "rgba": [
-                        0.933333,
-                        0.909804,
-                        0.666667,
+                        0.933,
+                        0.91,
+                        0.667,
                         1
                     ]
                 },
@@ -33347,9 +33097,9 @@ const TrussCAPI = {
                     "name": "lightGoldenRodYellow",
                     "hex": "#FAFAD2",
                     "rgba": [
-                        0.980392,
-                        0.980392,
-                        0.823529,
+                        0.98,
+                        0.98,
+                        0.824,
                         1
                     ]
                 },
@@ -33357,9 +33107,9 @@ const TrussCAPI = {
                     "name": "khaki",
                     "hex": "#F0E68C",
                     "rgba": [
-                        0.941176,
-                        0.901961,
-                        0.54902,
+                        0.941,
+                        0.902,
+                        0.549,
                         1
                     ]
                 },
@@ -33367,9 +33117,9 @@ const TrussCAPI = {
                     "name": "darkKhaki",
                     "hex": "#BDB76B",
                     "rgba": [
-                        0.741176,
-                        0.717647,
-                        0.419608,
+                        0.741,
+                        0.718,
+                        0.42,
                         1
                     ]
                 }
@@ -33392,9 +33142,9 @@ const TrussCAPI = {
                     "name": "limeGreen",
                     "hex": "#32CD32",
                     "rgba": [
-                        0.196078,
-                        0.803922,
-                        0.196078,
+                        0.196,
+                        0.804,
+                        0.196,
                         1
                     ]
                 },
@@ -33402,9 +33152,9 @@ const TrussCAPI = {
                     "name": "lightGreen",
                     "hex": "#90EE90",
                     "rgba": [
-                        0.564706,
-                        0.933333,
-                        0.564706,
+                        0.565,
+                        0.933,
+                        0.565,
                         1
                     ]
                 },
@@ -33412,9 +33162,9 @@ const TrussCAPI = {
                     "name": "paleGreen",
                     "hex": "#98FB98",
                     "rgba": [
-                        0.596078,
-                        0.984314,
-                        0.596078,
+                        0.596,
+                        0.984,
+                        0.596,
                         1
                     ]
                 },
@@ -33423,7 +33173,7 @@ const TrussCAPI = {
                     "hex": "#006400",
                     "rgba": [
                         0,
-                        0.392157,
+                        0.392,
                         0,
                         1
                     ]
@@ -33432,9 +33182,9 @@ const TrussCAPI = {
                     "name": "forestGreen",
                     "hex": "#228B22",
                     "rgba": [
-                        0.133333,
-                        0.545098,
-                        0.133333,
+                        0.133,
+                        0.545,
+                        0.133,
                         1
                     ]
                 },
@@ -33442,9 +33192,9 @@ const TrussCAPI = {
                     "name": "seaGreen",
                     "hex": "#2E8B57",
                     "rgba": [
-                        0.180392,
-                        0.545098,
-                        0.341176,
+                        0.18,
+                        0.545,
+                        0.341,
                         1
                     ]
                 },
@@ -33452,9 +33202,9 @@ const TrussCAPI = {
                     "name": "mediumSeaGreen",
                     "hex": "#3CB371",
                     "rgba": [
-                        0.235294,
-                        0.701961,
-                        0.443137,
+                        0.235,
+                        0.702,
+                        0.443,
                         1
                     ]
                 },
@@ -33462,9 +33212,9 @@ const TrussCAPI = {
                     "name": "darkSeaGreen",
                     "hex": "#8FBC8F",
                     "rgba": [
-                        0.560784,
-                        0.737255,
-                        0.560784,
+                        0.561,
+                        0.737,
+                        0.561,
                         1
                     ]
                 },
@@ -33472,9 +33222,9 @@ const TrussCAPI = {
                     "name": "lightSeaGreen",
                     "hex": "#20B2AA",
                     "rgba": [
-                        0.12549,
-                        0.698039,
-                        0.666667,
+                        0.125,
+                        0.698,
+                        0.667,
                         1
                     ]
                 },
@@ -33484,7 +33234,7 @@ const TrussCAPI = {
                     "rgba": [
                         0,
                         1,
-                        0.498039,
+                        0.498,
                         1
                     ]
                 },
@@ -33493,8 +33243,8 @@ const TrussCAPI = {
                     "hex": "#00FA9A",
                     "rgba": [
                         0,
-                        0.980392,
-                        0.603922,
+                        0.98,
+                        0.604,
                         1
                     ]
                 },
@@ -33502,9 +33252,9 @@ const TrussCAPI = {
                     "name": "greenYellow",
                     "hex": "#ADFF2F",
                     "rgba": [
-                        0.678431,
+                        0.678,
                         1,
-                        0.184314,
+                        0.184,
                         1
                     ]
                 },
@@ -33512,9 +33262,9 @@ const TrussCAPI = {
                     "name": "yellowGreen",
                     "hex": "#9ACD32",
                     "rgba": [
-                        0.603922,
-                        0.803922,
-                        0.196078,
+                        0.604,
+                        0.804,
+                        0.196,
                         1
                     ]
                 },
@@ -33522,7 +33272,7 @@ const TrussCAPI = {
                     "name": "chartreuse",
                     "hex": "#7FFF00",
                     "rgba": [
-                        0.498039,
+                        0.498,
                         1,
                         0,
                         1
@@ -33532,8 +33282,8 @@ const TrussCAPI = {
                     "name": "lawnGreen",
                     "hex": "#7CFC00",
                     "rgba": [
-                        0.486275,
-                        0.988235,
+                        0.486,
+                        0.988,
                         0,
                         1
                     ]
@@ -33542,8 +33292,8 @@ const TrussCAPI = {
                     "name": "olive",
                     "hex": "#808000",
                     "rgba": [
-                        0.501961,
-                        0.501961,
+                        0.502,
+                        0.502,
                         0,
                         1
                     ]
@@ -33552,9 +33302,9 @@ const TrussCAPI = {
                     "name": "oliveDrab",
                     "hex": "#6B8E23",
                     "rgba": [
-                        0.419608,
-                        0.556863,
-                        0.137255,
+                        0.42,
+                        0.557,
+                        0.137,
                         1
                     ]
                 },
@@ -33562,9 +33312,9 @@ const TrussCAPI = {
                     "name": "darkOliveGreen",
                     "hex": "#556B2F",
                     "rgba": [
-                        0.333333,
-                        0.419608,
-                        0.184314,
+                        0.333,
+                        0.42,
+                        0.184,
                         1
                     ]
                 }
@@ -33587,9 +33337,9 @@ const TrussCAPI = {
                     "name": "aquamarine",
                     "hex": "#7FFFD4",
                     "rgba": [
-                        0.498039,
+                        0.498,
                         1,
-                        0.831373,
+                        0.831,
                         1
                     ]
                 },
@@ -33598,8 +33348,8 @@ const TrussCAPI = {
                     "hex": "#66CDAA",
                     "rgba": [
                         0.4,
-                        0.803922,
-                        0.666667,
+                        0.804,
+                        0.667,
                         1
                     ]
                 },
@@ -33608,8 +33358,8 @@ const TrussCAPI = {
                     "hex": "#008B8B",
                     "rgba": [
                         0,
-                        0.545098,
-                        0.545098,
+                        0.545,
+                        0.545,
                         1
                     ]
                 },
@@ -33618,8 +33368,8 @@ const TrussCAPI = {
                     "hex": "#008080",
                     "rgba": [
                         0,
-                        0.501961,
-                        0.501961,
+                        0.502,
+                        0.502,
                         1
                     ]
                 },
@@ -33627,7 +33377,7 @@ const TrussCAPI = {
                     "name": "lightCyan",
                     "hex": "#E0FFFF",
                     "rgba": [
-                        0.878431,
+                        0.878,
                         1,
                         1,
                         1
@@ -33637,9 +33387,9 @@ const TrussCAPI = {
                     "name": "turquoise",
                     "hex": "#40E0D0",
                     "rgba": [
-                        0.25098,
-                        0.878431,
-                        0.815686,
+                        0.251,
+                        0.878,
+                        0.816,
                         1
                     ]
                 },
@@ -33647,8 +33397,8 @@ const TrussCAPI = {
                     "name": "mediumTurquoise",
                     "hex": "#48D1CC",
                     "rgba": [
-                        0.282353,
-                        0.819608,
+                        0.282,
+                        0.82,
                         0.8,
                         1
                     ]
@@ -33658,8 +33408,8 @@ const TrussCAPI = {
                     "hex": "#00CED1",
                     "rgba": [
                         0,
-                        0.807843,
-                        0.819608,
+                        0.808,
+                        0.82,
                         1
                     ]
                 },
@@ -33667,9 +33417,9 @@ const TrussCAPI = {
                     "name": "paleTurquoise",
                     "hex": "#AFEEEE",
                     "rgba": [
-                        0.686275,
-                        0.933333,
-                        0.933333,
+                        0.686,
+                        0.933,
+                        0.933,
                         1
                     ]
                 }
@@ -33684,7 +33434,7 @@ const TrussCAPI = {
                     "rgba": [
                         0,
                         0,
-                        0.501961,
+                        0.502,
                         1
                     ]
                 },
@@ -33694,7 +33444,7 @@ const TrussCAPI = {
                     "rgba": [
                         0,
                         0,
-                        0.545098,
+                        0.545,
                         1
                     ]
                 },
@@ -33704,7 +33454,7 @@ const TrussCAPI = {
                     "rgba": [
                         0,
                         0,
-                        0.803922,
+                        0.804,
                         1
                     ]
                 },
@@ -33712,9 +33462,9 @@ const TrussCAPI = {
                     "name": "royalBlue",
                     "hex": "#4169E1",
                     "rgba": [
-                        0.254902,
-                        0.411765,
-                        0.882353,
+                        0.255,
+                        0.412,
+                        0.882,
                         1
                     ]
                 },
@@ -33722,9 +33472,9 @@ const TrussCAPI = {
                     "name": "steelBlue",
                     "hex": "#4682B4",
                     "rgba": [
-                        0.27451,
-                        0.509804,
-                        0.705882,
+                        0.275,
+                        0.51,
+                        0.706,
                         1
                     ]
                 },
@@ -33732,9 +33482,9 @@ const TrussCAPI = {
                     "name": "blueSteel",
                     "hex": "#4682B4",
                     "rgba": [
-                        0.27451,
-                        0.509804,
-                        0.705882,
+                        0.275,
+                        0.51,
+                        0.706,
                         1
                     ]
                 },
@@ -33742,9 +33492,9 @@ const TrussCAPI = {
                     "name": "lightSteelBlue",
                     "hex": "#B0C4DE",
                     "rgba": [
-                        0.690196,
-                        0.768627,
-                        0.870588,
+                        0.69,
+                        0.769,
+                        0.871,
                         1
                     ]
                 },
@@ -33752,8 +33502,8 @@ const TrussCAPI = {
                     "name": "dodgerBlue",
                     "hex": "#1E90FF",
                     "rgba": [
-                        0.117647,
-                        0.564706,
+                        0.118,
+                        0.565,
                         1,
                         1
                     ]
@@ -33763,7 +33513,7 @@ const TrussCAPI = {
                     "hex": "#00BFFF",
                     "rgba": [
                         0,
-                        0.74902,
+                        0.749,
                         1,
                         1
                     ]
@@ -33772,9 +33522,9 @@ const TrussCAPI = {
                     "name": "skyBlue",
                     "hex": "#87CEEB",
                     "rgba": [
-                        0.529412,
-                        0.807843,
-                        0.921569,
+                        0.529,
+                        0.808,
+                        0.922,
                         1
                     ]
                 },
@@ -33782,9 +33532,9 @@ const TrussCAPI = {
                     "name": "lightSkyBlue",
                     "hex": "#87CEFA",
                     "rgba": [
-                        0.529412,
-                        0.807843,
-                        0.980392,
+                        0.529,
+                        0.808,
+                        0.98,
                         1
                     ]
                 },
@@ -33792,9 +33542,9 @@ const TrussCAPI = {
                     "name": "lightBlue",
                     "hex": "#ADD8E6",
                     "rgba": [
-                        0.678431,
-                        0.847059,
-                        0.901961,
+                        0.678,
+                        0.847,
+                        0.902,
                         1
                     ]
                 },
@@ -33802,9 +33552,9 @@ const TrussCAPI = {
                     "name": "powderBlue",
                     "hex": "#B0E0E6",
                     "rgba": [
-                        0.690196,
-                        0.878431,
-                        0.901961,
+                        0.69,
+                        0.878,
+                        0.902,
                         1
                     ]
                 },
@@ -33812,9 +33562,9 @@ const TrussCAPI = {
                     "name": "cornflowerBlue",
                     "hex": "#6495ED",
                     "rgba": [
-                        0.392157,
-                        0.584314,
-                        0.929412,
+                        0.392,
+                        0.584,
+                        0.929,
                         1
                     ]
                 },
@@ -33822,9 +33572,9 @@ const TrussCAPI = {
                     "name": "cadetBlue",
                     "hex": "#5F9EA0",
                     "rgba": [
-                        0.372549,
-                        0.619608,
-                        0.627451,
+                        0.373,
+                        0.62,
+                        0.627,
                         1
                     ]
                 },
@@ -33832,9 +33582,9 @@ const TrussCAPI = {
                     "name": "midnightBlue",
                     "hex": "#191970",
                     "rgba": [
-                        0.0980392,
-                        0.0980392,
-                        0.439216,
+                        0.098,
+                        0.098,
+                        0.439,
                         1
                     ]
                 },
@@ -33842,8 +33592,8 @@ const TrussCAPI = {
                     "name": "aliceBlue",
                     "hex": "#F0F8FF",
                     "rgba": [
-                        0.941176,
-                        0.972549,
+                        0.941,
+                        0.973,
                         1,
                         1
                     ]
@@ -33857,9 +33607,9 @@ const TrussCAPI = {
                     "name": "purple",
                     "hex": "#800080",
                     "rgba": [
-                        0.501961,
+                        0.502,
                         0,
-                        0.501961,
+                        0.502,
                         1
                     ]
                 },
@@ -33867,9 +33617,9 @@ const TrussCAPI = {
                     "name": "darkMagenta",
                     "hex": "#8B008B",
                     "rgba": [
-                        0.545098,
+                        0.545,
                         0,
-                        0.545098,
+                        0.545,
                         1
                     ]
                 },
@@ -33877,9 +33627,9 @@ const TrussCAPI = {
                     "name": "darkViolet",
                     "hex": "#9400D3",
                     "rgba": [
-                        0.580392,
+                        0.58,
                         0,
-                        0.827451,
+                        0.827,
                         1
                     ]
                 },
@@ -33887,9 +33637,9 @@ const TrussCAPI = {
                     "name": "blueViolet",
                     "hex": "#8A2BE2",
                     "rgba": [
-                        0.541176,
-                        0.168627,
-                        0.886275,
+                        0.541,
+                        0.169,
+                        0.886,
                         1
                     ]
                 },
@@ -33897,9 +33647,9 @@ const TrussCAPI = {
                     "name": "indigo",
                     "hex": "#4B0082",
                     "rgba": [
-                        0.294118,
+                        0.294,
                         0,
-                        0.509804,
+                        0.51,
                         1
                     ]
                 },
@@ -33907,9 +33657,9 @@ const TrussCAPI = {
                     "name": "slateBlue",
                     "hex": "#6A5ACD",
                     "rgba": [
-                        0.415686,
-                        0.352941,
-                        0.803922,
+                        0.416,
+                        0.353,
+                        0.804,
                         1
                     ]
                 },
@@ -33917,9 +33667,9 @@ const TrussCAPI = {
                     "name": "darkSlateBlue",
                     "hex": "#483D8B",
                     "rgba": [
-                        0.282353,
-                        0.239216,
-                        0.545098,
+                        0.282,
+                        0.239,
+                        0.545,
                         1
                     ]
                 },
@@ -33927,9 +33677,9 @@ const TrussCAPI = {
                     "name": "mediumSlateBlue",
                     "hex": "#7B68EE",
                     "rgba": [
-                        0.482353,
-                        0.407843,
-                        0.933333,
+                        0.482,
+                        0.408,
+                        0.933,
                         1
                     ]
                 },
@@ -33937,9 +33687,9 @@ const TrussCAPI = {
                     "name": "mediumPurple",
                     "hex": "#9370DB",
                     "rgba": [
-                        0.576471,
-                        0.439216,
-                        0.858824,
+                        0.576,
+                        0.439,
+                        0.859,
                         1
                     ]
                 },
@@ -33948,7 +33698,7 @@ const TrussCAPI = {
                     "hex": "#9932CC",
                     "rgba": [
                         0.6,
-                        0.196078,
+                        0.196,
                         0.8,
                         1
                     ]
@@ -33957,9 +33707,9 @@ const TrussCAPI = {
                     "name": "mediumOrchid",
                     "hex": "#BA55D3",
                     "rgba": [
-                        0.729412,
-                        0.333333,
-                        0.827451,
+                        0.729,
+                        0.333,
+                        0.827,
                         1
                     ]
                 },
@@ -33967,9 +33717,9 @@ const TrussCAPI = {
                     "name": "orchid",
                     "hex": "#DA70D6",
                     "rgba": [
-                        0.854902,
-                        0.439216,
-                        0.839216,
+                        0.855,
+                        0.439,
+                        0.839,
                         1
                     ]
                 },
@@ -33977,9 +33727,9 @@ const TrussCAPI = {
                     "name": "violet",
                     "hex": "#EE82EE",
                     "rgba": [
-                        0.933333,
-                        0.509804,
-                        0.933333,
+                        0.933,
+                        0.51,
+                        0.933,
                         1
                     ]
                 },
@@ -33987,9 +33737,9 @@ const TrussCAPI = {
                     "name": "plum",
                     "hex": "#DDA0DD",
                     "rgba": [
-                        0.866667,
-                        0.627451,
-                        0.866667,
+                        0.867,
+                        0.627,
+                        0.867,
                         1
                     ]
                 },
@@ -33997,9 +33747,9 @@ const TrussCAPI = {
                     "name": "thistle",
                     "hex": "#D8BFD8",
                     "rgba": [
-                        0.847059,
-                        0.74902,
-                        0.847059,
+                        0.847,
+                        0.749,
+                        0.847,
                         1
                     ]
                 },
@@ -34007,9 +33757,9 @@ const TrussCAPI = {
                     "name": "lavender",
                     "hex": "#E6E6FA",
                     "rgba": [
-                        0.901961,
-                        0.901961,
-                        0.980392,
+                        0.902,
+                        0.902,
+                        0.98,
                         1
                     ]
                 },
@@ -34033,8 +33783,8 @@ const TrussCAPI = {
                     "hex": "#FFC0CB",
                     "rgba": [
                         1,
-                        0.752941,
-                        0.796078,
+                        0.753,
+                        0.796,
                         1
                     ]
                 },
@@ -34043,8 +33793,8 @@ const TrussCAPI = {
                     "hex": "#FFB6C1",
                     "rgba": [
                         1,
-                        0.713726,
-                        0.756863,
+                        0.714,
+                        0.757,
                         1
                     ]
                 },
@@ -34053,8 +33803,8 @@ const TrussCAPI = {
                     "hex": "#FF69B4",
                     "rgba": [
                         1,
-                        0.411765,
-                        0.705882,
+                        0.412,
+                        0.706,
                         1
                     ]
                 },
@@ -34063,8 +33813,8 @@ const TrussCAPI = {
                     "hex": "#FF1493",
                     "rgba": [
                         1,
-                        0.0784314,
-                        0.576471,
+                        0.078,
+                        0.576,
                         1
                     ]
                 },
@@ -34072,9 +33822,9 @@ const TrussCAPI = {
                     "name": "mediumVioletRed",
                     "hex": "#C71585",
                     "rgba": [
-                        0.780392,
-                        0.0823529,
-                        0.521569,
+                        0.78,
+                        0.082,
+                        0.522,
                         1
                     ]
                 },
@@ -34082,9 +33832,9 @@ const TrussCAPI = {
                     "name": "paleVioletRed",
                     "hex": "#DB7093",
                     "rgba": [
-                        0.858824,
-                        0.439216,
-                        0.576471,
+                        0.859,
+                        0.439,
+                        0.576,
                         1
                     ]
                 }
@@ -34097,9 +33847,9 @@ const TrussCAPI = {
                     "name": "brown",
                     "hex": "#A52A2A",
                     "rgba": [
-                        0.647059,
-                        0.164706,
-                        0.164706,
+                        0.647,
+                        0.165,
+                        0.165,
                         1
                     ]
                 },
@@ -34107,7 +33857,7 @@ const TrussCAPI = {
                     "name": "maroon",
                     "hex": "#800000",
                     "rgba": [
-                        0.501961,
+                        0.502,
                         0,
                         0,
                         1
@@ -34117,9 +33867,9 @@ const TrussCAPI = {
                     "name": "saddleBrown",
                     "hex": "#8B4513",
                     "rgba": [
-                        0.545098,
-                        0.270588,
-                        0.0745098,
+                        0.545,
+                        0.271,
+                        0.075,
                         1
                     ]
                 },
@@ -34127,9 +33877,9 @@ const TrussCAPI = {
                     "name": "sienna",
                     "hex": "#A0522D",
                     "rgba": [
-                        0.627451,
-                        0.321569,
-                        0.176471,
+                        0.627,
+                        0.322,
+                        0.176,
                         1
                     ]
                 },
@@ -34137,9 +33887,9 @@ const TrussCAPI = {
                     "name": "chocolate",
                     "hex": "#D2691E",
                     "rgba": [
-                        0.823529,
-                        0.411765,
-                        0.117647,
+                        0.824,
+                        0.412,
+                        0.118,
                         1
                     ]
                 },
@@ -34147,9 +33897,9 @@ const TrussCAPI = {
                     "name": "peru",
                     "hex": "#CD853F",
                     "rgba": [
-                        0.803922,
-                        0.521569,
-                        0.247059,
+                        0.804,
+                        0.522,
+                        0.247,
                         1
                     ]
                 },
@@ -34157,9 +33907,9 @@ const TrussCAPI = {
                     "name": "sandyBrown",
                     "hex": "#F4A460",
                     "rgba": [
-                        0.956863,
-                        0.643137,
-                        0.376471,
+                        0.957,
+                        0.643,
+                        0.376,
                         1
                     ]
                 },
@@ -34167,9 +33917,9 @@ const TrussCAPI = {
                     "name": "burlyWood",
                     "hex": "#DEB887",
                     "rgba": [
-                        0.870588,
-                        0.721569,
-                        0.529412,
+                        0.871,
+                        0.722,
+                        0.529,
                         1
                     ]
                 },
@@ -34177,9 +33927,9 @@ const TrussCAPI = {
                     "name": "tan",
                     "hex": "#D2B48C",
                     "rgba": [
-                        0.823529,
-                        0.705882,
-                        0.54902,
+                        0.824,
+                        0.706,
+                        0.549,
                         1
                     ]
                 },
@@ -34187,9 +33937,9 @@ const TrussCAPI = {
                     "name": "rosyBrown",
                     "hex": "#BC8F8F",
                     "rgba": [
-                        0.737255,
-                        0.560784,
-                        0.560784,
+                        0.737,
+                        0.561,
+                        0.561,
                         1
                     ]
                 }
@@ -34203,8 +33953,8 @@ const TrussCAPI = {
                     "hex": "#FFFAFA",
                     "rgba": [
                         1,
-                        0.980392,
-                        0.980392,
+                        0.98,
+                        0.98,
                         1
                     ]
                 },
@@ -34212,9 +33962,9 @@ const TrussCAPI = {
                     "name": "honeyDew",
                     "hex": "#F0FFF0",
                     "rgba": [
-                        0.941176,
+                        0.941,
                         1,
-                        0.941176,
+                        0.941,
                         1
                     ]
                 },
@@ -34222,9 +33972,9 @@ const TrussCAPI = {
                     "name": "mintCream",
                     "hex": "#F5FFFA",
                     "rgba": [
-                        0.960784,
+                        0.961,
                         1,
-                        0.980392,
+                        0.98,
                         1
                     ]
                 },
@@ -34232,7 +33982,7 @@ const TrussCAPI = {
                     "name": "azure",
                     "hex": "#F0FFFF",
                     "rgba": [
-                        0.941176,
+                        0.941,
                         1,
                         1,
                         1
@@ -34242,8 +33992,8 @@ const TrussCAPI = {
                     "name": "ghostWhite",
                     "hex": "#F8F8FF",
                     "rgba": [
-                        0.972549,
-                        0.972549,
+                        0.973,
+                        0.973,
                         1,
                         1
                     ]
@@ -34253,8 +34003,8 @@ const TrussCAPI = {
                     "hex": "#FFFAF0",
                     "rgba": [
                         1,
-                        0.980392,
-                        0.941176,
+                        0.98,
+                        0.941,
                         1
                     ]
                 },
@@ -34264,7 +34014,7 @@ const TrussCAPI = {
                     "rgba": [
                         1,
                         1,
-                        0.941176,
+                        0.941,
                         1
                     ]
                 },
@@ -34272,9 +34022,9 @@ const TrussCAPI = {
                     "name": "antiqueWhite",
                     "hex": "#FAEBD7",
                     "rgba": [
-                        0.980392,
-                        0.921569,
-                        0.843137,
+                        0.98,
+                        0.922,
+                        0.843,
                         1
                     ]
                 },
@@ -34282,9 +34032,9 @@ const TrussCAPI = {
                     "name": "linen",
                     "hex": "#FAF0E6",
                     "rgba": [
-                        0.980392,
-                        0.941176,
-                        0.901961,
+                        0.98,
+                        0.941,
+                        0.902,
                         1
                     ]
                 },
@@ -34293,8 +34043,8 @@ const TrussCAPI = {
                     "hex": "#FFF0F5",
                     "rgba": [
                         1,
-                        0.941176,
-                        0.960784,
+                        0.941,
+                        0.961,
                         1
                     ]
                 },
@@ -34303,8 +34053,8 @@ const TrussCAPI = {
                     "hex": "#FFE4E1",
                     "rgba": [
                         1,
-                        0.894118,
-                        0.882353,
+                        0.894,
+                        0.882,
                         1
                     ]
                 },
@@ -34312,9 +34062,9 @@ const TrussCAPI = {
                     "name": "oldLace",
                     "hex": "#FDF5E6",
                     "rgba": [
-                        0.992157,
-                        0.960784,
-                        0.901961,
+                        0.992,
+                        0.961,
+                        0.902,
                         1
                     ]
                 },
@@ -34323,8 +34073,8 @@ const TrussCAPI = {
                     "hex": "#FFF5EE",
                     "rgba": [
                         1,
-                        0.960784,
-                        0.933333,
+                        0.961,
+                        0.933,
                         1
                     ]
                 },
@@ -34332,9 +34082,9 @@ const TrussCAPI = {
                     "name": "beige",
                     "hex": "#F5F5DC",
                     "rgba": [
-                        0.960784,
-                        0.960784,
-                        0.862745,
+                        0.961,
+                        0.961,
+                        0.863,
                         1
                     ]
                 },
@@ -34343,8 +34093,8 @@ const TrussCAPI = {
                     "hex": "#FFF8DC",
                     "rgba": [
                         1,
-                        0.972549,
-                        0.862745,
+                        0.973,
+                        0.863,
                         1
                     ]
                 },
@@ -34353,8 +34103,8 @@ const TrussCAPI = {
                     "hex": "#FFFACD",
                     "rgba": [
                         1,
-                        0.980392,
-                        0.803922,
+                        0.98,
+                        0.804,
                         1
                     ]
                 },
@@ -34364,7 +34114,7 @@ const TrussCAPI = {
                     "rgba": [
                         1,
                         1,
-                        0.878431,
+                        0.878,
                         1
                     ]
                 },
@@ -34372,9 +34122,9 @@ const TrussCAPI = {
                     "name": "wheat",
                     "hex": "#F5DEB3",
                     "rgba": [
-                        0.960784,
-                        0.870588,
-                        0.701961,
+                        0.961,
+                        0.871,
+                        0.702,
                         1
                     ]
                 },
@@ -34383,8 +34133,8 @@ const TrussCAPI = {
                     "hex": "#FFE4B5",
                     "rgba": [
                         1,
-                        0.894118,
-                        0.709804,
+                        0.894,
+                        0.71,
                         1
                     ]
                 },
@@ -34393,8 +34143,8 @@ const TrussCAPI = {
                     "hex": "#FFDAB9",
                     "rgba": [
                         1,
-                        0.854902,
-                        0.72549,
+                        0.855,
+                        0.725,
                         1
                     ]
                 },
@@ -34403,8 +34153,8 @@ const TrussCAPI = {
                     "hex": "#FFEFD5",
                     "rgba": [
                         1,
-                        0.937255,
-                        0.835294,
+                        0.937,
+                        0.835,
                         1
                     ]
                 },
@@ -34413,8 +34163,8 @@ const TrussCAPI = {
                     "hex": "#FFEBCD",
                     "rgba": [
                         1,
-                        0.921569,
-                        0.803922,
+                        0.922,
+                        0.804,
                         1
                     ]
                 },
@@ -34423,8 +34173,8 @@ const TrussCAPI = {
                     "hex": "#FFE4C4",
                     "rgba": [
                         1,
-                        0.894118,
-                        0.768627,
+                        0.894,
+                        0.769,
                         1
                     ]
                 },
@@ -34433,8 +34183,8 @@ const TrussCAPI = {
                     "hex": "#FFDEAD",
                     "rgba": [
                         1,
-                        0.870588,
-                        0.678431,
+                        0.871,
+                        0.678,
                         1
                     ]
                 }
@@ -34447,9 +34197,9 @@ const TrussCAPI = {
                     "name": "slateGray",
                     "hex": "#708090",
                     "rgba": [
-                        0.439216,
-                        0.501961,
-                        0.564706,
+                        0.439,
+                        0.502,
+                        0.565,
                         1
                     ]
                 },
@@ -34457,9 +34207,9 @@ const TrussCAPI = {
                     "name": "slateGrey",
                     "hex": "#708090",
                     "rgba": [
-                        0.439216,
-                        0.501961,
-                        0.564706,
+                        0.439,
+                        0.502,
+                        0.565,
                         1
                     ]
                 },
@@ -34467,8 +34217,8 @@ const TrussCAPI = {
                     "name": "lightSlateGray",
                     "hex": "#778899",
                     "rgba": [
-                        0.466667,
-                        0.533333,
+                        0.467,
+                        0.533,
                         0.6,
                         1
                     ]
@@ -34477,8 +34227,8 @@ const TrussCAPI = {
                     "name": "lightSlateGrey",
                     "hex": "#778899",
                     "rgba": [
-                        0.466667,
-                        0.533333,
+                        0.467,
+                        0.533,
                         0.6,
                         1
                     ]
@@ -34487,9 +34237,9 @@ const TrussCAPI = {
                     "name": "darkSlateGray",
                     "hex": "#2F4F4F",
                     "rgba": [
-                        0.184314,
-                        0.309804,
-                        0.309804,
+                        0.184,
+                        0.31,
+                        0.31,
                         1
                     ]
                 },
@@ -34497,9 +34247,9 @@ const TrussCAPI = {
                     "name": "darkSlateGrey",
                     "hex": "#2F4F4F",
                     "rgba": [
-                        0.184314,
-                        0.309804,
-                        0.309804,
+                        0.184,
+                        0.31,
+                        0.31,
                         1
                     ]
                 }

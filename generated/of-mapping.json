@@ -8,48 +8,6 @@
       "order": 1,
       "mappings": [
         {
-          "of": "ofGetWidth",
-          "tc": "getWindowWidth()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofGetHeight",
-          "tc": "getWindowHeight()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofGetWindowSize",
-          "tc": "getWindowSize()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofExit",
-          "tc": "requestExitApp()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofSystemLoadDialog",
-          "tc": "loadDialog(title, message, defaultPath, folderSelection)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofSystemSaveDialog",
-          "tc": "saveDialog(title, message, defaultPath, defaultName)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
           "of": "ofSystemAlertDialog",
           "tc": "alertDialog(title, message)",
           "notes": "",
@@ -71,22 +29,22 @@
           "notes_ko": ""
         },
         {
-          "of": "ofGetMousePressed",
-          "tc": "isMousePressed()",
+          "of": "ofGetHeight",
+          "tc": "getWindowHeight()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
         },
         {
-          "of": "ofGetKeyPressed",
-          "tc": "isKeyPressed(key)",
+          "of": "ofGetWindowSize",
+          "tc": "getWindowSize()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
         },
         {
-          "of": "ofShowCursor",
-          "tc": "showCursor()",
+          "of": "ofGetWidth",
+          "tc": "getWindowWidth()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -106,8 +64,50 @@
           "notes_ko": ""
         },
         {
+          "of": "ofGetKeyPressed",
+          "tc": "isKeyPressed(key)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofGetMousePressed",
+          "tc": "isMousePressed()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofSystemLoadDialog",
+          "tc": "loadDialog(title, message, defaultPath, folderSelection)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofExit",
+          "tc": "requestExitApp()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofSystemSaveDialog",
+          "tc": "saveDialog(title, message, defaultPath, defaultName)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
           "of": "ofSetFullscreen",
-          "tc": "setFullscreen(fullscreen)",
+          "tc": "setFullscreen(full)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofShowCursor",
+          "tc": "showCursor()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -122,83 +122,6 @@
       "order": 2,
       "mappings": [
         {
-          "of": "ofClear / ofBackground",
-          "tc": "clear(gray, a)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofSetColor",
-          "tc": "setColor(gray, a)",
-          "notes": "Range 0-1 instead of 0-255",
-          "notes_ja": "Range 0-1 instead of 0-255",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofDrawRectangle",
-          "tc": "drawRect(x, y, w, h)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofDrawRectRounded",
-          "tc": "drawRectRounded(x, y, w, h, radius)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofDrawCircle",
-          "tc": "drawCircle(x, y, radius)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofDrawEllipse",
-          "tc": "drawEllipse(x, y, w, h)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofDrawLine",
-          "tc": "drawLine(x1, y1, x2, y2)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofDrawTriangle",
-          "tc": "drawTriangle(x1, y1, x2, y2, x3, y3)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofDrawBox",
-          "tc": "drawBox(size)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofDrawSphere",
-          "tc": "drawSphere(radius, resolution)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofDrawCone",
-          "tc": "drawCone(radius, height, resolution)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
           "of": "ofBeginShape",
           "tc": "beginShape()",
           "notes": "",
@@ -206,22 +129,15 @@
           "notes_ko": ""
         },
         {
-          "of": "ofVertex",
-          "tc": "vertex(x, y)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofEndShape",
-          "tc": "endShape(close)",
+          "of": "ofClear / ofBackground",
+          "tc": "clear(r, g, b, a)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
         },
         {
           "of": "ofDrawBitmapString",
-          "tc": "drawBitmapString(text, x, y, screenFixed)",
+          "tc": "drawBitmapString(text, pos, screenFixed)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -234,8 +150,71 @@
           "notes_ko": ""
         },
         {
-          "of": "ofSetFrameRate",
-          "tc": "setFps(fps)",
+          "of": "ofDrawBox",
+          "tc": "drawBox(w, h, d)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofDrawCircle",
+          "tc": "drawCircle(center, radius)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofDrawCone",
+          "tc": "drawCone(radius, height, resolution)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofDrawEllipse",
+          "tc": "drawEllipse(center, radii)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofDrawLine",
+          "tc": "drawLine(p1, p2)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofDrawRectangle",
+          "tc": "drawRect(pos, size)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofDrawRectRounded",
+          "tc": "drawRectRounded(pos, size, radius)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofDrawSphere",
+          "tc": "drawSphere(radius, resolution)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofDrawTriangle",
+          "tc": "drawTriangle(p1, p2, p3)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofEndShape",
+          "tc": "endShape(close)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -255,15 +234,8 @@
           "notes_ko": ""
         },
         {
-          "of": "ofSetLineWidth",
-          "tc": "setStrokeWeight(weight)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofEnableBlendMode",
-          "tc": "setBlendMode(mode)",
+          "of": "ofPopStyle",
+          "tc": "popStyle()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -276,8 +248,36 @@
           "notes_ko": ""
         },
         {
-          "of": "ofPopStyle",
-          "tc": "popStyle()",
+          "of": "ofEnableBlendMode",
+          "tc": "setBlendMode(mode)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofSetColor",
+          "tc": "setColor(r, g, b, a)",
+          "notes": "Range 0-1 instead of 0-255",
+          "notes_ja": "Range 0-1 instead of 0-255",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofSetFrameRate",
+          "tc": "setFps(fps)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofSetLineWidth",
+          "tc": "setStrokeWeight(weight)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofVertex",
+          "tc": "vertex(x, y, z)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -292,8 +292,15 @@
       "order": 3,
       "mappings": [
         {
-          "of": "ofTranslate",
-          "tc": "translate(x, y)",
+          "of": "ofPopMatrix",
+          "tc": "popMatrix()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofPushMatrix",
+          "tc": "pushMatrix()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -320,15 +327,8 @@
           "notes_ko": ""
         },
         {
-          "of": "ofPushMatrix",
-          "tc": "pushMatrix()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofPopMatrix",
-          "tc": "popMatrix()",
+          "of": "ofTranslate",
+          "tc": "translate(pos)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -342,83 +342,6 @@
       "name_ko": "수학",
       "order": 4,
       "mappings": [
-        {
-          "of": "ofRandom",
-          "tc": "random()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofSeedRandom",
-          "tc": "randomSeed(seed)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofNoise",
-          "tc": "noise(x)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofSignedNoise",
-          "tc": "signedNoise(x)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofLerp",
-          "tc": "lerp(a, b, t)",
-          "notes": "std::lerp (C++20)",
-          "notes_ja": "std::lerp (C++20)",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofClamp",
-          "tc": "clamp(v, min, max)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofMap",
-          "tc": "remap(v, inMin, inMax, outMin, outMax)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofDegToRad",
-          "tc": "deg2rad(degrees)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofRadToDeg",
-          "tc": "rad2deg(radians)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofSign",
-          "tc": "sign(x)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofWrap",
-          "tc": "wrap(value, min, max)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
         {
           "of": "ofAngleDifferenceRadians",
           "tc": "angleDifference(angle1, angle2)",
@@ -434,6 +357,20 @@
           "notes_ko": ""
         },
         {
+          "of": "ofClamp",
+          "tc": "clamp(value, min, max)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofDegToRad",
+          "tc": "deg2rad(deg)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
           "of": "ofDist",
           "tc": "dist(x1, y1, x2, y2)",
           "notes": "",
@@ -443,6 +380,69 @@
         {
           "of": "ofDistSquared",
           "tc": "distSquared(x1, y1, x2, y2)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofLerp",
+          "tc": "lerp(a, b, t)",
+          "notes": "std::lerp (C++20)",
+          "notes_ja": "std::lerp (C++20)",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofNoise",
+          "tc": "noise(x)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofRadToDeg",
+          "tc": "rad2deg(rad)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofRandom",
+          "tc": "random()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofSeedRandom",
+          "tc": "randomSeed(seed)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofMap",
+          "tc": "remap(value, inMin, inMax, outMin, outMax)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofSign",
+          "tc": "sign(value)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofSignedNoise",
+          "tc": "signedNoise(x)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofWrap",
+          "tc": "wrap(value, min, max)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -464,15 +464,15 @@
           "notes_ko": ""
         },
         {
-          "of": "font.load(\"font.ttf\", size)",
-          "tc": "font.load(\"font.ttf\", size)",
+          "of": "font.drawString(text, x, y)",
+          "tc": "font.drawString(text, x, y)",
           "notes": "Same",
           "notes_ja": "Same",
           "notes_ko": ""
         },
         {
-          "of": "font.drawString(text, x, y)",
-          "tc": "font.drawString(text, x, y)",
+          "of": "font.load(\"font.ttf\", size)",
+          "tc": "font.load(\"font.ttf\", size)",
           "notes": "Same",
           "notes_ja": "Same",
           "notes_ko": ""
@@ -487,6 +487,13 @@
       "order": 11,
       "mappings": [
         {
+          "of": "ofSetupScreenOrtho",
+          "tc": "setupScreenOrtho()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
           "of": "ofSetupScreenPerspective",
           "tc": "setupScreenPerspective(fovDeg, nearDist, farDist)",
           "notes": "",
@@ -494,8 +501,8 @@
           "notes_ko": ""
         },
         {
-          "of": "ofSetupScreenOrtho",
-          "tc": "setupScreenOrtho()",
+          "of": "ofWorldToScreen",
+          "tc": "worldToScreen(worldPos)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -510,8 +517,15 @@
       "order": 13.5,
       "mappings": [
         {
-          "of": "ofVideoGrabber",
-          "tc": "VideoGrabber",
+          "of": "grabber.draw(x, y)",
+          "tc": "grabber.draw(x, y)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "grabber.isFrameNew()",
+          "tc": "grabber.isFrameNew()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -531,15 +545,8 @@
           "notes_ko": ""
         },
         {
-          "of": "grabber.draw(x, y)",
-          "tc": "grabber.draw(x, y)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "grabber.isFrameNew()",
-          "tc": "grabber.isFrameNew()",
+          "of": "ofVideoGrabber",
+          "tc": "VideoGrabber",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -554,22 +561,15 @@
       "order": 16,
       "mappings": [
         {
+          "of": "ofGetDay",
+          "tc": "getDay()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
           "of": "ofGetLastFrameTime",
           "tc": "getDeltaTime()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofGetFrameRate",
-          "tc": "getFrameRate()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofGetFrameNum",
-          "tc": "getFrameCount()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -582,13 +582,6 @@
           "notes_ko": ""
         },
         {
-          "of": "ofGetElapsedTimeMillis",
-          "tc": "getElapsedTimeMillis()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
           "of": "ofGetElapsedTimeMicros",
           "tc": "getElapsedTimeMicros()",
           "notes": "",
@@ -596,8 +589,50 @@
           "notes_ko": ""
         },
         {
-          "of": "ofResetElapsedTimeCounter",
-          "tc": "resetElapsedTimeCounter()",
+          "of": "ofGetElapsedTimeMillis",
+          "tc": "getElapsedTimeMillis()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofGetFrameNum",
+          "tc": "getFrameCount()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofGetFrameRate",
+          "tc": "getFrameRate()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofGetHours",
+          "tc": "getHours()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofGetMinutes",
+          "tc": "getMinutes()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofGetMonth",
+          "tc": "getMonth()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofGetSeconds",
+          "tc": "getSeconds()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -611,28 +646,14 @@
         },
         {
           "of": "ofGetTimestampString",
-          "tc": "getTimestampString()",
+          "tc": "getTimestampString(timestampFormat)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
         },
         {
-          "of": "ofGetSeconds",
-          "tc": "getSeconds()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofGetMinutes",
-          "tc": "getMinutes()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofGetHours",
-          "tc": "getHours()",
+          "of": "ofGetWeekday",
+          "tc": "getWeekday()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -645,22 +666,8 @@
           "notes_ko": ""
         },
         {
-          "of": "ofGetMonth",
-          "tc": "getMonth()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofGetDay",
-          "tc": "getDay()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofGetWeekday",
-          "tc": "getWeekday()",
+          "of": "ofResetElapsedTimeCounter",
+          "tc": "resetElapsedTimeCounter()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -675,29 +682,15 @@
       "order": 17,
       "mappings": [
         {
+          "of": "ofJoinString",
+          "tc": "joinString(stringElements, delimiter)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
           "of": "ofLog",
           "tc": "logNotice(module)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofToString",
-          "tc": "toString(value)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofToInt",
-          "tc": "toInt(str)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofToFloat",
-          "tc": "toFloat(str)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -710,13 +703,6 @@
           "notes_ko": ""
         },
         {
-          "of": "ofJoinString",
-          "tc": "joinString(elements, delimiter)",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
           "of": "ofStringReplace",
           "tc": "stringReplace(input, searchStr, replaceStr)",
           "notes": "",
@@ -724,8 +710,29 @@
           "notes_ko": ""
         },
         {
+          "of": "ofToFloat",
+          "tc": "toFloat(str)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofToInt",
+          "tc": "toInt(str)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
           "of": "ofToLower",
           "tc": "toLower(src)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofToString",
+          "tc": "toString(value)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -763,20 +770,6 @@
       "order": 19,
       "mappings": [
         {
-          "of": "ofSystemLoadDialog()",
-          "tc": "systemLoadDialog()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofSystemSaveDialog()",
-          "tc": "systemSaveDialog()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
           "of": "ofLoadJson(path)",
           "tc": "loadJson(path)",
           "notes": "nlohmann/json",
@@ -788,6 +781,20 @@
           "tc": "loadXml(path)",
           "notes": "pugixml",
           "notes_ja": "pugixml",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofSystemLoadDialog()",
+          "tc": "systemLoadDialog()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofSystemSaveDialog()",
+          "tc": "systemSaveDialog()",
+          "notes": "",
+          "notes_ja": "",
           "notes_ko": ""
         }
       ]
@@ -816,6 +823,13 @@
       "order": 21,
       "mappings": [
         {
+          "of": "ofLogError()",
+          "tc": "logError()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
           "of": "ofLog()",
           "tc": "logNotice()",
           "notes": "",
@@ -825,13 +839,6 @@
         {
           "of": "ofLogWarning()",
           "tc": "logWarning()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
-          "of": "ofLogError()",
-          "tc": "logError()",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""
@@ -846,17 +853,17 @@
       "order": 22,
       "mappings": [
         {
-          "of": "ofThread",
-          "tc": "std::thread + MainThreadRunner",
-          "notes": "Safe sync",
-          "notes_ja": "Safe sync",
-          "notes_ko": ""
-        },
-        {
           "of": "-",
           "tc": "MainThreadRunner::run(func)",
           "notes": "Execute on main thread",
           "notes_ja": "Execute on main thread",
+          "notes_ko": ""
+        },
+        {
+          "of": "ofThread",
+          "tc": "std::thread + MainThreadRunner",
+          "notes": "Safe sync",
+          "notes_ja": "Safe sync",
           "notes_ko": ""
         }
       ]
@@ -871,34 +878,6 @@
       "order": 1,
       "mappings": [
         {
-          "of": "glm::vec2 / ofVec2f",
-          "tc": "Vec2",
-          "notes": "2D vector (x, y)",
-          "notes_ja": "2Dベクトル (x, y)",
-          "notes_ko": "2D 벡터 (x, y)"
-        },
-        {
-          "of": "glm::vec3 / ofVec3f",
-          "tc": "Vec3",
-          "notes": "3D vector (x, y, z)",
-          "notes_ja": "3Dベクトル (x, y, z)",
-          "notes_ko": "3D 벡터 (x, y, z)"
-        },
-        {
-          "of": "-",
-          "tc": "IVec2",
-          "notes": "2D integer vector (x, y)",
-          "notes_ja": "2D整数ベクトル (x, y)",
-          "notes_ko": "2D 정수 벡터 (x, y)"
-        },
-        {
-          "of": "-",
-          "tc": "IVec3",
-          "notes": "3D integer vector (x, y, z)",
-          "notes_ja": "3D整数ベクトル (x, y, z)",
-          "notes_ko": "3D 정수 벡터 (x, y, z)"
-        },
-        {
           "of": "glm::mat4 / ofMatrix4x4",
           "tc": "Mat4",
           "notes": "4x4 matrix for 3D transformations",
@@ -911,6 +890,20 @@
           "notes": "Unit quaternion for 3D rotations",
           "notes_ja": "3D回転用単位クォータニオン",
           "notes_ko": "3D 회전용 단위 쿼터니언"
+        },
+        {
+          "of": "glm::vec2 / ofVec2f",
+          "tc": "Vec2",
+          "notes": "2D vector (x, y)",
+          "notes_ja": "2Dベクトル (x, y)",
+          "notes_ko": "2D 벡터 (x, y)"
+        },
+        {
+          "of": "glm::vec3 / ofVec3f",
+          "tc": "Vec3",
+          "notes": "3D vector (x, y, z)",
+          "notes_ja": "3Dベクトル (x, y, z)",
+          "notes_ko": "3D 벡터 (x, y, z)"
         }
       ]
     },
@@ -927,20 +920,6 @@
           "notes": "RGBA color (0.0-1.0 range)",
           "notes_ja": "RGBAカラー (0.0-1.0範囲)",
           "notes_ko": "RGBA 색상 (0.0-1.0 범위)"
-        },
-        {
-          "of": "-",
-          "tc": "ColorHSB",
-          "notes": "HSB color space (H/S/B: 0-1)",
-          "notes_ja": "HSB色空間 (H/S/B: 0-1)",
-          "notes_ko": "HSB 색공간 (H/S/B: 0-1)"
-        },
-        {
-          "of": "-",
-          "tc": "ColorOKLCH",
-          "notes": "Perceptually uniform OKLCH color",
-          "notes_ja": "知覚均一なOKLCHカラー",
-          "notes_ko": "지각적 균일 OKLCH 색상"
         }
       ]
     },
@@ -952,11 +931,11 @@
       "order": 3,
       "mappings": [
         {
-          "of": "ofRectangle",
-          "tc": "Rect",
-          "notes": "Rectangle (x, y, width, height)",
-          "notes_ja": "矩形 (x, y, width, height)",
-          "notes_ko": "사각형 (x, y, width, height)"
+          "of": "ofMesh",
+          "tc": "Mesh",
+          "notes": "3D mesh with vertices, colors, normals, indices",
+          "notes_ja": "頂点・色・法線・インデックスを持つ3Dメッシュ",
+          "notes_ko": "정점, 색상, 노멀, 인덱스를 가진 3D 메쉬"
         },
         {
           "of": "ofPath / ofPolyline",
@@ -966,11 +945,11 @@
           "notes_ko": "선과 곡선을 위한 경로/폴리라인"
         },
         {
-          "of": "ofMesh",
-          "tc": "Mesh",
-          "notes": "3D mesh with vertices, colors, normals, indices",
-          "notes_ja": "頂点・色・法線・インデックスを持つ3Dメッシュ",
-          "notes_ko": "정점, 색상, 노멀, 인덱스를 가진 3D 메쉬"
+          "of": "ofRectangle",
+          "tc": "Rect",
+          "notes": "Rectangle (x, y, width, height)",
+          "notes_ja": "矩形 (x, y, width, height)",
+          "notes_ko": "사각형 (x, y, width, height)"
         }
       ]
     },
@@ -982,11 +961,11 @@
       "order": 4,
       "mappings": [
         {
-          "of": "ofPixels",
-          "tc": "Pixels",
-          "notes": "Pixel buffer for image manipulation",
-          "notes_ja": "画像操作用ピクセルバッファ",
-          "notes_ko": "이미지 조작용 픽셀 버퍼"
+          "of": "ofFbo",
+          "tc": "Fbo",
+          "notes": "Framebuffer object for offscreen rendering",
+          "notes_ja": "オフスクリーンレンダリング用FBO",
+          "notes_ko": "오프스크린 렌더링용 프레임버퍼 객체"
         },
         {
           "of": "ofImage",
@@ -996,18 +975,18 @@
           "notes_ko": "CPU 픽셀과 GPU 텍스처를 가진 이미지"
         },
         {
+          "of": "ofPixels",
+          "tc": "Pixels",
+          "notes": "Pixel buffer for image manipulation",
+          "notes_ja": "画像操作用ピクセルバッファ",
+          "notes_ko": "이미지 조작용 픽셀 버퍼"
+        },
+        {
           "of": "ofTexture",
           "tc": "Texture",
           "notes": "GPU texture for rendering",
           "notes_ja": "レンダリング用GPUテクスチャ",
           "notes_ko": "렌더링용 GPU 텍스처"
-        },
-        {
-          "of": "ofFbo",
-          "tc": "Fbo",
-          "notes": "Framebuffer object for offscreen rendering",
-          "notes_ja": "オフスクリーンレンダリング用FBO",
-          "notes_ko": "오프스크린 렌더링용 프레임버퍼 객체"
         }
       ]
     },
@@ -1024,13 +1003,6 @@
           "notes": "Audio playback",
           "notes_ja": "オーディオ再生",
           "notes_ko": "오디오 재생"
-        },
-        {
-          "of": "-",
-          "tc": "ChipSound",
-          "notes": "Chip/synthesized sound generation",
-          "notes_ja": "チップ/合成サウンド生成",
-          "notes_ko": "칩/합성 사운드 생성"
         }
       ]
     },
@@ -1047,29 +1019,6 @@
           "notes": "TrueType font for text rendering",
           "notes_ja": "テキストレンダリング用TrueTypeフォント",
           "notes_ko": "텍스트 렌더링용 트루타입 폰트"
-        }
-      ]
-    },
-    {
-      "id": "file-io-types",
-      "name": "File I/O",
-      "name_ja": "ファイルI/O",
-      "name_ko": "파일 I/O",
-      "order": 7,
-      "mappings": [
-        {
-          "of": "-",
-          "tc": "FileWriter",
-          "notes": "Streaming file writer with immediate flush",
-          "notes_ja": "即時フラッシュ付きストリーミングファイルライター",
-          "notes_ko": "즉시 플러시되는 스트리밍 파일 라이터"
-        },
-        {
-          "of": "-",
-          "tc": "FileReader",
-          "notes": "Streaming file reader for large files",
-          "notes_ja": "大きなファイル用ストリーミングファイルリーダー",
-          "notes_ko": "대용량 파일용 스트리밍 파일 리더"
         }
       ]
     },
@@ -1104,27 +1053,6 @@
           "notes_ko": "네트워크 인터페이스의 주소 항목 하나 (listNetworkInterfaces가 반환)"
         },
         {
-          "of": "ofxUDPManager",
-          "tc": "UdpSocket",
-          "notes": "UDP socket (send/receive datagrams, broadcast, multicast)",
-          "notes_ja": "UDPソケット（データグラム送受信・ブロードキャスト・マルチキャスト）",
-          "notes_ko": "UDP 소켓 (데이터그램 송수신, 브로드캐스트, 멀티캐스트)"
-        },
-        {
-          "of": "-",
-          "tc": "UdpReceiveEventArgs",
-          "notes": "Event args for UdpSocket::onReceive",
-          "notes_ja": "UdpSocket::onReceiveのイベント引数",
-          "notes_ko": "UdpSocket::onReceive의 이벤트 인자"
-        },
-        {
-          "of": "-",
-          "tc": "UdpErrorEventArgs",
-          "notes": "Event args for UdpSocket::onError",
-          "notes_ja": "UdpSocket::onErrorのイベント引数",
-          "notes_ko": "UdpSocket::onError의 이벤트 인자"
-        },
-        {
           "of": "ofxTCPClient",
           "tc": "TcpClient",
           "notes": "TCP client connection (connect, send/receive a stream)",
@@ -1133,17 +1061,24 @@
         },
         {
           "of": "-",
+          "tc": "TcpClientConnectEventArgs",
+          "notes": "Event args for TcpServer::onClientConnect",
+          "notes_ja": "TcpServer::onClientConnectのイベント引数",
+          "notes_ko": "TcpServer::onClientConnect의 이벤트 인자"
+        },
+        {
+          "of": "-",
+          "tc": "TcpClientDisconnectEventArgs",
+          "notes": "Event args for TcpServer::onClientDisconnect",
+          "notes_ja": "TcpServer::onClientDisconnectのイベント引数",
+          "notes_ko": "TcpServer::onClientDisconnect의 이벤트 인자"
+        },
+        {
+          "of": "-",
           "tc": "TcpConnectEventArgs",
           "notes": "Event args for TcpClient::onConnect",
           "notes_ja": "TcpClient::onConnectのイベント引数",
           "notes_ko": "TcpClient::onConnect의 이벤트 인자"
-        },
-        {
-          "of": "-",
-          "tc": "TcpReceiveEventArgs",
-          "notes": "Event args for TcpClient::onReceive",
-          "notes_ja": "TcpClient::onReceiveのイベント引数",
-          "notes_ko": "TcpClient::onReceive의 이벤트 인자"
         },
         {
           "of": "-",
@@ -1158,6 +1093,13 @@
           "notes": "Event args for TcpClient::onError",
           "notes_ja": "TcpClient::onErrorのイベント引数",
           "notes_ko": "TcpClient::onError의 이벤트 인자"
+        },
+        {
+          "of": "-",
+          "tc": "TcpReceiveEventArgs",
+          "notes": "Event args for TcpClient::onReceive",
+          "notes_ja": "TcpClient::onReceiveのイベント引数",
+          "notes_ko": "TcpClient::onReceive의 이벤트 인자"
         },
         {
           "of": "ofxTCPServer",
@@ -1175,10 +1117,10 @@
         },
         {
           "of": "-",
-          "tc": "TcpClientConnectEventArgs",
-          "notes": "Event args for TcpServer::onClientConnect",
-          "notes_ja": "TcpServer::onClientConnectのイベント引数",
-          "notes_ko": "TcpServer::onClientConnect의 이벤트 인자"
+          "tc": "TcpServerErrorEventArgs",
+          "notes": "Event args for TcpServer::onError",
+          "notes_ja": "TcpServer::onErrorのイベント引数",
+          "notes_ko": "TcpServer::onError의 이벤트 인자"
         },
         {
           "of": "-",
@@ -1189,17 +1131,24 @@
         },
         {
           "of": "-",
-          "tc": "TcpClientDisconnectEventArgs",
-          "notes": "Event args for TcpServer::onClientDisconnect",
-          "notes_ja": "TcpServer::onClientDisconnectのイベント引数",
-          "notes_ko": "TcpServer::onClientDisconnect의 이벤트 인자"
+          "tc": "UdpErrorEventArgs",
+          "notes": "Event args for UdpSocket::onError",
+          "notes_ja": "UdpSocket::onErrorのイベント引数",
+          "notes_ko": "UdpSocket::onError의 이벤트 인자"
         },
         {
           "of": "-",
-          "tc": "TcpServerErrorEventArgs",
-          "notes": "Event args for TcpServer::onError",
-          "notes_ja": "TcpServer::onErrorのイベント引数",
-          "notes_ko": "TcpServer::onError의 이벤트 인자"
+          "tc": "UdpReceiveEventArgs",
+          "notes": "Event args for UdpSocket::onReceive",
+          "notes_ja": "UdpSocket::onReceiveのイベント引数",
+          "notes_ko": "UdpSocket::onReceive의 이벤트 인자"
+        },
+        {
+          "of": "ofxUDPManager",
+          "tc": "UdpSocket",
+          "notes": "UDP socket (send/receive datagrams, broadcast, multicast)",
+          "notes_ja": "UDPソケット（データグラム送受信・ブロードキャスト・マルチキャスト）",
+          "notes_ko": "UDP 소켓 (데이터그램 송수신, 브로드캐스트, 멀티캐스트)"
         }
       ]
     },
