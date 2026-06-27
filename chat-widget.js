@@ -57,10 +57,15 @@
     .cw-msgs::-webkit-scrollbar { width: 7px; }
     .cw-msgs::-webkit-scrollbar-thumb { background: var(--color-border,#27272a); border-radius: 4px; }
 
+    .cw-note { align-self: center; margin: auto 0; text-align: center; color: var(--color-text-muted,#8b8b93); font-size: 11px; line-height: 1.7; opacity: 0.8; padding: 0 24px; }
     .cw-msg { font-size: 13.5px; line-height: 1.6; max-width: 92%; }
     .cw-msg.user { align-self: flex-end; background: var(--color-primary,#6366f1); color: #fff; padding: 8px 12px; border-radius: 12px 12px 2px 12px; }
     .cw-msg.bot { align-self: flex-start; color: var(--color-text,#e8e8ed); }
     .cw-msg.bot pre { background: var(--color-bg,#0a0a0b); border: 1px solid var(--color-border,#27272a); border-radius: 7px; padding: 8px 10px; margin: 6px 0; overflow-x: auto; font-family: var(--font-mono,'JetBrains Mono','SF Mono',Consolas,monospace); font-size: 12px; }
+    .cw-pre { position: relative; }
+    .cw-pre .cw-codecopy { position: absolute; top: 10px; right: 8px; background: var(--color-bg-card,#16161a); border: 1px solid var(--color-border,#27272a); border-radius: 5px; color: var(--color-text-muted,#8b8b93); cursor: pointer; font-size: 10px; padding: 2px 7px; opacity: 0.6; transition: opacity 0.12s; }
+    .cw-pre:hover .cw-codecopy { opacity: 1; }
+    .cw-pre .cw-codecopy:hover { color: var(--color-text,#e8e8ed); border-color: var(--color-text-muted,#8b8b93); }
     .cw-msg.bot code { font-family: var(--font-mono,'JetBrains Mono','SF Mono',Consolas,monospace); font-size: 12px; }
     .cw-msg.bot a { color: var(--color-accent,#22d3ee); text-decoration: none; }
     .cw-msg.bot a:hover { text-decoration: underline; }
@@ -136,18 +141,21 @@
       placeholder: 'e.g. "How do I draw a curve?" "Any shader examples?"',
       more: 'See also: ',
       sources: 'sources',
+      privacy: 'Chats are logged anonymously for usage statistics.',
     },
     ja: {
       greeting: 'こんにちは！TrussC の案内役だよ。ドキュメントのことなら気軽に聞いてね。',
       placeholder: '例:「曲線の書き方は？」「シェーダのサンプルある？」',
       more: '詳しくは: ',
       sources: '出典',
+      privacy: '使用統計のため、チャットは匿名で記録されます。',
     },
     ko: {
       greeting: '안녕하세요! TrussC 안내 도우미예요. 문서에 관한 거라면 편하게 물어보세요.',
       placeholder: '예: "곡선은 어떻게 그리나요?" "셰이더 예제 있어요?"',
       more: '자세히: ',
       sources: '출처',
+      privacy: '사용 통계를 위해 대화는 익명으로 기록됩니다.',
     },
   };
   var STR = I18N[LANG];
@@ -199,6 +207,7 @@
     } else {
       var b = addBot(GREETING);
       var blink = b.el.querySelector('.cw-blink'); if (blink) blink.classList.remove('cw-blink');
+      showNote();
     }
   }
   function closePanel() { panel.classList.remove('open'); if (online) bubble.classList.add('show'); }
@@ -208,14 +217,17 @@
     try { localStorage.removeItem(STORE_KEY); } catch (e) {}
     msgs.innerHTML = '';
     var b = addBot(GREETING); var bl = b.el.querySelector('.cw-blink'); if (bl) bl.classList.remove('cw-blink');
+    showNote();
     qEl.focus();
   }
-  function copyConvo(btn) {
-    if (!convo.length) return;
-    var text = convo.map(function (t) { return (t.role === 'user' ? 'You: ' : 'TrussC: ') + t.content; }).join('\n\n');
+  function copyText(text, btn) {
     var done = function () { var o = btn.textContent; btn.textContent = 'copied'; setTimeout(function () { btn.textContent = o; }, 1200); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () {});
     else { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(ta); }
+  }
+  function copyConvo(btn) {
+    if (!convo.length) return;
+    copyText(convo.map(function (t) { return (t.role === 'user' ? 'You: ' : 'TrussC: ') + t.content; }).join('\n\n'), btn);
   }
 
   // F1 reveals the bubble (easter egg) and opens the panel.
@@ -226,13 +238,20 @@
   root.querySelector('.cw-x').addEventListener('click', closePanel);
   root.querySelector('.cw-clear').addEventListener('click', clearConvo);
   root.querySelector('.cw-copy').addEventListener('click', function (e) { copyConvo(e.currentTarget); });
+  // Per-code-block copy (event delegation — bubbles survive innerHTML rebuilds during streaming).
+  msgs.addEventListener('click', function (e) {
+    var btn = e.target && e.target.closest ? e.target.closest('.cw-codecopy') : null;
+    if (!btn) return;
+    var pre = btn.parentNode.querySelector('pre');
+    if (pre) copyText(pre.textContent, btn);
+  });
 
   // --- rendering: escape, then ```code``` → <pre>, links, inline `code`, <br> --
   function render(text) {
     var parts = String(text).split(/```/);
     return parts.map(function (p, i) {
       return i % 2
-        ? '<pre>' + esc(p.replace(/^[a-zA-Z]*\n/, '')) + '</pre>'
+        ? '<div class="cw-pre"><button class="cw-codecopy" type="button">copy</button><pre>' + esc(p.replace(/^[a-zA-Z]*\n/, '')) + '</pre></div>'
         : esc(p)
             .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+|\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
             .replace(/`([^`]+)`/g, '<code>$1</code>')
@@ -250,11 +269,21 @@
     msgs.appendChild(el); msgs.scrollTop = msgs.scrollHeight;
     return { el: el, buf: text };
   }
+  // Privacy notice, centered in the empty area before a conversation starts;
+  // removed once the user sends their first message.
+  var noteEl = null;
+  function showNote() {
+    if (noteEl) return;
+    noteEl = document.createElement('div'); noteEl.className = 'cw-note'; noteEl.textContent = STR.privacy;
+    msgs.appendChild(noteEl);
+  }
+  function hideNote() { if (noteEl) { noteEl.remove(); noteEl = null; } }
 
   async function send() {
     var q = qEl.value.trim();
     if (!q || busy || !online) return;
     busy = true; sendBtn.disabled = true;
+    hideNote();
     qEl.value = ''; qEl.style.height = '38px';   // clear input + collapse back to one row
     addUser(q);
     var bot = addBot('');
