@@ -276,6 +276,7 @@
           if (!ev || data === undefined) continue;
           var payload = JSON.parse(data);
           if (ev === 'token') { bot.buf += payload; bot.el.innerHTML = render(bot.buf) + '<span class="cw-blink"></span>'; msgs.scrollTop = msgs.scrollHeight; }
+          else if (ev === 'replace') { bot.buf = payload; bot.el.innerHTML = render(bot.buf) + '<span class="cw-blink"></span>'; msgs.scrollTop = msgs.scrollHeight; }
           else if (ev === 'sources') { srcs = payload; }
           else if (ev === 'links') { links = payload; }
           else if (ev === 'error') { bot.buf += '\n\n[error: ' + payload + ']'; }
