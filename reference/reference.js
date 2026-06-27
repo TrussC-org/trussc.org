@@ -392,20 +392,23 @@
     const PLAT_ORDER = ['linux', 'windows', 'macos', 'ios', 'android', 'wasm'];
     const PLAT_LABEL = { linux: 'Linux', windows: 'Windows', macos: 'macOS', ios: 'iOS', android: 'Android', wasm: 'WASM' };
     function platBadges(list) {
-        const on = new Set(list);
+        const on = new Set((list || []).map(p => p === 'web' ? 'wasm' : p));  // data emits 'web'; the badge is labelled WASM
         return PLAT_ORDER.map(p =>
             `<span class="plat-badge ${on.has(p) ? 'plat-on' : 'plat-off'}">${esc(PLAT_LABEL[p])}</span>`
         ).join('');
     }
     function renderPlatforms(d, inline) {
-        if (!d || !Array.isArray(d.platforms)) return '';
+        if (!d) return '';
+        const hasPlat = Array.isArray(d.platforms);
+        if (!hasPlat && !d.platformNote) return '';   // a platformNote alone should still show
         if (inline) {
-            let h = `<div class="plat-row plat-inline">${platBadges(d.platforms)}</div>`;
+            let h = '';
+            if (hasPlat) h += `<div class="plat-row plat-inline">${platBadges(d.platforms)}</div>`;
             if (d.platformNote) h += `<div class="plat-note">${esc(d.platformNote)}</div>`;
             return h;
         }
         let h = `<div class="detail-section"><div class="detail-section-title">${esc(UI.platforms)}</div>`;
-        h += `<div class="plat-row">${platBadges(d.platforms)}</div>`;
+        if (hasPlat) h += `<div class="plat-row">${platBadges(d.platforms)}</div>`;
         if (d.platformNote) h += `<div class="plat-note">${esc(d.platformNote)}</div>`;
         h += `</div>`;
         return h;
@@ -424,13 +427,27 @@
         }
         return _kindIndex.get(name) || 'function';
     }
+    // Is this name a real top-level reference entry? (builds the index lazily)
+    function isKnown(name) { kindOf(name); return _kindIndex.has(name); }
+    // A related target becomes a link ONLY when it resolves — a top-level symbol, or
+    // a `Type::method` whose owning type exists (routed to that type's page). Anything
+    // unresolvable renders as plain text instead of a silently-dead clickable link.
+    function relatedLink(r) {
+        const A = 'style="color:var(--color-accent,#4ec9b0);text-decoration:none;"';
+        if (isKnown(r)) return `<a href="#" onclick="navTo('${kindOf(r)}','${esc(r)}');return false;" ${A}>${esc(r)}</a>`;
+        const ix = r.indexOf('::');
+        if (ix > 0) {
+            const owner = r.slice(0, ix);
+            if (isKnown(owner) && kindOf(owner) === 'type')
+                return `<a href="#" onclick="navTo('type','${esc(owner)}');return false;" title="${esc(r)}" ${A}>${esc(r)}</a>`;
+        }
+        return `<span style="color:#888;">${esc(r)}</span>`;
+    }
     function renderRelated(list) {
         if (!list || !list.length) return '';
         let h = `<div class="detail-section"><div class="detail-section-title">${esc(UI.related)}</div>`;
         h += `<div style="font-size:13px;line-height:1.8;">`;
-        h += list.map(r =>
-            `<a href="#" onclick="navTo('${kindOf(r)}','${esc(r)}');return false;" style="color:var(--color-accent,#4ec9b0);text-decoration:none;">${esc(r)}</a>`
-        ).join(' · ');
+        h += list.map(relatedLink).join(' · ');
         h += `</div></div>`;
         return h;
     }
@@ -475,7 +492,10 @@
                 if (fn.name === name) overloads.push({ ...fn, category: cat.name });
             }
         }
-        if (overloads.length === 0) return;
+        if (overloads.length === 0) {
+            detail.innerHTML = backButton() + `<div class="detail-title">${esc(name)}</div><div class="detail-desc" style="color:#888;">${esc(UI.noResults || 'Not found')}</div>`;
+            return;
+        }
         const first = overloads[0];
 
         let html = backButton();
@@ -550,7 +570,8 @@
             html += `<div class="detail-section-title">${esc(UI.properties)}</div>`;
             for (const p of t.properties) {
                 html += `<div class="detail-entry">`;
-                html += `<div class="detail-sig"><span class="type">${esc(p.type)}</span> <span class="prop-name">${esc(p.name)}</span></div>`;
+                const ptype = p.type ? `<span class="type">${esc(p.type)}</span> ` : '';
+                html += `<div class="detail-sig">${ptype}<span class="prop-name">${esc(p.name)}</span></div>`;
                 if (p.desc) html += `<div class="detail-entry-desc">// ${esc(p.desc)}</div>`;
                 html += `</div>`;
             }
@@ -562,12 +583,8 @@
             html += `<div class="detail-section-title">${esc(UI.methods)}</div>`;
             for (const m of t.methods) {
                 html += `<div class="detail-entry">`;
-                if (m.signatures.length === 1) {
-                    html += `<div class="detail-sig"><span class="ret">${esc(m.return || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(m.signatures[0])}</span>)</div>`;
-                } else {
-                    for (const sig of m.signatures) {
-                        html += `<div class="detail-sig"><span class="ret">${esc(m.return || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig)}</span>)</div>`;
-                    }
+                for (const sig of [...new Set(m.signatures)]) {   // dedupe identical const/non-const rows
+                    html += `<div class="detail-sig"><span class="ret">${esc(m.return || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig)}</span>)</div>`;
                 }
                 if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
                 if (m.deprecated) html += renderDeprecated(m.deprecated);
@@ -582,7 +599,7 @@
             html += `<div class="detail-section-title">${esc(UI.staticMethods)}</div>`;
             for (const m of t.static_methods) {
                 html += `<div class="detail-entry">`;
-                for (const sig of m.signatures) {
+                for (const sig of [...new Set(m.signatures)]) {   // dedupe identical const/non-const rows
                     html += `<div class="detail-sig"><span class="ret">${esc(m.return || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig)}</span>)</div>`;
                 }
                 if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
@@ -640,11 +657,13 @@
 
         let html = backButton();
         html += `<div class="detail-title">${esc(c.name)}</div>`;
-        html += `<div class="detail-desc">${esc(UI.constantValue)}</div>`;
-        html += `<div class="detail-section">`;
-        html += `<div class="detail-section-title">${esc(UI.value)}</div>`;
-        html += `<div class="detail-entry"><div class="detail-sig" style="color:#b5cea8;font-size:16px;">${esc(String(c.value))}</div></div>`;
-        html += `</div>`;
+        html += `<div class="detail-desc">${esc(c.desc || UI.constantValue)}</div>`;
+        if (c.value !== undefined && c.value !== null) {   // don't print the literal word "undefined"
+            html += `<div class="detail-section">`;
+            html += `<div class="detail-section-title">${esc(UI.value)}</div>`;
+            html += `<div class="detail-entry"><div class="detail-sig" style="color:#b5cea8;font-size:16px;">${esc(String(c.value))}</div></div>`;
+            html += `</div>`;
+        }
 
         detail.innerHTML = html;
     }
@@ -704,7 +723,7 @@
             html += `<div class="overview-grid">`;
             const seen = new Set();
             for (const fn of cat.functions) {
-                const key = fn.name + '(' + (fn.params || '') + ')';
+                const key = fn.name;   // one card per function; overloads live on the detail page
                 if (seen.has(key)) continue;
                 seen.add(key);
 
