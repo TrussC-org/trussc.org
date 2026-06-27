@@ -47,7 +47,10 @@
     .cw-head .cw-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent,#22d3ee); }
     .cw-head .cw-title { font-size: 14px; font-weight: 600; }
     .cw-head .cw-sub { font-size: 11px; color: var(--color-text-muted,#8b8b93); }
-    .cw-head .cw-x { margin-left: auto; background: none; border: none; color: var(--color-text-muted,#8b8b93); cursor: pointer; font-size: 18px; line-height: 1; }
+    .cw-head .cw-act { background: none; border: 1px solid var(--color-border,#27272a); border-radius: 6px; color: var(--color-text-muted,#8b8b93); cursor: pointer; font-size: 11px; padding: 3px 8px; }
+    .cw-head .cw-act:hover { color: var(--color-text,#e8e8ed); border-color: var(--color-text-muted,#8b8b93); }
+    .cw-head .cw-copy { margin-left: auto; }
+    .cw-head .cw-x { background: none; border: none; color: var(--color-text-muted,#8b8b93); cursor: pointer; font-size: 18px; line-height: 1; padding: 0 2px; }
     .cw-head .cw-x:hover { color: var(--color-text,#e8e8ed); }
 
     .cw-msgs { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
@@ -98,6 +101,8 @@
           <div class="cw-title">TrussC Assistant</div>
           <div class="cw-sub">beginner docs helper · local LLM</div>
         </div>
+        <button class="cw-act cw-copy" aria-label="Copy conversation" title="Copy conversation">copy</button>
+        <button class="cw-act cw-clear" aria-label="Clear conversation" title="Clear conversation">clear</button>
         <button class="cw-x" aria-label="Close">×</button>
       </div>
       <div class="cw-msgs"></div>
@@ -117,7 +122,56 @@
 
   var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
   var online = false, busy = false;
-  var convo = [];   // conversation history sent back each turn for follow-up chains
+
+  // Localized strings. The page locale comes from <html lang> (en/ja/ko on
+  // trussc.org). The greeting sets expectations: a reference/examples guide that
+  // points you to the right API — not an all-purpose assistant.
+  var LANG = (function () {
+    var l = (document.documentElement.lang || '').slice(0, 2).toLowerCase();
+    return l === 'ja' || l === 'ko' ? l : 'en';
+  })();
+  var I18N = {
+    en: {
+      greeting: "Hi! I'm your TrussC guide — ask me anything in the docs.",
+      placeholder: 'e.g. "How do I draw a curve?" "Any shader examples?"',
+      more: 'See also: ',
+      sources: 'sources',
+    },
+    ja: {
+      greeting: 'こんにちは！TrussC の案内役だよ。ドキュメントのことなら気軽に聞いてね。',
+      placeholder: '例:「曲線の書き方は？」「シェーダのサンプルある？」',
+      more: '詳しくは: ',
+      sources: '出典',
+    },
+    ko: {
+      greeting: '안녕하세요! TrussC 안내 도우미예요. 문서에 관한 거라면 편하게 물어보세요.',
+      placeholder: '예: "곡선은 어떻게 그리나요?" "셰이더 예제 있어요?"',
+      more: '자세히: ',
+      sources: '출처',
+    },
+  };
+  var STR = I18N[LANG];
+  var GREETING = STR.greeting;
+  qEl.placeholder = STR.placeholder;
+
+  // Conversation history. Persisted to localStorage so closing the tab doesn't lose
+  // the chat — restored (text only; ephemeral links/sources footers are not
+  // re-rendered) when the panel reopens. Deliberately lightweight: a single thread,
+  // capped to the last 40 turns, dropped after 24h of inactivity. No history list —
+  // it's a convenience, fine to lose.
+  var STORE_KEY = 'trussc-chat-v2';
+  var TTL_MS = 24 * 60 * 60 * 1000;
+  function loadConvo() {
+    try {
+      var o = JSON.parse(localStorage.getItem(STORE_KEY));
+      if (!o || !Array.isArray(o.c) || (Date.now() - o.ts) > TTL_MS) { localStorage.removeItem(STORE_KEY); return []; }
+      return o.c;
+    } catch (e) { return []; }
+  }
+  function saveConvo() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ts: Date.now(), c: convo.slice(-40) })); } catch (e) {}
+  }
+  var convo = loadConvo();   // conversation history sent back each turn for follow-up chains
 
   // Health gate: only reveal on F1 if the server answers.
   fetch(API + '/health').then(function (r) { return r.json(); })
@@ -129,12 +183,33 @@
     bubble.classList.remove('show');
     panel.classList.add('open');
     qEl.focus();
-    if (!msgs.children.length) {
-      var b = addBot('こんにちは！TrussC のことなら何でも聞いてね。例：「曲線ってどう描くの？」「drawRect を使う例ある？」');
+    if (msgs.children.length) return;          // already populated this session
+    if (convo.length) {
+      // restore a prior conversation across tab closes (text bubbles only)
+      for (var i = 0; i < convo.length; i++) {
+        if (convo[i].role === 'user') addUser(convo[i].content);
+        else { var rb = addBot(convo[i].content); var rbl = rb.el.querySelector('.cw-blink'); if (rbl) rbl.classList.remove('cw-blink'); }
+      }
+    } else {
+      var b = addBot(GREETING);
       var blink = b.el.querySelector('.cw-blink'); if (blink) blink.classList.remove('cw-blink');
     }
   }
   function closePanel() { panel.classList.remove('open'); if (online) bubble.classList.add('show'); }
+  function clearConvo() {
+    convo = [];
+    try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+    msgs.innerHTML = '';
+    var b = addBot(GREETING); var bl = b.el.querySelector('.cw-blink'); if (bl) bl.classList.remove('cw-blink');
+    qEl.focus();
+  }
+  function copyConvo(btn) {
+    if (!convo.length) return;
+    var text = convo.map(function (t) { return (t.role === 'user' ? 'You: ' : 'TrussC: ') + t.content; }).join('\n\n');
+    var done = function () { var o = btn.textContent; btn.textContent = 'copied'; setTimeout(function () { btn.textContent = o; }, 1200); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () {});
+    else { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(ta); }
+  }
 
   // F1 reveals the bubble (easter egg) and opens the panel.
   window.addEventListener('keydown', function (e) {
@@ -142,6 +217,8 @@
   });
   bubble.addEventListener('click', openPanel);
   root.querySelector('.cw-x').addEventListener('click', closePanel);
+  root.querySelector('.cw-clear').addEventListener('click', clearConvo);
+  root.querySelector('.cw-copy').addEventListener('click', function (e) { copyConvo(e.currentTarget); });
 
   // --- rendering: escape, then ```code``` → <pre>, links, inline `code`, <br> --
   function render(text) {
@@ -203,12 +280,12 @@
     // finalize: drop the cursor; append "詳しくは" links + the sources disclosure
     var html = render(bot.buf);
     if (links && links.length) {
-      html += '<div class="cw-reflinks">詳しくは: ' +
+      html += '<div class="cw-reflinks">' + STR.more +
         links.map(function (l) { return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>'; }).join(' · ') +
         '</div>';
     }
     if (srcs && srcs.length) {
-      html += '<details class="cw-sources"><summary>sources (' + srcs.length + ')</summary>' +
+      html += '<details class="cw-sources"><summary>' + STR.sources + ' (' + srcs.length + ')</summary>' +
         srcs.map(function (s) {
           var t = s.link ? '<a href="' + esc(s.link) + '" target="_blank" rel="noopener">' + esc(s.title) + '</a>' : esc(s.title);
           return '<div class="cw-src"><span class="cw-tag">[' + esc(s.source) + ']</span> ' + t + ' · ' + s.score.toFixed(2) + '</div>';
@@ -217,6 +294,7 @@
     }
     bot.el.innerHTML = html;
     convo.push({ role: 'user', content: q }, { role: 'assistant', content: bot.buf });
+    saveConvo();   // survive tab close
     busy = false; sendBtn.disabled = false; qEl.focus();
   }
 
