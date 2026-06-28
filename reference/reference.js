@@ -547,9 +547,10 @@
             return;
         }
         const first = overloads[0];
+        const isStd = overloads.some(o => o.std);
 
         let html = backButton();
-        html += `<div class="detail-title">${esc(name)}</div>`;
+        html += `<div class="detail-title">${esc(name)}${isStd ? ' <span style="font-size:11px;font-weight:500;color:#888;border:1px solid var(--color-border,#3c3c3c);border-radius:4px;padding:1px 6px;vertical-align:middle;" title="Standard library passthrough — this is std::' + esc(name) + '">std</span>' : ''}</div>`;
         html += `<div class="detail-desc">${esc(first.desc || '')}</div>`;
         html += renderDeprecated((overloads.find(o => o.deprecated) || {}).deprecated);
 
@@ -790,6 +791,7 @@
                 if (retType) html += `<span class="ov-ret">${esc(retType)}</span> `;
                 html += `<span class="ov-name">${esc(fn.name)}</span>(<span class="ov-params">${esc(params)}</span>)`;
                 if (depr) html += ` <span class="ov-depr-tag">⚠ ${esc(UI.deprecated)}</span>`;
+                if (fn.std) html += ` <span style="font-size:10px;color:#888;border:1px solid var(--color-border,#3c3c3c);border-radius:3px;padding:0 5px;" title="std:: passthrough">std</span>`;
                 if (fn.desc) html += `<span class="ov-desc">// ${esc(fn.desc)}</span>`;
                 html += `</div>`;
             }
