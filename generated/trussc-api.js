@@ -15,7 +15,7 @@ const TrussCAPI = {
                 {
                     "name": "runApp",
                     "params": "settings",
-                    "params_typed": "const WindowSettings & settings = …",
+                    "params_typed": "const WindowSettings & settings = WindowSettings()",
                     "return_type": "int",
                     "desc": "Start the application main loop. Called from main()",
                     "keywords": [
@@ -80,7 +80,7 @@ const TrussCAPI = {
                 {
                     "name": "clear",
                     "params": "r, g, b, a",
-                    "params_typed": "float r, float g, float b, float a = …",
+                    "params_typed": "float r, float g, float b, float a = 1.0",
                     "return_type": "void",
                     "desc": "Clear screen. No args = transparent black (0,0,0,0)",
                     "keywords": [
@@ -120,7 +120,7 @@ const TrussCAPI = {
                 {
                     "name": "clear",
                     "params": "gray, a",
-                    "params_typed": "float gray, float a = …",
+                    "params_typed": "float gray, float a = 1.0",
                     "return_type": "void",
                     "desc": "Clear screen. No args = transparent black (0,0,0,0)",
                     "keywords": [
@@ -160,7 +160,7 @@ const TrussCAPI = {
                 {
                     "name": "setColor",
                     "params": "r, g, b, a",
-                    "params_typed": "float r, float g, float b, float a = …",
+                    "params_typed": "float r, float g, float b, float a = 1.0",
                     "return_type": "void",
                     "desc": "Set drawing color (0.0-1.0)",
                     "keywords": [
@@ -195,7 +195,7 @@ const TrussCAPI = {
                 {
                     "name": "setColor",
                     "params": "gray, a",
-                    "params_typed": "float gray, float a = …",
+                    "params_typed": "float gray, float a = 1.0",
                     "return_type": "void",
                     "desc": "Set drawing color (0.0-1.0)",
                     "keywords": [
@@ -265,7 +265,7 @@ const TrussCAPI = {
                 {
                     "name": "setColorHSB",
                     "params": "h, s, b, a",
-                    "params_typed": "float h, float s, float b, float a = …",
+                    "params_typed": "float h, float s, float b, float a = 1.0",
                     "return_type": "void",
                     "desc": "Set color from HSB (H: 0-1)",
                     "keywords": [
@@ -300,7 +300,7 @@ const TrussCAPI = {
                 {
                     "name": "setColorOKLab",
                     "params": "L, a_lab, b_lab, alpha",
-                    "params_typed": "float L, float a_lab, float b_lab, float alpha = …",
+                    "params_typed": "float L, float a_lab, float b_lab, float alpha = 1.0",
                     "return_type": "void",
                     "desc": "Set color from OKLab",
                     "keywords": [
@@ -318,7 +318,7 @@ const TrussCAPI = {
                 {
                     "name": "setColorOKLCH",
                     "params": "L, C, H, alpha",
-                    "params_typed": "float L, float C, float H, float alpha = …",
+                    "params_typed": "float L, float C, float H, float alpha = 1.0",
                     "return_type": "void",
                     "desc": "Set color from OKLCH",
                     "keywords": [
@@ -1056,7 +1056,7 @@ const TrussCAPI = {
                 {
                     "name": "drawBitmapString",
                     "params": "text, pos, screenFixed",
-                    "params_typed": "const std::string & text, Vec3 pos, bool screenFixed = …",
+                    "params_typed": "const std::string & text, Vec3 pos, bool screenFixed = true",
                     "return_type": "void",
                     "desc": "Draw text",
                     "keywords": [
@@ -1087,7 +1087,7 @@ const TrussCAPI = {
                 {
                     "name": "drawBitmapString",
                     "params": "text, x, y, screenFixed",
-                    "params_typed": "const std::string & text, float x, float y, bool screenFixed = …",
+                    "params_typed": "const std::string & text, float x, float y, bool screenFixed = true",
                     "return_type": "void",
                     "desc": "Draw text",
                     "keywords": [
@@ -1397,7 +1397,7 @@ const TrussCAPI = {
                 {
                     "name": "drawBitmapStringHighlight",
                     "params": "text, x, y, background, foreground",
-                    "params_typed": "const std::string & text, float x, float y, const Color & background = …, const Color & foreground = …",
+                    "params_typed": "const std::string & text, float x, float y, const Color & background = Color(0, 0, 0), const Color & foreground = Color(1, 1, 1)",
                     "return_type": "void",
                     "desc": "Draw text with background highlight",
                     "keywords": [
@@ -1491,7 +1491,7 @@ const TrussCAPI = {
                 {
                     "name": "endShape",
                     "params": "close",
-                    "params_typed": "bool close = …",
+                    "params_typed": "bool close = false",
                     "return_type": "void",
                     "desc": "End drawing a shape",
                     "keywords": [
@@ -1599,7 +1599,7 @@ const TrussCAPI = {
                 {
                     "name": "endStroke",
                     "params": "close",
-                    "params_typed": "bool close = …",
+                    "params_typed": "bool close = false",
                     "return_type": "void",
                     "desc": "End drawing a stroke",
                     "keywords": [
@@ -2044,7 +2044,7 @@ const TrussCAPI = {
                 {
                     "name": "drawSphere",
                     "params": "radius, resolution",
-                    "params_typed": "float radius, int resolution = …",
+                    "params_typed": "float radius, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D sphere (respects fill/noFill)",
                     "keywords": [
@@ -2064,7 +2064,7 @@ const TrussCAPI = {
                 {
                     "name": "drawSphere",
                     "params": "pos, radius, resolution",
-                    "params_typed": "Vec3 pos, float radius, int resolution = …",
+                    "params_typed": "Vec3 pos, float radius, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D sphere (respects fill/noFill)",
                     "keywords": [
@@ -2084,7 +2084,7 @@ const TrussCAPI = {
                 {
                     "name": "drawSphere",
                     "params": "x, y, z, radius, resolution",
-                    "params_typed": "float x, float y, float z, float radius, int resolution = …",
+                    "params_typed": "float x, float y, float z, float radius, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D sphere (respects fill/noFill)",
                     "keywords": [
@@ -2104,7 +2104,7 @@ const TrussCAPI = {
                 {
                     "name": "drawCone",
                     "params": "radius, height, resolution",
-                    "params_typed": "float radius, float height, int resolution = …",
+                    "params_typed": "float radius, float height, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
                     "keywords": [
@@ -2122,7 +2122,7 @@ const TrussCAPI = {
                 {
                     "name": "drawCone",
                     "params": "pos, radius, height, resolution",
-                    "params_typed": "Vec3 pos, float radius, float height, int resolution = …",
+                    "params_typed": "Vec3 pos, float radius, float height, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
                     "keywords": [
@@ -2140,7 +2140,7 @@ const TrussCAPI = {
                 {
                     "name": "drawCone",
                     "params": "x, y, z, radius, height, resolution",
-                    "params_typed": "float x, float y, float z, float radius, float height, int resolution = …",
+                    "params_typed": "float x, float y, float z, float radius, float height, int resolution = 16",
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
                     "keywords": [
@@ -3625,7 +3625,7 @@ const TrussCAPI = {
                 {
                     "name": "alertDialogAsync",
                     "params": "title, message, callback",
-                    "params_typed": "const std::string & title, const std::string & message, std::function<void ()> callback = …",
+                    "params_typed": "const std::string & title, const std::string & message, std::function<void ()> callback = std::function<void ()>(nullptr)",
                     "return_type": "void",
                     "desc": "Show alert dialog asynchronously. Callback is called when dismissed",
                     "keywords": [
@@ -3701,7 +3701,7 @@ const TrussCAPI = {
                 {
                     "name": "loadDialog",
                     "params": "title, message, defaultPath, folderSelection",
-                    "params_typed": "const std::string & title = …, const std::string & message = …, const std::string & defaultPath = …, bool folderSelection = …",
+                    "params_typed": "const std::string & title = std::string(\"\"), const std::string & message = std::string(\"\"), const std::string & defaultPath = std::string(\"\"), bool folderSelection = false",
                     "return_type": "FileDialogResult",
                     "desc": "Show file open dialog. Returns FileDialogResult with filePath, fileName, success",
                     "keywords": [
@@ -3762,7 +3762,7 @@ const TrussCAPI = {
                 {
                     "name": "saveDialog",
                     "params": "title, message, defaultPath, defaultName",
-                    "params_typed": "const std::string & title = …, const std::string & message = …, const std::string & defaultPath = …, const std::string & defaultName = …",
+                    "params_typed": "const std::string & title = std::string(\"\"), const std::string & message = std::string(\"\"), const std::string & defaultPath = std::string(\"\"), const std::string & defaultName = std::string(\"\")",
                     "return_type": "FileDialogResult",
                     "desc": "Show file save dialog. Returns FileDialogResult with filePath, fileName, success",
                     "keywords": [
@@ -4148,7 +4148,7 @@ const TrussCAPI = {
                 {
                     "name": "bindCursorImage",
                     "params": "cursor, width, height, pixels, hotspotX, hotspotY",
-                    "params_typed": "Cursor cursor, int width, int height, const unsigned char * pixels, int hotspotX = …, int hotspotY = …",
+                    "params_typed": "Cursor cursor, int width, int height, const unsigned char * pixels, int hotspotX = 0, int hotspotY = 0",
                     "return_type": "void",
                     "desc": "Bind a custom image to a cursor slot (RGBA pixels or Image)",
                     "keywords": [
@@ -4177,7 +4177,7 @@ const TrussCAPI = {
                 {
                     "name": "bindCursorImage",
                     "params": "cursor, image, hotspotX, hotspotY",
-                    "params_typed": "Cursor cursor, const Image & image, int hotspotX = …, int hotspotY = …",
+                    "params_typed": "Cursor cursor, const Image & image, int hotspotX = 0, int hotspotY = 0",
                     "return_type": "void",
                     "desc": "Bind a custom image to a cursor slot (RGBA pixels or Image)",
                     "keywords": [
@@ -6405,7 +6405,7 @@ const TrussCAPI = {
                 {
                     "name": "fbm",
                     "params": "x, y, octaves, lacunarity, gain",
-                    "params_typed": "float x, float y, int octaves = …, float lacunarity = …, float gain = …",
+                    "params_typed": "float x, float y, int octaves = 4, float lacunarity = 2.0, float gain = 0.5",
                     "return_type": "float",
                     "desc": "Fractal Brownian Motion noise",
                     "keywords": [
@@ -6432,7 +6432,7 @@ const TrussCAPI = {
                 {
                     "name": "fbm",
                     "params": "x, y, z, octaves, lacunarity, gain",
-                    "params_typed": "float x, float y, float z, int octaves = …, float lacunarity = …, float gain = …",
+                    "params_typed": "float x, float y, float z, int octaves = 4, float lacunarity = 2.0, float gain = 0.5",
                     "return_type": "float",
                     "desc": "Fractal Brownian Motion noise",
                     "keywords": [
@@ -8098,7 +8098,7 @@ const TrussCAPI = {
                 {
                     "name": "redraw",
                     "params": "count",
-                    "params_typed": "int count = …",
+                    "params_typed": "int count = 1",
                     "return_type": "void",
                     "desc": "Request extra redraws (useful for event-driven rendering)",
                     "keywords": [
@@ -8165,7 +8165,7 @@ const TrussCAPI = {
                 {
                     "name": "startRecording",
                     "params": "path, settings",
-                    "params_typed": "const std::string & path, const VideoRecordSettings & settings = …",
+                    "params_typed": "const std::string & path, const VideoRecordSettings & settings = {}",
                     "return_type": "bool",
                     "desc": "Start recording the window to a video file (native encoder, no ffmpeg)",
                     "keywords": [
@@ -8277,7 +8277,7 @@ const TrussCAPI = {
                 {
                     "name": "runHeadlessApp",
                     "params": "settings",
-                    "params_typed": "const HeadlessSettings & settings = …",
+                    "params_typed": "const HeadlessSettings & settings = HeadlessSettings()",
                     "return_type": "int",
                     "desc": "Run an app class without a window or graphics context (update loop only). Template on the app type; returns the process exit code",
                     "keywords": [
@@ -8598,7 +8598,7 @@ const TrussCAPI = {
                 {
                     "name": "logAt",
                     "params": "level",
-                    "params_typed": "LogLevel level = …",
+                    "params_typed": "LogLevel level = Notice",
                     "return_type": "LogStream",
                     "desc": "Stream-based log output at a runtime-selected level",
                     "keywords": [
@@ -8618,7 +8618,7 @@ const TrussCAPI = {
                 {
                     "name": "logVerbose",
                     "params": "module",
-                    "params_typed": "const std::string & module = …",
+                    "params_typed": "const std::string & module = std::string(\"\")",
                     "return_type": "LogStream",
                     "desc": "Stream-based verbose-level log output",
                     "keywords": [
@@ -8648,7 +8648,7 @@ const TrussCAPI = {
                 {
                     "name": "logNotice",
                     "params": "module",
-                    "params_typed": "const std::string & module = …",
+                    "params_typed": "const std::string & module = std::string(\"\")",
                     "return_type": "LogStream",
                     "desc": "Print to console",
                     "keywords": [
@@ -8669,7 +8669,7 @@ const TrussCAPI = {
                 {
                     "name": "logWarning",
                     "params": "module",
-                    "params_typed": "const std::string & module = …",
+                    "params_typed": "const std::string & module = std::string(\"\")",
                     "return_type": "LogStream",
                     "desc": "Stream-based warning-level log output",
                     "keywords": [
@@ -8695,7 +8695,7 @@ const TrussCAPI = {
                 {
                     "name": "logError",
                     "params": "module",
-                    "params_typed": "const std::string & module = …",
+                    "params_typed": "const std::string & module = std::string(\"\")",
                     "return_type": "LogStream",
                     "desc": "Stream-based error-level log output",
                     "keywords": [
@@ -8725,7 +8725,7 @@ const TrussCAPI = {
                 {
                     "name": "logFatal",
                     "params": "module",
-                    "params_typed": "const std::string & module = …",
+                    "params_typed": "const std::string & module = std::string(\"\")",
                     "return_type": "LogStream",
                     "desc": "Stream-based fatal-level log output",
                     "keywords": [
@@ -8745,7 +8745,7 @@ const TrussCAPI = {
                 {
                     "name": "tcLog",
                     "params": "level",
-                    "params_typed": "LogLevel level = …",
+                    "params_typed": "LogLevel level = Notice",
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logAt()",
                     "keywords": [
@@ -8766,7 +8766,7 @@ const TrussCAPI = {
                 {
                     "name": "tcLogVerbose",
                     "params": "module",
-                    "params_typed": "const std::string & module = …",
+                    "params_typed": "const std::string & module = std::string(\"\")",
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logVerbose()",
                     "keywords": [
@@ -8787,7 +8787,7 @@ const TrussCAPI = {
                 {
                     "name": "tcLogNotice",
                     "params": "module",
-                    "params_typed": "const std::string & module = …",
+                    "params_typed": "const std::string & module = std::string(\"\")",
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logNotice()",
                     "keywords": [
@@ -8808,7 +8808,7 @@ const TrussCAPI = {
                 {
                     "name": "tcLogWarning",
                     "params": "module",
-                    "params_typed": "const std::string & module = …",
+                    "params_typed": "const std::string & module = std::string(\"\")",
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logWarning()",
                     "keywords": [
@@ -8829,7 +8829,7 @@ const TrussCAPI = {
                 {
                     "name": "tcLogError",
                     "params": "module",
-                    "params_typed": "const std::string & module = …",
+                    "params_typed": "const std::string & module = std::string(\"\")",
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logError()",
                     "keywords": [
@@ -8850,7 +8850,7 @@ const TrussCAPI = {
                 {
                     "name": "tcLogFatal",
                     "params": "module",
-                    "params_typed": "const std::string & module = …",
+                    "params_typed": "const std::string & module = std::string(\"\")",
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logFatal()",
                     "keywords": [
@@ -9148,7 +9148,7 @@ const TrussCAPI = {
                 {
                     "name": "toHex",
                     "params": "value, width",
-                    "params_typed": "int value, int width = …",
+                    "params_typed": "int value, int width = 0",
                     "return_type": "std::string",
                     "desc": "Convert an integer (zero-padded to width) or string bytes to a hexadecimal string",
                     "keywords": [
@@ -9481,7 +9481,7 @@ const TrussCAPI = {
                 {
                     "name": "splitString",
                     "params": "source, delimiter, ignoreEmpty, trim",
-                    "params_typed": "const std::string & source, const std::string & delimiter, bool ignoreEmpty = …, bool trim = …",
+                    "params_typed": "const std::string & source, const std::string & delimiter, bool ignoreEmpty = false, bool trim = false",
                     "return_type": "std::vector<std::string>",
                     "desc": "Split string by delimiter",
                     "keywords": [
@@ -9904,7 +9904,7 @@ const TrussCAPI = {
                 {
                     "name": "toJsonString",
                     "params": "j, indent",
-                    "params_typed": "const Json & j, int indent = …",
+                    "params_typed": "const Json & j, int indent = 2",
                     "return_type": "std::string",
                     "desc": "Serialize a Json object to a string. indent sets the pretty-print width (negative for compact).",
                     "keywords": [
@@ -10268,7 +10268,7 @@ const TrussCAPI = {
                 {
                     "name": "saveJson",
                     "params": "j, path, indent",
-                    "params_typed": "const Json & j, const std::string & path, int indent = …",
+                    "params_typed": "const Json & j, const std::string & path, int indent = 2",
                     "return_type": "bool",
                     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath. indent sets the pretty-print width (negative for compact). Returns true on success.",
                     "keywords": [
@@ -11093,7 +11093,7 @@ const TrussCAPI = {
                 {
                     "name": "colorFromHSB",
                     "params": "h, s, b, a",
-                    "params_typed": "float h, float s, float b, float a = …",
+                    "params_typed": "float h, float s, float b, float a = 1.0",
                     "return_type": "Color",
                     "desc": "Create Color from HSB (alias for Color::fromHSB)",
                     "keywords": [
@@ -11127,7 +11127,7 @@ const TrussCAPI = {
                 {
                     "name": "colorFromOKLCH",
                     "params": "L, C, H, a",
-                    "params_typed": "float L, float C, float H, float a = …",
+                    "params_typed": "float L, float C, float H, float a = 1.0",
                     "return_type": "Color",
                     "desc": "Deprecated alias for Color::fromOKLCH()",
                     "keywords": [
@@ -11149,7 +11149,7 @@ const TrussCAPI = {
                 {
                     "name": "colorFromOKLab",
                     "params": "L, a_lab, b_lab, alpha",
-                    "params_typed": "float L, float a_lab, float b_lab, float alpha = …",
+                    "params_typed": "float L, float a_lab, float b_lab, float alpha = 1.0",
                     "return_type": "Color",
                     "desc": "Deprecated alias for Color::fromOKLab()",
                     "keywords": [
@@ -11171,7 +11171,7 @@ const TrussCAPI = {
                 {
                     "name": "colorFromLinear",
                     "params": "r, g, b, a",
-                    "params_typed": "float r, float g, float b, float a = …",
+                    "params_typed": "float r, float g, float b, float a = 1.0",
                     "return_type": "Color",
                     "desc": "Deprecated alias for Color::fromLinear()",
                     "keywords": [
@@ -11289,7 +11289,7 @@ const TrussCAPI = {
                 {
                     "name": "enable3DPerspective",
                     "params": "fovY, nearZ, farZ",
-                    "params_typed": "float fovY = …, float nearZ = …, float farZ = …",
+                    "params_typed": "float fovY = 0.785000026, float nearZ = 0.100000001, float farZ = 1000.0",
                     "return_type": "void",
                     "desc": "Deprecated alias for setupScreenPerspective()",
                     "keywords": [
@@ -11312,7 +11312,7 @@ const TrussCAPI = {
                 {
                     "name": "setupScreenFov",
                     "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "float fovDeg, float nearDist = …, float farDist = …",
+                    "params_typed": "float fovDeg, float nearDist = 0.0, float farDist = 0.0",
                     "return_type": "void",
                     "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)",
                     "keywords": [
@@ -11333,7 +11333,7 @@ const TrussCAPI = {
                 {
                     "name": "setupScreenPerspective",
                     "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "float fovDeg = …, float nearDist = …, float farDist = …",
+                    "params_typed": "float fovDeg = 45.0, float nearDist = 0.0, float farDist = 0.0",
                     "return_type": "void",
                     "desc": "Set up perspective projection (oF-style default 3D)",
                     "keywords": [
@@ -11485,7 +11485,7 @@ const TrussCAPI = {
                 {
                     "name": "screenToWorld",
                     "params": "screenPos, worldZ",
-                    "params_typed": "const Vec2 & screenPos, float worldZ = …",
+                    "params_typed": "const Vec2 & screenPos, float worldZ = 0.0",
                     "return_type": "Vec3",
                     "desc": "Convert screen coordinate to world coordinate on Z plane",
                     "keywords": [
@@ -12030,7 +12030,7 @@ const TrussCAPI = {
                 {
                     "name": "createPlane",
                     "params": "width, height, cols, rows",
-                    "params_typed": "float width, float height, int cols = …, int rows = …",
+                    "params_typed": "float width, float height, int cols = 2, int rows = 2",
                     "return_type": "Mesh",
                     "desc": "Create a plane mesh (subdivided quad on the XY plane)",
                     "keywords": [
@@ -12137,7 +12137,7 @@ const TrussCAPI = {
                 {
                     "name": "createSphere",
                     "params": "radius, resolution",
-                    "params_typed": "float radius, int resolution = …",
+                    "params_typed": "float radius, int resolution = 16",
                     "return_type": "Mesh",
                     "desc": "Create a sphere mesh",
                     "keywords": [
@@ -12174,7 +12174,7 @@ const TrussCAPI = {
                 {
                     "name": "createCylinder",
                     "params": "radius, height, resolution",
-                    "params_typed": "float radius, float height, int resolution = …",
+                    "params_typed": "float radius, float height, int resolution = 16",
                     "return_type": "Mesh",
                     "desc": "Create a cylinder mesh",
                     "keywords": [
@@ -12208,7 +12208,7 @@ const TrussCAPI = {
                 {
                     "name": "createCapsule",
                     "params": "radius, cylinderHeight, resolution",
-                    "params_typed": "float radius, float cylinderHeight, int resolution = …",
+                    "params_typed": "float radius, float cylinderHeight, int resolution = 16",
                     "return_type": "Mesh",
                     "desc": "Create a capsule mesh (Y-up: cylinder capped by two hemispheres)",
                     "keywords": [
@@ -12229,7 +12229,7 @@ const TrussCAPI = {
                 {
                     "name": "createCone",
                     "params": "radius, height, resolution",
-                    "params_typed": "float radius, float height, int resolution = …",
+                    "params_typed": "float radius, float height, int resolution = 16",
                     "return_type": "Mesh",
                     "desc": "Create a cone mesh",
                     "keywords": [
@@ -12264,7 +12264,7 @@ const TrussCAPI = {
                 {
                     "name": "createIcoSphere",
                     "params": "radius, subdivisions",
-                    "params_typed": "float radius, int subdivisions = …",
+                    "params_typed": "float radius, int subdivisions = 2",
                     "return_type": "Mesh",
                     "desc": "Create an icosphere mesh (geodesic sphere with uniform triangles)",
                     "keywords": [
@@ -12292,7 +12292,7 @@ const TrussCAPI = {
                 {
                     "name": "createTorus",
                     "params": "radius, tubeRadius, sides, rings",
-                    "params_typed": "float radius, float tubeRadius, int sides = …, int rings = …",
+                    "params_typed": "float radius, float tubeRadius, int sides = 24, int rings = 16",
                     "return_type": "Mesh",
                     "desc": "Create a torus (donut) mesh",
                     "keywords": [
@@ -12909,9 +12909,9 @@ const TrussCAPI = {
                 "full turn",
                 "6.28"
             ],
-            "details": "`TAU` (τ) equals `2π`, but reading it as merely \"π doubled\" sells it short. τ is the circle constant that falls out naturally when you define a circle from its radius — the constant a circle should have had all along.\n\nA circle is defined by distance from its center: the radius `r`. Write the circumference from the radius and you get:\n\n```\ncircumference C = τ · r\n```\n\nThe stray `2` of `2π` disappears, leaving just `τr`. That is the circle in its plain form.\n\nτ truly shines for angles. It denotes exactly one full turn, so a fraction of a turn is the angle directly.\n\n| amount   | radian    | degrees |\n| -------- | --------- | ------- |\n| full     | `TAU`     | 360°    |\n| half     | `TAU / 2` | 180°    |\n| quarter  | `TAU / 4` | 90°     |\n\n`TAU / 4` reads as \"a quarter turn\" with no arithmetic — the code matches the reader's intuition.\n\nEven the equation often called the most beautiful is more symmetric in τ:\n\n```\ne^(iτ) = 1\n```\n\n\"Go around once, return to where you started.\" It speaks to the essence of rotation more directly than Euler's `e^(iπ) = -1`, which flips at a half turn.\n\nDefining the circle by its diameter (`PI`) was a great human achievement but an unfortunate design choice. TrussC inherits that lesson and builds every rotation and angle API around `TAU`.\n\n## Usage\n\n### Rotation\n\n```cpp\nvoid update() {\n    angle += TAU * 0.01f;   // 1% of a full turn each frame\n}\n\nvoid draw() {\n    pushMatrix();\n    translate(getWindowWidth() / 2, getWindowHeight() / 2);\n    rotate(angle);\n    setColor(1.0f, 0.4f, 0.4f);\n    drawRect(-50, -50, 100, 100);\n    popMatrix();\n}\n```\n\n### Arranging points around a circle\n\n```cpp\nconst int n = 12;\nfor (int i = 0; i < n; i++) {\n    float a = TAU * i / n;       // divide the circle into n\n    float x = cos(a) * radius;\n    float y = sin(a) * radius;\n    drawCircle(x, y, 8);\n}\n```\n\n### Half and quarter turns\n\nHalf and quarter turns come up often, so they have their own constants.\n\n```cpp\nrotate(HALF_TAU);     // 1/2 turn\nrotate(QUARTER_TAU);  // 1/4 turn\n```",
-            "details_ja": "`TAU` (τ) は `2π` に等しい。ただ「π を 2 倍したもの」と捉えるのはもったいない。τ は、円を半径から素直に定義しなおしたときに現れる、本来あるべき円の定数だ。\n\n円の本質は中心からの距離、つまり半径 `r` にある。半径を基準に円周を書くと、こうなる。\n\n```\n円周 C = τ · r\n```\n\n`2π` の `2` が消えて、ただ `τr`。これが円の素の姿だ。\n\nそして τ の真価は 角度 で発揮される。τ は「ちょうど一周」を表す。だから周回の割合がそのまま角度になる。\n\n| 回す量 | radian    | 角度 |\n| ----- | --------- | ---- |\n| 一周   | `TAU`     | 360° |\n| 半周   | `TAU / 2` | 180° |\n| 1/4周  | `TAU / 4` | 90°  |\n\n`TAU / 4` を見れば、計算しなくても「一周の 4 分の 1 だな」と分かる。コードが読み手の直感とそのまま一致する。\n\n世界で一番美しいと言われる式も、τ で書く方が対称性が高い。\n\n```\ne^(iτ) = 1\n```\n\n「一周まわると元に戻る」。Euler の等式 `e^(iπ) = -1`（半周で裏返る）よりも、回転の本質を直接的に語っている。\n\n円を直径で定義した `PI` は人類の偉大な発明だったが、設計判断としては惜しかった。TrussC はその反省を引き継いで、回転と角度の API すべてを `TAU` 基準で組んでいる。\n\n## 使い方\n\n### 回転\n\n```cpp\nvoid update() {\n    angle += TAU * 0.01f;   // 毎フレーム一周の 1% だけ回す\n}\n\nvoid draw() {\n    pushMatrix();\n    translate(getWindowWidth() / 2, getWindowHeight() / 2);\n    rotate(angle);\n    setColor(1.0f, 0.4f, 0.4f);\n    drawRect(-50, -50, 100, 100);\n    popMatrix();\n}\n```\n\n### 円周上に並べる\n\n```cpp\nconst int n = 12;\nfor (int i = 0; i < n; i++) {\n    float a = TAU * i / n;       // 一周を n 等分\n    float x = cos(a) * radius;\n    float y = sin(a) * radius;\n    drawCircle(x, y, 8);\n}\n```\n\n### 半周・1/4 周\n\n半周や 1/4 周はよく出てくるので、個別に定数を用意している。\n\n```cpp\nrotate(HALF_TAU);     // 1/2 回転\nrotate(QUARTER_TAU);  // 1/4 回転\n```",
-            "details_ko": "`TAU` (τ)는 `2π`와 같지만, 단순히 \"π의 두 배\"로만 보는 것은 아깝다. τ는 원을 반지름에서 자연스럽게 다시 정의할 때 나타나는, 원이 본래 가졌어야 할 상수다.\n\n원의 본질은 중심으로부터의 거리, 즉 반지름 `r`에 있다. 반지름을 기준으로 원주를 쓰면 이렇게 된다.\n\n```\n원주 C = τ · r\n```\n\n`2π`의 `2`가 사라지고 그냥 `τr`만 남는다. 이것이 원의 본래 모습이다.\n\n그리고 τ의 진가는 각도에서 발휘된다. τ는 \"정확히 한 바퀴\"를 나타낸다. 그래서 회전의 비율이 곧 각도가 된다.\n\n| 회전량  | radian    | 각도 |\n| ------ | --------- | ---- |\n| 한 바퀴 | `TAU`     | 360° |\n| 반 바퀴 | `TAU / 2` | 180° |\n| 1/4    | `TAU / 4` | 90°  |\n\n`TAU / 4`를 보면 계산하지 않아도 \"한 바퀴의 1/4\"임을 알 수 있다. 코드가 읽는 사람의 직관과 그대로 일치한다.\n\n가장 아름답다고 일컬어지는 식도 τ로 쓰면 대칭성이 더 높다.\n\n```\ne^(iτ) = 1\n```\n\n\"한 바퀴 돌면 제자리로 돌아온다.\" 반 바퀴에서 뒤집히는 오일러의 `e^(iπ) = -1`보다 회전의 본질을 더 직접적으로 말해준다.\n\n원을 지름으로 정의한 `PI`는 인류의 위대한 발명이었지만 설계 판단으로는 아쉬웠다. TrussC는 그 교훈을 이어받아 회전과 각도 API 전부를 `TAU` 기준으로 구성한다.\n\n## 사용법\n\n### 회전\n\n```cpp\nvoid update() {\n    angle += TAU * 0.01f;   // 매 프레임 한 바퀴의 1%만 회전\n}\n\nvoid draw() {\n    pushMatrix();\n    translate(getWindowWidth() / 2, getWindowHeight() / 2);\n    rotate(angle);\n    setColor(1.0f, 0.4f, 0.4f);\n    drawRect(-50, -50, 100, 100);\n    popMatrix();\n}\n```\n\n### 원 둘레에 배치하기\n\n```cpp\nconst int n = 12;\nfor (int i = 0; i < n; i++) {\n    float a = TAU * i / n;       // 한 바퀴를 n 등분\n    float x = cos(a) * radius;\n    float y = sin(a) * radius;\n    drawCircle(x, y, 8);\n}\n```\n\n### 반 바퀴 · 1/4 바퀴\n\n반 바퀴나 1/4 바퀴는 자주 나오므로 별도의 상수를 마련해 두었다.\n\n```cpp\nrotate(HALF_TAU);     // 1/2 회전\nrotate(QUARTER_TAU);  // 1/4 회전\n```",
+            "details": "π was one of the greatest constants humankind has ever found. Tracing back to Archimedes in the 3rd century BC, geometry, analysis, and physics have been built on this single letter for nearly two thousand years — an unquestionable achievement.\n\nBut just one thing, truly just one, was an unfortunate first design choice: defining the circle by its diameter. That was where all the seams began.\n\nThe essence of a circle is the set of points equidistant from a center. That equal distance — the radius — is what defines a circle; the diameter is merely a by-product. Yet π was defined as `circumference / diameter`.\n\nThat single mismatch scatters a stray factor of `2π` across formulas the world over.\n\n- Circumference is `2πr` — somehow a `2` is needed.\n- One turn is `2π` radians; a half turn `π`, a quarter `π/2`.\n- Fourier transforms, the normal distribution, rotation — `2π` shows up almost everywhere.\n\nEveryone is made to write a quarter turn as `π/2`, and a coder always pauses for a moment to ask \"where did this `2` come from?\"\n\nThe small stress that piles up in practice is real — but more than that, you have to notice it leaves a single smudge on the expression of something beautiful.\n\nEven Euler's identity, often called the most beautiful equation, becomes a more symmetric expression when written with τ:\n\n```\ne^(iτ) = 1\n```\n\n\"Go around once, return to where you started.\" It speaks to the essence of rotation more directly than `e^(iπ) = -1`, which flips at a half turn.\n\nSo TrussC, with the utmost respect for π, moves past it. The rotation and angle APIs treat [`TAU`](#TAU) (= 2π) as the first-class constant.\n\nIn the hope that one day `TAU` takes the lead.\n\n## In TrussC\n\n`PI` is defined for compatibility and mathematical correctness, but for half a turn you should use `HALF_TAU`, and for a quarter `QUARTER_TAU` — that states the idea explicitly.\n\n```cpp\n// Discouraged: a quarter turn. Why divide by 2? — you pause for a moment\nrotate(PI / 2);\n\n// Preferred: a quarter turn, no second-guessing\nrotate(QUARTER_TAU);\nrotate(TAU / 4);\n```",
+            "details_ja": "π は人類が手にした最も偉大な定数のひとつだった。紀元前 3 世紀のアルキメデスに端を発し、約 2000 年にわたって幾何学・解析学・物理学がこの一文字の上に積み上げられてきた。疑いようのない偉業だ。\n\nただ、本当にひとつだけ、最初の設計判断が惜しかった。円を「直径」基準で定義してしまったこと。これがすべての綻びの始まりだった。\n\n円という図形の本質は、中心から等距離にある点の集合だ。その「等距離」、つまり半径 (radius) こそが円を定義する量であって、直径 (diameter) はその副産物にすぎない。にもかかわらず π は `円周 / 直径` として定義された。\n\nこのたった一つのボタンの掛け違いが、後の世界中の数式に `2π` という余分な係数をばらまくことになる。\n\n- 円周は `2πr`。なぜか `2` が要る。\n- 1 回転は `2π` radian。半回転で `π`、1/4 回転で `π/2`。\n- Fourier 変換にも、正規分布にも、回転にも、ほぼ必ず `2π` が顔を出す。\n\n誰もが「1/4 回転」を `π/2` と書かされ、コーダーが「この `2` はどこから来た？」といつも一瞬考える。\n\n実利面で小さく積もるストレスも無視できないが、それよりも美しさの表現に1点の曇りを与えてしまっているということに気づかなければならない。\n\n世界で一番美しいと言われるオイラーの公式も、τで書く方がより対称性の高い表現に変わる。\n\n```\ne^(iτ) = 1\n```\n\n「一周まわると元に戻る」。Euler の等式が `e^(iπ) = -1`（半周で裏返る）よりも、回転の本質を直接的に語っている。\n\nだから TrussC は、π への最大限の敬意を払ったうえで、その先へ進む。回転と角度の API は [`TAU`](#TAU) (= 2π) を第一級の定数として扱う。\n\n将来 `TAU` が主役になる日が来ることを願って。\n\n## TrussC での扱い\n\n`PI` は互換性と数学的な正しさのために定義しているが、半周を表すなら `HALF_TAU` 、1/4周なら `QUARTER_TAU` を使うべきだ。そのほうが「半周」という概念を明示的に表現できる。\n\n```cpp\n// 非推奨: 一周の 1/4。なぜ 2 で割る？と一瞬止まる\nrotate(PI / 2);\n\n// 推奨: 考える余地なく、一周の 1/4\nrotate(QUARTER_TAU);\nrotate(TAU / 4);  \n```",
+            "details_ko": "π는 인류가 손에 넣은 가장 위대한 상수 중 하나였다. 기원전 3세기 아르키메데스에서 비롯되어, 약 2000년에 걸쳐 기하학·해석학·물리학이 이 한 글자 위에 쌓여 왔다. 의심할 여지 없는 위업이다.\n\n다만 정말로 한 가지, 최초의 설계 판단이 아쉬웠다. 원을 \"지름\" 기준으로 정의한 것. 이것이 모든 어긋남의 시작이었다.\n\n원이라는 도형의 본질은 중심에서 같은 거리에 있는 점들의 집합이다. 그 \"같은 거리\", 즉 반지름(radius)이야말로 원을 정의하는 양이고, 지름(diameter)은 그 부산물에 불과하다. 그럼에도 π는 `원주 / 지름`으로 정의되었다.\n\n이 단 한 번의 어긋남이 이후 세계의 수식에 `2π`라는 군더더기 계수를 흩뿌린다.\n\n- 원주는 `2πr` — 어째서인지 `2`가 필요하다.\n- 한 바퀴는 `2π` 라디안. 반 바퀴는 `π`, 1/4 바퀴는 `π/2`.\n- 푸리에 변환에도, 정규분포에도, 회전에도 거의 반드시 `2π`가 등장한다.\n\n누구나 1/4 회전을 `π/2`로 쓰게 되고, 코더는 \"이 `2`는 어디서 왔지?\"라며 늘 잠시 멈춘다.\n\n실용적으로 조금씩 쌓이는 스트레스도 무시할 수 없지만, 그보다 아름다움의 표현에 한 점의 흐림을 더한다는 사실을 알아차려야 한다.\n\n가장 아름답다고 일컬어지는 오일러의 공식도 τ로 쓰면 더 대칭적인 표현으로 바뀐다:\n\n```\ne^(iτ) = 1\n```\n\n\"한 바퀴 돌면 제자리로 돌아온다.\" 반 바퀴에서 뒤집히는 `e^(iπ) = -1`보다 회전의 본질을 더 직접적으로 말해준다.\n\n그래서 TrussC는 π에 최대한의 경의를 표하면서 그다음으로 나아간다. 회전과 각도 API는 [`TAU`](#TAU) (= 2π)를 일급 상수로 다룬다.\n\n언젠가 `TAU`가 주역이 되는 날이 오기를 바라며.\n\n## TrussC에서의 취급\n\n`PI`는 호환성과 수학적 정확성을 위해 정의해 두었지만, 반 바퀴를 나타낸다면 `HALF_TAU`, 1/4 바퀴라면 `QUARTER_TAU`를 쓰는 편이 좋다. 그래야 개념을 명시적으로 표현할 수 있다.\n\n```cpp\n// 비권장: 한 바퀴의 1/4. 왜 2로 나누지? 하고 잠시 멈춘다\nrotate(PI / 2);\n\n// 권장: 생각할 여지 없이 한 바퀴의 1/4\nrotate(QUARTER_TAU);\nrotate(TAU / 4);\n```",
             "related": [
                 "PI",
                 "HALF_TAU",
@@ -12962,9 +12962,9 @@ const TrussCAPI = {
                 "radians",
                 "half tau"
             ],
-            "details": "π is one of the greatest constants humankind has ever found. Tracing back to Archimedes in the 3rd century BC, geometry, analysis, and physics have been built on this single letter for nearly two thousand years — an unquestionable achievement.\n\nBut one thing, just one, was an unfortunate first design choice: defining the circle by its diameter. That was where the seams began to show.\n\nThe essence of a circle is the set of points equidistant from a center. That equal distance — the radius — is what defines a circle; the diameter is merely a by-product. Yet π was defined as `circumference / diameter`.\n\nThat single mismatch scatters a stray factor of `2π` across formulas the world over.\n\n- Circumference is `2πr` — somehow a `2` is needed.\n- One turn is `2π` radians; a half turn `π`, a quarter `π/2`.\n- Fourier transforms, the normal distribution, rotation — `2π` shows up almost everywhere.\n\nA child is made to write a quarter turn as `π/2`, and an engineer pauses each time to ask \"where did this `2` come from?\" It puts a small smudge on something that should be clean.\n\nThe good news: it is not too late. So TrussC, with the utmost respect for π, moves past it. The rotation and angle APIs treat [`TAU`](#TAU) (= 2π) as the first-class constant.\n\nπ was not wrong. Choosing the diameter was.\n\n## In TrussC\n\n`PI` is defined for compatibility and mathematical correctness, but for half a turn you should reach for `HALF_TAU` — it states the idea of \"half a turn\" explicitly.\n\n```cpp\n// Discouraged: writing angles with PI smuggles in a \"2\" or \"/2\" and reads poorly\nrotate(PI / 2);   // a quarter turn. Why divide by 2? — you pause for a moment\n\nrotate(TAU / 4);  // a quarter turn, no second-guessing\n```",
-            "details_ja": "π は人類が手にした最も偉大な定数のひとつだ。紀元前 3 世紀のアルキメデスに端を発し、約 2000 年にわたって幾何学・解析学・物理学がこの一文字の上に積み上げられてきた。疑いようのない偉業だ。\n\nただ、本当にひとつだけ、最初の設計判断が惜しかった。円を「直径」基準で定義してしまったこと。これがすべての綻びの始まりだった。\n\n円という図形の本質は、中心から等距離にある点の集合だ。その「等距離」、つまり半径 (radius) こそが円を定義する量であって、直径 (diameter) はその副産物にすぎない。にもかかわらず π は `円周 / 直径` として定義された。\n\nこのたった一つのボタンの掛け違いが、後の世界中の数式に `2π` という余分な係数をばらまくことになる。\n\n- 円周は `2πr`。なぜか `2` が要る。\n- 1 回転は `2π` radian。半回転で `π`、1/4 回転で `π/2`。\n- Fourier 変換にも、正規分布にも、回転にも、ほぼ必ず `2π` が顔を出す。\n\n子どもが「1/4 回転」を `π/2` と書かされ、エンジニアが「この `2` はどこから来た？」と毎回一瞬考える。美しさの表現に、一点の曇りを与えてしまっている。\n\n幸いなのは、まだ間に合う ということだ。だから TrussC は、π への最大限の敬意を払ったうえで、その先へ進む。回転と角度の API は [`TAU`](#TAU) (= 2π) を第一級の定数として扱う。\n\nπ が間違っていたわけじゃない。直径を選んだことが惜しかった。\n\n## TrussC での扱い\n\n`PI` は互換性と数学的な正しさのために定義しているが、半周を表すなら `HALF_TAU` を使うべきだ。そのほうが「半周」という概念を明示的に表現できる。\n\n```cpp\n// 非推奨：角度を PI で書くと「2」や「/2」が紛れ込んで読みにくい\nrotate(PI / 2);   // 一周の 1/4。なぜ 2 で割る？と一瞬止まる\n\nrotate(TAU / 4);  // 考える余地なく、一周の 1/4\n```",
-            "details_ko": "π는 인류가 손에 넣은 가장 위대한 상수 중 하나다. 기원전 3세기 아르키메데스에서 비롯되어, 거의 2000년에 걸쳐 기하학·해석학·물리학이 이 한 글자 위에 쌓여 왔다. 의심할 여지 없는 위업이다.\n\n다만 정말로 한 가지, 최초의 설계 판단이 아쉬웠다. 원을 \"지름\" 기준으로 정의한 것. 이것이 모든 어긋남의 시작이었다.\n\n원이라는 도형의 본질은 중심에서 같은 거리에 있는 점들의 집합이다. 그 \"같은 거리\", 즉 반지름(radius)이야말로 원을 정의하는 양이고, 지름(diameter)은 그 부산물에 불과하다. 그럼에도 π는 `원주 / 지름`으로 정의되었다.\n\n이 단 한 번의 어긋남이 이후 세계의 수식에 `2π`라는 군더더기 계수를 흩뿌린다.\n\n- 원주는 `2πr` — 어째서인지 `2`가 필요하다.\n- 한 바퀴는 `2π` 라디안. 반 바퀴는 `π`, 1/4 바퀴는 `π/2`.\n- 푸리에 변환에도, 정규분포에도, 회전에도 거의 반드시 `2π`가 등장한다.\n\n아이는 1/4 회전을 `π/2`로 쓰게 되고, 엔지니어는 \"이 `2`는 어디서 왔지?\"라며 매번 잠시 멈춘다. 깔끔해야 할 것에 한 점의 흐림을 더한다.\n\n다행인 것은 아직 늦지 않았다는 점이다. 그래서 TrussC는 π에 최대한의 경의를 표하면서 그다음으로 나아간다. 회전과 각도 API는 [`TAU`](#TAU) (= 2π)를 일급 상수로 다룬다.\n\nπ가 틀린 것이 아니다. 지름을 고른 것이 아쉬웠다.\n\n## TrussC에서의 취급\n\n`PI`는 호환성과 수학적 정확성을 위해 정의해 두었지만, 반 바퀴를 나타낸다면 `HALF_TAU`를 쓰는 편이 좋다. 그래야 \"반 바퀴\"라는 개념을 명시적으로 표현할 수 있다.\n\n```cpp\n// 비권장: 각도를 PI로 쓰면 \"2\"나 \"/2\"가 섞여 들어 읽기 어렵다\nrotate(PI / 2);   // 한 바퀴의 1/4. 왜 2로 나누지? 하고 잠시 멈춘다\n\nrotate(TAU / 4);  // 생각할 여지 없이 한 바퀴의 1/4\n```",
+            "details": "π was one of the greatest constants humankind has ever found. Tracing back to Archimedes in the 3rd century BC, geometry, analysis, and physics have been built on this single letter for nearly two thousand years — an unquestionable achievement.\n\nBut just one thing, truly just one, was an unfortunate first design choice: defining the circle by its diameter. That was where all the seams began.\n\nThe essence of a circle is the set of points equidistant from a center. That equal distance — the radius — is what defines a circle; the diameter is merely a by-product. Yet π was defined as `circumference / diameter`.\n\nThat single mismatch scatters a stray factor of `2π` across formulas the world over.\n\n- Circumference is `2πr` — somehow a `2` is needed.\n- One turn is `2π` radians; a half turn `π`, a quarter `π/2`.\n- Fourier transforms, the normal distribution, rotation — `2π` shows up almost everywhere.\n\nEveryone is made to write a quarter turn as `π/2`, and a coder always pauses for a moment to ask \"where did this `2` come from?\"\n\nThe small stress that piles up in practice is real — but more than that, you have to notice it leaves a single smudge on the expression of something beautiful.\n\nEven Euler's identity, often called the most beautiful equation, becomes a more symmetric expression when written with τ:\n\n```\ne^(iτ) = 1\n```\n\n\"Go around once, return to where you started.\" It speaks to the essence of rotation more directly than `e^(iπ) = -1`, which flips at a half turn.\n\nSo TrussC, with the utmost respect for π, moves past it. The rotation and angle APIs treat [`TAU`](#TAU) (= 2π) as the first-class constant.\n\nIn the hope that one day `TAU` takes the lead.\n\n## In TrussC\n\n`PI` is defined for compatibility and mathematical correctness, but for half a turn you should use `HALF_TAU`, and for a quarter `QUARTER_TAU` — that states the idea explicitly.\n\n```cpp\n// Discouraged: a quarter turn. Why divide by 2? — you pause for a moment\nrotate(PI / 2);\n\n// Preferred: a quarter turn, no second-guessing\nrotate(QUARTER_TAU);\nrotate(TAU / 4);\n```",
+            "details_ja": "π は人類が手にした最も偉大な定数のひとつだった。紀元前 3 世紀のアルキメデスに端を発し、約 2000 年にわたって幾何学・解析学・物理学がこの一文字の上に積み上げられてきた。疑いようのない偉業だ。\n\nただ、本当にひとつだけ、最初の設計判断が惜しかった。円を「直径」基準で定義してしまったこと。これがすべての綻びの始まりだった。\n\n円という図形の本質は、中心から等距離にある点の集合だ。その「等距離」、つまり半径 (radius) こそが円を定義する量であって、直径 (diameter) はその副産物にすぎない。にもかかわらず π は `円周 / 直径` として定義された。\n\nこのたった一つのボタンの掛け違いが、後の世界中の数式に `2π` という余分な係数をばらまくことになる。\n\n- 円周は `2πr`。なぜか `2` が要る。\n- 1 回転は `2π` radian。半回転で `π`、1/4 回転で `π/2`。\n- Fourier 変換にも、正規分布にも、回転にも、ほぼ必ず `2π` が顔を出す。\n\n誰もが「1/4 回転」を `π/2` と書かされ、コーダーが「この `2` はどこから来た？」といつも一瞬考える。\n\n実利面で小さく積もるストレスも無視できないが、それよりも美しさの表現に1点の曇りを与えてしまっているということに気づかなければならない。\n\n世界で一番美しいと言われるオイラーの公式も、τで書く方がより対称性の高い表現に変わる。\n\n```\ne^(iτ) = 1\n```\n\n「一周まわると元に戻る」。Euler の等式が `e^(iπ) = -1`（半周で裏返る）よりも、回転の本質を直接的に語っている。\n\nだから TrussC は、π への最大限の敬意を払ったうえで、その先へ進む。回転と角度の API は [`TAU`](#TAU) (= 2π) を第一級の定数として扱う。\n\n将来 `TAU` が主役になる日が来ることを願って。\n\n## TrussC での扱い\n\n`PI` は互換性と数学的な正しさのために定義しているが、半周を表すなら `HALF_TAU` 、1/4周なら `QUARTER_TAU` を使うべきだ。そのほうが「半周」という概念を明示的に表現できる。\n\n```cpp\n// 非推奨: 一周の 1/4。なぜ 2 で割る？と一瞬止まる\nrotate(PI / 2);\n\n// 推奨: 考える余地なく、一周の 1/4\nrotate(QUARTER_TAU);\nrotate(TAU / 4);  \n```",
+            "details_ko": "π는 인류가 손에 넣은 가장 위대한 상수 중 하나였다. 기원전 3세기 아르키메데스에서 비롯되어, 약 2000년에 걸쳐 기하학·해석학·물리학이 이 한 글자 위에 쌓여 왔다. 의심할 여지 없는 위업이다.\n\n다만 정말로 한 가지, 최초의 설계 판단이 아쉬웠다. 원을 \"지름\" 기준으로 정의한 것. 이것이 모든 어긋남의 시작이었다.\n\n원이라는 도형의 본질은 중심에서 같은 거리에 있는 점들의 집합이다. 그 \"같은 거리\", 즉 반지름(radius)이야말로 원을 정의하는 양이고, 지름(diameter)은 그 부산물에 불과하다. 그럼에도 π는 `원주 / 지름`으로 정의되었다.\n\n이 단 한 번의 어긋남이 이후 세계의 수식에 `2π`라는 군더더기 계수를 흩뿌린다.\n\n- 원주는 `2πr` — 어째서인지 `2`가 필요하다.\n- 한 바퀴는 `2π` 라디안. 반 바퀴는 `π`, 1/4 바퀴는 `π/2`.\n- 푸리에 변환에도, 정규분포에도, 회전에도 거의 반드시 `2π`가 등장한다.\n\n누구나 1/4 회전을 `π/2`로 쓰게 되고, 코더는 \"이 `2`는 어디서 왔지?\"라며 늘 잠시 멈춘다.\n\n실용적으로 조금씩 쌓이는 스트레스도 무시할 수 없지만, 그보다 아름다움의 표현에 한 점의 흐림을 더한다는 사실을 알아차려야 한다.\n\n가장 아름답다고 일컬어지는 오일러의 공식도 τ로 쓰면 더 대칭적인 표현으로 바뀐다:\n\n```\ne^(iτ) = 1\n```\n\n\"한 바퀴 돌면 제자리로 돌아온다.\" 반 바퀴에서 뒤집히는 `e^(iπ) = -1`보다 회전의 본질을 더 직접적으로 말해준다.\n\n그래서 TrussC는 π에 최대한의 경의를 표하면서 그다음으로 나아간다. 회전과 각도 API는 [`TAU`](#TAU) (= 2π)를 일급 상수로 다룬다.\n\n언젠가 `TAU`가 주역이 되는 날이 오기를 바라며.\n\n## TrussC에서의 취급\n\n`PI`는 호환성과 수학적 정확성을 위해 정의해 두었지만, 반 바퀴를 나타낸다면 `HALF_TAU`, 1/4 바퀴라면 `QUARTER_TAU`를 쓰는 편이 좋다. 그래야 개념을 명시적으로 표현할 수 있다.\n\n```cpp\n// 비권장: 한 바퀴의 1/4. 왜 2로 나누지? 하고 잠시 멈춘다\nrotate(PI / 2);\n\n// 권장: 생각할 여지 없이 한 바퀴의 1/4\nrotate(QUARTER_TAU);\nrotate(TAU / 4);\n```",
             "related": [
                 "TAU",
                 "HALF_TAU",
@@ -13728,13 +13728,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "X component"
+                    "type": "float",
+                    "desc": "X component",
+                    "desc_ja": "X成分",
+                    "desc_ko": "X 성분"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Y component"
+                    "type": "float",
+                    "desc": "Y component",
+                    "desc_ja": "Y成分",
+                    "desc_ko": "Y 성분"
                 }
             ],
             "methods": [
@@ -13874,7 +13878,7 @@ const TrussCAPI = {
                     "name": "fromAngle",
                     "return": "Vec2",
                     "signatures": [
-                        "float radians, float length = …"
+                        "float radians, float length = 1.0"
                     ],
                     "desc": "Create Vec2 from angle"
                 }
@@ -14027,24 +14031,30 @@ const TrussCAPI = {
                     "",
                     "float x, float y, float z",
                     "float v",
-                    "const Vec2 & v, float z = …"
+                    "const Vec2 & v, float z = 0.0"
                 ]
             },
             "properties": [
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "X component"
+                    "type": "float",
+                    "desc": "X component",
+                    "desc_ja": "X成分",
+                    "desc_ko": "X 성분"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Y component"
+                    "type": "float",
+                    "desc": "Y component",
+                    "desc_ja": "Y成分",
+                    "desc_ko": "Y 성분"
                 },
                 {
                     "name": "z",
-                    "type": "",
-                    "desc": "Z component"
+                    "type": "float",
+                    "desc": "Z component",
+                    "desc_ja": "Z成分",
+                    "desc_ko": "Z 성분"
                 }
             ],
             "methods": [
@@ -14282,13 +14292,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "X component"
+                    "type": "int",
+                    "desc": "X component",
+                    "desc_ja": "X成分",
+                    "desc_ko": "X 성분"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Y component"
+                    "type": "int",
+                    "desc": "Y component",
+                    "desc_ja": "Y成分",
+                    "desc_ko": "Y 성분"
                 }
             ],
             "methods": [
@@ -14397,24 +14411,30 @@ const TrussCAPI = {
                     "",
                     "int x, int y, int z",
                     "int v",
-                    "const IVec2 & v, int z = …"
+                    "const IVec2 & v, int z = 0"
                 ]
             },
             "properties": [
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "X component"
+                    "type": "int",
+                    "desc": "X component",
+                    "desc_ja": "X成分",
+                    "desc_ko": "X 성분"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Y component"
+                    "type": "int",
+                    "desc": "Y component",
+                    "desc_ja": "Y成分",
+                    "desc_ko": "Y 성분"
                 },
                 {
                     "name": "z",
-                    "type": "",
-                    "desc": "Z component"
+                    "type": "int",
+                    "desc": "Z component",
+                    "desc_ja": "Z成分",
+                    "desc_ko": "Z 성분"
                 }
             ],
             "methods": [
@@ -14533,30 +14553,38 @@ const TrussCAPI = {
                     "",
                     "float x, float y, float z, float w",
                     "float v",
-                    "const Vec3 & v, float w = …",
-                    "const Vec2 & v, float z = …, float w = …"
+                    "const Vec3 & v, float w = 1.0",
+                    "const Vec2 & v, float z = 0.0, float w = 1.0"
                 ]
             },
             "properties": [
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "X component"
+                    "type": "float",
+                    "desc": "X component",
+                    "desc_ja": "X 成分",
+                    "desc_ko": "X 성분"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Y component"
+                    "type": "float",
+                    "desc": "Y component",
+                    "desc_ja": "Y 成分",
+                    "desc_ko": "Y 성분"
                 },
                 {
                     "name": "z",
-                    "type": "",
-                    "desc": "Z component"
+                    "type": "float",
+                    "desc": "Z component",
+                    "desc_ja": "Z 成分",
+                    "desc_ko": "Z 성분"
                 },
                 {
                     "name": "w",
-                    "type": "",
-                    "desc": "W component"
+                    "type": "float",
+                    "desc": "W component",
+                    "desc_ja": "W 成分",
+                    "desc_ko": "W 성분"
                 }
             ],
             "methods": [
@@ -14737,176 +14765,6 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "Mat4",
-            "desc": "4x4 matrix for 3D transformations",
-            "keywords": [
-                "matrix",
-                "transform",
-                "4x4",
-                "model view",
-                "projection",
-                "transformation"
-            ],
-            "desc_ja": "3D変換用4x4行列",
-            "desc_ko": "3D 변환용 4x4 행렬",
-            "related": [
-                "getCurrentMatrix",
-                "setMatrix",
-                "identity",
-                "translate",
-                "rotateX",
-                "rotateY",
-                "rotateZ",
-                "scale"
-            ],
-            "properties": [
-                {
-                    "name": "m",
-                    "type": "",
-                    "desc": "Raw row-major element storage (16 floats)"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "at",
-                    "return": "float &",
-                    "signatures": [
-                        "int row, int col",
-                        "int row, int col"
-                    ],
-                    "desc": "Access the element at (row, col)"
-                },
-                {
-                    "name": "transposed",
-                    "return": "Mat4",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get transposed matrix"
-                },
-                {
-                    "name": "inverted",
-                    "return": "Mat4",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get inverse matrix"
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "identity",
-                    "return": "Mat4",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Create an identity matrix"
-                },
-                {
-                    "name": "fromHomography",
-                    "return": "Mat4",
-                    "signatures": [
-                        "const Mat3 & h"
-                    ],
-                    "desc": "Build a Mat4 from a 3x3 homography (for 2D projection)"
-                },
-                {
-                    "name": "translate",
-                    "return": "Mat4",
-                    "signatures": [
-                        "float tx, float ty, float tz",
-                        "const Vec3 & t"
-                    ],
-                    "desc": "Create a translation matrix"
-                },
-                {
-                    "name": "rotateX",
-                    "return": "Mat4",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Create X-axis rotation matrix"
-                },
-                {
-                    "name": "rotateY",
-                    "return": "Mat4",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Create Y-axis rotation matrix"
-                },
-                {
-                    "name": "rotateZ",
-                    "return": "Mat4",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Create Z-axis rotation matrix"
-                },
-                {
-                    "name": "rotate",
-                    "return": "Mat4",
-                    "signatures": [
-                        "float radians, const Vec3 & axis"
-                    ],
-                    "desc": "Create a rotation matrix about an arbitrary axis"
-                },
-                {
-                    "name": "scale",
-                    "return": "Mat4",
-                    "signatures": [
-                        "float sx, float sy, float sz",
-                        "float s",
-                        "const Vec3 & s"
-                    ],
-                    "desc": "Create a scaling matrix"
-                },
-                {
-                    "name": "lookAt",
-                    "return": "Mat4",
-                    "signatures": [
-                        "const Vec3 & eye, const Vec3 & target, const Vec3 & up"
-                    ],
-                    "desc": "Create a view matrix"
-                },
-                {
-                    "name": "ortho",
-                    "return": "Mat4",
-                    "signatures": [
-                        "float left, float right, float bottom, float top, float nearPlane, float farPlane"
-                    ],
-                    "desc": "Create an orthographic projection matrix"
-                },
-                {
-                    "name": "perspective",
-                    "return": "Mat4",
-                    "signatures": [
-                        "float fovY, float aspect, float nearPlane, float farPlane"
-                    ],
-                    "desc": "Create a perspective projection matrix"
-                },
-                {
-                    "name": "frustum",
-                    "return": "Mat4",
-                    "signatures": [
-                        "float left, float right, float bottom, float top, float nearPlane, float farPlane"
-                    ],
-                    "desc": "Create an asymmetric perspective (frustum) projection matrix"
-                }
-            ],
-            "operators": [
-                {
-                    "symbol": "*",
-                    "signature": "Mat4 * Mat4 → Mat4",
-                    "cpp": "Mat4 operator*(const Mat4 &) const",
-                    "free": false,
-                    "desc": "Composition (matrix product)",
-                    "desc_ja": "合成（行列積）",
-                    "desc_ko": "합성(행렬 곱)"
-                }
-            ]
-        },
-        {
             "name": "Quaternion",
             "desc": "Unit quaternion for 3D rotations",
             "keywords": [
@@ -14943,23 +14801,31 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "w",
-                    "type": "",
-                    "desc": "W component"
+                    "type": "float",
+                    "desc": "W component",
+                    "desc_ja": "W成分",
+                    "desc_ko": "W 성분"
                 },
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "X component"
+                    "type": "float",
+                    "desc": "X component",
+                    "desc_ja": "X成分",
+                    "desc_ko": "X 성분"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Y component"
+                    "type": "float",
+                    "desc": "Y component",
+                    "desc_ja": "Y成分",
+                    "desc_ko": "Y 성분"
                 },
                 {
                     "name": "z",
-                    "type": "",
-                    "desc": "Z component"
+                    "type": "float",
+                    "desc": "Z component",
+                    "desc_ja": "Z成分",
+                    "desc_ko": "Z 성분"
                 }
             ],
             "methods": [
@@ -15119,8 +14985,10 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "m",
-                    "type": "",
-                    "desc": "Raw row-major element storage (9 floats)"
+                    "type": "float[9]",
+                    "desc": "Raw row-major element storage (9 floats)",
+                    "desc_ja": "行優先の生要素ストレージ (9 個の float)",
+                    "desc_ko": "행 우선 원본 요소 저장 (9개의 float)"
                 }
             ],
             "methods": [
@@ -15216,268 +15084,180 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "Color",
-            "desc": "RGBA color (0.0-1.0 range)",
+            "name": "Mat4",
+            "desc": "4x4 matrix for 3D transformations",
             "keywords": [
-                "rgba",
-                "rgb",
-                "tint",
-                "paint",
-                "swatch",
-                "of color"
+                "matrix",
+                "transform",
+                "4x4",
+                "model view",
+                "projection",
+                "transformation"
             ],
-            "desc_ja": "RGBAカラー (0.0-1.0範囲)",
-            "desc_ko": "RGBA 색상 (0.0-1.0 범위)",
-            "examples": [
-                {
-                    "name": "graphicsExample",
-                    "group": "graphics"
-                },
-                {
-                    "name": "colorExample",
-                    "group": "graphics"
-                }
-            ],
+            "desc_ja": "3D変換用4x4行列",
+            "desc_ko": "3D 변환용 4x4 행렬",
             "related": [
-                "ColorHSB",
-                "ColorOKLCH",
-                "setColor",
-                "fromHSB"
+                "getCurrentMatrix",
+                "setMatrix",
+                "identity",
+                "translate",
+                "rotateX",
+                "rotateY",
+                "rotateZ",
+                "scale"
             ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33"
+                ]
+            },
             "properties": [
                 {
-                    "name": "r",
-                    "type": "",
-                    "desc": "Red component (0.0-1.0)"
-                },
-                {
-                    "name": "g",
-                    "type": "",
-                    "desc": "Green component (0.0-1.0)"
-                },
-                {
-                    "name": "b",
-                    "type": "",
-                    "desc": "Blue component (0.0-1.0)"
-                },
-                {
-                    "name": "a",
-                    "type": "",
-                    "desc": "Alpha component (0.0-1.0)"
+                    "name": "m",
+                    "type": "float[16]",
+                    "desc": "Raw row-major element storage (16 floats)",
+                    "desc_ja": "行優先の生要素ストレージ (16 個の float)",
+                    "desc_ko": "행 우선 원본 요소 저장 (16개의 float)"
                 }
             ],
             "methods": [
                 {
-                    "name": "set",
-                    "return": "Color &",
+                    "name": "at",
+                    "return": "float &",
                     "signatures": [
-                        "float r, float g, float b, float a = …",
-                        "float gray, float a = …",
-                        "const Color & c"
+                        "int row, int col",
+                        "int row, int col"
                     ],
-                    "desc": "Set color components"
+                    "desc": "Access the element at (row, col)"
                 },
                 {
-                    "name": "toHex",
-                    "return": "uint32_t",
-                    "signatures": [
-                        "bool includeAlpha = …"
-                    ],
-                    "desc": "Convert to hex value"
-                },
-                {
-                    "name": "toLinear",
-                    "return": "ColorLinear",
+                    "name": "transposed",
+                    "return": "Mat4",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to linear RGB color space"
+                    "desc": "Get transposed matrix"
                 },
                 {
-                    "name": "toHSB",
-                    "return": "ColorHSB",
+                    "name": "inverted",
+                    "return": "Mat4",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Convert to HSB (H: 0-1, S: 0-1, B: 0-1)"
-                },
-                {
-                    "name": "toOKLab",
-                    "return": "ColorOKLab",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to OKLab (perceptually uniform)"
-                },
-                {
-                    "name": "toOKLCH",
-                    "return": "ColorOKLCH",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
-                },
-                {
-                    "name": "clamped",
-                    "return": "Color",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get clamped copy (0.0-1.0)"
-                },
-                {
-                    "name": "lerpRGB",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in RGB space"
-                },
-                {
-                    "name": "lerpLinear",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in linear RGB space"
-                },
-                {
-                    "name": "lerpHSB",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in HSB space"
-                },
-                {
-                    "name": "lerpOKLab",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in OKLab space (perceptually uniform)"
-                },
-                {
-                    "name": "lerpOKLCH",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in OKLCH space (shortest hue path)"
-                },
-                {
-                    "name": "lerp",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in OKLab space"
+                    "desc": "Get inverse matrix"
                 }
             ],
             "static_methods": [
                 {
-                    "name": "fromBytes",
-                    "return": "Color",
+                    "name": "identity",
+                    "return": "Mat4",
                     "signatures": [
-                        "int r, int g, int b, int a = …"
+                        ""
                     ],
-                    "desc": "Create from 0-255 values"
+                    "desc": "Create an identity matrix"
                 },
                 {
-                    "name": "fromHex",
-                    "return": "Color",
+                    "name": "fromHomography",
+                    "return": "Mat4",
                     "signatures": [
-                        "uint32_t hex, bool hasAlpha = …"
+                        "const Mat3 & h"
                     ],
-                    "desc": "Create from hex value"
+                    "desc": "Build a Mat4 from a 3x3 homography (for 2D projection)"
                 },
                 {
-                    "name": "fromHSB",
-                    "return": "Color",
+                    "name": "translate",
+                    "return": "Mat4",
                     "signatures": [
-                        "float h, float s, float b, float a = …"
+                        "float tx, float ty, float tz",
+                        "const Vec3 & t"
                     ],
-                    "desc": "Create from HSB (H: 0-1)"
+                    "desc": "Create a translation matrix"
                 },
                 {
-                    "name": "fromOKLCH",
-                    "return": "Color",
+                    "name": "rotateX",
+                    "return": "Mat4",
                     "signatures": [
-                        "float L, float C, float H, float a = …"
+                        "float radians"
                     ],
-                    "desc": "Create from OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
+                    "desc": "Create X-axis rotation matrix"
                 },
                 {
-                    "name": "fromOKLab",
-                    "return": "Color",
+                    "name": "rotateY",
+                    "return": "Mat4",
                     "signatures": [
-                        "float L, float a_lab, float b_lab, float alpha = …"
+                        "float radians"
                     ],
-                    "desc": "Create from OKLab (L: 0-1, a: ~-0.4-0.4, b: ~-0.4-0.4)"
+                    "desc": "Create Y-axis rotation matrix"
                 },
                 {
-                    "name": "fromLinear",
-                    "return": "Color",
+                    "name": "rotateZ",
+                    "return": "Mat4",
                     "signatures": [
-                        "float r, float g, float b, float a = …"
+                        "float radians"
                     ],
-                    "desc": "Create from linear RGB"
+                    "desc": "Create Z-axis rotation matrix"
+                },
+                {
+                    "name": "rotate",
+                    "return": "Mat4",
+                    "signatures": [
+                        "float radians, const Vec3 & axis"
+                    ],
+                    "desc": "Create a rotation matrix about an arbitrary axis"
+                },
+                {
+                    "name": "scale",
+                    "return": "Mat4",
+                    "signatures": [
+                        "float sx, float sy, float sz",
+                        "float s",
+                        "const Vec3 & s"
+                    ],
+                    "desc": "Create a scaling matrix"
+                },
+                {
+                    "name": "lookAt",
+                    "return": "Mat4",
+                    "signatures": [
+                        "const Vec3 & eye, const Vec3 & target, const Vec3 & up"
+                    ],
+                    "desc": "Create a view matrix"
+                },
+                {
+                    "name": "ortho",
+                    "return": "Mat4",
+                    "signatures": [
+                        "float left, float right, float bottom, float top, float nearPlane, float farPlane"
+                    ],
+                    "desc": "Create an orthographic projection matrix"
+                },
+                {
+                    "name": "perspective",
+                    "return": "Mat4",
+                    "signatures": [
+                        "float fovY, float aspect, float nearPlane, float farPlane"
+                    ],
+                    "desc": "Create a perspective projection matrix"
+                },
+                {
+                    "name": "frustum",
+                    "return": "Mat4",
+                    "signatures": [
+                        "float left, float right, float bottom, float top, float nearPlane, float farPlane"
+                    ],
+                    "desc": "Create an asymmetric perspective (frustum) projection matrix"
                 }
             ],
             "operators": [
                 {
-                    "symbol": "+",
-                    "signature": "Color + Color → Color",
-                    "cpp": "Color operator+(const Color &) const",
-                    "free": false,
-                    "desc": "Component-wise addition",
-                    "desc_ja": "成分ごとの加算",
-                    "desc_ko": "성분별 덧셈"
-                },
-                {
-                    "symbol": "-",
-                    "signature": "Color - Color → Color",
-                    "cpp": "Color operator-(const Color &) const",
-                    "free": false,
-                    "desc": "Component-wise subtraction",
-                    "desc_ja": "成分ごとの減算",
-                    "desc_ko": "성분별 뺄셈"
-                },
-                {
                     "symbol": "*",
-                    "signature": "Color * float → Color",
-                    "cpp": "Color operator*(float) const",
+                    "signature": "Mat4 * Mat4 → Mat4",
+                    "cpp": "Mat4 operator*(const Mat4 &) const",
                     "free": false,
-                    "desc": "Scalar multiplication",
-                    "desc_ja": "スカラー倍",
-                    "desc_ko": "스칼라 곱"
-                },
-                {
-                    "symbol": "/",
-                    "signature": "Color / float → Color",
-                    "cpp": "Color operator/(float) const",
-                    "free": false,
-                    "desc": "Scalar division",
-                    "desc_ja": "スカラー除算",
-                    "desc_ko": "스칼라 나눗셈"
-                },
-                {
-                    "symbol": "==",
-                    "signature": "Color == Color → bool",
-                    "cpp": "bool operator==(const Color &) const",
-                    "free": false,
-                    "desc": "Equality comparison",
-                    "desc_ja": "等価比較",
-                    "desc_ko": "같음 비교"
-                },
-                {
-                    "symbol": "!=",
-                    "signature": "Color != Color → bool",
-                    "cpp": "bool operator!=(const Color &) const",
-                    "free": false,
-                    "desc": "Inequality comparison",
-                    "desc_ja": "非等価比較",
-                    "desc_ko": "다름 비교"
+                    "desc": "Composition (matrix product)",
+                    "desc_ja": "合成（行列積）",
+                    "desc_ko": "합성(행렬 곱)"
                 }
             ]
         },
@@ -15490,13 +15270,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "labels",
-                    "type": "",
-                    "desc": ""
+                    "type": "const char *const *",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "count",
-                    "type": "",
-                    "desc": ""
+                    "type": "int",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ]
         },
@@ -15604,23 +15388,31 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "X position"
+                    "type": "float",
+                    "desc": "X position",
+                    "desc_ja": "X座標",
+                    "desc_ko": "X 위치"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Y position"
+                    "type": "float",
+                    "desc": "Y position",
+                    "desc_ja": "Y座標",
+                    "desc_ko": "Y 위치"
                 },
                 {
                     "name": "width",
-                    "type": "",
-                    "desc": "Width"
+                    "type": "float",
+                    "desc": "Width",
+                    "desc_ja": "幅",
+                    "desc_ko": "너비"
                 },
                 {
                     "name": "height",
-                    "type": "",
-                    "desc": "Height"
+                    "type": "float",
+                    "desc": "Height",
+                    "desc_ja": "高さ",
+                    "desc_ko": "높이"
                 }
             ],
             "methods": [
@@ -15718,13 +15510,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "origin",
-                    "type": "",
-                    "desc": "Ray origin point"
+                    "type": "Vec3",
+                    "desc": "Ray origin point",
+                    "desc_ja": "レイの始点",
+                    "desc_ko": "레이의 시작점"
                 },
                 {
                     "name": "direction",
-                    "type": "",
-                    "desc": "Ray direction (normalized)"
+                    "type": "Vec3",
+                    "desc": "Ray direction (normalized)",
+                    "desc_ja": "レイの方向（正規化済み）",
+                    "desc_ko": "레이 방향(정규화됨)"
                 }
             ],
             "methods": [
@@ -15782,7 +15578,7 @@ const TrussCAPI = {
                     "name": "fromScreenPoint2D",
                     "return": "Ray",
                     "signatures": [
-                        "float screenX, float screenY, float startZ = …"
+                        "float screenX, float screenY, float startZ = 1000.0"
                     ],
                     "desc": "Build an orthographic Z-parallel ray from a 2D screen point"
                 }
@@ -15797,28 +15593,38 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "view",
-                    "type": "",
-                    "desc": ""
+                    "type": "Mat4",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "projection",
-                    "type": "",
-                    "desc": ""
+                    "type": "Mat4",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "viewW",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "viewH",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "pickable",
-                    "type": "",
-                    "desc": ""
+                    "type": "bool",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "methods": [
@@ -15948,7 +15754,7 @@ const TrussCAPI = {
                     "name": "waitForThread",
                     "return": "void",
                     "signatures": [
-                        "bool callStopThread = …"
+                        "bool callStopThread = true"
                     ],
                     "desc": "Wait (join) for the thread to finish. If callStopThread is true (default), calls stopThread() first."
                 },
@@ -16136,9 +15942,9 @@ const TrussCAPI = {
                     "name": "listen",
                     "return": "EventListener",
                     "signatures": [
-                        "Callback callback, int priority = …",
-                        "Callback callback, Deliver deliver, int priority = …",
-                        "EventListener & listener, Callback callback, int priority = …"
+                        "Callback callback, int priority = App",
+                        "Callback callback, Deliver deliver, int priority = App",
+                        "EventListener & listener, Callback callback, int priority = App"
                     ],
                     "desc": "Register a listener callback and return an EventListener token; lower priority runs first, and Deliver::Main runs the callback on the main thread",
                     "deprecated": {
@@ -16196,18 +16002,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "level",
-                    "type": "",
-                    "desc": "Severity of the log message"
+                    "type": "LogLevel",
+                    "desc": "Severity of the log message",
+                    "desc_ja": "ログメッセージの重大度",
+                    "desc_ko": "로그 메시지의 심각도"
                 },
                 {
                     "name": "message",
-                    "type": "",
-                    "desc": "The log message text"
+                    "type": "std::string",
+                    "desc": "The log message text",
+                    "desc_ja": "ログメッセージのテキスト",
+                    "desc_ko": "로그 메시지 텍스트"
                 },
                 {
                     "name": "timestamp",
-                    "type": "",
-                    "desc": "Timestamp string (HH:MM:SS.mmm) generated when the message was logged"
+                    "type": "std::string",
+                    "desc": "Timestamp string (HH:MM:SS.mmm) generated when the message was logged",
+                    "desc_ja": "ログ記録時に生成されるタイムスタンプ文字列(HH:MM:SS.mmm)",
+                    "desc_ko": "로그 기록 시 생성되는 타임스탬프 문자열(HH:MM:SS.mmm)"
                 }
             ]
         },
@@ -16238,8 +16050,10 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "onLog",
-                    "type": "",
-                    "desc": "Event fired for every log message; listen to it to route logs (console/file/custom sink)"
+                    "type": "Event<LogEventArgs>",
+                    "desc": "Event fired for every log message; listen to it to route logs (console/file/custom sink)",
+                    "desc_ja": "全ログメッセージで発火するイベント。ログの転送先(コンソール/ファイル/独自シンク)を購読する",
+                    "desc_ko": "모든 로그 메시지에서 발생하는 이벤트. 로그 전송 대상(콘솔/파일/커스텀 싱크)을 구독"
                 }
             ],
             "methods": [
@@ -16325,7 +16139,7 @@ const TrussCAPI = {
             "desc_ko": "",
             "constructor": {
                 "signatures": [
-                    "LogLevel level, const std::string & module = …"
+                    "LogLevel level, const std::string & module = std::string(\"\")"
                 ]
             },
             "operators": [
@@ -16337,6 +16151,287 @@ const TrussCAPI = {
                     "desc": "",
                     "desc_ja": "",
                     "desc_ko": ""
+                }
+            ]
+        },
+        {
+            "name": "Color",
+            "desc": "RGBA color (0.0-1.0 range)",
+            "keywords": [
+                "rgba",
+                "rgb",
+                "tint",
+                "paint",
+                "swatch",
+                "of color"
+            ],
+            "desc_ja": "RGBAカラー (0.0-1.0範囲)",
+            "desc_ko": "RGBA 색상 (0.0-1.0 범위)",
+            "examples": [
+                {
+                    "name": "graphicsExample",
+                    "group": "graphics"
+                },
+                {
+                    "name": "colorExample",
+                    "group": "graphics"
+                }
+            ],
+            "related": [
+                "ColorHSB",
+                "ColorOKLCH",
+                "setColor",
+                "fromHSB"
+            ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "float r, float g, float b, float a = 1.0",
+                    "float gray, float a = 1.0"
+                ]
+            },
+            "properties": [
+                {
+                    "name": "r",
+                    "type": "float",
+                    "desc": "Red component (0.0-1.0)",
+                    "desc_ja": "赤成分 (0.0-1.0)",
+                    "desc_ko": "빨강 성분 (0.0-1.0)"
+                },
+                {
+                    "name": "g",
+                    "type": "float",
+                    "desc": "Green component (0.0-1.0)",
+                    "desc_ja": "緑成分 (0.0-1.0)",
+                    "desc_ko": "초록 성분 (0.0-1.0)"
+                },
+                {
+                    "name": "b",
+                    "type": "float",
+                    "desc": "Blue component (0.0-1.0)",
+                    "desc_ja": "青成分 (0.0-1.0)",
+                    "desc_ko": "파랑 성분 (0.0-1.0)"
+                },
+                {
+                    "name": "a",
+                    "type": "float",
+                    "desc": "Alpha component (0.0-1.0)",
+                    "desc_ja": "アルファ成分 (0.0-1.0)",
+                    "desc_ko": "알파 성분 (0.0-1.0)"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "set",
+                    "return": "Color &",
+                    "signatures": [
+                        "float r, float g, float b, float a = 1.0",
+                        "float gray, float a = 1.0",
+                        "const Color & c"
+                    ],
+                    "desc": "Set color components"
+                },
+                {
+                    "name": "toHex",
+                    "return": "uint32_t",
+                    "signatures": [
+                        "bool includeAlpha = false"
+                    ],
+                    "desc": "Convert to hex value"
+                },
+                {
+                    "name": "toLinear",
+                    "return": "ColorLinear",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Convert to linear RGB color space"
+                },
+                {
+                    "name": "toHSB",
+                    "return": "ColorHSB",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Convert to HSB (H: 0-1, S: 0-1, B: 0-1)"
+                },
+                {
+                    "name": "toOKLab",
+                    "return": "ColorOKLab",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Convert to OKLab (perceptually uniform)"
+                },
+                {
+                    "name": "toOKLCH",
+                    "return": "ColorOKLCH",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Convert to OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
+                },
+                {
+                    "name": "clamped",
+                    "return": "Color",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get clamped copy (0.0-1.0)"
+                },
+                {
+                    "name": "lerpRGB",
+                    "return": "Color",
+                    "signatures": [
+                        "const Color & target, float t"
+                    ],
+                    "desc": "Interpolate in RGB space"
+                },
+                {
+                    "name": "lerpLinear",
+                    "return": "Color",
+                    "signatures": [
+                        "const Color & target, float t"
+                    ],
+                    "desc": "Interpolate in linear RGB space"
+                },
+                {
+                    "name": "lerpHSB",
+                    "return": "Color",
+                    "signatures": [
+                        "const Color & target, float t"
+                    ],
+                    "desc": "Interpolate in HSB space"
+                },
+                {
+                    "name": "lerpOKLab",
+                    "return": "Color",
+                    "signatures": [
+                        "const Color & target, float t"
+                    ],
+                    "desc": "Interpolate in OKLab space (perceptually uniform)"
+                },
+                {
+                    "name": "lerpOKLCH",
+                    "return": "Color",
+                    "signatures": [
+                        "const Color & target, float t"
+                    ],
+                    "desc": "Interpolate in OKLCH space (shortest hue path)"
+                },
+                {
+                    "name": "lerp",
+                    "return": "Color",
+                    "signatures": [
+                        "const Color & target, float t"
+                    ],
+                    "desc": "Interpolate in OKLab space"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "fromBytes",
+                    "return": "Color",
+                    "signatures": [
+                        "int r, int g, int b, int a = 255"
+                    ],
+                    "desc": "Create from 0-255 values"
+                },
+                {
+                    "name": "fromHex",
+                    "return": "Color",
+                    "signatures": [
+                        "uint32_t hex, bool hasAlpha = false"
+                    ],
+                    "desc": "Create from hex value"
+                },
+                {
+                    "name": "fromHSB",
+                    "return": "Color",
+                    "signatures": [
+                        "float h, float s, float b, float a = 1.0"
+                    ],
+                    "desc": "Create from HSB (H: 0-1)"
+                },
+                {
+                    "name": "fromOKLCH",
+                    "return": "Color",
+                    "signatures": [
+                        "float L, float C, float H, float a = 1.0"
+                    ],
+                    "desc": "Create from OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
+                },
+                {
+                    "name": "fromOKLab",
+                    "return": "Color",
+                    "signatures": [
+                        "float L, float a_lab, float b_lab, float alpha = 1.0"
+                    ],
+                    "desc": "Create from OKLab (L: 0-1, a: ~-0.4-0.4, b: ~-0.4-0.4)"
+                },
+                {
+                    "name": "fromLinear",
+                    "return": "Color",
+                    "signatures": [
+                        "float r, float g, float b, float a = 1.0"
+                    ],
+                    "desc": "Create from linear RGB"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "+",
+                    "signature": "Color + Color → Color",
+                    "cpp": "Color operator+(const Color &) const",
+                    "free": false,
+                    "desc": "Component-wise addition",
+                    "desc_ja": "成分ごとの加算",
+                    "desc_ko": "성분별 덧셈"
+                },
+                {
+                    "symbol": "-",
+                    "signature": "Color - Color → Color",
+                    "cpp": "Color operator-(const Color &) const",
+                    "free": false,
+                    "desc": "Component-wise subtraction",
+                    "desc_ja": "成分ごとの減算",
+                    "desc_ko": "성분별 뺄셈"
+                },
+                {
+                    "symbol": "*",
+                    "signature": "Color * float → Color",
+                    "cpp": "Color operator*(float) const",
+                    "free": false,
+                    "desc": "Scalar multiplication",
+                    "desc_ja": "スカラー倍",
+                    "desc_ko": "스칼라 곱"
+                },
+                {
+                    "symbol": "/",
+                    "signature": "Color / float → Color",
+                    "cpp": "Color operator/(float) const",
+                    "free": false,
+                    "desc": "Scalar division",
+                    "desc_ja": "スカラー除算",
+                    "desc_ko": "스칼라 나눗셈"
+                },
+                {
+                    "symbol": "==",
+                    "signature": "Color == Color → bool",
+                    "cpp": "bool operator==(const Color &) const",
+                    "free": false,
+                    "desc": "Equality comparison",
+                    "desc_ja": "等価比較",
+                    "desc_ko": "같음 비교"
+                },
+                {
+                    "symbol": "!=",
+                    "signature": "Color != Color → bool",
+                    "cpp": "bool operator!=(const Color &) const",
+                    "free": false,
+                    "desc": "Inequality comparison",
+                    "desc_ja": "非等価比較",
+                    "desc_ko": "다름 비교"
                 }
             ]
         },
@@ -16357,26 +16452,41 @@ const TrussCAPI = {
                 "ColorOKLab",
                 "srgbToLinear"
             ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "float r, float g, float b, float a = 1.0",
+                    "float gray, float a = 1.0"
+                ]
+            },
             "properties": [
                 {
                     "name": "r",
-                    "type": "",
-                    "desc": "Red component (linear, 0.0-1.0)"
+                    "type": "float",
+                    "desc": "Red component (linear, 0.0-1.0)",
+                    "desc_ja": "赤成分（リニア、0.0-1.0）",
+                    "desc_ko": "빨강 성분(선형, 0.0-1.0)"
                 },
                 {
                     "name": "g",
-                    "type": "",
-                    "desc": "Green component (linear, 0.0-1.0)"
+                    "type": "float",
+                    "desc": "Green component (linear, 0.0-1.0)",
+                    "desc_ja": "緑成分（リニア、0.0-1.0）",
+                    "desc_ko": "초록 성분(선형, 0.0-1.0)"
                 },
                 {
                     "name": "b",
-                    "type": "",
-                    "desc": "Blue component (linear, 0.0-1.0)"
+                    "type": "float",
+                    "desc": "Blue component (linear, 0.0-1.0)",
+                    "desc_ja": "青成分（リニア、0.0-1.0）",
+                    "desc_ko": "파랑 성분(선형, 0.0-1.0)"
                 },
                 {
                     "name": "a",
-                    "type": "",
-                    "desc": "Alpha component (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Alpha component (0.0-1.0)",
+                    "desc_ja": "アルファ成分（0.0-1.0）",
+                    "desc_ko": "알파 성분(0.0-1.0)"
                 }
             ],
             "methods": [
@@ -16524,26 +16634,40 @@ const TrussCAPI = {
                 "setColorHSB",
                 "colorFromHSB"
             ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "float h, float s, float b, float a = 1.0"
+                ]
+            },
             "properties": [
                 {
                     "name": "h",
-                    "type": "",
-                    "desc": "Hue (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Hue (0.0-1.0)",
+                    "desc_ja": "色相 (0.0-1.0)",
+                    "desc_ko": "색상 (0.0-1.0)"
                 },
                 {
                     "name": "s",
-                    "type": "",
-                    "desc": "Saturation (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Saturation (0.0-1.0)",
+                    "desc_ja": "彩度 (0.0-1.0)",
+                    "desc_ko": "채도 (0.0-1.0)"
                 },
                 {
                     "name": "b",
-                    "type": "",
-                    "desc": "Brightness (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Brightness (0.0-1.0)",
+                    "desc_ja": "明度 (0.0-1.0)",
+                    "desc_ko": "명도 (0.0-1.0)"
                 },
                 {
                     "name": "a",
-                    "type": "",
-                    "desc": "Alpha component (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Alpha component (0.0-1.0)",
+                    "desc_ja": "アルファ成分 (0.0-1.0)",
+                    "desc_ko": "알파 성분 (0.0-1.0)"
                 }
             ],
             "methods": [
@@ -16583,7 +16707,7 @@ const TrussCAPI = {
                     "name": "lerp",
                     "return": "ColorHSB",
                     "signatures": [
-                        "const ColorHSB & target, float t, bool shortestPath = …"
+                        "const ColorHSB & target, float t, bool shortestPath = true"
                     ],
                     "desc": "Interpolate in HSB space (shortest hue path)"
                 }
@@ -16607,26 +16731,40 @@ const TrussCAPI = {
                 "Color",
                 "ColorLinear"
             ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "float L, float a, float b, float alpha = 1.0"
+                ]
+            },
             "properties": [
                 {
                     "name": "L",
-                    "type": "",
-                    "desc": "Lightness (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Lightness (0.0-1.0)",
+                    "desc_ja": "明度（0.0-1.0）",
+                    "desc_ko": "명도(0.0-1.0)"
                 },
                 {
                     "name": "a",
-                    "type": "",
-                    "desc": "Green-Red opponent axis (approx -0.4 to 0.4)"
+                    "type": "float",
+                    "desc": "Green-Red opponent axis (approx -0.4 to 0.4)",
+                    "desc_ja": "緑-赤の反対色軸（おおよそ-0.4～0.4）",
+                    "desc_ko": "초록-빨강 반대색 축(대략 -0.4 ~ 0.4)"
                 },
                 {
                     "name": "b",
-                    "type": "",
-                    "desc": "Blue-Yellow opponent axis (approx -0.4 to 0.4)"
+                    "type": "float",
+                    "desc": "Blue-Yellow opponent axis (approx -0.4 to 0.4)",
+                    "desc_ja": "青-黄の反対色軸（おおよそ-0.4～0.4）",
+                    "desc_ko": "파랑-노랑 반대색 축(대략 -0.4 ~ 0.4)"
                 },
                 {
                     "name": "alpha",
-                    "type": "",
-                    "desc": "Alpha component (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Alpha component (0.0-1.0)",
+                    "desc_ja": "アルファ成分（0.0-1.0）",
+                    "desc_ko": "알파 성분(0.0-1.0)"
                 }
             ],
             "methods": [
@@ -16698,26 +16836,40 @@ const TrussCAPI = {
                 "ColorOKLab",
                 "setColorOKLCH"
             ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "float L, float C, float H, float alpha = 1.0"
+                ]
+            },
             "properties": [
                 {
                     "name": "L",
-                    "type": "",
-                    "desc": "Lightness (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Lightness (0.0-1.0)",
+                    "desc_ja": "明度 (0.0-1.0)",
+                    "desc_ko": "명도 (0.0-1.0)"
                 },
                 {
                     "name": "C",
-                    "type": "",
-                    "desc": "Chroma (0.0 - ~0.4)"
+                    "type": "float",
+                    "desc": "Chroma (0.0 - ~0.4)",
+                    "desc_ja": "彩度 (0.0 - ~0.4)",
+                    "desc_ko": "채도 (0.0 - ~0.4)"
                 },
                 {
                     "name": "H",
-                    "type": "",
-                    "desc": "Hue (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Hue (0.0-1.0)",
+                    "desc_ja": "色相 (0.0-1.0)",
+                    "desc_ko": "색상 (0.0-1.0)"
                 },
                 {
                     "name": "alpha",
-                    "type": "",
-                    "desc": "Alpha component (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Alpha component (0.0-1.0)",
+                    "desc_ja": "アルファ成分 (0.0-1.0)",
+                    "desc_ko": "알파 성분 (0.0-1.0)"
                 }
             ],
             "methods": [
@@ -16757,288 +16909,9 @@ const TrussCAPI = {
                     "name": "lerp",
                     "return": "ColorOKLCH",
                     "signatures": [
-                        "const ColorOKLCH & target, float t, bool shortestPath = …"
+                        "const ColorOKLCH & target, float t, bool shortestPath = true"
                     ],
                     "desc": "Interpolate in OKLCH space (shortest hue path, perceptually uniform)"
-                }
-            ]
-        },
-        {
-            "name": "Pixels",
-            "desc": "Pixel buffer for image manipulation",
-            "keywords": [
-                "pixel buffer",
-                "bitmap",
-                "raster",
-                "image data",
-                "of pixels"
-            ],
-            "desc_ja": "画像操作用ピクセルバッファ",
-            "desc_ko": "이미지 조작용 픽셀 버퍼",
-            "examples": [
-                {
-                    "name": "normalMapExample",
-                    "group": "3d"
-                },
-                {
-                    "name": "AllFeaturesExample",
-                    "group": "tests"
-                }
-            ],
-            "related": [
-                "captureWindow",
-                "grabScreen",
-                "createPixels",
-                "extractFrame",
-                "addFrame",
-                "addFrameAt"
-            ],
-            "methods": [
-                {
-                    "name": "allocate",
-                    "return": "void",
-                    "signatures": [
-                        "int width, int height, int channels = …, PixelFormat format = …"
-                    ],
-                    "desc": "Allocate pixel buffer"
-                },
-                {
-                    "name": "clear",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Release pixel buffer"
-                },
-                {
-                    "name": "isAllocated",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if allocated"
-                },
-                {
-                    "name": "getWidth",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get width"
-                },
-                {
-                    "name": "getHeight",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get height"
-                },
-                {
-                    "name": "getChannels",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get number of channels"
-                },
-                {
-                    "name": "getFormat",
-                    "return": "PixelFormat",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the pixel format"
-                },
-                {
-                    "name": "isFloat",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether the pixel data uses 32-bit floats"
-                },
-                {
-                    "name": "getTotalBytes",
-                    "return": "size_t",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get total byte size"
-                },
-                {
-                    "name": "getData",
-                    "return": "unsigned char *",
-                    "signatures": [
-                        "",
-                        ""
-                    ],
-                    "desc": "Get raw data pointer"
-                },
-                {
-                    "name": "getDataF32",
-                    "return": "float *",
-                    "signatures": [
-                        "",
-                        ""
-                    ],
-                    "desc": "Get raw data pointer as float (float-format buffers)"
-                },
-                {
-                    "name": "getDataVoid",
-                    "return": "void *",
-                    "signatures": [
-                        "",
-                        ""
-                    ],
-                    "desc": "Get raw data pointer as void* (any format)"
-                },
-                {
-                    "name": "getColor",
-                    "return": "Color",
-                    "signatures": [
-                        "int x, int y"
-                    ],
-                    "desc": "Get pixel color at position"
-                },
-                {
-                    "name": "setColor",
-                    "return": "void",
-                    "signatures": [
-                        "int x, int y, const Color & c"
-                    ],
-                    "desc": "Set pixel color at position"
-                },
-                {
-                    "name": "setFromPixels",
-                    "return": "void",
-                    "signatures": [
-                        "const unsigned char * srcData, int width, int height, int channels"
-                    ],
-                    "desc": "Copy from external pixel data"
-                },
-                {
-                    "name": "setFromFloats",
-                    "return": "void",
-                    "signatures": [
-                        "const float * srcData, int width, int height, int channels"
-                    ],
-                    "desc": "Fill the buffer from a float array (allocates as needed)"
-                },
-                {
-                    "name": "copyTo",
-                    "return": "void",
-                    "signatures": [
-                        "unsigned char * dst"
-                    ],
-                    "desc": "Copy to external buffer"
-                },
-                {
-                    "name": "clone",
-                    "return": "Pixels",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return a deep copy of the pixel buffer"
-                },
-                {
-                    "name": "load",
-                    "return": "bool",
-                    "signatures": [
-                        "const fs::path & path"
-                    ],
-                    "desc": "Load image from file"
-                },
-                {
-                    "name": "loadHDR",
-                    "return": "bool",
-                    "signatures": [
-                        "const fs::path & path"
-                    ],
-                    "desc": "Load an HDR (.hdr) image into a float pixel buffer"
-                },
-                {
-                    "name": "loadPlatform",
-                    "return": "bool",
-                    "signatures": [
-                        "const fs::path & path"
-                    ],
-                    "desc": "Load an image using the platform image decoder"
-                },
-                {
-                    "name": "loadFromMemory",
-                    "return": "bool",
-                    "signatures": [
-                        "const unsigned char * buffer, int len"
-                    ],
-                    "desc": "Load image from memory"
-                },
-                {
-                    "name": "save",
-                    "return": "bool",
-                    "signatures": [
-                        "const fs::path & path"
-                    ],
-                    "desc": "Save image to file"
-                },
-                {
-                    "name": "halve",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8."
-                },
-                {
-                    "name": "resize",
-                    "return": "void",
-                    "signatures": [
-                        "int newW, int newH"
-                    ],
-                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8."
-                },
-                {
-                    "name": "crop",
-                    "return": "void",
-                    "signatures": [
-                        "int x, int y, int w, int h"
-                    ],
-                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge."
-                },
-                {
-                    "name": "mirror",
-                    "return": "void",
-                    "signatures": [
-                        "bool horizontal, bool vertical"
-                    ],
-                    "desc": "Flip in place. Both true is 180°."
-                },
-                {
-                    "name": "mirrorH",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mirror horizontally (alias for mirror(true, false))"
-                },
-                {
-                    "name": "mirrorV",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mirror vertically (alias for mirror(false, true))"
-                }
-            ],
-            "operators": [
-                {
-                    "symbol": "=",
-                    "signature": "Pixels = Pixels & → Pixels &",
-                    "cpp": "Pixels & operator=(Pixels &&)",
-                    "free": false,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
                 }
             ]
         },
@@ -17166,23 +17039,31 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "latitude",
-                    "type": "",
-                    "desc": "Latitude in degrees"
+                    "type": "double",
+                    "desc": "Latitude in degrees",
+                    "desc_ja": "緯度 (度)",
+                    "desc_ko": "위도 (도)"
                 },
                 {
                     "name": "longitude",
-                    "type": "",
-                    "desc": "Longitude in degrees"
+                    "type": "double",
+                    "desc": "Longitude in degrees",
+                    "desc_ja": "経度 (度)",
+                    "desc_ko": "경도 (도)"
                 },
                 {
                     "name": "altitude",
-                    "type": "",
-                    "desc": "Altitude in meters"
+                    "type": "double",
+                    "desc": "Altitude in meters",
+                    "desc_ja": "高度 (メートル)",
+                    "desc_ko": "고도 (미터)"
                 },
                 {
                     "name": "accuracy",
-                    "type": "",
-                    "desc": "Horizontal accuracy in meters; -1 if not available yet"
+                    "type": "float",
+                    "desc": "Horizontal accuracy in meters; -1 if not available yet",
+                    "desc_ja": "水平精度 (メートル)、未取得なら -1",
+                    "desc_ko": "수평 정확도 (미터), 아직 없으면 -1"
                 }
             ]
         },
@@ -17398,38 +17279,52 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "key",
-                    "type": "",
-                    "desc": "Key code (KEY_* / SAPP_KEYCODE_*)"
+                    "type": "int",
+                    "desc": "Key code (KEY_* / SAPP_KEYCODE_*)",
+                    "desc_ja": "キーコード(KEY_* / SAPP_KEYCODE_*)",
+                    "desc_ko": "키 코드(KEY_* / SAPP_KEYCODE_*)"
                 },
                 {
                     "name": "isRepeat",
-                    "type": "",
-                    "desc": "True if this is a repeat from holding the key"
+                    "type": "bool",
+                    "desc": "True if this is a repeat from holding the key",
+                    "desc_ja": "キー長押しによるリピートの場合 true",
+                    "desc_ko": "키를 누르고 있어 발생한 반복인 경우 true"
                 },
                 {
                     "name": "shift",
-                    "type": "",
-                    "desc": "Shift modifier held"
+                    "type": "bool",
+                    "desc": "Shift modifier held",
+                    "desc_ja": "Shift 修飾キーが押されている",
+                    "desc_ko": "Shift 수정 키가 눌려 있음"
                 },
                 {
                     "name": "ctrl",
-                    "type": "",
-                    "desc": "Ctrl modifier held"
+                    "type": "bool",
+                    "desc": "Ctrl modifier held",
+                    "desc_ja": "Ctrl 修飾キーが押されている",
+                    "desc_ko": "Ctrl 수정 키가 눌려 있음"
                 },
                 {
                     "name": "alt",
-                    "type": "",
-                    "desc": "Alt modifier held"
+                    "type": "bool",
+                    "desc": "Alt modifier held",
+                    "desc_ja": "Alt 修飾キーが押されている",
+                    "desc_ko": "Alt 수정 키가 눌려 있음"
                 },
                 {
                     "name": "super",
-                    "type": "",
-                    "desc": "Super / Command modifier held"
+                    "type": "bool",
+                    "desc": "Super / Command modifier held",
+                    "desc_ja": "Super / Command 修飾キーが押されている",
+                    "desc_ko": "Super / Command 수정 키가 눌려 있음"
                 },
                 {
                     "name": "consumed",
-                    "type": "",
-                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+                    "type": "bool",
+                    "desc": "Set true in a listener to stop propagation to lower-priority listeners",
+                    "desc_ja": "リスナーで true にすると、より低い priority のリスナーへの伝播を止める",
+                    "desc_ko": "리스너에서 true로 설정하면 더 낮은 priority의 리스너로의 전파를 중단"
                 }
             ]
         },
@@ -17454,53 +17349,73 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "Legacy mirror of pos.x (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.x (removed at v1.0)",
+                    "desc_ja": "pos.x のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "pos.x의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Legacy mirror of pos.y (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.y (removed at v1.0)",
+                    "desc_ja": "pos.y のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "pos.y의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "button",
-                    "type": "",
-                    "desc": "Mouse button (MOUSE_BUTTON_LEFT / RIGHT / MIDDLE)"
+                    "type": "int",
+                    "desc": "Mouse button (MOUSE_BUTTON_LEFT / RIGHT / MIDDLE)",
+                    "desc_ja": "マウスボタン(MOUSE_BUTTON_LEFT / RIGHT / MIDDLE)",
+                    "desc_ko": "마우스 버튼(MOUSE_BUTTON_LEFT / RIGHT / MIDDLE)"
                 },
                 {
                     "name": "shift",
-                    "type": "",
-                    "desc": "Shift modifier held"
+                    "type": "bool",
+                    "desc": "Shift modifier held",
+                    "desc_ja": "Shift 修飾キーが押されている",
+                    "desc_ko": "Shift 수정 키가 눌려 있음"
                 },
                 {
                     "name": "ctrl",
-                    "type": "",
-                    "desc": "Ctrl modifier held"
+                    "type": "bool",
+                    "desc": "Ctrl modifier held",
+                    "desc_ja": "Ctrl 修飾キーが押されている",
+                    "desc_ko": "Ctrl 수정 키가 눌려 있음"
                 },
                 {
                     "name": "alt",
-                    "type": "",
-                    "desc": "Alt modifier held"
+                    "type": "bool",
+                    "desc": "Alt modifier held",
+                    "desc_ja": "Alt 修飾キーが押されている",
+                    "desc_ko": "Alt 수정 키가 눌려 있음"
                 },
                 {
                     "name": "super",
-                    "type": "",
-                    "desc": "Super / Command modifier held"
+                    "type": "bool",
+                    "desc": "Super / Command modifier held",
+                    "desc_ja": "Super / Command 修飾キーが押されている",
+                    "desc_ko": "Super / Command 수정 키가 눌려 있음"
                 },
                 {
                     "name": "pos",
-                    "type": "",
-                    "desc": "Cursor position in the receiving node's local space (== globalPos at app level)"
+                    "type": "Vec2",
+                    "desc": "Cursor position in the receiving node's local space (== globalPos at app level)",
+                    "desc_ja": "受信ノードのローカル空間でのカーソル位置(アプリレベルでは globalPos と同じ)",
+                    "desc_ko": "수신 노드의 로컬 공간 내 커서 위치(앱 레벨에서는 globalPos와 동일)"
                 },
                 {
                     "name": "globalPos",
-                    "type": "",
-                    "desc": "Cursor position in screen space"
+                    "type": "Vec2",
+                    "desc": "Cursor position in screen space",
+                    "desc_ja": "スクリーン空間でのカーソル位置",
+                    "desc_ko": "스크린 공간 내 커서 위치"
                 },
                 {
                     "name": "consumed",
-                    "type": "",
-                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+                    "type": "bool",
+                    "desc": "Set true in a listener to stop propagation to lower-priority listeners",
+                    "desc_ja": "リスナーで true にすると、より低い priority のリスナーへの伝播を止める",
+                    "desc_ko": "리스너에서 true로 설정하면 더 낮은 priority의 리스너로의 전파를 중단"
                 }
             ],
             "methods": [
@@ -17544,68 +17459,94 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "Legacy mirror of pos.x (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.x (removed at v1.0)",
+                    "desc_ja": "pos.x のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "pos.x의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Legacy mirror of pos.y (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.y (removed at v1.0)",
+                    "desc_ja": "pos.y のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "pos.y의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "deltaX",
-                    "type": "",
-                    "desc": "Legacy mirror of delta.x (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of delta.x (removed at v1.0)",
+                    "desc_ja": "delta.x のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "delta.x의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "deltaY",
-                    "type": "",
-                    "desc": "Legacy mirror of delta.y (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of delta.y (removed at v1.0)",
+                    "desc_ja": "delta.y のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "delta.y의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "shift",
-                    "type": "",
-                    "desc": "Shift modifier held"
+                    "type": "bool",
+                    "desc": "Shift modifier held",
+                    "desc_ja": "Shift 修飾キーが押されている",
+                    "desc_ko": "Shift 수정 키가 눌려 있음"
                 },
                 {
                     "name": "ctrl",
-                    "type": "",
-                    "desc": "Ctrl modifier held"
+                    "type": "bool",
+                    "desc": "Ctrl modifier held",
+                    "desc_ja": "Ctrl 修飾キーが押されている",
+                    "desc_ko": "Ctrl 수정 키가 눌려 있음"
                 },
                 {
                     "name": "alt",
-                    "type": "",
-                    "desc": "Alt modifier held"
+                    "type": "bool",
+                    "desc": "Alt modifier held",
+                    "desc_ja": "Alt 修飾キーが押されている",
+                    "desc_ko": "Alt 수정 키가 눌려 있음"
                 },
                 {
                     "name": "super",
-                    "type": "",
-                    "desc": "Super / Command modifier held"
+                    "type": "bool",
+                    "desc": "Super / Command modifier held",
+                    "desc_ja": "Super / Command 修飾キーが押されている",
+                    "desc_ko": "Super / Command 수정 키가 눌려 있음"
                 },
                 {
                     "name": "pos",
-                    "type": "",
-                    "desc": "Cursor position in local space (== globalPos at app level)"
+                    "type": "Vec2",
+                    "desc": "Cursor position in local space (== globalPos at app level)",
+                    "desc_ja": "ローカル空間でのカーソル位置(アプリレベルでは globalPos と同じ)",
+                    "desc_ko": "로컬 공간 내 커서 위치(앱 레벨에서는 globalPos와 동일)"
                 },
                 {
                     "name": "globalPos",
-                    "type": "",
-                    "desc": "Cursor position in screen space"
+                    "type": "Vec2",
+                    "desc": "Cursor position in screen space",
+                    "desc_ja": "スクリーン空間でのカーソル位置",
+                    "desc_ko": "스크린 공간 내 커서 위치"
                 },
                 {
                     "name": "delta",
-                    "type": "",
-                    "desc": "Movement since the last event, in local space"
+                    "type": "Vec2",
+                    "desc": "Movement since the last event, in local space",
+                    "desc_ja": "前回イベントからの移動量(ローカル空間)",
+                    "desc_ko": "이전 이벤트 이후의 이동량(로컬 공간)"
                 },
                 {
                     "name": "globalDelta",
-                    "type": "",
-                    "desc": "Movement since the last event, in screen space"
+                    "type": "Vec2",
+                    "desc": "Movement since the last event, in screen space",
+                    "desc_ja": "前回イベントからの移動量(スクリーン空間)",
+                    "desc_ko": "이전 이벤트 이후의 이동량(스크린 공간)"
                 },
                 {
                     "name": "consumed",
-                    "type": "",
-                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+                    "type": "bool",
+                    "desc": "Set true in a listener to stop propagation to lower-priority listeners",
+                    "desc_ja": "リスナーで true にすると、より低い priority のリスナーへの伝播を止める",
+                    "desc_ko": "리스너에서 true로 설정하면 더 낮은 priority의 리스너로의 전파를 중단"
                 }
             ],
             "methods": [
@@ -17649,73 +17590,101 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "Legacy mirror of pos.x (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.x (removed at v1.0)",
+                    "desc_ja": "pos.x のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "pos.x의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Legacy mirror of pos.y (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of pos.y (removed at v1.0)",
+                    "desc_ja": "pos.y のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "pos.y의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "deltaX",
-                    "type": "",
-                    "desc": "Legacy mirror of delta.x (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of delta.x (removed at v1.0)",
+                    "desc_ja": "delta.x のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "delta.x의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "deltaY",
-                    "type": "",
-                    "desc": "Legacy mirror of delta.y (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of delta.y (removed at v1.0)",
+                    "desc_ja": "delta.y のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "delta.y의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "button",
-                    "type": "",
-                    "desc": "Mouse button being dragged (MOUSE_BUTTON_*)"
+                    "type": "int",
+                    "desc": "Mouse button being dragged (MOUSE_BUTTON_*)",
+                    "desc_ja": "ドラッグ中のマウスボタン(MOUSE_BUTTON_*)",
+                    "desc_ko": "드래그 중인 마우스 버튼(MOUSE_BUTTON_*)"
                 },
                 {
                     "name": "shift",
-                    "type": "",
-                    "desc": "Shift modifier held"
+                    "type": "bool",
+                    "desc": "Shift modifier held",
+                    "desc_ja": "Shift 修飾キーが押されている",
+                    "desc_ko": "Shift 수정 키가 눌려 있음"
                 },
                 {
                     "name": "ctrl",
-                    "type": "",
-                    "desc": "Ctrl modifier held"
+                    "type": "bool",
+                    "desc": "Ctrl modifier held",
+                    "desc_ja": "Ctrl 修飾キーが押されている",
+                    "desc_ko": "Ctrl 수정 키가 눌려 있음"
                 },
                 {
                     "name": "alt",
-                    "type": "",
-                    "desc": "Alt modifier held"
+                    "type": "bool",
+                    "desc": "Alt modifier held",
+                    "desc_ja": "Alt 修飾キーが押されている",
+                    "desc_ko": "Alt 수정 키가 눌려 있음"
                 },
                 {
                     "name": "super",
-                    "type": "",
-                    "desc": "Super / Command modifier held"
+                    "type": "bool",
+                    "desc": "Super / Command modifier held",
+                    "desc_ja": "Super / Command 修飾キーが押されている",
+                    "desc_ko": "Super / Command 수정 키가 눌려 있음"
                 },
                 {
                     "name": "pos",
-                    "type": "",
-                    "desc": "Cursor position in local space (== globalPos at app level)"
+                    "type": "Vec2",
+                    "desc": "Cursor position in local space (== globalPos at app level)",
+                    "desc_ja": "ローカル空間でのカーソル位置(アプリレベルでは globalPos と同じ)",
+                    "desc_ko": "로컬 공간 내 커서 위치(앱 레벨에서는 globalPos와 동일)"
                 },
                 {
                     "name": "globalPos",
-                    "type": "",
-                    "desc": "Cursor position in screen space"
+                    "type": "Vec2",
+                    "desc": "Cursor position in screen space",
+                    "desc_ja": "スクリーン空間でのカーソル位置",
+                    "desc_ko": "스크린 공간 내 커서 위치"
                 },
                 {
                     "name": "delta",
-                    "type": "",
-                    "desc": "Movement since the last event, in local space"
+                    "type": "Vec2",
+                    "desc": "Movement since the last event, in local space",
+                    "desc_ja": "前回イベントからの移動量(ローカル空間)",
+                    "desc_ko": "이전 이벤트 이후의 이동량(로컬 공간)"
                 },
                 {
                     "name": "globalDelta",
-                    "type": "",
-                    "desc": "Movement since the last event, in screen space"
+                    "type": "Vec2",
+                    "desc": "Movement since the last event, in screen space",
+                    "desc_ja": "前回イベントからの移動量(スクリーン空間)",
+                    "desc_ko": "이전 이벤트 이후의 이동량(스크린 공간)"
                 },
                 {
                     "name": "consumed",
-                    "type": "",
-                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+                    "type": "bool",
+                    "desc": "Set true in a listener to stop propagation to lower-priority listeners",
+                    "desc_ja": "リスナーで true にすると、より低い priority のリスナーへの伝播を止める",
+                    "desc_ko": "리스너에서 true로 설정하면 더 낮은 priority의 리스너로의 전파를 중단"
                 }
             ],
             "methods": [
@@ -17758,53 +17727,73 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "scrollX",
-                    "type": "",
-                    "desc": "Legacy mirror of scroll.x (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of scroll.x (removed at v1.0)",
+                    "desc_ja": "scroll.x のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "scroll.x의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "scrollY",
-                    "type": "",
-                    "desc": "Legacy mirror of scroll.y (removed at v1.0)"
+                    "type": "float",
+                    "desc": "Legacy mirror of scroll.y (removed at v1.0)",
+                    "desc_ja": "scroll.y のレガシーミラー(v1.0 で削除)",
+                    "desc_ko": "scroll.y의 레거시 미러(v1.0에서 제거)"
                 },
                 {
                     "name": "shift",
-                    "type": "",
-                    "desc": "Shift modifier held"
+                    "type": "bool",
+                    "desc": "Shift modifier held",
+                    "desc_ja": "Shift 修飾キーが押されている",
+                    "desc_ko": "Shift 수정 키가 눌려 있음"
                 },
                 {
                     "name": "ctrl",
-                    "type": "",
-                    "desc": "Ctrl modifier held"
+                    "type": "bool",
+                    "desc": "Ctrl modifier held",
+                    "desc_ja": "Ctrl 修飾キーが押されている",
+                    "desc_ko": "Ctrl 수정 키가 눌려 있음"
                 },
                 {
                     "name": "alt",
-                    "type": "",
-                    "desc": "Alt modifier held"
+                    "type": "bool",
+                    "desc": "Alt modifier held",
+                    "desc_ja": "Alt 修飾キーが押されている",
+                    "desc_ko": "Alt 수정 키가 눌려 있음"
                 },
                 {
                     "name": "super",
-                    "type": "",
-                    "desc": "Super / Command modifier held"
+                    "type": "bool",
+                    "desc": "Super / Command modifier held",
+                    "desc_ja": "Super / Command 修飾キーが押されている",
+                    "desc_ko": "Super / Command 수정 키가 눌려 있음"
                 },
                 {
                     "name": "pos",
-                    "type": "",
-                    "desc": "Cursor position in local space (== globalPos at app level)"
+                    "type": "Vec2",
+                    "desc": "Cursor position in local space (== globalPos at app level)",
+                    "desc_ja": "ローカル空間でのカーソル位置(アプリレベルでは globalPos と同じ)",
+                    "desc_ko": "로컬 공간 내 커서 위치(앱 레벨에서는 globalPos와 동일)"
                 },
                 {
                     "name": "globalPos",
-                    "type": "",
-                    "desc": "Cursor position in screen space"
+                    "type": "Vec2",
+                    "desc": "Cursor position in screen space",
+                    "desc_ja": "スクリーン空間でのカーソル位置",
+                    "desc_ko": "스크린 공간 내 커서 위치"
                 },
                 {
                     "name": "scroll",
-                    "type": "",
-                    "desc": "Scroll amount (x: horizontal, y: vertical)"
+                    "type": "Vec2",
+                    "desc": "Scroll amount (x: horizontal, y: vertical)",
+                    "desc_ja": "スクロール量(x: 水平、y: 垂直)",
+                    "desc_ko": "스크롤 양(x: 수평, y: 수직)"
                 },
                 {
                     "name": "consumed",
-                    "type": "",
-                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+                    "type": "bool",
+                    "desc": "Set true in a listener to stop propagation to lower-priority listeners",
+                    "desc_ja": "リスナーで true にすると、より低い priority のリスナーへの伝播を止める",
+                    "desc_ko": "리스너에서 true로 설정하면 더 낮은 priority의 리스너로의 전파를 중단"
                 }
             ],
             "methods": [
@@ -17835,13 +17824,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "width",
-                    "type": "",
-                    "desc": "New window width in pixels"
+                    "type": "int",
+                    "desc": "New window width in pixels",
+                    "desc_ja": "新しいウィンドウの幅(ピクセル)",
+                    "desc_ko": "새 윈도우 너비(픽셀)"
                 },
                 {
                     "name": "height",
-                    "type": "",
-                    "desc": "New window height in pixels"
+                    "type": "int",
+                    "desc": "New window height in pixels",
+                    "desc_ja": "新しいウィンドウの高さ(ピクセル)",
+                    "desc_ko": "새 윈도우 높이(픽셀)"
                 }
             ]
         },
@@ -17863,18 +17856,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "files",
-                    "type": "",
-                    "desc": "Paths of the dropped files"
+                    "type": "std::vector<std::string>",
+                    "desc": "Paths of the dropped files",
+                    "desc_ja": "ドロップされたファイルのパス",
+                    "desc_ko": "드롭된 파일의 경로"
                 },
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "Drop position x"
+                    "type": "float",
+                    "desc": "Drop position x",
+                    "desc_ja": "ドロップ位置の x",
+                    "desc_ko": "드롭 위치 x"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Drop position y"
+                    "type": "float",
+                    "desc": "Drop position y",
+                    "desc_ja": "ドロップ位置の y",
+                    "desc_ko": "드롭 위치 y"
                 }
             ]
         },
@@ -17902,8 +17901,10 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "text",
-                    "type": "",
-                    "desc": "Pasted clipboard content (already read for you)"
+                    "type": "std::string",
+                    "desc": "Pasted clipboard content (already read for you)",
+                    "desc_ja": "ペーストされたクリップボードの内容(読み込み済み)",
+                    "desc_ko": "붙여넣은 클립보드 내용(이미 읽혀 있음)"
                 }
             ]
         },
@@ -17925,28 +17926,38 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "id",
-                    "type": "",
-                    "desc": "Touch ID, persistent across move events"
+                    "type": "int",
+                    "desc": "Touch ID, persistent across move events",
+                    "desc_ja": "タッチ ID。move イベントをまたいで一貫",
+                    "desc_ko": "터치 ID. move 이벤트 전반에 걸쳐 유지됨"
                 },
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": "Touch x position"
+                    "type": "float",
+                    "desc": "Touch x position",
+                    "desc_ja": "タッチの x 位置",
+                    "desc_ko": "터치 x 위치"
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": "Touch y position"
+                    "type": "float",
+                    "desc": "Touch y position",
+                    "desc_ja": "タッチの y 位置",
+                    "desc_ko": "터치 y 위치"
                 },
                 {
                     "name": "pressure",
-                    "type": "",
-                    "desc": "Touch pressure (0.0-1.0; not yet reported by sokol, defaults to 1.0)"
+                    "type": "float",
+                    "desc": "Touch pressure (0.0-1.0; not yet reported by sokol, defaults to 1.0)",
+                    "desc_ja": "タッチ圧力(0.0-1.0。sokol はまだ報告せず、デフォルトは 1.0)",
+                    "desc_ko": "터치 압력(0.0-1.0. sokol에서 아직 보고하지 않으며 기본값은 1.0)"
                 },
                 {
                     "name": "changed",
-                    "type": "",
-                    "desc": "True if this touch was part of the current action"
+                    "type": "bool",
+                    "desc": "True if this touch was part of the current action",
+                    "desc_ja": "このタッチが現在のアクションの一部であれば true",
+                    "desc_ko": "이 터치가 현재 동작의 일부이면 true"
                 }
             ]
         },
@@ -17976,18 +17987,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "touches",
-                    "type": "",
-                    "desc": "Array of active touch points (up to MAX_TOUCHES = 8)"
+                    "type": "TouchPoint[8]",
+                    "desc": "Array of active touch points (up to MAX_TOUCHES = 8)",
+                    "desc_ja": "アクティブなタッチ点の配列(最大 MAX_TOUCHES = 8)",
+                    "desc_ko": "활성 터치 포인트의 배열(최대 MAX_TOUCHES = 8)"
                 },
                 {
                     "name": "numTouches",
-                    "type": "",
-                    "desc": "Number of valid entries in touches"
+                    "type": "int",
+                    "desc": "Number of valid entries in touches",
+                    "desc_ja": "touches 内の有効なエントリ数",
+                    "desc_ko": "touches 내의 유효한 항목 수"
                 },
                 {
                     "name": "cancelled",
-                    "type": "",
-                    "desc": "True when touchReleased fires due to system cancellation (incoming call, system gesture)"
+                    "type": "bool",
+                    "desc": "True when touchReleased fires due to system cancellation (incoming call, system gesture)",
+                    "desc_ja": "システムによるキャンセル(着信、システムジェスチャー)で touchReleased が発火したとき true",
+                    "desc_ko": "시스템 취소(수신 전화, 시스템 제스처)로 touchReleased가 발생할 때 true"
                 }
             ],
             "methods": [
@@ -18035,13 +18052,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "raw",
-                    "type": "",
-                    "desc": "Raw input line (e.g. \"tcdebug screenshot /tmp/a.png\")"
+                    "type": "std::string",
+                    "desc": "Raw input line (e.g. \"tcdebug screenshot /tmp/a.png\")",
+                    "desc_ja": "生の入力行(例: \\\"tcdebug screenshot /tmp/a.png\\\")",
+                    "desc_ko": "원시 입력 줄(예: \\\"tcdebug screenshot /tmp/a.png\\\")"
                 },
                 {
                     "name": "args",
-                    "type": "",
-                    "desc": "Input line split on whitespace (e.g. [\"tcdebug\", \"screenshot\", \"/tmp/a.png\"])"
+                    "type": "std::vector<std::string>",
+                    "desc": "Input line split on whitespace (e.g. [\"tcdebug\", \"screenshot\", \"/tmp/a.png\"])",
+                    "desc_ja": "空白で分割した入力行(例: [\\\"tcdebug\\\", \\\"screenshot\\\", \\\"/tmp/a.png\\\"])",
+                    "desc_ko": "공백으로 분할한 입력 줄(예: [\\\"tcdebug\\\", \\\"screenshot\\\", \\\"/tmp/a.png\\\"])"
                 }
             ]
         },
@@ -18063,8 +18084,10 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "cancel",
-                    "type": "",
-                    "desc": "Set true in a listener to cancel the requested exit"
+                    "type": "bool",
+                    "desc": "Set true in a listener to cancel the requested exit",
+                    "desc_ja": "リスナーで true にすると要求された終了をキャンセル",
+                    "desc_ko": "리스너에서 true로 설정하면 요청된 종료를 취소"
                 }
             ]
         },
@@ -18088,113 +18111,157 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "setup",
-                    "type": "",
-                    "desc": "Fired after app setup completes"
+                    "type": "Event<void>",
+                    "desc": "Fired after app setup completes",
+                    "desc_ja": "アプリの setup 完了後に発火",
+                    "desc_ko": "앱 setup 완료 후 발생"
                 },
                 {
                     "name": "update",
-                    "type": "",
-                    "desc": "Fired before update each frame"
+                    "type": "Event<void>",
+                    "desc": "Fired before update each frame",
+                    "desc_ja": "毎フレーム update の前に発火",
+                    "desc_ko": "매 프레임 update 전에 발생"
                 },
                 {
                     "name": "draw",
-                    "type": "",
-                    "desc": "Fired before draw each frame"
+                    "type": "Event<void>",
+                    "desc": "Fired before draw each frame",
+                    "desc_ja": "毎フレーム draw の前に発火",
+                    "desc_ko": "매 프레임 draw 전에 발생"
                 },
                 {
                     "name": "onRender",
-                    "type": "",
-                    "desc": "Fired after sokol_gl flush, while the render pass is still active"
+                    "type": "Event<void>",
+                    "desc": "Fired after sokol_gl flush, while the render pass is still active",
+                    "desc_ja": "sokol_gl flush 後、レンダーパスがまだアクティブな間に発火",
+                    "desc_ko": "sokol_gl flush 후, 렌더 패스가 아직 활성인 동안 발생"
                 },
                 {
                     "name": "afterFrame",
-                    "type": "",
-                    "desc": "Fired after present() (swapchain committed, outside any pass)"
+                    "type": "Event<void>",
+                    "desc": "Fired after present() (swapchain committed, outside any pass)",
+                    "desc_ja": "present() 後に発火 (スワップチェーンコミット済み、いかなるパスの外)",
+                    "desc_ko": "present() 후에 발생 (스왑체인 커밋됨, 어떤 패스 밖)"
                 },
                 {
                     "name": "exit",
-                    "type": "",
-                    "desc": "Fired on app exit"
+                    "type": "Event<void>",
+                    "desc": "Fired on app exit",
+                    "desc_ja": "アプリ終了時に発火",
+                    "desc_ko": "앱 종료 시 발생"
                 },
                 {
                     "name": "exitRequested",
-                    "type": "",
-                    "desc": "Fired when an exit is requested; set args.cancel = true to cancel it"
+                    "type": "Event<ExitRequestEventArgs>",
+                    "desc": "Fired when an exit is requested; set args.cancel = true to cancel it",
+                    "desc_ja": "終了が要求されたときに発火。args.cancel = true でキャンセルする",
+                    "desc_ko": "종료가 요청될 때 발생. args.cancel = true 로 취소"
                 },
                 {
                     "name": "keyPressed",
-                    "type": "",
-                    "desc": "Fired when a key is pressed"
+                    "type": "Event<KeyEventArgs>",
+                    "desc": "Fired when a key is pressed",
+                    "desc_ja": "キーが押されたときに発火",
+                    "desc_ko": "키가 눌렸을 때 발생"
                 },
                 {
                     "name": "keyReleased",
-                    "type": "",
-                    "desc": "Fired when a key is released"
+                    "type": "Event<KeyEventArgs>",
+                    "desc": "Fired when a key is released",
+                    "desc_ja": "キーが離されたときに発火",
+                    "desc_ko": "키가 떼어졌을 때 발생"
                 },
                 {
                     "name": "mousePressed",
-                    "type": "",
-                    "desc": "Fired when a mouse button is pressed"
+                    "type": "Event<MouseEventArgs>",
+                    "desc": "Fired when a mouse button is pressed",
+                    "desc_ja": "マウスボタンが押されたときに発火",
+                    "desc_ko": "마우스 버튼이 눌렸을 때 발생"
                 },
                 {
                     "name": "mouseReleased",
-                    "type": "",
-                    "desc": "Fired when a mouse button is released"
+                    "type": "Event<MouseEventArgs>",
+                    "desc": "Fired when a mouse button is released",
+                    "desc_ja": "マウスボタンが離されたときに発火",
+                    "desc_ko": "마우스 버튼이 떼어졌을 때 발생"
                 },
                 {
                     "name": "mouseMoved",
-                    "type": "",
-                    "desc": "Fired when the mouse moves with no button held"
+                    "type": "Event<MouseMoveEventArgs>",
+                    "desc": "Fired when the mouse moves with no button held",
+                    "desc_ja": "ボタンを押さずにマウスが動いたときに発火",
+                    "desc_ko": "버튼을 누르지 않고 마우스가 움직일 때 발생"
                 },
                 {
                     "name": "mouseDragged",
-                    "type": "",
-                    "desc": "Fired when the mouse moves with a button held"
+                    "type": "Event<MouseDragEventArgs>",
+                    "desc": "Fired when the mouse moves with a button held",
+                    "desc_ja": "ボタンを押したままマウスが動いたときに発火",
+                    "desc_ko": "버튼을 누른 채 마우스가 움직일 때 발생"
                 },
                 {
                     "name": "mouseScrolled",
-                    "type": "",
-                    "desc": "Fired when the mouse wheel / trackpad scrolls"
+                    "type": "Event<ScrollEventArgs>",
+                    "desc": "Fired when the mouse wheel / trackpad scrolls",
+                    "desc_ja": "マウスホイール / トラックパッドがスクロールしたときに発火",
+                    "desc_ko": "마우스 휠 / 트랙패드가 스크롤될 때 발생"
                 },
                 {
                     "name": "windowResized",
-                    "type": "",
-                    "desc": "Fired when the window is resized"
+                    "type": "Event<ResizeEventArgs>",
+                    "desc": "Fired when the window is resized",
+                    "desc_ja": "ウィンドウがリサイズされたときに発火",
+                    "desc_ko": "윈도우가 리사이즈될 때 발생"
                 },
                 {
                     "name": "filesDropped",
-                    "type": "",
-                    "desc": "Fired when files are dropped onto the window"
+                    "type": "Event<DragDropEventArgs>",
+                    "desc": "Fired when files are dropped onto the window",
+                    "desc_ja": "ウィンドウにファイルがドロップされたときに発火",
+                    "desc_ko": "윈도우에 파일이 드롭될 때 발생"
                 },
                 {
                     "name": "clipboardPasted",
-                    "type": "",
-                    "desc": "Fired on a paste gesture (Cmd+V / Ctrl+V / browser paste); args.text holds the content"
+                    "type": "Event<ClipboardPastedEventArgs>",
+                    "desc": "Fired on a paste gesture (Cmd+V / Ctrl+V / browser paste); args.text holds the content",
+                    "desc_ja": "ペースト操作(Cmd+V / Ctrl+V / ブラウザのペースト)で発火。args.text に内容が入る",
+                    "desc_ko": "붙여넣기 동작(Cmd+V / Ctrl+V / 브라우저 붙여넣기)에서 발생. args.text에 내용이 담김"
                 },
                 {
                     "name": "console",
-                    "type": "",
-                    "desc": "Fired when a command line is received from stdin"
+                    "type": "Event<ConsoleEventArgs>",
+                    "desc": "Fired when a command line is received from stdin",
+                    "desc_ja": "stdin からコマンドラインを受け取ったときに発火",
+                    "desc_ko": "stdin에서 명령줄을 수신했을 때 발생"
                 },
                 {
                     "name": "touchPressed",
-                    "type": "",
-                    "desc": "Fired when a touch begins (Android/iOS, multi-touch)"
+                    "type": "Event<TouchEventArgs>",
+                    "desc": "Fired when a touch begins (Android/iOS, multi-touch)",
+                    "desc_ja": "タッチが開始したときに発火(Android/iOS、マルチタッチ)",
+                    "desc_ko": "터치가 시작될 때 발생(Android/iOS, 멀티터치)"
                 },
                 {
                     "name": "touchMoved",
-                    "type": "",
-                    "desc": "Fired when a touch moves (Android/iOS, multi-touch)"
+                    "type": "Event<TouchEventArgs>",
+                    "desc": "Fired when a touch moves (Android/iOS, multi-touch)",
+                    "desc_ja": "タッチが移動したときに発火(Android/iOS、マルチタッチ)",
+                    "desc_ko": "터치가 이동할 때 발생(Android/iOS, 멀티터치)"
                 },
                 {
                     "name": "touchReleased",
-                    "type": "",
-                    "desc": "Fired when a touch ends or is cancelled (check args.cancelled)"
+                    "type": "Event<TouchEventArgs>",
+                    "desc": "Fired when a touch ends or is cancelled (check args.cancelled)",
+                    "desc_ja": "タッチが終了またはキャンセルされたときに発火(args.cancelled を確認)",
+                    "desc_ko": "터치가 끝나거나 취소될 때 발생(args.cancelled 확인)"
                 },
                 {
                     "name": "rawEvent",
-                    "type": "",
-                    "desc": "Fired for every raw sokol_app event (for addons needing the full sapp_event)"
+                    "type": "Event<const sapp_event>",
+                    "desc": "Fired for every raw sokol_app event (for addons needing the full sapp_event)",
+                    "desc_ja": "すべての生の sokol_app イベントで発火(完全な sapp_event が必要なアドオン向け)",
+                    "desc_ko": "모든 원시 sokol_app 이벤트에서 발생(전체 sapp_event가 필요한 애드온용)"
                 }
             ]
         },
@@ -18224,13 +18291,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "channels",
-                    "type": "",
-                    "desc": "Channel count of the source (1 = mono, 2 = stereo, ...)"
+                    "type": "int",
+                    "desc": "Channel count of the source (1 = mono, 2 = stereo, ...)",
+                    "desc_ja": "ソースのチャンネル数(1 = mono、2 = stereo、...)",
+                    "desc_ko": "소스의 채널 수(1 = mono, 2 = stereo, ...)"
                 },
                 {
                     "name": "sampleRate",
-                    "type": "",
-                    "desc": "Source sample rate in Hz"
+                    "type": "int",
+                    "desc": "Source sample rate in Hz",
+                    "desc_ja": "ソースのサンプルレート(Hz)",
+                    "desc_ko": "소스의 샘플레이트(Hz)"
                 }
             ],
             "methods": [
@@ -18284,13 +18355,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "samples",
-                    "type": "",
-                    "desc": "Interleaved PCM samples (channels interleaved per frame)"
+                    "type": "std::vector<float>",
+                    "desc": "Interleaved PCM samples (channels interleaved per frame)",
+                    "desc_ja": "interleavedなPCMサンプル(フレームごとにチャンネルがinterleave)",
+                    "desc_ko": "interleaved PCM 샘플(프레임마다 채널이 interleave됨)"
                 },
                 {
                     "name": "numSamples",
-                    "type": "",
-                    "desc": "Number of samples per channel (frame count)"
+                    "type": "size_t",
+                    "desc": "Number of samples per channel (frame count)",
+                    "desc_ja": "チャンネルあたりのサンプル数(フレーム数)",
+                    "desc_ko": "채널당 샘플 수(프레임 수)"
                 }
             ],
             "methods": [
@@ -18404,7 +18479,7 @@ const TrussCAPI = {
                     "name": "loadPcmFromMemory",
                     "return": "bool",
                     "signatures": [
-                        "const void * data, size_t dataSize, int numChannels, int rate, int bitsPerSample = …, bool bigEndian = …"
+                        "const void * data, size_t dataSize, int numChannels, int rate, int bitsPerSample = 16, bool bigEndian = false"
                     ],
                     "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths."
                 },
@@ -18420,7 +18495,7 @@ const TrussCAPI = {
                     "name": "generateSineWave",
                     "return": "void",
                     "signatures": [
-                        "float frequency, float duration, float volume = …, int sr = …"
+                        "float frequency, float duration, float volume = 0.5, int sr = 44100"
                     ],
                     "desc": "Fill the buffer with a mono sine wave of the given frequency (Hz) and duration (seconds)."
                 },
@@ -18428,7 +18503,7 @@ const TrussCAPI = {
                     "name": "generateSquareWave",
                     "return": "void",
                     "signatures": [
-                        "float frequency, float duration, float volume = …, int sr = …"
+                        "float frequency, float duration, float volume = 0.5, int sr = 44100"
                     ],
                     "desc": "Fill the buffer with a mono square wave."
                 },
@@ -18436,7 +18511,7 @@ const TrussCAPI = {
                     "name": "generateTriangleWave",
                     "return": "void",
                     "signatures": [
-                        "float frequency, float duration, float volume = …, int sr = …"
+                        "float frequency, float duration, float volume = 0.5, int sr = 44100"
                     ],
                     "desc": "Fill the buffer with a mono triangle wave."
                 },
@@ -18444,7 +18519,7 @@ const TrussCAPI = {
                     "name": "generateSawtoothWave",
                     "return": "void",
                     "signatures": [
-                        "float frequency, float duration, float volume = …, int sr = …"
+                        "float frequency, float duration, float volume = 0.5, int sr = 44100"
                     ],
                     "desc": "Fill the buffer with a mono sawtooth wave."
                 },
@@ -18452,7 +18527,7 @@ const TrussCAPI = {
                     "name": "generateNoise",
                     "return": "void",
                     "signatures": [
-                        "float duration, float volume = …, int sr = …"
+                        "float duration, float volume = 0.5, int sr = 44100"
                     ],
                     "desc": "Fill the buffer with mono white noise."
                 },
@@ -18460,7 +18535,7 @@ const TrussCAPI = {
                     "name": "generatePinkNoise",
                     "return": "void",
                     "signatures": [
-                        "float duration, float volume = …, int sr = …"
+                        "float duration, float volume = 0.5, int sr = 44100"
                     ],
                     "desc": "Fill the buffer with mono pink noise (1/f spectrum, Paul Kellet's method)."
                 },
@@ -18468,7 +18543,7 @@ const TrussCAPI = {
                     "name": "generateSilence",
                     "return": "void",
                     "signatures": [
-                        "float duration, int sr = …"
+                        "float duration, int sr = 44100"
                     ],
                     "desc": "Fill the buffer with silence of the given duration (useful as a base for mixFrom)."
                 },
@@ -18484,7 +18559,7 @@ const TrussCAPI = {
                     "name": "mixFrom",
                     "return": "void",
                     "signatures": [
-                        "const SoundBuffer & other, size_t offsetSamples, float volume = …"
+                        "const SoundBuffer & other, size_t offsetSamples, float volume = 1.0"
                     ],
                     "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed."
                 },
@@ -18510,7 +18585,7 @@ const TrussCAPI = {
                     "name": "createAdtsHeader",
                     "return": "void",
                     "signatures": [
-                        "uint8_t * header, int frameLength, int sampleRate, int channels, int profile = …"
+                        "uint8_t * header, int frameLength, int sampleRate, int channels, int profile = 2"
                     ],
                     "desc": "Write a 7-byte ADTS header for one raw AAC frame into header (AAC-in-MOV container helper)."
                 }
@@ -18543,7 +18618,7 @@ const TrussCAPI = {
                     "name": "loadStream",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, int maxPolyphony = …"
+                        "const std::string & path, int maxPolyphony = 1"
                     ],
                     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported.",
                     "platformNote": "Streaming audio (Sound::loadStream / SoundStream). On wasm it is unsupported (needs std::thread + on-disk file I/O, neither available in the default browser build); Sound::loadStream() logs a warning and silently falls back to eager load(). So you always get a Sound, but it is never actually streamed on web — branch on isStreaming() / __EMSCRIPTEN__ if it matters.",
@@ -18596,68 +18671,94 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "buffer",
-                    "type": "",
-                    "desc": ""
+                    "type": "std::shared_ptr<SoundSource>",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "stream",
-                    "type": "",
-                    "desc": ""
+                    "type": "std::shared_ptr<internal::StreamInstance>",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "volume",
-                    "type": "",
-                    "desc": "Playback volume (0.0-1.0). Stored as an atomic; safe to set from the UI thread while playing."
+                    "type": "std::atomic<float>",
+                    "desc": "Playback volume (0.0-1.0). Stored as an atomic; safe to set from the UI thread while playing.",
+                    "desc_ja": "再生音量 (0.0-1.0)。atomic 格納で、再生中に UI thread から設定して安全",
+                    "desc_ko": "재생 음량 (0.0-1.0). atomic 저장이라 재생 중 UI 스레드에서 설정해도 안전"
                 },
                 {
                     "name": "pan",
-                    "type": "",
-                    "desc": "Stereo pan (-1.0 left, 0.0 center, 1.0 right). Atomic."
+                    "type": "std::atomic<float>",
+                    "desc": "Stereo pan (-1.0 left, 0.0 center, 1.0 right). Atomic.",
+                    "desc_ja": "ステレオパン (-1.0 左, 0.0 中央, 1.0 右)。atomic",
+                    "desc_ko": "스테레오 팬 (-1.0 왼쪽, 0.0 중앙, 1.0 오른쪽). atomic"
                 },
                 {
                     "name": "speed",
-                    "type": "",
-                    "desc": "Playback speed (0.5 half, 1.0 normal, 2.0 double). Atomic."
+                    "type": "std::atomic<float>",
+                    "desc": "Playback speed (0.5 half, 1.0 normal, 2.0 double). Atomic.",
+                    "desc_ja": "再生速度 (0.5 半分, 1.0 標準, 2.0 倍)。atomic",
+                    "desc_ko": "재생 속도 (0.5 절반, 1.0 일반, 2.0 두 배). atomic"
                 },
                 {
                     "name": "loop",
-                    "type": "",
-                    "desc": "Loop the voice when it reaches the end. Atomic."
+                    "type": "std::atomic<bool>",
+                    "desc": "Loop the voice when it reaches the end. Atomic.",
+                    "desc_ja": "末尾に達したらループ再生する。atomic",
+                    "desc_ko": "끝에 도달하면 반복 재생. atomic"
                 },
                 {
                     "name": "playing",
-                    "type": "",
-                    "desc": "True while this voice is active in the mixer. Atomic."
+                    "type": "std::atomic<bool>",
+                    "desc": "True while this voice is active in the mixer. Atomic.",
+                    "desc_ja": "ミキサーでこのボイスがアクティブな間 true。atomic",
+                    "desc_ko": "믹서에서 이 보이스가 활성인 동안 true. atomic"
                 },
                 {
                     "name": "paused",
-                    "type": "",
-                    "desc": "True while paused (still a live voice, but not advancing). Atomic."
+                    "type": "std::atomic<bool>",
+                    "desc": "True while paused (still a live voice, but not advancing). Atomic.",
+                    "desc_ja": "一時停止中 true (ボイスは生きているが進まない)。atomic",
+                    "desc_ko": "일시정지 중 true (보이스는 살아있지만 진행하지 않음). atomic"
                 },
                 {
                     "name": "mixMode",
-                    "type": "",
-                    "desc": "Channel mix policy when no explicit channelMap is set (Auto / DownmixMono). Stored as an atomic int holding the MixMode value."
+                    "type": "std::atomic<int>",
+                    "desc": "Channel mix policy when no explicit channelMap is set (Auto / DownmixMono). Stored as an atomic int holding the MixMode value.",
+                    "desc_ja": "明示的な channelMap が無いときのチャンネルミックス方針 (Auto / DownmixMono)。MixMode 値を保持する atomic int で格納",
+                    "desc_ko": "명시적 channelMap이 없을 때의 채널 믹스 정책 (Auto / DownmixMono). MixMode 값을 가지는 atomic int로 저장"
                 },
                 {
                     "name": "channelMap",
-                    "type": "",
-                    "desc": "Atomically-swappable per-output-channel source routing. Null means follow mixMode; non-null map is the source of truth. UI thread installs new versions, audio thread reads each callback."
+                    "type": "internal::AtomicSharedPtr<const std::vector<std::vector<int>>>",
+                    "desc": "Atomically-swappable per-output-channel source routing. Null means follow mixMode; non-null map is the source of truth. UI thread installs new versions, audio thread reads each callback.",
+                    "desc_ja": "出力チャンネルごとのソースルーティング (atomic 差し替え可)。null なら mixMode に従い、非 null のマップが真実。UI thread が新版を入れ、audio thread が各コールバックで読む",
+                    "desc_ko": "출력 채널별 소스 라우팅 (atomic 교체 가능). null이면 mixMode를 따르고, non-null 맵이 기준. UI 스레드가 새 버전을 넣고 오디오 스레드가 콜백마다 읽음"
                 },
                 {
                     "name": "channelGains",
-                    "type": "",
-                    "desc": "Atomically-swappable per-output-channel gain multipliers. Entries beyond .size() default to 1.0. Orthogonal to channelMap / mixMode."
+                    "type": "internal::AtomicSharedPtr<const std::vector<float>>",
+                    "desc": "Atomically-swappable per-output-channel gain multipliers. Entries beyond .size() default to 1.0. Orthogonal to channelMap / mixMode.",
+                    "desc_ja": "出力チャンネルごとのゲイン乗数 (atomic 差し替え可)。.size() を超える要素は 1.0。channelMap / mixMode と直交",
+                    "desc_ko": "출력 채널별 게인 배수 (atomic 교체 가능). .size()를 넘는 항목은 1.0. channelMap / mixMode와 직교"
                 },
                 {
                     "name": "positionF",
-                    "type": "",
-                    "desc": "Floating-point playback cursor in source samples; advances by speed * rateRatio each output frame."
+                    "type": "double",
+                    "desc": "Floating-point playback cursor in source samples; advances by speed * rateRatio each output frame.",
+                    "desc_ja": "ソースサンプル単位の浮動小数点再生カーソル。各出力フレームで speed * rateRatio ずつ進む",
+                    "desc_ko": "소스 샘플 단위의 부동소수점 재생 커서. 각 출력 프레임마다 speed * rateRatio 만큼 진행"
                 },
                 {
                     "name": "rateRatio",
-                    "type": "",
-                    "desc": "Source-to-engine sample-rate ratio (buffer sampleRate / engine sampleRate), set when queued so the voice plays at correct pitch regardless of engine rate."
+                    "type": "float",
+                    "desc": "Source-to-engine sample-rate ratio (buffer sampleRate / engine sampleRate), set when queued so the voice plays at correct pitch regardless of engine rate.",
+                    "desc_ja": "ソース対エンジンのサンプルレート比 (buffer sampleRate / engine sampleRate)。キュー時に設定され、エンジンレートに依らず正しいピッチで再生される",
+                    "desc_ko": "소스 대 엔진 샘플레이트 비율 (buffer sampleRate / engine sampleRate). 큐 등록 시 설정되어 엔진 레이트와 무관하게 올바른 피치로 재생"
                 }
             ]
         },
@@ -18691,28 +18792,38 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "sampleRate",
-                    "type": "",
-                    "desc": "Engine output sample rate in Hz (default 96000)"
+                    "type": "int",
+                    "desc": "Engine output sample rate in Hz (default 96000)",
+                    "desc_ja": "エンジン出力サンプルレート (Hz、デフォルト 96000)",
+                    "desc_ko": "엔진 출력 샘플레이트 (Hz, 기본값 96000)"
                 },
                 {
                     "name": "channels",
-                    "type": "",
-                    "desc": "Output channel count (1 = mono, 2 = stereo; default 2)"
+                    "type": "int",
+                    "desc": "Output channel count (1 = mono, 2 = stereo; default 2)",
+                    "desc_ja": "出力チャンネル数 (1 = モノラル、2 = ステレオ、デフォルト 2)",
+                    "desc_ko": "출력 채널 수 (1 = 모노, 2 = 스테레오, 기본값 2)"
                 },
                 {
                     "name": "bufferSize",
-                    "type": "",
-                    "desc": "Requested device buffer size in frames; 0 = let miniaudio choose"
+                    "type": "int",
+                    "desc": "Requested device buffer size in frames; 0 = let miniaudio choose",
+                    "desc_ja": "要求するデバイスバッファサイズ (フレーム単位)、0 = miniaudio に任せる",
+                    "desc_ko": "요청하는 디바이스 버퍼 크기 (프레임 단위), 0 = miniaudio 가 선택"
                 },
                 {
                     "name": "maxPolyphony",
-                    "type": "",
-                    "desc": "Max simultaneously-playing Sound voices (default 32)"
+                    "type": "int",
+                    "desc": "Max simultaneously-playing Sound voices (default 32)",
+                    "desc_ja": "同時再生可能な Sound ボイスの最大数 (デフォルト 32)",
+                    "desc_ko": "동시 재생 가능한 Sound 보이스 최대 수 (기본값 32)"
                 },
                 {
                     "name": "deviceName",
-                    "type": "",
-                    "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate."
+                    "type": "std::string",
+                    "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate.",
+                    "desc_ja": "再生デバイス名、空 = システム既定。列挙には AudioEngine::listDevices() を使う",
+                    "desc_ko": "재생 디바이스 이름, 비어 있으면 시스템 기본값. 열거에는 AudioEngine::listDevices() 사용"
                 }
             ]
         },
@@ -18746,13 +18857,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "name",
-                    "type": "",
-                    "desc": "Device name (pass to AudioSettings::deviceName)"
+                    "type": "std::string",
+                    "desc": "Device name (pass to AudioSettings::deviceName)",
+                    "desc_ja": "デバイス名 (AudioSettings::deviceName へ渡す)",
+                    "desc_ko": "디바이스 이름 (AudioSettings::deviceName 에 전달)"
                 },
                 {
                     "name": "isDefault",
-                    "type": "",
-                    "desc": "True if this is the system default playback device"
+                    "type": "bool",
+                    "desc": "True if this is the system default playback device",
+                    "desc_ja": "システム既定の再生デバイスなら true",
+                    "desc_ko": "시스템 기본 재생 디바이스이면 true"
                 }
             ]
         },
@@ -18781,33 +18896,45 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "deviceName",
-                    "type": "",
-                    "desc": "Actual device name now active (resolved, never empty)"
+                    "type": "std::string",
+                    "desc": "Actual device name now active (resolved, never empty)",
+                    "desc_ja": "現在アクティブな実デバイス名 (解決済み、空にならない)",
+                    "desc_ko": "현재 활성화된 실제 디바이스 이름 (해석됨, 비지 않음)"
                 },
                 {
                     "name": "isDefaultDevice",
-                    "type": "",
-                    "desc": "True when the opened device is the OS's current default playback device"
+                    "type": "bool",
+                    "desc": "True when the opened device is the OS's current default playback device",
+                    "desc_ja": "開いたデバイスが OS の現在の既定再生デバイスのとき true",
+                    "desc_ko": "연 디바이스가 OS 의 현재 기본 재생 디바이스일 때 true"
                 },
                 {
                     "name": "sampleRate",
-                    "type": "",
-                    "desc": "Active engine sample rate in Hz"
+                    "type": "int",
+                    "desc": "Active engine sample rate in Hz",
+                    "desc_ja": "アクティブなエンジンのサンプルレート (Hz)",
+                    "desc_ko": "활성 엔진 샘플레이트 (Hz)"
                 },
                 {
                     "name": "channels",
-                    "type": "",
-                    "desc": "Active output channel count"
+                    "type": "int",
+                    "desc": "Active output channel count",
+                    "desc_ja": "アクティブな出力チャンネル数",
+                    "desc_ko": "활성 출력 채널 수"
                 },
                 {
                     "name": "bufferSize",
-                    "type": "",
-                    "desc": "Active device buffer size in frames"
+                    "type": "int",
+                    "desc": "Active device buffer size in frames",
+                    "desc_ja": "アクティブなデバイスバッファサイズ (フレーム単位)",
+                    "desc_ko": "활성 디바이스 버퍼 크기 (프레임 단위)"
                 },
                 {
                     "name": "maxPolyphony",
-                    "type": "",
-                    "desc": "Active max polyphony"
+                    "type": "int",
+                    "desc": "Active max polyphony",
+                    "desc_ja": "アクティブな最大ポリフォニー",
+                    "desc_ko": "활성 최대 폴리포니"
                 }
             ]
         },
@@ -18842,28 +18969,38 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "data",
-                    "type": "",
-                    "desc": "Interleaved mutable output, frameCount * channels samples"
+                    "type": "float *",
+                    "desc": "Interleaved mutable output, frameCount * channels samples",
+                    "desc_ja": "インターリーブされた可変出力、frameCount * channels サンプル",
+                    "desc_ko": "인터리브된 가변 출력, frameCount * channels 샘플"
                 },
                 {
                     "name": "frameCount",
-                    "type": "",
-                    "desc": "Number of frames in this callback"
+                    "type": "int",
+                    "desc": "Number of frames in this callback",
+                    "desc_ja": "このコールバックのフレーム数",
+                    "desc_ko": "이 콜백의 프레임 수"
                 },
                 {
                     "name": "channels",
-                    "type": "",
-                    "desc": "Channel count (floats per frame)"
+                    "type": "int",
+                    "desc": "Channel count (floats per frame)",
+                    "desc_ja": "チャンネル数 (フレームあたりの float 数)",
+                    "desc_ko": "채널 수 (프레임당 float 수)"
                 },
                 {
                     "name": "sampleRate",
-                    "type": "",
-                    "desc": "Engine output sample rate in Hz"
+                    "type": "int",
+                    "desc": "Engine output sample rate in Hz",
+                    "desc_ja": "エンジン出力サンプルレート (Hz)",
+                    "desc_ko": "엔진 출력 샘플레이트 (Hz)"
                 },
                 {
                     "name": "framePosition",
-                    "type": "",
-                    "desc": "Monotonic count of output frames emitted since engine init (sample-accurate time/phase reference)"
+                    "type": "uint64_t",
+                    "desc": "Monotonic count of output frames emitted since engine init (sample-accurate time/phase reference)",
+                    "desc_ja": "エンジン初期化以降に出力したフレームの単調カウント (サンプル精度の時間/位相基準)",
+                    "desc_ko": "엔진 초기화 이후 출력한 프레임의 단조 카운트 (샘플 정밀도의 시간/위상 기준)"
                 }
             ]
         },
@@ -18888,28 +19025,38 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "data",
-                    "type": "",
-                    "desc": "Interleaved read-only mic input, frameCount * channels samples"
+                    "type": "const float *",
+                    "desc": "Interleaved read-only mic input, frameCount * channels samples",
+                    "desc_ja": "インターリーブされた読み取り専用マイク入力、frameCount * channels サンプル",
+                    "desc_ko": "인터리브된 읽기 전용 마이크 입력, frameCount * channels 샘플"
                 },
                 {
                     "name": "frameCount",
-                    "type": "",
-                    "desc": "Number of frames in this callback"
+                    "type": "int",
+                    "desc": "Number of frames in this callback",
+                    "desc_ja": "このコールバックのフレーム数",
+                    "desc_ko": "이 콜백의 프레임 수"
                 },
                 {
                     "name": "channels",
-                    "type": "",
-                    "desc": "Channel count (floats per frame)"
+                    "type": "int",
+                    "desc": "Channel count (floats per frame)",
+                    "desc_ja": "チャンネル数 (フレームあたりの float 数)",
+                    "desc_ko": "채널 수 (프레임당 float 수)"
                 },
                 {
                     "name": "sampleRate",
-                    "type": "",
-                    "desc": "Input sample rate in Hz"
+                    "type": "int",
+                    "desc": "Input sample rate in Hz",
+                    "desc_ja": "入力サンプルレート (Hz)",
+                    "desc_ko": "입력 샘플레이트 (Hz)"
                 },
                 {
                     "name": "framePosition",
-                    "type": "",
-                    "desc": "Monotonic count of input frames received since capture start"
+                    "type": "uint64_t",
+                    "desc": "Monotonic count of input frames received since capture start",
+                    "desc_ja": "キャプチャ開始以降に受信した入力フレームの単調カウント",
+                    "desc_ko": "캡처 시작 이후 수신한 입력 프레임의 단조 카운트"
                 }
             ]
         },
@@ -18945,18 +19092,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "audioOut",
-                    "type": "",
-                    "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
+                    "type": "Event<AudioOutBuffer>",
+                    "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe.",
+                    "desc_ja": "リアルタイム再生コールバック event。listen() でシンセ / 処理用 listener を追加。各バッファごとに audio thread で発火、RT-safe を維持",
+                    "desc_ko": "실시간 재생 콜백 이벤트. listen()으로 신스 / 처리 리스너 추가. 버퍼별로 오디오 스레드에서 발화, RT-safe 유지"
                 },
                 {
                     "name": "audioIn",
-                    "type": "",
-                    "desc": "Real-time capture callback event (microphone input). listen() to add an input-processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
+                    "type": "Event<AudioInBuffer>",
+                    "desc": "Real-time capture callback event (microphone input). listen() to add an input-processing listener. Fires per audio buffer on the audio thread; keep RT-safe.",
+                    "desc_ja": "リアルタイム入力コールバック event (マイク入力)。listen() で入力処理用 listener を追加。各バッファごとに audio thread で発火、RT-safe を維持",
+                    "desc_ko": "실시간 입력 콜백 이벤트 (마이크 입력). listen()으로 입력 처리 리스너 추가. 버퍼별로 오디오 스레드에서 발화, RT-safe 유지"
                 },
                 {
                     "name": "audioDeviceChanged",
-                    "type": "",
-                    "desc": "Fires after every successful init() (initial AND re-init). Args carry the resolved device's real name, isDefaultDevice flag, sampleRate, channels, bufferSize, maxPolyphony. Listener runs on the thread that called init() (main), not the audio thread."
+                    "type": "Event<AudioDeviceChangedArgs>",
+                    "desc": "Fires after every successful init() (initial AND re-init). Args carry the resolved device's real name, isDefaultDevice flag, sampleRate, channels, bufferSize, maxPolyphony. Listener runs on the thread that called init() (main), not the audio thread.",
+                    "desc_ja": "成功した init() (初回 / 再 init) 後に発火。args は解決済みデバイス名、isDefaultDevice、sampleRate、channels、bufferSize、maxPolyphony。listener は init() を呼んだスレッド (通常 main) で実行",
+                    "desc_ko": "성공한 init() (초기 / 재 init) 후 발화. args는 해결된 장치명, isDefaultDevice, sampleRate, channels, bufferSize, maxPolyphony. listener는 init()을 호출한 스레드 (보통 main)에서 실행"
                 }
             ],
             "methods": [
@@ -19110,7 +19263,7 @@ const TrussCAPI = {
                     "name": "loadStream",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, int maxPolyphony = …"
+                        "const std::string & path, int maxPolyphony = 1"
                     ],
                     "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count.",
                     "platforms": [
@@ -19127,7 +19280,7 @@ const TrussCAPI = {
                     "name": "loadTestTone",
                     "return": "void",
                     "signatures": [
-                        "float frequency = …, float duration = …"
+                        "float frequency = 440.0, float duration = 1.0"
                     ],
                     "desc": "Load a generated sine test tone (no file needed). Handy for verifying audio output."
                 },
@@ -19386,7 +19539,7 @@ const TrussCAPI = {
                     "name": "start",
                     "return": "bool",
                     "signatures": [
-                        "int sampleRate = …"
+                        "int sampleRate = DEFAULT_SAMPLE_RATE"
                     ],
                     "desc": "Open the microphone device at the given sample rate and begin capturing. Returns false on failure."
                 },
@@ -19460,18 +19613,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "filePath",
-                    "type": "",
-                    "desc": "Full path to the chosen file"
+                    "type": "std::string",
+                    "desc": "Full path to the chosen file",
+                    "desc_ja": "選択されたファイルのフルパス",
+                    "desc_ko": "선택된 파일의 전체 경로"
                 },
                 {
                     "name": "fileName",
-                    "type": "",
-                    "desc": "Filename only (no directory)"
+                    "type": "std::string",
+                    "desc": "Filename only (no directory)",
+                    "desc_ja": "ファイル名のみ (ディレクトリなし)",
+                    "desc_ko": "파일 이름만 (디렉터리 제외)"
                 },
                 {
                     "name": "success",
-                    "type": "",
-                    "desc": "true if a file was chosen, false if the dialog was cancelled"
+                    "type": "bool",
+                    "desc": "true if a file was chosen, false if the dialog was cancelled",
+                    "desc_ja": "ファイルが選択されれば true、ダイアログがキャンセルされれば false",
+                    "desc_ko": "파일이 선택되면 true, 대화상자가 취소되면 false"
                 }
             ]
         },
@@ -19484,8 +19643,10 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "members",
-                    "type": "",
-                    "desc": ""
+                    "type": "Json",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "methods": [
@@ -19536,18 +19697,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "applied",
-                    "type": "",
-                    "desc": ""
+                    "type": "std::vector<std::string>",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "skipped",
-                    "type": "",
-                    "desc": ""
+                    "type": "std::vector<std::string>",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "readOnly",
-                    "type": "",
-                    "desc": ""
+                    "type": "std::vector<std::string>",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "methods": [
@@ -19642,7 +19809,7 @@ const TrussCAPI = {
                     "name": "save",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, const std::string & indent = …"
+                        "const std::string & path, const std::string & indent = std::string(\"  \")"
                     ],
                     "desc": "Save the document to a file. Relative paths are resolved via getDataPath. indent sets the per-level indentation string. Returns true on success."
                 },
@@ -19650,7 +19817,7 @@ const TrussCAPI = {
                     "name": "toString",
                     "return": "std::string",
                     "signatures": [
-                        "const std::string & indent = …"
+                        "const std::string & indent = std::string(\"  \")"
                     ],
                     "desc": "Serialize the document to an XML string. indent sets the per-level indentation string."
                 },
@@ -19700,7 +19867,7 @@ const TrussCAPI = {
                     "name": "addDeclaration",
                     "return": "void",
                     "signatures": [
-                        "const std::string & version = …, const std::string & encoding = …"
+                        "const std::string & version = std::string(\"1.0\"), const std::string & encoding = std::string(\"UTF-8\")"
                     ],
                     "desc": "Prepend an XML declaration (<?xml ...?>) with the given version and encoding."
                 }
@@ -19743,7 +19910,7 @@ const TrussCAPI = {
                     "name": "open",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, bool append = …"
+                        "const std::string & path, bool append = false"
                     ],
                     "desc": "Open file for writing"
                 },
@@ -19777,7 +19944,7 @@ const TrussCAPI = {
                     "name": "writeLine",
                     "return": "FileWriter &",
                     "signatures": [
-                        "const std::string & text = …"
+                        "const std::string & text = std::string(\"\")"
                     ],
                     "desc": "Write line with newline"
                 },
@@ -19930,143 +20097,6 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "Shader",
-            "desc": "GPU shader program (vertex + fragment) with a begin/end/setUniform API for custom-shaded drawing",
-            "keywords": [
-                "glsl",
-                "program",
-                "material",
-                "effect",
-                "fragment"
-            ],
-            "desc_ja": "GPU シェーダープログラム（頂点＋フラグメント）。begin/end/setUniform API でカスタムシェーダー描画を行う",
-            "desc_ko": "GPU 셰이더 프로그램(버텍스 + 프래그먼트); begin/end/setUniform API로 커스텀 셰이딩 그리기를 수행",
-            "examples": [
-                {
-                    "name": "shaderExample",
-                    "group": "graphics"
-                }
-            ],
-            "related": [
-                "FullscreenShader",
-                "setUniform",
-                "setTexture",
-                "pushShader",
-                "Fbo"
-            ],
-            "methods": [
-                {
-                    "name": "load",
-                    "return": "bool",
-                    "signatures": [
-                        "const sg_shader_desc *(*)(sg_backend) descFn"
-                    ],
-                    "desc": "Load from sokol-shdc generated function"
-                },
-                {
-                    "name": "clear",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "isLoaded",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if shader is loaded"
-                },
-                {
-                    "name": "begin",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Begin shader (pushes to stack)"
-                },
-                {
-                    "name": "end",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "End shader (pops from stack)"
-                },
-                {
-                    "name": "setUniform",
-                    "return": "void",
-                    "signatures": [
-                        "int slot, float value",
-                        "int slot, const Vec2 & v",
-                        "int slot, const Vec3 & v",
-                        "int slot, const Vec4 & v",
-                        "int slot, const Color & c",
-                        "int slot, const std::vector<float> & v",
-                        "int slot, const std::vector<Vec2> & v",
-                        "int slot, const std::vector<Vec3> & v",
-                        "int slot, const std::vector<Vec4> & v",
-                        "int slot, const void * data, size_t size"
-                    ],
-                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
-                },
-                {
-                    "name": "storeUniform",
-                    "return": "void",
-                    "signatures": [
-                        "int slot, const void * data, size_t size"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "applyUniforms",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setTexture",
-                    "return": "void",
-                    "signatures": [
-                        "int slot, sg_image image, sg_sampler sampler",
-                        "int slot, sg_view view, sg_sampler sampler"
-                    ],
-                    "desc": "Bind texture to slot"
-                },
-                {
-                    "name": "submitVertices",
-                    "return": "void",
-                    "signatures": [
-                        "const ShaderVertex * data, int count, PrimitiveType type"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "executeDeferredDraw",
-                    "return": "void",
-                    "signatures": [
-                        "const std::vector<ShaderVertex> & vertices, PrimitiveType type"
-                    ],
-                    "desc": ""
-                }
-            ],
-            "operators": [
-                {
-                    "symbol": "=",
-                    "signature": "Shader = Shader & → Shader &",
-                    "cpp": "Shader & operator=(Shader &&)",
-                    "free": false,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                }
-            ]
-        },
-        {
             "name": "ShaderVertex",
             "desc": "",
             "keywords": [],
@@ -20075,48 +20105,66 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "x",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "y",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "z",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "u",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "v",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "r",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "g",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "b",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "a",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ]
         },
@@ -20129,18 +20177,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "mode",
-                    "type": "",
-                    "desc": "Tessellation mode: adaptive Tolerance or fixed Resolution"
+                    "type": "Mode",
+                    "desc": "Tessellation mode: adaptive Tolerance or fixed Resolution",
+                    "desc_ja": "テッセレーションモード: 適応 Tolerance か固定 Resolution",
+                    "desc_ko": "테셀레이션 모드: 적응형 Tolerance 또는 고정 Resolution"
                 },
                 {
                     "name": "tolerance",
-                    "type": "",
-                    "desc": "Maximum chord-to-curve error in screen pixels (Tolerance mode)"
+                    "type": "float",
+                    "desc": "Maximum chord-to-curve error in screen pixels (Tolerance mode)",
+                    "desc_ja": "画面ピクセルでの弦-曲線の最大誤差（Tolerance モード）",
+                    "desc_ko": "화면 픽셀 단위 현-곡선 최대 오차(Tolerance 모드)"
                 },
                 {
                     "name": "resolution",
-                    "type": "",
-                    "desc": "Fixed segment count used in Resolution mode (and as a fallback)"
+                    "type": "int",
+                    "desc": "Fixed segment count used in Resolution mode (and as a fallback)",
+                    "desc_ja": "Resolution モードで使う固定セグメント数（フォールバックにも使用）",
+                    "desc_ko": "Resolution 모드에서 사용하는 고정 세그먼트 수(폴백으로도 사용)"
                 }
             ]
         },
@@ -20164,23 +20218,31 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "updateFps",
-                    "type": "",
-                    "desc": "Target update rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
+                    "type": "float",
+                    "desc": "Target update rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps",
+                    "desc_ja": "目標 update レート: VSYNC (-1)、EVENT_DRIVEN (0)、または固定 fps",
+                    "desc_ko": "목표 update 레이트: VSYNC (-1), EVENT_DRIVEN (0), 또는 고정 fps"
                 },
                 {
                     "name": "drawFps",
-                    "type": "",
-                    "desc": "Target draw rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
+                    "type": "float",
+                    "desc": "Target draw rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps",
+                    "desc_ja": "目標 draw レート: VSYNC (-1)、EVENT_DRIVEN (0)、または固定 fps",
+                    "desc_ko": "목표 draw 레이트: VSYNC (-1), EVENT_DRIVEN (0), 또는 고정 fps"
                 },
                 {
                     "name": "actualVsyncFps",
-                    "type": "",
-                    "desc": "Actual monitor refresh rate (0 if unknown)"
+                    "type": "float",
+                    "desc": "Actual monitor refresh rate (0 if unknown)",
+                    "desc_ja": "実際のモニターのリフレッシュレート (不明なら 0)",
+                    "desc_ko": "실제 모니터 리프레시 레이트 (알 수 없으면 0)"
                 },
                 {
                     "name": "synced",
-                    "type": "",
-                    "desc": "true when update and draw run in sync (1:1)"
+                    "type": "bool",
+                    "desc": "true when update and draw run in sync (1:1)",
+                    "desc_ja": "update と draw が同期 (1:1) で動くとき true",
+                    "desc_ko": "update와 draw가 동기(1:1)로 실행될 때 true"
                 }
             ]
         },
@@ -20206,53 +20268,73 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "width",
-                    "type": "",
-                    "desc": "Window width (default 1280)"
+                    "type": "int",
+                    "desc": "Window width (default 1280)",
+                    "desc_ja": "ウィンドウ幅 (デフォルト 1280)",
+                    "desc_ko": "윈도우 너비 (기본값 1280)"
                 },
                 {
                     "name": "height",
-                    "type": "",
-                    "desc": "Window height (default 720)"
+                    "type": "int",
+                    "desc": "Window height (default 720)",
+                    "desc_ja": "ウィンドウ高さ (デフォルト 720)",
+                    "desc_ko": "윈도우 높이 (기본값 720)"
                 },
                 {
                     "name": "title",
-                    "type": "",
-                    "desc": "Window title (default \"TrussC App\")"
+                    "type": "std::string",
+                    "desc": "Window title (default \"TrussC App\")",
+                    "desc_ja": "ウィンドウタイトル (デフォルト \\\"TrussC App\\\")",
+                    "desc_ko": "윈도우 제목 (기본값 \\\"TrussC App\\\")"
                 },
                 {
                     "name": "highDpi",
-                    "type": "",
-                    "desc": "High DPI support for sharp rendering on Retina (default true)"
+                    "type": "bool",
+                    "desc": "High DPI support for sharp rendering on Retina (default true)",
+                    "desc_ja": "Retina でのシャープな描画のための High DPI 対応 (デフォルト true)",
+                    "desc_ko": "Retina에서 선명한 렌더링을 위한 High DPI 지원 (기본값 true)"
                 },
                 {
                     "name": "pixelPerfect",
-                    "type": "",
-                    "desc": "true: coords match framebuffer size; false: coords use logical size (default false)"
+                    "type": "bool",
+                    "desc": "true: coords match framebuffer size; false: coords use logical size (default false)",
+                    "desc_ja": "true: 座標が framebuffer サイズに一致、false: 論理サイズを使用 (デフォルト false)",
+                    "desc_ko": "true: 좌표가 framebuffer 크기와 일치, false: 논리 크기 사용 (기본값 false)"
                 },
                 {
                     "name": "sampleCount",
-                    "type": "",
-                    "desc": "MSAA sample count (default 4)"
+                    "type": "int",
+                    "desc": "MSAA sample count (default 4)",
+                    "desc_ja": "MSAA サンプル数 (デフォルト 4)",
+                    "desc_ko": "MSAA 샘플 수 (기본값 4)"
                 },
                 {
                     "name": "fullscreen",
-                    "type": "",
-                    "desc": "Start in fullscreen (default false)"
+                    "type": "bool",
+                    "desc": "Start in fullscreen (default false)",
+                    "desc_ja": "フルスクリーンで起動 (デフォルト false)",
+                    "desc_ko": "풀스크린으로 시작 (기본값 false)"
                 },
                 {
                     "name": "decorated",
-                    "type": "",
-                    "desc": "false: borderless/chromeless window with no title bar (default true)"
+                    "type": "bool",
+                    "desc": "false: borderless/chromeless window with no title bar (default true)",
+                    "desc_ja": "false: タイトルバーなしのボーダーレス/クロームレスウィンドウ (デフォルト true)",
+                    "desc_ko": "false: 제목 표시줄 없는 보더리스/크롬리스 윈도우 (기본값 true)"
                 },
                 {
                     "name": "clipboardSize",
-                    "type": "",
-                    "desc": "Clipboard buffer size in bytes (default 65536)"
+                    "type": "int",
+                    "desc": "Clipboard buffer size in bytes (default 65536)",
+                    "desc_ja": "クリップボードバッファのサイズ (バイト、デフォルト 65536)",
+                    "desc_ko": "클립보드 버퍼 크기 (바이트, 기본값 65536)"
                 },
                 {
                     "name": "swapInterval",
-                    "type": "",
-                    "desc": "VSync present interval: 1 = on (default), 0 = off, N = every Nth refresh"
+                    "type": "int",
+                    "desc": "VSync present interval: 1 = on (default), 0 = off, N = every Nth refresh",
+                    "desc_ja": "VSync の present 間隔: 1 = on (デフォルト)、0 = off、N = N回ごとのリフレッシュ",
+                    "desc_ko": "VSync present 간격: 1 = on (기본값), 0 = off, N = N번째 리프레시마다"
                 }
             ],
             "methods": [
@@ -20327,547 +20409,6 @@ const TrussCAPI = {
                         "int interval"
                     ],
                     "desc": "Set VSync present interval: 1 = on, 0 = off, N = every Nth refresh (chainable)"
-                }
-            ]
-        },
-        {
-            "name": "Mesh",
-            "desc": "3D mesh with vertices, colors, normals, indices",
-            "keywords": [
-                "geometry",
-                "model",
-                "vertices",
-                "triangles",
-                "vbo",
-                "of mesh"
-            ],
-            "desc_ja": "頂点・色・法線・インデックスを持つ3Dメッシュ",
-            "desc_ko": "정점, 색상, 노멀, 인덱스를 가진 3D 메쉬",
-            "examples": [
-                {
-                    "name": "meshAppendExample",
-                    "group": "3d"
-                },
-                {
-                    "name": "meshTextureExample",
-                    "group": "3d"
-                },
-                {
-                    "name": "3DPrimitivesExample",
-                    "group": "3d"
-                }
-            ],
-            "related": [
-                "createMesh",
-                "shadowDraw",
-                "drawMesh",
-                "createBox",
-                "createPlane",
-                "createCylinder",
-                "createCone",
-                "createIcoSphere"
-            ],
-            "methods": [
-                {
-                    "name": "setMode",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "PrimitiveMode mode"
-                    ],
-                    "desc": "Set primitive mode (Triangles, Lines, Points, etc.)"
-                },
-                {
-                    "name": "getMode",
-                    "return": "PrimitiveMode",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get current primitive mode"
-                },
-                {
-                    "name": "addVertex",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "float x, float y, float z = …",
-                        "const Vec2 & v",
-                        "const Vec3 & v"
-                    ],
-                    "desc": "Add a vertex"
-                },
-                {
-                    "name": "addVertices",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "const std::vector<Vec3> & verts"
-                    ],
-                    "desc": "Add multiple vertices"
-                },
-                {
-                    "name": "getVertices",
-                    "return": "std::vector<Vec3> &",
-                    "signatures": [
-                        "",
-                        ""
-                    ],
-                    "desc": "Get all vertices"
-                },
-                {
-                    "name": "getNumVertices",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get vertex count"
-                },
-                {
-                    "name": "addColor",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "const Color & c",
-                        "float r, float g, float b, float a = …"
-                    ],
-                    "desc": "Add a vertex color"
-                },
-                {
-                    "name": "addColors",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "const std::vector<Color> & cols"
-                    ],
-                    "desc": "Add multiple vertex colors"
-                },
-                {
-                    "name": "getColors",
-                    "return": "std::vector<Color> &",
-                    "signatures": [
-                        "",
-                        ""
-                    ],
-                    "desc": "Get all vertex colors"
-                },
-                {
-                    "name": "getNumColors",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get vertex color count"
-                },
-                {
-                    "name": "hasColors",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if mesh has vertex colors"
-                },
-                {
-                    "name": "addIndex",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "unsigned int index"
-                    ],
-                    "desc": "Add an index"
-                },
-                {
-                    "name": "addIndices",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "const std::vector<unsigned int> & inds"
-                    ],
-                    "desc": "Add multiple indices"
-                },
-                {
-                    "name": "addTriangle",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "unsigned int i0, unsigned int i1, unsigned int i2"
-                    ],
-                    "desc": "Add a triangle (3 indices)"
-                },
-                {
-                    "name": "getIndices",
-                    "return": "std::vector<unsigned int> &",
-                    "signatures": [
-                        "",
-                        ""
-                    ],
-                    "desc": "Get all indices"
-                },
-                {
-                    "name": "getNumIndices",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get index count"
-                },
-                {
-                    "name": "hasIndices",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if mesh has indices"
-                },
-                {
-                    "name": "addNormal",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "float nx, float ny, float nz",
-                        "const Vec3 & n"
-                    ],
-                    "desc": "Add a normal vector"
-                },
-                {
-                    "name": "addNormals",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "const std::vector<Vec3> & norms"
-                    ],
-                    "desc": "Add multiple normals"
-                },
-                {
-                    "name": "setNormal",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "size_t index, const Vec3 & n"
-                    ],
-                    "desc": "Set normal at index"
-                },
-                {
-                    "name": "getNormal",
-                    "return": "Vec3",
-                    "signatures": [
-                        "size_t index"
-                    ],
-                    "desc": "Get normal at index"
-                },
-                {
-                    "name": "getNormals",
-                    "return": "std::vector<Vec3> &",
-                    "signatures": [
-                        "",
-                        ""
-                    ],
-                    "desc": "Get all normals"
-                },
-                {
-                    "name": "getNumNormals",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get normal count"
-                },
-                {
-                    "name": "hasNormals",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if mesh has normals"
-                },
-                {
-                    "name": "addTexCoord",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "float u, float v",
-                        "const Vec2 & t"
-                    ],
-                    "desc": "Add a texture coordinate"
-                },
-                {
-                    "name": "getTexCoords",
-                    "return": "std::vector<Vec2> &",
-                    "signatures": [
-                        "",
-                        ""
-                    ],
-                    "desc": "Get all texture coordinates"
-                },
-                {
-                    "name": "getNumTexCoords",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get texture coordinate count"
-                },
-                {
-                    "name": "hasTexCoords",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if mesh has texture coordinates"
-                },
-                {
-                    "name": "hasValidTexCoords",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if texture coordinates match vertex count"
-                },
-                {
-                    "name": "addTangent",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "float tx, float ty, float tz, float tw = …",
-                        "const Vec4 & t",
-                        "const Vec3 & t, float w = …"
-                    ],
-                    "desc": "Add a tangent vector (xyz direction + w handedness)"
-                },
-                {
-                    "name": "getTangents",
-                    "return": "std::vector<Vec4> &",
-                    "signatures": [
-                        "",
-                        ""
-                    ],
-                    "desc": "Get the tangent array (mutable)"
-                },
-                {
-                    "name": "getNumTangents",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Number of tangents"
-                },
-                {
-                    "name": "hasTangents",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether the mesh has tangents"
-                },
-                {
-                    "name": "clear",
-                    "return": "Mesh &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear all mesh data"
-                },
-                {
-                    "name": "clearVertices",
-                    "return": "Mesh &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear vertices only"
-                },
-                {
-                    "name": "clearNormals",
-                    "return": "Mesh &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear normals only"
-                },
-                {
-                    "name": "clearColors",
-                    "return": "Mesh &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear colors only"
-                },
-                {
-                    "name": "clearIndices",
-                    "return": "Mesh &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear indices only"
-                },
-                {
-                    "name": "clearTexCoords",
-                    "return": "Mesh &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear texture coordinates only"
-                },
-                {
-                    "name": "clearTangents",
-                    "return": "Mesh &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Remove all tangents"
-                },
-                {
-                    "name": "translate",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "float x, float y, float z",
-                        "const Vec3 & offset"
-                    ],
-                    "desc": "Translate all vertices"
-                },
-                {
-                    "name": "rotateX",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Rotate mesh around X axis"
-                },
-                {
-                    "name": "rotateY",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Rotate mesh around Y axis"
-                },
-                {
-                    "name": "rotateZ",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Rotate mesh around Z axis"
-                },
-                {
-                    "name": "scale",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "float x, float y, float z",
-                        "float s",
-                        "const Vec3 & s"
-                    ],
-                    "desc": "Scale mesh"
-                },
-                {
-                    "name": "transform",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "const Mat4 & m"
-                    ],
-                    "desc": "Apply transformation matrix"
-                },
-                {
-                    "name": "append",
-                    "return": "Mesh &",
-                    "signatures": [
-                        "const Mesh & other"
-                    ],
-                    "desc": "Append another mesh"
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        "",
-                        "const Texture & texture",
-                        "const Image & image"
-                    ],
-                    "desc": "Draw the mesh"
-                },
-                {
-                    "name": "drawNoLighting",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Draw the mesh without lighting"
-                },
-                {
-                    "name": "drawWithLighting",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Draw the mesh with lighting"
-                },
-                {
-                    "name": "drawNoLightingWithTexture",
-                    "return": "void",
-                    "signatures": [
-                        "const Texture & texture"
-                    ],
-                    "desc": "Draw the mesh textured without lighting"
-                },
-                {
-                    "name": "drawWireframe",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Draw mesh as wireframe"
-                },
-                {
-                    "name": "markGpuDirty",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mark GPU buffers stale after editing data in place"
-                },
-                {
-                    "name": "uploadToGpu",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Upload mesh data to GPU buffers now"
-                },
-                {
-                    "name": "drawGpuPbr",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Draw the mesh through the GPU PBR pipeline (uploads to GPU buffers as needed, then renders using active lights, material and environment)"
-                },
-                {
-                    "name": "getGpuVertexBuffer",
-                    "return": "sg_buffer",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "getGpuIndexBuffer",
-                    "return": "sg_buffer",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "getGpuVertexCount",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Number of vertices currently uploaded to the GPU"
-                },
-                {
-                    "name": "getGpuIndexCount",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Number of indices currently uploaded to the GPU"
-                }
-            ],
-            "operators": [
-                {
-                    "symbol": "=",
-                    "signature": "Mesh = Mesh → Mesh &",
-                    "cpp": "Mesh & operator=(const Mesh &)",
-                    "free": false,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
                 }
             ]
         },
@@ -20971,7 +20512,7 @@ const TrussCAPI = {
                     "name": "moveTo",
                     "return": "void",
                     "signatures": [
-                        "float x, float y, float z = …",
+                        "float x, float y, float z = 0",
                         "const Vec2 & p",
                         "const Vec3 & p"
                     ],
@@ -21005,7 +20546,7 @@ const TrussCAPI = {
                     "name": "lineTo",
                     "return": "void",
                     "signatures": [
-                        "float x, float y, float z = …",
+                        "float x, float y, float z = 0",
                         "const Vec2 & p",
                         "const Vec3 & p"
                     ],
@@ -21036,7 +20577,7 @@ const TrussCAPI = {
                     "return": "void",
                     "signatures": [
                         "const Vec3 & to, int resolution",
-                        "float x, float y, float z = …, int resolution",
+                        "float x, float y, float z = 0, int resolution",
                         "const Vec2 & to, int resolution"
                     ],
                     "desc": "Add Catmull-Rom curve segment (needs >=4 consecutive calls; resolution=-1 uses current curve style)"
@@ -21045,12 +20586,12 @@ const TrussCAPI = {
                     "name": "arc",
                     "return": "void",
                     "signatures": [
-                        "const Vec3 & center, float radiusX, float radiusY, float angleBegin, float angleEnd, bool clockwise = …, int circleResolution = …",
-                        "float x, float y, float radiusX, float radiusY, float angleBegin, float angleEnd, int circleResolution = …",
-                        "const Vec2 & center, float radiusX, float radiusY, float angleBegin, float angleEnd, int circleResolution = …",
-                        "const Vec3 & center, float radius, float angleBegin, float angleEnd, bool clockwise = …",
-                        "float x, float y, float radius, float angleBegin, float angleEnd, bool clockwise = …",
-                        "const Vec2 & center, float radius, float angleBegin, float angleEnd, bool clockwise = …"
+                        "const Vec3 & center, float radiusX, float radiusY, float angleBegin, float angleEnd, bool clockwise = true, int circleResolution = 20",
+                        "float x, float y, float radiusX, float radiusY, float angleBegin, float angleEnd, int circleResolution = 20",
+                        "const Vec2 & center, float radiusX, float radiusY, float angleBegin, float angleEnd, int circleResolution = 20",
+                        "const Vec3 & center, float radius, float angleBegin, float angleEnd, bool clockwise = true",
+                        "float x, float y, float radius, float angleBegin, float angleEnd, bool clockwise = true",
+                        "const Vec2 & center, float radius, float angleBegin, float angleEnd, bool clockwise = true"
                     ],
                     "desc": "Add an arc (angles in radians)"
                 },
@@ -21157,386 +20698,6 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "Light",
-            "desc": "Light source for 3D PBR rendering (directional, point, or spot)",
-            "keywords": [
-                "lamp",
-                "lighting",
-                "directional",
-                "point",
-                "spot",
-                "illumination"
-            ],
-            "desc_ja": "3D PBR用light（directional, point, spot）",
-            "desc_ko": "3D PBR 렌더링용 광원 (평행광, 점광, 스포트라이트)",
-            "examples": [
-                {
-                    "name": "pbrSpheresExample",
-                    "group": "3d"
-                },
-                {
-                    "name": "projectorSimulationExample",
-                    "group": "3d"
-                },
-                {
-                    "name": "normalMapExample",
-                    "group": "3d"
-                }
-            ],
-            "related": [
-                "addLight",
-                "removeLight",
-                "beginShadowPass",
-                "Material",
-                "LightType",
-                "Environment"
-            ],
-            "methods": [
-                {
-                    "name": "setDirectional",
-                    "return": "void",
-                    "signatures": [
-                        "const Vec3 & direction",
-                        "float dx, float dy, float dz"
-                    ],
-                    "desc": "Set as directional light"
-                },
-                {
-                    "name": "setPoint",
-                    "return": "void",
-                    "signatures": [
-                        "const Vec3 & position",
-                        "float x, float y, float z"
-                    ],
-                    "desc": "Set as point light"
-                },
-                {
-                    "name": "setSpot",
-                    "return": "void",
-                    "signatures": [
-                        "const Vec3 & position, const Vec3 & direction, float innerHalfAngle = …, float outerHalfAngle = …",
-                        "float px, float py, float pz, float dx, float dy, float dz, float innerHalfAngle = …, float outerHalfAngle = …"
-                    ],
-                    "desc": "Set as spot light with cone angles"
-                },
-                {
-                    "name": "getSpotInnerCos",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get spot light inner cone cosine"
-                },
-                {
-                    "name": "getSpotOuterCos",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get spot light outer cone cosine"
-                },
-                {
-                    "name": "setProjectionTexture",
-                    "return": "void",
-                    "signatures": [
-                        "const Texture * tex"
-                    ],
-                    "desc": "Set texture for projector-style light (gobo)"
-                },
-                {
-                    "name": "getProjectionTexture",
-                    "return": "const Texture *",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get projection texture (gobo)"
-                },
-                {
-                    "name": "hasProjectionTexture",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if a projection texture is set"
-                },
-                {
-                    "name": "setLensShift",
-                    "return": "void",
-                    "signatures": [
-                        "float sx, float sy"
-                    ],
-                    "desc": "Set projector lens shift (-1 to 1, normalized)"
-                },
-                {
-                    "name": "getLensShiftX",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get projector horizontal lens shift"
-                },
-                {
-                    "name": "getLensShiftY",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get projector vertical lens shift"
-                },
-                {
-                    "name": "setProjectorAspect",
-                    "return": "void",
-                    "signatures": [
-                        "float a"
-                    ],
-                    "desc": "Set projector aspect ratio"
-                },
-                {
-                    "name": "getProjectorAspect",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get projector aspect ratio"
-                },
-                {
-                    "name": "computeProjectorViewProj",
-                    "return": "Mat4",
-                    "signatures": [
-                        "float nearClip = …, float farClip = …"
-                    ],
-                    "desc": "Build the projector's view-projection matrix from spot params and lens shift"
-                },
-                {
-                    "name": "setIesProfile",
-                    "return": "void",
-                    "signatures": [
-                        "const IesProfile * ies"
-                    ],
-                    "desc": "Attach IES photometric profile for angular intensity"
-                },
-                {
-                    "name": "getIesProfile",
-                    "return": "const IesProfile *",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get attached IES photometric profile"
-                },
-                {
-                    "name": "hasIesProfile",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if an IES profile is attached"
-                },
-                {
-                    "name": "enableShadow",
-                    "return": "void",
-                    "signatures": [
-                        "int resolution = …"
-                    ],
-                    "desc": "Enable shadow casting (depth map at given resolution)"
-                },
-                {
-                    "name": "disableShadow",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Disable shadow casting"
-                },
-                {
-                    "name": "isShadowEnabled",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if shadow casting is enabled"
-                },
-                {
-                    "name": "getShadowResolution",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get shadow map resolution"
-                },
-                {
-                    "name": "setShadowBias",
-                    "return": "void",
-                    "signatures": [
-                        "float bias"
-                    ],
-                    "desc": "Set shadow depth bias in world units"
-                },
-                {
-                    "name": "getShadowBias",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get shadow depth bias"
-                },
-                {
-                    "name": "getType",
-                    "return": "LightType",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get light type (Directional, Point, or Spot)"
-                },
-                {
-                    "name": "getDirection",
-                    "return": "const Vec3 &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get light direction"
-                },
-                {
-                    "name": "getPosition",
-                    "return": "const Vec3 &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get light position"
-                },
-                {
-                    "name": "setAmbient",
-                    "return": "void",
-                    "signatures": [
-                        "const Color & c",
-                        "float r, float g, float b, float a = …"
-                    ],
-                    "desc": "Set ambient light color"
-                },
-                {
-                    "name": "getAmbient",
-                    "return": "const Color &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get ambient light color"
-                },
-                {
-                    "name": "setDiffuse",
-                    "return": "void",
-                    "signatures": [
-                        "const Color & c",
-                        "float r, float g, float b, float a = …"
-                    ],
-                    "desc": "Set diffuse (main) light color"
-                },
-                {
-                    "name": "getDiffuse",
-                    "return": "const Color &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get diffuse (main) light color"
-                },
-                {
-                    "name": "setSpecular",
-                    "return": "void",
-                    "signatures": [
-                        "const Color & c",
-                        "float r, float g, float b, float a = …"
-                    ],
-                    "desc": "Set specular light color"
-                },
-                {
-                    "name": "getSpecular",
-                    "return": "const Color &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get specular light color"
-                },
-                {
-                    "name": "setIntensity",
-                    "return": "void",
-                    "signatures": [
-                        "float i"
-                    ],
-                    "desc": "Set light intensity multiplier"
-                },
-                {
-                    "name": "getIntensity",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get light intensity"
-                },
-                {
-                    "name": "setAttenuation",
-                    "return": "void",
-                    "signatures": [
-                        "float constant, float linear, float quadratic"
-                    ],
-                    "desc": "Set distance attenuation factors"
-                },
-                {
-                    "name": "getConstantAttenuation",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get constant attenuation factor"
-                },
-                {
-                    "name": "getLinearAttenuation",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get linear attenuation factor"
-                },
-                {
-                    "name": "getQuadraticAttenuation",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get quadratic attenuation factor"
-                },
-                {
-                    "name": "enable",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Enable this light"
-                },
-                {
-                    "name": "disable",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Disable this light"
-                },
-                {
-                    "name": "isEnabled",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if light is enabled"
-                },
-                {
-                    "name": "calculate",
-                    "return": "Color",
-                    "signatures": [
-                        "const Vec3 & worldPos, const Vec3 & worldNormal, const Material & material, const Vec3 & viewPos"
-                    ],
-                    "desc": "Compute the CPU Phong lighting contribution at a world position/normal for a material"
-                }
-            ]
-        },
-        {
             "name": "Material",
             "desc": "PBR material (metallic-roughness workflow, glTF 2.0 compatible)",
             "keywords": [
@@ -21569,13 +20730,18 @@ const TrussCAPI = {
                 "Mesh",
                 "Environment"
             ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "setBaseColor",
                     "return": "Material &",
                     "signatures": [
                         "const Color & c",
-                        "float r, float g, float b, float a = …"
+                        "float r, float g, float b, float a = 1.0"
                     ],
                     "desc": "Set base color (albedo)"
                 },
@@ -21850,7 +21016,7 @@ const TrussCAPI = {
                     "name": "plastic",
                     "return": "Material",
                     "signatures": [
-                        "const Color & baseColor, float roughness = …"
+                        "const Color & baseColor, float roughness = 0.5"
                     ],
                     "desc": "Plastic material preset"
                 },
@@ -21866,9 +21032,787 @@ const TrussCAPI = {
                     "name": "fromPhong",
                     "return": "Material",
                     "signatures": [
-                        "const Color & diffuse, const Color & specular, float shininess, const Color & emissive = …"
+                        "const Color & diffuse, const Color & specular, float shininess, const Color & emissive = Color(0, 0, 0)"
                     ],
                     "desc": "Convert Phong material parameters to PBR (roughness from shininess, metallic estimated from specular luminance)"
+                }
+            ]
+        },
+        {
+            "name": "IesProfile",
+            "desc": "IESNA LM-63 photometric profile for angular light intensity",
+            "keywords": [
+                "ies",
+                "photometric",
+                "light distribution",
+                "luminaire",
+                "intensity profile"
+            ],
+            "desc_ja": "IESNA LM-63配光profile（角度別の光強度分布）",
+            "desc_ko": "IESNA LM-63 배광 프로파일 (각도별 조명 강도)",
+            "examples": [
+                {
+                    "name": "projectorSimulationExample",
+                    "group": "3d"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "Light",
+                "setMaterial"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
+            "methods": [
+                {
+                    "name": "load",
+                    "return": "bool",
+                    "signatures": [
+                        "const std::string & path"
+                    ],
+                    "desc": "Load IES profile from file"
+                },
+                {
+                    "name": "loadFromString",
+                    "return": "bool",
+                    "signatures": [
+                        "const std::string & data"
+                    ],
+                    "desc": "Load IES profile from inline string data"
+                },
+                {
+                    "name": "isLoaded",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if profile is loaded"
+                },
+                {
+                    "name": "getMaxVerticalAngle",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get maximum vertical angle in the profile (radians)"
+                },
+                {
+                    "name": "getMaxCandela",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get maximum candela value in the profile"
+                },
+                {
+                    "name": "getTextureWidth",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get width of the generated 1D lookup texture"
+                },
+                {
+                    "name": "getView",
+                    "return": "sg_view",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": ""
+                },
+                {
+                    "name": "getSampler",
+                    "return": "sg_sampler",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": ""
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "IesProfile = IesProfile & → IesProfile &",
+                    "cpp": "IesProfile & operator=(IesProfile &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ]
+        },
+        {
+            "name": "Light",
+            "desc": "Light source for 3D PBR rendering (directional, point, or spot)",
+            "keywords": [
+                "lamp",
+                "lighting",
+                "directional",
+                "point",
+                "spot",
+                "illumination"
+            ],
+            "desc_ja": "3D PBR用light（directional, point, spot）",
+            "desc_ko": "3D PBR 렌더링용 광원 (평행광, 점광, 스포트라이트)",
+            "examples": [
+                {
+                    "name": "pbrSpheresExample",
+                    "group": "3d"
+                },
+                {
+                    "name": "projectorSimulationExample",
+                    "group": "3d"
+                },
+                {
+                    "name": "normalMapExample",
+                    "group": "3d"
+                }
+            ],
+            "related": [
+                "addLight",
+                "removeLight",
+                "beginShadowPass",
+                "Material",
+                "LightType",
+                "Environment"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
+            "methods": [
+                {
+                    "name": "setDirectional",
+                    "return": "void",
+                    "signatures": [
+                        "const Vec3 & direction",
+                        "float dx, float dy, float dz"
+                    ],
+                    "desc": "Set as directional light"
+                },
+                {
+                    "name": "setPoint",
+                    "return": "void",
+                    "signatures": [
+                        "const Vec3 & position",
+                        "float x, float y, float z"
+                    ],
+                    "desc": "Set as point light"
+                },
+                {
+                    "name": "setSpot",
+                    "return": "void",
+                    "signatures": [
+                        "const Vec3 & position, const Vec3 & direction, float innerHalfAngle = 0.0, float outerHalfAngle = 0.785399973",
+                        "float px, float py, float pz, float dx, float dy, float dz, float innerHalfAngle = 0.0, float outerHalfAngle = 0.785399973"
+                    ],
+                    "desc": "Set as spot light with cone angles"
+                },
+                {
+                    "name": "getSpotInnerCos",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get spot light inner cone cosine"
+                },
+                {
+                    "name": "getSpotOuterCos",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get spot light outer cone cosine"
+                },
+                {
+                    "name": "setProjectionTexture",
+                    "return": "void",
+                    "signatures": [
+                        "const Texture * tex"
+                    ],
+                    "desc": "Set texture for projector-style light (gobo)"
+                },
+                {
+                    "name": "getProjectionTexture",
+                    "return": "const Texture *",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projection texture (gobo)"
+                },
+                {
+                    "name": "hasProjectionTexture",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if a projection texture is set"
+                },
+                {
+                    "name": "setLensShift",
+                    "return": "void",
+                    "signatures": [
+                        "float sx, float sy"
+                    ],
+                    "desc": "Set projector lens shift (-1 to 1, normalized)"
+                },
+                {
+                    "name": "getLensShiftX",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projector horizontal lens shift"
+                },
+                {
+                    "name": "getLensShiftY",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projector vertical lens shift"
+                },
+                {
+                    "name": "setProjectorAspect",
+                    "return": "void",
+                    "signatures": [
+                        "float a"
+                    ],
+                    "desc": "Set projector aspect ratio"
+                },
+                {
+                    "name": "getProjectorAspect",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get projector aspect ratio"
+                },
+                {
+                    "name": "computeProjectorViewProj",
+                    "return": "Mat4",
+                    "signatures": [
+                        "float nearClip = 0.100000001, float farClip = 10000.0"
+                    ],
+                    "desc": "Build the projector's view-projection matrix from spot params and lens shift"
+                },
+                {
+                    "name": "setIesProfile",
+                    "return": "void",
+                    "signatures": [
+                        "const IesProfile * ies"
+                    ],
+                    "desc": "Attach IES photometric profile for angular intensity"
+                },
+                {
+                    "name": "getIesProfile",
+                    "return": "const IesProfile *",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get attached IES photometric profile"
+                },
+                {
+                    "name": "hasIesProfile",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if an IES profile is attached"
+                },
+                {
+                    "name": "enableShadow",
+                    "return": "void",
+                    "signatures": [
+                        "int resolution = 1024"
+                    ],
+                    "desc": "Enable shadow casting (depth map at given resolution)"
+                },
+                {
+                    "name": "disableShadow",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Disable shadow casting"
+                },
+                {
+                    "name": "isShadowEnabled",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if shadow casting is enabled"
+                },
+                {
+                    "name": "getShadowResolution",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get shadow map resolution"
+                },
+                {
+                    "name": "setShadowBias",
+                    "return": "void",
+                    "signatures": [
+                        "float bias"
+                    ],
+                    "desc": "Set shadow depth bias in world units"
+                },
+                {
+                    "name": "getShadowBias",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get shadow depth bias"
+                },
+                {
+                    "name": "getType",
+                    "return": "LightType",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light type (Directional, Point, or Spot)"
+                },
+                {
+                    "name": "getDirection",
+                    "return": "const Vec3 &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light direction"
+                },
+                {
+                    "name": "getPosition",
+                    "return": "const Vec3 &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light position"
+                },
+                {
+                    "name": "setAmbient",
+                    "return": "void",
+                    "signatures": [
+                        "const Color & c",
+                        "float r, float g, float b, float a = 1.0"
+                    ],
+                    "desc": "Set ambient light color"
+                },
+                {
+                    "name": "getAmbient",
+                    "return": "const Color &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get ambient light color"
+                },
+                {
+                    "name": "setDiffuse",
+                    "return": "void",
+                    "signatures": [
+                        "const Color & c",
+                        "float r, float g, float b, float a = 1.0"
+                    ],
+                    "desc": "Set diffuse (main) light color"
+                },
+                {
+                    "name": "getDiffuse",
+                    "return": "const Color &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get diffuse (main) light color"
+                },
+                {
+                    "name": "setSpecular",
+                    "return": "void",
+                    "signatures": [
+                        "const Color & c",
+                        "float r, float g, float b, float a = 1.0"
+                    ],
+                    "desc": "Set specular light color"
+                },
+                {
+                    "name": "getSpecular",
+                    "return": "const Color &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get specular light color"
+                },
+                {
+                    "name": "setIntensity",
+                    "return": "void",
+                    "signatures": [
+                        "float i"
+                    ],
+                    "desc": "Set light intensity multiplier"
+                },
+                {
+                    "name": "getIntensity",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get light intensity"
+                },
+                {
+                    "name": "setAttenuation",
+                    "return": "void",
+                    "signatures": [
+                        "float constant, float linear, float quadratic"
+                    ],
+                    "desc": "Set distance attenuation factors"
+                },
+                {
+                    "name": "getConstantAttenuation",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get constant attenuation factor"
+                },
+                {
+                    "name": "getLinearAttenuation",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get linear attenuation factor"
+                },
+                {
+                    "name": "getQuadraticAttenuation",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get quadratic attenuation factor"
+                },
+                {
+                    "name": "enable",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Enable this light"
+                },
+                {
+                    "name": "disable",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Disable this light"
+                },
+                {
+                    "name": "isEnabled",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if light is enabled"
+                },
+                {
+                    "name": "calculate",
+                    "return": "Color",
+                    "signatures": [
+                        "const Vec3 & worldPos, const Vec3 & worldNormal, const Material & material, const Vec3 & viewPos"
+                    ],
+                    "desc": "Compute the CPU Phong lighting contribution at a world position/normal for a material"
+                }
+            ]
+        },
+        {
+            "name": "Pixels",
+            "desc": "Pixel buffer for image manipulation",
+            "keywords": [
+                "pixel buffer",
+                "bitmap",
+                "raster",
+                "image data",
+                "of pixels"
+            ],
+            "desc_ja": "画像操作用ピクセルバッファ",
+            "desc_ko": "이미지 조작용 픽셀 버퍼",
+            "examples": [
+                {
+                    "name": "normalMapExample",
+                    "group": "3d"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "captureWindow",
+                "grabScreen",
+                "createPixels",
+                "extractFrame",
+                "addFrame",
+                "addFrameAt"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
+            "methods": [
+                {
+                    "name": "allocate",
+                    "return": "void",
+                    "signatures": [
+                        "int width, int height, int channels = 4, PixelFormat format = U8"
+                    ],
+                    "desc": "Allocate pixel buffer"
+                },
+                {
+                    "name": "clear",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Release pixel buffer"
+                },
+                {
+                    "name": "isAllocated",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if allocated"
+                },
+                {
+                    "name": "getWidth",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get width"
+                },
+                {
+                    "name": "getHeight",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get height"
+                },
+                {
+                    "name": "getChannels",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get number of channels"
+                },
+                {
+                    "name": "getFormat",
+                    "return": "PixelFormat",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the pixel format"
+                },
+                {
+                    "name": "isFloat",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the pixel data uses 32-bit floats"
+                },
+                {
+                    "name": "getTotalBytes",
+                    "return": "size_t",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get total byte size"
+                },
+                {
+                    "name": "getData",
+                    "return": "unsigned char *",
+                    "signatures": [
+                        "",
+                        ""
+                    ],
+                    "desc": "Get raw data pointer"
+                },
+                {
+                    "name": "getDataF32",
+                    "return": "float *",
+                    "signatures": [
+                        "",
+                        ""
+                    ],
+                    "desc": "Get raw data pointer as float (float-format buffers)"
+                },
+                {
+                    "name": "getDataVoid",
+                    "return": "void *",
+                    "signatures": [
+                        "",
+                        ""
+                    ],
+                    "desc": "Get raw data pointer as void* (any format)"
+                },
+                {
+                    "name": "getColor",
+                    "return": "Color",
+                    "signatures": [
+                        "int x, int y"
+                    ],
+                    "desc": "Get pixel color at position"
+                },
+                {
+                    "name": "setColor",
+                    "return": "void",
+                    "signatures": [
+                        "int x, int y, const Color & c"
+                    ],
+                    "desc": "Set pixel color at position"
+                },
+                {
+                    "name": "setFromPixels",
+                    "return": "void",
+                    "signatures": [
+                        "const unsigned char * srcData, int width, int height, int channels"
+                    ],
+                    "desc": "Copy from external pixel data"
+                },
+                {
+                    "name": "setFromFloats",
+                    "return": "void",
+                    "signatures": [
+                        "const float * srcData, int width, int height, int channels"
+                    ],
+                    "desc": "Fill the buffer from a float array (allocates as needed)"
+                },
+                {
+                    "name": "copyTo",
+                    "return": "void",
+                    "signatures": [
+                        "unsigned char * dst"
+                    ],
+                    "desc": "Copy to external buffer"
+                },
+                {
+                    "name": "clone",
+                    "return": "Pixels",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return a deep copy of the pixel buffer"
+                },
+                {
+                    "name": "load",
+                    "return": "bool",
+                    "signatures": [
+                        "const fs::path & path"
+                    ],
+                    "desc": "Load image from file"
+                },
+                {
+                    "name": "loadHDR",
+                    "return": "bool",
+                    "signatures": [
+                        "const fs::path & path"
+                    ],
+                    "desc": "Load an HDR (.hdr) image into a float pixel buffer"
+                },
+                {
+                    "name": "loadPlatform",
+                    "return": "bool",
+                    "signatures": [
+                        "const fs::path & path"
+                    ],
+                    "desc": "Load an image using the platform image decoder"
+                },
+                {
+                    "name": "loadFromMemory",
+                    "return": "bool",
+                    "signatures": [
+                        "const unsigned char * buffer, int len"
+                    ],
+                    "desc": "Load image from memory"
+                },
+                {
+                    "name": "save",
+                    "return": "bool",
+                    "signatures": [
+                        "const fs::path & path"
+                    ],
+                    "desc": "Save image to file"
+                },
+                {
+                    "name": "halve",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8."
+                },
+                {
+                    "name": "resize",
+                    "return": "void",
+                    "signatures": [
+                        "int newW, int newH"
+                    ],
+                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8."
+                },
+                {
+                    "name": "crop",
+                    "return": "void",
+                    "signatures": [
+                        "int x, int y, int w, int h"
+                    ],
+                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge."
+                },
+                {
+                    "name": "mirror",
+                    "return": "void",
+                    "signatures": [
+                        "bool horizontal, bool vertical"
+                    ],
+                    "desc": "Flip in place. Both true is 180°."
+                },
+                {
+                    "name": "mirrorH",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mirror horizontally (alias for mirror(true, false))"
+                },
+                {
+                    "name": "mirrorV",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mirror vertically (alias for mirror(false, true))"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Pixels = Pixels & → Pixels &",
+                    "cpp": "Pixels & operator=(Pixels &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ]
         },
@@ -21900,14 +21844,19 @@ const TrussCAPI = {
                 "Image",
                 "Fbo"
             ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "allocate",
                     "return": "void",
                     "signatures": [
-                        "int width, int height, int channels = …, TextureUsage usage = …, int sampleCount = …",
-                        "int width, int height, TextureFormat format, TextureUsage usage = …, int sampleCount = …, int mipLevels = …",
-                        "const Pixels & pixels, TextureUsage usage = …, bool mipmaps = …"
+                        "int width, int height, int channels = 4, TextureUsage usage = Immutable, int sampleCount = 1",
+                        "int width, int height, TextureFormat format, TextureUsage usage = Immutable, int sampleCount = 1, int mipLevels = 1",
+                        "const Pixels & pixels, TextureUsage usage = Immutable, bool mipmaps = false"
                     ],
                     "desc": "Allocate texture"
                 },
@@ -21915,7 +21864,7 @@ const TrussCAPI = {
                     "name": "allocateCubemap",
                     "return": "void",
                     "signatures": [
-                        "int sideSize, TextureFormat format, TextureUsage usage = …, int mipLevels = …"
+                        "int sideSize, TextureFormat format, TextureUsage usage = RenderTarget, int mipLevels = 1"
                     ],
                     "desc": "Allocate a cubemap texture without initial data"
                 },
@@ -22256,115 +22205,6 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "IesProfile",
-            "desc": "IESNA LM-63 photometric profile for angular light intensity",
-            "keywords": [
-                "ies",
-                "photometric",
-                "light distribution",
-                "luminaire",
-                "intensity profile"
-            ],
-            "desc_ja": "IESNA LM-63配光profile（角度別の光強度分布）",
-            "desc_ko": "IESNA LM-63 배광 프로파일 (각도별 조명 강도)",
-            "examples": [
-                {
-                    "name": "projectorSimulationExample",
-                    "group": "3d"
-                },
-                {
-                    "name": "AllFeaturesExample",
-                    "group": "tests"
-                }
-            ],
-            "related": [
-                "Light",
-                "setMaterial"
-            ],
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "load",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::string & path"
-                    ],
-                    "desc": "Load IES profile from file"
-                },
-                {
-                    "name": "loadFromString",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::string & data"
-                    ],
-                    "desc": "Load IES profile from inline string data"
-                },
-                {
-                    "name": "isLoaded",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if profile is loaded"
-                },
-                {
-                    "name": "getMaxVerticalAngle",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get maximum vertical angle in the profile (radians)"
-                },
-                {
-                    "name": "getMaxCandela",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get maximum candela value in the profile"
-                },
-                {
-                    "name": "getTextureWidth",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get width of the generated 1D lookup texture"
-                },
-                {
-                    "name": "getView",
-                    "return": "sg_view",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "getSampler",
-                    "return": "sg_sampler",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                }
-            ],
-            "operators": [
-                {
-                    "symbol": "=",
-                    "signature": "IesProfile = IesProfile & → IesProfile &",
-                    "cpp": "IesProfile & operator=(IesProfile &&)",
-                    "free": false,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                }
-            ]
-        },
-        {
             "name": "HasTexture",
             "desc": "",
             "keywords": [],
@@ -22528,7 +22368,7 @@ const TrussCAPI = {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "const fs::path & path, bool mipmaps = …"
+                        "const fs::path & path, bool mipmaps = false"
                     ],
                     "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface)."
                 },
@@ -22536,7 +22376,7 @@ const TrussCAPI = {
                     "name": "loadFromMemory",
                     "return": "bool",
                     "signatures": [
-                        "const unsigned char * buffer, int len, bool mipmaps = …"
+                        "const unsigned char * buffer, int len, bool mipmaps = false"
                     ],
                     "desc": "Load image from memory. `mipmaps=true` builds a mip chain."
                 },
@@ -22552,7 +22392,7 @@ const TrussCAPI = {
                     "name": "allocate",
                     "return": "void",
                     "signatures": [
-                        "int width, int height, int channels = …, bool mipmaps = …"
+                        "int width, int height, int channels = 4, bool mipmaps = false"
                     ],
                     "desc": "Allocate empty image for dynamic updates. `mipmaps=true` builds a chain refreshed on every update()."
                 },
@@ -22709,6 +22549,552 @@ const TrussCAPI = {
                     "symbol": "=",
                     "signature": "Image = Image & → Image &",
                     "cpp": "Image & operator=(Image &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ]
+        },
+        {
+            "name": "Mesh",
+            "desc": "3D mesh with vertices, colors, normals, indices",
+            "keywords": [
+                "geometry",
+                "model",
+                "vertices",
+                "triangles",
+                "vbo",
+                "of mesh"
+            ],
+            "desc_ja": "頂点・色・法線・インデックスを持つ3Dメッシュ",
+            "desc_ko": "정점, 색상, 노멀, 인덱스를 가진 3D 메쉬",
+            "examples": [
+                {
+                    "name": "meshAppendExample",
+                    "group": "3d"
+                },
+                {
+                    "name": "meshTextureExample",
+                    "group": "3d"
+                },
+                {
+                    "name": "3DPrimitivesExample",
+                    "group": "3d"
+                }
+            ],
+            "related": [
+                "createMesh",
+                "shadowDraw",
+                "drawMesh",
+                "createBox",
+                "createPlane",
+                "createCylinder",
+                "createCone",
+                "createIcoSphere"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
+            "methods": [
+                {
+                    "name": "setMode",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "PrimitiveMode mode"
+                    ],
+                    "desc": "Set primitive mode (Triangles, Lines, Points, etc.)"
+                },
+                {
+                    "name": "getMode",
+                    "return": "PrimitiveMode",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get current primitive mode"
+                },
+                {
+                    "name": "addVertex",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "float x, float y, float z = 0.0",
+                        "const Vec2 & v",
+                        "const Vec3 & v"
+                    ],
+                    "desc": "Add a vertex"
+                },
+                {
+                    "name": "addVertices",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "const std::vector<Vec3> & verts"
+                    ],
+                    "desc": "Add multiple vertices"
+                },
+                {
+                    "name": "getVertices",
+                    "return": "std::vector<Vec3> &",
+                    "signatures": [
+                        "",
+                        ""
+                    ],
+                    "desc": "Get all vertices"
+                },
+                {
+                    "name": "getNumVertices",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get vertex count"
+                },
+                {
+                    "name": "addColor",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "const Color & c",
+                        "float r, float g, float b, float a = 1.0"
+                    ],
+                    "desc": "Add a vertex color"
+                },
+                {
+                    "name": "addColors",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "const std::vector<Color> & cols"
+                    ],
+                    "desc": "Add multiple vertex colors"
+                },
+                {
+                    "name": "getColors",
+                    "return": "std::vector<Color> &",
+                    "signatures": [
+                        "",
+                        ""
+                    ],
+                    "desc": "Get all vertex colors"
+                },
+                {
+                    "name": "getNumColors",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get vertex color count"
+                },
+                {
+                    "name": "hasColors",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if mesh has vertex colors"
+                },
+                {
+                    "name": "addIndex",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "unsigned int index"
+                    ],
+                    "desc": "Add an index"
+                },
+                {
+                    "name": "addIndices",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "const std::vector<unsigned int> & inds"
+                    ],
+                    "desc": "Add multiple indices"
+                },
+                {
+                    "name": "addTriangle",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "unsigned int i0, unsigned int i1, unsigned int i2"
+                    ],
+                    "desc": "Add a triangle (3 indices)"
+                },
+                {
+                    "name": "getIndices",
+                    "return": "std::vector<unsigned int> &",
+                    "signatures": [
+                        "",
+                        ""
+                    ],
+                    "desc": "Get all indices"
+                },
+                {
+                    "name": "getNumIndices",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get index count"
+                },
+                {
+                    "name": "hasIndices",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if mesh has indices"
+                },
+                {
+                    "name": "addNormal",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "float nx, float ny, float nz",
+                        "const Vec3 & n"
+                    ],
+                    "desc": "Add a normal vector"
+                },
+                {
+                    "name": "addNormals",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "const std::vector<Vec3> & norms"
+                    ],
+                    "desc": "Add multiple normals"
+                },
+                {
+                    "name": "setNormal",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "size_t index, const Vec3 & n"
+                    ],
+                    "desc": "Set normal at index"
+                },
+                {
+                    "name": "getNormal",
+                    "return": "Vec3",
+                    "signatures": [
+                        "size_t index"
+                    ],
+                    "desc": "Get normal at index"
+                },
+                {
+                    "name": "getNormals",
+                    "return": "std::vector<Vec3> &",
+                    "signatures": [
+                        "",
+                        ""
+                    ],
+                    "desc": "Get all normals"
+                },
+                {
+                    "name": "getNumNormals",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get normal count"
+                },
+                {
+                    "name": "hasNormals",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if mesh has normals"
+                },
+                {
+                    "name": "addTexCoord",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "float u, float v",
+                        "const Vec2 & t"
+                    ],
+                    "desc": "Add a texture coordinate"
+                },
+                {
+                    "name": "getTexCoords",
+                    "return": "std::vector<Vec2> &",
+                    "signatures": [
+                        "",
+                        ""
+                    ],
+                    "desc": "Get all texture coordinates"
+                },
+                {
+                    "name": "getNumTexCoords",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get texture coordinate count"
+                },
+                {
+                    "name": "hasTexCoords",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if mesh has texture coordinates"
+                },
+                {
+                    "name": "hasValidTexCoords",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if texture coordinates match vertex count"
+                },
+                {
+                    "name": "addTangent",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "float tx, float ty, float tz, float tw = 1.0",
+                        "const Vec4 & t",
+                        "const Vec3 & t, float w = 1.0"
+                    ],
+                    "desc": "Add a tangent vector (xyz direction + w handedness)"
+                },
+                {
+                    "name": "getTangents",
+                    "return": "std::vector<Vec4> &",
+                    "signatures": [
+                        "",
+                        ""
+                    ],
+                    "desc": "Get the tangent array (mutable)"
+                },
+                {
+                    "name": "getNumTangents",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Number of tangents"
+                },
+                {
+                    "name": "hasTangents",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the mesh has tangents"
+                },
+                {
+                    "name": "clear",
+                    "return": "Mesh &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Clear all mesh data"
+                },
+                {
+                    "name": "clearVertices",
+                    "return": "Mesh &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Clear vertices only"
+                },
+                {
+                    "name": "clearNormals",
+                    "return": "Mesh &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Clear normals only"
+                },
+                {
+                    "name": "clearColors",
+                    "return": "Mesh &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Clear colors only"
+                },
+                {
+                    "name": "clearIndices",
+                    "return": "Mesh &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Clear indices only"
+                },
+                {
+                    "name": "clearTexCoords",
+                    "return": "Mesh &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Clear texture coordinates only"
+                },
+                {
+                    "name": "clearTangents",
+                    "return": "Mesh &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Remove all tangents"
+                },
+                {
+                    "name": "translate",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "float x, float y, float z",
+                        "const Vec3 & offset"
+                    ],
+                    "desc": "Translate all vertices"
+                },
+                {
+                    "name": "rotateX",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "float radians"
+                    ],
+                    "desc": "Rotate mesh around X axis"
+                },
+                {
+                    "name": "rotateY",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "float radians"
+                    ],
+                    "desc": "Rotate mesh around Y axis"
+                },
+                {
+                    "name": "rotateZ",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "float radians"
+                    ],
+                    "desc": "Rotate mesh around Z axis"
+                },
+                {
+                    "name": "scale",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "float x, float y, float z",
+                        "float s",
+                        "const Vec3 & s"
+                    ],
+                    "desc": "Scale mesh"
+                },
+                {
+                    "name": "transform",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "const Mat4 & m"
+                    ],
+                    "desc": "Apply transformation matrix"
+                },
+                {
+                    "name": "append",
+                    "return": "Mesh &",
+                    "signatures": [
+                        "const Mesh & other"
+                    ],
+                    "desc": "Append another mesh"
+                },
+                {
+                    "name": "draw",
+                    "return": "void",
+                    "signatures": [
+                        "",
+                        "const Texture & texture",
+                        "const Image & image"
+                    ],
+                    "desc": "Draw the mesh"
+                },
+                {
+                    "name": "drawNoLighting",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Draw the mesh without lighting"
+                },
+                {
+                    "name": "drawWithLighting",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Draw the mesh with lighting"
+                },
+                {
+                    "name": "drawNoLightingWithTexture",
+                    "return": "void",
+                    "signatures": [
+                        "const Texture & texture"
+                    ],
+                    "desc": "Draw the mesh textured without lighting"
+                },
+                {
+                    "name": "drawWireframe",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Draw mesh as wireframe"
+                },
+                {
+                    "name": "markGpuDirty",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Mark GPU buffers stale after editing data in place"
+                },
+                {
+                    "name": "uploadToGpu",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Upload mesh data to GPU buffers now"
+                },
+                {
+                    "name": "drawGpuPbr",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Draw the mesh through the GPU PBR pipeline (uploads to GPU buffers as needed, then renders using active lights, material and environment)"
+                },
+                {
+                    "name": "getGpuVertexBuffer",
+                    "return": "sg_buffer",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": ""
+                },
+                {
+                    "name": "getGpuIndexBuffer",
+                    "return": "sg_buffer",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": ""
+                },
+                {
+                    "name": "getGpuVertexCount",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Number of vertices currently uploaded to the GPU"
+                },
+                {
+                    "name": "getGpuIndexCount",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Number of indices currently uploaded to the GPU"
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Mesh = Mesh → Mesh &",
+                    "cpp": "Mesh & operator=(const Mesh &)",
                     "free": false,
                     "desc": "",
                     "desc_ja": "",
@@ -22903,7 +23289,7 @@ const TrussCAPI = {
                     "name": "addVertex",
                     "return": "StrokeMesh &",
                     "signatures": [
-                        "float x, float y, float z = …",
+                        "float x, float y, float z = 0",
                         "const Vec3 & p",
                         "const Vec2 & p"
                     ],
@@ -23412,38 +23798,52 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "codepoint",
-                    "type": "",
-                    "desc": "Final codepoint after vertical-form mapping"
+                    "type": "uint32_t",
+                    "desc": "Final codepoint after vertical-form mapping",
+                    "desc_ja": "縦書きフォームマッピング後の最終 codepoint",
+                    "desc_ko": "세로쓰기 폼 매핑 후의 최종 codepoint"
                 },
                 {
                     "name": "drawX",
-                    "type": "",
-                    "desc": "Pen X position; the glyph's own xoffset is added on top"
+                    "type": "float",
+                    "desc": "Pen X position; the glyph's own xoffset is added on top",
+                    "desc_ja": "ペンの X 位置。グリフ自身の xoffset がさらに加算される",
+                    "desc_ko": "펜의 X 위치. 글리프 자체의 xoffset이 추가로 더해짐"
                 },
                 {
                     "name": "baselineY",
-                    "type": "",
-                    "desc": "Baseline Y position; the glyph's own yoffset is added on top"
+                    "type": "float",
+                    "desc": "Baseline Y position; the glyph's own yoffset is added on top",
+                    "desc_ja": "ベースラインの Y 位置。グリフ自身の yoffset がさらに加算される",
+                    "desc_ko": "베이스라인의 Y 위치. 글리프 자체의 yoffset이 추가로 더해짐"
                 },
                 {
                     "name": "rotationCw",
-                    "type": "",
-                    "desc": "Clockwise rotation in radians: 0 (upright) or TAU/4 (90 degrees, vertical text)"
+                    "type": "float",
+                    "desc": "Clockwise rotation in radians: 0 (upright) or TAU/4 (90 degrees, vertical text)",
+                    "desc_ja": "時計回りの回転（ラジアン）: 0（正立）または TAU/4（90 度、縦書き）",
+                    "desc_ko": "시계 방향 회전(라디안): 0(정립) 또는 TAU/4(90도, 세로쓰기)"
                 },
                 {
                     "name": "pivotX",
-                    "type": "",
-                    "desc": "Rotation center X (used only when rotationCw is non-zero)"
+                    "type": "float",
+                    "desc": "Rotation center X (used only when rotationCw is non-zero)",
+                    "desc_ja": "回転中心 X（rotationCw が 0 でない場合のみ使用）",
+                    "desc_ko": "회전 중심 X(rotationCw가 0이 아닐 때만 사용)"
                 },
                 {
                     "name": "pivotY",
-                    "type": "",
-                    "desc": "Rotation center Y (used only when rotationCw is non-zero)"
+                    "type": "float",
+                    "desc": "Rotation center Y (used only when rotationCw is non-zero)",
+                    "desc_ja": "回転中心 Y（rotationCw が 0 でない場合のみ使用）",
+                    "desc_ko": "회전 중심 Y(rotationCw가 0이 아닐 때만 사용)"
                 },
                 {
                     "name": "scaleX",
-                    "type": "",
-                    "desc": "Horizontal scale (1.0 normally, less than 1 for TCY combine)"
+                    "type": "float",
+                    "desc": "Horizontal scale (1.0 normally, less than 1 for TCY combine)",
+                    "desc_ja": "水平スケール（通常 1.0、TCY 合成では 1 未満）",
+                    "desc_ko": "수평 스케일(보통 1.0, TCY 합성 시 1 미만)"
                 }
             ]
         },
@@ -23478,12 +23878,17 @@ const TrussCAPI = {
                 "FullscreenShader",
                 "Shader"
             ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "methods": [
                 {
                     "name": "allocate",
                     "return": "void",
                     "signatures": [
-                        "int w, int h, int sampleCount = …, TextureFormat format = …, bool mipmaps = …"
+                        "int w, int h, int sampleCount = 1, TextureFormat format = RGBA8, bool mipmaps = false"
                     ],
                     "desc": "Allocate framebuffer. `mipmaps=true` builds a full mip chain that is refreshed automatically at end()."
                 },
@@ -23500,7 +23905,7 @@ const TrussCAPI = {
                     "return": "void",
                     "signatures": [
                         "",
-                        "float r, float g, float b, float a = …"
+                        "float r, float g, float b, float a = 1.0"
                     ],
                     "desc": "Begin rendering to FBO"
                 },
@@ -23669,6 +24074,148 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "Shader",
+            "desc": "GPU shader program (vertex + fragment) with a begin/end/setUniform API for custom-shaded drawing",
+            "keywords": [
+                "glsl",
+                "program",
+                "material",
+                "effect",
+                "fragment"
+            ],
+            "desc_ja": "GPU シェーダープログラム（頂点＋フラグメント）。begin/end/setUniform API でカスタムシェーダー描画を行う",
+            "desc_ko": "GPU 셰이더 프로그램(버텍스 + 프래그먼트); begin/end/setUniform API로 커스텀 셰이딩 그리기를 수행",
+            "examples": [
+                {
+                    "name": "shaderExample",
+                    "group": "graphics"
+                }
+            ],
+            "related": [
+                "FullscreenShader",
+                "setUniform",
+                "setTexture",
+                "pushShader",
+                "Fbo"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
+            "methods": [
+                {
+                    "name": "load",
+                    "return": "bool",
+                    "signatures": [
+                        "const sg_shader_desc *(*)(sg_backend) descFn"
+                    ],
+                    "desc": "Load from sokol-shdc generated function"
+                },
+                {
+                    "name": "clear",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": ""
+                },
+                {
+                    "name": "isLoaded",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Check if shader is loaded"
+                },
+                {
+                    "name": "begin",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Begin shader (pushes to stack)"
+                },
+                {
+                    "name": "end",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "End shader (pops from stack)"
+                },
+                {
+                    "name": "setUniform",
+                    "return": "void",
+                    "signatures": [
+                        "int slot, float value",
+                        "int slot, const Vec2 & v",
+                        "int slot, const Vec3 & v",
+                        "int slot, const Vec4 & v",
+                        "int slot, const Color & c",
+                        "int slot, const std::vector<float> & v",
+                        "int slot, const std::vector<Vec2> & v",
+                        "int slot, const std::vector<Vec3> & v",
+                        "int slot, const std::vector<Vec4> & v",
+                        "int slot, const void * data, size_t size"
+                    ],
+                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
+                },
+                {
+                    "name": "storeUniform",
+                    "return": "void",
+                    "signatures": [
+                        "int slot, const void * data, size_t size"
+                    ],
+                    "desc": ""
+                },
+                {
+                    "name": "applyUniforms",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": ""
+                },
+                {
+                    "name": "setTexture",
+                    "return": "void",
+                    "signatures": [
+                        "int slot, sg_image image, sg_sampler sampler",
+                        "int slot, sg_view view, sg_sampler sampler"
+                    ],
+                    "desc": "Bind texture to slot"
+                },
+                {
+                    "name": "submitVertices",
+                    "return": "void",
+                    "signatures": [
+                        "const ShaderVertex * data, int count, PrimitiveType type"
+                    ],
+                    "desc": ""
+                },
+                {
+                    "name": "executeDeferredDraw",
+                    "return": "void",
+                    "signatures": [
+                        "const std::vector<ShaderVertex> & vertices, PrimitiveType type"
+                    ],
+                    "desc": ""
+                }
+            ],
+            "operators": [
+                {
+                    "symbol": "=",
+                    "signature": "Shader = Shader & → Shader &",
+                    "cpp": "Shader & operator=(Shader &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ]
+        },
+        {
             "name": "FullscreenShader",
             "desc": "Shader specialization for fullscreen post-processing effects (position + texcoord quad). Set uniforms via setParams, then call draw to render a fullscreen quad.",
             "keywords": [
@@ -23727,18 +24274,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "deviceId",
-                    "type": "",
-                    "desc": "Numeric device ID (pass to setDeviceID); -1 if unknown"
+                    "type": "int",
+                    "desc": "Numeric device ID (pass to setDeviceID); -1 if unknown",
+                    "desc_ja": "数値のデバイス ID（setDeviceID に渡す）。不明なら -1",
+                    "desc_ko": "숫자 디바이스 ID(setDeviceID에 전달). 알 수 없으면 -1"
                 },
                 {
                     "name": "deviceName",
-                    "type": "",
-                    "desc": "Human-readable device name"
+                    "type": "std::string",
+                    "desc": "Human-readable device name",
+                    "desc_ja": "人間が読めるデバイス名",
+                    "desc_ko": "사람이 읽을 수 있는 디바이스 이름"
                 },
                 {
                     "name": "uniqueId",
-                    "type": "",
-                    "desc": "Stable unique identifier for the device"
+                    "type": "std::string",
+                    "desc": "Stable unique identifier for the device",
+                    "desc_ja": "デバイスの安定した一意識別子",
+                    "desc_ko": "디바이스의 안정적인 고유 식별자"
                 }
             ],
             "methods": [
@@ -23868,7 +24421,7 @@ const TrussCAPI = {
                     "name": "setup",
                     "return": "bool",
                     "signatures": [
-                        "int width = …, int height = …"
+                        "int width = 640, int height = 480"
                     ],
                     "desc": "Start the camera at the requested size. Returns false if permission is not yet granted (it is requested asynchronously); keep calling update() and capture begins once granted"
                 },
@@ -24635,7 +25188,7 @@ const TrussCAPI = {
                     "name": "extractFrame",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, Pixels & outPixels, float timeSec = …, float * outDuration = …"
+                        "const std::string & path, Pixels & outPixels, float timeSec = 1.0, float * outDuration = nullptr"
                     ],
                     "desc": "Extract a single frame from a video file without loading the full video. Useful for thumbnails",
                     "platformNote": "Static single-frame extraction is fully implemented only on macOS (AVAssetImageGenerator). Windows/Linux/Android stub it (`return false`, TODO); iOS and web have no extractFramePlatform() definition at all.",
@@ -24677,23 +25230,31 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "codec",
-                    "type": "",
-                    "desc": "Output codec (default H264)"
+                    "type": "VideoCodec",
+                    "desc": "Output codec (default H264)",
+                    "desc_ja": "出力コーデック（デフォルト H264）",
+                    "desc_ko": "출력 코덱(기본값 H264)"
                 },
                 {
                     "name": "fps",
-                    "type": "",
-                    "desc": "Capture/output frame rate. For ScreenRecorder this is the capture ceiling; for VideoWriter it is the exact output rate (default 60)"
+                    "type": "float",
+                    "desc": "Capture/output frame rate. For ScreenRecorder this is the capture ceiling; for VideoWriter it is the exact output rate (default 60)",
+                    "desc_ja": "キャプチャ/出力フレームレート。ScreenRecorder ではキャプチャの上限、VideoWriter では正確な出力レート（デフォルト 60）",
+                    "desc_ko": "캡처/출력 프레임레이트. ScreenRecorder에서는 캡처 상한, VideoWriter에서는 정확한 출력 레이트(기본값 60)"
                 },
                 {
                     "name": "bitrate",
-                    "type": "",
-                    "desc": "Target bits/sec for H.264/HEVC; 0 = auto. Ignored by ProRes"
+                    "type": "int",
+                    "desc": "Target bits/sec for H.264/HEVC; 0 = auto. Ignored by ProRes",
+                    "desc_ja": "H.264/HEVC の目標ビットレート（bits/sec）。0 = 自動。ProRes では無視される",
+                    "desc_ko": "H.264/HEVC의 목표 비트레이트(bits/sec). 0 = 자동. ProRes에서는 무시됨"
                 },
                 {
                     "name": "keyframeInterval",
-                    "type": "",
-                    "desc": "Frames between keyframes; 0 = encoder default"
+                    "type": "int",
+                    "desc": "Frames between keyframes; 0 = encoder default",
+                    "desc_ja": "キーフレーム間のフレーム数。0 = エンコーダのデフォルト",
+                    "desc_ko": "키프레임 사이의 프레임 수. 0 = 인코더 기본값"
                 }
             ]
         },
@@ -24732,7 +25293,7 @@ const TrussCAPI = {
                     "name": "open",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, int width, int height, const VideoRecordSettings & settings = …"
+                        "const std::string & path, int width, int height, const VideoRecordSettings & settings = {}"
                     ],
                     "desc": "Open the encoder at the given size (path resolved via getDataPath)"
                 },
@@ -24873,8 +25434,8 @@ const TrussCAPI = {
                     "name": "start",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, const VideoRecordSettings & settings = …",
-                        "const Fbo & fbo, const std::string & path, const VideoRecordSettings & settings = …"
+                        "const std::string & path, const VideoRecordSettings & settings = {}",
+                        "const Fbo & fbo, const std::string & path, const VideoRecordSettings & settings = {}"
                     ],
                     "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically"
                 },
@@ -25324,18 +25885,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "data",
-                    "type": "",
-                    "desc": "Received data"
+                    "type": "std::vector<char>",
+                    "desc": "Received data",
+                    "desc_ja": "受信データ",
+                    "desc_ko": "수신 데이터"
                 },
                 {
                     "name": "remoteHost",
-                    "type": "",
-                    "desc": "Source host"
+                    "type": "std::string",
+                    "desc": "Source host",
+                    "desc_ja": "送信元ホスト",
+                    "desc_ko": "출발지 호스트"
                 },
                 {
                     "name": "remotePort",
-                    "type": "",
-                    "desc": "Source port"
+                    "type": "int",
+                    "desc": "Source port",
+                    "desc_ja": "送信元ポート",
+                    "desc_ko": "출발지 포트"
                 }
             ]
         },
@@ -25356,13 +25923,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "message",
-                    "type": "",
-                    "desc": "Error message"
+                    "type": "std::string",
+                    "desc": "Error message",
+                    "desc_ja": "エラーメッセージ",
+                    "desc_ko": "오류 메시지"
                 },
                 {
                     "name": "errorCode",
-                    "type": "",
-                    "desc": "Error code"
+                    "type": "int",
+                    "desc": "Error code",
+                    "desc_ja": "エラーコード",
+                    "desc_ko": "오류 코드"
                 }
             ]
         },
@@ -25400,13 +25971,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "onReceive",
-                    "type": "",
-                    "desc": "Fired when data is received"
+                    "type": "Event<UdpReceiveEventArgs>",
+                    "desc": "Fired when data is received",
+                    "desc_ja": "データ受信時に発火",
+                    "desc_ko": "데이터 수신 시 발생"
                 },
                 {
                     "name": "onError",
-                    "type": "",
-                    "desc": "Fired on error"
+                    "type": "Event<UdpErrorEventArgs>",
+                    "desc": "Fired on error",
+                    "desc_ja": "エラー時に発火",
+                    "desc_ko": "오류 시 발생"
                 }
             ],
             "methods": [
@@ -25422,7 +25997,7 @@ const TrussCAPI = {
                     "name": "bind",
                     "return": "bool",
                     "signatures": [
-                        "int port, bool startReceiving = …"
+                        "int port, bool startReceiving = true"
                     ],
                     "desc": "Bind a port for receiving (startReceiving auto-starts the receive thread)"
                 },
@@ -25529,7 +26104,7 @@ const TrussCAPI = {
                     "name": "joinMulticastGroup",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & groupAddr, const std::string & interfaceAddr = …"
+                        "const std::string & groupAddr, const std::string & interfaceAddr = std::string(\"\")"
                     ],
                     "desc": "Join a multicast group for receiving (call after bind; \"\" = default route)"
                 },
@@ -25537,7 +26112,7 @@ const TrussCAPI = {
                     "name": "leaveMulticastGroup",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & groupAddr, const std::string & interfaceAddr = …"
+                        "const std::string & groupAddr, const std::string & interfaceAddr = std::string(\"\")"
                     ],
                     "desc": "Leave a previously joined multicast group"
                 },
@@ -25668,13 +26243,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "success",
-                    "type": "",
-                    "desc": "Whether the connection succeeded"
+                    "type": "bool",
+                    "desc": "Whether the connection succeeded",
+                    "desc_ja": "接続に成功したか",
+                    "desc_ko": "연결 성공 여부"
                 },
                 {
                     "name": "message",
-                    "type": "",
-                    "desc": "Connection message"
+                    "type": "std::string",
+                    "desc": "Connection message",
+                    "desc_ja": "接続メッセージ",
+                    "desc_ko": "연결 메시지"
                 }
             ]
         },
@@ -25695,8 +26274,10 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "data",
-                    "type": "",
-                    "desc": "Received data"
+                    "type": "std::vector<char>",
+                    "desc": "Received data",
+                    "desc_ja": "受信データ",
+                    "desc_ko": "수신 데이터"
                 }
             ]
         },
@@ -25717,13 +26298,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "reason",
-                    "type": "",
-                    "desc": "Disconnect reason"
+                    "type": "std::string",
+                    "desc": "Disconnect reason",
+                    "desc_ja": "切断理由",
+                    "desc_ko": "연결 해제 사유"
                 },
                 {
                     "name": "wasClean",
-                    "type": "",
-                    "desc": "Whether it was a clean disconnect"
+                    "type": "bool",
+                    "desc": "Whether it was a clean disconnect",
+                    "desc_ja": "正常な切断だったか",
+                    "desc_ko": "정상적인 연결 해제였는지"
                 }
             ]
         },
@@ -25744,13 +26329,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "message",
-                    "type": "",
-                    "desc": "Error message"
+                    "type": "std::string",
+                    "desc": "Error message",
+                    "desc_ja": "エラーメッセージ",
+                    "desc_ko": "오류 메시지"
                 },
                 {
                     "name": "errorCode",
-                    "type": "",
-                    "desc": "Error code"
+                    "type": "int",
+                    "desc": "Error code",
+                    "desc_ja": "エラーコード",
+                    "desc_ko": "오류 코드"
                 }
             ]
         },
@@ -25789,23 +26378,31 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "onConnect",
-                    "type": "",
-                    "desc": "Fired when the connection completes"
+                    "type": "Event<TcpConnectEventArgs>",
+                    "desc": "Fired when the connection completes",
+                    "desc_ja": "接続完了時に発火",
+                    "desc_ko": "연결 완료 시 발생"
                 },
                 {
                     "name": "onReceive",
-                    "type": "",
-                    "desc": "Fired when data is received"
+                    "type": "Event<TcpReceiveEventArgs>",
+                    "desc": "Fired when data is received",
+                    "desc_ja": "データ受信時に発火",
+                    "desc_ko": "데이터 수신 시 발생"
                 },
                 {
                     "name": "onDisconnect",
-                    "type": "",
-                    "desc": "Fired when disconnected"
+                    "type": "Event<TcpDisconnectEventArgs>",
+                    "desc": "Fired when disconnected",
+                    "desc_ja": "切断時に発火",
+                    "desc_ko": "연결 해제 시 발생"
                 },
                 {
                     "name": "onError",
-                    "type": "",
-                    "desc": "Fired on error"
+                    "type": "Event<TcpErrorEventArgs>",
+                    "desc": "Fired on error",
+                    "desc_ja": "エラー時に発火",
+                    "desc_ko": "오류 시 발생"
                 }
             ],
             "methods": [
@@ -25980,18 +26577,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "clientId",
-                    "type": "",
-                    "desc": "Client ID"
+                    "type": "int",
+                    "desc": "Client ID",
+                    "desc_ja": "クライアントID",
+                    "desc_ko": "클라이언트 ID"
                 },
                 {
                     "name": "host",
-                    "type": "",
-                    "desc": "Client IP address"
+                    "type": "std::string",
+                    "desc": "Client IP address",
+                    "desc_ja": "クライアントのIPアドレス",
+                    "desc_ko": "클라이언트 IP 주소"
                 },
                 {
                     "name": "port",
-                    "type": "",
-                    "desc": "Client port"
+                    "type": "int",
+                    "desc": "Client port",
+                    "desc_ja": "クライアントのポート",
+                    "desc_ko": "클라이언트 포트"
                 }
             ]
         },
@@ -26012,13 +26615,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "clientId",
-                    "type": "",
-                    "desc": "Client ID"
+                    "type": "int",
+                    "desc": "Client ID",
+                    "desc_ja": "クライアントID",
+                    "desc_ko": "클라이언트 ID"
                 },
                 {
                     "name": "data",
-                    "type": "",
-                    "desc": "Received data"
+                    "type": "std::vector<char>",
+                    "desc": "Received data",
+                    "desc_ja": "受信データ",
+                    "desc_ko": "수신 데이터"
                 }
             ]
         },
@@ -26039,18 +26646,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "clientId",
-                    "type": "",
-                    "desc": "Client ID"
+                    "type": "int",
+                    "desc": "Client ID",
+                    "desc_ja": "クライアントID",
+                    "desc_ko": "클라이언트 ID"
                 },
                 {
                     "name": "reason",
-                    "type": "",
-                    "desc": "Disconnect reason"
+                    "type": "std::string",
+                    "desc": "Disconnect reason",
+                    "desc_ja": "切断理由",
+                    "desc_ko": "연결 해제 사유"
                 },
                 {
                     "name": "wasClean",
-                    "type": "",
-                    "desc": "Whether the disconnect was clean"
+                    "type": "bool",
+                    "desc": "Whether the disconnect was clean",
+                    "desc_ja": "正常な切断だったか",
+                    "desc_ko": "정상적인 연결 해제였는지"
                 }
             ]
         },
@@ -26071,18 +26684,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "message",
-                    "type": "",
-                    "desc": "Error message"
+                    "type": "std::string",
+                    "desc": "Error message",
+                    "desc_ja": "エラーメッセージ",
+                    "desc_ko": "오류 메시지"
                 },
                 {
                     "name": "errorCode",
-                    "type": "",
-                    "desc": "Error code"
+                    "type": "int",
+                    "desc": "Error code",
+                    "desc_ja": "エラーコード",
+                    "desc_ko": "오류 코드"
                 },
                 {
                     "name": "clientId",
-                    "type": "",
-                    "desc": "Client ID (-1 = server-level error, not a specific client)"
+                    "type": "int",
+                    "desc": "Client ID (-1 = server-level error, not a specific client)",
+                    "desc_ja": "クライアントID（-1=特定クライアントでないサーバレベルのエラー）",
+                    "desc_ko": "클라이언트 ID (-1 = 특정 클라이언트가 아닌 서버 레벨 오류)"
                 }
             ]
         },
@@ -26120,23 +26739,31 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "onClientConnect",
-                    "type": "",
-                    "desc": "Fired when a client connects"
+                    "type": "Event<TcpClientConnectEventArgs>",
+                    "desc": "Fired when a client connects",
+                    "desc_ja": "クライアント接続時に発火",
+                    "desc_ko": "클라이언트 연결 시 발생"
                 },
                 {
                     "name": "onReceive",
-                    "type": "",
-                    "desc": "Fired when data is received from a client"
+                    "type": "Event<TcpServerReceiveEventArgs>",
+                    "desc": "Fired when data is received from a client",
+                    "desc_ja": "クライアントからのデータ受信時に発火",
+                    "desc_ko": "클라이언트로부터 데이터 수신 시 발생"
                 },
                 {
                     "name": "onClientDisconnect",
-                    "type": "",
-                    "desc": "Fired when a client disconnects"
+                    "type": "Event<TcpClientDisconnectEventArgs>",
+                    "desc": "Fired when a client disconnects",
+                    "desc_ja": "クライアント切断時に発火",
+                    "desc_ko": "클라이언트 연결 해제 시 발생"
                 },
                 {
                     "name": "onError",
-                    "type": "",
-                    "desc": "Fired on a server or per-client error"
+                    "type": "Event<TcpServerErrorEventArgs>",
+                    "desc": "Fired on a server or per-client error",
+                    "desc_ja": "サーバまたはクライアント単位のエラー時に発火",
+                    "desc_ko": "서버 또는 클라이언트별 오류 시 발생"
                 }
             ],
             "methods": [
@@ -26144,7 +26771,7 @@ const TrussCAPI = {
                     "name": "start",
                     "return": "bool",
                     "signatures": [
-                        "int port, int maxClients = …"
+                        "int port, int maxClients = 10"
                     ],
                     "desc": "Start listening on a port"
                 },
@@ -26262,38 +26889,52 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "name",
-                    "type": "",
-                    "desc": "Interface name (en0 / Ethernet / wlan0)"
+                    "type": "std::string",
+                    "desc": "Interface name (en0 / Ethernet / wlan0)",
+                    "desc_ja": "インターフェース名（en0 / Ethernet / wlan0）",
+                    "desc_ko": "인터페이스 이름 (en0 / Ethernet / wlan0)"
                 },
                 {
                     "name": "address",
-                    "type": "",
-                    "desc": "IP address (IPv4 dotted-quad or IPv6 textual)"
+                    "type": "std::string",
+                    "desc": "IP address (IPv4 dotted-quad or IPv6 textual)",
+                    "desc_ja": "IPアドレス（IPv4ドット区切り or IPv6文字列）",
+                    "desc_ko": "IP 주소 (IPv4 점 표기 또는 IPv6 문자열)"
                 },
                 {
                     "name": "netmask",
-                    "type": "",
-                    "desc": "Subnet mask (IPv4)"
+                    "type": "std::string",
+                    "desc": "Subnet mask (IPv4)",
+                    "desc_ja": "サブネットマスク（IPv4）",
+                    "desc_ko": "서브넷 마스크 (IPv4)"
                 },
                 {
                     "name": "mac",
-                    "type": "",
-                    "desc": "Hardware MAC address (empty if unavailable)"
+                    "type": "std::string",
+                    "desc": "Hardware MAC address (empty if unavailable)",
+                    "desc_ja": "ハードウェアMACアドレス（取得不可なら空）",
+                    "desc_ko": "하드웨어 MAC 주소 (없으면 빈 문자열)"
                 },
                 {
                     "name": "isIPv4",
-                    "type": "",
-                    "desc": "True for IPv4, false for IPv6"
+                    "type": "bool",
+                    "desc": "True for IPv4, false for IPv6",
+                    "desc_ja": "IPv4ならtrue、IPv6ならfalse",
+                    "desc_ko": "IPv4이면 true, IPv6이면 false"
                 },
                 {
                     "name": "isLoopback",
-                    "type": "",
-                    "desc": "True if a loopback interface"
+                    "type": "bool",
+                    "desc": "True if a loopback interface",
+                    "desc_ja": "ループバックインターフェースならtrue",
+                    "desc_ko": "루프백 인터페이스이면 true"
                 },
                 {
                     "name": "isUp",
-                    "type": "",
-                    "desc": "True if the interface link is up"
+                    "type": "bool",
+                    "desc": "True if the interface link is up",
+                    "desc_ja": "リンクが有効ならtrue",
+                    "desc_ko": "링크가 활성 상태이면 true"
                 }
             ],
             "methods": [
@@ -26373,18 +27014,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "deviceId",
-                    "type": "",
-                    "desc": "Device index"
+                    "type": "int",
+                    "desc": "Device index",
+                    "desc_ja": "デバイスインデックス",
+                    "desc_ko": "장치 인덱스"
                 },
                 {
                     "name": "devicePath",
-                    "type": "",
-                    "desc": "Device path (e.g. COM3, /dev/tty.usbserial-*)"
+                    "type": "std::string",
+                    "desc": "Device path (e.g. COM3, /dev/tty.usbserial-*)",
+                    "desc_ja": "デバイスパス（例: COM3, /dev/tty.usbserial-*）",
+                    "desc_ko": "장치 경로 (예: COM3, /dev/tty.usbserial-*)"
                 },
                 {
                     "name": "deviceName",
-                    "type": "",
-                    "desc": "Device name"
+                    "type": "std::string",
+                    "desc": "Device name",
+                    "desc_ja": "デバイス名",
+                    "desc_ko": "장치 이름"
                 }
             ],
             "methods": [
@@ -26631,49 +27278,65 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     "",
-                    "Wave w, float freq, float dur, float vol = …"
+                    "Wave w, float freq, float dur, float vol = 0.5"
                 ]
             },
             "properties": [
                 {
                     "name": "wave",
-                    "type": "",
-                    "desc": "Waveform (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise, Silent)"
+                    "type": "Wave",
+                    "desc": "Waveform (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise, Silent)",
+                    "desc_ja": "波形 (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise, Silent)",
+                    "desc_ko": "파형 (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise, Silent)"
                 },
                 {
                     "name": "hz",
-                    "type": "",
-                    "desc": "Frequency in Hz (ignored for Noise / Silent)"
+                    "type": "float",
+                    "desc": "Frequency in Hz (ignored for Noise / Silent)",
+                    "desc_ja": "周波数 (Hz)。Noise / Silent では無視",
+                    "desc_ko": "주파수 (Hz). Noise / Silent에서는 무시"
                 },
                 {
                     "name": "volume",
-                    "type": "",
-                    "desc": "Volume (0.0-1.0)"
+                    "type": "float",
+                    "desc": "Volume (0.0-1.0)",
+                    "desc_ja": "音量 (0.0-1.0)",
+                    "desc_ko": "음량 (0.0-1.0)"
                 },
                 {
                     "name": "duration",
-                    "type": "",
-                    "desc": "Note duration in seconds"
+                    "type": "float",
+                    "desc": "Note duration in seconds",
+                    "desc_ja": "ノートの長さ (秒)",
+                    "desc_ko": "노트 길이 (초)"
                 },
                 {
                     "name": "attack",
-                    "type": "",
-                    "desc": "ADSR attack time in seconds"
+                    "type": "float",
+                    "desc": "ADSR attack time in seconds",
+                    "desc_ja": "ADSR アタック時間 (秒)",
+                    "desc_ko": "ADSR 어택 시간 (초)"
                 },
                 {
                     "name": "decay",
-                    "type": "",
-                    "desc": "ADSR decay time in seconds"
+                    "type": "float",
+                    "desc": "ADSR decay time in seconds",
+                    "desc_ja": "ADSR ディケイ時間 (秒)",
+                    "desc_ko": "ADSR 디케이 시간 (초)"
                 },
                 {
                     "name": "sustain",
-                    "type": "",
-                    "desc": "ADSR sustain level (0.0-1.0)"
+                    "type": "float",
+                    "desc": "ADSR sustain level (0.0-1.0)",
+                    "desc_ja": "ADSR サスティンレベル (0.0-1.0)",
+                    "desc_ko": "ADSR 서스테인 레벨 (0.0-1.0)"
                 },
                 {
                     "name": "release",
-                    "type": "",
-                    "desc": "ADSR release time in seconds"
+                    "type": "float",
+                    "desc": "ADSR release time in seconds",
+                    "desc_ja": "ADSR リリース時間 (秒)",
+                    "desc_ko": "ADSR 릴리스 시간 (초)"
                 }
             ],
             "methods": [
@@ -26733,13 +27396,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "entries",
-                    "type": "",
-                    "desc": "The scheduled notes (each Entry pairs a ChipSoundNote with its start time in seconds)"
+                    "type": "std::vector<Entry>",
+                    "desc": "The scheduled notes (each Entry pairs a ChipSoundNote with its start time in seconds)",
+                    "desc_ja": "スケジュールされたノート (各 Entry は ChipSoundNote と開始時刻 (秒) を組にする)",
+                    "desc_ko": "스케줄된 노트 (각 Entry 는 ChipSoundNote 와 시작 시각 (초) 을 짝지음)"
                 },
                 {
                     "name": "volume",
-                    "type": "",
-                    "desc": "Master volume multiplier applied when mixing (default 1.0)"
+                    "type": "float",
+                    "desc": "Master volume multiplier applied when mixing (default 1.0)",
+                    "desc_ja": "ミックス時に適用されるマスターボリューム倍率 (デフォルト 1.0)",
+                    "desc_ko": "믹스 시 적용되는 마스터 볼륨 배율 (기본값 1.0)"
                 }
             ],
             "methods": [
@@ -26748,7 +27415,7 @@ const TrussCAPI = {
                     "return": "ChipSoundBundle &",
                     "signatures": [
                         "const ChipSoundNote & note, float time",
-                        "ChipSoundNote::Wave wave, float hz, float duration, float time, float vol = …"
+                        "ChipSoundNote::Wave wave, float hz, float duration, float time, float vol = 0.5"
                     ],
                     "desc": "Schedule a note to start at the given time (seconds). The second overload constructs the note inline from wave / frequency / duration."
                 },
@@ -26787,13 +27454,17 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "note",
-                    "type": "",
-                    "desc": ""
+                    "type": "ChipSoundNote",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "time",
-                    "type": "",
-                    "desc": ""
+                    "type": "float",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ]
         },
@@ -26833,14 +27504,16 @@ const TrussCAPI = {
             "constructor": {
                 "signatures": [
                     "",
-                    "T start, T end, float duration, EaseType type = …, EaseMode mode = …"
+                    "T start, T end, float duration, EaseType type = Cubic, EaseMode mode = InOut"
                 ]
             },
             "properties": [
                 {
                     "name": "complete",
-                    "type": "",
-                    "desc": "Event fired once the tween finishes; subscribe with complete->listen(...)"
+                    "type": "std::unique_ptr<Event<void>>",
+                    "desc": "Event fired once the tween finishes; subscribe with complete->listen(...)",
+                    "desc_ja": "トゥイーン完了時に一度発火するイベント。complete->listen(...) で購読する",
+                    "desc_ko": "트윈이 완료될 때 한 번 발생하는 이벤트. complete->listen(...) 으로 구독"
                 }
             ],
             "methods": [
@@ -26872,7 +27545,7 @@ const TrussCAPI = {
                     "name": "ease",
                     "return": "Tween<T> &",
                     "signatures": [
-                        "EaseType type, EaseMode mode = …",
+                        "EaseType type, EaseMode mode = InOut",
                         "EaseType inType, EaseType outType"
                     ],
                     "desc": "Set the easing curve; the two-type overload uses an asymmetric ease (one curve in, another out)"
@@ -26889,7 +27562,7 @@ const TrussCAPI = {
                     "name": "yoyo",
                     "return": "Tween<T> &",
                     "signatures": [
-                        "bool enable = …"
+                        "bool enable = true"
                     ],
                     "desc": "Reverse direction on each loop iteration (chainable)"
                 },
@@ -27027,6 +27700,37 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "Mod",
+            "desc": "Attachable behavior base class for Node. Subclass it, override the lifecycle and input hooks, and attach with node->addMod<T>(). Lifecycle: setup() on attach, then each frame earlyUpdate() -> Node::update() -> update() -> draw(), and onDestroy() on removal. Override isExclusive() to allow only one instance per Node, and canAttachTo() to restrict attachment.",
+            "keywords": [
+                "component",
+                "behavior",
+                "module",
+                "addmod",
+                "attach",
+                "plugin"
+            ],
+            "desc_ja": "Node にアタッチできる振る舞いの基底クラス。サブクラス化してライフサイクルと入力フックをオーバーライドし、node->addMod<T>() でアタッチする。ライフサイクル: アタッチ時に setup()、以降毎フレーム earlyUpdate() -> Node::update() -> update() -> draw()、削除時に onDestroy()。isExclusive() をオーバーライドすると Node ごとに1インスタンスのみ許可、canAttachTo() でアタッチ先を制限できる",
+            "desc_ko": "Node에 부착 가능한 동작 기반 클래스. 서브클래싱하여 라이프사이클과 입력 훅을 오버라이드하고 node->addMod<T>()로 부착. 라이프사이클: 부착 시 setup(), 이후 매 프레임 earlyUpdate() -> Node::update() -> update() -> draw(), 제거 시 onDestroy(). isExclusive()를 오버라이드하면 Node당 한 인스턴스만 허용, canAttachTo()로 부착 대상을 제한",
+            "related": [
+                "Node",
+                "LayoutMod",
+                "TweenMod",
+                "addChild"
+            ],
+            "methods": [
+                {
+                    "name": "getOwner",
+                    "return": "Node *",
+                    "signatures": [
+                        "",
+                        ""
+                    ],
+                    "desc": "Get the owner Node this Mod is attached to."
+                }
+            ]
+        },
+        {
             "name": "Node",
             "desc": "Base scene-graph node: transform hierarchy with parent/children, update/draw, input events and attachable Mods (C++ only, managed via shared_ptr / NodePtr)",
             "keywords": [
@@ -27058,11 +27762,18 @@ const TrussCAPI = {
                 "getRootNode",
                 "Mod"
             ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
             "properties": [
                 {
                     "name": "localMatrixChanged",
-                    "type": "",
-                    "desc": ""
+                    "type": "Event<void>",
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
             "methods": [
@@ -27102,7 +27813,7 @@ const TrussCAPI = {
                     "name": "addChild",
                     "return": "void",
                     "signatures": [
-                        "Ptr child, bool keepGlobalPosition = …"
+                        "Ptr child, bool keepGlobalPosition = false"
                     ],
                     "desc": "Add a child node (C++ only)"
                 },
@@ -27110,7 +27821,7 @@ const TrussCAPI = {
                     "name": "insertChild",
                     "return": "void",
                     "signatures": [
-                        "size_t index, Ptr child, bool keepGlobalPosition = …"
+                        "size_t index, Ptr child, bool keepGlobalPosition = false"
                     ],
                     "desc": "Insert a child node at a specific index (C++ only)"
                 },
@@ -27419,7 +28130,7 @@ const TrussCAPI = {
                     "return": "void",
                     "signatures": [
                         "const Vec3 & pos",
-                        "float x, float y, float z = …"
+                        "float x, float y, float z = 0.0"
                     ],
                     "desc": "Set local position (C++ only)"
                 },
@@ -27566,7 +28277,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const Vec3 & s",
                         "float uniform",
-                        "float sx, float sy, float sz = …"
+                        "float sx, float sy, float sz = 1.0"
                     ],
                     "desc": "Set local scale (vector, uniform, or per-axis) (C++ only)"
                 },
@@ -27643,7 +28354,7 @@ const TrussCAPI = {
                     "return": "void",
                     "signatures": [
                         "const Vec3 & global",
-                        "float x, float y, float z = …"
+                        "float x, float y, float z = 0.0"
                     ],
                     "desc": "Set the node's position in global (world) space (C++ only)"
                 },
@@ -27750,37 +28461,6 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "Mod",
-            "desc": "Attachable behavior base class for Node. Subclass it, override the lifecycle and input hooks, and attach with node->addMod<T>(). Lifecycle: setup() on attach, then each frame earlyUpdate() -> Node::update() -> update() -> draw(), and onDestroy() on removal. Override isExclusive() to allow only one instance per Node, and canAttachTo() to restrict attachment.",
-            "keywords": [
-                "component",
-                "behavior",
-                "module",
-                "addmod",
-                "attach",
-                "plugin"
-            ],
-            "desc_ja": "Node にアタッチできる振る舞いの基底クラス。サブクラス化してライフサイクルと入力フックをオーバーライドし、node->addMod<T>() でアタッチする。ライフサイクル: アタッチ時に setup()、以降毎フレーム earlyUpdate() -> Node::update() -> update() -> draw()、削除時に onDestroy()。isExclusive() をオーバーライドすると Node ごとに1インスタンスのみ許可、canAttachTo() でアタッチ先を制限できる",
-            "desc_ko": "Node에 부착 가능한 동작 기반 클래스. 서브클래싱하여 라이프사이클과 입력 훅을 오버라이드하고 node->addMod<T>()로 부착. 라이프사이클: 부착 시 setup(), 이후 매 프레임 earlyUpdate() -> Node::update() -> update() -> draw(), 제거 시 onDestroy(). isExclusive()를 오버라이드하면 Node당 한 인스턴스만 허용, canAttachTo()로 부착 대상을 제한",
-            "related": [
-                "Node",
-                "LayoutMod",
-                "TweenMod",
-                "addChild"
-            ],
-            "methods": [
-                {
-                    "name": "getOwner",
-                    "return": "Node *",
-                    "signatures": [
-                        "",
-                        ""
-                    ],
-                    "desc": "Get the owner Node this Mod is attached to."
-                }
-            ]
-        },
-        {
             "name": "HitResult",
             "desc": "Result of a node hit test (this is Node::HitResult). Returned by Node::findHitNode() / findHitNodeFromScreen(); call hit() to check whether anything was hit.",
             "keywords": [
@@ -27800,18 +28480,24 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "node",
-                    "type": "",
-                    "desc": "The hit node (shared_ptr), or null if nothing was hit."
+                    "type": "Ptr",
+                    "desc": "The hit node (shared_ptr), or null if nothing was hit.",
+                    "desc_ja": "ヒットしたノード (shared_ptr)、何もヒットしなければ null",
+                    "desc_ko": "맞은 노드 (shared_ptr), 아무것도 맞지 않으면 null"
                 },
                 {
                     "name": "distance",
-                    "type": "",
-                    "desc": "Distance from the ray origin to the hit point."
+                    "type": "float",
+                    "desc": "Distance from the ray origin to the hit point.",
+                    "desc_ja": "レイの原点からヒット点までの距離",
+                    "desc_ko": "레이 원점에서 히트 지점까지의 거리"
                 },
                 {
                     "name": "localPoint",
-                    "type": "",
-                    "desc": "Hit position in the hit node's local coordinates."
+                    "type": "Vec3",
+                    "desc": "Hit position in the hit node's local coordinates.",
+                    "desc_ja": "ヒットしたノードのローカル座標でのヒット位置",
+                    "desc_ko": "맞은 노드의 로컬 좌표 기준 히트 위치"
                 }
             ],
             "methods": [
@@ -27860,23 +28546,31 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "mousePressed",
-                    "type": "",
-                    "desc": "Fired when a mouse button is pressed over this node (localized args)"
+                    "type": "Event<MouseEventArgs>",
+                    "desc": "Fired when a mouse button is pressed over this node (localized args)",
+                    "desc_ja": "このノード上でマウスボタンが押されたときに発火（ローカル座標の引数）",
+                    "desc_ko": "이 노드 위에서 마우스 버튼이 눌렸을 때 발생 (로컬 좌표 인자)"
                 },
                 {
                     "name": "mouseReleased",
-                    "type": "",
-                    "desc": "Fired when a mouse button is released over this node (localized args)"
+                    "type": "Event<MouseEventArgs>",
+                    "desc": "Fired when a mouse button is released over this node (localized args)",
+                    "desc_ja": "このノード上でマウスボタンが離されたときに発火（ローカル座標の引数）",
+                    "desc_ko": "이 노드 위에서 마우스 버튼이 떼어졌을 때 발생 (로컬 좌표 인자)"
                 },
                 {
                     "name": "mouseDragged",
-                    "type": "",
-                    "desc": "Fired when the mouse is dragged on this node (localized args)"
+                    "type": "Event<MouseDragEventArgs>",
+                    "desc": "Fired when the mouse is dragged on this node (localized args)",
+                    "desc_ja": "このノード上でマウスがドラッグされたときに発火（ローカル座標の引数）",
+                    "desc_ko": "이 노드 위에서 마우스가 드래그될 때 발생 (로컬 좌표 인자)"
                 },
                 {
                     "name": "mouseScrolled",
-                    "type": "",
-                    "desc": "Fired when the mouse wheel / trackpad scrolls over this node (localized args)"
+                    "type": "Event<ScrollEventArgs>",
+                    "desc": "Fired when the mouse wheel / trackpad scrolls over this node (localized args)",
+                    "desc_ja": "このノード上でホイール/トラックパッドがスクロールしたときに発火（ローカル座標の引数）",
+                    "desc_ko": "이 노드 위에서 휠/트랙패드가 스크롤될 때 발생 (로컬 좌표 인자)"
                 }
             ],
             "methods": [
@@ -28039,23 +28733,31 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "normalColor",
-                    "type": "",
-                    "desc": "Fill color when idle (default dark grey)."
+                    "type": "Color",
+                    "desc": "Fill color when idle (default dark grey).",
+                    "desc_ja": "アイドル時の塗りつぶし色（デフォルトはダークグレー）",
+                    "desc_ko": "유휴 상태일 때의 채우기 색상(기본값 진한 회색)"
                 },
                 {
                     "name": "hoverColor",
-                    "type": "",
-                    "desc": "Fill color when the pointer is over the button."
+                    "type": "Color",
+                    "desc": "Fill color when the pointer is over the button.",
+                    "desc_ja": "ポインタがボタン上にあるときの塗りつぶし色",
+                    "desc_ko": "포인터가 버튼 위에 있을 때의 채우기 색상"
                 },
                 {
                     "name": "pressColor",
-                    "type": "",
-                    "desc": "Fill color while pressed."
+                    "type": "Color",
+                    "desc": "Fill color while pressed.",
+                    "desc_ja": "押下中の塗りつぶし色",
+                    "desc_ko": "눌린 동안의 채우기 색상"
                 },
                 {
                     "name": "label",
-                    "type": "",
-                    "desc": "Text drawn centered on the button (skipped if empty)."
+                    "type": "std::string",
+                    "desc": "Text drawn centered on the button (skipped if empty).",
+                    "desc_ja": "ボタンに中央寄せで描画されるテキスト（空なら描画されない）",
+                    "desc_ko": "버튼에 가운데 정렬로 그려지는 텍스트(비어 있으면 그리지 않음)"
                 }
             ],
             "methods": [
@@ -28110,7 +28812,7 @@ const TrussCAPI = {
             ],
             "constructor": {
                 "signatures": [
-                    "LayoutDirection direction = …, float spacing = …"
+                    "LayoutDirection direction = Vertical, float spacing = 0.0"
                 ]
             },
             "methods": [
@@ -28470,7 +29172,7 @@ const TrussCAPI = {
             ],
             "constructor": {
                 "signatures": [
-                    "ScrollContainer * container, Direction dir = …"
+                    "ScrollContainer * container, Direction dir = Vertical"
                 ]
             },
             "methods": [
@@ -28572,8 +29274,10 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "complete",
-                    "type": "",
-                    "desc": "Fired once when all tweens finish; subscribe with complete.listen(callback)"
+                    "type": "Event<void>",
+                    "desc": "Fired once when all tweens finish; subscribe with complete.listen(callback)",
+                    "desc_ja": "全アニメーション完了時に一度だけ発火。complete.listen(callback) で購読",
+                    "desc_ko": "모든 애니메이션이 끝나면 한 번 발생. complete.listen(callback)으로 구독"
                 }
             ],
             "methods": [
@@ -28581,7 +29285,7 @@ const TrussCAPI = {
                     "name": "moveTo",
                     "return": "TweenMod &",
                     "signatures": [
-                        "float x, float y, float z = …",
+                        "float x, float y, float z = 0.0",
                         "const Vec3 & pos",
                         "const Vec2 & pos"
                     ],
@@ -28591,7 +29295,7 @@ const TrussCAPI = {
                     "name": "moveBy",
                     "return": "TweenMod &",
                     "signatures": [
-                        "float dx, float dy, float dz = …",
+                        "float dx, float dy, float dz = 0.0",
                         "const Vec3 & delta",
                         "const Vec2 & delta"
                     ],
@@ -28601,7 +29305,7 @@ const TrussCAPI = {
                     "name": "moveFrom",
                     "return": "TweenMod &",
                     "signatures": [
-                        "float x, float y, float z = …",
+                        "float x, float y, float z = 0.0",
                         "const Vec3 & pos"
                     ],
                     "desc": "Set an explicit start position for the position tween (TweenMod method) (C++ only)"
@@ -28611,7 +29315,7 @@ const TrussCAPI = {
                     "return": "TweenMod &",
                     "signatures": [
                         "float uniform",
-                        "float sx, float sy, float sz = …",
+                        "float sx, float sy, float sz = 1.0",
                         "const Vec3 & s"
                     ],
                     "desc": "Animate scale to target (TweenMod method) (C++ only)"
@@ -28621,7 +29325,7 @@ const TrussCAPI = {
                     "return": "TweenMod &",
                     "signatures": [
                         "float factor",
-                        "float sx, float sy, float sz = …"
+                        "float sx, float sy, float sz = 1.0"
                     ],
                     "desc": "Animate scale by relative multiplier (TweenMod method) (C++ only)"
                 },
@@ -28630,7 +29334,7 @@ const TrussCAPI = {
                     "return": "TweenMod &",
                     "signatures": [
                         "float uniform",
-                        "float sx, float sy, float sz = …"
+                        "float sx, float sy, float sz = 1.0"
                     ],
                     "desc": "Set an explicit start scale for the scale tween (TweenMod method) (C++ only)"
                 },
@@ -28736,7 +29440,7 @@ const TrussCAPI = {
                     "name": "ease",
                     "return": "TweenMod &",
                     "signatures": [
-                        "EaseType type, EaseMode mode = …"
+                        "EaseType type, EaseMode mode = InOut"
                     ],
                     "desc": "Set easing function (TweenMod method). Types: Linear, Quad, Cubic, Quart, Quint, Sine, Expo, Circ, Back, Elastic, Bounce. Modes: In, Out, InOut (C++ only)"
                 },
@@ -29108,8 +29812,10 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "targetFps",
-                    "type": "",
-                    "desc": "Target update rate (default 60)"
+                    "type": "float",
+                    "desc": "Target update rate (default 60)",
+                    "desc_ja": "目標 update レート (デフォルト 60)",
+                    "desc_ko": "목표 update 레이트 (기본값 60)"
                 }
             ],
             "methods": [
@@ -29435,40 +30141,6 @@ const TrussCAPI = {
             "related": [
                 "getMouseButton",
                 "MouseEventArgs"
-            ]
-        },
-        {
-            "name": "Kind",
-            "desc": "Source kind tag on SoundSource, letting the mixer dispatch without a per-frame virtual call: Eager (SoundBuffer, full PCM in RAM) vs Stream (SoundStream, decoded on demand).",
-            "keywords": [
-                "sound kind",
-                "eager",
-                "stream",
-                "source type",
-                "buffer vs stream"
-            ],
-            "values": [
-                {
-                    "name": "Eager",
-                    "value": 0,
-                    "desc": "Eager source (SoundBuffer): the whole file decoded into RAM.",
-                    "desc_ja": "Eager ソース (SoundBuffer): ファイル全体を RAM にデコード",
-                    "desc_ko": "Eager 소스 (SoundBuffer): 파일 전체를 RAM에 디코딩"
-                },
-                {
-                    "name": "Stream",
-                    "value": 1,
-                    "desc": "Streaming source (SoundStream): decoded on demand from disk.",
-                    "desc_ja": "ストリーミングソース (SoundStream): ディスクからオンデマンドにデコード",
-                    "desc_ko": "스트리밍 소스 (SoundStream): 디스크에서 on-demand 디코딩"
-                }
-            ],
-            "desc_ja": "SoundSource の種別タグ。ミキサーがフレームごとの仮想呼び出しなしにディスパッチできる: Eager (SoundBuffer、全 PCM を RAM 保持) と Stream (SoundStream、オンデマンドにデコード)",
-            "desc_ko": "SoundSource의 종류 태그. 믹서가 프레임마다의 가상 호출 없이 디스패치 가능: Eager (SoundBuffer, 전체 PCM을 RAM 보유) 와 Stream (SoundStream, on-demand 디코딩)",
-            "related": [
-                "SoundSource",
-                "SoundBuffer",
-                "SoundStream"
             ]
         },
         {
@@ -29839,41 +30511,6 @@ const TrussCAPI = {
             "related": [
                 "PrimitiveMode",
                 "Mesh"
-            ]
-        },
-        {
-            "name": "Mode",
-            "desc": "Curve tessellation mode: adaptive tolerance or fixed resolution",
-            "keywords": [
-                "curve",
-                "tessellation",
-                "tolerance",
-                "resolution",
-                "adaptive",
-                "mode"
-            ],
-            "values": [
-                {
-                    "name": "Tolerance",
-                    "value": 0,
-                    "desc": "Pick segment count so the chord-to-curve error stays under the tolerance (pixels)",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Resolution",
-                    "value": 1,
-                    "desc": "Use a fixed segment count regardless of radius",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                }
-            ],
-            "desc_ja": "曲線テッセレーションモード: 適応トレランスまたは固定解像度",
-            "desc_ko": "곡선 테셀레이션 모드: 적응형 톨러런스 또는 고정 해상도",
-            "related": [
-                "CurveStyle",
-                "setCurveTolerance",
-                "setCurveResolution"
             ]
         },
         {
@@ -30600,90 +31237,6 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "CapType",
-            "desc": "Line cap shape for the ends of an open stroke",
-            "keywords": [
-                "stroke",
-                "cap",
-                "line end",
-                "butt",
-                "round",
-                "square"
-            ],
-            "values": [
-                {
-                    "name": "CAP_BUTT",
-                    "value": 0,
-                    "desc": "Butt cap (cut flat at the endpoint)",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "CAP_ROUND",
-                    "value": 1,
-                    "desc": "Round cap (semicircle)",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "CAP_SQUARE",
-                    "value": 2,
-                    "desc": "Square cap (extend by half the width)",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                }
-            ],
-            "desc_ja": "開いたストロークの端のラインキャップ形状",
-            "desc_ko": "열린 스트로크 끝의 라인 캡 모양",
-            "related": [
-                "StrokeMesh",
-                "setCapType",
-                "setStrokeCap"
-            ]
-        },
-        {
-            "name": "JoinType",
-            "desc": "Line join shape at the corners of a stroke",
-            "keywords": [
-                "stroke",
-                "join",
-                "corner",
-                "miter",
-                "round",
-                "bevel"
-            ],
-            "values": [
-                {
-                    "name": "JOIN_MITER",
-                    "value": 0,
-                    "desc": "Miter join (sharp pointed corners)",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "JOIN_ROUND",
-                    "value": 1,
-                    "desc": "Round join (rounded corners)",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "JOIN_BEVEL",
-                    "value": 2,
-                    "desc": "Bevel join (flat cut corners)",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                }
-            ],
-            "desc_ja": "ストロークのコーナーのラインジョイン形状",
-            "desc_ko": "스트로크 모서리의 라인 조인 모양",
-            "related": [
-                "StrokeMesh",
-                "setJoinType",
-                "setMiterLimit"
-            ]
-        },
-        {
             "name": "WritingMode",
             "desc": "",
             "keywords": [
@@ -30851,120 +31404,6 @@ const TrussCAPI = {
                 "VideoRecordSettings",
                 "startRecording"
             ]
-        },
-        {
-            "name": "Modifier",
-            "desc": "",
-            "keywords": [
-                "shift",
-                "ctrl",
-                "alt",
-                "cmd",
-                "meta",
-                "key",
-                "hotkey"
-            ],
-            "values": [
-                {
-                    "name": "None",
-                    "value": 0,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Shift",
-                    "value": 1,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Ctrl",
-                    "value": 2,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Alt",
-                    "value": 3,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Super",
-                    "value": 4,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                }
-            ],
-            "desc_ja": "",
-            "desc_ko": "",
-            "related": [
-                "isShiftPressed",
-                "KeyEventArgs"
-            ]
-        },
-        {
-            "name": "Wave",
-            "desc": "",
-            "keywords": [],
-            "values": [
-                {
-                    "name": "Sin",
-                    "value": 0,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Square",
-                    "value": 1,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Triangle",
-                    "value": 2,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Sawtooth",
-                    "value": 3,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Noise",
-                    "value": 4,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "PinkNoise",
-                    "value": 5,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Silent",
-                    "value": 6,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                }
-            ],
-            "desc_ja": "",
-            "desc_ko": ""
         },
         {
             "name": "EaseType",
@@ -31186,29 +31625,6 @@ const TrussCAPI = {
                 "Direction",
                 "LayoutMod"
             ]
-        },
-        {
-            "name": "Direction",
-            "desc": "",
-            "keywords": [],
-            "values": [
-                {
-                    "name": "Vertical",
-                    "value": 0,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Horizontal",
-                    "value": 1,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                }
-            ],
-            "desc_ja": "",
-            "desc_ko": ""
         }
     ],
     "macros": [
