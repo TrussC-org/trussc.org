@@ -486,6 +486,52 @@
         return h;
     }
 
+    // Minimal Markdown → HTML for long-form `details` (fenced code, GFM tables,
+    // headings, lists, inline code/bold/italic). Self-contained inline styles so no
+    // CSS file change is needed; all output is escaped.
+    const MD = {
+        pre: 'background:var(--color-bg,#0a0a0b);border:1px solid var(--color-border,#3c3c3c);border-radius:6px;padding:10px 12px;margin:8px 0;overflow-x:auto;',
+        codeBlk: "font-family:'JetBrains Mono','SF Mono',Consolas,monospace;font-size:12px;line-height:1.6;color:#d4d4d4;",
+        codeInline: "font-family:'JetBrains Mono','SF Mono',Consolas,monospace;font-size:0.92em;background:rgba(255,255,255,0.07);padding:1px 5px;border-radius:3px;",
+        tbl: 'border-collapse:collapse;margin:8px 0;font-size:13px;',
+        th: 'border:1px solid var(--color-border,#3c3c3c);padding:5px 11px;text-align:left;background:rgba(255,255,255,0.05);font-weight:600;',
+        td: 'border:1px solid var(--color-border,#3c3c3c);padding:5px 11px;',
+        h: { 1: 'font-size:18px;font-weight:700;margin:14px 0 6px;', 2: 'font-size:16px;font-weight:700;margin:12px 0 5px;', 3: 'font-size:14px;font-weight:600;margin:10px 0 4px;' },
+    };
+    function mdInline(s) {
+        return esc(s)
+            .replace(/`([^`]+)`/g, (_, c) => `<code style="${MD.codeInline}">${c}</code>`)
+            .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+            .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    }
+    function mdToHtml(src) {
+        const L = String(src).replace(/\r\n/g, '\n').split('\n');
+        const isSep = (s) => /-/.test(s) && /^\s*\|?[\s:|-]+\|?\s*$/.test(s);
+        const row = (s) => s.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
+        const out = [];
+        let i = 0;
+        while (i < L.length) {
+            const line = L[i];
+            let m = /^```(\w*)\s*$/.exec(line);
+            if (m) { const buf = []; i++; while (i < L.length && !/^```\s*$/.test(L[i])) { buf.push(L[i]); i++; } i++; out.push(`<pre style="${MD.pre}"><code style="${MD.codeBlk}">${esc(buf.join('\n'))}</code></pre>`); continue; }
+            m = /^(#{1,4})\s+(.*)$/.exec(line);
+            if (m) { out.push(`<div style="${MD.h[m[1].length] || MD.h[3]}">${mdInline(m[2])}</div>`); i++; continue; }
+            if (/\|/.test(line) && i + 1 < L.length && isSep(L[i + 1])) {
+                const head = row(line); i += 2; const body = [];
+                while (i < L.length && /\|/.test(L[i]) && L[i].trim()) { body.push(row(L[i])); i++; }
+                let t = `<table style="${MD.tbl}"><thead><tr>` + head.map((h) => `<th style="${MD.th}">${mdInline(h)}</th>`).join('') + '</tr></thead><tbody>';
+                for (const r of body) t += '<tr>' + r.map((c) => `<td style="${MD.td}">${mdInline(c)}</td>`).join('') + '</tr>';
+                out.push(t + '</tbody></table>'); continue;
+            }
+            if (/^\s*[-*]\s+/.test(line)) { const items = []; while (i < L.length && /^\s*[-*]\s+/.test(L[i])) { items.push(L[i].replace(/^\s*[-*]\s+/, '')); i++; } out.push('<ul style="margin:6px 0;padding-left:20px;">' + items.map((it) => `<li>${mdInline(it)}</li>`).join('') + '</ul>'); continue; }
+            if (line.trim() === '') { i++; continue; }
+            const para = [line]; i++;
+            while (i < L.length && L[i].trim() && !/^```/.test(L[i]) && !/^#{1,4}\s/.test(L[i]) && !/^\s*[-*]\s+/.test(L[i]) && !(/\|/.test(L[i]) && i + 1 < L.length && isSep(L[i + 1]))) { para.push(L[i]); i++; }
+            out.push(`<p style="margin:6px 0;">${para.map(mdInline).join('<br>')}</p>`);
+        }
+        return out.join('');
+    }
+
     function renderFunctionDetail(name, category) {
         const overloads = [];
         for (const cat of TrussCAPI.categories) {
@@ -507,7 +553,7 @@
         // Optional long-form details (multi-line), shown only here in the detail pane.
         const details = (overloads.find(o => o.details) || {}).details;
         if (details) {
-            html += `<div class="detail-details" style="white-space:pre-wrap;color:#bbb;font-size:13px;line-height:1.7;margin:6px 0 4px;">${esc(details)}</div>`;
+            html += `<div class="detail-details" style="color:#bbb;font-size:13px;line-height:1.7;margin:6px 0 4px;">${mdToHtml(details)}</div>`;
         }
 
         // Platform support (only when the symbol is restricted on some platform).
@@ -659,9 +705,9 @@
         let html = backButton();
         html += `<div class="detail-title">${esc(c.name)}</div>`;
         html += `<div class="detail-desc">${esc(c.desc || UI.constantValue)}</div>`;
-        // Long-form notes (e.g. the TAU/PI essays) — same treatment as function detail.
+        // Long-form notes (e.g. the TAU/PI essays) — Markdown-rendered, same as functions.
         if (c.details) {
-            html += `<div class="detail-details" style="white-space:pre-wrap;color:#bbb;font-size:13px;line-height:1.7;margin:6px 0 4px;">${esc(c.details)}</div>`;
+            html += `<div class="detail-details" style="color:#bbb;font-size:13px;line-height:1.7;margin:6px 0 4px;">${mdToHtml(c.details)}</div>`;
         }
         if (c.value !== undefined && c.value !== null) {   // don't print the literal word "undefined"
             html += `<div class="detail-section">`;
