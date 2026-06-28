@@ -2761,7 +2761,8 @@ const TrussCAPI = {
                         "setCurveResolution"
                     ],
                     "deprecated": {
-                        "reason": "Use setCurveResolution(int), or setCurveTolerance(float) for adaptive quality. Will be removed in v1.0.0"
+                        "reason": "Use setCurveResolution(int), or setCurveTolerance(float) for adaptive quality. Will be removed in v1.0.0",
+                        "replacement": "setCurveResolution"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setCurveResolution(int)`, or `setCurveTolerance(float)` for adaptive scale-aware quality. Scheduled for removal in v1.0.0."
                 },
@@ -2783,7 +2784,8 @@ const TrussCAPI = {
                         "getCurveResolution"
                     ],
                     "deprecated": {
-                        "reason": "Use getCurveResolution() instead. Will be removed in v1.0.0"
+                        "reason": "Use getCurveResolution() instead. Will be removed in v1.0.0",
+                        "replacement": "getCurveResolution"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `getCurveResolution()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -3419,7 +3421,8 @@ const TrussCAPI = {
                         "getMatrix"
                     ],
                     "deprecated": {
-                        "reason": "Use getMatrix() instead. Will be removed in v1.0.0"
+                        "reason": "Use getMatrix() instead. Will be removed in v1.0.0",
+                        "replacement": "getMatrix"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `getMatrix()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -3520,7 +3523,8 @@ const TrussCAPI = {
                         "setMatrix"
                     ],
                     "deprecated": {
-                        "reason": "Renamed to setMatrix() (it replaces the current matrix). Will be removed in v1.0.0"
+                        "reason": "Renamed to setMatrix() (it replaces the current matrix). Will be removed in v1.0.0",
+                        "replacement": "setMatrix"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setMatrix()` (same behavior — it replaces the current matrix). Scheduled for removal in v1.0.0."
                 },
@@ -3541,7 +3545,8 @@ const TrussCAPI = {
                         "getScale"
                     ],
                     "deprecated": {
-                        "reason": "Use getScale() instead. Will be removed in v1.0.0"
+                        "reason": "Use getScale() instead. Will be removed in v1.0.0",
+                        "replacement": "getScale"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `getScale()` (same behavior). Scheduled for removal in v1.0.0."
                 }
@@ -8516,7 +8521,8 @@ const TrussCAPI = {
                         "getLogger"
                     ],
                     "deprecated": {
-                        "reason": "Use getLogger() instead. Will be removed in v1.0.0"
+                        "reason": "Use getLogger() instead. Will be removed in v1.0.0",
+                        "replacement": "getLogger"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `getLogger()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8538,7 +8544,8 @@ const TrussCAPI = {
                         "setConsoleLogLevel"
                     ],
                     "deprecated": {
-                        "reason": "Use setConsoleLogLevel() instead. Will be removed in v1.0.0"
+                        "reason": "Use setConsoleLogLevel() instead. Will be removed in v1.0.0",
+                        "replacement": "setConsoleLogLevel"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setConsoleLogLevel()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8560,7 +8567,8 @@ const TrussCAPI = {
                         "setFileLogLevel"
                     ],
                     "deprecated": {
-                        "reason": "Use setFileLogLevel() instead. Will be removed in v1.0.0"
+                        "reason": "Use setFileLogLevel() instead. Will be removed in v1.0.0",
+                        "replacement": "setFileLogLevel"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setFileLogLevel()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8582,7 +8590,8 @@ const TrussCAPI = {
                         "setLogFile"
                     ],
                     "deprecated": {
-                        "reason": "Use setLogFile() instead. Will be removed in v1.0.0"
+                        "reason": "Use setLogFile() instead. Will be removed in v1.0.0",
+                        "replacement": "setLogFile"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setLogFile()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8604,7 +8613,8 @@ const TrussCAPI = {
                         "closeLogFile"
                     ],
                     "deprecated": {
-                        "reason": "Use closeLogFile() instead. Will be removed in v1.0.0"
+                        "reason": "Use closeLogFile() instead. Will be removed in v1.0.0",
+                        "replacement": "closeLogFile"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `closeLogFile()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8772,7 +8782,8 @@ const TrussCAPI = {
                         "logAt"
                     ],
                     "deprecated": {
-                        "reason": "Use logAt() instead. Will be removed in v1.0.0"
+                        "reason": "Use logAt() instead. Will be removed in v1.0.0",
+                        "replacement": "logAt"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logAt()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8793,7 +8804,8 @@ const TrussCAPI = {
                         "logVerbose"
                     ],
                     "deprecated": {
-                        "reason": "Use logVerbose() instead. Will be removed in v1.0.0"
+                        "reason": "Use logVerbose() instead. Will be removed in v1.0.0",
+                        "replacement": "logVerbose"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logVerbose()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8814,7 +8826,8 @@ const TrussCAPI = {
                         "logNotice"
                     ],
                     "deprecated": {
-                        "reason": "Use logNotice() instead. Will be removed in v1.0.0"
+                        "reason": "Use logNotice() instead. Will be removed in v1.0.0",
+                        "replacement": "logNotice"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logNotice()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8835,7 +8848,8 @@ const TrussCAPI = {
                         "logWarning"
                     ],
                     "deprecated": {
-                        "reason": "Use logWarning() instead. Will be removed in v1.0.0"
+                        "reason": "Use logWarning() instead. Will be removed in v1.0.0",
+                        "replacement": "logWarning"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logWarning()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8856,7 +8870,8 @@ const TrussCAPI = {
                         "logError"
                     ],
                     "deprecated": {
-                        "reason": "Use logError() instead. Will be removed in v1.0.0"
+                        "reason": "Use logError() instead. Will be removed in v1.0.0",
+                        "replacement": "logError"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logError()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -8877,7 +8892,8 @@ const TrussCAPI = {
                         "logFatal"
                     ],
                     "deprecated": {
-                        "reason": "Use logFatal() instead. Will be removed in v1.0.0"
+                        "reason": "Use logFatal() instead. Will be removed in v1.0.0",
+                        "replacement": "logFatal"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `logFatal()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -11115,7 +11131,8 @@ const TrussCAPI = {
                     "desc_ja": "HSBからColorを作成（Color::fromHSBのエイリアス）",
                     "desc_ko": "HSB로부터 Color를 생성 (Color::fromHSB의 별칭)",
                     "deprecated": {
-                        "reason": "Use Color::fromHSB() instead. Will be removed in v1.0.0"
+                        "reason": "Use Color::fromHSB() instead. Will be removed in v1.0.0",
+                        "replacement": "Color::fromHSB"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `Color::fromHSB()` (same behavior). Scheduled for removal in v1.0.0.",
                     "examples": [
@@ -11151,7 +11168,8 @@ const TrussCAPI = {
                         "Color::fromOKLCH"
                     ],
                     "deprecated": {
-                        "reason": "Use Color::fromOKLCH() instead. Will be removed in v1.0.0"
+                        "reason": "Use Color::fromOKLCH() instead. Will be removed in v1.0.0",
+                        "replacement": "Color::fromOKLCH"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `Color::fromOKLCH()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -11173,7 +11191,8 @@ const TrussCAPI = {
                         "Color::fromOKLab"
                     ],
                     "deprecated": {
-                        "reason": "Use Color::fromOKLab() instead. Will be removed in v1.0.0"
+                        "reason": "Use Color::fromOKLab() instead. Will be removed in v1.0.0",
+                        "replacement": "Color::fromOKLab"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `Color::fromOKLab()` (same behavior). Scheduled for removal in v1.0.0."
                 },
@@ -11195,7 +11214,8 @@ const TrussCAPI = {
                         "Color::fromLinear"
                     ],
                     "deprecated": {
-                        "reason": "Use Color::fromLinear() instead. Will be removed in v1.0.0"
+                        "reason": "Use Color::fromLinear() instead. Will be removed in v1.0.0",
+                        "replacement": "Color::fromLinear"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `Color::fromLinear()` (same behavior). Scheduled for removal in v1.0.0."
                 }
@@ -11291,7 +11311,8 @@ const TrussCAPI = {
                         "setupScreenPerspective"
                     ],
                     "deprecated": {
-                        "reason": "3D is now enabled by default. Use setupScreenPerspective() to change FOV."
+                        "reason": "3D is now enabled by default. Use setupScreenPerspective() to change FOV.",
+                        "replacement": "setupScreenPerspective"
                     },
                     "details": "No longer needed: 3D is enabled by default. Just delete the call, or use `setupScreenPerspective()` to change the FOV. Scheduled for removal in v1.0.0."
                 },
@@ -11314,7 +11335,8 @@ const TrussCAPI = {
                         "setupScreenFov"
                     ],
                     "deprecated": {
-                        "reason": "Use setupScreenPerspective(fovDeg) or setupScreenFov(fovDeg) instead. Note: FOV is now in degrees, not radians."
+                        "reason": "Use setupScreenPerspective(fovDeg) or setupScreenFov(fovDeg) instead. Note: FOV is now in degrees, not radians.",
+                        "replacement": "setupScreenPerspective"
                     },
                     "details": "Use `setupScreenPerspective(fovDeg)` or `setupScreenFov(fovDeg)`. WARNING: the FOV unit changed from radians to degrees, so a literal value must be converted (e.g. 0.785 rad ≈ 45 deg). Scheduled for removal in v1.0.0."
                 },
@@ -11535,7 +11557,8 @@ const TrussCAPI = {
                         "setupScreenOrtho"
                     ],
                     "deprecated": {
-                        "reason": "Use setupScreenOrtho() instead"
+                        "reason": "Use setupScreenOrtho() instead",
+                        "replacement": "setupScreenOrtho"
                     },
                     "details": "Kept as a backward-compatible alias; new code should call `setupScreenOrtho()` (same behavior). Scheduled for removal in v1.0.0."
                 }
@@ -12744,66 +12767,6 @@ const TrussCAPI = {
                     "params": "value",
                     "params_typed": "E value",
                     "return_type": "const char *",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "tcEnumLabelsAdl",
-                    "params": "Direction",
-                    "params_typed": "Direction",
-                    "return_type": "::trussc::EnumLabelSpan",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "tcEnumLabelsAdl",
-                    "params": "BlendMode",
-                    "params_typed": "BlendMode",
-                    "return_type": "::trussc::EnumLabelSpan",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "tcEnumLabelsAdl",
-                    "params": "EaseType",
-                    "params_typed": "EaseType",
-                    "return_type": "::trussc::EnumLabelSpan",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "tcEnumLabelsAdl",
-                    "params": "EaseMode",
-                    "params_typed": "EaseMode",
-                    "return_type": "::trussc::EnumLabelSpan",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "tcEnumLabelsAdl",
-                    "params": "LayoutDirection",
-                    "params_typed": "LayoutDirection",
-                    "return_type": "::trussc::EnumLabelSpan",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "tcEnumLabelsAdl",
-                    "params": "AxisMode",
-                    "params_typed": "AxisMode",
-                    "return_type": "::trussc::EnumLabelSpan",
                     "desc": "",
                     "keywords": [],
                     "desc_ja": "",
@@ -15270,7 +15233,7 @@ const TrussCAPI = {
                         "const char * name, Color & v",
                         "const char * name, int & v, const EnumLabelSpan & labels"
                     ],
-                    "desc": ""
+                    "desc": "Handle one reflected member by name and value; return true if it was edited."
                 },
                 {
                     "name": "isReadOnly",
@@ -15278,7 +15241,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return true if the current reflection scope is read-only."
                 },
                 {
                     "name": "pushReadOnly",
@@ -15286,7 +15249,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Enter a read-only scope (members visited inside cannot be written)."
                 },
                 {
                     "name": "popReadOnly",
@@ -15294,7 +15257,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Leave the current read-only scope."
                 },
                 {
                     "name": "beginGroup",
@@ -15302,7 +15265,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const char * name"
                     ],
-                    "desc": ""
+                    "desc": "Enter a nested composite group of reflected members (no-op for flat backends)."
                 },
                 {
                     "name": "endGroup",
@@ -15310,7 +15273,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Leave the current nested group."
                 }
             ]
         },
@@ -15605,7 +15568,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float screenX, float screenY"
                     ],
-                    "desc": ""
+                    "desc": "Unproject a screen point (pixels, top-left origin) into a world-space ray."
                 },
                 {
                     "name": "worldToScreen",
@@ -17392,7 +17355,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Copy the canonical pos field into the deprecated x/y mirror fields (legacy mirrors scheduled for removal in v1.0)."
                 }
             ]
         },
@@ -17522,7 +17485,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Copy the canonical pos/delta fields into the deprecated x/y/deltaX/deltaY mirror fields (legacy mirrors scheduled for removal in v1.0)."
                 }
             ]
         },
@@ -17659,7 +17622,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Copy the canonical pos/delta fields into the deprecated x/y/deltaX/deltaY mirror fields (legacy mirrors scheduled for removal in v1.0)."
                 }
             ]
         },
@@ -17767,7 +17730,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Copy the canonical scroll field into the deprecated scrollX/scrollY mirror fields (legacy mirrors scheduled for removal in v1.0)."
                 }
             ]
         },
@@ -19149,7 +19112,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float * buffer, int num_frames, int num_channels"
                     ],
-                    "desc": ""
+                    "desc": "Audio output callback: mix all playing sounds into the buffer (internal, called from the audio thread)."
                 }
             ],
             "static_methods": [
@@ -19533,7 +19496,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const float * input, size_t frameCount"
                     ],
-                    "desc": ""
+                    "desc": "Mic input callback: receive captured input samples (internal, called from the audio thread)."
                 }
             ]
         },
@@ -19615,7 +19578,7 @@ const TrussCAPI = {
                         "const char * name, Color & v",
                         "const char * name, int & v, const EnumLabelSpan & labels"
                     ],
-                    "desc": ""
+                    "desc": "Write one reflected member into the output JSON object."
                 },
                 {
                     "name": "beginGroup",
@@ -19623,7 +19586,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const char * name"
                     ],
-                    "desc": ""
+                    "desc": "Open a nested JSON object for a composite member."
                 },
                 {
                     "name": "endGroup",
@@ -19631,7 +19594,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Close the current nested JSON object."
                 }
             ]
         },
@@ -19676,7 +19639,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the source keys that matched no reflected member (typos etc.); valid after reflectMembers runs."
                 },
                 {
                     "name": "visit",
@@ -19691,7 +19654,7 @@ const TrussCAPI = {
                         "const char * name, Color & v",
                         "const char * name, int & v, const EnumLabelSpan & labels"
                     ],
-                    "desc": ""
+                    "desc": "Apply the JSON value for one member through its setter, recording applied/skipped/read-only."
                 },
                 {
                     "name": "beginGroup",
@@ -19699,7 +19662,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const char * name"
                     ],
-                    "desc": ""
+                    "desc": "Descend into the nested JSON object for a composite member."
                 },
                 {
                     "name": "endGroup",
@@ -19707,7 +19670,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return from the nested JSON object."
                 }
             ]
         },
@@ -21078,7 +21041,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the sokol-gfx texture view of the IES profile for pipeline binding (advanced interop)."
                 },
                 {
                     "name": "getSampler",
@@ -21086,7 +21049,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the sokol-gfx sampler of the IES profile for pipeline binding (advanced interop)."
                 }
             ],
             "operators": [
@@ -21841,7 +21804,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int face, int mipLevel"
                     ],
-                    "desc": ""
+                    "desc": "Return (lazily creating) the sokol-gfx attachment view for one (face, mip) of this cubemap (advanced interop)."
                 },
                 {
                     "name": "isCubemap",
@@ -21865,7 +21828,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int width, int height, sg_pixel_format format, const void * data, size_t dataSize"
                     ],
-                    "desc": ""
+                    "desc": "Allocate an immutable compressed texture (BC1/BC3/BC7 etc.) from the given data."
                 },
                 {
                     "name": "updateCompressed",
@@ -21945,7 +21908,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the texture's sokol-gfx pixel format."
                 },
                 {
                     "name": "loadData",
@@ -22100,7 +22063,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the underlying sokol-gfx image handle (advanced interop)."
                 },
                 {
                     "name": "getView",
@@ -22108,7 +22071,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the underlying sokol-gfx texture view handle (advanced interop)."
                 },
                 {
                     "name": "getSampler",
@@ -22116,7 +22079,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the underlying sokol-gfx sampler handle (advanced interop)."
                 },
                 {
                     "name": "getAttachmentView",
@@ -22124,7 +22087,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the sokol-gfx color attachment view used to render into this RenderTarget (advanced interop)."
                 },
                 {
                     "name": "getAttachmentViewForMip",
@@ -22132,7 +22095,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int level"
                     ],
-                    "desc": ""
+                    "desc": "Return the sokol-gfx color attachment view for the given mip level (advanced interop)."
                 },
                 {
                     "name": "getViewForMip",
@@ -22140,7 +22103,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int level"
                     ],
-                    "desc": ""
+                    "desc": "Return the sokol-gfx texture view for sampling a single mip level (advanced interop)."
                 }
             ],
             "operators": [
@@ -22181,7 +22144,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return true if the underlying texture is allocated."
                 },
                 {
                     "name": "draw",
@@ -22190,7 +22153,7 @@ const TrussCAPI = {
                         "float x, float y",
                         "float x, float y, float w, float h"
                     ],
-                    "desc": ""
+                    "desc": "Draw the texture at the given position (and optional size)."
                 },
                 {
                     "name": "setMinFilter",
@@ -22198,7 +22161,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureFilter filter"
                     ],
-                    "desc": ""
+                    "desc": "Set the texture minification filter."
                 },
                 {
                     "name": "setMagFilter",
@@ -22206,7 +22169,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureFilter filter"
                     ],
-                    "desc": ""
+                    "desc": "Set the texture magnification filter."
                 },
                 {
                     "name": "setFilter",
@@ -22214,7 +22177,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureFilter filter"
                     ],
-                    "desc": ""
+                    "desc": "Set both the minification and magnification filters."
                 },
                 {
                     "name": "getMinFilter",
@@ -22222,7 +22185,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the texture minification filter."
                 },
                 {
                     "name": "getMagFilter",
@@ -22230,7 +22193,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the texture magnification filter."
                 },
                 {
                     "name": "setWrapU",
@@ -22238,7 +22201,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureWrap wrap"
                     ],
-                    "desc": ""
+                    "desc": "Set the texture wrap mode on the U (horizontal) axis."
                 },
                 {
                     "name": "setWrapV",
@@ -22246,7 +22209,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureWrap wrap"
                     ],
-                    "desc": ""
+                    "desc": "Set the texture wrap mode on the V (vertical) axis."
                 },
                 {
                     "name": "setWrap",
@@ -22254,7 +22217,7 @@ const TrussCAPI = {
                     "signatures": [
                         "TextureWrap wrap"
                     ],
-                    "desc": ""
+                    "desc": "Set the texture wrap mode on both the U and V axes."
                 },
                 {
                     "name": "getWrapU",
@@ -22262,7 +22225,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the texture wrap mode on the U axis."
                 },
                 {
                     "name": "getWrapV",
@@ -22270,7 +22233,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the texture wrap mode on the V axis."
                 },
                 {
                     "name": "save",
@@ -22278,7 +22241,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const fs::path & path"
                     ],
-                    "desc": ""
+                    "desc": "Save the texture contents to a file; return true on success."
                 }
             ]
         },
@@ -23016,7 +22979,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the underlying sokol-gfx vertex buffer handle (advanced interop)."
                 },
                 {
                     "name": "getGpuIndexBuffer",
@@ -23024,7 +22987,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the underlying sokol-gfx index buffer handle (advanced interop)."
                 },
                 {
                     "name": "getGpuVertexCount",
@@ -23695,7 +23658,7 @@ const TrussCAPI = {
                     "signatures": [
                         "size_t index"
                     ],
-                    "desc": ""
+                    "desc": "Return the atlas page at the given index for debug visualization, or nullptr if out of range."
                 },
                 {
                     "name": "getSampler",
@@ -23703,7 +23666,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the shared sokol-gfx sampler used for atlas rendering (advanced interop)."
                 },
                 {
                     "name": "getLoadedGlyphCount",
@@ -23918,7 +23881,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the underlying sokol-gfx color image handle (advanced interop)."
                 },
                 {
                     "name": "getTextureView",
@@ -23926,7 +23889,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the underlying sokol-gfx color texture view handle (advanced interop)."
                 },
                 {
                     "name": "getSampler",
@@ -23934,7 +23897,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the underlying sokol-gfx sampler handle (advanced interop)."
                 }
             ],
             "operators": [
@@ -23994,7 +23957,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Destroy the shader's GPU resources and reset it to the unloaded state."
                 },
                 {
                     "name": "isLoaded",
@@ -24038,22 +24001,6 @@ const TrussCAPI = {
                     "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
                 },
                 {
-                    "name": "storeUniform",
-                    "return": "void",
-                    "signatures": [
-                        "int slot, const void * data, size_t size"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "applyUniforms",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
                     "name": "setTexture",
                     "return": "void",
                     "signatures": [
@@ -24068,15 +24015,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const ShaderVertex * data, int count, PrimitiveType type"
                     ],
-                    "desc": ""
-                },
-                {
-                    "name": "executeDeferredDraw",
-                    "return": "void",
-                    "signatures": [
-                        "const std::vector<ShaderVertex> & vertices, PrimitiveType type"
-                    ],
-                    "desc": ""
+                    "desc": "Submit a batch of vertices for deferred drawing with this shader (lines are unsupported)."
                 }
             ],
             "operators": [
@@ -24442,7 +24381,7 @@ const TrussCAPI = {
                     "signatures": [
                         "const std::string & path"
                     ],
-                    "desc": ""
+                    "desc": "Load a video from the given file path; return true on success."
                 },
                 {
                     "name": "close",
@@ -24450,7 +24389,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Close the video and release its resources."
                 },
                 {
                     "name": "isLoaded",
@@ -24498,7 +24437,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Decode the next frame and refresh internal state; call once per frame."
                 },
                 {
                     "name": "isPlaying",
@@ -24522,7 +24461,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return true if a new frame was decoded since the last update."
                 },
                 {
                     "name": "isDone",
@@ -24554,7 +24493,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the video duration in seconds."
                 },
                 {
                     "name": "getPosition",
@@ -24562,7 +24501,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the current playback position as a fraction (0-1)."
                 },
                 {
                     "name": "setPosition",
@@ -24570,7 +24509,7 @@ const TrussCAPI = {
                     "signatures": [
                         "float pct"
                     ],
-                    "desc": ""
+                    "desc": "Seek to a playback position given as a fraction (0-1)."
                 },
                 {
                     "name": "getCurrentTime",
@@ -24658,7 +24597,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the index of the current frame."
                 },
                 {
                     "name": "getTotalFrames",
@@ -24666,7 +24605,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the total number of frames in the video."
                 },
                 {
                     "name": "setFrame",
@@ -24674,7 +24613,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int frame"
                     ],
-                    "desc": ""
+                    "desc": "Seek to the given frame index."
                 },
                 {
                     "name": "nextFrame",
@@ -24682,7 +24621,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Advance to the next frame."
                 },
                 {
                     "name": "previousFrame",
@@ -24690,7 +24629,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Step back to the previous frame."
                 },
                 {
                     "name": "firstFrame",
@@ -24707,7 +24646,7 @@ const TrussCAPI = {
                         "",
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return raw RGBA pixel data of the current frame, or nullptr if none decoded yet."
                 },
                 {
                     "name": "hasAudio",
@@ -24715,7 +24654,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return true if the video has an audio track."
                 },
                 {
                     "name": "getAudioCodec",
@@ -24723,7 +24662,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the audio codec as a FourCC ('aac ', 'mp3 ', ...), or 0 if no audio."
                 },
                 {
                     "name": "getAudioData",
@@ -24731,7 +24670,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the raw (undecoded) audio data, or an empty vector if no audio."
                 },
                 {
                     "name": "getAudioSampleRate",
@@ -24739,7 +24678,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the audio sample rate in Hz, or 0 if no audio."
                 },
                 {
                     "name": "getAudioChannels",
@@ -24747,7 +24686,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the number of audio channels, or 0 if no audio."
                 },
                 {
                     "name": "isUsingHwAccel",
@@ -24755,7 +24694,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return true if hardware-accelerated decoding is currently active."
                 },
                 {
                     "name": "getHwAccelName",
@@ -24763,7 +24702,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the name of the active decode backend (e.g. \"videotoolbox\", \"software\", \"none\")."
                 },
                 {
                     "name": "setResyncThreshold",
@@ -24788,7 +24727,7 @@ const TrussCAPI = {
                         "",
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the texture holding the current video frame."
                 }
             ]
         },
@@ -26060,7 +25999,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Pump pending UDP I/O; normally auto-driven by the update event, but can be called manually for synchronous polling."
                 },
                 {
                     "name": "isValid",
@@ -26360,7 +26299,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Pump pending TCP I/O; normally auto-driven by the update event, but can be called manually for synchronous polling."
                 },
                 {
                     "name": "getRemoteHost",
@@ -26979,7 +26918,8 @@ const TrussCAPI = {
                     ],
                     "desc": "Deprecated alias for listDevices()",
                     "deprecated": {
-                        "reason": "Use listDevices() instead. Will be removed in v1.0.0"
+                        "reason": "Use listDevices() instead. Will be removed in v1.0.0",
+                        "replacement": "listDevices"
                     }
                 },
                 {
@@ -27793,7 +27733,8 @@ const TrussCAPI = {
                     ],
                     "desc": "Deprecated alias for isActive()",
                     "deprecated": {
-                        "reason": "Use isActive() instead. Will be removed in v1.0.0"
+                        "reason": "Use isActive() instead. Will be removed in v1.0.0",
+                        "replacement": "isActive"
                     }
                 },
                 {
@@ -27804,7 +27745,8 @@ const TrussCAPI = {
                     ],
                     "desc": "Deprecated alias for isVisible()",
                     "deprecated": {
-                        "reason": "Use isVisible() instead. Will be removed in v1.0.0"
+                        "reason": "Use isVisible() instead. Will be removed in v1.0.0",
+                        "replacement": "isVisible"
                     }
                 },
                 {
@@ -27815,7 +27757,8 @@ const TrussCAPI = {
                     ],
                     "desc": "Deprecated alias for setActive()",
                     "deprecated": {
-                        "reason": "Use setActive() instead. Will be removed in v1.0.0"
+                        "reason": "Use setActive() instead. Will be removed in v1.0.0",
+                        "replacement": "setActive"
                     }
                 },
                 {
@@ -27826,7 +27769,8 @@ const TrussCAPI = {
                     ],
                     "desc": "Deprecated alias for setVisible()",
                     "deprecated": {
-                        "reason": "Use setVisible() instead. Will be removed in v1.0.0"
+                        "reason": "Use setVisible() instead. Will be removed in v1.0.0",
+                        "replacement": "setVisible"
                     }
                 },
                 {
@@ -28178,7 +28122,8 @@ const TrussCAPI = {
                     ],
                     "desc": "Convert a global coordinate to this node's local space (C++ only)",
                     "deprecated": {
-                        "reason": "Use globalToLocal(Vec3) instead. Will be removed in v1.0.0"
+                        "reason": "Use globalToLocal(Vec3) instead. Will be removed in v1.0.0",
+                        "replacement": "globalToLocal"
                     }
                 },
                 {
@@ -28207,7 +28152,8 @@ const TrussCAPI = {
                     ],
                     "desc": "Convert a local coordinate to global space (C++ only)",
                     "deprecated": {
-                        "reason": "Use localToGlobal(Vec3) instead. Will be removed in v1.0.0"
+                        "reason": "Use localToGlobal(Vec3) instead. Will be removed in v1.0.0",
+                        "replacement": "localToGlobal"
                     }
                 },
                 {
@@ -28264,7 +28210,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Return the camera context this node was last drawn under (null if never drawn)."
                 },
                 {
                     "name": "setCameraContext",
@@ -28272,7 +28218,7 @@ const TrussCAPI = {
                     "signatures": [
                         "std::shared_ptr<const CameraContext> ctx"
                     ],
-                    "desc": ""
+                    "desc": "Set the camera context for a manually-managed node (normally set automatically by drawTree)."
                 },
                 {
                     "name": "getModTypeNames",
@@ -28483,7 +28429,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": ""
+                    "desc": "Draw the rectangle node; override in derived classes (draws nothing by default)."
                 }
             ]
         },
