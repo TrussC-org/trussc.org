@@ -342,114 +342,6 @@ const TrussCAPI = {
             "name": "Graphics - Shapes",
             "functions": [
                 {
-                    "name": "compile8x13",
-                    "params": "rows",
-                    "params_typed": "const char *const (&)[13] rows",
-                    "return_type": "std::array<uint8_t, 13>",
-                    "desc": "Compile-time ASCII art -> packed halfwidth (8x13) glyph bytes. '#' = lit, '.' = empty.",
-                    "keywords": [
-                        "ascii art",
-                        "glyph",
-                        "halfwidth",
-                        "pixel font",
-                        "8x13"
-                    ],
-                    "desc_ja": "ASCII アートをコンパイル時に半角 (8x13) パックバイトに変換。'#' = 描画、'.' = 透明",
-                    "desc_ko": "ASCII 아트를 컴파일 타임에 반각 (8x13) 패킹된 바이트로 변환. '#' = 채움, '.' = 빈 칸",
-                    "examples": [
-                        {
-                            "name": "bitmapStringExtendedExample",
-                            "group": "font"
-                        }
-                    ]
-                },
-                {
-                    "name": "compile16x13",
-                    "params": "rows",
-                    "params_typed": "const char *const (&)[13] rows",
-                    "return_type": "std::array<uint8_t, 26>",
-                    "desc": "Compile-time ASCII art -> packed fullwidth (16x13) glyph bytes. '#' = lit, '.' = empty.",
-                    "keywords": [
-                        "ascii art",
-                        "glyph",
-                        "fullwidth",
-                        "pixel font",
-                        "16x13"
-                    ],
-                    "desc_ja": "ASCII アートをコンパイル時に全角 (16x13) パックバイトに変換。'#' = 描画、'.' = 透明",
-                    "desc_ko": "ASCII 아트를 컴파일 타임에 전각 (16x13) 패킹된 바이트로 변환. '#' = 채움, '.' = 빈 칸",
-                    "examples": [
-                        {
-                            "name": "bitmapStringExtendedExample",
-                            "group": "font"
-                        }
-                    ]
-                },
-                {
-                    "name": "registerGlyph",
-                    "params": "g",
-                    "params_typed": "const Glyph & g",
-                    "return_type": "void",
-                    "desc": "Register a bitmap glyph for a Unicode codepoint (extends drawBitmapString)",
-                    "keywords": [
-                        "glyph",
-                        "character",
-                        "custom font",
-                        "unicode",
-                        "codepoint"
-                    ],
-                    "desc_ja": "Unicode コードポイントにビットマップグリフを登録 (drawBitmapString を拡張)",
-                    "desc_ko": "유니코드 코드포인트에 비트맵 글리프 등록 (drawBitmapString 확장)",
-                    "related": [
-                        "Glyph"
-                    ]
-                },
-                {
-                    "name": "registerGlyphs",
-                    "params": "glyphs",
-                    "params_typed": "const Glyph (&)[N] glyphs",
-                    "return_type": "void",
-                    "desc": "Register a batch of bitmap glyphs at once",
-                    "keywords": [
-                        "glyphs",
-                        "characters",
-                        "batch",
-                        "custom font"
-                    ],
-                    "desc_ja": "複数のビットマップグリフを一括登録",
-                    "desc_ko": "여러 비트맵 글리프를 한 번에 등록",
-                    "related": [
-                        "Glyph"
-                    ],
-                    "examples": [
-                        {
-                            "name": "bitmapStringExtendedExample",
-                            "group": "font"
-                        }
-                    ]
-                },
-                {
-                    "name": "updateGlyph",
-                    "params": "cp, newData",
-                    "params_typed": "uint32_t cp, const uint8_t * newData",
-                    "return_type": "void",
-                    "desc": "Swap an already-registered glyph's pixel data (atlas cell unchanged). Useful for per-frame animation.",
-                    "keywords": [
-                        "glyph",
-                        "animate",
-                        "swap",
-                        "pixel data"
-                    ],
-                    "desc_ja": "登録済みグリフのピクセルデータだけ差し替え（アトラス位置は維持）。フレームごとのアニメーションに便利",
-                    "desc_ko": "이미 등록된 글리프의 픽셀 데이터만 교체 (아틀라스 위치 유지). 프레임 애니메이션에 유용",
-                    "examples": [
-                        {
-                            "name": "bitmapStringExtendedExample",
-                            "group": "font"
-                        }
-                    ]
-                },
-                {
                     "name": "drawRect",
                     "params": "pos, size",
                     "params_typed": "Vec3 pos, Vec2 size",
@@ -1551,11 +1443,11 @@ const TrussCAPI = {
                             "group": "windowing"
                         },
                         {
-                            "name": "fontTategakiExample",
+                            "name": "bitmapStringExtendedExample",
                             "group": "font"
                         },
                         {
-                            "name": "fontWrapExample",
+                            "name": "fontTategakiExample",
                             "group": "font"
                         }
                     ]
@@ -12862,36 +12754,6 @@ const TrussCAPI = {
                     "desc_ko": ""
                 },
                 {
-                    "name": "reflectOneBase",
-                    "params": "self, r",
-                    "params_typed": "T * self, Reflector & r",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "reflectBases",
-                    "params": "self, r",
-                    "params_typed": "T * self, Reflector & r",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "reflectValue",
-                    "params": "r, name, v",
-                    "params_typed": "Reflector & r, const char * name, T & v",
-                    "return_type": "bool",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
                     "name": "tcEnumLabelsAdl",
                     "params": "Direction",
                     "params_typed": "Direction",
@@ -12946,276 +12808,6 @@ const TrussCAPI = {
                     "params": "AxisMode",
                     "params_typed": "AxisMode",
                     "return_type": "::trussc::EnumLabelSpan",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "utf8Decode",
-                    "params": "p, end",
-                    "params_typed": "const char *& p, const char * end",
-                    "return_type": "uint32_t",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "findRegistered",
-                    "params": "cp",
-                    "params_typed": "uint32_t cp",
-                    "return_type": "const internal::StoredGlyph *",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "lookupGlyph",
-                    "params": "cp",
-                    "params_typed": "uint32_t cp",
-                    "return_type": "GlyphCell",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "glyphPixelWidth",
-                    "params": "g",
-                    "params_typed": "const GlyphCell & g",
-                    "return_type": "int",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "codepointPixelWidth",
-                    "params": "cp",
-                    "params_typed": "uint32_t cp",
-                    "return_type": "int",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "codepointRequiredRows",
-                    "params": "cp",
-                    "params_typed": "uint32_t cp",
-                    "return_type": "int",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "textRequiredRows",
-                    "params": "p, end",
-                    "params_typed": "const char * p, const char * end",
-                    "return_type": "int",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "getCodepointTexCoord",
-                    "params": "cp, atlasRows, u, v, u2, v2",
-                    "params_typed": "uint32_t cp, int atlasRows, float & u, float & v, float & u2, float & v2",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "asciiGlyph",
-                    "params": "cp",
-                    "params_typed": "uint32_t cp",
-                    "return_type": "const uint8_t *",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "generateAtlasPixels",
-                    "params": "rows",
-                    "params_typed": "int rows",
-                    "return_type": "unsigned char *",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "generateAtlasPixels",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "unsigned char *",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "getCharBitmap",
-                    "params": "c",
-                    "params_typed": "char c",
-                    "return_type": "const unsigned char *",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "getCharTexCoord",
-                    "params": "c, u, v",
-                    "params_typed": "char c, float & u, float & v",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "tessellateCubicBezier",
-                    "params": "p0, p1, p2, p3, tolerance, out",
-                    "params_typed": "const Vec3 & p0, const Vec3 & p1, const Vec3 & p2, const Vec3 & p3, float tolerance, Out & out",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "tessellateQuadBezier",
-                    "params": "p0, p1, p2, tolerance, out",
-                    "params_typed": "const Vec3 & p0, const Vec3 & p1, const Vec3 & p2, float tolerance, Out & out",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "tessellateBezierN",
-                    "params": "pts, tolerance, out",
-                    "params_typed": "const std::vector<Vec3> & pts, float tolerance, Out & out",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "beginFrame",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "ensureSwapchainPass",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "present",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "isInSwapchainPass",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "suspendSwapchainPass",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "resumeSwapchainPass",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "restoreBlendPipeline",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "ensureFontAtlas",
-                    "params": "rows",
-                    "params_typed": "int rows",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "ensureFontAtlasForText",
-                    "params": "text",
-                    "params_typed": "const std::string & text",
-                    "return_type": "void",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "buildAppDescriptor",
-                    "params": "settings",
-                    "params_typed": "const WindowSettings & settings = …",
-                    "return_type": "sapp_desc",
-                    "desc": "",
-                    "keywords": [],
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "toSokolFormat",
-                    "params": "fmt",
-                    "params_typed": "TextureFormat fmt",
-                    "return_type": "sg_pixel_format",
                     "desc": "",
                     "keywords": [],
                     "desc_ja": "",
@@ -13306,7 +12898,9 @@ const TrussCAPI = {
         {
             "name": "TAU",
             "value": "6.283...",
-            "desc": "Full circle (2*PI)",
+            "desc": "Ratio of circumference to radius; the radian measure of one full turn. ≈ 6.28318.",
+            "desc_ja": "円周と半径の比。一周（full turn）に対応する radian。約 6.28318。",
+            "desc_ko": "원주와 반지름의 비. 한 바퀴(full turn)에 해당하는 라디안. 약 6.28318.",
             "keywords": [
                 "tau",
                 "two pi",
@@ -13314,12 +12908,25 @@ const TrussCAPI = {
                 "radians",
                 "full turn",
                 "6.28"
+            ],
+            "details": "`TAU` (τ) equals `2π`, but reading it as merely \"π doubled\" sells it short. τ is the circle constant that falls out naturally when you define a circle from its radius — the constant a circle should have had all along.\n\nA circle is defined by distance from its center: the radius `r`. Write the circumference from the radius and you get `circumference = τ · r` — the stray `2` of `2π` disappears, leaving just `τr`. That is the circle in its plain form.\n\nτ shines for angles. It denotes exactly one full turn, so a fraction of a turn is the angle directly: one turn = `TAU` (360°), half = `TAU/2` (180°), a quarter = `TAU/4` (90°). `TAU/4` reads as \"a quarter turn\" with no arithmetic — the code matches your intuition.\n\nEven the equation often called the most beautiful is more symmetric in τ: `e^(iτ) = 1` (\"go around once, return to where you started\") speaks to the essence of rotation more directly than Euler's `e^(iπ) = -1`, which flips at a half turn.\n\nDefining the circle by its diameter (PI) was a great achievement but an unfortunate design choice. TrussC inherits that lesson and builds every rotation and angle API around `TAU`.",
+            "details_ja": "`TAU` (τ) は `2π` に等しい。ただ「π を 2 倍したもの」と捉えるのはもったいない。τ は、円を半径から素直に定義しなおしたときに現れる、本来あるべき円の定数だ。\n\n円の本質は中心からの距離、つまり半径 `r` にある。半径を基準に円周を書くと `円周 = τ · r`。`2π` の `2` が消えて、ただ `τr`。これが円の素の姿だ。\n\nτ の真価は角度で発揮される。τ は「ちょうど一周」を表すので、周回の割合がそのまま角度になる。一周 = `TAU`（360°）、半周 = `TAU/2`（180°）、1/4 周 = `TAU/4`（90°）。`TAU/4` を見れば計算せずとも「一周の 4 分の 1」と分かり、コードが直感と一致する。\n\n世界で一番美しいと言われる式も、τ で書く方が対称性が高い：`e^(iτ) = 1`（一周まわると元に戻る）。Euler の等式 `e^(iπ) = -1`（半周で裏返る）よりも回転の本質を直接語っている。\n\n円を直径で定義した PI は人類の偉大な発明だったが、設計判断としては惜しかった。TrussC はその反省を引き継いで、回転と角度の API すべてを `TAU` 基準で組んでいる。",
+            "details_ko": "`TAU` (τ)는 `2π`와 같지만, 단순히 \"π의 두 배\"로만 보는 것은 아깝다. τ는 원을 반지름에서 자연스럽게 다시 정의할 때 나타나는, 원이 본래 가졌어야 할 상수다.\n\n원의 본질은 중심으로부터의 거리, 즉 반지름 `r`에 있다. 반지름을 기준으로 원주를 쓰면 `원주 = τ · r` — `2π`의 `2`가 사라지고 그냥 `τr`만 남는다. 이것이 원의 본래 모습이다.\n\nτ의 진가는 각도에서 드러난다. τ는 정확히 한 바퀴를 나타내므로 회전의 비율이 곧 각도가 된다. 한 바퀴 = `TAU`(360°), 반 바퀴 = `TAU/2`(180°), 1/4 바퀴 = `TAU/4`(90°). `TAU/4`를 보면 계산 없이도 \"한 바퀴의 1/4\"임을 알 수 있어 코드가 직관과 일치한다.\n\n가장 아름답다고 일컬어지는 식도 τ로 쓰면 더 대칭적이다: `e^(iτ) = 1`(\"한 바퀴 돌면 제자리로\"). 반 바퀴에서 뒤집히는 오일러의 `e^(iπ) = -1`보다 회전의 본질을 더 직접적으로 말해준다.\n\n원을 지름으로 정의한 PI는 위대한 발명이었지만 설계 판단으로는 아쉬웠다. TrussC는 그 교훈을 이어받아 회전과 각도 API 전부를 `TAU` 기준으로 구성한다.",
+            "related": [
+                "PI",
+                "HALF_TAU",
+                "QUARTER_TAU",
+                "rotate",
+                "sin",
+                "cos"
             ]
         },
         {
             "name": "HALF_TAU",
             "value": "3.141...",
             "desc": "Half circle (PI)",
+            "desc_ja": "半周 (PI)",
+            "desc_ko": "반원 (PI)",
             "keywords": [
                 "pi",
                 "half circle",
@@ -13332,6 +12939,8 @@ const TrussCAPI = {
             "name": "QUARTER_TAU",
             "value": "1.570...",
             "desc": "Quarter circle (PI/2)",
+            "desc_ja": "四分の一周 (PI/2)",
+            "desc_ko": "1/4 원 (PI/2)",
             "keywords": [
                 "pi over two",
                 "quarter circle",
@@ -13343,19 +12952,31 @@ const TrussCAPI = {
         {
             "name": "PI",
             "value": "3.141...",
-            "desc": "Pi (use TAU instead)",
+            "desc": "Ratio of circumference to diameter. ≈ 3.14159. Prefer HALF_TAU for half a turn.",
+            "desc_ja": "円周と直径の比。約 3.14159。半周には HALF_TAU を推奨。",
+            "desc_ko": "원주와 지름의 비. 약 3.14159. 반 바퀴에는 HALF_TAU 권장.",
             "keywords": [
                 "pi",
                 "3.14",
                 "circle",
                 "radians",
                 "half tau"
+            ],
+            "details": "π is one of the greatest constants humankind has ever found. Tracing back to Archimedes in the 3rd century BC, geometry, analysis, and physics have been built on this single letter for nearly two thousand years — an unquestionable achievement.\n\nBut one early design choice was unfortunate: defining the circle by its *diameter*. A circle is the set of points equidistant from a center; that equal distance — the radius — is what defines a circle, and the diameter is merely a by-product. Yet π was defined as `circumference / diameter`.\n\nThat one mismatch scatters a stray factor of `2π` across the formulas that follow. Circumference is `2πr`; one turn is `2π` radians, a half turn `π`, a quarter `π/2`. Fourier transforms, the normal distribution, rotation — `2π` shows up almost everywhere. You write a quarter turn as `π/2` and pause each time to ask \"where did this 2 come from?\" — a small smudge on something that should be clean.\n\nThe good news: it is not too late. So TrussC, with full respect for π, moves past it — the rotation and angle APIs treat TAU (= 2π) as the first-class constant. π was not wrong; choosing the diameter was the unfortunate part.",
+            "details_ja": "π は人類が手にした最も偉大な定数のひとつだ。紀元前 3 世紀のアルキメデスに端を発し、約 2000 年にわたって幾何学・解析学・物理学がこの一文字の上に積み上げられてきた。疑いようのない偉業だ。\n\nただ一つだけ、最初の設計判断が惜しかった——円を「直径」基準で定義してしまったこと。円の本質は中心から等距離にある点の集合であり、その「等距離」＝半径こそが円を定義する量で、直径はその副産物にすぎない。にもかかわらず π は `円周 / 直径` として定義された。\n\nこのボタンの掛け違いが、後の数式に `2π` という余分な係数をばらまく。円周は `2πr`、1 回転は `2π` radian、半回転で `π`、1/4 回転で `π/2`。Fourier 変換にも正規分布にも回転にも、ほぼ必ず `2π` が顔を出す。「1/4 回転」を `π/2` と書き、「この 2 はどこから？」と毎回一瞬考える——美しさに一点の曇りを与えている。\n\n幸い、まだ間に合う。だから TrussC は π への敬意を払ったうえでその先へ進み、回転と角度の API は TAU (= 2π) を第一級の定数として扱う。π が間違っていたのではない。直径を選んだことが惜しかっただけだ。",
+            "details_ko": "π는 인류가 손에 넣은 가장 위대한 상수 중 하나다. 기원전 3세기 아르키메데스에서 비롯되어, 거의 2000년에 걸쳐 기하학·해석학·물리학이 이 한 글자 위에 쌓여 왔다. 의심할 여지 없는 위업이다.\n\n다만 한 가지, 최초의 설계 판단이 아쉬웠다 — 원을 \"지름\" 기준으로 정의한 것. 원의 본질은 중심에서 같은 거리에 있는 점들의 집합이며, 그 \"같은 거리\"=반지름이야말로 원을 정의하는 양이고 지름은 그 부산물에 불과하다. 그럼에도 π는 `원주 / 지름`으로 정의되었다.\n\n이 한 번의 엇갈림이 이후의 수식에 `2π`라는 군더더기 계수를 흩뿌린다. 원주는 `2πr`, 한 바퀴는 `2π` 라디안, 반 바퀴는 `π`, 1/4 바퀴는 `π/2`. 푸리에 변환에도 정규분포에도 회전에도 거의 반드시 `2π`가 등장한다. 1/4 회전을 `π/2`로 쓰고 \"이 2는 어디서?\"라고 매번 잠시 멈추게 된다 — 깔끔해야 할 것에 한 점의 흐림을 더한다.\n\n다행히 아직 늦지 않았다. 그래서 TrussC는 π에 충분한 경의를 표하면서 그다음으로 나아간다 — 회전과 각도 API는 TAU (= 2π)를 일급 상수로 다룬다. π가 틀린 것이 아니다. 지름을 고른 것이 아쉬웠을 뿐이다.",
+            "related": [
+                "TAU",
+                "HALF_TAU",
+                "rotate"
             ]
         },
         {
             "name": "Left",
             "value": "Direction::Left",
             "desc": "Direction shorthand for Direction::Left",
+            "desc_ja": "Direction::Left の短縮表記",
+            "desc_ko": "Direction::Left의 단축 표기",
             "keywords": [
                 "direction",
                 "align",
@@ -13367,6 +12988,8 @@ const TrussCAPI = {
             "name": "Center",
             "value": "Direction::Center",
             "desc": "Direction shorthand for Direction::Center",
+            "desc_ja": "Direction::Center の短縮表記",
+            "desc_ko": "Direction::Center의 단축 표기",
             "keywords": [
                 "direction",
                 "align",
@@ -13378,6 +13001,8 @@ const TrussCAPI = {
             "name": "Right",
             "value": "Direction::Right",
             "desc": "Direction shorthand for Direction::Right",
+            "desc_ja": "Direction::Right の短縮表記",
+            "desc_ko": "Direction::Right의 단축 표기",
             "keywords": [
                 "direction",
                 "align",
@@ -13389,6 +13014,8 @@ const TrussCAPI = {
             "name": "Top",
             "value": "Direction::Top",
             "desc": "Direction shorthand for Direction::Top",
+            "desc_ja": "Direction::Top の短縮表記",
+            "desc_ko": "Direction::Top의 단축 표기",
             "keywords": [
                 "direction",
                 "align",
@@ -13400,6 +13027,8 @@ const TrussCAPI = {
             "name": "Bottom",
             "value": "Direction::Bottom",
             "desc": "Direction shorthand for Direction::Bottom",
+            "desc_ja": "Direction::Bottom の短縮表記",
+            "desc_ko": "Direction::Bottom의 단축 표기",
             "keywords": [
                 "direction",
                 "align",
@@ -13411,6 +13040,8 @@ const TrussCAPI = {
             "name": "Baseline",
             "value": "Direction::Baseline",
             "desc": "Direction shorthand for Direction::Baseline (text baseline)",
+            "desc_ja": "Direction::Baseline の短縮表記（テキストのベースライン）",
+            "desc_ko": "Direction::Baseline의 단축 표기 (텍스트 베이스라인)",
             "keywords": [
                 "direction",
                 "align",
@@ -13422,6 +13053,8 @@ const TrussCAPI = {
             "name": "EventPriority::BeforeApp",
             "value": "0",
             "desc": "Event priority that runs before the app (EventPriority::BeforeApp)",
+            "desc_ja": "アプリより前に実行されるイベント優先度（EventPriority::BeforeApp）",
+            "desc_ko": "앱보다 먼저 실행되는 이벤트 우선순위 (EventPriority::BeforeApp)",
             "keywords": [
                 "event",
                 "priority",
@@ -13435,12 +13068,16 @@ const TrussCAPI = {
             "name": "EventPriority::App",
             "value": "100",
             "desc": "",
+            "desc_ja": "",
+            "desc_ko": "",
             "keywords": []
         },
         {
             "name": "EventPriority::AfterApp",
             "value": "200",
             "desc": "Event priority that runs after the app (EventPriority::AfterApp)",
+            "desc_ja": "アプリより後に実行されるイベント優先度（EventPriority::AfterApp）",
+            "desc_ko": "앱보다 나중에 실행되는 이벤트 우선순위 (EventPriority::AfterApp)",
             "keywords": [
                 "event",
                 "priority",
@@ -13453,6 +13090,8 @@ const TrussCAPI = {
             "name": "audio::priority::Generator",
             "value": "100",
             "desc": "Audio listener priority for generators/synths (audio::priority::Generator)",
+            "desc_ja": "ジェネレーター/シンセ向けのオーディオリスナー優先度（audio::priority::Generator）",
+            "desc_ko": "제너레이터/신스용 오디오 리스너 우선순위 (audio::priority::Generator)",
             "keywords": [
                 "audio",
                 "priority",
@@ -13466,6 +13105,8 @@ const TrussCAPI = {
             "name": "audio::priority::Effect",
             "value": "500",
             "desc": "Audio listener priority for effects (audio::priority::Effect)",
+            "desc_ja": "エフェクト向けのオーディオリスナー優先度（audio::priority::Effect）",
+            "desc_ko": "이펙트용 오디오 리스너 우선순위 (audio::priority::Effect)",
             "keywords": [
                 "audio",
                 "priority",
@@ -13479,6 +13120,8 @@ const TrussCAPI = {
             "name": "audio::priority::Monitor",
             "value": "900",
             "desc": "Audio listener priority for monitors/scopes (audio::priority::Monitor)",
+            "desc_ja": "モニター/スコープ向けのオーディオリスナー優先度（audio::priority::Monitor）",
+            "desc_ko": "모니터/스코프용 오디오 리스너 우선순위 (audio::priority::Monitor)",
             "keywords": [
                 "audio",
                 "priority",
@@ -13490,129 +13133,39 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "bitmapfont::CHAR_HEIGHT",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::GLYPH_WIDTH_HALF",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::GLYPH_WIDTH_FULL",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::GLYPH_WIDTH",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::CELL_W",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::CELL_H",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::ATLAS_WIDTH",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::ATLAS_HEIGHT",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::CELLS_PER_ROW",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::CELLS_PER_COL",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::TOTAL_CELLS",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::CHAR_TEX_WIDTH",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::CHAR_TEX_HEIGHT",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::CHARS_PER_ROW",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::TEX_CELL_W",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::TEX_CELL_H",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::TEX_CHAR_WIDTH",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::TEX_CHAR_HEIGHT",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::TOFU_CELL",
-            "desc": "",
-            "keywords": []
-        },
-        {
-            "name": "bitmapfont::FIRST_REGISTERED_CELL",
-            "desc": "",
-            "keywords": []
-        },
-        {
             "name": "kMinCircleSegments",
             "desc": "",
+            "desc_ja": "",
+            "desc_ko": "",
             "keywords": []
         },
         {
             "name": "kMaxCircleSegments",
             "desc": "",
+            "desc_ja": "",
+            "desc_ko": "",
             "keywords": []
         },
         {
             "name": "kBezierMaxDepth",
             "desc": "",
+            "desc_ja": "",
+            "desc_ko": "",
             "keywords": []
         },
         {
             "name": "kBezierMaxOrder",
             "desc": "",
+            "desc_ja": "",
+            "desc_ko": "",
             "keywords": []
         },
         {
             "name": "VERSION_MAJOR",
             "value": "0",
             "desc": "TrussC major version number",
+            "desc_ja": "TrussC のメジャーバージョン番号",
+            "desc_ko": "TrussC 메이저 버전 번호",
             "keywords": [
                 "version",
                 "major",
@@ -13624,6 +13177,8 @@ const TrussCAPI = {
             "name": "VERSION_MINOR",
             "value": "0",
             "desc": "TrussC minor version number",
+            "desc_ja": "TrussC のマイナーバージョン番号",
+            "desc_ko": "TrussC 마이너 버전 번호",
             "keywords": [
                 "version",
                 "minor",
@@ -13635,6 +13190,8 @@ const TrussCAPI = {
             "name": "VERSION_PATCH",
             "value": "1",
             "desc": "TrussC patch version number",
+            "desc_ja": "TrussC のパッチバージョン番号",
+            "desc_ko": "TrussC 패치 버전 번호",
             "keywords": [
                 "version",
                 "patch",
@@ -13646,6 +13203,8 @@ const TrussCAPI = {
             "name": "VSYNC",
             "value": "-1.0",
             "desc": "Frame-rate sentinel: sync to the monitor refresh rate",
+            "desc_ja": "フレームレートのセンチネル: モニターのリフレッシュレートに同期",
+            "desc_ko": "프레임레이트 센티넬: 모니터 리프레시 레이트에 동기화",
             "keywords": [
                 "vsync",
                 "frame rate",
@@ -13659,6 +13218,8 @@ const TrussCAPI = {
             "name": "EVENT_DRIVEN",
             "value": "0.0",
             "desc": "Frame-rate sentinel: only redraw on demand (event-driven)",
+            "desc_ja": "フレームレートのセンチネル: 要求時のみ再描画（イベント駆動）",
+            "desc_ko": "프레임레이트 센티넬: 요청 시에만 다시 그림 (이벤트 기반)",
             "keywords": [
                 "event driven",
                 "frame rate",
@@ -13672,6 +13233,8 @@ const TrussCAPI = {
             "name": "KEY_SPACE",
             "value": "32",
             "desc": "Space key",
+            "desc_ja": "スペースキー",
+            "desc_ko": "스페이스 키",
             "keywords": [
                 "spacebar",
                 "space",
@@ -13682,6 +13245,8 @@ const TrussCAPI = {
             "name": "KEY_ESCAPE",
             "value": "256",
             "desc": "Escape key",
+            "desc_ja": "Escキー",
+            "desc_ko": "ESC 키",
             "keywords": [
                 "escape",
                 "esc",
@@ -13693,6 +13258,8 @@ const TrussCAPI = {
             "name": "KEY_ENTER",
             "value": "257",
             "desc": "Enter/Return key",
+            "desc_ja": "Enter/Returnキー",
+            "desc_ko": "엔터/리턴 키",
             "keywords": [
                 "enter",
                 "return",
@@ -13704,6 +13271,8 @@ const TrussCAPI = {
             "name": "KEY_TAB",
             "value": "258",
             "desc": "Tab key",
+            "desc_ja": "Tabキー",
+            "desc_ko": "탭 키",
             "keywords": [
                 "tab",
                 "indent",
@@ -13714,6 +13283,8 @@ const TrussCAPI = {
             "name": "KEY_BACKSPACE",
             "value": "259",
             "desc": "Backspace key",
+            "desc_ja": "Backspaceキー",
+            "desc_ko": "백스페이스 키",
             "keywords": [
                 "backspace",
                 "delete back",
@@ -13725,6 +13296,8 @@ const TrussCAPI = {
             "name": "KEY_DELETE",
             "value": "261",
             "desc": "Delete key",
+            "desc_ja": "Deleteキー",
+            "desc_ko": "Delete 키",
             "keywords": [
                 "delete",
                 "del",
@@ -13737,6 +13310,8 @@ const TrussCAPI = {
             "name": "KEY_RIGHT",
             "value": "262",
             "desc": "Right arrow key",
+            "desc_ja": "右矢印キー",
+            "desc_ko": "오른쪽 방향키",
             "keywords": [
                 "right arrow",
                 "cursor right",
@@ -13748,6 +13323,8 @@ const TrussCAPI = {
             "name": "KEY_LEFT",
             "value": "263",
             "desc": "Left arrow key",
+            "desc_ja": "左矢印キー",
+            "desc_ko": "왼쪽 방향키",
             "keywords": [
                 "left arrow",
                 "cursor left",
@@ -13759,6 +13336,8 @@ const TrussCAPI = {
             "name": "KEY_DOWN",
             "value": "264",
             "desc": "Down arrow key",
+            "desc_ja": "下矢印キー",
+            "desc_ko": "아래쪽 방향키",
             "keywords": [
                 "down arrow",
                 "cursor down",
@@ -13770,6 +13349,8 @@ const TrussCAPI = {
             "name": "KEY_UP",
             "value": "265",
             "desc": "Up arrow key",
+            "desc_ja": "上矢印キー",
+            "desc_ko": "위쪽 방향키",
             "keywords": [
                 "up arrow",
                 "cursor up",
@@ -13781,6 +13362,8 @@ const TrussCAPI = {
             "name": "KEY_LEFT_SHIFT",
             "value": "340",
             "desc": "Left Shift key",
+            "desc_ja": "左Shiftキー",
+            "desc_ko": "왼쪽 Shift 키",
             "keywords": [
                 "left shift",
                 "shift",
@@ -13792,6 +13375,8 @@ const TrussCAPI = {
             "name": "KEY_RIGHT_SHIFT",
             "value": "344",
             "desc": "Right Shift key",
+            "desc_ja": "右Shiftキー",
+            "desc_ko": "오른쪽 Shift 키",
             "keywords": [
                 "right shift",
                 "shift",
@@ -13803,6 +13388,8 @@ const TrussCAPI = {
             "name": "KEY_LEFT_CONTROL",
             "value": "341",
             "desc": "Left Control key",
+            "desc_ja": "左Controlキー",
+            "desc_ko": "왼쪽 Control 키",
             "keywords": [
                 "left control",
                 "ctrl",
@@ -13815,6 +13402,8 @@ const TrussCAPI = {
             "name": "KEY_RIGHT_CONTROL",
             "value": "345",
             "desc": "Right Control key",
+            "desc_ja": "右Controlキー",
+            "desc_ko": "오른쪽 Control 키",
             "keywords": [
                 "right control",
                 "ctrl",
@@ -13827,6 +13416,8 @@ const TrussCAPI = {
             "name": "KEY_LEFT_ALT",
             "value": "342",
             "desc": "Left Alt/Option key",
+            "desc_ja": "左Alt/Optionキー",
+            "desc_ko": "왼쪽 Alt/Option 키",
             "keywords": [
                 "left alt",
                 "option",
@@ -13839,6 +13430,8 @@ const TrussCAPI = {
             "name": "KEY_RIGHT_ALT",
             "value": "346",
             "desc": "Right Alt/Option key",
+            "desc_ja": "右Alt/Optionキー",
+            "desc_ko": "오른쪽 Alt/Option 키",
             "keywords": [
                 "right alt",
                 "option",
@@ -13851,6 +13444,8 @@ const TrussCAPI = {
             "name": "KEY_LEFT_SUPER",
             "value": "343",
             "desc": "Left Super/Command key",
+            "desc_ja": "左Super/Commandキー",
+            "desc_ko": "왼쪽 Super/Command 키",
             "keywords": [
                 "left super",
                 "command",
@@ -13864,6 +13459,8 @@ const TrussCAPI = {
             "name": "KEY_RIGHT_SUPER",
             "value": "347",
             "desc": "Right Super/Command key",
+            "desc_ja": "右Super/Commandキー",
+            "desc_ko": "오른쪽 Super/Command 키",
             "keywords": [
                 "right super",
                 "command",
@@ -13877,6 +13474,8 @@ const TrussCAPI = {
             "name": "KEY_F1",
             "value": "290",
             "desc": "F1 function key",
+            "desc_ja": "F1ファンクションキー",
+            "desc_ko": "F1 기능 키",
             "keywords": [
                 "function key",
                 "f1",
@@ -13888,6 +13487,8 @@ const TrussCAPI = {
             "name": "KEY_F2",
             "value": "291",
             "desc": "F2 function key",
+            "desc_ja": "F2ファンクションキー",
+            "desc_ko": "F2 기능 키",
             "keywords": [
                 "function key",
                 "f2",
@@ -13899,6 +13500,8 @@ const TrussCAPI = {
             "name": "KEY_F3",
             "value": "292",
             "desc": "F3 function key",
+            "desc_ja": "F3ファンクションキー",
+            "desc_ko": "F3 기능 키",
             "keywords": [
                 "function key",
                 "f3",
@@ -13910,6 +13513,8 @@ const TrussCAPI = {
             "name": "KEY_F4",
             "value": "293",
             "desc": "F4 function key",
+            "desc_ja": "F4ファンクションキー",
+            "desc_ko": "F4 기능 키",
             "keywords": [
                 "function key",
                 "f4",
@@ -13920,6 +13525,8 @@ const TrussCAPI = {
             "name": "KEY_F5",
             "value": "294",
             "desc": "F5 function key",
+            "desc_ja": "F5ファンクションキー",
+            "desc_ko": "F5 기능 키",
             "keywords": [
                 "function key",
                 "f5",
@@ -13932,6 +13539,8 @@ const TrussCAPI = {
             "name": "KEY_F6",
             "value": "295",
             "desc": "F6 function key",
+            "desc_ja": "F6ファンクションキー",
+            "desc_ko": "F6 기능 키",
             "keywords": [
                 "function key",
                 "f6",
@@ -13942,6 +13551,8 @@ const TrussCAPI = {
             "name": "KEY_F7",
             "value": "296",
             "desc": "F7 function key",
+            "desc_ja": "F7ファンクションキー",
+            "desc_ko": "F7 기능 키",
             "keywords": [
                 "function key",
                 "f7",
@@ -13952,6 +13563,8 @@ const TrussCAPI = {
             "name": "KEY_F8",
             "value": "297",
             "desc": "F8 function key",
+            "desc_ja": "F8ファンクションキー",
+            "desc_ko": "F8 기능 키",
             "keywords": [
                 "function key",
                 "f8",
@@ -13962,6 +13575,8 @@ const TrussCAPI = {
             "name": "KEY_F9",
             "value": "298",
             "desc": "F9 function key",
+            "desc_ja": "F9ファンクションキー",
+            "desc_ko": "F9 기능 키",
             "keywords": [
                 "function key",
                 "f9",
@@ -13972,6 +13587,8 @@ const TrussCAPI = {
             "name": "KEY_F10",
             "value": "299",
             "desc": "F10 function key",
+            "desc_ja": "F10ファンクションキー",
+            "desc_ko": "F10 기능 키",
             "keywords": [
                 "function key",
                 "f10",
@@ -13983,6 +13600,8 @@ const TrussCAPI = {
             "name": "KEY_F11",
             "value": "300",
             "desc": "F11 function key",
+            "desc_ja": "F11ファンクションキー",
+            "desc_ko": "F11 기능 키",
             "keywords": [
                 "function key",
                 "f11",
@@ -13994,6 +13613,8 @@ const TrussCAPI = {
             "name": "KEY_F12",
             "value": "301",
             "desc": "F12 function key",
+            "desc_ja": "F12ファンクションキー",
+            "desc_ko": "F12 기능 키",
             "keywords": [
                 "function key",
                 "f12",
@@ -14005,6 +13626,8 @@ const TrussCAPI = {
             "name": "MOUSE_BUTTON_LEFT",
             "value": "0",
             "desc": "Left mouse button",
+            "desc_ja": "左マウスボタン",
+            "desc_ko": "왼쪽 마우스 버튼",
             "keywords": [
                 "left click",
                 "mouse",
@@ -14016,6 +13639,8 @@ const TrussCAPI = {
             "name": "MOUSE_BUTTON_RIGHT",
             "value": "1",
             "desc": "Right mouse button",
+            "desc_ja": "右マウスボタン",
+            "desc_ko": "오른쪽 마우스 버튼",
             "keywords": [
                 "right click",
                 "mouse",
@@ -14028,6 +13653,8 @@ const TrussCAPI = {
             "name": "MOUSE_BUTTON_MIDDLE",
             "value": "2",
             "desc": "Middle mouse button",
+            "desc_ja": "中央マウスボタン",
+            "desc_ko": "가운데 마우스 버튼",
             "keywords": [
                 "middle click",
                 "mouse",
@@ -14039,6 +13666,8 @@ const TrussCAPI = {
         {
             "name": "kAppendCurveMaxPoints",
             "desc": "",
+            "desc_ja": "",
+            "desc_ko": "",
             "keywords": []
         }
     ],
@@ -16338,14 +15967,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Get the underlying thread's ID."
-                },
-                {
-                    "name": "threadedFunction",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override this with the work to run on the thread; recommended pattern is while (isThreadRunning()) { ... }. (protected, pure virtual)"
                 }
             ],
             "static_methods": [
@@ -17139,75 +16760,6 @@ const TrussCAPI = {
                         "const ColorOKLCH & target, float t, bool shortestPath = …"
                     ],
                     "desc": "Interpolate in OKLCH space (shortest hue path, perceptually uniform)"
-                }
-            ]
-        },
-        {
-            "name": "Glyph",
-            "desc": "A bitmap glyph to register via registerGlyph(): a codepoint plus packed 1-bit pixel rows. The data pointer must outlive every drawBitmapString call",
-            "keywords": [
-                "glyph",
-                "bitmap",
-                "font",
-                "character",
-                "pixels",
-                "codepoint"
-            ],
-            "desc_ja": "registerGlyph() で登録するビットマップグリフ。codepoint とパックされた 1-bit ピクセル行。data ポインタはすべての drawBitmapString 呼び出しより長く生存する必要がある",
-            "desc_ko": "registerGlyph()로 등록하는 비트맵 글리프. codepoint와 패킹된 1-bit 픽셀 행. data 포인터는 모든 drawBitmapString 호출보다 오래 살아 있어야 함",
-            "examples": [
-                {
-                    "name": "bitmapStringExtendedExample",
-                    "group": "font"
-                }
-            ],
-            "related": [
-                "bitmapfont::registerGlyph",
-                "bitmapfont::registerGlyphs",
-                "registerGlyph",
-                "registerGlyphs",
-                "Font",
-                "PlacedGlyph"
-            ],
-            "properties": [
-                {
-                    "name": "codepoint",
-                    "type": "",
-                    "desc": "Unicode codepoint this glyph renders"
-                },
-                {
-                    "name": "data",
-                    "type": "",
-                    "desc": "Packed bitmap rows (MSB first); must outlive all draw calls"
-                },
-                {
-                    "name": "width",
-                    "type": "",
-                    "desc": "Glyph width: Halfwidth (8x13) or Fullwidth (16x13)"
-                }
-            ]
-        },
-        {
-            "name": "GlyphCell",
-            "desc": "",
-            "keywords": [],
-            "desc_ja": "",
-            "desc_ko": "",
-            "properties": [
-                {
-                    "name": "atlasCellX",
-                    "type": "",
-                    "desc": ""
-                },
-                {
-                    "name": "atlasCellY",
-                    "type": "",
-                    "desc": ""
-                },
-                {
-                    "name": "cellWidth",
-                    "type": "",
-                    "desc": ""
                 }
             ]
         },
@@ -20402,48 +19954,6 @@ const TrussCAPI = {
                 "pushShader",
                 "Fbo"
             ],
-            "properties": [
-                {
-                    "name": "shader",
-                    "type": "",
-                    "desc": ""
-                },
-                {
-                    "name": "pipeline",
-                    "type": "",
-                    "desc": ""
-                },
-                {
-                    "name": "vertexBuffer",
-                    "type": "",
-                    "desc": ""
-                },
-                {
-                    "name": "indexBuffer",
-                    "type": "",
-                    "desc": ""
-                },
-                {
-                    "name": "loaded",
-                    "type": "",
-                    "desc": ""
-                },
-                {
-                    "name": "pendingTextures",
-                    "type": "",
-                    "desc": ""
-                },
-                {
-                    "name": "pendingViews",
-                    "type": "",
-                    "desc": ""
-                },
-                {
-                    "name": "pendingUniforms",
-                    "type": "",
-                    "desc": ""
-                }
-            ],
             "methods": [
                 {
                     "name": "load",
@@ -20540,54 +20050,6 @@ const TrussCAPI = {
                     "return": "void",
                     "signatures": [
                         "const std::vector<ShaderVertex> & vertices, PrimitiveType type"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "createPipelineDesc",
-                    "return": "sg_pipeline_desc",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "createVertexBuffer",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onBegin",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onEnd",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setupBindings",
-                    "return": "void",
-                    "signatures": [
-                        "sg_bindings & bind"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "pipelineForCurrentTarget",
-                    "return": "sg_pipeline",
-                    "signatures": [
-                        ""
                     ],
                     "desc": ""
                 }
@@ -23790,86 +23252,6 @@ const TrussCAPI = {
                     "desc": "Invoke a visitor once per laid-out glyph (positions follow writing mode, wrap, kinsoku, and TCY). Backend-agnostic layout pass shared by drawing, vector outlines, and hit testing"
                 },
                 {
-                    "name": "forEachGlyphHorizontal",
-                    "return": "void",
-                    "signatures": [
-                        "const std::string & text, float x, float y, Direction h, Direction v, const GlyphVisitor & visitor"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "emitPlacedGlyphsToAtlas",
-                    "return": "void",
-                    "signatures": [
-                        "const std::vector<PlacedGlyph> & placed"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "drawStringInternal",
-                    "return": "void",
-                    "signatures": [
-                        "const std::string & text, float x, float y, Direction h, Direction v"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "forEachGlyphVertical",
-                    "return": "void",
-                    "signatures": [
-                        "const std::string & text, float x, float y, Direction h, Direction v, const GlyphVisitor & visitor"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "drawStringVerticalInternal",
-                    "return": "void",
-                    "signatures": [
-                        "const std::string & text, float x, float y, Direction h, Direction v"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "kinsokuLineStart",
-                    "return": "bool",
-                    "signatures": [
-                        "uint32_t cp"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "kinsokuLineEnd",
-                    "return": "bool",
-                    "signatures": [
-                        "uint32_t cp"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "wrapTextHorizontal",
-                    "return": "std::string",
-                    "signatures": [
-                        "const std::string & text"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "wrapTextVertical",
-                    "return": "std::string",
-                    "signatures": [
-                        "const std::string & text"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "wrapTextIfEnabled",
-                    "return": "std::string",
-                    "signatures": [
-                        "const std::string & text"
-                    ],
-                    "desc": ""
-                },
-                {
                     "name": "getWidth",
                     "return": "float",
                     "signatures": [
@@ -23940,14 +23322,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Get font size"
-                },
-                {
-                    "name": "calcAlignOffset",
-                    "return": "Vec2",
-                    "signatures": [
-                        "const std::string & text, Direction h, Direction v"
-                    ],
-                    "desc": ""
                 },
                 {
                     "name": "getMemoryUsage",
@@ -24331,22 +23705,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Draw a fullscreen quad with this shader applied"
-                },
-                {
-                    "name": "createPipelineDesc",
-                    "return": "sg_pipeline_desc",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "createVertexBuffer",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
                 }
             ]
         },
@@ -25000,86 +24358,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": ""
-                },
-                {
-                    "name": "playImpl",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "stopImpl",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setPausedImpl",
-                    "return": "void",
-                    "signatures": [
-                        "bool paused"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setPositionImpl",
-                    "return": "void",
-                    "signatures": [
-                        "float pct"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setVolumeImpl",
-                    "return": "void",
-                    "signatures": [
-                        "float vol"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setSpeedImpl",
-                    "return": "void",
-                    "signatures": [
-                        "float speed"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setPanImpl",
-                    "return": "void",
-                    "signatures": [
-                        "float pan"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setLoopImpl",
-                    "return": "void",
-                    "signatures": [
-                        "bool loop"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "markFrameNew",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "markDone",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
                 }
             ]
         },
@@ -25350,70 +24628,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Get the name of the active decode backend. Returns 'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', or 'none'"
-                },
-                {
-                    "name": "playImpl",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "stopImpl",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setPausedImpl",
-                    "return": "void",
-                    "signatures": [
-                        "bool paused"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setPositionImpl",
-                    "return": "void",
-                    "signatures": [
-                        "float pct"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setVolumeImpl",
-                    "return": "void",
-                    "signatures": [
-                        "float vol"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setSpeedImpl",
-                    "return": "void",
-                    "signatures": [
-                        "float speed"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setPanImpl",
-                    "return": "void",
-                    "signatures": [
-                        "float pan"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "setLoopImpl",
-                    "return": "void",
-                    "signatures": [
-                        "bool loop"
-                    ],
-                    "desc": ""
                 }
             ],
             "static_methods": [
@@ -26692,14 +25906,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Remote port"
-                },
-                {
-                    "name": "notifyError",
-                    "return": "void",
-                    "signatures": [
-                        "const std::string & msg, int code = …"
-                    ],
-                    "desc": ""
                 }
             ],
             "operators": [
@@ -28540,258 +27746,6 @@ const TrussCAPI = {
                         "const std::string & name"
                     ],
                     "desc": "Find an attached mod by its short type name, e.g. \"LayoutMod\" (null if not attached) (C++ only)"
-                },
-                {
-                    "name": "resolvePickRay",
-                    "return": "std::pair<const CameraContext *, Ray>",
-                    "signatures": [
-                        "internal::PickRaySource & pick, const CameraContext * inheritedCtx, const Ray & globalRay"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "findHitNodeRecursive",
-                    "return": "HitResult",
-                    "signatures": [
-                        "internal::PickRaySource & pick, const CameraContext * inheritedCtx, Ray globalRay, const Mat4 & parentInverseMatrix"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "beginDraw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "endDraw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "drawChildren",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "hitTest",
-                    "return": "bool",
-                    "signatures": [
-                        "const Ray & localRay, float & outDistance",
-                        "Vec2 local"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMousePress",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs & e",
-                        "Vec2 local, int button"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseRelease",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs & e",
-                        "Vec2 local, int button"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseMove",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseMoveEventArgs & e",
-                        "Vec2 local"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseDrag",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseDragEventArgs & e",
-                        "Vec2 local, int button"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseScroll",
-                    "return": "bool",
-                    "signatures": [
-                        "const ScrollEventArgs & e",
-                        "Vec2 local, Vec2 scroll"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onKeyPress",
-                    "return": "bool",
-                    "signatures": [
-                        "const KeyEventArgs & e",
-                        "int key"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onKeyRelease",
-                    "return": "bool",
-                    "signatures": [
-                        "const KeyEventArgs & e",
-                        "int key"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseEnter",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseLeave",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onActiveChanged",
-                    "return": "void",
-                    "signatures": [
-                        "bool active"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onVisibleChanged",
-                    "return": "void",
-                    "signatures": [
-                        "bool visible"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "callAfter",
-                    "return": "uint64_t",
-                    "signatures": [
-                        "double delay, std::function<void ()> callback"
-                    ],
-                    "desc": "Run callback once after delay seconds. Fired from the update loop (frame-quantized). Returns a timer id."
-                },
-                {
-                    "name": "callEvery",
-                    "return": "uint64_t",
-                    "signatures": [
-                        "double interval, std::function<void ()> callback"
-                    ],
-                    "desc": "Run callback repeatedly every interval seconds. Fired from the update loop (frame-quantized). Returns a timer id."
-                },
-                {
-                    "name": "cancelTimer",
-                    "return": "void",
-                    "signatures": [
-                        "uint64_t id"
-                    ],
-                    "desc": "Cancel a frame timer (callAfter/callEvery) by id."
-                },
-                {
-                    "name": "cancelAllTimers",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Cancel all frame timers on this node."
-                },
-                {
-                    "name": "callAfterAsync",
-                    "return": "uint64_t",
-                    "signatures": [
-                        "double delay, std::function<void ()> callback"
-                    ],
-                    "desc": "Like callAfter, but fired by a precise background scheduler thread (no frame jitter). The callback runs OFF the main thread: guard shared state with a mutex, never draw from it, and don't cancel while holding that mutex. Native only (uses a real thread). Returns a timer id.",
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "android",
-                        "ios"
-                    ]
-                },
-                {
-                    "name": "callEveryAsync",
-                    "return": "uint64_t",
-                    "signatures": [
-                        "double interval, std::function<void ()> callback"
-                    ],
-                    "desc": "Like callEvery, but fired by a precise background scheduler thread with no drift (reschedules at absolute times). Ideal for sequencer clocks and LED/MIDI output timing. Same threading rules as callAfterAsync. Native only. Returns a timer id.",
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "android",
-                        "ios"
-                    ]
-                },
-                {
-                    "name": "cancelAsyncTimer",
-                    "return": "void",
-                    "signatures": [
-                        "uint64_t id"
-                    ],
-                    "desc": "Cancel an async timer by id. Blocks until its callback finishes if it is running now (unless called from inside the callback). Do not call while holding the mutex the callback uses.",
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "android",
-                        "ios"
-                    ]
-                },
-                {
-                    "name": "cancelAllAsyncTimers",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock.",
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "android",
-                        "ios"
-                    ]
-                },
-                {
-                    "name": "onLocalMatrixChanged",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "processTimers",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
                 }
             ]
         },
@@ -28823,150 +27777,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Get the owner Node this Mod is attached to."
-                },
-                {
-                    "name": "removeSelf",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Remove this Mod from its owner (no need to name its own type). Safe to call from inside the Mod's own update/draw/event handler; destruction is deferred until the current dispatch finishes. (protected)"
-                },
-                {
-                    "name": "setup",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: called once when the Mod is attached to the Node. (protected, virtual)"
-                },
-                {
-                    "name": "earlyUpdate",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: called every frame BEFORE Node::update(). Use for applying transforms, tweens, physics. (protected, virtual)"
-                },
-                {
-                    "name": "update",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: called every frame AFTER Node::update(). Use for reactions to node state changes. (protected, virtual)"
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: called during the draw phase, after Node::draw(). (protected, virtual)"
-                },
-                {
-                    "name": "onDestroy",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: called when the Mod is removed or the Node is destroyed. (protected, virtual)"
-                },
-                {
-                    "name": "onMousePress",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs & e"
-                    ],
-                    "desc": "Override: mouse press on the hit node. Return true to consume the event (counts as the node consuming it). (protected, virtual)"
-                },
-                {
-                    "name": "onMouseRelease",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs & e"
-                    ],
-                    "desc": "Override: mouse release on the hit node. Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onMouseMove",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseMoveEventArgs & e"
-                    ],
-                    "desc": "Override: mouse move over the hit node. Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onMouseDrag",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseDragEventArgs & e"
-                    ],
-                    "desc": "Override: mouse drag on the hit node. Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onMouseScroll",
-                    "return": "bool",
-                    "signatures": [
-                        "const ScrollEventArgs & e"
-                    ],
-                    "desc": "Override: mouse scroll over the hit node. Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onKeyPress",
-                    "return": "bool",
-                    "signatures": [
-                        "const KeyEventArgs & e"
-                    ],
-                    "desc": "Override: key press (broadcast to mods on every node). Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onKeyRelease",
-                    "return": "bool",
-                    "signatures": [
-                        "const KeyEventArgs & e"
-                    ],
-                    "desc": "Override: key release (broadcast to mods on every node). Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onMouseEnter",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: pointer entered the owner node. (protected, virtual)"
-                },
-                {
-                    "name": "onMouseLeave",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: pointer left the owner node. (protected, virtual)"
-                },
-                {
-                    "name": "hitTest",
-                    "return": "bool",
-                    "signatures": [
-                        "const Ray & localRay, float & outDistance"
-                    ],
-                    "desc": "Override: screen-space pointer picking (NOT physics collision). Define a hit shape in the node's LOCAL space; if the node's own test OR any mod's returns true, the node is the hit. (protected, virtual)"
-                },
-                {
-                    "name": "isExclusive",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override to return true if only one instance of this Mod type may be attached per Node (e.g. LayoutMod). Default false. (protected, virtual)"
-                },
-                {
-                    "name": "canAttachTo",
-                    "return": "bool",
-                    "signatures": [
-                        "Node * node"
-                    ],
-                    "desc": "Override to restrict which Node types this Mod can attach to. Return false to reject attachment. Default true. (protected, virtual)"
                 }
             ]
         },
@@ -29200,86 +28010,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": ""
-                },
-                {
-                    "name": "beginDraw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "endDraw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMousePress",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs & e"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseRelease",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs & e"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseDrag",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseDragEventArgs & e"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseScroll",
-                    "return": "bool",
-                    "signatures": [
-                        "const ScrollEventArgs & e"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "drawRectFill",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "drawRectStroke",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "drawRectFillAndStroke",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onSizeChanged",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
                 }
             ]
         },
@@ -29344,22 +28074,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Draw the button: fills the rect with the state-dependent color and draws the centered label. (override)"
-                },
-                {
-                    "name": "onMousePress",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs & e"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseRelease",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs & e"
-                    ],
-                    "desc": ""
                 }
             ]
         },
@@ -29545,38 +28259,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Recalculate layout (call after adding/removing children) (C++ only)"
-                },
-                {
-                    "name": "setup",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "earlyUpdate",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "isExclusive",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "canAttachTo",
-                    "return": "bool",
-                    "signatures": [
-                        "Node * node"
-                    ],
-                    "desc": ""
                 }
             ]
         },
@@ -29758,30 +28440,6 @@ const TrussCAPI = {
                         "float speed"
                     ],
                     "desc": "Set the scroll speed (wheel/trackpad sensitivity) (ScrollContainer method) (C++ only)"
-                },
-                {
-                    "name": "onSizeChanged",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "update",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseScroll",
-                    "return": "bool",
-                    "signatures": [
-                        "const ScrollEventArgs & e"
-                    ],
-                    "desc": ""
                 }
             ]
         },
@@ -29879,70 +28537,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Resync the bar size and position from its ScrollContainer (ScrollBar method) (C++ only)"
-                },
-                {
-                    "name": "updateVertical",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "updateHorizontal",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMousePress",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs & e"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseRelease",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs & e"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "onMouseDrag",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseDragEventArgs & e"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "handleVerticalDrag",
-                    "return": "void",
-                    "signatures": [
-                        "float localY"
-                    ],
-                    "desc": ""
-                },
-                {
-                    "name": "handleHorizontalDrag",
-                    "return": "void",
-                    "signatures": [
-                        "float localX"
-                    ],
-                    "desc": ""
                 }
             ]
         },
@@ -30241,14 +28835,6 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Get the current easing mode (In/Out/InOut) (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "earlyUpdate",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": ""
                 }
             ]
         },
@@ -30753,29 +29339,6 @@ const TrussCAPI = {
                 "windowFunction",
                 "WindowSettings"
             ]
-        },
-        {
-            "name": "Width",
-            "desc": "",
-            "keywords": [],
-            "values": [
-                {
-                    "name": "Halfwidth",
-                    "value": 1,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Fullwidth",
-                    "value": 2,
-                    "desc": "",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                }
-            ],
-            "desc_ja": "",
-            "desc_ko": ""
         },
         {
             "name": "ThermalState",
