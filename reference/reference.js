@@ -30,7 +30,7 @@
             for (const m of (t.methods || []).concat(t.static_methods || [])) { pick(m, 'desc'); pick(m, 'platformNote'); }
             for (const o of t.operators || []) pick(o, 'desc');
         }
-        for (const c of api.constants || []) pick(c, 'desc');
+        for (const c of api.constants || []) { pick(c, 'desc'); pick(c, 'details'); }
         for (const e of api.enums || []) { pick(e, 'desc'); for (const v of e.values || []) pick(v, 'desc'); for (const o of e.operators || []) pick(o, 'desc'); }
         for (const m of api.macros || []) pick(m, 'desc');
     }
@@ -415,7 +415,7 @@
     }
 
     // Resolve a related symbol name to its kind so links navigate correctly
-    // (a related entry may be a function, type, enum or macro). Built once.
+    // (a related entry may be a function, type, enum, macro or constant). Built once.
     let _kindIndex = null;
     function kindOf(name) {
         if (!_kindIndex) {
@@ -424,6 +424,7 @@
             for (const t of TrussCAPI.types || []) if (!_kindIndex.has(t.name)) _kindIndex.set(t.name, 'type');
             for (const e of TrussCAPI.enums || []) if (!_kindIndex.has(e.name)) _kindIndex.set(e.name, 'enum');
             for (const m of TrussCAPI.macros || []) if (!_kindIndex.has(m.name)) _kindIndex.set(m.name, 'macro');
+            for (const c of TrussCAPI.constants || []) if (!_kindIndex.has(c.name)) _kindIndex.set(c.name, 'constant');
         }
         return _kindIndex.get(name) || 'function';
     }
@@ -658,12 +659,17 @@
         let html = backButton();
         html += `<div class="detail-title">${esc(c.name)}</div>`;
         html += `<div class="detail-desc">${esc(c.desc || UI.constantValue)}</div>`;
+        // Long-form notes (e.g. the TAU/PI essays) — same treatment as function detail.
+        if (c.details) {
+            html += `<div class="detail-details" style="white-space:pre-wrap;color:#bbb;font-size:13px;line-height:1.7;margin:6px 0 4px;">${esc(c.details)}</div>`;
+        }
         if (c.value !== undefined && c.value !== null) {   // don't print the literal word "undefined"
             html += `<div class="detail-section">`;
             html += `<div class="detail-section-title">${esc(UI.value)}</div>`;
             html += `<div class="detail-entry"><div class="detail-sig" style="color:#b5cea8;font-size:16px;">${esc(String(c.value))}</div></div>`;
             html += `</div>`;
         }
+        html += renderRelated(c.related);
 
         detail.innerHTML = html;
     }
