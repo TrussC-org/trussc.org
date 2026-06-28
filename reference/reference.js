@@ -436,6 +436,9 @@
     function relatedLink(r) {
         const A = 'style="color:var(--color-accent,#4ec9b0);text-decoration:none;"';
         if (isKnown(r)) return `<a href="#" onclick="navTo('${kindOf(r)}','${esc(r)}');return false;" ${A}>${esc(r)}</a>`;
+        // template targets (Tween<T>, Event<T>, ThreadChannel<T>) → resolve to the base type
+        const base = r.replace(/<[^>]*>\s*$/, '');
+        if (base !== r && isKnown(base)) return `<a href="#" onclick="navTo('${kindOf(base)}','${esc(base)}');return false;" title="${esc(r)}" ${A}>${esc(r)}</a>`;
         const ix = r.indexOf('::');
         if (ix > 0) {
             const owner = r.slice(0, ix);
