@@ -285,10 +285,13 @@
     addUser(q);
     var bot = addBot('');
     var srcs = null, links = null;
+    // What the user is currently viewing (reference deep-link hash) → page context.
+    var hash = (location.hash || '').slice(1);
+    var page = /^(function|type|enum|macro|constant):.+/.test(hash) ? hash : null;
     try {
       var r = await fetch(API + '/chat', {
         method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ question: q, history: convo, convId: convId }),
+        body: JSON.stringify({ question: q, history: convo, convId: convId, page: page }),
       });
       var reader = r.body.getReader(); var dec = new TextDecoder(); var buf = '';
       for (;;) {
