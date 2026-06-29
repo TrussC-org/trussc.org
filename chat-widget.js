@@ -102,7 +102,7 @@
     <div class="cw-panel">
       <div class="cw-head">
         <span class="cw-dot"></span>
-        <div class="cw-title">TrussC docs helper</div>
+        <div class="cw-title">TrussC Guide (beta)</div>
         <button class="cw-act cw-copy" aria-label="Copy conversation" title="Copy conversation">copy</button>
         <button class="cw-act cw-clear" aria-label="Clear conversation" title="Clear conversation">clear</button>
         <button class="cw-x" aria-label="Close">×</button>
