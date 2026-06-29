@@ -28243,6 +28243,98 @@ const TrussCAPI = {
                         "const std::string & name"
                     ],
                     "desc": "Find an attached mod by its short type name, e.g. \"LayoutMod\" (null if not attached) (C++ only)"
+                },
+                {
+                    "name": "callAfter",
+                    "return": "uint64_t",
+                    "signatures": [
+                        "double delay, std::function<void ()> callback"
+                    ],
+                    "desc": "Run callback once after delay seconds. Fired from the update loop (frame-quantized). Returns a timer id."
+                },
+                {
+                    "name": "callEvery",
+                    "return": "uint64_t",
+                    "signatures": [
+                        "double interval, std::function<void ()> callback"
+                    ],
+                    "desc": "Run callback repeatedly every interval seconds. Fired from the update loop (frame-quantized). Returns a timer id."
+                },
+                {
+                    "name": "cancelTimer",
+                    "return": "void",
+                    "signatures": [
+                        "uint64_t id"
+                    ],
+                    "desc": "Cancel a frame timer (callAfter/callEvery) by id."
+                },
+                {
+                    "name": "cancelAllTimers",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Cancel all frame timers on this node."
+                },
+                {
+                    "name": "callAfterAsync",
+                    "return": "uint64_t",
+                    "signatures": [
+                        "double delay, std::function<void ()> callback"
+                    ],
+                    "desc": "Like callAfter, but fired by a precise background scheduler thread (no frame jitter). The callback runs OFF the main thread: guard shared state with a mutex, never draw from it, and don't cancel while holding that mutex. Native only (uses a real thread). Returns a timer id.",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "android",
+                        "ios"
+                    ]
+                },
+                {
+                    "name": "callEveryAsync",
+                    "return": "uint64_t",
+                    "signatures": [
+                        "double interval, std::function<void ()> callback"
+                    ],
+                    "desc": "Like callEvery, but fired by a precise background scheduler thread with no drift (reschedules at absolute times). Ideal for sequencer clocks and LED/MIDI output timing. Same threading rules as callAfterAsync. Native only. Returns a timer id.",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "android",
+                        "ios"
+                    ]
+                },
+                {
+                    "name": "cancelAsyncTimer",
+                    "return": "void",
+                    "signatures": [
+                        "uint64_t id"
+                    ],
+                    "desc": "Cancel an async timer by id. Blocks until its callback finishes if it is running now (unless called from inside the callback). Do not call while holding the mutex the callback uses.",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "android",
+                        "ios"
+                    ]
+                },
+                {
+                    "name": "cancelAllAsyncTimers",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock.",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "android",
+                        "ios"
+                    ]
                 }
             ]
         },
