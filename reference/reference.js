@@ -182,10 +182,12 @@
     }
 
     // Edit distance allowed for a typo, scaled to token length so short tokens
-    // don't match wildly different words (e.g. a 4-char token allows 1 edit).
+    // don't match wildly different words. A 4-char query gets 0 edits: at distance 1
+    // a real 4-letter symbol flips to common words ("node"→"mode"/"code"/"none"),
+    // flooding results — exact/subsequence is enough for tokens that short.
     function maxEditDist(token) {
         if (token.length >= 8) return 2;
-        if (token.length >= 4) return 1;
+        if (token.length >= 5) return 1;
         return 0;
     }
 
