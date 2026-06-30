@@ -22,7 +22,6 @@ const TrussCAPI = {
                         "main",
                         "start",
                         "launch",
-                        "run",
                         "boot",
                         "entry"
                     ],
@@ -49,7 +48,6 @@ const TrussCAPI = {
                     "desc": "Convert a single sRGB channel value to linear RGB",
                     "keywords": [
                         "gamma",
-                        "linear",
                         "color space",
                         "convert"
                     ],
@@ -67,7 +65,6 @@ const TrussCAPI = {
                     "desc": "Convert a single linear RGB channel value to sRGB",
                     "keywords": [
                         "gamma",
-                        "linear",
                         "color space",
                         "convert"
                     ],
@@ -164,7 +161,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set drawing color (0.0-1.0)",
                     "keywords": [
-                        "color",
                         "tint",
                         "rgba",
                         "fill"
@@ -199,7 +195,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set drawing color (0.0-1.0)",
                     "keywords": [
-                        "color",
                         "tint",
                         "rgba",
                         "fill"
@@ -234,7 +229,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set drawing color (0.0-1.0)",
                     "keywords": [
-                        "color",
                         "tint",
                         "rgba",
                         "fill"
@@ -269,12 +263,10 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set color from HSB (H: 0-1)",
                     "keywords": [
-                        "hsb",
                         "hsv",
                         "hue",
                         "saturation",
-                        "brightness",
-                        "color"
+                        "brightness"
                     ],
                     "desc_ja": "HSBで色を設定 (H: 0-1)",
                     "desc_ko": "HSB로 색상을 설정 (H: 0-1)",
@@ -306,7 +298,6 @@ const TrussCAPI = {
                     "keywords": [
                         "oklab",
                         "perceptual",
-                        "lab",
                         "lightness"
                     ],
                     "desc_ja": "OKLabで色を設定",
@@ -322,7 +313,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set color from OKLCH",
                     "keywords": [
-                        "oklch",
                         "perceptual",
                         "lightness",
                         "chroma",
@@ -361,7 +351,9 @@ const TrussCAPI = {
                         "drawRectSquircle",
                         "Rect"
                     ],
-                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.",
+                    "details": "Draws an axis-aligned rectangle from the top-left corner. Respects the current\n[`fill`](#fill) / [`noFill`](#noFill) mode and draw color. With a `Vec3`\nposition, `z` places it in 3D mode. For rounded corners, see\n[`drawRectRounded`](#drawRectRounded) and [`drawRectSquircle`](#drawRectSquircle).",
+                    "details_ja": "左上を原点に軸並行の矩形を描画する。現在の [`fill`](#fill) / [`noFill`](#noFill)\nモードと描画色に従う。`Vec3` で位置を渡すと `z` が 3D モードでの配置に使われる。\n角を丸めたいときは [`drawRectRounded`](#drawRectRounded) /\n[`drawRectSquircle`](#drawRectSquircle) を参照。",
+                    "details_ko": "좌상단을 원점으로 축에 정렬된 사각형을 그린다. 현재 [`fill`](#fill) /\n[`noFill`](#noFill) 모드와 그리기 색을 따른다. `Vec3`로 위치를 전달하면 `z`가\n3D 모드에서 배치에 사용된다. 둥근 모서리는 [`drawRectRounded`](#drawRectRounded) /\n[`drawRectSquircle`](#drawRectSquircle)를 참조.",
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -389,7 +381,9 @@ const TrussCAPI = {
                         "drawRectSquircle",
                         "Rect"
                     ],
-                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.",
+                    "details": "Draws an axis-aligned rectangle from the top-left corner. Respects the current\n[`fill`](#fill) / [`noFill`](#noFill) mode and draw color. With a `Vec3`\nposition, `z` places it in 3D mode. For rounded corners, see\n[`drawRectRounded`](#drawRectRounded) and [`drawRectSquircle`](#drawRectSquircle).",
+                    "details_ja": "左上を原点に軸並行の矩形を描画する。現在の [`fill`](#fill) / [`noFill`](#noFill)\nモードと描画色に従う。`Vec3` で位置を渡すと `z` が 3D モードでの配置に使われる。\n角を丸めたいときは [`drawRectRounded`](#drawRectRounded) /\n[`drawRectSquircle`](#drawRectSquircle) を参照。",
+                    "details_ko": "좌상단을 원점으로 축에 정렬된 사각형을 그린다. 현재 [`fill`](#fill) /\n[`noFill`](#noFill) 모드와 그리기 색을 따른다. `Vec3`로 위치를 전달하면 `z`가\n3D 모드에서 배치에 사용된다. 둥근 모서리는 [`drawRectRounded`](#drawRectRounded) /\n[`drawRectSquircle`](#drawRectSquircle)를 참조.",
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -417,7 +411,9 @@ const TrussCAPI = {
                         "drawRectSquircle",
                         "Rect"
                     ],
-                    "details": "Draws an axis-aligned rectangle from the top-left corner.\nRespects the current fill / noFill mode and draw color.\nWith a Vec3 position, z is used for placement in 3D mode.\nFor rounded corners, see drawRectRounded and drawRectSquircle.",
+                    "details": "Draws an axis-aligned rectangle from the top-left corner. Respects the current\n[`fill`](#fill) / [`noFill`](#noFill) mode and draw color. With a `Vec3`\nposition, `z` places it in 3D mode. For rounded corners, see\n[`drawRectRounded`](#drawRectRounded) and [`drawRectSquircle`](#drawRectSquircle).",
+                    "details_ja": "左上を原点に軸並行の矩形を描画する。現在の [`fill`](#fill) / [`noFill`](#noFill)\nモードと描画色に従う。`Vec3` で位置を渡すと `z` が 3D モードでの配置に使われる。\n角を丸めたいときは [`drawRectRounded`](#drawRectRounded) /\n[`drawRectSquircle`](#drawRectSquircle) を参照。",
+                    "details_ko": "좌상단을 원점으로 축에 정렬된 사각형을 그린다. 현재 [`fill`](#fill) /\n[`noFill`](#noFill) 모드와 그리기 색을 따른다. `Vec3`로 위치를 전달하면 `z`가\n3D 모드에서 배치에 사용된다. 둥근 모서리는 [`drawRectRounded`](#drawRectRounded) /\n[`drawRectSquircle`](#drawRectSquircle)를 참조.",
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -432,7 +428,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Draw rounded rectangle (circular arc corners)",
                     "keywords": [
-                        "rounded",
                         "corner",
                         "radius",
                         "pill",
@@ -457,7 +452,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Draw rounded rectangle (circular arc corners)",
                     "keywords": [
-                        "rounded",
                         "corner",
                         "radius",
                         "pill",
@@ -482,7 +476,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Draw squircle rectangle (curvature-continuous corners, iOS-style)",
                     "keywords": [
-                        "squircle",
                         "rounded",
                         "ios",
                         "superellipse",
@@ -504,7 +497,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Draw squircle rectangle (curvature-continuous corners, iOS-style)",
                     "keywords": [
-                        "squircle",
                         "rounded",
                         "ios",
                         "superellipse",
@@ -526,7 +518,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Draw circle",
                     "keywords": [
-                        "circle",
                         "round",
                         "ellipse",
                         "ball",
@@ -552,7 +543,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Draw circle",
                     "keywords": [
-                        "circle",
                         "round",
                         "ellipse",
                         "ball",
@@ -968,8 +958,7 @@ const TrussCAPI = {
                     "desc": "Draw triangle",
                     "keywords": [
                         "tri",
-                        "polygon",
-                        "triangle"
+                        "polygon"
                     ],
                     "desc_ja": "三角形を描画",
                     "desc_ko": "삼각형 그리기",
@@ -992,8 +981,7 @@ const TrussCAPI = {
                     "desc": "Draw triangle",
                     "keywords": [
                         "tri",
-                        "polygon",
-                        "triangle"
+                        "polygon"
                     ],
                     "desc_ja": "三角形を描画",
                     "desc_ko": "삼각형 그리기",
@@ -1061,7 +1049,6 @@ const TrussCAPI = {
                     "desc": "Draw text",
                     "keywords": [
                         "text",
-                        "string",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
@@ -1092,7 +1079,6 @@ const TrussCAPI = {
                     "desc": "Draw text",
                     "keywords": [
                         "text",
-                        "string",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
@@ -1123,7 +1109,6 @@ const TrussCAPI = {
                     "desc": "Draw text",
                     "keywords": [
                         "text",
-                        "string",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
@@ -1154,7 +1139,6 @@ const TrussCAPI = {
                     "desc": "Draw text",
                     "keywords": [
                         "text",
-                        "string",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
@@ -1185,7 +1169,6 @@ const TrussCAPI = {
                     "desc": "Draw text",
                     "keywords": [
                         "text",
-                        "string",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
@@ -1216,7 +1199,6 @@ const TrussCAPI = {
                     "desc": "Draw text",
                     "keywords": [
                         "text",
-                        "string",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
@@ -1469,9 +1451,13 @@ const TrussCAPI = {
                     "desc_ko": "도형 그리기 시작",
                     "related": [
                         "endShape",
+                        "vertex",
                         "beginStroke",
                         "beginLines"
                     ],
+                    "details": "`beginShape()` opens a vertex buffer. Add corners with [`vertex`](#vertex)\n(2D or 3D), then call [`endShape`](#endShape) to draw the result. Pass\n`endShape(true)` to close the outline (connect the last vertex back to the\nfirst).\n\n```cpp\n// Filled triangle, outline closed\nbeginShape();\nvertex(100, 100);\nvertex(200, 100);\nvertex(150, 200);\nendShape(true);   // close = link last vertex back to the first\n```\n\nToggle fill vs. outline with [`fill`](#fill) / [`noFill`](#noFill) before\n`endShape()`. The fill is a triangle fan, so it only renders **convex**\nshapes correctly — for concave or holed fills, build a [`Path`](#Path) and\ncall [`drawFill`](#Path::drawFill) instead. The stroke here is\na thin (1px) line strip; for thick lines with caps and joins use\n[`beginStroke`](#beginStroke). Curve helpers like [`appendArc`](#appendArc)\nand [`appendCurve`](#appendCurve) push curved runs into the same buffer.\n\nThe whole shape is a single color — the current draw color at the moment\n[`endShape`](#endShape) is called; calling [`setColor`](#setColor) between\n[`vertex`](#vertex) calls has no effect. For per-vertex colors or a gradient\nfill, build a [`Mesh`](#Mesh) and set a color per vertex with\n[`Mesh::addColor`](#Mesh::addColor) (or use [`beginLines`](#beginLines) for\nper-segment line colors) instead.",
+                    "details_ja": "`beginShape()` は頂点バッファを開く。[`vertex`](#vertex)（2D / 3D）で角を\n追加し、[`endShape`](#endShape) で描画する。`endShape(true)` を渡すと輪郭を\n閉じる（最後の頂点を最初の頂点に接続する）。\n\n```cpp\n// 塗りつぶした三角形、輪郭を閉じる\nbeginShape();\nvertex(100, 100);\nvertex(200, 100);\nvertex(150, 200);\nendShape(true);   // close = 最後の頂点を最初の頂点に繋ぐ\n```\n\n塗り / 輪郭の切り替えは `endShape()` の前に [`fill`](#fill) /\n[`noFill`](#noFill) で行う。塗りは triangle fan なので **凸形状** しか正しく\n描けない。凹形状や穴あき形状を塗るなら [`Path`](#Path) を作って\n`drawFill()` を呼ぶ。ここでの stroke は細い（1px）line strip なので、太さ・\ncap・join を付けた線が欲しければ [`beginStroke`](#beginStroke) を使う。\n[`appendArc`](#appendArc) や [`appendCurve`](#appendCurve) などの curve\nヘルパーで、同じバッファに曲線の頂点列を流し込める。\n\n図形全体は単色で塗られる（色は [`endShape`](#endShape) を呼んだ時点の現在の\n描画色）。[`vertex`](#vertex) の間で [`setColor`](#setColor) しても反映されない。\n頂点ごとの色やグラデーション塗りが欲しいときは、[`Mesh`](#Mesh) を作って\n[`Mesh::addColor`](#Mesh::addColor) で頂点ごとに色を付ける（線なら\n[`beginLines`](#beginLines) で線分ごとに色を付けられる）。",
+                    "details_ko": "`beginShape()`는 정점 버퍼를 연다. [`vertex`](#vertex)(2D/3D)로 모서리를\n추가한 뒤 [`endShape`](#endShape)로 그린다. `endShape(true)`를 전달하면\n윤곽을 닫는다(마지막 정점을 첫 정점에 연결).\n\n```cpp\n// 채워진 삼각형, 윤곽 닫기\nbeginShape();\nvertex(100, 100);\nvertex(200, 100);\nvertex(150, 200);\nendShape(true);   // close = 마지막 정점을 첫 정점에 연결\n```\n\n채움/윤곽 전환은 `endShape()` 전에 [`fill`](#fill) / [`noFill`](#noFill)로\n한다. 채움은 triangle fan이라 **볼록(convex)** 도형만 정확히 그린다. 오목하거나\n구멍이 있는 도형을 채우려면 [`Path`](#Path)를 만들어 `drawFill()`을 호출한다.\n여기서의 stroke는 가는(1px) line strip이므로, 두께·cap·join이 있는 선이\n필요하면 [`beginStroke`](#beginStroke)를 사용한다. [`appendArc`](#appendArc),\n[`appendCurve`](#appendCurve) 같은 curve 헬퍼로 같은 버퍼에 곡선 정점열을\n넣을 수 있다.\n\n도형 전체는 단색으로 칠해진다(색은 [`endShape`](#endShape)를 호출하는 시점의\n현재 그리기 색). [`vertex`](#vertex) 사이에서 [`setColor`](#setColor)를 호출해도\n반영되지 않는다. 정점별 색이나 그라데이션 채움이 필요하면 [`Mesh`](#Mesh)를 만들어\n[`Mesh::addColor`](#Mesh::addColor)로 정점마다 색을 지정한다(선이라면\n[`beginLines`](#beginLines)로 선분별 색을 줄 수 있다).",
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -1506,6 +1492,9 @@ const TrussCAPI = {
                         "fill",
                         "noFill"
                     ],
+                    "details": "Closes the buffer opened by [`beginShape`](#beginShape) and draws it. Pass\n`endShape(true)` to close the outline (link the last vertex back to the\nfirst). See [`beginShape`](#beginShape) for the full pattern and a code\nexample.",
+                    "details_ja": "[`beginShape`](#beginShape) で開いたバッファを閉じて描画する。\n`endShape(true)` を渡すと輪郭を閉じる（最後の頂点を最初の頂点に繋ぐ）。\nパターン全体とコード例は [`beginShape`](#beginShape) を参照。",
+                    "details_ko": "[`beginShape`](#beginShape)로 연 버퍼를 닫고 그린다. `endShape(true)`를\n전달하면 윤곽을 닫는다(마지막 정점을 첫 정점에 연결). 전체 패턴과 코드\n예시는 [`beginShape`](#beginShape)를 참고.",
                     "examples": [
                         {
                             "name": "graphicsExample",
@@ -1538,8 +1527,13 @@ const TrussCAPI = {
                     "related": [
                         "endLines",
                         "drawLine",
-                        "setColor"
-                    ]
+                        "setColor",
+                        "beginStroke",
+                        "beginShape"
+                    ],
+                    "details": "`beginLines()` opens a buffer that draws **independent line segments**. Add\npoints with [`vertex`](#vertex); they are consumed **in pairs** — vertices 0–1\nare one segment, 2–3 the next, and so on. Nothing is drawn until\n[`endLines`](#endLines) is called, and a trailing odd vertex is ignored. At\nleast two vertices are required.\n\nEach vertex captures the current draw color at the moment its `vertex()` is\ncalled, so set the color **between** vertices for per-segment (even\nper-endpoint, gradient) colors:\n\n```cpp\nbeginLines();\nsetColor(colors::red);    vertex(20, 20);\nsetColor(colors::blue);   vertex(200, 80);   // segment 1: red → blue\nsetColor(colors::lime);   vertex(20, 120);\nsetColor(colors::yellow); vertex(200, 180);  // segment 2: lime → yellow\nendLines();\n```\n\nThese are thin (1px) lines. For thick lines with caps and joins use\n[`beginStroke`](#beginStroke); for a connected outline (line strip) use\n[`beginShape`](#beginShape) with [`noFill`](#noFill).",
+                    "details_ja": "`beginLines()` は**独立した線分**を描くバッファを開く。[`vertex`](#vertex) で点を\n追加すると **2 つずつペア**で消費される — 頂点 0–1 が 1 本目、2–3 が 2 本目…という\n具合。[`endLines`](#endLines) を呼ぶまで描画されず、余った奇数番目の頂点は無視される。\n最低 2 頂点が必要。\n\n各頂点は `vertex()` を呼んだ時点の描画色を取り込むので、頂点の**間**で色を変えると\n線分ごと（さらには端点ごと＝グラデーション）に色を付けられる:\n\n```cpp\nbeginLines();\nsetColor(colors::red);    vertex(20, 20);\nsetColor(colors::blue);   vertex(200, 80);   // 線分1: red → blue\nsetColor(colors::lime);   vertex(20, 120);\nsetColor(colors::yellow); vertex(200, 180);  // 線分2: lime → yellow\nendLines();\n```\n\nこれは細い（1px）線。太さ・cap・join 付きの線は [`beginStroke`](#beginStroke)、\n連続した輪郭（line strip）は [`beginShape`](#beginShape) ＋ [`noFill`](#noFill) を使う。",
+                    "details_ko": "`beginLines()`는 **독립적인 선분**을 그리는 버퍼를 연다. [`vertex`](#vertex)로 점을\n추가하면 **두 개씩 쌍으로** 소비된다 — 정점 0–1이 첫 선분, 2–3이 다음 선분… 식이다.\n[`endLines`](#endLines)를 호출하기 전에는 그려지지 않으며, 남는 홀수 번째 정점은\n무시된다. 최소 2개의 정점이 필요하다.\n\n각 정점은 `vertex()`를 호출하는 시점의 그리기 색을 담으므로, 정점 **사이에서** 색을\n바꾸면 선분마다(나아가 끝점마다 = 그라데이션) 색을 줄 수 있다:\n\n```cpp\nbeginLines();\nsetColor(colors::red);    vertex(20, 20);\nsetColor(colors::blue);   vertex(200, 80);   // 선분1: red → blue\nsetColor(colors::lime);   vertex(20, 120);\nsetColor(colors::yellow); vertex(200, 180);  // 선분2: lime → yellow\nendLines();\n```\n\n이것은 가는(1px) 선이다. 두께·cap·join이 있는 선은 [`beginStroke`](#beginStroke),\n연결된 윤곽(line strip)은 [`beginShape`](#beginShape) + [`noFill`](#noFill)를 사용한다."
                 },
                 {
                     "name": "endLines",
@@ -1575,11 +1569,15 @@ const TrussCAPI = {
                     "desc_ko": "stroke 그리기 시작 (내부적으로 StrokeMesh 사용)",
                     "related": [
                         "endStroke",
+                        "vertex",
                         "beginShape",
                         "setStrokeWeight",
                         "setStrokeCap",
                         "setStrokeJoin"
                     ],
+                    "details": "Unlike [`beginShape`](#beginShape)'s thin 1px line strip, `beginStroke()`\nbuilds a real triangle mesh with **width, end caps and corner joins** (a\n`StrokeMesh` internally). Set the look with [`setStrokeWeight`](#setStrokeWeight),\n[`setStrokeCap`](#setStrokeCap) and [`setStrokeJoin`](#setStrokeJoin) before\nthe vertices, add points with [`vertex`](#vertex), then [`endStroke`](#endStroke).\n\n```cpp\nsetStrokeWeight(8);\nsetStrokeCap(StrokeCap::Round);\nsetStrokeJoin(StrokeJoin::Round);\nbeginStroke();\nvertex(50, 50);\nvertex(150, 80);\nvertex(250, 50);\nendStroke();        // open polyline; pass true to close it into a loop\n```\n\nEach `vertex()` snapshots the **current** stroke weight and color, so calling\n[`setStrokeWeight`](#setStrokeWeight) / [`setColor`](#setColor) between\nvertices produces a tapered or gradient stroke along one path.",
+                    "details_ja": "[`beginShape`](#beginShape) の細い 1px line strip と違い、`beginStroke()` は\n**太さ・端点 cap・角 join** を持つ本物の triangle mesh を作る（内部的に\n`StrokeMesh`）。見た目は頂点の前に [`setStrokeWeight`](#setStrokeWeight)、\n[`setStrokeCap`](#setStrokeCap)、[`setStrokeJoin`](#setStrokeJoin) で設定し、\n[`vertex`](#vertex) で点を追加して [`endStroke`](#endStroke) で閉じる。\n\n```cpp\nsetStrokeWeight(8);\nsetStrokeCap(StrokeCap::Round);\nsetStrokeJoin(StrokeJoin::Round);\nbeginStroke();\nvertex(50, 50);\nvertex(150, 80);\nvertex(250, 50);\nendStroke();        // 開いた線。true を渡すとループとして閉じる\n```\n\n各 `vertex()` は **その時点の** stroke weight と color をスナップショットする。\nそのため頂点の間で [`setStrokeWeight`](#setStrokeWeight) /\n[`setColor`](#setColor) を変えると、1本の線の中で太さやグラデーションが\n変化する stroke を作れる。",
+                    "details_ko": "[`beginShape`](#beginShape)의 가는 1px line strip과 달리 `beginStroke()`는\n**두께·끝 cap·모서리 join**을 가진 진짜 triangle mesh를 만든다(내부적으로\n`StrokeMesh`). 모양은 정점 전에 [`setStrokeWeight`](#setStrokeWeight),\n[`setStrokeCap`](#setStrokeCap), [`setStrokeJoin`](#setStrokeJoin)로 설정하고,\n[`vertex`](#vertex)로 점을 추가한 뒤 [`endStroke`](#endStroke)로 마친다.\n\n```cpp\nsetStrokeWeight(8);\nsetStrokeCap(StrokeCap::Round);\nsetStrokeJoin(StrokeJoin::Round);\nbeginStroke();\nvertex(50, 50);\nvertex(150, 80);\nvertex(250, 50);\nendStroke();        // 열린 선; true를 전달하면 루프로 닫는다\n```\n\n각 `vertex()`는 **그 시점의** stroke weight와 color를 스냅샷한다. 그래서\n정점 사이에서 [`setStrokeWeight`](#setStrokeWeight) / [`setColor`](#setColor)를\n바꾸면 한 선 안에서 두께나 그라데이션이 변하는 stroke를 만들 수 있다.",
                     "examples": [
                         {
                             "name": "grabExample",
@@ -1611,6 +1609,9 @@ const TrussCAPI = {
                     "related": [
                         "beginStroke"
                     ],
+                    "details": "Closes the buffer opened by [`beginStroke`](#beginStroke) and renders it as a\n`StrokeMesh` (width / caps / joins). Pass `endStroke(true)` to close the\npolyline into a loop. See [`beginStroke`](#beginStroke) for the full pattern\nand a code example.",
+                    "details_ja": "[`beginStroke`](#beginStroke) で開いたバッファを閉じ、`StrokeMesh`（太さ /\ncap / join）として描画する。`endStroke(true)` を渡すと線をループとして閉じる。\nパターン全体とコード例は [`beginStroke`](#beginStroke) を参照。",
+                    "details_ko": "[`beginStroke`](#beginStroke)로 연 버퍼를 닫고 `StrokeMesh`(두께 / cap /\njoin)로 그린다. `endStroke(true)`를 전달하면 선을 루프로 닫는다. 전체 패턴과\n코드 예시는 [`beginStroke`](#beginStroke)를 참고.",
                     "examples": [
                         {
                             "name": "grabExample",
@@ -1633,16 +1634,15 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Add a vertex",
                     "keywords": [
-                        "point",
-                        "node",
-                        "corner",
-                        "addvertex"
+                        "addvertex",
+                        "shape",
+                        "stroke"
                     ],
                     "desc_ja": "頂点を追加",
                     "desc_ko": "정점 추가",
                     "related": [
-                        "appendArc",
-                        "appendCurve"
+                        "beginShape",
+                        "endShape"
                     ],
                     "examples": [
                         {
@@ -1666,16 +1666,15 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Add a vertex",
                     "keywords": [
-                        "point",
-                        "node",
-                        "corner",
-                        "addvertex"
+                        "addvertex",
+                        "shape",
+                        "stroke"
                     ],
                     "desc_ja": "頂点を追加",
                     "desc_ko": "정점 추가",
                     "related": [
-                        "appendArc",
-                        "appendCurve"
+                        "beginShape",
+                        "endShape"
                     ],
                     "examples": [
                         {
@@ -1699,16 +1698,15 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Add a vertex",
                     "keywords": [
-                        "point",
-                        "node",
-                        "corner",
-                        "addvertex"
+                        "addvertex",
+                        "shape",
+                        "stroke"
                     ],
                     "desc_ja": "頂点を追加",
                     "desc_ko": "정점 추가",
                     "related": [
-                        "appendArc",
-                        "appendCurve"
+                        "beginShape",
+                        "endShape"
                     ],
                     "examples": [
                         {
@@ -1732,16 +1730,15 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Add a vertex",
                     "keywords": [
-                        "point",
-                        "node",
-                        "corner",
-                        "addvertex"
+                        "addvertex",
+                        "shape",
+                        "stroke"
                     ],
                     "desc_ja": "頂点を追加",
                     "desc_ko": "정점 추가",
                     "related": [
-                        "appendArc",
-                        "appendCurve"
+                        "beginShape",
+                        "endShape"
                     ],
                     "examples": [
                         {
@@ -1765,7 +1762,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Append arc vertices to the current shape (use between beginShape/endShape)",
                     "keywords": [
-                        "arc",
                         "curve",
                         "shape",
                         "add arc"
@@ -1789,7 +1785,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Append arc vertices to the current shape (use between beginShape/endShape)",
                     "keywords": [
-                        "arc",
                         "curve",
                         "shape",
                         "add arc"
@@ -1892,7 +1887,6 @@ const TrussCAPI = {
                     "desc": "Draw 3D box (respects fill/noFill)",
                     "keywords": [
                         "cube",
-                        "box",
                         "rectangle",
                         "cuboid",
                         "3d"
@@ -1918,7 +1912,6 @@ const TrussCAPI = {
                     "desc": "Draw 3D box (respects fill/noFill)",
                     "keywords": [
                         "cube",
-                        "box",
                         "rectangle",
                         "cuboid",
                         "3d"
@@ -1944,7 +1937,6 @@ const TrussCAPI = {
                     "desc": "Draw 3D box (respects fill/noFill)",
                     "keywords": [
                         "cube",
-                        "box",
                         "rectangle",
                         "cuboid",
                         "3d"
@@ -1970,7 +1962,6 @@ const TrussCAPI = {
                     "desc": "Draw 3D box (respects fill/noFill)",
                     "keywords": [
                         "cube",
-                        "box",
                         "rectangle",
                         "cuboid",
                         "3d"
@@ -1996,7 +1987,6 @@ const TrussCAPI = {
                     "desc": "Draw 3D box (respects fill/noFill)",
                     "keywords": [
                         "cube",
-                        "box",
                         "rectangle",
                         "cuboid",
                         "3d"
@@ -2022,7 +2012,6 @@ const TrussCAPI = {
                     "desc": "Draw 3D box (respects fill/noFill)",
                     "keywords": [
                         "cube",
-                        "box",
                         "rectangle",
                         "cuboid",
                         "3d"
@@ -2107,7 +2096,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
                     "keywords": [
-                        "cone",
                         "pyramid",
                         "funnel",
                         "3d"
@@ -2125,7 +2113,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
                     "keywords": [
-                        "cone",
                         "pyramid",
                         "funnel",
                         "3d"
@@ -2143,7 +2130,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Draw 3D cone (respects fill/noFill)",
                     "keywords": [
-                        "cone",
                         "pyramid",
                         "funnel",
                         "3d"
@@ -2227,7 +2213,6 @@ const TrussCAPI = {
                     "desc": "Reset style to default values (white color, fill enabled, stroke disabled)",
                     "keywords": [
                         "default",
-                        "reset",
                         "clear style"
                     ],
                     "desc_ja": "スタイルをデフォルト値にリセット（白色、塗りつぶし有効、ストローク無効）",
@@ -2325,7 +2310,6 @@ const TrussCAPI = {
                     "keywords": [
                         "line width",
                         "thickness",
-                        "weight",
                         "ofsetlinewidth"
                     ],
                     "desc_ja": "ストロークの太さを設定",
@@ -2358,8 +2342,7 @@ const TrussCAPI = {
                     "desc": "Get current stroke width",
                     "keywords": [
                         "line width",
-                        "thickness",
-                        "weight"
+                        "thickness"
                     ],
                     "desc_ja": "現在のストロークの太さを取得",
                     "desc_ko": "현재 stroke 두께를 얻음",
@@ -2574,7 +2557,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set blend mode. BlendMode::Alpha (default), Add, Multiply, Screen, Subtract, Disabled",
                     "keywords": [
-                        "blend",
                         "additive",
                         "multiply",
                         "transparency",
@@ -2602,9 +2584,7 @@ const TrussCAPI = {
                     "return_type": "BlendMode",
                     "desc": "Get current blend mode",
                     "keywords": [
-                        "blend",
-                        "compositing",
-                        "current"
+                        "compositing"
                     ],
                     "desc_ja": "現在のブレンドモードを取得",
                     "desc_ko": "현재 블렌드 모드를 얻음",
@@ -2620,10 +2600,8 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Reset blend mode to Alpha (default)",
                     "keywords": [
-                        "blend",
                         "default",
-                        "alpha",
-                        "reset"
+                        "alpha"
                     ],
                     "desc_ja": "ブレンドモードをAlpha（デフォルト）にリセット",
                     "desc_ko": "블렌드 모드를 Alpha (기본값)로 초기화",
@@ -2750,9 +2728,7 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Deprecated alias for setCurveResolution()",
                     "keywords": [
-                        "circle",
                         "segments",
-                        "resolution",
                         "deprecated"
                     ],
                     "desc_ja": "setCurveResolution() の非推奨エイリアス",
@@ -2773,9 +2749,7 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Deprecated alias for getCurveResolution()",
                     "keywords": [
-                        "circle",
                         "segments",
-                        "resolution",
                         "deprecated"
                     ],
                     "desc_ja": "getCurveResolution() の非推奨エイリアス",
@@ -2796,7 +2770,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Check if fill mode is enabled",
                     "keywords": [
-                        "fill",
                         "solid",
                         "check fill"
                     ],
@@ -2810,7 +2783,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Check if stroke mode is enabled",
                     "keywords": [
-                        "stroke",
                         "outline",
                         "check stroke"
                     ],
@@ -3390,9 +3362,7 @@ const TrussCAPI = {
                     "desc": "Get the current transformation matrix",
                     "keywords": [
                         "transform",
-                        "matrix",
-                        "modelview",
-                        "current"
+                        "modelview"
                     ],
                     "desc_ja": "現在の変換行列を取得",
                     "desc_ko": "현재 변환 행렬을 얻음",
@@ -3410,9 +3380,7 @@ const TrussCAPI = {
                     "desc": "Deprecated alias for getMatrix()",
                     "keywords": [
                         "transform",
-                        "matrix",
                         "modelview",
-                        "current",
                         "deprecated"
                     ],
                     "desc_ja": "getMatrix() の非推奨エイリアス",
@@ -3434,7 +3402,6 @@ const TrussCAPI = {
                     "desc": "Effective uniform scale of the current matrix (max of x/y basis lengths)",
                     "keywords": [
                         "transform",
-                        "scale",
                         "matrix",
                         "zoom"
                     ],
@@ -3453,7 +3420,6 @@ const TrussCAPI = {
                     "desc": "Reset transformation matrix to identity",
                     "keywords": [
                         "identity",
-                        "reset",
                         "clear transform"
                     ],
                     "desc_ja": "変換行列をリセット",
@@ -3470,7 +3436,6 @@ const TrussCAPI = {
                     "desc": "Multiply the current matrix by mat (relative transform, like translate/rotate)",
                     "keywords": [
                         "transform",
-                        "matrix",
                         "multiply",
                         "apply",
                         "modelview"
@@ -3491,7 +3456,6 @@ const TrussCAPI = {
                     "desc": "Replace the current matrix with mat (absolute - use with caution, may break camera setup)",
                     "keywords": [
                         "transform",
-                        "matrix",
                         "modelview",
                         "replace",
                         "load"
@@ -3512,8 +3476,6 @@ const TrussCAPI = {
                     "desc": "Deprecated alias for setMatrix()",
                     "keywords": [
                         "transform",
-                        "matrix",
-                        "load",
                         "replace",
                         "deprecated"
                     ],
@@ -3536,7 +3498,6 @@ const TrussCAPI = {
                     "desc": "Deprecated alias for getScale()",
                     "keywords": [
                         "transform",
-                        "scale",
                         "deprecated"
                     ],
                     "desc_ja": "getScale() の非推奨エイリアス",
@@ -3564,12 +3525,9 @@ const TrussCAPI = {
                     "return_type": "CoreEvents &",
                     "desc": "Get the global CoreEvents hub holding all framework events (setup, update, draw, keyPressed, mousePressed, etc.); use events().eventName.listen(callback) to subscribe",
                     "keywords": [
-                        "event",
                         "callback",
                         "listener",
-                        "hub",
-                        "subscribe",
-                        "hook"
+                        "hub"
                     ],
                     "desc_ja": "全フレームワークイベント（setup, update, draw, keyPressed, mousePressed など）を保持するグローバルなCoreEventsハブを取得。events().eventName.listen(callback) で購読",
                     "desc_ko": "모든 프레임워크 이벤트(setup, update, draw, keyPressed, mousePressed 등)를 보유하는 전역 CoreEvents 허브를 얻음. events().eventName.listen(callback) 으로 구독",
@@ -3595,7 +3553,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Show alert dialog with OK button",
                     "keywords": [
-                        "alert",
                         "message",
                         "popup",
                         "warning",
@@ -3631,10 +3588,8 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Show alert dialog asynchronously. Callback is called when dismissed",
                     "keywords": [
-                        "alert",
                         "message",
                         "popup",
-                        "async",
                         "callback",
                         "notify"
                     ],
@@ -3654,11 +3609,9 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Show Yes/No confirmation dialog. Returns true if Yes clicked",
                     "keywords": [
-                        "confirm",
                         "yesno",
                         "prompt",
                         "ask",
-                        "dialog",
                         "modal"
                     ],
                     "desc_ja": "Yes/No確認ダイアログを表示。Yesが押されたらtrueを返す",
@@ -3684,10 +3637,8 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Show Yes/No dialog asynchronously. Callback receives true if Yes clicked",
                     "keywords": [
-                        "confirm",
                         "yesno",
                         "prompt",
-                        "async",
                         "callback",
                         "ask"
                     ],
@@ -3711,7 +3662,6 @@ const TrussCAPI = {
                         "file",
                         "picker",
                         "browse",
-                        "dialog",
                         "chooser"
                     ],
                     "desc_ja": "ファイル選択ダイアログを表示。FileDialogResult（filePath, fileName, success）を返す",
@@ -3747,9 +3697,7 @@ const TrussCAPI = {
                         "open",
                         "file",
                         "picker",
-                        "async",
-                        "callback",
-                        "dialog"
+                        "callback"
                     ],
                     "desc_ja": "ファイル選択ダイアログを非同期で表示。コールバックにFileDialogResultが渡される",
                     "desc_ko": "파일 열기 대화상자를 비동기로 표시. 콜백에 FileDialogResult가 전달됨",
@@ -3768,11 +3716,9 @@ const TrussCAPI = {
                     "return_type": "FileDialogResult",
                     "desc": "Show file save dialog. Returns FileDialogResult with filePath, fileName, success",
                     "keywords": [
-                        "save",
                         "file",
                         "picker",
                         "browse",
-                        "dialog",
                         "export"
                     ],
                     "desc_ja": "ファイル保存ダイアログを表示。FileDialogResult（filePath, fileName, success）を返す",
@@ -3805,12 +3751,9 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Show file save dialog asynchronously. Callback receives FileDialogResult",
                     "keywords": [
-                        "save",
                         "file",
                         "picker",
-                        "async",
-                        "callback",
-                        "dialog"
+                        "callback"
                     ],
                     "desc_ja": "ファイル保存ダイアログを非同期で表示。コールバックにFileDialogResultが渡される",
                     "desc_ko": "파일 저장 대화상자를 비동기로 표시. 콜백에 FileDialogResult가 전달됨",
@@ -3829,9 +3772,7 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get global mouse X (screen coordinates, not window-relative)",
                     "keywords": [
-                        "mouse",
                         "screen",
-                        "global",
                         "absolute",
                         "horizontal"
                     ],
@@ -3864,9 +3805,7 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get global mouse Y (screen coordinates, not window-relative)",
                     "keywords": [
-                        "mouse",
                         "screen",
-                        "global",
                         "absolute",
                         "vertical"
                     ],
@@ -3899,10 +3838,8 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get previous frame global mouse X",
                     "keywords": [
-                        "mouse",
                         "previous",
                         "last",
-                        "global",
                         "horizontal"
                     ],
                     "desc_ja": "前フレームのグローバルマウスX座標",
@@ -3925,10 +3862,8 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get previous frame global mouse Y",
                     "keywords": [
-                        "mouse",
                         "previous",
                         "last",
-                        "global",
                         "vertical"
                     ],
                     "desc_ja": "前フレームのグローバルマウスY座標",
@@ -3951,7 +3886,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get mouse X position",
                     "keywords": [
-                        "mouse",
                         "cursor",
                         "pointer",
                         "position",
@@ -3985,7 +3919,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get mouse Y position",
                     "keywords": [
-                        "mouse",
                         "cursor",
                         "pointer",
                         "position",
@@ -4019,7 +3952,6 @@ const TrussCAPI = {
                     "return_type": "Vec2",
                     "desc": "Get mouse position as Vec2",
                     "keywords": [
-                        "mouse",
                         "cursor",
                         "pointer",
                         "position",
@@ -4040,9 +3972,7 @@ const TrussCAPI = {
                     "return_type": "Vec2",
                     "desc": "Get global mouse position as Vec2",
                     "keywords": [
-                        "mouse",
                         "screen",
-                        "global",
                         "pointer",
                         "position",
                         "absolute"
@@ -4062,10 +3992,8 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Show the mouse cursor (default)",
                     "keywords": [
-                        "cursor",
                         "mouse",
                         "pointer",
-                        "show",
                         "visible",
                         "unhide"
                     ],
@@ -4083,10 +4011,8 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Hide the mouse cursor",
                     "keywords": [
-                        "cursor",
                         "mouse",
                         "pointer",
-                        "hide",
                         "invisible",
                         "conceal"
                     ],
@@ -4104,7 +4030,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set the mouse cursor shape",
                     "keywords": [
-                        "cursor",
                         "mouse",
                         "pointer",
                         "shape",
@@ -4133,12 +4058,10 @@ const TrussCAPI = {
                     "return_type": "Cursor",
                     "desc": "Get the current mouse cursor shape",
                     "keywords": [
-                        "cursor",
                         "mouse",
                         "pointer",
                         "shape",
-                        "icon",
-                        "current"
+                        "icon"
                     ],
                     "desc_ja": "現在のマウスカーソル形状を取得",
                     "desc_ko": "현재 마우스 커서 모양을 얻음",
@@ -4154,9 +4077,7 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Bind a custom image to a cursor slot (RGBA pixels or Image)",
                     "keywords": [
-                        "cursor",
                         "custom",
-                        "image",
                         "icon",
                         "pointer",
                         "bitmap"
@@ -4183,9 +4104,7 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Bind a custom image to a cursor slot (RGBA pixels or Image)",
                     "keywords": [
-                        "cursor",
                         "custom",
-                        "image",
                         "icon",
                         "pointer",
                         "bitmap"
@@ -4212,9 +4131,7 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Unbind a custom cursor image, restoring the system default",
                     "keywords": [
-                        "cursor",
                         "custom",
-                        "image",
                         "reset",
                         "default",
                         "restore"
@@ -4234,7 +4151,6 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Get canvas width",
                     "keywords": [
-                        "width",
                         "canvas",
                         "size",
                         "screen",
@@ -4254,7 +4170,6 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Get canvas height",
                     "keywords": [
-                        "height",
                         "canvas",
                         "size",
                         "screen",
@@ -4274,7 +4189,6 @@ const TrussCAPI = {
                     "return_type": "Vec2",
                     "desc": "Get canvas size as Vec2",
                     "keywords": [
-                        "size",
                         "dimensions",
                         "canvas",
                         "screen",
@@ -4295,9 +4209,7 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Is mouse button pressed",
                     "keywords": [
-                        "mouse",
                         "click",
-                        "pressed",
                         "down",
                         "held",
                         "button"
@@ -4330,8 +4242,6 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Get currently pressed mouse button",
                     "keywords": [
-                        "mouse",
-                        "button",
                         "click",
                         "pressed",
                         "left",
@@ -4357,9 +4267,7 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Is specific key currently pressed",
                     "keywords": [
-                        "key",
                         "keyboard",
-                        "pressed",
                         "held",
                         "down",
                         "input"
@@ -4379,7 +4287,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "True while either Shift key (left or right) is held",
                     "keywords": [
-                        "shift",
                         "modifier",
                         "key",
                         "held",
@@ -4400,7 +4307,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "True while either Control key (left or right) is held",
                     "keywords": [
-                        "control",
                         "ctrl",
                         "modifier",
                         "key",
@@ -4422,7 +4328,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "True while either Alt / Option key (left or right) is held",
                     "keywords": [
-                        "alt",
                         "option",
                         "modifier",
                         "key",
@@ -4444,7 +4349,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "True while either Super / Cmd / Win key (left or right) is held",
                     "keywords": [
-                        "super",
                         "cmd",
                         "command",
                         "win",
@@ -4466,9 +4370,7 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Enable/disable touch events firing as mouse events (for Android/iOS)",
                     "keywords": [
-                        "touch",
                         "tap",
-                        "mouse",
                         "mobile",
                         "finger",
                         "emulate"
@@ -4486,9 +4388,7 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Get touchAsMouse state",
                     "keywords": [
-                        "touch",
                         "tap",
-                        "mouse",
                         "mobile",
                         "state",
                         "finger"
@@ -4508,7 +4408,6 @@ const TrussCAPI = {
                     "keywords": [
                         "quit",
                         "close",
-                        "exit",
                         "terminate",
                         "shutdown",
                         "cancelable"
@@ -4517,8 +4416,10 @@ const TrussCAPI = {
                     "desc_ko": "어플리케이션 종료를 요청. events().exitRequested를 수신하고 args.cancel = true로 설정하면 취소 가능",
                     "related": [
                         "exitApp",
-                        "events"
-                    ]
+                        "events",
+                        "ExitRequestEventArgs"
+                    ],
+                    "details": "Fires events().exitRequested (an Event<ExitRequestEventArgs>) before quitting. A\nlistener can veto the exit by setting args.cancel = true — useful for \"save before\nquit?\" prompts. Use exitApp() instead for an immediate, non-cancellable quit.\n\n    listener_ = events().exitRequested.listen([this](ExitRequestEventArgs& e){\n        if (hasUnsavedChanges) e.cancel = true;   // stops the exit\n    });"
                 },
                 {
                     "name": "exitApp",
@@ -4529,7 +4430,6 @@ const TrussCAPI = {
                     "keywords": [
                         "quit",
                         "close",
-                        "exit",
                         "terminate",
                         "shutdown",
                         "kill"
@@ -4547,7 +4447,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "True when an overlay currently has the pointer over it (e.g. cursor over a tcxImGui panel); guard raw mouse input so clicks on UI panels are not also handled by the app",
                     "keywords": [
-                        "overlay",
                         "ui",
                         "imgui",
                         "hover",
@@ -4568,7 +4467,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "True when an overlay currently owns keyboard focus (e.g. a text input is active); guard raw key input so typing into a UI field is not also handled by the app",
                     "keywords": [
-                        "overlay",
                         "ui",
                         "imgui",
                         "focus",
@@ -4596,7 +4494,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Block the current thread for the given number of milliseconds",
                     "keywords": [
-                        "sleep",
                         "wait",
                         "delay",
                         "pause",
@@ -4613,7 +4510,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Block the current thread for the given number of microseconds",
                     "keywords": [
-                        "sleep",
                         "wait",
                         "delay",
                         "pause",
@@ -4630,8 +4526,6 @@ const TrussCAPI = {
                     "return_type": "uint64_t",
                     "desc": "Total frames rendered",
                     "keywords": [
-                        "frame",
-                        "count",
                         "number",
                         "total",
                         "frames",
@@ -4647,8 +4541,6 @@ const TrussCAPI = {
                     "return_type": "uint64_t",
                     "desc": "Get the number of update() calls since the app started",
                     "keywords": [
-                        "update",
-                        "count",
                         "tick",
                         "logic",
                         "number",
@@ -4670,8 +4562,6 @@ const TrussCAPI = {
                     "return_type": "uint64_t",
                     "desc": "Get the number of draw() calls since the app started",
                     "keywords": [
-                        "draw",
-                        "count",
                         "render",
                         "frame",
                         "number",
@@ -4693,7 +4583,6 @@ const TrussCAPI = {
                     "return_type": "double",
                     "desc": "Seconds since last frame",
                     "keywords": [
-                        "delta",
                         "dt",
                         "elapsed",
                         "frametime",
@@ -4728,7 +4617,6 @@ const TrussCAPI = {
                         "framerate",
                         "speed",
                         "refresh",
-                        "rate",
                         "performance"
                     ],
                     "desc_ja": "現在のFPS",
@@ -4755,10 +4643,8 @@ const TrussCAPI = {
                     "return_type": "FpsSettings",
                     "desc": "Get the current FPS configuration (update/draw target rates, actual VSync rate, sync flag)",
                     "keywords": [
-                        "fps",
                         "framerate",
                         "config",
-                        "settings",
                         "vsync",
                         "target"
                     ],
@@ -4781,7 +4667,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get current FPS (alias for getFrameRate)",
                     "keywords": [
-                        "fps",
                         "framerate",
                         "speed",
                         "refresh",
@@ -4900,7 +4785,6 @@ const TrussCAPI = {
                     "keywords": [
                         "scene graph",
                         "objects",
-                        "count",
                         "tree",
                         "entities"
                     ],
@@ -4918,9 +4802,7 @@ const TrussCAPI = {
                     "return_type": "size_t",
                     "desc": "Get number of active Texture objects",
                     "keywords": [
-                        "texture",
                         "image",
-                        "count",
                         "leak",
                         "gpu"
                     ],
@@ -4940,7 +4822,6 @@ const TrussCAPI = {
                     "keywords": [
                         "framebuffer",
                         "render target",
-                        "count",
                         "leak",
                         "resources"
                     ],
@@ -5224,7 +5105,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get battery charge level (0.0-1.0), or -1 if unavailable (e.g. desktop without a battery)",
                     "keywords": [
-                        "battery",
                         "power",
                         "charge",
                         "energy",
@@ -5257,9 +5137,7 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Return true if the battery is currently charging",
                     "keywords": [
-                        "battery",
                         "power",
-                        "charging",
                         "plugged",
                         "ac"
                     ],
@@ -5419,7 +5297,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Return true when the proximity sensor detects a nearby object (e.g. phone held to the ear)",
                     "keywords": [
-                        "proximity",
                         "near",
                         "sensor",
                         "ear",
@@ -5492,10 +5369,7 @@ const TrussCAPI = {
                     "keywords": [
                         "init",
                         "sokol",
-                        "gfx",
-                        "backend",
-                        "initialize",
-                        "low-level"
+                        "backend"
                     ],
                     "desc_ja": "sokol_gfx + sokol_gl を初期化（通常はアプリループが自動で呼ぶ）",
                     "desc_ko": "sokol_gfx + sokol_gl 초기화 (보통 앱 루프가 자동으로 호출)",
@@ -5513,10 +5387,7 @@ const TrussCAPI = {
                     "keywords": [
                         "shutdown",
                         "sokol",
-                        "gfx",
-                        "backend",
-                        "teardown",
-                        "low-level"
+                        "teardown"
                     ],
                     "desc_ja": "sokol_gfx + sokol_gl をシャットダウン（通常はアプリループが自動で呼ぶ）",
                     "desc_ko": "sokol_gfx + sokol_gl 종료 (보통 앱 루프가 자동으로 호출)",
@@ -5545,9 +5416,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Reset elapsed time",
                     "keywords": [
-                        "reset",
-                        "elapsed",
-                        "time",
                         "clear",
                         "restart",
                         "zero"
@@ -5562,7 +5430,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Elapsed seconds (float)",
                     "keywords": [
-                        "elapsed",
                         "time",
                         "seconds",
                         "uptime",
@@ -5585,8 +5452,6 @@ const TrussCAPI = {
                     "return_type": "uint64_t",
                     "desc": "Elapsed milliseconds (int64)",
                     "keywords": [
-                        "elapsed",
-                        "time",
                         "milliseconds",
                         "uptime",
                         "runtime",
@@ -5608,8 +5473,6 @@ const TrussCAPI = {
                     "return_type": "uint64_t",
                     "desc": "Elapsed microseconds (int64)",
                     "keywords": [
-                        "elapsed",
-                        "time",
                         "microseconds",
                         "uptime",
                         "runtime",
@@ -5625,8 +5488,6 @@ const TrussCAPI = {
                     "return_type": "double",
                     "desc": "Elapsed seconds (double) since program start. A separate clock from getElapsedTimef(); it is NOT reset by resetElapsedTimeCounter().",
                     "keywords": [
-                        "elapsed",
-                        "time",
                         "seconds",
                         "uptime",
                         "runtime",
@@ -5661,7 +5522,6 @@ const TrussCAPI = {
                     "keywords": [
                         "unix",
                         "epoch",
-                        "time",
                         "milliseconds",
                         "wallclock",
                         "timestamp"
@@ -5678,7 +5538,6 @@ const TrussCAPI = {
                     "keywords": [
                         "unix",
                         "epoch",
-                        "time",
                         "microseconds",
                         "wallclock",
                         "timestamp"
@@ -5693,9 +5552,7 @@ const TrussCAPI = {
                     "return_type": "uint64_t",
                     "desc": "Current Unix timestamp in seconds",
                     "keywords": [
-                        "unix",
                         "epoch",
-                        "time",
                         "seconds",
                         "timestamp",
                         "wallclock"
@@ -5710,10 +5567,8 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Formatted timestamp",
                     "keywords": [
-                        "timestamp",
                         "datetime",
                         "formatted",
-                        "string",
                         "date",
                         "clock"
                     ],
@@ -5737,10 +5592,8 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Formatted timestamp",
                     "keywords": [
-                        "timestamp",
                         "datetime",
                         "formatted",
-                        "string",
                         "date",
                         "clock"
                     ],
@@ -5771,12 +5624,10 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Current seconds (0-59)",
                     "keywords": [
-                        "seconds",
                         "clock",
                         "time",
                         "wallclock",
-                        "now",
-                        "current"
+                        "now"
                     ],
                     "desc_ja": "現在の秒 (0-59)",
                     "desc_ko": "현재 초 (0-59)",
@@ -5794,12 +5645,10 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Current minutes (0-59)",
                     "keywords": [
-                        "minutes",
                         "clock",
                         "time",
                         "wallclock",
-                        "now",
-                        "current"
+                        "now"
                     ],
                     "desc_ja": "現在の分 (0-59)",
                     "desc_ko": "현재 분 (0-59)",
@@ -5817,12 +5666,10 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Current hours (0-23)",
                     "keywords": [
-                        "hours",
                         "clock",
                         "time",
                         "wallclock",
-                        "now",
-                        "current"
+                        "now"
                     ],
                     "desc_ja": "現在の時 (0-23)",
                     "desc_ko": "현재 시 (0-23)",
@@ -5840,11 +5687,9 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Current year",
                     "keywords": [
-                        "year",
                         "date",
                         "calendar",
                         "now",
-                        "current",
                         "clock"
                     ],
                     "desc_ja": "現在の年",
@@ -5863,11 +5708,9 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Current month (1-12)",
                     "keywords": [
-                        "month",
                         "date",
                         "calendar",
                         "now",
-                        "current",
                         "clock"
                     ],
                     "desc_ja": "現在の月 (1-12)",
@@ -5886,11 +5729,9 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Current day (1-31)",
                     "keywords": [
-                        "day",
                         "date",
                         "calendar",
                         "now",
-                        "current",
                         "clock"
                     ],
                     "desc_ja": "現在の日 (1-31)",
@@ -5909,7 +5750,6 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Weekday (0=Sun, 6=Sat)",
                     "keywords": [
-                        "weekday",
                         "day",
                         "dow",
                         "calendar",
@@ -6060,7 +5900,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set random seed",
                     "keywords": [
-                        "seed",
                         "rng",
                         "deterministic",
                         "reproducible"
@@ -6222,7 +6061,6 @@ const TrussCAPI = {
                         "perlin",
                         "simplex",
                         "random",
-                        "noise",
                         "procedural"
                     ],
                     "desc_ja": "パーリンノイズ",
@@ -6249,7 +6087,6 @@ const TrussCAPI = {
                         "perlin",
                         "simplex",
                         "random",
-                        "noise",
                         "procedural"
                     ],
                     "desc_ja": "パーリンノイズ",
@@ -6276,7 +6113,6 @@ const TrussCAPI = {
                         "perlin",
                         "simplex",
                         "random",
-                        "noise",
                         "procedural"
                     ],
                     "desc_ja": "パーリンノイズ",
@@ -6303,7 +6139,6 @@ const TrussCAPI = {
                         "perlin",
                         "simplex",
                         "random",
-                        "noise",
                         "procedural"
                     ],
                     "desc_ja": "パーリンノイズ",
@@ -6330,7 +6165,6 @@ const TrussCAPI = {
                         "perlin",
                         "simplex",
                         "random",
-                        "noise",
                         "procedural"
                     ],
                     "desc_ja": "パーリンノイズ",
@@ -6357,7 +6191,6 @@ const TrussCAPI = {
                         "perlin",
                         "simplex",
                         "random",
-                        "noise",
                         "procedural"
                     ],
                     "desc_ja": "パーリンノイズ",
@@ -6384,7 +6217,6 @@ const TrussCAPI = {
                         "perlin",
                         "simplex",
                         "random",
-                        "noise",
                         "procedural"
                     ],
                     "desc_ja": "パーリンノイズ",
@@ -6410,10 +6242,7 @@ const TrussCAPI = {
                     "keywords": [
                         "fractal",
                         "perlin",
-                        "brownian",
-                        "octaves",
-                        "turbulence",
-                        "terrain"
+                        "brownian"
                     ],
                     "desc_ja": "フラクタルノイズ",
                     "desc_ko": "Fractal Brownian Motion 노이즈",
@@ -6437,10 +6266,7 @@ const TrussCAPI = {
                     "keywords": [
                         "fractal",
                         "perlin",
-                        "brownian",
-                        "octaves",
-                        "turbulence",
-                        "terrain"
+                        "brownian"
                     ],
                     "desc_ja": "フラクタルノイズ",
                     "desc_ko": "Fractal Brownian Motion 노이즈",
@@ -6506,10 +6332,7 @@ const TrussCAPI = {
                     "keywords": [
                         "map",
                         "rescale",
-                        "normalize",
-                        "range",
-                        "scale",
-                        "convert"
+                        "normalize"
                     ],
                     "desc_ja": "値を範囲間でリマッピング",
                     "desc_ko": "값을 한 범위에서 다른 범위로 리매핑",
@@ -6528,10 +6351,7 @@ const TrussCAPI = {
                     "keywords": [
                         "interpolate",
                         "mix",
-                        "blend",
-                        "tween",
-                        "linear",
-                        "between"
+                        "linear"
                     ],
                     "desc_ja": "線形補間",
                     "desc_ko": "선형 보간",
@@ -6857,7 +6677,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Shortest angle difference in radians [-TAU/2, TAU/2]",
                     "keywords": [
-                        "angle",
                         "shortest",
                         "delta",
                         "radians",
@@ -6878,7 +6697,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Shortest angle difference in degrees [-180, 180]",
                     "keywords": [
-                        "angle",
                         "shortest",
                         "delta",
                         "degrees",
@@ -6898,7 +6716,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Return the window coefficient for sample i of n for the given window type",
                     "keywords": [
-                        "window",
                         "hann",
                         "hamming",
                         "blackman",
@@ -6920,10 +6737,7 @@ const TrussCAPI = {
                     "keywords": [
                         "windowing",
                         "hann",
-                        "hamming",
-                        "fft",
-                        "taper",
-                        "leakage"
+                        "fft"
                     ],
                     "desc_ja": "FFT 前のスペクトル漏れを抑えるため信号に窓関数を適用（インプレース）",
                     "desc_ko": "FFT 전 스펙트럼 누설을 줄이기 위해 신호에 윈도우 함수를 적용 (in-place)",
@@ -6940,10 +6754,7 @@ const TrussCAPI = {
                     "keywords": [
                         "windowing",
                         "hann",
-                        "hamming",
-                        "fft",
-                        "taper",
-                        "leakage"
+                        "fft"
                     ],
                     "desc_ja": "FFT 前のスペクトル漏れを抑えるため信号に窓関数を適用（インプレース）",
                     "desc_ko": "FFT 전 스펙트럼 누설을 줄이기 위해 신호에 윈도우 함수를 적용 (in-place)",
@@ -7019,7 +6830,6 @@ const TrussCAPI = {
                     "return_type": "std::vector<std::complex<float>>",
                     "desc": "Convert a real-valued signal into a complex array with zero imaginary parts",
                     "keywords": [
-                        "complex",
                         "imaginary",
                         "real",
                         "convert"
@@ -7037,7 +6847,6 @@ const TrussCAPI = {
                         "fourier",
                         "frequency",
                         "spectrum",
-                        "real",
                         "signal"
                     ],
                     "desc_ja": "実数信号のFFTを計算。必要に応じて先に窓関数を適用",
@@ -7066,7 +6875,6 @@ const TrussCAPI = {
                         "fourier",
                         "frequency",
                         "spectrum",
-                        "real",
                         "signal"
                     ],
                     "desc_ja": "実数信号のFFTを計算。必要に応じて先に窓関数を適用",
@@ -7113,8 +6921,7 @@ const TrussCAPI = {
                         "decibel",
                         "amplitude",
                         "spectrum",
-                        "loudness",
-                        "db"
+                        "loudness"
                     ],
                     "desc_ja": "各ビンの大きさをデシベルで返す、minDb にクランプ",
                     "desc_ko": "각 bin의 크기를 데시벨로 반환, minDb로 clamp"
@@ -7126,7 +6933,6 @@ const TrussCAPI = {
                     "return_type": "std::vector<float>",
                     "desc": "Return the phase angle (radians) of each bin in a spectrum",
                     "keywords": [
-                        "phase",
                         "angle",
                         "spectrum",
                         "frequency"
@@ -7141,7 +6947,6 @@ const TrussCAPI = {
                     "return_type": "std::vector<float>",
                     "desc": "Return the power spectrum (magnitude squared) of each bin",
                     "keywords": [
-                        "power",
                         "spectrum",
                         "energy",
                         "frequency"
@@ -7156,8 +6961,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Convert an FFT bin index to its frequency in Hz",
                     "keywords": [
-                        "bin",
-                        "frequency",
                         "hertz",
                         "convert",
                         "spectrum"
@@ -7172,8 +6975,6 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Convert a frequency in Hz to the nearest FFT bin index",
                     "keywords": [
-                        "frequency",
-                        "bin",
                         "hertz",
                         "convert",
                         "spectrum"
@@ -7551,7 +7352,6 @@ const TrussCAPI = {
                     "desc": "Squared distance",
                     "keywords": [
                         "distance",
-                        "squared",
                         "length",
                         "fast",
                         "compare"
@@ -7571,7 +7371,6 @@ const TrussCAPI = {
                     "desc": "Squared distance",
                     "keywords": [
                         "distance",
-                        "squared",
                         "length",
                         "fast",
                         "compare"
@@ -7591,7 +7390,6 @@ const TrussCAPI = {
                     "desc": "Squared distance",
                     "keywords": [
                         "distance",
-                        "squared",
                         "length",
                         "fast",
                         "compare"
@@ -7642,7 +7440,6 @@ const TrussCAPI = {
                         "retina",
                         "hidpi",
                         "density",
-                        "scale",
                         "monitor"
                     ],
                     "desc_ja": "メインディスプレイのDPIスケールを取得（ウィンドウ生成前に利用可能）。macOS: 1.0 または 2.0（Retina）、他のプラットフォーム: 1.0",
@@ -7811,8 +7608,7 @@ const TrussCAPI = {
                         "retina",
                         "hidpi",
                         "density",
-                        "pixel ratio",
-                        "scale"
+                        "pixel ratio"
                     ],
                     "desc_ja": "ディスプレイのDPIスケール係数を取得（Retinaなら2.0等）",
                     "desc_ko": "디스플레이 DPI 스케일 계수를 얻음 (Retina는 2.0 등)",
@@ -7891,7 +7687,6 @@ const TrussCAPI = {
                     "keywords": [
                         "copy",
                         "paste",
-                        "clipboard",
                         "pasteboard"
                     ],
                     "desc_ja": "クリップボードにコピー",
@@ -7914,7 +7709,6 @@ const TrussCAPI = {
                     "desc": "Get text from clipboard",
                     "keywords": [
                         "paste",
-                        "clipboard",
                         "copy",
                         "pasteboard"
                     ],
@@ -7957,7 +7751,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set fullscreen mode",
                     "keywords": [
-                        "fullscreen",
                         "maximize",
                         "borderless",
                         "windowed"
@@ -7976,7 +7769,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Check if window is fullscreen",
                     "keywords": [
-                        "fullscreen",
                         "maximized",
                         "borderless",
                         "status"
@@ -7995,7 +7787,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Toggle fullscreen mode",
                     "keywords": [
-                        "fullscreen",
                         "maximize",
                         "borderless",
                         "screen"
@@ -8048,7 +7839,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get window aspect ratio (width / height)",
                     "keywords": [
-                        "ratio",
                         "proportion",
                         "widescreen",
                         "16:9"
@@ -8166,7 +7956,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Save a screenshot of the rendered frame (png/jpg/bmp). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written.",
                     "keywords": [
-                        "screenshot",
                         "capture",
                         "png",
                         "export",
@@ -8221,8 +8010,7 @@ const TrussCAPI = {
                         "record",
                         "video",
                         "finish",
-                        "movie",
-                        "stop"
+                        "movie"
                     ],
                     "desc_ja": "録画を停止してファイルを確定",
                     "desc_ko": "녹화를 중지하고 파일을 마무리",
@@ -8261,8 +8049,7 @@ const TrussCAPI = {
                     "keywords": [
                         "record",
                         "frames",
-                        "video",
-                        "count"
+                        "video"
                     ],
                     "desc_ja": "現在の録画でこれまでにキャプチャしたフレーム数",
                     "desc_ko": "현재 녹화에서 지금까지 캡처한 프레임 수",
@@ -8282,8 +8069,7 @@ const TrussCAPI = {
                         "record",
                         "file",
                         "video",
-                        "output",
-                        "path"
+                        "output"
                     ],
                     "desc_ja": "現在の録画の出力ファイルパス",
                     "desc_ko": "현재 녹화의 출력 파일 경로",
@@ -8299,7 +8085,6 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Run an app class without a window or graphics context (update loop only). Template on the app type; returns the process exit code",
                     "keywords": [
-                        "headless",
                         "no window",
                         "offscreen",
                         "cli",
@@ -8326,9 +8111,6 @@ const TrussCAPI = {
                     "return_type": "std::thread::id",
                     "desc": "Get the main thread ID. Records the current thread's ID on the first call, so it must first be called from the main thread.",
                     "keywords": [
-                        "thread",
-                        "main",
-                        "id",
                         "concurrency"
                     ],
                     "desc_ja": "メインスレッドIDを取得。初回呼び出しで現在のスレッドIDを記録するため、最初はメインスレッドから呼ぶ必要がある",
@@ -8344,8 +8126,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Whether the calling thread is the main (scene) thread. The main thread ID is recorded on the first call to getMainThreadId().",
                     "keywords": [
-                        "thread",
-                        "main",
                         "concurrency",
                         "ui thread"
                     ],
@@ -8362,7 +8142,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame",
                     "keywords": [
-                        "thread",
                         "main thread",
                         "marshal",
                         "queue",
@@ -8383,9 +8162,6 @@ const TrussCAPI = {
                     "return_type": "const char *",
                     "desc": "Return the uppercase name of a log level (e.g. \"NOTICE\", \"WARNING\")",
                     "keywords": [
-                        "log",
-                        "level",
-                        "string",
                         "name",
                         "label"
                     ],
@@ -8405,7 +8181,6 @@ const TrussCAPI = {
                     "desc": "Access the global logger instance",
                     "keywords": [
                         "log",
-                        "logger",
                         "logging"
                     ],
                     "desc_ja": "グローバルなロガーインスタンスにアクセス",
@@ -8424,9 +8199,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set the minimum log level printed to the console",
                     "keywords": [
-                        "log",
-                        "level",
-                        "console",
                         "verbosity",
                         "filter"
                     ],
@@ -8452,9 +8224,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set the minimum log level written to the log file",
                     "keywords": [
-                        "log",
-                        "level",
-                        "file",
                         "verbosity",
                         "filter"
                     ],
@@ -8473,8 +8242,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Open a file to receive log output",
                     "keywords": [
-                        "log",
-                        "file",
                         "output",
                         "write",
                         "path"
@@ -8493,9 +8260,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Close the current log file",
                     "keywords": [
-                        "log",
-                        "file",
-                        "close",
                         "flush"
                     ],
                     "desc_ja": "現在のログファイルを閉じる",
@@ -8512,7 +8276,6 @@ const TrussCAPI = {
                     "desc": "Deprecated alias for getLogger()",
                     "keywords": [
                         "log",
-                        "logger",
                         "deprecated"
                     ],
                     "desc_ja": "getLogger() の非推奨エイリアス",
@@ -8533,9 +8296,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Deprecated alias for setConsoleLogLevel()",
                     "keywords": [
-                        "log",
-                        "level",
-                        "console",
                         "deprecated"
                     ],
                     "desc_ja": "setConsoleLogLevel() の非推奨エイリアス",
@@ -8556,9 +8316,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Deprecated alias for setFileLogLevel()",
                     "keywords": [
-                        "log",
-                        "level",
-                        "file",
                         "deprecated"
                     ],
                     "desc_ja": "setFileLogLevel() の非推奨エイリアス",
@@ -8579,8 +8336,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Deprecated alias for setLogFile()",
                     "keywords": [
-                        "log",
-                        "file",
                         "path",
                         "deprecated"
                     ],
@@ -8602,9 +8357,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Deprecated alias for closeLogFile()",
                     "keywords": [
-                        "log",
-                        "file",
-                        "close",
                         "deprecated"
                     ],
                     "desc_ja": "closeLogFile() の非推奨エイリアス",
@@ -8625,7 +8377,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Stream-based log output at a runtime-selected level",
                     "keywords": [
-                        "log",
                         "level",
                         "print",
                         "severity"
@@ -8645,8 +8396,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Stream-based verbose-level log output",
                     "keywords": [
-                        "log",
-                        "verbose",
                         "trace",
                         "debug",
                         "print"
@@ -8675,7 +8424,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Print to console",
                     "keywords": [
-                        "log",
                         "print",
                         "console",
                         "debug",
@@ -8696,9 +8444,7 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Stream-based warning-level log output",
                     "keywords": [
-                        "log",
                         "warn",
-                        "warning",
                         "print"
                     ],
                     "desc_ja": "ストリームベースの warning レベルログ出力",
@@ -8722,8 +8468,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Stream-based error-level log output",
                     "keywords": [
-                        "log",
-                        "error",
                         "err",
                         "print"
                     ],
@@ -8752,8 +8496,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Stream-based fatal-level log output",
                     "keywords": [
-                        "log",
-                        "fatal",
                         "crash",
                         "critical",
                         "print"
@@ -8772,7 +8514,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logAt()",
                     "keywords": [
-                        "log",
                         "level",
                         "deprecated"
                     ],
@@ -8794,8 +8535,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logVerbose()",
                     "keywords": [
-                        "log",
-                        "verbose",
                         "deprecated"
                     ],
                     "desc_ja": "logVerbose() の非推奨エイリアス",
@@ -8816,8 +8555,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logNotice()",
                     "keywords": [
-                        "log",
-                        "notice",
                         "deprecated"
                     ],
                     "desc_ja": "logNotice() の非推奨エイリアス",
@@ -8838,8 +8575,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logWarning()",
                     "keywords": [
-                        "log",
-                        "warning",
                         "deprecated"
                     ],
                     "desc_ja": "logWarning() の非推奨エイリアス",
@@ -8860,8 +8595,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logError()",
                     "keywords": [
-                        "log",
-                        "error",
                         "deprecated"
                     ],
                     "desc_ja": "logError() の非推奨エイリアス",
@@ -8882,8 +8615,6 @@ const TrussCAPI = {
                     "return_type": "LogStream",
                     "desc": "Deprecated alias for logFatal()",
                     "keywords": [
-                        "log",
-                        "fatal",
                         "deprecated"
                     ],
                     "desc_ja": "logFatal() の非推奨エイリアス",
@@ -9155,7 +8886,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Convert an integer (zero-padded to width) or string bytes to a hexadecimal string",
                     "keywords": [
-                        "hex",
                         "hexadecimal",
                         "format",
                         "string",
@@ -9181,7 +8911,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Convert an integer (zero-padded to width) or string bytes to a hexadecimal string",
                     "keywords": [
-                        "hex",
                         "hexadecimal",
                         "format",
                         "string",
@@ -9207,7 +8936,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Convert an integer (zero-padded to width) or string bytes to a hexadecimal string",
                     "keywords": [
-                        "hex",
                         "hexadecimal",
                         "format",
                         "string",
@@ -9233,7 +8961,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Convert an integer to a binary string",
                     "keywords": [
-                        "binary",
                         "bits",
                         "base2",
                         "convert"
@@ -9258,7 +8985,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Convert an integer to a binary string",
                     "keywords": [
-                        "binary",
                         "bits",
                         "base2",
                         "convert"
@@ -9283,7 +9009,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Convert an integer to a binary string",
                     "keywords": [
-                        "binary",
                         "bits",
                         "base2",
                         "convert"
@@ -9308,7 +9033,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Convert an integer to a binary string",
                     "keywords": [
-                        "binary",
                         "bits",
                         "base2",
                         "convert"
@@ -9333,7 +9057,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Convert an integer to a binary string",
                     "keywords": [
-                        "binary",
                         "bits",
                         "base2",
                         "convert"
@@ -9358,7 +9081,6 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Parse a hex string into a signed int",
                     "keywords": [
-                        "hex",
                         "hexadecimal",
                         "parse",
                         "base16",
@@ -9385,7 +9107,6 @@ const TrussCAPI = {
                     "return_type": "unsigned int",
                     "desc": "Parse a hex string into an unsigned int",
                     "keywords": [
-                        "hex",
                         "hexadecimal",
                         "unsigned",
                         "base16",
@@ -9517,8 +9238,7 @@ const TrussCAPI = {
                         "tokenize",
                         "explode",
                         "separator",
-                        "delimiter",
-                        "split"
+                        "delimiter"
                     ],
                     "desc_ja": "文字列をデリミタで分割",
                     "desc_ko": "구분자로 문자열을 분할",
@@ -9587,10 +9307,7 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Trim whitespace from both ends of a string",
                     "keywords": [
-                        "strip",
-                        "whitespace",
-                        "clean",
-                        "trim"
+                        "string"
                     ],
                     "desc_ja": "文字列の両端の空白を除去",
                     "desc_ko": "문자열 양 끝의 공백을 제거",
@@ -9613,11 +9330,7 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Trim leading whitespace from a string",
                     "keywords": [
-                        "strip",
-                        "leading",
-                        "left",
-                        "ltrim",
-                        "whitespace"
+                        "string"
                     ],
                     "desc_ja": "文字列の先頭の空白を除去",
                     "desc_ko": "문자열 앞쪽의 공백을 제거",
@@ -9633,11 +9346,7 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Trim trailing whitespace from a string",
                     "keywords": [
-                        "strip",
-                        "trailing",
-                        "right",
-                        "rtrim",
-                        "whitespace"
+                        "string"
                     ],
                     "desc_ja": "文字列の末尾の空白を除去",
                     "desc_ko": "문자열 뒤쪽의 공백을 제거",
@@ -9899,8 +9608,7 @@ const TrussCAPI = {
                         "size",
                         "buffer",
                         "estimate",
-                        "capacity",
-                        "compress"
+                        "capacity"
                     ],
                     "desc_ja": "宛先バッファのサイズ確保用の最悪ケースの圧縮サイズ",
                     "desc_ko": "대상 버퍼 크기 산정용 최악의 경우 압축 크기",
@@ -9917,8 +9625,6 @@ const TrussCAPI = {
                     "return_type": "Json",
                     "desc": "Parse a JSON string into a Json object; returns an empty Json on parse error.",
                     "keywords": [
-                        "json",
-                        "parse",
                         "deserialize",
                         "decode"
                     ],
@@ -9937,7 +9643,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Serialize a Json object to a string. indent sets the pretty-print width (negative for compact).",
                     "keywords": [
-                        "json",
                         "serialize",
                         "stringify",
                         "encode",
@@ -9967,8 +9672,7 @@ const TrussCAPI = {
                         "serialize",
                         "reflection",
                         "dump",
-                        "members",
-                        "json"
+                        "members"
                     ],
                     "desc_ja": "objのreflect済み(TC_REFLECT)メンバをすべてJsonオブジェクトとして返す。NodeやModなど任意のreflected型で動作",
                     "desc_ko": "obj의 reflect된(TC_REFLECT) 멤버를 모두 Json 객체로 반환. Node나 Mod 등 임의의 reflected 타입에서 동작",
@@ -9988,8 +9692,7 @@ const TrussCAPI = {
                         "deserialize",
                         "reflection",
                         "apply",
-                        "load",
-                        "json"
+                        "load"
                     ],
                     "desc_ja": "Jsonオブジェクトのキーをobjのreflect済み(TC_REFLECT)メンバに適用する。reflectorを返すので、どのメンバがapplied/skipped/read-only/unknownだったか確認できる",
                     "desc_ko": "Json 객체의 키를 obj의 reflect된(TC_REFLECT) 멤버에 적용. reflector를 반환하므로 어떤 멤버가 applied/skipped/read-only/unknown이었는지 확인 가능",
@@ -10006,8 +9709,6 @@ const TrussCAPI = {
                     "return_type": "Xml",
                     "desc": "Parse an XML string into an Xml object.",
                     "keywords": [
-                        "xml",
-                        "parse",
                         "deserialize",
                         "decode"
                     ],
@@ -10045,8 +9746,6 @@ const TrussCAPI = {
                     "return_type": "const std::string &",
                     "desc": "Readable (demangled) fully-qualified name for a type, cached per type",
                     "keywords": [
-                        "type",
-                        "name",
                         "rtti",
                         "typeid",
                         "reflection",
@@ -10065,8 +9764,6 @@ const TrussCAPI = {
                     "return_type": "const std::string &",
                     "desc": "Readable (demangled) fully-qualified name for a type, cached per type",
                     "keywords": [
-                        "type",
-                        "name",
                         "rtti",
                         "typeid",
                         "reflection",
@@ -10085,9 +9782,6 @@ const TrussCAPI = {
                     "return_type": "const std::string &",
                     "desc": "Short (unqualified) readable name for a type, cached per type",
                     "keywords": [
-                        "type",
-                        "name",
-                        "short",
                         "unqualified",
                         "rtti",
                         "typeid"
@@ -10105,8 +9799,6 @@ const TrussCAPI = {
                     "return_type": "Json",
                     "desc": "Serialize a node (and its subtree up to maxDepth; -1 = unlimited) to JSON via reflection",
                     "keywords": [
-                        "node",
-                        "json",
                         "serialize",
                         "reflect",
                         "tree",
@@ -10134,7 +9826,6 @@ const TrussCAPI = {
                     "desc": "Get the absolute path of the running executable.",
                     "keywords": [
                         "exe",
-                        "executable",
                         "binary",
                         "app path",
                         "self"
@@ -10156,7 +9847,6 @@ const TrussCAPI = {
                     "desc": "Get the directory containing the running executable (with trailing slash).",
                     "keywords": [
                         "exe",
-                        "executable",
                         "binary",
                         "app folder",
                         "directory"
@@ -10177,8 +9867,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set the root directory used to resolve relative data paths. A relative path is resolved against the executable directory; an absolute path (starting with /) is used as-is. A trailing slash is added automatically.",
                     "keywords": [
-                        "data",
-                        "root",
                         "resource",
                         "directory",
                         "base"
@@ -10198,8 +9886,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Get the current data path root (with trailing slash).",
                     "keywords": [
-                        "data",
-                        "root",
                         "resource",
                         "directory",
                         "base"
@@ -10218,11 +9904,9 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Get full path relative to data directory",
                     "keywords": [
-                        "data",
                         "resource",
                         "asset",
-                        "resolve",
-                        "path"
+                        "resolve"
                     ],
                     "desc_ja": "データディレクトリからの相対パスを取得",
                     "desc_ko": "데이터 디렉토리 기준의 전체 경로를 얻음",
@@ -10250,10 +9934,8 @@ const TrussCAPI = {
                     "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms.",
                     "keywords": [
                         "bundle",
-                        "resources",
                         "macos",
-                        "app",
-                        "data"
+                        "app"
                     ],
                     "desc_ja": "配布用にデータパスルートをmacOSアプリバンドルのContents/Resources/dataフォルダに向ける。macOS以外のプラットフォームでは何もしない",
                     "desc_ko": "배포용으로 데이터 경로 루트를 macOS 앱 번들의 Contents/Resources/data 폴더로 지정. macOS 외 플랫폼에서는 동작하지 않음",
@@ -10273,10 +9955,8 @@ const TrussCAPI = {
                     "return_type": "Json",
                     "desc": "Load a JSON file and return it as a Json object. Relative paths are resolved via getDataPath; returns an empty Json on error.",
                     "keywords": [
-                        "json",
                         "read",
                         "open",
-                        "load",
                         "parse"
                     ],
                     "desc_ja": "JSONファイルを読み込みJsonオブジェクトとして返す。相対パスはgetDataPathで解決され、エラー時は空のJsonを返す",
@@ -10301,9 +9981,7 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath. indent sets the pretty-print width (negative for compact). Returns true on success.",
                     "keywords": [
-                        "json",
                         "write",
-                        "save",
                         "store",
                         "serialize"
                     ],
@@ -10329,10 +10007,8 @@ const TrussCAPI = {
                     "return_type": "Xml",
                     "desc": "Load an XML file and return it as an Xml object. Relative paths are resolved via getDataPath.",
                     "keywords": [
-                        "xml",
                         "read",
                         "open",
-                        "load",
                         "parse"
                     ],
                     "desc_ja": "XMLファイルを読み込みXmlオブジェクトとして返す。相対パスはgetDataPathで解決される",
@@ -10357,7 +10033,6 @@ const TrussCAPI = {
                     "keywords": [
                         "basename",
                         "filename",
-                        "name",
                         "path"
                     ],
                     "desc_ja": "パスからファイル名を取得",
@@ -10390,7 +10065,6 @@ const TrussCAPI = {
                     "desc": "Get filename without extension",
                     "keywords": [
                         "stem",
-                        "name",
                         "no extension",
                         "filename"
                     ],
@@ -10418,7 +10092,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Get file extension without dot",
                     "keywords": [
-                        "extension",
                         "ext",
                         "suffix",
                         "type",
@@ -10452,10 +10125,8 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Get parent directory",
                     "keywords": [
-                        "parent",
                         "dirname",
                         "folder",
-                        "directory",
                         "up"
                     ],
                     "desc_ja": "親ディレクトリを取得",
@@ -10484,7 +10155,6 @@ const TrussCAPI = {
                     "keywords": [
                         "combine",
                         "concat",
-                        "path",
                         "append",
                         "merge"
                     ],
@@ -10512,7 +10182,6 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "Get absolute path",
                     "keywords": [
-                        "absolute",
                         "full path",
                         "resolve",
                         "canonical"
@@ -10531,10 +10200,7 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Check if file exists",
                     "keywords": [
-                        "exists",
-                        "check",
-                        "found",
-                        "file"
+                        "found"
                     ],
                     "desc_ja": "ファイルが存在するか確認",
                     "desc_ko": "파일 존재 여부를 확인",
@@ -10561,11 +10227,8 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Check if directory exists",
                     "keywords": [
-                        "exists",
                         "folder",
-                        "dir",
-                        "check",
-                        "directory"
+                        "dir"
                     ],
                     "desc_ja": "ディレクトリが存在するか確認",
                     "desc_ko": "디렉토리 존재 여부를 확인",
@@ -10593,9 +10256,7 @@ const TrussCAPI = {
                     "desc": "Create directory (and parents)",
                     "keywords": [
                         "mkdir",
-                        "make folder",
-                        "create",
-                        "directory"
+                        "make folder"
                     ],
                     "desc_ja": "ディレクトリを作成（親も含む）",
                     "desc_ko": "디렉토리를 생성 (상위 포함)",
@@ -10650,8 +10311,7 @@ const TrussCAPI = {
                         "delete",
                         "rm",
                         "unlink",
-                        "erase",
-                        "file"
+                        "erase"
                     ],
                     "desc_ja": "ファイルを削除",
                     "desc_ko": "파일을 삭제",
@@ -10666,10 +10326,8 @@ const TrussCAPI = {
                     "return_type": "int64_t",
                     "desc": "Get file size in bytes",
                     "keywords": [
-                        "size",
                         "bytes",
-                        "length",
-                        "file"
+                        "length"
                     ],
                     "desc_ja": "ファイルサイズを取得（バイト）",
                     "desc_ko": "파일 크기를 바이트로 얻음",
@@ -10686,10 +10344,7 @@ const TrussCAPI = {
                     "desc": "Load entire text file",
                     "keywords": [
                         "read",
-                        "open",
-                        "text",
-                        "file",
-                        "load"
+                        "open"
                     ],
                     "desc_ja": "テキストファイルを読み込む",
                     "desc_ko": "텍스트 파일 전체를 로드",
@@ -10707,9 +10362,6 @@ const TrussCAPI = {
                     "desc": "Save string to text file",
                     "keywords": [
                         "write",
-                        "save",
-                        "text",
-                        "file",
                         "store"
                     ],
                     "desc_ja": "文字列をファイルに保存",
@@ -10727,10 +10379,8 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Append string to file",
                     "keywords": [
-                        "append",
                         "write",
                         "add",
-                        "file",
                         "concat"
                     ],
                     "desc_ja": "ファイルに追記",
@@ -10753,7 +10403,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set the output volume for beep() (0.0-1.0).",
                     "keywords": [
-                        "beep",
                         "loudness",
                         "gain",
                         "level",
@@ -10779,7 +10428,6 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get the current beep() output volume (0.0-1.0).",
                     "keywords": [
-                        "beep",
                         "loudness",
                         "gain",
                         "level"
@@ -10854,8 +10502,7 @@ const TrussCAPI = {
                         "spectrum",
                         "samples",
                         "waveform",
-                        "visualization",
-                        "analysis"
+                        "visualization"
                     ],
                     "desc_ja": "FFT / 可視化用に最新のミックス出力サンプル(モノ、L+R平均)をoutBufferにコピー。numSamplesは解析バッファサイズ(4096)で上限される。書き込んだサンプル数を返す",
                     "desc_ko": "FFT / 시각화용으로 최신 믹스 출력 샘플(모노, L+R 평균)을 outBuffer에 복사. numSamples는 분석 버퍼 크기(4096)로 제한됨. 기록한 샘플 수를 반환",
@@ -10879,9 +10526,7 @@ const TrussCAPI = {
                     "desc": "Get the global MicInput singleton (microphone capture). Call start() on it to open the device.",
                     "keywords": [
                         "microphone",
-                        "mic",
                         "capture",
-                        "input",
                         "record"
                     ],
                     "desc_ja": "グローバルなMicInputシングルトン(マイク入力)を取得。start()を呼ぶとデバイスを開く",
@@ -10905,11 +10550,9 @@ const TrussCAPI = {
                     "desc": "Copy the latest microphone input samples into outBuffer. Convenience wrapper over getMicInput().getBuffer(). numSamples is capped at the mic buffer size (4096). Returns the number of samples written.",
                     "keywords": [
                         "microphone",
-                        "mic",
                         "samples",
                         "fft",
-                        "waveform",
-                        "analysis"
+                        "waveform"
                     ],
                     "desc_ja": "最新のマイク入力サンプルをoutBufferにコピー。getMicInput().getBuffer()の便利ラッパー。numSamplesはマイクバッファサイズ(4096)で上限される。書き込んだサンプル数を返す",
                     "desc_ko": "최신 마이크 입력 샘플을 outBuffer에 복사. getMicInput().getBuffer()의 편의 래퍼. numSamples는 마이크 버퍼 크기(4096)로 제한됨. 기록한 샘플 수를 반환",
@@ -10942,8 +10585,7 @@ const TrussCAPI = {
                         "resolve",
                         "lookup",
                         "find",
-                        "os font",
-                        "path"
+                        "os font"
                     ],
                     "desc_ja": "システムフォント名（PostScript 名や family 名）をファイルパスに解決。見つからなければ空文字を返す。macOS は CoreText、Linux/Win は現状スタブ",
                     "desc_ko": "시스템 폰트 이름을 파일 경로로 변환",
@@ -10969,8 +10611,7 @@ const TrussCAPI = {
                         "enumerate",
                         "available",
                         "os fonts",
-                        "installed",
-                        "list"
+                        "installed"
                     ],
                     "desc_ja": "OS が認識している全フォント名を取得",
                     "desc_ko": "시스템에 설치된 모든 폰트 이름을 나열",
@@ -11180,7 +10821,6 @@ const TrussCAPI = {
                     "return_type": "Color",
                     "desc": "Deprecated alias for Color::fromOKLab()",
                     "keywords": [
-                        "lab",
                         "perceptual",
                         "make",
                         "deprecated"
@@ -11203,7 +10843,6 @@ const TrussCAPI = {
                     "return_type": "Color",
                     "desc": "Deprecated alias for Color::fromLinear()",
                     "keywords": [
-                        "linear",
                         "rgb",
                         "make",
                         "deprecated"
@@ -11236,7 +10875,6 @@ const TrussCAPI = {
                         "selection",
                         "active",
                         "clicked",
-                        "current",
                         "inspector"
                     ],
                     "desc_ja": "現在選択中のノード(最後にクリックされたノード、Nodeシステムが保持。なければnull)を取得。inspectorなどのツールがこれを読み取り、setSelectedNode()で操作できる",
@@ -11273,7 +10911,6 @@ const TrussCAPI = {
                     "return_type": "Node *",
                     "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around.",
                     "keywords": [
-                        "root",
                         "tree",
                         "app",
                         "top",
@@ -11302,7 +10939,6 @@ const TrussCAPI = {
                     "keywords": [
                         "3d",
                         "perspective",
-                        "enable",
                         "deprecated"
                     ],
                     "desc_ja": "setupScreenPerspective() の非推奨エイリアス",
@@ -11324,7 +10960,6 @@ const TrussCAPI = {
                     "desc": "Deprecated alias for setupScreenPerspective()",
                     "keywords": [
                         "3d",
-                        "perspective",
                         "fov",
                         "deprecated"
                     ],
@@ -11347,7 +10982,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)",
                     "keywords": [
-                        "fov",
                         "field of view",
                         "projection",
                         "perspective",
@@ -11368,7 +11002,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set up perspective projection (oF-style default 3D)",
                     "keywords": [
-                        "perspective",
                         "projection",
                         "3d mode",
                         "frustum",
@@ -11390,11 +11023,8 @@ const TrussCAPI = {
                     "desc": "Set up orthographic projection (2D mode)",
                     "keywords": [
                         "orthographic",
-                        "projection",
                         "2d mode",
-                        "flat",
-                        "ofSetupScreenOrtho",
-                        "no perspective"
+                        "ofSetupScreenOrtho"
                     ],
                     "desc_ja": "正投影を設定（2Dモード）",
                     "desc_ko": "정사영 투영을 설정 (2D 모드)",
@@ -11410,9 +11040,7 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set default screen FOV (applied at frame start)",
                     "keywords": [
-                        "fov",
                         "field of view",
-                        "default",
                         "projection",
                         "perspective"
                     ],
@@ -11429,11 +11057,8 @@ const TrussCAPI = {
                     "return_type": "float",
                     "desc": "Get current default screen FOV",
                     "keywords": [
-                        "fov",
                         "field of view",
-                        "default",
-                        "projection",
-                        "query"
+                        "projection"
                     ],
                     "desc_ja": "現在のデフォルトスクリーンFOVを取得",
                     "desc_ko": "현재 기본 스크린 FOV를 얻음",
@@ -11451,7 +11076,6 @@ const TrussCAPI = {
                         "near plane",
                         "clipping",
                         "frustum",
-                        "near",
                         "z near",
                         "default screen"
                     ],
@@ -11473,7 +11097,6 @@ const TrussCAPI = {
                         "far plane",
                         "clipping",
                         "frustum",
-                        "far",
                         "z far",
                         "default screen"
                     ],
@@ -11494,9 +11117,6 @@ const TrussCAPI = {
                     "keywords": [
                         "project",
                         "world to screen",
-                        "unproject",
-                        "depth",
-                        "coordinate",
                         "ofWorldToScreen"
                     ],
                     "desc_ja": "ワールド座標をスクリーン座標に変換（x, y = 画面ピクセル, z = 深度 0-1）",
@@ -11520,10 +11140,7 @@ const TrussCAPI = {
                     "desc": "Convert screen coordinate to world coordinate on Z plane",
                     "keywords": [
                         "unproject",
-                        "screen to world",
-                        "pick",
                         "raycast",
-                        "coordinate",
                         "ofScreenToWorld"
                     ],
                     "desc_ja": "スクリーン座標をワールド座標に変換（Z平面上）",
@@ -11548,7 +11165,6 @@ const TrussCAPI = {
                     "keywords": [
                         "2d",
                         "ortho",
-                        "disable",
                         "deprecated"
                     ],
                     "desc_ja": "setupScreenOrtho() の非推奨エイリアス",
@@ -11579,8 +11195,7 @@ const TrussCAPI = {
                         "near plane",
                         "clipping",
                         "frustum",
-                        "z near",
-                        "query"
+                        "z near"
                     ],
                     "desc_ja": "ニアクリップのオーバーライド値を取得（0 = カメラ距離から自動計算）。",
                     "desc_ko": "니어 클립 오버라이드 값을 가져온다 (0 = 카메라 거리에서 자동 계산).",
@@ -11598,8 +11213,7 @@ const TrussCAPI = {
                         "far plane",
                         "clipping",
                         "frustum",
-                        "z far",
-                        "query"
+                        "z far"
                     ],
                     "desc_ja": "ファークリップのオーバーライド値を取得（0 = カメラ距離から自動計算）。",
                     "desc_ko": "파 클립 오버라이드 값을 가져온다 (0 = 카메라 거리에서 자동 계산).",
@@ -11618,8 +11232,7 @@ const TrussCAPI = {
                         "eye",
                         "view vector",
                         "specular",
-                        "viewpoint",
-                        "query"
+                        "viewpoint"
                     ],
                     "desc_ja": "specular/PBRの視線ベクトルに使う現在のカメラ位置",
                     "desc_ko": "specular/PBR 시선 벡터에 사용하는 현재 카메라 위치",
@@ -11642,7 +11255,6 @@ const TrussCAPI = {
                     "return_type": "Color",
                     "desc": "CPU-side lighting result for a world position and normal, summing all active lights with the given material",
                     "keywords": [
-                        "lighting",
                         "cpu",
                         "shade",
                         "compute light",
@@ -11665,7 +11277,6 @@ const TrussCAPI = {
                     "desc": "Set IBL environment for PBR ambient lighting",
                     "keywords": [
                         "ibl",
-                        "environment",
                         "skybox",
                         "hdri",
                         "ambient",
@@ -11702,7 +11313,6 @@ const TrussCAPI = {
                     "desc": "Clear IBL environment",
                     "keywords": [
                         "ibl",
-                        "environment",
                         "skybox",
                         "reset",
                         "remove env"
@@ -11718,10 +11328,8 @@ const TrussCAPI = {
                     "desc": "Get the current environment (IBL/skybox), or nullptr if none is set",
                     "keywords": [
                         "ibl",
-                        "environment",
                         "skybox",
                         "hdri",
-                        "query",
                         "ambient"
                     ],
                     "desc_ja": "現在の環境(IBL/skybox)を取得、未設定ならnullptr",
@@ -11738,7 +11346,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Add a light to the scene",
                     "keywords": [
-                        "light",
                         "lamp",
                         "illuminate",
                         "directional",
@@ -11775,9 +11382,7 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Remove a light from the scene",
                     "keywords": [
-                        "light",
                         "delete light",
-                        "remove",
                         "unlight",
                         "lamp"
                     ],
@@ -11794,7 +11399,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Remove all lights from the scene",
                     "keywords": [
-                        "lights",
                         "remove all",
                         "reset",
                         "delete",
@@ -11824,11 +11428,9 @@ const TrussCAPI = {
                     "return_type": "int",
                     "desc": "Number of currently active lights",
                     "keywords": [
-                        "lights",
                         "count",
                         "number",
-                        "active lights",
-                        "query"
+                        "active lights"
                     ],
                     "desc_ja": "現在アクティブなライトの数",
                     "desc_ko": "현재 활성화된 light 개수"
@@ -11840,7 +11442,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Set material for subsequent mesh draws (activates PBR)",
                     "keywords": [
-                        "material",
                         "pbr",
                         "surface",
                         "shading",
@@ -11876,7 +11477,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Clear material (return to default rendering)",
                     "keywords": [
-                        "material",
                         "reset",
                         "default",
                         "unset",
@@ -11909,10 +11509,8 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Begin shadow depth pass from the light's point of view",
                     "keywords": [
-                        "shadow",
                         "depth pass",
                         "shadow map",
-                        "begin",
                         "light view"
                     ],
                     "desc_ja": "light視点のshadow depth passを開始",
@@ -11937,10 +11535,8 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "End shadow depth pass",
                     "keywords": [
-                        "shadow",
                         "depth pass",
                         "shadow map",
-                        "end",
                         "finish"
                     ],
                     "desc_ja": "shadow depth passを終了",
@@ -11962,7 +11558,6 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Draw a mesh into the shadow depth pass (depth only)",
                     "keywords": [
-                        "shadow",
                         "depth",
                         "shadow map",
                         "render shadow",
@@ -12060,7 +11655,6 @@ const TrussCAPI = {
                     "return_type": "Mesh",
                     "desc": "Create a plane mesh (subdivided quad on the XY plane)",
                     "keywords": [
-                        "plane",
                         "quad",
                         "flat",
                         "grid",
@@ -12094,7 +11688,6 @@ const TrussCAPI = {
                     "return_type": "Mesh",
                     "desc": "Create a box mesh",
                     "keywords": [
-                        "box",
                         "cube",
                         "rectangular",
                         "block",
@@ -12129,7 +11722,6 @@ const TrussCAPI = {
                     "return_type": "Mesh",
                     "desc": "Create a box mesh",
                     "keywords": [
-                        "box",
                         "cube",
                         "rectangular",
                         "block",
@@ -12164,7 +11756,6 @@ const TrussCAPI = {
                     "return_type": "Mesh",
                     "desc": "Create a sphere mesh",
                     "keywords": [
-                        "sphere",
                         "ball",
                         "globe",
                         "round",
@@ -12200,7 +11791,6 @@ const TrussCAPI = {
                     "return_type": "Mesh",
                     "desc": "Create a cylinder mesh",
                     "keywords": [
-                        "cylinder",
                         "tube",
                         "pipe",
                         "ofCylinderPrimitive",
@@ -12233,7 +11823,6 @@ const TrussCAPI = {
                     "return_type": "Mesh",
                     "desc": "Create a capsule mesh (Y-up: cylinder capped by two hemispheres)",
                     "keywords": [
-                        "capsule",
                         "pill",
                         "stadium",
                         "rounded cylinder",
@@ -12254,7 +11843,6 @@ const TrussCAPI = {
                     "return_type": "Mesh",
                     "desc": "Create a cone mesh",
                     "keywords": [
-                        "cone",
                         "pyramid",
                         "spike",
                         "ofConePrimitive",
@@ -12291,7 +11879,6 @@ const TrussCAPI = {
                         "icosphere",
                         "geodesic",
                         "ball",
-                        "sphere",
                         "uniform sphere",
                         "ofIcoSpherePrimitive"
                     ],
@@ -12316,7 +11903,6 @@ const TrussCAPI = {
                     "return_type": "Mesh",
                     "desc": "Create a torus (donut) mesh",
                     "keywords": [
-                        "torus",
                         "donut",
                         "ring",
                         "doughnut",
@@ -12355,8 +11941,7 @@ const TrussCAPI = {
                         "channels",
                         "components",
                         "rgba",
-                        "format",
-                        "count"
+                        "format"
                     ],
                     "desc_ja": "TextureFormatのカラーチャンネル数(1、2、または4)",
                     "desc_ko": "TextureFormat의 컬러 채널 수(1, 2 또는 4)",
@@ -12392,10 +11977,8 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "Whether a TextureFormat uses floating-point components",
                     "keywords": [
-                        "float",
                         "hdr",
                         "precision",
-                        "format",
                         "type"
                     ],
                     "desc_ja": "TextureFormatが浮動小数点成分を使うかどうか",
@@ -12475,7 +12058,6 @@ const TrussCAPI = {
                     "return_type": "const char *",
                     "desc": "Return a human-readable name for a VideoCodec value (e.g. \"H.264\", \"HEVC\", \"ProRes 422\")",
                     "keywords": [
-                        "codec",
                         "h264",
                         "hevc",
                         "prores",
@@ -12502,7 +12084,6 @@ const TrussCAPI = {
                     "return_type": "std::vector<NetworkInterface>",
                     "desc": "List all network interface address entries (IPv4/IPv6, loopback, up or down)",
                     "keywords": [
-                        "network",
                         "interface",
                         "ip",
                         "adapter",
@@ -12533,10 +12114,8 @@ const TrussCAPI = {
                     "return_type": "void",
                     "desc": "Log the interface list (one line per entry)",
                     "keywords": [
-                        "network",
                         "interface",
                         "log",
-                        "print",
                         "ip"
                     ],
                     "desc_ja": "インターフェース一覧をログ出力（1エントリ1行）",
@@ -12560,10 +12139,8 @@ const TrussCAPI = {
                     "return_type": "std::string",
                     "desc": "The most likely LAN address (skips loopback/down, IPv4 preferred). \"\" if none",
                     "keywords": [
-                        "ip",
                         "address",
                         "lan",
-                        "local",
                         "host"
                     ],
                     "desc_ja": "一番それっぽいLANアドレス（ループバック/downを除外、IPv4優先）。無ければ\"\"",
@@ -12591,7 +12168,6 @@ const TrussCAPI = {
                         "ip",
                         "address",
                         "lan",
-                        "local",
                         "list"
                     ],
                     "desc_ja": "ループバック以外の全アドレス（インターフェースごと）",
@@ -12615,7 +12191,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "True if addr is a loopback address (127.0.0.0/8 or ::1)",
                     "keywords": [
-                        "loopback",
                         "localhost",
                         "127.0.0.1",
                         "ip"
@@ -12634,7 +12209,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "True if addr is a private IPv4 (10/8, 172.16/12, 192.168/16)",
                     "keywords": [
-                        "private",
                         "lan",
                         "rfc1918",
                         "internal",
@@ -12674,7 +12248,6 @@ const TrussCAPI = {
                     "return_type": "bool",
                     "desc": "True if IPv4 a and b are on the same subnet under netmask",
                     "keywords": [
-                        "subnet",
                         "netmask",
                         "network",
                         "same lan",
@@ -12695,7 +12268,6 @@ const TrussCAPI = {
                     "desc": "The OUI (first 3 bytes) of a MAC, uppercase \"A4:83:E7\". \"\" if unparseable",
                     "keywords": [
                         "mac",
-                        "oui",
                         "vendor",
                         "manufacturer",
                         "address"
@@ -12868,7 +12440,6 @@ const TrussCAPI = {
             "desc_ja": "円周と半径の比。一周（full turn）に対応する radian。約 6.28318。",
             "desc_ko": "원주와 반지름의 비. 한 바퀴(full turn)에 해당하는 라디안. 약 6.28318.",
             "keywords": [
-                "tau",
                 "two pi",
                 "circle",
                 "radians",
@@ -12922,7 +12493,6 @@ const TrussCAPI = {
             "desc_ja": "円周と直径の比。約 3.14159。半周には HALF_TAU を推奨。",
             "desc_ko": "원주와 지름의 비. 약 3.14159. 반 바퀴에는 HALF_TAU 권장.",
             "keywords": [
-                "pi",
                 "3.14",
                 "circle",
                 "radians",
@@ -12946,7 +12516,6 @@ const TrussCAPI = {
             "keywords": [
                 "direction",
                 "align",
-                "left",
                 "horizontal"
             ]
         },
@@ -12959,7 +12528,6 @@ const TrussCAPI = {
             "keywords": [
                 "direction",
                 "align",
-                "center",
                 "middle"
             ]
         },
@@ -12972,7 +12540,6 @@ const TrussCAPI = {
             "keywords": [
                 "direction",
                 "align",
-                "right",
                 "horizontal"
             ]
         },
@@ -12985,7 +12552,6 @@ const TrussCAPI = {
             "keywords": [
                 "direction",
                 "align",
-                "top",
                 "vertical"
             ]
         },
@@ -12998,7 +12564,6 @@ const TrussCAPI = {
             "keywords": [
                 "direction",
                 "align",
-                "bottom",
                 "vertical"
             ]
         },
@@ -13011,7 +12576,6 @@ const TrussCAPI = {
             "keywords": [
                 "direction",
                 "align",
-                "baseline",
                 "text"
             ]
         },
@@ -13025,7 +12589,6 @@ const TrussCAPI = {
                 "event",
                 "priority",
                 "listener",
-                "before",
                 "overlay",
                 "first"
             ]
@@ -13048,7 +12611,6 @@ const TrussCAPI = {
                 "event",
                 "priority",
                 "listener",
-                "after",
                 "last"
             ]
         },
@@ -13061,7 +12623,6 @@ const TrussCAPI = {
             "keywords": [
                 "audio",
                 "priority",
-                "generator",
                 "synth",
                 "oscillator",
                 "audioOut"
@@ -13076,7 +12637,6 @@ const TrussCAPI = {
             "keywords": [
                 "audio",
                 "priority",
-                "effect",
                 "reverb",
                 "filter",
                 "audioOut"
@@ -13089,12 +12649,8 @@ const TrussCAPI = {
             "desc_ja": "モニター/スコープ向けのオーディオリスナー優先度（audio::priority::Monitor）",
             "desc_ko": "모니터/스코프용 오디오 리스너 우선순위 (audio::priority::Monitor)",
             "keywords": [
-                "audio",
                 "priority",
-                "monitor",
                 "scope",
-                "fft",
-                "record",
                 "audioOut"
             ]
         },
@@ -13105,8 +12661,6 @@ const TrussCAPI = {
             "desc_ja": "TrussC のメジャーバージョン番号",
             "desc_ko": "TrussC 메이저 버전 번호",
             "keywords": [
-                "version",
-                "major",
                 "semver",
                 "release"
             ]
@@ -13118,8 +12672,6 @@ const TrussCAPI = {
             "desc_ja": "TrussC のマイナーバージョン番号",
             "desc_ko": "TrussC 마이너 버전 번호",
             "keywords": [
-                "version",
-                "minor",
                 "semver",
                 "release"
             ]
@@ -13131,8 +12683,6 @@ const TrussCAPI = {
             "desc_ja": "TrussC のパッチバージョン番号",
             "desc_ko": "TrussC 패치 버전 번호",
             "keywords": [
-                "version",
-                "patch",
                 "semver",
                 "release"
             ]
@@ -13144,12 +12694,10 @@ const TrussCAPI = {
             "desc_ja": "フレームレートのセンチネル: モニターのリフレッシュレートに同期",
             "desc_ko": "프레임레이트 센티넬: 모니터 리프레시 레이트에 동기화",
             "keywords": [
-                "vsync",
                 "frame rate",
                 "fps",
                 "refresh",
-                "sync",
-                "sentinel"
+                "sync"
             ]
         },
         {
@@ -13163,8 +12711,7 @@ const TrussCAPI = {
                 "frame rate",
                 "fps",
                 "redraw",
-                "on demand",
-                "sentinel"
+                "on demand"
             ]
         },
         {
@@ -13174,9 +12721,7 @@ const TrussCAPI = {
             "desc_ja": "スペースキー",
             "desc_ko": "스페이스 키",
             "keywords": [
-                "spacebar",
-                "space",
-                "key"
+                "spacebar"
             ]
         },
         {
@@ -13186,10 +12731,8 @@ const TrussCAPI = {
             "desc_ja": "Escキー",
             "desc_ko": "ESC 키",
             "keywords": [
-                "escape",
                 "esc",
-                "cancel",
-                "key"
+                "cancel"
             ]
         },
         {
@@ -13199,10 +12742,8 @@ const TrussCAPI = {
             "desc_ja": "Enter/Returnキー",
             "desc_ko": "엔터/리턴 키",
             "keywords": [
-                "enter",
                 "return",
-                "newline",
-                "key"
+                "newline"
             ]
         },
         {
@@ -13212,9 +12753,7 @@ const TrussCAPI = {
             "desc_ja": "Tabキー",
             "desc_ko": "탭 키",
             "keywords": [
-                "tab",
-                "indent",
-                "key"
+                "indent"
             ]
         },
         {
@@ -13224,10 +12763,8 @@ const TrussCAPI = {
             "desc_ja": "Backspaceキー",
             "desc_ko": "백스페이스 키",
             "keywords": [
-                "backspace",
                 "delete back",
-                "erase",
-                "key"
+                "erase"
             ]
         },
         {
@@ -13237,11 +12774,9 @@ const TrussCAPI = {
             "desc_ja": "Deleteキー",
             "desc_ko": "Delete 키",
             "keywords": [
-                "delete",
                 "del",
                 "forward delete",
-                "erase",
-                "key"
+                "erase"
             ]
         },
         {
@@ -13253,8 +12788,7 @@ const TrussCAPI = {
             "keywords": [
                 "right arrow",
                 "cursor right",
-                "arrow",
-                "key"
+                "arrow"
             ]
         },
         {
@@ -13266,8 +12800,7 @@ const TrussCAPI = {
             "keywords": [
                 "left arrow",
                 "cursor left",
-                "arrow",
-                "key"
+                "arrow"
             ]
         },
         {
@@ -13279,8 +12812,7 @@ const TrussCAPI = {
             "keywords": [
                 "down arrow",
                 "cursor down",
-                "arrow",
-                "key"
+                "arrow"
             ]
         },
         {
@@ -13292,8 +12824,7 @@ const TrussCAPI = {
             "keywords": [
                 "up arrow",
                 "cursor up",
-                "arrow",
-                "key"
+                "arrow"
             ]
         },
         {
@@ -13304,9 +12835,7 @@ const TrussCAPI = {
             "desc_ko": "왼쪽 Shift 키",
             "keywords": [
                 "left shift",
-                "shift",
-                "modifier",
-                "key"
+                "modifier"
             ]
         },
         {
@@ -13317,9 +12846,7 @@ const TrussCAPI = {
             "desc_ko": "오른쪽 Shift 키",
             "keywords": [
                 "right shift",
-                "shift",
-                "modifier",
-                "key"
+                "modifier"
             ]
         },
         {
@@ -13331,9 +12858,7 @@ const TrussCAPI = {
             "keywords": [
                 "left control",
                 "ctrl",
-                "control",
-                "modifier",
-                "key"
+                "modifier"
             ]
         },
         {
@@ -13345,9 +12870,7 @@ const TrussCAPI = {
             "keywords": [
                 "right control",
                 "ctrl",
-                "control",
-                "modifier",
-                "key"
+                "modifier"
             ]
         },
         {
@@ -13359,9 +12882,7 @@ const TrussCAPI = {
             "keywords": [
                 "left alt",
                 "option",
-                "alt",
-                "modifier",
-                "key"
+                "modifier"
             ]
         },
         {
@@ -13373,9 +12894,7 @@ const TrussCAPI = {
             "keywords": [
                 "right alt",
                 "option",
-                "alt",
-                "modifier",
-                "key"
+                "modifier"
             ]
         },
         {
@@ -13389,8 +12908,7 @@ const TrussCAPI = {
                 "command",
                 "cmd",
                 "windows key",
-                "meta",
-                "key"
+                "meta"
             ]
         },
         {
@@ -13404,8 +12922,7 @@ const TrussCAPI = {
                 "command",
                 "cmd",
                 "windows key",
-                "meta",
-                "key"
+                "meta"
             ]
         },
         {
@@ -13417,8 +12934,7 @@ const TrussCAPI = {
             "keywords": [
                 "function key",
                 "f1",
-                "help",
-                "key"
+                "help"
             ]
         },
         {
@@ -13430,8 +12946,7 @@ const TrussCAPI = {
             "keywords": [
                 "function key",
                 "f2",
-                "rename",
-                "key"
+                "rename"
             ]
         },
         {
@@ -13443,8 +12958,7 @@ const TrussCAPI = {
             "keywords": [
                 "function key",
                 "f3",
-                "search",
-                "key"
+                "search"
             ]
         },
         {
@@ -13455,8 +12969,7 @@ const TrussCAPI = {
             "desc_ko": "F4 기능 키",
             "keywords": [
                 "function key",
-                "f4",
-                "key"
+                "f4"
             ]
         },
         {
@@ -13469,8 +12982,7 @@ const TrussCAPI = {
                 "function key",
                 "f5",
                 "refresh",
-                "reload",
-                "key"
+                "reload"
             ]
         },
         {
@@ -13481,8 +12993,7 @@ const TrussCAPI = {
             "desc_ko": "F6 기능 키",
             "keywords": [
                 "function key",
-                "f6",
-                "key"
+                "f6"
             ]
         },
         {
@@ -13493,8 +13004,7 @@ const TrussCAPI = {
             "desc_ko": "F7 기능 키",
             "keywords": [
                 "function key",
-                "f7",
-                "key"
+                "f7"
             ]
         },
         {
@@ -13505,8 +13015,7 @@ const TrussCAPI = {
             "desc_ko": "F8 기능 키",
             "keywords": [
                 "function key",
-                "f8",
-                "key"
+                "f8"
             ]
         },
         {
@@ -13517,8 +13026,7 @@ const TrussCAPI = {
             "desc_ko": "F9 기능 키",
             "keywords": [
                 "function key",
-                "f9",
-                "key"
+                "f9"
             ]
         },
         {
@@ -13530,8 +13038,7 @@ const TrussCAPI = {
             "keywords": [
                 "function key",
                 "f10",
-                "menu",
-                "key"
+                "menu"
             ]
         },
         {
@@ -13543,8 +13050,7 @@ const TrussCAPI = {
             "keywords": [
                 "function key",
                 "f11",
-                "fullscreen",
-                "key"
+                "fullscreen"
             ]
         },
         {
@@ -13556,8 +13062,7 @@ const TrussCAPI = {
             "keywords": [
                 "function key",
                 "f12",
-                "devtools",
-                "key"
+                "devtools"
             ]
         },
         {
@@ -13568,8 +13073,6 @@ const TrussCAPI = {
             "desc_ko": "왼쪽 마우스 버튼",
             "keywords": [
                 "left click",
-                "mouse",
-                "button",
                 "primary"
             ]
         },
@@ -13581,8 +13084,6 @@ const TrussCAPI = {
             "desc_ko": "오른쪽 마우스 버튼",
             "keywords": [
                 "right click",
-                "mouse",
-                "button",
                 "context menu",
                 "secondary"
             ]
@@ -13595,8 +13096,6 @@ const TrussCAPI = {
             "desc_ko": "가운데 마우스 버튼",
             "keywords": [
                 "middle click",
-                "mouse",
-                "button",
                 "scroll wheel",
                 "wheel"
             ]
@@ -13626,10 +13125,7 @@ const TrussCAPI = {
             "desc": "2D vector (x, y)",
             "keywords": [
                 "vector",
-                "point",
-                "xy",
                 "2d",
-                "coordinate",
                 "glm vec2"
             ],
             "desc_ja": "2Dベクトル (x, y)",
@@ -13930,10 +13426,7 @@ const TrussCAPI = {
             "desc": "3D vector (x, y, z)",
             "keywords": [
                 "vector",
-                "point",
-                "xyz",
                 "3d",
-                "coordinate",
                 "glm vec3"
             ],
             "desc_ja": "3Dベクトル (x, y, z)",
@@ -14466,11 +13959,8 @@ const TrussCAPI = {
             "desc": "4D vector (x, y, z, w). Used for homogeneous coordinates and RGBA-style data",
             "keywords": [
                 "vector",
-                "vec4",
-                "rgba",
                 "quaternion",
-                "homogeneous",
-                "xyzw"
+                "homogeneous"
             ],
             "desc_ja": "4D ベクトル (x, y, z, w)。同次座標や RGBA 形式のデータに使用",
             "desc_ko": "4D 벡터 (x, y, z, w). 동차 좌표 및 RGBA 형식 데이터에 사용",
@@ -14894,11 +14384,8 @@ const TrussCAPI = {
             "desc": "3x3 matrix for 2D affine / homography transforms (row-major). Includes static factories and a homography solver",
             "keywords": [
                 "matrix",
-                "mat3",
-                "transform",
                 "homography",
-                "affine",
-                "2d"
+                "affine"
             ],
             "desc_ja": "2D アフィン/ホモグラフィ変換用の 3x3 行列 (行優先)。静的ファクトリとホモグラフィソルバを含む",
             "desc_ko": "2D 아핀/호모그래피 변환용 3x3 행렬 (행 우선). 정적 팩토리와 호모그래피 솔버 포함",
@@ -15019,10 +14506,7 @@ const TrussCAPI = {
             "keywords": [
                 "matrix",
                 "transform",
-                "4x4",
-                "model view",
-                "projection",
-                "transformation"
+                "projection"
             ],
             "desc_ja": "3D変換用4x4行列",
             "desc_ko": "3D 변환용 4x4 행렬",
@@ -15283,9 +14767,6 @@ const TrussCAPI = {
             "keywords": [
                 "rectangle",
                 "bounds",
-                "box",
-                "region",
-                "aabb",
                 "ofrectangle"
             ],
             "desc_ja": "矩形 (x, y, width, height)",
@@ -15416,7 +14897,6 @@ const TrussCAPI = {
             "name": "Ray",
             "desc": "A ray with an origin and a normalized direction, used for unified hit testing and picking",
             "keywords": [
-                "ray",
                 "raycast",
                 "pick",
                 "hittest",
@@ -15516,7 +14996,6 @@ const TrussCAPI = {
             "name": "CameraContext",
             "desc": "A snapshot of the camera (view / projection / viewport) that a part of the scene was drawn under. One is registered per camera scope (screen setup, EasyCam::begin, Fbo::begin) and stamped on each node at draw time, so mouse picking unprojects the cursor through the same camera the node was rendered with.",
             "keywords": [
-                "camera",
                 "picking",
                 "unproject",
                 "view",
@@ -15584,7 +15063,6 @@ const TrussCAPI = {
             "name": "EventListener",
             "desc": "RAII token returned by Event::listen(); the listener is automatically disconnected when this token is destroyed or reassigned. Move-only",
             "keywords": [
-                "listener",
                 "subscription",
                 "raii",
                 "token",
@@ -15642,7 +15120,6 @@ const TrussCAPI = {
             "name": "Thread",
             "desc": "Base class for background threads (ofThread compatible). Subclass it, override the protected pure-virtual threadedFunction() with a while (isThreadRunning()) { ... } loop, then control it with startThread()/stopThread()/waitForThread(). A protected mutex dataMutex_ is available for sharing data.",
             "keywords": [
-                "thread",
                 "background",
                 "worker",
                 "async",
@@ -15759,9 +15236,7 @@ const TrussCAPI = {
             "name": "ThreadChannel",
             "desc": "Thread-safe FIFO queue for one-way inter-thread communication (ofThreadChannel compatible), template<typename T>. Producer-Consumer pattern: a worker thread send()s values and another thread receive()s them. Use two channels for bidirectional communication.",
             "keywords": [
-                "thread",
                 "queue",
-                "channel",
                 "fifo",
                 "producer consumer",
                 "pipe"
@@ -15851,10 +15326,7 @@ const TrussCAPI = {
             "keywords": [
                 "signal",
                 "callback",
-                "listener",
-                "subscribe",
-                "notify",
-                "delegate"
+                "listener"
             ],
             "desc_ja": "listen(callback) で購読し notify(arg) で発火する汎用イベント。テンプレートパラメータはリスナーに参照で渡される引数の型。Event<void> は引数なしの特殊化(callback も notify も引数なし)。listen() は破棄時に切断する EventListener RAII トークンを返す",
             "desc_ko": "listen(callback)으로 구독하고 notify(arg)로 발생시키는 범용 이벤트. 템플릿 파라미터는 리스너에 참조로 전달되는 인자 타입. Event<void>는 인자 없는 특수화(callback과 notify 모두 인자 없음). listen()은 파괴 시 연결을 끊는 EventListener RAII 토큰을 반환",
@@ -15913,7 +15385,6 @@ const TrussCAPI = {
             "name": "LogEventArgs",
             "desc": "Arguments delivered for each log message (level, text, and timestamp)",
             "keywords": [
-                "log",
                 "message",
                 "level",
                 "console",
@@ -15961,10 +15432,7 @@ const TrussCAPI = {
             "keywords": [
                 "log",
                 "logging",
-                "console",
-                "debug",
-                "output",
-                "trace"
+                "console"
             ],
             "desc_ja": "コンソール・ファイル出力と onLog イベントを備えたロギングコア。グローバルインスタンスは getLogger() でアクセス",
             "desc_ko": "콘솔·파일 출력과 onLog 이벤트를 갖춘 로깅 코어. 전역 인스턴스는 getLogger() 로 접근",
@@ -16067,8 +15535,6 @@ const TrussCAPI = {
             "name": "LogStream",
             "desc": "Stream-based log output — the object returned by logNotice() / logWarning() / logError(), accepting values via operator<<.",
             "keywords": [
-                "log",
-                "stream",
                 "output"
             ],
             "desc_ja": "ストリーム形式のログ出力。logNotice() / logWarning() / logError() が返すオブジェクトで、operator<< で値を流し込む。",
@@ -16095,10 +15561,7 @@ const TrussCAPI = {
             "desc": "RGBA color (0.0-1.0 range)",
             "keywords": [
                 "rgba",
-                "rgb",
                 "tint",
-                "paint",
-                "swatch",
                 "of color"
             ],
             "desc_ja": "RGBAカラー (0.0-1.0範囲)",
@@ -16375,8 +15838,6 @@ const TrussCAPI = {
             "name": "ColorLinear",
             "desc": "A color in linear RGB space (no gamma encoding), 0.0-1.0 float per channel",
             "keywords": [
-                "color",
-                "linear",
                 "rgb",
                 "lineargamma",
                 "colorspace"
@@ -16652,11 +16113,9 @@ const TrussCAPI = {
             "name": "ColorOKLab",
             "desc": "A color in the OKLab perceptual color space (lightness + two opponent axes)",
             "keywords": [
-                "color",
                 "oklab",
                 "perceptual",
-                "colorspace",
-                "lab"
+                "colorspace"
             ],
             "desc_ja": "OKLab知覚色空間の色（明度＋2つの反対色軸）",
             "desc_ko": "OKLab 지각 색공간의 색상(명도 + 두 개의 반대색 축)",
@@ -16748,7 +16207,6 @@ const TrussCAPI = {
             "name": "ColorOKLCH",
             "desc": "Perceptually uniform OKLCH color",
             "keywords": [
-                "oklch",
                 "perceptual",
                 "lightness",
                 "chroma",
@@ -16958,7 +16416,6 @@ const TrussCAPI = {
             "desc": "GPS / WiFi location fix returned by getLocation()",
             "keywords": [
                 "gps",
-                "location",
                 "coordinates",
                 "geolocation",
                 "position",
@@ -17191,10 +16648,8 @@ const TrussCAPI = {
             "desc": "Arguments for keyPressed / keyReleased events",
             "keywords": [
                 "keyboard",
-                "key",
                 "keypress",
-                "input",
-                "args"
+                "input"
             ],
             "desc_ja": "keyPressed / keyReleased イベントの引数",
             "desc_ko": "keyPressed / keyReleased 이벤트의 인자",
@@ -17263,7 +16718,6 @@ const TrussCAPI = {
             "name": "MouseEventArgs",
             "desc": "Arguments for mousePressed / mouseReleased events. pos is local space, globalPos is screen space (equal at app level)",
             "keywords": [
-                "mouse",
                 "click",
                 "button",
                 "press",
@@ -17363,8 +16817,6 @@ const TrussCAPI = {
             "name": "MouseMoveEventArgs",
             "desc": "Arguments for mouseMoved (cursor moving with no button held)",
             "keywords": [
-                "mouse",
-                "move",
                 "hover",
                 "cursor",
                 "pointer"
@@ -17493,8 +16945,6 @@ const TrussCAPI = {
             "name": "MouseDragEventArgs",
             "desc": "Arguments for mouseDragged (cursor moving with a button held)",
             "keywords": [
-                "mouse",
-                "drag",
                 "move",
                 "cursor",
                 "pointer"
@@ -17630,7 +17080,6 @@ const TrussCAPI = {
             "name": "ScrollEventArgs",
             "desc": "Arguments for mouseScrolled events",
             "keywords": [
-                "scroll",
                 "wheel",
                 "mouse",
                 "zoom",
@@ -17738,7 +17187,6 @@ const TrussCAPI = {
             "name": "ResizeEventArgs",
             "desc": "Arguments for windowResized events",
             "keywords": [
-                "resize",
                 "window",
                 "size",
                 "viewport"
@@ -17766,8 +17214,6 @@ const TrussCAPI = {
             "name": "DragDropEventArgs",
             "desc": "Arguments for filesDropped events",
             "keywords": [
-                "drag",
-                "drop",
                 "files",
                 "dropped",
                 "import"
@@ -17805,7 +17251,6 @@ const TrussCAPI = {
             "name": "ClipboardPastedEventArgs",
             "desc": "Arguments for clipboardPasted events; the only reliable way to read the clipboard on the Web platform",
             "keywords": [
-                "clipboard",
                 "paste",
                 "copy",
                 "text"
@@ -17836,7 +17281,6 @@ const TrussCAPI = {
             "name": "TouchPoint",
             "desc": "A single finger within a TouchEventArgs",
             "keywords": [
-                "touch",
                 "finger",
                 "tap",
                 "multitouch",
@@ -17889,7 +17333,6 @@ const TrussCAPI = {
             "name": "TouchEventArgs",
             "desc": "Arguments for touchPressed / touchMoved / touchReleased events (multi-touch, Android/iOS)",
             "keywords": [
-                "touch",
                 "finger",
                 "tap",
                 "multitouch",
@@ -17962,7 +17405,6 @@ const TrussCAPI = {
             "name": "ConsoleEventArgs",
             "desc": "Arguments for the console event (a command line received from stdin)",
             "keywords": [
-                "console",
                 "command",
                 "stdin",
                 "terminal",
@@ -17994,7 +17436,6 @@ const TrussCAPI = {
             "name": "ExitRequestEventArgs",
             "desc": "Arguments for the exitRequested event",
             "keywords": [
-                "exit",
                 "quit",
                 "close",
                 "shutdown"
@@ -18019,7 +17460,6 @@ const TrussCAPI = {
             "name": "CoreEvents",
             "desc": "Hub of all framework core events. Each member is an Event you subscribe to with .listen(callback); access the global instance via events()",
             "keywords": [
-                "events",
                 "callbacks",
                 "hub",
                 "listeners",
@@ -18753,8 +18193,6 @@ const TrussCAPI = {
             "name": "AudioDeviceInfo",
             "desc": "One entry in the list returned by AudioEngine::listDevices().",
             "keywords": [
-                "audio",
-                "device",
                 "soundcard",
                 "output",
                 "playback"
@@ -18796,9 +18234,6 @@ const TrussCAPI = {
             "name": "AudioDeviceChangedArgs",
             "desc": "Argument type for the AudioEngine::audioDeviceChanged event, fired after every successful init() (initial and re-init). Reports the resolved device's real name (never empty).",
             "keywords": [
-                "audio",
-                "device",
-                "changed",
                 "switch",
                 "reinit"
             ],
@@ -18863,10 +18298,8 @@ const TrussCAPI = {
             "name": "AudioOutBuffer",
             "desc": "Argument type for the AudioEngine::audioOut event. Holds the interleaved mutable output buffer for a single audio callback. Listeners should ADD their contribution to data (voices are already mixed in); do not call engine APIs from here.",
             "keywords": [
-                "audio",
                 "output",
                 "synthesis",
-                "buffer",
                 "dsp",
                 "callback"
             ],
@@ -18928,12 +18361,10 @@ const TrussCAPI = {
             "name": "AudioInBuffer",
             "desc": "Argument type for the AudioEngine::audioIn event. Holds the interleaved read-only microphone input for a single capture callback. Process and return quickly; do not call engine APIs from here.",
             "keywords": [
-                "audio",
                 "microphone",
                 "mic",
                 "input",
-                "capture",
-                "buffer"
+                "capture"
             ],
             "desc_ja": "AudioEngine::audioIn イベントの引数型。1 回のキャプチャコールバック分のインターリーブされた読み取り専用マイク入力を保持する。処理は素早く済ませて返すこと。ここからエンジン API を呼ばないこと",
             "desc_ko": "AudioEngine::audioIn 이벤트의 인자 타입. 한 번의 캡처 콜백 분량의 인터리브된 읽기 전용 마이크 입력을 보유. 처리를 빠르게 끝내고 반환할 것. 여기서 엔진 API 를 호출하지 말 것",
@@ -19432,7 +18863,6 @@ const TrussCAPI = {
             "desc": "Microphone capture (miniaudio). Opens an input device and exposes the latest samples through a ring buffer. Use the global getMicInput() to access the shared instance, then start() it; getMicAnalysisBuffer() is a convenience wrapper over getBuffer().",
             "keywords": [
                 "microphone",
-                "mic",
                 "audio input",
                 "capture",
                 "recording input"
@@ -19504,8 +18934,6 @@ const TrussCAPI = {
             "name": "FileDialogResult",
             "desc": "Result of a load/save file dialog",
             "keywords": [
-                "dialog",
-                "file",
                 "open",
                 "save",
                 "picker",
@@ -19678,7 +19106,6 @@ const TrussCAPI = {
             "name": "Xml",
             "desc": "XML document wrapper around pugixml. Loads, saves and queries XML; node-level access is via XmlNode returned from root() and child().",
             "keywords": [
-                "xml",
                 "document",
                 "parse",
                 "pugixml",
@@ -20013,8 +19440,6 @@ const TrussCAPI = {
             "name": "ShaderVertex",
             "desc": "Standard vertex format for shader drawing (position, normal, texcoord, color).",
             "keywords": [
-                "vertex",
-                "shader",
                 "mesh",
                 "format"
             ],
@@ -20120,7 +19545,6 @@ const TrussCAPI = {
             "name": "FpsSettings",
             "desc": "FPS configuration returned by getFpsSettings(). Rates use VSYNC (-1) and EVENT_DRIVEN (0) sentinels, or a fixed fps",
             "keywords": [
-                "fps",
                 "framerate",
                 "vsync",
                 "timing",
@@ -20168,7 +19592,6 @@ const TrussCAPI = {
             "name": "WindowSettings",
             "desc": "Window configuration passed to the app at startup (size, title, DPI, MSAA, fullscreen, decoration, VSync). Setters chain",
             "keywords": [
-                "window",
                 "config",
                 "size",
                 "title",
@@ -20335,10 +19758,7 @@ const TrussCAPI = {
             "desc": "Path/Polyline for lines and curves",
             "keywords": [
                 "polyline",
-                "shape",
                 "contour",
-                "outline",
-                "vector path",
                 "of path"
             ],
             "desc_ja": "線と曲線のパス/ポリライン",
@@ -20959,7 +20379,6 @@ const TrussCAPI = {
             "name": "IesProfile",
             "desc": "IESNA LM-63 photometric profile for angular light intensity",
             "keywords": [
-                "ies",
                 "photometric",
                 "light distribution",
                 "luminaire",
@@ -21068,12 +20487,9 @@ const TrussCAPI = {
             "name": "Light",
             "desc": "Light source for 3D PBR rendering (directional, point, or spot)",
             "keywords": [
-                "lamp",
                 "lighting",
                 "directional",
-                "point",
-                "spot",
-                "illumination"
+                "point"
             ],
             "desc_ja": "3D PBR用light（directional, point, spot）",
             "desc_ko": "3D PBR 렌더링용 광원 (평행광, 점광, 스포트라이트)",
@@ -22122,7 +21538,6 @@ const TrussCAPI = {
             "name": "HasTexture",
             "desc": "Base class for objects that own a texture (e.g. Image, Fbo, VideoPlayer); exposes getTexture().",
             "keywords": [
-                "texture",
                 "base",
                 "interface"
             ],
@@ -22479,10 +21894,7 @@ const TrussCAPI = {
             "desc": "3D mesh with vertices, colors, normals, indices",
             "keywords": [
                 "geometry",
-                "model",
                 "vertices",
-                "triangles",
-                "vbo",
                 "of mesh"
             ],
             "desc_ja": "頂点・色・法線・インデックスを持つ3Dメッシュ",
@@ -23024,10 +22436,7 @@ const TrussCAPI = {
             "keywords": [
                 "ibl",
                 "skybox",
-                "cubemap",
-                "ambient",
-                "hdr",
-                "reflection"
+                "hdr"
             ],
             "desc_ja": "PBR ambient用IBL environment map（irradiance + prefilter + BRDF LUT）",
             "desc_ko": "PBR 앰비언트용 IBL 환경맵 (이래디언스 + 프리필터 + BRDF LUT)",
@@ -23129,7 +22538,6 @@ const TrussCAPI = {
             "name": "StrokeMesh",
             "desc": "Variable-width polyline stroke geometry with caps, joins and miter limit; build it from points or a Path, then update() and draw()",
             "keywords": [
-                "stroke",
                 "polyline",
                 "line",
                 "thick",
@@ -23289,9 +22697,6 @@ const TrussCAPI = {
             "keywords": [
                 "typeface",
                 "ttf",
-                "truetype",
-                "text",
-                "glyph",
                 "of true type font"
             ],
             "desc_ja": "テキストレンダリング用TrueTypeフォント",
@@ -24034,9 +23439,7 @@ const TrussCAPI = {
             "name": "FullscreenShader",
             "desc": "Shader specialization for fullscreen post-processing effects (position + texcoord quad). Set uniforms via setParams, then call draw to render a fullscreen quad.",
             "keywords": [
-                "shader",
                 "postprocess",
-                "fullscreen",
                 "effect",
                 "quad",
                 "filter"
@@ -24075,10 +23478,7 @@ const TrussCAPI = {
             "desc": "Information about an available camera device, returned by VideoGrabber::listDevices()",
             "keywords": [
                 "camera",
-                "device",
-                "webcam",
-                "video",
-                "info"
+                "webcam"
             ],
             "desc_ja": "利用可能なカメラデバイスの情報。VideoGrabber::listDevices() が返す",
             "desc_ko": "사용 가능한 카메라 디바이스 정보. VideoGrabber::listDevices()가 반환",
@@ -24142,8 +23542,6 @@ const TrussCAPI = {
                 "webcam",
                 "camera",
                 "capture",
-                "video",
-                "grabber",
                 "live"
             ],
             "desc_ja": "Webカメラのキャプチャソース。setup() を一度呼び、毎フレーム update()。getTexture() (HasTexture 経由) でライブフレームを取得。ムーブのみ。macOS ではカメラ権限を自動でリクエスト",
@@ -24362,9 +23760,7 @@ const TrussCAPI = {
             "name": "VideoPlayerBase",
             "desc": "Abstract base class for video playback. Use VideoPlayer for the concrete implementation.",
             "keywords": [
-                "video",
                 "playback",
-                "base",
                 "abstract"
             ],
             "desc_ja": "動画再生の抽象基底クラス。実体は VideoPlayer を使う。",
@@ -24736,7 +24132,6 @@ const TrussCAPI = {
             "desc": "Plays a video file: load/play/stop, per-frame update, and a texture you can draw each frame",
             "keywords": [
                 "movie",
-                "video",
                 "playback",
                 "ofvideoplayer",
                 "film"
@@ -25027,10 +24422,7 @@ const TrussCAPI = {
             "name": "VideoRecordSettings",
             "desc": "Encoder settings passed to VideoWriter::open(), ScreenRecorder::start(), and startRecording()",
             "keywords": [
-                "video",
-                "record",
                 "encoder",
-                "settings",
                 "codec",
                 "export"
             ],
@@ -25754,11 +25146,9 @@ const TrussCAPI = {
             "name": "UdpSocket",
             "desc": "UDP socket (send/receive datagrams, broadcast, multicast)",
             "keywords": [
-                "udp",
                 "datagram",
                 "broadcast",
-                "multicast",
-                "socket"
+                "multicast"
             ],
             "desc_ja": "UDPソケット（データグラム送受信・ブロードキャスト・マルチキャスト）",
             "desc_ko": "UDP 소켓 (데이터그램 송수신, 브로드캐스트, 멀티캐스트)",
@@ -26160,7 +25550,6 @@ const TrussCAPI = {
             "name": "TcpClient",
             "desc": "TCP client connection (connect, send/receive a stream)",
             "keywords": [
-                "tcp",
                 "socket client",
                 "stream",
                 "connection",
@@ -26689,7 +26078,6 @@ const TrussCAPI = {
                 "nic",
                 "adapter",
                 "ip address",
-                "interface",
                 "network card"
             ],
             "desc_ja": "ネットワークインターフェースの1アドレスエントリ（listNetworkInterfacesが返す）",
@@ -26879,10 +26267,7 @@ const TrussCAPI = {
             "keywords": [
                 "com port",
                 "uart",
-                "usb serial",
-                "rs232",
-                "arduino",
-                "tty"
+                "arduino"
             ],
             "desc_ja": "クロスプラットフォームのシリアルポート（USB/COM）：接続・バイト読み書き",
             "desc_ko": "크로스플랫폼 시리얼 포트 (USB/COM): 연결, 바이트 읽기/쓰기",
@@ -27066,12 +26451,7 @@ const TrussCAPI = {
             "keywords": [
                 "chiptune",
                 "8bit",
-                "synth",
-                "note",
-                "retro",
-                "tone",
-                "adsr",
-                "envelope"
+                "synth"
             ],
             "desc_ja": "8bit スタイルの 1 音。public フィールド (wave, hz, volume, duration, ADSR の attack/decay/sustain/release) の素の集約体。指定初期化子 ({ .wave = Wave::Square, .hz = 440, .duration = 0.2f }) かコンストラクタで直接設定し、build() で Sound 化 (または ChipSoundBundle に add())",
             "desc_ko": "8비트 스타일 한 음. public 필드(wave, hz, volume, duration, ADSR의 attack/decay/sustain/release)의 단순 집합체. 지정 초기화자({ .wave = Wave::Square, .hz = 440, .duration = 0.2f })나 생성자로 직접 설정한 뒤 build()로 Sound화(또는 ChipSoundBundle에 add())",
@@ -27185,8 +26565,7 @@ const TrussCAPI = {
                 "8bit",
                 "sequence",
                 "timeline",
-                "notes",
-                "chip"
+                "notes"
             ],
             "desc_ja": "チップチューンノート (ChipSoundNote + 開始時刻) のタイムラインで、1 つのミックス済み Sound にビルドする。時刻ごとにノートを追加し、build() を呼んで ADSR とクリッピングを適用したミックスをレンダリングする",
             "desc_ko": "칩튠 노트 (ChipSoundNote + 시작 시각) 의 타임라인으로, 하나의 믹스된 Sound 로 빌드한다. 시각마다 노트를 추가한 뒤 build() 를 호출해 ADSR 과 클리핑을 적용한 믹스를 렌더링한다",
@@ -27257,7 +26636,6 @@ const TrussCAPI = {
             "name": "Tween",
             "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
             "keywords": [
-                "tween",
                 "animate",
                 "easing",
                 "interpolate",
@@ -27485,10 +26863,7 @@ const TrussCAPI = {
             "keywords": [
                 "component",
                 "behavior",
-                "module",
-                "addmod",
-                "attach",
-                "plugin"
+                "addmod"
             ],
             "desc_ja": "Node にアタッチできる振る舞いの基底クラス。サブクラス化してライフサイクルと入力フックをオーバーライドし、node->addMod<T>() でアタッチする。ライフサイクル: アタッチ時に setup()、以降毎フレーム earlyUpdate() -> Node::update() -> update() -> draw()、削除時に onDestroy()。isExclusive() をオーバーライドすると Node ごとに1インスタンスのみ許可、canAttachTo() でアタッチ先を制限できる",
             "desc_ko": "Node에 부착 가능한 동작 기반 클래스. 서브클래싱하여 라이프사이클과 입력 훅을 오버라이드하고 node->addMod<T>()로 부착. 라이프사이클: 부착 시 setup(), 이후 매 프레임 earlyUpdate() -> Node::update() -> update() -> draw(), 제거 시 onDestroy(). isExclusive()를 오버라이드하면 Node당 한 인스턴스만 허용, canAttachTo()로 부착 대상을 제한",
@@ -28529,7 +27904,6 @@ const TrussCAPI = {
             "name": "RectNodeButton",
             "desc": "Simple clickable button node (a RectNode subclass). Set normalColor/hoverColor/pressColor and label; it draws a filled rect that changes color on hover/press and a centered label. Events are enabled on construction. Listen on its inherited mousePressed/mouseReleased events for clicks.",
             "keywords": [
-                "button",
                 "click",
                 "ui",
                 "widget",
@@ -28600,7 +27974,6 @@ const TrussCAPI = {
             "name": "LayoutMod",
             "desc": "Layout modifier (Mod) that auto-arranges child RectNodes in a vertical or horizontal stack with spacing, padding and axis sizing",
             "keywords": [
-                "layout",
                 "arrange",
                 "flex",
                 "stack",
@@ -28785,7 +28158,6 @@ const TrussCAPI = {
             "name": "ScrollContainer",
             "desc": "Scrollable RectNode that clips and scrolls a single content node when it overflows the container bounds",
             "keywords": [
-                "scroll",
                 "scrollable",
                 "viewport",
                 "panel",
@@ -28966,7 +28338,6 @@ const TrussCAPI = {
             "name": "ScrollBar",
             "desc": "Visual scroll indicator RectNode that syncs with a ScrollContainer and supports drag scrolling",
             "keywords": [
-                "scroll",
                 "indicator",
                 "slider",
                 "thumb",
@@ -29064,7 +28435,6 @@ const TrussCAPI = {
             "desc": "Animation modifier (Mod) that tweens a Node's position, scale and rotation with easing; exposes a complete Event",
             "keywords": [
                 "animate",
-                "tween",
                 "motion",
                 "transition",
                 "easing"
@@ -29363,9 +28733,7 @@ const TrussCAPI = {
             "keywords": [
                 "event",
                 "priority",
-                "listener",
-                "app",
-                "default"
+                "listener"
             ],
             "desc_ja": "アプリケーションの基底クラス。サブクラス化して setup/update/draw や入力コールバック（mousePressed, keyPressed など）をオーバーライドして TrussC アプリを作る",
             "desc_ko": "기반 애플리케이션 클래스: 서브클래싱하여 setup/update/draw와 입력 콜백(mousePressed, keyPressed 등)을 오버라이드하여 TrussC 앱을 만듦",
@@ -29532,7 +28900,6 @@ const TrussCAPI = {
             "name": "HeadlessSettings",
             "desc": "Settings for runHeadlessApp() (no window / graphics). Currently just the target update rate",
             "keywords": [
-                "headless",
                 "nowindow",
                 "offscreen",
                 "server",
@@ -29570,13 +28937,9 @@ const TrussCAPI = {
             "name": "Direction",
             "desc": "Alignment / direction: Left, Center, Right, Top, Bottom, Baseline.",
             "keywords": [
-                "direction",
                 "horizontal",
                 "vertical",
-                "axis",
-                "orientation",
-                "row",
-                "column"
+                "orientation"
             ],
             "values": [
                 {
@@ -29635,12 +28998,8 @@ const TrussCAPI = {
             "desc": "Event delivery timing: Inline fires synchronously on the calling thread; Main queues the event to the main thread.",
             "keywords": [
                 "dispatch",
-                "event",
                 "thread",
-                "queue",
-                "delivery",
-                "async",
-                "main thread"
+                "async"
             ],
             "values": [
                 {
@@ -29669,13 +29028,11 @@ const TrussCAPI = {
             "name": "LogLevel",
             "desc": "Log severity, from Verbose (most detailed) to Fatal; Silent disables logging.",
             "keywords": [
-                "log",
                 "verbose",
                 "warning",
                 "error",
                 "severity",
-                "debug",
-                "level"
+                "debug"
             ],
             "values": [
                 {
@@ -29735,7 +29092,6 @@ const TrussCAPI = {
             "name": "WindowType",
             "desc": "FFT window function: Rect, Hanning, Hamming, Blackman.",
             "keywords": [
-                "window",
                 "fullscreen",
                 "borderless",
                 "decorated",
@@ -29785,13 +29141,9 @@ const TrussCAPI = {
             "name": "ThermalState",
             "desc": "Device thermal state, from Nominal to Critical.",
             "keywords": [
-                "thermal",
                 "temperature",
-                "heat",
                 "overheating",
-                "nominal",
-                "throttle",
-                "cpu"
+                "throttle"
             ],
             "values": [
                 {
@@ -29834,8 +29186,6 @@ const TrussCAPI = {
             "name": "MouseButton",
             "desc": "Mouse button: Left, Right, Middle, or None.",
             "keywords": [
-                "mouse",
-                "button",
                 "click",
                 "left",
                 "right",
@@ -29882,13 +29232,9 @@ const TrussCAPI = {
             "name": "MixMode",
             "desc": "Sound channel mixing: Auto (match the output) or DownmixMono.",
             "keywords": [
-                "mix",
                 "channel",
-                "routing",
                 "downmix",
-                "mono",
-                "audio",
-                "stereo"
+                "mono"
             ],
             "values": [
                 {
@@ -29917,7 +29263,6 @@ const TrussCAPI = {
             "name": "Beep",
             "desc": "Built-in system beep sounds (ping, success, error, …) for beep().",
             "keywords": [
-                "beep",
                 "sound",
                 "alert",
                 "tone",
@@ -30013,13 +29358,9 @@ const TrussCAPI = {
             "name": "Codec",
             "desc": "Compression codec: None (raw) or LZ4.",
             "keywords": [
-                "codec",
                 "compression",
                 "lz4",
-                "compress",
-                "encoding",
-                "none",
-                "algorithm"
+                "encoding"
             ],
             "values": [
                 {
@@ -30049,13 +29390,9 @@ const TrussCAPI = {
             "name": "BlendMode",
             "desc": "Color blend mode: Alpha, Add, Multiply, Screen, Subtract, Disabled.",
             "keywords": [
-                "blend",
-                "additive",
                 "alpha",
-                "transparency",
-                "compositing",
-                "multiply",
-                "screen"
+                "additive",
+                "multiply"
             ],
             "values": [
                 {
@@ -30112,12 +29449,8 @@ const TrussCAPI = {
             "name": "TextureFilter",
             "desc": "Texture sampling filter: Nearest or Linear.",
             "keywords": [
-                "filter",
                 "nearest",
                 "linear",
-                "bilinear",
-                "smoothing",
-                "interpolation",
                 "sampling"
             ],
             "values": [
@@ -30147,13 +29480,9 @@ const TrussCAPI = {
             "name": "TextureWrap",
             "desc": "Texture wrap mode: Repeat, ClampToEdge, MirroredRepeat.",
             "keywords": [
-                "wrap",
                 "repeat",
                 "clamp",
-                "tile",
-                "mirror",
-                "edge",
-                "uv"
+                "mirror"
             ],
             "values": [
                 {
@@ -30189,13 +29518,9 @@ const TrussCAPI = {
             "name": "PrimitiveType",
             "desc": "Geometry primitive type: Points, Lines, LineStrip, Triangles, TriangleStrip, Quads.",
             "keywords": [
-                "primitive",
                 "triangle",
                 "line",
-                "point",
-                "topology",
-                "geometry",
-                "mesh"
+                "topology"
             ],
             "values": [
                 {
@@ -30252,8 +29577,6 @@ const TrussCAPI = {
             "name": "StrokeCap",
             "desc": "Line cap style for strokes: Butt, Round, Square.",
             "keywords": [
-                "cap",
-                "stroke",
                 "line end",
                 "butt",
                 "round",
@@ -30296,8 +29619,6 @@ const TrussCAPI = {
             "name": "StrokeJoin",
             "desc": "Line join style for strokes: Miter, Round, Bevel.",
             "keywords": [
-                "join",
-                "stroke",
                 "corner",
                 "miter",
                 "round",
@@ -30342,11 +29663,7 @@ const TrussCAPI = {
             "keywords": [
                 "pointer",
                 "mouse",
-                "arrow",
-                "hand",
-                "crosshair",
-                "shape",
-                "icon"
+                "arrow"
             ],
             "values": [
                 {
@@ -30552,13 +29869,9 @@ const TrussCAPI = {
             "name": "Orientation",
             "desc": "Screen orientation mask passed to setOrientation (iOS/Android); values are bit flags and can be combined with |",
             "keywords": [
-                "orientation",
                 "portrait",
                 "landscape",
-                "rotation",
-                "screen",
-                "mobile",
-                "tilt"
+                "screen"
             ],
             "values": [
                 {
@@ -30641,13 +29954,9 @@ const TrussCAPI = {
             "name": "LightType",
             "desc": "Light type: Directional, Point, or Spot.",
             "keywords": [
-                "lighting",
                 "directional",
                 "point",
-                "spot",
-                "lamp",
-                "illumination",
-                "shading"
+                "spot"
             ],
             "values": [
                 {
@@ -30683,8 +29992,6 @@ const TrussCAPI = {
             "name": "PixelFormat",
             "desc": "CPU pixel data format: U8 (8-bit) or F32 (float).",
             "keywords": [
-                "pixel",
-                "format",
                 "rgba",
                 "channel",
                 "bit depth",
@@ -30718,13 +30025,9 @@ const TrussCAPI = {
             "name": "TextureFormat",
             "desc": "GPU texture format (RGBA8, RGBA16F, R8, …) — channel layout and bit depth.",
             "keywords": [
-                "format",
                 "pixel",
                 "rgba",
-                "bgra",
-                "channel",
-                "bit depth",
-                "encoding"
+                "bit depth"
             ],
             "values": [
                 {
@@ -30820,13 +30123,9 @@ const TrussCAPI = {
             "name": "TextureUsage",
             "desc": "Texture update pattern: Immutable, Dynamic, Stream, or RenderTarget.",
             "keywords": [
-                "usage",
-                "gpu",
                 "render target",
                 "immutable",
-                "dynamic",
-                "stream",
-                "buffer"
+                "dynamic"
             ],
             "values": [
                 {
@@ -30869,13 +30168,9 @@ const TrussCAPI = {
             "name": "ImageType",
             "desc": "Image type: Color or Grayscale.",
             "keywords": [
-                "image",
-                "format",
                 "grayscale",
-                "rgb",
-                "rgba",
-                "channels",
-                "color"
+                "color",
+                "format"
             ],
             "values": [
                 {
@@ -30904,13 +30199,9 @@ const TrussCAPI = {
             "name": "PrimitiveMode",
             "desc": "Draw primitive mode: Triangles, TriangleStrip, TriangleFan, Lines, LineStrip, LineLoop, Points.",
             "keywords": [
-                "primitive",
                 "triangles",
                 "lines",
-                "points",
-                "strip",
-                "topology",
-                "draw mode"
+                "topology"
             ],
             "values": [
                 {
@@ -30974,13 +30265,9 @@ const TrussCAPI = {
             "name": "WritingMode",
             "desc": "Text writing mode: Horizontal or VerticalRL (vertical, right-to-left).",
             "keywords": [
-                "text",
                 "vertical",
-                "horizontal",
                 "tategaki",
-                "writing",
-                "direction",
-                "layout"
+                "horizontal"
             ],
             "values": [
                 {
@@ -31009,12 +30296,8 @@ const TrussCAPI = {
             "name": "TcyMode",
             "desc": "Tate-chu-yoko: how Latin / digit runs are laid out within vertical text",
             "keywords": [
-                "tcy",
                 "tate chu yoko",
                 "vertical text",
-                "digits",
-                "latin",
-                "rotation",
                 "japanese"
             ],
             "values": [
@@ -31051,13 +30334,9 @@ const TrussCAPI = {
             "name": "KinsokuLevel",
             "desc": "Line-breaking (kinsoku) strictness for vertical / Japanese text",
             "keywords": [
-                "kinsoku",
                 "line break",
-                "wrapping",
                 "japanese",
-                "strictness",
-                "punctuation",
-                "vertical text"
+                "wrapping"
             ],
             "values": [
                 {
@@ -31093,8 +30372,6 @@ const TrussCAPI = {
             "name": "VideoCodec",
             "desc": "Video codec: H264, HEVC, ProRes422, ProRes4444.",
             "keywords": [
-                "video",
-                "codec",
                 "encoding",
                 "h264",
                 "compression",
@@ -31145,11 +30422,7 @@ const TrussCAPI = {
             "keywords": [
                 "easing",
                 "tween",
-                "curve",
-                "interpolation",
-                "animation",
-                "bounce",
-                "elastic"
+                "bounce"
             ],
             "values": [
                 {
@@ -31246,10 +30519,6 @@ const TrussCAPI = {
             "desc": "Easing direction: In, Out, or InOut.",
             "keywords": [
                 "easing",
-                "in",
-                "out",
-                "inout",
-                "direction",
                 "tween",
                 "animation"
             ],
@@ -31287,13 +30556,9 @@ const TrussCAPI = {
             "name": "LayoutDirection",
             "desc": "Layout axis direction: Vertical or Horizontal.",
             "keywords": [
-                "layout",
-                "flow",
                 "horizontal",
                 "vertical",
-                "row",
-                "column",
-                "stack"
+                "flow"
             ],
             "values": [
                 {
@@ -31322,13 +30587,9 @@ const TrussCAPI = {
             "name": "AxisMode",
             "desc": "Layout axis sizing: None (fixed), Fill (expand to the parent), Content (fit children).",
             "keywords": [
-                "axis",
-                "x",
-                "y",
-                "z",
-                "constraint",
-                "lock",
-                "free"
+                "layout",
+                "sizing",
+                "fill"
             ],
             "values": [
                 {
