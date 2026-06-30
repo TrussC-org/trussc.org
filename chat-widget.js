@@ -89,6 +89,12 @@
     .cw-inp button:disabled { opacity: 0.5; cursor: default; }
     .cw-blink::after { content: '▍'; color: var(--color-text-muted,#8b8b93); animation: cw-blink 1s step-end infinite; }
     @keyframes cw-blink { 50% { opacity: 0; } }
+
+    /* Mobile: full-screen overlay instead of a floating panel (no overflow, room for the keyboard). */
+    @media (max-width: 480px) {
+      .cw-panel { top: 0; right: 0; bottom: 0; left: 0; width: auto; height: auto; max-width: none; max-height: none; border: none; border-radius: 0; }
+      .cw-bubble { right: 16px; bottom: 16px; }
+    }
   `;
   var style = document.createElement('style');
   style.textContent = css;
