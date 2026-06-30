@@ -135,21 +135,21 @@
   })();
   var I18N = {
     en: {
-      greeting: "Hi! I'm your TrussC guide — ask me anything in the docs.",
+      greeting: 'Got a question?',
       placeholder: 'e.g. "How do I draw a curve?" "Any shader examples?"',
       more: 'See also: ',
       sources: 'sources',
       privacy: 'Chats are logged anonymously for usage statistics.',
     },
     ja: {
-      greeting: 'こんにちは！TrussC の案内役だよ。ドキュメントのことなら気軽に聞いてね。',
+      greeting: '質問ある？',
       placeholder: '例:「曲線の書き方は？」「シェーダのサンプルある？」',
       more: '詳しくは: ',
       sources: '出典',
       privacy: '使用統計のため、チャットは匿名で記録されます。',
     },
     ko: {
-      greeting: '안녕하세요! TrussC 안내 도우미예요. 문서에 관한 거라면 편하게 물어보세요.',
+      greeting: '질문 있어?',
       placeholder: '예: "곡선은 어떻게 그리나요?" "셰이더 예제 있어요?"',
       more: '자세히: ',
       sources: '출처',
