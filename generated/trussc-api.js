@@ -2460,6 +2460,105 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "setPointSize",
+                    "params": "px",
+                    "params_typed": "float px",
+                    "return_type": "void",
+                    "desc": "Set the point size in logical pixels (Square/Round point styles; Pixel is always 1px).",
+                    "keywords": [
+                        "point cloud",
+                        "points",
+                        "splat size",
+                        "gl point size"
+                    ],
+                    "desc_ja": "点のサイズを論理ピクセルで設定（Square/Round スタイル時。Pixel は常に 1px）。",
+                    "desc_ko": "포인트 크기를 논리 픽셀로 설정한다(Square/Round 스타일. Pixel은 항상 1px).",
+                    "related": [
+                        "getPointSize",
+                        "setPointStyle",
+                        "PointStyle",
+                        "Mesh::drawGpuPoints",
+                        "setStrokeWeight"
+                    ],
+                    "details": "Draw state for [`PrimitiveMode`](#PrimitiveMode)`::Points` meshes, the point-cloud\nanalogue of [`setStrokeWeight`](#setStrokeWeight). The unit is **logical pixels**\n(like `strokeWeight`), so it stays the same apparent size across DPIs. Affects the\n`Square` and `Round` [`PointStyle`](#PointStyle) splats; `Pixel` is a true 1px\npoint and ignores it. Saved/restored by [`pushStyle`](#pushStyle) /\n[`popStyle`](#popStyle).",
+                    "details_ja": "[`PrimitiveMode`](#PrimitiveMode)`::Points` メッシュの描画ステートで、点群版の\n[`setStrokeWeight`](#setStrokeWeight)。単位は **論理ピクセル**（`strokeWeight` と\n同じ）なので、DPI が変わっても見た目のサイズは一定。`Square` と `Round` の\n[`PointStyle`](#PointStyle) スプラットに効き、`Pixel` は本物の 1px 点なので無視\nされる。[`pushStyle`](#pushStyle) / [`popStyle`](#popStyle) で保存・復元される。",
+                    "details_ko": "[`PrimitiveMode`](#PrimitiveMode)`::Points` 메시의 그리기 상태로, 포인트 클라우드\n버전의 [`setStrokeWeight`](#setStrokeWeight)다. 단위는 **논리 픽셀**(`strokeWeight`과\n동일)이라 DPI가 달라져도 보이는 크기가 일정하다. `Square`와 `Round`\n[`PointStyle`](#PointStyle) 스플랫에 적용되며, `Pixel`은 진짜 1px 포인트라 무시한다.\n[`pushStyle`](#pushStyle) / [`popStyle`](#popStyle)로 저장·복원된다.",
+                    "examples": [
+                        {
+                            "name": "pointCloudExample",
+                            "group": "3d"
+                        }
+                    ]
+                },
+                {
+                    "name": "getPointSize",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get the current point size (logical px).",
+                    "keywords": [
+                        "point cloud",
+                        "points",
+                        "splat size"
+                    ],
+                    "desc_ja": "現在の点サイズ（論理 px）を取得。",
+                    "desc_ko": "현재 포인트 크기(논리 px)를 얻는다.",
+                    "related": [
+                        "setPointSize",
+                        "getPointStyle"
+                    ]
+                },
+                {
+                    "name": "setPointStyle",
+                    "params": "s",
+                    "params_typed": "PointStyle s",
+                    "return_type": "void",
+                    "desc": "Set the point shape: PointStyle::Square, Round or Pixel.",
+                    "keywords": [
+                        "point cloud",
+                        "points",
+                        "shape",
+                        "square",
+                        "round",
+                        "pixel"
+                    ],
+                    "desc_ja": "点の形を設定：PointStyle::Square / Round / Pixel。",
+                    "desc_ko": "포인트 모양을 설정한다: PointStyle::Square / Round / Pixel.",
+                    "related": [
+                        "getPointStyle",
+                        "setPointSize",
+                        "PointStyle",
+                        "Mesh::drawGpuPoints"
+                    ],
+                    "details": "Draw state choosing how a [`PrimitiveMode`](#PrimitiveMode)`::Points` mesh is\ndrawn — see [`PointStyle`](#PointStyle) for the shapes (all GPU-resident).\n`Square` / `Round` are billboard splats sized by\n[`setPointSize`](#setPointSize); `Pixel` is a 1px point primitive. Saved/restored\nby [`pushStyle`](#pushStyle) / [`popStyle`](#popStyle).",
+                    "details_ja": "[`PrimitiveMode`](#PrimitiveMode)`::Points` メッシュの描き方を選ぶ描画ステート。\n形は [`PointStyle`](#PointStyle) を参照（すべて GPU 常駐）。`Square` / `Round` は\n[`setPointSize`](#setPointSize) でサイズ指定するビルボードスプラット、`Pixel` は\n1px 点プリミティブ。[`pushStyle`](#pushStyle) / [`popStyle`](#popStyle) で保存・\n復元される。",
+                    "details_ko": "[`PrimitiveMode`](#PrimitiveMode)`::Points` 메시를 어떻게 그릴지 고르는 그리기\n상태다. 모양은 [`PointStyle`](#PointStyle) 참고(모두 GPU 상주). `Square` / `Round`는\n[`setPointSize`](#setPointSize)로 크기를 정하는 빌보드 스플랫이고, `Pixel`은 1px\n포인트 프리미티브다. [`pushStyle`](#pushStyle) / [`popStyle`](#popStyle)로\n저장·복원된다.",
+                    "examples": [
+                        {
+                            "name": "pointCloudExample",
+                            "group": "3d"
+                        }
+                    ]
+                },
+                {
+                    "name": "getPointStyle",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "PointStyle",
+                    "desc": "Get the current point shape (PointStyle).",
+                    "keywords": [
+                        "point cloud",
+                        "points",
+                        "shape"
+                    ],
+                    "desc_ja": "現在の点の形（PointStyle）を取得。",
+                    "desc_ko": "현재 포인트 모양(PointStyle)을 얻는다.",
+                    "related": [
+                        "setPointStyle",
+                        "getPointSize"
+                    ]
+                },
+                {
                     "name": "setScissor",
                     "params": "x, y, w, h",
                     "params_typed": "float x, float y, float w, float h",
@@ -4683,6 +4782,10 @@ const TrussCAPI = {
                         {
                             "name": "bitmapStringExtendedExample",
                             "group": "font"
+                        },
+                        {
+                            "name": "pointCloudExample",
+                            "group": "3d"
                         },
                         {
                             "name": "fontPathExample",
@@ -7171,6 +7274,10 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "pointCloudExample",
+                            "group": "3d"
                         }
                     ]
                 },
@@ -12342,7 +12449,13 @@ const TrussCAPI = {
                     "desc": "Return the display string for one enum value (TC_ENUM_LABELS override, else reflected name).",
                     "keywords": [],
                     "desc_ja": "ある enum 値の表示文字列を返す（TC_ENUM_LABELS があれば優先、なければリフレクション名）。",
-                    "desc_ko": "한 enum 값의 표시 문자열을 반환한다(TC_ENUM_LABELS 우선, 없으면 리플렉션 이름)."
+                    "desc_ko": "한 enum 값의 표시 문자열을 반환한다(TC_ENUM_LABELS 우선, 없으면 리플렉션 이름).",
+                    "examples": [
+                        {
+                            "name": "pointCloudExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "atanh",
@@ -22375,7 +22488,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Upload mesh data to GPU buffers now"
+                    "desc": "Upload the mesh's vertex/index data to its GPU buffers now (for the PBR / custom-render path)."
                 },
                 {
                     "name": "drawGpuPbr",
@@ -22383,7 +22496,23 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Draw the mesh through the GPU PBR pipeline (uploads to GPU buffers as needed, then renders using active lights, material and environment)"
+                    "desc": "Draw the mesh through the GPU PBR pipeline (retained GPU buffer + active lights, material and environment)."
+                },
+                {
+                    "name": "drawGpuPoints",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Draw a Points-mode mesh as a GPU-resident point cloud (Square/Round splats or 1px Pixel points)."
+                },
+                {
+                    "name": "uploadPointsToGpu",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Upload the point cloud (positions + colors) to its GPU buffer now (for the Points / custom-render path)."
                 },
                 {
                     "name": "getGpuVertexBuffer",
@@ -22391,7 +22520,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the underlying sokol-gfx vertex buffer handle (advanced interop)."
+                    "desc": "The sokol-gfx vertex buffer handle backing the mesh (advanced interop)."
                 },
                 {
                     "name": "getGpuIndexBuffer",
@@ -22399,7 +22528,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Return the underlying sokol-gfx index buffer handle (advanced interop)."
+                    "desc": "The sokol-gfx index buffer handle backing the mesh, or an empty handle if non-indexed (advanced interop)."
                 },
                 {
                     "name": "getGpuVertexCount",
@@ -22407,7 +22536,7 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Number of vertices currently uploaded to the GPU"
+                    "desc": "Number of vertices currently uploaded to the GPU vertex buffer. Pairs with getGpuVertexBuffer (e.g. as the draw count for a custom pipeline)."
                 },
                 {
                     "name": "getGpuIndexCount",
@@ -22415,7 +22544,23 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Number of indices currently uploaded to the GPU"
+                    "desc": "Number of indices currently uploaded to the GPU index buffer (0 if the mesh is non-indexed). Pairs with getGpuIndexBuffer for custom rendering."
+                },
+                {
+                    "name": "getGpuPointBuffer",
+                    "return": "sg_buffer",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "The sokol-gfx buffer handle holding the uploaded point data, position + color per point (advanced interop)."
+                },
+                {
+                    "name": "getGpuPointCount",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Number of points currently uploaded to the GPU point buffer (PrimitiveMode::Points). Pairs with getGpuPointBuffer for custom rendering."
                 }
             ],
             "operators": [
@@ -24705,11 +24850,11 @@ const TrussCAPI = {
                     "group": "3d"
                 },
                 {
-                    "name": "fboMipmapExample",
+                    "name": "pointCloudExample",
                     "group": "3d"
                 },
                 {
-                    "name": "coordinateConversionExample",
+                    "name": "fboMipmapExample",
                     "group": "3d"
                 }
             ],
@@ -29655,6 +29800,48 @@ const TrussCAPI = {
                 "getStrokeJoin",
                 "StrokeCap",
                 "StrokeMesh"
+            ]
+        },
+        {
+            "name": "PointStyle",
+            "desc": "Shape used to draw points: Square, Round, Pixel.",
+            "keywords": [
+                "point cloud",
+                "points",
+                "splat",
+                "shape",
+                "pixel"
+            ],
+            "values": [
+                {
+                    "name": "Square",
+                    "value": 0,
+                    "desc": "Billboarded quad splat (lightest, default).",
+                    "desc_ja": "ビルボード四角スプラット（最軽量・デフォルト）。",
+                    "desc_ko": "빌보드 사각 스플랫(가장 가벼움, 기본값)."
+                },
+                {
+                    "name": "Round",
+                    "value": 1,
+                    "desc": "Anti-aliased disc splat (alpha-to-coverage).",
+                    "desc_ja": "アンチエイリアスされた円スプラット（alpha-to-coverage）。",
+                    "desc_ko": "안티앨리어싱된 원 스플랫(alpha-to-coverage)."
+                },
+                {
+                    "name": "Pixel",
+                    "value": 2,
+                    "desc": "True 1px point primitive (ignores point size).",
+                    "desc_ja": "本物の 1px 点プリミティブ（サイズを無視）。",
+                    "desc_ko": "진짜 1px 포인트 프리미티브(크기를 무시)."
+                }
+            ],
+            "desc_ja": "点の描画形状：Square, Round, Pixel。",
+            "desc_ko": "포인트를 그리는 모양: Square, Round, Pixel.",
+            "related": [
+                "setPointStyle",
+                "getPointStyle",
+                "setPointSize",
+                "Mesh::drawGpuPoints"
             ]
         },
         {
