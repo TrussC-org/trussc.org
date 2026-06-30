@@ -128,14 +128,14 @@
     const DEPR_ATTR = ' style="text-decoration:line-through;opacity:0.6;" title="Deprecated"';
 
     // ---------------------------------------------------------------------
-    // Fuzzy matching (no dependencies).
+    // Fuzzy matching + relevance ranking (no dependencies).
     //
-    // A query token matches a haystack string if any of:
-    //   - case-insensitive substring
-    //   - subsequence (chars appear in order, e.g. "drwrct" in "drawrect")
-    //   - Levenshtein distance <= 2 against any whitespace word of length >= 4
-    //     (so "drawRct" still hits "drawRect")
-    // A multi-token query matches only if EVERY token matches the item.
+    // A query token can relate to a string by (strongest first): exact word,
+    // substring, dense subsequence ("drwrct" in "drawrect"), or length-scaled
+    // Damerau-Levenshtein ("drawRct" -> "drawRect"). Each item is RANKED by its
+    // strongest field match (see tokenRank), and the sidebar only shows the
+    // strong tiers unless they are too few (see cutoffRank). A multi-token query
+    // requires EVERY token to match; the item takes its weakest token's rank.
     // ---------------------------------------------------------------------
 
     function isSubsequence(needle, haystack) {
@@ -191,65 +191,101 @@
         return 0;
     }
 
-    // Fuzzy match against an IDENTIFIER-like string (name, keyword, method name):
-    // substring, dense subsequence, or bounded Levenshtein. These are short, so
-    // subsequence/edit-distance stay meaningful.
-    function identMatches(token, haystack) {
-        if (!haystack) return false;
+    // Classify HOW a token matches an identifier-like string (name, member name,
+    // keyword). The strongest relation wins. Returns one of:
+    //   'exact' | 'substring' | 'subseq' | 'editdist' | null
+    // 'exact' = token equals the whole identifier OR one of its camelCase sub-words
+    // (so "node" is an exact hit on "RectNode" via its "node" sub-word).
+    function identMatchKind(token, haystack) {
+        if (!haystack) return null;
         const lower = haystack.toLowerCase();
-        if (lower.indexOf(token) !== -1) return true;
+        const words = subWords(haystack);
+        if (lower === token || words.includes(token)) return 'exact';
+        if (lower.indexOf(token) !== -1) return 'substring';
+        // Dense subsequence (sub-word not much longer than the token), whole + sub-words.
+        for (const w of [lower, ...words]) {
+            if (token.length >= 3 && w.length <= token.length + 3 && isSubsequence(token, w)) return 'subseq';
+        }
+        // Bounded Levenshtein (length-scaled; 4-char tokens get 0 = off).
         const maxDist = maxEditDist(token);
-        // Match against the whole identifier AND each camelCase sub-word, so both a
-        // full-name typo ("drawCurev"->drawCurve) and a fragment typo ("curev"->curve) hit.
-        for (const w of [lower, ...subWords(haystack)]) {
-            // Dense subsequence (sub-word not much longer than the token).
-            if (token.length >= 3 && w.length <= token.length + 3 &&
-                isSubsequence(token, w)) return true;
-            if (maxDist > 0 && Math.abs(w.length - token.length) <= maxDist &&
-                editDistance(token, w) <= maxDist) return true;
+        if (maxDist > 0) for (const w of [lower, ...words]) {
+            if (Math.abs(w.length - token.length) <= maxDist && editDistance(token, w) <= maxDist) return 'editdist';
         }
-        return false;
+        return null;
     }
 
-    // Match against PROSE (descriptions): substring only — never fuzz a sentence,
-    // that is what produced far-fetched hits.
-    function proseMatches(token, haystack) {
-        return !!haystack && haystack.toLowerCase().indexOf(token) !== -1;
-    }
-
-    // Collect searchable fragments, split by how strictly to match them.
-    function searchableFields(item) {
-        const idents = [], prose = [];
-        if (item.name) idents.push(item.name);
-        if (item.category) idents.push(item.category);
-        // So `deprecated` as a query filters to deprecated symbols (they live in
-        // their normal category, not a dedicated group).
-        if (isDeprecated(item)) idents.push('deprecated');
+    // Relevance ranking (lower = stronger). A token's rank against an item is the
+    // strongest relation across the item's fields:
+    //   1 exact word          (name / member name)
+    //   2 substring           (name / member name)
+    //   3 dense subsequence    (name / member name)
+    //   4 keyword / metadata   (category, "deprecated") — any match kind
+    //   5 edit-distance (typo) (name / member name)
+    //   6 prose (desc) substring — the noisiest, last resort
+    // Members = a type's method/property names and an enum's value names, so the
+    // owning type/enum surfaces when you search a member. Keyword sits ABOVE
+    // name-typos (4 < 5): a curated keyword is a better signal than a fuzzy guess.
+    const NAME_RANK = { exact: 1, substring: 2, subseq: 3, editdist: 5 };
+    function tokenRank(token, item) {
         const d = item.data || {};
-        if (Array.isArray(d.keywords)) for (const kw of d.keywords) if (kw) idents.push(kw);
+        let best = Infinity;
+        // name + members (strongest fields)
+        const nameLike = [];
+        if (item.name) nameLike.push(item.name);
         if (item.kind === 'type') {
-            if (Array.isArray(d.methods)) for (const m of d.methods) if (m.name) idents.push(m.name);
-            if (Array.isArray(d.properties)) for (const p of d.properties) if (p.name) idents.push(p.name);
+            if (Array.isArray(d.methods)) for (const m of d.methods) if (m.name) nameLike.push(m.name);
+            if (Array.isArray(d.properties)) for (const p of d.properties) if (p.name) nameLike.push(p.name);
         }
-        if (item.kind === 'enum' && Array.isArray(d.values)) {
-            for (const v of d.values) if (v.name) idents.push(v.name);
+        if (item.kind === 'enum' && Array.isArray(d.values)) for (const v of d.values) if (v.name) nameLike.push(v.name);
+        for (const f of nameLike) {
+            const k = identMatchKind(token, f);
+            if (k) best = Math.min(best, NAME_RANK[k]);
+            if (best === 1) return 1;
         }
-        if (d.desc) prose.push(d.desc);
-        return { idents, prose };
+        // keyword + metadata → rank 4 (regardless of how it matched). `deprecated`
+        // as a query filters to deprecated symbols; category enables group searches.
+        if (best > 4) {
+            const meta = [];
+            if (item.category) meta.push(item.category);
+            if (isDeprecated(item)) meta.push('deprecated');
+            if (Array.isArray(d.keywords)) for (const kw of d.keywords) if (kw) meta.push(kw);
+            for (const f of meta) { if (identMatchKind(token, f)) { best = 4; break; } }
+        }
+        // prose (desc): substring only — never fuzz a sentence
+        if (best > 6 && d.desc && d.desc.toLowerCase().indexOf(token) !== -1) best = 6;
+        return best;
     }
 
-    function matchItem(item, query) {
+    // An item's rank for a multi-token query: every token must match SOME field
+    // (else the item is excluded); the item is only as strong as its weakest token.
+    function itemRank(item, query) {
         const tokens = query.split(/\s+/).filter(Boolean);
-        if (tokens.length === 0) return true;
-        const { idents, prose } = searchableFields(item);
-        // Every token must match at least one field (fuzzy on idents, substring on prose).
+        if (tokens.length === 0) return 0;
+        let worst = 0;
         for (const token of tokens) {
-            let hit = false;
-            for (const f of idents) { if (identMatches(token, f)) { hit = true; break; } }
-            if (!hit) for (const f of prose) { if (proseMatches(token, f)) { hit = true; break; } }
-            if (!hit) return false;
+            const r = tokenRank(token, item);
+            if (r === Infinity) return Infinity;
+            if (r > worst) worst = r;
         }
-        return true;
+        return worst;
+    }
+
+    // Tiered cutoff. Ranks 1–3 (real name/member hits) ALWAYS show — they are
+    // trusted. We descend to weaker tiers (4 keyword, 5 typo, 6 prose) ONLY when
+    // the strong tiers produced fewer than RANK_TARGET results, and stop as soon as
+    // the running total reaches it. So a query with ≥3 solid hits never shows noise.
+    const RANK_FLOOR = 3, RANK_TARGET = 3;
+    function cutoffRank(matchedRanks) {
+        const cnt = {};
+        for (const r of matchedRanks) cnt[r] = (cnt[r] || 0) + 1;
+        let cum = 0;
+        for (let r = 1; r <= RANK_FLOOR; r++) cum += (cnt[r] || 0);
+        let cutoff = RANK_FLOOR;
+        for (let r = RANK_FLOOR + 1; r <= 6 && cum < RANK_TARGET; r++) {
+            cum += (cnt[r] || 0);
+            cutoff = r;
+        }
+        return cutoff;
     }
 
     // ---------------------------------------------------------------------
@@ -258,11 +294,27 @@
         query = (query || '').toLowerCase().trim();
         let html = '';
 
+        // Rank every item once, derive the visibility cutoff, expose show().
+        const rankOf = new Map();
+        let show;
+        if (!query) {
+            show = () => true;
+        } else {
+            const matched = [];
+            for (const item of items) {
+                const r = itemRank(item, query);
+                rankOf.set(item, r);
+                if (r !== Infinity) matched.push(r);
+            }
+            const cutoff = cutoffRank(matched);
+            show = (item) => (rankOf.get(item) ?? Infinity) <= cutoff;
+        }
+
         // Group: Functions by category
         const funcCats = {};
         for (const item of items) {
             if (item.kind !== 'function') continue;
-            if (query && !matchItem(item, query)) continue;
+            if (!show(item)) continue;
             if (!funcCats[item.category]) funcCats[item.category] = [];
             funcCats[item.category].push(item);
         }
@@ -291,7 +343,7 @@
         }
 
         // Group: Types
-        const typeItems = items.filter(i => i.kind === 'type' && (!query || matchItem(i, query)));
+        const typeItems = items.filter(i => i.kind === 'type' && show(i));
         if (typeItems.length > 0) {
             html += `<div class="sidebar-group" id="group-types">`;
             html += `<div class="sidebar-group-title" onclick="toggleGroup('group-types')">`;
@@ -305,7 +357,7 @@
         }
 
         // Group: Enums
-        const enumItems = items.filter(i => i.kind === 'enum' && (!query || matchItem(i, query)));
+        const enumItems = items.filter(i => i.kind === 'enum' && show(i));
         if (enumItems.length > 0) {
             html += `<div class="sidebar-group" id="group-enums">`;
             html += `<div class="sidebar-group-title" onclick="toggleGroup('group-enums')">`;
@@ -319,7 +371,7 @@
         }
 
         // Group: Macros
-        const macroItems = items.filter(i => i.kind === 'macro' && (!query || matchItem(i, query)));
+        const macroItems = items.filter(i => i.kind === 'macro' && show(i));
         if (macroItems.length > 0) {
             html += `<div class="sidebar-group" id="group-macros">`;
             html += `<div class="sidebar-group-title" onclick="toggleGroup('group-macros')">`;
@@ -333,7 +385,7 @@
         }
 
         // Group: Constants
-        const constItems = items.filter(i => i.kind === 'constant' && (!query || matchItem(i, query)));
+        const constItems = items.filter(i => i.kind === 'constant' && show(i));
         if (constItems.length > 0) {
             html += `<div class="sidebar-group" id="group-constants">`;
             html += `<div class="sidebar-group-title" onclick="toggleGroup('group-constants')">`;
@@ -348,7 +400,7 @@
         // Group: Colors (palette). The sidebar only ever drills down to the color
         // sub-groups (categories) — never individual colors. A query narrows the
         // list to groups that contain a matching color. Collapsed by default.
-        const colorItems = items.filter(i => i.kind === 'color' && (!query || matchItem(i, query)));
+        const colorItems = items.filter(i => i.kind === 'color' && show(i));
         if (colorItems.length > 0) {
             const matchedGroups = query ? new Set(colorItems.map(i => i.data.group)) : null;
             html += `<div class="sidebar-group collapsed" id="group-colors">`;
