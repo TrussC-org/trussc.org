@@ -56,6 +56,12 @@
           "width": 960,
           "height": 600,
           "webSupported": true
+        },
+        {
+          "name": "pointCloudExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
         }
       ]
     },
