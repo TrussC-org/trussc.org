@@ -185,11 +185,15 @@
     } catch (e) { return null; }
   }
   function saveConvo() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ts: Date.now(), id: convId, c: convo.slice(-40) })); } catch (e) {}
+    try { localStorage.setItem(STORE_KEY, JSON.stringify({ ts: Date.now(), id: convId, c: convo.slice(-40), p: pinned.slice(0, 20) })); } catch (e) {}
   }
   var _store = loadStore();
   var convo = _store ? _store.c : [];     // history sent back each turn for follow-up chains
   var convId = (_store && _store.id) || newId();   // stable per conversation → groups stat rows into threads
+  // LLM-curated "important" chunk ids, recent-first. Sent back each turn so earlier
+  // context survives pronoun follow-ups; the server takes the top few and the model
+  // re-curates, so stale ids naturally fall off the end.
+  var pinned = (_store && Array.isArray(_store.p)) ? _store.p : [];
 
   // Health gate: only reveal on F1 if the server answers.
   fetch(API + '/health').then(function (r) { return r.json(); })
@@ -217,6 +221,7 @@
   function closePanel() { panel.classList.remove('open'); if (online) bubble.classList.add('show'); }
   function clearConvo() {
     convo = [];
+    pinned = [];
     convId = newId();   // a fresh thread
     try { localStorage.removeItem(STORE_KEY); } catch (e) {}
     msgs.innerHTML = '';
@@ -296,7 +301,7 @@
     try {
       var r = await fetch(API + '/chat', {
         method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ question: q, history: convo, convId: convId, page: page }),
+        body: JSON.stringify({ question: q, history: convo, convId: convId, page: page, pinned: pinned }),
       });
       var reader = r.body.getReader(); var dec = new TextDecoder(); var buf = '';
       for (;;) {
@@ -313,6 +318,15 @@
           else if (ev === 'replace') { bot.buf = payload; bot.el.innerHTML = render(bot.buf) + '<span class="cw-blink"></span>'; msgs.scrollTop = msgs.scrollHeight; }
           else if (ev === 'sources') { srcs = payload; }
           else if (ev === 'links') { links = payload; }
+          else if (ev === 'done') {
+            // Fold this turn's curated ids onto the front of the ledger (recent-first,
+            // deduped). The model re-picks each turn, so unused ids drift off the tail.
+            if (payload && payload.usedIds && payload.usedIds.length) {
+              var merged = payload.usedIds.concat(pinned), seen = {}, dedup = [];
+              for (var pi = 0; pi < merged.length; pi++) { if (!seen[merged[pi]]) { seen[merged[pi]] = 1; dedup.push(merged[pi]); } }
+              pinned = dedup.slice(0, 20);
+            }
+          }
           else if (ev === 'error') { bot.buf += '\n\n[error: ' + payload + ']'; }
         }
       }
