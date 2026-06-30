@@ -6,7 +6,8 @@
 // It injects its own CSS + DOM and is HEALTH-GATED: nothing appears unless the
 // API answers GET /api?... → /health. So shipping this to the live site while the
 // backend is undeployed keeps the assistant invisible — it self-enables the day
-// the server comes online. F1 is the (intentionally obscure) reveal trigger.
+// the server comes online. Public beta: once online, the bubble shows by default
+// (the old F1-only reveal is temporarily disabled).
 //
 // Config (in priority order):
 //   <script data-api="…">         per-tag API origin
@@ -186,7 +187,7 @@
 
   // Health gate: only reveal on F1 if the server answers.
   fetch(API + '/health').then(function (r) { return r.json(); })
-    .then(function (j) { online = !!j.ok; })
+    .then(function (j) { online = !!j.ok; if (online) bubble.classList.add('show'); })
     .catch(function () { online = false; });
 
   function openPanel() {
@@ -227,10 +228,8 @@
     copyText(convo.map(function (t) { return (t.role === 'user' ? 'You: ' : 'TrussC: ') + t.content; }).join('\n\n'), btn);
   }
 
-  // F1 reveals the bubble (easter egg) and opens the panel.
-  window.addEventListener('keydown', function (e) {
-    if (e.key === 'F1') { e.preventDefault(); if (online) { bubble.classList.add('show'); openPanel(); } }
-  });
+  // Public beta: the bubble shows by default once the backend is online (see the
+  // health gate above). The old F1-only reveal is temporarily disabled.
   bubble.addEventListener('click', openPanel);
   root.querySelector('.cw-x').addEventListener('click', closePanel);
   root.querySelector('.cw-clear').addEventListener('click', clearConvo);
