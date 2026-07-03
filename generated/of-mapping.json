@@ -682,6 +682,13 @@
       "order": 17,
       "mappings": [
         {
+          "of": "ofGetVersionInfo",
+          "tc": "getVersion()",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
           "of": "ofJoinString",
           "tc": "joinString(stringElements, delimiter)",
           "notes": "",

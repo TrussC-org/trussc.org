@@ -6,7 +6,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.6.2",
+    "version": "v0.6.3",
     "lang": "all",
     "categories": [
         {
@@ -9827,6 +9827,22 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "getVersion",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "const char *",
+                    "desc": "TrussC version string from git describe (e.g. \"v0.6.2\" or \"v0.6.2-14-gabc123\")",
+                    "keywords": [
+                        "semver",
+                        "release",
+                        "git",
+                        "tag",
+                        "describe"
+                    ],
+                    "desc_ja": "git describe 由来の TrussC バージョン文字列（例: \"v0.6.2\"、\"v0.6.2-14-gabc123\"）",
+                    "desc_ko": "git describe 기반 TrussC 버전 문자열 (예: \"v0.6.2\", \"v0.6.2-14-gabc123\")"
+                },
+                {
                     "name": "intersectRect",
                     "params": "x1, y1, w1, h1, x2, y2, w2, h2, ox, oy, ow, oh",
                     "params_typed": "float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2, float & ox, float & oy, float & ow, float & oh",
@@ -10882,21 +10898,7 @@ const TrussCAPI = {
                         "reason": "Use Color::fromHSB() instead. Will be removed in v1.0.0",
                         "replacement": "Color::fromHSB"
                     },
-                    "details": "Kept as a backward-compatible alias; new code should call `Color::fromHSB()` (same behavior). Scheduled for removal in v1.0.0.",
-                    "examples": [
-                        {
-                            "name": "strokeMeshExample",
-                            "group": "graphics"
-                        },
-                        {
-                            "name": "clippingExample",
-                            "group": "graphics"
-                        },
-                        {
-                            "name": "timerExample",
-                            "group": "utils"
-                        }
-                    ]
+                    "details": "Kept as a backward-compatible alias; new code should call `Color::fromHSB()` (same behavior). Scheduled for removal in v1.0.0."
                 },
                 {
                     "name": "colorFromOKLCH",
@@ -12765,39 +12767,6 @@ const TrussCAPI = {
                 "priority",
                 "scope",
                 "audioOut"
-            ]
-        },
-        {
-            "name": "VERSION_MAJOR",
-            "value": "0",
-            "desc": "TrussC major version number",
-            "desc_ja": "TrussC のメジャーバージョン番号",
-            "desc_ko": "TrussC 메이저 버전 번호",
-            "keywords": [
-                "semver",
-                "release"
-            ]
-        },
-        {
-            "name": "VERSION_MINOR",
-            "value": "0",
-            "desc": "TrussC minor version number",
-            "desc_ja": "TrussC のマイナーバージョン番号",
-            "desc_ko": "TrussC 마이너 버전 번호",
-            "keywords": [
-                "semver",
-                "release"
-            ]
-        },
-        {
-            "name": "VERSION_PATCH",
-            "value": "1",
-            "desc": "TrussC patch version number",
-            "desc_ja": "TrussC のパッチバージョン番号",
-            "desc_ko": "TrussC 패치 버전 번호",
-            "keywords": [
-                "semver",
-                "release"
             ]
         },
         {
@@ -24537,6 +24506,14 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Get the name of the active decode backend. Returns 'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', or 'none'"
+                },
+                {
+                    "name": "getPath",
+                    "return": "const std::string &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Path of the currently loaded video file (resolved via getDataPath); empty string when nothing is loaded"
                 }
             ],
             "static_methods": [
@@ -24544,11 +24521,23 @@ const TrussCAPI = {
                     "name": "extractFrame",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, Pixels & outPixels, float timeSec = 1.0, float * outDuration = nullptr"
+                        "const std::string & path, Pixels & outPixels, float timeSec = 1.0, float * outDuration = nullptr",
+                        "Pixels & outPixels, float timeSec = 1.0, float * outDuration = nullptr"
                     ],
-                    "desc": "Extract a single frame from a video file without loading the full video. Useful for thumbnails",
-                    "platformNote": "Static single-frame extraction is fully implemented only on macOS (AVAssetImageGenerator). Windows/Linux/Android stub it (`return false`, TODO); iOS and web have no extractFramePlatform() definition at all.",
-                    "platformNote_ja": "静止フレーム抽出が実装されているのは macOS のみ（AVAssetImageGenerator）。win/linux/android は false を返すスタブ、ios/web は extractFramePlatform() の定義自体が存在しない。"
+                    "desc": "Extract the exact frame at a given time from a video file. Frame-accurate on every platform",
+                    "platformNote": "Implemented on macOS (AVAssetImageGenerator), Windows (Media Foundation / IMFSourceReader), and Linux (FFmpeg). Android stubs it (`return false`); iOS and web have no extractFramePlatform() definition and are unsupported.",
+                    "platformNote_ja": "macOS（AVAssetImageGenerator）・Windows（Media Foundation / IMFSourceReader）・Linux（FFmpeg）で実装済み。android は false を返すスタブ、ios/web は extractFramePlatform() の定義自体が無く未対応。"
+                },
+                {
+                    "name": "extractKeyFrame",
+                    "return": "bool",
+                    "signatures": [
+                        "const std::string & path, Pixels & outPixels, float timeSec = 1.0, float * outDuration = nullptr",
+                        "Pixels & outPixels, float timeSec = 1.0, float * outDuration = nullptr"
+                    ],
+                    "desc": "Extract the nearest keyframe at or before a given time. Faster than extractFrame but time-approximate",
+                    "platformNote": "Implemented on macOS (AVAssetImageGenerator), Windows (Media Foundation / IMFSourceReader), and Linux (FFmpeg). Android stubs it (`return false`); iOS and web are unsupported.",
+                    "platformNote_ja": "macOS（AVAssetImageGenerator）・Windows（Media Foundation / IMFSourceReader）・Linux（FFmpeg）で実装済み。android は false を返すスタブ、ios/web は未対応。"
                 }
             ],
             "operators": [
@@ -27880,8 +27869,8 @@ const TrussCAPI = {
                     "group": "node"
                 },
                 {
-                    "name": "layoutModExample",
-                    "group": "node"
+                    "name": "clippingExample",
+                    "group": "graphics"
                 }
             ],
             "related": [
