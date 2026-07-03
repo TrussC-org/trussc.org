@@ -554,6 +554,13 @@
           "width": 960,
           "height": 600,
           "webSupported": false
+        },
+        {
+          "name": "videoGrabberFrameQueueExample",
+          "width": 960,
+          "height": 680,
+          "webSupported": false,
+          "autoScreenshot": false
         }
       ]
     },
