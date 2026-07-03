@@ -6,7 +6,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.6.3",
+    "version": "v0.6.4",
     "lang": "all",
     "categories": [
         {
@@ -970,6 +970,10 @@ const TrussCAPI = {
                         {
                             "name": "graphicsExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "reflectExample",
+                            "group": "utils"
                         }
                     ]
                 },
@@ -993,6 +997,10 @@ const TrussCAPI = {
                         {
                             "name": "graphicsExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "reflectExample",
+                            "group": "utils"
                         }
                     ]
                 },
@@ -1046,15 +1054,15 @@ const TrussCAPI = {
                     "params": "text, pos, screenFixed",
                     "params_typed": "const std::string & text, Vec3 pos, bool screenFixed = true",
                     "return_type": "void",
-                    "desc": "Draw text",
+                    "desc": "Draw text. The Vec3 overloads project through the current camera context — a screen-aligned 3D label; z=0 on the default screen matches plain 2D; behind-camera draws nothing; screenFixed picks fixed-pixel vs perspective size",
                     "keywords": [
                         "text",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
                     ],
-                    "desc_ja": "テキストを描画",
-                    "desc_ko": "비트맵 텍스트 그리기",
+                    "desc_ja": "テキストを描画。Vec3 オーバーロードは現在のカメラコンテキストで投影し、画面に正対する3Dラベルになる（デフォルト画面の z=0 は通常の2Dと一致、カメラ後方は非描画、screenFixed で固定ピクセル/遠近サイズを選択）",
+                    "desc_ko": "비트맵 텍스트 그리기. Vec3 오버로드는 현재 카메라 컨텍스트로 투영해 화면에 정렬된 3D 라벨을 그린다(기본 화면의 z=0은 일반 2D와 동일, 카메라 뒤쪽은 그리지 않음, screenFixed로 고정 픽셀/원근 크기 선택)",
                     "related": [
                         "drawBitmapStringHighlight",
                         "Font::drawString",
@@ -1076,15 +1084,15 @@ const TrussCAPI = {
                     "params": "text, x, y, screenFixed",
                     "params_typed": "const std::string & text, float x, float y, bool screenFixed = true",
                     "return_type": "void",
-                    "desc": "Draw text",
+                    "desc": "Draw text. The Vec3 overloads project through the current camera context — a screen-aligned 3D label; z=0 on the default screen matches plain 2D; behind-camera draws nothing; screenFixed picks fixed-pixel vs perspective size",
                     "keywords": [
                         "text",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
                     ],
-                    "desc_ja": "テキストを描画",
-                    "desc_ko": "비트맵 텍스트 그리기",
+                    "desc_ja": "テキストを描画。Vec3 オーバーロードは現在のカメラコンテキストで投影し、画面に正対する3Dラベルになる（デフォルト画面の z=0 は通常の2Dと一致、カメラ後方は非描画、screenFixed で固定ピクセル/遠近サイズを選択）",
+                    "desc_ko": "비트맵 텍스트 그리기. Vec3 오버로드는 현재 카메라 컨텍스트로 투영해 화면에 정렬된 3D 라벨을 그린다(기본 화면의 z=0은 일반 2D와 동일, 카메라 뒤쪽은 그리지 않음, screenFixed로 고정 픽셀/원근 크기 선택)",
                     "related": [
                         "drawBitmapStringHighlight",
                         "Font::drawString",
@@ -1106,15 +1114,15 @@ const TrussCAPI = {
                     "params": "text, pos, scale",
                     "params_typed": "const std::string & text, Vec3 pos, float scale",
                     "return_type": "void",
-                    "desc": "Draw text",
+                    "desc": "Draw text. The Vec3 overloads project through the current camera context — a screen-aligned 3D label; z=0 on the default screen matches plain 2D; behind-camera draws nothing; screenFixed picks fixed-pixel vs perspective size",
                     "keywords": [
                         "text",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
                     ],
-                    "desc_ja": "テキストを描画",
-                    "desc_ko": "비트맵 텍스트 그리기",
+                    "desc_ja": "テキストを描画。Vec3 オーバーロードは現在のカメラコンテキストで投影し、画面に正対する3Dラベルになる（デフォルト画面の z=0 は通常の2Dと一致、カメラ後方は非描画、screenFixed で固定ピクセル/遠近サイズを選択）",
+                    "desc_ko": "비트맵 텍스트 그리기. Vec3 오버로드는 현재 카메라 컨텍스트로 투영해 화면에 정렬된 3D 라벨을 그린다(기본 화면의 z=0은 일반 2D와 동일, 카메라 뒤쪽은 그리지 않음, screenFixed로 고정 픽셀/원근 크기 선택)",
                     "related": [
                         "drawBitmapStringHighlight",
                         "Font::drawString",
@@ -1136,15 +1144,15 @@ const TrussCAPI = {
                     "params": "text, x, y, scale",
                     "params_typed": "const std::string & text, float x, float y, float scale",
                     "return_type": "void",
-                    "desc": "Draw text",
+                    "desc": "Draw text. The Vec3 overloads project through the current camera context — a screen-aligned 3D label; z=0 on the default screen matches plain 2D; behind-camera draws nothing; screenFixed picks fixed-pixel vs perspective size",
                     "keywords": [
                         "text",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
                     ],
-                    "desc_ja": "テキストを描画",
-                    "desc_ko": "비트맵 텍스트 그리기",
+                    "desc_ja": "テキストを描画。Vec3 オーバーロードは現在のカメラコンテキストで投影し、画面に正対する3Dラベルになる（デフォルト画面の z=0 は通常の2Dと一致、カメラ後方は非描画、screenFixed で固定ピクセル/遠近サイズを選択）",
+                    "desc_ko": "비트맵 텍스트 그리기. Vec3 오버로드는 현재 카메라 컨텍스트로 투영해 화면에 정렬된 3D 라벨을 그린다(기본 화면의 z=0은 일반 2D와 동일, 카메라 뒤쪽은 그리지 않음, screenFixed로 고정 픽셀/원근 크기 선택)",
                     "related": [
                         "drawBitmapStringHighlight",
                         "Font::drawString",
@@ -1166,15 +1174,15 @@ const TrussCAPI = {
                     "params": "text, pos, h, v",
                     "params_typed": "const std::string & text, Vec3 pos, Direction h, Direction v",
                     "return_type": "void",
-                    "desc": "Draw text",
+                    "desc": "Draw text. The Vec3 overloads project through the current camera context — a screen-aligned 3D label; z=0 on the default screen matches plain 2D; behind-camera draws nothing; screenFixed picks fixed-pixel vs perspective size",
                     "keywords": [
                         "text",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
                     ],
-                    "desc_ja": "テキストを描画",
-                    "desc_ko": "비트맵 텍스트 그리기",
+                    "desc_ja": "テキストを描画。Vec3 オーバーロードは現在のカメラコンテキストで投影し、画面に正対する3Dラベルになる（デフォルト画面の z=0 は通常の2Dと一致、カメラ後方は非描画、screenFixed で固定ピクセル/遠近サイズを選択）",
+                    "desc_ko": "비트맵 텍스트 그리기. Vec3 오버로드는 현재 카메라 컨텍스트로 투영해 화면에 정렬된 3D 라벨을 그린다(기본 화면의 z=0은 일반 2D와 동일, 카메라 뒤쪽은 그리지 않음, screenFixed로 고정 픽셀/원근 크기 선택)",
                     "related": [
                         "drawBitmapStringHighlight",
                         "Font::drawString",
@@ -1196,15 +1204,15 @@ const TrussCAPI = {
                     "params": "text, x, y, h, v",
                     "params_typed": "const std::string & text, float x, float y, Direction h, Direction v",
                     "return_type": "void",
-                    "desc": "Draw text",
+                    "desc": "Draw text. The Vec3 overloads project through the current camera context — a screen-aligned 3D label; z=0 on the default screen matches plain 2D; behind-camera draws nothing; screenFixed picks fixed-pixel vs perspective size",
                     "keywords": [
                         "text",
                         "label",
                         "print",
                         "ofdrawbitmapstring"
                     ],
-                    "desc_ja": "テキストを描画",
-                    "desc_ko": "비트맵 텍스트 그리기",
+                    "desc_ja": "テキストを描画。Vec3 オーバーロードは現在のカメラコンテキストで投影し、画面に正対する3Dラベルになる（デフォルト画面の z=0 は通常の2Dと一致、カメラ後方は非描画、screenFixed で固定ピクセル/遠近サイズを選択）",
+                    "desc_ko": "비트맵 텍스트 그리기. Vec3 오버로드는 현재 카메라 컨텍스트로 투영해 화면에 정렬된 3D 라벨을 그린다(기본 화면의 z=0은 일반 2D와 동일, 카메라 뒤쪽은 그리지 않음, screenFixed로 고정 픽셀/원근 크기 선택)",
                     "related": [
                         "drawBitmapStringHighlight",
                         "Font::drawString",
@@ -3271,6 +3279,12 @@ const TrussCAPI = {
                     "desc_ko": "Z축을 중심으로 회전",
                     "related": [
                         "rotateZDeg"
+                    ],
+                    "examples": [
+                        {
+                            "name": "reflectExample",
+                            "group": "utils"
+                        }
                     ]
                 },
                 {
@@ -3390,6 +3404,10 @@ const TrussCAPI = {
                         {
                             "name": "videoGrabberExample",
                             "group": "video"
+                        },
+                        {
+                            "name": "reflectExample",
+                            "group": "utils"
                         }
                     ]
                 },
@@ -3420,6 +3438,10 @@ const TrussCAPI = {
                         {
                             "name": "videoGrabberExample",
                             "group": "video"
+                        },
+                        {
+                            "name": "reflectExample",
+                            "group": "utils"
                         }
                     ]
                 },
@@ -3450,6 +3472,10 @@ const TrussCAPI = {
                         {
                             "name": "videoGrabberExample",
                             "group": "video"
+                        },
+                        {
+                            "name": "reflectExample",
+                            "group": "utils"
                         }
                     ]
                 },
@@ -8081,7 +8107,7 @@ const TrussCAPI = {
                     "params": "path, settings",
                     "params_typed": "const std::string & path, const VideoRecordSettings & settings = {}",
                     "return_type": "bool",
-                    "desc": "Start recording the window to a video file (native encoder, no ffmpeg)",
+                    "desc": "Start recording the window to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited",
                     "keywords": [
                         "record",
                         "video",
@@ -8089,8 +8115,39 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウを動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）",
-                    "desc_ko": "윈도우를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요)",
+                    "desc_ja": "ウィンドウを動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）",
+                    "desc_ko": "윈도우를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한)",
+                    "related": [
+                        "VideoRecordSettings",
+                        "stopRecording",
+                        "isRecording",
+                        "saveScreenshot"
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "android",
+                        "ios"
+                    ],
+                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter stub returns false).",
+                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter スタブが false）。"
+                },
+                {
+                    "name": "startRecording",
+                    "params": "path, durationSec",
+                    "params_typed": "const std::string & path, float durationSec",
+                    "return_type": "bool",
+                    "desc": "Start recording the window to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited",
+                    "keywords": [
+                        "record",
+                        "video",
+                        "capture",
+                        "movie",
+                        "mp4"
+                    ],
+                    "desc_ja": "ウィンドウを動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）",
+                    "desc_ko": "윈도우를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한)",
                     "related": [
                         "VideoRecordSettings",
                         "stopRecording",
@@ -9787,6 +9844,12 @@ const TrussCAPI = {
                         "Json",
                         "reflectFromJson",
                         "toJsonString"
+                    ],
+                    "examples": [
+                        {
+                            "name": "reflectExample",
+                            "group": "utils"
+                        }
                     ]
                 },
                 {
@@ -19114,6 +19177,12 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "JSON オブジェクトをセッター経由でリフレクトされたメンバへ適用する Reflector バックエンド。",
             "desc_ko": "JSON 객체를 세터를 통해 리플렉션된 멤버에 적용하는 Reflector 백엔드.",
+            "examples": [
+                {
+                    "name": "reflectExample",
+                    "group": "utils"
+                }
+            ],
             "constructor": {
                 "signatures": [
                     "Json src"
@@ -23650,6 +23719,55 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "GrabberFrame",
+            "desc": "One captured camera frame with its capture-time timestamp: RGBA pixels, width/height, and timestampUs (monotonic steady_clock microseconds, stamped on the capture thread). Returned by VideoGrabber::getBufferFrames(). Pixels and timestamp travel together so there is no race between reading the pixels and reading the time",
+            "keywords": [
+                "webcam",
+                "camera",
+                "frame",
+                "timestamp",
+                "queue",
+                "measurement"
+            ],
+            "desc_ja": "キャプチャ時刻付きのカメラ1フレーム。RGBAピクセル・width/height・timestampUs（monotonicなsteady_clockのマイクロ秒。キャプチャスレッドで打刻）を持つ。VideoGrabber::getBufferFrames() が返す。ピクセルと時刻が一体なので「ピクセル取得と時刻取得の間に次フレームが割り込む」競合が起きない。カメラを計測/測定に使うときの基本単位",
+            "desc_ko": "캡처 시각이 붙은 카메라 1프레임. RGBA 픽셀, width/height, timestampUs(단조 steady_clock 마이크로초, 캡처 스레드에서 기록)를 가짐. VideoGrabber::getBufferFrames()가 반환. 픽셀과 시각이 한 구조체로 오므로 둘을 따로 읽는 사이에 다음 프레임이 끼어드는 경쟁이 없음",
+            "related": [
+                "VideoGrabber",
+                "VideoGrabber::getBufferFrames",
+                "VideoGrabber::setFrameQueueSize"
+            ],
+            "properties": [
+                {
+                    "name": "pixels",
+                    "type": "std::vector<unsigned char>",
+                    "desc": "RGBA8 pixel data (width * height * 4 bytes)",
+                    "desc_ja": "RGBA8 のピクセルデータ（width * height * 4 バイト）",
+                    "desc_ko": "RGBA8 픽셀 데이터 (width * height * 4 바이트)"
+                },
+                {
+                    "name": "width",
+                    "type": "int",
+                    "desc": "Frame width in pixels",
+                    "desc_ja": "フレームの幅（ピクセル）",
+                    "desc_ko": "프레임 너비(픽셀)"
+                },
+                {
+                    "name": "height",
+                    "type": "int",
+                    "desc": "Frame height in pixels",
+                    "desc_ja": "フレームの高さ（ピクセル）",
+                    "desc_ko": "프레임 높이(픽셀)"
+                },
+                {
+                    "name": "timestampUs",
+                    "type": "uint64_t",
+                    "desc": "Capture time in microseconds on the monotonic clock (std::chrono::steady_clock), stamped on the capture thread the moment the frame arrived from the driver. Not wall-clock time — use for interval math and cross-source sync only",
+                    "desc_ja": "キャプチャ時刻（monotonic クロック = std::chrono::steady_clock のマイクロ秒）。ドライバからフレームが届いた瞬間にキャプチャスレッドで打刻される。壁時計時刻ではないので、区間計算や他ソースとの同期にのみ使う",
+                    "desc_ko": "캡처 시각(단조 클록 = std::chrono::steady_clock의 마이크로초). 드라이버에서 프레임이 도착한 순간 캡처 스레드에서 기록됨. 벽시계 시각이 아니므로 구간 계산과 소스 간 동기화에만 사용"
+                }
+            ]
+        },
+        {
             "name": "VideoGrabber",
             "desc": "Webcam capture source. Call setup() once, then update() every frame; getTexture() (via HasTexture) gives the live frame. Move-only. Camera permission is requested automatically on macOS",
             "keywords": [
@@ -23821,6 +23939,47 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Return a pointer to the current RGBA pixel buffer"
+                },
+                {
+                    "name": "setFrameQueueSize",
+                    "return": "void",
+                    "signatures": [
+                        "size_t maxFrames"
+                    ],
+                    "desc": "Enable the timestamped frame queue and set its capacity (0 = disable, the default; zero overhead when off). When full, the oldest frame is dropped so a slow consumer never blocks capture. Sizing hint: at least ceil(cameraFps / appFps) plus headroom; 8-16 is plenty. Can be called before or after setup()",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
+                    "name": "getFrameQueueSize",
+                    "return": "size_t",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the frame queue capacity (0 = queueing disabled)",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
+                    "name": "getBufferFrames",
+                    "return": "size_t",
+                    "signatures": [
+                        "std::vector<GrabberFrame> & out"
+                    ],
+                    "desc": "Drain all frames captured since the last call (appended to the given vector, oldest first; returns the count). Each GrabberFrame carries a monotonic timestamp stamped on the capture thread, so timestamps stay truthful even if the main loop stalls, and no frame is lost when the camera runs faster than the app loop. Requires setFrameQueueSize() > 0; getPixels()/isFrameNew() are unaffected",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ],
+                    "platformNote": "Frames are pushed by the platform capture thread: macOS (AVFoundation capture queue), Windows (Media Foundation reader thread), Linux (V4L2 capture thread). web/android do not push (no capture thread), so the queue stays empty there.",
+                    "platformNote_ja": "フレームはプラットフォームのキャプチャスレッドが積む。macOS（AVFoundation）・Windows（Media Foundation リーダースレッド）・Linux（V4L2 キャプチャスレッド）で実装済み。web/android はキャプチャスレッドが無いため積まれず、常に空。"
                 },
                 {
                     "name": "copyToImage",
@@ -24595,6 +24754,13 @@ const TrussCAPI = {
                     "desc": "Frames between keyframes; 0 = encoder default",
                     "desc_ja": "キーフレーム間のフレーム数。0 = エンコーダのデフォルト",
                     "desc_ko": "키프레임 사이의 프레임 수. 0 = 인코더 기본값"
+                },
+                {
+                    "name": "duration",
+                    "type": "float",
+                    "desc": "Recording length in seconds; 0 = unlimited (stop manually). When set, recording auto-stops and the file is finalized at exactly this length; a manual stop before the cutoff still wins",
+                    "desc_ja": "録画の長さ（秒）。0 = 無制限（手動で stop）。指定するとその長さで自動停止しファイルが確定する。時間内の手動 stop は常に優先される",
+                    "desc_ko": "녹화 길이(초). 0 = 무제한(수동으로 stop). 지정하면 해당 길이에서 자동 정지되고 파일이 확정된다. 시간 내 수동 stop이 항상 우선"
                 }
             ]
         },
@@ -24775,7 +24941,9 @@ const TrussCAPI = {
                     "return": "bool",
                     "signatures": [
                         "const std::string & path, const VideoRecordSettings & settings = {}",
-                        "const Fbo & fbo, const std::string & path, const VideoRecordSettings & settings = {}"
+                        "const Fbo & fbo, const std::string & path, const VideoRecordSettings & settings = {}",
+                        "const std::string & path, float durationSec",
+                        "const Fbo & fbo, const std::string & path, float durationSec"
                     ],
                     "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically"
                 },
