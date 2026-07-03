@@ -201,18 +201,14 @@
           "width": 960,
           "height": 600,
           "webSupported": true,
-          "additionalFiles": [
-            "shaders/effect.glsl"
-          ]
+          "additionalFiles": ["shaders/effect.glsl"]
         },
         {
           "name": "fullscreenShaderExample",
           "width": 960,
           "height": 600,
           "webSupported": true,
-          "additionalFiles": [
-            "shaders/effects.glsl"
-          ]
+          "additionalFiles": ["shaders/effects.glsl"]
         },
         {
           "name": "strokeMeshExample",
@@ -460,18 +456,14 @@
           "width": 580,
           "height": 380,
           "webSupported": false,
-          "additionalFiles": [
-            "AnalysisThread.h"
-          ]
+          "additionalFiles": ["AnalysisThread.h"]
         },
         {
           "name": "threadExample",
           "width": 640,
           "height": 480,
           "webSupported": false,
-          "additionalFiles": [
-            "threadedObject.h"
-          ]
+          "additionalFiles": ["threadedObject.h"]
         }
       ]
     },
@@ -641,9 +633,7 @@
           "height": 540,
           "webSupported": true,
           "autoScreenshot": false,
-          "additionalFiles": [
-            "shaders/lut.glsl"
-          ]
+          "additionalFiles": ["shaders/lut.glsl"]
         }
       ]
     },
