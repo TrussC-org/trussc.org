@@ -58,7 +58,7 @@
     .cw-msgs::-webkit-scrollbar { width: 7px; }
     .cw-msgs::-webkit-scrollbar-thumb { background: var(--color-border,#27272a); border-radius: 4px; }
 
-    .cw-note { align-self: center; margin: auto 0; text-align: center; color: var(--color-text-muted,#8b8b93); font-size: 11px; line-height: 1.7; opacity: 0.8; padding: 0 24px; }
+    .cw-note { align-self: center; margin: auto 24px; white-space: pre-line; text-align: center; color: var(--color-text-muted,#8b8b93); font-size: 13px; line-height: 1.7; padding: 10px 16px; background: var(--color-bg-card,#16161a); border: 1px solid var(--color-border,#27272a); border-radius: 10px; }
     .cw-msg { font-size: 13.5px; line-height: 1.6; max-width: 92%; }
     .cw-msg.user { align-self: flex-end; background: var(--color-primary,#6366f1); color: #fff; padding: 8px 12px; border-radius: 12px 12px 2px 12px; }
     .cw-msg.bot { align-self: flex-start; color: var(--color-text,#e8e8ed); }
@@ -145,21 +145,21 @@
       placeholder: 'e.g. "How do I draw a curve?" "Any shader examples?"',
       more: 'See also: ',
       sources: 'sources',
-      privacy: 'Chats are logged anonymously for usage statistics.',
+      privacy: '\uD83D\uDD12 Chat history is stored anonymized\nNo personal data is collected.',
     },
     ja: {
       greeting: '質問ある？',
       placeholder: '例:「曲線の書き方は？」「シェーダのサンプルある？」',
       more: '詳しくは: ',
       sources: '出典',
-      privacy: '使用統計のため、チャットは匿名で記録されます。',
+      privacy: '\uD83D\uDD12 チャット履歴は匿名化されて保存しています\n（個人情報は含まれません）',
     },
     ko: {
       greeting: '질문 있어?',
       placeholder: '예: "곡선은 어떻게 그리나요?" "셰이더 예제 있어요?"',
       more: '자세히: ',
       sources: '출처',
-      privacy: '사용 통계를 위해 대화는 익명으로 기록됩니다.',
+      privacy: '\uD83D\uDD12 채팅 기록은 익명화되어 저장됩니다\n(개인정보는 수집하지 않아요)',
     },
   };
   var STR = I18N[LANG];
