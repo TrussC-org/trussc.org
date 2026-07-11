@@ -1,12996 +1,13068 @@
-// TrussSketch API Definition
-            // This is the single source of truth for all TrussSketch functions.
-            // Used by: autocomplete, reference page, REFERENCE.md generation
-            //
-            // AUTO-GENERATED from api-definition.yaml
-            // Do not edit directly - edit api-definition.yaml instead
-            
-            const TrussSketchAPI = {
-    "categories": [
-        {
-            "name": "Lifecycle",
-            "functions": [
-                {
-                    "name": "setup",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Called once at start"
-                },
-                {
-                    "name": "update",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Called every frame before draw"
-                },
-                {
-                    "name": "draw",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Called every frame after update"
-                },
-                {
-                    "name": "cleanup",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Called once before exit (optional user callback for cleanup)"
-                },
-                {
-                    "name": "runApp",
-                    "params": "settings",
-                    "params_typed": "const WindowSettings& settings = WindowSettings()",
-                    "return_type": "int",
-                    "desc": "Start the application main loop. Called from main()"
-                }
-            ]
-        },
-        {
-            "name": "Events",
-            "functions": [
-                {
-                    "name": "mousePressed",
-                    "params": "pos, button",
-                    "params_typed": "Vec2 pos, int button",
-                    "return_type": "void",
-                    "desc": "Mouse button pressed"
-                },
-                {
-                    "name": "mouseReleased",
-                    "params": "pos, button",
-                    "params_typed": "Vec2 pos, int button",
-                    "return_type": "void",
-                    "desc": "Mouse button released"
-                },
-                {
-                    "name": "mouseMoved",
-                    "params": "pos",
-                    "params_typed": "Vec2 pos",
-                    "return_type": "void",
-                    "desc": "Mouse moved"
-                },
-                {
-                    "name": "mouseDragged",
-                    "params": "pos, button",
-                    "params_typed": "Vec2 pos, int button",
-                    "return_type": "void",
-                    "desc": "Mouse dragged"
-                },
-                {
-                    "name": "keyPressed",
-                    "params": "key",
-                    "params_typed": "int key",
-                    "return_type": "void",
-                    "desc": "Key pressed. Use KEY_* constants for special keys, or uppercase char literals for printable keys (e.g. key == 'A', key == '1')"
-                },
-                {
-                    "name": "keyReleased",
-                    "params": "key",
-                    "params_typed": "int key",
-                    "return_type": "void",
-                    "desc": "Key released"
-                },
-                {
-                    "name": "windowResized",
-                    "params": "width, height",
-                    "params_typed": "int width, int height",
-                    "return_type": "void",
-                    "desc": "Window resized"
-                }
-            ]
-        },
-        {
-            "name": "Graphics - Color",
-            "functions": [
-                {
-                    "name": "clear",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Clear screen. No args = transparent black (0,0,0,0)"
-                },
-                {
-                    "name": "clear",
-                    "params": "gray, a",
-                    "params_typed": "float gray, float a = 1.0f",
-                    "return_type": "void",
-                    "desc": "Clear screen. No args = transparent black (0,0,0,0)"
-                },
-                {
-                    "name": "clear",
-                    "params": "r, g, b, a",
-                    "params_typed": "float r, float g, float b, float a = 1.0f",
-                    "return_type": "void",
-                    "desc": "Clear screen. No args = transparent black (0,0,0,0)"
-                },
-                {
-                    "name": "setColor",
-                    "params": "gray, a",
-                    "params_typed": "float gray, float a = 1.0f",
-                    "return_type": "void",
-                    "desc": "Set drawing color (0.0-1.0)"
-                },
-                {
-                    "name": "setColor",
-                    "params": "r, g, b, a",
-                    "params_typed": "float r, float g, float b, float a = 1.0f",
-                    "return_type": "void",
-                    "desc": "Set drawing color (0.0-1.0)"
-                },
-                {
-                    "name": "setColor",
-                    "params": "r, g, b, a",
-                    "params_typed": "float r, float g, float b, float a",
-                    "return_type": "void",
-                    "desc": "Set drawing color (0.0-1.0)"
-                },
-                {
-                    "name": "setColorHSB",
-                    "params": "h, s, b, a",
-                    "params_typed": "float h, float s, float b, float a = 1.0f",
-                    "return_type": "void",
-                    "desc": "Set color from HSB (H: 0-1)"
-                },
-                {
-                    "name": "setColorOKLCH",
-                    "params": "L, C, H, alpha",
-                    "params_typed": "float L, float C, float H, float alpha = 1.0f",
-                    "return_type": "void",
-                    "desc": "Set color from OKLCH"
-                },
-                {
-                    "name": "setColorOKLab",
-                    "params": "L, a_lab, b_lab, alpha",
-                    "params_typed": "float L, float a_lab, float b_lab, float alpha = 1.0f",
-                    "return_type": "void",
-                    "desc": "Set color from OKLab"
-                },
-                {
-                    "name": "srgbToLinear",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Convert a single sRGB channel value to linear RGB"
-                },
-                {
-                    "name": "linearToSrgb",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Convert a single linear RGB channel value to sRGB"
-                }
-            ]
-        },
-        {
-            "name": "Graphics - Shapes",
-            "functions": [
-                {
-                    "name": "drawRect",
-                    "params": "x, y, w, h",
-                    "params_typed": "float x, float y, float w, float h",
-                    "return_type": "void",
-                    "desc": "Draw rectangle"
-                },
-                {
-                    "name": "drawRect",
-                    "params": "pos, w, h",
-                    "params_typed": "Vec3 pos, float w, float h",
-                    "return_type": "void",
-                    "desc": "Draw rectangle"
-                },
-                {
-                    "name": "drawRect",
-                    "params": "pos, size",
-                    "params_typed": "Vec3 pos, Vec2 size",
-                    "return_type": "void",
-                    "desc": "Draw rectangle"
-                },
-                {
-                    "name": "drawRectRounded",
-                    "params": "x, y, w, h, radius",
-                    "params_typed": "float x, float y, float w, float h, float radius",
-                    "return_type": "void",
-                    "desc": "Draw rounded rectangle (circular arc corners)"
-                },
-                {
-                    "name": "drawRectRounded",
-                    "params": "pos, size, radius",
-                    "params_typed": "Vec3 pos, Vec2 size, float radius",
-                    "return_type": "void",
-                    "desc": "Draw rounded rectangle (circular arc corners)"
-                },
-                {
-                    "name": "drawRectSquircle",
-                    "params": "x, y, w, h, radius",
-                    "params_typed": "float x, float y, float w, float h, float radius",
-                    "return_type": "void",
-                    "desc": "Draw squircle rectangle (curvature-continuous corners, iOS-style)"
-                },
-                {
-                    "name": "drawRectSquircle",
-                    "params": "pos, size, radius",
-                    "params_typed": "Vec3 pos, Vec2 size, float radius",
-                    "return_type": "void",
-                    "desc": "Draw squircle rectangle (curvature-continuous corners, iOS-style)"
-                },
-                {
-                    "name": "drawCircle",
-                    "params": "x, y, radius",
-                    "params_typed": "float x, float y, float radius",
-                    "return_type": "void",
-                    "desc": "Draw circle"
-                },
-                {
-                    "name": "drawCircle",
-                    "params": "center, radius",
-                    "params_typed": "Vec3 center, float radius",
-                    "return_type": "void",
-                    "desc": "Draw circle"
-                },
-                {
-                    "name": "drawArc",
-                    "params": "x, y, radius, angleBegin, angleEnd",
-                    "params_typed": "float x, float y, float radius, float angleBegin, float angleEnd",
-                    "return_type": "void",
-                    "desc": "Draw arc (partial circle, angles in radians)"
-                },
-                {
-                    "name": "drawArc",
-                    "params": "center, radius, angleBegin, angleEnd",
-                    "params_typed": "Vec3 center, float radius, float angleBegin, float angleEnd",
-                    "return_type": "void",
-                    "desc": "Draw arc (partial circle, angles in radians)"
-                },
-                {
-                    "name": "drawEllipse",
-                    "params": "x, y, w, h",
-                    "params_typed": "float x, float y, float w, float h",
-                    "return_type": "void",
-                    "desc": "Draw ellipse"
-                },
-                {
-                    "name": "drawEllipse",
-                    "params": "center, rx, ry",
-                    "params_typed": "Vec3 center, float rx, float ry",
-                    "return_type": "void",
-                    "desc": "Draw ellipse"
-                },
-                {
-                    "name": "drawEllipse",
-                    "params": "center, radii",
-                    "params_typed": "Vec3 center, Vec2 radii",
-                    "return_type": "void",
-                    "desc": "Draw ellipse"
-                },
-                {
-                    "name": "drawPoint",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "void",
-                    "desc": "Draw a single point"
-                },
-                {
-                    "name": "drawPoint",
-                    "params": "pos",
-                    "params_typed": "Vec3 pos",
-                    "return_type": "void",
-                    "desc": "Draw a single point"
-                },
-                {
-                    "name": "drawLine",
-                    "params": "x1, y1, x2, y2",
-                    "params_typed": "float x1, float y1, float x2, float y2",
-                    "return_type": "void",
-                    "desc": "Draw line (2D or 3D)"
-                },
-                {
-                    "name": "drawLine",
-                    "params": "x1, y1, z1, x2, y2, z2",
-                    "params_typed": "float x1, float y1, float z1, float x2, float y2, float z2",
-                    "return_type": "void",
-                    "desc": "Draw line (2D or 3D)"
-                },
-                {
-                    "name": "drawLine",
-                    "params": "p1, p2",
-                    "params_typed": "Vec3 p1, Vec3 p2",
-                    "return_type": "void",
-                    "desc": "Draw line (2D or 3D)"
-                },
-                {
-                    "name": "drawBezier",
-                    "params": "p0, p1, p2, p3",
-                    "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3",
-                    "return_type": "void",
-                    "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)"
-                },
-                {
-                    "name": "drawBezier",
-                    "params": "p0, p1, p2",
-                    "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2",
-                    "return_type": "void",
-                    "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)"
-                },
-                {
-                    "name": "drawBezier",
-                    "params": "controlPoints",
-                    "params_typed": "const vector<Vec3>& controlPoints",
-                    "return_type": "void",
-                    "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)"
-                },
-                {
-                    "name": "drawCurve",
-                    "params": "p0, p1, p2, p3",
-                    "params_typed": "Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3",
-                    "return_type": "void",
-                    "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)"
-                },
-                {
-                    "name": "drawCurve",
-                    "params": "points",
-                    "params_typed": "const vector<Vec3>& points",
-                    "return_type": "void",
-                    "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)"
-                },
-                {
-                    "name": "drawCurve",
-                    "params": "points, closed",
-                    "params_typed": "const vector<Vec3>& points, bool closed",
-                    "return_type": "void",
-                    "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)"
-                },
-                {
-                    "name": "drawTriangle",
-                    "params": "x1, y1, x2, y2, x3, y3",
-                    "params_typed": "float x1, float y1, float x2, float y2, float x3, float y3",
-                    "return_type": "void",
-                    "desc": "Draw triangle"
-                },
-                {
-                    "name": "drawTriangle",
-                    "params": "p1, p2, p3",
-                    "params_typed": "Vec3 p1, Vec3 p2, Vec3 p3",
-                    "return_type": "void",
-                    "desc": "Draw triangle"
-                },
-                {
-                    "name": "drawBox",
-                    "params": "size",
-                    "params_typed": "float size",
-                    "return_type": "void",
-                    "desc": "Draw 3D box (respects fill/noFill)"
-                },
-                {
-                    "name": "drawBox",
-                    "params": "w, h, d",
-                    "params_typed": "float w, float h, float d",
-                    "return_type": "void",
-                    "desc": "Draw 3D box (respects fill/noFill)"
-                },
-                {
-                    "name": "drawBox",
-                    "params": "x, y, z, size",
-                    "params_typed": "float x, float y, float z, float size",
-                    "return_type": "void",
-                    "desc": "Draw 3D box (respects fill/noFill)"
-                },
-                {
-                    "name": "drawBox",
-                    "params": "x, y, z, w, h, d",
-                    "params_typed": "float x, float y, float z, float w, float h, float d",
-                    "return_type": "void",
-                    "desc": "Draw 3D box (respects fill/noFill)"
-                },
-                {
-                    "name": "drawBox",
-                    "params": "pos, size",
-                    "params_typed": "Vec3 pos, float size",
-                    "return_type": "void",
-                    "desc": "Draw 3D box (respects fill/noFill)"
-                },
-                {
-                    "name": "drawBox",
-                    "params": "pos, w, h, d",
-                    "params_typed": "Vec3 pos, float w, float h, float d",
-                    "return_type": "void",
-                    "desc": "Draw 3D box (respects fill/noFill)"
-                },
-                {
-                    "name": "drawSphere",
-                    "params": "radius, resolution",
-                    "params_typed": "float radius, int resolution = 16",
-                    "return_type": "void",
-                    "desc": "Draw 3D sphere (respects fill/noFill)"
-                },
-                {
-                    "name": "drawSphere",
-                    "params": "x, y, z, radius, resolution",
-                    "params_typed": "float x, float y, float z, float radius, int resolution = 16",
-                    "return_type": "void",
-                    "desc": "Draw 3D sphere (respects fill/noFill)"
-                },
-                {
-                    "name": "drawSphere",
-                    "params": "pos, radius, resolution",
-                    "params_typed": "Vec3 pos, float radius, int resolution = 16",
-                    "return_type": "void",
-                    "desc": "Draw 3D sphere (respects fill/noFill)"
-                },
-                {
-                    "name": "drawCone",
-                    "params": "radius, height, resolution",
-                    "params_typed": "float radius, float height, int resolution = 16",
-                    "return_type": "void",
-                    "desc": "Draw 3D cone (respects fill/noFill)"
-                },
-                {
-                    "name": "drawCone",
-                    "params": "x, y, z, radius, height, resolution",
-                    "params_typed": "float x, float y, float z, float radius, float height, int resolution = 16",
-                    "return_type": "void",
-                    "desc": "Draw 3D cone (respects fill/noFill)"
-                },
-                {
-                    "name": "drawCone",
-                    "params": "pos, radius, height, resolution",
-                    "params_typed": "Vec3 pos, float radius, float height, int resolution = 16",
-                    "return_type": "void",
-                    "desc": "Draw 3D cone (respects fill/noFill)"
-                },
-                {
-                    "name": "beginShape",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Begin drawing a shape"
-                },
-                {
-                    "name": "vertex",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "void",
-                    "desc": "Add a vertex"
-                },
-                {
-                    "name": "vertex",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "void",
-                    "desc": "Add a vertex"
-                },
-                {
-                    "name": "vertex",
-                    "params": "v",
-                    "params_typed": "const Vec2& v",
-                    "return_type": "void",
-                    "desc": "Add a vertex"
-                },
-                {
-                    "name": "vertex",
-                    "params": "v",
-                    "params_typed": "const Vec3& v",
-                    "return_type": "void",
-                    "desc": "Add a vertex"
-                },
-                {
-                    "name": "endShape",
-                    "params": "close",
-                    "params_typed": "bool close = false",
-                    "return_type": "void",
-                    "desc": "End drawing a shape"
-                },
-                {
-                    "name": "appendArc",
-                    "params": "cx, cy, radius, angleBegin, angleEnd",
-                    "params_typed": "float cx, float cy, float radius, float angleBegin, float angleEnd",
-                    "return_type": "void",
-                    "desc": "Append arc vertices to the current shape (use between beginShape/endShape)"
-                },
-                {
-                    "name": "appendArc",
-                    "params": "center, radius, angleBegin, angleEnd",
-                    "params_typed": "const Vec2& center, float radius, float angleBegin, float angleEnd",
-                    "return_type": "void",
-                    "desc": "Append arc vertices to the current shape (use between beginShape/endShape)"
-                },
-                {
-                    "name": "appendCurve",
-                    "params": "points",
-                    "params_typed": "const vector<Vec3>& points",
-                    "return_type": "void",
-                    "desc": "Append Catmull-Rom curve vertices to the current shape (use between beginShape/endShape; needs >=4 points, closed=true wraps around)"
-                },
-                {
-                    "name": "appendCurve",
-                    "params": "points, closed",
-                    "params_typed": "const vector<Vec3>& points, bool closed",
-                    "return_type": "void",
-                    "desc": "Append Catmull-Rom curve vertices to the current shape (use between beginShape/endShape; needs >=4 points, closed=true wraps around)"
-                },
-                {
-                    "name": "beginStroke",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Begin drawing a stroke (uses StrokeMesh internally)"
-                },
-                {
-                    "name": "endStroke",
-                    "params": "close",
-                    "params_typed": "bool close = false",
-                    "return_type": "void",
-                    "desc": "End drawing a stroke"
-                },
-                {
-                    "name": "beginLines",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Begin batch line drawing. Add vertex pairs with vertex(), then call endLines(). Each pair of vertices draws one independent line segment. Use setColor() between vertices for per-line colors."
-                },
-                {
-                    "name": "endLines",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "End batch line drawing and render all accumulated line segments"
-                },
-                {
-                    "name": "drawStroke",
-                    "params": "x1, y1, x2, y2",
-                    "params_typed": "float x1, float y1, float x2, float y2",
-                    "return_type": "void",
-                    "desc": "Draw a single stroke segment (thick line with cap/join)"
-                },
-                {
-                    "name": "drawStroke",
-                    "params": "p1, p2",
-                    "params_typed": "const Vec2& p1, const Vec2& p2",
-                    "return_type": "void",
-                    "desc": "Draw a single stroke segment (thick line with cap/join)"
-                },
-                {
-                    "name": "drawBitmapString",
-                    "params": "text, x, y, screenFixed",
-                    "params_typed": "const string& text, float x, float y, bool screenFixed = true",
-                    "return_type": "void",
-                    "desc": "Draw text"
-                },
-                {
-                    "name": "drawBitmapStringHighlight",
-                    "params": "text, x, y, background, foreground",
-                    "params_typed": "const string& text, float x, float y, const Color& background = Color(0,0,0), const Color& foreground = Color(1,1,1)",
-                    "return_type": "void",
-                    "desc": "Draw text with background highlight"
-                },
-                {
-                    "name": "getBitmapStringBounds",
-                    "params": "text, width, height",
-                    "params_typed": "const string& text, float& width, float& height",
-                    "return_type": "void",
-                    "desc": "Get bitmap string bounding box size"
-                },
-                {
-                    "name": "setTextAlign",
-                    "params": "h, v",
-                    "params_typed": "Direction h, Direction v",
-                    "return_type": "void",
-                    "desc": "Set text alignment"
-                },
-                {
-                    "name": "getTextAlignH",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Direction",
-                    "desc": "Get horizontal text alignment"
-                },
-                {
-                    "name": "getTextAlignV",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Direction",
-                    "desc": "Get vertical text alignment"
-                },
-                {
-                    "name": "getBitmapFontHeight",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get bitmap font height"
-                },
-                {
-                    "name": "getBitmapStringWidth",
-                    "params": "text",
-                    "params_typed": "const string& text",
-                    "return_type": "float",
-                    "desc": "Get text width"
-                },
-                {
-                    "name": "getBitmapStringHeight",
-                    "params": "text",
-                    "params_typed": "const string& text",
-                    "return_type": "float",
-                    "desc": "Get text height"
-                },
-                {
-                    "name": "getBitmapStringBBox",
-                    "params": "text",
-                    "params_typed": "const std::string & text",
-                    "return_type": "Rect",
-                    "desc": "Get text bounding box"
-                },
-                {
-                    "name": "bitmapfont::registerGlyph",
-                    "params": "g",
-                    "params_typed": "const bitmapfont::Glyph& g",
-                    "return_type": "void",
-                    "desc": "Register a bitmap glyph for a Unicode codepoint (extends drawBitmapString)"
-                },
-                {
-                    "name": "bitmapfont::registerGlyphs",
-                    "params": "glyphs",
-                    "params_typed": "const bitmapfont::Glyph (&glyphs)[N] glyphs[]",
-                    "return_type": "void",
-                    "desc": "Register a batch of bitmap glyphs at once"
-                },
-                {
-                    "name": "bitmapfont::updateGlyph",
-                    "params": "cp, newData",
-                    "params_typed": "uint32_t cp, const uint8_t* newData",
-                    "return_type": "void",
-                    "desc": "Swap an already-registered glyph's pixel data (atlas cell unchanged). Useful for per-frame animation."
-                },
-                {
-                    "name": "bitmapfont::compile8x13",
-                    "params": "rows",
-                    "params_typed": "const char* const (&rows)[13] rows",
-                    "return_type": "std::array<uint8_t, 13>",
-                    "desc": "Compile-time ASCII art -> packed halfwidth (8x13) glyph bytes. '#' = lit, '.' = empty."
-                },
-                {
-                    "name": "bitmapfont::compile16x13",
-                    "params": "rows",
-                    "params_typed": "const char* const (&rows)[13] rows",
-                    "return_type": "std::array<uint8_t, 26>",
-                    "desc": "Compile-time ASCII art -> packed fullwidth (16x13) glyph bytes. '#' = lit, '.' = empty."
-                },
-                {
-                    "name": "setBitmapLineHeight",
-                    "params": "height",
-                    "params_typed": "float height",
-                    "return_type": "void",
-                    "desc": "Set line height for bitmap string newlines (default: 16)"
-                },
-                {
-                    "name": "getBitmapLineHeight",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get line height for bitmap string newlines"
-                },
-                {
-                    "name": "setFps",
-                    "params": "fps",
-                    "params_typed": "float fps",
-                    "return_type": "void",
-                    "desc": "Set target frame rate (VSYNC = -1.0)"
-                }
-            ]
-        },
-        {
-            "name": "Graphics - Style",
-            "functions": [
-                {
-                    "name": "fill",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Enable fill mode (shapes are solid, no outline)"
-                },
-                {
-                    "name": "noFill",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Enable stroke mode (shapes show outline only)"
-                },
-                {
-                    "name": "setStrokeWeight",
-                    "params": "weight",
-                    "params_typed": "float weight",
-                    "return_type": "void",
-                    "desc": "Set stroke width"
-                },
-                {
-                    "name": "getStrokeWeight",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current stroke width"
-                },
-                {
-                    "name": "setStrokeCap",
-                    "params": "cap",
-                    "params_typed": "StrokeCap cap",
-                    "return_type": "void",
-                    "desc": "Set stroke cap style (Butt, Round, Square)"
-                },
-                {
-                    "name": "getStrokeCap",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "StrokeCap",
-                    "desc": "Get current stroke cap style"
-                },
-                {
-                    "name": "setStrokeJoin",
-                    "params": "join",
-                    "params_typed": "StrokeJoin join",
-                    "return_type": "void",
-                    "desc": "Set stroke join style (Miter, Round, Bevel)"
-                },
-                {
-                    "name": "getStrokeJoin",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "StrokeJoin",
-                    "desc": "Get current stroke join style"
-                },
-                {
-                    "name": "isFillEnabled",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if fill mode is enabled"
-                },
-                {
-                    "name": "isStrokeEnabled",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if stroke mode is enabled"
-                },
-                {
-                    "name": "setCurveTolerance",
-                    "params": "pixels",
-                    "params_typed": "float pixels",
-                    "return_type": "void",
-                    "desc": "Set adaptive curve tessellation tolerance in pixels (smaller = smoother, scale-aware)"
-                },
-                {
-                    "name": "getCurveTolerance",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current curve tessellation tolerance (in pixels)"
-                },
-                {
-                    "name": "setCurveResolution",
-                    "params": "n",
-                    "params_typed": "int n",
-                    "return_type": "void",
-                    "desc": "Set fixed curve segment count (switches off adaptive tolerance mode)"
-                },
-                {
-                    "name": "getCurveResolution",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get current curve resolution"
-                },
-                {
-                    "name": "resetStyle",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Reset style to default values (white color, fill enabled, stroke disabled)"
-                },
-                {
-                    "name": "getColor",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Color",
-                    "desc": "Get current fill color"
-                },
-                {
-                    "name": "setScissor",
-                    "params": "x, y, w, h",
-                    "params_typed": "float x, float y, float w, float h",
-                    "return_type": "void",
-                    "desc": "Set scissor clipping rectangle. Also available via RectNode::setClipping(true)"
-                },
-                {
-                    "name": "resetScissor",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Reset (disable) scissor clipping"
-                },
-                {
-                    "name": "pushScissor",
-                    "params": "x, y, w, h",
-                    "params_typed": "float x, float y, float w, float h",
-                    "return_type": "void",
-                    "desc": "Push scissor clipping rectangle onto stack"
-                },
-                {
-                    "name": "popScissor",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Pop scissor clipping rectangle from stack"
-                },
-                {
-                    "name": "setBlendMode",
-                    "params": "mode",
-                    "params_typed": "BlendMode mode",
-                    "return_type": "void",
-                    "desc": "Set blend mode. BlendMode::Alpha (default), Add, Multiply, Screen, Subtract, Disabled"
-                },
-                {
-                    "name": "getBlendMode",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "BlendMode",
-                    "desc": "Get current blend mode"
-                },
-                {
-                    "name": "resetBlendMode",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Reset blend mode to Alpha (default)"
-                },
-                {
-                    "name": "pushStyle",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Push current style (color, fill, stroke, blend) onto stack"
-                },
-                {
-                    "name": "popStyle",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Pop style from stack, restoring previous state"
-                },
-                {
-                    "name": "getCurveMode",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "CurveStyle::Mode",
-                    "desc": "Current curve tessellation mode (fixed segment count vs. adaptive tolerance)"
-                }
-            ]
-        },
-        {
-            "name": "Transform",
-            "functions": [
-                {
-                    "name": "translate",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "void",
-                    "desc": "Move origin"
-                },
-                {
-                    "name": "translate",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "void",
-                    "desc": "Move origin"
-                },
-                {
-                    "name": "rotate",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "void",
-                    "desc": "Rotate by radians (single axis, euler angles, or quaternion)"
-                },
-                {
-                    "name": "rotate",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "void",
-                    "desc": "Rotate by radians (single axis, euler angles, or quaternion)"
-                },
-                {
-                    "name": "rotate",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "void",
-                    "desc": "Rotate by radians (single axis, euler angles, or quaternion)"
-                },
-                {
-                    "name": "rotate",
-                    "params": "quat",
-                    "params_typed": "const Quaternion& quat",
-                    "return_type": "void",
-                    "desc": "Rotate by radians (single axis, euler angles, or quaternion)"
-                },
-                {
-                    "name": "rotateDeg",
-                    "params": "degrees",
-                    "params_typed": "float degrees",
-                    "return_type": "void",
-                    "desc": "Rotate by degrees"
-                },
-                {
-                    "name": "rotateDeg",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "void",
-                    "desc": "Rotate by degrees"
-                },
-                {
-                    "name": "rotateDeg",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "void",
-                    "desc": "Rotate by degrees"
-                },
-                {
-                    "name": "rotateX",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "void",
-                    "desc": "Rotate around X axis"
-                },
-                {
-                    "name": "rotateY",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "void",
-                    "desc": "Rotate around Y axis"
-                },
-                {
-                    "name": "rotateZ",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "void",
-                    "desc": "Rotate around Z axis"
-                },
-                {
-                    "name": "rotateXDeg",
-                    "params": "degrees",
-                    "params_typed": "float degrees",
-                    "return_type": "void",
-                    "desc": "Rotate around X axis (degrees)"
-                },
-                {
-                    "name": "rotateYDeg",
-                    "params": "degrees",
-                    "params_typed": "float degrees",
-                    "return_type": "void",
-                    "desc": "Rotate around Y axis (degrees)"
-                },
-                {
-                    "name": "rotateZDeg",
-                    "params": "degrees",
-                    "params_typed": "float degrees",
-                    "return_type": "void",
-                    "desc": "Rotate around Z axis (degrees)"
-                },
-                {
-                    "name": "scale",
-                    "params": "s",
-                    "params_typed": "float s",
-                    "return_type": "void",
-                    "desc": "Scale"
-                },
-                {
-                    "name": "scale",
-                    "params": "sx, sy",
-                    "params_typed": "float sx, float sy",
-                    "return_type": "void",
-                    "desc": "Scale"
-                },
-                {
-                    "name": "pushMatrix",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Save transform state"
-                },
-                {
-                    "name": "popMatrix",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Restore transform state"
-                },
-                {
-                    "name": "getMatrix",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Mat4",
-                    "desc": "Get the current transformation matrix"
-                },
-                {
-                    "name": "getScale",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Effective uniform scale of the current matrix (max of x/y basis lengths)"
-                },
-                {
-                    "name": "resetMatrix",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Reset transformation matrix to identity"
-                },
-                {
-                    "name": "multMatrix",
-                    "params": "mat",
-                    "params_typed": "const Mat4& mat",
-                    "return_type": "void",
-                    "desc": "Multiply the current matrix by mat (relative transform, like translate/rotate)"
-                },
-                {
-                    "name": "setMatrix",
-                    "params": "mat",
-                    "params_typed": "const Mat4& mat",
-                    "return_type": "void",
-                    "desc": "Replace the current matrix with mat (absolute - use with caution, may break camera setup)"
-                },
-                {
-                    "name": "getCurrentMatrix",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Mat4",
-                    "desc": "Deprecated alias for getMatrix()"
-                },
-                {
-                    "name": "loadMatrix",
-                    "params": "mat",
-                    "params_typed": "const Mat4& mat",
-                    "return_type": "void",
-                    "desc": "Deprecated alias for setMatrix()"
-                },
-                {
-                    "name": "getCurrentScale",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Deprecated alias for getScale()"
-                }
-            ]
-        },
-        {
-            "name": "Window & Input",
-            "functions": [
-                {
-                    "name": "getWindowWidth",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get canvas width"
-                },
-                {
-                    "name": "getWindowHeight",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get canvas height"
-                },
-                {
-                    "name": "getWindowSize",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Vec2",
-                    "desc": "Get canvas size as Vec2"
-                },
-                {
-                    "name": "requestExitApp",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Request application exit. Can be cancelled by listening to events().exitRequested and setting args.cancel = true"
-                },
-                {
-                    "name": "exitApp",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Immediately exit the application (cannot be cancelled)"
-                },
-                {
-                    "name": "alertDialog",
-                    "params": "title, message",
-                    "params_typed": "const string& title, const string& message",
-                    "return_type": "void",
-                    "desc": "Show alert dialog with OK button"
-                },
-                {
-                    "name": "confirmDialog",
-                    "params": "title, message",
-                    "params_typed": "const string& title, const string& message",
-                    "return_type": "bool",
-                    "desc": "Show Yes/No confirmation dialog. Returns true if Yes clicked"
-                },
-                {
-                    "name": "alertDialogAsync",
-                    "params": "title, message, callback",
-                    "params_typed": "const string& title, const string& message, function<void()> callback = nullptr",
-                    "return_type": "void",
-                    "desc": "Show alert dialog asynchronously. Callback is called when dismissed"
-                },
-                {
-                    "name": "confirmDialogAsync",
-                    "params": "title, message, callback",
-                    "params_typed": "const string& title, const string& message, function<void(bool)> callback",
-                    "return_type": "void",
-                    "desc": "Show Yes/No dialog asynchronously. Callback receives true if Yes clicked"
-                },
-                {
-                    "name": "getMouseX",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get mouse X position"
-                },
-                {
-                    "name": "getMouseY",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get mouse Y position"
-                },
-                {
-                    "name": "getMousePos",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Vec2",
-                    "desc": "Get mouse position as Vec2"
-                },
-                {
-                    "name": "getGlobalMousePos",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Vec2",
-                    "desc": "Get global mouse position as Vec2"
-                },
-                {
-                    "name": "getGlobalMouseX",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get global mouse X (screen coordinates, not window-relative)"
-                },
-                {
-                    "name": "getGlobalMouseY",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get global mouse Y (screen coordinates, not window-relative)"
-                },
-                {
-                    "name": "getGlobalPMouseX",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get previous frame global mouse X"
-                },
-                {
-                    "name": "getGlobalPMouseY",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get previous frame global mouse Y"
-                },
-                {
-                    "name": "getMouseButton",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get currently pressed mouse button"
-                },
-                {
-                    "name": "setTouchAsMouse",
-                    "params": "enabled",
-                    "params_typed": "bool enabled",
-                    "return_type": "void",
-                    "desc": "Enable/disable touch events firing as mouse events (for Android/iOS)"
-                },
-                {
-                    "name": "getTouchAsMouse",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Get touchAsMouse state"
-                },
-                {
-                    "name": "isMousePressed",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Is mouse button pressed"
-                },
-                {
-                    "name": "isKeyPressed",
-                    "params": "key",
-                    "params_typed": "int key",
-                    "return_type": "bool",
-                    "desc": "Is specific key currently pressed"
-                },
-                {
-                    "name": "isShiftPressed",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True while either Shift key (left or right) is held"
-                },
-                {
-                    "name": "isControlPressed",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True while either Control key (left or right) is held"
-                },
-                {
-                    "name": "isAltPressed",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True while either Alt / Option key (left or right) is held"
-                },
-                {
-                    "name": "isSuperPressed",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True while either Super / Cmd / Win key (left or right) is held"
-                },
-                {
-                    "name": "showCursor",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Show the mouse cursor (default)"
-                },
-                {
-                    "name": "hideCursor",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Hide the mouse cursor"
-                },
-                {
-                    "name": "setCursor",
-                    "params": "cursor",
-                    "params_typed": "Cursor cursor",
-                    "return_type": "void",
-                    "desc": "Set the mouse cursor shape"
-                },
-                {
-                    "name": "getCursor",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Cursor",
-                    "desc": "Get the current mouse cursor shape"
-                },
-                {
-                    "name": "bindCursorImage",
-                    "params": "cursor, width, height, pixels, hotspotX, hotspotY",
-                    "params_typed": "Cursor cursor, int width, int height, const unsigned char* pixels, int hotspotX = 0, int hotspotY = 0",
-                    "return_type": "void",
-                    "desc": "Bind a custom image to a cursor slot (RGBA pixels or Image)"
-                },
-                {
-                    "name": "bindCursorImage",
-                    "params": "cursor, image, hotspotX, hotspotY",
-                    "params_typed": "Cursor cursor, const Image& image, int hotspotX = 0, int hotspotY = 0",
-                    "return_type": "void",
-                    "desc": "Bind a custom image to a cursor slot (RGBA pixels or Image)"
-                },
-                {
-                    "name": "unbindCursorImage",
-                    "params": "cursor",
-                    "params_typed": "Cursor cursor",
-                    "return_type": "void",
-                    "desc": "Unbind a custom cursor image, restoring the system default"
-                },
-                {
-                    "name": "events",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "CoreEvents&",
-                    "desc": "Get the global CoreEvents hub holding all framework events (setup, update, draw, keyPressed, mousePressed, etc.); use events().eventName.listen(callback) to subscribe"
-                },
-                {
-                    "name": "isOverlayHovered",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True when an overlay currently has the pointer over it (e.g. cursor over a tcxImGui panel); guard raw mouse input so clicks on UI panels are not also handled by the app"
-                },
-                {
-                    "name": "isOverlayFocused",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True when an overlay currently owns keyboard focus (e.g. a text input is active); guard raw key input so typing into a UI field is not also handled by the app"
-                }
-            ]
-        },
-        {
-            "name": "Time - Frame",
-            "functions": [
-                {
-                    "name": "getDeltaTime",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "double",
-                    "desc": "Seconds since last frame"
-                },
-                {
-                    "name": "getFrameRate",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "double",
-                    "desc": "Current FPS"
-                },
-                {
-                    "name": "getFps",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current FPS (alias for getFrameRate)"
-                },
-                {
-                    "name": "getFrameCount",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "uint64_t",
-                    "desc": "Total frames rendered"
-                },
-                {
-                    "name": "sleepMillis",
-                    "params": "millis",
-                    "params_typed": "int millis",
-                    "return_type": "void",
-                    "desc": "Block the current thread for the given number of milliseconds"
-                },
-                {
-                    "name": "sleepMicros",
-                    "params": "micros",
-                    "params_typed": "int micros",
-                    "return_type": "void",
-                    "desc": "Block the current thread for the given number of microseconds"
-                },
-                {
-                    "name": "getUpdateCount",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "uint64_t",
-                    "desc": "Get the number of update() calls since the app started"
-                },
-                {
-                    "name": "getDrawCount",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "uint64_t",
-                    "desc": "Get the number of draw() calls since the app started"
-                },
-                {
-                    "name": "getFpsSettings",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "FpsSettings",
-                    "desc": "Get the current FPS configuration (update/draw target rates, actual VSync rate, sync flag)"
-                }
-            ]
-        },
-        {
-            "name": "Memory",
-            "functions": [
-                {
-                    "name": "getSokolMemoryBytes",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Total bytes allocated by sokol libraries"
-                },
-                {
-                    "name": "getSokolMemoryAllocs",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Number of active allocations in sokol libraries"
-                },
-                {
-                    "name": "releaseSglBuffers",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Release sokol_gl vertex/command buffers (auto re-allocated on next draw)"
-                },
-                {
-                    "name": "getMemoryUsage",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "size_t",
-                    "desc": "Get process memory usage in bytes (platform-specific)"
-                },
-                {
-                    "name": "getFboCount",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "size_t",
-                    "desc": "Get number of active FBO objects"
-                },
-                {
-                    "name": "getTextureCount",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "size_t",
-                    "desc": "Get number of active Texture objects"
-                },
-                {
-                    "name": "getNodeCount",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "size_t",
-                    "desc": "Get number of active Node objects in scene graph"
-                }
-            ]
-        },
-        {
-            "name": "Platform",
-            "functions": [
-                {
-                    "name": "Platform::isWeb",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True on Web (Emscripten / WASM)"
-                },
-                {
-                    "name": "Platform::isMacOS",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True on macOS"
-                },
-                {
-                    "name": "Platform::isIOS",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True on iOS"
-                },
-                {
-                    "name": "Platform::isWindows",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True on Windows"
-                },
-                {
-                    "name": "Platform::isAndroid",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True on Android"
-                },
-                {
-                    "name": "Platform::isLinux",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True on Linux (desktop, excludes Android)"
-                },
-                {
-                    "name": "Platform::isApple",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True on any Apple platform (macOS or iOS)"
-                },
-                {
-                    "name": "Platform::isMobile",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True on mobile (iOS or Android)"
-                },
-                {
-                    "name": "Platform::isDesktop",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True on desktop (macOS, Windows, or Linux)"
-                },
-                {
-                    "name": "Platform::name",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "const char*",
-                    "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\""
-                },
-                {
-                    "name": "getThermalTemperature",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get device temperature in Celsius, or -1 if unavailable"
-                }
-            ]
-        },
-        {
-            "name": "Graphics Backend",
-            "functions": [
-                {
-                    "name": "GraphicsBackend::isOpenGL",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True when running on OpenGL (core or GLES3)"
-                },
-                {
-                    "name": "GraphicsBackend::isMetal",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True when running on Apple Metal"
-                },
-                {
-                    "name": "GraphicsBackend::isD3D11",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True when running on Direct3D 11"
-                },
-                {
-                    "name": "GraphicsBackend::isWebGPU",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True when running on WebGPU"
-                },
-                {
-                    "name": "GraphicsBackend::isWebGL2",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True when running on WebGL2 (GLES3 under Emscripten)"
-                },
-                {
-                    "name": "GraphicsBackend::isVulkan",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True when running on Vulkan"
-                },
-                {
-                    "name": "GraphicsBackend::name",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "const char*",
-                    "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\""
-                }
-            ]
-        },
-        {
-            "name": "Build Info",
-            "functions": [
-                {
-                    "name": "BuildInfo::date",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "const char*",
-                    "desc": "Build date in \"YYYY-MM-DD\" form (local time, CMake configure time)"
-                },
-                {
-                    "name": "BuildInfo::time",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "const char*",
-                    "desc": "Build time in \"HH:MM:SS\" form (local time)"
-                },
-                {
-                    "name": "BuildInfo::dateTime",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "const char*",
-                    "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)"
-                },
-                {
-                    "name": "BuildInfo::timestamp",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int64_t",
-                    "desc": "Build timestamp as Unix seconds (UTC)"
-                },
-                {
-                    "name": "BuildInfo::year",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Build year (e.g. 2026)"
-                },
-                {
-                    "name": "BuildInfo::month",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Build month (1-12)"
-                },
-                {
-                    "name": "BuildInfo::day",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Build day of month (1-31)"
-                },
-                {
-                    "name": "BuildInfo::hour",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Build hour (0-23)"
-                },
-                {
-                    "name": "BuildInfo::minute",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Build minute (0-59)"
-                },
-                {
-                    "name": "BuildInfo::second",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Build second (0-59)"
-                }
-            ]
-        },
-        {
-            "name": "Time - Elapsed",
-            "functions": [
-                {
-                    "name": "getElapsedTimef",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Elapsed seconds (float)"
-                },
-                {
-                    "name": "getElapsedTime",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "double",
-                    "desc": "Elapsed seconds (alias for getElapsedTimef)"
-                },
-                {
-                    "name": "getElapsedTimeMillis",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "uint64_t",
-                    "desc": "Elapsed milliseconds (int64)"
-                },
-                {
-                    "name": "getElapsedTimeMicros",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "uint64_t",
-                    "desc": "Elapsed microseconds (int64)"
-                },
-                {
-                    "name": "resetElapsedTimeCounter",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Reset elapsed time"
-                }
-            ]
-        },
-        {
-            "name": "Time - System",
-            "functions": [
-                {
-                    "name": "getSystemTimeMillis",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "uint64_t",
-                    "desc": "Unix time in milliseconds"
-                },
-                {
-                    "name": "getSystemTimeMicros",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "uint64_t",
-                    "desc": "Unix time in microseconds"
-                },
-                {
-                    "name": "getUnixTime",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "uint64_t",
-                    "desc": "Current Unix timestamp in seconds"
-                },
-                {
-                    "name": "getTimestampString",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "string",
-                    "desc": "Formatted timestamp"
-                },
-                {
-                    "name": "getTimestampString",
-                    "params": "format",
-                    "params_typed": "const string& format",
-                    "return_type": "string",
-                    "desc": "Formatted timestamp"
-                }
-            ]
-        },
-        {
-            "name": "Time - Current",
-            "functions": [
-                {
-                    "name": "getSeconds",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Current seconds (0-59)"
-                },
-                {
-                    "name": "getMinutes",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Current minutes (0-59)"
-                },
-                {
-                    "name": "getHours",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Current hours (0-23)"
-                },
-                {
-                    "name": "getYear",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Current year"
-                },
-                {
-                    "name": "getMonth",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Current month (1-12)"
-                },
-                {
-                    "name": "getDay",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Current day (1-31)"
-                },
-                {
-                    "name": "getWeekday",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Weekday (0=Sun, 6=Sat)"
-                }
-            ]
-        },
-        {
-            "name": "Math - Random & Noise",
-            "functions": [
-                {
-                    "name": "random",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Random number"
-                },
-                {
-                    "name": "random",
-                    "params": "max",
-                    "params_typed": "float max",
-                    "return_type": "float",
-                    "desc": "Random number"
-                },
-                {
-                    "name": "random",
-                    "params": "min, max",
-                    "params_typed": "float min, float max",
-                    "return_type": "float",
-                    "desc": "Random number"
-                },
-                {
-                    "name": "randomInt",
-                    "params": "max",
-                    "params_typed": "int max",
-                    "return_type": "int",
-                    "desc": "Random integer"
-                },
-                {
-                    "name": "randomInt",
-                    "params": "min, max",
-                    "params_typed": "int min, int max",
-                    "return_type": "int",
-                    "desc": "Random integer"
-                },
-                {
-                    "name": "randomSeed",
-                    "params": "seed",
-                    "params_typed": "unsigned int seed",
-                    "return_type": "void",
-                    "desc": "Set random seed"
-                },
-                {
-                    "name": "noise",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Perlin noise"
-                },
-                {
-                    "name": "noise",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "float",
-                    "desc": "Perlin noise"
-                },
-                {
-                    "name": "noise",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "float",
-                    "desc": "Perlin noise"
-                },
-                {
-                    "name": "signedNoise",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Perlin noise (-1.0 to 1.0)"
-                },
-                {
-                    "name": "signedNoise",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "float",
-                    "desc": "Perlin noise (-1.0 to 1.0)"
-                },
-                {
-                    "name": "signedNoise",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "float",
-                    "desc": "Perlin noise (-1.0 to 1.0)"
-                },
-                {
-                    "name": "signedNoise",
-                    "params": "x, y, z, w",
-                    "params_typed": "float x, float y, float z, float w",
-                    "return_type": "float",
-                    "desc": "Perlin noise (-1.0 to 1.0)"
-                },
-                {
-                    "name": "fbm",
-                    "params": "x, y, octaves, lacunarity, gain",
-                    "params_typed": "float x, float y, int octaves = 4, float lacunarity = 2.0, float gain = 0.5",
-                    "return_type": "float",
-                    "desc": "Fractal Brownian Motion noise"
-                },
-                {
-                    "name": "fbm",
-                    "params": "x, y, z, octaves, lacunarity, gain",
-                    "params_typed": "float x, float y, float z, int octaves = 4, float lacunarity = 2.0, float gain = 0.5",
-                    "return_type": "float",
-                    "desc": "Fractal Brownian Motion noise"
-                }
-            ]
-        },
-        {
-            "name": "Math - Interpolation",
-            "functions": [
-                {
-                    "name": "lerp",
-                    "params": "a, b, t",
-                    "params_typed": "float a, float b, float t",
-                    "return_type": "float",
-                    "desc": "Linear interpolation"
-                },
-                {
-                    "name": "clamp",
-                    "params": "v, min, max",
-                    "params_typed": "float v, float min, float max",
-                    "return_type": "float",
-                    "desc": "Clamp value to range"
-                },
-                {
-                    "name": "remap",
-                    "params": "v, inMin, inMax, outMin, outMax",
-                    "params_typed": "float v, float inMin, float inMax, float outMin, float outMax",
-                    "return_type": "float",
-                    "desc": "Remap value from one range to another"
-                }
-            ]
-        },
-        {
-            "name": "Math - Trigonometry",
-            "functions": [
-                {
-                    "name": "sin",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Sine"
-                },
-                {
-                    "name": "cos",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Cosine"
-                },
-                {
-                    "name": "tan",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Tangent"
-                },
-                {
-                    "name": "asin",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Arc sine"
-                },
-                {
-                    "name": "acos",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Arc cosine"
-                },
-                {
-                    "name": "atan",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Arc tangent"
-                },
-                {
-                    "name": "atan2",
-                    "params": "y, x",
-                    "params_typed": "float y, float x",
-                    "return_type": "float",
-                    "desc": "Arc tangent of y/x"
-                },
-                {
-                    "name": "deg2rad",
-                    "params": "degrees",
-                    "params_typed": "float degrees",
-                    "return_type": "float",
-                    "desc": "Degrees to radians"
-                },
-                {
-                    "name": "rad2deg",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "float",
-                    "desc": "Radians to degrees"
-                }
-            ]
-        },
-        {
-            "name": "Math - General",
-            "functions": [
-                {
-                    "name": "abs",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Absolute value"
-                },
-                {
-                    "name": "sqrt",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Square root"
-                },
-                {
-                    "name": "sq",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Square (x*x)"
-                },
-                {
-                    "name": "pow",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "float",
-                    "desc": "Power (x^y)"
-                },
-                {
-                    "name": "log",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Natural logarithm"
-                },
-                {
-                    "name": "exp",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Exponential (e^x)"
-                },
-                {
-                    "name": "min",
-                    "params": "a, b",
-                    "params_typed": "float a, float b",
-                    "return_type": "float",
-                    "desc": "Minimum"
-                },
-                {
-                    "name": "max",
-                    "params": "a, b",
-                    "params_typed": "float a, float b",
-                    "return_type": "float",
-                    "desc": "Maximum"
-                },
-                {
-                    "name": "floor",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Round down"
-                },
-                {
-                    "name": "ceil",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Round up"
-                },
-                {
-                    "name": "round",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Round to nearest"
-                },
-                {
-                    "name": "fmod",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "float",
-                    "desc": "Floating-point modulo"
-                },
-                {
-                    "name": "sign",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Sign (-1, 0, 1)"
-                },
-                {
-                    "name": "fract",
-                    "params": "x",
-                    "params_typed": "float x",
-                    "return_type": "float",
-                    "desc": "Fractional part"
-                },
-                {
-                    "name": "wrap",
-                    "params": "value, min, max",
-                    "params_typed": "float value, float min, float max",
-                    "return_type": "float",
-                    "desc": "Wrap value within range [min, max)"
-                },
-                {
-                    "name": "angleDifference",
-                    "params": "angle1, angle2",
-                    "params_typed": "float angle1, float angle2",
-                    "return_type": "float",
-                    "desc": "Shortest angle difference in radians [-TAU/2, TAU/2]"
-                },
-                {
-                    "name": "angleDifferenceDeg",
-                    "params": "deg1, deg2",
-                    "params_typed": "float deg1, float deg2",
-                    "return_type": "float",
-                    "desc": "Shortest angle difference in degrees [-180, 180]"
-                },
-                {
-                    "name": "applyWindow",
-                    "params": "signal, type",
-                    "params_typed": "vector<float>& signal, WindowType type",
-                    "return_type": "void",
-                    "desc": "Apply a window function (in place) to a signal to reduce spectral leakage before FFT"
-                },
-                {
-                    "name": "applyWindow",
-                    "params": "signal, type",
-                    "params_typed": "vector<complex<float>>& signal, WindowType type",
-                    "return_type": "void",
-                    "desc": "Apply a window function (in place) to a signal to reduce spectral leakage before FFT"
-                },
-                {
-                    "name": "isPowerOfTwo",
-                    "params": "n",
-                    "params_typed": "int n",
-                    "return_type": "bool",
-                    "desc": "Return true if n is a positive power of two"
-                },
-                {
-                    "name": "nextPowerOfTwo",
-                    "params": "n",
-                    "params_typed": "int n",
-                    "return_type": "int",
-                    "desc": "Return the smallest power of two greater than or equal to n"
-                },
-                {
-                    "name": "fft",
-                    "params": "data",
-                    "params_typed": "vector<complex<float>>& data",
-                    "return_type": "void",
-                    "desc": "In-place forward FFT (Cooley-Tukey radix-2); the data size must be a power of two"
-                },
-                {
-                    "name": "ifft",
-                    "params": "data",
-                    "params_typed": "vector<complex<float>>& data",
-                    "return_type": "void",
-                    "desc": "In-place inverse FFT; the data size must be a power of two"
-                },
-                {
-                    "name": "toComplex",
-                    "params": "real",
-                    "params_typed": "const vector<float>& real",
-                    "return_type": "vector<complex<float>>",
-                    "desc": "Convert a real-valued signal into a complex array with zero imaginary parts"
-                },
-                {
-                    "name": "fftReal",
-                    "params": "signal",
-                    "params_typed": "const vector<float>& signal",
-                    "return_type": "vector<complex<float>>",
-                    "desc": "Compute the FFT of a real-valued signal, optionally applying a window function first"
-                },
-                {
-                    "name": "fftReal",
-                    "params": "signal, window",
-                    "params_typed": "const vector<float>& signal, WindowType window",
-                    "return_type": "vector<complex<float>>",
-                    "desc": "Compute the FFT of a real-valued signal, optionally applying a window function first"
-                },
-                {
-                    "name": "fftMagnitude",
-                    "params": "spectrum",
-                    "params_typed": "const vector<complex<float>>& spectrum",
-                    "return_type": "vector<float>",
-                    "desc": "Return the magnitude (amplitude) of each bin in a spectrum"
-                },
-                {
-                    "name": "fftMagnitudeDb",
-                    "params": "spectrum, minDb",
-                    "params_typed": "const vector<complex<float>>& spectrum, float minDb = -100.0f",
-                    "return_type": "vector<float>",
-                    "desc": "Return the magnitude of each bin in decibels, clamped to minDb"
-                },
-                {
-                    "name": "fftPhase",
-                    "params": "spectrum",
-                    "params_typed": "const vector<complex<float>>& spectrum",
-                    "return_type": "vector<float>",
-                    "desc": "Return the phase angle (radians) of each bin in a spectrum"
-                },
-                {
-                    "name": "fftPower",
-                    "params": "spectrum",
-                    "params_typed": "const vector<complex<float>>& spectrum",
-                    "return_type": "vector<float>",
-                    "desc": "Return the power spectrum (magnitude squared) of each bin"
-                },
-                {
-                    "name": "binToFrequency",
-                    "params": "bin, fftSize, sampleRate",
-                    "params_typed": "int bin, int fftSize, int sampleRate",
-                    "return_type": "float",
-                    "desc": "Convert an FFT bin index to its frequency in Hz"
-                },
-                {
-                    "name": "frequencyToBin",
-                    "params": "freq, fftSize, sampleRate",
-                    "params_typed": "float freq, int fftSize, int sampleRate",
-                    "return_type": "int",
-                    "desc": "Convert a frequency in Hz to the nearest FFT bin index"
-                },
-                {
-                    "name": "windowFunction",
-                    "params": "type, i, n",
-                    "params_typed": "WindowType type, int i, int n",
-                    "return_type": "float",
-                    "desc": "Return the window coefficient for sample i of n for the given window type"
-                }
-            ]
-        },
-        {
-            "name": "Math - Geometry",
-            "functions": [
-                {
-                    "name": "dist",
-                    "params": "x1, y1, x2, y2",
-                    "params_typed": "float x1, float y1, float x2, float y2",
-                    "return_type": "float",
-                    "desc": "Distance between points"
-                },
-                {
-                    "name": "distSquared",
-                    "params": "x1, y1, x2, y2",
-                    "params_typed": "float x1, float y1, float x2, float y2",
-                    "return_type": "float",
-                    "desc": "Squared distance"
-                }
-            ]
-        },
-        {
-            "name": "Window & System",
-            "functions": [
-                {
-                    "name": "setWindowTitle",
-                    "params": "title",
-                    "params_typed": "const string& title",
-                    "return_type": "void",
-                    "desc": "Set window title"
-                },
-                {
-                    "name": "setWindowSize",
-                    "params": "width, height",
-                    "params_typed": "int width, int height",
-                    "return_type": "void",
-                    "desc": "Set window size"
-                },
-                {
-                    "name": "toggleFullscreen",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Toggle fullscreen mode"
-                },
-                {
-                    "name": "setClipboardString",
-                    "params": "text",
-                    "params_typed": "const string& text",
-                    "return_type": "void",
-                    "desc": "Copy text to clipboard"
-                },
-                {
-                    "name": "getClipboardString",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "string",
-                    "desc": "Get text from clipboard"
-                },
-                {
-                    "name": "getDpiScale",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get display DPI scale factor (e.g. 2.0 for Retina)"
-                },
-                {
-                    "name": "getFramebufferWidth",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get framebuffer width in pixels (window width * DPI scale)"
-                },
-                {
-                    "name": "getFramebufferHeight",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get framebuffer height in pixels (window height * DPI scale)"
-                },
-                {
-                    "name": "getAspectRatio",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get window aspect ratio (width / height)"
-                },
-                {
-                    "name": "setIndependentFps",
-                    "params": "updateFps, drawFps",
-                    "params_typed": "float updateFps, float drawFps",
-                    "return_type": "void",
-                    "desc": "Set independent update and draw frame rates"
-                },
-                {
-                    "name": "grabScreen",
-                    "params": "outPixels",
-                    "params_typed": "Pixels& outPixels",
-                    "return_type": "bool",
-                    "desc": "Capture current screen to Pixels"
-                },
-                {
-                    "name": "saveScreenshot",
-                    "params": "path",
-                    "params_typed": "const std::filesystem::path& path",
-                    "return_type": "bool",
-                    "desc": "Save a screenshot of the rendered frame (png/jpg/bmp). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written."
-                },
-                {
-                    "name": "stopRecording",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Stop the current recording and finalize the file"
-                },
-                {
-                    "name": "isRecording",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check whether a recording is in progress"
-                },
-                {
-                    "name": "recordingFrameCount",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Number of frames captured so far in the current recording"
-                },
-                {
-                    "name": "recordingPath",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "const string&",
-                    "desc": "Output file path of the current recording"
-                },
-                {
-                    "name": "isFullscreen",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if window is fullscreen"
-                },
-                {
-                    "name": "setFullscreen",
-                    "params": "fullscreen",
-                    "params_typed": "bool fullscreen",
-                    "return_type": "void",
-                    "desc": "Set fullscreen mode"
-                },
-                {
-                    "name": "redraw",
-                    "params": "count",
-                    "params_typed": "int count = 1",
-                    "return_type": "void",
-                    "desc": "Request extra redraws (useful for event-driven rendering)"
-                },
-                {
-                    "name": "getBackendName",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "string",
-                    "desc": "Get the active graphics backend name (e.g. \"Metal (macOS)\", \"D3D11\", \"OpenGL\", \"WebGPU\")"
-                },
-                {
-                    "name": "getDisplayScaleFactor",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get the DPI scale of the main display (available before window creation). macOS: 1.0 or 2.0 (Retina); other platforms: 1.0"
-                },
-                {
-                    "name": "setWindowSizeLogical",
-                    "params": "width, height",
-                    "params_typed": "int width, int height",
-                    "return_type": "void",
-                    "desc": "Resize the window to the given logical size (logical pixels)"
-                },
-                {
-                    "name": "runHeadlessApp",
-                    "params": "settings",
-                    "params_typed": "const HeadlessSettings& settings = HeadlessSettings()",
-                    "return_type": "int",
-                    "desc": "Run an app class without a window or graphics context (update loop only). Template on the app type; returns the process exit code"
-                }
-            ]
-        },
-        {
-            "name": "Utility",
-            "functions": [
-                {
-                    "name": "logNotice",
-                    "params": "module",
-                    "params_typed": "const std::string & module = \"\"",
-                    "return_type": "LogStream",
-                    "desc": "Print to console"
-                },
-                {
-                    "name": "compress",
-                    "params": "src, nbytes, out, codec",
-                    "params_typed": "const void* src, size_t nbytes, vector<uint8_t>& out, Codec codec",
-                    "return_type": "bool",
-                    "desc": "Compress a byte buffer with the given codec (Codec::None or Codec::LZ4). Resizes out and returns true on success."
-                },
-                {
-                    "name": "decompress",
-                    "params": "src, nbytes, out, decompressedSize, codec",
-                    "params_typed": "const void* src, size_t nbytes, vector<uint8_t>& out, size_t decompressedSize, Codec codec",
-                    "return_type": "bool",
-                    "desc": "Decompress a byte buffer; decompressedSize is the known original byte count. Resizes out and returns true on success (false / cleared out on size mismatch or failure)."
-                },
-                {
-                    "name": "beep",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Play a beep sound"
-                },
-                {
-                    "name": "beep",
-                    "params": "frequency",
-                    "params_typed": "float frequency",
-                    "return_type": "void",
-                    "desc": "Play a beep sound"
-                },
-                {
-                    "name": "toInt",
-                    "params": "str",
-                    "params_typed": "const string& str",
-                    "return_type": "int",
-                    "desc": "Convert string to int"
-                },
-                {
-                    "name": "toFloat",
-                    "params": "str",
-                    "params_typed": "const string& str",
-                    "return_type": "float",
-                    "desc": "Convert string to float"
-                },
-                {
-                    "name": "splitString",
-                    "params": "source, delimiter, ignoreEmpty, trim",
-                    "params_typed": "const std::string & source, const std::string & delimiter, bool ignoreEmpty = false, bool trim = false",
-                    "return_type": "std::vector<std::string>",
-                    "desc": "Split string by delimiter"
-                },
-                {
-                    "name": "joinString",
-                    "params": "elements, delimiter",
-                    "params_typed": "const vector<string>& elements, const string& delimiter",
-                    "return_type": "string",
-                    "desc": "Join strings with delimiter"
-                },
-                {
-                    "name": "toLower",
-                    "params": "src",
-                    "params_typed": "const string& src",
-                    "return_type": "string",
-                    "desc": "Convert to lower case"
-                },
-                {
-                    "name": "toUpper",
-                    "params": "src",
-                    "params_typed": "const string& src",
-                    "return_type": "string",
-                    "desc": "Convert to upper case"
-                },
-                {
-                    "name": "intersectRect",
-                    "params": "x1, y1, w1, h1, x2, y2, w2, h2, ox, oy, ow, oh",
-                    "params_typed": "float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2, float& ox, float& oy, float& ow, float& oh",
-                    "return_type": "void",
-                    "desc": "Compute intersection of two rectangles"
-                },
-                {
-                    "name": "mcp::registerDebuggerTools",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Opt in to the MCP debugger tools, letting an AI agent drive the app: input injection (mouse_click, key_press, mouse_move, scroll) plus node selection and scene mutation (select_node, set_node_members). Call once in setup(); calling it IS the opt-in (there is no separate enable step). The tools do nothing unless the MCP server is running (TRUSSC_MCP=1), so it is safe to leave in. Read-only inspection — screenshots and the node tree — needs no opt-in and is always available when MCP is on."
-                },
-                {
-                    "name": "logVerbose",
-                    "params": "module",
-                    "params_typed": "const string& module = \"\"",
-                    "return_type": "LogStream",
-                    "desc": "Stream-based verbose-level log output"
-                },
-                {
-                    "name": "logWarning",
-                    "params": "module",
-                    "params_typed": "const string& module = \"\"",
-                    "return_type": "LogStream",
-                    "desc": "Stream-based warning-level log output"
-                },
-                {
-                    "name": "logError",
-                    "params": "module",
-                    "params_typed": "const string& module = \"\"",
-                    "return_type": "LogStream",
-                    "desc": "Stream-based error-level log output"
-                },
-                {
-                    "name": "logFatal",
-                    "params": "module",
-                    "params_typed": "const string& module = \"\"",
-                    "return_type": "LogStream",
-                    "desc": "Stream-based fatal-level log output"
-                },
-                {
-                    "name": "logAt",
-                    "params": "level",
-                    "params_typed": "LogLevel level = LogLevel::Notice",
-                    "return_type": "LogStream",
-                    "desc": "Stream-based log output at a runtime-selected level"
-                },
-                {
-                    "name": "getLogger",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Logger&",
-                    "desc": "Access the global logger instance"
-                },
-                {
-                    "name": "setConsoleLogLevel",
-                    "params": "level",
-                    "params_typed": "LogLevel level",
-                    "return_type": "void",
-                    "desc": "Set the minimum log level printed to the console"
-                },
-                {
-                    "name": "setFileLogLevel",
-                    "params": "level",
-                    "params_typed": "LogLevel level",
-                    "return_type": "void",
-                    "desc": "Set the minimum log level written to the log file"
-                },
-                {
-                    "name": "setLogFile",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "bool",
-                    "desc": "Open a file to receive log output"
-                },
-                {
-                    "name": "closeLogFile",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Close the current log file"
-                },
-                {
-                    "name": "compressBound",
-                    "params": "nbytes, codec",
-                    "params_typed": "size_t nbytes, Codec codec",
-                    "return_type": "size_t",
-                    "desc": "Worst-case compressed size, for sizing a destination buffer"
-                },
-                {
-                    "name": "toInt64",
-                    "params": "str",
-                    "params_typed": "const string& str",
-                    "return_type": "int64_t",
-                    "desc": "Parse a string into a 64-bit integer"
-                },
-                {
-                    "name": "toDouble",
-                    "params": "str",
-                    "params_typed": "const string& str",
-                    "return_type": "double",
-                    "desc": "Parse a string into a double"
-                },
-                {
-                    "name": "toBool",
-                    "params": "str",
-                    "params_typed": "const string& str",
-                    "return_type": "bool",
-                    "desc": "Parse a string into a bool"
-                },
-                {
-                    "name": "toBinary",
-                    "params": "value",
-                    "params_typed": "int value",
-                    "return_type": "string",
-                    "desc": "Convert an integer to a binary string"
-                },
-                {
-                    "name": "hexToInt",
-                    "params": "hexStr",
-                    "params_typed": "const string& hexStr",
-                    "return_type": "int",
-                    "desc": "Parse a hex string into a signed int"
-                },
-                {
-                    "name": "hexToUInt",
-                    "params": "hexStr",
-                    "params_typed": "const string& hexStr",
-                    "return_type": "unsigned int",
-                    "desc": "Parse a hex string into an unsigned int"
-                },
-                {
-                    "name": "toBase64",
-                    "params": "bytes, len",
-                    "params_typed": "const unsigned char* bytes, size_t len",
-                    "return_type": "string",
-                    "desc": "Encode raw bytes as a Base64 string"
-                },
-                {
-                    "name": "isStringInString",
-                    "params": "haystack, needle",
-                    "params_typed": "const string& haystack, const string& needle",
-                    "return_type": "bool",
-                    "desc": "Check whether one string contains another"
-                },
-                {
-                    "name": "stringTimesInString",
-                    "params": "haystack, needle",
-                    "params_typed": "const string& haystack, const string& needle",
-                    "return_type": "size_t",
-                    "desc": "Count occurrences of a substring in a string"
-                },
-                {
-                    "name": "trim",
-                    "params": "src",
-                    "params_typed": "const string& src",
-                    "return_type": "string",
-                    "desc": "Trim whitespace from both ends of a string"
-                },
-                {
-                    "name": "trimFront",
-                    "params": "src",
-                    "params_typed": "const string& src",
-                    "return_type": "string",
-                    "desc": "Trim leading whitespace from a string"
-                },
-                {
-                    "name": "trimBack",
-                    "params": "src",
-                    "params_typed": "const string& src",
-                    "return_type": "string",
-                    "desc": "Trim trailing whitespace from a string"
-                },
-                {
-                    "name": "parseJson",
-                    "params": "str",
-                    "params_typed": "const string& str",
-                    "return_type": "Json",
-                    "desc": "Parse a JSON string into a Json object; returns an empty Json on parse error."
-                },
-                {
-                    "name": "toJsonString",
-                    "params": "j, indent",
-                    "params_typed": "const Json& j, int indent = 2",
-                    "return_type": "string",
-                    "desc": "Serialize a Json object to a string. indent sets the pretty-print width (negative for compact)."
-                },
-                {
-                    "name": "parseXml",
-                    "params": "str",
-                    "params_typed": "const string& str",
-                    "return_type": "Xml",
-                    "desc": "Parse an XML string into an Xml object."
-                },
-                {
-                    "name": "reflectToJson",
-                    "params": "obj",
-                    "params_typed": "T& obj",
-                    "return_type": "Json",
-                    "desc": "Return all reflected (TC_REFLECT) members of obj as a Json object. Works on any reflected type such as a Node or Mod."
-                },
-                {
-                    "name": "reflectFromJson",
-                    "params": "obj, j",
-                    "params_typed": "T& obj, const Json& j",
-                    "return_type": "JsonReadReflector",
-                    "desc": "Apply the keys of a Json object onto obj's reflected (TC_REFLECT) members. Returns the reflector so callers can inspect which members were applied, skipped, read-only, or unknown."
-                },
-                {
-                    "name": "isMainThread",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Whether the calling thread is the main (scene) thread. The main thread ID is recorded on the first call to getMainThreadId()."
-                },
-                {
-                    "name": "getMainThreadId",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "thread::id",
-                    "desc": "Get the main thread ID. Records the current thread's ID on the first call, so it must first be called from the main thread."
-                }
-            ]
-        },
-        {
-            "name": "File",
-            "functions": [
-                {
-                    "name": "getDataPath",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "string",
-                    "desc": "Get full path relative to data directory"
-                },
-                {
-                    "name": "getAbsolutePath",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "string",
-                    "desc": "Get absolute path"
-                },
-                {
-                    "name": "getFileName",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "string",
-                    "desc": "Get filename from path"
-                },
-                {
-                    "name": "getBaseName",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "string",
-                    "desc": "Get filename without extension"
-                },
-                {
-                    "name": "getFileExtension",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "string",
-                    "desc": "Get file extension without dot"
-                },
-                {
-                    "name": "getParentDirectory",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "string",
-                    "desc": "Get parent directory"
-                },
-                {
-                    "name": "joinPath",
-                    "params": "dir, file",
-                    "params_typed": "const string& dir, const string& file",
-                    "return_type": "string",
-                    "desc": "Join directory and filename"
-                },
-                {
-                    "name": "fileExists",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "bool",
-                    "desc": "Check if file exists"
-                },
-                {
-                    "name": "directoryExists",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "bool",
-                    "desc": "Check if directory exists"
-                },
-                {
-                    "name": "createDirectory",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "bool",
-                    "desc": "Create directory (and parents)"
-                },
-                {
-                    "name": "listDirectory",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "vector<string>",
-                    "desc": "List files in directory"
-                },
-                {
-                    "name": "removeFile",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "bool",
-                    "desc": "Remove file"
-                },
-                {
-                    "name": "getFileSize",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "int64_t",
-                    "desc": "Get file size in bytes"
-                },
-                {
-                    "name": "loadTextFile",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "string",
-                    "desc": "Load entire text file"
-                },
-                {
-                    "name": "saveTextFile",
-                    "params": "path, content",
-                    "params_typed": "const string& path, const string& content",
-                    "return_type": "bool",
-                    "desc": "Save string to text file"
-                },
-                {
-                    "name": "appendToFile",
-                    "params": "path, content",
-                    "params_typed": "const string& path, const string& content",
-                    "return_type": "bool",
-                    "desc": "Append string to file"
-                },
-                {
-                    "name": "loadJson",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "Json",
-                    "desc": "Load a JSON file and return it as a Json object. Relative paths are resolved via getDataPath; returns an empty Json on error."
-                },
-                {
-                    "name": "saveJson",
-                    "params": "j, path, indent",
-                    "params_typed": "const Json& j, const string& path, int indent = 2",
-                    "return_type": "bool",
-                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath. indent sets the pretty-print width (negative for compact). Returns true on success."
-                },
-                {
-                    "name": "loadXml",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "Xml",
-                    "desc": "Load an XML file and return it as an Xml object. Relative paths are resolved via getDataPath."
-                },
-                {
-                    "name": "setDataPathRoot",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "void",
-                    "desc": "Set the root directory used to resolve relative data paths. A relative path is resolved against the executable directory; an absolute path (starting with /) is used as-is. A trailing slash is added automatically."
-                },
-                {
-                    "name": "getDataPathRoot",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "string",
-                    "desc": "Get the current data path root (with trailing slash)."
-                },
-                {
-                    "name": "setDataPathToResources",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms."
-                }
-            ]
-        },
-        {
-            "name": "Sound",
-            "functions": [
-                {
-                    "name": "Sound",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a sound player"
-                },
-                {
-                    "name": "load",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "bool",
-                    "desc": "Load sound file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a"
-                },
-                {
-                    "name": "isStreaming",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True if this Sound was loaded via loadStream() (vs eager load())"
-                },
-                {
-                    "name": "play",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Play sound"
-                },
-                {
-                    "name": "stop",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Stop sound"
-                },
-                {
-                    "name": "pause",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Pause playback (resume() to continue)"
-                },
-                {
-                    "name": "resume",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Resume paused playback"
-                },
-                {
-                    "name": "isPlaying",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True while playing (false if stopped, paused, or never played)"
-                },
-                {
-                    "name": "isPaused",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True while paused"
-                },
-                {
-                    "name": "isLoaded",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True after a successful load() / loadStream() / loadTestTone()"
-                },
-                {
-                    "name": "getPosition",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current playback position in seconds"
-                },
-                {
-                    "name": "setPosition",
-                    "params": "seconds",
-                    "params_typed": "float seconds",
-                    "return_type": "void",
-                    "desc": "Seek to a specific time in seconds. On streams, costs ~10 ms blackout while the ring refills."
-                },
-                {
-                    "name": "getDuration",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get total duration of the loaded sound in seconds"
-                },
-                {
-                    "name": "setVolume",
-                    "params": "vol",
-                    "params_typed": "float vol",
-                    "return_type": "void",
-                    "desc": "Set volume (0.0-1.0)"
-                },
-                {
-                    "name": "getVolume",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current volume"
-                },
-                {
-                    "name": "setPan",
-                    "params": "pan",
-                    "params_typed": "float pan",
-                    "return_type": "void",
-                    "desc": "Set stereo balance (-1.0 left ~ 0 center ~ +1.0 right). On multi-ch devices only affects ch0/ch1."
-                },
-                {
-                    "name": "getPan",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current pan value"
-                },
-                {
-                    "name": "setSpeed",
-                    "params": "speed",
-                    "params_typed": "float speed",
-                    "return_type": "void",
-                    "desc": "Playback speed [-10, 10]. Negative = reverse (eager only). Streams clamp to [0, 10]. 0 = freeze."
-                },
-                {
-                    "name": "getSpeed",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current playback speed"
-                },
-                {
-                    "name": "setLoop",
-                    "params": "loop",
-                    "params_typed": "bool loop",
-                    "return_type": "void",
-                    "desc": "Enable/disable looping"
-                },
-                {
-                    "name": "isLoop",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True if looping is enabled"
-                },
-                {
-                    "name": "setMixMode",
-                    "params": "m",
-                    "params_typed": "MixMode m",
-                    "return_type": "void",
-                    "desc": "Channel routing preset. Auto (default) = mono broadcasts / multi 1:1. DownmixMono = average src to all out ch."
-                },
-                {
-                    "name": "setChannelMap",
-                    "params": "map",
-                    "params_typed": "const vector<int>& map",
-                    "return_type": "void",
-                    "desc": "Per-output-channel routing. 1D: each entry is a src ch index (-1 = silent). 2D: each entry lists src ch indices that sum into that output."
-                },
-                {
-                    "name": "setChannelMap",
-                    "params": "map",
-                    "params_typed": "vector<vector<int>> map",
-                    "return_type": "void",
-                    "desc": "Per-output-channel routing. 1D: each entry is a src ch index (-1 = silent). 2D: each entry lists src ch indices that sum into that output."
-                },
-                {
-                    "name": "setChannelGains",
-                    "params": "gains",
-                    "params_typed": "const vector<float>& gains",
-                    "return_type": "void",
-                    "desc": "Per-output-channel gain multiplier. Entries beyond .size() default to 1.0. No internal normalization (setVolume is the overall gain)."
-                },
-                {
-                    "name": "clearChannelMap",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Clear the explicit channel map; routing falls back to setMixMode rules."
-                },
-                {
-                    "name": "clearChannelGains",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Clear per-channel gains (back to uniform 1.0)."
-                },
-                {
-                    "name": "setBeepVolume",
-                    "params": "vol",
-                    "params_typed": "float vol",
-                    "return_type": "void",
-                    "desc": "Set the output volume for beep() (0.0-1.0)."
-                },
-                {
-                    "name": "getBeepVolume",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get the current beep() output volume (0.0-1.0)."
-                }
-            ]
-        },
-        {
-            "name": "AudioEngine",
-            "functions": [
-                {
-                    "name": "getInstance",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "AudioEngine&",
-                    "desc": "Get the global AudioEngine singleton"
-                },
-                {
-                    "name": "init",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Initialize / re-initialize audio engine. Re-entrant: calling on a running engine stops the device, migrates active voices to new settings, restarts. ~30-100 ms gap; voices keep playback position."
-                },
-                {
-                    "name": "init",
-                    "params": "settings",
-                    "params_typed": "const AudioSettings& settings",
-                    "return_type": "bool",
-                    "desc": "Initialize / re-initialize audio engine. Re-entrant: calling on a running engine stops the device, migrates active voices to new settings, restarts. ~30-100 ms gap; voices keep playback position."
-                },
-                {
-                    "name": "shutdown",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Shut down the audio device. Usually called automatically at program exit."
-                },
-                {
-                    "name": "listDevices",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "vector<AudioDeviceInfo>",
-                    "desc": "Enumerate available playback devices. Returns name + isDefault for each."
-                },
-                {
-                    "name": "getSampleRate",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Current engine sample rate (Hz). Returns default (48000) if not yet initialized."
-                },
-                {
-                    "name": "getChannels",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Current engine output channel count"
-                },
-                {
-                    "name": "getMaxPolyphony",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Max simultaneously-playing Sound voices"
-                },
-                {
-                    "name": "getBufferSize",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Current device buffer size in frames (0 = miniaudio default)"
-                },
-                {
-                    "name": "isInitialized",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "True after a successful init()"
-                },
-                {
-                    "name": "audioIn",
-                    "params": "buf",
-                    "params_typed": "const AudioInBuffer & buf",
-                    "return_type": "void",
-                    "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut."
-                },
-                {
-                    "name": "initAudio",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Initialize the global AudioEngine. Called automatically by Sound::load() / play(), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener)."
-                },
-                {
-                    "name": "shutdownAudio",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Shut down the global AudioEngine and close the audio device. Usually unnecessary (runs at program exit)."
-                },
-                {
-                    "name": "getAudioAnalysisBuffer",
-                    "params": "outBuffer, numSamples",
-                    "params_typed": "float* outBuffer, size_t numSamples",
-                    "return_type": "size_t",
-                    "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer for FFT / visualization. numSamples is capped at the analysis buffer size (4096). Returns the number of samples written."
-                },
-                {
-                    "name": "getMicInput",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "MicInput&",
-                    "desc": "Get the global MicInput singleton (microphone capture). Call start() on it to open the device."
-                },
-                {
-                    "name": "getMicAnalysisBuffer",
-                    "params": "outBuffer, numSamples",
-                    "params_typed": "float* outBuffer, size_t numSamples",
-                    "return_type": "size_t",
-                    "desc": "Copy the latest microphone input samples into outBuffer. Convenience wrapper over getMicInput().getBuffer(). numSamples is capped at the mic buffer size (4096). Returns the number of samples written."
-                }
-            ]
-        },
-        {
-            "name": "ChipSound",
-            "functions": [
-                {
-                    "name": "ChipSoundNote",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a chip sound note (8-bit style sound)"
-                },
-                {
-                    "name": "build",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Sound@",
-                    "desc": "Build and return Sound object from note"
-                },
-                {
-                    "name": "add",
-                    "params": "note, time",
-                    "params_typed": "const ChipSoundNote& note, float time",
-                    "return_type": "ChipSoundBundle&",
-                    "desc": "Add a note at specified time (seconds)"
-                },
-                {
-                    "name": "clear",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "ChipSoundBundle&",
-                    "desc": "Clear all notes from bundle"
-                },
-                {
-                    "name": "getDuration",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get the total duration of the bundle"
-                }
-            ]
-        },
-        {
-            "name": "Font",
-            "functions": [
-                {
-                    "name": "load",
-                    "params": "path, size",
-                    "params_typed": "const string& path, int size",
-                    "return_type": "bool",
-                    "desc": "Load TTF font file"
-                },
-                {
-                    "name": "isLoaded",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if font is loaded"
-                },
-                {
-                    "name": "drawString",
-                    "params": "text, x, y",
-                    "params_typed": "const string& text, float x, float y",
-                    "return_type": "void",
-                    "desc": "Draw text at position"
-                },
-                {
-                    "name": "getStringPath",
-                    "params": "text, x, y",
-                    "params_typed": "const string& text, float x, float y",
-                    "return_type": "Path",
-                    "desc": "Get text outline as a Path (one subpath per contour). Stays crisp under scale / rotation; use drawStroke / drawFill (holes auto-detected for e, a, O, 日, etc.)."
-                },
-                {
-                    "name": "getWidth",
-                    "params": "text",
-                    "params_typed": "const string& text",
-                    "return_type": "float",
-                    "desc": "Get text width in pixels"
-                },
-                {
-                    "name": "getHeight",
-                    "params": "text",
-                    "params_typed": "const string& text",
-                    "return_type": "float",
-                    "desc": "Get text height in pixels"
-                },
-                {
-                    "name": "getLineHeight",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get line height"
-                },
-                {
-                    "name": "getSize",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get font size"
-                },
-                {
-                    "name": "registerGlyph",
-                    "params": "g",
-                    "params_typed": "const bitmapfont::Glyph & g",
-                    "return_type": "void",
-                    "desc": "Register one bitmap glyph so drawBitmapString can render its codepoint. Replaces any glyph already registered at the same codepoint and marks the atlas dirty for re-upload"
-                },
-                {
-                    "name": "updateGlyph",
-                    "params": "cp, newData",
-                    "params_typed": "uint32_t cp, const uint8_t *newData",
-                    "return_type": "void",
-                    "desc": "Swap the pixel data of an already-registered glyph without changing its atlas position. Useful for animating a glyph by updating its data each frame"
-                }
-            ]
-        },
-        {
-            "name": "Animation",
-            "functions": [
-                {
-                    "name": "ease",
-                    "params": "t, type, mode",
-                    "params_typed": "float t, EaseType type, EaseMode mode",
-                    "return_type": "float",
-                    "desc": "Apply easing to value (0-1)"
-                },
-                {
-                    "name": "easeIn",
-                    "params": "t, type",
-                    "params_typed": "float t, EaseType type",
-                    "return_type": "float",
-                    "desc": "Apply ease-in to value (0-1)"
-                },
-                {
-                    "name": "easeOut",
-                    "params": "t, type",
-                    "params_typed": "float t, EaseType type",
-                    "return_type": "float",
-                    "desc": "Apply ease-out to value (0-1)"
-                },
-                {
-                    "name": "easeInOut",
-                    "params": "t, type",
-                    "params_typed": "float t, EaseType type",
-                    "return_type": "float",
-                    "desc": "Apply ease-in-out to value (0-1)"
-                },
-                {
-                    "name": "from",
-                    "params": "value",
-                    "params_typed": "float value",
-                    "return_type": "Tween@",
-                    "desc": "Set start value"
-                },
-                {
-                    "name": "to",
-                    "params": "value",
-                    "params_typed": "float value",
-                    "return_type": "Tween@",
-                    "desc": "Set end value"
-                },
-                {
-                    "name": "duration",
-                    "params": "seconds",
-                    "params_typed": "float seconds",
-                    "return_type": "Tween@",
-                    "desc": "Set animation duration"
-                },
-                {
-                    "name": "ease",
-                    "params": "type",
-                    "params_typed": "EaseType type",
-                    "return_type": "Tween@",
-                    "desc": "Set easing type"
-                },
-                {
-                    "name": "start",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Tween@",
-                    "desc": "Start animation (chainable)"
-                },
-                {
-                    "name": "pause",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Tween@",
-                    "desc": "Pause animation (chainable)"
-                },
-                {
-                    "name": "resume",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Tween@",
-                    "desc": "Resume animation (chainable)"
-                },
-                {
-                    "name": "reset",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Tween@",
-                    "desc": "Reset animation (chainable)"
-                },
-                {
-                    "name": "finish",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Tween@",
-                    "desc": "Jump to end (chainable)"
-                },
-                {
-                    "name": "loop",
-                    "params": "count",
-                    "params_typed": "int count = -1",
-                    "return_type": "Tween@",
-                    "desc": "Set loop count (-1=infinite, 0=none, N=repeat N times)"
-                },
-                {
-                    "name": "yoyo",
-                    "params": "enable",
-                    "params_typed": "bool enable = true",
-                    "return_type": "Tween@",
-                    "desc": "Enable yoyo (reverse direction each loop)"
-                },
-                {
-                    "name": "getValue",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current tween value"
-                },
-                {
-                    "name": "getProgress",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get progress (0-1)"
-                },
-                {
-                    "name": "getElapsed",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get elapsed time"
-                },
-                {
-                    "name": "getDuration",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get duration"
-                },
-                {
-                    "name": "isPlaying",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if playing"
-                },
-                {
-                    "name": "isComplete",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if complete"
-                },
-                {
-                    "name": "getStart",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get start value"
-                },
-                {
-                    "name": "getEnd",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get end value"
-                },
-                {
-                    "name": "getLoopCount",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get number of completed loop iterations"
-                }
-            ]
-        },
-        {
-            "name": "Types - Vec2",
-            "functions": [
-                {
-                    "name": "Vec2",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create 2D vector (type constructor)"
-                },
-                {
-                    "name": "Vec2",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "",
-                    "desc": "Create 2D vector (type constructor)"
-                },
-                {
-                    "name": "Vec2",
-                    "params": "v",
-                    "params_typed": "float v",
-                    "return_type": "",
-                    "desc": "Create 2D vector (type constructor)"
-                },
-                {
-                    "name": "set",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "Vec2&",
-                    "desc": "Set vector components (type method)"
-                },
-                {
-                    "name": "set",
-                    "params": "x_, y_",
-                    "params_typed": "float x_, float y_",
-                    "return_type": "Vec2&",
-                    "desc": "Set vector components (type method)"
-                },
-                {
-                    "name": "Vec2_fromAngle",
-                    "params": "radians, length",
-                    "params_typed": "float radians, float length = 1.0f",
-                    "return_type": "Vec2",
-                    "desc": "Create Vec2 from angle"
-                },
-                {
-                    "name": "Vec2_fromAngle",
-                    "params": "radians, length",
-                    "params_typed": "float radians, float length",
-                    "return_type": "Vec2",
-                    "desc": "Create Vec2 from angle"
-                }
-            ]
-        },
-        {
-            "name": "Types - Vec3",
-            "functions": [
-                {
-                    "name": "Vec3",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create 3D vector (type constructor)"
-                },
-                {
-                    "name": "Vec3",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "",
-                    "desc": "Create 3D vector (type constructor)"
-                },
-                {
-                    "name": "Vec3",
-                    "params": "v",
-                    "params_typed": "float v",
-                    "return_type": "",
-                    "desc": "Create 3D vector (type constructor)"
-                },
-                {
-                    "name": "set",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "Vec3&",
-                    "desc": "Set vector components (type method)"
-                },
-                {
-                    "name": "set",
-                    "params": "x_, y_, z_",
-                    "params_typed": "float x_, float y_, float z_",
-                    "return_type": "Vec3&",
-                    "desc": "Set vector components (type method)"
-                }
-            ]
-        },
-        {
-            "name": "Types - Color",
-            "functions": [
-                {
-                    "name": "Color",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create color (type constructor)"
-                },
-                {
-                    "name": "Color",
-                    "params": "r, g, b",
-                    "params_typed": "float r, float g, float b",
-                    "return_type": "",
-                    "desc": "Create color (type constructor)"
-                },
-                {
-                    "name": "Color",
-                    "params": "r, g, b, a",
-                    "params_typed": "float r, float g, float b, float a",
-                    "return_type": "",
-                    "desc": "Create color (type constructor)"
-                },
-                {
-                    "name": "set",
-                    "params": "r_, g_, b_, a_",
-                    "params_typed": "float r_, float g_, float b_, float a_ = 1.0f",
-                    "return_type": "Color&",
-                    "desc": "Set color components (type method)"
-                },
-                {
-                    "name": "set",
-                    "params": "r, g, b, a",
-                    "params_typed": "float r, float g, float b, float a",
-                    "return_type": "Color&",
-                    "desc": "Set color components (type method)"
-                },
-                {
-                    "name": "set",
-                    "params": "gray, a_",
-                    "params_typed": "float gray, float a_ = 1.0f",
-                    "return_type": "Color&",
-                    "desc": "Set color components (type method)"
-                },
-                {
-                    "name": "set",
-                    "params": "c",
-                    "params_typed": "const Color& c",
-                    "return_type": "Color&",
-                    "desc": "Set color components (type method)"
-                },
-                {
-                    "name": "toHSB",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "ColorHSB",
-                    "desc": "Convert to HSB color space (H: 0-1, S: 0-1, B: 0-1)"
-                },
-                {
-                    "name": "toOKLab",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "ColorOKLab",
-                    "desc": "Convert to OKLab color space (perceptually uniform)"
-                },
-                {
-                    "name": "toOKLCH",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "ColorOKLCH",
-                    "desc": "Convert to OKLCH color space (L: 0-1, C: 0-0.4, H: 0-1)"
-                },
-                {
-                    "name": "Color_fromHSB",
-                    "params": "h, s, b, a",
-                    "params_typed": "float h, float s, float b, float a = 1.0f",
-                    "return_type": "Color",
-                    "desc": "Create Color from HSB (H: 0-1, S: 0-1, B: 0-1)"
-                },
-                {
-                    "name": "Color_fromHSB",
-                    "params": "h, s, b, a",
-                    "params_typed": "float h, float s, float b, float a",
-                    "return_type": "Color",
-                    "desc": "Create Color from HSB (H: 0-1, S: 0-1, B: 0-1)"
-                },
-                {
-                    "name": "colorFromHSB",
-                    "params": "h, s, b, a",
-                    "params_typed": "float h, float s, float b, float a = 1.0f",
-                    "return_type": "Color",
-                    "desc": "Create Color from HSB (alias for Color_fromHSB)"
-                },
-                {
-                    "name": "colorFromHSB",
-                    "params": "h, s, b, a",
-                    "params_typed": "float h, float s, float b, float a",
-                    "return_type": "Color",
-                    "desc": "Create Color from HSB (alias for Color_fromHSB)"
-                },
-                {
-                    "name": "Color_fromOKLCH",
-                    "params": "L, C, H, a",
-                    "params_typed": "float L, float C, float H, float a = 1.0f",
-                    "return_type": "Color",
-                    "desc": "Create Color from OKLCH"
-                },
-                {
-                    "name": "Color_fromOKLCH",
-                    "params": "L, C, H, a",
-                    "params_typed": "float L, float C, float H, float a",
-                    "return_type": "Color",
-                    "desc": "Create Color from OKLCH"
-                },
-                {
-                    "name": "Color_fromOKLab",
-                    "params": "L, a_lab, b_lab, alpha",
-                    "params_typed": "float L, float a_lab, float b_lab, float alpha = 1.0f",
-                    "return_type": "Color",
-                    "desc": "Create Color from OKLab"
-                },
-                {
-                    "name": "Color_fromOKLab",
-                    "params": "L, a, b, alpha",
-                    "params_typed": "float L, float a, float b, float alpha",
-                    "return_type": "Color",
-                    "desc": "Create Color from OKLab"
-                }
-            ]
-        },
-        {
-            "name": "Types - ColorHSB",
-            "functions": [
-                {
-                    "name": "ColorHSB",
-                    "params": "h, s, b",
-                    "params_typed": "float h, float s, float b",
-                    "return_type": "",
-                    "desc": "HSB color type (H: 0-1, S: 0-1, B: 0-1). Use toRGB() to convert to Color"
-                },
-                {
-                    "name": "ColorHSB",
-                    "params": "h, s, b, a",
-                    "params_typed": "float h, float s, float b, float a",
-                    "return_type": "",
-                    "desc": "HSB color type (H: 0-1, S: 0-1, B: 0-1). Use toRGB() to convert to Color"
-                },
-                {
-                    "name": "toRGB",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Color",
-                    "desc": "Convert ColorHSB to Color (RGB)"
-                },
-                {
-                    "name": "lerp",
-                    "params": "target, t, shortestPath",
-                    "params_typed": "const ColorHSB & target, float t, bool shortestPath = true",
-                    "return_type": "ColorHSB",
-                    "desc": "Interpolate in HSB space (shortest hue path)"
-                }
-            ]
-        },
-        {
-            "name": "Types - ColorOKLCH",
-            "functions": [
-                {
-                    "name": "ColorOKLCH",
-                    "params": "L, C, H",
-                    "params_typed": "float L, float C, float H",
-                    "return_type": "",
-                    "desc": "OKLCH color type (L: 0-1, C: 0-0.4, H: 0-1). Perceptually uniform"
-                },
-                {
-                    "name": "ColorOKLCH",
-                    "params": "L, C, H, a",
-                    "params_typed": "float L, float C, float H, float a",
-                    "return_type": "",
-                    "desc": "OKLCH color type (L: 0-1, C: 0-0.4, H: 0-1). Perceptually uniform"
-                },
-                {
-                    "name": "toRGB",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Color",
-                    "desc": "Convert ColorOKLCH to Color (RGB)"
-                },
-                {
-                    "name": "lerp",
-                    "params": "target, t, shortestPath",
-                    "params_typed": "const ColorOKLCH & target, float t, bool shortestPath = true",
-                    "return_type": "ColorOKLCH",
-                    "desc": "Interpolate in OKLCH space (shortest hue path, perceptually uniform)"
-                }
-            ]
-        },
-        {
-            "name": "Types - Rect",
-            "functions": [
-                {
-                    "name": "Rect",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a rectangle (type constructor)"
-                },
-                {
-                    "name": "Rect",
-                    "params": "x, y, w, h",
-                    "params_typed": "float x, float y, float w, float h",
-                    "return_type": "",
-                    "desc": "Create a rectangle (type constructor)"
-                },
-                {
-                    "name": "set",
-                    "params": "x, y, w, h",
-                    "params_typed": "float x, float y, float w, float h",
-                    "return_type": "Rect&",
-                    "desc": "Set rectangle properties (type method)"
-                },
-                {
-                    "name": "set",
-                    "params": "x_, y_, w_, h_",
-                    "params_typed": "float x_, float y_, float w_, float h_",
-                    "return_type": "Rect&",
-                    "desc": "Set rectangle properties (type method)"
-                },
-                {
-                    "name": "contains",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "bool",
-                    "desc": "Check if point is inside (type method)"
-                },
-                {
-                    "name": "intersects",
-                    "params": "other",
-                    "params_typed": "const Rect & other",
-                    "return_type": "bool",
-                    "desc": "Check intersection (type method)"
-                }
-            ]
-        },
-        {
-            "name": "Scene Graph",
-            "functions": [
-                {
-                    "name": "Node",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a base scene node (C++ only - uses shared_ptr)"
-                },
-                {
-                    "name": "addChild",
-                    "params": "child, keepGlobalPosition",
-                    "params_typed": "Node::Ptr child, bool keepGlobalPosition = false",
-                    "return_type": "void",
-                    "desc": "Add a child node (C++ only)"
-                },
-                {
-                    "name": "moveToFront",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Move this node to the end of its parent's child list — drawn last, on top of siblings. No-op if no parent or already last (C++ only)"
-                },
-                {
-                    "name": "moveToBack",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Move this node to the beginning of its parent's child list — drawn first, beneath siblings. No-op if no parent or already first (C++ only)"
-                },
-                {
-                    "name": "destroy",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Mark node for deferred removal from scene graph (C++ only)"
-                },
-                {
-                    "name": "isDead",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if node is marked for destruction (C++ only)"
-                },
-                {
-                    "name": "RectNode",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a 2D rectangle node (C++ only - uses shared_ptr)"
-                },
-                {
-                    "name": "setSize",
-                    "params": "w, h",
-                    "params_typed": "float w, float h",
-                    "return_type": "void",
-                    "desc": "Set size (C++ only)"
-                },
-                {
-                    "name": "setClipping",
-                    "params": "enabled",
-                    "params_typed": "bool enabled",
-                    "return_type": "void",
-                    "desc": "Enable/disable scissor clipping for RectNode (C++ only)"
-                },
-                {
-                    "name": "enableEvents",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Enable mouse/key events for this node (C++ only)"
-                },
-                {
-                    "name": "ScrollContainer",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Scrollable container node with clipping (C++ only)"
-                },
-                {
-                    "name": "setContent",
-                    "params": "newContent",
-                    "params_typed": "Node::Ptr newContent",
-                    "return_type": "void",
-                    "desc": "Set content node for ScrollContainer (C++ only)"
-                },
-                {
-                    "name": "setScrollY",
-                    "params": "y",
-                    "params_typed": "float y",
-                    "return_type": "void",
-                    "desc": "Set vertical scroll position (C++ only)"
-                },
-                {
-                    "name": "ScrollBar",
-                    "params": "container, dir",
-                    "params_typed": "ScrollContainer* container, Direction dir = Vertical",
-                    "return_type": "",
-                    "desc": "Visual scroll indicator for ScrollContainer (C++ only)"
-                },
-                {
-                    "name": "LayoutMod",
-                    "params": "dir, spacing",
-                    "params_typed": "LayoutDirection dir, float spacing = 0",
-                    "return_type": "",
-                    "desc": "Layout modifier for automatic child arrangement (C++ only)"
-                },
-                {
-                    "name": "updateLayout",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Recalculate layout (call after adding/removing children) (C++ only)"
-                },
-                {
-                    "name": "TweenMod",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Animation modifier for Node properties (position, scale, rotation) with easing (C++ only)"
-                },
-                {
-                    "name": "moveTo",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z = 0.0f",
-                    "return_type": "TweenMod&",
-                    "desc": "Animate position to target (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "moveTo",
-                    "params": "pos",
-                    "params_typed": "const Vec3& pos",
-                    "return_type": "TweenMod&",
-                    "desc": "Animate position to target (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "moveBy",
-                    "params": "dx, dy, dz",
-                    "params_typed": "float dx, float dy, float dz = 0.0f",
-                    "return_type": "TweenMod&",
-                    "desc": "Animate position by relative amount (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "scaleTo",
-                    "params": "uniform",
-                    "params_typed": "float uniform",
-                    "return_type": "TweenMod&",
-                    "desc": "Animate scale to target (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "scaleTo",
-                    "params": "sx, sy, sz",
-                    "params_typed": "float sx, float sy, float sz = 1",
-                    "return_type": "TweenMod&",
-                    "desc": "Animate scale to target (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "scaleBy",
-                    "params": "factor",
-                    "params_typed": "float factor",
-                    "return_type": "TweenMod&",
-                    "desc": "Animate scale by relative multiplier (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "rotateTo",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "TweenMod&",
-                    "desc": "Animate rotation to target angle or quaternion (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "rotateTo",
-                    "params": "q",
-                    "params_typed": "const Quaternion& q",
-                    "return_type": "TweenMod&",
-                    "desc": "Animate rotation to target angle or quaternion (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "rotateBy",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "TweenMod&",
-                    "desc": "Animate rotation by relative angle (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "duration",
-                    "params": "seconds",
-                    "params_typed": "float seconds",
-                    "return_type": "TweenMod&",
-                    "desc": "Set animation duration (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "ease",
-                    "params": "type, mode",
-                    "params_typed": "EaseType type, EaseMode mode = InOut",
-                    "return_type": "TweenMod&",
-                    "desc": "Set easing function (TweenMod method). Types: Linear, Quad, Cubic, Quart, Quint, Sine, Expo, Circ, Back, Elastic, Bounce. Modes: In, Out, InOut (C++ only)"
-                },
-                {
-                    "name": "delay",
-                    "params": "seconds",
-                    "params_typed": "float seconds",
-                    "return_type": "TweenMod&",
-                    "desc": "Set delay before animation starts (TweenMod method) (C++ only)"
-                },
-                {
-                    "name": "getSelectedNode",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Node*",
-                    "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none). A tool such as an inspector can read it and drive it via setSelectedNode()."
-                },
-                {
-                    "name": "setSelectedNode",
-                    "params": "n",
-                    "params_typed": "Node* n",
-                    "return_type": "void",
-                    "desc": "Set the currently selected node. Pass nullptr to clear the selection."
-                },
-                {
-                    "name": "getRootNode",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Node*",
-                    "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around."
-                }
-            ]
-        },
-        {
-            "name": "3D Setup",
-            "functions": [
-                {
-                    "name": "setupScreenPerspective",
-                    "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "float fovDeg = 45.0f, float nearDist = 0.0f, float farDist = 0.0f",
-                    "return_type": "void",
-                    "desc": "Set up perspective projection (oF-style default 3D)"
-                },
-                {
-                    "name": "setupScreenPerspective",
-                    "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "float fovDeg = 45.0f, float nearDist = 0.0f, float farDist = 0.0f",
-                    "return_type": "void",
-                    "desc": "Set up perspective projection (oF-style default 3D)"
-                },
-                {
-                    "name": "setupScreenPerspective",
-                    "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "float fovDeg, float nearDist, float farDist",
-                    "return_type": "void",
-                    "desc": "Set up perspective projection (oF-style default 3D)"
-                },
-                {
-                    "name": "setupScreenOrtho",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Set up orthographic projection (2D mode)"
-                },
-                {
-                    "name": "setupScreenFov",
-                    "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "float fovDeg, float nearDist = 0.0f, float farDist = 0.0f",
-                    "return_type": "void",
-                    "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)"
-                },
-                {
-                    "name": "setupScreenFov",
-                    "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "float fovDeg, float nearDist, float farDist",
-                    "return_type": "void",
-                    "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)"
-                },
-                {
-                    "name": "setDefaultScreenFov",
-                    "params": "fovDeg",
-                    "params_typed": "float fovDeg",
-                    "return_type": "void",
-                    "desc": "Set default screen FOV (applied at frame start)"
-                },
-                {
-                    "name": "getDefaultScreenFov",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current default screen FOV"
-                },
-                {
-                    "name": "worldToScreen",
-                    "params": "worldPos",
-                    "params_typed": "const Vec3& worldPos",
-                    "return_type": "Vec3",
-                    "desc": "Convert world coordinate to screen coordinate (x, y = screen pos, z = depth 0-1)"
-                },
-                {
-                    "name": "screenToWorld",
-                    "params": "screenPos, worldZ",
-                    "params_typed": "const Vec2 & screenPos, float worldZ = 0.0f",
-                    "return_type": "Vec3",
-                    "desc": "Convert screen coordinate to world coordinate on Z plane"
-                },
-                {
-                    "name": "screenToWorld",
-                    "params": "screenPos, worldZ",
-                    "params_typed": "const Vec2& screenPos, float worldZ",
-                    "return_type": "Vec3",
-                    "desc": "Convert screen coordinate to world coordinate on Z plane"
-                }
-            ]
-        },
-        {
-            "name": "3D Camera",
-            "functions": [
-                {
-                    "name": "begin",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Apply camera transform (start 3D mode)"
-                },
-                {
-                    "name": "end",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Restore previous transform (end 3D mode)"
-                },
-                {
-                    "name": "reset",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Reset camera to default position"
-                },
-                {
-                    "name": "setTarget",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "void",
-                    "desc": "Set camera look-at target"
-                },
-                {
-                    "name": "setTarget",
-                    "params": "target",
-                    "params_typed": "const Vec3 &target",
-                    "return_type": "void",
-                    "desc": "Set camera look-at target"
-                },
-                {
-                    "name": "getTarget",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Vec3",
-                    "desc": "Get camera look-at target"
-                },
-                {
-                    "name": "setDistance",
-                    "params": "distance",
-                    "params_typed": "float distance",
-                    "return_type": "void",
-                    "desc": "Set distance from target"
-                },
-                {
-                    "name": "getDistance",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get distance from target"
-                },
-                {
-                    "name": "setAzimuth",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "void",
-                    "desc": "Set orbit azimuth (horizontal angle, radians)"
-                },
-                {
-                    "name": "getAzimuth",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get orbit azimuth (horizontal angle, radians)"
-                },
-                {
-                    "name": "setElevation",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "void",
-                    "desc": "Set orbit elevation (vertical angle, radians; clamped to ~±80°)"
-                },
-                {
-                    "name": "getElevation",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get orbit elevation (vertical angle, radians)"
-                },
-                {
-                    "name": "setFov",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "void",
-                    "desc": "Set field of view in radians"
-                },
-                {
-                    "name": "getFov",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get field of view in radians"
-                },
-                {
-                    "name": "setFovDeg",
-                    "params": "degrees",
-                    "params_typed": "float degrees",
-                    "return_type": "void",
-                    "desc": "Set field of view in degrees"
-                },
-                {
-                    "name": "setNearClip",
-                    "params": "nearClip",
-                    "params_typed": "float nearClip",
-                    "return_type": "void",
-                    "desc": "Set near clipping plane"
-                },
-                {
-                    "name": "setFarClip",
-                    "params": "farClip",
-                    "params_typed": "float farClip",
-                    "return_type": "void",
-                    "desc": "Set far clipping plane"
-                },
-                {
-                    "name": "getNearClip",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get near clipping plane distance"
-                },
-                {
-                    "name": "getFarClip",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get far clipping plane distance"
-                },
-                {
-                    "name": "enableMouseInput",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Enable mouse input for camera control"
-                },
-                {
-                    "name": "disableMouseInput",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Disable mouse input for camera control"
-                },
-                {
-                    "name": "isMouseInputEnabled",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if mouse input is enabled"
-                },
-                {
-                    "name": "mousePressed",
-                    "params": "x, y, button",
-                    "params_typed": "int x, int y, int button",
-                    "return_type": "void",
-                    "desc": "Handle mouse press event"
-                },
-                {
-                    "name": "mouseReleased",
-                    "params": "x, y, button",
-                    "params_typed": "int x, int y, int button",
-                    "return_type": "void",
-                    "desc": "Handle mouse release event"
-                },
-                {
-                    "name": "mouseDragged",
-                    "params": "x, y, button",
-                    "params_typed": "int x, int y, int button",
-                    "return_type": "void",
-                    "desc": "Handle mouse drag event"
-                },
-                {
-                    "name": "mouseScrolled",
-                    "params": "dx, dy",
-                    "params_typed": "float dx, float dy",
-                    "return_type": "void",
-                    "desc": "Handle mouse scroll event (for zoom)"
-                },
-                {
-                    "name": "getPosition",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Vec3",
-                    "desc": "Get camera position"
-                },
-                {
-                    "name": "setSensitivity",
-                    "params": "sensitivity",
-                    "params_typed": "float sensitivity",
-                    "return_type": "void",
-                    "desc": "Set rotation sensitivity"
-                },
-                {
-                    "name": "setZoomSensitivity",
-                    "params": "sensitivity",
-                    "params_typed": "float sensitivity",
-                    "return_type": "void",
-                    "desc": "Set zoom sensitivity"
-                },
-                {
-                    "name": "setPanSensitivity",
-                    "params": "sensitivity",
-                    "params_typed": "float sensitivity",
-                    "return_type": "void",
-                    "desc": "Set pan sensitivity"
-                },
-                {
-                    "name": "getCameraPosition",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "const Vec3&",
-                    "desc": "Current camera position used for specular/PBR view vector"
-                }
-            ]
-        },
-        {
-            "name": "Lighting & PBR",
-            "functions": [
-                {
-                    "name": "addLight",
-                    "params": "light",
-                    "params_typed": "Light& light",
-                    "return_type": "void",
-                    "desc": "Add a light to the scene"
-                },
-                {
-                    "name": "removeLight",
-                    "params": "light",
-                    "params_typed": "Light& light",
-                    "return_type": "void",
-                    "desc": "Remove a light from the scene"
-                },
-                {
-                    "name": "clearLights",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Remove all lights from the scene"
-                },
-                {
-                    "name": "setMaterial",
-                    "params": "material",
-                    "params_typed": "Material& material",
-                    "return_type": "void",
-                    "desc": "Set material for subsequent mesh draws (activates PBR)"
-                },
-                {
-                    "name": "clearMaterial",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Clear material (return to default rendering)"
-                },
-                {
-                    "name": "setCameraPosition",
-                    "params": "pos",
-                    "params_typed": "const Vec3& pos",
-                    "return_type": "void",
-                    "desc": "Set camera position for specular calculation"
-                },
-                {
-                    "name": "setCameraPosition",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "void",
-                    "desc": "Set camera position for specular calculation"
-                },
-                {
-                    "name": "setEnvironment",
-                    "params": "env",
-                    "params_typed": "Environment& env",
-                    "return_type": "void",
-                    "desc": "Set IBL environment for PBR ambient lighting"
-                },
-                {
-                    "name": "clearEnvironment",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Clear IBL environment"
-                },
-                {
-                    "name": "beginShadowPass",
-                    "params": "light",
-                    "params_typed": "Light& light",
-                    "return_type": "void",
-                    "desc": "Begin shadow depth pass from the light's point of view"
-                },
-                {
-                    "name": "endShadowPass",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "End shadow depth pass"
-                },
-                {
-                    "name": "shadowDraw",
-                    "params": "mesh",
-                    "params_typed": "const Mesh& mesh",
-                    "return_type": "void",
-                    "desc": "Draw a mesh into the shadow depth pass (depth only)"
-                },
-                {
-                    "name": "getNumLights",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Number of currently active lights"
-                },
-                {
-                    "name": "getEnvironment",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Environment*",
-                    "desc": "Get the current environment (IBL/skybox), or nullptr if none is set"
-                },
-                {
-                    "name": "calculateLighting",
-                    "params": "worldPos, worldNormal, material",
-                    "params_typed": "const Vec3& worldPos, const Vec3& worldNormal, const Material& material",
-                    "return_type": "Color",
-                    "desc": "CPU-side lighting result for a world position and normal, summing all active lights with the given material"
-                }
-            ]
-        },
-        {
-            "name": "Math - 3D",
-            "functions": [
-                {
-                    "name": "Mat4_identity",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Mat4",
-                    "desc": "Create an identity matrix"
-                },
-                {
-                    "name": "Mat4_translate",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "Mat4",
-                    "desc": "Create a translation matrix"
-                },
-                {
-                    "name": "Mat4_translate",
-                    "params": "v",
-                    "params_typed": "const Vec3& v",
-                    "return_type": "Mat4",
-                    "desc": "Create a translation matrix"
-                },
-                {
-                    "name": "Mat4_rotateX",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "Mat4",
-                    "desc": "Create X-axis rotation matrix"
-                },
-                {
-                    "name": "Mat4_rotateY",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "Mat4",
-                    "desc": "Create Y-axis rotation matrix"
-                },
-                {
-                    "name": "Mat4_rotateZ",
-                    "params": "radians",
-                    "params_typed": "float radians",
-                    "return_type": "Mat4",
-                    "desc": "Create Z-axis rotation matrix"
-                },
-                {
-                    "name": "Mat4_scale",
-                    "params": "s",
-                    "params_typed": "float s",
-                    "return_type": "Mat4",
-                    "desc": "Create a scaling matrix"
-                },
-                {
-                    "name": "Mat4_scale",
-                    "params": "sx, sy, sz",
-                    "params_typed": "float sx, float sy, float sz",
-                    "return_type": "Mat4",
-                    "desc": "Create a scaling matrix"
-                },
-                {
-                    "name": "Mat4_lookAt",
-                    "params": "eye, target, up",
-                    "params_typed": "const Vec3 & eye, const Vec3 & target, const Vec3 & up",
-                    "return_type": "Mat4",
-                    "desc": "Create a view matrix"
-                },
-                {
-                    "name": "Mat4_ortho",
-                    "params": "left, right, bottom, top, nearPlane, farPlane",
-                    "params_typed": "float left, float right, float bottom, float top, float nearPlane, float farPlane",
-                    "return_type": "Mat4",
-                    "desc": "Create an orthographic projection matrix"
-                },
-                {
-                    "name": "Mat4_perspective",
-                    "params": "fovY, aspect, nearPlane, farPlane",
-                    "params_typed": "float fovY, float aspect, float nearPlane, float farPlane",
-                    "return_type": "Mat4",
-                    "desc": "Create a perspective projection matrix"
-                },
-                {
-                    "name": "Quaternion_identity",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Quaternion",
-                    "desc": "Create an identity quaternion"
-                },
-                {
-                    "name": "Quaternion_fromAxisAngle",
-                    "params": "axis, radians",
-                    "params_typed": "const Vec3 & axis, float radians",
-                    "return_type": "Quaternion",
-                    "desc": "Create quaternion from axis-angle"
-                },
-                {
-                    "name": "Quaternion_fromEuler",
-                    "params": "pitch, yaw, roll",
-                    "params_typed": "float pitch, float yaw, float roll",
-                    "return_type": "Quaternion",
-                    "desc": "Create quaternion from Euler angles"
-                },
-                {
-                    "name": "Quaternion_fromEuler",
-                    "params": "euler",
-                    "params_typed": "const Vec3& euler",
-                    "return_type": "Quaternion",
-                    "desc": "Create quaternion from Euler angles"
-                },
-                {
-                    "name": "Quaternion_slerp",
-                    "params": "a, b, t",
-                    "params_typed": "const Quaternion & a, const Quaternion & b, float t",
-                    "return_type": "Quaternion",
-                    "desc": "Spherical linear interpolation"
-                }
-            ]
-        },
-        {
-            "name": "Graphics - Advanced",
-            "functions": [
-                {
-                    "name": "drawMesh",
-                    "params": "mesh",
-                    "params_typed": "const Mesh & mesh",
-                    "return_type": "void",
-                    "desc": "Draw a mesh"
-                },
-                {
-                    "name": "createBox",
-                    "params": "size",
-                    "params_typed": "float size",
-                    "return_type": "Mesh",
-                    "desc": "Create a box mesh"
-                },
-                {
-                    "name": "createBox",
-                    "params": "w, h, d",
-                    "params_typed": "float w, float h, float d",
-                    "return_type": "Mesh",
-                    "desc": "Create a box mesh"
-                },
-                {
-                    "name": "createPlane",
-                    "params": "width, height, cols, rows",
-                    "params_typed": "float width, float height, int cols = 2, int rows = 2",
-                    "return_type": "Mesh",
-                    "desc": "Create a plane mesh (subdivided quad on the XY plane)"
-                },
-                {
-                    "name": "createCylinder",
-                    "params": "radius, height, resolution",
-                    "params_typed": "float radius, float height, int resolution = 16",
-                    "return_type": "Mesh",
-                    "desc": "Create a cylinder mesh"
-                },
-                {
-                    "name": "createCone",
-                    "params": "radius, height, resolution",
-                    "params_typed": "float radius, float height, int resolution = 16",
-                    "return_type": "Mesh",
-                    "desc": "Create a cone mesh"
-                },
-                {
-                    "name": "createIcoSphere",
-                    "params": "radius, subdivisions",
-                    "params_typed": "float radius, int subdivisions = 2",
-                    "return_type": "Mesh",
-                    "desc": "Create an icosphere mesh (geodesic sphere with uniform triangles)"
-                },
-                {
-                    "name": "createTorus",
-                    "params": "radius, tubeRadius, sides, rings",
-                    "params_typed": "float radius, float tubeRadius, int sides = 24, int rings = 16",
-                    "return_type": "Mesh",
-                    "desc": "Create a torus (donut) mesh"
-                },
-                {
-                    "name": "createSphere",
-                    "params": "radius, res",
-                    "params_typed": "float radius, int res = 20",
-                    "return_type": "Mesh",
-                    "desc": "Create a sphere mesh"
-                },
-                {
-                    "name": "createCapsule",
-                    "params": "radius, cylinderHeight, res",
-                    "params_typed": "float radius, float cylinderHeight, int res = 16",
-                    "return_type": "Mesh",
-                    "desc": "Create a capsule mesh (Y-up: cylinder capped by two hemispheres)"
-                }
-            ]
-        },
-        {
-            "name": "Graphics - Texture & GPU",
-            "functions": [
-                {
-                    "name": "Texture",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a texture"
-                },
-                {
-                    "name": "load",
-                    "params": "path, mipmaps",
-                    "params_typed": "const std::filesystem::path & path, bool mipmaps = false",
-                    "return_type": "bool",
-                    "desc": "Load image from file"
-                },
-                {
-                    "name": "bind",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Bind texture"
-                },
-                {
-                    "name": "unbind",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Unbind texture"
-                },
-                {
-                    "name": "getWidth",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get width"
-                },
-                {
-                    "name": "getHeight",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get height"
-                },
-                {
-                    "name": "channelCount",
-                    "params": "fmt",
-                    "params_typed": "TextureFormat fmt",
-                    "return_type": "int",
-                    "desc": "Number of color channels for a TextureFormat (1, 2, or 4)"
-                },
-                {
-                    "name": "bytesPerPixel",
-                    "params": "fmt",
-                    "params_typed": "TextureFormat fmt",
-                    "return_type": "int",
-                    "desc": "Bytes per pixel for a TextureFormat"
-                },
-                {
-                    "name": "isFloatFormat",
-                    "params": "fmt",
-                    "params_typed": "TextureFormat fmt",
-                    "return_type": "bool",
-                    "desc": "Whether a TextureFormat uses floating-point components"
-                }
-            ]
-        },
-        {
-            "name": "Graphics - FBO",
-            "functions": [
-                {
-                    "name": "Fbo",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create an FBO"
-                },
-                {
-                    "name": "allocate",
-                    "params": "w, h, sampleCount, format, mipmaps",
-                    "params_typed": "int w, int h, int sampleCount = 1, TextureFormat format = TextureFormat::RGBA8, bool mipmaps = false",
-                    "return_type": "void",
-                    "desc": "Allocate buffer"
-                },
-                {
-                    "name": "begin",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Begin drawing to FBO. No args = preserve previous content. With args = clear with specified color"
-                },
-                {
-                    "name": "begin",
-                    "params": "r, g, b, a",
-                    "params_typed": "float r, float g, float b, float a = 1.0",
-                    "return_type": "void",
-                    "desc": "Begin drawing to FBO. No args = preserve previous content. With args = clear with specified color"
-                },
-                {
-                    "name": "end",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "End drawing to FBO"
-                },
-                {
-                    "name": "getTexture",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Texture&",
-                    "desc": "Get internal texture"
-                }
-            ]
-        },
-        {
-            "name": "Graphics - Shader",
-            "functions": [
-                {
-                    "name": "Shader",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a shader (base class, inheritable)"
-                },
-                {
-                    "name": "load",
-                    "params": "descFn",
-                    "params_typed": "const sg_shader_desc* (*descFn)(sg_backend) descFn",
-                    "return_type": "bool",
-                    "desc": "Load from sokol-shdc generated function"
-                },
-                {
-                    "name": "isLoaded",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if shader is loaded"
-                },
-                {
-                    "name": "begin",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Begin shader (pushes to stack)"
-                },
-                {
-                    "name": "end",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "End shader (pops from stack)"
-                },
-                {
-                    "name": "pushShader",
-                    "params": "shader",
-                    "params_typed": "Shader& shader",
-                    "return_type": "void",
-                    "desc": "Push shader to stack (subsequent draws use this shader)"
-                },
-                {
-                    "name": "popShader",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Pop shader from stack"
-                },
-                {
-                    "name": "setUniform",
-                    "params": "slot, value",
-                    "params_typed": "int slot, float value",
-                    "return_type": "void",
-                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
-                },
-                {
-                    "name": "setUniform",
-                    "params": "slot, v",
-                    "params_typed": "int slot, const Vec2& v",
-                    "return_type": "void",
-                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
-                },
-                {
-                    "name": "setUniform",
-                    "params": "slot, v",
-                    "params_typed": "int slot, const Vec3& v",
-                    "return_type": "void",
-                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
-                },
-                {
-                    "name": "setUniform",
-                    "params": "slot, v",
-                    "params_typed": "int slot, const Vec4& v",
-                    "return_type": "void",
-                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
-                },
-                {
-                    "name": "setUniform",
-                    "params": "slot, c",
-                    "params_typed": "int slot, const Color& c",
-                    "return_type": "void",
-                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
-                },
-                {
-                    "name": "setUniform",
-                    "params": "slot, v",
-                    "params_typed": "int slot, const vector<float>& v",
-                    "return_type": "void",
-                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
-                },
-                {
-                    "name": "setUniform",
-                    "params": "slot, v",
-                    "params_typed": "int slot, const vector<Vec2>& v",
-                    "return_type": "void",
-                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
-                },
-                {
-                    "name": "setUniform",
-                    "params": "slot, v",
-                    "params_typed": "int slot, const vector<Vec3>& v",
-                    "return_type": "void",
-                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
-                },
-                {
-                    "name": "setUniform",
-                    "params": "slot, v",
-                    "params_typed": "int slot, const vector<Vec4>& v",
-                    "return_type": "void",
-                    "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
-                },
-                {
-                    "name": "setTexture",
-                    "params": "slot, view, sampler",
-                    "params_typed": "int slot, sg_view view, sg_sampler sampler",
-                    "return_type": "void",
-                    "desc": "Bind texture to slot"
-                }
-            ]
-        },
-        {
-            "name": "Types - Pixels",
-            "functions": [
-                {
-                    "name": "Pixels",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create pixel buffer"
-                },
-                {
-                    "name": "allocate",
-                    "params": "width, height, channels, format",
-                    "params_typed": "int width, int height, int channels = 4, PixelFormat format = PixelFormat::U8",
-                    "return_type": "void",
-                    "desc": "Allocate memory"
-                },
-                {
-                    "name": "getData",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "uint8_t*",
-                    "desc": "Get raw data pointer"
-                },
-                {
-                    "name": "getColor",
-                    "params": "x, y",
-                    "params_typed": "int x, int y",
-                    "return_type": "Color",
-                    "desc": "Get color at pixel"
-                },
-                {
-                    "name": "setColor",
-                    "params": "x, y, c",
-                    "params_typed": "int x, int y, const Color& c",
-                    "return_type": "void",
-                    "desc": "Set color at pixel"
-                },
-                {
-                    "name": "save",
-                    "params": "path",
-                    "params_typed": "const std::filesystem::path & path",
-                    "return_type": "bool",
-                    "desc": "Save to file"
-                }
-            ]
-        },
-        {
-            "name": "Types - Mesh",
-            "functions": [
-                {
-                    "name": "Mesh",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a new Mesh (constructor)"
-                },
-                {
-                    "name": "setMode",
-                    "params": "mode",
-                    "params_typed": "PrimitiveMode mode",
-                    "return_type": "Mesh&",
-                    "desc": "Set primitive mode (MESH_TRIANGLES, etc.)"
-                },
-                {
-                    "name": "addVertex",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "Mesh&",
-                    "desc": "Add a vertex"
-                },
-                {
-                    "name": "addVertex",
-                    "params": "v",
-                    "params_typed": "const Vec3& v",
-                    "return_type": "Mesh&",
-                    "desc": "Add a vertex"
-                },
-                {
-                    "name": "addColor",
-                    "params": "r, g, b, a",
-                    "params_typed": "float r, float g, float b, float a",
-                    "return_type": "Mesh&",
-                    "desc": "Add a color for the vertex"
-                },
-                {
-                    "name": "addColor",
-                    "params": "c",
-                    "params_typed": "const Color& c",
-                    "return_type": "Mesh&",
-                    "desc": "Add a color for the vertex"
-                },
-                {
-                    "name": "addTexCoord",
-                    "params": "u, v",
-                    "params_typed": "float u, float v",
-                    "return_type": "Mesh&",
-                    "desc": "Add a texture coordinate"
-                },
-                {
-                    "name": "addNormal",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z",
-                    "return_type": "Mesh&",
-                    "desc": "Add a normal vector"
-                },
-                {
-                    "name": "addIndex",
-                    "params": "int",
-                    "params_typed": "unsigned int",
-                    "return_type": "Mesh&",
-                    "desc": "Add an index"
-                },
-                {
-                    "name": "addTriangle",
-                    "params": "int, int, int",
-                    "params_typed": "unsigned int, unsigned int, unsigned int",
-                    "return_type": "Mesh&",
-                    "desc": "Add a triangle (3 indices)"
-                },
-                {
-                    "name": "clear",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "Mesh&",
-                    "desc": "Clear all data"
-                },
-                {
-                    "name": "draw",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Draw the mesh"
-                }
-            ]
-        },
-        {
-            "name": "Types - Path",
-            "functions": [
-                {
-                    "name": "Path",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a new Path (constructor)"
-                },
-                {
-                    "name": "addVertex",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "void",
-                    "desc": "Add a vertex"
-                },
-                {
-                    "name": "lineTo",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z = 0",
-                    "return_type": "void",
-                    "desc": "Add a line segment to point"
-                },
-                {
-                    "name": "bezierTo",
-                    "params": "cx1, cy1, cx2, cy2, x, y, resolution",
-                    "params_typed": "float cx1, float cy1, float cx2, float cy2, float x, float y, int resolution = -1",
-                    "return_type": "void",
-                    "desc": "Add a cubic bezier curve"
-                },
-                {
-                    "name": "quadBezierTo",
-                    "params": "cx, cy, x, y, resolution",
-                    "params_typed": "float cx, float cy, float x, float y, int resolution = -1",
-                    "return_type": "void",
-                    "desc": "Add a quadratic bezier curve"
-                },
-                {
-                    "name": "curveTo",
-                    "params": "x, y, z, resolution",
-                    "params_typed": "float x, float y, float z = 0, int resolution = -1",
-                    "return_type": "void",
-                    "desc": "Add a Catmull-Rom curve segment"
-                },
-                {
-                    "name": "arc",
-                    "params": "x, y, radiusX, radiusY, angleBegin, angleEnd, circleResolution",
-                    "params_typed": "float x, float y, float radiusX, float radiusY, float angleBegin, float angleEnd, int circleResolution = 20",
-                    "return_type": "void",
-                    "desc": "Add an arc"
-                },
-                {
-                    "name": "close",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Close the shape"
-                }
-            ]
-        },
-        {
-            "name": "Types - StrokeMesh",
-            "functions": [
-                {
-                    "name": "setWidth",
-                    "params": "width",
-                    "params_typed": "float width",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Set stroke width (method chaining)"
-                },
-                {
-                    "name": "setColor",
-                    "params": "color",
-                    "params_typed": "const Color &color",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Set stroke color (method chaining)"
-                },
-                {
-                    "name": "setCapType",
-                    "params": "type",
-                    "params_typed": "StrokeMesh::CapType type",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Set cap type: Butt, Round, Square (method chaining)"
-                },
-                {
-                    "name": "setJoinType",
-                    "params": "type",
-                    "params_typed": "StrokeMesh::JoinType type",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Set join type: Miter, Round, Bevel (method chaining)"
-                },
-                {
-                    "name": "setMiterLimit",
-                    "params": "limit",
-                    "params_typed": "float limit",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Set miter limit for sharp corners (method chaining)"
-                },
-                {
-                    "name": "addVertex",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z = 0",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Add a vertex (method chaining)"
-                },
-                {
-                    "name": "addVertex",
-                    "params": "p",
-                    "params_typed": "const Vec3& p",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Add a vertex (method chaining)"
-                },
-                {
-                    "name": "addVertex",
-                    "params": "x, y, z",
-                    "params_typed": "float x, float y, float z = 0",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Add a vertex (method chaining)"
-                },
-                {
-                    "name": "addVertex",
-                    "params": "p",
-                    "params_typed": "const Vec3& p",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Add a vertex (method chaining)"
-                },
-                {
-                    "name": "addVertexWithWidth",
-                    "params": "x, y, width",
-                    "params_typed": "float x, float y, float width",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Add a vertex with variable width (method chaining)"
-                },
-                {
-                    "name": "setShape",
-                    "params": "path",
-                    "params_typed": "const Path & path",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Set shape from Path (method chaining)"
-                },
-                {
-                    "name": "setClosed",
-                    "params": "closed",
-                    "params_typed": "bool closed",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Set whether the stroke is closed (method chaining)"
-                },
-                {
-                    "name": "clear",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "StrokeMesh&",
-                    "desc": "Clear all vertices (method chaining)"
-                },
-                {
-                    "name": "update",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Update the internal mesh (required before draw)"
-                },
-                {
-                    "name": "draw",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Draw the stroke mesh"
-                }
-            ]
-        },
-        {
-            "name": "Video",
-            "functions": [
-                {
-                    "name": "VideoPlayer",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a video player"
-                },
-                {
-                    "name": "load",
-                    "params": "path",
-                    "params_typed": "const string& path",
-                    "return_type": "bool",
-                    "desc": "Load a video file"
-                },
-                {
-                    "name": "close",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Close the video and release resources"
-                },
-                {
-                    "name": "isLoaded",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if a video is loaded"
-                },
-                {
-                    "name": "play",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Start or resume playback"
-                },
-                {
-                    "name": "stop",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Stop playback and reset to beginning"
-                },
-                {
-                    "name": "setPaused",
-                    "params": "paused",
-                    "params_typed": "bool paused",
-                    "return_type": "void",
-                    "desc": "Pause or resume playback"
-                },
-                {
-                    "name": "togglePause",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Toggle pause state"
-                },
-                {
-                    "name": "update",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Update the video frame. Call once per frame in update()"
-                },
-                {
-                    "name": "isPlaying",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if video is currently playing (not paused)"
-                },
-                {
-                    "name": "isPaused",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if video is paused"
-                },
-                {
-                    "name": "isFrameNew",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if a new frame is available since last update"
-                },
-                {
-                    "name": "isDone",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if playback has reached the end"
-                },
-                {
-                    "name": "getWidth",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get video width in pixels"
-                },
-                {
-                    "name": "getHeight",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get video height in pixels"
-                },
-                {
-                    "name": "getDuration",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get total duration in seconds"
-                },
-                {
-                    "name": "getPosition",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current position (0.0 to 1.0)"
-                },
-                {
-                    "name": "setPosition",
-                    "params": "pct",
-                    "params_typed": "float pct",
-                    "return_type": "void",
-                    "desc": "Seek to position (0.0 to 1.0)"
-                },
-                {
-                    "name": "getCurrentTime",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current playback time in seconds"
-                },
-                {
-                    "name": "setCurrentTime",
-                    "params": "seconds",
-                    "params_typed": "float seconds",
-                    "return_type": "void",
-                    "desc": "Seek to a specific time in seconds"
-                },
-                {
-                    "name": "setVolume",
-                    "params": "vol",
-                    "params_typed": "float vol",
-                    "return_type": "void",
-                    "desc": "Set audio volume (0.0 to 1.0)"
-                },
-                {
-                    "name": "getVolume",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current volume"
-                },
-                {
-                    "name": "setSpeed",
-                    "params": "speed",
-                    "params_typed": "float speed",
-                    "return_type": "void",
-                    "desc": "Set playback speed (1.0 = normal, 2.0 = double speed)"
-                },
-                {
-                    "name": "getSpeed",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current playback speed"
-                },
-                {
-                    "name": "setPan",
-                    "params": "pan",
-                    "params_typed": "float pan",
-                    "return_type": "void",
-                    "desc": "Set stereo pan (-1.0 left, 0.0 center, 1.0 right)"
-                },
-                {
-                    "name": "getPan",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current stereo pan"
-                },
-                {
-                    "name": "setLoop",
-                    "params": "loop",
-                    "params_typed": "bool loop",
-                    "return_type": "void",
-                    "desc": "Enable/disable looping"
-                },
-                {
-                    "name": "isLoop",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if looping is enabled"
-                },
-                {
-                    "name": "getCurrentFrame",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get current frame number"
-                },
-                {
-                    "name": "getTotalFrames",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get total number of frames"
-                },
-                {
-                    "name": "setFrame",
-                    "params": "frame",
-                    "params_typed": "int frame",
-                    "return_type": "void",
-                    "desc": "Seek to a specific frame number"
-                },
-                {
-                    "name": "nextFrame",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Advance to the next frame"
-                },
-                {
-                    "name": "previousFrame",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Go back to the previous frame"
-                },
-                {
-                    "name": "firstFrame",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Go to the first frame"
-                },
-                {
-                    "name": "setGammaCorrection",
-                    "params": "gamma",
-                    "params_typed": "float gamma",
-                    "return_type": "void",
-                    "desc": "Set gamma correction (1.0 = none). Use ~0.45 to brighten on platforms with dark output (e.g. macOS AVFoundation)"
-                },
-                {
-                    "name": "getGammaCorrection",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get current gamma correction value"
-                },
-                {
-                    "name": "setUseHwAccel",
-                    "params": "enable",
-                    "params_typed": "bool enable",
-                    "return_type": "void",
-                    "desc": "Enable/disable hardware decoding. Must be called before load(). Default: true. When enabled, the player probes available HW backends (VAAPI, V4L2M2M, CUDA, etc.) and falls back to software if none are available. Currently affects the Linux backend only."
-                },
-                {
-                    "name": "getUseHwAccel",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Get HW accel preference (not the actual backend — use isUsingHwAccel() for that)"
-                },
-                {
-                    "name": "isUsingHwAccel",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if hardware decoding is currently active (after load)"
-                },
-                {
-                    "name": "getHwAccelName",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "string",
-                    "desc": "Get the name of the active decode backend. Returns 'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', or 'none'"
-                },
-                {
-                    "name": "setResyncThreshold",
-                    "params": "seconds",
-                    "params_typed": "float seconds",
-                    "return_type": "void",
-                    "desc": "Set the maximum video/audio drift before hard re-sync. When drift exceeds this threshold, video seeks to match audio position instead of catching up frame-by-frame. Set to 0 to disable. Default: 0.5s. Primarily affects Linux (FFmpeg) backend."
-                },
-                {
-                    "name": "getResyncThreshold",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "float",
-                    "desc": "Get the current resync threshold in seconds"
-                },
-                {
-                    "name": "hasAudio",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if the loaded video has an audio track"
-                },
-                {
-                    "name": "start",
-                    "params": "path, settings",
-                    "params_typed": "const string& path, const VideoRecordSettings& settings = {}",
-                    "return_type": "bool",
-                    "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically"
-                },
-                {
-                    "name": "start",
-                    "params": "fbo, path, settings",
-                    "params_typed": "const Fbo& fbo, const string& path, const VideoRecordSettings& settings = {}",
-                    "return_type": "bool",
-                    "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically"
-                },
-                {
-                    "name": "stop",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Stop live capture and finalize the file"
-                },
-                {
-                    "name": "open",
-                    "params": "path, width, height, settings",
-                    "params_typed": "const string& path, int width, int height, const VideoRecordSettings& settings = {}",
-                    "return_type": "bool",
-                    "desc": "Open the encoder at the given size (path resolved via getDataPath)"
-                },
-                {
-                    "name": "addFrame",
-                    "params": "fbo",
-                    "params_typed": "const Fbo& fbo",
-                    "return_type": "bool",
-                    "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)"
-                },
-                {
-                    "name": "addFrame",
-                    "params": "pixels",
-                    "params_typed": "const Pixels& pixels",
-                    "return_type": "bool",
-                    "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)"
-                },
-                {
-                    "name": "addFrameAt",
-                    "params": "fbo, timeSec",
-                    "params_typed": "const Fbo& fbo, double timeSec",
-                    "return_type": "bool",
-                    "desc": "Append one frame at an explicit presentation time (seconds)"
-                },
-                {
-                    "name": "addFrameAt",
-                    "params": "pixels, timeSec",
-                    "params_typed": "const Pixels& pixels, double timeSec",
-                    "return_type": "bool",
-                    "desc": "Append one frame at an explicit presentation time (seconds)"
-                },
-                {
-                    "name": "close",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Finalize and flush the video file"
-                },
-                {
-                    "name": "videoCodecName",
-                    "params": "c",
-                    "params_typed": "VideoCodec c",
-                    "return_type": "const char *",
-                    "desc": "Return a human-readable name for a VideoCodec value (e.g. \"H.264\", \"HEVC\", \"ProRes 422\")"
-                }
-            ]
-        },
-        {
-            "name": "Addon: tcxLut (Color Grading)",
-            "functions": [
-                {
-                    "name": "tcx::lut::Lut3D",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a 3D LUT for color grading"
-                },
-                {
-                    "name": "load",
-                    "params": "path",
-                    "params_typed": "const fs::path& path",
-                    "return_type": "bool",
-                    "desc": "Load .cube file"
-                },
-                {
-                    "name": "allocate",
-                    "params": "size, data",
-                    "params_typed": "int size, const float* data = nullptr",
-                    "return_type": "void",
-                    "desc": "Allocate LUT with optional data"
-                },
-                {
-                    "name": "isAllocated",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Check if LUT is allocated"
-                },
-                {
-                    "name": "getSize",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "int",
-                    "desc": "Get LUT size (e.g., 32 for 32x32x32)"
-                },
-                {
-                    "name": "tcx::lut::createIdentity",
-                    "params": "size",
-                    "params_typed": "int size = 32",
-                    "return_type": "Lut3D",
-                    "desc": "Create identity LUT (no color change)"
-                },
-                {
-                    "name": "tcx::lut::createVintage",
-                    "params": "size",
-                    "params_typed": "int size = 32",
-                    "return_type": "Lut3D",
-                    "desc": "Create vintage/faded look LUT"
-                },
-                {
-                    "name": "tcx::lut::createCinematic",
-                    "params": "size",
-                    "params_typed": "int size = 32",
-                    "return_type": "Lut3D",
-                    "desc": "Create cinematic orange/teal LUT"
-                },
-                {
-                    "name": "tcx::lut::createFilmNoir",
-                    "params": "size",
-                    "params_typed": "int size = 32",
-                    "return_type": "Lut3D",
-                    "desc": "Create film noir high-contrast B&W LUT"
-                },
-                {
-                    "name": "tcx::lut::createWarm",
-                    "params": "size",
-                    "params_typed": "int size = 32",
-                    "return_type": "Lut3D",
-                    "desc": "Create warm color shift LUT"
-                },
-                {
-                    "name": "tcx::lut::createCool",
-                    "params": "size",
-                    "params_typed": "int size = 32",
-                    "return_type": "Lut3D",
-                    "desc": "Create cool color shift LUT"
-                },
-                {
-                    "name": "tcx::lut::createPastel",
-                    "params": "size",
-                    "params_typed": "int size = 32",
-                    "return_type": "Lut3D",
-                    "desc": "Create soft pastel LUT"
-                },
-                {
-                    "name": "tcx::lut::LutShader",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "",
-                    "desc": "Create a LUT shader for color grading"
-                },
-                {
-                    "name": "setTexture",
-                    "params": "tex",
-                    "params_typed": "const T& tex",
-                    "return_type": "void",
-                    "desc": "Set source texture (VideoGrabber, Texture, Fbo, etc.)"
-                },
-                {
-                    "name": "setLut",
-                    "params": "lut",
-                    "params_typed": "const Lut3D& lut",
-                    "return_type": "void",
-                    "desc": "Set LUT to apply"
-                },
-                {
-                    "name": "setBlend",
-                    "params": "blend",
-                    "params_typed": "float blend",
-                    "return_type": "void",
-                    "desc": "Set blend amount (0=original, 1=full LUT)"
-                },
-                {
-                    "name": "draw",
-                    "params": "x, y",
-                    "params_typed": "float x, float y",
-                    "return_type": "void",
-                    "desc": "Draw with LUT applied"
-                },
-                {
-                    "name": "draw",
-                    "params": "x, y, w, h",
-                    "params_typed": "float x, float y, float w, float h",
-                    "return_type": "void",
-                    "desc": "Draw with LUT applied"
-                },
-                {
-                    "name": "drawSubsection",
-                    "params": "x, y, w, h, sx, sy, sw, sh",
-                    "params_typed": "float x, float y, float w, float h, float sx, float sy, float sw, float sh",
-                    "return_type": "void",
-                    "desc": "Draw subsection with LUT applied"
-                }
-            ]
-        },
-        {
-            "name": "Timers",
-            "functions": [
-                {
-                    "name": "callAfter",
-                    "params": "delay, callback",
-                    "params_typed": "double delay, std::function<void()> callback",
-                    "return_type": "uint64_t",
-                    "desc": "Run callback once after delay seconds. Fired from the update loop (frame-quantized). Returns a timer id."
-                },
-                {
-                    "name": "callEvery",
-                    "params": "interval, callback",
-                    "params_typed": "double interval, std::function<void()> callback",
-                    "return_type": "uint64_t",
-                    "desc": "Run callback repeatedly every interval seconds. Fired from the update loop (frame-quantized). Returns a timer id."
-                },
-                {
-                    "name": "callAfterAsync",
-                    "params": "delay, callback",
-                    "params_typed": "double delay, std::function<void()> callback",
-                    "return_type": "uint64_t",
-                    "desc": "Like callAfter, but fired by a precise background scheduler thread (no frame jitter). The callback runs OFF the main thread: guard shared state with a mutex, never draw from it, and don't cancel while holding that mutex. Native only (uses a real thread). Returns a timer id."
-                },
-                {
-                    "name": "callEveryAsync",
-                    "params": "interval, callback",
-                    "params_typed": "double interval, std::function<void()> callback",
-                    "return_type": "uint64_t",
-                    "desc": "Like callEvery, but fired by a precise background scheduler thread with no drift (reschedules at absolute times). Ideal for sequencer clocks and LED/MIDI output timing. Same threading rules as callAfterAsync. Native only. Returns a timer id."
-                },
-                {
-                    "name": "cancelTimer",
-                    "params": "id",
-                    "params_typed": "uint64_t id",
-                    "return_type": "void",
-                    "desc": "Cancel a frame timer (callAfter/callEvery) by id."
-                },
-                {
-                    "name": "cancelAllTimers",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Cancel all frame timers on this node."
-                },
-                {
-                    "name": "cancelAsyncTimer",
-                    "params": "id",
-                    "params_typed": "uint64_t id",
-                    "return_type": "void",
-                    "desc": "Cancel an async timer by id. Blocks until its callback finishes if it is running now (unless called from inside the callback). Do not call while holding the mutex the callback uses."
-                },
-                {
-                    "name": "cancelAllAsyncTimers",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock."
-                }
-            ]
-        },
-        {
-            "name": "Network",
-            "functions": [
-                {
-                    "name": "printNetworkInterfaces",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Log the interface list (one line per entry)"
-                },
-                {
-                    "name": "getLocalIp",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "std::string",
-                    "desc": "The most likely LAN address (skips loopback/down, IPv4 preferred). \"\" if none"
-                },
-                {
-                    "name": "getLocalIps",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "std::vector<std::string>",
-                    "desc": "Every non-loopback address (one per interface entry)"
-                },
-                {
-                    "name": "isLoopback",
-                    "params": "addr",
-                    "params_typed": "const std::string& addr",
-                    "return_type": "bool",
-                    "desc": "True if addr is a loopback address (127.0.0.0/8 or ::1)"
-                },
-                {
-                    "name": "isPrivate",
-                    "params": "addr",
-                    "params_typed": "const std::string& addr",
-                    "return_type": "bool",
-                    "desc": "True if addr is a private IPv4 (10/8, 172.16/12, 192.168/16)"
-                },
-                {
-                    "name": "isLinkLocal",
-                    "params": "addr",
-                    "params_typed": "const std::string& addr",
-                    "return_type": "bool",
-                    "desc": "True if addr is link-local (169.254/16 or fe80::/10)"
-                },
-                {
-                    "name": "sameSubnet",
-                    "params": "a, b, netmask",
-                    "params_typed": "const std::string& a, const std::string& b, const std::string& netmask",
-                    "return_type": "bool",
-                    "desc": "True if IPv4 a and b are on the same subnet under netmask"
-                },
-                {
-                    "name": "getOui",
-                    "params": "mac",
-                    "params_typed": "const std::string& mac",
-                    "return_type": "std::string",
-                    "desc": "The OUI (first 3 bytes) of a MAC, uppercase \"A4:83:E7\". \"\" if unparseable"
-                },
-                {
-                    "name": "isLocallyAdministered",
-                    "params": "mac",
-                    "params_typed": "const std::string& mac",
-                    "return_type": "bool",
-                    "desc": "True if the MAC's locally-administered bit is set (randomized/virtual MAC)"
-                }
-            ]
-        }
-    ],
-    "constants": [
-        {
-            "name": "TAU",
-            "value": "6.283...",
-            "desc": "Full circle (2*PI)"
-        },
-        {
-            "name": "HALF_TAU",
-            "value": "3.141...",
-            "desc": "Half circle (PI)"
-        },
-        {
-            "name": "QUARTER_TAU",
-            "value": "1.570...",
-            "desc": "Quarter circle (PI/2)"
-        },
-        {
-            "name": "PI",
-            "value": "3.141...",
-            "desc": "Pi (use TAU instead)"
-        },
-        {
-            "name": "FONT_SANS",
-            "value": "string",
-            "desc": "System sans-serif font path (CDN URL on Web)"
-        },
-        {
-            "name": "FONT_SERIF",
-            "value": "string",
-            "desc": "System serif font path (CDN URL on Web)"
-        },
-        {
-            "name": "FONT_MONO",
-            "value": "string",
-            "desc": "System monospace font path (CDN URL on Web)"
-        },
-        {
-            "name": "FONT_SANS_JA",
-            "value": "string",
-            "desc": "Japanese sans-serif font (Hiragino Sans on macOS, Yu Gothic on Win, Noto Sans CJK JP on Linux/Android, Google Fonts CDN URL on Web)"
-        },
-        {
-            "name": "FONT_SERIF_JA",
-            "value": "string",
-            "desc": "Japanese serif font (Hiragino Mincho on macOS, Yu Mincho on Win, Noto Serif CJK JP on Linux/Android, Google Fonts CDN URL on Web)"
-        },
-        {
-            "name": "KEY_SPACE",
-            "value": "32",
-            "desc": "Space key"
-        },
-        {
-            "name": "KEY_ESCAPE",
-            "value": "256",
-            "desc": "Escape key"
-        },
-        {
-            "name": "KEY_ENTER",
-            "value": "257",
-            "desc": "Enter/Return key"
-        },
-        {
-            "name": "KEY_TAB",
-            "value": "258",
-            "desc": "Tab key"
-        },
-        {
-            "name": "KEY_BACKSPACE",
-            "value": "259",
-            "desc": "Backspace key"
-        },
-        {
-            "name": "KEY_DELETE",
-            "value": "261",
-            "desc": "Delete key"
-        },
-        {
-            "name": "KEY_RIGHT",
-            "value": "262",
-            "desc": "Right arrow key"
-        },
-        {
-            "name": "KEY_LEFT",
-            "value": "263",
-            "desc": "Left arrow key"
-        },
-        {
-            "name": "KEY_DOWN",
-            "value": "264",
-            "desc": "Down arrow key"
-        },
-        {
-            "name": "KEY_UP",
-            "value": "265",
-            "desc": "Up arrow key"
-        },
-        {
-            "name": "KEY_LEFT_SHIFT",
-            "value": "340",
-            "desc": "Left Shift key"
-        },
-        {
-            "name": "KEY_RIGHT_SHIFT",
-            "value": "344",
-            "desc": "Right Shift key"
-        },
-        {
-            "name": "KEY_LEFT_CONTROL",
-            "value": "341",
-            "desc": "Left Control key"
-        },
-        {
-            "name": "KEY_RIGHT_CONTROL",
-            "value": "345",
-            "desc": "Right Control key"
-        },
-        {
-            "name": "KEY_LEFT_ALT",
-            "value": "342",
-            "desc": "Left Alt/Option key"
-        },
-        {
-            "name": "KEY_RIGHT_ALT",
-            "value": "346",
-            "desc": "Right Alt/Option key"
-        },
-        {
-            "name": "KEY_LEFT_SUPER",
-            "value": "343",
-            "desc": "Left Super/Command key"
-        },
-        {
-            "name": "KEY_RIGHT_SUPER",
-            "value": "347",
-            "desc": "Right Super/Command key"
-        },
-        {
-            "name": "MOUSE_BUTTON_LEFT",
-            "value": "0",
-            "desc": "Left mouse button"
-        },
-        {
-            "name": "MOUSE_BUTTON_RIGHT",
-            "value": "1",
-            "desc": "Right mouse button"
-        },
-        {
-            "name": "MOUSE_BUTTON_MIDDLE",
-            "value": "2",
-            "desc": "Middle mouse button"
-        }
-    ],
-    "keywords": [
-        "void",
-        "int",
-        "float",
-        "bool",
-        "string",
-        "if",
-        "else",
-        "for",
-        "while",
-        "return",
-        "break",
-        "continue",
-        "true",
-        "false",
-        "null",
-        "const"
-    ],
-    "types": [
-        {
-            "name": "Vec2",
-            "desc": "2D vector (x, y)",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "float x, float y",
-                    "float v"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "x",
-                    "type": "float",
-                    "desc": "X component"
-                },
-                {
-                    "name": "y",
-                    "type": "float",
-                    "desc": "Y component"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "set",
-                    "return": "Vec2&",
-                    "signatures": [
-                        "float x, float y",
-                        "float x_, float y_"
-                    ],
-                    "desc": "Set vector components"
-                },
-                {
-                    "name": "length",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get vector length"
-                },
-                {
-                    "name": "lengthSquared",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get squared length (faster, no sqrt)"
-                },
-                {
-                    "name": "normalized",
-                    "return": "Vec2",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get normalized copy"
-                },
-                {
-                    "name": "normalize",
-                    "return": "Vec2&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Normalize in place"
-                },
-                {
-                    "name": "limit",
-                    "return": "Vec2&",
-                    "signatures": [
-                        "float max"
-                    ],
-                    "desc": "Limit length to max"
-                },
-                {
-                    "name": "dot",
-                    "return": "float",
-                    "signatures": [
-                        "const Vec2 & v"
-                    ],
-                    "desc": "Dot product"
-                },
-                {
-                    "name": "cross",
-                    "return": "float",
-                    "signatures": [
-                        "const Vec2 & v"
-                    ],
-                    "desc": "Cross product (z component)"
-                },
-                {
-                    "name": "distance",
-                    "return": "float",
-                    "signatures": [
-                        "const Vec2 & v"
-                    ],
-                    "desc": "Distance to another vector"
-                },
-                {
-                    "name": "distanceSquared",
-                    "return": "float",
-                    "signatures": [
-                        "const Vec2 & v"
-                    ],
-                    "desc": "Squared distance (faster)"
-                },
-                {
-                    "name": "angle",
-                    "return": "float",
-                    "signatures": [
-                        "",
-                        "const Vec2& v"
-                    ],
-                    "desc": "Angle in radians"
-                },
-                {
-                    "name": "rotated",
-                    "return": "Vec2",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Get rotated copy"
-                },
-                {
-                    "name": "rotate",
-                    "return": "Vec2&",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Rotate in place"
-                },
-                {
-                    "name": "lerp",
-                    "return": "Vec2",
-                    "signatures": [
-                        "const Vec2 & v, float t"
-                    ],
-                    "desc": "Linear interpolation"
-                },
-                {
-                    "name": "perpendicular",
-                    "return": "Vec2",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get perpendicular vector"
-                },
-                {
-                    "name": "reflected",
-                    "return": "Vec2",
-                    "signatures": [
-                        "const Vec2 & normal"
-                    ],
-                    "desc": "Get reflected vector"
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "Vec2_fromAngle",
-                    "return": "Vec2",
-                    "signatures": [
-                        "float radians",
-                        "float radians, float length"
-                    ],
-                    "desc": "Create Vec2 from angle"
-                }
-            ]
-        },
-        {
-            "name": "Vec3",
-            "desc": "3D vector (x, y, z)",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "float x, float y, float z",
-                    "float v"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "x",
-                    "type": "float",
-                    "desc": "X component"
-                },
-                {
-                    "name": "y",
-                    "type": "float",
-                    "desc": "Y component"
-                },
-                {
-                    "name": "z",
-                    "type": "float",
-                    "desc": "Z component"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "set",
-                    "return": "Vec3&",
-                    "signatures": [
-                        "float x, float y, float z",
-                        "float x_, float y_, float z_"
-                    ],
-                    "desc": "Set vector components"
-                },
-                {
-                    "name": "length",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get vector length"
-                },
-                {
-                    "name": "lengthSquared",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get squared length"
-                },
-                {
-                    "name": "normalized",
-                    "return": "Vec3",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get normalized copy"
-                },
-                {
-                    "name": "normalize",
-                    "return": "Vec3&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Normalize in place"
-                },
-                {
-                    "name": "limit",
-                    "return": "Vec3&",
-                    "signatures": [
-                        "float max"
-                    ],
-                    "desc": "Limit length to max"
-                },
-                {
-                    "name": "dot",
-                    "return": "float",
-                    "signatures": [
-                        "const Vec3 & v"
-                    ],
-                    "desc": "Dot product"
-                },
-                {
-                    "name": "cross",
-                    "return": "Vec3",
-                    "signatures": [
-                        "const Vec3 & v"
-                    ],
-                    "desc": "Cross product"
-                },
-                {
-                    "name": "distance",
-                    "return": "float",
-                    "signatures": [
-                        "const Vec3 & v"
-                    ],
-                    "desc": "Distance to another vector"
-                },
-                {
-                    "name": "distanceSquared",
-                    "return": "float",
-                    "signatures": [
-                        "const Vec3 & v"
-                    ],
-                    "desc": "Squared distance"
-                },
-                {
-                    "name": "lerp",
-                    "return": "Vec3",
-                    "signatures": [
-                        "const Vec3 & v, float t"
-                    ],
-                    "desc": "Linear interpolation"
-                },
-                {
-                    "name": "reflected",
-                    "return": "Vec3",
-                    "signatures": [
-                        "const Vec3 & normal"
-                    ],
-                    "desc": "Get reflected vector"
-                },
-                {
-                    "name": "xy",
-                    "return": "Vec2",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get XY components as Vec2"
-                }
-            ]
-        },
-        {
-            "name": "IVec2",
-            "desc": "2D integer vector (x, y)",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "int x, int y",
-                    "int v"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "x",
-                    "type": "int",
-                    "desc": "X component"
-                },
-                {
-                    "name": "y",
-                    "type": "int",
-                    "desc": "Y component"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "toVec2",
-                    "return": "Vec2",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to Vec2 (float)"
-                }
-            ]
-        },
-        {
-            "name": "IVec3",
-            "desc": "3D integer vector (x, y, z)",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "int x, int y, int z",
-                    "int v",
-                    "IVec2 v, int z"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "x",
-                    "type": "int",
-                    "desc": "X component"
-                },
-                {
-                    "name": "y",
-                    "type": "int",
-                    "desc": "Y component"
-                },
-                {
-                    "name": "z",
-                    "type": "int",
-                    "desc": "Z component"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "toVec3",
-                    "return": "Vec3",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to Vec3 (float)"
-                },
-                {
-                    "name": "xy",
-                    "return": "IVec2",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get XY components as IVec2"
-                }
-            ]
-        },
-        {
-            "name": "Color",
-            "desc": "RGBA color (0.0-1.0 range)",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "float r, float g, float b",
-                    "float r, float g, float b, float a",
-                    "float gray",
-                    "float gray, float a"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "r",
-                    "type": "float",
-                    "desc": "Red component (0.0-1.0)"
-                },
-                {
-                    "name": "g",
-                    "type": "float",
-                    "desc": "Green component (0.0-1.0)"
-                },
-                {
-                    "name": "b",
-                    "type": "float",
-                    "desc": "Blue component (0.0-1.0)"
-                },
-                {
-                    "name": "a",
-                    "type": "float",
-                    "desc": "Alpha component (0.0-1.0)"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "set",
-                    "return": "Color&",
-                    "signatures": [
-                        "float r_, float g_, float b_, float a_ = 1.0f",
-                        "float r, float g, float b, float a",
-                        "float gray, float a_ = 1.0f"
-                    ],
-                    "desc": "Set color components"
-                },
-                {
-                    "name": "toHex",
-                    "return": "uint32_t",
-                    "signatures": [
-                        "bool includeAlpha = false",
-                        "bool includeAlpha"
-                    ],
-                    "desc": "Convert to hex value"
-                },
-                {
-                    "name": "lerp",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in OKLab space"
-                },
-                {
-                    "name": "lerpRGB",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in RGB space"
-                },
-                {
-                    "name": "clamped",
-                    "return": "Color",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get clamped copy (0.0-1.0)"
-                },
-                {
-                    "name": "toLinear",
-                    "return": "ColorLinear",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to linear RGB color space"
-                },
-                {
-                    "name": "toHSB",
-                    "return": "ColorHSB",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to HSB (H: 0-1, S: 0-1, B: 0-1)"
-                },
-                {
-                    "name": "toOKLab",
-                    "return": "ColorOKLab",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to OKLab (perceptually uniform)"
-                },
-                {
-                    "name": "toOKLCH",
-                    "return": "ColorOKLCH",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
-                },
-                {
-                    "name": "lerpLinear",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in linear RGB space"
-                },
-                {
-                    "name": "lerpHSB",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in HSB space"
-                },
-                {
-                    "name": "lerpOKLab",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in OKLab space (perceptually uniform)"
-                },
-                {
-                    "name": "lerpOKLCH",
-                    "return": "Color",
-                    "signatures": [
-                        "const Color & target, float t"
-                    ],
-                    "desc": "Interpolate in OKLCH space (shortest hue path)"
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "Color_fromHex",
-                    "return": "Color",
-                    "signatures": [
-                        "uint hex",
-                        "uint hex, bool hasAlpha"
-                    ],
-                    "desc": "Create from hex value"
-                },
-                {
-                    "name": "Color_fromHSB",
-                    "return": "Color",
-                    "signatures": [
-                        "float h, float s, float b",
-                        "float h, float s, float b, float a"
-                    ],
-                    "desc": "Create from HSB (H: 0-1)"
-                },
-                {
-                    "name": "Color_fromOKLab",
-                    "return": "Color",
-                    "signatures": [
-                        "float L, float a, float b",
-                        "float L, float a, float b, float alpha"
-                    ],
-                    "desc": "Create from OKLab (L: 0-1, a: ~-0.4-0.4, b: ~-0.4-0.4)"
-                },
-                {
-                    "name": "Color_fromOKLCH",
-                    "return": "Color",
-                    "signatures": [
-                        "float L, float C, float H",
-                        "float L, float C, float H, float a"
-                    ],
-                    "desc": "Create from OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
-                },
-                {
-                    "name": "Color_fromLinear",
-                    "return": "Color",
-                    "signatures": [
-                        "float r, float g, float b",
-                        "float r, float g, float b, float a"
-                    ],
-                    "desc": "Create from linear RGB"
-                },
-                {
-                    "name": "Color_fromBytes",
-                    "return": "Color",
-                    "signatures": [
-                        "int r, int g, int b",
-                        "int r, int g, int b, int a"
-                    ],
-                    "desc": "Create from 0-255 values"
-                }
-            ]
-        },
-        {
-            "name": "Rect",
-            "desc": "Rectangle (x, y, width, height)",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "float x, float y, float width, float height"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "x",
-                    "type": "float",
-                    "desc": "X position"
-                },
-                {
-                    "name": "y",
-                    "type": "float",
-                    "desc": "Y position"
-                },
-                {
-                    "name": "width",
-                    "type": "float",
-                    "desc": "Width"
-                },
-                {
-                    "name": "height",
-                    "type": "float",
-                    "desc": "Height"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "set",
-                    "return": "Rect&",
-                    "signatures": [
-                        "float x, float y, float w, float h"
-                    ],
-                    "desc": "Set rectangle bounds"
-                },
-                {
-                    "name": "getRight",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get right edge (x + width)"
-                },
-                {
-                    "name": "getBottom",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get bottom edge (y + height)"
-                },
-                {
-                    "name": "getCenterX",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get center X"
-                },
-                {
-                    "name": "getCenterY",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get center Y"
-                },
-                {
-                    "name": "contains",
-                    "return": "bool",
-                    "signatures": [
-                        "float px, float py"
-                    ],
-                    "desc": "Check if point is inside"
-                },
-                {
-                    "name": "intersects",
-                    "return": "bool",
-                    "signatures": [
-                        "const Rect & other"
-                    ],
-                    "desc": "Check if intersects with another rect"
-                }
-            ]
-        },
-        {
-            "name": "Mat4",
-            "desc": "4x4 matrix for 3D transformations",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "transposed",
-                    "return": "Mat4",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get transposed matrix"
-                },
-                {
-                    "name": "inverted",
-                    "return": "Mat4",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get inverse matrix"
-                }
-            ]
-        },
-        {
-            "name": "Quaternion",
-            "desc": "Unit quaternion for 3D rotations",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "float w, float x, float y, float z"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "w",
-                    "type": "float",
-                    "desc": "W component"
-                },
-                {
-                    "name": "x",
-                    "type": "float",
-                    "desc": "X component"
-                },
-                {
-                    "name": "y",
-                    "type": "float",
-                    "desc": "Y component"
-                },
-                {
-                    "name": "z",
-                    "type": "float",
-                    "desc": "Z component"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "rotate",
-                    "return": "Vec3",
-                    "signatures": [
-                        "const Vec3 & v"
-                    ],
-                    "desc": "Rotate a vector"
-                },
-                {
-                    "name": "toEuler",
-                    "return": "Vec3",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to Euler angles"
-                },
-                {
-                    "name": "toMatrix",
-                    "return": "Mat4",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Convert to rotation matrix"
-                },
-                {
-                    "name": "normalized",
-                    "return": "Quaternion",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get normalized quaternion"
-                },
-                {
-                    "name": "length",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get quaternion length"
-                },
-                {
-                    "name": "conjugate",
-                    "return": "Quaternion",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get conjugate quaternion"
-                }
-            ]
-        },
-        {
-            "name": "Pixels",
-            "desc": "Pixel buffer for image manipulation",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "allocate",
-                    "return": "void",
-                    "signatures": [
-                        "int width, int height, int channels = 4, PixelFormat format = PixelFormat::U8",
-                        "int width, int height, int channels = 4, PixelFormat format = PixelFormat::U8"
-                    ],
-                    "desc": "Allocate pixel buffer"
-                },
-                {
-                    "name": "getColor",
-                    "return": "Color",
-                    "signatures": [
-                        "int x, int y"
-                    ],
-                    "desc": "Get pixel color at position"
-                },
-                {
-                    "name": "setColor",
-                    "return": "void",
-                    "signatures": [
-                        "int x, int y, const Color & c"
-                    ],
-                    "desc": "Set pixel color at position"
-                },
-                {
-                    "name": "halve",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8."
-                },
-                {
-                    "name": "resize",
-                    "return": "void",
-                    "signatures": [
-                        "int newWidth, int newHeight"
-                    ],
-                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8."
-                },
-                {
-                    "name": "crop",
-                    "return": "void",
-                    "signatures": [
-                        "int x, int y, int w, int h"
-                    ],
-                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge."
-                },
-                {
-                    "name": "mirror",
-                    "return": "void",
-                    "signatures": [
-                        "bool horizontal, bool vertical"
-                    ],
-                    "desc": "Flip in place. Both true is 180°."
-                },
-                {
-                    "name": "mirrorH",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mirror horizontally (alias for mirror(true, false))"
-                },
-                {
-                    "name": "mirrorV",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mirror vertically (alias for mirror(false, true))"
-                },
-                {
-                    "name": "load",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::filesystem::path & path"
-                    ],
-                    "desc": "Load image from file"
-                },
-                {
-                    "name": "save",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::filesystem::path & path"
-                    ],
-                    "desc": "Save image to file"
-                },
-                {
-                    "name": "getWidth",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get width"
-                },
-                {
-                    "name": "getHeight",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get height"
-                },
-                {
-                    "name": "isAllocated",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if allocated"
-                },
-                {
-                    "name": "clear",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Release pixel buffer"
-                },
-                {
-                    "name": "getChannels",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get number of channels"
-                },
-                {
-                    "name": "getTotalBytes",
-                    "return": "size_t",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get total byte size"
-                },
-                {
-                    "name": "getData",
-                    "return": "uint8_t*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get raw data pointer"
-                },
-                {
-                    "name": "loadFromMemory",
-                    "return": "bool",
-                    "signatures": [
-                        "const uint8_t* buffer, int len"
-                    ],
-                    "desc": "Load image from memory"
-                },
-                {
-                    "name": "setFromPixels",
-                    "return": "void",
-                    "signatures": [
-                        "const uint8_t* data, int width, int height, int channels"
-                    ],
-                    "desc": "Copy from external pixel data"
-                },
-                {
-                    "name": "copyTo",
-                    "return": "void",
-                    "signatures": [
-                        "uint8_t* dst"
-                    ],
-                    "desc": "Copy to external buffer"
-                }
-            ]
-        },
-        {
-            "name": "Image",
-            "desc": "Image with CPU pixels and GPU texture",
-            "methods": [
-                {
-                    "name": "load",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::filesystem::path & path, bool mipmaps = false",
-                        "const std::filesystem::path & path, bool mipmaps = false"
-                    ],
-                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface)."
-                },
-                {
-                    "name": "loadFromMemory",
-                    "return": "bool",
-                    "signatures": [
-                        "const unsigned char * buffer, int len, bool mipmaps = false",
-                        "const uint8_t* buffer, int len, bool mipmaps"
-                    ],
-                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain."
-                },
-                {
-                    "name": "save",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::filesystem::path & path"
-                    ],
-                    "desc": "Save image to file"
-                },
-                {
-                    "name": "allocate",
-                    "return": "void",
-                    "signatures": [
-                        "int width, int height, int channels = 4, bool mipmaps = false",
-                        "int width, int height, int channels = 4, bool mipmaps = false",
-                        "int width, int height, int channels, bool mipmaps"
-                    ],
-                    "desc": "Allocate empty image for dynamic updates. `mipmaps=true` builds a chain refreshed on every update()."
-                },
-                {
-                    "name": "clear",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Release image resources"
-                },
-                {
-                    "name": "halve",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8."
-                },
-                {
-                    "name": "resize",
-                    "return": "void",
-                    "signatures": [
-                        "int newWidth, int newHeight"
-                    ],
-                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8. Use FBO sampling for fast paths."
-                },
-                {
-                    "name": "crop",
-                    "return": "void",
-                    "signatures": [
-                        "int x, int y, int w, int h"
-                    ],
-                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge."
-                },
-                {
-                    "name": "mirror",
-                    "return": "void",
-                    "signatures": [
-                        "bool horizontal, bool vertical"
-                    ],
-                    "desc": "Flip the image. `horizontal=true` mirrors left-right; `vertical=true` mirrors top-bottom; both true is 180°."
-                },
-                {
-                    "name": "mirrorH",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mirror horizontally (alias for mirror(true, false))"
-                },
-                {
-                    "name": "mirrorV",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mirror vertically (alias for mirror(false, true))"
-                },
-                {
-                    "name": "isAllocated",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if allocated"
-                },
-                {
-                    "name": "getWidth",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get width"
-                },
-                {
-                    "name": "getHeight",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get height"
-                },
-                {
-                    "name": "getChannels",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get number of channels"
-                },
-                {
-                    "name": "getPixels",
-                    "return": "Pixels&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get pixels reference for direct manipulation"
-                },
-                {
-                    "name": "getPixelsData",
-                    "return": "uint8_t*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get raw pixel data pointer"
-                },
-                {
-                    "name": "getColor",
-                    "return": "Color",
-                    "signatures": [
-                        "int x, int y"
-                    ],
-                    "desc": "Get pixel color at position"
-                },
-                {
-                    "name": "setColor",
-                    "return": "void",
-                    "signatures": [
-                        "int x, int y, const Color & c"
-                    ],
-                    "desc": "Set pixel color at position (marks image as dirty)"
-                },
-                {
-                    "name": "update",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Apply pixel changes to GPU texture"
-                },
-                {
-                    "name": "setDirty",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mark image as needing update"
-                },
-                {
-                    "name": "getTexture",
-                    "return": "Texture&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get internal texture"
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        "float x, float y",
-                        "float x, float y, float w, float h"
-                    ],
-                    "desc": "Draw image"
-                }
-            ]
-        },
-        {
-            "name": "Texture",
-            "desc": "GPU texture for rendering",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "allocate",
-                    "return": "void",
-                    "signatures": [
-                        "int width, int height, int channels = 4, TextureUsage usage = TextureUsage::Immutable, int sampleCount = 1",
-                        "const Pixels& pixels, TextureUsage usage = TextureUsage::Immutable, bool mipmaps = false"
-                    ],
-                    "desc": "Allocate texture"
-                },
-                {
-                    "name": "loadData",
-                    "return": "void",
-                    "signatures": [
-                        "const Pixels& pixels"
-                    ],
-                    "desc": "Load pixel data to texture"
-                },
-                {
-                    "name": "bind",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Bind texture for rendering"
-                },
-                {
-                    "name": "unbind",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Unbind texture"
-                },
-                {
-                    "name": "getWidth",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get width"
-                },
-                {
-                    "name": "getHeight",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get height"
-                },
-                {
-                    "name": "isAllocated",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if allocated"
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        "float x, float y",
-                        "float x, float y, float w, float h"
-                    ],
-                    "desc": "Draw texture"
-                },
-                {
-                    "name": "drawSubsection",
-                    "return": "void",
-                    "signatures": [
-                        "float x, float y, float w, float h, float sx, float sy, float sw, float sh"
-                    ],
-                    "desc": "Draw subsection of texture"
-                },
-                {
-                    "name": "clear",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Release texture resources"
-                },
-                {
-                    "name": "getChannels",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get number of channels"
-                },
-                {
-                    "name": "getUsage",
-                    "return": "TextureUsage",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get texture usage mode"
-                },
-                {
-                    "name": "getSampleCount",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get MSAA sample count"
-                },
-                {
-                    "name": "setMinFilter",
-                    "return": "void",
-                    "signatures": [
-                        "TextureFilter filter"
-                    ],
-                    "desc": "Set minification filter"
-                },
-                {
-                    "name": "setMagFilter",
-                    "return": "void",
-                    "signatures": [
-                        "TextureFilter filter"
-                    ],
-                    "desc": "Set magnification filter"
-                },
-                {
-                    "name": "setFilter",
-                    "return": "void",
-                    "signatures": [
-                        "TextureFilter filter"
-                    ],
-                    "desc": "Set both min and mag filters"
-                },
-                {
-                    "name": "getMinFilter",
-                    "return": "TextureFilter",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get minification filter"
-                },
-                {
-                    "name": "getMagFilter",
-                    "return": "TextureFilter",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get magnification filter"
-                },
-                {
-                    "name": "setWrapU",
-                    "return": "void",
-                    "signatures": [
-                        "TextureWrap wrap"
-                    ],
-                    "desc": "Set horizontal wrap mode"
-                },
-                {
-                    "name": "setWrapV",
-                    "return": "void",
-                    "signatures": [
-                        "TextureWrap wrap"
-                    ],
-                    "desc": "Set vertical wrap mode"
-                },
-                {
-                    "name": "setWrap",
-                    "return": "void",
-                    "signatures": [
-                        "TextureWrap wrap"
-                    ],
-                    "desc": "Set both wrap modes"
-                },
-                {
-                    "name": "getWrapU",
-                    "return": "TextureWrap",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get horizontal wrap mode"
-                },
-                {
-                    "name": "getWrapV",
-                    "return": "TextureWrap",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get vertical wrap mode"
-                }
-            ]
-        },
-        {
-            "name": "Fbo",
-            "desc": "Framebuffer object for offscreen rendering",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "allocate",
-                    "return": "void",
-                    "signatures": [
-                        "int w, int h, int sampleCount = 1, TextureFormat format = TextureFormat::RGBA8, bool mipmaps = false",
-                        "int w, int h, int sampleCount = 1, TextureFormat format = TextureFormat::RGBA8, bool mipmaps = false",
-                        "int w, int h, int sampleCount = 1, TextureFormat format = TextureFormat::RGBA8, bool mipmaps = false",
-                        "int width, int height, int sampleCount, TextureFormat format, bool mipmaps"
-                    ],
-                    "desc": "Allocate framebuffer. `mipmaps=true` builds a full mip chain that is refreshed automatically at end()."
-                },
-                {
-                    "name": "begin",
-                    "return": "void",
-                    "signatures": [
-                        "",
-                        "float r, float g, float b, float a"
-                    ],
-                    "desc": "Begin rendering to FBO"
-                },
-                {
-                    "name": "end",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "End rendering to FBO"
-                },
-                {
-                    "name": "getTexture",
-                    "return": "const Texture&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get FBO texture"
-                },
-                {
-                    "name": "getWidth",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get width"
-                },
-                {
-                    "name": "getHeight",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get height"
-                },
-                {
-                    "name": "isAllocated",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if allocated"
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        "float x, float y",
-                        "float x, float y, float w, float h"
-                    ],
-                    "desc": "Draw FBO contents"
-                },
-                {
-                    "name": "getSampleCount",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get MSAA sample count"
-                },
-                {
-                    "name": "isActive",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if currently rendering to FBO"
-                },
-                {
-                    "name": "clear",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Release FBO resources"
-                },
-                {
-                    "name": "save",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::filesystem::path & path"
-                    ],
-                    "desc": "Save FBO contents to file"
-                },
-                {
-                    "name": "copyTo",
-                    "return": "bool",
-                    "signatures": [
-                        "Image & image"
-                    ],
-                    "desc": "Copy FBO contents to Image"
-                }
-            ]
-        },
-        {
-            "name": "Path",
-            "desc": "Path/Polyline for lines and curves",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "vector<Vec2> verts",
-                    "vector<Vec3> verts"
-                ]
-            },
-            "methods": [
-                {
-                    "name": "addVertex",
-                    "return": "void",
-                    "signatures": [
-                        "float x, float y",
-                        "float x, float y, float z",
-                        "float x, float y",
-                        "float x, float y, float z"
-                    ],
-                    "desc": "Add a vertex"
-                },
-                {
-                    "name": "addVertices",
-                    "return": "void",
-                    "signatures": [
-                        "const std::vector<Vec3>& verts",
-                        "const std::vector<Vec2>& verts"
-                    ],
-                    "desc": "Add multiple vertices"
-                },
-                {
-                    "name": "getVertices",
-                    "return": "const std::vector<Vec3>&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get all vertices"
-                },
-                {
-                    "name": "size",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get vertex count"
-                },
-                {
-                    "name": "empty",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if polyline is empty"
-                },
-                {
-                    "name": "clear",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear all vertices"
-                },
-                {
-                    "name": "moveTo",
-                    "return": "void",
-                    "signatures": [
-                        "float x, float y, float z = 0",
-                        "float x, float y, float z",
-                        "float x, float y, float z = 0",
-                        "const Vec3& p"
-                    ],
-                    "desc": "Start a new subpath at (x, y). A single Path can hold multiple disjoint contours (think SVG `<path>` with `M ... M ...`) — used by Font::getGlyphPath to keep an outer ring and its holes in one Path so drawFill can detect holes."
-                },
-                {
-                    "name": "lineTo",
-                    "return": "void",
-                    "signatures": [
-                        "float x, float y, float z = 0",
-                        "float x, float y, float z",
-                        "float x, float y, float z = 0",
-                        "const Vec3& p"
-                    ],
-                    "desc": "Add line segment to point"
-                },
-                {
-                    "name": "bezierTo",
-                    "return": "void",
-                    "signatures": [
-                        "float cx1, float cy1, float cx2, float cy2, float x, float y, int resolution = -1",
-                        "float cx1, float cy1, float cx2, float cy2, float x, float y, int resolution = -1",
-                        "const Vec3& cp1, const Vec3& cp2, const Vec3& to, int resolution = -1"
-                    ],
-                    "desc": "Add cubic bezier curve (resolution=-1 uses current curve style)"
-                },
-                {
-                    "name": "quadBezierTo",
-                    "return": "void",
-                    "signatures": [
-                        "float cx, float cy, float x, float y, int resolution = -1",
-                        "float cx, float cy, float x, float y, int resolution = -1",
-                        "const Vec3& cp, const Vec3& to, int resolution = -1"
-                    ],
-                    "desc": "Add quadratic bezier curve (resolution=-1 uses current curve style)"
-                },
-                {
-                    "name": "curveTo",
-                    "return": "void",
-                    "signatures": [
-                        "float x, float y, float z = 0, int resolution = -1",
-                        "const Vec2& to, int resolution = -1",
-                        "float x, float y, float z = 0, int resolution = -1"
-                    ],
-                    "desc": "Add Catmull-Rom curve segment (needs >=4 consecutive calls; resolution=-1 uses current curve style)"
-                },
-                {
-                    "name": "arc",
-                    "return": "void",
-                    "signatures": [
-                        "float x, float y, float radius, float angleBegin, float angleEnd, bool clockwise = true",
-                        "float x, float y, float radius, float angleBegin, float angleEnd, bool clockwise = true",
-                        "const Vec3& center, float radius, float angleBegin, float angleEnd, bool clockwise = true"
-                    ],
-                    "desc": "Add an arc (angles in radians)"
-                },
-                {
-                    "name": "close",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Close the path"
-                },
-                {
-                    "name": "setClosed",
-                    "return": "void",
-                    "signatures": [
-                        "bool closed"
-                    ],
-                    "desc": "Set closed state"
-                },
-                {
-                    "name": "isClosed",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if path is closed"
-                },
-                {
-                    "name": "reverseWinding",
-                    "return": "Path&",
-                    "signatures": [
-                        "",
-                        "size_t subpath"
-                    ],
-                    "desc": "Reverse the winding direction (vertex order) of all subpaths, or of one subpath. Under drawFill's non-zero winding rule, reversing a subpath toggles it between filling and cutting — e.g. build a circle contour, then reverseWinding(i) it into a hole punch. Reversing ALL subpaths leaves the render unchanged (only relative direction matters) — handy for imported outlines using the opposite convention."
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Draw the polyline (fill + 1px stroke based on current style — fill uses triangle fan, convex only). For concave shapes / holes use drawFill."
-                },
-                {
-                    "name": "drawFill",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Fill the path as a concave polygon with holes (earcut tessellation). Subpaths follow the non-zero winding rule (SVG / PostScript default): a subpath wound opposite to its enclosing ring becomes a hole; same-direction subpaths union (never punch holes). Handles glyphs with holes (e, a, O, 日 ...), overlapping contours, and both TrueType / CFF winding conventions. To cut a hole in a hand-built Path, wind the inner subpath opposite (see reverseWinding)."
-                },
-                {
-                    "name": "drawStroke",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Thick stroke via StrokeMesh (respects strokeWeight / strokeCap / strokeJoin), per-subpath. Use draw() for 1-pixel lines."
-                },
-                {
-                    "name": "getBounds",
-                    "return": "Rect",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get bounding box as Rect"
-                },
-                {
-                    "name": "getPerimeter",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get total path length"
-                }
-            ]
-        },
-        {
-            "name": "Mesh",
-            "desc": "3D mesh with vertices, colors, normals, indices",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "setMode",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "PrimitiveMode mode"
-                    ],
-                    "desc": "Set primitive mode (Triangles, Lines, Points, etc.)"
-                },
-                {
-                    "name": "getMode",
-                    "return": "PrimitiveMode",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get current primitive mode"
-                },
-                {
-                    "name": "addVertex",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "float x, float y, float z",
-                        "float x, float y, float z = 0.0f",
-                        "const Vec3& v"
-                    ],
-                    "desc": "Add a vertex"
-                },
-                {
-                    "name": "addVertices",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "const std::vector<Vec3> & verts",
-                        "const std::vector<Vec3> & verts"
-                    ],
-                    "desc": "Add multiple vertices"
-                },
-                {
-                    "name": "getVertices",
-                    "return": "const std::vector<Vec3>&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get all vertices"
-                },
-                {
-                    "name": "getNumVertices",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get vertex count"
-                },
-                {
-                    "name": "addColor",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "const Color& c",
-                        "float r, float g, float b, float a = 1.0f"
-                    ],
-                    "desc": "Add a vertex color"
-                },
-                {
-                    "name": "addColors",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "const std::vector<Color> & cols"
-                    ],
-                    "desc": "Add multiple vertex colors"
-                },
-                {
-                    "name": "getColors",
-                    "return": "const std::vector<Color>&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get all vertex colors"
-                },
-                {
-                    "name": "getNumColors",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get vertex color count"
-                },
-                {
-                    "name": "hasColors",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if mesh has vertex colors"
-                },
-                {
-                    "name": "addIndex",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "unsigned int index"
-                    ],
-                    "desc": "Add an index"
-                },
-                {
-                    "name": "addIndices",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "const std::vector<unsigned int> & inds"
-                    ],
-                    "desc": "Add multiple indices"
-                },
-                {
-                    "name": "addTriangle",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "unsigned int i0, unsigned int i1, unsigned int i2"
-                    ],
-                    "desc": "Add a triangle (3 indices)"
-                },
-                {
-                    "name": "getIndices",
-                    "return": "const std::vector<unsigned int>&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get all indices"
-                },
-                {
-                    "name": "getNumIndices",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get index count"
-                },
-                {
-                    "name": "hasIndices",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if mesh has indices"
-                },
-                {
-                    "name": "addNormal",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "float nx, float ny, float nz",
-                        "float nx, float ny, float nz"
-                    ],
-                    "desc": "Add a normal vector"
-                },
-                {
-                    "name": "addNormals",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "const std::vector<Vec3> & norms"
-                    ],
-                    "desc": "Add multiple normals"
-                },
-                {
-                    "name": "setNormal",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "size_t index, const Vec3 & n"
-                    ],
-                    "desc": "Set normal at index"
-                },
-                {
-                    "name": "getNormal",
-                    "return": "Vec3",
-                    "signatures": [
-                        "size_t index"
-                    ],
-                    "desc": "Get normal at index"
-                },
-                {
-                    "name": "getNormals",
-                    "return": "const std::vector<Vec3>&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get all normals"
-                },
-                {
-                    "name": "getNumNormals",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get normal count"
-                },
-                {
-                    "name": "hasNormals",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if mesh has normals"
-                },
-                {
-                    "name": "addTexCoord",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "float u, float v",
-                        "float u, float v"
-                    ],
-                    "desc": "Add a texture coordinate"
-                },
-                {
-                    "name": "getTexCoords",
-                    "return": "const std::vector<Vec2>&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get all texture coordinates"
-                },
-                {
-                    "name": "getNumTexCoords",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get texture coordinate count"
-                },
-                {
-                    "name": "hasTexCoords",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if mesh has texture coordinates"
-                },
-                {
-                    "name": "hasValidTexCoords",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if texture coordinates match vertex count"
-                },
-                {
-                    "name": "clear",
-                    "return": "Mesh&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear all mesh data"
-                },
-                {
-                    "name": "clearVertices",
-                    "return": "Mesh&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear vertices only"
-                },
-                {
-                    "name": "clearColors",
-                    "return": "Mesh&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear colors only"
-                },
-                {
-                    "name": "clearIndices",
-                    "return": "Mesh&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear indices only"
-                },
-                {
-                    "name": "clearNormals",
-                    "return": "Mesh&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear normals only"
-                },
-                {
-                    "name": "clearTexCoords",
-                    "return": "Mesh&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear texture coordinates only"
-                },
-                {
-                    "name": "translate",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "float x, float y, float z",
-                        "float x, float y, float z"
-                    ],
-                    "desc": "Translate all vertices"
-                },
-                {
-                    "name": "rotateX",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Rotate mesh around X axis"
-                },
-                {
-                    "name": "rotateY",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Rotate mesh around Y axis"
-                },
-                {
-                    "name": "rotateZ",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Rotate mesh around Z axis"
-                },
-                {
-                    "name": "scale",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "float s",
-                        "float x, float y, float z"
-                    ],
-                    "desc": "Scale mesh"
-                },
-                {
-                    "name": "transform",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "const Mat4 & m"
-                    ],
-                    "desc": "Apply transformation matrix"
-                },
-                {
-                    "name": "append",
-                    "return": "Mesh&",
-                    "signatures": [
-                        "const Mesh & other"
-                    ],
-                    "desc": "Append another mesh"
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        "",
-                        "const Texture& texture",
-                        "const Image& image"
-                    ],
-                    "desc": "Draw the mesh"
-                },
-                {
-                    "name": "drawWireframe",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Draw mesh as wireframe"
-                },
-                {
-                    "name": "drawGpuPbr",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Draw the mesh through the GPU PBR pipeline (uploads to GPU buffers as needed, then renders using active lights, material and environment)"
-                }
-            ]
-        },
-        {
-            "name": "Sound",
-            "desc": "Audio playback",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "load",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::string & path"
-                    ],
-                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a"
-                },
-                {
-                    "name": "play",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Play audio"
-                },
-                {
-                    "name": "stop",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Stop audio"
-                },
-                {
-                    "name": "isLoaded",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if loaded"
-                },
-                {
-                    "name": "isPlaying",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if playing"
-                },
-                {
-                    "name": "setVolume",
-                    "return": "void",
-                    "signatures": [
-                        "float volume"
-                    ],
-                    "desc": "Set volume (0.0-1.0)"
-                },
-                {
-                    "name": "setLoop",
-                    "return": "void",
-                    "signatures": [
-                        "bool loop"
-                    ],
-                    "desc": "Set loop mode"
-                },
-                {
-                    "name": "isLoop",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if loop mode is enabled"
-                },
-                {
-                    "name": "setPan",
-                    "return": "void",
-                    "signatures": [
-                        "float pan"
-                    ],
-                    "desc": "Set panning (-1.0=left, 0.0=center, 1.0=right)"
-                },
-                {
-                    "name": "getPan",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get current panning"
-                },
-                {
-                    "name": "setSpeed",
-                    "return": "void",
-                    "signatures": [
-                        "float speed"
-                    ],
-                    "desc": "Set playback speed (1.0=normal)"
-                },
-                {
-                    "name": "getSpeed",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get current playback speed"
-                },
-                {
-                    "name": "pause",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Pause playback"
-                },
-                {
-                    "name": "resume",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Resume playback"
-                },
-                {
-                    "name": "isPaused",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if paused"
-                },
-                {
-                    "name": "getPosition",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get playback position in seconds"
-                },
-                {
-                    "name": "getDuration",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get total duration in seconds"
-                }
-            ]
-        },
-        {
-            "name": "Font",
-            "desc": "TrueType font for text rendering",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "load",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::string & nameOrPath, int size"
-                    ],
-                    "desc": "Load font file"
-                },
-                {
-                    "name": "isLoaded",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if loaded"
-                },
-                {
-                    "name": "drawString",
-                    "return": "void",
-                    "signatures": [
-                        "const string& text, float x, float y"
-                    ],
-                    "desc": "Draw text"
-                },
-                {
-                    "name": "getGlyphPath",
-                    "return": "Path",
-                    "signatures": [
-                        "uint32_t codepoint"
-                    ],
-                    "desc": "Vector outline of a single glyph as one Path with one subpath per contour. Em-normalized (1.0 = em), screen Y-down, baseline at y=0, pen at x=0. Use Path::drawFill() for filled rendering — holes (e, a, O, 日 ...) are auto-detected via earcut."
-                },
-                {
-                    "name": "getStringPath",
-                    "return": "Path",
-                    "signatures": [
-                        "const string& text, float x, float y",
-                        "const string& text, float x, float y, Direction h, Direction v"
-                    ],
-                    "desc": "Vector outline of the whole string at (x, y) as one Path containing every glyph's contours (one subpath each). Uses the same layout pipeline as drawString (writing mode, alignment, wrap, kinsoku, TCY). Logical pixels — drawStroke / drawFill / transform freely."
-                },
-                {
-                    "name": "getWidth",
-                    "return": "float",
-                    "signatures": [
-                        "const std::string & text"
-                    ],
-                    "desc": "Get text width"
-                },
-                {
-                    "name": "getHeight",
-                    "return": "float",
-                    "signatures": [
-                        "const std::string & text"
-                    ],
-                    "desc": "Get text height"
-                },
-                {
-                    "name": "getLineHeight",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get line height"
-                },
-                {
-                    "name": "getSize",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get font size"
-                },
-                {
-                    "name": "clearAtlas",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear font atlas (GPU memory freed, glyphs re-rasterized on next draw)"
-                },
-                {
-                    "name": "getMemoryUsage",
-                    "return": "size_t",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get atlas memory usage in bytes"
-                },
-                {
-                    "name": "getLoadedGlyphCount",
-                    "return": "size_t",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get number of loaded glyphs"
-                },
-                {
-                    "name": "getAtlasCount",
-                    "return": "size_t",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get number of atlas pages"
-                },
-                {
-                    "name": "setWritingMode",
-                    "return": "void",
-                    "signatures": [
-                        "WritingMode mode"
-                    ],
-                    "desc": "Switch between horizontal and vertical (tategaki) writing. Default is Horizontal (existing behavior unchanged)."
-                },
-                {
-                    "name": "getWritingMode",
-                    "return": "WritingMode",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Current writing mode"
-                },
-                {
-                    "name": "setTcyDigits",
-                    "return": "void",
-                    "signatures": [
-                        "int maxDigits, TcyMode inMode, TcyMode overflowMode"
-                    ],
-                    "desc": "Tate-chu-yoko config for ASCII digit runs in vertical text. Runs with <= maxDigits use inMode (typically Combine — squeezed into one cell); longer runs fall back to overflowMode (typically Rotate)."
-                },
-                {
-                    "name": "setTcyLatin",
-                    "return": "void",
-                    "signatures": [
-                        "TcyMode mode"
-                    ],
-                    "desc": "Tate-chu-yoko mode for Latin letter runs in vertical text. Default is Rotate (whole run rotated 90 CW)."
-                }
-            ]
-        },
-        {
-            "name": "FileWriter",
-            "desc": "Streaming file writer with immediate flush",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "open",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::string & path, bool append = false",
-                        "const std::string & path, bool append = false"
-                    ],
-                    "desc": "Open file for writing"
-                },
-                {
-                    "name": "close",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Close file"
-                },
-                {
-                    "name": "isOpen",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if file is open"
-                },
-                {
-                    "name": "write",
-                    "return": "FileWriter&",
-                    "signatures": [
-                        "const std::string& text",
-                        "char c",
-                        "const void* data, size_t size"
-                    ],
-                    "desc": "Write data to file"
-                },
-                {
-                    "name": "writeLine",
-                    "return": "FileWriter &",
-                    "signatures": [
-                        "const std::string & text = \"\"",
-                        "const std::string & text = \"\""
-                    ],
-                    "desc": "Write line with newline"
-                },
-                {
-                    "name": "flush",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Flush buffer to disk"
-                }
-            ]
-        },
-        {
-            "name": "FileReader",
-            "desc": "Streaming file reader for large files",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "open",
-                    "return": "bool",
-                    "signatures": [
-                        "const std::string & path"
-                    ],
-                    "desc": "Open file for reading"
-                },
-                {
-                    "name": "close",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Close file"
-                },
-                {
-                    "name": "isOpen",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if file is open"
-                },
-                {
-                    "name": "eof",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if at end of file"
-                },
-                {
-                    "name": "readLine",
-                    "return": "string",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Read one line"
-                },
-                {
-                    "name": "readChar",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Read one character (-1 at EOF)"
-                },
-                {
-                    "name": "read",
-                    "return": "size_t",
-                    "signatures": [
-                        "void* buffer, size_t size"
-                    ],
-                    "desc": "Read binary data"
-                },
-                {
-                    "name": "seek",
-                    "return": "void",
-                    "signatures": [
-                        "size_t pos"
-                    ],
-                    "desc": "Seek to position"
-                },
-                {
-                    "name": "tell",
-                    "return": "size_t",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get current position"
-                },
-                {
-                    "name": "remaining",
-                    "return": "size_t",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get remaining bytes"
-                }
-            ]
-        },
-        {
-            "name": "ColorHSB",
-            "desc": "HSB color space (H/S/B: 0-1)"
-        },
-        {
-            "name": "ColorOKLCH",
-            "desc": "Perceptually uniform OKLCH color"
-        },
-        {
-            "name": "ChipSound",
-            "desc": "Chip/synthesized sound generation"
-        },
-        {
-            "name": "Light",
-            "desc": "Light source for 3D PBR rendering (directional, point, or spot)",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "setDirectional",
-                    "return": "void",
-                    "signatures": [
-                        "const Vec3& direction",
-                        "float dx, float dy, float dz"
-                    ],
-                    "desc": "Set as directional light"
-                },
-                {
-                    "name": "setPoint",
-                    "return": "void",
-                    "signatures": [
-                        "const Vec3& position",
-                        "float x, float y, float z"
-                    ],
-                    "desc": "Set as point light"
-                },
-                {
-                    "name": "setSpot",
-                    "return": "void",
-                    "signatures": [
-                        "const Vec3& position, const Vec3& direction, float innerHalfAngle, float outerHalfAngle",
-                        "float px, float py, float pz, float dx, float dy, float dz, float innerHalfAngle, float outerHalfAngle"
-                    ],
-                    "desc": "Set as spot light with cone angles"
-                },
-                {
-                    "name": "setAmbient",
-                    "return": "void",
-                    "signatures": [
-                        "const Color& c",
-                        "float r, float g, float b, float a"
-                    ],
-                    "desc": "Set ambient light color"
-                },
-                {
-                    "name": "setDiffuse",
-                    "return": "void",
-                    "signatures": [
-                        "const Color& c",
-                        "float r, float g, float b, float a"
-                    ],
-                    "desc": "Set diffuse (main) light color"
-                },
-                {
-                    "name": "setSpecular",
-                    "return": "void",
-                    "signatures": [
-                        "const Color& c",
-                        "float r, float g, float b, float a"
-                    ],
-                    "desc": "Set specular light color"
-                },
-                {
-                    "name": "setIntensity",
-                    "return": "void",
-                    "signatures": [
-                        "float intensity"
-                    ],
-                    "desc": "Set light intensity multiplier"
-                },
-                {
-                    "name": "setAttenuation",
-                    "return": "void",
-                    "signatures": [
-                        "float constant, float linear, float quadratic"
-                    ],
-                    "desc": "Set distance attenuation factors"
-                },
-                {
-                    "name": "setProjectionTexture",
-                    "return": "void",
-                    "signatures": [
-                        "const Texture* tex"
-                    ],
-                    "desc": "Set texture for projector-style light (gobo)"
-                },
-                {
-                    "name": "setLensShift",
-                    "return": "void",
-                    "signatures": [
-                        "float sx, float sy"
-                    ],
-                    "desc": "Set projector lens shift (-1 to 1, normalized)"
-                },
-                {
-                    "name": "setProjectorAspect",
-                    "return": "void",
-                    "signatures": [
-                        "float aspect"
-                    ],
-                    "desc": "Set projector aspect ratio"
-                },
-                {
-                    "name": "setIesProfile",
-                    "return": "void",
-                    "signatures": [
-                        "const IesProfile* ies"
-                    ],
-                    "desc": "Attach IES photometric profile for angular intensity"
-                },
-                {
-                    "name": "enableShadow",
-                    "return": "void",
-                    "signatures": [
-                        "int resolution"
-                    ],
-                    "desc": "Enable shadow casting (depth map at given resolution)"
-                },
-                {
-                    "name": "disableShadow",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Disable shadow casting"
-                },
-                {
-                    "name": "enable",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Enable this light"
-                },
-                {
-                    "name": "disable",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Disable this light"
-                },
-                {
-                    "name": "setShadowBias",
-                    "return": "void",
-                    "signatures": [
-                        "float bias"
-                    ],
-                    "desc": "Set shadow depth bias in world units"
-                },
-                {
-                    "name": "getType",
-                    "return": "LightType",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get light type (Directional, Point, or Spot)"
-                },
-                {
-                    "name": "getPosition",
-                    "return": "const Vec3&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get light position"
-                },
-                {
-                    "name": "getDirection",
-                    "return": "const Vec3&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get light direction"
-                },
-                {
-                    "name": "getIntensity",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get light intensity"
-                },
-                {
-                    "name": "getAmbient",
-                    "return": "const Color&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get ambient light color"
-                },
-                {
-                    "name": "getDiffuse",
-                    "return": "const Color&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get diffuse (main) light color"
-                },
-                {
-                    "name": "getSpecular",
-                    "return": "const Color&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get specular light color"
-                },
-                {
-                    "name": "getConstantAttenuation",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get constant attenuation factor"
-                },
-                {
-                    "name": "getLinearAttenuation",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get linear attenuation factor"
-                },
-                {
-                    "name": "getQuadraticAttenuation",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get quadratic attenuation factor"
-                },
-                {
-                    "name": "isEnabled",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if light is enabled"
-                },
-                {
-                    "name": "isShadowEnabled",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if shadow casting is enabled"
-                },
-                {
-                    "name": "getShadowResolution",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get shadow map resolution"
-                },
-                {
-                    "name": "getShadowBias",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get shadow depth bias"
-                },
-                {
-                    "name": "getSpotInnerCos",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get spot light inner cone cosine"
-                },
-                {
-                    "name": "getSpotOuterCos",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get spot light outer cone cosine"
-                },
-                {
-                    "name": "getProjectionTexture",
-                    "return": "const Texture*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get projection texture (gobo)"
-                },
-                {
-                    "name": "hasProjectionTexture",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if a projection texture is set"
-                },
-                {
-                    "name": "getLensShiftX",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get projector horizontal lens shift"
-                },
-                {
-                    "name": "getLensShiftY",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get projector vertical lens shift"
-                },
-                {
-                    "name": "getProjectorAspect",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get projector aspect ratio"
-                },
-                {
-                    "name": "getIesProfile",
-                    "return": "const IesProfile*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get attached IES photometric profile"
-                },
-                {
-                    "name": "hasIesProfile",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if an IES profile is attached"
-                }
-            ]
-        },
-        {
-            "name": "Material",
-            "desc": "PBR material (metallic-roughness workflow, glTF 2.0 compatible)",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "setBaseColor",
-                    "return": "Material&",
-                    "signatures": [
-                        "const Color& c",
-                        "float r, float g, float b, float a"
-                    ],
-                    "desc": "Set base color (albedo)"
-                },
-                {
-                    "name": "setMetallic",
-                    "return": "Material&",
-                    "signatures": [
-                        "float m"
-                    ],
-                    "desc": "Set metallic factor (0=dielectric, 1=metal)"
-                },
-                {
-                    "name": "setRoughness",
-                    "return": "Material&",
-                    "signatures": [
-                        "float r"
-                    ],
-                    "desc": "Set roughness factor (0=mirror, 1=matte)"
-                },
-                {
-                    "name": "setEmissive",
-                    "return": "Material&",
-                    "signatures": [
-                        "const Color& c",
-                        "float r, float g, float b"
-                    ],
-                    "desc": "Set emissive color"
-                },
-                {
-                    "name": "setEmissiveStrength",
-                    "return": "Material&",
-                    "signatures": [
-                        "float s"
-                    ],
-                    "desc": "Set emissive strength multiplier"
-                },
-                {
-                    "name": "setAo",
-                    "return": "Material&",
-                    "signatures": [
-                        "float ao"
-                    ],
-                    "desc": "Set ambient occlusion factor"
-                },
-                {
-                    "name": "setNormalMap",
-                    "return": "Material&",
-                    "signatures": [
-                        "const Texture* tex"
-                    ],
-                    "desc": "Set normal map texture for bump mapping"
-                },
-                {
-                    "name": "setBaseColorTexture",
-                    "return": "Material&",
-                    "signatures": [
-                        "const Texture* tex"
-                    ],
-                    "desc": "Set base color (albedo) texture map"
-                },
-                {
-                    "name": "setMetallicRoughnessTexture",
-                    "return": "Material&",
-                    "signatures": [
-                        "const Texture* tex"
-                    ],
-                    "desc": "Set metallic-roughness texture (glTF: G=roughness, B=metallic)"
-                },
-                {
-                    "name": "setEmissiveTexture",
-                    "return": "Material&",
-                    "signatures": [
-                        "const Texture* tex"
-                    ],
-                    "desc": "Set emissive texture map"
-                },
-                {
-                    "name": "setOcclusionTexture",
-                    "return": "Material&",
-                    "signatures": [
-                        "const Texture* tex"
-                    ],
-                    "desc": "Set occlusion texture map"
-                },
-                {
-                    "name": "getBaseColor",
-                    "return": "const Color&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get base color (albedo)"
-                },
-                {
-                    "name": "getMetallic",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get metallic factor"
-                },
-                {
-                    "name": "getRoughness",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get roughness factor"
-                },
-                {
-                    "name": "getAo",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get ambient occlusion factor"
-                },
-                {
-                    "name": "getEmissive",
-                    "return": "const Color&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get emissive color"
-                },
-                {
-                    "name": "getEmissiveStrength",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get emissive strength multiplier"
-                },
-                {
-                    "name": "getNormalMap",
-                    "return": "const Texture*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get normal map texture"
-                },
-                {
-                    "name": "hasNormalMap",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if a normal map is set"
-                },
-                {
-                    "name": "getBaseColorTexture",
-                    "return": "const Texture*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get base color texture"
-                },
-                {
-                    "name": "hasBaseColorTexture",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if a base color texture is set"
-                },
-                {
-                    "name": "getMetallicRoughnessTexture",
-                    "return": "const Texture*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get metallic-roughness texture"
-                },
-                {
-                    "name": "hasMetallicRoughnessTexture",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if a metallic-roughness texture is set"
-                },
-                {
-                    "name": "getEmissiveTexture",
-                    "return": "const Texture*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get emissive texture"
-                },
-                {
-                    "name": "hasEmissiveTexture",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if an emissive texture is set"
-                },
-                {
-                    "name": "getOcclusionTexture",
-                    "return": "const Texture*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get occlusion texture"
-                },
-                {
-                    "name": "hasOcclusionTexture",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if an occlusion texture is set"
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "gold",
-                    "return": "Material",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Gold material preset"
-                },
-                {
-                    "name": "silver",
-                    "return": "Material",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Silver material preset"
-                },
-                {
-                    "name": "copper",
-                    "return": "Material",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Copper material preset"
-                },
-                {
-                    "name": "iron",
-                    "return": "Material",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Iron material preset"
-                },
-                {
-                    "name": "plastic",
-                    "return": "Material",
-                    "signatures": [
-                        "const Color& baseColor, float roughness"
-                    ],
-                    "desc": "Plastic material preset"
-                },
-                {
-                    "name": "rubber",
-                    "return": "Material",
-                    "signatures": [
-                        "const Color& baseColor"
-                    ],
-                    "desc": "Rubber material preset"
-                },
-                {
-                    "name": "bronze",
-                    "return": "Material",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Bronze material preset"
-                },
-                {
-                    "name": "emerald",
-                    "return": "Material",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Emerald material preset"
-                },
-                {
-                    "name": "ruby",
-                    "return": "Material",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Ruby material preset"
-                },
-                {
-                    "name": "fromPhong",
-                    "return": "Material",
-                    "signatures": [
-                        "const Color& diffuse, const Color& specular, float shininess, const Color& emissive"
-                    ],
-                    "desc": "Convert Phong material parameters to PBR (roughness from shininess, metallic estimated from specular luminance)"
-                }
-            ]
-        },
-        {
-            "name": "IesProfile",
-            "desc": "IESNA LM-63 photometric profile for angular light intensity",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "load",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path"
-                    ],
-                    "desc": "Load IES profile from file"
-                },
-                {
-                    "name": "loadFromString",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& data"
-                    ],
-                    "desc": "Load IES profile from inline string data"
-                },
-                {
-                    "name": "isLoaded",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if profile is loaded"
-                },
-                {
-                    "name": "getMaxVerticalAngle",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get maximum vertical angle in the profile (radians)"
-                },
-                {
-                    "name": "getMaxCandela",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get maximum candela value in the profile"
-                },
-                {
-                    "name": "getTextureWidth",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get width of the generated 1D lookup texture"
-                }
-            ]
-        },
-        {
-            "name": "Environment",
-            "desc": "IBL environment map for PBR ambient lighting (irradiance + prefilter + BRDF LUT)",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "loadFromHDR",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path"
-                    ],
-                    "desc": "Load environment from HDR image file"
-                },
-                {
-                    "name": "loadProcedural",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Generate a simple procedural sky environment"
-                },
-                {
-                    "name": "isLoaded",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check if environment is loaded"
-                },
-                {
-                    "name": "release",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Release GPU resources"
-                },
-                {
-                    "name": "getIrradianceMap",
-                    "return": "const Texture&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get irradiance cubemap for diffuse IBL"
-                },
-                {
-                    "name": "getPrefilterMap",
-                    "return": "const Texture&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get prefiltered environment cubemap for specular IBL"
-                },
-                {
-                    "name": "getBrdfLut",
-                    "return": "const Texture&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get BRDF integration lookup texture"
-                },
-                {
-                    "name": "getPrefilterMipLevels",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get number of mip levels in the prefilter map"
-                }
-            ]
-        },
-        {
-            "name": "EasyCam",
-            "desc": "3D camera with mouse control"
-        },
-        {
-            "name": "Platform",
-            "desc": "Compile-time OS detection. All methods are constexpr and resolve at compile time based on the target platform.",
-            "static_methods": [
-                {
-                    "name": "isWeb",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True on Web (Emscripten / WASM)"
-                },
-                {
-                    "name": "isMacOS",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True on macOS"
-                },
-                {
-                    "name": "isIOS",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True on iOS"
-                },
-                {
-                    "name": "isWindows",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True on Windows"
-                },
-                {
-                    "name": "isAndroid",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True on Android"
-                },
-                {
-                    "name": "isLinux",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True on Linux (desktop, excludes Android)"
-                },
-                {
-                    "name": "isApple",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True on any Apple platform (macOS or iOS)"
-                },
-                {
-                    "name": "isMobile",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True on mobile (iOS or Android)"
-                },
-                {
-                    "name": "isDesktop",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True on desktop (macOS, Windows, or Linux)"
-                },
-                {
-                    "name": "name",
-                    "return": "const char*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\""
-                }
-            ]
-        },
-        {
-            "name": "GraphicsBackend",
-            "desc": "Runtime sokol_gfx backend query. Values are meaningful only after sg_setup() has completed (i.e. after the first setup() call).",
-            "static_methods": [
-                {
-                    "name": "isOpenGL",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True when running on OpenGL (core or GLES3)"
-                },
-                {
-                    "name": "isMetal",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True when running on Apple Metal"
-                },
-                {
-                    "name": "isD3D11",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True when running on Direct3D 11"
-                },
-                {
-                    "name": "isWebGPU",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True when running on WebGPU"
-                },
-                {
-                    "name": "isWebGL2",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True when running on WebGL2 (GLES3 under Emscripten)"
-                },
-                {
-                    "name": "isVulkan",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True when running on Vulkan"
-                },
-                {
-                    "name": "name",
-                    "return": "const char*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\""
-                }
-            ]
-        },
-        {
-            "name": "BuildInfo",
-            "desc": "Build timestamp info injected as compile definitions by trussc_app() at CMake configure time. Refreshes when cmake reconfigures. Date/time fields are local time; timestamp is UTC Unix seconds.",
-            "static_methods": [
-                {
-                    "name": "date",
-                    "return": "const char*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Build date in \"YYYY-MM-DD\" form (local time)"
-                },
-                {
-                    "name": "time",
-                    "return": "const char*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Build time in \"HH:MM:SS\" form (local time)"
-                },
-                {
-                    "name": "dateTime",
-                    "return": "const char*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)"
-                },
-                {
-                    "name": "timestamp",
-                    "return": "int64_t",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Build timestamp as Unix seconds (UTC)"
-                },
-                {
-                    "name": "year",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Build year (e.g. 2026)"
-                },
-                {
-                    "name": "month",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Build month (1-12)"
-                },
-                {
-                    "name": "day",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Build day of month (1-31)"
-                },
-                {
-                    "name": "hour",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Build hour (0-23)"
-                },
-                {
-                    "name": "minute",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Build minute (0-59)"
-                },
-                {
-                    "name": "second",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Build second (0-59)"
-                }
-            ]
-        },
-        {
-            "name": "NetworkInterface",
-            "desc": "One address entry of a network interface (returned by listNetworkInterfaces)",
-            "properties": [
-                {
-                    "name": "name",
-                    "type": "std::string",
-                    "desc": "Interface name (en0 / Ethernet / wlan0)"
-                },
-                {
-                    "name": "address",
-                    "type": "std::string",
-                    "desc": "IP address (IPv4 dotted-quad or IPv6 textual)"
-                },
-                {
-                    "name": "netmask",
-                    "type": "std::string",
-                    "desc": "Subnet mask (IPv4)"
-                },
-                {
-                    "name": "mac",
-                    "type": "std::string",
-                    "desc": "Hardware MAC address (empty if unavailable)"
-                },
-                {
-                    "name": "isIPv4",
-                    "type": "bool",
-                    "desc": "True for IPv4, false for IPv6"
-                },
-                {
-                    "name": "isLoopback",
-                    "type": "bool",
-                    "desc": "True if a loopback interface"
-                },
-                {
-                    "name": "isUp",
-                    "type": "bool",
-                    "desc": "True if the interface link is up"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "getName",
-                    "return": "const std::string&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Interface name"
-                },
-                {
-                    "name": "getAddress",
-                    "return": "const std::string&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "IP address"
-                },
-                {
-                    "name": "getNetmask",
-                    "return": "const std::string&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Subnet mask"
-                },
-                {
-                    "name": "getMac",
-                    "return": "const std::string&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "MAC address"
-                },
-                {
-                    "name": "getIsIPv4",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether the address is IPv4"
-                },
-                {
-                    "name": "getIsLoopback",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether this is a loopback interface"
-                },
-                {
-                    "name": "getIsUp",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether the link is up"
-                }
-            ]
-        },
-        {
-            "name": "UdpReceiveEventArgs",
-            "desc": "Event args for UdpSocket::onReceive",
-            "properties": [
-                {
-                    "name": "data",
-                    "type": "std::vector<char>",
-                    "desc": "Received data"
-                },
-                {
-                    "name": "remoteHost",
-                    "type": "std::string",
-                    "desc": "Source host"
-                },
-                {
-                    "name": "remotePort",
-                    "type": "int",
-                    "desc": "Source port"
-                }
-            ]
-        },
-        {
-            "name": "UdpErrorEventArgs",
-            "desc": "Event args for UdpSocket::onError",
-            "properties": [
-                {
-                    "name": "message",
-                    "type": "std::string",
-                    "desc": "Error message"
-                },
-                {
-                    "name": "errorCode",
-                    "type": "int",
-                    "desc": "Error code"
-                }
-            ]
-        },
-        {
-            "name": "TcpConnectEventArgs",
-            "desc": "Event args for TcpClient::onConnect",
-            "properties": [
-                {
-                    "name": "success",
-                    "type": "bool",
-                    "desc": "Whether the connection succeeded"
-                },
-                {
-                    "name": "message",
-                    "type": "std::string",
-                    "desc": "Connection message"
-                }
-            ]
-        },
-        {
-            "name": "TcpReceiveEventArgs",
-            "desc": "Event args for TcpClient::onReceive",
-            "properties": [
-                {
-                    "name": "data",
-                    "type": "std::vector<char>",
-                    "desc": "Received data"
-                }
-            ]
-        },
-        {
-            "name": "TcpDisconnectEventArgs",
-            "desc": "Event args for TcpClient::onDisconnect",
-            "properties": [
-                {
-                    "name": "reason",
-                    "type": "std::string",
-                    "desc": "Disconnect reason"
-                },
-                {
-                    "name": "wasClean",
-                    "type": "bool",
-                    "desc": "Whether it was a clean disconnect"
-                }
-            ]
-        },
-        {
-            "name": "TcpErrorEventArgs",
-            "desc": "Event args for TcpClient::onError",
-            "properties": [
-                {
-                    "name": "message",
-                    "type": "std::string",
-                    "desc": "Error message"
-                },
-                {
-                    "name": "errorCode",
-                    "type": "int",
-                    "desc": "Error code"
-                }
-            ]
-        },
-        {
-            "name": "TcpServerClient",
-            "desc": "A client connected to a TcpServer (read-only handle)",
-            "methods": [
-                {
-                    "name": "getId",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Client ID assigned by the server"
-                },
-                {
-                    "name": "getHost",
-                    "return": "const std::string&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Client IP address"
-                },
-                {
-                    "name": "getPort",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Client port"
-                }
-            ]
-        },
-        {
-            "name": "TcpClientConnectEventArgs",
-            "desc": "Event args for TcpServer::onClientConnect",
-            "properties": [
-                {
-                    "name": "clientId",
-                    "type": "int",
-                    "desc": "Client ID"
-                },
-                {
-                    "name": "host",
-                    "type": "std::string",
-                    "desc": "Client IP address"
-                },
-                {
-                    "name": "port",
-                    "type": "int",
-                    "desc": "Client port"
-                }
-            ]
-        },
-        {
-            "name": "TcpServerReceiveEventArgs",
-            "desc": "Event args for TcpServer::onReceive",
-            "properties": [
-                {
-                    "name": "clientId",
-                    "type": "int",
-                    "desc": "Client ID"
-                },
-                {
-                    "name": "data",
-                    "type": "std::vector<char>",
-                    "desc": "Received data"
-                }
-            ]
-        },
-        {
-            "name": "TcpClientDisconnectEventArgs",
-            "desc": "Event args for TcpServer::onClientDisconnect",
-            "properties": [
-                {
-                    "name": "clientId",
-                    "type": "int",
-                    "desc": "Client ID"
-                },
-                {
-                    "name": "reason",
-                    "type": "std::string",
-                    "desc": "Disconnect reason"
-                },
-                {
-                    "name": "wasClean",
-                    "type": "bool",
-                    "desc": "Whether the disconnect was clean"
-                }
-            ]
-        },
-        {
-            "name": "TcpServerErrorEventArgs",
-            "desc": "Event args for TcpServer::onError",
-            "properties": [
-                {
-                    "name": "message",
-                    "type": "std::string",
-                    "desc": "Error message"
-                },
-                {
-                    "name": "errorCode",
-                    "type": "int",
-                    "desc": "Error code"
-                },
-                {
-                    "name": "clientId",
-                    "type": "int",
-                    "desc": "Client ID (-1 = server-level error, not a specific client)"
-                }
-            ]
-        },
-        {
-            "name": "SerialDeviceInfo",
-            "desc": "Info for one serial device (from Serial::listDevices)",
-            "properties": [
-                {
-                    "name": "deviceId",
-                    "type": "int",
-                    "desc": "Device index"
-                },
-                {
-                    "name": "devicePath",
-                    "type": "std::string",
-                    "desc": "Device path (e.g. COM3, /dev/tty.usbserial-*)"
-                },
-                {
-                    "name": "deviceName",
-                    "type": "std::string",
-                    "desc": "Device name"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "getDeviceID",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Device index"
-                },
-                {
-                    "name": "getDevicePath",
-                    "return": "const std::string&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Device path"
-                },
-                {
-                    "name": "getDeviceName",
-                    "return": "const std::string&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Device name"
-                }
-            ]
-        },
-        {
-            "name": "SoundSource",
-            "desc": "Abstract base for anything Sound::play() can consume. Two concrete subclasses: SoundBuffer (eager, full PCM in RAM) and SoundStream (decoded on demand from disk). Holds the shared channels / sampleRate fields and the kind() / getDuration() interface.",
-            "properties": [
-                {
-                    "name": "channels",
-                    "type": "int",
-                    "desc": "Channel count of the source (1 = mono, 2 = stereo, ...)"
-                },
-                {
-                    "name": "sampleRate",
-                    "type": "int",
-                    "desc": "Source sample rate in Hz"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "kind",
-                    "return": "SoundSource::Kind",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Source kind (Eager for SoundBuffer, Stream for SoundStream). Lets the mixer dispatch without a virtual call per frame."
-                },
-                {
-                    "name": "getDuration",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Duration in seconds. numSamples/sampleRate for buffers; the decoded file's duration for streams."
-                }
-            ]
-        },
-        {
-            "name": "SoundBuffer",
-            "desc": "Eager sound source: the full file decoded into interleaved float PCM held in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Also provides waveform generators, an ADSR envelope, and mixing helpers, so it doubles as a procedural-audio scratch buffer. Best for short SFX and zero-latency play / seek / multi-instance.",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "properties": [
-                {
-                    "name": "samples",
-                    "type": "vector<float>",
-                    "desc": "Interleaved PCM samples (channels interleaved per frame)"
-                },
-                {
-                    "name": "numSamples",
-                    "type": "size_t",
-                    "desc": "Number of samples per channel (frame count)"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "load",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path"
-                    ],
-                    "desc": "Decode a file into PCM, auto-detecting format from the extension (.wav .mp3 .ogg .flac .aac .m4a, case-insensitive). Returns false on failure."
-                },
-                {
-                    "name": "loadWav",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path"
-                    ],
-                    "desc": "Decode a WAV file into PCM."
-                },
-                {
-                    "name": "loadMp3",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path"
-                    ],
-                    "desc": "Decode an MP3 file into PCM."
-                },
-                {
-                    "name": "loadOgg",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path"
-                    ],
-                    "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis)."
-                },
-                {
-                    "name": "loadFlac",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path"
-                    ],
-                    "desc": "Decode a FLAC file into PCM."
-                },
-                {
-                    "name": "loadAac",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path"
-                    ],
-                    "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms)."
-                },
-                {
-                    "name": "loadWavFromMemory",
-                    "return": "bool",
-                    "signatures": [
-                        "const void* data, size_t dataSize"
-                    ],
-                    "desc": "Decode WAV data from a memory buffer."
-                },
-                {
-                    "name": "loadMp3FromMemory",
-                    "return": "bool",
-                    "signatures": [
-                        "const void* data, size_t dataSize"
-                    ],
-                    "desc": "Decode MP3 data from a memory buffer."
-                },
-                {
-                    "name": "loadOggFromMemory",
-                    "return": "bool",
-                    "signatures": [
-                        "const void* data, size_t dataSize"
-                    ],
-                    "desc": "Decode OGG Vorbis data from a memory buffer."
-                },
-                {
-                    "name": "loadFlacFromMemory",
-                    "return": "bool",
-                    "signatures": [
-                        "const void* data, size_t dataSize"
-                    ],
-                    "desc": "Decode FLAC data from a memory buffer."
-                },
-                {
-                    "name": "loadAacFromMemory",
-                    "return": "bool",
-                    "signatures": [
-                        "const void* data, size_t dataSize"
-                    ],
-                    "desc": "Decode AAC data from a memory buffer (platform-specific; returns false on unsupported platforms)."
-                },
-                {
-                    "name": "loadPcmFromMemory",
-                    "return": "bool",
-                    "signatures": [
-                        "const void* data, size_t dataSize, int numChannels, int rate, int bitsPerSample = 16, bool bigEndian = false"
-                    ],
-                    "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths."
-                },
-                {
-                    "name": "getDuration",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Duration in seconds (numSamples / sampleRate)."
-                },
-                {
-                    "name": "generateSineWave",
-                    "return": "void",
-                    "signatures": [
-                        "float frequency, float duration, float volume = 0.5f, int sr = 44100"
-                    ],
-                    "desc": "Fill the buffer with a mono sine wave of the given frequency (Hz) and duration (seconds)."
-                },
-                {
-                    "name": "generateSquareWave",
-                    "return": "void",
-                    "signatures": [
-                        "float frequency, float duration, float volume = 0.5f, int sr = 44100"
-                    ],
-                    "desc": "Fill the buffer with a mono square wave."
-                },
-                {
-                    "name": "generateTriangleWave",
-                    "return": "void",
-                    "signatures": [
-                        "float frequency, float duration, float volume = 0.5f, int sr = 44100"
-                    ],
-                    "desc": "Fill the buffer with a mono triangle wave."
-                },
-                {
-                    "name": "generateSawtoothWave",
-                    "return": "void",
-                    "signatures": [
-                        "float frequency, float duration, float volume = 0.5f, int sr = 44100"
-                    ],
-                    "desc": "Fill the buffer with a mono sawtooth wave."
-                },
-                {
-                    "name": "generateNoise",
-                    "return": "void",
-                    "signatures": [
-                        "float duration, float volume = 0.5f, int sr = 44100"
-                    ],
-                    "desc": "Fill the buffer with mono white noise."
-                },
-                {
-                    "name": "generatePinkNoise",
-                    "return": "void",
-                    "signatures": [
-                        "float duration, float volume = 0.5f, int sr = 44100"
-                    ],
-                    "desc": "Fill the buffer with mono pink noise (1/f spectrum, Paul Kellet's method)."
-                },
-                {
-                    "name": "generateSilence",
-                    "return": "void",
-                    "signatures": [
-                        "float duration, int sr = 44100"
-                    ],
-                    "desc": "Fill the buffer with silence of the given duration (useful as a base for mixFrom)."
-                },
-                {
-                    "name": "applyADSR",
-                    "return": "void",
-                    "signatures": [
-                        "float attack, float decay, float sustainLevel, float release"
-                    ],
-                    "desc": "Apply an ADSR amplitude envelope to the buffer in place (attack / decay / release in seconds, sustainLevel 0-1)."
-                },
-                {
-                    "name": "mixFrom",
-                    "return": "void",
-                    "signatures": [
-                        "const SoundBuffer& other, size_t offsetSamples, float volume = 1.0f"
-                    ],
-                    "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed."
-                },
-                {
-                    "name": "clip",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Hard-clip all samples into the -1.0 .. 1.0 range."
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "SoundBuffer_getAdtsSampleRateIndex",
-                    "return": "int",
-                    "signatures": [
-                        "int sampleRate"
-                    ],
-                    "desc": "ADTS sample-rate index for the given rate (AAC-in-MOV container helper)."
-                },
-                {
-                    "name": "SoundBuffer_createAdtsHeader",
-                    "return": "void",
-                    "signatures": [
-                        "uint8_t* header, int frameLength, int sampleRate, int channels, int profile = 2"
-                    ],
-                    "desc": "Write a 7-byte ADTS header for one raw AAC frame into header (AAC-in-MOV container helper)."
-                }
-            ]
-        },
-        {
-            "name": "SoundStream",
-            "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a ~10 ms refill, and each polyphony slot costs one open file handle + decoder + ring buffer.",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "loadStream",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path, int maxPolyphony = 1"
-                    ],
-                    "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported."
-                },
-                {
-                    "name": "getDuration",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Decoded file duration in seconds."
-                },
-                {
-                    "name": "getPath",
-                    "return": "const string&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Path the stream was opened from."
-                },
-                {
-                    "name": "getMaxPolyphony",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Number of concurrent decoder slots reserved at loadStream()."
-                }
-            ]
-        },
-        {
-            "name": "AudioEngine",
-            "desc": "Singleton miniaudio-based mixer engine. Owns the output device, mixes all playing Sound voices, exposes real-time audioOut / audioIn / audioDeviceChanged events, and an FFT analysis ring buffer. Access via AudioEngine::getInstance(); most apps drive it indirectly through the Sound class and the global initAudio() / shutdownAudio() helpers.",
-            "properties": [
-                {
-                    "name": "audioOut",
-                    "type": "Event<AudioOutBuffer>",
-                    "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
-                },
-                {
-                    "name": "audioIn",
-                    "type": "Event<AudioInBuffer>",
-                    "desc": "Real-time capture callback event (microphone input). listen() to add an input-processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
-                },
-                {
-                    "name": "audioDeviceChanged",
-                    "type": "Event<AudioDeviceChangedArgs>",
-                    "desc": "Fires after every successful init() (initial AND re-init). Args carry the resolved device's real name, isDefaultDevice flag, sampleRate, channels, bufferSize, maxPolyphony. Listener runs on the thread that called init() (main), not the audio thread."
-                }
-            ],
-            "methods": [
-                {
-                    "name": "init",
-                    "return": "bool",
-                    "signatures": [
-                        "",
-                        "const AudioSettings& settings"
-                    ],
-                    "desc": "Initialize the engine with defaults, or with an AudioSettings override. Re-init on a running engine migrates active voices to the new settings. Returns true on success."
-                },
-                {
-                    "name": "shutdown",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Stop and close the audio device."
-                },
-                {
-                    "name": "getSampleRate",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Current engine output sample rate (Hz). Returns the default (48000) before init()."
-                },
-                {
-                    "name": "getChannels",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Current engine output channel count."
-                },
-                {
-                    "name": "getMaxPolyphony",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Maximum number of simultaneously-playing Sound voices."
-                },
-                {
-                    "name": "getBufferSize",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Current device buffer size in frames (0 = miniaudio default)."
-                },
-                {
-                    "name": "isInitialized",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True after a successful init()."
-                },
-                {
-                    "name": "getAnalysisBuffer",
-                    "return": "size_t",
-                    "signatures": [
-                        "float* outBuffer, size_t numSamples"
-                    ],
-                    "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096. Returns the number of samples written. (Global wrapper: getAudioAnalysisBuffer.)"
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "AudioEngine_getInstance",
-                    "return": "AudioEngine&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the global AudioEngine singleton."
-                },
-                {
-                    "name": "AudioEngine_listDevices",
-                    "return": "vector<AudioDeviceInfo>",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Enumerate available playback devices (name + isDefault). Empty if unsupported on the platform."
-                }
-            ]
-        },
-        {
-            "name": "MicInput",
-            "desc": "Microphone capture (miniaudio). Opens an input device and exposes the latest samples through a ring buffer. Use the global getMicInput() to access the shared instance, then start() it; getMicAnalysisBuffer() is a convenience wrapper over getBuffer().",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "start",
-                    "return": "bool",
-                    "signatures": [
-                        "int sampleRate = 44100"
-                    ],
-                    "desc": "Open the microphone device at the given sample rate and begin capturing. Returns false on failure."
-                },
-                {
-                    "name": "stop",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Stop capture and close the microphone device."
-                },
-                {
-                    "name": "getBuffer",
-                    "return": "size_t",
-                    "signatures": [
-                        "float* outBuffer, size_t numSamples"
-                    ],
-                    "desc": "Copy the latest captured samples into outBuffer. numSamples is capped at the ring buffer size (4096). Returns the number of samples written."
-                },
-                {
-                    "name": "isRunning",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True while the microphone device is open and capturing."
-                },
-                {
-                    "name": "getSampleRate",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Sample rate the microphone was opened at."
-                }
-            ]
-        },
-        {
-            "name": "AudioSettings",
-            "desc": "Configuration passed to AudioEngine::init() to override engine defaults (sample rate, channels, buffer size, polyphony, device). Empty deviceName selects the system default playback device.",
-            "properties": [
-                {
-                    "name": "sampleRate",
-                    "type": "int",
-                    "desc": "Engine output sample rate in Hz (default 96000)"
-                },
-                {
-                    "name": "channels",
-                    "type": "int",
-                    "desc": "Output channel count (1 = mono, 2 = stereo; default 2)"
-                },
-                {
-                    "name": "bufferSize",
-                    "type": "int",
-                    "desc": "Requested device buffer size in frames; 0 = let miniaudio choose"
-                },
-                {
-                    "name": "maxPolyphony",
-                    "type": "int",
-                    "desc": "Max simultaneously-playing Sound voices (default 32)"
-                },
-                {
-                    "name": "deviceName",
-                    "type": "string",
-                    "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate."
-                }
-            ]
-        },
-        {
-            "name": "AudioDeviceInfo",
-            "desc": "One entry in the list returned by AudioEngine::listDevices().",
-            "properties": [
-                {
-                    "name": "name",
-                    "type": "string",
-                    "desc": "Device name (pass to AudioSettings::deviceName)"
-                },
-                {
-                    "name": "isDefault",
-                    "type": "bool",
-                    "desc": "True if this is the system default playback device"
-                }
-            ]
-        },
-        {
-            "name": "AudioDeviceChangedArgs",
-            "desc": "Argument type for the AudioEngine::audioDeviceChanged event, fired after every successful init() (initial and re-init). Reports the resolved device's real name (never empty).",
-            "properties": [
-                {
-                    "name": "deviceName",
-                    "type": "string",
-                    "desc": "Actual device name now active (resolved, never empty)"
-                },
-                {
-                    "name": "isDefaultDevice",
-                    "type": "bool",
-                    "desc": "True when the opened device is the OS's current default playback device"
-                },
-                {
-                    "name": "sampleRate",
-                    "type": "int",
-                    "desc": "Active engine sample rate in Hz"
-                },
-                {
-                    "name": "channels",
-                    "type": "int",
-                    "desc": "Active output channel count"
-                },
-                {
-                    "name": "bufferSize",
-                    "type": "int",
-                    "desc": "Active device buffer size in frames"
-                },
-                {
-                    "name": "maxPolyphony",
-                    "type": "int",
-                    "desc": "Active max polyphony"
-                }
-            ]
-        },
-        {
-            "name": "AudioOutBuffer",
-            "desc": "Argument type for the AudioEngine::audioOut event. Holds the interleaved mutable output buffer for a single audio callback. Listeners should ADD their contribution to data (voices are already mixed in); do not call engine APIs from here.",
-            "properties": [
-                {
-                    "name": "data",
-                    "type": "float*",
-                    "desc": "Interleaved mutable output, frameCount * channels samples"
-                },
-                {
-                    "name": "frameCount",
-                    "type": "int",
-                    "desc": "Number of frames in this callback"
-                },
-                {
-                    "name": "channels",
-                    "type": "int",
-                    "desc": "Channel count (floats per frame)"
-                },
-                {
-                    "name": "sampleRate",
-                    "type": "int",
-                    "desc": "Engine output sample rate in Hz"
-                },
-                {
-                    "name": "framePosition",
-                    "type": "uint64_t",
-                    "desc": "Monotonic count of output frames emitted since engine init (sample-accurate time/phase reference)"
-                }
-            ]
-        },
-        {
-            "name": "AudioInBuffer",
-            "desc": "Argument type for the AudioEngine::audioIn event. Holds the interleaved read-only microphone input for a single capture callback. Process and return quickly; do not call engine APIs from here.",
-            "properties": [
-                {
-                    "name": "data",
-                    "type": "const float*",
-                    "desc": "Interleaved read-only mic input, frameCount * channels samples"
-                },
-                {
-                    "name": "frameCount",
-                    "type": "int",
-                    "desc": "Number of frames in this callback"
-                },
-                {
-                    "name": "channels",
-                    "type": "int",
-                    "desc": "Channel count (floats per frame)"
-                },
-                {
-                    "name": "sampleRate",
-                    "type": "int",
-                    "desc": "Input sample rate in Hz"
-                },
-                {
-                    "name": "framePosition",
-                    "type": "uint64_t",
-                    "desc": "Monotonic count of input frames received since capture start"
-                }
-            ]
-        },
-        {
-            "name": "ChipSoundNote",
-            "desc": "One 8-bit-style note: a plain aggregate of public fields (wave, hz, volume, duration, and the ADSR envelope attack/decay/sustain/release). Set fields directly via designated initializers ({ .wave = Wave::Square, .hz = 440, .duration = 0.2f }) or the constructor, then build() it into a Sound (or add() it to a ChipSoundBundle).",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "Wave w, float freq, float dur, float vol = 0.5f"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "wave",
-                    "type": "Wave",
-                    "desc": "Waveform (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise, Silent)"
-                },
-                {
-                    "name": "hz",
-                    "type": "float",
-                    "desc": "Frequency in Hz (ignored for Noise / Silent)"
-                },
-                {
-                    "name": "volume",
-                    "type": "float",
-                    "desc": "Volume (0.0-1.0)"
-                },
-                {
-                    "name": "duration",
-                    "type": "float",
-                    "desc": "Note duration in seconds"
-                },
-                {
-                    "name": "attack",
-                    "type": "float",
-                    "desc": "ADSR attack time in seconds"
-                },
-                {
-                    "name": "decay",
-                    "type": "float",
-                    "desc": "ADSR decay time in seconds"
-                },
-                {
-                    "name": "sustain",
-                    "type": "float",
-                    "desc": "ADSR sustain level (0.0-1.0)"
-                },
-                {
-                    "name": "release",
-                    "type": "float",
-                    "desc": "ADSR release time in seconds"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "build",
-                    "return": "Sound",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Render this note (with its ADSR envelope) into a playable Sound"
-                }
-            ]
-        },
-        {
-            "name": "ChipSoundBundle",
-            "desc": "A timeline of chiptune notes (ChipSoundNote + start time) that builds into a single mixed Sound. Add notes at times, then call build() to render the mix with ADSR and clipping applied.",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "properties": [
-                {
-                    "name": "entries",
-                    "type": "vector<ChipSoundBundle::Entry>",
-                    "desc": "The scheduled notes (each Entry pairs a ChipSoundNote with its start time in seconds)"
-                },
-                {
-                    "name": "volume",
-                    "type": "float",
-                    "desc": "Master volume multiplier applied when mixing (default 1.0)"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "add",
-                    "return": "ChipSoundBundle&",
-                    "signatures": [
-                        "const ChipSoundNote& note, float time",
-                        "ChipSoundNote::Wave wave, float hz, float duration, float time, float vol = 0.5f"
-                    ],
-                    "desc": "Schedule a note to start at the given time (seconds). The second overload constructs the note inline from wave / frequency / duration."
-                },
-                {
-                    "name": "clear",
-                    "return": "ChipSoundBundle&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Remove all scheduled notes."
-                },
-                {
-                    "name": "getDuration",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Total duration in seconds, auto-computed from the last note's end."
-                },
-                {
-                    "name": "build",
-                    "return": "Sound",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Render all scheduled notes into a single mixed, clipped Sound ready to play."
-                }
-            ]
-        },
-        {
-            "name": "Logger",
-            "desc": "Logging core with console and file output and an onLog event; access the global instance via getLogger()",
-            "methods": [
-                {
-                    "name": "log",
-                    "return": "void",
-                    "signatures": [
-                        "LogLevel level, const string& message"
-                    ],
-                    "desc": "Emit a log message at the given level"
-                },
-                {
-                    "name": "setConsoleLogLevel",
-                    "return": "void",
-                    "signatures": [
-                        "LogLevel level"
-                    ],
-                    "desc": "Set the minimum console log level"
-                },
-                {
-                    "name": "getConsoleLogLevel",
-                    "return": "LogLevel",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the current console log level"
-                },
-                {
-                    "name": "setLogFile",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path"
-                    ],
-                    "desc": "Open a file to receive log output"
-                },
-                {
-                    "name": "closeFile",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Close the current log file"
-                },
-                {
-                    "name": "setFileLogLevel",
-                    "return": "void",
-                    "signatures": [
-                        "LogLevel level"
-                    ],
-                    "desc": "Set the minimum file log level"
-                },
-                {
-                    "name": "getFileLogLevel",
-                    "return": "LogLevel",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the current file log level"
-                },
-                {
-                    "name": "getLogFilePath",
-                    "return": "const string&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the path of the current log file"
-                },
-                {
-                    "name": "isFileOpen",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Check whether a log file is currently open"
-                }
-            ]
-        },
-        {
-            "name": "CoreEvents",
-            "desc": "Hub of all framework core events. Each member is an Event you subscribe to with .listen(callback); access the global instance via events()",
-            "properties": [
-                {
-                    "name": "setup",
-                    "type": "Event<void>",
-                    "desc": "Fired after app setup completes"
-                },
-                {
-                    "name": "update",
-                    "type": "Event<void>",
-                    "desc": "Fired before update each frame"
-                },
-                {
-                    "name": "draw",
-                    "type": "Event<void>",
-                    "desc": "Fired before draw each frame"
-                },
-                {
-                    "name": "onRender",
-                    "type": "Event<void>",
-                    "desc": "Fired after sokol_gl flush, while the render pass is still active"
-                },
-                {
-                    "name": "afterFrame",
-                    "type": "Event<void>",
-                    "desc": "Fired after present() (swapchain committed, outside any pass)"
-                },
-                {
-                    "name": "exit",
-                    "type": "Event<void>",
-                    "desc": "Fired on app exit"
-                },
-                {
-                    "name": "exitRequested",
-                    "type": "Event<ExitRequestEventArgs>",
-                    "desc": "Fired when an exit is requested; set args.cancel = true to cancel it"
-                },
-                {
-                    "name": "keyPressed",
-                    "type": "Event<KeyEventArgs>",
-                    "desc": "Fired when a key is pressed"
-                },
-                {
-                    "name": "keyReleased",
-                    "type": "Event<KeyEventArgs>",
-                    "desc": "Fired when a key is released"
-                },
-                {
-                    "name": "mousePressed",
-                    "type": "Event<MouseEventArgs>",
-                    "desc": "Fired when a mouse button is pressed"
-                },
-                {
-                    "name": "mouseReleased",
-                    "type": "Event<MouseEventArgs>",
-                    "desc": "Fired when a mouse button is released"
-                },
-                {
-                    "name": "mouseMoved",
-                    "type": "Event<MouseMoveEventArgs>",
-                    "desc": "Fired when the mouse moves with no button held"
-                },
-                {
-                    "name": "mouseDragged",
-                    "type": "Event<MouseDragEventArgs>",
-                    "desc": "Fired when the mouse moves with a button held"
-                },
-                {
-                    "name": "mouseScrolled",
-                    "type": "Event<ScrollEventArgs>",
-                    "desc": "Fired when the mouse wheel / trackpad scrolls"
-                },
-                {
-                    "name": "windowResized",
-                    "type": "Event<ResizeEventArgs>",
-                    "desc": "Fired when the window is resized"
-                },
-                {
-                    "name": "filesDropped",
-                    "type": "Event<DragDropEventArgs>",
-                    "desc": "Fired when files are dropped onto the window"
-                },
-                {
-                    "name": "clipboardPasted",
-                    "type": "Event<ClipboardPastedEventArgs>",
-                    "desc": "Fired on a paste gesture (Cmd+V / Ctrl+V / browser paste); args.text holds the content"
-                },
-                {
-                    "name": "console",
-                    "type": "Event<ConsoleEventArgs>",
-                    "desc": "Fired when a command line is received from stdin"
-                },
-                {
-                    "name": "touchPressed",
-                    "type": "Event<TouchEventArgs>",
-                    "desc": "Fired when a touch begins (Android/iOS, multi-touch)"
-                },
-                {
-                    "name": "touchMoved",
-                    "type": "Event<TouchEventArgs>",
-                    "desc": "Fired when a touch moves (Android/iOS, multi-touch)"
-                },
-                {
-                    "name": "touchReleased",
-                    "type": "Event<TouchEventArgs>",
-                    "desc": "Fired when a touch ends or is cancelled (check args.cancelled)"
-                },
-                {
-                    "name": "rawEvent",
-                    "type": "Event<const sapp_event>",
-                    "desc": "Fired for every raw sokol_app event (for addons needing the full sapp_event)"
-                }
-            ]
-        },
-        {
-            "name": "Event",
-            "desc": "Generic event you subscribe to with listen(callback) and fire with notify(arg). The template parameter is the argument type passed to listeners by reference; Event<void> is the no-argument specialization (callbacks and notify take no argument). listen() returns an EventListener RAII token that disconnects when destroyed",
-            "methods": [
-                {
-                    "name": "listen",
-                    "return": "EventListener",
-                    "signatures": [
-                        "Callback callback, int priority = EventPriority::App",
-                        "Callback callback, Deliver deliver, int priority = EventPriority::App"
-                    ],
-                    "desc": "Register a listener callback and return an EventListener token; lower priority runs first, and Deliver::Main runs the callback on the main thread"
-                },
-                {
-                    "name": "notify",
-                    "return": "void",
-                    "signatures": [
-                        "T& arg"
-                    ],
-                    "desc": "Fire the event, calling all listeners in priority order (no argument for Event<void>); stops early if a listener marks an input arg consumed"
-                },
-                {
-                    "name": "listenerCount",
-                    "return": "size_t",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Number of currently registered listeners"
-                },
-                {
-                    "name": "clear",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Remove all listeners"
-                }
-            ]
-        },
-        {
-            "name": "EventListener",
-            "desc": "RAII token returned by Event::listen(); the listener is automatically disconnected when this token is destroyed or reassigned. Move-only",
-            "methods": [
-                {
-                    "name": "disconnect",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction)"
-                },
-                {
-                    "name": "isConnected",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True while the listener is still connected to its event"
-                }
-            ]
-        },
-        {
-            "name": "KeyEventArgs",
-            "desc": "Arguments for keyPressed / keyReleased events",
-            "properties": [
-                {
-                    "name": "key",
-                    "type": "int",
-                    "desc": "Key code (KEY_* / SAPP_KEYCODE_*)"
-                },
-                {
-                    "name": "isRepeat",
-                    "type": "bool",
-                    "desc": "True if this is a repeat from holding the key"
-                },
-                {
-                    "name": "shift",
-                    "type": "bool",
-                    "desc": "Shift modifier held"
-                },
-                {
-                    "name": "ctrl",
-                    "type": "bool",
-                    "desc": "Ctrl modifier held"
-                },
-                {
-                    "name": "alt",
-                    "type": "bool",
-                    "desc": "Alt modifier held"
-                },
-                {
-                    "name": "super",
-                    "type": "bool",
-                    "desc": "Super / Command modifier held"
-                },
-                {
-                    "name": "consumed",
-                    "type": "bool",
-                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
-                }
-            ]
-        },
-        {
-            "name": "MouseEventArgs",
-            "desc": "Arguments for mousePressed / mouseReleased events. pos is local space, globalPos is screen space (equal at app level)",
-            "properties": [
-                {
-                    "name": "pos",
-                    "type": "Vec2",
-                    "desc": "Cursor position in the receiving node's local space (== globalPos at app level)"
-                },
-                {
-                    "name": "globalPos",
-                    "type": "Vec2",
-                    "desc": "Cursor position in screen space"
-                },
-                {
-                    "name": "button",
-                    "type": "int",
-                    "desc": "Mouse button (MOUSE_BUTTON_LEFT / RIGHT / MIDDLE)"
-                },
-                {
-                    "name": "x",
-                    "type": "float",
-                    "desc": "Legacy mirror of pos.x (removed at v1.0)"
-                },
-                {
-                    "name": "y",
-                    "type": "float",
-                    "desc": "Legacy mirror of pos.y (removed at v1.0)"
-                },
-                {
-                    "name": "shift",
-                    "type": "bool",
-                    "desc": "Shift modifier held"
-                },
-                {
-                    "name": "ctrl",
-                    "type": "bool",
-                    "desc": "Ctrl modifier held"
-                },
-                {
-                    "name": "alt",
-                    "type": "bool",
-                    "desc": "Alt modifier held"
-                },
-                {
-                    "name": "super",
-                    "type": "bool",
-                    "desc": "Super / Command modifier held"
-                },
-                {
-                    "name": "consumed",
-                    "type": "bool",
-                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
-                }
-            ]
-        },
-        {
-            "name": "MouseMoveEventArgs",
-            "desc": "Arguments for mouseMoved (cursor moving with no button held)",
-            "properties": [
-                {
-                    "name": "pos",
-                    "type": "Vec2",
-                    "desc": "Cursor position in local space (== globalPos at app level)"
-                },
-                {
-                    "name": "globalPos",
-                    "type": "Vec2",
-                    "desc": "Cursor position in screen space"
-                },
-                {
-                    "name": "delta",
-                    "type": "Vec2",
-                    "desc": "Movement since the last event, in local space"
-                },
-                {
-                    "name": "globalDelta",
-                    "type": "Vec2",
-                    "desc": "Movement since the last event, in screen space"
-                },
-                {
-                    "name": "x",
-                    "type": "float",
-                    "desc": "Legacy mirror of pos.x (removed at v1.0)"
-                },
-                {
-                    "name": "y",
-                    "type": "float",
-                    "desc": "Legacy mirror of pos.y (removed at v1.0)"
-                },
-                {
-                    "name": "deltaX",
-                    "type": "float",
-                    "desc": "Legacy mirror of delta.x (removed at v1.0)"
-                },
-                {
-                    "name": "deltaY",
-                    "type": "float",
-                    "desc": "Legacy mirror of delta.y (removed at v1.0)"
-                },
-                {
-                    "name": "shift",
-                    "type": "bool",
-                    "desc": "Shift modifier held"
-                },
-                {
-                    "name": "ctrl",
-                    "type": "bool",
-                    "desc": "Ctrl modifier held"
-                },
-                {
-                    "name": "alt",
-                    "type": "bool",
-                    "desc": "Alt modifier held"
-                },
-                {
-                    "name": "super",
-                    "type": "bool",
-                    "desc": "Super / Command modifier held"
-                },
-                {
-                    "name": "consumed",
-                    "type": "bool",
-                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
-                }
-            ]
-        },
-        {
-            "name": "MouseDragEventArgs",
-            "desc": "Arguments for mouseDragged (cursor moving with a button held)",
-            "properties": [
-                {
-                    "name": "pos",
-                    "type": "Vec2",
-                    "desc": "Cursor position in local space (== globalPos at app level)"
-                },
-                {
-                    "name": "globalPos",
-                    "type": "Vec2",
-                    "desc": "Cursor position in screen space"
-                },
-                {
-                    "name": "delta",
-                    "type": "Vec2",
-                    "desc": "Movement since the last event, in local space"
-                },
-                {
-                    "name": "globalDelta",
-                    "type": "Vec2",
-                    "desc": "Movement since the last event, in screen space"
-                },
-                {
-                    "name": "button",
-                    "type": "int",
-                    "desc": "Mouse button being dragged (MOUSE_BUTTON_*)"
-                },
-                {
-                    "name": "x",
-                    "type": "float",
-                    "desc": "Legacy mirror of pos.x (removed at v1.0)"
-                },
-                {
-                    "name": "y",
-                    "type": "float",
-                    "desc": "Legacy mirror of pos.y (removed at v1.0)"
-                },
-                {
-                    "name": "deltaX",
-                    "type": "float",
-                    "desc": "Legacy mirror of delta.x (removed at v1.0)"
-                },
-                {
-                    "name": "deltaY",
-                    "type": "float",
-                    "desc": "Legacy mirror of delta.y (removed at v1.0)"
-                },
-                {
-                    "name": "shift",
-                    "type": "bool",
-                    "desc": "Shift modifier held"
-                },
-                {
-                    "name": "ctrl",
-                    "type": "bool",
-                    "desc": "Ctrl modifier held"
-                },
-                {
-                    "name": "alt",
-                    "type": "bool",
-                    "desc": "Alt modifier held"
-                },
-                {
-                    "name": "super",
-                    "type": "bool",
-                    "desc": "Super / Command modifier held"
-                },
-                {
-                    "name": "consumed",
-                    "type": "bool",
-                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
-                }
-            ]
-        },
-        {
-            "name": "ScrollEventArgs",
-            "desc": "Arguments for mouseScrolled events",
-            "properties": [
-                {
-                    "name": "pos",
-                    "type": "Vec2",
-                    "desc": "Cursor position in local space (== globalPos at app level)"
-                },
-                {
-                    "name": "globalPos",
-                    "type": "Vec2",
-                    "desc": "Cursor position in screen space"
-                },
-                {
-                    "name": "scroll",
-                    "type": "Vec2",
-                    "desc": "Scroll amount (x: horizontal, y: vertical)"
-                },
-                {
-                    "name": "scrollX",
-                    "type": "float",
-                    "desc": "Legacy mirror of scroll.x (removed at v1.0)"
-                },
-                {
-                    "name": "scrollY",
-                    "type": "float",
-                    "desc": "Legacy mirror of scroll.y (removed at v1.0)"
-                },
-                {
-                    "name": "shift",
-                    "type": "bool",
-                    "desc": "Shift modifier held"
-                },
-                {
-                    "name": "ctrl",
-                    "type": "bool",
-                    "desc": "Ctrl modifier held"
-                },
-                {
-                    "name": "alt",
-                    "type": "bool",
-                    "desc": "Alt modifier held"
-                },
-                {
-                    "name": "super",
-                    "type": "bool",
-                    "desc": "Super / Command modifier held"
-                },
-                {
-                    "name": "consumed",
-                    "type": "bool",
-                    "desc": "Set true in a listener to stop propagation to lower-priority listeners"
-                }
-            ]
-        },
-        {
-            "name": "ResizeEventArgs",
-            "desc": "Arguments for windowResized events",
-            "properties": [
-                {
-                    "name": "width",
-                    "type": "int",
-                    "desc": "New window width in pixels"
-                },
-                {
-                    "name": "height",
-                    "type": "int",
-                    "desc": "New window height in pixels"
-                }
-            ]
-        },
-        {
-            "name": "DragDropEventArgs",
-            "desc": "Arguments for filesDropped events",
-            "properties": [
-                {
-                    "name": "files",
-                    "type": "vector<string>",
-                    "desc": "Paths of the dropped files"
-                },
-                {
-                    "name": "x",
-                    "type": "float",
-                    "desc": "Drop position x"
-                },
-                {
-                    "name": "y",
-                    "type": "float",
-                    "desc": "Drop position y"
-                }
-            ]
-        },
-        {
-            "name": "ClipboardPastedEventArgs",
-            "desc": "Arguments for clipboardPasted events; the only reliable way to read the clipboard on the Web platform",
-            "properties": [
-                {
-                    "name": "text",
-                    "type": "string",
-                    "desc": "Pasted clipboard content (already read for you)"
-                }
-            ]
-        },
-        {
-            "name": "TouchPoint",
-            "desc": "A single finger within a TouchEventArgs",
-            "properties": [
-                {
-                    "name": "id",
-                    "type": "int",
-                    "desc": "Touch ID, persistent across move events"
-                },
-                {
-                    "name": "x",
-                    "type": "float",
-                    "desc": "Touch x position"
-                },
-                {
-                    "name": "y",
-                    "type": "float",
-                    "desc": "Touch y position"
-                },
-                {
-                    "name": "pressure",
-                    "type": "float",
-                    "desc": "Touch pressure (0.0-1.0; not yet reported by sokol, defaults to 1.0)"
-                },
-                {
-                    "name": "changed",
-                    "type": "bool",
-                    "desc": "True if this touch was part of the current action"
-                }
-            ]
-        },
-        {
-            "name": "TouchEventArgs",
-            "desc": "Arguments for touchPressed / touchMoved / touchReleased events (multi-touch, Android/iOS)",
-            "properties": [
-                {
-                    "name": "touches",
-                    "type": "TouchPoint[8]",
-                    "desc": "Array of active touch points (up to MAX_TOUCHES = 8)"
-                },
-                {
-                    "name": "numTouches",
-                    "type": "int",
-                    "desc": "Number of valid entries in touches"
-                },
-                {
-                    "name": "cancelled",
-                    "type": "bool",
-                    "desc": "True when touchReleased fires due to system cancellation (incoming call, system gesture)"
-                }
-            ]
-        },
-        {
-            "name": "ExitRequestEventArgs",
-            "desc": "Arguments for the exitRequested event",
-            "properties": [
-                {
-                    "name": "cancel",
-                    "type": "bool",
-                    "desc": "Set true in a listener to cancel the requested exit"
-                }
-            ]
-        },
-        {
-            "name": "LogEventArgs",
-            "desc": "Arguments delivered for each log message (level, text, and timestamp)",
-            "properties": [
-                {
-                    "name": "level",
-                    "type": "LogLevel",
-                    "desc": "Severity of the log message"
-                },
-                {
-                    "name": "message",
-                    "type": "string",
-                    "desc": "The log message text"
-                },
-                {
-                    "name": "timestamp",
-                    "type": "string",
-                    "desc": "Timestamp string (HH:MM:SS.mmm) generated when the message was logged"
-                }
-            ]
-        },
-        {
-            "name": "ConsoleEventArgs",
-            "desc": "Arguments for the console event (a command line received from stdin)",
-            "properties": [
-                {
-                    "name": "raw",
-                    "type": "string",
-                    "desc": "Raw input line (e.g. \"tcdebug screenshot /tmp/a.png\")"
-                },
-                {
-                    "name": "args",
-                    "type": "vector<string>",
-                    "desc": "Input line split on whitespace (e.g. [\"tcdebug\", \"screenshot\", \"/tmp/a.png\"])"
-                }
-            ]
-        },
-        {
-            "name": "FullscreenShader",
-            "desc": "Shader specialization for fullscreen post-processing effects (position + texcoord quad). Set uniforms via setParams, then call draw to render a fullscreen quad.",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "setParams",
-                    "return": "void",
-                    "signatures": [
-                        "const T& params"
-                    ],
-                    "desc": "Set uniform parameter block (template; copies the struct bytes). Call before draw."
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Draw a fullscreen quad with this shader applied"
-                }
-            ]
-        },
-        {
-            "name": "Ray",
-            "desc": "A ray with an origin and a normalized direction, used for unified hit testing and picking",
-            "properties": [
-                {
-                    "name": "origin",
-                    "type": "Vec3",
-                    "desc": "Ray origin point"
-                },
-                {
-                    "name": "direction",
-                    "type": "Vec3",
-                    "desc": "Ray direction (normalized)"
-                }
-            ]
-        },
-        {
-            "name": "ColorLinear",
-            "desc": "A color in linear RGB space (no gamma encoding), 0.0-1.0 float per channel",
-            "properties": [
-                {
-                    "name": "r",
-                    "type": "float",
-                    "desc": "Red component (linear, 0.0-1.0)"
-                },
-                {
-                    "name": "g",
-                    "type": "float",
-                    "desc": "Green component (linear, 0.0-1.0)"
-                },
-                {
-                    "name": "b",
-                    "type": "float",
-                    "desc": "Blue component (linear, 0.0-1.0)"
-                },
-                {
-                    "name": "a",
-                    "type": "float",
-                    "desc": "Alpha component (0.0-1.0)"
-                }
-            ]
-        },
-        {
-            "name": "ColorOKLab",
-            "desc": "A color in the OKLab perceptual color space (lightness + two opponent axes)",
-            "properties": [
-                {
-                    "name": "L",
-                    "type": "float",
-                    "desc": "Lightness (0.0-1.0)"
-                },
-                {
-                    "name": "a",
-                    "type": "float",
-                    "desc": "Green-Red opponent axis (approx -0.4 to 0.4)"
-                },
-                {
-                    "name": "b",
-                    "type": "float",
-                    "desc": "Blue-Yellow opponent axis (approx -0.4 to 0.4)"
-                },
-                {
-                    "name": "alpha",
-                    "type": "float",
-                    "desc": "Alpha component (0.0-1.0)"
-                }
-            ]
-        },
-        {
-            "name": "Json",
-            "desc": "Alias for nlohmann::json (using Json = nlohmann::json). Used as the in-memory JSON value type by loadJson, saveJson, parseJson and toJsonString. See the nlohmann/json documentation for its full API."
-        },
-        {
-            "name": "Xml",
-            "desc": "XML document wrapper around pugixml. Loads, saves and queries XML; node-level access is via XmlNode returned from root() and child().",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "load",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path"
-                    ],
-                    "desc": "Load an XML document from a file. Relative paths are resolved via getDataPath. Returns true on success."
-                },
-                {
-                    "name": "parse",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& str"
-                    ],
-                    "desc": "Parse an XML document from a string. Returns true on success."
-                },
-                {
-                    "name": "save",
-                    "return": "bool",
-                    "signatures": [
-                        "const string& path, const string& indent = \"  \""
-                    ],
-                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath. indent sets the per-level indentation string. Returns true on success."
-                },
-                {
-                    "name": "toString",
-                    "return": "string",
-                    "signatures": [
-                        "const string& indent = \"  \""
-                    ],
-                    "desc": "Serialize the document to an XML string. indent sets the per-level indentation string."
-                },
-                {
-                    "name": "root",
-                    "return": "XmlNode",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the document's root element node."
-                },
-                {
-                    "name": "addRoot",
-                    "return": "XmlNode",
-                    "signatures": [
-                        "const string& name"
-                    ],
-                    "desc": "Append a new root element with the given name and return it."
-                },
-                {
-                    "name": "child",
-                    "return": "XmlNode",
-                    "signatures": [
-                        "const string& name"
-                    ],
-                    "desc": "Find a direct child node of the document by name."
-                },
-                {
-                    "name": "document",
-                    "return": "XmlDocument&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Access the underlying pugixml document for advanced operations."
-                },
-                {
-                    "name": "empty",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return true if the document has no content."
-                },
-                {
-                    "name": "addDeclaration",
-                    "return": "void",
-                    "signatures": [
-                        "const string& version = \"1.0\", const string& encoding = \"UTF-8\""
-                    ],
-                    "desc": "Prepend an XML declaration (<?xml ...?>) with the given version and encoding."
-                }
-            ]
-        },
-        {
-            "name": "XmlDocument",
-            "desc": "Alias for pugi::xml_document. The owning XML document type underlying the Xml wrapper; see the pugixml documentation for its full API."
-        },
-        {
-            "name": "XmlNode",
-            "desc": "Alias for pugi::xml_node. A single element/node within an XML document, returned by Xml::root() and Xml::child(); see the pugixml documentation for node query and manipulation methods."
-        },
-        {
-            "name": "XmlAttribute",
-            "desc": "Alias for pugi::xml_attribute. A name/value attribute on an XmlNode; see the pugixml documentation for its API."
-        },
-        {
-            "name": "XmlParseResult",
-            "desc": "Alias for pugi::xml_parse_result. Result of an XML parse operation, carrying success status, error description and offset."
-        },
-        {
-            "name": "Mod",
-            "desc": "Attachable behavior base class for Node. Subclass it, override the lifecycle and input hooks, and attach with node->addMod<T>(). Lifecycle: setup() on attach, then each frame earlyUpdate() -> Node::update() -> update() -> draw(), and onDestroy() on removal. Override isExclusive() to allow only one instance per Node, and canAttachTo() to restrict attachment.",
-            "methods": [
-                {
-                    "name": "getOwner",
-                    "return": "Node*",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the owner Node this Mod is attached to."
-                },
-                {
-                    "name": "removeSelf",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Remove this Mod from its owner (no need to name its own type). Safe to call from inside the Mod's own update/draw/event handler; destruction is deferred until the current dispatch finishes. (protected)"
-                },
-                {
-                    "name": "setup",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: called once when the Mod is attached to the Node. (protected, virtual)"
-                },
-                {
-                    "name": "earlyUpdate",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: called every frame BEFORE Node::update(). Use for applying transforms, tweens, physics. (protected, virtual)"
-                },
-                {
-                    "name": "update",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: called every frame AFTER Node::update(). Use for reactions to node state changes. (protected, virtual)"
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: called during the draw phase, after Node::draw(). (protected, virtual)"
-                },
-                {
-                    "name": "onDestroy",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: called when the Mod is removed or the Node is destroyed. (protected, virtual)"
-                },
-                {
-                    "name": "onMousePress",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs& e"
-                    ],
-                    "desc": "Override: mouse press on the hit node. Return true to consume the event (counts as the node consuming it). (protected, virtual)"
-                },
-                {
-                    "name": "onMouseRelease",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseEventArgs& e"
-                    ],
-                    "desc": "Override: mouse release on the hit node. Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onMouseMove",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseMoveEventArgs& e"
-                    ],
-                    "desc": "Override: mouse move over the hit node. Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onMouseDrag",
-                    "return": "bool",
-                    "signatures": [
-                        "const MouseDragEventArgs& e"
-                    ],
-                    "desc": "Override: mouse drag on the hit node. Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onMouseScroll",
-                    "return": "bool",
-                    "signatures": [
-                        "const ScrollEventArgs& e"
-                    ],
-                    "desc": "Override: mouse scroll over the hit node. Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onKeyPress",
-                    "return": "bool",
-                    "signatures": [
-                        "const KeyEventArgs& e"
-                    ],
-                    "desc": "Override: key press (broadcast to mods on every node). Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onKeyRelease",
-                    "return": "bool",
-                    "signatures": [
-                        "const KeyEventArgs& e"
-                    ],
-                    "desc": "Override: key release (broadcast to mods on every node). Return true to consume. (protected, virtual)"
-                },
-                {
-                    "name": "onMouseEnter",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: pointer entered the owner node. (protected, virtual)"
-                },
-                {
-                    "name": "onMouseLeave",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override: pointer left the owner node. (protected, virtual)"
-                },
-                {
-                    "name": "hitTest",
-                    "return": "bool",
-                    "signatures": [
-                        "const Ray& localRay, float& outDistance"
-                    ],
-                    "desc": "Override: screen-space pointer picking (NOT physics collision). Define a hit shape in the node's LOCAL space; if the node's own test OR any mod's returns true, the node is the hit. (protected, virtual)"
-                },
-                {
-                    "name": "isExclusive",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override to return true if only one instance of this Mod type may be attached per Node (e.g. LayoutMod). Default false. (protected, virtual)"
-                },
-                {
-                    "name": "canAttachTo",
-                    "return": "bool",
-                    "signatures": [
-                        "Node* node"
-                    ],
-                    "desc": "Override to restrict which Node types this Mod can attach to. Return false to reject attachment. Default true. (protected, virtual)"
-                }
-            ]
-        },
-        {
-            "name": "RectNodeButton",
-            "desc": "Simple clickable button node (a RectNode subclass). Set normalColor/hoverColor/pressColor and label; it draws a filled rect that changes color on hover/press and a centered label. Events are enabled on construction. Listen on its inherited mousePressed/mouseReleased events for clicks.",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "properties": [
-                {
-                    "name": "normalColor",
-                    "type": "Color",
-                    "desc": "Fill color when idle (default dark grey)."
-                },
-                {
-                    "name": "hoverColor",
-                    "type": "Color",
-                    "desc": "Fill color when the pointer is over the button."
-                },
-                {
-                    "name": "pressColor",
-                    "type": "Color",
-                    "desc": "Fill color while pressed."
-                },
-                {
-                    "name": "label",
-                    "type": "string",
-                    "desc": "Text drawn centered on the button (skipped if empty)."
-                }
-            ],
-            "methods": [
-                {
-                    "name": "isPressed",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether the button is currently pressed."
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Draw the button: fills the rect with the state-dependent color and draws the centered label. (override)"
-                }
-            ]
-        },
-        {
-            "name": "Thread",
-            "desc": "Base class for background threads (ofThread compatible). Subclass it, override the protected pure-virtual threadedFunction() with a while (isThreadRunning()) { ... } loop, then control it with startThread()/stopThread()/waitForThread(). A protected mutex dataMutex_ is available for sharing data.",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "startThread",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Start the background thread (runs threadedFunction). No-op if already running."
-                },
-                {
-                    "name": "stopThread",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Send the stop signal: isThreadRunning() returns false inside threadedFunction so a while-loop can exit. Does not block."
-                },
-                {
-                    "name": "waitForThread",
-                    "return": "void",
-                    "signatures": [
-                        "bool callStopThread = true"
-                    ],
-                    "desc": "Wait (join) for the thread to finish. If callStopThread is true (default), calls stopThread() first."
-                },
-                {
-                    "name": "isThreadRunning",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether the thread is currently running."
-                },
-                {
-                    "name": "getThreadId",
-                    "return": "thread::id",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the underlying thread's ID."
-                },
-                {
-                    "name": "threadedFunction",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Override this with the work to run on the thread; recommended pattern is while (isThreadRunning()) { ... }. (protected, pure virtual)"
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "Thread_sleep",
-                    "return": "void",
-                    "signatures": [
-                        "unsigned long milliseconds"
-                    ],
-                    "desc": "Pause the current thread for the given number of milliseconds."
-                },
-                {
-                    "name": "Thread_yield",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Yield execution to other threads."
-                },
-                {
-                    "name": "Thread_isCurrentThreadTheMainThread",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether the current thread is the main thread. The main thread ID must be recorded first (call getMainThreadId() from the main thread)."
-                },
-                {
-                    "name": "Thread_getMainThreadId",
-                    "return": "thread::id",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the main thread ID, recording the current thread's ID on the first call."
-                }
-            ]
-        },
-        {
-            "name": "ThreadChannel",
-            "desc": "Thread-safe FIFO queue for one-way inter-thread communication (ofThreadChannel compatible), template<typename T>. Producer-Consumer pattern: a worker thread send()s values and another thread receive()s them. Use two channels for bidirectional communication.",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "send",
-                    "return": "bool",
-                    "signatures": [
-                        "const T& value",
-                        "T&& value"
-                    ],
-                    "desc": "Send a value onto the queue (copy or move overload). Returns false if the channel is closed (with the move overload the value is invalidated even on failure)."
-                },
-                {
-                    "name": "receive",
-                    "return": "bool",
-                    "signatures": [
-                        "T& value"
-                    ],
-                    "desc": "Receive a value (blocking): waits until data arrives, writing it into value. Returns false if the channel is closed."
-                },
-                {
-                    "name": "tryReceive",
-                    "return": "bool",
-                    "signatures": [
-                        "T& value",
-                        "T& value, int64_t timeoutMs"
-                    ],
-                    "desc": "Receive a value without blocking, or waiting at most timeoutMs milliseconds (timeout overload). Returns false immediately/after the timeout if no data."
-                },
-                {
-                    "name": "close",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Close the channel, waking all waiting threads. After closing, send/receive return false."
-                },
-                {
-                    "name": "clear",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Clear the queue, discarding all pending values."
-                },
-                {
-                    "name": "empty",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether the queue is empty (approximate)."
-                },
-                {
-                    "name": "size",
-                    "return": "size_t",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Number of queued values (approximate)."
-                },
-                {
-                    "name": "isClosed",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether the channel has been closed."
-                }
-            ]
-        },
-        {
-            "name": "HitResult",
-            "desc": "Result of a node hit test (this is Node::HitResult). Returned by Node::findHitNode() / findHitNodeFromScreen(); call hit() to check whether anything was hit.",
-            "properties": [
-                {
-                    "name": "node",
-                    "type": "Node::Ptr",
-                    "desc": "The hit node (shared_ptr), or null if nothing was hit."
-                },
-                {
-                    "name": "distance",
-                    "type": "float",
-                    "desc": "Distance from the ray origin to the hit point."
-                },
-                {
-                    "name": "localPoint",
-                    "type": "Vec3",
-                    "desc": "Hit position in the hit node's local coordinates."
-                }
-            ],
-            "methods": [
-                {
-                    "name": "hit",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Whether a node was hit (node is non-null)."
-                }
-            ]
-        },
-        {
-            "name": "NodeWeakPtr",
-            "desc": "Alias for weak_ptr<Node> (using NodeWeakPtr = weak_ptr<Node>). A non-owning weak reference to a Node; lock() it to obtain a NodePtr if the node still exists."
-        },
-        {
-            "name": "Location",
-            "desc": "GPS / WiFi location fix returned by getLocation()",
-            "properties": [
-                {
-                    "name": "latitude",
-                    "type": "double",
-                    "desc": "Latitude in degrees"
-                },
-                {
-                    "name": "longitude",
-                    "type": "double",
-                    "desc": "Longitude in degrees"
-                },
-                {
-                    "name": "altitude",
-                    "type": "double",
-                    "desc": "Altitude in meters"
-                },
-                {
-                    "name": "accuracy",
-                    "type": "float",
-                    "desc": "Horizontal accuracy in meters; -1 if not available yet"
-                }
-            ]
-        },
-        {
-            "name": "FpsSettings",
-            "desc": "FPS configuration returned by getFpsSettings(). Rates use VSYNC (-1) and EVENT_DRIVEN (0) sentinels, or a fixed fps",
-            "properties": [
-                {
-                    "name": "updateFps",
-                    "type": "float",
-                    "desc": "Target update rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
-                },
-                {
-                    "name": "drawFps",
-                    "type": "float",
-                    "desc": "Target draw rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
-                },
-                {
-                    "name": "actualVsyncFps",
-                    "type": "float",
-                    "desc": "Actual monitor refresh rate (0 if unknown)"
-                },
-                {
-                    "name": "synced",
-                    "type": "bool",
-                    "desc": "true when update and draw run in sync (1:1)"
-                }
-            ]
-        },
-        {
-            "name": "WindowSettings",
-            "desc": "Window configuration passed to the app at startup (size, title, DPI, MSAA, fullscreen, decoration, VSync). Setters chain",
-            "properties": [
-                {
-                    "name": "width",
-                    "type": "int",
-                    "desc": "Window width (default 1280)"
-                },
-                {
-                    "name": "height",
-                    "type": "int",
-                    "desc": "Window height (default 720)"
-                },
-                {
-                    "name": "title",
-                    "type": "string",
-                    "desc": "Window title (default \"TrussC App\")"
-                },
-                {
-                    "name": "highDpi",
-                    "type": "bool",
-                    "desc": "High DPI support for sharp rendering on Retina (default true)"
-                },
-                {
-                    "name": "pixelPerfect",
-                    "type": "bool",
-                    "desc": "true: coords match framebuffer size; false: coords use logical size (default false)"
-                },
-                {
-                    "name": "sampleCount",
-                    "type": "int",
-                    "desc": "MSAA sample count (default 4)"
-                },
-                {
-                    "name": "fullscreen",
-                    "type": "bool",
-                    "desc": "Start in fullscreen (default false)"
-                },
-                {
-                    "name": "decorated",
-                    "type": "bool",
-                    "desc": "false: borderless/chromeless window with no title bar (default true)"
-                },
-                {
-                    "name": "clipboardSize",
-                    "type": "int",
-                    "desc": "Clipboard buffer size in bytes (default 65536)"
-                },
-                {
-                    "name": "swapInterval",
-                    "type": "int",
-                    "desc": "VSync present interval: 1 = on (default), 0 = off, N = every Nth refresh"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "setSize",
-                    "return": "WindowSettings&",
-                    "signatures": [
-                        "int w, int h"
-                    ],
-                    "desc": "Set window size (chainable)"
-                },
-                {
-                    "name": "setTitle",
-                    "return": "WindowSettings&",
-                    "signatures": [
-                        "const string& t"
-                    ],
-                    "desc": "Set window title (chainable)"
-                },
-                {
-                    "name": "setHighDpi",
-                    "return": "WindowSettings&",
-                    "signatures": [
-                        "bool enabled"
-                    ],
-                    "desc": "Enable/disable high DPI support (chainable)"
-                },
-                {
-                    "name": "setPixelPerfect",
-                    "return": "WindowSettings&",
-                    "signatures": [
-                        "bool enabled"
-                    ],
-                    "desc": "Set pixel-perfect mode: true = framebuffer-size coords, false = logical-size coords (chainable)"
-                },
-                {
-                    "name": "setSampleCount",
-                    "return": "WindowSettings&",
-                    "signatures": [
-                        "int count"
-                    ],
-                    "desc": "Set MSAA sample count (chainable)"
-                },
-                {
-                    "name": "setFullscreen",
-                    "return": "WindowSettings&",
-                    "signatures": [
-                        "bool enabled"
-                    ],
-                    "desc": "Enable/disable fullscreen at startup (chainable)"
-                },
-                {
-                    "name": "setDecorated",
-                    "return": "WindowSettings&",
-                    "signatures": [
-                        "bool enabled"
-                    ],
-                    "desc": "false = borderless/chromeless window that can still take focus and be closed programmatically (chainable)"
-                },
-                {
-                    "name": "setClipboardSize",
-                    "return": "WindowSettings&",
-                    "signatures": [
-                        "int size"
-                    ],
-                    "desc": "Set clipboard buffer size in bytes (chainable)"
-                },
-                {
-                    "name": "setSwapInterval",
-                    "return": "WindowSettings&",
-                    "signatures": [
-                        "int interval"
-                    ],
-                    "desc": "Set VSync present interval: 1 = on, 0 = off, N = every Nth refresh (chainable)"
-                }
-            ]
-        },
-        {
-            "name": "HeadlessSettings",
-            "desc": "Settings for runHeadlessApp() (no window / graphics). Currently just the target update rate",
-            "properties": [
-                {
-                    "name": "targetFps",
-                    "type": "float",
-                    "desc": "Target update rate (default 60)"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "setFps",
-                    "return": "HeadlessSettings&",
-                    "signatures": [
-                        "float fps"
-                    ],
-                    "desc": "Set the target update rate (chainable)"
-                }
-            ]
-        },
-        {
-            "name": "FileDialogResult",
-            "desc": "Result of a load/save file dialog",
-            "properties": [
-                {
-                    "name": "filePath",
-                    "type": "string",
-                    "desc": "Full path to the chosen file"
-                },
-                {
-                    "name": "fileName",
-                    "type": "string",
-                    "desc": "Filename only (no directory)"
-                },
-                {
-                    "name": "success",
-                    "type": "bool",
-                    "desc": "true if a file was chosen, false if the dialog was cancelled"
-                }
-            ]
-        },
-        {
-            "name": "Vec4",
-            "desc": "4D vector (x, y, z, w). Used for homogeneous coordinates and RGBA-style data",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "float x, float y, float z, float w",
-                    "float v",
-                    "const Vec3& v, float w = 1.0f",
-                    "const Vec2& v, float z = 0.0f, float w = 1.0f"
-                ]
-            },
-            "properties": [
-                {
-                    "name": "x",
-                    "type": "float",
-                    "desc": "X component"
-                },
-                {
-                    "name": "y",
-                    "type": "float",
-                    "desc": "Y component"
-                },
-                {
-                    "name": "z",
-                    "type": "float",
-                    "desc": "Z component"
-                },
-                {
-                    "name": "w",
-                    "type": "float",
-                    "desc": "W component"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "set",
-                    "return": "Vec4&",
-                    "signatures": [
-                        "float x, float y, float z, float w",
-                        "const Vec4& v"
-                    ],
-                    "desc": "Set all components (chainable)"
-                },
-                {
-                    "name": "length",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the vector's magnitude"
-                },
-                {
-                    "name": "lengthSquared",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the squared magnitude (cheaper than length())"
-                },
-                {
-                    "name": "normalized",
-                    "return": "Vec4",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return a unit-length copy of this vector"
-                },
-                {
-                    "name": "normalize",
-                    "return": "Vec4&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Normalize this vector in place (chainable)"
-                },
-                {
-                    "name": "dot",
-                    "return": "float",
-                    "signatures": [
-                        "const Vec4& v"
-                    ],
-                    "desc": "Dot product with another vector"
-                },
-                {
-                    "name": "lerp",
-                    "return": "Vec4",
-                    "signatures": [
-                        "const Vec4& v, float t"
-                    ],
-                    "desc": "Linearly interpolate toward v by t (0..1)"
-                },
-                {
-                    "name": "xy",
-                    "return": "Vec2",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the (x, y) components as a Vec2"
-                },
-                {
-                    "name": "xyz",
-                    "return": "Vec3",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the (x, y, z) components as a Vec3"
-                }
-            ]
-        },
-        {
-            "name": "Mat3",
-            "desc": "3x3 matrix for 2D affine / homography transforms (row-major). Includes static factories and a homography solver",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22"
-                ]
-            },
-            "methods": [
-                {
-                    "name": "at",
-                    "return": "float&",
-                    "signatures": [
-                        "int row, int col"
-                    ],
-                    "desc": "Access the element at (row, col)"
-                },
-                {
-                    "name": "transposed",
-                    "return": "Mat3",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the transpose of this matrix"
-                },
-                {
-                    "name": "determinant",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Compute the determinant"
-                },
-                {
-                    "name": "inverted",
-                    "return": "Mat3",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the inverse matrix (identity if singular)"
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "Mat3_identity",
-                    "return": "Mat3",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the identity matrix"
-                },
-                {
-                    "name": "Mat3_translate",
-                    "return": "Mat3",
-                    "signatures": [
-                        "float tx, float ty",
-                        "const Vec2& t"
-                    ],
-                    "desc": "Build a 2D translation matrix"
-                },
-                {
-                    "name": "Mat3_rotate",
-                    "return": "Mat3",
-                    "signatures": [
-                        "float radians"
-                    ],
-                    "desc": "Build a 2D rotation matrix (radians)"
-                },
-                {
-                    "name": "Mat3_scale",
-                    "return": "Mat3",
-                    "signatures": [
-                        "float sx, float sy",
-                        "float s",
-                        "const Vec2& s"
-                    ],
-                    "desc": "Build a 2D scale matrix"
-                },
-                {
-                    "name": "Mat3_getHomography",
-                    "return": "Mat3",
-                    "signatures": [
-                        "const Vec2 src[4], const Vec2 dst[4]"
-                    ],
-                    "desc": "Compute the homography matrix mapping 4 source points to 4 destination points (solves H * src = dst)"
-                }
-            ]
-        },
-        {
-            "name": "VideoGrabber",
-            "desc": "Webcam capture source. Call setup() once, then update() every frame; getTexture() (via HasTexture) gives the live frame. Move-only. Camera permission is requested automatically on macOS",
-            "constructor": {
-                "signatures": [
-                    ""
-                ]
-            },
-            "methods": [
-                {
-                    "name": "listDevices",
-                    "return": "vector<VideoDeviceInfo>",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the list of available camera devices"
-                },
-                {
-                    "name": "setDeviceID",
-                    "return": "void",
-                    "signatures": [
-                        "int deviceId"
-                    ],
-                    "desc": "Select which camera to use; call before setup()"
-                },
-                {
-                    "name": "getDeviceID",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the selected device ID"
-                },
-                {
-                    "name": "setDesiredFrameRate",
-                    "return": "void",
-                    "signatures": [
-                        "int fps"
-                    ],
-                    "desc": "Request a capture frame rate; call before setup()"
-                },
-                {
-                    "name": "getDesiredFrameRate",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the requested frame rate (-1 if unspecified)"
-                },
-                {
-                    "name": "setVerbose",
-                    "return": "void",
-                    "signatures": [
-                        "bool verbose"
-                    ],
-                    "desc": "Enable or disable verbose logging"
-                },
-                {
-                    "name": "isVerbose",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return whether verbose logging is enabled"
-                },
-                {
-                    "name": "setup",
-                    "return": "bool",
-                    "signatures": [
-                        "int width = 640, int height = 480"
-                    ],
-                    "desc": "Start the camera at the requested size. Returns false if permission is not yet granted (it is requested asynchronously); keep calling update() and capture begins once granted"
-                },
-                {
-                    "name": "close",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Stop the camera and release its resources"
-                },
-                {
-                    "name": "update",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Poll for a new frame and upload it to the texture. Call every frame; also completes a setup() that was waiting on permission"
-                },
-                {
-                    "name": "isFrameNew",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return true if a new frame arrived during the most recent update()"
-                },
-                {
-                    "name": "isInitialized",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return true once the camera is set up and capturing"
-                },
-                {
-                    "name": "isPendingPermission",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return true while waiting for camera permission to be granted"
-                },
-                {
-                    "name": "getWidth",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the captured frame width in pixels"
-                },
-                {
-                    "name": "getHeight",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the captured frame height in pixels"
-                },
-                {
-                    "name": "getDeviceName",
-                    "return": "const string &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the name of the active capture device"
-                },
-                {
-                    "name": "getPixels",
-                    "return": "unsigned char *",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return a pointer to the current RGBA pixel buffer"
-                },
-                {
-                    "name": "copyToImage",
-                    "return": "void",
-                    "signatures": [
-                        "Image &image"
-                    ],
-                    "desc": "Copy the current frame into an Image (allocating/updating it as needed)"
-                },
-                {
-                    "name": "getTexture",
-                    "return": "Texture &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the texture holding the live camera frame (HasTexture override)"
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "VideoGrabber_checkCameraPermission",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return whether camera access has been granted (macOS 10.14+)"
-                },
-                {
-                    "name": "VideoGrabber_requestCameraPermission",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Request camera access asynchronously (macOS)"
-                }
-            ]
-        },
-        {
-            "name": "Tween",
-            "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "T start, T end, float duration, EaseType type = EaseType::Cubic, EaseMode mode = EaseMode::InOut"
-                ]
-            },
-            "methods": [
-                {
-                    "name": "from",
-                    "return": "Tween &",
-                    "signatures": [
-                        "T value"
-                    ],
-                    "desc": "Set the start value (chainable)"
-                },
-                {
-                    "name": "to",
-                    "return": "Tween &",
-                    "signatures": [
-                        "T value"
-                    ],
-                    "desc": "Set the end value (chainable)"
-                },
-                {
-                    "name": "duration",
-                    "return": "Tween &",
-                    "signatures": [
-                        "float seconds"
-                    ],
-                    "desc": "Set the animation duration in seconds (chainable)"
-                },
-                {
-                    "name": "ease",
-                    "return": "Tween &",
-                    "signatures": [
-                        "EaseType type, EaseMode mode = EaseMode::InOut",
-                        "EaseType inType, EaseType outType"
-                    ],
-                    "desc": "Set the easing curve; the two-type overload uses an asymmetric ease (one curve in, another out)"
-                },
-                {
-                    "name": "loop",
-                    "return": "Tween &",
-                    "signatures": [
-                        "int count = -1"
-                    ],
-                    "desc": "Repeat the animation: -1 = infinite, 0 = no loop, N = repeat N times (chainable)"
-                },
-                {
-                    "name": "yoyo",
-                    "return": "Tween &",
-                    "signatures": [
-                        "bool enable = true"
-                    ],
-                    "desc": "Reverse direction on each loop iteration (chainable)"
-                },
-                {
-                    "name": "delay",
-                    "return": "Tween &",
-                    "signatures": [
-                        "float seconds"
-                    ],
-                    "desc": "Delay before the animation starts, in seconds (chainable)"
-                },
-                {
-                    "name": "start",
-                    "return": "Tween &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Start (or restart) the animation and begin auto-updating each frame"
-                },
-                {
-                    "name": "pause",
-                    "return": "Tween &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Pause the animation, keeping its current progress"
-                },
-                {
-                    "name": "resume",
-                    "return": "Tween &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Resume a paused animation"
-                },
-                {
-                    "name": "reset",
-                    "return": "Tween &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Stop the animation and reset progress to the start"
-                },
-                {
-                    "name": "finish",
-                    "return": "Tween &",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Jump immediately to the end value and fire the complete event"
-                },
-                {
-                    "name": "getValue",
-                    "return": "T",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the current eased value"
-                },
-                {
-                    "name": "getProgress",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return normalized progress through the current iteration (0.0-1.0)"
-                },
-                {
-                    "name": "getElapsed",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return elapsed time in seconds within the current iteration"
-                },
-                {
-                    "name": "getDuration",
-                    "return": "float",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the configured duration in seconds"
-                },
-                {
-                    "name": "isPlaying",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return true while the animation is actively playing"
-                },
-                {
-                    "name": "isComplete",
-                    "return": "bool",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return true once the animation (all loops) has finished"
-                },
-                {
-                    "name": "getStart",
-                    "return": "T",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the start value"
-                },
-                {
-                    "name": "getEnd",
-                    "return": "T",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return the end value"
-                },
-                {
-                    "name": "getLoopCount",
-                    "return": "int",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Return how many loop iterations have completed so far"
-                }
-            ]
-        },
-        {
-            "name": "VideoDeviceInfo",
-            "desc": "Information about an available camera device, returned by VideoGrabber::listDevices()",
-            "properties": [
-                {
-                    "name": "deviceId",
-                    "type": "int",
-                    "desc": "Numeric device ID (pass to setDeviceID); -1 if unknown"
-                },
-                {
-                    "name": "deviceName",
-                    "type": "string",
-                    "desc": "Human-readable device name"
-                },
-                {
-                    "name": "uniqueId",
-                    "type": "string",
-                    "desc": "Stable unique identifier for the device"
-                }
-            ]
-        },
-        {
-            "name": "VideoRecordSettings",
-            "desc": "Encoder settings passed to VideoWriter::open(), ScreenRecorder::start(), and startRecording()",
-            "properties": [
-                {
-                    "name": "codec",
-                    "type": "VideoCodec",
-                    "desc": "Output codec (default H264)"
-                },
-                {
-                    "name": "fps",
-                    "type": "float",
-                    "desc": "Capture/output frame rate. For ScreenRecorder this is the capture ceiling; for VideoWriter it is the exact output rate (default 60)"
-                },
-                {
-                    "name": "bitrate",
-                    "type": "int",
-                    "desc": "Target bits/sec for H.264/HEVC; 0 = auto. Ignored by ProRes"
-                },
-                {
-                    "name": "keyframeInterval",
-                    "type": "int",
-                    "desc": "Frames between keyframes; 0 = encoder default"
-                }
-            ]
-        },
-        {
-            "name": "Glyph",
-            "desc": "A bitmap glyph to register via registerGlyph(): a codepoint plus packed 1-bit pixel rows. The data pointer must outlive every drawBitmapString call",
-            "properties": [
-                {
-                    "name": "codepoint",
-                    "type": "uint32_t",
-                    "desc": "Unicode codepoint this glyph renders"
-                },
-                {
-                    "name": "data",
-                    "type": "const uint8_t *",
-                    "desc": "Packed bitmap rows (MSB first); must outlive all draw calls"
-                },
-                {
-                    "name": "width",
-                    "type": "Width",
-                    "desc": "Glyph width: Halfwidth (8x13) or Fullwidth (16x13)"
-                }
-            ]
-        },
-        {
-            "name": "PlacedGlyph",
-            "desc": "One laid-out glyph emitted by Font::forEachGlyph (nested as Font::PlacedGlyph). Carries the final codepoint and pen position so visitors can render quads, build vector paths, or hit-test independently of the layout pass",
-            "properties": [
-                {
-                    "name": "codepoint",
-                    "type": "uint32_t",
-                    "desc": "Final codepoint after vertical-form mapping"
-                },
-                {
-                    "name": "drawX",
-                    "type": "float",
-                    "desc": "Pen X position; the glyph's own xoffset is added on top"
-                },
-                {
-                    "name": "baselineY",
-                    "type": "float",
-                    "desc": "Baseline Y position; the glyph's own yoffset is added on top"
-                },
-                {
-                    "name": "rotationCw",
-                    "type": "float",
-                    "desc": "Clockwise rotation in radians: 0 (upright) or TAU/4 (90 degrees, vertical text)"
-                },
-                {
-                    "name": "pivotX",
-                    "type": "float",
-                    "desc": "Rotation center X (used only when rotationCw is non-zero)"
-                },
-                {
-                    "name": "pivotY",
-                    "type": "float",
-                    "desc": "Rotation center Y (used only when rotationCw is non-zero)"
-                },
-                {
-                    "name": "scaleX",
-                    "type": "float",
-                    "desc": "Horizontal scale (1.0 normally, less than 1 for TCY combine)"
-                }
-            ]
-        },
-        {
-            "name": "GlyphVisitor",
-            "desc": "Alias for function<void(const Font::PlacedGlyph&)> (nested as Font::GlyphVisitor). The per-glyph callback type accepted by Font::forEachGlyph"
-        },
-        {
-            "name": "StrokeMesh",
-            "desc": "Variable-width polyline stroke geometry with caps, joins and miter limit; build it from points or a Path, then update() and draw()",
-            "constructor": {
-                "signatures": [
-                    "",
-                    "const Path& polyline"
-                ]
-            },
-            "methods": [
-                {
-                    "name": "setWidth",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        "float w"
-                    ],
-                    "desc": "Set the stroke width"
-                },
-                {
-                    "name": "setColor",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        "const Color& c"
-                    ],
-                    "desc": "Set the stroke color"
-                },
-                {
-                    "name": "setCapType",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        "StrokeMesh::CapType type"
-                    ],
-                    "desc": "Set the line cap shape (StrokeMesh::CapType: Butt, Round, Square)"
-                },
-                {
-                    "name": "setJoinType",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        "StrokeMesh::JoinType type"
-                    ],
-                    "desc": "Set the line join shape (StrokeMesh::JoinType: Miter, Round, Bevel)"
-                },
-                {
-                    "name": "setMiterLimit",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        "float limit"
-                    ],
-                    "desc": "Set the miter limit for sharp corners"
-                },
-                {
-                    "name": "addVertex",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        "float x, float y, float z = 0",
-                        "const Vec2& v",
-                        "const Vec3& v"
-                    ],
-                    "desc": "Append a vertex to the stroke path"
-                },
-                {
-                    "name": "addVertexWithWidth",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        "float x, float y, float width",
-                        "const Vec3& p, float width"
-                    ],
-                    "desc": "Append a vertex with a per-vertex width"
-                },
-                {
-                    "name": "setWidths",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        "const vector<float>& w"
-                    ],
-                    "desc": "Set per-vertex widths from a list"
-                },
-                {
-                    "name": "setShape",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        "const Path& polyline"
-                    ],
-                    "desc": "Set the stroke shape from a Path"
-                },
-                {
-                    "name": "setClosed",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        "bool closed"
-                    ],
-                    "desc": "Set whether the stroke forms a closed loop"
-                },
-                {
-                    "name": "clear",
-                    "return": "StrokeMesh&",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Remove all vertices"
-                },
-                {
-                    "name": "update",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Rebuild the internal triangle mesh (call before draw after edits)"
-                },
-                {
-                    "name": "draw",
-                    "return": "void",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Draw the stroke mesh"
-                }
-            ]
-        }
-    ]
+// AUTO-GENERATED by TrussC/docs/scripts/emit-sketch-api.js — DO NOT EDIT.
+// Lua-flavored TrussSketch editor API data (autocomplete). Source:
+// docs/reference/reference-data.json + colors.json.
+const TrussSketchAPI = {
+ "categories": [
+  {
+   "name": "animation",
+   "functions": [
+    {
+     "name": "ease",
+     "snippet": "ease(${1:t}, ${2:type}, ${3:mode})",
+     "desc": "Apply easing to value (0-1)"
+    },
+    {
+     "name": "easeIn",
+     "snippet": "easeIn(${1:t}, ${2:type})",
+     "desc": "Apply ease-in to value (0-1)"
+    },
+    {
+     "name": "easeInOut",
+     "snippet": "easeInOut(${1:t}, ${2:type})",
+     "desc": "Apply ease-in-out to value (0-1)"
+    },
+    {
+     "name": "easeOut",
+     "snippet": "easeOut(${1:t}, ${2:type})",
+     "desc": "Apply ease-out to value (0-1)"
+    }
+   ]
+  },
+  {
+   "name": "audioengine",
+   "functions": [
+    {
+     "name": "getMicInput",
+     "snippet": "getMicInput()",
+     "desc": "Get the global MicInput singleton (microphone capture). Call start() on it to open the device."
+    },
+    {
+     "name": "initAudio",
+     "snippet": "initAudio()",
+     "desc": "Initialize the global AudioEngine. Called automatically by Sound::load() / play(), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener)."
+    },
+    {
+     "name": "shutdownAudio",
+     "snippet": "shutdownAudio()",
+     "desc": "Shut down the global AudioEngine and close the audio device. Usually unnecessary (runs at program exit)."
+    }
+   ]
+  },
+  {
+   "name": "file",
+   "functions": [
+    {
+     "name": "appendToFile",
+     "snippet": "appendToFile(${1:path}, ${2:content})",
+     "desc": "Append string to file"
+    },
+    {
+     "name": "createDirectory",
+     "snippet": "createDirectory(${1:path})",
+     "desc": "Create directory (and parents)"
+    },
+    {
+     "name": "directoryExists",
+     "snippet": "directoryExists(${1:path})",
+     "desc": "Check if directory exists"
+    },
+    {
+     "name": "fileExists",
+     "snippet": "fileExists(${1:path})",
+     "desc": "Check if file exists"
+    },
+    {
+     "name": "getAbsolutePath",
+     "snippet": "getAbsolutePath(${1:path})",
+     "desc": "Get absolute path"
+    },
+    {
+     "name": "getBaseName",
+     "snippet": "getBaseName(${1:path})",
+     "desc": "Get filename without extension"
+    },
+    {
+     "name": "getDataPath",
+     "snippet": "getDataPath(${1:filename})",
+     "desc": "Get full path relative to data directory"
+    },
+    {
+     "name": "getDataPathRoot",
+     "snippet": "getDataPathRoot()",
+     "desc": "Get the current data path root (with trailing slash)."
+    },
+    {
+     "name": "getExecutableDir",
+     "snippet": "getExecutableDir()",
+     "desc": "Get the directory containing the running executable (with trailing slash)."
+    },
+    {
+     "name": "getExecutablePath",
+     "snippet": "getExecutablePath()",
+     "desc": "Get the absolute path of the running executable."
+    },
+    {
+     "name": "getFileExtension",
+     "snippet": "getFileExtension(${1:path})",
+     "desc": "Get file extension without dot"
+    },
+    {
+     "name": "getFileName",
+     "snippet": "getFileName(${1:path})",
+     "desc": "Get filename from path"
+    },
+    {
+     "name": "getFileSize",
+     "snippet": "getFileSize(${1:path})",
+     "desc": "Get file size in bytes"
+    },
+    {
+     "name": "getParentDirectory",
+     "snippet": "getParentDirectory(${1:path})",
+     "desc": "Get parent directory"
+    },
+    {
+     "name": "joinPath",
+     "snippet": "joinPath(${1:dir}, ${2:file})",
+     "desc": "Join directory and filename"
+    },
+    {
+     "name": "listDirectory",
+     "snippet": "listDirectory(${1:path})",
+     "desc": "List files in directory"
+    },
+    {
+     "name": "loadJson",
+     "snippet": "loadJson(${1:path})",
+     "desc": "Load a JSON file and return it as a Json object. Relative paths are resolved via getDataPath; returns an empty Json on error."
+    },
+    {
+     "name": "loadTextFile",
+     "snippet": "loadTextFile(${1:path})",
+     "desc": "Load entire text file"
+    },
+    {
+     "name": "loadXml",
+     "snippet": "loadXml(${1:path})",
+     "desc": "Load an XML file and return it as an Xml object. Relative paths are resolved via getDataPath."
+    },
+    {
+     "name": "removeFile",
+     "snippet": "removeFile(${1:path})",
+     "desc": "Remove file"
+    },
+    {
+     "name": "saveJson",
+     "snippet": "saveJson(${1:j}, ${2:path})",
+     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath. indent sets the pretty-print width (negative for compact). Returns true on success."
+    },
+    {
+     "name": "saveTextFile",
+     "snippet": "saveTextFile(${1:path}, ${2:content})",
+     "desc": "Save string to text file"
+    },
+    {
+     "name": "setDataPathRoot",
+     "snippet": "setDataPathRoot(${1:path})",
+     "desc": "Set the root directory used to resolve relative data paths. A relative path is resolved against the executable directory; an absolute path (starting with /) is used as-is. A trailing slash is added automatically."
+    },
+    {
+     "name": "setDataPathToResources",
+     "snippet": "setDataPathToResources()",
+     "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms."
+    }
+   ]
+  },
+  {
+   "name": "font",
+   "functions": [
+    {
+     "name": "listSystemFonts",
+     "snippet": "listSystemFonts()",
+     "desc": "Enumerate names of all fonts known to the OS"
+    },
+    {
+     "name": "systemFontPath",
+     "snippet": "systemFontPath(${1:name})",
+     "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS uses CoreText; Linux/Windows currently stub."
+    }
+   ]
+  },
+  {
+   "name": "graphics_3d_setup",
+   "functions": [
+    {
+     "name": "getDefaultScreenFov",
+     "snippet": "getDefaultScreenFov()",
+     "desc": "Get current default screen FOV"
+    },
+    {
+     "name": "screenToWorld",
+     "snippet": "screenToWorld(${1:screenPos})",
+     "desc": "Convert screen coordinate to world coordinate on Z plane"
+    },
+    {
+     "name": "setDefaultScreenFov",
+     "snippet": "setDefaultScreenFov(${1:fovDeg})",
+     "desc": "Set default screen FOV (applied at frame start)"
+    },
+    {
+     "name": "setFarClip",
+     "snippet": "setFarClip(${1:farDist})",
+     "desc": "Set the default-screen far clipping plane (0 = auto-calculate)"
+    },
+    {
+     "name": "setNearClip",
+     "snippet": "setNearClip(${1:nearDist})",
+     "desc": "Set the default-screen near clipping plane (0 = auto-calculate)"
+    },
+    {
+     "name": "setupScreenFov",
+     "snippet": "setupScreenFov(${1:fovDeg})",
+     "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)"
+    },
+    {
+     "name": "setupScreenOrtho",
+     "snippet": "setupScreenOrtho()",
+     "desc": "Set up orthographic projection (2D mode)"
+    },
+    {
+     "name": "setupScreenPerspective",
+     "snippet": "setupScreenPerspective()",
+     "desc": "Set up perspective projection (oF-style default 3D)"
+    },
+    {
+     "name": "worldToScreen",
+     "snippet": "worldToScreen(${1:worldPos})",
+     "desc": "Convert a world coordinate to screen coordinate (x, y = screen pixels, z = depth 0-1)"
+    }
+   ]
+  },
+  {
+   "name": "graphics_advanced",
+   "functions": [
+    {
+     "name": "createBox",
+     "snippet": "createBox(${1:width}, ${2:height}, ${3:depth})",
+     "desc": "Create a box mesh"
+    },
+    {
+     "name": "createCapsule",
+     "snippet": "createCapsule(${1:radius}, ${2:cylinderHeight})",
+     "desc": "Create a capsule mesh (Y-up: cylinder capped by two hemispheres)"
+    },
+    {
+     "name": "createCone",
+     "snippet": "createCone(${1:radius}, ${2:height})",
+     "desc": "Create a cone mesh"
+    },
+    {
+     "name": "createCylinder",
+     "snippet": "createCylinder(${1:radius}, ${2:height})",
+     "desc": "Create a cylinder mesh"
+    },
+    {
+     "name": "createIcoSphere",
+     "snippet": "createIcoSphere(${1:radius})",
+     "desc": "Create an icosphere mesh (geodesic sphere with uniform triangles)"
+    },
+    {
+     "name": "createPlane",
+     "snippet": "createPlane(${1:width}, ${2:height})",
+     "desc": "Create a plane mesh (subdivided quad on the XY plane)"
+    },
+    {
+     "name": "createSphere",
+     "snippet": "createSphere(${1:radius})",
+     "desc": "Create a sphere mesh"
+    },
+    {
+     "name": "createTorus",
+     "snippet": "createTorus(${1:radius}, ${2:tubeRadius})",
+     "desc": "Create a torus (donut) mesh"
+    }
+   ]
+  },
+  {
+   "name": "graphics_backend",
+   "functions": [
+    {
+     "name": "cleanup",
+     "snippet": "cleanup()",
+     "desc": "Shut down sokol_gfx + sokol_gl (called for you by the app loop)"
+    },
+    {
+     "name": "setup",
+     "snippet": "setup()",
+     "desc": "Initialize sokol_gfx + sokol_gl (called for you by the app loop)"
+    }
+   ]
+  },
+  {
+   "name": "graphics_camera",
+   "functions": [
+    {
+     "name": "getCameraPosition",
+     "snippet": "getCameraPosition()",
+     "desc": "Current camera position used for specular/PBR view vector"
+    },
+    {
+     "name": "getFarClip",
+     "snippet": "getFarClip()",
+     "desc": "Get the far-clip override (0 = auto-calculate from the camera distance)."
+    },
+    {
+     "name": "getNearClip",
+     "snippet": "getNearClip()",
+     "desc": "Get the near-clip override (0 = auto-calculate from the camera distance)."
+    }
+   ]
+  },
+  {
+   "name": "graphics_color",
+   "functions": [
+    {
+     "name": "clear",
+     "snippet": "clear(${1:r}, ${2:g}, ${3:b})",
+     "desc": "Clear screen. No args = transparent black (0,0,0,0)"
+    },
+    {
+     "name": "linearToSrgb",
+     "snippet": "linearToSrgb(${1:x})",
+     "desc": "Convert a single linear RGB channel value to sRGB"
+    },
+    {
+     "name": "setColor",
+     "snippet": "setColor(${1:r}, ${2:g}, ${3:b})",
+     "desc": "Set drawing color (0.0-1.0)"
+    },
+    {
+     "name": "setColorHSB",
+     "snippet": "setColorHSB(${1:h}, ${2:s}, ${3:b})",
+     "desc": "Set color from HSB (H: 0-1)"
+    },
+    {
+     "name": "setColorOKLab",
+     "snippet": "setColorOKLab(${1:L}, ${2:a_lab}, ${3:b_lab})",
+     "desc": "Set color from OKLab"
+    },
+    {
+     "name": "setColorOKLCH",
+     "snippet": "setColorOKLCH(${1:L}, ${2:C}, ${3:H})",
+     "desc": "Set color from OKLCH"
+    },
+    {
+     "name": "srgbToLinear",
+     "snippet": "srgbToLinear(${1:x})",
+     "desc": "Convert a single sRGB channel value to linear RGB"
+    }
+   ]
+  },
+  {
+   "name": "graphics_lighting",
+   "functions": [
+    {
+     "name": "addLight",
+     "snippet": "addLight(${1:light})",
+     "desc": "Add a light to the scene"
+    },
+    {
+     "name": "beginShadowPass",
+     "snippet": "beginShadowPass(${1:light})",
+     "desc": "Begin shadow depth pass from the light's point of view"
+    },
+    {
+     "name": "calculateLighting",
+     "snippet": "calculateLighting(${1:worldPos}, ${2:worldNormal}, ${3:material})",
+     "desc": "CPU-side lighting result for a world position and normal, summing all active lights with the given material"
+    },
+    {
+     "name": "clearEnvironment",
+     "snippet": "clearEnvironment()",
+     "desc": "Clear IBL environment"
+    },
+    {
+     "name": "clearLights",
+     "snippet": "clearLights()",
+     "desc": "Remove all lights from the scene"
+    },
+    {
+     "name": "clearMaterial",
+     "snippet": "clearMaterial()",
+     "desc": "Clear material (return to default rendering)"
+    },
+    {
+     "name": "endShadowPass",
+     "snippet": "endShadowPass()",
+     "desc": "End shadow depth pass"
+    },
+    {
+     "name": "getEnvironment",
+     "snippet": "getEnvironment()",
+     "desc": "Get the current environment (IBL/skybox), or nullptr if none is set"
+    },
+    {
+     "name": "getNumLights",
+     "snippet": "getNumLights()",
+     "desc": "Number of currently active lights"
+    },
+    {
+     "name": "removeLight",
+     "snippet": "removeLight(${1:light})",
+     "desc": "Remove a light from the scene"
+    },
+    {
+     "name": "setCameraPosition",
+     "snippet": "setCameraPosition(${1:pos})",
+     "desc": "Set camera position for specular calculation"
+    },
+    {
+     "name": "setEnvironment",
+     "snippet": "setEnvironment(${1:env})",
+     "desc": "Set IBL environment for PBR ambient lighting"
+    },
+    {
+     "name": "setMaterial",
+     "snippet": "setMaterial(${1:material})",
+     "desc": "Set material for subsequent mesh draws (activates PBR)"
+    },
+    {
+     "name": "shadowDraw",
+     "snippet": "shadowDraw(${1:mesh})",
+     "desc": "Draw a mesh into the shadow depth pass (depth only)"
+    }
+   ]
+  },
+  {
+   "name": "graphics_shader",
+   "functions": [
+    {
+     "name": "popShader",
+     "snippet": "popShader()",
+     "desc": "Pop shader from stack"
+    },
+    {
+     "name": "pushShader",
+     "snippet": "pushShader(${1:shader})",
+     "desc": "Push shader to stack (subsequent draws use this shader)"
+    }
+   ]
+  },
+  {
+   "name": "graphics_shapes",
+   "functions": [
+    {
+     "name": "appendArc",
+     "snippet": "appendArc(${1:cx}, ${2:cy}, ${3:radius}, ${4:angleBegin}, ${5:angleEnd})",
+     "desc": "Append arc vertices to the current shape (use between beginShape/endShape)"
+    },
+    {
+     "name": "appendCurve",
+     "snippet": "appendCurve(${1:points})",
+     "desc": "Append Catmull-Rom curve vertices to the current shape (use between beginShape/endShape; needs >=4 points, closed=true wraps around)"
+    },
+    {
+     "name": "beginLines",
+     "snippet": "beginLines()",
+     "desc": "Begin batch line drawing. Add vertex pairs with vertex(), then call endLines(). Each pair of vertices draws one independent line segment. Use setColor() between vertices for per-line colors."
+    },
+    {
+     "name": "beginShape",
+     "snippet": "beginShape()",
+     "desc": "Begin drawing a shape"
+    },
+    {
+     "name": "beginStroke",
+     "snippet": "beginStroke()",
+     "desc": "Begin drawing a stroke (uses StrokeMesh internally)"
+    },
+    {
+     "name": "drawArc",
+     "snippet": "drawArc(${1:center}, ${2:radius}, ${3:angleBegin}, ${4:angleEnd})",
+     "desc": "Draw arc (partial circle, angles in radians)"
+    },
+    {
+     "name": "drawBezier",
+     "snippet": "drawBezier(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})",
+     "desc": "Draw bezier curve (cubic with 4 points, quadratic with 3, or N-th order via vector)"
+    },
+    {
+     "name": "drawBitmapString",
+     "snippet": "drawBitmapString(${1:text}, ${2:pos})",
+     "desc": "Draw text. The Vec3 overloads project through the current camera context — a screen-aligned 3D label; z=0 on the default screen matches plain 2D; behind-camera draws nothing; screenFixed picks fixed-pixel vs perspective size"
+    },
+    {
+     "name": "drawBitmapStringHighlight",
+     "snippet": "drawBitmapStringHighlight(${1:text}, ${2:x}, ${3:y})",
+     "desc": "Draw text with background highlight"
+    },
+    {
+     "name": "drawBox",
+     "snippet": "drawBox(${1:w}, ${2:h}, ${3:d})",
+     "desc": "Draw 3D box (respects fill/noFill)"
+    },
+    {
+     "name": "drawCircle",
+     "snippet": "drawCircle(${1:center}, ${2:radius})",
+     "desc": "Draw circle"
+    },
+    {
+     "name": "drawCone",
+     "snippet": "drawCone(${1:radius}, ${2:height})",
+     "desc": "Draw 3D cone (respects fill/noFill)"
+    },
+    {
+     "name": "drawCurve",
+     "snippet": "drawCurve(${1:p0}, ${2:p1}, ${3:p2}, ${4:p3})",
+     "desc": "Draw Catmull-Rom curve (4 control points draw p1->p2; vector chains segments passing through interior points; closed=true wraps around)"
+    },
+    {
+     "name": "drawEllipse",
+     "snippet": "drawEllipse(${1:center}, ${2:radii})",
+     "desc": "Draw ellipse"
+    },
+    {
+     "name": "drawLine",
+     "snippet": "drawLine(${1:p1}, ${2:p2})",
+     "desc": "Draw line (2D or 3D)"
+    },
+    {
+     "name": "drawPoint",
+     "snippet": "drawPoint(${1:pos})",
+     "desc": "Draw a single point"
+    },
+    {
+     "name": "drawRect",
+     "snippet": "drawRect(${1:pos}, ${2:size})",
+     "desc": "Draw rectangle"
+    },
+    {
+     "name": "drawRectRounded",
+     "snippet": "drawRectRounded(${1:pos}, ${2:size}, ${3:radius})",
+     "desc": "Draw rounded rectangle (circular arc corners)"
+    },
+    {
+     "name": "drawRectSquircle",
+     "snippet": "drawRectSquircle(${1:pos}, ${2:size}, ${3:radius})",
+     "desc": "Draw squircle rectangle (curvature-continuous corners, iOS-style)"
+    },
+    {
+     "name": "drawSphere",
+     "snippet": "drawSphere(${1:radius})",
+     "desc": "Draw 3D sphere (respects fill/noFill)"
+    },
+    {
+     "name": "drawStroke",
+     "snippet": "drawStroke(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
+     "desc": "Draw a single stroke segment (thick line with cap/join)"
+    },
+    {
+     "name": "drawTriangle",
+     "snippet": "drawTriangle(${1:p1}, ${2:p2}, ${3:p3})",
+     "desc": "Draw triangle"
+    },
+    {
+     "name": "endLines",
+     "snippet": "endLines()",
+     "desc": "End batch line drawing and render all accumulated line segments"
+    },
+    {
+     "name": "endShape",
+     "snippet": "endShape()",
+     "desc": "End drawing a shape"
+    },
+    {
+     "name": "endStroke",
+     "snippet": "endStroke()",
+     "desc": "End drawing a stroke"
+    },
+    {
+     "name": "getBitmapFontHeight",
+     "snippet": "getBitmapFontHeight()",
+     "desc": "Get bitmap font height"
+    },
+    {
+     "name": "getBitmapLineHeight",
+     "snippet": "getBitmapLineHeight()",
+     "desc": "Get line height for bitmap string newlines"
+    },
+    {
+     "name": "getBitmapStringBBox",
+     "snippet": "getBitmapStringBBox(${1:text})",
+     "desc": "Get text bounding box"
+    },
+    {
+     "name": "getBitmapStringHeight",
+     "snippet": "getBitmapStringHeight(${1:text})",
+     "desc": "Get text height"
+    },
+    {
+     "name": "getBitmapStringWidth",
+     "snippet": "getBitmapStringWidth(${1:text})",
+     "desc": "Get text width"
+    },
+    {
+     "name": "getTextAlignH",
+     "snippet": "getTextAlignH()",
+     "desc": "Get horizontal text alignment"
+    },
+    {
+     "name": "getTextAlignV",
+     "snippet": "getTextAlignV()",
+     "desc": "Get vertical text alignment"
+    },
+    {
+     "name": "setBitmapLineHeight",
+     "snippet": "setBitmapLineHeight(${1:h})",
+     "desc": "Set line height for bitmap string newlines (default: 16)"
+    },
+    {
+     "name": "setFps",
+     "snippet": "setFps(${1:fps})",
+     "desc": "Set target frame rate (VSYNC = -1.0)"
+    },
+    {
+     "name": "setTextAlign",
+     "snippet": "setTextAlign(${1:h}, ${2:v})",
+     "desc": "Set text alignment"
+    },
+    {
+     "name": "vertex",
+     "snippet": "vertex(${1:x}, ${2:y}, ${3:z})",
+     "desc": "Add a vertex"
+    }
+   ]
+  },
+  {
+   "name": "graphics_style",
+   "functions": [
+    {
+     "name": "fill",
+     "snippet": "fill()",
+     "desc": "Enable fill mode (shapes are solid, no outline)"
+    },
+    {
+     "name": "getBlendMode",
+     "snippet": "getBlendMode()",
+     "desc": "Get current blend mode"
+    },
+    {
+     "name": "getColor",
+     "snippet": "getColor()",
+     "desc": "Get current fill color"
+    },
+    {
+     "name": "getCurveMode",
+     "snippet": "getCurveMode()",
+     "desc": "Current curve tessellation mode (fixed segment count vs. adaptive tolerance)"
+    },
+    {
+     "name": "getCurveResolution",
+     "snippet": "getCurveResolution()",
+     "desc": "Get current curve resolution"
+    },
+    {
+     "name": "getCurveTolerance",
+     "snippet": "getCurveTolerance()",
+     "desc": "Get current curve tessellation tolerance (in pixels)"
+    },
+    {
+     "name": "getPointSize",
+     "snippet": "getPointSize()",
+     "desc": "Get the current point size (logical px)."
+    },
+    {
+     "name": "getPointStyle",
+     "snippet": "getPointStyle()",
+     "desc": "Get the current point shape (PointStyle)."
+    },
+    {
+     "name": "getStrokeCap",
+     "snippet": "getStrokeCap()",
+     "desc": "Get current stroke cap style"
+    },
+    {
+     "name": "getStrokeJoin",
+     "snippet": "getStrokeJoin()",
+     "desc": "Get current stroke join style"
+    },
+    {
+     "name": "getStrokeWeight",
+     "snippet": "getStrokeWeight()",
+     "desc": "Get current stroke width"
+    },
+    {
+     "name": "isFillEnabled",
+     "snippet": "isFillEnabled()",
+     "desc": "Check if fill mode is enabled"
+    },
+    {
+     "name": "isStrokeEnabled",
+     "snippet": "isStrokeEnabled()",
+     "desc": "Check if stroke mode is enabled"
+    },
+    {
+     "name": "noFill",
+     "snippet": "noFill()",
+     "desc": "Enable stroke mode (shapes show outline only)"
+    },
+    {
+     "name": "popScissor",
+     "snippet": "popScissor()",
+     "desc": "Pop scissor clipping rectangle from stack"
+    },
+    {
+     "name": "popStyle",
+     "snippet": "popStyle()",
+     "desc": "Pop style from stack, restoring previous state"
+    },
+    {
+     "name": "pushScissor",
+     "snippet": "pushScissor(${1:x}, ${2:y}, ${3:w}, ${4:h})",
+     "desc": "Push scissor clipping rectangle onto stack"
+    },
+    {
+     "name": "pushStyle",
+     "snippet": "pushStyle()",
+     "desc": "Push current style (color, fill, stroke, blend) onto stack"
+    },
+    {
+     "name": "resetBlendMode",
+     "snippet": "resetBlendMode()",
+     "desc": "Reset blend mode to Alpha (default)"
+    },
+    {
+     "name": "resetScissor",
+     "snippet": "resetScissor()",
+     "desc": "Reset (disable) scissor clipping"
+    },
+    {
+     "name": "resetStyle",
+     "snippet": "resetStyle()",
+     "desc": "Reset style to default values (white color, fill enabled, stroke disabled)"
+    },
+    {
+     "name": "setBlendMode",
+     "snippet": "setBlendMode(${1:mode})",
+     "desc": "Set blend mode. BlendMode::Alpha (default), Add, Multiply, Screen, Subtract, Disabled"
+    },
+    {
+     "name": "setCurveResolution",
+     "snippet": "setCurveResolution(${1:n})",
+     "desc": "Set fixed curve segment count (switches off adaptive tolerance mode)"
+    },
+    {
+     "name": "setCurveTolerance",
+     "snippet": "setCurveTolerance(${1:pixels})",
+     "desc": "Set adaptive curve tessellation tolerance in pixels (smaller = smoother, scale-aware)"
+    },
+    {
+     "name": "setPointSize",
+     "snippet": "setPointSize(${1:px})",
+     "desc": "Set the point size in logical pixels (Square/Round point styles; Pixel is always 1px)."
+    },
+    {
+     "name": "setPointStyle",
+     "snippet": "setPointStyle(${1:s})",
+     "desc": "Set the point shape: PointStyle::Square, Round or Pixel."
+    },
+    {
+     "name": "setScissor",
+     "snippet": "setScissor(${1:x}, ${2:y}, ${3:w}, ${4:h})",
+     "desc": "Set scissor clipping rectangle. Also available via RectNode::setClipping(true)"
+    },
+    {
+     "name": "setStrokeCap",
+     "snippet": "setStrokeCap(${1:cap})",
+     "desc": "Set stroke cap style (Butt, Round, Square)"
+    },
+    {
+     "name": "setStrokeJoin",
+     "snippet": "setStrokeJoin(${1:join})",
+     "desc": "Set stroke join style (Miter, Round, Bevel)"
+    },
+    {
+     "name": "setStrokeWeight",
+     "snippet": "setStrokeWeight(${1:weight})",
+     "desc": "Set stroke width"
+    }
+   ]
+  },
+  {
+   "name": "graphics_texture",
+   "functions": [
+    {
+     "name": "bytesPerPixel",
+     "snippet": "bytesPerPixel(${1:fmt})",
+     "desc": "Bytes per pixel for a TextureFormat"
+    },
+    {
+     "name": "channelCount",
+     "snippet": "channelCount(${1:fmt})",
+     "desc": "Number of color channels for a TextureFormat (1, 2, or 4)"
+    },
+    {
+     "name": "isFloatFormat",
+     "snippet": "isFloatFormat(${1:fmt})",
+     "desc": "Whether a TextureFormat uses floating-point components"
+    }
+   ]
+  },
+  {
+   "name": "math_general",
+   "functions": [
+    {
+     "name": "abs",
+     "snippet": "abs(${1:x})",
+     "desc": "Absolute value"
+    },
+    {
+     "name": "angleDifference",
+     "snippet": "angleDifference(${1:angle1}, ${2:angle2})",
+     "desc": "Shortest angle difference in radians [-TAU/2, TAU/2]"
+    },
+    {
+     "name": "angleDifferenceDeg",
+     "snippet": "angleDifferenceDeg(${1:deg1}, ${2:deg2})",
+     "desc": "Shortest angle difference in degrees [-180, 180]"
+    },
+    {
+     "name": "binToFrequency",
+     "snippet": "binToFrequency(${1:bin}, ${2:fftSize}, ${3:sampleRate})",
+     "desc": "Convert an FFT bin index to its frequency in Hz"
+    },
+    {
+     "name": "ceil",
+     "snippet": "ceil(${1:x})",
+     "desc": "Round up"
+    },
+    {
+     "name": "exp",
+     "snippet": "exp(${1:x})",
+     "desc": "Exponential (e^x)"
+    },
+    {
+     "name": "fftMagnitude",
+     "snippet": "fftMagnitude(${1:spectrum})",
+     "desc": "Return the magnitude (amplitude) of each bin in a spectrum"
+    },
+    {
+     "name": "fftMagnitudeDb",
+     "snippet": "fftMagnitudeDb(${1:spectrum}, ${2:minDb})",
+     "desc": "Return the magnitude of each bin in decibels, clamped to minDb"
+    },
+    {
+     "name": "fftPhase",
+     "snippet": "fftPhase(${1:spectrum})",
+     "desc": "Return the phase angle (radians) of each bin in a spectrum"
+    },
+    {
+     "name": "fftPower",
+     "snippet": "fftPower(${1:spectrum})",
+     "desc": "Return the power spectrum (magnitude squared) of each bin"
+    },
+    {
+     "name": "fftReal",
+     "snippet": "fftReal(${1:signal})",
+     "desc": "Compute the FFT of a real-valued signal, optionally applying a window function first"
+    },
+    {
+     "name": "floor",
+     "snippet": "floor(${1:x})",
+     "desc": "Round down"
+    },
+    {
+     "name": "fmod",
+     "snippet": "fmod(${1:x}, ${2:y})",
+     "desc": "Floating-point modulo"
+    },
+    {
+     "name": "fract",
+     "snippet": "fract(${1:value})",
+     "desc": "Fractional part"
+    },
+    {
+     "name": "frequencyToBin",
+     "snippet": "frequencyToBin(${1:freq}, ${2:fftSize}, ${3:sampleRate})",
+     "desc": "Convert a frequency in Hz to the nearest FFT bin index"
+    },
+    {
+     "name": "isPowerOfTwo",
+     "snippet": "isPowerOfTwo(${1:n})",
+     "desc": "Return true if n is a positive power of two"
+    },
+    {
+     "name": "log",
+     "snippet": "log(${1:x})",
+     "desc": "Natural logarithm"
+    },
+    {
+     "name": "max",
+     "snippet": "max(${1:a}, ${2:b})",
+     "desc": "Maximum"
+    },
+    {
+     "name": "min",
+     "snippet": "min(${1:a}, ${2:b})",
+     "desc": "Minimum"
+    },
+    {
+     "name": "nextPowerOfTwo",
+     "snippet": "nextPowerOfTwo(${1:n})",
+     "desc": "Return the smallest power of two greater than or equal to n"
+    },
+    {
+     "name": "pow",
+     "snippet": "pow(${1:x}, ${2:y})",
+     "desc": "Power (x^y)"
+    },
+    {
+     "name": "round",
+     "snippet": "round(${1:x})",
+     "desc": "Round to nearest"
+    },
+    {
+     "name": "sign",
+     "snippet": "sign(${1:value})",
+     "desc": "Sign (-1, 0, 1)"
+    },
+    {
+     "name": "sq",
+     "snippet": "sq(${1:value})",
+     "desc": "Square (x*x)"
+    },
+    {
+     "name": "sqrt",
+     "snippet": "sqrt(${1:x})",
+     "desc": "Square root"
+    },
+    {
+     "name": "toComplex",
+     "snippet": "toComplex(${1:real})",
+     "desc": "Convert a real-valued signal into a complex array with zero imaginary parts"
+    },
+    {
+     "name": "windowFunction",
+     "snippet": "windowFunction(${1:type}, ${2:i}, ${3:n})",
+     "desc": "Return the window coefficient for sample i of n for the given window type"
+    },
+    {
+     "name": "wrap",
+     "snippet": "wrap(${1:value}, ${2:min}, ${3:max})",
+     "desc": "Wrap value within range [min, max)"
+    }
+   ]
+  },
+  {
+   "name": "math_geometry",
+   "functions": [
+    {
+     "name": "dist",
+     "snippet": "dist(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
+     "desc": "Distance between points"
+    },
+    {
+     "name": "distSquared",
+     "snippet": "distSquared(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
+     "desc": "Squared distance"
+    }
+   ]
+  },
+  {
+   "name": "math_interpolation",
+   "functions": [
+    {
+     "name": "clamp",
+     "snippet": "clamp(${1:value}, ${2:min}, ${3:max})",
+     "desc": "Clamp value to range"
+    },
+    {
+     "name": "lerp",
+     "snippet": "lerp(${1:a}, ${2:b}, ${3:t})",
+     "desc": "Linear interpolation"
+    },
+    {
+     "name": "remap",
+     "snippet": "remap(${1:value}, ${2:inMin}, ${3:inMax}, ${4:outMin}, ${5:outMax})",
+     "desc": "Remap value from one range to another"
+    }
+   ]
+  },
+  {
+   "name": "math_random",
+   "functions": [
+    {
+     "name": "fbm",
+     "snippet": "fbm(${1:x}, ${2:y})",
+     "desc": "Fractal Brownian Motion noise"
+    },
+    {
+     "name": "noise",
+     "snippet": "noise(${1:x})",
+     "desc": "Perlin noise"
+    },
+    {
+     "name": "random",
+     "snippet": "random()",
+     "desc": "Random number"
+    },
+    {
+     "name": "randomInt",
+     "snippet": "randomInt(${1:max})",
+     "desc": "Random integer. randomInt(max) returns 0 to max-1 (max exclusive); randomInt(min, max) returns min to max (inclusive)."
+    },
+    {
+     "name": "randomSeed",
+     "snippet": "randomSeed(${1:seed})",
+     "desc": "Set random seed"
+    },
+    {
+     "name": "signedNoise",
+     "snippet": "signedNoise(${1:x})",
+     "desc": "Perlin noise (-1.0 to 1.0)"
+    }
+   ]
+  },
+  {
+   "name": "math_trig",
+   "functions": [
+    {
+     "name": "acos",
+     "snippet": "acos(${1:x})",
+     "desc": "Arc cosine"
+    },
+    {
+     "name": "asin",
+     "snippet": "asin(${1:x})",
+     "desc": "Arc sine"
+    },
+    {
+     "name": "atan",
+     "snippet": "atan(${1:x})",
+     "desc": "Arc tangent"
+    },
+    {
+     "name": "atan2",
+     "snippet": "atan2(${1:y}, ${2:x})",
+     "desc": "Arc tangent of y/x"
+    },
+    {
+     "name": "cos",
+     "snippet": "cos(${1:x})",
+     "desc": "Cosine"
+    },
+    {
+     "name": "deg2rad",
+     "snippet": "deg2rad(${1:deg})",
+     "desc": "Degrees to radians"
+    },
+    {
+     "name": "rad2deg",
+     "snippet": "rad2deg(${1:rad})",
+     "desc": "Radians to degrees"
+    },
+    {
+     "name": "sin",
+     "snippet": "sin(${1:x})",
+     "desc": "Sine"
+    },
+    {
+     "name": "tan",
+     "snippet": "tan(${1:x})",
+     "desc": "Tangent"
+    }
+   ]
+  },
+  {
+   "name": "memory",
+   "functions": [
+    {
+     "name": "getFboCount",
+     "snippet": "getFboCount()",
+     "desc": "Get number of active FBO objects"
+    },
+    {
+     "name": "getMemoryUsage",
+     "snippet": "getMemoryUsage()",
+     "desc": "Get process memory usage in bytes (platform-specific)"
+    },
+    {
+     "name": "getNodeCount",
+     "snippet": "getNodeCount()",
+     "desc": "Get number of active Node objects in scene graph"
+    },
+    {
+     "name": "getSokolMemoryAllocs",
+     "snippet": "getSokolMemoryAllocs()",
+     "desc": "Number of active allocations in sokol libraries"
+    },
+    {
+     "name": "getSokolMemoryBytes",
+     "snippet": "getSokolMemoryBytes()",
+     "desc": "Total bytes allocated by sokol libraries"
+    },
+    {
+     "name": "getTextureCount",
+     "snippet": "getTextureCount()",
+     "desc": "Get number of active Texture objects"
+    },
+    {
+     "name": "releaseSglBuffers",
+     "snippet": "releaseSglBuffers()",
+     "desc": "Release sokol_gl vertex/command buffers (auto re-allocated on next draw)"
+    }
+   ]
+  },
+  {
+   "name": "network",
+   "functions": [
+    {
+     "name": "getLocalIp",
+     "snippet": "getLocalIp()",
+     "desc": "The most likely LAN address (skips loopback/down, IPv4 preferred). \"\" if none\n"
+    },
+    {
+     "name": "getLocalIps",
+     "snippet": "getLocalIps()",
+     "desc": "Every non-loopback address (one per interface entry)"
+    },
+    {
+     "name": "getOui",
+     "snippet": "getOui(${1:mac})",
+     "desc": "The OUI (first 3 bytes) of a MAC, uppercase \"A4:83:E7\". \"\" if unparseable\n"
+    },
+    {
+     "name": "isLinkLocal",
+     "snippet": "isLinkLocal(${1:addr})",
+     "desc": "True if addr is link-local (169.254/16 or fe80::/10)"
+    },
+    {
+     "name": "isLocallyAdministered",
+     "snippet": "isLocallyAdministered(${1:mac})",
+     "desc": "True if the MAC's locally-administered bit is set (randomized/virtual MAC)"
+    },
+    {
+     "name": "isLoopback",
+     "snippet": "isLoopback(${1:addr})",
+     "desc": "True if addr is a loopback address (127.0.0.0/8 or ::1)"
+    },
+    {
+     "name": "isPrivate",
+     "snippet": "isPrivate(${1:addr})",
+     "desc": "True if addr is a private IPv4 (10/8, 172.16/12, 192.168/16)"
+    },
+    {
+     "name": "listNetworkInterfaces",
+     "snippet": "listNetworkInterfaces()",
+     "desc": "List all network interface address entries (IPv4/IPv6, loopback, up or down)"
+    },
+    {
+     "name": "printNetworkInterfaces",
+     "snippet": "printNetworkInterfaces()",
+     "desc": "Log the interface list (one line per entry)"
+    },
+    {
+     "name": "sameSubnet",
+     "snippet": "sameSubnet(${1:a}, ${2:b}, ${3:netmask})",
+     "desc": "True if IPv4 a and b are on the same subnet under netmask"
+    }
+   ]
+  },
+  {
+   "name": "other",
+   "functions": [
+    {
+     "name": "atanh",
+     "snippet": "atanh(${1:x})",
+     "desc": "Inverse hyperbolic tangent"
+    },
+    {
+     "name": "exp2",
+     "snippet": "exp2(${1:x})",
+     "desc": "Base-2 exponential (2^x)"
+    },
+    {
+     "name": "log10",
+     "snippet": "log10(${1:x})",
+     "desc": "Base-10 (common) logarithm"
+    },
+    {
+     "name": "log2",
+     "snippet": "log2(${1:x})",
+     "desc": "Base-2 logarithm"
+    },
+    {
+     "name": "operator*",
+     "snippet": "operator*(${1:s}, ${2:v})",
+     "desc": "Component-wise multiplication"
+    },
+    {
+     "name": "operator&",
+     "snippet": "operator&(${1:a}, ${2:b})",
+     "desc": ""
+    },
+    {
+     "name": "operator|",
+     "snippet": "operator|(${1:a}, ${2:b})",
+     "desc": ""
+    },
+    {
+     "name": "remainder",
+     "snippet": "remainder(${1:x}, ${2:y})",
+     "desc": "IEEE floating-point remainder of x/y"
+    },
+    {
+     "name": "tanh",
+     "snippet": "tanh(${1:x})",
+     "desc": "Hyperbolic tangent"
+    },
+    {
+     "name": "trunc",
+     "snippet": "trunc(${1:x})",
+     "desc": "Truncate toward zero (drop the fractional part)"
+    }
+   ]
+  },
+  {
+   "name": "platform",
+   "functions": [
+    {
+     "name": "captureWindow",
+     "snippet": "captureWindow(${1:outPixels})",
+     "desc": "Capture the current window contents into a Pixels object. Returns true on success"
+    },
+    {
+     "name": "getAccelerometer",
+     "snippet": "getAccelerometer()",
+     "desc": "Get accelerometer reading in g-force (1.0 = Earth gravity). Mobile only; desktop returns zero"
+    },
+    {
+     "name": "getBatteryLevel",
+     "snippet": "getBatteryLevel()",
+     "desc": "Get battery charge level (0.0-1.0), or -1 if unavailable (e.g. desktop without a battery)"
+    },
+    {
+     "name": "getCompassHeading",
+     "snippet": "getCompassHeading()",
+     "desc": "Get compass heading in radians (0 = north, clockwise). Mobile only"
+    },
+    {
+     "name": "getDeviceOrientation",
+     "snippet": "getDeviceOrientation()",
+     "desc": "Get the fused device attitude (accelerometer + gyroscope + magnetometer) as a quaternion. Mobile only"
+    },
+    {
+     "name": "getGyroscope",
+     "snippet": "getGyroscope()",
+     "desc": "Get gyroscope angular velocity in rad/s. Mobile only; desktop returns zero"
+    },
+    {
+     "name": "getImmersiveMode",
+     "snippet": "getImmersiveMode()",
+     "desc": "Return whether immersive mode is currently enabled"
+    },
+    {
+     "name": "getLocation",
+     "snippet": "getLocation()",
+     "desc": "Get the most recent GPS / WiFi location fix. Starts location updates on the first call"
+    },
+    {
+     "name": "getSystemBrightness",
+     "snippet": "getSystemBrightness()",
+     "desc": "Get screen brightness (0.0-1.0). iOS: linear. Android: gamma-corrected (perceptual). Desktop: returns -1 (not supported)"
+    },
+    {
+     "name": "getSystemVolume",
+     "snippet": "getSystemVolume()",
+     "desc": "Get system output volume (0.0-1.0)"
+    },
+    {
+     "name": "getThermalState",
+     "snippet": "getThermalState()",
+     "desc": "Get the coarse-grained device thermal state (Nominal / Fair / Serious / Critical)"
+    },
+    {
+     "name": "getThermalTemperature",
+     "snippet": "getThermalTemperature()",
+     "desc": "Get device temperature in Celsius, or -1 if unavailable"
+    },
+    {
+     "name": "isBatteryCharging",
+     "snippet": "isBatteryCharging()",
+     "desc": "Return true if the battery is currently charging"
+    },
+    {
+     "name": "isProximityClose",
+     "snippet": "isProximityClose()",
+     "desc": "Return true when the proximity sensor detects a nearby object (e.g. phone held to the ear)"
+    },
+    {
+     "name": "setImmersiveMode",
+     "snippet": "setImmersiveMode(${1:enabled})",
+     "desc": "Hide system UI for immersive fullscreen. Android: sticky immersive (status + navigation bars). iOS: hides status bar + home indicator. Desktop: no-op"
+    },
+    {
+     "name": "setSystemBrightness",
+     "snippet": "setSystemBrightness(${1:brightness})",
+     "desc": "Set screen brightness (0.0-1.0). Meaning of the value differs by platform (iOS linear, Android perceptual). Desktop: not supported"
+    },
+    {
+     "name": "setSystemVolume",
+     "snippet": "setSystemVolume(${1:volume})",
+     "desc": "Set system output volume (0.0-1.0). iOS: not supported by the OS (logs a warning)"
+    }
+   ]
+  },
+  {
+   "name": "scene_graph",
+   "functions": [
+    {
+     "name": "getRootNode",
+     "snippet": "getRootNode()",
+     "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around."
+    },
+    {
+     "name": "getSelectedNode",
+     "snippet": "getSelectedNode()",
+     "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none). A tool such as an inspector can read it and drive it via setSelectedNode()."
+    }
+   ]
+  },
+  {
+   "name": "sound",
+   "functions": [
+    {
+     "name": "getBeepVolume",
+     "snippet": "getBeepVolume()",
+     "desc": "Get the current beep() output volume (0.0-1.0)."
+    },
+    {
+     "name": "setBeepVolume",
+     "snippet": "setBeepVolume(${1:vol})",
+     "desc": "Set the output volume for beep() (0.0-1.0)."
+    }
+   ]
+  },
+  {
+   "name": "time_current",
+   "functions": [
+    {
+     "name": "getDay",
+     "snippet": "getDay()",
+     "desc": "Current day (1-31)"
+    },
+    {
+     "name": "getHours",
+     "snippet": "getHours()",
+     "desc": "Current hours (0-23)"
+    },
+    {
+     "name": "getMinutes",
+     "snippet": "getMinutes()",
+     "desc": "Current minutes (0-59)"
+    },
+    {
+     "name": "getMonth",
+     "snippet": "getMonth()",
+     "desc": "Current month (1-12)"
+    },
+    {
+     "name": "getSeconds",
+     "snippet": "getSeconds()",
+     "desc": "Current seconds (0-59)"
+    },
+    {
+     "name": "getWeekday",
+     "snippet": "getWeekday()",
+     "desc": "Weekday (0=Sun, 6=Sat)"
+    },
+    {
+     "name": "getYear",
+     "snippet": "getYear()",
+     "desc": "Current year"
+    }
+   ]
+  },
+  {
+   "name": "time_elapsed",
+   "functions": [
+    {
+     "name": "getElapsedTime",
+     "snippet": "getElapsedTime()",
+     "desc": "Elapsed seconds (double) since program start. A separate clock from getElapsedTimef(); it is NOT reset by resetElapsedTimeCounter()."
+    },
+    {
+     "name": "getElapsedTimef",
+     "snippet": "getElapsedTimef()",
+     "desc": "Elapsed seconds (float)"
+    },
+    {
+     "name": "getElapsedTimeMicros",
+     "snippet": "getElapsedTimeMicros()",
+     "desc": "Elapsed microseconds (int64)"
+    },
+    {
+     "name": "getElapsedTimeMillis",
+     "snippet": "getElapsedTimeMillis()",
+     "desc": "Elapsed milliseconds (int64)"
+    },
+    {
+     "name": "resetElapsedTimeCounter",
+     "snippet": "resetElapsedTimeCounter()",
+     "desc": "Reset elapsed time"
+    }
+   ]
+  },
+  {
+   "name": "time_frame",
+   "functions": [
+    {
+     "name": "getDeltaTime",
+     "snippet": "getDeltaTime()",
+     "desc": "Seconds since last frame"
+    },
+    {
+     "name": "getDrawCount",
+     "snippet": "getDrawCount()",
+     "desc": "Get the number of draw() calls since the app started"
+    },
+    {
+     "name": "getFps",
+     "snippet": "getFps()",
+     "desc": "Get current FPS (alias for getFrameRate)"
+    },
+    {
+     "name": "getFpsSettings",
+     "snippet": "getFpsSettings()",
+     "desc": "Get the current FPS configuration (update/draw target rates, actual VSync rate, sync flag)"
+    },
+    {
+     "name": "getFrameCount",
+     "snippet": "getFrameCount()",
+     "desc": "Total frames rendered"
+    },
+    {
+     "name": "getFrameRate",
+     "snippet": "getFrameRate()",
+     "desc": "Current FPS"
+    },
+    {
+     "name": "getUpdateCount",
+     "snippet": "getUpdateCount()",
+     "desc": "Get the number of update() calls since the app started"
+    },
+    {
+     "name": "sleepMicros",
+     "snippet": "sleepMicros(${1:micros})",
+     "desc": "Block the current thread for the given number of microseconds"
+    },
+    {
+     "name": "sleepMillis",
+     "snippet": "sleepMillis(${1:millis})",
+     "desc": "Block the current thread for the given number of milliseconds"
+    }
+   ]
+  },
+  {
+   "name": "time_system",
+   "functions": [
+    {
+     "name": "getSystemTimeMicros",
+     "snippet": "getSystemTimeMicros()",
+     "desc": "Unix time in microseconds"
+    },
+    {
+     "name": "getSystemTimeMillis",
+     "snippet": "getSystemTimeMillis()",
+     "desc": "Unix time in milliseconds"
+    },
+    {
+     "name": "getTimestampString",
+     "snippet": "getTimestampString(${1:timestampFormat})",
+     "desc": "Formatted timestamp"
+    },
+    {
+     "name": "getUnixTime",
+     "snippet": "getUnixTime()",
+     "desc": "Current Unix timestamp in seconds"
+    }
+   ]
+  },
+  {
+   "name": "transform",
+   "functions": [
+    {
+     "name": "getMatrix",
+     "snippet": "getMatrix()",
+     "desc": "Get the current transformation matrix"
+    },
+    {
+     "name": "getScale",
+     "snippet": "getScale()",
+     "desc": "Effective uniform scale of the current matrix (max of x/y basis lengths)"
+    },
+    {
+     "name": "multMatrix",
+     "snippet": "multMatrix(${1:mat})",
+     "desc": "Multiply the current matrix by mat (relative transform, like translate/rotate)"
+    },
+    {
+     "name": "popMatrix",
+     "snippet": "popMatrix()",
+     "desc": "Restore transform state"
+    },
+    {
+     "name": "pushMatrix",
+     "snippet": "pushMatrix()",
+     "desc": "Save transform state"
+    },
+    {
+     "name": "resetMatrix",
+     "snippet": "resetMatrix()",
+     "desc": "Reset transformation matrix to identity"
+    },
+    {
+     "name": "rotate",
+     "snippet": "rotate(${1:radians})",
+     "desc": "Rotate by radians (single axis, euler angles, or quaternion)"
+    },
+    {
+     "name": "rotateDeg",
+     "snippet": "rotateDeg(${1:degrees})",
+     "desc": "Rotate by degrees"
+    },
+    {
+     "name": "rotateX",
+     "snippet": "rotateX(${1:radians})",
+     "desc": "Rotate around X axis"
+    },
+    {
+     "name": "rotateXDeg",
+     "snippet": "rotateXDeg(${1:degrees})",
+     "desc": "Rotate around X axis (degrees)"
+    },
+    {
+     "name": "rotateY",
+     "snippet": "rotateY(${1:radians})",
+     "desc": "Rotate around Y axis"
+    },
+    {
+     "name": "rotateYDeg",
+     "snippet": "rotateYDeg(${1:degrees})",
+     "desc": "Rotate around Y axis (degrees)"
+    },
+    {
+     "name": "rotateZ",
+     "snippet": "rotateZ(${1:radians})",
+     "desc": "Rotate around Z axis"
+    },
+    {
+     "name": "rotateZDeg",
+     "snippet": "rotateZDeg(${1:degrees})",
+     "desc": "Rotate around Z axis (degrees)"
+    },
+    {
+     "name": "scale",
+     "snippet": "scale(${1:s})",
+     "desc": "Scale"
+    },
+    {
+     "name": "setMatrix",
+     "snippet": "setMatrix(${1:mat})",
+     "desc": "Replace the current matrix with mat (absolute - use with caution, may break camera setup)"
+    },
+    {
+     "name": "translate",
+     "snippet": "translate(${1:pos})",
+     "desc": "Move origin"
+    }
+   ]
+  },
+  {
+   "name": "utility",
+   "functions": [
+    {
+     "name": "beep",
+     "snippet": "beep()",
+     "desc": "Play a beep sound"
+    },
+    {
+     "name": "closeLogFile",
+     "snippet": "closeLogFile()",
+     "desc": "Close the current log file"
+    },
+    {
+     "name": "compressBound",
+     "snippet": "compressBound(${1:nbytes}, ${2:codec})",
+     "desc": "Worst-case compressed size, for sizing a destination buffer"
+    },
+    {
+     "name": "getLogger",
+     "snippet": "getLogger()",
+     "desc": "Access the global logger instance"
+    },
+    {
+     "name": "getMainThreadId",
+     "snippet": "getMainThreadId()",
+     "desc": "Get the main thread ID. Records the current thread's ID on the first call, so it must first be called from the main thread."
+    },
+    {
+     "name": "getVersion",
+     "snippet": "getVersion()",
+     "desc": "TrussC version string from git describe (e.g. \"v0.6.2\" or \"v0.6.2-14-gabc123\")"
+    },
+    {
+     "name": "hexToInt",
+     "snippet": "hexToInt(${1:hexStr})",
+     "desc": "Parse a hex string into a signed int"
+    },
+    {
+     "name": "hexToUInt",
+     "snippet": "hexToUInt(${1:hexStr})",
+     "desc": "Parse a hex string into an unsigned int"
+    },
+    {
+     "name": "isMainThread",
+     "snippet": "isMainThread()",
+     "desc": "Whether the calling thread is the main (scene) thread. The main thread ID is recorded on the first call to getMainThreadId()."
+    },
+    {
+     "name": "isStringInString",
+     "snippet": "isStringInString(${1:haystack}, ${2:needle})",
+     "desc": "Check whether one string contains another"
+    },
+    {
+     "name": "joinString",
+     "snippet": "joinString(${1:stringElements}, ${2:delimiter})",
+     "desc": "Join strings with delimiter"
+    },
+    {
+     "name": "logAt",
+     "snippet": "logAt()",
+     "desc": "Stream-based log output at a runtime-selected level"
+    },
+    {
+     "name": "logError",
+     "snippet": "logError()",
+     "desc": "Stream-based error-level log output"
+    },
+    {
+     "name": "logFatal",
+     "snippet": "logFatal()",
+     "desc": "Stream-based fatal-level log output"
+    },
+    {
+     "name": "logLevelToString",
+     "snippet": "logLevelToString(${1:level})",
+     "desc": "Return the uppercase name of a log level (e.g. \"NOTICE\", \"WARNING\")\n"
+    },
+    {
+     "name": "logNotice",
+     "snippet": "logNotice()",
+     "desc": "Print to console"
+    },
+    {
+     "name": "logVerbose",
+     "snippet": "logVerbose()",
+     "desc": "Stream-based verbose-level log output"
+    },
+    {
+     "name": "logWarning",
+     "snippet": "logWarning()",
+     "desc": "Stream-based warning-level log output"
+    },
+    {
+     "name": "nodeToJson",
+     "snippet": "nodeToJson(${1:node}, ${2:maxDepth})",
+     "desc": "Serialize a node (and its subtree up to maxDepth; -1 = unlimited) to JSON via reflection"
+    },
+    {
+     "name": "parseJson",
+     "snippet": "parseJson(${1:str})",
+     "desc": "Parse a JSON string into a Json object; returns an empty Json on parse error."
+    },
+    {
+     "name": "parseXml",
+     "snippet": "parseXml(${1:str})",
+     "desc": "Parse an XML string into an Xml object."
+    },
+    {
+     "name": "runOnMainThread",
+     "snippet": "runOnMainThread(${1:fn})",
+     "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame"
+    },
+    {
+     "name": "setConsoleLogLevel",
+     "snippet": "setConsoleLogLevel(${1:level})",
+     "desc": "Set the minimum log level printed to the console"
+    },
+    {
+     "name": "setFileLogLevel",
+     "snippet": "setFileLogLevel(${1:level})",
+     "desc": "Set the minimum log level written to the log file"
+    },
+    {
+     "name": "setLogFile",
+     "snippet": "setLogFile(${1:path})",
+     "desc": "Open a file to receive log output"
+    },
+    {
+     "name": "shortTypeName",
+     "snippet": "shortTypeName(${1:ti})",
+     "desc": "Short (unqualified) readable name for a type, cached per type"
+    },
+    {
+     "name": "splitString",
+     "snippet": "splitString(${1:source}, ${2:delimiter})",
+     "desc": "Split string by delimiter"
+    },
+    {
+     "name": "stringTimesInString",
+     "snippet": "stringTimesInString(${1:haystack}, ${2:needle})",
+     "desc": "Count occurrences of a substring in a string"
+    },
+    {
+     "name": "toBase64",
+     "snippet": "toBase64(${1:bytes})",
+     "desc": "Encode raw bytes as a Base64 string"
+    },
+    {
+     "name": "toBinary",
+     "snippet": "toBinary(${1:value})",
+     "desc": "Convert an integer to a binary string"
+    },
+    {
+     "name": "toBool",
+     "snippet": "toBool(${1:str})",
+     "desc": "Parse a string into a bool"
+    },
+    {
+     "name": "toDouble",
+     "snippet": "toDouble(${1:str})",
+     "desc": "Parse a string into a double"
+    },
+    {
+     "name": "toFloat",
+     "snippet": "toFloat(${1:str})",
+     "desc": "Convert string to float"
+    },
+    {
+     "name": "toInt",
+     "snippet": "toInt(${1:str})",
+     "desc": "Convert string to int"
+    },
+    {
+     "name": "toInt64",
+     "snippet": "toInt64(${1:str})",
+     "desc": "Parse a string into a 64-bit integer"
+    },
+    {
+     "name": "toJsonString",
+     "snippet": "toJsonString(${1:j})",
+     "desc": "Serialize a Json object to a string. indent sets the pretty-print width (negative for compact)."
+    },
+    {
+     "name": "toLower",
+     "snippet": "toLower(${1:src})",
+     "desc": "Convert to lower case"
+    },
+    {
+     "name": "toUpper",
+     "snippet": "toUpper(${1:src})",
+     "desc": "Convert to upper case"
+    },
+    {
+     "name": "trim",
+     "snippet": "trim(${1:src})",
+     "desc": "Trim whitespace from both ends of a string"
+    },
+    {
+     "name": "trimBack",
+     "snippet": "trimBack(${1:src})",
+     "desc": "Trim trailing whitespace from a string"
+    },
+    {
+     "name": "trimFront",
+     "snippet": "trimFront(${1:src})",
+     "desc": "Trim leading whitespace from a string"
+    },
+    {
+     "name": "typeName",
+     "snippet": "typeName(${1:ti})",
+     "desc": "Readable (demangled) fully-qualified name for a type, cached per type"
+    }
+   ]
+  },
+  {
+   "name": "video",
+   "functions": [
+    {
+     "name": "videoCodecName",
+     "snippet": "videoCodecName(${1:c})",
+     "desc": "Return a human-readable name for a VideoCodec value (e.g. \"H.264\", \"HEVC\", \"ProRes 422\")\n"
+    }
+   ]
+  },
+  {
+   "name": "window_input",
+   "functions": [
+    {
+     "name": "alertDialog",
+     "snippet": "alertDialog(${1:title}, ${2:message})",
+     "desc": "Show alert dialog with OK button"
+    },
+    {
+     "name": "alertDialogAsync",
+     "snippet": "alertDialogAsync(${1:title}, ${2:message})",
+     "desc": "Show alert dialog asynchronously. Callback is called when dismissed"
+    },
+    {
+     "name": "bindCursorImage",
+     "snippet": "bindCursorImage(${1:cursor}, ${2:image})",
+     "desc": "Bind a custom image to a cursor slot (RGBA pixels or Image)"
+    },
+    {
+     "name": "confirmDialog",
+     "snippet": "confirmDialog(${1:title}, ${2:message})",
+     "desc": "Show Yes/No confirmation dialog. Returns true if Yes clicked"
+    },
+    {
+     "name": "confirmDialogAsync",
+     "snippet": "confirmDialogAsync(${1:title}, ${2:message}, ${3:callback})",
+     "desc": "Show Yes/No dialog asynchronously. Callback receives true if Yes clicked"
+    },
+    {
+     "name": "events",
+     "snippet": "events()",
+     "desc": "Get the global CoreEvents hub holding all framework events (setup, update, draw, keyPressed, mousePressed, etc.); use events().eventName.listen(callback) to subscribe"
+    },
+    {
+     "name": "exitApp",
+     "snippet": "exitApp()",
+     "desc": "Immediately exit the application (cannot be cancelled)"
+    },
+    {
+     "name": "getCursor",
+     "snippet": "getCursor()",
+     "desc": "Get the current mouse cursor shape"
+    },
+    {
+     "name": "getGlobalMousePos",
+     "snippet": "getGlobalMousePos()",
+     "desc": "Get global mouse position as Vec2"
+    },
+    {
+     "name": "getGlobalMouseX",
+     "snippet": "getGlobalMouseX()",
+     "desc": "Get global mouse X (screen coordinates, not window-relative)"
+    },
+    {
+     "name": "getGlobalMouseY",
+     "snippet": "getGlobalMouseY()",
+     "desc": "Get global mouse Y (screen coordinates, not window-relative)"
+    },
+    {
+     "name": "getGlobalPMouseX",
+     "snippet": "getGlobalPMouseX()",
+     "desc": "Get previous frame global mouse X"
+    },
+    {
+     "name": "getGlobalPMouseY",
+     "snippet": "getGlobalPMouseY()",
+     "desc": "Get previous frame global mouse Y"
+    },
+    {
+     "name": "getMouseButton",
+     "snippet": "getMouseButton()",
+     "desc": "Get currently pressed mouse button"
+    },
+    {
+     "name": "getMousePos",
+     "snippet": "getMousePos()",
+     "desc": "Get mouse position as Vec2"
+    },
+    {
+     "name": "getMouseX",
+     "snippet": "getMouseX()",
+     "desc": "Get mouse X position"
+    },
+    {
+     "name": "getMouseY",
+     "snippet": "getMouseY()",
+     "desc": "Get mouse Y position"
+    },
+    {
+     "name": "getTouchAsMouse",
+     "snippet": "getTouchAsMouse()",
+     "desc": "Get touchAsMouse state"
+    },
+    {
+     "name": "getWindowHeight",
+     "snippet": "getWindowHeight()",
+     "desc": "Get canvas height"
+    },
+    {
+     "name": "getWindowSize",
+     "snippet": "getWindowSize()",
+     "desc": "Get canvas size as Vec2"
+    },
+    {
+     "name": "getWindowWidth",
+     "snippet": "getWindowWidth()",
+     "desc": "Get canvas width"
+    },
+    {
+     "name": "hideCursor",
+     "snippet": "hideCursor()",
+     "desc": "Hide the mouse cursor"
+    },
+    {
+     "name": "isAltPressed",
+     "snippet": "isAltPressed()",
+     "desc": "True while either Alt / Option key (left or right) is held"
+    },
+    {
+     "name": "isControlPressed",
+     "snippet": "isControlPressed()",
+     "desc": "True while either Control key (left or right) is held"
+    },
+    {
+     "name": "isKeyPressed",
+     "snippet": "isKeyPressed(${1:key})",
+     "desc": "Is specific key currently pressed"
+    },
+    {
+     "name": "isMousePressed",
+     "snippet": "isMousePressed()",
+     "desc": "Is mouse button pressed"
+    },
+    {
+     "name": "isOverlayFocused",
+     "snippet": "isOverlayFocused()",
+     "desc": "True when an overlay currently owns keyboard focus (e.g. a text input is active); guard raw key input so typing into a UI field is not also handled by the app"
+    },
+    {
+     "name": "isOverlayHovered",
+     "snippet": "isOverlayHovered()",
+     "desc": "True when an overlay currently has the pointer over it (e.g. cursor over a tcxImGui panel); guard raw mouse input so clicks on UI panels are not also handled by the app"
+    },
+    {
+     "name": "isShiftPressed",
+     "snippet": "isShiftPressed()",
+     "desc": "True while either Shift key (left or right) is held"
+    },
+    {
+     "name": "isSuperPressed",
+     "snippet": "isSuperPressed()",
+     "desc": "True while either Super / Cmd / Win key (left or right) is held"
+    },
+    {
+     "name": "loadDialog",
+     "snippet": "loadDialog()",
+     "desc": "Show file open dialog. Returns FileDialogResult with filePath, fileName, success"
+    },
+    {
+     "name": "loadDialogAsync",
+     "snippet": "loadDialogAsync(${1:title}, ${2:message}, ${3:defaultPath}, ${4:folderSelection}, ${5:callback})",
+     "desc": "Show file open dialog asynchronously. Callback receives FileDialogResult"
+    },
+    {
+     "name": "requestExitApp",
+     "snippet": "requestExitApp()",
+     "desc": "Request application exit. Can be cancelled by listening to events().exitRequested and setting args.cancel = true"
+    },
+    {
+     "name": "saveDialog",
+     "snippet": "saveDialog()",
+     "desc": "Show file save dialog. Returns FileDialogResult with filePath, fileName, success"
+    },
+    {
+     "name": "saveDialogAsync",
+     "snippet": "saveDialogAsync(${1:title}, ${2:message}, ${3:defaultPath}, ${4:defaultName}, ${5:callback})",
+     "desc": "Show file save dialog asynchronously. Callback receives FileDialogResult"
+    },
+    {
+     "name": "setCursor",
+     "snippet": "setCursor(${1:cursor})",
+     "desc": "Set the mouse cursor shape"
+    },
+    {
+     "name": "setTouchAsMouse",
+     "snippet": "setTouchAsMouse(${1:enabled})",
+     "desc": "Enable/disable touch events firing as mouse events (for Android/iOS)"
+    },
+    {
+     "name": "showCursor",
+     "snippet": "showCursor()",
+     "desc": "Show the mouse cursor (default)"
+    },
+    {
+     "name": "unbindCursorImage",
+     "snippet": "unbindCursorImage(${1:cursor})",
+     "desc": "Unbind a custom cursor image, restoring the system default"
+    }
+   ]
+  },
+  {
+   "name": "window_system",
+   "functions": [
+    {
+     "name": "bringWindowToFront",
+     "snippet": "bringWindowToFront()",
+     "desc": "Activate and raise the application window, giving it focus. Desktop only; no-op on mobile/web"
+    },
+    {
+     "name": "getAspectRatio",
+     "snippet": "getAspectRatio()",
+     "desc": "Get window aspect ratio (width / height)"
+    },
+    {
+     "name": "getBackendName",
+     "snippet": "getBackendName()",
+     "desc": "Get the active graphics backend name (e.g. \"Metal (macOS)\", \"D3D11\", \"OpenGL\", \"WebGPU\")\n"
+    },
+    {
+     "name": "getClipboardString",
+     "snippet": "getClipboardString()",
+     "desc": "Get text from clipboard"
+    },
+    {
+     "name": "getDisplayScaleFactor",
+     "snippet": "getDisplayScaleFactor()",
+     "desc": "Get the DPI scale of the main display (available before window creation). macOS: 1.0 or 2.0 (Retina); other platforms: 1.0"
+    },
+    {
+     "name": "getDpiScale",
+     "snippet": "getDpiScale()",
+     "desc": "Get display DPI scale factor (e.g. 2.0 for Retina)"
+    },
+    {
+     "name": "getFramebufferHeight",
+     "snippet": "getFramebufferHeight()",
+     "desc": "Get framebuffer height in pixels (window height * DPI scale)"
+    },
+    {
+     "name": "getFramebufferWidth",
+     "snippet": "getFramebufferWidth()",
+     "desc": "Get framebuffer width in pixels (window width * DPI scale)"
+    },
+    {
+     "name": "getKeepScreenOn",
+     "snippet": "getKeepScreenOn()",
+     "desc": "Check whether keep-screen-on is currently enabled"
+    },
+    {
+     "name": "getWindowPosition",
+     "snippet": "getWindowPosition()",
+     "desc": "Get window position in screen coordinates (top-left origin). macOS/Windows only; other platforms return (-1, -1)"
+    },
+    {
+     "name": "grabScreen",
+     "snippet": "grabScreen(${1:outPixels})",
+     "desc": "Capture current screen to Pixels"
+    },
+    {
+     "name": "isFullscreen",
+     "snippet": "isFullscreen()",
+     "desc": "Check if window is fullscreen"
+    },
+    {
+     "name": "isRecording",
+     "snippet": "isRecording()",
+     "desc": "Check whether a recording is in progress"
+    },
+    {
+     "name": "recordingFrameCount",
+     "snippet": "recordingFrameCount()",
+     "desc": "Number of frames captured so far in the current recording"
+    },
+    {
+     "name": "recordingPath",
+     "snippet": "recordingPath()",
+     "desc": "Output file path of the current recording"
+    },
+    {
+     "name": "redraw",
+     "snippet": "redraw()",
+     "desc": "Request extra redraws (useful for event-driven rendering)"
+    },
+    {
+     "name": "saveScreenshot",
+     "snippet": "saveScreenshot(${1:path})",
+     "desc": "Save a screenshot of the rendered frame (png/jpg/bmp). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written."
+    },
+    {
+     "name": "setClipboardString",
+     "snippet": "setClipboardString(${1:text})",
+     "desc": "Copy text to clipboard"
+    },
+    {
+     "name": "setFullscreen",
+     "snippet": "setFullscreen(${1:full})",
+     "desc": "Set fullscreen mode"
+    },
+    {
+     "name": "setIndependentFps",
+     "snippet": "setIndependentFps(${1:updateFps}, ${2:drawFps})",
+     "desc": "Set independent update and draw frame rates"
+    },
+    {
+     "name": "setKeepScreenOn",
+     "snippet": "setKeepScreenOn(${1:enabled})",
+     "desc": "Prevent display sleep / auto-lock while the app is running. Supported: Android, iOS, macOS, Windows. Linux / Web: no-op"
+    },
+    {
+     "name": "setOrientation",
+     "snippet": "setOrientation(${1:mask})",
+     "desc": "Set allowed screen orientations (mobile). Values: Orientation::Portrait, Landscape, All"
+    },
+    {
+     "name": "setWindowDecorated",
+     "snippet": "setWindowDecorated(${1:decorated})",
+     "desc": "Toggle the window's standard decorations (title bar, borders, buttons). false = borderless but still focusable and closable. Desktop only"
+    },
+    {
+     "name": "setWindowPosition",
+     "snippet": "setWindowPosition(${1:x}, ${2:y})",
+     "desc": "Set window position in screen coordinates (top-left origin). macOS/Windows only; no-op on other platforms"
+    },
+    {
+     "name": "setWindowSize",
+     "snippet": "setWindowSize(${1:width}, ${2:height})",
+     "desc": "Set window size"
+    },
+    {
+     "name": "setWindowSizeLogical",
+     "snippet": "setWindowSizeLogical(${1:width}, ${2:height})",
+     "desc": "Resize the window to the given logical size (logical pixels)"
+    },
+    {
+     "name": "setWindowTitle",
+     "snippet": "setWindowTitle(${1:title})",
+     "desc": "Set window title"
+    },
+    {
+     "name": "startRecording",
+     "snippet": "startRecording(${1:path})",
+     "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)"
+    },
+    {
+     "name": "stopRecording",
+     "snippet": "stopRecording()",
+     "desc": "Stop the current recording and finalize the file"
+    },
+    {
+     "name": "toggleFullscreen",
+     "snippet": "toggleFullscreen()",
+     "desc": "Toggle fullscreen mode"
+    }
+   ]
+  }
+ ],
+ "constants": [
+  {
+   "name": "TAU",
+   "value": "",
+   "desc": "Ratio of circumference to radius; the radian measure of one full turn. ≈ 6.28318."
+  },
+  {
+   "name": "HALF_TAU",
+   "value": "",
+   "desc": "Half circle (PI)"
+  },
+  {
+   "name": "QUARTER_TAU",
+   "value": "",
+   "desc": "Quarter circle (PI/2)"
+  },
+  {
+   "name": "PI",
+   "value": "",
+   "desc": "Ratio of circumference to diameter. ≈ 3.14159. Prefer HALF_TAU for half a turn."
+  },
+  {
+   "name": "Left",
+   "value": "",
+   "desc": "Direction shorthand for Direction::Left"
+  },
+  {
+   "name": "Center",
+   "value": "",
+   "desc": "Direction shorthand for Direction::Center"
+  },
+  {
+   "name": "Right",
+   "value": "",
+   "desc": "Direction shorthand for Direction::Right"
+  },
+  {
+   "name": "Top",
+   "value": "",
+   "desc": "Direction shorthand for Direction::Top"
+  },
+  {
+   "name": "Bottom",
+   "value": "",
+   "desc": "Direction shorthand for Direction::Bottom"
+  },
+  {
+   "name": "Baseline",
+   "value": "",
+   "desc": "Direction shorthand for Direction::Baseline (text baseline)"
+  },
+  {
+   "name": "VSYNC",
+   "value": "",
+   "desc": "Frame-rate sentinel: sync to the monitor refresh rate"
+  },
+  {
+   "name": "EVENT_DRIVEN",
+   "value": "",
+   "desc": "Frame-rate sentinel: only redraw on demand (event-driven)"
+  },
+  {
+   "name": "KEY_SPACE",
+   "value": "",
+   "desc": "Space key"
+  },
+  {
+   "name": "KEY_ESCAPE",
+   "value": "",
+   "desc": "Escape key"
+  },
+  {
+   "name": "KEY_ENTER",
+   "value": "",
+   "desc": "Enter/Return key"
+  },
+  {
+   "name": "KEY_TAB",
+   "value": "",
+   "desc": "Tab key"
+  },
+  {
+   "name": "KEY_BACKSPACE",
+   "value": "",
+   "desc": "Backspace key"
+  },
+  {
+   "name": "KEY_DELETE",
+   "value": "",
+   "desc": "Delete key"
+  },
+  {
+   "name": "KEY_RIGHT",
+   "value": "",
+   "desc": "Right arrow key"
+  },
+  {
+   "name": "KEY_LEFT",
+   "value": "",
+   "desc": "Left arrow key"
+  },
+  {
+   "name": "KEY_DOWN",
+   "value": "",
+   "desc": "Down arrow key"
+  },
+  {
+   "name": "KEY_UP",
+   "value": "",
+   "desc": "Up arrow key"
+  },
+  {
+   "name": "KEY_LEFT_SHIFT",
+   "value": "",
+   "desc": "Left Shift key"
+  },
+  {
+   "name": "KEY_RIGHT_SHIFT",
+   "value": "",
+   "desc": "Right Shift key"
+  },
+  {
+   "name": "KEY_LEFT_CONTROL",
+   "value": "",
+   "desc": "Left Control key"
+  },
+  {
+   "name": "KEY_RIGHT_CONTROL",
+   "value": "",
+   "desc": "Right Control key"
+  },
+  {
+   "name": "KEY_LEFT_ALT",
+   "value": "",
+   "desc": "Left Alt/Option key"
+  },
+  {
+   "name": "KEY_RIGHT_ALT",
+   "value": "",
+   "desc": "Right Alt/Option key"
+  },
+  {
+   "name": "KEY_LEFT_SUPER",
+   "value": "",
+   "desc": "Left Super/Command key"
+  },
+  {
+   "name": "KEY_RIGHT_SUPER",
+   "value": "",
+   "desc": "Right Super/Command key"
+  },
+  {
+   "name": "KEY_F1",
+   "value": "",
+   "desc": "F1 function key"
+  },
+  {
+   "name": "KEY_F2",
+   "value": "",
+   "desc": "F2 function key"
+  },
+  {
+   "name": "KEY_F3",
+   "value": "",
+   "desc": "F3 function key"
+  },
+  {
+   "name": "KEY_F4",
+   "value": "",
+   "desc": "F4 function key"
+  },
+  {
+   "name": "KEY_F5",
+   "value": "",
+   "desc": "F5 function key"
+  },
+  {
+   "name": "KEY_F6",
+   "value": "",
+   "desc": "F6 function key"
+  },
+  {
+   "name": "KEY_F7",
+   "value": "",
+   "desc": "F7 function key"
+  },
+  {
+   "name": "KEY_F8",
+   "value": "",
+   "desc": "F8 function key"
+  },
+  {
+   "name": "KEY_F9",
+   "value": "",
+   "desc": "F9 function key"
+  },
+  {
+   "name": "KEY_F10",
+   "value": "",
+   "desc": "F10 function key"
+  },
+  {
+   "name": "KEY_F11",
+   "value": "",
+   "desc": "F11 function key"
+  },
+  {
+   "name": "KEY_F12",
+   "value": "",
+   "desc": "F12 function key"
+  },
+  {
+   "name": "MOUSE_BUTTON_LEFT",
+   "value": "",
+   "desc": "Left mouse button"
+  },
+  {
+   "name": "MOUSE_BUTTON_RIGHT",
+   "value": "",
+   "desc": "Right mouse button"
+  },
+  {
+   "name": "MOUSE_BUTTON_MIDDLE",
+   "value": "",
+   "desc": "Middle mouse button"
+  }
+ ],
+ "types": [
+  {
+   "name": "App",
+   "desc": "Base application class: subclass it and override setup/update/draw and the input callbacks (mousePressed, keyPressed, etc.) to build a TrussC app",
+   "constructor": {
+    "snippet": "App()"
+   },
+   "methods": [
+    {
+     "name": "setSize",
+     "snippet": "setSize(${1:w}, ${2:h})",
+     "return": "void",
+     "desc": "Set the app's size"
+    },
+    {
+     "name": "requestExit",
+     "snippet": "requestExit()",
+     "return": "void",
+     "desc": "Request the app to exit"
+    },
+    {
+     "name": "isExitRequested",
+     "snippet": "isExitRequested()",
+     "return": "bool",
+     "desc": "Whether an exit has been requested"
+    },
+    {
+     "name": "keyPressed",
+     "snippet": "keyPressed(${1:e})",
+     "return": "void",
+     "desc": "Key pressed. Use KEY_* constants for special keys, or uppercase char literals for printable keys (e.g. key == 'A', key == '1')"
+    },
+    {
+     "name": "keyReleased",
+     "snippet": "keyReleased(${1:e})",
+     "return": "void",
+     "desc": "Key released"
+    },
+    {
+     "name": "mousePressed",
+     "snippet": "mousePressed(${1:e})",
+     "return": "void",
+     "desc": "Mouse button pressed"
+    },
+    {
+     "name": "mouseReleased",
+     "snippet": "mouseReleased(${1:e})",
+     "return": "void",
+     "desc": "Mouse button released"
+    },
+    {
+     "name": "mouseMoved",
+     "snippet": "mouseMoved(${1:e})",
+     "return": "void",
+     "desc": "Mouse moved"
+    },
+    {
+     "name": "mouseDragged",
+     "snippet": "mouseDragged(${1:e})",
+     "return": "void",
+     "desc": "Mouse dragged"
+    },
+    {
+     "name": "mouseScrolled",
+     "snippet": "mouseScrolled(${1:e})",
+     "return": "void",
+     "desc": "Mouse wheel / trackpad scrolled"
+    },
+    {
+     "name": "touchPressed",
+     "snippet": "touchPressed(${1:touch})",
+     "return": "void",
+     "desc": "Touch began (Android/iOS, multi-touch)"
+    },
+    {
+     "name": "touchMoved",
+     "snippet": "touchMoved(${1:touch})",
+     "return": "void",
+     "desc": "Touch moved (Android/iOS, multi-touch)"
+    },
+    {
+     "name": "touchReleased",
+     "snippet": "touchReleased(${1:touch})",
+     "return": "void",
+     "desc": "Touch ended or was cancelled (check touch.cancelled)"
+    },
+    {
+     "name": "windowResized",
+     "snippet": "windowResized(${1:width}, ${2:height})",
+     "return": "void",
+     "desc": "Window resized"
+    },
+    {
+     "name": "filesDropped",
+     "snippet": "filesDropped(${1:files})",
+     "return": "void",
+     "desc": "Files were dropped onto the window"
+    },
+    {
+     "name": "exit",
+     "snippet": "exit()",
+     "return": "void",
+     "desc": "App exit callback (override for cleanup before shutdown)"
+    },
+    {
+     "name": "audioOut",
+     "snippet": "audioOut(${1:buf})",
+     "return": "void",
+     "desc": "Fill the audio output buffer (override to synthesize audio)"
+    },
+    {
+     "name": "audioIn",
+     "snippet": "audioIn(${1:buf})",
+     "return": "void",
+     "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut."
+    }
+   ]
+  },
+  {
+   "name": "AudioDeviceChangedArgs",
+   "desc": "Argument type for the AudioEngine::audioDeviceChanged event, fired after every successful init() (initial and re-init). Reports the resolved device's real name (never empty).",
+   "properties": [
+    {
+     "name": "deviceName",
+     "type": "std::string",
+     "desc": "Actual device name now active (resolved, never empty)"
+    },
+    {
+     "name": "isDefaultDevice",
+     "type": "bool",
+     "desc": "True when the opened device is the OS's current default playback device"
+    },
+    {
+     "name": "sampleRate",
+     "type": "int",
+     "desc": "Active engine sample rate in Hz"
+    },
+    {
+     "name": "channels",
+     "type": "int",
+     "desc": "Active output channel count"
+    },
+    {
+     "name": "bufferSize",
+     "type": "int",
+     "desc": "Active device buffer size in frames"
+    },
+    {
+     "name": "maxPolyphony",
+     "type": "int",
+     "desc": "Active max polyphony"
+    }
+   ]
+  },
+  {
+   "name": "AudioDeviceInfo",
+   "desc": "One entry in the list returned by AudioEngine::listDevices().",
+   "properties": [
+    {
+     "name": "name",
+     "type": "std::string",
+     "desc": "Device name (pass to AudioSettings::deviceName)"
+    },
+    {
+     "name": "isDefault",
+     "type": "bool",
+     "desc": "True if this is the system default playback device"
+    }
+   ]
+  },
+  {
+   "name": "AudioEngine",
+   "desc": "Singleton miniaudio-based mixer engine. Owns the output device, mixes all playing Sound voices, exposes real-time audioOut / audioIn / audioDeviceChanged events, and an FFT analysis ring buffer. Access via AudioEngine::getInstance(); most apps drive it indirectly through the Sound class and the global initAudio() / shutdownAudio() helpers.",
+   "properties": [
+    {
+     "name": "audioOut",
+     "type": "Event<AudioOutBuffer>",
+     "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
+    },
+    {
+     "name": "audioIn",
+     "type": "Event<AudioInBuffer>",
+     "desc": "Real-time capture callback event (microphone input). listen() to add an input-processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
+    },
+    {
+     "name": "audioDeviceChanged",
+     "type": "Event<AudioDeviceChangedArgs>",
+     "desc": "Fires after every successful init() (initial AND re-init). Args carry the resolved device's real name, isDefaultDevice flag, sampleRate, channels, bufferSize, maxPolyphony. Listener runs on the thread that called init() (main), not the audio thread."
+    }
+   ],
+   "methods": [
+    {
+     "name": "init",
+     "snippet": "init()",
+     "return": "bool",
+     "desc": "Initialize the engine with defaults, or with an AudioSettings override. Re-init on a running engine migrates active voices to the new settings. Returns true on success."
+    },
+    {
+     "name": "shutdown",
+     "snippet": "shutdown()",
+     "return": "void",
+     "desc": "Stop and close the audio device."
+    },
+    {
+     "name": "getSampleRate",
+     "snippet": "getSampleRate()",
+     "return": "int",
+     "desc": "Current engine output sample rate (Hz). Returns the default (48000) before init()."
+    },
+    {
+     "name": "getChannels",
+     "snippet": "getChannels()",
+     "return": "int",
+     "desc": "Current engine output channel count."
+    },
+    {
+     "name": "getMaxPolyphony",
+     "snippet": "getMaxPolyphony()",
+     "return": "int",
+     "desc": "Maximum number of simultaneously-playing Sound voices."
+    },
+    {
+     "name": "getBufferSize",
+     "snippet": "getBufferSize()",
+     "return": "int",
+     "desc": "Current device buffer size in frames (0 = miniaudio default)."
+    },
+    {
+     "name": "isInitialized",
+     "snippet": "isInitialized()",
+     "return": "bool",
+     "desc": "True after a successful init()."
+    },
+    {
+     "name": "play",
+     "snippet": "play(${1:source})",
+     "return": "std::shared_ptr<PlayingSound>",
+     "desc": "Start a new mixer voice for the given source (eager SoundBuffer or streaming SoundStream) and return its live PlayingSound handle. Usually called indirectly via Sound::play()."
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "getInstance",
+     "snippet": "getInstance()",
+     "return": "AudioEngine &",
+     "desc": "Get the global AudioEngine singleton."
+    },
+    {
+     "name": "listDevices",
+     "snippet": "listDevices()",
+     "return": "std::vector<AudioDeviceInfo>",
+     "desc": "Enumerate available playback devices (name + isDefault). Empty if unsupported on the platform."
+    }
+   ]
+  },
+  {
+   "name": "AudioInBuffer",
+   "desc": "Argument type for the AudioEngine::audioIn event. Holds the interleaved read-only microphone input for a single capture callback. Process and return quickly; do not call engine APIs from here.",
+   "properties": [
+    {
+     "name": "frameCount",
+     "type": "int",
+     "desc": "Number of frames in this callback"
+    },
+    {
+     "name": "channels",
+     "type": "int",
+     "desc": "Channel count (floats per frame)"
+    },
+    {
+     "name": "sampleRate",
+     "type": "int",
+     "desc": "Input sample rate in Hz"
+    },
+    {
+     "name": "framePosition",
+     "type": "uint64_t",
+     "desc": "Monotonic count of input frames received since capture start"
+    }
+   ]
+  },
+  {
+   "name": "AudioOutBuffer",
+   "desc": "Argument type for the AudioEngine::audioOut event. Holds the interleaved mutable output buffer for a single audio callback. Listeners should ADD their contribution to data (voices are already mixed in); do not call engine APIs from here.",
+   "properties": [
+    {
+     "name": "frameCount",
+     "type": "int",
+     "desc": "Number of frames in this callback"
+    },
+    {
+     "name": "channels",
+     "type": "int",
+     "desc": "Channel count (floats per frame)"
+    },
+    {
+     "name": "sampleRate",
+     "type": "int",
+     "desc": "Engine output sample rate in Hz"
+    },
+    {
+     "name": "framePosition",
+     "type": "uint64_t",
+     "desc": "Monotonic count of output frames emitted since engine init (sample-accurate time/phase reference)"
+    }
+   ]
+  },
+  {
+   "name": "AudioSettings",
+   "desc": "Configuration passed to AudioEngine::init() to override engine defaults (sample rate, channels, buffer size, polyphony, device). Empty deviceName selects the system default playback device.",
+   "properties": [
+    {
+     "name": "sampleRate",
+     "type": "int",
+     "desc": "Engine output sample rate in Hz (default 96000)"
+    },
+    {
+     "name": "channels",
+     "type": "int",
+     "desc": "Output channel count (1 = mono, 2 = stereo; default 2)"
+    },
+    {
+     "name": "bufferSize",
+     "type": "int",
+     "desc": "Requested device buffer size in frames; 0 = let miniaudio choose"
+    },
+    {
+     "name": "maxPolyphony",
+     "type": "int",
+     "desc": "Max simultaneously-playing Sound voices (default 32)"
+    },
+    {
+     "name": "deviceName",
+     "type": "std::string",
+     "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate."
+    }
+   ]
+  },
+  {
+   "name": "AxisMode",
+   "desc": "Layout axis sizing: None (fixed), Fill (expand to the parent), Content (fit children).",
+   "static_methods": [
+    {
+     "name": "None",
+     "snippet": "None",
+     "return": "AxisMode",
+     "desc": "= 0"
+    },
+    {
+     "name": "Fill",
+     "snippet": "Fill",
+     "return": "AxisMode",
+     "desc": "= 1"
+    },
+    {
+     "name": "Content",
+     "snippet": "Content",
+     "return": "AxisMode",
+     "desc": "= 2"
+    }
+   ]
+  },
+  {
+   "name": "Beep",
+   "desc": "Built-in system beep sounds (ping, success, error, …) for beep().",
+   "static_methods": [
+    {
+     "name": "ping",
+     "snippet": "ping",
+     "return": "Beep",
+     "desc": "= 0"
+    },
+    {
+     "name": "success",
+     "snippet": "success",
+     "return": "Beep",
+     "desc": "= 1"
+    },
+    {
+     "name": "complete",
+     "snippet": "complete",
+     "return": "Beep",
+     "desc": "= 2"
+    },
+    {
+     "name": "coin",
+     "snippet": "coin",
+     "return": "Beep",
+     "desc": "= 3"
+    },
+    {
+     "name": "error",
+     "snippet": "error",
+     "return": "Beep",
+     "desc": "= 4"
+    },
+    {
+     "name": "warning",
+     "snippet": "warning",
+     "return": "Beep",
+     "desc": "= 5"
+    },
+    {
+     "name": "cancel",
+     "snippet": "cancel",
+     "return": "Beep",
+     "desc": "= 6"
+    },
+    {
+     "name": "click",
+     "snippet": "click",
+     "return": "Beep",
+     "desc": "= 7"
+    },
+    {
+     "name": "typing",
+     "snippet": "typing",
+     "return": "Beep",
+     "desc": "= 8"
+    },
+    {
+     "name": "notify",
+     "snippet": "notify",
+     "return": "Beep",
+     "desc": "= 9"
+    },
+    {
+     "name": "sweep",
+     "snippet": "sweep",
+     "return": "Beep",
+     "desc": "= 10"
+    }
+   ]
+  },
+  {
+   "name": "BlendMode",
+   "desc": "Color blend mode: Alpha, Add, Multiply, Screen, Subtract, Disabled.",
+   "static_methods": [
+    {
+     "name": "Alpha",
+     "snippet": "Alpha",
+     "return": "BlendMode",
+     "desc": "= 0"
+    },
+    {
+     "name": "Add",
+     "snippet": "Add",
+     "return": "BlendMode",
+     "desc": "= 1"
+    },
+    {
+     "name": "Multiply",
+     "snippet": "Multiply",
+     "return": "BlendMode",
+     "desc": "= 2"
+    },
+    {
+     "name": "Screen",
+     "snippet": "Screen",
+     "return": "BlendMode",
+     "desc": "= 3"
+    },
+    {
+     "name": "Subtract",
+     "snippet": "Subtract",
+     "return": "BlendMode",
+     "desc": "= 4"
+    },
+    {
+     "name": "Disabled",
+     "snippet": "Disabled",
+     "return": "BlendMode",
+     "desc": "= 5"
+    }
+   ]
+  },
+  {
+   "name": "BuildInfo",
+   "desc": "Build timestamp info injected as compile definitions by trussc_app() at CMake configure time. Refreshes when cmake reconfigures. Date/time fields are local time; timestamp is UTC Unix seconds.",
+   "static_methods": [
+    {
+     "name": "date",
+     "snippet": "date()",
+     "return": "const char *",
+     "desc": "Build date in \"YYYY-MM-DD\" form (local time)\n"
+    },
+    {
+     "name": "time",
+     "snippet": "time()",
+     "return": "const char *",
+     "desc": "Build time in \"HH:MM:SS\" form (local time)\n"
+    },
+    {
+     "name": "dateTime",
+     "snippet": "dateTime()",
+     "return": "const char *",
+     "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)\n"
+    },
+    {
+     "name": "timestamp",
+     "snippet": "timestamp()",
+     "return": "int64_t",
+     "desc": "Build timestamp as Unix seconds (UTC)"
+    },
+    {
+     "name": "year",
+     "snippet": "year()",
+     "return": "int",
+     "desc": "Build year (e.g. 2026)"
+    },
+    {
+     "name": "month",
+     "snippet": "month()",
+     "return": "int",
+     "desc": "Build month (1-12)"
+    },
+    {
+     "name": "day",
+     "snippet": "day()",
+     "return": "int",
+     "desc": "Build day of month (1-31)"
+    },
+    {
+     "name": "hour",
+     "snippet": "hour()",
+     "return": "int",
+     "desc": "Build hour (0-23)"
+    },
+    {
+     "name": "minute",
+     "snippet": "minute()",
+     "return": "int",
+     "desc": "Build minute (0-59)"
+    },
+    {
+     "name": "second",
+     "snippet": "second()",
+     "return": "int",
+     "desc": "Build second (0-59)"
+    }
+   ]
+  },
+  {
+   "name": "CameraContext",
+   "desc": "A snapshot of the camera (view / projection / viewport) that a part of the scene was drawn under. One is registered per camera scope (screen setup, EasyCam::begin, Fbo::begin) and stamped on each node at draw time, so mouse picking unprojects the cursor through the same camera the node was rendered with.",
+   "properties": [
+    {
+     "name": "view",
+     "type": "Mat4",
+     "desc": "View matrix this scene part was drawn under."
+    },
+    {
+     "name": "projection",
+     "type": "Mat4",
+     "desc": "Projection matrix this scene part was drawn under."
+    },
+    {
+     "name": "viewW",
+     "type": "float",
+     "desc": "Viewport width in pixels for this context."
+    },
+    {
+     "name": "viewH",
+     "type": "float",
+     "desc": "Viewport height in pixels for this context."
+    },
+    {
+     "name": "pickable",
+     "type": "bool",
+     "desc": "Whether nodes drawn under this context can be hit-tested; false for FBO contexts."
+    }
+   ],
+   "methods": [
+    {
+     "name": "screenPointToRay",
+     "snippet": "screenPointToRay(${1:screenX}, ${2:screenY})",
+     "return": "Ray",
+     "desc": "Unproject a screen point (pixels, top-left origin) into a world-space ray."
+    },
+    {
+     "name": "worldToScreen",
+     "snippet": "worldToScreen(${1:worldPos})",
+     "return": "Vec3",
+     "desc": "Convert world coordinate to screen coordinate (x, y = screen pos, z = depth 0-1)"
+    }
+   ]
+  },
+  {
+   "name": "ChipSoundBundle",
+   "desc": "A timeline of chiptune notes (ChipSoundNote + start time) that builds into a single mixed Sound. Add notes at times, then call build() to render the mix with ADSR and clipping applied.",
+   "properties": [
+    {
+     "name": "entries",
+     "type": "std::vector<Entry>",
+     "desc": "The scheduled notes (each Entry pairs a ChipSoundNote with its start time in seconds)"
+    },
+    {
+     "name": "volume",
+     "type": "float",
+     "desc": "Master volume multiplier applied when mixing (default 1.0)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "add",
+     "snippet": "add(${1:note}, ${2:time})",
+     "return": "ChipSoundBundle &",
+     "desc": "Schedule a note to start at the given time (seconds). The second overload constructs the note inline from wave / frequency / duration."
+    },
+    {
+     "name": "clear",
+     "snippet": "clear()",
+     "return": "ChipSoundBundle &",
+     "desc": "Remove all scheduled notes."
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "float",
+     "desc": "Total duration in seconds, auto-computed from the last note's end."
+    },
+    {
+     "name": "build",
+     "snippet": "build()",
+     "return": "Sound",
+     "desc": "Render all scheduled notes into a single mixed, clipped Sound ready to play."
+    }
+   ]
+  },
+  {
+   "name": "ChipSoundNote",
+   "desc": "One 8-bit-style note: a plain aggregate of public fields (wave, hz, volume, duration, and the ADSR envelope attack/decay/sustain/release). Set fields directly via designated initializers ({ .wave = Wave::Square, .hz = 440, .duration = 0.2f }) or the constructor, then build() it into a Sound (or add() it to a ChipSoundBundle).",
+   "constructor": {
+    "snippet": "ChipSoundNote(${1:w}, ${2:freq}, ${3:dur})"
+   },
+   "properties": [
+    {
+     "name": "wave",
+     "type": "Wave",
+     "desc": "Waveform (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise, Silent)"
+    },
+    {
+     "name": "hz",
+     "type": "float",
+     "desc": "Frequency in Hz (ignored for Noise / Silent)"
+    },
+    {
+     "name": "volume",
+     "type": "float",
+     "desc": "Volume (0.0-1.0)"
+    },
+    {
+     "name": "duration",
+     "type": "float",
+     "desc": "Note duration in seconds"
+    },
+    {
+     "name": "attack",
+     "type": "float",
+     "desc": "ADSR attack time in seconds"
+    },
+    {
+     "name": "decay",
+     "type": "float",
+     "desc": "ADSR decay time in seconds"
+    },
+    {
+     "name": "sustain",
+     "type": "float",
+     "desc": "ADSR sustain level (0.0-1.0)"
+    },
+    {
+     "name": "release",
+     "type": "float",
+     "desc": "ADSR release time in seconds"
+    }
+   ],
+   "methods": [
+    {
+     "name": "build",
+     "snippet": "build()",
+     "return": "Sound",
+     "desc": "Render this note (with its ADSR envelope) into a playable Sound"
+    },
+    {
+     "name": "generateBuffer",
+     "snippet": "generateBuffer(${1:buf})",
+     "return": "void",
+     "desc": "Write this note's raw waveform (without the ADSR envelope) into buf. Used internally by build() and by ChipSoundBundle mixing."
+    },
+    {
+     "name": "getTotalDuration",
+     "snippet": "getTotalDuration()",
+     "return": "float",
+     "desc": "Total note duration in seconds (used by ChipSoundBundle to lay out note timing)."
+    }
+   ]
+  },
+  {
+   "name": "ClipboardPastedEventArgs",
+   "desc": "Arguments for clipboardPasted events; the only reliable way to read the clipboard on the Web platform",
+   "properties": [
+    {
+     "name": "text",
+     "type": "std::string",
+     "desc": "Pasted clipboard content (already read for you)"
+    }
+   ]
+  },
+  {
+   "name": "Codec",
+   "desc": "Compression codec: None (raw) or LZ4.",
+   "static_methods": [
+    {
+     "name": "None",
+     "snippet": "None",
+     "return": "Codec",
+     "desc": "= 0"
+    },
+    {
+     "name": "LZ4",
+     "snippet": "LZ4",
+     "return": "Codec",
+     "desc": "= 1"
+    }
+   ]
+  },
+  {
+   "name": "Color",
+   "desc": "RGBA color (0.0-1.0 range)",
+   "constructor": {
+    "snippet": "Color(${1:r}, ${2:g}, ${3:b})"
+   },
+   "properties": [
+    {
+     "name": "r",
+     "type": "float",
+     "desc": "Red component (0.0-1.0)"
+    },
+    {
+     "name": "g",
+     "type": "float",
+     "desc": "Green component (0.0-1.0)"
+    },
+    {
+     "name": "b",
+     "type": "float",
+     "desc": "Blue component (0.0-1.0)"
+    },
+    {
+     "name": "a",
+     "type": "float",
+     "desc": "Alpha component (0.0-1.0)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "set",
+     "snippet": "set(${1:r}, ${2:g}, ${3:b})",
+     "return": "Color &",
+     "desc": "Set color components"
+    },
+    {
+     "name": "toHex",
+     "snippet": "toHex()",
+     "return": "uint32_t",
+     "desc": "Convert to hex value"
+    },
+    {
+     "name": "toLinear",
+     "snippet": "toLinear()",
+     "return": "ColorLinear",
+     "desc": "Convert to linear RGB color space"
+    },
+    {
+     "name": "toHSB",
+     "snippet": "toHSB()",
+     "return": "ColorHSB",
+     "desc": "Convert to HSB (H: 0-1, S: 0-1, B: 0-1)"
+    },
+    {
+     "name": "toOKLab",
+     "snippet": "toOKLab()",
+     "return": "ColorOKLab",
+     "desc": "Convert to OKLab (perceptually uniform)"
+    },
+    {
+     "name": "toOKLCH",
+     "snippet": "toOKLCH()",
+     "return": "ColorOKLCH",
+     "desc": "Convert to OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
+    },
+    {
+     "name": "clamped",
+     "snippet": "clamped()",
+     "return": "Color",
+     "desc": "Get clamped copy (0.0-1.0)"
+    },
+    {
+     "name": "lerpRGB",
+     "snippet": "lerpRGB(${1:target}, ${2:t})",
+     "return": "Color",
+     "desc": "Interpolate in RGB space"
+    },
+    {
+     "name": "lerpLinear",
+     "snippet": "lerpLinear(${1:target}, ${2:t})",
+     "return": "Color",
+     "desc": "Interpolate in linear RGB space"
+    },
+    {
+     "name": "lerpHSB",
+     "snippet": "lerpHSB(${1:target}, ${2:t})",
+     "return": "Color",
+     "desc": "Interpolate in HSB space"
+    },
+    {
+     "name": "lerpOKLab",
+     "snippet": "lerpOKLab(${1:target}, ${2:t})",
+     "return": "Color",
+     "desc": "Interpolate in OKLab space (perceptually uniform)"
+    },
+    {
+     "name": "lerpOKLCH",
+     "snippet": "lerpOKLCH(${1:target}, ${2:t})",
+     "return": "Color",
+     "desc": "Interpolate in OKLCH space (shortest hue path)"
+    },
+    {
+     "name": "lerp",
+     "snippet": "lerp(${1:target}, ${2:t})",
+     "return": "Color",
+     "desc": "Interpolate in OKLab space"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "fromBytes",
+     "snippet": "fromBytes(${1:r}, ${2:g}, ${3:b})",
+     "return": "Color",
+     "desc": "Create from 0-255 values"
+    },
+    {
+     "name": "fromHex",
+     "snippet": "fromHex(${1:hex})",
+     "return": "Color",
+     "desc": "Create from hex value"
+    },
+    {
+     "name": "fromHSB",
+     "snippet": "fromHSB(${1:h}, ${2:s}, ${3:b})",
+     "return": "Color",
+     "desc": "Create from HSB (H: 0-1)"
+    },
+    {
+     "name": "fromOKLCH",
+     "snippet": "fromOKLCH(${1:L}, ${2:C}, ${3:H})",
+     "return": "Color",
+     "desc": "Create from OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
+    },
+    {
+     "name": "fromOKLab",
+     "snippet": "fromOKLab(${1:L}, ${2:a_lab}, ${3:b_lab})",
+     "return": "Color",
+     "desc": "Create from OKLab (L: 0-1, a: ~-0.4-0.4, b: ~-0.4-0.4)"
+    },
+    {
+     "name": "fromLinear",
+     "snippet": "fromLinear(${1:r}, ${2:g}, ${3:b})",
+     "return": "Color",
+     "desc": "Create from linear RGB"
+    }
+   ]
+  },
+  {
+   "name": "ColorHSB",
+   "desc": "HSB color space (H/S/B: 0-1)",
+   "constructor": {
+    "snippet": "ColorHSB(${1:h}, ${2:s}, ${3:b})"
+   },
+   "properties": [
+    {
+     "name": "h",
+     "type": "float",
+     "desc": "Hue (0.0-1.0)"
+    },
+    {
+     "name": "s",
+     "type": "float",
+     "desc": "Saturation (0.0-1.0)"
+    },
+    {
+     "name": "b",
+     "type": "float",
+     "desc": "Brightness (0.0-1.0)"
+    },
+    {
+     "name": "a",
+     "type": "float",
+     "desc": "Alpha component (0.0-1.0)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "toRGB",
+     "snippet": "toRGB()",
+     "return": "Color",
+     "desc": "Convert ColorHSB to Color (RGB)"
+    },
+    {
+     "name": "toLinear",
+     "snippet": "toLinear()",
+     "return": "ColorLinear",
+     "desc": "Convert to linear RGB color space"
+    },
+    {
+     "name": "toOKLab",
+     "snippet": "toOKLab()",
+     "return": "ColorOKLab",
+     "desc": "Convert to OKLab color space"
+    },
+    {
+     "name": "toOKLCH",
+     "snippet": "toOKLCH()",
+     "return": "ColorOKLCH",
+     "desc": "Convert to OKLCH color space"
+    },
+    {
+     "name": "lerp",
+     "snippet": "lerp(${1:target}, ${2:t})",
+     "return": "ColorHSB",
+     "desc": "Interpolate in HSB space (shortest hue path)"
+    }
+   ]
+  },
+  {
+   "name": "ColorLinear",
+   "desc": "A color in linear RGB space (no gamma encoding), 0.0-1.0 float per channel",
+   "constructor": {
+    "snippet": "ColorLinear(${1:r}, ${2:g}, ${3:b})"
+   },
+   "properties": [
+    {
+     "name": "r",
+     "type": "float",
+     "desc": "Red component (linear, 0.0-1.0)"
+    },
+    {
+     "name": "g",
+     "type": "float",
+     "desc": "Green component (linear, 0.0-1.0)"
+    },
+    {
+     "name": "b",
+     "type": "float",
+     "desc": "Blue component (linear, 0.0-1.0)"
+    },
+    {
+     "name": "a",
+     "type": "float",
+     "desc": "Alpha component (0.0-1.0)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "toSRGB",
+     "snippet": "toSRGB()",
+     "return": "Color",
+     "desc": "Convert to sRGB (gamma-encoded) Color"
+    },
+    {
+     "name": "toHSB",
+     "snippet": "toHSB()",
+     "return": "ColorHSB",
+     "desc": "Convert to HSB color space"
+    },
+    {
+     "name": "toOKLab",
+     "snippet": "toOKLab()",
+     "return": "ColorOKLab",
+     "desc": "Convert to OKLab color space"
+    },
+    {
+     "name": "toOKLCH",
+     "snippet": "toOKLCH()",
+     "return": "ColorOKLCH",
+     "desc": "Convert to OKLCH color space"
+    },
+    {
+     "name": "clamped",
+     "snippet": "clamped()",
+     "return": "ColorLinear",
+     "desc": "Clamp to non-negative RGB (HDR-safe) with alpha in 0-1"
+    },
+    {
+     "name": "clampedLDR",
+     "snippet": "clampedLDR()",
+     "return": "ColorLinear",
+     "desc": "Clamp every channel to the 0-1 LDR range"
+    },
+    {
+     "name": "lerp",
+     "snippet": "lerp(${1:target}, ${2:t})",
+     "return": "ColorLinear",
+     "desc": "Interpolate in linear space (physically correct)"
+    }
+   ]
+  },
+  {
+   "name": "ColorOKLab",
+   "desc": "A color in the OKLab perceptual color space (lightness + two opponent axes)",
+   "constructor": {
+    "snippet": "ColorOKLab(${1:L}, ${2:a}, ${3:b})"
+   },
+   "properties": [
+    {
+     "name": "L",
+     "type": "float",
+     "desc": "Lightness (0.0-1.0)"
+    },
+    {
+     "name": "a",
+     "type": "float",
+     "desc": "Green-Red opponent axis (approx -0.4 to 0.4)"
+    },
+    {
+     "name": "b",
+     "type": "float",
+     "desc": "Blue-Yellow opponent axis (approx -0.4 to 0.4)"
+    },
+    {
+     "name": "alpha",
+     "type": "float",
+     "desc": "Alpha component (0.0-1.0)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "toLinear",
+     "snippet": "toLinear()",
+     "return": "ColorLinear",
+     "desc": "Convert to linear RGB color space"
+    },
+    {
+     "name": "toRGB",
+     "snippet": "toRGB()",
+     "return": "Color",
+     "desc": "Convert to sRGB Color"
+    },
+    {
+     "name": "toHSB",
+     "snippet": "toHSB()",
+     "return": "ColorHSB",
+     "desc": "Convert to HSB color space"
+    },
+    {
+     "name": "toOKLCH",
+     "snippet": "toOKLCH()",
+     "return": "ColorOKLCH",
+     "desc": "Convert to OKLCH color space"
+    },
+    {
+     "name": "lerp",
+     "snippet": "lerp(${1:target}, ${2:t})",
+     "return": "ColorOKLab",
+     "desc": "Interpolate in OKLab space (perceptually uniform)"
+    }
+   ]
+  },
+  {
+   "name": "ColorOKLCH",
+   "desc": "Perceptually uniform OKLCH color",
+   "constructor": {
+    "snippet": "ColorOKLCH(${1:L}, ${2:C}, ${3:H})"
+   },
+   "properties": [
+    {
+     "name": "L",
+     "type": "float",
+     "desc": "Lightness (0.0-1.0)"
+    },
+    {
+     "name": "C",
+     "type": "float",
+     "desc": "Chroma (0.0 - ~0.4)"
+    },
+    {
+     "name": "H",
+     "type": "float",
+     "desc": "Hue (0.0-1.0)"
+    },
+    {
+     "name": "alpha",
+     "type": "float",
+     "desc": "Alpha component (0.0-1.0)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "toOKLab",
+     "snippet": "toOKLab()",
+     "return": "ColorOKLab",
+     "desc": "Convert to OKLab color space"
+    },
+    {
+     "name": "toLinear",
+     "snippet": "toLinear()",
+     "return": "ColorLinear",
+     "desc": "Convert to linear RGB color space"
+    },
+    {
+     "name": "toRGB",
+     "snippet": "toRGB()",
+     "return": "Color",
+     "desc": "Convert ColorOKLCH to Color (RGB)"
+    },
+    {
+     "name": "toHSB",
+     "snippet": "toHSB()",
+     "return": "ColorHSB",
+     "desc": "Convert to HSB color space"
+    },
+    {
+     "name": "lerp",
+     "snippet": "lerp(${1:target}, ${2:t})",
+     "return": "ColorOKLCH",
+     "desc": "Interpolate in OKLCH space (shortest hue path, perceptually uniform)"
+    }
+   ]
+  },
+  {
+   "name": "colors",
+   "desc": "Named color constants",
+   "static_methods": [
+    {
+     "name": "white",
+     "snippet": "white",
+     "return": "Color",
+     "desc": "#FFFFFF"
+    },
+    {
+     "name": "black",
+     "snippet": "black",
+     "return": "Color",
+     "desc": "#000000"
+    },
+    {
+     "name": "red",
+     "snippet": "red",
+     "return": "Color",
+     "desc": "#FF0000"
+    },
+    {
+     "name": "green",
+     "snippet": "green",
+     "return": "Color",
+     "desc": "#00FF00"
+    },
+    {
+     "name": "blue",
+     "snippet": "blue",
+     "return": "Color",
+     "desc": "#0000FF"
+    },
+    {
+     "name": "yellow",
+     "snippet": "yellow",
+     "return": "Color",
+     "desc": "#FFFF00"
+    },
+    {
+     "name": "cyan",
+     "snippet": "cyan",
+     "return": "Color",
+     "desc": "#00FFFF"
+    },
+    {
+     "name": "magenta",
+     "snippet": "magenta",
+     "return": "Color",
+     "desc": "#FF00FF"
+    },
+    {
+     "name": "transparent",
+     "snippet": "transparent",
+     "return": "Color",
+     "desc": "#000000"
+    },
+    {
+     "name": "gray",
+     "snippet": "gray",
+     "return": "Color",
+     "desc": "#808080"
+    },
+    {
+     "name": "grey",
+     "snippet": "grey",
+     "return": "Color",
+     "desc": "#808080"
+    },
+    {
+     "name": "darkGray",
+     "snippet": "darkGray",
+     "return": "Color",
+     "desc": "#A9A9A9"
+    },
+    {
+     "name": "darkGrey",
+     "snippet": "darkGrey",
+     "return": "Color",
+     "desc": "#A9A9A9"
+    },
+    {
+     "name": "dimGray",
+     "snippet": "dimGray",
+     "return": "Color",
+     "desc": "#696969"
+    },
+    {
+     "name": "dimGrey",
+     "snippet": "dimGrey",
+     "return": "Color",
+     "desc": "#696969"
+    },
+    {
+     "name": "lightGray",
+     "snippet": "lightGray",
+     "return": "Color",
+     "desc": "#D3D3D3"
+    },
+    {
+     "name": "lightGrey",
+     "snippet": "lightGrey",
+     "return": "Color",
+     "desc": "#D3D3D3"
+    },
+    {
+     "name": "silver",
+     "snippet": "silver",
+     "return": "Color",
+     "desc": "#C0C0C0"
+    },
+    {
+     "name": "gainsboro",
+     "snippet": "gainsboro",
+     "return": "Color",
+     "desc": "#DCDCDC"
+    },
+    {
+     "name": "whiteSmoke",
+     "snippet": "whiteSmoke",
+     "return": "Color",
+     "desc": "#F5F5F5"
+    },
+    {
+     "name": "darkRed",
+     "snippet": "darkRed",
+     "return": "Color",
+     "desc": "#8B0000"
+    },
+    {
+     "name": "fireBrick",
+     "snippet": "fireBrick",
+     "return": "Color",
+     "desc": "#B22222"
+    },
+    {
+     "name": "crimson",
+     "snippet": "crimson",
+     "return": "Color",
+     "desc": "#DC143C"
+    },
+    {
+     "name": "indianRed",
+     "snippet": "indianRed",
+     "return": "Color",
+     "desc": "#CD5C5C"
+    },
+    {
+     "name": "lightCoral",
+     "snippet": "lightCoral",
+     "return": "Color",
+     "desc": "#F08080"
+    },
+    {
+     "name": "salmon",
+     "snippet": "salmon",
+     "return": "Color",
+     "desc": "#FA8072"
+    },
+    {
+     "name": "darkSalmon",
+     "snippet": "darkSalmon",
+     "return": "Color",
+     "desc": "#E9967A"
+    },
+    {
+     "name": "lightSalmon",
+     "snippet": "lightSalmon",
+     "return": "Color",
+     "desc": "#FFA07A"
+    },
+    {
+     "name": "orange",
+     "snippet": "orange",
+     "return": "Color",
+     "desc": "#FFA500"
+    },
+    {
+     "name": "darkOrange",
+     "snippet": "darkOrange",
+     "return": "Color",
+     "desc": "#FF8C00"
+    },
+    {
+     "name": "orangeRed",
+     "snippet": "orangeRed",
+     "return": "Color",
+     "desc": "#FF4500"
+    },
+    {
+     "name": "tomato",
+     "snippet": "tomato",
+     "return": "Color",
+     "desc": "#FF6347"
+    },
+    {
+     "name": "coral",
+     "snippet": "coral",
+     "return": "Color",
+     "desc": "#FF7F50"
+    },
+    {
+     "name": "gold",
+     "snippet": "gold",
+     "return": "Color",
+     "desc": "#FFD700"
+    },
+    {
+     "name": "goldenRod",
+     "snippet": "goldenRod",
+     "return": "Color",
+     "desc": "#DAA520"
+    },
+    {
+     "name": "darkGoldenRod",
+     "snippet": "darkGoldenRod",
+     "return": "Color",
+     "desc": "#B8860B"
+    },
+    {
+     "name": "paleGoldenRod",
+     "snippet": "paleGoldenRod",
+     "return": "Color",
+     "desc": "#EEE8AA"
+    },
+    {
+     "name": "lightGoldenRodYellow",
+     "snippet": "lightGoldenRodYellow",
+     "return": "Color",
+     "desc": "#FAFAD2"
+    },
+    {
+     "name": "khaki",
+     "snippet": "khaki",
+     "return": "Color",
+     "desc": "#F0E68C"
+    },
+    {
+     "name": "darkKhaki",
+     "snippet": "darkKhaki",
+     "return": "Color",
+     "desc": "#BDB76B"
+    },
+    {
+     "name": "lime",
+     "snippet": "lime",
+     "return": "Color",
+     "desc": "#00FF00"
+    },
+    {
+     "name": "limeGreen",
+     "snippet": "limeGreen",
+     "return": "Color",
+     "desc": "#32CD32"
+    },
+    {
+     "name": "lightGreen",
+     "snippet": "lightGreen",
+     "return": "Color",
+     "desc": "#90EE90"
+    },
+    {
+     "name": "paleGreen",
+     "snippet": "paleGreen",
+     "return": "Color",
+     "desc": "#98FB98"
+    },
+    {
+     "name": "darkGreen",
+     "snippet": "darkGreen",
+     "return": "Color",
+     "desc": "#006400"
+    },
+    {
+     "name": "forestGreen",
+     "snippet": "forestGreen",
+     "return": "Color",
+     "desc": "#228B22"
+    },
+    {
+     "name": "seaGreen",
+     "snippet": "seaGreen",
+     "return": "Color",
+     "desc": "#2E8B57"
+    },
+    {
+     "name": "mediumSeaGreen",
+     "snippet": "mediumSeaGreen",
+     "return": "Color",
+     "desc": "#3CB371"
+    },
+    {
+     "name": "darkSeaGreen",
+     "snippet": "darkSeaGreen",
+     "return": "Color",
+     "desc": "#8FBC8F"
+    },
+    {
+     "name": "lightSeaGreen",
+     "snippet": "lightSeaGreen",
+     "return": "Color",
+     "desc": "#20B2AA"
+    },
+    {
+     "name": "springGreen",
+     "snippet": "springGreen",
+     "return": "Color",
+     "desc": "#00FF7F"
+    },
+    {
+     "name": "mediumSpringGreen",
+     "snippet": "mediumSpringGreen",
+     "return": "Color",
+     "desc": "#00FA9A"
+    },
+    {
+     "name": "greenYellow",
+     "snippet": "greenYellow",
+     "return": "Color",
+     "desc": "#ADFF2F"
+    },
+    {
+     "name": "yellowGreen",
+     "snippet": "yellowGreen",
+     "return": "Color",
+     "desc": "#9ACD32"
+    },
+    {
+     "name": "chartreuse",
+     "snippet": "chartreuse",
+     "return": "Color",
+     "desc": "#7FFF00"
+    },
+    {
+     "name": "lawnGreen",
+     "snippet": "lawnGreen",
+     "return": "Color",
+     "desc": "#7CFC00"
+    },
+    {
+     "name": "olive",
+     "snippet": "olive",
+     "return": "Color",
+     "desc": "#808000"
+    },
+    {
+     "name": "oliveDrab",
+     "snippet": "oliveDrab",
+     "return": "Color",
+     "desc": "#6B8E23"
+    },
+    {
+     "name": "darkOliveGreen",
+     "snippet": "darkOliveGreen",
+     "return": "Color",
+     "desc": "#556B2F"
+    },
+    {
+     "name": "aqua",
+     "snippet": "aqua",
+     "return": "Color",
+     "desc": "#00FFFF"
+    },
+    {
+     "name": "aquamarine",
+     "snippet": "aquamarine",
+     "return": "Color",
+     "desc": "#7FFFD4"
+    },
+    {
+     "name": "mediumAquaMarine",
+     "snippet": "mediumAquaMarine",
+     "return": "Color",
+     "desc": "#66CDAA"
+    },
+    {
+     "name": "darkCyan",
+     "snippet": "darkCyan",
+     "return": "Color",
+     "desc": "#008B8B"
+    },
+    {
+     "name": "teal",
+     "snippet": "teal",
+     "return": "Color",
+     "desc": "#008080"
+    },
+    {
+     "name": "lightCyan",
+     "snippet": "lightCyan",
+     "return": "Color",
+     "desc": "#E0FFFF"
+    },
+    {
+     "name": "turquoise",
+     "snippet": "turquoise",
+     "return": "Color",
+     "desc": "#40E0D0"
+    },
+    {
+     "name": "mediumTurquoise",
+     "snippet": "mediumTurquoise",
+     "return": "Color",
+     "desc": "#48D1CC"
+    },
+    {
+     "name": "darkTurquoise",
+     "snippet": "darkTurquoise",
+     "return": "Color",
+     "desc": "#00CED1"
+    },
+    {
+     "name": "paleTurquoise",
+     "snippet": "paleTurquoise",
+     "return": "Color",
+     "desc": "#AFEEEE"
+    },
+    {
+     "name": "navy",
+     "snippet": "navy",
+     "return": "Color",
+     "desc": "#000080"
+    },
+    {
+     "name": "darkBlue",
+     "snippet": "darkBlue",
+     "return": "Color",
+     "desc": "#00008B"
+    },
+    {
+     "name": "mediumBlue",
+     "snippet": "mediumBlue",
+     "return": "Color",
+     "desc": "#0000CD"
+    },
+    {
+     "name": "royalBlue",
+     "snippet": "royalBlue",
+     "return": "Color",
+     "desc": "#4169E1"
+    },
+    {
+     "name": "steelBlue",
+     "snippet": "steelBlue",
+     "return": "Color",
+     "desc": "#4682B4"
+    },
+    {
+     "name": "blueSteel",
+     "snippet": "blueSteel",
+     "return": "Color",
+     "desc": "#4682B4"
+    },
+    {
+     "name": "lightSteelBlue",
+     "snippet": "lightSteelBlue",
+     "return": "Color",
+     "desc": "#B0C4DE"
+    },
+    {
+     "name": "dodgerBlue",
+     "snippet": "dodgerBlue",
+     "return": "Color",
+     "desc": "#1E90FF"
+    },
+    {
+     "name": "deepSkyBlue",
+     "snippet": "deepSkyBlue",
+     "return": "Color",
+     "desc": "#00BFFF"
+    },
+    {
+     "name": "skyBlue",
+     "snippet": "skyBlue",
+     "return": "Color",
+     "desc": "#87CEEB"
+    },
+    {
+     "name": "lightSkyBlue",
+     "snippet": "lightSkyBlue",
+     "return": "Color",
+     "desc": "#87CEFA"
+    },
+    {
+     "name": "lightBlue",
+     "snippet": "lightBlue",
+     "return": "Color",
+     "desc": "#ADD8E6"
+    },
+    {
+     "name": "powderBlue",
+     "snippet": "powderBlue",
+     "return": "Color",
+     "desc": "#B0E0E6"
+    },
+    {
+     "name": "cornflowerBlue",
+     "snippet": "cornflowerBlue",
+     "return": "Color",
+     "desc": "#6495ED"
+    },
+    {
+     "name": "cadetBlue",
+     "snippet": "cadetBlue",
+     "return": "Color",
+     "desc": "#5F9EA0"
+    },
+    {
+     "name": "midnightBlue",
+     "snippet": "midnightBlue",
+     "return": "Color",
+     "desc": "#191970"
+    },
+    {
+     "name": "aliceBlue",
+     "snippet": "aliceBlue",
+     "return": "Color",
+     "desc": "#F0F8FF"
+    },
+    {
+     "name": "purple",
+     "snippet": "purple",
+     "return": "Color",
+     "desc": "#800080"
+    },
+    {
+     "name": "darkMagenta",
+     "snippet": "darkMagenta",
+     "return": "Color",
+     "desc": "#8B008B"
+    },
+    {
+     "name": "darkViolet",
+     "snippet": "darkViolet",
+     "return": "Color",
+     "desc": "#9400D3"
+    },
+    {
+     "name": "blueViolet",
+     "snippet": "blueViolet",
+     "return": "Color",
+     "desc": "#8A2BE2"
+    },
+    {
+     "name": "indigo",
+     "snippet": "indigo",
+     "return": "Color",
+     "desc": "#4B0082"
+    },
+    {
+     "name": "slateBlue",
+     "snippet": "slateBlue",
+     "return": "Color",
+     "desc": "#6A5ACD"
+    },
+    {
+     "name": "darkSlateBlue",
+     "snippet": "darkSlateBlue",
+     "return": "Color",
+     "desc": "#483D8B"
+    },
+    {
+     "name": "mediumSlateBlue",
+     "snippet": "mediumSlateBlue",
+     "return": "Color",
+     "desc": "#7B68EE"
+    },
+    {
+     "name": "mediumPurple",
+     "snippet": "mediumPurple",
+     "return": "Color",
+     "desc": "#9370DB"
+    },
+    {
+     "name": "darkOrchid",
+     "snippet": "darkOrchid",
+     "return": "Color",
+     "desc": "#9932CC"
+    },
+    {
+     "name": "mediumOrchid",
+     "snippet": "mediumOrchid",
+     "return": "Color",
+     "desc": "#BA55D3"
+    },
+    {
+     "name": "orchid",
+     "snippet": "orchid",
+     "return": "Color",
+     "desc": "#DA70D6"
+    },
+    {
+     "name": "violet",
+     "snippet": "violet",
+     "return": "Color",
+     "desc": "#EE82EE"
+    },
+    {
+     "name": "plum",
+     "snippet": "plum",
+     "return": "Color",
+     "desc": "#DDA0DD"
+    },
+    {
+     "name": "thistle",
+     "snippet": "thistle",
+     "return": "Color",
+     "desc": "#D8BFD8"
+    },
+    {
+     "name": "lavender",
+     "snippet": "lavender",
+     "return": "Color",
+     "desc": "#E6E6FA"
+    },
+    {
+     "name": "fuchsia",
+     "snippet": "fuchsia",
+     "return": "Color",
+     "desc": "#FF00FF"
+    },
+    {
+     "name": "pink",
+     "snippet": "pink",
+     "return": "Color",
+     "desc": "#FFC0CB"
+    },
+    {
+     "name": "lightPink",
+     "snippet": "lightPink",
+     "return": "Color",
+     "desc": "#FFB6C1"
+    },
+    {
+     "name": "hotPink",
+     "snippet": "hotPink",
+     "return": "Color",
+     "desc": "#FF69B4"
+    },
+    {
+     "name": "deepPink",
+     "snippet": "deepPink",
+     "return": "Color",
+     "desc": "#FF1493"
+    },
+    {
+     "name": "mediumVioletRed",
+     "snippet": "mediumVioletRed",
+     "return": "Color",
+     "desc": "#C71585"
+    },
+    {
+     "name": "paleVioletRed",
+     "snippet": "paleVioletRed",
+     "return": "Color",
+     "desc": "#DB7093"
+    },
+    {
+     "name": "brown",
+     "snippet": "brown",
+     "return": "Color",
+     "desc": "#A52A2A"
+    },
+    {
+     "name": "maroon",
+     "snippet": "maroon",
+     "return": "Color",
+     "desc": "#800000"
+    },
+    {
+     "name": "saddleBrown",
+     "snippet": "saddleBrown",
+     "return": "Color",
+     "desc": "#8B4513"
+    },
+    {
+     "name": "sienna",
+     "snippet": "sienna",
+     "return": "Color",
+     "desc": "#A0522D"
+    },
+    {
+     "name": "chocolate",
+     "snippet": "chocolate",
+     "return": "Color",
+     "desc": "#D2691E"
+    },
+    {
+     "name": "peru",
+     "snippet": "peru",
+     "return": "Color",
+     "desc": "#CD853F"
+    },
+    {
+     "name": "sandyBrown",
+     "snippet": "sandyBrown",
+     "return": "Color",
+     "desc": "#F4A460"
+    },
+    {
+     "name": "burlyWood",
+     "snippet": "burlyWood",
+     "return": "Color",
+     "desc": "#DEB887"
+    },
+    {
+     "name": "tan",
+     "snippet": "tan",
+     "return": "Color",
+     "desc": "#D2B48C"
+    },
+    {
+     "name": "rosyBrown",
+     "snippet": "rosyBrown",
+     "return": "Color",
+     "desc": "#BC8F8F"
+    },
+    {
+     "name": "snow",
+     "snippet": "snow",
+     "return": "Color",
+     "desc": "#FFFAFA"
+    },
+    {
+     "name": "honeyDew",
+     "snippet": "honeyDew",
+     "return": "Color",
+     "desc": "#F0FFF0"
+    },
+    {
+     "name": "mintCream",
+     "snippet": "mintCream",
+     "return": "Color",
+     "desc": "#F5FFFA"
+    },
+    {
+     "name": "azure",
+     "snippet": "azure",
+     "return": "Color",
+     "desc": "#F0FFFF"
+    },
+    {
+     "name": "ghostWhite",
+     "snippet": "ghostWhite",
+     "return": "Color",
+     "desc": "#F8F8FF"
+    },
+    {
+     "name": "floralWhite",
+     "snippet": "floralWhite",
+     "return": "Color",
+     "desc": "#FFFAF0"
+    },
+    {
+     "name": "ivory",
+     "snippet": "ivory",
+     "return": "Color",
+     "desc": "#FFFFF0"
+    },
+    {
+     "name": "antiqueWhite",
+     "snippet": "antiqueWhite",
+     "return": "Color",
+     "desc": "#FAEBD7"
+    },
+    {
+     "name": "linen",
+     "snippet": "linen",
+     "return": "Color",
+     "desc": "#FAF0E6"
+    },
+    {
+     "name": "lavenderBlush",
+     "snippet": "lavenderBlush",
+     "return": "Color",
+     "desc": "#FFF0F5"
+    },
+    {
+     "name": "mistyRose",
+     "snippet": "mistyRose",
+     "return": "Color",
+     "desc": "#FFE4E1"
+    },
+    {
+     "name": "oldLace",
+     "snippet": "oldLace",
+     "return": "Color",
+     "desc": "#FDF5E6"
+    },
+    {
+     "name": "seaShell",
+     "snippet": "seaShell",
+     "return": "Color",
+     "desc": "#FFF5EE"
+    },
+    {
+     "name": "beige",
+     "snippet": "beige",
+     "return": "Color",
+     "desc": "#F5F5DC"
+    },
+    {
+     "name": "cornsilk",
+     "snippet": "cornsilk",
+     "return": "Color",
+     "desc": "#FFF8DC"
+    },
+    {
+     "name": "lemonChiffon",
+     "snippet": "lemonChiffon",
+     "return": "Color",
+     "desc": "#FFFACD"
+    },
+    {
+     "name": "lightYellow",
+     "snippet": "lightYellow",
+     "return": "Color",
+     "desc": "#FFFFE0"
+    },
+    {
+     "name": "wheat",
+     "snippet": "wheat",
+     "return": "Color",
+     "desc": "#F5DEB3"
+    },
+    {
+     "name": "moccasin",
+     "snippet": "moccasin",
+     "return": "Color",
+     "desc": "#FFE4B5"
+    },
+    {
+     "name": "peachPuff",
+     "snippet": "peachPuff",
+     "return": "Color",
+     "desc": "#FFDAB9"
+    },
+    {
+     "name": "papayaWhip",
+     "snippet": "papayaWhip",
+     "return": "Color",
+     "desc": "#FFEFD5"
+    },
+    {
+     "name": "blanchedAlmond",
+     "snippet": "blanchedAlmond",
+     "return": "Color",
+     "desc": "#FFEBCD"
+    },
+    {
+     "name": "bisque",
+     "snippet": "bisque",
+     "return": "Color",
+     "desc": "#FFE4C4"
+    },
+    {
+     "name": "navajoWhite",
+     "snippet": "navajoWhite",
+     "return": "Color",
+     "desc": "#FFDEAD"
+    },
+    {
+     "name": "slateGray",
+     "snippet": "slateGray",
+     "return": "Color",
+     "desc": "#708090"
+    },
+    {
+     "name": "slateGrey",
+     "snippet": "slateGrey",
+     "return": "Color",
+     "desc": "#708090"
+    },
+    {
+     "name": "lightSlateGray",
+     "snippet": "lightSlateGray",
+     "return": "Color",
+     "desc": "#778899"
+    },
+    {
+     "name": "lightSlateGrey",
+     "snippet": "lightSlateGrey",
+     "return": "Color",
+     "desc": "#778899"
+    },
+    {
+     "name": "darkSlateGray",
+     "snippet": "darkSlateGray",
+     "return": "Color",
+     "desc": "#2F4F4F"
+    },
+    {
+     "name": "darkSlateGrey",
+     "snippet": "darkSlateGrey",
+     "return": "Color",
+     "desc": "#2F4F4F"
+    }
+   ]
+  },
+  {
+   "name": "ConsoleEventArgs",
+   "desc": "Arguments for the console event (a command line received from stdin)",
+   "properties": [
+    {
+     "name": "raw",
+     "type": "std::string",
+     "desc": "Raw input line (e.g. \"tcdebug screenshot /tmp/a.png\")\n"
+    },
+    {
+     "name": "args",
+     "type": "std::vector<std::string>",
+     "desc": "Input line split on whitespace (e.g. [\"tcdebug\", \"screenshot\", \"/tmp/a.png\"])\n"
+    }
+   ]
+  },
+  {
+   "name": "CoreEvents",
+   "desc": "Hub of all framework core events. Each member is an Event you subscribe to with .listen(callback); access the global instance via events()",
+   "properties": [
+    {
+     "name": "setup",
+     "type": "Event<void>",
+     "desc": "Fired after app setup completes"
+    },
+    {
+     "name": "update",
+     "type": "Event<void>",
+     "desc": "Fired before update each frame"
+    },
+    {
+     "name": "draw",
+     "type": "Event<void>",
+     "desc": "Fired before draw each frame"
+    },
+    {
+     "name": "onRender",
+     "type": "Event<void>",
+     "desc": "Fired after sokol_gl flush, while the render pass is still active"
+    },
+    {
+     "name": "afterFrame",
+     "type": "Event<void>",
+     "desc": "Fired after present() (swapchain committed, outside any pass)"
+    },
+    {
+     "name": "exit",
+     "type": "Event<void>",
+     "desc": "Fired on app exit"
+    },
+    {
+     "name": "exitRequested",
+     "type": "Event<ExitRequestEventArgs>",
+     "desc": "Fired when an exit is requested; set args.cancel = true to cancel it"
+    },
+    {
+     "name": "keyPressed",
+     "type": "Event<KeyEventArgs>",
+     "desc": "Fired when a key is pressed"
+    },
+    {
+     "name": "keyReleased",
+     "type": "Event<KeyEventArgs>",
+     "desc": "Fired when a key is released"
+    },
+    {
+     "name": "mousePressed",
+     "type": "Event<MouseEventArgs>",
+     "desc": "Fired when a mouse button is pressed"
+    },
+    {
+     "name": "mouseReleased",
+     "type": "Event<MouseEventArgs>",
+     "desc": "Fired when a mouse button is released"
+    },
+    {
+     "name": "mouseMoved",
+     "type": "Event<MouseMoveEventArgs>",
+     "desc": "Fired when the mouse moves with no button held"
+    },
+    {
+     "name": "mouseDragged",
+     "type": "Event<MouseDragEventArgs>",
+     "desc": "Fired when the mouse moves with a button held"
+    },
+    {
+     "name": "mouseScrolled",
+     "type": "Event<ScrollEventArgs>",
+     "desc": "Fired when the mouse wheel / trackpad scrolls"
+    },
+    {
+     "name": "windowResized",
+     "type": "Event<ResizeEventArgs>",
+     "desc": "Fired when the window is resized"
+    },
+    {
+     "name": "filesDropped",
+     "type": "Event<DragDropEventArgs>",
+     "desc": "Fired when files are dropped onto the window"
+    },
+    {
+     "name": "clipboardPasted",
+     "type": "Event<ClipboardPastedEventArgs>",
+     "desc": "Fired on a paste gesture (Cmd+V / Ctrl+V / browser paste); args.text holds the content"
+    },
+    {
+     "name": "console",
+     "type": "Event<ConsoleEventArgs>",
+     "desc": "Fired when a command line is received from stdin"
+    },
+    {
+     "name": "touchPressed",
+     "type": "Event<TouchEventArgs>",
+     "desc": "Fired when a touch begins (Android/iOS, multi-touch)"
+    },
+    {
+     "name": "touchMoved",
+     "type": "Event<TouchEventArgs>",
+     "desc": "Fired when a touch moves (Android/iOS, multi-touch)"
+    },
+    {
+     "name": "touchReleased",
+     "type": "Event<TouchEventArgs>",
+     "desc": "Fired when a touch ends or is cancelled (check args.cancelled)"
+    },
+    {
+     "name": "rawEvent",
+     "type": "Event<const sapp_event>",
+     "desc": "Fired for every raw sokol_app event (for addons needing the full sapp_event)"
+    }
+   ]
+  },
+  {
+   "name": "Cursor",
+   "desc": "Mouse cursor shape (Default, Arrow, IBeam, Crosshair, Hand, resize cursors, …).",
+   "static_methods": [
+    {
+     "name": "Default",
+     "snippet": "Default",
+     "return": "Cursor",
+     "desc": "= 0"
+    },
+    {
+     "name": "Arrow",
+     "snippet": "Arrow",
+     "return": "Cursor",
+     "desc": "= 1"
+    },
+    {
+     "name": "IBeam",
+     "snippet": "IBeam",
+     "return": "Cursor",
+     "desc": "= 2"
+    },
+    {
+     "name": "Crosshair",
+     "snippet": "Crosshair",
+     "return": "Cursor",
+     "desc": "= 3"
+    },
+    {
+     "name": "Hand",
+     "snippet": "Hand",
+     "return": "Cursor",
+     "desc": "= 4"
+    },
+    {
+     "name": "ResizeEW",
+     "snippet": "ResizeEW",
+     "return": "Cursor",
+     "desc": "= 5"
+    },
+    {
+     "name": "ResizeNS",
+     "snippet": "ResizeNS",
+     "return": "Cursor",
+     "desc": "= 6"
+    },
+    {
+     "name": "ResizeNWSE",
+     "snippet": "ResizeNWSE",
+     "return": "Cursor",
+     "desc": "= 7"
+    },
+    {
+     "name": "ResizeNESW",
+     "snippet": "ResizeNESW",
+     "return": "Cursor",
+     "desc": "= 8"
+    },
+    {
+     "name": "ResizeAll",
+     "snippet": "ResizeAll",
+     "return": "Cursor",
+     "desc": "= 9"
+    },
+    {
+     "name": "NotAllowed",
+     "snippet": "NotAllowed",
+     "return": "Cursor",
+     "desc": "= 10"
+    },
+    {
+     "name": "Custom0",
+     "snippet": "Custom0",
+     "return": "Cursor",
+     "desc": "= 11"
+    },
+    {
+     "name": "Custom1",
+     "snippet": "Custom1",
+     "return": "Cursor",
+     "desc": "= 12"
+    },
+    {
+     "name": "Custom2",
+     "snippet": "Custom2",
+     "return": "Cursor",
+     "desc": "= 13"
+    },
+    {
+     "name": "Custom3",
+     "snippet": "Custom3",
+     "return": "Cursor",
+     "desc": "= 14"
+    },
+    {
+     "name": "Custom4",
+     "snippet": "Custom4",
+     "return": "Cursor",
+     "desc": "= 15"
+    },
+    {
+     "name": "Custom5",
+     "snippet": "Custom5",
+     "return": "Cursor",
+     "desc": "= 16"
+    },
+    {
+     "name": "Custom6",
+     "snippet": "Custom6",
+     "return": "Cursor",
+     "desc": "= 17"
+    },
+    {
+     "name": "Custom7",
+     "snippet": "Custom7",
+     "return": "Cursor",
+     "desc": "= 18"
+    },
+    {
+     "name": "Custom8",
+     "snippet": "Custom8",
+     "return": "Cursor",
+     "desc": "= 19"
+    },
+    {
+     "name": "Custom9",
+     "snippet": "Custom9",
+     "return": "Cursor",
+     "desc": "= 20"
+    },
+    {
+     "name": "Custom10",
+     "snippet": "Custom10",
+     "return": "Cursor",
+     "desc": "= 21"
+    },
+    {
+     "name": "Custom11",
+     "snippet": "Custom11",
+     "return": "Cursor",
+     "desc": "= 22"
+    },
+    {
+     "name": "Custom12",
+     "snippet": "Custom12",
+     "return": "Cursor",
+     "desc": "= 23"
+    },
+    {
+     "name": "Custom13",
+     "snippet": "Custom13",
+     "return": "Cursor",
+     "desc": "= 24"
+    },
+    {
+     "name": "Custom14",
+     "snippet": "Custom14",
+     "return": "Cursor",
+     "desc": "= 25"
+    },
+    {
+     "name": "Custom15",
+     "snippet": "Custom15",
+     "return": "Cursor",
+     "desc": "= 26"
+    }
+   ]
+  },
+  {
+   "name": "CurveStyle",
+   "desc": "Curve tessellation settings: Mode (Tolerance or Resolution), the pixel tolerance, and the fixed resolution fallback",
+   "properties": [
+    {
+     "name": "mode",
+     "type": "Mode",
+     "desc": "Tessellation mode: adaptive Tolerance or fixed Resolution"
+    },
+    {
+     "name": "tolerance",
+     "type": "float",
+     "desc": "Maximum chord-to-curve error in screen pixels (Tolerance mode)"
+    },
+    {
+     "name": "resolution",
+     "type": "int",
+     "desc": "Fixed segment count used in Resolution mode (and as a fallback)"
+    }
+   ]
+  },
+  {
+   "name": "Deliver",
+   "desc": "Event delivery timing: Inline fires synchronously on the calling thread; Main queues the event to the main thread.",
+   "static_methods": [
+    {
+     "name": "Inline",
+     "snippet": "Inline",
+     "return": "Deliver",
+     "desc": "= 0"
+    },
+    {
+     "name": "Main",
+     "snippet": "Main",
+     "return": "Deliver",
+     "desc": "= 1"
+    }
+   ]
+  },
+  {
+   "name": "Direction",
+   "desc": "Alignment / direction: Left, Center, Right, Top, Bottom, Baseline.",
+   "static_methods": [
+    {
+     "name": "Left",
+     "snippet": "Left",
+     "return": "Direction",
+     "desc": "= 0"
+    },
+    {
+     "name": "Center",
+     "snippet": "Center",
+     "return": "Direction",
+     "desc": "= 1"
+    },
+    {
+     "name": "Right",
+     "snippet": "Right",
+     "return": "Direction",
+     "desc": "= 2"
+    },
+    {
+     "name": "Top",
+     "snippet": "Top",
+     "return": "Direction",
+     "desc": "= 3"
+    },
+    {
+     "name": "Bottom",
+     "snippet": "Bottom",
+     "return": "Direction",
+     "desc": "= 4"
+    },
+    {
+     "name": "Baseline",
+     "snippet": "Baseline",
+     "return": "Direction",
+     "desc": "= 5"
+    }
+   ]
+  },
+  {
+   "name": "DragDropEventArgs",
+   "desc": "Arguments for filesDropped events",
+   "properties": [
+    {
+     "name": "files",
+     "type": "std::vector<std::string>",
+     "desc": "Paths of the dropped files"
+    },
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "Drop position x"
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Drop position y"
+    }
+   ]
+  },
+  {
+   "name": "EaseMode",
+   "desc": "Easing direction: In, Out, or InOut.",
+   "static_methods": [
+    {
+     "name": "In",
+     "snippet": "In",
+     "return": "EaseMode",
+     "desc": "= 0"
+    },
+    {
+     "name": "Out",
+     "snippet": "Out",
+     "return": "EaseMode",
+     "desc": "= 1"
+    },
+    {
+     "name": "InOut",
+     "snippet": "InOut",
+     "return": "EaseMode",
+     "desc": "= 2"
+    }
+   ]
+  },
+  {
+   "name": "EaseType",
+   "desc": "Easing function family (Linear, Quad, Cubic, Sine, Expo, …) for tweens.",
+   "static_methods": [
+    {
+     "name": "Linear",
+     "snippet": "Linear",
+     "return": "EaseType",
+     "desc": "= 0"
+    },
+    {
+     "name": "Quad",
+     "snippet": "Quad",
+     "return": "EaseType",
+     "desc": "= 1"
+    },
+    {
+     "name": "Cubic",
+     "snippet": "Cubic",
+     "return": "EaseType",
+     "desc": "= 2"
+    },
+    {
+     "name": "Quart",
+     "snippet": "Quart",
+     "return": "EaseType",
+     "desc": "= 3"
+    },
+    {
+     "name": "Quint",
+     "snippet": "Quint",
+     "return": "EaseType",
+     "desc": "= 4"
+    },
+    {
+     "name": "Sine",
+     "snippet": "Sine",
+     "return": "EaseType",
+     "desc": "= 5"
+    },
+    {
+     "name": "Expo",
+     "snippet": "Expo",
+     "return": "EaseType",
+     "desc": "= 6"
+    },
+    {
+     "name": "Circ",
+     "snippet": "Circ",
+     "return": "EaseType",
+     "desc": "= 7"
+    },
+    {
+     "name": "Back",
+     "snippet": "Back",
+     "return": "EaseType",
+     "desc": "= 8"
+    },
+    {
+     "name": "Elastic",
+     "snippet": "Elastic",
+     "return": "EaseType",
+     "desc": "= 9"
+    },
+    {
+     "name": "Bounce",
+     "snippet": "Bounce",
+     "return": "EaseType",
+     "desc": "= 10"
+    }
+   ]
+  },
+  {
+   "name": "EasyCam",
+   "desc": "3D camera with mouse control",
+   "constructor": {
+    "snippet": "EasyCam()"
+   },
+   "methods": [
+    {
+     "name": "begin",
+     "snippet": "begin()",
+     "return": "void",
+     "desc": "Apply camera transform (start 3D mode)"
+    },
+    {
+     "name": "end",
+     "snippet": "end()",
+     "return": "void",
+     "desc": "Restore previous transform (end 3D mode)"
+    },
+    {
+     "name": "reset",
+     "snippet": "reset()",
+     "return": "void",
+     "desc": "Reset camera to default position"
+    },
+    {
+     "name": "setTarget",
+     "snippet": "setTarget(${1:x}, ${2:y}, ${3:z})",
+     "return": "void",
+     "desc": "Set camera look-at target"
+    },
+    {
+     "name": "getTarget",
+     "snippet": "getTarget()",
+     "return": "Vec3",
+     "desc": "Get camera look-at target"
+    },
+    {
+     "name": "setUpAxis",
+     "snippet": "setUpAxis(${1:up})",
+     "return": "void",
+     "desc": "Set the camera up axis (default Y-up; use (0,0,1) for Z-up)"
+    },
+    {
+     "name": "getUpAxis",
+     "snippet": "getUpAxis()",
+     "return": "Vec3",
+     "desc": "Get the camera up axis"
+    },
+    {
+     "name": "setDistance",
+     "snippet": "setDistance(${1:d})",
+     "return": "void",
+     "desc": "Set distance from target"
+    },
+    {
+     "name": "getDistance",
+     "snippet": "getDistance()",
+     "return": "float",
+     "desc": "Get distance from target"
+    },
+    {
+     "name": "setAzimuth",
+     "snippet": "setAzimuth(${1:radians})",
+     "return": "void",
+     "desc": "Set orbit azimuth (horizontal angle, radians)"
+    },
+    {
+     "name": "setElevation",
+     "snippet": "setElevation(${1:radians})",
+     "return": "void",
+     "desc": "Set orbit elevation (vertical angle, radians; clamped to ~±80°)"
+    },
+    {
+     "name": "getElevation",
+     "snippet": "getElevation()",
+     "return": "float",
+     "desc": "Get orbit elevation (vertical angle, radians)"
+    },
+    {
+     "name": "getAzimuth",
+     "snippet": "getAzimuth()",
+     "return": "float",
+     "desc": "Get orbit azimuth (horizontal angle, radians)"
+    },
+    {
+     "name": "enableOrtho",
+     "snippet": "enableOrtho()",
+     "return": "void",
+     "desc": "Enable orthographic projection"
+    },
+    {
+     "name": "disableOrtho",
+     "snippet": "disableOrtho()",
+     "return": "void",
+     "desc": "Disable orthographic projection (use perspective)"
+    },
+    {
+     "name": "setOrtho",
+     "snippet": "setOrtho(${1:ortho})",
+     "return": "void",
+     "desc": "Set orthographic projection on/off"
+    },
+    {
+     "name": "getOrtho",
+     "snippet": "getOrtho()",
+     "return": "bool",
+     "desc": "Get whether orthographic projection is enabled"
+    },
+    {
+     "name": "setFov",
+     "snippet": "setFov(${1:fov})",
+     "return": "void",
+     "desc": "Set field of view in radians"
+    },
+    {
+     "name": "getFov",
+     "snippet": "getFov()",
+     "return": "float",
+     "desc": "Get field of view in radians"
+    },
+    {
+     "name": "setFovDeg",
+     "snippet": "setFovDeg(${1:degrees})",
+     "return": "void",
+     "desc": "Set field of view in degrees"
+    },
+    {
+     "name": "setNearClip",
+     "snippet": "setNearClip(${1:nearClip})",
+     "return": "void",
+     "desc": "Set near clipping plane"
+    },
+    {
+     "name": "setFarClip",
+     "snippet": "setFarClip(${1:farClip})",
+     "return": "void",
+     "desc": "Set far clipping plane"
+    },
+    {
+     "name": "setSensitivity",
+     "snippet": "setSensitivity(${1:s})",
+     "return": "void",
+     "desc": "Set rotation sensitivity"
+    },
+    {
+     "name": "setZoomSensitivity",
+     "snippet": "setZoomSensitivity(${1:s})",
+     "return": "void",
+     "desc": "Set zoom sensitivity"
+    },
+    {
+     "name": "setPanSensitivity",
+     "snippet": "setPanSensitivity(${1:s})",
+     "return": "void",
+     "desc": "Set pan sensitivity"
+    },
+    {
+     "name": "setOrbitButton",
+     "snippet": "setOrbitButton(${1:button})",
+     "return": "EasyCam &",
+     "desc": "Set the mouse button that orbits the camera (default: left)"
+    },
+    {
+     "name": "getOrbitButton",
+     "snippet": "getOrbitButton()",
+     "return": "int",
+     "desc": "Get the mouse button that orbits the camera"
+    },
+    {
+     "name": "setPanButton",
+     "snippet": "setPanButton(${1:button})",
+     "return": "EasyCam &",
+     "desc": "Set the mouse button that pans the camera (default: middle)"
+    },
+    {
+     "name": "getPanButton",
+     "snippet": "getPanButton()",
+     "return": "int",
+     "desc": "Get the mouse button that pans the camera"
+    },
+    {
+     "name": "setDragModifier",
+     "snippet": "setDragModifier(${1:m})",
+     "return": "EasyCam &",
+     "desc": "Set the modifier key required for camera mouse input (default: None)"
+    },
+    {
+     "name": "getDragModifier",
+     "snippet": "getDragModifier()",
+     "return": "Modifier",
+     "desc": "Get the modifier key required for camera mouse input"
+    },
+    {
+     "name": "setControlArea",
+     "snippet": "setControlArea(${1:area})",
+     "return": "void",
+     "desc": "Constrain camera mouse input to a screen rectangle"
+    },
+    {
+     "name": "clearControlArea",
+     "snippet": "clearControlArea()",
+     "return": "void",
+     "desc": "Clear the camera mouse-input control area constraint"
+    },
+    {
+     "name": "enableMouseInput",
+     "snippet": "enableMouseInput()",
+     "return": "void",
+     "desc": "Enable mouse input for camera control"
+    },
+    {
+     "name": "disableMouseInput",
+     "snippet": "disableMouseInput()",
+     "return": "void",
+     "desc": "Disable mouse input for camera control"
+    },
+    {
+     "name": "isMouseInputEnabled",
+     "snippet": "isMouseInputEnabled()",
+     "return": "bool",
+     "desc": "Check if mouse input is enabled"
+    },
+    {
+     "name": "mousePressed",
+     "snippet": "mousePressed(${1:x}, ${2:y}, ${3:button})",
+     "return": "void",
+     "desc": "Handle mouse press event"
+    },
+    {
+     "name": "mouseReleased",
+     "snippet": "mouseReleased(${1:x}, ${2:y}, ${3:button})",
+     "return": "void",
+     "desc": "Handle mouse release event"
+    },
+    {
+     "name": "mouseDragged",
+     "snippet": "mouseDragged(${1:x}, ${2:y}, ${3:button})",
+     "return": "void",
+     "desc": "Handle mouse drag event"
+    },
+    {
+     "name": "mouseScrolled",
+     "snippet": "mouseScrolled(${1:dx}, ${2:dy})",
+     "return": "void",
+     "desc": "Handle mouse scroll event (for zoom)"
+    },
+    {
+     "name": "getPosition",
+     "snippet": "getPosition()",
+     "return": "Vec3",
+     "desc": "Get camera position"
+    },
+    {
+     "name": "getOrientation",
+     "snippet": "getOrientation()",
+     "return": "Quaternion",
+     "desc": "Get the camera orientation quaternion"
+    },
+    {
+     "name": "setOrientation",
+     "snippet": "setOrientation(${1:q})",
+     "return": "void",
+     "desc": "Set the camera orientation quaternion"
+    }
+   ]
+  },
+  {
+   "name": "EnumLabelSpan",
+   "desc": "Label table for one enum type: a view over its human-readable enumerator names.",
+   "properties": [
+    {
+     "name": "count",
+     "type": "int",
+     "desc": "Number of labels in the table."
+    }
+   ]
+  },
+  {
+   "name": "EventListener",
+   "desc": "RAII token returned by Event::listen(); the listener is automatically disconnected when this token is destroyed or reassigned. Move-only",
+   "constructor": {
+    "snippet": "EventListener()"
+   },
+   "methods": [
+    {
+     "name": "disconnect",
+     "snippet": "disconnect()",
+     "return": "void",
+     "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction)"
+    },
+    {
+     "name": "isConnected",
+     "snippet": "isConnected()",
+     "return": "bool",
+     "desc": "True while the listener is still connected to its event"
+    }
+   ]
+  },
+  {
+   "name": "ExitRequestEventArgs",
+   "desc": "Arguments for the exitRequested event",
+   "properties": [
+    {
+     "name": "cancel",
+     "type": "bool",
+     "desc": "Set true in a listener to cancel the requested exit"
+    }
+   ]
+  },
+  {
+   "name": "Fbo",
+   "desc": "Framebuffer object for offscreen rendering",
+   "constructor": {
+    "snippet": "Fbo()"
+   },
+   "methods": [
+    {
+     "name": "lifetimeToken",
+     "snippet": "lifetimeToken()",
+     "return": "std::shared_ptr<void>",
+     "desc": "Lifetime token for observers holding a raw pointer to this Fbo (e.g. ScreenRecorder auto-stops when the recorded Fbo dies). Per-object: it does not transfer on move"
+    },
+    {
+     "name": "allocate",
+     "snippet": "allocate(${1:w}, ${2:h})",
+     "return": "void",
+     "desc": "Allocate framebuffer. `mipmaps=true` builds a full mip chain that is refreshed automatically at end()."
+    },
+    {
+     "name": "clear",
+     "snippet": "clear()",
+     "return": "void",
+     "desc": "Release FBO resources"
+    },
+    {
+     "name": "begin",
+     "snippet": "begin()",
+     "return": "void",
+     "desc": "Begin rendering to FBO"
+    },
+    {
+     "name": "clearColor",
+     "snippet": "clearColor(${1:r}, ${2:g}, ${3:b}, ${4:a})",
+     "return": "void",
+     "desc": "Clear the FBO with a solid color"
+    },
+    {
+     "name": "end",
+     "snippet": "end()",
+     "return": "void",
+     "desc": "End rendering to FBO"
+    },
+    {
+     "name": "copyTo",
+     "snippet": "copyTo(${1:image})",
+     "return": "bool",
+     "desc": "Copy FBO contents to Image"
+    },
+    {
+     "name": "getWidth",
+     "snippet": "getWidth()",
+     "return": "int",
+     "desc": "Get width"
+    },
+    {
+     "name": "getHeight",
+     "snippet": "getHeight()",
+     "return": "int",
+     "desc": "Get height"
+    },
+    {
+     "name": "getSampleCount",
+     "snippet": "getSampleCount()",
+     "return": "int",
+     "desc": "Get MSAA sample count"
+    },
+    {
+     "name": "getTextureFormat",
+     "snippet": "getTextureFormat()",
+     "return": "TextureFormat",
+     "desc": "Get the FBO's color texture format"
+    },
+    {
+     "name": "isAllocated",
+     "snippet": "isAllocated()",
+     "return": "bool",
+     "desc": "Check if allocated"
+    },
+    {
+     "name": "isActive",
+     "snippet": "isActive()",
+     "return": "bool",
+     "desc": "Check if currently rendering to FBO"
+    },
+    {
+     "name": "getTexture",
+     "snippet": "getTexture()",
+     "return": "Texture &",
+     "desc": "Get FBO texture"
+    },
+    {
+     "name": "draw",
+     "snippet": "draw(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Draw FBO contents"
+    },
+    {
+     "name": "save",
+     "snippet": "save(${1:path})",
+     "return": "bool",
+     "desc": "Save FBO contents to file"
+    },
+    {
+     "name": "getColorImage",
+     "snippet": "getColorImage()",
+     "return": "sg_image",
+     "desc": "Return the underlying sokol-gfx color image handle (advanced interop)."
+    },
+    {
+     "name": "getTextureView",
+     "snippet": "getTextureView()",
+     "return": "sg_view",
+     "desc": "Return the underlying sokol-gfx color texture view handle (advanced interop)."
+    },
+    {
+     "name": "getSampler",
+     "snippet": "getSampler()",
+     "return": "sg_sampler",
+     "desc": "Return the underlying sokol-gfx sampler handle (advanced interop)."
+    }
+   ]
+  },
+  {
+   "name": "FileDialogResult",
+   "desc": "Result of a load/save file dialog",
+   "properties": [
+    {
+     "name": "filePath",
+     "type": "std::string",
+     "desc": "Full path to the chosen file"
+    },
+    {
+     "name": "fileName",
+     "type": "std::string",
+     "desc": "Filename only (no directory)"
+    },
+    {
+     "name": "success",
+     "type": "bool",
+     "desc": "true if a file was chosen, false if the dialog was cancelled"
+    }
+   ]
+  },
+  {
+   "name": "FileReader",
+   "desc": "Streaming file reader for large files",
+   "constructor": {
+    "snippet": "FileReader()"
+   },
+   "methods": [
+    {
+     "name": "open",
+     "snippet": "open(${1:path})",
+     "return": "bool",
+     "desc": "Open file for reading"
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Close file"
+    },
+    {
+     "name": "isOpen",
+     "snippet": "isOpen()",
+     "return": "bool",
+     "desc": "Check if file is open"
+    },
+    {
+     "name": "eof",
+     "snippet": "eof()",
+     "return": "bool",
+     "desc": "Check if at end of file"
+    },
+    {
+     "name": "readLine",
+     "snippet": "readLine()",
+     "return": "std::string",
+     "desc": "Read one line"
+    },
+    {
+     "name": "readChar",
+     "snippet": "readChar()",
+     "return": "int",
+     "desc": "Read one character (-1 at EOF)"
+    },
+    {
+     "name": "seek",
+     "snippet": "seek(${1:pos})",
+     "return": "void",
+     "desc": "Seek to position"
+    },
+    {
+     "name": "tell",
+     "snippet": "tell()",
+     "return": "size_t",
+     "desc": "Get current position"
+    },
+    {
+     "name": "remaining",
+     "snippet": "remaining()",
+     "return": "size_t",
+     "desc": "Get remaining bytes"
+    }
+   ]
+  },
+  {
+   "name": "FileWriter",
+   "desc": "Streaming file writer with immediate flush",
+   "constructor": {
+    "snippet": "FileWriter()"
+   },
+   "methods": [
+    {
+     "name": "open",
+     "snippet": "open(${1:path})",
+     "return": "bool",
+     "desc": "Open file for writing"
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Close file"
+    },
+    {
+     "name": "isOpen",
+     "snippet": "isOpen()",
+     "return": "bool",
+     "desc": "Check if file is open"
+    },
+    {
+     "name": "write",
+     "snippet": "write(${1:text})",
+     "return": "FileWriter &",
+     "desc": "Write data to file"
+    },
+    {
+     "name": "writeLine",
+     "snippet": "writeLine()",
+     "return": "FileWriter &",
+     "desc": "Write line with newline"
+    },
+    {
+     "name": "flush",
+     "snippet": "flush()",
+     "return": "void",
+     "desc": "Flush buffer to disk"
+    }
+   ]
+  },
+  {
+   "name": "Font",
+   "desc": "TrueType font for text rendering",
+   "constructor": {
+    "snippet": "Font()"
+   },
+   "methods": [
+    {
+     "name": "load",
+     "snippet": "load(${1:nameOrPath}, ${2:size})",
+     "return": "bool",
+     "desc": "Load font file"
+    },
+    {
+     "name": "isLoaded",
+     "snippet": "isLoaded()",
+     "return": "bool",
+     "desc": "Check if loaded"
+    },
+    {
+     "name": "setAlign",
+     "snippet": "setAlign(${1:h}, ${2:v})",
+     "return": "void",
+     "desc": "Set horizontal (and optional vertical) text alignment"
+    },
+    {
+     "name": "getAlignH",
+     "snippet": "getAlignH()",
+     "return": "Direction",
+     "desc": "Get current horizontal text alignment"
+    },
+    {
+     "name": "getAlignV",
+     "snippet": "getAlignV()",
+     "return": "Direction",
+     "desc": "Get current vertical text alignment"
+    },
+    {
+     "name": "setLineHeight",
+     "snippet": "setLineHeight(${1:pixels})",
+     "return": "void",
+     "desc": "Set line height in pixels (0 = use font default)"
+    },
+    {
+     "name": "setLineHeightEm",
+     "snippet": "setLineHeightEm(${1:multiplier})",
+     "return": "void",
+     "desc": "Set line height as a multiple of the font default (1.0 = default, 1.5 = 1.5x)"
+    },
+    {
+     "name": "resetLineHeight",
+     "snippet": "resetLineHeight()",
+     "return": "void",
+     "desc": "Reset line height to the font default"
+    },
+    {
+     "name": "drawString",
+     "snippet": "drawString(${1:text}, ${2:x}, ${3:y})",
+     "return": "void",
+     "desc": "Draw text"
+    },
+    {
+     "name": "getGlyphPath",
+     "snippet": "getGlyphPath(${1:codepoint})",
+     "return": "Path",
+     "desc": "Vector outline of a single glyph as one Path with one subpath per contour. Em-normalized (1.0 = em), screen Y-down, baseline at y=0, pen at x=0. Use Path::drawFill() for filled rendering — holes (e, a, O, 日 ...) are auto-detected via earcut."
+    },
+    {
+     "name": "getStringPath",
+     "snippet": "getStringPath(${1:text}, ${2:x}, ${3:y}, ${4:h}, ${5:v})",
+     "return": "Path",
+     "desc": "Vector outline of the whole string at (x, y) as one Path containing every glyph's contours (one subpath each). Uses the same layout pipeline as drawString (writing mode, alignment, wrap, kinsoku, TCY). Logical pixels — drawStroke / drawFill / transform freely."
+    },
+    {
+     "name": "setWritingMode",
+     "snippet": "setWritingMode(${1:mode})",
+     "return": "void",
+     "desc": "Switch between horizontal and vertical (tategaki) writing. Default is Horizontal (existing behavior unchanged)."
+    },
+    {
+     "name": "getWritingMode",
+     "snippet": "getWritingMode()",
+     "return": "WritingMode",
+     "desc": "Current writing mode"
+    },
+    {
+     "name": "setTcyDigits",
+     "snippet": "setTcyDigits(${1:maxDigits}, ${2:inMode}, ${3:overflowMode})",
+     "return": "void",
+     "desc": "Tate-chu-yoko config for ASCII digit runs in vertical text. Runs with <= maxDigits use inMode (typically Combine — squeezed into one cell); longer runs fall back to overflowMode (typically Rotate)."
+    },
+    {
+     "name": "setTcyLatin",
+     "snippet": "setTcyLatin(${1:mode})",
+     "return": "void",
+     "desc": "Tate-chu-yoko mode for Latin letter runs in vertical text. Default is Rotate (whole run rotated 90 CW)."
+    },
+    {
+     "name": "getTcyLatinMode",
+     "snippet": "getTcyLatinMode()",
+     "return": "TcyMode",
+     "desc": "Get the tate-chu-yoko mode for Latin letter runs"
+    },
+    {
+     "name": "getTcyDigitMax",
+     "snippet": "getTcyDigitMax()",
+     "return": "int",
+     "desc": "Get the maximum digit-run length that uses tate-chu-yoko combine mode"
+    },
+    {
+     "name": "enableWrap",
+     "snippet": "enableWrap(${1:enabled})",
+     "return": "void",
+     "desc": "Enable or disable line wrapping (default off)"
+    },
+    {
+     "name": "isWrapEnabled",
+     "snippet": "isWrapEnabled()",
+     "return": "bool",
+     "desc": "Check if line wrapping is enabled"
+    },
+    {
+     "name": "setMaxLineLength",
+     "snippet": "setMaxLineLength(${1:length})",
+     "return": "void",
+     "desc": "Set the wrap length (horizontal: line width; vertical: column height)"
+    },
+    {
+     "name": "getMaxLineLength",
+     "snippet": "getMaxLineLength()",
+     "return": "float",
+     "desc": "Get the current wrap length"
+    },
+    {
+     "name": "setLatinHyphenation",
+     "snippet": "setLatinHyphenation(${1:enabled})",
+     "return": "void",
+     "desc": "When wrapping a Latin run with no break point, insert '-' before the forced break (default off)"
+    },
+    {
+     "name": "getLatinHyphenation",
+     "snippet": "getLatinHyphenation()",
+     "return": "bool",
+     "desc": "Check if Latin hyphenation is enabled"
+    },
+    {
+     "name": "setHangingPunctuation",
+     "snippet": "setHangingPunctuation(${1:enabled})",
+     "return": "void",
+     "desc": "Let prohibited line-start CJK punctuation hang past the line edge instead of wrapping (default off)"
+    },
+    {
+     "name": "getHangingPunctuation",
+     "snippet": "getHangingPunctuation()",
+     "return": "bool",
+     "desc": "Check if hanging punctuation is enabled"
+    },
+    {
+     "name": "setKinsoku",
+     "snippet": "setKinsoku(${1:level})",
+     "return": "void",
+     "desc": "Choose which CJK kinsoku (line-break prohibition) table to apply during wrap"
+    },
+    {
+     "name": "getKinsoku",
+     "snippet": "getKinsoku()",
+     "return": "KinsokuLevel",
+     "desc": "Get the current kinsoku level"
+    },
+    {
+     "name": "forEachGlyph",
+     "snippet": "forEachGlyph(${1:text}, ${2:x}, ${3:y}, ${4:h}, ${5:v}, ${6:visitor})",
+     "return": "void",
+     "desc": "Invoke a visitor once per laid-out glyph (positions follow writing mode, wrap, kinsoku, and TCY). Backend-agnostic layout pass shared by drawing, vector outlines, and hit testing"
+    },
+    {
+     "name": "getWidth",
+     "snippet": "getWidth(${1:text})",
+     "return": "float",
+     "desc": "Get text width"
+    },
+    {
+     "name": "stringWidth",
+     "snippet": "stringWidth(${1:text})",
+     "return": "float",
+     "desc": "Pixel width of the text (alias of getWidth)"
+    },
+    {
+     "name": "getHeight",
+     "snippet": "getHeight(${1:text})",
+     "return": "float",
+     "desc": "Get text height"
+    },
+    {
+     "name": "getBBox",
+     "snippet": "getBBox(${1:text})",
+     "return": "Rect",
+     "desc": "Get the bounding box of the text (top-left origin)"
+    },
+    {
+     "name": "getLineHeight",
+     "snippet": "getLineHeight()",
+     "return": "float",
+     "desc": "Get line height"
+    },
+    {
+     "name": "getDefaultLineHeight",
+     "snippet": "getDefaultLineHeight()",
+     "return": "float",
+     "desc": "Get the font's default line height (unaffected by setLineHeight)"
+    },
+    {
+     "name": "getAscent",
+     "snippet": "getAscent()",
+     "return": "float",
+     "desc": "Get the font ascent (distance from baseline to top)"
+    },
+    {
+     "name": "getDescent",
+     "snippet": "getDescent()",
+     "return": "float",
+     "desc": "Get the font descent (distance from baseline to bottom; negative)"
+    },
+    {
+     "name": "getSize",
+     "snippet": "getSize()",
+     "return": "int",
+     "desc": "Get font size"
+    },
+    {
+     "name": "getMemoryUsage",
+     "snippet": "getMemoryUsage()",
+     "return": "size_t",
+     "desc": "Get atlas memory usage in bytes"
+    },
+    {
+     "name": "getAtlasMemoryUsage",
+     "snippet": "getAtlasMemoryUsage()",
+     "return": "size_t",
+     "desc": "Get atlas memory usage in bytes (alias of getMemoryUsage)"
+    },
+    {
+     "name": "clearAtlas",
+     "snippet": "clearAtlas()",
+     "return": "void",
+     "desc": "Clear font atlas (GPU memory freed, glyphs re-rasterized on next draw)"
+    },
+    {
+     "name": "getAtlasCount",
+     "snippet": "getAtlasCount()",
+     "return": "size_t",
+     "desc": "Get number of atlas pages"
+    },
+    {
+     "name": "getAtlas",
+     "snippet": "getAtlas(${1:index})",
+     "return": "const internal::AtlasState *",
+     "desc": "Return the atlas page at the given index for debug visualization, or nullptr if out of range."
+    },
+    {
+     "name": "getSampler",
+     "snippet": "getSampler()",
+     "return": "sg_sampler",
+     "desc": "Return the shared sokol-gfx sampler used for atlas rendering (advanced interop)."
+    },
+    {
+     "name": "getLoadedGlyphCount",
+     "snippet": "getLoadedGlyphCount()",
+     "return": "size_t",
+     "desc": "Get number of loaded glyphs"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "getTotalCacheMemoryUsage",
+     "snippet": "getTotalCacheMemoryUsage()",
+     "return": "size_t",
+     "desc": "Total memory used by the shared font atlas cache across all fonts"
+    }
+   ]
+  },
+  {
+   "name": "FpsSettings",
+   "desc": "FPS configuration returned by getFpsSettings(). Rates use VSYNC (-1) and EVENT_DRIVEN (0) sentinels, or a fixed fps",
+   "properties": [
+    {
+     "name": "updateFps",
+     "type": "float",
+     "desc": "Target update rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
+    },
+    {
+     "name": "drawFps",
+     "type": "float",
+     "desc": "Target draw rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
+    },
+    {
+     "name": "actualVsyncFps",
+     "type": "float",
+     "desc": "Actual monitor refresh rate (0 if unknown)"
+    },
+    {
+     "name": "synced",
+     "type": "bool",
+     "desc": "true when update and draw run in sync (1:1)"
+    }
+   ]
+  },
+  {
+   "name": "FullscreenShader",
+   "desc": "Shader specialization for fullscreen post-processing effects (position + texcoord quad). Set uniforms via setParams, then call draw to render a fullscreen quad.",
+   "constructor": {
+    "snippet": "FullscreenShader()"
+   },
+   "methods": [
+    {
+     "name": "draw",
+     "snippet": "draw()",
+     "return": "void",
+     "desc": "Draw a fullscreen quad with this shader applied"
+    }
+   ]
+  },
+  {
+   "name": "GrabberFrame",
+   "desc": "One captured camera frame with its capture-time timestamp: Pixels (RGBA8) plus timestampUs (monotonic steady_clock microseconds, stamped on the capture thread). Returned by VideoGrabber::getQueuedFrames(). Pixels and timestamp travel together so there is no race between reading the pixels and reading the time",
+   "properties": [
+    {
+     "name": "pixels",
+     "type": "Pixels",
+     "desc": "The frame as RGBA8 Pixels (carries its own width/height). Pixels is move-only - use clone() if you need a copy"
+    },
+    {
+     "name": "timestampUs",
+     "type": "uint64_t",
+     "desc": "Capture time in microseconds on the monotonic clock (std::chrono::steady_clock), stamped on the capture thread the moment the frame arrived from the driver. Not wall-clock time — use for interval math and cross-source sync only"
+    }
+   ]
+  },
+  {
+   "name": "GraphicsBackend",
+   "desc": "Runtime sokol_gfx backend query. Values are meaningful only after sg_setup() has completed (i.e. after the first setup() call).",
+   "static_methods": [
+    {
+     "name": "isWebGPU",
+     "snippet": "isWebGPU()",
+     "return": "bool",
+     "desc": "True when running on WebGPU"
+    },
+    {
+     "name": "isWebGL2",
+     "snippet": "isWebGL2()",
+     "return": "bool",
+     "desc": "True when running on WebGL2 (GLES3 under Emscripten)"
+    },
+    {
+     "name": "isMetal",
+     "snippet": "isMetal()",
+     "return": "bool",
+     "desc": "True when running on Apple Metal"
+    },
+    {
+     "name": "isD3D11",
+     "snippet": "isD3D11()",
+     "return": "bool",
+     "desc": "True when running on Direct3D 11"
+    },
+    {
+     "name": "isVulkan",
+     "snippet": "isVulkan()",
+     "return": "bool",
+     "desc": "True when running on Vulkan"
+    },
+    {
+     "name": "isOpenGL",
+     "snippet": "isOpenGL()",
+     "return": "bool",
+     "desc": "True when running on OpenGL (core or GLES3)"
+    },
+    {
+     "name": "name",
+     "snippet": "name()",
+     "return": "const char *",
+     "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"\n"
+    }
+   ]
+  },
+  {
+   "name": "HasTexture",
+   "desc": "Base class for objects that own a texture (e.g. Image, Fbo, VideoPlayer); exposes getTexture().",
+   "methods": [
+    {
+     "name": "getTexture",
+     "snippet": "getTexture()",
+     "return": "Texture &",
+     "desc": "Get internal texture"
+    },
+    {
+     "name": "hasTexture",
+     "snippet": "hasTexture()",
+     "return": "bool",
+     "desc": "Return true if the underlying texture is allocated."
+    },
+    {
+     "name": "draw",
+     "snippet": "draw(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Draw the texture at the given position (and optional size)."
+    },
+    {
+     "name": "setMinFilter",
+     "snippet": "setMinFilter(${1:filter})",
+     "return": "void",
+     "desc": "Set the texture minification filter."
+    },
+    {
+     "name": "setMagFilter",
+     "snippet": "setMagFilter(${1:filter})",
+     "return": "void",
+     "desc": "Set the texture magnification filter."
+    },
+    {
+     "name": "setFilter",
+     "snippet": "setFilter(${1:filter})",
+     "return": "void",
+     "desc": "Set both the minification and magnification filters."
+    },
+    {
+     "name": "getMinFilter",
+     "snippet": "getMinFilter()",
+     "return": "TextureFilter",
+     "desc": "Return the texture minification filter."
+    },
+    {
+     "name": "getMagFilter",
+     "snippet": "getMagFilter()",
+     "return": "TextureFilter",
+     "desc": "Return the texture magnification filter."
+    },
+    {
+     "name": "setWrapU",
+     "snippet": "setWrapU(${1:wrap})",
+     "return": "void",
+     "desc": "Set the texture wrap mode on the U (horizontal) axis."
+    },
+    {
+     "name": "setWrapV",
+     "snippet": "setWrapV(${1:wrap})",
+     "return": "void",
+     "desc": "Set the texture wrap mode on the V (vertical) axis."
+    },
+    {
+     "name": "setWrap",
+     "snippet": "setWrap(${1:wrap})",
+     "return": "void",
+     "desc": "Set the texture wrap mode on both the U and V axes."
+    },
+    {
+     "name": "getWrapU",
+     "snippet": "getWrapU()",
+     "return": "TextureWrap",
+     "desc": "Return the texture wrap mode on the U axis."
+    },
+    {
+     "name": "getWrapV",
+     "snippet": "getWrapV()",
+     "return": "TextureWrap",
+     "desc": "Return the texture wrap mode on the V axis."
+    },
+    {
+     "name": "save",
+     "snippet": "save(${1:path})",
+     "return": "bool",
+     "desc": "Save the texture contents to a file; return true on success."
+    }
+   ]
+  },
+  {
+   "name": "HeadlessSettings",
+   "desc": "Settings for runHeadlessApp() (no window / graphics). Currently just the target update rate",
+   "properties": [
+    {
+     "name": "targetFps",
+     "type": "float",
+     "desc": "Target update rate (default 60)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "setFps",
+     "snippet": "setFps(${1:fps})",
+     "return": "HeadlessSettings &",
+     "desc": "Set the target update rate (chainable)"
+    }
+   ]
+  },
+  {
+   "name": "IesProfile",
+   "desc": "IESNA LM-63 photometric profile for angular light intensity",
+   "constructor": {
+    "snippet": "IesProfile()"
+   },
+   "methods": [
+    {
+     "name": "load",
+     "snippet": "load(${1:path})",
+     "return": "bool",
+     "desc": "Load IES profile from file"
+    },
+    {
+     "name": "loadFromString",
+     "snippet": "loadFromString(${1:data})",
+     "return": "bool",
+     "desc": "Load IES profile from inline string data"
+    },
+    {
+     "name": "isLoaded",
+     "snippet": "isLoaded()",
+     "return": "bool",
+     "desc": "Check if profile is loaded"
+    },
+    {
+     "name": "getMaxVerticalAngle",
+     "snippet": "getMaxVerticalAngle()",
+     "return": "float",
+     "desc": "Get maximum vertical angle in the profile (radians)"
+    },
+    {
+     "name": "getMaxCandela",
+     "snippet": "getMaxCandela()",
+     "return": "float",
+     "desc": "Get maximum candela value in the profile"
+    },
+    {
+     "name": "getTextureWidth",
+     "snippet": "getTextureWidth()",
+     "return": "int",
+     "desc": "Get width of the generated 1D lookup texture"
+    },
+    {
+     "name": "getView",
+     "snippet": "getView()",
+     "return": "sg_view",
+     "desc": "Return the sokol-gfx texture view of the IES profile for pipeline binding (advanced interop)."
+    },
+    {
+     "name": "getSampler",
+     "snippet": "getSampler()",
+     "return": "sg_sampler",
+     "desc": "Return the sokol-gfx sampler of the IES profile for pipeline binding (advanced interop)."
+    }
+   ]
+  },
+  {
+   "name": "Image",
+   "desc": "Image with CPU pixels and GPU texture",
+   "constructor": {
+    "snippet": "Image()"
+   },
+   "methods": [
+    {
+     "name": "load",
+     "snippet": "load(${1:path})",
+     "return": "bool",
+     "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface)."
+    },
+    {
+     "name": "save",
+     "snippet": "save(${1:path})",
+     "return": "bool",
+     "desc": "Save image to file"
+    },
+    {
+     "name": "allocate",
+     "snippet": "allocate(${1:width}, ${2:height})",
+     "return": "void",
+     "desc": "Allocate empty image for dynamic updates. `mipmaps=true` builds a chain refreshed on every update()."
+    },
+    {
+     "name": "clear",
+     "snippet": "clear()",
+     "return": "void",
+     "desc": "Release image resources"
+    },
+    {
+     "name": "isAllocated",
+     "snippet": "isAllocated()",
+     "return": "bool",
+     "desc": "Check if allocated"
+    },
+    {
+     "name": "getWidth",
+     "snippet": "getWidth()",
+     "return": "int",
+     "desc": "Get width"
+    },
+    {
+     "name": "getHeight",
+     "snippet": "getHeight()",
+     "return": "int",
+     "desc": "Get height"
+    },
+    {
+     "name": "getChannels",
+     "snippet": "getChannels()",
+     "return": "int",
+     "desc": "Get number of channels"
+    },
+    {
+     "name": "getPixels",
+     "snippet": "getPixels()",
+     "return": "Pixels &",
+     "desc": "Get pixels reference for direct manipulation"
+    },
+    {
+     "name": "getPixelsData",
+     "snippet": "getPixelsData()",
+     "return": "unsigned char *",
+     "desc": "Get raw pixel data pointer"
+    },
+    {
+     "name": "getColor",
+     "snippet": "getColor(${1:x}, ${2:y})",
+     "return": "Color",
+     "desc": "Get pixel color at position"
+    },
+    {
+     "name": "setColor",
+     "snippet": "setColor(${1:x}, ${2:y}, ${3:c})",
+     "return": "void",
+     "desc": "Set pixel color at position (marks image as dirty)"
+    },
+    {
+     "name": "halve",
+     "snippet": "halve()",
+     "return": "void",
+     "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8."
+    },
+    {
+     "name": "resize",
+     "snippet": "resize(${1:newW}, ${2:newH})",
+     "return": "void",
+     "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8. Use FBO sampling for fast paths."
+    },
+    {
+     "name": "crop",
+     "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})",
+     "return": "void",
+     "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge."
+    },
+    {
+     "name": "mirror",
+     "snippet": "mirror(${1:horizontal}, ${2:vertical})",
+     "return": "void",
+     "desc": "Flip the image. `horizontal=true` mirrors left-right; `vertical=true` mirrors top-bottom; both true is 180°."
+    },
+    {
+     "name": "mirrorH",
+     "snippet": "mirrorH()",
+     "return": "void",
+     "desc": "Mirror horizontally (alias for mirror(true, false))"
+    },
+    {
+     "name": "mirrorV",
+     "snippet": "mirrorV()",
+     "return": "void",
+     "desc": "Mirror vertically (alias for mirror(false, true))"
+    },
+    {
+     "name": "update",
+     "snippet": "update()",
+     "return": "void",
+     "desc": "Apply pixel changes to GPU texture"
+    },
+    {
+     "name": "setDirty",
+     "snippet": "setDirty()",
+     "return": "void",
+     "desc": "Mark image as needing update"
+    },
+    {
+     "name": "getTexture",
+     "snippet": "getTexture()",
+     "return": "Texture &",
+     "desc": "Get internal texture"
+    }
+   ]
+  },
+  {
+   "name": "ImageType",
+   "desc": "Image type: Color or Grayscale.",
+   "static_methods": [
+    {
+     "name": "Color",
+     "snippet": "Color",
+     "return": "ImageType",
+     "desc": "= 0"
+    },
+    {
+     "name": "Grayscale",
+     "snippet": "Grayscale",
+     "return": "ImageType",
+     "desc": "= 1"
+    }
+   ]
+  },
+  {
+   "name": "IVec2",
+   "desc": "2D integer vector (x, y)",
+   "constructor": {
+    "snippet": "IVec2(${1:x}, ${2:y})"
+   },
+   "properties": [
+    {
+     "name": "x",
+     "type": "int",
+     "desc": "X component"
+    },
+    {
+     "name": "y",
+     "type": "int",
+     "desc": "Y component"
+    }
+   ],
+   "methods": [
+    {
+     "name": "toVec2",
+     "snippet": "toVec2()",
+     "return": "Vec2",
+     "desc": "Convert to Vec2 (float)"
+    }
+   ]
+  },
+  {
+   "name": "IVec3",
+   "desc": "3D integer vector (x, y, z)",
+   "constructor": {
+    "snippet": "IVec3(${1:x}, ${2:y}, ${3:z})"
+   },
+   "properties": [
+    {
+     "name": "x",
+     "type": "int",
+     "desc": "X component"
+    },
+    {
+     "name": "y",
+     "type": "int",
+     "desc": "Y component"
+    },
+    {
+     "name": "z",
+     "type": "int",
+     "desc": "Z component"
+    }
+   ],
+   "methods": [
+    {
+     "name": "toVec3",
+     "snippet": "toVec3()",
+     "return": "Vec3",
+     "desc": "Convert to Vec3 (float)"
+    },
+    {
+     "name": "xy",
+     "snippet": "xy()",
+     "return": "IVec2",
+     "desc": "Get XY components as IVec2"
+    }
+   ]
+  },
+  {
+   "name": "JsonReadReflector",
+   "desc": "Reflector backend that applies a JSON object onto reflected members through their setters.",
+   "constructor": {
+    "snippet": "JsonReadReflector(${1:src})"
+   },
+   "properties": [
+    {
+     "name": "applied",
+     "type": "std::vector<std::string>",
+     "desc": "Keys that matched a member and were written."
+    },
+    {
+     "name": "skipped",
+     "type": "std::vector<std::string>",
+     "desc": "Keys that matched a member but had the wrong JSON shape."
+    },
+    {
+     "name": "readOnly",
+     "type": "std::vector<std::string>",
+     "desc": "Keys that matched a read-only member and were not written."
+    }
+   ],
+   "methods": [
+    {
+     "name": "unknownKeys",
+     "snippet": "unknownKeys()",
+     "return": "std::vector<std::string>",
+     "desc": "Return the source keys that matched no reflected member (typos etc.); valid after reflectMembers runs."
+    },
+    {
+     "name": "endGroup",
+     "snippet": "endGroup()",
+     "return": "void",
+     "desc": "Return from the nested JSON object."
+    }
+   ]
+  },
+  {
+   "name": "JsonWriteReflector",
+   "desc": "Reflector backend that writes reflected members into a JSON object.",
+   "properties": [
+    {
+     "name": "members",
+     "type": "Json",
+     "desc": "The accumulated JSON object built from visited members."
+    }
+   ],
+   "methods": [
+    {
+     "name": "endGroup",
+     "snippet": "endGroup()",
+     "return": "void",
+     "desc": "Close the current nested JSON object."
+    }
+   ]
+  },
+  {
+   "name": "KeyEventArgs",
+   "desc": "Arguments for keyPressed / keyReleased events",
+   "properties": [
+    {
+     "name": "key",
+     "type": "int",
+     "desc": "Key code (KEY_* / SAPP_KEYCODE_*)"
+    },
+    {
+     "name": "isRepeat",
+     "type": "bool",
+     "desc": "True if this is a repeat from holding the key"
+    },
+    {
+     "name": "shift",
+     "type": "bool",
+     "desc": "Shift modifier held"
+    },
+    {
+     "name": "ctrl",
+     "type": "bool",
+     "desc": "Ctrl modifier held"
+    },
+    {
+     "name": "alt",
+     "type": "bool",
+     "desc": "Alt modifier held"
+    },
+    {
+     "name": "super",
+     "type": "bool",
+     "desc": "Super / Command modifier held"
+    },
+    {
+     "name": "consumed",
+     "type": "bool",
+     "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+    }
+   ]
+  },
+  {
+   "name": "KinsokuLevel",
+   "desc": "Line-breaking (kinsoku) strictness for vertical / Japanese text",
+   "static_methods": [
+    {
+     "name": "Off",
+     "snippet": "Off",
+     "return": "KinsokuLevel",
+     "desc": "= 0"
+    },
+    {
+     "name": "PunctuationOnly",
+     "snippet": "PunctuationOnly",
+     "return": "KinsokuLevel",
+     "desc": "= 1"
+    },
+    {
+     "name": "Standard",
+     "snippet": "Standard",
+     "return": "KinsokuLevel",
+     "desc": "= 2"
+    }
+   ]
+  },
+  {
+   "name": "LayoutDirection",
+   "desc": "Layout axis direction: Vertical or Horizontal.",
+   "static_methods": [
+    {
+     "name": "Vertical",
+     "snippet": "Vertical",
+     "return": "LayoutDirection",
+     "desc": "= 0"
+    },
+    {
+     "name": "Horizontal",
+     "snippet": "Horizontal",
+     "return": "LayoutDirection",
+     "desc": "= 1"
+    }
+   ]
+  },
+  {
+   "name": "LayoutMod",
+   "desc": "Layout modifier (Mod) that auto-arranges child RectNodes in a vertical or horizontal stack with spacing, padding and axis sizing",
+   "constructor": {
+    "snippet": "LayoutMod()"
+   },
+   "methods": [
+    {
+     "name": "getDirection",
+     "snippet": "getDirection()",
+     "return": "LayoutDirection",
+     "desc": "Get the layout direction (Vertical/Horizontal) (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "setDirection",
+     "snippet": "setDirection(${1:dir})",
+     "return": "LayoutMod &",
+     "desc": "Set the layout direction and re-layout (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "getSpacing",
+     "snippet": "getSpacing()",
+     "return": "float",
+     "desc": "Get the spacing between children (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "setSpacing",
+     "snippet": "setSpacing(${1:spacing})",
+     "return": "LayoutMod &",
+     "desc": "Set the spacing between children and re-layout (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "getCrossAxis",
+     "snippet": "getCrossAxis()",
+     "return": "AxisMode",
+     "desc": "Get the cross-axis sizing mode (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "setCrossAxis",
+     "snippet": "setCrossAxis(${1:mode})",
+     "return": "LayoutMod &",
+     "desc": "Set the cross-axis sizing mode and re-layout (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "getMainAxis",
+     "snippet": "getMainAxis()",
+     "return": "AxisMode",
+     "desc": "Get the main-axis sizing mode (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "setMainAxis",
+     "snippet": "setMainAxis(${1:mode})",
+     "return": "LayoutMod &",
+     "desc": "Set the main-axis sizing mode and re-layout (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "getPaddingLeft",
+     "snippet": "getPaddingLeft()",
+     "return": "float",
+     "desc": "Get the left padding (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "getPaddingTop",
+     "snippet": "getPaddingTop()",
+     "return": "float",
+     "desc": "Get the top padding (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "getPaddingRight",
+     "snippet": "getPaddingRight()",
+     "return": "float",
+     "desc": "Get the right padding (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "getPaddingBottom",
+     "snippet": "getPaddingBottom()",
+     "return": "float",
+     "desc": "Get the bottom padding (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "setPadding",
+     "snippet": "setPadding(${1:padding})",
+     "return": "LayoutMod &",
+     "desc": "Set padding (uniform, vertical/horizontal, or per-side) and re-layout (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "setPaddingLeft",
+     "snippet": "setPaddingLeft(${1:v})",
+     "return": "LayoutMod &",
+     "desc": "Set the left padding and re-layout (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "setPaddingTop",
+     "snippet": "setPaddingTop(${1:v})",
+     "return": "LayoutMod &",
+     "desc": "Set the top padding and re-layout (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "setPaddingRight",
+     "snippet": "setPaddingRight(${1:v})",
+     "return": "LayoutMod &",
+     "desc": "Set the right padding and re-layout (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "setPaddingBottom",
+     "snippet": "setPaddingBottom(${1:v})",
+     "return": "LayoutMod &",
+     "desc": "Set the bottom padding and re-layout (LayoutMod method) (C++ only)"
+    },
+    {
+     "name": "updateLayout",
+     "snippet": "updateLayout()",
+     "return": "void",
+     "desc": "Recalculate layout (call after adding/removing children) (C++ only)"
+    }
+   ]
+  },
+  {
+   "name": "Light",
+   "desc": "Light source for 3D PBR rendering (directional, point, or spot)",
+   "constructor": {
+    "snippet": "Light()"
+   },
+   "methods": [
+    {
+     "name": "setDirectional",
+     "snippet": "setDirectional(${1:direction})",
+     "return": "void",
+     "desc": "Set as directional light"
+    },
+    {
+     "name": "setPoint",
+     "snippet": "setPoint(${1:position})",
+     "return": "void",
+     "desc": "Set as point light"
+    },
+    {
+     "name": "setSpot",
+     "snippet": "setSpot(${1:position}, ${2:direction})",
+     "return": "void",
+     "desc": "Set as spot light with cone angles"
+    },
+    {
+     "name": "getSpotInnerCos",
+     "snippet": "getSpotInnerCos()",
+     "return": "float",
+     "desc": "Get spot light inner cone cosine"
+    },
+    {
+     "name": "getSpotOuterCos",
+     "snippet": "getSpotOuterCos()",
+     "return": "float",
+     "desc": "Get spot light outer cone cosine"
+    },
+    {
+     "name": "getProjectionTexture",
+     "snippet": "getProjectionTexture()",
+     "return": "const Texture *",
+     "desc": "Get projection texture (gobo)"
+    },
+    {
+     "name": "hasProjectionTexture",
+     "snippet": "hasProjectionTexture()",
+     "return": "bool",
+     "desc": "Check if a projection texture is set"
+    },
+    {
+     "name": "setLensShift",
+     "snippet": "setLensShift(${1:sx}, ${2:sy})",
+     "return": "void",
+     "desc": "Set projector lens shift (-1 to 1, normalized)"
+    },
+    {
+     "name": "getLensShiftX",
+     "snippet": "getLensShiftX()",
+     "return": "float",
+     "desc": "Get projector horizontal lens shift"
+    },
+    {
+     "name": "getLensShiftY",
+     "snippet": "getLensShiftY()",
+     "return": "float",
+     "desc": "Get projector vertical lens shift"
+    },
+    {
+     "name": "setProjectorAspect",
+     "snippet": "setProjectorAspect(${1:a})",
+     "return": "void",
+     "desc": "Set projector aspect ratio"
+    },
+    {
+     "name": "getProjectorAspect",
+     "snippet": "getProjectorAspect()",
+     "return": "float",
+     "desc": "Get projector aspect ratio"
+    },
+    {
+     "name": "computeProjectorViewProj",
+     "snippet": "computeProjectorViewProj()",
+     "return": "Mat4",
+     "desc": "Build the projector's view-projection matrix from spot params and lens shift"
+    },
+    {
+     "name": "getIesProfile",
+     "snippet": "getIesProfile()",
+     "return": "const IesProfile *",
+     "desc": "Get attached IES photometric profile"
+    },
+    {
+     "name": "hasIesProfile",
+     "snippet": "hasIesProfile()",
+     "return": "bool",
+     "desc": "Check if an IES profile is attached"
+    },
+    {
+     "name": "enableShadow",
+     "snippet": "enableShadow()",
+     "return": "void",
+     "desc": "Enable shadow casting (depth map at given resolution)"
+    },
+    {
+     "name": "disableShadow",
+     "snippet": "disableShadow()",
+     "return": "void",
+     "desc": "Disable shadow casting"
+    },
+    {
+     "name": "isShadowEnabled",
+     "snippet": "isShadowEnabled()",
+     "return": "bool",
+     "desc": "Check if shadow casting is enabled"
+    },
+    {
+     "name": "getShadowResolution",
+     "snippet": "getShadowResolution()",
+     "return": "int",
+     "desc": "Get shadow map resolution"
+    },
+    {
+     "name": "setShadowBias",
+     "snippet": "setShadowBias(${1:bias})",
+     "return": "void",
+     "desc": "Set shadow depth bias in world units"
+    },
+    {
+     "name": "getShadowBias",
+     "snippet": "getShadowBias()",
+     "return": "float",
+     "desc": "Get shadow depth bias"
+    },
+    {
+     "name": "getType",
+     "snippet": "getType()",
+     "return": "LightType",
+     "desc": "Get light type (Directional, Point, or Spot)"
+    },
+    {
+     "name": "getDirection",
+     "snippet": "getDirection()",
+     "return": "const Vec3 &",
+     "desc": "Get light direction"
+    },
+    {
+     "name": "getPosition",
+     "snippet": "getPosition()",
+     "return": "const Vec3 &",
+     "desc": "Get light position"
+    },
+    {
+     "name": "setAmbient",
+     "snippet": "setAmbient(${1:c})",
+     "return": "void",
+     "desc": "Set ambient light color"
+    },
+    {
+     "name": "getAmbient",
+     "snippet": "getAmbient()",
+     "return": "const Color &",
+     "desc": "Get ambient light color"
+    },
+    {
+     "name": "setDiffuse",
+     "snippet": "setDiffuse(${1:c})",
+     "return": "void",
+     "desc": "Set diffuse (main) light color"
+    },
+    {
+     "name": "getDiffuse",
+     "snippet": "getDiffuse()",
+     "return": "const Color &",
+     "desc": "Get diffuse (main) light color"
+    },
+    {
+     "name": "setSpecular",
+     "snippet": "setSpecular(${1:c})",
+     "return": "void",
+     "desc": "Set specular light color"
+    },
+    {
+     "name": "getSpecular",
+     "snippet": "getSpecular()",
+     "return": "const Color &",
+     "desc": "Get specular light color"
+    },
+    {
+     "name": "setIntensity",
+     "snippet": "setIntensity(${1:i})",
+     "return": "void",
+     "desc": "Set light intensity multiplier"
+    },
+    {
+     "name": "getIntensity",
+     "snippet": "getIntensity()",
+     "return": "float",
+     "desc": "Get light intensity"
+    },
+    {
+     "name": "setAttenuation",
+     "snippet": "setAttenuation(${1:constant}, ${2:linear}, ${3:quadratic})",
+     "return": "void",
+     "desc": "Set distance attenuation factors"
+    },
+    {
+     "name": "getConstantAttenuation",
+     "snippet": "getConstantAttenuation()",
+     "return": "float",
+     "desc": "Get constant attenuation factor"
+    },
+    {
+     "name": "getLinearAttenuation",
+     "snippet": "getLinearAttenuation()",
+     "return": "float",
+     "desc": "Get linear attenuation factor"
+    },
+    {
+     "name": "getQuadraticAttenuation",
+     "snippet": "getQuadraticAttenuation()",
+     "return": "float",
+     "desc": "Get quadratic attenuation factor"
+    },
+    {
+     "name": "enable",
+     "snippet": "enable()",
+     "return": "void",
+     "desc": "Enable this light"
+    },
+    {
+     "name": "disable",
+     "snippet": "disable()",
+     "return": "void",
+     "desc": "Disable this light"
+    },
+    {
+     "name": "isEnabled",
+     "snippet": "isEnabled()",
+     "return": "bool",
+     "desc": "Check if light is enabled"
+    },
+    {
+     "name": "calculate",
+     "snippet": "calculate(${1:worldPos}, ${2:worldNormal}, ${3:material}, ${4:viewPos})",
+     "return": "Color",
+     "desc": "Compute the CPU Phong lighting contribution at a world position/normal for a material"
+    }
+   ]
+  },
+  {
+   "name": "LightType",
+   "desc": "Light type: Directional, Point, or Spot.",
+   "static_methods": [
+    {
+     "name": "Directional",
+     "snippet": "Directional",
+     "return": "LightType",
+     "desc": "= 0"
+    },
+    {
+     "name": "Point",
+     "snippet": "Point",
+     "return": "LightType",
+     "desc": "= 1"
+    },
+    {
+     "name": "Spot",
+     "snippet": "Spot",
+     "return": "LightType",
+     "desc": "= 2"
+    }
+   ]
+  },
+  {
+   "name": "Location",
+   "desc": "GPS / WiFi location fix returned by getLocation()",
+   "properties": [
+    {
+     "name": "latitude",
+     "type": "double",
+     "desc": "Latitude in degrees"
+    },
+    {
+     "name": "longitude",
+     "type": "double",
+     "desc": "Longitude in degrees"
+    },
+    {
+     "name": "altitude",
+     "type": "double",
+     "desc": "Altitude in meters"
+    },
+    {
+     "name": "accuracy",
+     "type": "float",
+     "desc": "Horizontal accuracy in meters; -1 if not available yet"
+    }
+   ]
+  },
+  {
+   "name": "LogEventArgs",
+   "desc": "Arguments delivered for each log message (level, text, and timestamp)",
+   "constructor": {
+    "snippet": "LogEventArgs(${1:lvl}, ${2:msg})"
+   },
+   "properties": [
+    {
+     "name": "level",
+     "type": "LogLevel",
+     "desc": "Severity of the log message"
+    },
+    {
+     "name": "message",
+     "type": "std::string",
+     "desc": "The log message text"
+    },
+    {
+     "name": "timestamp",
+     "type": "std::string",
+     "desc": "Timestamp string (HH:MM:SS.mmm) generated when the message was logged"
+    }
+   ]
+  },
+  {
+   "name": "Logger",
+   "desc": "Logging core with console and file output and an onLog event; access the global instance via getLogger()",
+   "constructor": {
+    "snippet": "Logger()"
+   },
+   "properties": [
+    {
+     "name": "onLog",
+     "type": "Event<LogEventArgs>",
+     "desc": "Event fired for every log message; listen to it to route logs (console/file/custom sink)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "log",
+     "snippet": "log(${1:level}, ${2:message})",
+     "return": "void",
+     "desc": "Emit a log message at the given level"
+    },
+    {
+     "name": "setConsoleLogLevel",
+     "snippet": "setConsoleLogLevel(${1:level})",
+     "return": "void",
+     "desc": "Set the minimum console log level"
+    },
+    {
+     "name": "getConsoleLogLevel",
+     "snippet": "getConsoleLogLevel()",
+     "return": "LogLevel",
+     "desc": "Get the current console log level"
+    },
+    {
+     "name": "setLogFile",
+     "snippet": "setLogFile(${1:path})",
+     "return": "bool",
+     "desc": "Open a file to receive log output"
+    },
+    {
+     "name": "closeFile",
+     "snippet": "closeFile()",
+     "return": "void",
+     "desc": "Close the current log file"
+    },
+    {
+     "name": "setFileLogLevel",
+     "snippet": "setFileLogLevel(${1:level})",
+     "return": "void",
+     "desc": "Set the minimum file log level"
+    },
+    {
+     "name": "getFileLogLevel",
+     "snippet": "getFileLogLevel()",
+     "return": "LogLevel",
+     "desc": "Get the current file log level"
+    },
+    {
+     "name": "getLogFilePath",
+     "snippet": "getLogFilePath()",
+     "return": "const std::string &",
+     "desc": "Get the path of the current log file"
+    },
+    {
+     "name": "isFileOpen",
+     "snippet": "isFileOpen()",
+     "return": "bool",
+     "desc": "Check whether a log file is currently open"
+    }
+   ]
+  },
+  {
+   "name": "LogLevel",
+   "desc": "Log severity, from Verbose (most detailed) to Fatal; Silent disables logging.",
+   "static_methods": [
+    {
+     "name": "Verbose",
+     "snippet": "Verbose",
+     "return": "LogLevel",
+     "desc": "= 0"
+    },
+    {
+     "name": "Notice",
+     "snippet": "Notice",
+     "return": "LogLevel",
+     "desc": "= 1"
+    },
+    {
+     "name": "Warning",
+     "snippet": "Warning",
+     "return": "LogLevel",
+     "desc": "= 2"
+    },
+    {
+     "name": "Error",
+     "snippet": "Error",
+     "return": "LogLevel",
+     "desc": "= 3"
+    },
+    {
+     "name": "Fatal",
+     "snippet": "Fatal",
+     "return": "LogLevel",
+     "desc": "= 4"
+    },
+    {
+     "name": "Silent",
+     "snippet": "Silent",
+     "return": "LogLevel",
+     "desc": "= 5"
+    }
+   ]
+  },
+  {
+   "name": "LogStream",
+   "desc": "Stream-based log output — the object returned by logNotice() / logWarning() / logError(), accepting values via operator<<.",
+   "constructor": {
+    "snippet": "LogStream(${1:level})"
+   }
+  },
+  {
+   "name": "Mat3",
+   "desc": "3x3 matrix for 2D affine / homography transforms (row-major). Includes static factories and a homography solver",
+   "constructor": {
+    "snippet": "Mat3(${1:m00}, ${2:m01}, ${3:m02}, ${4:m10}, ${5:m11}, ${6:m12}, ${7:m20}, ${8:m21}, ${9:m22})"
+   },
+   "methods": [
+    {
+     "name": "at",
+     "snippet": "at(${1:row}, ${2:col})",
+     "return": "float &",
+     "desc": "Access the element at (row, col)"
+    },
+    {
+     "name": "transposed",
+     "snippet": "transposed()",
+     "return": "Mat3",
+     "desc": "Return the transpose of this matrix"
+    },
+    {
+     "name": "determinant",
+     "snippet": "determinant()",
+     "return": "float",
+     "desc": "Compute the determinant"
+    },
+    {
+     "name": "inverted",
+     "snippet": "inverted()",
+     "return": "Mat3",
+     "desc": "Return the inverse matrix (identity if singular)"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "identity",
+     "snippet": "identity()",
+     "return": "Mat3",
+     "desc": "Return the identity matrix"
+    },
+    {
+     "name": "translate",
+     "snippet": "translate(${1:tx}, ${2:ty})",
+     "return": "Mat3",
+     "desc": "Build a 2D translation matrix"
+    },
+    {
+     "name": "rotate",
+     "snippet": "rotate(${1:radians})",
+     "return": "Mat3",
+     "desc": "Build a 2D rotation matrix (radians)"
+    },
+    {
+     "name": "scale",
+     "snippet": "scale(${1:sx}, ${2:sy})",
+     "return": "Mat3",
+     "desc": "Build a 2D scale matrix"
+    }
+   ]
+  },
+  {
+   "name": "Mat4",
+   "desc": "4x4 matrix for 3D transformations",
+   "constructor": {
+    "snippet": "Mat4(${1:m00}, ${2:m01}, ${3:m02}, ${4:m03}, ${5:m10}, ${6:m11}, ${7:m12}, ${8:m13}, ${9:m20}, ${10:m21}, ${11:m22}, ${12:m23}, ${13:m30}, ${14:m31}, ${15:m32}, ${16:m33})"
+   },
+   "methods": [
+    {
+     "name": "at",
+     "snippet": "at(${1:row}, ${2:col})",
+     "return": "float &",
+     "desc": "Access the element at (row, col)"
+    },
+    {
+     "name": "transposed",
+     "snippet": "transposed()",
+     "return": "Mat4",
+     "desc": "Get transposed matrix"
+    },
+    {
+     "name": "inverted",
+     "snippet": "inverted()",
+     "return": "Mat4",
+     "desc": "Get inverse matrix"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "identity",
+     "snippet": "identity()",
+     "return": "Mat4",
+     "desc": "Create an identity matrix"
+    },
+    {
+     "name": "fromHomography",
+     "snippet": "fromHomography(${1:h})",
+     "return": "Mat4",
+     "desc": "Build a Mat4 from a 3x3 homography (for 2D projection)"
+    },
+    {
+     "name": "translate",
+     "snippet": "translate(${1:tx}, ${2:ty}, ${3:tz})",
+     "return": "Mat4",
+     "desc": "Create a translation matrix"
+    },
+    {
+     "name": "rotateX",
+     "snippet": "rotateX(${1:radians})",
+     "return": "Mat4",
+     "desc": "Create X-axis rotation matrix"
+    },
+    {
+     "name": "rotateY",
+     "snippet": "rotateY(${1:radians})",
+     "return": "Mat4",
+     "desc": "Create Y-axis rotation matrix"
+    },
+    {
+     "name": "rotateZ",
+     "snippet": "rotateZ(${1:radians})",
+     "return": "Mat4",
+     "desc": "Create Z-axis rotation matrix"
+    },
+    {
+     "name": "rotate",
+     "snippet": "rotate(${1:radians}, ${2:axis})",
+     "return": "Mat4",
+     "desc": "Create a rotation matrix about an arbitrary axis"
+    },
+    {
+     "name": "scale",
+     "snippet": "scale(${1:sx}, ${2:sy}, ${3:sz})",
+     "return": "Mat4",
+     "desc": "Create a scaling matrix"
+    },
+    {
+     "name": "lookAt",
+     "snippet": "lookAt(${1:eye}, ${2:target}, ${3:up})",
+     "return": "Mat4",
+     "desc": "Create a view matrix"
+    },
+    {
+     "name": "ortho",
+     "snippet": "ortho(${1:left}, ${2:right}, ${3:bottom}, ${4:top}, ${5:nearPlane}, ${6:farPlane})",
+     "return": "Mat4",
+     "desc": "Create an orthographic projection matrix"
+    },
+    {
+     "name": "perspective",
+     "snippet": "perspective(${1:fovY}, ${2:aspect}, ${3:nearPlane}, ${4:farPlane})",
+     "return": "Mat4",
+     "desc": "Create a perspective projection matrix"
+    },
+    {
+     "name": "frustum",
+     "snippet": "frustum(${1:left}, ${2:right}, ${3:bottom}, ${4:top}, ${5:nearPlane}, ${6:farPlane})",
+     "return": "Mat4",
+     "desc": "Create an asymmetric perspective (frustum) projection matrix"
+    }
+   ]
+  },
+  {
+   "name": "Material",
+   "desc": "PBR material (metallic-roughness workflow, glTF 2.0 compatible)",
+   "constructor": {
+    "snippet": "Material()"
+   },
+   "methods": [
+    {
+     "name": "setBaseColor",
+     "snippet": "setBaseColor(${1:c})",
+     "return": "Material &",
+     "desc": "Set base color (albedo)"
+    },
+    {
+     "name": "getBaseColor",
+     "snippet": "getBaseColor()",
+     "return": "const Color &",
+     "desc": "Get base color (albedo)"
+    },
+    {
+     "name": "setMetallic",
+     "snippet": "setMetallic(${1:m})",
+     "return": "Material &",
+     "desc": "Set metallic factor (0=dielectric, 1=metal)"
+    },
+    {
+     "name": "getMetallic",
+     "snippet": "getMetallic()",
+     "return": "float",
+     "desc": "Get metallic factor"
+    },
+    {
+     "name": "setRoughness",
+     "snippet": "setRoughness(${1:r})",
+     "return": "Material &",
+     "desc": "Set roughness factor (0=mirror, 1=matte)"
+    },
+    {
+     "name": "getRoughness",
+     "snippet": "getRoughness()",
+     "return": "float",
+     "desc": "Get roughness factor"
+    },
+    {
+     "name": "setAo",
+     "snippet": "setAo(${1:ao})",
+     "return": "Material &",
+     "desc": "Set ambient occlusion factor"
+    },
+    {
+     "name": "getAo",
+     "snippet": "getAo()",
+     "return": "float",
+     "desc": "Get ambient occlusion factor"
+    },
+    {
+     "name": "setEmissive",
+     "snippet": "setEmissive(${1:c})",
+     "return": "Material &",
+     "desc": "Set emissive color"
+    },
+    {
+     "name": "getEmissive",
+     "snippet": "getEmissive()",
+     "return": "const Color &",
+     "desc": "Get emissive color"
+    },
+    {
+     "name": "setEmissiveStrength",
+     "snippet": "setEmissiveStrength(${1:s})",
+     "return": "Material &",
+     "desc": "Set emissive strength multiplier"
+    },
+    {
+     "name": "getEmissiveStrength",
+     "snippet": "getEmissiveStrength()",
+     "return": "float",
+     "desc": "Get emissive strength multiplier"
+    },
+    {
+     "name": "getNormalMap",
+     "snippet": "getNormalMap()",
+     "return": "const Texture *",
+     "desc": "Get normal map texture"
+    },
+    {
+     "name": "hasNormalMap",
+     "snippet": "hasNormalMap()",
+     "return": "bool",
+     "desc": "Check if a normal map is set"
+    },
+    {
+     "name": "getBaseColorTexture",
+     "snippet": "getBaseColorTexture()",
+     "return": "const Texture *",
+     "desc": "Get base color texture"
+    },
+    {
+     "name": "hasBaseColorTexture",
+     "snippet": "hasBaseColorTexture()",
+     "return": "bool",
+     "desc": "Check if a base color texture is set"
+    },
+    {
+     "name": "getMetallicRoughnessTexture",
+     "snippet": "getMetallicRoughnessTexture()",
+     "return": "const Texture *",
+     "desc": "Get metallic-roughness texture"
+    },
+    {
+     "name": "hasMetallicRoughnessTexture",
+     "snippet": "hasMetallicRoughnessTexture()",
+     "return": "bool",
+     "desc": "Check if a metallic-roughness texture is set"
+    },
+    {
+     "name": "getEmissiveTexture",
+     "snippet": "getEmissiveTexture()",
+     "return": "const Texture *",
+     "desc": "Get emissive texture"
+    },
+    {
+     "name": "hasEmissiveTexture",
+     "snippet": "hasEmissiveTexture()",
+     "return": "bool",
+     "desc": "Check if an emissive texture is set"
+    },
+    {
+     "name": "getOcclusionTexture",
+     "snippet": "getOcclusionTexture()",
+     "return": "const Texture *",
+     "desc": "Get occlusion texture"
+    },
+    {
+     "name": "hasOcclusionTexture",
+     "snippet": "hasOcclusionTexture()",
+     "return": "bool",
+     "desc": "Check if an occlusion texture is set"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "gold",
+     "snippet": "gold()",
+     "return": "Material",
+     "desc": "Gold material preset"
+    },
+    {
+     "name": "silver",
+     "snippet": "silver()",
+     "return": "Material",
+     "desc": "Silver material preset"
+    },
+    {
+     "name": "copper",
+     "snippet": "copper()",
+     "return": "Material",
+     "desc": "Copper material preset"
+    },
+    {
+     "name": "iron",
+     "snippet": "iron()",
+     "return": "Material",
+     "desc": "Iron material preset"
+    },
+    {
+     "name": "bronze",
+     "snippet": "bronze()",
+     "return": "Material",
+     "desc": "Bronze material preset"
+    },
+    {
+     "name": "emerald",
+     "snippet": "emerald()",
+     "return": "Material",
+     "desc": "Emerald material preset"
+    },
+    {
+     "name": "ruby",
+     "snippet": "ruby()",
+     "return": "Material",
+     "desc": "Ruby material preset"
+    },
+    {
+     "name": "plastic",
+     "snippet": "plastic(${1:baseColor})",
+     "return": "Material",
+     "desc": "Plastic material preset"
+    },
+    {
+     "name": "rubber",
+     "snippet": "rubber(${1:baseColor})",
+     "return": "Material",
+     "desc": "Rubber material preset"
+    },
+    {
+     "name": "fromPhong",
+     "snippet": "fromPhong(${1:diffuse}, ${2:specular}, ${3:shininess})",
+     "return": "Material",
+     "desc": "Convert Phong material parameters to PBR (roughness from shininess, metallic estimated from specular luminance)"
+    }
+   ]
+  },
+  {
+   "name": "Mesh",
+   "desc": "3D mesh with vertices, colors, normals, indices",
+   "constructor": {
+    "snippet": "Mesh()"
+   },
+   "methods": [
+    {
+     "name": "setMode",
+     "snippet": "setMode(${1:mode})",
+     "return": "Mesh &",
+     "desc": "Set primitive mode (Triangles, Lines, Points, etc.)"
+    },
+    {
+     "name": "getMode",
+     "snippet": "getMode()",
+     "return": "PrimitiveMode",
+     "desc": "Get current primitive mode"
+    },
+    {
+     "name": "addVertex",
+     "snippet": "addVertex(${1:x}, ${2:y})",
+     "return": "Mesh &",
+     "desc": "Add a vertex"
+    },
+    {
+     "name": "addVertices",
+     "snippet": "addVertices(${1:verts})",
+     "return": "Mesh &",
+     "desc": "Add multiple vertices"
+    },
+    {
+     "name": "getVertices",
+     "snippet": "getVertices()",
+     "return": "std::vector<Vec3> &",
+     "desc": "Get all vertices"
+    },
+    {
+     "name": "getNumVertices",
+     "snippet": "getNumVertices()",
+     "return": "int",
+     "desc": "Get vertex count"
+    },
+    {
+     "name": "addColor",
+     "snippet": "addColor(${1:c})",
+     "return": "Mesh &",
+     "desc": "Add a vertex color"
+    },
+    {
+     "name": "addColors",
+     "snippet": "addColors(${1:cols})",
+     "return": "Mesh &",
+     "desc": "Add multiple vertex colors"
+    },
+    {
+     "name": "getColors",
+     "snippet": "getColors()",
+     "return": "std::vector<Color> &",
+     "desc": "Get all vertex colors"
+    },
+    {
+     "name": "getNumColors",
+     "snippet": "getNumColors()",
+     "return": "int",
+     "desc": "Get vertex color count"
+    },
+    {
+     "name": "hasColors",
+     "snippet": "hasColors()",
+     "return": "bool",
+     "desc": "Check if mesh has vertex colors"
+    },
+    {
+     "name": "addIndex",
+     "snippet": "addIndex(${1:index})",
+     "return": "Mesh &",
+     "desc": "Add an index"
+    },
+    {
+     "name": "addIndices",
+     "snippet": "addIndices(${1:inds})",
+     "return": "Mesh &",
+     "desc": "Add multiple indices"
+    },
+    {
+     "name": "addTriangle",
+     "snippet": "addTriangle(${1:i0}, ${2:i1}, ${3:i2})",
+     "return": "Mesh &",
+     "desc": "Add a triangle (3 indices)"
+    },
+    {
+     "name": "getIndices",
+     "snippet": "getIndices()",
+     "return": "std::vector<unsigned int> &",
+     "desc": "Get all indices"
+    },
+    {
+     "name": "getNumIndices",
+     "snippet": "getNumIndices()",
+     "return": "int",
+     "desc": "Get index count"
+    },
+    {
+     "name": "hasIndices",
+     "snippet": "hasIndices()",
+     "return": "bool",
+     "desc": "Check if mesh has indices"
+    },
+    {
+     "name": "addNormal",
+     "snippet": "addNormal(${1:nx}, ${2:ny}, ${3:nz})",
+     "return": "Mesh &",
+     "desc": "Add a normal vector"
+    },
+    {
+     "name": "addNormals",
+     "snippet": "addNormals(${1:norms})",
+     "return": "Mesh &",
+     "desc": "Add multiple normals"
+    },
+    {
+     "name": "setNormal",
+     "snippet": "setNormal(${1:index}, ${2:n})",
+     "return": "Mesh &",
+     "desc": "Set normal at index"
+    },
+    {
+     "name": "getNormal",
+     "snippet": "getNormal(${1:index})",
+     "return": "Vec3",
+     "desc": "Get normal at index"
+    },
+    {
+     "name": "getNormals",
+     "snippet": "getNormals()",
+     "return": "std::vector<Vec3> &",
+     "desc": "Get all normals"
+    },
+    {
+     "name": "getNumNormals",
+     "snippet": "getNumNormals()",
+     "return": "int",
+     "desc": "Get normal count"
+    },
+    {
+     "name": "hasNormals",
+     "snippet": "hasNormals()",
+     "return": "bool",
+     "desc": "Check if mesh has normals"
+    },
+    {
+     "name": "addTexCoord",
+     "snippet": "addTexCoord(${1:u}, ${2:v})",
+     "return": "Mesh &",
+     "desc": "Add a texture coordinate"
+    },
+    {
+     "name": "getTexCoords",
+     "snippet": "getTexCoords()",
+     "return": "std::vector<Vec2> &",
+     "desc": "Get all texture coordinates"
+    },
+    {
+     "name": "getNumTexCoords",
+     "snippet": "getNumTexCoords()",
+     "return": "int",
+     "desc": "Get texture coordinate count"
+    },
+    {
+     "name": "hasTexCoords",
+     "snippet": "hasTexCoords()",
+     "return": "bool",
+     "desc": "Check if mesh has texture coordinates"
+    },
+    {
+     "name": "hasValidTexCoords",
+     "snippet": "hasValidTexCoords()",
+     "return": "bool",
+     "desc": "Check if texture coordinates match vertex count"
+    },
+    {
+     "name": "addTangent",
+     "snippet": "addTangent(${1:tx}, ${2:ty}, ${3:tz})",
+     "return": "Mesh &",
+     "desc": "Add a tangent vector (xyz direction + w handedness)"
+    },
+    {
+     "name": "getTangents",
+     "snippet": "getTangents()",
+     "return": "std::vector<Vec4> &",
+     "desc": "Get the tangent array (mutable)"
+    },
+    {
+     "name": "getNumTangents",
+     "snippet": "getNumTangents()",
+     "return": "int",
+     "desc": "Number of tangents"
+    },
+    {
+     "name": "hasTangents",
+     "snippet": "hasTangents()",
+     "return": "bool",
+     "desc": "Whether the mesh has tangents"
+    },
+    {
+     "name": "clear",
+     "snippet": "clear()",
+     "return": "Mesh &",
+     "desc": "Clear all mesh data"
+    },
+    {
+     "name": "clearVertices",
+     "snippet": "clearVertices()",
+     "return": "Mesh &",
+     "desc": "Clear vertices only"
+    },
+    {
+     "name": "clearNormals",
+     "snippet": "clearNormals()",
+     "return": "Mesh &",
+     "desc": "Clear normals only"
+    },
+    {
+     "name": "clearColors",
+     "snippet": "clearColors()",
+     "return": "Mesh &",
+     "desc": "Clear colors only"
+    },
+    {
+     "name": "clearIndices",
+     "snippet": "clearIndices()",
+     "return": "Mesh &",
+     "desc": "Clear indices only"
+    },
+    {
+     "name": "clearTexCoords",
+     "snippet": "clearTexCoords()",
+     "return": "Mesh &",
+     "desc": "Clear texture coordinates only"
+    },
+    {
+     "name": "clearTangents",
+     "snippet": "clearTangents()",
+     "return": "Mesh &",
+     "desc": "Remove all tangents"
+    },
+    {
+     "name": "translate",
+     "snippet": "translate(${1:x}, ${2:y}, ${3:z})",
+     "return": "Mesh &",
+     "desc": "Translate all vertices"
+    },
+    {
+     "name": "rotateX",
+     "snippet": "rotateX(${1:radians})",
+     "return": "Mesh &",
+     "desc": "Rotate mesh around X axis"
+    },
+    {
+     "name": "rotateY",
+     "snippet": "rotateY(${1:radians})",
+     "return": "Mesh &",
+     "desc": "Rotate mesh around Y axis"
+    },
+    {
+     "name": "rotateZ",
+     "snippet": "rotateZ(${1:radians})",
+     "return": "Mesh &",
+     "desc": "Rotate mesh around Z axis"
+    },
+    {
+     "name": "scale",
+     "snippet": "scale(${1:x}, ${2:y}, ${3:z})",
+     "return": "Mesh &",
+     "desc": "Scale mesh"
+    },
+    {
+     "name": "transform",
+     "snippet": "transform(${1:m})",
+     "return": "Mesh &",
+     "desc": "Apply transformation matrix"
+    },
+    {
+     "name": "append",
+     "snippet": "append(${1:other})",
+     "return": "Mesh &",
+     "desc": "Append another mesh"
+    },
+    {
+     "name": "draw",
+     "snippet": "draw()",
+     "return": "void",
+     "desc": "Draw the mesh"
+    },
+    {
+     "name": "drawNoLighting",
+     "snippet": "drawNoLighting()",
+     "return": "void",
+     "desc": "Draw the mesh without lighting"
+    },
+    {
+     "name": "drawWithLighting",
+     "snippet": "drawWithLighting()",
+     "return": "void",
+     "desc": "Draw the mesh with lighting"
+    },
+    {
+     "name": "drawNoLightingWithTexture",
+     "snippet": "drawNoLightingWithTexture(${1:texture})",
+     "return": "void",
+     "desc": "Draw the mesh textured without lighting"
+    },
+    {
+     "name": "drawWireframe",
+     "snippet": "drawWireframe()",
+     "return": "void",
+     "desc": "Draw mesh as wireframe"
+    },
+    {
+     "name": "markGpuDirty",
+     "snippet": "markGpuDirty()",
+     "return": "void",
+     "desc": "Mark GPU buffers stale after editing data in place"
+    },
+    {
+     "name": "uploadToGpu",
+     "snippet": "uploadToGpu()",
+     "return": "void",
+     "desc": "Upload the mesh's vertex/index data to its GPU buffers now (for the PBR / custom-render path)."
+    },
+    {
+     "name": "drawGpuPbr",
+     "snippet": "drawGpuPbr()",
+     "return": "void",
+     "desc": "Draw the mesh through the GPU PBR pipeline (retained GPU buffer + active lights, material and environment)."
+    },
+    {
+     "name": "drawGpuPoints",
+     "snippet": "drawGpuPoints()",
+     "return": "void",
+     "desc": "Draw a Points-mode mesh as a GPU-resident point cloud (Square/Round splats or 1px Pixel points)."
+    },
+    {
+     "name": "uploadPointsToGpu",
+     "snippet": "uploadPointsToGpu()",
+     "return": "void",
+     "desc": "Upload the point cloud (positions + colors) to its GPU buffer now (for the Points / custom-render path)."
+    },
+    {
+     "name": "getGpuVertexBuffer",
+     "snippet": "getGpuVertexBuffer()",
+     "return": "sg_buffer",
+     "desc": "The sokol-gfx vertex buffer handle backing the mesh (advanced interop)."
+    },
+    {
+     "name": "getGpuIndexBuffer",
+     "snippet": "getGpuIndexBuffer()",
+     "return": "sg_buffer",
+     "desc": "The sokol-gfx index buffer handle backing the mesh, or an empty handle if non-indexed (advanced interop)."
+    },
+    {
+     "name": "getGpuVertexCount",
+     "snippet": "getGpuVertexCount()",
+     "return": "int",
+     "desc": "Number of vertices currently uploaded to the GPU vertex buffer. Pairs with getGpuVertexBuffer (e.g. as the draw count for a custom pipeline)."
+    },
+    {
+     "name": "getGpuIndexCount",
+     "snippet": "getGpuIndexCount()",
+     "return": "int",
+     "desc": "Number of indices currently uploaded to the GPU index buffer (0 if the mesh is non-indexed). Pairs with getGpuIndexBuffer for custom rendering."
+    },
+    {
+     "name": "getGpuPointBuffer",
+     "snippet": "getGpuPointBuffer()",
+     "return": "sg_buffer",
+     "desc": "The sokol-gfx buffer handle holding the uploaded point data, position + color per point (advanced interop)."
+    },
+    {
+     "name": "getGpuPointCount",
+     "snippet": "getGpuPointCount()",
+     "return": "int",
+     "desc": "Number of points currently uploaded to the GPU point buffer (PrimitiveMode::Points). Pairs with getGpuPointBuffer for custom rendering."
+    }
+   ]
+  },
+  {
+   "name": "MicInput",
+   "desc": "Microphone capture (miniaudio). Opens an input device and exposes the latest samples through a ring buffer. Use the global getMicInput() to access the shared instance, then start() it; getMicAnalysisBuffer() is a convenience wrapper over getBuffer().",
+   "constructor": {
+    "snippet": "MicInput()"
+   },
+   "methods": [
+    {
+     "name": "start",
+     "snippet": "start()",
+     "return": "bool",
+     "desc": "Open the microphone device at the given sample rate and begin capturing. Returns false on failure."
+    },
+    {
+     "name": "stop",
+     "snippet": "stop()",
+     "return": "void",
+     "desc": "Stop capture and close the microphone device."
+    },
+    {
+     "name": "isRunning",
+     "snippet": "isRunning()",
+     "return": "bool",
+     "desc": "True while the microphone device is open and capturing."
+    },
+    {
+     "name": "getSampleRate",
+     "snippet": "getSampleRate()",
+     "return": "int",
+     "desc": "Sample rate the microphone was opened at."
+    }
+   ]
+  },
+  {
+   "name": "MixMode",
+   "desc": "Sound channel mixing: Auto (match the output) or DownmixMono.",
+   "static_methods": [
+    {
+     "name": "Auto",
+     "snippet": "Auto",
+     "return": "MixMode",
+     "desc": "= 0"
+    },
+    {
+     "name": "DownmixMono",
+     "snippet": "DownmixMono",
+     "return": "MixMode",
+     "desc": "= 1"
+    }
+   ]
+  },
+  {
+   "name": "Mod",
+   "desc": "Attachable behavior base class for Node. Subclass it, override the lifecycle and input hooks, and attach with node->addMod<T>(). Lifecycle: setup() on attach, then each frame earlyUpdate() -> Node::update() -> update() -> draw(), and onDestroy() on removal. Override isExclusive() to allow only one instance per Node, and canAttachTo() to restrict attachment.",
+   "methods": [
+    {
+     "name": "getOwner",
+     "snippet": "getOwner()",
+     "return": "Node *",
+     "desc": "Get the owner Node this Mod is attached to."
+    }
+   ]
+  },
+  {
+   "name": "MouseButton",
+   "desc": "Mouse button: Left, Right, Middle, or None.",
+   "static_methods": [
+    {
+     "name": "Left",
+     "snippet": "Left",
+     "return": "MouseButton",
+     "desc": "= 0"
+    },
+    {
+     "name": "Right",
+     "snippet": "Right",
+     "return": "MouseButton",
+     "desc": "= 1"
+    },
+    {
+     "name": "Middle",
+     "snippet": "Middle",
+     "return": "MouseButton",
+     "desc": "= 2"
+    },
+    {
+     "name": "None",
+     "snippet": "None",
+     "return": "MouseButton",
+     "desc": "= 256"
+    }
+   ]
+  },
+  {
+   "name": "MouseDragEventArgs",
+   "desc": "Arguments for mouseDragged (cursor moving with a button held)",
+   "properties": [
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "Legacy mirror of pos.x (removed at v1.0)"
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Legacy mirror of pos.y (removed at v1.0)"
+    },
+    {
+     "name": "deltaX",
+     "type": "float",
+     "desc": "Legacy mirror of delta.x (removed at v1.0)"
+    },
+    {
+     "name": "deltaY",
+     "type": "float",
+     "desc": "Legacy mirror of delta.y (removed at v1.0)"
+    },
+    {
+     "name": "button",
+     "type": "int",
+     "desc": "Mouse button being dragged (MOUSE_BUTTON_*)"
+    },
+    {
+     "name": "shift",
+     "type": "bool",
+     "desc": "Shift modifier held"
+    },
+    {
+     "name": "ctrl",
+     "type": "bool",
+     "desc": "Ctrl modifier held"
+    },
+    {
+     "name": "alt",
+     "type": "bool",
+     "desc": "Alt modifier held"
+    },
+    {
+     "name": "super",
+     "type": "bool",
+     "desc": "Super / Command modifier held"
+    },
+    {
+     "name": "pos",
+     "type": "Vec2",
+     "desc": "Cursor position in local space (== globalPos at app level)"
+    },
+    {
+     "name": "globalPos",
+     "type": "Vec2",
+     "desc": "Cursor position in screen space"
+    },
+    {
+     "name": "delta",
+     "type": "Vec2",
+     "desc": "Movement since the last event, in local space"
+    },
+    {
+     "name": "globalDelta",
+     "type": "Vec2",
+     "desc": "Movement since the last event, in screen space"
+    },
+    {
+     "name": "consumed",
+     "type": "bool",
+     "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+    }
+   ],
+   "methods": [
+    {
+     "name": "syncLegacy",
+     "snippet": "syncLegacy()",
+     "return": "void",
+     "desc": "Copy the canonical pos/delta fields into the deprecated x/y/deltaX/deltaY mirror fields (legacy mirrors scheduled for removal in v1.0)."
+    }
+   ]
+  },
+  {
+   "name": "MouseEventArgs",
+   "desc": "Arguments for mousePressed / mouseReleased events. pos is local space, globalPos is screen space (equal at app level)",
+   "properties": [
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "Legacy mirror of pos.x (removed at v1.0)"
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Legacy mirror of pos.y (removed at v1.0)"
+    },
+    {
+     "name": "button",
+     "type": "int",
+     "desc": "Mouse button (MOUSE_BUTTON_LEFT / RIGHT / MIDDLE)"
+    },
+    {
+     "name": "shift",
+     "type": "bool",
+     "desc": "Shift modifier held"
+    },
+    {
+     "name": "ctrl",
+     "type": "bool",
+     "desc": "Ctrl modifier held"
+    },
+    {
+     "name": "alt",
+     "type": "bool",
+     "desc": "Alt modifier held"
+    },
+    {
+     "name": "super",
+     "type": "bool",
+     "desc": "Super / Command modifier held"
+    },
+    {
+     "name": "pos",
+     "type": "Vec2",
+     "desc": "Cursor position in the receiving node's local space (== globalPos at app level)"
+    },
+    {
+     "name": "globalPos",
+     "type": "Vec2",
+     "desc": "Cursor position in screen space"
+    },
+    {
+     "name": "consumed",
+     "type": "bool",
+     "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+    }
+   ],
+   "methods": [
+    {
+     "name": "syncLegacy",
+     "snippet": "syncLegacy()",
+     "return": "void",
+     "desc": "Copy the canonical pos field into the deprecated x/y mirror fields (legacy mirrors scheduled for removal in v1.0)."
+    }
+   ]
+  },
+  {
+   "name": "MouseMoveEventArgs",
+   "desc": "Arguments for mouseMoved (cursor moving with no button held)",
+   "properties": [
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "Legacy mirror of pos.x (removed at v1.0)"
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Legacy mirror of pos.y (removed at v1.0)"
+    },
+    {
+     "name": "deltaX",
+     "type": "float",
+     "desc": "Legacy mirror of delta.x (removed at v1.0)"
+    },
+    {
+     "name": "deltaY",
+     "type": "float",
+     "desc": "Legacy mirror of delta.y (removed at v1.0)"
+    },
+    {
+     "name": "shift",
+     "type": "bool",
+     "desc": "Shift modifier held"
+    },
+    {
+     "name": "ctrl",
+     "type": "bool",
+     "desc": "Ctrl modifier held"
+    },
+    {
+     "name": "alt",
+     "type": "bool",
+     "desc": "Alt modifier held"
+    },
+    {
+     "name": "super",
+     "type": "bool",
+     "desc": "Super / Command modifier held"
+    },
+    {
+     "name": "pos",
+     "type": "Vec2",
+     "desc": "Cursor position in local space (== globalPos at app level)"
+    },
+    {
+     "name": "globalPos",
+     "type": "Vec2",
+     "desc": "Cursor position in screen space"
+    },
+    {
+     "name": "delta",
+     "type": "Vec2",
+     "desc": "Movement since the last event, in local space"
+    },
+    {
+     "name": "globalDelta",
+     "type": "Vec2",
+     "desc": "Movement since the last event, in screen space"
+    },
+    {
+     "name": "consumed",
+     "type": "bool",
+     "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+    }
+   ],
+   "methods": [
+    {
+     "name": "syncLegacy",
+     "snippet": "syncLegacy()",
+     "return": "void",
+     "desc": "Copy the canonical pos/delta fields into the deprecated x/y/deltaX/deltaY mirror fields (legacy mirrors scheduled for removal in v1.0)."
+    }
+   ]
+  },
+  {
+   "name": "NetworkInterface",
+   "desc": "One address entry of a network interface (returned by listNetworkInterfaces)",
+   "properties": [
+    {
+     "name": "name",
+     "type": "std::string",
+     "desc": "Interface name (en0 / Ethernet / wlan0)"
+    },
+    {
+     "name": "address",
+     "type": "std::string",
+     "desc": "IP address (IPv4 dotted-quad or IPv6 textual)"
+    },
+    {
+     "name": "netmask",
+     "type": "std::string",
+     "desc": "Subnet mask (IPv4)"
+    },
+    {
+     "name": "mac",
+     "type": "std::string",
+     "desc": "Hardware MAC address (empty if unavailable)"
+    },
+    {
+     "name": "isIPv4",
+     "type": "bool",
+     "desc": "True for IPv4, false for IPv6"
+    },
+    {
+     "name": "isLoopback",
+     "type": "bool",
+     "desc": "True if a loopback interface"
+    },
+    {
+     "name": "isUp",
+     "type": "bool",
+     "desc": "True if the interface link is up"
+    }
+   ],
+   "methods": [
+    {
+     "name": "getName",
+     "snippet": "getName()",
+     "return": "const std::string &",
+     "desc": "Interface name"
+    },
+    {
+     "name": "getAddress",
+     "snippet": "getAddress()",
+     "return": "const std::string &",
+     "desc": "IP address"
+    },
+    {
+     "name": "getNetmask",
+     "snippet": "getNetmask()",
+     "return": "const std::string &",
+     "desc": "Subnet mask"
+    },
+    {
+     "name": "getMac",
+     "snippet": "getMac()",
+     "return": "const std::string &",
+     "desc": "MAC address"
+    },
+    {
+     "name": "getIsIPv4",
+     "snippet": "getIsIPv4()",
+     "return": "bool",
+     "desc": "Whether the address is IPv4"
+    },
+    {
+     "name": "getIsLoopback",
+     "snippet": "getIsLoopback()",
+     "return": "bool",
+     "desc": "Whether this is a loopback interface"
+    },
+    {
+     "name": "getIsUp",
+     "snippet": "getIsUp()",
+     "return": "bool",
+     "desc": "Whether the link is up"
+    }
+   ]
+  },
+  {
+   "name": "Node",
+   "desc": "Base scene-graph node: transform hierarchy with parent/children, update/draw, input events and attachable Mods (C++ only, managed via shared_ptr / NodePtr)",
+   "constructor": {
+    "snippet": "Node()"
+   },
+   "properties": [
+    {
+     "name": "localMatrixChanged",
+     "type": "Event<void>",
+     "desc": "Event fired when this node's local matrix changes."
+    }
+   ],
+   "methods": [
+    {
+     "name": "setup",
+     "snippet": "setup()",
+     "return": "void",
+     "desc": "Called once at start"
+    },
+    {
+     "name": "update",
+     "snippet": "update()",
+     "return": "void",
+     "desc": "Called every frame before draw"
+    },
+    {
+     "name": "draw",
+     "snippet": "draw()",
+     "return": "void",
+     "desc": "Called every frame after update"
+    },
+    {
+     "name": "cleanup",
+     "snippet": "cleanup()",
+     "return": "void",
+     "desc": "Called once before exit (optional user callback for cleanup)"
+    },
+    {
+     "name": "addChild",
+     "snippet": "addChild(${1:child})",
+     "return": "void",
+     "desc": "Add a child node (C++ only)"
+    },
+    {
+     "name": "insertChild",
+     "snippet": "insertChild(${1:index}, ${2:child})",
+     "return": "void",
+     "desc": "Insert a child node at a specific index (C++ only)"
+    },
+    {
+     "name": "removeChild",
+     "snippet": "removeChild(${1:child})",
+     "return": "void",
+     "desc": "Remove a child node (C++ only)"
+    },
+    {
+     "name": "removeAllChildren",
+     "snippet": "removeAllChildren()",
+     "return": "void",
+     "desc": "Remove all child nodes (C++ only)"
+    },
+    {
+     "name": "onChildAdded",
+     "snippet": "onChildAdded(${1:child})",
+     "return": "void",
+     "desc": "Callback fired when a child is added (overridable) (C++ only)"
+    },
+    {
+     "name": "onChildRemoved",
+     "snippet": "onChildRemoved(${1:child})",
+     "return": "void",
+     "desc": "Callback fired when a child is removed (overridable) (C++ only)"
+    },
+    {
+     "name": "getParent",
+     "snippet": "getParent()",
+     "return": "Ptr",
+     "desc": "Get the parent node (null if none) (C++ only)"
+    },
+    {
+     "name": "getChildren",
+     "snippet": "getChildren()",
+     "return": "std::vector<Ptr>",
+     "desc": "Get a copy of the child node list (safe to iterate while modifying) (C++ only)"
+    },
+    {
+     "name": "getChildCount",
+     "snippet": "getChildCount()",
+     "return": "size_t",
+     "desc": "Get the number of child nodes (C++ only)"
+    },
+    {
+     "name": "getChildIndex",
+     "snippet": "getChildIndex()",
+     "return": "int",
+     "desc": "This node's index among its parent's children (-1 if no parent) (C++ only)"
+    },
+    {
+     "name": "moveToFront",
+     "snippet": "moveToFront()",
+     "return": "void",
+     "desc": "Move this node to the end of its parent's child list — drawn last, on top of siblings. No-op if no parent or already last (C++ only)"
+    },
+    {
+     "name": "moveToBack",
+     "snippet": "moveToBack()",
+     "return": "void",
+     "desc": "Move this node to the beginning of its parent's child list — drawn first, beneath siblings. No-op if no parent or already first (C++ only)"
+    },
+    {
+     "name": "isActive",
+     "snippet": "isActive()",
+     "return": "bool",
+     "desc": "Whether the node is active (inactive: update and draw are skipped) (C++ only)"
+    },
+    {
+     "name": "setActive",
+     "snippet": "setActive(${1:active})",
+     "return": "void",
+     "desc": "Set the active state (inactive: update and draw are skipped) (C++ only)"
+    },
+    {
+     "name": "isVisible",
+     "snippet": "isVisible()",
+     "return": "bool",
+     "desc": "Whether the node is visible (invisible: only draw is skipped) (C++ only)"
+    },
+    {
+     "name": "setVisible",
+     "snippet": "setVisible(${1:visible})",
+     "return": "void",
+     "desc": "Set the visible state (invisible: only draw is skipped) (C++ only)"
+    },
+    {
+     "name": "destroy",
+     "snippet": "destroy()",
+     "return": "void",
+     "desc": "Mark node for deferred removal from scene graph (C++ only)"
+    },
+    {
+     "name": "isDead",
+     "snippet": "isDead()",
+     "return": "bool",
+     "desc": "Check if node is marked for destruction (C++ only)"
+    },
+    {
+     "name": "enableEvents",
+     "snippet": "enableEvents()",
+     "return": "void",
+     "desc": "Enable mouse/key events for this node (C++ only)"
+    },
+    {
+     "name": "disableEvents",
+     "snippet": "disableEvents()",
+     "return": "void",
+     "desc": "Disable mouse/key events for this node (C++ only)"
+    },
+    {
+     "name": "isEventsEnabled",
+     "snippet": "isEventsEnabled()",
+     "return": "bool",
+     "desc": "Whether events are enabled (only such nodes are hit-test targets) (C++ only)"
+    },
+    {
+     "name": "isMouseOver",
+     "snippet": "isMouseOver()",
+     "return": "bool",
+     "desc": "Whether the mouse is over this node (auto-updated each frame, O(1)) (C++ only)"
+    },
+    {
+     "name": "setName",
+     "snippet": "setName(${1:name})",
+     "return": "Node &",
+     "desc": "Set an optional instance name (chainable) (C++ only)"
+    },
+    {
+     "name": "getName",
+     "snippet": "getName()",
+     "return": "const std::string &",
+     "desc": "Get the optional instance name (empty unless setName() was called) (C++ only)"
+    },
+    {
+     "name": "hasName",
+     "snippet": "hasName()",
+     "return": "bool",
+     "desc": "Whether an instance name has been set (C++ only)"
+    },
+    {
+     "name": "getTypeName",
+     "snippet": "getTypeName()",
+     "return": "const std::string &",
+     "desc": "C++ class name (most-derived type) via RTTI, e.g. \"trussc::RectNode\" (cached) (C++ only)\n"
+    },
+    {
+     "name": "getDisplayName",
+     "snippet": "getDisplayName()",
+     "return": "std::string",
+     "desc": "Short type-anchored label for trees / inspectors, e.g. \"RectNode\" or \"RectNode (play)\" (C++ only)\n"
+    },
+    {
+     "name": "getInstanceId",
+     "snippet": "getInstanceId()",
+     "return": "uint64_t",
+     "desc": "Per-process unique id, assigned once at construction and stable across reparenting (C++ only)"
+    },
+    {
+     "name": "findByInstanceId",
+     "snippet": "findByInstanceId(${1:id})",
+     "return": "Node *",
+     "desc": "Find a node in this subtree (self included) by instance id, depth-first (null if not found) (C++ only)"
+    },
+    {
+     "name": "getPos",
+     "snippet": "getPos()",
+     "return": "const Vec3 &",
+     "desc": "Get local position (C++ only)"
+    },
+    {
+     "name": "getX",
+     "snippet": "getX()",
+     "return": "float",
+     "desc": "Get local X position (C++ only)"
+    },
+    {
+     "name": "getY",
+     "snippet": "getY()",
+     "return": "float",
+     "desc": "Get local Y position (C++ only)"
+    },
+    {
+     "name": "getZ",
+     "snippet": "getZ()",
+     "return": "float",
+     "desc": "Get local Z position (C++ only)"
+    },
+    {
+     "name": "setPos",
+     "snippet": "setPos(${1:pos})",
+     "return": "void",
+     "desc": "Set local position (C++ only)"
+    },
+    {
+     "name": "setX",
+     "snippet": "setX(${1:x})",
+     "return": "void",
+     "desc": "Set local X position (C++ only)"
+    },
+    {
+     "name": "setY",
+     "snippet": "setY(${1:y})",
+     "return": "void",
+     "desc": "Set local Y position (C++ only)"
+    },
+    {
+     "name": "setZ",
+     "snippet": "setZ(${1:z})",
+     "return": "void",
+     "desc": "Set local Z position (C++ only)"
+    },
+    {
+     "name": "getQuaternion",
+     "snippet": "getQuaternion()",
+     "return": "const Quaternion &",
+     "desc": "Get rotation as a quaternion (C++ only)"
+    },
+    {
+     "name": "setQuaternion",
+     "snippet": "setQuaternion(${1:q})",
+     "return": "void",
+     "desc": "Set rotation from a quaternion (C++ only)"
+    },
+    {
+     "name": "getEuler",
+     "snippet": "getEuler()",
+     "return": "Vec3",
+     "desc": "Get rotation as Euler angles in radians (pitch=X, yaw=Y, roll=Z) (C++ only)"
+    },
+    {
+     "name": "setEuler",
+     "snippet": "setEuler(${1:euler})",
+     "return": "void",
+     "desc": "Set rotation from Euler angles in radians (pitch=X, yaw=Y, roll=Z) (C++ only)"
+    },
+    {
+     "name": "getEulerDeg",
+     "snippet": "getEulerDeg()",
+     "return": "Vec3",
+     "desc": "Get rotation as Euler angles in degrees (C++ only)"
+    },
+    {
+     "name": "setEulerDeg",
+     "snippet": "setEulerDeg(${1:deg})",
+     "return": "void",
+     "desc": "Set rotation from Euler angles in degrees (C++ only)"
+    },
+    {
+     "name": "getRot",
+     "snippet": "getRot()",
+     "return": "float",
+     "desc": "Get 2D Z-axis rotation in radians (C++ only)"
+    },
+    {
+     "name": "setRot",
+     "snippet": "setRot(${1:radians})",
+     "return": "void",
+     "desc": "Set 2D Z-axis rotation in radians (C++ only)"
+    },
+    {
+     "name": "getRotDeg",
+     "snippet": "getRotDeg()",
+     "return": "float",
+     "desc": "Get 2D Z-axis rotation in degrees (C++ only)"
+    },
+    {
+     "name": "setRotDeg",
+     "snippet": "setRotDeg(${1:degrees})",
+     "return": "void",
+     "desc": "Set 2D Z-axis rotation in degrees (C++ only)"
+    },
+    {
+     "name": "getScale",
+     "snippet": "getScale()",
+     "return": "const Vec3 &",
+     "desc": "Get local scale (C++ only)"
+    },
+    {
+     "name": "getScaleX",
+     "snippet": "getScaleX()",
+     "return": "float",
+     "desc": "Get local X scale (C++ only)"
+    },
+    {
+     "name": "getScaleY",
+     "snippet": "getScaleY()",
+     "return": "float",
+     "desc": "Get local Y scale (C++ only)"
+    },
+    {
+     "name": "getScaleZ",
+     "snippet": "getScaleZ()",
+     "return": "float",
+     "desc": "Get local Z scale (C++ only)"
+    },
+    {
+     "name": "setScale",
+     "snippet": "setScale(${1:s})",
+     "return": "void",
+     "desc": "Set local scale (vector, uniform, or per-axis) (C++ only)"
+    },
+    {
+     "name": "setScaleX",
+     "snippet": "setScaleX(${1:sx})",
+     "return": "void",
+     "desc": "Set local X scale (C++ only)"
+    },
+    {
+     "name": "setScaleY",
+     "snippet": "setScaleY(${1:sy})",
+     "return": "void",
+     "desc": "Set local Y scale (C++ only)"
+    },
+    {
+     "name": "setScaleZ",
+     "snippet": "setScaleZ(${1:sz})",
+     "return": "void",
+     "desc": "Set local Z scale (C++ only)"
+    },
+    {
+     "name": "getLocalMatrix",
+     "snippet": "getLocalMatrix()",
+     "return": "const Mat4 &",
+     "desc": "Get this node's local transform matrix (cached) (C++ only)"
+    },
+    {
+     "name": "getGlobalMatrix",
+     "snippet": "getGlobalMatrix()",
+     "return": "const Mat4 &",
+     "desc": "Get this node's global transform matrix, including parent transforms (cached) (C++ only)"
+    },
+    {
+     "name": "getGlobalMatrixInverse",
+     "snippet": "getGlobalMatrixInverse()",
+     "return": "Mat4",
+     "desc": "Get the inverse of the global transform matrix (C++ only)"
+    },
+    {
+     "name": "getGlobalPos",
+     "snippet": "getGlobalPos()",
+     "return": "Vec3",
+     "desc": "Get the node's origin in global (world) space (C++ only)"
+    },
+    {
+     "name": "setGlobalPos",
+     "snippet": "setGlobalPos(${1:global})",
+     "return": "void",
+     "desc": "Set the node's position in global (world) space (C++ only)"
+    },
+    {
+     "name": "getMouseX",
+     "snippet": "getMouseX()",
+     "return": "float",
+     "desc": "Get mouse X in this node's local coordinate system (C++ only)"
+    },
+    {
+     "name": "getMouseY",
+     "snippet": "getMouseY()",
+     "return": "float",
+     "desc": "Get mouse Y in this node's local coordinate system (C++ only)"
+    },
+    {
+     "name": "getPMouseX",
+     "snippet": "getPMouseX()",
+     "return": "float",
+     "desc": "Get previous-frame mouse X in this node's local coordinate system (C++ only)"
+    },
+    {
+     "name": "getPMouseY",
+     "snippet": "getPMouseY()",
+     "return": "float",
+     "desc": "Get previous-frame mouse Y in this node's local coordinate system (C++ only)"
+    },
+    {
+     "name": "findHitNode",
+     "snippet": "findHitNode(${1:globalRay})",
+     "return": "HitResult",
+     "desc": "Hit test the whole tree with a global ray, returning the frontmost node (C++ only)"
+    },
+    {
+     "name": "findHitNodeFromScreen",
+     "snippet": "findHitNodeFromScreen(${1:screenX}, ${2:screenY})",
+     "return": "HitResult",
+     "desc": "Hit test the whole tree from a screen point, using each node's own camera context (C++ only)"
+    },
+    {
+     "name": "getCameraContext",
+     "snippet": "getCameraContext()",
+     "return": "std::shared_ptr<const CameraContext>",
+     "desc": "Return the camera context this node was last drawn under (null if never drawn)."
+    },
+    {
+     "name": "setCameraContext",
+     "snippet": "setCameraContext(${1:ctx})",
+     "return": "void",
+     "desc": "Set the camera context for a manually-managed node (normally set automatically by drawTree)."
+    },
+    {
+     "name": "getModTypeNames",
+     "snippet": "getModTypeNames()",
+     "return": "std::vector<std::string>",
+     "desc": "Get the short (unqualified) type names of the attached mods (C++ only)"
+    },
+    {
+     "name": "getMods",
+     "snippet": "getMods()",
+     "return": "std::vector<Mod *>",
+     "desc": "Get all attached mods (pointers stay owned by this node) (C++ only)"
+    },
+    {
+     "name": "getModByTypeName",
+     "snippet": "getModByTypeName(${1:name})",
+     "return": "Mod *",
+     "desc": "Find an attached mod by its short type name, e.g. \"LayoutMod\" (null if not attached) (C++ only)\n"
+    },
+    {
+     "name": "callAfter",
+     "snippet": "callAfter(${1:delay}, ${2:callback})",
+     "return": "uint64_t",
+     "desc": "Run callback once after delay seconds. Fired from the update loop (frame-quantized). Returns a timer id."
+    },
+    {
+     "name": "callEvery",
+     "snippet": "callEvery(${1:interval}, ${2:callback})",
+     "return": "uint64_t",
+     "desc": "Run callback repeatedly every interval seconds. Fired from the update loop (frame-quantized). Returns a timer id."
+    },
+    {
+     "name": "cancelTimer",
+     "snippet": "cancelTimer(${1:id})",
+     "return": "void",
+     "desc": "Cancel a frame timer (callAfter/callEvery) by id."
+    },
+    {
+     "name": "cancelAllTimers",
+     "snippet": "cancelAllTimers()",
+     "return": "void",
+     "desc": "Cancel all frame timers on this node."
+    },
+    {
+     "name": "callAfterAsync",
+     "snippet": "callAfterAsync(${1:delay}, ${2:callback})",
+     "return": "uint64_t",
+     "desc": "Like callAfter, but fired by a precise background scheduler thread (no frame jitter). The callback runs OFF the main thread: guard shared state with a mutex, never draw from it, and don't cancel while holding that mutex. Native only (uses a real thread). Returns a timer id."
+    },
+    {
+     "name": "callEveryAsync",
+     "snippet": "callEveryAsync(${1:interval}, ${2:callback})",
+     "return": "uint64_t",
+     "desc": "Like callEvery, but fired by a precise background scheduler thread with no drift (reschedules at absolute times). Ideal for sequencer clocks and LED/MIDI output timing. Same threading rules as callAfterAsync. Native only. Returns a timer id."
+    },
+    {
+     "name": "cancelAsyncTimer",
+     "snippet": "cancelAsyncTimer(${1:id})",
+     "return": "void",
+     "desc": "Cancel an async timer by id. Blocks until its callback finishes if it is running now (unless called from inside the callback). Do not call while holding the mutex the callback uses."
+    },
+    {
+     "name": "cancelAllAsyncTimers",
+     "snippet": "cancelAllAsyncTimers()",
+     "return": "void",
+     "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock."
+    }
+   ]
+  },
+  {
+   "name": "Orientation",
+   "desc": "Screen orientation mask passed to setOrientation (iOS/Android); values are bit flags and can be combined with |",
+   "static_methods": [
+    {
+     "name": "Portrait",
+     "snippet": "Portrait",
+     "return": "Orientation",
+     "desc": "= 2"
+    },
+    {
+     "name": "PortraitUpsideDown",
+     "snippet": "PortraitUpsideDown",
+     "return": "Orientation",
+     "desc": "= 4"
+    },
+    {
+     "name": "LandscapeLeft",
+     "snippet": "LandscapeLeft",
+     "return": "Orientation",
+     "desc": "= 16"
+    },
+    {
+     "name": "LandscapeRight",
+     "snippet": "LandscapeRight",
+     "return": "Orientation",
+     "desc": "= 8"
+    },
+    {
+     "name": "Landscape",
+     "snippet": "Landscape",
+     "return": "Orientation",
+     "desc": "= 24"
+    },
+    {
+     "name": "All",
+     "snippet": "All",
+     "return": "Orientation",
+     "desc": "= 30"
+    },
+    {
+     "name": "AllButUpsideDown",
+     "snippet": "AllButUpsideDown",
+     "return": "Orientation",
+     "desc": "= 26"
+    }
+   ]
+  },
+  {
+   "name": "Path",
+   "desc": "Path/Polyline for lines and curves",
+   "constructor": {
+    "snippet": "Path(${1:verts})"
+   },
+   "methods": [
+    {
+     "name": "addVertex",
+     "snippet": "addVertex(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Add a vertex"
+    },
+    {
+     "name": "addVertices",
+     "snippet": "addVertices(${1:verts})",
+     "return": "void",
+     "desc": "Add multiple vertices"
+    },
+    {
+     "name": "getVertices",
+     "snippet": "getVertices()",
+     "return": "const std::vector<Vec3> &",
+     "desc": "Get all vertices"
+    },
+    {
+     "name": "size",
+     "snippet": "size()",
+     "return": "int",
+     "desc": "Get vertex count"
+    },
+    {
+     "name": "empty",
+     "snippet": "empty()",
+     "return": "bool",
+     "desc": "Check if polyline is empty"
+    },
+    {
+     "name": "clear",
+     "snippet": "clear()",
+     "return": "void",
+     "desc": "Clear all vertices"
+    },
+    {
+     "name": "moveTo",
+     "snippet": "moveTo(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Start a new subpath at (x, y). A single Path can hold multiple disjoint contours (think SVG `<path>` with `M ... M ...`) — used by Font::getGlyphPath to keep an outer ring and its holes in one Path so drawFill can detect holes."
+    },
+    {
+     "name": "getNumSubpaths",
+     "snippet": "getNumSubpaths()",
+     "return": "size_t",
+     "desc": "Number of subpaths (contours)"
+    },
+    {
+     "name": "getSubpathRange",
+     "snippet": "getSubpathRange(${1:i})",
+     "return": "std::pair<size_t, size_t>",
+     "desc": "Vertex index range [begin, end) of subpath i"
+    },
+    {
+     "name": "isSubpathClosed",
+     "snippet": "isSubpathClosed(${1:i})",
+     "return": "bool",
+     "desc": "Whether subpath i is closed"
+    },
+    {
+     "name": "lineTo",
+     "snippet": "lineTo(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Add line segment to point"
+    },
+    {
+     "name": "bezierTo",
+     "snippet": "bezierTo(${1:cp1}, ${2:cp2}, ${3:to}, ${4:resolution})",
+     "return": "void",
+     "desc": "Add cubic bezier curve (resolution=-1 uses current curve style)"
+    },
+    {
+     "name": "quadBezierTo",
+     "snippet": "quadBezierTo(${1:cp}, ${2:to}, ${3:resolution})",
+     "return": "void",
+     "desc": "Add quadratic bezier curve (resolution=-1 uses current curve style)"
+    },
+    {
+     "name": "curveTo",
+     "snippet": "curveTo(${1:to}, ${2:resolution})",
+     "return": "void",
+     "desc": "Add Catmull-Rom curve segment (needs >=4 consecutive calls; resolution=-1 uses current curve style)"
+    },
+    {
+     "name": "arc",
+     "snippet": "arc(${1:center}, ${2:radiusX}, ${3:radiusY}, ${4:angleBegin}, ${5:angleEnd})",
+     "return": "void",
+     "desc": "Add an arc (angles in radians)"
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Close the path"
+    },
+    {
+     "name": "setClosed",
+     "snippet": "setClosed(${1:closed})",
+     "return": "void",
+     "desc": "Set closed state"
+    },
+    {
+     "name": "isClosed",
+     "snippet": "isClosed()",
+     "return": "bool",
+     "desc": "Check if path is closed"
+    },
+    {
+     "name": "reverseWinding",
+     "snippet": "reverseWinding(${1:i})",
+     "return": "Path &",
+     "desc": "Reverse the winding direction (vertex order) of all subpaths, or of one subpath. Under drawFill's non-zero winding rule, reversing a subpath toggles it between filling and cutting — e.g. build a circle contour, then reverseWinding(i) it into a hole punch. Reversing ALL subpaths leaves the render unchanged (only relative direction matters) — handy for imported outlines using the opposite convention."
+    },
+    {
+     "name": "draw",
+     "snippet": "draw()",
+     "return": "void",
+     "desc": "Draw the polyline (fill + 1px stroke based on current style — fill uses triangle fan, convex only). For concave shapes / holes use drawFill."
+    },
+    {
+     "name": "buildFillTriangles",
+     "snippet": "buildFillTriangles()",
+     "return": "std::vector<std::array<float, 2>>",
+     "desc": "Triangulate the path interior into a flat list of 2D triangle vertices"
+    },
+    {
+     "name": "drawFill",
+     "snippet": "drawFill()",
+     "return": "void",
+     "desc": "Fill the path as a concave polygon with holes (earcut tessellation). Subpaths follow the non-zero winding rule (SVG / PostScript default): a subpath wound opposite to its enclosing ring becomes a hole; same-direction subpaths union (never punch holes). Handles glyphs with holes (e, a, O, 日 ...), overlapping contours, and both TrueType / CFF winding conventions. To cut a hole in a hand-built Path, wind the inner subpath opposite (see reverseWinding)."
+    },
+    {
+     "name": "toFillMesh",
+     "snippet": "toFillMesh()",
+     "return": "Mesh",
+     "desc": "Build a fillable Mesh from the path interior"
+    },
+    {
+     "name": "drawStroke",
+     "snippet": "drawStroke()",
+     "return": "void",
+     "desc": "Thick stroke via StrokeMesh (respects strokeWeight / strokeCap / strokeJoin), per-subpath. Use draw() for 1-pixel lines."
+    },
+    {
+     "name": "getBounds",
+     "snippet": "getBounds()",
+     "return": "Rect",
+     "desc": "Get bounding box as Rect"
+    },
+    {
+     "name": "getPerimeter",
+     "snippet": "getPerimeter()",
+     "return": "float",
+     "desc": "Get total path length"
+    }
+   ]
+  },
+  {
+   "name": "PixelFormat",
+   "desc": "CPU pixel data format: U8 (8-bit) or F32 (float).",
+   "static_methods": [
+    {
+     "name": "U8",
+     "snippet": "U8",
+     "return": "PixelFormat",
+     "desc": "= 0"
+    },
+    {
+     "name": "F32",
+     "snippet": "F32",
+     "return": "PixelFormat",
+     "desc": "= 1"
+    }
+   ]
+  },
+  {
+   "name": "Pixels",
+   "desc": "Pixel buffer for image manipulation",
+   "constructor": {
+    "snippet": "Pixels()"
+   },
+   "methods": [
+    {
+     "name": "allocate",
+     "snippet": "allocate(${1:width}, ${2:height})",
+     "return": "void",
+     "desc": "Allocate pixel buffer"
+    },
+    {
+     "name": "clear",
+     "snippet": "clear()",
+     "return": "void",
+     "desc": "Release pixel buffer"
+    },
+    {
+     "name": "isAllocated",
+     "snippet": "isAllocated()",
+     "return": "bool",
+     "desc": "Check if allocated"
+    },
+    {
+     "name": "getWidth",
+     "snippet": "getWidth()",
+     "return": "int",
+     "desc": "Get width"
+    },
+    {
+     "name": "getHeight",
+     "snippet": "getHeight()",
+     "return": "int",
+     "desc": "Get height"
+    },
+    {
+     "name": "getChannels",
+     "snippet": "getChannels()",
+     "return": "int",
+     "desc": "Get number of channels"
+    },
+    {
+     "name": "getFormat",
+     "snippet": "getFormat()",
+     "return": "PixelFormat",
+     "desc": "Get the pixel format"
+    },
+    {
+     "name": "isFloat",
+     "snippet": "isFloat()",
+     "return": "bool",
+     "desc": "Whether the pixel data uses 32-bit floats"
+    },
+    {
+     "name": "getTotalBytes",
+     "snippet": "getTotalBytes()",
+     "return": "size_t",
+     "desc": "Get total byte size"
+    },
+    {
+     "name": "getData",
+     "snippet": "getData()",
+     "return": "unsigned char *",
+     "desc": "Get raw data pointer"
+    },
+    {
+     "name": "getDataF32",
+     "snippet": "getDataF32()",
+     "return": "float *",
+     "desc": "Get raw data pointer as float (float-format buffers)"
+    },
+    {
+     "name": "getDataVoid",
+     "snippet": "getDataVoid()",
+     "return": "void *",
+     "desc": "Get raw data pointer as void* (any format)"
+    },
+    {
+     "name": "getColor",
+     "snippet": "getColor(${1:x}, ${2:y})",
+     "return": "Color",
+     "desc": "Get pixel color at position"
+    },
+    {
+     "name": "setColor",
+     "snippet": "setColor(${1:x}, ${2:y}, ${3:c})",
+     "return": "void",
+     "desc": "Set pixel color at position"
+    },
+    {
+     "name": "clone",
+     "snippet": "clone()",
+     "return": "Pixels",
+     "desc": "Return a deep copy of the pixel buffer"
+    },
+    {
+     "name": "load",
+     "snippet": "load(${1:path})",
+     "return": "bool",
+     "desc": "Load image from file"
+    },
+    {
+     "name": "loadHDR",
+     "snippet": "loadHDR(${1:path})",
+     "return": "bool",
+     "desc": "Load an HDR (.hdr) image into a float pixel buffer"
+    },
+    {
+     "name": "loadPlatform",
+     "snippet": "loadPlatform(${1:path})",
+     "return": "bool",
+     "desc": "Load an image using the platform image decoder"
+    },
+    {
+     "name": "save",
+     "snippet": "save(${1:path})",
+     "return": "bool",
+     "desc": "Save image to file"
+    },
+    {
+     "name": "halve",
+     "snippet": "halve()",
+     "return": "void",
+     "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8."
+    },
+    {
+     "name": "resize",
+     "snippet": "resize(${1:newW}, ${2:newH})",
+     "return": "void",
+     "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8."
+    },
+    {
+     "name": "crop",
+     "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})",
+     "return": "void",
+     "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge."
+    },
+    {
+     "name": "mirror",
+     "snippet": "mirror(${1:horizontal}, ${2:vertical})",
+     "return": "void",
+     "desc": "Flip in place. Both true is 180°."
+    },
+    {
+     "name": "mirrorH",
+     "snippet": "mirrorH()",
+     "return": "void",
+     "desc": "Mirror horizontally (alias for mirror(true, false))"
+    },
+    {
+     "name": "mirrorV",
+     "snippet": "mirrorV()",
+     "return": "void",
+     "desc": "Mirror vertically (alias for mirror(false, true))"
+    }
+   ]
+  },
+  {
+   "name": "Platform",
+   "desc": "Compile-time OS detection. All methods are constexpr and resolve at compile time based on the target platform.",
+   "static_methods": [
+    {
+     "name": "isWeb",
+     "snippet": "isWeb()",
+     "return": "bool",
+     "desc": "True on Web (Emscripten / WASM)"
+    },
+    {
+     "name": "isMacOS",
+     "snippet": "isMacOS()",
+     "return": "bool",
+     "desc": "True on macOS"
+    },
+    {
+     "name": "isIOS",
+     "snippet": "isIOS()",
+     "return": "bool",
+     "desc": "True on iOS"
+    },
+    {
+     "name": "isWindows",
+     "snippet": "isWindows()",
+     "return": "bool",
+     "desc": "True on Windows"
+    },
+    {
+     "name": "isAndroid",
+     "snippet": "isAndroid()",
+     "return": "bool",
+     "desc": "True on Android"
+    },
+    {
+     "name": "isLinux",
+     "snippet": "isLinux()",
+     "return": "bool",
+     "desc": "True on Linux (desktop, excludes Android)"
+    },
+    {
+     "name": "isApple",
+     "snippet": "isApple()",
+     "return": "bool",
+     "desc": "True on any Apple platform (macOS or iOS)"
+    },
+    {
+     "name": "isMobile",
+     "snippet": "isMobile()",
+     "return": "bool",
+     "desc": "True on mobile (iOS or Android)"
+    },
+    {
+     "name": "isDesktop",
+     "snippet": "isDesktop()",
+     "return": "bool",
+     "desc": "True on desktop (macOS, Windows, or Linux)"
+    },
+    {
+     "name": "name",
+     "snippet": "name()",
+     "return": "const char *",
+     "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"\n"
+    }
+   ]
+  },
+  {
+   "name": "PlayingSound",
+   "desc": "A single live mixer voice returned by AudioEngine::play(). Its fields are the real-time playback state the audio thread reads each callback (volume / pan / speed / loop / playing / paused / mixMode / position) plus the channel routing snapshots. Most fields are atomics so the UI thread can mutate them while the audio thread plays; set them directly.",
+   "properties": [
+    {
+     "name": "buffer",
+     "type": "std::shared_ptr<SoundSource>",
+     "desc": "The polymorphic sound source (eager SoundBuffer or streaming SoundStream) this voice plays."
+    },
+    {
+     "name": "volume",
+     "type": "std::atomic<float>",
+     "desc": "Playback volume (0.0-1.0). Stored as an atomic; safe to set from the UI thread while playing."
+    },
+    {
+     "name": "pan",
+     "type": "std::atomic<float>",
+     "desc": "Stereo pan (-1.0 left, 0.0 center, 1.0 right). Atomic."
+    },
+    {
+     "name": "speed",
+     "type": "std::atomic<float>",
+     "desc": "Playback speed (0.5 half, 1.0 normal, 2.0 double). Atomic."
+    },
+    {
+     "name": "loop",
+     "type": "std::atomic<bool>",
+     "desc": "Loop the voice when it reaches the end. Atomic."
+    },
+    {
+     "name": "playing",
+     "type": "std::atomic<bool>",
+     "desc": "True while this voice is active in the mixer. Atomic."
+    },
+    {
+     "name": "paused",
+     "type": "std::atomic<bool>",
+     "desc": "True while paused (still a live voice, but not advancing). Atomic."
+    },
+    {
+     "name": "mixMode",
+     "type": "std::atomic<int>",
+     "desc": "Channel mix policy when no explicit channelMap is set (Auto / DownmixMono). Stored as an atomic int holding the MixMode value."
+    },
+    {
+     "name": "positionF",
+     "type": "double",
+     "desc": "Floating-point playback cursor in source samples; advances by speed * rateRatio each output frame."
+    },
+    {
+     "name": "rateRatio",
+     "type": "float",
+     "desc": "Source-to-engine sample-rate ratio (buffer sampleRate / engine sampleRate), set when queued so the voice plays at correct pitch regardless of engine rate."
+    }
+   ]
+  },
+  {
+   "name": "PointStyle",
+   "desc": "Shape used to draw points: Square, Round, Pixel.",
+   "static_methods": [
+    {
+     "name": "Square",
+     "snippet": "Square",
+     "return": "PointStyle",
+     "desc": "= 0"
+    },
+    {
+     "name": "Round",
+     "snippet": "Round",
+     "return": "PointStyle",
+     "desc": "= 1"
+    },
+    {
+     "name": "Pixel",
+     "snippet": "Pixel",
+     "return": "PointStyle",
+     "desc": "= 2"
+    }
+   ]
+  },
+  {
+   "name": "PrimitiveMode",
+   "desc": "Draw primitive mode: Triangles, TriangleStrip, TriangleFan, Lines, LineStrip, LineLoop, Points.",
+   "static_methods": [
+    {
+     "name": "Triangles",
+     "snippet": "Triangles",
+     "return": "PrimitiveMode",
+     "desc": "= 0"
+    },
+    {
+     "name": "TriangleStrip",
+     "snippet": "TriangleStrip",
+     "return": "PrimitiveMode",
+     "desc": "= 1"
+    },
+    {
+     "name": "TriangleFan",
+     "snippet": "TriangleFan",
+     "return": "PrimitiveMode",
+     "desc": "= 2"
+    },
+    {
+     "name": "Lines",
+     "snippet": "Lines",
+     "return": "PrimitiveMode",
+     "desc": "= 3"
+    },
+    {
+     "name": "LineStrip",
+     "snippet": "LineStrip",
+     "return": "PrimitiveMode",
+     "desc": "= 4"
+    },
+    {
+     "name": "LineLoop",
+     "snippet": "LineLoop",
+     "return": "PrimitiveMode",
+     "desc": "= 5"
+    },
+    {
+     "name": "Points",
+     "snippet": "Points",
+     "return": "PrimitiveMode",
+     "desc": "= 6"
+    }
+   ]
+  },
+  {
+   "name": "PrimitiveType",
+   "desc": "Geometry primitive type: Points, Lines, LineStrip, Triangles, TriangleStrip, Quads.",
+   "static_methods": [
+    {
+     "name": "Points",
+     "snippet": "Points",
+     "return": "PrimitiveType",
+     "desc": "= 0"
+    },
+    {
+     "name": "Lines",
+     "snippet": "Lines",
+     "return": "PrimitiveType",
+     "desc": "= 1"
+    },
+    {
+     "name": "LineStrip",
+     "snippet": "LineStrip",
+     "return": "PrimitiveType",
+     "desc": "= 2"
+    },
+    {
+     "name": "Triangles",
+     "snippet": "Triangles",
+     "return": "PrimitiveType",
+     "desc": "= 3"
+    },
+    {
+     "name": "TriangleStrip",
+     "snippet": "TriangleStrip",
+     "return": "PrimitiveType",
+     "desc": "= 4"
+    },
+    {
+     "name": "Quads",
+     "snippet": "Quads",
+     "return": "PrimitiveType",
+     "desc": "= 5"
+    }
+   ]
+  },
+  {
+   "name": "Quaternion",
+   "desc": "Unit quaternion for 3D rotations",
+   "constructor": {
+    "snippet": "Quaternion(${1:w}, ${2:x}, ${3:y}, ${4:z})"
+   },
+   "properties": [
+    {
+     "name": "w",
+     "type": "float",
+     "desc": "W component"
+    },
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "X component"
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Y component"
+    },
+    {
+     "name": "z",
+     "type": "float",
+     "desc": "Z component"
+    }
+   ],
+   "methods": [
+    {
+     "name": "toEuler",
+     "snippet": "toEuler()",
+     "return": "Vec3",
+     "desc": "Convert to Euler angles"
+    },
+    {
+     "name": "toMatrix",
+     "snippet": "toMatrix()",
+     "return": "Mat4",
+     "desc": "Convert to rotation matrix"
+    },
+    {
+     "name": "length",
+     "snippet": "length()",
+     "return": "float",
+     "desc": "Get quaternion length"
+    },
+    {
+     "name": "lengthSquared",
+     "snippet": "lengthSquared()",
+     "return": "float",
+     "desc": "Get the squared length (avoids the sqrt)"
+    },
+    {
+     "name": "normalized",
+     "snippet": "normalized()",
+     "return": "Quaternion",
+     "desc": "Get normalized quaternion"
+    },
+    {
+     "name": "normalize",
+     "snippet": "normalize()",
+     "return": "Quaternion &",
+     "desc": "Normalize this quaternion in place and return *this"
+    },
+    {
+     "name": "conjugate",
+     "snippet": "conjugate()",
+     "return": "Quaternion",
+     "desc": "Get conjugate quaternion"
+    },
+    {
+     "name": "rotate",
+     "snippet": "rotate(${1:v})",
+     "return": "Vec3",
+     "desc": "Rotate a vector"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "identity",
+     "snippet": "identity()",
+     "return": "Quaternion",
+     "desc": "Create an identity quaternion"
+    },
+    {
+     "name": "fromAxisAngle",
+     "snippet": "fromAxisAngle(${1:axis}, ${2:radians})",
+     "return": "Quaternion",
+     "desc": "Create quaternion from axis-angle"
+    },
+    {
+     "name": "fromEuler",
+     "snippet": "fromEuler(${1:pitch}, ${2:yaw}, ${3:roll})",
+     "return": "Quaternion",
+     "desc": "Create quaternion from Euler angles"
+    },
+    {
+     "name": "slerp",
+     "snippet": "slerp(${1:a}, ${2:b}, ${3:t})",
+     "return": "Quaternion",
+     "desc": "Spherical linear interpolation"
+    }
+   ]
+  },
+  {
+   "name": "Ray",
+   "desc": "A ray with an origin and a normalized direction, used for unified hit testing and picking",
+   "constructor": {
+    "snippet": "Ray(${1:o}, ${2:d})"
+   },
+   "properties": [
+    {
+     "name": "origin",
+     "type": "Vec3",
+     "desc": "Ray origin point"
+    },
+    {
+     "name": "direction",
+     "type": "Vec3",
+     "desc": "Ray direction (normalized)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "at",
+     "snippet": "at(${1:t})",
+     "return": "Vec3",
+     "desc": "Get the point along the ray at distance t: origin + direction * t"
+    },
+    {
+     "name": "transformed",
+     "snippet": "transformed(${1:inverseMatrix})",
+     "return": "Ray",
+     "desc": "Transform the ray by a matrix (typically an inverse to map into local space)"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "fromScreenPoint2D",
+     "snippet": "fromScreenPoint2D(${1:screenX}, ${2:screenY})",
+     "return": "Ray",
+     "desc": "Build an orthographic Z-parallel ray from a 2D screen point"
+    }
+   ]
+  },
+  {
+   "name": "Rect",
+   "desc": "Rectangle (x, y, width, height)",
+   "constructor": {
+    "snippet": "Rect(${1:x}, ${2:y}, ${3:z}, ${4:w}, ${5:h})"
+   },
+   "properties": [
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "X position"
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Y position"
+    },
+    {
+     "name": "width",
+     "type": "float",
+     "desc": "Width"
+    },
+    {
+     "name": "height",
+     "type": "float",
+     "desc": "Height"
+    }
+   ],
+   "methods": [
+    {
+     "name": "set",
+     "snippet": "set(${1:x}, ${2:y}, ${3:w}, ${4:h})",
+     "return": "Rect &",
+     "desc": "Set rectangle bounds"
+    },
+    {
+     "name": "getRight",
+     "snippet": "getRight()",
+     "return": "float",
+     "desc": "Get right edge (x + width)"
+    },
+    {
+     "name": "getBottom",
+     "snippet": "getBottom()",
+     "return": "float",
+     "desc": "Get bottom edge (y + height)"
+    },
+    {
+     "name": "getCenter",
+     "snippet": "getCenter()",
+     "return": "Vec2",
+     "desc": "Get the center point of the rectangle"
+    },
+    {
+     "name": "getCenterX",
+     "snippet": "getCenterX()",
+     "return": "float",
+     "desc": "Get center X"
+    },
+    {
+     "name": "getCenterY",
+     "snippet": "getCenterY()",
+     "return": "float",
+     "desc": "Get center Y"
+    },
+    {
+     "name": "contains",
+     "snippet": "contains(${1:px}, ${2:py})",
+     "return": "bool",
+     "desc": "Check if point is inside"
+    },
+    {
+     "name": "intersects",
+     "snippet": "intersects(${1:other})",
+     "return": "bool",
+     "desc": "Check if intersects with another rect"
+    }
+   ]
+  },
+  {
+   "name": "RectNode",
+   "desc": "2D UI rectangle node: size, clipping and ray-based hit testing, plus subscribable mouse Event members",
+   "properties": [
+    {
+     "name": "mousePressed",
+     "type": "Event<MouseEventArgs>",
+     "desc": "Fired when a mouse button is pressed over this node (localized args)"
+    },
+    {
+     "name": "mouseReleased",
+     "type": "Event<MouseEventArgs>",
+     "desc": "Fired when a mouse button is released over this node (localized args)"
+    },
+    {
+     "name": "mouseDragged",
+     "type": "Event<MouseDragEventArgs>",
+     "desc": "Fired when the mouse is dragged on this node (localized args)"
+    },
+    {
+     "name": "mouseScrolled",
+     "type": "Event<ScrollEventArgs>",
+     "desc": "Fired when the mouse wheel / trackpad scrolls over this node (localized args)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "getWidth",
+     "snippet": "getWidth()",
+     "return": "float",
+     "desc": "Get the node width (RectNode method) (C++ only)"
+    },
+    {
+     "name": "getHeight",
+     "snippet": "getHeight()",
+     "return": "float",
+     "desc": "Get the node height (RectNode method) (C++ only)"
+    },
+    {
+     "name": "getSize",
+     "snippet": "getSize()",
+     "return": "Vec2",
+     "desc": "Get the node size as a Vec2 (RectNode method) (C++ only)"
+    },
+    {
+     "name": "setWidth",
+     "snippet": "setWidth(${1:w})",
+     "return": "void",
+     "desc": "Set the node width (RectNode method) (C++ only)"
+    },
+    {
+     "name": "setHeight",
+     "snippet": "setHeight(${1:h})",
+     "return": "void",
+     "desc": "Set the node height (RectNode method) (C++ only)"
+    },
+    {
+     "name": "setSize",
+     "snippet": "setSize(${1:w}, ${2:h})",
+     "return": "void",
+     "desc": "Set size (C++ only)"
+    },
+    {
+     "name": "setRect",
+     "snippet": "setRect(${1:x}, ${2:y}, ${3:w}, ${4:h})",
+     "return": "void",
+     "desc": "Set position and size at once (RectNode method) (C++ only)"
+    },
+    {
+     "name": "setClipping",
+     "snippet": "setClipping(${1:enabled})",
+     "return": "void",
+     "desc": "Enable/disable scissor clipping for RectNode (C++ only)"
+    },
+    {
+     "name": "isClipping",
+     "snippet": "isClipping()",
+     "return": "bool",
+     "desc": "Whether scissor clipping is enabled (RectNode method) (C++ only)"
+    },
+    {
+     "name": "getLeft",
+     "snippet": "getLeft()",
+     "return": "float",
+     "desc": "Local left edge (always 0) (RectNode method) (C++ only)"
+    },
+    {
+     "name": "getRight",
+     "snippet": "getRight()",
+     "return": "float",
+     "desc": "Local right edge (equals width) (RectNode method) (C++ only)"
+    },
+    {
+     "name": "getTop",
+     "snippet": "getTop()",
+     "return": "float",
+     "desc": "Local top edge (always 0) (RectNode method) (C++ only)"
+    },
+    {
+     "name": "getBottom",
+     "snippet": "getBottom()",
+     "return": "float",
+     "desc": "Local bottom edge (equals height) (RectNode method) (C++ only)"
+    },
+    {
+     "name": "hitTest",
+     "snippet": "hitTest(${1:local})",
+     "return": "bool",
+     "desc": "Hit-test the rectangle against a ray (with out distance) or a 2D point (RectNode method) (C++ only)"
+    },
+    {
+     "name": "draw",
+     "snippet": "draw()",
+     "return": "void",
+     "desc": "Draw the rectangle node; override in derived classes (draws nothing by default)."
+    }
+   ]
+  },
+  {
+   "name": "RectNodeButton",
+   "desc": "Simple clickable button node (a RectNode subclass). Set normalColor/hoverColor/pressColor and label; it draws a filled rect that changes color on hover/press and a centered label. Events are enabled on construction. Listen on its inherited mousePressed/mouseReleased events for clicks.",
+   "constructor": {
+    "snippet": "RectNodeButton()"
+   },
+   "properties": [
+    {
+     "name": "normalColor",
+     "type": "Color",
+     "desc": "Fill color when idle (default dark grey)."
+    },
+    {
+     "name": "hoverColor",
+     "type": "Color",
+     "desc": "Fill color when the pointer is over the button."
+    },
+    {
+     "name": "pressColor",
+     "type": "Color",
+     "desc": "Fill color while pressed."
+    },
+    {
+     "name": "label",
+     "type": "std::string",
+     "desc": "Text drawn centered on the button (skipped if empty)."
+    }
+   ],
+   "methods": [
+    {
+     "name": "isPressed",
+     "snippet": "isPressed()",
+     "return": "bool",
+     "desc": "Whether the button is currently pressed."
+    },
+    {
+     "name": "draw",
+     "snippet": "draw()",
+     "return": "void",
+     "desc": "Draw the button: fills the rect with the state-dependent color and draws the centered label. (override)"
+    }
+   ]
+  },
+  {
+   "name": "Reflector",
+   "desc": "Visitor base for the TC_REFLECT reflection system; backends (inspector, JSON, codec) subclass it with one visit() per supported type.",
+   "methods": [
+    {
+     "name": "isReadOnly",
+     "snippet": "isReadOnly()",
+     "return": "bool",
+     "desc": "Return true if the current reflection scope is read-only."
+    },
+    {
+     "name": "pushReadOnly",
+     "snippet": "pushReadOnly()",
+     "return": "void",
+     "desc": "Enter a read-only scope (members visited inside cannot be written)."
+    },
+    {
+     "name": "popReadOnly",
+     "snippet": "popReadOnly()",
+     "return": "void",
+     "desc": "Leave the current read-only scope."
+    },
+    {
+     "name": "endGroup",
+     "snippet": "endGroup()",
+     "return": "void",
+     "desc": "Leave the current nested group."
+    }
+   ]
+  },
+  {
+   "name": "ResizeEventArgs",
+   "desc": "Arguments for windowResized events",
+   "properties": [
+    {
+     "name": "width",
+     "type": "int",
+     "desc": "New window width in pixels"
+    },
+    {
+     "name": "height",
+     "type": "int",
+     "desc": "New window height in pixels"
+    }
+   ]
+  },
+  {
+   "name": "ScreenRecorder",
+   "desc": "Captures the rendered output to a video file (start/stop recording of the on-screen frames)",
+   "constructor": {
+    "snippet": "ScreenRecorder()"
+   },
+   "methods": [
+    {
+     "name": "start",
+     "snippet": "start(${1:path})",
+     "return": "bool",
+     "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically"
+    },
+    {
+     "name": "stop",
+     "snippet": "stop()",
+     "return": "void",
+     "desc": "Stop live capture and finalize the file"
+    },
+    {
+     "name": "isRecording",
+     "snippet": "isRecording()",
+     "return": "bool",
+     "desc": "Check if the screen recorder is currently capturing"
+    },
+    {
+     "name": "getFrameCount",
+     "snippet": "getFrameCount()",
+     "return": "int",
+     "desc": "Number of frames captured so far"
+    },
+    {
+     "name": "getPath",
+     "snippet": "getPath()",
+     "return": "const std::string &",
+     "desc": "Output file path of the current recording"
+    },
+    {
+     "name": "writer",
+     "snippet": "writer()",
+     "return": "VideoWriter &",
+     "desc": "Access the underlying VideoWriter for advanced introspection"
+    }
+   ]
+  },
+  {
+   "name": "ScrollBar",
+   "desc": "Visual scroll indicator RectNode that syncs with a ScrollContainer and supports drag scrolling",
+   "methods": [
+    {
+     "name": "getBarColor",
+     "snippet": "getBarColor()",
+     "return": "Color",
+     "desc": "Get the scroll-bar color (ScrollBar method) (C++ only)"
+    },
+    {
+     "name": "setBarColor",
+     "snippet": "setBarColor(${1:color})",
+     "return": "void",
+     "desc": "Set the scroll-bar color (ScrollBar method) (C++ only)"
+    },
+    {
+     "name": "getBarWidth",
+     "snippet": "getBarWidth()",
+     "return": "float",
+     "desc": "Get the scroll-bar thickness (ScrollBar method) (C++ only)"
+    },
+    {
+     "name": "setBarWidth",
+     "snippet": "setBarWidth(${1:width})",
+     "return": "void",
+     "desc": "Set the scroll-bar thickness (ScrollBar method) (C++ only)"
+    },
+    {
+     "name": "getMargin",
+     "snippet": "getMargin()",
+     "return": "float",
+     "desc": "Get the margin between the bar and the container edge (ScrollBar method) (C++ only)"
+    },
+    {
+     "name": "setMargin",
+     "snippet": "setMargin(${1:margin})",
+     "return": "void",
+     "desc": "Set the margin between the bar and the container edge (ScrollBar method) (C++ only)"
+    },
+    {
+     "name": "getOffset",
+     "snippet": "getOffset()",
+     "return": "float",
+     "desc": "Get the rounded-cap draw offset (round(barWidth/2)) (ScrollBar method) (C++ only)"
+    },
+    {
+     "name": "updateFromContainer",
+     "snippet": "updateFromContainer()",
+     "return": "void",
+     "desc": "Resync the bar size and position from its ScrollContainer (ScrollBar method) (C++ only)"
+    }
+   ]
+  },
+  {
+   "name": "ScrollContainer",
+   "desc": "Scrollable RectNode that clips and scrolls a single content node when it overflows the container bounds",
+   "constructor": {
+    "snippet": "ScrollContainer()"
+   },
+   "methods": [
+    {
+     "name": "setContent",
+     "snippet": "setContent(${1:newContent})",
+     "return": "void",
+     "desc": "Set content node for ScrollContainer (C++ only)"
+    },
+    {
+     "name": "getContent",
+     "snippet": "getContent()",
+     "return": "Node::Ptr",
+     "desc": "Get the scrollable content node (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "getContentRect",
+     "snippet": "getContentRect()",
+     "return": "RectNode *",
+     "desc": "Get the content node cast to RectNode (null if not a RectNode) (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "getScrollX",
+     "snippet": "getScrollX()",
+     "return": "float",
+     "desc": "Get the horizontal scroll position (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "getScrollY",
+     "snippet": "getScrollY()",
+     "return": "float",
+     "desc": "Get the vertical scroll position (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "getScroll",
+     "snippet": "getScroll()",
+     "return": "Vec2",
+     "desc": "Get the scroll position as a Vec2 (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "setScrollX",
+     "snippet": "setScrollX(${1:x})",
+     "return": "void",
+     "desc": "Set the horizontal scroll position (clamped) (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "setScrollY",
+     "snippet": "setScrollY(${1:y})",
+     "return": "void",
+     "desc": "Set vertical scroll position (C++ only)"
+    },
+    {
+     "name": "setScroll",
+     "snippet": "setScroll(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Set the scroll position from x/y or a Vec2 (clamped) (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "getMaxScrollX",
+     "snippet": "getMaxScrollX()",
+     "return": "float",
+     "desc": "Get the maximum horizontal scroll (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "getMaxScrollY",
+     "snippet": "getMaxScrollY()",
+     "return": "float",
+     "desc": "Get the maximum vertical scroll (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "updateScrollBounds",
+     "snippet": "updateScrollBounds()",
+     "return": "void",
+     "desc": "Recalculate scroll bounds from the content size (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "isHorizontalScrollEnabled",
+     "snippet": "isHorizontalScrollEnabled()",
+     "return": "bool",
+     "desc": "Whether horizontal scrolling is enabled (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "isVerticalScrollEnabled",
+     "snippet": "isVerticalScrollEnabled()",
+     "return": "bool",
+     "desc": "Whether vertical scrolling is enabled (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "setHorizontalScrollEnabled",
+     "snippet": "setHorizontalScrollEnabled(${1:enabled})",
+     "return": "void",
+     "desc": "Enable or disable horizontal scrolling (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "setVerticalScrollEnabled",
+     "snippet": "setVerticalScrollEnabled(${1:enabled})",
+     "return": "void",
+     "desc": "Enable or disable vertical scrolling (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "getScrollSpeed",
+     "snippet": "getScrollSpeed()",
+     "return": "float",
+     "desc": "Get the scroll speed (wheel/trackpad sensitivity) (ScrollContainer method) (C++ only)"
+    },
+    {
+     "name": "setScrollSpeed",
+     "snippet": "setScrollSpeed(${1:speed})",
+     "return": "void",
+     "desc": "Set the scroll speed (wheel/trackpad sensitivity) (ScrollContainer method) (C++ only)"
+    }
+   ]
+  },
+  {
+   "name": "ScrollEventArgs",
+   "desc": "Arguments for mouseScrolled events",
+   "properties": [
+    {
+     "name": "scrollX",
+     "type": "float",
+     "desc": "Legacy mirror of scroll.x (removed at v1.0)"
+    },
+    {
+     "name": "scrollY",
+     "type": "float",
+     "desc": "Legacy mirror of scroll.y (removed at v1.0)"
+    },
+    {
+     "name": "shift",
+     "type": "bool",
+     "desc": "Shift modifier held"
+    },
+    {
+     "name": "ctrl",
+     "type": "bool",
+     "desc": "Ctrl modifier held"
+    },
+    {
+     "name": "alt",
+     "type": "bool",
+     "desc": "Alt modifier held"
+    },
+    {
+     "name": "super",
+     "type": "bool",
+     "desc": "Super / Command modifier held"
+    },
+    {
+     "name": "pos",
+     "type": "Vec2",
+     "desc": "Cursor position in local space (== globalPos at app level)"
+    },
+    {
+     "name": "globalPos",
+     "type": "Vec2",
+     "desc": "Cursor position in screen space"
+    },
+    {
+     "name": "scroll",
+     "type": "Vec2",
+     "desc": "Scroll amount (x: horizontal, y: vertical)"
+    },
+    {
+     "name": "consumed",
+     "type": "bool",
+     "desc": "Set true in a listener to stop propagation to lower-priority listeners"
+    }
+   ],
+   "methods": [
+    {
+     "name": "syncLegacy",
+     "snippet": "syncLegacy()",
+     "return": "void",
+     "desc": "Copy the canonical scroll field into the deprecated scrollX/scrollY mirror fields (legacy mirrors scheduled for removal in v1.0)."
+    }
+   ]
+  },
+  {
+   "name": "Serial",
+   "desc": "Cross-platform serial port (USB/COM): connect, read/write bytes",
+   "constructor": {
+    "snippet": "Serial()"
+   },
+   "methods": [
+    {
+     "name": "setup",
+     "snippet": "setup(${1:portName}, ${2:baudRate})",
+     "return": "bool",
+     "desc": "Connect to a port by path or by index from listDevices()"
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Disconnect and release resources"
+    },
+    {
+     "name": "isInitialized",
+     "snippet": "isInitialized()",
+     "return": "bool",
+     "desc": "Whether currently connected"
+    },
+    {
+     "name": "getDevicePath",
+     "snippet": "getDevicePath()",
+     "return": "const std::string &",
+     "desc": "Current device path"
+    },
+    {
+     "name": "available",
+     "snippet": "available()",
+     "return": "int",
+     "desc": "Number of bytes available to read"
+    },
+    {
+     "name": "readByte",
+     "snippet": "readByte()",
+     "return": "int",
+     "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error"
+    },
+    {
+     "name": "writeBytes",
+     "snippet": "writeBytes(${1:buffer})",
+     "return": "int",
+     "desc": "Write bytes; returns actual count or -1 on error"
+    },
+    {
+     "name": "writeByte",
+     "snippet": "writeByte(${1:byte})",
+     "return": "bool",
+     "desc": "Write a single byte; true on success"
+    },
+    {
+     "name": "flushInput",
+     "snippet": "flushInput()",
+     "return": "void",
+     "desc": "Clear the input buffer"
+    },
+    {
+     "name": "flushOutput",
+     "snippet": "flushOutput()",
+     "return": "void",
+     "desc": "Clear the output buffer"
+    },
+    {
+     "name": "flush",
+     "snippet": "flush()",
+     "return": "void",
+     "desc": "Clear both input and output buffers"
+    },
+    {
+     "name": "drain",
+     "snippet": "drain()",
+     "return": "void",
+     "desc": "Wait until output transmission completes"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "printDevices",
+     "snippet": "printDevices()",
+     "return": "void",
+     "desc": "Log all available serial devices"
+    },
+    {
+     "name": "listDevices",
+     "snippet": "listDevices()",
+     "return": "std::vector<SerialDeviceInfo>",
+     "desc": "List available serial devices"
+    }
+   ]
+  },
+  {
+   "name": "SerialDeviceInfo",
+   "desc": "Info for one serial device (from Serial::listDevices)",
+   "properties": [
+    {
+     "name": "deviceId",
+     "type": "int",
+     "desc": "Device index"
+    },
+    {
+     "name": "devicePath",
+     "type": "std::string",
+     "desc": "Device path (e.g. COM3, /dev/tty.usbserial-*)"
+    },
+    {
+     "name": "deviceName",
+     "type": "std::string",
+     "desc": "Device name"
+    }
+   ],
+   "methods": [
+    {
+     "name": "getDeviceID",
+     "snippet": "getDeviceID()",
+     "return": "int",
+     "desc": "Device index"
+    },
+    {
+     "name": "getDevicePath",
+     "snippet": "getDevicePath()",
+     "return": "const std::string &",
+     "desc": "Device path"
+    },
+    {
+     "name": "getDeviceName",
+     "snippet": "getDeviceName()",
+     "return": "const std::string &",
+     "desc": "Device name"
+    }
+   ]
+  },
+  {
+   "name": "Shader",
+   "desc": "GPU shader program (vertex + fragment) with a begin/end/setUniform API for custom-shaded drawing",
+   "constructor": {
+    "snippet": "Shader()"
+   },
+   "methods": [
+    {
+     "name": "load",
+     "snippet": "load(${1:descFn})",
+     "return": "bool",
+     "desc": "Load from sokol-shdc generated function"
+    },
+    {
+     "name": "clear",
+     "snippet": "clear()",
+     "return": "void",
+     "desc": "Destroy the shader's GPU resources and reset it to the unloaded state."
+    },
+    {
+     "name": "isLoaded",
+     "snippet": "isLoaded()",
+     "return": "bool",
+     "desc": "Check if shader is loaded"
+    },
+    {
+     "name": "begin",
+     "snippet": "begin()",
+     "return": "void",
+     "desc": "Begin shader (pushes to stack)"
+    },
+    {
+     "name": "end",
+     "snippet": "end()",
+     "return": "void",
+     "desc": "End shader (pops from stack)"
+    },
+    {
+     "name": "setUniform",
+     "snippet": "setUniform(${1:slot}, ${2:value})",
+     "return": "void",
+     "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
+    },
+    {
+     "name": "setTexture",
+     "snippet": "setTexture(${1:slot}, ${2:image}, ${3:sampler})",
+     "return": "void",
+     "desc": "Bind texture to slot"
+    }
+   ]
+  },
+  {
+   "name": "ShaderVertex",
+   "desc": "Standard vertex format for shader drawing (position, normal, texcoord, color).",
+   "properties": [
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "Vertex position X."
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Vertex position Y."
+    },
+    {
+     "name": "z",
+     "type": "float",
+     "desc": "Vertex position Z."
+    },
+    {
+     "name": "u",
+     "type": "float",
+     "desc": "Texture coordinate U."
+    },
+    {
+     "name": "v",
+     "type": "float",
+     "desc": "Texture coordinate V."
+    },
+    {
+     "name": "r",
+     "type": "float",
+     "desc": "Vertex color red component."
+    },
+    {
+     "name": "g",
+     "type": "float",
+     "desc": "Vertex color green component."
+    },
+    {
+     "name": "b",
+     "type": "float",
+     "desc": "Vertex color blue component."
+    },
+    {
+     "name": "a",
+     "type": "float",
+     "desc": "Vertex color alpha component."
+    }
+   ]
+  },
+  {
+   "name": "Sound",
+   "desc": "Audio playback",
+   "constructor": {
+    "snippet": "Sound()"
+   },
+   "methods": [
+    {
+     "name": "load",
+     "snippet": "load(${1:path})",
+     "return": "bool",
+     "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a"
+    },
+    {
+     "name": "loadStream",
+     "snippet": "loadStream(${1:path})",
+     "return": "bool",
+     "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count."
+    },
+    {
+     "name": "loadTestTone",
+     "snippet": "loadTestTone()",
+     "return": "void",
+     "desc": "Load a generated sine test tone (no file needed). Handy for verifying audio output."
+    },
+    {
+     "name": "loadFromBuffer",
+     "snippet": "loadFromBuffer(${1:buf})",
+     "return": "void",
+     "desc": "Load PCM directly from a pre-generated SoundBuffer (e.g. from ChipSound or a procedural waveform), copying it or adopting the shared_ptr."
+    },
+    {
+     "name": "isLoaded",
+     "snippet": "isLoaded()",
+     "return": "bool",
+     "desc": "Check if loaded"
+    },
+    {
+     "name": "isStreaming",
+     "snippet": "isStreaming()",
+     "return": "bool",
+     "desc": "True if this Sound was loaded via loadStream() (vs eager load())"
+    },
+    {
+     "name": "play",
+     "snippet": "play()",
+     "return": "void",
+     "desc": "Play audio"
+    },
+    {
+     "name": "stop",
+     "snippet": "stop()",
+     "return": "void",
+     "desc": "Stop audio"
+    },
+    {
+     "name": "pause",
+     "snippet": "pause()",
+     "return": "void",
+     "desc": "Pause playback"
+    },
+    {
+     "name": "resume",
+     "snippet": "resume()",
+     "return": "void",
+     "desc": "Resume playback"
+    },
+    {
+     "name": "setVolume",
+     "snippet": "setVolume(${1:vol})",
+     "return": "void",
+     "desc": "Set volume (0.0-1.0)"
+    },
+    {
+     "name": "getVolume",
+     "snippet": "getVolume()",
+     "return": "float",
+     "desc": "Get current volume"
+    },
+    {
+     "name": "setLoop",
+     "snippet": "setLoop(${1:loop})",
+     "return": "void",
+     "desc": "Set loop mode"
+    },
+    {
+     "name": "isLoop",
+     "snippet": "isLoop()",
+     "return": "bool",
+     "desc": "Check if loop mode is enabled"
+    },
+    {
+     "name": "setPan",
+     "snippet": "setPan(${1:pan})",
+     "return": "void",
+     "desc": "Set panning (-1.0=left, 0.0=center, 1.0=right)"
+    },
+    {
+     "name": "getPan",
+     "snippet": "getPan()",
+     "return": "float",
+     "desc": "Get current panning"
+    },
+    {
+     "name": "setSpeed",
+     "snippet": "setSpeed(${1:speed})",
+     "return": "void",
+     "desc": "Set playback speed (1.0=normal)"
+    },
+    {
+     "name": "getSpeed",
+     "snippet": "getSpeed()",
+     "return": "float",
+     "desc": "Get current playback speed"
+    },
+    {
+     "name": "setMixMode",
+     "snippet": "setMixMode(${1:m})",
+     "return": "void",
+     "desc": "Channel routing preset. Auto (default) = mono broadcasts / multi 1:1. DownmixMono = average src to all out ch."
+    },
+    {
+     "name": "getMixMode",
+     "snippet": "getMixMode()",
+     "return": "MixMode",
+     "desc": "Current channel mix policy (Auto / DownmixMono). Overridden when a non-empty channel map is set."
+    },
+    {
+     "name": "setChannelMap",
+     "snippet": "setChannelMap(${1:map})",
+     "return": "void",
+     "desc": "Per-output-channel routing. 1D: each entry is a src ch index (-1 = silent). 2D: each entry lists src ch indices that sum into that output."
+    },
+    {
+     "name": "getChannelMap",
+     "snippet": "getChannelMap()",
+     "return": "std::shared_ptr<const std::vector<std::vector<int>>>",
+     "desc": "Current per-output-channel source routing snapshot, or null if mixMode rules apply."
+    },
+    {
+     "name": "setChannelGains",
+     "snippet": "setChannelGains(${1:gains})",
+     "return": "void",
+     "desc": "Per-output-channel gain multiplier. Entries beyond .size() default to 1.0. No internal normalization (setVolume is the overall gain)."
+    },
+    {
+     "name": "getChannelGains",
+     "snippet": "getChannelGains()",
+     "return": "std::shared_ptr<const std::vector<float>>",
+     "desc": "Current per-output-channel gain multipliers snapshot, or null if none set."
+    },
+    {
+     "name": "clearChannelMap",
+     "snippet": "clearChannelMap()",
+     "return": "void",
+     "desc": "Clear the explicit channel map; routing falls back to setMixMode rules."
+    },
+    {
+     "name": "clearChannelGains",
+     "snippet": "clearChannelGains()",
+     "return": "void",
+     "desc": "Clear per-channel gains (back to uniform 1.0)."
+    },
+    {
+     "name": "isPlaying",
+     "snippet": "isPlaying()",
+     "return": "bool",
+     "desc": "Check if playing"
+    },
+    {
+     "name": "isPaused",
+     "snippet": "isPaused()",
+     "return": "bool",
+     "desc": "Check if paused"
+    },
+    {
+     "name": "getPosition",
+     "snippet": "getPosition()",
+     "return": "float",
+     "desc": "Get playback position in seconds"
+    },
+    {
+     "name": "setPosition",
+     "snippet": "setPosition(${1:seconds})",
+     "return": "void",
+     "desc": "Seek to a specific time in seconds. On streams, costs ~10 ms blackout while the ring refills."
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "float",
+     "desc": "Get total duration in seconds"
+    }
+   ]
+  },
+  {
+   "name": "SoundBuffer",
+   "desc": "Eager sound source: the full file decoded into interleaved float PCM held in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Also provides waveform generators, an ADSR envelope, and mixing helpers, so it doubles as a procedural-audio scratch buffer. Best for short SFX and zero-latency play / seek / multi-instance.",
+   "constructor": {
+    "snippet": "SoundBuffer()"
+   },
+   "properties": [
+    {
+     "name": "samples",
+     "type": "std::vector<float>",
+     "desc": "Interleaved PCM samples (channels interleaved per frame)"
+    },
+    {
+     "name": "numSamples",
+     "type": "size_t",
+     "desc": "Number of samples per channel (frame count)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "loadOgg",
+     "snippet": "loadOgg(${1:path})",
+     "return": "bool",
+     "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis)."
+    },
+    {
+     "name": "loadWav",
+     "snippet": "loadWav(${1:path})",
+     "return": "bool",
+     "desc": "Decode a WAV file into PCM."
+    },
+    {
+     "name": "loadMp3",
+     "snippet": "loadMp3(${1:path})",
+     "return": "bool",
+     "desc": "Decode an MP3 file into PCM."
+    },
+    {
+     "name": "loadFlac",
+     "snippet": "loadFlac(${1:path})",
+     "return": "bool",
+     "desc": "Decode a FLAC file into PCM."
+    },
+    {
+     "name": "load",
+     "snippet": "load(${1:path})",
+     "return": "bool",
+     "desc": "Decode a file into PCM, auto-detecting format from the extension (.wav .mp3 .ogg .flac .aac .m4a, case-insensitive). Returns false on failure."
+    },
+    {
+     "name": "loadAac",
+     "snippet": "loadAac(${1:path})",
+     "return": "bool",
+     "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms)."
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "float",
+     "desc": "Duration in seconds (numSamples / sampleRate)."
+    },
+    {
+     "name": "generateSineWave",
+     "snippet": "generateSineWave(${1:frequency}, ${2:duration})",
+     "return": "void",
+     "desc": "Fill the buffer with a mono sine wave of the given frequency (Hz) and duration (seconds)."
+    },
+    {
+     "name": "generateSquareWave",
+     "snippet": "generateSquareWave(${1:frequency}, ${2:duration})",
+     "return": "void",
+     "desc": "Fill the buffer with a mono square wave."
+    },
+    {
+     "name": "generateTriangleWave",
+     "snippet": "generateTriangleWave(${1:frequency}, ${2:duration})",
+     "return": "void",
+     "desc": "Fill the buffer with a mono triangle wave."
+    },
+    {
+     "name": "generateSawtoothWave",
+     "snippet": "generateSawtoothWave(${1:frequency}, ${2:duration})",
+     "return": "void",
+     "desc": "Fill the buffer with a mono sawtooth wave."
+    },
+    {
+     "name": "generateNoise",
+     "snippet": "generateNoise(${1:duration})",
+     "return": "void",
+     "desc": "Fill the buffer with mono white noise."
+    },
+    {
+     "name": "generatePinkNoise",
+     "snippet": "generatePinkNoise(${1:duration})",
+     "return": "void",
+     "desc": "Fill the buffer with mono pink noise (1/f spectrum, Paul Kellet's method)."
+    },
+    {
+     "name": "generateSilence",
+     "snippet": "generateSilence(${1:duration})",
+     "return": "void",
+     "desc": "Fill the buffer with silence of the given duration (useful as a base for mixFrom)."
+    },
+    {
+     "name": "applyADSR",
+     "snippet": "applyADSR(${1:attack}, ${2:decay}, ${3:sustainLevel}, ${4:release})",
+     "return": "void",
+     "desc": "Apply an ADSR amplitude envelope to the buffer in place (attack / decay / release in seconds, sustainLevel 0-1)."
+    },
+    {
+     "name": "mixFrom",
+     "snippet": "mixFrom(${1:other}, ${2:offsetSamples})",
+     "return": "void",
+     "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed."
+    },
+    {
+     "name": "clip",
+     "snippet": "clip()",
+     "return": "void",
+     "desc": "Hard-clip all samples into the -1.0 .. 1.0 range."
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "getAdtsSampleRateIndex",
+     "snippet": "getAdtsSampleRateIndex(${1:sampleRate})",
+     "return": "int",
+     "desc": "ADTS sample-rate index for the given rate (AAC-in-MOV container helper)."
+    }
+   ]
+  },
+  {
+   "name": "SoundStream",
+   "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a ~10 ms refill, and each polyphony slot costs one open file handle + decoder + ring buffer.",
+   "constructor": {
+    "snippet": "SoundStream()"
+   },
+   "methods": [
+    {
+     "name": "loadStream",
+     "snippet": "loadStream(${1:path})",
+     "return": "bool",
+     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported."
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "float",
+     "desc": "Decoded file duration in seconds."
+    },
+    {
+     "name": "getPath",
+     "snippet": "getPath()",
+     "return": "const std::string &",
+     "desc": "Path the stream was opened from."
+    },
+    {
+     "name": "getMaxPolyphony",
+     "snippet": "getMaxPolyphony()",
+     "return": "int",
+     "desc": "Number of concurrent decoder slots reserved at loadStream()."
+    }
+   ]
+  },
+  {
+   "name": "StrokeCap",
+   "desc": "Line cap style for strokes: Butt, Round, Square.",
+   "static_methods": [
+    {
+     "name": "Butt",
+     "snippet": "Butt",
+     "return": "StrokeCap",
+     "desc": "= 0"
+    },
+    {
+     "name": "Round",
+     "snippet": "Round",
+     "return": "StrokeCap",
+     "desc": "= 1"
+    },
+    {
+     "name": "Square",
+     "snippet": "Square",
+     "return": "StrokeCap",
+     "desc": "= 2"
+    }
+   ]
+  },
+  {
+   "name": "StrokeJoin",
+   "desc": "Line join style for strokes: Miter, Round, Bevel.",
+   "static_methods": [
+    {
+     "name": "Miter",
+     "snippet": "Miter",
+     "return": "StrokeJoin",
+     "desc": "= 0"
+    },
+    {
+     "name": "Round",
+     "snippet": "Round",
+     "return": "StrokeJoin",
+     "desc": "= 1"
+    },
+    {
+     "name": "Bevel",
+     "snippet": "Bevel",
+     "return": "StrokeJoin",
+     "desc": "= 2"
+    }
+   ]
+  },
+  {
+   "name": "StrokeMesh",
+   "desc": "Variable-width polyline stroke geometry with caps, joins and miter limit; build it from points or a Path, then update() and draw()",
+   "constructor": {
+    "snippet": "StrokeMesh(${1:polyline})"
+   },
+   "methods": [
+    {
+     "name": "setWidth",
+     "snippet": "setWidth(${1:width})",
+     "return": "StrokeMesh &",
+     "desc": "Set the stroke width"
+    },
+    {
+     "name": "setColor",
+     "snippet": "setColor(${1:color})",
+     "return": "StrokeMesh &",
+     "desc": "Set the stroke color"
+    },
+    {
+     "name": "setCapType",
+     "snippet": "setCapType(${1:type})",
+     "return": "StrokeMesh &",
+     "desc": "Set the line cap shape (StrokeMesh::CapType: Butt, Round, Square)"
+    },
+    {
+     "name": "setJoinType",
+     "snippet": "setJoinType(${1:type})",
+     "return": "StrokeMesh &",
+     "desc": "Set the line join shape (StrokeMesh::JoinType: Miter, Round, Bevel)"
+    },
+    {
+     "name": "setMiterLimit",
+     "snippet": "setMiterLimit(${1:limit})",
+     "return": "StrokeMesh &",
+     "desc": "Set the miter limit for sharp corners"
+    },
+    {
+     "name": "addVertex",
+     "snippet": "addVertex(${1:x}, ${2:y})",
+     "return": "StrokeMesh &",
+     "desc": "Append a vertex to the stroke path"
+    },
+    {
+     "name": "addVertexWithWidth",
+     "snippet": "addVertexWithWidth(${1:x}, ${2:y}, ${3:width})",
+     "return": "StrokeMesh &",
+     "desc": "Append a vertex with a per-vertex width"
+    },
+    {
+     "name": "setWidths",
+     "snippet": "setWidths(${1:w})",
+     "return": "StrokeMesh &",
+     "desc": "Set per-vertex widths from a list"
+    },
+    {
+     "name": "setShape",
+     "snippet": "setShape(${1:polyline})",
+     "return": "StrokeMesh &",
+     "desc": "Set the stroke shape from a Path"
+    },
+    {
+     "name": "setClosed",
+     "snippet": "setClosed(${1:closed})",
+     "return": "StrokeMesh &",
+     "desc": "Set whether the stroke forms a closed loop"
+    },
+    {
+     "name": "clear",
+     "snippet": "clear()",
+     "return": "StrokeMesh &",
+     "desc": "Remove all vertices"
+    },
+    {
+     "name": "update",
+     "snippet": "update()",
+     "return": "void",
+     "desc": "Rebuild the internal triangle mesh (call before draw after edits)"
+    },
+    {
+     "name": "draw",
+     "snippet": "draw()",
+     "return": "void",
+     "desc": "Draw the stroke mesh"
+    },
+    {
+     "name": "getMesh",
+     "snippet": "getMesh()",
+     "return": "Mesh &",
+     "desc": "Get a reference to the underlying generated triangle Mesh"
+    },
+    {
+     "name": "getPolylines",
+     "snippet": "getPolylines()",
+     "return": "std::vector<Path> &",
+     "desc": "Get a reference to the stroke's source polylines"
+    }
+   ]
+  },
+  {
+   "name": "TcpClient",
+   "desc": "TCP client connection (connect, send/receive a stream)",
+   "constructor": {
+    "snippet": "TcpClient()"
+   },
+   "properties": [
+    {
+     "name": "onConnect",
+     "type": "Event<TcpConnectEventArgs>",
+     "desc": "Fired when the connection completes"
+    },
+    {
+     "name": "onReceive",
+     "type": "Event<TcpReceiveEventArgs>",
+     "desc": "Fired when data is received"
+    },
+    {
+     "name": "onDisconnect",
+     "type": "Event<TcpDisconnectEventArgs>",
+     "desc": "Fired when disconnected"
+    },
+    {
+     "name": "onError",
+     "type": "Event<TcpErrorEventArgs>",
+     "desc": "Fired on error"
+    }
+   ],
+   "methods": [
+    {
+     "name": "connect",
+     "snippet": "connect(${1:host}, ${2:port})",
+     "return": "bool",
+     "desc": "Connect to a server (blocking)"
+    },
+    {
+     "name": "connectAsync",
+     "snippet": "connectAsync(${1:host}, ${2:port})",
+     "return": "void",
+     "desc": "Connect asynchronously (notifies via onConnect)"
+    },
+    {
+     "name": "disconnect",
+     "snippet": "disconnect()",
+     "return": "void",
+     "desc": "Disconnect"
+    },
+    {
+     "name": "isConnected",
+     "snippet": "isConnected()",
+     "return": "bool",
+     "desc": "Whether currently connected"
+    },
+    {
+     "name": "send",
+     "snippet": "send(${1:data})",
+     "return": "bool",
+     "desc": "Send data to the server"
+    },
+    {
+     "name": "setReceiveBufferSize",
+     "snippet": "setReceiveBufferSize(${1:size})",
+     "return": "void",
+     "desc": "Set the receive buffer size"
+    },
+    {
+     "name": "setBlocking",
+     "snippet": "setBlocking(${1:blocking})",
+     "return": "void",
+     "desc": "Set blocking mode"
+    },
+    {
+     "name": "setUseThread",
+     "snippet": "setUseThread(${1:useThread})",
+     "return": "void",
+     "desc": "Whether to use threads (must be false on Wasm)"
+    },
+    {
+     "name": "isUsingThread",
+     "snippet": "isUsingThread()",
+     "return": "bool",
+     "desc": "Whether threading is in use"
+    },
+    {
+     "name": "processNetwork",
+     "snippet": "processNetwork()",
+     "return": "void",
+     "desc": "Pump pending TCP I/O; normally auto-driven by the update event, but can be called manually for synchronous polling."
+    },
+    {
+     "name": "getRemoteHost",
+     "snippet": "getRemoteHost()",
+     "return": "std::string",
+     "desc": "Remote host name"
+    },
+    {
+     "name": "getRemotePort",
+     "snippet": "getRemotePort()",
+     "return": "int",
+     "desc": "Remote port"
+    }
+   ]
+  },
+  {
+   "name": "TcpClientConnectEventArgs",
+   "desc": "Event args for TcpServer::onClientConnect",
+   "properties": [
+    {
+     "name": "clientId",
+     "type": "int",
+     "desc": "Client ID"
+    },
+    {
+     "name": "host",
+     "type": "std::string",
+     "desc": "Client IP address"
+    },
+    {
+     "name": "port",
+     "type": "int",
+     "desc": "Client port"
+    }
+   ]
+  },
+  {
+   "name": "TcpClientDisconnectEventArgs",
+   "desc": "Event args for TcpServer::onClientDisconnect",
+   "properties": [
+    {
+     "name": "clientId",
+     "type": "int",
+     "desc": "Client ID"
+    },
+    {
+     "name": "reason",
+     "type": "std::string",
+     "desc": "Disconnect reason"
+    },
+    {
+     "name": "wasClean",
+     "type": "bool",
+     "desc": "Whether the disconnect was clean"
+    }
+   ]
+  },
+  {
+   "name": "TcpConnectEventArgs",
+   "desc": "Event args for TcpClient::onConnect",
+   "properties": [
+    {
+     "name": "success",
+     "type": "bool",
+     "desc": "Whether the connection succeeded"
+    },
+    {
+     "name": "message",
+     "type": "std::string",
+     "desc": "Connection message"
+    }
+   ]
+  },
+  {
+   "name": "TcpDisconnectEventArgs",
+   "desc": "Event args for TcpClient::onDisconnect",
+   "properties": [
+    {
+     "name": "reason",
+     "type": "std::string",
+     "desc": "Disconnect reason"
+    },
+    {
+     "name": "wasClean",
+     "type": "bool",
+     "desc": "Whether it was a clean disconnect"
+    }
+   ]
+  },
+  {
+   "name": "TcpErrorEventArgs",
+   "desc": "Event args for TcpClient::onError",
+   "properties": [
+    {
+     "name": "message",
+     "type": "std::string",
+     "desc": "Error message"
+    },
+    {
+     "name": "errorCode",
+     "type": "int",
+     "desc": "Error code"
+    }
+   ]
+  },
+  {
+   "name": "TcpReceiveEventArgs",
+   "desc": "Event args for TcpClient::onReceive",
+   "properties": [
+    {
+     "name": "data",
+     "type": "std::vector<char>",
+     "desc": "Received data"
+    }
+   ]
+  },
+  {
+   "name": "TcpServer",
+   "desc": "TCP server (accept clients, send/broadcast)",
+   "constructor": {
+    "snippet": "TcpServer()"
+   },
+   "properties": [
+    {
+     "name": "onClientConnect",
+     "type": "Event<TcpClientConnectEventArgs>",
+     "desc": "Fired when a client connects"
+    },
+    {
+     "name": "onReceive",
+     "type": "Event<TcpServerReceiveEventArgs>",
+     "desc": "Fired when data is received from a client"
+    },
+    {
+     "name": "onClientDisconnect",
+     "type": "Event<TcpClientDisconnectEventArgs>",
+     "desc": "Fired when a client disconnects"
+    },
+    {
+     "name": "onError",
+     "type": "Event<TcpServerErrorEventArgs>",
+     "desc": "Fired on a server or per-client error"
+    }
+   ],
+   "methods": [
+    {
+     "name": "start",
+     "snippet": "start(${1:port})",
+     "return": "bool",
+     "desc": "Start listening on a port"
+    },
+    {
+     "name": "stop",
+     "snippet": "stop()",
+     "return": "void",
+     "desc": "Stop the server"
+    },
+    {
+     "name": "isRunning",
+     "snippet": "isRunning()",
+     "return": "bool",
+     "desc": "Whether the server is running"
+    },
+    {
+     "name": "disconnectClient",
+     "snippet": "disconnectClient(${1:clientId})",
+     "return": "void",
+     "desc": "Disconnect a specific client"
+    },
+    {
+     "name": "disconnectAllClients",
+     "snippet": "disconnectAllClients()",
+     "return": "void",
+     "desc": "Disconnect all clients"
+    },
+    {
+     "name": "getClientCount",
+     "snippet": "getClientCount()",
+     "return": "int",
+     "desc": "Number of connected clients"
+    },
+    {
+     "name": "getClientIds",
+     "snippet": "getClientIds()",
+     "return": "std::vector<int>",
+     "desc": "IDs of all connected clients"
+    },
+    {
+     "name": "getClient",
+     "snippet": "getClient(${1:clientId})",
+     "return": "const TcpServerClient *",
+     "desc": "Client info (nullptr if not found)"
+    },
+    {
+     "name": "send",
+     "snippet": "send(${1:clientId}, ${2:data})",
+     "return": "bool",
+     "desc": "Send data to a specific client"
+    },
+    {
+     "name": "broadcast",
+     "snippet": "broadcast(${1:data})",
+     "return": "void",
+     "desc": "Broadcast data to all clients"
+    },
+    {
+     "name": "setReceiveBufferSize",
+     "snippet": "setReceiveBufferSize(${1:size})",
+     "return": "void",
+     "desc": "Set the receive buffer size"
+    },
+    {
+     "name": "getPort",
+     "snippet": "getPort()",
+     "return": "int",
+     "desc": "The listening port"
+    }
+   ]
+  },
+  {
+   "name": "TcpServerClient",
+   "desc": "A client connected to a TcpServer (read-only handle)",
+   "methods": [
+    {
+     "name": "getId",
+     "snippet": "getId()",
+     "return": "int",
+     "desc": "Client ID assigned by the server"
+    },
+    {
+     "name": "getHost",
+     "snippet": "getHost()",
+     "return": "const std::string &",
+     "desc": "Client IP address"
+    },
+    {
+     "name": "getPort",
+     "snippet": "getPort()",
+     "return": "int",
+     "desc": "Client port"
+    }
+   ]
+  },
+  {
+   "name": "TcpServerErrorEventArgs",
+   "desc": "Event args for TcpServer::onError",
+   "properties": [
+    {
+     "name": "message",
+     "type": "std::string",
+     "desc": "Error message"
+    },
+    {
+     "name": "errorCode",
+     "type": "int",
+     "desc": "Error code"
+    },
+    {
+     "name": "clientId",
+     "type": "int",
+     "desc": "Client ID (-1 = server-level error, not a specific client)"
+    }
+   ]
+  },
+  {
+   "name": "TcpServerReceiveEventArgs",
+   "desc": "Event args for TcpServer::onReceive",
+   "properties": [
+    {
+     "name": "clientId",
+     "type": "int",
+     "desc": "Client ID"
+    },
+    {
+     "name": "data",
+     "type": "std::vector<char>",
+     "desc": "Received data"
+    }
+   ]
+  },
+  {
+   "name": "TcyMode",
+   "desc": "Tate-chu-yoko: how Latin / digit runs are laid out within vertical text",
+   "static_methods": [
+    {
+     "name": "Rotate",
+     "snippet": "Rotate",
+     "return": "TcyMode",
+     "desc": "= 0"
+    },
+    {
+     "name": "Upright",
+     "snippet": "Upright",
+     "return": "TcyMode",
+     "desc": "= 1"
+    },
+    {
+     "name": "Combine",
+     "snippet": "Combine",
+     "return": "TcyMode",
+     "desc": "= 2"
+    }
+   ]
+  },
+  {
+   "name": "Texture",
+   "desc": "GPU texture for rendering",
+   "constructor": {
+    "snippet": "Texture()"
+   },
+   "methods": [
+    {
+     "name": "allocate",
+     "snippet": "allocate(${1:width}, ${2:height})",
+     "return": "void",
+     "desc": "Allocate texture"
+    },
+    {
+     "name": "allocateCubemap",
+     "snippet": "allocateCubemap(${1:sideSize}, ${2:format})",
+     "return": "void",
+     "desc": "Allocate a cubemap texture without initial data"
+    },
+    {
+     "name": "getCubemapFaceAttachmentView",
+     "snippet": "getCubemapFaceAttachmentView(${1:face}, ${2:mipLevel})",
+     "return": "sg_view",
+     "desc": "Return (lazily creating) the sokol-gfx attachment view for one (face, mip) of this cubemap (advanced interop)."
+    },
+    {
+     "name": "isCubemap",
+     "snippet": "isCubemap()",
+     "return": "bool",
+     "desc": "Whether this texture is a cubemap"
+    },
+    {
+     "name": "getNumMipLevels",
+     "snippet": "getNumMipLevels()",
+     "return": "int",
+     "desc": "Number of mip levels"
+    },
+    {
+     "name": "isCompressed",
+     "snippet": "isCompressed()",
+     "return": "bool",
+     "desc": "Whether this texture uses a compressed pixel format"
+    },
+    {
+     "name": "clear",
+     "snippet": "clear()",
+     "return": "void",
+     "desc": "Release texture resources"
+    },
+    {
+     "name": "isAllocated",
+     "snippet": "isAllocated()",
+     "return": "bool",
+     "desc": "Check if allocated"
+    },
+    {
+     "name": "getWidth",
+     "snippet": "getWidth()",
+     "return": "int",
+     "desc": "Get width"
+    },
+    {
+     "name": "getHeight",
+     "snippet": "getHeight()",
+     "return": "int",
+     "desc": "Get height"
+    },
+    {
+     "name": "getChannels",
+     "snippet": "getChannels()",
+     "return": "int",
+     "desc": "Get number of channels"
+    },
+    {
+     "name": "getUsage",
+     "snippet": "getUsage()",
+     "return": "TextureUsage",
+     "desc": "Get texture usage mode"
+    },
+    {
+     "name": "getSampleCount",
+     "snippet": "getSampleCount()",
+     "return": "int",
+     "desc": "Get MSAA sample count"
+    },
+    {
+     "name": "getPixelFormat",
+     "snippet": "getPixelFormat()",
+     "return": "sg_pixel_format",
+     "desc": "Return the texture's sokol-gfx pixel format."
+    },
+    {
+     "name": "loadData",
+     "snippet": "loadData(${1:pixels})",
+     "return": "void",
+     "desc": "Load pixel data to texture"
+    },
+    {
+     "name": "setMinFilter",
+     "snippet": "setMinFilter(${1:filter})",
+     "return": "void",
+     "desc": "Set minification filter"
+    },
+    {
+     "name": "setMagFilter",
+     "snippet": "setMagFilter(${1:filter})",
+     "return": "void",
+     "desc": "Set magnification filter"
+    },
+    {
+     "name": "setFilter",
+     "snippet": "setFilter(${1:filter})",
+     "return": "void",
+     "desc": "Set both min and mag filters"
+    },
+    {
+     "name": "getMinFilter",
+     "snippet": "getMinFilter()",
+     "return": "TextureFilter",
+     "desc": "Get minification filter"
+    },
+    {
+     "name": "getMagFilter",
+     "snippet": "getMagFilter()",
+     "return": "TextureFilter",
+     "desc": "Get magnification filter"
+    },
+    {
+     "name": "setPremultipliedAlpha",
+     "snippet": "setPremultipliedAlpha(${1:v})",
+     "return": "void",
+     "desc": "Set whether the texture color is premultiplied by alpha"
+    },
+    {
+     "name": "isPremultipliedAlpha",
+     "snippet": "isPremultipliedAlpha()",
+     "return": "bool",
+     "desc": "Whether the texture color is premultiplied by alpha"
+    },
+    {
+     "name": "setWrapU",
+     "snippet": "setWrapU(${1:wrap})",
+     "return": "void",
+     "desc": "Set horizontal wrap mode"
+    },
+    {
+     "name": "setWrapV",
+     "snippet": "setWrapV(${1:wrap})",
+     "return": "void",
+     "desc": "Set vertical wrap mode"
+    },
+    {
+     "name": "setWrap",
+     "snippet": "setWrap(${1:wrap})",
+     "return": "void",
+     "desc": "Set both wrap modes"
+    },
+    {
+     "name": "getWrapU",
+     "snippet": "getWrapU()",
+     "return": "TextureWrap",
+     "desc": "Get horizontal wrap mode"
+    },
+    {
+     "name": "getWrapV",
+     "snippet": "getWrapV()",
+     "return": "TextureWrap",
+     "desc": "Get vertical wrap mode"
+    },
+    {
+     "name": "draw",
+     "snippet": "draw(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Draw texture"
+    },
+    {
+     "name": "drawFlippedY",
+     "snippet": "drawFlippedY(${1:x}, ${2:y}, ${3:w}, ${4:h})",
+     "return": "void",
+     "desc": "Draw the texture vertically flipped"
+    },
+    {
+     "name": "drawSubsection",
+     "snippet": "drawSubsection(${1:x}, ${2:y}, ${3:w}, ${4:h}, ${5:sx}, ${6:sy}, ${7:sw}, ${8:sh})",
+     "return": "void",
+     "desc": "Draw subsection of texture"
+    },
+    {
+     "name": "bind",
+     "snippet": "bind()",
+     "return": "void",
+     "desc": "Bind texture for rendering"
+    },
+    {
+     "name": "unbind",
+     "snippet": "unbind()",
+     "return": "void",
+     "desc": "Unbind texture"
+    },
+    {
+     "name": "getImage",
+     "snippet": "getImage()",
+     "return": "sg_image",
+     "desc": "Return the underlying sokol-gfx image handle (advanced interop)."
+    },
+    {
+     "name": "getView",
+     "snippet": "getView()",
+     "return": "sg_view",
+     "desc": "Return the underlying sokol-gfx texture view handle (advanced interop)."
+    },
+    {
+     "name": "getSampler",
+     "snippet": "getSampler()",
+     "return": "sg_sampler",
+     "desc": "Return the underlying sokol-gfx sampler handle (advanced interop)."
+    },
+    {
+     "name": "getAttachmentView",
+     "snippet": "getAttachmentView()",
+     "return": "sg_view",
+     "desc": "Return the sokol-gfx color attachment view used to render into this RenderTarget (advanced interop)."
+    },
+    {
+     "name": "getAttachmentViewForMip",
+     "snippet": "getAttachmentViewForMip(${1:level})",
+     "return": "sg_view",
+     "desc": "Return the sokol-gfx color attachment view for the given mip level (advanced interop)."
+    },
+    {
+     "name": "getViewForMip",
+     "snippet": "getViewForMip(${1:level})",
+     "return": "sg_view",
+     "desc": "Return the sokol-gfx texture view for sampling a single mip level (advanced interop)."
+    }
+   ]
+  },
+  {
+   "name": "TextureFilter",
+   "desc": "Texture sampling filter: Nearest or Linear.",
+   "static_methods": [
+    {
+     "name": "Nearest",
+     "snippet": "Nearest",
+     "return": "TextureFilter",
+     "desc": "= 0"
+    },
+    {
+     "name": "Linear",
+     "snippet": "Linear",
+     "return": "TextureFilter",
+     "desc": "= 1"
+    }
+   ]
+  },
+  {
+   "name": "TextureFormat",
+   "desc": "GPU texture format (RGBA8, RGBA16F, R8, …) — channel layout and bit depth.",
+   "static_methods": [
+    {
+     "name": "RGBA8",
+     "snippet": "RGBA8",
+     "return": "TextureFormat",
+     "desc": "= 0"
+    },
+    {
+     "name": "RGBA16F",
+     "snippet": "RGBA16F",
+     "return": "TextureFormat",
+     "desc": "= 1"
+    },
+    {
+     "name": "RGBA32F",
+     "snippet": "RGBA32F",
+     "return": "TextureFormat",
+     "desc": "= 2"
+    },
+    {
+     "name": "R8",
+     "snippet": "R8",
+     "return": "TextureFormat",
+     "desc": "= 3"
+    },
+    {
+     "name": "R16F",
+     "snippet": "R16F",
+     "return": "TextureFormat",
+     "desc": "= 4"
+    },
+    {
+     "name": "R32F",
+     "snippet": "R32F",
+     "return": "TextureFormat",
+     "desc": "= 5"
+    },
+    {
+     "name": "RG8",
+     "snippet": "RG8",
+     "return": "TextureFormat",
+     "desc": "= 6"
+    },
+    {
+     "name": "RG16F",
+     "snippet": "RG16F",
+     "return": "TextureFormat",
+     "desc": "= 7"
+    },
+    {
+     "name": "RG32F",
+     "snippet": "RG32F",
+     "return": "TextureFormat",
+     "desc": "= 8"
+    },
+    {
+     "name": "BGRA8",
+     "snippet": "BGRA8",
+     "return": "TextureFormat",
+     "desc": "= 9"
+    },
+    {
+     "name": "RGBA16",
+     "snippet": "RGBA16",
+     "return": "TextureFormat",
+     "desc": "= 10"
+    }
+   ]
+  },
+  {
+   "name": "TextureUsage",
+   "desc": "Texture update pattern: Immutable, Dynamic, Stream, or RenderTarget.",
+   "static_methods": [
+    {
+     "name": "Immutable",
+     "snippet": "Immutable",
+     "return": "TextureUsage",
+     "desc": "= 0"
+    },
+    {
+     "name": "Dynamic",
+     "snippet": "Dynamic",
+     "return": "TextureUsage",
+     "desc": "= 1"
+    },
+    {
+     "name": "Stream",
+     "snippet": "Stream",
+     "return": "TextureUsage",
+     "desc": "= 2"
+    },
+    {
+     "name": "RenderTarget",
+     "snippet": "RenderTarget",
+     "return": "TextureUsage",
+     "desc": "= 3"
+    }
+   ]
+  },
+  {
+   "name": "TextureWrap",
+   "desc": "Texture wrap mode: Repeat, ClampToEdge, MirroredRepeat.",
+   "static_methods": [
+    {
+     "name": "Repeat",
+     "snippet": "Repeat",
+     "return": "TextureWrap",
+     "desc": "= 0"
+    },
+    {
+     "name": "ClampToEdge",
+     "snippet": "ClampToEdge",
+     "return": "TextureWrap",
+     "desc": "= 1"
+    },
+    {
+     "name": "MirroredRepeat",
+     "snippet": "MirroredRepeat",
+     "return": "TextureWrap",
+     "desc": "= 2"
+    }
+   ]
+  },
+  {
+   "name": "ThermalState",
+   "desc": "Device thermal state, from Nominal to Critical.",
+   "static_methods": [
+    {
+     "name": "Nominal",
+     "snippet": "Nominal",
+     "return": "ThermalState",
+     "desc": "= 0"
+    },
+    {
+     "name": "Fair",
+     "snippet": "Fair",
+     "return": "ThermalState",
+     "desc": "= 1"
+    },
+    {
+     "name": "Serious",
+     "snippet": "Serious",
+     "return": "ThermalState",
+     "desc": "= 2"
+    },
+    {
+     "name": "Critical",
+     "snippet": "Critical",
+     "return": "ThermalState",
+     "desc": "= 3"
+    }
+   ]
+  },
+  {
+   "name": "TouchEventArgs",
+   "desc": "Arguments for touchPressed / touchMoved / touchReleased events (multi-touch, Android/iOS)",
+   "properties": [
+    {
+     "name": "numTouches",
+     "type": "int",
+     "desc": "Number of valid entries in touches"
+    },
+    {
+     "name": "cancelled",
+     "type": "bool",
+     "desc": "True when touchReleased fires due to system cancellation (incoming call, system gesture)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "x",
+     "snippet": "x()",
+     "return": "float",
+     "desc": "Convenience: X position of the first touch point"
+    },
+    {
+     "name": "y",
+     "snippet": "y()",
+     "return": "float",
+     "desc": "Convenience: Y position of the first touch point"
+    },
+    {
+     "name": "id",
+     "snippet": "id()",
+     "return": "int",
+     "desc": "Convenience: ID of the first touch point"
+    }
+   ]
+  },
+  {
+   "name": "TouchPoint",
+   "desc": "A single finger within a TouchEventArgs",
+   "properties": [
+    {
+     "name": "id",
+     "type": "int",
+     "desc": "Touch ID, persistent across move events"
+    },
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "Touch x position"
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Touch y position"
+    },
+    {
+     "name": "pressure",
+     "type": "float",
+     "desc": "Touch pressure (0.0-1.0; not yet reported by sokol, defaults to 1.0)"
+    },
+    {
+     "name": "changed",
+     "type": "bool",
+     "desc": "True if this touch was part of the current action"
+    }
+   ]
+  },
+  {
+   "name": "Tween",
+   "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+   "constructor": {
+    "snippet": "Tween(${1:start}, ${2:end}, ${3:duration})"
+   }
+  },
+  {
+   "name": "TweenMod",
+   "desc": "Animation modifier (Mod) that tweens a Node's position, scale and rotation with easing; exposes a complete Event",
+   "constructor": {
+    "snippet": "TweenMod()"
+   },
+   "properties": [
+    {
+     "name": "complete",
+     "type": "Event<void>",
+     "desc": "Fired once when all tweens finish; subscribe with complete.listen(callback)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "moveTo",
+     "snippet": "moveTo(${1:x}, ${2:y})",
+     "return": "TweenMod &",
+     "desc": "Animate position to target (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "moveBy",
+     "snippet": "moveBy(${1:dx}, ${2:dy})",
+     "return": "TweenMod &",
+     "desc": "Animate position by relative amount (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "moveFrom",
+     "snippet": "moveFrom(${1:x}, ${2:y})",
+     "return": "TweenMod &",
+     "desc": "Set an explicit start position for the position tween (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "scaleTo",
+     "snippet": "scaleTo(${1:uniform})",
+     "return": "TweenMod &",
+     "desc": "Animate scale to target (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "scaleBy",
+     "snippet": "scaleBy(${1:factor})",
+     "return": "TweenMod &",
+     "desc": "Animate scale by relative multiplier (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "scaleFrom",
+     "snippet": "scaleFrom(${1:uniform})",
+     "return": "TweenMod &",
+     "desc": "Set an explicit start scale for the scale tween (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateTo",
+     "snippet": "rotateTo(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Animate rotation to target angle or quaternion (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateBy",
+     "snippet": "rotateBy(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Animate rotation by relative angle (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateFrom",
+     "snippet": "rotateFrom(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Set an explicit start rotation (angle or quaternion) for the rotation tween (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateXTo",
+     "snippet": "rotateXTo(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Animate X-axis rotation to an absolute angle (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateXBy",
+     "snippet": "rotateXBy(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Animate X-axis rotation by a relative angle (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateYTo",
+     "snippet": "rotateYTo(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Animate Y-axis rotation to an absolute angle (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateYBy",
+     "snippet": "rotateYBy(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Animate Y-axis rotation by a relative angle (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateZTo",
+     "snippet": "rotateZTo(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Animate Z-axis rotation to an absolute angle (same as rotateTo for 2D) (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateZBy",
+     "snippet": "rotateZBy(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Animate Z-axis rotation by a relative angle (same as rotateBy for 2D) (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateXFrom",
+     "snippet": "rotateXFrom(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Set an explicit start angle for the X-axis rotation tween (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "rotateYFrom",
+     "snippet": "rotateYFrom(${1:radians})",
+     "return": "TweenMod &",
+     "desc": "Set an explicit start angle for the Y-axis rotation tween (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "duration",
+     "snippet": "duration(${1:seconds})",
+     "return": "TweenMod &",
+     "desc": "Set animation duration (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "ease",
+     "snippet": "ease(${1:type})",
+     "return": "TweenMod &",
+     "desc": "Set easing function (TweenMod method). Types: Linear, Quad, Cubic, Quart, Quint, Sine, Expo, Circ, Back, Elastic, Bounce. Modes: In, Out, InOut (C++ only)"
+    },
+    {
+     "name": "delay",
+     "snippet": "delay(${1:seconds})",
+     "return": "TweenMod &",
+     "desc": "Set delay before animation starts (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "start",
+     "snippet": "start()",
+     "return": "TweenMod &",
+     "desc": "Start (or restart) the tween from its configured values (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "pause",
+     "snippet": "pause()",
+     "return": "TweenMod &",
+     "desc": "Pause playback, keeping the current progress (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "resume",
+     "snippet": "resume()",
+     "return": "TweenMod &",
+     "desc": "Resume a paused tween (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "reset",
+     "snippet": "reset()",
+     "return": "TweenMod &",
+     "desc": "Reset progress to the start and stop playback (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "isPlaying",
+     "snippet": "isPlaying()",
+     "return": "bool",
+     "desc": "Whether the tween is currently playing (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "isComplete",
+     "snippet": "isComplete()",
+     "return": "bool",
+     "desc": "Whether the tween has finished (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "getProgress",
+     "snippet": "getProgress()",
+     "return": "float",
+     "desc": "Current progress in 0..1 (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "float",
+     "desc": "Get the animation duration in seconds (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "getDelay",
+     "snippet": "getDelay()",
+     "return": "float",
+     "desc": "Get the start delay in seconds (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "getEaseType",
+     "snippet": "getEaseType()",
+     "return": "EaseType",
+     "desc": "Get the current easing type (TweenMod method) (C++ only)"
+    },
+    {
+     "name": "getEaseMode",
+     "snippet": "getEaseMode()",
+     "return": "EaseMode",
+     "desc": "Get the current easing mode (In/Out/InOut) (TweenMod method) (C++ only)"
+    }
+   ]
+  },
+  {
+   "name": "UdpErrorEventArgs",
+   "desc": "Event args for UdpSocket::onError",
+   "properties": [
+    {
+     "name": "message",
+     "type": "std::string",
+     "desc": "Error message"
+    },
+    {
+     "name": "errorCode",
+     "type": "int",
+     "desc": "Error code"
+    }
+   ]
+  },
+  {
+   "name": "UdpReceiveEventArgs",
+   "desc": "Event args for UdpSocket::onReceive",
+   "properties": [
+    {
+     "name": "data",
+     "type": "std::vector<char>",
+     "desc": "Received data"
+    },
+    {
+     "name": "remoteHost",
+     "type": "std::string",
+     "desc": "Source host"
+    },
+    {
+     "name": "remotePort",
+     "type": "int",
+     "desc": "Source port"
+    }
+   ]
+  },
+  {
+   "name": "UdpSocket",
+   "desc": "UDP socket (send/receive datagrams, broadcast, multicast)",
+   "constructor": {
+    "snippet": "UdpSocket()"
+   },
+   "properties": [
+    {
+     "name": "onReceive",
+     "type": "Event<UdpReceiveEventArgs>",
+     "desc": "Fired when data is received"
+    },
+    {
+     "name": "onError",
+     "type": "Event<UdpErrorEventArgs>",
+     "desc": "Fired on error"
+    }
+   ],
+   "methods": [
+    {
+     "name": "create",
+     "snippet": "create()",
+     "return": "bool",
+     "desc": "Create the socket explicitly (usually auto-created by bind/connect)"
+    },
+    {
+     "name": "bind",
+     "snippet": "bind(${1:port})",
+     "return": "bool",
+     "desc": "Bind a port for receiving (startReceiving auto-starts the receive thread)"
+    },
+    {
+     "name": "connect",
+     "snippet": "connect(${1:host}, ${2:port})",
+     "return": "bool",
+     "desc": "Set the destination for send()"
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Close the socket"
+    },
+    {
+     "name": "sendTo",
+     "snippet": "sendTo(${1:host}, ${2:port}, ${3:message})",
+     "return": "bool",
+     "desc": "Send data to a specific host and port"
+    },
+    {
+     "name": "send",
+     "snippet": "send(${1:message})",
+     "return": "bool",
+     "desc": "Send to the destination set by connect()"
+    },
+    {
+     "name": "startReceiving",
+     "snippet": "startReceiving()",
+     "return": "void",
+     "desc": "Start the receive thread (auto-called after bind)"
+    },
+    {
+     "name": "stopReceiving",
+     "snippet": "stopReceiving()",
+     "return": "void",
+     "desc": "Stop the receive thread"
+    },
+    {
+     "name": "isReceiving",
+     "snippet": "isReceiving()",
+     "return": "bool",
+     "desc": "Whether the receive thread is active"
+    },
+    {
+     "name": "setNonBlocking",
+     "snippet": "setNonBlocking(${1:nonBlocking})",
+     "return": "bool",
+     "desc": "Set non-blocking mode"
+    },
+    {
+     "name": "setBroadcast",
+     "snippet": "setBroadcast(${1:enable})",
+     "return": "bool",
+     "desc": "Allow broadcast sending"
+    },
+    {
+     "name": "setReuseAddress",
+     "snippet": "setReuseAddress(${1:enable})",
+     "return": "bool",
+     "desc": "Allow address reuse (set before bind)"
+    },
+    {
+     "name": "setReusePort",
+     "snippet": "setReusePort(${1:enable})",
+     "return": "bool",
+     "desc": "Allow multiple sockets on the same port (multicast receivers; set before bind)"
+    },
+    {
+     "name": "joinMulticastGroup",
+     "snippet": "joinMulticastGroup(${1:groupAddr})",
+     "return": "bool",
+     "desc": "Join a multicast group for receiving (call after bind; \"\" = default route)\n"
+    },
+    {
+     "name": "leaveMulticastGroup",
+     "snippet": "leaveMulticastGroup(${1:groupAddr})",
+     "return": "bool",
+     "desc": "Leave a previously joined multicast group"
+    },
+    {
+     "name": "setMulticastTTL",
+     "snippet": "setMulticastTTL(${1:ttl})",
+     "return": "bool",
+     "desc": "Hop limit for outgoing multicast (default 1 = local subnet)"
+    },
+    {
+     "name": "setMulticastLoopback",
+     "snippet": "setMulticastLoopback(${1:enable})",
+     "return": "bool",
+     "desc": "Whether outgoing multicast loops back to local listeners (default on)"
+    },
+    {
+     "name": "setMulticastInterface",
+     "snippet": "setMulticastInterface(${1:interfaceAddr})",
+     "return": "bool",
+     "desc": "Pick the NIC for outgoing multicast (\"\" = default route)\n"
+    },
+    {
+     "name": "setReceiveBufferSize",
+     "snippet": "setReceiveBufferSize(${1:size})",
+     "return": "bool",
+     "desc": "Set the receive buffer size"
+    },
+    {
+     "name": "setSendBufferSize",
+     "snippet": "setSendBufferSize(${1:size})",
+     "return": "bool",
+     "desc": "Set the send buffer size"
+    },
+    {
+     "name": "setReceiveTimeout",
+     "snippet": "setReceiveTimeout(${1:timeoutMs})",
+     "return": "bool",
+     "desc": "Set the receive timeout (0 = infinite)"
+    },
+    {
+     "name": "setUseThread",
+     "snippet": "setUseThread(${1:useThread})",
+     "return": "void",
+     "desc": "Whether to use a receive thread (must be false on Wasm)"
+    },
+    {
+     "name": "getLocalPort",
+     "snippet": "getLocalPort()",
+     "return": "int",
+     "desc": "The bound local port"
+    },
+    {
+     "name": "processNetwork",
+     "snippet": "processNetwork()",
+     "return": "void",
+     "desc": "Pump pending UDP I/O; normally auto-driven by the update event, but can be called manually for synchronous polling."
+    },
+    {
+     "name": "isValid",
+     "snippet": "isValid()",
+     "return": "bool",
+     "desc": "Whether the socket is valid"
+    },
+    {
+     "name": "getConnectedHost",
+     "snippet": "getConnectedHost()",
+     "return": "const std::string &",
+     "desc": "Destination host from connect()"
+    },
+    {
+     "name": "getConnectedPort",
+     "snippet": "getConnectedPort()",
+     "return": "int",
+     "desc": "Destination port from connect()"
+    }
+   ]
+  },
+  {
+   "name": "Vec2",
+   "desc": "2D vector (x, y)",
+   "constructor": {
+    "snippet": "Vec2(${1:x}, ${2:y})"
+   },
+   "properties": [
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "X component"
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Y component"
+    }
+   ],
+   "methods": [
+    {
+     "name": "set",
+     "snippet": "set(${1:x}, ${2:y})",
+     "return": "Vec2 &",
+     "desc": "Set vector components"
+    },
+    {
+     "name": "length",
+     "snippet": "length()",
+     "return": "float",
+     "desc": "Get vector length"
+    },
+    {
+     "name": "lengthSquared",
+     "snippet": "lengthSquared()",
+     "return": "float",
+     "desc": "Get squared length (faster, no sqrt)"
+    },
+    {
+     "name": "normalized",
+     "snippet": "normalized()",
+     "return": "Vec2",
+     "desc": "Get normalized copy"
+    },
+    {
+     "name": "normalize",
+     "snippet": "normalize()",
+     "return": "Vec2 &",
+     "desc": "Normalize in place"
+    },
+    {
+     "name": "limit",
+     "snippet": "limit(${1:max})",
+     "return": "Vec2 &",
+     "desc": "Limit length to max"
+    },
+    {
+     "name": "dot",
+     "snippet": "dot(${1:v})",
+     "return": "float",
+     "desc": "Dot product"
+    },
+    {
+     "name": "cross",
+     "snippet": "cross(${1:v})",
+     "return": "float",
+     "desc": "Cross product (z component)"
+    },
+    {
+     "name": "distance",
+     "snippet": "distance(${1:v})",
+     "return": "float",
+     "desc": "Distance to another vector"
+    },
+    {
+     "name": "distanceSquared",
+     "snippet": "distanceSquared(${1:v})",
+     "return": "float",
+     "desc": "Squared distance (faster)"
+    },
+    {
+     "name": "angle",
+     "snippet": "angle()",
+     "return": "float",
+     "desc": "Angle in radians"
+    },
+    {
+     "name": "rotated",
+     "snippet": "rotated(${1:radians})",
+     "return": "Vec2",
+     "desc": "Get rotated copy"
+    },
+    {
+     "name": "rotate",
+     "snippet": "rotate(${1:radians})",
+     "return": "Vec2 &",
+     "desc": "Rotate in place"
+    },
+    {
+     "name": "lerp",
+     "snippet": "lerp(${1:v}, ${2:t})",
+     "return": "Vec2",
+     "desc": "Linear interpolation"
+    },
+    {
+     "name": "perpendicular",
+     "snippet": "perpendicular()",
+     "return": "Vec2",
+     "desc": "Get perpendicular vector"
+    },
+    {
+     "name": "reflected",
+     "snippet": "reflected(${1:normal})",
+     "return": "Vec2",
+     "desc": "Get reflected vector"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "fromAngle",
+     "snippet": "fromAngle(${1:radians})",
+     "return": "Vec2",
+     "desc": "Create Vec2 from angle"
+    }
+   ]
+  },
+  {
+   "name": "Vec3",
+   "desc": "3D vector (x, y, z)",
+   "constructor": {
+    "snippet": "Vec3(${1:x}, ${2:y}, ${3:z})"
+   },
+   "properties": [
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "X component"
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Y component"
+    },
+    {
+     "name": "z",
+     "type": "float",
+     "desc": "Z component"
+    }
+   ],
+   "methods": [
+    {
+     "name": "set",
+     "snippet": "set(${1:x}, ${2:y}, ${3:z})",
+     "return": "Vec3 &",
+     "desc": "Set vector components"
+    },
+    {
+     "name": "length",
+     "snippet": "length()",
+     "return": "float",
+     "desc": "Get vector length"
+    },
+    {
+     "name": "lengthSquared",
+     "snippet": "lengthSquared()",
+     "return": "float",
+     "desc": "Get squared length"
+    },
+    {
+     "name": "normalized",
+     "snippet": "normalized()",
+     "return": "Vec3",
+     "desc": "Get normalized copy"
+    },
+    {
+     "name": "normalize",
+     "snippet": "normalize()",
+     "return": "Vec3 &",
+     "desc": "Normalize in place"
+    },
+    {
+     "name": "limit",
+     "snippet": "limit(${1:max})",
+     "return": "Vec3 &",
+     "desc": "Limit length to max"
+    },
+    {
+     "name": "dot",
+     "snippet": "dot(${1:v})",
+     "return": "float",
+     "desc": "Dot product"
+    },
+    {
+     "name": "cross",
+     "snippet": "cross(${1:v})",
+     "return": "Vec3",
+     "desc": "Cross product"
+    },
+    {
+     "name": "distance",
+     "snippet": "distance(${1:v})",
+     "return": "float",
+     "desc": "Distance to another vector"
+    },
+    {
+     "name": "distanceSquared",
+     "snippet": "distanceSquared(${1:v})",
+     "return": "float",
+     "desc": "Squared distance"
+    },
+    {
+     "name": "lerp",
+     "snippet": "lerp(${1:v}, ${2:t})",
+     "return": "Vec3",
+     "desc": "Linear interpolation"
+    },
+    {
+     "name": "reflected",
+     "snippet": "reflected(${1:normal})",
+     "return": "Vec3",
+     "desc": "Get reflected vector"
+    },
+    {
+     "name": "xy",
+     "snippet": "xy()",
+     "return": "Vec2",
+     "desc": "Get XY components as Vec2"
+    }
+   ]
+  },
+  {
+   "name": "Vec4",
+   "desc": "4D vector (x, y, z, w). Used for homogeneous coordinates and RGBA-style data",
+   "constructor": {
+    "snippet": "Vec4(${1:x}, ${2:y}, ${3:z}, ${4:w})"
+   },
+   "properties": [
+    {
+     "name": "x",
+     "type": "float",
+     "desc": "X component"
+    },
+    {
+     "name": "y",
+     "type": "float",
+     "desc": "Y component"
+    },
+    {
+     "name": "z",
+     "type": "float",
+     "desc": "Z component"
+    },
+    {
+     "name": "w",
+     "type": "float",
+     "desc": "W component"
+    }
+   ],
+   "methods": [
+    {
+     "name": "set",
+     "snippet": "set(${1:x}, ${2:y}, ${3:z}, ${4:w})",
+     "return": "Vec4 &",
+     "desc": "Set all components (chainable)"
+    },
+    {
+     "name": "length",
+     "snippet": "length()",
+     "return": "float",
+     "desc": "Get the vector's magnitude"
+    },
+    {
+     "name": "lengthSquared",
+     "snippet": "lengthSquared()",
+     "return": "float",
+     "desc": "Get the squared magnitude (cheaper than length())"
+    },
+    {
+     "name": "normalized",
+     "snippet": "normalized()",
+     "return": "Vec4",
+     "desc": "Return a unit-length copy of this vector"
+    },
+    {
+     "name": "normalize",
+     "snippet": "normalize()",
+     "return": "Vec4 &",
+     "desc": "Normalize this vector in place (chainable)"
+    },
+    {
+     "name": "dot",
+     "snippet": "dot(${1:v})",
+     "return": "float",
+     "desc": "Dot product with another vector"
+    },
+    {
+     "name": "lerp",
+     "snippet": "lerp(${1:v}, ${2:t})",
+     "return": "Vec4",
+     "desc": "Linearly interpolate toward v by t (0..1)"
+    },
+    {
+     "name": "xy",
+     "snippet": "xy()",
+     "return": "Vec2",
+     "desc": "Get the (x, y) components as a Vec2"
+    },
+    {
+     "name": "xyz",
+     "snippet": "xyz()",
+     "return": "Vec3",
+     "desc": "Get the (x, y, z) components as a Vec3"
+    }
+   ]
+  },
+  {
+   "name": "VideoCodec",
+   "desc": "Video codec: H264, HEVC, ProRes422, ProRes4444.",
+   "static_methods": [
+    {
+     "name": "H264",
+     "snippet": "H264",
+     "return": "VideoCodec",
+     "desc": "= 0"
+    },
+    {
+     "name": "HEVC",
+     "snippet": "HEVC",
+     "return": "VideoCodec",
+     "desc": "= 1"
+    },
+    {
+     "name": "ProRes422",
+     "snippet": "ProRes422",
+     "return": "VideoCodec",
+     "desc": "= 2"
+    },
+    {
+     "name": "ProRes4444",
+     "snippet": "ProRes4444",
+     "return": "VideoCodec",
+     "desc": "= 3"
+    }
+   ]
+  },
+  {
+   "name": "VideoDeviceInfo",
+   "desc": "Information about an available camera device, returned by VideoGrabber::listDevices()",
+   "properties": [
+    {
+     "name": "deviceId",
+     "type": "int",
+     "desc": "Numeric device ID (pass to setDeviceID); -1 if unknown"
+    },
+    {
+     "name": "deviceName",
+     "type": "std::string",
+     "desc": "Human-readable device name"
+    },
+    {
+     "name": "uniqueId",
+     "type": "std::string",
+     "desc": "Stable unique identifier for the device"
+    }
+   ],
+   "methods": [
+    {
+     "name": "getDeviceID",
+     "snippet": "getDeviceID()",
+     "return": "int",
+     "desc": "Get the numeric device ID (-1 if unknown)"
+    },
+    {
+     "name": "getDeviceName",
+     "snippet": "getDeviceName()",
+     "return": "const std::string &",
+     "desc": "Get the human-readable device name"
+    },
+    {
+     "name": "getUniqueId",
+     "snippet": "getUniqueId()",
+     "return": "const std::string &",
+     "desc": "Get the stable unique identifier for the device"
+    }
+   ]
+  },
+  {
+   "name": "VideoGrabber",
+   "desc": "Webcam capture source. Call setup() once, then update() every frame; getTexture() (via HasTexture) gives the live frame. Move-only. Camera permission is requested automatically on macOS",
+   "constructor": {
+    "snippet": "VideoGrabber()"
+   },
+   "methods": [
+    {
+     "name": "listDevices",
+     "snippet": "listDevices()",
+     "return": "std::vector<VideoDeviceInfo>",
+     "desc": "Return the list of available camera devices"
+    },
+    {
+     "name": "setDeviceID",
+     "snippet": "setDeviceID(${1:deviceId})",
+     "return": "void",
+     "desc": "Select which camera to use; call before setup()"
+    },
+    {
+     "name": "getDeviceID",
+     "snippet": "getDeviceID()",
+     "return": "int",
+     "desc": "Return the selected device ID"
+    },
+    {
+     "name": "setDesiredFrameRate",
+     "snippet": "setDesiredFrameRate(${1:fps})",
+     "return": "void",
+     "desc": "Request a capture frame rate; call before setup()"
+    },
+    {
+     "name": "getDesiredFrameRate",
+     "snippet": "getDesiredFrameRate()",
+     "return": "int",
+     "desc": "Return the requested frame rate (-1 if unspecified)"
+    },
+    {
+     "name": "setVerbose",
+     "snippet": "setVerbose(${1:verbose})",
+     "return": "void",
+     "desc": "Enable or disable verbose logging"
+    },
+    {
+     "name": "isVerbose",
+     "snippet": "isVerbose()",
+     "return": "bool",
+     "desc": "Return whether verbose logging is enabled"
+    },
+    {
+     "name": "setup",
+     "snippet": "setup()",
+     "return": "bool",
+     "desc": "Start the camera at the requested size. Returns false if permission is not yet granted (it is requested asynchronously); keep calling update() and capture begins once granted"
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Stop the camera and release its resources"
+    },
+    {
+     "name": "update",
+     "snippet": "update()",
+     "return": "void",
+     "desc": "Poll for a new frame and upload it to the texture. Call every frame; also completes a setup() that was waiting on permission"
+    },
+    {
+     "name": "isFrameNew",
+     "snippet": "isFrameNew()",
+     "return": "bool",
+     "desc": "Return true if a new frame arrived during the most recent update()"
+    },
+    {
+     "name": "isInitialized",
+     "snippet": "isInitialized()",
+     "return": "bool",
+     "desc": "Return true once the camera is set up and capturing"
+    },
+    {
+     "name": "isPendingPermission",
+     "snippet": "isPendingPermission()",
+     "return": "bool",
+     "desc": "Return true while waiting for camera permission to be granted"
+    },
+    {
+     "name": "getWidth",
+     "snippet": "getWidth()",
+     "return": "int",
+     "desc": "Return the captured frame width in pixels"
+    },
+    {
+     "name": "getHeight",
+     "snippet": "getHeight()",
+     "return": "int",
+     "desc": "Return the captured frame height in pixels"
+    },
+    {
+     "name": "getDeviceName",
+     "snippet": "getDeviceName()",
+     "return": "const std::string &",
+     "desc": "Return the name of the active capture device"
+    },
+    {
+     "name": "getPixels",
+     "snippet": "getPixels()",
+     "return": "unsigned char *",
+     "desc": "Return a pointer to the current RGBA pixel buffer"
+    },
+    {
+     "name": "setFrameQueueSize",
+     "snippet": "setFrameQueueSize(${1:maxFrames})",
+     "return": "void",
+     "desc": "Enable the timestamped frame queue and set its capacity (0 = disable, the default; zero overhead when off). When full, the oldest frame is dropped so a slow consumer never blocks capture. Sizing hint: at least ceil(cameraFps / appFps) plus headroom; 8-16 is plenty. Can be called before or after setup()"
+    },
+    {
+     "name": "getFrameQueueSize",
+     "snippet": "getFrameQueueSize()",
+     "return": "size_t",
+     "desc": "Return the frame queue capacity (0 = queueing disabled)"
+    },
+    {
+     "name": "copyToImage",
+     "snippet": "copyToImage(${1:image})",
+     "return": "void",
+     "desc": "Copy the current frame into an Image (allocating/updating it as needed)"
+    },
+    {
+     "name": "getTexture",
+     "snippet": "getTexture()",
+     "return": "Texture &",
+     "desc": "Return the texture holding the live camera frame (HasTexture override)"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "checkCameraPermission",
+     "snippet": "checkCameraPermission()",
+     "return": "bool",
+     "desc": "Return whether camera access has been granted (macOS 10.14+)"
+    },
+    {
+     "name": "requestCameraPermission",
+     "snippet": "requestCameraPermission()",
+     "return": "void",
+     "desc": "Request camera access asynchronously (macOS)"
+    }
+   ]
+  },
+  {
+   "name": "VideoPlayer",
+   "desc": "Plays a video file: load/play/stop, per-frame update, and a texture you can draw each frame",
+   "constructor": {
+    "snippet": "VideoPlayer()"
+   },
+   "methods": [
+    {
+     "name": "load",
+     "snippet": "load(${1:path})",
+     "return": "bool",
+     "desc": "Load a video file"
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Close the video and release resources"
+    },
+    {
+     "name": "update",
+     "snippet": "update()",
+     "return": "void",
+     "desc": "Update the video frame. Call once per frame in update()"
+    },
+    {
+     "name": "play",
+     "snippet": "play()",
+     "return": "void",
+     "desc": "Start or resume playback. With the auto poster (default), a seek made while stopped/paused is bridged with the exact frame at the new position before playback, so it never starts on a stale picture"
+    },
+    {
+     "name": "setAutoPoster",
+     "snippet": "setAutoPoster(${1:on})",
+     "return": "void",
+     "desc": "Auto poster (default ON): on load/stop/play the player synchronously puts the frame at the current position on the texture, so drawing never shows black or a stale picture. Turn off to skip the one-time synchronous decode"
+    },
+    {
+     "name": "getAutoPoster",
+     "snippet": "getAutoPoster()",
+     "return": "bool",
+     "desc": "Return whether the auto poster is enabled (default true)"
+    },
+    {
+     "name": "draw",
+     "snippet": "draw(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Draw the current video frame at (x, y), optionally scaled to w x h"
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "float",
+     "desc": "Get total duration in seconds"
+    },
+    {
+     "name": "getPosition",
+     "snippet": "getPosition()",
+     "return": "float",
+     "desc": "Get current position (0.0 to 1.0)"
+    },
+    {
+     "name": "getCurrentFrame",
+     "snippet": "getCurrentFrame()",
+     "return": "int",
+     "desc": "Get current frame number"
+    },
+    {
+     "name": "getTotalFrames",
+     "snippet": "getTotalFrames()",
+     "return": "int",
+     "desc": "Get total number of frames"
+    },
+    {
+     "name": "setFrame",
+     "snippet": "setFrame(${1:frame})",
+     "return": "void",
+     "desc": "Seek to a specific frame number"
+    },
+    {
+     "name": "nextFrame",
+     "snippet": "nextFrame()",
+     "return": "void",
+     "desc": "Advance to the next frame"
+    },
+    {
+     "name": "previousFrame",
+     "snippet": "previousFrame()",
+     "return": "void",
+     "desc": "Go back to the previous frame"
+    },
+    {
+     "name": "setGammaCorrection",
+     "snippet": "setGammaCorrection(${1:gamma})",
+     "return": "void",
+     "desc": "Set gamma correction (1.0 = none). Use ~0.45 to brighten on platforms with dark output (e.g. macOS AVFoundation)"
+    },
+    {
+     "name": "getGammaCorrection",
+     "snippet": "getGammaCorrection()",
+     "return": "float",
+     "desc": "Get current gamma correction value"
+    },
+    {
+     "name": "setUseHwAccel",
+     "snippet": "setUseHwAccel(${1:enable})",
+     "return": "void",
+     "desc": "Enable/disable hardware decoding. Must be called before load(). Default: true. When enabled, the player probes available HW backends (VAAPI, V4L2M2M, CUDA, etc.) and falls back to software if none are available. Currently affects the Linux backend only."
+    },
+    {
+     "name": "getUseHwAccel",
+     "snippet": "getUseHwAccel()",
+     "return": "bool",
+     "desc": "Get HW accel preference (not the actual backend — use isUsingHwAccel() for that)"
+    },
+    {
+     "name": "getPixels",
+     "snippet": "getPixels()",
+     "return": "unsigned char *",
+     "desc": "Pointer to the current RGBA pixel buffer (mutable)"
+    },
+    {
+     "name": "getPixelsY",
+     "snippet": "getPixelsY()",
+     "return": "unsigned char *",
+     "desc": "Pointer to the Y (luma) plane when decoding NV12/YUV; null otherwise"
+    },
+    {
+     "name": "getPixelsUV",
+     "snippet": "getPixelsUV()",
+     "return": "unsigned char *",
+     "desc": "Pointer to the interleaved UV (chroma) plane when decoding NV12; null otherwise"
+    },
+    {
+     "name": "hasAudio",
+     "snippet": "hasAudio()",
+     "return": "bool",
+     "desc": "Check if the loaded video has an audio track"
+    },
+    {
+     "name": "getAudioCodec",
+     "snippet": "getAudioCodec()",
+     "return": "uint32_t",
+     "desc": "FourCC of the audio codec in the loaded video (0 if none)"
+    },
+    {
+     "name": "getAudioData",
+     "snippet": "getAudioData()",
+     "return": "std::vector<uint8_t>",
+     "desc": "Raw decoded audio data for the loaded video"
+    },
+    {
+     "name": "getAudioSampleRate",
+     "snippet": "getAudioSampleRate()",
+     "return": "int",
+     "desc": "Audio sample rate in Hz (0 if no audio)"
+    },
+    {
+     "name": "getAudioChannels",
+     "snippet": "getAudioChannels()",
+     "return": "int",
+     "desc": "Number of audio channels (0 if no audio)"
+    },
+    {
+     "name": "isUsingHwAccel",
+     "snippet": "isUsingHwAccel()",
+     "return": "bool",
+     "desc": "Check if hardware decoding is currently active (after load)"
+    },
+    {
+     "name": "getHwAccelName",
+     "snippet": "getHwAccelName()",
+     "return": "std::string",
+     "desc": "Get the name of the active decode backend. Returns 'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', or 'none'"
+    },
+    {
+     "name": "getPath",
+     "snippet": "getPath()",
+     "return": "const std::string &",
+     "desc": "Path of the currently loaded video file (resolved via getDataPath); empty string when nothing is loaded"
+    }
+   ]
+  },
+  {
+   "name": "VideoRecordSettings",
+   "desc": "Encoder settings passed to VideoWriter::open(), ScreenRecorder::start(), and startRecording()",
+   "properties": [
+    {
+     "name": "codec",
+     "type": "VideoCodec",
+     "desc": "Output codec (default H264)"
+    },
+    {
+     "name": "fps",
+     "type": "float",
+     "desc": "Capture/output frame rate. For ScreenRecorder this is the capture ceiling; for VideoWriter it is the exact output rate (default 60)"
+    },
+    {
+     "name": "bitrate",
+     "type": "int",
+     "desc": "Target bits/sec for H.264/HEVC; 0 = auto. Ignored by ProRes"
+    },
+    {
+     "name": "keyframeInterval",
+     "type": "int",
+     "desc": "Frames between keyframes; 0 = encoder default"
+    },
+    {
+     "name": "duration",
+     "type": "float",
+     "desc": "Recording length in seconds; 0 = unlimited (stop manually). When set, recording auto-stops and the file is finalized at exactly this length; a manual stop before the cutoff still wins"
+    }
+   ]
+  },
+  {
+   "name": "VideoWriter",
+   "desc": "Encodes frames to a video file: open a path, write frames, then close to finalize the file",
+   "constructor": {
+    "snippet": "VideoWriter()"
+   },
+   "methods": [
+    {
+     "name": "open",
+     "snippet": "open(${1:path}, ${2:width}, ${3:height})",
+     "return": "bool",
+     "desc": "Open the encoder at the given size (path resolved via getDataPath)"
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Finalize and flush the video file"
+    },
+    {
+     "name": "isOpen",
+     "snippet": "isOpen()",
+     "return": "bool",
+     "desc": "Check if the encoder is open and accepting frames"
+    },
+    {
+     "name": "getFrameCount",
+     "snippet": "getFrameCount()",
+     "return": "int",
+     "desc": "Number of frames written so far"
+    },
+    {
+     "name": "getWidth",
+     "snippet": "getWidth()",
+     "return": "int",
+     "desc": "Encoder output width in pixels"
+    },
+    {
+     "name": "getHeight",
+     "snippet": "getHeight()",
+     "return": "int",
+     "desc": "Encoder output height in pixels"
+    },
+    {
+     "name": "getFps",
+     "snippet": "getFps()",
+     "return": "float",
+     "desc": "Fixed encoding frame rate"
+    },
+    {
+     "name": "getPath",
+     "snippet": "getPath()",
+     "return": "const std::string &",
+     "desc": "Resolved output file path"
+    },
+    {
+     "name": "getSettings",
+     "snippet": "getSettings()",
+     "return": "const VideoRecordSettings &",
+     "desc": "Encoder settings the writer was opened with"
+    },
+    {
+     "name": "addFrame",
+     "snippet": "addFrame(${1:fbo})",
+     "return": "bool",
+     "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)"
+    },
+    {
+     "name": "addFrameAt",
+     "snippet": "addFrameAt(${1:fbo}, ${2:timeSec})",
+     "return": "bool",
+     "desc": "Append one frame at an explicit presentation time (seconds)"
+    },
+    {
+     "name": "submitFrame",
+     "snippet": "submitFrame(${1:timeSec})",
+     "return": "bool",
+     "desc": "Append the previously locked frame at the given presentation time (seconds)"
+    }
+   ]
+  },
+  {
+   "name": "WindowSettings",
+   "desc": "Window configuration passed to the app at startup (size, title, DPI, MSAA, fullscreen, decoration, VSync). Setters chain",
+   "properties": [
+    {
+     "name": "width",
+     "type": "int",
+     "desc": "Window width (default 1280)"
+    },
+    {
+     "name": "height",
+     "type": "int",
+     "desc": "Window height (default 720)"
+    },
+    {
+     "name": "title",
+     "type": "std::string",
+     "desc": "Window title (default \"TrussC App\")\n"
+    },
+    {
+     "name": "highDpi",
+     "type": "bool",
+     "desc": "High DPI support for sharp rendering on Retina (default true)"
+    },
+    {
+     "name": "pixelPerfect",
+     "type": "bool",
+     "desc": "true: coords match framebuffer size; false: coords use logical size (default false)"
+    },
+    {
+     "name": "sampleCount",
+     "type": "int",
+     "desc": "MSAA sample count (default 4)"
+    },
+    {
+     "name": "fullscreen",
+     "type": "bool",
+     "desc": "Start in fullscreen (default false)"
+    },
+    {
+     "name": "decorated",
+     "type": "bool",
+     "desc": "false: borderless/chromeless window with no title bar (default true)"
+    },
+    {
+     "name": "clipboardSize",
+     "type": "int",
+     "desc": "Clipboard buffer size in bytes (default 65536)"
+    },
+    {
+     "name": "swapInterval",
+     "type": "int",
+     "desc": "VSync present interval: 1 = on (default), 0 = off, N = every Nth refresh"
+    },
+    {
+     "name": "uniformBufferReserve",
+     "type": "int",
+     "desc": "Per-frame GPU uniform buffer reservation in bytes; 0 = backend default (4MB). Overflow silently corrupts frames in release builds on Metal/WebGPU/Vulkan"
+    }
+   ],
+   "methods": [
+    {
+     "name": "setSize",
+     "snippet": "setSize(${1:w}, ${2:h})",
+     "return": "WindowSettings &",
+     "desc": "Set window size (chainable)"
+    },
+    {
+     "name": "setTitle",
+     "snippet": "setTitle(${1:t})",
+     "return": "WindowSettings &",
+     "desc": "Set window title (chainable)"
+    },
+    {
+     "name": "setHighDpi",
+     "snippet": "setHighDpi(${1:enabled})",
+     "return": "WindowSettings &",
+     "desc": "Enable/disable high DPI support (chainable)"
+    },
+    {
+     "name": "setPixelPerfect",
+     "snippet": "setPixelPerfect(${1:enabled})",
+     "return": "WindowSettings &",
+     "desc": "Set pixel-perfect mode: true = framebuffer-size coords, false = logical-size coords (chainable)"
+    },
+    {
+     "name": "setSampleCount",
+     "snippet": "setSampleCount(${1:count})",
+     "return": "WindowSettings &",
+     "desc": "Set MSAA sample count (chainable)"
+    },
+    {
+     "name": "setFullscreen",
+     "snippet": "setFullscreen(${1:enabled})",
+     "return": "WindowSettings &",
+     "desc": "Enable/disable fullscreen at startup (chainable)"
+    },
+    {
+     "name": "setDecorated",
+     "snippet": "setDecorated(${1:enabled})",
+     "return": "WindowSettings &",
+     "desc": "false = borderless/chromeless window that can still take focus and be closed programmatically (chainable)"
+    },
+    {
+     "name": "setClipboardSize",
+     "snippet": "setClipboardSize(${1:size})",
+     "return": "WindowSettings &",
+     "desc": "Set clipboard buffer size in bytes (chainable)"
+    },
+    {
+     "name": "setSwapInterval",
+     "snippet": "setSwapInterval(${1:interval})",
+     "return": "WindowSettings &",
+     "desc": "Set VSync present interval: 1 = on, 0 = off, N = every Nth refresh (chainable)"
+    },
+    {
+     "name": "reserveUniformBuffer",
+     "snippet": "reserveUniformBuffer(${1:bytes})",
+     "return": "WindowSettings &",
+     "desc": "Reserve the per-frame GPU uniform buffer in bytes, vector::reserve style; 0 = backend default 4MB ≈ 8k draw calls. Metal/WebGPU/Vulkan only — GL/D3D11 have no such cap (chainable)"
+    }
+   ]
+  },
+  {
+   "name": "WindowType",
+   "desc": "FFT window function: Rect, Hanning, Hamming, Blackman.",
+   "static_methods": [
+    {
+     "name": "Rect",
+     "snippet": "Rect",
+     "return": "WindowType",
+     "desc": "= 0"
+    },
+    {
+     "name": "Hanning",
+     "snippet": "Hanning",
+     "return": "WindowType",
+     "desc": "= 1"
+    },
+    {
+     "name": "Hamming",
+     "snippet": "Hamming",
+     "return": "WindowType",
+     "desc": "= 2"
+    },
+    {
+     "name": "Blackman",
+     "snippet": "Blackman",
+     "return": "WindowType",
+     "desc": "= 3"
+    }
+   ]
+  },
+  {
+   "name": "WritingMode",
+   "desc": "Text writing mode: Horizontal or VerticalRL (vertical, right-to-left).",
+   "static_methods": [
+    {
+     "name": "Horizontal",
+     "snippet": "Horizontal",
+     "return": "WritingMode",
+     "desc": "= 0"
+    },
+    {
+     "name": "VerticalRL",
+     "snippet": "VerticalRL",
+     "return": "WritingMode",
+     "desc": "= 1"
+    }
+   ]
+  },
+  {
+   "name": "Xml",
+   "desc": "XML document wrapper around pugixml. Loads, saves and queries XML; node-level access is via XmlNode returned from root() and child().",
+   "constructor": {
+    "snippet": "Xml()"
+   },
+   "methods": [
+    {
+     "name": "load",
+     "snippet": "load(${1:path})",
+     "return": "bool",
+     "desc": "Load an XML document from a file. Relative paths are resolved via getDataPath. Returns true on success."
+    },
+    {
+     "name": "parse",
+     "snippet": "parse(${1:str})",
+     "return": "bool",
+     "desc": "Parse an XML document from a string. Returns true on success."
+    },
+    {
+     "name": "save",
+     "snippet": "save(${1:path})",
+     "return": "bool",
+     "desc": "Save the document to a file. Relative paths are resolved via getDataPath. indent sets the per-level indentation string. Returns true on success."
+    },
+    {
+     "name": "toString",
+     "snippet": "toString()",
+     "return": "std::string",
+     "desc": "Serialize the document to an XML string. indent sets the per-level indentation string."
+    },
+    {
+     "name": "root",
+     "snippet": "root()",
+     "return": "XmlNode",
+     "desc": "Get the document's root element node."
+    },
+    {
+     "name": "addRoot",
+     "snippet": "addRoot(${1:name})",
+     "return": "XmlNode",
+     "desc": "Append a new root element with the given name and return it."
+    },
+    {
+     "name": "child",
+     "snippet": "child(${1:name})",
+     "return": "XmlNode",
+     "desc": "Find a direct child node of the document by name."
+    },
+    {
+     "name": "document",
+     "snippet": "document()",
+     "return": "XmlDocument &",
+     "desc": "Access the underlying pugixml document for advanced operations."
+    },
+    {
+     "name": "empty",
+     "snippet": "empty()",
+     "return": "bool",
+     "desc": "Return true if the document has no content."
+    },
+    {
+     "name": "addDeclaration",
+     "snippet": "addDeclaration()",
+     "return": "void",
+     "desc": "Prepend an XML declaration (<?xml ...?>) with the given version and encoding."
+    }
+   ]
+  }
+ ]
 };
-            
-            // Export for different environments
-            if (typeof module !== 'undefined' && module.exports) {
-                module.exports = TrussSketchAPI;
-            }
-            

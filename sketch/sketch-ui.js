@@ -791,51 +791,46 @@
             logToConsole('Renamed: ' + oldName + ' -> ' + finalName, 'success');
         }
 
-        const defaultCode = `// TrussSketch - Creative Coding Playground
-float t;
+        const defaultCode = `-- TrussSketch (Lua) - Creative Coding Playground
+local t = 0
 
-void setup() {
-    t = 0;
-}
+function setup()
+    t = 0
+end
 
-void update() {
-    t += getDeltaTime();
-}
+function update()
+    t = t + getDeltaTime()
+end
 
-void draw() {
-    clear(1);
+function draw()
+    clear(1)
 
-    float cx = getWindowWidth() / 2;
-    float cy = getWindowHeight() / 2;
+    local cx = getWindowWidth() / 2
+    local cy = getWindowHeight() / 2
 
-    // Smooth wave
-    setStrokeWeight(3);
-    setColor(0.2, 0.5, 0.9);
-    beginStroke();
-    for (int i = 0; i <= 50; i++) {
-        float x = i * 12 + 50;
-        float y = cy + sin(i * 0.2 + t * 2) * 60;
-        vertex(x, y);
-    }
-    endStroke();
-    setStrokeWeight(0);
+    -- Bars
+    for i = 0, 9 do
+        local bh = 30 + math.abs(math.sin(t * 2 + i * 0.4)) * 120
+        setColor(0.2, 0.5 + i * 0.04, 0.9)
+        drawRect(40 + i * 52, getWindowHeight() - bh - 30, 40, bh)
+    end
 
-    // Pulsing circle
-    setColor(0.95, 0.3, 0.4);
-    drawCircle(cx - 120, cy, 40 + sin(t * 3) * 10);
+    -- Pulsing circle
+    setColor(0.95, 0.3, 0.4)
+    drawCircle(cx - 120, cy, 40 + math.sin(t * 3) * 10)
 
-    // Rotating square
-    setColor(0.3, 0.8, 0.5);
-    pushMatrix();
-    translate(cx + 120, cy);
-    rotate(t);
-    drawRect(-35, -35, 70, 70);
-    popMatrix();
+    -- Rotating square
+    setColor(0.3, 0.8, 0.5)
+    pushMatrix()
+    translate(cx + 120, cy)
+    rotate(t)
+    drawRect(-35, -35, 70, 70)
+    popMatrix()
 
-    // Mouse follower
-    setColor(0.1, 0.1, 0.1, 0.5);
-    drawCircle(getMouseX(), getMouseY(), 8);
-}
+    -- Mouse follower
+    setColor(0.1, 0.1, 0.1, 0.5)
+    drawCircle(getMouseX(), getMouseY(), 8)
+end
 `;
 
         // Load code from URL hash (LZString compressed)
@@ -866,14 +861,13 @@ void draw() {
             return null;
         }
 
-        // Initialize Monaco Editor
-        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' }});
-        require(['vs/editor/editor.main'], function() {
+        // Initialize editor (CodeMirror 6 via the Monaco-compatible shim in cm-editor.js)
+        window.__cmReady.then(function() {
             // Define TrussSketch language (AngelScript-like)
             monaco.languages.register({ id: 'trusssketch' });
             monaco.languages.setMonarchTokensProvider('trusssketch', {
-                keywords: ['void', 'if', 'else', 'for', 'while', 'do', 'switch', 'case', 'default', 'return', 'break', 'continue', 'true', 'false', 'null', 'const', 'class', 'this', 'cast', 'funcdef', 'interface', 'mixin', 'enum', 'import', 'from', 'typedef', 'auto', 'in', 'out', 'inout', 'override', 'final', 'get', 'set', 'private', 'protected', 'shared', 'external', 'not', 'and', 'or', 'xor', 'is'],
-                typeKeywords: ['int', 'int8', 'int16', 'int64', 'uint', 'uint8', 'uint16', 'uint64', 'float', 'double', 'string', 'bool', 'array', 'Vec2', 'Vec3', 'Color', 'Rect', 'Mat4', 'Quaternion', 'Pixels', 'Texture', 'Fbo', 'Sound', 'Font', 'Mesh', 'Path', 'StrokeMesh', 'Image', 'EasyCam', 'ChipSoundNote', 'ChipSoundBundle', 'FileWriter', 'FileReader', 'Tween'],
+                keywords: ['and', 'break', 'do', 'else', 'elseif', 'end', 'false', 'for', 'function', 'goto', 'if', 'in', 'local', 'nil', 'not', 'or', 'repeat', 'return', 'then', 'true', 'until', 'while'],
+                typeKeywords: (TrussSketchAPI.types || []).map(t => t.name),   // all bound types/enums (from trusssketch-api.js)
                 operators: ['+', '-', '*', '/', '%', '=', '==', '!=', '<', '>', '<=', '>=', '&&', '||', '!'],
                 symbols: /[=><!~?:&|+\-*\/\^%]+/,
                 tokenizer: {
@@ -977,40 +971,30 @@ void draw() {
                 return completions;
             }
 
-            // Build completions for a specific type (properties + methods)
-            function buildTypeCompletions(typeName) {
+            // Lua access rules: `.` reads fields (v.x) / statics (Vec2.fromAngle),
+            // `:` calls instance methods (v:length()).
+            function buildPropertyCompletions(typeName) {
                 const type = typeMap[typeName];
-                if (!type) return null;
+                if (!type || !type.properties) return null;
+                return type.properties.map(prop => ({
+                    label: prop.name,
+                    kind: monaco.languages.CompletionItemKind.Field,
+                    insertText: prop.name,
+                    detail: `${prop.type} - ${prop.desc}`
+                }));
+            }
 
-                const completions = [];
-
-                // Add properties
-                if (type.properties) {
-                    for (const prop of type.properties) {
-                        completions.push({
-                            label: prop.name,
-                            kind: monaco.languages.CompletionItemKind.Field,
-                            insertText: prop.name,
-                            detail: `${prop.type} - ${prop.desc}`
-                        });
-                    }
-                }
-
-                // Add methods
-                if (type.methods) {
-                    for (const method of type.methods) {
-                        completions.push({
-                            label: method.name,
-                            kind: monaco.languages.CompletionItemKind.Method,
-                            insertText: method.snippet,
-                            insertTextRules: method.snippet.includes('$') ?
-                                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet : undefined,
-                            detail: `${method.return} - ${method.desc}`
-                        });
-                    }
-                }
-
-                return completions;
+            function buildMethodCompletions(typeName) {
+                const type = typeMap[typeName];
+                if (!type || !type.methods) return null;
+                return type.methods.map(method => ({
+                    label: method.name,
+                    kind: monaco.languages.CompletionItemKind.Method,
+                    insertText: method.snippet,
+                    insertTextRules: method.snippet.includes('$') ?
+                        monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet : undefined,
+                    detail: `${method.return} - ${method.desc}`
+                }));
             }
 
             // Build static method completions for a type
@@ -1044,11 +1028,11 @@ void draw() {
                     return { type: returnTypes[identifier], isStatic: false };
                 }
 
-                // Search for variable declaration in the code
+                // Search for a Lua declaration in the code:
+                //   local v = Vec2(...)   v = Vec2.new(...)   local c = colors.red
                 const fullText = model.getValue();
                 for (const typeName of Object.keys(typeMap)) {
-                    // Match patterns like "Vec2 varName" or "Vec2 varName ="
-                    const pattern = new RegExp(`\\b${typeName}\\s+${identifier}\\b`);
+                    const pattern = new RegExp(`(?:local\\s+)?${identifier}\\s*=\\s*${typeName}\\s*[.(]`);
                     if (pattern.test(fullText)) {
                         return { type: typeName, isStatic: false };
                     }
@@ -1060,7 +1044,7 @@ void draw() {
             const globalCompletions = buildGlobalCompletions();
 
             monaco.languages.registerCompletionItemProvider('trusssketch', {
-                triggerCharacters: ['.'],
+                triggerCharacters: ['.', ':'],
                 provideCompletionItems: function(model, position) {
                     const word = model.getWordUntilPosition(position);
                     const range = {
@@ -1074,21 +1058,24 @@ void draw() {
                     const lineContent = model.getLineContent(position.lineNumber);
                     const textBeforeCursor = lineContent.substring(0, position.column - 1);
 
-                    // Check if we're after a dot (member access)
-                    // Match "word." or "word.partial" (e.g., "vec." or "vec.len")
-                    const dotMatch = textBeforeCursor.match(/(\w+)\.(\w*)$/);
+                    // Member access: `.` (fields / statics / enum values) or `:` (Lua methods)
+                    const dotMatch = textBeforeCursor.match(/(\w+)([.:])(\w*)$/);
                     if (dotMatch) {
                         const identifier = dotMatch[1];
+                        const sep = dotMatch[2];
                         const typeInfo = inferType(identifier, model);
 
                         if (typeInfo) {
                             let completions;
-                            if (typeInfo.isStatic) {
-                                // Static access (e.g., Vec2.fromAngle)
+                            if (sep === ':') {
+                                // v:length() — instance methods only
+                                completions = typeInfo.isStatic ? null : buildMethodCompletions(typeInfo.type);
+                            } else if (typeInfo.isStatic) {
+                                // Vec2.fromAngle / BlendMode.Add / colors.red
                                 completions = buildStaticCompletions(typeInfo.type);
                             } else {
-                                // Instance access (e.g., pos.x, pos.length())
-                                completions = buildTypeCompletions(typeInfo.type);
+                                // v.x — fields
+                                completions = buildPropertyCompletions(typeInfo.type);
                             }
 
                             if (completions && completions.length > 0) {
