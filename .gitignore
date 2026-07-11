@@ -21,3 +21,4 @@ node_modules/
 .wrangler/
 sketch/TrussSketch.js
 sketch/TrussSketch.wasm
+sketch/TrussSketch.data
