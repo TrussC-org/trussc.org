@@ -571,6 +571,43 @@
             color: #89d185;
         }
 
+        /* Kid-friendly errors: the muted original sits under the friendly line. */
+        .console-line.muted {
+            color: #8b8b93;
+        }
+
+        /* AI "ask" answer block: indented, calm info tone. */
+        .console-line.answer {
+            color: #9cb8d4;
+            padding-left: 14px;
+            margin-left: 4px;
+            border-left: 2px solid #3c3c3c;
+            white-space: pre-wrap;
+        }
+
+        .console-ask-btn {
+            margin-left: 8px;
+            background: rgba(120, 160, 255, 0.12);
+            border: 1px solid #3c3c3c;
+            border-radius: 10px;
+            color: #9cdcfe;
+            cursor: pointer;
+            font-size: 11px;
+            line-height: 1.4;
+            padding: 0 8px;
+            font-family: inherit;
+            vertical-align: baseline;
+        }
+
+        .console-ask-btn:hover {
+            background: rgba(120, 160, 255, 0.25);
+        }
+
+        .console-ask-btn:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
         .status {
             padding: 4px 16px;
             background: #007acc;

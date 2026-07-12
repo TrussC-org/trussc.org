@@ -145,6 +145,10 @@
                 copy: 'Copy',
                 assetWarning: 'Heads up! This project has assets (images, etc.) that can\'t be shared via URL.\n\nOnly the code will be shared. Cool?',
                 shareText: 'Made with TrussSketch ✨',
+                askBtn: 'ask AI',
+                askThinking: 'Asking the AI teacher…',
+                askLimit: 'That\'s enough asking for today. Try reading the error message carefully!',
+                askFailed: 'Can\'t reach the AI teacher right now. Try again in a bit.',
             },
             ja: {
                 videoSaved: '🎬 できた！',
@@ -153,6 +157,10 @@
                 copy: 'コピー',
                 assetWarning: 'ちょっと待って！このプロジェクトにはアセット（画像など）があるけど、URLには含められないんだ。\n\nコードだけシェアするけどOK？',
                 shareText: 'TrussSketchで作ったよ ✨',
+                askBtn: 'せんせいに聞く',
+                askThinking: '先生AIに聞いてるよ…',
+                askLimit: '今日はここまで。エラーメッセージをよく読んでみよう',
+                askFailed: 'いま先生AIにつながらないみたい。ちょっとしてからまた試してね',
             },
             'zh-Hans': {
                 videoSaved: '🎬 搞定！',
@@ -970,6 +978,22 @@ end
                     }
                 }
 
+                // Cooperative task API (host prelude, not in the generated data)
+                const taskFns = [
+                    { name: 'spawn',   snippet: 'spawn(function()\n\t$0\nend)', desc: 'Start a cooperative task (coroutine); runs until the function returns.' },
+                    { name: 'wait',    snippet: 'wait($0)',                     desc: 'Inside a task, suspend for N seconds. wait() / wait(0) resumes next frame.' },
+                    { name: 'forever', snippet: 'forever(function()\n\t$0\nend)', desc: 'Spawn a task that repeats forever (an implicit wait(0) runs after each pass).' }
+                ];
+                for (const fn of taskFns) {
+                    completions.push({
+                        label: fn.name,
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: fn.snippet,
+                        insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        detail: fn.desc
+                    });
+                }
+
                 // Add constants
                 for (const c of TrussSketchAPI.constants) {
                     completions.push({
@@ -1201,6 +1225,285 @@ end
             document.getElementById('console').innerHTML = '';
         }
 
+        // =====================================================================
+        // Errors as conversation: kid-friendly messages + an "ask AI" button.
+        // =====================================================================
+
+        // The docs bot (chat-widget.js) contract: POST {API}/chat with a JSON
+        // body, reply streamed as SSE (event: token|replace|done|error). We reuse
+        // that exact contract here — no new server API. If it were missing we'd
+        // flip ASK_ENABLED off and hide the button; it exists, so it's on.
+        const ASK_ENABLED = true;
+        const ASK_API = 'https://api.trussc.org';
+
+        // Two-letter friendly locale: ja is authored, everything else falls to en.
+        function friendlyLang() { return getLang() === 'ja' ? 'ja' : 'en'; }
+
+        // Translate one engine error line into a short kid-readable sentence.
+        // Input is a full "file (line, col) : message" line; we match on the
+        // message tail. Returns null when nothing matches (caller shows raw only).
+        function friendlyError(rawLine) {
+            const loc = rawLine.match(/\)\s*:\s*([\s\S]*)$/);
+            const msg = loc ? loc[1].trim() : rawLine.trim();
+            const ja = friendlyLang() === 'ja';
+            let m;
+
+            // undefined variable 'X' (+ optional did you mean 'Y'?)
+            m = msg.match(/undefined variable '([^']+)'(?:\s*\(did you mean '([^']+)'\?\))?/);
+            if (m) {
+                if (ja) {
+                    let s = `変数 '${m[1]}' はまだ作られていないよ。`;
+                    if (m[2]) s += `もしかして '${m[2]}' のこと？`;
+                    return s;
+                }
+                let s = `The variable '${m[1]}' hasn't been created yet.`;
+                if (m[2]) s += ` Did you mean '${m[2]}'?`;
+                return s;
+            }
+
+            // arithmetic on a nil value (local/global/field/upvalue 'X')
+            m = msg.match(/attempt to perform arithmetic on a nil value(?:\s*\((?:local|global|field|upvalue) '([^']+)'\))?/);
+            if (m) {
+                if (ja) return m[1]
+                    ? `'${m[1]}' に値が入っていないのに計算に使おうとしたよ。`
+                    : `値が入っていない(nil)ものを計算に使おうとしたよ。`;
+                return m[1]
+                    ? `'${m[1]}' has no value yet, but you tried to do math with it.`
+                    : `You tried to do math with something that has no value (nil).`;
+            }
+
+            // call a nil value (global/field/local/method 'X')
+            m = msg.match(/attempt to call a nil value(?:\s*\((?:global|field|local|method|upvalue) '([^']+)'\))?/);
+            if (m) {
+                if (ja) return m[1]
+                    ? `'${m[1]}' という関数は見つからないよ。名前を確認してね。`
+                    : `その関数は見つからないよ。名前を確認してね。`;
+                return m[1]
+                    ? `There's no function called '${m[1]}'. Check the spelling.`
+                    : `That function can't be found. Check the spelling.`;
+            }
+
+            // index a nil value (reading into something empty)
+            if (/attempt to index a nil value/.test(msg)) {
+                return ja
+                    ? `中身が空っぽ(nil)のものの中を見ようとしたよ。`
+                    : `You tried to look inside something that's empty (nil).`;
+            }
+
+            // compare across types
+            if (/attempt to compare/.test(msg)) {
+                return ja
+                    ? `種類のちがうもの同士を比べようとしたよ。`
+                    : `You tried to compare two different kinds of things.`;
+            }
+
+            // 'end' expected (check before the generic syntax matcher)
+            if (/'end' expected/.test(msg)) {
+                return ja ? `'end' が足りないみたい。` : `Looks like an 'end' is missing.`;
+            }
+
+            // syntax error / unexpected symbol near 'X'
+            m = msg.match(/(?:syntax error|unexpected symbol)[^\n]*?near '?([^'\n]*?)'?$/) ||
+                msg.match(/(?:syntax error|unexpected symbol)[^\n]*?near '([^'\n]+)'/);
+            if (m) {
+                const near = (m[1] || '').trim();
+                if (ja) return near
+                    ? `'${near}' の近くで書き方がおかしいみたい。`
+                    : `書き方がおかしいところがあるみたい。`;
+                return near
+                    ? `Something's written wrong near '${near}'.`
+                    : `Something's written wrong somewhere.`;
+            }
+
+            return null;  // unmatched → no friendly line
+        }
+
+        // Normalized signature for caching: drop file names and line/column
+        // numbers (position noise) but KEEP quoted identifier names, so the same
+        // kind of error reuses one answer regardless of where it happens.
+        function errorSignature(rawLine) {
+            let s = rawLine
+                .replace(/^\S+\s*\(\d+,\s*\d+\)\s*:\s*/, '')  // strip "file (l, c) :"
+                .replace(/:\d+:/g, ':')                        // stray line refs
+                .replace(/\bline \d+/g, 'line')
+                .trim();
+            return friendlyLang() + '|' + s;
+        }
+
+        // Grab the offending source line ±3 for the AI question.
+        // (The CM6 model shim only implements getValue(), not the Monaco
+        // getLineCount/getLineContent pair.)
+        function getCodeContext(loc) {
+            if (!loc || !files.has(loc.file)) return '';
+            const lines = files.get(loc.file).model.getValue().split('\n');
+            const from = Math.max(1, loc.line - 3);
+            const to = Math.min(lines.length, loc.line + 3);
+            return lines.slice(from - 1, to).join('\n');
+        }
+
+        // ---- ask-cost controls (client side) --------------------------------
+        const ASK_CACHE_KEY = 'trusssketch-ask-cache-v1';
+        const ASK_RATE_KEY = 'trusssketch-ask-rate-v1';
+        const ASK_CACHE_MAX = 50;
+        const ASK_DAILY_MAX = 10;
+
+        function askCacheGet(sig) {
+            try {
+                const c = JSON.parse(localStorage.getItem(ASK_CACHE_KEY)) || { order: [], map: {} };
+                if (!(sig in c.map)) return null;
+                // LRU touch: move to front.
+                c.order = [sig].concat(c.order.filter(s => s !== sig));
+                localStorage.setItem(ASK_CACHE_KEY, JSON.stringify(c));
+                return c.map[sig];
+            } catch (e) { return null; }
+        }
+        function askCacheSet(sig, answer) {
+            try {
+                const c = JSON.parse(localStorage.getItem(ASK_CACHE_KEY)) || { order: [], map: {} };
+                c.map[sig] = answer;
+                c.order = [sig].concat(c.order.filter(s => s !== sig));
+                while (c.order.length > ASK_CACHE_MAX) {
+                    const drop = c.order.pop();
+                    delete c.map[drop];
+                }
+                localStorage.setItem(ASK_CACHE_KEY, JSON.stringify(c));
+            } catch (e) { /* storage full/blocked: skip caching */ }
+        }
+        function askRateState() {
+            const today = new Date().toISOString().slice(0, 10);
+            let r;
+            try { r = JSON.parse(localStorage.getItem(ASK_RATE_KEY)); } catch (e) { r = null; }
+            if (!r || r.date !== today) r = { date: today, count: 0 };
+            return r;
+        }
+        function askRateAllowed() { return askRateState().count < ASK_DAILY_MAX; }
+        function askRateConsume() {
+            const r = askRateState();
+            r.count += 1;
+            try { localStorage.setItem(ASK_RATE_KEY, JSON.stringify(r)); } catch (e) {}
+        }
+
+        // Stable per-session conversation id (groups asks server-side).
+        const askConvId = (window.crypto && crypto.randomUUID)
+            ? crypto.randomUUID()
+            : 'sk-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+
+        // Render (or create) an answer block in the console; returns the element
+        // so streaming tokens can update it in place.
+        function renderAnswerBlock(text) {
+            const consoleEl = document.getElementById('console');
+            const el = document.createElement('div');
+            el.className = 'console-line answer';
+            el.textContent = '🧑‍🏫 ' + text;
+            consoleEl.appendChild(el);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+            return el;
+        }
+
+        async function askAboutError(rawLine, loc, btn) {
+            if (!ASK_ENABLED) return;
+            if (btn) btn.disabled = true;
+
+            const sig = errorSignature(rawLine);
+            const cached = askCacheGet(sig);
+            if (cached) { renderAnswerBlock(cached); if (btn) btn.disabled = false; return; }
+
+            if (!askRateAllowed()) {
+                logToConsole(t('askLimit'), 'muted');
+                if (btn) btn.disabled = false;
+                return;
+            }
+
+            const answerEl = renderAnswerBlock(t('askThinking'));
+            const ja = friendlyLang() === 'ja';
+            const errLine = (rawLine.match(/\)\s*:\s*([\s\S]*)$/) || [null, rawLine])[1].trim();
+            const context = getCodeContext(loc);
+            const question = ja
+                ? `TrussSketchでこのエラーが出たよ。意味と直し方を小学生にもわかるように短く教えて。\nエラー: ${errLine}\nコードの該当部分:\n${context}`
+                : `I got this error in TrussSketch. Explain what it means and how to fix it, short and simple enough for a young kid.\nError: ${errLine}\nThe relevant code:\n${context}`;
+
+            try {
+                const r = await fetch(ASK_API + '/chat', {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify({ question: question, history: [], convId: askConvId, page: null, pinned: [] }),
+                });
+                if (!r.ok || !r.body) throw new Error('bad response');
+                const reader = r.body.getReader();
+                const dec = new TextDecoder();
+                let buf = '', acc = '';
+                for (;;) {
+                    const chunk = await reader.read();
+                    if (chunk.done) break;
+                    buf += dec.decode(chunk.value, { stream: true });
+                    let sep;
+                    while ((sep = buf.indexOf('\n\n')) !== -1) {
+                        const block = buf.slice(0, sep); buf = buf.slice(sep + 2);
+                        const ev = (/event: (.+)/.exec(block) || [])[1];
+                        const data = (/data: ([\s\S]+)/.exec(block) || [])[1];
+                        if (!ev || data === undefined) continue;
+                        let payload;
+                        try { payload = JSON.parse(data); } catch (e) { continue; }
+                        if (ev === 'token') { acc += payload; answerEl.textContent = '🧑‍🏫 ' + acc; }
+                        else if (ev === 'replace') { acc = payload; answerEl.textContent = '🧑‍🏫 ' + acc; }
+                        // sources/links/done/error events are ignored here.
+                        document.getElementById('console').scrollTop = document.getElementById('console').scrollHeight;
+                    }
+                }
+                if (!acc.trim()) throw new Error('empty answer');
+                answerEl.textContent = '🧑‍🏫 ' + acc;
+                askCacheSet(sig, acc);
+                askRateConsume();
+            } catch (e) {
+                // Never surface a raw exception to a kid.
+                answerEl.textContent = '🧑‍🏫 ' + t('askFailed');
+            }
+            if (btn) btn.disabled = false;
+        }
+
+        // Log an error-styled console line with an inline "ask AI" button.
+        function logErrorWithAsk(text, rawLine, loc) {
+            const consoleEl = document.getElementById('console');
+            const line = document.createElement('div');
+            line.className = 'console-line error';
+            const span = document.createElement('span');
+            span.textContent = text;
+            line.appendChild(span);
+            if (ASK_ENABLED) {
+                const btn = document.createElement('button');
+                btn.className = 'console-ask-btn';
+                btn.type = 'button';
+                btn.textContent = t('askBtn');
+                btn.onclick = () => askAboutError(rawLine, loc, btn);
+                line.appendChild(btn);
+            }
+            consoleEl.appendChild(line);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        // Turn an engine error report into the "friendly first, raw muted" console
+        // shape. Line markers are still handled separately by showScriptErrors().
+        // Raw `stack traceback:` blocks are suppressed from the console entirely.
+        function displayScriptError(rawError) {
+            const lines = rawError.split('\n');
+            for (const line of lines) {
+                if (/^\s*stack traceback:/.test(line)) break;  // drop traceback tail
+                if (line.trim() === '') continue;
+                const loc = parseErrorLocation(line);
+                if (loc) {
+                    const friendly = friendlyError(line);
+                    if (friendly) {
+                        logErrorWithAsk(loc.file + ' (' + loc.line + ') : ' + friendly, line, loc);
+                        logToConsole(line, 'muted');  // original, de-emphasized
+                    } else {
+                        logErrorWithAsk(line, line, loc);  // no friendly form: raw + ask
+                    }
+                } else {
+                    logToConsole(line, 'muted');  // continuation / unrecognized
+                }
+            }
+        }
+
         function setStatus(message, type = '') {
             const status = document.getElementById('status');
             status.textContent = message;
@@ -1291,7 +1594,7 @@ end
                 const err = Module.ccall('getRuntimeError', 'string', [], []);
                 if (err && err.length > 0 && err !== lastRuntimeError) {
                     lastRuntimeError = err;
-                    logToConsole('Runtime error: ' + err, 'error');
+                    displayScriptError(err);
                     showScriptErrors(err);
                 }
             } catch (e) { /* engine mid-reload; try again next tick */ }
@@ -1329,7 +1632,7 @@ end
                 // Check for script errors
                 const error = Module.ccall('getScriptError', 'string', [], []);
                 if (error && error.length > 0) {
-                    logToConsole('Error: ' + error, 'error');
+                    displayScriptError(error);
                     showScriptErrors(error);
                 } else {
                     if (!quiet) logToConsole('Script loaded successfully!', 'success');

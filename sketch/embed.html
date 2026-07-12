@@ -104,40 +104,16 @@
     <!-- Content -->
     <main class="container" style="max-width: 800px;">
 
-        <!-- Deploy from Saved Project -->
+        <!-- Quick Start (loader flow) -->
         <section class="embed-section">
-            <h2>Deploy Your Sketch</h2>
-            <p>The easiest way to publish your sketch on the web:</p>
-            <ol style="color: var(--color-text-muted); line-height: 2;">
-                <li>Save your project from the <a href="./" style="color: var(--color-primary-light);">Sketch Editor</a> (you'll get a <code>.tcsproj</code> file)</li>
-                <li>Unzip the <code>.tcsproj</code> file — it's a standard ZIP archive</li>
-                <li>Upload the extracted folder to any static hosting (GitHub Pages, Netlify, Vercel, etc.)</li>
-                <li>Open <code>index.html</code> — done!</li>
-            </ol>
-            <p>The extracted folder contains:</p>
-            <div class="embed-code"><span class="comment">myProject/</span>
-├── <span class="string">src/</span>          <span class="comment"># Your .tcs script files</span>
-├── <span class="string">data/</span>         <span class="comment"># Assets (images, sounds) if any</span>
-├── <span class="string">index.html</span>    <span class="comment"># Ready-to-deploy web page</span>
-└── <span class="string">truss-project.json</span>  <span class="comment"># Project manifest (for re-importing into editor)</span></div>
-            <p>The <code>index.html</code> loads the TrussSketch runtime from CDN, so no build step is needed. You can also edit the HTML to customize the page layout.</p>
-        </section>
-
-        <!-- Quick Start -->
-        <section class="embed-section">
-            <h2>Embed in an Existing Page</h2>
-            <p>Want to add a sketch to your own HTML? Include the script and write your sketch code:</p>
+            <h2>Embed in Any Page</h2>
+            <p>Drop a <code>&lt;canvas&gt;</code>, load a pinned loader, and call <code>TrussSketch.mount()</code> with your Lua sketch. Three lines:</p>
             <div class="embed-code">
-<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
-<span class="tag">&lt;script</span> <span class="attr">type</span>=<span class="string">"text/tcs"</span><span class="tag">&gt;</span>
-<span class="keyword">void</span> draw() {
-    clear(<span class="number">0.1</span>);
-    setColor(<span class="number">1</span>, <span class="number">0.5</span>, <span class="number">0.2</span>);
-    drawCircle(getMouseX(), getMouseY(), <span class="number">30</span>);
-}
-<span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"600"</span><span class="tag">&gt;&lt;/canvas&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@0.6.5.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;script&gt;</span> TrussSketch.mount(<span class="string">'#canvas'</span>, luaCode); <span class="tag">&lt;/script&gt;</span>
             </div>
-            <p>That's it! A fullscreen canvas is automatically created as a background layer.</p>
+            <p>The loader boots the engine and runs your sketch on that canvas. <code>mount()</code> returns a Promise that resolves to a controller — see below.</p>
         </section>
 
         <!-- Full Example -->
@@ -149,80 +125,80 @@
 <span class="tag">&lt;html&gt;</span>
 <span class="tag">&lt;head&gt;</span>
     <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
-    <span class="tag">&lt;title&gt;</span>My Site<span class="tag">&lt;/title&gt;</span>
-    <span class="tag">&lt;style&gt;</span>
-        body { margin: <span class="number">0</span>; color: white; font-family: sans-serif; }
-        .content { position: relative; z-index: <span class="number">1</span>; padding: <span class="number">2</span>rem; }
-    <span class="tag">&lt;/style&gt;</span>
+    <span class="tag">&lt;title&gt;</span>My Sketch<span class="tag">&lt;/title&gt;</span>
 <span class="tag">&lt;/head&gt;</span>
 <span class="tag">&lt;body&gt;</span>
-    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"content"</span><span class="tag">&gt;</span>
-        <span class="tag">&lt;h1&gt;</span>Hello World<span class="tag">&lt;/h1&gt;</span>
-        <span class="tag">&lt;p&gt;</span>Your content goes here.<span class="tag">&lt;/p&gt;</span>
-    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"600"</span><span class="tag">&gt;&lt;/canvas&gt;</span>
 
-    <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
-    <span class="tag">&lt;script</span> <span class="attr">type</span>=<span class="string">"text/tcs"</span><span class="tag">&gt;</span>
-<span class="keyword">float</span> t = <span class="number">0</span>;
-
-<span class="keyword">void</span> draw() {
-    t += getDeltaTime();
-    clear(<span class="number">0.05</span>);
-
-    <span class="keyword">float</span> cx = getWindowWidth() / <span class="number">2</span>;
-    <span class="keyword">float</span> cy = getWindowHeight() / <span class="number">2</span>;
-
-    <span class="comment">// Pulsing circles</span>
-    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
-        <span class="keyword">float</span> r = <span class="number">50</span> + i * <span class="number">40</span> + sin(t * <span class="number">2</span>) * <span class="number">20</span>;
-        setColor(<span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.9</span>, <span class="number">0.2</span>);
-        drawCircle(cx, cy, r);
-    }
-}
+    <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@0.6.5.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+    <span class="tag">&lt;script&gt;</span>
+<span class="keyword">const</span> lua = <span class="string">`</span>
+<span class="string">local t = 0</span>
+<span class="string">function update()</span>
+<span class="string">  t = t + getDeltaTime()</span>
+<span class="string">end</span>
+<span class="string">function draw()</span>
+<span class="string">  clear(0.05)</span>
+<span class="string">  local w = getWindowWidth()</span>
+<span class="string">  local h = getWindowHeight()</span>
+<span class="string">  setColor(0.3, 0.5, 0.9)</span>
+<span class="string">  drawCircle(w / 2 + math.cos(t) * 150, h / 2 + math.sin(t) * 150, 40)</span>
+<span class="string">end</span>
+<span class="string">`</span>;
+TrussSketch.mount(<span class="string">'#canvas'</span>, lua);
     <span class="tag">&lt;/script&gt;</span>
 <span class="tag">&lt;/body&gt;</span>
 <span class="tag">&lt;/html&gt;</span>
             </div>
         </section>
 
-        <!-- Custom Canvas -->
+        <!-- Controller / options -->
         <section class="embed-section">
-            <h2>Custom Canvas</h2>
-            <p>Target a specific canvas element instead of fullscreen:</p>
+            <h2>Controller &amp; Options</h2>
+            <p><code>mount(target, code, opts)</code> resolves to a controller you can drive at runtime:</p>
             <div class="embed-code">
-<span class="tag">&lt;canvas</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span> <span class="attr">width</span>=<span class="string">"400"</span> <span class="attr">height</span>=<span class="string">"300"</span><span class="tag">&gt;&lt;/canvas&gt;</span>
+<span class="keyword">const</span> sketch = <span class="keyword">await</span> TrussSketch.mount(<span class="string">'#canvas'</span>, lua, {
+    onError: (msg) =&gt; console.warn(msg),  <span class="comment">// build + runtime errors</span>
+    onReady: ()    =&gt; console.log(<span class="string">'ready'</span>),
+});
 
-<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
-<span class="tag">&lt;script</span> <span class="attr">type</span>=<span class="string">"text/tcs"</span> <span class="attr">data-canvas</span>=<span class="string">"myCanvas"</span><span class="tag">&gt;</span>
-<span class="keyword">void</span> draw() {
-    clear(<span class="number">0.1</span>);
-    drawCircle(<span class="number">200</span>, <span class="number">150</span>, <span class="number">50</span>);
-}
-<span class="tag">&lt;/script&gt;</span>
+sketch.run(newLuaCode);  <span class="comment">// hot-swap the running sketch (returns '' or an error)</span>
+sketch.pause();          <span class="comment">// stop update/draw (saves power)</span>
+sketch.resume();
+sketch.getError();       <span class="comment">// current build/runtime error, or ''</span>
             </div>
+            <p><code>opts</code> also accepts <code>cdnBase</code> (where the engine files are served from), <code>files</code> (a <code>{ "name.lua": "code" }</code> map of extra Lua files loaded before your main <code>code</code>), and <code>autorun</code> (default <code>true</code>).</p>
+            <p><strong>One sketch per page.</strong> The engine is a single global WebAssembly instance, so <code>mount()</code> can be called only once per page load. Use <code>sketch.run()</code> to change the code, not a second <code>mount()</code>.</p>
         </section>
 
-        <!-- External File -->
+        <!-- Version pinning -->
         <section class="embed-section">
-            <h2>External File</h2>
-            <p>Load your sketch from a separate .tcs file:</p>
+            <h2>Version Pinning</h2>
+            <p>Always embed a <strong>pinned</strong> version so your page keeps working when the engine updates:</p>
             <div class="embed-code">
-<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
-<span class="tag">&lt;script</span> <span class="attr">type</span>=<span class="string">"text/tcs"</span> <span class="attr">src</span>=<span class="string">"sketch.tcs"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@0.6.5.js"</span><span class="tag">&gt;&lt;/script&gt;</span>  <span class="comment">// pinned — recommended</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@latest.js"</span><span class="tag">&gt;&lt;/script&gt;</span> <span class="comment">// unstable — testing only</span>
             </div>
-            <p>This keeps your code organized and makes it easier to edit.</p>
+            <p>A pinned loader also pins the engine (<code>.wasm</code>/<code>.data</code>) it loads. The <code>@latest</code> alias exists for quick experiments and can change or break at any time — never use it in production.</p>
         </section>
 
-        <!-- Self Hosting -->
+        <!-- Deploy from Saved Project (secondary) -->
         <section class="embed-section">
-            <h2>Self-Hosting</h2>
-            <p>For version stability, download and host the files yourself:</p>
-            <ul class="file-list">
-                <li><a href="https://cdn.trussc.org/sketch.js" download>sketch.js</a> - Loader script</li>
-                <li><a href="https://cdn.trussc.org/TrussSketch.js" download>TrussSketch.js</a> - Runtime</li>
-                <li><a href="https://cdn.trussc.org/TrussSketch.wasm" download>TrussSketch.wasm</a> - WebAssembly (~3.4MB)</li>
-            </ul>
-            <p>Place them in the same directory and reference your local sketch.js.</p>
+            <h2>Alternative: Deploy a Saved Project</h2>
+            <p>Prefer a ready-made page? Export your project from the editor and host the folder as-is:</p>
+            <ol style="color: var(--color-text-muted); line-height: 2;">
+                <li>Save your project from the <a href="./" style="color: var(--color-primary-light);">Sketch Editor</a> (you'll get a <code>.tcsproj</code> file)</li>
+                <li>Unzip the <code>.tcsproj</code> file — it's a standard ZIP archive</li>
+                <li>Upload the extracted folder to any static hosting (GitHub Pages, Netlify, Vercel, etc.)</li>
+                <li>Open <code>index.html</code> — done!</li>
+            </ol>
+            <p>The extracted folder contains:</p>
+            <div class="embed-code"><span class="comment">myProject/</span>
+├── <span class="string">src/</span>          <span class="comment"># Your Lua script files</span>
+├── <span class="string">data/</span>         <span class="comment"># Assets (images, sounds) if any</span>
+├── <span class="string">index.html</span>    <span class="comment"># Ready-to-deploy web page</span>
+└── <span class="string">truss-project.json</span>  <span class="comment"># Project manifest (for re-importing into editor)</span></div>
+            <p>The <code>index.html</code> loads the TrussSketch runtime from CDN, so no build step is needed. You can also edit the HTML to customize the page layout.</p>
         </section>
 
         <!-- Learn More -->
