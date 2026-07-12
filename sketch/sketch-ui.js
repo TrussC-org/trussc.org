@@ -235,6 +235,9 @@
             if (autoRunTimer) clearTimeout(autoRunTimer);
             autoRunTimer = setTimeout(() => {
                 autoRunTimer = null;
+                // A slider drag already rebuilt via the tcs-number-tweak fast
+                // path; skip the redundant (and console-clearing) rerun.
+                if (Date.now() - lastTweakTime < 600) return;
                 // Pulse effect
                 const runBtn = document.getElementById('runBtn');
                 if (runBtn) {
@@ -251,6 +254,27 @@
             if (!runBtn) return;
             runBtn.classList.toggle('auto-run', autoRunEnabled);
         }
+
+        // Number-tweak slider (cm-editor.js) fires this on every slider-driven
+        // edit. Rebuild on a tight throttle (leading + trailing) so the sketch
+        // tracks the drag instead of waiting out the 500ms auto-run debounce.
+        let lastTweakTime = 0;
+        let tweakLastRunTime = 0;
+        let tweakTrailingTimer = null;
+        document.addEventListener('tcs-number-tweak', () => {
+            lastTweakTime = Date.now();
+            const since = lastTweakTime - tweakLastRunTime;
+            if (since >= 150) {
+                tweakLastRunTime = Date.now();
+                runScript(true);
+            } else if (!tweakTrailingTimer) {
+                tweakTrailingTimer = setTimeout(() => {
+                    tweakTrailingTimer = null;
+                    tweakLastRunTime = Date.now();
+                    runScript(true);  // trailing run: the final value always applies
+                }, 150 - since);
+            }
+        });
 
         function toggleAutoRun() {
             autoRunEnabled = !autoRunEnabled;
@@ -1273,8 +1297,9 @@ end
             } catch (e) { /* engine mid-reload; try again next tick */ }
         }, 500);
 
-        // Run script
-        function runScript() {
+        // Run script. quiet=true (number-tweak drags) skips the console
+        // chatter so rapid rebuilds don't wipe/flood the console panel.
+        function runScript(quiet) {
             if (!editor) {
                 logToConsole('Editor not ready yet!', 'error');
                 return;
@@ -1284,10 +1309,10 @@ end
                 return;
             }
 
-            clearConsole();
+            if (!quiet) clearConsole();
             clearErrorMarkers();
             lastRuntimeError = '';
-            logToConsole('Running script...', 'notice');
+            if (!quiet) logToConsole('Running script...', 'notice');
 
             try {
                 // Resume engine if it was paused
@@ -1307,7 +1332,7 @@ end
                     logToConsole('Error: ' + error, 'error');
                     showScriptErrors(error);
                 } else {
-                    logToConsole('Script loaded successfully!', 'success');
+                    if (!quiet) logToConsole('Script loaded successfully!', 'success');
                     // Set running state
                     document.getElementById('runBtn').classList.add('running');
                     document.getElementById('stopBtn').classList.add('running');

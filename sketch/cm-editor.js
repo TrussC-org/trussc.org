@@ -8,10 +8,11 @@
 //
 // Loaded as an ES module; resolves window.__cmReady once window.monaco is ready.
 
-import { EditorState } from "@codemirror/state";
+import { EditorState, StateField } from "@codemirror/state";
 import {
     EditorView, keymap, lineNumbers, highlightActiveLine,
-    highlightActiveLineGutter, drawSelection, highlightSpecialChars
+    highlightActiveLineGutter, drawSelection, highlightSpecialChars,
+    showTooltip
 } from "@codemirror/view";
 import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
 import {
@@ -89,7 +90,144 @@ const theme = EditorView.theme({
     '.cm-activeLineGutter': { backgroundColor: 'rgba(255,255,255,0.05)' },
     '&.cm-focused .cm-cursor': { borderLeftColor: '#fff' },
     '.cm-tooltip-autocomplete': { backgroundColor: '#252526', border: '1px solid #454545' },
+    '.cm-tooltip.cm-number-tweak': {
+        backgroundColor: '#252526', border: '1px solid #454545',
+        borderRadius: '6px', padding: '6px 10px',
+    },
+    '.cm-number-tweak input[type=range]': {
+        width: '160px', margin: '0', display: 'block',
+        accentColor: '#569cd6', touchAction: 'none',
+    },
 }, { dark: true });
+
+// ---- number tweak: cursor on a number literal -> slider tooltip ---------
+// Touch-friendly live tweaking: tap/click a number, drag the slider that
+// appears above it; each change rewrites the literal and fires a
+// 'tcs-number-tweak' DOM event so the page can hot-reload immediately.
+function numberTokenAt(state) {
+    const sel = state.selection.main;
+    if (!sel.empty) return null;
+    const line = state.doc.lineAt(sel.head);
+    const text = line.text;
+    const cursor = sel.head - line.from;
+    const commentIdx = text.indexOf('--');
+    const re = /\d+\.?\d*(?:[eE][+-]?\d+)?/g;
+    let m;
+    while ((m = re.exec(text)) !== null) {
+        let start = m.index;
+        const end = start + m[0].length;
+        if (start > cursor + 1) break;                   // +1: cursor may sit on a leading '-'
+        if (commentIdx >= 0 && start > commentIdx) break;
+        const prev = start > 0 ? text[start - 1] : '';
+        if (/[A-Za-z_]/.test(prev)) continue;            // hex body / identifier tail
+        if (text[end] === 'x' || text[end] === 'X') continue; // the 0 of 0x...
+        // cheap string check: unbalanced quote before the token
+        const before = text.slice(0, start);
+        if (((before.match(/"/g) || []).length % 2) !== 0) continue;
+        if (((before.match(/'/g) || []).length % 2) !== 0) continue;
+        // ".5"-style decimal: pull the dot in (but not ".." concat)
+        if (prev === '.' && text[start - 2] !== '.' && !/\d/.test(text[start - 2] || '')) start--;
+        // leading '-' is part of the number only when it's a sign, not subtraction
+        if (start > 0 && text[start - 1] === '-' && text[start - 2] !== '-') {
+            let j = start - 2;
+            while (j >= 0 && text[j] === ' ') j--;
+            if (j < 0 || '(=+*/%<>[{,;'.includes(text[j])) start--;
+        }
+        if (cursor < start || cursor > end) continue;    // end-inclusive
+        const raw = text.slice(start, end);
+        return {
+            from: line.from + start, to: line.from + end,
+            value: parseFloat(raw), hasDot: raw.includes('.'),
+        };
+    }
+    return null;
+}
+
+// One stable `create` so CM6 reuses the tooltip DOM across cursor moves and
+// our own slider-driven doc edits (reuse is keyed on create identity).
+function tweakTooltipView(ev) {
+    const dom = document.createElement('div');
+    dom.className = 'cm-number-tweak';
+    const slider = document.createElement('input');
+    slider.type = 'range';
+    dom.appendChild(slider);
+
+    let cur = null;       // { from, to, decimals } — tracked across our edits
+    let dragging = false; // freeze the range while the thumb is held
+
+    function configure(state) {
+        const tok = numberTokenAt(state);
+        if (!tok) return;
+        const v = tok.value;
+        let min, max, step;
+        if (tok.hasDot && v >= 0 && v <= 1) {
+            min = 0; max = 1; step = 0.01;
+        } else if (tok.hasDot) {
+            const span = Math.max(1, Math.abs(v)) * 2;
+            min = v - span; max = v + span; step = span / 100;
+        } else {
+            const span = Math.max(10, Math.abs(v) * 2);
+            min = Math.round(v - span); max = Math.round(v + span); step = 1;
+        }
+        const decimals = step >= 1 ? 0 : Math.min(6, Math.max(2, -Math.floor(Math.log10(step))));
+        cur = { from: tok.from, to: tok.to, decimals };
+        slider.min = String(min);
+        slider.max = String(max);
+        slider.step = String(step);
+        slider.value = String(v);
+    }
+    configure(ev.state);
+
+    slider.addEventListener('pointerdown', () => { dragging = true; });
+    const endDrag = () => {
+        if (!dragging) return;
+        dragging = false;
+        configure(ev.state);  // re-center the range around the final value
+        ev.focus();
+    };
+    slider.addEventListener('pointerup', endDrag);
+    slider.addEventListener('pointercancel', endDrag);
+
+    slider.addEventListener('input', () => {
+        if (!cur) return;
+        const num = parseFloat(slider.value);
+        let text;
+        if (cur.decimals) {
+            text = num.toFixed(cur.decimals).replace(/(\.\d*?)0+$/, '$1');
+            if (text.endsWith('.')) text += '0';
+        } else {
+            text = String(Math.round(num));
+        }
+        ev.dispatch({
+            changes: { from: cur.from, to: cur.to, insert: text },
+            selection: { anchor: cur.from + text.length },
+        });
+        cur.to = cur.from + text.length;
+        ev.dom.dispatchEvent(new CustomEvent('tcs-number-tweak', { bubbles: true }));
+    });
+
+    return {
+        dom,
+        update(u) {
+            // Reconfigure when the cursor lands on a (different) number; never
+            // mid-drag, or the scale would slide under the thumb.
+            if (!dragging && (u.selectionSet || u.docChanged)) configure(u.state);
+        },
+    };
+}
+
+const numberTweakField = StateField.define({
+    create: (state) => {
+        const tok = numberTokenAt(state);
+        return tok ? { pos: tok.from, above: true, strictSide: false, create: tweakTooltipView } : null;
+    },
+    update(value, tr) {
+        if (!tr.docChanged && !tr.selection) return value;
+        const tok = numberTokenAt(tr.state);
+        return tok ? { pos: tok.from, above: true, strictSide: false, create: tweakTooltipView } : null;
+    },
+    provide: (f) => showTooltip.from(f),
+});
 
 // ---- completion: adapt the captured Monaco provider to a CM6 source -----
 function cmCompletionSource(context) {
@@ -136,6 +274,7 @@ function buildExtensions() {
         buildLanguage(),
         syntaxHighlighting(highlightStyle),
         autocompletion({ override: [cmCompletionSource], activateOnTyping: true }),
+        numberTweakField,
         lintGutter(),
         theme,
         EditorState.tabSize.of(4),
@@ -209,6 +348,7 @@ function create(el) {
         state: EditorState.create({ doc: '', extensions: sharedExtensions }),
         parent: el,
     });
+    window.__cmView = view;  // debug/testing hook
     editorApi = {
         setModel,
         focus() { view.focus(); },
