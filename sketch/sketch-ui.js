@@ -224,8 +224,9 @@
         // File panel state
         let filePanelOpen = false;
 
-        // Auto-run mode
-        let autoRunEnabled = false;
+        // Auto-run mode (hot reload) — on by default; the undefined-global lint
+        // + candidate-state build in the engine keep broken edits from applying.
+        let autoRunEnabled = true;
         let autoRunTimer = null;
         const AUTO_RUN_DELAY = 500;  // ms after typing stops
 
@@ -1220,6 +1221,58 @@ end
             }
         }
 
+        // Parse an engine error report (one "file (line, col) : msg" per line),
+        // set markers in the affected files and jump to the first one.
+        function showScriptErrors(error) {
+            const errorLines = error.split('\n');
+            const markersByFile = new Map();
+            for (const line of errorLines) {
+                const loc = parseErrorLocation(line);
+                if (loc) {
+                    if (!markersByFile.has(loc.file)) {
+                        markersByFile.set(loc.file, []);
+                    }
+                    markersByFile.get(loc.file).push({
+                        startLineNumber: loc.line,
+                        startColumn: loc.column,
+                        endLineNumber: loc.line,
+                        endColumn: loc.column + 10,
+                        message: line,
+                        severity: monaco.MarkerSeverity.Error
+                    });
+                }
+            }
+            for (const [file, markers] of markersByFile) {
+                if (files.has(file)) {
+                    monaco.editor.setModelMarkers(files.get(file).model, 'trusssketch', markers);
+                }
+            }
+            // Switch to first error's file
+            if (errorLines.length > 0) {
+                const firstLoc = parseErrorLocation(errorLines[0]);
+                if (firstLoc && files.has(firstLoc.file) && currentFile !== firstLoc.file) {
+                    switchToFile(firstLoc.file);
+                }
+            }
+        }
+
+        // Poll for errors raised inside per-frame callbacks (draw/update/events).
+        // Build errors surface synchronously in runScript; these only exist at
+        // runtime, so without polling they'd be invisible (the old bug where a
+        // nil-value crash in draw() showed nothing at all).
+        let lastRuntimeError = '';
+        setInterval(() => {
+            if (!Module || !Module.ccall || !isRunning()) return;
+            try {
+                const err = Module.ccall('getRuntimeError', 'string', [], []);
+                if (err && err.length > 0 && err !== lastRuntimeError) {
+                    lastRuntimeError = err;
+                    logToConsole('Runtime error: ' + err, 'error');
+                    showScriptErrors(err);
+                }
+            } catch (e) { /* engine mid-reload; try again next tick */ }
+        }, 500);
+
         // Run script
         function runScript() {
             if (!editor) {
@@ -1233,6 +1286,7 @@ end
 
             clearConsole();
             clearErrorMarkers();
+            lastRuntimeError = '';
             logToConsole('Running script...', 'notice');
 
             try {
@@ -1251,38 +1305,7 @@ end
                 const error = Module.ccall('getScriptError', 'string', [], []);
                 if (error && error.length > 0) {
                     logToConsole('Error: ' + error, 'error');
-                    // Parse all errors (one per line) and set markers
-                    const errorLines = error.split('\n');
-                    const markersByFile = new Map();
-                    for (const line of errorLines) {
-                        const loc = parseErrorLocation(line);
-                        if (loc) {
-                            if (!markersByFile.has(loc.file)) {
-                                markersByFile.set(loc.file, []);
-                            }
-                            markersByFile.get(loc.file).push({
-                                startLineNumber: loc.line,
-                                startColumn: loc.column,
-                                endLineNumber: loc.line,
-                                endColumn: loc.column + 10,
-                                message: line,
-                                severity: monaco.MarkerSeverity.Error
-                            });
-                        }
-                    }
-                    // Set markers for each file
-                    for (const [file, markers] of markersByFile) {
-                        if (files.has(file)) {
-                            monaco.editor.setModelMarkers(files.get(file).model, 'trusssketch', markers);
-                        }
-                    }
-                    // Switch to first error's file
-                    if (errorLines.length > 0) {
-                        const firstLoc = parseErrorLocation(errorLines[0]);
-                        if (firstLoc && files.has(firstLoc.file) && currentFile !== firstLoc.file) {
-                            switchToFile(firstLoc.file);
-                        }
-                    }
+                    showScriptErrors(error);
                 } else {
                     logToConsole('Script loaded successfully!', 'success');
                     // Set running state
@@ -1635,6 +1658,7 @@ end
                     runScript();
                 }
             };
+            updateRunButtonState();  // reflect the default auto-run state
         })();
 
         // Keyboard shortcuts (Cmd+Enter / Ctrl+Enter to run) - fallback for when editor not focused
