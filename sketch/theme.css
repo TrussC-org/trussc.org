@@ -1,0 +1,51 @@
+/* theme.css — TrussSketch playground light theme palette (source of truth).
+   Linked from sketch/index.html and sketch/embed.html. Bright, white-based,
+   friendly look aimed at classroom / Chromebook use. All colors live here as
+   CSS variables so the inline styles and the CM6 editor stay in sync. */
+
+:root {
+    /* keep native form controls / scrollbars light, never dark islands */
+    color-scheme: light;
+
+    /* --- core palette (fixed) --- */
+    --ts-bg: #ffffff;
+    --ts-panel: #f6f8fa;
+    --ts-border: #d0d7de;
+    --ts-text: #1f2328;
+    --ts-text-muted: #656d76;
+    --ts-primary: #2f6fed;
+    --ts-link: #0969da;
+    --ts-error: #d1242f;
+    --ts-success: #1a7f37;
+    --ts-notice: #0969da;
+    --ts-warn: #9a6700;
+
+    /* --- derived surfaces --- */
+    --ts-panel-hover: #eef1f4;        /* subtle hover on light panels */
+    --ts-selected-bg: rgba(47, 111, 237, 0.12); /* selected file / active item */
+    --ts-shadow: 0 6px 24px rgba(31, 35, 40, 0.12);
+
+    /* --- editor --- */
+    --ts-editor-bg: #ffffff;
+    --ts-editor-gutter-bg: #f6f8fa;
+    --ts-editor-gutter-text: #8c959f;
+    --ts-editor-active-line: rgba(47, 111, 237, 0.05);
+
+    /* --- buttons / toolbar --- */
+    --ts-btn-bg: #f6f8fa;
+    --ts-btn-border: #d0d7de;
+    --ts-btn-hover-bg: #eef1f4;
+    --ts-icon-idle: #656d76;          /* neutral icon buttons (play/stop idle, fullscreen, record) */
+    --ts-icon-idle-hover: #57606a;
+    --ts-run: #1a7f37;                /* run button (green) */
+    --ts-run-hover: #1f9c43;
+    --ts-stop: #d1242f;               /* stop / record-active (red) */
+    --ts-stop-hover: #e5484d;
+
+    /* --- canvas surround (soft neutral so a white-clearing sketch stays distinct) --- */
+    --ts-canvas-surround: #eef1f4;
+
+    /* --- status bar --- */
+    --ts-ready-bg: #dafbe1;
+    --ts-ready-text: #1a7f37;
+}

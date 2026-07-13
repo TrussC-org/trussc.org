@@ -73,32 +73,44 @@ function buildLanguage() {
     });
 }
 
+// GitHub-light-ish syntax colors (kept in sync with sketch/theme.css palette).
 const highlightStyle = HighlightStyle.define([
-    { tag: tags.keyword, color: '#c586c0' },
-    { tag: tags.typeName, color: '#4ec9b0' },
-    { tag: tags.variableName, color: '#9cdcfe' },
-    { tag: tags.number, color: '#b5cea8' },
-    { tag: tags.string, color: '#ce9178' },
-    { tag: tags.comment, color: '#6a9955', fontStyle: 'italic' },
+    { tag: tags.keyword, color: '#cf222e' },
+    { tag: tags.typeName, color: '#8250df' },
+    { tag: tags.variableName, color: '#1f2328' },
+    { tag: tags.number, color: '#0550ae' },
+    { tag: tags.string, color: '#0a3069' },
+    { tag: tags.comment, color: '#59636e', fontStyle: 'italic' },
 ]);
 
 const theme = EditorView.theme({
-    '&': { height: '100%', backgroundColor: '#1e1e1e', color: '#d4d4d4', fontSize: '14px' },
+    '&': { height: '100%', backgroundColor: '#ffffff', color: '#1f2328', fontSize: '14px' },
     '.cm-scroller': { fontFamily: "'JetBrains Mono','Fira Code',monospace", lineHeight: '1.5', overflow: 'auto' },
-    '.cm-gutters': { backgroundColor: '#1e1e1e', color: '#6a737d', border: 'none' },
-    '.cm-activeLine': { backgroundColor: 'rgba(255,255,255,0.04)' },
-    '.cm-activeLineGutter': { backgroundColor: 'rgba(255,255,255,0.05)' },
-    '&.cm-focused .cm-cursor': { borderLeftColor: '#fff' },
-    '.cm-tooltip-autocomplete': { backgroundColor: '#252526', border: '1px solid #454545' },
+    '.cm-gutters': { backgroundColor: '#f6f8fa', color: '#8c959f', border: 'none' },
+    '.cm-activeLine': { backgroundColor: 'rgba(47,111,237,0.05)' },
+    '.cm-activeLineGutter': { backgroundColor: 'rgba(47,111,237,0.08)' },
+    '&.cm-focused .cm-cursor': { borderLeftColor: '#1f2328' },
+    '.cm-selectionBackground': { backgroundColor: '#d7e3fb' },
+    '&.cm-focused .cm-selectionBackground': { backgroundColor: '#b6d3ff' },
+    '::selection': { backgroundColor: '#b6d3ff' },
+    '.cm-tooltip': { backgroundColor: '#ffffff', color: '#1f2328', border: '1px solid #d0d7de' },
+    '.cm-tooltip-autocomplete': {
+        backgroundColor: '#ffffff', border: '1px solid #d0d7de',
+        boxShadow: '0 6px 24px rgba(31,35,40,0.12)',
+    },
+    '.cm-tooltip-autocomplete ul li[aria-selected]': {
+        backgroundColor: '#2f6fed', color: '#ffffff',
+    },
     '.cm-tooltip.cm-number-tweak': {
-        backgroundColor: '#252526', border: '1px solid #454545',
+        backgroundColor: '#ffffff', border: '1px solid #d0d7de',
         borderRadius: '6px', padding: '6px 10px',
+        boxShadow: '0 6px 24px rgba(31,35,40,0.12)',
     },
     '.cm-number-tweak input[type=range]': {
         width: '160px', margin: '0', display: 'block',
-        accentColor: '#569cd6', touchAction: 'none',
+        accentColor: '#2f6fed', touchAction: 'none',
     },
-}, { dark: true });
+}, { dark: false });
 
 // ---- number tweak: cursor on a number literal -> slider tooltip ---------
 // Touch-friendly live tweaking: tap/click a number, drag the slider that

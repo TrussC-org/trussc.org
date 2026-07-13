@@ -2084,12 +2084,12 @@ end
 
             // Immediately show "Copied!" feedback
             btn.textContent = 'Copied!';
-            btn.style.background = '#2ea043';
+            btn.classList.add('copied');
 
             // Revert after 2 seconds
             setTimeout(() => {
                 btn.textContent = originalText;
-                btn.style.background = '';
+                btn.classList.remove('copied');
             }, 2000);
 
             // Get data (plain text for single file, JSON for multi-file)

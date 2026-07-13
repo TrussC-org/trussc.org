@@ -10,7 +10,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="theme.css">
     <style>
+        /* Light-theme override: remap the site's dark --color-* tokens (from
+           ../style.css) to the TrussSketch light palette so this docs page
+           matches the playground without touching ../style.css. */
+        :root {
+            --color-bg: var(--ts-bg);
+            --color-bg-alt: var(--ts-panel);
+            --color-bg-card: var(--ts-panel);
+            --color-bg-code: var(--ts-panel);
+            --color-text: var(--ts-text);
+            --color-text-muted: var(--ts-text-muted);
+            --color-text-subtle: #8c959f;
+            --color-primary: var(--ts-primary);
+            --color-primary-light: var(--ts-link);
+            --color-primary-dark: var(--ts-primary);
+            --color-accent: var(--ts-notice);
+            --color-accent-alt: var(--ts-primary);
+            --color-border: var(--ts-border);
+            --color-border-light: var(--ts-border);
+            /* Non-prefixed aliases used by this page's inline styles. */
+            --primary: var(--ts-primary);
+            --text-muted: var(--ts-text-muted);
+            --border: var(--ts-border);
+        }
+
+        /* .nav hardcodes a dark translucent bg in ../style.css — lighten it here. */
+        .nav {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
         .embed-hero {
             padding: 6rem 0 3rem;
             text-align: center;
@@ -39,8 +69,8 @@
             margin-bottom: 1rem;
         }
         .embed-code {
-            background: #252526;
-            border: 1px solid var(--border);
+            background: var(--ts-panel);
+            border: 1px solid var(--ts-border);
             border-radius: 8px;
             padding: 1.5rem;
             overflow-x: auto;
@@ -49,14 +79,14 @@
             font-size: 0.9rem;
             line-height: 1.6;
             white-space: pre;
-            color: #d4d4d4;
+            color: var(--ts-text);
         }
-        .embed-code .comment { color: #6a9955; }
-        .embed-code .tag { color: #569cd6; }
-        .embed-code .attr { color: #9cdcfe; }
-        .embed-code .string { color: #ce9178; }
-        .embed-code .keyword { color: #c586c0; }
-        .embed-code .number { color: #b5cea8; }
+        .embed-code .comment { color: #59636e; }
+        .embed-code .tag { color: #116329; }
+        .embed-code .attr { color: #0550ae; }
+        .embed-code .string { color: #0a3069; }
+        .embed-code .keyword { color: #cf222e; }
+        .embed-code .number { color: #0550ae; }
         .file-list {
             list-style: none;
             padding: 0;
@@ -65,7 +95,7 @@
             padding: 0.5rem 0;
         }
         .file-list a {
-            color: var(--primary);
+            color: var(--ts-link);
         }
     </style>
 </head>

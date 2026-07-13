@@ -3,192 +3,514 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrussSketch Quick Reference</title>
+    <title>TrussSketch Reference</title>
     <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!--
+      LIGHT THEME. This page is white-based and self-contained. The shared site
+      /style.css (dark) is intentionally NOT loaded — sketch/theme.css is owned by
+      another agent, so the light palette is embedded inline here as --color-*
+      tokens. The reference inline styles below use those vars, and the shared
+      renderer (/reference/reference.js) is reused UNCHANGED (its var(--color-*, …)
+      fallbacks resolve to these light values).
+    -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* --- Light palette (duplicated inline; see note above) --------------- */
+        :root {
+            --color-bg: #ffffff;
+            --color-bg-alt: #f6f8fa;
+            --color-bg-card: #f6f8fa;
+            --color-bg-code: #f6f8fa;
+
+            --color-text: #1f2328;
+            --color-text-muted: #656d76;
+            --color-text-subtle: #8c959f;
+
+            --color-primary: #2f6fed;
+            --color-primary-light: #0550ae;   /* darker for small uppercase labels on white */
+            --color-primary-dark: #0550ae;
+
+            --color-accent: #0969da;           /* link blue — titles / type names / ret token */
+            --color-accent-alt: #8250df;
+
+            --color-link: #0969da;
+            --color-success: #1a7f37;
+            --color-error: #d1242f;
+
+            --color-border: #d0d7de;
+            --color-border-light: #d8dee4;
+
+            /* code-token colors tuned for a white background */
+            --tok-name: #8250df;               /* function / method names (purple) */
+            --tok-params: #0550ae;             /* parameters (blue) */
+            --tok-const: #116329;              /* constants / numbers (green) */
+            --tok-comment: #1a7f37;            /* // descriptions (green) */
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #1e1e1e;
-            color: #d4d4d4;
+            background: var(--color-bg);
+            color: var(--color-text);
             line-height: 1.6;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        h1 {
-            color: #569cd6;
-            margin-bottom: 10px;
-            font-size: 28px;
+        /* --- Minimal top bar (own, light) ---------------------------------- */
+        .nav {
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            flex: none;
         }
-
-        h1 a {
-            color: #569cd6;
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 10px 20px;
+        }
+        .nav-brand { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+        .nav-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--color-text);
             text-decoration: none;
+            white-space: nowrap;
+        }
+        .nav-title:hover { color: var(--color-primary); }
+        .ref-subtitle {
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .nav-back {
+            color: var(--color-link);
+            text-decoration: none;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .nav-back:hover { text-decoration: underline; }
+
+        /* Main layout: fill the viewport below the nav; children scroll internally. */
+        .main {
+            display: flex;
+            flex: 1;
+            min-height: 0;
         }
 
-        h1 a:hover {
-            text-decoration: underline;
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: var(--color-bg-card);
+            border-right: 1px solid var(--color-border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
-        .subtitle {
-            color: #888;
-            margin-bottom: 30px;
+        .search-box {
+            padding: 10px;
+            border-bottom: 1px solid var(--color-border);
         }
 
-        .subtitle a {
-            color: #4ec9b0;
-        }
-
-        h2 {
-            color: #4ec9b0;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 18px;
-            border-bottom: 1px solid #3c3c3c;
-            padding-bottom: 5px;
-        }
-
-        .section {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .func {
-            background: #252526;
-            padding: 8px 12px;
+        .search-box input {
+            width: 100%;
+            padding: 6px 10px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border-light);
             border-radius: 4px;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            color: var(--color-text);
             font-size: 13px;
+            outline: none;
         }
 
-        .func-name {
-            color: #dcdcaa;
+        .search-box input:focus { border-color: var(--color-primary); }
+        .search-box input::placeholder { color: var(--color-text-muted); }
+
+        .sidebar-list {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
         }
 
-        .func-params {
-            color: #9cdcfe;
-        }
+        .sidebar-list::-webkit-scrollbar { width: 6px; }
+        .sidebar-list::-webkit-scrollbar-thumb { background: var(--color-border-light); border-radius: 3px; }
 
-        .func-desc {
-            color: #6a9955;
+        .sidebar-group-title {
+            padding: 10px 14px 4px;
             font-size: 11px;
-            margin-top: 4px;
+            font-weight: 600;
+            color: var(--color-primary-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
         }
 
-        .constants {
+        .sidebar-group-title:hover { color: var(--color-primary); }
+
+        .sidebar-group-title svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.15s;
+        }
+
+        .sidebar-group.collapsed .sidebar-group-title svg {
+            transform: rotate(-90deg);
+        }
+
+        .sidebar-group.collapsed .sidebar-group-items {
+            display: none;
+        }
+
+        .sidebar-cat-title {
+            padding: 6px 14px 2px 20px;
+            font-size: 10px;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .sidebar-item {
+            padding: 3px 14px 3px 28px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--color-text);
+        }
+
+        .sidebar-item:hover { background: var(--color-bg-alt); }
+        .sidebar-item.active { background: var(--color-primary); color: #fff; }
+
+        .sidebar-item.type-item { color: var(--color-accent); }
+        .sidebar-item.const-item { color: var(--tok-const); }
+
+        .sidebar-item .item-kind {
+            font-size: 9px;
+            color: var(--color-text-muted);
+            margin-left: 6px;
+        }
+
+        /* Detail panel */
+        .detail {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px 40px;
+        }
+
+        .detail::-webkit-scrollbar { width: 8px; }
+        .detail::-webkit-scrollbar-thumb { background: var(--color-border-light); border-radius: 4px; }
+
+        .detail-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--color-text-muted);
+            font-size: 15px;
+        }
+
+        .detail-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            color: var(--color-accent);
+            margin-bottom: 4px;
+        }
+
+        .detail-desc {
+            color: var(--color-text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .detail-section {
+            margin-bottom: 24px;
+        }
+
+        .detail-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-primary-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 10px;
+        }
+
+        .detail-entry {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .detail-entry:last-child { border-bottom: none; }
+
+        .detail-sig {
+            color: var(--color-text);
+        }
+
+        .detail-sig .ret { color: var(--color-accent); }
+        .detail-sig .name { color: var(--tok-name); }
+        .detail-sig .params { color: var(--tok-params); }
+        .detail-sig .type { color: var(--color-accent); }
+        .detail-sig .prop-name { color: var(--tok-params); }
+
+        .detail-entry-desc {
+            color: var(--tok-comment);
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        /* Platform support badges (unused by the sketch data, kept for parity) */
+        .plat-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 6px;
         }
-
-        .const {
-            background: #252526;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 13px;
-            color: #b5cea8;
-        }
-
-        .example {
-            background: #252526;
-            padding: 15px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 13px;
-            overflow-x: auto;
-            white-space: pre;
+        .plat-row.plat-inline { margin: 4px 0 2px; }
+        .plat-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
             line-height: 1.4;
+            padding: 1px 7px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            user-select: none;
+        }
+        .plat-on {
+            color: var(--color-accent);
+            border-color: var(--color-border-light);
+            background: rgba(9,105,218,0.10);
+        }
+        .plat-off {
+            color: var(--color-text-subtle);
+            border-color: var(--color-border);
+            background: transparent;
+            text-decoration: line-through;
+        }
+        .plat-note {
+            color: var(--color-text-muted);
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 6px;
         }
 
-        .keyword { color: #c586c0; }
-        .function { color: #dcdcaa; }
-        .number { color: #b5cea8; }
-        .string { color: #ce9178; }
-        .comment { color: #6a9955; }
+        .detail-overloads {
+            padding-left: 0;
+        }
 
-        @media (max-width: 600px) {
-            .section {
-                grid-template-columns: 1fr;
-            }
+        .detail-overload {
+            color: var(--color-text);
+            padding: 2px 0;
+        }
+
+        /* Overview grid */
+        .overview-section {
+            margin-bottom: 28px;
+        }
+
+        .overview-section-title {
+            color: var(--color-accent);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .overview-cat-title {
+            color: var(--color-primary-light);
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 14px;
+            margin-bottom: 6px;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 6px;
+        }
+
+        .overview-item {
+            background: var(--color-bg-card);
+            padding: 7px 12px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            border: 1px solid var(--color-border);
+            transition: background 0.15s;
+        }
+
+        .overview-item:hover { background: var(--color-bg-alt); }
+
+        .overview-item .ov-ret { color: var(--color-accent); }
+        .overview-item .ov-name { color: var(--tok-name); }
+        .overview-item .ov-params { color: var(--tok-params); }
+        .overview-item .ov-desc { color: var(--color-text-muted); font-size: 11px; display: block; margin-top: 2px; }
+
+        .overview-item.ov-type .ov-name { color: var(--color-accent); }
+        .overview-item.ov-type .ov-desc { color: var(--color-text-muted); display: block; margin-top: 2px; }
+
+        .overview-item.ov-const .ov-name { color: var(--tok-const); }
+        .ov-val { color: var(--color-text-muted); margin-left: 4px; }
+
+        .detail-back {
+            color: var(--color-primary-light);
+            font-size: 13px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .detail-back:hover { text-decoration: underline; }
+
+        /* Tooltip */
+        .tooltip {
+            position: fixed;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(31,35,40,0.15);
+            display: none;
+        }
+
+        .tooltip .tt-ret { color: var(--color-accent); }
+        .tooltip .tt-name { color: var(--tok-name); }
+        .tooltip .tt-params { color: var(--tok-params); }
+        .tooltip .tt-desc { color: var(--tok-comment); display: block; font-size: 11px; margin-top: 2px; }
+
+        /* Color palette */
+        .color-chip {
+            display: inline-block;
+            width: 14px; height: 14px;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.15);
+            vertical-align: middle;
+            flex: none;
+        }
+        .sidebar-item .color-chip { width: 11px; height: 11px; margin-right: 7px; }
+        .color-group { margin-bottom: 12px; }
+        .color-group-title {
+            font-size: 13px; font-weight: 600; color: var(--color-primary-light);
+            cursor: pointer; user-select: none;
+            display: flex; align-items: center; gap: 6px;
+            padding: 8px 0; border-bottom: 1px solid var(--color-border); margin-bottom: 12px;
+        }
+        .color-group-title:hover { color: var(--color-primary); }
+        .color-group-title svg { width: 12px; height: 12px; transition: transform 0.15s; }
+        .color-group.collapsed .color-group-title svg { transform: rotate(-90deg); }
+        .color-group.collapsed .color-grid { display: none; }
+        .color-group-count { color: var(--color-text-muted); font-weight: 400; font-size: 11px; }
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 6px;
+        }
+        .color-swatch {
+            display: flex; align-items: center; gap: 8px;
+            background: var(--color-bg-card); padding: 6px 10px; border-radius: 4px;
+            border: 1px solid var(--color-border);
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+        }
+        .color-swatch .color-chip { width: 34px; height: 17px; }
+        .color-swatch .color-name { color: var(--color-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .color-swatch .color-hex { color: var(--color-text-muted); font-size: 10px; margin-left: auto; }
+        .color-swatch-hl { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+        .overview-item .color-preview { display: inline-flex; gap: 3px; margin-left: 8px; vertical-align: middle; }
+
+        /* Deprecated markers in the overview grid (unused by sketch data, kept for parity) */
+        .overview-item.ov-deprecated .ov-name { text-decoration: line-through; opacity: 0.7; }
+        .ov-depr-tag { color: #9a6700; font-size: 10px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main { flex-direction: column; }
+            .sidebar { width: 100%; min-width: auto; height: 40vh; border-right: none; border-bottom: 1px solid var(--color-border); }
+            .detail { padding: 20px; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1><a href="../">TrussSketch</a> Quick Reference</h1>
-    <p class="subtitle">All functions mapped from <a href="https://github.com/TrussC-org/TrussC">TrussC</a></p>
+    <!-- Minimal light header. #subtitle is filled in by reference.js. -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/sketch/" class="nav-title">TrussSketch Reference</a>
+                <span class="ref-subtitle" id="subtitle">Lua API Reference</span>
+            </div>
+            <a href="/sketch/" class="nav-back">← Back to TrussSketch</a>
+        </div>
+    </nav>
 
-    <div id="content"></div>
+    <div class="main">
+        <div class="sidebar">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Search functions, types..." autofocus>
+            </div>
+            <div class="sidebar-list" id="sidebar-list"></div>
+        </div>
+        <div class="detail" id="detail"></div>
+        <div class="tooltip" id="tooltip"></div>
+    </div>
 
-    <h2>Example</h2>
-    <div class="example"><span class="keyword">float</span> angle = <span class="number">0</span>;
-
-<span class="keyword">void</span> <span class="function">draw</span>() {
-    angle += <span class="function">getDeltaTime</span>();
-    <span class="function">clear</span>(<span class="number">0.1</span>);
-    <span class="function">pushMatrix</span>();
-    <span class="function">translate</span>(<span class="function">getWindowWidth</span>() / <span class="number">2</span>, <span class="function">getWindowHeight</span>() / <span class="number">2</span>);
-    <span class="function">rotate</span>(angle);
-    <span class="function">setColor</span>(<span class="number">1</span>, <span class="number">0.5</span>, <span class="number">0.2</span>);
-    <span class="function">drawRect</span>(-<span class="number">50</span>, -<span class="number">50</span>, <span class="number">100</span>, <span class="number">100</span>);
-    <span class="function">popMatrix</span>();
-}</div>
-
-    <h2>Embed</h2>
-    <p style="color: #888; margin-bottom: 15px;">
-        Add TrussSketch to any website with just two lines of code.
-        <a href="../embed.html" style="color: #4ec9b0;">See embed guide →</a>
-    </p>
-
-    <script src="../../generated/trusssketch-api.js"></script>
+    <!-- Lua-flavored data (global `TrussCAPI`, same schema as trussc-api.js). -->
+    <script src="/generated/trusssketch-ref.js"></script>
     <script>
-        function renderReference() {
-            const content = document.getElementById('content');
-            let html = '';
-
-            // Render categories
-            for (const cat of TrussSketchAPI.categories) {
-                html += `<h2>${cat.name}</h2>\n<div class="section">\n`;
-
-                // Group by unique function name (for overloads)
-                const seen = new Set();
-                for (const fn of cat.functions) {
-                    const key = fn.name + '(' + fn.params + ')';
-                    if (seen.has(key)) continue;
-                    seen.add(key);
-
-                    const params = fn.params ? `<span class="func-params">${fn.params}</span>` : '';
-                    html += `<div class="func"><span class="func-name">${fn.name}</span>(${params})`;
-                    if (fn.desc) {
-                        html += `<div class="func-desc">${fn.desc}</div>`;
-                    }
-                    html += `</div>\n`;
-                }
-
-                html += `</div>\n`;
-            }
-
-            // Render constants
-            html += `<h2>Constants</h2>\n<div class="constants">\n`;
-            for (const c of TrussSketchAPI.constants) {
-                html += `<div class="const">${c.name} = ${c.value}</div>\n`;
-            }
-            html += `</div>\n`;
-
-            content.innerHTML = html;
-        }
-
-        renderReference();
+        window.REF_LANG = 'en';
+        window.REF_UI = {
+            subtitle: 'Lua API Reference',
+            groupFunctions: 'Functions',
+            groupTypes: 'Types',
+            groupEnums: 'Enums',
+            groupConstants: 'Constants',
+            searchPlaceholder: 'Search functions, types...',
+            backToOverview: '← Back to overview',
+            signatures: 'Signatures',
+            constructor: 'Constructor',
+            properties: 'Properties',
+            methods: 'Methods',
+            staticMethods: 'Static Methods',
+            operators: 'Operators',
+            deprecated: 'Deprecated',
+            deprecatedUse: 'Use',
+            colors: 'Colors',
+            colorsDesc: 'Named color constants. Values are 0–1 float RGBA; hex is the 0–255 form.',
+            category: 'Category',
+            related: 'Related',
+            examples: 'Examples',
+            platforms: 'Platforms',
+            values: 'Values',
+            value: 'Value',
+            constantValue: 'Constant value',
+            noResults: 'No results'
+        };
     </script>
+    <!-- The renderer is reused UNCHANGED (absolute path — not copied here). -->
+    <script src="/reference/reference.js"></script>
 </body>
 </html>

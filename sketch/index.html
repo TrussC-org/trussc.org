@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrussSketch - TrussC Playground</title>
     <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="theme.css">
     <style>
         * {
             margin: 0;
@@ -14,30 +15,30 @@
 
         body {
             font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            background: #1e1e1e;
-            color: #d4d4d4;
+            background: var(--ts-bg);
+            color: var(--ts-text);
             height: 100vh;
             overflow: hidden;
         }
 
         .header {
-            background: #252526;
+            background: var(--ts-panel);
             padding: 8px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #3c3c3c;
+            border-bottom: 1px solid var(--ts-border);
             height: 48px;
         }
 
         .header h1 {
             font-size: 16px;
             font-weight: 500;
-            color: #cccccc;
+            color: var(--ts-text);
         }
 
         .header h1 span {
-            color: #569cd6;
+            color: var(--ts-primary);
         }
 
         .controls {
@@ -84,36 +85,36 @@
 
         /* Stopped state (default) */
         .btn-play {
-            background: #6e7681;
+            background: var(--ts-icon-idle);
         }
 
         .btn-play:hover {
-            background: #848d97;
+            background: var(--ts-icon-idle-hover);
         }
 
         .btn-stop-icon {
-            background: #9e4a4a;
+            background: var(--ts-stop);
         }
 
         .btn-stop-icon:hover {
-            background: #b35a5a;
+            background: var(--ts-stop-hover);
         }
 
         /* Running state */
         .btn-play.running {
-            background: #2ea043;
+            background: var(--ts-run);
         }
 
         .btn-play.running:hover {
-            background: #3fb950;
+            background: var(--ts-run-hover);
         }
 
         .btn-stop-icon.running {
-            background: #6e7681;
+            background: var(--ts-icon-idle);
         }
 
         .btn-stop-icon.running:hover {
-            background: #848d97;
+            background: var(--ts-icon-idle-hover);
         }
 
         /* Auto-run mode */
@@ -148,27 +149,27 @@
         }
 
         .btn-fullscreen {
-            background: #6e7681;
+            background: var(--ts-icon-idle);
         }
 
         .btn-fullscreen:hover {
-            background: #848d97;
+            background: var(--ts-icon-idle-hover);
         }
 
         .btn-record {
-            background: #6e7681;
+            background: var(--ts-icon-idle);
         }
 
         .btn-record:hover {
-            background: #848d97;
+            background: var(--ts-icon-idle-hover);
         }
 
         .btn-record svg {
-            fill: #ccc;
+            fill: white;
         }
 
         .btn-record.recording {
-            background: #dc3545;
+            background: var(--ts-stop);
             animation: pulse-record 1s infinite;
         }
 
@@ -177,7 +178,7 @@
         }
 
         .btn-record.recording:hover {
-            background: #e35d6a;
+            background: var(--ts-stop-hover);
         }
 
         @keyframes pulse-record {
@@ -188,18 +189,25 @@
         /* Text buttons (save, load, share, help) */
         .btn {
             padding: 6px 12px;
-            border: none;
+            border: 1px solid var(--ts-btn-border);
             border-radius: 4px;
             font-size: 12px;
             cursor: pointer;
             font-family: inherit;
             transition: background 0.2s;
-            background: #3c3c3c;
-            color: #cccccc;
+            background: var(--ts-btn-bg);
+            color: var(--ts-text);
         }
 
         .btn:hover {
-            background: #4a4a4a;
+            background: var(--ts-btn-hover-bg);
+        }
+
+        /* Transient "Copied!" feedback on the Share button (set from sketch-ui.js). */
+        .btn.copied {
+            background: var(--ts-success);
+            border-color: var(--ts-success);
+            color: #fff;
         }
 
         .btn-help {
@@ -222,8 +230,8 @@
         /* File tabs */
         .file-tabs {
             display: flex;
-            background: #252526;
-            border-bottom: 1px solid #3c3c3c;
+            background: var(--ts-panel);
+            border-bottom: 1px solid var(--ts-border);
             height: 32px;
             align-items: flex-end;
             overflow-x: auto;
@@ -235,21 +243,21 @@
         }
 
         .file-tabs::-webkit-scrollbar-thumb {
-            background: #3c3c3c;
+            background: var(--ts-border);
         }
 
         .file-tab {
             display: flex;
             align-items: center;
             padding: 6px 12px;
-            background: #2d2d2d;
-            border: 1px solid #3c3c3c;
+            background: var(--ts-panel-hover);
+            border: 1px solid var(--ts-border);
             border-bottom: none;
             border-radius: 4px 4px 0 0;
             margin-left: 4px;
             cursor: pointer;
             font-size: 12px;
-            color: #888;
+            color: var(--ts-text-muted);
             white-space: nowrap;
             transition: background 0.15s;
         }
@@ -259,13 +267,13 @@
         }
 
         .file-tab:hover {
-            background: #3c3c3c;
+            background: var(--ts-panel);
         }
 
         .file-tab.active {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            border-bottom: 1px solid #1e1e1e;
+            background: var(--ts-bg);
+            color: var(--ts-text);
+            border-bottom: 1px solid var(--ts-bg);
             margin-bottom: -1px;
         }
 
@@ -274,7 +282,7 @@
         }
 
         .file-tab.drag-over {
-            border-left: 2px solid #58a6ff;
+            border-left: 2px solid var(--ts-primary);
             padding-left: 6px;
         }
 
@@ -298,7 +306,7 @@
 
         .file-tab-close:hover {
             opacity: 1;
-            background: #5a5a5a;
+            background: var(--ts-border);
         }
 
         .file-tab-close svg {
@@ -316,13 +324,13 @@
             margin-left: 4px;
             border-radius: 4px;
             cursor: pointer;
-            color: #888;
+            color: var(--ts-text-muted);
             transition: background 0.15s, color 0.15s;
         }
 
         .file-tab-add:hover {
-            background: #3c3c3c;
-            color: #d4d4d4;
+            background: var(--ts-panel-hover);
+            color: var(--ts-text);
         }
 
         .file-tab-add svg {
@@ -336,8 +344,8 @@
             width: 200px;
             min-width: 200px;
             flex-shrink: 0;
-            background: #252526;
-            border-right: 1px solid #3c3c3c;
+            background: var(--ts-panel);
+            border-right: 1px solid var(--ts-border);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
@@ -356,8 +364,8 @@
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            color: #888;
-            border-bottom: 1px solid #3c3c3c;
+            color: var(--ts-text-muted);
+            border-bottom: 1px solid var(--ts-border);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -370,7 +378,7 @@
         .file-panel-section-header {
             padding: 4px 12px;
             font-size: 11px;
-            color: #888;
+            color: var(--ts-text-muted);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -378,7 +386,7 @@
         }
 
         .file-panel-section-header:hover {
-            background: #2a2a2a;
+            background: var(--ts-panel-hover);
         }
 
         .file-panel-section-header svg {
@@ -403,15 +411,15 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            color: #ccc;
+            color: var(--ts-text);
         }
 
         .file-panel-item:hover {
-            background: #2a2d2e;
+            background: var(--ts-panel-hover);
         }
 
         .file-panel-item.active {
-            background: #094771;
+            background: var(--ts-selected-bg);
         }
 
         .file-panel-item-icon {
@@ -429,7 +437,7 @@
         .file-panel-item-size {
             margin-left: auto;
             font-size: 10px;
-            color: #666;
+            color: var(--ts-text-muted);
         }
 
         .file-panel-item-delete {
@@ -448,7 +456,7 @@
 
         .file-panel-item-delete:hover {
             opacity: 1 !important;
-            background: #5a5a5a;
+            background: var(--ts-border);
         }
 
         .file-panel-item-delete svg {
@@ -460,32 +468,33 @@
         .file-panel-drop-zone {
             margin: 8px;
             padding: 16px;
-            border: 2px dashed #3c3c3c;
+            border: 2px dashed var(--ts-border);
             border-radius: 4px;
             text-align: center;
             font-size: 11px;
-            color: #666;
+            color: var(--ts-text-muted);
             cursor: pointer;
             transition: border-color 0.2s, background 0.2s;
         }
 
         .file-panel-drop-zone:hover {
-            border-color: #007acc;
-            background: rgba(0, 122, 204, 0.1);
+            border-color: var(--ts-primary);
+            background: rgba(47, 111, 237, 0.08);
         }
 
         .file-panel-drop-zone.drag-over {
-            border-color: #007acc;
-            background: rgba(0, 122, 204, 0.2);
+            border-color: var(--ts-primary);
+            background: rgba(47, 111, 237, 0.16);
         }
 
         .btn-files {
-            background: #3c3c3c;
             padding: 6px 10px;
         }
 
         .btn-files.active {
-            background: #007acc;
+            background: var(--ts-primary);
+            border-color: var(--ts-primary);
+            color: #fff;
         }
 
         #editor {
@@ -501,7 +510,7 @@
             width: 50%;
             display: flex;
             flex-direction: column;
-            background: #1a1a1a;
+            background: var(--ts-canvas-surround);
         }
 
         .canvas-container {
@@ -522,8 +531,9 @@
 
         .console {
             height: 240px;
-            background: #1e1e1e;
-            border-top: 1px solid #3c3c3c;
+            background: var(--ts-panel);
+            color: var(--ts-text);
+            border-top: 1px solid var(--ts-border);
             overflow-y: auto;
             padding: 8px;
             font-size: 12px;
@@ -531,26 +541,26 @@
 
         .resizer {
             width: 6px;
-            background: #3c3c3c;
+            background: var(--ts-border);
             cursor: col-resize;
             transition: background 0.2s;
         }
 
         .resizer:hover,
         .resizer.active {
-            background: #007acc;
+            background: var(--ts-primary);
         }
 
         .resizer-h {
             height: 6px;
-            background: #3c3c3c;
+            background: var(--ts-border);
             cursor: row-resize;
             transition: background 0.2s;
         }
 
         .resizer-h:hover,
         .resizer-h.active {
-            background: #007acc;
+            background: var(--ts-primary);
         }
 
         .console-line {
@@ -560,37 +570,40 @@
         }
 
         .console-line.error {
-            color: #f14c4c;
+            color: var(--ts-error);
         }
 
         .console-line.notice {
-            color: #3794ff;
+            color: var(--ts-notice);
         }
 
         .console-line.success {
-            color: #89d185;
+            color: var(--ts-success);
         }
 
         /* Kid-friendly errors: the muted original sits under the friendly line. */
         .console-line.muted {
-            color: #8b8b93;
+            color: var(--ts-text-muted);
         }
 
-        /* AI "ask" answer block: indented, calm info tone. */
+        /* AI "ask" answer block: indented on white, calm info tone with a subtle border. */
         .console-line.answer {
-            color: #9cb8d4;
-            padding-left: 14px;
-            margin-left: 4px;
-            border-left: 2px solid #3c3c3c;
+            color: var(--ts-text);
+            background: var(--ts-bg);
+            padding: 8px 12px;
+            margin: 4px 0 4px 4px;
+            border: 1px solid var(--ts-border);
+            border-left: 3px solid var(--ts-primary);
+            border-radius: 6px;
             white-space: pre-wrap;
         }
 
         .console-ask-btn {
             margin-left: 8px;
-            background: rgba(120, 160, 255, 0.12);
-            border: 1px solid #3c3c3c;
+            background: rgba(47, 111, 237, 0.10);
+            border: 1px solid var(--ts-border);
             border-radius: 10px;
-            color: #9cdcfe;
+            color: var(--ts-link);
             cursor: pointer;
             font-size: 11px;
             line-height: 1.4;
@@ -600,7 +613,7 @@
         }
 
         .console-ask-btn:hover {
-            background: rgba(120, 160, 255, 0.25);
+            background: rgba(47, 111, 237, 0.18);
         }
 
         .console-ask-btn:disabled {
@@ -610,18 +623,18 @@
 
         .status {
             padding: 4px 16px;
-            background: #007acc;
+            background: var(--ts-primary);
             color: white;
             font-size: 12px;
         }
 
         .status.error {
-            background: #f14c4c;
+            background: var(--ts-error);
         }
 
         .status.ready {
-            background: #89d185;
-            color: #1e1e1e;
+            background: var(--ts-ready-bg);
+            color: var(--ts-ready-text);
         }
 
         .loading {
@@ -629,12 +642,12 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            color: #888;
+            color: var(--ts-text-muted);
         }
 
         .loading-spinner {
-            border: 3px solid #3c3c3c;
-            border-top: 3px solid #007acc;
+            border: 3px solid var(--ts-border);
+            border-top: 3px solid var(--ts-primary);
             border-radius: 50%;
             width: 40px;
             height: 40px;
