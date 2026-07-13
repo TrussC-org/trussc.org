@@ -157,7 +157,7 @@
                 copy: 'コピー',
                 assetWarning: 'ちょっと待って！このプロジェクトにはアセット（画像など）があるけど、URLには含められないんだ。\n\nコードだけシェアするけどOK？',
                 shareText: 'TrussSketchで作ったよ ✨',
-                askBtn: 'せんせいに聞く',
+                askBtn: 'AIに聞く',
                 askThinking: '先生AIに聞いてるよ…',
                 askLimit: '今日はここまで。エラーメッセージをよく読んでみよう',
                 askFailed: 'いま先生AIにつながらないみたい。ちょっとしてからまた試してね',
