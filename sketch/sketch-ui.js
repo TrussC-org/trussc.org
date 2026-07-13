@@ -204,8 +204,8 @@
             }
         };
 
-        function getLang() {
-            const lang = navigator.language || 'en';
+        // Map one BCP47 tag to a UI language we support, or null.
+        function matchLang(lang) {
             if (lang.startsWith('ja')) return 'ja';
             if (lang.startsWith('ko')) return 'ko';
             if (lang.startsWith('es')) return 'es';
@@ -214,6 +214,21 @@
             if (lang === 'zh-TW' || lang === 'zh-HK' || lang === 'zh-MO' || lang === 'zh-Hant') return 'zh-Hant';
             // Simplified Chinese: China, Singapore
             if (lang.startsWith('zh')) return 'zh-Hans';
+            if (lang.startsWith('en')) return 'en';
+            return null;
+        }
+
+        // Walk the browser's full preference list (Accept-Language semantics),
+        // not just navigator.language: on ChromeOS the UI can be Japanese while
+        // the top preferred language is English — the first SUPPORTED entry is
+        // what the user actually wants.
+        function getLang() {
+            const prefs = (navigator.languages && navigator.languages.length)
+                ? navigator.languages : [navigator.language || 'en'];
+            for (const lang of prefs) {
+                const hit = matchLang(lang);
+                if (hit) return hit;
+            }
             return 'en';
         }
 
