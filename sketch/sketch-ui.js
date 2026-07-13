@@ -1434,14 +1434,15 @@ end
             const errLine = (rawLine.match(/\)\s*:\s*([\s\S]*)$/) || [null, rawLine])[1].trim();
             const context = getCodeContext(loc);
             const question = ja
-                ? `TrussSketchでこのエラーが出たよ。意味と直し方を小学生にもわかるように短く教えて。\nエラー: ${errLine}\nコードの該当部分:\n${context}`
-                : `I got this error in TrussSketch. Explain what it means and how to fix it, short and simple enough for a young kid.\nError: ${errLine}\nThe relevant code:\n${context}`;
+                ? `TrussSketch（プログラミング言語はLua）でこのエラーが出たよ。意味と直し方を小学生にもわかるように短く日本語で教えて。\nエラー: ${errLine}\nコードの該当部分:\n${context}`
+                : `I got this error in TrussSketch (the language is Lua). Explain what it means and how to fix it, short and simple enough for a young kid, in English.\nError: ${errLine}\nThe relevant code:\n${context}`;
 
             try {
                 const r = await fetch(ASK_API + '/chat', {
                     method: 'POST',
                     headers: { 'content-type': 'application/json' },
-                    body: JSON.stringify({ question: question, history: [], convId: askConvId, page: null, pinned: [] }),
+                    // page:'sketch' switches the server into Lua answer mode (rag.mjs SKETCH_MODE)
+                    body: JSON.stringify({ question: question, history: [], convId: askConvId, page: 'sketch', pinned: [] }),
                 });
                 if (!r.ok || !r.body) throw new Error('bad response');
                 const reader = r.body.getReader();
