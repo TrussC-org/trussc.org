@@ -13,6 +13,9 @@
     'use strict';
 
     const LANG = window.REF_LANG || 'en';
+    // Scope separator for qualified names (enum values etc.): the Lua-flavored
+    // dataset (sketch/reference, lang:'lua') accesses them with '.', C++ with '::'.
+    const SCOPE_SEP = (typeof TrussCAPI !== 'undefined' && TrussCAPI.lang === 'lua') ? '.' : '::';
 
     // Collapse localized variants (desc_ja / name_ko / ...) onto the base field for
     // the active language, in place. en (or a missing variant) keeps the base value.
@@ -733,7 +736,7 @@
         for (const v of e.values || []) {
             const val = (v.value !== undefined && v.value !== null) ? ` <span class="ov-val">= ${esc(String(v.value))}</span>` : '';
             html += `<div class="detail-entry">`;
-            html += `<div class="detail-sig"><span class="name" style="color:var(--color-accent,#4ec9b0);">${esc(e.name)}::${esc(v.name)}</span>${val}</div>`;
+            html += `<div class="detail-sig"><span class="name" style="color:var(--color-accent,#4ec9b0);">${esc(e.name)}${SCOPE_SEP}${esc(v.name)}</span>${val}</div>`;
             if (v.desc) html += `<div class="detail-entry-desc">// ${esc(v.desc)}</div>`;
             html += `</div>`;
         }

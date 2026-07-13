@@ -195,10 +195,16 @@
         }
 
         .sidebar-item:hover { background: var(--color-bg-alt); }
-        .sidebar-item.active { background: var(--color-primary); color: #fff; }
 
         .sidebar-item.type-item { color: var(--color-accent); }
         .sidebar-item.const-item { color: var(--tok-const); }
+
+        /* .active must come AFTER type-item/const-item: same specificity, and
+           their per-kind colors would otherwise override the white text on
+           the selected (primary-blue) row. */
+        .sidebar-item.active,
+        .sidebar-item.type-item.active,
+        .sidebar-item.const-item.active { background: var(--color-primary); color: #fff; }
 
         .sidebar-item .item-kind {
             font-size: 9px;

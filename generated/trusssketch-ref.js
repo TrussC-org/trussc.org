@@ -8,7 +8,7 @@
 
 const TrussCAPI = {
     "version": "v0.6.4 (Lua)",
-    "lang": "all",
+    "lang": "lua",
     "categories": [
         {
             "name": "Tasks",
