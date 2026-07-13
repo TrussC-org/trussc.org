@@ -8107,7 +8107,7 @@ const TrussCAPI = {
                     "params": "path, settings",
                     "params_typed": "const std::string & path, const VideoRecordSettings & settings = {}",
                     "return_type": "bool",
-                    "desc": "Start recording the window to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
                     "keywords": [
                         "record",
                         "video",
@@ -8115,8 +8115,8 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウを動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）",
-                    "desc_ko": "윈도우를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한)",
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)",
                     "related": [
                         "VideoRecordSettings",
                         "stopRecording",
@@ -8138,7 +8138,7 @@ const TrussCAPI = {
                     "params": "path, durationSec",
                     "params_typed": "const std::string & path, float durationSec",
                     "return_type": "bool",
-                    "desc": "Start recording the window to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
                     "keywords": [
                         "record",
                         "video",
@@ -8146,8 +8146,70 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウを動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）",
-                    "desc_ko": "윈도우를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한)",
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)",
+                    "related": [
+                        "VideoRecordSettings",
+                        "stopRecording",
+                        "isRecording",
+                        "saveScreenshot"
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "android",
+                        "ios"
+                    ],
+                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter stub returns false).",
+                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter スタブが false）。"
+                },
+                {
+                    "name": "startRecording",
+                    "params": "fbo, path, settings",
+                    "params_typed": "const Fbo & fbo, const std::string & path, const VideoRecordSettings & settings = {}",
+                    "return_type": "bool",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
+                    "keywords": [
+                        "record",
+                        "video",
+                        "capture",
+                        "movie",
+                        "mp4"
+                    ],
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)",
+                    "related": [
+                        "VideoRecordSettings",
+                        "stopRecording",
+                        "isRecording",
+                        "saveScreenshot"
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "android",
+                        "ios"
+                    ],
+                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter stub returns false).",
+                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter スタブが false）。"
+                },
+                {
+                    "name": "startRecording",
+                    "params": "fbo, path, durationSec",
+                    "params_typed": "const Fbo & fbo, const std::string & path, float durationSec",
+                    "return_type": "bool",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
+                    "keywords": [
+                        "record",
+                        "video",
+                        "capture",
+                        "movie",
+                        "mp4"
+                    ],
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)",
                     "related": [
                         "VideoRecordSettings",
                         "stopRecording",
@@ -19827,6 +19889,13 @@ const TrussCAPI = {
                     "desc": "VSync present interval: 1 = on (default), 0 = off, N = every Nth refresh",
                     "desc_ja": "VSync の present 間隔: 1 = on (デフォルト)、0 = off、N = N回ごとのリフレッシュ",
                     "desc_ko": "VSync present 간격: 1 = on (기본값), 0 = off, N = N번째 리프레시마다"
+                },
+                {
+                    "name": "uniformBufferReserve",
+                    "type": "int",
+                    "desc": "Per-frame GPU uniform buffer reservation in bytes; 0 = backend default (4MB). Overflow silently corrupts frames in release builds on Metal/WebGPU/Vulkan",
+                    "desc_ja": "フレームあたりの GPU ユニフォームバッファの予約量 (バイト); 0 = バックエンド既定 (4MB)。Metal/WebGPU/Vulkan でオーバーフローすると Release ビルドでフレームが静かに壊れる",
+                    "desc_ko": "프레임당 GPU 유니폼 버퍼 예약량 (바이트); 0 = 백엔드 기본값 (4MB). Metal/WebGPU/Vulkan에서 오버플로하면 릴리스 빌드에서 프레임이 조용히 손상됨"
                 }
             ],
             "methods": [
@@ -19901,6 +19970,14 @@ const TrussCAPI = {
                         "int interval"
                     ],
                     "desc": "Set VSync present interval: 1 = on, 0 = off, N = every Nth refresh (chainable)"
+                },
+                {
+                    "name": "reserveUniformBuffer",
+                    "return": "WindowSettings &",
+                    "signatures": [
+                        "int bytes"
+                    ],
+                    "desc": "Reserve the per-frame GPU uniform buffer in bytes, vector::reserve style; 0 = backend default 4MB ≈ 8k draw calls. Metal/WebGPU/Vulkan only — GL/D3D11 have no such cap (chainable)"
                 }
             ]
         },
@@ -23312,6 +23389,14 @@ const TrussCAPI = {
             },
             "methods": [
                 {
+                    "name": "lifetimeToken",
+                    "return": "std::shared_ptr<void>",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Lifetime token for observers holding a raw pointer to this Fbo (e.g. ScreenRecorder auto-stops when the recorded Fbo dies). Per-object: it does not transfer on move"
+                },
+                {
                     "name": "allocate",
                     "return": "void",
                     "signatures": [
@@ -23720,7 +23805,7 @@ const TrussCAPI = {
         },
         {
             "name": "GrabberFrame",
-            "desc": "One captured camera frame with its capture-time timestamp: RGBA pixels, width/height, and timestampUs (monotonic steady_clock microseconds, stamped on the capture thread). Returned by VideoGrabber::getBufferFrames(). Pixels and timestamp travel together so there is no race between reading the pixels and reading the time",
+            "desc": "One captured camera frame with its capture-time timestamp: Pixels (RGBA8) plus timestampUs (monotonic steady_clock microseconds, stamped on the capture thread). Returned by VideoGrabber::getQueuedFrames(). Pixels and timestamp travel together so there is no race between reading the pixels and reading the time",
             "keywords": [
                 "webcam",
                 "camera",
@@ -23729,34 +23814,20 @@ const TrussCAPI = {
                 "queue",
                 "measurement"
             ],
-            "desc_ja": "キャプチャ時刻付きのカメラ1フレーム。RGBAピクセル・width/height・timestampUs（monotonicなsteady_clockのマイクロ秒。キャプチャスレッドで打刻）を持つ。VideoGrabber::getBufferFrames() が返す。ピクセルと時刻が一体なので「ピクセル取得と時刻取得の間に次フレームが割り込む」競合が起きない。カメラを計測/測定に使うときの基本単位",
-            "desc_ko": "캡처 시각이 붙은 카메라 1프레임. RGBA 픽셀, width/height, timestampUs(단조 steady_clock 마이크로초, 캡처 스레드에서 기록)를 가짐. VideoGrabber::getBufferFrames()가 반환. 픽셀과 시각이 한 구조체로 오므로 둘을 따로 읽는 사이에 다음 프레임이 끼어드는 경쟁이 없음",
+            "desc_ja": "キャプチャ時刻付きのカメラ1フレーム。Pixels（RGBA8）と timestampUs（monotonicなsteady_clockのマイクロ秒。キャプチャスレッドで打刻）を持つ。VideoGrabber::getQueuedFrames() が返す。ピクセルと時刻が一体なので「ピクセル取得と時刻取得の間に次フレームが割り込む」競合が起きない。カメラを計測/測定に使うときの基本単位",
+            "desc_ko": "캡처 시각이 붙은 카메라 1프레임. Pixels(RGBA8)와 timestampUs(단조 steady_clock 마이크로초, 캡처 스레드에서 기록)를 가짐. VideoGrabber::getQueuedFrames()가 반환. 픽셀과 시각이 한 구조체로 오므로 둘을 따로 읽는 사이에 다음 프레임이 끼어드는 경쟁이 없음",
             "related": [
                 "VideoGrabber",
-                "VideoGrabber::getBufferFrames",
+                "VideoGrabber::getQueuedFrames",
                 "VideoGrabber::setFrameQueueSize"
             ],
             "properties": [
                 {
                     "name": "pixels",
-                    "type": "std::vector<unsigned char>",
-                    "desc": "RGBA8 pixel data (width * height * 4 bytes)",
-                    "desc_ja": "RGBA8 のピクセルデータ（width * height * 4 バイト）",
-                    "desc_ko": "RGBA8 픽셀 데이터 (width * height * 4 바이트)"
-                },
-                {
-                    "name": "width",
-                    "type": "int",
-                    "desc": "Frame width in pixels",
-                    "desc_ja": "フレームの幅（ピクセル）",
-                    "desc_ko": "프레임 너비(픽셀)"
-                },
-                {
-                    "name": "height",
-                    "type": "int",
-                    "desc": "Frame height in pixels",
-                    "desc_ja": "フレームの高さ（ピクセル）",
-                    "desc_ko": "프레임 높이(픽셀)"
+                    "type": "Pixels",
+                    "desc": "The frame as RGBA8 Pixels (carries its own width/height). Pixels is move-only - use clone() if you need a copy",
+                    "desc_ja": "フレーム本体（RGBA8 の Pixels。width/height は Pixels が持つ）。Pixels はムーブ専用なので、コピーが要る時は clone() を使う",
+                    "desc_ko": "프레임 본체(RGBA8 Pixels, width/height는 Pixels가 가짐). Pixels는 이동 전용이므로 복사가 필요하면 clone() 사용"
                 },
                 {
                     "name": "timestampUs",
@@ -23967,7 +24038,7 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "getBufferFrames",
+                    "name": "getQueuedFrames",
                     "return": "size_t",
                     "signatures": [
                         "std::vector<GrabberFrame> & out"
@@ -24131,6 +24202,14 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Return true if a new frame was decoded since the last update."
+                },
+                {
+                    "name": "isReady",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True while the texture holds a real picture — i.e. drawing shows actual video, not black. With the default auto poster this is true from load() on; false only if the poster failed and no frame has arrived yet"
                 },
                 {
                     "name": "isDone",
@@ -24465,6 +24544,30 @@ const TrussCAPI = {
                     "desc": "Update the video frame. Call once per frame in update()"
                 },
                 {
+                    "name": "play",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Start or resume playback. With the auto poster (default), a seek made while stopped/paused is bridged with the exact frame at the new position before playback, so it never starts on a stale picture"
+                },
+                {
+                    "name": "setAutoPoster",
+                    "return": "void",
+                    "signatures": [
+                        "bool on"
+                    ],
+                    "desc": "Auto poster (default ON): on load/stop/play the player synchronously puts the frame at the current position on the texture, so drawing never shows black or a stale picture. Turn off to skip the one-time synchronous decode"
+                },
+                {
+                    "name": "getAutoPoster",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return whether the auto poster is enabled (default true)"
+                },
+                {
                     "name": "draw",
                     "return": "void",
                     "signatures": [
@@ -24680,8 +24783,10 @@ const TrussCAPI = {
                     "name": "extractFrame",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, Pixels & outPixels, float timeSec = 1.0, float * outDuration = nullptr",
-                        "Pixels & outPixels, float timeSec = 1.0, float * outDuration = nullptr"
+                        "const std::string & path, Pixels & outPixels, float timeSec, float * outDuration = nullptr",
+                        "Pixels & outPixels, float timeSec, float * outDuration = nullptr",
+                        "const std::string & path, Image & outImage, float timeSec, float * outDuration = nullptr",
+                        "Image & outImage, float timeSec, float * outDuration = nullptr"
                     ],
                     "desc": "Extract the exact frame at a given time from a video file. Frame-accurate on every platform",
                     "platformNote": "Implemented on macOS (AVAssetImageGenerator), Windows (Media Foundation / IMFSourceReader), and Linux (FFmpeg). Android stubs it (`return false`); iOS and web have no extractFramePlatform() definition and are unsupported.",
@@ -24691,8 +24796,10 @@ const TrussCAPI = {
                     "name": "extractKeyFrame",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, Pixels & outPixels, float timeSec = 1.0, float * outDuration = nullptr",
-                        "Pixels & outPixels, float timeSec = 1.0, float * outDuration = nullptr"
+                        "const std::string & path, Pixels & outPixels, float timeSec, float * outDuration = nullptr",
+                        "Pixels & outPixels, float timeSec, float * outDuration = nullptr",
+                        "const std::string & path, Image & outImage, float timeSec, float * outDuration = nullptr",
+                        "Image & outImage, float timeSec, float * outDuration = nullptr"
                     ],
                     "desc": "Extract the nearest keyframe at or before a given time. Faster than extractFrame but time-approximate",
                     "platformNote": "Implemented on macOS (AVAssetImageGenerator), Windows (Media Foundation / IMFSourceReader), and Linux (FFmpeg). Android stubs it (`return false`); iOS and web are unsupported.",
@@ -24892,7 +24999,10 @@ const TrussCAPI = {
                     "signatures": [
                         "int & strideOut"
                     ],
-                    "desc": "Lock and return the encoder's frame buffer for zero-copy fills; strideOut receives the row stride. Pair with submitFrame"
+                    "desc": "Lock and return the encoder's frame buffer for zero-copy fills; strideOut receives the row stride. Pair with submitFrame",
+                    "platforms": [
+                        "macos"
+                    ]
                 },
                 {
                     "name": "submitFrame",
@@ -24900,7 +25010,10 @@ const TrussCAPI = {
                     "signatures": [
                         "double timeSec"
                     ],
-                    "desc": "Append the previously locked frame at the given presentation time (seconds)"
+                    "desc": "Append the previously locked frame at the given presentation time (seconds)",
+                    "platforms": [
+                        "macos"
+                    ]
                 }
             ]
         },
@@ -24945,7 +25058,7 @@ const TrussCAPI = {
                         "const std::string & path, float durationSec",
                         "const Fbo & fbo, const std::string & path, float durationSec"
                     ],
-                    "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically"
+                    "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically"
                 },
                 {
                     "name": "stop",
