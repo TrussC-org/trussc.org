@@ -2559,23 +2559,6 @@ const TrussSketchAPI = {
   {
    "name": "AudioEngine",
    "desc": "Singleton miniaudio-based mixer engine. Owns the output device, mixes all playing Sound voices, exposes real-time audioOut / audioIn / audioDeviceChanged events, and an FFT analysis ring buffer. Access via AudioEngine::getInstance(); most apps drive it indirectly through the Sound class and the global initAudio() / shutdownAudio() helpers.",
-   "properties": [
-    {
-     "name": "audioOut",
-     "type": "Event<AudioOutBuffer>",
-     "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
-    },
-    {
-     "name": "audioIn",
-     "type": "Event<AudioInBuffer>",
-     "desc": "Real-time capture callback event (microphone input). listen() to add an input-processing listener. Fires per audio buffer on the audio thread; keep RT-safe."
-    },
-    {
-     "name": "audioDeviceChanged",
-     "type": "Event<AudioDeviceChangedArgs>",
-     "desc": "Fires after every successful init() (initial AND re-init). Args carry the resolved device's real name, isDefaultDevice flag, sampleRate, channels, bufferSize, maxPolyphony. Listener runs on the thread that called init() (main), not the audio thread."
-    }
-   ],
    "methods": [
     {
      "name": "init",
@@ -2590,40 +2573,22 @@ const TrussSketchAPI = {
      "desc": "Stop and close the audio device."
     },
     {
-     "name": "getSampleRate",
-     "snippet": "getSampleRate()",
-     "return": "int",
-     "desc": "Current engine output sample rate (Hz). Returns the default (48000) before init()."
-    },
-    {
-     "name": "getChannels",
-     "snippet": "getChannels()",
-     "return": "int",
-     "desc": "Current engine output channel count."
-    },
-    {
-     "name": "getMaxPolyphony",
-     "snippet": "getMaxPolyphony()",
-     "return": "int",
-     "desc": "Maximum number of simultaneously-playing Sound voices."
-    },
-    {
-     "name": "getBufferSize",
-     "snippet": "getBufferSize()",
-     "return": "int",
-     "desc": "Current device buffer size in frames (0 = miniaudio default)."
-    },
-    {
-     "name": "isInitialized",
-     "snippet": "isInitialized()",
-     "return": "bool",
-     "desc": "True after a successful init()."
+     "name": "getAnalysisBuffer",
+     "snippet": "getAnalysisBuffer()",
+     "return": "",
+     "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096. Returns the number of samples written. (Global wrapper: getAudioAnalysisBuffer.)"
     },
     {
      "name": "play",
      "snippet": "play(${1:source})",
      "return": "std::shared_ptr<PlayingSound>",
      "desc": "Start a new mixer voice for the given source (eager SoundBuffer or streaming SoundStream) and return its live PlayingSound handle. Usually called indirectly via Sound::play()."
+    },
+    {
+     "name": "mixAudio",
+     "snippet": "mixAudio()",
+     "return": "",
+     "desc": "Audio output callback: mix all playing sounds into the buffer (internal, called from the audio thread)."
     }
    ],
    "static_methods": [
@@ -2632,12 +2597,6 @@ const TrussSketchAPI = {
      "snippet": "getInstance()",
      "return": "AudioEngine &",
      "desc": "Get the global AudioEngine singleton."
-    },
-    {
-     "name": "listDevices",
-     "snippet": "listDevices()",
-     "return": "std::vector<AudioDeviceInfo>",
-     "desc": "Enumerate available playback devices (name + isDefault). Empty if unsupported on the platform."
     }
    ]
   },
@@ -4928,8 +4887,8 @@ const TrussSketchAPI = {
      "desc": "Apply camera transform (start 3D mode)"
     },
     {
-     "name": "end",
-     "snippet": "end()",
+     "name": "end_cam",
+     "snippet": "end_cam()",
      "return": "void",
      "desc": "Restore previous transform (end 3D mode)"
     },
@@ -4976,54 +4935,6 @@ const TrussSketchAPI = {
      "desc": "Get distance from target"
     },
     {
-     "name": "setAzimuth",
-     "snippet": "setAzimuth(${1:radians})",
-     "return": "void",
-     "desc": "Set orbit azimuth (horizontal angle, radians)"
-    },
-    {
-     "name": "setElevation",
-     "snippet": "setElevation(${1:radians})",
-     "return": "void",
-     "desc": "Set orbit elevation (vertical angle, radians; clamped to ~±80°)"
-    },
-    {
-     "name": "getElevation",
-     "snippet": "getElevation()",
-     "return": "float",
-     "desc": "Get orbit elevation (vertical angle, radians)"
-    },
-    {
-     "name": "getAzimuth",
-     "snippet": "getAzimuth()",
-     "return": "float",
-     "desc": "Get orbit azimuth (horizontal angle, radians)"
-    },
-    {
-     "name": "enableOrtho",
-     "snippet": "enableOrtho()",
-     "return": "void",
-     "desc": "Enable orthographic projection"
-    },
-    {
-     "name": "disableOrtho",
-     "snippet": "disableOrtho()",
-     "return": "void",
-     "desc": "Disable orthographic projection (use perspective)"
-    },
-    {
-     "name": "setOrtho",
-     "snippet": "setOrtho(${1:ortho})",
-     "return": "void",
-     "desc": "Set orthographic projection on/off"
-    },
-    {
-     "name": "getOrtho",
-     "snippet": "getOrtho()",
-     "return": "bool",
-     "desc": "Get whether orthographic projection is enabled"
-    },
-    {
      "name": "setFov",
      "snippet": "setFov(${1:fov})",
      "return": "void",
@@ -5034,6 +4945,12 @@ const TrussSketchAPI = {
      "snippet": "getFov()",
      "return": "float",
      "desc": "Get field of view in radians"
+    },
+    {
+     "name": "getPosition",
+     "snippet": "getPosition()",
+     "return": "Vec3",
+     "desc": "Get camera position"
     },
     {
      "name": "setFovDeg",
@@ -5070,42 +4987,6 @@ const TrussSketchAPI = {
      "snippet": "setPanSensitivity(${1:s})",
      "return": "void",
      "desc": "Set pan sensitivity"
-    },
-    {
-     "name": "setOrbitButton",
-     "snippet": "setOrbitButton(${1:button})",
-     "return": "EasyCam &",
-     "desc": "Set the mouse button that orbits the camera (default: left)"
-    },
-    {
-     "name": "getOrbitButton",
-     "snippet": "getOrbitButton()",
-     "return": "int",
-     "desc": "Get the mouse button that orbits the camera"
-    },
-    {
-     "name": "setPanButton",
-     "snippet": "setPanButton(${1:button})",
-     "return": "EasyCam &",
-     "desc": "Set the mouse button that pans the camera (default: middle)"
-    },
-    {
-     "name": "getPanButton",
-     "snippet": "getPanButton()",
-     "return": "int",
-     "desc": "Get the mouse button that pans the camera"
-    },
-    {
-     "name": "setDragModifier",
-     "snippet": "setDragModifier(${1:m})",
-     "return": "EasyCam &",
-     "desc": "Set the modifier key required for camera mouse input (default: None)"
-    },
-    {
-     "name": "getDragModifier",
-     "snippet": "getDragModifier()",
-     "return": "Modifier",
-     "desc": "Get the modifier key required for camera mouse input"
     },
     {
      "name": "setControlArea",
@@ -5160,24 +5041,6 @@ const TrussSketchAPI = {
      "snippet": "mouseScrolled(${1:dx}, ${2:dy})",
      "return": "void",
      "desc": "Handle mouse scroll event (for zoom)"
-    },
-    {
-     "name": "getPosition",
-     "snippet": "getPosition()",
-     "return": "Vec3",
-     "desc": "Get camera position"
-    },
-    {
-     "name": "getOrientation",
-     "snippet": "getOrientation()",
-     "return": "Quaternion",
-     "desc": "Get the camera orientation quaternion"
-    },
-    {
-     "name": "setOrientation",
-     "snippet": "setOrientation(${1:q})",
-     "return": "void",
-     "desc": "Set the camera orientation quaternion"
     }
    ]
   },
@@ -5232,12 +5095,6 @@ const TrussSketchAPI = {
    },
    "methods": [
     {
-     "name": "lifetimeToken",
-     "snippet": "lifetimeToken()",
-     "return": "std::shared_ptr<void>",
-     "desc": "Lifetime token for observers holding a raw pointer to this Fbo (e.g. ScreenRecorder auto-stops when the recorded Fbo dies). Per-object: it does not transfer on move"
-    },
-    {
      "name": "allocate",
      "snippet": "allocate(${1:w}, ${2:h})",
      "return": "void",
@@ -5262,10 +5119,22 @@ const TrussSketchAPI = {
      "desc": "Clear the FBO with a solid color"
     },
     {
-     "name": "end",
-     "snippet": "end()",
+     "name": "end_fbo",
+     "snippet": "end_fbo()",
      "return": "void",
      "desc": "End rendering to FBO"
+    },
+    {
+     "name": "readPixels",
+     "snippet": "readPixels()",
+     "return": "",
+     "desc": "Read FBO contents into a CPU buffer (8-bit per channel)"
+    },
+    {
+     "name": "readPixelsFloat",
+     "snippet": "readPixelsFloat()",
+     "return": "",
+     "desc": "Read FBO contents into a CPU buffer (32-bit float per channel)"
     },
     {
      "name": "copyTo",
@@ -5316,16 +5185,16 @@ const TrussSketchAPI = {
      "desc": "Get FBO texture"
     },
     {
-     "name": "draw",
-     "snippet": "draw(${1:x}, ${2:y})",
-     "return": "void",
-     "desc": "Draw FBO contents"
-    },
-    {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "bool",
      "desc": "Save FBO contents to file"
+    },
+    {
+     "name": "draw",
+     "snippet": "draw(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Draw FBO contents"
     },
     {
      "name": "getColorImage",
@@ -6048,6 +5917,12 @@ const TrussSketchAPI = {
      "desc": "Save image to file"
     },
     {
+     "name": "loadFromMemory",
+     "snippet": "loadFromMemory()",
+     "return": "",
+     "desc": "Load image from memory. `mipmaps=true` builds a mip chain."
+    },
+    {
      "name": "allocate",
      "snippet": "allocate(${1:width}, ${2:height})",
      "return": "void",
@@ -6058,6 +5933,12 @@ const TrussSketchAPI = {
      "snippet": "clear()",
      "return": "void",
      "desc": "Release image resources"
+    },
+    {
+     "name": "draw",
+     "snippet": "draw()",
+     "return": "",
+     "desc": ""
     },
     {
      "name": "isAllocated",
@@ -6106,42 +5987,6 @@ const TrussSketchAPI = {
      "snippet": "setColor(${1:x}, ${2:y}, ${3:c})",
      "return": "void",
      "desc": "Set pixel color at position (marks image as dirty)"
-    },
-    {
-     "name": "halve",
-     "snippet": "halve()",
-     "return": "void",
-     "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8."
-    },
-    {
-     "name": "resize",
-     "snippet": "resize(${1:newW}, ${2:newH})",
-     "return": "void",
-     "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8. Use FBO sampling for fast paths."
-    },
-    {
-     "name": "crop",
-     "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})",
-     "return": "void",
-     "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge."
-    },
-    {
-     "name": "mirror",
-     "snippet": "mirror(${1:horizontal}, ${2:vertical})",
-     "return": "void",
-     "desc": "Flip the image. `horizontal=true` mirrors left-right; `vertical=true` mirrors top-bottom; both true is 180°."
-    },
-    {
-     "name": "mirrorH",
-     "snippet": "mirrorH()",
-     "return": "void",
-     "desc": "Mirror horizontally (alias for mirror(true, false))"
-    },
-    {
-     "name": "mirrorV",
-     "snippet": "mirrorV()",
-     "return": "void",
-     "desc": "Mirror vertically (alias for mirror(false, true))"
     },
     {
      "name": "update",
@@ -6541,6 +6386,12 @@ const TrussSketchAPI = {
      "desc": "Get spot light outer cone cosine"
     },
     {
+     "name": "setProjectionTexture",
+     "snippet": "setProjectionTexture()",
+     "return": "",
+     "desc": "Set texture for projector-style light (gobo)"
+    },
+    {
      "name": "getProjectionTexture",
      "snippet": "getProjectionTexture()",
      "return": "const Texture *",
@@ -6587,6 +6438,12 @@ const TrussSketchAPI = {
      "snippet": "computeProjectorViewProj()",
      "return": "Mat4",
      "desc": "Build the projector's view-projection matrix from spot params and lens shift"
+    },
+    {
+     "name": "setIesProfile",
+     "snippet": "setIesProfile()",
+     "return": "",
+     "desc": "Attach IES photometric profile for angular intensity"
     },
     {
      "name": "getIesProfile",
@@ -6661,22 +6518,10 @@ const TrussSketchAPI = {
      "desc": "Set ambient light color"
     },
     {
-     "name": "getAmbient",
-     "snippet": "getAmbient()",
-     "return": "const Color &",
-     "desc": "Get ambient light color"
-    },
-    {
      "name": "setDiffuse",
      "snippet": "setDiffuse(${1:c})",
      "return": "void",
      "desc": "Set diffuse (main) light color"
-    },
-    {
-     "name": "getDiffuse",
-     "snippet": "getDiffuse()",
-     "return": "const Color &",
-     "desc": "Get diffuse (main) light color"
     },
     {
      "name": "setSpecular",
@@ -6685,22 +6530,34 @@ const TrussSketchAPI = {
      "desc": "Set specular light color"
     },
     {
+     "name": "getAmbient",
+     "snippet": "getAmbient()",
+     "return": "const Color &",
+     "desc": "Get ambient light color"
+    },
+    {
+     "name": "getDiffuse",
+     "snippet": "getDiffuse()",
+     "return": "const Color &",
+     "desc": "Get diffuse (main) light color"
+    },
+    {
      "name": "getSpecular",
      "snippet": "getSpecular()",
      "return": "const Color &",
      "desc": "Get specular light color"
     },
     {
-     "name": "setIntensity",
-     "snippet": "setIntensity(${1:i})",
-     "return": "void",
-     "desc": "Set light intensity multiplier"
-    },
-    {
      "name": "getIntensity",
      "snippet": "getIntensity()",
      "return": "float",
      "desc": "Get light intensity"
+    },
+    {
+     "name": "setIntensity",
+     "snippet": "setIntensity(${1:i})",
+     "return": "void",
+     "desc": "Set light intensity multiplier"
     },
     {
      "name": "setAttenuation",
@@ -6959,16 +6816,22 @@ const TrussSketchAPI = {
      "desc": "Access the element at (row, col)"
     },
     {
-     "name": "transposed",
-     "snippet": "transposed()",
-     "return": "Mat3",
-     "desc": "Return the transpose of this matrix"
+     "name": "set",
+     "snippet": "set(${1:row}, ${2:col})",
+     "return": "float &",
+     "desc": "Access the element at (row, col)"
     },
     {
      "name": "determinant",
      "snippet": "determinant()",
      "return": "float",
      "desc": "Compute the determinant"
+    },
+    {
+     "name": "transposed",
+     "snippet": "transposed()",
+     "return": "Mat3",
+     "desc": "Return the transpose of this matrix"
     },
     {
      "name": "inverted",
@@ -6983,6 +6846,12 @@ const TrussSketchAPI = {
      "snippet": "identity()",
      "return": "Mat3",
      "desc": "Return the identity matrix"
+    },
+    {
+     "name": "getHomography",
+     "snippet": "getHomography()",
+     "return": "",
+     "desc": "Compute the homography matrix mapping 4 source points to 4 destination points (solves H * src = dst)"
     },
     {
      "name": "translate",
@@ -7014,6 +6883,12 @@ const TrussSketchAPI = {
     {
      "name": "at",
      "snippet": "at(${1:row}, ${2:col})",
+     "return": "float &",
+     "desc": "Access the element at (row, col)"
+    },
+    {
+     "name": "set",
+     "snippet": "set(${1:row}, ${2:col})",
      "return": "float &",
      "desc": "Access the element at (row, col)"
     },
@@ -7113,16 +6988,16 @@ const TrussSketchAPI = {
    },
    "methods": [
     {
-     "name": "setBaseColor",
-     "snippet": "setBaseColor(${1:c})",
-     "return": "Material &",
-     "desc": "Set base color (albedo)"
-    },
-    {
      "name": "getBaseColor",
      "snippet": "getBaseColor()",
      "return": "const Color &",
      "desc": "Get base color (albedo)"
+    },
+    {
+     "name": "setBaseColor",
+     "snippet": "setBaseColor(${1:c})",
+     "return": "Material &",
+     "desc": "Set base color (albedo)"
     },
     {
      "name": "setMetallic",
@@ -7161,16 +7036,10 @@ const TrussSketchAPI = {
      "desc": "Get ambient occlusion factor"
     },
     {
-     "name": "setEmissive",
-     "snippet": "setEmissive(${1:c})",
-     "return": "Material &",
-     "desc": "Set emissive color"
-    },
-    {
-     "name": "getEmissive",
-     "snippet": "getEmissive()",
-     "return": "const Color &",
-     "desc": "Get emissive color"
+     "name": "getEmissiveStrength",
+     "snippet": "getEmissiveStrength()",
+     "return": "float",
+     "desc": "Get emissive strength multiplier"
     },
     {
      "name": "setEmissiveStrength",
@@ -7179,10 +7048,22 @@ const TrussSketchAPI = {
      "desc": "Set emissive strength multiplier"
     },
     {
-     "name": "getEmissiveStrength",
-     "snippet": "getEmissiveStrength()",
-     "return": "float",
-     "desc": "Get emissive strength multiplier"
+     "name": "getEmissive",
+     "snippet": "getEmissive()",
+     "return": "const Color &",
+     "desc": "Get emissive color"
+    },
+    {
+     "name": "setEmissive",
+     "snippet": "setEmissive(${1:c})",
+     "return": "Material &",
+     "desc": "Set emissive color"
+    },
+    {
+     "name": "setNormalMap",
+     "snippet": "setNormalMap()",
+     "return": "",
+     "desc": "Set normal map texture for bump mapping"
     },
     {
      "name": "getNormalMap",
@@ -7197,6 +7078,12 @@ const TrussSketchAPI = {
      "desc": "Check if a normal map is set"
     },
     {
+     "name": "setBaseColorTexture",
+     "snippet": "setBaseColorTexture()",
+     "return": "",
+     "desc": "Set base color (albedo) texture map"
+    },
+    {
      "name": "getBaseColorTexture",
      "snippet": "getBaseColorTexture()",
      "return": "const Texture *",
@@ -7207,6 +7094,12 @@ const TrussSketchAPI = {
      "snippet": "hasBaseColorTexture()",
      "return": "bool",
      "desc": "Check if a base color texture is set"
+    },
+    {
+     "name": "setMetallicRoughnessTexture",
+     "snippet": "setMetallicRoughnessTexture()",
+     "return": "",
+     "desc": "Set metallic-roughness texture (glTF: G=roughness, B=metallic)"
     },
     {
      "name": "getMetallicRoughnessTexture",
@@ -7221,6 +7114,12 @@ const TrussSketchAPI = {
      "desc": "Check if a metallic-roughness texture is set"
     },
     {
+     "name": "setEmissiveTexture",
+     "snippet": "setEmissiveTexture()",
+     "return": "",
+     "desc": "Set emissive texture map"
+    },
+    {
      "name": "getEmissiveTexture",
      "snippet": "getEmissiveTexture()",
      "return": "const Texture *",
@@ -7231,6 +7130,12 @@ const TrussSketchAPI = {
      "snippet": "hasEmissiveTexture()",
      "return": "bool",
      "desc": "Check if an emissive texture is set"
+    },
+    {
+     "name": "setOcclusionTexture",
+     "snippet": "setOcclusionTexture()",
+     "return": "",
+     "desc": "Set occlusion texture map"
     },
     {
      "name": "getOcclusionTexture",
@@ -7715,6 +7620,12 @@ const TrussSketchAPI = {
      "desc": "Stop capture and close the microphone device."
     },
     {
+     "name": "getBuffer",
+     "snippet": "getBuffer()",
+     "return": "",
+     "desc": "Copy the latest captured samples into outBuffer. numSamples is capped at the ring buffer size (4096). Returns the number of samples written."
+    },
+    {
      "name": "isRunning",
      "snippet": "isRunning()",
      "return": "bool",
@@ -7725,6 +7636,12 @@ const TrussSketchAPI = {
      "snippet": "getSampleRate()",
      "return": "int",
      "desc": "Sample rate the microphone was opened at."
+    },
+    {
+     "name": "onAudioData",
+     "snippet": "onAudioData()",
+     "return": "",
+     "desc": "Mic input callback: receive captured input samples (internal, called from the audio thread)."
     }
    ]
   },
@@ -8937,16 +8854,28 @@ const TrussSketchAPI = {
      "desc": "Set pixel color at position"
     },
     {
+     "name": "setFromPixels",
+     "snippet": "setFromPixels()",
+     "return": "",
+     "desc": "Copy from external pixel data"
+    },
+    {
+     "name": "setFromFloats",
+     "snippet": "setFromFloats()",
+     "return": "",
+     "desc": "Fill the buffer from a float array (allocates as needed)"
+    },
+    {
+     "name": "copyTo",
+     "snippet": "copyTo()",
+     "return": "",
+     "desc": "Copy to external buffer"
+    },
+    {
      "name": "clone",
      "snippet": "clone()",
      "return": "Pixels",
      "desc": "Return a deep copy of the pixel buffer"
-    },
-    {
-     "name": "load",
-     "snippet": "load(${1:path})",
-     "return": "bool",
-     "desc": "Load image from file"
     },
     {
      "name": "loadHDR",
@@ -8961,46 +8890,22 @@ const TrussSketchAPI = {
      "desc": "Load an image using the platform image decoder"
     },
     {
+     "name": "loadFromMemory",
+     "snippet": "loadFromMemory()",
+     "return": "",
+     "desc": "Load image from memory"
+    },
+    {
+     "name": "load",
+     "snippet": "load(${1:path})",
+     "return": "bool",
+     "desc": "Load image from file"
+    },
+    {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "bool",
      "desc": "Save image to file"
-    },
-    {
-     "name": "halve",
-     "snippet": "halve()",
-     "return": "void",
-     "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8."
-    },
-    {
-     "name": "resize",
-     "snippet": "resize(${1:newW}, ${2:newH})",
-     "return": "void",
-     "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8."
-    },
-    {
-     "name": "crop",
-     "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})",
-     "return": "void",
-     "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge."
-    },
-    {
-     "name": "mirror",
-     "snippet": "mirror(${1:horizontal}, ${2:vertical})",
-     "return": "void",
-     "desc": "Flip in place. Both true is 180°."
-    },
-    {
-     "name": "mirrorH",
-     "snippet": "mirrorH()",
-     "return": "void",
-     "desc": "Mirror horizontally (alias for mirror(true, false))"
-    },
-    {
-     "name": "mirrorV",
-     "snippet": "mirrorV()",
-     "return": "void",
-     "desc": "Mirror vertically (alias for mirror(false, true))"
     }
    ]
   },
@@ -10120,8 +10025,8 @@ const TrussSketchAPI = {
      "desc": "Begin shader (pushes to stack)"
     },
     {
-     "name": "end",
-     "snippet": "end()",
+     "name": "end_shader",
+     "snippet": "end_shader()",
      "return": "void",
      "desc": "End shader (pops from stack)"
     },
@@ -10136,6 +10041,12 @@ const TrussSketchAPI = {
      "snippet": "setTexture(${1:slot}, ${2:image}, ${3:sampler})",
      "return": "void",
      "desc": "Bind texture to slot"
+    },
+    {
+     "name": "submitVertices",
+     "snippet": "submitVertices()",
+     "return": "",
+     "desc": "Submit a batch of vertices for deferred drawing with this shader (lines are unsupported)."
     }
    ]
   },
@@ -10391,18 +10302,6 @@ const TrussSketchAPI = {
    "constructor": {
     "snippet": "SoundBuffer()"
    },
-   "properties": [
-    {
-     "name": "samples",
-     "type": "std::vector<float>",
-     "desc": "Interleaved PCM samples (channels interleaved per frame)"
-    },
-    {
-     "name": "numSamples",
-     "type": "size_t",
-     "desc": "Number of samples per channel (frame count)"
-    }
-   ],
    "methods": [
     {
      "name": "loadOgg",
@@ -10423,22 +10322,28 @@ const TrussSketchAPI = {
      "desc": "Decode an MP3 file into PCM."
     },
     {
-     "name": "loadFlac",
-     "snippet": "loadFlac(${1:path})",
-     "return": "bool",
-     "desc": "Decode a FLAC file into PCM."
-    },
-    {
-     "name": "load",
-     "snippet": "load(${1:path})",
-     "return": "bool",
-     "desc": "Decode a file into PCM, auto-detecting format from the extension (.wav .mp3 .ogg .flac .aac .m4a, case-insensitive). Returns false on failure."
+     "name": "loadMp3FromMemory",
+     "snippet": "loadMp3FromMemory()",
+     "return": "",
+     "desc": "Decode MP3 data from a memory buffer."
     },
     {
      "name": "loadAac",
      "snippet": "loadAac(${1:path})",
      "return": "bool",
      "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms)."
+    },
+    {
+     "name": "loadAacFromMemory",
+     "snippet": "loadAacFromMemory()",
+     "return": "",
+     "desc": "Decode AAC data from a memory buffer (platform-specific; returns false on unsupported platforms)."
+    },
+    {
+     "name": "loadPcmFromMemory",
+     "snippet": "loadPcmFromMemory()",
+     "return": "",
+     "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths."
     },
     {
      "name": "getDuration",
@@ -10513,6 +10418,12 @@ const TrussSketchAPI = {
      "snippet": "getAdtsSampleRateIndex(${1:sampleRate})",
      "return": "int",
      "desc": "ADTS sample-rate index for the given rate (AAC-in-MOV container helper)."
+    },
+    {
+     "name": "createAdtsHeader",
+     "snippet": "createAdtsHeader()",
+     "return": "",
+     "desc": "Write a 7-byte ADTS header for one raw AAC frame into header (AAC-in-MOV container helper)."
     }
    ]
   },
@@ -11108,6 +11019,18 @@ const TrussSketchAPI = {
      "desc": "Allocate a cubemap texture without initial data"
     },
     {
+     "name": "uploadCubemapFace",
+     "snippet": "uploadCubemapFace()",
+     "return": "",
+     "desc": "Upload pixel data for one cubemap face at one mip level"
+    },
+    {
+     "name": "uploadCubemapMip",
+     "snippet": "uploadCubemapMip()",
+     "return": "",
+     "desc": "Upload pixel data for all six faces of one cubemap mip level"
+    },
+    {
      "name": "getCubemapFaceAttachmentView",
      "snippet": "getCubemapFaceAttachmentView(${1:face}, ${2:mipLevel})",
      "return": "sg_view",
@@ -11124,6 +11047,18 @@ const TrussSketchAPI = {
      "snippet": "getNumMipLevels()",
      "return": "int",
      "desc": "Number of mip levels"
+    },
+    {
+     "name": "allocateCompressed",
+     "snippet": "allocateCompressed()",
+     "return": "",
+     "desc": "Allocate an immutable compressed texture (BC1/BC3/BC7 etc.) from the given data."
+    },
+    {
+     "name": "updateCompressed",
+     "snippet": "updateCompressed()",
+     "return": "",
+     "desc": "Upload compressed pixel data to an already-allocated texture"
     },
     {
      "name": "isCompressed",
@@ -11264,12 +11199,6 @@ const TrussSketchAPI = {
      "desc": "Draw texture"
     },
     {
-     "name": "drawFlippedY",
-     "snippet": "drawFlippedY(${1:x}, ${2:y}, ${3:w}, ${4:h})",
-     "return": "void",
-     "desc": "Draw the texture vertically flipped"
-    },
-    {
      "name": "drawSubsection",
      "snippet": "drawSubsection(${1:x}, ${2:y}, ${3:w}, ${4:h}, ${5:sx}, ${6:sy}, ${7:sw}, ${8:sh})",
      "return": "void",
@@ -11310,18 +11239,6 @@ const TrussSketchAPI = {
      "snippet": "getAttachmentView()",
      "return": "sg_view",
      "desc": "Return the sokol-gfx color attachment view used to render into this RenderTarget (advanced interop)."
-    },
-    {
-     "name": "getAttachmentViewForMip",
-     "snippet": "getAttachmentViewForMip(${1:level})",
-     "return": "sg_view",
-     "desc": "Return the sokol-gfx color attachment view for the given mip level (advanced interop)."
-    },
-    {
-     "name": "getViewForMip",
-     "snippet": "getViewForMip(${1:level})",
-     "return": "sg_view",
-     "desc": "Return the sokol-gfx texture view for sampling a single mip level (advanced interop)."
     }
    ]
   },
@@ -11567,11 +11484,274 @@ const TrussSketchAPI = {
    ]
   },
   {
-   "name": "Tween",
+   "name": "TweenColor",
    "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
    "constructor": {
-    "snippet": "Tween(${1:start}, ${2:end}, ${3:duration})"
-   }
+    "snippet": "TweenColor(${1:from}, ${2:to}, ${3:duration})"
+   },
+   "methods": [
+    {
+     "name": "from",
+     "snippet": "from(${1:value})",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "to",
+     "snippet": "to(${1:value})",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "duration",
+     "snippet": "duration(${1:seconds})",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "ease",
+     "snippet": "ease(${1:type}, ${2:mode})",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "loop",
+     "snippet": "loop(${1:count})",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "yoyo",
+     "snippet": "yoyo(${1:enable})",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "delay",
+     "snippet": "delay(${1:seconds})",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "start",
+     "snippet": "start()",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "pause",
+     "snippet": "pause()",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "resume",
+     "snippet": "resume()",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "reset",
+     "snippet": "reset()",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "finish",
+     "snippet": "finish()",
+     "return": "TweenColor",
+     "desc": ""
+    },
+    {
+     "name": "getValue",
+     "snippet": "getValue()",
+     "return": "Color",
+     "desc": ""
+    },
+    {
+     "name": "getProgress",
+     "snippet": "getProgress()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "getElapsed",
+     "snippet": "getElapsed()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "isPlaying",
+     "snippet": "isPlaying()",
+     "return": "boolean",
+     "desc": ""
+    },
+    {
+     "name": "isComplete",
+     "snippet": "isComplete()",
+     "return": "boolean",
+     "desc": ""
+    },
+    {
+     "name": "getStart",
+     "snippet": "getStart()",
+     "return": "Color",
+     "desc": ""
+    },
+    {
+     "name": "getEnd",
+     "snippet": "getEnd()",
+     "return": "Color",
+     "desc": ""
+    },
+    {
+     "name": "getLoopCount",
+     "snippet": "getLoopCount()",
+     "return": "number",
+     "desc": ""
+    }
+   ]
+  },
+  {
+   "name": "TweenFloat",
+   "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+   "constructor": {
+    "snippet": "TweenFloat(${1:from}, ${2:to}, ${3:duration})"
+   },
+   "methods": [
+    {
+     "name": "from",
+     "snippet": "from(${1:value})",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "to",
+     "snippet": "to(${1:value})",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "duration",
+     "snippet": "duration(${1:seconds})",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "ease",
+     "snippet": "ease(${1:type}, ${2:mode})",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "loop",
+     "snippet": "loop(${1:count})",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "yoyo",
+     "snippet": "yoyo(${1:enable})",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "delay",
+     "snippet": "delay(${1:seconds})",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "start",
+     "snippet": "start()",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "pause",
+     "snippet": "pause()",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "resume",
+     "snippet": "resume()",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "reset",
+     "snippet": "reset()",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "finish",
+     "snippet": "finish()",
+     "return": "TweenFloat",
+     "desc": ""
+    },
+    {
+     "name": "getValue",
+     "snippet": "getValue()",
+     "return": "float",
+     "desc": ""
+    },
+    {
+     "name": "getProgress",
+     "snippet": "getProgress()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "getElapsed",
+     "snippet": "getElapsed()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "isPlaying",
+     "snippet": "isPlaying()",
+     "return": "boolean",
+     "desc": ""
+    },
+    {
+     "name": "isComplete",
+     "snippet": "isComplete()",
+     "return": "boolean",
+     "desc": ""
+    },
+    {
+     "name": "getStart",
+     "snippet": "getStart()",
+     "return": "float",
+     "desc": ""
+    },
+    {
+     "name": "getEnd",
+     "snippet": "getEnd()",
+     "return": "float",
+     "desc": ""
+    },
+    {
+     "name": "getLoopCount",
+     "snippet": "getLoopCount()",
+     "return": "number",
+     "desc": ""
+    }
+   ]
   },
   {
    "name": "TweenMod",
@@ -11772,6 +11952,276 @@ const TrussSketchAPI = {
      "snippet": "getEaseMode()",
      "return": "EaseMode",
      "desc": "Get the current easing mode (In/Out/InOut) (TweenMod method) (C++ only)"
+    }
+   ]
+  },
+  {
+   "name": "TweenVec2",
+   "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+   "constructor": {
+    "snippet": "TweenVec2(${1:from}, ${2:to}, ${3:duration})"
+   },
+   "methods": [
+    {
+     "name": "from",
+     "snippet": "from(${1:value})",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "to",
+     "snippet": "to(${1:value})",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "duration",
+     "snippet": "duration(${1:seconds})",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "ease",
+     "snippet": "ease(${1:type}, ${2:mode})",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "loop",
+     "snippet": "loop(${1:count})",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "yoyo",
+     "snippet": "yoyo(${1:enable})",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "delay",
+     "snippet": "delay(${1:seconds})",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "start",
+     "snippet": "start()",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "pause",
+     "snippet": "pause()",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "resume",
+     "snippet": "resume()",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "reset",
+     "snippet": "reset()",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "finish",
+     "snippet": "finish()",
+     "return": "TweenVec2",
+     "desc": ""
+    },
+    {
+     "name": "getValue",
+     "snippet": "getValue()",
+     "return": "Vec2",
+     "desc": ""
+    },
+    {
+     "name": "getProgress",
+     "snippet": "getProgress()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "getElapsed",
+     "snippet": "getElapsed()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "isPlaying",
+     "snippet": "isPlaying()",
+     "return": "boolean",
+     "desc": ""
+    },
+    {
+     "name": "isComplete",
+     "snippet": "isComplete()",
+     "return": "boolean",
+     "desc": ""
+    },
+    {
+     "name": "getStart",
+     "snippet": "getStart()",
+     "return": "Vec2",
+     "desc": ""
+    },
+    {
+     "name": "getEnd",
+     "snippet": "getEnd()",
+     "return": "Vec2",
+     "desc": ""
+    },
+    {
+     "name": "getLoopCount",
+     "snippet": "getLoopCount()",
+     "return": "number",
+     "desc": ""
+    }
+   ]
+  },
+  {
+   "name": "TweenVec3",
+   "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+   "constructor": {
+    "snippet": "TweenVec3(${1:from}, ${2:to}, ${3:duration})"
+   },
+   "methods": [
+    {
+     "name": "from",
+     "snippet": "from(${1:value})",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "to",
+     "snippet": "to(${1:value})",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "duration",
+     "snippet": "duration(${1:seconds})",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "ease",
+     "snippet": "ease(${1:type}, ${2:mode})",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "loop",
+     "snippet": "loop(${1:count})",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "yoyo",
+     "snippet": "yoyo(${1:enable})",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "delay",
+     "snippet": "delay(${1:seconds})",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "start",
+     "snippet": "start()",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "pause",
+     "snippet": "pause()",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "resume",
+     "snippet": "resume()",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "reset",
+     "snippet": "reset()",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "finish",
+     "snippet": "finish()",
+     "return": "TweenVec3",
+     "desc": ""
+    },
+    {
+     "name": "getValue",
+     "snippet": "getValue()",
+     "return": "Vec3",
+     "desc": ""
+    },
+    {
+     "name": "getProgress",
+     "snippet": "getProgress()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "getElapsed",
+     "snippet": "getElapsed()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "number",
+     "desc": ""
+    },
+    {
+     "name": "isPlaying",
+     "snippet": "isPlaying()",
+     "return": "boolean",
+     "desc": ""
+    },
+    {
+     "name": "isComplete",
+     "snippet": "isComplete()",
+     "return": "boolean",
+     "desc": ""
+    },
+    {
+     "name": "getStart",
+     "snippet": "getStart()",
+     "return": "Vec3",
+     "desc": ""
+    },
+    {
+     "name": "getEnd",
+     "snippet": "getEnd()",
+     "return": "Vec3",
+     "desc": ""
+    },
+    {
+     "name": "getLoopCount",
+     "snippet": "getLoopCount()",
+     "return": "number",
+     "desc": ""
     }
    ]
   },

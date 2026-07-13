@@ -8327,29 +8327,6 @@ const TrussCAPI = {
                 "AudioSettings",
                 "initAudio"
             ],
-            "properties": [
-                {
-                    "name": "audioEngine.audioOut",
-                    "type": "Event",
-                    "desc": "Real-time playback callback event. listen() to add a synthesis / processing listener. Fires per audio buffer on the audio thread; keep RT-safe.",
-                    "desc_ja": "リアルタイム再生コールバック event。listen() でシンセ / 処理用 listener を追加。各バッファごとに audio thread で発火、RT-safe を維持",
-                    "desc_ko": "실시간 재생 콜백 이벤트. listen()으로 신스 / 처리 리스너 추가. 버퍼별로 오디오 스레드에서 발화, RT-safe 유지"
-                },
-                {
-                    "name": "audioEngine.audioIn",
-                    "type": "Event",
-                    "desc": "Real-time capture callback event (microphone input). listen() to add an input-processing listener. Fires per audio buffer on the audio thread; keep RT-safe.",
-                    "desc_ja": "リアルタイム入力コールバック event (マイク入力)。listen() で入力処理用 listener を追加。各バッファごとに audio thread で発火、RT-safe を維持",
-                    "desc_ko": "실시간 입력 콜백 이벤트 (마이크 입력). listen()으로 입력 처리 리스너 추가. 버퍼별로 오디오 스레드에서 발화, RT-safe 유지"
-                },
-                {
-                    "name": "audioEngine.audioDeviceChanged",
-                    "type": "Event",
-                    "desc": "Fires after every successful init() (initial AND re-init). Args carry the resolved device's real name, isDefaultDevice flag, sampleRate, channels, bufferSize, maxPolyphony. Listener runs on the thread that called init() (main), not the audio thread.",
-                    "desc_ja": "成功した init() (初回 / 再 init) 後に発火。args は解決済みデバイス名、isDefaultDevice、sampleRate、channels、bufferSize、maxPolyphony。listener は init() を呼んだスレッド (通常 main) で実行",
-                    "desc_ko": "성공한 init() (초기 / 재 init) 후 발화. args는 해결된 장치명, isDefaultDevice, sampleRate, channels, bufferSize, maxPolyphony. listener는 init()을 호출한 스레드 (보통 main)에서 실행"
-                }
-            ],
             "methods": [
                 {
                     "name": "audioEngine:init",
@@ -8373,54 +8350,14 @@ const TrussCAPI = {
                     "desc_ko": "오디오 디바이스를 정지하고 닫음"
                 },
                 {
-                    "name": "audioEngine:getSampleRate",
+                    "name": "audioEngine:getAnalysisBuffer",
                     "return": "number",
                     "signatures": [
-                        ""
+                        "outBuffer, numSamples"
                     ],
-                    "desc": "Current engine output sample rate (Hz). Returns the default (48000) before init().",
-                    "desc_ja": "現在のエンジン出力サンプルレート (Hz)。init() 前はデフォルト (48000) を返す",
-                    "desc_ko": "현재 엔진 출력 샘플레이트 (Hz). init() 전에는 기본값 (48000) 반환"
-                },
-                {
-                    "name": "audioEngine:getChannels",
-                    "return": "number",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Current engine output channel count.",
-                    "desc_ja": "現在のエンジン出力チャンネル数",
-                    "desc_ko": "현재 엔진 출력 채널 수"
-                },
-                {
-                    "name": "audioEngine:getMaxPolyphony",
-                    "return": "number",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Maximum number of simultaneously-playing Sound voices.",
-                    "desc_ja": "同時再生可能な Sound ボイスの最大数",
-                    "desc_ko": "동시 재생 가능한 Sound 보이스 최대 수"
-                },
-                {
-                    "name": "audioEngine:getBufferSize",
-                    "return": "number",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Current device buffer size in frames (0 = miniaudio default).",
-                    "desc_ja": "現在のデバイスバッファサイズ (フレーム単位、0 = miniaudio デフォルト)",
-                    "desc_ko": "현재 디바이스 버퍼 크기 (프레임 단위, 0 = miniaudio 기본값)"
-                },
-                {
-                    "name": "audioEngine:isInitialized",
-                    "return": "boolean",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "True after a successful init().",
-                    "desc_ja": "init() 成功後に true",
-                    "desc_ko": "init() 성공 후 true"
+                    "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096. Returns the number of samples written. (Global wrapper: getAudioAnalysisBuffer.)",
+                    "desc_ja": "最新のミックス出力サンプル (モノラル、L+R 平均) を outBuffer にコピー。numSamples は 4096 に制限される。書き込んだサンプル数を返す (グローバルラッパー: getAudioAnalysisBuffer)",
+                    "desc_ko": "최신 믹스 출력 샘플 (모노, L+R 평균) 을 outBuffer 에 복사. numSamples 는 4096 으로 제한됨. 기록한 샘플 수를 반환 (전역 래퍼: getAudioAnalysisBuffer)"
                 },
                 {
                     "name": "audioEngine:play",
@@ -8432,6 +8369,16 @@ const TrussCAPI = {
                     "desc": "Start a new mixer voice for the given source (eager SoundBuffer or streaming SoundStream) and return its live PlayingSound handle. Usually called indirectly via Sound::play().",
                     "desc_ja": "指定ソース (eager SoundBuffer か streaming SoundStream) の新しいミキサーボイスを開始し、ライブな PlayingSound ハンドルを返す。通常は Sound::play() 経由で間接的に呼ばれる",
                     "desc_ko": "지정 소스 (eager SoundBuffer 또는 streaming SoundStream) 의 새 믹서 보이스를 시작하고 라이브 PlayingSound 핸들을 반환. 보통 Sound::play()를 통해 간접 호출됨"
+                },
+                {
+                    "name": "audioEngine:mixAudio",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "buffer, num_frames, num_channels"
+                    ],
+                    "desc": "Audio output callback: mix all playing sounds into the buffer (internal, called from the audio thread).",
+                    "desc_ja": "音声出力コールバック。再生中の全サウンドをバッファにミックスする（内部用、音声スレッドから呼ばれる）。",
+                    "desc_ko": "오디오 출력 콜백. 재생 중인 모든 사운드를 버퍼에 믹스한다(내부용, 오디오 스레드에서 호출)."
                 }
             ],
             "static_methods": [
@@ -8444,16 +8391,6 @@ const TrussCAPI = {
                     "desc": "Get the global AudioEngine singleton.",
                     "desc_ja": "グローバルな AudioEngine シングルトンを取得",
                     "desc_ko": "전역 AudioEngine 싱글톤을 얻음"
-                },
-                {
-                    "name": "AudioEngine.listDevices",
-                    "return": "table",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Enumerate available playback devices (name + isDefault). Empty if unsupported on the platform.",
-                    "desc_ja": "利用可能な再生デバイスを列挙 (name + isDefault)。プラットフォームが非対応の場合は空",
-                    "desc_ko": "사용 가능한 재생 디바이스를 열거 (name + isDefault). 플랫폼이 미지원이면 비어 있음"
                 }
             ]
         },
@@ -10005,7 +9942,7 @@ const TrussCAPI = {
                     "desc_ko": "카메라 변환을 적용 (3D 모드 시작)"
                 },
                 {
-                    "name": "easyCam:end",
+                    "name": "easyCam:end_cam",
                     "return": "(nothing)",
                     "signatures": [
                         ""
@@ -10087,86 +10024,6 @@ const TrussCAPI = {
                     "desc_ko": "타겟으로부터의 거리를 얻음"
                 },
                 {
-                    "name": "easyCam:setAzimuth",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "radians"
-                    ],
-                    "desc": "Set orbit azimuth (horizontal angle, radians)",
-                    "desc_ja": "周回の方位角（水平角・ラジアン）を設定",
-                    "desc_ko": "궤도 방위각(수평각, 라디안)을 설정"
-                },
-                {
-                    "name": "easyCam:setElevation",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "radians"
-                    ],
-                    "desc": "Set orbit elevation (vertical angle, radians; clamped to ~±80°)",
-                    "desc_ja": "周回の仰角（垂直角・ラジアン、約±80°でクランプ）を設定",
-                    "desc_ko": "궤도 고도각(수직각, 라디안; 약 ±80°로 제한)을 설정"
-                },
-                {
-                    "name": "easyCam:getElevation",
-                    "return": "number",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get orbit elevation (vertical angle, radians)",
-                    "desc_ja": "周回の仰角（垂直角・ラジアン）を取得",
-                    "desc_ko": "궤도 고도각(수직각, 라디안)을 얻음"
-                },
-                {
-                    "name": "easyCam:getAzimuth",
-                    "return": "number",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get orbit azimuth (horizontal angle, radians)",
-                    "desc_ja": "周回の方位角（水平角・ラジアン）を取得",
-                    "desc_ko": "궤도 방위각(수평각, 라디안)을 얻음"
-                },
-                {
-                    "name": "easyCam:enableOrtho",
-                    "return": "(nothing)",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Enable orthographic projection",
-                    "desc_ja": "正射影を有効化",
-                    "desc_ko": "정사영을 활성화"
-                },
-                {
-                    "name": "easyCam:disableOrtho",
-                    "return": "(nothing)",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Disable orthographic projection (use perspective)",
-                    "desc_ja": "正射影を無効化（透視投影を使用）",
-                    "desc_ko": "정사영을 비활성화 (원근 투영 사용)"
-                },
-                {
-                    "name": "easyCam:setOrtho",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "ortho"
-                    ],
-                    "desc": "Set orthographic projection on/off",
-                    "desc_ja": "正射影のオン/オフを設定",
-                    "desc_ko": "정사영 켜기/끄기를 설정"
-                },
-                {
-                    "name": "easyCam:getOrtho",
-                    "return": "boolean",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get whether orthographic projection is enabled",
-                    "desc_ja": "正射影が有効かどうかを取得",
-                    "desc_ko": "정사영이 활성화되었는지 얻음"
-                },
-                {
                     "name": "easyCam:setFov",
                     "return": "(nothing)",
                     "signatures": [
@@ -10185,6 +10042,16 @@ const TrussCAPI = {
                     "desc": "Get field of view in radians",
                     "desc_ja": "視野角をラジアンで取得",
                     "desc_ko": "시야각을 라디안으로 얻음"
+                },
+                {
+                    "name": "easyCam:getPosition",
+                    "return": "Vec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get camera position",
+                    "desc_ja": "カメラ位置を取得",
+                    "desc_ko": "카메라 위치를 얻음"
                 },
                 {
                     "name": "easyCam:setFovDeg",
@@ -10245,66 +10112,6 @@ const TrussCAPI = {
                     "desc": "Set pan sensitivity",
                     "desc_ja": "パン感度を設定",
                     "desc_ko": "팬 감도를 설정"
-                },
-                {
-                    "name": "easyCam:setOrbitButton",
-                    "return": "EasyCam",
-                    "signatures": [
-                        "button"
-                    ],
-                    "desc": "Set the mouse button that orbits the camera (default: left)",
-                    "desc_ja": "カメラを回転させるマウスボタンを設定（デフォルト：左）",
-                    "desc_ko": "카메라를 회전시키는 마우스 버튼을 설정 (기본: 왼쪽)"
-                },
-                {
-                    "name": "easyCam:getOrbitButton",
-                    "return": "number",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the mouse button that orbits the camera",
-                    "desc_ja": "カメラを回転させるマウスボタンを取得",
-                    "desc_ko": "카메라를 회전시키는 마우스 버튼을 얻음"
-                },
-                {
-                    "name": "easyCam:setPanButton",
-                    "return": "EasyCam",
-                    "signatures": [
-                        "button"
-                    ],
-                    "desc": "Set the mouse button that pans the camera (default: middle)",
-                    "desc_ja": "カメラをパンさせるマウスボタンを設定（デフォルト：中）",
-                    "desc_ko": "카메라를 패닝하는 마우스 버튼을 설정 (기본: 가운데)"
-                },
-                {
-                    "name": "easyCam:getPanButton",
-                    "return": "number",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the mouse button that pans the camera",
-                    "desc_ja": "カメラをパンさせるマウスボタンを取得",
-                    "desc_ko": "카메라를 패닝하는 마우스 버튼을 얻음"
-                },
-                {
-                    "name": "easyCam:setDragModifier",
-                    "return": "EasyCam",
-                    "signatures": [
-                        "m"
-                    ],
-                    "desc": "Set the modifier key required for camera mouse input (default: None)",
-                    "desc_ja": "カメラのマウス入力に必要な修飾キーを設定（デフォルト：None）",
-                    "desc_ko": "카메라 마우스 입력에 필요한 수정자 키를 설정 (기본: None)"
-                },
-                {
-                    "name": "easyCam:getDragModifier",
-                    "return": "Modifier",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the modifier key required for camera mouse input",
-                    "desc_ja": "カメラのマウス入力に必要な修飾キーを取得",
-                    "desc_ko": "카메라 마우스 입력에 필요한 수정자 키를 얻음"
                 },
                 {
                     "name": "easyCam:setControlArea",
@@ -10395,36 +10202,6 @@ const TrussCAPI = {
                     "desc": "Handle mouse scroll event (for zoom)",
                     "desc_ja": "マウススクロールイベントを処理（ズーム用）",
                     "desc_ko": "마우스 스크롤 이벤트 처리 (줌용)"
-                },
-                {
-                    "name": "easyCam:getPosition",
-                    "return": "Vec3",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get camera position",
-                    "desc_ja": "カメラ位置を取得",
-                    "desc_ko": "카메라 위치를 얻음"
-                },
-                {
-                    "name": "easyCam:getOrientation",
-                    "return": "Quaternion",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get the camera orientation quaternion",
-                    "desc_ja": "カメラの姿勢クォータニオンを取得",
-                    "desc_ko": "카메라 방향 쿼터니언을 얻음"
-                },
-                {
-                    "name": "easyCam:setOrientation",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "q"
-                    ],
-                    "desc": "Set the camera orientation quaternion",
-                    "desc_ja": "カメラの姿勢クォータニオンを設定",
-                    "desc_ko": "카메라 방향 쿼터니언을 설정"
                 }
             ]
         },
@@ -10538,16 +10315,6 @@ const TrussCAPI = {
             },
             "methods": [
                 {
-                    "name": "fbo:lifetimeToken",
-                    "return": "shared_ptr",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Lifetime token for observers holding a raw pointer to this Fbo (e.g. ScreenRecorder auto-stops when the recorded Fbo dies). Per-object: it does not transfer on move",
-                    "desc_ja": "この Fbo への生ポインタを持つ監視者向けの生存トークン（例: ScreenRecorder は録画中の Fbo が破棄されると自動停止する）。オブジェクト固有で、ムーブしても移らない",
-                    "desc_ko": "이 Fbo의 원시 포인터를 가진 관찰자를 위한 수명 토큰(예: ScreenRecorder는 녹화 중인 Fbo가 파괴되면 자동 정지). 객체 고유이며 이동해도 옮겨지지 않음"
-                },
-                {
                     "name": "fbo:allocate",
                     "return": "(nothing)",
                     "signatures": [
@@ -10589,7 +10356,7 @@ const TrussCAPI = {
                     "desc_ko": "FBO를 단색으로 클리어"
                 },
                 {
-                    "name": "fbo:end",
+                    "name": "fbo:end_fbo",
                     "return": "(nothing)",
                     "signatures": [
                         ""
@@ -10597,6 +10364,26 @@ const TrussCAPI = {
                     "desc": "End rendering to FBO",
                     "desc_ja": "FBOへのレンダリングを終了",
                     "desc_ko": "FBO 렌더링 종료"
+                },
+                {
+                    "name": "fbo:readPixels",
+                    "return": "boolean",
+                    "signatures": [
+                        "pixels"
+                    ],
+                    "desc": "Read FBO contents into a CPU buffer (8-bit per channel)",
+                    "desc_ja": "FBOの内容をCPUバッファに読み出す（チャンネルあたり8ビット）",
+                    "desc_ko": "FBO 내용을 CPU 버퍼로 읽음 (채널당 8비트)"
+                },
+                {
+                    "name": "fbo:readPixelsFloat",
+                    "return": "boolean",
+                    "signatures": [
+                        "pixels"
+                    ],
+                    "desc": "Read FBO contents into a CPU buffer (32-bit float per channel)",
+                    "desc_ja": "FBOの内容をCPUバッファに読み出す（チャンネルあたり32ビット浮動小数点）",
+                    "desc_ko": "FBO 내용을 CPU 버퍼로 읽음 (채널당 32비트 부동소수점)"
                 },
                 {
                     "name": "fbo:copyTo",
@@ -10680,6 +10467,16 @@ const TrussCAPI = {
                     "desc_ko": "FBO 텍스처를 얻음"
                 },
                 {
+                    "name": "fbo:save",
+                    "return": "boolean",
+                    "signatures": [
+                        "path"
+                    ],
+                    "desc": "Save FBO contents to file",
+                    "desc_ja": "FBOの内容をファイルに保存",
+                    "desc_ko": "FBO 내용을 파일로 저장"
+                },
+                {
                     "name": "fbo:draw",
                     "return": "(nothing)",
                     "signatures": [
@@ -10689,16 +10486,6 @@ const TrussCAPI = {
                     "desc": "Draw FBO contents",
                     "desc_ja": "FBOの内容を描画",
                     "desc_ko": "FBO 내용을 그림"
-                },
-                {
-                    "name": "fbo:save",
-                    "return": "boolean",
-                    "signatures": [
-                        "path"
-                    ],
-                    "desc": "Save FBO contents to file",
-                    "desc_ja": "FBOの内容をファイルに保存",
-                    "desc_ko": "FBO 내용을 파일로 저장"
                 },
                 {
                     "name": "fbo:getColorImage",
@@ -11994,6 +11781,16 @@ const TrussCAPI = {
                     "desc_ko": "이미지를 파일로 저장"
                 },
                 {
+                    "name": "image:loadFromMemory",
+                    "return": "boolean",
+                    "signatures": [
+                        "buffer, len, mipmaps = false"
+                    ],
+                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain.",
+                    "desc_ja": "メモリから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築",
+                    "desc_ko": "메모리에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성"
+                },
+                {
                     "name": "image:allocate",
                     "return": "(nothing)",
                     "signatures": [
@@ -12012,6 +11809,16 @@ const TrussCAPI = {
                     "desc": "Release image resources",
                     "desc_ja": "画像リソースを解放",
                     "desc_ko": "이미지 리소스를 해제"
+                },
+                {
+                    "name": "image:draw",
+                    "return": "",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 },
                 {
                     "name": "image:isAllocated",
@@ -12094,66 +11901,6 @@ const TrussCAPI = {
                     "desc": "Set pixel color at position (marks image as dirty)",
                     "desc_ja": "指定位置のピクセル色を設定（ダーティフラグが立つ）",
                     "desc_ko": "지정 위치의 픽셀 색상을 설정 (이미지를 dirty로 표시)"
-                },
-                {
-                    "name": "image:halve",
-                    "return": "(nothing)",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8.",
-                    "desc_ja": "2x2 ボックス平均で半分に縮小 (U8 はガンマ補正)",
-                    "desc_ko": "2x2 박스 평균으로 절반 크기로 축소 (U8은 감마 보정)"
-                },
-                {
-                    "name": "image:resize",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "newW, newH"
-                    ],
-                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8. Use FBO sampling for fast paths.",
-                    "desc_ja": "高品質リサイズ (縮小=BoxArea / 拡大=Catmull-Rom bicubic、 U8はガンマ補正)。 高速版が必要なら FBO 経由で",
-                    "desc_ko": "고품질 리사이즈 (축소=BoxArea / 확대=Catmull-Rom 바이큐빅, U8 감마 보정). 빠른 경로는 FBO 활용"
-                },
-                {
-                    "name": "image:crop",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "x, y, w, h"
-                    ],
-                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge.",
-                    "desc_ja": "(x, y) から (w x h) を切り出し。 範囲外は最近房 (clamp-to-edge) で埋める",
-                    "desc_ko": "(x, y)에서 (w x h) 영역 자르기. 범위 밖은 클램프-투-엣지로 채움"
-                },
-                {
-                    "name": "image:mirror",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "horizontal, vertical"
-                    ],
-                    "desc": "Flip the image. `horizontal=true` mirrors left-right; `vertical=true` mirrors top-bottom; both true is 180°.",
-                    "desc_ja": "画像を反転。 horizontal=true で左右、 vertical=true で上下、 両方 true で 180度回転",
-                    "desc_ko": "이미지 뒤집기. horizontal=true 좌우, vertical=true 상하, 둘 다 true는 180도 회전"
-                },
-                {
-                    "name": "image:mirrorH",
-                    "return": "(nothing)",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mirror horizontally (alias for mirror(true, false))",
-                    "desc_ja": "水平反転 (mirror(true, false) のエイリアス)",
-                    "desc_ko": "수평 뒤집기 (mirror(true, false) 별칭)"
-                },
-                {
-                    "name": "image:mirrorV",
-                    "return": "(nothing)",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mirror vertically (alias for mirror(false, true))",
-                    "desc_ja": "垂直反転 (mirror(false, true) のエイリアス)",
-                    "desc_ko": "수직 뒤집기 (mirror(false, true) 별칭)"
                 },
                 {
                     "name": "image:update",
@@ -12744,6 +12491,16 @@ const TrussCAPI = {
                     "desc_ko": "스포트 라이트 외부 콘 코사인을 얻음"
                 },
                 {
+                    "name": "light:setProjectionTexture",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "tex"
+                    ],
+                    "desc": "Set texture for projector-style light (gobo)",
+                    "desc_ja": "projector投影用texture（gobo）を設定",
+                    "desc_ko": "프로젝터 투영용 텍스처 (고보)를 설정"
+                },
+                {
                     "name": "light:getProjectionTexture",
                     "return": "Texture",
                     "signatures": [
@@ -12822,6 +12579,16 @@ const TrussCAPI = {
                     "desc": "Build the projector's view-projection matrix from spot params and lens shift",
                     "desc_ja": "スポットのパラメータとレンズシフトからプロジェクタのビュー射影行列を構築",
                     "desc_ko": "스포트 파라미터와 렌즈 시프트로 프로젝터의 뷰-프로젝션 행렬을 구축"
+                },
+                {
+                    "name": "light:setIesProfile",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "ies"
+                    ],
+                    "desc": "Attach IES photometric profile for angular intensity",
+                    "desc_ja": "IES配光profileを設定",
+                    "desc_ko": "IES 배광 프로파일을 설정"
                 },
                 {
                     "name": "light:getIesProfile",
@@ -12945,16 +12712,6 @@ const TrussCAPI = {
                     "desc_ko": "앰비언트 조명 색상을 설정"
                 },
                 {
-                    "name": "light:getAmbient",
-                    "return": "Color",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get ambient light color",
-                    "desc_ja": "ambient色を取得",
-                    "desc_ko": "앰비언트 조명 색상을 얻음"
-                },
-                {
                     "name": "light:setDiffuse",
                     "return": "(nothing)",
                     "signatures": [
@@ -12964,16 +12721,6 @@ const TrussCAPI = {
                     "desc": "Set diffuse (main) light color",
                     "desc_ja": "diffuse色を設定",
                     "desc_ko": "디퓨즈 (메인) 조명 색상을 설정"
-                },
-                {
-                    "name": "light:getDiffuse",
-                    "return": "Color",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get diffuse (main) light color",
-                    "desc_ja": "diffuse色を取得",
-                    "desc_ko": "디퓨즈 (메인) 조명 색상을 얻음"
                 },
                 {
                     "name": "light:setSpecular",
@@ -12987,6 +12734,26 @@ const TrussCAPI = {
                     "desc_ko": "스펙큘러 조명 색상을 설정"
                 },
                 {
+                    "name": "light:getAmbient",
+                    "return": "Color",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get ambient light color",
+                    "desc_ja": "ambient色を取得",
+                    "desc_ko": "앰비언트 조명 색상을 얻음"
+                },
+                {
+                    "name": "light:getDiffuse",
+                    "return": "Color",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get diffuse (main) light color",
+                    "desc_ja": "diffuse色を取得",
+                    "desc_ko": "디퓨즈 (메인) 조명 색상을 얻음"
+                },
+                {
                     "name": "light:getSpecular",
                     "return": "Color",
                     "signatures": [
@@ -12997,16 +12764,6 @@ const TrussCAPI = {
                     "desc_ko": "스펙큘러 조명 색상을 얻음"
                 },
                 {
-                    "name": "light:setIntensity",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "i"
-                    ],
-                    "desc": "Set light intensity multiplier",
-                    "desc_ja": "light intensityを設定",
-                    "desc_ko": "조명 강도를 설정"
-                },
-                {
                     "name": "light:getIntensity",
                     "return": "number",
                     "signatures": [
@@ -13015,6 +12772,16 @@ const TrussCAPI = {
                     "desc": "Get light intensity",
                     "desc_ja": "light intensityを取得",
                     "desc_ko": "조명 강도를 얻음"
+                },
+                {
+                    "name": "light:setIntensity",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "i"
+                    ],
+                    "desc": "Set light intensity multiplier",
+                    "desc_ja": "light intensityを設定",
+                    "desc_ko": "조명 강도를 설정"
                 },
                 {
                     "name": "light:setAttenuation",
@@ -13359,14 +13126,15 @@ const TrussCAPI = {
                     "desc_ko": "(row, col) 위치의 요소에 접근"
                 },
                 {
-                    "name": "mat3:transposed",
-                    "return": "Mat3",
+                    "name": "mat3:set",
+                    "return": "number",
                     "signatures": [
-                        ""
+                        "row, col",
+                        "row, col"
                     ],
-                    "desc": "Return the transpose of this matrix",
-                    "desc_ja": "この行列の転置を返す",
-                    "desc_ko": "이 행렬의 전치를 반환"
+                    "desc": "Access the element at (row, col)",
+                    "desc_ja": "(row, col) の要素にアクセス",
+                    "desc_ko": "(row, col) 위치의 요소에 접근"
                 },
                 {
                     "name": "mat3:determinant",
@@ -13377,6 +13145,16 @@ const TrussCAPI = {
                     "desc": "Compute the determinant",
                     "desc_ja": "行列式を計算",
                     "desc_ko": "행렬식을 계산"
+                },
+                {
+                    "name": "mat3:transposed",
+                    "return": "Mat3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the transpose of this matrix",
+                    "desc_ja": "この行列の転置を返す",
+                    "desc_ko": "이 행렬의 전치를 반환"
                 },
                 {
                     "name": "mat3:inverted",
@@ -13399,6 +13177,16 @@ const TrussCAPI = {
                     "desc": "Return the identity matrix",
                     "desc_ja": "単位行列を返す",
                     "desc_ko": "단위 행렬을 반환"
+                },
+                {
+                    "name": "Mat3.getHomography",
+                    "return": "Mat3",
+                    "signatures": [
+                        "src, dst"
+                    ],
+                    "desc": "Compute the homography matrix mapping 4 source points to 4 destination points (solves H * src = dst)",
+                    "desc_ja": "4つのソース点を4つのデスティネーション点へ写すホモグラフィ行列を計算 (H * src = dst を解く)",
+                    "desc_ko": "4개의 소스 점을 4개의 대상 점으로 매핑하는 호모그래피 행렬을 계산 (H * src = dst를 품)"
                 },
                 {
                     "name": "Mat3.translate",
@@ -13463,6 +13251,17 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "mat4:at",
+                    "return": "number",
+                    "signatures": [
+                        "row, col",
+                        "row, col"
+                    ],
+                    "desc": "Access the element at (row, col)",
+                    "desc_ja": "(row, col) の要素にアクセス",
+                    "desc_ko": "(row, col) 위치의 요소에 접근"
+                },
+                {
+                    "name": "mat4:set",
                     "return": "number",
                     "signatures": [
                         "row, col",
@@ -13645,6 +13444,16 @@ const TrussCAPI = {
             },
             "methods": [
                 {
+                    "name": "material:getBaseColor",
+                    "return": "Color",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get base color (albedo)",
+                    "desc_ja": "base color（albedo）を取得",
+                    "desc_ko": "베이스 컬러 (알베도)를 얻음"
+                },
+                {
                     "name": "material:setBaseColor",
                     "return": "Material",
                     "signatures": [
@@ -13654,16 +13463,6 @@ const TrussCAPI = {
                     "desc": "Set base color (albedo)",
                     "desc_ja": "base color（albedo）を設定",
                     "desc_ko": "베이스 컬러 (알베도)를 설정"
-                },
-                {
-                    "name": "material:getBaseColor",
-                    "return": "Color",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Get base color (albedo)",
-                    "desc_ja": "base color（albedo）を取得",
-                    "desc_ko": "베이스 컬러 (알베도)를 얻음"
                 },
                 {
                     "name": "material:setMetallic",
@@ -13726,25 +13525,14 @@ const TrussCAPI = {
                     "desc_ko": "앰비언트 오클루전 값을 얻음"
                 },
                 {
-                    "name": "material:setEmissive",
-                    "return": "Material",
-                    "signatures": [
-                        "c",
-                        "r, g, b"
-                    ],
-                    "desc": "Set emissive color",
-                    "desc_ja": "emissive色を設定",
-                    "desc_ko": "이미시브 색상을 설정"
-                },
-                {
-                    "name": "material:getEmissive",
-                    "return": "Color",
+                    "name": "material:getEmissiveStrength",
+                    "return": "number",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get emissive color",
-                    "desc_ja": "emissive色を取得",
-                    "desc_ko": "이미시브 색상을 얻음"
+                    "desc": "Get emissive strength multiplier",
+                    "desc_ja": "emissive強度を取得",
+                    "desc_ko": "이미시브 강도를 얻음"
                 },
                 {
                     "name": "material:setEmissiveStrength",
@@ -13757,14 +13545,35 @@ const TrussCAPI = {
                     "desc_ko": "이미시브 강도를 설정"
                 },
                 {
-                    "name": "material:getEmissiveStrength",
-                    "return": "number",
+                    "name": "material:getEmissive",
+                    "return": "Color",
                     "signatures": [
                         ""
                     ],
-                    "desc": "Get emissive strength multiplier",
-                    "desc_ja": "emissive強度を取得",
-                    "desc_ko": "이미시브 강도를 얻음"
+                    "desc": "Get emissive color",
+                    "desc_ja": "emissive色を取得",
+                    "desc_ko": "이미시브 색상을 얻음"
+                },
+                {
+                    "name": "material:setEmissive",
+                    "return": "Material",
+                    "signatures": [
+                        "c",
+                        "r, g, b"
+                    ],
+                    "desc": "Set emissive color",
+                    "desc_ja": "emissive色を設定",
+                    "desc_ko": "이미시브 색상을 설정"
+                },
+                {
+                    "name": "material:setNormalMap",
+                    "return": "Material",
+                    "signatures": [
+                        "tex"
+                    ],
+                    "desc": "Set normal map texture for bump mapping",
+                    "desc_ja": "bump mapping用normal mapを設定",
+                    "desc_ko": "범프 매핑용 노멀맵을 설정"
                 },
                 {
                     "name": "material:getNormalMap",
@@ -13787,6 +13596,16 @@ const TrussCAPI = {
                     "desc_ko": "노멀맵이 설정되었는지 확인"
                 },
                 {
+                    "name": "material:setBaseColorTexture",
+                    "return": "Material",
+                    "signatures": [
+                        "tex"
+                    ],
+                    "desc": "Set base color (albedo) texture map",
+                    "desc_ja": "base color textureを設定",
+                    "desc_ko": "베이스 컬러 텍스처를 설정"
+                },
+                {
                     "name": "material:getBaseColorTexture",
                     "return": "Texture",
                     "signatures": [
@@ -13805,6 +13624,16 @@ const TrussCAPI = {
                     "desc": "Check if a base color texture is set",
                     "desc_ja": "base color textureが設定されているか確認",
                     "desc_ko": "베이스 컬러 텍스처가 설정되었는지 확인"
+                },
+                {
+                    "name": "material:setMetallicRoughnessTexture",
+                    "return": "Material",
+                    "signatures": [
+                        "tex"
+                    ],
+                    "desc": "Set metallic-roughness texture (glTF: G=roughness, B=metallic)",
+                    "desc_ja": "metallic-roughness textureを設定（glTF: G=roughness, B=metallic）",
+                    "desc_ko": "메탈릭-러프니스 텍스처를 설정 (glTF: G=러프니스, B=메탈릭)"
                 },
                 {
                     "name": "material:getMetallicRoughnessTexture",
@@ -13827,6 +13656,16 @@ const TrussCAPI = {
                     "desc_ko": "메탈릭-러프니스 텍스처가 설정되었는지 확인"
                 },
                 {
+                    "name": "material:setEmissiveTexture",
+                    "return": "Material",
+                    "signatures": [
+                        "tex"
+                    ],
+                    "desc": "Set emissive texture map",
+                    "desc_ja": "emissive textureを設定",
+                    "desc_ko": "이미시브 텍스처를 설정"
+                },
+                {
                     "name": "material:getEmissiveTexture",
                     "return": "Texture",
                     "signatures": [
@@ -13845,6 +13684,16 @@ const TrussCAPI = {
                     "desc": "Check if an emissive texture is set",
                     "desc_ja": "emissive textureが設定されているか確認",
                     "desc_ko": "이미시브 텍스처가 설정되었는지 확인"
+                },
+                {
+                    "name": "material:setOcclusionTexture",
+                    "return": "Material",
+                    "signatures": [
+                        "tex"
+                    ],
+                    "desc": "Set occlusion texture map",
+                    "desc_ja": "occlusion textureを設定",
+                    "desc_ko": "오클루전 텍스처를 설정"
                 },
                 {
                     "name": "material:getOcclusionTexture",
@@ -14687,6 +14536,16 @@ const TrussCAPI = {
                     "desc_ko": "캡처를 정지하고 마이크 디바이스를 닫음"
                 },
                 {
+                    "name": "micInput:getBuffer",
+                    "return": "number",
+                    "signatures": [
+                        "outBuffer, numSamples"
+                    ],
+                    "desc": "Copy the latest captured samples into outBuffer. numSamples is capped at the ring buffer size (4096). Returns the number of samples written.",
+                    "desc_ja": "最新のキャプチャサンプルを outBuffer にコピー。numSamples はリングバッファサイズ (4096) に制限される。書き込んだサンプル数を返す",
+                    "desc_ko": "최신 캡처 샘플을 outBuffer 에 복사. numSamples 는 링 버퍼 크기 (4096) 로 제한됨. 기록한 샘플 수를 반환"
+                },
+                {
                     "name": "micInput:isRunning",
                     "return": "boolean",
                     "signatures": [
@@ -14705,6 +14564,16 @@ const TrussCAPI = {
                     "desc": "Sample rate the microphone was opened at.",
                     "desc_ja": "マイクを開いたときのサンプルレート",
                     "desc_ko": "마이크를 연 샘플레이트"
+                },
+                {
+                    "name": "micInput:onAudioData",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "input, frameCount"
+                    ],
+                    "desc": "Mic input callback: receive captured input samples (internal, called from the audio thread).",
+                    "desc_ja": "マイク入力コールバック。キャプチャした入力サンプルを受け取る（内部用、音声スレッドから呼ばれる）。",
+                    "desc_ko": "마이크 입력 콜백. 캡처된 입력 샘플을 받는다(내부용, 오디오 스레드에서 호출)."
                 }
             ]
         },
@@ -16573,6 +16442,36 @@ const TrussCAPI = {
                     "desc_ko": "지정 위치의 픽셀 색상을 설정"
                 },
                 {
+                    "name": "pixels:setFromPixels",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "srcData, width, height, channels"
+                    ],
+                    "desc": "Copy from external pixel data",
+                    "desc_ja": "外部ピクセルデータからコピー",
+                    "desc_ko": "외부 픽셀 데이터에서 복사"
+                },
+                {
+                    "name": "pixels:setFromFloats",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "srcData, width, height, channels"
+                    ],
+                    "desc": "Fill the buffer from a float array (allocates as needed)",
+                    "desc_ja": "float配列からバッファを埋める（必要に応じて確保）",
+                    "desc_ko": "float 배열로 버퍼를 채움 (필요시 할당)"
+                },
+                {
+                    "name": "pixels:copyTo",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "dst"
+                    ],
+                    "desc": "Copy to external buffer",
+                    "desc_ja": "外部バッファにコピー",
+                    "desc_ko": "외부 버퍼로 복사"
+                },
+                {
                     "name": "pixels:clone",
                     "return": "Pixels",
                     "signatures": [
@@ -16581,16 +16480,6 @@ const TrussCAPI = {
                     "desc": "Return a deep copy of the pixel buffer",
                     "desc_ja": "ピクセルバッファのディープコピーを返す",
                     "desc_ko": "픽셀 버퍼의 깊은 복사본을 반환"
-                },
-                {
-                    "name": "pixels:load",
-                    "return": "boolean",
-                    "signatures": [
-                        "path"
-                    ],
-                    "desc": "Load image from file",
-                    "desc_ja": "ファイルから画像を読み込む",
-                    "desc_ko": "파일에서 이미지를 로드"
                 },
                 {
                     "name": "pixels:loadHDR",
@@ -16613,6 +16502,26 @@ const TrussCAPI = {
                     "desc_ko": "플랫폼 이미지 디코더로 이미지를 로드"
                 },
                 {
+                    "name": "pixels:loadFromMemory",
+                    "return": "boolean",
+                    "signatures": [
+                        "buffer, len"
+                    ],
+                    "desc": "Load image from memory",
+                    "desc_ja": "メモリから画像を読み込む",
+                    "desc_ko": "메모리에서 이미지를 로드"
+                },
+                {
+                    "name": "pixels:load",
+                    "return": "boolean",
+                    "signatures": [
+                        "path"
+                    ],
+                    "desc": "Load image from file",
+                    "desc_ja": "ファイルから画像を読み込む",
+                    "desc_ko": "파일에서 이미지를 로드"
+                },
+                {
                     "name": "pixels:save",
                     "return": "boolean",
                     "signatures": [
@@ -16621,66 +16530,6 @@ const TrussCAPI = {
                     "desc": "Save image to file",
                     "desc_ja": "ファイルに画像を保存",
                     "desc_ko": "이미지를 파일로 저장"
-                },
-                {
-                    "name": "pixels:halve",
-                    "return": "(nothing)",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Replace with 2x2 box-averaged half. Gamma-correct for U8.",
-                    "desc_ja": "2x2 ボックス平均で半分に縮小 (U8 はガンマ補正)",
-                    "desc_ko": "2x2 박스 평균으로 절반 크기로 축소 (U8은 감마 보정)"
-                },
-                {
-                    "name": "pixels:resize",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "newW, newH"
-                    ],
-                    "desc": "Quality resize: BoxArea on downscale, Catmull-Rom bicubic on upscale, gamma-correct for U8.",
-                    "desc_ja": "高品質リサイズ (縮小=BoxArea / 拡大=Catmull-Rom bicubic、 U8はガンマ補正)",
-                    "desc_ko": "고품질 리사이즈 (축소=BoxArea / 확대=Catmull-Rom 바이큐빅, U8 감마 보정)"
-                },
-                {
-                    "name": "pixels:crop",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "x, y, w, h"
-                    ],
-                    "desc": "Crop to (w x h) region starting at (x, y). Out-of-bounds samples use clamp-to-edge.",
-                    "desc_ja": "(x, y) から (w x h) を切り出し。 範囲外は最近房 (clamp-to-edge)",
-                    "desc_ko": "(x, y)에서 (w x h) 영역 자르기. 범위 밖은 클램프-투-엣지"
-                },
-                {
-                    "name": "pixels:mirror",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "horizontal, vertical"
-                    ],
-                    "desc": "Flip in place. Both true is 180°.",
-                    "desc_ja": "in-place 反転。 両方 true で 180度回転",
-                    "desc_ko": "in-place 뒤집기. 둘 다 true는 180도 회전"
-                },
-                {
-                    "name": "pixels:mirrorH",
-                    "return": "(nothing)",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mirror horizontally (alias for mirror(true, false))",
-                    "desc_ja": "水平反転 (mirror(true, false) のエイリアス)",
-                    "desc_ko": "수평 뒤집기 (mirror(true, false) 별칭)"
-                },
-                {
-                    "name": "pixels:mirrorV",
-                    "return": "(nothing)",
-                    "signatures": [
-                        ""
-                    ],
-                    "desc": "Mirror vertically (alias for mirror(false, true))",
-                    "desc_ja": "垂直反転 (mirror(false, true) のエイリアス)",
-                    "desc_ko": "수직 뒤집기 (mirror(false, true) 별칭)"
                 }
             ]
         },
@@ -18430,7 +18279,7 @@ const TrussCAPI = {
                     "desc_ko": "셰이더 시작 (스택에 푸시)"
                 },
                 {
-                    "name": "shader:end",
+                    "name": "shader:end_shader",
                     "return": "(nothing)",
                     "signatures": [
                         ""
@@ -18467,6 +18316,16 @@ const TrussCAPI = {
                     "desc": "Bind texture to slot",
                     "desc_ja": "スロットにテクスチャをバインド",
                     "desc_ko": "슬롯에 텍스처를 바인딩"
+                },
+                {
+                    "name": "shader:submitVertices",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "data, count, type"
+                    ],
+                    "desc": "Submit a batch of vertices for deferred drawing with this shader (lines are unsupported).",
+                    "desc_ja": "このシェーダで遅延描画する頂点バッチを送る（ラインは非対応）。",
+                    "desc_ko": "이 셰이더로 지연 렌더링할 정점 배치를 제출한다(라인은 미지원)."
                 }
             ]
         },
@@ -18904,22 +18763,6 @@ const TrussCAPI = {
                     ""
                 ]
             },
-            "properties": [
-                {
-                    "name": "soundBuffer.samples",
-                    "type": "table",
-                    "desc": "Interleaved PCM samples (channels interleaved per frame)",
-                    "desc_ja": "interleavedなPCMサンプル(フレームごとにチャンネルがinterleave)",
-                    "desc_ko": "interleaved PCM 샘플(프레임마다 채널이 interleave됨)"
-                },
-                {
-                    "name": "soundBuffer.numSamples",
-                    "type": "number",
-                    "desc": "Number of samples per channel (frame count)",
-                    "desc_ja": "チャンネルあたりのサンプル数(フレーム数)",
-                    "desc_ko": "채널당 샘플 수(프레임 수)"
-                }
-            ],
             "methods": [
                 {
                     "name": "soundBuffer:loadOgg",
@@ -18952,24 +18795,14 @@ const TrussCAPI = {
                     "desc_ko": "MP3 파일을 PCM으로 디코딩"
                 },
                 {
-                    "name": "soundBuffer:loadFlac",
+                    "name": "soundBuffer:loadMp3FromMemory",
                     "return": "boolean",
                     "signatures": [
-                        "path"
+                        "data, dataSize"
                     ],
-                    "desc": "Decode a FLAC file into PCM.",
-                    "desc_ja": "FLACファイルをPCMにデコード",
-                    "desc_ko": "FLAC 파일을 PCM으로 디코딩"
-                },
-                {
-                    "name": "soundBuffer:load",
-                    "return": "boolean",
-                    "signatures": [
-                        "path"
-                    ],
-                    "desc": "Decode a file into PCM, auto-detecting format from the extension (.wav .mp3 .ogg .flac .aac .m4a, case-insensitive). Returns false on failure.",
-                    "desc_ja": "拡張子から形式を自動判別してファイルをPCMにデコード(.wav .mp3 .ogg .flac .aac .m4a、大文字小文字を区別しない)。失敗時falseを返す",
-                    "desc_ko": "확장자로 형식을 자동 판별해 파일을 PCM으로 디코딩(.wav .mp3 .ogg .flac .aac .m4a, 대소문자 무시). 실패 시 false 반환"
+                    "desc": "Decode MP3 data from a memory buffer.",
+                    "desc_ja": "メモリバッファからMP3データをデコード",
+                    "desc_ko": "메모리 버퍼에서 MP3 데이터를 디코딩"
                 },
                 {
                     "name": "soundBuffer:loadAac",
@@ -18980,6 +18813,26 @@ const TrussCAPI = {
                     "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms).",
                     "desc_ja": "AAC / M4AファイルをPCMにデコード(プラットフォーム依存。非対応プラットフォームではfalseを返す)",
                     "desc_ko": "AAC / M4A 파일을 PCM으로 디코딩(플랫폼 의존. 미지원 플랫폼에서는 false 반환)"
+                },
+                {
+                    "name": "soundBuffer:loadAacFromMemory",
+                    "return": "boolean",
+                    "signatures": [
+                        "data, dataSize"
+                    ],
+                    "desc": "Decode AAC data from a memory buffer (platform-specific; returns false on unsupported platforms).",
+                    "desc_ja": "メモリバッファからAACデータをデコード(プラットフォーム依存。非対応プラットフォームではfalseを返す)",
+                    "desc_ko": "메모리 버퍼에서 AAC 데이터를 디코딩(플랫폼 의존. 미지원 플랫폼에서는 false 반환)"
+                },
+                {
+                    "name": "soundBuffer:loadPcmFromMemory",
+                    "return": "boolean",
+                    "signatures": [
+                        "data, dataSize, numChannels, rate, bitsPerSample = 16, bigEndian = false"
+                    ],
+                    "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths.",
+                    "desc_ja": "形式を明示してメモリから生のinterleaved PCM(16-bit signedまたは32-bit float)を読み込む。非対応のビット深度ではfalseを返す",
+                    "desc_ko": "형식을 명시해 메모리에서 raw interleaved PCM(16-bit signed 또는 32-bit float)을 로드. 미지원 비트 심도에서는 false 반환"
                 },
                 {
                     "name": "soundBuffer:getDuration",
@@ -19102,6 +18955,16 @@ const TrussCAPI = {
                     "desc": "ADTS sample-rate index for the given rate (AAC-in-MOV container helper).",
                     "desc_ja": "指定レートに対するADTSサンプルレートインデックス(AAC-in-MOVコンテナ用ヘルパー)",
                     "desc_ko": "지정 레이트에 대한 ADTS 샘플레이트 인덱스(AAC-in-MOV 컨테이너 헬퍼)"
+                },
+                {
+                    "name": "SoundBuffer.createAdtsHeader",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "header, frameLength, sampleRate, channels, profile = 2"
+                    ],
+                    "desc": "Write a 7-byte ADTS header for one raw AAC frame into header (AAC-in-MOV container helper).",
+                    "desc_ja": "1つの生AACフレーム用に7バイトのADTSヘッダをheaderに書き込む(AAC-in-MOVコンテナ用ヘルパー)",
+                    "desc_ko": "하나의 raw AAC 프레임용 7바이트 ADTS 헤더를 header에 기록(AAC-in-MOV 컨테이너 헬퍼)"
                 }
             ]
         },
@@ -20061,6 +19924,26 @@ const TrussCAPI = {
                     "desc_ko": "초기 데이터 없이 큐브맵 텍스처를 할당"
                 },
                 {
+                    "name": "texture:uploadCubemapFace",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "face, mipLevel, data, dataSize"
+                    ],
+                    "desc": "Upload pixel data for one cubemap face at one mip level",
+                    "desc_ja": "1つのミップレベルのキューブマップ1面にピクセルデータをアップロード",
+                    "desc_ko": "한 밉 레벨의 큐브맵 한 면에 픽셀 데이터를 업로드"
+                },
+                {
+                    "name": "texture:uploadCubemapMip",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "mipLevel, data, dataSize"
+                    ],
+                    "desc": "Upload pixel data for all six faces of one cubemap mip level",
+                    "desc_ja": "キューブマップの1ミップレベルの6面すべてにピクセルデータをアップロード",
+                    "desc_ko": "큐브맵 한 밉 레벨의 6면 전체에 픽셀 데이터를 업로드"
+                },
+                {
                     "name": "texture:getCubemapFaceAttachmentView",
                     "return": "sg_view",
                     "signatures": [
@@ -20089,6 +19972,26 @@ const TrussCAPI = {
                     "desc": "Number of mip levels",
                     "desc_ja": "ミップレベル数",
                     "desc_ko": "밉 레벨 수"
+                },
+                {
+                    "name": "texture:allocateCompressed",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "width, height, format, data, dataSize"
+                    ],
+                    "desc": "Allocate an immutable compressed texture (BC1/BC3/BC7 etc.) from the given data.",
+                    "desc_ja": "指定データから不変の圧縮テクスチャ（BC1/BC3/BC7 等）を確保する。",
+                    "desc_ko": "주어진 데이터로 불변 압축 텍스처(BC1/BC3/BC7 등)를 할당한다."
+                },
+                {
+                    "name": "texture:updateCompressed",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "data, dataSize"
+                    ],
+                    "desc": "Upload compressed pixel data to an already-allocated texture",
+                    "desc_ja": "確保済みテクスチャに圧縮ピクセルデータをアップロード",
+                    "desc_ko": "이미 할당된 텍스처에 압축 픽셀 데이터를 업로드"
                 },
                 {
                     "name": "texture:isCompressed",
@@ -20322,16 +20225,6 @@ const TrussCAPI = {
                     "desc_ko": "텍스처를 그림"
                 },
                 {
-                    "name": "texture:drawFlippedY",
-                    "return": "(nothing)",
-                    "signatures": [
-                        "x, y, w, h"
-                    ],
-                    "desc": "Draw the texture vertically flipped",
-                    "desc_ja": "テクスチャを上下反転して描画",
-                    "desc_ko": "텍스처를 상하 반전하여 그림"
-                },
-                {
                     "name": "texture:drawSubsection",
                     "return": "(nothing)",
                     "signatures": [
@@ -20400,26 +20293,6 @@ const TrussCAPI = {
                     "desc": "Return the sokol-gfx color attachment view used to render into this RenderTarget (advanced interop).",
                     "desc_ja": "この RenderTarget へ描画するための sokol-gfx カラーアタッチメント view を返す（高度な相互運用向け）。",
                     "desc_ko": "이 RenderTarget에 렌더링하기 위한 sokol-gfx 컬러 어태치먼트 view를 반환한다(고급 상호운용용)."
-                },
-                {
-                    "name": "texture:getAttachmentViewForMip",
-                    "return": "sg_view",
-                    "signatures": [
-                        "level"
-                    ],
-                    "desc": "Return the sokol-gfx color attachment view for the given mip level (advanced interop).",
-                    "desc_ja": "指定したミップレベルの sokol-gfx カラーアタッチメント view を返す（高度な相互運用向け）。",
-                    "desc_ko": "지정한 밉 레벨의 sokol-gfx 컬러 어태치먼트 view를 반환한다(고급 상호운용용)."
-                },
-                {
-                    "name": "texture:getViewForMip",
-                    "return": "sg_view",
-                    "signatures": [
-                        "level"
-                    ],
-                    "desc": "Return the sokol-gfx texture view for sampling a single mip level (advanced interop).",
-                    "desc_ja": "単一のミップレベルをサンプリングするための sokol-gfx テクスチャ view を返す（高度な相互運用向け）。",
-                    "desc_ko": "단일 밉 레벨을 샘플링하기 위한 sokol-gfx 텍스처 view를 반환한다(고급 상호운용용)."
                 }
             ]
         },
@@ -20541,7 +20414,7 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "Tween",
+            "name": "TweenColor",
             "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
             "keywords": [
                 "animate",
@@ -20552,17 +20425,459 @@ const TrussCAPI = {
             ],
             "desc_ja": "型 T の値をイージング付きでアニメーション。lerp 可能な任意の型（float, Vec2, Vec3, Vec4, Color など）にテンプレート化。start() を呼ぶと events().update で毎フレーム自動更新。チェイン可能なセッターで設定する",
             "desc_ko": "T 타입 값을 이징과 함께 애니메이션. lerp 가능한 임의 타입(float, Vec2, Vec3, Vec4, Color 등)으로 템플릿화. start() 호출 시 events().update로 매 프레임 자동 갱신. 체이닝 가능한 세터로 설정",
-            "related": [
-                "ease",
-                "Tween::from",
-                "Tween::to"
-            ],
             "constructor": {
                 "signatures": [
                     "",
-                    "start, end, duration, type = Cubic, mode = InOut"
+                    "from, to, duration",
+                    "from, to, duration, ease",
+                    "from, to, duration, ease, mode"
                 ]
-            }
+            },
+            "methods": [
+                {
+                    "name": "tweenColor:from",
+                    "return": "TweenColor",
+                    "signatures": [
+                        "value"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:to",
+                    "return": "TweenColor",
+                    "signatures": [
+                        "value"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:duration",
+                    "return": "TweenColor",
+                    "signatures": [
+                        "seconds"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:ease",
+                    "return": "TweenColor",
+                    "signatures": [
+                        "type, mode"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:loop",
+                    "return": "TweenColor",
+                    "signatures": [
+                        "count"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:yoyo",
+                    "return": "TweenColor",
+                    "signatures": [
+                        "enable"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:delay",
+                    "return": "TweenColor",
+                    "signatures": [
+                        "seconds"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:start",
+                    "return": "TweenColor",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:pause",
+                    "return": "TweenColor",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:resume",
+                    "return": "TweenColor",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:reset",
+                    "return": "TweenColor",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:finish",
+                    "return": "TweenColor",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:getValue",
+                    "return": "Color",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:getProgress",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:getElapsed",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:getDuration",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:isPlaying",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:isComplete",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:getStart",
+                    "return": "Color",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:getEnd",
+                    "return": "Color",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenColor:getLoopCount",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ]
+        },
+        {
+            "name": "TweenFloat",
+            "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+            "keywords": [
+                "animate",
+                "easing",
+                "interpolate",
+                "transition",
+                "motion"
+            ],
+            "desc_ja": "型 T の値をイージング付きでアニメーション。lerp 可能な任意の型（float, Vec2, Vec3, Vec4, Color など）にテンプレート化。start() を呼ぶと events().update で毎フレーム自動更新。チェイン可能なセッターで設定する",
+            "desc_ko": "T 타입 값을 이징과 함께 애니메이션. lerp 가능한 임의 타입(float, Vec2, Vec3, Vec4, Color 등)으로 템플릿화. start() 호출 시 events().update로 매 프레임 자동 갱신. 체이닝 가능한 세터로 설정",
+            "constructor": {
+                "signatures": [
+                    "",
+                    "from, to, duration",
+                    "from, to, duration, ease",
+                    "from, to, duration, ease, mode"
+                ]
+            },
+            "methods": [
+                {
+                    "name": "tweenFloat:from",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        "value"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:to",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        "value"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:duration",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        "seconds"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:ease",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        "type, mode"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:loop",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        "count"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:yoyo",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        "enable"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:delay",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        "seconds"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:start",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:pause",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:resume",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:reset",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:finish",
+                    "return": "TweenFloat",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:getValue",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:getProgress",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:getElapsed",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:getDuration",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:isPlaying",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:isComplete",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:getStart",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:getEnd",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenFloat:getLoopCount",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ]
         },
         {
             "name": "TweenMod",
@@ -20914,6 +21229,472 @@ const TrussCAPI = {
                     "desc": "Get the current easing mode (In/Out/InOut) (TweenMod method) (C++ only)",
                     "desc_ja": "現在のイージングモード（In/Out/InOut）を取得（TweenModメソッド）（C++のみ）",
                     "desc_ko": "현재 easing 모드(In/Out/InOut)를 얻음 (TweenMod 메서드) (C++ 전용)"
+                }
+            ]
+        },
+        {
+            "name": "TweenVec2",
+            "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+            "keywords": [
+                "animate",
+                "easing",
+                "interpolate",
+                "transition",
+                "motion"
+            ],
+            "desc_ja": "型 T の値をイージング付きでアニメーション。lerp 可能な任意の型（float, Vec2, Vec3, Vec4, Color など）にテンプレート化。start() を呼ぶと events().update で毎フレーム自動更新。チェイン可能なセッターで設定する",
+            "desc_ko": "T 타입 값을 이징과 함께 애니메이션. lerp 가능한 임의 타입(float, Vec2, Vec3, Vec4, Color 등)으로 템플릿화. start() 호출 시 events().update로 매 프레임 자동 갱신. 체이닝 가능한 세터로 설정",
+            "constructor": {
+                "signatures": [
+                    "",
+                    "from, to, duration",
+                    "from, to, duration, ease",
+                    "from, to, duration, ease, mode"
+                ]
+            },
+            "methods": [
+                {
+                    "name": "tweenVec2:from",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        "value"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:to",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        "value"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:duration",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        "seconds"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:ease",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        "type, mode"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:loop",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        "count"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:yoyo",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        "enable"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:delay",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        "seconds"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:start",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:pause",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:resume",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:reset",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:finish",
+                    "return": "TweenVec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:getValue",
+                    "return": "Vec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:getProgress",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:getElapsed",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:getDuration",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:isPlaying",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:isComplete",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:getStart",
+                    "return": "Vec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:getEnd",
+                    "return": "Vec2",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec2:getLoopCount",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ]
+        },
+        {
+            "name": "TweenVec3",
+            "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+            "keywords": [
+                "animate",
+                "easing",
+                "interpolate",
+                "transition",
+                "motion"
+            ],
+            "desc_ja": "型 T の値をイージング付きでアニメーション。lerp 可能な任意の型（float, Vec2, Vec3, Vec4, Color など）にテンプレート化。start() を呼ぶと events().update で毎フレーム自動更新。チェイン可能なセッターで設定する",
+            "desc_ko": "T 타입 값을 이징과 함께 애니메이션. lerp 가능한 임의 타입(float, Vec2, Vec3, Vec4, Color 등)으로 템플릿화. start() 호출 시 events().update로 매 프레임 자동 갱신. 체이닝 가능한 세터로 설정",
+            "constructor": {
+                "signatures": [
+                    "",
+                    "from, to, duration",
+                    "from, to, duration, ease",
+                    "from, to, duration, ease, mode"
+                ]
+            },
+            "methods": [
+                {
+                    "name": "tweenVec3:from",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        "value"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:to",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        "value"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:duration",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        "seconds"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:ease",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        "type, mode"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:loop",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        "count"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:yoyo",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        "enable"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:delay",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        "seconds"
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:start",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:pause",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:resume",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:reset",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:finish",
+                    "return": "TweenVec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:getValue",
+                    "return": "Vec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:getProgress",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:getElapsed",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:getDuration",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:isPlaying",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:isComplete",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:getStart",
+                    "return": "Vec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:getEnd",
+                    "return": "Vec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "tweenVec3:getLoopCount",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ]
         },
