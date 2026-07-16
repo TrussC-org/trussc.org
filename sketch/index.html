@@ -954,11 +954,11 @@
                     })
                     .catch(() => {
                         console.log('Local TrussSketch.js not found, using CDN');
-                        script.src = CDN_BASE + 'TrussSketch.js?v=' + new Date().getTime();
+                        script.src = ENGINE_BASE + 'TrussSketch.js';
                         document.body.appendChild(script);
                     });
             } else {
-                script.src = CDN_BASE + 'TrussSketch.js?v=' + new Date().getTime();
+                script.src = ENGINE_BASE + 'TrussSketch.js';
                 document.body.appendChild(script);
             }
         })();

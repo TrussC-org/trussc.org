@@ -2138,8 +2138,14 @@ end
             }
         }
 
-        // CDN configuration
+        // CDN configuration. The engine is pinned to an immutable versioned path
+        // (cdn.trussc.org/<version>/...): assets there never change, so the browser
+        // caches them for good — no ?v= cache-buster (which forced a full 13 MB
+        // re-download on EVERY visit) and no 4h-edge-cache mixed-state windows.
+        // Bump ENGINE_VERSION when deploying a new engine (tools/deploy_cdn.sh <ver>).
         const CDN_BASE = 'https://cdn.trussc.org/';
+        const ENGINE_VERSION = '0.6.5';
+        const ENGINE_BASE = CDN_BASE + ENGINE_VERSION + '/';
         const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         let useLocalFiles = false; // Will be set after checking local file availability
 
@@ -2150,8 +2156,8 @@ end
                     // Local development: use local files
                     return path + '?v=' + new Date().getTime();
                 } else {
-                    // Production: use CDN
-                    return CDN_BASE + path + '?v=' + new Date().getTime();
+                    // Production: versioned CDN path, immutable -> fully cacheable
+                    return ENGINE_BASE + path;
                 }
             },
             canvas: (function() {
