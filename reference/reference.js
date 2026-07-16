@@ -614,7 +614,7 @@
         // Optional long-form details (multi-line), shown only here in the detail pane.
         const details = (overloads.find(o => o.details) || {}).details;
         if (details) {
-            html += `<div class="detail-details" style="color:#bbb;font-size:13px;line-height:1.7;margin:6px 0 4px;">${mdToHtml(details)}</div>`;
+            html += `<div class="detail-details" style="color:var(--ref-details,#bbb);font-size:13px;line-height:1.7;margin:6px 0 4px;">${mdToHtml(details)}</div>`;
         }
 
         // Platform support (only when the symbol is restricted on some platform).
@@ -754,7 +754,7 @@
         html += `<div class="detail-desc">${esc(m.desc || '')}</div>`;
         html += `<div class="detail-section">`;
         html += `<div class="detail-section-title">${esc(UI.signatures)}</div>`;
-        html += `<div class="detail-entry"><div class="detail-sig"><span class="name" style="color:#dcdcaa;">${esc(m.signature || m.name)}</span></div></div>`;
+        html += `<div class="detail-entry"><div class="detail-sig"><span class="name" style="color:var(--ref-macro-sig,#dcdcaa);">${esc(m.signature || m.name)}</span></div></div>`;
         html += `</div>`;
         detail.innerHTML = html;
     }
@@ -768,12 +768,12 @@
         html += `<div class="detail-desc">${esc(c.desc || UI.constantValue)}</div>`;
         // Long-form notes (e.g. the TAU/PI essays) — Markdown-rendered, same as functions.
         if (c.details) {
-            html += `<div class="detail-details" style="color:#bbb;font-size:13px;line-height:1.7;margin:6px 0 4px;">${mdToHtml(c.details)}</div>`;
+            html += `<div class="detail-details" style="color:var(--ref-details,#bbb);font-size:13px;line-height:1.7;margin:6px 0 4px;">${mdToHtml(c.details)}</div>`;
         }
         if (c.value !== undefined && c.value !== null) {   // don't print the literal word "undefined"
             html += `<div class="detail-section">`;
             html += `<div class="detail-section-title">${esc(UI.value)}</div>`;
-            html += `<div class="detail-entry"><div class="detail-sig" style="color:#b5cea8;font-size:16px;">${esc(String(c.value))}</div></div>`;
+            html += `<div class="detail-entry"><div class="detail-sig" style="color:var(--ref-const-value,#b5cea8);font-size:16px;">${esc(String(c.value))}</div></div>`;
             html += `</div>`;
         }
         html += renderRelated(c.related);

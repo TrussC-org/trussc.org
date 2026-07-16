@@ -338,19 +338,20 @@
         // Get file icon based on extension
         function getFileIcon(filename) {
             const ext = filename.split('.').pop().toLowerCase();
+            // GitHub-light palette to stay readable on the white theme
             const icons = {
-                'as': '<svg viewBox="0 0 16 16"><path d="M4 2h5l3 3v9H4V2z" fill="none" stroke="#569cd6" stroke-width="1.2"/></svg>',
-                'tcs': '<svg viewBox="0 0 16 16"><path d="M4 2h5l3 3v9H4V2z" fill="none" stroke="#569cd6" stroke-width="1.2"/></svg>',
-                'png': '<svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1" fill="none" stroke="#89d185" stroke-width="1.2"/><circle cx="6" cy="6" r="1.5" fill="#89d185"/></svg>',
-                'jpg': '<svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1" fill="none" stroke="#89d185" stroke-width="1.2"/><circle cx="6" cy="6" r="1.5" fill="#89d185"/></svg>',
-                'jpeg': '<svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1" fill="none" stroke="#89d185" stroke-width="1.2"/><circle cx="6" cy="6" r="1.5" fill="#89d185"/></svg>',
-                'gif': '<svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1" fill="none" stroke="#89d185" stroke-width="1.2"/><circle cx="6" cy="6" r="1.5" fill="#89d185"/></svg>',
-                'mp3': '<svg viewBox="0 0 16 16"><circle cx="8" cy="10" r="3" fill="none" stroke="#ce9178" stroke-width="1.2"/><path d="M11 10V4" stroke="#ce9178" stroke-width="1.2"/></svg>',
-                'wav': '<svg viewBox="0 0 16 16"><circle cx="8" cy="10" r="3" fill="none" stroke="#ce9178" stroke-width="1.2"/><path d="M11 10V4" stroke="#ce9178" stroke-width="1.2"/></svg>',
-                'ogg': '<svg viewBox="0 0 16 16"><circle cx="8" cy="10" r="3" fill="none" stroke="#ce9178" stroke-width="1.2"/><path d="M11 10V4" stroke="#ce9178" stroke-width="1.2"/></svg>',
-                'json': '<svg viewBox="0 0 16 16"><path d="M4 2h5l3 3v9H4V2z" fill="none" stroke="#dcdcaa" stroke-width="1.2"/></svg>',
+                'as': '<svg viewBox="0 0 16 16"><path d="M4 2h5l3 3v9H4V2z" fill="none" stroke="#0969da" stroke-width="1.2"/></svg>',
+                'tcs': '<svg viewBox="0 0 16 16"><path d="M4 2h5l3 3v9H4V2z" fill="none" stroke="#0969da" stroke-width="1.2"/></svg>',
+                'png': '<svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1" fill="none" stroke="#1a7f37" stroke-width="1.2"/><circle cx="6" cy="6" r="1.5" fill="#1a7f37"/></svg>',
+                'jpg': '<svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1" fill="none" stroke="#1a7f37" stroke-width="1.2"/><circle cx="6" cy="6" r="1.5" fill="#1a7f37"/></svg>',
+                'jpeg': '<svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1" fill="none" stroke="#1a7f37" stroke-width="1.2"/><circle cx="6" cy="6" r="1.5" fill="#1a7f37"/></svg>',
+                'gif': '<svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1" fill="none" stroke="#1a7f37" stroke-width="1.2"/><circle cx="6" cy="6" r="1.5" fill="#1a7f37"/></svg>',
+                'mp3': '<svg viewBox="0 0 16 16"><circle cx="8" cy="10" r="3" fill="none" stroke="#bc4c00" stroke-width="1.2"/><path d="M11 10V4" stroke="#bc4c00" stroke-width="1.2"/></svg>',
+                'wav': '<svg viewBox="0 0 16 16"><circle cx="8" cy="10" r="3" fill="none" stroke="#bc4c00" stroke-width="1.2"/><path d="M11 10V4" stroke="#bc4c00" stroke-width="1.2"/></svg>',
+                'ogg': '<svg viewBox="0 0 16 16"><circle cx="8" cy="10" r="3" fill="none" stroke="#bc4c00" stroke-width="1.2"/><path d="M11 10V4" stroke="#bc4c00" stroke-width="1.2"/></svg>',
+                'json': '<svg viewBox="0 0 16 16"><path d="M4 2h5l3 3v9H4V2z" fill="none" stroke="#9a6700" stroke-width="1.2"/></svg>',
             };
-            return icons[ext] || '<svg viewBox="0 0 16 16"><path d="M4 2h5l3 3v9H4V2z" fill="none" stroke="#888" stroke-width="1.2"/></svg>';
+            return icons[ext] || '<svg viewBox="0 0 16 16"><path d="M4 2h5l3 3v9H4V2z" fill="none" stroke="#57606a" stroke-width="1.2"/></svg>';
         }
 
         // Format file size
