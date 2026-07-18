@@ -84,17 +84,17 @@ const TrussSketchAPI = {
     {
      "name": "getDataPath",
      "snippet": "getDataPath(${1:filename})",
-     "desc": "Get full path relative to data directory"
+     "desc": "Resolve a relative path against the data directory and return it as fs::path. An absolute input is returned unchanged."
     },
     {
      "name": "getDataPathRoot",
      "snippet": "getDataPathRoot()",
-     "desc": "Get the current data path root (with trailing slash)."
+     "desc": "Get the current data path root as fs::path."
     },
     {
      "name": "getExecutableDir",
      "snippet": "getExecutableDir()",
-     "desc": "Get the directory containing the running executable (with trailing slash)."
+     "desc": "Get the directory containing the running executable."
     },
     {
      "name": "getExecutablePath",
@@ -132,6 +132,11 @@ const TrussSketchAPI = {
      "desc": "List files in directory"
     },
     {
+     "name": "loadErrorName",
+     "snippet": "loadErrorName(${1:e})",
+     "desc": "Short label for a LoadError value (\"FileNotFound\", ...). For log messages"
+    },
+    {
      "name": "loadJson",
      "snippet": "loadJson(${1:path})",
      "desc": "Load a JSON file and return it as a Json object. Relative paths are resolved via getDataPath; returns an empty Json on error."
@@ -164,7 +169,7 @@ const TrussSketchAPI = {
     {
      "name": "setDataPathRoot",
      "snippet": "setDataPathRoot(${1:path})",
-     "desc": "Set the root directory used to resolve relative data paths. A relative path is resolved against the executable directory; an absolute path (starting with /) is used as-is. A trailing slash is added automatically."
+     "desc": "Set the root directory used to resolve relative data paths. A relative root is resolved against the executable directory; an absolute root (fs::path::is_absolute, e.g. C:/ on Windows) is used as-is."
     },
     {
      "name": "setDataPathToResources",
@@ -744,7 +749,7 @@ const TrussSketchAPI = {
     {
      "name": "setBlendMode",
      "snippet": "setBlendMode(${1:mode})",
-     "desc": "Set blend mode. BlendMode::Alpha (default), Add, Multiply, Screen, Subtract, Disabled"
+     "desc": "Set blend mode. BlendMode::Alpha (default), Add, Multiply, Screen, Subtract, Disabled. Works on the screen and inside Fbo passes alike; the mode persists until changed (it also carries into a subsequent Fbo::begin)"
     },
     {
      "name": "setCurveResolution",
@@ -1177,6 +1182,11 @@ const TrussSketchAPI = {
      "desc": "Inverse hyperbolic tangent"
     },
     {
+     "name": "createWindow",
+     "snippet": "createWindow()",
+     "desc": "Create a secondary window (macOS / Windows / desktop Linux; returns nullptr on single-window platforms). It ticks on its own display's vsync; closing it leaves the app running. Give it content with Window::setApp()"
+    },
+    {
      "name": "exp2",
      "snippet": "exp2(${1:x})",
      "desc": "Base-2 exponential (2^x)"
@@ -1595,6 +1605,11 @@ const TrussSketchAPI = {
      "name": "compressBound",
      "snippet": "compressBound(${1:nbytes}, ${2:codec})",
      "desc": "Worst-case compressed size, for sizing a destination buffer"
+    },
+    {
+     "name": "fromBase64",
+     "snippet": "fromBase64(${1:encoded})",
+     "desc": "Decode a Base64 string back into raw bytes"
     },
     {
      "name": "getLogger",
@@ -5222,12 +5237,12 @@ const TrussSketchAPI = {
    "properties": [
     {
      "name": "filePath",
-     "type": "std::string",
+     "type": "fs::path",
      "desc": "Full path to the chosen file"
     },
     {
      "name": "fileName",
-     "type": "std::string",
+     "type": "fs::path",
      "desc": "Filename only (no directory)"
     },
     {
@@ -5355,7 +5370,7 @@ const TrussSketchAPI = {
     {
      "name": "load",
      "snippet": "load(${1:nameOrPath}, ${2:size})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Load font file"
     },
     {
@@ -5907,7 +5922,7 @@ const TrussSketchAPI = {
     {
      "name": "load",
      "snippet": "load(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface)."
     },
     {
@@ -6630,6 +6645,80 @@ const TrussSketchAPI = {
      "snippet": "Spot",
      "return": "LightType",
      "desc": "= 2"
+    }
+   ]
+  },
+  {
+   "name": "LoadError",
+   "desc": "Load failure kind: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown.",
+   "static_methods": [
+    {
+     "name": "None",
+     "snippet": "None",
+     "return": "LoadError",
+     "desc": "= 0"
+    },
+    {
+     "name": "FileNotFound",
+     "snippet": "FileNotFound",
+     "return": "LoadError",
+     "desc": "= 1"
+    },
+    {
+     "name": "UnsupportedFormat",
+     "snippet": "UnsupportedFormat",
+     "return": "LoadError",
+     "desc": "= 2"
+    },
+    {
+     "name": "DecodeFailed",
+     "snippet": "DecodeFailed",
+     "return": "LoadError",
+     "desc": "= 3"
+    },
+    {
+     "name": "Unknown",
+     "snippet": "Unknown",
+     "return": "LoadError",
+     "desc": "= 4"
+    }
+   ]
+  },
+  {
+   "name": "LoadResult",
+   "desc": "Result of a resource load (Image, SoundBuffer, VideoPlayer, Font, ...). Truthy on success; on failure carries a LoadError and a human-readable message.",
+   "properties": [
+    {
+     "name": "error",
+     "type": "LoadError",
+     "desc": "What went wrong; LoadError::None on success"
+    },
+    {
+     "name": "message",
+     "type": "std::string",
+     "desc": "Human-readable failure detail (may be empty)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "ok",
+     "snippet": "ok()",
+     "return": "bool",
+     "desc": "true if the load succeeded (error == LoadError::None)"
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "success",
+     "snippet": "success()",
+     "return": "LoadResult",
+     "desc": "Make a success result (static)"
+    },
+    {
+     "name": "fail",
+     "snippet": "fail(${1:e})",
+     "return": "LoadResult",
+     "desc": "Make a failure result with an error kind and optional message (static)"
     }
    ]
   },
@@ -8880,7 +8969,7 @@ const TrussSketchAPI = {
     {
      "name": "loadHDR",
      "snippet": "loadHDR(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Load an HDR (.hdr) image into a float pixel buffer"
     },
     {
@@ -8898,7 +8987,7 @@ const TrussSketchAPI = {
     {
      "name": "load",
      "snippet": "load(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Load image from file"
     },
     {
@@ -9611,7 +9700,7 @@ const TrussSketchAPI = {
     {
      "name": "getPath",
      "snippet": "getPath()",
-     "return": "const std::string &",
+     "return": "fs::path",
      "desc": "Output file path of the current recording"
     },
     {
@@ -10111,13 +10200,13 @@ const TrussSketchAPI = {
     {
      "name": "load",
      "snippet": "load(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a"
     },
     {
      "name": "loadStream",
      "snippet": "loadStream(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count."
     },
     {
@@ -10306,19 +10395,19 @@ const TrussSketchAPI = {
     {
      "name": "loadOgg",
      "snippet": "loadOgg(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis)."
     },
     {
      "name": "loadWav",
      "snippet": "loadWav(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Decode a WAV file into PCM."
     },
     {
      "name": "loadMp3",
      "snippet": "loadMp3(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Decode an MP3 file into PCM."
     },
     {
@@ -10330,7 +10419,7 @@ const TrussSketchAPI = {
     {
      "name": "loadAac",
      "snippet": "loadAac(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms)."
     },
     {
@@ -10437,7 +10526,7 @@ const TrussSketchAPI = {
     {
      "name": "loadStream",
      "snippet": "loadStream(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported."
     },
     {
@@ -10449,7 +10538,7 @@ const TrussSketchAPI = {
     {
      "name": "getPath",
      "snippet": "getPath()",
-     "return": "const std::string &",
+     "return": "fs::path",
      "desc": "Path the stream was opened from."
     },
     {
@@ -12989,7 +13078,7 @@ const TrussSketchAPI = {
     {
      "name": "load",
      "snippet": "load(${1:path})",
-     "return": "bool",
+     "return": "LoadResult",
      "desc": "Load a video file"
     },
     {
@@ -13157,7 +13246,7 @@ const TrussSketchAPI = {
     {
      "name": "getPath",
      "snippet": "getPath()",
-     "return": "const std::string &",
+     "return": "fs::path",
      "desc": "Path of the currently loaded video file (resolved via getDataPath); empty string when nothing is loaded"
     }
    ]
@@ -13245,7 +13334,7 @@ const TrussSketchAPI = {
     {
      "name": "getPath",
      "snippet": "getPath()",
-     "return": "const std::string &",
+     "return": "fs::path",
      "desc": "Resolved output file path"
     },
     {
@@ -13271,6 +13360,75 @@ const TrussSketchAPI = {
      "snippet": "submitFrame(${1:timeSec})",
      "return": "bool",
      "desc": "Append the previously locked frame at the given presentation time (seconds)"
+    }
+   ]
+  },
+  {
+   "name": "Window",
+   "desc": "A secondary application window (macOS only for now). Owns its own Node tree, events, mouse state and render context; ticks at its display's refresh rate. GPU resources are shared with every other window",
+   "constructor": {
+    "snippet": "Window()"
+   },
+   "methods": [
+    {
+     "name": "setApp",
+     "snippet": "setApp(${1:app})",
+     "return": "void",
+     "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window"
+    },
+    {
+     "name": "getApp",
+     "snippet": "getApp()",
+     "return": "std::shared_ptr<App>",
+     "desc": "Get the App attached to this window"
+    },
+    {
+     "name": "events",
+     "snippet": "events()",
+     "return": "CoreEvents &",
+     "desc": "This window's own event stream (mousePressed / keyPressed / draw / ...)"
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Close the native window; the main window and other windows keep running"
+    },
+    {
+     "name": "isOpen",
+     "snippet": "isOpen()",
+     "return": "bool",
+     "desc": "Whether the native window is still open"
+    },
+    {
+     "name": "setTitle",
+     "snippet": "setTitle(${1:title})",
+     "return": "void",
+     "desc": "Set the window title"
+    },
+    {
+     "name": "getTitle",
+     "snippet": "getTitle()",
+     "return": "const std::string &",
+     "desc": "Last title set for this window (via WindowSettings or setTitle)"
+    },
+    {
+     "name": "getWidth",
+     "snippet": "getWidth()",
+     "return": "int",
+     "desc": "Window width in logical points (matches its coordinate system)"
+    },
+    {
+     "name": "getHeight",
+     "snippet": "getHeight()",
+     "return": "int",
+     "desc": "Window height in logical points (matches its coordinate system)"
+    },
+    {
+     "name": "setClearColor",
+     "snippet": "setClearColor(${1:c})",
+     "return": "void",
+     "desc": "Background clear color for this window"
     }
    ]
   },

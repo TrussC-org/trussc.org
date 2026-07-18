@@ -6,7 +6,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.6.4",
+    "version": "v0.7.0",
     "lang": "all",
     "categories": [
         {
@@ -2662,7 +2662,7 @@ const TrussCAPI = {
                     "params": "mode",
                     "params_typed": "BlendMode mode",
                     "return_type": "void",
-                    "desc": "Set blend mode. BlendMode::Alpha (default), Add, Multiply, Screen, Subtract, Disabled",
+                    "desc": "Set blend mode. BlendMode::Alpha (default), Add, Multiply, Screen, Subtract, Disabled. Works on the screen and inside Fbo passes alike; the mode persists until changed (it also carries into a subsequent Fbo::begin)",
                     "keywords": [
                         "additive",
                         "multiply",
@@ -2670,8 +2670,8 @@ const TrussCAPI = {
                         "compositing",
                         "ofenableblendmode"
                     ],
-                    "desc_ja": "ブレンドモードを設定。BlendMode::Alpha（デフォルト）, Add, Multiply, Screen, Subtract, Disabled",
-                    "desc_ko": "블렌드 모드를 설정. BlendMode::Alpha (기본값), Add, Multiply, Screen, Subtract, Disabled",
+                    "desc_ja": "ブレンドモードを設定。BlendMode::Alpha（デフォルト）, Add, Multiply, Screen, Subtract, Disabled。画面・Fboパス内のどちらでも有効で、変更するまで持続する（Fbo::begin をまたいでも引き継がれる）",
+                    "desc_ko": "블렌드 모드를 설정. BlendMode::Alpha (기본값), Add, Multiply, Screen, Subtract, Disabled. 화면과 Fbo 패스 안에서 동일하게 동작하며, 변경할 때까지 유지됨 (이후의 Fbo::begin에도 이어짐)",
                     "related": [
                         "BlendMode",
                         "getBlendMode",
@@ -3779,7 +3779,7 @@ const TrussCAPI = {
                 {
                     "name": "loadDialog",
                     "params": "title, message, defaultPath, folderSelection",
-                    "params_typed": "const std::string & title = std::string(\"\"), const std::string & message = std::string(\"\"), const std::string & defaultPath = std::string(\"\"), bool folderSelection = false",
+                    "params_typed": "const std::string & title = std::string(\"\"), const std::string & message = std::string(\"\"), const fs::path & defaultPath = fs::path(), bool folderSelection = false",
                     "return_type": "FileDialogResult",
                     "desc": "Show file open dialog. Returns FileDialogResult with filePath, fileName, success",
                     "keywords": [
@@ -3815,7 +3815,7 @@ const TrussCAPI = {
                 {
                     "name": "loadDialogAsync",
                     "params": "title, message, defaultPath, folderSelection, callback",
-                    "params_typed": "const std::string & title, const std::string & message, const std::string & defaultPath, bool folderSelection, std::function<void (const FileDialogResult &)> callback",
+                    "params_typed": "const std::string & title, const std::string & message, const fs::path & defaultPath, bool folderSelection, std::function<void (const FileDialogResult &)> callback",
                     "return_type": "void",
                     "desc": "Show file open dialog asynchronously. Callback receives FileDialogResult",
                     "keywords": [
@@ -3837,7 +3837,7 @@ const TrussCAPI = {
                 {
                     "name": "saveDialog",
                     "params": "title, message, defaultPath, defaultName",
-                    "params_typed": "const std::string & title = std::string(\"\"), const std::string & message = std::string(\"\"), const std::string & defaultPath = std::string(\"\"), const std::string & defaultName = std::string(\"\")",
+                    "params_typed": "const std::string & title = std::string(\"\"), const std::string & message = std::string(\"\"), const fs::path & defaultPath = fs::path(), const fs::path & defaultName = fs::path()",
                     "return_type": "FileDialogResult",
                     "desc": "Show file save dialog. Returns FileDialogResult with filePath, fileName, success",
                     "keywords": [
@@ -3872,7 +3872,7 @@ const TrussCAPI = {
                 {
                     "name": "saveDialogAsync",
                     "params": "title, message, defaultPath, defaultName, callback",
-                    "params_typed": "const std::string & title, const std::string & message, const std::string & defaultPath, const std::string & defaultName, std::function<void (const FileDialogResult &)> callback",
+                    "params_typed": "const std::string & title, const std::string & message, const fs::path & defaultPath, const fs::path & defaultName, std::function<void (const FileDialogResult &)> callback",
                     "return_type": "void",
                     "desc": "Show file save dialog asynchronously. Callback receives FileDialogResult",
                     "keywords": [
@@ -4030,10 +4030,6 @@ const TrussCAPI = {
                         {
                             "name": "cursorExample",
                             "group": "input_output"
-                        },
-                        {
-                            "name": "nodeExample",
-                            "group": "node"
                         }
                     ]
                 },
@@ -4063,10 +4059,6 @@ const TrussCAPI = {
                         {
                             "name": "cursorExample",
                             "group": "input_output"
-                        },
-                        {
-                            "name": "nodeExample",
-                            "group": "node"
                         }
                     ]
                 },
@@ -4724,10 +4716,6 @@ const TrussCAPI = {
                         {
                             "name": "blendingExample",
                             "group": "graphics"
-                        },
-                        {
-                            "name": "hitTestExample",
-                            "group": "node"
                         }
                     ]
                 },
@@ -8105,7 +8093,7 @@ const TrussCAPI = {
                 {
                     "name": "startRecording",
                     "params": "path, settings",
-                    "params_typed": "const std::string & path, const VideoRecordSettings & settings = {}",
+                    "params_typed": "const fs::path & path, const VideoRecordSettings & settings = {}",
                     "return_type": "bool",
                     "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
                     "keywords": [
@@ -8136,7 +8124,7 @@ const TrussCAPI = {
                 {
                     "name": "startRecording",
                     "params": "path, durationSec",
-                    "params_typed": "const std::string & path, float durationSec",
+                    "params_typed": "const fs::path & path, float durationSec",
                     "return_type": "bool",
                     "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
                     "keywords": [
@@ -8167,7 +8155,7 @@ const TrussCAPI = {
                 {
                     "name": "startRecording",
                     "params": "fbo, path, settings",
-                    "params_typed": "const Fbo & fbo, const std::string & path, const VideoRecordSettings & settings = {}",
+                    "params_typed": "const Fbo & fbo, const fs::path & path, const VideoRecordSettings & settings = {}",
                     "return_type": "bool",
                     "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
                     "keywords": [
@@ -8198,7 +8186,7 @@ const TrussCAPI = {
                 {
                     "name": "startRecording",
                     "params": "fbo, path, durationSec",
-                    "params_typed": "const Fbo & fbo, const std::string & path, float durationSec",
+                    "params_typed": "const Fbo & fbo, const fs::path & path, float durationSec",
                     "return_type": "bool",
                     "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
                     "keywords": [
@@ -8289,7 +8277,7 @@ const TrussCAPI = {
                     "name": "recordingPath",
                     "params": "",
                     "params_typed": "",
-                    "return_type": "const std::string &",
+                    "return_type": "fs::path",
                     "desc": "Output file path of the current recording",
                     "keywords": [
                         "record",
@@ -8464,7 +8452,7 @@ const TrussCAPI = {
                 {
                     "name": "setLogFile",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "bool",
                     "desc": "Open a file to receive log output",
                     "keywords": [
@@ -8558,7 +8546,7 @@ const TrussCAPI = {
                 {
                     "name": "tcSetLogFile",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "bool",
                     "desc": "Deprecated alias for setLogFile()",
                     "keywords": [
@@ -9361,7 +9349,8 @@ const TrussCAPI = {
                     "desc_ko": "raw 바이트를 Base64 문자열로 인코딩",
                     "related": [
                         "compress",
-                        "toBinary"
+                        "toBinary",
+                        "fromBase64"
                     ]
                 },
                 {
@@ -9380,7 +9369,8 @@ const TrussCAPI = {
                     "desc_ko": "raw 바이트를 Base64 문자열로 인코딩",
                     "related": [
                         "compress",
-                        "toBinary"
+                        "toBinary",
+                        "fromBase64"
                     ]
                 },
                 {
@@ -9399,8 +9389,32 @@ const TrussCAPI = {
                     "desc_ko": "raw 바이트를 Base64 문자열로 인코딩",
                     "related": [
                         "compress",
-                        "toBinary"
+                        "toBinary",
+                        "fromBase64"
                     ]
+                },
+                {
+                    "name": "fromBase64",
+                    "params": "encoded",
+                    "params_typed": "const std::string & encoded",
+                    "return_type": "std::vector<unsigned char>",
+                    "desc": "Decode a Base64 string back into raw bytes",
+                    "keywords": [
+                        "base64",
+                        "decode",
+                        "decoding",
+                        "bytes",
+                        "binary"
+                    ],
+                    "desc_ja": "Base64 文字列を生バイトにデコード",
+                    "desc_ko": "Base64 문자열을 raw 바이트로 디코딩",
+                    "related": [
+                        "toBase64",
+                        "decompress"
+                    ],
+                    "details": "The counterpart of toBase64. Padding ('='), whitespace, and any other non-alphabet characters are skipped, so line-wrapped or MIME-style input decodes fine. To turn decoded image bytes into a picture, combine with Image::loadFromMemory.",
+                    "details_ja": "toBase64 の対になる関数。パディング（'='）・空白・その他のアルファベット外文字は読み飛ばすので、改行入りや MIME 形式の入力もそのままデコードできます。デコードした画像バイト列を絵にするには Image::loadFromMemory と組み合わせてください。",
+                    "details_ko": "toBase64 의 대응 함수입니다. 패딩('='), 공백, 그 외 알파벳 이외의 문자는 건너뛰므로 줄바꿈이 있거나 MIME 형식인 입력도 그대로 디코딩됩니다. 디코딩한 이미지 바이트를 그림으로 만들려면 Image::loadFromMemory 와 조합하세요."
                 },
                 {
                     "name": "isStringInString",
@@ -10070,7 +10084,7 @@ const TrussCAPI = {
                     "name": "getExecutablePath",
                     "params": "",
                     "params_typed": "",
-                    "return_type": "std::string",
+                    "return_type": "fs::path",
                     "desc": "Get the absolute path of the running executable.",
                     "keywords": [
                         "exe",
@@ -10091,16 +10105,16 @@ const TrussCAPI = {
                     "name": "getExecutableDir",
                     "params": "",
                     "params_typed": "",
-                    "return_type": "std::string",
-                    "desc": "Get the directory containing the running executable (with trailing slash).",
+                    "return_type": "fs::path",
+                    "desc": "Get the directory containing the running executable.",
                     "keywords": [
                         "exe",
                         "binary",
                         "app folder",
                         "directory"
                     ],
-                    "desc_ja": "実行中の実行ファイルを含むディレクトリを取得(末尾スラッシュ付き)",
-                    "desc_ko": "실행 중인 실행 파일이 있는 디렉터리를 얻음(끝 슬래시 포함)",
+                    "desc_ja": "実行中の実行ファイルを含むディレクトリを取得",
+                    "desc_ko": "실행 중인 실행 파일이 있는 디렉터리를 얻음",
                     "related": [
                         "getExecutablePath",
                         "setDataPathToResources"
@@ -10109,18 +10123,37 @@ const TrussCAPI = {
                     "platformNote_ja": "ネイティブは全て実ディレクトリを返す（android は internalDataPath）。Web はハードコードの \"/\"。\n"
                 },
                 {
+                    "name": "loadErrorName",
+                    "params": "e",
+                    "params_typed": "LoadError e",
+                    "return_type": "const char *",
+                    "desc": "Short label for a LoadError value (\"FileNotFound\", ...). For log messages",
+                    "keywords": [
+                        "error",
+                        "name",
+                        "label",
+                        "log"
+                    ],
+                    "desc_ja": "LoadError 値の短いラベル（\"FileNotFound\" など）。ログ用",
+                    "desc_ko": "LoadError 값의 짧은 레이블(\"FileNotFound\" 등). 로그용",
+                    "related": [
+                        "LoadResult",
+                        "LoadError"
+                    ]
+                },
+                {
                     "name": "setDataPathRoot",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "void",
-                    "desc": "Set the root directory used to resolve relative data paths. A relative path is resolved against the executable directory; an absolute path (starting with /) is used as-is. A trailing slash is added automatically.",
+                    "desc": "Set the root directory used to resolve relative data paths. A relative root is resolved against the executable directory; an absolute root (fs::path::is_absolute, e.g. C:/ on Windows) is used as-is.",
                     "keywords": [
                         "resource",
                         "directory",
                         "base"
                     ],
-                    "desc_ja": "相対データパスの解決に使うルートディレクトリを設定。相対パスは実行ファイルのディレクトリ基準で解決され、絶対パス(/始まり)はそのまま使われる。末尾のスラッシュは自動で付加される",
-                    "desc_ko": "상대 데이터 경로 해석에 사용할 루트 디렉터리를 설정. 상대 경로는 실행 파일 디렉터리 기준으로 해석되고, 절대 경로(/로 시작)는 그대로 사용됨. 끝의 슬래시는 자동으로 추가됨",
+                    "desc_ja": "相対データパスの解決に使うルートディレクトリを設定。相対ルートは実行ファイルのディレクトリ基準で解決され、絶対ルート(fs::path::is_absolute 判定、Windows の C:/ も可)はそのまま使われる",
+                    "desc_ko": "상대 데이터 경로 해석에 사용할 루트 디렉터리를 설정. 상대 루트는 실행 파일 디렉터리 기준으로 해석되고, 절대 루트(fs::path::is_absolute 판정, Windows의 C:/ 포함)는 그대로 사용됨",
                     "related": [
                         "getDataPathRoot",
                         "setDataPathToResources",
@@ -10131,15 +10164,15 @@ const TrussCAPI = {
                     "name": "getDataPathRoot",
                     "params": "",
                     "params_typed": "",
-                    "return_type": "std::string",
-                    "desc": "Get the current data path root (with trailing slash).",
+                    "return_type": "fs::path",
+                    "desc": "Get the current data path root as fs::path.",
                     "keywords": [
                         "resource",
                         "directory",
                         "base"
                     ],
-                    "desc_ja": "現在のデータパスルートを取得(末尾スラッシュ付き)",
-                    "desc_ko": "현재 데이터 경로 루트를 얻음(끝 슬래시 포함)",
+                    "desc_ja": "現在のデータパスルートを fs::path で取得",
+                    "desc_ko": "현재 데이터 경로 루트를 fs::path로 얻음",
                     "related": [
                         "setDataPathRoot",
                         "getDataPath"
@@ -10148,16 +10181,16 @@ const TrussCAPI = {
                 {
                     "name": "getDataPath",
                     "params": "filename",
-                    "params_typed": "const std::string & filename",
-                    "return_type": "std::string",
-                    "desc": "Get full path relative to data directory",
+                    "params_typed": "const fs::path & filename",
+                    "return_type": "fs::path",
+                    "desc": "Resolve a relative path against the data directory and return it as fs::path. An absolute input is returned unchanged.",
                     "keywords": [
                         "resource",
                         "asset",
                         "resolve"
                     ],
-                    "desc_ja": "データディレクトリからの相対パスを取得",
-                    "desc_ko": "데이터 디렉토리 기준의 전체 경로를 얻음",
+                    "desc_ja": "相対パスをデータディレクトリ基準で解決して fs::path で返す。絶対パスはそのまま返る",
+                    "desc_ko": "상대 경로를 데이터 디렉터리 기준으로 해석해 fs::path로 반환. 절대 경로는 그대로 반환됨",
                     "related": [
                         "getDataPathRoot",
                         "getAbsolutePath",
@@ -10199,7 +10232,7 @@ const TrussCAPI = {
                 {
                     "name": "loadJson",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "Json",
                     "desc": "Load a JSON file and return it as a Json object. Relative paths are resolved via getDataPath; returns an empty Json on error.",
                     "keywords": [
@@ -10225,7 +10258,7 @@ const TrussCAPI = {
                 {
                     "name": "saveJson",
                     "params": "j, path, indent",
-                    "params_typed": "const Json & j, const std::string & path, int indent = 2",
+                    "params_typed": "const Json & j, const fs::path & path, int indent = 2",
                     "return_type": "bool",
                     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath. indent sets the pretty-print width (negative for compact). Returns true on success.",
                     "keywords": [
@@ -10251,7 +10284,7 @@ const TrussCAPI = {
                 {
                     "name": "loadXml",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "Xml",
                     "desc": "Load an XML file and return it as an Xml object. Relative paths are resolved via getDataPath.",
                     "keywords": [
@@ -10275,7 +10308,7 @@ const TrussCAPI = {
                 {
                     "name": "getFileName",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "std::string",
                     "desc": "Get filename from path",
                     "keywords": [
@@ -10308,7 +10341,7 @@ const TrussCAPI = {
                 {
                     "name": "getBaseName",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "std::string",
                     "desc": "Get filename without extension",
                     "keywords": [
@@ -10336,7 +10369,7 @@ const TrussCAPI = {
                 {
                     "name": "getFileExtension",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "std::string",
                     "desc": "Get file extension without dot",
                     "keywords": [
@@ -10369,7 +10402,7 @@ const TrussCAPI = {
                 {
                     "name": "getParentDirectory",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "std::string",
                     "desc": "Get parent directory",
                     "keywords": [
@@ -10397,7 +10430,7 @@ const TrussCAPI = {
                 {
                     "name": "joinPath",
                     "params": "dir, file",
-                    "params_typed": "const std::string & dir, const std::string & file",
+                    "params_typed": "const fs::path & dir, const fs::path & file",
                     "return_type": "std::string",
                     "desc": "Join directory and filename",
                     "keywords": [
@@ -10426,7 +10459,7 @@ const TrussCAPI = {
                 {
                     "name": "getAbsolutePath",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "std::string",
                     "desc": "Get absolute path",
                     "keywords": [
@@ -10444,7 +10477,7 @@ const TrussCAPI = {
                 {
                     "name": "fileExists",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "bool",
                     "desc": "Check if file exists",
                     "keywords": [
@@ -10471,7 +10504,7 @@ const TrussCAPI = {
                 {
                     "name": "directoryExists",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "bool",
                     "desc": "Check if directory exists",
                     "keywords": [
@@ -10499,7 +10532,7 @@ const TrussCAPI = {
                 {
                     "name": "createDirectory",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "bool",
                     "desc": "Create directory (and parents)",
                     "keywords": [
@@ -10522,7 +10555,7 @@ const TrussCAPI = {
                 {
                     "name": "listDirectory",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "std::vector<std::string>",
                     "desc": "List files in directory",
                     "keywords": [
@@ -10552,7 +10585,7 @@ const TrussCAPI = {
                 {
                     "name": "removeFile",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "bool",
                     "desc": "Remove file",
                     "keywords": [
@@ -10570,7 +10603,7 @@ const TrussCAPI = {
                 {
                     "name": "getFileSize",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "int64_t",
                     "desc": "Get file size in bytes",
                     "keywords": [
@@ -10587,7 +10620,7 @@ const TrussCAPI = {
                 {
                     "name": "loadTextFile",
                     "params": "path",
-                    "params_typed": "const std::string & path",
+                    "params_typed": "const fs::path & path",
                     "return_type": "std::string",
                     "desc": "Load entire text file",
                     "keywords": [
@@ -10605,7 +10638,7 @@ const TrussCAPI = {
                 {
                     "name": "saveTextFile",
                     "params": "path, content",
-                    "params_typed": "const std::string & path, const std::string & content",
+                    "params_typed": "const fs::path & path, const std::string & content",
                     "return_type": "bool",
                     "desc": "Save string to text file",
                     "keywords": [
@@ -10623,7 +10656,7 @@ const TrussCAPI = {
                 {
                     "name": "appendToFile",
                     "params": "path, content",
-                    "params_typed": "const std::string & path, const std::string & content",
+                    "params_typed": "const fs::path & path, const std::string & content",
                     "return_type": "bool",
                     "desc": "Append string to file",
                     "keywords": [
@@ -10827,7 +10860,7 @@ const TrussCAPI = {
                     "name": "systemFontPath",
                     "params": "name",
                     "params_typed": "const std::string & name",
-                    "return_type": "std::string",
+                    "return_type": "fs::path",
                     "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS uses CoreText; Linux/Windows currently stub.",
                     "keywords": [
                         "resolve",
@@ -12585,6 +12618,30 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "createWindow",
+                    "params": "settings",
+                    "params_typed": "const WindowSettings & settings = {}",
+                    "return_type": "std::shared_ptr<Window>",
+                    "desc": "Create a secondary window (macOS / Windows / desktop Linux; returns nullptr on single-window platforms). It ticks on its own display's vsync; closing it leaves the app running. Give it content with Window::setApp()",
+                    "keywords": [
+                        "multi window",
+                        "second window",
+                        "open window",
+                        "display"
+                    ],
+                    "desc_ja": "セカンダリウィンドウを作成 (macOS / Windows / デスクトップLinux。シングルウィンドウのプラットフォームでは nullptr)。ウィンドウ自身のディスプレイのvsyncで駆動され、閉じてもアプリは動き続ける。中身は Window::setApp() で与える",
+                    "desc_ko": "보조 윈도우를 생성 (macOS / Windows / 데스크톱 Linux, 단일 윈도우 플랫폼에서는 nullptr). 해당 디스플레이의 vsync로 구동되며 닫아도 앱은 계속 실행됨. 내용은 Window::setApp()으로 부여",
+                    "related": [
+                        "Window",
+                        "WindowSettings"
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
                     "name": "atanh",
                     "params": "x",
                     "params_typed": "float x",
@@ -14320,8 +14377,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "*",
-                    "signature": "Vec4 * float → Vec4",
-                    "cpp": "Vec4 operator*(float) const",
+                    "signature": "Vec4 * Vec4 → Vec4",
+                    "cpp": "Vec4 operator*(const Vec4 &) const",
                     "free": false,
                     "desc": "Scalar multiplication",
                     "desc_ja": "スカラー倍",
@@ -14329,8 +14386,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "/",
-                    "signature": "Vec4 / float → Vec4",
-                    "cpp": "Vec4 operator/(float) const",
+                    "signature": "Vec4 / Vec4 → Vec4",
+                    "cpp": "Vec4 operator/(const Vec4 &) const",
                     "free": false,
                     "desc": "Scalar division",
                     "desc_ja": "スカラー除算",
@@ -14356,8 +14413,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "*=",
-                    "signature": "Vec4 *= float → Vec4 &",
-                    "cpp": "Vec4 & operator*=(float)",
+                    "signature": "Vec4 *= Vec4 → Vec4 &",
+                    "cpp": "Vec4 & operator*=(const Vec4 &)",
                     "free": false,
                     "desc": "In-place scalar multiplication",
                     "desc_ja": "スカラー倍代入",
@@ -14365,8 +14422,8 @@ const TrussCAPI = {
                 },
                 {
                     "symbol": "/=",
-                    "signature": "Vec4 /= float → Vec4 &",
-                    "cpp": "Vec4 & operator/=(float)",
+                    "signature": "Vec4 /= Vec4 → Vec4 &",
+                    "cpp": "Vec4 & operator/=(const Vec4 &)",
                     "free": false,
                     "desc": "In-place scalar division",
                     "desc_ja": "スカラー除算代入",
@@ -15692,7 +15749,7 @@ const TrussCAPI = {
                     "name": "setLogFile",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Open a file to receive log output"
                 },
@@ -17837,6 +17894,66 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "LoadResult",
+            "desc": "Result of a resource load (Image, SoundBuffer, VideoPlayer, Font, ...). Truthy on success; on failure carries a LoadError and a human-readable message.",
+            "keywords": [
+                "error",
+                "load",
+                "result",
+                "fail"
+            ],
+            "desc_ja": "リソース読み込み（Image、SoundBuffer、VideoPlayer、Font など）の結果。成功時は真、失敗時は LoadError とメッセージを保持",
+            "desc_ko": "리소스 로드(Image, SoundBuffer, VideoPlayer, Font 등)의 결과. 성공 시 참, 실패 시 LoadError와 메시지를 보유",
+            "related": [
+                "LoadError",
+                "loadErrorName"
+            ],
+            "properties": [
+                {
+                    "name": "error",
+                    "type": "LoadError",
+                    "desc": "What went wrong; LoadError::None on success",
+                    "desc_ja": "失敗の種別。成功時は LoadError::None",
+                    "desc_ko": "실패 종류. 성공 시 LoadError::None"
+                },
+                {
+                    "name": "message",
+                    "type": "std::string",
+                    "desc": "Human-readable failure detail (may be empty)",
+                    "desc_ja": "人間可読な失敗の詳細（空のこともある）",
+                    "desc_ko": "사람이 읽을 수 있는 실패 상세(비어 있을 수 있음)"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "ok",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "true if the load succeeded (error == LoadError::None)"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "success",
+                    "return": "LoadResult",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Make a success result (static)"
+                },
+                {
+                    "name": "fail",
+                    "return": "LoadResult",
+                    "signatures": [
+                        "LoadError e, std::string msg = std::string()"
+                    ],
+                    "desc": "Make a failure result with an error kind and optional message (static)"
+                }
+            ]
+        },
+        {
             "name": "SoundSource",
             "desc": "Abstract base for anything Sound::play() can consume. Two concrete subclasses: SoundBuffer (eager, full PCM in RAM) and SoundStream (decoded on demand from disk). Holds the shared channels / sampleRate fields and the kind() / getDuration() interface.",
             "keywords": [
@@ -17942,47 +18059,47 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "loadOgg",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis)."
                 },
                 {
                     "name": "loadWav",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Decode a WAV file into PCM."
                 },
                 {
                     "name": "loadMp3",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Decode an MP3 file into PCM."
                 },
                 {
                     "name": "loadFlac",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Decode a FLAC file into PCM."
                 },
                 {
                     "name": "load",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Decode a file into PCM, auto-detecting format from the extension (.wav .mp3 .ogg .flac .aac .m4a, case-insensitive). Returns false on failure."
                 },
                 {
                     "name": "loadWavFromMemory",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const void * data, size_t dataSize"
                     ],
@@ -17990,7 +18107,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "loadMp3FromMemory",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const void * data, size_t dataSize"
                     ],
@@ -17998,7 +18115,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "loadFlacFromMemory",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const void * data, size_t dataSize"
                     ],
@@ -18006,7 +18123,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "loadOggFromMemory",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const void * data, size_t dataSize"
                     ],
@@ -18014,9 +18131,9 @@ const TrussCAPI = {
                 },
                 {
                     "name": "loadAac",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms).",
                     "platforms": [
@@ -18031,7 +18148,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "loadAacFromMemory",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const void * data, size_t dataSize"
                     ],
@@ -18048,7 +18165,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "loadPcmFromMemory",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const void * data, size_t dataSize, int numChannels, int rate, int bitsPerSample = 16, bool bigEndian = false"
                     ],
@@ -18186,9 +18303,9 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "loadStream",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path, int maxPolyphony = 1"
+                        "const fs::path & path, int maxPolyphony = 1"
                     ],
                     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported.",
                     "platformNote": "Streaming audio (Sound::loadStream / SoundStream). On wasm it is unsupported (needs std::thread + on-disk file I/O, neither available in the default browser build); Sound::loadStream() logs a warning and silently falls back to eager load(). So you always get a Sound, but it is never actually streamed on web — branch on isStreaming() / __EMSCRIPTEN__ if it matters.",
@@ -18204,7 +18321,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "getPath",
-                    "return": "const std::string &",
+                    "return": "fs::path",
                     "signatures": [
                         ""
                     ],
@@ -18806,17 +18923,17 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "load",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a"
                 },
                 {
                     "name": "loadStream",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path, int maxPolyphony = 1"
+                        "const fs::path & path, int maxPolyphony = 1"
                     ],
                     "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count.",
                     "platforms": [
@@ -19163,14 +19280,14 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "filePath",
-                    "type": "std::string",
+                    "type": "fs::path",
                     "desc": "Full path to the chosen file",
                     "desc_ja": "選択されたファイルのフルパス",
                     "desc_ko": "선택된 파일의 전체 경로"
                 },
                 {
                     "name": "fileName",
-                    "type": "std::string",
+                    "type": "fs::path",
                     "desc": "Filename only (no directory)",
                     "desc_ja": "ファイル名のみ (ディレクトリなし)",
                     "desc_ko": "파일 이름만 (디렉터리 제외)"
@@ -19348,7 +19465,7 @@ const TrussCAPI = {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Load an XML document from a file. Relative paths are resolved via getDataPath. Returns true on success."
                 },
@@ -19364,7 +19481,7 @@ const TrussCAPI = {
                     "name": "save",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, const std::string & indent = std::string(\"  \")"
+                        "const fs::path & path, const std::string & indent = std::string(\"  \")"
                     ],
                     "desc": "Save the document to a file. Relative paths are resolved via getDataPath. indent sets the per-level indentation string. Returns true on success."
                 },
@@ -19464,7 +19581,7 @@ const TrussCAPI = {
                     "name": "open",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, bool append = false"
+                        "const fs::path & path, bool append = false"
                     ],
                     "desc": "Open file for writing"
                 },
@@ -19559,7 +19676,7 @@ const TrussCAPI = {
                     "name": "open",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Open file for reading"
                 },
@@ -20638,7 +20755,7 @@ const TrussCAPI = {
                     "name": "load",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Load IES profile from file"
                 },
@@ -21277,7 +21394,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "load",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const fs::path & path"
                     ],
@@ -21285,7 +21402,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "loadHDR",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const fs::path & path"
                     ],
@@ -21301,7 +21418,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "loadFromMemory",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const unsigned char * buffer, int len"
                     ],
@@ -21927,7 +22044,7 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "load",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const fs::path & path, bool mipmaps = false"
                     ],
@@ -21935,7 +22052,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "loadFromMemory",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
                         "const unsigned char * buffer, int len, bool mipmaps = false"
                     ],
@@ -22731,7 +22848,7 @@ const TrussCAPI = {
                     "name": "loadFromHDR",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path",
+                        "const fs::path & path",
                         "const Pixels & src"
                     ],
                     "desc": "Load environment from HDR image file"
@@ -22987,9 +23104,9 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "load",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & nameOrPath, int size"
+                        "const fs::path & nameOrPath, int size"
                     ],
                     "desc": "Load font file"
                 },
@@ -24117,9 +24234,9 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "load",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Load a video from the given file path; return true on success."
                 },
@@ -24521,9 +24638,9 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "load",
-                    "return": "bool",
+                    "return": "LoadResult",
                     "signatures": [
-                        "const std::string & path"
+                        "const fs::path & path"
                     ],
                     "desc": "Load a video file"
                 },
@@ -24771,7 +24888,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "getPath",
-                    "return": "const std::string &",
+                    "return": "fs::path",
                     "signatures": [
                         ""
                     ],
@@ -24783,9 +24900,9 @@ const TrussCAPI = {
                     "name": "extractFrame",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, Pixels & outPixels, float timeSec, float * outDuration = nullptr",
+                        "const fs::path & path, Pixels & outPixels, float timeSec, float * outDuration = nullptr",
                         "Pixels & outPixels, float timeSec, float * outDuration = nullptr",
-                        "const std::string & path, Image & outImage, float timeSec, float * outDuration = nullptr",
+                        "const fs::path & path, Image & outImage, float timeSec, float * outDuration = nullptr",
                         "Image & outImage, float timeSec, float * outDuration = nullptr"
                     ],
                     "desc": "Extract the exact frame at a given time from a video file. Frame-accurate on every platform",
@@ -24796,9 +24913,9 @@ const TrussCAPI = {
                     "name": "extractKeyFrame",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, Pixels & outPixels, float timeSec, float * outDuration = nullptr",
+                        "const fs::path & path, Pixels & outPixels, float timeSec, float * outDuration = nullptr",
                         "Pixels & outPixels, float timeSec, float * outDuration = nullptr",
-                        "const std::string & path, Image & outImage, float timeSec, float * outDuration = nullptr",
+                        "const fs::path & path, Image & outImage, float timeSec, float * outDuration = nullptr",
                         "Image & outImage, float timeSec, float * outDuration = nullptr"
                     ],
                     "desc": "Extract the nearest keyframe at or before a given time. Faster than extractFrame but time-approximate",
@@ -24906,7 +25023,7 @@ const TrussCAPI = {
                     "name": "open",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, int width, int height, const VideoRecordSettings & settings = {}"
+                        "const fs::path & path, int width, int height, const VideoRecordSettings & settings = {}"
                     ],
                     "desc": "Open the encoder at the given size (path resolved via getDataPath)"
                 },
@@ -24960,7 +25077,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "getPath",
-                    "return": "const std::string &",
+                    "return": "fs::path",
                     "signatures": [
                         ""
                     ],
@@ -25053,10 +25170,10 @@ const TrussCAPI = {
                     "name": "start",
                     "return": "bool",
                     "signatures": [
-                        "const std::string & path, const VideoRecordSettings & settings = {}",
-                        "const Fbo & fbo, const std::string & path, const VideoRecordSettings & settings = {}",
-                        "const std::string & path, float durationSec",
-                        "const Fbo & fbo, const std::string & path, float durationSec"
+                        "const fs::path & path, const VideoRecordSettings & settings = {}",
+                        "const Fbo & fbo, const fs::path & path, const VideoRecordSettings & settings = {}",
+                        "const fs::path & path, float durationSec",
+                        "const Fbo & fbo, const fs::path & path, float durationSec"
                     ],
                     "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically"
                 },
@@ -25086,7 +25203,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "getPath",
-                    "return": "const std::string &",
+                    "return": "fs::path",
                     "signatures": [
                         ""
                     ],
@@ -25121,10 +25238,6 @@ const TrussCAPI = {
                 },
                 {
                     "name": "pointCloudExample",
-                    "group": "3d"
-                },
-                {
-                    "name": "fboMipmapExample",
                     "group": "3d"
                 }
             ],
@@ -29345,6 +29458,114 @@ const TrussCAPI = {
                     "desc": "Set the target update rate (chainable)"
                 }
             ]
+        },
+        {
+            "name": "Window",
+            "desc": "A secondary application window (macOS only for now). Owns its own Node tree, events, mouse state and render context; ticks at its display's refresh rate. GPU resources are shared with every other window",
+            "keywords": [
+                "multi window",
+                "second window",
+                "secondary",
+                "display"
+            ],
+            "desc_ja": "セカンダリウィンドウ (現状macOSのみ)。自分のNodeツリー・イベント・マウス状態・描画コンテキストを持ち、所属ディスプレイのリフレッシュレートで駆動される。GPUリソースは全ウィンドウで共有",
+            "desc_ko": "보조 윈도우 (현재 macOS 전용). 자체 Node 트리·이벤트·마우스 상태·렌더 컨텍스트를 갖고, 소속 디스플레이의 주사율로 구동됨. GPU 리소스는 모든 윈도우와 공유",
+            "related": [
+                "createWindow",
+                "WindowSettings"
+            ],
+            "platforms": [
+                "macos",
+                "windows",
+                "linux"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
+            "methods": [
+                {
+                    "name": "setApp",
+                    "return": "void",
+                    "signatures": [
+                        "std::shared_ptr<App> app"
+                    ],
+                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window"
+                },
+                {
+                    "name": "getApp",
+                    "return": "std::shared_ptr<App>",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the App attached to this window"
+                },
+                {
+                    "name": "events",
+                    "return": "CoreEvents &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "This window's own event stream (mousePressed / keyPressed / draw / ...)"
+                },
+                {
+                    "name": "close",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Close the native window; the main window and other windows keep running"
+                },
+                {
+                    "name": "isOpen",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the native window is still open"
+                },
+                {
+                    "name": "setTitle",
+                    "return": "void",
+                    "signatures": [
+                        "const std::string & title"
+                    ],
+                    "desc": "Set the window title"
+                },
+                {
+                    "name": "getTitle",
+                    "return": "const std::string &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Last title set for this window (via WindowSettings or setTitle)"
+                },
+                {
+                    "name": "getWidth",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Window width in logical points (matches its coordinate system)"
+                },
+                {
+                    "name": "getHeight",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Window height in logical points (matches its coordinate system)"
+                },
+                {
+                    "name": "setClearColor",
+                    "return": "void",
+                    "signatures": [
+                        "const Color & c"
+                    ],
+                    "desc": "Background clear color for this window"
+                }
+            ]
         }
     ],
     "enums": [
@@ -29641,6 +29862,58 @@ const TrussCAPI = {
             "related": [
                 "getMouseButton",
                 "MouseEventArgs"
+            ]
+        },
+        {
+            "name": "LoadError",
+            "desc": "Load failure kind: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown.",
+            "keywords": [
+                "error",
+                "load",
+                "not found",
+                "decode"
+            ],
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0,
+                    "desc": "Success (no error)",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "FileNotFound",
+                    "value": 1,
+                    "desc": "The (resolved) path does not exist or could not be opened",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "UnsupportedFormat",
+                    "value": 2,
+                    "desc": "Extension / container not supported on this platform",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DecodeFailed",
+                    "value": 3,
+                    "desc": "The decoder rejected the data (corrupt, truncated, wrong codec)",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Unknown",
+                    "value": 4,
+                    "desc": "Anything the loader could not classify",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "読み込み失敗の種別：None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown。",
+            "desc_ko": "로드 실패 종류: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown.",
+            "related": [
+                "LoadResult"
             ]
         },
         {

@@ -7,7 +7,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.6.4 (Lua)",
+    "version": "v0.7.0 (Lua)",
     "lang": "lua",
     "categories": [
         {
@@ -1659,7 +1659,7 @@ const TrussCAPI = {
                     "params": "mode",
                     "params_typed": "mode",
                     "return_type": "(nothing)",
-                    "desc": "Set blend mode. BlendMode::Alpha (default), Add, Multiply, Screen, Subtract, Disabled",
+                    "desc": "Set blend mode. BlendMode::Alpha (default), Add, Multiply, Screen, Subtract, Disabled. Works on the screen and inside Fbo passes alike; the mode persists until changed (it also carries into a subsequent Fbo::begin)",
                     "keywords": [
                         "additive",
                         "multiply",
@@ -1667,8 +1667,8 @@ const TrussCAPI = {
                         "compositing",
                         "ofenableblendmode"
                     ],
-                    "desc_ja": "ブレンドモードを設定。BlendMode::Alpha（デフォルト）, Add, Multiply, Screen, Subtract, Disabled",
-                    "desc_ko": "블렌드 모드를 설정. BlendMode::Alpha (기본값), Add, Multiply, Screen, Subtract, Disabled"
+                    "desc_ja": "ブレンドモードを設定。BlendMode::Alpha（デフォルト）, Add, Multiply, Screen, Subtract, Disabled。画面・Fboパス内のどちらでも有効で、変更するまで持続する（Fbo::begin をまたいでも引き継がれる）",
+                    "desc_ko": "블렌드 모드를 설정. BlendMode::Alpha (기본값), Add, Multiply, Screen, Subtract, Disabled. 화면과 Fbo 패스 안에서 동일하게 동작하며, 변경할 때까지 유지됨 (이후의 Fbo::begin에도 이어짐)"
                 },
                 {
                     "name": "getBlendMode",
@@ -2277,7 +2277,7 @@ const TrussCAPI = {
                 {
                     "name": "loadDialog",
                     "params": "title, message, defaultPath, folderSelection",
-                    "params_typed": "title = \"\", message = \"\", defaultPath = \"\", folderSelection = false",
+                    "params_typed": "title = \"\", message = \"\", defaultPath = fs.path(), folderSelection = false",
                     "return_type": "FileDialogResult",
                     "desc": "Show file open dialog. Returns FileDialogResult with filePath, fileName, success",
                     "keywords": [
@@ -2308,7 +2308,7 @@ const TrussCAPI = {
                 {
                     "name": "saveDialog",
                     "params": "title, message, defaultPath, defaultName",
-                    "params_typed": "title = \"\", message = \"\", defaultPath = \"\", defaultName = \"\"",
+                    "params_typed": "title = \"\", message = \"\", defaultPath = fs.path(), defaultName = fs.path()",
                     "return_type": "FileDialogResult",
                     "desc": "Show file save dialog. Returns FileDialogResult with filePath, fileName, success",
                     "keywords": [
@@ -5633,6 +5633,22 @@ const TrussCAPI = {
                     "desc_ko": "raw 바이트를 Base64 문자열로 인코딩"
                 },
                 {
+                    "name": "fromBase64",
+                    "params": "encoded",
+                    "params_typed": "encoded",
+                    "return_type": "table",
+                    "desc": "Decode a Base64 string back into raw bytes",
+                    "keywords": [
+                        "base64",
+                        "decode",
+                        "decoding",
+                        "bytes",
+                        "binary"
+                    ],
+                    "desc_ja": "Base64 文字列を生バイトにデコード",
+                    "desc_ko": "Base64 문자열을 raw 바이트로 디코딩"
+                },
+                {
                     "name": "isStringInString",
                     "params": "haystack, needle",
                     "params_typed": "haystack, needle",
@@ -5967,57 +5983,72 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "string",
-                    "desc": "Get the directory containing the running executable (with trailing slash).",
+                    "desc": "Get the directory containing the running executable.",
                     "keywords": [
                         "exe",
                         "binary",
                         "app folder",
                         "directory"
                     ],
-                    "desc_ja": "実行中の実行ファイルを含むディレクトリを取得(末尾スラッシュ付き)",
-                    "desc_ko": "실행 중인 실행 파일이 있는 디렉터리를 얻음(끝 슬래시 포함)"
+                    "desc_ja": "実行中の実行ファイルを含むディレクトリを取得",
+                    "desc_ko": "실행 중인 실행 파일이 있는 디렉터리를 얻음"
+                },
+                {
+                    "name": "loadErrorName",
+                    "params": "e",
+                    "params_typed": "e",
+                    "return_type": "number",
+                    "desc": "Short label for a LoadError value (\"FileNotFound\", ...). For log messages",
+                    "keywords": [
+                        "error",
+                        "name",
+                        "label",
+                        "log"
+                    ],
+                    "desc_ja": "LoadError 値の短いラベル（\"FileNotFound\" など）。ログ用",
+                    "desc_ko": "LoadError 값의 짧은 레이블(\"FileNotFound\" 등). 로그용"
                 },
                 {
                     "name": "setDataPathRoot",
                     "params": "path",
                     "params_typed": "path",
                     "return_type": "(nothing)",
-                    "desc": "Set the root directory used to resolve relative data paths. A relative path is resolved against the executable directory; an absolute path (starting with /) is used as-is. A trailing slash is added automatically.",
+                    "desc": "Set the root directory used to resolve relative data paths. A relative root is resolved against the executable directory; an absolute root (fs::path::is_absolute, e.g. C:/ on Windows) is used as-is.",
                     "keywords": [
                         "resource",
                         "directory",
                         "base"
                     ],
-                    "desc_ja": "相対データパスの解決に使うルートディレクトリを設定。相対パスは実行ファイルのディレクトリ基準で解決され、絶対パス(/始まり)はそのまま使われる。末尾のスラッシュは自動で付加される",
-                    "desc_ko": "상대 데이터 경로 해석에 사용할 루트 디렉터리를 설정. 상대 경로는 실행 파일 디렉터리 기준으로 해석되고, 절대 경로(/로 시작)는 그대로 사용됨. 끝의 슬래시는 자동으로 추가됨"
+                    "desc_ja": "相対データパスの解決に使うルートディレクトリを設定。相対ルートは実行ファイルのディレクトリ基準で解決され、絶対ルート(fs::path::is_absolute 判定、Windows の C:/ も可)はそのまま使われる",
+                    "desc_ko": "상대 데이터 경로 해석에 사용할 루트 디렉터리를 설정. 상대 루트는 실행 파일 디렉터리 기준으로 해석되고, 절대 루트(fs::path::is_absolute 판정, Windows의 C:/ 포함)는 그대로 사용됨"
                 },
                 {
                     "name": "getDataPathRoot",
                     "params": "",
                     "params_typed": "",
                     "return_type": "string",
-                    "desc": "Get the current data path root (with trailing slash).",
+                    "desc": "Get the current data path root as fs::path.",
                     "keywords": [
                         "resource",
                         "directory",
                         "base"
                     ],
-                    "desc_ja": "現在のデータパスルートを取得(末尾スラッシュ付き)",
-                    "desc_ko": "현재 데이터 경로 루트를 얻음(끝 슬래시 포함)"
+                    "desc_ja": "現在のデータパスルートを fs::path で取得",
+                    "desc_ko": "현재 데이터 경로 루트를 fs::path로 얻음"
                 },
                 {
                     "name": "getDataPath",
                     "params": "filename",
                     "params_typed": "filename",
                     "return_type": "string",
-                    "desc": "Get full path relative to data directory",
+                    "desc": "Resolve a relative path against the data directory and return it as fs::path. An absolute input is returned unchanged.",
                     "keywords": [
                         "resource",
                         "asset",
                         "resolve"
                     ],
-                    "desc_ja": "データディレクトリからの相対パスを取得",
-                    "desc_ko": "데이터 디렉토리 기준의 전체 경로를 얻음"
+                    "desc_ja": "相対パスをデータディレクトリ基準で解決して fs::path で返す。絶対パスはそのまま返る",
+                    "desc_ko": "상대 경로를 데이터 디렉터리 기준으로 해석해 fs::path로 반환. 절대 경로는 그대로 반환됨"
                 },
                 {
                     "name": "setDataPathToResources",
@@ -7378,6 +7409,21 @@ const TrussCAPI = {
         {
             "name": "Other",
             "functions": [
+                {
+                    "name": "createWindow",
+                    "params": "settings",
+                    "params_typed": "settings = {}",
+                    "return_type": "shared_ptr",
+                    "desc": "Create a secondary window (macOS / Windows / desktop Linux; returns nullptr on single-window platforms). It ticks on its own display's vsync; closing it leaves the app running. Give it content with Window::setApp()",
+                    "keywords": [
+                        "multi window",
+                        "second window",
+                        "open window",
+                        "display"
+                    ],
+                    "desc_ja": "セカンダリウィンドウを作成 (macOS / Windows / デスクトップLinux。シングルウィンドウのプラットフォームでは nullptr)。ウィンドウ自身のディスプレイのvsyncで駆動され、閉じてもアプリは動き続ける。中身は Window::setApp() で与える",
+                    "desc_ko": "보조 윈도우를 생성 (macOS / Windows / 데스크톱 Linux, 단일 윈도우 플랫폼에서는 nullptr). 해당 디스플레이의 vsync로 구동되며 닫아도 앱은 계속 실행됨. 내용은 Window::setApp()으로 부여"
+                },
                 {
                     "name": "atanh",
                     "params": "x",
@@ -10781,7 +10827,7 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "font:load",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "nameOrPath, size"
                     ],
@@ -11762,7 +11808,7 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "image:load",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path, mipmaps = false"
                     ],
@@ -11782,7 +11828,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "image:loadFromMemory",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "buffer, len, mipmaps = false"
                     ],
@@ -12862,6 +12908,72 @@ const TrussCAPI = {
                     "desc": "Compute the CPU Phong lighting contribution at a world position/normal for a material",
                     "desc_ja": "ワールド座標・法線とマテリアルに対するCPU Phongライティングの寄与を計算",
                     "desc_ko": "월드 위치/법선과 머티리얼에 대한 CPU Phong 라이팅 기여를 계산"
+                }
+            ]
+        },
+        {
+            "name": "LoadResult",
+            "desc": "Result of a resource load (Image, SoundBuffer, VideoPlayer, Font, ...). Truthy on success; on failure carries a LoadError and a human-readable message.",
+            "keywords": [
+                "error",
+                "load",
+                "result",
+                "fail"
+            ],
+            "desc_ja": "リソース読み込み（Image、SoundBuffer、VideoPlayer、Font など）の結果。成功時は真、失敗時は LoadError とメッセージを保持",
+            "desc_ko": "리소스 로드(Image, SoundBuffer, VideoPlayer, Font 등)의 결과. 성공 시 참, 실패 시 LoadError와 메시지를 보유",
+            "related": [
+                "LoadError",
+                "loadErrorName"
+            ],
+            "properties": [
+                {
+                    "name": "loadResult.error",
+                    "type": "LoadError",
+                    "desc": "What went wrong; LoadError::None on success",
+                    "desc_ja": "失敗の種別。成功時は LoadError::None",
+                    "desc_ko": "실패 종류. 성공 시 LoadError::None"
+                },
+                {
+                    "name": "loadResult.message",
+                    "type": "string",
+                    "desc": "Human-readable failure detail (may be empty)",
+                    "desc_ja": "人間可読な失敗の詳細（空のこともある）",
+                    "desc_ko": "사람이 읽을 수 있는 실패 상세(비어 있을 수 있음)"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "loadResult:ok",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "true if the load succeeded (error == LoadError::None)",
+                    "desc_ja": "読み込みが成功していれば true（error == LoadError::None）",
+                    "desc_ko": "로드가 성공했으면 true (error == LoadError::None)"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "LoadResult.success",
+                    "return": "LoadResult",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Make a success result (static)",
+                    "desc_ja": "成功の結果を作る（static）",
+                    "desc_ko": "성공 결과를 만듦 (static)"
+                },
+                {
+                    "name": "LoadResult.fail",
+                    "return": "LoadResult",
+                    "signatures": [
+                        "e, msg = \"\""
+                    ],
+                    "desc": "Make a failure result with an error kind and optional message (static)",
+                    "desc_ja": "エラー種別と任意のメッセージ付きで失敗の結果を作る（static）",
+                    "desc_ko": "오류 종류와 선택적 메시지로 실패 결과를 만듦 (static)"
                 }
             ]
         },
@@ -16483,7 +16595,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "pixels:loadHDR",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path"
                     ],
@@ -16503,7 +16615,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "pixels:loadFromMemory",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "buffer, len"
                     ],
@@ -16513,7 +16625,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "pixels:load",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path"
                     ],
@@ -18428,7 +18540,7 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "sound:load",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path"
                     ],
@@ -18438,7 +18550,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:loadStream",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path, maxPolyphony = 1"
                     ],
@@ -18766,7 +18878,7 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "soundBuffer:loadOgg",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path"
                     ],
@@ -18776,7 +18888,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "soundBuffer:loadWav",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path"
                     ],
@@ -18786,7 +18898,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "soundBuffer:loadMp3",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path"
                     ],
@@ -18796,7 +18908,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "soundBuffer:loadMp3FromMemory",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "data, dataSize"
                     ],
@@ -18806,7 +18918,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "soundBuffer:loadAac",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path"
                     ],
@@ -18816,7 +18928,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "soundBuffer:loadAacFromMemory",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "data, dataSize"
                     ],
@@ -18826,7 +18938,7 @@ const TrussCAPI = {
                 },
                 {
                     "name": "soundBuffer:loadPcmFromMemory",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "data, dataSize, numChannels, rate, bitsPerSample = 16, bigEndian = false"
                     ],
@@ -18992,7 +19104,7 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "soundStream:loadStream",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path, maxPolyphony = 1"
                     ],
@@ -22968,7 +23080,7 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "videoPlayer:load",
-                    "return": "boolean",
+                    "return": "LoadResult",
                     "signatures": [
                         "path"
                     ],
@@ -23456,6 +23568,129 @@ const TrussCAPI = {
                     "desc": "Append the previously locked frame at the given presentation time (seconds)",
                     "desc_ja": "直前にロックしたフレームを指定の表示時刻（秒）で追加",
                     "desc_ko": "직전에 잠근 프레임을 지정된 표시 시각(초)으로 추가"
+                }
+            ]
+        },
+        {
+            "name": "Window",
+            "desc": "A secondary application window (macOS only for now). Owns its own Node tree, events, mouse state and render context; ticks at its display's refresh rate. GPU resources are shared with every other window",
+            "keywords": [
+                "multi window",
+                "second window",
+                "secondary",
+                "display"
+            ],
+            "desc_ja": "セカンダリウィンドウ (現状macOSのみ)。自分のNodeツリー・イベント・マウス状態・描画コンテキストを持ち、所属ディスプレイのリフレッシュレートで駆動される。GPUリソースは全ウィンドウで共有",
+            "desc_ko": "보조 윈도우 (현재 macOS 전용). 자체 Node 트리·이벤트·마우스 상태·렌더 컨텍스트를 갖고, 소속 디스플레이의 주사율로 구동됨. GPU 리소스는 모든 윈도우와 공유",
+            "related": [
+                "createWindow",
+                "WindowSettings"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
+            "methods": [
+                {
+                    "name": "window:setApp",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "app"
+                    ],
+                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window",
+                    "desc_ja": "このウィンドウにAppを設定 (ウィンドウにコンテンツを与える唯一の方法)。Appのライフサイクル一式 (setup/update/draw/キー/マウス/windowResized + RectNodeサイズ同期) がこのウィンドウで動く。1ウィンドウ1App",
+                    "desc_ko": "이 윈도우에 App을 연결 (윈도우에 콘텐츠를 주는 유일한 방법). App의 전체 라이프사이클이 이 윈도우에서 실행됨. 윈도우당 App 하나"
+                },
+                {
+                    "name": "window:getApp",
+                    "return": "shared_ptr",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the App attached to this window",
+                    "desc_ja": "このウィンドウのAppを取得",
+                    "desc_ko": "이 윈도우의 App을 얻음"
+                },
+                {
+                    "name": "window:events",
+                    "return": "CoreEvents",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "This window's own event stream (mousePressed / keyPressed / draw / ...)",
+                    "desc_ja": "このウィンドウ専用のイベントストリーム (mousePressed / keyPressed / draw など)",
+                    "desc_ko": "이 윈도우 전용 이벤트 스트림 (mousePressed / keyPressed / draw 등)"
+                },
+                {
+                    "name": "window:close",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Close the native window; the main window and other windows keep running",
+                    "desc_ja": "ウィンドウを閉じる。メインウィンドウや他のウィンドウは動き続ける",
+                    "desc_ko": "윈도우를 닫음. 메인 윈도우와 다른 윈도우는 계속 실행됨"
+                },
+                {
+                    "name": "window:isOpen",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether the native window is still open",
+                    "desc_ja": "ウィンドウが開いているか",
+                    "desc_ko": "윈도우가 열려 있는지"
+                },
+                {
+                    "name": "window:setTitle",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "title"
+                    ],
+                    "desc": "Set the window title",
+                    "desc_ja": "ウィンドウタイトルを設定",
+                    "desc_ko": "윈도우 제목을 설정"
+                },
+                {
+                    "name": "window:getTitle",
+                    "return": "string",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Last title set for this window (via WindowSettings or setTitle)",
+                    "desc_ja": "このウィンドウに最後に設定されたタイトル（WindowSettings または setTitle 経由）",
+                    "desc_ko": "이 창에 마지막으로 설정된 제목 (WindowSettings 또는 setTitle 경유)"
+                },
+                {
+                    "name": "window:getWidth",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Window width in logical points (matches its coordinate system)",
+                    "desc_ja": "ウィンドウ幅 (論理ポイント、座標系と一致)",
+                    "desc_ko": "윈도우 너비 (논리 포인트, 좌표계와 일치)"
+                },
+                {
+                    "name": "window:getHeight",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Window height in logical points (matches its coordinate system)",
+                    "desc_ja": "ウィンドウ高さ (論理ポイント、座標系と一致)",
+                    "desc_ko": "윈도우 높이 (논리 포인트, 좌표계와 일치)"
+                },
+                {
+                    "name": "window:setClearColor",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "c"
+                    ],
+                    "desc": "Background clear color for this window",
+                    "desc_ja": "このウィンドウの背景クリア色",
+                    "desc_ko": "이 윈도우의 배경 클리어 색"
                 }
             ]
         },
@@ -24583,6 +24818,58 @@ const TrussCAPI = {
             "related": [
                 "Light",
                 "addLight"
+            ]
+        },
+        {
+            "name": "LoadError",
+            "desc": "Load failure kind: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown.",
+            "keywords": [
+                "error",
+                "load",
+                "not found",
+                "decode"
+            ],
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "FileNotFound",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "UnsupportedFormat",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DecodeFailed",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Unknown",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "読み込み失敗の種別：None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown。",
+            "desc_ko": "로드 실패 종류: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown.",
+            "related": [
+                "LoadResult"
             ]
         },
         {
