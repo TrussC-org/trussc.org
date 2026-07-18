@@ -574,6 +574,27 @@
           "webSupported": true
         },
         {
+          "name": "multiWindowExample",
+          "width": 800,
+          "height": 600,
+          "webSupported": false,
+          "autoScreenshot": false
+        },
+        {
+          "name": "imguiWindowsExample",
+          "width": 800,
+          "height": 600,
+          "webSupported": false,
+          "autoScreenshot": false
+        },
+        {
+          "name": "easyCamWindowExample",
+          "width": 800,
+          "height": 600,
+          "webSupported": false,
+          "autoScreenshot": false
+        },
+        {
           "name": "noWindowModeExample",
           "width": 960,
           "height": 600,
