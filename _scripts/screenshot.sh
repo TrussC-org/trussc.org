@@ -199,7 +199,7 @@ for sample_input in "${samples[@]}"; do
         # save_screenshot (path に特殊文字が無い前提)
         curl -s --max-time 10 -X POST "http://localhost:${mcp_port}/mcp" \
             -H "Content-Type: application/json" \
-            -d "{\"jsonrpc\":\"2.0\",\"method\":\"tools/call\",\"id\":2,\"params\":{\"name\":\"save_screenshot\",\"arguments\":{\"path\":\"$screenshot_path\"}}}" >/dev/null || true
+            -d "{\"jsonrpc\":\"2.0\",\"method\":\"tools/call\",\"id\":2,\"params\":{\"name\":\"tc_save_screenshot\",\"arguments\":{\"path\":\"$screenshot_path\"}}}" >/dev/null || true
 
         sleep 0.5
 
