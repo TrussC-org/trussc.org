@@ -2668,6 +2668,67 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "AudioRecorder",
+   "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks",
+   "constructor": {
+    "snippet": "AudioRecorder()"
+   },
+   "methods": [
+    {
+     "name": "start",
+     "snippet": "start(${1:path})",
+     "return": "bool",
+     "desc": "Start recording the master mix into a WAV file (relative paths resolve via getDataPath). The audio engine must already be initialized; returns false otherwise or when the file cannot be opened"
+    },
+    {
+     "name": "stop",
+     "snippet": "stop()",
+     "return": "void",
+     "desc": "Stop and finalize the file (patches the WAV header sizes). Safe to call when not recording; also runs automatically on destruction"
+    },
+    {
+     "name": "isRecording",
+     "snippet": "isRecording()",
+     "return": "bool",
+     "desc": "True while recording"
+    },
+    {
+     "name": "getRecordedSeconds",
+     "snippet": "getRecordedSeconds()",
+     "return": "double",
+     "desc": "Seconds actually written to the file so far"
+    },
+    {
+     "name": "getDroppedFrames",
+     "snippet": "getDroppedFrames()",
+     "return": "uint64_t",
+     "desc": "Frames lost to ring-buffer overflow (0 in normal operation; nonzero means the writer thread fell behind)"
+    },
+    {
+     "name": "getPath",
+     "snippet": "getPath()",
+     "return": "fs::path",
+     "desc": "Resolved path of the file being written"
+    }
+   ]
+  },
+  {
+   "name": "AudioRecordSettings",
+   "desc": "Settings for AudioRecorder::start(): sample format (S16/F32) and an optional channel map",
+   "properties": [
+    {
+     "name": "format",
+     "type": "SampleFormat",
+     "desc": "Sample format written to the file (SampleFormat::S16 default)"
+    },
+    {
+     "name": "channelMap",
+     "type": "std::vector<std::vector<int>>",
+     "desc": "Channel routing, same structure as Sound::setChannelMap(): outer index = file channel, inner list = engine channels summed into it (unnormalized; clipping is the caller's choice). Empty = auto: 1ch engine to mono, 2ch to stereo, 3ch+ to averaged mono"
+    }
+   ]
+  },
+  {
    "name": "AudioSettings",
    "desc": "Configuration passed to AudioEngine::init() to override engine defaults (sample rate, channels, buffer size, polyphony, device). Empty deviceName selects the system default playback device.",
    "properties": [
@@ -13279,6 +13340,26 @@ const TrussSketchAPI = {
      "name": "duration",
      "type": "float",
      "desc": "Recording length in seconds; 0 = unlimited (stop manually). When set, recording auto-stops and the file is finalized at exactly this length; a manual stop before the cutoff still wins"
+    },
+    {
+     "name": "audio",
+     "type": "bool",
+     "desc": "Record the AudioEngine's master mix into the file as an AAC track (macOS only for now; other platforms warn and record video only). ScreenRecorder also switches the video PTS to the audio device clock, so A/V stay in sync however unstable the frame rate is"
+    },
+    {
+     "name": "audioBitrate",
+     "type": "int",
+     "desc": "AAC bitrate in bits/sec (default 192000)"
+    },
+    {
+     "name": "audioSampleRate",
+     "type": "int",
+     "desc": "Sample rate of the audio track. ScreenRecorder fills it from the running AudioEngine; set manually only when feeding writeAudio() on a bare VideoWriter"
+    },
+    {
+     "name": "audioChannels",
+     "type": "int",
+     "desc": "Channel count of the audio track. ScreenRecorder fills it from the running AudioEngine; set manually only when feeding writeAudio() on a bare VideoWriter"
     }
    ]
   },

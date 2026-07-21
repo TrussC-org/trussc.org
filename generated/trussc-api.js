@@ -6,7 +6,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.7.0",
+    "version": "v0.7.1",
     "lang": "all",
     "categories": [
         {
@@ -6433,10 +6433,6 @@ const TrussCAPI = {
                         {
                             "name": "uiExample",
                             "group": "node"
-                        },
-                        {
-                            "name": "systemInfoExample",
-                            "group": "utils"
                         }
                     ]
                 },
@@ -24985,6 +24981,34 @@ const TrussCAPI = {
                     "desc": "Recording length in seconds; 0 = unlimited (stop manually). When set, recording auto-stops and the file is finalized at exactly this length; a manual stop before the cutoff still wins",
                     "desc_ja": "録画の長さ（秒）。0 = 無制限（手動で stop）。指定するとその長さで自動停止しファイルが確定する。時間内の手動 stop は常に優先される",
                     "desc_ko": "녹화 길이(초). 0 = 무제한(수동으로 stop). 지정하면 해당 길이에서 자동 정지되고 파일이 확정된다. 시간 내 수동 stop이 항상 우선"
+                },
+                {
+                    "name": "audio",
+                    "type": "bool",
+                    "desc": "Record the AudioEngine's master mix into the file as an AAC track (macOS only for now; other platforms warn and record video only). ScreenRecorder also switches the video PTS to the audio device clock, so A/V stay in sync however unstable the frame rate is",
+                    "desc_ja": "AudioEngineのマスターミックスをAACトラックとしてファイルに録音する（現状macOSのみ。他プラットフォームは警告して映像のみ）。ScreenRecorder は映像PTSもオーディオデバイスクロックに切り替えるため、フレームレートが不安定でもA/Vがズレない",
+                    "desc_ko": "AudioEngine의 마스터 믹스를 AAC 트랙으로 파일에 녹음(현재 macOS 전용, 다른 플랫폼은 경고 후 영상만 녹화). ScreenRecorder는 영상 PTS도 오디오 디바이스 클럭으로 전환하므로 프레임레이트가 불안정해도 A/V가 어긋나지 않음"
+                },
+                {
+                    "name": "audioBitrate",
+                    "type": "int",
+                    "desc": "AAC bitrate in bits/sec (default 192000)",
+                    "desc_ja": "AACのビットレート（bits/sec、デフォルト192000）",
+                    "desc_ko": "AAC 비트레이트(bits/sec, 기본 192000)"
+                },
+                {
+                    "name": "audioSampleRate",
+                    "type": "int",
+                    "desc": "Sample rate of the audio track. ScreenRecorder fills it from the running AudioEngine; set manually only when feeding writeAudio() on a bare VideoWriter",
+                    "desc_ja": "音声トラックのサンプルレート。ScreenRecorder は稼働中のAudioEngineから自動設定する。素のVideoWriterに writeAudio() で流し込む場合のみ手動設定",
+                    "desc_ko": "오디오 트랙의 샘플레이트. ScreenRecorder는 실행 중인 AudioEngine에서 자동 설정. 순수 VideoWriter에 writeAudio()로 넣을 때만 수동 설정"
+                },
+                {
+                    "name": "audioChannels",
+                    "type": "int",
+                    "desc": "Channel count of the audio track. ScreenRecorder fills it from the running AudioEngine; set manually only when feeding writeAudio() on a bare VideoWriter",
+                    "desc_ja": "音声トラックのチャンネル数。ScreenRecorder は稼働中のAudioEngineから自動設定する。素のVideoWriterに writeAudio() で流し込む場合のみ手動設定",
+                    "desc_ko": "오디오 트랙의 채널 수. ScreenRecorder는 실행 중인 AudioEngine에서 자동 설정. 순수 VideoWriter에 writeAudio()로 넣을 때만 수동 설정"
                 }
             ]
         },
@@ -25131,6 +25155,14 @@ const TrussCAPI = {
                     "platforms": [
                         "macos"
                     ]
+                },
+                {
+                    "name": "writeAudio",
+                    "return": "bool",
+                    "signatures": [
+                        "const float * interleaved, int frames, double timeSec"
+                    ],
+                    "desc": "Append interleaved float32 samples to the audio track at an explicit PTS (seconds, same timeline as addFrameAt). Only meaningful when opened with settings.audio = true and audioSampleRate/audioChannels set; returns false otherwise"
                 }
             ]
         },
@@ -27157,6 +27189,114 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Render all scheduled notes into a single mixed, clipped Sound ready to play."
+                }
+            ]
+        },
+        {
+            "name": "AudioRecordSettings",
+            "desc": "Settings for AudioRecorder::start(): sample format (S16/F32) and an optional channel map",
+            "keywords": [
+                "record",
+                "wav",
+                "format",
+                "channel map",
+                "export"
+            ],
+            "desc_ja": "AudioRecorder::start() に渡す設定。サンプルフォーマット（S16/F32）とチャンネルマップ（省略可）",
+            "desc_ko": "AudioRecorder::start()에 전달하는 설정. 샘플 포맷(S16/F32)과 채널 맵(생략 가능)",
+            "related": [
+                "AudioRecorder",
+                "Sound"
+            ],
+            "properties": [
+                {
+                    "name": "format",
+                    "type": "SampleFormat",
+                    "desc": "Sample format written to the file (SampleFormat::S16 default)",
+                    "desc_ja": "ファイルに書き込むサンプルフォーマット（デフォルト SampleFormat::S16）",
+                    "desc_ko": "파일에 기록할 샘플 포맷 (기본 SampleFormat::S16)"
+                },
+                {
+                    "name": "channelMap",
+                    "type": "std::vector<std::vector<int>>",
+                    "desc": "Channel routing, same structure as Sound::setChannelMap(): outer index = file channel, inner list = engine channels summed into it (unnormalized; clipping is the caller's choice). Empty = auto: 1ch engine to mono, 2ch to stereo, 3ch+ to averaged mono",
+                    "desc_ja": "チャンネルルーティング。Sound::setChannelMap() と同じ構造で、外側=ファイル側ch、内側=そこへ合算するエンジン側chのリスト（正規化なし・クリップは呼び出し側の裁量）。空=自動: エンジン1ch→モノ、2ch→ステレオ、3ch以上→平均ダウンミックスのモノ",
+                    "desc_ko": "채널 라우팅. Sound::setChannelMap()과 같은 구조로, 바깥쪽=파일 채널, 안쪽=그 채널로 합산할 엔진 채널 목록(비정규화, 클리핑은 호출자의 선택). 비어 있으면 자동: 엔진 1ch→모노, 2ch→스테레오, 3ch 이상→평균 다운믹스 모노"
+                }
+            ]
+        },
+        {
+            "name": "AudioRecorder",
+            "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks",
+            "keywords": [
+                "record",
+                "wav",
+                "capture",
+                "master",
+                "mix",
+                "tap",
+                "bounce"
+            ],
+            "desc_ja": "エンジンのマスター出力（Sound再生もaudioOut合成も含む、スピーカーに出る音そのもの）をWAVファイルに録音する。audioOutをMonitor優先度でタップし、ファイルIOはバックグラウンドスレッドで行う（オーディオスレッドはブロックしない）",
+            "desc_ko": "엔진의 마스터 출력(스피커로 나가는 소리 그대로, Sound 재생과 audioOut 합성 포함)을 WAV 파일로 녹음. audioOut을 Monitor 우선순위로 탭하고 파일 IO는 백그라운드 스레드에서 수행(오디오 스레드는 블록되지 않음)",
+            "related": [
+                "AudioRecordSettings",
+                "AudioEngine",
+                "ScreenRecorder"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
+            "methods": [
+                {
+                    "name": "start",
+                    "return": "bool",
+                    "signatures": [
+                        "const fs::path & path, const AudioRecordSettings & settings = {std::vector<std::vector<int>>()}"
+                    ],
+                    "desc": "Start recording the master mix into a WAV file (relative paths resolve via getDataPath). The audio engine must already be initialized; returns false otherwise or when the file cannot be opened"
+                },
+                {
+                    "name": "stop",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Stop and finalize the file (patches the WAV header sizes). Safe to call when not recording; also runs automatically on destruction"
+                },
+                {
+                    "name": "isRecording",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "True while recording"
+                },
+                {
+                    "name": "getRecordedSeconds",
+                    "return": "double",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Seconds actually written to the file so far"
+                },
+                {
+                    "name": "getDroppedFrames",
+                    "return": "uint64_t",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Frames lost to ring-buffer overflow (0 in normal operation; nonzero means the writer thread fell behind)"
+                },
+                {
+                    "name": "getPath",
+                    "return": "fs::path",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Resolved path of the file being written"
                 }
             ]
         },
