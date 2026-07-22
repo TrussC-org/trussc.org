@@ -436,7 +436,8 @@ const TrussCAPI = {
                     "desc_ja": "角丸矩形を描画（円弧コーナー）",
                     "desc_ko": "둥근 모서리 사각형 그리기 (원호 모서리)",
                     "related": [
-                        "drawRectSquircle"
+                        "drawRectSquircle",
+                        "drawSuperellipse"
                     ],
                     "examples": [
                         {
@@ -460,7 +461,8 @@ const TrussCAPI = {
                     "desc_ja": "角丸矩形を描画（円弧コーナー）",
                     "desc_ko": "둥근 모서리 사각형 그리기 (원호 모서리)",
                     "related": [
-                        "drawRectSquircle"
+                        "drawRectSquircle",
+                        "drawSuperellipse"
                     ],
                     "examples": [
                         {
@@ -483,6 +485,10 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "スクワークル矩形を描画（曲率連続コーナー、iOS風）",
                     "desc_ko": "스쿼클 사각형 그리기 (곡률 연속 모서리, iOS 스타일)",
+                    "related": [
+                        "drawRectRounded",
+                        "drawSuperellipse"
+                    ],
                     "examples": [
                         {
                             "name": "roundedRectExample",
@@ -504,6 +510,74 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "スクワークル矩形を描画（曲率連続コーナー、iOS風）",
                     "desc_ko": "스쿼클 사각형 그리기 (곡률 연속 모서리, iOS 스타일)",
+                    "related": [
+                        "drawRectRounded",
+                        "drawSuperellipse"
+                    ],
+                    "examples": [
+                        {
+                            "name": "roundedRectExample",
+                            "group": "graphics"
+                        }
+                    ]
+                },
+                {
+                    "name": "drawSuperellipse",
+                    "params": "pos, size, n",
+                    "params_typed": "Vec3 pos, Vec2 size, float n = 5.0",
+                    "return_type": "void",
+                    "desc": "Draw a superellipse (Lamé curve) inscribed in a rect — Apple-icon-like by default (n=5)",
+                    "keywords": [
+                        "superellipse",
+                        "lame curve",
+                        "apple icon",
+                        "squircle",
+                        "rounded",
+                        "piet hein"
+                    ],
+                    "desc_ja": "矩形に内接するスーパー楕円（ラメ曲線）を描画 — デフォルト（n=5）はAppleアイコン風",
+                    "desc_ko": "사각형에 내접하는 초타원(라메 곡선) 그리기 — 기본값(n=5)은 Apple 아이콘 스타일",
+                    "related": [
+                        "drawRectRounded",
+                        "drawRectSquircle",
+                        "drawEllipse",
+                        "appendSuperellipse"
+                    ],
+                    "details": "Draws the Lamé curve `|x/rx|^n + |y/ry|^n = 1` filling the rect `(x, y, w, h)` —\na drop-in alternative to [`drawRectRounded`](#drawRectRounded). The exponent `n`\nmorphs the shape: `2` = ellipse, `4` = squircle, higher values approach the\nbounding rect; `1` = diamond, `< 1` = concave star-like shapes (filled correctly\nvia a center fan). The default `n = 5` approximates the Apple app-icon\nsilhouette; Piet Hein's classic superellipse uses `n = 2.5`. Aspect ratio comes\nfrom `w`/`h`. Unlike [`drawRectSquircle`](#drawRectSquircle) (which rounds the\ncorners of a rect with straight edges in between), the whole outline is one\ncontinuous superellipse.",
+                    "details_ja": "矩形 `(x, y, w, h)` を満たすラメ曲線 `|x/rx|^n + |y/ry|^n = 1` を描画する。\n[`drawRectRounded`](#drawRectRounded) の代わりにそのまま使える。指数 `n` で形が\n変わる: `2` = 楕円、`4` = スクワークル、大きいほど矩形に近づく。`1` = ひし形、\n`1` 未満は凹んだ星形（中心ファンで正しく塗られる）。デフォルトの `n = 5` は\nApple のアプリアイコンに近いシルエット。Piet Hein の古典的スーパー楕円は\n`n = 2.5`。縦横比は `w`/`h` で決まる。[`drawRectSquircle`](#drawRectSquircle)\n（角だけ丸めて辺は直線）と違い、輪郭全体が1本の連続したスーパー楕円になる。",
+                    "details_ko": "사각형 `(x, y, w, h)`를 채우는 라메 곡선 `|x/rx|^n + |y/ry|^n = 1`을 그린다.\n[`drawRectRounded`](#drawRectRounded) 대신 바로 사용할 수 있다. 지수 `n`으로\n형태가 변한다: `2` = 타원, `4` = 스쿼클, 클수록 사각형에 가까워진다. `1` =\n마름모, `1` 미만은 오목한 별 모양(중심 팬으로 올바르게 채워진다). 기본값\n`n = 5`는 Apple 앱 아이콘에 가까운 실루엣이며, Piet Hein의 고전적 초타원은\n`n = 2.5`. 종횡비는 `w`/`h`로 결정된다. [`drawRectSquircle`](#drawRectSquircle)\n(모서리만 둥글고 변은 직선)과 달리 윤곽 전체가 하나의 연속된 초타원이다.",
+                    "examples": [
+                        {
+                            "name": "roundedRectExample",
+                            "group": "graphics"
+                        }
+                    ]
+                },
+                {
+                    "name": "drawSuperellipse",
+                    "params": "x, y, w, h, n",
+                    "params_typed": "float x, float y, float w, float h, float n = 5.0",
+                    "return_type": "void",
+                    "desc": "Draw a superellipse (Lamé curve) inscribed in a rect — Apple-icon-like by default (n=5)",
+                    "keywords": [
+                        "superellipse",
+                        "lame curve",
+                        "apple icon",
+                        "squircle",
+                        "rounded",
+                        "piet hein"
+                    ],
+                    "desc_ja": "矩形に内接するスーパー楕円（ラメ曲線）を描画 — デフォルト（n=5）はAppleアイコン風",
+                    "desc_ko": "사각형에 내접하는 초타원(라메 곡선) 그리기 — 기본값(n=5)은 Apple 아이콘 스타일",
+                    "related": [
+                        "drawRectRounded",
+                        "drawRectSquircle",
+                        "drawEllipse",
+                        "appendSuperellipse"
+                    ],
+                    "details": "Draws the Lamé curve `|x/rx|^n + |y/ry|^n = 1` filling the rect `(x, y, w, h)` —\na drop-in alternative to [`drawRectRounded`](#drawRectRounded). The exponent `n`\nmorphs the shape: `2` = ellipse, `4` = squircle, higher values approach the\nbounding rect; `1` = diamond, `< 1` = concave star-like shapes (filled correctly\nvia a center fan). The default `n = 5` approximates the Apple app-icon\nsilhouette; Piet Hein's classic superellipse uses `n = 2.5`. Aspect ratio comes\nfrom `w`/`h`. Unlike [`drawRectSquircle`](#drawRectSquircle) (which rounds the\ncorners of a rect with straight edges in between), the whole outline is one\ncontinuous superellipse.",
+                    "details_ja": "矩形 `(x, y, w, h)` を満たすラメ曲線 `|x/rx|^n + |y/ry|^n = 1` を描画する。\n[`drawRectRounded`](#drawRectRounded) の代わりにそのまま使える。指数 `n` で形が\n変わる: `2` = 楕円、`4` = スクワークル、大きいほど矩形に近づく。`1` = ひし形、\n`1` 未満は凹んだ星形（中心ファンで正しく塗られる）。デフォルトの `n = 5` は\nApple のアプリアイコンに近いシルエット。Piet Hein の古典的スーパー楕円は\n`n = 2.5`。縦横比は `w`/`h` で決まる。[`drawRectSquircle`](#drawRectSquircle)\n（角だけ丸めて辺は直線）と違い、輪郭全体が1本の連続したスーパー楕円になる。",
+                    "details_ko": "사각형 `(x, y, w, h)`를 채우는 라메 곡선 `|x/rx|^n + |y/ry|^n = 1`을 그린다.\n[`drawRectRounded`](#drawRectRounded) 대신 바로 사용할 수 있다. 지수 `n`으로\n형태가 변한다: `2` = 타원, `4` = 스쿼클, 클수록 사각형에 가까워진다. `1` =\n마름모, `1` 미만은 오목한 별 모양(중심 팬으로 올바르게 채워진다). 기본값\n`n = 5`는 Apple 앱 아이콘에 가까운 실루엣이며, Piet Hein의 고전적 초타원은\n`n = 2.5`. 종횡비는 `w`/`h`로 결정된다. [`drawRectSquircle`](#drawRectSquircle)\n(모서리만 둥글고 변은 직선)과 달리 윤곽 전체가 하나의 연속된 초타원이다.",
                     "examples": [
                         {
                             "name": "roundedRectExample",
@@ -1468,15 +1542,15 @@ const TrussCAPI = {
                     "details_ko": "`beginShape()`는 정점 버퍼를 연다. [`vertex`](#vertex)(2D/3D)로 모서리를\n추가한 뒤 [`endShape`](#endShape)로 그린다. `endShape(true)`를 전달하면\n윤곽을 닫는다(마지막 정점을 첫 정점에 연결).\n\n```cpp\n// 채워진 삼각형, 윤곽 닫기\nbeginShape();\nvertex(100, 100);\nvertex(200, 100);\nvertex(150, 200);\nendShape(true);   // close = 마지막 정점을 첫 정점에 연결\n```\n\n채움/윤곽 전환은 `endShape()` 전에 [`fill`](#fill) / [`noFill`](#noFill)로\n한다. 채움은 triangle fan이라 **볼록(convex)** 도형만 정확히 그린다. 오목하거나\n구멍이 있는 도형을 채우려면 [`Path`](#Path)를 만들어 `drawFill()`을 호출한다.\n여기서의 stroke는 가는(1px) line strip이므로, 두께·cap·join이 있는 선이\n필요하면 [`beginStroke`](#beginStroke)를 사용한다. [`appendArc`](#appendArc),\n[`appendCurve`](#appendCurve) 같은 curve 헬퍼로 같은 버퍼에 곡선 정점열을\n넣을 수 있다.\n\n도형 전체는 단색으로 칠해진다(색은 [`endShape`](#endShape)를 호출하는 시점의\n현재 그리기 색). [`vertex`](#vertex) 사이에서 [`setColor`](#setColor)를 호출해도\n반영되지 않는다. 정점별 색이나 그라데이션 채움이 필요하면 [`Mesh`](#Mesh)를 만들어\n[`Mesh::addColor`](#Mesh::addColor)로 정점마다 색을 지정한다(선이라면\n[`beginLines`](#beginLines)로 선분별 색을 줄 수 있다).",
                     "examples": [
                         {
+                            "name": "customEaseExample",
+                            "group": "animation"
+                        },
+                        {
                             "name": "graphicsExample",
                             "group": "graphics"
                         },
                         {
                             "name": "strokeExample",
-                            "group": "graphics"
-                        },
-                        {
-                            "name": "shaderExample",
                             "group": "graphics"
                         }
                     ]
@@ -1505,15 +1579,15 @@ const TrussCAPI = {
                     "details_ko": "[`beginShape`](#beginShape)로 연 버퍼를 닫고 그린다. `endShape(true)`를\n전달하면 윤곽을 닫는다(마지막 정점을 첫 정점에 연결). 전체 패턴과 코드\n예시는 [`beginShape`](#beginShape)를 참고.",
                     "examples": [
                         {
+                            "name": "customEaseExample",
+                            "group": "animation"
+                        },
+                        {
                             "name": "graphicsExample",
                             "group": "graphics"
                         },
                         {
                             "name": "strokeExample",
-                            "group": "graphics"
-                        },
-                        {
-                            "name": "shaderExample",
                             "group": "graphics"
                         }
                     ]
@@ -1662,8 +1736,8 @@ const TrussCAPI = {
                             "group": "node"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
+                            "name": "customEaseExample",
+                            "group": "animation"
                         }
                     ]
                 },
@@ -1694,8 +1768,8 @@ const TrussCAPI = {
                             "group": "node"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
+                            "name": "customEaseExample",
+                            "group": "animation"
                         }
                     ]
                 },
@@ -1726,8 +1800,8 @@ const TrussCAPI = {
                             "group": "node"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
+                            "name": "customEaseExample",
+                            "group": "animation"
                         }
                     ]
                 },
@@ -1758,8 +1832,8 @@ const TrussCAPI = {
                             "group": "node"
                         },
                         {
-                            "name": "graphicsExample",
-                            "group": "graphics"
+                            "name": "customEaseExample",
+                            "group": "animation"
                         }
                     ]
                 },
@@ -1808,6 +1882,54 @@ const TrussCAPI = {
                             "group": "graphics"
                         }
                     ]
+                },
+                {
+                    "name": "appendSuperellipse",
+                    "params": "x, y, w, h, n",
+                    "params_typed": "float x, float y, float w, float h, float n = 5.0",
+                    "return_type": "void",
+                    "desc": "Append the closed outline of a superellipse inscribed in a rect to the current shape (use between beginShape/endShape)",
+                    "keywords": [
+                        "superellipse",
+                        "lame curve",
+                        "squircle",
+                        "shape",
+                        "outline"
+                    ],
+                    "desc_ja": "矩形に内接するスーパー楕円の閉じた輪郭を現在の図形に追加（beginShape/endShape間で使用）",
+                    "desc_ko": "사각형에 내접하는 초타원의 닫힌 윤곽을 현재 도형에 추가 (beginShape/endShape 사이에서 사용)",
+                    "related": [
+                        "drawSuperellipse",
+                        "appendArc",
+                        "beginShape"
+                    ],
+                    "details": "Same bounding-box convention and exponent parameter as\n[`drawSuperellipse`](#drawSuperellipse). Note that `endShape()` fills with a\nfirst-vertex fan, which is only correct for convex outlines (`n >= 1`); for\nconcave `n < 1` shapes use [`drawSuperellipse`](#drawSuperellipse) directly.",
+                    "details_ja": "[`drawSuperellipse`](#drawSuperellipse) と同じバウンディングボックス指定・指数\nパラメータを取る。`endShape()` の塗りは先頭頂点からのファンなので凸形状\n（`n >= 1`）でのみ正しい。凹になる `n < 1` は\n[`drawSuperellipse`](#drawSuperellipse) を直接使うこと。",
+                    "details_ko": "[`drawSuperellipse`](#drawSuperellipse)와 같은 바운딩 박스 지정과 지수\n매개변수를 사용한다. `endShape()`의 채우기는 첫 정점 기준 팬이므로 볼록한\n윤곽(`n >= 1`)에서만 올바르다. 오목한 `n < 1` 형태는\n[`drawSuperellipse`](#drawSuperellipse)를 직접 사용할 것."
+                },
+                {
+                    "name": "appendSuperellipse",
+                    "params": "pos, size, n",
+                    "params_typed": "const Vec2 & pos, const Vec2 & size, float n = 5.0",
+                    "return_type": "void",
+                    "desc": "Append the closed outline of a superellipse inscribed in a rect to the current shape (use between beginShape/endShape)",
+                    "keywords": [
+                        "superellipse",
+                        "lame curve",
+                        "squircle",
+                        "shape",
+                        "outline"
+                    ],
+                    "desc_ja": "矩形に内接するスーパー楕円の閉じた輪郭を現在の図形に追加（beginShape/endShape間で使用）",
+                    "desc_ko": "사각형에 내접하는 초타원의 닫힌 윤곽을 현재 도형에 추가 (beginShape/endShape 사이에서 사용)",
+                    "related": [
+                        "drawSuperellipse",
+                        "appendArc",
+                        "beginShape"
+                    ],
+                    "details": "Same bounding-box convention and exponent parameter as\n[`drawSuperellipse`](#drawSuperellipse). Note that `endShape()` fills with a\nfirst-vertex fan, which is only correct for convex outlines (`n >= 1`); for\nconcave `n < 1` shapes use [`drawSuperellipse`](#drawSuperellipse) directly.",
+                    "details_ja": "[`drawSuperellipse`](#drawSuperellipse) と同じバウンディングボックス指定・指数\nパラメータを取る。`endShape()` の塗りは先頭頂点からのファンなので凸形状\n（`n >= 1`）でのみ正しい。凹になる `n < 1` は\n[`drawSuperellipse`](#drawSuperellipse) を直接使うこと。",
+                    "details_ko": "[`drawSuperellipse`](#drawSuperellipse)와 같은 바운딩 박스 지정과 지수\n매개변수를 사용한다. `endShape()`의 채우기는 첫 정점 기준 팬이므로 볼록한\n윤곽(`n >= 1`)에서만 올바르다. 오목한 `n < 1` 형태는\n[`drawSuperellipse`](#drawSuperellipse)를 직접 사용할 것."
                 },
                 {
                     "name": "appendCurve",
@@ -2279,8 +2401,8 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
-                            "name": "uiExample",
-                            "group": "node"
+                            "name": "customEaseExample",
+                            "group": "animation"
                         }
                     ]
                 },
@@ -2717,6 +2839,70 @@ const TrussCAPI = {
                             "name": "blendingExample",
                             "group": "graphics"
                         }
+                    ]
+                },
+                {
+                    "name": "enableDepthTest",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Re-enable depth test/write on the blend pipelines (compare LESS_EQUAL + depth write, same as the 3D pipeline). Use to restore depth after setBlendMode() mid-scene; persists like the blend mode (across frames and Fbo passes) until disableDepthTest()",
+                    "keywords": [
+                        "depth",
+                        "z-buffer",
+                        "occlusion",
+                        "3d",
+                        "blend",
+                        "restore"
+                    ],
+                    "desc_ja": "ブレンドパイプラインのデプステスト/書き込みを再有効化（LESS_EQUAL比較+デプス書き込み、3Dパイプラインと同じ設定）。シーン途中の setBlendMode() 後にデプスを復元するために使う。ブレンドモードと同様にフレームやFboパスをまたいで disableDepthTest() まで持続する",
+                    "desc_ko": "블렌드 파이프라인의 깊이 테스트/쓰기를 다시 활성화 (LESS_EQUAL 비교 + 깊이 쓰기, 3D 파이프라인과 동일한 설정). 씬 도중 setBlendMode() 이후 깊이를 복원할 때 사용. 블렌드 모드처럼 프레임과 Fbo 패스를 넘어 disableDepthTest()까지 유지됨",
+                    "related": [
+                        "disableDepthTest",
+                        "isDepthTestEnabled",
+                        "setBlendMode"
+                    ],
+                    "details": "Every setBlendMode() pipeline (Alpha, Add, even Disabled) normally has depth write/test OFF;\nonly the 3D pipeline (screen setup / EasyCam::begin()) writes depth. Changing the blend mode\ninside a 3D scene therefore drops depth testing for everything drawn after it. enableDepthTest()\nrestores it without starting a new camera scope:\n\n    cam.begin();\n    drawSolidGeometry();              // depth-tested (3D pipeline)\n    setBlendMode(BlendMode::Add);\n    drawGlowEffects();                // additive, no depth by default\n    resetBlendMode();\n    enableDepthTest();\n    drawMoreSolidGeometry();          // depth-tested again, correctly occluded\n    cam.end();\n    disableDepthTest();               // back to default before 2D overlays"
+                },
+                {
+                    "name": "disableDepthTest",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Disable depth test/write on the blend pipelines again (the default). Call before drawing 2D overlays (HUD, text) so they are not occluded by the 3D scene",
+                    "keywords": [
+                        "depth",
+                        "z-buffer",
+                        "occlusion",
+                        "overlay",
+                        "hud",
+                        "2d"
+                    ],
+                    "desc_ja": "ブレンドパイプラインのデプステスト/書き込みを再び無効化（デフォルト状態）。2DオーバーレイやHUDが3Dシーンに隠されないよう、描画前に呼ぶ",
+                    "desc_ko": "블렌드 파이프라인의 깊이 테스트/쓰기를 다시 비활성화 (기본 상태). 2D 오버레이 (HUD, 텍스트)가 3D 씬에 가려지지 않도록 그리기 전에 호출",
+                    "related": [
+                        "enableDepthTest",
+                        "isDepthTestEnabled",
+                        "setBlendMode"
+                    ]
+                },
+                {
+                    "name": "isDepthTestEnabled",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Whether the depth-tested blend pipeline variant is active (set by enableDepthTest)",
+                    "keywords": [
+                        "depth",
+                        "z-buffer",
+                        "check",
+                        "state"
+                    ],
+                    "desc_ja": "デプステスト付きブレンドパイプラインが有効か（enableDepthTest で設定）",
+                    "desc_ko": "깊이 테스트가 적용된 블렌드 파이프라인이 활성 상태인지 (enableDepthTest로 설정)",
+                    "related": [
+                        "enableDepthTest",
+                        "disableDepthTest"
                     ]
                 },
                 {
@@ -3224,10 +3410,6 @@ const TrussCAPI = {
                         {
                             "name": "meshAppendExample",
                             "group": "3d"
-                        },
-                        {
-                            "name": "meshTextureExample",
-                            "group": "3d"
                         }
                     ]
                 },
@@ -3251,14 +3433,6 @@ const TrussCAPI = {
                     "examples": [
                         {
                             "name": "fboMipmapExample",
-                            "group": "3d"
-                        },
-                        {
-                            "name": "projectorSimulationExample",
-                            "group": "3d"
-                        },
-                        {
-                            "name": "meshAppendExample",
                             "group": "3d"
                         }
                     ]
@@ -6429,6 +6603,10 @@ const TrussCAPI = {
                         {
                             "name": "textureExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "customEaseExample",
+                            "group": "animation"
                         },
                         {
                             "name": "uiExample",
@@ -10916,7 +11094,7 @@ const TrussCAPI = {
                     "params": "t, type",
                     "params_typed": "float t, EaseType type",
                     "return_type": "float",
-                    "desc": "Apply ease-in to value (0-1)",
+                    "desc": "Apply ease-in (accelerate) to value (0-1); takes an EaseType or a custom EaseFunction",
                     "keywords": [
                         "easing",
                         "accelerate",
@@ -10924,21 +11102,51 @@ const TrussCAPI = {
                         "interpolation",
                         "smooth"
                     ],
-                    "desc_ja": "イーズインを適用 (0-1)",
-                    "desc_ko": "값에 ease-in 적용 (0-1)",
+                    "desc_ja": "イーズイン（加速）を適用 (0-1)。EaseType またはカスタム EaseFunction を受ける",
+                    "desc_ko": "ease-in(가속) 적용 (0-1). EaseType 또는 커스텀 EaseFunction 지정 가능",
                     "related": [
                         "EaseType",
+                        "EaseFunction",
                         "easeInOut",
                         "easeOut",
                         "ease"
-                    ]
+                    ],
+                    "details": "The EaseFunction overload returns `fn(t)` — the curve exactly as authored\n(null falls back to linear). All built-in curves are internally defined in\nease-in form, and [`easeOut`](#easeOut) / [`easeInOut`](#easeInOut) are\nderived from it, so one authored base curve serves all three modes.",
+                    "details_ja": "EaseFunction オーバーロードは `fn(t)` — 書いたカーブそのまま — を返す\n（null はリニアにフォールバック）。組み込みカーブは内部的にすべて ease-in 形で\n定義されていて、[`easeOut`](#easeOut) / [`easeInOut`](#easeInOut) はそこから\n導出される。つまり基準カーブを1本書けば3モードすべてで使える。",
+                    "details_ko": "EaseFunction 오버로드는 `fn(t)` — 작성한 커브 그대로 — 를 반환한다 (null은\nlinear로 폴백). 내장 커브는 내부적으로 모두 ease-in 형태로 정의되며\n[`easeOut`](#easeOut) / [`easeInOut`](#easeInOut)은 여기서 도출된다. 기준\n커브 하나로 3가지 모드를 모두 사용할 수 있다."
+                },
+                {
+                    "name": "easeIn",
+                    "params": "t, fn",
+                    "params_typed": "float t, const EaseFunction & fn",
+                    "return_type": "float",
+                    "desc": "Apply ease-in (accelerate) to value (0-1); takes an EaseType or a custom EaseFunction",
+                    "keywords": [
+                        "easing",
+                        "accelerate",
+                        "ramp up",
+                        "interpolation",
+                        "smooth"
+                    ],
+                    "desc_ja": "イーズイン（加速）を適用 (0-1)。EaseType またはカスタム EaseFunction を受ける",
+                    "desc_ko": "ease-in(가속) 적용 (0-1). EaseType 또는 커스텀 EaseFunction 지정 가능",
+                    "related": [
+                        "EaseType",
+                        "EaseFunction",
+                        "easeInOut",
+                        "easeOut",
+                        "ease"
+                    ],
+                    "details": "The EaseFunction overload returns `fn(t)` — the curve exactly as authored\n(null falls back to linear). All built-in curves are internally defined in\nease-in form, and [`easeOut`](#easeOut) / [`easeInOut`](#easeInOut) are\nderived from it, so one authored base curve serves all three modes.",
+                    "details_ja": "EaseFunction オーバーロードは `fn(t)` — 書いたカーブそのまま — を返す\n（null はリニアにフォールバック）。組み込みカーブは内部的にすべて ease-in 形で\n定義されていて、[`easeOut`](#easeOut) / [`easeInOut`](#easeInOut) はそこから\n導出される。つまり基準カーブを1本書けば3モードすべてで使える。",
+                    "details_ko": "EaseFunction 오버로드는 `fn(t)` — 작성한 커브 그대로 — 를 반환한다 (null은\nlinear로 폴백). 내장 커브는 내부적으로 모두 ease-in 형태로 정의되며\n[`easeOut`](#easeOut) / [`easeInOut`](#easeInOut)은 여기서 도출된다. 기준\n커브 하나로 3가지 모드를 모두 사용할 수 있다."
                 },
                 {
                     "name": "easeOut",
                     "params": "t, type",
                     "params_typed": "float t, EaseType type",
                     "return_type": "float",
-                    "desc": "Apply ease-out to value (0-1)",
+                    "desc": "Apply ease-out (decelerate) to value (0-1); takes an EaseType or a custom EaseFunction",
                     "keywords": [
                         "easing",
                         "decelerate",
@@ -10946,79 +11154,181 @@ const TrussCAPI = {
                         "interpolation",
                         "smooth"
                     ],
-                    "desc_ja": "イーズアウトを適用 (0-1)",
-                    "desc_ko": "값에 ease-out 적용 (0-1)",
+                    "desc_ja": "イーズアウト（減速）を適用 (0-1)。EaseType またはカスタム EaseFunction を受ける",
+                    "desc_ko": "ease-out(감속) 적용 (0-1). EaseType 또는 커스텀 EaseFunction 지정 가능",
                     "related": [
                         "EaseType",
+                        "EaseFunction",
                         "easeIn",
                         "easeInOut",
                         "ease"
-                    ]
+                    ],
+                    "details": "Derived from the ease-in base curve by the standard reflection\n`1 - f(1 - t)` (time and value flipped). The EaseFunction overload applies\nthe same reflection to a custom ease-in curve; a null function falls back to\nlinear.",
+                    "details_ja": "ease-in 基準カーブから標準の変換 `1 - f(1 - t)`（時間と値の反転）で導出される。\nEaseFunction オーバーロードはカスタムの ease-in カーブに同じ変換を適用する。\nnull はリニアにフォールバック。",
+                    "details_ko": "ease-in 기준 커브에서 표준 변환 `1 - f(1 - t)`(시간과 값 반전)로 도출된다.\nEaseFunction 오버로드는 커스텀 ease-in 커브에 같은 변환을 적용한다. null은\nlinear로 폴백."
+                },
+                {
+                    "name": "easeOut",
+                    "params": "t, fn",
+                    "params_typed": "float t, const EaseFunction & fn",
+                    "return_type": "float",
+                    "desc": "Apply ease-out (decelerate) to value (0-1); takes an EaseType or a custom EaseFunction",
+                    "keywords": [
+                        "easing",
+                        "decelerate",
+                        "ramp down",
+                        "interpolation",
+                        "smooth"
+                    ],
+                    "desc_ja": "イーズアウト（減速）を適用 (0-1)。EaseType またはカスタム EaseFunction を受ける",
+                    "desc_ko": "ease-out(감속) 적용 (0-1). EaseType 또는 커스텀 EaseFunction 지정 가능",
+                    "related": [
+                        "EaseType",
+                        "EaseFunction",
+                        "easeIn",
+                        "easeInOut",
+                        "ease"
+                    ],
+                    "details": "Derived from the ease-in base curve by the standard reflection\n`1 - f(1 - t)` (time and value flipped). The EaseFunction overload applies\nthe same reflection to a custom ease-in curve; a null function falls back to\nlinear.",
+                    "details_ja": "ease-in 基準カーブから標準の変換 `1 - f(1 - t)`（時間と値の反転）で導出される。\nEaseFunction オーバーロードはカスタムの ease-in カーブに同じ変換を適用する。\nnull はリニアにフォールバック。",
+                    "details_ko": "ease-in 기준 커브에서 표준 변환 `1 - f(1 - t)`(시간과 값 반전)로 도출된다.\nEaseFunction 오버로드는 커스텀 ease-in 커브에 같은 변환을 적용한다. null은\nlinear로 폴백."
                 },
                 {
                     "name": "easeInOut",
                     "params": "t, type",
                     "params_typed": "float t, EaseType type",
                     "return_type": "float",
-                    "desc": "Apply ease-in-out to value (0-1)",
+                    "desc": "Apply ease-in-out to value (0-1); takes an EaseType, an asymmetric type pair, or a custom EaseFunction",
                     "keywords": [
                         "easing",
                         "smoothstep",
                         "accelerate decelerate",
                         "interpolation"
                     ],
-                    "desc_ja": "イーズインアウトを適用 (0-1)",
-                    "desc_ko": "값에 ease-in-out 적용 (0-1)",
+                    "desc_ja": "イーズインアウトを適用 (0-1)。EaseType、非対称の型ペア、カスタム EaseFunction を受ける",
+                    "desc_ko": "ease-in-out 적용 (0-1). EaseType, 비대칭 타입 쌍, 커스텀 EaseFunction 지정 가능",
                     "related": [
                         "EaseType",
+                        "EaseFunction",
                         "easeIn",
                         "easeOut",
                         "ease"
-                    ]
+                    ],
+                    "details": "First half is the ease-in curve scaled to [0, 0.5], second half the derived\nease-out scaled to [0.5, 1]. The two-type overload is asymmetric (one family\nin, another out). The EaseFunction overload applies the same construction to\na custom ease-in base curve; a null function falls back to linear.",
+                    "details_ja": "前半は ease-in カーブを [0, 0.5] に縮小、後半は導出した ease-out を [0.5, 1] に\n縮小したもの。2 型オーバーロードは非対称（入りと抜けで別ファミリ）。\nEaseFunction オーバーロードはカスタムの ease-in 基準カーブに同じ構成を適用する。\nnull はリニアにフォールバック。",
+                    "details_ko": "전반은 ease-in 커브를 [0, 0.5]로 축소, 후반은 도출된 ease-out을 [0.5, 1]로\n축소한 것. 2개 타입 오버로드는 비대칭(들어갈 때와 나올 때 다른 계열).\nEaseFunction 오버로드는 커스텀 ease-in 기준 커브에 같은 구성을 적용한다.\nnull은 linear로 폴백."
                 },
                 {
                     "name": "easeInOut",
                     "params": "t, inType, outType",
                     "params_typed": "float t, EaseType inType, EaseType outType",
                     "return_type": "float",
-                    "desc": "Apply ease-in-out to value (0-1)",
+                    "desc": "Apply ease-in-out to value (0-1); takes an EaseType, an asymmetric type pair, or a custom EaseFunction",
                     "keywords": [
                         "easing",
                         "smoothstep",
                         "accelerate decelerate",
                         "interpolation"
                     ],
-                    "desc_ja": "イーズインアウトを適用 (0-1)",
-                    "desc_ko": "값에 ease-in-out 적용 (0-1)",
+                    "desc_ja": "イーズインアウトを適用 (0-1)。EaseType、非対称の型ペア、カスタム EaseFunction を受ける",
+                    "desc_ko": "ease-in-out 적용 (0-1). EaseType, 비대칭 타입 쌍, 커스텀 EaseFunction 지정 가능",
                     "related": [
                         "EaseType",
+                        "EaseFunction",
                         "easeIn",
                         "easeOut",
                         "ease"
-                    ]
+                    ],
+                    "details": "First half is the ease-in curve scaled to [0, 0.5], second half the derived\nease-out scaled to [0.5, 1]. The two-type overload is asymmetric (one family\nin, another out). The EaseFunction overload applies the same construction to\na custom ease-in base curve; a null function falls back to linear.",
+                    "details_ja": "前半は ease-in カーブを [0, 0.5] に縮小、後半は導出した ease-out を [0.5, 1] に\n縮小したもの。2 型オーバーロードは非対称（入りと抜けで別ファミリ）。\nEaseFunction オーバーロードはカスタムの ease-in 基準カーブに同じ構成を適用する。\nnull はリニアにフォールバック。",
+                    "details_ko": "전반은 ease-in 커브를 [0, 0.5]로 축소, 후반은 도출된 ease-out을 [0.5, 1]로\n축소한 것. 2개 타입 오버로드는 비대칭(들어갈 때와 나올 때 다른 계열).\nEaseFunction 오버로드는 커스텀 ease-in 기준 커브에 같은 구성을 적용한다.\nnull은 linear로 폴백."
+                },
+                {
+                    "name": "easeInOut",
+                    "params": "t, fn",
+                    "params_typed": "float t, const EaseFunction & fn",
+                    "return_type": "float",
+                    "desc": "Apply ease-in-out to value (0-1); takes an EaseType, an asymmetric type pair, or a custom EaseFunction",
+                    "keywords": [
+                        "easing",
+                        "smoothstep",
+                        "accelerate decelerate",
+                        "interpolation"
+                    ],
+                    "desc_ja": "イーズインアウトを適用 (0-1)。EaseType、非対称の型ペア、カスタム EaseFunction を受ける",
+                    "desc_ko": "ease-in-out 적용 (0-1). EaseType, 비대칭 타입 쌍, 커스텀 EaseFunction 지정 가능",
+                    "related": [
+                        "EaseType",
+                        "EaseFunction",
+                        "easeIn",
+                        "easeOut",
+                        "ease"
+                    ],
+                    "details": "First half is the ease-in curve scaled to [0, 0.5], second half the derived\nease-out scaled to [0.5, 1]. The two-type overload is asymmetric (one family\nin, another out). The EaseFunction overload applies the same construction to\na custom ease-in base curve; a null function falls back to linear.",
+                    "details_ja": "前半は ease-in カーブを [0, 0.5] に縮小、後半は導出した ease-out を [0.5, 1] に\n縮小したもの。2 型オーバーロードは非対称（入りと抜けで別ファミリ）。\nEaseFunction オーバーロードはカスタムの ease-in 基準カーブに同じ構成を適用する。\nnull はリニアにフォールバック。",
+                    "details_ko": "전반은 ease-in 커브를 [0, 0.5]로 축소, 후반은 도출된 ease-out을 [0.5, 1]로\n축소한 것. 2개 타입 오버로드는 비대칭(들어갈 때와 나올 때 다른 계열).\nEaseFunction 오버로드는 커스텀 ease-in 기준 커브에 같은 구성을 적용한다.\nnull은 linear로 폴백."
                 },
                 {
                     "name": "ease",
                     "params": "t, type, mode",
                     "params_typed": "float t, EaseType type, EaseMode mode",
                     "return_type": "float",
-                    "desc": "Apply easing to value (0-1)",
+                    "desc": "Apply easing to a normalized value (0-1) with an EaseType or a custom EaseFunction",
                     "keywords": [
                         "easing",
                         "interpolation",
                         "tween",
                         "smooth",
-                        "curve"
+                        "curve",
+                        "custom"
                     ],
-                    "desc_ja": "イージングを適用 (0-1)",
-                    "desc_ko": "값에 easing 적용 (0-1)",
+                    "desc_ja": "正規化値 (0-1) にイージングを適用。EaseType またはカスタム EaseFunction を指定",
+                    "desc_ko": "정규화 값 (0-1)에 easing 적용. EaseType 또는 커스텀 EaseFunction 지정",
                     "related": [
                         "EaseType",
                         "EaseMode",
+                        "EaseFunction",
                         "Tween<T>",
                         "lerp",
                         "remap"
                     ],
+                    "details": "`ease(t, EaseType, EaseMode)` uses a built-in curve; `ease(t, EaseFunction,\nEaseMode)` evaluates a custom curve with the same In/Out/InOut treatment\n(the function is the ease-in base; a null function falls back to linear).\nUse these free functions when driving a value manually in `update()`/`draw()`\ninstead of running a [`Tween<T>`](#Tween<T>).",
+                    "details_ja": "`ease(t, EaseType, EaseMode)` は組み込みカーブを、`ease(t, EaseFunction,\nEaseMode)` はカスタムカーブを同じ In/Out/InOut の扱いで評価する（関数は\nease-in 基準。null はリニアにフォールバック）。[`Tween<T>`](#Tween<T>) を\n使わず `update()`/`draw()` の中で手動で値を作るときはこの自由関数群を使う。",
+                    "details_ko": "`ease(t, EaseType, EaseMode)`는 내장 커브를, `ease(t, EaseFunction, EaseMode)`는\n커스텀 커브를 같은 In/Out/InOut 방식으로 평가한다 (함수는 ease-in 기준, null은\nlinear로 폴백). [`Tween<T>`](#Tween<T>) 없이 `update()`/`draw()`에서 수동으로\n값을 만들 때 이 자유 함수들을 사용.",
+                    "examples": [
+                        {
+                            "name": "tweenExample",
+                            "group": "animation"
+                        }
+                    ]
+                },
+                {
+                    "name": "ease",
+                    "params": "t, fn, mode",
+                    "params_typed": "float t, const EaseFunction & fn, EaseMode mode",
+                    "return_type": "float",
+                    "desc": "Apply easing to a normalized value (0-1) with an EaseType or a custom EaseFunction",
+                    "keywords": [
+                        "easing",
+                        "interpolation",
+                        "tween",
+                        "smooth",
+                        "curve",
+                        "custom"
+                    ],
+                    "desc_ja": "正規化値 (0-1) にイージングを適用。EaseType またはカスタム EaseFunction を指定",
+                    "desc_ko": "정규화 값 (0-1)에 easing 적용. EaseType 또는 커스텀 EaseFunction 지정",
+                    "related": [
+                        "EaseType",
+                        "EaseMode",
+                        "EaseFunction",
+                        "Tween<T>",
+                        "lerp",
+                        "remap"
+                    ],
+                    "details": "`ease(t, EaseType, EaseMode)` uses a built-in curve; `ease(t, EaseFunction,\nEaseMode)` evaluates a custom curve with the same In/Out/InOut treatment\n(the function is the ease-in base; a null function falls back to linear).\nUse these free functions when driving a value manually in `update()`/`draw()`\ninstead of running a [`Tween<T>`](#Tween<T>).",
+                    "details_ja": "`ease(t, EaseType, EaseMode)` は組み込みカーブを、`ease(t, EaseFunction,\nEaseMode)` はカスタムカーブを同じ In/Out/InOut の扱いで評価する（関数は\nease-in 基準。null はリニアにフォールバック）。[`Tween<T>`](#Tween<T>) を\n使わず `update()`/`draw()` の中で手動で値を作るときはこの自由関数群を使う。",
+                    "details_ko": "`ease(t, EaseType, EaseMode)`는 내장 커브를, `ease(t, EaseFunction, EaseMode)`는\n커스텀 커브를 같은 In/Out/InOut 방식으로 평가한다 (함수는 ease-in 기준, null은\nlinear로 폴백). [`Tween<T>`](#Tween<T>) 없이 `update()`/`draw()`에서 수동으로\n값을 만들 때 이 자유 함수들을 사용.",
                     "examples": [
                         {
                             "name": "tweenExample",
@@ -11631,10 +11941,6 @@ const TrussCAPI = {
                         {
                             "name": "normalMapExample",
                             "group": "3d"
-                        },
-                        {
-                            "name": "3DPrimitivesExample",
-                            "group": "3d"
                         }
                     ]
                 },
@@ -11726,10 +12032,6 @@ const TrussCAPI = {
                         {
                             "name": "projectorSimulationExample",
                             "group": "3d"
-                        },
-                        {
-                            "name": "normalMapExample",
-                            "group": "3d"
                         }
                     ]
                 },
@@ -11770,20 +12072,24 @@ const TrussCAPI = {
                     "params": "light",
                     "params_typed": "Light & light",
                     "return_type": "void",
-                    "desc": "Begin shadow depth pass from the light's point of view",
+                    "desc": "Begin shadow depth pass from the light's point of view (up to 4 shadow lights per frame)",
                     "keywords": [
                         "depth pass",
                         "shadow map",
-                        "light view"
+                        "light view",
+                        "multi light"
                     ],
-                    "desc_ja": "light視点のshadow depth passを開始",
-                    "desc_ko": "조명 시점의 섀도우 뎁스 패스를 시작",
+                    "desc_ja": "light視点のshadow depth passを開始（1フレームに最大4灯まで）",
+                    "desc_ko": "조명 시점의 섀도우 뎁스 패스를 시작 (프레임당 최대 4개 조명)",
                     "related": [
                         "Light",
                         "endShadowPass",
                         "shadowDraw",
                         "addLight"
                     ],
+                    "details": "Run one `beginShadowPass(light)` / [`endShadowPass`](#endShadowPass) cycle per\nshadow-casting light, before the PBR pass. Up to 4 lights can cast shadows in\nthe same frame — each pass renders into its own layer of a shared shadow map\narray. Passes beyond the limit are ignored with a one-time warning. All\nlayers share one resolution: the largest requested via `enableShadow()`.",
+                    "details_ja": "shadowを落とすlightごとに `beginShadowPass(light)` /\n[`endShadowPass`](#endShadowPass) のサイクルをPBRパスの前に1回ずつ実行する。\n1フレームに最大4灯までshadowを落とせる（各パスは共有shadow map配列の\n専用レイヤーに描画される）。上限を超えたパスは一度だけ警告を出して無視される。\n解像度は全レイヤー共通で、`enableShadow()` で要求された最大値になる。",
+                    "details_ko": "섀도우를 드리우는 조명마다 `beginShadowPass(light)` /\n[`endShadowPass`](#endShadowPass) 사이클을 PBR 패스 전에 한 번씩 실행한다.\n한 프레임에 최대 4개 조명이 섀도우를 드리울 수 있으며, 각 패스는 공유 섀도우 맵\n배열의 전용 레이어에 렌더링된다. 한도를 넘는 패스는 한 번만 경고를 내고\n무시된다. 해상도는 모든 레이어가 공유하며 `enableShadow()`로 요청된 최댓값이 된다.",
                     "examples": [
                         {
                             "name": "projectorSimulationExample",
@@ -11864,10 +12170,6 @@ const TrussCAPI = {
                         {
                             "name": "easyCamExample",
                             "group": "3d"
-                        },
-                        {
-                            "name": "normalMapExample",
-                            "group": "3d"
                         }
                     ]
                 },
@@ -11896,10 +12198,6 @@ const TrussCAPI = {
                         },
                         {
                             "name": "easyCamExample",
-                            "group": "3d"
-                        },
-                        {
-                            "name": "normalMapExample",
                             "group": "3d"
                         }
                     ]
@@ -11971,10 +12269,6 @@ const TrussCAPI = {
                         {
                             "name": "fboMipmapExample",
                             "group": "3d"
-                        },
-                        {
-                            "name": "coordinateConversionExample",
-                            "group": "3d"
                         }
                     ]
                 },
@@ -12004,10 +12298,6 @@ const TrussCAPI = {
                         },
                         {
                             "name": "fboMipmapExample",
-                            "group": "3d"
-                        },
-                        {
-                            "name": "coordinateConversionExample",
                             "group": "3d"
                         }
                     ]
@@ -13396,6 +13686,10 @@ const TrussCAPI = {
                     "group": "math"
                 },
                 {
+                    "name": "customEaseExample",
+                    "group": "animation"
+                },
+                {
                     "name": "grabExample",
                     "group": "node"
                 }
@@ -13699,10 +13993,6 @@ const TrussCAPI = {
                 {
                     "name": "curvesExample",
                     "group": "graphics"
-                },
-                {
-                    "name": "coordinateConversionExample",
-                    "group": "3d"
                 }
             ],
             "related": [
@@ -20842,10 +21132,6 @@ const TrussCAPI = {
                 {
                     "name": "projectorSimulationExample",
                     "group": "3d"
-                },
-                {
-                    "name": "normalMapExample",
-                    "group": "3d"
                 }
             ],
             "related": [
@@ -21007,7 +21293,7 @@ const TrussCAPI = {
                     "signatures": [
                         "int resolution = 1024"
                     ],
-                    "desc": "Enable shadow casting (depth map at given resolution)"
+                    "desc": "Enable shadow casting (depth map at given resolution; up to 4 shadow lights per frame)"
                 },
                 {
                     "name": "disableShadow",
@@ -24985,9 +25271,9 @@ const TrussCAPI = {
                 {
                     "name": "audio",
                     "type": "bool",
-                    "desc": "Record the AudioEngine's master mix into the file as an AAC track (macOS only for now; other platforms warn and record video only). ScreenRecorder also switches the video PTS to the audio device clock, so A/V stay in sync however unstable the frame rate is",
-                    "desc_ja": "AudioEngineのマスターミックスをAACトラックとしてファイルに録音する（現状macOSのみ。他プラットフォームは警告して映像のみ）。ScreenRecorder は映像PTSもオーディオデバイスクロックに切り替えるため、フレームレートが不安定でもA/Vがズレない",
-                    "desc_ko": "AudioEngine의 마스터 믹스를 AAC 트랙으로 파일에 녹음(현재 macOS 전용, 다른 플랫폼은 경고 후 영상만 녹화). ScreenRecorder는 영상 PTS도 오디오 디바이스 클럭으로 전환하므로 프레임레이트가 불안정해도 A/V가 어긋나지 않음"
+                    "desc": "Record the AudioEngine's master mix into the file as an AAC track (macOS/Windows/Linux; other platforms warn and record video only; Linux needs a GStreamer AAC encoder such as gst-libav or gst-plugins-bad). ScreenRecorder also switches the video PTS to the audio device clock, so A/V stay in sync however unstable the frame rate is",
+                    "desc_ja": "AudioEngineのマスターミックスをAACトラックとしてファイルに録音する（macOS/Windows/Linux。他プラットフォームは警告して映像のみ。LinuxはGStreamerのAACエンコーダ（gst-libavかgst-plugins-bad）が必要）。ScreenRecorder は映像PTSもオーディオデバイスクロックに切り替えるため、フレームレートが不安定でもA/Vがズレない",
+                    "desc_ko": "AudioEngine의 마스터 믹스를 AAC 트랙으로 파일에 녹음(macOS/Windows/Linux, 다른 플랫폼은 경고 후 영상만 녹화, Linux는 GStreamer AAC 인코더(gst-libav 또는 gst-plugins-bad) 필요). ScreenRecorder는 영상 PTS도 오디오 디바이스 클럭으로 전환하므로 프레임레이트가 불안정해도 A/V가 어긋나지 않음"
                 },
                 {
                     "name": "audioBitrate",
@@ -27318,6 +27604,10 @@ const TrussCAPI = {
                     "group": "animation"
                 },
                 {
+                    "name": "customEaseExample",
+                    "group": "animation"
+                },
+                {
                     "name": "AllFeaturesExample",
                     "group": "tests"
                 }
@@ -27372,9 +27662,10 @@ const TrussCAPI = {
                     "return": "Tween<T> &",
                     "signatures": [
                         "EaseType type, EaseMode mode = InOut",
-                        "EaseType inType, EaseType outType"
+                        "EaseType inType, EaseType outType",
+                        "EaseFunction fn, EaseMode mode = In"
                     ],
-                    "desc": "Set the easing curve; the two-type overload uses an asymmetric ease (one curve in, another out)"
+                    "desc": "Set the easing curve: a built-in EaseType, an asymmetric in/out pair, or a custom EaseFunction"
                 },
                 {
                     "name": "loop",
@@ -29293,9 +29584,10 @@ const TrussCAPI = {
                     "name": "ease",
                     "return": "TweenMod &",
                     "signatures": [
-                        "EaseType type, EaseMode mode = InOut"
+                        "EaseType type, EaseMode mode = InOut",
+                        "EaseFunction fn, EaseMode mode = In"
                     ],
-                    "desc": "Set easing function (TweenMod method). Types: Linear, Quad, Cubic, Quart, Quint, Sine, Expo, Circ, Back, Elastic, Bounce. Modes: In, Out, InOut (C++ only)"
+                    "desc": "Set easing (TweenMod method): a built-in EaseType + EaseMode, or a custom EaseFunction (C++ only)"
                 },
                 {
                     "name": "delay",
@@ -31369,6 +31661,13 @@ const TrussCAPI = {
                     "name": "Bounce",
                     "value": 10,
                     "desc": "Bouncing",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Custom",
+                    "value": 11,
+                    "desc": "User-supplied curve function (falls back to Linear when none is set)",
                     "desc_ja": "",
                     "desc_ko": ""
                 }

@@ -9,22 +9,22 @@ const TrussSketchAPI = {
     {
      "name": "ease",
      "snippet": "ease(${1:t}, ${2:type}, ${3:mode})",
-     "desc": "Apply easing to value (0-1)"
+     "desc": "Apply easing to a normalized value (0-1) with an EaseType or a custom EaseFunction"
     },
     {
      "name": "easeIn",
      "snippet": "easeIn(${1:t}, ${2:type})",
-     "desc": "Apply ease-in to value (0-1)"
+     "desc": "Apply ease-in (accelerate) to value (0-1); takes an EaseType or a custom EaseFunction"
     },
     {
      "name": "easeInOut",
      "snippet": "easeInOut(${1:t}, ${2:type})",
-     "desc": "Apply ease-in-out to value (0-1)"
+     "desc": "Apply ease-in-out to value (0-1); takes an EaseType, an asymmetric type pair, or a custom EaseFunction"
     },
     {
      "name": "easeOut",
      "snippet": "easeOut(${1:t}, ${2:type})",
-     "desc": "Apply ease-out to value (0-1)"
+     "desc": "Apply ease-out (decelerate) to value (0-1); takes an EaseType or a custom EaseFunction"
     }
    ]
   },
@@ -374,7 +374,7 @@ const TrussSketchAPI = {
     {
      "name": "beginShadowPass",
      "snippet": "beginShadowPass(${1:light})",
-     "desc": "Begin shadow depth pass from the light's point of view"
+     "desc": "Begin shadow depth pass from the light's point of view (up to 4 shadow lights per frame)"
     },
     {
      "name": "calculateLighting",
@@ -465,6 +465,11 @@ const TrussSketchAPI = {
      "name": "appendCurve",
      "snippet": "appendCurve(${1:points})",
      "desc": "Append Catmull-Rom curve vertices to the current shape (use between beginShape/endShape; needs >=4 points, closed=true wraps around)"
+    },
+    {
+     "name": "appendSuperellipse",
+     "snippet": "appendSuperellipse(${1:x}, ${2:y}, ${3:w}, ${4:h})",
+     "desc": "Append the closed outline of a superellipse inscribed in a rect to the current shape (use between beginShape/endShape)"
     },
     {
      "name": "beginLines",
@@ -562,6 +567,11 @@ const TrussSketchAPI = {
      "desc": "Draw a single stroke segment (thick line with cap/join)"
     },
     {
+     "name": "drawSuperellipse",
+     "snippet": "drawSuperellipse(${1:pos}, ${2:size})",
+     "desc": "Draw a superellipse (Lamé curve) inscribed in a rect — Apple-icon-like by default (n=5)"
+    },
+    {
      "name": "drawTriangle",
      "snippet": "drawTriangle(${1:p1}, ${2:p2}, ${3:p3})",
      "desc": "Draw triangle"
@@ -642,6 +652,16 @@ const TrussSketchAPI = {
    "name": "graphics_style",
    "functions": [
     {
+     "name": "disableDepthTest",
+     "snippet": "disableDepthTest()",
+     "desc": "Disable depth test/write on the blend pipelines again (the default). Call before drawing 2D overlays (HUD, text) so they are not occluded by the 3D scene"
+    },
+    {
+     "name": "enableDepthTest",
+     "snippet": "enableDepthTest()",
+     "desc": "Re-enable depth test/write on the blend pipelines (compare LESS_EQUAL + depth write, same as the 3D pipeline). Use to restore depth after setBlendMode() mid-scene; persists like the blend mode (across frames and Fbo passes) until disableDepthTest()"
+    },
+    {
      "name": "fill",
      "snippet": "fill()",
      "desc": "Enable fill mode (shapes are solid, no outline)"
@@ -695,6 +715,11 @@ const TrussSketchAPI = {
      "name": "getStrokeWeight",
      "snippet": "getStrokeWeight()",
      "desc": "Get current stroke width"
+    },
+    {
+     "name": "isDepthTestEnabled",
+     "snippet": "isDepthTestEnabled()",
+     "desc": "Whether the depth-tested blend pipeline variant is active (set by enableDepthTest)"
     },
     {
      "name": "isFillEnabled",
@@ -4946,6 +4971,12 @@ const TrussSketchAPI = {
      "snippet": "Bounce",
      "return": "EaseType",
      "desc": "= 10"
+    },
+    {
+     "name": "Custom",
+     "snippet": "Custom",
+     "return": "EaseType",
+     "desc": "= 11"
     }
    ]
   },
@@ -6537,7 +6568,7 @@ const TrussSketchAPI = {
      "name": "enableShadow",
      "snippet": "enableShadow()",
      "return": "void",
-     "desc": "Enable shadow casting (depth map at given resolution)"
+     "desc": "Enable shadow casting (depth map at given resolution; up to 4 shadow lights per frame)"
     },
     {
      "name": "disableShadow",
@@ -12029,7 +12060,7 @@ const TrussSketchAPI = {
      "name": "ease",
      "snippet": "ease(${1:type})",
      "return": "TweenMod &",
-     "desc": "Set easing function (TweenMod method). Types: Linear, Quad, Cubic, Quart, Quint, Sine, Expo, Circ, Back, Elastic, Bounce. Modes: In, Out, InOut (C++ only)"
+     "desc": "Set easing (TweenMod method): a built-in EaseType + EaseMode, or a custom EaseFunction (C++ only)"
     },
     {
      "name": "delay",
@@ -13344,7 +13375,7 @@ const TrussSketchAPI = {
     {
      "name": "audio",
      "type": "bool",
-     "desc": "Record the AudioEngine's master mix into the file as an AAC track (macOS only for now; other platforms warn and record video only). ScreenRecorder also switches the video PTS to the audio device clock, so A/V stay in sync however unstable the frame rate is"
+     "desc": "Record the AudioEngine's master mix into the file as an AAC track (macOS/Windows/Linux; other platforms warn and record video only; Linux needs a GStreamer AAC encoder such as gst-libav or gst-plugins-bad). ScreenRecorder also switches the video PTS to the audio device clock, so A/V stay in sync however unstable the frame rate is"
     },
     {
      "name": "audioBitrate",

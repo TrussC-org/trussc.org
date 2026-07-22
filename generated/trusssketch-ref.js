@@ -358,6 +358,40 @@ const TrussCAPI = {
                     "desc_ko": "스쿼클 사각형 그리기 (곡률 연속 모서리, iOS 스타일)"
                 },
                 {
+                    "name": "drawSuperellipse",
+                    "params": "pos, size, n",
+                    "params_typed": "pos, size, n = 5.0",
+                    "return_type": "(nothing)",
+                    "desc": "Draw a superellipse (Lamé curve) inscribed in a rect — Apple-icon-like by default (n=5)",
+                    "keywords": [
+                        "superellipse",
+                        "lame curve",
+                        "apple icon",
+                        "squircle",
+                        "rounded",
+                        "piet hein"
+                    ],
+                    "desc_ja": "矩形に内接するスーパー楕円（ラメ曲線）を描画 — デフォルト（n=5）はAppleアイコン風",
+                    "desc_ko": "사각형에 내접하는 초타원(라메 곡선) 그리기 — 기본값(n=5)은 Apple 아이콘 스타일"
+                },
+                {
+                    "name": "drawSuperellipse",
+                    "params": "x, y, w, h, n",
+                    "params_typed": "x, y, w, h, n = 5.0",
+                    "return_type": "(nothing)",
+                    "desc": "Draw a superellipse (Lamé curve) inscribed in a rect — Apple-icon-like by default (n=5)",
+                    "keywords": [
+                        "superellipse",
+                        "lame curve",
+                        "apple icon",
+                        "squircle",
+                        "rounded",
+                        "piet hein"
+                    ],
+                    "desc_ja": "矩形に内接するスーパー楕円（ラメ曲線）を描画 — デフォルト（n=5）はAppleアイコン風",
+                    "desc_ko": "사각형에 내접하는 초타원(라메 곡선) 그리기 — 기본값(n=5)은 Apple 아이콘 스타일"
+                },
+                {
                     "name": "drawCircle",
                     "params": "center, radius",
                     "params_typed": "center, radius",
@@ -1095,6 +1129,38 @@ const TrussCAPI = {
                     "desc_ko": "현재 도형에 호 정점을 추가 (beginShape/endShape 사이에서 사용)"
                 },
                 {
+                    "name": "appendSuperellipse",
+                    "params": "x, y, w, h, n",
+                    "params_typed": "x, y, w, h, n = 5.0",
+                    "return_type": "(nothing)",
+                    "desc": "Append the closed outline of a superellipse inscribed in a rect to the current shape (use between beginShape/endShape)",
+                    "keywords": [
+                        "superellipse",
+                        "lame curve",
+                        "squircle",
+                        "shape",
+                        "outline"
+                    ],
+                    "desc_ja": "矩形に内接するスーパー楕円の閉じた輪郭を現在の図形に追加（beginShape/endShape間で使用）",
+                    "desc_ko": "사각형에 내접하는 초타원의 닫힌 윤곽을 현재 도형에 추가 (beginShape/endShape 사이에서 사용)"
+                },
+                {
+                    "name": "appendSuperellipse",
+                    "params": "pos, size, n",
+                    "params_typed": "pos, size, n = 5.0",
+                    "return_type": "(nothing)",
+                    "desc": "Append the closed outline of a superellipse inscribed in a rect to the current shape (use between beginShape/endShape)",
+                    "keywords": [
+                        "superellipse",
+                        "lame curve",
+                        "squircle",
+                        "shape",
+                        "outline"
+                    ],
+                    "desc_ja": "矩形に内接するスーパー楕円の閉じた輪郭を現在の図形に追加（beginShape/endShape間で使用）",
+                    "desc_ko": "사각형에 내접하는 초타원의 닫힌 윤곽을 현재 도형에 추가 (beginShape/endShape 사이에서 사용)"
+                },
+                {
                     "name": "appendCurve",
                     "params": "points",
                     "params_typed": "points",
@@ -1694,6 +1760,55 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "ブレンドモードをAlpha（デフォルト）にリセット",
                     "desc_ko": "블렌드 모드를 Alpha (기본값)로 초기화"
+                },
+                {
+                    "name": "enableDepthTest",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "(nothing)",
+                    "desc": "Re-enable depth test/write on the blend pipelines (compare LESS_EQUAL + depth write, same as the 3D pipeline). Use to restore depth after setBlendMode() mid-scene; persists like the blend mode (across frames and Fbo passes) until disableDepthTest()",
+                    "keywords": [
+                        "depth",
+                        "z-buffer",
+                        "occlusion",
+                        "3d",
+                        "blend",
+                        "restore"
+                    ],
+                    "desc_ja": "ブレンドパイプラインのデプステスト/書き込みを再有効化（LESS_EQUAL比較+デプス書き込み、3Dパイプラインと同じ設定）。シーン途中の setBlendMode() 後にデプスを復元するために使う。ブレンドモードと同様にフレームやFboパスをまたいで disableDepthTest() まで持続する",
+                    "desc_ko": "블렌드 파이프라인의 깊이 테스트/쓰기를 다시 활성화 (LESS_EQUAL 비교 + 깊이 쓰기, 3D 파이프라인과 동일한 설정). 씬 도중 setBlendMode() 이후 깊이를 복원할 때 사용. 블렌드 모드처럼 프레임과 Fbo 패스를 넘어 disableDepthTest()까지 유지됨"
+                },
+                {
+                    "name": "disableDepthTest",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "(nothing)",
+                    "desc": "Disable depth test/write on the blend pipelines again (the default). Call before drawing 2D overlays (HUD, text) so they are not occluded by the 3D scene",
+                    "keywords": [
+                        "depth",
+                        "z-buffer",
+                        "occlusion",
+                        "overlay",
+                        "hud",
+                        "2d"
+                    ],
+                    "desc_ja": "ブレンドパイプラインのデプステスト/書き込みを再び無効化（デフォルト状態）。2DオーバーレイやHUDが3Dシーンに隠されないよう、描画前に呼ぶ",
+                    "desc_ko": "블렌드 파이프라인의 깊이 테스트/쓰기를 다시 비활성화 (기본 상태). 2D 오버레이 (HUD, 텍스트)가 3D 씬에 가려지지 않도록 그리기 전에 호출"
+                },
+                {
+                    "name": "isDepthTestEnabled",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "boolean",
+                    "desc": "Whether the depth-tested blend pipeline variant is active (set by enableDepthTest)",
+                    "keywords": [
+                        "depth",
+                        "z-buffer",
+                        "check",
+                        "state"
+                    ],
+                    "desc_ja": "デプステスト付きブレンドパイプラインが有効か（enableDepthTest で設定）",
+                    "desc_ko": "깊이 테스트가 적용된 블렌드 파이프라인이 활성 상태인지 (enableDepthTest로 설정)"
                 },
                 {
                     "name": "setCurveTolerance",
@@ -6452,7 +6567,7 @@ const TrussCAPI = {
                     "params": "t, type",
                     "params_typed": "t, type",
                     "return_type": "number",
-                    "desc": "Apply ease-in to value (0-1)",
+                    "desc": "Apply ease-in (accelerate) to value (0-1); takes an EaseType or a custom EaseFunction",
                     "keywords": [
                         "easing",
                         "accelerate",
@@ -6460,15 +6575,31 @@ const TrussCAPI = {
                         "interpolation",
                         "smooth"
                     ],
-                    "desc_ja": "イーズインを適用 (0-1)",
-                    "desc_ko": "값에 ease-in 적용 (0-1)"
+                    "desc_ja": "イーズイン（加速）を適用 (0-1)。EaseType またはカスタム EaseFunction を受ける",
+                    "desc_ko": "ease-in(가속) 적용 (0-1). EaseType 또는 커스텀 EaseFunction 지정 가능"
+                },
+                {
+                    "name": "easeIn",
+                    "params": "t, fn",
+                    "params_typed": "t, fn",
+                    "return_type": "number",
+                    "desc": "Apply ease-in (accelerate) to value (0-1); takes an EaseType or a custom EaseFunction",
+                    "keywords": [
+                        "easing",
+                        "accelerate",
+                        "ramp up",
+                        "interpolation",
+                        "smooth"
+                    ],
+                    "desc_ja": "イーズイン（加速）を適用 (0-1)。EaseType またはカスタム EaseFunction を受ける",
+                    "desc_ko": "ease-in(가속) 적용 (0-1). EaseType 또는 커스텀 EaseFunction 지정 가능"
                 },
                 {
                     "name": "easeOut",
                     "params": "t, type",
                     "params_typed": "t, type",
                     "return_type": "number",
-                    "desc": "Apply ease-out to value (0-1)",
+                    "desc": "Apply ease-out (decelerate) to value (0-1); takes an EaseType or a custom EaseFunction",
                     "keywords": [
                         "easing",
                         "decelerate",
@@ -6476,54 +6607,103 @@ const TrussCAPI = {
                         "interpolation",
                         "smooth"
                     ],
-                    "desc_ja": "イーズアウトを適用 (0-1)",
-                    "desc_ko": "값에 ease-out 적용 (0-1)"
+                    "desc_ja": "イーズアウト（減速）を適用 (0-1)。EaseType またはカスタム EaseFunction を受ける",
+                    "desc_ko": "ease-out(감속) 적용 (0-1). EaseType 또는 커스텀 EaseFunction 지정 가능"
+                },
+                {
+                    "name": "easeOut",
+                    "params": "t, fn",
+                    "params_typed": "t, fn",
+                    "return_type": "number",
+                    "desc": "Apply ease-out (decelerate) to value (0-1); takes an EaseType or a custom EaseFunction",
+                    "keywords": [
+                        "easing",
+                        "decelerate",
+                        "ramp down",
+                        "interpolation",
+                        "smooth"
+                    ],
+                    "desc_ja": "イーズアウト（減速）を適用 (0-1)。EaseType またはカスタム EaseFunction を受ける",
+                    "desc_ko": "ease-out(감속) 적용 (0-1). EaseType 또는 커스텀 EaseFunction 지정 가능"
                 },
                 {
                     "name": "easeInOut",
                     "params": "t, type",
                     "params_typed": "t, type",
                     "return_type": "number",
-                    "desc": "Apply ease-in-out to value (0-1)",
+                    "desc": "Apply ease-in-out to value (0-1); takes an EaseType, an asymmetric type pair, or a custom EaseFunction",
                     "keywords": [
                         "easing",
                         "smoothstep",
                         "accelerate decelerate",
                         "interpolation"
                     ],
-                    "desc_ja": "イーズインアウトを適用 (0-1)",
-                    "desc_ko": "값에 ease-in-out 적용 (0-1)"
+                    "desc_ja": "イーズインアウトを適用 (0-1)。EaseType、非対称の型ペア、カスタム EaseFunction を受ける",
+                    "desc_ko": "ease-in-out 적용 (0-1). EaseType, 비대칭 타입 쌍, 커스텀 EaseFunction 지정 가능"
                 },
                 {
                     "name": "easeInOut",
                     "params": "t, inType, outType",
                     "params_typed": "t, inType, outType",
                     "return_type": "number",
-                    "desc": "Apply ease-in-out to value (0-1)",
+                    "desc": "Apply ease-in-out to value (0-1); takes an EaseType, an asymmetric type pair, or a custom EaseFunction",
                     "keywords": [
                         "easing",
                         "smoothstep",
                         "accelerate decelerate",
                         "interpolation"
                     ],
-                    "desc_ja": "イーズインアウトを適用 (0-1)",
-                    "desc_ko": "값에 ease-in-out 적용 (0-1)"
+                    "desc_ja": "イーズインアウトを適用 (0-1)。EaseType、非対称の型ペア、カスタム EaseFunction を受ける",
+                    "desc_ko": "ease-in-out 적용 (0-1). EaseType, 비대칭 타입 쌍, 커스텀 EaseFunction 지정 가능"
+                },
+                {
+                    "name": "easeInOut",
+                    "params": "t, fn",
+                    "params_typed": "t, fn",
+                    "return_type": "number",
+                    "desc": "Apply ease-in-out to value (0-1); takes an EaseType, an asymmetric type pair, or a custom EaseFunction",
+                    "keywords": [
+                        "easing",
+                        "smoothstep",
+                        "accelerate decelerate",
+                        "interpolation"
+                    ],
+                    "desc_ja": "イーズインアウトを適用 (0-1)。EaseType、非対称の型ペア、カスタム EaseFunction を受ける",
+                    "desc_ko": "ease-in-out 적용 (0-1). EaseType, 비대칭 타입 쌍, 커스텀 EaseFunction 지정 가능"
                 },
                 {
                     "name": "ease",
                     "params": "t, type, mode",
                     "params_typed": "t, type, mode",
                     "return_type": "number",
-                    "desc": "Apply easing to value (0-1)",
+                    "desc": "Apply easing to a normalized value (0-1) with an EaseType or a custom EaseFunction",
                     "keywords": [
                         "easing",
                         "interpolation",
                         "tween",
                         "smooth",
-                        "curve"
+                        "curve",
+                        "custom"
                     ],
-                    "desc_ja": "イージングを適用 (0-1)",
-                    "desc_ko": "값에 easing 적용 (0-1)"
+                    "desc_ja": "正規化値 (0-1) にイージングを適用。EaseType またはカスタム EaseFunction を指定",
+                    "desc_ko": "정규화 값 (0-1)에 easing 적용. EaseType 또는 커스텀 EaseFunction 지정"
+                },
+                {
+                    "name": "ease",
+                    "params": "t, fn, mode",
+                    "params_typed": "t, fn, mode",
+                    "return_type": "number",
+                    "desc": "Apply easing to a normalized value (0-1) with an EaseType or a custom EaseFunction",
+                    "keywords": [
+                        "easing",
+                        "interpolation",
+                        "tween",
+                        "smooth",
+                        "curve",
+                        "custom"
+                    ],
+                    "desc_ja": "正規化値 (0-1) にイージングを適用。EaseType またはカスタム EaseFunction を指定",
+                    "desc_ko": "정규화 값 (0-1)에 easing 적용. EaseType 또는 커스텀 EaseFunction 지정"
                 }
             ],
             "name_ja": "アニメーション",
@@ -6919,14 +7099,15 @@ const TrussCAPI = {
                     "params": "light",
                     "params_typed": "light",
                     "return_type": "(nothing)",
-                    "desc": "Begin shadow depth pass from the light's point of view",
+                    "desc": "Begin shadow depth pass from the light's point of view (up to 4 shadow lights per frame)",
                     "keywords": [
                         "depth pass",
                         "shadow map",
-                        "light view"
+                        "light view",
+                        "multi light"
                     ],
-                    "desc_ja": "light視点のshadow depth passを開始",
-                    "desc_ko": "조명 시점의 섀도우 뎁스 패스를 시작"
+                    "desc_ja": "light視点のshadow depth passを開始（1フレームに最大4灯まで）",
+                    "desc_ko": "조명 시점의 섀도우 뎁스 패스를 시작 (프레임당 최대 4개 조명)"
                 },
                 {
                     "name": "endShadowPass",
@@ -12782,9 +12963,9 @@ const TrussCAPI = {
                     "signatures": [
                         "resolution = 1024"
                     ],
-                    "desc": "Enable shadow casting (depth map at given resolution)",
-                    "desc_ja": "shadow castingを有効化（指定解像度のdepth map）",
-                    "desc_ko": "섀도우 캐스팅을 활성화 (지정 해상도의 뎁스맵)"
+                    "desc": "Enable shadow casting (depth map at given resolution; up to 4 shadow lights per frame)",
+                    "desc_ja": "shadow castingを有効化（指定解像度のdepth map、1フレームに最大4灯まで）",
+                    "desc_ko": "섀도우 캐스팅을 활성화 (지정 해상도의 뎁스맵, 프레임당 최대 4개 조명)"
                 },
                 {
                     "name": "light:disableShadow",
@@ -21336,11 +21517,12 @@ const TrussCAPI = {
                     "name": "tweenMod:ease",
                     "return": "TweenMod",
                     "signatures": [
-                        "type, mode = InOut"
+                        "type, mode = InOut",
+                        "fn, mode = In"
                     ],
-                    "desc": "Set easing function (TweenMod method). Types: Linear, Quad, Cubic, Quart, Quint, Sine, Expo, Circ, Back, Elastic, Bounce. Modes: In, Out, InOut (C++ only)",
-                    "desc_ja": "イージング関数を設定（TweenModメソッド）。Types: Linear, Quad, Cubic, Quart, Quint, Sine, Expo, Circ, Back, Elastic, Bounce。Modes: In, Out, InOut（C++のみ）",
-                    "desc_ko": "easing 함수를 설정 (TweenMod 메서드). Types: Linear, Quad, Cubic, Quart, Quint, Sine, Expo, Circ, Back, Elastic, Bounce. Modes: In, Out, InOut (C++ 전용)"
+                    "desc": "Set easing (TweenMod method): a built-in EaseType + EaseMode, or a custom EaseFunction (C++ only)",
+                    "desc_ja": "イージングを設定（TweenModメソッド）：組み込み EaseType + EaseMode、またはカスタム EaseFunction（C++のみ）",
+                    "desc_ko": "easing 설정 (TweenMod 메서드): 내장 EaseType + EaseMode, 또는 커스텀 EaseFunction (C++ 전용)"
                 },
                 {
                     "name": "tweenMod:delay",
@@ -23546,9 +23728,9 @@ const TrussCAPI = {
                 {
                     "name": "videoRecordSettings.audio",
                     "type": "boolean",
-                    "desc": "Record the AudioEngine's master mix into the file as an AAC track (macOS only for now; other platforms warn and record video only). ScreenRecorder also switches the video PTS to the audio device clock, so A/V stay in sync however unstable the frame rate is",
-                    "desc_ja": "AudioEngineのマスターミックスをAACトラックとしてファイルに録音する（現状macOSのみ。他プラットフォームは警告して映像のみ）。ScreenRecorder は映像PTSもオーディオデバイスクロックに切り替えるため、フレームレートが不安定でもA/Vがズレない",
-                    "desc_ko": "AudioEngine의 마스터 믹스를 AAC 트랙으로 파일에 녹음(현재 macOS 전용, 다른 플랫폼은 경고 후 영상만 녹화). ScreenRecorder는 영상 PTS도 오디오 디바이스 클럭으로 전환하므로 프레임레이트가 불안정해도 A/V가 어긋나지 않음"
+                    "desc": "Record the AudioEngine's master mix into the file as an AAC track (macOS/Windows/Linux; other platforms warn and record video only; Linux needs a GStreamer AAC encoder such as gst-libav or gst-plugins-bad). ScreenRecorder also switches the video PTS to the audio device clock, so A/V stay in sync however unstable the frame rate is",
+                    "desc_ja": "AudioEngineのマスターミックスをAACトラックとしてファイルに録音する（macOS/Windows/Linux。他プラットフォームは警告して映像のみ。LinuxはGStreamerのAACエンコーダ（gst-libavかgst-plugins-bad）が必要）。ScreenRecorder は映像PTSもオーディオデバイスクロックに切り替えるため、フレームレートが不安定でもA/Vがズレない",
+                    "desc_ko": "AudioEngine의 마스터 믹스를 AAC 트랙으로 파일에 녹음(macOS/Windows/Linux, 다른 플랫폼은 경고 후 영상만 녹화, Linux는 GStreamer AAC 인코더(gst-libav 또는 gst-plugins-bad) 필요). ScreenRecorder는 영상 PTS도 오디오 디바이스 클럭으로 전환하므로 프레임레이트가 불안정해도 A/V가 어긋나지 않음"
                 },
                 {
                     "name": "videoRecordSettings.audioBitrate",
@@ -24814,6 +24996,13 @@ const TrussCAPI = {
                 {
                     "name": "Bounce",
                     "value": 10,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Custom",
+                    "value": 11,
                     "desc": "",
                     "desc_ja": "",
                     "desc_ko": ""
