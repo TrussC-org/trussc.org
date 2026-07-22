@@ -69,6 +69,13 @@
       "visible": true,
       "items": [
         {
+          "name": "customEaseExample",
+          "width": 1000,
+          "height": 610,
+          "additionalFiles": ["FreehandCurveNode.h", "PointCurveNode.h"],
+          "webSupported": true
+        },
+        {
           "name": "tweenExample",
           "width": 960,
           "height": 800,
