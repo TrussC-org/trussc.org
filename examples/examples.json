@@ -74,6 +74,12 @@
           "width": 1280,
           "height": 720,
           "webSupported": true
+        },
+        {
+          "name": "sunlightExample",
+          "width": 1280,
+          "height": 720,
+          "webSupported": true
         }
       ]
     },
