@@ -2029,6 +2029,10 @@ const TrussCAPI = {
                     ],
                     "examples": [
                         {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        },
+                        {
                             "name": "emptyExample",
                             "group": "templates"
                         }
@@ -2053,6 +2057,10 @@ const TrussCAPI = {
                         "setMaterial"
                     ],
                     "examples": [
+                        {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        },
                         {
                             "name": "emptyExample",
                             "group": "templates"
@@ -2079,6 +2087,10 @@ const TrussCAPI = {
                     ],
                     "examples": [
                         {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        },
+                        {
                             "name": "emptyExample",
                             "group": "templates"
                         }
@@ -2103,6 +2115,10 @@ const TrussCAPI = {
                         "setMaterial"
                     ],
                     "examples": [
+                        {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        },
                         {
                             "name": "emptyExample",
                             "group": "templates"
@@ -2129,6 +2145,10 @@ const TrussCAPI = {
                     ],
                     "examples": [
                         {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        },
+                        {
                             "name": "emptyExample",
                             "group": "templates"
                         }
@@ -2153,6 +2173,10 @@ const TrussCAPI = {
                         "setMaterial"
                     ],
                     "examples": [
+                        {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        },
                         {
                             "name": "emptyExample",
                             "group": "templates"
@@ -2803,6 +2827,10 @@ const TrussCAPI = {
                         {
                             "name": "blendingExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "depthTestExample",
+                            "group": "3d"
                         }
                     ]
                 },
@@ -2838,6 +2866,10 @@ const TrussCAPI = {
                         {
                             "name": "blendingExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "depthTestExample",
+                            "group": "3d"
                         }
                     ]
                 },
@@ -2862,7 +2894,13 @@ const TrussCAPI = {
                         "isDepthTestEnabled",
                         "setBlendMode"
                     ],
-                    "details": "Every setBlendMode() pipeline (Alpha, Add, even Disabled) normally has depth write/test OFF;\nonly the 3D pipeline (screen setup / EasyCam::begin()) writes depth. Changing the blend mode\ninside a 3D scene therefore drops depth testing for everything drawn after it. enableDepthTest()\nrestores it without starting a new camera scope:\n\n    cam.begin();\n    drawSolidGeometry();              // depth-tested (3D pipeline)\n    setBlendMode(BlendMode::Add);\n    drawGlowEffects();                // additive, no depth by default\n    resetBlendMode();\n    enableDepthTest();\n    drawMoreSolidGeometry();          // depth-tested again, correctly occluded\n    cam.end();\n    disableDepthTest();               // back to default before 2D overlays"
+                    "details": "Every setBlendMode() pipeline (Alpha, Add, even Disabled) normally has depth write/test OFF;\nonly the 3D pipeline (screen setup / EasyCam::begin()) writes depth. Changing the blend mode\ninside a 3D scene therefore drops depth testing for everything drawn after it. enableDepthTest()\nrestores it without starting a new camera scope:\n\n    cam.begin();\n    drawSolidGeometry();              // depth-tested (3D pipeline)\n    setBlendMode(BlendMode::Add);\n    drawGlowEffects();                // additive, no depth by default\n    resetBlendMode();\n    enableDepthTest();\n    drawMoreSolidGeometry();          // depth-tested again, correctly occluded\n    cam.end();\n    disableDepthTest();               // back to default before 2D overlays",
+                    "examples": [
+                        {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        }
+                    ]
                 },
                 {
                     "name": "disableDepthTest",
@@ -2884,6 +2922,12 @@ const TrussCAPI = {
                         "enableDepthTest",
                         "isDepthTestEnabled",
                         "setBlendMode"
+                    ],
+                    "examples": [
+                        {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        }
                     ]
                 },
                 {
@@ -2903,6 +2947,12 @@ const TrussCAPI = {
                     "related": [
                         "enableDepthTest",
                         "disableDepthTest"
+                    ],
+                    "examples": [
+                        {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        }
                     ]
                 },
                 {
@@ -3404,6 +3454,10 @@ const TrussCAPI = {
                     ],
                     "examples": [
                         {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        },
+                        {
                             "name": "fboMipmapExample",
                             "group": "3d"
                         },
@@ -3432,7 +3486,15 @@ const TrussCAPI = {
                     ],
                     "examples": [
                         {
+                            "name": "depthTestExample",
+                            "group": "3d"
+                        },
+                        {
                             "name": "fboMipmapExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "multiShadowExample",
                             "group": "3d"
                         }
                     ]
@@ -11935,6 +11997,10 @@ const TrussCAPI = {
                     ],
                     "examples": [
                         {
+                            "name": "multiShadowExample",
+                            "group": "3d"
+                        },
+                        {
                             "name": "projectorSimulationExample",
                             "group": "3d"
                         },
@@ -12030,6 +12096,10 @@ const TrussCAPI = {
                             "group": "3d"
                         },
                         {
+                            "name": "multiShadowExample",
+                            "group": "3d"
+                        },
+                        {
                             "name": "projectorSimulationExample",
                             "group": "3d"
                         }
@@ -12092,6 +12162,14 @@ const TrussCAPI = {
                     "details_ko": "섀도우를 드리우는 조명마다 `beginShadowPass(light)` /\n[`endShadowPass`](#endShadowPass) 사이클을 PBR 패스 전에 한 번씩 실행한다.\n한 프레임에 최대 4개 조명이 섀도우를 드리울 수 있으며, 각 패스는 공유 섀도우 맵\n배열의 전용 레이어에 렌더링된다. 한도를 넘는 패스는 한 번만 경고를 내고\n무시된다. 해상도는 모든 레이어가 공유하며 `enableShadow()`로 요청된 최댓값이 된다.",
                     "examples": [
                         {
+                            "name": "multiShadowExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "sunlightExample",
+                            "group": "3d"
+                        },
+                        {
                             "name": "projectorSimulationExample",
                             "group": "3d"
                         }
@@ -12114,6 +12192,14 @@ const TrussCAPI = {
                         "beginShadowPass"
                     ],
                     "examples": [
+                        {
+                            "name": "multiShadowExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "sunlightExample",
+                            "group": "3d"
+                        },
                         {
                             "name": "projectorSimulationExample",
                             "group": "3d"
@@ -12139,7 +12225,15 @@ const TrussCAPI = {
                     ],
                     "examples": [
                         {
+                            "name": "multiShadowExample",
+                            "group": "3d"
+                        },
+                        {
                             "name": "projectorSimulationExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "sunlightExample",
                             "group": "3d"
                         }
                     ]
@@ -12170,6 +12264,10 @@ const TrussCAPI = {
                         {
                             "name": "easyCamExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "multiShadowExample",
+                            "group": "3d"
                         }
                     ]
                 },
@@ -12198,6 +12296,10 @@ const TrussCAPI = {
                         },
                         {
                             "name": "easyCamExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "multiShadowExample",
                             "group": "3d"
                         }
                     ]
@@ -12267,7 +12369,11 @@ const TrussCAPI = {
                             "group": "3d"
                         },
                         {
-                            "name": "fboMipmapExample",
+                            "name": "multiShadowExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "sunlightExample",
                             "group": "3d"
                         }
                     ]
@@ -12297,7 +12403,11 @@ const TrussCAPI = {
                             "group": "3d"
                         },
                         {
-                            "name": "fboMipmapExample",
+                            "name": "multiShadowExample",
+                            "group": "3d"
+                        },
+                        {
+                            "name": "sunlightExample",
                             "group": "3d"
                         }
                     ]
@@ -13993,6 +14103,10 @@ const TrussCAPI = {
                 {
                     "name": "curvesExample",
                     "group": "graphics"
+                },
+                {
+                    "name": "multiShadowExample",
+                    "group": "3d"
                 }
             ],
             "related": [
@@ -21126,11 +21240,15 @@ const TrussCAPI = {
             "desc_ko": "3D PBR 렌더링용 광원 (평행광, 점광, 스포트라이트)",
             "examples": [
                 {
-                    "name": "pbrSpheresExample",
+                    "name": "sunlightExample",
                     "group": "3d"
                 },
                 {
-                    "name": "projectorSimulationExample",
+                    "name": "multiShadowExample",
+                    "group": "3d"
+                },
+                {
+                    "name": "pbrSpheresExample",
                     "group": "3d"
                 }
             ],
@@ -21264,6 +21382,14 @@ const TrussCAPI = {
                     "desc": "Build the projector's view-projection matrix from spot params and lens shift"
                 },
                 {
+                    "name": "computeShadowViewProj",
+                    "return": "Mat4",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build the light's view-projection matrix for rendering + sampling the shadow map (spot: projector frustum; directional: orthographic box)"
+                },
+                {
                     "name": "setIesProfile",
                     "return": "void",
                     "signatures": [
@@ -21334,6 +21460,62 @@ const TrussCAPI = {
                         ""
                     ],
                     "desc": "Get shadow depth bias"
+                },
+                {
+                    "name": "setShadowSoftness",
+                    "return": "Light &",
+                    "signatures": [
+                        "float size"
+                    ],
+                    "desc": "Set shadow softness as the light's emitter size in world units (0 = hard, default); drives PCSS penumbra"
+                },
+                {
+                    "name": "getShadowSoftness",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get shadow softness (emitter size in world units)"
+                },
+                {
+                    "name": "setShadowArea",
+                    "return": "Light &",
+                    "signatures": [
+                        "const Vec3 & center, float radius"
+                    ],
+                    "desc": "Set the orthographic shadow volume (center + radius) for a directional light (default radius 500)"
+                },
+                {
+                    "name": "getShadowAreaCenter",
+                    "return": "const Vec3 &",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get directional shadow volume center"
+                },
+                {
+                    "name": "getShadowAreaRadius",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get directional shadow volume radius (half-extent)"
+                },
+                {
+                    "name": "setShadowSamples",
+                    "return": "Light &",
+                    "signatures": [
+                        "int taps"
+                    ],
+                    "desc": "Set the PCSS PCF tap count (clamped 1-36, default 16); only affects soft shadows (softness > 0)"
+                },
+                {
+                    "name": "getShadowSamples",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get PCSS PCF tap count"
                 },
                 {
                     "name": "getType",

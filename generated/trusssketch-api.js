@@ -6601,6 +6601,54 @@ const TrussSketchAPI = {
      "desc": "Get shadow depth bias"
     },
     {
+     "name": "setShadowSoftness",
+     "snippet": "setShadowSoftness(${1:size})",
+     "return": "Light &",
+     "desc": "Set shadow softness as the light's emitter size in world units (0 = hard, default); drives PCSS penumbra"
+    },
+    {
+     "name": "getShadowSoftness",
+     "snippet": "getShadowSoftness()",
+     "return": "float",
+     "desc": "Get shadow softness (emitter size in world units)"
+    },
+    {
+     "name": "setShadowSamples",
+     "snippet": "setShadowSamples(${1:taps})",
+     "return": "Light &",
+     "desc": "Set the PCSS PCF tap count (clamped 1-36, default 16); only affects soft shadows (softness > 0)"
+    },
+    {
+     "name": "getShadowSamples",
+     "snippet": "getShadowSamples()",
+     "return": "int",
+     "desc": "Get PCSS PCF tap count"
+    },
+    {
+     "name": "setShadowArea",
+     "snippet": "setShadowArea(${1:center}, ${2:radius})",
+     "return": "Light &",
+     "desc": "Set the orthographic shadow volume (center + radius) for a directional light (default radius 500)"
+    },
+    {
+     "name": "getShadowAreaCenter",
+     "snippet": "getShadowAreaCenter()",
+     "return": "const Vec3 &",
+     "desc": "Get directional shadow volume center"
+    },
+    {
+     "name": "getShadowAreaRadius",
+     "snippet": "getShadowAreaRadius()",
+     "return": "float",
+     "desc": "Get directional shadow volume radius (half-extent)"
+    },
+    {
+     "name": "computeShadowViewProj",
+     "snippet": "computeShadowViewProj()",
+     "return": "Mat4",
+     "desc": "Build the light's view-projection matrix for rendering + sampling the shadow map (spot: projector frustum; directional: orthographic box)"
+    },
+    {
      "name": "getType",
      "snippet": "getType()",
      "return": "LightType",

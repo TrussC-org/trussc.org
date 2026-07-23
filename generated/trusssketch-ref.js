@@ -13018,6 +13018,86 @@ const TrussCAPI = {
                     "desc_ko": "섀도우 뎁스 바이어스를 얻음"
                 },
                 {
+                    "name": "light:setShadowSoftness",
+                    "return": "Light",
+                    "signatures": [
+                        "size"
+                    ],
+                    "desc": "Set shadow softness as the light's emitter size in world units (0 = hard, default); drives PCSS penumbra",
+                    "desc_ja": "shadowの柔らかさをlightのemitterサイズ（world単位）で設定（0=硬い、デフォルト）。PCSSの半影を制御",
+                    "desc_ko": "섀도우 부드러움을 조명 이미터 크기(월드 단위)로 설정 (0=단단함, 기본값); PCSS 반영을 제어"
+                },
+                {
+                    "name": "light:getShadowSoftness",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get shadow softness (emitter size in world units)",
+                    "desc_ja": "shadowの柔らかさ（emitterサイズ、world単位）を取得",
+                    "desc_ko": "섀도우 부드러움(이미터 크기, 월드 단위)을 얻음"
+                },
+                {
+                    "name": "light:setShadowSamples",
+                    "return": "Light",
+                    "signatures": [
+                        "taps"
+                    ],
+                    "desc": "Set the PCSS PCF tap count (clamped 1-36, default 16); only affects soft shadows (softness > 0)",
+                    "desc_ja": "PCSSのPCFタップ数を設定（1〜36にclamp、デフォルト16）。soft shadow（softness > 0）のみに影響",
+                    "desc_ko": "PCSS PCF 탭 수를 설정 (1~36으로 클램프, 기본값 16); 소프트 섀도우(softness > 0)에만 영향"
+                },
+                {
+                    "name": "light:getShadowSamples",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get PCSS PCF tap count",
+                    "desc_ja": "PCSSのPCFタップ数を取得",
+                    "desc_ko": "PCSS PCF 탭 수를 얻음"
+                },
+                {
+                    "name": "light:setShadowArea",
+                    "return": "Light",
+                    "signatures": [
+                        "center, radius"
+                    ],
+                    "desc": "Set the orthographic shadow volume (center + radius) for a directional light (default radius 500)",
+                    "desc_ja": "directional lightの正射影shadowボリューム（中心＋半径）を設定（デフォルト半径500）",
+                    "desc_ko": "디렉셔널 라이트의 직교 섀도우 볼륨(중심 + 반지름)을 설정 (기본 반지름 500)"
+                },
+                {
+                    "name": "light:getShadowAreaCenter",
+                    "return": "Vec3",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get directional shadow volume center",
+                    "desc_ja": "directional shadowボリュームの中心を取得",
+                    "desc_ko": "디렉셔널 섀도우 볼륨 중심을 얻음"
+                },
+                {
+                    "name": "light:getShadowAreaRadius",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get directional shadow volume radius (half-extent)",
+                    "desc_ja": "directional shadowボリュームの半径（half-extent）を取得",
+                    "desc_ko": "디렉셔널 섀도우 볼륨 반지름(half-extent)을 얻음"
+                },
+                {
+                    "name": "light:computeShadowViewProj",
+                    "return": "Mat4",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Build the light's view-projection matrix for rendering + sampling the shadow map (spot: projector frustum; directional: orthographic box)",
+                    "desc_ja": "shadow mapの描画・サンプルに使うlightのビュー射影行列を構築（spot: projector錐台、directional: 正射影ボックス）",
+                    "desc_ko": "섀도우 맵 렌더링/샘플링에 쓰는 조명의 뷰-프로젝션 행렬을 구축 (스포트: 프로젝터 절두체, 디렉셔널: 직교 박스)"
+                },
+                {
                     "name": "light:getType",
                     "return": "LightType",
                     "signatures": [
