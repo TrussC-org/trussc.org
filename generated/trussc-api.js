@@ -6,7 +6,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.7.2",
+    "version": "v0.7.3",
     "lang": "all",
     "categories": [
         {
@@ -30172,12 +30172,60 @@ const TrussCAPI = {
                     "desc": "Window height in logical points (matches its coordinate system)"
                 },
                 {
+                    "name": "setSize",
+                    "return": "void",
+                    "signatures": [
+                        "int width, int height"
+                    ],
+                    "desc": "Resize this window's content area to the given logical size (points)"
+                },
+                {
+                    "name": "setFullscreen",
+                    "return": "void",
+                    "signatures": [
+                        "bool full"
+                    ],
+                    "desc": "Enter or leave fullscreen for this window (macOS native fullscreen, Windows borderless-fullscreen, Linux EWMH _NET_WM_STATE_FULLSCREEN)"
+                },
+                {
+                    "name": "isFullscreen",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether this window is currently fullscreen (macOS reads the live window state; the transition is animated)"
+                },
+                {
+                    "name": "toggleFullscreen",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Toggle this window's fullscreen state"
+                },
+                {
                     "name": "setClearColor",
                     "return": "void",
                     "signatures": [
                         "const Color & c"
                     ],
                     "desc": "Background clear color for this window"
+                },
+                {
+                    "name": "setFps",
+                    "return": "void",
+                    "signatures": [
+                        "float fps"
+                    ],
+                    "desc": "Set this window's target frame rate; <= 0 (or >= the display rate) free-runs at vsync, otherwise update/draw run at ~fps by skipping display ticks"
+                },
+                {
+                    "name": "getFps",
+                    "return": "float",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "This window's target frame rate set via setFps (0 = free-run at vsync); not a measured rate"
                 }
             ]
         }

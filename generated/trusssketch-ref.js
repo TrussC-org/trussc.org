@@ -7,7 +7,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.7.2 (Lua)",
+    "version": "v0.7.3 (Lua)",
     "lang": "lua",
     "categories": [
         {
@@ -24093,6 +24093,46 @@ const TrussCAPI = {
                     "desc_ko": "윈도우 높이 (논리 포인트, 좌표계와 일치)"
                 },
                 {
+                    "name": "window:setSize",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "width, height"
+                    ],
+                    "desc": "Resize this window's content area to the given logical size (points)",
+                    "desc_ja": "このウィンドウのコンテンツ領域を指定した論理サイズ（ポイント）にリサイズ",
+                    "desc_ko": "이 윈도우의 콘텐츠 영역을 지정한 논리 크기(포인트)로 리사이즈"
+                },
+                {
+                    "name": "window:setFullscreen",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "full"
+                    ],
+                    "desc": "Enter or leave fullscreen for this window (macOS native fullscreen, Windows borderless-fullscreen, Linux EWMH _NET_WM_STATE_FULLSCREEN)",
+                    "desc_ja": "このウィンドウのフルスクリーンを開始/解除（macOS はネイティブフルスクリーン、Windows はボーダーレスフルスクリーン、Linux は EWMH _NET_WM_STATE_FULLSCREEN）",
+                    "desc_ko": "이 윈도우의 전체화면을 켜거나 끔 (macOS 네이티브 전체화면, Windows 보더리스 전체화면, Linux EWMH _NET_WM_STATE_FULLSCREEN)"
+                },
+                {
+                    "name": "window:isFullscreen",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether this window is currently fullscreen (macOS reads the live window state; the transition is animated)",
+                    "desc_ja": "このウィンドウが現在フルスクリーンかどうか（macOS はライブのウィンドウ状態を参照。遷移はアニメーション）",
+                    "desc_ko": "이 윈도우가 현재 전체화면인지 여부 (macOS는 실시간 윈도우 상태를 읽음. 전환은 애니메이션)"
+                },
+                {
+                    "name": "window:toggleFullscreen",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Toggle this window's fullscreen state",
+                    "desc_ja": "このウィンドウのフルスクリーン状態を切り替え",
+                    "desc_ko": "이 윈도우의 전체화면 상태를 전환"
+                },
+                {
                     "name": "window:setClearColor",
                     "return": "(nothing)",
                     "signatures": [
@@ -24101,6 +24141,26 @@ const TrussCAPI = {
                     "desc": "Background clear color for this window",
                     "desc_ja": "このウィンドウの背景クリア色",
                     "desc_ko": "이 윈도우의 배경 클리어 색"
+                },
+                {
+                    "name": "window:setFps",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "fps"
+                    ],
+                    "desc": "Set this window's target frame rate; <= 0 (or >= the display rate) free-runs at vsync, otherwise update/draw run at ~fps by skipping display ticks",
+                    "desc_ja": "このウィンドウの目標フレームレートを設定。0 以下（またはディスプレイのリフレッシュレート以上）で vsync 同期のフリーラン、それ以外は表示ティックを間引いて約 fps で update/draw を実行",
+                    "desc_ko": "이 윈도우의 목표 프레임레이트를 설정. 0 이하(또는 디스플레이 리프레시레이트 이상)이면 vsync 프리런, 그 외에는 표시 틱을 건너뛰어 약 fps로 update/draw 실행"
+                },
+                {
+                    "name": "window:getFps",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "This window's target frame rate set via setFps (0 = free-run at vsync); not a measured rate",
+                    "desc_ja": "setFps で設定したこのウィンドウの目標フレームレート（0 = vsync フリーラン）。実測値ではない",
+                    "desc_ko": "setFps로 설정한 이 윈도우의 목표 프레임레이트 (0 = vsync 프리런). 실측값이 아님"
                 }
             ]
         },

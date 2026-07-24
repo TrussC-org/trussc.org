@@ -13585,10 +13585,46 @@ const TrussSketchAPI = {
      "desc": "Window height in logical points (matches its coordinate system)"
     },
     {
+     "name": "setSize",
+     "snippet": "setSize(${1:width}, ${2:height})",
+     "return": "void",
+     "desc": "Resize this window's content area to the given logical size (points)"
+    },
+    {
+     "name": "setFullscreen",
+     "snippet": "setFullscreen(${1:full})",
+     "return": "void",
+     "desc": "Enter or leave fullscreen for this window (macOS native fullscreen, Windows borderless-fullscreen, Linux EWMH _NET_WM_STATE_FULLSCREEN)"
+    },
+    {
+     "name": "isFullscreen",
+     "snippet": "isFullscreen()",
+     "return": "bool",
+     "desc": "Whether this window is currently fullscreen (macOS reads the live window state; the transition is animated)"
+    },
+    {
+     "name": "toggleFullscreen",
+     "snippet": "toggleFullscreen()",
+     "return": "void",
+     "desc": "Toggle this window's fullscreen state"
+    },
+    {
      "name": "setClearColor",
      "snippet": "setClearColor(${1:c})",
      "return": "void",
      "desc": "Background clear color for this window"
+    },
+    {
+     "name": "setFps",
+     "snippet": "setFps(${1:fps})",
+     "return": "void",
+     "desc": "Set this window's target frame rate; <= 0 (or >= the display rate) free-runs at vsync, otherwise update/draw run at ~fps by skipping display ticks"
+    },
+    {
+     "name": "getFps",
+     "snippet": "getFps()",
+     "return": "float",
+     "desc": "This window's target frame rate set via setFps (0 = free-run at vsync); not a measured rate"
     }
    ]
   },

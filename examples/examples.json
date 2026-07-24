@@ -606,6 +606,13 @@
           "autoScreenshot": false
         },
         {
+          "name": "windowControlExample",
+          "width": 800,
+          "height": 600,
+          "webSupported": false,
+          "autoScreenshot": true
+        },
+        {
           "name": "imguiWindowsExample",
           "width": 800,
           "height": 600,
