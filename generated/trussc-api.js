@@ -6,7 +6,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.7.3",
+    "version": "v0.7.4",
     "lang": "all",
     "categories": [
         {
