@@ -2145,7 +2145,7 @@ end
         // re-download on EVERY visit) and no 4h-edge-cache mixed-state windows.
         // Bump ENGINE_VERSION when deploying a new engine (tools/deploy_cdn.sh <ver>).
         const CDN_BASE = 'https://cdn.trussc.org/';
-        const ENGINE_VERSION = '0.6.5';
+        const ENGINE_VERSION = '0.7.4';
         const ENGINE_BASE = CDN_BASE + ENGINE_VERSION + '/';
         const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         let useLocalFiles = false; // Will be set after checking local file availability

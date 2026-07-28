@@ -140,7 +140,7 @@
             <p>Drop a <code>&lt;canvas&gt;</code>, load a pinned loader, and call <code>TrussSketch.mount()</code> with your Lua sketch. Three lines:</p>
             <div class="embed-code">
 <span class="tag">&lt;canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"600"</span><span class="tag">&gt;&lt;/canvas&gt;</span>
-<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@0.6.5.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@0.7.4.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
 <span class="tag">&lt;script&gt;</span> TrussSketch.mount(<span class="string">'#canvas'</span>, luaCode); <span class="tag">&lt;/script&gt;</span>
             </div>
             <p>The loader boots the engine and runs your sketch on that canvas. <code>mount()</code> returns a Promise that resolves to a controller — see below.</p>
@@ -160,7 +160,7 @@
 <span class="tag">&lt;body&gt;</span>
     <span class="tag">&lt;canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"600"</span><span class="tag">&gt;&lt;/canvas&gt;</span>
 
-    <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@0.6.5.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+    <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@0.7.4.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
     <span class="tag">&lt;script&gt;</span>
 <span class="keyword">const</span> lua = <span class="string">`</span>
 <span class="string">local t = 0</span>
@@ -206,7 +206,7 @@ sketch.getError();       <span class="comment">// current build/runtime error, o
             <h2>Version Pinning</h2>
             <p>Always embed a <strong>pinned</strong> version so your page keeps working when the engine updates:</p>
             <div class="embed-code">
-<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@0.6.5.js"</span><span class="tag">&gt;&lt;/script&gt;</span>  <span class="comment">// pinned — recommended</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@0.7.4.js"</span><span class="tag">&gt;&lt;/script&gt;</span>  <span class="comment">// pinned — recommended</span>
 <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"https://cdn.trussc.org/sketch@latest.js"</span><span class="tag">&gt;&lt;/script&gt;</span> <span class="comment">// unstable — testing only</span>
             </div>
             <p>A pinned loader also pins the engine (<code>.wasm</code>/<code>.data</code>) it loads. The <code>@latest</code> alias exists for quick experiments and can change or break at any time — never use it in production.</p>
