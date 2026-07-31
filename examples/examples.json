@@ -192,6 +192,12 @@
           "webSupported": true
         },
         {
+          "name": "fboBlendModeExample",
+          "width": 960,
+          "height": 540,
+          "webSupported": true
+        },
+        {
           "name": "graphicsExample",
           "width": 960,
           "height": 600,
@@ -419,6 +425,12 @@
           "webSupported": true
         },
         {
+          "name": "audioRecorderExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
           "name": "audioSynthExample",
           "width": 960,
           "height": 600,
@@ -578,6 +590,12 @@
           "name": "videoRecAdvancedExample",
           "width": 960,
           "height": 600,
+          "webSupported": false
+        },
+        {
+          "name": "videoRecordAudioExample",
+          "width": 960,
+          "height": 540,
           "webSupported": false
         },
         {
