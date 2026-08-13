@@ -11127,6 +11127,66 @@ const TrussCAPI = {
             },
             "methods": [
                 {
+                    "name": "font:setOversampling",
+                    "return": "Font",
+                    "signatures": [
+                        "n"
+                    ],
+                    "desc": "Rasterize glyphs at N x N the target size and box-filter them down, trading N^2 atlas memory for sharper text under arbitrary transforms (1 = off).",
+                    "desc_ja": "グリフを N x N 倍の解像度でラスタライズしてから縮小し、アトラスのメモリを N^2 倍払う代わりに任意の変換下で文字を鮮明にする（1 = 無効）。",
+                    "desc_ko": "글리프를 N x N 배 해상도로 래스터화한 뒤 축소하여, 아틀라스 메모리를 N^2 배 쓰는 대신 임의의 변환에서도 글자를 또렷하게 만든다(1 = 끔)."
+                },
+                {
+                    "name": "font:getOversampling",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the oversampling factor this font rasterizes with (1 = off).",
+                    "desc_ja": "このフォントがラスタライズに使うオーバーサンプリング倍率を返す（1 = 無効）。",
+                    "desc_ko": "이 폰트가 래스터화에 사용하는 오버샘플링 배수를 반환한다(1 = 끔)."
+                },
+                {
+                    "name": "font:setGridFit",
+                    "return": "Font",
+                    "signatures": [
+                        "enabled"
+                    ],
+                    "desc": "Snap every baseline to a whole pixel at draw time so horizontal strokes stay sharp, at no memory cost and one rounding per line (on by default; automatically stands down when the transform is not 1:1, where rounding in model space would hurt instead).",
+                    "desc_ja": "描画時に各行のベースラインを整数ピクセルにスナップして横画を鮮明に保つ。メモリコストはなく、行あたり丸め1回だけ（既定で有効。1:1 でない変換下ではモデル空間での丸めが逆効果になるため自動的に無効化される）。",
+                    "desc_ko": "그리기 시점에 각 줄의 베이스라인을 정수 픽셀에 맞춰 가로획을 또렷하게 유지한다. 메모리 비용은 없고 줄당 반올림 한 번뿐이다(기본 활성화. 1:1이 아닌 변환에서는 모델 공간 반올림이 역효과이므로 자동으로 해제된다)."
+                },
+                {
+                    "name": "font:getGridFit",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return whether vertical grid fit is enabled for this font.",
+                    "desc_ja": "このフォントで縦方向のグリッドフィットが有効かどうかを返す。",
+                    "desc_ko": "이 폰트에 세로 그리드 피팅이 활성화되어 있는지 여부를 반환한다."
+                },
+                {
+                    "name": "font:setMipmaps",
+                    "return": "Font",
+                    "signatures": [
+                        "enabled"
+                    ],
+                    "desc": "Enable mipmapping of the glyph atlas so text stays stable when drawn much smaller than its loaded size (on by default; the chain is built lazily on the first minified draw).",
+                    "desc_ja": "グリフアトラスのミップマップを有効にし、読み込みサイズよりかなり小さく描画してもテキストがちらつかないようにする（既定で有効。ミップ列は最初に縮小描画された時点で生成される）。",
+                    "desc_ko": "글리프 아틀라스의 밉맵을 활성화하여 로드 크기보다 훨씬 작게 그려도 텍스트가 흔들리지 않게 한다(기본 활성화. 밉 체인은 첫 축소 렌더링 시점에 생성된다)."
+                },
+                {
+                    "name": "font:getMipmaps",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return whether the glyph atlas is allowed to build mipmaps.",
+                    "desc_ja": "グリフアトラスがミップマップを生成してよいかどうかを返す。",
+                    "desc_ko": "글리프 아틀라스가 밉맵을 생성해도 되는지 여부를 반환한다."
+                },
+                {
                     "name": "font:load",
                     "return": "LoadResult",
                     "signatures": [
@@ -11572,6 +11632,26 @@ const TrussCAPI = {
                 }
             ],
             "static_methods": [
+                {
+                    "name": "Font.setDefaultOversampling",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "n"
+                    ],
+                    "desc": "Set the oversampling factor newly loaded fonts start with; does not affect fonts already loaded.",
+                    "desc_ja": "以降に読み込むフォントの既定のオーバーサンプリング倍率を設定する。読み込み済みのフォントには影響しない。",
+                    "desc_ko": "이후 로드하는 폰트의 기본 오버샘플링 배수를 설정한다. 이미 로드된 폰트에는 영향을 주지 않는다."
+                },
+                {
+                    "name": "Font.getDefaultOversampling",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the oversampling factor newly loaded fonts start with.",
+                    "desc_ja": "以降に読み込むフォントの既定のオーバーサンプリング倍率を返す。",
+                    "desc_ko": "이후 로드하는 폰트의 기본 오버샘플링 배수를 반환한다."
+                },
                 {
                     "name": "Font.getTotalCacheMemoryUsage",
                     "return": "number",

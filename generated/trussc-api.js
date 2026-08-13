@@ -2829,6 +2829,10 @@ const TrussCAPI = {
                             "group": "graphics"
                         },
                         {
+                            "name": "fboBlendModeExample",
+                            "group": "graphics"
+                        },
+                        {
                             "name": "depthTestExample",
                             "group": "3d"
                         }
@@ -2863,6 +2867,10 @@ const TrussCAPI = {
                     "desc_ja": "ブレンドモードをAlpha（デフォルト）にリセット",
                     "desc_ko": "블렌드 모드를 Alpha (기본값)로 초기화",
                     "examples": [
+                        {
+                            "name": "fboBlendModeExample",
+                            "group": "graphics"
+                        },
                         {
                             "name": "blendingExample",
                             "group": "graphics"
@@ -17321,6 +17329,10 @@ const TrussCAPI = {
                 {
                     "name": "eventsExample",
                     "group": "events"
+                },
+                {
+                    "name": "curvesExample",
+                    "group": "graphics"
                 }
             ],
             "related": [
@@ -23567,6 +23579,54 @@ const TrussCAPI = {
             },
             "methods": [
                 {
+                    "name": "setOversampling",
+                    "return": "Font &",
+                    "signatures": [
+                        "int n"
+                    ],
+                    "desc": "Rasterize glyphs at N x N the target size and box-filter them down, trading N^2 atlas memory for sharper text under arbitrary transforms (1 = off)."
+                },
+                {
+                    "name": "getOversampling",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the oversampling factor this font rasterizes with (1 = off)."
+                },
+                {
+                    "name": "setGridFit",
+                    "return": "Font &",
+                    "signatures": [
+                        "bool enabled"
+                    ],
+                    "desc": "Snap every baseline to a whole pixel at draw time so horizontal strokes stay sharp, at no memory cost and one rounding per line (on by default; automatically stands down when the transform is not 1:1, where rounding in model space would hurt instead)."
+                },
+                {
+                    "name": "getGridFit",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return whether vertical grid fit is enabled for this font."
+                },
+                {
+                    "name": "setMipmaps",
+                    "return": "Font &",
+                    "signatures": [
+                        "bool enabled"
+                    ],
+                    "desc": "Enable mipmapping of the glyph atlas so text stays stable when drawn much smaller than its loaded size (on by default; the chain is built lazily on the first minified draw)."
+                },
+                {
+                    "name": "getMipmaps",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return whether the glyph atlas is allowed to build mipmaps."
+                },
+                {
                     "name": "load",
                     "return": "LoadResult",
                     "signatures": [
@@ -23925,6 +23985,22 @@ const TrussCAPI = {
             ],
             "static_methods": [
                 {
+                    "name": "setDefaultOversampling",
+                    "return": "void",
+                    "signatures": [
+                        "int n"
+                    ],
+                    "desc": "Set the oversampling factor newly loaded fonts start with; does not affect fonts already loaded."
+                },
+                {
+                    "name": "getDefaultOversampling",
+                    "return": "int",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the oversampling factor newly loaded fonts start with."
+                },
+                {
                     "name": "getTotalCacheMemoryUsage",
                     "return": "size_t",
                     "signatures": [
@@ -23953,6 +24029,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fboExample",
+                    "group": "graphics"
+                },
+                {
+                    "name": "fboBlendModeExample",
                     "group": "graphics"
                 }
             ],

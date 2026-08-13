@@ -5460,6 +5460,42 @@ const TrussSketchAPI = {
    },
    "methods": [
     {
+     "name": "setOversampling",
+     "snippet": "setOversampling(${1:n})",
+     "return": "Font &",
+     "desc": "Rasterize glyphs at N x N the target size and box-filter them down, trading N^2 atlas memory for sharper text under arbitrary transforms (1 = off)."
+    },
+    {
+     "name": "getOversampling",
+     "snippet": "getOversampling()",
+     "return": "int",
+     "desc": "Return the oversampling factor this font rasterizes with (1 = off)."
+    },
+    {
+     "name": "setGridFit",
+     "snippet": "setGridFit(${1:enabled})",
+     "return": "Font &",
+     "desc": "Snap every baseline to a whole pixel at draw time so horizontal strokes stay sharp, at no memory cost and one rounding per line (on by default; automatically stands down when the transform is not 1:1, where rounding in model space would hurt instead)."
+    },
+    {
+     "name": "getGridFit",
+     "snippet": "getGridFit()",
+     "return": "bool",
+     "desc": "Return whether vertical grid fit is enabled for this font."
+    },
+    {
+     "name": "setMipmaps",
+     "snippet": "setMipmaps(${1:enabled})",
+     "return": "Font &",
+     "desc": "Enable mipmapping of the glyph atlas so text stays stable when drawn much smaller than its loaded size (on by default; the chain is built lazily on the first minified draw)."
+    },
+    {
+     "name": "getMipmaps",
+     "snippet": "getMipmaps()",
+     "return": "bool",
+     "desc": "Return whether the glyph atlas is allowed to build mipmaps."
+    },
+    {
      "name": "load",
      "snippet": "load(${1:nameOrPath}, ${2:size})",
      "return": "LoadResult",
@@ -5725,6 +5761,18 @@ const TrussSketchAPI = {
     }
    ],
    "static_methods": [
+    {
+     "name": "setDefaultOversampling",
+     "snippet": "setDefaultOversampling(${1:n})",
+     "return": "void",
+     "desc": "Set the oversampling factor newly loaded fonts start with; does not affect fonts already loaded."
+    },
+    {
+     "name": "getDefaultOversampling",
+     "snippet": "getDefaultOversampling()",
+     "return": "int",
+     "desc": "Return the oversampling factor newly loaded fonts start with."
+    },
     {
      "name": "getTotalCacheMemoryUsage",
      "snippet": "getTotalCacheMemoryUsage()",
