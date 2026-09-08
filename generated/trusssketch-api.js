@@ -10141,7 +10141,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "SendError",
-   "desc": "Why a send could not be queued, or how a queued one finished: None, ClientNotFound, Disconnected, QueueFull, NotRunning.",
+   "desc": "Why a send could not be queued, or how a queued one finished: None, ClientNotFound, Disconnected, Timeout, QueueFull, NotRunning.",
    "static_methods": [
     {
      "name": "None",
@@ -10162,16 +10162,22 @@ const TrussSketchAPI = {
      "desc": "= 2"
     },
     {
+     "name": "Timeout",
+     "snippet": "Timeout",
+     "return": "SendError",
+     "desc": "= 3"
+    },
+    {
      "name": "QueueFull",
      "snippet": "QueueFull",
      "return": "SendError",
-     "desc": "= 3"
+     "desc": "= 4"
     },
     {
      "name": "NotRunning",
      "snippet": "NotRunning",
      "return": "SendError",
-     "desc": "= 4"
+     "desc": "= 5"
     }
    ]
   },
@@ -11170,7 +11176,7 @@ const TrussSketchAPI = {
     {
      "name": "error",
      "type": "SendError",
-     "desc": "SendError::None when the whole payload reached the kernel"
+     "desc": "SendError::None when the whole payload reached the kernel; Disconnected when the client went away, Timeout when it merely stopped reading"
     },
     {
      "name": "bytesSent",

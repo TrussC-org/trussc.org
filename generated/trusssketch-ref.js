@@ -7622,21 +7622,6 @@ const TrussCAPI = {
                     "desc_ko": "보조 윈도우를 생성 (macOS / Windows / 데스크톱 Linux, 단일 윈도우 플랫폼에서는 nullptr). 해당 디스플레이의 vsync로 구동되며 닫아도 앱은 계속 실행됨. 내용은 Window::setApp()으로 부여"
                 },
                 {
-                    "name": "createWindow",
-                    "params": "a0",
-                    "params_typed": "a0 = {}",
-                    "return_type": "shared_ptr",
-                    "desc": "Create a secondary window (macOS / Windows / desktop Linux; returns nullptr on single-window platforms). It ticks on its own display's vsync; closing it leaves the app running. Give it content with Window::setApp()",
-                    "keywords": [
-                        "multi window",
-                        "second window",
-                        "open window",
-                        "display"
-                    ],
-                    "desc_ja": "セカンダリウィンドウを作成 (macOS / Windows / デスクトップLinux。シングルウィンドウのプラットフォームでは nullptr)。ウィンドウ自身のディスプレイのvsyncで駆動され、閉じてもアプリは動き続ける。中身は Window::setApp() で与える",
-                    "desc_ko": "보조 윈도우를 생성 (macOS / Windows / 데스크톱 Linux, 단일 윈도우 플랫폼에서는 nullptr). 해당 디스플레이의 vsync로 구동되며 닫아도 앱은 계속 실행됨. 내용은 Window::setApp()으로 부여"
-                },
-                {
                     "name": "atanh",
                     "params": "x",
                     "params_typed": "x",
@@ -20269,9 +20254,9 @@ const TrussCAPI = {
                 {
                     "name": "tcpSendCompleteEventArgs.error",
                     "type": "SendError",
-                    "desc": "SendError::None when the whole payload reached the kernel",
-                    "desc_ja": "ペイロード全体がカーネルに渡っていれば SendError::None",
-                    "desc_ko": "페이로드 전체가 커널에 전달되었으면 SendError::None"
+                    "desc": "SendError::None when the whole payload reached the kernel; Disconnected when the client went away, Timeout when it merely stopped reading",
+                    "desc_ja": "ペイロード全体がカーネルに渡っていれば SendError::None。相手が居なくなったなら Disconnected、読むのをやめただけなら Timeout",
+                    "desc_ko": "페이로드 전체가 커널에 전달되었으면 SendError::None. 상대가 사라졌으면 Disconnected, 읽기를 멈춘 것뿐이면 Timeout"
                 },
                 {
                     "name": "tcpSendCompleteEventArgs.bytesSent",
@@ -26031,7 +26016,7 @@ const TrussCAPI = {
         },
         {
             "name": "SendError",
-            "desc": "Why a send could not be queued, or how a queued one finished: None, ClientNotFound, Disconnected, QueueFull, NotRunning.",
+            "desc": "Why a send could not be queued, or how a queued one finished: None, ClientNotFound, Disconnected, Timeout, QueueFull, NotRunning.",
             "keywords": [
                 "send",
                 "error",
@@ -26062,22 +26047,29 @@ const TrussCAPI = {
                     "desc_ko": ""
                 },
                 {
-                    "name": "QueueFull",
+                    "name": "Timeout",
                     "value": 3,
                     "desc": "",
                     "desc_ja": "",
                     "desc_ko": ""
                 },
                 {
-                    "name": "NotRunning",
+                    "name": "QueueFull",
                     "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "NotRunning",
+                    "value": 5,
                     "desc": "",
                     "desc_ja": "",
                     "desc_ko": ""
                 }
             ],
-            "desc_ja": "送信をキューに入れられなかった理由、またはキュー済み送信の結末：None, ClientNotFound, Disconnected, QueueFull, NotRunning。",
-            "desc_ko": "전송을 큐에 넣지 못한 이유 또는 큐에 든 전송의 결과: None, ClientNotFound, Disconnected, QueueFull, NotRunning.",
+            "desc_ja": "送信をキューに入れられなかった理由、またはキュー済み送信の結末：None, ClientNotFound, Disconnected, Timeout, QueueFull, NotRunning。",
+            "desc_ko": "전송을 큐에 넣지 못한 이유 또는 큐에 든 전송의 결과: None, ClientNotFound, Disconnected, Timeout, QueueFull, NotRunning.",
             "related": [
                 "SendResult",
                 "sendErrorName",
