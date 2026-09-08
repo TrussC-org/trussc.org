@@ -2,7 +2,18 @@
 # 共通関数・設定
 
 # パス設定
-TRUSSC_ROOT="${TRUSSC_ROOT:-$HOME/Nextcloud/Make/TrussC/TrussC}"
+# TRUSSC_ROOT: the framework checkout these scripts build examples from.
+# Resolved relative to this repository, since the two are cloned side by side —
+# the previous default was one machine's absolute path (a Nextcloud sync copy),
+# which by now is a stale, git-less snapshot on that machine and absent on every
+# other. Set TRUSSC_ROOT to override.
+_SITE_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+TRUSSC_ROOT="${TRUSSC_ROOT:-$_SITE_ROOT/../TrussC}"
+if [[ ! -d "$TRUSSC_ROOT/examples" ]]; then
+    echo "ERROR: TRUSSC_ROOT does not look like a TrussC checkout: $TRUSSC_ROOT" >&2
+    echo "       expected a sibling of $_SITE_ROOT, or set TRUSSC_ROOT explicitly." >&2
+    exit 1
+fi
 EXAMPLES_DIR="$TRUSSC_ROOT/examples"
 ADDONS_DIR="$TRUSSC_ROOT/addons"
 SAMPLES_DIR="/tmp/trussc-samples"
