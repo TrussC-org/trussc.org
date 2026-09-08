@@ -6,7 +6,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.7.4",
+    "version": "v0.7.5",
     "lang": "all",
     "categories": [
         {
@@ -12749,6 +12749,26 @@ const TrussCAPI = {
             "name": "Network",
             "functions": [
                 {
+                    "name": "sendErrorName",
+                    "params": "e",
+                    "params_typed": "SendError e",
+                    "return_type": "const char *",
+                    "desc": "Short label for a SendError value (\"QueueFull\", ...). For log messages",
+                    "keywords": [
+                        "send",
+                        "error",
+                        "name",
+                        "label",
+                        "log"
+                    ],
+                    "desc_ja": "SendError 値の短いラベル（\"QueueFull\" など）。ログ用",
+                    "desc_ko": "SendError 값의 짧은 레이블(\"QueueFull\" 등). 로그용",
+                    "related": [
+                        "SendError",
+                        "SendResult"
+                    ]
+                },
+                {
                     "name": "listNetworkInterfaces",
                     "params": "",
                     "params_typed": "",
@@ -13025,6 +13045,30 @@ const TrussCAPI = {
                     "name": "createWindow",
                     "params": "settings",
                     "params_typed": "const WindowSettings & settings = {}",
+                    "return_type": "std::shared_ptr<Window>",
+                    "desc": "Create a secondary window (macOS / Windows / desktop Linux; returns nullptr on single-window platforms). It ticks on its own display's vsync; closing it leaves the app running. Give it content with Window::setApp()",
+                    "keywords": [
+                        "multi window",
+                        "second window",
+                        "open window",
+                        "display"
+                    ],
+                    "desc_ja": "セカンダリウィンドウを作成 (macOS / Windows / デスクトップLinux。シングルウィンドウのプラットフォームでは nullptr)。ウィンドウ自身のディスプレイのvsyncで駆動され、閉じてもアプリは動き続ける。中身は Window::setApp() で与える",
+                    "desc_ko": "보조 윈도우를 생성 (macOS / Windows / 데스크톱 Linux, 단일 윈도우 플랫폼에서는 nullptr). 해당 디스플레이의 vsync로 구동되며 닫아도 앱은 계속 실행됨. 내용은 Window::setApp()으로 부여",
+                    "related": [
+                        "Window",
+                        "WindowSettings"
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
+                    "name": "createWindow",
+                    "params": "",
+                    "params_typed": "const WindowSettings & = {}",
                     "return_type": "std::shared_ptr<Window>",
                     "desc": "Create a secondary window (macOS / Windows / desktop Linux; returns nullptr on single-window platforms). It ticks on its own display's vsync; closing it leaves the app running. Give it content with Window::setApp()",
                     "keywords": [
@@ -16020,7 +16064,10 @@ const TrussCAPI = {
                     "signatures": [
                         "Callback callback, int priority = App",
                         "Callback callback, Deliver deliver, int priority = App",
-                        "EventListener & listener, Callback callback, int priority = App"
+                        "Obj * obj, void (Obj::*)(T &) method, int priority = App",
+                        "Obj * obj, void (Obj::*)(T &) method, Deliver deliver, int priority = App",
+                        "EventListener & listener, Callback callback, int priority = App",
+                        "EventListener & listener, Obj * obj, void (Obj::*)(T &) method, int priority = App"
                     ],
                     "desc": "Register a listener callback and return an EventListener token; lower priority runs first, and Deliver::Main runs the callback on the main thread",
                     "deprecated": {
@@ -16219,8 +16266,8 @@ const TrussCAPI = {
             "operators": [
                 {
                     "symbol": "<<",
-                    "signature": "LogStream << std::ostream &(*)(std::ostream &) → LogStream &",
-                    "cpp": "LogStream & operator<<(std::ostream &(*)(std::ostream &)) const",
+                    "signature": "LogStream << T → LogStream &",
+                    "cpp": "LogStream & operator<<(const T &) const",
                     "free": false,
                     "desc": "",
                     "desc_ja": "",
@@ -18891,9 +18938,9 @@ const TrussCAPI = {
                 {
                     "name": "sampleRate",
                     "type": "int",
-                    "desc": "Engine output sample rate in Hz (default 96000)",
-                    "desc_ja": "エンジン出力サンプルレート (Hz、デフォルト 96000)",
-                    "desc_ko": "엔진 출력 샘플레이트 (Hz, 기본값 96000)"
+                    "desc": "Engine output sample rate in Hz (0 = the engine default, 48000)",
+                    "desc_ja": "エンジン出力サンプルレート (Hz、0 = エンジンのデフォルト 48000)",
+                    "desc_ko": "엔진 출력 샘플레이트 (Hz, 0 = 엔진 기본값 48000)"
                 },
                 {
                     "name": "channels",
@@ -20045,6 +20092,15 @@ const TrussCAPI = {
                     "symbol": "=",
                     "signature": "FileWriter = FileWriter & → FileWriter &",
                     "cpp": "FileWriter & operator=(FileWriter &&)",
+                    "free": false,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "symbol": "<<",
+                    "signature": "FileWriter << T → FileWriter &",
+                    "cpp": "FileWriter & operator<<(const T &) const",
                     "free": false,
                     "desc": "",
                     "desc_ja": "",
@@ -24393,6 +24449,14 @@ const TrussCAPI = {
             },
             "methods": [
                 {
+                    "name": "setParams",
+                    "return": "void",
+                    "signatures": [
+                        "const T & params"
+                    ],
+                    "desc": "Set the uniform block for the fullscreen pass; call before draw (C++ only)"
+                },
+                {
                     "name": "draw",
                     "return": "void",
                     "signatures": [
@@ -26828,6 +26892,98 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "SendResult",
+            "desc": "Result of sendAsync(). Truthy when the payload was queued; carries the id that onSendComplete reports back.",
+            "keywords": [
+                "send",
+                "async",
+                "result",
+                "queued",
+                "id"
+            ],
+            "desc_ja": "sendAsync() の結果。キューに入れば真となり、onSendComplete が返してくる id を保持",
+            "desc_ko": "sendAsync()의 결과. 큐에 들어가면 참이며, onSendComplete가 되돌려주는 id를 보유",
+            "related": [
+                "SendError",
+                "TcpServer::sendAsync",
+                "TcpSendCompleteEventArgs"
+            ],
+            "properties": [
+                {
+                    "name": "error",
+                    "type": "SendError",
+                    "desc": "Why the send was not queued; SendError::None on success",
+                    "desc_ja": "キューに入らなかった理由。成功時は SendError::None",
+                    "desc_ko": "큐에 들어가지 못한 이유. 성공 시 SendError::None"
+                },
+                {
+                    "name": "id",
+                    "type": "uint64_t",
+                    "desc": "Identifies this send in onSendComplete; 0 when nothing was queued",
+                    "desc_ja": "この送信を onSendComplete で識別する ID。キューに入らなかった場合は 0",
+                    "desc_ko": "이 전송을 onSendComplete에서 식별하는 ID. 큐에 들어가지 않았으면 0"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "ok",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "true if the payload was queued (error == SendError::None)"
+                }
+            ]
+        },
+        {
+            "name": "TcpSendCompleteEventArgs",
+            "desc": "A queued send finished. Fires exactly once for every id sendAsync() handed out",
+            "keywords": [
+                "send",
+                "async",
+                "complete",
+                "callback",
+                "event"
+            ],
+            "desc_ja": "キュー済みの送信が完了した通知。sendAsync() が返した id ごとにちょうど1回発火",
+            "desc_ko": "큐에 든 전송이 완료됨. sendAsync()가 반환한 id마다 정확히 한 번 발생",
+            "related": [
+                "TcpServer::onSendComplete",
+                "TcpServer::sendAsync",
+                "SendError"
+            ],
+            "properties": [
+                {
+                    "name": "clientId",
+                    "type": "int",
+                    "desc": "Which client the send was for (-1 when the sender has no clients)",
+                    "desc_ja": "どのクライアント宛ての送信か（クライアントを持たない送信側では -1）",
+                    "desc_ko": "어느 클라이언트로의 전송인지 (클라이언트가 없는 송신 측에서는 -1)"
+                },
+                {
+                    "name": "sendId",
+                    "type": "uint64_t",
+                    "desc": "Matches the SendResult::id that queued this payload",
+                    "desc_ja": "このペイロードをキューに入れた SendResult::id と一致",
+                    "desc_ko": "이 페이로드를 큐에 넣은 SendResult::id와 일치"
+                },
+                {
+                    "name": "error",
+                    "type": "SendError",
+                    "desc": "SendError::None when the whole payload reached the kernel",
+                    "desc_ja": "ペイロード全体がカーネルに渡っていれば SendError::None",
+                    "desc_ko": "페이로드 전체가 커널에 전달되었으면 SendError::None"
+                },
+                {
+                    "name": "bytesSent",
+                    "type": "size_t",
+                    "desc": "How much of the payload got through",
+                    "desc_ja": "実際に送れたバイト数",
+                    "desc_ko": "실제로 전송된 바이트 수"
+                }
+            ]
+        },
+        {
             "name": "TcpServerClient",
             "desc": "A client connected to a TcpServer (read-only handle)",
             "keywords": [
@@ -27074,6 +27230,13 @@ const TrussCAPI = {
                     "desc": "Fired on a server or per-client error",
                     "desc_ja": "サーバまたはクライアント単位のエラー時に発火",
                     "desc_ko": "서버 또는 클라이언트별 오류 시 발생"
+                },
+                {
+                    "name": "onSendComplete",
+                    "type": "Event<TcpSendCompleteEventArgs>",
+                    "desc": "Fired when a queued send finishes, successfully or not",
+                    "desc_ja": "キュー済みの送信が完了した時に発火（成功・失敗どちらも）",
+                    "desc_ko": "큐에 든 전송이 완료되면 발생 (성공/실패 모두)"
                 }
             ],
             "methods": [
@@ -27149,7 +27312,7 @@ const TrussCAPI = {
                         "int clientId, const std::vector<char> & data",
                         "int clientId, const std::string & message"
                     ],
-                    "desc": "Send data to a specific client"
+                    "desc": "Send data to a specific client (blocking)"
                 },
                 {
                     "name": "broadcast",
@@ -27159,7 +27322,27 @@ const TrussCAPI = {
                         "const std::vector<char> & data",
                         "const std::string & message"
                     ],
-                    "desc": "Broadcast data to all clients"
+                    "desc": "Broadcast data to all clients and wait for every one of them (blocking)"
+                },
+                {
+                    "name": "sendAsync",
+                    "return": "SendResult",
+                    "signatures": [
+                        "int clientId, const void * data, size_t size",
+                        "int clientId, std::vector<char> && data",
+                        "int clientId, const std::string & message"
+                    ],
+                    "desc": "Queue data for a client and return at once, without waiting for it to be written"
+                },
+                {
+                    "name": "broadcastAsync",
+                    "return": "int",
+                    "signatures": [
+                        "const void * data, size_t size",
+                        "const std::vector<char> & data",
+                        "const std::string & message"
+                    ],
+                    "desc": "Queue data for every client and return at once; returns how many accepted it"
                 },
                 {
                     "name": "setReceiveBufferSize",
@@ -27168,6 +27351,38 @@ const TrussCAPI = {
                         "size_t size"
                     ],
                     "desc": "Set the receive buffer size"
+                },
+                {
+                    "name": "setSendTimeout",
+                    "return": "void",
+                    "signatures": [
+                        "float seconds"
+                    ],
+                    "desc": "Set how long a send may stall without progress before giving up, in seconds (0 = wait indefinitely)"
+                },
+                {
+                    "name": "setSendAsyncBufferSize",
+                    "return": "void",
+                    "signatures": [
+                        "size_t bytes"
+                    ],
+                    "desc": "Set the high-water mark for one client's send queue, in bytes (0 = unlimited). Defaults to 16 MB"
+                },
+                {
+                    "name": "getSendAsyncBufferSize",
+                    "return": "size_t",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "The current high-water mark for one client's send queue, in bytes"
+                },
+                {
+                    "name": "getSendAsyncPendingBytes",
+                    "return": "size_t",
+                    "signatures": [
+                        "int clientId"
+                    ],
+                    "desc": "How much a client has queued and not yet completed, in bytes (0 for an unknown client)"
                 },
                 {
                     "name": "getPort",
@@ -28815,6 +29030,38 @@ const TrussCAPI = {
                         "std::shared_ptr<const CameraContext> ctx"
                     ],
                     "desc": "Set the camera context for a manually-managed node (normally set automatically by drawTree)."
+                },
+                {
+                    "name": "getMod",
+                    "return": "T *",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Get the attached mod of type T, or nullptr if this node has none (C++ only)"
+                },
+                {
+                    "name": "hasMod",
+                    "return": "bool",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Whether a mod of type T is attached to this node (C++ only)"
+                },
+                {
+                    "name": "addMod",
+                    "return": "T *",
+                    "signatures": [
+                        "Args &&... args"
+                    ],
+                    "desc": "Attach a mod of type T to this node, forwarding any arguments to its constructor; returns the mod for chaining (C++ only)"
+                },
+                {
+                    "name": "removeMod",
+                    "return": "void",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Remove the attached mod of type T, calling its onDestroy() before it is freed (C++ only)"
                 },
                 {
                     "name": "getModTypeNames",
@@ -31886,6 +32133,62 @@ const TrussCAPI = {
                 "videoCodecName",
                 "VideoRecordSettings",
                 "startRecording"
+            ]
+        },
+        {
+            "name": "SendError",
+            "desc": "Why a send could not be queued, or how a queued one finished: None, ClientNotFound, Disconnected, QueueFull, NotRunning.",
+            "keywords": [
+                "send",
+                "error",
+                "async",
+                "queue full",
+                "disconnected"
+            ],
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0,
+                    "desc": "Success: queued, or the whole payload reached the kernel",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "ClientNotFound",
+                    "value": 1,
+                    "desc": "No client is registered under that id",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Disconnected",
+                    "value": 2,
+                    "desc": "The connection went away before the payload was written",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "QueueFull",
+                    "value": 3,
+                    "desc": "The send queue is already at its high-water mark",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "NotRunning",
+                    "value": 4,
+                    "desc": "The server is not running",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "送信をキューに入れられなかった理由、またはキュー済み送信の結末：None, ClientNotFound, Disconnected, QueueFull, NotRunning。",
+            "desc_ko": "전송을 큐에 넣지 못한 이유 또는 큐에 든 전송의 결과: None, ClientNotFound, Disconnected, QueueFull, NotRunning.",
+            "related": [
+                "SendResult",
+                "sendErrorName",
+                "TcpSendCompleteEventArgs",
+                "TcpServer::sendAsync"
             ]
         },
         {

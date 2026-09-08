@@ -355,6 +355,12 @@
           "webSupported": false
         },
         {
+          "name": "tcpAsyncExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        },
+        {
           "name": "udpExample",
           "width": 960,
           "height": 600,

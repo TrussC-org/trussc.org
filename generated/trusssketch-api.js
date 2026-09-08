@@ -1195,6 +1195,11 @@ const TrussSketchAPI = {
      "name": "sameSubnet",
      "snippet": "sameSubnet(${1:a}, ${2:b}, ${3:netmask})",
      "desc": "True if IPv4 a and b are on the same subnet under netmask"
+    },
+    {
+     "name": "sendErrorName",
+     "snippet": "sendErrorName(${1:e})",
+     "desc": "Short label for a SendError value (\"QueueFull\", ...). For log messages"
     }
    ]
   },
@@ -2760,7 +2765,7 @@ const TrussSketchAPI = {
     {
      "name": "sampleRate",
      "type": "int",
-     "desc": "Engine output sample rate in Hz (default 96000)"
+     "desc": "Engine output sample rate in Hz (0 = the engine default, 48000)"
     },
     {
      "name": "channels",
@@ -10135,6 +10140,66 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "SendError",
+   "desc": "Why a send could not be queued, or how a queued one finished: None, ClientNotFound, Disconnected, QueueFull, NotRunning.",
+   "static_methods": [
+    {
+     "name": "None",
+     "snippet": "None",
+     "return": "SendError",
+     "desc": "= 0"
+    },
+    {
+     "name": "ClientNotFound",
+     "snippet": "ClientNotFound",
+     "return": "SendError",
+     "desc": "= 1"
+    },
+    {
+     "name": "Disconnected",
+     "snippet": "Disconnected",
+     "return": "SendError",
+     "desc": "= 2"
+    },
+    {
+     "name": "QueueFull",
+     "snippet": "QueueFull",
+     "return": "SendError",
+     "desc": "= 3"
+    },
+    {
+     "name": "NotRunning",
+     "snippet": "NotRunning",
+     "return": "SendError",
+     "desc": "= 4"
+    }
+   ]
+  },
+  {
+   "name": "SendResult",
+   "desc": "Result of sendAsync(). Truthy when the payload was queued; carries the id that onSendComplete reports back.",
+   "properties": [
+    {
+     "name": "error",
+     "type": "SendError",
+     "desc": "Why the send was not queued; SendError::None on success"
+    },
+    {
+     "name": "id",
+     "type": "uint64_t",
+     "desc": "Identifies this send in onSendComplete; 0 when nothing was queued"
+    }
+   ],
+   "methods": [
+    {
+     "name": "ok",
+     "snippet": "ok()",
+     "return": "bool",
+     "desc": "true if the payload was queued (error == SendError::None)"
+    }
+   ]
+  },
+  {
    "name": "Serial",
    "desc": "Cross-platform serial port (USB/COM): connect, read/write bytes",
    "constructor": {
@@ -11089,6 +11154,32 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "TcpSendCompleteEventArgs",
+   "desc": "A queued send finished. Fires exactly once for every id sendAsync() handed out",
+   "properties": [
+    {
+     "name": "clientId",
+     "type": "int",
+     "desc": "Which client the send was for (-1 when the sender has no clients)"
+    },
+    {
+     "name": "sendId",
+     "type": "uint64_t",
+     "desc": "Matches the SendResult::id that queued this payload"
+    },
+    {
+     "name": "error",
+     "type": "SendError",
+     "desc": "SendError::None when the whole payload reached the kernel"
+    },
+    {
+     "name": "bytesSent",
+     "type": "size_t",
+     "desc": "How much of the payload got through"
+    }
+   ]
+  },
+  {
    "name": "TcpServer",
    "desc": "TCP server (accept clients, send/broadcast)",
    "constructor": {
@@ -11114,6 +11205,11 @@ const TrussSketchAPI = {
      "name": "onError",
      "type": "Event<TcpServerErrorEventArgs>",
      "desc": "Fired on a server or per-client error"
+    },
+    {
+     "name": "onSendComplete",
+     "type": "Event<TcpSendCompleteEventArgs>",
+     "desc": "Fired when a queued send finishes, successfully or not"
     }
    ],
    "methods": [
@@ -11169,19 +11265,55 @@ const TrussSketchAPI = {
      "name": "send",
      "snippet": "send(${1:clientId}, ${2:data})",
      "return": "bool",
-     "desc": "Send data to a specific client"
+     "desc": "Send data to a specific client (blocking)"
     },
     {
      "name": "broadcast",
      "snippet": "broadcast(${1:data})",
      "return": "void",
-     "desc": "Broadcast data to all clients"
+     "desc": "Broadcast data to all clients and wait for every one of them (blocking)"
+    },
+    {
+     "name": "sendAsync",
+     "snippet": "sendAsync(${1:clientId}, ${2:data})",
+     "return": "SendResult",
+     "desc": "Queue data for a client and return at once, without waiting for it to be written"
+    },
+    {
+     "name": "broadcastAsync",
+     "snippet": "broadcastAsync(${1:data})",
+     "return": "int",
+     "desc": "Queue data for every client and return at once; returns how many accepted it"
     },
     {
      "name": "setReceiveBufferSize",
      "snippet": "setReceiveBufferSize(${1:size})",
      "return": "void",
      "desc": "Set the receive buffer size"
+    },
+    {
+     "name": "setSendTimeout",
+     "snippet": "setSendTimeout(${1:seconds})",
+     "return": "void",
+     "desc": "Set how long a send may stall without progress before giving up, in seconds (0 = wait indefinitely)"
+    },
+    {
+     "name": "setSendAsyncBufferSize",
+     "snippet": "setSendAsyncBufferSize(${1:bytes})",
+     "return": "void",
+     "desc": "Set the high-water mark for one client's send queue, in bytes (0 = unlimited). Defaults to 16 MB"
+    },
+    {
+     "name": "getSendAsyncBufferSize",
+     "snippet": "getSendAsyncBufferSize()",
+     "return": "size_t",
+     "desc": "The current high-water mark for one client's send queue, in bytes"
+    },
+    {
+     "name": "getSendAsyncPendingBytes",
+     "snippet": "getSendAsyncPendingBytes(${1:clientId})",
+     "return": "size_t",
+     "desc": "How much a client has queued and not yet completed, in bytes (0 for an unknown client)"
     },
     {
      "name": "getPort",
