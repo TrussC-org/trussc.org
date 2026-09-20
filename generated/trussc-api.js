@@ -15642,35 +15642,39 @@ const TrussCAPI = {
                 },
                 {
                     "name": "intersectZPlane",
-                    "return": "bool",
+                    "return": "Hit",
                     "signatures": [
+                        "",
                         "float & outT, Vec3 & outPoint"
                     ],
-                    "desc": "Intersect the Z=0 plane; writes distance and hit point, returns whether it hit"
+                    "desc": "Intersect the Z=0 plane and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
                 },
                 {
                     "name": "intersectPlane",
-                    "return": "bool",
+                    "return": "Hit",
                     "signatures": [
+                        "const Vec3 & planeNormal, float planeD",
                         "const Vec3 & planeNormal, float planeD, float & outT, Vec3 & outPoint"
                     ],
-                    "desc": "Intersect an arbitrary plane; writes distance and hit point, returns whether it hit"
+                    "desc": "Intersect an arbitrary plane and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
                 },
                 {
                     "name": "intersectSphere",
-                    "return": "bool",
+                    "return": "Hit",
                     "signatures": [
+                        "float radius",
                         "float radius, float & outT"
                     ],
-                    "desc": "Intersect a sphere centered at the origin; writes distance, returns whether it hit"
+                    "desc": "Intersect a sphere centered at the origin and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
                 },
                 {
                     "name": "intersectAABB",
-                    "return": "bool",
+                    "return": "Hit",
                     "signatures": [
+                        "const Vec3 & boxMin, const Vec3 & boxMax",
                         "const Vec3 & boxMin, const Vec3 & boxMax, float & outT"
                     ],
-                    "desc": "Intersect an axis-aligned bounding box; writes distance, returns whether it hit"
+                    "desc": "Intersect an axis-aligned bounding box and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
                 }
             ],
             "static_methods": [
@@ -16045,10 +16049,7 @@ const TrussCAPI = {
                         "EventListener & listener, Callback callback, int priority = App",
                         "EventListener & listener, Obj * obj, void (Obj::*)(T &) method, int priority = App"
                     ],
-                    "desc": "Register a listener callback and return an EventListener token; lower priority runs first, and Deliver::Main runs the callback on the main thread",
-                    "deprecated": {
-                        "reason": "Use 'listener = event.listen(callback)' instead"
-                    }
+                    "desc": "Register a listener callback and return an EventListener token; lower priority runs first, and Deliver::Main runs the callback on the main thread"
                 },
                 {
                     "name": "notify",
@@ -28907,11 +28908,7 @@ const TrussCAPI = {
                         "const Vec3 & global",
                         "float globalX, float globalY, float & localX, float & localY"
                     ],
-                    "desc": "Convert a global coordinate to this node's local space (C++ only)",
-                    "deprecated": {
-                        "reason": "Use globalToLocal(Vec3) instead. Will be removed in v1.0.0",
-                        "replacement": "globalToLocal"
-                    }
+                    "desc": "Convert a global coordinate to this node's local space (C++ only)"
                 },
                 {
                     "name": "getGlobalPos",
@@ -28937,11 +28934,7 @@ const TrussCAPI = {
                         "const Vec3 & local",
                         "float localX, float localY, float & globalX, float & globalY"
                     ],
-                    "desc": "Convert a local coordinate to global space (C++ only)",
-                    "deprecated": {
-                        "reason": "Use localToGlobal(Vec3) instead. Will be removed in v1.0.0",
-                        "replacement": "localToGlobal"
-                    }
+                    "desc": "Convert a local coordinate to global space (C++ only)"
                 },
                 {
                     "name": "getMouseX",

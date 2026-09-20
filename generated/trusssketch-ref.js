@@ -16342,6 +16342,16 @@ const TrussCAPI = {
                     "desc_ko": "글로벌 변환 행렬의 역행렬을 얻음 (C++ 전용)"
                 },
                 {
+                    "name": "node:globalToLocal",
+                    "return": "Vec3",
+                    "signatures": [
+                        "global"
+                    ],
+                    "desc": "Convert a global coordinate to this node's local space (C++ only)",
+                    "desc_ja": "グローバル座標をこのノードのローカル空間に変換（C++のみ）",
+                    "desc_ko": "글로벌 좌표를 이 노드의 로컬 공간으로 변환 (C++ 전용)"
+                },
+                {
                     "name": "node:getGlobalPos",
                     "return": "Vec3",
                     "signatures": [
@@ -16361,6 +16371,16 @@ const TrussCAPI = {
                     "desc": "Set the node's position in global (world) space (C++ only)",
                     "desc_ja": "ノードの位置をグローバル（ワールド）空間で設定（C++のみ）",
                     "desc_ko": "노드의 위치를 글로벌(월드) 공간에서 설정 (C++ 전용)"
+                },
+                {
+                    "name": "node:localToGlobal",
+                    "return": "Vec3",
+                    "signatures": [
+                        "local"
+                    ],
+                    "desc": "Convert a local coordinate to global space (C++ only)",
+                    "desc_ja": "ローカル座標をグローバル空間に変換（C++のみ）",
+                    "desc_ko": "로컬 좌표를 글로벌 공간으로 변환 (C++ 전용)"
                 },
                 {
                     "name": "node:getMouseX",
@@ -17572,6 +17592,46 @@ const TrussCAPI = {
                     "desc": "Transform the ray by a matrix (typically an inverse to map into local space)",
                     "desc_ja": "行列でレイを変換 (通常は逆行列でローカル空間へ写す)",
                     "desc_ko": "행렬로 레이를 변환 (보통 역행렬로 로컬 공간으로 매핑)"
+                },
+                {
+                    "name": "ray:intersectZPlane",
+                    "return": "Hit",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Intersect the Z=0 plane and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0.",
+                    "desc_ja": "Z=0 平面と交差し、距離と交点を持つ Ray::Hit を返す。出力引数版は deprecated で v1.0.0 で削除",
+                    "desc_ko": "Z=0 평면과 교차하여 거리와 교점을 담은 Ray::Hit를 반환. 출력 인자 버전은 deprecated이며 v1.0.0에서 제거"
+                },
+                {
+                    "name": "ray:intersectPlane",
+                    "return": "Hit",
+                    "signatures": [
+                        "planeNormal, planeD"
+                    ],
+                    "desc": "Intersect an arbitrary plane and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0.",
+                    "desc_ja": "任意の平面と交差し、距離と交点を持つ Ray::Hit を返す。出力引数版は deprecated で v1.0.0 で削除",
+                    "desc_ko": "임의의 평면과 교차하여 거리와 교점을 담은 Ray::Hit를 반환. 출력 인자 버전은 deprecated이며 v1.0.0에서 제거"
+                },
+                {
+                    "name": "ray:intersectSphere",
+                    "return": "Hit",
+                    "signatures": [
+                        "radius"
+                    ],
+                    "desc": "Intersect a sphere centered at the origin and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0.",
+                    "desc_ja": "原点中心の球と交差し、距離と交点を持つ Ray::Hit を返す。出力引数版は deprecated で v1.0.0 で削除",
+                    "desc_ko": "원점 중심의 구와 교차하여 거리와 교점을 담은 Ray::Hit를 반환. 출력 인자 버전은 deprecated이며 v1.0.0에서 제거"
+                },
+                {
+                    "name": "ray:intersectAABB",
+                    "return": "Hit",
+                    "signatures": [
+                        "boxMin, boxMax"
+                    ],
+                    "desc": "Intersect an axis-aligned bounding box and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0.",
+                    "desc_ja": "軸並行バウンディングボックスと交差し、距離と交点を持つ Ray::Hit を返す。出力引数版は deprecated で v1.0.0 で削除",
+                    "desc_ko": "축 정렬 경계 상자와 교차하여 거리와 교점을 담은 Ray::Hit를 반환. 출력 인자 버전은 deprecated이며 v1.0.0에서 제거"
                 }
             ],
             "static_methods": [

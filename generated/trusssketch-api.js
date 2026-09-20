@@ -8686,6 +8686,12 @@ const TrussSketchAPI = {
      "desc": "Get the inverse of the global transform matrix (C++ only)"
     },
     {
+     "name": "globalToLocal",
+     "snippet": "globalToLocal(${1:global})",
+     "return": "Vec3",
+     "desc": "Convert a global coordinate to this node's local space (C++ only)"
+    },
+    {
      "name": "getGlobalPos",
      "snippet": "getGlobalPos()",
      "return": "Vec3",
@@ -8696,6 +8702,12 @@ const TrussSketchAPI = {
      "snippet": "setGlobalPos(${1:global})",
      "return": "void",
      "desc": "Set the node's position in global (world) space (C++ only)"
+    },
+    {
+     "name": "localToGlobal",
+     "snippet": "localToGlobal(${1:local})",
+     "return": "Vec3",
+     "desc": "Convert a local coordinate to global space (C++ only)"
     },
     {
      "name": "getMouseX",
@@ -9562,6 +9574,30 @@ const TrussSketchAPI = {
      "snippet": "transformed(${1:inverseMatrix})",
      "return": "Ray",
      "desc": "Transform the ray by a matrix (typically an inverse to map into local space)"
+    },
+    {
+     "name": "intersectZPlane",
+     "snippet": "intersectZPlane()",
+     "return": "Hit",
+     "desc": "Intersect the Z=0 plane and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
+    },
+    {
+     "name": "intersectPlane",
+     "snippet": "intersectPlane(${1:planeNormal}, ${2:planeD})",
+     "return": "Hit",
+     "desc": "Intersect an arbitrary plane and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
+    },
+    {
+     "name": "intersectSphere",
+     "snippet": "intersectSphere(${1:radius})",
+     "return": "Hit",
+     "desc": "Intersect a sphere centered at the origin and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
+    },
+    {
+     "name": "intersectAABB",
+     "snippet": "intersectAABB(${1:boxMin}, ${2:boxMax})",
+     "return": "Hit",
+     "desc": "Intersect an axis-aligned bounding box and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
     }
    ],
    "static_methods": [
