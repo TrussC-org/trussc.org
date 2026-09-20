@@ -8275,9 +8275,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "app:setSize",
-                    "return": "(nothing)",
                     "signatures": [
-                        "w, h"
+                        {
+                            "ret": "(nothing)",
+                            "params": "w, h"
+                        }
                     ],
                     "desc": "Set the app's size",
                     "desc_ja": "アプリのサイズを設定",
@@ -8285,9 +8287,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:requestExit",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Request the app to exit",
                     "desc_ja": "アプリの終了を要求",
@@ -8295,9 +8299,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:isExitRequested",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether an exit has been requested",
                     "desc_ja": "終了が要求されているかどうか",
@@ -8305,10 +8311,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:keyPressed",
-                    "return": "(nothing)",
                     "signatures": [
-                        "e",
-                        "key"
+                        {
+                            "ret": "(nothing)",
+                            "params": "e"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "key"
+                        }
                     ],
                     "desc": "Key pressed. Use KEY_* constants for special keys, or uppercase char literals for printable keys (e.g. key == 'A', key == '1')",
                     "desc_ja": "キーが押された。特殊キーはKEY_*定数、印字可能キーは大文字リテラル（例: key == 'A', key == '1'）で比較",
@@ -8316,10 +8327,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:keyReleased",
-                    "return": "(nothing)",
                     "signatures": [
-                        "e",
-                        "key"
+                        {
+                            "ret": "(nothing)",
+                            "params": "e"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "key"
+                        }
                     ],
                     "desc": "Key released",
                     "desc_ja": "キーが離された",
@@ -8327,10 +8343,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:mousePressed",
-                    "return": "(nothing)",
                     "signatures": [
-                        "e",
-                        "pos, button"
+                        {
+                            "ret": "(nothing)",
+                            "params": "e"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "pos, button"
+                        }
                     ],
                     "desc": "Mouse button pressed",
                     "desc_ja": "マウスボタンが押された",
@@ -8338,10 +8359,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:mouseReleased",
-                    "return": "(nothing)",
                     "signatures": [
-                        "e",
-                        "pos, button"
+                        {
+                            "ret": "(nothing)",
+                            "params": "e"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "pos, button"
+                        }
                     ],
                     "desc": "Mouse button released",
                     "desc_ja": "マウスボタンが離された",
@@ -8349,10 +8375,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:mouseMoved",
-                    "return": "(nothing)",
                     "signatures": [
-                        "e",
-                        "pos"
+                        {
+                            "ret": "(nothing)",
+                            "params": "e"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "pos"
+                        }
                     ],
                     "desc": "Mouse moved",
                     "desc_ja": "マウスが移動した",
@@ -8360,10 +8391,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:mouseDragged",
-                    "return": "(nothing)",
                     "signatures": [
-                        "e",
-                        "pos, button"
+                        {
+                            "ret": "(nothing)",
+                            "params": "e"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "pos, button"
+                        }
                     ],
                     "desc": "Mouse dragged",
                     "desc_ja": "マウスがドラッグされた",
@@ -8371,10 +8407,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:mouseScrolled",
-                    "return": "(nothing)",
                     "signatures": [
-                        "e",
-                        "delta"
+                        {
+                            "ret": "(nothing)",
+                            "params": "e"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "delta"
+                        }
                     ],
                     "desc": "Mouse wheel / trackpad scrolled",
                     "desc_ja": "マウスホイール / トラックパッドがスクロールされた",
@@ -8382,9 +8423,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:touchPressed",
-                    "return": "(nothing)",
                     "signatures": [
-                        "touch"
+                        {
+                            "ret": "(nothing)",
+                            "params": "touch"
+                        }
                     ],
                     "desc": "Touch began (Android/iOS, multi-touch)",
                     "desc_ja": "タッチが開始した(Android/iOS、マルチタッチ)",
@@ -8392,9 +8435,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:touchMoved",
-                    "return": "(nothing)",
                     "signatures": [
-                        "touch"
+                        {
+                            "ret": "(nothing)",
+                            "params": "touch"
+                        }
                     ],
                     "desc": "Touch moved (Android/iOS, multi-touch)",
                     "desc_ja": "タッチが移動した(Android/iOS、マルチタッチ)",
@@ -8402,9 +8447,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:touchReleased",
-                    "return": "(nothing)",
                     "signatures": [
-                        "touch"
+                        {
+                            "ret": "(nothing)",
+                            "params": "touch"
+                        }
                     ],
                     "desc": "Touch ended or was cancelled (check touch.cancelled)",
                     "desc_ja": "タッチが終了またはキャンセルされた(touch.cancelled を確認)",
@@ -8412,9 +8459,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:windowResized",
-                    "return": "(nothing)",
                     "signatures": [
-                        "width, height"
+                        {
+                            "ret": "(nothing)",
+                            "params": "width, height"
+                        }
                     ],
                     "desc": "Window resized",
                     "desc_ja": "ウィンドウがリサイズされた",
@@ -8422,9 +8471,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:filesDropped",
-                    "return": "(nothing)",
                     "signatures": [
-                        "files"
+                        {
+                            "ret": "(nothing)",
+                            "params": "files"
+                        }
                     ],
                     "desc": "Files were dropped onto the window",
                     "desc_ja": "ウィンドウにファイルがドロップされた",
@@ -8432,9 +8483,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:exit",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "App exit callback (override for cleanup before shutdown)",
                     "desc_ja": "アプリ終了コールバック(終了前のクリーンアップにオーバーライド)",
@@ -8442,9 +8495,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:audioOut",
-                    "return": "(nothing)",
                     "signatures": [
-                        "buf"
+                        {
+                            "ret": "(nothing)",
+                            "params": "buf"
+                        }
                     ],
                     "desc": "Fill the audio output buffer (override to synthesize audio)",
                     "desc_ja": "オーディオ出力バッファを満たす(音を合成するにはオーバーライド)",
@@ -8452,9 +8507,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "app:audioIn",
-                    "return": "(nothing)",
                     "signatures": [
-                        "buf"
+                        {
+                            "ret": "(nothing)",
+                            "params": "buf"
+                        }
                     ],
                     "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut.",
                     "desc_ja": "リアルタイム入力コールバック event (マイク入力)。RT-safe 要件は audioOut と同様",
@@ -8756,9 +8813,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "audioRecorder:start",
-                    "return": "boolean",
                     "signatures": [
-                        "path, settings = {std.vector<std.vector<int>>()}"
+                        {
+                            "ret": "boolean",
+                            "params": "path, settings = {std.vector<std.vector<int>>()}"
+                        }
                     ],
                     "desc": "Start recording the master mix into a WAV file (relative paths resolve via getDataPath). The audio engine must already be initialized; returns false otherwise or when the file cannot be opened",
                     "desc_ja": "マスターミックスのWAV録音を開始（相対パスは getDataPath で解決）。オーディオエンジンが初期化済みであること。未初期化またはファイルが開けない場合は false",
@@ -8766,9 +8825,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "audioRecorder:stop",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Stop and finalize the file (patches the WAV header sizes). Safe to call when not recording; also runs automatically on destruction",
                     "desc_ja": "録音を停止しファイルを確定する（WAVヘッダのサイズを書き戻す）。未録音時に呼んでも安全。デストラクタでも自動実行される",
@@ -8776,9 +8837,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "audioRecorder:isRecording",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True while recording",
                     "desc_ja": "録音中なら true",
@@ -8786,9 +8849,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "audioRecorder:getRecordedSeconds",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Seconds actually written to the file so far",
                     "desc_ja": "ここまでにファイルへ書き込まれた秒数",
@@ -8796,9 +8861,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "audioRecorder:getDroppedFrames",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Frames lost to ring-buffer overflow (0 in normal operation; nonzero means the writer thread fell behind)",
                     "desc_ja": "リングバッファ溢れで失われたフレーム数（通常は0。非0はライタースレッドの遅延を意味する）",
@@ -8806,9 +8873,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "audioRecorder:getPath",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Resolved path of the file being written",
                     "desc_ja": "書き込み中ファイルの解決済みパス",
@@ -8922,9 +8991,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "BuildInfo.date",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build date in \"YYYY-MM-DD\" form (local time)\n",
                     "desc_ja": "ビルド日 \"YYYY-MM-DD\" 形式 (ローカル時刻)\n",
@@ -8932,9 +9003,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "BuildInfo.time",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build time in \"HH:MM:SS\" form (local time)\n",
                     "desc_ja": "ビルド時刻 \"HH:MM:SS\" 形式 (ローカル時刻)\n",
@@ -8942,9 +9015,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "BuildInfo.dateTime",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)\n",
                     "desc_ja": "ビルド日時 \"YYYY-MM-DD HH:MM:SS\" 形式 (ローカル時刻)\n",
@@ -8952,9 +9027,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "BuildInfo.timestamp",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build timestamp as Unix seconds (UTC)",
                     "desc_ja": "ビルド時刻のUnix秒 (UTC)",
@@ -8962,9 +9039,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "BuildInfo.year",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build year (e.g. 2026)",
                     "desc_ja": "ビルド年 (例: 2026)",
@@ -8972,9 +9051,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "BuildInfo.month",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build month (1-12)",
                     "desc_ja": "ビルド月 (1-12)",
@@ -8982,9 +9063,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "BuildInfo.day",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build day of month (1-31)",
                     "desc_ja": "ビルド日 (1-31)",
@@ -8992,9 +9075,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "BuildInfo.hour",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build hour (0-23)",
                     "desc_ja": "ビルド時 (0-23)",
@@ -9002,9 +9087,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "BuildInfo.minute",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build minute (0-59)",
                     "desc_ja": "ビルド分 (0-59)",
@@ -9012,9 +9099,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "BuildInfo.second",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build second (0-59)",
                     "desc_ja": "ビルド秒 (0-59)",
@@ -9073,9 +9162,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "cameraContext:screenPointToRay",
-                    "return": "Ray",
                     "signatures": [
-                        "screenX, screenY"
+                        {
+                            "ret": "Ray",
+                            "params": "screenX, screenY"
+                        }
                     ],
                     "desc": "Unproject a screen point (pixels, top-left origin) into a world-space ray.",
                     "desc_ja": "スクリーン座標（ピクセル、左上原点）をワールド空間のレイに逆投影する。",
@@ -9083,9 +9174,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "cameraContext:worldToScreen",
-                    "return": "Vec3",
                     "signatures": [
-                        "worldPos"
+                        {
+                            "ret": "Vec3",
+                            "params": "worldPos"
+                        }
                     ],
                     "desc": "Convert world coordinate to screen coordinate (x, y = screen pos, z = depth 0-1)",
                     "desc_ja": "ワールド座標をスクリーン座標に変換（x, y = 画面位置, z = 深度 0-1）",
@@ -9129,10 +9222,15 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "chipSoundBundle:add",
-                    "return": "ChipSoundBundle",
                     "signatures": [
-                        "note, time",
-                        "wave, hz, duration, time, vol = 0.5"
+                        {
+                            "ret": "ChipSoundBundle",
+                            "params": "note, time"
+                        },
+                        {
+                            "ret": "ChipSoundBundle",
+                            "params": "wave, hz, duration, time, vol = 0.5"
+                        }
                     ],
                     "desc": "Schedule a note to start at the given time (seconds). The second overload constructs the note inline from wave / frequency / duration.",
                     "desc_ja": "指定時刻 (秒) に開始するノートをスケジュール。2 番目のオーバーロードは wave / frequency / duration からノートをインラインで構築する",
@@ -9140,9 +9238,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "chipSoundBundle:clear",
-                    "return": "ChipSoundBundle",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ChipSoundBundle",
+                            "params": ""
+                        }
                     ],
                     "desc": "Remove all scheduled notes.",
                     "desc_ja": "スケジュールされた全ノートを削除",
@@ -9150,9 +9250,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "chipSoundBundle:getDuration",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Total duration in seconds, auto-computed from the last note's end.",
                     "desc_ja": "総再生時間 (秒)、最後のノートの終端から自動計算される",
@@ -9160,9 +9262,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "chipSoundBundle:build",
-                    "return": "Sound",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Sound",
+                            "params": ""
+                        }
                     ],
                     "desc": "Render all scheduled notes into a single mixed, clipped Sound ready to play.",
                     "desc_ja": "スケジュールされた全ノートを、再生可能なミックス・クリップ済みの単一 Sound にレンダリング",
@@ -9252,9 +9356,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "chipSoundNote:build",
-                    "return": "Sound",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Sound",
+                            "params": ""
+                        }
                     ],
                     "desc": "Render this note (with its ADSR envelope) into a playable Sound",
                     "desc_ja": "この音 (ADSR エンベロープ込み) を再生可能な Sound にレンダリング",
@@ -9262,9 +9368,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "chipSoundNote:generateBuffer",
-                    "return": "(nothing)",
                     "signatures": [
-                        "buf"
+                        {
+                            "ret": "(nothing)",
+                            "params": "buf"
+                        }
                     ],
                     "desc": "Write this note's raw waveform (without the ADSR envelope) into buf. Used internally by build() and by ChipSoundBundle mixing.",
                     "desc_ja": "この音の素の波形 (ADSR エンベロープなし) を buf に書き込む。build() と ChipSoundBundle のミックスで内部的に使われる",
@@ -9272,9 +9380,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "chipSoundNote:getTotalDuration",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Total note duration in seconds (used by ChipSoundBundle to lay out note timing).",
                     "desc_ja": "ノートの総再生時間 (秒)。ChipSoundBundle がノートの配置時間に使う",
@@ -9362,11 +9472,19 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "color:set",
-                    "return": "Color",
                     "signatures": [
-                        "r, g, b, a = 1.0",
-                        "gray, a = 1.0",
-                        "c"
+                        {
+                            "ret": "Color",
+                            "params": "r, g, b, a = 1.0"
+                        },
+                        {
+                            "ret": "Color",
+                            "params": "gray, a = 1.0"
+                        },
+                        {
+                            "ret": "Color",
+                            "params": "c"
+                        }
                     ],
                     "desc": "Set color components",
                     "desc_ja": "カラー成分を設定",
@@ -9374,9 +9492,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:toHex",
-                    "return": "number",
                     "signatures": [
-                        "includeAlpha = false"
+                        {
+                            "ret": "number",
+                            "params": "includeAlpha = false"
+                        }
                     ],
                     "desc": "Convert to hex value",
                     "desc_ja": "16進数値に変換",
@@ -9384,9 +9504,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:toLinear",
-                    "return": "ColorLinear",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorLinear",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to linear RGB color space",
                     "desc_ja": "リニアRGB色空間に変換",
@@ -9394,9 +9516,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:toHSB",
-                    "return": "ColorHSB",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorHSB",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to HSB (H: 0-1, S: 0-1, B: 0-1)",
                     "desc_ja": "HSBに変換 (H: 0-1, S: 0-1, B: 0-1)",
@@ -9404,9 +9528,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:toOKLab",
-                    "return": "ColorOKLab",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorOKLab",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to OKLab (perceptually uniform)",
                     "desc_ja": "OKLabに変換（知覚的に均一）",
@@ -9414,9 +9540,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:toOKLCH",
-                    "return": "ColorOKLCH",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorOKLCH",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to OKLCH (L: 0-1, C: 0-0.4, H: 0-1)",
                     "desc_ja": "OKLCHに変換 (L: 0-1, C: 0-0.4, H: 0-1)",
@@ -9424,9 +9552,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:clamped",
-                    "return": "Color",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Color",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get clamped copy (0.0-1.0)",
                     "desc_ja": "クランプしたコピーを取得",
@@ -9434,9 +9564,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:lerpRGB",
-                    "return": "Color",
                     "signatures": [
-                        "target, t"
+                        {
+                            "ret": "Color",
+                            "params": "target, t"
+                        }
                     ],
                     "desc": "Interpolate in RGB space",
                     "desc_ja": "RGB空間で補間",
@@ -9444,9 +9576,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:lerpLinear",
-                    "return": "Color",
                     "signatures": [
-                        "target, t"
+                        {
+                            "ret": "Color",
+                            "params": "target, t"
+                        }
                     ],
                     "desc": "Interpolate in linear RGB space",
                     "desc_ja": "リニアRGB空間で補間",
@@ -9454,9 +9588,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:lerpHSB",
-                    "return": "Color",
                     "signatures": [
-                        "target, t"
+                        {
+                            "ret": "Color",
+                            "params": "target, t"
+                        }
                     ],
                     "desc": "Interpolate in HSB space",
                     "desc_ja": "HSB空間で補間",
@@ -9464,9 +9600,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:lerpOKLab",
-                    "return": "Color",
                     "signatures": [
-                        "target, t"
+                        {
+                            "ret": "Color",
+                            "params": "target, t"
+                        }
                     ],
                     "desc": "Interpolate in OKLab space (perceptually uniform)",
                     "desc_ja": "OKLab空間で補間（知覚的に均一）",
@@ -9474,9 +9612,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:lerpOKLCH",
-                    "return": "Color",
                     "signatures": [
-                        "target, t"
+                        {
+                            "ret": "Color",
+                            "params": "target, t"
+                        }
                     ],
                     "desc": "Interpolate in OKLCH space (shortest hue path)",
                     "desc_ja": "OKLCH空間で補間（色相は最短経路）",
@@ -9484,9 +9624,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "color:lerp",
-                    "return": "Color",
                     "signatures": [
-                        "target, t"
+                        {
+                            "ret": "Color",
+                            "params": "target, t"
+                        }
                     ],
                     "desc": "Interpolate in OKLab space",
                     "desc_ja": "OKLab空間で補間",
@@ -9496,9 +9638,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "Color.fromBytes",
-                    "return": "Color",
                     "signatures": [
-                        "r, g, b, a = 255"
+                        {
+                            "ret": "Color",
+                            "params": "r, g, b, a = 255"
+                        }
                     ],
                     "desc": "Create from 0-255 values",
                     "desc_ja": "0-255の値から作成",
@@ -9506,9 +9650,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Color.fromHex",
-                    "return": "Color",
                     "signatures": [
-                        "hex, hasAlpha = false"
+                        {
+                            "ret": "Color",
+                            "params": "hex, hasAlpha = false"
+                        }
                     ],
                     "desc": "Create from hex value",
                     "desc_ja": "16進数値から作成",
@@ -9516,9 +9662,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Color.fromHSB",
-                    "return": "Color",
                     "signatures": [
-                        "h, s, b, a = 1.0"
+                        {
+                            "ret": "Color",
+                            "params": "h, s, b, a = 1.0"
+                        }
                     ],
                     "desc": "Create from HSB (H: 0-1)",
                     "desc_ja": "HSBから作成 (H: 0-1)",
@@ -9526,9 +9674,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Color.fromOKLCH",
-                    "return": "Color",
                     "signatures": [
-                        "L, C, H, a = 1.0"
+                        {
+                            "ret": "Color",
+                            "params": "L, C, H, a = 1.0"
+                        }
                     ],
                     "desc": "Create from OKLCH (L: 0-1, C: 0-0.4, H: 0-1)",
                     "desc_ja": "OKLCHから作成 (L: 0-1, C: 0-0.4, H: 0-1)",
@@ -9536,9 +9686,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Color.fromOKLab",
-                    "return": "Color",
                     "signatures": [
-                        "L, a_lab, b_lab, alpha = 1.0"
+                        {
+                            "ret": "Color",
+                            "params": "L, a_lab, b_lab, alpha = 1.0"
+                        }
                     ],
                     "desc": "Create from OKLab (L: 0-1, a: ~-0.4-0.4, b: ~-0.4-0.4)",
                     "desc_ja": "OKLabから作成 (L: 0-1, a: ~-0.4-0.4, b: ~-0.4-0.4)",
@@ -9546,9 +9698,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Color.fromLinear",
-                    "return": "Color",
                     "signatures": [
-                        "r, g, b, a = 1.0"
+                        {
+                            "ret": "Color",
+                            "params": "r, g, b, a = 1.0"
+                        }
                     ],
                     "desc": "Create from linear RGB",
                     "desc_ja": "リニアRGBから作成",
@@ -9614,9 +9768,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "colorHSB:toRGB",
-                    "return": "Color",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Color",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert ColorHSB to Color (RGB)",
                     "desc_ja": "ColorHSBをColor (RGB) に変換",
@@ -9624,9 +9780,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorHSB:toLinear",
-                    "return": "ColorLinear",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorLinear",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to linear RGB color space",
                     "desc_ja": "リニア RGB 色空間に変換",
@@ -9634,9 +9792,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorHSB:toOKLab",
-                    "return": "ColorOKLab",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorOKLab",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to OKLab color space",
                     "desc_ja": "OKLab 色空間に変換",
@@ -9644,9 +9804,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorHSB:toOKLCH",
-                    "return": "ColorOKLCH",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorOKLCH",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to OKLCH color space",
                     "desc_ja": "OKLCH 色空間に変換",
@@ -9654,9 +9816,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorHSB:lerp",
-                    "return": "ColorHSB",
                     "signatures": [
-                        "target, t, shortestPath = true"
+                        {
+                            "ret": "ColorHSB",
+                            "params": "target, t, shortestPath = true"
+                        }
                     ],
                     "desc": "Interpolate in HSB space (shortest hue path)",
                     "desc_ja": "HSB空間で補間（色相は最短経路）",
@@ -9719,9 +9883,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "colorLinear:toSRGB",
-                    "return": "Color",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Color",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to sRGB (gamma-encoded) Color",
                     "desc_ja": "sRGB（ガンマエンコード済み）Color に変換",
@@ -9729,9 +9895,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorLinear:toHSB",
-                    "return": "ColorHSB",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorHSB",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to HSB color space",
                     "desc_ja": "HSB 色空間に変換",
@@ -9739,9 +9907,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorLinear:toOKLab",
-                    "return": "ColorOKLab",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorOKLab",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to OKLab color space",
                     "desc_ja": "OKLab 色空間に変換",
@@ -9749,9 +9919,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorLinear:toOKLCH",
-                    "return": "ColorOKLCH",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorOKLCH",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to OKLCH color space",
                     "desc_ja": "OKLCH 色空間に変換",
@@ -9759,9 +9931,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorLinear:clamped",
-                    "return": "ColorLinear",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorLinear",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clamp to non-negative RGB (HDR-safe) with alpha in 0-1",
                     "desc_ja": "RGB を非負にクランプ（HDR 安全）、アルファは 0-1",
@@ -9769,9 +9943,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorLinear:clampedLDR",
-                    "return": "ColorLinear",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorLinear",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clamp every channel to the 0-1 LDR range",
                     "desc_ja": "全チャンネルを 0-1 の LDR 範囲にクランプ",
@@ -9779,9 +9955,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorLinear:lerp",
-                    "return": "ColorLinear",
                     "signatures": [
-                        "target, t"
+                        {
+                            "ret": "ColorLinear",
+                            "params": "target, t"
+                        }
                     ],
                     "desc": "Interpolate in linear space (physically correct)",
                     "desc_ja": "リニア空間で補間（物理的に正しい）",
@@ -9843,9 +10021,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "colorOKLab:toLinear",
-                    "return": "ColorLinear",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorLinear",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to linear RGB color space",
                     "desc_ja": "リニア RGB 色空間に変換",
@@ -9853,9 +10033,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorOKLab:toRGB",
-                    "return": "Color",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Color",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to sRGB Color",
                     "desc_ja": "sRGB Color に変換",
@@ -9863,9 +10045,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorOKLab:toHSB",
-                    "return": "ColorHSB",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorHSB",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to HSB color space",
                     "desc_ja": "HSB 色空間に変換",
@@ -9873,9 +10057,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorOKLab:toOKLCH",
-                    "return": "ColorOKLCH",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorOKLCH",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to OKLCH color space",
                     "desc_ja": "OKLCH 色空間に変換",
@@ -9883,9 +10069,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorOKLab:lerp",
-                    "return": "ColorOKLab",
                     "signatures": [
-                        "target, t"
+                        {
+                            "ret": "ColorOKLab",
+                            "params": "target, t"
+                        }
                     ],
                     "desc": "Interpolate in OKLab space (perceptually uniform)",
                     "desc_ja": "OKLab 空間で補間（知覚的に均一）",
@@ -9950,9 +10138,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "colorOKLCH:toOKLab",
-                    "return": "ColorOKLab",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorOKLab",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to OKLab color space",
                     "desc_ja": "OKLab 色空間に変換",
@@ -9960,9 +10150,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorOKLCH:toLinear",
-                    "return": "ColorLinear",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorLinear",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to linear RGB color space",
                     "desc_ja": "リニア RGB 色空間に変換",
@@ -9970,9 +10162,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorOKLCH:toRGB",
-                    "return": "Color",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Color",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert ColorOKLCH to Color (RGB)",
                     "desc_ja": "ColorOKLCHをColor (RGB) に変換",
@@ -9980,9 +10174,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorOKLCH:toHSB",
-                    "return": "ColorHSB",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "ColorHSB",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to HSB color space",
                     "desc_ja": "HSB 色空間に変換",
@@ -9990,9 +10186,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "colorOKLCH:lerp",
-                    "return": "ColorOKLCH",
                     "signatures": [
-                        "target, t, shortestPath = true"
+                        {
+                            "ret": "ColorOKLCH",
+                            "params": "target, t, shortestPath = true"
+                        }
                     ],
                     "desc": "Interpolate in OKLCH space (shortest hue path, perceptually uniform)",
                     "desc_ja": "OKLCH空間で補間（色相は最短経路、知覚的に均一）",
@@ -10608,9 +10806,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "eventListener:disconnect",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction)",
                     "desc_ja": "リスナーを今すぐ明示的に切断(そうしなければ破棄時に自動で行われる)",
@@ -10618,9 +10818,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "eventListener:isConnected",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True while the listener is still connected to its event",
                     "desc_ja": "リスナーがイベントに接続されている間 true",
@@ -10947,9 +11149,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "fileReader:open",
-                    "return": "boolean",
                     "signatures": [
-                        "path"
+                        {
+                            "ret": "boolean",
+                            "params": "path"
+                        }
                     ],
                     "desc": "Open file for reading",
                     "desc_ja": "読み込み用にファイルを開く",
@@ -10957,9 +11161,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileReader:close",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Close file",
                     "desc_ja": "ファイルを閉じる",
@@ -10967,9 +11173,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileReader:isOpen",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if file is open",
                     "desc_ja": "ファイルが開いているか確認",
@@ -10977,9 +11185,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileReader:eof",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if at end of file",
                     "desc_ja": "ファイル末尾か確認",
@@ -10987,9 +11197,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileReader:readLine",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Read one line",
                     "desc_ja": "1行読み込む",
@@ -10997,9 +11209,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileReader:readChar",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Read one character (-1 at EOF)",
                     "desc_ja": "1文字読み込む（EOF時-1）",
@@ -11007,9 +11221,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileReader:seek",
-                    "return": "(nothing)",
                     "signatures": [
-                        "pos"
+                        {
+                            "ret": "(nothing)",
+                            "params": "pos"
+                        }
                     ],
                     "desc": "Seek to position",
                     "desc_ja": "位置に移動",
@@ -11017,9 +11233,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileReader:tell",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get current position",
                     "desc_ja": "現在位置を取得",
@@ -11027,9 +11245,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileReader:remaining",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get remaining bytes",
                     "desc_ja": "残りバイト数を取得",
@@ -11061,9 +11281,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "fileWriter:open",
-                    "return": "boolean",
                     "signatures": [
-                        "path, append = false"
+                        {
+                            "ret": "boolean",
+                            "params": "path, append = false"
+                        }
                     ],
                     "desc": "Open file for writing",
                     "desc_ja": "書き込み用にファイルを開く",
@@ -11071,9 +11293,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileWriter:close",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Close file",
                     "desc_ja": "ファイルを閉じる",
@@ -11081,9 +11305,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileWriter:isOpen",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if file is open",
                     "desc_ja": "ファイルが開いているか確認",
@@ -11091,10 +11317,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileWriter:write",
-                    "return": "FileWriter",
                     "signatures": [
-                        "text",
-                        "c"
+                        {
+                            "ret": "FileWriter",
+                            "params": "text"
+                        },
+                        {
+                            "ret": "FileWriter",
+                            "params": "c"
+                        }
                     ],
                     "desc": "Write data to file",
                     "desc_ja": "データを書き込む",
@@ -11102,9 +11333,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileWriter:writeLine",
-                    "return": "FileWriter",
                     "signatures": [
-                        "text = \"\""
+                        {
+                            "ret": "FileWriter",
+                            "params": "text = \"\""
+                        }
                     ],
                     "desc": "Write line with newline",
                     "desc_ja": "改行付きで書き込む",
@@ -11112,9 +11345,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fileWriter:flush",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Flush buffer to disk",
                     "desc_ja": "バッファをディスクに書き出す",
@@ -11144,9 +11379,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "font:setOversampling",
-                    "return": "Font",
                     "signatures": [
-                        "n"
+                        {
+                            "ret": "Font",
+                            "params": "n"
+                        }
                     ],
                     "desc": "Rasterize glyphs at N x N the target size and box-filter them down, trading N^2 atlas memory for sharper text under arbitrary transforms (1 = off).",
                     "desc_ja": "グリフを N x N 倍の解像度でラスタライズしてから縮小し、アトラスのメモリを N^2 倍払う代わりに任意の変換下で文字を鮮明にする（1 = 無効）。",
@@ -11154,9 +11391,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getOversampling",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the oversampling factor this font rasterizes with (1 = off).",
                     "desc_ja": "このフォントがラスタライズに使うオーバーサンプリング倍率を返す（1 = 無効）。",
@@ -11164,9 +11403,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setGridFit",
-                    "return": "Font",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "Font",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "Snap every baseline to a whole pixel at draw time so horizontal strokes stay sharp, at no memory cost and one rounding per line (on by default; automatically stands down when the transform is not 1:1, where rounding in model space would hurt instead).",
                     "desc_ja": "描画時に各行のベースラインを整数ピクセルにスナップして横画を鮮明に保つ。メモリコストはなく、行あたり丸め1回だけ（既定で有効。1:1 でない変換下ではモデル空間での丸めが逆効果になるため自動的に無効化される）。",
@@ -11174,9 +11415,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getGridFit",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return whether vertical grid fit is enabled for this font.",
                     "desc_ja": "このフォントで縦方向のグリッドフィットが有効かどうかを返す。",
@@ -11184,9 +11427,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setMipmaps",
-                    "return": "Font",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "Font",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "Enable mipmapping of the glyph atlas so text stays stable when drawn much smaller than its loaded size (on by default; the chain is built lazily on the first minified draw).",
                     "desc_ja": "グリフアトラスのミップマップを有効にし、読み込みサイズよりかなり小さく描画してもテキストがちらつかないようにする（既定で有効。ミップ列は最初に縮小描画された時点で生成される）。",
@@ -11194,9 +11439,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getMipmaps",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return whether the glyph atlas is allowed to build mipmaps.",
                     "desc_ja": "グリフアトラスがミップマップを生成してよいかどうかを返す。",
@@ -11204,9 +11451,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:load",
-                    "return": "LoadResult",
                     "signatures": [
-                        "nameOrPath, size"
+                        {
+                            "ret": "LoadResult",
+                            "params": "nameOrPath, size"
+                        }
                     ],
                     "desc": "Load font file",
                     "desc_ja": "フォントファイルを読み込む",
@@ -11214,9 +11463,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:isLoaded",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if loaded",
                     "desc_ja": "読み込み済みか確認",
@@ -11224,10 +11475,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setAlign",
-                    "return": "(nothing)",
                     "signatures": [
-                        "h, v",
-                        "h"
+                        {
+                            "ret": "(nothing)",
+                            "params": "h, v"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "h"
+                        }
                     ],
                     "desc": "Set horizontal (and optional vertical) text alignment",
                     "desc_ja": "テキストの水平（および任意で垂直）揃えを設定",
@@ -11235,9 +11491,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getAlignH",
-                    "return": "Direction",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Direction",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get current horizontal text alignment",
                     "desc_ja": "現在の水平テキスト揃えを取得",
@@ -11245,9 +11503,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getAlignV",
-                    "return": "Direction",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Direction",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get current vertical text alignment",
                     "desc_ja": "現在の垂直テキスト揃えを取得",
@@ -11255,9 +11515,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setLineHeight",
-                    "return": "(nothing)",
                     "signatures": [
-                        "pixels"
+                        {
+                            "ret": "(nothing)",
+                            "params": "pixels"
+                        }
                     ],
                     "desc": "Set line height in pixels (0 = use font default)",
                     "desc_ja": "行の高さをピクセルで設定（0 = フォント既定値を使用）",
@@ -11265,9 +11527,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setLineHeightEm",
-                    "return": "(nothing)",
                     "signatures": [
-                        "multiplier"
+                        {
+                            "ret": "(nothing)",
+                            "params": "multiplier"
+                        }
                     ],
                     "desc": "Set line height as a multiple of the font default (1.0 = default, 1.5 = 1.5x)",
                     "desc_ja": "行の高さをフォント既定値の倍率で設定（1.0 = 既定、1.5 = 1.5倍）",
@@ -11275,9 +11539,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:resetLineHeight",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Reset line height to the font default",
                     "desc_ja": "行の高さをフォント既定値に戻す",
@@ -11285,10 +11551,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:drawString",
-                    "return": "(nothing)",
                     "signatures": [
-                        "text, x, y",
-                        "text, x, y, h, v"
+                        {
+                            "ret": "(nothing)",
+                            "params": "text, x, y"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "text, x, y, h, v"
+                        }
                     ],
                     "desc": "Draw text",
                     "desc_ja": "テキストを描画",
@@ -11296,9 +11567,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getGlyphPath",
-                    "return": "Path",
                     "signatures": [
-                        "codepoint"
+                        {
+                            "ret": "Path",
+                            "params": "codepoint"
+                        }
                     ],
                     "desc": "Vector outline of a single glyph as one Path with one subpath per contour. Em-normalized (1.0 = em), screen Y-down, baseline at y=0, pen at x=0. Use Path::drawFill() for filled rendering — holes (e, a, O, 日 ...) are auto-detected via earcut.",
                     "desc_ja": "単一グリフの輪郭を Path として取得 (1 contour = 1 subpath)。em 正規化 (1.0 = em)、画面 Y-down、ベースライン y=0、ペン位置 x=0。drawFill() で塗り — 穴 (e, a, O, 日 等) は earcut で自動検出。",
@@ -11306,10 +11579,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getStringPath",
-                    "return": "Path",
                     "signatures": [
-                        "text, x, y, h, v",
-                        "text, x, y"
+                        {
+                            "ret": "Path",
+                            "params": "text, x, y, h, v"
+                        },
+                        {
+                            "ret": "Path",
+                            "params": "text, x, y"
+                        }
                     ],
                     "desc": "Vector outline of the whole string at (x, y) as one Path containing every glyph's contours (one subpath each). Uses the same layout pipeline as drawString (writing mode, alignment, wrap, kinsoku, TCY). Logical pixels — drawStroke / drawFill / transform freely.",
                     "desc_ja": "文字列全体の輪郭を 1 個の Path として返す (全グリフの contour が subpath として連結)。drawString と同じレイアウトパイプライン (書字方向 / 揃え / 折返し / 禁則 / 縦中横) 経由。座標は論理ピクセル — drawStroke / drawFill / 変形自由。",
@@ -11317,9 +11595,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setWritingMode",
-                    "return": "(nothing)",
                     "signatures": [
-                        "mode"
+                        {
+                            "ret": "(nothing)",
+                            "params": "mode"
+                        }
                     ],
                     "desc": "Switch between horizontal and vertical (tategaki) writing. Default is Horizontal (existing behavior unchanged).",
                     "desc_ja": "横書き / 縦書きを切り替え。デフォルトは Horizontal (既存挙動と同じ)",
@@ -11327,9 +11607,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getWritingMode",
-                    "return": "WritingMode",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "WritingMode",
+                            "params": ""
+                        }
                     ],
                     "desc": "Current writing mode",
                     "desc_ja": "現在の書字方向を取得",
@@ -11337,9 +11619,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setTcyDigits",
-                    "return": "(nothing)",
                     "signatures": [
-                        "maxDigits, inMode, overflowMode"
+                        {
+                            "ret": "(nothing)",
+                            "params": "maxDigits, inMode, overflowMode"
+                        }
                     ],
                     "desc": "Tate-chu-yoko config for ASCII digit runs in vertical text. Runs with <= maxDigits use inMode (typically Combine — squeezed into one cell); longer runs fall back to overflowMode (typically Rotate).",
                     "desc_ja": "縦書きで連続する ASCII 数字の縦中横設定。maxDigits 桁以内なら inMode (通常 Combine = 1セルに圧縮)、超えたら overflowMode (通常 Rotate)",
@@ -11347,9 +11631,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setTcyLatin",
-                    "return": "(nothing)",
                     "signatures": [
-                        "mode"
+                        {
+                            "ret": "(nothing)",
+                            "params": "mode"
+                        }
                     ],
                     "desc": "Tate-chu-yoko mode for Latin letter runs in vertical text. Default is Rotate (whole run rotated 90 CW).",
                     "desc_ja": "縦書きで連続する Latin 文字の表示方式。デフォルトは Rotate (連続を 90度 CW 回転)",
@@ -11357,9 +11643,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getTcyLatinMode",
-                    "return": "TcyMode",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "TcyMode",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the tate-chu-yoko mode for Latin letter runs",
                     "desc_ja": "Latin 文字連続の縦中横モードを取得",
@@ -11367,9 +11655,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getTcyDigitMax",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the maximum digit-run length that uses tate-chu-yoko combine mode",
                     "desc_ja": "縦中横の Combine モードを使う数字連続の最大桁数を取得",
@@ -11377,9 +11667,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:enableWrap",
-                    "return": "(nothing)",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "(nothing)",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "Enable or disable line wrapping (default off)",
                     "desc_ja": "行の折り返しを有効/無効化（既定はオフ）",
@@ -11387,9 +11679,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:isWrapEnabled",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if line wrapping is enabled",
                     "desc_ja": "行の折り返しが有効か確認",
@@ -11397,9 +11691,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setMaxLineLength",
-                    "return": "(nothing)",
                     "signatures": [
-                        "length"
+                        {
+                            "ret": "(nothing)",
+                            "params": "length"
+                        }
                     ],
                     "desc": "Set the wrap length (horizontal: line width; vertical: column height)",
                     "desc_ja": "折り返し長を設定（横書き: 行幅、縦書き: 列高）",
@@ -11407,9 +11703,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getMaxLineLength",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the current wrap length",
                     "desc_ja": "現在の折り返し長を取得",
@@ -11417,9 +11715,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setLatinHyphenation",
-                    "return": "(nothing)",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "(nothing)",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "When wrapping a Latin run with no break point, insert '-' before the forced break (default off)",
                     "desc_ja": "改行位置のない Latin 連続を折り返す際、強制改行前に '-' を挿入（既定オフ）",
@@ -11427,9 +11727,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getLatinHyphenation",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if Latin hyphenation is enabled",
                     "desc_ja": "Latin ハイフネーションが有効か確認",
@@ -11437,9 +11739,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setHangingPunctuation",
-                    "return": "(nothing)",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "(nothing)",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "Let prohibited line-start CJK punctuation hang past the line edge instead of wrapping (default off)",
                     "desc_ja": "行頭禁則の CJK 約物を折り返さず行末からはみ出させる（既定オフ）",
@@ -11447,9 +11751,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getHangingPunctuation",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if hanging punctuation is enabled",
                     "desc_ja": "ぶら下げ約物が有効か確認",
@@ -11457,9 +11763,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:setKinsoku",
-                    "return": "(nothing)",
                     "signatures": [
-                        "level"
+                        {
+                            "ret": "(nothing)",
+                            "params": "level"
+                        }
                     ],
                     "desc": "Choose which CJK kinsoku (line-break prohibition) table to apply during wrap",
                     "desc_ja": "折り返し時に適用する CJK 禁則テーブルを選択",
@@ -11467,9 +11775,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getKinsoku",
-                    "return": "KinsokuLevel",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "KinsokuLevel",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the current kinsoku level",
                     "desc_ja": "現在の禁則レベルを取得",
@@ -11477,10 +11787,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:forEachGlyph",
-                    "return": "(nothing)",
                     "signatures": [
-                        "text, x, y, h, v, visitor",
-                        "text, x, y, visitor"
+                        {
+                            "ret": "(nothing)",
+                            "params": "text, x, y, h, v, visitor"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "text, x, y, visitor"
+                        }
                     ],
                     "desc": "Invoke a visitor once per laid-out glyph (positions follow writing mode, wrap, kinsoku, and TCY). Backend-agnostic layout pass shared by drawing, vector outlines, and hit testing",
                     "desc_ja": "配置された各グリフごとにビジターを呼ぶ（位置は書字方向・折返し・禁則・縦中横に従う）。描画・ベクター輪郭・ヒットテストで共有されるレイアウトパス",
@@ -11488,9 +11803,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getWidth",
-                    "return": "number",
                     "signatures": [
-                        "text"
+                        {
+                            "ret": "number",
+                            "params": "text"
+                        }
                     ],
                     "desc": "Get text width",
                     "desc_ja": "テキストの幅を取得",
@@ -11498,9 +11815,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:stringWidth",
-                    "return": "number",
                     "signatures": [
-                        "text"
+                        {
+                            "ret": "number",
+                            "params": "text"
+                        }
                     ],
                     "desc": "Pixel width of the text (alias of getWidth)",
                     "desc_ja": "テキストのピクセル幅（getWidth のエイリアス）",
@@ -11508,9 +11827,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getHeight",
-                    "return": "number",
                     "signatures": [
-                        "text"
+                        {
+                            "ret": "number",
+                            "params": "text"
+                        }
                     ],
                     "desc": "Get text height",
                     "desc_ja": "テキストの高さを取得",
@@ -11518,9 +11839,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getBBox",
-                    "return": "Rect",
                     "signatures": [
-                        "text"
+                        {
+                            "ret": "Rect",
+                            "params": "text"
+                        }
                     ],
                     "desc": "Get the bounding box of the text (top-left origin)",
                     "desc_ja": "テキストのバウンディングボックスを取得（左上原点）",
@@ -11528,9 +11851,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getLineHeight",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get line height",
                     "desc_ja": "行の高さを取得",
@@ -11538,9 +11863,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getDefaultLineHeight",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the font's default line height (unaffected by setLineHeight)",
                     "desc_ja": "フォントの既定の行の高さを取得（setLineHeight の影響を受けない）",
@@ -11548,9 +11875,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getAscent",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the font ascent (distance from baseline to top)",
                     "desc_ja": "フォントのアセント（ベースラインから上端までの距離）を取得",
@@ -11558,9 +11887,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getDescent",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the font descent (distance from baseline to bottom; negative)",
                     "desc_ja": "フォントのディセント（ベースラインから下端までの距離、負値）を取得",
@@ -11568,9 +11899,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getSize",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get font size",
                     "desc_ja": "フォントサイズを取得",
@@ -11578,9 +11911,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getMemoryUsage",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get atlas memory usage in bytes",
                     "desc_ja": "アトラスのメモリ使用量（バイト）を取得",
@@ -11588,9 +11923,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getAtlasMemoryUsage",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get atlas memory usage in bytes (alias of getMemoryUsage)",
                     "desc_ja": "アトラスのメモリ使用量をバイトで取得（getMemoryUsage のエイリアス）",
@@ -11598,9 +11935,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:clearAtlas",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear font atlas (GPU memory freed, glyphs re-rasterized on next draw)",
                     "desc_ja": "フォントアトラスをクリア（GPU解放、次の描画時に再ラスタライズ）",
@@ -11608,9 +11947,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getAtlasCount",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get number of atlas pages",
                     "desc_ja": "アトラスページ数を取得",
@@ -11618,9 +11959,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getAtlas",
-                    "return": "AtlasState",
                     "signatures": [
-                        "index"
+                        {
+                            "ret": "AtlasState",
+                            "params": "index"
+                        }
                     ],
                     "desc": "Return the atlas page at the given index for debug visualization, or nullptr if out of range.",
                     "desc_ja": "デバッグ表示用に指定インデックスのアトラスページを返す。範囲外なら nullptr。",
@@ -11628,9 +11971,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getSampler",
-                    "return": "sg_sampler",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "sg_sampler",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the shared sokol-gfx sampler used for atlas rendering (advanced interop).",
                     "desc_ja": "アトラス描画に使う共有 sokol-gfx sampler を返す（高度な相互運用向け）。",
@@ -11638,9 +11983,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "font:getLoadedGlyphCount",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get number of loaded glyphs",
                     "desc_ja": "読み込み済みグリフ数を取得",
@@ -11650,9 +11997,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "Font.setDefaultOversampling",
-                    "return": "(nothing)",
                     "signatures": [
-                        "n"
+                        {
+                            "ret": "(nothing)",
+                            "params": "n"
+                        }
                     ],
                     "desc": "Set the oversampling factor newly loaded fonts start with; does not affect fonts already loaded.",
                     "desc_ja": "以降に読み込むフォントの既定のオーバーサンプリング倍率を設定する。読み込み済みのフォントには影響しない。",
@@ -11660,9 +12009,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Font.getDefaultOversampling",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the oversampling factor newly loaded fonts start with.",
                     "desc_ja": "以降に読み込むフォントの既定のオーバーサンプリング倍率を返す。",
@@ -11670,9 +12021,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Font.getTotalCacheMemoryUsage",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Total memory used by the shared font atlas cache across all fonts",
                     "desc_ja": "全フォントで共有されるフォントアトラスキャッシュの合計メモリ使用量",
@@ -11751,9 +12104,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "fullscreenShader:draw",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Draw a fullscreen quad with this shader applied",
                     "desc_ja": "この Shader を適用してフルスクリーンクアッドを描画",
@@ -11816,9 +12171,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "GraphicsBackend.isWebGPU",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True when running on WebGPU",
                     "desc_ja": "WebGPUで動作中なら true",
@@ -11826,9 +12183,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "GraphicsBackend.isWebGL2",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True when running on WebGL2 (GLES3 under Emscripten)",
                     "desc_ja": "WebGL2 (EmscriptenのGLES3) で動作中なら true",
@@ -11836,9 +12195,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "GraphicsBackend.isMetal",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True when running on Apple Metal",
                     "desc_ja": "Apple Metalで動作中なら true",
@@ -11846,9 +12207,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "GraphicsBackend.isD3D11",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True when running on Direct3D 11",
                     "desc_ja": "Direct3D 11で動作中なら true",
@@ -11856,9 +12219,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "GraphicsBackend.isVulkan",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True when running on Vulkan",
                     "desc_ja": "Vulkanで動作中なら true",
@@ -11866,9 +12231,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "GraphicsBackend.isOpenGL",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True when running on OpenGL (core or GLES3)",
                     "desc_ja": "OpenGL (coreまたはGLES3) で動作中なら true",
@@ -11876,9 +12243,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "GraphicsBackend.name",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"\n",
                     "desc_ja": "短いバックエンド名: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"\n",
@@ -11898,10 +12267,15 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "hasTexture:getTexture",
-                    "return": "Texture",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "Texture",
+                            "params": ""
+                        },
+                        {
+                            "ret": "Texture",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get internal texture",
                     "desc_ja": "内部テクスチャを取得",
@@ -11909,9 +12283,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:hasTexture",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return true if the underlying texture is allocated.",
                     "desc_ja": "内部テクスチャが確保済みなら true を返す。",
@@ -11919,10 +12295,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:draw",
-                    "return": "(nothing)",
                     "signatures": [
-                        "x, y",
-                        "x, y, w, h"
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, w, h"
+                        }
                     ],
                     "desc": "Draw the texture at the given position (and optional size).",
                     "desc_ja": "指定した位置（および任意のサイズ）にテクスチャを描画する。",
@@ -11930,9 +12311,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:setMinFilter",
-                    "return": "(nothing)",
                     "signatures": [
-                        "filter"
+                        {
+                            "ret": "(nothing)",
+                            "params": "filter"
+                        }
                     ],
                     "desc": "Set the texture minification filter.",
                     "desc_ja": "テクスチャの縮小フィルタを設定する。",
@@ -11940,9 +12323,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:setMagFilter",
-                    "return": "(nothing)",
                     "signatures": [
-                        "filter"
+                        {
+                            "ret": "(nothing)",
+                            "params": "filter"
+                        }
                     ],
                     "desc": "Set the texture magnification filter.",
                     "desc_ja": "テクスチャの拡大フィルタを設定する。",
@@ -11950,9 +12335,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:setFilter",
-                    "return": "(nothing)",
                     "signatures": [
-                        "filter"
+                        {
+                            "ret": "(nothing)",
+                            "params": "filter"
+                        }
                     ],
                     "desc": "Set both the minification and magnification filters.",
                     "desc_ja": "縮小・拡大フィルタの両方を設定する。",
@@ -11960,9 +12347,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:getMinFilter",
-                    "return": "TextureFilter",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "TextureFilter",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the texture minification filter.",
                     "desc_ja": "テクスチャの縮小フィルタを返す。",
@@ -11970,9 +12359,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:getMagFilter",
-                    "return": "TextureFilter",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "TextureFilter",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the texture magnification filter.",
                     "desc_ja": "テクスチャの拡大フィルタを返す。",
@@ -11980,9 +12371,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:setWrapU",
-                    "return": "(nothing)",
                     "signatures": [
-                        "wrap"
+                        {
+                            "ret": "(nothing)",
+                            "params": "wrap"
+                        }
                     ],
                     "desc": "Set the texture wrap mode on the U (horizontal) axis.",
                     "desc_ja": "テクスチャの U（水平）軸のラップモードを設定する。",
@@ -11990,9 +12383,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:setWrapV",
-                    "return": "(nothing)",
                     "signatures": [
-                        "wrap"
+                        {
+                            "ret": "(nothing)",
+                            "params": "wrap"
+                        }
                     ],
                     "desc": "Set the texture wrap mode on the V (vertical) axis.",
                     "desc_ja": "テクスチャの V（垂直）軸のラップモードを設定する。",
@@ -12000,9 +12395,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:setWrap",
-                    "return": "(nothing)",
                     "signatures": [
-                        "wrap"
+                        {
+                            "ret": "(nothing)",
+                            "params": "wrap"
+                        }
                     ],
                     "desc": "Set the texture wrap mode on both the U and V axes.",
                     "desc_ja": "テクスチャの U・V 両軸のラップモードを設定する。",
@@ -12010,9 +12407,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:getWrapU",
-                    "return": "TextureWrap",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "TextureWrap",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the texture wrap mode on the U axis.",
                     "desc_ja": "テクスチャの U 軸のラップモードを返す。",
@@ -12020,9 +12419,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:getWrapV",
-                    "return": "TextureWrap",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "TextureWrap",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the texture wrap mode on the V axis.",
                     "desc_ja": "テクスチャの V 軸のラップモードを返す。",
@@ -12030,9 +12431,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "hasTexture:save",
-                    "return": "boolean",
                     "signatures": [
-                        "path"
+                        {
+                            "ret": "boolean",
+                            "params": "path"
+                        }
                     ],
                     "desc": "Save the texture contents to a file; return true on success.",
                     "desc_ja": "テクスチャの内容をファイルに保存する。成功したら true を返す。",
@@ -12067,9 +12470,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "headlessSettings:setFps",
-                    "return": "HeadlessSettings",
                     "signatures": [
-                        "fps"
+                        {
+                            "ret": "HeadlessSettings",
+                            "params": "fps"
+                        }
                     ],
                     "desc": "Set the target update rate (chainable)",
                     "desc_ja": "目標 update レートを設定 (チェイン可能)",
@@ -12100,9 +12505,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "iesProfile:load",
-                    "return": "boolean",
                     "signatures": [
-                        "path"
+                        {
+                            "ret": "boolean",
+                            "params": "path"
+                        }
                     ],
                     "desc": "Load IES profile from file",
                     "desc_ja": "ファイルからIES profileを読み込み",
@@ -12110,9 +12517,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "iesProfile:loadFromString",
-                    "return": "boolean",
                     "signatures": [
-                        "data"
+                        {
+                            "ret": "boolean",
+                            "params": "data"
+                        }
                     ],
                     "desc": "Load IES profile from inline string data",
                     "desc_ja": "文字列データからIES profileを読み込み",
@@ -12120,9 +12529,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "iesProfile:isLoaded",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if profile is loaded",
                     "desc_ja": "profileが読み込み済みか確認",
@@ -12130,9 +12541,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "iesProfile:getMaxVerticalAngle",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get maximum vertical angle in the profile (radians)",
                     "desc_ja": "profileの最大垂直角を取得（ラジアン）",
@@ -12140,9 +12553,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "iesProfile:getMaxCandela",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get maximum candela value in the profile",
                     "desc_ja": "profileの最大カンデラ値を取得",
@@ -12150,9 +12565,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "iesProfile:getTextureWidth",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get width of the generated 1D lookup texture",
                     "desc_ja": "生成された1D lookup textureの幅を取得",
@@ -12160,9 +12577,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "iesProfile:getView",
-                    "return": "sg_view",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "sg_view",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the sokol-gfx texture view of the IES profile for pipeline binding (advanced interop).",
                     "desc_ja": "パイプラインバインド用に IES プロファイルの sokol-gfx テクスチャ view を返す（高度な相互運用向け）。",
@@ -12170,9 +12589,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "iesProfile:getSampler",
-                    "return": "sg_sampler",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "sg_sampler",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the sokol-gfx sampler of the IES profile for pipeline binding (advanced interop).",
                     "desc_ja": "パイプラインバインド用に IES プロファイルの sokol-gfx sampler を返す（高度な相互運用向け）。",
@@ -12420,9 +12841,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "iVec2:toVec2",
-                    "return": "Vec2",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec2",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to Vec2 (float)",
                     "desc_ja": "Vec2（float）に変換",
@@ -12480,9 +12903,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "iVec3:toVec3",
-                    "return": "Vec3",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec3",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to Vec3 (float)",
                     "desc_ja": "Vec3（float）に変換",
@@ -12490,9 +12915,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "iVec3:xy",
-                    "return": "IVec2",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "IVec2",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get XY components as IVec2",
                     "desc_ja": "XY成分をIVec2として取得",
@@ -12537,9 +12964,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "jsonReadReflector:unknownKeys",
-                    "return": "table",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the source keys that matched no reflected member (typos etc.); valid after reflectMembers runs.",
                     "desc_ja": "どの反映メンバにも一致しなかったソースキー（タイポ等）を返す。reflectMembers 実行後に有効。",
@@ -12547,9 +12976,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "jsonReadReflector:endGroup",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return from the nested JSON object.",
                     "desc_ja": "ネストした JSON オブジェクトから戻る。",
@@ -12575,9 +13006,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "jsonWriteReflector:endGroup",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Close the current nested JSON object.",
                     "desc_ja": "現在のネストした JSON オブジェクトを閉じる。",
@@ -12674,9 +13107,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "layoutMod:getDirection",
-                    "return": "LayoutDirection",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "LayoutDirection",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the layout direction (Vertical/Horizontal) (LayoutMod method) (C++ only)",
                     "desc_ja": "レイアウト方向（Vertical/Horizontal）を取得（LayoutModメソッド）（C++のみ）",
@@ -12684,9 +13119,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:setDirection",
-                    "return": "LayoutMod",
                     "signatures": [
-                        "dir"
+                        {
+                            "ret": "LayoutMod",
+                            "params": "dir"
+                        }
                     ],
                     "desc": "Set the layout direction and re-layout (LayoutMod method) (C++ only)",
                     "desc_ja": "レイアウト方向を設定して再配置（LayoutModメソッド）（C++のみ）",
@@ -12694,9 +13131,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:getSpacing",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the spacing between children (LayoutMod method) (C++ only)",
                     "desc_ja": "子要素間の間隔を取得（LayoutModメソッド）（C++のみ）",
@@ -12704,9 +13143,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:setSpacing",
-                    "return": "LayoutMod",
                     "signatures": [
-                        "spacing"
+                        {
+                            "ret": "LayoutMod",
+                            "params": "spacing"
+                        }
                     ],
                     "desc": "Set the spacing between children and re-layout (LayoutMod method) (C++ only)",
                     "desc_ja": "子要素間の間隔を設定して再配置（LayoutModメソッド）（C++のみ）",
@@ -12714,9 +13155,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:getCrossAxis",
-                    "return": "AxisMode",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "AxisMode",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the cross-axis sizing mode (LayoutMod method) (C++ only)",
                     "desc_ja": "クロス軸のサイズモードを取得（LayoutModメソッド）（C++のみ）",
@@ -12724,9 +13167,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:setCrossAxis",
-                    "return": "LayoutMod",
                     "signatures": [
-                        "mode"
+                        {
+                            "ret": "LayoutMod",
+                            "params": "mode"
+                        }
                     ],
                     "desc": "Set the cross-axis sizing mode and re-layout (LayoutMod method) (C++ only)",
                     "desc_ja": "クロス軸のサイズモードを設定して再配置（LayoutModメソッド）（C++のみ）",
@@ -12734,9 +13179,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:getMainAxis",
-                    "return": "AxisMode",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "AxisMode",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the main-axis sizing mode (LayoutMod method) (C++ only)",
                     "desc_ja": "メイン軸のサイズモードを取得（LayoutModメソッド）（C++のみ）",
@@ -12744,9 +13191,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:setMainAxis",
-                    "return": "LayoutMod",
                     "signatures": [
-                        "mode"
+                        {
+                            "ret": "LayoutMod",
+                            "params": "mode"
+                        }
                     ],
                     "desc": "Set the main-axis sizing mode and re-layout (LayoutMod method) (C++ only)",
                     "desc_ja": "メイン軸のサイズモードを設定して再配置（LayoutModメソッド）（C++のみ）",
@@ -12754,9 +13203,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:getPaddingLeft",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the left padding (LayoutMod method) (C++ only)",
                     "desc_ja": "左パディングを取得（LayoutModメソッド）（C++のみ）",
@@ -12764,9 +13215,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:getPaddingTop",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the top padding (LayoutMod method) (C++ only)",
                     "desc_ja": "上パディングを取得（LayoutModメソッド）（C++のみ）",
@@ -12774,9 +13227,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:getPaddingRight",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the right padding (LayoutMod method) (C++ only)",
                     "desc_ja": "右パディングを取得（LayoutModメソッド）（C++のみ）",
@@ -12784,9 +13239,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:getPaddingBottom",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the bottom padding (LayoutMod method) (C++ only)",
                     "desc_ja": "下パディングを取得（LayoutModメソッド）（C++のみ）",
@@ -12794,11 +13251,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:setPadding",
-                    "return": "LayoutMod",
                     "signatures": [
-                        "padding",
-                        "vertical, horizontal",
-                        "top, right, bottom, left"
+                        {
+                            "ret": "LayoutMod",
+                            "params": "padding"
+                        },
+                        {
+                            "ret": "LayoutMod",
+                            "params": "vertical, horizontal"
+                        },
+                        {
+                            "ret": "LayoutMod",
+                            "params": "top, right, bottom, left"
+                        }
                     ],
                     "desc": "Set padding (uniform, vertical/horizontal, or per-side) and re-layout (LayoutMod method) (C++ only)",
                     "desc_ja": "パディング（一律、縦横、または各辺）を設定して再配置（LayoutModメソッド）（C++のみ）",
@@ -12806,9 +13271,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:setPaddingLeft",
-                    "return": "LayoutMod",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "LayoutMod",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Set the left padding and re-layout (LayoutMod method) (C++ only)",
                     "desc_ja": "左パディングを設定して再配置（LayoutModメソッド）（C++のみ）",
@@ -12816,9 +13283,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:setPaddingTop",
-                    "return": "LayoutMod",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "LayoutMod",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Set the top padding and re-layout (LayoutMod method) (C++ only)",
                     "desc_ja": "上パディングを設定して再配置（LayoutModメソッド）（C++のみ）",
@@ -12826,9 +13295,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:setPaddingRight",
-                    "return": "LayoutMod",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "LayoutMod",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Set the right padding and re-layout (LayoutMod method) (C++ only)",
                     "desc_ja": "右パディングを設定して再配置（LayoutModメソッド）（C++のみ）",
@@ -12836,9 +13307,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:setPaddingBottom",
-                    "return": "LayoutMod",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "LayoutMod",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Set the bottom padding and re-layout (LayoutMod method) (C++ only)",
                     "desc_ja": "下パディングを設定して再配置（LayoutModメソッド）（C++のみ）",
@@ -12846,9 +13319,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "layoutMod:updateLayout",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Recalculate layout (call after adding/removing children) (C++ only)",
                     "desc_ja": "レイアウトを再計算（子の追加/削除後に呼ぶ）（C++のみ）",
@@ -13422,9 +13897,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "loadResult:ok",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "true if the load succeeded (error == LoadError::None)",
                     "desc_ja": "読み込みが成功していれば true（error == LoadError::None）",
@@ -13434,9 +13911,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "LoadResult.success",
-                    "return": "LoadResult",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "LoadResult",
+                            "params": ""
+                        }
                     ],
                     "desc": "Make a success result (static)",
                     "desc_ja": "成功の結果を作る（static）",
@@ -13444,9 +13923,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "LoadResult.fail",
-                    "return": "LoadResult",
                     "signatures": [
-                        "e, msg = \"\""
+                        {
+                            "ret": "LoadResult",
+                            "params": "e, msg = \"\""
+                        }
                     ],
                     "desc": "Make a failure result with an error kind and optional message (static)",
                     "desc_ja": "エラー種別と任意のメッセージ付きで失敗の結果を作る（static）",
@@ -13578,9 +14059,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "logger:log",
-                    "return": "(nothing)",
                     "signatures": [
-                        "level, message"
+                        {
+                            "ret": "(nothing)",
+                            "params": "level, message"
+                        }
                     ],
                     "desc": "Emit a log message at the given level",
                     "desc_ja": "指定レベルでログメッセージを出力",
@@ -13588,9 +14071,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "logger:setConsoleLogLevel",
-                    "return": "(nothing)",
                     "signatures": [
-                        "level"
+                        {
+                            "ret": "(nothing)",
+                            "params": "level"
+                        }
                     ],
                     "desc": "Set the minimum console log level",
                     "desc_ja": "コンソールの最小ログレベルを設定",
@@ -13598,9 +14083,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "logger:getConsoleLogLevel",
-                    "return": "LogLevel",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "LogLevel",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the current console log level",
                     "desc_ja": "現在のコンソールログレベルを取得",
@@ -13608,9 +14095,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "logger:setLogFile",
-                    "return": "boolean",
                     "signatures": [
-                        "path"
+                        {
+                            "ret": "boolean",
+                            "params": "path"
+                        }
                     ],
                     "desc": "Open a file to receive log output",
                     "desc_ja": "ログ出力を受けるファイルを開く",
@@ -13618,9 +14107,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "logger:closeFile",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Close the current log file",
                     "desc_ja": "現在のログファイルを閉じる",
@@ -13628,9 +14119,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "logger:setFileLogLevel",
-                    "return": "(nothing)",
                     "signatures": [
-                        "level"
+                        {
+                            "ret": "(nothing)",
+                            "params": "level"
+                        }
                     ],
                     "desc": "Set the minimum file log level",
                     "desc_ja": "ファイルの最小ログレベルを設定",
@@ -13638,9 +14131,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "logger:getFileLogLevel",
-                    "return": "LogLevel",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "LogLevel",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the current file log level",
                     "desc_ja": "現在のファイルログレベルを取得",
@@ -13648,9 +14143,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "logger:getLogFilePath",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the path of the current log file",
                     "desc_ja": "現在のログファイルのパスを取得",
@@ -13658,9 +14155,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "logger:isFileOpen",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check whether a log file is currently open",
                     "desc_ja": "ログファイルが現在開いているか確認",
@@ -14434,9 +14933,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "mesh:setMode",
-                    "return": "Mesh",
                     "signatures": [
-                        "mode"
+                        {
+                            "ret": "Mesh",
+                            "params": "mode"
+                        }
                     ],
                     "desc": "Set primitive mode (Triangles, Lines, Points, etc.)",
                     "desc_ja": "プリミティブモードを設定",
@@ -14444,9 +14945,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getMode",
-                    "return": "PrimitiveMode",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "PrimitiveMode",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get current primitive mode",
                     "desc_ja": "現在のプリミティブモードを取得",
@@ -14454,11 +14957,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addVertex",
-                    "return": "Mesh",
                     "signatures": [
-                        "x, y, z = 0.0",
-                        "v",
-                        "v"
+                        {
+                            "ret": "Mesh",
+                            "params": "x, y, z = 0.0"
+                        },
+                        {
+                            "ret": "Mesh",
+                            "params": "v"
+                        },
+                        {
+                            "ret": "Mesh",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Add a vertex",
                     "desc_ja": "頂点を追加",
@@ -14466,9 +14977,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addVertices",
-                    "return": "Mesh",
                     "signatures": [
-                        "verts"
+                        {
+                            "ret": "Mesh",
+                            "params": "verts"
+                        }
                     ],
                     "desc": "Add multiple vertices",
                     "desc_ja": "複数の頂点を追加",
@@ -14476,10 +14989,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getVertices",
-                    "return": "table",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        },
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get all vertices",
                     "desc_ja": "全頂点を取得",
@@ -14487,9 +15005,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getNumVertices",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get vertex count",
                     "desc_ja": "頂点数を取得",
@@ -14497,10 +15017,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addColor",
-                    "return": "Mesh",
                     "signatures": [
-                        "c",
-                        "r, g, b, a = 1.0"
+                        {
+                            "ret": "Mesh",
+                            "params": "c"
+                        },
+                        {
+                            "ret": "Mesh",
+                            "params": "r, g, b, a = 1.0"
+                        }
                     ],
                     "desc": "Add a vertex color",
                     "desc_ja": "頂点カラーを追加",
@@ -14508,9 +15033,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addColors",
-                    "return": "Mesh",
                     "signatures": [
-                        "cols"
+                        {
+                            "ret": "Mesh",
+                            "params": "cols"
+                        }
                     ],
                     "desc": "Add multiple vertex colors",
                     "desc_ja": "複数の頂点カラーを追加",
@@ -14518,10 +15045,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getColors",
-                    "return": "table",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        },
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get all vertex colors",
                     "desc_ja": "全頂点カラーを取得",
@@ -14529,9 +15061,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getNumColors",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get vertex color count",
                     "desc_ja": "頂点カラー数を取得",
@@ -14539,9 +15073,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:hasColors",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if mesh has vertex colors",
                     "desc_ja": "頂点カラーがあるか確認",
@@ -14549,9 +15085,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addIndex",
-                    "return": "Mesh",
                     "signatures": [
-                        "index"
+                        {
+                            "ret": "Mesh",
+                            "params": "index"
+                        }
                     ],
                     "desc": "Add an index",
                     "desc_ja": "インデックスを追加",
@@ -14559,9 +15097,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addIndices",
-                    "return": "Mesh",
                     "signatures": [
-                        "inds"
+                        {
+                            "ret": "Mesh",
+                            "params": "inds"
+                        }
                     ],
                     "desc": "Add multiple indices",
                     "desc_ja": "複数のインデックスを追加",
@@ -14569,9 +15109,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addTriangle",
-                    "return": "Mesh",
                     "signatures": [
-                        "i0, i1, i2"
+                        {
+                            "ret": "Mesh",
+                            "params": "i0, i1, i2"
+                        }
                     ],
                     "desc": "Add a triangle (3 indices)",
                     "desc_ja": "三角形を追加（インデックス3つ）",
@@ -14579,10 +15121,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getIndices",
-                    "return": "table",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        },
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get all indices",
                     "desc_ja": "全インデックスを取得",
@@ -14590,9 +15137,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getNumIndices",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get index count",
                     "desc_ja": "インデックス数を取得",
@@ -14600,9 +15149,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:hasIndices",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if mesh has indices",
                     "desc_ja": "インデックスがあるか確認",
@@ -14610,10 +15161,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addNormal",
-                    "return": "Mesh",
                     "signatures": [
-                        "nx, ny, nz",
-                        "n"
+                        {
+                            "ret": "Mesh",
+                            "params": "nx, ny, nz"
+                        },
+                        {
+                            "ret": "Mesh",
+                            "params": "n"
+                        }
                     ],
                     "desc": "Add a normal vector",
                     "desc_ja": "法線ベクトルを追加",
@@ -14621,9 +15177,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addNormals",
-                    "return": "Mesh",
                     "signatures": [
-                        "norms"
+                        {
+                            "ret": "Mesh",
+                            "params": "norms"
+                        }
                     ],
                     "desc": "Add multiple normals",
                     "desc_ja": "複数の法線を追加",
@@ -14631,9 +15189,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:setNormal",
-                    "return": "Mesh",
                     "signatures": [
-                        "index, n"
+                        {
+                            "ret": "Mesh",
+                            "params": "index, n"
+                        }
                     ],
                     "desc": "Set normal at index",
                     "desc_ja": "指定インデックスの法線を設定",
@@ -14641,9 +15201,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getNormal",
-                    "return": "Vec3",
                     "signatures": [
-                        "index"
+                        {
+                            "ret": "Vec3",
+                            "params": "index"
+                        }
                     ],
                     "desc": "Get normal at index",
                     "desc_ja": "指定インデックスの法線を取得",
@@ -14651,10 +15213,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getNormals",
-                    "return": "table",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        },
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get all normals",
                     "desc_ja": "全法線を取得",
@@ -14662,9 +15229,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getNumNormals",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get normal count",
                     "desc_ja": "法線数を取得",
@@ -14672,9 +15241,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:hasNormals",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if mesh has normals",
                     "desc_ja": "法線があるか確認",
@@ -14682,10 +15253,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addTexCoord",
-                    "return": "Mesh",
                     "signatures": [
-                        "u, v",
-                        "t"
+                        {
+                            "ret": "Mesh",
+                            "params": "u, v"
+                        },
+                        {
+                            "ret": "Mesh",
+                            "params": "t"
+                        }
                     ],
                     "desc": "Add a texture coordinate",
                     "desc_ja": "テクスチャ座標を追加",
@@ -14693,10 +15269,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getTexCoords",
-                    "return": "table",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        },
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get all texture coordinates",
                     "desc_ja": "全テクスチャ座標を取得",
@@ -14704,9 +15285,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getNumTexCoords",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get texture coordinate count",
                     "desc_ja": "テクスチャ座標数を取得",
@@ -14714,9 +15297,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:hasTexCoords",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if mesh has texture coordinates",
                     "desc_ja": "テクスチャ座標があるか確認",
@@ -14724,9 +15309,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:hasValidTexCoords",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if texture coordinates match vertex count",
                     "desc_ja": "テクスチャ座標が頂点数と一致するか確認",
@@ -14734,11 +15321,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:addTangent",
-                    "return": "Mesh",
                     "signatures": [
-                        "tx, ty, tz, tw = 1.0",
-                        "t",
-                        "t, w = 1.0"
+                        {
+                            "ret": "Mesh",
+                            "params": "tx, ty, tz, tw = 1.0"
+                        },
+                        {
+                            "ret": "Mesh",
+                            "params": "t"
+                        },
+                        {
+                            "ret": "Mesh",
+                            "params": "t, w = 1.0"
+                        }
                     ],
                     "desc": "Add a tangent vector (xyz direction + w handedness)",
                     "desc_ja": "接線ベクトルを追加（xyz方向 + w利き手）",
@@ -14746,10 +15341,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getTangents",
-                    "return": "table",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        },
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the tangent array (mutable)",
                     "desc_ja": "接線配列を取得（変更可能）",
@@ -14757,9 +15357,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getNumTangents",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of tangents",
                     "desc_ja": "接線の数",
@@ -14767,9 +15369,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:hasTangents",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the mesh has tangents",
                     "desc_ja": "メッシュが接線を持つかどうか",
@@ -14777,9 +15381,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:clear",
-                    "return": "Mesh",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mesh",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear all mesh data",
                     "desc_ja": "全メッシュデータをクリア",
@@ -14787,9 +15393,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:clearVertices",
-                    "return": "Mesh",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mesh",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear vertices only",
                     "desc_ja": "頂点のみクリア",
@@ -14797,9 +15405,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:clearNormals",
-                    "return": "Mesh",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mesh",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear normals only",
                     "desc_ja": "法線のみクリア",
@@ -14807,9 +15417,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:clearColors",
-                    "return": "Mesh",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mesh",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear colors only",
                     "desc_ja": "色のみクリア",
@@ -14817,9 +15429,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:clearIndices",
-                    "return": "Mesh",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mesh",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear indices only",
                     "desc_ja": "インデックスのみクリア",
@@ -14827,9 +15441,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:clearTexCoords",
-                    "return": "Mesh",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mesh",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear texture coordinates only",
                     "desc_ja": "テクスチャ座標のみクリア",
@@ -14837,9 +15453,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:clearTangents",
-                    "return": "Mesh",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mesh",
+                            "params": ""
+                        }
                     ],
                     "desc": "Remove all tangents",
                     "desc_ja": "すべての接線を削除",
@@ -14847,10 +15465,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:translate",
-                    "return": "Mesh",
                     "signatures": [
-                        "x, y, z",
-                        "offset"
+                        {
+                            "ret": "Mesh",
+                            "params": "x, y, z"
+                        },
+                        {
+                            "ret": "Mesh",
+                            "params": "offset"
+                        }
                     ],
                     "desc": "Translate all vertices",
                     "desc_ja": "全頂点を移動",
@@ -14858,9 +15481,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:rotateX",
-                    "return": "Mesh",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "Mesh",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Rotate mesh around X axis",
                     "desc_ja": "X軸周りにメッシュを回転",
@@ -14868,9 +15493,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:rotateY",
-                    "return": "Mesh",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "Mesh",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Rotate mesh around Y axis",
                     "desc_ja": "Y軸周りにメッシュを回転",
@@ -14878,9 +15505,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:rotateZ",
-                    "return": "Mesh",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "Mesh",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Rotate mesh around Z axis",
                     "desc_ja": "Z軸周りにメッシュを回転",
@@ -14888,11 +15517,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:scale",
-                    "return": "Mesh",
                     "signatures": [
-                        "x, y, z",
-                        "s",
-                        "s"
+                        {
+                            "ret": "Mesh",
+                            "params": "x, y, z"
+                        },
+                        {
+                            "ret": "Mesh",
+                            "params": "s"
+                        },
+                        {
+                            "ret": "Mesh",
+                            "params": "s"
+                        }
                     ],
                     "desc": "Scale mesh",
                     "desc_ja": "メッシュをスケール",
@@ -14900,9 +15537,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:transform",
-                    "return": "Mesh",
                     "signatures": [
-                        "m"
+                        {
+                            "ret": "Mesh",
+                            "params": "m"
+                        }
                     ],
                     "desc": "Apply transformation matrix",
                     "desc_ja": "変換行列を適用",
@@ -14910,9 +15549,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:append",
-                    "return": "Mesh",
                     "signatures": [
-                        "other"
+                        {
+                            "ret": "Mesh",
+                            "params": "other"
+                        }
                     ],
                     "desc": "Append another mesh",
                     "desc_ja": "別のメッシュを追加",
@@ -14920,11 +15561,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:draw",
-                    "return": "(nothing)",
                     "signatures": [
-                        "",
-                        "texture",
-                        "image"
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "texture"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "image"
+                        }
                     ],
                     "desc": "Draw the mesh",
                     "desc_ja": "メッシュを描画",
@@ -14932,9 +15581,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:drawNoLighting",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Draw the mesh without lighting",
                     "desc_ja": "ライティングなしでメッシュを描画",
@@ -14942,9 +15593,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:drawWithLighting",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Draw the mesh with lighting",
                     "desc_ja": "ライティングありでメッシュを描画",
@@ -14952,9 +15605,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:drawNoLightingWithTexture",
-                    "return": "(nothing)",
                     "signatures": [
-                        "texture"
+                        {
+                            "ret": "(nothing)",
+                            "params": "texture"
+                        }
                     ],
                     "desc": "Draw the mesh textured without lighting",
                     "desc_ja": "ライティングなしでテクスチャ付きメッシュを描画",
@@ -14962,9 +15617,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:drawWireframe",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Draw mesh as wireframe",
                     "desc_ja": "ワイヤーフレームで描画",
@@ -14972,9 +15629,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:markGpuDirty",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Mark GPU buffers stale after editing data in place",
                     "desc_ja": "データを直接編集した後にGPUバッファを古い扱いにする",
@@ -14982,9 +15641,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:uploadToGpu",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Upload the mesh's vertex/index data to its GPU buffers now (for the PBR / custom-render path).",
                     "desc_ja": "メッシュの頂点・インデックスデータを今すぐ GPU バッファにアップロード（PBR / 自前描画パス向け）。",
@@ -14992,9 +15653,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:drawGpuPbr",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Draw the mesh through the GPU PBR pipeline (retained GPU buffer + active lights, material and environment).",
                     "desc_ja": "GPU PBRパイプラインでメッシュを描画（GPU常駐バッファ＋アクティブなライト・マテリアル・環境を使用）。",
@@ -15002,9 +15665,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:drawGpuPoints",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Draw a Points-mode mesh as a GPU-resident point cloud (Square/Round splats or 1px Pixel points).",
                     "desc_ja": "Points モードのメッシュを GPU常駐の点群として描画（Square/Round スプラット、または 1px の Pixel 点）。",
@@ -15012,9 +15677,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:uploadPointsToGpu",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Upload the point cloud (positions + colors) to its GPU buffer now (for the Points / custom-render path).",
                     "desc_ja": "点群（位置＋色）を今すぐ GPU バッファにアップロード（Points / 自前描画パス向け）。",
@@ -15022,9 +15689,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getGpuVertexBuffer",
-                    "return": "sg_buffer",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "sg_buffer",
+                            "params": ""
+                        }
                     ],
                     "desc": "The sokol-gfx vertex buffer handle backing the mesh (advanced interop).",
                     "desc_ja": "メッシュを支える sokol-gfx 頂点バッファハンドル（高度な相互運用向け）。",
@@ -15032,9 +15701,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getGpuIndexBuffer",
-                    "return": "sg_buffer",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "sg_buffer",
+                            "params": ""
+                        }
                     ],
                     "desc": "The sokol-gfx index buffer handle backing the mesh, or an empty handle if non-indexed (advanced interop).",
                     "desc_ja": "メッシュを支える sokol-gfx インデックスバッファハンドル（非インデックスなら空ハンドル、高度な相互運用向け）。",
@@ -15042,9 +15713,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getGpuVertexCount",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of vertices currently uploaded to the GPU vertex buffer. Pairs with getGpuVertexBuffer (e.g. as the draw count for a custom pipeline).",
                     "desc_ja": "現在 GPU 頂点バッファにアップロードされている頂点数。getGpuVertexBuffer と組で使う（自前パイプラインの描画頂点数など）。",
@@ -15052,9 +15725,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getGpuIndexCount",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of indices currently uploaded to the GPU index buffer (0 if the mesh is non-indexed). Pairs with getGpuIndexBuffer for custom rendering.",
                     "desc_ja": "現在 GPU インデックスバッファにアップロードされているインデックス数（非インデックスメッシュなら 0）。自前描画では getGpuIndexBuffer と組で使う。",
@@ -15062,9 +15737,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getGpuPointBuffer",
-                    "return": "sg_buffer",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "sg_buffer",
+                            "params": ""
+                        }
                     ],
                     "desc": "The sokol-gfx buffer handle holding the uploaded point data, position + color per point (advanced interop).",
                     "desc_ja": "アップロード済みの点データ（点ごとに位置＋色）を保持する sokol-gfx バッファハンドル（高度な相互運用向け）。",
@@ -15072,9 +15749,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "mesh:getGpuPointCount",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of points currently uploaded to the GPU point buffer (PrimitiveMode::Points). Pairs with getGpuPointBuffer for custom rendering.",
                     "desc_ja": "現在 GPU 点バッファにアップロードされている点数（PrimitiveMode::Points）。自前描画では getGpuPointBuffer と組で使う。",
@@ -15185,10 +15864,15 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "mod:getOwner",
-                    "return": "Node",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "Node",
+                            "params": ""
+                        },
+                        {
+                            "ret": "Node",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the owner Node this Mod is attached to.",
                     "desc_ja": "この Mod がアタッチされている所有 Node を取得",
@@ -15313,9 +15997,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "mouseDragEventArgs:syncLegacy",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Copy the canonical pos/delta fields into the deprecated x/y/deltaX/deltaY mirror fields (legacy mirrors scheduled for removal in v1.0).",
                     "desc_ja": "正規の pos/delta を非推奨の x/y/deltaX/deltaY ミラーフィールドにコピーする（レガシーミラーは v1.0 で削除予定）。",
@@ -15414,9 +16100,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "mouseEventArgs:syncLegacy",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Copy the canonical pos field into the deprecated x/y mirror fields (legacy mirrors scheduled for removal in v1.0).",
                     "desc_ja": "正規の pos を非推奨の x/y ミラーフィールドにコピーする（レガシーミラーは v1.0 で削除予定）。",
@@ -15534,9 +16222,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "mouseMoveEventArgs:syncLegacy",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Copy the canonical pos/delta fields into the deprecated x/y/deltaX/deltaY mirror fields (legacy mirrors scheduled for removal in v1.0).",
                     "desc_ja": "正規の pos/delta を非推奨の x/y/deltaX/deltaY ミラーフィールドにコピーする（レガシーミラーは v1.0 で削除予定）。",
@@ -15614,9 +16304,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "networkInterface:getName",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Interface name",
                     "desc_ja": "インターフェース名",
@@ -15624,9 +16316,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "networkInterface:getAddress",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "IP address",
                     "desc_ja": "IPアドレス",
@@ -15634,9 +16328,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "networkInterface:getNetmask",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Subnet mask",
                     "desc_ja": "サブネットマスク",
@@ -15644,9 +16340,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "networkInterface:getMac",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "MAC address",
                     "desc_ja": "MACアドレス",
@@ -15654,9 +16352,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "networkInterface:getIsIPv4",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the address is IPv4",
                     "desc_ja": "アドレスがIPv4か",
@@ -15664,9 +16364,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "networkInterface:getIsLoopback",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether this is a loopback interface",
                     "desc_ja": "ループバックインターフェースか",
@@ -15674,9 +16376,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "networkInterface:getIsUp",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the link is up",
                     "desc_ja": "リンクが有効か",
@@ -15719,9 +16423,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "node:setup",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Called once at start",
                     "desc_ja": "開始時に一度呼ばれる",
@@ -15729,9 +16435,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:update",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Called every frame before draw",
                     "desc_ja": "毎フレーム、drawの前に呼ばれる",
@@ -15739,9 +16447,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:draw",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Called every frame after update",
                     "desc_ja": "毎フレーム、updateの後に呼ばれる",
@@ -15749,9 +16459,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:cleanup",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Called once before exit (optional user callback for cleanup)",
                     "desc_ja": "終了前に一度呼ばれる（オプショナルなクリーンアップコールバック）",
@@ -15759,9 +16471,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:addChild",
-                    "return": "(nothing)",
                     "signatures": [
-                        "child, keepGlobalPosition = false"
+                        {
+                            "ret": "(nothing)",
+                            "params": "child, keepGlobalPosition = false"
+                        }
                     ],
                     "desc": "Add a child node (C++ only)",
                     "desc_ja": "子ノードを追加（C++のみ）",
@@ -15769,9 +16483,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:insertChild",
-                    "return": "(nothing)",
                     "signatures": [
-                        "index, child, keepGlobalPosition = false"
+                        {
+                            "ret": "(nothing)",
+                            "params": "index, child, keepGlobalPosition = false"
+                        }
                     ],
                     "desc": "Insert a child node at a specific index (C++ only)",
                     "desc_ja": "指定インデックスに子ノードを挿入（C++のみ）",
@@ -15779,9 +16495,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:removeChild",
-                    "return": "(nothing)",
                     "signatures": [
-                        "child"
+                        {
+                            "ret": "(nothing)",
+                            "params": "child"
+                        }
                     ],
                     "desc": "Remove a child node (C++ only)",
                     "desc_ja": "子ノードを削除（C++のみ）",
@@ -15789,9 +16507,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:removeAllChildren",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Remove all child nodes (C++ only)",
                     "desc_ja": "すべての子ノードを削除（C++のみ）",
@@ -15799,9 +16519,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:onChildAdded",
-                    "return": "(nothing)",
                     "signatures": [
-                        "child"
+                        {
+                            "ret": "(nothing)",
+                            "params": "child"
+                        }
                     ],
                     "desc": "Callback fired when a child is added (overridable) (C++ only)",
                     "desc_ja": "子が追加されたときに呼ばれるコールバック（オーバーライド可能）（C++のみ）",
@@ -15809,9 +16531,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:onChildRemoved",
-                    "return": "(nothing)",
                     "signatures": [
-                        "child"
+                        {
+                            "ret": "(nothing)",
+                            "params": "child"
+                        }
                     ],
                     "desc": "Callback fired when a child is removed (overridable) (C++ only)",
                     "desc_ja": "子が削除されたときに呼ばれるコールバック（オーバーライド可能）（C++のみ）",
@@ -15819,9 +16543,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getParent",
-                    "return": "Ptr",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Ptr",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the parent node (null if none) (C++ only)",
                     "desc_ja": "親ノードを取得（なければnull）（C++のみ）",
@@ -15829,9 +16555,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getChildren",
-                    "return": "table",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get a copy of the child node list (safe to iterate while modifying) (C++ only)",
                     "desc_ja": "子ノードのリスト（コピー、走査中の変更に安全）を取得（C++のみ）",
@@ -15839,9 +16567,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getChildCount",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the number of child nodes (C++ only)",
                     "desc_ja": "子ノードの数を取得（C++のみ）",
@@ -15849,9 +16579,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getChildIndex",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "This node's index among its parent's children (-1 if no parent) (C++ only)",
                     "desc_ja": "親の子の中でのこのノードのインデックス（親がなければ-1）（C++のみ）",
@@ -15859,9 +16591,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:moveToFront",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Move this node to the end of its parent's child list — drawn last, on top of siblings. No-op if no parent or already last (C++ only)",
                     "desc_ja": "親の子リストの末尾へ移動。最後に描画され、兄弟の最前面に表示される。親がない / すでに末尾の場合は何もしない（C++のみ）",
@@ -15869,9 +16603,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:moveToBack",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Move this node to the beginning of its parent's child list — drawn first, beneath siblings. No-op if no parent or already first (C++ only)",
                     "desc_ja": "親の子リストの先頭へ移動。最初に描画され、兄弟の最背面に表示される。親がない / すでに先頭の場合は何もしない（C++のみ）",
@@ -15879,9 +16615,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:isActive",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the node is active (inactive: update and draw are skipped) (C++ only)",
                     "desc_ja": "ノードがアクティブか（非アクティブ時はupdate/drawがスキップされる）（C++のみ）",
@@ -15889,9 +16627,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setActive",
-                    "return": "(nothing)",
                     "signatures": [
-                        "active"
+                        {
+                            "ret": "(nothing)",
+                            "params": "active"
+                        }
                     ],
                     "desc": "Set the active state (inactive: update and draw are skipped) (C++ only)",
                     "desc_ja": "アクティブ状態を設定（非アクティブ時はupdate/drawがスキップされる）（C++のみ）",
@@ -15899,9 +16639,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:isVisible",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the node is visible (invisible: only draw is skipped) (C++ only)",
                     "desc_ja": "ノードが表示状態か（非表示時はdrawのみスキップされる）（C++のみ）",
@@ -15909,9 +16651,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setVisible",
-                    "return": "(nothing)",
                     "signatures": [
-                        "visible"
+                        {
+                            "ret": "(nothing)",
+                            "params": "visible"
+                        }
                     ],
                     "desc": "Set the visible state (invisible: only draw is skipped) (C++ only)",
                     "desc_ja": "表示状態を設定（非表示時はdrawのみスキップされる）（C++のみ）",
@@ -15919,9 +16663,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:destroy",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Mark node for deferred removal from scene graph (C++ only)",
                     "desc_ja": "ノードを削除予約する（次のupdate時にツリーから除去、C++のみ）",
@@ -15929,9 +16675,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:isDead",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if node is marked for destruction (C++ only)",
                     "desc_ja": "ノードが削除予約されているか（C++のみ）",
@@ -15939,9 +16687,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:enableEvents",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Enable mouse/key events for this node (C++ only)",
                     "desc_ja": "このノードのマウス/キーイベントを有効化（C++のみ）",
@@ -15949,9 +16699,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:disableEvents",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Disable mouse/key events for this node (C++ only)",
                     "desc_ja": "このノードのマウス/キーイベントを無効化（C++のみ）",
@@ -15959,9 +16711,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:isEventsEnabled",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether events are enabled (only such nodes are hit-test targets) (C++ only)",
                     "desc_ja": "イベントが有効か（有効なノードのみヒットテスト対象）（C++のみ）",
@@ -15969,9 +16723,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:isMouseOver",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the mouse is over this node (auto-updated each frame, O(1)) (C++ only)",
                     "desc_ja": "マウスがこのノード上にあるか（毎フレーム自動更新、O(1)）（C++のみ）",
@@ -15979,9 +16735,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setName",
-                    "return": "Node",
                     "signatures": [
-                        "name"
+                        {
+                            "ret": "Node",
+                            "params": "name"
+                        }
                     ],
                     "desc": "Set an optional instance name (chainable) (C++ only)",
                     "desc_ja": "任意のインスタンス名を設定（メソッドチェーン可能）（C++のみ）",
@@ -15989,9 +16747,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getName",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the optional instance name (empty unless setName() was called) (C++ only)",
                     "desc_ja": "任意のインスタンス名を取得（setName()未呼び出しなら空）（C++のみ）",
@@ -15999,9 +16759,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:hasName",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether an instance name has been set (C++ only)",
                     "desc_ja": "インスタンス名が設定されているか（C++のみ）",
@@ -16009,9 +16771,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getTypeName",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "C++ class name (most-derived type) via RTTI, e.g. \"trussc::RectNode\" (cached) (C++ only)\n",
                     "desc_ja": "RTTIによるC++クラス名（最派生型）。例 \"trussc::RectNode\"（キャッシュ済み）（C++のみ）\n",
@@ -16019,9 +16783,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getDisplayName",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Short type-anchored label for trees / inspectors, e.g. \"RectNode\" or \"RectNode (play)\" (C++ only)\n",
                     "desc_ja": "ツリー/インスペクタ向けの短い型ベースのラベル。例 \"RectNode\" や \"RectNode (play)\"（C++のみ）\n",
@@ -16029,9 +16795,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getInstanceId",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Per-process unique id, assigned once at construction and stable across reparenting (C++ only)",
                     "desc_ja": "プロセス内で一意のID。生成時に一度割り当てられ、再ペアレント後も変わらない（C++のみ）",
@@ -16039,9 +16807,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:findByInstanceId",
-                    "return": "Node",
                     "signatures": [
-                        "id"
+                        {
+                            "ret": "Node",
+                            "params": "id"
+                        }
                     ],
                     "desc": "Find a node in this subtree (self included) by instance id, depth-first (null if not found) (C++ only)",
                     "desc_ja": "このサブツリー（自身を含む）からインスタンスIDでノードを深さ優先で検索（なければnull）（C++のみ）",
@@ -16049,9 +16819,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getPos",
-                    "return": "Vec3",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec3",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get local position (C++ only)",
                     "desc_ja": "ローカル位置を取得（C++のみ）",
@@ -16059,9 +16831,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getX",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get local X position (C++ only)",
                     "desc_ja": "ローカルX座標を取得（C++のみ）",
@@ -16069,9 +16843,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getY",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get local Y position (C++ only)",
                     "desc_ja": "ローカルY座標を取得（C++のみ）",
@@ -16079,9 +16855,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getZ",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get local Z position (C++ only)",
                     "desc_ja": "ローカルZ座標を取得（C++のみ）",
@@ -16089,10 +16867,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setPos",
-                    "return": "(nothing)",
                     "signatures": [
-                        "pos",
-                        "x, y, z = 0.0"
+                        {
+                            "ret": "(nothing)",
+                            "params": "pos"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, z = 0.0"
+                        }
                     ],
                     "desc": "Set local position (C++ only)",
                     "desc_ja": "ローカル位置を設定（C++のみ）",
@@ -16100,9 +16883,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setX",
-                    "return": "(nothing)",
                     "signatures": [
-                        "x"
+                        {
+                            "ret": "(nothing)",
+                            "params": "x"
+                        }
                     ],
                     "desc": "Set local X position (C++ only)",
                     "desc_ja": "ローカルX座標を設定（C++のみ）",
@@ -16110,9 +16895,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setY",
-                    "return": "(nothing)",
                     "signatures": [
-                        "y"
+                        {
+                            "ret": "(nothing)",
+                            "params": "y"
+                        }
                     ],
                     "desc": "Set local Y position (C++ only)",
                     "desc_ja": "ローカルY座標を設定（C++のみ）",
@@ -16120,9 +16907,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setZ",
-                    "return": "(nothing)",
                     "signatures": [
-                        "z"
+                        {
+                            "ret": "(nothing)",
+                            "params": "z"
+                        }
                     ],
                     "desc": "Set local Z position (C++ only)",
                     "desc_ja": "ローカルZ座標を設定（C++のみ）",
@@ -16130,9 +16919,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getQuaternion",
-                    "return": "Quaternion",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Quaternion",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get rotation as a quaternion (C++ only)",
                     "desc_ja": "回転をクォータニオンで取得（C++のみ）",
@@ -16140,9 +16931,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setQuaternion",
-                    "return": "(nothing)",
                     "signatures": [
-                        "q"
+                        {
+                            "ret": "(nothing)",
+                            "params": "q"
+                        }
                     ],
                     "desc": "Set rotation from a quaternion (C++ only)",
                     "desc_ja": "回転をクォータニオンで設定（C++のみ）",
@@ -16150,9 +16943,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getEuler",
-                    "return": "Vec3",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec3",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get rotation as Euler angles in radians (pitch=X, yaw=Y, roll=Z) (C++ only)",
                     "desc_ja": "回転をオイラー角（ラジアン、pitch=X/yaw=Y/roll=Z）で取得（C++のみ）",
@@ -16160,10 +16955,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setEuler",
-                    "return": "(nothing)",
                     "signatures": [
-                        "euler",
-                        "pitch, yaw, roll"
+                        {
+                            "ret": "(nothing)",
+                            "params": "euler"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "pitch, yaw, roll"
+                        }
                     ],
                     "desc": "Set rotation from Euler angles in radians (pitch=X, yaw=Y, roll=Z) (C++ only)",
                     "desc_ja": "回転をオイラー角（ラジアン、pitch=X/yaw=Y/roll=Z）で設定（C++のみ）",
@@ -16171,9 +16971,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getEulerDeg",
-                    "return": "Vec3",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec3",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get rotation as Euler angles in degrees (C++ only)",
                     "desc_ja": "回転をオイラー角（度数）で取得（C++のみ）",
@@ -16181,9 +16983,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setEulerDeg",
-                    "return": "(nothing)",
                     "signatures": [
-                        "deg"
+                        {
+                            "ret": "(nothing)",
+                            "params": "deg"
+                        }
                     ],
                     "desc": "Set rotation from Euler angles in degrees (C++ only)",
                     "desc_ja": "回転をオイラー角（度数）で設定（C++のみ）",
@@ -16191,9 +16995,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getRot",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get 2D Z-axis rotation in radians (C++ only)",
                     "desc_ja": "2DのZ軸回転をラジアンで取得（C++のみ）",
@@ -16201,9 +17007,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setRot",
-                    "return": "(nothing)",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "(nothing)",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Set 2D Z-axis rotation in radians (C++ only)",
                     "desc_ja": "2DのZ軸回転をラジアンで設定（C++のみ）",
@@ -16211,9 +17019,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getRotDeg",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get 2D Z-axis rotation in degrees (C++ only)",
                     "desc_ja": "2DのZ軸回転を度数で取得（C++のみ）",
@@ -16221,9 +17031,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setRotDeg",
-                    "return": "(nothing)",
                     "signatures": [
-                        "degrees"
+                        {
+                            "ret": "(nothing)",
+                            "params": "degrees"
+                        }
                     ],
                     "desc": "Set 2D Z-axis rotation in degrees (C++ only)",
                     "desc_ja": "2DのZ軸回転を度数で設定（C++のみ）",
@@ -16231,9 +17043,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getScale",
-                    "return": "Vec3",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec3",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get local scale (C++ only)",
                     "desc_ja": "ローカルスケールを取得（C++のみ）",
@@ -16241,9 +17055,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getScaleX",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get local X scale (C++ only)",
                     "desc_ja": "ローカルXスケールを取得（C++のみ）",
@@ -16251,9 +17067,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getScaleY",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get local Y scale (C++ only)",
                     "desc_ja": "ローカルYスケールを取得（C++のみ）",
@@ -16261,9 +17079,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getScaleZ",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get local Z scale (C++ only)",
                     "desc_ja": "ローカルZスケールを取得（C++のみ）",
@@ -16271,11 +17091,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setScale",
-                    "return": "(nothing)",
                     "signatures": [
-                        "s",
-                        "uniform",
-                        "sx, sy, sz = 1.0"
+                        {
+                            "ret": "(nothing)",
+                            "params": "s"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "uniform"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "sx, sy, sz = 1.0"
+                        }
                     ],
                     "desc": "Set local scale (vector, uniform, or per-axis) (C++ only)",
                     "desc_ja": "ローカルスケールを設定（ベクトル/一様/軸別）（C++のみ）",
@@ -16283,9 +17111,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setScaleX",
-                    "return": "(nothing)",
                     "signatures": [
-                        "sx"
+                        {
+                            "ret": "(nothing)",
+                            "params": "sx"
+                        }
                     ],
                     "desc": "Set local X scale (C++ only)",
                     "desc_ja": "ローカルXスケールを設定（C++のみ）",
@@ -16293,9 +17123,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setScaleY",
-                    "return": "(nothing)",
                     "signatures": [
-                        "sy"
+                        {
+                            "ret": "(nothing)",
+                            "params": "sy"
+                        }
                     ],
                     "desc": "Set local Y scale (C++ only)",
                     "desc_ja": "ローカルYスケールを設定（C++のみ）",
@@ -16303,9 +17135,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setScaleZ",
-                    "return": "(nothing)",
                     "signatures": [
-                        "sz"
+                        {
+                            "ret": "(nothing)",
+                            "params": "sz"
+                        }
                     ],
                     "desc": "Set local Z scale (C++ only)",
                     "desc_ja": "ローカルZスケールを設定（C++のみ）",
@@ -16313,9 +17147,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getLocalMatrix",
-                    "return": "Mat4",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mat4",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get this node's local transform matrix (cached) (C++ only)",
                     "desc_ja": "このノードのローカル変換行列を取得（キャッシュ済み）（C++のみ）",
@@ -16323,9 +17159,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getGlobalMatrix",
-                    "return": "Mat4",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mat4",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get this node's global transform matrix, including parent transforms (cached) (C++ only)",
                     "desc_ja": "親変換を含むこのノードのグローバル変換行列を取得（キャッシュ済み）（C++のみ）",
@@ -16333,9 +17171,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getGlobalMatrixInverse",
-                    "return": "Mat4",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mat4",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the inverse of the global transform matrix (C++ only)",
                     "desc_ja": "グローバル変換行列の逆行列を取得（C++のみ）",
@@ -16343,9 +17183,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:globalToLocal",
-                    "return": "Vec3",
                     "signatures": [
-                        "global"
+                        {
+                            "ret": "Vec3",
+                            "params": "global"
+                        }
                     ],
                     "desc": "Convert a global coordinate to this node's local space (C++ only)",
                     "desc_ja": "グローバル座標をこのノードのローカル空間に変換（C++のみ）",
@@ -16353,9 +17195,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getGlobalPos",
-                    "return": "Vec3",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec3",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the node's origin in global (world) space (C++ only)",
                     "desc_ja": "ノードの原点をグローバル（ワールド）空間で取得（C++のみ）",
@@ -16363,10 +17207,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setGlobalPos",
-                    "return": "(nothing)",
                     "signatures": [
-                        "global",
-                        "x, y, z = 0.0"
+                        {
+                            "ret": "(nothing)",
+                            "params": "global"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, z = 0.0"
+                        }
                     ],
                     "desc": "Set the node's position in global (world) space (C++ only)",
                     "desc_ja": "ノードの位置をグローバル（ワールド）空間で設定（C++のみ）",
@@ -16374,9 +17223,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:localToGlobal",
-                    "return": "Vec3",
                     "signatures": [
-                        "local"
+                        {
+                            "ret": "Vec3",
+                            "params": "local"
+                        }
                     ],
                     "desc": "Convert a local coordinate to global space (C++ only)",
                     "desc_ja": "ローカル座標をグローバル空間に変換（C++のみ）",
@@ -16384,9 +17235,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getMouseX",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get mouse X in this node's local coordinate system (C++ only)",
                     "desc_ja": "このノードのローカル座標系でのマウスX座標を取得（C++のみ）",
@@ -16394,9 +17247,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getMouseY",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get mouse Y in this node's local coordinate system (C++ only)",
                     "desc_ja": "このノードのローカル座標系でのマウスY座標を取得（C++のみ）",
@@ -16404,9 +17259,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getPMouseX",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get previous-frame mouse X in this node's local coordinate system (C++ only)",
                     "desc_ja": "このノードのローカル座標系での前フレームのマウスX座標を取得（C++のみ）",
@@ -16414,9 +17271,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getPMouseY",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get previous-frame mouse Y in this node's local coordinate system (C++ only)",
                     "desc_ja": "このノードのローカル座標系での前フレームのマウスY座標を取得（C++のみ）",
@@ -16424,9 +17283,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:findHitNode",
-                    "return": "HitResult",
                     "signatures": [
-                        "globalRay"
+                        {
+                            "ret": "HitResult",
+                            "params": "globalRay"
+                        }
                     ],
                     "desc": "Hit test the whole tree with a global ray, returning the frontmost node (C++ only)",
                     "desc_ja": "グローバルRayでツリー全体をヒットテストし、最前面のノードを返す（C++のみ）",
@@ -16434,9 +17295,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:findHitNodeFromScreen",
-                    "return": "HitResult",
                     "signatures": [
-                        "screenX, screenY"
+                        {
+                            "ret": "HitResult",
+                            "params": "screenX, screenY"
+                        }
                     ],
                     "desc": "Hit test the whole tree from a screen point, using each node's own camera context (C++ only)",
                     "desc_ja": "スクリーン座標からツリー全体をヒットテスト（各ノード自身のカメラコンテキストを使用）（C++のみ）",
@@ -16444,9 +17307,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getCameraContext",
-                    "return": "shared_ptr",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "shared_ptr",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the camera context this node was last drawn under (null if never drawn).",
                     "desc_ja": "このノードが最後に描画されたカメラコンテキストを返す（未描画なら null）。",
@@ -16454,9 +17319,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:setCameraContext",
-                    "return": "(nothing)",
                     "signatures": [
-                        "ctx"
+                        {
+                            "ret": "(nothing)",
+                            "params": "ctx"
+                        }
                     ],
                     "desc": "Set the camera context for a manually-managed node (normally set automatically by drawTree).",
                     "desc_ja": "手動管理ノードのカメラコンテキストを設定する（通常は drawTree が自動設定）。",
@@ -16464,9 +17331,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getModTypeNames",
-                    "return": "table",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the short (unqualified) type names of the attached mods (C++ only)",
                     "desc_ja": "アタッチされたModの短い（非修飾）型名を取得（C++のみ）",
@@ -16474,9 +17343,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getMods",
-                    "return": "table",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get all attached mods (pointers stay owned by this node) (C++ only)",
                     "desc_ja": "アタッチされた全Modを取得（ポインタの所有権はこのノードのまま）（C++のみ）",
@@ -16484,9 +17355,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:getModByTypeName",
-                    "return": "Mod",
                     "signatures": [
-                        "name"
+                        {
+                            "ret": "Mod",
+                            "params": "name"
+                        }
                     ],
                     "desc": "Find an attached mod by its short type name, e.g. \"LayoutMod\" (null if not attached) (C++ only)\n",
                     "desc_ja": "短い型名（例 \"LayoutMod\"）でアタッチ済みModを検索（なければnull）（C++のみ）\n",
@@ -16494,9 +17367,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:callAfter",
-                    "return": "number",
                     "signatures": [
-                        "delay, callback"
+                        {
+                            "ret": "number",
+                            "params": "delay, callback"
+                        }
                     ],
                     "desc": "Run callback once after delay seconds. Fired from the update loop (frame-quantized). Returns a timer id.",
                     "desc_ja": "delay秒後にcallbackを1回実行。更新ループから発火（フレーム単位）。タイマーidを返す",
@@ -16504,9 +17379,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:callEvery",
-                    "return": "number",
                     "signatures": [
-                        "interval, callback"
+                        {
+                            "ret": "number",
+                            "params": "interval, callback"
+                        }
                     ],
                     "desc": "Run callback repeatedly every interval seconds. Fired from the update loop (frame-quantized). Returns a timer id.",
                     "desc_ja": "interval秒ごとにcallbackを繰り返し実行。更新ループから発火（フレーム単位）。タイマーidを返す",
@@ -16514,9 +17391,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:cancelTimer",
-                    "return": "(nothing)",
                     "signatures": [
-                        "id"
+                        {
+                            "ret": "(nothing)",
+                            "params": "id"
+                        }
                     ],
                     "desc": "Cancel a frame timer (callAfter/callEvery) by id.",
                     "desc_ja": "id指定でフレームタイマー（callAfter/callEvery）をキャンセル",
@@ -16524,9 +17403,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:cancelAllTimers",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Cancel all frame timers on this node.",
                     "desc_ja": "このノードのフレームタイマーを全てキャンセル",
@@ -16534,9 +17415,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:callAfterAsync",
-                    "return": "number",
                     "signatures": [
-                        "delay, callback"
+                        {
+                            "ret": "number",
+                            "params": "delay, callback"
+                        }
                     ],
                     "desc": "Like callAfter, but fired by a precise background scheduler thread (no frame jitter). The callback runs OFF the main thread: guard shared state with a mutex, never draw from it, and don't cancel while holding that mutex. Native only (uses a real thread). Returns a timer id.",
                     "desc_ja": "callAfterの精密版。バックグラウンドのスケジューラスレッドが正確な時刻に発火（フレームジッタなし）。コールバックはメインスレッド外で走る：共有状態はmutexで保護、描画は禁止、そのmutexを保持したままcancelしない。ネイティブ専用（実スレッド使用）。タイマーidを返す",
@@ -16544,9 +17427,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:callEveryAsync",
-                    "return": "number",
                     "signatures": [
-                        "interval, callback"
+                        {
+                            "ret": "number",
+                            "params": "interval, callback"
+                        }
                     ],
                     "desc": "Like callEvery, but fired by a precise background scheduler thread with no drift (reschedules at absolute times). Ideal for sequencer clocks and LED/MIDI output timing. Same threading rules as callAfterAsync. Native only. Returns a timer id.",
                     "desc_ja": "callEveryの精密版。バックグラウンドのスケジューラスレッドがドリフトなく発火（絶対時刻で再スケジュール）。シーケンサのクロックやLED/MIDI出力のタイミングに最適。スレッドの注意点はcallAfterAsyncと同じ。ネイティブ専用。タイマーidを返す",
@@ -16554,9 +17439,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:cancelAsyncTimer",
-                    "return": "(nothing)",
                     "signatures": [
-                        "id"
+                        {
+                            "ret": "(nothing)",
+                            "params": "id"
+                        }
                     ],
                     "desc": "Cancel an async timer by id. Blocks until its callback finishes if it is running now (unless called from inside the callback). Do not call while holding the mutex the callback uses.",
                     "desc_ja": "id指定で非同期タイマーをキャンセル。実行中なら完了を待つ（コールバック内から呼ぶ場合を除く）。コールバックが使うmutexを保持したまま呼ばないこと",
@@ -16564,9 +17451,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "node:cancelAllAsyncTimers",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock.",
                     "desc_ja": "このノードの非同期タイマーを全てキャンセル（モード変更時など）。実行中のコールバックの完了を待つ。デッドロック回避のため、コールバックのmutexを保持せずに呼ぶこと",
@@ -16601,12 +17490,23 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "path:addVertex",
-                    "return": "(nothing)",
                     "signatures": [
-                        "x, y",
-                        "x, y, z",
-                        "v",
-                        "v"
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, z"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "v"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Add a vertex",
                     "desc_ja": "頂点を追加",
@@ -16614,10 +17514,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:addVertices",
-                    "return": "(nothing)",
                     "signatures": [
-                        "verts",
-                        "verts"
+                        {
+                            "ret": "(nothing)",
+                            "params": "verts"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "verts"
+                        }
                     ],
                     "desc": "Add multiple vertices",
                     "desc_ja": "複数の頂点を追加",
@@ -16625,10 +17530,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:getVertices",
-                    "return": "table",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        },
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get all vertices",
                     "desc_ja": "全頂点を取得",
@@ -16636,9 +17546,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:size",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get vertex count",
                     "desc_ja": "頂点数を取得",
@@ -16646,9 +17558,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:empty",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if polyline is empty",
                     "desc_ja": "ポリラインが空か確認",
@@ -16656,9 +17570,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:clear",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear all vertices",
                     "desc_ja": "全頂点をクリア",
@@ -16666,11 +17582,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:moveTo",
-                    "return": "(nothing)",
                     "signatures": [
-                        "x, y, z = 0",
-                        "p",
-                        "p"
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, z = 0"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "p"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "p"
+                        }
                     ],
                     "desc": "Start a new subpath at (x, y). A single Path can hold multiple disjoint contours (think SVG `<path>` with `M ... M ...`) — used by Font::getGlyphPath to keep an outer ring and its holes in one Path so drawFill can detect holes.",
                     "desc_ja": "(x, y) で新しい subpath 開始。1 個の Path に複数の独立した contour を持てる (SVG の `M ... M ...` 相当)。Font::getGlyphPath が外枠と穴を 1 つの Path にまとめて drawFill が穴を検出できるようにする用途。",
@@ -16678,9 +17602,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:getNumSubpaths",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of subpaths (contours)",
                     "desc_ja": "サブパス（輪郭）の数",
@@ -16688,9 +17614,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:getSubpathRange",
-                    "return": "pair",
                     "signatures": [
-                        "i"
+                        {
+                            "ret": "pair",
+                            "params": "i"
+                        }
                     ],
                     "desc": "Vertex index range [begin, end) of subpath i",
                     "desc_ja": "サブパスiの頂点インデックス範囲 [begin, end)",
@@ -16698,9 +17626,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:isSubpathClosed",
-                    "return": "boolean",
                     "signatures": [
-                        "i"
+                        {
+                            "ret": "boolean",
+                            "params": "i"
+                        }
                     ],
                     "desc": "Whether subpath i is closed",
                     "desc_ja": "サブパスiが閉じているかどうか",
@@ -16708,11 +17638,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:lineTo",
-                    "return": "(nothing)",
                     "signatures": [
-                        "x, y, z = 0",
-                        "p",
-                        "p"
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, z = 0"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "p"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "p"
+                        }
                     ],
                     "desc": "Add line segment to point",
                     "desc_ja": "点まで線を追加",
@@ -16720,11 +17658,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:bezierTo",
-                    "return": "(nothing)",
                     "signatures": [
-                        "cp1, cp2, to, resolution",
-                        "cx1, cy1, cx2, cy2, x, y, resolution",
-                        "cp1, cp2, to, resolution"
+                        {
+                            "ret": "(nothing)",
+                            "params": "cp1, cp2, to, resolution"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "cx1, cy1, cx2, cy2, x, y, resolution"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "cp1, cp2, to, resolution"
+                        }
                     ],
                     "desc": "Add cubic bezier curve (resolution=-1 uses current curve style)",
                     "desc_ja": "3次ベジェ曲線を追加（resolution=-1で現在のcurve styleを使用）",
@@ -16732,11 +17678,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:quadBezierTo",
-                    "return": "(nothing)",
                     "signatures": [
-                        "cp, to, resolution",
-                        "cx, cy, x, y, resolution",
-                        "cp, to, resolution"
+                        {
+                            "ret": "(nothing)",
+                            "params": "cp, to, resolution"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "cx, cy, x, y, resolution"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "cp, to, resolution"
+                        }
                     ],
                     "desc": "Add quadratic bezier curve (resolution=-1 uses current curve style)",
                     "desc_ja": "2次ベジェ曲線を追加（resolution=-1で現在のcurve styleを使用）",
@@ -16744,11 +17698,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:curveTo",
-                    "return": "(nothing)",
                     "signatures": [
-                        "to, resolution",
-                        "x, y, z = 0, resolution",
-                        "to, resolution"
+                        {
+                            "ret": "(nothing)",
+                            "params": "to, resolution"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, z = 0, resolution"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "to, resolution"
+                        }
                     ],
                     "desc": "Add Catmull-Rom curve segment (needs >=4 consecutive calls; resolution=-1 uses current curve style)",
                     "desc_ja": "Catmull-Rom曲線を追加（4回以上の連続呼び出しが必要、resolution=-1で現在のcurve styleを使用）",
@@ -16756,14 +17718,31 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:arc",
-                    "return": "(nothing)",
                     "signatures": [
-                        "center, radiusX, radiusY, angleBegin, angleEnd, clockwise = true, circleResolution = 20",
-                        "x, y, radiusX, radiusY, angleBegin, angleEnd, circleResolution = 20",
-                        "center, radiusX, radiusY, angleBegin, angleEnd, circleResolution = 20",
-                        "center, radius, angleBegin, angleEnd, clockwise = true",
-                        "x, y, radius, angleBegin, angleEnd, clockwise = true",
-                        "center, radius, angleBegin, angleEnd, clockwise = true"
+                        {
+                            "ret": "(nothing)",
+                            "params": "center, radiusX, radiusY, angleBegin, angleEnd, clockwise = true, circleResolution = 20"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, radiusX, radiusY, angleBegin, angleEnd, circleResolution = 20"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "center, radiusX, radiusY, angleBegin, angleEnd, circleResolution = 20"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "center, radius, angleBegin, angleEnd, clockwise = true"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, radius, angleBegin, angleEnd, clockwise = true"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "center, radius, angleBegin, angleEnd, clockwise = true"
+                        }
                     ],
                     "desc": "Add an arc (angles in radians)",
                     "desc_ja": "円弧を追加（角度はradian）",
@@ -16771,9 +17750,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:close",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Close the path",
                     "desc_ja": "パスを閉じる",
@@ -16781,9 +17762,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:setClosed",
-                    "return": "(nothing)",
                     "signatures": [
-                        "closed"
+                        {
+                            "ret": "(nothing)",
+                            "params": "closed"
+                        }
                     ],
                     "desc": "Set closed state",
                     "desc_ja": "閉じた状態を設定",
@@ -16791,9 +17774,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:isClosed",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if path is closed",
                     "desc_ja": "パスが閉じているか確認",
@@ -16801,10 +17786,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:reverseWinding",
-                    "return": "Path",
                     "signatures": [
-                        "i",
-                        ""
+                        {
+                            "ret": "Path",
+                            "params": "i"
+                        },
+                        {
+                            "ret": "Path",
+                            "params": ""
+                        }
                     ],
                     "desc": "Reverse the winding direction (vertex order) of all subpaths, or of one subpath. Under drawFill's non-zero winding rule, reversing a subpath toggles it between filling and cutting — e.g. build a circle contour, then reverseWinding(i) it into a hole punch. Reversing ALL subpaths leaves the render unchanged (only relative direction matters) — handy for imported outlines using the opposite convention.",
                     "desc_ja": "subpath の巻き方向 (頂点順) を反転。引数なしで全 subpath、index 指定で 1 つだけ。drawFill の non-zero winding rule では反転で塗り ↔ 穴が切り替わる — 円の contour を作って reverseWinding(i) すれば穴パンチになる。全部反転しても描画結果は不変 (相対方向のみ意味を持つ) なので、逆巻き慣習のインポートデータの修正にも使える。",
@@ -16812,9 +17802,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:draw",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Draw the polyline (fill + 1px stroke based on current style — fill uses triangle fan, convex only). For concave shapes / holes use drawFill.",
                     "desc_ja": "ポリラインを描画 (現在の style で fill + 1px stroke。fill は triangle fan = 凸形状のみ)。凹形状や穴は drawFill を使う。",
@@ -16822,9 +17814,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:buildFillTriangles",
-                    "return": "table",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Triangulate the path interior into a flat list of 2D triangle vertices",
                     "desc_ja": "パス内部を三角形分割し、2D三角形頂点のフラットなリストにする",
@@ -16832,9 +17826,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:drawFill",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Fill the path as a concave polygon with holes (earcut tessellation). Subpaths follow the non-zero winding rule (SVG / PostScript default): a subpath wound opposite to its enclosing ring becomes a hole; same-direction subpaths union (never punch holes). Handles glyphs with holes (e, a, O, 日 ...), overlapping contours, and both TrueType / CFF winding conventions. To cut a hole in a hand-built Path, wind the inner subpath opposite (see reverseWinding).",
                     "desc_ja": "穴付き凹多角形として塗りつぶし (earcut)。subpath は non-zero winding rule (SVG / PostScript のデフォルト) に従う — 外側のリングと逆巻きの subpath が穴になり、同方向は union (穴を開けない)。穴付きグリフ (e, a, O, 日 等)、重なった contour、TrueType / CFF 両方の巻き方向慣習に対応。手書き Path で穴を開けるには内側を逆巻きにする (reverseWinding 参照)。",
@@ -16842,9 +17838,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:toFillMesh",
-                    "return": "Mesh",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mesh",
+                            "params": ""
+                        }
                     ],
                     "desc": "Build a fillable Mesh from the path interior",
                     "desc_ja": "パス内部から塗りつぶし可能なMeshを生成",
@@ -16852,9 +17850,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:drawStroke",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Thick stroke via StrokeMesh (respects strokeWeight / strokeCap / strokeJoin), per-subpath. Use draw() for 1-pixel lines.",
                     "desc_ja": "StrokeMesh による太いストローク (strokeWeight / Cap / Join 反映)、subpath 毎。1 ピクセル線は draw()。",
@@ -16862,9 +17862,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:getBounds",
-                    "return": "Rect",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Rect",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get bounding box as Rect",
                     "desc_ja": "バウンディングボックスをRectで取得",
@@ -16872,9 +17874,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "path:getPerimeter",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get total path length",
                     "desc_ja": "パスの全長を取得",
@@ -17161,9 +18165,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "Platform.isWeb",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True on Web (Emscripten / WASM)",
                     "desc_ja": "Web (Emscripten / WASM) で true",
@@ -17171,9 +18177,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Platform.isMacOS",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True on macOS",
                     "desc_ja": "macOSで true",
@@ -17181,9 +18189,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Platform.isIOS",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True on iOS",
                     "desc_ja": "iOSで true",
@@ -17191,9 +18201,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Platform.isWindows",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True on Windows",
                     "desc_ja": "Windowsで true",
@@ -17201,9 +18213,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Platform.isAndroid",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True on Android",
                     "desc_ja": "Androidで true",
@@ -17211,9 +18225,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Platform.isLinux",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True on Linux (desktop, excludes Android)",
                     "desc_ja": "Linux (デスクトップ、Android除く) で true",
@@ -17221,9 +18237,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Platform.isApple",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True on any Apple platform (macOS or iOS)",
                     "desc_ja": "Apple系 (macOS または iOS) で true",
@@ -17231,9 +18249,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Platform.isMobile",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True on mobile (iOS or Android)",
                     "desc_ja": "モバイル (iOS または Android) で true",
@@ -17241,9 +18261,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Platform.isDesktop",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True on desktop (macOS, Windows, or Linux)",
                     "desc_ja": "デスクトップ (macOS, Windows, Linux) で true",
@@ -17251,9 +18273,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Platform.name",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"\n",
                     "desc_ja": "短いプラットフォーム名: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"\n",
@@ -17411,9 +18435,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "quaternion:toEuler",
-                    "return": "Vec3",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec3",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to Euler angles",
                     "desc_ja": "オイラー角に変換",
@@ -17421,9 +18447,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "quaternion:toMatrix",
-                    "return": "Mat4",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mat4",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convert to rotation matrix",
                     "desc_ja": "回転行列に変換",
@@ -17431,9 +18459,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "quaternion:length",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get quaternion length",
                     "desc_ja": "クォータニオンの長さを取得",
@@ -17441,9 +18471,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "quaternion:lengthSquared",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the squared length (avoids the sqrt)",
                     "desc_ja": "長さの2乗を取得 (sqrt を回避)",
@@ -17451,9 +18483,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "quaternion:normalized",
-                    "return": "Quaternion",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Quaternion",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get normalized quaternion",
                     "desc_ja": "正規化したクォータニオンを取得",
@@ -17461,9 +18495,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "quaternion:normalize",
-                    "return": "Quaternion",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Quaternion",
+                            "params": ""
+                        }
                     ],
                     "desc": "Normalize this quaternion in place and return *this",
                     "desc_ja": "このクォータニオンをその場で正規化し *this を返す",
@@ -17471,9 +18507,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "quaternion:conjugate",
-                    "return": "Quaternion",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Quaternion",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get conjugate quaternion",
                     "desc_ja": "共役クォータニオンを取得",
@@ -17481,9 +18519,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "quaternion:rotate",
-                    "return": "Vec3",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "Vec3",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Rotate a vector",
                     "desc_ja": "ベクトルを回転",
@@ -17493,9 +18533,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "Quaternion.identity",
-                    "return": "Quaternion",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Quaternion",
+                            "params": ""
+                        }
                     ],
                     "desc": "Create an identity quaternion",
                     "desc_ja": "単位クォータニオンを作成",
@@ -17503,9 +18545,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Quaternion.fromAxisAngle",
-                    "return": "Quaternion",
                     "signatures": [
-                        "axis, radians"
+                        {
+                            "ret": "Quaternion",
+                            "params": "axis, radians"
+                        }
                     ],
                     "desc": "Create quaternion from axis-angle",
                     "desc_ja": "軸-角度からクォータニオンを作成",
@@ -17513,10 +18557,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Quaternion.fromEuler",
-                    "return": "Quaternion",
                     "signatures": [
-                        "pitch, yaw, roll",
-                        "euler"
+                        {
+                            "ret": "Quaternion",
+                            "params": "pitch, yaw, roll"
+                        },
+                        {
+                            "ret": "Quaternion",
+                            "params": "euler"
+                        }
                     ],
                     "desc": "Create quaternion from Euler angles",
                     "desc_ja": "オイラー角からクォータニオンを作成",
@@ -17524,9 +18573,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Quaternion.slerp",
-                    "return": "Quaternion",
                     "signatures": [
-                        "a, b, t"
+                        {
+                            "ret": "Quaternion",
+                            "params": "a, b, t"
+                        }
                     ],
                     "desc": "Spherical linear interpolation",
                     "desc_ja": "球面線形補間",
@@ -17575,9 +18626,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "ray:at",
-                    "return": "Vec3",
                     "signatures": [
-                        "t"
+                        {
+                            "ret": "Vec3",
+                            "params": "t"
+                        }
                     ],
                     "desc": "Get the point along the ray at distance t: origin + direction * t",
                     "desc_ja": "距離 t におけるレイ上の点を取得: origin + direction * t",
@@ -17585,9 +18638,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "ray:transformed",
-                    "return": "Ray",
                     "signatures": [
-                        "inverseMatrix"
+                        {
+                            "ret": "Ray",
+                            "params": "inverseMatrix"
+                        }
                     ],
                     "desc": "Transform the ray by a matrix (typically an inverse to map into local space)",
                     "desc_ja": "行列でレイを変換 (通常は逆行列でローカル空間へ写す)",
@@ -17595,9 +18650,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "ray:intersectZPlane",
-                    "return": "Hit",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Hit",
+                            "params": ""
+                        }
                     ],
                     "desc": "Intersect the Z=0 plane and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0.",
                     "desc_ja": "Z=0 平面と交差し、距離と交点を持つ Ray::Hit を返す。出力引数版は deprecated で v1.0.0 で削除",
@@ -17605,9 +18662,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "ray:intersectPlane",
-                    "return": "Hit",
                     "signatures": [
-                        "planeNormal, planeD"
+                        {
+                            "ret": "Hit",
+                            "params": "planeNormal, planeD"
+                        }
                     ],
                     "desc": "Intersect an arbitrary plane and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0.",
                     "desc_ja": "任意の平面と交差し、距離と交点を持つ Ray::Hit を返す。出力引数版は deprecated で v1.0.0 で削除",
@@ -17615,9 +18674,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "ray:intersectSphere",
-                    "return": "Hit",
                     "signatures": [
-                        "radius"
+                        {
+                            "ret": "Hit",
+                            "params": "radius"
+                        }
                     ],
                     "desc": "Intersect a sphere centered at the origin and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0.",
                     "desc_ja": "原点中心の球と交差し、距離と交点を持つ Ray::Hit を返す。出力引数版は deprecated で v1.0.0 で削除",
@@ -17625,9 +18686,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "ray:intersectAABB",
-                    "return": "Hit",
                     "signatures": [
-                        "boxMin, boxMax"
+                        {
+                            "ret": "Hit",
+                            "params": "boxMin, boxMax"
+                        }
                     ],
                     "desc": "Intersect an axis-aligned bounding box and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0.",
                     "desc_ja": "軸並行バウンディングボックスと交差し、距離と交点を持つ Ray::Hit を返す。出力引数版は deprecated で v1.0.0 で削除",
@@ -17637,9 +18700,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "Ray.fromScreenPoint2D",
-                    "return": "Ray",
                     "signatures": [
-                        "screenX, screenY, startZ = 1000.0"
+                        {
+                            "ret": "Ray",
+                            "params": "screenX, screenY, startZ = 1000.0"
+                        }
                     ],
                     "desc": "Build an orthographic Z-parallel ray from a 2D screen point",
                     "desc_ja": "2D スクリーン座標から Z 軸に平行な正射影レイを作成",
@@ -17704,10 +18769,15 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "rect:set",
-                    "return": "Rect",
                     "signatures": [
-                        "x, y, w, h",
-                        "pos, w, h"
+                        {
+                            "ret": "Rect",
+                            "params": "x, y, w, h"
+                        },
+                        {
+                            "ret": "Rect",
+                            "params": "pos, w, h"
+                        }
                     ],
                     "desc": "Set rectangle bounds",
                     "desc_ja": "矩形の範囲を設定",
@@ -17715,9 +18785,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rect:getRight",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get right edge (x + width)",
                     "desc_ja": "右端を取得",
@@ -17725,9 +18797,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rect:getBottom",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get bottom edge (y + height)",
                     "desc_ja": "下端を取得",
@@ -17735,9 +18809,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rect:getCenter",
-                    "return": "Vec2",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec2",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the center point of the rectangle",
                     "desc_ja": "矩形の中心点を取得",
@@ -17745,9 +18821,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rect:getCenterX",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get center X",
                     "desc_ja": "中心Xを取得",
@@ -17755,9 +18833,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rect:getCenterY",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get center Y",
                     "desc_ja": "中心Yを取得",
@@ -17765,9 +18845,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rect:contains",
-                    "return": "boolean",
                     "signatures": [
-                        "px, py"
+                        {
+                            "ret": "boolean",
+                            "params": "px, py"
+                        }
                     ],
                     "desc": "Check if point is inside",
                     "desc_ja": "点が内部にあるか判定",
@@ -17775,9 +18857,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rect:intersects",
-                    "return": "boolean",
                     "signatures": [
-                        "other"
+                        {
+                            "ret": "boolean",
+                            "params": "other"
+                        }
                     ],
                     "desc": "Check if intersects with another rect",
                     "desc_ja": "別の矩形と交差するか判定",
@@ -17835,9 +18919,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "rectNode:getWidth",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the node width (RectNode method) (C++ only)",
                     "desc_ja": "ノードの幅を取得（RectNodeメソッド）（C++のみ）",
@@ -17845,9 +18931,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:getHeight",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the node height (RectNode method) (C++ only)",
                     "desc_ja": "ノードの高さを取得（RectNodeメソッド）（C++のみ）",
@@ -17855,9 +18943,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:getSize",
-                    "return": "Vec2",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec2",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the node size as a Vec2 (RectNode method) (C++ only)",
                     "desc_ja": "ノードのサイズをVec2で取得（RectNodeメソッド）（C++のみ）",
@@ -17865,9 +18955,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:setWidth",
-                    "return": "(nothing)",
                     "signatures": [
-                        "w"
+                        {
+                            "ret": "(nothing)",
+                            "params": "w"
+                        }
                     ],
                     "desc": "Set the node width (RectNode method) (C++ only)",
                     "desc_ja": "ノードの幅を設定（RectNodeメソッド）（C++のみ）",
@@ -17875,9 +18967,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:setHeight",
-                    "return": "(nothing)",
                     "signatures": [
-                        "h"
+                        {
+                            "ret": "(nothing)",
+                            "params": "h"
+                        }
                     ],
                     "desc": "Set the node height (RectNode method) (C++ only)",
                     "desc_ja": "ノードの高さを設定（RectNodeメソッド）（C++のみ）",
@@ -17885,11 +18979,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:setSize",
-                    "return": "(nothing)",
                     "signatures": [
-                        "w, h",
-                        "size",
-                        "s"
+                        {
+                            "ret": "(nothing)",
+                            "params": "w, h"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "size"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "s"
+                        }
                     ],
                     "desc": "Set size (C++ only)",
                     "desc_ja": "サイズを設定（C++のみ）",
@@ -17897,9 +18999,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:setRect",
-                    "return": "(nothing)",
                     "signatures": [
-                        "x, y, w, h"
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, w, h"
+                        }
                     ],
                     "desc": "Set position and size at once (RectNode method) (C++ only)",
                     "desc_ja": "位置とサイズを一度に設定（RectNodeメソッド）（C++のみ）",
@@ -17907,9 +19011,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:setClipping",
-                    "return": "(nothing)",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "(nothing)",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "Enable/disable scissor clipping for RectNode (C++ only)",
                     "desc_ja": "RectNodeのシザークリッピングを有効/無効化（C++のみ）",
@@ -17917,9 +19023,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:isClipping",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether scissor clipping is enabled (RectNode method) (C++ only)",
                     "desc_ja": "シザークリッピングが有効かどうか（RectNodeメソッド）（C++のみ）",
@@ -17927,9 +19035,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:getLeft",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Local left edge (always 0) (RectNode method) (C++ only)",
                     "desc_ja": "ローカルの左端（常に0）（RectNodeメソッド）（C++のみ）",
@@ -17937,9 +19047,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:getRight",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Local right edge (equals width) (RectNode method) (C++ only)",
                     "desc_ja": "ローカルの右端（幅に等しい）（RectNodeメソッド）（C++のみ）",
@@ -17947,9 +19059,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:getTop",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Local top edge (always 0) (RectNode method) (C++ only)",
                     "desc_ja": "ローカルの上端（常に0）（RectNodeメソッド）（C++のみ）",
@@ -17957,9 +19071,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:getBottom",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Local bottom edge (equals height) (RectNode method) (C++ only)",
                     "desc_ja": "ローカルの下端（高さに等しい）（RectNodeメソッド）（C++のみ）",
@@ -17967,9 +19083,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:hitTest",
-                    "return": "boolean",
                     "signatures": [
-                        "local"
+                        {
+                            "ret": "boolean",
+                            "params": "local"
+                        }
                     ],
                     "desc": "Hit-test the rectangle against a ray (with out distance) or a 2D point (RectNode method) (C++ only)",
                     "desc_ja": "矩形をレイ（距離を出力）または2D点に対してヒットテスト（RectNodeメソッド）（C++のみ）",
@@ -17977,9 +19095,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNode:draw",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Draw the rectangle node; override in derived classes (draws nothing by default).",
                     "desc_ja": "矩形ノードを描画する。派生クラスでオーバーライドする（デフォルトは何も描かない）。",
@@ -18041,9 +19161,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "rectNodeButton:isPressed",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the button is currently pressed.",
                     "desc_ja": "ボタンが現在押されているかどうか",
@@ -18051,9 +19173,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "rectNodeButton:draw",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Draw the button: fills the rect with the state-dependent color and draws the centered label. (override)",
                     "desc_ja": "ボタンを描画: 状態に応じた色で矩形を塗りつぶし、中央寄せのラベルを描画する。（override）",
@@ -18070,9 +19194,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "reflector:isReadOnly",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return true if the current reflection scope is read-only.",
                     "desc_ja": "現在の反映スコープが読み取り専用なら true を返す。",
@@ -18080,9 +19206,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "reflector:pushReadOnly",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Enter a read-only scope (members visited inside cannot be written).",
                     "desc_ja": "読み取り専用スコープに入る（内側で訪れるメンバは書き込み不可）。",
@@ -18090,9 +19218,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "reflector:popReadOnly",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Leave the current read-only scope.",
                     "desc_ja": "現在の読み取り専用スコープを抜ける。",
@@ -18100,9 +19230,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "reflector:endGroup",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Leave the current nested group.",
                     "desc_ja": "現在のネストグループを抜ける。",
@@ -18162,12 +19294,23 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "screenRecorder:start",
-                    "return": "boolean",
                     "signatures": [
-                        "path, settings = {}",
-                        "fbo, path, settings = {}",
-                        "path, durationSec",
-                        "fbo, path, durationSec"
+                        {
+                            "ret": "boolean",
+                            "params": "path, settings = {}"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": "fbo, path, settings = {}"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": "path, durationSec"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": "fbo, path, durationSec"
+                        }
                     ],
                     "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically",
                     "desc_ja": "ライブ録画開始（ウィンドウ、またはGUIなしのクリーン出力はFbo）。サイズは自動取得。録画中に start を呼ぶと現在のファイルを確定してから新規開始。録画中の Fbo が破棄された場合は自動で停止・確定する",
@@ -18175,9 +19318,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "screenRecorder:stop",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Stop live capture and finalize the file",
                     "desc_ja": "ライブ録画を停止してファイルを確定",
@@ -18185,9 +19330,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "screenRecorder:isRecording",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if the screen recorder is currently capturing",
                     "desc_ja": "画面録画が現在キャプチャ中か確認",
@@ -18195,9 +19342,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "screenRecorder:getFrameCount",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of frames captured so far",
                     "desc_ja": "これまでにキャプチャしたフレーム数",
@@ -18205,9 +19354,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "screenRecorder:getPath",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Output file path of the current recording",
                     "desc_ja": "現在の録画の出力ファイルパス",
@@ -18215,9 +19366,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "screenRecorder:writer",
-                    "return": "VideoWriter",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "VideoWriter",
+                            "params": ""
+                        }
                     ],
                     "desc": "Access the underlying VideoWriter for advanced introspection",
                     "desc_ja": "内部の VideoWriter にアクセス（高度な調査用）",
@@ -18242,9 +19395,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "scrollBar:getBarColor",
-                    "return": "Color",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Color",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the scroll-bar color (ScrollBar method) (C++ only)",
                     "desc_ja": "スクロールバーの色を取得（ScrollBarメソッド）（C++のみ）",
@@ -18252,9 +19407,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollBar:setBarColor",
-                    "return": "(nothing)",
                     "signatures": [
-                        "color"
+                        {
+                            "ret": "(nothing)",
+                            "params": "color"
+                        }
                     ],
                     "desc": "Set the scroll-bar color (ScrollBar method) (C++ only)",
                     "desc_ja": "スクロールバーの色を設定（ScrollBarメソッド）（C++のみ）",
@@ -18262,9 +19419,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollBar:getBarWidth",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the scroll-bar thickness (ScrollBar method) (C++ only)",
                     "desc_ja": "スクロールバーの太さを取得（ScrollBarメソッド）（C++のみ）",
@@ -18272,9 +19431,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollBar:setBarWidth",
-                    "return": "(nothing)",
                     "signatures": [
-                        "width"
+                        {
+                            "ret": "(nothing)",
+                            "params": "width"
+                        }
                     ],
                     "desc": "Set the scroll-bar thickness (ScrollBar method) (C++ only)",
                     "desc_ja": "スクロールバーの太さを設定（ScrollBarメソッド）（C++のみ）",
@@ -18282,9 +19443,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollBar:getMargin",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the margin between the bar and the container edge (ScrollBar method) (C++ only)",
                     "desc_ja": "バーとコンテナ端の間のマージンを取得（ScrollBarメソッド）（C++のみ）",
@@ -18292,9 +19455,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollBar:setMargin",
-                    "return": "(nothing)",
                     "signatures": [
-                        "margin"
+                        {
+                            "ret": "(nothing)",
+                            "params": "margin"
+                        }
                     ],
                     "desc": "Set the margin between the bar and the container edge (ScrollBar method) (C++ only)",
                     "desc_ja": "バーとコンテナ端の間のマージンを設定（ScrollBarメソッド）（C++のみ）",
@@ -18302,9 +19467,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollBar:getOffset",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the rounded-cap draw offset (round(barWidth/2)) (ScrollBar method) (C++ only)",
                     "desc_ja": "丸キャップの描画オフセット（round(barWidth/2)）を取得（ScrollBarメソッド）（C++のみ）",
@@ -18312,9 +19479,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollBar:updateFromContainer",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Resync the bar size and position from its ScrollContainer (ScrollBar method) (C++ only)",
                     "desc_ja": "ScrollContainerからバーのサイズと位置を再同期（ScrollBarメソッド）（C++のみ）",
@@ -18347,9 +19516,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "scrollContainer:setContent",
-                    "return": "(nothing)",
                     "signatures": [
-                        "newContent"
+                        {
+                            "ret": "(nothing)",
+                            "params": "newContent"
+                        }
                     ],
                     "desc": "Set content node for ScrollContainer (C++ only)",
                     "desc_ja": "ScrollContainerのコンテンツノードを設定（C++のみ）",
@@ -18357,9 +19528,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:getContent",
-                    "return": "Ptr",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Ptr",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the scrollable content node (ScrollContainer method) (C++ only)",
                     "desc_ja": "スクロール対象のコンテンツノードを取得（ScrollContainerメソッド）（C++のみ）",
@@ -18367,9 +19540,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:getContentRect",
-                    "return": "RectNode",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "RectNode",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the content node cast to RectNode (null if not a RectNode) (ScrollContainer method) (C++ only)",
                     "desc_ja": "コンテンツノードをRectNodeとして取得（RectNodeでなければnull）（ScrollContainerメソッド）（C++のみ）",
@@ -18377,9 +19552,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:getScrollX",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the horizontal scroll position (ScrollContainer method) (C++ only)",
                     "desc_ja": "横スクロール位置を取得（ScrollContainerメソッド）（C++のみ）",
@@ -18387,9 +19564,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:getScrollY",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the vertical scroll position (ScrollContainer method) (C++ only)",
                     "desc_ja": "縦スクロール位置を取得（ScrollContainerメソッド）（C++のみ）",
@@ -18397,9 +19576,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:getScroll",
-                    "return": "Vec2",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec2",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the scroll position as a Vec2 (ScrollContainer method) (C++ only)",
                     "desc_ja": "スクロール位置をVec2で取得（ScrollContainerメソッド）（C++のみ）",
@@ -18407,9 +19588,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:setScrollX",
-                    "return": "(nothing)",
                     "signatures": [
-                        "x"
+                        {
+                            "ret": "(nothing)",
+                            "params": "x"
+                        }
                     ],
                     "desc": "Set the horizontal scroll position (clamped) (ScrollContainer method) (C++ only)",
                     "desc_ja": "横スクロール位置を設定（クランプあり）（ScrollContainerメソッド）（C++のみ）",
@@ -18417,9 +19600,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:setScrollY",
-                    "return": "(nothing)",
                     "signatures": [
-                        "y"
+                        {
+                            "ret": "(nothing)",
+                            "params": "y"
+                        }
                     ],
                     "desc": "Set vertical scroll position (C++ only)",
                     "desc_ja": "縦スクロール位置を設定（C++のみ）",
@@ -18427,10 +19612,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:setScroll",
-                    "return": "(nothing)",
                     "signatures": [
-                        "x, y",
-                        "pos"
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "pos"
+                        }
                     ],
                     "desc": "Set the scroll position from x/y or a Vec2 (clamped) (ScrollContainer method) (C++ only)",
                     "desc_ja": "スクロール位置をx/yまたはVec2で設定（クランプあり）（ScrollContainerメソッド）（C++のみ）",
@@ -18438,9 +19628,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:getMaxScrollX",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the maximum horizontal scroll (ScrollContainer method) (C++ only)",
                     "desc_ja": "横スクロールの最大値を取得（ScrollContainerメソッド）（C++のみ）",
@@ -18448,9 +19640,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:getMaxScrollY",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the maximum vertical scroll (ScrollContainer method) (C++ only)",
                     "desc_ja": "縦スクロールの最大値を取得（ScrollContainerメソッド）（C++のみ）",
@@ -18458,9 +19652,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:updateScrollBounds",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Recalculate scroll bounds from the content size (ScrollContainer method) (C++ only)",
                     "desc_ja": "コンテンツサイズからスクロール範囲を再計算（ScrollContainerメソッド）（C++のみ）",
@@ -18468,9 +19664,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:isHorizontalScrollEnabled",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether horizontal scrolling is enabled (ScrollContainer method) (C++ only)",
                     "desc_ja": "横スクロールが有効かどうか（ScrollContainerメソッド）（C++のみ）",
@@ -18478,9 +19676,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:isVerticalScrollEnabled",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether vertical scrolling is enabled (ScrollContainer method) (C++ only)",
                     "desc_ja": "縦スクロールが有効かどうか（ScrollContainerメソッド）（C++のみ）",
@@ -18488,9 +19688,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:setHorizontalScrollEnabled",
-                    "return": "(nothing)",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "(nothing)",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "Enable or disable horizontal scrolling (ScrollContainer method) (C++ only)",
                     "desc_ja": "横スクロールを有効/無効化（ScrollContainerメソッド）（C++のみ）",
@@ -18498,9 +19700,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:setVerticalScrollEnabled",
-                    "return": "(nothing)",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "(nothing)",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "Enable or disable vertical scrolling (ScrollContainer method) (C++ only)",
                     "desc_ja": "縦スクロールを有効/無効化（ScrollContainerメソッド）（C++のみ）",
@@ -18508,9 +19712,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:getScrollSpeed",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the scroll speed (wheel/trackpad sensitivity) (ScrollContainer method) (C++ only)",
                     "desc_ja": "スクロール速度（ホイール/トラックパッド感度）を取得（ScrollContainerメソッド）（C++のみ）",
@@ -18518,9 +19724,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "scrollContainer:setScrollSpeed",
-                    "return": "(nothing)",
                     "signatures": [
-                        "speed"
+                        {
+                            "ret": "(nothing)",
+                            "params": "speed"
+                        }
                     ],
                     "desc": "Set the scroll speed (wheel/trackpad sensitivity) (ScrollContainer method) (C++ only)",
                     "desc_ja": "スクロール速度（ホイール/トラックパッド感度）を設定（ScrollContainerメソッド）（C++のみ）",
@@ -18617,9 +19825,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "scrollEventArgs:syncLegacy",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Copy the canonical scroll field into the deprecated scrollX/scrollY mirror fields (legacy mirrors scheduled for removal in v1.0).",
                     "desc_ja": "正規の scroll を非推奨の scrollX/scrollY ミラーフィールドにコピーする（レガシーミラーは v1.0 で削除予定）。",
@@ -18663,9 +19873,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "sendResult:ok",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "true if the payload was queued (error == SendError::None)",
                     "desc_ja": "ペイロードがキューに入っていれば true（error == SendError::None）",
@@ -18695,10 +19907,15 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "serial:setup",
-                    "return": "boolean",
                     "signatures": [
-                        "portName, baudRate",
-                        "deviceIndex, baudRate"
+                        {
+                            "ret": "boolean",
+                            "params": "portName, baudRate"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": "deviceIndex, baudRate"
+                        }
                     ],
                     "desc": "Connect to a port by path or by index from listDevices()",
                     "desc_ja": "パス指定、またはlistDevices()のインデックスでポートに接続",
@@ -18706,9 +19923,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:close",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Disconnect and release resources",
                     "desc_ja": "切断してリソースを解放",
@@ -18716,9 +19935,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:isInitialized",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether currently connected",
                     "desc_ja": "接続中か",
@@ -18726,9 +19947,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:getDevicePath",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Current device path",
                     "desc_ja": "現在のデバイスパス",
@@ -18736,9 +19959,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:available",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of bytes available to read",
                     "desc_ja": "読み取り可能なバイト数",
@@ -18746,9 +19971,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:readByte",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error",
                     "desc_ja": "1バイト読む。成功時0-255、データ無し-1、エラー-2",
@@ -18756,9 +19983,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:writeBytes",
-                    "return": "number",
                     "signatures": [
-                        "buffer"
+                        {
+                            "ret": "number",
+                            "params": "buffer"
+                        }
                     ],
                     "desc": "Write bytes; returns actual count or -1 on error",
                     "desc_ja": "バイトを書く。実際の書き込み数、エラー時-1を返す",
@@ -18766,9 +19995,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:writeByte",
-                    "return": "boolean",
                     "signatures": [
-                        "byte"
+                        {
+                            "ret": "boolean",
+                            "params": "byte"
+                        }
                     ],
                     "desc": "Write a single byte; true on success",
                     "desc_ja": "1バイト書く。成功でtrue",
@@ -18776,9 +20007,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:flushInput",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear the input buffer",
                     "desc_ja": "入力バッファをクリア",
@@ -18786,9 +20019,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:flushOutput",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear the output buffer",
                     "desc_ja": "出力バッファをクリア",
@@ -18796,9 +20031,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:flush",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear both input and output buffers",
                     "desc_ja": "入力・出力バッファを両方クリア",
@@ -18806,9 +20043,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serial:drain",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Wait until output transmission completes",
                     "desc_ja": "出力送信の完了を待つ",
@@ -18818,9 +20057,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "Serial.printDevices",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Log all available serial devices",
                     "desc_ja": "利用可能なシリアルデバイスをログ出力",
@@ -18828,9 +20069,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "Serial.listDevices",
-                    "return": "table",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "List available serial devices",
                     "desc_ja": "利用可能なシリアルデバイスを列挙",
@@ -18878,9 +20121,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "serialDeviceInfo:getDeviceID",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Device index",
                     "desc_ja": "デバイスインデックス",
@@ -18888,9 +20133,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serialDeviceInfo:getDevicePath",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Device path",
                     "desc_ja": "デバイスパス",
@@ -18898,9 +20145,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "serialDeviceInfo:getDeviceName",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Device name",
                     "desc_ja": "デバイス名",
@@ -19123,9 +20372,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "sound:load",
-                    "return": "LoadResult",
                     "signatures": [
-                        "path"
+                        {
+                            "ret": "LoadResult",
+                            "params": "path"
+                        }
                     ],
                     "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a",
                     "desc_ja": "音声ファイルを読み込む。拡張子で自動判別: .wav .mp3 .ogg .flac .aac .m4a",
@@ -19133,9 +20384,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:loadStream",
-                    "return": "LoadResult",
                     "signatures": [
-                        "path, maxPolyphony = 1"
+                        {
+                            "ret": "LoadResult",
+                            "params": "path, maxPolyphony = 1"
+                        }
                     ],
                     "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count.",
                     "desc_ja": "ディスクからストリーミング再生 (WAV/MP3/FLAC)。長尺ファイル向け、メモリ節約。maxPolyphony は同時再生数",
@@ -19143,9 +20396,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:loadTestTone",
-                    "return": "(nothing)",
                     "signatures": [
-                        "frequency = 440.0, duration = 1.0"
+                        {
+                            "ret": "(nothing)",
+                            "params": "frequency = 440.0, duration = 1.0"
+                        }
                     ],
                     "desc": "Load a generated sine test tone (no file needed). Handy for verifying audio output.",
                     "desc_ja": "生成したサイン波のテストトーンを読み込む (ファイル不要)。オーディオ出力確認に便利",
@@ -19153,10 +20408,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:loadFromBuffer",
-                    "return": "(nothing)",
                     "signatures": [
-                        "buf",
-                        "buf"
+                        {
+                            "ret": "(nothing)",
+                            "params": "buf"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "buf"
+                        }
                     ],
                     "desc": "Load PCM directly from a pre-generated SoundBuffer (e.g. from ChipSound or a procedural waveform), copying it or adopting the shared_ptr.",
                     "desc_ja": "事前生成した SoundBuffer (ChipSound や手続き的波形など) から PCM を直接読み込む。コピーするか shared_ptr を採用",
@@ -19164,9 +20424,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:isLoaded",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if loaded",
                     "desc_ja": "読み込み済みか確認",
@@ -19174,9 +20436,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:isStreaming",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "True if this Sound was loaded via loadStream() (vs eager load())",
                     "desc_ja": "loadStream() で読み込んでいれば true",
@@ -19184,9 +20448,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:play",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Play audio",
                     "desc_ja": "音声を再生",
@@ -19194,9 +20460,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:stop",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Stop audio",
                     "desc_ja": "音声を停止",
@@ -19204,9 +20472,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:pause",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Pause playback",
                     "desc_ja": "一時停止",
@@ -19214,9 +20484,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:resume",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Resume playback",
                     "desc_ja": "再生を再開",
@@ -19224,9 +20496,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:setVolume",
-                    "return": "(nothing)",
                     "signatures": [
-                        "vol"
+                        {
+                            "ret": "(nothing)",
+                            "params": "vol"
+                        }
                     ],
                     "desc": "Set volume (0.0-1.0)",
                     "desc_ja": "音量を設定 (0.0-1.0)",
@@ -19234,9 +20508,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:getVolume",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get current volume",
                     "desc_ja": "現在の音量を取得",
@@ -19244,9 +20520,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:setLoop",
-                    "return": "(nothing)",
                     "signatures": [
-                        "loop"
+                        {
+                            "ret": "(nothing)",
+                            "params": "loop"
+                        }
                     ],
                     "desc": "Set loop mode",
                     "desc_ja": "ループモードを設定",
@@ -19254,9 +20532,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:isLoop",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if loop mode is enabled",
                     "desc_ja": "ループモードが有効か確認",
@@ -19264,9 +20544,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:setPan",
-                    "return": "(nothing)",
                     "signatures": [
-                        "pan"
+                        {
+                            "ret": "(nothing)",
+                            "params": "pan"
+                        }
                     ],
                     "desc": "Set panning (-1.0=left, 0.0=center, 1.0=right)",
                     "desc_ja": "パンを設定 (-1.0=左, 0.0=中央, 1.0=右)",
@@ -19274,9 +20556,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:getPan",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get current panning",
                     "desc_ja": "現在のパンを取得",
@@ -19284,9 +20568,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:setSpeed",
-                    "return": "(nothing)",
                     "signatures": [
-                        "speed"
+                        {
+                            "ret": "(nothing)",
+                            "params": "speed"
+                        }
                     ],
                     "desc": "Set playback speed (1.0=normal)",
                     "desc_ja": "再生速度を設定 (1.0=標準)",
@@ -19294,9 +20580,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:getSpeed",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get current playback speed",
                     "desc_ja": "現在の再生速度を取得",
@@ -19304,9 +20592,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:setMixMode",
-                    "return": "(nothing)",
                     "signatures": [
-                        "m"
+                        {
+                            "ret": "(nothing)",
+                            "params": "m"
+                        }
                     ],
                     "desc": "Channel routing preset. Auto (default) = mono broadcasts / multi 1:1. DownmixMono = average src to all out ch.",
                     "desc_ja": "チャンネルルーティング preset。Auto (デフォ)=mono は broadcast / multi は 1:1、DownmixMono=全 src を平均して全 out ch に同じ音",
@@ -19314,9 +20604,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:getMixMode",
-                    "return": "MixMode",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "MixMode",
+                            "params": ""
+                        }
                     ],
                     "desc": "Current channel mix policy (Auto / DownmixMono). Overridden when a non-empty channel map is set.",
                     "desc_ja": "現在のチャンネルミックス方針 (Auto / DownmixMono)。空でないチャンネルマップがあると上書きされる",
@@ -19324,10 +20616,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:setChannelMap",
-                    "return": "(nothing)",
                     "signatures": [
-                        "map",
-                        "map"
+                        {
+                            "ret": "(nothing)",
+                            "params": "map"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "map"
+                        }
                     ],
                     "desc": "Per-output-channel routing. 1D: each entry is a src ch index (-1 = silent). 2D: each entry lists src ch indices that sum into that output.",
                     "desc_ja": "出力 ch ごとのルーティング。1D 版は各要素が src ch index (-1=無音)、2D 版は各要素が sum 対象の src ch リスト",
@@ -19335,9 +20632,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:getChannelMap",
-                    "return": "shared_ptr",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "shared_ptr",
+                            "params": ""
+                        }
                     ],
                     "desc": "Current per-output-channel source routing snapshot, or null if mixMode rules apply.",
                     "desc_ja": "現在の出力チャンネルごとのソースルーティングのスナップショット。mixMode 規則が適用される場合は null",
@@ -19345,9 +20644,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:setChannelGains",
-                    "return": "(nothing)",
                     "signatures": [
-                        "gains"
+                        {
+                            "ret": "(nothing)",
+                            "params": "gains"
+                        }
                     ],
                     "desc": "Per-output-channel gain multiplier. Entries beyond .size() default to 1.0. No internal normalization (setVolume is the overall gain).",
                     "desc_ja": "出力 ch ごとのゲイン倍率。.size() を超える ch は 1.0、内部正規化なし (setVolume が全体ゲイン)",
@@ -19355,9 +20656,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:getChannelGains",
-                    "return": "shared_ptr",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "shared_ptr",
+                            "params": ""
+                        }
                     ],
                     "desc": "Current per-output-channel gain multipliers snapshot, or null if none set.",
                     "desc_ja": "現在の出力チャンネルごとのゲイン乗数のスナップショット。未設定なら null",
@@ -19365,9 +20668,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:clearChannelMap",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear the explicit channel map; routing falls back to setMixMode rules.",
                     "desc_ja": "ChannelMap を解除して MixMode ルールに戻す",
@@ -19375,9 +20680,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:clearChannelGains",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Clear per-channel gains (back to uniform 1.0).",
                     "desc_ja": "ChannelGains を解除して uniform 1.0 に戻す",
@@ -19385,9 +20692,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:isPlaying",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if playing",
                     "desc_ja": "再生中か確認",
@@ -19395,9 +20704,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:isPaused",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if paused",
                     "desc_ja": "一時停止中か確認",
@@ -19405,9 +20716,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:getPosition",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get playback position in seconds",
                     "desc_ja": "再生位置を取得（秒）",
@@ -19415,9 +20728,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:setPosition",
-                    "return": "(nothing)",
                     "signatures": [
-                        "seconds"
+                        {
+                            "ret": "(nothing)",
+                            "params": "seconds"
+                        }
                     ],
                     "desc": "Seek to a specific time in seconds. On streams, costs ~10 ms blackout while the ring refills.",
                     "desc_ja": "指定秒数にシーク。ストリームでは ring 補充に ~10ms 無音",
@@ -19425,9 +20740,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "sound:getDuration",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get total duration in seconds",
                     "desc_ja": "総再生時間を取得（秒）",
@@ -19687,9 +21004,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "soundStream:loadStream",
-                    "return": "LoadResult",
                     "signatures": [
-                        "path, maxPolyphony = 1"
+                        {
+                            "ret": "LoadResult",
+                            "params": "path, maxPolyphony = 1"
+                        }
                     ],
                     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported.",
                     "desc_ja": "ファイルを開き、形式(.wav .mp3 .flac .ogg)を検証し、channels / sampleRate / durationを埋める。maxPolyphonyはその数だけ同時デコーダスロットを予約。ファイルが開けないか形式が非対応の場合falseを返す",
@@ -19697,9 +21016,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "soundStream:getDuration",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Decoded file duration in seconds.",
                     "desc_ja": "デコードしたファイルの秒単位の長さ",
@@ -19707,9 +21028,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "soundStream:getPath",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Path the stream was opened from.",
                     "desc_ja": "ストリームを開いた元のパス",
@@ -19717,9 +21040,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "soundStream:getMaxPolyphony",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of concurrent decoder slots reserved at loadStream().",
                     "desc_ja": "loadStream() 時に予約される同時デコーダースロット数",
@@ -19755,9 +21080,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "strokeMesh:setWidth",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        "width"
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "width"
+                        }
                     ],
                     "desc": "Set the stroke width",
                     "desc_ja": "ストローク幅を設定",
@@ -19765,9 +21092,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:setColor",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        "color"
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "color"
+                        }
                     ],
                     "desc": "Set the stroke color",
                     "desc_ja": "ストロークの色を設定",
@@ -19775,9 +21104,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:setCapType",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        "type"
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "type"
+                        }
                     ],
                     "desc": "Set the line cap shape (StrokeMesh::CapType: Butt, Round, Square)",
                     "desc_ja": "ラインキャップ形状を設定（StrokeMesh::CapType: Butt, Round, Square）",
@@ -19785,9 +21116,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:setJoinType",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        "type"
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "type"
+                        }
                     ],
                     "desc": "Set the line join shape (StrokeMesh::JoinType: Miter, Round, Bevel)",
                     "desc_ja": "ラインジョイン形状を設定（StrokeMesh::JoinType: Miter, Round, Bevel）",
@@ -19795,9 +21128,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:setMiterLimit",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        "limit"
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "limit"
+                        }
                     ],
                     "desc": "Set the miter limit for sharp corners",
                     "desc_ja": "鋭角コーナーのマイターリミットを設定",
@@ -19805,11 +21140,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:addVertex",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        "x, y, z = 0",
-                        "p",
-                        "p"
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "x, y, z = 0"
+                        },
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "p"
+                        },
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "p"
+                        }
                     ],
                     "desc": "Append a vertex to the stroke path",
                     "desc_ja": "ストロークパスに頂点を追加",
@@ -19817,10 +21160,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:addVertexWithWidth",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        "x, y, width",
-                        "p, width"
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "x, y, width"
+                        },
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "p, width"
+                        }
                     ],
                     "desc": "Append a vertex with a per-vertex width",
                     "desc_ja": "頂点ごとの幅付きで頂点を追加",
@@ -19828,9 +21176,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:setWidths",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        "w"
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "w"
+                        }
                     ],
                     "desc": "Set per-vertex widths from a list",
                     "desc_ja": "リストから頂点ごとの幅を設定",
@@ -19838,9 +21188,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:setShape",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        "polyline"
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "polyline"
+                        }
                     ],
                     "desc": "Set the stroke shape from a Path",
                     "desc_ja": "Path からストローク形状を設定",
@@ -19848,9 +21200,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:setClosed",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        "closed"
+                        {
+                            "ret": "StrokeMesh",
+                            "params": "closed"
+                        }
                     ],
                     "desc": "Set whether the stroke forms a closed loop",
                     "desc_ja": "ストロークが閉ループを形成するかを設定",
@@ -19858,9 +21212,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:clear",
-                    "return": "StrokeMesh",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "StrokeMesh",
+                            "params": ""
+                        }
                     ],
                     "desc": "Remove all vertices",
                     "desc_ja": "すべての頂点を削除",
@@ -19868,9 +21224,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:update",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Rebuild the internal triangle mesh (call before draw after edits)",
                     "desc_ja": "内部の三角形メッシュを再構築（編集後、draw の前に呼ぶ）",
@@ -19878,9 +21236,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:draw",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Draw the stroke mesh",
                     "desc_ja": "ストロークメッシュを描画",
@@ -19888,9 +21248,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:getMesh",
-                    "return": "Mesh",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Mesh",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get a reference to the underlying generated triangle Mesh",
                     "desc_ja": "生成された内部の三角形 Mesh への参照を取得",
@@ -19898,9 +21260,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "strokeMesh:getPolylines",
-                    "return": "table",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get a reference to the stroke's source polylines",
                     "desc_ja": "ストロークのソースポリラインへの参照を取得",
@@ -19963,9 +21327,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "tcpClient:connect",
-                    "return": "boolean",
                     "signatures": [
-                        "host, port"
+                        {
+                            "ret": "boolean",
+                            "params": "host, port"
+                        }
                     ],
                     "desc": "Connect to a server (blocking)",
                     "desc_ja": "サーバへ接続（ブロッキング）",
@@ -19973,9 +21339,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:connectAsync",
-                    "return": "(nothing)",
                     "signatures": [
-                        "host, port"
+                        {
+                            "ret": "(nothing)",
+                            "params": "host, port"
+                        }
                     ],
                     "desc": "Connect asynchronously (notifies via onConnect)",
                     "desc_ja": "非同期に接続（onConnectで通知）",
@@ -19983,9 +21351,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:disconnect",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Disconnect",
                     "desc_ja": "切断する",
@@ -19993,9 +21363,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:isConnected",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether currently connected",
                     "desc_ja": "接続中か",
@@ -20003,10 +21375,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:send",
-                    "return": "boolean",
                     "signatures": [
-                        "data",
-                        "message"
+                        {
+                            "ret": "boolean",
+                            "params": "data"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": "message"
+                        }
                     ],
                     "desc": "Send data to the server",
                     "desc_ja": "サーバへ送信",
@@ -20014,9 +21391,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:setReceiveBufferSize",
-                    "return": "(nothing)",
                     "signatures": [
-                        "size"
+                        {
+                            "ret": "(nothing)",
+                            "params": "size"
+                        }
                     ],
                     "desc": "Set the receive buffer size",
                     "desc_ja": "受信バッファサイズを設定",
@@ -20024,9 +21403,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:setBlocking",
-                    "return": "(nothing)",
                     "signatures": [
-                        "blocking"
+                        {
+                            "ret": "(nothing)",
+                            "params": "blocking"
+                        }
                     ],
                     "desc": "Set blocking mode",
                     "desc_ja": "ブロッキングモードを設定",
@@ -20034,9 +21415,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:setUseThread",
-                    "return": "(nothing)",
                     "signatures": [
-                        "useThread"
+                        {
+                            "ret": "(nothing)",
+                            "params": "useThread"
+                        }
                     ],
                     "desc": "Whether to use threads (must be false on Wasm)",
                     "desc_ja": "スレッドを使うか（Wasmではfalse必須）",
@@ -20044,9 +21427,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:isUsingThread",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether threading is in use",
                     "desc_ja": "スレッドを使用中か",
@@ -20054,9 +21439,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:processNetwork",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Pump pending TCP I/O; normally auto-driven by the update event, but can be called manually for synchronous polling.",
                     "desc_ja": "保留中の TCP I/O を処理する。通常は update イベントで自動駆動されるが、同期ポーリングのため手動呼び出しも可能。",
@@ -20064,9 +21451,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:getRemoteHost",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Remote host name",
                     "desc_ja": "リモートホスト名",
@@ -20074,9 +21463,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpClient:getRemotePort",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Remote port",
                     "desc_ja": "リモートポート",
@@ -20390,9 +21781,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "tcpServer:start",
-                    "return": "boolean",
                     "signatures": [
-                        "port, maxClients = 10"
+                        {
+                            "ret": "boolean",
+                            "params": "port, maxClients = 10"
+                        }
                     ],
                     "desc": "Start listening on a port",
                     "desc_ja": "ポートで待ち受けを開始",
@@ -20400,9 +21793,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:stop",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Stop the server",
                     "desc_ja": "サーバを停止",
@@ -20410,9 +21805,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:isRunning",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the server is running",
                     "desc_ja": "サーバが動作中か",
@@ -20420,9 +21817,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:disconnectClient",
-                    "return": "(nothing)",
                     "signatures": [
-                        "clientId"
+                        {
+                            "ret": "(nothing)",
+                            "params": "clientId"
+                        }
                     ],
                     "desc": "Disconnect a specific client",
                     "desc_ja": "指定クライアントを切断",
@@ -20430,9 +21829,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:disconnectAllClients",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Disconnect all clients",
                     "desc_ja": "全クライアントを切断",
@@ -20440,9 +21841,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:getClientCount",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of connected clients",
                     "desc_ja": "接続中のクライアント数",
@@ -20450,9 +21853,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:getClientIds",
-                    "return": "table",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "IDs of all connected clients",
                     "desc_ja": "接続中の全クライアントID",
@@ -20460,9 +21865,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:getClient",
-                    "return": "TcpServerClient",
                     "signatures": [
-                        "clientId"
+                        {
+                            "ret": "TcpServerClient",
+                            "params": "clientId"
+                        }
                     ],
                     "desc": "Client info (nullptr if not found)",
                     "desc_ja": "クライアント情報（見つからなければnullptr）",
@@ -20470,10 +21877,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:send",
-                    "return": "boolean",
                     "signatures": [
-                        "clientId, data",
-                        "clientId, message"
+                        {
+                            "ret": "boolean",
+                            "params": "clientId, data"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": "clientId, message"
+                        }
                     ],
                     "desc": "Send data to a specific client (blocking)",
                     "desc_ja": "指定クライアントへ送信（ブロッキング）",
@@ -20481,10 +21893,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:broadcast",
-                    "return": "(nothing)",
                     "signatures": [
-                        "data",
-                        "message"
+                        {
+                            "ret": "(nothing)",
+                            "params": "data"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "message"
+                        }
                     ],
                     "desc": "Broadcast data to all clients and wait for every one of them (blocking)",
                     "desc_ja": "全クライアントへブロードキャストし、全員分の完了を待つ（ブロッキング）",
@@ -20492,10 +21909,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:sendAsync",
-                    "return": "SendResult",
                     "signatures": [
-                        "clientId, data",
-                        "clientId, message"
+                        {
+                            "ret": "SendResult",
+                            "params": "clientId, data"
+                        },
+                        {
+                            "ret": "SendResult",
+                            "params": "clientId, message"
+                        }
                     ],
                     "desc": "Queue data for a client and return at once, without waiting for it to be written",
                     "desc_ja": "クライアント宛てのデータをキューに入れて即座に返る（書き込み完了を待たない）",
@@ -20503,10 +21925,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:broadcastAsync",
-                    "return": "number",
                     "signatures": [
-                        "data",
-                        "message"
+                        {
+                            "ret": "number",
+                            "params": "data"
+                        },
+                        {
+                            "ret": "number",
+                            "params": "message"
+                        }
                     ],
                     "desc": "Queue data for every client and return at once; returns how many accepted it",
                     "desc_ja": "全クライアントへキュー投入して即座に返る。受け付けたクライアント数を返す",
@@ -20514,9 +21941,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:setReceiveBufferSize",
-                    "return": "(nothing)",
                     "signatures": [
-                        "size"
+                        {
+                            "ret": "(nothing)",
+                            "params": "size"
+                        }
                     ],
                     "desc": "Set the receive buffer size",
                     "desc_ja": "受信バッファサイズを設定",
@@ -20524,9 +21953,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:setSendTimeout",
-                    "return": "(nothing)",
                     "signatures": [
-                        "seconds"
+                        {
+                            "ret": "(nothing)",
+                            "params": "seconds"
+                        }
                     ],
                     "desc": "Set how long a send may stall without progress before giving up, in seconds (0 = wait indefinitely)",
                     "desc_ja": "送信が無通信のまま何秒まで待つかを設定（0 = 無制限に待つ）",
@@ -20534,9 +21965,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:setSendAsyncBufferSize",
-                    "return": "(nothing)",
                     "signatures": [
-                        "bytes"
+                        {
+                            "ret": "(nothing)",
+                            "params": "bytes"
+                        }
                     ],
                     "desc": "Set the high-water mark for one client's send queue, in bytes (0 = unlimited). Defaults to 16 MB",
                     "desc_ja": "クライアント1つあたりの送信キューの高水位マークを設定（バイト、0 = 無制限）。既定は16MB",
@@ -20544,9 +21977,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:getSendAsyncBufferSize",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "The current high-water mark for one client's send queue, in bytes",
                     "desc_ja": "クライアント1つあたりの送信キューの高水位マーク（バイト）",
@@ -20554,9 +21989,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:getSendAsyncPendingBytes",
-                    "return": "number",
                     "signatures": [
-                        "clientId"
+                        {
+                            "ret": "number",
+                            "params": "clientId"
+                        }
                     ],
                     "desc": "How much a client has queued and not yet completed, in bytes (0 for an unknown client)",
                     "desc_ja": "そのクライアントがキューに抱えていて未完了のバイト数（未知のクライアントなら0）",
@@ -20564,9 +22001,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServer:getPort",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "The listening port",
                     "desc_ja": "待ち受けポート",
@@ -20592,9 +22031,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "tcpServerClient:getId",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Client ID assigned by the server",
                     "desc_ja": "サーバが割り当てたクライアントID",
@@ -20602,9 +22043,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServerClient:getHost",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Client IP address",
                     "desc_ja": "クライアントのIPアドレス",
@@ -20612,9 +22055,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tcpServerClient:getPort",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Client port",
                     "desc_ja": "クライアントのポート",
@@ -21143,9 +22588,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "touchEventArgs:x",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convenience: X position of the first touch point",
                     "desc_ja": "便利関数: 最初のタッチ点のX座標",
@@ -21153,9 +22600,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "touchEventArgs:y",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convenience: Y position of the first touch point",
                     "desc_ja": "便利関数: 最初のタッチ点のY座標",
@@ -21163,9 +22612,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "touchEventArgs:id",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Convenience: ID of the first touch point",
                     "desc_ja": "便利関数: 最初のタッチ点のID",
@@ -21723,11 +23174,19 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "tweenMod:moveTo",
-                    "return": "TweenMod",
                     "signatures": [
-                        "x, y, z = 0.0",
-                        "pos",
-                        "pos"
+                        {
+                            "ret": "TweenMod",
+                            "params": "x, y, z = 0.0"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "pos"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "pos"
+                        }
                     ],
                     "desc": "Animate position to target (TweenMod method) (C++ only)",
                     "desc_ja": "位置を目標値へアニメーション（TweenModメソッド）（C++のみ）",
@@ -21735,11 +23194,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:moveBy",
-                    "return": "TweenMod",
                     "signatures": [
-                        "dx, dy, dz = 0.0",
-                        "delta",
-                        "delta"
+                        {
+                            "ret": "TweenMod",
+                            "params": "dx, dy, dz = 0.0"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "delta"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "delta"
+                        }
                     ],
                     "desc": "Animate position by relative amount (TweenMod method) (C++ only)",
                     "desc_ja": "位置を相対量だけアニメーション（TweenModメソッド）（C++のみ）",
@@ -21747,10 +23214,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:moveFrom",
-                    "return": "TweenMod",
                     "signatures": [
-                        "x, y, z = 0.0",
-                        "pos"
+                        {
+                            "ret": "TweenMod",
+                            "params": "x, y, z = 0.0"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "pos"
+                        }
                     ],
                     "desc": "Set an explicit start position for the position tween (TweenMod method) (C++ only)",
                     "desc_ja": "位置アニメーションの開始位置を明示的に設定（TweenModメソッド）（C++のみ）",
@@ -21758,11 +23230,19 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:scaleTo",
-                    "return": "TweenMod",
                     "signatures": [
-                        "uniform",
-                        "sx, sy, sz = 1.0",
-                        "s"
+                        {
+                            "ret": "TweenMod",
+                            "params": "uniform"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "sx, sy, sz = 1.0"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "s"
+                        }
                     ],
                     "desc": "Animate scale to target (TweenMod method) (C++ only)",
                     "desc_ja": "スケールを目標値へアニメーション（TweenModメソッド）（C++のみ）",
@@ -21770,10 +23250,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:scaleBy",
-                    "return": "TweenMod",
                     "signatures": [
-                        "factor",
-                        "sx, sy, sz = 1.0"
+                        {
+                            "ret": "TweenMod",
+                            "params": "factor"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "sx, sy, sz = 1.0"
+                        }
                     ],
                     "desc": "Animate scale by relative multiplier (TweenMod method) (C++ only)",
                     "desc_ja": "スケールを相対倍率でアニメーション（TweenModメソッド）（C++のみ）",
@@ -21781,10 +23266,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:scaleFrom",
-                    "return": "TweenMod",
                     "signatures": [
-                        "uniform",
-                        "sx, sy, sz = 1.0"
+                        {
+                            "ret": "TweenMod",
+                            "params": "uniform"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "sx, sy, sz = 1.0"
+                        }
                     ],
                     "desc": "Set an explicit start scale for the scale tween (TweenMod method) (C++ only)",
                     "desc_ja": "スケールアニメーションの開始スケールを明示的に設定（TweenModメソッド）（C++のみ）",
@@ -21792,10 +23282,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateTo",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians",
-                        "q"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "q"
+                        }
                     ],
                     "desc": "Animate rotation to target angle or quaternion (TweenMod method) (C++ only)",
                     "desc_ja": "回転を目標角度またはクォータニオンへアニメーション（TweenModメソッド）（C++のみ）",
@@ -21803,9 +23298,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateBy",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Animate rotation by relative angle (TweenMod method) (C++ only)",
                     "desc_ja": "回転を相対角度でアニメーション（TweenModメソッド）（C++のみ）",
@@ -21813,10 +23310,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateFrom",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians",
-                        "q"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "q"
+                        }
                     ],
                     "desc": "Set an explicit start rotation (angle or quaternion) for the rotation tween (TweenMod method) (C++ only)",
                     "desc_ja": "回転アニメーションの開始回転（角度またはクォータニオン）を明示的に設定（TweenModメソッド）（C++のみ）",
@@ -21824,9 +23326,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateXTo",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Animate X-axis rotation to an absolute angle (TweenMod method) (C++ only)",
                     "desc_ja": "X軸回転を絶対角度へアニメーション（TweenModメソッド）（C++のみ）",
@@ -21834,9 +23338,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateXBy",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Animate X-axis rotation by a relative angle (TweenMod method) (C++ only)",
                     "desc_ja": "X軸回転を相対角度でアニメーション（TweenModメソッド）（C++のみ）",
@@ -21844,9 +23350,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateYTo",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Animate Y-axis rotation to an absolute angle (TweenMod method) (C++ only)",
                     "desc_ja": "Y軸回転を絶対角度へアニメーション（TweenModメソッド）（C++のみ）",
@@ -21854,9 +23362,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateYBy",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Animate Y-axis rotation by a relative angle (TweenMod method) (C++ only)",
                     "desc_ja": "Y軸回転を相対角度でアニメーション（TweenModメソッド）（C++のみ）",
@@ -21864,9 +23374,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateZTo",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Animate Z-axis rotation to an absolute angle (same as rotateTo for 2D) (TweenMod method) (C++ only)",
                     "desc_ja": "Z軸回転を絶対角度へアニメーション（2DではrotateToと同じ）（TweenModメソッド）（C++のみ）",
@@ -21874,9 +23386,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateZBy",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Animate Z-axis rotation by a relative angle (same as rotateBy for 2D) (TweenMod method) (C++ only)",
                     "desc_ja": "Z軸回転を相対角度でアニメーション（2DではrotateByと同じ）（TweenModメソッド）（C++のみ）",
@@ -21884,9 +23398,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateXFrom",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Set an explicit start angle for the X-axis rotation tween (TweenMod method) (C++ only)",
                     "desc_ja": "X軸回転アニメーションの開始角度を明示的に設定（TweenModメソッド）（C++のみ）",
@@ -21894,9 +23410,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:rotateYFrom",
-                    "return": "TweenMod",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "TweenMod",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Set an explicit start angle for the Y-axis rotation tween (TweenMod method) (C++ only)",
                     "desc_ja": "Y軸回転アニメーションの開始角度を明示的に設定（TweenModメソッド）（C++のみ）",
@@ -21904,9 +23422,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:duration",
-                    "return": "TweenMod",
                     "signatures": [
-                        "seconds"
+                        {
+                            "ret": "TweenMod",
+                            "params": "seconds"
+                        }
                     ],
                     "desc": "Set animation duration (TweenMod method) (C++ only)",
                     "desc_ja": "アニメーション時間を設定（TweenModメソッド）（C++のみ）",
@@ -21914,10 +23434,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:ease",
-                    "return": "TweenMod",
                     "signatures": [
-                        "type, mode = InOut",
-                        "fn, mode = In"
+                        {
+                            "ret": "TweenMod",
+                            "params": "type, mode = InOut"
+                        },
+                        {
+                            "ret": "TweenMod",
+                            "params": "fn, mode = In"
+                        }
                     ],
                     "desc": "Set easing (TweenMod method): a built-in EaseType + EaseMode, or a custom EaseFunction (C++ only)",
                     "desc_ja": "イージングを設定（TweenModメソッド）：組み込み EaseType + EaseMode、またはカスタム EaseFunction（C++のみ）",
@@ -21925,9 +23450,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:delay",
-                    "return": "TweenMod",
                     "signatures": [
-                        "seconds"
+                        {
+                            "ret": "TweenMod",
+                            "params": "seconds"
+                        }
                     ],
                     "desc": "Set delay before animation starts (TweenMod method) (C++ only)",
                     "desc_ja": "アニメーション開始前の遅延を設定（TweenModメソッド）（C++のみ）",
@@ -21935,9 +23462,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:start",
-                    "return": "TweenMod",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "TweenMod",
+                            "params": ""
+                        }
                     ],
                     "desc": "Start (or restart) the tween from its configured values (TweenMod method) (C++ only)",
                     "desc_ja": "設定された値からアニメーションを開始（再開）（TweenModメソッド）（C++のみ）",
@@ -21945,9 +23474,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:pause",
-                    "return": "TweenMod",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "TweenMod",
+                            "params": ""
+                        }
                     ],
                     "desc": "Pause playback, keeping the current progress (TweenMod method) (C++ only)",
                     "desc_ja": "現在の進行度を保ったまま再生を一時停止（TweenModメソッド）（C++のみ）",
@@ -21955,9 +23486,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:resume",
-                    "return": "TweenMod",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "TweenMod",
+                            "params": ""
+                        }
                     ],
                     "desc": "Resume a paused tween (TweenMod method) (C++ only)",
                     "desc_ja": "一時停止したアニメーションを再開（TweenModメソッド）（C++のみ）",
@@ -21965,9 +23498,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:reset",
-                    "return": "TweenMod",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "TweenMod",
+                            "params": ""
+                        }
                     ],
                     "desc": "Reset progress to the start and stop playback (TweenMod method) (C++ only)",
                     "desc_ja": "進行度を最初に戻して再生を停止（TweenModメソッド）（C++のみ）",
@@ -21975,9 +23510,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:isPlaying",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the tween is currently playing (TweenMod method) (C++ only)",
                     "desc_ja": "アニメーションが現在再生中かどうか（TweenModメソッド）（C++のみ）",
@@ -21985,9 +23522,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:isComplete",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the tween has finished (TweenMod method) (C++ only)",
                     "desc_ja": "アニメーションが完了したかどうか（TweenModメソッド）（C++のみ）",
@@ -21995,9 +23534,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:getProgress",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Current progress in 0..1 (TweenMod method) (C++ only)",
                     "desc_ja": "現在の進行度を0〜1で取得（TweenModメソッド）（C++のみ）",
@@ -22005,9 +23546,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:getDuration",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the animation duration in seconds (TweenMod method) (C++ only)",
                     "desc_ja": "アニメーション時間（秒）を取得（TweenModメソッド）（C++のみ）",
@@ -22015,9 +23558,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:getDelay",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the start delay in seconds (TweenMod method) (C++ only)",
                     "desc_ja": "開始遅延（秒）を取得（TweenModメソッド）（C++のみ）",
@@ -22025,9 +23570,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:getEaseType",
-                    "return": "EaseType",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "EaseType",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the current easing type (TweenMod method) (C++ only)",
                     "desc_ja": "現在のイージングタイプを取得（TweenModメソッド）（C++のみ）",
@@ -22035,9 +23582,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "tweenMod:getEaseMode",
-                    "return": "EaseMode",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "EaseMode",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the current easing mode (In/Out/InOut) (TweenMod method) (C++ only)",
                     "desc_ja": "現在のイージングモード（In/Out/InOut）を取得（TweenModメソッド）（C++のみ）",
@@ -22620,9 +24169,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "udpSocket:create",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Create the socket explicitly (usually auto-created by bind/connect)",
                     "desc_ja": "ソケットを明示的に作成（通常はbind/connectが自動作成）",
@@ -22630,9 +24181,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:bind",
-                    "return": "boolean",
                     "signatures": [
-                        "port, startReceiving = true"
+                        {
+                            "ret": "boolean",
+                            "params": "port, startReceiving = true"
+                        }
                     ],
                     "desc": "Bind a port for receiving (startReceiving auto-starts the receive thread)",
                     "desc_ja": "受信用にポートをbind（startReceivingで受信スレッド自動開始）",
@@ -22640,9 +24193,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:connect",
-                    "return": "boolean",
                     "signatures": [
-                        "host, port"
+                        {
+                            "ret": "boolean",
+                            "params": "host, port"
+                        }
                     ],
                     "desc": "Set the destination for send()",
                     "desc_ja": "send()の宛先を設定",
@@ -22650,9 +24205,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:close",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Close the socket",
                     "desc_ja": "ソケットを閉じる",
@@ -22660,9 +24217,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:sendTo",
-                    "return": "boolean",
                     "signatures": [
-                        "host, port, message"
+                        {
+                            "ret": "boolean",
+                            "params": "host, port, message"
+                        }
                     ],
                     "desc": "Send data to a specific host and port",
                     "desc_ja": "指定ホスト・ポートへ送信",
@@ -22670,9 +24229,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:send",
-                    "return": "boolean",
                     "signatures": [
-                        "message"
+                        {
+                            "ret": "boolean",
+                            "params": "message"
+                        }
                     ],
                     "desc": "Send to the destination set by connect()",
                     "desc_ja": "connect()で設定した宛先へ送信",
@@ -22680,9 +24241,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:startReceiving",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Start the receive thread (auto-called after bind)",
                     "desc_ja": "受信スレッドを開始（bind後に自動呼び出し）",
@@ -22690,9 +24253,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:stopReceiving",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Stop the receive thread",
                     "desc_ja": "受信スレッドを停止",
@@ -22700,9 +24265,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:isReceiving",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the receive thread is active",
                     "desc_ja": "受信スレッドが動作中か",
@@ -22710,9 +24277,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setNonBlocking",
-                    "return": "boolean",
                     "signatures": [
-                        "nonBlocking"
+                        {
+                            "ret": "boolean",
+                            "params": "nonBlocking"
+                        }
                     ],
                     "desc": "Set non-blocking mode",
                     "desc_ja": "ノンブロッキングモードを設定",
@@ -22720,9 +24289,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setBroadcast",
-                    "return": "boolean",
                     "signatures": [
-                        "enable"
+                        {
+                            "ret": "boolean",
+                            "params": "enable"
+                        }
                     ],
                     "desc": "Allow broadcast sending",
                     "desc_ja": "ブロードキャスト送信を許可",
@@ -22730,9 +24301,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setReuseAddress",
-                    "return": "boolean",
                     "signatures": [
-                        "enable"
+                        {
+                            "ret": "boolean",
+                            "params": "enable"
+                        }
                     ],
                     "desc": "Allow address reuse (set before bind)",
                     "desc_ja": "アドレス再利用を許可（bind前に設定）",
@@ -22740,9 +24313,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setReusePort",
-                    "return": "boolean",
                     "signatures": [
-                        "enable"
+                        {
+                            "ret": "boolean",
+                            "params": "enable"
+                        }
                     ],
                     "desc": "Allow multiple sockets on the same port (multicast receivers; set before bind)",
                     "desc_ja": "同一ポートへの複数ソケットを許可（マルチキャスト受信。bind前に設定）",
@@ -22750,9 +24325,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:joinMulticastGroup",
-                    "return": "boolean",
                     "signatures": [
-                        "groupAddr, interfaceAddr = \"\""
+                        {
+                            "ret": "boolean",
+                            "params": "groupAddr, interfaceAddr = \"\""
+                        }
                     ],
                     "desc": "Join a multicast group for receiving (call after bind; \"\" = default route)\n",
                     "desc_ja": "受信用にマルチキャストグループへ参加（bind後。\"\"=デフォルト経路）\n",
@@ -22760,9 +24337,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:leaveMulticastGroup",
-                    "return": "boolean",
                     "signatures": [
-                        "groupAddr, interfaceAddr = \"\""
+                        {
+                            "ret": "boolean",
+                            "params": "groupAddr, interfaceAddr = \"\""
+                        }
                     ],
                     "desc": "Leave a previously joined multicast group",
                     "desc_ja": "参加済みマルチキャストグループから離脱",
@@ -22770,9 +24349,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setMulticastTTL",
-                    "return": "boolean",
                     "signatures": [
-                        "ttl"
+                        {
+                            "ret": "boolean",
+                            "params": "ttl"
+                        }
                     ],
                     "desc": "Hop limit for outgoing multicast (default 1 = local subnet)",
                     "desc_ja": "送信マルチキャストのホップ制限（既定1=ローカルサブネット）",
@@ -22780,9 +24361,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setMulticastLoopback",
-                    "return": "boolean",
                     "signatures": [
-                        "enable"
+                        {
+                            "ret": "boolean",
+                            "params": "enable"
+                        }
                     ],
                     "desc": "Whether outgoing multicast loops back to local listeners (default on)",
                     "desc_ja": "送信マルチキャストをローカルにループバックするか（既定on）",
@@ -22790,9 +24373,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setMulticastInterface",
-                    "return": "boolean",
                     "signatures": [
-                        "interfaceAddr"
+                        {
+                            "ret": "boolean",
+                            "params": "interfaceAddr"
+                        }
                     ],
                     "desc": "Pick the NIC for outgoing multicast (\"\" = default route)\n",
                     "desc_ja": "送信マルチキャストのNICを選択（\"\"=デフォルト経路）\n",
@@ -22800,9 +24385,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setReceiveBufferSize",
-                    "return": "boolean",
                     "signatures": [
-                        "size"
+                        {
+                            "ret": "boolean",
+                            "params": "size"
+                        }
                     ],
                     "desc": "Set the receive buffer size",
                     "desc_ja": "受信バッファサイズを設定",
@@ -22810,9 +24397,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setSendBufferSize",
-                    "return": "boolean",
                     "signatures": [
-                        "size"
+                        {
+                            "ret": "boolean",
+                            "params": "size"
+                        }
                     ],
                     "desc": "Set the send buffer size",
                     "desc_ja": "送信バッファサイズを設定",
@@ -22820,9 +24409,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setReceiveTimeout",
-                    "return": "boolean",
                     "signatures": [
-                        "timeoutMs"
+                        {
+                            "ret": "boolean",
+                            "params": "timeoutMs"
+                        }
                     ],
                     "desc": "Set the receive timeout (0 = infinite)",
                     "desc_ja": "受信タイムアウトを設定（0=無限）",
@@ -22830,9 +24421,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:setUseThread",
-                    "return": "(nothing)",
                     "signatures": [
-                        "useThread"
+                        {
+                            "ret": "(nothing)",
+                            "params": "useThread"
+                        }
                     ],
                     "desc": "Whether to use a receive thread (must be false on Wasm)",
                     "desc_ja": "受信スレッドを使うか（Wasmではfalse必須）",
@@ -22840,9 +24433,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:getLocalPort",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "The bound local port",
                     "desc_ja": "bind済みのローカルポート",
@@ -22850,9 +24445,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:processNetwork",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Pump pending UDP I/O; normally auto-driven by the update event, but can be called manually for synchronous polling.",
                     "desc_ja": "保留中の UDP I/O を処理する。通常は update イベントで自動駆動されるが、同期ポーリングのため手動呼び出しも可能。",
@@ -22860,9 +24457,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:isValid",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the socket is valid",
                     "desc_ja": "ソケットが有効か",
@@ -22870,9 +24469,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:getConnectedHost",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Destination host from connect()",
                     "desc_ja": "connect()で設定した宛先ホスト",
@@ -22880,9 +24481,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "udpSocket:getConnectedPort",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Destination port from connect()",
                     "desc_ja": "connect()で設定した宛先ポート",
@@ -22931,10 +24534,15 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "vec2:set",
-                    "return": "Vec2",
                     "signatures": [
-                        "x, y",
-                        "v"
+                        {
+                            "ret": "Vec2",
+                            "params": "x, y"
+                        },
+                        {
+                            "ret": "Vec2",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Set vector components",
                     "desc_ja": "ベクトルの成分を設定",
@@ -22942,9 +24550,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:length",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get vector length",
                     "desc_ja": "ベクトルの長さを取得",
@@ -22952,9 +24562,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:lengthSquared",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get squared length (faster, no sqrt)",
                     "desc_ja": "長さの二乗を取得（sqrtなしで高速）",
@@ -22962,9 +24574,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:normalized",
-                    "return": "Vec2",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec2",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get normalized copy",
                     "desc_ja": "正規化したコピーを取得",
@@ -22972,9 +24586,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:normalize",
-                    "return": "Vec2",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec2",
+                            "params": ""
+                        }
                     ],
                     "desc": "Normalize in place",
                     "desc_ja": "その場で正規化",
@@ -22982,9 +24598,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:limit",
-                    "return": "Vec2",
                     "signatures": [
-                        "max"
+                        {
+                            "ret": "Vec2",
+                            "params": "max"
+                        }
                     ],
                     "desc": "Limit length to max",
                     "desc_ja": "長さを最大値に制限",
@@ -22992,9 +24610,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:dot",
-                    "return": "number",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "number",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Dot product",
                     "desc_ja": "内積",
@@ -23002,9 +24622,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:cross",
-                    "return": "number",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "number",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Cross product (z component)",
                     "desc_ja": "外積（z成分）",
@@ -23012,9 +24634,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:distance",
-                    "return": "number",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "number",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Distance to another vector",
                     "desc_ja": "別のベクトルとの距離",
@@ -23022,9 +24646,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:distanceSquared",
-                    "return": "number",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "number",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Squared distance (faster)",
                     "desc_ja": "距離の二乗（高速）",
@@ -23032,10 +24658,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:angle",
-                    "return": "number",
                     "signatures": [
-                        "",
-                        "v"
+                        {
+                            "ret": "number",
+                            "params": ""
+                        },
+                        {
+                            "ret": "number",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Angle in radians",
                     "desc_ja": "ラジアンでの角度",
@@ -23043,9 +24674,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:rotated",
-                    "return": "Vec2",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "Vec2",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Get rotated copy",
                     "desc_ja": "回転したコピーを取得",
@@ -23053,9 +24686,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:rotate",
-                    "return": "Vec2",
                     "signatures": [
-                        "radians"
+                        {
+                            "ret": "Vec2",
+                            "params": "radians"
+                        }
                     ],
                     "desc": "Rotate in place",
                     "desc_ja": "その場で回転",
@@ -23063,9 +24698,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:lerp",
-                    "return": "Vec2",
                     "signatures": [
-                        "v, t"
+                        {
+                            "ret": "Vec2",
+                            "params": "v, t"
+                        }
                     ],
                     "desc": "Linear interpolation",
                     "desc_ja": "線形補間",
@@ -23073,9 +24710,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:perpendicular",
-                    "return": "Vec2",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec2",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get perpendicular vector",
                     "desc_ja": "垂直ベクトルを取得",
@@ -23083,9 +24722,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec2:reflected",
-                    "return": "Vec2",
                     "signatures": [
-                        "normal"
+                        {
+                            "ret": "Vec2",
+                            "params": "normal"
+                        }
                     ],
                     "desc": "Get reflected vector",
                     "desc_ja": "反射ベクトルを取得",
@@ -23095,9 +24736,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "Vec2.fromAngle",
-                    "return": "Vec2",
                     "signatures": [
-                        "radians, length = 1.0"
+                        {
+                            "ret": "Vec2",
+                            "params": "radians, length = 1.0"
+                        }
                     ],
                     "desc": "Create Vec2 from angle",
                     "desc_ja": "角度からVec2を作成",
@@ -23154,10 +24797,15 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "vec3:set",
-                    "return": "Vec3",
                     "signatures": [
-                        "x, y, z",
-                        "v"
+                        {
+                            "ret": "Vec3",
+                            "params": "x, y, z"
+                        },
+                        {
+                            "ret": "Vec3",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Set vector components",
                     "desc_ja": "ベクトルの成分を設定",
@@ -23165,9 +24813,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:length",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get vector length",
                     "desc_ja": "ベクトルの長さを取得",
@@ -23175,9 +24825,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:lengthSquared",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get squared length",
                     "desc_ja": "長さの二乗を取得",
@@ -23185,9 +24837,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:normalized",
-                    "return": "Vec3",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec3",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get normalized copy",
                     "desc_ja": "正規化したコピーを取得",
@@ -23195,9 +24849,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:normalize",
-                    "return": "Vec3",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec3",
+                            "params": ""
+                        }
                     ],
                     "desc": "Normalize in place",
                     "desc_ja": "その場で正規化",
@@ -23205,9 +24861,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:limit",
-                    "return": "Vec3",
                     "signatures": [
-                        "max"
+                        {
+                            "ret": "Vec3",
+                            "params": "max"
+                        }
                     ],
                     "desc": "Limit length to max",
                     "desc_ja": "長さを最大値に制限",
@@ -23215,9 +24873,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:dot",
-                    "return": "number",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "number",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Dot product",
                     "desc_ja": "内積",
@@ -23225,9 +24885,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:cross",
-                    "return": "Vec3",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "Vec3",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Cross product",
                     "desc_ja": "外積",
@@ -23235,9 +24897,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:distance",
-                    "return": "number",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "number",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Distance to another vector",
                     "desc_ja": "別のベクトルとの距離",
@@ -23245,9 +24909,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:distanceSquared",
-                    "return": "number",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "number",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Squared distance",
                     "desc_ja": "距離の二乗",
@@ -23255,9 +24921,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:lerp",
-                    "return": "Vec3",
                     "signatures": [
-                        "v, t"
+                        {
+                            "ret": "Vec3",
+                            "params": "v, t"
+                        }
                     ],
                     "desc": "Linear interpolation",
                     "desc_ja": "線形補間",
@@ -23265,9 +24933,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:reflected",
-                    "return": "Vec3",
                     "signatures": [
-                        "normal"
+                        {
+                            "ret": "Vec3",
+                            "params": "normal"
+                        }
                     ],
                     "desc": "Get reflected vector",
                     "desc_ja": "反射ベクトルを取得",
@@ -23275,9 +24945,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec3:xy",
-                    "return": "Vec2",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec2",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get XY components as Vec2",
                     "desc_ja": "XY成分をVec2として取得",
@@ -23342,10 +25014,15 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "vec4:set",
-                    "return": "Vec4",
                     "signatures": [
-                        "x, y, z, w",
-                        "v"
+                        {
+                            "ret": "Vec4",
+                            "params": "x, y, z, w"
+                        },
+                        {
+                            "ret": "Vec4",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Set all components (chainable)",
                     "desc_ja": "全成分を設定 (チェイン可能)",
@@ -23353,9 +25030,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec4:length",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the vector's magnitude",
                     "desc_ja": "ベクトルの長さを取得",
@@ -23363,9 +25042,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec4:lengthSquared",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the squared magnitude (cheaper than length())",
                     "desc_ja": "長さの2乗を取得 (length() より低コスト)",
@@ -23373,9 +25054,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec4:normalized",
-                    "return": "Vec4",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec4",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return a unit-length copy of this vector",
                     "desc_ja": "このベクトルの単位長コピーを返す",
@@ -23383,9 +25066,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec4:normalize",
-                    "return": "Vec4",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec4",
+                            "params": ""
+                        }
                     ],
                     "desc": "Normalize this vector in place (chainable)",
                     "desc_ja": "このベクトルをその場で正規化 (チェイン可能)",
@@ -23393,9 +25078,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec4:dot",
-                    "return": "number",
                     "signatures": [
-                        "v"
+                        {
+                            "ret": "number",
+                            "params": "v"
+                        }
                     ],
                     "desc": "Dot product with another vector",
                     "desc_ja": "別のベクトルとの内積",
@@ -23403,9 +25090,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec4:lerp",
-                    "return": "Vec4",
                     "signatures": [
-                        "v, t"
+                        {
+                            "ret": "Vec4",
+                            "params": "v, t"
+                        }
                     ],
                     "desc": "Linearly interpolate toward v by t (0..1)",
                     "desc_ja": "t (0..1) で v へ線形補間",
@@ -23413,9 +25102,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec4:xy",
-                    "return": "Vec2",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec2",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the (x, y) components as a Vec2",
                     "desc_ja": "(x, y) 成分を Vec2 として取得",
@@ -23423,9 +25114,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "vec4:xyz",
-                    "return": "Vec3",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "Vec3",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the (x, y, z) components as a Vec3",
                     "desc_ja": "(x, y, z) 成分を Vec3 として取得",
@@ -23471,9 +25164,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "videoDeviceInfo:getDeviceID",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the numeric device ID (-1 if unknown)",
                     "desc_ja": "数値のデバイス ID を取得（不明なら -1）",
@@ -23481,9 +25176,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoDeviceInfo:getDeviceName",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the human-readable device name",
                     "desc_ja": "人間が読めるデバイス名を取得",
@@ -23491,9 +25188,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoDeviceInfo:getUniqueId",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the stable unique identifier for the device",
                     "desc_ja": "デバイスの安定した一意識別子を取得",
@@ -23524,9 +25223,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "videoGrabber:listDevices",
-                    "return": "table",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the list of available camera devices",
                     "desc_ja": "利用可能なカメラデバイスのリストを返す",
@@ -23534,9 +25235,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:setDeviceID",
-                    "return": "(nothing)",
                     "signatures": [
-                        "deviceId"
+                        {
+                            "ret": "(nothing)",
+                            "params": "deviceId"
+                        }
                     ],
                     "desc": "Select which camera to use; call before setup()",
                     "desc_ja": "使用するカメラを選択。setup() の前に呼ぶ",
@@ -23544,9 +25247,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:getDeviceID",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the selected device ID",
                     "desc_ja": "選択されたデバイス ID を返す",
@@ -23554,9 +25259,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:setDesiredFrameRate",
-                    "return": "(nothing)",
                     "signatures": [
-                        "fps"
+                        {
+                            "ret": "(nothing)",
+                            "params": "fps"
+                        }
                     ],
                     "desc": "Request a capture frame rate; call before setup()",
                     "desc_ja": "キャプチャのフレームレートをリクエスト。setup() の前に呼ぶ",
@@ -23564,9 +25271,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:getDesiredFrameRate",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the requested frame rate (-1 if unspecified)",
                     "desc_ja": "リクエストされたフレームレートを返す (未指定なら -1)",
@@ -23574,9 +25283,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:setVerbose",
-                    "return": "(nothing)",
                     "signatures": [
-                        "verbose"
+                        {
+                            "ret": "(nothing)",
+                            "params": "verbose"
+                        }
                     ],
                     "desc": "Enable or disable verbose logging",
                     "desc_ja": "詳細ログを有効/無効化",
@@ -23584,9 +25295,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:isVerbose",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return whether verbose logging is enabled",
                     "desc_ja": "verbose ログが有効かどうかを返す",
@@ -23594,9 +25307,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:setup",
-                    "return": "boolean",
                     "signatures": [
-                        "width = 640, height = 480"
+                        {
+                            "ret": "boolean",
+                            "params": "width = 640, height = 480"
+                        }
                     ],
                     "desc": "Start the camera at the requested size. Returns false if permission is not yet granted (it is requested asynchronously); keep calling update() and capture begins once granted",
                     "desc_ja": "指定サイズでカメラを開始。許可がまだ得られていない場合は false を返す（許可は非同期で要求される）。update() を呼び続け、許可されるとキャプチャが始まる",
@@ -23604,9 +25319,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:close",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Stop the camera and release its resources",
                     "desc_ja": "カメラを停止しリソースを解放",
@@ -23614,9 +25331,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:update",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Poll for a new frame and upload it to the texture. Call every frame; also completes a setup() that was waiting on permission",
                     "desc_ja": "新しいフレームをポーリングしテクスチャにアップロード。毎フレーム呼ぶ。許可待ちだった setup() もここで完了する",
@@ -23624,9 +25343,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:isFrameNew",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return true if a new frame arrived during the most recent update()",
                     "desc_ja": "直近の update() で新しいフレームが届いた場合 true を返す",
@@ -23634,9 +25355,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:isInitialized",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return true once the camera is set up and capturing",
                     "desc_ja": "カメラのセットアップが完了しキャプチャ中なら true を返す",
@@ -23644,9 +25367,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:isPendingPermission",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return true while waiting for camera permission to be granted",
                     "desc_ja": "カメラ許可の付与を待っている間 true を返す",
@@ -23654,9 +25379,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:getWidth",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the captured frame width in pixels",
                     "desc_ja": "キャプチャしたフレームの幅をピクセルで返す",
@@ -23664,9 +25391,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:getHeight",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the captured frame height in pixels",
                     "desc_ja": "キャプチャしたフレームの高さをピクセルで返す",
@@ -23674,9 +25403,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:getDeviceName",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the name of the active capture device",
                     "desc_ja": "アクティブなキャプチャデバイスの名前を返す",
@@ -23684,10 +25415,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:getPixels",
-                    "return": "number",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        },
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return a pointer to the current RGBA pixel buffer",
                     "desc_ja": "現在の RGBA ピクセルバッファへのポインタを返す",
@@ -23695,9 +25431,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:setFrameQueueSize",
-                    "return": "(nothing)",
                     "signatures": [
-                        "maxFrames"
+                        {
+                            "ret": "(nothing)",
+                            "params": "maxFrames"
+                        }
                     ],
                     "desc": "Enable the timestamped frame queue and set its capacity (0 = disable, the default; zero overhead when off). When full, the oldest frame is dropped so a slow consumer never blocks capture. Sizing hint: at least ceil(cameraFps / appFps) plus headroom; 8-16 is plenty. Can be called before or after setup()",
                     "desc_ja": "タイムスタンプ付きフレームキューを有効化し容量を設定（0 = 無効。デフォルトで、オフ時のオーバーヘッドはゼロ）。満杯時は古いフレームから捨てるので、取り出しが遅れてもキャプチャは止まらない。容量目安は ceil(カメラfps / アプリfps) + 余裕で、8〜16 で十分。setup() の前後どちらでも呼べる",
@@ -23705,9 +25443,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:getFrameQueueSize",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the frame queue capacity (0 = queueing disabled)",
                     "desc_ja": "フレームキューの容量を返す（0 = キュー無効）",
@@ -23715,9 +25455,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:copyToImage",
-                    "return": "(nothing)",
                     "signatures": [
-                        "image"
+                        {
+                            "ret": "(nothing)",
+                            "params": "image"
+                        }
                     ],
                     "desc": "Copy the current frame into an Image (allocating/updating it as needed)",
                     "desc_ja": "現在のフレームを Image にコピー（必要に応じて確保・更新する）",
@@ -23725,10 +25467,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoGrabber:getTexture",
-                    "return": "Texture",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "Texture",
+                            "params": ""
+                        },
+                        {
+                            "ret": "Texture",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return the texture holding the live camera frame (HasTexture override)",
                     "desc_ja": "ライブカメラフレームを保持するテクスチャを返す（HasTexture のオーバーライド）",
@@ -23738,9 +25485,11 @@ const TrussCAPI = {
             "static_methods": [
                 {
                     "name": "VideoGrabber.checkCameraPermission",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return whether camera access has been granted (macOS 10.14+)",
                     "desc_ja": "カメラアクセスが許可されているかどうかを返す（macOS 10.14+）",
@@ -23748,9 +25497,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "VideoGrabber.requestCameraPermission",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Request camera access asynchronously (macOS)",
                     "desc_ja": "カメラアクセスを非同期で要求（macOS）",
@@ -23781,9 +25532,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "videoPlayer:load",
-                    "return": "LoadResult",
                     "signatures": [
-                        "path"
+                        {
+                            "ret": "LoadResult",
+                            "params": "path"
+                        }
                     ],
                     "desc": "Load a video file",
                     "desc_ja": "ビデオファイルを読み込む",
@@ -23791,9 +25544,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:close",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Close the video and release resources",
                     "desc_ja": "ビデオを閉じてリソースを解放",
@@ -23801,9 +25556,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:update",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Update the video frame. Call once per frame in update()",
                     "desc_ja": "ビデオフレームを更新。update()内で毎フレーム呼ぶ",
@@ -23811,9 +25568,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:play",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Start or resume playback. With the auto poster (default), a seek made while stopped/paused is bridged with the exact frame at the new position before playback, so it never starts on a stale picture",
                     "desc_ja": "再生を開始/再開。自動ポスター（デフォルト）有効時は、停止/一時停止中のシークがあれば新しい位置の正確なフレームを載せてから再生するので、古い絵のまま再生が始まらない",
@@ -23821,9 +25580,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:setAutoPoster",
-                    "return": "(nothing)",
                     "signatures": [
-                        "on"
+                        {
+                            "ret": "(nothing)",
+                            "params": "on"
+                        }
                     ],
                     "desc": "Auto poster (default ON): on load/stop/play the player synchronously puts the frame at the current position on the texture, so drawing never shows black or a stale picture. Turn off to skip the one-time synchronous decode",
                     "desc_ja": "自動ポスター（デフォルトON）。load/stop/play 時に現在位置のフレームを同期的にテクスチャへ載せるので、描画が黒や古い絵になる瞬間が無い。同期デコード（1回きり）を避けたい場合のみオフにする",
@@ -23831,9 +25592,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getAutoPoster",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Return whether the auto poster is enabled (default true)",
                     "desc_ja": "自動ポスターが有効かを返す（デフォルト true）",
@@ -23841,10 +25604,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:draw",
-                    "return": "(nothing)",
                     "signatures": [
-                        "x, y",
-                        "x, y, w, h"
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, w, h"
+                        }
                     ],
                     "desc": "Draw the current video frame at (x, y), optionally scaled to w x h",
                     "desc_ja": "現在のビデオフレームを (x, y) に描画。w x h を指定するとスケール",
@@ -23852,9 +25620,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getDuration",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get total duration in seconds",
                     "desc_ja": "総再生時間を秒単位で取得",
@@ -23862,9 +25632,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getPosition",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get current position (0.0 to 1.0)",
                     "desc_ja": "現在の再生位置を取得（0.0〜1.0）",
@@ -23872,9 +25644,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getCurrentFrame",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get current frame number",
                     "desc_ja": "現在のフレーム番号を取得",
@@ -23882,9 +25656,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getTotalFrames",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get total number of frames",
                     "desc_ja": "総フレーム数を取得",
@@ -23892,9 +25668,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:setFrame",
-                    "return": "(nothing)",
                     "signatures": [
-                        "frame"
+                        {
+                            "ret": "(nothing)",
+                            "params": "frame"
+                        }
                     ],
                     "desc": "Seek to a specific frame number",
                     "desc_ja": "指定フレームにシーク",
@@ -23902,9 +25680,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:nextFrame",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Advance to the next frame",
                     "desc_ja": "次のフレームに進む",
@@ -23912,9 +25692,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:previousFrame",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Go back to the previous frame",
                     "desc_ja": "前のフレームに戻る",
@@ -23922,9 +25704,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:setGammaCorrection",
-                    "return": "(nothing)",
                     "signatures": [
-                        "gamma"
+                        {
+                            "ret": "(nothing)",
+                            "params": "gamma"
+                        }
                     ],
                     "desc": "Set gamma correction (1.0 = none). Use ~0.45 to brighten on platforms with dark output (e.g. macOS AVFoundation)",
                     "desc_ja": "ガンマ補正を設定（1.0=補正なし）。macOS等で暗くなる場合に~0.45で明るくする",
@@ -23932,9 +25716,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getGammaCorrection",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get current gamma correction value",
                     "desc_ja": "現在のガンマ補正値を取得",
@@ -23942,9 +25728,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:setUseHwAccel",
-                    "return": "(nothing)",
                     "signatures": [
-                        "enable"
+                        {
+                            "ret": "(nothing)",
+                            "params": "enable"
+                        }
                     ],
                     "desc": "Enable/disable hardware decoding. Must be called before load(). Default: true. When enabled, the player probes available HW backends (VAAPI, V4L2M2M, CUDA, etc.) and falls back to software if none are available. Currently affects the Linux backend only.",
                     "desc_ja": "ハードウェアデコードの有効/無効。load()の前に呼ぶ。デフォルト: true。有効時はHWバックエンド（VAAPI, V4L2M2M, CUDA等）を自動検出し、なければソフトウェアにフォールバック。現在Linuxのみ対応",
@@ -23952,9 +25740,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getUseHwAccel",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get HW accel preference (not the actual backend — use isUsingHwAccel() for that)",
                     "desc_ja": "HWアクセル設定を取得（実際のバックエンドはisUsingHwAccel()で確認）",
@@ -23962,10 +25752,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getPixels",
-                    "return": "number",
                     "signatures": [
-                        "",
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        },
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Pointer to the current RGBA pixel buffer (mutable)",
                     "desc_ja": "現在の RGBA ピクセルバッファへのポインタ（書き換え可能）",
@@ -23973,9 +25768,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getPixelsY",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Pointer to the Y (luma) plane when decoding NV12/YUV; null otherwise",
                     "desc_ja": "NV12/YUV デコード時の Y（輝度）プレーンへのポインタ。それ以外は null",
@@ -23983,9 +25780,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getPixelsUV",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Pointer to the interleaved UV (chroma) plane when decoding NV12; null otherwise",
                     "desc_ja": "NV12 デコード時のインターリーブ UV（色差）プレーンへのポインタ。それ以外は null",
@@ -23993,9 +25792,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:hasAudio",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if the loaded video has an audio track",
                     "desc_ja": "読み込んだビデオに音声トラックがあるか確認",
@@ -24003,9 +25804,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getAudioCodec",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "FourCC of the audio codec in the loaded video (0 if none)",
                     "desc_ja": "読み込んだビデオの音声コーデックの FourCC（なければ 0）",
@@ -24013,9 +25816,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getAudioData",
-                    "return": "table",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
                     ],
                     "desc": "Raw decoded audio data for the loaded video",
                     "desc_ja": "読み込んだビデオのデコード済み音声データ（生バイト）",
@@ -24023,9 +25828,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getAudioSampleRate",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Audio sample rate in Hz (0 if no audio)",
                     "desc_ja": "音声のサンプルレート（Hz、音声がなければ 0）",
@@ -24033,9 +25840,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getAudioChannels",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of audio channels (0 if no audio)",
                     "desc_ja": "音声のチャンネル数（音声がなければ 0）",
@@ -24043,9 +25852,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:isUsingHwAccel",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if hardware decoding is currently active (after load)",
                     "desc_ja": "ハードウェアデコードが現在有効か確認（load後に使用）",
@@ -24053,9 +25864,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getHwAccelName",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the name of the active decode backend. Returns 'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', or 'none'",
                     "desc_ja": "使用中のデコードバックエンド名を取得。'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', 'none' のいずれか",
@@ -24063,9 +25876,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoPlayer:getPath",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Path of the currently loaded video file (resolved via getDataPath); empty string when nothing is loaded",
                     "desc_ja": "現在ロード中のビデオファイルのパス（getDataPath で解決済み）。未ロードなら空文字列",
@@ -24178,9 +25993,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "videoWriter:open",
-                    "return": "boolean",
                     "signatures": [
-                        "path, width, height, settings = {}"
+                        {
+                            "ret": "boolean",
+                            "params": "path, width, height, settings = {}"
+                        }
                     ],
                     "desc": "Open the encoder at the given size (path resolved via getDataPath)",
                     "desc_ja": "指定サイズでエンコーダを開く（パスはgetDataPathで解決）",
@@ -24188,9 +26005,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:close",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Finalize and flush the video file",
                     "desc_ja": "動画ファイルを確定してフラッシュ",
@@ -24198,9 +26017,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:isOpen",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Check if the encoder is open and accepting frames",
                     "desc_ja": "エンコーダが開いていてフレームを受け付けるか確認",
@@ -24208,9 +26029,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:getFrameCount",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Number of frames written so far",
                     "desc_ja": "これまでに書き込んだフレーム数",
@@ -24218,9 +26041,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:getWidth",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Encoder output width in pixels",
                     "desc_ja": "エンコーダ出力の幅（ピクセル）",
@@ -24228,9 +26053,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:getHeight",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Encoder output height in pixels",
                     "desc_ja": "エンコーダ出力の高さ（ピクセル）",
@@ -24238,9 +26065,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:getFps",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Fixed encoding frame rate",
                     "desc_ja": "固定エンコードフレームレート",
@@ -24248,9 +26077,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:getPath",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Resolved output file path",
                     "desc_ja": "解決済みの出力ファイルパス",
@@ -24258,9 +26089,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:getSettings",
-                    "return": "VideoRecordSettings",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "VideoRecordSettings",
+                            "params": ""
+                        }
                     ],
                     "desc": "Encoder settings the writer was opened with",
                     "desc_ja": "ライターを開いたときのエンコーダ設定",
@@ -24268,10 +26101,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:addFrame",
-                    "return": "boolean",
                     "signatures": [
-                        "fbo",
-                        "pixels"
+                        {
+                            "ret": "boolean",
+                            "params": "fbo"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": "pixels"
+                        }
                     ],
                     "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)",
                     "desc_ja": "1フレームを固定レート（frameIndex/fps）で追加",
@@ -24279,10 +26117,15 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:addFrameAt",
-                    "return": "boolean",
                     "signatures": [
-                        "fbo, timeSec",
-                        "pixels, timeSec"
+                        {
+                            "ret": "boolean",
+                            "params": "fbo, timeSec"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": "pixels, timeSec"
+                        }
                     ],
                     "desc": "Append one frame at an explicit presentation time (seconds)",
                     "desc_ja": "1フレームを明示的な表示時刻（秒）で追加",
@@ -24290,9 +26133,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "videoWriter:submitFrame",
-                    "return": "boolean",
                     "signatures": [
-                        "timeSec"
+                        {
+                            "ret": "boolean",
+                            "params": "timeSec"
+                        }
                     ],
                     "desc": "Append the previously locked frame at the given presentation time (seconds)",
                     "desc_ja": "直前にロックしたフレームを指定の表示時刻（秒）で追加",
@@ -24323,9 +26168,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "window:setApp",
-                    "return": "(nothing)",
                     "signatures": [
-                        "app"
+                        {
+                            "ret": "(nothing)",
+                            "params": "app"
+                        }
                     ],
                     "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window",
                     "desc_ja": "このウィンドウにAppを設定 (ウィンドウにコンテンツを与える唯一の方法)。Appのライフサイクル一式 (setup/update/draw/キー/マウス/windowResized + RectNodeサイズ同期) がこのウィンドウで動く。1ウィンドウ1App",
@@ -24333,9 +26180,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:getApp",
-                    "return": "shared_ptr",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "shared_ptr",
+                            "params": ""
+                        }
                     ],
                     "desc": "Get the App attached to this window",
                     "desc_ja": "このウィンドウのAppを取得",
@@ -24343,9 +26192,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:events",
-                    "return": "CoreEvents",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "CoreEvents",
+                            "params": ""
+                        }
                     ],
                     "desc": "This window's own event stream (mousePressed / keyPressed / draw / ...)",
                     "desc_ja": "このウィンドウ専用のイベントストリーム (mousePressed / keyPressed / draw など)",
@@ -24353,9 +26204,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:close",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Close the native window; the main window and other windows keep running",
                     "desc_ja": "ウィンドウを閉じる。メインウィンドウや他のウィンドウは動き続ける",
@@ -24363,9 +26216,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:isOpen",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether the native window is still open",
                     "desc_ja": "ウィンドウが開いているか",
@@ -24373,9 +26228,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:setTitle",
-                    "return": "(nothing)",
                     "signatures": [
-                        "title"
+                        {
+                            "ret": "(nothing)",
+                            "params": "title"
+                        }
                     ],
                     "desc": "Set the window title",
                     "desc_ja": "ウィンドウタイトルを設定",
@@ -24383,9 +26240,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:getTitle",
-                    "return": "string",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
                     ],
                     "desc": "Last title set for this window (via WindowSettings or setTitle)",
                     "desc_ja": "このウィンドウに最後に設定されたタイトル（WindowSettings または setTitle 経由）",
@@ -24393,9 +26252,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:getWidth",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Window width in logical points (matches its coordinate system)",
                     "desc_ja": "ウィンドウ幅 (論理ポイント、座標系と一致)",
@@ -24403,9 +26264,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:getHeight",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "Window height in logical points (matches its coordinate system)",
                     "desc_ja": "ウィンドウ高さ (論理ポイント、座標系と一致)",
@@ -24413,9 +26276,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:setSize",
-                    "return": "(nothing)",
                     "signatures": [
-                        "width, height"
+                        {
+                            "ret": "(nothing)",
+                            "params": "width, height"
+                        }
                     ],
                     "desc": "Resize this window's content area to the given logical size (points)",
                     "desc_ja": "このウィンドウのコンテンツ領域を指定した論理サイズ（ポイント）にリサイズ",
@@ -24423,9 +26288,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:setFullscreen",
-                    "return": "(nothing)",
                     "signatures": [
-                        "full"
+                        {
+                            "ret": "(nothing)",
+                            "params": "full"
+                        }
                     ],
                     "desc": "Enter or leave fullscreen for this window (macOS native fullscreen, Windows borderless-fullscreen, Linux EWMH _NET_WM_STATE_FULLSCREEN)",
                     "desc_ja": "このウィンドウのフルスクリーンを開始/解除（macOS はネイティブフルスクリーン、Windows はボーダーレスフルスクリーン、Linux は EWMH _NET_WM_STATE_FULLSCREEN）",
@@ -24433,9 +26300,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:isFullscreen",
-                    "return": "boolean",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
                     ],
                     "desc": "Whether this window is currently fullscreen (macOS reads the live window state; the transition is animated)",
                     "desc_ja": "このウィンドウが現在フルスクリーンかどうか（macOS はライブのウィンドウ状態を参照。遷移はアニメーション）",
@@ -24443,9 +26312,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:toggleFullscreen",
-                    "return": "(nothing)",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
                     ],
                     "desc": "Toggle this window's fullscreen state",
                     "desc_ja": "このウィンドウのフルスクリーン状態を切り替え",
@@ -24453,9 +26324,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:setClearColor",
-                    "return": "(nothing)",
                     "signatures": [
-                        "c"
+                        {
+                            "ret": "(nothing)",
+                            "params": "c"
+                        }
                     ],
                     "desc": "Background clear color for this window",
                     "desc_ja": "このウィンドウの背景クリア色",
@@ -24463,9 +26336,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:setFps",
-                    "return": "(nothing)",
                     "signatures": [
-                        "fps"
+                        {
+                            "ret": "(nothing)",
+                            "params": "fps"
+                        }
                     ],
                     "desc": "Set this window's target frame rate; <= 0 (or >= the display rate) free-runs at vsync, otherwise update/draw run at ~fps by skipping display ticks",
                     "desc_ja": "このウィンドウの目標フレームレートを設定。0 以下（またはディスプレイのリフレッシュレート以上）で vsync 同期のフリーラン、それ以外は表示ティックを間引いて約 fps で update/draw を実行",
@@ -24473,9 +26348,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "window:getFps",
-                    "return": "number",
                     "signatures": [
-                        ""
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
                     ],
                     "desc": "This window's target frame rate set via setFps (0 = free-run at vsync); not a measured rate",
                     "desc_ja": "setFps で設定したこのウィンドウの目標フレームレート（0 = vsync フリーラン）。実測値ではない",
@@ -24583,9 +26460,11 @@ const TrussCAPI = {
             "methods": [
                 {
                     "name": "windowSettings:setSize",
-                    "return": "WindowSettings",
                     "signatures": [
-                        "w, h"
+                        {
+                            "ret": "WindowSettings",
+                            "params": "w, h"
+                        }
                     ],
                     "desc": "Set window size (chainable)",
                     "desc_ja": "ウィンドウサイズを設定 (チェイン可能)",
@@ -24593,9 +26472,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "windowSettings:setTitle",
-                    "return": "WindowSettings",
                     "signatures": [
-                        "t"
+                        {
+                            "ret": "WindowSettings",
+                            "params": "t"
+                        }
                     ],
                     "desc": "Set window title (chainable)",
                     "desc_ja": "ウィンドウタイトルを設定 (チェイン可能)",
@@ -24603,9 +26484,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "windowSettings:setHighDpi",
-                    "return": "WindowSettings",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "WindowSettings",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "Enable/disable high DPI support (chainable)",
                     "desc_ja": "High DPI 対応を有効/無効化 (チェイン可能)",
@@ -24613,9 +26496,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "windowSettings:setPixelPerfect",
-                    "return": "WindowSettings",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "WindowSettings",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "Set pixel-perfect mode: true = framebuffer-size coords, false = logical-size coords (chainable)",
                     "desc_ja": "ピクセルパーフェクトモードを設定: true = framebuffer サイズ座標、false = 論理サイズ座標 (チェイン可能)",
@@ -24623,9 +26508,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "windowSettings:setSampleCount",
-                    "return": "WindowSettings",
                     "signatures": [
-                        "count"
+                        {
+                            "ret": "WindowSettings",
+                            "params": "count"
+                        }
                     ],
                     "desc": "Set MSAA sample count (chainable)",
                     "desc_ja": "MSAA サンプル数を設定 (チェイン可能)",
@@ -24633,9 +26520,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "windowSettings:setFullscreen",
-                    "return": "WindowSettings",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "WindowSettings",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "Enable/disable fullscreen at startup (chainable)",
                     "desc_ja": "起動時のフルスクリーンを有効/無効化 (チェイン可能)",
@@ -24643,9 +26532,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "windowSettings:setDecorated",
-                    "return": "WindowSettings",
                     "signatures": [
-                        "enabled"
+                        {
+                            "ret": "WindowSettings",
+                            "params": "enabled"
+                        }
                     ],
                     "desc": "false = borderless/chromeless window that can still take focus and be closed programmatically (chainable)",
                     "desc_ja": "false = フォーカス取得やプログラムからのクローズは可能なボーダーレス/クロームレスウィンドウ (チェイン可能)",
@@ -24653,9 +26544,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "windowSettings:setClipboardSize",
-                    "return": "WindowSettings",
                     "signatures": [
-                        "size"
+                        {
+                            "ret": "WindowSettings",
+                            "params": "size"
+                        }
                     ],
                     "desc": "Set clipboard buffer size in bytes (chainable)",
                     "desc_ja": "クリップボードバッファのサイズをバイト単位で設定 (チェイン可能)",
@@ -24663,9 +26556,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "windowSettings:setSwapInterval",
-                    "return": "WindowSettings",
                     "signatures": [
-                        "interval"
+                        {
+                            "ret": "WindowSettings",
+                            "params": "interval"
+                        }
                     ],
                     "desc": "Set VSync present interval: 1 = on, 0 = off, N = every Nth refresh (chainable)",
                     "desc_ja": "VSync の present 間隔を設定: 1 = on、0 = off、N = N回ごとのリフレッシュ (チェイン可能)",
@@ -24673,9 +26568,11 @@ const TrussCAPI = {
                 },
                 {
                     "name": "windowSettings:reserveUniformBuffer",
-                    "return": "WindowSettings",
                     "signatures": [
-                        "bytes"
+                        {
+                            "ret": "WindowSettings",
+                            "params": "bytes"
+                        }
                     ],
                     "desc": "Reserve the per-frame GPU uniform buffer in bytes, vector::reserve style; 0 = backend default 4MB ≈ 8k draw calls. Metal/WebGPU/Vulkan only — GL/D3D11 have no such cap (chainable)",
                     "desc_ja": "フレームあたりの GPU ユニフォームバッファを vector::reserve の要領でバイト単位で予約; 0 = バックエンド既定の 4MB ≈ 8千ドローコール。Metal/WebGPU/Vulkan のみ — GL/D3D11 に上限はない (チェイン可能)",

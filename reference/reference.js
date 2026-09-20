@@ -686,13 +686,27 @@
             html += `</div>`;
         }
 
+        // Overload rows: {ret, params}. A const/non-const pair differs only in the
+        // qualifier, which is not shown, so identical rendered rows collapse.
+        const dedupeSigs = (sigs) => {
+            const seen = new Set(), out = [];
+            for (const s of sigs || []) {
+                const key = `${s.ret || ''}|${s.params || ''}`;
+                if (!seen.has(key)) { seen.add(key); out.push(s); }
+            }
+            return out;
+        };
+
         if (t.methods && t.methods.length > 0) {
             html += `<div class="detail-section">`;
             html += `<div class="detail-section-title">${esc(UI.methods)}</div>`;
             for (const m of t.methods) {
                 html += `<div class="detail-entry">`;
-                for (const sig of [...new Set(m.signatures)]) {   // dedupe identical const/non-const rows
-                    html += `<div class="detail-sig"><span class="ret">${esc(m.return || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig)}</span>)</div>`;
+                // Each overload carries its own return type; dedupe on the WHOLE
+                // row so a const/non-const pair with identical params still
+                // collapses, while overloads that genuinely differ stay apart.
+                for (const sig of dedupeSigs(m.signatures)) {
+                    html += `<div class="detail-sig"><span class="ret">${esc(sig.ret || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig.params)}</span>)</div>`;
                 }
                 if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
                 if (m.deprecated) html += renderDeprecated(m.deprecated);
@@ -707,8 +721,11 @@
             html += `<div class="detail-section-title">${esc(UI.staticMethods)}</div>`;
             for (const m of t.static_methods) {
                 html += `<div class="detail-entry">`;
-                for (const sig of [...new Set(m.signatures)]) {   // dedupe identical const/non-const rows
-                    html += `<div class="detail-sig"><span class="ret">${esc(m.return || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig)}</span>)</div>`;
+                // Each overload carries its own return type; dedupe on the WHOLE
+                // row so a const/non-const pair with identical params still
+                // collapses, while overloads that genuinely differ stay apart.
+                for (const sig of dedupeSigs(m.signatures)) {
+                    html += `<div class="detail-sig"><span class="ret">${esc(sig.ret || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig.params)}</span>)</div>`;
                 }
                 if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
                 html += renderPlatforms(m, true);
