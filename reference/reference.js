@@ -32,6 +32,12 @@
             for (const p of t.properties || []) pick(p, 'desc');
             for (const m of (t.methods || []).concat(t.static_methods || [])) { pick(m, 'desc'); pick(m, 'platformNote'); }
             for (const o of t.operators || []) pick(o, 'desc');
+            for (const n of t.nested || []) {
+                pick(n, 'desc');
+                for (const p of n.properties || []) pick(p, 'desc');
+                for (const m of (n.methods || []).concat(n.static_methods || [])) pick(m, 'desc');
+                for (const v of n.values || []) pick(v, 'desc');
+            }
         }
         for (const c of api.constants || []) { pick(c, 'desc'); pick(c, 'details'); }
         for (const e of api.enums || []) { pick(e, 'desc'); for (const v of e.values || []) pick(v, 'desc'); for (const o of e.operators || []) pick(o, 'desc'); }
@@ -54,6 +60,7 @@
         properties: 'Properties',
         methods: 'Methods',
         staticMethods: 'Static Methods',
+        nestedTypes: 'Nested Types',
         operators: 'Operators',
         deprecated: 'Deprecated',
         deprecatedUse: 'Use',
@@ -729,6 +736,36 @@
                 }
                 if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
                 html += renderPlatforms(m, true);
+                html += `</div>`;
+            }
+            html += `</div>`;
+        }
+
+        // Nested types and enums (Ray::Hit, Node::HitResult, SoundSource::Kind, …).
+        // Methods advertise them by their bare name -- `Hit Ray::intersectSphere(float)`
+        // -- so without this section the reader has nowhere to find out what Hit is.
+        if (t.nested && t.nested.length) {
+            html += `<div class="detail-section">`;
+            html += `<div class="detail-section-title">${esc(UI.nestedTypes)}</div>`;
+            for (const n of t.nested) {
+                html += `<div class="detail-entry">`;
+                html += `<div class="detail-sig"><span class="ret">${n.kind === 'enum' ? 'enum' : 'struct'}</span> <span class="name">${esc(n.name)}</span></div>`;
+                if (n.desc) html += `<div class="detail-entry-desc">// ${esc(n.desc)}</div>`;
+                const ind = ' style="margin-left:1.5em;"';
+                for (const p of n.properties || []) {
+                    html += `<div class="detail-sig"${ind}><span class="ret">${esc(p.type || '')}</span> <span class="name">${esc(p.name)}</span></div>`;
+                    if (p.desc) html += `<div class="detail-entry-desc"${ind}>// ${esc(p.desc)}</div>`;
+                }
+                for (const m of (n.methods || []).concat(n.static_methods || [])) {
+                    for (const sig of dedupeSigs(m.signatures))
+                        html += `<div class="detail-sig"${ind}><span class="ret">${esc(sig.ret || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig.params)}</span>)</div>`;
+                    if (m.desc) html += `<div class="detail-entry-desc"${ind}>// ${esc(m.desc)}</div>`;
+                }
+                for (const v of n.values || []) {
+                    const val = (v.value !== undefined && v.value !== null) ? ` <span class="ov-val">= ${esc(String(v.value))}</span>` : '';
+                    html += `<div class="detail-sig"${ind}><span class="name">${esc(n.short)}${SCOPE_SEP}${esc(v.name)}</span>${val}</div>`;
+                    if (v.desc) html += `<div class="detail-entry-desc"${ind}>// ${esc(v.desc)}</div>`;
+                }
                 html += `</div>`;
             }
             html += `</div>`;

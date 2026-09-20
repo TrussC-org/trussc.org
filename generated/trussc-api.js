@@ -15971,6 +15971,39 @@ const TrussCAPI = {
                     ],
                     "desc": "Build an orthographic Z-parallel ray from a 2D screen point"
                 }
+            ],
+            "nested": [
+                {
+                    "name": "Ray::Hit",
+                    "short": "Hit",
+                    "kind": "type",
+                    "desc": "Result of a ray intersection (this is Ray::Hit). Returned by every intersect* overload; `hit` says whether anything was hit, and `t` / `point` are only meaningful when it did. Convertible to bool, so it reads directly as a condition: `if (auto h = ray.intersectSphere(r))`.",
+                    "desc_ja": "レイの交差結果 (Ray::Hit)。すべての intersect* が返す。`hit` がヒットしたかを示し、`t` と `point` はヒットしたときのみ意味を持つ。bool に変換できるので `if (auto h = ray.intersectSphere(r))` とそのまま条件に書ける",
+                    "desc_ko": "레이 교차 결과 (Ray::Hit). 모든 intersect* 오버로드가 반환. `hit`이 교차 여부를 나타내고 `t`와 `point`는 교차했을 때만 의미가 있다. bool로 변환되므로 `if (auto h = ray.intersectSphere(r))`처럼 조건문에 바로 쓸 수 있다",
+                    "properties": [
+                        {
+                            "name": "hit",
+                            "type": "bool",
+                            "desc": "True if the ray hit",
+                            "desc_ja": "レイがヒットしたかどうか",
+                            "desc_ko": "레이가 교차했는지 여부"
+                        },
+                        {
+                            "name": "t",
+                            "type": "float",
+                            "desc": "Distance along the ray to the intersection — only meaningful when hit is true",
+                            "desc_ja": "交差点までのレイ上の距離 — hit が true のときのみ意味を持つ",
+                            "desc_ko": "교차점까지 레이 위의 거리 — hit이 true일 때만 의미가 있다"
+                        },
+                        {
+                            "name": "point",
+                            "type": "Vec3",
+                            "desc": "Intersection point — only meaningful when hit is true",
+                            "desc_ja": "交点 — hit が true のときのみ意味を持つ",
+                            "desc_ko": "교점 — hit이 true일 때만 의미가 있다"
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -18991,6 +19024,32 @@ const TrussCAPI = {
                     ],
                     "desc": "Duration in seconds. numSamples/sampleRate for buffers; the decoded file's duration for streams."
                 }
+            ],
+            "nested": [
+                {
+                    "name": "SoundSource::Kind",
+                    "short": "Kind",
+                    "kind": "enum",
+                    "desc": "Source kind tag on SoundSource, letting the mixer dispatch without a per-frame virtual call: Eager (SoundBuffer, full PCM in RAM) vs Stream (SoundStream, decoded on demand).",
+                    "desc_ja": "SoundSource の種別タグ。ミキサーがフレームごとの仮想呼び出しなしにディスパッチできる: Eager (SoundBuffer、全 PCM を RAM 保持) と Stream (SoundStream、オンデマンドにデコード)",
+                    "desc_ko": "SoundSource의 종류 태그. 믹서가 프레임마다의 가상 호출 없이 디스패치 가능: Eager (SoundBuffer, 전체 PCM을 RAM 보유) 와 Stream (SoundStream, on-demand 디코딩)",
+                    "values": [
+                        {
+                            "name": "Eager",
+                            "value": 0,
+                            "desc": "Eager source (SoundBuffer): the whole file decoded into RAM.",
+                            "desc_ja": "Eager ソース (SoundBuffer): ファイル全体を RAM にデコード",
+                            "desc_ko": "Eager 소스 (SoundBuffer): 파일 전체를 RAM에 디코딩"
+                        },
+                        {
+                            "name": "Stream",
+                            "value": 1,
+                            "desc": "Streaming source (SoundStream): decoded on demand from disk.",
+                            "desc_ja": "ストリーミングソース (SoundStream): ディスクからオンデマンドにデコード",
+                            "desc_ko": "스트리밍 소스 (SoundStream): 디스크에서 on-demand 디코딩"
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -21150,6 +21209,32 @@ const TrussCAPI = {
                     "desc": "Fixed segment count used in Resolution mode (and as a fallback)",
                     "desc_ja": "Resolution モードで使う固定セグメント数（フォールバックにも使用）",
                     "desc_ko": "Resolution 모드에서 사용하는 고정 세그먼트 수(폴백으로도 사용)"
+                }
+            ],
+            "nested": [
+                {
+                    "name": "CurveStyle::Mode",
+                    "short": "Mode",
+                    "kind": "enum",
+                    "desc": "Curve tessellation mode: adaptive tolerance or fixed resolution",
+                    "desc_ja": "曲線テッセレーションモード: 適応トレランスまたは固定解像度",
+                    "desc_ko": "곡선 테셀레이션 모드: 적응형 톨러런스 또는 고정 해상도",
+                    "values": [
+                        {
+                            "name": "Tolerance",
+                            "value": 0,
+                            "desc": "Pick segment count so the chord-to-curve error stays under the tolerance (pixels)",
+                            "desc_ja": "",
+                            "desc_ko": ""
+                        },
+                        {
+                            "name": "Resolution",
+                            "value": 1,
+                            "desc": "Use a fixed segment count regardless of radius",
+                            "desc_ja": "",
+                            "desc_ko": ""
+                        }
+                    ]
                 }
             ]
         },
@@ -25252,6 +25337,70 @@ const TrussCAPI = {
                     ],
                     "desc": "Get a reference to the stroke's source polylines"
                 }
+            ],
+            "nested": [
+                {
+                    "name": "StrokeMesh::CapType",
+                    "short": "CapType",
+                    "kind": "enum",
+                    "desc": "Line cap shape for the ends of an open stroke",
+                    "desc_ja": "開いたストロークの端のラインキャップ形状",
+                    "desc_ko": "열린 스트로크 끝의 라인 캡 모양",
+                    "values": [
+                        {
+                            "name": "CAP_BUTT",
+                            "value": 0,
+                            "desc": "Butt cap (cut flat at the endpoint)",
+                            "desc_ja": "",
+                            "desc_ko": ""
+                        },
+                        {
+                            "name": "CAP_ROUND",
+                            "value": 1,
+                            "desc": "Round cap (semicircle)",
+                            "desc_ja": "",
+                            "desc_ko": ""
+                        },
+                        {
+                            "name": "CAP_SQUARE",
+                            "value": 2,
+                            "desc": "Square cap (extend by half the width)",
+                            "desc_ja": "",
+                            "desc_ko": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "StrokeMesh::JoinType",
+                    "short": "JoinType",
+                    "kind": "enum",
+                    "desc": "Line join shape at the corners of a stroke",
+                    "desc_ja": "ストロークのコーナーのラインジョイン形状",
+                    "desc_ko": "스트로크 모서리의 라인 조인 모양",
+                    "values": [
+                        {
+                            "name": "JOIN_MITER",
+                            "value": 0,
+                            "desc": "Miter join (sharp pointed corners)",
+                            "desc_ja": "",
+                            "desc_ko": ""
+                        },
+                        {
+                            "name": "JOIN_ROUND",
+                            "value": 1,
+                            "desc": "Round join (rounded corners)",
+                            "desc_ja": "",
+                            "desc_ko": ""
+                        },
+                        {
+                            "name": "JOIN_BEVEL",
+                            "value": 2,
+                            "desc": "Bevel join (flat cut corners)",
+                            "desc_ja": "",
+                            "desc_ko": ""
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -25835,6 +25984,67 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Total memory used by the shared font atlas cache across all fonts"
+                }
+            ],
+            "nested": [
+                {
+                    "name": "Font::PlacedGlyph",
+                    "short": "PlacedGlyph",
+                    "kind": "type",
+                    "desc": "One laid-out glyph emitted by Font::forEachGlyph (nested as Font::PlacedGlyph). Carries the final codepoint and pen position so visitors can render quads, build vector paths, or hit-test independently of the layout pass",
+                    "desc_ja": "Font::forEachGlyph が出力するレイアウト済みグリフ 1 個（Font::PlacedGlyph としてネスト）。最終的な codepoint とペン位置を持ち、ビジターがレイアウトパスとは独立に quad 描画・ベクターパス生成・ヒットテストを行える",
+                    "desc_ko": "Font::forEachGlyph가 출력하는 배치 완료된 글리프 하나(Font::PlacedGlyph로 중첩). 최종 codepoint와 펜 위치를 담아, 비지터가 레이아웃 패스와 독립적으로 quad 렌더링, 벡터 경로 생성, 히트 테스트를 수행 가능",
+                    "properties": [
+                        {
+                            "name": "codepoint",
+                            "type": "uint32_t",
+                            "desc": "Final codepoint after vertical-form mapping",
+                            "desc_ja": "縦書きフォームマッピング後の最終 codepoint",
+                            "desc_ko": "세로쓰기 폼 매핑 후의 최종 codepoint"
+                        },
+                        {
+                            "name": "drawX",
+                            "type": "float",
+                            "desc": "Pen X position; the glyph's own xoffset is added on top",
+                            "desc_ja": "ペンの X 位置。グリフ自身の xoffset がさらに加算される",
+                            "desc_ko": "펜의 X 위치. 글리프 자체의 xoffset이 추가로 더해짐"
+                        },
+                        {
+                            "name": "baselineY",
+                            "type": "float",
+                            "desc": "Baseline Y position; the glyph's own yoffset is added on top",
+                            "desc_ja": "ベースラインの Y 位置。グリフ自身の yoffset がさらに加算される",
+                            "desc_ko": "베이스라인의 Y 위치. 글리프 자체의 yoffset이 추가로 더해짐"
+                        },
+                        {
+                            "name": "rotationCw",
+                            "type": "float",
+                            "desc": "Clockwise rotation in radians: 0 (upright) or TAU/4 (90 degrees, vertical text)",
+                            "desc_ja": "時計回りの回転（ラジアン）: 0（正立）または TAU/4（90 度、縦書き）",
+                            "desc_ko": "시계 방향 회전(라디안): 0(정립) 또는 TAU/4(90도, 세로쓰기)"
+                        },
+                        {
+                            "name": "pivotX",
+                            "type": "float",
+                            "desc": "Rotation center X (used only when rotationCw is non-zero)",
+                            "desc_ja": "回転中心 X（rotationCw が 0 でない場合のみ使用）",
+                            "desc_ko": "회전 중심 X(rotationCw가 0이 아닐 때만 사용)"
+                        },
+                        {
+                            "name": "pivotY",
+                            "type": "float",
+                            "desc": "Rotation center Y (used only when rotationCw is non-zero)",
+                            "desc_ja": "回転中心 Y（rotationCw が 0 でない場合のみ使用）",
+                            "desc_ko": "회전 중심 Y(rotationCw가 0이 아닐 때만 사용)"
+                        },
+                        {
+                            "name": "scaleX",
+                            "type": "float",
+                            "desc": "Horizontal scale (1.0 normally, less than 1 for TCY combine)",
+                            "desc_ja": "水平スケール（通常 1.0、TCY 合成では 1 未満）",
+                            "desc_ko": "수평 스케일(보통 1.0, TCY 합성 시 1 미만)"
+                        }
+                    ]
                 }
             ]
         },
@@ -28507,6 +28717,53 @@ const TrussCAPI = {
                     ],
                     "desc": "Set the camera orientation quaternion"
                 }
+            ],
+            "nested": [
+                {
+                    "name": "EasyCam::Modifier",
+                    "short": "Modifier",
+                    "kind": "enum",
+                    "desc": "Modifier key that must be held for EasyCam mouse input (orbit / pan / zoom), so the camera can share the mouse with scene interaction",
+                    "desc_ja": "EasyCam のマウス入力（オービット / パン / ズーム）に必要な修飾キー。カメラとシーン操作でマウスを共有するために使う",
+                    "desc_ko": "EasyCam 마우스 입력(오비트 / 팬 / 줌)에 필요한 수정자 키. 카메라와 씬 조작이 마우스를 공유할 수 있게 한다",
+                    "values": [
+                        {
+                            "name": "None",
+                            "value": 0,
+                            "desc": "No modifier — plain drags control the camera (default)",
+                            "desc_ja": "修飾キー不要 — そのままのドラッグでカメラが動く（デフォルト）",
+                            "desc_ko": "수정자 없음 — 그냥 드래그하면 카메라가 움직인다(기본값)"
+                        },
+                        {
+                            "name": "Shift",
+                            "value": 1,
+                            "desc": "Hold Shift for camera input",
+                            "desc_ja": "Shift を押しながらでカメラ操作",
+                            "desc_ko": "Shift를 누른 채로 카메라 조작"
+                        },
+                        {
+                            "name": "Ctrl",
+                            "value": 2,
+                            "desc": "Hold Ctrl for camera input",
+                            "desc_ja": "Ctrl を押しながらでカメラ操作",
+                            "desc_ko": "Ctrl을 누른 채로 카메라 조작"
+                        },
+                        {
+                            "name": "Alt",
+                            "value": 3,
+                            "desc": "Hold Alt for camera input",
+                            "desc_ja": "Alt を押しながらでカメラ操作",
+                            "desc_ko": "Alt를 누른 채로 카메라 조작"
+                        },
+                        {
+                            "name": "Super",
+                            "value": 4,
+                            "desc": "Hold the platform key (Cmd / Win) for camera input",
+                            "desc_ja": "プラットフォームキー（Cmd / Win）を押しながらでカメラ操作",
+                            "desc_ko": "플랫폼 키(Cmd / Win)를 누른 채로 카메라 조작"
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -30376,6 +30633,67 @@ const TrussCAPI = {
                     ],
                     "desc": "Total note duration in seconds (used by ChipSoundBundle to lay out note timing)."
                 }
+            ],
+            "nested": [
+                {
+                    "name": "ChipSoundNote::Wave",
+                    "short": "Wave",
+                    "kind": "enum",
+                    "desc": "Waveform a ChipSoundNote is synthesised from. Also available unqualified as `Wave`.",
+                    "desc_ja": "ChipSoundNote を合成する波形。`Wave` という非修飾の別名でも使える",
+                    "desc_ko": "ChipSoundNote를 합성하는 파형. `Wave`라는 비수식 별칭으로도 쓸 수 있다",
+                    "values": [
+                        {
+                            "name": "Sin",
+                            "value": 0,
+                            "desc": "Sine — smooth, no harmonics (default)",
+                            "desc_ja": "サイン波 — 倍音のない滑らかな音（デフォルト）",
+                            "desc_ko": "사인파 — 배음이 없는 부드러운 소리(기본값)"
+                        },
+                        {
+                            "name": "Square",
+                            "value": 1,
+                            "desc": "Square — the classic chiptune lead",
+                            "desc_ja": "矩形波 — チップチューンの定番リード",
+                            "desc_ko": "구형파 — 칩튠의 대표적인 리드"
+                        },
+                        {
+                            "name": "Triangle",
+                            "value": 2,
+                            "desc": "Triangle — softer than square, often used for bass",
+                            "desc_ja": "三角波 — 矩形波より柔らかく、ベースによく使う",
+                            "desc_ko": "삼각파 — 구형파보다 부드러워 베이스에 자주 쓴다"
+                        },
+                        {
+                            "name": "Sawtooth",
+                            "value": 3,
+                            "desc": "Sawtooth — bright and buzzy",
+                            "desc_ja": "ノコギリ波 — 明るくざらついた音",
+                            "desc_ko": "톱니파 — 밝고 거친 소리"
+                        },
+                        {
+                            "name": "Noise",
+                            "value": 4,
+                            "desc": "White noise — percussion and effects",
+                            "desc_ja": "ホワイトノイズ — 打楽器や効果音に",
+                            "desc_ko": "화이트 노이즈 — 타악기와 효과음에"
+                        },
+                        {
+                            "name": "PinkNoise",
+                            "value": 5,
+                            "desc": "Pink noise — darker than white, 1/f spectrum",
+                            "desc_ja": "ピンクノイズ — ホワイトより暗い 1/f スペクトル",
+                            "desc_ko": "핑크 노이즈 — 화이트보다 어두운 1/f 스펙트럼"
+                        },
+                        {
+                            "name": "Silent",
+                            "value": 6,
+                            "desc": "Silence — occupies its duration without sounding, for rests",
+                            "desc_ja": "無音 — 長さだけ占めて鳴らない。休符に使う",
+                            "desc_ko": "무음 — 길이만 차지하고 소리내지 않는다. 쉼표용"
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -30462,6 +30780,32 @@ const TrussCAPI = {
                     ],
                     "desc": "Render all scheduled notes into a single mixed, clipped Sound ready to play."
                 }
+            ],
+            "nested": [
+                {
+                    "name": "ChipSoundBundle::Entry",
+                    "short": "Entry",
+                    "kind": "type",
+                    "desc": "One scheduled note in a ChipSoundBundle: the note itself plus the time it starts at. `ChipSoundBundle::entries` is a vector of these, so a melody can be inspected or edited directly as well as built with add().",
+                    "desc_ja": "ChipSoundBundle に並ぶ1音: 音符そのものと、その開始時刻。`ChipSoundBundle::entries` はこれの配列なので、add() で積むだけでなくメロディを直接読んだり書き換えたりもできる",
+                    "desc_ko": "ChipSoundBundle에 놓인 한 음: 음표 자체와 시작 시각. `ChipSoundBundle::entries`가 이들의 배열이므로 add()로 쌓는 것 외에 멜로디를 직접 읽거나 고칠 수도 있다",
+                    "properties": [
+                        {
+                            "name": "note",
+                            "type": "ChipSoundNote",
+                            "desc": "The chip-synth note for this bundle entry.",
+                            "desc_ja": "このバンドルエントリのチップシンセノート。",
+                            "desc_ko": "이 번들 엔트리의 칩 신스 노트."
+                        },
+                        {
+                            "name": "time",
+                            "type": "float",
+                            "desc": "Start time of this note in seconds.",
+                            "desc_ja": "このノートの開始時刻（秒）。",
+                            "desc_ko": "이 노트의 시작 시각(초)."
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -30494,6 +30838,32 @@ const TrussCAPI = {
                     "desc": "Channel routing, same structure as Sound::setChannelMap(): outer index = file channel, inner list = engine channels summed into it (unnormalized; clipping is the caller's choice). Empty = auto: 1ch engine to mono, 2ch to stereo, 3ch+ to averaged mono",
                     "desc_ja": "チャンネルルーティング。Sound::setChannelMap() と同じ構造で、外側=ファイル側ch、内側=そこへ合算するエンジン側chのリスト（正規化なし・クリップは呼び出し側の裁量）。空=自動: エンジン1ch→モノ、2ch→ステレオ、3ch以上→平均ダウンミックスのモノ",
                     "desc_ko": "채널 라우팅. Sound::setChannelMap()과 같은 구조로, 바깥쪽=파일 채널, 안쪽=그 채널로 합산할 엔진 채널 목록(비정규화, 클리핑은 호출자의 선택). 비어 있으면 자동: 엔진 1ch→모노, 2ch→스테레오, 3ch 이상→평균 다운믹스 모노"
+                }
+            ],
+            "nested": [
+                {
+                    "name": "AudioRecordSettings::SampleFormat",
+                    "short": "SampleFormat",
+                    "kind": "enum",
+                    "desc": "WAV sample format: S16 = 16-bit PCM (default), F32 = 32-bit IEEE float (headroom survives, no clipping in the file)",
+                    "desc_ja": "WAVのサンプルフォーマット。S16 = 16bit PCM（デフォルト）、F32 = 32bit IEEE float（ヘッドルームが残りファイル内でクリップしない）",
+                    "desc_ko": "WAV 샘플 포맷. S16 = 16bit PCM(기본값), F32 = 32bit IEEE float(헤드룸이 유지되어 파일에서 클리핑되지 않음)",
+                    "values": [
+                        {
+                            "name": "S16",
+                            "value": 0,
+                            "desc": "16-bit PCM (default)",
+                            "desc_ja": "",
+                            "desc_ko": ""
+                        },
+                        {
+                            "name": "F32",
+                            "value": 1,
+                            "desc": "32-bit IEEE float",
+                            "desc_ja": "",
+                            "desc_ko": ""
+                        }
+                    ]
                 }
             ]
         },
@@ -31970,6 +32340,51 @@ const TrussCAPI = {
                         "linux",
                         "android",
                         "ios"
+                    ]
+                }
+            ],
+            "nested": [
+                {
+                    "name": "Node::HitResult",
+                    "short": "HitResult",
+                    "kind": "type",
+                    "desc": "Result of a node hit test (this is Node::HitResult). Returned by Node::findHitNode() / findHitNodeFromScreen(); call hit() to check whether anything was hit.",
+                    "desc_ja": "ノードのヒットテスト結果 (Node::HitResult)。Node::findHitNode() / findHitNodeFromScreen() が返す。何かにヒットしたかは hit() で確認",
+                    "desc_ko": "노드 히트 테스트 결과 (Node::HitResult). Node::findHitNode() / findHitNodeFromScreen()가 반환. 무언가에 맞았는지는 hit()으로 확인",
+                    "properties": [
+                        {
+                            "name": "node",
+                            "type": "Ptr",
+                            "desc": "The hit node (shared_ptr), or null if nothing was hit.",
+                            "desc_ja": "ヒットしたノード (shared_ptr)、何もヒットしなければ null",
+                            "desc_ko": "맞은 노드 (shared_ptr), 아무것도 맞지 않으면 null"
+                        },
+                        {
+                            "name": "distance",
+                            "type": "float",
+                            "desc": "Distance from the ray origin to the hit point.",
+                            "desc_ja": "レイの原点からヒット点までの距離",
+                            "desc_ko": "레이 원점에서 히트 지점까지의 거리"
+                        },
+                        {
+                            "name": "localPoint",
+                            "type": "Vec3",
+                            "desc": "Hit position in the hit node's local coordinates.",
+                            "desc_ja": "ヒットしたノードのローカル座標でのヒット位置",
+                            "desc_ko": "맞은 노드의 로컬 좌표 기준 히트 위치"
+                        }
+                    ],
+                    "methods": [
+                        {
+                            "name": "hit",
+                            "signatures": [
+                                {
+                                    "ret": "bool",
+                                    "params": ""
+                                }
+                            ],
+                            "desc": "Whether a node was hit (node is non-null)."
+                        }
                     ]
                 }
             ]
