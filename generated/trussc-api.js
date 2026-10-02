@@ -12486,14 +12486,14 @@ const TrussCAPI = {
                     "params": "j, path, indent",
                     "params_typed": "const Json & j, const fs::path & path, int indent = 2",
                     "return_type": "bool",
-                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). Returns true on success; on failure it logs an error and returns false.",
+                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). The JSON is serialized before the file is opened, so a serialization error leaves an existing file untouched. Written in binary mode (LF line endings on every platform). Returns true on success; when serializing, opening, writing or closing fails it logs an error and returns false. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it.",
                     "keywords": [
                         "write",
                         "store",
                         "serialize"
                     ],
-                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決し、親フォルダがなければ作る。indentはpretty-print幅を指定(負の値でcompact)。成功時trueを返し、失敗時はエラーをログに出してfalseを返す",
-                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. indent는 pretty-print 폭을 지정(음수면 compact). 성공 시 true 반환, 실패 시 오류를 로그에 남기고 false 반환",
+                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決し、親フォルダがなければ作る。indentはpretty-print幅を指定(負の値でcompact)。ファイルを開く前にシリアライズするので、シリアライズに失敗しても既存のファイルはそのまま残る。バイナリモードで書く(どのプラットフォームでも改行はLF)。成功時trueを返し、シリアライズ・オープン・書き込み・closeのいずれかに失敗したときはエラーをログに出してfalseを返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する",
+                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. indent는 pretty-print 폭을 지정(음수면 compact). 파일을 열기 전에 직렬화하므로 직렬화에 실패해도 기존 파일은 그대로 남는다. 바이너리 모드로 기록(모든 플랫폼에서 줄바꿈은 LF). 성공 시 true 반환, 직렬화·열기·쓰기·닫기 중 하나라도 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다",
                     "related": [
                         "Json",
                         "loadJson",
@@ -12902,13 +12902,13 @@ const TrussCAPI = {
                     "params": "path, content",
                     "params_typed": "const fs::path & path, const std::string & content",
                     "return_type": "bool",
-                    "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened",
+                    "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it",
                     "keywords": [
                         "write",
                         "store"
                     ],
-                    "desc_ja": "文字列をファイルに保存。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して false を返す",
-                    "desc_ko": "문자열을 텍스트 파일로 저장. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 false 반환",
+                    "desc_ja": "文字列をファイルに保存。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して false を返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する",
+                    "desc_ko": "문자열을 텍스트 파일로 저장. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다",
                     "related": [
                         "loadTextFile",
                         "appendToFile",
@@ -12926,14 +12926,14 @@ const TrussCAPI = {
                     "params": "path, content",
                     "params_typed": "const fs::path & path, const std::string & content",
                     "return_type": "bool",
-                    "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened",
+                    "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails",
                     "keywords": [
                         "write",
                         "add",
                         "concat"
                     ],
-                    "desc_ja": "ファイルに追記。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して false を返す",
-                    "desc_ko": "파일에 문자열을 추가. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 false 반환",
+                    "desc_ja": "ファイルに追記。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して false を返す",
+                    "desc_ko": "파일에 문자열을 추가. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 false 반환",
                     "related": [
                         "saveTextFile"
                     ],
@@ -17802,7 +17802,17 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get inverse matrix"
+                    "desc": "Get inverse matrix (identity when |det| < 1e-10, including valid tiny scales; use tryInvert for a relative check)"
+                },
+                {
+                    "name": "tryInvert",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": "Mat4 & out"
+                        }
+                    ],
+                    "desc": "Checked inverse: writes the inverse to out and returns true, or returns false (out unchanged) when the matrix is degenerate, e.g. an axis scaled to 0. The test is relative to the matrix scale, so small but valid scales still invert"
                 }
             ],
             "static_methods": [
@@ -23240,7 +23250,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Check if playing"
+                    "desc": "Check if playing (false while paused). A stream halted by a decoder failure stops after its buffered audio drains, including looping streams. The error is logged once; TrussC does not retry automatically."
                 },
                 {
                     "name": "isPaused",
@@ -26281,7 +26291,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created; when it cannot be, an error is logged and false returned"
+                    "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created. The image is encoded in memory before the file is opened, so an encode error leaves an existing file untouched. When encoding fails, the folder cannot be created, or opening, writing or closing the file fails, an error is logged and false returned. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it"
                 },
                 {
                     "name": "halve",
@@ -30471,7 +30481,7 @@ const TrussCAPI = {
                             "params": "float seconds"
                         }
                     ],
-                    "desc": "Set the maximum video/audio drift before hard re-sync. When drift exceeds this threshold, video seeks to match audio position instead of catching up frame-by-frame. Set to 0 to disable. Default: 0.5s. Primarily affects Linux (FFmpeg) backend."
+                    "desc": "Set the maximum video/audio drift before hard re-sync (video seeks to the audio position). Set to 0 or negative to disable hard re-sync. Default: 0.5s. Affects the Linux (FFmpeg) backend and tcxHap's HapPlayer. HapPlayer advances by wall-clock dt * speed and slews toward playing audio with a 0.25s time constant; slewing remains enabled when hard re-sync is disabled."
                 },
                 {
                     "name": "getResyncThreshold",

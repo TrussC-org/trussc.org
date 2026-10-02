@@ -54,7 +54,7 @@ const TrussSketchAPI = {
     {
      "name": "appendToFile",
      "snippet": "appendToFile(${1:path}, ${2:content})",
-     "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened"
+     "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails"
     },
     {
      "name": "createDirectory",
@@ -164,12 +164,12 @@ const TrussSketchAPI = {
     {
      "name": "saveJson",
      "snippet": "saveJson(${1:j}, ${2:path})",
-     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). Returns true on success; on failure it logs an error and returns false."
+     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). The JSON is serialized before the file is opened, so a serialization error leaves an existing file untouched. Written in binary mode (LF line endings on every platform). Returns true on success; when serializing, opening, writing or closing fails it logs an error and returns false. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it."
     },
     {
      "name": "saveTextFile",
      "snippet": "saveTextFile(${1:path}, ${2:content})",
-     "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened"
+     "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it"
     },
     {
      "name": "setDataPathRoot",
@@ -7314,7 +7314,7 @@ const TrussSketchAPI = {
      "name": "inverted",
      "snippet": "inverted()",
      "return": "Mat4",
-     "desc": "Get inverse matrix"
+     "desc": "Get inverse matrix (identity when |det| < 1e-10, including valid tiny scales; use tryInvert for a relative check)"
     }
    ],
    "static_methods": [
@@ -9350,7 +9350,7 @@ const TrussSketchAPI = {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "bool",
-     "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created; when it cannot be, an error is logged and false returned"
+     "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created. The image is encoded in memory before the file is opened, so an encode error leaves an existing file untouched. When encoding fails, the folder cannot be created, or opening, writing or closing the file fails, an error is logged and false returned. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it"
     }
    ]
   },
@@ -10926,7 +10926,7 @@ const TrussSketchAPI = {
      "name": "isPlaying",
      "snippet": "isPlaying()",
      "return": "bool",
-     "desc": "Check if playing"
+     "desc": "Check if playing (false while paused). A stream halted by a decoder failure stops after its buffered audio drains, including looping streams. The error is logged once; TrussC does not retry automatically."
     },
     {
      "name": "isPaused",
