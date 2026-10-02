@@ -674,12 +674,6 @@
           "width": 960,
           "height": 600,
           "webSupported": true
-        },
-        {
-          "name": "HotReloadExample",
-          "width": 960,
-          "height": 600,
-          "webSupported": false
         }
       ]
     }
