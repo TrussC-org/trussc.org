@@ -243,9 +243,9 @@
         {
           "of": "ofPushStyle",
           "tc": "pushStyle()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
+          "notes": "Scope-bound form: auto s = scopedStyle();",
+          "notes_ja": "スコープで閉じる形: auto s = scopedStyle();",
+          "notes_ko": "스코프로 닫는 형태: auto s = scopedStyle();"
         },
         {
           "of": "ofEnableBlendMode",
@@ -301,9 +301,9 @@
         {
           "of": "ofPushMatrix",
           "tc": "pushMatrix()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
+          "notes": "Scope-bound form: auto m = scopedMatrix();",
+          "notes_ja": "スコープで閉じる形: auto m = scopedMatrix();",
+          "notes_ko": "스코프로 닫는 형태: auto m = scopedMatrix();"
         },
         {
           "of": "ofRotateRad",
@@ -762,10 +762,10 @@
       "mappings": [
         {
           "of": "ofxGui / ofxImGui",
-          "tc": "ImGui (built-in)",
-          "notes": "Included by default",
-          "notes_ja": "Included by default",
-          "notes_ko": ""
+          "tc": "Dear ImGui (tcxImGui addon)",
+          "notes": "tcxImGui addon (not in core)",
+          "notes_ja": "tcxImGui アドオン（コアには含まれない）",
+          "notes_ko": "tcxImGui 애드온 (코어에는 포함되지 않음)"
         }
       ]
     },
@@ -776,6 +776,13 @@
       "name_ko": "I/O",
       "order": 19,
       "mappings": [
+        {
+          "of": "ofSystemLoadDialog()",
+          "tc": "loadDialog()",
+          "notes": "loadDialogAsync() for a non-blocking variant",
+          "notes_ja": "非同期版は loadDialogAsync()",
+          "notes_ko": "비동기 버전은 loadDialogAsync()"
+        },
         {
           "of": "ofLoadJson(path)",
           "tc": "loadJson(path)",
@@ -791,18 +798,11 @@
           "notes_ko": ""
         },
         {
-          "of": "ofSystemLoadDialog()",
-          "tc": "systemLoadDialog()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
-        },
-        {
           "of": "ofSystemSaveDialog()",
-          "tc": "systemSaveDialog()",
-          "notes": "",
-          "notes_ja": "",
-          "notes_ko": ""
+          "tc": "saveDialog()",
+          "notes": "saveDialogAsync() for a non-blocking variant",
+          "notes_ja": "非同期版は saveDialogAsync()",
+          "notes_ko": "비동기 버전은 saveDialogAsync()"
         }
       ]
     },
@@ -861,17 +861,31 @@
       "mappings": [
         {
           "of": "-",
-          "tc": "MainThreadRunner::run(func)",
-          "notes": "Execute on main thread",
-          "notes_ja": "Execute on main thread",
+          "tc": "runOnMainThread(func)",
+          "notes": "Execute on the main thread",
+          "notes_ja": "メインスレッドで実行",
+          "notes_ko": "메인 스레드에서 실행"
+        },
+        {
+          "of": "ofScopedLock",
+          "tc": "std::lock_guard / std::scoped_lock",
+          "notes": "",
+          "notes_ja": "",
           "notes_ko": ""
         },
         {
+          "of": "ofMutex",
+          "tc": "std::mutex",
+          "notes": "TrussC has no wrapper; use std::mutex",
+          "notes_ja": "TrussC にラッパーは無い。std::mutex を使う",
+          "notes_ko": "TrussC에는 래퍼가 없음. std::mutex를 사용"
+        },
+        {
           "of": "ofThread",
-          "tc": "std::thread + MainThreadRunner",
-          "notes": "Safe sync",
-          "notes_ja": "Safe sync",
-          "notes_ko": ""
+          "tc": "Thread",
+          "notes": "Subclass and override threadedFunction(); startThread() / waitForThread()",
+          "notes_ja": "サブクラスで threadedFunction() をオーバーライド。startThread() / waitForThread()",
+          "notes_ko": "서브클래스에서 threadedFunction()을 오버라이드. startThread() / waitForThread()"
         }
       ]
     }
@@ -1007,9 +1021,9 @@
         {
           "of": "ofSoundPlayer",
           "tc": "Sound",
-          "notes": "Audio playback",
-          "notes_ja": "オーディオ再生",
-          "notes_ko": "오디오 재생"
+          "notes": "Audio playback. A Sound plays only while it, or a copy of it, is alive: copies share the voice, and when the last handle is destroyed or overwritten the voice stops (looping or one-shot) and its slot is freed. Keep Sound objects alive (e.g. as members) to play overlapping one-shots.",
+          "notes_ja": "オーディオ再生。Sound は自身かそのコピーが生きている間だけ鳴る: コピーはボイスを共有し、最後のハンドルが破棄または上書きされるとボイスは止まり (ループでもワンショットでも)、スロットが空く。ワンショットを重ねて鳴らすときは Sound オブジェクトを生かしておく (メンバーにするなど)",
+          "notes_ko": "오디오 재생. Sound 는 자신 또는 그 복사본이 살아 있는 동안에만 재생된다: 복사본은 보이스를 공유하고, 마지막 핸들이 파괴되거나 덮어쓰이면 보이스가 정지하고 (루프든 원샷이든) 슬롯이 비워진다. 원샷을 겹쳐 재생하려면 Sound 객체를 살려 둔다 (멤버로 두는 등)"
         }
       ]
     },
@@ -1179,6 +1193,13 @@
           "notes": "Info for one serial device (from Serial::listDevices)",
           "notes_ja": "1シリアルデバイスの情報（Serial::listDevicesが返す）",
           "notes_ko": "시리얼 장치 하나의 정보 (Serial::listDevices가 반환)"
+        },
+        {
+          "of": "-",
+          "tc": "SerialDisconnectEventArgs",
+          "notes": "Event args for Serial::onDisconnect",
+          "notes_ja": "Serial::onDisconnectのイベント引数",
+          "notes_ko": "Serial::onDisconnect의 이벤트 인자"
         }
       ]
     }

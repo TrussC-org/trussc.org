@@ -943,7 +943,7 @@ const TrussCAPI = {
                     "params": "fps",
                     "params_typed": "fps",
                     "return_type": "(nothing)",
-                    "desc": "Set target frame rate (VSYNC = -1.0)",
+                    "desc": "Set the target frame rate; update and draw run together (VSYNC = -1, EVENT_DRIVEN = 0, or a fixed fps). A fixed fps at or just above the display rate draws every display frame. Switching at runtime starts the new rate from the switch (no catch-up; a fixed fps draws the next frame, and the first update's getDeltaTime() leaves out the previous mode: called between updates it counts from the call, called inside an update from that update's start; the time dropped is under a frame in the usual modes, long only after an idle like EVENT_DRIVEN). Calling it again with the current rate does nothing, so it is safe to call every frame; on the frame where the value changes (setFps(guiValue) in draw() while a slider moves), that update's dt counts only from the call and is shorter than the frame",
                     "keywords": [
                         "frame rate",
                         "framerate",
@@ -951,8 +951,8 @@ const TrussCAPI = {
                         "speed",
                         "ofsetframerate"
                     ],
-                    "desc_ja": "ターゲットフレームレートを設定 (VSYNC = -1.0)",
-                    "desc_ko": "목표 프레임레이트를 설정 (VSYNC = -1.0)"
+                    "desc_ja": "ターゲットフレームレートを設定し、update と draw を同期して回す（VSYNC = -1、EVENT_DRIVEN = 0、または固定fps）。ディスプレイのリフレッシュレートと同じか少し上の固定fpsは毎フレーム描画する。実行中の切り替えは切り替えた時点から新しいレートで始まる（取り戻しはせず、固定fpsなら次のフレームを描画し、最初の update の getDeltaTime() には前のモードの時間が入らない。update の外で呼べば呼び出しから、update の中で呼べばその update の開始から数える。捨てる時間は普段のモードなら1フレーム未満で、長くなるのは EVENT_DRIVEN のアイドルのあとだけ）。今と同じレートで呼んでも何もしないので、毎フレーム呼んでもよい。ただし値が変わったフレーム（スライダー操作中に draw() で setFps(guiValue) するなど）では、その update の dt は呼び出しからの時間になり、1フレームより短くなる",
+                    "desc_ko": "목표 프레임레이트를 설정하고 update와 draw를 동기로 돌린다(VSYNC = -1, EVENT_DRIVEN = 0, 또는 고정 fps). 디스플레이 리프레시레이트와 같거나 약간 높은 고정 fps는 매 프레임 그린다. 실행 중 전환은 전환 시점부터 새 레이트로 시작한다(따라잡기 없이, 고정 fps라면 다음 프레임을 그리고, 첫 update의 getDeltaTime()에는 이전 모드의 시간이 들어가지 않는다. update 밖에서 호출하면 호출 시점부터, update 안에서 호출하면 그 update의 시작부터 센다. 버려지는 시간은 평소 모드라면 1프레임 미만이며, 길어지는 것은 EVENT_DRIVEN 대기 뒤뿐이다). 현재와 같은 레이트로 호출하면 아무것도 하지 않으므로 매 프레임 호출해도 된다. 단, 값이 바뀐 프레임(슬라이더 조작 중 draw()에서 setFps(guiValue) 하는 경우 등)에서는 그 update의 dt가 호출 시점부터의 시간이 되어 1프레임보다 짧아진다"
                 },
                 {
                     "name": "beginShape",
@@ -1436,6 +1436,27 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "スタイルをスタックからポップし、前の状態を復元",
                     "desc_ko": "스택에서 스타일을 꺼내서 이전 상태로 복원"
+                },
+                {
+                    "name": "scopedStyle",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "StyleScope",
+                    "desc": "pushStyle() now, popStyle() at the end of the scope: `auto s = scopedStyle();` returns a StyleScope guard that pops when it goes out of scope, also on an early return or an exception. For code with several exits or long blocks; pushStyle() / popStyle() remain the main form. [[nodiscard]]: `scopedStyle();` alone would pop at once and is a compiler warning",
+                    "keywords": [
+                        "raii",
+                        "scope",
+                        "guard",
+                        "save",
+                        "restore",
+                        "state",
+                        "stack",
+                        "push",
+                        "pop",
+                        "early return"
+                    ],
+                    "desc_ja": "今 pushStyle() し、スコープの終わりで popStyle() する。`auto s = scopedStyle();` はスコープを抜けると（早期 return や例外でも）ポップする StyleScope ガードを返す。出口が複数あるコードや長いブロック向け。基本の書き方は pushStyle() / popStyle() のまま。[[nodiscard]]: `scopedStyle();` だけの行はすぐにポップしてしまうため、コンパイラが警告する",
+                    "desc_ko": "지금 pushStyle()하고 스코프 끝에서 popStyle()한다. `auto s = scopedStyle();`는 스코프를 벗어날 때(조기 return이나 예외에서도) 팝하는 StyleScope 가드를 반환한다. 출구가 여러 개인 코드나 긴 블록용. 기본 형태는 여전히 pushStyle() / popStyle(). [[nodiscard]]: `scopedStyle();`만 쓴 줄은 곧바로 팝되므로 컴파일러가 경고한다"
                 },
                 {
                     "name": "resetStyle",
@@ -1945,6 +1966,27 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "変換状態を復元",
                     "desc_ko": "변환 상태를 복원"
+                },
+                {
+                    "name": "scopedMatrix",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "MatrixScope",
+                    "desc": "pushMatrix() now, popMatrix() at the end of the scope: `auto m = scopedMatrix();` returns a MatrixScope guard that pops when it goes out of scope, also on an early return or an exception. For code with several exits or long blocks; pushMatrix() / popMatrix() remain the main form. [[nodiscard]]: `scopedMatrix();` alone would pop at once and is a compiler warning",
+                    "keywords": [
+                        "raii",
+                        "scope",
+                        "guard",
+                        "save",
+                        "restore",
+                        "transform",
+                        "stack",
+                        "push",
+                        "pop",
+                        "early return"
+                    ],
+                    "desc_ja": "今 pushMatrix() し、スコープの終わりで popMatrix() する。`auto m = scopedMatrix();` はスコープを抜けると（早期 return や例外でも）ポップする MatrixScope ガードを返す。出口が複数あるコードや長いブロック向け。基本の書き方は pushMatrix() / popMatrix() のまま。[[nodiscard]]: `scopedMatrix();` だけの行はすぐにポップしてしまうため、コンパイラが警告する",
+                    "desc_ko": "지금 pushMatrix()하고 스코프 끝에서 popMatrix()한다. `auto m = scopedMatrix();`는 스코프를 벗어날 때(조기 return이나 예외에서도) 팝하는 MatrixScope 가드를 반환한다. 출구가 여러 개인 코드나 긴 블록용. 기본 형태는 여전히 pushMatrix() / popMatrix(). [[nodiscard]]: `scopedMatrix();`만 쓴 줄은 곧바로 팝되므로 컴파일러가 경고한다"
                 },
                 {
                     "name": "translate",
@@ -2992,7 +3034,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Seconds since last frame",
+                    "desc": "Seconds since the previous update. Measured wall time in VSYNC / setFps modes; in fixed-Hz update mode (setIndependentFps with an update rate) and in runHeadlessApp every step reports exactly 1 / updateFps. Per window; a secondary window still measures its delta with high_resolution_clock (the system clock on Linux) until #307: a forward system clock step (NTP, a manual change) lands in one delta, so that window's due Node timers fire at once, and an uncapped callEveryCatchUp fires once per interval of the step; a backward step makes one delta negative: getDeltaTime() is negative on that tick and the window's Node timers are not counted down on it",
                     "keywords": [
                         "dt",
                         "elapsed",
@@ -3000,15 +3042,15 @@ const TrussCAPI = {
                         "timestep",
                         "interval"
                     ],
-                    "desc_ja": "前フレームからの経過秒数",
-                    "desc_ko": "이전 프레임으로부터의 경과 시간(초)"
+                    "desc_ja": "前回の update からの経過秒数。VSYNC / setFps モードでは実測時間。固定Hz update モード（update レートを指定した setIndependentFps）と runHeadlessApp では各ステップが正確に 1 / updateFps を返す。ウィンドウごと。サブウィンドウは #307 までは high_resolution_clock（Linux ではシステム時計）で測るので、システム時刻が先へ飛ぶ（NTP や手動変更）とその分が1回の delta に入り、そのウィンドウの期限が来た Node タイマーが一度に発火し、上限なしの callEveryCatchUp は飛んだ分のインターバルの回数だけ呼ばれる。時刻が戻ると delta が1回負になり、そのティックでは getDeltaTime() が負で、そのウィンドウの Node タイマーはカウントダウンされない",
+                    "desc_ko": "이전 update로부터의 경과 시간(초). VSYNC / setFps 모드에서는 실측 시간. 고정 Hz update 모드(update 레이트를 지정한 setIndependentFps)와 runHeadlessApp에서는 각 스텝이 정확히 1 / updateFps를 반환. 윈도우별. 보조 윈도우는 #307까지는 high_resolution_clock(Linux에서는 시스템 시계)으로 재므로, 시스템 시각이 앞으로 뛰면(NTP, 수동 변경) 그만큼이 한 번의 delta에 들어가 그 윈도우의 만기된 Node 타이머가 한꺼번에 실행되고, 상한 없는 callEveryCatchUp은 뛴 시간의 인터벌 수만큼 호출된다. 시각이 뒤로 가면 delta가 한 번 음수가 되어, 그 틱에서는 getDeltaTime()이 음수이고 그 윈도우의 Node 타이머는 카운트다운되지 않는다"
                 },
                 {
                     "name": "getFrameRate",
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Current FPS",
+                    "desc": "Measured update rate (updates per second over the last 10 frames). In fixed-Hz update mode and runHeadlessApp this is the measured rate, not the configured one: the fixed steps are counted by the time they consumed, so it reads steady when the rate isn't a multiple of the frame rate and drops when time is dropped. Recorded by the main loop and runHeadlessApp; in a secondary window each call currently adds the window's last delta and returns the average of the last 10 calls, so reading it once per second gives a ~10 s average",
                     "keywords": [
                         "fps",
                         "framerate",
@@ -3016,8 +3058,8 @@ const TrussCAPI = {
                         "refresh",
                         "performance"
                     ],
-                    "desc_ja": "現在のFPS",
-                    "desc_ko": "현재 FPS"
+                    "desc_ja": "実測の update レート（直近10フレームの1秒あたり update 回数）。固定Hz update モードと runHeadlessApp でも設定値ではなく実測値。固定ステップは消費した時間で数えるので、フレームレートの整数倍でないレートでも値が揺れず、時間が捨てられると下がる。メインループと runHeadlessApp が記録する。サブウィンドウでは今のところ、呼ぶたびにそのウィンドウの直近の delta を加えて直近10回の呼び出しの平均を返すので、1秒に1回読むと約10秒の平均になる",
+                    "desc_ko": "실측 update 레이트(최근 10프레임의 초당 update 횟수). 고정 Hz update 모드와 runHeadlessApp에서도 설정값이 아닌 실측값. 고정 스텝은 소비한 시간으로 세므로 프레임레이트의 정수배가 아닌 레이트에서도 값이 흔들리지 않고, 시간이 버려지면 내려간다. 메인 루프와 runHeadlessApp이 기록한다. 보조 윈도우에서는 지금은 호출할 때마다 그 윈도우의 최근 delta를 더해 최근 10회 호출의 평균을 반환하므로, 1초에 한 번 읽으면 약 10초의 평균이 된다"
                 },
                 {
                     "name": "getFpsSettings",
@@ -3039,7 +3081,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Get current FPS (alias for getFrameRate)",
+                    "desc": "Get the measured FPS (alias for getFrameRate). In a secondary window it is currently the average of the last 10 calls, like getFrameRate()",
                     "keywords": [
                         "framerate",
                         "speed",
@@ -3047,8 +3089,8 @@ const TrussCAPI = {
                         "rate",
                         "performance"
                     ],
-                    "desc_ja": "現在のFPSを取得（getFrameRateのエイリアス）",
-                    "desc_ko": "현재 FPS를 얻음 (getFrameRate의 별칭)"
+                    "desc_ja": "実測のFPSを取得（getFrameRateのエイリアス）。サブウィンドウでは getFrameRate() と同じく、今のところ直近10回の呼び出しの平均",
+                    "desc_ko": "실측 FPS를 얻음 (getFrameRate의 별칭). 보조 윈도우에서는 getFrameRate()와 같이 지금은 최근 10회 호출의 평균"
                 }
             ],
             "name_ja": "時間 - フレーム",
@@ -3483,21 +3525,21 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "(nothing)",
-                    "desc": "Reset elapsed time",
+                    "desc": "Restart the elapsed-time counter: getElapsedTime/f/Millis/Micros and getFrameElapsedTime count from 0 again. Display only: Node timers, the loop, recording and the tc_get_health uptime keep running on the underlying clock. A duration taken as the difference of two of those readings across a reset comes out wrong (negative, or wrapped for the unsigned Millis/Micros); measure durations with getSystemTimeMicros()",
                     "keywords": [
                         "clear",
                         "restart",
                         "zero"
                     ],
-                    "desc_ja": "経過時間をリセット",
-                    "desc_ko": "경과 시간을 초기화"
+                    "desc_ja": "経過時間カウンタを0から数え直す（getElapsedTime/f/Millis/Micros と getFrameElapsedTime が対象）。表示上のリセットのみで、Nodeタイマー・ループ・録画・tc_get_health の uptime は内部のクロックで動き続ける。リセットをまたいだ2回の値の差は経過時間にならない（負になる。符号なしの Millis/Micros では巻き戻る）ので、時間計測は getSystemTimeMicros() で行う",
+                    "desc_ko": "경과 시간 카운터를 0부터 다시 센다(getElapsedTime/f/Millis/Micros와 getFrameElapsedTime 대상). 표시상의 리셋일 뿐이며 Node 타이머, 루프, 녹화, tc_get_health의 uptime은 내부 시계로 계속 동작한다. 리셋을 사이에 둔 두 값의 차이는 경과 시간이 되지 않으므로(음수가 되고, 부호 없는 Millis/Micros는 되감긴다) 시간 측정은 getSystemTimeMicros()로 한다"
                 },
                 {
                     "name": "getElapsedTimef",
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Elapsed seconds (float)",
+                    "desc": "Elapsed seconds (float) since program start. Same clock as getElapsedTime(); a float loses precision after about a day of uptime (7.8 ms steps at 18 h), so use it for animation and display, and getElapsedTime() (double) where precision matters",
                     "keywords": [
                         "time",
                         "seconds",
@@ -3505,53 +3547,70 @@ const TrussCAPI = {
                         "runtime",
                         "clock"
                     ],
-                    "desc_ja": "経過秒数（float）",
-                    "desc_ko": "경과 시간(초, float)"
+                    "desc_ja": "プログラム開始からの経過秒数（float）。getElapsedTime() と同じクロック。float は稼働約1日で精度が落ちる（18時間で7.8ms刻み）ので、アニメーションや表示用に使い、精度が要るところでは getElapsedTime()（double）を使う",
+                    "desc_ko": "프로그램 시작 이후 경과 시간(초, float). getElapsedTime()과 같은 시계. float는 가동 약 하루 후 정밀도가 떨어지므로(18시간에 7.8ms 단위) 애니메이션·표시용으로 쓰고, 정밀도가 필요한 곳에는 getElapsedTime()(double)을 쓴다"
                 },
                 {
                     "name": "getElapsedTimeMillis",
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Elapsed milliseconds (int64)",
+                    "desc": "Elapsed milliseconds (uint64) since program start. Same clock as getElapsedTime()",
                     "keywords": [
                         "milliseconds",
                         "uptime",
                         "runtime",
                         "clock"
                     ],
-                    "desc_ja": "経過ミリ秒（int64）",
-                    "desc_ko": "경과 시간(밀리초, int64)"
+                    "desc_ja": "プログラム開始からの経過ミリ秒（uint64）。getElapsedTime() と同じクロック",
+                    "desc_ko": "프로그램 시작 이후 경과 밀리초(uint64). getElapsedTime()과 같은 시계"
                 },
                 {
                     "name": "getElapsedTimeMicros",
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Elapsed microseconds (int64)",
+                    "desc": "Elapsed microseconds (uint64) since program start. Same clock as getElapsedTime()",
                     "keywords": [
                         "microseconds",
                         "uptime",
                         "runtime",
                         "clock"
                     ],
-                    "desc_ja": "経過マイクロ秒（int64）",
-                    "desc_ko": "경과 시간(마이크로초, int64)"
+                    "desc_ja": "プログラム開始からの経過マイクロ秒（uint64）。getElapsedTime() と同じクロック",
+                    "desc_ko": "프로그램 시작 이후 경과 마이크로초(uint64). getElapsedTime()과 같은 시계"
                 },
                 {
                     "name": "getElapsedTime",
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Elapsed seconds (double) since program start. A separate clock from getElapsedTimef(); it is NOT reset by resetElapsedTimeCounter().",
+                    "desc": "Elapsed seconds (double) since program start, on a steady clock (system clock changes don't affect it). The same clock as getElapsedTimef/Millis/Micros: resetElapsedTimeCounter() restarts all of them, so the difference of two readings is only a duration if nothing resets the counter in between. Keeps full precision where getElapsedTimef() loses it after long uptimes",
                     "keywords": [
                         "seconds",
                         "uptime",
                         "runtime",
                         "clock"
                     ],
-                    "desc_ja": "プログラム開始からの経過秒（double）。getElapsedTimef() とは別クロックで、resetElapsedTimeCounter() の影響を受けない。",
-                    "desc_ko": "프로그램 시작 이후 경과 초(double). getElapsedTimef()와는 별개의 시계이며 resetElapsedTimeCounter()의 영향을 받지 않는다."
+                    "desc_ja": "プログラム開始からの経過秒（double）。steady clock なのでシステム時刻の変更の影響を受けない。getElapsedTimef/Millis/Micros と同じクロックで、resetElapsedTimeCounter() でこれら全てが0から数え直すので、2回の値の差が経過時間になるのは間にリセットがない場合だけ。長時間稼働で精度が落ちる getElapsedTimef() と違い、精度を保つ",
+                    "desc_ko": "프로그램 시작 이후 경과 초(double). steady clock이라 시스템 시각 변경의 영향을 받지 않는다. getElapsedTimef/Millis/Micros와 같은 시계이며 resetElapsedTimeCounter()로 이들 모두가 0부터 다시 세므로, 두 값의 차이가 경과 시간이 되는 것은 그 사이에 리셋이 없을 때뿐이다. 장시간 가동에서 정밀도가 떨어지는 getElapsedTimef()와 달리 정밀도를 유지한다"
+                },
+                {
+                    "name": "getFrameElapsedTime",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "number",
+                    "desc": "Elapsed seconds (double) sampled once at the start of the current frame, so every update step and the draw of one frame see the same value (getElapsedTime() moves during the frame). Same clock and reset as getElapsedTime(). Sampled by the main loop and runHeadlessApp; in a secondary window it currently returns the live getElapsedTime()",
+                    "keywords": [
+                        "time",
+                        "seconds",
+                        "animation",
+                        "per frame",
+                        "consistent",
+                        "clock"
+                    ],
+                    "desc_ja": "現在のフレーム開始時に1回だけ取った経過秒（double）。1フレーム内の全 update ステップと draw が同じ値を見る（getElapsedTime() はフレーム中も進む）。クロックとリセットは getElapsedTime() と同じ。メインループと runHeadlessApp が取得する。サブウィンドウでは今のところ getElapsedTime() の現在値を返す",
+                    "desc_ko": "현재 프레임 시작 시 한 번만 샘플링한 경과 초(double). 한 프레임 안의 모든 update 스텝과 draw가 같은 값을 본다(getElapsedTime()은 프레임 중에도 진행). 시계와 리셋은 getElapsedTime()과 같다. 메인 루프와 runHeadlessApp이 샘플링한다. 보조 윈도우에서는 지금은 getElapsedTime()의 현재 값을 반환한다"
                 }
             ],
             "name_ja": "時間 - 経過",
@@ -3565,7 +3624,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Unix time in milliseconds",
+                    "desc": "Unix time in milliseconds (wall clock). It follows system clock adjustments, so take differences as int64_t (see getSystemTimeMicros)",
                     "keywords": [
                         "unix",
                         "epoch",
@@ -3573,15 +3632,15 @@ const TrussCAPI = {
                         "wallclock",
                         "timestamp"
                     ],
-                    "desc_ja": "Unix時間（ミリ秒）",
-                    "desc_ko": "Unix 시간(밀리초)"
+                    "desc_ja": "Unix時間（ミリ秒、壁時計）。システム時刻の調整に追従するので、差は int64_t で取る（getSystemTimeMicros を参照）",
+                    "desc_ko": "Unix 시간(밀리초, 벽시계). 시스템 시각 조정을 따르므로 차이는 int64_t로 구한다(getSystemTimeMicros 참조)"
                 },
                 {
                     "name": "getSystemTimeMicros",
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Unix time in microseconds",
+                    "desc": "Unix time in microseconds (wall clock). To measure a duration, take the difference of two readings as int64_t: it follows system clock adjustments, so a clock step can make t1 < t0 and an unsigned difference would wrap. Unlike the getElapsedTime family, resetElapsedTimeCounter() doesn't affect it",
                     "keywords": [
                         "unix",
                         "epoch",
@@ -3589,8 +3648,8 @@ const TrussCAPI = {
                         "wallclock",
                         "timestamp"
                     ],
-                    "desc_ja": "Unix時間（マイクロ秒）",
-                    "desc_ko": "Unix 시간(마이크로초)"
+                    "desc_ja": "Unix時間（マイクロ秒、壁時計）。時間を計るときは2回の値の差を int64_t で取る。システム時刻の調整に追従するので、時刻の変更で t1 < t0 になりうり、符号なしの差は巻き戻る。getElapsedTime 系と違い resetElapsedTimeCounter() の影響は受けない",
+                    "desc_ko": "Unix 시간(마이크로초, 벽시계). 시간을 잴 때는 두 값의 차이를 int64_t로 구한다. 시스템 시각 조정을 따르므로 시각 변경으로 t1 < t0이 될 수 있고, 부호 없는 차이는 되감긴다. getElapsedTime 계열과 달리 resetElapsedTimeCounter()의 영향을 받지 않는다"
                 },
                 {
                     "name": "getUnixTime",
@@ -5149,15 +5208,48 @@ const TrussCAPI = {
                     "params": "updateFps, drawFps",
                     "params_typed": "updateFps, drawFps",
                     "return_type": "(nothing)",
-                    "desc": "Set independent update and draw frame rates",
+                    "desc": "Set independent update and draw rates. A fixed update rate runs fixed steps (getDeltaTime() is 1 / updateFps for each), at most setMaxUpdateSteps() per frame (default 10): time beyond that (after a stall, when update() is too slow, or when updateFps is more than that many times the display rate) is dropped with a one-time warning. Switching at runtime starts the new rate from the switch (no catch-up; on the next frame a fixed update rate runs one step, a VSYNC update's getDeltaTime() counts from the call, or from the update's start when called inside an update, and a fixed draw rate draws). Calling it again with the current rates does nothing, and changing only the draw rate keeps the update's phase and drops no time; switching between a synced (setFps) and an independent update counts as an update-mode change even at the same rate (setFps(VSYNC) to setIndependentFps(VSYNC, 30) drops up to a frame). Entering a fixed update rate restarts with one step, which can count more or less than the time since the last update (from a 144 Hz display to a fixed 60, the step is ~9.7 ms longer than the 1/144 s since the last update); entering a VSYNC update drops the time since the last update (under a frame in the usual modes, long only after an idle like EVENT_DRIVEN), and on that frame, called outside update(), its dt counts only from the call",
                     "keywords": [
                         "framerate",
                         "update rate",
                         "decouple",
                         "tick rate"
                     ],
-                    "desc_ja": "updateとdrawのフレームレートを個別に設定",
-                    "desc_ko": "update와 draw의 프레임레이트를 독립적으로 설정"
+                    "desc_ja": "updateとdrawのフレームレートを個別に設定。固定の update レートは固定ステップで回り（各ステップの getDeltaTime() は 1 / updateFps）、1フレームあたり最大 setMaxUpdateSteps() ステップ（既定10）。それを超える分（停止後、update() が遅すぎる場合、updateFps がディスプレイのレートのその倍数を超える場合）は捨てられ、一度だけ警告が出る。実行中の切り替えは切り替えた時点から新しいレートで始まる（取り戻しはせず、次のフレームで固定 update レートは1ステップ回り、VSYNC の update の getDeltaTime() は呼び出しから（update の中で呼んだならその update の開始から）数え、固定 draw レートは描画する）。今と同じレートで呼んでも何もせず、draw のレートだけを変えても update の位相は保たれ、時間も捨てない。ただし同期（setFps）と独立の update の切り替えは、レートが同じでも update のモードの変化として扱う（setFps(VSYNC) から setIndependentFps(VSYNC, 30) で最大1フレーム捨てる）。固定の update レートに入るときは1ステップ分で再開するので、前回の update からの時間より多くも少なくも数えうる（144Hz の表示から 60 固定で、そのステップは前回の update からの 1/144 秒より約 9.7 ms 長い）。VSYNC の update に入るときは前回の update からの時間を捨て（普段のモードなら1フレーム未満、長くなるのは EVENT_DRIVEN のアイドルのあとだけ）、そのフレームで update の外から呼んだ場合、dt は呼び出しからの時間になる",
+                    "desc_ko": "update와 draw의 프레임레이트를 독립적으로 설정. 고정 update 레이트는 고정 스텝으로 돌며(각 스텝의 getDeltaTime()은 1 / updateFps) 프레임당 최대 setMaxUpdateSteps() 스텝(기본값 10). 이를 넘는 시간(정지 후, update()가 너무 느릴 때, updateFps가 디스플레이 레이트의 그 배수를 넘을 때)은 버려지고 경고가 한 번 출력된다. 실행 중 전환은 전환 시점부터 새 레이트로 시작한다(따라잡기 없이, 다음 프레임에 고정 update 레이트는 한 스텝 돌고, VSYNC update의 getDeltaTime()은 호출 시점부터(update 안에서 호출했다면 그 update의 시작부터) 세며, 고정 draw 레이트는 그린다). 현재와 같은 레이트로 호출하면 아무것도 하지 않으며, draw 레이트만 바꾸면 update의 위상이 유지되고 시간도 버려지지 않는다. 단, 동기(setFps)와 독립 update 사이의 전환은 레이트가 같아도 update 모드의 변화로 다룬다(setFps(VSYNC)에서 setIndependentFps(VSYNC, 30)으로 바꾸면 최대 1프레임이 버려진다). 고정 update 레이트로 들어갈 때는 1스텝으로 다시 시작하므로 직전 update 이후의 시간보다 많거나 적게 셀 수 있다(144Hz 표시에서 60 고정으로 바꾸면 그 스텝은 직전 update 이후의 1/144초보다 약 9.7 ms 길다). VSYNC update로 들어갈 때는 직전 update 이후의 시간이 버려지며(평소 모드라면 1프레임 미만, 길어지는 것은 EVENT_DRIVEN 대기 뒤뿐), 그 프레임에서 update 밖에서 호출한 경우 dt는 호출 시점부터의 시간이 된다"
+                },
+                {
+                    "name": "setMaxUpdateSteps",
+                    "params": "steps",
+                    "params_typed": "steps",
+                    "return_type": "(nothing)",
+                    "desc": "Set the most fixed-rate update steps run in one frame (setIndependentFps with an update rate) or in one runHeadlessApp loop pass. More are pending after a stall, when update() is slower than its own rate, or when the update rate is more than this many times the display rate; the time beyond the cap is dropped with a one-time warning instead of replayed. Default 10. 0 or less removes the cap so every step runs (e.g. a deterministic simulation), at the cost of a freeze while a long stall is replayed and of frames that keep growing while update() is slower than its rate",
+                    "keywords": [
+                        "update cap",
+                        "catch up",
+                        "fixed step",
+                        "stall",
+                        "deterministic",
+                        "tick rate"
+                    ],
+                    "desc_ja": "1フレーム（update レートを指定した setIndependentFps）または runHeadlessApp のループ1周で回す固定レート update ステップの最大数を設定する。停止のあと、update() が自分のレートに追いつかないとき、update レートがディスプレイのレートのこの倍数を超えるときにステップが溜まり、上限を超えた分の時間は再実行せずに捨てられ、一度だけ警告が出る。既定は10。0以下にすると上限がなくなり全ステップを回す（決定的なシミュレーションなど）が、長い停止のあとは再実行の間止まり、update() がレートに追いつかない間はフレームが伸び続ける",
+                    "desc_ko": "한 프레임(update 레이트를 지정한 setIndependentFps) 또는 runHeadlessApp 루프 1회에서 돌리는 고정 레이트 update 스텝의 최대 수를 설정한다. 정지 후, update()가 자신의 레이트를 따라가지 못할 때, update 레이트가 디스플레이 레이트의 이 배수를 넘을 때 스텝이 쌓이며, 상한을 넘는 시간은 다시 실행하지 않고 버려지고 경고가 한 번 출력된다. 기본값은 10. 0 이하로 하면 상한이 없어져 모든 스텝을 돌리지만(결정적 시뮬레이션 등), 긴 정지 후에는 재실행하는 동안 멈추고 update()가 레이트를 따라가지 못하는 동안에는 프레임이 계속 길어진다"
+                },
+                {
+                    "name": "getMaxUpdateSteps",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "number",
+                    "desc": "The cap on fixed-rate update steps per frame (and per runHeadlessApp loop pass) set by setMaxUpdateSteps(). 10 by default; 0 or less means no cap",
+                    "keywords": [
+                        "update cap",
+                        "catch up",
+                        "fixed step",
+                        "stall",
+                        "tick rate"
+                    ],
+                    "desc_ja": "setMaxUpdateSteps() で設定した、1フレーム（runHeadlessApp ではループ1周）あたりの固定レート update ステップの上限。既定は10で、0以下は上限なし",
+                    "desc_ko": "setMaxUpdateSteps()로 설정한, 프레임당(runHeadlessApp에서는 루프 1회당) 고정 레이트 update 스텝의 상한. 기본값은 10이며 0 이하는 상한 없음"
                 },
                 {
                     "name": "redraw",
@@ -5196,15 +5288,15 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "path",
                     "return_type": "boolean",
-                    "desc": "Save a screenshot of the rendered frame (png/jpg/bmp). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written.",
+                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written.",
                     "keywords": [
                         "capture",
                         "png",
                         "export",
                         "save image"
                     ],
-                    "desc_ja": "描画済みフレームのスクショを保存（png/jpg/bmp）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueは「保存先を準備しキューに積めた（親フォルダ生成・書き込み可）」の意味で、ファイル書き込み完了ではない",
-                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(png/jpg/bmp). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 '대상 준비 및 캡처 큐 등록 성공(상위 폴더 생성·쓰기 가능)'을 의미하며 파일 기록 완료가 아님"
+                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueは「保存先を準備しキューに積めた（親フォルダ生成・書き込み可）」の意味で、ファイル書き込み完了ではない",
+                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 '대상 준비 및 캡처 큐 등록 성공(상위 폴더 생성·쓰기 가능)'을 의미하며 파일 기록 완료가 아님"
                 },
                 {
                     "name": "startRecording",
@@ -5366,7 +5458,7 @@ const TrussCAPI = {
                     "params": "fn",
                     "params_typed": "fn",
                     "return_type": "(nothing)",
-                    "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame",
+                    "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame. Each frame runs, in order, what was queued when its drain started; work queued during the drain runs in the next frame. Nothing is dropped and there is no limit (a callback may edit the tree or free something); the tc_get_health MCP tool reports the count as mainQueuePending. Code that may queue faster than the app runs it, and can drop values, keeps its own bounded or latest-value buffer",
                     "keywords": [
                         "main thread",
                         "marshal",
@@ -5374,8 +5466,8 @@ const TrussCAPI = {
                         "dispatch",
                         "sync"
                     ],
-                    "desc_ja": "コールバックをメイン（シーン）スレッドで実行。既にメインなら即時、そうでなければ次フレームにキュー",
-                    "desc_ko": "콜백을 메인(씬) 스레드에서 실행. 이미 메인이면 즉시, 아니면 다음 프레임으로 큐잉"
+                    "desc_ja": "コールバックをメイン（シーン）スレッドで実行。既にメインなら即時、そうでなければ次フレームにキュー。各フレームは、ドレイン開始時点でキューにあったものを順番に実行する。ドレイン中にキューされたものは次のフレームで実行される。何も捨てず、上限もない（コールバックはツリーを編集したり何かを解放したりしうる）。その数は MCP ツール tc_get_health が mainQueuePending として返す。アプリが処理するより速くキューしうるコードで、値を捨ててよいものは、自前で上限付きのバッファか最新値だけのバッファを持つ",
+                    "desc_ko": "콜백을 메인(씬) 스레드에서 실행. 이미 메인이면 즉시, 아니면 다음 프레임으로 큐잉. 각 프레임은 드레인 시작 시점에 큐에 있던 것을 순서대로 실행한다. 드레인 중에 큐잉된 것은 다음 프레임에 실행된다. 아무것도 버리지 않고 상한도 없다(콜백이 트리를 편집하거나 무언가를 해제할 수 있으므로). 그 개수는 MCP 도구 tc_get_health가 mainQueuePending으로 보고한다. 앱이 처리하는 것보다 빠르게 큐잉할 수 있고 값을 버려도 되는 코드는 자체적으로 상한이 있는 버퍼나 최신값 버퍼를 둔다"
                 },
                 {
                     "name": "logLevelToString",
@@ -5404,6 +5496,21 @@ const TrussCAPI = {
                     "desc_ko": "전역 logger 인스턴스에 접근"
                 },
                 {
+                    "name": "setLogLevel",
+                    "params": "level",
+                    "params_typed": "level",
+                    "return_type": "(nothing)",
+                    "desc": "Set the console, file and system log levels at once (a later per-output call wins)",
+                    "keywords": [
+                        "verbosity",
+                        "filter",
+                        "log level",
+                        "all outputs"
+                    ],
+                    "desc_ja": "コンソール・ファイル・システムのログレベルを一度に設定（後の出力ごとの呼び出しが優先）",
+                    "desc_ko": "콘솔·파일·시스템 로그 레벨을 한 번에 설정 (이후의 출력별 호출이 우선)"
+                },
+                {
                     "name": "setConsoleLogLevel",
                     "params": "level",
                     "params_typed": "level",
@@ -5430,18 +5537,36 @@ const TrussCAPI = {
                     "desc_ko": "로그 파일에 기록할 최소 로그 레벨을 설정"
                 },
                 {
+                    "name": "setSystemLogLevel",
+                    "params": "level",
+                    "params_typed": "level",
+                    "return_type": "(nothing)",
+                    "desc": "Set the minimum log level written to the OS log: os_log on macOS, OutputDebugStringW on Windows",
+                    "keywords": [
+                        "verbosity",
+                        "filter",
+                        "os_log",
+                        "OutputDebugString",
+                        "system log",
+                        "console.app",
+                        "debugview"
+                    ],
+                    "desc_ja": "OS ログに書く最小ログレベルを設定：macOS は os_log、Windows は OutputDebugStringW",
+                    "desc_ko": "OS 로그에 기록할 최소 로그 레벨을 설정: macOS는 os_log, Windows는 OutputDebugStringW"
+                },
+                {
                     "name": "setLogFile",
                     "params": "path",
                     "params_typed": "path",
                     "return_type": "boolean",
-                    "desc": "Open a file to receive log output",
+                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path",
                     "keywords": [
                         "output",
                         "write",
                         "path"
                     ],
-                    "desc_ja": "ログ出力を受けるファイルを開く",
-                    "desc_ko": "로그 출력을 받을 파일을 엶"
+                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して false を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す",
+                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 false를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환"
                 },
                 {
                     "name": "closeLogFile",
@@ -6058,18 +6183,18 @@ const TrussCAPI = {
                 },
                 {
                     "name": "nodeToJson",
-                    "params": "node, maxDepth",
-                    "params_typed": "node, maxDepth",
+                    "params": "node, maxDepth, includeDerived",
+                    "params_typed": "node, maxDepth, includeDerived = false",
                     "return_type": "Json",
-                    "desc": "Serialize a node (and its subtree up to maxDepth; -1 = unlimited) to JSON via reflection",
+                    "desc": "Serialize a node (and its subtree up to maxDepth; -1 = unlimited) to JSON via reflection. Derived members (e.g. globalPos) are left out unless includeDerived is true; then they are included and named under \"derived\"",
                     "keywords": [
                         "serialize",
                         "reflect",
                         "tree",
                         "dump"
                     ],
-                    "desc_ja": "ノード（および maxDepth までのサブツリー、-1 = 無制限）をリフレクションで JSON にシリアライズ",
-                    "desc_ko": "노드(및 maxDepth까지의 서브트리, -1 = 무제한)를 리플렉션으로 JSON으로 직렬화"
+                    "desc_ja": "ノード（および maxDepth までのサブツリー、-1 = 無制限）をリフレクションで JSON にシリアライズ。派生メンバ（例: globalPos）は includeDerived が true のときだけ含め、\"derived\" に名前を列挙する",
+                    "desc_ko": "노드(및 maxDepth까지의 서브트리, -1 = 무제한)를 리플렉션으로 JSON으로 직렬화. 파생 멤버(예: globalPos)는 includeDerived가 true일 때만 포함하며 \"derived\"에 이름을 나열한다"
                 }
             ],
             "name_ja": "ユーティリティ",
@@ -6078,6 +6203,42 @@ const TrussCAPI = {
         {
             "name": "File",
             "functions": [
+                {
+                    "name": "pathToUtf8",
+                    "params": "p",
+                    "params_typed": "p",
+                    "return_type": "string",
+                    "desc": "Convert a path to a UTF-8 std::string, the same on every platform. Use it instead of path.string(), which on Windows converts to the process code page and can throw for characters outside it. On Windows it can still throw for a name that is not valid UTF-16 (an unpaired surrogate); to log a path, use log << path, which does not throw.",
+                    "keywords": [
+                        "utf-8",
+                        "encoding",
+                        "unicode",
+                        "string",
+                        "japanese",
+                        "windows",
+                        "code page"
+                    ],
+                    "desc_ja": "パスを UTF-8 の std::string に変換する（全プラットフォームで同じ）。path.string() の代わりに使う。path.string() は Windows ではプロセスのコードページに変換し、そこにない文字で例外を投げることがある。Windows では、不正な UTF-16 の名前（対になっていないサロゲート）でこの関数も例外を投げうる。ログに出すなら log << path を使う（こちらは投げない）",
+                    "desc_ko": "경로를 UTF-8 std::string으로 변환 (모든 플랫폼에서 동일). path.string() 대신 사용한다. path.string()은 Windows에서 프로세스 코드 페이지로 변환하며, 거기에 없는 문자에서 예외를 던질 수 있다. Windows에서는 올바르지 않은 UTF-16 이름(짝이 없는 서로게이트)에서 이 함수도 예외를 던질 수 있다. 로그에 경로를 출력할 때는 log << path를 사용한다 (이쪽은 예외를 던지지 않는다)"
+                },
+                {
+                    "name": "utf8ToPath",
+                    "params": "utf8",
+                    "params_typed": "utf8",
+                    "return_type": "string",
+                    "desc": "Convert a UTF-8 string to fs::path, decoding it as UTF-8 on every platform. fs::path(std::string) on Windows decodes in the process code page, which is UTF-8 only in apps built with TrussC's Windows manifest (Windows 10 1903 or later).",
+                    "keywords": [
+                        "utf-8",
+                        "encoding",
+                        "unicode",
+                        "string",
+                        "japanese",
+                        "windows",
+                        "code page"
+                    ],
+                    "desc_ja": "UTF-8 文字列を fs::path に変換する（全プラットフォームで UTF-8 として解釈）。Windows の fs::path(std::string) はプロセスのコードページで解釈し、それが UTF-8 になるのは TrussC の Windows マニフェスト入りでビルドしたアプリ（Windows 10 1903 以降）だけ",
+                    "desc_ko": "UTF-8 문자열을 fs::path로 변환 (모든 플랫폼에서 UTF-8로 해석). Windows의 fs::path(std::string)는 프로세스 코드 페이지로 해석하며, 그것이 UTF-8인 것은 TrussC의 Windows 매니페스트로 빌드한 앱(Windows 10 1903 이상)뿐이다"
+                },
                 {
                     "name": "getExecutablePath",
                     "params": "",
@@ -6198,14 +6359,14 @@ const TrussCAPI = {
                     "params": "j, path, indent",
                     "params_typed": "j, path, indent = 2",
                     "return_type": "boolean",
-                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath. indent sets the pretty-print width (negative for compact). Returns true on success.",
+                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). Returns true on success; on failure it logs an error and returns false.",
                     "keywords": [
                         "write",
                         "store",
                         "serialize"
                     ],
-                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決。indentはpretty-print幅を指定(負の値でcompact)。成功時trueを返す",
-                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석. indent는 pretty-print 폭을 지정(음수면 compact). 성공 시 true 반환"
+                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決し、親フォルダがなければ作る。indentはpretty-print幅を指定(負の値でcompact)。成功時trueを返し、失敗時はエラーをログに出してfalseを返す",
+                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. indent는 pretty-print 폭을 지정(음수면 compact). 성공 시 true 반환, 실패 시 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "loadXml",
@@ -6254,15 +6415,15 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "path",
                     "return_type": "string",
-                    "desc": "Get file extension without dot",
+                    "desc": "Get file extension without dot, as written (case kept). Compare toLower(getFileExtension(path)) to match it case-insensitively, as TrussC's loaders do.",
                     "keywords": [
                         "ext",
                         "suffix",
                         "type",
                         "format"
                     ],
-                    "desc_ja": "拡張子を取得（ドットなし）",
-                    "desc_ko": "파일 확장자를 얻음 (점 제외)"
+                    "desc_ja": "拡張子を取得（ドットなし、書かれたとおりの大文字小文字）。大文字小文字を区別せずに比べるには、TrussCのローダーと同じく toLower(getFileExtension(path)) を比べる",
+                    "desc_ko": "파일 확장자를 얻음 (점 제외, 쓰인 그대로의 대소문자). 대소문자 무시로 비교하려면 TrussC 로더처럼 toLower(getFileExtension(path))를 비교"
                 },
                 {
                     "name": "getParentDirectory",
@@ -6407,27 +6568,27 @@ const TrussCAPI = {
                     "params": "path, content",
                     "params_typed": "path, content",
                     "return_type": "boolean",
-                    "desc": "Save string to text file",
+                    "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened",
                     "keywords": [
                         "write",
                         "store"
                     ],
-                    "desc_ja": "文字列をファイルに保存",
-                    "desc_ko": "문자열을 텍스트 파일로 저장"
+                    "desc_ja": "文字列をファイルに保存。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して false を返す",
+                    "desc_ko": "문자열을 텍스트 파일로 저장. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "appendToFile",
                     "params": "path, content",
                     "params_typed": "path, content",
                     "return_type": "boolean",
-                    "desc": "Append string to file",
+                    "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened",
                     "keywords": [
                         "write",
                         "add",
                         "concat"
                     ],
-                    "desc_ja": "ファイルに追記",
-                    "desc_ko": "파일에 문자열을 추가"
+                    "desc_ja": "ファイルに追記。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して false を返す",
+                    "desc_ko": "파일에 문자열을 추가. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 false 반환"
                 }
             ],
             "name_ja": "ファイル",
@@ -6477,7 +6638,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "(nothing)",
-                    "desc": "Initialize the global AudioEngine. Called automatically by Sound::load() / play(), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener).",
+                    "desc": "Initialize the global AudioEngine. Sound::load(), loadStream(), loadTestTone() and loadFromBuffer() call it automatically while the engine is not initialized (play() does not), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener).",
                     "keywords": [
                         "initialize",
                         "start",
@@ -6485,8 +6646,8 @@ const TrussCAPI = {
                         "setup",
                         "open"
                     ],
-                    "desc_ja": "グローバルなAudioEngineを初期化。Sound::load() / play()から自動的に呼ばれるため、手動使用はオーディオを早期に開始したい場合(例: audioOut合成リスナーの前)のみ必要",
-                    "desc_ko": "전역 AudioEngine을 초기화. Sound::load() / play()에서 자동 호출되므로, 수동 사용은 오디오를 일찍 시작하려는 경우(예: audioOut 합성 리스너 이전)에만 필요"
+                    "desc_ja": "グローバルなAudioEngineを初期化。エンジンが未初期化なら Sound::load() / loadStream() / loadTestTone() / loadFromBuffer() が自動的に初期化する (play() はしない) ため、手動使用はオーディオを早期に開始したい場合(例: audioOut合成リスナーの前)のみ必要",
+                    "desc_ko": "전역 AudioEngine을 초기화. 엔진이 초기화되지 않았으면 Sound::load() / loadStream() / loadTestTone() / loadFromBuffer() 가 자동으로 초기화하므로 (play() 는 하지 않음), 수동 사용은 오디오를 일찍 시작하려는 경우(예: audioOut 합성 리스너 이전)에만 필요"
                 },
                 {
                     "name": "shutdownAudio",
@@ -6717,30 +6878,30 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "Node",
-                    "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none). A tool such as an inspector can read it and drive it via setSelectedNode().",
+                    "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none or once the node is freed). A tool such as an inspector can read it and drive it via setSelectedNode(). The pointer is for the current call; to keep the node, keep its weak_from_this().",
                     "keywords": [
                         "selection",
                         "active",
                         "clicked",
                         "inspector"
                     ],
-                    "desc_ja": "現在選択中のノード(最後にクリックされたノード、Nodeシステムが保持。なければnull)を取得。inspectorなどのツールがこれを読み取り、setSelectedNode()で操作できる",
-                    "desc_ko": "현재 선택된 노드(마지막으로 클릭된 노드, Node 시스템이 보유. 없으면 null)를 얻음. inspector 같은 도구가 이를 읽고 setSelectedNode()로 조작 가능"
+                    "desc_ja": "現在選択中のノード(最後にクリックされたノード、Nodeシステムが保持。なければ、またはノードが解放されたらnull)を取得。inspectorなどのツールがこれを読み取り、setSelectedNode()で操作できる。ポインタはその呼び出しの間だけ使い、ノードを持ち続けるならweak_from_this()を保持する",
+                    "desc_ko": "현재 선택된 노드(마지막으로 클릭된 노드, Node 시스템이 보유. 없거나 노드가 해제되면 null)를 얻음. inspector 같은 도구가 이를 읽고 setSelectedNode()로 조작 가능. 포인터는 그 호출 동안만 사용하고, 노드를 계속 참조하려면 weak_from_this()를 보관"
                 },
                 {
                     "name": "getRootNode",
                     "params": "",
                     "params_typed": "",
                     "return_type": "Node",
-                    "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around.",
+                    "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around. Not yet the App inside its own constructor: use it from setup() on.",
                     "keywords": [
                         "tree",
                         "app",
                         "top",
                         "hierarchy"
                     ],
-                    "desc_ja": "実行中のAppをノードツリーのルートとして取得(アプリ生存中はフレームワークが設定、それ以外はnull)。アプリが自身を渡し回さずともツールがツリー全体を辿れる",
-                    "desc_ko": "실행 중인 App을 노드 트리의 루트로 얻음(앱이 살아있는 동안 프레임워크가 설정, 그 외에는 null). 앱이 자신을 넘기지 않아도 도구가 트리 전체를 순회 가능"
+                    "desc_ja": "実行中のAppをノードツリーのルートとして取得(アプリ生存中はフレームワークが設定、それ以外はnull)。アプリが自身を渡し回さずともツールがツリー全体を辿れる。App自身のコンストラクタ内ではまだそのAppを返さない。setup()以降で使う",
+                    "desc_ko": "실행 중인 App을 노드 트리의 루트로 얻음(앱이 살아있는 동안 프레임워크가 설정, 그 외에는 null). 앱이 자신을 넘기지 않아도 도구가 트리 전체를 순회 가능. App 자신의 생성자 안에서는 아직 그 App을 반환하지 않음. setup()부터 사용"
                 }
             ],
             "name_ja": "シーングラフ",
@@ -7009,7 +7170,7 @@ const TrussCAPI = {
                     "params": "light",
                     "params_typed": "light",
                     "return_type": "(nothing)",
-                    "desc": "Add a light to the scene",
+                    "desc": "Add a light to the scene (up to 8 lights per window; a light added past 8 is not registered, with a one-time warning)",
                     "keywords": [
                         "lamp",
                         "illuminate",
@@ -7017,8 +7178,8 @@ const TrussCAPI = {
                         "point light",
                         "ofLight"
                     ],
-                    "desc_ja": "シーンにlightを追加",
-                    "desc_ko": "씬에 조명을 추가"
+                    "desc_ja": "シーンにlightを追加（1ウィンドウ最大8灯。9灯目以降は登録されず、1回だけ警告を出す）",
+                    "desc_ko": "씬에 조명을 추가 (창당 최대 8개. 8개를 넘어 추가한 조명은 등록되지 않으며 경고를 한 번 출력)"
                 },
                 {
                     "name": "removeLight",
@@ -8281,9 +8442,9 @@ const TrussCAPI = {
                             "params": "w, h"
                         }
                     ],
-                    "desc": "Set the app's size",
-                    "desc_ja": "アプリのサイズを設定",
-                    "desc_ko": "앱 크기를 설정"
+                    "desc": "Resize the app's own window — the one it is attached to, or the main window for the main App — from any window's callbacks. Same units as setWindowSize(). An App attached to no window only changes its own size. So does an App no shared_ptr owns yet (e.g. inside its constructor), which also warns once: call it in setup()",
+                    "desc_ja": "アプリ自身のウィンドウ (Appが載っているウィンドウ、メインAppならメインウィンドウ) をリサイズ。どのウィンドウのコールバックから呼んでも同じ。単位は setWindowSize() と同じ。どのウィンドウにも載っていないAppは自分のサイズだけが変わる。まだshared_ptrに所有されていないApp(コンストラクタ内など)も自分のサイズだけが変わり、一度だけ警告が出る。setup()で呼ぶ",
+                    "desc_ko": "앱 자신의 윈도우 (App이 연결된 윈도우, 메인 App이면 메인 윈도우)를 리사이즈. 어느 윈도우의 콜백에서 호출해도 동일. 단위는 setWindowSize()와 같음. 어떤 윈도우에도 연결되지 않은 App은 자신의 크기만 바뀜. 아직 shared_ptr이 소유하지 않은 App(생성자 안 등)도 자신의 크기만 바뀌고 경고가 한 번 나옴. setup()에서 호출"
                 },
                 {
                     "name": "app:requestExit",
@@ -8308,6 +8469,18 @@ const TrussCAPI = {
                     "desc": "Whether an exit has been requested",
                     "desc_ja": "終了が要求されているかどうか",
                     "desc_ko": "종료가 요청되었는지 여부"
+                },
+                {
+                    "name": "app:getWindow",
+                    "signatures": [
+                        {
+                            "ret": "Window",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "The Window this App is attached to via Window::setApp(), or nullptr when it is not attached — including the main App started by runApp() and an App whose window was closed. Resolved from the App itself, so subApp->getWindow() returns the right window from any window's callbacks",
+                    "desc_ja": "Window::setApp() でこのAppが載っているWindow。載っていなければ nullptr (runApp() で起動したメインAppと、ウィンドウが閉じられたAppを含む)。App自身から引くので、どのウィンドウのコールバックから subApp->getWindow() を呼んでも正しいウィンドウが返る",
+                    "desc_ko": "Window::setApp()으로 이 App이 연결된 Window. 연결되어 있지 않으면 nullptr (runApp()으로 시작한 메인 App과 윈도우가 닫힌 App 포함). App 자체에서 조회하므로 어느 윈도우의 콜백에서 subApp->getWindow()를 호출해도 올바른 윈도우가 반환됨"
                 },
                 {
                     "name": "app:keyPressed",
@@ -8501,9 +8674,9 @@ const TrussCAPI = {
                             "params": "buf"
                         }
                     ],
-                    "desc": "Fill the audio output buffer (override to synthesize audio)",
-                    "desc_ja": "オーディオ出力バッファを満たす(音を合成するにはオーバーライド)",
-                    "desc_ko": "오디오 출력 버퍼를 채움(오디오를 합성하려면 오버라이드)"
+                    "desc": "Fill the audio output buffer (override to synthesize audio). Runs on the audio thread. First called right after setup() returns, so what setup() prepares is ready in here; an App that is never run gets no calls. The framework detaches it after cleanup() and waits for a call in flight before it destroys the App (exit, hot reload, closing the App's window), for as long as the call takes: don't wait on the main thread or on a lock the main thread may hold in here, or the teardown hangs (with an error logged after one second). An App runs once: when its window closes it is detached for good; to show the App again, create a new one",
+                    "desc_ja": "オーディオ出力バッファを満たす(音を合成するにはオーバーライド)。オーディオスレッドで実行される。setup() が戻った直後から呼ばれるので、setup() で用意したものはここで使える。一度も動かさない App には呼ばれない。フレームワークが cleanup() の後で切り離し、実行中の呼び出しが戻るまで時間の制限なしに待ってから App を破棄する (終了時、ホットリロード時、App のウィンドウを閉じたとき)。ここでメインスレッドや、メインスレッドが持ちうるロックを待たないこと。後片付けが固まる (1 秒後にエラーログが出る)。App は 1 回だけ動くので、ウィンドウを閉じたら二度と登録されない。もう一度表示するには新しい App を作る",
+                    "desc_ko": "오디오 출력 버퍼를 채움(오디오를 합성하려면 오버라이드). 오디오 스레드에서 실행된다. setup() 이 반환된 직후부터 호출되므로 setup() 에서 준비한 것은 여기서 쓸 수 있다. 한 번도 실행되지 않은 App 에는 호출되지 않는다. 프레임워크가 cleanup() 후에 분리하고, 실행 중인 호출이 반환될 때까지 시간 제한 없이 기다린 뒤 App 을 파괴한다 (종료 시, 핫 리로드 시, App 의 윈도우를 닫을 때). 여기서 메인 스레드나 메인 스레드가 쥘 수 있는 락을 기다리지 말 것. 정리가 멈춘다 (1 초 후 에러 로그가 남는다). App 은 한 번만 동작하므로 윈도우를 닫으면 다시 등록되지 않는다. 다시 표시하려면 새 App 을 만든다"
                 },
                 {
                     "name": "app:audioIn",
@@ -8513,9 +8686,9 @@ const TrussCAPI = {
                             "params": "buf"
                         }
                     ],
-                    "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut.",
-                    "desc_ja": "リアルタイム入力コールバック event (マイク入力)。RT-safe 要件は audioOut と同様",
-                    "desc_ko": "실시간 캡처 콜백 이벤트 (마이크 입력). RT-safe 요건은 audioOut과 동일"
+                    "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut. Like audioOut, first called right after setup() returns and detached after cleanup() for good; the same rule applies: don't wait on the main thread or on its locks in here.",
+                    "desc_ja": "リアルタイム入力コールバック event (マイク入力)。RT-safe 要件は audioOut と同様。audioOut と同じく setup() が戻った直後から呼ばれ、cleanup() の後で切り離され、元には戻らない。ここでもメインスレッドやそのロックを待たないこと",
+                    "desc_ko": "실시간 캡처 콜백 이벤트 (마이크 입력). RT-safe 요건은 audioOut과 동일. audioOut 과 같이 setup() 이 반환된 직후부터 호출되고, cleanup() 후에 분리되어 다시 등록되지 않는다. 여기서도 메인 스레드나 그 락을 기다리지 말 것"
                 }
             ]
         },
@@ -8564,9 +8737,9 @@ const TrussCAPI = {
                 {
                     "name": "audioDeviceChangedArgs.bufferSize",
                     "type": "number",
-                    "desc": "Active device buffer size in frames",
-                    "desc_ja": "アクティブなデバイスバッファサイズ (フレーム単位)",
-                    "desc_ko": "활성 디바이스 버퍼 크기 (프레임 단위)"
+                    "desc": "Buffer (period) size the device runs with, in frames at the engine rate (granted by the device; bufferSize / sampleRate = period in seconds). Not the requested value: see AudioEngine::getBufferSize.",
+                    "desc_ja": "デバイスが実際に使うバッファ (ピリオド) サイズ。エンジンのサンプルレートでのフレーム数 (デバイスが許可した値。bufferSize / sampleRate = 秒単位のピリオド)。要求値ではない。要求値は AudioEngine::getBufferSize",
+                    "desc_ko": "디바이스가 실제로 사용하는 버퍼 (피리어드) 크기. 엔진 샘플레이트 기준 프레임 수 (디바이스가 허용한 값. bufferSize / sampleRate = 초 단위 피리어드). 요청값이 아님. 요청값은 AudioEngine::getBufferSize"
                 },
                 {
                     "name": "audioDeviceChangedArgs.maxPolyphony",
@@ -8635,9 +8808,9 @@ const TrussCAPI = {
                         "",
                         "settings"
                     ],
-                    "desc": "Initialize the engine with defaults, or with an AudioSettings override. Re-init on a running engine migrates active voices to the new settings. Returns true on success.",
-                    "desc_ja": "デフォルト、または AudioSettings の上書きでエンジンを初期化。動作中のエンジンで再初期化するとアクティブなボイスを新設定へ移行する。成功時 true を返す",
-                    "desc_ko": "기본값 또는 AudioSettings 오버라이드로 엔진을 초기화. 동작 중인 엔진에서 재초기화하면 활성 보이스를 새 설정으로 이전한다. 성공 시 true 반환"
+                    "desc": "Initialize the engine, or re-initialize it with an AudioSettings override. init(settings) keeps the sample rate, channels, buffer size and polyphony even when it fails; init() with no arguments reuses the last ones (the defaults if init(settings) was never called) but always opens the system default device. Re-init on a running engine migrates active voices to the new settings. With no usable audio backend, miniaudio falls back to its silent Null device: init() then succeeds and logs a warning. Returns true on success, false when no output device can be opened; the failure is logged through logError(\"AudioEngine\") with the requested device name. A failed re-init leaves the engine stopped: the running device is closed before the new one is tried. It may be called again later; each failed try opens the device and logs again, so retry on a timer (about once a second) or on a user action, not every frame. Sound::load*() calls init() while the engine is not initialized, so after a failed init(settings) it opens the system default device with those settings; call init(settings) again before loading sounds if you want the requested device.",
+                    "desc_ja": "エンジンを初期化する、または AudioSettings の上書きで再初期化する。init(settings) はサンプルレート、チャンネル、バッファサイズ、ポリフォニーを失敗しても保持し、引数なしの init() は直前のそれらを再利用する (init(settings) を一度も呼んでいなければデフォルト) が、デバイスは常にシステム既定を開く。動作中のエンジンで再初期化するとアクティブなボイスを新設定へ移行する。使えるオーディオバックエンドがないと miniaudio は無音の Null デバイスにフォールバックし、init() は成功して警告をログに出す。成功時 true、出力デバイスを開けないときは false を返す。失敗は要求したデバイス名とともに logError(\"AudioEngine\") でログに出る。再初期化が失敗するとエンジンは止まったままになる (新しいデバイスを試す前に動作中のデバイスを閉じるため)。後からもう一度呼んでよいが、失敗するたびにデバイスを開き直してログを出すので、毎フレームではなくタイマー (1 秒に 1 回程度) やユーザー操作で再試行すること。Sound::load*() はエンジンが未初期化なら init() を呼ぶので、init(settings) が失敗した後はその設定でシステム既定のデバイスが開かれる。要求したデバイスを使いたいならサウンドを読み込む前に init(settings) を呼び直すこと",
+                    "desc_ko": "엔진을 초기화하거나 AudioSettings 오버라이드로 재초기화. init(settings) 는 샘플레이트, 채널, 버퍼 크기, 폴리포니를 실패해도 유지하고, 인수 없는 init() 은 마지막 값을 재사용하지만 (init(settings) 를 호출한 적이 없으면 기본값) 디바이스는 항상 시스템 기본 디바이스를 연다. 동작 중인 엔진에서 재초기화하면 활성 보이스를 새 설정으로 이전한다. 사용할 수 있는 오디오 백엔드가 없으면 miniaudio 는 무음의 Null 디바이스로 폴백하고, init() 은 성공하며 경고를 로그에 남긴다. 성공 시 true, 출력 디바이스를 열 수 없으면 false 반환. 실패는 요청한 디바이스 이름과 함께 logError(\"AudioEngine\") 로 로그에 남는다. 재초기화가 실패하면 엔진은 멈춘 상태로 남는다 (새 디바이스를 시도하기 전에 동작 중인 디바이스를 닫기 때문). 나중에 다시 호출해도 되지만, 실패할 때마다 디바이스를 다시 열고 로그를 남기므로 매 프레임이 아니라 타이머(1초에 한 번 정도)나 사용자 조작으로 재시도할 것. Sound::load*() 는 엔진이 초기화되지 않았으면 init() 을 호출하므로, init(settings) 가 실패한 뒤에는 그 설정으로 시스템 기본 디바이스가 열린다. 요청한 디바이스를 쓰려면 사운드를 로드하기 전에 init(settings) 를 다시 호출할 것"
                 },
                 {
                     "name": "audioEngine:shutdown",
@@ -8788,7 +8961,7 @@ const TrussCAPI = {
         },
         {
             "name": "AudioRecorder",
-            "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks",
+            "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks. Every file has a 36-byte JUNK chunk after the RIFF header, so the samples start at byte 80 (S16) or 92 (F32). A take over 4 GiB of samples (about 3.1 h of 48 kHz stereo F32) is written as RF64 (EBU Tech 3306); older readers without RF64 support can't open it",
             "keywords": [
                 "record",
                 "wav",
@@ -8798,8 +8971,8 @@ const TrussCAPI = {
                 "tap",
                 "bounce"
             ],
-            "desc_ja": "エンジンのマスター出力（Sound再生もaudioOut合成も含む、スピーカーに出る音そのもの）をWAVファイルに録音する。audioOutをMonitor優先度でタップし、ファイルIOはバックグラウンドスレッドで行う（オーディオスレッドはブロックしない）",
-            "desc_ko": "엔진의 마스터 출력(스피커로 나가는 소리 그대로, Sound 재생과 audioOut 합성 포함)을 WAV 파일로 녹음. audioOut을 Monitor 우선순위로 탭하고 파일 IO는 백그라운드 스레드에서 수행(오디오 스레드는 블록되지 않음)",
+            "desc_ja": "エンジンのマスター出力（Sound再生もaudioOut合成も含む、スピーカーに出る音そのもの）をWAVファイルに録音する。audioOutをMonitor優先度でタップし、ファイルIOはバックグラウンドスレッドで行う（オーディオスレッドはブロックしない）。どのファイルも RIFF ヘッダの後に 36 バイトの JUNK チャンクを持つので、サンプルは 80 バイト目 (S16) か 92 バイト目 (F32) から始まる。サンプルが 4 GiB を超えるテイク (48 kHz ステレオ F32 で約 3.1 時間) は RF64 (EBU Tech 3306) で書かれ、RF64 に対応していない古いリーダーでは開けない",
+            "desc_ko": "엔진의 마스터 출력(스피커로 나가는 소리 그대로, Sound 재생과 audioOut 합성 포함)을 WAV 파일로 녹음. audioOut을 Monitor 우선순위로 탭하고 파일 IO는 백그라운드 스레드에서 수행(오디오 스레드는 블록되지 않음). 모든 파일은 RIFF 헤더 뒤에 36바이트 JUNK 청크를 가지므로 샘플은 80바이트째(S16) 또는 92바이트째(F32)부터 시작한다. 샘플이 4 GiB를 넘는 테이크(48 kHz 스테레오 F32로 약 3.1시간)는 RF64(EBU Tech 3306)로 기록되며, RF64를 지원하지 않는 오래된 리더에서는 열 수 없다",
             "related": [
                 "AudioRecordSettings",
                 "AudioEngine",
@@ -8831,9 +9004,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Stop and finalize the file (patches the WAV header sizes). Safe to call when not recording; also runs automatically on destruction",
-                    "desc_ja": "録音を停止しファイルを確定する（WAVヘッダのサイズを書き戻す）。未録音時に呼んでも安全。デストラクタでも自動実行される",
-                    "desc_ko": "녹음을 정지하고 파일을 마무리(WAV 헤더 크기를 기록). 녹음 중이 아닐 때 호출해도 안전하며 소멸자에서도 자동 실행됨"
+                    "desc": "Stop and finalize the file (patches the WAV header sizes; a take over 4 GiB of samples becomes RF64, logged as a notice; a failed file write, such as a full disk, is logged as an error instead); the buffer a capture was still copying is included. Safe to call when not recording; also runs automatically on destruction. Waits on AudioEngine::waitForAudioCallbacks(): for every audioOut / audioIn listener running at that moment, not only the recorder's (usually well under one buffer). Don't call it while holding a lock that such a listener takes: it would wait up to one second and the audio drops out meanwhile",
+                    "desc_ja": "録音を停止しファイルを確定する（WAVヘッダのサイズを書き戻す。サンプルが 4 GiB を超えたテイクは RF64 にして notice ログを出す。ディスクが一杯などでファイル書き込みが失敗していたら、代わりに error ログを出す）。取り込み途中だったバッファも含まれる。未録音時に呼んでも安全。デストラクタでも自動実行される。AudioEngine::waitForAudioCallbacks() で待つので、レコーダーの分だけでなく、その時点で動いている audioOut / audioIn のリスナーすべてを待つ (通常はバッファ 1 つ分より短い)。そうしたリスナーが取るロックを持ったまま呼ばないこと。最大 1 秒止まり、その間は音が途切れる",
+                    "desc_ko": "녹음을 정지하고 파일을 마무리(WAV 헤더 크기를 기록. 샘플이 4 GiB를 넘은 테이크는 RF64로 만들고 notice 로그를 남긴다. 디스크가 가득 차는 등으로 파일 쓰기가 실패했다면 대신 error 로그를 남긴다). 캡처 도중이던 버퍼도 포함된다. 녹음 중이 아닐 때 호출해도 안전하며 소멸자에서도 자동 실행됨. AudioEngine::waitForAudioCallbacks() 로 기다리므로 레코더 것만이 아니라 그 시점에 실행 중인 audioOut / audioIn 리스너 전부를 기다린다 (보통 버퍼 하나 분량보다 짧다). 그런 리스너가 잡는 락을 쥔 채로 호출하지 말 것. 최대 1 초 멈추고 그동안 소리가 끊긴다"
                 },
                 {
                     "name": "audioRecorder:isRecording",
@@ -8970,6 +9143,96 @@ const TrussCAPI = {
                     "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate.",
                     "desc_ja": "再生デバイス名、空 = システム既定。列挙には AudioEngine::listDevices() を使う",
                     "desc_ko": "재생 디바이스 이름, 비어 있으면 시스템 기본값. 열거에는 AudioEngine::listDevices() 사용"
+                }
+            ]
+        },
+        {
+            "name": "AudioStats",
+            "desc": "Audio engine health counters and meters, returned by AudioEngine::getStats(). Counters are cumulative since the process started (they survive re-init); peak / rms / cpuUsage describe the recent output.",
+            "keywords": [
+                "audio diagnostics",
+                "dropped plays",
+                "clipping",
+                "cpu usage",
+                "cpu load",
+                "meter"
+            ],
+            "desc_ja": "AudioEngine::getStats() が返すオーディオエンジンの健全性カウンタとメーター。カウンタはプロセス起動からの累計 (再初期化でも消えない)。peak / rms / cpuUsage は直近の出力を表す",
+            "desc_ko": "AudioEngine::getStats() 가 반환하는 오디오 엔진 상태 카운터와 미터. 카운터는 프로세스 시작 이후 누계 (재초기화해도 유지). peak / rms / cpuUsage 는 최근 출력을 나타낸다",
+            "related": [
+                "AudioEngine::getStats",
+                "PlayingSoundInfo"
+            ],
+            "properties": [
+                {
+                    "name": "audioStats.droppedPlays",
+                    "type": "number",
+                    "desc": "Plays AudioEngine::play() refused since startup (Sound::play() returned false), all reasons: the sum of the four dropped* fields.",
+                    "desc_ja": "起動から AudioEngine::play() が拒否した再生の数 (Sound::play() が false を返した)。全理由の合計で、4 つの dropped* フィールドの和",
+                    "desc_ko": "시작 이후 AudioEngine::play() 가 거부한 재생 수 (Sound::play() 가 false 반환). 모든 이유의 합계로, 네 개의 dropped* 필드의 합"
+                },
+                {
+                    "name": "audioStats.droppedPolyphonyLimit",
+                    "type": "number",
+                    "desc": "Plays refused because every playback slot was busy (AudioSettings::maxPolyphony, default 32).",
+                    "desc_ja": "全再生スロットが使用中 (AudioSettings::maxPolyphony、既定 32) で捨てた再生の数",
+                    "desc_ko": "모든 재생 슬롯이 사용 중 (AudioSettings::maxPolyphony, 기본 32) 이라 버려진 재생 수"
+                },
+                {
+                    "name": "audioStats.droppedStreamLimit",
+                    "type": "number",
+                    "desc": "Plays refused because a SoundStream already had maxPolyphony playbacks. Only copies of a streamed Sound can hit this: a single Sound stops its previous playback first.",
+                    "desc_ja": "SoundStream が既に maxPolyphony 本の再生を持っていたために捨てた再生の数。ストリームした Sound のコピーでだけ起きる (単独の Sound は前の再生を先に止める)",
+                    "desc_ko": "SoundStream 이 이미 maxPolyphony 개의 재생을 갖고 있어 버려진 재생 수. 스트리밍 Sound 의 복사본에서만 발생 (단일 Sound 는 이전 재생을 먼저 정지)"
+                },
+                {
+                    "name": "audioStats.droppedDecoderError",
+                    "type": "number",
+                    "desc": "Plays refused because a stream's file could not be reopened for the new playback (moved, deleted or unreadable).",
+                    "desc_ja": "ストリームのファイルを新しい再生用に開き直せず (移動・削除・読めない) 捨てた再生の数",
+                    "desc_ko": "스트림 파일을 새 재생용으로 다시 열 수 없어 (이동·삭제·읽기 불가) 버려진 재생 수"
+                },
+                {
+                    "name": "audioStats.droppedNotRunning",
+                    "type": "number",
+                    "desc": "Plays refused because no output device was running (init failed, or after shutdown()).",
+                    "desc_ja": "出力デバイスが動いていなかった (init 失敗、または shutdown() 後) ために捨てた再生の数",
+                    "desc_ko": "출력 디바이스가 동작하지 않아 (init 실패 또는 shutdown() 이후) 버려진 재생 수"
+                },
+                {
+                    "name": "audioStats.clippedSamples",
+                    "type": "number",
+                    "desc": "Output samples beyond +/-1.0 that the final clamp cut off (counted per channel sample).",
+                    "desc_ja": "最終クランプで切り落とされた ±1.0 を超える出力サンプル数 (チャンネルごとのサンプル単位)",
+                    "desc_ko": "최종 클램프에서 잘린 ±1.0 을 넘는 출력 샘플 수 (채널별 샘플 단위)"
+                },
+                {
+                    "name": "audioStats.peak",
+                    "type": "number",
+                    "desc": "Master output peak over the last ~100 ms, linear (1.0 = full scale). Measured before the clamp, so a value above 1 shows how far the mix overshoots. 0 while the engine is not running.",
+                    "desc_ja": "直近約 100 ms のマスター出力のピーク (リニア、1.0 = フルスケール)。クランプ前に測るので、1 を超えた値はミックスのはみ出し量を示す。エンジン停止中は 0",
+                    "desc_ko": "최근 약 100 ms 의 마스터 출력 피크 (선형, 1.0 = 풀 스케일). 클램프 전에 측정하므로 1 을 넘는 값은 믹스가 얼마나 넘쳤는지를 보여준다. 엔진이 정지 상태면 0"
+                },
+                {
+                    "name": "audioStats.rms",
+                    "type": "number",
+                    "desc": "Master output RMS over the same ~100 ms window, linear. 0 while the engine is not running.",
+                    "desc_ja": "同じ約 100 ms 区間のマスター出力の RMS (リニア)。エンジン停止中は 0",
+                    "desc_ko": "같은 약 100 ms 구간의 마스터 출력 RMS (선형). 엔진이 정지 상태면 0"
+                },
+                {
+                    "name": "audioStats.cpuUsage",
+                    "type": "number",
+                    "desc": "Fraction of audio-thread time: time spent mixing the playing sounds and audioOut listeners divided by the audio time produced, averaged over ~0.5 s of audio. 1.0 means the callback took as long as the audio it produced (0.25 = a quarter of the time budget). 0 while the engine is not running.",
+                    "desc_ja": "オーディオスレッドの時間の割合: 再生中のサウンドと audioOut リスナーのミックスにかかった時間 ÷ 生成した音の時間。約 0.5 秒分の音の平均。1.0 はコールバックが生成した音と同じだけの時間がかかったことを表す (0.25 = 時間予算の 4 分の 1)。エンジン停止中は 0",
+                    "desc_ko": "오디오 스레드 시간의 비율: 재생 중인 사운드와 audioOut 리스너 믹스에 걸린 시간 ÷ 생성한 오디오 시간. 약 0.5 초 분량의 오디오 평균. 1.0 은 콜백이 생성한 오디오만큼의 시간이 걸렸다는 뜻 (0.25 = 시간 예산의 4 분의 1). 엔진이 정지 상태면 0"
+                },
+                {
+                    "name": "audioStats.cpuUsagePeak",
+                    "type": "number",
+                    "desc": "CPU usage of the worst single callback in the same window; above 1 the callback took longer than the audio it produced (a dropout). 0 while the engine is not running.",
+                    "desc_ja": "同じ区間で最も重かったコールバック 1 回の CPU 使用率。1 を超えたらコールバックが生成した音より長くかかった (音切れ)。エンジン停止中は 0",
+                    "desc_ko": "같은 구간에서 가장 무거웠던 콜백 한 번의 CPU 사용률. 1 을 넘으면 콜백이 생성한 오디오보다 오래 걸린 것 (끊김). 엔진이 정지 상태면 0"
                 }
             ]
         },
@@ -10289,6 +10552,13 @@ const TrussCAPI = {
                     "desc_ko": "앱 종료 시 발생"
                 },
                 {
+                    "name": "coreEvents.hotReloadUnload",
+                    "type": "Event",
+                    "desc": "Hot reload only: fired before the host unloads the current guest build (on each reload, and at exit after exit), while its App is still alive. Guest code whose state outlives the App (singletons, function-local statics) drops its listeners on the host's events here; tcxImGui and tcxNodeInspector do this themselves. Never fired in a normal build",
+                    "desc_ja": "ホットリロード専用: ホストが現在のゲストビルドをアンロードする前(リロードのたび、および終了時に exit の後)、App がまだ生きている間に発火。App より長く生きる状態(シングルトン、関数内 static)を持つゲストのコードは、ここでホストのイベントへのリスナーを外す。tcxImGui と tcxNodeInspector は自動で行う。通常ビルドでは発火しない",
+                    "desc_ko": "핫 리로드 전용: 호스트가 현재 게스트 빌드를 언로드하기 전(리로드마다, 그리고 종료 시 exit 다음), App이 아직 살아 있는 동안 발생. App보다 오래 사는 상태(싱글턴, 함수 내 static)를 가진 게스트 코드는 여기서 호스트 이벤트의 리스너를 해제함. tcxImGui와 tcxNodeInspector는 자동으로 처리. 일반 빌드에서는 발생하지 않음"
+                },
+                {
                     "name": "coreEvents.exitRequested",
                     "type": "Event",
                     "desc": "Fired when an exit is requested; set args.cancel = true to cancel it",
@@ -10812,9 +11082,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction)",
-                    "desc_ja": "リスナーを今すぐ明示的に切断(そうしなければ破棄時に自動で行われる)",
-                    "desc_ko": "리스너를 지금 명시적으로 연결 해제(그렇지 않으면 파괴 시 자동으로 수행됨)"
+                    "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction). On the thread that fires the event it is not called again, even later in a notify() pass already running. It does not wait for a callback running on another thread: for audio, follow it with AudioEngine::waitForAudioCallbacks()",
+                    "desc_ja": "リスナーを今すぐ明示的に切断(そうしなければ破棄時に自動で行われる)。イベントを発火するスレッド上では、実行中の notify() パスの後半も含めて二度と呼ばれない。別スレッドで実行中のコールバックは待たない。オーディオなら続けて AudioEngine::waitForAudioCallbacks() を呼ぶ",
+                    "desc_ko": "리스너를 지금 명시적으로 연결 해제(그렇지 않으면 파괴 시 자동으로 수행됨). 이벤트를 발생시키는 스레드에서는 이미 진행 중인 notify() 패스의 뒷부분을 포함해 다시 호출되지 않는다. 다른 스레드에서 실행 중인 콜백은 기다리지 않는다. 오디오라면 이어서 AudioEngine::waitForAudioCallbacks() 을 호출한다"
                 },
                 {
                     "name": "eventListener:isConnected",
@@ -11287,9 +11557,9 @@ const TrussCAPI = {
                             "params": "path, append = false"
                         }
                     ],
-                    "desc": "Open file for writing",
-                    "desc_ja": "書き込み用にファイルを開く",
-                    "desc_ko": "쓰기용으로 파일을 엶"
+                    "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened",
+                    "desc_ja": "書き込み用にファイルを開く（append = true で既存ファイルに追記）。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して false を返す",
+                    "desc_ko": "쓰기용으로 파일을 엶 (append = true면 기존 파일에 추가). 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "fileWriter:close",
@@ -11917,9 +12187,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get atlas memory usage in bytes",
-                    "desc_ja": "アトラスのメモリ使用量（バイト）を取得",
-                    "desc_ko": "아틀라스 메모리 사용량을 바이트로 얻음"
+                    "desc": "Get atlas memory usage in bytes (one byte per atlas texel: width x height summed over the pages)",
+                    "desc_ja": "アトラスのメモリ使用量（バイト）を取得（アトラス 1 テクセルにつき 1 バイト。各ページの幅 x 高さの合計）",
+                    "desc_ko": "아틀라스 메모리 사용량을 바이트로 얻음 (아틀라스 텍셀당 1바이트: 각 페이지의 폭 x 높이 합계)"
                 },
                 {
                     "name": "font:getAtlasMemoryUsage",
@@ -11965,9 +12235,9 @@ const TrussCAPI = {
                             "params": "index"
                         }
                     ],
-                    "desc": "Return the atlas page at the given index for debug visualization, or nullptr if out of range.",
-                    "desc_ja": "デバッグ表示用に指定インデックスのアトラスページを返す。範囲外なら nullptr。",
-                    "desc_ko": "디버그 시각화용으로 지정 인덱스의 아틀라스 페이지를 반환한다. 범위를 벗어나면 nullptr."
+                    "desc": "Return the atlas page at the given index for debug visualization, or nullptr if out of range. Pages are single-channel R8 textures holding glyph coverage in R, so drawing a page's view with the normal pipeline shows it in red.",
+                    "desc_ja": "デバッグ表示用に指定インデックスのアトラスページを返す。範囲外なら nullptr。ページはグリフのカバレッジを R に持つ単一チャンネルの R8 テクスチャなので、ページの view を通常のパイプラインで描くと赤く表示される。",
+                    "desc_ko": "디버그 시각화용으로 지정 인덱스의 아틀라스 페이지를 반환한다. 범위를 벗어나면 nullptr. 페이지는 글리프 커버리지를 R에 담는 단일 채널 R8 텍스처이므로, 페이지의 view를 일반 파이프라인으로 그리면 빨갛게 표시된다."
                 },
                 {
                     "name": "font:getSampler",
@@ -12630,9 +12900,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path, mipmaps = false"
                     ],
-                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface).",
-                    "desc_ja": "ファイルから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築 (3D サーフェスなど縮小サンプル用途で推奨)",
-                    "desc_ko": "파일에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성 (3D 표면 등 축소 샘플링 용도 권장)"
+                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`.",
+                    "desc_ja": "ファイルから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築 (3D サーフェスなど縮小サンプル用途で推奨)。GPU テクスチャを作るのでメインスレッド専用。バックグラウンドで読むなら、ワーカースレッドで `Pixels::load` し、メインスレッドで `Texture::allocate(pixels)` する",
+                    "desc_ko": "파일에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성 (3D 표면 등 축소 샘플링 용도 권장). GPU 텍스처를 생성하므로 메인 스레드 전용. 백그라운드에서 로드하려면 워커 스레드에서 `Pixels::load` 후 메인 스레드에서 `Texture::allocate(pixels)`"
                 },
                 {
                     "name": "image:save",
@@ -12650,9 +12920,9 @@ const TrussCAPI = {
                     "signatures": [
                         "buffer, len, mipmaps = false"
                     ],
-                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain.",
-                    "desc_ja": "メモリから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築",
-                    "desc_ko": "메모리에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성"
+                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain. Main thread only; decode in the background with `Pixels::loadFromMemory`.",
+                    "desc_ja": "メモリから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築。メインスレッド専用。バックグラウンドでのデコードは `Pixels::loadFromMemory` で",
+                    "desc_ko": "메모리에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성. 메인 스레드 전용. 백그라운드 디코딩은 `Pixels::loadFromMemory`로"
                 },
                 {
                     "name": "image:allocate",
@@ -13001,6 +13271,20 @@ const TrussCAPI = {
                     "desc": "The accumulated JSON object built from visited members.",
                     "desc_ja": "訪問したメンバから構築された JSON オブジェクト。",
                     "desc_ko": "방문한 멤버로 구성된 JSON 객체."
+                },
+                {
+                    "name": "jsonWriteReflector.includeDerived",
+                    "type": "boolean",
+                    "desc": "When true, derived values (TC_DERIVED, e.g. Node's globalPos) are written too; false (default) leaves them out, as a save should.",
+                    "desc_ja": "true なら派生値（TC_DERIVED、例: Node の globalPos）も書き出す。false（既定）では保存用に除外する。",
+                    "desc_ko": "true이면 파생 값(TC_DERIVED, 예: Node의 globalPos)도 기록한다. false(기본값)이면 저장용으로 제외한다."
+                },
+                {
+                    "name": "jsonWriteReflector.derived",
+                    "type": "table",
+                    "desc": "Member paths of the derived values encountered (nested groups joined by '.'), whether or not they were written.",
+                    "desc_ja": "出会った派生値のメンバパス（ネストしたグループは '.' で連結）。書き出したかどうかに関係なく記録する。",
+                    "desc_ko": "만난 파생 값의 멤버 경로(중첩 그룹은 '.'으로 연결). 기록 여부와 관계없이 기록한다."
                 }
             ],
             "methods": [
@@ -13414,9 +13698,9 @@ const TrussCAPI = {
                     "signatures": [
                         "tex"
                     ],
-                    "desc": "Set texture for projector-style light (gobo)",
-                    "desc_ja": "projector投影用texture（gobo）を設定",
-                    "desc_ko": "프로젝터 투영용 텍스처 (고보)를 설정"
+                    "desc": "Set texture for projector-style light (gobo) (currently one projector slot: only the first registered Spot light with a texture projects it; further ones light as plain spots and log a one-time warning)",
+                    "desc_ja": "projector投影用texture（gobo）を設定（現在projectorスロットは1つ: texture付きで登録された最初のSpot lightだけが投影し、2灯目以降は通常のspotとして照らし1回だけ警告を出す）",
+                    "desc_ko": "프로젝터 투영용 텍스처 (고보)를 설정 (현재 프로젝터 슬롯은 1개: 텍스처가 있는 첫 번째 등록 Spot 조명만 투영하며, 그 이후 조명은 일반 스포트로 비추고 경고를 한 번 출력)"
                 },
                 {
                     "name": "light:getProjectionTexture",
@@ -13504,9 +13788,9 @@ const TrussCAPI = {
                     "signatures": [
                         "ies"
                     ],
-                    "desc": "Attach IES photometric profile for angular intensity",
-                    "desc_ja": "IES配光profileを設定",
-                    "desc_ko": "IES 배광 프로파일을 설정"
+                    "desc": "Attach IES photometric profile for angular intensity (currently one IES slot: only the first registered light with a profile uses it; further ones log a one-time warning)",
+                    "desc_ja": "IES配光profileを設定（現在IESスロットは1つ: profile付きで登録された最初のlightだけが使い、2灯目以降は1回だけ警告を出す）",
+                    "desc_ko": "IES 배광 프로파일을 설정 (현재 IES 슬롯은 1개: 프로파일이 있는 첫 번째 등록 조명만 사용하며, 그 이후 조명은 경고를 한 번 출력)"
                 },
                 {
                     "name": "light:getIesProfile",
@@ -14028,19 +14312,29 @@ const TrussCAPI = {
         },
         {
             "name": "Logger",
-            "desc": "Logging core with console and file output and an onLog event; access the global instance via getLogger()",
+            "desc": "Logging core with console, file and system (OS log) output, each with its own level, and an onLog event; access the global instance via getLogger()",
             "keywords": [
                 "log",
                 "logging",
-                "console"
+                "console",
+                "log level",
+                "os_log",
+                "logcat",
+                "OutputDebugString",
+                "system log"
             ],
-            "desc_ja": "コンソール・ファイル出力と onLog イベントを備えたロギングコア。グローバルインスタンスは getLogger() でアクセス",
-            "desc_ko": "콘솔·파일 출력과 onLog 이벤트를 갖춘 로깅 코어. 전역 인스턴스는 getLogger() 로 접근",
+            "desc_ja": "コンソール・ファイル・システム（OS ログ）出力（それぞれ独自のレベル）と onLog イベントを備えたロギングコア。グローバルインスタンスは getLogger() でアクセス",
+            "desc_ko": "콘솔·파일·시스템(OS 로그) 출력(각각 고유 레벨)과 onLog 이벤트를 갖춘 로깅 코어. 전역 인스턴스는 getLogger() 로 접근",
             "related": [
                 "getLogger",
                 "LogLevel",
                 "LogEventArgs",
-                "logNotice"
+                "logNotice",
+                "setLogLevel",
+                "setConsoleLogLevel",
+                "setFileLogLevel",
+                "setSystemLogLevel",
+                "setLogFile"
             ],
             "constructor": {
                 "signatures": [
@@ -14068,6 +14362,18 @@ const TrussCAPI = {
                     "desc": "Emit a log message at the given level",
                     "desc_ja": "指定レベルでログメッセージを出力",
                     "desc_ko": "지정한 레벨로 로그 메시지를 출력"
+                },
+                {
+                    "name": "logger:setLogLevel",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "level"
+                        }
+                    ],
+                    "desc": "Set the console, file and system log levels at once (a later per-output call wins)",
+                    "desc_ja": "コンソール・ファイル・システムのログレベルを一度に設定（後の出力ごとの呼び出しが優先）",
+                    "desc_ko": "콘솔·파일·시스템 로그 레벨을 한 번에 설정 (이후의 출력별 호출이 우선)"
                 },
                 {
                     "name": "logger:setConsoleLogLevel",
@@ -14101,9 +14407,9 @@ const TrussCAPI = {
                             "params": "path"
                         }
                     ],
-                    "desc": "Open a file to receive log output",
-                    "desc_ja": "ログ出力を受けるファイルを開く",
-                    "desc_ko": "로그 출력을 받을 파일을 엶"
+                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path",
+                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して false を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す",
+                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 false를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환"
                 },
                 {
                     "name": "logger:closeFile",
@@ -14142,6 +14448,30 @@ const TrussCAPI = {
                     "desc_ko": "현재 파일 로그 레벨을 얻음"
                 },
                 {
+                    "name": "logger:setSystemLogLevel",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "level"
+                        }
+                    ],
+                    "desc": "Set the minimum system (OS log) level: os_log on macOS, OutputDebugStringW on Windows",
+                    "desc_ja": "システム（OS ログ）の最小レベルを設定：macOS は os_log、Windows は OutputDebugStringW",
+                    "desc_ko": "시스템(OS 로그) 최소 레벨을 설정: macOS는 os_log, Windows는 OutputDebugStringW"
+                },
+                {
+                    "name": "logger:getSystemLogLevel",
+                    "signatures": [
+                        {
+                            "ret": "LogLevel",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Get the current system (OS log) level",
+                    "desc_ja": "現在のシステム（OS ログ）レベルを取得",
+                    "desc_ko": "현재 시스템(OS 로그) 레벨을 얻음"
+                },
+                {
                     "name": "logger:getLogFilePath",
                     "signatures": [
                         {
@@ -14149,9 +14479,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get the path of the current log file",
-                    "desc_ja": "現在のログファイルのパスを取得",
-                    "desc_ko": "현재 로그 파일의 경로를 얻음"
+                    "desc": "Get the path of the current log file, as setLogFile resolved it (UTF-8; empty when no file is open)",
+                    "desc_ja": "現在のログファイルのパスを取得（setLogFile が解決したパス、UTF-8。ファイルを開いていなければ空）",
+                    "desc_ko": "현재 로그 파일의 경로를 얻음 (setLogFile이 해석한 경로, UTF-8. 열린 파일이 없으면 빈 문자열)"
                 },
                 {
                     "name": "logger:isFileOpen",
@@ -16645,9 +16975,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Whether the node is visible (invisible: only draw is skipped) (C++ only)",
-                    "desc_ja": "ノードが表示状態か（非表示時はdrawのみスキップされる）（C++のみ）",
-                    "desc_ko": "노드가 보이는 상태인지 (비표시 시 draw만 건너뜀) (C++ 전용)"
+                    "desc": "Whether the node is visible (invisible: the node and its descendants are not drawn and not hit by the mouse; update() keeps running) (C++ only)",
+                    "desc_ja": "ノードが表示状態か（非表示時はノードと子孫が描画されず、マウスの当たり判定からも外れる。update() は動き続ける）（C++のみ）",
+                    "desc_ko": "노드가 보이는 상태인지 (비표시 시 노드와 자손이 그려지지 않고 마우스 히트 판정에서도 빠짐. update()는 계속 실행됨) (C++ 전용)"
                 },
                 {
                     "name": "node:setVisible",
@@ -16657,9 +16987,9 @@ const TrussCAPI = {
                             "params": "visible"
                         }
                     ],
-                    "desc": "Set the visible state (invisible: only draw is skipped) (C++ only)",
-                    "desc_ja": "表示状態を設定（非表示時はdrawのみスキップされる）（C++のみ）",
-                    "desc_ko": "보이는 상태를 설정 (비표시 시 draw만 건너뜀) (C++ 전용)"
+                    "desc": "Set the visible state (invisible: the node and its descendants are not drawn and not hit by the mouse; update() keeps running) (C++ only)",
+                    "desc_ja": "表示状態を設定（非表示時はノードと子孫が描画されず、マウスの当たり判定からも外れる。update() は動き続ける）（C++のみ）",
+                    "desc_ko": "보이는 상태를 설정 (비표시 시 노드와 자손이 그려지지 않고 마우스 히트 판정에서도 빠짐. update()는 계속 실행됨) (C++ 전용)"
                 },
                 {
                     "name": "node:destroy",
@@ -17373,9 +17703,9 @@ const TrussCAPI = {
                             "params": "delay, callback"
                         }
                     ],
-                    "desc": "Run callback once after delay seconds. Fired from the update loop (frame-quantized). Returns a timer id.",
-                    "desc_ja": "delay秒後にcallbackを1回実行。更新ループから発火（フレーム単位）。タイマーidを返す",
-                    "desc_ko": "delay초 후 callback을 한 번 실행. 업데이트 루프에서 발생(프레임 단위). 타이머 id를 반환"
+                    "desc": "Run callback once after delay seconds. A frame timer fired from the update loop: the delay counts down by getDeltaTime() on each update of this node, so it pauses while the node is inactive and resetElapsedTimeCounter() doesn't affect it. Only time after the call counts: it starts with the next update, and in the main window nothing before the call is charged (the earlier part of a long update or setup(), an idle gap or a stall before an event handler or draw() made it). In VSYNC / setFps modes it fires on the first update that starts at least delay after the call. In fixed-Hz update mode it counts step time (1 / updateFps per step): when a frame runs several steps (after a stall, or when updateFps is above the display rate: callAfter(1.0 / 120) made in the first step of a frame at a fixed 120 Hz on a 60 Hz display fires on the next step of that frame) it can fire within that frame, before delay has passed in wall time, and time the loop drops (beyond setMaxUpdateSteps() steps per frame) is not counted, so it fires that much later in wall time. A runtime setFps() / setIndependentFps() that switches the update into a measured mode (VSYNC / setFps) between updates (a key handler, draw()) drops the time since the last update, so the timer fires that much later: under a frame in the usual modes, long only after an idle like EVENT_DRIVEN. Called inside an update, the time counts from that update's start. Changing only the draw rate drops nothing, but switching between synced (setFps) and independent (setIndependentFps) update counts as an update-mode change even at the same rate (setFps(VSYNC) to setIndependentFps(VSYNC, 30) drops up to a frame). Entering a fixed update rate restarts with one step, which can count more or less than the time since the last update (144 Hz display to a fixed 60: the step is ~9.7 ms longer than the 1/144 s since the last update). A node moved during an update, before that update reached it, under a parent the update has already traversed misses that update's countdown (one delta late); a node that moves itself from its own update() is not delayed. In a secondary window, until #307, a timer created in or between its ticks counts the window's whole next delta, time before the call included (after a 3 s setup(), callAfter(2.0) fires about one frame later). Returns a timer id.",
+                    "desc_ja": "delay秒後にcallbackを1回実行。更新ループから発火するフレームタイマーで、このノードの update ごとに getDeltaTime() ずつカウントダウンする。ノードが非アクティブの間は止まり、resetElapsedTimeCounter() の影響は受けない。数えるのは呼び出し後の時間だけで、次の update から数え始め、メインウィンドウでは呼び出し前の時間（長い update や setup() の前半、イベントハンドラや draw() で作る前の待機や停止）は数えない。VSYNC / setFps モードでは、呼び出しから delay 以上経ってから始まる最初の update で発火する。固定Hz update モードではステップ時間（1ステップあたり 1 / updateFps）で数えるので、1フレームで複数のステップを回すとき（停止のあとや、updateFps が表示のレートより高いとき。60Hz の表示で 120Hz 固定なら、フレームの最初のステップで作った callAfter(1.0 / 120) は同じフレームの次のステップで発火する）は、そのフレームの中で、実時間で delay が経つ前に発火しうる。またループが捨てた時間（1フレーム setMaxUpdateSteps() ステップを超える分）は数えられず、実時間ではその分遅れて発火する。実行中の setFps() / setIndependentFps() で update を計測モード（VSYNC / setFps）に切り替えるとき、update の外（イベントハンドラや draw()）で呼ぶと前回の update からの時間は捨てられ、その分遅れて発火する。普段のモードなら1フレーム未満で、長く捨てるのは EVENT_DRIVEN のアイドルのように前のモードで update が長く来なかったときだけ。update の中で呼んだ場合は、その update の開始から数える。draw のレートだけを変えるなら何も捨てない。ただし同期（setFps）と独立（setIndependentFps）の update の切り替えは、レートが同じでも update のモードの変化として扱う（setFps(VSYNC) から setIndependentFps(VSYNC, 30) で最大1フレーム捨てる）。固定の update レートに入るときは1ステップ分で再開するので、前回の update からの時間より多くも少なくも数えうる（144Hz の表示から 60 固定で、そのステップは前回の update からの 1/144 秒より約 9.7 ms 長い）。update 中に、その update がまだ届く前に、すでに巡回した親の下へ移したノードは、その回のカウントダウンを逃してタイマーが1 delta 遅れる。自分の update() で自分を移したノードは遅れない。サブウィンドウでは #307 までは、ティック内やティックの間で作ったタイマーは呼び出し前の時間も含めてそのウィンドウの次の delta を丸ごと数える（3秒かかる setup() のあとの callAfter(2.0) は約1フレーム後に発火する）。タイマーidを返す",
+                    "desc_ko": "delay초 후 callback을 한 번 실행. 업데이트 루프에서 실행되는 프레임 타이머로, 이 노드의 update마다 getDeltaTime()만큼 카운트다운한다. 노드가 비활성인 동안에는 멈추고 resetElapsedTimeCounter()의 영향을 받지 않는다. 호출 이후의 시간만 센다: 다음 update부터 세기 시작하며, 메인 윈도우에서는 호출 전의 시간(긴 update나 setup()의 앞부분, 이벤트 핸들러나 draw()에서 만들기 전의 대기나 정지)은 세지 않는다. VSYNC / setFps 모드에서는 호출 후 delay 이상 지나서 시작하는 첫 update에서 실행된다. 고정 Hz update 모드에서는 스텝 시간(스텝당 1 / updateFps)으로 세므로, 한 프레임에 여러 스텝을 돌릴 때(정지 후, 또는 updateFps가 표시 레이트보다 높을 때. 60Hz 표시에서 120Hz 고정이면 프레임의 첫 스텝에서 만든 callAfter(1.0 / 120)은 같은 프레임의 다음 스텝에서 실행된다)는 그 프레임 안에서 실제 시간으로 delay가 지나기 전에 실행될 수 있고, 루프가 버린 시간(프레임당 setMaxUpdateSteps() 스텝을 넘는 분)은 세지 않아 실제 시간으로는 그만큼 늦게 실행된다. 실행 중 setFps() / setIndependentFps()로 update를 계측 모드(VSYNC / setFps)로 전환할 때 update 밖(이벤트 핸들러, draw())에서 호출하면 직전 update 이후의 시간이 버려져 그만큼 늦게 실행된다. 평소 모드라면 1프레임 미만이며, 길게 버려지는 것은 EVENT_DRIVEN 대기처럼 이전 모드에서 update가 오래 오지 않았을 때뿐이다. update 안에서 호출하면 그 update의 시작부터 센다. draw 레이트만 바꾸면 아무것도 버려지지 않는다. 단, 동기(setFps)와 독립(setIndependentFps) update 사이의 전환은 레이트가 같아도 update 모드의 변화로 다룬다(setFps(VSYNC)에서 setIndependentFps(VSYNC, 30)으로 바꾸면 최대 1프레임이 버려진다). 고정 update 레이트로 들어갈 때는 1스텝으로 다시 시작하므로 직전 update 이후의 시간보다 많거나 적게 셀 수 있다(144Hz 표시에서 60 고정으로 바꾸면 그 스텝은 직전 update 이후의 1/144초보다 약 9.7 ms 길다). update 중에, 그 update가 아직 닿기 전에 이미 순회한 부모 아래로 옮긴 노드는 그 회의 카운트다운을 놓쳐 타이머가 1 delta 늦어진다. 자신의 update()에서 자신을 옮긴 노드는 늦어지지 않는다. 보조 윈도우에서는 #307까지는 틱 안이나 틱 사이에서 만든 타이머가 호출 전의 시간까지 포함해 그 윈도우의 다음 delta를 통째로 센다(3초 걸리는 setup() 뒤의 callAfter(2.0)은 약 1프레임 뒤에 실행된다). 타이머 id를 반환"
                 },
                 {
                     "name": "node:callEvery",
@@ -17385,9 +17715,21 @@ const TrussCAPI = {
                             "params": "interval, callback"
                         }
                     ],
-                    "desc": "Run callback repeatedly every interval seconds. Fired from the update loop (frame-quantized). Returns a timer id.",
-                    "desc_ja": "interval秒ごとにcallbackを繰り返し実行。更新ループから発火（フレーム単位）。タイマーidを返す",
-                    "desc_ko": "interval초마다 callback을 반복 실행. 업데이트 루프에서 발생(프레임 단위). 타이머 id를 반환"
+                    "desc": "Run callback repeatedly every interval seconds. A frame timer counted down by getDeltaTime() like callAfter. Keeps its phase (next due = previous due + interval); when an update comes more than a whole interval late it fires once, not once per missed interval (callEveryCatchUp does that). Like callAfter, a runtime setFps() / setIndependentFps() that switches the update into a measured mode between updates drops the time since the last update (under a frame in the usual modes; see callAfter). Returns a timer id.",
+                    "desc_ja": "interval秒ごとにcallbackを繰り返し実行。callAfter と同じく getDeltaTime() でカウントダウンするフレームタイマー。位相を保つ（次の予定 = 前回の予定 + interval）。update がインターバル1つ分以上遅れたときは、取りこぼした回数分ではなく1回だけ発火する（回数分呼ぶのは callEveryCatchUp）。callAfter と同じく、実行中の setFps() / setIndependentFps() で update を計測モードに切り替えるとき、update の外で呼ぶと前回の update からの時間は捨てられる（普段のモードなら1フレーム未満。callAfter を参照）。タイマーidを返す",
+                    "desc_ko": "interval초마다 callback을 반복 실행. callAfter처럼 getDeltaTime()으로 카운트다운하는 프레임 타이머. 위상을 유지한다(다음 예정 = 이전 예정 + interval). update가 인터벌 하나 이상 늦으면 놓친 횟수만큼이 아니라 한 번만 실행된다(횟수만큼 호출하는 것은 callEveryCatchUp). callAfter처럼 실행 중 setFps() / setIndependentFps()로 update를 계측 모드로 전환할 때 update 밖에서 호출하면 직전 update 이후의 시간이 버려진다(평소 모드라면 1프레임 미만. callAfter 참조). 타이머 id를 반환"
+                },
+                {
+                    "name": "node:callEveryCatchUp",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": "interval, callback, maxCatchUp"
+                        }
+                    ],
+                    "desc": "Like callEvery, but calls back once for every interval that came due, at most maxCatchUp times per update (maxCatchUp has no default; 0 or -1, any value <= 0, means no limit), e.g. to keep a counter or a simulation in step after a late update. Past the limit the remaining due intervals are dropped and the phase is kept. Cancelling the timer from the callback stops the remaining calls. Without a limit, a long stall in a VSYNC or setFps() loop (or an idle stretch in EVENT_DRIVEN mode) makes it fire that many times at once. In fixed-Hz update mode it counts step time, so time the loop drops beyond its step cap (setMaxUpdateSteps) is not counted. Returns a timer id.",
+                    "desc_ja": "callEvery と同じだが、期限の来たインターバル1つにつき1回ずつ呼ぶ。1回の update で呼ぶのは最大 maxCatchUp 回（maxCatchUp は省略できない。0 や -1 など 0 以下なら上限なし）。update が遅れたあとでもカウンタやシミュレーションを予定どおりに進めたいとき用。上限を超えた分のインターバルは捨て、位相は保つ。コールバック内でこのタイマーをキャンセルすると残りの呼び出しは止まる。上限なしだと、VSYNC / setFps() のループで長く止まったとき（EVENT_DRIVEN モードで長く待機したときも）その回数分を一度に呼ぶ。固定Hz update モードではステップ時間で数えるので、ループがステップ上限（setMaxUpdateSteps）を超えて捨てた時間は数えない。タイマーidを返す",
+                    "desc_ko": "callEvery와 같지만, 만기된 인터벌 하나마다 한 번씩 호출한다. 한 번의 update에서 호출하는 것은 최대 maxCatchUp회(maxCatchUp은 생략할 수 없다. 0이나 -1 등 0 이하이면 제한 없음). update가 늦은 뒤에도 카운터나 시뮬레이션을 예정대로 진행시키고 싶을 때 쓴다. 제한을 넘는 인터벌은 버리고 위상은 유지한다. 콜백 안에서 이 타이머를 취소하면 남은 호출은 멈춘다. 제한이 없으면 VSYNC / setFps() 루프가 오래 멈췄을 때(EVENT_DRIVEN 모드에서 오래 대기했을 때도) 그 횟수만큼 한꺼번에 호출한다. 고정 Hz update 모드에서는 스텝 시간으로 세므로, 루프가 스텝 상한(setMaxUpdateSteps)을 넘어 버린 시간은 세지 않는다. 타이머 id를 반환"
                 },
                 {
                     "name": "node:cancelTimer",
@@ -17460,6 +17802,47 @@ const TrussCAPI = {
                     "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock.",
                     "desc_ja": "このノードの非同期タイマーを全てキャンセル（モード変更時など）。実行中のコールバックの完了を待つ。デッドロック回避のため、コールバックのmutexを保持せずに呼ぶこと",
                     "desc_ko": "이 노드의 모든 비동기 타이머를 취소(모드 전환 등). 실행 중인 콜백의 완료를 기다림. 데드락 방지를 위해 콜백의 mutex를 들지 않고 호출할 것"
+                }
+            ]
+        },
+        {
+            "name": "OnceGate",
+            "desc": "Gate for a log line (or anything else): isFirstTime() is true the first time, and with an interval, again once that much time has passed since the last true",
+            "keywords": [
+                "warn once",
+                "log once",
+                "once",
+                "rate limit",
+                "throttle",
+                "suppress",
+                "repeat",
+                "deduplicate"
+            ],
+            "desc_ja": "ログ出力などのゲート：isFirstTime() は初回だけ true。間隔を指定すると、前回 true からその時間が経つと再び true",
+            "desc_ko": "로그 출력 등의 게이트: isFirstTime()은 처음에만 true. 간격을 지정하면 마지막 true 이후 그 시간이 지나면 다시 true",
+            "related": [
+                "OnceGate::isFirstTime",
+                "logWarning",
+                "logError"
+            ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "intervalSeconds"
+                ]
+            },
+            "methods": [
+                {
+                    "name": "onceGate:isFirstTime",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "True the first time; with an interval, true again once that much time has passed since the last true. Otherwise false",
+                    "desc_ja": "初回は true。間隔を指定した場合は、前回 true からその時間が経つと再び true。それ以外は false",
+                    "desc_ko": "처음에는 true. 간격을 지정한 경우 마지막 true 이후 그 시간이 지나면 다시 true. 그 밖에는 false"
                 }
             ]
         },
@@ -18120,9 +18503,9 @@ const TrussCAPI = {
                     "signatures": [
                         "buffer, len"
                     ],
-                    "desc": "Load image from memory",
-                    "desc_ja": "メモリから画像を読み込む",
-                    "desc_ko": "메모리에서 이미지를 로드"
+                    "desc": "Decode an image from memory into CPU pixels. No GPU work, so it is safe on a worker thread.",
+                    "desc_ja": "メモリ上の画像を CPU メモリにデコードする。GPU を使わないのでワーカースレッドで呼んでよい",
+                    "desc_ko": "메모리의 이미지를 CPU 메모리로 디코딩. GPU를 쓰지 않으므로 워커 스레드에서 호출 가능"
                 },
                 {
                     "name": "pixels:load",
@@ -18130,9 +18513,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Load image from file",
-                    "desc_ja": "ファイルから画像を読み込む",
-                    "desc_ko": "파일에서 이미지를 로드"
+                    "desc": "Load image from file into CPU memory. No GPU work, so it is safe on a worker thread; upload the result on the main thread (`Texture::allocate(pixels)`).",
+                    "desc_ja": "ファイルから画像を CPU メモリに読み込む。GPU を使わないのでワーカースレッドで呼んでよい。結果はメインスレッドでアップロードする (`Texture::allocate(pixels)`)",
+                    "desc_ko": "파일에서 이미지를 CPU 메모리로 로드. GPU를 쓰지 않으므로 워커 스레드에서 호출 가능. 결과는 메인 스레드에서 업로드 (`Texture::allocate(pixels)`)"
                 },
                 {
                     "name": "pixels:save",
@@ -18140,9 +18523,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Save image to file",
-                    "desc_ja": "ファイルに画像を保存",
-                    "desc_ko": "이미지를 파일로 저장"
+                    "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created; when it cannot be, an error is logged and false returned",
+                    "desc_ja": "ファイルに画像を保存。形式は拡張子で決まり、大文字小文字は区別しない: .png, .jpg/.jpeg, .bmp（それ以外はPNGで書く）。ファイル名は指定どおりに使う。相対パスは getDataPath で解決し、親フォルダがなければ作る。作れないときはエラーをログに出して false を返す",
+                    "desc_ko": "이미지를 파일로 저장. 형식은 확장자로 정해지며 대소문자 무시: .png, .jpg/.jpeg, .bmp (그 외는 PNG로 저장). 파일 이름은 지정한 그대로 사용. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 만들 수 없으면 오류를 로그에 남기고 false 반환"
                 }
             ]
         },
@@ -18362,9 +18745,9 @@ const TrussCAPI = {
                 {
                     "name": "playingSound.positionF",
                     "type": "number",
-                    "desc": "Floating-point playback cursor in source samples; advances by speed * rateRatio each output frame.",
-                    "desc_ja": "ソースサンプル単位の浮動小数点再生カーソル。各出力フレームで speed * rateRatio ずつ進む",
-                    "desc_ko": "소스 샘플 단위의 부동소수점 재생 커서. 각 출력 프레임마다 speed * rateRatio 만큼 진행"
+                    "desc": "Floating-point playback cursor; advances by speed * rateRatio each output frame. An eager voice counts source sample frames; a stream counts frames at the engine rate its decoder outputs at (the voice's position rate, which a re-init at another rate can change), not source samples. Use Sound::getPosition() for seconds.",
+                    "desc_ja": "浮動小数点の再生カーソル。各出力フレームで speed * rateRatio ずつ進む。eager ボイスはソースのサンプルフレーム単位、ストリームはデコーダが出力するエンジンレートのフレーム単位 (ボイスの位置レート。別レートでの再初期化で変わりうる) で、ソースサンプル単位ではない。秒で欲しいときは Sound::getPosition() を使う",
+                    "desc_ko": "부동소수점 재생 커서. 각 출력 프레임마다 speed * rateRatio 만큼 진행. eager 보이스는 소스 샘플 프레임 단위, 스트림은 디코더가 출력하는 엔진 레이트의 프레임 단위(보이스의 위치 레이트로, 다른 레이트로 재초기화하면 바뀔 수 있음)이며 소스 샘플 단위가 아님. 초 단위는 Sound::getPosition() 사용"
                 },
                 {
                     "name": "playingSound.rateRatio",
@@ -18372,6 +18755,109 @@ const TrussCAPI = {
                     "desc": "Source-to-engine sample-rate ratio (buffer sampleRate / engine sampleRate), set when queued so the voice plays at correct pitch regardless of engine rate.",
                     "desc_ja": "ソース対エンジンのサンプルレート比 (buffer sampleRate / engine sampleRate)。キュー時に設定され、エンジンレートに依らず正しいピッチで再生される",
                     "desc_ko": "소스 대 엔진 샘플레이트 비율 (buffer sampleRate / engine sampleRate). 큐 등록 시 설정되어 엔진 레이트와 무관하게 올바른 피치로 재생"
+                },
+                {
+                    "name": "playingSound.level",
+                    "type": "atomic",
+                    "desc": "Peak absolute value of this voice's contribution to the mix over the most recent audio callback (after volume / pan / channel gains). Written by the audio thread; read it for metering.",
+                    "desc_ja": "直近のオーディオコールバックでこのボイスがミックスに加えた値のピーク絶対値 (volume / pan / チャンネルゲイン適用後)。オーディオスレッドが書く。メーター表示用に読む",
+                    "desc_ko": "최근 오디오 콜백에서 이 보이스가 믹스에 더한 값의 피크 절댓값 (volume / pan / 채널 게인 적용 후). 오디오 스레드가 쓴다. 미터 표시용으로 읽는다"
+                }
+            ]
+        },
+        {
+            "name": "PlayingSoundInfo",
+            "desc": "One playing (or paused) sound as reported by AudioEngine::getPlayingSounds(): a copy taken under the engine lock, so later changes to the playback are not reflected.",
+            "keywords": [
+                "playing sound",
+                "playback",
+                "voice",
+                "diagnostics",
+                "level"
+            ],
+            "desc_ja": "AudioEngine::getPlayingSounds() が返す再生中 (または一時停止中) のサウンド 1 つ分。エンジンのロック下で取ったコピーなので、その後の再生の変化は反映されない",
+            "desc_ko": "AudioEngine::getPlayingSounds() 가 반환하는 재생 중 (또는 일시 정지 중) 인 사운드 하나. 엔진 락 아래에서 만든 복사본이므로 이후 재생 변화는 반영되지 않는다",
+            "related": [
+                "AudioEngine::getPlayingSounds",
+                "PlayingSound"
+            ],
+            "properties": [
+                {
+                    "name": "playingSoundInfo.slot",
+                    "type": "number",
+                    "desc": "Playback slot index (0 .. maxPolyphony - 1).",
+                    "desc_ja": "再生スロットの番号 (0 .. maxPolyphony - 1)",
+                    "desc_ko": "재생 슬롯 번호 (0 .. maxPolyphony - 1)"
+                },
+                {
+                    "name": "playingSoundInfo.path",
+                    "type": "string",
+                    "desc": "Source file (fs::path) as given, the same value as SoundBuffer::getPath() / SoundStream::getPath() and the file name in the logs; empty for generated or in-memory buffers. tc_get_audio_state reports it as UTF-8.",
+                    "desc_ja": "ソースファイル (fs::path)。渡されたままの値で、SoundBuffer::getPath() / SoundStream::getPath() やログのファイル名と同じ。生成したバッファやメモリからのバッファでは空。tc_get_audio_state は UTF-8 で返す",
+                    "desc_ko": "소스 파일 (fs::path). 전달된 그대로의 값으로, SoundBuffer::getPath() / SoundStream::getPath() 및 로그의 파일 이름과 같다. 생성한 버퍼나 메모리 버퍼에서는 비어 있음. tc_get_audio_state 는 UTF-8 로 보고한다"
+                },
+                {
+                    "name": "playingSoundInfo.streaming",
+                    "type": "boolean",
+                    "desc": "True for a SoundStream playback (Sound::loadStream), false for an eager SoundBuffer.",
+                    "desc_ja": "SoundStream の再生 (Sound::loadStream) なら true、eager な SoundBuffer なら false",
+                    "desc_ko": "SoundStream 재생 (Sound::loadStream) 이면 true, eager SoundBuffer 면 false"
+                },
+                {
+                    "name": "playingSoundInfo.paused",
+                    "type": "boolean",
+                    "desc": "True while the playback is paused (Sound::pause()).",
+                    "desc_ja": "一時停止中 (Sound::pause()) なら true",
+                    "desc_ko": "일시 정지 중 (Sound::pause()) 이면 true"
+                },
+                {
+                    "name": "playingSoundInfo.loop",
+                    "type": "boolean",
+                    "desc": "Loop flag of the playback.",
+                    "desc_ja": "再生のループ設定",
+                    "desc_ko": "재생의 루프 설정"
+                },
+                {
+                    "name": "playingSoundInfo.position",
+                    "type": "number",
+                    "desc": "Playback position in seconds.",
+                    "desc_ja": "再生位置 (秒)",
+                    "desc_ko": "재생 위치 (초)"
+                },
+                {
+                    "name": "playingSoundInfo.duration",
+                    "type": "number",
+                    "desc": "Source duration in seconds.",
+                    "desc_ja": "ソースの長さ (秒)",
+                    "desc_ko": "소스 길이 (초)"
+                },
+                {
+                    "name": "playingSoundInfo.volume",
+                    "type": "number",
+                    "desc": "Volume of the playback.",
+                    "desc_ja": "再生の音量",
+                    "desc_ko": "재생의 볼륨"
+                },
+                {
+                    "name": "playingSoundInfo.pan",
+                    "type": "number",
+                    "desc": "Pan of the playback (-1 left, 0 center, 1 right).",
+                    "desc_ja": "再生のパン (-1 左、0 中央、1 右)",
+                    "desc_ko": "재생의 팬 (-1 왼쪽, 0 중앙, 1 오른쪽)"
+                },
+                {
+                    "name": "playingSoundInfo.speed",
+                    "type": "number",
+                    "desc": "Playback speed (1.0 = natural pitch).",
+                    "desc_ja": "再生速度 (1.0 = 元のピッチ)",
+                    "desc_ko": "재생 속도 (1.0 = 원래 피치)"
+                },
+                {
+                    "name": "playingSoundInfo.level",
+                    "type": "number",
+                    "desc": "Peak absolute value of this playback's output in the last audio callback, after volume / pan / channel gains (linear, 1.0 = full scale; can exceed 1). 0 while paused, and while the engine is not running.",
+                    "desc_ja": "直近のオーディオコールバックでのこの再生の出力のピーク絶対値。volume / pan / チャンネルゲイン適用後 (リニア、1.0 = フルスケール、1 を超えることもある)。一時停止中と、エンジン停止中は 0",
+                    "desc_ko": "최근 오디오 콜백에서 이 재생 출력의 피크 절댓값. volume / pan / 채널 게인 적용 후 (선형, 1.0 = 풀 스케일, 1 을 넘을 수 있음). 일시 정지 중, 그리고 엔진이 정지 상태일 때는 0"
                 }
             ]
         },
@@ -19229,6 +19715,42 @@ const TrussCAPI = {
                     "desc_ko": "현재 읽기 전용 범위를 벗어난다."
                 },
                 {
+                    "name": "reflector:isDerived",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return true if the current member is a derived value (TC_DERIVED): computed from another member, writable, but not saved.",
+                    "desc_ja": "現在のメンバが派生値（TC_DERIVED）なら true を返す。他のメンバから計算され、書き込めるが保存はされない。",
+                    "desc_ko": "현재 멤버가 파생 값(TC_DERIVED)이면 true를 반환한다. 다른 멤버에서 계산되며 쓸 수 있지만 저장되지 않는다."
+                },
+                {
+                    "name": "reflector:pushDerived",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Enter a derived-value scope (TC_DERIVED visits inside it).",
+                    "desc_ja": "派生値スコープに入る（TC_DERIVED はこの内側で訪れる）。",
+                    "desc_ko": "파생 값 범위로 진입한다(TC_DERIVED는 이 안에서 방문한다)."
+                },
+                {
+                    "name": "reflector:popDerived",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Leave the current derived-value scope.",
+                    "desc_ja": "現在の派生値スコープを抜ける。",
+                    "desc_ko": "현재 파생 값 범위를 벗어난다."
+                },
+                {
                     "name": "reflector:endGroup",
                     "signatures": [
                         {
@@ -19897,6 +20419,7 @@ const TrussCAPI = {
             "desc_ko": "크로스플랫폼 시리얼 포트 (USB/COM): 연결, 바이트 읽기/쓰기",
             "related": [
                 "SerialDeviceInfo",
+                "SerialDisconnectEventArgs",
                 "TcpClient"
             ],
             "constructor": {
@@ -19904,6 +20427,15 @@ const TrussCAPI = {
                     ""
                 ]
             },
+            "properties": [
+                {
+                    "name": "serial.onDisconnect",
+                    "type": "Event",
+                    "desc": "Event fired once per open connection when it ends: on a detected device loss (wasClean = false) or on close() of an open port (wasClean = true)",
+                    "desc_ja": "開いた接続1つにつき1回、接続が終わったときに発火するイベント。デバイスの消失を検出したとき（wasClean = false）と、開いているポートを close() したとき（wasClean = true）",
+                    "desc_ko": "열린 연결 하나당 한 번, 연결이 끝날 때 발생하는 이벤트. 장치 소실을 감지했을 때(wasClean = false)와 열린 포트를 close()했을 때(wasClean = true)"
+                }
+            ],
             "methods": [
                 {
                     "name": "serial:setup",
@@ -19929,9 +20461,21 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Disconnect and release resources",
-                    "desc_ja": "切断してリソースを解放",
-                    "desc_ko": "연결을 끊고 리소스를 해제"
+                    "desc": "Disconnect and release resources; fires onDisconnect (wasClean = true) when the port was open",
+                    "desc_ja": "切断してリソースを解放。ポートが開いていれば onDisconnect（wasClean = true）を発火",
+                    "desc_ko": "연결을 끊고 리소스를 해제. 포트가 열려 있었으면 onDisconnect(wasClean = true)를 발생"
+                },
+                {
+                    "name": "serial:isConnected",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Whether the port is open and working; turns false after close() or when a read/write call finds the device gone",
+                    "desc_ja": "ポートが開いていて使えるか。close() 後や、読み書きの呼び出しがデバイスの消失を検出すると false になる",
+                    "desc_ko": "포트가 열려 있고 사용 가능한지. close() 후나 읽기/쓰기 호출이 장치 소실을 감지하면 false가 됨"
                 },
                 {
                     "name": "serial:isInitialized",
@@ -19941,9 +20485,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Whether currently connected",
-                    "desc_ja": "接続中か",
-                    "desc_ko": "현재 연결 중인지"
+                    "desc": "Whether currently connected; same as isConnected()",
+                    "desc_ja": "接続中か。isConnected() と同じ",
+                    "desc_ko": "현재 연결 중인지. isConnected()와 같음"
                 },
                 {
                     "name": "serial:getDevicePath",
@@ -19953,9 +20497,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Current device path",
-                    "desc_ja": "現在のデバイスパス",
-                    "desc_ko": "현재 장치 경로"
+                    "desc": "Current device path; a copy, since another thread's setup() may change it. Never waits for setup(), close() or an I/O call",
+                    "desc_ja": "現在のデバイスパス。別スレッドの setup() が変えうるので、コピーを返す。setup()、close()、I/O 呼び出しを待たない",
+                    "desc_ko": "현재 장치 경로. 다른 스레드의 setup()이 바꿀 수 있으므로 복사본을 반환. setup(), close(), I/O 호출을 기다리지 않음"
                 },
                 {
                     "name": "serial:available",
@@ -19965,9 +20509,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of bytes available to read",
-                    "desc_ja": "読み取り可能なバイト数",
-                    "desc_ko": "읽을 수 있는 바이트 수"
+                    "desc": "Number of bytes available to read; 0 when not connected (a lost device also closes the port and fires onDisconnect)",
+                    "desc_ja": "読み取り可能なバイト数。未接続なら0（デバイスの消失を検出するとポートを閉じ、onDisconnect も発火）",
+                    "desc_ko": "읽을 수 있는 바이트 수. 연결되지 않았으면 0 (장치 소실을 감지하면 포트를 닫고 onDisconnect도 발생)"
                 },
                 {
                     "name": "serial:readByte",
@@ -19977,9 +20521,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error",
-                    "desc_ja": "1バイト読む。成功時0-255、データ無し-1、エラー-2",
-                    "desc_ko": "1바이트를 읽음. 성공 0-255, 데이터 없음 -1, 오류 -2"
+                    "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error (a lost device also closes the port and fires onDisconnect)",
+                    "desc_ja": "1バイト読む。成功時0-255、データ無し-1、エラー-2（デバイスの消失を検出するとポートを閉じ、onDisconnect も発火）",
+                    "desc_ko": "1바이트를 읽음. 성공 0-255, 데이터 없음 -1, 오류 -2 (장치 소실을 감지하면 포트를 닫고 onDisconnect도 발생)"
                 },
                 {
                     "name": "serial:writeBytes",
@@ -19989,9 +20533,9 @@ const TrussCAPI = {
                             "params": "buffer"
                         }
                     ],
-                    "desc": "Write bytes; returns actual count or -1 on error",
-                    "desc_ja": "バイトを書く。実際の書き込み数、エラー時-1を返す",
-                    "desc_ko": "바이트를 씀. 실제 쓴 수 또는 오류 시 -1 반환"
+                    "desc": "Write bytes; returns actual count or -1 on error (a lost device also closes the port and fires onDisconnect)",
+                    "desc_ja": "バイトを書く。実際の書き込み数、エラー時-1を返す（デバイスの消失を検出するとポートを閉じ、onDisconnect も発火）",
+                    "desc_ko": "바이트를 씀. 실제 쓴 수 또는 오류 시 -1 반환 (장치 소실을 감지하면 포트를 닫고 onDisconnect도 발생)"
                 },
                 {
                     "name": "serial:writeByte",
@@ -20154,6 +20698,52 @@ const TrussCAPI = {
                     "desc": "Device name",
                     "desc_ja": "デバイス名",
                     "desc_ko": "장치 이름"
+                }
+            ]
+        },
+        {
+            "name": "SerialDisconnectEventArgs",
+            "desc": "Event args for Serial::onDisconnect",
+            "keywords": [
+                "disconnect event",
+                "serial unplug",
+                "on disconnect args"
+            ],
+            "desc_ja": "Serial::onDisconnectのイベント引数",
+            "desc_ko": "Serial::onDisconnect의 이벤트 인자",
+            "related": [
+                "Serial",
+                "Serial::onDisconnect",
+                "TcpDisconnectEventArgs"
+            ],
+            "properties": [
+                {
+                    "name": "serialDisconnectEventArgs.portName",
+                    "type": "string",
+                    "desc": "Port name as passed to setup()",
+                    "desc_ja": "setup() に渡したポート名",
+                    "desc_ko": "setup()에 전달한 포트 이름"
+                },
+                {
+                    "name": "serialDisconnectEventArgs.baudRate",
+                    "type": "number",
+                    "desc": "The rate the port was open at (the one setup() logged); pass it back to setup() to reconnect",
+                    "desc_ja": "ポートを開いていたボーレート（setup() がログに出した値）。setup() に渡せば再接続できる",
+                    "desc_ko": "포트가 열려 있던 보드레이트(setup()이 로그로 남긴 값). setup()에 넘기면 재연결할 수 있음"
+                },
+                {
+                    "name": "serialDisconnectEventArgs.reason",
+                    "type": "string",
+                    "desc": "Human-readable reason: \"closed by close()\" (on Android it may go on with \"(the device had already been lost: ...)\"), or the loss warning's text such as \"read: Input/output error\". For display and logs; tell a close from a loss with wasClean",
+                    "desc_ja": "人が読める理由。\"closed by close()\"（Android では後ろに \"(the device had already been lost: ...)\" が付くことがある）、または \"read: Input/output error\" のような消失の警告と同じ文字列。表示やログ用で、クローズか消失かの判定には wasClean を使う",
+                    "desc_ko": "사람이 읽을 수 있는 사유. \"closed by close()\"(Android에서는 뒤에 \"(the device had already been lost: ...)\"가 붙을 수 있음) 또는 \"read: Input/output error\" 같은 소실 경고와 같은 문자열. 표시와 로그용이며, 닫기인지 소실인지는 wasClean으로 판단할 것"
+                },
+                {
+                    "name": "serialDisconnectEventArgs.wasClean",
+                    "type": "boolean",
+                    "desc": "true: closed by the app (close()); false: device lost / I/O error",
+                    "desc_ja": "true: アプリが閉じた（close()）、false: デバイスの消失 / I/O エラー",
+                    "desc_ko": "true: 앱이 닫음(close()), false: 장치 소실 / I/O 오류"
                 }
             ]
         },
@@ -20350,16 +20940,19 @@ const TrussCAPI = {
         },
         {
             "name": "Sound",
-            "desc": "Audio playback",
+            "desc": "Audio playback. A Sound plays only while it, or a copy of it, is alive: copies share the voice, and when the last handle is destroyed or overwritten the voice stops (looping or one-shot) and its slot is freed. Keep Sound objects alive (e.g. as members) to play overlapping one-shots.",
             "keywords": [
                 "audio",
                 "player",
                 "sfx",
                 "music",
-                "of sound player"
+                "of sound player",
+                "lifetime",
+                "voice",
+                "scope"
             ],
-            "desc_ja": "オーディオ再生",
-            "desc_ko": "오디오 재생",
+            "desc_ja": "オーディオ再生。Sound は自身かそのコピーが生きている間だけ鳴る: コピーはボイスを共有し、最後のハンドルが破棄または上書きされるとボイスは止まり (ループでもワンショットでも)、スロットが空く。ワンショットを重ねて鳴らすときは Sound オブジェクトを生かしておく (メンバーにするなど)",
+            "desc_ko": "오디오 재생. Sound 는 자신 또는 그 복사본이 살아 있는 동안에만 재생된다: 복사본은 보이스를 공유하고, 마지막 핸들이 파괴되거나 덮어쓰이면 보이스가 정지하고 (루프든 원샷이든) 슬롯이 비워진다. 원샷을 겹쳐 재생하려면 Sound 객체를 살려 둔다 (멤버로 두는 등)",
             "related": [
                 "AudioEngine",
                 "SoundBuffer"
@@ -20378,9 +20971,9 @@ const TrussCAPI = {
                             "params": "path"
                         }
                     ],
-                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a",
-                    "desc_ja": "音声ファイルを読み込む。拡張子で自動判別: .wav .mp3 .ogg .flac .aac .m4a",
-                    "desc_ko": "오디오 파일을 로드. 확장자로 자동 판별: .wav .mp3 .ogg .flac .aac .m4a"
+                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a (case-insensitive; the file name keeps its case as written)",
+                    "desc_ja": "音声ファイルを読み込む。拡張子で自動判別: .wav .mp3 .ogg .flac .aac .m4a（大文字小文字を区別しない。ファイル名の大文字小文字は書いたとおりに保つ）",
+                    "desc_ko": "오디오 파일을 로드. 확장자로 자동 판별: .wav .mp3 .ogg .flac .aac .m4a (대소문자 무시, 파일 이름의 대소문자는 쓴 그대로 유지)"
                 },
                 {
                     "name": "sound:loadStream",
@@ -20450,13 +21043,13 @@ const TrussCAPI = {
                     "name": "sound:play",
                     "signatures": [
                         {
-                            "ret": "(nothing)",
+                            "ret": "boolean",
                             "params": ""
                         }
                     ],
-                    "desc": "Play audio",
-                    "desc_ja": "音声を再生",
-                    "desc_ko": "오디오 재생"
+                    "desc": "Play from the beginning (this Sound's previous voice is stopped first). Returns false when nothing will play: not loaded, or the engine dropped the play (every voice busy, the stream's maxPolyphony reached by a copy of a streamed Sound, the stream file could not be reopened, or no output device running). Drops are logged as warnings and counted in AudioEngine::getStats().",
+                    "desc_ja": "先頭から再生する (この Sound の前のボイスは先に止める)。何も鳴らないときは false を返す: 未ロード、またはエンジンが再生を捨てた場合 (全ボイス使用中、ストリームした Sound のコピーが maxPolyphony に達した、ストリームのファイルを開き直せない、出力デバイスが動いていない)。捨てた再生は warning としてログに出し、AudioEngine::getStats() で数える",
+                    "desc_ko": "처음부터 재생한다 (이 Sound 의 이전 보이스는 먼저 정지). 아무것도 재생되지 않으면 false 를 반환: 로드되지 않았거나 엔진이 재생을 버린 경우 (모든 보이스 사용 중, 스트리밍 Sound 의 복사본이 maxPolyphony 에 도달, 스트림 파일을 다시 열 수 없음, 출력 디바이스가 동작하지 않음). 버려진 재생은 warning 으로 로그에 남고 AudioEngine::getStats() 에서 집계된다"
                 },
                 {
                     "name": "sound:stop",
@@ -20466,9 +21059,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Stop audio",
-                    "desc_ja": "音声を停止",
-                    "desc_ko": "오디오 정지"
+                    "desc": "Stop audio and release the voice (a streamed voice also closes its decoder and file). Copies that share the voice see it stopped.",
+                    "desc_ja": "音声を停止してボイスを解放する (ストリームのボイスはデコーダとファイルも閉じる)。ボイスを共有するコピーからも停止して見える",
+                    "desc_ko": "오디오를 정지하고 보이스를 해제한다 (스트리밍 보이스는 디코더와 파일도 닫는다). 보이스를 공유하는 복사본에서도 정지로 보인다"
                 },
                 {
                     "name": "sound:pause",
@@ -20722,9 +21315,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get playback position in seconds",
-                    "desc_ja": "再生位置を取得（秒）",
-                    "desc_ko": "재생 위치를 초 단위로 얻음"
+                    "desc": "Get playback position in seconds. On a stream, right after setPosition() and until the audio has moved there (usually ~10 ms), this is the requested position.",
+                    "desc_ja": "再生位置を取得（秒）。ストリームでは setPosition() の直後から音が実際にそこへ移るまで (通常 ~10ms) の間、要求した位置を返す",
+                    "desc_ko": "재생 위치를 초 단위로 얻음. 스트림에서는 setPosition() 직후부터 소리가 실제로 그 위치로 옮겨질 때까지 (보통 ~10ms) 요청한 위치를 반환"
                 },
                 {
                     "name": "sound:setPosition",
@@ -20734,9 +21327,9 @@ const TrussCAPI = {
                             "params": "seconds"
                         }
                     ],
-                    "desc": "Seek to a specific time in seconds. On streams, costs ~10 ms blackout while the ring refills.",
-                    "desc_ja": "指定秒数にシーク。ストリームでは ring 補充に ~10ms 無音",
-                    "desc_ko": "지정 시간(초)으로 시크. 스트림은 링 재충전에 ~10ms 무음"
+                    "desc": "Seek to a specific time in seconds. On streams the decoder seeks and the ring refills, so the audio moves after ~10 ms of silence (longer on slow storage or for an MP3 several hours long); getPosition() reports the new position at once, the last of several calls wins, and a paused stream resumes from there. A stream whose length is unknown (getDuration() is 0) cannot seek: the call is ignored with a warning.",
+                    "desc_ja": "指定秒数にシーク。ストリームではデコーダがシークして ring を補充するので、~10ms の無音の後に音が移る (遅いストレージや数時間の長さの MP3 ではもっとかかる)。getPosition() は直後から新しい位置を返し、続けて呼んだ場合は最後の呼び出しが有効。一時停止中のストリームは再開時にそこから鳴る。長さが不明なストリーム (getDuration() が 0) はシークできず、呼び出しは警告を出して無視される",
+                    "desc_ko": "지정 시간(초)으로 시크. 스트림은 디코더가 시크하고 링을 재충전하므로 ~10ms 무음 후에 소리가 옮겨짐 (느린 저장소나 몇 시간 길이의 MP3에서는 더 걸림). getPosition()은 즉시 새 위치를 반환하고, 연속으로 호출하면 마지막 호출이 유효. 일시정지 중인 스트림은 재개할 때 그 위치부터 재생. 길이를 알 수 없는 스트림 (getDuration()이 0)은 시크할 수 없으며, 호출은 경고와 함께 무시됨"
                 },
                 {
                     "name": "sound:getDuration",
@@ -20842,9 +21435,9 @@ const TrussCAPI = {
                     "signatures": [
                         "data, dataSize, numChannels, rate, bitsPerSample = 16, bigEndian = false"
                     ],
-                    "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths.",
-                    "desc_ja": "形式を明示してメモリから生のinterleaved PCM(16-bit signedまたは32-bit float)を読み込む。非対応のビット深度ではfalseを返す",
-                    "desc_ko": "형식을 명시해 메모리에서 raw interleaved PCM(16-bit signed 또는 32-bit float)을 로드. 미지원 비트 심도에서는 false 반환"
+                    "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths, a channel count below 1, a data size that is not a whole number of frames, or more samples than a buffer can hold.",
+                    "desc_ja": "形式を明示してメモリから生のinterleaved PCM(16-bit signedまたは32-bit float)を読み込む。非対応のビット深度、1未満のチャンネル数、フレーム単位で割り切れないデータサイズ、バッファに収まらないサンプル数ではfalseを返す",
+                    "desc_ko": "형식을 명시해 메모리에서 raw interleaved PCM(16-bit signed 또는 32-bit float)을 로드. 미지원 비트 심도, 1 미만의 채널 수, 프레임 단위로 나누어떨어지지 않는 데이터 크기, 버퍼에 담을 수 없는 샘플 수에서는 false 반환"
                 },
                 {
                     "name": "soundBuffer:getDuration",
@@ -20942,9 +21535,9 @@ const TrussCAPI = {
                     "signatures": [
                         "other, offsetSamples, volume = 1.0"
                     ],
-                    "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed.",
-                    "desc_ja": "別のバッファをoffsetSamplesから加算ミックスし、必要ならこのバッファを拡張する",
-                    "desc_ko": "다른 버퍼를 offsetSamples부터 가산 믹스하고, 필요하면 이 버퍼를 확장"
+                    "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed. offsetSamples is in frames (samples per channel, like numSamples). Both buffers must have the same channel count; otherwise nothing is mixed and an error is logged.",
+                    "desc_ja": "別のバッファをoffsetSamplesから加算ミックスし、必要ならこのバッファを拡張する。offsetSamplesはフレーム単位(numSamplesと同じチャンネルあたりのサンプル数)。両バッファのチャンネル数が同じである必要があり、異なる場合は何もミックスせずエラーをログに出す",
+                    "desc_ko": "다른 버퍼를 offsetSamples부터 가산 믹스하고, 필요하면 이 버퍼를 확장. offsetSamples는 프레임 단위(numSamples와 같은 채널당 샘플 수). 두 버퍼의 채널 수가 같아야 하며, 다르면 아무것도 믹스하지 않고 에러를 로그에 남김"
                 },
                 {
                     "name": "soundBuffer:clip",
@@ -20982,7 +21575,7 @@ const TrussCAPI = {
         },
         {
             "name": "SoundStream",
-            "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a ~10 ms refill, and each polyphony slot costs one open file handle + decoder + ring buffer.",
+            "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a refill of usually ~10 ms (a file whose length is unknown cannot seek), and each polyphony slot costs one open file handle + decoder + ring buffer.",
             "keywords": [
                 "streaming audio",
                 "bgm",
@@ -20990,8 +21583,8 @@ const TrussCAPI = {
                 "disk audio",
                 "on demand"
             ],
-            "desc_ja": "ストリーミングなサウンドソース: ファイルを開いたままにし、全PCMをRAMに置く代わりにvoiceごとの小さなring bufferへオンデマンドにデコードする。SoundSourceから派生(channels / sampleRate / kind() / getDuration()を継承)。長尺ファイル(BGM、ポッドキャスト)に最適。SoundBufferとのトレードオフ: setSpeed()は1.0として扱われ、setPosition()は約10 msのrefillでseekし、polyphonyスロットごとにopenファイルハンドル+デコーダ+ring bufferのコストがかかる",
-            "desc_ko": "스트리밍 사운드 소스: 파일을 열어둔 채로, 전체 PCM을 RAM에 두는 대신 voice별 작은 ring buffer로 on-demand 디코딩. SoundSource에서 파생(channels / sampleRate / kind() / getDuration() 상속). 긴 파일(BGM, 팟캐스트)에 최적. SoundBuffer 대비 트레이드오프: setSpeed()는 1.0으로 처리되고, setPosition()은 약 10 ms의 refill로 seek하며, polyphony 슬롯마다 open 파일 핸들 + 디코더 + ring buffer 비용이 듦",
+            "desc_ja": "ストリーミングなサウンドソース: ファイルを開いたままにし、全PCMをRAMに置く代わりにvoiceごとの小さなring bufferへオンデマンドにデコードする。SoundSourceから派生(channels / sampleRate / kind() / getDuration()を継承)。長尺ファイル(BGM、ポッドキャスト)に最適。SoundBufferとのトレードオフ: setSpeed()は1.0として扱われ、setPosition()は通常約10 msのrefillでseekし(長さが不明なファイルはseekできない)、polyphonyスロットごとにopenファイルハンドル+デコーダ+ring bufferのコストがかかる",
+            "desc_ko": "스트리밍 사운드 소스: 파일을 열어둔 채로, 전체 PCM을 RAM에 두는 대신 voice별 작은 ring buffer로 on-demand 디코딩. SoundSource에서 파생(channels / sampleRate / kind() / getDuration() 상속). 긴 파일(BGM, 팟캐스트)에 최적. SoundBuffer 대비 트레이드오프: setSpeed()는 1.0으로 처리되고, setPosition()은 보통 약 10 ms의 refill로 seek하며(길이를 알 수 없는 파일은 seek할 수 없음), polyphony 슬롯마다 open 파일 핸들 + 디코더 + ring buffer 비용이 듦",
             "related": [
                 "SoundBuffer",
                 "SoundSource"
@@ -21010,9 +21603,9 @@ const TrussCAPI = {
                             "params": "path, maxPolyphony = 1"
                         }
                     ],
-                    "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported.",
-                    "desc_ja": "ファイルを開き、形式(.wav .mp3 .flac .ogg)を検証し、channels / sampleRate / durationを埋める。maxPolyphonyはその数だけ同時デコーダスロットを予約。ファイルが開けないか形式が非対応の場合falseを返す",
-                    "desc_ko": "파일을 열어 형식(.wav .mp3 .flac .ogg)을 검증하고 channels / sampleRate / duration을 채움. maxPolyphony는 그 수만큼 동시 디코더 슬롯을 예약. 파일을 열 수 없거나 형식이 미지원이면 false 반환"
+                    "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened, the format is unsupported, or the file has no audio frames (DecodeFailed).",
+                    "desc_ja": "ファイルを開き、形式(.wav .mp3 .flac .ogg)を検証し、channels / sampleRate / durationを埋める。maxPolyphonyはその数だけ同時デコーダスロットを予約。ファイルが開けない、形式が非対応、またはオーディオフレームが無い (DecodeFailed) 場合falseを返す",
+                    "desc_ko": "파일을 열어 형식(.wav .mp3 .flac .ogg)을 검증하고 channels / sampleRate / duration을 채움. maxPolyphony는 그 수만큼 동시 디코더 슬롯을 예약. 파일을 열 수 없거나, 형식이 미지원이거나, 오디오 프레임이 없으면 (DecodeFailed) false 반환"
                 },
                 {
                     "name": "soundStream:getDuration",
@@ -21022,9 +21615,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Decoded file duration in seconds.",
-                    "desc_ja": "デコードしたファイルの秒単位の長さ",
-                    "desc_ko": "디코딩된 파일의 초 단위 길이"
+                    "desc": "Decoded file duration in seconds. 0 when the file does not record its length (e.g. a FLAC encoded to a pipe); such a stream plays to its end but cannot seek, and an engine re-init at another sample rate restarts it from the beginning.",
+                    "desc_ja": "デコードしたファイルの秒単位の長さ。ファイルが長さを記録していない場合 (パイプへエンコードした FLAC など) は 0 で、そのストリームは最後まで再生できるがシークはできず、別のサンプルレートでエンジンを再初期化すると先頭から再生し直す",
+                    "desc_ko": "디코딩된 파일의 초 단위 길이. 파일에 길이가 기록되어 있지 않으면 (파이프로 인코딩한 FLAC 등) 0이며, 그런 스트림은 끝까지 재생되지만 시크할 수 없고, 다른 샘플레이트로 엔진을 재초기화하면 처음부터 다시 재생됨"
                 },
                 {
                     "name": "soundStream:getPath",
@@ -21312,9 +21905,9 @@ const TrussCAPI = {
                 {
                     "name": "tcpClient.onDisconnect",
                     "type": "Event",
-                    "desc": "Fired when disconnected",
-                    "desc_ja": "切断時に発火",
-                    "desc_ko": "연결 해제 시 발생"
+                    "desc": "Fired when the connection ends: the peer closed it, an error ended it, or disconnect() / connect() on a connected client (not from the destructor)",
+                    "desc_ja": "接続が終わったときに発火：相手が閉じた、エラーで切れた、または disconnect() / 接続中の connect()（デストラクタでは発火しない）",
+                    "desc_ko": "연결이 끝났을 때 발생: 상대가 닫음, 오류로 끊김, 또는 disconnect() / 연결 중 connect() (소멸자에서는 발생하지 않음)"
                 },
                 {
                     "name": "tcpClient.onError",
@@ -21784,12 +22377,12 @@ const TrussCAPI = {
                     "signatures": [
                         {
                             "ret": "boolean",
-                            "params": "port, maxClients = 10"
+                            "params": "port, maxClients = 0"
                         }
                     ],
-                    "desc": "Start listening on a port",
-                    "desc_ja": "ポートで待ち受けを開始",
-                    "desc_ko": "포트에서 수신 대기를 시작"
+                    "desc": "Start listening on a port. maxClients caps the connected clients (0 = unlimited, the default)",
+                    "desc_ja": "ポートで待ち受けを開始。maxClients で同時接続数に上限を付ける（0 = 無制限、既定）",
+                    "desc_ko": "포트에서 수신 대기를 시작. maxClients로 동시 접속 수를 제한 (0 = 무제한, 기본값)"
                 },
                 {
                     "name": "tcpServer:stop",
@@ -22007,9 +22600,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "The listening port",
-                    "desc_ja": "待ち受けポート",
-                    "desc_ko": "수신 대기 포트"
+                    "desc": "The port the server is bound to. After start(0) this is the port the OS picked; for a fixed port it is that port",
+                    "desc_ja": "サーバが bind しているポート。start(0) のあとは OS が選んだポート、固定のポートならそのポート",
+                    "desc_ko": "서버가 bind된 포트. start(0) 후에는 OS가 고른 포트, 고정 포트라면 그 포트"
                 }
             ]
         },
@@ -26174,9 +26767,9 @@ const TrussCAPI = {
                             "params": "app"
                         }
                     ],
-                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window",
-                    "desc_ja": "このウィンドウにAppを設定 (ウィンドウにコンテンツを与える唯一の方法)。Appのライフサイクル一式 (setup/update/draw/キー/マウス/windowResized + RectNodeサイズ同期) がこのウィンドウで動く。1ウィンドウ1App",
-                    "desc_ko": "이 윈도우에 App을 연결 (윈도우에 콘텐츠를 주는 유일한 방법). App의 전체 라이프사이클이 이 윈도우에서 실행됨. 윈도우당 App 하나"
+                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open (both log an error and leave the window as it is)",
+                    "desc_ja": "このウィンドウにAppを設定 (ウィンドウにコンテンツを与える唯一の方法)。Appのライフサイクル一式 (setup/update/draw/キー/マウス/windowResized + RectNodeサイズ同期) がこのウィンドウで動く。1ウィンドウ1App。App は 1 回だけ動く: 最初に付けたときに setup()、ウィンドウを閉じたとき (#318 以降は差し替えで外したときも) に exit() / cleanup()。ウィンドウを閉じると audioOut() / audioIn() も切り離され、元には戻らない。もう一度表示するには新しい App を作る。setApp() は cleanup() 済みの App と、開いていないウィンドウへの設定を拒否する (どちらもエラーログを出し、ウィンドウはそのまま)",
+                    "desc_ko": "이 윈도우에 App을 연결 (윈도우에 콘텐츠를 주는 유일한 방법). App의 전체 라이프사이클이 이 윈도우에서 실행됨. 윈도우당 App 하나. App 은 한 번만 동작한다: 처음 연결할 때 setup(), 윈도우를 닫을 때 (#318 이후에는 교체로 분리될 때도) exit() / cleanup(). 윈도우를 닫으면 audioOut() / audioIn() 도 분리되고 다시 연결되지 않는다. 다시 표시하려면 새 App 을 만든다. setApp() 은 cleanup() 이 이미 실행된 App 과, 열려 있지 않은 윈도우에 대한 설정을 거부한다 (둘 다 에러 로그를 남기고 윈도우는 그대로)"
                 },
                 {
                     "name": "window:getApp",
@@ -26273,6 +26866,18 @@ const TrussCAPI = {
                     "desc": "Window height in logical points (matches its coordinate system)",
                     "desc_ja": "ウィンドウ高さ (論理ポイント、座標系と一致)",
                     "desc_ko": "윈도우 높이 (논리 포인트, 좌표계와 일치)"
+                },
+                {
+                    "name": "window:isOccluded",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Whether the OS reports this window as not visible, so it renders no frames (its update/draw pause until it is visible again): macOS minimized, fully covered or on another Space; Windows minimized or DXGI-occluded; Linux (X11) minimized or fully obscured (without a compositing manager). False for a closed window",
+                    "desc_ja": "OS がこのウィンドウを非表示と報告しているか。true の間はフレームを描かない (再び表示されるまで update/draw が止まる)。macOS は最小化・完全に隠れている・別の Space、Windows は最小化または DXGI が occluded と報告、Linux (X11) は最小化または完全に隠れている (コンポジットマネージャがない場合)。閉じたウィンドウでは false",
+                    "desc_ko": "OS가 이 윈도우를 보이지 않는 상태로 보고하는지 여부. true인 동안에는 프레임을 그리지 않음 (다시 보일 때까지 update/draw가 멈춤). macOS는 최소화·완전히 가려짐·다른 Space, Windows는 최소화 또는 DXGI가 occluded로 보고, Linux (X11)는 최소화 또는 완전히 가려짐 (컴포지팅 매니저가 없을 때). 닫힌 윈도우에서는 false"
                 },
                 {
                     "name": "window:setSize",
@@ -26629,9 +27234,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path, indent = \"  \""
                     ],
-                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath. indent sets the per-level indentation string. Returns true on success.",
-                    "desc_ja": "ドキュメントをファイルに保存する。相対パスは getDataPath で解決される。indent は各レベルのインデント文字列を設定する。成功時に true を返す",
-                    "desc_ko": "문서를 파일에 저장. 상대 경로는 getDataPath로 해석됨. indent는 레벨별 들여쓰기 문자열을 설정. 성공 시 true 반환"
+                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the per-level indentation string. Returns true on success; on failure it logs an error and returns false.",
+                    "desc_ja": "ドキュメントをファイルに保存する。相対パスは getDataPath で解決され、親フォルダがなければ作られる。indent は各レベルのインデント文字列を設定する。成功時に true を返し、失敗時はエラーをログに出して false を返す",
+                    "desc_ko": "문서를 파일에 저장. 상대 경로는 getDataPath로 해석되고, 상위 폴더가 없으면 만들어진다. indent는 레벨별 들여쓰기 문자열을 설정. 성공 시 true 반환, 실패 시 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "xml:toString",
@@ -27567,13 +28172,15 @@ const TrussCAPI = {
         },
         {
             "name": "LogLevel",
-            "desc": "Log severity, from Verbose (most detailed) to Fatal; Silent disables logging.",
+            "desc": "Log severity, from Verbose (most detailed) to Fatal. Each output (console, file, system) shows lines at its own level and above; Silent as an output's level turns that output off.",
             "keywords": [
                 "verbose",
                 "warning",
                 "error",
                 "severity",
-                "debug"
+                "debug",
+                "silent",
+                "log level"
             ],
             "values": [
                 {
@@ -27619,12 +28226,14 @@ const TrussCAPI = {
                     "desc_ko": ""
                 }
             ],
-            "desc_ja": "ログの重大度。Verbose（最も詳細）から Fatal まで。Silent はログを無効化。",
-            "desc_ko": "로그 심각도. Verbose(가장 상세)부터 Fatal까지. Silent는 로깅 비활성화.",
+            "desc_ja": "ログの重大度。Verbose（最も詳細）から Fatal まで。各出力（コンソール・ファイル・システム）は自分のレベル以上の行を出す。出力のレベルを Silent にするとその出力は止まる。",
+            "desc_ko": "로그 심각도. Verbose(가장 상세)부터 Fatal까지. 각 출력(콘솔·파일·시스템)은 자신의 레벨 이상의 줄을 낸다. 출력의 레벨을 Silent로 하면 그 출력은 꺼진다.",
             "related": [
                 "logAt",
+                "setLogLevel",
                 "setConsoleLogLevel",
                 "setFileLogLevel",
+                "setSystemLogLevel",
                 "Logger",
                 "logNotice"
             ]

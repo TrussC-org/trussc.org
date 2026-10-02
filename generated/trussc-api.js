@@ -55,6 +55,12 @@ const TrussCAPI = {
                     "desc_ko": "단일 sRGB 채널 값을 linear RGB로 변환",
                     "related": [
                         "VideoPlayer::setGammaCorrection"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -72,6 +78,12 @@ const TrussCAPI = {
                     "desc_ko": "단일 linear RGB 채널 값을 sRGB로 변환",
                     "related": [
                         "VideoPlayer::setGammaCorrection"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -304,6 +316,12 @@ const TrussCAPI = {
                     "desc_ko": "OKLab으로 색상을 설정",
                     "related": [
                         "ColorOKLab"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -322,6 +340,12 @@ const TrussCAPI = {
                     "desc_ko": "OKLCH로 색상을 설정",
                     "related": [
                         "ColorOKLCH"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -443,6 +467,10 @@ const TrussCAPI = {
                         {
                             "name": "roundedRectExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -468,6 +496,10 @@ const TrussCAPI = {
                         {
                             "name": "roundedRectExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -493,6 +525,10 @@ const TrussCAPI = {
                         {
                             "name": "roundedRectExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -518,6 +554,10 @@ const TrussCAPI = {
                         {
                             "name": "roundedRectExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -550,6 +590,10 @@ const TrussCAPI = {
                         {
                             "name": "roundedRectExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -582,6 +626,10 @@ const TrussCAPI = {
                         {
                             "name": "roundedRectExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -657,6 +705,10 @@ const TrussCAPI = {
                         {
                             "name": "graphicsExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -682,6 +734,10 @@ const TrussCAPI = {
                         {
                             "name": "graphicsExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -707,6 +763,10 @@ const TrussCAPI = {
                         {
                             "name": "graphicsExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -732,6 +792,10 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -757,6 +821,10 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -789,6 +857,10 @@ const TrussCAPI = {
                         {
                             "name": "curveVariationsExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -821,6 +893,10 @@ const TrussCAPI = {
                         {
                             "name": "curveVariationsExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -853,6 +929,10 @@ const TrussCAPI = {
                         {
                             "name": "curveVariationsExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -884,6 +964,10 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -915,6 +999,10 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -946,6 +1034,10 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -1091,7 +1183,13 @@ const TrussCAPI = {
                         "particle"
                     ],
                     "desc_ja": "点を描画",
-                    "desc_ko": "점 그리기"
+                    "desc_ko": "점 그리기",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "drawPoint",
@@ -1106,7 +1204,13 @@ const TrussCAPI = {
                         "particle"
                     ],
                     "desc_ja": "点を描画",
-                    "desc_ko": "점 그리기"
+                    "desc_ko": "점 그리기",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getBitmapStringBounds",
@@ -1121,7 +1225,13 @@ const TrussCAPI = {
                         "extent"
                     ],
                     "desc_ja": "ビットマップ文字列のバウンディングボックスサイズを取得",
-                    "desc_ko": "비트맵 문자열의 바운딩 박스 크기를 얻음"
+                    "desc_ko": "비트맵 문자열의 바운딩 박스 크기를 얻음",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "drawBitmapString",
@@ -1345,7 +1455,13 @@ const TrussCAPI = {
                         "left right"
                     ],
                     "desc_ja": "水平方向のテキスト配置を取得",
-                    "desc_ko": "수평 텍스트 정렬을 얻음"
+                    "desc_ko": "수평 텍스트 정렬을 얻음",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getTextAlignV",
@@ -1360,7 +1476,13 @@ const TrussCAPI = {
                         "baseline"
                     ],
                     "desc_ja": "垂直方向のテキスト配置を取得",
-                    "desc_ko": "수직 텍스트 정렬을 얻음"
+                    "desc_ko": "수직 텍스트 정렬을 얻음",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "setBitmapLineHeight",
@@ -1378,6 +1500,12 @@ const TrussCAPI = {
                     "desc_ko": "비트맵 문자열 개행 시의 줄 높이를 설정 (기본값: 16)",
                     "related": [
                         "getBitmapLineHeight"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -1396,6 +1524,12 @@ const TrussCAPI = {
                     "desc_ko": "비트맵 문자열 개행 시의 줄 높이를 얻음",
                     "related": [
                         "setBitmapLineHeight"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -1411,7 +1545,13 @@ const TrussCAPI = {
                         "ascent"
                     ],
                     "desc_ja": "ビットマップフォントの高さを取得",
-                    "desc_ko": "비트맵 폰트 높이를 얻음"
+                    "desc_ko": "비트맵 폰트 높이를 얻음",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getBitmapStringWidth",
@@ -1426,7 +1566,13 @@ const TrussCAPI = {
                         "pixels"
                     ],
                     "desc_ja": "テキストの幅を取得",
-                    "desc_ko": "비트맵 텍스트 너비를 얻음"
+                    "desc_ko": "비트맵 텍스트 너비를 얻음",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getBitmapStringHeight",
@@ -1441,7 +1587,13 @@ const TrussCAPI = {
                         "pixels"
                     ],
                     "desc_ja": "テキストの高さを取得",
-                    "desc_ko": "비트맵 텍스트 높이를 얻음"
+                    "desc_ko": "비트맵 텍스트 높이를 얻음",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getBitmapStringBBox",
@@ -1456,7 +1608,13 @@ const TrussCAPI = {
                         "rect"
                     ],
                     "desc_ja": "テキストのバウンディングボックスを取得",
-                    "desc_ko": "비트맵 텍스트 바운딩 박스를 얻음"
+                    "desc_ko": "비트맵 텍스트 바운딩 박스를 얻음",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "drawBitmapStringHighlight",
@@ -1488,7 +1646,7 @@ const TrussCAPI = {
                     "params": "fps",
                     "params_typed": "float fps",
                     "return_type": "void",
-                    "desc": "Set target frame rate (VSYNC = -1.0)",
+                    "desc": "Set the target frame rate; update and draw run together (VSYNC = -1, EVENT_DRIVEN = 0, or a fixed fps). A fixed fps at or just above the display rate draws every display frame. Switching at runtime starts the new rate from the switch (no catch-up; a fixed fps draws the next frame, and the first update's getDeltaTime() leaves out the previous mode: called between updates it counts from the call, called inside an update from that update's start; the time dropped is under a frame in the usual modes, long only after an idle like EVENT_DRIVEN). Calling it again with the current rate does nothing, so it is safe to call every frame; on the frame where the value changes (setFps(guiValue) in draw() while a slider moves), that update's dt counts only from the call and is shorter than the frame",
                     "keywords": [
                         "frame rate",
                         "framerate",
@@ -1496,10 +1654,12 @@ const TrussCAPI = {
                         "speed",
                         "ofsetframerate"
                     ],
-                    "desc_ja": "ターゲットフレームレートを設定 (VSYNC = -1.0)",
-                    "desc_ko": "목표 프레임레이트를 설정 (VSYNC = -1.0)",
+                    "desc_ja": "ターゲットフレームレートを設定し、update と draw を同期して回す（VSYNC = -1、EVENT_DRIVEN = 0、または固定fps）。ディスプレイのリフレッシュレートと同じか少し上の固定fpsは毎フレーム描画する。実行中の切り替えは切り替えた時点から新しいレートで始まる（取り戻しはせず、固定fpsなら次のフレームを描画し、最初の update の getDeltaTime() には前のモードの時間が入らない。update の外で呼べば呼び出しから、update の中で呼べばその update の開始から数える。捨てる時間は普段のモードなら1フレーム未満で、長くなるのは EVENT_DRIVEN のアイドルのあとだけ）。今と同じレートで呼んでも何もしないので、毎フレーム呼んでもよい。ただし値が変わったフレーム（スライダー操作中に draw() で setFps(guiValue) するなど）では、その update の dt は呼び出しからの時間になり、1フレームより短くなる",
+                    "desc_ko": "목표 프레임레이트를 설정하고 update와 draw를 동기로 돌린다(VSYNC = -1, EVENT_DRIVEN = 0, 또는 고정 fps). 디스플레이 리프레시레이트와 같거나 약간 높은 고정 fps는 매 프레임 그린다. 실행 중 전환은 전환 시점부터 새 레이트로 시작한다(따라잡기 없이, 고정 fps라면 다음 프레임을 그리고, 첫 update의 getDeltaTime()에는 이전 모드의 시간이 들어가지 않는다. update 밖에서 호출하면 호출 시점부터, update 안에서 호출하면 그 update의 시작부터 센다. 버려지는 시간은 평소 모드라면 1프레임 미만이며, 길어지는 것은 EVENT_DRIVEN 대기 뒤뿐이다). 현재와 같은 레이트로 호출하면 아무것도 하지 않으므로 매 프레임 호출해도 된다. 단, 값이 바뀐 프레임(슬라이더 조작 중 draw()에서 setFps(guiValue) 하는 경우 등)에서는 그 update의 dt가 호출 시점부터의 시간이 되어 1프레임보다 짧아진다",
                     "related": [
-                        "getFps"
+                        "getFps",
+                        "setIndependentFps",
+                        "getFpsSettings"
                     ],
                     "examples": [
                         {
@@ -1615,7 +1775,13 @@ const TrussCAPI = {
                     ],
                     "details": "`beginLines()` opens a buffer that draws **independent line segments**. Add\npoints with [`vertex`](#vertex); they are consumed **in pairs** — vertices 0–1\nare one segment, 2–3 the next, and so on. Nothing is drawn until\n[`endLines`](#endLines) is called, and a trailing odd vertex is ignored. At\nleast two vertices are required.\n\nEach vertex captures the current draw color at the moment its `vertex()` is\ncalled, so set the color **between** vertices for per-segment (even\nper-endpoint, gradient) colors:\n\n```cpp\nbeginLines();\nsetColor(colors::red);    vertex(20, 20);\nsetColor(colors::blue);   vertex(200, 80);   // segment 1: red → blue\nsetColor(colors::lime);   vertex(20, 120);\nsetColor(colors::yellow); vertex(200, 180);  // segment 2: lime → yellow\nendLines();\n```\n\nThese are thin (1px) lines. For thick lines with caps and joins use\n[`beginStroke`](#beginStroke); for a connected outline (line strip) use\n[`beginShape`](#beginShape) with [`noFill`](#noFill).",
                     "details_ja": "`beginLines()` は**独立した線分**を描くバッファを開く。[`vertex`](#vertex) で点を\n追加すると **2 つずつペア**で消費される — 頂点 0–1 が 1 本目、2–3 が 2 本目…という\n具合。[`endLines`](#endLines) を呼ぶまで描画されず、余った奇数番目の頂点は無視される。\n最低 2 頂点が必要。\n\n各頂点は `vertex()` を呼んだ時点の描画色を取り込むので、頂点の**間**で色を変えると\n線分ごと（さらには端点ごと＝グラデーション）に色を付けられる:\n\n```cpp\nbeginLines();\nsetColor(colors::red);    vertex(20, 20);\nsetColor(colors::blue);   vertex(200, 80);   // 線分1: red → blue\nsetColor(colors::lime);   vertex(20, 120);\nsetColor(colors::yellow); vertex(200, 180);  // 線分2: lime → yellow\nendLines();\n```\n\nこれは細い（1px）線。太さ・cap・join 付きの線は [`beginStroke`](#beginStroke)、\n連続した輪郭（line strip）は [`beginShape`](#beginShape) ＋ [`noFill`](#noFill) を使う。",
-                    "details_ko": "`beginLines()`는 **독립적인 선분**을 그리는 버퍼를 연다. [`vertex`](#vertex)로 점을\n추가하면 **두 개씩 쌍으로** 소비된다 — 정점 0–1이 첫 선분, 2–3이 다음 선분… 식이다.\n[`endLines`](#endLines)를 호출하기 전에는 그려지지 않으며, 남는 홀수 번째 정점은\n무시된다. 최소 2개의 정점이 필요하다.\n\n각 정점은 `vertex()`를 호출하는 시점의 그리기 색을 담으므로, 정점 **사이에서** 색을\n바꾸면 선분마다(나아가 끝점마다 = 그라데이션) 색을 줄 수 있다:\n\n```cpp\nbeginLines();\nsetColor(colors::red);    vertex(20, 20);\nsetColor(colors::blue);   vertex(200, 80);   // 선분1: red → blue\nsetColor(colors::lime);   vertex(20, 120);\nsetColor(colors::yellow); vertex(200, 180);  // 선분2: lime → yellow\nendLines();\n```\n\n이것은 가는(1px) 선이다. 두께·cap·join이 있는 선은 [`beginStroke`](#beginStroke),\n연결된 윤곽(line strip)은 [`beginShape`](#beginShape) + [`noFill`](#noFill)를 사용한다."
+                    "details_ko": "`beginLines()`는 **독립적인 선분**을 그리는 버퍼를 연다. [`vertex`](#vertex)로 점을\n추가하면 **두 개씩 쌍으로** 소비된다 — 정점 0–1이 첫 선분, 2–3이 다음 선분… 식이다.\n[`endLines`](#endLines)를 호출하기 전에는 그려지지 않으며, 남는 홀수 번째 정점은\n무시된다. 최소 2개의 정점이 필요하다.\n\n각 정점은 `vertex()`를 호출하는 시점의 그리기 색을 담으므로, 정점 **사이에서** 색을\n바꾸면 선분마다(나아가 끝점마다 = 그라데이션) 색을 줄 수 있다:\n\n```cpp\nbeginLines();\nsetColor(colors::red);    vertex(20, 20);\nsetColor(colors::blue);   vertex(200, 80);   // 선분1: red → blue\nsetColor(colors::lime);   vertex(20, 120);\nsetColor(colors::yellow); vertex(200, 180);  // 선분2: lime → yellow\nendLines();\n```\n\n이것은 가는(1px) 선이다. 두께·cap·join이 있는 선은 [`beginStroke`](#beginStroke),\n연결된 윤곽(line strip)은 [`beginShape`](#beginShape) + [`noFill`](#noFill)를 사용한다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "endLines",
@@ -1633,6 +1799,12 @@ const TrussCAPI = {
                     "desc_ko": "배치 선 그리기 종료. 누적된 모든 선을 렌더링",
                     "related": [
                         "beginLines"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -1857,6 +2029,10 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -1880,6 +2056,10 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -1905,7 +2085,13 @@ const TrussCAPI = {
                     ],
                     "details": "Same bounding-box convention and exponent parameter as\n[`drawSuperellipse`](#drawSuperellipse). Note that `endShape()` fills with a\nfirst-vertex fan, which is only correct for convex outlines (`n >= 1`); for\nconcave `n < 1` shapes use [`drawSuperellipse`](#drawSuperellipse) directly.",
                     "details_ja": "[`drawSuperellipse`](#drawSuperellipse) と同じバウンディングボックス指定・指数\nパラメータを取る。`endShape()` の塗りは先頭頂点からのファンなので凸形状\n（`n >= 1`）でのみ正しい。凹になる `n < 1` は\n[`drawSuperellipse`](#drawSuperellipse) を直接使うこと。",
-                    "details_ko": "[`drawSuperellipse`](#drawSuperellipse)와 같은 바운딩 박스 지정과 지수\n매개변수를 사용한다. `endShape()`의 채우기는 첫 정점 기준 팬이므로 볼록한\n윤곽(`n >= 1`)에서만 올바르다. 오목한 `n < 1` 형태는\n[`drawSuperellipse`](#drawSuperellipse)를 직접 사용할 것."
+                    "details_ko": "[`drawSuperellipse`](#drawSuperellipse)와 같은 바운딩 박스 지정과 지수\n매개변수를 사용한다. `endShape()`의 채우기는 첫 정점 기준 팬이므로 볼록한\n윤곽(`n >= 1`)에서만 올바르다. 오목한 `n < 1` 형태는\n[`drawSuperellipse`](#drawSuperellipse)를 직접 사용할 것.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "appendSuperellipse",
@@ -1929,7 +2115,13 @@ const TrussCAPI = {
                     ],
                     "details": "Same bounding-box convention and exponent parameter as\n[`drawSuperellipse`](#drawSuperellipse). Note that `endShape()` fills with a\nfirst-vertex fan, which is only correct for convex outlines (`n >= 1`); for\nconcave `n < 1` shapes use [`drawSuperellipse`](#drawSuperellipse) directly.",
                     "details_ja": "[`drawSuperellipse`](#drawSuperellipse) と同じバウンディングボックス指定・指数\nパラメータを取る。`endShape()` の塗りは先頭頂点からのファンなので凸形状\n（`n >= 1`）でのみ正しい。凹になる `n < 1` は\n[`drawSuperellipse`](#drawSuperellipse) を直接使うこと。",
-                    "details_ko": "[`drawSuperellipse`](#drawSuperellipse)와 같은 바운딩 박스 지정과 지수\n매개변수를 사용한다. `endShape()`의 채우기는 첫 정점 기준 팬이므로 볼록한\n윤곽(`n >= 1`)에서만 올바르다. 오목한 `n < 1` 형태는\n[`drawSuperellipse`](#drawSuperellipse)를 직접 사용할 것."
+                    "details_ko": "[`drawSuperellipse`](#drawSuperellipse)와 같은 바운딩 박스 지정과 지수\n매개변수를 사용한다. `endShape()`의 채우기는 첫 정점 기준 팬이므로 볼록한\n윤곽(`n >= 1`)에서만 올바르다. 오목한 `n < 1` 형태는\n[`drawSuperellipse`](#drawSuperellipse)를 직접 사용할 것.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "appendCurve",
@@ -1947,6 +2139,12 @@ const TrussCAPI = {
                     "desc_ko": "현재 도형에 Catmull-Rom 곡선 정점을 추가 (beginShape/endShape 사이에서 사용, 4점 이상 필요, closed=true는 닫힌 곡선)",
                     "related": [
                         "drawCurve"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -1965,6 +2163,12 @@ const TrussCAPI = {
                     "desc_ko": "현재 도형에 Catmull-Rom 곡선 정점을 추가 (beginShape/endShape 사이에서 사용, 4점 이상 필요, closed=true는 닫힌 곡선)",
                     "related": [
                         "drawCurve"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -1986,6 +2190,12 @@ const TrussCAPI = {
                         "setStrokeCap",
                         "setStrokeJoin",
                         "drawLine"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2007,6 +2217,12 @@ const TrussCAPI = {
                         "setStrokeCap",
                         "setStrokeJoin",
                         "drawLine"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2201,6 +2417,12 @@ const TrussCAPI = {
                     "related": [
                         "createSphere",
                         "setMaterial"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2221,6 +2443,12 @@ const TrussCAPI = {
                     "related": [
                         "createSphere",
                         "setMaterial"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2241,6 +2469,12 @@ const TrussCAPI = {
                     "related": [
                         "createSphere",
                         "setMaterial"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2258,6 +2492,12 @@ const TrussCAPI = {
                     "desc_ko": "3D 원뿔 그리기 (fill/noFill 적용됨)",
                     "related": [
                         "createCone"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2275,6 +2515,12 @@ const TrussCAPI = {
                     "desc_ko": "3D 원뿔 그리기 (fill/noFill 적용됨)",
                     "related": [
                         "createCone"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2292,6 +2538,12 @@ const TrussCAPI = {
                     "desc_ko": "3D 원뿔 그리기 (fill/noFill 적용됨)",
                     "related": [
                         "createCone"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -2317,7 +2569,8 @@ const TrussCAPI = {
                     "desc_ko": "현재 스타일(색상, 채우기, 스트로크, 블렌드)을 스택에 푸시",
                     "related": [
                         "popStyle",
-                        "pushMatrix"
+                        "pushMatrix",
+                        "scopedStyle"
                     ],
                     "examples": [
                         {
@@ -2360,6 +2613,41 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "scopedStyle",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "StyleScope",
+                    "desc": "pushStyle() now, popStyle() at the end of the scope: `auto s = scopedStyle();` returns a StyleScope guard that pops when it goes out of scope, also on an early return or an exception. For code with several exits or long blocks; pushStyle() / popStyle() remain the main form. [[nodiscard]]: `scopedStyle();` alone would pop at once and is a compiler warning",
+                    "keywords": [
+                        "raii",
+                        "scope",
+                        "guard",
+                        "save",
+                        "restore",
+                        "state",
+                        "stack",
+                        "push",
+                        "pop",
+                        "early return"
+                    ],
+                    "desc_ja": "今 pushStyle() し、スコープの終わりで popStyle() する。`auto s = scopedStyle();` はスコープを抜けると（早期 return や例外でも）ポップする StyleScope ガードを返す。出口が複数あるコードや長いブロック向け。基本の書き方は pushStyle() / popStyle() のまま。[[nodiscard]]: `scopedStyle();` だけの行はすぐにポップしてしまうため、コンパイラが警告する",
+                    "desc_ko": "지금 pushStyle()하고 스코프 끝에서 popStyle()한다. `auto s = scopedStyle();`는 스코프를 벗어날 때(조기 return이나 예외에서도) 팝하는 StyleScope 가드를 반환한다. 출구가 여러 개인 코드나 긴 블록용. 기본 형태는 여전히 pushStyle() / popStyle(). [[nodiscard]]: `scopedStyle();`만 쓴 줄은 곧바로 팝되므로 컴파일러가 경고한다",
+                    "related": [
+                        "pushStyle",
+                        "popStyle",
+                        "scopedMatrix"
+                    ],
+                    "details": "C++ only: Lua has no scope-bound guard, so in Lua use pushStyle() / popStyle().",
+                    "details_ja": "C++ だけ。Lua にはスコープで閉じるガードが無いので、Lua では pushStyle() / popStyle() を使う。",
+                    "details_ko": "C++ 전용. Lua에는 스코프로 닫는 가드가 없으므로 Lua에서는 pushStyle() / popStyle()를 사용한다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "resetStyle",
                     "params": "",
                     "params_typed": "",
@@ -2370,7 +2658,13 @@ const TrussCAPI = {
                         "clear style"
                     ],
                     "desc_ja": "スタイルをデフォルト値にリセット（白色、塗りつぶし有効、ストローク無効）",
-                    "desc_ko": "스타일을 기본값으로 초기화 (흰색, 채우기 활성, 스트로크 비활성)"
+                    "desc_ko": "스타일을 기본값으로 초기화 (흰색, 채우기 활성, 스트로크 비활성)",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getColor",
@@ -2395,6 +2689,10 @@ const TrussCAPI = {
                         {
                             "name": "easyCamExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -2502,6 +2800,12 @@ const TrussCAPI = {
                     "desc_ko": "현재 stroke 두께를 얻음",
                     "related": [
                         "setStrokeWeight"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2556,6 +2860,12 @@ const TrussCAPI = {
                     "related": [
                         "StrokeCap",
                         "setStrokeCap"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2611,6 +2921,12 @@ const TrussCAPI = {
                     "related": [
                         "StrokeJoin",
                         "setStrokeJoin"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2641,6 +2957,10 @@ const TrussCAPI = {
                         {
                             "name": "pointCloudExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -2660,6 +2980,12 @@ const TrussCAPI = {
                     "related": [
                         "setPointSize",
                         "getPointStyle"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2691,6 +3017,10 @@ const TrussCAPI = {
                         {
                             "name": "pointCloudExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -2710,6 +3040,12 @@ const TrussCAPI = {
                     "related": [
                         "setPointStyle",
                         "getPointSize"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2730,6 +3066,12 @@ const TrussCAPI = {
                     "related": [
                         "RectNode::setClipping",
                         "pushScissor"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2750,6 +3092,12 @@ const TrussCAPI = {
                     "related": [
                         "RectNode::setClipping",
                         "pushScissor"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2765,7 +3113,13 @@ const TrussCAPI = {
                         "unclip"
                     ],
                     "desc_ja": "シザー（クリッピング）を解除",
-                    "desc_ko": "시저(클리핑)를 해제"
+                    "desc_ko": "시저(클리핑)를 해제",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "pushScissor",
@@ -2783,6 +3137,12 @@ const TrussCAPI = {
                     "desc_ko": "시저 사각형을 스택에 푸시",
                     "related": [
                         "popScissor"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2801,6 +3161,12 @@ const TrussCAPI = {
                     "desc_ko": "시저 사각형을 스택에서 복원",
                     "related": [
                         "pushScissor"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2852,6 +3218,12 @@ const TrussCAPI = {
                     "related": [
                         "BlendMode",
                         "setBlendMode"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -2907,6 +3279,10 @@ const TrussCAPI = {
                         {
                             "name": "depthTestExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -2935,6 +3311,10 @@ const TrussCAPI = {
                         {
                             "name": "depthTestExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -2960,6 +3340,10 @@ const TrussCAPI = {
                         {
                             "name": "depthTestExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -3020,6 +3404,10 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -3038,6 +3426,12 @@ const TrussCAPI = {
                     "desc_ko": "현재 곡선 분할 허용 오차를 얻음 (픽셀 단위)",
                     "related": [
                         "setCurveTolerance"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -3055,6 +3449,12 @@ const TrussCAPI = {
                     "desc_ko": "현재 곡선 분할 개수를 얻음",
                     "related": [
                         "setCurveResolution"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -3070,7 +3470,13 @@ const TrussCAPI = {
                         "smoothness"
                     ],
                     "desc_ja": "現在の曲線テッセレーションモード（固定セグメント数 vs. 適応許容誤差）",
-                    "desc_ko": "현재 곡선 tessellation 모드 (고정 세그먼트 수 vs. 적응형 허용오차)"
+                    "desc_ko": "현재 곡선 tessellation 모드 (고정 세그먼트 수 vs. 적응형 허용오차)",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "setCircleResolution",
@@ -3125,7 +3531,13 @@ const TrussCAPI = {
                         "check fill"
                     ],
                     "desc_ja": "塗りつぶしモードが有効か確認",
-                    "desc_ko": "채우기 모드 활성 여부 확인"
+                    "desc_ko": "채우기 모드 활성 여부 확인",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "isStrokeEnabled",
@@ -3138,7 +3550,13 @@ const TrussCAPI = {
                         "check stroke"
                     ],
                     "desc_ja": "ストロークモードが有効か確認",
-                    "desc_ko": "stroke 모드 활성 여부 확인"
+                    "desc_ko": "stroke 모드 활성 여부 확인",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 }
             ],
             "name_ja": "グラフィックス - スタイル",
@@ -3164,7 +3582,8 @@ const TrussCAPI = {
                     "related": [
                         "popMatrix",
                         "pushStyle",
-                        "translate"
+                        "translate",
+                        "scopedMatrix"
                     ],
                     "examples": [
                         {
@@ -3211,6 +3630,41 @@ const TrussCAPI = {
                         {
                             "name": "3DPrimitivesExample",
                             "group": "3d"
+                        }
+                    ]
+                },
+                {
+                    "name": "scopedMatrix",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "MatrixScope",
+                    "desc": "pushMatrix() now, popMatrix() at the end of the scope: `auto m = scopedMatrix();` returns a MatrixScope guard that pops when it goes out of scope, also on an early return or an exception. For code with several exits or long blocks; pushMatrix() / popMatrix() remain the main form. [[nodiscard]]: `scopedMatrix();` alone would pop at once and is a compiler warning",
+                    "keywords": [
+                        "raii",
+                        "scope",
+                        "guard",
+                        "save",
+                        "restore",
+                        "transform",
+                        "stack",
+                        "push",
+                        "pop",
+                        "early return"
+                    ],
+                    "desc_ja": "今 pushMatrix() し、スコープの終わりで popMatrix() する。`auto m = scopedMatrix();` はスコープを抜けると（早期 return や例外でも）ポップする MatrixScope ガードを返す。出口が複数あるコードや長いブロック向け。基本の書き方は pushMatrix() / popMatrix() のまま。[[nodiscard]]: `scopedMatrix();` だけの行はすぐにポップしてしまうため、コンパイラが警告する",
+                    "desc_ko": "지금 pushMatrix()하고 스코프 끝에서 popMatrix()한다. `auto m = scopedMatrix();`는 스코프를 벗어날 때(조기 return이나 예외에서도) 팝하는 MatrixScope 가드를 반환한다. 출구가 여러 개인 코드나 긴 블록용. 기본 형태는 여전히 pushMatrix() / popMatrix(). [[nodiscard]]: `scopedMatrix();`만 쓴 줄은 곧바로 팝되므로 컴파일러가 경고한다",
+                    "related": [
+                        "pushMatrix",
+                        "popMatrix",
+                        "scopedStyle"
+                    ],
+                    "details": "C++ only: Lua has no scope-bound guard, so in Lua use pushMatrix() / popMatrix().",
+                    "details_ja": "C++ だけ。Lua にはスコープで閉じるガードが無いので、Lua では pushMatrix() / popMatrix() を使う。",
+                    "details_ko": "C++ 전용. Lua에는 스코프로 닫는 가드가 없으므로 Lua에서는 pushMatrix() / popMatrix()를 사용한다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -3528,6 +3982,10 @@ const TrussCAPI = {
                         {
                             "name": "reflectExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -3544,7 +4002,13 @@ const TrussCAPI = {
                         "rotation"
                     ],
                     "desc_ja": "度で回転",
-                    "desc_ko": "도(degree)로 회전"
+                    "desc_ko": "도(degree)로 회전",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "rotateDeg",
@@ -3559,7 +4023,13 @@ const TrussCAPI = {
                         "rotation"
                     ],
                     "desc_ja": "度で回転",
-                    "desc_ko": "도(degree)로 회전"
+                    "desc_ko": "도(degree)로 회전",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "rotateDeg",
@@ -3574,7 +4044,13 @@ const TrussCAPI = {
                         "rotation"
                     ],
                     "desc_ja": "度で回転",
-                    "desc_ko": "도(degree)로 회전"
+                    "desc_ko": "도(degree)로 회전",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "rotateXDeg",
@@ -3589,7 +4065,13 @@ const TrussCAPI = {
                         "degrees"
                     ],
                     "desc_ja": "X軸周りに回転（度）",
-                    "desc_ko": "X축을 중심으로 회전 (도)"
+                    "desc_ko": "X축을 중심으로 회전 (도)",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "rotateYDeg",
@@ -3604,7 +4086,13 @@ const TrussCAPI = {
                         "degrees"
                     ],
                     "desc_ja": "Y軸周りに回転（度）",
-                    "desc_ko": "Y축을 중심으로 회전 (도)"
+                    "desc_ko": "Y축을 중심으로 회전 (도)",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "rotateZDeg",
@@ -3619,7 +4107,13 @@ const TrussCAPI = {
                         "degrees"
                     ],
                     "desc_ja": "Z軸周りに回転（度）",
-                    "desc_ko": "Z축을 중심으로 회전 (도)"
+                    "desc_ko": "Z축을 중심으로 회전 (도)",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "scale",
@@ -3739,6 +4233,12 @@ const TrussCAPI = {
                         "Mat4",
                         "setMatrix",
                         "worldToScreen"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -3779,6 +4279,12 @@ const TrussCAPI = {
                     "related": [
                         "getMatrix",
                         "scale"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -3795,6 +4301,12 @@ const TrussCAPI = {
                     "desc_ko": "변환 행렬을 단위 행렬로 초기화",
                     "related": [
                         "setMatrix"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -3815,6 +4327,12 @@ const TrussCAPI = {
                         "Mat4",
                         "setMatrix",
                         "translate"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -3835,6 +4353,12 @@ const TrussCAPI = {
                         "Mat4",
                         "multMatrix",
                         "resetMatrix"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -3938,6 +4462,10 @@ const TrussCAPI = {
                         {
                             "name": "fileDialogExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -3968,6 +4496,12 @@ const TrussCAPI = {
                         "confirmDialogAsync",
                         "alertDialog"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platformNote": "Async alert. Real on iOS via UIAlertController. Android only prints to logcat then fires the callback (no UI dialog).",
                     "platformNote_ja": "非同期アラート。iOS は UIAlertController で実装あり。Android は logcat 出力後にコールバックを呼ぶだけで UI ダイアログは出ない。"
                 },
@@ -3988,6 +4522,12 @@ const TrussCAPI = {
                     "related": [
                         "confirmDialogAsync",
                         "alertDialog"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platforms": [
                         "macos",
@@ -4017,6 +4557,12 @@ const TrussCAPI = {
                         "alertDialogAsync",
                         "confirmDialog"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platformNote": "Async confirm. Real on iOS via UIAlertController Yes/No. Android immediately calls back with false (no dialog).",
                     "platformNote_ja": "非同期確認。iOS は UIAlertController の Yes/No で実装あり。Android はダイアログを出さず即座に false でコールバックする。"
                 },
@@ -4045,6 +4591,10 @@ const TrussCAPI = {
                         {
                             "name": "fileDialogExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -4053,8 +4603,8 @@ const TrussCAPI = {
                         "linux",
                         "android"
                     ],
-                    "platformNote": "Sync file/folder open. iOS no-ops (use loadDialogAsync); Android returns empty result (no JNI Intent yet); Web/WASM logs a warning and returns empty.",
-                    "platformNote_ja": "同期のファイル/フォルダ選択。iOS はスタブ（loadDialogAsync を使う）、Android は空の結果を返す（JNI Intent 未実装）、Web/WASM は警告を出して空を返す。"
+                    "platformNote": "Sync file/folder open. iOS logs an error and returns an empty result (use loadDialogAsync); Android returns empty result (no JNI Intent yet); Web/WASM logs a warning and returns empty.",
+                    "platformNote_ja": "同期のファイル/フォルダ選択。iOS はエラーログを出して空の結果を返すスタブ（loadDialogAsync を使う）、Android は空の結果を返す（JNI Intent 未実装）、Web/WASM は警告を出して空を返す。"
                 },
                 {
                     "name": "loadDialogAsync",
@@ -4074,6 +4624,12 @@ const TrussCAPI = {
                         "FileDialogResult",
                         "saveDialogAsync",
                         "loadDialog"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platformNote": "Async file/folder open. Real on iOS via UIDocumentPickerViewController. Android calls back with empty result (no JNI Intent); Web/WASM calls back with empty (warning logged).",
                     "platformNote_ja": "非同期のファイル/フォルダ選択。iOS は UIDocumentPickerViewController で実装あり。Android は空の結果でコールバック（JNI Intent 未実装）、Web/WASM も空でコールバック（警告ログ）。"
@@ -4102,6 +4658,10 @@ const TrussCAPI = {
                         {
                             "name": "fileDialogExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -4110,8 +4670,8 @@ const TrussCAPI = {
                         "linux",
                         "android"
                     ],
-                    "platformNote": "Sync file save. iOS no-ops (use saveDialogAsync); Android returns empty result (no JNI Intent yet); Web/WASM logs a warning and returns empty.",
-                    "platformNote_ja": "同期のファイル保存。iOS はスタブ（saveDialogAsync を使う）、Android は空の結果を返す（JNI Intent 未実装）、Web/WASM は警告を出して空を返す。"
+                    "platformNote": "Sync file save. iOS logs an error and returns an empty result (use saveDialogAsync); Android returns empty result (no JNI Intent yet); Web/WASM logs a warning and returns empty.",
+                    "platformNote_ja": "同期のファイル保存。iOS はエラーログを出して空の結果を返すスタブ（saveDialogAsync を使う）、Android は空の結果を返す（JNI Intent 未実装）、Web/WASM は警告を出して空を返す。"
                 },
                 {
                     "name": "saveDialogAsync",
@@ -4130,6 +4690,12 @@ const TrussCAPI = {
                         "FileDialogResult",
                         "loadDialogAsync",
                         "saveDialog"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platformNote": "Async file save. Real on iOS via UIDocumentPickerViewController export. Android calls back with empty result (no JNI Intent); Web/WASM calls back with empty (warning logged).",
                     "platformNote_ja": "非同期のファイル保存。iOS は UIDocumentPickerViewController のエクスポートで実装あり。Android は空の結果でコールバック（JNI Intent 未実装）、Web/WASM も空でコールバック（警告ログ）。"
@@ -4221,6 +4787,10 @@ const TrussCAPI = {
                         {
                             "name": "mouseExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -4245,6 +4815,10 @@ const TrussCAPI = {
                         {
                             "name": "mouseExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -4324,6 +4898,12 @@ const TrussCAPI = {
                         "getGlobalMousePos",
                         "getMouseButton",
                         "isMousePressed"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4344,6 +4924,12 @@ const TrussCAPI = {
                         "getMousePos",
                         "getGlobalMouseX",
                         "getGlobalMouseY"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4363,6 +4949,12 @@ const TrussCAPI = {
                     "related": [
                         "hideCursor",
                         "setCursor"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4382,6 +4974,12 @@ const TrussCAPI = {
                     "related": [
                         "showCursor",
                         "setCursor"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4409,6 +5007,10 @@ const TrussCAPI = {
                         {
                             "name": "cursorExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -4429,6 +5031,12 @@ const TrussCAPI = {
                     "related": [
                         "Cursor",
                         "setCursor"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4455,6 +5063,10 @@ const TrussCAPI = {
                         {
                             "name": "cursorExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -4482,6 +5094,10 @@ const TrussCAPI = {
                         {
                             "name": "cursorExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -4503,6 +5119,12 @@ const TrussCAPI = {
                         "Cursor",
                         "bindCursorImage",
                         "setCursor"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4561,6 +5183,12 @@ const TrussCAPI = {
                         "setWindowSize",
                         "getFramebufferWidth",
                         "getAspectRatio"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4618,6 +5246,10 @@ const TrussCAPI = {
                         {
                             "name": "mouseExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -4639,6 +5271,12 @@ const TrussCAPI = {
                         "isMousePressed",
                         "isShiftPressed",
                         "isControlPressed"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4659,6 +5297,12 @@ const TrussCAPI = {
                         "isControlPressed",
                         "isAltPressed",
                         "isSuperPressed"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4680,6 +5324,12 @@ const TrussCAPI = {
                         "isShiftPressed",
                         "isAltPressed",
                         "isSuperPressed"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4701,6 +5351,12 @@ const TrussCAPI = {
                         "isShiftPressed",
                         "isControlPressed",
                         "isSuperPressed"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4722,6 +5378,12 @@ const TrussCAPI = {
                         "isShiftPressed",
                         "isControlPressed",
                         "isAltPressed"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4740,6 +5402,12 @@ const TrussCAPI = {
                     "desc_ko": "터치 이벤트를 마우스 이벤트로 발생시킬지 설정 (Android/iOS용)",
                     "related": [
                         "getTouchAsMouse"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4758,6 +5426,12 @@ const TrussCAPI = {
                     "desc_ko": "touchAsMouse 상태를 얻음",
                     "related": [
                         "setTouchAsMouse"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4780,7 +5454,13 @@ const TrussCAPI = {
                         "events",
                         "ExitRequestEventArgs"
                     ],
-                    "details": "Fires events().exitRequested (an Event<ExitRequestEventArgs>) before quitting. A\nlistener can veto the exit by setting args.cancel = true — useful for \"save before\nquit?\" prompts. Use exitApp() instead for an immediate, non-cancellable quit.\n\n    listener_ = events().exitRequested.listen([this](ExitRequestEventArgs& e){\n        if (hasUnsavedChanges) e.cancel = true;   // stops the exit\n    });"
+                    "details": "Fires events().exitRequested (an Event<ExitRequestEventArgs>) before quitting. A\nlistener can veto the exit by setting args.cancel = true — useful for \"save before\nquit?\" prompts. Use exitApp() instead for an immediate, non-cancellable quit.\n\n    listener_ = events().exitRequested.listen([this](ExitRequestEventArgs& e){\n        if (hasUnsavedChanges) e.cancel = true;   // stops the exit\n    });",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "exitApp",
@@ -4799,6 +5479,12 @@ const TrussCAPI = {
                     "desc_ko": "어플리케이션을 즉시 종료 (취소 불가)",
                     "related": [
                         "requestExitApp"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4819,6 +5505,12 @@ const TrussCAPI = {
                     "related": [
                         "isOverlayFocused",
                         "isMousePressed"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -4839,6 +5531,12 @@ const TrussCAPI = {
                     "related": [
                         "isOverlayHovered",
                         "isKeyPressed"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -4862,7 +5560,13 @@ const TrussCAPI = {
                         "milliseconds"
                     ],
                     "desc_ja": "指定したミリ秒だけ現在のスレッドをブロック",
-                    "desc_ko": "지정한 밀리초만큼 현재 스레드를 블록"
+                    "desc_ko": "지정한 밀리초만큼 현재 스레드를 블록",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "sleepMicros",
@@ -4878,7 +5582,13 @@ const TrussCAPI = {
                         "microseconds"
                     ],
                     "desc_ja": "指定したマイクロ秒だけ現在のスレッドをブロック",
-                    "desc_ko": "지정한 마이크로초만큼 현재 스레드를 블록"
+                    "desc_ko": "지정한 마이크로초만큼 현재 스레드를 블록",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getFrameCount",
@@ -4893,7 +5603,13 @@ const TrussCAPI = {
                         "tick"
                     ],
                     "desc_ja": "描画されたフレーム数",
-                    "desc_ko": "렌더링된 총 프레임 수"
+                    "desc_ko": "렌더링된 총 프레임 수",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getUpdateCount",
@@ -4913,6 +5629,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -4934,6 +5654,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -4942,7 +5666,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "double",
-                    "desc": "Seconds since last frame",
+                    "desc": "Seconds since the previous update. Measured wall time in VSYNC / setFps modes; in fixed-Hz update mode (setIndependentFps with an update rate) and in runHeadlessApp every step reports exactly 1 / updateFps. Per window; a secondary window still measures its delta with high_resolution_clock (the system clock on Linux) until #307: a forward system clock step (NTP, a manual change) lands in one delta, so that window's due Node timers fire at once, and an uncapped callEveryCatchUp fires once per interval of the step; a backward step makes one delta negative: getDeltaTime() is negative on that tick and the window's Node timers are not counted down on it",
                     "keywords": [
                         "dt",
                         "elapsed",
@@ -4950,8 +5674,13 @@ const TrussCAPI = {
                         "timestep",
                         "interval"
                     ],
-                    "desc_ja": "前フレームからの経過秒数",
-                    "desc_ko": "이전 프레임으로부터의 경과 시간(초)",
+                    "desc_ja": "前回の update からの経過秒数。VSYNC / setFps モードでは実測時間。固定Hz update モード（update レートを指定した setIndependentFps）と runHeadlessApp では各ステップが正確に 1 / updateFps を返す。ウィンドウごと。サブウィンドウは #307 までは high_resolution_clock（Linux ではシステム時計）で測るので、システム時刻が先へ飛ぶ（NTP や手動変更）とその分が1回の delta に入り、そのウィンドウの期限が来た Node タイマーが一度に発火し、上限なしの callEveryCatchUp は飛んだ分のインターバルの回数だけ呼ばれる。時刻が戻ると delta が1回負になり、そのティックでは getDeltaTime() が負で、そのウィンドウの Node タイマーはカウントダウンされない",
+                    "desc_ko": "이전 update로부터의 경과 시간(초). VSYNC / setFps 모드에서는 실측 시간. 고정 Hz update 모드(update 레이트를 지정한 setIndependentFps)와 runHeadlessApp에서는 각 스텝이 정확히 1 / updateFps를 반환. 윈도우별. 보조 윈도우는 #307까지는 high_resolution_clock(Linux에서는 시스템 시계)으로 재므로, 시스템 시각이 앞으로 뛰면(NTP, 수동 변경) 그만큼이 한 번의 delta에 들어가 그 윈도우의 만기된 Node 타이머가 한꺼번에 실행되고, 상한 없는 callEveryCatchUp은 뛴 시간의 인터벌 수만큼 호출된다. 시각이 뒤로 가면 delta가 한 번 음수가 되어, 그 틱에서는 getDeltaTime()이 음수이고 그 윈도우의 Node 타이머는 카운트다운되지 않는다",
+                    "related": [
+                        "getFrameRate",
+                        "setIndependentFps",
+                        "getFrameElapsedTime"
+                    ],
                     "examples": [
                         {
                             "name": "vectorMathExample",
@@ -4968,7 +5697,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "double",
-                    "desc": "Current FPS",
+                    "desc": "Measured update rate (updates per second over the last 10 frames). In fixed-Hz update mode and runHeadlessApp this is the measured rate, not the configured one: the fixed steps are counted by the time they consumed, so it reads steady when the rate isn't a multiple of the frame rate and drops when time is dropped. Recorded by the main loop and runHeadlessApp; in a secondary window each call currently adds the window's last delta and returns the average of the last 10 calls, so reading it once per second gives a ~10 s average",
                     "keywords": [
                         "fps",
                         "framerate",
@@ -4976,8 +5705,13 @@ const TrussCAPI = {
                         "refresh",
                         "performance"
                     ],
-                    "desc_ja": "現在のFPS",
-                    "desc_ko": "현재 FPS",
+                    "desc_ja": "実測の update レート（直近10フレームの1秒あたり update 回数）。固定Hz update モードと runHeadlessApp でも設定値ではなく実測値。固定ステップは消費した時間で数えるので、フレームレートの整数倍でないレートでも値が揺れず、時間が捨てられると下がる。メインループと runHeadlessApp が記録する。サブウィンドウでは今のところ、呼ぶたびにそのウィンドウの直近の delta を加えて直近10回の呼び出しの平均を返すので、1秒に1回読むと約10秒の平均になる",
+                    "desc_ko": "실측 update 레이트(최근 10프레임의 초당 update 횟수). 고정 Hz update 모드와 runHeadlessApp에서도 설정값이 아닌 실측값. 고정 스텝은 소비한 시간으로 세므로 프레임레이트의 정수배가 아닌 레이트에서도 값이 흔들리지 않고, 시간이 버려지면 내려간다. 메인 루프와 runHeadlessApp이 기록한다. 보조 윈도우에서는 지금은 호출할 때마다 그 윈도우의 최근 delta를 더해 최근 10회 호출의 평균을 반환하므로, 1초에 한 번 읽으면 약 10초의 평균이 된다",
+                    "related": [
+                        "getFps",
+                        "getDeltaTime",
+                        "getFpsSettings"
+                    ],
                     "examples": [
                         {
                             "name": "fontTategakiExample",
@@ -5014,6 +5748,10 @@ const TrussCAPI = {
                         {
                             "name": "loopModeExample",
                             "group": "windowing"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -5022,7 +5760,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "float",
-                    "desc": "Get current FPS (alias for getFrameRate)",
+                    "desc": "Get the measured FPS (alias for getFrameRate). In a secondary window it is currently the average of the last 10 calls, like getFrameRate()",
                     "keywords": [
                         "framerate",
                         "speed",
@@ -5030,8 +5768,8 @@ const TrussCAPI = {
                         "rate",
                         "performance"
                     ],
-                    "desc_ja": "現在のFPSを取得（getFrameRateのエイリアス）",
-                    "desc_ko": "현재 FPS를 얻음 (getFrameRate의 별칭)",
+                    "desc_ja": "実測のFPSを取得（getFrameRateのエイリアス）。サブウィンドウでは getFrameRate() と同じく、今のところ直近10回の呼び出しの平均",
+                    "desc_ko": "실측 FPS를 얻음 (getFrameRate의 별칭). 보조 윈도우에서는 getFrameRate()와 같이 지금은 최근 10회 호출의 평균",
                     "related": [
                         "setFps",
                         "getFpsSettings"
@@ -5076,6 +5814,12 @@ const TrussCAPI = {
                     "related": [
                         "getSokolMemoryAllocs",
                         "getMemoryUsage"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -5096,6 +5840,12 @@ const TrussCAPI = {
                     "related": [
                         "getSokolMemoryBytes",
                         "getMemoryUsage"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -5115,6 +5865,12 @@ const TrussCAPI = {
                     "desc_ko": "sokol_gl의 정점/커맨드 버퍼를 해제 (다음 드로우 시 자동 재할당)",
                     "related": [
                         "getSokolMemoryBytes"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -5135,6 +5891,12 @@ const TrussCAPI = {
                     "related": [
                         "getSokolMemoryBytes",
                         "getThermalState"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -5154,6 +5916,12 @@ const TrussCAPI = {
                     "related": [
                         "getFboCount",
                         "getTextureCount"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -5172,6 +5940,12 @@ const TrussCAPI = {
                     "related": [
                         "getFboCount",
                         "getNodeCount"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -5191,6 +5965,12 @@ const TrussCAPI = {
                     "related": [
                         "getTextureCount",
                         "getNodeCount"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -5224,6 +6004,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5254,6 +6038,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5283,6 +6071,12 @@ const TrussCAPI = {
                         "grabScreen",
                         "saveScreenshot"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -5290,8 +6084,8 @@ const TrussCAPI = {
                         "ios",
                         "android"
                     ],
-                    "platformNote": "Web is unimplemented (logs warning, returns false). All native backends read back the framebuffer.",
-                    "platformNote_ja": "Web は未実装（警告を出して false）。ネイティブは全てフレームバッファを読み戻す。"
+                    "platformNote": "Not implemented on web (no canvas readback): always returns false and logs a one-time warning. Take screenshots with the browser's own tools there. All native backends read back the framebuffer.",
+                    "platformNote_ja": "Web では未実装（canvas の読み戻しはない）: 常に false を返し、警告を1回だけ出す。Web ではブラウザ自身のスクリーンショット機能を使う。ネイティブは全てフレームバッファを読み戻す。"
                 },
                 {
                     "name": "getSystemVolume",
@@ -5315,6 +6109,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platformNote": "Returns -1 on Windows, Linux and Web (no implementation).",
@@ -5337,6 +6135,12 @@ const TrussCAPI = {
                     "desc_ko": "시스템 출력 볼륨을 설정 (0.0-1.0). iOS: OS가 미지원 (경고 로그 출력)",
                     "related": [
                         "getSystemVolume"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platformNote": "No-op on iOS (explicitly unsupported), Windows, Linux and Web.",
                     "platformNote_ja": "iOS（明示的に非対応）/ Windows / Linux / Web では no-op。"
@@ -5363,6 +6167,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5390,6 +6198,12 @@ const TrussCAPI = {
                     "desc_ko": "화면 밝기를 설정 (0.0-1.0). 값의 의미는 플랫폼마다 다름 (iOS 선형, Android 지각적). Desktop: 미지원",
                     "related": [
                         "getSystemBrightness"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platforms": [
                         "macos",
@@ -5422,6 +6236,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5454,6 +6272,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platformNote": "Stub on ALL platforms — always returns -1 (no OS exposes a raw temperature value).",
@@ -5481,6 +6303,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5511,6 +6337,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5544,6 +6374,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5576,6 +6410,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5610,6 +6448,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5642,6 +6484,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5672,6 +6518,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5704,6 +6554,10 @@ const TrussCAPI = {
                         {
                             "name": "systemInfoExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ],
                     "platforms": [
@@ -5775,21 +6629,31 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "void",
-                    "desc": "Reset elapsed time",
+                    "desc": "Restart the elapsed-time counter: getElapsedTime/f/Millis/Micros and getFrameElapsedTime count from 0 again. Display only: Node timers, the loop, recording and the tc_get_health uptime keep running on the underlying clock. A duration taken as the difference of two of those readings across a reset comes out wrong (negative, or wrapped for the unsigned Millis/Micros); measure durations with getSystemTimeMicros()",
                     "keywords": [
                         "clear",
                         "restart",
                         "zero"
                     ],
-                    "desc_ja": "経過時間をリセット",
-                    "desc_ko": "경과 시간을 초기화"
+                    "desc_ja": "経過時間カウンタを0から数え直す（getElapsedTime/f/Millis/Micros と getFrameElapsedTime が対象）。表示上のリセットのみで、Nodeタイマー・ループ・録画・tc_get_health の uptime は内部のクロックで動き続ける。リセットをまたいだ2回の値の差は経過時間にならない（負になる。符号なしの Millis/Micros では巻き戻る）ので、時間計測は getSystemTimeMicros() で行う",
+                    "desc_ko": "경과 시간 카운터를 0부터 다시 센다(getElapsedTime/f/Millis/Micros와 getFrameElapsedTime 대상). 표시상의 리셋일 뿐이며 Node 타이머, 루프, 녹화, tc_get_health의 uptime은 내부 시계로 계속 동작한다. 리셋을 사이에 둔 두 값의 차이는 경과 시간이 되지 않으므로(음수가 되고, 부호 없는 Millis/Micros는 되감긴다) 시간 측정은 getSystemTimeMicros()로 한다",
+                    "related": [
+                        "getElapsedTime",
+                        "getFrameElapsedTime"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getElapsedTimef",
                     "params": "",
                     "params_typed": "",
                     "return_type": "float",
-                    "desc": "Elapsed seconds (float)",
+                    "desc": "Elapsed seconds (float) since program start. Same clock as getElapsedTime(); a float loses precision after about a day of uptime (7.8 ms steps at 18 h), so use it for animation and display, and getElapsedTime() (double) where precision matters",
                     "keywords": [
                         "time",
                         "seconds",
@@ -5797,8 +6661,13 @@ const TrussCAPI = {
                         "runtime",
                         "clock"
                     ],
-                    "desc_ja": "経過秒数（float）",
-                    "desc_ko": "경과 시간(초, float)",
+                    "desc_ja": "プログラム開始からの経過秒数（float）。getElapsedTime() と同じクロック。float は稼働約1日で精度が落ちる（18時間で7.8ms刻み）ので、アニメーションや表示用に使い、精度が要るところでは getElapsedTime()（double）を使う",
+                    "desc_ko": "프로그램 시작 이후 경과 시간(초, float). getElapsedTime()과 같은 시계. float는 가동 약 하루 후 정밀도가 떨어지므로(18시간에 7.8ms 단위) 애니메이션·표시용으로 쓰고, 정밀도가 필요한 곳에는 getElapsedTime()(double)을 쓴다",
+                    "related": [
+                        "getElapsedTime",
+                        "getFrameElapsedTime",
+                        "resetElapsedTimeCounter"
+                    ],
                     "examples": [
                         {
                             "name": "emptyExample",
@@ -5811,19 +6680,23 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "uint64_t",
-                    "desc": "Elapsed milliseconds (int64)",
+                    "desc": "Elapsed milliseconds (uint64) since program start. Same clock as getElapsedTime()",
                     "keywords": [
                         "milliseconds",
                         "uptime",
                         "runtime",
                         "clock"
                     ],
-                    "desc_ja": "経過ミリ秒（int64）",
-                    "desc_ko": "경과 시간(밀리초, int64)",
+                    "desc_ja": "プログラム開始からの経過ミリ秒（uint64）。getElapsedTime() と同じクロック",
+                    "desc_ko": "프로그램 시작 이후 경과 밀리초(uint64). getElapsedTime()과 같은 시계",
                     "examples": [
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -5832,31 +6705,40 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "uint64_t",
-                    "desc": "Elapsed microseconds (int64)",
+                    "desc": "Elapsed microseconds (uint64) since program start. Same clock as getElapsedTime()",
                     "keywords": [
                         "microseconds",
                         "uptime",
                         "runtime",
                         "clock"
                     ],
-                    "desc_ja": "経過マイクロ秒（int64）",
-                    "desc_ko": "경과 시간(마이크로초, int64)"
+                    "desc_ja": "プログラム開始からの経過マイクロ秒（uint64）。getElapsedTime() と同じクロック",
+                    "desc_ko": "프로그램 시작 이후 경과 마이크로초(uint64). getElapsedTime()과 같은 시계",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getElapsedTime",
                     "params": "",
                     "params_typed": "",
                     "return_type": "double",
-                    "desc": "Elapsed seconds (double) since program start. A separate clock from getElapsedTimef(); it is NOT reset by resetElapsedTimeCounter().",
+                    "desc": "Elapsed seconds (double) since program start, on a steady clock (system clock changes don't affect it). The same clock as getElapsedTimef/Millis/Micros: resetElapsedTimeCounter() restarts all of them, so the difference of two readings is only a duration if nothing resets the counter in between. Keeps full precision where getElapsedTimef() loses it after long uptimes",
                     "keywords": [
                         "seconds",
                         "uptime",
                         "runtime",
                         "clock"
                     ],
-                    "desc_ja": "プログラム開始からの経過秒（double）。getElapsedTimef() とは別クロックで、resetElapsedTimeCounter() の影響を受けない。",
-                    "desc_ko": "프로그램 시작 이후 경과 초(double). getElapsedTimef()와는 별개의 시계이며 resetElapsedTimeCounter()의 영향을 받지 않는다.",
+                    "desc_ja": "プログラム開始からの経過秒（double）。steady clock なのでシステム時刻の変更の影響を受けない。getElapsedTimef/Millis/Micros と同じクロックで、resetElapsedTimeCounter() でこれら全てが0から数え直すので、2回の値の差が経過時間になるのは間にリセットがない場合だけ。長時間稼働で精度が落ちる getElapsedTimef() と違い、精度を保つ",
+                    "desc_ko": "프로그램 시작 이후 경과 초(double). steady clock이라 시스템 시각 변경의 영향을 받지 않는다. getElapsedTimef/Millis/Micros와 같은 시계이며 resetElapsedTimeCounter()로 이들 모두가 0부터 다시 세므로, 두 값의 차이가 경과 시간이 되는 것은 그 사이에 리셋이 없을 때뿐이다. 장시간 가동에서 정밀도가 떨어지는 getElapsedTimef()와 달리 정밀도를 유지한다",
                     "related": [
+                        "getElapsedTimef",
+                        "getFrameElapsedTime",
+                        "resetElapsedTimeCounter",
                         "getElapsedTimeMillis",
                         "getElapsedTimeMicros"
                     ],
@@ -5864,6 +6746,34 @@ const TrussCAPI = {
                         {
                             "name": "vectorMathExample",
                             "group": "math"
+                        }
+                    ]
+                },
+                {
+                    "name": "getFrameElapsedTime",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "double",
+                    "desc": "Elapsed seconds (double) sampled once at the start of the current frame, so every update step and the draw of one frame see the same value (getElapsedTime() moves during the frame). Same clock and reset as getElapsedTime(). Sampled by the main loop and runHeadlessApp; in a secondary window it currently returns the live getElapsedTime()",
+                    "keywords": [
+                        "time",
+                        "seconds",
+                        "animation",
+                        "per frame",
+                        "consistent",
+                        "clock"
+                    ],
+                    "desc_ja": "現在のフレーム開始時に1回だけ取った経過秒（double）。1フレーム内の全 update ステップと draw が同じ値を見る（getElapsedTime() はフレーム中も進む）。クロックとリセットは getElapsedTime() と同じ。メインループと runHeadlessApp が取得する。サブウィンドウでは今のところ getElapsedTime() の現在値を返す",
+                    "desc_ko": "현재 프레임 시작 시 한 번만 샘플링한 경과 초(double). 한 프레임 안의 모든 update 스텝과 draw가 같은 값을 본다(getElapsedTime()은 프레임 중에도 진행). 시계와 리셋은 getElapsedTime()과 같다. 메인 루프와 runHeadlessApp이 샘플링한다. 보조 윈도우에서는 지금은 getElapsedTime()의 현재 값을 반환한다",
+                    "related": [
+                        "getElapsedTime",
+                        "getDeltaTime",
+                        "resetElapsedTimeCounter"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 }
@@ -5879,7 +6789,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "uint64_t",
-                    "desc": "Unix time in milliseconds",
+                    "desc": "Unix time in milliseconds (wall clock). It follows system clock adjustments, so take differences as int64_t (see getSystemTimeMicros)",
                     "keywords": [
                         "unix",
                         "epoch",
@@ -5887,15 +6797,25 @@ const TrussCAPI = {
                         "wallclock",
                         "timestamp"
                     ],
-                    "desc_ja": "Unix時間（ミリ秒）",
-                    "desc_ko": "Unix 시간(밀리초)"
+                    "desc_ja": "Unix時間（ミリ秒、壁時計）。システム時刻の調整に追従するので、差は int64_t で取る（getSystemTimeMicros を参照）",
+                    "desc_ko": "Unix 시간(밀리초, 벽시계). 시스템 시각 조정을 따르므로 차이는 int64_t로 구한다(getSystemTimeMicros 참조)",
+                    "related": [
+                        "getSystemTimeMicros",
+                        "getElapsedTime"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getSystemTimeMicros",
                     "params": "",
                     "params_typed": "",
                     "return_type": "uint64_t",
-                    "desc": "Unix time in microseconds",
+                    "desc": "Unix time in microseconds (wall clock). To measure a duration, take the difference of two readings as int64_t: it follows system clock adjustments, so a clock step can make t1 < t0 and an unsigned difference would wrap. Unlike the getElapsedTime family, resetElapsedTimeCounter() doesn't affect it",
                     "keywords": [
                         "unix",
                         "epoch",
@@ -5903,8 +6823,18 @@ const TrussCAPI = {
                         "wallclock",
                         "timestamp"
                     ],
-                    "desc_ja": "Unix時間（マイクロ秒）",
-                    "desc_ko": "Unix 시간(마이크로초)"
+                    "desc_ja": "Unix時間（マイクロ秒、壁時計）。時間を計るときは2回の値の差を int64_t で取る。システム時刻の調整に追従するので、時刻の変更で t1 < t0 になりうり、符号なしの差は巻き戻る。getElapsedTime 系と違い resetElapsedTimeCounter() の影響は受けない",
+                    "desc_ko": "Unix 시간(마이크로초, 벽시계). 시간을 잴 때는 두 값의 차이를 int64_t로 구한다. 시스템 시각 조정을 따르므로 시각 변경으로 t1 < t0이 될 수 있고, 부호 없는 차이는 되감긴다. getElapsedTime 계열과 달리 resetElapsedTimeCounter()의 영향을 받지 않는다",
+                    "related": [
+                        "getSystemTimeMillis",
+                        "getElapsedTime"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getUnixTime",
@@ -5919,7 +6849,13 @@ const TrussCAPI = {
                         "wallclock"
                     ],
                     "desc_ja": "現在のUnixタイムスタンプ（秒）",
-                    "desc_ko": "현재 Unix 타임스탬프(초)"
+                    "desc_ko": "현재 Unix 타임스탬프(초)",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getTimestampString",
@@ -5943,6 +6879,10 @@ const TrussCAPI = {
                         {
                             "name": "fileExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -5968,6 +6908,10 @@ const TrussCAPI = {
                         {
                             "name": "fileExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 }
@@ -5996,6 +6940,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6017,6 +6965,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6038,6 +6990,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6059,6 +7015,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6080,6 +7040,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6101,6 +7065,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6123,6 +7091,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 }
@@ -6157,6 +7129,10 @@ const TrussCAPI = {
                         {
                             "name": "timerExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6184,6 +7160,10 @@ const TrussCAPI = {
                         {
                             "name": "timerExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6211,6 +7191,10 @@ const TrussCAPI = {
                         {
                             "name": "timerExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6232,6 +7216,12 @@ const TrussCAPI = {
                     "related": [
                         "random",
                         "randomSeed"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6252,6 +7242,12 @@ const TrussCAPI = {
                     "related": [
                         "random",
                         "randomSeed"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6270,6 +7266,12 @@ const TrussCAPI = {
                     "related": [
                         "random",
                         "noise"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6290,6 +7292,12 @@ const TrussCAPI = {
                     "related": [
                         "noise",
                         "fbm"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6310,6 +7318,12 @@ const TrussCAPI = {
                     "related": [
                         "noise",
                         "fbm"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6330,6 +7344,12 @@ const TrussCAPI = {
                     "related": [
                         "noise",
                         "fbm"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6350,6 +7370,12 @@ const TrussCAPI = {
                     "related": [
                         "noise",
                         "fbm"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6370,6 +7396,12 @@ const TrussCAPI = {
                     "related": [
                         "noise",
                         "fbm"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6390,6 +7422,12 @@ const TrussCAPI = {
                     "related": [
                         "noise",
                         "fbm"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6410,6 +7448,12 @@ const TrussCAPI = {
                     "related": [
                         "noise",
                         "fbm"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6435,6 +7479,10 @@ const TrussCAPI = {
                         {
                             "name": "noiseField2dExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6461,6 +7509,10 @@ const TrussCAPI = {
                         {
                             "name": "noiseField2dExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6487,6 +7539,10 @@ const TrussCAPI = {
                         {
                             "name": "noiseField2dExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6513,6 +7569,10 @@ const TrussCAPI = {
                         {
                             "name": "noiseField2dExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6539,6 +7599,10 @@ const TrussCAPI = {
                         {
                             "name": "noiseField2dExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6565,6 +7629,10 @@ const TrussCAPI = {
                         {
                             "name": "noiseField2dExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6591,6 +7659,10 @@ const TrussCAPI = {
                         {
                             "name": "noiseField2dExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6615,6 +7687,10 @@ const TrussCAPI = {
                         {
                             "name": "noiseField2dExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6639,6 +7715,10 @@ const TrussCAPI = {
                         {
                             "name": "noiseField2dExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 }
@@ -6701,6 +7781,12 @@ const TrussCAPI = {
                         "lerp",
                         "clamp",
                         "wrap"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6756,6 +7842,12 @@ const TrussCAPI = {
                     "related": [
                         "rad2deg",
                         "rotateDeg"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6780,6 +7872,10 @@ const TrussCAPI = {
                         {
                             "name": "fontPathExample",
                             "group": "font"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -6969,6 +8065,12 @@ const TrussCAPI = {
                     "desc_ko": "부호 (-1, 0, 1)",
                     "related": [
                         "abs"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -6989,6 +8091,12 @@ const TrussCAPI = {
                         "floor",
                         "fmod",
                         "wrap"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7008,6 +8116,12 @@ const TrussCAPI = {
                         "sqrt",
                         "pow",
                         "distSquared"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7029,6 +8143,12 @@ const TrussCAPI = {
                         "fmod",
                         "clamp",
                         "angleDifference"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7049,6 +8169,12 @@ const TrussCAPI = {
                         "angleDifferenceDeg",
                         "wrap",
                         "atan2"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7068,6 +8194,12 @@ const TrussCAPI = {
                     "related": [
                         "angleDifference",
                         "rad2deg"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7087,6 +8219,12 @@ const TrussCAPI = {
                     "desc_ko": "지정한 윈도우 타입에서 n개 중 i번째 샘플의 윈도우 계수를 반환",
                     "related": [
                         "WindowType"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7104,6 +8242,12 @@ const TrussCAPI = {
                     "desc_ko": "FFT 전 스펙트럼 누설을 줄이기 위해 신호에 윈도우 함수를 적용 (in-place)",
                     "related": [
                         "WindowType"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7121,6 +8265,12 @@ const TrussCAPI = {
                     "desc_ko": "FFT 전 스펙트럼 누설을 줄이기 위해 신호에 윈도우 함수를 적용 (in-place)",
                     "related": [
                         "WindowType"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7136,7 +8286,13 @@ const TrussCAPI = {
                         "bit"
                     ],
                     "desc_ja": "n が正の2のべき乗なら true を返す",
-                    "desc_ko": "n이 양의 2의 거듭제곱이면 true 반환"
+                    "desc_ko": "n이 양의 2의 거듭제곱이면 true 반환",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "nextPowerOfTwo",
@@ -7151,7 +8307,13 @@ const TrussCAPI = {
                         "binary"
                     ],
                     "desc_ja": "n 以上で最小の2のべき乗を返す",
-                    "desc_ko": "n 이상인 가장 작은 2의 거듭제곱을 반환"
+                    "desc_ko": "n 이상인 가장 작은 2의 거듭제곱을 반환",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "fft",
@@ -7167,7 +8329,13 @@ const TrussCAPI = {
                         "dft"
                     ],
                     "desc_ja": "インプレースの順方向FFT（Cooley-Tukey radix-2）。データサイズは2のべき乗でなければならない",
-                    "desc_ko": "in-place 정방향 FFT (Cooley-Tukey radix-2). 데이터 크기는 2의 거듭제곱이어야 함"
+                    "desc_ko": "in-place 정방향 FFT (Cooley-Tukey radix-2). 데이터 크기는 2의 거듭제곱이어야 함",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "ifft",
@@ -7182,7 +8350,13 @@ const TrussCAPI = {
                         "transform"
                     ],
                     "desc_ja": "インプレースの逆FFT。データサイズは2のべき乗でなければならない",
-                    "desc_ko": "in-place 역 FFT. 데이터 크기는 2의 거듭제곱이어야 함"
+                    "desc_ko": "in-place 역 FFT. 데이터 크기는 2의 거듭제곱이어야 함",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "toComplex",
@@ -7196,7 +8370,13 @@ const TrussCAPI = {
                         "convert"
                     ],
                     "desc_ja": "実数信号を虚部0の複素数配列に変換",
-                    "desc_ko": "실수 신호를 허수부가 0인 복소수 배열로 변환"
+                    "desc_ko": "실수 신호를 허수부가 0인 복소수 배열로 변환",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "fftReal",
@@ -7223,6 +8403,10 @@ const TrussCAPI = {
                         {
                             "name": "soundPlayerFFTExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -7251,6 +8435,10 @@ const TrussCAPI = {
                         {
                             "name": "soundPlayerFFTExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -7270,6 +8458,12 @@ const TrussCAPI = {
                     "desc_ko": "스펙트럼의 각 bin의 크기(진폭)를 반환",
                     "related": [
                         "fftMagnitudeDb"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7285,7 +8479,13 @@ const TrussCAPI = {
                         "loudness"
                     ],
                     "desc_ja": "各ビンの大きさをデシベルで返す、minDb にクランプ",
-                    "desc_ko": "각 bin의 크기를 데시벨로 반환, minDb로 clamp"
+                    "desc_ko": "각 bin의 크기를 데시벨로 반환, minDb로 clamp",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "fftPhase",
@@ -7299,7 +8499,13 @@ const TrussCAPI = {
                         "frequency"
                     ],
                     "desc_ja": "スペクトルの各ビンの位相角（ラジアン）を返す",
-                    "desc_ko": "스펙트럼의 각 bin의 위상각(라디안)을 반환"
+                    "desc_ko": "스펙트럼의 각 bin의 위상각(라디안)을 반환",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "fftPower",
@@ -7313,7 +8519,13 @@ const TrussCAPI = {
                         "frequency"
                     ],
                     "desc_ja": "各ビンのパワースペクトル（大きさの2乗）を返す",
-                    "desc_ko": "각 bin의 파워 스펙트럼(크기의 제곱)을 반환"
+                    "desc_ko": "각 bin의 파워 스펙트럼(크기의 제곱)을 반환",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "binToFrequency",
@@ -7327,7 +8539,13 @@ const TrussCAPI = {
                         "spectrum"
                     ],
                     "desc_ja": "FFT のビンインデックスを Hz の周波数に変換",
-                    "desc_ko": "FFT bin 인덱스를 Hz 주파수로 변환"
+                    "desc_ko": "FFT bin 인덱스를 Hz 주파수로 변환",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "frequencyToBin",
@@ -7341,7 +8559,13 @@ const TrussCAPI = {
                         "spectrum"
                     ],
                     "desc_ja": "Hz の周波数を最も近い FFT ビンインデックスに変換",
-                    "desc_ko": "Hz 주파수를 가장 가까운 FFT bin 인덱스로 변환"
+                    "desc_ko": "Hz 주파수를 가장 가까운 FFT bin 인덱스로 변환",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "abs",
@@ -7667,6 +8891,12 @@ const TrussCAPI = {
                     "related": [
                         "distSquared",
                         "sqrt"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7687,6 +8917,12 @@ const TrussCAPI = {
                     "related": [
                         "distSquared",
                         "sqrt"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7707,6 +8943,12 @@ const TrussCAPI = {
                     "related": [
                         "distSquared",
                         "sqrt"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7726,6 +8968,12 @@ const TrussCAPI = {
                     "related": [
                         "dist",
                         "sq"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7745,6 +8993,12 @@ const TrussCAPI = {
                     "related": [
                         "dist",
                         "sq"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7764,6 +9018,12 @@ const TrussCAPI = {
                     "related": [
                         "dist",
                         "sq"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -7792,6 +9052,12 @@ const TrussCAPI = {
                         "setWindowPosition",
                         "setFullscreen"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platformNote": "Desktop-only. No-op on iOS, Android and Web (always foreground / no window mgmt).",
                     "platformNote_ja": "デスクトップ専用。iOS / Android / Web では no-op（常に前面 / ウィンドウ管理なし）。"
                 },
@@ -7812,6 +9078,12 @@ const TrussCAPI = {
                     "related": [
                         "getDpiScale",
                         "getWindowPosition"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -7832,6 +9104,12 @@ const TrussCAPI = {
                     "related": [
                         "setWindowPosition",
                         "getDisplayScaleFactor"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platforms": [
                         "macos",
@@ -7859,6 +9137,12 @@ const TrussCAPI = {
                         "getWindowPosition",
                         "bringWindowToFront"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platforms": [
                         "macos",
                         "windows"
@@ -7885,6 +9169,12 @@ const TrussCAPI = {
                         "setFullscreen",
                         "setWindowSize"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platformNote": "Desktop-only (toggles WM frame). No-op on iOS, Android and Web.",
                     "platformNote_ja": "デスクトップ専用（WM フレーム切替）。iOS / Android / Web では no-op。"
                 },
@@ -7905,6 +9195,12 @@ const TrussCAPI = {
                     "related": [
                         "setWindowSize",
                         "getDpiScale"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platformNote": "No-op on Linux (not yet implemented), iOS and Android (fixed fullscreen). Web resizes the canvas.",
                     "platformNote_ja": "Linux（未実装）/ iOS / Android（全画面固定）では no-op。Web は canvas をリサイズ。"
@@ -7927,6 +9223,12 @@ const TrussCAPI = {
                     "related": [
                         "getKeepScreenOn",
                         "setImmersiveMode"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platforms": [
                         "macos",
@@ -7954,6 +9256,12 @@ const TrussCAPI = {
                     "related": [
                         "setKeepScreenOn"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -7980,6 +9288,12 @@ const TrussCAPI = {
                     "related": [
                         "getFramebufferWidth",
                         "getDisplayScaleFactor"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8001,6 +9315,12 @@ const TrussCAPI = {
                         "getFramebufferHeight",
                         "getWindowWidth",
                         "getDpiScale"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8022,6 +9342,12 @@ const TrussCAPI = {
                         "getFramebufferWidth",
                         "getWindowHeight",
                         "getDpiScale"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8063,6 +9389,10 @@ const TrussCAPI = {
                         {
                             "name": "clipboardExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -8086,6 +9416,10 @@ const TrussCAPI = {
                         {
                             "name": "clipboardExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -8107,6 +9441,12 @@ const TrussCAPI = {
                         "getWindowSize",
                         "setWindowSizeLogical",
                         "setWindowPosition"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8125,6 +9465,12 @@ const TrussCAPI = {
                     "related": [
                         "isFullscreen",
                         "toggleFullscreen"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8143,6 +9489,12 @@ const TrussCAPI = {
                     "related": [
                         "setFullscreen",
                         "toggleFullscreen"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8167,6 +9519,10 @@ const TrussCAPI = {
                         {
                             "name": "easyCamExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -8189,6 +9545,12 @@ const TrussCAPI = {
                         "Orientation",
                         "setImmersiveMode",
                         "getDeviceOrientation"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platforms": [
                         "android",
@@ -8213,6 +9575,12 @@ const TrussCAPI = {
                     "related": [
                         "getWindowSize",
                         "getWindowWidth"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8233,6 +9601,12 @@ const TrussCAPI = {
                     "related": [
                         "GraphicsBackend::name",
                         "Platform::name"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8240,18 +9614,19 @@ const TrussCAPI = {
                     "params": "updateFps, drawFps",
                     "params_typed": "float updateFps, float drawFps",
                     "return_type": "void",
-                    "desc": "Set independent update and draw frame rates",
+                    "desc": "Set independent update and draw rates. A fixed update rate runs fixed steps (getDeltaTime() is 1 / updateFps for each), at most setMaxUpdateSteps() per frame (default 10): time beyond that (after a stall, when update() is too slow, or when updateFps is more than that many times the display rate) is dropped with a one-time warning. Switching at runtime starts the new rate from the switch (no catch-up; on the next frame a fixed update rate runs one step, a VSYNC update's getDeltaTime() counts from the call, or from the update's start when called inside an update, and a fixed draw rate draws). Calling it again with the current rates does nothing, and changing only the draw rate keeps the update's phase and drops no time; switching between a synced (setFps) and an independent update counts as an update-mode change even at the same rate (setFps(VSYNC) to setIndependentFps(VSYNC, 30) drops up to a frame). Entering a fixed update rate restarts with one step, which can count more or less than the time since the last update (from a 144 Hz display to a fixed 60, the step is ~9.7 ms longer than the 1/144 s since the last update); entering a VSYNC update drops the time since the last update (under a frame in the usual modes, long only after an idle like EVENT_DRIVEN), and on that frame, called outside update(), its dt counts only from the call",
                     "keywords": [
                         "framerate",
                         "update rate",
                         "decouple",
                         "tick rate"
                     ],
-                    "desc_ja": "updateとdrawのフレームレートを個別に設定",
-                    "desc_ko": "update와 draw의 프레임레이트를 독립적으로 설정",
+                    "desc_ja": "updateとdrawのフレームレートを個別に設定。固定の update レートは固定ステップで回り（各ステップの getDeltaTime() は 1 / updateFps）、1フレームあたり最大 setMaxUpdateSteps() ステップ（既定10）。それを超える分（停止後、update() が遅すぎる場合、updateFps がディスプレイのレートのその倍数を超える場合）は捨てられ、一度だけ警告が出る。実行中の切り替えは切り替えた時点から新しいレートで始まる（取り戻しはせず、次のフレームで固定 update レートは1ステップ回り、VSYNC の update の getDeltaTime() は呼び出しから（update の中で呼んだならその update の開始から）数え、固定 draw レートは描画する）。今と同じレートで呼んでも何もせず、draw のレートだけを変えても update の位相は保たれ、時間も捨てない。ただし同期（setFps）と独立の update の切り替えは、レートが同じでも update のモードの変化として扱う（setFps(VSYNC) から setIndependentFps(VSYNC, 30) で最大1フレーム捨てる）。固定の update レートに入るときは1ステップ分で再開するので、前回の update からの時間より多くも少なくも数えうる（144Hz の表示から 60 固定で、そのステップは前回の update からの 1/144 秒より約 9.7 ms 長い）。VSYNC の update に入るときは前回の update からの時間を捨て（普段のモードなら1フレーム未満、長くなるのは EVENT_DRIVEN のアイドルのあとだけ）、そのフレームで update の外から呼んだ場合、dt は呼び出しからの時間になる",
+                    "desc_ko": "update와 draw의 프레임레이트를 독립적으로 설정. 고정 update 레이트는 고정 스텝으로 돌며(각 스텝의 getDeltaTime()은 1 / updateFps) 프레임당 최대 setMaxUpdateSteps() 스텝(기본값 10). 이를 넘는 시간(정지 후, update()가 너무 느릴 때, updateFps가 디스플레이 레이트의 그 배수를 넘을 때)은 버려지고 경고가 한 번 출력된다. 실행 중 전환은 전환 시점부터 새 레이트로 시작한다(따라잡기 없이, 다음 프레임에 고정 update 레이트는 한 스텝 돌고, VSYNC update의 getDeltaTime()은 호출 시점부터(update 안에서 호출했다면 그 update의 시작부터) 세며, 고정 draw 레이트는 그린다). 현재와 같은 레이트로 호출하면 아무것도 하지 않으며, draw 레이트만 바꾸면 update의 위상이 유지되고 시간도 버려지지 않는다. 단, 동기(setFps)와 독립 update 사이의 전환은 레이트가 같아도 update 모드의 변화로 다룬다(setFps(VSYNC)에서 setIndependentFps(VSYNC, 30)으로 바꾸면 최대 1프레임이 버려진다). 고정 update 레이트로 들어갈 때는 1스텝으로 다시 시작하므로 직전 update 이후의 시간보다 많거나 적게 셀 수 있다(144Hz 표시에서 60 고정으로 바꾸면 그 스텝은 직전 update 이후의 1/144초보다 약 9.7 ms 길다). VSYNC update로 들어갈 때는 직전 update 이후의 시간이 버려지며(평소 모드라면 1프레임 미만, 길어지는 것은 EVENT_DRIVEN 대기 뒤뿐), 그 프레임에서 update 밖에서 호출한 경우 dt는 호출 시점부터의 시간이 된다",
                     "related": [
                         "setFps",
-                        "getFpsSettings"
+                        "getFpsSettings",
+                        "setMaxUpdateSteps"
                     ],
                     "examples": [
                         {
@@ -8265,6 +9640,65 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        }
+                    ]
+                },
+                {
+                    "name": "setMaxUpdateSteps",
+                    "params": "steps",
+                    "params_typed": "int steps",
+                    "return_type": "void",
+                    "desc": "Set the most fixed-rate update steps run in one frame (setIndependentFps with an update rate) or in one runHeadlessApp loop pass. More are pending after a stall, when update() is slower than its own rate, or when the update rate is more than this many times the display rate; the time beyond the cap is dropped with a one-time warning instead of replayed. Default 10. 0 or less removes the cap so every step runs (e.g. a deterministic simulation), at the cost of a freeze while a long stall is replayed and of frames that keep growing while update() is slower than its rate",
+                    "keywords": [
+                        "update cap",
+                        "catch up",
+                        "fixed step",
+                        "stall",
+                        "deterministic",
+                        "tick rate"
+                    ],
+                    "desc_ja": "1フレーム（update レートを指定した setIndependentFps）または runHeadlessApp のループ1周で回す固定レート update ステップの最大数を設定する。停止のあと、update() が自分のレートに追いつかないとき、update レートがディスプレイのレートのこの倍数を超えるときにステップが溜まり、上限を超えた分の時間は再実行せずに捨てられ、一度だけ警告が出る。既定は10。0以下にすると上限がなくなり全ステップを回す（決定的なシミュレーションなど）が、長い停止のあとは再実行の間止まり、update() がレートに追いつかない間はフレームが伸び続ける",
+                    "desc_ko": "한 프레임(update 레이트를 지정한 setIndependentFps) 또는 runHeadlessApp 루프 1회에서 돌리는 고정 레이트 update 스텝의 최대 수를 설정한다. 정지 후, update()가 자신의 레이트를 따라가지 못할 때, update 레이트가 디스플레이 레이트의 이 배수를 넘을 때 스텝이 쌓이며, 상한을 넘는 시간은 다시 실행하지 않고 버려지고 경고가 한 번 출력된다. 기본값은 10. 0 이하로 하면 상한이 없어져 모든 스텝을 돌리지만(결정적 시뮬레이션 등), 긴 정지 후에는 재실행하는 동안 멈추고 update()가 레이트를 따라가지 못하는 동안에는 프레임이 계속 길어진다",
+                    "related": [
+                        "getMaxUpdateSteps",
+                        "setIndependentFps",
+                        "runHeadlessApp",
+                        "Node::callEveryCatchUp"
+                    ],
+                    "examples": [
+                        {
+                            "name": "loopModeExample",
+                            "group": "windowing"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "getMaxUpdateSteps",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "The cap on fixed-rate update steps per frame (and per runHeadlessApp loop pass) set by setMaxUpdateSteps(). 10 by default; 0 or less means no cap",
+                    "keywords": [
+                        "update cap",
+                        "catch up",
+                        "fixed step",
+                        "stall",
+                        "tick rate"
+                    ],
+                    "desc_ja": "setMaxUpdateSteps() で設定した、1フレーム（runHeadlessApp ではループ1周）あたりの固定レート update ステップの上限。既定は10で、0以下は上限なし",
+                    "desc_ko": "setMaxUpdateSteps()로 설정한, 프레임당(runHeadlessApp에서는 루프 1회당) 고정 레이트 update 스텝의 상한. 기본값은 10이며 0 이하는 상한 없음",
+                    "related": [
+                        "setMaxUpdateSteps",
+                        "setIndependentFps"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -8290,6 +9724,10 @@ const TrussCAPI = {
                         {
                             "name": "loopModeExample",
                             "group": "windowing"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -8312,27 +9750,58 @@ const TrussCAPI = {
                         "Pixels",
                         "saveScreenshot",
                         "captureWindow"
-                    ]
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Not implemented on web (no canvas readback): always returns false and logs a one-time warning. Take screenshots with the browser's own tools there.",
+                    "platformNote_ja": "Web では未実装（canvas の読み戻しはない）: 常に false を返し、警告を1回だけ出す。Web ではブラウザ自身のスクリーンショット機能を使う。"
                 },
                 {
                     "name": "saveScreenshot",
                     "params": "path",
                     "params_typed": "const std::filesystem::path & path",
                     "return_type": "bool",
-                    "desc": "Save a screenshot of the rendered frame (png/jpg/bmp). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written.",
+                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written.",
                     "keywords": [
                         "capture",
                         "png",
                         "export",
                         "save image"
                     ],
-                    "desc_ja": "描画済みフレームのスクショを保存（png/jpg/bmp）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueは「保存先を準備しキューに積めた（親フォルダ生成・書き込み可）」の意味で、ファイル書き込み完了ではない",
-                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(png/jpg/bmp). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 '대상 준비 및 캡처 큐 등록 성공(상위 폴더 생성·쓰기 가능)'을 의미하며 파일 기록 완료가 아님",
+                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueは「保存先を準備しキューに積めた（親フォルダ生成・書き込み可）」の意味で、ファイル書き込み完了ではない",
+                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 '대상 준비 및 캡처 큐 등록 성공(상위 폴더 생성·쓰기 가능)'을 의미하며 파일 기록 완료가 아님",
                     "related": [
                         "grabScreen",
                         "startRecording",
                         "captureWindow"
-                    ]
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ],
+                    "platformNote": "Formats: png/jpg/bmp on Linux and Android; macOS also writes tiff/tif and gif; Windows also writes tga; iOS writes only png and jpg/jpeg. Any other extension saves PNG data at the given path, except on Windows, which appends \".png\" to it. Not implemented on web (no canvas readback): always returns false without queuing anything, since no file could be written, and logs a one-time warning pointing to the browser's own screenshot feature.",
+                    "platformNote_ja": "対応形式: Linux と Android は png/jpg/bmp。macOS はさらに tiff/tif と gif、Windows はさらに tga に対応。iOS は png と jpg/jpeg のみ。それ以外の拡張子は指定パスに PNG データで保存する（Windows のみパスに \".png\" を付け足す）。Web では未実装（canvas の読み戻しはない）: ファイルを書けないので何もキューに積まず常に false を返し、ブラウザ自身のスクリーンショット機能を案内する警告を1回だけ出す。",
+                    "platformNote_ko": "지원 형식: Linux와 Android는 png/jpg/bmp. macOS는 추가로 tiff/tif와 gif, Windows는 추가로 tga를 지원. iOS는 png와 jpg/jpeg만 지원. 그 밖의 확장자는 지정한 경로에 PNG 데이터로 저장(Windows만 경로에 \".png\"를 덧붙임). Web에서는 미구현(canvas 읽기 불가): 파일을 쓸 수 없으므로 아무것도 큐에 넣지 않고 항상 false를 반환하며, 브라우저 자체 스크린샷 기능을 안내하는 경고를 한 번만 출력."
                 },
                 {
                     "name": "startRecording",
@@ -8496,6 +9965,12 @@ const TrussCAPI = {
                         "startRecording",
                         "recordingFrameCount",
                         "recordingPath"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8515,6 +9990,12 @@ const TrussCAPI = {
                         "isRecording",
                         "recordingPath",
                         "getFrameCount"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8534,6 +10015,12 @@ const TrussCAPI = {
                     "related": [
                         "isRecording",
                         "recordingFrameCount"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8541,18 +10028,19 @@ const TrussCAPI = {
                     "params": "settings",
                     "params_typed": "const HeadlessSettings & settings = HeadlessSettings()",
                     "return_type": "int",
-                    "desc": "Run an app class without a window or graphics context (update loop only). Template on the app type; returns the process exit code",
+                    "desc": "Run an app class without a window or graphics context (update loop only). Updates are fixed steps at the target rate (getDeltaTime() is 1 / fps), at most setMaxUpdateSteps() per loop pass (default 10; between passes the loop sleeps until the next step is due, at most 1 ms); time beyond that (after a stall, or when update() is slower than its rate) is dropped with a one-time warning. Template on the app type; returns the process exit code",
                     "keywords": [
                         "no window",
                         "offscreen",
                         "cli",
                         "server"
                     ],
-                    "desc_ja": "ウィンドウやグラフィックスコンテキストなしでアプリクラスを実行（update ループのみ）。アプリ型をテンプレート引数に取り、プロセスの終了コードを返す",
-                    "desc_ko": "윈도우나 그래픽스 컨텍스트 없이 앱 클래스를 실행 (update 루프만). 앱 타입을 템플릿 인자로 받고 프로세스 종료 코드를 반환",
+                    "desc_ja": "ウィンドウやグラフィックスコンテキストなしでアプリクラスを実行（update ループのみ）。update は目標レートの固定ステップ（getDeltaTime() は 1 / fps）で、ループ1周あたり最大 setMaxUpdateSteps() ステップ（既定10。周と周の間は次のステップの時刻まで、最長1ms スリープする）。それを超える分（停止後や update() がレートに追いつかない場合）は捨てられ、一度だけ警告が出る。アプリ型をテンプレート引数に取り、プロセスの終了コードを返す",
+                    "desc_ko": "윈도우나 그래픽스 컨텍스트 없이 앱 클래스를 실행 (update 루프만). update는 목표 레이트의 고정 스텝(getDeltaTime()은 1 / fps)으로 루프 1회당 최대 setMaxUpdateSteps() 스텝(기본값 10. 회차 사이에는 다음 스텝 시각까지, 최대 1ms 슬립). 이를 넘는 시간(정지 후, update()가 레이트를 따라가지 못할 때)은 버려지고 경고가 한 번 출력된다. 앱 타입을 템플릿 인자로 받고 프로세스 종료 코드를 반환",
                     "related": [
                         "HeadlessSettings",
-                        "runApp"
+                        "runApp",
+                        "setMaxUpdateSteps"
                     ]
                 }
             ],
@@ -8575,6 +10063,12 @@ const TrussCAPI = {
                     "desc_ko": "메인 스레드 ID를 얻음. 첫 호출 시 현재 스레드 ID를 기록하므로 처음에는 반드시 메인 스레드에서 호출해야 함",
                     "related": [
                         "isMainThread"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8591,6 +10085,12 @@ const TrussCAPI = {
                     "desc_ko": "호출 스레드가 메인(scene) 스레드인지 여부. 메인 스레드 ID는 getMainThreadId()의 첫 호출 시 기록됨",
                     "related": [
                         "getMainThreadId"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8598,7 +10098,7 @@ const TrussCAPI = {
                     "params": "fn",
                     "params_typed": "std::function<void ()> fn",
                     "return_type": "void",
-                    "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame",
+                    "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame. Each frame runs, in order, what was queued when its drain started; work queued during the drain runs in the next frame. Nothing is dropped and there is no limit (a callback may edit the tree or free something); the tc_get_health MCP tool reports the count as mainQueuePending. Code that may queue faster than the app runs it, and can drop values, keeps its own bounded or latest-value buffer",
                     "keywords": [
                         "main thread",
                         "marshal",
@@ -8606,11 +10106,17 @@ const TrussCAPI = {
                         "dispatch",
                         "sync"
                     ],
-                    "desc_ja": "コールバックをメイン（シーン）スレッドで実行。既にメインなら即時、そうでなければ次フレームにキュー",
-                    "desc_ko": "콜백을 메인(씬) 스레드에서 실행. 이미 메인이면 즉시, 아니면 다음 프레임으로 큐잉",
+                    "desc_ja": "コールバックをメイン（シーン）スレッドで実行。既にメインなら即時、そうでなければ次フレームにキュー。各フレームは、ドレイン開始時点でキューにあったものを順番に実行する。ドレイン中にキューされたものは次のフレームで実行される。何も捨てず、上限もない（コールバックはツリーを編集したり何かを解放したりしうる）。その数は MCP ツール tc_get_health が mainQueuePending として返す。アプリが処理するより速くキューしうるコードで、値を捨ててよいものは、自前で上限付きのバッファか最新値だけのバッファを持つ",
+                    "desc_ko": "콜백을 메인(씬) 스레드에서 실행. 이미 메인이면 즉시, 아니면 다음 프레임으로 큐잉. 각 프레임은 드레인 시작 시점에 큐에 있던 것을 순서대로 실행한다. 드레인 중에 큐잉된 것은 다음 프레임에 실행된다. 아무것도 버리지 않고 상한도 없다(콜백이 트리를 편집하거나 무언가를 해제할 수 있으므로). 그 개수는 MCP 도구 tc_get_health가 mainQueuePending으로 보고한다. 앱이 처리하는 것보다 빠르게 큐잉할 수 있고 값을 버려도 되는 코드는 자체적으로 상한이 있는 버퍼나 최신값 버퍼를 둔다",
                     "related": [
                         "isMainThread",
                         "Node::callAfterAsync"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8629,6 +10135,12 @@ const TrussCAPI = {
                         "LogLevel",
                         "logAt",
                         "setConsoleLogLevel"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8648,6 +10160,43 @@ const TrussCAPI = {
                         "setConsoleLogLevel",
                         "setLogFile",
                         "logAt"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "setLogLevel",
+                    "params": "level",
+                    "params_typed": "LogLevel level",
+                    "return_type": "void",
+                    "desc": "Set the console, file and system log levels at once (a later per-output call wins)",
+                    "keywords": [
+                        "verbosity",
+                        "filter",
+                        "log level",
+                        "all outputs"
+                    ],
+                    "desc_ja": "コンソール・ファイル・システムのログレベルを一度に設定（後の出力ごとの呼び出しが優先）",
+                    "desc_ko": "콘솔·파일·시스템 로그 레벨을 한 번에 설정 (이후의 출력별 호출이 우선)",
+                    "related": [
+                        "LogLevel",
+                        "setConsoleLogLevel",
+                        "setFileLogLevel",
+                        "setSystemLogLevel",
+                        "Logger"
+                    ],
+                    "details": "Sets the console, file and system levels at once. It overwrites them when called; a later `setConsoleLogLevel()` / `setFileLogLevel()` / `setSystemLogLevel()` call wins. There is no `getLogLevel()`, since there is no single level to return. The levels of all outputs are explained under [`Logger`](#Logger).\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "details_ja": "コンソール・ファイル・システムのレベルを一度に設定する。呼んだ時点で上書きし、その後の `setConsoleLogLevel()` / `setFileLogLevel()` / `setSystemLogLevel()` が優先される。返すべき単一のレベルが無いので `getLogLevel()` は無い。各出力のレベルの全体像は [`Logger`](#Logger) を参照。\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "details_ko": "콘솔·파일·시스템 레벨을 한 번에 설정한다. 호출 시점에 덮어쓰고, 그 뒤의 `setConsoleLogLevel()` / `setFileLogLevel()` / `setSystemLogLevel()` 호출이 우선한다. 반환할 단일 레벨이 없으므로 `getLogLevel()`은 없다. 각 출력의 레벨 전체는 [`Logger`](#Logger) 참조.\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8664,14 +10213,24 @@ const TrussCAPI = {
                     "desc_ko": "콘솔에 출력할 최소 로그 레벨을 설정",
                     "related": [
                         "LogLevel",
+                        "setLogLevel",
                         "setFileLogLevel",
+                        "setSystemLogLevel",
                         "getLogger",
+                        "Logger",
                         "logNotice"
                     ],
+                    "details": "Lines below this level are not printed to the console (stdout / stderr; `os_log` on iOS, logcat on Android). Default Notice; `LogLevel::Silent` turns the console off. The levels of all outputs are explained under [`Logger`](#Logger).\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "details_ja": "このレベル未満の行はコンソール（stdout / stderr。iOS は `os_log`、Android は logcat）に出ない。既定は Notice、`LogLevel::Silent` でコンソール出力が止まる。各出力のレベルの全体像は [`Logger`](#Logger) を参照。\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "details_ko": "이 레벨 미만의 줄은 콘솔(stdout / stderr. iOS는 `os_log`, Android는 logcat)에 나오지 않는다. 기본값 Notice, `LogLevel::Silent`면 콘솔 출력이 꺼진다. 각 출력의 레벨 전체는 [`Logger`](#Logger) 참조.\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
                     "examples": [
                         {
                             "name": "jsonXmlExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -8689,8 +10248,54 @@ const TrussCAPI = {
                     "desc_ko": "로그 파일에 기록할 최소 로그 레벨을 설정",
                     "related": [
                         "LogLevel",
+                        "setLogLevel",
                         "setConsoleLogLevel",
-                        "setLogFile"
+                        "setSystemLogLevel",
+                        "setLogFile",
+                        "Logger"
+                    ],
+                    "details": "Lines below this level are not written to the log file (`setLogFile()`). Default Notice; `LogLevel::Silent` stops writing to the file. The levels of all outputs are explained under [`Logger`](#Logger).\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "details_ja": "このレベル未満の行はログファイル（`setLogFile()`）に書かれない。既定は Notice、`LogLevel::Silent` でファイルへの書き込みが止まる。各出力のレベルの全体像は [`Logger`](#Logger) を参照。\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "details_ko": "이 레벨 미만의 줄은 로그 파일(`setLogFile()`)에 기록되지 않는다. 기본값 Notice, `LogLevel::Silent`면 파일 기록이 멈춘다. 각 출력의 레벨 전체는 [`Logger`](#Logger) 참조.\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "setSystemLogLevel",
+                    "params": "level",
+                    "params_typed": "LogLevel level",
+                    "return_type": "void",
+                    "desc": "Set the minimum log level written to the OS log: os_log on macOS, OutputDebugStringW on Windows",
+                    "keywords": [
+                        "verbosity",
+                        "filter",
+                        "os_log",
+                        "OutputDebugString",
+                        "system log",
+                        "console.app",
+                        "debugview"
+                    ],
+                    "desc_ja": "OS ログに書く最小ログレベルを設定：macOS は os_log、Windows は OutputDebugStringW",
+                    "desc_ko": "OS 로그에 기록할 최소 로그 레벨을 설정: macOS는 os_log, Windows는 OutputDebugStringW",
+                    "related": [
+                        "LogLevel",
+                        "setLogLevel",
+                        "setConsoleLogLevel",
+                        "setFileLogLevel",
+                        "Logger"
+                    ],
+                    "details": "Lines below this level are not written to the OS log: `os_log` on macOS (Console.app), `OutputDebugStringW` on Windows (Visual Studio output window, DebugView). Default Notice; `LogLevel::Silent` turns it off. No effect on iOS and Android (the OS log is the console output there; use `setConsoleLogLevel()`) or on Linux and web (no OS log output). The levels of all outputs are explained under [`Logger`](#Logger).\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "details_ja": "このレベル未満の行は OS ログに書かれない。macOS は `os_log`（Console.app）、Windows は `OutputDebugStringW`（Visual Studio の出力ウィンドウ、DebugView）。既定は Notice、`LogLevel::Silent` で止まる。iOS と Android では効かず（OS ログがコンソール出力なので `setConsoleLogLevel()` を使う）、Linux と web にも OS ログ出力は無い。各出力のレベルの全体像は [`Logger`](#Logger) を参照。\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "details_ko": "이 레벨 미만의 줄은 OS 로그에 기록되지 않는다. macOS는 `os_log`(Console.app), Windows는 `OutputDebugStringW`(Visual Studio 출력 창, DebugView). 기본값 Notice, `LogLevel::Silent`면 꺼진다. iOS와 Android에서는 효과가 없고(OS 로그가 콘솔 출력이므로 `setConsoleLogLevel()` 사용), Linux와 web에는 OS 로그 출력이 없다. 각 출력의 레벨 전체는 [`Logger`](#Logger) 참조.\n\n```cpp\nsetLogLevel(LogLevel::Warning);       // console, file and system output: all Warning\nsetFileLogLevel(LogLevel::Verbose);   // then only the file goes down to Verbose\nsetSystemLogLevel(LogLevel::Silent);  // no OS log (os_log / OutputDebugString)\n```",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8698,17 +10303,23 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "const fs::path & path",
                     "return_type": "bool",
-                    "desc": "Open a file to receive log output",
+                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path",
                     "keywords": [
                         "output",
                         "write",
                         "path"
                     ],
-                    "desc_ja": "ログ出力を受けるファイルを開く",
-                    "desc_ko": "로그 출력을 받을 파일을 엶",
+                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して false を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す",
+                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 false를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환",
                     "related": [
                         "closeLogFile",
                         "setFileLogLevel"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8724,6 +10335,12 @@ const TrussCAPI = {
                     "desc_ko": "현재 로그 파일을 닫음",
                     "related": [
                         "setLogFile"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8845,6 +10462,12 @@ const TrussCAPI = {
                         "LogLevel",
                         "getLogger",
                         "setConsoleLogLevel"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -8872,6 +10495,10 @@ const TrussCAPI = {
                         {
                             "name": "graphicsExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -8963,6 +10590,12 @@ const TrussCAPI = {
                     "related": [
                         "logError",
                         "logWarning"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9255,6 +10888,12 @@ const TrussCAPI = {
                         "toFloat",
                         "toInt64",
                         "toString"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9275,6 +10914,12 @@ const TrussCAPI = {
                     "related": [
                         "toInt",
                         "hexToInt"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9296,6 +10941,12 @@ const TrussCAPI = {
                         "toInt",
                         "toDouble",
                         "toString"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9316,6 +10967,12 @@ const TrussCAPI = {
                     "related": [
                         "toFloat",
                         "toString"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9335,6 +10992,12 @@ const TrussCAPI = {
                     "related": [
                         "toInt",
                         "toString"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9359,6 +11022,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9384,6 +11051,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9409,6 +11080,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9433,6 +11108,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9457,6 +11136,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9481,6 +11164,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9505,6 +11192,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9529,6 +11220,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9555,6 +11250,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9575,6 +11274,12 @@ const TrussCAPI = {
                     "related": [
                         "hexToInt",
                         "toInt"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9595,6 +11300,12 @@ const TrussCAPI = {
                         "compress",
                         "toBinary",
                         "fromBase64"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9615,6 +11326,12 @@ const TrussCAPI = {
                         "compress",
                         "toBinary",
                         "fromBase64"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9635,6 +11352,12 @@ const TrussCAPI = {
                         "compress",
                         "toBinary",
                         "fromBase64"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9658,7 +11381,13 @@ const TrussCAPI = {
                     ],
                     "details": "The counterpart of toBase64. Padding ('='), whitespace, and any other non-alphabet characters are skipped, so line-wrapped or MIME-style input decodes fine. To turn decoded image bytes into a picture, combine with Image::loadFromMemory.",
                     "details_ja": "toBase64 の対になる関数。パディング（'='）・空白・その他のアルファベット外文字は読み飛ばすので、改行入りや MIME 形式の入力もそのままデコードできます。デコードした画像バイト列を絵にするには Image::loadFromMemory と組み合わせてください。",
-                    "details_ko": "toBase64 의 대응 함수입니다. 패딩('='), 공백, 그 외 알파벳 이외의 문자는 건너뛰므로 줄바꿈이 있거나 MIME 형식인 입력도 그대로 디코딩됩니다. 디코딩한 이미지 바이트를 그림으로 만들려면 Image::loadFromMemory 와 조합하세요."
+                    "details_ko": "toBase64 의 대응 함수입니다. 패딩('='), 공백, 그 외 알파벳 이외의 문자는 건너뛰므로 줄바꿈이 있거나 MIME 형식인 입력도 그대로 디코딩됩니다. 디코딩한 이미지 바이트를 그림으로 만들려면 Image::loadFromMemory 와 조합하세요.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "isStringInString",
@@ -9683,6 +11412,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9709,6 +11442,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9735,6 +11472,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9761,6 +11502,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9782,6 +11527,12 @@ const TrussCAPI = {
                         "splitString",
                         "isStringInString",
                         "trim"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9804,6 +11555,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9821,6 +11576,12 @@ const TrussCAPI = {
                     "related": [
                         "trimBack",
                         "trim"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9837,6 +11598,12 @@ const TrussCAPI = {
                     "related": [
                         "trimFront",
                         "trim"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -9864,6 +11631,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9889,6 +11660,10 @@ const TrussCAPI = {
                         {
                             "name": "utilsExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9915,6 +11690,10 @@ const TrussCAPI = {
                         {
                             "name": "beepSoundExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9941,6 +11720,10 @@ const TrussCAPI = {
                         {
                             "name": "beepSoundExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9967,6 +11750,10 @@ const TrussCAPI = {
                         {
                             "name": "beepSoundExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9993,6 +11780,10 @@ const TrussCAPI = {
                         {
                             "name": "beepSoundExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -10016,6 +11807,12 @@ const TrussCAPI = {
                         "compressBound",
                         "decompress",
                         "toBase64"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10038,6 +11835,12 @@ const TrussCAPI = {
                         "compressBound",
                         "decompress",
                         "toBase64"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10059,6 +11862,12 @@ const TrussCAPI = {
                         "Codec",
                         "compress",
                         "compressBound"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10080,6 +11889,12 @@ const TrussCAPI = {
                         "Codec",
                         "compress",
                         "compressBound"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10100,6 +11915,12 @@ const TrussCAPI = {
                         "Codec",
                         "compress",
                         "decompress"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10118,6 +11939,12 @@ const TrussCAPI = {
                         "Json",
                         "toJsonString",
                         "loadJson"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10143,23 +11970,29 @@ const TrussCAPI = {
                         {
                             "name": "jsonXmlExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
                 {
                     "name": "reflectToJson",
-                    "params": "obj",
-                    "params_typed": "T & obj",
+                    "params": "obj, includeDerived",
+                    "params_typed": "T & obj, bool includeDerived = false",
                     "return_type": "Json",
-                    "desc": "Return all reflected (TC_REFLECT) members of obj as a Json object. Works on any reflected type such as a Node or Mod.",
+                    "desc": "Return the reflected (TC_REFLECT) members of obj as a Json object. Works on any reflected type such as a Node or Mod. Derived values (TC_DERIVED, e.g. Node's globalPos) are left out unless includeDerived is true, so the default output is what a save should contain.",
                     "keywords": [
                         "serialize",
                         "reflection",
                         "dump",
-                        "members"
+                        "members",
+                        "save",
+                        "derived"
                     ],
-                    "desc_ja": "objのreflect済み(TC_REFLECT)メンバをすべてJsonオブジェクトとして返す。NodeやModなど任意のreflected型で動作",
-                    "desc_ko": "obj의 reflect된(TC_REFLECT) 멤버를 모두 Json 객체로 반환. Node나 Mod 등 임의의 reflected 타입에서 동작",
+                    "desc_ja": "objのreflect済み(TC_REFLECT)メンバをJsonオブジェクトとして返す。NodeやModなど任意のreflected型で動作。派生値(TC_DERIVED、例: NodeのglobalPos)はincludeDerivedがtrueでない限り含めないので、既定の出力はそのまま保存に使える",
+                    "desc_ko": "obj의 reflect된(TC_REFLECT) 멤버를 Json 객체로 반환. Node나 Mod 등 임의의 reflected 타입에서 동작. 파생 값(TC_DERIVED, 예: Node의 globalPos)은 includeDerived가 true가 아니면 제외하므로 기본 출력은 그대로 저장에 쓸 수 있다",
                     "related": [
                         "Json",
                         "reflectFromJson",
@@ -10169,6 +12002,10 @@ const TrussCAPI = {
                         {
                             "name": "reflectExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -10190,6 +12027,12 @@ const TrussCAPI = {
                         "Json",
                         "reflectToJson",
                         "parseJson"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10207,6 +12050,12 @@ const TrussCAPI = {
                     "related": [
                         "Xml",
                         "loadXml"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10223,7 +12072,84 @@ const TrussCAPI = {
                         "describe"
                     ],
                     "desc_ja": "git describe 由来の TrussC バージョン文字列（例: \"v0.6.2\"、\"v0.6.2-14-gabc123\"）",
-                    "desc_ko": "git describe 기반 TrussC 버전 문자열 (예: \"v0.6.2\", \"v0.6.2-14-gabc123\")"
+                    "desc_ko": "git describe 기반 TrussC 버전 문자열 (예: \"v0.6.2\", \"v0.6.2-14-gabc123\")",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "typeName",
+                    "params": "ti",
+                    "params_typed": "const std::type_info & ti",
+                    "return_type": "const std::string &",
+                    "desc": "Readable (demangled) fully-qualified name for a type, cached per type",
+                    "keywords": [
+                        "rtti",
+                        "typeid",
+                        "reflection",
+                        "demangle"
+                    ],
+                    "desc_ja": "型の読みやすい（デマングル済み）完全修飾名。型ごとにキャッシュされる",
+                    "desc_ko": "타입의 읽기 쉬운(디맹글된) 정규화 이름. 타입별로 캐시됨",
+                    "related": [
+                        "shortTypeName"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "typeName",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "const std::string &",
+                    "desc": "Readable (demangled) fully-qualified name for a type, cached per type",
+                    "keywords": [
+                        "rtti",
+                        "typeid",
+                        "reflection",
+                        "demangle"
+                    ],
+                    "desc_ja": "型の読みやすい（デマングル済み）完全修飾名。型ごとにキャッシュされる",
+                    "desc_ko": "타입의 읽기 쉬운(디맹글된) 정규화 이름. 타입별로 캐시됨",
+                    "related": [
+                        "shortTypeName"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "shortTypeName",
+                    "params": "ti",
+                    "params_typed": "const std::type_info & ti",
+                    "return_type": "const std::string &",
+                    "desc": "Short (unqualified) readable name for a type, cached per type",
+                    "keywords": [
+                        "unqualified",
+                        "rtti",
+                        "typeid"
+                    ],
+                    "desc_ja": "型の短い（修飾なし）読みやすい名前。型ごとにキャッシュされる",
+                    "desc_ko": "타입의 짧은(수식 없는) 읽기 쉬운 이름. 타입별로 캐시됨",
+                    "related": [
+                        "typeName"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "intersectRect",
@@ -10243,78 +12169,37 @@ const TrussCAPI = {
                     "related": [
                         "Rect::intersects",
                         "Rect::contains"
-                    ]
-                },
-                {
-                    "name": "typeName",
-                    "params": "ti",
-                    "params_typed": "const std::type_info & ti",
-                    "return_type": "const std::string &",
-                    "desc": "Readable (demangled) fully-qualified name for a type, cached per type",
-                    "keywords": [
-                        "rtti",
-                        "typeid",
-                        "reflection",
-                        "demangle"
                     ],
-                    "desc_ja": "型の読みやすい（デマングル済み）完全修飾名。型ごとにキャッシュされる",
-                    "desc_ko": "타입의 읽기 쉬운(디맹글된) 정규화 이름. 타입별로 캐시됨",
-                    "related": [
-                        "shortTypeName"
-                    ]
-                },
-                {
-                    "name": "typeName",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "const std::string &",
-                    "desc": "Readable (demangled) fully-qualified name for a type, cached per type",
-                    "keywords": [
-                        "rtti",
-                        "typeid",
-                        "reflection",
-                        "demangle"
-                    ],
-                    "desc_ja": "型の読みやすい（デマングル済み）完全修飾名。型ごとにキャッシュされる",
-                    "desc_ko": "타입의 읽기 쉬운(디맹글된) 정규화 이름. 타입별로 캐시됨",
-                    "related": [
-                        "shortTypeName"
-                    ]
-                },
-                {
-                    "name": "shortTypeName",
-                    "params": "ti",
-                    "params_typed": "const std::type_info & ti",
-                    "return_type": "const std::string &",
-                    "desc": "Short (unqualified) readable name for a type, cached per type",
-                    "keywords": [
-                        "unqualified",
-                        "rtti",
-                        "typeid"
-                    ],
-                    "desc_ja": "型の短い（修飾なし）読みやすい名前。型ごとにキャッシュされる",
-                    "desc_ko": "타입의 짧은(수식 없는) 읽기 쉬운 이름. 타입별로 캐시됨",
-                    "related": [
-                        "typeName"
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
                     "name": "nodeToJson",
-                    "params": "node, maxDepth",
-                    "params_typed": "Node & node, int maxDepth",
+                    "params": "node, maxDepth, includeDerived",
+                    "params_typed": "Node & node, int maxDepth, bool includeDerived = false",
                     "return_type": "Json",
-                    "desc": "Serialize a node (and its subtree up to maxDepth; -1 = unlimited) to JSON via reflection",
+                    "desc": "Serialize a node (and its subtree up to maxDepth; -1 = unlimited) to JSON via reflection. Derived members (e.g. globalPos) are left out unless includeDerived is true; then they are included and named under \"derived\"",
                     "keywords": [
                         "serialize",
                         "reflect",
                         "tree",
                         "dump"
                     ],
-                    "desc_ja": "ノード（および maxDepth までのサブツリー、-1 = 無制限）をリフレクションで JSON にシリアライズ",
-                    "desc_ko": "노드(및 maxDepth까지의 서브트리, -1 = 무제한)를 리플렉션으로 JSON으로 직렬화",
+                    "desc_ja": "ノード（および maxDepth までのサブツリー、-1 = 無制限）をリフレクションで JSON にシリアライズ。派生メンバ（例: globalPos）は includeDerived が true のときだけ含め、\"derived\" に名前を列挙する",
+                    "desc_ko": "노드(및 maxDepth까지의 서브트리, -1 = 무제한)를 리플렉션으로 JSON으로 직렬화. 파생 멤버(예: globalPos)는 includeDerived가 true일 때만 포함하며 \"derived\"에 이름을 나열한다",
                     "related": [
                         "getRootNode",
                         "Node::findByInstanceId"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -10324,6 +12209,63 @@ const TrussCAPI = {
         {
             "name": "File",
             "functions": [
+                {
+                    "name": "pathToUtf8",
+                    "params": "p",
+                    "params_typed": "const fs::path & p",
+                    "return_type": "std::string",
+                    "desc": "Convert a path to a UTF-8 std::string, the same on every platform. Use it instead of path.string(), which on Windows converts to the process code page and can throw for characters outside it. On Windows it can still throw for a name that is not valid UTF-16 (an unpaired surrogate); to log a path, use log << path, which does not throw.",
+                    "keywords": [
+                        "utf-8",
+                        "encoding",
+                        "unicode",
+                        "string",
+                        "japanese",
+                        "windows",
+                        "code page"
+                    ],
+                    "desc_ja": "パスを UTF-8 の std::string に変換する（全プラットフォームで同じ）。path.string() の代わりに使う。path.string() は Windows ではプロセスのコードページに変換し、そこにない文字で例外を投げることがある。Windows では、不正な UTF-16 の名前（対になっていないサロゲート）でこの関数も例外を投げうる。ログに出すなら log << path を使う（こちらは投げない）",
+                    "desc_ko": "경로를 UTF-8 std::string으로 변환 (모든 플랫폼에서 동일). path.string() 대신 사용한다. path.string()은 Windows에서 프로세스 코드 페이지로 변환하며, 거기에 없는 문자에서 예외를 던질 수 있다. Windows에서는 올바르지 않은 UTF-16 이름(짝이 없는 서로게이트)에서 이 함수도 예외를 던질 수 있다. 로그에 경로를 출력할 때는 log << path를 사용한다 (이쪽은 예외를 던지지 않는다)",
+                    "related": [
+                        "utf8ToPath",
+                        "getFileName",
+                        "joinPath"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "utf8ToPath",
+                    "params": "utf8",
+                    "params_typed": "std::string_view utf8",
+                    "return_type": "fs::path",
+                    "desc": "Convert a UTF-8 string to fs::path, decoding it as UTF-8 on every platform. fs::path(std::string) on Windows decodes in the process code page, which is UTF-8 only in apps built with TrussC's Windows manifest (Windows 10 1903 or later).",
+                    "keywords": [
+                        "utf-8",
+                        "encoding",
+                        "unicode",
+                        "string",
+                        "japanese",
+                        "windows",
+                        "code page"
+                    ],
+                    "desc_ja": "UTF-8 文字列を fs::path に変換する（全プラットフォームで UTF-8 として解釈）。Windows の fs::path(std::string) はプロセスのコードページで解釈し、それが UTF-8 になるのは TrussC の Windows マニフェスト入りでビルドしたアプリ（Windows 10 1903 以降）だけ",
+                    "desc_ko": "UTF-8 문자열을 fs::path로 변환 (모든 플랫폼에서 UTF-8로 해석). Windows의 fs::path(std::string)는 프로세스 코드 페이지로 해석하며, 그것이 UTF-8인 것은 TrussC의 Windows 매니페스트로 빌드한 앱(Windows 10 1903 이상)뿐이다",
+                    "related": [
+                        "pathToUtf8",
+                        "getDataPath"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
                 {
                     "name": "getExecutablePath",
                     "params": "",
@@ -10341,6 +12283,12 @@ const TrussCAPI = {
                     "related": [
                         "getExecutableDir",
                         "getAbsolutePath"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platformNote": "Android returns \"\" (assets via AAssetManager); Web returns hardcoded \"/\".\n",
                     "platformNote_ja": "Android は \"\" を返す（アセットは AAssetManager 経由）。Web はハードコードの \"/\"。\n"
@@ -10363,6 +12311,12 @@ const TrussCAPI = {
                         "getExecutablePath",
                         "setDataPathToResources"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platformNote": "Real directory on all native platforms (android = internalDataPath). Web returns hardcoded \"/\".\n",
                     "platformNote_ja": "ネイティブは全て実ディレクトリを返す（android は internalDataPath）。Web はハードコードの \"/\"。\n"
                 },
@@ -10383,6 +12337,12 @@ const TrussCAPI = {
                     "related": [
                         "LoadResult",
                         "LoadError"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10402,6 +12362,12 @@ const TrussCAPI = {
                         "getDataPathRoot",
                         "setDataPathToResources",
                         "getDataPath"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10420,6 +12386,12 @@ const TrussCAPI = {
                     "related": [
                         "setDataPathRoot",
                         "getDataPath"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10468,6 +12440,12 @@ const TrussCAPI = {
                         "setDataPathRoot",
                         "getExecutableDir"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platforms": [
                         "macos",
                         "ios"
@@ -10496,6 +12474,10 @@ const TrussCAPI = {
                         {
                             "name": "jsonXmlExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -10504,14 +12486,14 @@ const TrussCAPI = {
                     "params": "j, path, indent",
                     "params_typed": "const Json & j, const fs::path & path, int indent = 2",
                     "return_type": "bool",
-                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath. indent sets the pretty-print width (negative for compact). Returns true on success.",
+                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). Returns true on success; on failure it logs an error and returns false.",
                     "keywords": [
                         "write",
                         "store",
                         "serialize"
                     ],
-                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決。indentはpretty-print幅を指定(負の値でcompact)。成功時trueを返す",
-                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석. indent는 pretty-print 폭을 지정(음수면 compact). 성공 시 true 반환",
+                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決し、親フォルダがなければ作る。indentはpretty-print幅を指定(負の値でcompact)。成功時trueを返し、失敗時はエラーをログに出してfalseを返す",
+                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. indent는 pretty-print 폭을 지정(음수면 compact). 성공 시 true 반환, 실패 시 오류를 로그에 남기고 false 반환",
                     "related": [
                         "Json",
                         "loadJson",
@@ -10522,6 +12504,10 @@ const TrussCAPI = {
                         {
                             "name": "jsonXmlExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -10546,6 +12532,10 @@ const TrussCAPI = {
                         {
                             "name": "jsonXmlExample",
                             "group": "input_output"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -10615,15 +12605,15 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "const fs::path & path",
                     "return_type": "std::string",
-                    "desc": "Get file extension without dot",
+                    "desc": "Get file extension without dot, as written (case kept). Compare toLower(getFileExtension(path)) to match it case-insensitively, as TrussC's loaders do.",
                     "keywords": [
                         "ext",
                         "suffix",
                         "type",
                         "format"
                     ],
-                    "desc_ja": "拡張子を取得（ドットなし）",
-                    "desc_ko": "파일 확장자를 얻음 (점 제외)",
+                    "desc_ja": "拡張子を取得（ドットなし、書かれたとおりの大文字小文字）。大文字小文字を区別せずに比べるには、TrussCのローダーと同じく toLower(getFileExtension(path)) を比べる",
+                    "desc_ko": "파일 확장자를 얻음 (점 제외, 쓰인 그대로의 대소문자). 대소문자 무시로 비교하려면 TrussC 로더처럼 toLower(getFileExtension(path))를 비교",
                     "related": [
                         "getBaseName",
                         "getFileName"
@@ -10716,6 +12706,12 @@ const TrussCAPI = {
                     "related": [
                         "getDataPath",
                         "getExecutablePath"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10793,6 +12789,10 @@ const TrussCAPI = {
                         {
                             "name": "fileExample",
                             "group": "utils"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -10842,6 +12842,12 @@ const TrussCAPI = {
                     "desc_ko": "파일을 삭제",
                     "related": [
                         "fileExists"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10859,6 +12865,12 @@ const TrussCAPI = {
                     "related": [
                         "fileExists",
                         "loadTextFile"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10877,6 +12889,12 @@ const TrussCAPI = {
                         "saveTextFile",
                         "loadJson",
                         "getFileSize"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10884,17 +12902,23 @@ const TrussCAPI = {
                     "params": "path, content",
                     "params_typed": "const fs::path & path, const std::string & content",
                     "return_type": "bool",
-                    "desc": "Save string to text file",
+                    "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened",
                     "keywords": [
                         "write",
                         "store"
                     ],
-                    "desc_ja": "文字列をファイルに保存",
-                    "desc_ko": "문자열을 텍스트 파일로 저장",
+                    "desc_ja": "文字列をファイルに保存。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して false を返す",
+                    "desc_ko": "문자열을 텍스트 파일로 저장. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 false 반환",
                     "related": [
                         "loadTextFile",
                         "appendToFile",
                         "saveJson"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -10902,16 +12926,22 @@ const TrussCAPI = {
                     "params": "path, content",
                     "params_typed": "const fs::path & path, const std::string & content",
                     "return_type": "bool",
-                    "desc": "Append string to file",
+                    "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened",
                     "keywords": [
                         "write",
                         "add",
                         "concat"
                     ],
-                    "desc_ja": "ファイルに追記",
-                    "desc_ko": "파일에 문자열을 추가",
+                    "desc_ja": "ファイルに追記。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して false を返す",
+                    "desc_ko": "파일에 문자열을 추가. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 false 반환",
                     "related": [
                         "saveTextFile"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -10943,6 +12973,10 @@ const TrussCAPI = {
                         {
                             "name": "beepSoundExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -10967,6 +13001,10 @@ const TrussCAPI = {
                         {
                             "name": "beepSoundExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 }
@@ -10982,7 +13020,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "void",
-                    "desc": "Initialize the global AudioEngine. Called automatically by Sound::load() / play(), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener).",
+                    "desc": "Initialize the global AudioEngine. Sound::load(), loadStream(), loadTestTone() and loadFromBuffer() call it automatically while the engine is not initialized (play() does not), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener).",
                     "keywords": [
                         "initialize",
                         "start",
@@ -10990,11 +13028,17 @@ const TrussCAPI = {
                         "setup",
                         "open"
                     ],
-                    "desc_ja": "グローバルなAudioEngineを初期化。Sound::load() / play()から自動的に呼ばれるため、手動使用はオーディオを早期に開始したい場合(例: audioOut合成リスナーの前)のみ必要",
-                    "desc_ko": "전역 AudioEngine을 초기화. Sound::load() / play()에서 자동 호출되므로, 수동 사용은 오디오를 일찍 시작하려는 경우(예: audioOut 합성 리스너 이전)에만 필요",
+                    "desc_ja": "グローバルなAudioEngineを初期化。エンジンが未初期化なら Sound::load() / loadStream() / loadTestTone() / loadFromBuffer() が自動的に初期化する (play() はしない) ため、手動使用はオーディオを早期に開始したい場合(例: audioOut合成リスナーの前)のみ必要",
+                    "desc_ko": "전역 AudioEngine을 초기화. 엔진이 초기화되지 않았으면 Sound::load() / loadStream() / loadTestTone() / loadFromBuffer() 가 자동으로 초기화하므로 (play() 는 하지 않음), 수동 사용은 오디오를 일찍 시작하려는 경우(예: audioOut 합성 리스너 이전)에만 필요",
                     "related": [
                         "AudioEngine::getInstance",
                         "shutdownAudio"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11014,6 +13058,12 @@ const TrussCAPI = {
                     "desc_ko": "전역 AudioEngine을 종료하고 오디오 장치를 닫음. 보통 불필요(프로그램 종료 시 실행됨)",
                     "related": [
                         "initAudio"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11040,6 +13090,10 @@ const TrussCAPI = {
                         {
                             "name": "soundPlayerFFTExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -11064,6 +13118,10 @@ const TrussCAPI = {
                         {
                             "name": "micInputExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -11090,6 +13148,10 @@ const TrussCAPI = {
                         {
                             "name": "micInputExample",
                             "group": "sound"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 }
@@ -11117,6 +13179,12 @@ const TrussCAPI = {
                     "related": [
                         "listSystemFonts"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -11142,6 +13210,12 @@ const TrussCAPI = {
                     "desc_ko": "시스템에 설치된 모든 폰트 이름을 나열",
                     "related": [
                         "systemFontPath"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platforms": [
                         "macos",
@@ -11183,7 +13257,13 @@ const TrussCAPI = {
                     ],
                     "details": "The EaseFunction overload returns `fn(t)` — the curve exactly as authored\n(null falls back to linear). All built-in curves are internally defined in\nease-in form, and [`easeOut`](#easeOut) / [`easeInOut`](#easeInOut) are\nderived from it, so one authored base curve serves all three modes.",
                     "details_ja": "EaseFunction オーバーロードは `fn(t)` — 書いたカーブそのまま — を返す\n（null はリニアにフォールバック）。組み込みカーブは内部的にすべて ease-in 形で\n定義されていて、[`easeOut`](#easeOut) / [`easeInOut`](#easeInOut) はそこから\n導出される。つまり基準カーブを1本書けば3モードすべてで使える。",
-                    "details_ko": "EaseFunction 오버로드는 `fn(t)` — 작성한 커브 그대로 — 를 반환한다 (null은\nlinear로 폴백). 내장 커브는 내부적으로 모두 ease-in 형태로 정의되며\n[`easeOut`](#easeOut) / [`easeInOut`](#easeInOut)은 여기서 도출된다. 기준\n커브 하나로 3가지 모드를 모두 사용할 수 있다."
+                    "details_ko": "EaseFunction 오버로드는 `fn(t)` — 작성한 커브 그대로 — 를 반환한다 (null은\nlinear로 폴백). 내장 커브는 내부적으로 모두 ease-in 형태로 정의되며\n[`easeOut`](#easeOut) / [`easeInOut`](#easeInOut)은 여기서 도출된다. 기준\n커브 하나로 3가지 모드를 모두 사용할 수 있다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "easeIn",
@@ -11209,7 +13289,13 @@ const TrussCAPI = {
                     ],
                     "details": "The EaseFunction overload returns `fn(t)` — the curve exactly as authored\n(null falls back to linear). All built-in curves are internally defined in\nease-in form, and [`easeOut`](#easeOut) / [`easeInOut`](#easeInOut) are\nderived from it, so one authored base curve serves all three modes.",
                     "details_ja": "EaseFunction オーバーロードは `fn(t)` — 書いたカーブそのまま — を返す\n（null はリニアにフォールバック）。組み込みカーブは内部的にすべて ease-in 形で\n定義されていて、[`easeOut`](#easeOut) / [`easeInOut`](#easeInOut) はそこから\n導出される。つまり基準カーブを1本書けば3モードすべてで使える。",
-                    "details_ko": "EaseFunction 오버로드는 `fn(t)` — 작성한 커브 그대로 — 를 반환한다 (null은\nlinear로 폴백). 내장 커브는 내부적으로 모두 ease-in 형태로 정의되며\n[`easeOut`](#easeOut) / [`easeInOut`](#easeInOut)은 여기서 도출된다. 기준\n커브 하나로 3가지 모드를 모두 사용할 수 있다."
+                    "details_ko": "EaseFunction 오버로드는 `fn(t)` — 작성한 커브 그대로 — 를 반환한다 (null은\nlinear로 폴백). 내장 커브는 내부적으로 모두 ease-in 형태로 정의되며\n[`easeOut`](#easeOut) / [`easeInOut`](#easeInOut)은 여기서 도출된다. 기준\n커브 하나로 3가지 모드를 모두 사용할 수 있다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "easeOut",
@@ -11235,7 +13321,13 @@ const TrussCAPI = {
                     ],
                     "details": "Derived from the ease-in base curve by the standard reflection\n`1 - f(1 - t)` (time and value flipped). The EaseFunction overload applies\nthe same reflection to a custom ease-in curve; a null function falls back to\nlinear.",
                     "details_ja": "ease-in 基準カーブから標準の変換 `1 - f(1 - t)`（時間と値の反転）で導出される。\nEaseFunction オーバーロードはカスタムの ease-in カーブに同じ変換を適用する。\nnull はリニアにフォールバック。",
-                    "details_ko": "ease-in 기준 커브에서 표준 변환 `1 - f(1 - t)`(시간과 값 반전)로 도출된다.\nEaseFunction 오버로드는 커스텀 ease-in 커브에 같은 변환을 적용한다. null은\nlinear로 폴백."
+                    "details_ko": "ease-in 기준 커브에서 표준 변환 `1 - f(1 - t)`(시간과 값 반전)로 도출된다.\nEaseFunction 오버로드는 커스텀 ease-in 커브에 같은 변환을 적용한다. null은\nlinear로 폴백.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "easeOut",
@@ -11261,7 +13353,13 @@ const TrussCAPI = {
                     ],
                     "details": "Derived from the ease-in base curve by the standard reflection\n`1 - f(1 - t)` (time and value flipped). The EaseFunction overload applies\nthe same reflection to a custom ease-in curve; a null function falls back to\nlinear.",
                     "details_ja": "ease-in 基準カーブから標準の変換 `1 - f(1 - t)`（時間と値の反転）で導出される。\nEaseFunction オーバーロードはカスタムの ease-in カーブに同じ変換を適用する。\nnull はリニアにフォールバック。",
-                    "details_ko": "ease-in 기준 커브에서 표준 변환 `1 - f(1 - t)`(시간과 값 반전)로 도출된다.\nEaseFunction 오버로드는 커스텀 ease-in 커브에 같은 변환을 적용한다. null은\nlinear로 폴백."
+                    "details_ko": "ease-in 기준 커브에서 표준 변환 `1 - f(1 - t)`(시간과 값 반전)로 도출된다.\nEaseFunction 오버로드는 커스텀 ease-in 커브에 같은 변환을 적용한다. null은\nlinear로 폴백.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "easeInOut",
@@ -11286,7 +13384,13 @@ const TrussCAPI = {
                     ],
                     "details": "First half is the ease-in curve scaled to [0, 0.5], second half the derived\nease-out scaled to [0.5, 1]. The two-type overload is asymmetric (one family\nin, another out). The EaseFunction overload applies the same construction to\na custom ease-in base curve; a null function falls back to linear.",
                     "details_ja": "前半は ease-in カーブを [0, 0.5] に縮小、後半は導出した ease-out を [0.5, 1] に\n縮小したもの。2 型オーバーロードは非対称（入りと抜けで別ファミリ）。\nEaseFunction オーバーロードはカスタムの ease-in 基準カーブに同じ構成を適用する。\nnull はリニアにフォールバック。",
-                    "details_ko": "전반은 ease-in 커브를 [0, 0.5]로 축소, 후반은 도출된 ease-out을 [0.5, 1]로\n축소한 것. 2개 타입 오버로드는 비대칭(들어갈 때와 나올 때 다른 계열).\nEaseFunction 오버로드는 커스텀 ease-in 기준 커브에 같은 구성을 적용한다.\nnull은 linear로 폴백."
+                    "details_ko": "전반은 ease-in 커브를 [0, 0.5]로 축소, 후반은 도출된 ease-out을 [0.5, 1]로\n축소한 것. 2개 타입 오버로드는 비대칭(들어갈 때와 나올 때 다른 계열).\nEaseFunction 오버로드는 커스텀 ease-in 기준 커브에 같은 구성을 적용한다.\nnull은 linear로 폴백.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "easeInOut",
@@ -11311,7 +13415,13 @@ const TrussCAPI = {
                     ],
                     "details": "First half is the ease-in curve scaled to [0, 0.5], second half the derived\nease-out scaled to [0.5, 1]. The two-type overload is asymmetric (one family\nin, another out). The EaseFunction overload applies the same construction to\na custom ease-in base curve; a null function falls back to linear.",
                     "details_ja": "前半は ease-in カーブを [0, 0.5] に縮小、後半は導出した ease-out を [0.5, 1] に\n縮小したもの。2 型オーバーロードは非対称（入りと抜けで別ファミリ）。\nEaseFunction オーバーロードはカスタムの ease-in 基準カーブに同じ構成を適用する。\nnull はリニアにフォールバック。",
-                    "details_ko": "전반은 ease-in 커브를 [0, 0.5]로 축소, 후반은 도출된 ease-out을 [0.5, 1]로\n축소한 것. 2개 타입 오버로드는 비대칭(들어갈 때와 나올 때 다른 계열).\nEaseFunction 오버로드는 커스텀 ease-in 기준 커브에 같은 구성을 적용한다.\nnull은 linear로 폴백."
+                    "details_ko": "전반은 ease-in 커브를 [0, 0.5]로 축소, 후반은 도출된 ease-out을 [0.5, 1]로\n축소한 것. 2개 타입 오버로드는 비대칭(들어갈 때와 나올 때 다른 계열).\nEaseFunction 오버로드는 커스텀 ease-in 기준 커브에 같은 구성을 적용한다.\nnull은 linear로 폴백.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "easeInOut",
@@ -11336,7 +13446,13 @@ const TrussCAPI = {
                     ],
                     "details": "First half is the ease-in curve scaled to [0, 0.5], second half the derived\nease-out scaled to [0.5, 1]. The two-type overload is asymmetric (one family\nin, another out). The EaseFunction overload applies the same construction to\na custom ease-in base curve; a null function falls back to linear.",
                     "details_ja": "前半は ease-in カーブを [0, 0.5] に縮小、後半は導出した ease-out を [0.5, 1] に\n縮小したもの。2 型オーバーロードは非対称（入りと抜けで別ファミリ）。\nEaseFunction オーバーロードはカスタムの ease-in 基準カーブに同じ構成を適用する。\nnull はリニアにフォールバック。",
-                    "details_ko": "전반은 ease-in 커브를 [0, 0.5]로 축소, 후반은 도출된 ease-out을 [0.5, 1]로\n축소한 것. 2개 타입 오버로드는 비대칭(들어갈 때와 나올 때 다른 계열).\nEaseFunction 오버로드는 커스텀 ease-in 기준 커브에 같은 구성을 적용한다.\nnull은 linear로 폴백."
+                    "details_ko": "전반은 ease-in 커브를 [0, 0.5]로 축소, 후반은 도출된 ease-out을 [0.5, 1]로\n축소한 것. 2개 타입 오버로드는 비대칭(들어갈 때와 나올 때 다른 계열).\nEaseFunction 오버로드는 커스텀 ease-in 기준 커브에 같은 구성을 적용한다.\nnull은 linear로 폴백.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "ease",
@@ -11369,6 +13485,10 @@ const TrussCAPI = {
                         {
                             "name": "tweenExample",
                             "group": "animation"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -11403,6 +13523,10 @@ const TrussCAPI = {
                         {
                             "name": "tweenExample",
                             "group": "animation"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 }
@@ -11513,19 +13637,25 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "Node *",
-                    "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none). A tool such as an inspector can read it and drive it via setSelectedNode().",
+                    "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none or once the node is freed). A tool such as an inspector can read it and drive it via setSelectedNode(). The pointer is for the current call; to keep the node, keep its weak_from_this().",
                     "keywords": [
                         "selection",
                         "active",
                         "clicked",
                         "inspector"
                     ],
-                    "desc_ja": "現在選択中のノード(最後にクリックされたノード、Nodeシステムが保持。なければnull)を取得。inspectorなどのツールがこれを読み取り、setSelectedNode()で操作できる",
-                    "desc_ko": "현재 선택된 노드(마지막으로 클릭된 노드, Node 시스템이 보유. 없으면 null)를 얻음. inspector 같은 도구가 이를 읽고 setSelectedNode()로 조작 가능",
+                    "desc_ja": "現在選択中のノード(最後にクリックされたノード、Nodeシステムが保持。なければ、またはノードが解放されたらnull)を取得。inspectorなどのツールがこれを読み取り、setSelectedNode()で操作できる。ポインタはその呼び出しの間だけ使い、ノードを持ち続けるならweak_from_this()を保持する",
+                    "desc_ko": "현재 선택된 노드(마지막으로 클릭된 노드, Node 시스템이 보유. 없거나 노드가 해제되면 null)를 얻음. inspector 같은 도구가 이를 읽고 setSelectedNode()로 조작 가능. 포인터는 그 호출 동안만 사용하고, 노드를 계속 참조하려면 weak_from_this()를 보관",
                     "related": [
                         "setSelectedNode",
                         "getRootNode",
                         "Node::enableEvents"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11533,7 +13663,7 @@ const TrussCAPI = {
                     "params": "n",
                     "params_typed": "Node * n",
                     "return_type": "void",
-                    "desc": "Set the currently selected node. Pass nullptr to clear the selection.",
+                    "desc": "Set the currently selected node. Pass nullptr to clear the selection; a node no shared_ptr owns also clears it.",
                     "keywords": [
                         "select",
                         "selection",
@@ -11541,10 +13671,16 @@ const TrussCAPI = {
                         "set active",
                         "inspector"
                     ],
-                    "desc_ja": "現在選択中のノードを設定。nullptrを渡すと選択を解除",
-                    "desc_ko": "현재 선택된 노드를 설정. nullptr을 전달하면 선택을 해제",
+                    "desc_ja": "現在選択中のノードを設定。nullptrを渡すと選択を解除(shared_ptrで所有されていないノードも解除になる)",
+                    "desc_ko": "현재 선택된 노드를 설정. nullptr을 전달하면 선택을 해제(shared_ptr이 소유하지 않는 노드도 해제됨)",
                     "related": [
                         "getSelectedNode"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11552,18 +13688,24 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "Node *",
-                    "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around.",
+                    "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around. Not yet the App inside its own constructor: use it from setup() on.",
                     "keywords": [
                         "tree",
                         "app",
                         "top",
                         "hierarchy"
                     ],
-                    "desc_ja": "実行中のAppをノードツリーのルートとして取得(アプリ生存中はフレームワークが設定、それ以外はnull)。アプリが自身を渡し回さずともツールがツリー全体を辿れる",
-                    "desc_ko": "실행 중인 App을 노드 트리의 루트로 얻음(앱이 살아있는 동안 프레임워크가 설정, 그 외에는 null). 앱이 자신을 넘기지 않아도 도구가 트리 전체를 순회 가능",
+                    "desc_ja": "実行中のAppをノードツリーのルートとして取得(アプリ生存中はフレームワークが設定、それ以外はnull)。アプリが自身を渡し回さずともツールがツリー全体を辿れる。App自身のコンストラクタ内ではまだそのAppを返さない。setup()以降で使う",
+                    "desc_ko": "실행 중인 App을 노드 트리의 루트로 얻음(앱이 살아있는 동안 프레임워크가 설정, 그 외에는 null). 앱이 자신을 넘기지 않아도 도구가 트리 전체를 순회 가능. App 자신의 생성자 안에서는 아직 그 App을 반환하지 않음. setup()부터 사용",
                     "related": [
                         "getSelectedNode",
                         "Node"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -11636,6 +13778,12 @@ const TrussCAPI = {
                     "related": [
                         "setDefaultScreenFov",
                         "EasyCam::setFov"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11656,6 +13804,12 @@ const TrussCAPI = {
                     "related": [
                         "setupScreenFov",
                         "Mat4::perspective"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11674,6 +13828,12 @@ const TrussCAPI = {
                     "related": [
                         "setupScreenFov",
                         "Mat4::ortho"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11691,6 +13851,12 @@ const TrussCAPI = {
                     "desc_ko": "기본 스크린 FOV를 설정 (프레임 시작 시 적용)",
                     "related": [
                         "getDefaultScreenFov"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11707,6 +13873,12 @@ const TrussCAPI = {
                     "desc_ko": "현재 기본 스크린 FOV를 얻음",
                     "related": [
                         "setDefaultScreenFov"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11728,6 +13900,12 @@ const TrussCAPI = {
                         "setFarClip",
                         "getNearClip",
                         "setupScreenPerspective"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11749,6 +13927,12 @@ const TrussCAPI = {
                         "setNearClip",
                         "getFarClip",
                         "setupScreenPerspective"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11772,6 +13956,10 @@ const TrussCAPI = {
                         {
                             "name": "coordinateConversionExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -11796,6 +13984,10 @@ const TrussCAPI = {
                         {
                             "name": "coordinateConversionExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -11844,6 +14036,12 @@ const TrussCAPI = {
                     "desc_ko": "니어 클립 오버라이드 값을 가져온다 (0 = 카메라 거리에서 자동 계산).",
                     "related": [
                         "setNearClip"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11862,6 +14060,12 @@ const TrussCAPI = {
                     "desc_ko": "파 클립 오버라이드 값을 가져온다 (0 = 카메라 거리에서 자동 계산).",
                     "related": [
                         "setFarClip"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11882,6 +14086,12 @@ const TrussCAPI = {
                     "related": [
                         "setCameraPosition",
                         "setMaterial"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -11910,6 +14120,12 @@ const TrussCAPI = {
                         "Material",
                         "Light",
                         "addLight"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11961,7 +14177,13 @@ const TrussCAPI = {
                         "remove env"
                     ],
                     "desc_ja": "IBL environment mapをクリア",
-                    "desc_ko": "IBL 환경맵을 해제"
+                    "desc_ko": "IBL 환경맵을 해제",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "getEnvironment",
@@ -11980,6 +14202,12 @@ const TrussCAPI = {
                     "related": [
                         "Environment",
                         "setEnvironment"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -11987,7 +14215,7 @@ const TrussCAPI = {
                     "params": "light",
                     "params_typed": "Light & light",
                     "return_type": "void",
-                    "desc": "Add a light to the scene",
+                    "desc": "Add a light to the scene (up to 8 lights per window; a light added past 8 is not registered, with a one-time warning)",
                     "keywords": [
                         "lamp",
                         "illuminate",
@@ -11995,8 +14223,8 @@ const TrussCAPI = {
                         "point light",
                         "ofLight"
                     ],
-                    "desc_ja": "シーンにlightを追加",
-                    "desc_ko": "씬에 조명을 추가",
+                    "desc_ja": "シーンにlightを追加（1ウィンドウ最大8灯。9灯目以降は登録されず、1回だけ警告を出す）",
+                    "desc_ko": "씬에 조명을 추가 (창당 최대 8개. 8개를 넘어 추가한 조명은 등록되지 않으며 경고를 한 번 출력)",
                     "related": [
                         "Light",
                         "LightType",
@@ -12033,6 +14261,12 @@ const TrussCAPI = {
                     "desc_ko": "씬에서 조명을 제거",
                     "related": [
                         "Light"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -12076,7 +14310,13 @@ const TrussCAPI = {
                         "active lights"
                     ],
                     "desc_ja": "現在アクティブなライトの数",
-                    "desc_ko": "현재 활성화된 light 개수"
+                    "desc_ko": "현재 활성화된 light 개수",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "setMaterial",
@@ -12505,6 +14745,12 @@ const TrussCAPI = {
                         "Mesh",
                         "createCylinder",
                         "createSphere"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -12564,6 +14810,10 @@ const TrussCAPI = {
                         {
                             "name": "3DPrimitivesExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -12592,6 +14842,10 @@ const TrussCAPI = {
                         {
                             "name": "meshTextureExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 }
@@ -12619,6 +14873,12 @@ const TrussCAPI = {
                     "related": [
                         "TextureFormat",
                         "PixelFormat"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -12639,6 +14899,12 @@ const TrussCAPI = {
                     "related": [
                         "TextureFormat",
                         "PixelFormat"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -12656,6 +14922,12 @@ const TrussCAPI = {
                     "desc_ko": "TextureFormat이 부동소수점 성분을 사용하는지 여부",
                     "related": [
                         "TextureFormat"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -12688,6 +14960,10 @@ const TrussCAPI = {
                         {
                             "name": "shaderExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -12712,6 +14988,10 @@ const TrussCAPI = {
                         {
                             "name": "shaderExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 }
@@ -12739,6 +15019,12 @@ const TrussCAPI = {
                     "related": [
                         "VideoCodec",
                         "VideoWriter"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -12766,6 +15052,12 @@ const TrussCAPI = {
                     "related": [
                         "SendError",
                         "SendResult"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -12787,6 +15079,12 @@ const TrussCAPI = {
                         "printNetworkInterfaces",
                         "getLocalIp",
                         "getLocalIps"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platforms": [
                         "macos",
@@ -12815,6 +15113,12 @@ const TrussCAPI = {
                         "listNetworkInterfaces",
                         "getLocalIps"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -12840,6 +15144,12 @@ const TrussCAPI = {
                         "getLocalIps",
                         "listNetworkInterfaces",
                         "isPrivate"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ],
                     "platforms": [
                         "macos",
@@ -12867,6 +15177,12 @@ const TrussCAPI = {
                         "getLocalIp",
                         "listNetworkInterfaces"
                     ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
                     "platforms": [
                         "macos",
                         "windows",
@@ -12891,6 +15207,12 @@ const TrussCAPI = {
                     "related": [
                         "isPrivate",
                         "isLinkLocal"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -12911,6 +15233,12 @@ const TrussCAPI = {
                         "isLoopback",
                         "isLinkLocal",
                         "sameSubnet"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -12930,6 +15258,12 @@ const TrussCAPI = {
                     "related": [
                         "isLoopback",
                         "isPrivate"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -12949,6 +15283,12 @@ const TrussCAPI = {
                     "related": [
                         "isPrivate",
                         "getLocalIp"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -12967,6 +15307,12 @@ const TrussCAPI = {
                     "desc_ko": "MAC의 OUI(앞 3바이트)를 대문자로 \"A4:83:E7\". 해석 불가 시 \"\"",
                     "related": [
                         "isLocallyAdministered"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 },
                 {
@@ -12986,6 +15332,12 @@ const TrussCAPI = {
                     "desc_ko": "MAC의 locally-administered 비트가 설정되어 있으면 true (랜덤/가상 MAC)",
                     "related": [
                         "getOui"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
                     ]
                 }
             ],
@@ -13038,6 +15390,10 @@ const TrussCAPI = {
                         {
                             "name": "pointCloudExample",
                             "group": "3d"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -13828,8 +16184,8 @@ const TrussCAPI = {
                     "group": "animation"
                 },
                 {
-                    "name": "grabExample",
-                    "group": "node"
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -14173,8 +16529,8 @@ const TrussCAPI = {
                     "group": "graphics"
                 },
                 {
-                    "name": "multiShadowExample",
-                    "group": "3d"
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -14463,6 +16819,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "2D整数ベクトル (x, y)",
             "desc_ko": "2D 정수 벡터 (x, y)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "Vec2",
                 "IVec3"
@@ -14589,6 +16951,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "3D整数ベクトル (x, y, z)",
             "desc_ko": "3D 정수 벡터 (x, y, z)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "Vec3",
                 "IVec2"
@@ -14731,6 +17099,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "4D ベクトル (x, y, z, w)。同次座標や RGBA 形式のデータに使用",
             "desc_ko": "4D 벡터 (x, y, z, w). 동차 좌표 및 RGBA 형식 데이터에 사용",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "Vec3",
                 "Vec2",
@@ -14987,6 +17361,10 @@ const TrussCAPI = {
             "desc_ko": "3D 회전용 단위 쿼터니언",
             "examples": [
                 {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                },
+                {
                     "name": "systemInfoExample",
                     "group": "utils"
                 }
@@ -15204,6 +17582,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "2D アフィン/ホモグラフィ変換用の 3x3 行列 (行優先)。静的ファクトリとホモグラフィソルバを含む",
             "desc_ko": "2D 아핀/호모그래피 변환용 3x3 행렬 (행 우선). 정적 팩토리와 호모그래피 솔버 포함",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "Mat4",
                 "Vec2"
@@ -15355,6 +17739,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "3D変換用4x4行列",
             "desc_ko": "3D 변환용 4x4 행렬",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "getCurrentMatrix",
                 "setMatrix",
@@ -15567,6 +17957,12 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "ある enum 型のラベル表。人間可読な列挙子名の軽量ビュー。",
             "desc_ko": "한 enum 타입의 라벨 테이블. 사람이 읽을 수 있는 열거자 이름의 경량 뷰.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "properties": [
                 {
                     "name": "labels",
@@ -15590,6 +17986,12 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "TC_REFLECT リフレクションのビジター基底クラス。バックエンド（インスペクタ、JSON、コーデック）が型ごとの visit() を実装して継承する。",
             "desc_ko": "TC_REFLECT 리플렉션의 비지터 베이스 클래스. 백엔드(인스펙터, JSON, 코덱)가 타입별 visit()를 구현해 상속한다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "methods": [
                 {
                     "name": "visit",
@@ -15660,6 +18062,36 @@ const TrussCAPI = {
                     "desc": "Leave the current read-only scope."
                 },
                 {
+                    "name": "isDerived",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return true if the current member is a derived value (TC_DERIVED): computed from another member, writable, but not saved."
+                },
+                {
+                    "name": "pushDerived",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Enter a derived-value scope (TC_DERIVED visits inside it)."
+                },
+                {
+                    "name": "popDerived",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Leave the current derived-value scope."
+                },
+                {
                     "name": "beginGroup",
                     "signatures": [
                         {
@@ -15693,12 +18125,12 @@ const TrussCAPI = {
             "desc_ko": "사각형 (x, y, width, height)",
             "examples": [
                 {
-                    "name": "fontExample",
-                    "group": "font"
-                },
-                {
                     "name": "AllFeaturesExample",
                     "group": "tests"
+                },
+                {
+                    "name": "fontExample",
+                    "group": "font"
                 }
             ],
             "related": [
@@ -15844,6 +18276,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "原点と正規化された方向を持つ Ray。統一されたヒットテストとピッキングに使用",
             "desc_ko": "원점과 정규화된 방향을 가진 Ray. 통합된 히트 테스트와 피킹에 사용",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "EasyCam",
                 "screenToWorld"
@@ -16017,6 +18455,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "シーンの一部が描画されたときのカメラ（view / projection / viewport）のスナップショット。カメラスコープ（画面設定・EasyCam::begin・Fbo::begin）ごとに登録され、描画時に各ノードへ刻まれる。これによりマウスピッキングはノードが描画されたのと同じカメラでカーソルを逆投影する。",
             "desc_ko": "장면의 일부가 그려질 때의 카메라(view / projection / viewport) 스냅샷. 카메라 스코프(화면 설정, EasyCam::begin, Fbo::begin)마다 등록되어 그리기 시 각 노드에 찍히므로, 마우스 피킹은 노드가 그려진 것과 같은 카메라로 커서를 역투영한다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "properties": [
                 {
                     "name": "view",
@@ -16113,7 +18557,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction)"
+                    "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction). On the thread that fires the event it is not called again, even later in a notify() pass already running. It does not wait for a callback running on another thread: for audio, follow it with AudioEngine::waitForAudioCallbacks()"
                 },
                 {
                     "name": "isConnected",
@@ -16140,7 +18584,7 @@ const TrussCAPI = {
         },
         {
             "name": "Thread",
-            "desc": "Base class for background threads (ofThread compatible). Subclass it, override the protected pure-virtual threadedFunction() with a while (isThreadRunning()) { ... } loop, then control it with startThread()/stopThread()/waitForThread(). A protected mutex dataMutex_ is available for sharing data.",
+            "desc": "Base class for background threads (ofThread compatible). Subclass it, override the protected pure-virtual threadedFunction() with a while (isThreadRunning()) { ... } loop, then control it with startThread()/stopThread()/waitForThread(). A protected mutex dataMutex_ is available for sharing data. A subclass must call waitForThread() in its own destructor: the base destructor also stops and joins, but only after the subclass members are destroyed, and logs a warning if threadedFunction() is still running. A subclass that does not wait may be destroyed before its worker has called threadedFunction() (e.g. right after startThread()), and then it depends on when the worker makes that call: while the subclass destructor runs, the real threadedFunction() runs and may use members that are already destroyed (undefined behaviour, usually without an abort); at about the moment ~Thread() starts, it can still end in \"pure virtual method called\"; after that, threadedFunction() is skipped and the base destructor warns and joins. Only waiting in the subclass destructor (waitForThread()) rules out all three. Hold subclasses via unique_ptr / shared_ptr (moving a Thread is deprecated: it does not move the running thread).",
             "keywords": [
                 "background",
                 "worker",
@@ -16148,8 +18592,14 @@ const TrussCAPI = {
                 "concurrent",
                 "ofthread"
             ],
-            "desc_ja": "バックグラウンドスレッドの基底クラス（ofThread 互換）。サブクラス化して protected の純粋仮想 threadedFunction() を while (isThreadRunning()) { ... } ループでオーバーライドし、startThread()/stopThread()/waitForThread() で制御する。データ共有用に protected の mutex dataMutex_ が利用できる",
-            "desc_ko": "백그라운드 스레드의 기반 클래스(ofThread 호환). 서브클래싱하여 protected 순수 가상 threadedFunction()을 while (isThreadRunning()) { ... } 루프로 오버라이드한 뒤 startThread()/stopThread()/waitForThread()로 제어. 데이터 공유용 protected mutex dataMutex_가 제공됨",
+            "desc_ja": "バックグラウンドスレッドの基底クラス（ofThread 互換）。サブクラス化して protected の純粋仮想 threadedFunction() を while (isThreadRunning()) { ... } ループでオーバーライドし、startThread()/stopThread()/waitForThread() で制御する。データ共有用に protected の mutex dataMutex_ が利用できる。サブクラスは自分のデストラクタで必ず waitForThread() を呼ぶこと: 基底のデストラクタも停止して join するが、それはサブクラスのメンバが破棄された後になる。threadedFunction() がまだ動いていれば警告をログに出す。待機しないサブクラスは、ワーカーが threadedFunction() を呼ぶ前に破棄されうる（例: startThread() の直後）。その場合はワーカーがその呼び出しに達するタイミング次第になる: サブクラスのデストラクタ実行中なら本物の threadedFunction() が走り、破棄済みのメンバを使いうる（未定義動作で、たいてい異常終了もしない）。~Thread() の開始とほぼ同時なら \"pure virtual method called\" で強制終了しうる。それより後なら threadedFunction() はスキップされ、基底のデストラクタが警告を出して join する。3つすべてを防げるのは、サブクラスのデストラクタで待つ（waitForThread()）ことだけ。サブクラスは unique_ptr / shared_ptr で保持する（Thread のムーブは非推奨: 実行中のスレッドは移らない）",
+            "desc_ko": "백그라운드 스레드의 기반 클래스(ofThread 호환). 서브클래싱하여 protected 순수 가상 threadedFunction()을 while (isThreadRunning()) { ... } 루프로 오버라이드한 뒤 startThread()/stopThread()/waitForThread()로 제어. 데이터 공유용 protected mutex dataMutex_가 제공됨. 서브클래스는 자신의 소멸자에서 반드시 waitForThread()를 호출해야 함: 기반 소멸자도 정지 후 join하지만 서브클래스 멤버가 파괴된 뒤에 실행됨. threadedFunction()이 아직 실행 중이면 경고를 로그로 남김. 대기하지 않는 서브클래스는 워커가 threadedFunction()을 호출하기 전에 파괴될 수 있음(예: startThread() 직후). 그 경우 워커가 그 호출에 도달하는 시점에 따라 달라짐: 서브클래스 소멸자 실행 중이면 실제 threadedFunction()이 실행되어 이미 파괴된 멤버를 사용할 수 있음(정의되지 않은 동작이며, 대개 비정상 종료도 없음). ~Thread() 시작과 거의 같은 순간이면 \"pure virtual method called\"로 강제 종료될 수 있음. 그 이후라면 threadedFunction()은 건너뛰고 기반 소멸자가 경고를 남긴 뒤 join함. 세 경우를 모두 막는 방법은 서브클래스 소멸자에서 대기(waitForThread())하는 것뿐임. 서브클래스는 unique_ptr / shared_ptr로 보유(Thread 이동은 deprecated: 실행 중인 스레드는 옮겨지지 않음)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "ThreadChannel<T>",
                 "isMainThread"
@@ -16195,7 +18645,7 @@ const TrussCAPI = {
                             "params": "bool callStopThread = true"
                         }
                     ],
-                    "desc": "Wait (join) for the thread to finish. If callStopThread is true (default), calls stopThread() first."
+                    "desc": "Wait (join) for the thread to finish. If callStopThread is true (default), calls stopThread() first. A subclass must call it in its own destructor. Never call it on the thread itself (e.g. from a destructor that runs inside threadedFunction()): joining itself throws std::system_error."
                 },
                 {
                     "name": "isThreadRunning",
@@ -16283,6 +18733,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "スレッド間の一方向通信用のスレッドセーフなFIFOキュー（ofThreadChannel 互換）、template<typename T>。Producer-Consumer パターン: ワーカースレッドが値を send() し、別のスレッドが receive() する。双方向通信には2つのチャンネルを使う",
             "desc_ko": "스레드 간 단방향 통신용 스레드 안전 FIFO 큐(ofThreadChannel 호환), template<typename T>. Producer-Consumer 패턴: 워커 스레드가 값을 send()하고 다른 스레드가 receive()함. 양방향 통신에는 채널 두 개를 사용",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "Thread"
             ],
@@ -16331,6 +18787,16 @@ const TrussCAPI = {
                     "desc": "Receive a value without blocking, or waiting at most timeoutMs milliseconds (timeout overload). Returns false immediately/after the timeout if no data."
                 },
                 {
+                    "name": "receiveAll",
+                    "signatures": [
+                        {
+                            "ret": "std::vector<T>",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Receive everything queued right now without blocking and return it as a std::vector<T> in FIFO order, e.g. for (auto& msg : channel.receiveAll()) handle(msg);. Under the lock it only swaps the queue with an empty one; the values are moved into the vector after the lock is released, so other threads wait only for the swap. Values sent afterwards stay queued for the next receive. Returns an empty vector if the channel is empty or closed."
+                },
+                {
                     "name": "close",
                     "signatures": [
                         {
@@ -16358,7 +18824,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Whether the queue is empty (approximate)."
+                    "desc": "Whether the queue is empty. Takes the lock, so it is safe while other threads send; they may send or receive right after it returns."
                 },
                 {
                     "name": "size",
@@ -16368,7 +18834,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of queued values (approximate)."
+                    "desc": "Number of queued values. Takes the lock, so it is safe while other threads send; they may send or receive right after it returns."
                 },
                 {
                     "name": "isClosed",
@@ -16392,6 +18858,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "listen(callback) で購読し notify(arg) で発火する汎用イベント。テンプレートパラメータはリスナーに参照で渡される引数の型。Event<void> は引数なしの特殊化(callback も notify も引数なし)。listen() は破棄時に切断する EventListener RAII トークンを返す",
             "desc_ko": "listen(callback)으로 구독하고 notify(arg)로 발생시키는 범용 이벤트. 템플릿 파라미터는 리스너에 참조로 전달되는 인자 타입. Event<void>는 인자 없는 특수화(callback과 notify 모두 인자 없음). listen()은 파괴 시 연결을 끊는 EventListener RAII 토큰을 반환",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "AudioEngine::audioDeviceChanged",
                 "EventListener",
@@ -16448,7 +18920,7 @@ const TrussCAPI = {
                             "params": "T & arg"
                         }
                     ],
-                    "desc": "Fire the event, calling all listeners in priority order (no argument for Event<void>); stops early if a listener marks an input arg consumed"
+                    "desc": "Fire the event, calling all listeners in priority order (no argument for Event<void>); stops early if a listener marks an input arg consumed. A listener removed during the pass on this thread is not called; one added during the pass starts from the next notify()"
                 },
                 {
                     "name": "listenerCount",
@@ -16483,6 +18955,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "各ログメッセージで渡される引数(level、text、timestamp)",
             "desc_ko": "각 로그 메시지마다 전달되는 인자(level, text, timestamp)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "Logger",
                 "LogLevel",
@@ -16519,19 +18997,35 @@ const TrussCAPI = {
         },
         {
             "name": "Logger",
-            "desc": "Logging core with console and file output and an onLog event; access the global instance via getLogger()",
+            "desc": "Logging core with console, file and system (OS log) output, each with its own level, and an onLog event; access the global instance via getLogger()",
             "keywords": [
                 "log",
                 "logging",
-                "console"
+                "console",
+                "log level",
+                "os_log",
+                "logcat",
+                "OutputDebugString",
+                "system log"
             ],
-            "desc_ja": "コンソール・ファイル出力と onLog イベントを備えたロギングコア。グローバルインスタンスは getLogger() でアクセス",
-            "desc_ko": "콘솔·파일 출력과 onLog 이벤트를 갖춘 로깅 코어. 전역 인스턴스는 getLogger() 로 접근",
+            "desc_ja": "コンソール・ファイル・システム（OS ログ）出力（それぞれ独自のレベル）と onLog イベントを備えたロギングコア。グローバルインスタンスは getLogger() でアクセス",
+            "desc_ko": "콘솔·파일·시스템(OS 로그) 출력(각각 고유 레벨)과 onLog 이벤트를 갖춘 로깅 코어. 전역 인스턴스는 getLogger() 로 접근",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "getLogger",
                 "LogLevel",
                 "LogEventArgs",
-                "logNotice"
+                "logNotice",
+                "setLogLevel",
+                "setConsoleLogLevel",
+                "setFileLogLevel",
+                "setSystemLogLevel",
+                "setLogFile"
             ],
             "constructor": {
                 "signatures": [
@@ -16557,6 +19051,16 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Emit a log message at the given level"
+                },
+                {
+                    "name": "setLogLevel",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "LogLevel level"
+                        }
+                    ],
+                    "desc": "Set the console, file and system log levels at once (a later per-output call wins)"
                 },
                 {
                     "name": "setConsoleLogLevel",
@@ -16586,7 +19090,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Open a file to receive log output"
+                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path"
                 },
                 {
                     "name": "closeFile",
@@ -16619,14 +19123,34 @@ const TrussCAPI = {
                     "desc": "Get the current file log level"
                 },
                 {
-                    "name": "getLogFilePath",
+                    "name": "setSystemLogLevel",
                     "signatures": [
                         {
-                            "ret": "const std::string &",
+                            "ret": "void",
+                            "params": "LogLevel level"
+                        }
+                    ],
+                    "desc": "Set the minimum system (OS log) level: os_log on macOS, OutputDebugStringW on Windows"
+                },
+                {
+                    "name": "getSystemLogLevel",
+                    "signatures": [
+                        {
+                            "ret": "LogLevel",
                             "params": ""
                         }
                     ],
-                    "desc": "Get the path of the current log file"
+                    "desc": "Get the current system (OS log) level"
+                },
+                {
+                    "name": "getLogFilePath",
+                    "signatures": [
+                        {
+                            "ret": "std::string",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Get the path of the current log file, as setLogFile resolved it (UTF-8; empty when no file is open)"
                 },
                 {
                     "name": "isFileOpen",
@@ -16648,6 +19172,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "ストリーム形式のログ出力。logNotice() / logWarning() / logError() が返すオブジェクトで、operator<< で値を流し込む。",
             "desc_ko": "스트림 기반 로그 출력. logNotice() / logWarning() / logError()가 반환하는 객체이며 operator<< 로 값을 흘려보낸다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "constructor": {
                 "signatures": [
                     "LogLevel level, const std::string & module = std::string(\"\")"
@@ -16997,6 +19527,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "リニアRGB空間の色（ガンマエンコードなし）、各チャンネル0.0-1.0のfloat",
             "desc_ko": "선형 RGB 공간의 색상(감마 인코딩 없음), 채널당 0.0-1.0 float",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "Color",
                 "ColorOKLab",
@@ -17296,6 +19832,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "OKLab知覚色空間の色（明度＋2つの反対色軸）",
             "desc_ko": "OKLab 지각 색공간의 색상(명도 + 두 개의 반대색 축)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "ColorOKLCH",
                 "Color",
@@ -17405,6 +19947,10 @@ const TrussCAPI = {
                 {
                     "name": "colorExample",
                     "group": "graphics"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -17519,6 +20065,10 @@ const TrussCAPI = {
                 {
                     "name": "platformInfoExample",
                     "group": "utils"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -17640,6 +20190,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "getLocation() が返す GPS / WiFi 位置情報",
             "desc_ko": "getLocation()이 반환하는 GPS / WiFi 위치 정보",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "getLocation"
             ],
@@ -17691,6 +20247,10 @@ const TrussCAPI = {
                 {
                     "name": "platformInfoExample",
                     "group": "utils"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -17786,6 +20346,10 @@ const TrussCAPI = {
                 {
                     "name": "platformInfoExample",
                     "group": "utils"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -17912,6 +20476,10 @@ const TrussCAPI = {
                 {
                     "name": "curvesExample",
                     "group": "graphics"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -18456,6 +21024,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "windowResized イベントの引数",
             "desc_ko": "windowResized 이벤트의 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "properties": [
                 {
                     "name": "width",
@@ -18483,6 +21057,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "filesDropped イベントの引数",
             "desc_ko": "filesDropped 이벤트의 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "ClipboardPastedEventArgs"
             ],
@@ -18524,6 +21104,10 @@ const TrussCAPI = {
                 {
                     "name": "clipboardExample",
                     "group": "utils"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -18551,6 +21135,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TouchEventArgs 内の単一の指",
             "desc_ko": "TouchEventArgs 내의 단일 손가락",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TouchEventArgs"
             ],
@@ -18608,6 +21198,10 @@ const TrussCAPI = {
                 {
                     "name": "systemInfoExample",
                     "group": "utils"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -18681,6 +21275,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "console イベントの引数(stdin から受け取ったコマンドライン)",
             "desc_ko": "console 이벤트의 인자(stdin에서 수신한 명령줄)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "events"
             ],
@@ -18711,6 +21311,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "exitRequested イベントの引数",
             "desc_ko": "exitRequested 이벤트의 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "requestExitApp",
                 "events"
@@ -18736,6 +21342,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "フレームワークの全コアイベントのハブ。各メンバーは .listen(callback) で購読する Event。グローバルインスタンスは events() でアクセス",
             "desc_ko": "프레임워크의 모든 코어 이벤트 허브. 각 멤버는 .listen(callback) 으로 구독하는 Event. 전역 인스턴스는 events() 로 접근",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "events",
                 "Event<T>",
@@ -18783,6 +21395,13 @@ const TrussCAPI = {
                     "desc": "Fired on app exit",
                     "desc_ja": "アプリ終了時に発火",
                     "desc_ko": "앱 종료 시 발생"
+                },
+                {
+                    "name": "hotReloadUnload",
+                    "type": "Event<void>",
+                    "desc": "Hot reload only: fired before the host unloads the current guest build (on each reload, and at exit after exit), while its App is still alive. Guest code whose state outlives the App (singletons, function-local statics) drops its listeners on the host's events here; tcxImGui and tcxNodeInspector do this themselves. Never fired in a normal build",
+                    "desc_ja": "ホットリロード専用: ホストが現在のゲストビルドをアンロードする前(リロードのたび、および終了時に exit の後)、App がまだ生きている間に発火。App より長く生きる状態(シングルトン、関数内 static)を持つゲストのコードは、ここでホストのイベントへのリスナーを外す。tcxImGui と tcxNodeInspector は自動で行う。通常ビルドでは発火しない",
+                    "desc_ko": "핫 리로드 전용: 호스트가 현재 게스트 빌드를 언로드하기 전(리로드마다, 그리고 종료 시 exit 다음), App이 아직 살아 있는 동안 발생. App보다 오래 사는 상태(싱글턴, 함수 내 static)를 가진 게스트 코드는 여기서 호스트 이벤트의 리스너를 해제함. tcxImGui와 tcxNodeInspector는 자동으로 처리. 일반 빌드에서는 발생하지 않음"
                 },
                 {
                     "name": "exitRequested",
@@ -18909,6 +21528,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "リソース読み込み（Image、SoundBuffer、VideoPlayer、Font など）の結果。成功時は真、失敗時は LoadError とメッセージを保持",
             "desc_ko": "리소스 로드(Image, SoundBuffer, VideoPlayer, Font 등)의 결과. 성공 시 참, 실패 시 LoadError와 메시지를 보유",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "LoadError",
                 "loadErrorName"
@@ -18976,6 +21601,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "Sound::play()が扱えるものの抽象基底。具象サブクラスは2つ: SoundBuffer(eager、全PCMをRAMに保持)とSoundStream(ディスクからオンデマンドにデコード)。共有のchannels / sampleRateフィールドとkind() / getDuration()インターフェースを保持",
             "desc_ko": "Sound::play()가 다룰 수 있는 것의 추상 기반. 구체 서브클래스 2개: SoundBuffer(eager, 전체 PCM을 RAM에 보유)와 SoundStream(디스크에서 on-demand 디코딩). 공유 channels / sampleRate 필드와 kind() / getDuration() 인터페이스를 보유",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "SoundBuffer",
                 "SoundStream",
@@ -19098,6 +21729,16 @@ const TrussCAPI = {
                 }
             ],
             "methods": [
+                {
+                    "name": "getPath",
+                    "signatures": [
+                        {
+                            "ret": "fs::path",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "File the samples were decoded from (for AAC, when loaded through load()); empty for memory, PCM and generated buffers."
+                },
                 {
                     "name": "loadOgg",
                     "signatures": [
@@ -19234,7 +21875,7 @@ const TrussCAPI = {
                             "params": "const void * data, size_t dataSize, int numChannels, int rate, int bitsPerSample = 16, bool bigEndian = false"
                         }
                     ],
-                    "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths."
+                    "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths, a channel count below 1, a data size that is not a whole number of frames, or more samples than a buffer can hold."
                 },
                 {
                     "name": "getDuration",
@@ -19334,7 +21975,7 @@ const TrussCAPI = {
                             "params": "const SoundBuffer & other, size_t offsetSamples, float volume = 1.0"
                         }
                     ],
-                    "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed."
+                    "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed. offsetSamples is in frames (samples per channel, like numSamples). Both buffers must have the same channel count; otherwise nothing is mixed and an error is logged."
                 },
                 {
                     "name": "clip",
@@ -19372,7 +22013,7 @@ const TrussCAPI = {
         },
         {
             "name": "SoundStream",
-            "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a ~10 ms refill, and each polyphony slot costs one open file handle + decoder + ring buffer.",
+            "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a refill of usually ~10 ms (a file whose length is unknown cannot seek), and each polyphony slot costs one open file handle + decoder + ring buffer.",
             "keywords": [
                 "streaming audio",
                 "bgm",
@@ -19380,8 +22021,14 @@ const TrussCAPI = {
                 "disk audio",
                 "on demand"
             ],
-            "desc_ja": "ストリーミングなサウンドソース: ファイルを開いたままにし、全PCMをRAMに置く代わりにvoiceごとの小さなring bufferへオンデマンドにデコードする。SoundSourceから派生(channels / sampleRate / kind() / getDuration()を継承)。長尺ファイル(BGM、ポッドキャスト)に最適。SoundBufferとのトレードオフ: setSpeed()は1.0として扱われ、setPosition()は約10 msのrefillでseekし、polyphonyスロットごとにopenファイルハンドル+デコーダ+ring bufferのコストがかかる",
-            "desc_ko": "스트리밍 사운드 소스: 파일을 열어둔 채로, 전체 PCM을 RAM에 두는 대신 voice별 작은 ring buffer로 on-demand 디코딩. SoundSource에서 파생(channels / sampleRate / kind() / getDuration() 상속). 긴 파일(BGM, 팟캐스트)에 최적. SoundBuffer 대비 트레이드오프: setSpeed()는 1.0으로 처리되고, setPosition()은 약 10 ms의 refill로 seek하며, polyphony 슬롯마다 open 파일 핸들 + 디코더 + ring buffer 비용이 듦",
+            "desc_ja": "ストリーミングなサウンドソース: ファイルを開いたままにし、全PCMをRAMに置く代わりにvoiceごとの小さなring bufferへオンデマンドにデコードする。SoundSourceから派生(channels / sampleRate / kind() / getDuration()を継承)。長尺ファイル(BGM、ポッドキャスト)に最適。SoundBufferとのトレードオフ: setSpeed()は1.0として扱われ、setPosition()は通常約10 msのrefillでseekし(長さが不明なファイルはseekできない)、polyphonyスロットごとにopenファイルハンドル+デコーダ+ring bufferのコストがかかる",
+            "desc_ko": "스트리밍 사운드 소스: 파일을 열어둔 채로, 전체 PCM을 RAM에 두는 대신 voice별 작은 ring buffer로 on-demand 디코딩. SoundSource에서 파생(channels / sampleRate / kind() / getDuration() 상속). 긴 파일(BGM, 팟캐스트)에 최적. SoundBuffer 대비 트레이드오프: setSpeed()는 1.0으로 처리되고, setPosition()은 보통 약 10 ms의 refill로 seek하며(길이를 알 수 없는 파일은 seek할 수 없음), polyphony 슬롯마다 open 파일 핸들 + 디코더 + ring buffer 비용이 듦",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "SoundBuffer",
                 "SoundSource"
@@ -19400,7 +22047,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path, int maxPolyphony = 1"
                         }
                     ],
-                    "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported.",
+                    "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened, the format is unsupported, or the file has no audio frames (DecodeFailed).",
                     "platformNote": "Streaming audio (Sound::loadStream / SoundStream). On wasm it is unsupported (needs std::thread + on-disk file I/O, neither available in the default browser build); Sound::loadStream() logs a warning and silently falls back to eager load(). So you always get a Sound, but it is never actually streamed on web — branch on isStreaming() / __EMSCRIPTEN__ if it matters.",
                     "platformNote_ja": "ストリーミング再生 (Sound::loadStream / SoundStream)。wasm では非対応 (std::thread + ディスクI/O が必要、ブラウザの既定ビルドにはどちらも無い)。Sound::loadStream() は警告を出して eager load() に静かにフォールバックする。Sound 自体は得られるが web では決してストリームされない — 必要なら isStreaming() / __EMSCRIPTEN__ で分岐する。"
                 },
@@ -19412,7 +22059,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Decoded file duration in seconds."
+                    "desc": "Decoded file duration in seconds. 0 when the file does not record its length (e.g. a FLAC encoded to a pipe); such a stream plays to its end but cannot seek, and an engine re-init at another sample rate restarts it from the beginning."
                 },
                 {
                     "name": "getPath",
@@ -19448,6 +22095,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "AudioEngine::play() が返す 1 本のライブミキサーボイス。フィールドは audio thread が各コールバックで読む再生状態 (volume / pan / speed / loop / playing / paused / mixMode / 位置) とチャンネルルーティングのスナップショット。大半は atomic なので UI thread から再生中に書き換えられる。直接設定する",
             "desc_ko": "AudioEngine::play()가 반환하는 하나의 라이브 믹서 보이스. 필드는 오디오 스레드가 콜백마다 읽는 재생 상태 (volume / pan / speed / loop / playing / paused / mixMode / 위치) 와 채널 라우팅 스냅샷. 대부분 atomic이라 UI 스레드에서 재생 중에 변경 가능. 직접 설정한다",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "AudioEngine",
                 "SoundSource",
@@ -19534,9 +22187,9 @@ const TrussCAPI = {
                 {
                     "name": "positionF",
                     "type": "double",
-                    "desc": "Floating-point playback cursor in source samples; advances by speed * rateRatio each output frame.",
-                    "desc_ja": "ソースサンプル単位の浮動小数点再生カーソル。各出力フレームで speed * rateRatio ずつ進む",
-                    "desc_ko": "소스 샘플 단위의 부동소수점 재생 커서. 각 출력 프레임마다 speed * rateRatio 만큼 진행"
+                    "desc": "Floating-point playback cursor; advances by speed * rateRatio each output frame. An eager voice counts source sample frames; a stream counts frames at the engine rate its decoder outputs at (the voice's position rate, which a re-init at another rate can change), not source samples. Use Sound::getPosition() for seconds.",
+                    "desc_ja": "浮動小数点の再生カーソル。各出力フレームで speed * rateRatio ずつ進む。eager ボイスはソースのサンプルフレーム単位、ストリームはデコーダが出力するエンジンレートのフレーム単位 (ボイスの位置レート。別レートでの再初期化で変わりうる) で、ソースサンプル単位ではない。秒で欲しいときは Sound::getPosition() を使う",
+                    "desc_ko": "부동소수점 재생 커서. 각 출력 프레임마다 speed * rateRatio 만큼 진행. eager 보이스는 소스 샘플 프레임 단위, 스트림은 디코더가 출력하는 엔진 레이트의 프레임 단위(보이스의 위치 레이트로, 다른 레이트로 재초기화하면 바뀔 수 있음)이며 소스 샘플 단위가 아님. 초 단위는 Sound::getPosition() 사용"
                 },
                 {
                     "name": "rateRatio",
@@ -19544,6 +22197,13 @@ const TrussCAPI = {
                     "desc": "Source-to-engine sample-rate ratio (buffer sampleRate / engine sampleRate), set when queued so the voice plays at correct pitch regardless of engine rate.",
                     "desc_ja": "ソース対エンジンのサンプルレート比 (buffer sampleRate / engine sampleRate)。キュー時に設定され、エンジンレートに依らず正しいピッチで再生される",
                     "desc_ko": "소스 대 엔진 샘플레이트 비율 (buffer sampleRate / engine sampleRate). 큐 등록 시 설정되어 엔진 레이트와 무관하게 올바른 피치로 재생"
+                },
+                {
+                    "name": "level",
+                    "type": "std::atomic<float>",
+                    "desc": "Peak absolute value of this voice's contribution to the mix over the most recent audio callback (after volume / pan / channel gains). Written by the audio thread; read it for metering.",
+                    "desc_ja": "直近のオーディオコールバックでこのボイスがミックスに加えた値のピーク絶対値 (volume / pan / チャンネルゲイン適用後)。オーディオスレッドが書く。メーター表示用に読む",
+                    "desc_ko": "최근 오디오 콜백에서 이 보이스가 믹스에 더한 값의 피크 절댓값 (volume / pan / 채널 게인 적용 후). 오디오 스레드가 쓴다. 미터 표시용으로 읽는다"
                 }
             ]
         },
@@ -19630,6 +22290,10 @@ const TrussCAPI = {
                 {
                     "name": "audioDeviceExample",
                     "group": "sound"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -19666,6 +22330,10 @@ const TrussCAPI = {
                 {
                     "name": "audioDeviceExample",
                     "group": "sound"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -19704,9 +22372,9 @@ const TrussCAPI = {
                 {
                     "name": "bufferSize",
                     "type": "int",
-                    "desc": "Active device buffer size in frames",
-                    "desc_ja": "アクティブなデバイスバッファサイズ (フレーム単位)",
-                    "desc_ko": "활성 디바이스 버퍼 크기 (프레임 단위)"
+                    "desc": "Buffer (period) size the device runs with, in frames at the engine rate (granted by the device; bufferSize / sampleRate = period in seconds). Not the requested value: see AudioEngine::getBufferSize.",
+                    "desc_ja": "デバイスが実際に使うバッファ (ピリオド) サイズ。エンジンのサンプルレートでのフレーム数 (デバイスが許可した値。bufferSize / sampleRate = 秒単位のピリオド)。要求値ではない。要求値は AudioEngine::getBufferSize",
+                    "desc_ko": "디바이스가 실제로 사용하는 버퍼 (피리어드) 크기. 엔진 샘플레이트 기준 프레임 수 (디바이스가 허용한 값. bufferSize / sampleRate = 초 단위 피리어드). 요청값이 아님. 요청값은 AudioEngine::getBufferSize"
                 },
                 {
                     "name": "maxPolyphony",
@@ -19791,6 +22459,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "AudioEngine::audioIn イベントの引数型。1 回のキャプチャコールバック分のインターリーブされた読み取り専用マイク入力を保持する。処理は素早く済ませて返すこと。ここからエンジン API を呼ばないこと",
             "desc_ko": "AudioEngine::audioIn 이벤트의 인자 타입. 한 번의 캡처 콜백 분량의 인터리브된 읽기 전용 마이크 입력을 보유. 처리를 빠르게 끝내고 반환할 것. 여기서 엔진 API 를 호출하지 말 것",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "MicInput",
                 "AudioOutBuffer"
@@ -19830,6 +22504,204 @@ const TrussCAPI = {
                     "desc": "Monotonic count of input frames received since capture start",
                     "desc_ja": "キャプチャ開始以降に受信した入力フレームの単調カウント",
                     "desc_ko": "캡처 시작 이후 수신한 입력 프레임의 단조 카운트"
+                }
+            ]
+        },
+        {
+            "name": "PlayingSoundInfo",
+            "desc": "One playing (or paused) sound as reported by AudioEngine::getPlayingSounds(): a copy taken under the engine lock, so later changes to the playback are not reflected.",
+            "keywords": [
+                "playing sound",
+                "playback",
+                "voice",
+                "diagnostics",
+                "level"
+            ],
+            "desc_ja": "AudioEngine::getPlayingSounds() が返す再生中 (または一時停止中) のサウンド 1 つ分。エンジンのロック下で取ったコピーなので、その後の再生の変化は反映されない",
+            "desc_ko": "AudioEngine::getPlayingSounds() 가 반환하는 재생 중 (또는 일시 정지 중) 인 사운드 하나. 엔진 락 아래에서 만든 복사본이므로 이후 재생 변화는 반영되지 않는다",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "AudioEngine::getPlayingSounds",
+                "PlayingSound"
+            ],
+            "properties": [
+                {
+                    "name": "slot",
+                    "type": "int",
+                    "desc": "Playback slot index (0 .. maxPolyphony - 1).",
+                    "desc_ja": "再生スロットの番号 (0 .. maxPolyphony - 1)",
+                    "desc_ko": "재생 슬롯 번호 (0 .. maxPolyphony - 1)"
+                },
+                {
+                    "name": "path",
+                    "type": "fs::path",
+                    "desc": "Source file (fs::path) as given, the same value as SoundBuffer::getPath() / SoundStream::getPath() and the file name in the logs; empty for generated or in-memory buffers. tc_get_audio_state reports it as UTF-8.",
+                    "desc_ja": "ソースファイル (fs::path)。渡されたままの値で、SoundBuffer::getPath() / SoundStream::getPath() やログのファイル名と同じ。生成したバッファやメモリからのバッファでは空。tc_get_audio_state は UTF-8 で返す",
+                    "desc_ko": "소스 파일 (fs::path). 전달된 그대로의 값으로, SoundBuffer::getPath() / SoundStream::getPath() 및 로그의 파일 이름과 같다. 생성한 버퍼나 메모리 버퍼에서는 비어 있음. tc_get_audio_state 는 UTF-8 로 보고한다"
+                },
+                {
+                    "name": "streaming",
+                    "type": "bool",
+                    "desc": "True for a SoundStream playback (Sound::loadStream), false for an eager SoundBuffer.",
+                    "desc_ja": "SoundStream の再生 (Sound::loadStream) なら true、eager な SoundBuffer なら false",
+                    "desc_ko": "SoundStream 재생 (Sound::loadStream) 이면 true, eager SoundBuffer 면 false"
+                },
+                {
+                    "name": "paused",
+                    "type": "bool",
+                    "desc": "True while the playback is paused (Sound::pause()).",
+                    "desc_ja": "一時停止中 (Sound::pause()) なら true",
+                    "desc_ko": "일시 정지 중 (Sound::pause()) 이면 true"
+                },
+                {
+                    "name": "loop",
+                    "type": "bool",
+                    "desc": "Loop flag of the playback.",
+                    "desc_ja": "再生のループ設定",
+                    "desc_ko": "재생의 루프 설정"
+                },
+                {
+                    "name": "position",
+                    "type": "float",
+                    "desc": "Playback position in seconds.",
+                    "desc_ja": "再生位置 (秒)",
+                    "desc_ko": "재생 위치 (초)"
+                },
+                {
+                    "name": "duration",
+                    "type": "float",
+                    "desc": "Source duration in seconds.",
+                    "desc_ja": "ソースの長さ (秒)",
+                    "desc_ko": "소스 길이 (초)"
+                },
+                {
+                    "name": "volume",
+                    "type": "float",
+                    "desc": "Volume of the playback.",
+                    "desc_ja": "再生の音量",
+                    "desc_ko": "재생의 볼륨"
+                },
+                {
+                    "name": "pan",
+                    "type": "float",
+                    "desc": "Pan of the playback (-1 left, 0 center, 1 right).",
+                    "desc_ja": "再生のパン (-1 左、0 中央、1 右)",
+                    "desc_ko": "재생의 팬 (-1 왼쪽, 0 중앙, 1 오른쪽)"
+                },
+                {
+                    "name": "speed",
+                    "type": "float",
+                    "desc": "Playback speed (1.0 = natural pitch).",
+                    "desc_ja": "再生速度 (1.0 = 元のピッチ)",
+                    "desc_ko": "재생 속도 (1.0 = 원래 피치)"
+                },
+                {
+                    "name": "level",
+                    "type": "float",
+                    "desc": "Peak absolute value of this playback's output in the last audio callback, after volume / pan / channel gains (linear, 1.0 = full scale; can exceed 1). 0 while paused, and while the engine is not running.",
+                    "desc_ja": "直近のオーディオコールバックでのこの再生の出力のピーク絶対値。volume / pan / チャンネルゲイン適用後 (リニア、1.0 = フルスケール、1 を超えることもある)。一時停止中と、エンジン停止中は 0",
+                    "desc_ko": "최근 오디오 콜백에서 이 재생 출력의 피크 절댓값. volume / pan / 채널 게인 적용 후 (선형, 1.0 = 풀 스케일, 1 을 넘을 수 있음). 일시 정지 중, 그리고 엔진이 정지 상태일 때는 0"
+                }
+            ]
+        },
+        {
+            "name": "AudioStats",
+            "desc": "Audio engine health counters and meters, returned by AudioEngine::getStats(). Counters are cumulative since the process started (they survive re-init); peak / rms / cpuUsage describe the recent output.",
+            "keywords": [
+                "audio diagnostics",
+                "dropped plays",
+                "clipping",
+                "cpu usage",
+                "cpu load",
+                "meter"
+            ],
+            "desc_ja": "AudioEngine::getStats() が返すオーディオエンジンの健全性カウンタとメーター。カウンタはプロセス起動からの累計 (再初期化でも消えない)。peak / rms / cpuUsage は直近の出力を表す",
+            "desc_ko": "AudioEngine::getStats() 가 반환하는 오디오 엔진 상태 카운터와 미터. 카운터는 프로세스 시작 이후 누계 (재초기화해도 유지). peak / rms / cpuUsage 는 최근 출력을 나타낸다",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "AudioEngine::getStats",
+                "PlayingSoundInfo"
+            ],
+            "properties": [
+                {
+                    "name": "droppedPlays",
+                    "type": "uint64_t",
+                    "desc": "Plays AudioEngine::play() refused since startup (Sound::play() returned false), all reasons: the sum of the four dropped* fields.",
+                    "desc_ja": "起動から AudioEngine::play() が拒否した再生の数 (Sound::play() が false を返した)。全理由の合計で、4 つの dropped* フィールドの和",
+                    "desc_ko": "시작 이후 AudioEngine::play() 가 거부한 재생 수 (Sound::play() 가 false 반환). 모든 이유의 합계로, 네 개의 dropped* 필드의 합"
+                },
+                {
+                    "name": "droppedPolyphonyLimit",
+                    "type": "uint64_t",
+                    "desc": "Plays refused because every playback slot was busy (AudioSettings::maxPolyphony, default 32).",
+                    "desc_ja": "全再生スロットが使用中 (AudioSettings::maxPolyphony、既定 32) で捨てた再生の数",
+                    "desc_ko": "모든 재생 슬롯이 사용 중 (AudioSettings::maxPolyphony, 기본 32) 이라 버려진 재생 수"
+                },
+                {
+                    "name": "droppedStreamLimit",
+                    "type": "uint64_t",
+                    "desc": "Plays refused because a SoundStream already had maxPolyphony playbacks. Only copies of a streamed Sound can hit this: a single Sound stops its previous playback first.",
+                    "desc_ja": "SoundStream が既に maxPolyphony 本の再生を持っていたために捨てた再生の数。ストリームした Sound のコピーでだけ起きる (単独の Sound は前の再生を先に止める)",
+                    "desc_ko": "SoundStream 이 이미 maxPolyphony 개의 재생을 갖고 있어 버려진 재생 수. 스트리밍 Sound 의 복사본에서만 발생 (단일 Sound 는 이전 재생을 먼저 정지)"
+                },
+                {
+                    "name": "droppedDecoderError",
+                    "type": "uint64_t",
+                    "desc": "Plays refused because a stream's file could not be reopened for the new playback (moved, deleted or unreadable).",
+                    "desc_ja": "ストリームのファイルを新しい再生用に開き直せず (移動・削除・読めない) 捨てた再生の数",
+                    "desc_ko": "스트림 파일을 새 재생용으로 다시 열 수 없어 (이동·삭제·읽기 불가) 버려진 재생 수"
+                },
+                {
+                    "name": "droppedNotRunning",
+                    "type": "uint64_t",
+                    "desc": "Plays refused because no output device was running (init failed, or after shutdown()).",
+                    "desc_ja": "出力デバイスが動いていなかった (init 失敗、または shutdown() 後) ために捨てた再生の数",
+                    "desc_ko": "출력 디바이스가 동작하지 않아 (init 실패 또는 shutdown() 이후) 버려진 재생 수"
+                },
+                {
+                    "name": "clippedSamples",
+                    "type": "uint64_t",
+                    "desc": "Output samples beyond +/-1.0 that the final clamp cut off (counted per channel sample).",
+                    "desc_ja": "最終クランプで切り落とされた ±1.0 を超える出力サンプル数 (チャンネルごとのサンプル単位)",
+                    "desc_ko": "최종 클램프에서 잘린 ±1.0 을 넘는 출력 샘플 수 (채널별 샘플 단위)"
+                },
+                {
+                    "name": "peak",
+                    "type": "float",
+                    "desc": "Master output peak over the last ~100 ms, linear (1.0 = full scale). Measured before the clamp, so a value above 1 shows how far the mix overshoots. 0 while the engine is not running.",
+                    "desc_ja": "直近約 100 ms のマスター出力のピーク (リニア、1.0 = フルスケール)。クランプ前に測るので、1 を超えた値はミックスのはみ出し量を示す。エンジン停止中は 0",
+                    "desc_ko": "최근 약 100 ms 의 마스터 출력 피크 (선형, 1.0 = 풀 스케일). 클램프 전에 측정하므로 1 을 넘는 값은 믹스가 얼마나 넘쳤는지를 보여준다. 엔진이 정지 상태면 0"
+                },
+                {
+                    "name": "rms",
+                    "type": "float",
+                    "desc": "Master output RMS over the same ~100 ms window, linear. 0 while the engine is not running.",
+                    "desc_ja": "同じ約 100 ms 区間のマスター出力の RMS (リニア)。エンジン停止中は 0",
+                    "desc_ko": "같은 약 100 ms 구간의 마스터 출력 RMS (선형). 엔진이 정지 상태면 0"
+                },
+                {
+                    "name": "cpuUsage",
+                    "type": "float",
+                    "desc": "Fraction of audio-thread time: time spent mixing the playing sounds and audioOut listeners divided by the audio time produced, averaged over ~0.5 s of audio. 1.0 means the callback took as long as the audio it produced (0.25 = a quarter of the time budget). 0 while the engine is not running.",
+                    "desc_ja": "オーディオスレッドの時間の割合: 再生中のサウンドと audioOut リスナーのミックスにかかった時間 ÷ 生成した音の時間。約 0.5 秒分の音の平均。1.0 はコールバックが生成した音と同じだけの時間がかかったことを表す (0.25 = 時間予算の 4 分の 1)。エンジン停止中は 0",
+                    "desc_ko": "오디오 스레드 시간의 비율: 재생 중인 사운드와 audioOut 리스너 믹스에 걸린 시간 ÷ 생성한 오디오 시간. 약 0.5 초 분량의 오디오 평균. 1.0 은 콜백이 생성한 오디오만큼의 시간이 걸렸다는 뜻 (0.25 = 시간 예산의 4 분의 1). 엔진이 정지 상태면 0"
+                },
+                {
+                    "name": "cpuUsagePeak",
+                    "type": "float",
+                    "desc": "CPU usage of the worst single callback in the same window; above 1 the callback took longer than the audio it produced (a dropout). 0 while the engine is not running.",
+                    "desc_ja": "同じ区間で最も重かったコールバック 1 回の CPU 使用率。1 を超えたらコールバックが生成した音より長くかかった (音切れ)。エンジン停止中は 0",
+                    "desc_ko": "같은 구간에서 가장 무거웠던 콜백 한 번의 CPU 사용률. 1 을 넘으면 콜백이 생성한 오디오보다 오래 걸린 것 (끊김). 엔진이 정지 상태면 0"
                 }
             ]
         },
@@ -19898,7 +22770,7 @@ const TrussCAPI = {
                             "params": "const AudioSettings & settings"
                         }
                     ],
-                    "desc": "Initialize the engine with defaults, or with an AudioSettings override. Re-init on a running engine migrates active voices to the new settings. Returns true on success."
+                    "desc": "Initialize the engine, or re-initialize it with an AudioSettings override. init(settings) keeps the sample rate, channels, buffer size and polyphony even when it fails; init() with no arguments reuses the last ones (the defaults if init(settings) was never called) but always opens the system default device. Re-init on a running engine migrates active voices to the new settings. With no usable audio backend, miniaudio falls back to its silent Null device: init() then succeeds and logs a warning. Returns true on success, false when no output device can be opened; the failure is logged through logError(\"AudioEngine\") with the requested device name. A failed re-init leaves the engine stopped: the running device is closed before the new one is tried. It may be called again later; each failed try opens the device and logs again, so retry on a timer (about once a second) or on a user action, not every frame. Sound::load*() calls init() while the engine is not initialized, so after a failed init(settings) it opens the system default device with those settings; call init(settings) again before loading sounds if you want the requested device."
                 },
                 {
                     "name": "shutdown",
@@ -19948,7 +22820,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Current device buffer size in frames (0 = miniaudio default)."
+                    "desc": "Requested buffer size in frames, as passed in AudioSettings::bufferSize (0 = backend default). The size the device actually uses is AudioDeviceChangedArgs::bufferSize."
                 },
                 {
                     "name": "isInitialized",
@@ -19959,6 +22831,36 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "True after a successful init()."
+                },
+                {
+                    "name": "getStats",
+                    "signatures": [
+                        {
+                            "ret": "AudioStats",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Engine health snapshot (AudioStats): plays dropped since startup, in total and by reason; hard-clipped output samples; master peak / RMS; audio-thread CPU usage. Only reads atomics, so it is cheap from any thread. The tc_get_audio_state MCP tool reports the same numbers."
+                },
+                {
+                    "name": "getPlayingSounds",
+                    "signatures": [
+                        {
+                            "ret": "std::vector<PlayingSoundInfo>",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Snapshot of the sounds currently playing or paused (PlayingSoundInfo: slot, path, streaming, position, duration, volume, pan, speed, loop, paused, level). Playbacks left in their slots after shutdown() are listed with level 0. Copied under the engine lock: call it from the main thread, not from an audioOut / audioIn listener."
+                },
+                {
+                    "name": "waitForAudioCallbacks",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Teardown barrier for audioOut / audioIn listeners: returns once every audio callback that was running when it was called has finished. EventListener::disconnect() does not wait for a callback running on the audio thread, so an object whose listener uses its members disconnects, calls this, and only then lets the members go (in its own destructor or cleanup(), not in a base-class destructor). Returns true at once when no audio runs or when called from inside a listener; gives up on a listener stuck for about one second (logs a warning, returns false). It waits for every audioOut / audioIn listener running at that moment, not only yours, so don't call it while holding a lock that a listener takes: that listener blocks, the call waits the full second, and the audio drops out meanwhile."
                 },
                 {
                     "name": "getAnalysisBuffer",
@@ -20020,16 +22922,19 @@ const TrussCAPI = {
         },
         {
             "name": "Sound",
-            "desc": "Audio playback",
+            "desc": "Audio playback. A Sound plays only while it, or a copy of it, is alive: copies share the voice, and when the last handle is destroyed or overwritten the voice stops (looping or one-shot) and its slot is freed. Keep Sound objects alive (e.g. as members) to play overlapping one-shots.",
             "keywords": [
                 "audio",
                 "player",
                 "sfx",
                 "music",
-                "of sound player"
+                "of sound player",
+                "lifetime",
+                "voice",
+                "scope"
             ],
-            "desc_ja": "オーディオ再生",
-            "desc_ko": "오디오 재생",
+            "desc_ja": "オーディオ再生。Sound は自身かそのコピーが生きている間だけ鳴る: コピーはボイスを共有し、最後のハンドルが破棄または上書きされるとボイスは止まり (ループでもワンショットでも)、スロットが空く。ワンショットを重ねて鳴らすときは Sound オブジェクトを生かしておく (メンバーにするなど)",
+            "desc_ko": "오디오 재생. Sound 는 자신 또는 그 복사본이 살아 있는 동안에만 재생된다: 복사본은 보이스를 공유하고, 마지막 핸들이 파괴되거나 덮어쓰이면 보이스가 정지하고 (루프든 원샷이든) 슬롯이 비워진다. 원샷을 겹쳐 재생하려면 Sound 객체를 살려 둔다 (멤버로 두는 등)",
             "examples": [
                 {
                     "name": "chipSoundExample",
@@ -20058,7 +22963,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a"
+                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a (case-insensitive; the file name keeps its case as written)"
                 },
                 {
                     "name": "loadStream",
@@ -20127,11 +23032,11 @@ const TrussCAPI = {
                     "name": "play",
                     "signatures": [
                         {
-                            "ret": "void",
+                            "ret": "bool",
                             "params": ""
                         }
                     ],
-                    "desc": "Play audio"
+                    "desc": "Play from the beginning (this Sound's previous voice is stopped first). Returns false when nothing will play: not loaded, or the engine dropped the play (every voice busy, the stream's maxPolyphony reached by a copy of a streamed Sound, the stream file could not be reopened, or no output device running). Drops are logged as warnings and counted in AudioEngine::getStats()."
                 },
                 {
                     "name": "stop",
@@ -20141,7 +23046,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Stop audio"
+                    "desc": "Stop audio and release the voice (a streamed voice also closes its decoder and file). Copies that share the voice see it stopped."
                 },
                 {
                     "name": "pause",
@@ -20355,7 +23260,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get playback position in seconds"
+                    "desc": "Get playback position in seconds. On a stream, right after setPosition() and until the audio has moved there (usually ~10 ms), this is the requested position."
                 },
                 {
                     "name": "setPosition",
@@ -20365,7 +23270,7 @@ const TrussCAPI = {
                             "params": "float seconds"
                         }
                     ],
-                    "desc": "Seek to a specific time in seconds. On streams, costs ~10 ms blackout while the ring refills."
+                    "desc": "Seek to a specific time in seconds. On streams the decoder seeks and the ring refills, so the audio moves after ~10 ms of silence (longer on slow storage or for an MP3 several hours long); getPosition() reports the new position at once, the last of several calls wins, and a paused stream resumes from there. A stream whose length is unknown (getDuration() is 0) cannot seek: the call is ignored with a warning."
                 },
                 {
                     "name": "getDuration",
@@ -20390,6 +23295,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "マイク入力 (miniaudio)。入力デバイスを開き、最新サンプルをリングバッファ経由で公開する。共有インスタンスはグローバルの getMicInput() で取得し、start() する。getMicAnalysisBuffer() は getBuffer() の簡易ラッパー",
             "desc_ko": "마이크 입력 (miniaudio). 입력 디바이스를 열고 최신 샘플을 링 버퍼를 통해 노출한다. 공유 인스턴스는 전역 getMicInput() 으로 접근한 뒤 start() 한다. getMicAnalysisBuffer() 는 getBuffer() 의 편의 래퍼",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "getMicInput",
                 "AudioEngine",
@@ -20452,6 +23363,16 @@ const TrussCAPI = {
                     "desc": "Sample rate the microphone was opened at."
                 },
                 {
+                    "name": "getDeviceName",
+                    "signatures": [
+                        {
+                            "ret": "std::string",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Name of the capture device start() opened; empty while stopped, and on Web (the browser does not expose it)."
+                },
+                {
                     "name": "onAudioData",
                     "signatures": [
                         {
@@ -20460,6 +23381,51 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Mic input callback: receive captured input samples (internal, called from the audio thread)."
+                }
+            ]
+        },
+        {
+            "name": "OnceGate",
+            "desc": "Gate for a log line (or anything else): isFirstTime() is true the first time, and with an interval, again once that much time has passed since the last true",
+            "keywords": [
+                "warn once",
+                "log once",
+                "once",
+                "rate limit",
+                "throttle",
+                "suppress",
+                "repeat",
+                "deduplicate"
+            ],
+            "desc_ja": "ログ出力などのゲート：isFirstTime() は初回だけ true。間隔を指定すると、前回 true からその時間が経つと再び true",
+            "desc_ko": "로그 출력 등의 게이트: isFirstTime()은 처음에만 true. 간격을 지정하면 마지막 true 이후 그 시간이 지나면 다시 true",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "OnceGate::isFirstTime",
+                "logWarning",
+                "logError"
+            ],
+            "constructor": {
+                "signatures": [
+                    "",
+                    "double intervalSeconds"
+                ]
+            },
+            "methods": [
+                {
+                    "name": "isFirstTime",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "True the first time; with an interval, true again once that much time has passed since the last true. Otherwise false"
                 }
             ]
         },
@@ -20478,6 +23444,10 @@ const TrussCAPI = {
                 {
                     "name": "fileDialogExample",
                     "group": "input_output"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -20516,6 +23486,12 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "リフレクトされたメンバを JSON オブジェクトへ書き出す Reflector バックエンド。",
             "desc_ko": "리플렉션된 멤버를 JSON 객체로 쓰는 Reflector 백엔드.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "properties": [
                 {
                     "name": "members",
@@ -20523,6 +23499,20 @@ const TrussCAPI = {
                     "desc": "The accumulated JSON object built from visited members.",
                     "desc_ja": "訪問したメンバから構築された JSON オブジェクト。",
                     "desc_ko": "방문한 멤버로 구성된 JSON 객체."
+                },
+                {
+                    "name": "includeDerived",
+                    "type": "bool",
+                    "desc": "When true, derived values (TC_DERIVED, e.g. Node's globalPos) are written too; false (default) leaves them out, as a save should.",
+                    "desc_ja": "true なら派生値（TC_DERIVED、例: Node の globalPos）も書き出す。false（既定）では保存用に除外する。",
+                    "desc_ko": "true이면 파생 값(TC_DERIVED, 예: Node의 globalPos)도 기록한다. false(기본값)이면 저장용으로 제외한다."
+                },
+                {
+                    "name": "derived",
+                    "type": "std::vector<std::string>",
+                    "desc": "Member paths of the derived values encountered (nested groups joined by '.'), whether or not they were written.",
+                    "desc_ja": "出会った派生値のメンバパス（ネストしたグループは '.' で連結）。書き出したかどうかに関係なく記録する。",
+                    "desc_ko": "만난 파생 값의 멤버 경로(중첩 그룹은 '.'으로 연결). 기록 여부와 관계없이 기록한다."
                 }
             ],
             "methods": [
@@ -20596,6 +23586,10 @@ const TrussCAPI = {
                 {
                     "name": "reflectExample",
                     "group": "utils"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "constructor": {
@@ -20712,6 +23706,10 @@ const TrussCAPI = {
                 {
                     "name": "jsonXmlExample",
                     "group": "input_output"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -20754,7 +23752,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path, const std::string & indent = std::string(\"  \")"
                         }
                     ],
-                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath. indent sets the per-level indentation string. Returns true on success."
+                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the per-level indentation string. Returns true on success; on failure it logs an error and returns false."
                 },
                 {
                     "name": "toString",
@@ -20876,7 +23874,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path, bool append = false"
                         }
                     ],
-                    "desc": "Open file for writing"
+                    "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened"
                 },
                 {
                     "name": "close",
@@ -21116,6 +24114,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "シェーダ描画用の標準頂点フォーマット（位置・法線・テクスチャ座標・色）。",
             "desc_ko": "셰이더 그리기용 표준 정점 포맷(위치, 법선, 텍스처 좌표, 색).",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "properties": [
                 {
                     "name": "x",
@@ -21188,6 +24192,12 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "曲線テッセレーション設定: Mode（Tolerance か Resolution）、ピクセルトレランス、固定解像度のフォールバック",
             "desc_ko": "곡선 테셀레이션 설정: Mode(Tolerance 또는 Resolution), 픽셀 톨러런스, 고정 해상도 폴백",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "properties": [
                 {
                     "name": "mode",
@@ -21249,6 +24259,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "getFpsSettings() が返す FPS 設定。レートは VSYNC (-1)、EVENT_DRIVEN (0) のセンチネル、または固定 fps",
             "desc_ko": "getFpsSettings()가 반환하는 FPS 설정. 레이트는 VSYNC (-1), EVENT_DRIVEN (0) 센티넬 또는 고정 fps",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "getFpsSettings",
                 "setFps",
@@ -21505,8 +24521,8 @@ const TrussCAPI = {
                     "group": "graphics"
                 },
                 {
-                    "name": "strokeMeshExample",
-                    "group": "graphics"
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -22315,12 +25331,12 @@ const TrussCAPI = {
             "desc_ko": "IESNA LM-63 배광 프로파일 (각도별 조명 강도)",
             "examples": [
                 {
-                    "name": "projectorSimulationExample",
-                    "group": "3d"
-                },
-                {
                     "name": "AllFeaturesExample",
                     "group": "tests"
+                },
+                {
+                    "name": "projectorSimulationExample",
+                    "group": "3d"
                 }
             ],
             "related": [
@@ -22442,11 +25458,11 @@ const TrussCAPI = {
                     "group": "3d"
                 },
                 {
-                    "name": "multiShadowExample",
-                    "group": "3d"
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 },
                 {
-                    "name": "pbrSpheresExample",
+                    "name": "multiShadowExample",
                     "group": "3d"
                 }
             ],
@@ -22534,7 +25550,7 @@ const TrussCAPI = {
                             "params": "const Texture * tex"
                         }
                     ],
-                    "desc": "Set texture for projector-style light (gobo)"
+                    "desc": "Set texture for projector-style light (gobo) (currently one projector slot: only the first registered Spot light with a texture projects it; further ones light as plain spots and log a one-time warning)"
                 },
                 {
                     "name": "getProjectionTexture",
@@ -22634,7 +25650,7 @@ const TrussCAPI = {
                             "params": "const IesProfile * ies"
                         }
                     ],
-                    "desc": "Attach IES photometric profile for angular intensity"
+                    "desc": "Attach IES photometric profile for angular intensity (currently one IES slot: only the first registered light with a profile uses it; further ones log a one-time warning)"
                 },
                 {
                     "name": "getIesProfile",
@@ -23004,12 +26020,12 @@ const TrussCAPI = {
             "desc_ko": "이미지 조작용 픽셀 버퍼",
             "examples": [
                 {
-                    "name": "normalMapExample",
-                    "group": "3d"
-                },
-                {
                     "name": "AllFeaturesExample",
                     "group": "tests"
+                },
+                {
+                    "name": "normalMapExample",
+                    "group": "3d"
                 }
             ],
             "related": [
@@ -23225,7 +26241,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Load image from file"
+                    "desc": "Load image from file into CPU memory. No GPU work, so it is safe on a worker thread; upload the result on the main thread (`Texture::allocate(pixels)`)."
                 },
                 {
                     "name": "loadHDR",
@@ -23255,7 +26271,7 @@ const TrussCAPI = {
                             "params": "const unsigned char * buffer, int len"
                         }
                     ],
-                    "desc": "Load image from memory"
+                    "desc": "Decode an image from memory into CPU pixels. No GPU work, so it is safe on a worker thread."
                 },
                 {
                     "name": "save",
@@ -23265,7 +26281,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Save image to file"
+                    "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created; when it cannot be, an error is logged and false returned"
                 },
                 {
                     "name": "halve",
@@ -23354,12 +26370,12 @@ const TrussCAPI = {
             "desc_ko": "렌더링용 GPU 텍스처",
             "examples": [
                 {
-                    "name": "normalMapExample",
-                    "group": "3d"
-                },
-                {
                     "name": "AllFeaturesExample",
                     "group": "tests"
+                },
+                {
+                    "name": "normalMapExample",
+                    "group": "3d"
                 }
             ],
             "related": [
@@ -23834,6 +26850,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "テクスチャを持つオブジェクト（Image / Fbo / VideoPlayer など）の基底クラス。getTexture() を提供する。",
             "desc_ko": "텍스처를 가진 객체(Image / Fbo / VideoPlayer 등)의 기반 클래스. getTexture()를 제공한다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "methods": [
                 {
                     "name": "getTexture",
@@ -24030,7 +27052,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path, bool mipmaps = false"
                         }
                     ],
-                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface)."
+                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`."
                 },
                 {
                     "name": "loadFromMemory",
@@ -24040,7 +27062,7 @@ const TrussCAPI = {
                             "params": "const unsigned char * buffer, int len, bool mipmaps = false"
                         }
                     ],
-                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain."
+                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain. Main thread only; decode in the background with `Pixels::loadFromMemory`."
                 },
                 {
                     "name": "save",
@@ -24287,8 +27309,8 @@ const TrussCAPI = {
                     "group": "3d"
                 },
                 {
-                    "name": "3DPrimitivesExample",
-                    "group": "3d"
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -25040,8 +28062,8 @@ const TrussCAPI = {
                     "group": "3d"
                 },
                 {
-                    "name": "3DPrimitivesExample",
-                    "group": "3d"
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -25159,6 +28181,10 @@ const TrussCAPI = {
                 {
                     "name": "strokeMeshExample",
                     "group": "graphics"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -25891,7 +28917,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get atlas memory usage in bytes"
+                    "desc": "Get atlas memory usage in bytes (one byte per atlas texel: width x height summed over the pages)"
                 },
                 {
                     "name": "getAtlasMemoryUsage",
@@ -25931,7 +28957,7 @@ const TrussCAPI = {
                             "params": "size_t index"
                         }
                     ],
-                    "desc": "Return the atlas page at the given index for debug visualization, or nullptr if out of range."
+                    "desc": "Return the atlas page at the given index for debug visualization, or nullptr if out of range. Pages are single-channel R8 textures holding glyph coverage in R, so drawing a page's view with the normal pipeline shows it in red."
                 },
                 {
                     "name": "getSampler",
@@ -26351,6 +29377,10 @@ const TrussCAPI = {
                 {
                     "name": "shaderExample",
                     "group": "graphics"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -26514,6 +29544,10 @@ const TrussCAPI = {
                 {
                     "name": "fullscreenShaderExample",
                     "group": "graphics"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -26558,6 +29592,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "利用可能なカメラデバイスの情報。VideoGrabber::listDevices() が返す",
             "desc_ko": "사용 가능한 카메라 디바이스 정보. VideoGrabber::listDevices()가 반환",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "VideoGrabber"
             ],
@@ -26630,6 +29670,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "キャプチャ時刻付きのカメラ1フレーム。Pixels（RGBA8）と timestampUs（monotonicなsteady_clockのマイクロ秒。キャプチャスレッドで打刻）を持つ。VideoGrabber::getQueuedFrames() が返す。ピクセルと時刻が一体なので「ピクセル取得と時刻取得の間に次フレームが割り込む」競合が起きない。カメラを計測/測定に使うときの基本単位",
             "desc_ko": "캡처 시각이 붙은 카메라 1프레임. Pixels(RGBA8)와 timestampUs(단조 steady_clock 마이크로초, 캡처 스레드에서 기록)를 가짐. VideoGrabber::getQueuedFrames()가 반환. 픽셀과 시각이 한 구조체로 오므로 둘을 따로 읽는 사이에 다음 프레임이 끼어드는 경쟁이 없음",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "VideoGrabber",
                 "VideoGrabber::getQueuedFrames",
@@ -26667,6 +29713,10 @@ const TrussCAPI = {
                 {
                     "name": "videoGrabberExample",
                     "group": "video"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -26977,6 +30027,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "動画再生の抽象基底クラス。実体は VideoPlayer を使う。",
             "desc_ko": "비디오 재생의 추상 기반 클래스. 실제 구현은 VideoPlayer를 사용한다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "constructor": {
                 "signatures": [
                     ""
@@ -27878,6 +30934,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "VideoWriter::open()、ScreenRecorder::start()、startRecording() に渡すエンコーダ設定",
             "desc_ko": "VideoWriter::open(), ScreenRecorder::start(), startRecording()에 전달하는 인코더 설정",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "startRecording",
                 "VideoCodec",
@@ -27961,6 +31023,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "フレームを動画ファイルにエンコードする。パスを開いてフレームを書き込み、close でファイルを確定する",
             "desc_ko": "프레임을 비디오 파일로 인코딩: 경로를 열어 프레임을 기록한 뒤 close로 파일을 확정",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "ScreenRecorder",
                 "videoCodecName"
@@ -28152,6 +31220,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "描画結果を動画ファイルにキャプチャする（画面フレームの録画開始/停止）",
             "desc_ko": "렌더링 출력을 비디오 파일로 캡처(화면 프레임의 녹화 시작/정지)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "VideoWriter",
                 "startRecording",
@@ -28264,8 +31338,8 @@ const TrussCAPI = {
                     "group": "3d"
                 },
                 {
-                    "name": "pointCloudExample",
-                    "group": "3d"
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -28777,6 +31851,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "UdpSocket::onReceiveのイベント引数",
             "desc_ko": "UdpSocket::onReceive의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "UdpSocket",
                 "UdpErrorEventArgs"
@@ -28815,6 +31895,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "UdpSocket::onErrorのイベント引数",
             "desc_ko": "UdpSocket::onError의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "UdpSocket",
                 "UdpReceiveEventArgs"
@@ -28846,6 +31932,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "UDPソケット（データグラム送受信・ブロードキャスト・マルチキャスト）",
             "desc_ko": "UDP 소켓 (데이터그램 송수신, 브로드캐스트, 멀티캐스트)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpClient",
                 "TcpServer",
@@ -29197,6 +32289,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TcpClient::onConnectのイベント引数",
             "desc_ko": "TcpClient::onConnect의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpClient",
                 "TcpDisconnectEventArgs",
@@ -29229,6 +32327,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TcpClient::onReceiveのイベント引数",
             "desc_ko": "TcpClient::onReceive의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpClient",
                 "TcpConnectEventArgs"
@@ -29253,6 +32357,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TcpClient::onDisconnectのイベント引数",
             "desc_ko": "TcpClient::onDisconnect의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpClient",
                 "TcpConnectEventArgs"
@@ -29284,6 +32394,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TcpClient::onErrorのイベント引数",
             "desc_ko": "TcpClient::onError의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpClient",
                 "TcpReceiveEventArgs"
@@ -29316,6 +32432,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TCPクライアント接続（接続・ストリーム送受信）",
             "desc_ko": "TCP 클라이언트 연결 (연결, 스트림 송수신)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpServer",
                 "UdpSocket",
@@ -29354,9 +32476,9 @@ const TrussCAPI = {
                 {
                     "name": "onDisconnect",
                     "type": "Event<TcpDisconnectEventArgs>",
-                    "desc": "Fired when disconnected",
-                    "desc_ja": "切断時に発火",
-                    "desc_ko": "연결 해제 시 발생"
+                    "desc": "Fired when the connection ends: the peer closed it, an error ended it, or disconnect() / connect() on a connected client (not from the destructor)",
+                    "desc_ja": "接続が終わったときに発火：相手が閉じた、エラーで切れた、または disconnect() / 接続中の connect()（デストラクタでは発火しない）",
+                    "desc_ko": "연결이 끝났을 때 발생: 상대가 닫음, 오류로 끊김, 또는 disconnect() / 연결 중 connect() (소멸자에서는 발생하지 않음)"
                 },
                 {
                     "name": "onError",
@@ -29520,6 +32642,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "sendAsync() の結果。キューに入れば真となり、onSendComplete が返してくる id を保持",
             "desc_ko": "sendAsync()의 결과. 큐에 들어가면 참이며, onSendComplete가 되돌려주는 id를 보유",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "SendError",
                 "TcpServer::sendAsync",
@@ -29566,6 +32694,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "キュー済みの送信が完了した通知。sendAsync() が返した id ごとにちょうど1回発火",
             "desc_ko": "큐에 든 전송이 완료됨. sendAsync()가 반환한 id마다 정확히 한 번 발생",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpServer::onSendComplete",
                 "TcpServer::sendAsync",
@@ -29613,6 +32747,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TcpServerに接続したクライアント（読み取り専用ハンドル）",
             "desc_ko": "TcpServer에 연결된 클라이언트 (읽기 전용 핸들)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpServer",
                 "TcpClient"
@@ -29660,6 +32800,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TcpServer::onClientConnectのイベント引数",
             "desc_ko": "TcpServer::onClientConnect의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpServer",
                 "TcpServerReceiveEventArgs",
@@ -29699,6 +32845,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TcpServer::onReceiveのイベント引数",
             "desc_ko": "TcpServer::onReceive의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpServer",
                 "TcpClientConnectEventArgs"
@@ -29730,6 +32882,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TcpServer::onClientDisconnectのイベント引数",
             "desc_ko": "TcpServer::onClientDisconnect의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpServer",
                 "TcpClientConnectEventArgs"
@@ -29768,6 +32926,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TcpServer::onErrorのイベント引数",
             "desc_ko": "TcpServer::onError의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpServer",
                 "TcpServerReceiveEventArgs"
@@ -29808,6 +32972,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "TCPサーバ（クライアント受け入れ・送信/ブロードキャスト）",
             "desc_ko": "TCP 서버 (클라이언트 수락, 전송/브로드캐스트)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "TcpClient",
                 "TcpServerClient",
@@ -29870,10 +33040,10 @@ const TrussCAPI = {
                     "signatures": [
                         {
                             "ret": "bool",
-                            "params": "int port, int maxClients = 10"
+                            "params": "int port, int maxClients = 0"
                         }
                     ],
-                    "desc": "Start listening on a port"
+                    "desc": "Start listening on a port. maxClients caps the connected clients (0 = unlimited, the default)"
                 },
                 {
                     "name": "stop",
@@ -30075,7 +33245,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "The listening port"
+                    "desc": "The port the server is bound to. After start(0) this is the port the OS picked; for a fixed port it is that port"
                 }
             ]
         },
@@ -30090,6 +33260,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "ネットワークインターフェースの1アドレスエントリ（listNetworkInterfacesが返す）",
             "desc_ko": "네트워크 인터페이스의 주소 항목 하나 (listNetworkInterfaces가 반환)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "listNetworkInterfaces",
                 "UdpSocket",
@@ -30230,6 +33406,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "1シリアルデバイスの情報（Serial::listDevicesが返す）",
             "desc_ko": "시리얼 장치 하나의 정보 (Serial::listDevices가 반환)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "Serial"
             ],
@@ -30290,6 +33472,58 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "SerialDisconnectEventArgs",
+            "desc": "Event args for Serial::onDisconnect",
+            "keywords": [
+                "disconnect event",
+                "serial unplug",
+                "on disconnect args"
+            ],
+            "desc_ja": "Serial::onDisconnectのイベント引数",
+            "desc_ko": "Serial::onDisconnect의 이벤트 인자",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "Serial",
+                "Serial::onDisconnect",
+                "TcpDisconnectEventArgs"
+            ],
+            "properties": [
+                {
+                    "name": "portName",
+                    "type": "std::string",
+                    "desc": "Port name as passed to setup()",
+                    "desc_ja": "setup() に渡したポート名",
+                    "desc_ko": "setup()에 전달한 포트 이름"
+                },
+                {
+                    "name": "baudRate",
+                    "type": "int",
+                    "desc": "The rate the port was open at (the one setup() logged); pass it back to setup() to reconnect",
+                    "desc_ja": "ポートを開いていたボーレート（setup() がログに出した値）。setup() に渡せば再接続できる",
+                    "desc_ko": "포트가 열려 있던 보드레이트(setup()이 로그로 남긴 값). setup()에 넘기면 재연결할 수 있음"
+                },
+                {
+                    "name": "reason",
+                    "type": "std::string",
+                    "desc": "Human-readable reason: \"closed by close()\" (on Android it may go on with \"(the device had already been lost: ...)\"), or the loss warning's text such as \"read: Input/output error\". For display and logs; tell a close from a loss with wasClean",
+                    "desc_ja": "人が読める理由。\"closed by close()\"（Android では後ろに \"(the device had already been lost: ...)\" が付くことがある）、または \"read: Input/output error\" のような消失の警告と同じ文字列。表示やログ用で、クローズか消失かの判定には wasClean を使う",
+                    "desc_ko": "사람이 읽을 수 있는 사유. \"closed by close()\"(Android에서는 뒤에 \"(the device had already been lost: ...)\"가 붙을 수 있음) 또는 \"read: Input/output error\" 같은 소실 경고와 같은 문자열. 표시와 로그용이며, 닫기인지 소실인지는 wasClean으로 판단할 것"
+                },
+                {
+                    "name": "wasClean",
+                    "type": "bool",
+                    "desc": "true: closed by the app (close()); false: device lost / I/O error",
+                    "desc_ja": "true: アプリが閉じた（close()）、false: デバイスの消失 / I/O エラー",
+                    "desc_ko": "true: 앱이 닫음(close()), false: 장치 소실 / I/O 오류"
+                }
+            ]
+        },
+        {
             "name": "Serial",
             "desc": "Cross-platform serial port (USB/COM): connect, read/write bytes",
             "keywords": [
@@ -30307,6 +33541,7 @@ const TrussCAPI = {
             ],
             "related": [
                 "SerialDeviceInfo",
+                "SerialDisconnectEventArgs",
                 "TcpClient"
             ],
             "platforms": [
@@ -30322,6 +33557,15 @@ const TrussCAPI = {
                     ""
                 ]
             },
+            "properties": [
+                {
+                    "name": "onDisconnect",
+                    "type": "Event<SerialDisconnectEventArgs>",
+                    "desc": "Event fired once per open connection when it ends: on a detected device loss (wasClean = false) or on close() of an open port (wasClean = true)",
+                    "desc_ja": "開いた接続1つにつき1回、接続が終わったときに発火するイベント。デバイスの消失を検出したとき（wasClean = false）と、開いているポートを close() したとき（wasClean = true）",
+                    "desc_ko": "열린 연결 하나당 한 번, 연결이 끝날 때 발생하는 이벤트. 장치 소실을 감지했을 때(wasClean = false)와 열린 포트를 close()했을 때(wasClean = true)"
+                }
+            ],
             "methods": [
                 {
                     "name": "getDeviceList",
@@ -30362,7 +33606,17 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Disconnect and release resources"
+                    "desc": "Disconnect and release resources; fires onDisconnect (wasClean = true) when the port was open"
+                },
+                {
+                    "name": "isConnected",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Whether the port is open and working; turns false after close() or when a read/write call finds the device gone"
                 },
                 {
                     "name": "isInitialized",
@@ -30372,17 +33626,17 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Whether currently connected"
+                    "desc": "Whether currently connected; same as isConnected()"
                 },
                 {
                     "name": "getDevicePath",
                     "signatures": [
                         {
-                            "ret": "const std::string &",
+                            "ret": "std::string",
                             "params": ""
                         }
                     ],
-                    "desc": "Current device path"
+                    "desc": "Current device path; a copy, since another thread's setup() may change it. Never waits for setup(), close() or an I/O call"
                 },
                 {
                     "name": "available",
@@ -30392,7 +33646,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of bytes available to read"
+                    "desc": "Number of bytes available to read; 0 when not connected (a lost device also closes the port and fires onDisconnect)"
                 },
                 {
                     "name": "readBytes",
@@ -30406,7 +33660,7 @@ const TrussCAPI = {
                             "params": "std::string & buffer, int length"
                         }
                     ],
-                    "desc": "Read bytes; returns actual count (>=0) or -1 on error"
+                    "desc": "Read bytes; returns actual count (>=0) or -1 on error (a lost device also closes the port and fires onDisconnect)"
                 },
                 {
                     "name": "readByte",
@@ -30416,7 +33670,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error"
+                    "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error (a lost device also closes the port and fires onDisconnect)"
                 },
                 {
                     "name": "writeBytes",
@@ -30430,7 +33684,7 @@ const TrussCAPI = {
                             "params": "const std::string & buffer"
                         }
                     ],
-                    "desc": "Write bytes; returns actual count or -1 on error"
+                    "desc": "Write bytes; returns actual count or -1 on error (a lost device also closes the port and fires onDisconnect)"
                 },
                 {
                     "name": "writeByte",
@@ -30531,6 +33785,10 @@ const TrussCAPI = {
                 {
                     "name": "chipSoundExample",
                     "group": "sound"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -30712,6 +33970,10 @@ const TrussCAPI = {
                 {
                     "name": "chipSoundExample",
                     "group": "sound"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -30820,6 +34082,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "AudioRecorder::start() に渡す設定。サンプルフォーマット（S16/F32）とチャンネルマップ（省略可）",
             "desc_ko": "AudioRecorder::start()에 전달하는 설정. 샘플 포맷(S16/F32)과 채널 맵(생략 가능)",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "AudioRecorder",
                 "Sound"
@@ -30869,7 +34137,7 @@ const TrussCAPI = {
         },
         {
             "name": "AudioRecorder",
-            "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks",
+            "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks. Every file has a 36-byte JUNK chunk after the RIFF header, so the samples start at byte 80 (S16) or 92 (F32). A take over 4 GiB of samples (about 3.1 h of 48 kHz stereo F32) is written as RF64 (EBU Tech 3306); older readers without RF64 support can't open it",
             "keywords": [
                 "record",
                 "wav",
@@ -30879,8 +34147,14 @@ const TrussCAPI = {
                 "tap",
                 "bounce"
             ],
-            "desc_ja": "エンジンのマスター出力（Sound再生もaudioOut合成も含む、スピーカーに出る音そのもの）をWAVファイルに録音する。audioOutをMonitor優先度でタップし、ファイルIOはバックグラウンドスレッドで行う（オーディオスレッドはブロックしない）",
-            "desc_ko": "엔진의 마스터 출력(스피커로 나가는 소리 그대로, Sound 재생과 audioOut 합성 포함)을 WAV 파일로 녹음. audioOut을 Monitor 우선순위로 탭하고 파일 IO는 백그라운드 스레드에서 수행(오디오 스레드는 블록되지 않음)",
+            "desc_ja": "エンジンのマスター出力（Sound再生もaudioOut合成も含む、スピーカーに出る音そのもの）をWAVファイルに録音する。audioOutをMonitor優先度でタップし、ファイルIOはバックグラウンドスレッドで行う（オーディオスレッドはブロックしない）。どのファイルも RIFF ヘッダの後に 36 バイトの JUNK チャンクを持つので、サンプルは 80 バイト目 (S16) か 92 バイト目 (F32) から始まる。サンプルが 4 GiB を超えるテイク (48 kHz ステレオ F32 で約 3.1 時間) は RF64 (EBU Tech 3306) で書かれ、RF64 に対応していない古いリーダーでは開けない",
+            "desc_ko": "엔진의 마스터 출력(스피커로 나가는 소리 그대로, Sound 재생과 audioOut 합성 포함)을 WAV 파일로 녹음. audioOut을 Monitor 우선순위로 탭하고 파일 IO는 백그라운드 스레드에서 수행(오디오 스레드는 블록되지 않음). 모든 파일은 RIFF 헤더 뒤에 36바이트 JUNK 청크를 가지므로 샘플은 80바이트째(S16) 또는 92바이트째(F32)부터 시작한다. 샘플이 4 GiB를 넘는 테이크(48 kHz 스테레오 F32로 약 3.1시간)는 RF64(EBU Tech 3306)로 기록되며, RF64를 지원하지 않는 오래된 리더에서는 열 수 없다",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "AudioRecordSettings",
                 "AudioEngine",
@@ -30910,7 +34184,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Stop and finalize the file (patches the WAV header sizes). Safe to call when not recording; also runs automatically on destruction"
+                    "desc": "Stop and finalize the file (patches the WAV header sizes; a take over 4 GiB of samples becomes RF64, logged as a notice; a failed file write, such as a full disk, is logged as an error instead); the buffer a capture was still copying is included. Safe to call when not recording; also runs automatically on destruction. Waits on AudioEngine::waitForAudioCallbacks(): for every audioOut / audioIn listener running at that moment, not only the recorder's (usually well under one buffer). Don't call it while holding a lock that such a listener takes: it would wait up to one second and the audio drops out meanwhile"
                 },
                 {
                     "name": "isRecording",
@@ -31242,6 +34516,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "Node にアタッチできる振る舞いの基底クラス。サブクラス化してライフサイクルと入力フックをオーバーライドし、node->addMod<T>() でアタッチする。ライフサイクル: アタッチ時に setup()、以降毎フレーム earlyUpdate() -> Node::update() -> update() -> draw()、削除時に onDestroy()。isExclusive() をオーバーライドすると Node ごとに1インスタンスのみ許可、canAttachTo() でアタッチ先を制限できる",
             "desc_ko": "Node에 부착 가능한 동작 기반 클래스. 서브클래싱하여 라이프사이클과 입력 훅을 오버라이드하고 node->addMod<T>()로 부착. 라이프사이클: 부착 시 setup(), 이후 매 프레임 earlyUpdate() -> Node::update() -> update() -> draw(), 제거 시 onDestroy(). isExclusive()를 오버라이드하면 Node당 한 인스턴스만 허용, canAttachTo()로 부착 대상을 제한",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "Node",
                 "LayoutMod",
@@ -31283,12 +34563,12 @@ const TrussCAPI = {
                     "group": "node"
                 },
                 {
-                    "name": "timerExample",
-                    "group": "utils"
-                },
-                {
                     "name": "AllFeaturesExample",
                     "group": "tests"
+                },
+                {
+                    "name": "timerExample",
+                    "group": "utils"
                 }
             ],
             "related": [
@@ -31510,7 +34790,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Whether the node is visible (invisible: only draw is skipped) (C++ only)"
+                    "desc": "Whether the node is visible (invisible: the node and its descendants are not drawn and not hit by the mouse; update() keeps running) (C++ only)"
                 },
                 {
                     "name": "setVisible",
@@ -31520,7 +34800,7 @@ const TrussCAPI = {
                             "params": "bool visible"
                         }
                     ],
-                    "desc": "Set the visible state (invisible: only draw is skipped) (C++ only)"
+                    "desc": "Set the visible state (invisible: the node and its descendants are not drawn and not hit by the mouse; update() keeps running) (C++ only)"
                 },
                 {
                     "name": "getActive",
@@ -32242,7 +35522,7 @@ const TrussCAPI = {
                             "params": "double delay, std::function<void ()> callback"
                         }
                     ],
-                    "desc": "Run callback once after delay seconds. Fired from the update loop (frame-quantized). Returns a timer id."
+                    "desc": "Run callback once after delay seconds. A frame timer fired from the update loop: the delay counts down by getDeltaTime() on each update of this node, so it pauses while the node is inactive and resetElapsedTimeCounter() doesn't affect it. Only time after the call counts: it starts with the next update, and in the main window nothing before the call is charged (the earlier part of a long update or setup(), an idle gap or a stall before an event handler or draw() made it). In VSYNC / setFps modes it fires on the first update that starts at least delay after the call. In fixed-Hz update mode it counts step time (1 / updateFps per step): when a frame runs several steps (after a stall, or when updateFps is above the display rate: callAfter(1.0 / 120) made in the first step of a frame at a fixed 120 Hz on a 60 Hz display fires on the next step of that frame) it can fire within that frame, before delay has passed in wall time, and time the loop drops (beyond setMaxUpdateSteps() steps per frame) is not counted, so it fires that much later in wall time. A runtime setFps() / setIndependentFps() that switches the update into a measured mode (VSYNC / setFps) between updates (a key handler, draw()) drops the time since the last update, so the timer fires that much later: under a frame in the usual modes, long only after an idle like EVENT_DRIVEN. Called inside an update, the time counts from that update's start. Changing only the draw rate drops nothing, but switching between synced (setFps) and independent (setIndependentFps) update counts as an update-mode change even at the same rate (setFps(VSYNC) to setIndependentFps(VSYNC, 30) drops up to a frame). Entering a fixed update rate restarts with one step, which can count more or less than the time since the last update (144 Hz display to a fixed 60: the step is ~9.7 ms longer than the 1/144 s since the last update). A node moved during an update, before that update reached it, under a parent the update has already traversed misses that update's countdown (one delta late); a node that moves itself from its own update() is not delayed. In a secondary window, until #307, a timer created in or between its ticks counts the window's whole next delta, time before the call included (after a 3 s setup(), callAfter(2.0) fires about one frame later). Returns a timer id."
                 },
                 {
                     "name": "callEvery",
@@ -32252,7 +35532,17 @@ const TrussCAPI = {
                             "params": "double interval, std::function<void ()> callback"
                         }
                     ],
-                    "desc": "Run callback repeatedly every interval seconds. Fired from the update loop (frame-quantized). Returns a timer id."
+                    "desc": "Run callback repeatedly every interval seconds. A frame timer counted down by getDeltaTime() like callAfter. Keeps its phase (next due = previous due + interval); when an update comes more than a whole interval late it fires once, not once per missed interval (callEveryCatchUp does that). Like callAfter, a runtime setFps() / setIndependentFps() that switches the update into a measured mode between updates drops the time since the last update (under a frame in the usual modes; see callAfter). Returns a timer id."
+                },
+                {
+                    "name": "callEveryCatchUp",
+                    "signatures": [
+                        {
+                            "ret": "uint64_t",
+                            "params": "double interval, std::function<void ()> callback, int maxCatchUp"
+                        }
+                    ],
+                    "desc": "Like callEvery, but calls back once for every interval that came due, at most maxCatchUp times per update (maxCatchUp has no default; 0 or -1, any value <= 0, means no limit), e.g. to keep a counter or a simulation in step after a late update. Past the limit the remaining due intervals are dropped and the phase is kept. Cancelling the timer from the callback stops the remaining calls. Without a limit, a long stall in a VSYNC or setFps() loop (or an idle stretch in EVENT_DRIVEN mode) makes it fire that many times at once. In fixed-Hz update mode it counts step time, so time the loop drops beyond its step cap (setMaxUpdateSteps) is not counted. Returns a timer id."
                 },
                 {
                     "name": "cancelTimer",
@@ -32627,6 +35917,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "シンプルなクリック可能ボタンノード（RectNode のサブクラス）。normalColor/hoverColor/pressColor と label を設定すると、ホバー/押下で色が変わる塗りつぶし矩形と中央寄せのラベルを描画する。イベントは生成時に有効化される。クリックは継承した mousePressed/mouseReleased イベントで受け取る",
             "desc_ko": "간단한 클릭 가능 버튼 노드(RectNode 서브클래스). normalColor/hoverColor/pressColor와 label을 설정하면 호버/누름 시 색이 바뀌는 채워진 사각형과 가운데 정렬 라벨을 그림. 이벤트는 생성 시 활성화됨. 클릭은 상속된 mousePressed/mouseReleased 이벤트로 수신",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "RectNode",
                 "Node"
@@ -32934,6 +36230,10 @@ const TrussCAPI = {
                 {
                     "name": "uiExample",
                     "group": "node"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -33153,6 +36453,10 @@ const TrussCAPI = {
                 {
                     "name": "uiExample",
                     "group": "node"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -33261,6 +36565,10 @@ const TrussCAPI = {
                 {
                     "name": "tweenModExample",
                     "group": "node"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
                 }
             ],
             "related": [
@@ -33666,7 +36974,7 @@ const TrussCAPI = {
                             "params": "float w, float h"
                         }
                     ],
-                    "desc": "Set the app's size"
+                    "desc": "Resize the app's own window — the one it is attached to, or the main window for the main App — from any window's callbacks. Same units as setWindowSize(). An App attached to no window only changes its own size. So does an App no shared_ptr owns yet (e.g. inside its constructor), which also warns once: call it in setup()"
                 },
                 {
                     "name": "requestExit",
@@ -33687,6 +36995,16 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Whether an exit has been requested"
+                },
+                {
+                    "name": "getWindow",
+                    "signatures": [
+                        {
+                            "ret": "Window *",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "The Window this App is attached to via Window::setApp(), or nullptr when it is not attached — including the main App started by runApp() and an App whose window was closed. Resolved from the App itself, so subApp->getWindow() returns the right window from any window's callbacks"
                 },
                 {
                     "name": "keyPressed",
@@ -33854,7 +37172,7 @@ const TrussCAPI = {
                             "params": "AudioOutBuffer & buf"
                         }
                     ],
-                    "desc": "Fill the audio output buffer (override to synthesize audio)"
+                    "desc": "Fill the audio output buffer (override to synthesize audio). Runs on the audio thread. First called right after setup() returns, so what setup() prepares is ready in here; an App that is never run gets no calls. The framework detaches it after cleanup() and waits for a call in flight before it destroys the App (exit, hot reload, closing the App's window), for as long as the call takes: don't wait on the main thread or on a lock the main thread may hold in here, or the teardown hangs (with an error logged after one second). An App runs once: when its window closes it is detached for good; to show the App again, create a new one"
                 },
                 {
                     "name": "audioIn",
@@ -33864,7 +37182,7 @@ const TrussCAPI = {
                             "params": "const AudioInBuffer & buf"
                         }
                     ],
-                    "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut."
+                    "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut. Like audioOut, first called right after setup() returns and detached after cleanup() for good; the same rule applies: don't wait on the main thread or on its locks in here."
                 }
             ]
         },
@@ -33879,6 +37197,12 @@ const TrussCAPI = {
             ],
             "desc_ja": "runHeadlessApp() 用の設定 (ウィンドウ/グラフィックスなし)。現状は目標 update レートのみ",
             "desc_ko": "runHeadlessApp()용 설정 (윈도우/그래픽 없음). 현재는 목표 update 레이트만",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
             "related": [
                 "runHeadlessApp",
                 "WindowSettings"
@@ -33939,7 +37263,7 @@ const TrussCAPI = {
                             "params": "std::shared_ptr<App> app"
                         }
                     ],
-                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window"
+                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open (both log an error and leave the window as it is)"
                 },
                 {
                     "name": "getApp",
@@ -34020,6 +37344,16 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Window height in logical points (matches its coordinate system)"
+                },
+                {
+                    "name": "isOccluded",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Whether the OS reports this window as not visible, so it renders no frames (its update/draw pause until it is visible again): macOS minimized, fully covered or on another Space; Windows minimized or DXGI-occluded; Linux (X11) minimized or fully obscured (without a compositing manager). False for a closed window"
                 },
                 {
                     "name": "setSize",
@@ -34188,64 +37522,68 @@ const TrussCAPI = {
         },
         {
             "name": "LogLevel",
-            "desc": "Log severity, from Verbose (most detailed) to Fatal; Silent disables logging.",
+            "desc": "Log severity, from Verbose (most detailed) to Fatal. Each output (console, file, system) shows lines at its own level and above; Silent as an output's level turns that output off.",
             "keywords": [
                 "verbose",
                 "warning",
                 "error",
                 "severity",
-                "debug"
+                "debug",
+                "silent",
+                "log level"
             ],
             "values": [
                 {
                     "name": "Verbose",
                     "value": 0,
-                    "desc": "Detailed info (for debugging)",
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc": "Detail for debugging (per-frame state, per-load info such as sokol's info messages). Hidden by default",
+                    "desc_ja": "デバッグ用の詳細（フレームごとの状態、sokol の info メッセージのような読み込みごとの情報）。既定では出ない",
+                    "desc_ko": "디버깅용 상세 정보(프레임마다의 상태, sokol의 info 메시지 같은 로드마다의 정보). 기본으로는 나오지 않음"
                 },
                 {
                     "name": "Notice",
                     "value": 1,
-                    "desc": "Normal info",
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc": "Normal information worth seeing in a normal run. The default level of every output",
+                    "desc_ja": "通常の実行で見る価値のある情報。全出力の既定レベル",
+                    "desc_ko": "일반 실행에서 볼 가치가 있는 정보. 모든 출력의 기본 레벨"
                 },
                 {
                     "name": "Warning",
                     "value": 2,
-                    "desc": "Warning",
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc": "Something unexpected that the app recovers from (a fallback, a skipped item)",
+                    "desc_ja": "想定外だがアプリは続けられること（フォールバック、項目のスキップなど）",
+                    "desc_ko": "예상 밖이지만 앱이 복구하는 일(폴백, 항목 건너뛰기 등)"
                 },
                 {
                     "name": "Error",
                     "value": 3,
-                    "desc": "Error",
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc": "An operation failed (a file did not load, a device did not open)",
+                    "desc_ja": "処理が失敗した（ファイルが読めない、デバイスが開けないなど）",
+                    "desc_ko": "작업이 실패함(파일을 읽지 못함, 장치를 열지 못함 등)"
                 },
                 {
                     "name": "Fatal",
                     "value": 4,
-                    "desc": "Fatal error",
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc": "The app cannot continue",
+                    "desc_ja": "アプリが続行できない",
+                    "desc_ko": "앱이 계속할 수 없음"
                 },
                 {
                     "name": "Silent",
                     "value": 5,
-                    "desc": "No output (for filtering)",
-                    "desc_ja": "",
-                    "desc_ko": ""
+                    "desc": "Not a line level: as an output's level, it turns that output off",
+                    "desc_ja": "行のレベルではない。出力のレベルに設定するとその出力が止まる",
+                    "desc_ko": "줄의 레벨이 아님. 출력의 레벨로 설정하면 그 출력이 꺼짐"
                 }
             ],
-            "desc_ja": "ログの重大度。Verbose（最も詳細）から Fatal まで。Silent はログを無効化。",
-            "desc_ko": "로그 심각도. Verbose(가장 상세)부터 Fatal까지. Silent는 로깅 비활성화.",
+            "desc_ja": "ログの重大度。Verbose（最も詳細）から Fatal まで。各出力（コンソール・ファイル・システム）は自分のレベル以上の行を出す。出力のレベルを Silent にするとその出力は止まる。",
+            "desc_ko": "로그 심각도. Verbose(가장 상세)부터 Fatal까지. 각 출력(콘솔·파일·시스템)은 자신의 레벨 이상의 줄을 낸다. 출력의 레벨을 Silent로 하면 그 출력은 꺼진다.",
             "related": [
                 "logAt",
+                "setLogLevel",
                 "setConsoleLogLevel",
                 "setFileLogLevel",
+                "setSystemLogLevel",
                 "Logger",
                 "logNotice"
             ]

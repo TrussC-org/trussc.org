@@ -39,7 +39,7 @@ const TrussSketchAPI = {
     {
      "name": "initAudio",
      "snippet": "initAudio()",
-     "desc": "Initialize the global AudioEngine. Called automatically by Sound::load() / play(), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener)."
+     "desc": "Initialize the global AudioEngine. Sound::load(), loadStream(), loadTestTone() and loadFromBuffer() call it automatically while the engine is not initialized (play() does not), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener)."
     },
     {
      "name": "shutdownAudio",
@@ -54,7 +54,7 @@ const TrussSketchAPI = {
     {
      "name": "appendToFile",
      "snippet": "appendToFile(${1:path}, ${2:content})",
-     "desc": "Append string to file"
+     "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened"
     },
     {
      "name": "createDirectory",
@@ -104,7 +104,7 @@ const TrussSketchAPI = {
     {
      "name": "getFileExtension",
      "snippet": "getFileExtension(${1:path})",
-     "desc": "Get file extension without dot"
+     "desc": "Get file extension without dot, as written (case kept). Compare toLower(getFileExtension(path)) to match it case-insensitively, as TrussC's loaders do."
     },
     {
      "name": "getFileName",
@@ -152,6 +152,11 @@ const TrussSketchAPI = {
      "desc": "Load an XML file and return it as an Xml object. Relative paths are resolved via getDataPath."
     },
     {
+     "name": "pathToUtf8",
+     "snippet": "pathToUtf8(${1:p})",
+     "desc": "Convert a path to a UTF-8 std::string, the same on every platform. Use it instead of path.string(), which on Windows converts to the process code page and can throw for characters outside it. On Windows it can still throw for a name that is not valid UTF-16 (an unpaired surrogate); to log a path, use log << path, which does not throw."
+    },
+    {
      "name": "removeFile",
      "snippet": "removeFile(${1:path})",
      "desc": "Remove file"
@@ -159,12 +164,12 @@ const TrussSketchAPI = {
     {
      "name": "saveJson",
      "snippet": "saveJson(${1:j}, ${2:path})",
-     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath. indent sets the pretty-print width (negative for compact). Returns true on success."
+     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). Returns true on success; on failure it logs an error and returns false."
     },
     {
      "name": "saveTextFile",
      "snippet": "saveTextFile(${1:path}, ${2:content})",
-     "desc": "Save string to text file"
+     "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened"
     },
     {
      "name": "setDataPathRoot",
@@ -175,6 +180,11 @@ const TrussSketchAPI = {
      "name": "setDataPathToResources",
      "snippet": "setDataPathToResources()",
      "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms."
+    },
+    {
+     "name": "utf8ToPath",
+     "snippet": "utf8ToPath(${1:utf8})",
+     "desc": "Convert a UTF-8 string to fs::path, decoding it as UTF-8 on every platform. fs::path(std::string) on Windows decodes in the process code page, which is UTF-8 only in apps built with TrussC's Windows manifest (Windows 10 1903 or later)."
     }
    ]
   },
@@ -369,7 +379,7 @@ const TrussSketchAPI = {
     {
      "name": "addLight",
      "snippet": "addLight(${1:light})",
-     "desc": "Add a light to the scene"
+     "desc": "Add a light to the scene (up to 8 lights per window; a light added past 8 is not registered, with a one-time warning)"
     },
     {
      "name": "beginShadowPass",
@@ -634,7 +644,7 @@ const TrussSketchAPI = {
     {
      "name": "setFps",
      "snippet": "setFps(${1:fps})",
-     "desc": "Set target frame rate (VSYNC = -1.0)"
+     "desc": "Set the target frame rate; update and draw run together (VSYNC = -1, EVENT_DRIVEN = 0, or a fixed fps). A fixed fps at or just above the display rate draws every display frame. Switching at runtime starts the new rate from the switch (no catch-up; a fixed fps draws the next frame, and the first update's getDeltaTime() leaves out the previous mode: called between updates it counts from the call, called inside an update from that update's start; the time dropped is under a frame in the usual modes, long only after an idle like EVENT_DRIVEN). Calling it again with the current rate does nothing, so it is safe to call every frame; on the frame where the value changes (setFps(guiValue) in draw() while a slider moves), that update's dt counts only from the call and is shorter than the frame"
     },
     {
      "name": "setTextAlign",
@@ -1359,12 +1369,12 @@ const TrussSketchAPI = {
     {
      "name": "getRootNode",
      "snippet": "getRootNode()",
-     "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around."
+     "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around. Not yet the App inside its own constructor: use it from setup() on."
     },
     {
      "name": "getSelectedNode",
      "snippet": "getSelectedNode()",
-     "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none). A tool such as an inspector can read it and drive it via setSelectedNode()."
+     "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none or once the node is freed). A tool such as an inspector can read it and drive it via setSelectedNode(). The pointer is for the current call; to keep the node, keep its weak_from_this()."
     }
    ]
   },
@@ -1429,27 +1439,32 @@ const TrussSketchAPI = {
     {
      "name": "getElapsedTime",
      "snippet": "getElapsedTime()",
-     "desc": "Elapsed seconds (double) since program start. A separate clock from getElapsedTimef(); it is NOT reset by resetElapsedTimeCounter()."
+     "desc": "Elapsed seconds (double) since program start, on a steady clock (system clock changes don't affect it). The same clock as getElapsedTimef/Millis/Micros: resetElapsedTimeCounter() restarts all of them, so the difference of two readings is only a duration if nothing resets the counter in between. Keeps full precision where getElapsedTimef() loses it after long uptimes"
     },
     {
      "name": "getElapsedTimef",
      "snippet": "getElapsedTimef()",
-     "desc": "Elapsed seconds (float)"
+     "desc": "Elapsed seconds (float) since program start. Same clock as getElapsedTime(); a float loses precision after about a day of uptime (7.8 ms steps at 18 h), so use it for animation and display, and getElapsedTime() (double) where precision matters"
     },
     {
      "name": "getElapsedTimeMicros",
      "snippet": "getElapsedTimeMicros()",
-     "desc": "Elapsed microseconds (int64)"
+     "desc": "Elapsed microseconds (uint64) since program start. Same clock as getElapsedTime()"
     },
     {
      "name": "getElapsedTimeMillis",
      "snippet": "getElapsedTimeMillis()",
-     "desc": "Elapsed milliseconds (int64)"
+     "desc": "Elapsed milliseconds (uint64) since program start. Same clock as getElapsedTime()"
+    },
+    {
+     "name": "getFrameElapsedTime",
+     "snippet": "getFrameElapsedTime()",
+     "desc": "Elapsed seconds (double) sampled once at the start of the current frame, so every update step and the draw of one frame see the same value (getElapsedTime() moves during the frame). Same clock and reset as getElapsedTime(). Sampled by the main loop and runHeadlessApp; in a secondary window it currently returns the live getElapsedTime()"
     },
     {
      "name": "resetElapsedTimeCounter",
      "snippet": "resetElapsedTimeCounter()",
-     "desc": "Reset elapsed time"
+     "desc": "Restart the elapsed-time counter: getElapsedTime/f/Millis/Micros and getFrameElapsedTime count from 0 again. Display only: Node timers, the loop, recording and the tc_get_health uptime keep running on the underlying clock. A duration taken as the difference of two of those readings across a reset comes out wrong (negative, or wrapped for the unsigned Millis/Micros); measure durations with getSystemTimeMicros()"
     }
    ]
   },
@@ -1459,7 +1474,7 @@ const TrussSketchAPI = {
     {
      "name": "getDeltaTime",
      "snippet": "getDeltaTime()",
-     "desc": "Seconds since last frame"
+     "desc": "Seconds since the previous update. Measured wall time in VSYNC / setFps modes; in fixed-Hz update mode (setIndependentFps with an update rate) and in runHeadlessApp every step reports exactly 1 / updateFps. Per window; a secondary window still measures its delta with high_resolution_clock (the system clock on Linux) until #307: a forward system clock step (NTP, a manual change) lands in one delta, so that window's due Node timers fire at once, and an uncapped callEveryCatchUp fires once per interval of the step; a backward step makes one delta negative: getDeltaTime() is negative on that tick and the window's Node timers are not counted down on it"
     },
     {
      "name": "getDrawCount",
@@ -1469,7 +1484,7 @@ const TrussSketchAPI = {
     {
      "name": "getFps",
      "snippet": "getFps()",
-     "desc": "Get current FPS (alias for getFrameRate)"
+     "desc": "Get the measured FPS (alias for getFrameRate). In a secondary window it is currently the average of the last 10 calls, like getFrameRate()"
     },
     {
      "name": "getFpsSettings",
@@ -1484,7 +1499,7 @@ const TrussSketchAPI = {
     {
      "name": "getFrameRate",
      "snippet": "getFrameRate()",
-     "desc": "Current FPS"
+     "desc": "Measured update rate (updates per second over the last 10 frames). In fixed-Hz update mode and runHeadlessApp this is the measured rate, not the configured one: the fixed steps are counted by the time they consumed, so it reads steady when the rate isn't a multiple of the frame rate and drops when time is dropped. Recorded by the main loop and runHeadlessApp; in a secondary window each call currently adds the window's last delta and returns the average of the last 10 calls, so reading it once per second gives a ~10 s average"
     },
     {
      "name": "getUpdateCount",
@@ -1509,12 +1524,12 @@ const TrussSketchAPI = {
     {
      "name": "getSystemTimeMicros",
      "snippet": "getSystemTimeMicros()",
-     "desc": "Unix time in microseconds"
+     "desc": "Unix time in microseconds (wall clock). To measure a duration, take the difference of two readings as int64_t: it follows system clock adjustments, so a clock step can make t1 < t0 and an unsigned difference would wrap. Unlike the getElapsedTime family, resetElapsedTimeCounter() doesn't affect it"
     },
     {
      "name": "getSystemTimeMillis",
      "snippet": "getSystemTimeMillis()",
-     "desc": "Unix time in milliseconds"
+     "desc": "Unix time in milliseconds (wall clock). It follows system clock adjustments, so take differences as int64_t (see getSystemTimeMicros)"
     },
     {
      "name": "getTimestampString",
@@ -1719,7 +1734,7 @@ const TrussSketchAPI = {
     {
      "name": "nodeToJson",
      "snippet": "nodeToJson(${1:node}, ${2:maxDepth})",
-     "desc": "Serialize a node (and its subtree up to maxDepth; -1 = unlimited) to JSON via reflection"
+     "desc": "Serialize a node (and its subtree up to maxDepth; -1 = unlimited) to JSON via reflection. Derived members (e.g. globalPos) are left out unless includeDerived is true; then they are included and named under \"derived\""
     },
     {
      "name": "parseJson",
@@ -1734,7 +1749,7 @@ const TrussSketchAPI = {
     {
      "name": "runOnMainThread",
      "snippet": "runOnMainThread(${1:fn})",
-     "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame"
+     "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame. Each frame runs, in order, what was queued when its drain started; work queued during the drain runs in the next frame. Nothing is dropped and there is no limit (a callback may edit the tree or free something); the tc_get_health MCP tool reports the count as mainQueuePending. Code that may queue faster than the app runs it, and can drop values, keeps its own bounded or latest-value buffer"
     },
     {
      "name": "setConsoleLogLevel",
@@ -1749,7 +1764,17 @@ const TrussSketchAPI = {
     {
      "name": "setLogFile",
      "snippet": "setLogFile(${1:path})",
-     "desc": "Open a file to receive log output"
+     "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path"
+    },
+    {
+     "name": "setLogLevel",
+     "snippet": "setLogLevel(${1:level})",
+     "desc": "Set the console, file and system log levels at once (a later per-output call wins)"
+    },
+    {
+     "name": "setSystemLogLevel",
+     "snippet": "setSystemLogLevel(${1:level})",
+     "desc": "Set the minimum log level written to the OS log: os_log on macOS, OutputDebugStringW on Windows"
     },
     {
      "name": "shortTypeName",
@@ -2097,6 +2122,11 @@ const TrussSketchAPI = {
      "desc": "Check whether keep-screen-on is currently enabled"
     },
     {
+     "name": "getMaxUpdateSteps",
+     "snippet": "getMaxUpdateSteps()",
+     "desc": "The cap on fixed-rate update steps per frame (and per runHeadlessApp loop pass) set by setMaxUpdateSteps(). 10 by default; 0 or less means no cap"
+    },
+    {
      "name": "getWindowPosition",
      "snippet": "getWindowPosition()",
      "desc": "Get window position in screen coordinates (top-left origin). macOS/Windows only; other platforms return (-1, -1)"
@@ -2134,7 +2164,7 @@ const TrussSketchAPI = {
     {
      "name": "saveScreenshot",
      "snippet": "saveScreenshot(${1:path})",
-     "desc": "Save a screenshot of the rendered frame (png/jpg/bmp). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written."
+     "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written."
     },
     {
      "name": "setClipboardString",
@@ -2149,12 +2179,17 @@ const TrussSketchAPI = {
     {
      "name": "setIndependentFps",
      "snippet": "setIndependentFps(${1:updateFps}, ${2:drawFps})",
-     "desc": "Set independent update and draw frame rates"
+     "desc": "Set independent update and draw rates. A fixed update rate runs fixed steps (getDeltaTime() is 1 / updateFps for each), at most setMaxUpdateSteps() per frame (default 10): time beyond that (after a stall, when update() is too slow, or when updateFps is more than that many times the display rate) is dropped with a one-time warning. Switching at runtime starts the new rate from the switch (no catch-up; on the next frame a fixed update rate runs one step, a VSYNC update's getDeltaTime() counts from the call, or from the update's start when called inside an update, and a fixed draw rate draws). Calling it again with the current rates does nothing, and changing only the draw rate keeps the update's phase and drops no time; switching between a synced (setFps) and an independent update counts as an update-mode change even at the same rate (setFps(VSYNC) to setIndependentFps(VSYNC, 30) drops up to a frame). Entering a fixed update rate restarts with one step, which can count more or less than the time since the last update (from a 144 Hz display to a fixed 60, the step is ~9.7 ms longer than the 1/144 s since the last update); entering a VSYNC update drops the time since the last update (under a frame in the usual modes, long only after an idle like EVENT_DRIVEN), and on that frame, called outside update(), its dt counts only from the call"
     },
     {
      "name": "setKeepScreenOn",
      "snippet": "setKeepScreenOn(${1:enabled})",
      "desc": "Prevent display sleep / auto-lock while the app is running. Supported: Android, iOS, macOS, Windows. Linux / Web: no-op"
+    },
+    {
+     "name": "setMaxUpdateSteps",
+     "snippet": "setMaxUpdateSteps(${1:steps})",
+     "desc": "Set the most fixed-rate update steps run in one frame (setIndependentFps with an update rate) or in one runHeadlessApp loop pass. More are pending after a stall, when update() is slower than its own rate, or when the update rate is more than this many times the display rate; the time beyond the cap is dropped with a one-time warning instead of replayed. Default 10. 0 or less removes the cap so every step runs (e.g. a deterministic simulation), at the cost of a freeze while a long stall is replayed and of frames that keep growing while update() is slower than its rate"
     },
     {
      "name": "setOrientation",
@@ -2443,7 +2478,7 @@ const TrussSketchAPI = {
      "name": "setSize",
      "snippet": "setSize(${1:w}, ${2:h})",
      "return": "void",
-     "desc": "Set the app's size"
+     "desc": "Resize the app's own window — the one it is attached to, or the main window for the main App — from any window's callbacks. Same units as setWindowSize(). An App attached to no window only changes its own size. So does an App no shared_ptr owns yet (e.g. inside its constructor), which also warns once: call it in setup()"
     },
     {
      "name": "requestExit",
@@ -2456,6 +2491,12 @@ const TrussSketchAPI = {
      "snippet": "isExitRequested()",
      "return": "bool",
      "desc": "Whether an exit has been requested"
+    },
+    {
+     "name": "getWindow",
+     "snippet": "getWindow()",
+     "return": "Window *",
+     "desc": "The Window this App is attached to via Window::setApp(), or nullptr when it is not attached — including the main App started by runApp() and an App whose window was closed. Resolved from the App itself, so subApp->getWindow() returns the right window from any window's callbacks"
     },
     {
      "name": "keyPressed",
@@ -2539,13 +2580,13 @@ const TrussSketchAPI = {
      "name": "audioOut",
      "snippet": "audioOut(${1:buf})",
      "return": "void",
-     "desc": "Fill the audio output buffer (override to synthesize audio)"
+     "desc": "Fill the audio output buffer (override to synthesize audio). Runs on the audio thread. First called right after setup() returns, so what setup() prepares is ready in here; an App that is never run gets no calls. The framework detaches it after cleanup() and waits for a call in flight before it destroys the App (exit, hot reload, closing the App's window), for as long as the call takes: don't wait on the main thread or on a lock the main thread may hold in here, or the teardown hangs (with an error logged after one second). An App runs once: when its window closes it is detached for good; to show the App again, create a new one"
     },
     {
      "name": "audioIn",
      "snippet": "audioIn(${1:buf})",
      "return": "void",
-     "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut."
+     "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut. Like audioOut, first called right after setup() returns and detached after cleanup() for good; the same rule applies: don't wait on the main thread or on its locks in here."
     }
    ]
   },
@@ -2576,7 +2617,7 @@ const TrussSketchAPI = {
     {
      "name": "bufferSize",
      "type": "int",
-     "desc": "Active device buffer size in frames"
+     "desc": "Buffer (period) size the device runs with, in frames at the engine rate (granted by the device; bufferSize / sampleRate = period in seconds). Not the requested value: see AudioEngine::getBufferSize."
     },
     {
      "name": "maxPolyphony",
@@ -2609,7 +2650,7 @@ const TrussSketchAPI = {
      "name": "init",
      "snippet": "init()",
      "return": "bool",
-     "desc": "Initialize the engine with defaults, or with an AudioSettings override. Re-init on a running engine migrates active voices to the new settings. Returns true on success."
+     "desc": "Initialize the engine, or re-initialize it with an AudioSettings override. init(settings) keeps the sample rate, channels, buffer size and polyphony even when it fails; init() with no arguments reuses the last ones (the defaults if init(settings) was never called) but always opens the system default device. Re-init on a running engine migrates active voices to the new settings. With no usable audio backend, miniaudio falls back to its silent Null device: init() then succeeds and logs a warning. Returns true on success, false when no output device can be opened; the failure is logged through logError(\"AudioEngine\") with the requested device name. A failed re-init leaves the engine stopped: the running device is closed before the new one is tried. It may be called again later; each failed try opens the device and logs again, so retry on a timer (about once a second) or on a user action, not every frame. Sound::load*() calls init() while the engine is not initialized, so after a failed init(settings) it opens the system default device with those settings; call init(settings) again before loading sounds if you want the requested device."
     },
     {
      "name": "shutdown",
@@ -2699,7 +2740,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "AudioRecorder",
-   "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks",
+   "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks. Every file has a 36-byte JUNK chunk after the RIFF header, so the samples start at byte 80 (S16) or 92 (F32). A take over 4 GiB of samples (about 3.1 h of 48 kHz stereo F32) is written as RF64 (EBU Tech 3306); older readers without RF64 support can't open it",
    "constructor": {
     "snippet": "AudioRecorder()"
    },
@@ -2714,7 +2755,7 @@ const TrussSketchAPI = {
      "name": "stop",
      "snippet": "stop()",
      "return": "void",
-     "desc": "Stop and finalize the file (patches the WAV header sizes). Safe to call when not recording; also runs automatically on destruction"
+     "desc": "Stop and finalize the file (patches the WAV header sizes; a take over 4 GiB of samples becomes RF64, logged as a notice; a failed file write, such as a full disk, is logged as an error instead); the buffer a capture was still copying is included. Safe to call when not recording; also runs automatically on destruction. Waits on AudioEngine::waitForAudioCallbacks(): for every audioOut / audioIn listener running at that moment, not only the recorder's (usually well under one buffer). Don't call it while holding a lock that such a listener takes: it would wait up to one second and the audio drops out meanwhile"
     },
     {
      "name": "isRecording",
@@ -2786,6 +2827,62 @@ const TrussSketchAPI = {
      "name": "deviceName",
      "type": "std::string",
      "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate."
+    }
+   ]
+  },
+  {
+   "name": "AudioStats",
+   "desc": "Audio engine health counters and meters, returned by AudioEngine::getStats(). Counters are cumulative since the process started (they survive re-init); peak / rms / cpuUsage describe the recent output.",
+   "properties": [
+    {
+     "name": "droppedPlays",
+     "type": "uint64_t",
+     "desc": "Plays AudioEngine::play() refused since startup (Sound::play() returned false), all reasons: the sum of the four dropped* fields."
+    },
+    {
+     "name": "droppedPolyphonyLimit",
+     "type": "uint64_t",
+     "desc": "Plays refused because every playback slot was busy (AudioSettings::maxPolyphony, default 32)."
+    },
+    {
+     "name": "droppedStreamLimit",
+     "type": "uint64_t",
+     "desc": "Plays refused because a SoundStream already had maxPolyphony playbacks. Only copies of a streamed Sound can hit this: a single Sound stops its previous playback first."
+    },
+    {
+     "name": "droppedDecoderError",
+     "type": "uint64_t",
+     "desc": "Plays refused because a stream's file could not be reopened for the new playback (moved, deleted or unreadable)."
+    },
+    {
+     "name": "droppedNotRunning",
+     "type": "uint64_t",
+     "desc": "Plays refused because no output device was running (init failed, or after shutdown())."
+    },
+    {
+     "name": "clippedSamples",
+     "type": "uint64_t",
+     "desc": "Output samples beyond +/-1.0 that the final clamp cut off (counted per channel sample)."
+    },
+    {
+     "name": "peak",
+     "type": "float",
+     "desc": "Master output peak over the last ~100 ms, linear (1.0 = full scale). Measured before the clamp, so a value above 1 shows how far the mix overshoots. 0 while the engine is not running."
+    },
+    {
+     "name": "rms",
+     "type": "float",
+     "desc": "Master output RMS over the same ~100 ms window, linear. 0 while the engine is not running."
+    },
+    {
+     "name": "cpuUsage",
+     "type": "float",
+     "desc": "Fraction of audio-thread time: time spent mixing the playing sounds and audioOut listeners divided by the audio time produced, averaged over ~0.5 s of audio. 1.0 means the callback took as long as the audio it produced (0.25 = a quarter of the time budget). 0 while the engine is not running."
+    },
+    {
+     "name": "cpuUsagePeak",
+     "type": "float",
+     "desc": "CPU usage of the worst single callback in the same window; above 1 the callback took longer than the audio it produced (a dropout). 0 while the engine is not running."
     }
    ]
   },
@@ -4532,6 +4629,11 @@ const TrussSketchAPI = {
      "desc": "Fired on app exit"
     },
     {
+     "name": "hotReloadUnload",
+     "type": "Event<void>",
+     "desc": "Hot reload only: fired before the host unloads the current guest build (on each reload, and at exit after exit), while its App is still alive. Guest code whose state outlives the App (singletons, function-local statics) drops its listeners on the host's events here; tcxImGui and tcxNodeInspector do this themselves. Never fired in a normal build"
+    },
+    {
      "name": "exitRequested",
      "type": "Event<ExitRequestEventArgs>",
      "desc": "Fired when an exit is requested; set args.cancel = true to cancel it"
@@ -5178,7 +5280,7 @@ const TrussSketchAPI = {
      "name": "disconnect",
      "snippet": "disconnect()",
      "return": "void",
-     "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction)"
+     "desc": "Explicitly disconnect the listener now (otherwise happens automatically on destruction). On the thread that fires the event it is not called again, even later in a notify() pass already running. It does not wait for a callback running on another thread: for audio, follow it with AudioEngine::waitForAudioCallbacks()"
     },
     {
      "name": "isConnected",
@@ -5423,7 +5525,7 @@ const TrussSketchAPI = {
      "name": "open",
      "snippet": "open(${1:path})",
      "return": "bool",
-     "desc": "Open file for writing"
+     "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened"
     },
     {
      "name": "close",
@@ -5726,7 +5828,7 @@ const TrussSketchAPI = {
      "name": "getMemoryUsage",
      "snippet": "getMemoryUsage()",
      "return": "size_t",
-     "desc": "Get atlas memory usage in bytes"
+     "desc": "Get atlas memory usage in bytes (one byte per atlas texel: width x height summed over the pages)"
     },
     {
      "name": "getAtlasMemoryUsage",
@@ -5750,7 +5852,7 @@ const TrussSketchAPI = {
      "name": "getAtlas",
      "snippet": "getAtlas(${1:index})",
      "return": "const internal::AtlasState *",
-     "desc": "Return the atlas page at the given index for debug visualization, or nullptr if out of range."
+     "desc": "Return the atlas page at the given index for debug visualization, or nullptr if out of range. Pages are single-channel R8 textures holding glyph coverage in R, so drawing a page's view with the normal pipeline shows it in red."
     },
     {
      "name": "getSampler",
@@ -6068,7 +6170,7 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "LoadResult",
-     "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface)."
+     "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`."
     },
     {
      "name": "save",
@@ -6080,7 +6182,7 @@ const TrussSketchAPI = {
      "name": "loadFromMemory",
      "snippet": "loadFromMemory()",
      "return": "",
-     "desc": "Load image from memory. `mipmaps=true` builds a mip chain."
+     "desc": "Load image from memory. `mipmaps=true` builds a mip chain. Main thread only; decode in the background with `Pixels::loadFromMemory`."
     },
     {
      "name": "allocate",
@@ -6297,6 +6399,16 @@ const TrussSketchAPI = {
      "name": "members",
      "type": "Json",
      "desc": "The accumulated JSON object built from visited members."
+    },
+    {
+     "name": "includeDerived",
+     "type": "bool",
+     "desc": "When true, derived values (TC_DERIVED, e.g. Node's globalPos) are written too; false (default) leaves them out, as a save should."
+    },
+    {
+     "name": "derived",
+     "type": "std::vector<std::string>",
+     "desc": "Member paths of the derived values encountered (nested groups joined by '.'), whether or not they were written."
     }
    ],
    "methods": [
@@ -6549,7 +6661,7 @@ const TrussSketchAPI = {
      "name": "setProjectionTexture",
      "snippet": "setProjectionTexture()",
      "return": "",
-     "desc": "Set texture for projector-style light (gobo)"
+     "desc": "Set texture for projector-style light (gobo) (currently one projector slot: only the first registered Spot light with a texture projects it; further ones light as plain spots and log a one-time warning)"
     },
     {
      "name": "getProjectionTexture",
@@ -6603,7 +6715,7 @@ const TrussSketchAPI = {
      "name": "setIesProfile",
      "snippet": "setIesProfile()",
      "return": "",
-     "desc": "Attach IES photometric profile for angular intensity"
+     "desc": "Attach IES photometric profile for angular intensity (currently one IES slot: only the first registered light with a profile uses it; further ones log a one-time warning)"
     },
     {
      "name": "getIesProfile",
@@ -6967,7 +7079,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Logger",
-   "desc": "Logging core with console and file output and an onLog event; access the global instance via getLogger()",
+   "desc": "Logging core with console, file and system (OS log) output, each with its own level, and an onLog event; access the global instance via getLogger()",
    "constructor": {
     "snippet": "Logger()"
    },
@@ -6986,6 +7098,12 @@ const TrussSketchAPI = {
      "desc": "Emit a log message at the given level"
     },
     {
+     "name": "setLogLevel",
+     "snippet": "setLogLevel(${1:level})",
+     "return": "void",
+     "desc": "Set the console, file and system log levels at once (a later per-output call wins)"
+    },
+    {
      "name": "setConsoleLogLevel",
      "snippet": "setConsoleLogLevel(${1:level})",
      "return": "void",
@@ -7001,7 +7119,7 @@ const TrussSketchAPI = {
      "name": "setLogFile",
      "snippet": "setLogFile(${1:path})",
      "return": "bool",
-     "desc": "Open a file to receive log output"
+     "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path"
     },
     {
      "name": "closeFile",
@@ -7022,10 +7140,22 @@ const TrussSketchAPI = {
      "desc": "Get the current file log level"
     },
     {
+     "name": "setSystemLogLevel",
+     "snippet": "setSystemLogLevel(${1:level})",
+     "return": "void",
+     "desc": "Set the minimum system (OS log) level: os_log on macOS, OutputDebugStringW on Windows"
+    },
+    {
+     "name": "getSystemLogLevel",
+     "snippet": "getSystemLogLevel()",
+     "return": "LogLevel",
+     "desc": "Get the current system (OS log) level"
+    },
+    {
      "name": "getLogFilePath",
      "snippet": "getLogFilePath()",
-     "return": "const std::string &",
-     "desc": "Get the path of the current log file"
+     "return": "std::string",
+     "desc": "Get the path of the current log file, as setLogFile resolved it (UTF-8; empty when no file is open)"
     },
     {
      "name": "isFileOpen",
@@ -7037,7 +7167,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "LogLevel",
-   "desc": "Log severity, from Verbose (most detailed) to Fatal; Silent disables logging.",
+   "desc": "Log severity, from Verbose (most detailed) to Fatal. Each output (console, file, system) shows lines at its own level and above; Silent as an output's level turns that output off.",
    "static_methods": [
     {
      "name": "Verbose",
@@ -8425,13 +8555,13 @@ const TrussSketchAPI = {
      "name": "isVisible",
      "snippet": "isVisible()",
      "return": "bool",
-     "desc": "Whether the node is visible (invisible: only draw is skipped) (C++ only)"
+     "desc": "Whether the node is visible (invisible: the node and its descendants are not drawn and not hit by the mouse; update() keeps running) (C++ only)"
     },
     {
      "name": "setVisible",
      "snippet": "setVisible(${1:visible})",
      "return": "void",
-     "desc": "Set the visible state (invisible: only draw is skipped) (C++ only)"
+     "desc": "Set the visible state (invisible: the node and its descendants are not drawn and not hit by the mouse; update() keeps running) (C++ only)"
     },
     {
      "name": "destroy",
@@ -8779,13 +8909,19 @@ const TrussSketchAPI = {
      "name": "callAfter",
      "snippet": "callAfter(${1:delay}, ${2:callback})",
      "return": "uint64_t",
-     "desc": "Run callback once after delay seconds. Fired from the update loop (frame-quantized). Returns a timer id."
+     "desc": "Run callback once after delay seconds. A frame timer fired from the update loop: the delay counts down by getDeltaTime() on each update of this node, so it pauses while the node is inactive and resetElapsedTimeCounter() doesn't affect it. Only time after the call counts: it starts with the next update, and in the main window nothing before the call is charged (the earlier part of a long update or setup(), an idle gap or a stall before an event handler or draw() made it). In VSYNC / setFps modes it fires on the first update that starts at least delay after the call. In fixed-Hz update mode it counts step time (1 / updateFps per step): when a frame runs several steps (after a stall, or when updateFps is above the display rate: callAfter(1.0 / 120) made in the first step of a frame at a fixed 120 Hz on a 60 Hz display fires on the next step of that frame) it can fire within that frame, before delay has passed in wall time, and time the loop drops (beyond setMaxUpdateSteps() steps per frame) is not counted, so it fires that much later in wall time. A runtime setFps() / setIndependentFps() that switches the update into a measured mode (VSYNC / setFps) between updates (a key handler, draw()) drops the time since the last update, so the timer fires that much later: under a frame in the usual modes, long only after an idle like EVENT_DRIVEN. Called inside an update, the time counts from that update's start. Changing only the draw rate drops nothing, but switching between synced (setFps) and independent (setIndependentFps) update counts as an update-mode change even at the same rate (setFps(VSYNC) to setIndependentFps(VSYNC, 30) drops up to a frame). Entering a fixed update rate restarts with one step, which can count more or less than the time since the last update (144 Hz display to a fixed 60: the step is ~9.7 ms longer than the 1/144 s since the last update). A node moved during an update, before that update reached it, under a parent the update has already traversed misses that update's countdown (one delta late); a node that moves itself from its own update() is not delayed. In a secondary window, until #307, a timer created in or between its ticks counts the window's whole next delta, time before the call included (after a 3 s setup(), callAfter(2.0) fires about one frame later). Returns a timer id."
     },
     {
      "name": "callEvery",
      "snippet": "callEvery(${1:interval}, ${2:callback})",
      "return": "uint64_t",
-     "desc": "Run callback repeatedly every interval seconds. Fired from the update loop (frame-quantized). Returns a timer id."
+     "desc": "Run callback repeatedly every interval seconds. A frame timer counted down by getDeltaTime() like callAfter. Keeps its phase (next due = previous due + interval); when an update comes more than a whole interval late it fires once, not once per missed interval (callEveryCatchUp does that). Like callAfter, a runtime setFps() / setIndependentFps() that switches the update into a measured mode between updates drops the time since the last update (under a frame in the usual modes; see callAfter). Returns a timer id."
+    },
+    {
+     "name": "callEveryCatchUp",
+     "snippet": "callEveryCatchUp(${1:interval}, ${2:callback}, ${3:maxCatchUp})",
+     "return": "uint64_t",
+     "desc": "Like callEvery, but calls back once for every interval that came due, at most maxCatchUp times per update (maxCatchUp has no default; 0 or -1, any value <= 0, means no limit), e.g. to keep a counter or a simulation in step after a late update. Past the limit the remaining due intervals are dropped and the phase is kept. Cancelling the timer from the callback stops the remaining calls. Without a limit, a long stall in a VSYNC or setFps() loop (or an idle stretch in EVENT_DRIVEN mode) makes it fire that many times at once. In fixed-Hz update mode it counts step time, so time the loop drops beyond its step cap (setMaxUpdateSteps) is not counted. Returns a timer id."
     },
     {
      "name": "cancelTimer",
@@ -8822,6 +8958,21 @@ const TrussSketchAPI = {
      "snippet": "cancelAllAsyncTimers()",
      "return": "void",
      "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock."
+    }
+   ]
+  },
+  {
+   "name": "OnceGate",
+   "desc": "Gate for a log line (or anything else): isFirstTime() is true the first time, and with an interval, again once that much time has passed since the last true",
+   "constructor": {
+    "snippet": "OnceGate(${1:intervalSeconds})"
+   },
+   "methods": [
+    {
+     "name": "isFirstTime",
+     "snippet": "isFirstTime()",
+     "return": "bool",
+     "desc": "True the first time; with an interval, true again once that much time has passed since the last true. Otherwise false"
     }
    ]
   },
@@ -9187,19 +9338,19 @@ const TrussSketchAPI = {
      "name": "loadFromMemory",
      "snippet": "loadFromMemory()",
      "return": "",
-     "desc": "Load image from memory"
+     "desc": "Decode an image from memory into CPU pixels. No GPU work, so it is safe on a worker thread."
     },
     {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "LoadResult",
-     "desc": "Load image from file"
+     "desc": "Load image from file into CPU memory. No GPU work, so it is safe on a worker thread; upload the result on the main thread (`Texture::allocate(pixels)`)."
     },
     {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "bool",
-     "desc": "Save image to file"
+     "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created; when it cannot be, an error is logged and false returned"
     }
    ]
   },
@@ -9316,12 +9467,78 @@ const TrussSketchAPI = {
     {
      "name": "positionF",
      "type": "double",
-     "desc": "Floating-point playback cursor in source samples; advances by speed * rateRatio each output frame."
+     "desc": "Floating-point playback cursor; advances by speed * rateRatio each output frame. An eager voice counts source sample frames; a stream counts frames at the engine rate its decoder outputs at (the voice's position rate, which a re-init at another rate can change), not source samples. Use Sound::getPosition() for seconds."
     },
     {
      "name": "rateRatio",
      "type": "float",
      "desc": "Source-to-engine sample-rate ratio (buffer sampleRate / engine sampleRate), set when queued so the voice plays at correct pitch regardless of engine rate."
+    },
+    {
+     "name": "level",
+     "type": "std::atomic<float>",
+     "desc": "Peak absolute value of this voice's contribution to the mix over the most recent audio callback (after volume / pan / channel gains). Written by the audio thread; read it for metering."
+    }
+   ]
+  },
+  {
+   "name": "PlayingSoundInfo",
+   "desc": "One playing (or paused) sound as reported by AudioEngine::getPlayingSounds(): a copy taken under the engine lock, so later changes to the playback are not reflected.",
+   "properties": [
+    {
+     "name": "slot",
+     "type": "int",
+     "desc": "Playback slot index (0 .. maxPolyphony - 1)."
+    },
+    {
+     "name": "path",
+     "type": "fs::path",
+     "desc": "Source file (fs::path) as given, the same value as SoundBuffer::getPath() / SoundStream::getPath() and the file name in the logs; empty for generated or in-memory buffers. tc_get_audio_state reports it as UTF-8."
+    },
+    {
+     "name": "streaming",
+     "type": "bool",
+     "desc": "True for a SoundStream playback (Sound::loadStream), false for an eager SoundBuffer."
+    },
+    {
+     "name": "paused",
+     "type": "bool",
+     "desc": "True while the playback is paused (Sound::pause())."
+    },
+    {
+     "name": "loop",
+     "type": "bool",
+     "desc": "Loop flag of the playback."
+    },
+    {
+     "name": "position",
+     "type": "float",
+     "desc": "Playback position in seconds."
+    },
+    {
+     "name": "duration",
+     "type": "float",
+     "desc": "Source duration in seconds."
+    },
+    {
+     "name": "volume",
+     "type": "float",
+     "desc": "Volume of the playback."
+    },
+    {
+     "name": "pan",
+     "type": "float",
+     "desc": "Pan of the playback (-1 left, 0 center, 1 right)."
+    },
+    {
+     "name": "speed",
+     "type": "float",
+     "desc": "Playback speed (1.0 = natural pitch)."
+    },
+    {
+     "name": "level",
+     "type": "float",
+     "desc": "Peak absolute value of this playback's output in the last audio callback, after volume / pan / channel gains (linear, 1.0 = full scale; can exceed 1). 0 while paused, and while the engine is not running."
     }
    ]
   },
@@ -9872,6 +10089,24 @@ const TrussSketchAPI = {
      "desc": "Leave the current read-only scope."
     },
     {
+     "name": "isDerived",
+     "snippet": "isDerived()",
+     "return": "bool",
+     "desc": "Return true if the current member is a derived value (TC_DERIVED): computed from another member, writable, but not saved."
+    },
+    {
+     "name": "pushDerived",
+     "snippet": "pushDerived()",
+     "return": "void",
+     "desc": "Enter a derived-value scope (TC_DERIVED visits inside it)."
+    },
+    {
+     "name": "popDerived",
+     "snippet": "popDerived()",
+     "return": "void",
+     "desc": "Leave the current derived-value scope."
+    },
+    {
      "name": "endGroup",
      "snippet": "endGroup()",
      "return": "void",
@@ -10247,6 +10482,13 @@ const TrussSketchAPI = {
    "constructor": {
     "snippet": "Serial()"
    },
+   "properties": [
+    {
+     "name": "onDisconnect",
+     "type": "Event<SerialDisconnectEventArgs>",
+     "desc": "Event fired once per open connection when it ends: on a detected device loss (wasClean = false) or on close() of an open port (wasClean = true)"
+    }
+   ],
    "methods": [
     {
      "name": "setup",
@@ -10258,37 +10500,43 @@ const TrussSketchAPI = {
      "name": "close",
      "snippet": "close()",
      "return": "void",
-     "desc": "Disconnect and release resources"
+     "desc": "Disconnect and release resources; fires onDisconnect (wasClean = true) when the port was open"
+    },
+    {
+     "name": "isConnected",
+     "snippet": "isConnected()",
+     "return": "bool",
+     "desc": "Whether the port is open and working; turns false after close() or when a read/write call finds the device gone"
     },
     {
      "name": "isInitialized",
      "snippet": "isInitialized()",
      "return": "bool",
-     "desc": "Whether currently connected"
+     "desc": "Whether currently connected; same as isConnected()"
     },
     {
      "name": "getDevicePath",
      "snippet": "getDevicePath()",
-     "return": "const std::string &",
-     "desc": "Current device path"
+     "return": "std::string",
+     "desc": "Current device path; a copy, since another thread's setup() may change it. Never waits for setup(), close() or an I/O call"
     },
     {
      "name": "available",
      "snippet": "available()",
      "return": "int",
-     "desc": "Number of bytes available to read"
+     "desc": "Number of bytes available to read; 0 when not connected (a lost device also closes the port and fires onDisconnect)"
     },
     {
      "name": "readByte",
      "snippet": "readByte()",
      "return": "int",
-     "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error"
+     "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error (a lost device also closes the port and fires onDisconnect)"
     },
     {
      "name": "writeBytes",
      "snippet": "writeBytes(${1:buffer})",
      "return": "int",
-     "desc": "Write bytes; returns actual count or -1 on error"
+     "desc": "Write bytes; returns actual count or -1 on error (a lost device also closes the port and fires onDisconnect)"
     },
     {
      "name": "writeByte",
@@ -10374,6 +10622,32 @@ const TrussSketchAPI = {
      "snippet": "getDeviceName()",
      "return": "const std::string &",
      "desc": "Device name"
+    }
+   ]
+  },
+  {
+   "name": "SerialDisconnectEventArgs",
+   "desc": "Event args for Serial::onDisconnect",
+   "properties": [
+    {
+     "name": "portName",
+     "type": "std::string",
+     "desc": "Port name as passed to setup()"
+    },
+    {
+     "name": "baudRate",
+     "type": "int",
+     "desc": "The rate the port was open at (the one setup() logged); pass it back to setup() to reconnect"
+    },
+    {
+     "name": "reason",
+     "type": "std::string",
+     "desc": "Human-readable reason: \"closed by close()\" (on Android it may go on with \"(the device had already been lost: ...)\"), or the loss warning's text such as \"read: Input/output error\". For display and logs; tell a close from a loss with wasClean"
+    },
+    {
+     "name": "wasClean",
+     "type": "bool",
+     "desc": "true: closed by the app (close()); false: device lost / I/O error"
     }
    ]
   },
@@ -10487,7 +10761,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Sound",
-   "desc": "Audio playback",
+   "desc": "Audio playback. A Sound plays only while it, or a copy of it, is alive: copies share the voice, and when the last handle is destroyed or overwritten the voice stops (looping or one-shot) and its slot is freed. Keep Sound objects alive (e.g. as members) to play overlapping one-shots.",
    "constructor": {
     "snippet": "Sound()"
    },
@@ -10496,7 +10770,7 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "LoadResult",
-     "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a"
+     "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a (case-insensitive; the file name keeps its case as written)"
     },
     {
      "name": "loadStream",
@@ -10531,14 +10805,14 @@ const TrussSketchAPI = {
     {
      "name": "play",
      "snippet": "play()",
-     "return": "void",
-     "desc": "Play audio"
+     "return": "bool",
+     "desc": "Play from the beginning (this Sound's previous voice is stopped first). Returns false when nothing will play: not loaded, or the engine dropped the play (every voice busy, the stream's maxPolyphony reached by a copy of a streamed Sound, the stream file could not be reopened, or no output device running). Drops are logged as warnings and counted in AudioEngine::getStats()."
     },
     {
      "name": "stop",
      "snippet": "stop()",
      "return": "void",
-     "desc": "Stop audio"
+     "desc": "Stop audio and release the voice (a streamed voice also closes its decoder and file). Copies that share the voice see it stopped."
     },
     {
      "name": "pause",
@@ -10664,13 +10938,13 @@ const TrussSketchAPI = {
      "name": "getPosition",
      "snippet": "getPosition()",
      "return": "float",
-     "desc": "Get playback position in seconds"
+     "desc": "Get playback position in seconds. On a stream, right after setPosition() and until the audio has moved there (usually ~10 ms), this is the requested position."
     },
     {
      "name": "setPosition",
      "snippet": "setPosition(${1:seconds})",
      "return": "void",
-     "desc": "Seek to a specific time in seconds. On streams, costs ~10 ms blackout while the ring refills."
+     "desc": "Seek to a specific time in seconds. On streams the decoder seeks and the ring refills, so the audio moves after ~10 ms of silence (longer on slow storage or for an MP3 several hours long); getPosition() reports the new position at once, the last of several calls wins, and a paused stream resumes from there. A stream whose length is unknown (getDuration() is 0) cannot seek: the call is ignored with a warning."
     },
     {
      "name": "getDuration",
@@ -10727,7 +11001,7 @@ const TrussSketchAPI = {
      "name": "loadPcmFromMemory",
      "snippet": "loadPcmFromMemory()",
      "return": "",
-     "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths."
+     "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths, a channel count below 1, a data size that is not a whole number of frames, or more samples than a buffer can hold."
     },
     {
      "name": "getDuration",
@@ -10787,7 +11061,7 @@ const TrussSketchAPI = {
      "name": "mixFrom",
      "snippet": "mixFrom(${1:other}, ${2:offsetSamples})",
      "return": "void",
-     "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed."
+     "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed. offsetSamples is in frames (samples per channel, like numSamples). Both buffers must have the same channel count; otherwise nothing is mixed and an error is logged."
     },
     {
      "name": "clip",
@@ -10813,7 +11087,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "SoundStream",
-   "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a ~10 ms refill, and each polyphony slot costs one open file handle + decoder + ring buffer.",
+   "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a refill of usually ~10 ms (a file whose length is unknown cannot seek), and each polyphony slot costs one open file handle + decoder + ring buffer.",
    "constructor": {
     "snippet": "SoundStream()"
    },
@@ -10822,13 +11096,13 @@ const TrussSketchAPI = {
      "name": "loadStream",
      "snippet": "loadStream(${1:path})",
      "return": "LoadResult",
-     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened or the format is unsupported."
+     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened, the format is unsupported, or the file has no audio frames (DecodeFailed)."
     },
     {
      "name": "getDuration",
      "snippet": "getDuration()",
      "return": "float",
-     "desc": "Decoded file duration in seconds."
+     "desc": "Decoded file duration in seconds. 0 when the file does not record its length (e.g. a FLAC encoded to a pipe); such a stream plays to its end but cannot seek, and an engine re-init at another sample rate restarts it from the beginning."
     },
     {
      "name": "getPath",
@@ -11011,7 +11285,7 @@ const TrussSketchAPI = {
     {
      "name": "onDisconnect",
      "type": "Event<TcpDisconnectEventArgs>",
-     "desc": "Fired when disconnected"
+     "desc": "Fired when the connection ends: the peer closed it, an error ended it, or disconnect() / connect() on a connected client (not from the destructor)"
     },
     {
      "name": "onError",
@@ -11259,7 +11533,7 @@ const TrussSketchAPI = {
      "name": "start",
      "snippet": "start(${1:port})",
      "return": "bool",
-     "desc": "Start listening on a port"
+     "desc": "Start listening on a port. maxClients caps the connected clients (0 = unlimited, the default)"
     },
     {
      "name": "stop",
@@ -11361,7 +11635,7 @@ const TrussSketchAPI = {
      "name": "getPort",
      "snippet": "getPort()",
      "return": "int",
-     "desc": "The listening port"
+     "desc": "The port the server is bound to. After start(0) this is the port the OS picked; for a fixed port it is that port"
     }
    ]
   },
@@ -13756,7 +14030,7 @@ const TrussSketchAPI = {
      "name": "setApp",
      "snippet": "setApp(${1:app})",
      "return": "void",
-     "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window"
+     "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open (both log an error and leave the window as it is)"
     },
     {
      "name": "getApp",
@@ -13805,6 +14079,12 @@ const TrussSketchAPI = {
      "snippet": "getHeight()",
      "return": "int",
      "desc": "Window height in logical points (matches its coordinate system)"
+    },
+    {
+     "name": "isOccluded",
+     "snippet": "isOccluded()",
+     "return": "bool",
+     "desc": "Whether the OS reports this window as not visible, so it renders no frames (its update/draw pause until it is visible again): macOS minimized, fully covered or on another Space; Windows minimized or DXGI-occluded; Linux (X11) minimized or fully obscured (without a compositing manager). False for a closed window"
     },
     {
      "name": "setSize",
@@ -14044,7 +14324,7 @@ const TrussSketchAPI = {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "bool",
-     "desc": "Save the document to a file. Relative paths are resolved via getDataPath. indent sets the per-level indentation string. Returns true on success."
+     "desc": "Save the document to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the per-level indentation string. Returns true on success; on failure it logs an error and returns false."
     },
     {
      "name": "toString",
