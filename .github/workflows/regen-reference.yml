@@ -1,0 +1,146 @@
+name: Regenerate reference data
+
+# Rebuilds the API data the site renders -- generated/trussc-api.js (reference),
+# trusssketch-ref.js / trusssketch-api.js (TrussSketch reference + editor) and
+# of-mapping.json -- from TrussC's main branch, and commits it when it changed.
+#
+# The pipeline is TrussC's own (docs/reference/README.md): clang reads the C++
+# headers, generate.js joins that with the hand-written api-reference.toml into
+# reference-data.json, and the emitters write into ../../../trussc.org/generated/.
+# So TrussC and this repo are checked out side by side.
+#
+# It runs on macOS on purpose: the headers are parsed for the platform they are
+# compiled on, and a Linux parse drops the macOS-only API (VideoWriter::lockFrame
+# and friends) from the reference. The site data has always been generated on a Mac.
+#
+# Pushes to the workflow itself run it as a dry run (generate + report, no commit),
+# so a change to this file is tested before the nightly run uses it.
+
+on:
+  schedule:
+    - cron: '17 18 * * *'          # daily, 03:17 JST
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Generate and report the diff, but do not commit'
+        type: boolean
+        default: false
+      allow_shrink:
+        description: 'Commit even if a generated file lost more than 5% of its symbols'
+        type: boolean
+        default: false
+  push:
+    paths:
+      - '.github/workflows/regen-reference.yml'
+      - '.github/scripts/check-regen.mjs'
+
+concurrency:
+  group: regen-reference
+  cancel-in-progress: false
+
+jobs:
+  regen:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write               # push the regenerated data
+      pages: write                  # request a Pages build after the push
+    env:
+      DRY_RUN: ${{ github.event_name == 'push' || inputs.dry_run == true }}
+    steps:
+      - name: Check out TrussC (main)
+        uses: actions/checkout@v5
+        with:
+          repository: TrussC-org/TrussC
+          ref: main
+          path: TrussC
+          # The emitters stamp the version from `git describe --tags`, so the tags
+          # and the history leading to them are needed; blobs are fetched lazily.
+          fetch-depth: 0
+          filter: blob:none
+
+      - name: Check out trussc.org
+        uses: actions/checkout@v5
+        with:
+          path: trussc.org
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      # The headers include the built-in shaders' generated *.glsl.h, which are
+      # gitignored and produced by the build. Without them clang stops mid-parse
+      # and generate.js (rightly) refuses to render from a partial AST. Build only
+      # the shader target -- not the library.
+      - name: Generate built-in shader headers
+        run: |
+          cmake -S TrussC/core -B "$RUNNER_TEMP/tc-shaders" -DCMAKE_BUILD_TYPE=Release
+          cmake --build "$RUNNER_TEMP/tc-shaders" --target TrussC_shaders
+
+      - name: Install doc tooling deps
+        run: cd TrussC/docs && npm ci
+
+      - name: Build reference-data.json (clang AST + api-reference.toml)
+        # /usr/bin/time -l reports the peak RSS: the runner has ~7 GB, the heap cap is 8 GB.
+        run: cd TrussC/docs && /usr/bin/time -l node --max-old-space-size=8192 reference/generate.js
+
+      - name: Emit site data
+        run: |
+          cd TrussC/docs
+          node scripts/emit-web.js
+          # Second pass: scan-examples.js links examples to symbols by reading the
+          # trussc-api.js the first pass just wrote.
+          node scripts/emit-web.js
+          node scripts/emit-sketch-reference.js
+          node scripts/emit-sketch-api.js
+          node reference/emit-of.js
+
+      - name: Check symbol counts
+        working-directory: trussc.org
+        env:
+          MAX_SHRINK: ${{ inputs.allow_shrink == true && '1' || '0.05' }}
+        run: node .github/scripts/check-regen.mjs
+
+      - name: Show the diff
+        working-directory: trussc.org
+        run: |
+          git status --short
+          git diff --stat -- generated/
+          {
+            echo '### Changed files'
+            echo '```'
+            git diff --stat -- generated/ || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          git diff -- generated/ > "$RUNNER_TEMP/regen.diff" || true
+
+      - name: Upload the diff
+        uses: actions/upload-artifact@v4
+        with:
+          name: regen-diff
+          path: ${{ runner.temp }}/regen.diff
+          if-no-files-found: ignore
+
+      - name: Commit and push
+        if: env.DRY_RUN != 'true'
+        working-directory: trussc.org
+        run: |
+          git add generated/
+          if git diff --cached --quiet; then
+            echo "Reference data unchanged."
+            exit 0
+          fi
+          TC_SHA=$(git -C ../TrussC rev-parse --short HEAD)
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "doc: regenerate reference data from TrussC ${TC_SHA}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "PUSHED=1" >> "$GITHUB_ENV"
+
+      # A push made with GITHUB_TOKEN is not guaranteed to start the branch-based
+      # Pages build, so ask for one explicitly.
+      - name: Request a Pages build
+        if: env.PUSHED == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds"
