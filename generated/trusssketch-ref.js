@@ -5288,15 +5288,15 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "path",
                     "return_type": "boolean",
-                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written.",
+                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
                     "keywords": [
                         "capture",
                         "png",
                         "export",
                         "save image"
                     ],
-                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueは「保存先を準備しキューに積めた（親フォルダ生成・書き込み可）」の意味で、ファイル書き込み完了ではない",
-                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 '대상 준비 및 캡처 큐 등록 성공(상위 폴더 생성·쓰기 가능)'을 의미하며 파일 기록 완료가 아님"
+                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueは「保存先を準備しキューに積めた（親フォルダ生成・書き込み可）」の意味で、ファイル書き込み完了ではない。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 '대상 준비 및 캡처 큐 등록 성공(상위 폴더 생성·쓰기 가능)'을 의미하며 파일 기록 완료가 아님. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "startRecording",
@@ -5559,14 +5559,14 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "path",
                     "return_type": "boolean",
-                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path",
+                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
                     "keywords": [
                         "output",
                         "write",
                         "path"
                     ],
-                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して false を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す",
-                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 false를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환"
+                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して false を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 false를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "closeLogFile",
@@ -6204,6 +6204,20 @@ const TrussCAPI = {
             "name": "File",
             "functions": [
                 {
+                    "name": "getDataPath",
+                    "params": "filename",
+                    "params_typed": "filename",
+                    "return_type": "string",
+                    "desc": "Resolve a relative path against the data directory and return it as fs::path. An absolute input is returned unchanged. Only the data-directory base is lexically normalized; filename components are preserved. Safe to call from any thread. This is the bundled data the app reads (bin/data in development, the bundle's Resources/data when packaged); files the app writes and keeps go to getUserDataPath().",
+                    "keywords": [
+                        "resource",
+                        "asset",
+                        "resolve"
+                    ],
+                    "desc_ja": "相対パスをデータディレクトリ基準で解決して fs::path で返す。絶対パスはそのまま返る。データディレクトリの基準部分だけを字句的に正規化し、ファイル名の構成要素は保つ。どのスレッドから呼んでもよい。アプリが読む同梱データの場所（開発中は bin/data、パッケージ後はバンドルの Resources/data）。アプリが書いて残すファイルは getUserDataPath() へ",
+                    "desc_ko": "상대 경로를 데이터 디렉터리 기준으로 해석해 fs::path로 반환. 절대 경로는 그대로 반환됨. 데이터 디렉터리 기준 부분만 어휘적으로 정규화하고 파일 이름의 구성 요소는 유지. 어느 스레드에서 호출해도 됨. 앱이 읽는 동봉 데이터의 위치(개발 중에는 bin/data, 패키지 후에는 번들의 Resources/data). 앱이 쓰고 보관하는 파일은 getUserDataPath()로"
+                },
+                {
                     "name": "pathToUtf8",
                     "params": "p",
                     "params_typed": "p",
@@ -6289,56 +6303,91 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "path",
                     "return_type": "(nothing)",
-                    "desc": "Set the root directory used to resolve relative data paths. A relative root is resolved against the executable directory; an absolute root (fs::path::is_absolute, e.g. C:/ on Windows) is used as-is.",
+                    "desc": "Set the root directory used to resolve relative data paths. A relative root is resolved against the executable directory; an absolute root (fs::path::is_absolute, e.g. C:/ on Windows) is used as-is. Call it before starting threads that load files (e.g. in setup()).",
                     "keywords": [
                         "resource",
                         "directory",
                         "base"
                     ],
-                    "desc_ja": "相対データパスの解決に使うルートディレクトリを設定。相対ルートは実行ファイルのディレクトリ基準で解決され、絶対ルート(fs::path::is_absolute 判定、Windows の C:/ も可)はそのまま使われる",
-                    "desc_ko": "상대 데이터 경로 해석에 사용할 루트 디렉터리를 설정. 상대 루트는 실행 파일 디렉터리 기준으로 해석되고, 절대 루트(fs::path::is_absolute 판정, Windows의 C:/ 포함)는 그대로 사용됨"
+                    "desc_ja": "相対データパスの解決に使うルートディレクトリを設定。相対ルートは実行ファイルのディレクトリ基準で解決され、絶対ルート(fs::path::is_absolute 判定、Windows の C:/ も可)はそのまま使われる。ファイルを読み込むスレッドを開始する前に呼ぶ (例: setup() 内)",
+                    "desc_ko": "상대 데이터 경로 해석에 사용할 루트 디렉터리를 설정. 상대 루트는 실행 파일 디렉터리 기준으로 해석되고, 절대 루트(fs::path::is_absolute 판정, Windows의 C:/ 포함)는 그대로 사용됨. 파일을 로드하는 스레드를 시작하기 전에 호출 (예: setup() 안)"
                 },
                 {
                     "name": "getDataPathRoot",
                     "params": "",
                     "params_typed": "",
                     "return_type": "string",
-                    "desc": "Get the current data path root as fs::path.",
+                    "desc": "Get the current data path root as fs::path. Unless explicitly set, Apple platforms choose one existing folder on first use, in order: <exe>/data (iOS), <exe>/../Resources/data (macOS release), <exe>/../../../data (macOS development). The choice is kept for the process; missing files never fall back to another folder. Only the release workflow copies bin/data into the macOS bundle; normal builds keep using bin/data.",
                     "keywords": [
                         "resource",
                         "directory",
                         "base"
                     ],
-                    "desc_ja": "現在のデータパスルートを fs::path で取得",
-                    "desc_ko": "현재 데이터 경로 루트를 fs::path로 얻음"
-                },
-                {
-                    "name": "getDataPath",
-                    "params": "filename",
-                    "params_typed": "filename",
-                    "return_type": "string",
-                    "desc": "Resolve a relative path against the data directory and return it as fs::path. An absolute input is returned unchanged.",
-                    "keywords": [
-                        "resource",
-                        "asset",
-                        "resolve"
-                    ],
-                    "desc_ja": "相対パスをデータディレクトリ基準で解決して fs::path で返す。絶対パスはそのまま返る",
-                    "desc_ko": "상대 경로를 데이터 디렉터리 기준으로 해석해 fs::path로 반환. 절대 경로는 그대로 반환됨"
+                    "desc_ja": "現在のデータパスルートを fs::path で取得。明示的に設定しない場合、Apple では最初の使用時に存在するフォルダを <exe>/data（iOS）、<exe>/../Resources/data（macOS 配布）、<exe>/../../../data（macOS 開発）の順で一つ選ぶ。この選択はプロセス中保持され、見つからないファイルを別フォルダで探すことはない。macOS バンドルに bin/data をコピーするのはリリース workflow のみで、通常のビルドでは bin/data を使う",
+                    "desc_ko": "현재 데이터 경로 루트를 fs::path로 얻음. 명시적으로 설정하지 않으면 Apple에서는 최초 사용 시 존재하는 폴더를 <exe>/data(iOS), <exe>/../Resources/data(macOS 배포), <exe>/../../../data(macOS 개발) 순으로 하나 선택한다. 이 선택은 프로세스 동안 유지되며, 없는 파일을 다른 폴더에서 찾지 않는다. macOS 번들에 bin/data를 복사하는 것은 릴리스 workflow뿐이며 일반 빌드에서는 bin/data를 사용한다"
                 },
                 {
                     "name": "setDataPathToResources",
                     "params": "",
                     "params_typed": "",
                     "return_type": "(nothing)",
-                    "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms.",
+                    "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms. Call it before starting threads that load files (e.g. in setup()).",
                     "keywords": [
                         "bundle",
                         "macos",
                         "app"
                     ],
-                    "desc_ja": "配布用にデータパスルートをmacOSアプリバンドルのContents/Resources/dataフォルダに向ける。macOS以外のプラットフォームでは何もしない",
-                    "desc_ko": "배포용으로 데이터 경로 루트를 macOS 앱 번들의 Contents/Resources/data 폴더로 지정. macOS 외 플랫폼에서는 동작하지 않음"
+                    "desc_ja": "配布用にデータパスルートをmacOSアプリバンドルのContents/Resources/dataフォルダに向ける。macOS以外のプラットフォームでは何もしない。ファイルを読み込むスレッドを開始する前に呼ぶ (例: setup() 内)",
+                    "desc_ko": "배포용으로 데이터 경로 루트를 macOS 앱 번들의 Contents/Resources/data 폴더로 지정. macOS 외 플랫폼에서는 동작하지 않음. 파일을 로드하는 스레드를 시작하기 전에 호출 (예: setup() 안)"
+                },
+                {
+                    "name": "getUserDataPath",
+                    "params": "path",
+                    "params_typed": "path = fs.path(\"\")",
+                    "return_type": "string",
+                    "desc": "Folder for files the app writes and keeps (settings, presets, logs, recordings): always the OS per-user app folder, in development and in a packaged app alike. macOS ~/Library/Application Support/<bundle id>/, Windows %LOCALAPPDATA%\\<app>\\, Linux $XDG_DATA_HOME/<app>/ (default ~/.local/share/<app>/), iOS the app's Library/Application Support/, Android the app's internal files folder; on web it is in memory and not kept. <app> is the executable name. Created on first use. A relative path is joined to it; an absolute path is returned as is. Write and read back through it: saveJson(j, getUserDataPath(\"settings.json\")) then loadJson(getUserDataPath(\"settings.json\")). setUserDataPathRoot() changes it.",
+                    "keywords": [
+                        "save",
+                        "settings",
+                        "preferences",
+                        "writable",
+                        "application support",
+                        "appdata",
+                        "user folder"
+                    ],
+                    "desc_ja": "アプリが書いて残すファイル（設定、プリセット、ログ、録画）用のフォルダ。開発中もパッケージ後も常に OS のユーザーごとのアプリフォルダ。macOS は ~/Library/Application Support/<bundle id>/、Windows は %LOCALAPPDATA%\\<app>\\、Linux は $XDG_DATA_HOME/<app>/（既定は ~/.local/share/<app>/）、iOS はアプリの Library/Application Support/、Android はアプリの内部ファイルフォルダ。web ではメモリ上にあり残らない。<app> は実行ファイル名。初回使用時に作られる。相対パスはこのフォルダにつなげ、絶対パスはそのまま返す。書くときも読み戻すときもこれを通す: saveJson(j, getUserDataPath(\"settings.json\")) の後 loadJson(getUserDataPath(\"settings.json\"))。setUserDataPathRoot() で変えられる",
+                    "desc_ko": "앱이 쓰고 보관하는 파일(설정, 프리셋, 로그, 녹화)용 폴더. 개발 중이든 패키지 후든 항상 OS의 사용자별 앱 폴더. macOS는 ~/Library/Application Support/<bundle id>/, Windows는 %LOCALAPPDATA%\\<app>\\, Linux는 $XDG_DATA_HOME/<app>/(기본 ~/.local/share/<app>/), iOS는 앱의 Library/Application Support/, Android는 앱의 내부 파일 폴더. web에서는 메모리에 있고 남지 않는다. <app>은 실행 파일 이름. 처음 사용할 때 만들어진다. 상대 경로는 이 폴더에 이어 붙이고, 절대 경로는 그대로 반환. 쓸 때도 다시 읽을 때도 이것을 거친다: saveJson(j, getUserDataPath(\"settings.json\")) 후 loadJson(getUserDataPath(\"settings.json\")). setUserDataPathRoot()로 바꿀 수 있다"
+                },
+                {
+                    "name": "getTempPath",
+                    "params": "path",
+                    "params_typed": "path = fs.path(\"\")",
+                    "return_type": "string",
+                    "desc": "Folder for temporary files, which the OS may delete at any time: $TMPDIR/<bundle id>/ on macOS, %TEMP%\\<app>\\ on Windows, $TMPDIR (or /tmp) /<app>/ on Linux, the app's tmp/ on iOS, the app's cache folder on Android, in-memory /tmp on web. Created on first use. A relative path is joined to it; an absolute path is returned as is.",
+                    "keywords": [
+                        "temporary",
+                        "cache",
+                        "tmp",
+                        "scratch"
+                    ],
+                    "desc_ja": "一時ファイル用のフォルダ。OS がいつ消してもよいもの。macOS は $TMPDIR/<bundle id>/、Windows は %TEMP%\\<app>\\、Linux は $TMPDIR（なければ /tmp）/<app>/、iOS はアプリの tmp/、Android はアプリのキャッシュフォルダ、web はメモリ上の /tmp。初回使用時に作られる。相対パスはこのフォルダにつなげ、絶対パスはそのまま返す",
+                    "desc_ko": "임시 파일용 폴더. OS가 언제든 지울 수 있다. macOS는 $TMPDIR/<bundle id>/, Windows는 %TEMP%\\<app>\\, Linux는 $TMPDIR(없으면 /tmp)/<app>/, iOS는 앱의 tmp/, Android는 앱의 캐시 폴더, web은 메모리상의 /tmp. 처음 사용할 때 만들어진다. 상대 경로는 이 폴더에 이어 붙이고, 절대 경로는 그대로 반환"
+                },
+                {
+                    "name": "setUserDataPathRoot",
+                    "params": "path",
+                    "params_typed": "path",
+                    "return_type": "(nothing)",
+                    "desc": "Fix the folder getUserDataPath() returns, for installations, several instances of one app, or tests. Mirrors setDataPathRoot(): a relative root is resolved against the executable directory, an absolute root is used as is. The folder is created on first use. A root inside the app bundle (macOS / iOS) still gets its writes refused.",
+                    "keywords": [
+                        "save",
+                        "writable",
+                        "override",
+                        "installation",
+                        "instance"
+                    ],
+                    "desc_ja": "getUserDataPath() が返すフォルダを固定する。設置作品、同じアプリの複数起動、テスト向け。setDataPathRoot() と同じく、相対ルートは実行ファイルのディレクトリ基準で解決し、絶対ルートはそのまま使う。フォルダは初回使用時に作られる。アプリバンドル内のルート（macOS / iOS）への書き込みはやはり拒否される",
+                    "desc_ko": "getUserDataPath()가 반환하는 폴더를 고정. 설치 작품, 같은 앱의 여러 인스턴스, 테스트용. setDataPathRoot()와 같이 상대 루트는 실행 파일 디렉터리 기준으로 해석하고 절대 루트는 그대로 사용. 폴더는 처음 사용할 때 만들어진다. 앱 번들 안의 루트(macOS / iOS)로의 쓰기는 여전히 거부된다"
                 },
                 {
                     "name": "loadJson",
@@ -6359,14 +6408,14 @@ const TrussCAPI = {
                     "params": "j, path, indent",
                     "params_typed": "j, path, indent = 2",
                     "return_type": "boolean",
-                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). The JSON is serialized before the file is opened, so a serialization error leaves an existing file untouched. Written in binary mode (LF line endings on every platform). Returns true on success; when serializing, opening, writing or closing fails it logs an error and returns false. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it.",
+                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). The JSON is serialized before the file is opened, so a serialization error leaves an existing file untouched. Written in binary mode (LF line endings on every platform). Returns true on success; when serializing, opening, writing or closing fails it logs an error and returns false. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
                     "keywords": [
                         "write",
                         "store",
                         "serialize"
                     ],
-                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決し、親フォルダがなければ作る。indentはpretty-print幅を指定(負の値でcompact)。ファイルを開く前にシリアライズするので、シリアライズに失敗しても既存のファイルはそのまま残る。バイナリモードで書く(どのプラットフォームでも改行はLF)。成功時trueを返し、シリアライズ・オープン・書き込み・closeのいずれかに失敗したときはエラーをログに出してfalseを返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する",
-                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. indent는 pretty-print 폭을 지정(음수면 compact). 파일을 열기 전에 직렬화하므로 직렬화에 실패해도 기존 파일은 그대로 남는다. 바이너리 모드로 기록(모든 플랫폼에서 줄바꿈은 LF). 성공 시 true 반환, 직렬화·열기·쓰기·닫기 중 하나라도 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다"
+                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決し、親フォルダがなければ作る。indentはpretty-print幅を指定(負の値でcompact)。ファイルを開く前にシリアライズするので、シリアライズに失敗しても既存のファイルはそのまま残る。バイナリモードで書く(どのプラットフォームでも改行はLF)。成功時trueを返し、シリアライズ・オープン・書き込み・closeのいずれかに失敗したときはエラーをログに出してfalseを返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. indent는 pretty-print 폭을 지정(음수면 compact). 파일을 열기 전에 직렬화하므로 직렬화에 실패해도 기존 파일은 그대로 남는다. 바이너리 모드로 기록(모든 플랫폼에서 줄바꿈은 LF). 성공 시 true 반환, 직렬화·열기·쓰기·닫기 중 하나라도 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "loadXml",
@@ -6568,27 +6617,27 @@ const TrussCAPI = {
                     "params": "path, content",
                     "params_typed": "path, content",
                     "return_type": "boolean",
-                    "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it",
+                    "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
                     "keywords": [
                         "write",
                         "store"
                     ],
-                    "desc_ja": "文字列をファイルに保存。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して false を返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する",
-                    "desc_ko": "문자열을 텍스트 파일로 저장. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다"
+                    "desc_ja": "文字列をファイルに保存。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して false を返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "문자열을 텍스트 파일로 저장. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "appendToFile",
                     "params": "path, content",
                     "params_typed": "path, content",
                     "return_type": "boolean",
-                    "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails",
+                    "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
                     "keywords": [
                         "write",
                         "add",
                         "concat"
                     ],
-                    "desc_ja": "ファイルに追記。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して false を返す",
-                    "desc_ko": "파일에 문자열을 추가. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 false 반환"
+                    "desc_ja": "ファイルに追記。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して false を返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "파일에 문자열을 추가. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 false 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 }
             ],
             "name_ja": "ファイル",
@@ -8992,9 +9041,9 @@ const TrussCAPI = {
                             "params": "path, settings = {std.vector<std.vector<int>>()}"
                         }
                     ],
-                    "desc": "Start recording the master mix into a WAV file (relative paths resolve via getDataPath). The audio engine must already be initialized; returns false otherwise or when the file cannot be opened",
-                    "desc_ja": "マスターミックスのWAV録音を開始（相対パスは getDataPath で解決）。オーディオエンジンが初期化済みであること。未初期化またはファイルが開けない場合は false",
-                    "desc_ko": "마스터 믹스의 WAV 녹음을 시작(상대 경로는 getDataPath로 해석). 오디오 엔진이 초기화되어 있어야 하며, 아니면(또는 파일을 열 수 없으면) false 반환"
+                    "desc": "Start recording the master mix into a WAV file (relative paths resolve via getDataPath). The audio engine must already be initialized; returns false otherwise or when the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "desc_ja": "マスターミックスのWAV録音を開始（相対パスは getDataPath で解決）。オーディオエンジンが初期化済みであること。未初期化またはファイルが開けない場合は false。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "마스터 믹스의 WAV 녹음을 시작(상대 경로는 getDataPath로 해석). 오디오 엔진이 초기화되어 있어야 하며, 아니면(또는 파일을 열 수 없으면) false 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "audioRecorder:stop",
@@ -9155,7 +9204,10 @@ const TrussCAPI = {
                 "clipping",
                 "cpu usage",
                 "cpu load",
-                "meter"
+                "meter",
+                "underrun",
+                "stall",
+                "re-init"
             ],
             "desc_ja": "AudioEngine::getStats() が返すオーディオエンジンの健全性カウンタとメーター。カウンタはプロセス起動からの累計 (再初期化でも消えない)。peak / rms / cpuUsage は直近の出力を表す",
             "desc_ko": "AudioEngine::getStats() 가 반환하는 오디오 엔진 상태 카운터와 미터. 카운터는 프로세스 시작 이후 누계 (재초기화해도 유지). peak / rms / cpuUsage 는 최근 출력을 나타낸다",
@@ -9209,30 +9261,51 @@ const TrussCAPI = {
                 {
                     "name": "audioStats.peak",
                     "type": "number",
-                    "desc": "Master output peak over the last ~100 ms, linear (1.0 = full scale). Measured before the clamp, so a value above 1 shows how far the mix overshoots. 0 while the engine is not running.",
-                    "desc_ja": "直近約 100 ms のマスター出力のピーク (リニア、1.0 = フルスケール)。クランプ前に測るので、1 を超えた値はミックスのはみ出し量を示す。エンジン停止中は 0",
-                    "desc_ko": "최근 약 100 ms 의 마스터 출력 피크 (선형, 1.0 = 풀 스케일). 클램프 전에 측정하므로 1 을 넘는 값은 믹스가 얼마나 넘쳤는지를 보여준다. 엔진이 정지 상태면 0"
+                    "desc": "Master output peak over the last ~100 ms, linear (1.0 = full scale). Measured before the clamp, so a value above 1 shows how far the mix overshoots. 0 while the engine is not running or callbacks are stalled.",
+                    "desc_ja": "直近約 100 ms のマスター出力のピーク (リニア、1.0 = フルスケール)。クランプ前に測るので、1 を超えた値はミックスのはみ出し量を示す。エンジン停止中、またはコールバックが停止状態なら 0",
+                    "desc_ko": "최근 약 100 ms 의 마스터 출력 피크 (선형, 1.0 = 풀 스케일). 클램프 전에 측정하므로 1 을 넘는 값은 믹스가 얼마나 넘쳤는지를 보여준다. 엔진 또는 콜백이 정지 상태면 0"
                 },
                 {
                     "name": "audioStats.rms",
                     "type": "number",
-                    "desc": "Master output RMS over the same ~100 ms window, linear. 0 while the engine is not running.",
-                    "desc_ja": "同じ約 100 ms 区間のマスター出力の RMS (リニア)。エンジン停止中は 0",
-                    "desc_ko": "같은 약 100 ms 구간의 마스터 출력 RMS (선형). 엔진이 정지 상태면 0"
+                    "desc": "Master output RMS over the same ~100 ms window, linear. 0 while the engine is not running or callbacks are stalled.",
+                    "desc_ja": "同じ約 100 ms 区間のマスター出力の RMS (リニア)。エンジン停止中、またはコールバックが停止状態なら 0",
+                    "desc_ko": "같은 약 100 ms 구간의 마스터 출력 RMS (선형). 엔진 또는 콜백이 정지 상태면 0"
                 },
                 {
                     "name": "audioStats.cpuUsage",
                     "type": "number",
-                    "desc": "Fraction of audio-thread time: time spent mixing the playing sounds and audioOut listeners divided by the audio time produced, averaged over ~0.5 s of audio. 1.0 means the callback took as long as the audio it produced (0.25 = a quarter of the time budget). 0 while the engine is not running.",
-                    "desc_ja": "オーディオスレッドの時間の割合: 再生中のサウンドと audioOut リスナーのミックスにかかった時間 ÷ 生成した音の時間。約 0.5 秒分の音の平均。1.0 はコールバックが生成した音と同じだけの時間がかかったことを表す (0.25 = 時間予算の 4 分の 1)。エンジン停止中は 0",
-                    "desc_ko": "오디오 스레드 시간의 비율: 재생 중인 사운드와 audioOut 리스너 믹스에 걸린 시간 ÷ 생성한 오디오 시간. 약 0.5 초 분량의 오디오 평균. 1.0 은 콜백이 생성한 오디오만큼의 시간이 걸렸다는 뜻 (0.25 = 시간 예산의 4 분의 1). 엔진이 정지 상태면 0"
+                    "desc": "Fraction of audio-thread time: time spent mixing the playing sounds and audioOut listeners divided by the audio time produced, averaged over ~0.5 s of audio. 1.0 means the callback took as long as the audio it produced (0.25 = a quarter of the time budget). 0 while the engine is not running or callbacks are stalled.",
+                    "desc_ja": "オーディオスレッドの時間の割合: 再生中のサウンドと audioOut リスナーのミックスにかかった時間 ÷ 生成した音の時間。約 0.5 秒分の音の平均。1.0 はコールバックが生成した音と同じだけの時間がかかったことを表す (0.25 = 時間予算の 4 分の 1)。エンジン停止中、またはコールバックが停止状態なら 0",
+                    "desc_ko": "오디오 스레드 시간의 비율: 재생 중인 사운드와 audioOut 리스너 믹스에 걸린 시간 ÷ 생성한 오디오 시간. 약 0.5 초 분량의 오디오 평균. 1.0 은 콜백이 생성한 오디오만큼의 시간이 걸렸다는 뜻 (0.25 = 시간 예산의 4 분의 1). 엔진 또는 콜백이 정지 상태면 0"
                 },
                 {
                     "name": "audioStats.cpuUsagePeak",
                     "type": "number",
-                    "desc": "CPU usage of the worst single callback in the same window; above 1 the callback took longer than the audio it produced (a dropout). 0 while the engine is not running.",
-                    "desc_ja": "同じ区間で最も重かったコールバック 1 回の CPU 使用率。1 を超えたらコールバックが生成した音より長くかかった (音切れ)。エンジン停止中は 0",
-                    "desc_ko": "같은 구간에서 가장 무거웠던 콜백 한 번의 CPU 사용률. 1 을 넘으면 콜백이 생성한 오디오보다 오래 걸린 것 (끊김). 엔진이 정지 상태면 0"
+                    "desc": "CPU usage of the worst single callback in the same window; above 1 the callback took longer than the audio it produced (a dropout). 0 while the engine is not running or callbacks are stalled.",
+                    "desc_ja": "同じ区間で最も重かったコールバック 1 回の CPU 使用率。1 を超えたらコールバックが生成した音より長くかかった (音切れ)。エンジン停止中、またはコールバックが停止状態なら 0",
+                    "desc_ko": "같은 구간에서 가장 무거웠던 콜백 한 번의 CPU 사용률. 1 을 넘으면 콜백이 생성한 오디오보다 오래 걸린 것 (끊김). 엔진 또는 콜백이 정지 상태면 0"
+                },
+                {
+                    "name": "audioStats.underrunFrames",
+                    "type": "number",
+                    "desc": "Cumulative silent output frames per streaming voice because the decoder fell behind. A new voice's wait before its first decoded frame, pauses, pending seeks, refill waits after an applied seek and a normal end are excluded. Warnings are aggregated on the main thread at most once per two seconds, with remaining counts flushed at exit.",
+                    "desc_ja": "デコーダーが遅れてストリーム再生が無音になった出力フレーム数の累計 (再生インスタンスごと)。新しい再生の最初のデコード待ち、一時停止、処理待ちのシーク、シーク適用後のデータ補充待ち、正常な終端は含まない。警告はメインスレッドで2秒に最大1回集約し、終了時に残りを報告する",
+                    "desc_ko": "디코더가 늦어 스트림 재생이 무음이 된 출력 프레임 수 누계 (재생 인스턴스별). 새 재생의 첫 디코딩 대기, 일시 정지, 처리 대기 중인 탐색, 탐색 적용 후 데이터 보충 대기, 정상 종료는 제외한다. 경고는 메인 스레드에서 2초에 최대 한 번 집계하며 종료 시 나머지를 보고한다"
+                },
+                {
+                    "name": "audioStats.stalled",
+                    "type": "boolean",
+                    "desc": "True while the engine is running but no mix callback has finished for max(250 ms, four granted device periods). Master meters, CPU usage meters and playing-sound levels read zero while stalled. Clears when a callback finishes or the device stops; the main thread reports stall episodes with rate-limited warnings.",
+                    "desc_ja": "エンジン動作中にミックスコールバックが max(250 ms, デバイスが実際に与えた4周期) の間完了しなければ true。停止状態ではマスターメーター、CPU 使用率メーター、再生インスタンスのレベルは0。コールバックの完了またはデバイス停止で解除される。メインスレッドが停止の発生を間隔制限付きの警告で報告する",
+                    "desc_ko": "엔진 동작 중 믹스 콜백이 max(250 ms, 디바이스가 실제 부여한 4주기) 동안 완료되지 않으면 true. 이 상태에서는 마스터 미터, CPU 사용률 미터, 재생 인스턴스 레벨이 0이다. 콜백 완료 또는 디바이스 정지로 해제되며 메인 스레드가 발생을 간격 제한 경고로 보고한다"
+                },
+                {
+                    "name": "audioStats.voicesStoppedByReinit",
+                    "type": "number",
+                    "desc": "Cumulative streaming voices stopped because a live sample-rate re-init could not reopen their decoder. Separate from droppedPlays: these voices had already started successfully. Each failure keeps the existing warning with its file path and decoder result on the thread calling init(); this counter adds no summary warning.",
+                    "desc_ja": "動作中のサンプルレート再初期化でデコーダーを開き直せず停止したストリーム再生インスタンスの累計。再生開始は成功していたため droppedPlays とは別に数える。各失敗は init() を呼んだスレッドでファイルパスとデコーダーの結果値を含む既存の警告を出す。このカウンタによる集約警告は追加しない",
+                    "desc_ko": "동작 중 샘플 레이트 재초기화에서 디코더를 다시 열 수 없어 정지한 스트림 재생 인스턴스 누계. 재생 시작은 성공했으므로 droppedPlays 와 별도로 센다. 각 실패는 init() 을 호출한 스레드에서 파일 경로와 디코더 결과 값을 포함하는 기존 경고를 남긴다. 이 카운터는 요약 경고를 추가하지 않는다"
                 }
             ]
         },
@@ -11557,9 +11630,9 @@ const TrussCAPI = {
                             "params": "path, append = false"
                         }
                     ],
-                    "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened",
-                    "desc_ja": "書き込み用にファイルを開く（append = true で既存ファイルに追記）。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して false を返す",
-                    "desc_ko": "쓰기용으로 파일을 엶 (append = true면 기존 파일에 추가). 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 false 반환"
+                    "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "desc_ja": "書き込み用にファイルを開く（append = true で既存ファイルに追記）。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して false を返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "쓰기용으로 파일을 엶 (append = true면 기존 파일에 추가). 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 false 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "fileWriter:close",
@@ -11727,9 +11800,9 @@ const TrussCAPI = {
                             "params": "nameOrPath, size"
                         }
                     ],
-                    "desc": "Load font file",
-                    "desc_ja": "フォントファイルを読み込む",
-                    "desc_ko": "폰트 파일을 로드"
+                    "desc": "Load a font file or a system font name. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins.",
+                    "desc_ja": "フォントファイルまたはシステムフォント名を読み込む。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う。データフォルダのファイルとシステムフォントが同名なら、データフォルダのファイルを使う",
+                    "desc_ko": "폰트 파일 또는 시스템 폰트 이름을 로드. 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용. 데이터 폴더의 파일과 시스템 폰트 이름이 같으면 데이터 폴더의 파일을 사용"
                 },
                 {
                     "name": "font:isLoaded",
@@ -12900,9 +12973,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path, mipmaps = false"
                     ],
-                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`.",
-                    "desc_ja": "ファイルから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築 (3D サーフェスなど縮小サンプル用途で推奨)。GPU テクスチャを作るのでメインスレッド専用。バックグラウンドで読むなら、ワーカースレッドで `Pixels::load` し、メインスレッドで `Texture::allocate(pixels)` する",
-                    "desc_ko": "파일에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성 (3D 표면 등 축소 샘플링 용도 권장). GPU 텍스처를 생성하므로 메인 스레드 전용. 백그라운드에서 로드하려면 워커 스레드에서 `Pixels::load` 후 메인 스레드에서 `Texture::allocate(pixels)`"
+                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given.",
+                    "desc_ja": "ファイルから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築 (3D サーフェスなど縮小サンプル用途で推奨)。GPU テクスチャを作るのでメインスレッド専用。バックグラウンドで読むなら、ワーカースレッドで `Pixels::load` し、メインスレッドで `Texture::allocate(pixels)` する。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う",
+                    "desc_ko": "파일에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성 (3D 표면 등 축소 샘플링 용도 권장). GPU 텍스처를 생성하므로 메인 스레드 전용. 백그라운드에서 로드하려면 워커 스레드에서 `Pixels::load` 후 메인 스레드에서 `Texture::allocate(pixels)`. 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용"
                 },
                 {
                     "name": "image:save",
@@ -12910,9 +12983,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Save image to file",
-                    "desc_ja": "ファイルに画像を保存",
-                    "desc_ko": "이미지를 파일로 저장"
+                    "desc": "Save image to file. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "desc_ja": "ファイルに画像を保存。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "이미지를 파일로 저장. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "image:loadFromMemory",
@@ -14479,9 +14552,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get the path of the current log file, as setLogFile resolved it (UTF-8; empty when no file is open)",
-                    "desc_ja": "現在のログファイルのパスを取得（setLogFile が解決したパス、UTF-8。ファイルを開いていなければ空）",
-                    "desc_ko": "현재 로그 파일의 경로를 얻음 (setLogFile이 해석한 경로, UTF-8. 열린 파일이 없으면 빈 문자열)"
+                    "desc": "Get the path of the current log file, as setLogFile resolved it (UTF-8; empty when no file is open). On Windows, unpaired UTF-16 surrogates are replaced with U+FFFD for display",
+                    "desc_ja": "現在のログファイルのパスを取得（setLogFile が解決したパス、UTF-8。ファイルを開いていなければ空）。Windows では対にならない UTF-16 サロゲートを表示用に U+FFFD に置き換える",
+                    "desc_ko": "현재 로그 파일의 경로를 얻음 (setLogFile이 해석한 경로, UTF-8. 열린 파일이 없으면 빈 문자열). Windows에서는 짝이 없는 UTF-16 서로게이트를 표시용 U+FFFD로 바꿈"
                 },
                 {
                     "name": "logger:isFileOpen",
@@ -14838,7 +14911,7 @@ const TrussCAPI = {
         },
         {
             "name": "Material",
-            "desc": "PBR material (metallic-roughness workflow, glTF 2.0 compatible)",
+            "desc": "PBR material (metallic-roughness workflow, glTF 2.0 compatible). Destruction touches window context state and must run on the main thread, like Light destruction.",
             "keywords": [
                 "pbr",
                 "shader surface",
@@ -14846,8 +14919,8 @@ const TrussCAPI = {
                 "roughness",
                 "gltf"
             ],
-            "desc_ja": "PBR material（metallic-roughness、glTF 2.0互換）",
-            "desc_ko": "PBR 재질 (메탈릭-러프니스 워크플로우, glTF 2.0 호환)",
+            "desc_ja": "PBR material（metallic-roughness、glTF 2.0互換）。破棄はウィンドウコンテキストの状態に触れるため、Light と同様にメインスレッドで行う必要がある。",
+            "desc_ko": "PBR 재질 (메탈릭-러프니스 워크플로우, glTF 2.0 호환). 소멸 시 윈도우 컨텍스트 상태에 접근하므로 Light와 마찬가지로 메인 스레드에서 소멸시켜야 함.",
             "related": [
                 "setMaterial",
                 "calculateLighting",
@@ -15965,9 +16038,21 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Mark GPU buffers stale after editing data in place",
-                    "desc_ja": "データを直接編集した後にGPUバッファを古い扱いにする",
-                    "desc_ko": "데이터를 직접 수정한 후 GPU 버퍼를 오래된 것으로 표시"
+                    "desc": "Force a GPU re-upload on the next draw (bumps the data revision). Not needed after normal edits: every mutator and non-const getter already does this.",
+                    "desc_ja": "次の描画で GPU への再アップロードを強制する（データリビジョンを進める）。通常の編集後は不要：すべての変更関数と非 const ゲッターが自動で行う。",
+                    "desc_ko": "다음 그리기에서 GPU 재업로드를 강제한다(데이터 리비전을 올림). 일반적인 편집 후에는 필요 없다: 모든 변경 함수와 non-const getter가 이미 수행한다."
+                },
+                {
+                    "name": "mesh:getDataRevision",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Current data revision: changes whenever the mesh data changes (mutators, non-const getters, markGpuDirty). GPU buffers are re-uploaded when it differs from the revision they were uploaded from. Compare with != only.",
+                    "desc_ja": "現在のデータリビジョン。メッシュのデータが変わるたび（変更関数、非 const ゲッター、markGpuDirty）に変わる。GPU バッファはアップロード時のリビジョンと異なると再アップロードされる。比較は != のみで行う。",
+                    "desc_ko": "현재 데이터 리비전. 메시 데이터가 바뀔 때마다(변경 함수, non-const getter, markGpuDirty) 바뀐다. GPU 버퍼는 업로드 당시의 리비전과 다르면 다시 업로드된다. 비교는 != 로만 한다."
                 },
                 {
                     "name": "mesh:uploadToGpu",
@@ -17754,54 +17839,6 @@ const TrussCAPI = {
                     "desc": "Cancel all frame timers on this node.",
                     "desc_ja": "このノードのフレームタイマーを全てキャンセル",
                     "desc_ko": "이 노드의 모든 프레임 타이머를 취소"
-                },
-                {
-                    "name": "node:callAfterAsync",
-                    "signatures": [
-                        {
-                            "ret": "number",
-                            "params": "delay, callback"
-                        }
-                    ],
-                    "desc": "Like callAfter, but fired by a precise background scheduler thread (no frame jitter). The callback runs OFF the main thread: guard shared state with a mutex, never draw from it, and don't cancel while holding that mutex. Native only (uses a real thread). Returns a timer id.",
-                    "desc_ja": "callAfterの精密版。バックグラウンドのスケジューラスレッドが正確な時刻に発火（フレームジッタなし）。コールバックはメインスレッド外で走る：共有状態はmutexで保護、描画は禁止、そのmutexを保持したままcancelしない。ネイティブ専用（実スレッド使用）。タイマーidを返す",
-                    "desc_ko": "callAfter의 정밀 버전. 백그라운드 스케줄러 스레드가 정확한 시각에 실행(프레임 지터 없음). 콜백은 메인 스레드 밖에서 실행됨: 공유 상태는 mutex로 보호, 그리기 금지, 해당 mutex를 들고 cancel하지 말 것. 네이티브 전용(실제 스레드 사용). 타이머 id를 반환"
-                },
-                {
-                    "name": "node:callEveryAsync",
-                    "signatures": [
-                        {
-                            "ret": "number",
-                            "params": "interval, callback"
-                        }
-                    ],
-                    "desc": "Like callEvery, but fired by a precise background scheduler thread with no drift (reschedules at absolute times). Ideal for sequencer clocks and LED/MIDI output timing. Same threading rules as callAfterAsync. Native only. Returns a timer id.",
-                    "desc_ja": "callEveryの精密版。バックグラウンドのスケジューラスレッドがドリフトなく発火（絶対時刻で再スケジュール）。シーケンサのクロックやLED/MIDI出力のタイミングに最適。スレッドの注意点はcallAfterAsyncと同じ。ネイティブ専用。タイマーidを返す",
-                    "desc_ko": "callEvery의 정밀 버전. 백그라운드 스케줄러 스레드가 드리프트 없이 실행(절대 시각으로 재예약). 시퀀서 클럭이나 LED/MIDI 출력 타이밍에 적합. 스레드 주의사항은 callAfterAsync와 동일. 네이티브 전용. 타이머 id를 반환"
-                },
-                {
-                    "name": "node:cancelAsyncTimer",
-                    "signatures": [
-                        {
-                            "ret": "(nothing)",
-                            "params": "id"
-                        }
-                    ],
-                    "desc": "Cancel an async timer by id. Blocks until its callback finishes if it is running now (unless called from inside the callback). Do not call while holding the mutex the callback uses.",
-                    "desc_ja": "id指定で非同期タイマーをキャンセル。実行中なら完了を待つ（コールバック内から呼ぶ場合を除く）。コールバックが使うmutexを保持したまま呼ばないこと",
-                    "desc_ko": "id로 비동기 타이머를 취소. 실행 중이면 완료를 기다림(콜백 내부에서 호출하는 경우 제외). 콜백이 쓰는 mutex를 들고 호출하지 말 것"
-                },
-                {
-                    "name": "node:cancelAllAsyncTimers",
-                    "signatures": [
-                        {
-                            "ret": "(nothing)",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock.",
-                    "desc_ja": "このノードの非同期タイマーを全てキャンセル（モード変更時など）。実行中のコールバックの完了を待つ。デッドロック回避のため、コールバックのmutexを保持せずに呼ぶこと",
-                    "desc_ko": "이 노드의 모든 비동기 타이머를 취소(모드 전환 등). 실행 중인 콜백의 완료를 기다림. 데드락 방지를 위해 콜백의 mutex를 들지 않고 호출할 것"
                 }
             ]
         },
@@ -18481,11 +18518,11 @@ const TrussCAPI = {
                     "name": "pixels:loadHDR",
                     "return": "LoadResult",
                     "signatures": [
-                        "path"
+                        "filePath"
                     ],
-                    "desc": "Load an HDR (.hdr) image into a float pixel buffer",
-                    "desc_ja": "HDR(.hdr)画像をfloatピクセルバッファに読み込む",
-                    "desc_ko": "HDR(.hdr) 이미지를 float 픽셀 버퍼로 로드"
+                    "desc": "Load an HDR (.hdr) image into a float pixel buffer. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given.",
+                    "desc_ja": "HDR(.hdr)画像をfloatピクセルバッファに読み込む。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う",
+                    "desc_ko": "HDR(.hdr) 이미지를 float 픽셀 버퍼로 로드. 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용"
                 },
                 {
                     "name": "pixels:loadPlatform",
@@ -18511,11 +18548,11 @@ const TrussCAPI = {
                     "name": "pixels:load",
                     "return": "LoadResult",
                     "signatures": [
-                        "path"
+                        "filePath"
                     ],
-                    "desc": "Load image from file into CPU memory. No GPU work, so it is safe on a worker thread; upload the result on the main thread (`Texture::allocate(pixels)`).",
-                    "desc_ja": "ファイルから画像を CPU メモリに読み込む。GPU を使わないのでワーカースレッドで呼んでよい。結果はメインスレッドでアップロードする (`Texture::allocate(pixels)`)",
-                    "desc_ko": "파일에서 이미지를 CPU 메모리로 로드. GPU를 쓰지 않으므로 워커 스레드에서 호출 가능. 결과는 메인 스레드에서 업로드 (`Texture::allocate(pixels)`)"
+                    "desc": "Load image from file into CPU memory. No GPU work, so it is safe on a worker thread; upload the result on the main thread (`Texture::allocate(pixels)`). Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given.",
+                    "desc_ja": "ファイルから画像を CPU メモリに読み込む。GPU を使わないのでワーカースレッドで呼んでよい。結果はメインスレッドでアップロードする (`Texture::allocate(pixels)`)。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う",
+                    "desc_ko": "파일에서 이미지를 CPU 메모리로 로드. GPU를 쓰지 않으므로 워커 스레드에서 호출 가능. 결과는 메인 스레드에서 업로드 (`Texture::allocate(pixels)`). 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용"
                 },
                 {
                     "name": "pixels:save",
@@ -18523,9 +18560,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created. The image is encoded in memory before the file is opened, so an encode error leaves an existing file untouched. When encoding fails, the folder cannot be created, or opening, writing or closing the file fails, an error is logged and false returned. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it",
-                    "desc_ja": "ファイルに画像を保存。形式は拡張子で決まり、大文字小文字は区別しない: .png, .jpg/.jpeg, .bmp（それ以外はPNGで書く）。ファイル名は指定どおりに使う。相対パスは getDataPath で解決し、親フォルダがなければ作る。ファイルを開く前にメモリ上でエンコードするので、エンコードに失敗しても既存のファイルはそのまま残る。エンコードに失敗したとき、フォルダを作れないとき、ファイルのオープン・書き込み・close に失敗したときはエラーをログに出して false を返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する",
-                    "desc_ko": "이미지를 파일로 저장. 형식은 확장자로 정해지며 대소문자 무시: .png, .jpg/.jpeg, .bmp (그 외는 PNG로 저장). 파일 이름은 지정한 그대로 사용. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 파일을 열기 전에 메모리에서 인코딩하므로 인코딩에 실패해도 기존 파일은 그대로 남는다. 인코딩에 실패하거나, 폴더를 만들 수 없거나, 파일 열기·쓰기·닫기에 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다"
+                    "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created. The image is encoded in memory before the file is opened, so an encode error leaves an existing file untouched. When encoding fails, the folder cannot be created, or opening, writing or closing the file fails, an error is logged and false returned. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "desc_ja": "ファイルに画像を保存。形式は拡張子で決まり、大文字小文字は区別しない: .png, .jpg/.jpeg, .bmp（それ以外はPNGで書く）。ファイル名は指定どおりに使う。相対パスは getDataPath で解決し、親フォルダがなければ作る。ファイルを開く前にメモリ上でエンコードするので、エンコードに失敗しても既存のファイルはそのまま残る。エンコードに失敗したとき、フォルダを作れないとき、ファイルのオープン・書き込み・close に失敗したときはエラーをログに出して false を返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "이미지를 파일로 저장. 형식은 확장자로 정해지며 대소문자 무시: .png, .jpg/.jpeg, .bmp (그 외는 PNG로 저장). 파일 이름은 지정한 그대로 사용. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 파일을 열기 전에 메모리에서 인코딩하므로 인코딩에 실패해도 기존 파일은 그대로 남는다. 인코딩에 실패하거나, 폴더를 만들 수 없거나, 파일 열기·쓰기·닫기에 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 }
             ]
         },
@@ -18855,9 +18892,9 @@ const TrussCAPI = {
                 {
                     "name": "playingSoundInfo.level",
                     "type": "number",
-                    "desc": "Peak absolute value of this playback's output in the last audio callback, after volume / pan / channel gains (linear, 1.0 = full scale; can exceed 1). 0 while paused, and while the engine is not running.",
-                    "desc_ja": "直近のオーディオコールバックでのこの再生の出力のピーク絶対値。volume / pan / チャンネルゲイン適用後 (リニア、1.0 = フルスケール、1 を超えることもある)。一時停止中と、エンジン停止中は 0",
-                    "desc_ko": "최근 오디오 콜백에서 이 재생 출력의 피크 절댓값. volume / pan / 채널 게인 적용 후 (선형, 1.0 = 풀 스케일, 1 을 넘을 수 있음). 일시 정지 중, 그리고 엔진이 정지 상태일 때는 0"
+                    "desc": "Peak absolute value of this playback's output in the last audio callback, after volume / pan / channel gains (linear, 1.0 = full scale; can exceed 1). 0 while paused, while the engine is not running, or while callbacks are stalled.",
+                    "desc_ja": "直近のオーディオコールバックでのこの再生の出力のピーク絶対値。volume / pan / チャンネルゲイン適用後 (リニア、1.0 = フルスケール、1 を超えることもある)。一時停止中、エンジン停止中、コールバックが停止状態なら 0",
+                    "desc_ko": "최근 오디오 콜백에서 이 재생 출력의 피크 절댓값. volume / pan / 채널 게인 적용 후 (선형, 1.0 = 풀 스케일, 1 을 넘을 수 있음). 일시 정지 중, 엔진 정지 중, 또는 콜백 정지 상태일 때는 0"
                 }
             ]
         },
@@ -20971,9 +21008,9 @@ const TrussCAPI = {
                             "params": "path"
                         }
                     ],
-                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a (case-insensitive; the file name keeps its case as written)",
-                    "desc_ja": "音声ファイルを読み込む。拡張子で自動判別: .wav .mp3 .ogg .flac .aac .m4a（大文字小文字を区別しない。ファイル名の大文字小文字は書いたとおりに保つ）",
-                    "desc_ko": "오디오 파일을 로드. 확장자로 자동 판별: .wav .mp3 .ogg .flac .aac .m4a (대소문자 무시, 파일 이름의 대소문자는 쓴 그대로 유지)"
+                    "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a (case-insensitive; the file name keeps its case as written). Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given.",
+                    "desc_ja": "音声ファイルを読み込む。拡張子で自動判別: .wav .mp3 .ogg .flac .aac .m4a（大文字小文字を区別しない。ファイル名の大文字小文字は書いたとおりに保つ）。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う",
+                    "desc_ko": "오디오 파일을 로드. 확장자로 자동 판별: .wav .mp3 .ogg .flac .aac .m4a (대소문자 무시, 파일 이름의 대소문자는 쓴 그대로 유지). 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용"
                 },
                 {
                     "name": "sound:loadStream",
@@ -20983,9 +21020,9 @@ const TrussCAPI = {
                             "params": "path, maxPolyphony = 1"
                         }
                     ],
-                    "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count.",
-                    "desc_ja": "ディスクからストリーミング再生 (WAV/MP3/FLAC)。長尺ファイル向け、メモリ節約。maxPolyphony は同時再生数",
-                    "desc_ko": "디스크에서 스트리밍 재생 (WAV/MP3/FLAC). 긴 파일 적합, 메모리 절약. maxPolyphony는 동시 재생 수"
+                    "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given.",
+                    "desc_ja": "ディスクからストリーミング再生 (WAV/MP3/FLAC)。長尺ファイル向け、メモリ節約。maxPolyphony は同時再生数。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う",
+                    "desc_ko": "디스크에서 스트리밍 재생 (WAV/MP3/FLAC). 긴 파일 적합, 메모리 절약. maxPolyphony는 동시 재생 수. 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용"
                 },
                 {
                     "name": "sound:loadTestTone",
@@ -26592,9 +26629,9 @@ const TrussCAPI = {
                             "params": "path, width, height, settings = {}"
                         }
                     ],
-                    "desc": "Open the encoder at the given size (path resolved via getDataPath)",
-                    "desc_ja": "指定サイズでエンコーダを開く（パスはgetDataPathで解決）",
-                    "desc_ko": "지정 크기로 인코더를 엽니다 (경로는 getDataPath로 해석)"
+                    "desc": "Open the encoder at the given size (path resolved via getDataPath). A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "desc_ja": "指定サイズでエンコーダを開く（パスはgetDataPathで解決）。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "지정 크기로 인코더를 엽니다 (경로는 getDataPath로 해석). 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "videoWriter:close",
@@ -27234,9 +27271,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path, indent = \"  \""
                     ],
-                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the per-level indentation string. Returns true on success; on failure it logs an error and returns false.",
-                    "desc_ja": "ドキュメントをファイルに保存する。相対パスは getDataPath で解決され、親フォルダがなければ作られる。indent は各レベルのインデント文字列を設定する。成功時に true を返し、失敗時はエラーをログに出して false を返す",
-                    "desc_ko": "문서를 파일에 저장. 상대 경로는 getDataPath로 해석되고, 상위 폴더가 없으면 만들어진다. indent는 레벨별 들여쓰기 문자열을 설정. 성공 시 true 반환, 실패 시 오류를 로그에 남기고 false 반환"
+                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the per-level indentation string. Returns true on success; on failure it logs an error and returns false. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "desc_ja": "ドキュメントをファイルに保存する。相対パスは getDataPath で解決され、親フォルダがなければ作られる。indent は各レベルのインデント文字列を設定する。成功時に true を返し、失敗時はエラーをログに出して false を返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "문서를 파일에 저장. 상대 경로는 getDataPath로 해석되고, 상위 폴더가 없으면 만들어진다. indent는 레벨별 들여쓰기 문자열을 설정. 성공 시 true 반환, 실패 시 오류를 로그에 남기고 false 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "xml:toString",

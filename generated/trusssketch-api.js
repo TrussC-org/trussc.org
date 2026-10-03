@@ -54,7 +54,7 @@ const TrussSketchAPI = {
     {
      "name": "appendToFile",
      "snippet": "appendToFile(${1:path}, ${2:content})",
-     "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails"
+     "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "createDirectory",
@@ -84,12 +84,12 @@ const TrussSketchAPI = {
     {
      "name": "getDataPath",
      "snippet": "getDataPath(${1:filename})",
-     "desc": "Resolve a relative path against the data directory and return it as fs::path. An absolute input is returned unchanged."
+     "desc": "Resolve a relative path against the data directory and return it as fs::path. An absolute input is returned unchanged. Only the data-directory base is lexically normalized; filename components are preserved. Safe to call from any thread. This is the bundled data the app reads (bin/data in development, the bundle's Resources/data when packaged); files the app writes and keeps go to getUserDataPath()."
     },
     {
      "name": "getDataPathRoot",
      "snippet": "getDataPathRoot()",
-     "desc": "Get the current data path root as fs::path."
+     "desc": "Get the current data path root as fs::path. Unless explicitly set, Apple platforms choose one existing folder on first use, in order: <exe>/data (iOS), <exe>/../Resources/data (macOS release), <exe>/../../../data (macOS development). The choice is kept for the process; missing files never fall back to another folder. Only the release workflow copies bin/data into the macOS bundle; normal builds keep using bin/data."
     },
     {
      "name": "getExecutableDir",
@@ -120,6 +120,16 @@ const TrussSketchAPI = {
      "name": "getParentDirectory",
      "snippet": "getParentDirectory(${1:path})",
      "desc": "Get parent directory"
+    },
+    {
+     "name": "getTempPath",
+     "snippet": "getTempPath()",
+     "desc": "Folder for temporary files, which the OS may delete at any time: $TMPDIR/<bundle id>/ on macOS, %TEMP%\\<app>\\ on Windows, $TMPDIR (or /tmp) /<app>/ on Linux, the app's tmp/ on iOS, the app's cache folder on Android, in-memory /tmp on web. Created on first use. A relative path is joined to it; an absolute path is returned as is."
+    },
+    {
+     "name": "getUserDataPath",
+     "snippet": "getUserDataPath()",
+     "desc": "Folder for files the app writes and keeps (settings, presets, logs, recordings): always the OS per-user app folder, in development and in a packaged app alike. macOS ~/Library/Application Support/<bundle id>/, Windows %LOCALAPPDATA%\\<app>\\, Linux $XDG_DATA_HOME/<app>/ (default ~/.local/share/<app>/), iOS the app's Library/Application Support/, Android the app's internal files folder; on web it is in memory and not kept. <app> is the executable name. Created on first use. A relative path is joined to it; an absolute path is returned as is. Write and read back through it: saveJson(j, getUserDataPath(\"settings.json\")) then loadJson(getUserDataPath(\"settings.json\")). setUserDataPathRoot() changes it."
     },
     {
      "name": "joinPath",
@@ -164,22 +174,27 @@ const TrussSketchAPI = {
     {
      "name": "saveJson",
      "snippet": "saveJson(${1:j}, ${2:path})",
-     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). The JSON is serialized before the file is opened, so a serialization error leaves an existing file untouched. Written in binary mode (LF line endings on every platform). Returns true on success; when serializing, opening, writing or closing fails it logs an error and returns false. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it."
+     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). The JSON is serialized before the file is opened, so a serialization error leaves an existing file untouched. Written in binary mode (LF line endings on every platform). Returns true on success; when serializing, opening, writing or closing fails it logs an error and returns false. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "saveTextFile",
      "snippet": "saveTextFile(${1:path}, ${2:content})",
-     "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it"
+     "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "setDataPathRoot",
      "snippet": "setDataPathRoot(${1:path})",
-     "desc": "Set the root directory used to resolve relative data paths. A relative root is resolved against the executable directory; an absolute root (fs::path::is_absolute, e.g. C:/ on Windows) is used as-is."
+     "desc": "Set the root directory used to resolve relative data paths. A relative root is resolved against the executable directory; an absolute root (fs::path::is_absolute, e.g. C:/ on Windows) is used as-is. Call it before starting threads that load files (e.g. in setup())."
     },
     {
      "name": "setDataPathToResources",
      "snippet": "setDataPathToResources()",
-     "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms."
+     "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms. Call it before starting threads that load files (e.g. in setup())."
+    },
+    {
+     "name": "setUserDataPathRoot",
+     "snippet": "setUserDataPathRoot(${1:path})",
+     "desc": "Fix the folder getUserDataPath() returns, for installations, several instances of one app, or tests. Mirrors setDataPathRoot(): a relative root is resolved against the executable directory, an absolute root is used as is. The folder is created on first use. A root inside the app bundle (macOS / iOS) still gets its writes refused."
     },
     {
      "name": "utf8ToPath",
@@ -1764,7 +1779,7 @@ const TrussSketchAPI = {
     {
      "name": "setLogFile",
      "snippet": "setLogFile(${1:path})",
-     "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path"
+     "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "setLogLevel",
@@ -2164,7 +2179,7 @@ const TrussSketchAPI = {
     {
      "name": "saveScreenshot",
      "snippet": "saveScreenshot(${1:path})",
-     "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written."
+     "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "setClipboardString",
@@ -2749,7 +2764,7 @@ const TrussSketchAPI = {
      "name": "start",
      "snippet": "start(${1:path})",
      "return": "bool",
-     "desc": "Start recording the master mix into a WAV file (relative paths resolve via getDataPath). The audio engine must already be initialized; returns false otherwise or when the file cannot be opened"
+     "desc": "Start recording the master mix into a WAV file (relative paths resolve via getDataPath). The audio engine must already be initialized; returns false otherwise or when the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "stop",
@@ -2867,22 +2882,37 @@ const TrussSketchAPI = {
     {
      "name": "peak",
      "type": "float",
-     "desc": "Master output peak over the last ~100 ms, linear (1.0 = full scale). Measured before the clamp, so a value above 1 shows how far the mix overshoots. 0 while the engine is not running."
+     "desc": "Master output peak over the last ~100 ms, linear (1.0 = full scale). Measured before the clamp, so a value above 1 shows how far the mix overshoots. 0 while the engine is not running or callbacks are stalled."
     },
     {
      "name": "rms",
      "type": "float",
-     "desc": "Master output RMS over the same ~100 ms window, linear. 0 while the engine is not running."
+     "desc": "Master output RMS over the same ~100 ms window, linear. 0 while the engine is not running or callbacks are stalled."
     },
     {
      "name": "cpuUsage",
      "type": "float",
-     "desc": "Fraction of audio-thread time: time spent mixing the playing sounds and audioOut listeners divided by the audio time produced, averaged over ~0.5 s of audio. 1.0 means the callback took as long as the audio it produced (0.25 = a quarter of the time budget). 0 while the engine is not running."
+     "desc": "Fraction of audio-thread time: time spent mixing the playing sounds and audioOut listeners divided by the audio time produced, averaged over ~0.5 s of audio. 1.0 means the callback took as long as the audio it produced (0.25 = a quarter of the time budget). 0 while the engine is not running or callbacks are stalled."
     },
     {
      "name": "cpuUsagePeak",
      "type": "float",
-     "desc": "CPU usage of the worst single callback in the same window; above 1 the callback took longer than the audio it produced (a dropout). 0 while the engine is not running."
+     "desc": "CPU usage of the worst single callback in the same window; above 1 the callback took longer than the audio it produced (a dropout). 0 while the engine is not running or callbacks are stalled."
+    },
+    {
+     "name": "underrunFrames",
+     "type": "uint64_t",
+     "desc": "Cumulative silent output frames per streaming voice because the decoder fell behind. A new voice's wait before its first decoded frame, pauses, pending seeks, refill waits after an applied seek and a normal end are excluded. Warnings are aggregated on the main thread at most once per two seconds, with remaining counts flushed at exit."
+    },
+    {
+     "name": "stalled",
+     "type": "bool",
+     "desc": "True while the engine is running but no mix callback has finished for max(250 ms, four granted device periods). Master meters, CPU usage meters and playing-sound levels read zero while stalled. Clears when a callback finishes or the device stops; the main thread reports stall episodes with rate-limited warnings."
+    },
+    {
+     "name": "voicesStoppedByReinit",
+     "type": "uint64_t",
+     "desc": "Cumulative streaming voices stopped because a live sample-rate re-init could not reopen their decoder. Separate from droppedPlays: these voices had already started successfully. Each failure keeps the existing warning with its file path and decoder result on the thread calling init(); this counter adds no summary warning."
     }
    ]
   },
@@ -5525,7 +5555,7 @@ const TrussSketchAPI = {
      "name": "open",
      "snippet": "open(${1:path})",
      "return": "bool",
-     "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened"
+     "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "close",
@@ -5606,7 +5636,7 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:nameOrPath}, ${2:size})",
      "return": "LoadResult",
-     "desc": "Load font file"
+     "desc": "Load a font file or a system font name. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins."
     },
     {
      "name": "isLoaded",
@@ -6170,13 +6200,13 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "LoadResult",
-     "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`."
+     "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given."
     },
     {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "bool",
-     "desc": "Save image to file"
+     "desc": "Save image to file. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "loadFromMemory",
@@ -7155,7 +7185,7 @@ const TrussSketchAPI = {
      "name": "getLogFilePath",
      "snippet": "getLogFilePath()",
      "return": "std::string",
-     "desc": "Get the path of the current log file, as setLogFile resolved it (UTF-8; empty when no file is open)"
+     "desc": "Get the path of the current log file, as setLogFile resolved it (UTF-8; empty when no file is open). On Windows, unpaired UTF-16 surrogates are replaced with U+FFFD for display"
     },
     {
      "name": "isFileOpen",
@@ -7394,7 +7424,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Material",
-   "desc": "PBR material (metallic-roughness workflow, glTF 2.0 compatible)",
+   "desc": "PBR material (metallic-roughness workflow, glTF 2.0 compatible). Destruction touches window context state and must run on the main thread, like Light destruction.",
    "constructor": {
     "snippet": "Material()"
    },
@@ -7948,7 +7978,13 @@ const TrussSketchAPI = {
      "name": "markGpuDirty",
      "snippet": "markGpuDirty()",
      "return": "void",
-     "desc": "Mark GPU buffers stale after editing data in place"
+     "desc": "Force a GPU re-upload on the next draw (bumps the data revision). Not needed after normal edits: every mutator and non-const getter already does this."
+    },
+    {
+     "name": "getDataRevision",
+     "snippet": "getDataRevision()",
+     "return": "uint64_t",
+     "desc": "Current data revision: changes whenever the mesh data changes (mutators, non-const getters, markGpuDirty). GPU buffers are re-uploaded when it differs from the revision they were uploaded from. Compare with != only."
     },
     {
      "name": "uploadToGpu",
@@ -8934,30 +8970,6 @@ const TrussSketchAPI = {
      "snippet": "cancelAllTimers()",
      "return": "void",
      "desc": "Cancel all frame timers on this node."
-    },
-    {
-     "name": "callAfterAsync",
-     "snippet": "callAfterAsync(${1:delay}, ${2:callback})",
-     "return": "uint64_t",
-     "desc": "Like callAfter, but fired by a precise background scheduler thread (no frame jitter). The callback runs OFF the main thread: guard shared state with a mutex, never draw from it, and don't cancel while holding that mutex. Native only (uses a real thread). Returns a timer id."
-    },
-    {
-     "name": "callEveryAsync",
-     "snippet": "callEveryAsync(${1:interval}, ${2:callback})",
-     "return": "uint64_t",
-     "desc": "Like callEvery, but fired by a precise background scheduler thread with no drift (reschedules at absolute times). Ideal for sequencer clocks and LED/MIDI output timing. Same threading rules as callAfterAsync. Native only. Returns a timer id."
-    },
-    {
-     "name": "cancelAsyncTimer",
-     "snippet": "cancelAsyncTimer(${1:id})",
-     "return": "void",
-     "desc": "Cancel an async timer by id. Blocks until its callback finishes if it is running now (unless called from inside the callback). Do not call while holding the mutex the callback uses."
-    },
-    {
-     "name": "cancelAllAsyncTimers",
-     "snippet": "cancelAllAsyncTimers()",
-     "return": "void",
-     "desc": "Cancel all async timers on this node (e.g. on mode change). Waits out any in-flight callback. Call it WITHOUT holding the callback's mutex to avoid a deadlock."
     }
    ]
   },
@@ -9324,9 +9336,9 @@ const TrussSketchAPI = {
     },
     {
      "name": "loadHDR",
-     "snippet": "loadHDR(${1:path})",
+     "snippet": "loadHDR(${1:filePath})",
      "return": "LoadResult",
-     "desc": "Load an HDR (.hdr) image into a float pixel buffer"
+     "desc": "Load an HDR (.hdr) image into a float pixel buffer. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given."
     },
     {
      "name": "loadPlatform",
@@ -9342,15 +9354,15 @@ const TrussSketchAPI = {
     },
     {
      "name": "load",
-     "snippet": "load(${1:path})",
+     "snippet": "load(${1:filePath})",
      "return": "LoadResult",
-     "desc": "Load image from file into CPU memory. No GPU work, so it is safe on a worker thread; upload the result on the main thread (`Texture::allocate(pixels)`)."
+     "desc": "Load image from file into CPU memory. No GPU work, so it is safe on a worker thread; upload the result on the main thread (`Texture::allocate(pixels)`). Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given."
     },
     {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "bool",
-     "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created. The image is encoded in memory before the file is opened, so an encode error leaves an existing file untouched. When encoding fails, the folder cannot be created, or opening, writing or closing the file fails, an error is logged and false returned. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it"
+     "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created. The image is encoded in memory before the file is opened, so an encode error leaves an existing file untouched. When encoding fails, the folder cannot be created, or opening, writing or closing the file fails, an error is logged and false returned. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     }
    ]
   },
@@ -9538,7 +9550,7 @@ const TrussSketchAPI = {
     {
      "name": "level",
      "type": "float",
-     "desc": "Peak absolute value of this playback's output in the last audio callback, after volume / pan / channel gains (linear, 1.0 = full scale; can exceed 1). 0 while paused, and while the engine is not running."
+     "desc": "Peak absolute value of this playback's output in the last audio callback, after volume / pan / channel gains (linear, 1.0 = full scale; can exceed 1). 0 while paused, while the engine is not running, or while callbacks are stalled."
     }
    ]
   },
@@ -10770,13 +10782,13 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "LoadResult",
-     "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a (case-insensitive; the file name keeps its case as written)"
+     "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a (case-insensitive; the file name keeps its case as written). Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given."
     },
     {
      "name": "loadStream",
      "snippet": "loadStream(${1:path})",
      "return": "LoadResult",
-     "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count."
+     "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given."
     },
     {
      "name": "loadTestTone",
@@ -13949,7 +13961,7 @@ const TrussSketchAPI = {
      "name": "open",
      "snippet": "open(${1:path}, ${2:width}, ${3:height})",
      "return": "bool",
-     "desc": "Open the encoder at the given size (path resolved via getDataPath)"
+     "desc": "Open the encoder at the given size (path resolved via getDataPath). A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "close",
@@ -14324,7 +14336,7 @@ const TrussSketchAPI = {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "bool",
-     "desc": "Save the document to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the per-level indentation string. Returns true on success; on failure it logs an error and returns false."
+     "desc": "Save the document to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the per-level indentation string. Returns true on success; on failure it logs an error and returns false. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "toString",
