@@ -1804,7 +1804,7 @@ const TrussSketchAPI = {
     {
      "name": "stringTimesInString",
      "snippet": "stringTimesInString(${1:haystack}, ${2:needle})",
-     "desc": "Count occurrences of a substring in a string"
+     "desc": "Count nonoverlapping occurrences of a substring in a string. An empty substring matches nothing and returns 0."
     },
     {
      "name": "toBase64",

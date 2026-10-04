@@ -11424,7 +11424,7 @@ const TrussCAPI = {
                     "params": "haystack, needle",
                     "params_typed": "const std::string & haystack, const std::string & needle",
                     "return_type": "std::size_t",
-                    "desc": "Count occurrences of a substring in a string",
+                    "desc": "Count nonoverlapping occurrences of a substring in a string. An empty substring matches nothing and returns 0.",
                     "keywords": [
                         "count",
                         "occurrences",
@@ -11432,8 +11432,8 @@ const TrussCAPI = {
                         "tally",
                         "substring"
                     ],
-                    "desc_ja": "文字列中の部分文字列の出現回数を数える",
-                    "desc_ko": "문자열 내 부분 문자열의 출현 횟수를 셈",
+                    "desc_ja": "文字列中の部分文字列の出現回数を重なりなしで数える。部分文字列が空なら一致なしとして 0 を返す。",
+                    "desc_ko": "문자열 내 부분 문자열의 출현 횟수를 겹치지 않게 셈. 부분 문자열이 비어 있으면 일치 없음으로 0을 반환함.",
                     "related": [
                         "isStringInString",
                         "splitString"
@@ -11514,15 +11514,15 @@ const TrussCAPI = {
                     "params": "input, searchStr, replaceStr",
                     "params_typed": "std::string & input, const std::string & searchStr, const std::string & replaceStr",
                     "return_type": "void",
-                    "desc": "Replace substring in place",
+                    "desc": "Replace substrings in place, left to right without overlapping or searching the replacement. An empty search string leaves the input unchanged.",
                     "keywords": [
                         "substitute",
                         "find replace",
                         "swap",
                         "sub"
                     ],
-                    "desc_ja": "部分文字列を置換（直接変更）",
-                    "desc_ko": "부분 문자열을 직접 치환",
+                    "desc_ja": "部分文字列を左から重なりなしで置換（直接変更）。置換後の文字列は再検索しない。検索文字列が空なら入力は変更しない。",
+                    "desc_ko": "부분 문자열을 왼쪽부터 겹치지 않게 직접 치환하며 치환 결과는 다시 검색하지 않음. 검색 문자열이 비어 있으면 입력을 변경하지 않음.",
                     "related": [
                         "splitString",
                         "isStringInString",

@@ -1438,27 +1438,6 @@ const TrussCAPI = {
                     "desc_ko": "스택에서 스타일을 꺼내서 이전 상태로 복원"
                 },
                 {
-                    "name": "scopedStyle",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "StyleScope",
-                    "desc": "pushStyle() now, popStyle() at the end of the scope: `auto s = scopedStyle();` returns a StyleScope guard that pops when it goes out of scope, also on an early return or an exception. For code with several exits or long blocks; pushStyle() / popStyle() remain the main form. [[nodiscard]]: `scopedStyle();` alone would pop at once and is a compiler warning",
-                    "keywords": [
-                        "raii",
-                        "scope",
-                        "guard",
-                        "save",
-                        "restore",
-                        "state",
-                        "stack",
-                        "push",
-                        "pop",
-                        "early return"
-                    ],
-                    "desc_ja": "今 pushStyle() し、スコープの終わりで popStyle() する。`auto s = scopedStyle();` はスコープを抜けると（早期 return や例外でも）ポップする StyleScope ガードを返す。出口が複数あるコードや長いブロック向け。基本の書き方は pushStyle() / popStyle() のまま。[[nodiscard]]: `scopedStyle();` だけの行はすぐにポップしてしまうため、コンパイラが警告する",
-                    "desc_ko": "지금 pushStyle()하고 스코프 끝에서 popStyle()한다. `auto s = scopedStyle();`는 스코프를 벗어날 때(조기 return이나 예외에서도) 팝하는 StyleScope 가드를 반환한다. 출구가 여러 개인 코드나 긴 블록용. 기본 형태는 여전히 pushStyle() / popStyle(). [[nodiscard]]: `scopedStyle();`만 쓴 줄은 곧바로 팝되므로 컴파일러가 경고한다"
-                },
-                {
                     "name": "resetStyle",
                     "params": "",
                     "params_typed": "",
@@ -1966,27 +1945,6 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "変換状態を復元",
                     "desc_ko": "변환 상태를 복원"
-                },
-                {
-                    "name": "scopedMatrix",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "MatrixScope",
-                    "desc": "pushMatrix() now, popMatrix() at the end of the scope: `auto m = scopedMatrix();` returns a MatrixScope guard that pops when it goes out of scope, also on an early return or an exception. For code with several exits or long blocks; pushMatrix() / popMatrix() remain the main form. [[nodiscard]]: `scopedMatrix();` alone would pop at once and is a compiler warning",
-                    "keywords": [
-                        "raii",
-                        "scope",
-                        "guard",
-                        "save",
-                        "restore",
-                        "transform",
-                        "stack",
-                        "push",
-                        "pop",
-                        "early return"
-                    ],
-                    "desc_ja": "今 pushMatrix() し、スコープの終わりで popMatrix() する。`auto m = scopedMatrix();` はスコープを抜けると（早期 return や例外でも）ポップする MatrixScope ガードを返す。出口が複数あるコードや長いブロック向け。基本の書き方は pushMatrix() / popMatrix() のまま。[[nodiscard]]: `scopedMatrix();` だけの行はすぐにポップしてしまうため、コンパイラが警告する",
-                    "desc_ko": "지금 pushMatrix()하고 스코프 끝에서 popMatrix()한다. `auto m = scopedMatrix();`는 스코프를 벗어날 때(조기 return이나 예외에서도) 팝하는 MatrixScope 가드를 반환한다. 출구가 여러 개인 코드나 긴 블록용. 기본 형태는 여전히 pushMatrix() / popMatrix(). [[nodiscard]]: `scopedMatrix();`만 쓴 줄은 곧바로 팝되므로 컴파일러가 경고한다"
                 },
                 {
                     "name": "translate",
@@ -5909,7 +5867,7 @@ const TrussCAPI = {
                     "params": "haystack, needle",
                     "params_typed": "haystack, needle",
                     "return_type": "size_t",
-                    "desc": "Count occurrences of a substring in a string",
+                    "desc": "Count nonoverlapping occurrences of a substring in a string. An empty substring matches nothing and returns 0.",
                     "keywords": [
                         "count",
                         "occurrences",
@@ -5917,8 +5875,8 @@ const TrussCAPI = {
                         "tally",
                         "substring"
                     ],
-                    "desc_ja": "文字列中の部分文字列の出現回数を数える",
-                    "desc_ko": "문자열 내 부분 문자열의 출현 횟수를 셈"
+                    "desc_ja": "文字列中の部分文字列の出現回数を重なりなしで数える。部分文字列が空なら一致なしとして 0 を返す。",
+                    "desc_ko": "문자열 내 부분 문자열의 출현 횟수를 겹치지 않게 셈. 부분 문자열이 비어 있으면 일치 없음으로 0을 반환함."
                 },
                 {
                     "name": "splitString",
