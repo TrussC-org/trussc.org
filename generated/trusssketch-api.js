@@ -1924,7 +1924,7 @@ const TrussSketchAPI = {
     {
      "name": "exitApp",
      "snippet": "exitApp()",
-     "desc": "Immediately exit the application (cannot be cancelled)"
+     "desc": "Exit the application with normal cleanup (cannot be cancelled). code defaults to 0. On Windows/Linux, runApp returns this code to its caller; on macOS, the process exits with this code after cleanup without returning from runApp. Use a non-zero code for failures."
     },
     {
      "name": "getCursor",
@@ -2179,7 +2179,7 @@ const TrussSketchAPI = {
     {
      "name": "saveScreenshot",
      "snippet": "saveScreenshot(${1:path})",
-     "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when capture is queued; on native platforms the destination folder is prepared first. This does not mean the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
     },
     {
      "name": "setClipboardString",
@@ -4669,6 +4669,11 @@ const TrussSketchAPI = {
      "desc": "Fired when an exit is requested; set args.cancel = true to cancel it"
     },
     {
+     "name": "deviceLost",
+     "type": "Event<DeviceLostEventArgs>",
+     "desc": "Fired once when the shared Windows D3D11 device is lost. args.reason contains the GetDeviceRemovedReason HRESULT bits. Set args.cancel = true to keep running and handle the loss yourself; otherwise the app logs an error and exits with code 1. GPU resources are not recreated."
+    },
+    {
      "name": "keyPressed",
      "type": "Event<KeyEventArgs>",
      "desc": "Fired when a key is pressed"
@@ -4949,6 +4954,22 @@ const TrussSketchAPI = {
      "snippet": "Main",
      "return": "Deliver",
      "desc": "= 1"
+    }
+   ]
+  },
+  {
+   "name": "DeviceLostEventArgs",
+   "desc": "Arguments for the deviceLost event (Windows D3D11).",
+   "properties": [
+    {
+     "name": "reason",
+     "type": "uint32_t",
+     "desc": "GetDeviceRemovedReason HRESULT bits, stored as uint32_t."
+    },
+    {
+     "name": "cancel",
+     "type": "bool",
+     "desc": "Set true to cancel the default failure exit and handle device loss in the app."
     }
    ]
   },
@@ -11300,6 +11321,11 @@ const TrussSketchAPI = {
      "desc": "Fired when the connection ends: the peer closed it, an error ended it, or disconnect() / connect() on a connected client (not from the destructor)"
     },
     {
+     "name": "onSendComplete",
+     "type": "Event<TcpSendCompleteEventArgs>",
+     "desc": "A queued send completed; clientId is -1, sendId identifies the payload"
+    },
+    {
      "name": "onError",
      "type": "Event<TcpErrorEventArgs>",
      "desc": "Fired on error"
@@ -11316,7 +11342,7 @@ const TrussSketchAPI = {
      "name": "connectAsync",
      "snippet": "connectAsync(${1:host}, ${2:port})",
      "return": "void",
-     "desc": "Connect asynchronously (notifies via onConnect)"
+     "desc": "Start a cancellable connection attempt; the same pending target is a silent no-op, a different target replaces it"
     },
     {
      "name": "disconnect",
@@ -11331,10 +11357,52 @@ const TrussSketchAPI = {
      "desc": "Whether currently connected"
     },
     {
+     "name": "isConnecting",
+     "snippet": "isConnecting()",
+     "return": "bool",
+     "desc": "Whether a TCP connection attempt or TLS handshake is in progress"
+    },
+    {
      "name": "send",
      "snippet": "send(${1:data})",
      "return": "bool",
      "desc": "Send data to the server"
+    },
+    {
+     "name": "sendAsync",
+     "snippet": "sendAsync(${1:data})",
+     "return": "SendResult",
+     "desc": "Queue owned bytes without waiting; returns SendResult and reports once through onSendComplete"
+    },
+    {
+     "name": "setSendTimeout",
+     "snippet": "setSendTimeout(${1:seconds})",
+     "return": "void",
+     "desc": "Set the idle send timeout in seconds; default 60, 0 waits forever"
+    },
+    {
+     "name": "setConnectTimeout",
+     "snippet": "setConnectTimeout(${1:seconds})",
+     "return": "void",
+     "desc": "Set the TCP connect deadline in seconds; default 0 uses the OS deadline"
+    },
+    {
+     "name": "setSendAsyncBufferSize",
+     "snippet": "setSendAsyncBufferSize(${1:bytes})",
+     "return": "void",
+     "desc": "Set the send queue high-water mark; default 16 MB, 0 unlimited"
+    },
+    {
+     "name": "getSendAsyncBufferSize",
+     "snippet": "getSendAsyncBufferSize()",
+     "return": "size_t",
+     "desc": "Get the send queue high-water mark in bytes"
+    },
+    {
+     "name": "getSendAsyncPendingBytes",
+     "snippet": "getSendAsyncPendingBytes()",
+     "return": "size_t",
+     "desc": "Bytes queued but not yet completed"
     },
     {
      "name": "setReceiveBufferSize",

@@ -6,7 +6,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.7.5",
+    "version": "v0.7.6",
     "lang": "all",
     "categories": [
         {
@@ -17,7 +17,7 @@ const TrussCAPI = {
                     "params": "settings",
                     "params_typed": "const WindowSettings & settings = WindowSettings()",
                     "return_type": "int",
-                    "desc": "Start the application main loop with your App subclass. Templated on the app type — call TC_RUN_APP(MyApp) (or runApp<MyApp>()) from main().",
+                    "desc": "Start the application main loop with your App subclass. Templated on the app type — call TC_RUN_APP(MyApp) (or runApp<MyApp>()) from main(). On desktop, returns 1 if window or GPU startup fails before setup() runs, otherwise 0. On Linux, no available X display causes an abort (a nonzero process status). TC_RUN_APP passes this status to main(); Android and Web use OS/browser-owned loops and do not report shutdown through this return value.",
                     "keywords": [
                         "main",
                         "start",
@@ -25,8 +25,8 @@ const TrussCAPI = {
                         "boot",
                         "entry"
                     ],
-                    "desc_ja": "App サブクラスを指定してアプリのメインループを開始。アプリ型でテンプレート化されているので、main() から TC_RUN_APP(MyApp)（または runApp<MyApp>()）で呼ぶ。",
-                    "desc_ko": "App 서브클래스로 애플리케이션 메인 루프를 시작. 앱 타입으로 템플릿화되어 있으므로 main()에서 TC_RUN_APP(MyApp)(또는 runApp<MyApp>())로 호출.",
+                    "desc_ja": "App サブクラスを指定してアプリのメインループを開始。アプリ型でテンプレート化されているので、main() から TC_RUN_APP(MyApp)（または runApp<MyApp>()）で呼ぶ。 デスクトップでは、ウィンドウや GPU の起動に失敗して setup() が実行されなかった場合は 1、それ以外は 0 を返す。Linux で X のディスプレイが無い場合は abort で終了する（終了ステータスは 0 ではない）。TC_RUN_APP はこの終了コードを main() に渡す。Android と Web は OS／ブラウザがループを管理するため、この戻り値で終了を通知しない。",
+                    "desc_ko": "App 서브클래스로 애플리케이션 메인 루프를 시작. 앱 타입으로 템플릿화되어 있으므로 main()에서 TC_RUN_APP(MyApp)(또는 runApp<MyApp>())로 호출. 데스크톱에서는 창 또는 GPU 시작 실패로 setup()이 실행되지 않으면 1, 그 외에는 0을 반환한다. Linux에서 X 디스플레이가 없으면 abort로 종료한다(종료 상태는 0이 아님). TC_RUN_APP은 이 종료 코드를 main()에 전달한다. Android와 Web은 OS/브라우저가 루프를 관리하므로 이 반환값으로 종료를 보고하지 않는다.",
                     "related": [
                         "WindowSettings",
                         "runHeadlessApp",
@@ -5464,10 +5464,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "exitApp",
-                    "params": "",
-                    "params_typed": "",
+                    "params": "code",
+                    "params_typed": "int code = 0",
                     "return_type": "void",
-                    "desc": "Immediately exit the application (cannot be cancelled)",
+                    "desc": "Exit the application with normal cleanup (cannot be cancelled). code defaults to 0. On Windows/Linux, runApp returns this code to its caller; on macOS, the process exits with this code after cleanup without returning from runApp. Use a non-zero code for failures.",
                     "keywords": [
                         "quit",
                         "close",
@@ -5475,8 +5475,8 @@ const TrussCAPI = {
                         "shutdown",
                         "kill"
                     ],
-                    "desc_ja": "アプリケーションを即座に終了（キャンセル不可）",
-                    "desc_ko": "어플리케이션을 즉시 종료 (취소 불가)",
+                    "desc_ja": "通常のクリーンアップを行ってアプリを終了（キャンセル不可）。code の既定値は 0。Windows/Linux では runApp がこの値を呼び出し元へ返す。macOS では runApp から戻らず、クリーンアップ後にこの終了コードでプロセスを終了する。異常終了には非ゼロを指定。",
+                    "desc_ko": "정상 정리 후 앱 종료 (취소 불가). code의 기본값은 0. Windows/Linux에서는 runApp이 이 값을 호출자에게 반환하며, macOS에서는 runApp이 반환하지 않고 정리 후 이 코드로 프로세스가 종료됨. 실패 시 0이 아닌 값 사용.",
                     "related": [
                         "requestExitApp"
                     ],
@@ -9772,15 +9772,15 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "const std::filesystem::path & path",
                     "return_type": "bool",
-                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when capture is queued; on native platforms the destination folder is prepared first. This does not mean the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
                     "keywords": [
                         "capture",
                         "png",
                         "export",
                         "save image"
                     ],
-                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueは「保存先を準備しキューに積めた（親フォルダ生成・書き込み可）」の意味で、ファイル書き込み完了ではない。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 '대상 준비 및 캡처 큐 등록 성공(상위 폴더 생성·쓰기 가능)'을 의미하며 파일 기록 완료가 아님. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환",
+                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueはキャプチャをキューに積めた意味で、ファイル書き込み完了ではない。ネイティブ環境では先に保存先フォルダを準備する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 캡처 큐 등록 성공을 의미하며 파일 기록 완료가 아님. 네이티브 플랫폼에서는 먼저 대상 폴더를 준비한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환",
                     "related": [
                         "grabScreen",
                         "startRecording",
@@ -9792,16 +9792,9 @@ const TrussCAPI = {
                             "group": "tests"
                         }
                     ],
-                    "platforms": [
-                        "macos",
-                        "windows",
-                        "linux",
-                        "ios",
-                        "android"
-                    ],
-                    "platformNote": "Formats: png/jpg/jpeg/bmp on Linux, Android and iOS; macOS also writes tiff/tif and gif; Windows also writes tga. On every native platform, an unsupported extension or no extension saves PNG with \".png\" appended to the path (shot.xyz → shot.xyz.png; shot → shot.png), and logs a warning naming the actual destination and supported formats. Reported paths (including MCP responses) name the actual destination; the bool return value still indicates whether capture was queued. Not implemented on web (no canvas readback): always returns false without queuing anything and logs a one-time warning pointing to the browser’s own screenshot feature.",
-                    "platformNote_ja": "対応形式: Linux・Android・iOS は png/jpg/jpeg/bmp。macOS はさらに tiff/tif と gif、Windows はさらに tga に対応。すべてのネイティブ環境で、未対応の拡張子または拡張子なしの場合はパスに \".png\" を追加して PNG を保存（shot.xyz → shot.xyz.png、shot → shot.png）し、実際の保存先と対応形式を警告に出す。報告するパス（MCP 応答を含む）は実際の保存先で、bool の戻り値は引き続きキャプチャをキューに積めたかを表す。Web では未実装（canvas の読み戻しはない）: 何もキューに積まず常に false を返し、ブラウザ自身のスクリーンショット機能を案内する警告を1回だけ出す。",
-                    "platformNote_ko": "지원 형식: Linux, Android, iOS는 png/jpg/jpeg/bmp. macOS는 추가로 tiff/tif와 gif, Windows는 추가로 tga를 지원. 모든 네이티브 플랫폼에서 지원하지 않는 확장자이거나 확장자가 없으면 경로에 \".png\"를 덧붙여 PNG로 저장(shot.xyz → shot.xyz.png, shot → shot.png)하고, 실제 저장 경로와 지원 형식을 경고로 출력. 보고되는 경로(MCP 응답 포함)는 실제 저장 경로이며 bool 반환값은 계속 캡처 큐 등록 여부를 나타냄. Web에서는 미구현(canvas 읽기 불가): 아무것도 큐에 넣지 않고 항상 false를 반환하며, 브라우저 자체 스크린샷 기능을 안내하는 경고를 한 번만 출력."
+                    "platformNote": "Formats: png/jpg/jpeg/bmp on Linux, Android and iOS; macOS also writes tiff/tif and gif; Windows also writes tga. On every native platform, an unsupported extension or no extension saves PNG with \".png\" appended to the path (shot.xyz → shot.xyz.png; shot → shot.png), and logs a warning naming the actual destination and supported formats. Reported paths (including MCP responses) name the actual destination; the bool return value still indicates whether capture was queued. On web, downloads the canvas as PNG or JPEG (png/jpg/jpeg, case-insensitive); other or missing extensions append .png with a warning. Only the filename is used, directories are ignored, and an empty filename gets a timestamped PNG name. Returns true when queued; later encoding/download failures, including a tainted canvas from cross-origin content without CORS, are logged as errors. The browser may ask to allow multiple downloads. grabScreen() remains unsupported on web.",
+                    "platformNote_ja": "対応形式: Linux・Android・iOS は png/jpg/jpeg/bmp。macOS はさらに tiff/tif と gif、Windows はさらに tga に対応。すべてのネイティブ環境で、未対応の拡張子または拡張子なしの場合はパスに \".png\" を追加して PNG を保存（shot.xyz → shot.xyz.png、shot → shot.png）し、実際の保存先と対応形式を警告に出す。報告するパス（MCP 応答を含む）は実際の保存先で、bool の戻り値は引き続きキャプチャをキューに積めたかを表す。Web では canvas を PNG または JPEG としてダウンロードする（png/jpg/jpeg、大文字小文字を区別しない）。未対応または拡張子なしの場合は .png を追加して警告する。ファイル名のみを使い、ディレクトリは無視する。空のファイル名にはタイムスタンプ付きの PNG 名を使う。キューに積めたら true を返し、その後のエンコード・ダウンロード失敗（CORS なしの別オリジンの内容で汚染された canvas を含む）はエラーとしてログに出す。ブラウザが「複数ファイルのダウンロードを許可」の確認を出すことがある。grabScreen() は引き続き Web 非対応。",
+                    "platformNote_ko": "지원 형식: Linux, Android, iOS는 png/jpg/jpeg/bmp. macOS는 추가로 tiff/tif와 gif, Windows는 추가로 tga를 지원. 모든 네이티브 플랫폼에서 지원하지 않는 확장자이거나 확장자가 없으면 경로에 \".png\"를 덧붙여 PNG로 저장(shot.xyz → shot.xyz.png, shot → shot.png)하고, 실제 저장 경로와 지원 형식을 경고로 출력. 보고되는 경로(MCP 응답 포함)는 실제 저장 경로이며 bool 반환값은 계속 캡처 큐 등록 여부를 나타냄. Web에서는 canvas를 PNG 또는 JPEG로 다운로드한다(png/jpg/jpeg, 대소문자 무시). 미지원 또는 확장자 없음은 .png를 추가하고 경고한다. 파일명만 사용하고 디렉터리는 무시하며, 빈 파일명에는 타임스탬프가 포함된 PNG 이름을 사용한다. 큐 등록 시 true를 반환하고 이후 인코딩·다운로드 실패(CORS 없는 다른 출처 콘텐츠로 오염된 canvas 포함)는 오류로 기록한다. 브라우저가 여러 파일 다운로드 허용을 요청할 수 있다. grabScreen()은 Web에서 계속 미지원."
                 },
                 {
                     "name": "startRecording",
@@ -21427,6 +21420,35 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "DeviceLostEventArgs",
+            "desc": "Arguments for the deviceLost event (Windows D3D11).",
+            "keywords": [],
+            "desc_ja": "deviceLost イベントの引数 (Windows D3D11)。",
+            "desc_ko": "deviceLost 이벤트의 인자 (Windows D3D11).",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "reason",
+                    "type": "uint32_t",
+                    "desc": "GetDeviceRemovedReason HRESULT bits, stored as uint32_t.",
+                    "desc_ja": "GetDeviceRemovedReason の HRESULT ビット値を uint32_t で保持。",
+                    "desc_ko": "GetDeviceRemovedReason의 HRESULT 비트 값을 uint32_t로 저장."
+                },
+                {
+                    "name": "cancel",
+                    "type": "bool",
+                    "desc": "Set true to cancel the default failure exit and handle device loss in the app.",
+                    "desc_ja": "true にすると既定の異常終了を抑止し、デバイス喪失をアプリで処理する。",
+                    "desc_ko": "true로 설정하면 기본 실패 종료를 취소하고 앱에서 장치 손실을 처리."
+                }
+            ]
+        },
+        {
             "name": "CoreEvents",
             "desc": "Hub of all framework core events. Each member is an Event you subscribe to with .listen(callback); access the global instance via events()",
             "keywords": [
@@ -21504,6 +21526,13 @@ const TrussCAPI = {
                     "desc": "Fired when an exit is requested; set args.cancel = true to cancel it",
                     "desc_ja": "終了が要求されたときに発火。args.cancel = true でキャンセルする",
                     "desc_ko": "종료가 요청될 때 발생. args.cancel = true 로 취소"
+                },
+                {
+                    "name": "deviceLost",
+                    "type": "Event<DeviceLostEventArgs>",
+                    "desc": "Fired once when the shared Windows D3D11 device is lost. args.reason contains the GetDeviceRemovedReason HRESULT bits. Set args.cancel = true to keep running and handle the loss yourself; otherwise the app logs an error and exits with code 1. GPU resources are not recreated.",
+                    "desc_ja": "Windows の共有 D3D11 デバイス喪失時に一度発火。args.reason は GetDeviceRemovedReason の HRESULT ビット値。args.cancel = true で終了を抑止し、アプリ自身で対処できる。既定ではエラーを記録してコード 1 で終了。GPU リソースは再作成しない。",
+                    "desc_ko": "Windows 공유 D3D11 장치가 손실되면 한 번 발생. args.reason은 GetDeviceRemovedReason의 HRESULT 비트 값. args.cancel = true로 종료를 취소하고 앱이 직접 처리할 수 있다. 기본값은 오류 기록 후 코드 1로 종료. GPU 리소스는 재생성하지 않는다."
                 },
                 {
                     "name": "keyPressed",
@@ -32449,6 +32478,112 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "SendResult",
+            "desc": "Result of sendAsync(). Truthy when the payload was queued; carries the id that onSendComplete reports back.",
+            "keywords": [
+                "send",
+                "async",
+                "result",
+                "queued",
+                "id"
+            ],
+            "desc_ja": "sendAsync() の結果。キューに入れば真となり、onSendComplete が返してくる id を保持",
+            "desc_ko": "sendAsync()의 결과. 큐에 들어가면 참이며, onSendComplete가 되돌려주는 id를 보유",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "SendError",
+                "TcpServer::sendAsync",
+                "TcpSendCompleteEventArgs"
+            ],
+            "properties": [
+                {
+                    "name": "error",
+                    "type": "SendError",
+                    "desc": "Why the send was not queued; SendError::None on success",
+                    "desc_ja": "キューに入らなかった理由。成功時は SendError::None",
+                    "desc_ko": "큐에 들어가지 못한 이유. 성공 시 SendError::None"
+                },
+                {
+                    "name": "id",
+                    "type": "uint64_t",
+                    "desc": "Identifies this send in onSendComplete; 0 when nothing was queued",
+                    "desc_ja": "この送信を onSendComplete で識別する ID。キューに入らなかった場合は 0",
+                    "desc_ko": "이 전송을 onSendComplete에서 식별하는 ID. 큐에 들어가지 않았으면 0"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "ok",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "true if the payload was queued (error == SendError::None)"
+                }
+            ]
+        },
+        {
+            "name": "TcpSendCompleteEventArgs",
+            "desc": "A queued send finished. Fires exactly once for every id sendAsync() handed out",
+            "keywords": [
+                "send",
+                "async",
+                "complete",
+                "callback",
+                "event"
+            ],
+            "desc_ja": "キュー済みの送信が完了した通知。sendAsync() が返した id ごとにちょうど1回発火",
+            "desc_ko": "큐에 든 전송이 완료됨. sendAsync()가 반환한 id마다 정확히 한 번 발생",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "TcpServer::onSendComplete",
+                "TcpServer::sendAsync",
+                "SendError"
+            ],
+            "properties": [
+                {
+                    "name": "clientId",
+                    "type": "int",
+                    "desc": "Which client the send was for (-1 when the sender has no clients)",
+                    "desc_ja": "どのクライアント宛ての送信か（クライアントを持たない送信側では -1）",
+                    "desc_ko": "어느 클라이언트로의 전송인지 (클라이언트가 없는 송신 측에서는 -1)"
+                },
+                {
+                    "name": "sendId",
+                    "type": "uint64_t",
+                    "desc": "Matches the SendResult::id that queued this payload",
+                    "desc_ja": "このペイロードをキューに入れた SendResult::id と一致",
+                    "desc_ko": "이 페이로드를 큐에 넣은 SendResult::id와 일치"
+                },
+                {
+                    "name": "error",
+                    "type": "SendError",
+                    "desc": "SendError::None when the whole payload reached the kernel; Disconnected when the client went away, Timeout when it merely stopped reading",
+                    "desc_ja": "ペイロード全体がカーネルに渡っていれば SendError::None。相手が居なくなったなら Disconnected、読むのをやめただけなら Timeout",
+                    "desc_ko": "페이로드 전체가 커널에 전달되었으면 SendError::None. 상대가 사라졌으면 Disconnected, 읽기를 멈춘 것뿐이면 Timeout"
+                },
+                {
+                    "name": "bytesSent",
+                    "type": "size_t",
+                    "desc": "How much of the payload got through",
+                    "desc_ja": "実際に送れたバイト数",
+                    "desc_ko": "실제로 전송된 바이트 수"
+                }
+            ]
+        },
+        {
             "name": "TcpConnectEventArgs",
             "desc": "Event args for TcpClient::onConnect",
             "keywords": [
@@ -32650,6 +32785,13 @@ const TrussCAPI = {
                     "desc_ko": "연결이 끝났을 때 발생: 상대가 닫음, 오류로 끊김, 또는 disconnect() / 연결 중 connect() (소멸자에서는 발생하지 않음)"
                 },
                 {
+                    "name": "onSendComplete",
+                    "type": "Event<TcpSendCompleteEventArgs>",
+                    "desc": "A queued send completed; clientId is -1, sendId identifies the payload",
+                    "desc_ja": "キュー済みの送信の完了。clientId は -1、sendId がデータを識別",
+                    "desc_ko": "큐에 든 전송 완료. clientId는 -1, sendId가 데이터를 식별"
+                },
+                {
                     "name": "onError",
                     "type": "Event<TcpErrorEventArgs>",
                     "desc": "Fired on error",
@@ -32676,7 +32818,7 @@ const TrussCAPI = {
                             "params": "const std::string & host, int port"
                         }
                     ],
-                    "desc": "Connect asynchronously (notifies via onConnect)"
+                    "desc": "Start a cancellable connection attempt; the same pending target is a silent no-op, a different target replaces it"
                 },
                 {
                     "name": "disconnect",
@@ -32699,6 +32841,16 @@ const TrussCAPI = {
                     "desc": "Whether currently connected"
                 },
                 {
+                    "name": "isConnecting",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Whether a TCP connection attempt or TLS handshake is in progress"
+                },
+                {
                     "name": "send",
                     "signatures": [
                         {
@@ -32715,6 +32867,74 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Send data to the server"
+                },
+                {
+                    "name": "sendAsync",
+                    "signatures": [
+                        {
+                            "ret": "SendResult",
+                            "params": "const void * data, size_t size"
+                        },
+                        {
+                            "ret": "SendResult",
+                            "params": "std::vector<char> && data"
+                        },
+                        {
+                            "ret": "SendResult",
+                            "params": "const std::string & message"
+                        }
+                    ],
+                    "desc": "Queue owned bytes without waiting; returns SendResult and reports once through onSendComplete"
+                },
+                {
+                    "name": "setSendTimeout",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "float seconds"
+                        }
+                    ],
+                    "desc": "Set the idle send timeout in seconds; default 60, 0 waits forever"
+                },
+                {
+                    "name": "setConnectTimeout",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "float seconds"
+                        }
+                    ],
+                    "desc": "Set the TCP connect deadline in seconds; default 0 uses the OS deadline"
+                },
+                {
+                    "name": "setSendAsyncBufferSize",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "size_t bytes"
+                        }
+                    ],
+                    "desc": "Set the send queue high-water mark; default 16 MB, 0 unlimited"
+                },
+                {
+                    "name": "getSendAsyncBufferSize",
+                    "signatures": [
+                        {
+                            "ret": "size_t",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Get the send queue high-water mark in bytes"
+                },
+                {
+                    "name": "getSendAsyncPendingBytes",
+                    "signatures": [
+                        {
+                            "ret": "size_t",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Bytes queued but not yet completed"
                 },
                 {
                     "name": "setReceiveBufferSize",
@@ -32796,112 +33016,6 @@ const TrussCAPI = {
                     "desc": "",
                     "desc_ja": "",
                     "desc_ko": ""
-                }
-            ]
-        },
-        {
-            "name": "SendResult",
-            "desc": "Result of sendAsync(). Truthy when the payload was queued; carries the id that onSendComplete reports back.",
-            "keywords": [
-                "send",
-                "async",
-                "result",
-                "queued",
-                "id"
-            ],
-            "desc_ja": "sendAsync() の結果。キューに入れば真となり、onSendComplete が返してくる id を保持",
-            "desc_ko": "sendAsync()의 결과. 큐에 들어가면 참이며, onSendComplete가 되돌려주는 id를 보유",
-            "examples": [
-                {
-                    "name": "AllFeaturesExample",
-                    "group": "tests"
-                }
-            ],
-            "related": [
-                "SendError",
-                "TcpServer::sendAsync",
-                "TcpSendCompleteEventArgs"
-            ],
-            "properties": [
-                {
-                    "name": "error",
-                    "type": "SendError",
-                    "desc": "Why the send was not queued; SendError::None on success",
-                    "desc_ja": "キューに入らなかった理由。成功時は SendError::None",
-                    "desc_ko": "큐에 들어가지 못한 이유. 성공 시 SendError::None"
-                },
-                {
-                    "name": "id",
-                    "type": "uint64_t",
-                    "desc": "Identifies this send in onSendComplete; 0 when nothing was queued",
-                    "desc_ja": "この送信を onSendComplete で識別する ID。キューに入らなかった場合は 0",
-                    "desc_ko": "이 전송을 onSendComplete에서 식별하는 ID. 큐에 들어가지 않았으면 0"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "ok",
-                    "signatures": [
-                        {
-                            "ret": "bool",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "true if the payload was queued (error == SendError::None)"
-                }
-            ]
-        },
-        {
-            "name": "TcpSendCompleteEventArgs",
-            "desc": "A queued send finished. Fires exactly once for every id sendAsync() handed out",
-            "keywords": [
-                "send",
-                "async",
-                "complete",
-                "callback",
-                "event"
-            ],
-            "desc_ja": "キュー済みの送信が完了した通知。sendAsync() が返した id ごとにちょうど1回発火",
-            "desc_ko": "큐에 든 전송이 완료됨. sendAsync()가 반환한 id마다 정확히 한 번 발생",
-            "examples": [
-                {
-                    "name": "AllFeaturesExample",
-                    "group": "tests"
-                }
-            ],
-            "related": [
-                "TcpServer::onSendComplete",
-                "TcpServer::sendAsync",
-                "SendError"
-            ],
-            "properties": [
-                {
-                    "name": "clientId",
-                    "type": "int",
-                    "desc": "Which client the send was for (-1 when the sender has no clients)",
-                    "desc_ja": "どのクライアント宛ての送信か（クライアントを持たない送信側では -1）",
-                    "desc_ko": "어느 클라이언트로의 전송인지 (클라이언트가 없는 송신 측에서는 -1)"
-                },
-                {
-                    "name": "sendId",
-                    "type": "uint64_t",
-                    "desc": "Matches the SendResult::id that queued this payload",
-                    "desc_ja": "このペイロードをキューに入れた SendResult::id と一致",
-                    "desc_ko": "이 페이로드를 큐에 넣은 SendResult::id와 일치"
-                },
-                {
-                    "name": "error",
-                    "type": "SendError",
-                    "desc": "SendError::None when the whole payload reached the kernel; Disconnected when the client went away, Timeout when it merely stopped reading",
-                    "desc_ja": "ペイロード全体がカーネルに渡っていれば SendError::None。相手が居なくなったなら Disconnected、読むのをやめただけなら Timeout",
-                    "desc_ko": "페이로드 전체가 커널에 전달되었으면 SendError::None. 상대가 사라졌으면 Disconnected, 읽기를 멈춘 것뿐이면 Timeout"
-                },
-                {
-                    "name": "bytesSent",
-                    "type": "size_t",
-                    "desc": "How much of the payload got through",
-                    "desc_ja": "実際に送れたバイト数",
-                    "desc_ko": "실제로 전송된 바이트 수"
                 }
             ]
         },
@@ -39228,7 +39342,7 @@ const TrussCAPI = {
                 {
                     "name": "NotRunning",
                     "value": 5,
-                    "desc": "The server is not running",
+                    "desc": "The server is not running, or the client is not connected",
                     "desc_ja": "",
                     "desc_ko": ""
                 }

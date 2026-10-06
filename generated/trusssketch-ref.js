@@ -7,7 +7,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.7.5 (Lua)",
+    "version": "v0.7.6 (Lua)",
     "lang": "lua",
     "categories": [
         {
@@ -2857,10 +2857,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "exitApp",
-                    "params": "",
-                    "params_typed": "",
+                    "params": "code",
+                    "params_typed": "code = 0",
                     "return_type": "(nothing)",
-                    "desc": "Immediately exit the application (cannot be cancelled)",
+                    "desc": "Exit the application with normal cleanup (cannot be cancelled). code defaults to 0. On Windows/Linux, runApp returns this code to its caller; on macOS, the process exits with this code after cleanup without returning from runApp. Use a non-zero code for failures.",
                     "keywords": [
                         "quit",
                         "close",
@@ -2868,8 +2868,8 @@ const TrussCAPI = {
                         "shutdown",
                         "kill"
                     ],
-                    "desc_ja": "アプリケーションを即座に終了（キャンセル不可）",
-                    "desc_ko": "어플리케이션을 즉시 종료 (취소 불가)"
+                    "desc_ja": "通常のクリーンアップを行ってアプリを終了（キャンセル不可）。code の既定値は 0。Windows/Linux では runApp がこの値を呼び出し元へ返す。macOS では runApp から戻らず、クリーンアップ後にこの終了コードでプロセスを終了する。異常終了には非ゼロを指定。",
+                    "desc_ko": "정상 정리 후 앱 종료 (취소 불가). code의 기본값은 0. Windows/Linux에서는 runApp이 이 값을 호출자에게 반환하며, macOS에서는 runApp이 반환하지 않고 정리 후 이 코드로 프로세스가 종료됨. 실패 시 0이 아닌 값 사용."
                 },
                 {
                     "name": "isOverlayHovered",
@@ -5246,15 +5246,15 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "path",
                     "return_type": "boolean",
-                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when the destination was prepared and the capture queued (parent dir created/writable), not that the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when capture is queued; on native platforms the destination folder is prepared first. This does not mean the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
                     "keywords": [
                         "capture",
                         "png",
                         "export",
                         "save image"
                     ],
-                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueは「保存先を準備しキューに積めた（親フォルダ生成・書き込み可）」の意味で、ファイル書き込み完了ではない。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 '대상 준비 및 캡처 큐 등록 성공(상위 폴더 생성·쓰기 가능)'을 의미하며 파일 기록 완료가 아님. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueはキャプチャをキューに積めた意味で、ファイル書き込み完了ではない。ネイティブ環境では先に保存先フォルダを準備する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
+                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 캡처 큐 등록 성공을 의미하며 파일 기록 완료가 아님. 네이티브 플랫폼에서는 먼저 대상 폴더를 준비한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
                 },
                 {
                     "name": "startRecording",
@@ -10597,6 +10597,13 @@ const TrussCAPI = {
                     "desc_ko": "종료가 요청될 때 발생. args.cancel = true 로 취소"
                 },
                 {
+                    "name": "coreEvents.deviceLost",
+                    "type": "Event",
+                    "desc": "Fired once when the shared Windows D3D11 device is lost. args.reason contains the GetDeviceRemovedReason HRESULT bits. Set args.cancel = true to keep running and handle the loss yourself; otherwise the app logs an error and exits with code 1. GPU resources are not recreated.",
+                    "desc_ja": "Windows の共有 D3D11 デバイス喪失時に一度発火。args.reason は GetDeviceRemovedReason の HRESULT ビット値。args.cancel = true で終了を抑止し、アプリ自身で対処できる。既定ではエラーを記録してコード 1 で終了。GPU リソースは再作成しない。",
+                    "desc_ko": "Windows 공유 D3D11 장치가 손실되면 한 번 발생. args.reason은 GetDeviceRemovedReason의 HRESULT 비트 값. args.cancel = true로 종료를 취소하고 앱이 직접 처리할 수 있다. 기본값은 오류 기록 후 코드 1로 종료. GPU 리소스는 재생성하지 않는다."
+                },
+                {
                     "name": "coreEvents.keyPressed",
                     "type": "Event",
                     "desc": "Fired when a key is pressed",
@@ -10730,6 +10737,29 @@ const TrussCAPI = {
                     "desc": "Fixed segment count used in Resolution mode (and as a fallback)",
                     "desc_ja": "Resolution モードで使う固定セグメント数（フォールバックにも使用）",
                     "desc_ko": "Resolution 모드에서 사용하는 고정 세그먼트 수(폴백으로도 사용)"
+                }
+            ]
+        },
+        {
+            "name": "DeviceLostEventArgs",
+            "desc": "Arguments for the deviceLost event (Windows D3D11).",
+            "keywords": [],
+            "desc_ja": "deviceLost イベントの引数 (Windows D3D11)。",
+            "desc_ko": "deviceLost 이벤트의 인자 (Windows D3D11).",
+            "properties": [
+                {
+                    "name": "deviceLostEventArgs.reason",
+                    "type": "number",
+                    "desc": "GetDeviceRemovedReason HRESULT bits, stored as uint32_t.",
+                    "desc_ja": "GetDeviceRemovedReason の HRESULT ビット値を uint32_t で保持。",
+                    "desc_ko": "GetDeviceRemovedReason의 HRESULT 비트 값을 uint32_t로 저장."
+                },
+                {
+                    "name": "deviceLostEventArgs.cancel",
+                    "type": "boolean",
+                    "desc": "Set true to cancel the default failure exit and handle device loss in the app.",
+                    "desc_ja": "true にすると既定の異常終了を抑止し、デバイス喪失をアプリで処理する。",
+                    "desc_ko": "true로 설정하면 기본 실패 종료를 취소하고 앱에서 장치 손실을 처리."
                 }
             ]
         },
@@ -21905,6 +21935,13 @@ const TrussCAPI = {
                     "desc_ko": "연결이 끝났을 때 발생: 상대가 닫음, 오류로 끊김, 또는 disconnect() / 연결 중 connect() (소멸자에서는 발생하지 않음)"
                 },
                 {
+                    "name": "tcpClient.onSendComplete",
+                    "type": "Event",
+                    "desc": "A queued send completed; clientId is -1, sendId identifies the payload",
+                    "desc_ja": "キュー済みの送信の完了。clientId は -1、sendId がデータを識別",
+                    "desc_ko": "큐에 든 전송 완료. clientId는 -1, sendId가 데이터를 식별"
+                },
+                {
                     "name": "tcpClient.onError",
                     "type": "Event",
                     "desc": "Fired on error",
@@ -21933,9 +21970,9 @@ const TrussCAPI = {
                             "params": "host, port"
                         }
                     ],
-                    "desc": "Connect asynchronously (notifies via onConnect)",
-                    "desc_ja": "非同期に接続（onConnectで通知）",
-                    "desc_ko": "비동기로 연결 (onConnect로 통지)"
+                    "desc": "Start a cancellable connection attempt; the same pending target is a silent no-op, a different target replaces it",
+                    "desc_ja": "キャンセル可能な接続を開始。接続中の同じ宛先は何もせず、別の宛先なら置き換える",
+                    "desc_ko": "취소 가능한 연결 시작. 같은 대기 대상은 무시하고 다른 대상은 기존 시도를 대체"
                 },
                 {
                     "name": "tcpClient:disconnect",
@@ -21962,6 +21999,18 @@ const TrussCAPI = {
                     "desc_ko": "현재 연결 중인지"
                 },
                 {
+                    "name": "tcpClient:isConnecting",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Whether a TCP connection attempt or TLS handshake is in progress",
+                    "desc_ja": "TCP 接続または TLS ハンドシェイクの進行中か",
+                    "desc_ko": "TCP 연결 또는 TLS 핸드셰이크 진행 중인지"
+                },
+                {
                     "name": "tcpClient:send",
                     "signatures": [
                         {
@@ -21976,6 +22025,82 @@ const TrussCAPI = {
                     "desc": "Send data to the server",
                     "desc_ja": "サーバへ送信",
                     "desc_ko": "서버로 전송"
+                },
+                {
+                    "name": "tcpClient:sendAsync",
+                    "signatures": [
+                        {
+                            "ret": "SendResult",
+                            "params": "data"
+                        },
+                        {
+                            "ret": "SendResult",
+                            "params": "message"
+                        }
+                    ],
+                    "desc": "Queue owned bytes without waiting; returns SendResult and reports once through onSendComplete",
+                    "desc_ja": "データを所有するキューに待たずに追加。SendResult を返し onSendComplete で1回通知",
+                    "desc_ko": "데이터를 소유하는 큐에 대기 없이 추가. SendResult 반환 및 onSendComplete로 한 번 알림"
+                },
+                {
+                    "name": "tcpClient:setSendTimeout",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "seconds"
+                        }
+                    ],
+                    "desc": "Set the idle send timeout in seconds; default 60, 0 waits forever",
+                    "desc_ja": "送信に進捗がない時間の上限を秒で設定。既定 60、0 は無期限",
+                    "desc_ko": "전송 진행 없는 시간 제한을 초로 설정. 기본 60, 0은 무기한"
+                },
+                {
+                    "name": "tcpClient:setConnectTimeout",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "seconds"
+                        }
+                    ],
+                    "desc": "Set the TCP connect deadline in seconds; default 0 uses the OS deadline",
+                    "desc_ja": "TCP 接続期限を秒で設定。既定の 0 は OS の期限に任せる",
+                    "desc_ko": "TCP 연결 기한을 초로 설정. 기본 0은 OS 기한 사용"
+                },
+                {
+                    "name": "tcpClient:setSendAsyncBufferSize",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "bytes"
+                        }
+                    ],
+                    "desc": "Set the send queue high-water mark; default 16 MB, 0 unlimited",
+                    "desc_ja": "送信キューの高水位を設定。既定 16 MB、0 は無制限",
+                    "desc_ko": "전송 큐의 상한 기준 설정. 기본 16 MB, 0은 무제한"
+                },
+                {
+                    "name": "tcpClient:getSendAsyncBufferSize",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Get the send queue high-water mark in bytes",
+                    "desc_ja": "送信キューの高水位をバイト数で取得",
+                    "desc_ko": "전송 큐의 상한 기준을 바이트로 가져오기"
+                },
+                {
+                    "name": "tcpClient:getSendAsyncPendingBytes",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Bytes queued but not yet completed",
+                    "desc_ja": "キュー済みで未完了のバイト数",
+                    "desc_ko": "큐에 있고 아직 완료되지 않은 바이트 수"
                 },
                 {
                     "name": "tcpClient:setReceiveBufferSize",
