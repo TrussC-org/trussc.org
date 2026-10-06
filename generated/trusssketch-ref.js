@@ -8835,9 +8835,9 @@ const TrussCAPI = {
                     "signatures": [
                         "outBuffer, numSamples"
                     ],
-                    "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096. Returns the number of samples written. (Global wrapper: getAudioAnalysisBuffer.)",
-                    "desc_ja": "最新のミックス出力サンプル (モノラル、L+R 平均) を outBuffer にコピー。numSamples は 4096 に制限される。書き込んだサンプル数を返す (グローバルラッパー: getAudioAnalysisBuffer)",
-                    "desc_ko": "최신 믹스 출력 샘플 (모노, L+R 평균) 을 outBuffer 에 복사. numSamples 는 4096 으로 제한됨. 기록한 샘플 수를 반환 (전역 래퍼: getAudioAnalysisBuffer)"
+                    "desc": "Copy the latest post-clamp output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096; missing startup samples are zero padded. Safe from any thread. Returns the number of samples written, or 0 while stopped or uninitialized. Reuses the previous successful copy if concurrent writes prevent a snapshot. Reads the same two-second, per-channel ring as the MCP-only tc_get_audio_spectrum (full FFT, selectable size/window/channels/frequency range/peak count) and tc_save_audio_capture (recent output as float32 WAV). The audio callback writes the ring without locks. Global wrapper: getAudioAnalysisBuffer.",
+                    "desc_ja": "最新のクランプ後の出力サンプル (モノラル、L+R 平均) を outBuffer にコピー。numSamples の上限は4096、起動直後の不足分は0で埋める。どのスレッドからでも呼べる。書き込んだサンプル数を返し、停止中または未初期化の場合は0。同時書き込みでスナップショットを取得できない場合は直前の成功したコピーを再利用する。MCP 専用の tc_get_audio_spectrum (サイズ・窓・チャンネル・周波数範囲・ピーク数を指定できる全 FFT) と tc_save_audio_capture (直近の出力を float32 WAV に保存) と同じ、チャンネルごとの2秒間のリングを読む。オーディオコールバックはロックせず書き込む。グローバルラッパー: getAudioAnalysisBuffer。",
+                    "desc_ko": "최신 클램프 후 출력 샘플 (모노, L+R 평균)을 outBuffer 에 복사한다. numSamples 의 상한은 4096이며 시작 직후 부족한 샘플은 0으로 채운다. 어느 스레드에서든 호출할 수 있다. 기록한 샘플 수를 반환하며 정지 중이거나 초기화되지 않았으면 0이다. 동시 쓰기로 스냅샷을 얻지 못하면 이전에 성공한 복사본을 재사용한다. MCP 전용 tc_get_audio_spectrum (크기·윈도·채널·주파수 범위·피크 수를 선택하는 전체 FFT) 및 tc_save_audio_capture (최근 출력을 float32 WAV 로 저장)와 같은 채널별 2초 링을 읽는다. 오디오 콜백은 잠금 없이 링에 쓴다. 전역 래퍼: getAudioAnalysisBuffer."
                 },
                 {
                     "name": "audioEngine:play",
@@ -16110,9 +16110,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "The sokol-gfx index buffer handle backing the mesh, or an empty handle if non-indexed (advanced interop).",
-                    "desc_ja": "メッシュを支える sokol-gfx インデックスバッファハンドル（非インデックスなら空ハンドル、高度な相互運用向け）。",
-                    "desc_ko": "메시를 뒷받침하는 sokol-gfx 인덱스 버퍼 핸들(비인덱스면 빈 핸들, 고급 상호운용용)."
+                    "desc": "The sokol-gfx buffer handle holding the uploaded list indices (advanced interop). TriangleStrip and TriangleFan expand to triangle lists; LineStrip and LineLoop expand to line lists. If the mesh has no indices, 0..N-1 (N = vertex count) supplies the source sequence, including for Points. Use getGpuIndexCount for the uploaded count. Custom pipelines must draw triangle modes as triangle lists and line modes as line lists.",
+                    "desc_ja": "アップロードしたリストのインデックスを保持する sokol-gfx バッファハンドル（高度な相互運用向け）。TriangleStrip と TriangleFan は三角形リストに、LineStrip と LineLoop は線リストに展開する。元のインデックスが無ければ 0..N-1（N は頂点数）を入力列とし、Points でも同じ連番を使う。アップロード済みの数は getGpuIndexCount で取得する。独自のパイプラインでは三角形モードを三角形リスト、線モードを線リストとして描画する。",
+                    "desc_ko": "업로드한 리스트 인덱스를 담는 sokol-gfx 버퍼 핸들(고급 상호운용용). TriangleStrip과 TriangleFan은 삼각형 리스트로, LineStrip과 LineLoop는 선 리스트로 확장한다. 원본 인덱스가 없으면 0..N-1(N은 정점 수)을 입력 시퀀스로 사용하며, Points에서도 같은 순차 인덱스를 사용한다. 업로드된 개수는 getGpuIndexCount로 얻는다. 커스텀 파이프라인에서는 삼각형 모드를 삼각형 리스트로, 선 모드를 선 리스트로 그려야 한다."
                 },
                 {
                     "name": "mesh:getGpuVertexCount",
@@ -16134,9 +16134,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of indices currently uploaded to the GPU index buffer (0 if the mesh is non-indexed). Pairs with getGpuIndexBuffer for custom rendering.",
-                    "desc_ja": "現在 GPU インデックスバッファにアップロードされているインデックス数（非インデックスメッシュなら 0）。自前描画では getGpuIndexBuffer と組で使う。",
-                    "desc_ko": "현재 GPU 인덱스 버퍼에 업로드된 인덱스 수(비인덱스 메시면 0). 커스텀 렌더링에서는 getGpuIndexBuffer와 짝으로 쓴다."
+                    "desc": "Number of indices in the uploaded GPU list; pairs with getGpuIndexBuffer for custom rendering. TriangleStrip and TriangleFan expand to triangle lists; LineStrip and LineLoop expand to line lists. If the mesh has no indices, 0..N-1 (N = vertex count) supplies the source sequence, including for Points. Custom pipelines must draw triangle modes as triangle lists and line modes as line lists.",
+                    "desc_ja": "GPU にアップロードしたリストのインデックス数。自前描画では getGpuIndexBuffer と組で使う。TriangleStrip と TriangleFan は三角形リストに、LineStrip と LineLoop は線リストに展開する。元のインデックスが無ければ 0..N-1（N は頂点数）を入力列とし、Points でも同じ連番を使う。独自のパイプラインでは三角形モードを三角形リスト、線モードを線リストとして描画する。",
+                    "desc_ko": "GPU에 업로드한 리스트의 인덱스 수. 커스텀 렌더링에서는 getGpuIndexBuffer와 함께 쓴다. TriangleStrip과 TriangleFan은 삼각형 리스트로, LineStrip과 LineLoop는 선 리스트로 확장한다. 원본 인덱스가 없으면 0..N-1(N은 정점 수)을 입력 시퀀스로 사용하며, Points에서도 같은 순차 인덱스를 사용한다. 커스텀 파이프라인에서는 삼각형 모드를 삼각형 리스트로, 선 모드를 선 리스트로 그려야 한다."
                 },
                 {
                     "name": "mesh:getGpuPointBuffer",
@@ -17868,6 +17868,18 @@ const TrussCAPI = {
                     "desc": "True the first time; with an interval, true again once that much time has passed since the last true. Otherwise false",
                     "desc_ja": "初回は true。間隔を指定した場合は、前回 true からその時間が経つと再び true。それ以外は false",
                     "desc_ko": "처음에는 true. 간격을 지정한 경우 마지막 true 이후 그 시간이 지나면 다시 true. 그 밖에는 false"
+                },
+                {
+                    "name": "onceGate:reset",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Restore the never-fired state so the next isFirstTime() returns true immediately, for both once-only and interval gates. Lock-free and safe from any thread",
+                    "desc_ja": "未発火の状態に戻し、1回限り・間隔指定のどちらのゲートでも次の isFirstTime() が即座に true を返す。ロック不要でどのスレッドからでも安全に呼べる",
+                    "desc_ko": "아직 실행되지 않은 상태로 되돌려 일회성·간격 지정 게이트 모두 다음 isFirstTime()이 즉시 true를 반환하게 한다. 락 없이 어느 스레드에서나 안전하게 호출할 수 있다"
                 }
             ]
         },
@@ -25914,6 +25926,29 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "VideoErrorEventArgs",
+            "desc": "Runtime video error event payload.",
+            "keywords": [],
+            "desc_ja": "動画の再生時エラーのイベント引数。",
+            "desc_ko": "동영상 재생 오류 이벤트 인자.",
+            "properties": [
+                {
+                    "name": "videoErrorEventArgs.message",
+                    "type": "string",
+                    "desc": "Backend error message.",
+                    "desc_ja": "バックエンドのエラーメッセージ。",
+                    "desc_ko": "백엔드 오류 메시지."
+                },
+                {
+                    "name": "videoErrorEventArgs.errorCode",
+                    "type": "number",
+                    "desc": "Backend-specific error code; zero when unavailable. Codes are not portable between backends.",
+                    "desc_ja": "バックエンド固有のエラーコード。取得できない場合は 0。バックエンド間で共通の値ではない。",
+                    "desc_ko": "백엔드별 오류 코드. 코드가 없으면 0이며 백엔드 간 공통 값이 아니다."
+                }
+            ]
+        },
+        {
             "name": "VideoGrabber",
             "desc": "Webcam capture source. Call setup() once, then update() every frame; getTexture() (via HasTexture) gives the live frame. Move-only. Camera permission is requested automatically on macOS",
             "keywords": [
@@ -26887,9 +26922,9 @@ const TrussCAPI = {
                             "params": "app"
                         }
                     ],
-                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open (both log an error and leave the window as it is)",
-                    "desc_ja": "このウィンドウにAppを設定 (ウィンドウにコンテンツを与える唯一の方法)。Appのライフサイクル一式 (setup/update/draw/キー/マウス/windowResized + RectNodeサイズ同期) がこのウィンドウで動く。1ウィンドウ1App。App は 1 回だけ動く: 最初に付けたときに setup()、ウィンドウを閉じたとき (#318 以降は差し替えで外したときも) に exit() / cleanup()。ウィンドウを閉じると audioOut() / audioIn() も切り離され、元には戻らない。もう一度表示するには新しい App を作る。setApp() は cleanup() 済みの App と、開いていないウィンドウへの設定を拒否する (どちらもエラーログを出し、ウィンドウはそのまま)",
-                    "desc_ko": "이 윈도우에 App을 연결 (윈도우에 콘텐츠를 주는 유일한 방법). App의 전체 라이프사이클이 이 윈도우에서 실행됨. 윈도우당 App 하나. App 은 한 번만 동작한다: 처음 연결할 때 setup(), 윈도우를 닫을 때 (#318 이후에는 교체로 분리될 때도) exit() / cleanup(). 윈도우를 닫으면 audioOut() / audioIn() 도 분리되고 다시 연결되지 않는다. 다시 표시하려면 새 App 을 만든다. setApp() 은 cleanup() 이 이미 실행된 App 과, 열려 있지 않은 윈도우에 대한 설정을 거부한다 (둘 다 에러 로그를 남기고 윈도우는 그대로)"
+                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open or is closing (both log an error and leave the window as it is). setApp() is a request: it returns at once and the window applies it at its next frame boundary (before or after one of its ticks or events), wherever it is called from, including the App's own update() / draw() / keyPressed(). Until then getApp() returns the current App. The last setApp() before the boundary wins, a close() requested before it wins over it, and the checks run again when the request is applied",
+                    "desc_ja": "このウィンドウにAppを設定 (ウィンドウにコンテンツを与える唯一の方法)。Appのライフサイクル一式 (setup/update/draw/キー/マウス/windowResized + RectNodeサイズ同期) がこのウィンドウで動く。1ウィンドウ1App。App は 1 回だけ動く: 最初に付けたときに setup()、ウィンドウを閉じたとき (#318 以降は差し替えで外したときも) に exit() / cleanup()。ウィンドウを閉じると audioOut() / audioIn() も切り離され、元には戻らない。もう一度表示するには新しい App を作る。setApp() は cleanup() 済みの App と、開いていないウィンドウ・閉じる途中のウィンドウへの設定を拒否する (どちらもエラーログを出し、ウィンドウはそのまま)。setApp() はリクエスト: すぐに戻り、ウィンドウは次のフレーム境界 (そのウィンドウの tick やイベントの前後) で反映する。App 自身の update() / draw() / keyPressed() など、どこから呼んでも同じ。それまで getApp() は今の App を返す。境界までの最後の setApp() が有効で、それより前に close() が要求されていれば close() が優先される。チェックは反映時にもう一度行う",
+                    "desc_ko": "이 윈도우에 App을 연결 (윈도우에 콘텐츠를 주는 유일한 방법). App의 전체 라이프사이클이 이 윈도우에서 실행됨. 윈도우당 App 하나. App 은 한 번만 동작한다: 처음 연결할 때 setup(), 윈도우를 닫을 때 (#318 이후에는 교체로 분리될 때도) exit() / cleanup(). 윈도우를 닫으면 audioOut() / audioIn() 도 분리되고 다시 연결되지 않는다. 다시 표시하려면 새 App 을 만든다. setApp() 은 cleanup() 이 이미 실행된 App 과, 열려 있지 않거나 닫히는 중인 윈도우에 대한 설정을 거부한다 (둘 다 에러 로그를 남기고 윈도우는 그대로). setApp() 은 요청이다: 바로 반환되고, 윈도우는 다음 프레임 경계 (그 윈도우의 tick 이나 이벤트의 앞뒤) 에서 반영한다. App 자신의 update() / draw() / keyPressed() 등 어디서 호출해도 같다. 그때까지 getApp() 은 현재 App 을 반환한다. 경계까지의 마지막 setApp() 이 유효하고, 그 전에 close() 가 요청되었으면 close() 가 우선한다. 검사는 반영할 때 다시 수행한다"
                 },
                 {
                     "name": "window:getApp",
@@ -26923,9 +26958,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Close the native window; the main window and other windows keep running",
-                    "desc_ja": "ウィンドウを閉じる。メインウィンドウや他のウィンドウは動き続ける",
-                    "desc_ko": "윈도우를 닫음. 메인 윈도우와 다른 윈도우는 계속 실행됨"
+                    "desc": "Close the native window; the main window and other windows keep running. A request, like exitApp() for the main window: it returns at once and the window closes at its backend's next safe point (after the current run-loop pass on Linux / Windows, after the next main-window tick on macOS), through the same path as its close button. Until then isOpen() is true and getApp() / App::getWindow() still return the App and the window. Safe to call from the window's own App (update() / draw() / keyPressed()). Destroying the Window (its last shared_ptr) still closes it immediately",
+                    "desc_ja": "ウィンドウを閉じる。メインウィンドウや他のウィンドウは動き続ける。メインウィンドウの exitApp() と同じくリクエスト: すぐに戻り、ウィンドウはバックエンドの次の安全な時点 (Linux / Windows は今回のランループの後、macOS は次のメインウィンドウ tick の後) に、閉じるボタンと同じ経路で閉じる。それまで isOpen() は true で、getApp() / App::getWindow() は今の App とウィンドウを返す。ウィンドウ自身の App (update() / draw() / keyPressed()) から呼んでも安全。Window を破棄したとき (最後の shared_ptr) はその場で閉じる",
+                    "desc_ko": "윈도우를 닫음. 메인 윈도우와 다른 윈도우는 계속 실행됨. 메인 윈도우의 exitApp() 처럼 요청이다: 바로 반환되고, 윈도우는 백엔드의 다음 안전한 시점 (Linux / Windows 는 이번 런 루프 이후, macOS 는 다음 메인 윈도우 tick 이후) 에 닫기 버튼과 같은 경로로 닫힌다. 그때까지 isOpen() 은 true 이고 getApp() / App::getWindow() 는 현재 App 과 윈도우를 반환한다. 윈도우 자신의 App (update() / draw() / keyPressed()) 에서 호출해도 안전하다. Window 를 파괴하면 (마지막 shared_ptr) 즉시 닫힌다"
                 },
                 {
                     "name": "window:isOpen",
@@ -26935,9 +26970,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Whether the native window is still open",
-                    "desc_ja": "ウィンドウが開いているか",
-                    "desc_ko": "윈도우가 열려 있는지"
+                    "desc": "Whether the native window is still open (true until a requested close() lands)",
+                    "desc_ja": "ウィンドウが開いているか (要求した close() が反映されるまでは true)",
+                    "desc_ko": "윈도우가 열려 있는지 (요청한 close() 가 반영될 때까지 true)"
                 },
                 {
                     "name": "window:setTitle",

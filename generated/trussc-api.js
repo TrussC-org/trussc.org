@@ -23018,7 +23018,7 @@ const TrussCAPI = {
                             "params": "float * outBuffer, size_t numSamples"
                         }
                     ],
-                    "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096. Returns the number of samples written. (Global wrapper: getAudioAnalysisBuffer.)"
+                    "desc": "Copy the latest post-clamp output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096; missing startup samples are zero padded. Safe from any thread. Returns the number of samples written, or 0 while stopped or uninitialized. Reuses the previous successful copy if concurrent writes prevent a snapshot. Reads the same two-second, per-channel ring as the MCP-only tc_get_audio_spectrum (full FFT, selectable size/window/channels/frequency range/peak count) and tc_save_audio_capture (recent output as float32 WAV). The audio callback writes the ring without locks. Global wrapper: getAudioAnalysisBuffer."
                 },
                 {
                     "name": "play",
@@ -23574,6 +23574,16 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "True the first time; with an interval, true again once that much time has passed since the last true. Otherwise false"
+                },
+                {
+                    "name": "reset",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Restore the never-fired state so the next isFirstTime() returns true immediately, for both once-only and interval gates. Lock-free and safe from any thread"
                 }
             ]
         },
@@ -28165,7 +28175,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "The sokol-gfx index buffer handle backing the mesh, or an empty handle if non-indexed (advanced interop)."
+                    "desc": "The sokol-gfx buffer handle holding the uploaded list indices (advanced interop). TriangleStrip and TriangleFan expand to triangle lists; LineStrip and LineLoop expand to line lists. If the mesh has no indices, 0..N-1 (N = vertex count) supplies the source sequence, including for Points. Use getGpuIndexCount for the uploaded count. Custom pipelines must draw triangle modes as triangle lists and line modes as line lists."
                 },
                 {
                     "name": "getGpuVertexCount",
@@ -28185,7 +28195,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of indices currently uploaded to the GPU index buffer (0 if the mesh is non-indexed). Pairs with getGpuIndexBuffer for custom rendering."
+                    "desc": "Number of indices in the uploaded GPU list; pairs with getGpuIndexBuffer for custom rendering. TriangleStrip and TriangleFan expand to triangle lists; LineStrip and LineLoop expand to line lists. If the mesh has no indices, 0..N-1 (N = vertex count) supplies the source sequence, including for Points. Custom pipelines must draw triangle modes as triangle lists and line modes as line lists."
                 },
                 {
                     "name": "getGpuPointBuffer",
@@ -29403,6 +29413,7 @@ const TrussCAPI = {
                     "desc": "Read FBO contents into a CPU buffer (32-bit float per channel)",
                     "platforms": [
                         "macos",
+                        "ios",
                         "windows",
                         "linux",
                         "android"
@@ -30217,6 +30228,35 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "VideoErrorEventArgs",
+            "desc": "Runtime video error event payload.",
+            "keywords": [],
+            "desc_ja": "動画の再生時エラーのイベント引数。",
+            "desc_ko": "동영상 재생 오류 이벤트 인자.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "message",
+                    "type": "std::string",
+                    "desc": "Backend error message.",
+                    "desc_ja": "バックエンドのエラーメッセージ。",
+                    "desc_ko": "백엔드 오류 메시지."
+                },
+                {
+                    "name": "errorCode",
+                    "type": "int64_t",
+                    "desc": "Backend-specific error code; zero when unavailable. Codes are not portable between backends.",
+                    "desc_ja": "バックエンド固有のエラーコード。取得できない場合は 0。バックエンド間で共通の値ではない。",
+                    "desc_ko": "백엔드별 오류 코드. 코드가 없으면 0이며 백엔드 간 공통 값이 아니다."
+                }
+            ]
+        },
+        {
             "name": "VideoPlayerBase",
             "desc": "Abstract base class for video playback. Use VideoPlayer for the concrete implementation.",
             "keywords": [
@@ -30236,6 +30276,15 @@ const TrussCAPI = {
                     ""
                 ]
             },
+            "properties": [
+                {
+                    "name": "onError",
+                    "type": "Event<VideoErrorEventArgs>",
+                    "desc": "Runtime failure event, delivered once per error stop by update() on the main thread. Playback stops without unloading, rewinding, or replacing the last frame. The app may seek, play again, or reload; there is no automatic retry. Keep calling update() on the main thread to receive errors. Normal EOF and stalls alone are not errors. Isolated invalid packets/frames are warned and skipped. onError listeners are not moved.",
+                    "desc_ja": "再生時エラーによる停止ごとに一度、メインスレッドの update() から通知する。読み込み状態・位置・最後のフレームを保持して停止する。アプリ側でシーク・再生再開・再読み込みを選択でき、自動再試行はしない。通知を受け取るにはメインスレッドで update() を呼び続ける。正常な EOF や単なる停滞はエラーではない。単独の破損パケット・フレームは警告して読み飛ばす。onError リスナーはムーブされない。",
+                    "desc_ko": "재생 오류로 정지할 때마다 메인 스레드의 update()에서 한 번 알린다. 로드 상태, 위치, 마지막 프레임을 유지한다. 앱이 탐색, 재생 재개, 다시 로드를 선택하며 자동 재시도는 없다. 오류를 받으려면 메인 스레드에서 update()를 계속 호출한다. 정상 EOF나 단순 정체는 오류가 아니다. 개별 손상 패킷/프레임은 경고 후 건너뛴다. onError 리스너는 이동되지 않는다."
+                }
+            ],
             "methods": [
                 {
                     "name": "load",
@@ -30318,6 +30367,26 @@ const TrussCAPI = {
                     "desc": "Decode the next frame and refresh internal state; call once per frame."
                 },
                 {
+                    "name": "hasError",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Whether update() has delivered a runtime playback failure. Cleared by a successful load() or close(), retained through seek and play()."
+                },
+                {
+                    "name": "getErrorMessage",
+                    "signatures": [
+                        {
+                            "ret": "const std::string &",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Last runtime error message, or an empty string when there is no error. Query on the main thread after update()."
+                },
+                {
                     "name": "isPlaying",
                     "signatures": [
                         {
@@ -30325,7 +30394,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Check if video is currently playing (not paused)"
+                    "desc": "Check if video is currently playing (not paused). False after a runtime playback error."
                 },
                 {
                     "name": "isPaused",
@@ -37546,7 +37615,7 @@ const TrussCAPI = {
                             "params": "std::shared_ptr<App> app"
                         }
                     ],
-                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open (both log an error and leave the window as it is)"
+                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open or is closing (both log an error and leave the window as it is). setApp() is a request: it returns at once and the window applies it at its next frame boundary (before or after one of its ticks or events), wherever it is called from, including the App's own update() / draw() / keyPressed(). Until then getApp() returns the current App. The last setApp() before the boundary wins, a close() requested before it wins over it, and the checks run again when the request is applied"
                 },
                 {
                     "name": "getApp",
@@ -37576,7 +37645,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Close the native window; the main window and other windows keep running"
+                    "desc": "Close the native window; the main window and other windows keep running. A request, like exitApp() for the main window: it returns at once and the window closes at its backend's next safe point (after the current run-loop pass on Linux / Windows, after the next main-window tick on macOS), through the same path as its close button. Until then isOpen() is true and getApp() / App::getWindow() still return the App and the window. Safe to call from the window's own App (update() / draw() / keyPressed()). Destroying the Window (its last shared_ptr) still closes it immediately"
                 },
                 {
                     "name": "isOpen",
@@ -37586,7 +37655,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Whether the native window is still open"
+                    "desc": "Whether the native window is still open (true until a requested close() lands)"
                 },
                 {
                     "name": "setTitle",

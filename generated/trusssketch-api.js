@@ -2677,7 +2677,7 @@ const TrussSketchAPI = {
      "name": "getAnalysisBuffer",
      "snippet": "getAnalysisBuffer()",
      "return": "",
-     "desc": "Copy the latest mixed output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096. Returns the number of samples written. (Global wrapper: getAudioAnalysisBuffer.)"
+     "desc": "Copy the latest post-clamp output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096; missing startup samples are zero padded. Safe from any thread. Returns the number of samples written, or 0 while stopped or uninitialized. Reuses the previous successful copy if concurrent writes prevent a snapshot. Reads the same two-second, per-channel ring as the MCP-only tc_get_audio_spectrum (full FFT, selectable size/window/channels/frequency range/peak count) and tc_save_audio_capture (recent output as float32 WAV). The audio callback writes the ring without locks. Global wrapper: getAudioAnalysisBuffer."
     },
     {
      "name": "play",
@@ -8041,7 +8041,7 @@ const TrussSketchAPI = {
      "name": "getGpuIndexBuffer",
      "snippet": "getGpuIndexBuffer()",
      "return": "sg_buffer",
-     "desc": "The sokol-gfx index buffer handle backing the mesh, or an empty handle if non-indexed (advanced interop)."
+     "desc": "The sokol-gfx buffer handle holding the uploaded list indices (advanced interop). TriangleStrip and TriangleFan expand to triangle lists; LineStrip and LineLoop expand to line lists. If the mesh has no indices, 0..N-1 (N = vertex count) supplies the source sequence, including for Points. Use getGpuIndexCount for the uploaded count. Custom pipelines must draw triangle modes as triangle lists and line modes as line lists."
     },
     {
      "name": "getGpuVertexCount",
@@ -8053,7 +8053,7 @@ const TrussSketchAPI = {
      "name": "getGpuIndexCount",
      "snippet": "getGpuIndexCount()",
      "return": "int",
-     "desc": "Number of indices currently uploaded to the GPU index buffer (0 if the mesh is non-indexed). Pairs with getGpuIndexBuffer for custom rendering."
+     "desc": "Number of indices in the uploaded GPU list; pairs with getGpuIndexBuffer for custom rendering. TriangleStrip and TriangleFan expand to triangle lists; LineStrip and LineLoop expand to line lists. If the mesh has no indices, 0..N-1 (N = vertex count) supplies the source sequence, including for Points. Custom pipelines must draw triangle modes as triangle lists and line modes as line lists."
     },
     {
      "name": "getGpuPointBuffer",
@@ -9006,6 +9006,12 @@ const TrussSketchAPI = {
      "snippet": "isFirstTime()",
      "return": "bool",
      "desc": "True the first time; with an interval, true again once that much time has passed since the last true. Otherwise false"
+    },
+    {
+     "name": "reset",
+     "snippet": "reset()",
+     "return": "void",
+     "desc": "Restore the never-fired state so the next isFirstTime() returns true immediately, for both once-only and interval gates. Lock-free and safe from any thread"
     }
    ]
   },
@@ -13636,6 +13642,22 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "VideoErrorEventArgs",
+   "desc": "Runtime video error event payload.",
+   "properties": [
+    {
+     "name": "message",
+     "type": "std::string",
+     "desc": "Backend error message."
+    },
+    {
+     "name": "errorCode",
+     "type": "int64_t",
+     "desc": "Backend-specific error code; zero when unavailable. Codes are not portable between backends."
+    }
+   ]
+  },
+  {
    "name": "VideoGrabber",
    "desc": "Webcam capture source. Call setup() once, then update() every frame; getTexture() (via HasTexture) gives the live frame. Move-only. Camera permission is requested automatically on macOS",
    "constructor": {
@@ -14110,7 +14132,7 @@ const TrussSketchAPI = {
      "name": "setApp",
      "snippet": "setApp(${1:app})",
      "return": "void",
-     "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open (both log an error and leave the window as it is)"
+     "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open or is closing (both log an error and leave the window as it is). setApp() is a request: it returns at once and the window applies it at its next frame boundary (before or after one of its ticks or events), wherever it is called from, including the App's own update() / draw() / keyPressed(). Until then getApp() returns the current App. The last setApp() before the boundary wins, a close() requested before it wins over it, and the checks run again when the request is applied"
     },
     {
      "name": "getApp",
@@ -14128,13 +14150,13 @@ const TrussSketchAPI = {
      "name": "close",
      "snippet": "close()",
      "return": "void",
-     "desc": "Close the native window; the main window and other windows keep running"
+     "desc": "Close the native window; the main window and other windows keep running. A request, like exitApp() for the main window: it returns at once and the window closes at its backend's next safe point (after the current run-loop pass on Linux / Windows, after the next main-window tick on macOS), through the same path as its close button. Until then isOpen() is true and getApp() / App::getWindow() still return the App and the window. Safe to call from the window's own App (update() / draw() / keyPressed()). Destroying the Window (its last shared_ptr) still closes it immediately"
     },
     {
      "name": "isOpen",
      "snippet": "isOpen()",
      "return": "bool",
-     "desc": "Whether the native window is still open"
+     "desc": "Whether the native window is still open (true until a requested close() lands)"
     },
     {
      "name": "setTitle",
