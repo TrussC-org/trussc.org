@@ -5063,15 +5063,15 @@ const TrussCAPI = {
                     "params": "width, height",
                     "params_typed": "width, height",
                     "return_type": "(nothing)",
-                    "desc": "Set window size",
+                    "desc": "Set window size. Resizing the main window is not implemented on Linux yet",
                     "keywords": [
                         "resize",
                         "dimensions",
                         "width height",
                         "resolution"
                     ],
-                    "desc_ja": "ウィンドウのサイズを設定",
-                    "desc_ko": "윈도우 크기를 설정"
+                    "desc_ja": "ウィンドウのサイズを設定。メインウィンドウのリサイズは Linux ではまだ未実装",
+                    "desc_ko": "윈도우 크기를 설정. 메인 윈도우 리사이즈는 Linux에서 아직 미구현"
                 },
                 {
                     "name": "setFullscreen",
@@ -6698,14 +6698,14 @@ const TrussCAPI = {
                     "params": "name",
                     "params_typed": "name",
                     "return_type": "string",
-                    "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS uses CoreText; Linux/Windows currently stub.",
+                    "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS / iOS use CoreText, Linux fontconfig, Windows DirectWrite.",
                     "keywords": [
                         "resolve",
                         "lookup",
                         "find",
                         "os font"
                     ],
-                    "desc_ja": "システムフォント名（PostScript 名や family 名）をファイルパスに解決。見つからなければ空文字を返す。macOS は CoreText、Linux/Win は現状スタブ",
+                    "desc_ja": "システムフォント名（PostScript 名や family 名）をファイルパスに解決。見つからなければ空文字を返す。macOS / iOS は CoreText、Linux は fontconfig、Windows は DirectWrite",
                     "desc_ko": "시스템 폰트 이름을 파일 경로로 변환"
                 },
                 {
@@ -8449,9 +8449,9 @@ const TrussCAPI = {
                             "params": "w, h"
                         }
                     ],
-                    "desc": "Resize the app's own window — the one it is attached to, or the main window for the main App — from any window's callbacks. Same units as setWindowSize(). An App attached to no window only changes its own size. So does an App no shared_ptr owns yet (e.g. inside its constructor), which also warns once: call it in setup()",
-                    "desc_ja": "アプリ自身のウィンドウ (Appが載っているウィンドウ、メインAppならメインウィンドウ) をリサイズ。どのウィンドウのコールバックから呼んでも同じ。単位は setWindowSize() と同じ。どのウィンドウにも載っていないAppは自分のサイズだけが変わる。まだshared_ptrに所有されていないApp(コンストラクタ内など)も自分のサイズだけが変わり、一度だけ警告が出る。setup()で呼ぶ",
-                    "desc_ko": "앱 자신의 윈도우 (App이 연결된 윈도우, 메인 App이면 메인 윈도우)를 리사이즈. 어느 윈도우의 콜백에서 호출해도 동일. 단위는 setWindowSize()와 같음. 어떤 윈도우에도 연결되지 않은 App은 자신의 크기만 바뀜. 아직 shared_ptr이 소유하지 않은 App(생성자 안 등)도 자신의 크기만 바뀌고 경고가 한 번 나옴. setup()에서 호출"
+                    "desc": "Resize the app's own window — the one it is attached to, or the main window for the main App — from any window's callbacks. Same units as setWindowSize(). An App attached to no window only changes its own size. So does an App no shared_ptr owns yet (e.g. inside its constructor), which also warns once: call it in setup(). Resizing the main window is not implemented on Linux yet",
+                    "desc_ja": "アプリ自身のウィンドウ (Appが載っているウィンドウ、メインAppならメインウィンドウ) をリサイズ。どのウィンドウのコールバックから呼んでも同じ。単位は setWindowSize() と同じ。どのウィンドウにも載っていないAppは自分のサイズだけが変わる。まだshared_ptrに所有されていないApp(コンストラクタ内など)も自分のサイズだけが変わり、一度だけ警告が出る。setup()で呼ぶ。メインウィンドウのリサイズは Linux ではまだ未実装",
+                    "desc_ko": "앱 자신의 윈도우 (App이 연결된 윈도우, 메인 App이면 메인 윈도우)를 리사이즈. 어느 윈도우의 콜백에서 호출해도 동일. 단위는 setWindowSize()와 같음. 어떤 윈도우에도 연결되지 않은 App은 자신의 크기만 바뀜. 아직 shared_ptr이 소유하지 않은 App(생성자 안 등)도 자신의 크기만 바뀌고 경고가 한 번 나옴. setup()에서 호출. 메인 윈도우 리사이즈는 Linux에서 아직 미구현"
                 },
                 {
                     "name": "app:requestExit",
@@ -8485,9 +8485,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "The Window this App is attached to via Window::setApp(), or nullptr when it is not attached — including the main App started by runApp() and an App whose window was closed. Resolved from the App itself, so subApp->getWindow() returns the right window from any window's callbacks",
-                    "desc_ja": "Window::setApp() でこのAppが載っているWindow。載っていなければ nullptr (runApp() で起動したメインAppと、ウィンドウが閉じられたAppを含む)。App自身から引くので、どのウィンドウのコールバックから subApp->getWindow() を呼んでも正しいウィンドウが返る",
-                    "desc_ko": "Window::setApp()으로 이 App이 연결된 Window. 연결되어 있지 않으면 nullptr (runApp()으로 시작한 메인 App과 윈도우가 닫힌 App 포함). App 자체에서 조회하므로 어느 윈도우의 콜백에서 subApp->getWindow()를 호출해도 올바른 윈도우가 반환됨"
+                    "desc": "The Window this App is attached to via Window::setApp(), or nullptr when it is not attached — including the main App started by runApp() and an App whose window was closed. `close()` only requests closure; the window remains available until teardown begins. Already nullptr during teardown: inside this App's own exit() / cleanup() and in the window's events().exit listeners, because the native window is destroyed first. Read what you need (title, size, fullscreen) before calling close(), or keep it up to date in update(). Resolved from the App itself, so subApp->getWindow() returns the right window from any window's callbacks",
+                    "desc_ja": "Window::setApp() でこのAppが載っているWindow。載っていなければ nullptr (runApp() で起動したメインAppと、ウィンドウが閉じられたAppを含む)。close() は終了要求のみで、破棄が始まるまではウィンドウを取得できる。破棄中はすでに nullptr になる: このApp自身の exit() / cleanup() の中と、そのウィンドウの events().exit リスナーの中。ネイティブウィンドウが先に破棄されるため。必要な情報 (タイトル、サイズ、フルスクリーン) は close() を呼ぶ前に読むか、update() で更新しておく。App自身から引くので、どのウィンドウのコールバックから subApp->getWindow() を呼んでも正しいウィンドウが返る",
+                    "desc_ko": "Window::setApp()으로 이 App이 연결된 Window. 연결되어 있지 않으면 nullptr (runApp()으로 시작한 메인 App과 윈도우가 닫힌 App 포함). close()는 닫기를 요청할 뿐이며 실제 정리가 시작되기 전까지 윈도우를 얻을 수 있음. 정리 중에는 이미 nullptr: 이 App 자신의 exit() / cleanup() 안과 그 윈도우의 events().exit 리스너 안. 네이티브 윈도우가 먼저 파괴되기 때문. 필요한 정보 (제목, 크기, 전체 화면)는 close()를 호출하기 전에 읽거나 update()에서 갱신해 둘 것. App 자체에서 조회하므로 어느 윈도우의 콜백에서 subApp->getWindow()를 호출해도 올바른 윈도우가 반환됨"
                 },
                 {
                     "name": "app:keyPressed",
@@ -8681,9 +8681,9 @@ const TrussCAPI = {
                             "params": "buf"
                         }
                     ],
-                    "desc": "Fill the audio output buffer (override to synthesize audio). Runs on the audio thread. First called right after setup() returns, so what setup() prepares is ready in here; an App that is never run gets no calls. The framework detaches it after cleanup() and waits for a call in flight before it destroys the App (exit, hot reload, closing the App's window), for as long as the call takes: don't wait on the main thread or on a lock the main thread may hold in here, or the teardown hangs (with an error logged after one second). An App runs once: when its window closes it is detached for good; to show the App again, create a new one",
-                    "desc_ja": "オーディオ出力バッファを満たす(音を合成するにはオーバーライド)。オーディオスレッドで実行される。setup() が戻った直後から呼ばれるので、setup() で用意したものはここで使える。一度も動かさない App には呼ばれない。フレームワークが cleanup() の後で切り離し、実行中の呼び出しが戻るまで時間の制限なしに待ってから App を破棄する (終了時、ホットリロード時、App のウィンドウを閉じたとき)。ここでメインスレッドや、メインスレッドが持ちうるロックを待たないこと。後片付けが固まる (1 秒後にエラーログが出る)。App は 1 回だけ動くので、ウィンドウを閉じたら二度と登録されない。もう一度表示するには新しい App を作る",
-                    "desc_ko": "오디오 출력 버퍼를 채움(오디오를 합성하려면 오버라이드). 오디오 스레드에서 실행된다. setup() 이 반환된 직후부터 호출되므로 setup() 에서 준비한 것은 여기서 쓸 수 있다. 한 번도 실행되지 않은 App 에는 호출되지 않는다. 프레임워크가 cleanup() 후에 분리하고, 실행 중인 호출이 반환될 때까지 시간 제한 없이 기다린 뒤 App 을 파괴한다 (종료 시, 핫 리로드 시, App 의 윈도우를 닫을 때). 여기서 메인 스레드나 메인 스레드가 쥘 수 있는 락을 기다리지 말 것. 정리가 멈춘다 (1 초 후 에러 로그가 남는다). App 은 한 번만 동작하므로 윈도우를 닫으면 다시 등록되지 않는다. 다시 표시하려면 새 App 을 만든다"
+                    "desc": "Fill the audio output buffer (override to synthesize audio). Runs on the audio thread. First called right after setup() returns, so what setup() prepares is ready in here; an App that is never run gets no calls. The framework calls exit(), detaches it and waits as long as necessary for a call in flight before calling cleanup() (exit, hot reload, closing the App's window). cleanup() may free its audio state. Don't wait on the main thread or on a lock the main thread may hold in here, or the teardown hangs (with an error logged after one second). An App runs once: when its window closes it is detached for good; to show the App again, create a new one",
+                    "desc_ja": "オーディオ出力バッファを満たす(音を合成するにはオーバーライド)。オーディオスレッドで実行される。setup() が戻った直後から呼ばれるので、setup() で用意したものはここで使える。一度も動かさない App には呼ばれない。フレームワークが exit() の後で切り離し、実行中の呼び出しが戻るまで時間の制限なしに待ってから cleanup() を呼ぶ (終了時、ホットリロード時、App のウィンドウを閉じたとき)。cleanup() ではオーディオの状態を解放できる。ここでメインスレッドや、メインスレッドが持ちうるロックを待たないこと。後片付けが固まる (1 秒後にエラーログが出る)。App は 1 回だけ動くので、ウィンドウを閉じたら二度と登録されない。もう一度表示するには新しい App を作る",
+                    "desc_ko": "오디오 출력 버퍼를 채움(오디오를 합성하려면 오버라이드). 오디오 스레드에서 실행된다. setup() 이 반환된 직후부터 호출되므로 setup() 에서 준비한 것은 여기서 쓸 수 있다. 한 번도 실행되지 않은 App 에는 호출되지 않는다. 프레임워크가 exit() 후에 분리하고, 실행 중인 호출이 반환될 때까지 시간 제한 없이 기다린 뒤 cleanup() 을 호출한다 (종료 시, 핫 리로드 시, App 의 윈도우를 닫을 때). cleanup() 에서는 오디오 상태를 해제할 수 있다. 여기서 메인 스레드나 메인 스레드가 쥘 수 있는 락을 기다리지 말 것. 정리가 멈춘다 (1 초 후 에러 로그가 남는다). App 은 한 번만 동작하므로 윈도우를 닫으면 다시 등록되지 않는다. 다시 표시하려면 새 App 을 만든다"
                 },
                 {
                     "name": "app:audioIn",
@@ -8693,9 +8693,9 @@ const TrussCAPI = {
                             "params": "buf"
                         }
                     ],
-                    "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut. Like audioOut, first called right after setup() returns and detached after cleanup() for good; the same rule applies: don't wait on the main thread or on its locks in here.",
-                    "desc_ja": "リアルタイム入力コールバック event (マイク入力)。RT-safe 要件は audioOut と同様。audioOut と同じく setup() が戻った直後から呼ばれ、cleanup() の後で切り離され、元には戻らない。ここでもメインスレッドやそのロックを待たないこと",
-                    "desc_ko": "실시간 캡처 콜백 이벤트 (마이크 입력). RT-safe 요건은 audioOut과 동일. audioOut 과 같이 setup() 이 반환된 직후부터 호출되고, cleanup() 후에 분리되어 다시 등록되지 않는다. 여기서도 메인 스레드나 그 락을 기다리지 말 것"
+                    "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut. Like audioOut, first called right after setup() returns and detached before cleanup() for good; the same rule applies: don't wait on the main thread or on its locks in here.",
+                    "desc_ja": "リアルタイム入力コールバック event (マイク入力)。RT-safe 要件は audioOut と同様。audioOut と同じく setup() が戻った直後から呼ばれ、cleanup() の前で切り離され、元には戻らない。ここでもメインスレッドやそのロックを待たないこと",
+                    "desc_ko": "실시간 캡처 콜백 이벤트 (마이크 입력). RT-safe 요건은 audioOut과 동일. audioOut 과 같이 setup() 이 반환된 직후부터 호출되고, cleanup() 전에 분리되어 다시 등록되지 않는다. 여기서도 메인 스레드나 그 락을 기다리지 말 것"
                 }
             ]
         },
@@ -8815,9 +8815,9 @@ const TrussCAPI = {
                         "",
                         "settings"
                     ],
-                    "desc": "Initialize the engine, or re-initialize it with an AudioSettings override. init(settings) keeps the sample rate, channels, buffer size and polyphony even when it fails; init() with no arguments reuses the last ones (the defaults if init(settings) was never called) but always opens the system default device. Re-init on a running engine migrates active voices to the new settings. With no usable audio backend, miniaudio falls back to its silent Null device: init() then succeeds and logs a warning. Returns true on success, false when no output device can be opened; the failure is logged through logError(\"AudioEngine\") with the requested device name. A failed re-init leaves the engine stopped: the running device is closed before the new one is tried. It may be called again later; each failed try opens the device and logs again, so retry on a timer (about once a second) or on a user action, not every frame. Sound::load*() calls init() while the engine is not initialized, so after a failed init(settings) it opens the system default device with those settings; call init(settings) again before loading sounds if you want the requested device.",
-                    "desc_ja": "エンジンを初期化する、または AudioSettings の上書きで再初期化する。init(settings) はサンプルレート、チャンネル、バッファサイズ、ポリフォニーを失敗しても保持し、引数なしの init() は直前のそれらを再利用する (init(settings) を一度も呼んでいなければデフォルト) が、デバイスは常にシステム既定を開く。動作中のエンジンで再初期化するとアクティブなボイスを新設定へ移行する。使えるオーディオバックエンドがないと miniaudio は無音の Null デバイスにフォールバックし、init() は成功して警告をログに出す。成功時 true、出力デバイスを開けないときは false を返す。失敗は要求したデバイス名とともに logError(\"AudioEngine\") でログに出る。再初期化が失敗するとエンジンは止まったままになる (新しいデバイスを試す前に動作中のデバイスを閉じるため)。後からもう一度呼んでよいが、失敗するたびにデバイスを開き直してログを出すので、毎フレームではなくタイマー (1 秒に 1 回程度) やユーザー操作で再試行すること。Sound::load*() はエンジンが未初期化なら init() を呼ぶので、init(settings) が失敗した後はその設定でシステム既定のデバイスが開かれる。要求したデバイスを使いたいならサウンドを読み込む前に init(settings) を呼び直すこと",
-                    "desc_ko": "엔진을 초기화하거나 AudioSettings 오버라이드로 재초기화. init(settings) 는 샘플레이트, 채널, 버퍼 크기, 폴리포니를 실패해도 유지하고, 인수 없는 init() 은 마지막 값을 재사용하지만 (init(settings) 를 호출한 적이 없으면 기본값) 디바이스는 항상 시스템 기본 디바이스를 연다. 동작 중인 엔진에서 재초기화하면 활성 보이스를 새 설정으로 이전한다. 사용할 수 있는 오디오 백엔드가 없으면 miniaudio 는 무음의 Null 디바이스로 폴백하고, init() 은 성공하며 경고를 로그에 남긴다. 성공 시 true, 출력 디바이스를 열 수 없으면 false 반환. 실패는 요청한 디바이스 이름과 함께 logError(\"AudioEngine\") 로 로그에 남는다. 재초기화가 실패하면 엔진은 멈춘 상태로 남는다 (새 디바이스를 시도하기 전에 동작 중인 디바이스를 닫기 때문). 나중에 다시 호출해도 되지만, 실패할 때마다 디바이스를 다시 열고 로그를 남기므로 매 프레임이 아니라 타이머(1초에 한 번 정도)나 사용자 조작으로 재시도할 것. Sound::load*() 는 엔진이 초기화되지 않았으면 init() 을 호출하므로, init(settings) 가 실패한 뒤에는 그 설정으로 시스템 기본 디바이스가 열린다. 요청한 디바이스를 쓰려면 사운드를 로드하기 전에 init(settings) 를 다시 호출할 것"
+                    "desc": "Initialize the engine, or re-initialize it with an AudioSettings override. init(settings) keeps the sample rate, channels, buffer size and polyphony even when it fails; init() with no arguments reuses the last ones (the defaults if init(settings) was never called) but always opens the system default device on AudioBackend::Default. Re-init on a running engine migrates active voices to the new settings. miniaudio reaches Null only when no real backend context can be created; if a context opens but its device cannot, init() returns false without switching backend. Set AudioSettings::backend = AudioBackend::Null for intentional silent operation (one Notice per init). getStats() retains the last init failure until a successful init. Returns true on success, false when no output device can be opened; the failure is logged through logError(\"AudioEngine\") with the requested device name. A failed re-init leaves the engine stopped: the running device is closed before the new one is tried. It may be called again later; each failed try opens the device and logs again, so retry on a timer (about once a second) or on a user action, not every frame. Sound::load*() calls init() while the engine is not initialized, so after a failed init(settings) it opens the system default device with those settings; call init(settings) again before loading sounds if you want the requested device.",
+                    "desc_ja": "エンジンを初期化する、または AudioSettings の上書きで再初期化する。init(settings) はサンプルレート、チャンネル、バッファサイズ、ポリフォニーを失敗しても保持し、引数なしの init() は直前のそれらを再利用する (init(settings) を一度も呼んでいなければデフォルト) が、バックエンドは常に AudioBackend::Default、デバイスはシステム既定を開く。動作中のエンジンで再初期化するとアクティブなボイスを新設定へ移行する。miniaudio が Null に到達するのは実バックエンドのコンテキストを作れない場合だけ。コンテキストが開いてもデバイスを開けなければ、バックエンドを切り替えず false を返す。意図的に無音で動かすには AudioSettings::backend = AudioBackend::Null を指定する (init ごとに Notice を 1 回)。getStats() は次の初期化成功まで最後の失敗を保持する。成功時 true、出力デバイスを開けないときは false を返す。失敗は要求したデバイス名とともに logError(\"AudioEngine\") でログに出る。再初期化が失敗するとエンジンは止まったままになる (新しいデバイスを試す前に動作中のデバイスを閉じるため)。後からもう一度呼んでよいが、失敗するたびにデバイスを開き直してログを出すので、毎フレームではなくタイマー (1 秒に 1 回程度) やユーザー操作で再試行すること。Sound::load*() はエンジンが未初期化なら init() を呼ぶので、init(settings) が失敗した後はその設定でシステム既定のデバイスが開かれる。要求したデバイスを使いたいならサウンドを読み込む前に init(settings) を呼び直すこと",
+                    "desc_ko": "엔진을 초기화하거나 AudioSettings 오버라이드로 재초기화. init(settings) 는 샘플레이트, 채널, 버퍼 크기, 폴리포니를 실패해도 유지하고, 인수 없는 init() 은 마지막 값을 재사용하지만 (init(settings) 를 호출한 적이 없으면 기본값) 백엔드는 항상 AudioBackend::Default이며 시스템 기본 디바이스를 연다. 동작 중인 엔진에서 재초기화하면 활성 보이스를 새 설정으로 이전한다. miniaudio 는 실제 백엔드 컨텍스트를 만들 수 없을 때만 Null 에 도달한다. 컨텍스트가 열려도 디바이스를 열 수 없으면 백엔드를 바꾸지 않고 false 를 반환한다. 의도적인 무음 실행에는 AudioSettings::backend = AudioBackend::Null 을 지정한다 (init 마다 Notice 한 번). getStats() 는 다음 초기화 성공까지 마지막 실패를 유지한다. 성공 시 true, 출력 디바이스를 열 수 없으면 false 반환. 실패는 요청한 디바이스 이름과 함께 logError(\"AudioEngine\") 로 로그에 남는다. 재초기화가 실패하면 엔진은 멈춘 상태로 남는다 (새 디바이스를 시도하기 전에 동작 중인 디바이스를 닫기 때문). 나중에 다시 호출해도 되지만, 실패할 때마다 디바이스를 다시 열고 로그를 남기므로 매 프레임이 아니라 타이머(1초에 한 번 정도)나 사용자 조작으로 재시도할 것. Sound::load*() 는 엔진이 초기화되지 않았으면 init() 을 호출하므로, init(settings) 가 실패한 뒤에는 그 설정으로 시스템 기본 디바이스가 열린다. 요청한 디바이스를 쓰려면 사운드를 로드하기 전에 init(settings) 를 다시 호출할 것"
                 },
                 {
                     "name": "audioEngine:shutdown",
@@ -9150,6 +9150,13 @@ const TrussCAPI = {
                     "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate.",
                     "desc_ja": "再生デバイス名、空 = システム既定。列挙には AudioEngine::listDevices() を使う",
                     "desc_ko": "재생 디바이스 이름, 비어 있으면 시스템 기본값. 열거에는 AudioEngine::listDevices() 사용"
+                },
+                {
+                    "name": "audioSettings.backend",
+                    "type": "AudioBackend",
+                    "desc": "Backend to open (Default by default). Set Null and call init(settings) before loading sounds for headless use. Enumeration and native MicInput follow the engine backend; before init, enumeration uses real backends. Zero-argument init() uses Default.",
+                    "desc_ja": "開くバックエンド (既定 Default)。ヘッドレス実行では Null を指定してサウンド読込前に init(settings) を呼ぶ。列挙とネイティブ MicInput はエンジンのバックエンドに従う。init 前の列挙は実バックエンドを使う。引数なしの init() は Default を使う。",
+                    "desc_ko": "열 백엔드 (기본 Default). 헤드리스 실행에는 Null 을 지정하고 사운드 로드 전에 init(settings) 를 호출한다. 열거와 네이티브 MicInput 은 엔진 백엔드를 따른다. init 전 열거는 실제 백엔드를 사용한다. 인수 없는 init() 은 Default 를 사용한다."
                 }
             ]
         },
@@ -9264,6 +9271,20 @@ const TrussCAPI = {
                     "desc": "Cumulative streaming voices stopped because a live sample-rate re-init could not reopen their decoder. Separate from droppedPlays: these voices had already started successfully. Each failure keeps the existing warning with its file path and decoder result on the thread calling init(); this counter adds no summary warning.",
                     "desc_ja": "動作中のサンプルレート再初期化でデコーダーを開き直せず停止したストリーム再生インスタンスの累計。再生開始は成功していたため droppedPlays とは別に数える。各失敗は init() を呼んだスレッドでファイルパスとデコーダーの結果値を含む既存の警告を出す。このカウンタによる集約警告は追加しない",
                     "desc_ko": "동작 중 샘플 레이트 재초기화에서 디코더를 다시 열 수 없어 정지한 스트림 재생 인스턴스 누계. 재생 시작은 성공했으므로 droppedPlays 와 별도로 센다. 각 실패는 init() 을 호출한 스레드에서 파일 경로와 디코더 결과 값을 포함하는 기존 경고를 남긴다. 이 카운터는 요약 경고를 추가하지 않는다"
+                },
+                {
+                    "name": "audioStats.initFailure",
+                    "type": "AudioInitFailure",
+                    "desc": "Last init failure, retained through shutdown and cleared by successful init. tc_get_audio_state includes initFailure with reason, result, backend and requested device only while a failure is recorded.",
+                    "desc_ja": "最後の初期化失敗。shutdown 後も保持し、init 成功でクリアする。tc_get_audio_state は失敗記録があるときだけ reason、result、backend、要求デバイス名を含む initFailure を返す。",
+                    "desc_ko": "마지막 초기화 실패. shutdown 후에도 유지하며 init 성공 시 지운다. tc_get_audio_state 는 실패 기록이 있을 때만 reason, result, backend, 요청 디바이스 이름을 담은 initFailure 를 반환한다."
+                },
+                {
+                    "name": "audioStats.initFailureResult",
+                    "type": "number",
+                    "desc": "miniaudio result code of the last failed init (for example -401 for a device open failure); 0 when no failure is recorded.",
+                    "desc_ja": "最後の初期化失敗の miniaudio 結果コード (例: デバイスを開けない場合 -401)。失敗記録がなければ 0。",
+                    "desc_ko": "마지막 초기화 실패의 miniaudio 결과 코드 (예: 디바이스 열기 실패 -401). 실패 기록이 없으면 0."
                 }
             ]
         },
@@ -11785,12 +11806,12 @@ const TrussCAPI = {
                     "signatures": [
                         {
                             "ret": "LoadResult",
-                            "params": "nameOrPath, size"
+                            "params": "nameOrPath, size, faceIndex = 0"
                         }
                     ],
-                    "desc": "Load a font file or a system font name. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins.",
-                    "desc_ja": "フォントファイルまたはシステムフォント名を読み込む。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う。データフォルダのファイルとシステムフォントが同名なら、データフォルダのファイルを使う",
-                    "desc_ko": "폰트 파일 또는 시스템 폰트 이름을 로드. 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용. 데이터 폴더의 파일과 시스템 폰트 이름이 같으면 데이터 폴더의 파일을 사용"
+                    "desc": "Load a font file or a system font name; faceIndex picks the face in a .ttc. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins.",
+                    "desc_ja": "フォントファイルまたはシステムフォント名を読み込む。faceIndex で .ttc 内の書体を選ぶ。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う。データフォルダのファイルとシステムフォントが同名なら、データフォルダのファイルを使う",
+                    "desc_ko": "폰트 파일 또는 시스템 폰트 이름을 로드. faceIndex로 .ttc 안의 서체를 선택. 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용. 데이터 폴더의 파일과 시스템 폰트 이름이 같으면 데이터 폴더의 파일을 사용"
                 },
                 {
                     "name": "font:isLoaded",
@@ -21352,9 +21373,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get playback position in seconds. On a stream, right after setPosition() and until the audio has moved there (usually ~10 ms), this is the requested position.",
-                    "desc_ja": "再生位置を取得（秒）。ストリームでは setPosition() の直後から音が実際にそこへ移るまで (通常 ~10ms) の間、要求した位置を返す",
-                    "desc_ko": "재생 위치를 초 단위로 얻음. 스트림에서는 setPosition() 직후부터 소리가 실제로 그 위치로 옮겨질 때까지 (보통 ~10ms) 요청한 위치를 반환"
+                    "desc": "Get playback position in seconds. On a stream, right after setPosition() and until the audio has moved there, this is the requested position. See Sound::setPosition() for measured stream seek latency.",
+                    "desc_ja": "再生位置を取得（秒）。ストリームでは setPosition() の直後から音が実際にそこへ移るまでの間、要求した位置を返す。ストリームのシーク遅延の実測値は Sound::setPosition() を参照",
+                    "desc_ko": "재생 위치를 초 단위로 얻음. 스트림에서는 setPosition() 직후부터 소리가 실제로 그 위치로 옮겨질 때까지 요청한 위치를 반환. 스트림 시크 지연의 측정값은 Sound::setPosition() 참조"
                 },
                 {
                     "name": "sound:setPosition",
@@ -21364,9 +21385,9 @@ const TrussCAPI = {
                             "params": "seconds"
                         }
                     ],
-                    "desc": "Seek to a specific time in seconds. On streams the decoder seeks and the ring refills, so the audio moves after ~10 ms of silence (longer on slow storage or for an MP3 several hours long); getPosition() reports the new position at once, the last of several calls wins, and a paused stream resumes from there. A stream whose length is unknown (getDuration() is 0) cannot seek: the call is ignored with a warning.",
-                    "desc_ja": "指定秒数にシーク。ストリームではデコーダがシークして ring を補充するので、~10ms の無音の後に音が移る (遅いストレージや数時間の長さの MP3 ではもっとかかる)。getPosition() は直後から新しい位置を返し、続けて呼んだ場合は最後の呼び出しが有効。一時停止中のストリームは再開時にそこから鳴る。長さが不明なストリーム (getDuration() が 0) はシークできず、呼び出しは警告を出して無視される",
-                    "desc_ko": "지정 시간(초)으로 시크. 스트림은 디코더가 시크하고 링을 재충전하므로 ~10ms 무음 후에 소리가 옮겨짐 (느린 저장소나 몇 시간 길이의 MP3에서는 더 걸림). getPosition()은 즉시 새 위치를 반환하고, 연속으로 호출하면 마지막 호출이 유효. 일시정지 중인 스트림은 재개할 때 그 위치부터 재생. 길이를 알 수 없는 스트림 (getDuration()이 0)은 시크할 수 없으며, 호출은 경고와 함께 무시됨"
+                    "desc": "Seek to a specific time in seconds. On streams the audio moves after the decoder seeks and the ring refills. Measured seek to first post-seek output callback on WASAPI/CoreAudio: about 1.5 audio callbacks on average, about 2 at p95 (13–16 ms mean with 10 ms callbacks). PulseAudio on main averaged 25.4 ms. These are callback-level timings, not speaker/DAC latency or silence duration; slow storage or an MP3 several hours long can take longer. See issue #550 for measurements. getPosition() reports the new position at once, the last of several calls wins, and a paused stream resumes from there. A stream whose length is unknown (getDuration() is 0) cannot seek: the call is ignored with a warning.",
+                    "desc_ja": "指定秒数にシーク。ストリームではデコーダのシークと ring の補充後に音が移る。シーク要求からシーク先の音を含む最初の出力コールバックまでの実測値は、WASAPI/CoreAudio で平均約 1.5 コールバック、p95 で約 2 コールバック (10 ms 間隔では平均 13–16 ms)。PulseAudio の main では平均 25.4 ms。これはコールバック単位の測定で、スピーカー/DAC までの遅延や無音時間ではない。遅いストレージや数時間の長さの MP3 ではもっとかかる。測定の詳細は issue #550 を参照。getPosition() は直後から新しい位置を返し、続けて呼んだ場合は最後の呼び出しが有効。一時停止中のストリームは再開時にそこから鳴る。長さが不明なストリーム (getDuration() が 0) はシークできず、呼び出しは警告を出して無視される",
+                    "desc_ko": "지정 시간(초)으로 시크. 스트림은 디코더가 시크하고 링을 재충전한 뒤 소리가 옮겨짐. 시크 요청부터 새 위치의 오디오가 담긴 첫 출력 콜백까지의 측정값은 WASAPI/CoreAudio에서 평균 약 1.5 콜백, p95 약 2 콜백 (10 ms 간격에서 평균 13–16 ms). PulseAudio의 main에서는 평균 25.4 ms. 이는 콜백 단위 측정이며 스피커/DAC까지의 지연이나 무음 시간이 아님. 느린 저장소나 몇 시간 길이의 MP3에서는 더 걸릴 수 있음. 측정 상세는 issue #550 참조. getPosition()은 즉시 새 위치를 반환하고, 연속으로 호출하면 마지막 호출이 유효. 일시정지 중인 스트림은 재개할 때 그 위치부터 재생. 길이를 알 수 없는 스트림 (getDuration()이 0)은 시크할 수 없으며, 호출은 경고와 함께 무시됨"
                 },
                 {
                     "name": "sound:getDuration",
@@ -21612,7 +21633,7 @@ const TrussCAPI = {
         },
         {
             "name": "SoundStream",
-            "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a refill of usually ~10 ms (a file whose length is unknown cannot seek), and each polyphony slot costs one open file handle + decoder + ring buffer.",
+            "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a ring-buffer refill (see Sound::setPosition() for measured latency; a file whose length is unknown cannot seek), and each polyphony slot costs one open file handle + decoder + ring buffer.",
             "keywords": [
                 "streaming audio",
                 "bgm",
@@ -21620,8 +21641,8 @@ const TrussCAPI = {
                 "disk audio",
                 "on demand"
             ],
-            "desc_ja": "ストリーミングなサウンドソース: ファイルを開いたままにし、全PCMをRAMに置く代わりにvoiceごとの小さなring bufferへオンデマンドにデコードする。SoundSourceから派生(channels / sampleRate / kind() / getDuration()を継承)。長尺ファイル(BGM、ポッドキャスト)に最適。SoundBufferとのトレードオフ: setSpeed()は1.0として扱われ、setPosition()は通常約10 msのrefillでseekし(長さが不明なファイルはseekできない)、polyphonyスロットごとにopenファイルハンドル+デコーダ+ring bufferのコストがかかる",
-            "desc_ko": "스트리밍 사운드 소스: 파일을 열어둔 채로, 전체 PCM을 RAM에 두는 대신 voice별 작은 ring buffer로 on-demand 디코딩. SoundSource에서 파생(channels / sampleRate / kind() / getDuration() 상속). 긴 파일(BGM, 팟캐스트)에 최적. SoundBuffer 대비 트레이드오프: setSpeed()는 1.0으로 처리되고, setPosition()은 보통 약 10 ms의 refill로 seek하며(길이를 알 수 없는 파일은 seek할 수 없음), polyphony 슬롯마다 open 파일 핸들 + 디코더 + ring buffer 비용이 듦",
+            "desc_ja": "ストリーミングなサウンドソース: ファイルを開いたままにし、全PCMをRAMに置く代わりにvoiceごとの小さなring bufferへオンデマンドにデコードする。SoundSourceから派生(channels / sampleRate / kind() / getDuration()を継承)。長尺ファイル(BGM、ポッドキャスト)に最適。SoundBufferとのトレードオフ: setSpeed()は1.0として扱われ、setPosition()はring bufferを補充してseekし(遅延の実測値はSound::setPosition()を参照。長さが不明なファイルはseekできない)、polyphonyスロットごとにopenファイルハンドル+デコーダ+ring bufferのコストがかかる",
+            "desc_ko": "스트리밍 사운드 소스: 파일을 열어둔 채로, 전체 PCM을 RAM에 두는 대신 voice별 작은 ring buffer로 on-demand 디코딩. SoundSource에서 파생(channels / sampleRate / kind() / getDuration() 상속). 긴 파일(BGM, 팟캐스트)에 최적. SoundBuffer 대비 트레이드오프: setSpeed()는 1.0으로 처리되고, setPosition()은 ring buffer를 재충전하여 seek하며(지연 측정값은 Sound::setPosition() 참조. 길이를 알 수 없는 파일은 seek할 수 없음), polyphony 슬롯마다 open 파일 핸들 + 디코더 + ring buffer 비용이 듦",
             "related": [
                 "SoundBuffer",
                 "SoundSource"
@@ -26391,64 +26412,16 @@ const TrussCAPI = {
                     "desc_ko": "현재 재생 위치를 가져옴 (0.0~1.0)"
                 },
                 {
-                    "name": "videoPlayer:getCurrentFrame",
+                    "name": "videoPlayer:getFrameRate",
                     "signatures": [
                         {
                             "ret": "number",
                             "params": ""
                         }
                     ],
-                    "desc": "Get current frame number",
-                    "desc_ja": "現在のフレーム番号を取得",
-                    "desc_ko": "현재 프레임 번호를 가져옴"
-                },
-                {
-                    "name": "videoPlayer:getTotalFrames",
-                    "signatures": [
-                        {
-                            "ret": "number",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "Get total number of frames",
-                    "desc_ja": "総フレーム数を取得",
-                    "desc_ko": "전체 프레임 수를 가져옴"
-                },
-                {
-                    "name": "videoPlayer:setFrame",
-                    "signatures": [
-                        {
-                            "ret": "(nothing)",
-                            "params": "frame"
-                        }
-                    ],
-                    "desc": "Seek to a specific frame number",
-                    "desc_ja": "指定フレームにシーク",
-                    "desc_ko": "지정된 프레임으로 이동"
-                },
-                {
-                    "name": "videoPlayer:nextFrame",
-                    "signatures": [
-                        {
-                            "ret": "(nothing)",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "Advance to the next frame",
-                    "desc_ja": "次のフレームに進む",
-                    "desc_ko": "다음 프레임으로 이동"
-                },
-                {
-                    "name": "videoPlayer:previousFrame",
-                    "signatures": [
-                        {
-                            "ret": "(nothing)",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "Go back to the previous frame",
-                    "desc_ja": "前のフレームに戻る",
-                    "desc_ko": "이전 프레임으로 이동"
+                    "desc": "Get the file frame rate in fps, or 0 when unknown or unloaded. Web returns 0.",
+                    "desc_ja": "ファイルのフレームレート（fps）を取得。不明または未ロードなら 0。Web では 0。",
+                    "desc_ko": "파일의 프레임 레이트(fps)를 가져옴. 알 수 없거나 로드되지 않았으면 0. Web에서는 0."
                 },
                 {
                     "name": "videoPlayer:setGammaCorrection",
@@ -26922,9 +26895,9 @@ const TrussCAPI = {
                             "params": "app"
                         }
                     ],
-                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open or is closing (both log an error and leave the window as it is). setApp() is a request: it returns at once and the window applies it at its next frame boundary (before or after one of its ticks or events), wherever it is called from, including the App's own update() / draw() / keyPressed(). Until then getApp() returns the current App. The last setApp() before the boundary wins, a close() requested before it wins over it, and the checks run again when the request is applied",
-                    "desc_ja": "このウィンドウにAppを設定 (ウィンドウにコンテンツを与える唯一の方法)。Appのライフサイクル一式 (setup/update/draw/キー/マウス/windowResized + RectNodeサイズ同期) がこのウィンドウで動く。1ウィンドウ1App。App は 1 回だけ動く: 最初に付けたときに setup()、ウィンドウを閉じたとき (#318 以降は差し替えで外したときも) に exit() / cleanup()。ウィンドウを閉じると audioOut() / audioIn() も切り離され、元には戻らない。もう一度表示するには新しい App を作る。setApp() は cleanup() 済みの App と、開いていないウィンドウ・閉じる途中のウィンドウへの設定を拒否する (どちらもエラーログを出し、ウィンドウはそのまま)。setApp() はリクエスト: すぐに戻り、ウィンドウは次のフレーム境界 (そのウィンドウの tick やイベントの前後) で反映する。App 自身の update() / draw() / keyPressed() など、どこから呼んでも同じ。それまで getApp() は今の App を返す。境界までの最後の setApp() が有効で、それより前に close() が要求されていれば close() が優先される。チェックは反映時にもう一度行う",
-                    "desc_ko": "이 윈도우에 App을 연결 (윈도우에 콘텐츠를 주는 유일한 방법). App의 전체 라이프사이클이 이 윈도우에서 실행됨. 윈도우당 App 하나. App 은 한 번만 동작한다: 처음 연결할 때 setup(), 윈도우를 닫을 때 (#318 이후에는 교체로 분리될 때도) exit() / cleanup(). 윈도우를 닫으면 audioOut() / audioIn() 도 분리되고 다시 연결되지 않는다. 다시 표시하려면 새 App 을 만든다. setApp() 은 cleanup() 이 이미 실행된 App 과, 열려 있지 않거나 닫히는 중인 윈도우에 대한 설정을 거부한다 (둘 다 에러 로그를 남기고 윈도우는 그대로). setApp() 은 요청이다: 바로 반환되고, 윈도우는 다음 프레임 경계 (그 윈도우의 tick 이나 이벤트의 앞뒤) 에서 반영한다. App 자신의 update() / draw() / keyPressed() 등 어디서 호출해도 같다. 그때까지 getApp() 은 현재 App 을 반환한다. 경계까지의 마지막 setApp() 이 유효하고, 그 전에 close() 가 요청되었으면 close() 가 우선한다. 검사는 반영할 때 다시 수행한다"
+                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when it leaves its window (close(), setApp(other), or setApp(nullptr)), and leaving also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open or is closing (both log an error and leave the window as it is). setApp() is a request: it returns at once and the window applies it at its next frame boundary (before or after one of its ticks or events), wherever it is called from, including the App's own update() / draw() / keyPressed(). Until then getApp() returns the current App. The last setApp() before the boundary wins, a close() requested before it wins over it, and the checks run again when the request is applied",
+                    "desc_ja": "このウィンドウにAppを設定 (ウィンドウにコンテンツを与える唯一の方法)。Appのライフサイクル一式 (setup/update/draw/キー/マウス/windowResized + RectNodeサイズ同期) がこのウィンドウで動く。1ウィンドウ1App。App は 1 回だけ動く: 最初に付けたときに setup()、ウィンドウから外れたとき (close()、setApp() で別の App に差し替えたとき、setApp(nullptr) のとき) に exit() / cleanup()。ウィンドウから外れると audioOut() / audioIn() も切り離され、元には戻らない。もう一度表示するには新しい App を作る。setApp() は cleanup() 済みの App と、開いていないウィンドウ・閉じる途中のウィンドウへの設定を拒否する (どちらもエラーログを出し、ウィンドウはそのまま)。setApp() はリクエスト: すぐに戻り、ウィンドウは次のフレーム境界 (そのウィンドウの tick やイベントの前後) で反映する。App 自身の update() / draw() / keyPressed() など、どこから呼んでも同じ。それまで getApp() は今の App を返す。境界までの最後の setApp() が有効で、それより前に close() が要求されていれば close() が優先される。チェックは反映時にもう一度行う",
+                    "desc_ko": "이 윈도우에 App을 연결 (윈도우에 콘텐츠를 주는 유일한 방법). App의 전체 라이프사이클이 이 윈도우에서 실행됨. 윈도우당 App 하나. App 은 한 번만 동작한다: 처음 연결할 때 setup(), 윈도우에서 분리될 때 (close(), setApp() 으로 다른 App 으로 교체할 때, setApp(nullptr) 일 때) exit() / cleanup(). 윈도우에서 분리되면 audioOut() / audioIn() 도 분리되고 다시 연결되지 않는다. 다시 표시하려면 새 App 을 만든다. setApp() 은 cleanup() 이 이미 실행된 App 과, 열려 있지 않거나 닫히는 중인 윈도우에 대한 설정을 거부한다 (둘 다 에러 로그를 남기고 윈도우는 그대로). setApp() 은 요청이다: 바로 반환되고, 윈도우는 다음 프레임 경계 (그 윈도우의 tick 이나 이벤트의 앞뒤) 에서 반영한다. App 자신의 update() / draw() / keyPressed() 등 어디서 호출해도 같다. 그때까지 getApp() 은 현재 App 을 반환한다. 경계까지의 마지막 setApp() 이 유효하고, 그 전에 close() 가 요청되었으면 close() 가 우선한다. 검사는 반영할 때 다시 수행한다"
                 },
                 {
                     "name": "window:getApp",
@@ -27469,6 +27442,66 @@ const TrussCAPI = {
         }
     ],
     "enums": [
+        {
+            "name": "AudioBackend",
+            "desc": "Audio backend selection: Default uses the platform backend order; Null explicitly runs the real mixer silently without a device.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "Default",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Null",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "オーディオバックエンドの選択。Default はプラットフォームの順序、Null はデバイスなしで実際のミキサーを無音で動かす。",
+            "desc_ko": "오디오 백엔드 선택. Default 는 플랫폼 순서, Null 은 디바이스 없이 실제 믹서를 무음으로 실행한다."
+        },
+        {
+            "name": "AudioInitFailure",
+            "desc": "Initialization failure stage: None, NoBackend (context creation), DeviceOpen, or DeviceStart.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "NoBackend",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DeviceOpen",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DeviceStart",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "初期化失敗の段階: None、NoBackend (コンテキスト作成)、DeviceOpen、DeviceStart。",
+            "desc_ko": "초기화 실패 단계: None, NoBackend (컨텍스트 생성), DeviceOpen, DeviceStart."
+        },
         {
             "name": "AxisMode",
             "desc": "Layout axis sizing: None (fixed), Fill (expand to the parent), Content (fit children).",

@@ -214,7 +214,7 @@ const TrussSketchAPI = {
     {
      "name": "systemFontPath",
      "snippet": "systemFontPath(${1:name})",
-     "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS uses CoreText; Linux/Windows currently stub."
+     "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS / iOS use CoreText, Linux fontconfig, Windows DirectWrite."
     }
    ]
   },
@@ -2224,7 +2224,7 @@ const TrussSketchAPI = {
     {
      "name": "setWindowSize",
      "snippet": "setWindowSize(${1:width}, ${2:height})",
-     "desc": "Set window size"
+     "desc": "Set window size. Resizing the main window is not implemented on Linux yet"
     },
     {
      "name": "setWindowSizeLogical",
@@ -2493,7 +2493,7 @@ const TrussSketchAPI = {
      "name": "setSize",
      "snippet": "setSize(${1:w}, ${2:h})",
      "return": "void",
-     "desc": "Resize the app's own window — the one it is attached to, or the main window for the main App — from any window's callbacks. Same units as setWindowSize(). An App attached to no window only changes its own size. So does an App no shared_ptr owns yet (e.g. inside its constructor), which also warns once: call it in setup()"
+     "desc": "Resize the app's own window — the one it is attached to, or the main window for the main App — from any window's callbacks. Same units as setWindowSize(). An App attached to no window only changes its own size. So does an App no shared_ptr owns yet (e.g. inside its constructor), which also warns once: call it in setup(). Resizing the main window is not implemented on Linux yet"
     },
     {
      "name": "requestExit",
@@ -2511,7 +2511,7 @@ const TrussSketchAPI = {
      "name": "getWindow",
      "snippet": "getWindow()",
      "return": "Window *",
-     "desc": "The Window this App is attached to via Window::setApp(), or nullptr when it is not attached — including the main App started by runApp() and an App whose window was closed. Resolved from the App itself, so subApp->getWindow() returns the right window from any window's callbacks"
+     "desc": "The Window this App is attached to via Window::setApp(), or nullptr when it is not attached — including the main App started by runApp() and an App whose window was closed. `close()` only requests closure; the window remains available until teardown begins. Already nullptr during teardown: inside this App's own exit() / cleanup() and in the window's events().exit listeners, because the native window is destroyed first. Read what you need (title, size, fullscreen) before calling close(), or keep it up to date in update(). Resolved from the App itself, so subApp->getWindow() returns the right window from any window's callbacks"
     },
     {
      "name": "keyPressed",
@@ -2595,13 +2595,31 @@ const TrussSketchAPI = {
      "name": "audioOut",
      "snippet": "audioOut(${1:buf})",
      "return": "void",
-     "desc": "Fill the audio output buffer (override to synthesize audio). Runs on the audio thread. First called right after setup() returns, so what setup() prepares is ready in here; an App that is never run gets no calls. The framework detaches it after cleanup() and waits for a call in flight before it destroys the App (exit, hot reload, closing the App's window), for as long as the call takes: don't wait on the main thread or on a lock the main thread may hold in here, or the teardown hangs (with an error logged after one second). An App runs once: when its window closes it is detached for good; to show the App again, create a new one"
+     "desc": "Fill the audio output buffer (override to synthesize audio). Runs on the audio thread. First called right after setup() returns, so what setup() prepares is ready in here; an App that is never run gets no calls. The framework calls exit(), detaches it and waits as long as necessary for a call in flight before calling cleanup() (exit, hot reload, closing the App's window). cleanup() may free its audio state. Don't wait on the main thread or on a lock the main thread may hold in here, or the teardown hangs (with an error logged after one second). An App runs once: when its window closes it is detached for good; to show the App again, create a new one"
     },
     {
      "name": "audioIn",
      "snippet": "audioIn(${1:buf})",
      "return": "void",
-     "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut. Like audioOut, first called right after setup() returns and detached after cleanup() for good; the same rule applies: don't wait on the main thread or on its locks in here."
+     "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut. Like audioOut, first called right after setup() returns and detached before cleanup() for good; the same rule applies: don't wait on the main thread or on its locks in here."
+    }
+   ]
+  },
+  {
+   "name": "AudioBackend",
+   "desc": "Audio backend selection: Default uses the platform backend order; Null explicitly runs the real mixer silently without a device.",
+   "static_methods": [
+    {
+     "name": "Default",
+     "snippet": "Default",
+     "return": "AudioBackend",
+     "desc": "= 0"
+    },
+    {
+     "name": "Null",
+     "snippet": "Null",
+     "return": "AudioBackend",
+     "desc": "= 1"
     }
    ]
   },
@@ -2665,7 +2683,7 @@ const TrussSketchAPI = {
      "name": "init",
      "snippet": "init()",
      "return": "bool",
-     "desc": "Initialize the engine, or re-initialize it with an AudioSettings override. init(settings) keeps the sample rate, channels, buffer size and polyphony even when it fails; init() with no arguments reuses the last ones (the defaults if init(settings) was never called) but always opens the system default device. Re-init on a running engine migrates active voices to the new settings. With no usable audio backend, miniaudio falls back to its silent Null device: init() then succeeds and logs a warning. Returns true on success, false when no output device can be opened; the failure is logged through logError(\"AudioEngine\") with the requested device name. A failed re-init leaves the engine stopped: the running device is closed before the new one is tried. It may be called again later; each failed try opens the device and logs again, so retry on a timer (about once a second) or on a user action, not every frame. Sound::load*() calls init() while the engine is not initialized, so after a failed init(settings) it opens the system default device with those settings; call init(settings) again before loading sounds if you want the requested device."
+     "desc": "Initialize the engine, or re-initialize it with an AudioSettings override. init(settings) keeps the sample rate, channels, buffer size and polyphony even when it fails; init() with no arguments reuses the last ones (the defaults if init(settings) was never called) but always opens the system default device on AudioBackend::Default. Re-init on a running engine migrates active voices to the new settings. miniaudio reaches Null only when no real backend context can be created; if a context opens but its device cannot, init() returns false without switching backend. Set AudioSettings::backend = AudioBackend::Null for intentional silent operation (one Notice per init). getStats() retains the last init failure until a successful init. Returns true on success, false when no output device can be opened; the failure is logged through logError(\"AudioEngine\") with the requested device name. A failed re-init leaves the engine stopped: the running device is closed before the new one is tried. It may be called again later; each failed try opens the device and logs again, so retry on a timer (about once a second) or on a user action, not every frame. Sound::load*() calls init() while the engine is not initialized, so after a failed init(settings) it opens the system default device with those settings; call init(settings) again before loading sounds if you want the requested device."
     },
     {
      "name": "shutdown",
@@ -2724,6 +2742,36 @@ const TrussSketchAPI = {
      "name": "framePosition",
      "type": "uint64_t",
      "desc": "Monotonic count of input frames received since capture start"
+    }
+   ]
+  },
+  {
+   "name": "AudioInitFailure",
+   "desc": "Initialization failure stage: None, NoBackend (context creation), DeviceOpen, or DeviceStart.",
+   "static_methods": [
+    {
+     "name": "None",
+     "snippet": "None",
+     "return": "AudioInitFailure",
+     "desc": "= 0"
+    },
+    {
+     "name": "NoBackend",
+     "snippet": "NoBackend",
+     "return": "AudioInitFailure",
+     "desc": "= 1"
+    },
+    {
+     "name": "DeviceOpen",
+     "snippet": "DeviceOpen",
+     "return": "AudioInitFailure",
+     "desc": "= 2"
+    },
+    {
+     "name": "DeviceStart",
+     "snippet": "DeviceStart",
+     "return": "AudioInitFailure",
+     "desc": "= 3"
     }
    ]
   },
@@ -2842,6 +2890,11 @@ const TrussSketchAPI = {
      "name": "deviceName",
      "type": "std::string",
      "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate."
+    },
+    {
+     "name": "backend",
+     "type": "AudioBackend",
+     "desc": "Backend to open (Default by default). Set Null and call init(settings) before loading sounds for headless use. Enumeration and native MicInput follow the engine backend; before init, enumeration uses real backends. Zero-argument init() uses Default."
     }
    ]
   },
@@ -2913,6 +2966,16 @@ const TrussSketchAPI = {
      "name": "voicesStoppedByReinit",
      "type": "uint64_t",
      "desc": "Cumulative streaming voices stopped because a live sample-rate re-init could not reopen their decoder. Separate from droppedPlays: these voices had already started successfully. Each failure keeps the existing warning with its file path and decoder result on the thread calling init(); this counter adds no summary warning."
+    },
+    {
+     "name": "initFailure",
+     "type": "AudioInitFailure",
+     "desc": "Last init failure, retained through shutdown and cleared by successful init. tc_get_audio_state includes initFailure with reason, result, backend and requested device only while a failure is recorded."
+    },
+    {
+     "name": "initFailureResult",
+     "type": "int",
+     "desc": "miniaudio result code of the last failed init (for example -401 for a device open failure); 0 when no failure is recorded."
     }
    ]
   },
@@ -5657,7 +5720,7 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:nameOrPath}, ${2:size})",
      "return": "LoadResult",
-     "desc": "Load a font file or a system font name. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins."
+     "desc": "Load a font file or a system font name; faceIndex picks the face in a .ttc. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins."
     },
     {
      "name": "isLoaded",
@@ -10977,13 +11040,13 @@ const TrussSketchAPI = {
      "name": "getPosition",
      "snippet": "getPosition()",
      "return": "float",
-     "desc": "Get playback position in seconds. On a stream, right after setPosition() and until the audio has moved there (usually ~10 ms), this is the requested position."
+     "desc": "Get playback position in seconds. On a stream, right after setPosition() and until the audio has moved there, this is the requested position. See Sound::setPosition() for measured stream seek latency."
     },
     {
      "name": "setPosition",
      "snippet": "setPosition(${1:seconds})",
      "return": "void",
-     "desc": "Seek to a specific time in seconds. On streams the decoder seeks and the ring refills, so the audio moves after ~10 ms of silence (longer on slow storage or for an MP3 several hours long); getPosition() reports the new position at once, the last of several calls wins, and a paused stream resumes from there. A stream whose length is unknown (getDuration() is 0) cannot seek: the call is ignored with a warning."
+     "desc": "Seek to a specific time in seconds. On streams the audio moves after the decoder seeks and the ring refills. Measured seek to first post-seek output callback on WASAPI/CoreAudio: about 1.5 audio callbacks on average, about 2 at p95 (13–16 ms mean with 10 ms callbacks). PulseAudio on main averaged 25.4 ms. These are callback-level timings, not speaker/DAC latency or silence duration; slow storage or an MP3 several hours long can take longer. See issue #550 for measurements. getPosition() reports the new position at once, the last of several calls wins, and a paused stream resumes from there. A stream whose length is unknown (getDuration() is 0) cannot seek: the call is ignored with a warning."
     },
     {
      "name": "getDuration",
@@ -11126,7 +11189,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "SoundStream",
-   "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a refill of usually ~10 ms (a file whose length is unknown cannot seek), and each polyphony slot costs one open file handle + decoder + ring buffer.",
+   "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a ring-buffer refill (see Sound::setPosition() for measured latency; a file whose length is unknown cannot seek), and each polyphony slot costs one open file handle + decoder + ring buffer.",
    "constructor": {
     "snippet": "SoundStream()"
    },
@@ -13868,34 +13931,10 @@ const TrussSketchAPI = {
      "desc": "Get current position (0.0 to 1.0)"
     },
     {
-     "name": "getCurrentFrame",
-     "snippet": "getCurrentFrame()",
-     "return": "int",
-     "desc": "Get current frame number"
-    },
-    {
-     "name": "getTotalFrames",
-     "snippet": "getTotalFrames()",
-     "return": "int",
-     "desc": "Get total number of frames"
-    },
-    {
-     "name": "setFrame",
-     "snippet": "setFrame(${1:frame})",
-     "return": "void",
-     "desc": "Seek to a specific frame number"
-    },
-    {
-     "name": "nextFrame",
-     "snippet": "nextFrame()",
-     "return": "void",
-     "desc": "Advance to the next frame"
-    },
-    {
-     "name": "previousFrame",
-     "snippet": "previousFrame()",
-     "return": "void",
-     "desc": "Go back to the previous frame"
+     "name": "getFrameRate",
+     "snippet": "getFrameRate()",
+     "return": "float",
+     "desc": "Get the file frame rate in fps, or 0 when unknown or unloaded. Web returns 0."
     },
     {
      "name": "setGammaCorrection",
@@ -14132,7 +14171,7 @@ const TrussSketchAPI = {
      "name": "setApp",
      "snippet": "setApp(${1:app})",
      "return": "void",
-     "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open or is closing (both log an error and leave the window as it is). setApp() is a request: it returns at once and the window applies it at its next frame boundary (before or after one of its ticks or events), wherever it is called from, including the App's own update() / draw() / keyPressed(). Until then getApp() returns the current App. The last setApp() before the boundary wins, a close() requested before it wins over it, and the checks run again when the request is applied"
+     "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when it leaves its window (close(), setApp(other), or setApp(nullptr)), and leaving also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open or is closing (both log an error and leave the window as it is). setApp() is a request: it returns at once and the window applies it at its next frame boundary (before or after one of its ticks or events), wherever it is called from, including the App's own update() / draw() / keyPressed(). Until then getApp() returns the current App. The last setApp() before the boundary wins, a close() requested before it wins over it, and the checks run again when the request is applied"
     },
     {
      "name": "getApp",

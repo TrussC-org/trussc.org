@@ -9203,7 +9203,8 @@ const TrussCAPI = {
                         }
                     ],
                     "platformNote": "No-op on Linux (not yet implemented), iOS and Android (fixed fullscreen). Web resizes the canvas.",
-                    "platformNote_ja": "Linux（未実装）/ iOS / Android（全画面固定）では no-op。Web は canvas をリサイズ。"
+                    "platformNote_ja": "Linux（未実装）/ iOS / Android（全画面固定）では no-op。Web は canvas をリサイズ。",
+                    "platformNote_ko": "Linux(미구현) / iOS / Android(전체 화면 고정)에서는 no-op. Web은 canvas를 리사이즈."
                 },
                 {
                     "name": "setKeepScreenOn",
@@ -9428,15 +9429,15 @@ const TrussCAPI = {
                     "params": "width, height",
                     "params_typed": "int width, int height",
                     "return_type": "void",
-                    "desc": "Set window size",
+                    "desc": "Set window size. Resizing the main window is not implemented on Linux yet",
                     "keywords": [
                         "resize",
                         "dimensions",
                         "width height",
                         "resolution"
                     ],
-                    "desc_ja": "ウィンドウのサイズを設定",
-                    "desc_ko": "윈도우 크기를 설정",
+                    "desc_ja": "ウィンドウのサイズを設定。メインウィンドウのリサイズは Linux ではまだ未実装",
+                    "desc_ko": "윈도우 크기를 설정. 메인 윈도우 리사이즈는 Linux에서 아직 미구현",
                     "related": [
                         "getWindowSize",
                         "setWindowSizeLogical",
@@ -9447,7 +9448,10 @@ const TrussCAPI = {
                             "name": "AllFeaturesExample",
                             "group": "tests"
                         }
-                    ]
+                    ],
+                    "platformNote": "Resizing the main window is a no-op on Linux (not yet implemented), iOS and Android (fixed fullscreen). Web resizes the canvas. A window created with createWindow() resizes on Linux too.",
+                    "platformNote_ja": "メインウィンドウのリサイズは Linux（未実装）/ iOS / Android（全画面固定）では no-op。Web は canvas をリサイズ。createWindow() で作ったウィンドウは Linux でもリサイズされる。",
+                    "platformNote_ko": "메인 윈도우 리사이즈는 Linux(미구현) / iOS / Android(전체 화면 고정)에서 no-op. Web은 canvas를 리사이즈. createWindow()로 만든 윈도우는 Linux에서도 리사이즈됨."
                 },
                 {
                     "name": "setFullscreen",
@@ -13245,14 +13249,14 @@ const TrussCAPI = {
                     "params": "name",
                     "params_typed": "const std::string & name",
                     "return_type": "fs::path",
-                    "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS uses CoreText; Linux/Windows currently stub.",
+                    "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS / iOS use CoreText, Linux fontconfig, Windows DirectWrite.",
                     "keywords": [
                         "resolve",
                         "lookup",
                         "find",
                         "os font"
                     ],
-                    "desc_ja": "システムフォント名（PostScript 名や family 名）をファイルパスに解決。見つからなければ空文字を返す。macOS は CoreText、Linux/Win は現状スタブ",
+                    "desc_ja": "システムフォント名（PostScript 名や family 名）をファイルパスに解決。見つからなければ空文字を返す。macOS / iOS は CoreText、Linux は fontconfig、Windows は DirectWrite",
                     "desc_ko": "시스템 폰트 이름을 파일 경로로 변환",
                     "related": [
                         "listSystemFonts"
@@ -21985,8 +21989,7 @@ const TrussCAPI = {
                         "macos",
                         "windows",
                         "linux",
-                        "ios",
-                        "web"
+                        "ios"
                     ],
                     "platformNote": "Memory-based AAC decode. Real impls on macOS/iOS (AVFoundation), Windows (Media Foundation), Linux (GStreamer). STUBBED on Android (returns false) and on wasm (logs 'loadAacFromMemory() not yet implemented for Web (use file path instead)' and returns false). Not documented in api-definition.yaml.",
                     "platformNote_ja": "メモリからの AAC デコード。macOS/iOS (AVFoundation)、Windows (Media Foundation)、Linux (GStreamer) は実装あり。Android はスタブで false、wasm も 'loadAacFromMemory() not yet implemented for Web' を出して false。api-definition.yaml には未記載。"
@@ -22137,7 +22140,7 @@ const TrussCAPI = {
         },
         {
             "name": "SoundStream",
-            "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a refill of usually ~10 ms (a file whose length is unknown cannot seek), and each polyphony slot costs one open file handle + decoder + ring buffer.",
+            "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a ring-buffer refill (see Sound::setPosition() for measured latency; a file whose length is unknown cannot seek), and each polyphony slot costs one open file handle + decoder + ring buffer.",
             "keywords": [
                 "streaming audio",
                 "bgm",
@@ -22145,8 +22148,8 @@ const TrussCAPI = {
                 "disk audio",
                 "on demand"
             ],
-            "desc_ja": "ストリーミングなサウンドソース: ファイルを開いたままにし、全PCMをRAMに置く代わりにvoiceごとの小さなring bufferへオンデマンドにデコードする。SoundSourceから派生(channels / sampleRate / kind() / getDuration()を継承)。長尺ファイル(BGM、ポッドキャスト)に最適。SoundBufferとのトレードオフ: setSpeed()は1.0として扱われ、setPosition()は通常約10 msのrefillでseekし(長さが不明なファイルはseekできない)、polyphonyスロットごとにopenファイルハンドル+デコーダ+ring bufferのコストがかかる",
-            "desc_ko": "스트리밍 사운드 소스: 파일을 열어둔 채로, 전체 PCM을 RAM에 두는 대신 voice별 작은 ring buffer로 on-demand 디코딩. SoundSource에서 파생(channels / sampleRate / kind() / getDuration() 상속). 긴 파일(BGM, 팟캐스트)에 최적. SoundBuffer 대비 트레이드오프: setSpeed()는 1.0으로 처리되고, setPosition()은 보통 약 10 ms의 refill로 seek하며(길이를 알 수 없는 파일은 seek할 수 없음), polyphony 슬롯마다 open 파일 핸들 + 디코더 + ring buffer 비용이 듦",
+            "desc_ja": "ストリーミングなサウンドソース: ファイルを開いたままにし、全PCMをRAMに置く代わりにvoiceごとの小さなring bufferへオンデマンドにデコードする。SoundSourceから派生(channels / sampleRate / kind() / getDuration()を継承)。長尺ファイル(BGM、ポッドキャスト)に最適。SoundBufferとのトレードオフ: setSpeed()は1.0として扱われ、setPosition()はring bufferを補充してseekし(遅延の実測値はSound::setPosition()を参照。長さが不明なファイルはseekできない)、polyphonyスロットごとにopenファイルハンドル+デコーダ+ring bufferのコストがかかる",
+            "desc_ko": "스트리밍 사운드 소스: 파일을 열어둔 채로, 전체 PCM을 RAM에 두는 대신 voice별 작은 ring buffer로 on-demand 디코딩. SoundSource에서 파생(channels / sampleRate / kind() / getDuration() 상속). 긴 파일(BGM, 팟캐스트)에 최적. SoundBuffer 대비 트레이드오프: setSpeed()는 1.0으로 처리되고, setPosition()은 ring buffer를 재충전하여 seek하며(지연 측정값은 Sound::setPosition() 참조. 길이를 알 수 없는 파일은 seek할 수 없음), polyphony 슬롯마다 open 파일 핸들 + 디코더 + ring buffer 비용이 듦",
             "examples": [
                 {
                     "name": "AllFeaturesExample",
@@ -22393,6 +22396,13 @@ const TrussCAPI = {
                     "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate.",
                     "desc_ja": "再生デバイス名、空 = システム既定。列挙には AudioEngine::listDevices() を使う",
                     "desc_ko": "재생 디바이스 이름, 비어 있으면 시스템 기본값. 열거에는 AudioEngine::listDevices() 사용"
+                },
+                {
+                    "name": "backend",
+                    "type": "AudioBackend",
+                    "desc": "Backend to open (Default by default). Set Null and call init(settings) before loading sounds for headless use. Enumeration and native MicInput follow the engine backend; before init, enumeration uses real backends. Zero-argument init() uses Default.",
+                    "desc_ja": "開くバックエンド (既定 Default)。ヘッドレス実行では Null を指定してサウンド読込前に init(settings) を呼ぶ。列挙とネイティブ MicInput はエンジンのバックエンドに従う。init 前の列挙は実バックエンドを使う。引数なしの init() は Default を使う。",
+                    "desc_ko": "열 백엔드 (기본 Default). 헤드리스 실행에는 Null 을 지정하고 사운드 로드 전에 init(settings) 를 호출한다. 열거와 네이티브 MicInput 은 엔진 백엔드를 따른다. init 전 열거는 실제 백엔드를 사용한다. 인수 없는 init() 은 Default 를 사용한다."
                 }
             ]
         },
@@ -22850,6 +22860,27 @@ const TrussCAPI = {
                     "desc": "Cumulative streaming voices stopped because a live sample-rate re-init could not reopen their decoder. Separate from droppedPlays: these voices had already started successfully. Each failure keeps the existing warning with its file path and decoder result on the thread calling init(); this counter adds no summary warning.",
                     "desc_ja": "動作中のサンプルレート再初期化でデコーダーを開き直せず停止したストリーム再生インスタンスの累計。再生開始は成功していたため droppedPlays とは別に数える。各失敗は init() を呼んだスレッドでファイルパスとデコーダーの結果値を含む既存の警告を出す。このカウンタによる集約警告は追加しない",
                     "desc_ko": "동작 중 샘플 레이트 재초기화에서 디코더를 다시 열 수 없어 정지한 스트림 재생 인스턴스 누계. 재생 시작은 성공했으므로 droppedPlays 와 별도로 센다. 각 실패는 init() 을 호출한 스레드에서 파일 경로와 디코더 결과 값을 포함하는 기존 경고를 남긴다. 이 카운터는 요약 경고를 추가하지 않는다"
+                },
+                {
+                    "name": "initFailure",
+                    "type": "AudioInitFailure",
+                    "desc": "Last init failure, retained through shutdown and cleared by successful init. tc_get_audio_state includes initFailure with reason, result, backend and requested device only while a failure is recorded.",
+                    "desc_ja": "最後の初期化失敗。shutdown 後も保持し、init 成功でクリアする。tc_get_audio_state は失敗記録があるときだけ reason、result、backend、要求デバイス名を含む initFailure を返す。",
+                    "desc_ko": "마지막 초기화 실패. shutdown 후에도 유지하며 init 성공 시 지운다. tc_get_audio_state 는 실패 기록이 있을 때만 reason, result, backend, 요청 디바이스 이름을 담은 initFailure 를 반환한다."
+                },
+                {
+                    "name": "initFailureResult",
+                    "type": "int",
+                    "desc": "miniaudio result code of the last failed init (for example -401 for a device open failure); 0 when no failure is recorded.",
+                    "desc_ja": "最後の初期化失敗の miniaudio 結果コード (例: デバイスを開けない場合 -401)。失敗記録がなければ 0。",
+                    "desc_ko": "마지막 초기화 실패의 miniaudio 결과 코드 (예: 디바이스 열기 실패 -401). 실패 기록이 없으면 0."
+                },
+                {
+                    "name": "initFailureBackend",
+                    "type": "const char *",
+                    "desc": "Static backend name resolved from the atomic failure snapshot. Empty when no backend context opened or no failure is recorded.",
+                    "desc_ja": "atomic な失敗スナップショットから解決する静的なバックエンド名。コンテキストが開かなかった場合や失敗記録がない場合は空。",
+                    "desc_ko": "atomic 실패 스냅샷에서 해석한 정적 백엔드 이름. 컨텍스트를 열지 못했거나 실패 기록이 없으면 비어 있다."
                 }
             ]
         },
@@ -22918,7 +22949,7 @@ const TrussCAPI = {
                             "params": "const AudioSettings & settings"
                         }
                     ],
-                    "desc": "Initialize the engine, or re-initialize it with an AudioSettings override. init(settings) keeps the sample rate, channels, buffer size and polyphony even when it fails; init() with no arguments reuses the last ones (the defaults if init(settings) was never called) but always opens the system default device. Re-init on a running engine migrates active voices to the new settings. With no usable audio backend, miniaudio falls back to its silent Null device: init() then succeeds and logs a warning. Returns true on success, false when no output device can be opened; the failure is logged through logError(\"AudioEngine\") with the requested device name. A failed re-init leaves the engine stopped: the running device is closed before the new one is tried. It may be called again later; each failed try opens the device and logs again, so retry on a timer (about once a second) or on a user action, not every frame. Sound::load*() calls init() while the engine is not initialized, so after a failed init(settings) it opens the system default device with those settings; call init(settings) again before loading sounds if you want the requested device."
+                    "desc": "Initialize the engine, or re-initialize it with an AudioSettings override. init(settings) keeps the sample rate, channels, buffer size and polyphony even when it fails; init() with no arguments reuses the last ones (the defaults if init(settings) was never called) but always opens the system default device on AudioBackend::Default. Re-init on a running engine migrates active voices to the new settings. miniaudio reaches Null only when no real backend context can be created; if a context opens but its device cannot, init() returns false without switching backend. Set AudioSettings::backend = AudioBackend::Null for intentional silent operation (one Notice per init). getStats() retains the last init failure until a successful init. Returns true on success, false when no output device can be opened; the failure is logged through logError(\"AudioEngine\") with the requested device name. A failed re-init leaves the engine stopped: the running device is closed before the new one is tried. It may be called again later; each failed try opens the device and logs again, so retry on a timer (about once a second) or on a user action, not every frame. Sound::load*() calls init() while the engine is not initialized, so after a failed init(settings) it opens the system default device with those settings; call init(settings) again before loading sounds if you want the requested device."
                 },
                 {
                     "name": "shutdown",
@@ -23408,7 +23439,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get playback position in seconds. On a stream, right after setPosition() and until the audio has moved there (usually ~10 ms), this is the requested position."
+                    "desc": "Get playback position in seconds. On a stream, right after setPosition() and until the audio has moved there, this is the requested position. See Sound::setPosition() for measured stream seek latency."
                 },
                 {
                     "name": "setPosition",
@@ -23418,7 +23449,7 @@ const TrussCAPI = {
                             "params": "float seconds"
                         }
                     ],
-                    "desc": "Seek to a specific time in seconds. On streams the decoder seeks and the ring refills, so the audio moves after ~10 ms of silence (longer on slow storage or for an MP3 several hours long); getPosition() reports the new position at once, the last of several calls wins, and a paused stream resumes from there. A stream whose length is unknown (getDuration() is 0) cannot seek: the call is ignored with a warning."
+                    "desc": "Seek to a specific time in seconds. On streams the audio moves after the decoder seeks and the ring refills. Measured seek to first post-seek output callback on WASAPI/CoreAudio: about 1.5 audio callbacks on average, about 2 at p95 (13–16 ms mean with 10 ms callbacks). PulseAudio on main averaged 25.4 ms. These are callback-level timings, not speaker/DAC latency or silence duration; slow storage or an MP3 several hours long can take longer. See issue #550 for measurements. getPosition() reports the new position at once, the last of several calls wins, and a paused stream resumes from there. A stream whose length is unknown (getDuration() is 0) cannot seek: the call is ignored with a warning."
                 },
                 {
                     "name": "getDuration",
@@ -28716,10 +28747,10 @@ const TrussCAPI = {
                     "signatures": [
                         {
                             "ret": "LoadResult",
-                            "params": "const fs::path & nameOrPath, int size"
+                            "params": "const fs::path & nameOrPath, int size, int faceIndex = 0"
                         }
                     ],
-                    "desc": "Load a font file or a system font name. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins."
+                    "desc": "Load a font file or a system font name; faceIndex picks the face in a .ttc. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins."
                 },
                 {
                     "name": "isLoaded",
@@ -30587,6 +30618,16 @@ const TrussCAPI = {
                     "desc": "Check if looping is enabled"
                 },
                 {
+                    "name": "getFrameRate",
+                    "signatures": [
+                        {
+                            "ret": "float",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the file frame rate in fps, or 0 when unknown or unloaded. Implemented by each video player."
+                },
+                {
                     "name": "getCurrentFrame",
                     "signatures": [
                         {
@@ -30594,7 +30635,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Return the index of the current frame."
+                    "desc": "Get current frame number; 0 when the frame rate is unknown."
                 },
                 {
                     "name": "getTotalFrames",
@@ -30604,7 +30645,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Return the total number of frames in the video."
+                    "desc": "Get total frame count; 0 when the frame rate is unknown."
                 },
                 {
                     "name": "setFrame",
@@ -30614,7 +30655,7 @@ const TrussCAPI = {
                             "params": "int frame"
                         }
                     ],
-                    "desc": "Seek to the given frame index."
+                    "desc": "Seek to a frame number; does nothing when the frame rate is unknown (0)."
                 },
                 {
                     "name": "nextFrame",
@@ -30624,7 +30665,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Advance to the next frame."
+                    "desc": "Advance one frame; does nothing when the frame rate is unknown (0)."
                 },
                 {
                     "name": "previousFrame",
@@ -30634,7 +30675,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Step back to the previous frame."
+                    "desc": "Go back one frame; does nothing when the frame rate is unknown (0)."
                 },
                 {
                     "name": "firstFrame",
@@ -30901,54 +30942,14 @@ const TrussCAPI = {
                     "desc": "Get current position (0.0 to 1.0)"
                 },
                 {
-                    "name": "getCurrentFrame",
+                    "name": "getFrameRate",
                     "signatures": [
                         {
-                            "ret": "int",
+                            "ret": "float",
                             "params": ""
                         }
                     ],
-                    "desc": "Get current frame number"
-                },
-                {
-                    "name": "getTotalFrames",
-                    "signatures": [
-                        {
-                            "ret": "int",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "Get total number of frames"
-                },
-                {
-                    "name": "setFrame",
-                    "signatures": [
-                        {
-                            "ret": "void",
-                            "params": "int frame"
-                        }
-                    ],
-                    "desc": "Seek to a specific frame number"
-                },
-                {
-                    "name": "nextFrame",
-                    "signatures": [
-                        {
-                            "ret": "void",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "Advance to the next frame"
-                },
-                {
-                    "name": "previousFrame",
-                    "signatures": [
-                        {
-                            "ret": "void",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "Go back to the previous frame"
+                    "desc": "Get the file frame rate in fps, or 0 when unknown or unloaded. Web returns 0."
                 },
                 {
                     "name": "setGammaCorrection",
@@ -37326,7 +37327,10 @@ const TrussCAPI = {
                             "params": "float w, float h"
                         }
                     ],
-                    "desc": "Resize the app's own window — the one it is attached to, or the main window for the main App — from any window's callbacks. Same units as setWindowSize(). An App attached to no window only changes its own size. So does an App no shared_ptr owns yet (e.g. inside its constructor), which also warns once: call it in setup()"
+                    "desc": "Resize the app's own window — the one it is attached to, or the main window for the main App — from any window's callbacks. Same units as setWindowSize(). An App attached to no window only changes its own size. So does an App no shared_ptr owns yet (e.g. inside its constructor), which also warns once: call it in setup(). Resizing the main window is not implemented on Linux yet",
+                    "platformNote": "Resizing the main window is a no-op on Linux (not yet implemented), iOS and Android (fixed fullscreen). Web resizes the canvas. A window created with createWindow() resizes on Linux too.",
+                    "platformNote_ja": "メインウィンドウのリサイズは Linux（未実装）/ iOS / Android（全画面固定）では no-op。Web は canvas をリサイズ。createWindow() で作ったウィンドウは Linux でもリサイズされる。",
+                    "platformNote_ko": "메인 윈도우 리사이즈는 Linux(미구현) / iOS / Android(전체 화면 고정)에서 no-op. Web은 canvas를 리사이즈. createWindow()로 만든 윈도우는 Linux에서도 리사이즈됨."
                 },
                 {
                     "name": "requestExit",
@@ -37356,7 +37360,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "The Window this App is attached to via Window::setApp(), or nullptr when it is not attached — including the main App started by runApp() and an App whose window was closed. Resolved from the App itself, so subApp->getWindow() returns the right window from any window's callbacks"
+                    "desc": "The Window this App is attached to via Window::setApp(), or nullptr when it is not attached — including the main App started by runApp() and an App whose window was closed. `close()` only requests closure; the window remains available until teardown begins. Already nullptr during teardown: inside this App's own exit() / cleanup() and in the window's events().exit listeners, because the native window is destroyed first. Read what you need (title, size, fullscreen) before calling close(), or keep it up to date in update(). Resolved from the App itself, so subApp->getWindow() returns the right window from any window's callbacks"
                 },
                 {
                     "name": "keyPressed",
@@ -37524,7 +37528,7 @@ const TrussCAPI = {
                             "params": "AudioOutBuffer & buf"
                         }
                     ],
-                    "desc": "Fill the audio output buffer (override to synthesize audio). Runs on the audio thread. First called right after setup() returns, so what setup() prepares is ready in here; an App that is never run gets no calls. The framework detaches it after cleanup() and waits for a call in flight before it destroys the App (exit, hot reload, closing the App's window), for as long as the call takes: don't wait on the main thread or on a lock the main thread may hold in here, or the teardown hangs (with an error logged after one second). An App runs once: when its window closes it is detached for good; to show the App again, create a new one"
+                    "desc": "Fill the audio output buffer (override to synthesize audio). Runs on the audio thread. First called right after setup() returns, so what setup() prepares is ready in here; an App that is never run gets no calls. The framework calls exit(), detaches it and waits as long as necessary for a call in flight before calling cleanup() (exit, hot reload, closing the App's window). cleanup() may free its audio state. Don't wait on the main thread or on a lock the main thread may hold in here, or the teardown hangs (with an error logged after one second). An App runs once: when its window closes it is detached for good; to show the App again, create a new one"
                 },
                 {
                     "name": "audioIn",
@@ -37534,7 +37538,7 @@ const TrussCAPI = {
                             "params": "const AudioInBuffer & buf"
                         }
                     ],
-                    "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut. Like audioOut, first called right after setup() returns and detached after cleanup() for good; the same rule applies: don't wait on the main thread or on its locks in here."
+                    "desc": "Real-time capture callback event (microphone input). RT-safe same as audioOut. Like audioOut, first called right after setup() returns and detached before cleanup() for good; the same rule applies: don't wait on the main thread or on its locks in here."
                 }
             ]
         },
@@ -37615,7 +37619,7 @@ const TrussCAPI = {
                             "params": "std::shared_ptr<App> app"
                         }
                     ],
-                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when its window closes (or, with #318, when it is swapped out), and closing the window also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open or is closing (both log an error and leave the window as it is). setApp() is a request: it returns at once and the window applies it at its next frame boundary (before or after one of its ticks or events), wherever it is called from, including the App's own update() / draw() / keyPressed(). Until then getApp() returns the current App. The last setApp() before the boundary wins, a close() requested before it wins over it, and the checks run again when the request is applied"
+                    "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when it leaves its window (close(), setApp(other), or setApp(nullptr)), and leaving also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open or is closing (both log an error and leave the window as it is). setApp() is a request: it returns at once and the window applies it at its next frame boundary (before or after one of its ticks or events), wherever it is called from, including the App's own update() / draw() / keyPressed(). Until then getApp() returns the current App. The last setApp() before the boundary wins, a close() requested before it wins over it, and the checks run again when the request is applied"
                 },
                 {
                     "name": "getApp",
@@ -38162,6 +38166,66 @@ const TrussCAPI = {
                 "Sound::setMixMode",
                 "Sound"
             ]
+        },
+        {
+            "name": "AudioBackend",
+            "desc": "Audio backend selection: Default uses the platform backend order; Null explicitly runs the real mixer silently without a device.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "Default",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Null",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "オーディオバックエンドの選択。Default はプラットフォームの順序、Null はデバイスなしで実際のミキサーを無音で動かす。",
+            "desc_ko": "오디오 백엔드 선택. Default 는 플랫폼 순서, Null 은 디바이스 없이 실제 믹서를 무음으로 실행한다."
+        },
+        {
+            "name": "AudioInitFailure",
+            "desc": "Initialization failure stage: None, NoBackend (context creation), DeviceOpen, or DeviceStart.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "NoBackend",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DeviceOpen",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DeviceStart",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "初期化失敗の段階: None、NoBackend (コンテキスト作成)、DeviceOpen、DeviceStart。",
+            "desc_ko": "초기화 실패 단계: None, NoBackend (컨텍스트 생성), DeviceOpen, DeviceStart."
         },
         {
             "name": "Beep",
