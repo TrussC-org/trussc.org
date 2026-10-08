@@ -21303,10 +21303,10 @@ const TrussCAPI = {
             "properties": [
                 {
                     "name": "touches",
-                    "type": "TouchPoint[8]",
-                    "desc": "Array of active touch points (up to MAX_TOUCHES = 8)",
-                    "desc_ja": "アクティブなタッチ点の配列(最大 MAX_TOUCHES = 8)",
-                    "desc_ko": "활성 터치 포인트의 배열(최대 MAX_TOUCHES = 8)"
+                    "type": "TouchPoint[32]",
+                    "desc": "Array of active touch points (up to MAX_TOUCHES = 32)",
+                    "desc_ja": "アクティブなタッチ点の配列(最大 MAX_TOUCHES = 32)",
+                    "desc_ko": "활성 터치 포인트의 배열(최대 MAX_TOUCHES = 32)"
                 },
                 {
                     "name": "numTouches",
