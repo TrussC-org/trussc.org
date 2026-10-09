@@ -11200,9 +11200,16 @@ const TrussCAPI = {
                 {
                     "name": "exitRequestEventArgs.cancel",
                     "type": "boolean",
-                    "desc": "Set true in a listener to cancel the requested exit",
-                    "desc_ja": "リスナーで true にすると要求された終了をキャンセル",
-                    "desc_ko": "리스너에서 true로 설정하면 요청된 종료를 취소"
+                    "desc": "Set true in a listener to cancel the requested exit. Windowed Windows session\nend (including Restart Manager), macOS termination and Linux/macOS SIGTERM or\nSIGINT use this event too. After a veto the user starts shutdown again. A second\nsignal forces termination. Forced OS shutdown cannot be blocked; Windows gives\nexit()/cleanup() only a few seconds after WM_ENDSESSION(TRUE).\n",
+                    "desc_ja": "リスナーで true にすると終了要求をキャンセル。ウィンドウ付きアプリの Windows\nセッション終了（Restart Manager を含む）、macOS 終了、Linux/macOS の SIGTERM・SIGINT\nもこのイベントを通る。キャンセル後はユーザーが終了操作をやり直す。2 回目のシグナルは\n強制終了する。OS の強制終了は阻止できず、Windows の WM_ENDSESSION(TRUE) 後に\nexit()/cleanup() を実行できる時間は数秒に限られる。\n",
+                    "desc_ko": "리스너에서 true로 설정하면 종료 요청을 취소한다. 창 앱의 Windows 세션 종료\n(Restart Manager 포함), macOS 종료, Linux/macOS SIGTERM 및 SIGINT도 이 이벤트를 거친다.\n취소 후 사용자가 종료를 다시 시작한다. 두 번째 시그널은 강제 종료한다. OS의 강제 종료는\n막을 수 없으며 Windows WM_ENDSESSION(TRUE) 이후 exit()/cleanup() 실행 시간은 몇 초뿐이다.\n"
+                },
+                {
+                    "name": "exitRequestEventArgs.reason",
+                    "type": "string",
+                    "desc": "Optional explanation shown by Windows when cancel blocks shutdown or logoff; empty uses a generic busy message",
+                    "desc_ja": "cancel で Windows のシャットダウンやログオフを止める理由。空なら汎用の処理中メッセージを表示",
+                    "desc_ko": "cancel로 Windows 종료나 로그오프를 막을 때 표시할 이유. 비어 있으면 일반적인 작업 중 메시지 표시"
                 }
             ]
         },
@@ -20567,9 +20574,21 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of bytes available to read; 0 when not connected (a lost device also closes the port and fires onDisconnect)",
-                    "desc_ja": "読み取り可能なバイト数。未接続なら0（デバイスの消失を検出するとポートを閉じ、onDisconnect も発火）",
-                    "desc_ko": "읽을 수 있는 바이트 수. 연결되지 않았으면 0 (장치 소실을 감지하면 포트를 닫고 onDisconnect도 발생)"
+                    "desc": "Number of bytes buffered by TrussC to read; 0 when not connected (a lost device also closes the port and fires onDisconnect)",
+                    "desc_ja": "TrussC がバッファに保持している読み取り可能なバイト数。未接続なら0（デバイスの消失を検出するとポートを閉じ、onDisconnect も発火）",
+                    "desc_ko": "TrussC 버퍼에서 읽을 수 있는 바이트 수. 연결되지 않았으면 0 (장치 소실을 감지하면 포트를 닫고 onDisconnect도 발생)"
+                },
+                {
+                    "name": "serial:getDroppedByteCount",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Received bytes discarded by the 1 MiB TrussC buffer since the last setup(); flush and close preserve the count",
+                    "desc_ja": "直近の setup() 以降、1 MiB の TrussC バッファから破棄された受信バイト数。flush と close では累計を保持",
+                    "desc_ko": "마지막 setup() 이후 1 MiB TrussC 버퍼에서 버린 수신 바이트 수. flush와 close는 누적 수를 유지"
                 },
                 {
                     "name": "serial:readByte",
@@ -26299,6 +26318,30 @@ const TrussCAPI = {
                 ]
             },
             "methods": [
+                {
+                    "name": "videoPlayer:setAudioStreaming",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "streaming"
+                        }
+                    ],
+                    "desc": "Choose Linux audio streaming (default true). Call before load(); false preloads the whole track for sample-accurate loops and seeks. Changes apply to the next load.",
+                    "desc_ja": "Linux の音声ストリーミングを選択（既定 true）。load() 前に false を指定すると音声全体をメモリに読み込み、サンプル精度でループとシークする。変更は次回の load() から適用。",
+                    "desc_ko": "Linux 오디오 스트리밍을 선택(기본 true). load() 전에 false로 설정하면 전체 트랙을 메모리에 로드하여 샘플 단위 루프와 탐색을 사용한다. 변경은 다음 load()부터 적용."
+                },
+                {
+                    "name": "videoPlayer:isAudioStreaming",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the audio streaming preference (default true); on Linux it applies to the next load(). Native OS players ignore the preference.",
+                    "desc_ja": "音声ストリーミングの設定を返す（既定 true）。Linux では次回の load() から適用。ネイティブ OS プレイヤーはこの設定を無視する。",
+                    "desc_ko": "오디오 스트리밍 설정을 반환(기본 true). Linux에서는 다음 load()부터 적용. 네이티브 OS 플레이어는 이 설정을 무시한다."
+                },
                 {
                     "name": "videoPlayer:load",
                     "signatures": [

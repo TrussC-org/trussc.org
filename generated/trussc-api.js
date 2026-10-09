@@ -21417,9 +21417,16 @@ const TrussCAPI = {
                 {
                     "name": "cancel",
                     "type": "bool",
-                    "desc": "Set true in a listener to cancel the requested exit",
-                    "desc_ja": "リスナーで true にすると要求された終了をキャンセル",
-                    "desc_ko": "리스너에서 true로 설정하면 요청된 종료를 취소"
+                    "desc": "Set true in a listener to cancel the requested exit. Windowed Windows session\nend (including Restart Manager), macOS termination and Linux/macOS SIGTERM or\nSIGINT use this event too. After a veto the user starts shutdown again. A second\nsignal forces termination. Forced OS shutdown cannot be blocked; Windows gives\nexit()/cleanup() only a few seconds after WM_ENDSESSION(TRUE).",
+                    "desc_ja": "リスナーで true にすると終了要求をキャンセル。ウィンドウ付きアプリの Windows\nセッション終了（Restart Manager を含む）、macOS 終了、Linux/macOS の SIGTERM・SIGINT\nもこのイベントを通る。キャンセル後はユーザーが終了操作をやり直す。2 回目のシグナルは\n強制終了する。OS の強制終了は阻止できず、Windows の WM_ENDSESSION(TRUE) 後に\nexit()/cleanup() を実行できる時間は数秒に限られる。",
+                    "desc_ko": "리스너에서 true로 설정하면 종료 요청을 취소한다. 창 앱의 Windows 세션 종료\n(Restart Manager 포함), macOS 종료, Linux/macOS SIGTERM 및 SIGINT도 이 이벤트를 거친다.\n취소 후 사용자가 종료를 다시 시작한다. 두 번째 시그널은 강제 종료한다. OS의 강제 종료는\n막을 수 없으며 Windows WM_ENDSESSION(TRUE) 이후 exit()/cleanup() 실행 시간은 몇 초뿐이다."
+                },
+                {
+                    "name": "reason",
+                    "type": "std::string",
+                    "desc": "Optional explanation shown by Windows when cancel blocks shutdown or logoff; empty uses a generic busy message",
+                    "desc_ja": "cancel で Windows のシャットダウンやログオフを止める理由。空なら汎用の処理中メッセージを表示",
+                    "desc_ko": "cancel로 Windows 종료나 로그오프를 막을 때 표시할 이유. 비어 있으면 일반적인 작업 중 메시지 표시"
                 }
             ]
         },
@@ -30848,6 +30855,29 @@ const TrussCAPI = {
             },
             "methods": [
                 {
+                    "name": "setAudioStreaming",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "bool streaming"
+                        }
+                    ],
+                    "desc": "Choose Linux audio streaming (default true). Call before load(); false preloads the whole track for sample-accurate loops and seeks. Changes apply to the next load.",
+                    "platformNote": "Linux only: streaming keeps audio memory bounded, loops in the stream worker without seeking audio at each video loop, and explicit seeks may have a short refill gap. HTTP(S) URLs are supported. macOS/iOS, Windows and Web use native audio playback and ignore this setting, logging a notice once when false is selected. Android currently has no video audio.",
+                    "platformNote_ja": "Linux のみ有効。ストリーミングは音声メモリを一定に保ち、動画ループごとに音声をシークせずワーカー内でループする。明示的シークでは短い再充填の隙間が生じる場合がある。HTTP(S) URL にも対応。macOS/iOS、Windows、Web はネイティブ音声再生のため設定を無視し、false 指定時に一度だけ通知ログを出す。Android は動画音声未対応。",
+                    "platformNote_ko": "Linux에서만 유효. 스트리밍은 오디오 메모리를 일정하게 유지하고 매 비디오 루프에서 오디오를 탐색하지 않고 워커 안에서 반복한다. 명시적 탐색에는 짧은 버퍼 충전 공백이 생길 수 있다. HTTP(S) URL도 지원한다. macOS/iOS, Windows, Web은 네이티브 오디오 재생을 사용하여 이 설정을 무시하고 false 선택 시 한 번 알림을 기록한다. Android는 비디오 오디오 미지원."
+                },
+                {
+                    "name": "isAudioStreaming",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the audio streaming preference (default true); on Linux it applies to the next load(). Native OS players ignore the preference."
+                },
+                {
                     "name": "load",
                     "signatures": [
                         {
@@ -33999,7 +34029,17 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of bytes available to read; 0 when not connected (a lost device also closes the port and fires onDisconnect)"
+                    "desc": "Number of bytes buffered by TrussC to read; 0 when not connected (a lost device also closes the port and fires onDisconnect)"
+                },
+                {
+                    "name": "getDroppedByteCount",
+                    "signatures": [
+                        {
+                            "ret": "size_t",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Received bytes discarded by the 1 MiB TrussC buffer since the last setup(); flush and close preserve the count"
                 },
                 {
                     "name": "readBytes",

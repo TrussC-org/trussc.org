@@ -5411,7 +5411,12 @@ const TrussSketchAPI = {
     {
      "name": "cancel",
      "type": "bool",
-     "desc": "Set true in a listener to cancel the requested exit"
+     "desc": "Set true in a listener to cancel the requested exit. Windowed Windows session\nend (including Restart Manager), macOS termination and Linux/macOS SIGTERM or\nSIGINT use this event too. After a veto the user starts shutdown again. A second\nsignal forces termination. Forced OS shutdown cannot be blocked; Windows gives\nexit()/cleanup() only a few seconds after WM_ENDSESSION(TRUE).\n"
+    },
+    {
+     "name": "reason",
+     "type": "std::string",
+     "desc": "Optional explanation shown by Windows when cancel blocks shutdown or logoff; empty uses a generic busy message"
     }
    ]
   },
@@ -10626,7 +10631,13 @@ const TrussSketchAPI = {
      "name": "available",
      "snippet": "available()",
      "return": "int",
-     "desc": "Number of bytes available to read; 0 when not connected (a lost device also closes the port and fires onDisconnect)"
+     "desc": "Number of bytes buffered by TrussC to read; 0 when not connected (a lost device also closes the port and fires onDisconnect)"
+    },
+    {
+     "name": "getDroppedByteCount",
+     "snippet": "getDroppedByteCount()",
+     "return": "size_t",
+     "desc": "Received bytes discarded by the 1 MiB TrussC buffer since the last setup(); flush and close preserve the count"
     },
     {
      "name": "readByte",
@@ -13876,6 +13887,18 @@ const TrussSketchAPI = {
     "snippet": "VideoPlayer()"
    },
    "methods": [
+    {
+     "name": "setAudioStreaming",
+     "snippet": "setAudioStreaming(${1:streaming})",
+     "return": "void",
+     "desc": "Choose Linux audio streaming (default true). Call before load(); false preloads the whole track for sample-accurate loops and seeks. Changes apply to the next load."
+    },
+    {
+     "name": "isAudioStreaming",
+     "snippet": "isAudioStreaming()",
+     "return": "bool",
+     "desc": "Return the audio streaming preference (default true); on Linux it applies to the next load(). Native OS players ignore the preference."
+    },
     {
      "name": "load",
      "snippet": "load(${1:path})",
