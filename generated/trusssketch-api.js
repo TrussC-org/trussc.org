@@ -11901,19 +11901,13 @@ const TrussSketchAPI = {
      "name": "allocateCubemap",
      "snippet": "allocateCubemap(${1:sideSize}, ${2:format})",
      "return": "void",
-     "desc": "Allocate a cubemap texture without initial data"
+     "desc": "Allocate a cubemap texture without initial data. Dynamic / Stream requires one mip level; requesting more logs an error and leaves the texture unallocated. RenderTarget supports mip chains. Immutable is refused with an error (it would need initial data)."
     },
     {
-     "name": "uploadCubemapFace",
-     "snippet": "uploadCubemapFace()",
+     "name": "loadCubemapData",
+     "snippet": "loadCubemapData()",
      "return": "",
-     "desc": "Upload pixel data for one cubemap face at one mip level"
-    },
-    {
-     "name": "uploadCubemapMip",
-     "snippet": "uploadCubemapMip()",
-     "return": "",
-     "desc": "Upload pixel data for all six faces of one cubemap mip level"
+     "desc": "Load all six cubemap faces (+X, -X, +Y, -Y, +Z, -Z) in one update. Requires Dynamic / Stream usage and faceSize equal to sideSize squared times bytes per pixel. Immutable / RenderTarget or a size mismatch logs a warning and returns. A second upload to the same image in the same device frame is skipped with the loadData warning. Replaces uploadCubemapFace / uploadCubemapMip in v0.8."
     },
     {
      "name": "getCubemapFaceAttachmentView",

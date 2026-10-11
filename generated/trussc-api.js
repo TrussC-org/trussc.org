@@ -6,7 +6,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.7.6",
+    "version": "v0.7.7",
     "lang": "all",
     "categories": [
         {
@@ -26610,27 +26610,17 @@ const TrussCAPI = {
                             "params": "int sideSize, TextureFormat format, TextureUsage usage = RenderTarget, int mipLevels = 1"
                         }
                     ],
-                    "desc": "Allocate a cubemap texture without initial data"
+                    "desc": "Allocate a cubemap texture without initial data. Dynamic / Stream requires one mip level; requesting more logs an error and leaves the texture unallocated. RenderTarget supports mip chains. Immutable is refused with an error (it would need initial data)."
                 },
                 {
-                    "name": "uploadCubemapFace",
+                    "name": "loadCubemapData",
                     "signatures": [
                         {
                             "ret": "void",
-                            "params": "int face, int mipLevel, const void * data, size_t dataSize"
+                            "params": "const void *const * faces, size_t faceSize"
                         }
                     ],
-                    "desc": "Upload pixel data for one cubemap face at one mip level"
-                },
-                {
-                    "name": "uploadCubemapMip",
-                    "signatures": [
-                        {
-                            "ret": "void",
-                            "params": "int mipLevel, const void * data, size_t dataSize"
-                        }
-                    ],
-                    "desc": "Upload pixel data for all six faces of one cubemap mip level"
+                    "desc": "Load all six cubemap faces (+X, -X, +Y, -Y, +Z, -Z) in one update. Requires Dynamic / Stream usage and faceSize equal to sideSize squared times bytes per pixel. Immutable / RenderTarget or a size mismatch logs a warning and returns. A second upload to the same image in the same device frame is skipped with the loadData warning. Replaces uploadCubemapFace / uploadCubemapMip in v0.8."
                 },
                 {
                     "name": "getCubemapFaceAttachmentView",
