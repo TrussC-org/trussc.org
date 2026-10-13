@@ -224,7 +224,12 @@ const TrussSketchAPI = {
     {
      "name": "getDefaultScreenFov",
      "snippet": "getDefaultScreenFov()",
-     "desc": "Get current default screen FOV"
+     "desc": "Get default screen FOV in radians"
+    },
+    {
+     "name": "getDefaultScreenFovDeg",
+     "snippet": "getDefaultScreenFovDeg()",
+     "desc": "Get default screen FOV in degrees"
     },
     {
      "name": "screenToWorld",
@@ -233,8 +238,18 @@ const TrussSketchAPI = {
     },
     {
      "name": "setDefaultScreenFov",
-     "snippet": "setDefaultScreenFov(${1:fovDeg})",
-     "desc": "Set default screen FOV (applied at frame start)"
+     "snippet": "setDefaultScreenFov(${1:fovRadians})",
+     "desc": "Set default screen FOV in radians (frame start and FBO begin)"
+    },
+    {
+     "name": "setDefaultScreenFovDeg",
+     "snippet": "setDefaultScreenFovDeg(${1:fovDeg})",
+     "desc": "Set default screen FOV in degrees"
+    },
+    {
+     "name": "setDefaultScreenOrtho",
+     "snippet": "setDefaultScreenOrtho()",
+     "desc": "Set orthographic projection as the default (frame start and FBO begin)"
     },
     {
      "name": "setFarClip",
@@ -248,8 +263,23 @@ const TrussSketchAPI = {
     },
     {
      "name": "setupScreenFov",
-     "snippet": "setupScreenFov(${1:fovDeg})",
-     "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)"
+     "snippet": "setupScreenFov(${1:fovRadians})",
+     "desc": "Set up screen perspective with FOV in radians"
+    },
+    {
+     "name": "setupScreenFovDeg",
+     "snippet": "setupScreenFovDeg(${1:fovDeg})",
+     "desc": "Set up screen perspective with FOV in degrees"
+    },
+    {
+     "name": "setupScreenFovWithSize",
+     "snippet": "setupScreenFovWithSize(${1:fovRadians}, ${2:viewW}, ${3:viewH})",
+     "desc": "Set up perspective with explicit viewport size and FOV in radians"
+    },
+    {
+     "name": "setupScreenFovWithSizeDeg",
+     "snippet": "setupScreenFovWithSizeDeg(${1:fovDeg}, ${2:viewW}, ${3:viewH})",
+     "desc": "Set up perspective with explicit viewport size and FOV in degrees"
     },
     {
      "name": "setupScreenOrtho",
@@ -259,7 +289,12 @@ const TrussSketchAPI = {
     {
      "name": "setupScreenPerspective",
      "snippet": "setupScreenPerspective()",
-     "desc": "Set up perspective projection (oF-style default 3D)"
+     "desc": "Set up screen perspective with FOV in radians (default TAU/8)"
+    },
+    {
+     "name": "setupScreenPerspectiveDeg",
+     "snippet": "setupScreenPerspectiveDeg()",
+     "desc": "Set up screen perspective with FOV in degrees (default 45)"
     },
     {
      "name": "worldToScreen",
@@ -3525,7 +3560,7 @@ const TrussSketchAPI = {
     {
      "name": "h",
      "type": "float",
-     "desc": "Hue (0.0-1.0)"
+     "desc": "Hue (0–1 of a turn): color data, not a rotation angle"
     },
     {
      "name": "s",
@@ -3730,7 +3765,7 @@ const TrussSketchAPI = {
     {
      "name": "H",
      "type": "float",
-     "desc": "Hue (0.0-1.0)"
+     "desc": "Hue (0–1 of a turn): color data, not a rotation angle"
     },
     {
      "name": "alpha",
@@ -5725,7 +5760,7 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:nameOrPath}, ${2:size})",
      "return": "LoadResult",
-     "desc": "Load a font file or a system font name; faceIndex picks the face in a .ttc. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins."
+     "desc": "Load a font file or a system font name; faceIndex picks the face in a .ttc. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins. On Web, URL loading waits until the font is usable or fetching/decoding fails."
     },
     {
      "name": "isLoaded",
@@ -6289,7 +6324,7 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "LoadResult",
-     "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given."
+     "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. Returns TooLarge if either dimension exceeds the active GPU texture limit; headless loading keeps CPU pixels."
     },
     {
      "name": "save",
@@ -6301,7 +6336,7 @@ const TrussSketchAPI = {
      "name": "loadFromMemory",
      "snippet": "loadFromMemory()",
      "return": "",
-     "desc": "Load image from memory. `mipmaps=true` builds a mip chain. Main thread only; decode in the background with `Pixels::loadFromMemory`."
+     "desc": "Load image from memory. `mipmaps=true` builds a mip chain. Main thread only; decode in the background with `Pixels::loadFromMemory`. Returns TooLarge if either dimension exceeds the active GPU texture limit; headless loading keeps CPU pixels."
     },
     {
      "name": "allocate",
@@ -7074,7 +7109,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "LoadError",
-   "desc": "Load failure kind: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown.",
+   "desc": "Load failure kind: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown, TooLarge, Cancelled.",
    "static_methods": [
     {
      "name": "None",
@@ -7105,6 +7140,18 @@ const TrussSketchAPI = {
      "snippet": "Unknown",
      "return": "LoadError",
      "desc": "= 4"
+    },
+    {
+     "name": "TooLarge",
+     "snippet": "TooLarge",
+     "return": "LoadError",
+     "desc": "= 5"
+    },
+    {
+     "name": "Cancelled",
+     "snippet": "Cancelled",
+     "return": "LoadError",
+     "desc": "= 6"
     }
    ]
   },
@@ -8842,13 +8889,13 @@ const TrussSketchAPI = {
      "name": "getEulerDeg",
      "snippet": "getEulerDeg()",
      "return": "Vec3",
-     "desc": "Get rotation as Euler angles in degrees (C++ only)"
+     "desc": "Get rotation as Euler angles in degrees"
     },
     {
      "name": "setEulerDeg",
      "snippet": "setEulerDeg(${1:deg})",
      "return": "void",
-     "desc": "Set rotation from Euler angles in degrees (C++ only)"
+     "desc": "Set rotation from Euler angles in degrees"
     },
     {
      "name": "getRot",
@@ -8866,13 +8913,13 @@ const TrussSketchAPI = {
      "name": "getRotDeg",
      "snippet": "getRotDeg()",
      "return": "float",
-     "desc": "Get 2D Z-axis rotation in degrees (C++ only)"
+     "desc": "Get 2D Z-axis rotation in degrees"
     },
     {
      "name": "setRotDeg",
      "snippet": "setRotDeg(${1:degrees})",
      "return": "void",
-     "desc": "Set 2D Z-axis rotation in degrees (C++ only)"
+     "desc": "Set 2D Z-axis rotation in degrees"
     },
     {
      "name": "getScale",
@@ -9226,7 +9273,13 @@ const TrussSketchAPI = {
      "name": "arc",
      "snippet": "arc(${1:center}, ${2:radiusX}, ${3:radiusY}, ${4:angleBegin}, ${5:angleEnd})",
      "return": "void",
-     "desc": "Add an arc (angles in radians)"
+     "desc": "Add a circular or elliptical arc (all angles in radians)"
+    },
+    {
+     "name": "arcDeg",
+     "snippet": "arcDeg(${1:center}, ${2:radiusX}, ${3:radiusY}, ${4:angleBegin}, ${5:angleEnd})",
+     "return": "void",
+     "desc": "Add an elliptical arc with angles in degrees (all elliptical overloads)"
     },
     {
      "name": "close",
@@ -9600,7 +9653,7 @@ const TrussSketchAPI = {
     {
      "name": "path",
      "type": "fs::path",
-     "desc": "Source file (fs::path) as given, the same value as SoundBuffer::getPath() / SoundStream::getPath() and the file name in the logs; empty for generated or in-memory buffers. tc_get_audio_state reports it as UTF-8."
+     "desc": "Resolved source file (fs::path), the same value as SoundBuffer::getPath() / SoundStream::getPath() and the file name in the logs; empty for generated or in-memory buffers. tc_get_audio_state reports it as UTF-8."
     },
     {
      "name": "streaming",
@@ -11078,19 +11131,19 @@ const TrussSketchAPI = {
      "name": "loadOgg",
      "snippet": "loadOgg(${1:path})",
      "return": "LoadResult",
-     "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis)."
+     "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis). Relative paths resolve via getDataPath(); absolute paths pass through."
     },
     {
      "name": "loadWav",
      "snippet": "loadWav(${1:path})",
      "return": "LoadResult",
-     "desc": "Decode a WAV file into PCM."
+     "desc": "Decode a WAV file into PCM. Relative paths resolve via getDataPath(); absolute paths pass through."
     },
     {
      "name": "loadMp3",
      "snippet": "loadMp3(${1:path})",
      "return": "LoadResult",
-     "desc": "Decode an MP3 file into PCM."
+     "desc": "Decode an MP3 file into PCM. Relative paths resolve via getDataPath(); absolute paths pass through."
     },
     {
      "name": "loadMp3FromMemory",
@@ -11102,7 +11155,7 @@ const TrussSketchAPI = {
      "name": "loadAac",
      "snippet": "loadAac(${1:path})",
      "return": "LoadResult",
-     "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms)."
+     "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms). Relative paths resolve via getDataPath(); absolute paths pass through. On Web, load waits for decoded PCM using OfflineAudioContext, including in setup()."
     },
     {
      "name": "loadAacFromMemory",
@@ -11209,7 +11262,7 @@ const TrussSketchAPI = {
      "name": "loadStream",
      "snippet": "loadStream(${1:path})",
      "return": "LoadResult",
-     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened, the format is unsupported, or the file has no audio frames (DecodeFailed)."
+     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened, the format is unsupported, or the file has no audio frames (DecodeFailed). Relative paths resolve via getDataPath(); absolute paths pass through."
     },
     {
      "name": "getDuration",
@@ -11221,7 +11274,7 @@ const TrussSketchAPI = {
      "name": "getPath",
      "snippet": "getPath()",
      "return": "fs::path",
-     "desc": "Path the stream was opened from."
+     "desc": "Path the stream was opened from. Relative names are resolved via getDataPath(); empty after a failed load."
     },
     {
      "name": "getMaxPolyphony",
@@ -13897,7 +13950,7 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "LoadResult",
-     "desc": "Load a video file"
+     "desc": "Load a video file On Web, load waits for a decoded first frame instead of returning placeholder dimensions."
     },
     {
      "name": "close",

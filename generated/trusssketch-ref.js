@@ -6162,6 +6162,21 @@ const TrussCAPI = {
             "name": "File",
             "functions": [
                 {
+                    "name": "loadErrorName",
+                    "params": "e",
+                    "params_typed": "e",
+                    "return_type": "number",
+                    "desc": "Short label for a LoadError value (\"FileNotFound\", ...). For log messages",
+                    "keywords": [
+                        "error",
+                        "name",
+                        "label",
+                        "log"
+                    ],
+                    "desc_ja": "LoadError 値の短いラベル（\"FileNotFound\" など）。ログ用",
+                    "desc_ko": "LoadError 값의 짧은 레이블(\"FileNotFound\" 등). 로그용"
+                },
+                {
                     "name": "getDataPath",
                     "params": "filename",
                     "params_typed": "filename",
@@ -6240,21 +6255,6 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "実行中の実行ファイルを含むディレクトリを取得",
                     "desc_ko": "실행 중인 실행 파일이 있는 디렉터리를 얻음"
-                },
-                {
-                    "name": "loadErrorName",
-                    "params": "e",
-                    "params_typed": "e",
-                    "return_type": "number",
-                    "desc": "Short label for a LoadError value (\"FileNotFound\", ...). For log messages",
-                    "keywords": [
-                        "error",
-                        "name",
-                        "label",
-                        "log"
-                    ],
-                    "desc_ja": "LoadError 値の短いラベル（\"FileNotFound\" など）。ログ用",
-                    "desc_ko": "LoadError 값의 짧은 레이블(\"FileNotFound\" 등). 로그용"
                 },
                 {
                     "name": "setDataPathRoot",
@@ -6918,11 +6918,31 @@ const TrussCAPI = {
             "name": "3D Setup",
             "functions": [
                 {
-                    "name": "setupScreenFov",
-                    "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "fovDeg, nearDist = 0.0, farDist = 0.0",
+                    "name": "setupScreenFovWithSize",
+                    "params": "fovRadians, viewW, viewH, nearDist, farDist",
+                    "params_typed": "fovRadians, viewW, viewH, nearDist = 0.0, farDist = 0.0",
                     "return_type": "(nothing)",
-                    "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)",
+                    "desc": "Set up perspective with explicit viewport size and FOV in radians",
+                    "keywords": [],
+                    "desc_ja": "明示的な画面サイズとラジアンのFOVで透視投影を設定",
+                    "desc_ko": "명시적 뷰포트 크기와 라디안 FOV로 원근 투영 설정"
+                },
+                {
+                    "name": "setupScreenFovWithSizeDeg",
+                    "params": "fovDeg, viewW, viewH, nearDist, farDist",
+                    "params_typed": "fovDeg, viewW, viewH, nearDist = 0.0, farDist = 0.0",
+                    "return_type": "(nothing)",
+                    "desc": "Set up perspective with explicit viewport size and FOV in degrees",
+                    "keywords": [],
+                    "desc_ja": "明示的な画面サイズと度数のFOVで透視投影を設定",
+                    "desc_ko": "명시적 뷰포트 크기와 도 단위 FOV로 원근 투영 설정"
+                },
+                {
+                    "name": "setupScreenFov",
+                    "params": "fovRadians, nearDist, farDist",
+                    "params_typed": "fovRadians, nearDist = 0.0, farDist = 0.0",
+                    "return_type": "(nothing)",
+                    "desc": "Set up screen perspective with FOV in radians",
                     "keywords": [
                         "field of view",
                         "projection",
@@ -6930,15 +6950,25 @@ const TrussCAPI = {
                         "ortho",
                         "screen setup"
                     ],
-                    "desc_ja": "指定したFOVで画面投影を設定（0 = 正投影、0より大 = パースペクティブ）",
-                    "desc_ko": "지정한 FOV로 화면 투영을 설정 (0 = 정사영, 0보다 크면 원근)"
+                    "desc_ja": "ラジアンのFOVで画面の透視投影を設定",
+                    "desc_ko": "라디안 FOV로 화면 원근 투영 설정"
+                },
+                {
+                    "name": "setupScreenFovDeg",
+                    "params": "fovDeg, nearDist, farDist",
+                    "params_typed": "fovDeg, nearDist = 0.0, farDist = 0.0",
+                    "return_type": "(nothing)",
+                    "desc": "Set up screen perspective with FOV in degrees",
+                    "keywords": [],
+                    "desc_ja": "度数のFOVで画面の透視投影を設定",
+                    "desc_ko": "도 단위 FOV로 화면 원근 투영 설정"
                 },
                 {
                     "name": "setupScreenPerspective",
-                    "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "fovDeg = 45.0, nearDist = 0.0, farDist = 0.0",
+                    "params": "fovRadians, nearDist, farDist",
+                    "params_typed": "fovRadians, nearDist = 0.0, farDist = 0.0",
                     "return_type": "(nothing)",
-                    "desc": "Set up perspective projection (oF-style default 3D)",
+                    "desc": "Set up screen perspective with FOV in radians (default TAU/8)",
                     "keywords": [
                         "projection",
                         "3d mode",
@@ -6946,8 +6976,18 @@ const TrussCAPI = {
                         "ofSetupScreenPerspective",
                         "fov"
                     ],
-                    "desc_ja": "パースペクティブ投影を設定（oF風デフォルト3D）",
-                    "desc_ko": "원근 투영을 설정 (oF 스타일 기본 3D)"
+                    "desc_ja": "ラジアンのFOVで透視投影を設定（既定 TAU/8）",
+                    "desc_ko": "라디안 FOV로 원근 투영 설정 (기본 TAU/8)"
+                },
+                {
+                    "name": "setupScreenPerspectiveDeg",
+                    "params": "fovDeg, nearDist, farDist",
+                    "params_typed": "fovDeg = 45.0, nearDist = 0.0, farDist = 0.0",
+                    "return_type": "(nothing)",
+                    "desc": "Set up screen perspective with FOV in degrees (default 45)",
+                    "keywords": [],
+                    "desc_ja": "度数のFOVで透視投影を設定（既定45）",
+                    "desc_ko": "도 단위 FOV로 원근 투영 설정 (기본 45)"
                 },
                 {
                     "name": "setupScreenOrtho",
@@ -6965,30 +7005,65 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setDefaultScreenFov",
-                    "params": "fovDeg",
-                    "params_typed": "fovDeg",
+                    "params": "fovRadians",
+                    "params_typed": "fovRadians",
                     "return_type": "(nothing)",
-                    "desc": "Set default screen FOV (applied at frame start)",
+                    "desc": "Set default screen FOV in radians (frame start and FBO begin)",
                     "keywords": [
                         "field of view",
                         "projection",
                         "perspective"
                     ],
-                    "desc_ja": "デフォルトのスクリーンFOVを設定（フレーム開始時に適用）",
-                    "desc_ko": "기본 스크린 FOV를 설정 (프레임 시작 시 적용)"
+                    "desc_ja": "デフォルトFOVをラジアンで設定（フレーム開始・FBO開始時）",
+                    "desc_ko": "기본 FOV를 라디안으로 설정 (프레임 및 FBO 시작 시)"
+                },
+                {
+                    "name": "setDefaultScreenOrtho",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "(nothing)",
+                    "desc": "Set orthographic projection as the default (frame start and FBO begin)",
+                    "keywords": [
+                        "orthographic",
+                        "2d mode",
+                        "default",
+                        "projection"
+                    ],
+                    "desc_ja": "正投影をデフォルトに設定（フレーム開始・FBO開始時）",
+                    "desc_ko": "정사영을 기본 투영으로 설정 (프레임 및 FBO 시작 시)"
                 },
                 {
                     "name": "getDefaultScreenFov",
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Get current default screen FOV",
+                    "desc": "Get default screen FOV in radians",
                     "keywords": [
                         "field of view",
                         "projection"
                     ],
-                    "desc_ja": "現在のデフォルトスクリーンFOVを取得",
-                    "desc_ko": "현재 기본 스크린 FOV를 얻음"
+                    "desc_ja": "デフォルトFOVをラジアンで取得",
+                    "desc_ko": "기본 FOV를 라디안으로 얻음"
+                },
+                {
+                    "name": "setDefaultScreenFovDeg",
+                    "params": "fovDeg",
+                    "params_typed": "fovDeg",
+                    "return_type": "(nothing)",
+                    "desc": "Set default screen FOV in degrees",
+                    "keywords": [],
+                    "desc_ja": "デフォルトFOVを度数で設定",
+                    "desc_ko": "기본 FOV를 도 단위로 설정"
+                },
+                {
+                    "name": "getDefaultScreenFovDeg",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "number",
+                    "desc": "Get default screen FOV in degrees",
+                    "keywords": [],
+                    "desc_ja": "デフォルトFOVを度数で取得",
+                    "desc_ko": "기본 FOV를 도 단위로 얻음"
                 },
                 {
                     "name": "setNearClip",
@@ -10054,9 +10129,9 @@ const TrussCAPI = {
                 {
                     "name": "colorHSB.h",
                     "type": "number",
-                    "desc": "Hue (0.0-1.0)",
-                    "desc_ja": "色相 (0.0-1.0)",
-                    "desc_ko": "색상 (0.0-1.0)"
+                    "desc": "Hue (0–1 of a turn): color data, not a rotation angle",
+                    "desc_ja": "色相（1周を0〜1で表す）。回転角ではなく色データ",
+                    "desc_ko": "색상 (한 바퀴를 0–1로 표현): 회전각이 아닌 색 데이터"
                 },
                 {
                     "name": "colorHSB.s",
@@ -10438,9 +10513,9 @@ const TrussCAPI = {
                 {
                     "name": "colorOKLCH.H",
                     "type": "number",
-                    "desc": "Hue (0.0-1.0)",
-                    "desc_ja": "色相 (0.0-1.0)",
-                    "desc_ko": "색상 (0.0-1.0)"
+                    "desc": "Hue (0–1 of a turn): color data, not a rotation angle",
+                    "desc_ja": "色相（1周を0〜1で表す）。回転角ではなく色データ",
+                    "desc_ko": "색상 (한 바퀴를 0–1로 표현): 회전각이 아닌 색 데이터"
                 },
                 {
                     "name": "colorOKLCH.alpha",
@@ -11816,9 +11891,9 @@ const TrussCAPI = {
                             "params": "nameOrPath, size, faceIndex = 0"
                         }
                     ],
-                    "desc": "Load a font file or a system font name; faceIndex picks the face in a .ttc. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins.",
-                    "desc_ja": "フォントファイルまたはシステムフォント名を読み込む。faceIndex で .ttc 内の書体を選ぶ。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う。データフォルダのファイルとシステムフォントが同名なら、データフォルダのファイルを使う",
-                    "desc_ko": "폰트 파일 또는 시스템 폰트 이름을 로드. faceIndex로 .ttc 안의 서체를 선택. 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용. 데이터 폴더의 파일과 시스템 폰트 이름이 같으면 데이터 폴더의 파일을 사용"
+                    "desc": "Load a font file or a system font name; faceIndex picks the face in a .ttc. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins. On Web, URL loading waits until the font is usable or fetching/decoding fails.",
+                    "desc_ja": "フォントファイルまたはシステムフォント名を読み込む。faceIndex で .ttc 内の書体を選ぶ。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う。データフォルダのファイルとシステムフォントが同名なら、データフォルダのファイルを使う。Web の URL 読み込みはフォントが使える状態になるか取得・デコードが失敗するまで待つ。",
+                    "desc_ko": "폰트 파일 또는 시스템 폰트 이름을 로드. faceIndex로 .ttc 안의 서체를 선택. 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용. 데이터 폴더의 파일과 시스템 폰트 이름이 같으면 데이터 폴더의 파일을 사용. Web URL 로드는 폰트를 사용할 수 있거나 가져오기/디코딩에 실패할 때까지 기다린다."
                 },
                 {
                     "name": "font:isLoaded",
@@ -12989,9 +13064,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path, mipmaps = false"
                     ],
-                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given.",
-                    "desc_ja": "ファイルから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築 (3D サーフェスなど縮小サンプル用途で推奨)。GPU テクスチャを作るのでメインスレッド専用。バックグラウンドで読むなら、ワーカースレッドで `Pixels::load` し、メインスレッドで `Texture::allocate(pixels)` する。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う",
-                    "desc_ko": "파일에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성 (3D 표면 등 축소 샘플링 용도 권장). GPU 텍스처를 생성하므로 메인 스레드 전용. 백그라운드에서 로드하려면 워커 스레드에서 `Pixels::load` 후 메인 스레드에서 `Texture::allocate(pixels)`. 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용"
+                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. Returns TooLarge if either dimension exceeds the active GPU texture limit; headless loading keeps CPU pixels.",
+                    "desc_ja": "ファイルから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築 (3D サーフェスなど縮小サンプル用途で推奨)。GPU テクスチャを作るのでメインスレッド専用。バックグラウンドで読むなら、ワーカースレッドで `Pixels::load` し、メインスレッドで `Texture::allocate(pixels)` する。相対パスはデータフォルダ基準 (getDataPath()) で解決し、絶対パスはそのまま使う。GPU 使用時、幅または高さがテクスチャ上限を超えると TooLarge。ヘッドレスでは CPU ピクセルを保持する。",
+                    "desc_ko": "파일에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성 (3D 표면 등 축소 샘플링 용도 권장). GPU 텍스처를 생성하므로 메인 스레드 전용. 백그라운드에서 로드하려면 워커 스레드에서 `Pixels::load` 후 메인 스레드에서 `Texture::allocate(pixels)`. 상대 경로는 데이터 폴더 기준 (getDataPath())으로 해석하고, 절대 경로는 그대로 사용. GPU 사용 시 너비나 높이가 텍스처 한도를 초과하면 TooLarge를 반환한다. 헤드리스에서는 CPU 픽셀을 유지한다."
                 },
                 {
                     "name": "image:save",
@@ -13009,9 +13084,9 @@ const TrussCAPI = {
                     "signatures": [
                         "buffer, len, mipmaps = false"
                     ],
-                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain. Main thread only; decode in the background with `Pixels::loadFromMemory`.",
-                    "desc_ja": "メモリから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築。メインスレッド専用。バックグラウンドでのデコードは `Pixels::loadFromMemory` で",
-                    "desc_ko": "메모리에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성. 메인 스레드 전용. 백그라운드 디코딩은 `Pixels::loadFromMemory`로"
+                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain. Main thread only; decode in the background with `Pixels::loadFromMemory`. Returns TooLarge if either dimension exceeds the active GPU texture limit; headless loading keeps CPU pixels.",
+                    "desc_ja": "メモリから画像を読み込む。`mipmaps=true` でミップマップ連鎖を構築。メインスレッド専用。バックグラウンドでのデコードは `Pixels::loadFromMemory` で GPU 使用時、幅または高さがテクスチャ上限を超えると TooLarge。ヘッドレスでは CPU ピクセルを保持する。",
+                    "desc_ko": "메모리에서 이미지를 로드. `mipmaps=true` 시 밉맵 체인 생성. 메인 스레드 전용. 백그라운드 디코딩은 `Pixels::loadFromMemory`로 GPU 사용 시 너비나 높이가 텍스처 한도를 초과하면 TooLarge를 반환한다. 헤드리스에서는 CPU 픽셀을 유지한다."
                 },
                 {
                     "name": "image:allocate",
@@ -17408,9 +17483,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get rotation as Euler angles in degrees (C++ only)",
-                    "desc_ja": "回転をオイラー角（度数）で取得（C++のみ）",
-                    "desc_ko": "회전을 오일러 각(도)으로 얻음 (C++ 전용)"
+                    "desc": "Get rotation as Euler angles in degrees",
+                    "desc_ja": "回転をオイラー角（度数）で取得",
+                    "desc_ko": "회전을 오일러 각(도)으로 얻음"
                 },
                 {
                     "name": "node:setEulerDeg",
@@ -17420,9 +17495,9 @@ const TrussCAPI = {
                             "params": "deg"
                         }
                     ],
-                    "desc": "Set rotation from Euler angles in degrees (C++ only)",
-                    "desc_ja": "回転をオイラー角（度数）で設定（C++のみ）",
-                    "desc_ko": "회전을 오일러 각(도)으로 설정 (C++ 전용)"
+                    "desc": "Set rotation from Euler angles in degrees",
+                    "desc_ja": "回転をオイラー角（度数）で設定",
+                    "desc_ko": "회전을 오일러 각(도)으로 설정"
                 },
                 {
                     "name": "node:getRot",
@@ -17456,9 +17531,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get 2D Z-axis rotation in degrees (C++ only)",
-                    "desc_ja": "2DのZ軸回転を度数で取得（C++のみ）",
-                    "desc_ko": "2D Z축 회전을 도로 얻음 (C++ 전용)"
+                    "desc": "Get 2D Z-axis rotation in degrees",
+                    "desc_ja": "2DのZ軸回転を度数で取得",
+                    "desc_ko": "2D Z축 회전을 도로 얻음"
                 },
                 {
                     "name": "node:setRotDeg",
@@ -17468,9 +17543,9 @@ const TrussCAPI = {
                             "params": "degrees"
                         }
                     ],
-                    "desc": "Set 2D Z-axis rotation in degrees (C++ only)",
-                    "desc_ja": "2DのZ軸回転を度数で設定（C++のみ）",
-                    "desc_ko": "2D Z축 회전을 도로 설정 (C++ 전용)"
+                    "desc": "Set 2D Z-axis rotation in degrees",
+                    "desc_ja": "2DのZ軸回転を度数で設定",
+                    "desc_ko": "2D Z축 회전을 도로 설정"
                 },
                 {
                     "name": "node:getScale",
@@ -18192,9 +18267,29 @@ const TrussCAPI = {
                             "params": "center, radius, angleBegin, angleEnd, clockwise = true"
                         }
                     ],
-                    "desc": "Add an arc (angles in radians)",
-                    "desc_ja": "円弧を追加（角度はradian）",
-                    "desc_ko": "호를 추가 (각도는 radian)"
+                    "desc": "Add a circular or elliptical arc (all angles in radians)",
+                    "desc_ja": "円弧・楕円弧を追加（すべての角度はラジアン）",
+                    "desc_ko": "원호 또는 타원호 추가 (모든 각도는 라디안)"
+                },
+                {
+                    "name": "path:arcDeg",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "center, radiusX, radiusY, angleBegin, angleEnd, clockwise = true, circleResolution = 20"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, radiusX, radiusY, angleBegin, angleEnd, circleResolution = 20"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "center, radiusX, radiusY, angleBegin, angleEnd, circleResolution = 20"
+                        }
+                    ],
+                    "desc": "Add an elliptical arc with angles in degrees (all elliptical overloads)",
+                    "desc_ja": "度数の角度で楕円弧を追加（全楕円オーバーロード）",
+                    "desc_ko": "도 단위 각도로 타원호 추가 (모든 타원 오버로드)"
                 },
                 {
                     "name": "path:close",
@@ -18857,9 +18952,9 @@ const TrussCAPI = {
                 {
                     "name": "playingSoundInfo.path",
                     "type": "string",
-                    "desc": "Source file (fs::path) as given, the same value as SoundBuffer::getPath() / SoundStream::getPath() and the file name in the logs; empty for generated or in-memory buffers. tc_get_audio_state reports it as UTF-8.",
-                    "desc_ja": "ソースファイル (fs::path)。渡されたままの値で、SoundBuffer::getPath() / SoundStream::getPath() やログのファイル名と同じ。生成したバッファやメモリからのバッファでは空。tc_get_audio_state は UTF-8 で返す",
-                    "desc_ko": "소스 파일 (fs::path). 전달된 그대로의 값으로, SoundBuffer::getPath() / SoundStream::getPath() 및 로그의 파일 이름과 같다. 생성한 버퍼나 메모리 버퍼에서는 비어 있음. tc_get_audio_state 는 UTF-8 로 보고한다"
+                    "desc": "Resolved source file (fs::path), the same value as SoundBuffer::getPath() / SoundStream::getPath() and the file name in the logs; empty for generated or in-memory buffers. tc_get_audio_state reports it as UTF-8.",
+                    "desc_ja": "ソースファイル (fs::path)。解決済みの値で、SoundBuffer::getPath() / SoundStream::getPath() やログのファイル名と同じ。生成したバッファやメモリからのバッファでは空。tc_get_audio_state は UTF-8 で返す",
+                    "desc_ko": "소스 파일 (fs::path). 해석된 값으로, SoundBuffer::getPath() / SoundStream::getPath() 및 로그의 파일 이름과 같다. 생성한 버퍼나 메모리 버퍼에서는 비어 있음. tc_get_audio_state 는 UTF-8 로 보고한다"
                 },
                 {
                     "name": "playingSoundInfo.streaming",
@@ -21452,9 +21547,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis).",
-                    "desc_ja": "OGG VorbisファイルをPCMにデコード(stb_vorbis経由)",
-                    "desc_ko": "OGG Vorbis 파일을 PCM으로 디코딩(stb_vorbis 사용)"
+                    "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis). Relative paths resolve via getDataPath(); absolute paths pass through.",
+                    "desc_ja": "OGG VorbisファイルをPCMにデコード(stb_vorbis経由) 相対パスは getDataPath() で解決し、絶対パスはそのまま使う。",
+                    "desc_ko": "OGG Vorbis 파일을 PCM으로 디코딩(stb_vorbis 사용). 상대 경로는 getDataPath()로 해석하고 절대 경로는 그대로 사용한다."
                 },
                 {
                     "name": "soundBuffer:loadWav",
@@ -21462,9 +21557,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Decode a WAV file into PCM.",
-                    "desc_ja": "WAVファイルをPCMにデコード",
-                    "desc_ko": "WAV 파일을 PCM으로 디코딩"
+                    "desc": "Decode a WAV file into PCM. Relative paths resolve via getDataPath(); absolute paths pass through.",
+                    "desc_ja": "WAVファイルをPCMにデコードする。相対パスは getDataPath() で解決し、絶対パスはそのまま使う。",
+                    "desc_ko": "WAV 파일을 PCM으로 디코딩. 상대 경로는 getDataPath()로 해석하고 절대 경로는 그대로 사용한다."
                 },
                 {
                     "name": "soundBuffer:loadMp3",
@@ -21472,9 +21567,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Decode an MP3 file into PCM.",
-                    "desc_ja": "MP3ファイルをPCMにデコード",
-                    "desc_ko": "MP3 파일을 PCM으로 디코딩"
+                    "desc": "Decode an MP3 file into PCM. Relative paths resolve via getDataPath(); absolute paths pass through.",
+                    "desc_ja": "MP3ファイルをPCMにデコードする。相対パスは getDataPath() で解決し、絶対パスはそのまま使う。",
+                    "desc_ko": "MP3 파일을 PCM으로 디코딩. 상대 경로는 getDataPath()로 해석하고 절대 경로는 그대로 사용한다."
                 },
                 {
                     "name": "soundBuffer:loadMp3FromMemory",
@@ -21492,9 +21587,9 @@ const TrussCAPI = {
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms).",
-                    "desc_ja": "AAC / M4AファイルをPCMにデコード(プラットフォーム依存。非対応プラットフォームではfalseを返す)",
-                    "desc_ko": "AAC / M4A 파일을 PCM으로 디코딩(플랫폼 의존. 미지원 플랫폼에서는 false 반환)"
+                    "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms). Relative paths resolve via getDataPath(); absolute paths pass through. On Web, load waits for decoded PCM using OfflineAudioContext, including in setup().",
+                    "desc_ja": "AAC / M4AファイルをPCMにデコード(プラットフォーム依存。非対応プラットフォームではfalseを返す)。相対パスは getDataPath() で解決し、絶対パスはそのまま使う。 Web では setup() 内でも OfflineAudioContext による PCM デコード完了まで待つ。",
+                    "desc_ko": "AAC / M4A 파일을 PCM으로 디코딩(플랫폼 의존. 미지원 플랫폼에서는 false 반환). 상대 경로는 getDataPath()로 해석하고 절대 경로는 그대로 사용한다. Web에서는 setup() 안에서도 OfflineAudioContext를 통한 PCM 디코딩 완료까지 기다린다."
                 },
                 {
                     "name": "soundBuffer:loadAacFromMemory",
@@ -21680,9 +21775,9 @@ const TrussCAPI = {
                             "params": "path, maxPolyphony = 1"
                         }
                     ],
-                    "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened, the format is unsupported, or the file has no audio frames (DecodeFailed).",
-                    "desc_ja": "ファイルを開き、形式(.wav .mp3 .flac .ogg)を検証し、channels / sampleRate / durationを埋める。maxPolyphonyはその数だけ同時デコーダスロットを予約。ファイルが開けない、形式が非対応、またはオーディオフレームが無い (DecodeFailed) 場合falseを返す",
-                    "desc_ko": "파일을 열어 형식(.wav .mp3 .flac .ogg)을 검증하고 channels / sampleRate / duration을 채움. maxPolyphony는 그 수만큼 동시 디코더 슬롯을 예약. 파일을 열 수 없거나, 형식이 미지원이거나, 오디오 프레임이 없으면 (DecodeFailed) false 반환"
+                    "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened, the format is unsupported, or the file has no audio frames (DecodeFailed). Relative paths resolve via getDataPath(); absolute paths pass through.",
+                    "desc_ja": "ファイルを開き、形式(.wav .mp3 .flac .ogg)を検証し、channels / sampleRate / durationを埋める。maxPolyphonyはその数だけ同時デコーダスロットを予約。ファイルが開けない、形式が非対応、またはオーディオフレームが無い (DecodeFailed) 場合falseを返す。相対パスは getDataPath() で解決し、絶対パスはそのまま使う。",
+                    "desc_ko": "파일을 열어 형식(.wav .mp3 .flac .ogg)을 검증하고 channels / sampleRate / duration을 채움. maxPolyphony는 그 수만큼 동시 디코더 슬롯을 예약. 파일을 열 수 없거나, 형식이 미지원이거나, 오디오 프레임이 없으면 (DecodeFailed) false 반환. 상대 경로는 getDataPath()로 해석하고 절대 경로는 그대로 사용한다."
                 },
                 {
                     "name": "soundStream:getDuration",
@@ -21704,9 +21799,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Path the stream was opened from.",
-                    "desc_ja": "ストリームを開いた元のパス",
-                    "desc_ko": "스트림을 연 원본 경로"
+                    "desc": "Path the stream was opened from. Relative names are resolved via getDataPath(); empty after a failed load.",
+                    "desc_ja": "ストリームを開いた元のパス。相対名は getDataPath() で解決し、読み込み失敗後は空。",
+                    "desc_ko": "스트림을 연 원본 경로. 상대 이름은 getDataPath()로 해석하며, 로드 실패 후에는 비어 있음."
                 },
                 {
                     "name": "soundStream:getMaxPolyphony",
@@ -26340,9 +26435,9 @@ const TrussCAPI = {
                             "params": "path"
                         }
                     ],
-                    "desc": "Load a video file",
-                    "desc_ja": "ビデオファイルを読み込む",
-                    "desc_ko": "비디오 파일을 로드"
+                    "desc": "Load a video file On Web, load waits for a decoded first frame instead of returning placeholder dimensions.",
+                    "desc_ja": "ビデオファイルを読み込む。Web でも最初のフレームのデコードを待ち、仮の寸法で成功を返さない。",
+                    "desc_ko": "비디오 파일을 로드. Web에서도 첫 프레임 디코딩을 기다리며 임시 크기로 성공을 반환하지 않는다."
                 },
                 {
                     "name": "videoPlayer:close",
@@ -28341,7 +28436,7 @@ const TrussCAPI = {
         },
         {
             "name": "LoadError",
-            "desc": "Load failure kind: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown.",
+            "desc": "Load failure kind: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown, TooLarge, Cancelled.",
             "keywords": [
                 "error",
                 "load",
@@ -28383,10 +28478,24 @@ const TrussCAPI = {
                     "desc": "",
                     "desc_ja": "",
                     "desc_ko": ""
+                },
+                {
+                    "name": "TooLarge",
+                    "value": 5,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Cancelled",
+                    "value": 6,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
-            "desc_ja": "読み込み失敗の種別：None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown。",
-            "desc_ko": "로드 실패 종류: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown.",
+            "desc_ja": "読み込み失敗の種別：None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown, TooLarge, Cancelled。",
+            "desc_ko": "로드 실패 종류: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown, TooLarge, Cancelled.",
             "related": [
                 "LoadResult"
             ]

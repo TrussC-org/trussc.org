@@ -495,7 +495,7 @@
         },
         {
           "of": "ofSetupScreenPerspective",
-          "tc": "setupScreenPerspective(fovDeg, nearDist, farDist)",
+          "tc": "setupScreenPerspectiveDeg(fovDeg, nearDist, farDist)",
           "notes": "",
           "notes_ja": "",
           "notes_ko": ""

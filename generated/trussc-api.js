@@ -12207,6 +12207,31 @@ const TrussCAPI = {
             "name": "File",
             "functions": [
                 {
+                    "name": "loadErrorName",
+                    "params": "e",
+                    "params_typed": "LoadError e",
+                    "return_type": "const char *",
+                    "desc": "Short label for a LoadError value (\"FileNotFound\", ...). For log messages",
+                    "keywords": [
+                        "error",
+                        "name",
+                        "label",
+                        "log"
+                    ],
+                    "desc_ja": "LoadError 値の短いラベル（\"FileNotFound\" など）。ログ用",
+                    "desc_ko": "LoadError 값의 짧은 레이블(\"FileNotFound\" 등). 로그용",
+                    "related": [
+                        "LoadResult",
+                        "LoadError"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "getDataPath",
                     "params": "filename",
                     "params_typed": "const fs::path & filename",
@@ -12346,31 +12371,6 @@ const TrussCAPI = {
                     ],
                     "platformNote": "Real directory on all native platforms (android = internalDataPath). Web returns hardcoded \"/\".\n",
                     "platformNote_ja": "ネイティブは全て実ディレクトリを返す（android は internalDataPath）。Web はハードコードの \"/\"。\n"
-                },
-                {
-                    "name": "loadErrorName",
-                    "params": "e",
-                    "params_typed": "LoadError e",
-                    "return_type": "const char *",
-                    "desc": "Short label for a LoadError value (\"FileNotFound\", ...). For log messages",
-                    "keywords": [
-                        "error",
-                        "name",
-                        "label",
-                        "log"
-                    ],
-                    "desc_ja": "LoadError 値の短いラベル（\"FileNotFound\" など）。ログ用",
-                    "desc_ko": "LoadError 값의 짧은 레이블(\"FileNotFound\" 등). 로그용",
-                    "related": [
-                        "LoadResult",
-                        "LoadError"
-                    ],
-                    "examples": [
-                        {
-                            "name": "AllFeaturesExample",
-                            "group": "tests"
-                        }
-                    ]
                 },
                 {
                     "name": "setDataPathRoot",
@@ -13837,17 +13837,63 @@ const TrussCAPI = {
                         "setupScreenFov"
                     ],
                     "deprecated": {
-                        "reason": "Use setupScreenPerspective(fovDeg) or setupScreenFov(fovDeg) instead. Note: FOV is now in degrees, not radians.",
+                        "reason": "Use setupScreenPerspective(fovY) or setupScreenFov(fovY) instead (radians).",
                         "replacement": "setupScreenPerspective"
                     },
-                    "details": "Use `setupScreenPerspective(fovDeg)` or `setupScreenFov(fovDeg)`. WARNING: the FOV unit changed from radians to degrees, so a literal value must be converted (e.g. 0.785 rad ≈ 45 deg). Scheduled for removal in v1.0.0."
+                    "details": "Use setupScreenPerspective(fovRadians) or setupScreenFov(fovRadians); both use radians. Degree input uses the Deg companions. Scheduled for removal in v1.0.0.",
+                    "details_ja": "setupScreenPerspective(fovRadians) または setupScreenFov(fovRadians) を使う。どちらもラジアン。度数には Deg 版を使う。v1.0.0で削除予定。",
+                    "details_ko": "setupScreenPerspective(fovRadians) 또는 setupScreenFov(fovRadians)를 사용한다. 둘 다 라디안이며 도 단위 입력에는 Deg 버전을 사용한다. v1.0.0에서 제거 예정."
+                },
+                {
+                    "name": "setupScreenFovWithSize",
+                    "params": "fovRadians, viewW, viewH, nearDist, farDist",
+                    "params_typed": "float fovRadians, float viewW, float viewH, float nearDist = 0.0, float farDist = 0.0",
+                    "return_type": "void",
+                    "desc": "Set up perspective with explicit viewport size and FOV in radians",
+                    "keywords": [],
+                    "desc_ja": "明示的な画面サイズとラジアンのFOVで透視投影を設定",
+                    "desc_ko": "명시적 뷰포트 크기와 라디안 FOV로 원근 투영 설정",
+                    "related": [
+                        "setupScreenFov"
+                    ],
+                    "details": "Accepts 0 (orthographic) or 0 < fov < TAU/2 radians. Invalid values warn once and are ignored, preserving the current projection/default. setupScreenOrtho() and setDefaultScreenOrtho() are the readable spellings for orthographic setup and defaults.",
+                    "details_ja": "0（正投影）または 0 < fov < TAU/2 のラジアンを受け付ける。範囲外は一度だけ警告して無視し、現在の投影・デフォルト値を維持する。正投影の設定とデフォルト値には、意図が明確な setupScreenOrtho() と setDefaultScreenOrtho() を使える。",
+                    "details_ko": "0(정사영) 또는 0 < fov < TAU/2 라디안을 허용한다. 범위 밖 값은 한 번 경고하고 무시하여 현재 투영과 기본값을 유지한다. 정사영 설정과 기본값에는 의도가 명확한 setupScreenOrtho()와 setDefaultScreenOrtho()를 사용할 수 있다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "setupScreenFovWithSizeDeg",
+                    "params": "fovDeg, viewW, viewH, nearDist, farDist",
+                    "params_typed": "float fovDeg, float viewW, float viewH, float nearDist = 0.0, float farDist = 0.0",
+                    "return_type": "void",
+                    "desc": "Set up perspective with explicit viewport size and FOV in degrees",
+                    "keywords": [],
+                    "desc_ja": "明示的な画面サイズと度数のFOVで透視投影を設定",
+                    "desc_ko": "명시적 뷰포트 크기와 도 단위 FOV로 원근 투영 설정",
+                    "related": [
+                        "setupScreenFovWithSize"
+                    ],
+                    "details": "Degree companion: accepts 0 (orthographic) or 0 < fov < 180. Invalid values warn once and are ignored. setupScreenOrtho() and setDefaultScreenOrtho() are the readable orthographic spellings.",
+                    "details_ja": "度数版。0（正投影）または 0 < fov < 180 を受け付け、範囲外は一度だけ警告して無視する。正投影には意図が明確な setupScreenOrtho() と setDefaultScreenOrtho() を使える。",
+                    "details_ko": "도 단위 버전. 0(정사영) 또는 0 < fov < 180을 허용하며 범위 밖 값은 한 번 경고하고 무시한다. 정사영에는 의도가 명확한 setupScreenOrtho()와 setDefaultScreenOrtho()를 사용할 수 있다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "setupScreenFov",
-                    "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "float fovDeg, float nearDist = 0.0, float farDist = 0.0",
+                    "params": "fovRadians, nearDist, farDist",
+                    "params_typed": "float fovRadians, float nearDist = 0.0, float farDist = 0.0",
                     "return_type": "void",
-                    "desc": "Set up screen projection with specified FOV (0 = ortho, >0 = perspective)",
+                    "desc": "Set up screen perspective with FOV in radians",
                     "keywords": [
                         "field of view",
                         "projection",
@@ -13855,12 +13901,37 @@ const TrussCAPI = {
                         "ortho",
                         "screen setup"
                     ],
-                    "desc_ja": "指定したFOVで画面投影を設定（0 = 正投影、0より大 = パースペクティブ）",
-                    "desc_ko": "지정한 FOV로 화면 투영을 설정 (0 = 정사영, 0보다 크면 원근)",
+                    "desc_ja": "ラジアンのFOVで画面の透視投影を設定",
+                    "desc_ko": "라디안 FOV로 화면 원근 투영 설정",
                     "related": [
                         "setDefaultScreenFov",
                         "EasyCam::setFov"
                     ],
+                    "details": "Accepts 0 (orthographic) or 0 < fov < TAU/2 radians. Invalid values warn once and are ignored, preserving the current projection/default. setupScreenOrtho() and setDefaultScreenOrtho() are the readable spellings for orthographic setup and defaults.",
+                    "details_ja": "0（正投影）または 0 < fov < TAU/2 のラジアンを受け付ける。範囲外は一度だけ警告して無視し、現在の投影・デフォルト値を維持する。正投影の設定とデフォルト値には、意図が明確な setupScreenOrtho() と setDefaultScreenOrtho() を使える。",
+                    "details_ko": "0(정사영) 또는 0 < fov < TAU/2 라디안을 허용한다. 범위 밖 값은 한 번 경고하고 무시하여 현재 투영과 기본값을 유지한다. 정사영 설정과 기본값에는 의도가 명확한 setupScreenOrtho()와 setDefaultScreenOrtho()를 사용할 수 있다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "setupScreenFovDeg",
+                    "params": "fovDeg, nearDist, farDist",
+                    "params_typed": "float fovDeg, float nearDist = 0.0, float farDist = 0.0",
+                    "return_type": "void",
+                    "desc": "Set up screen perspective with FOV in degrees",
+                    "keywords": [],
+                    "desc_ja": "度数のFOVで画面の透視投影を設定",
+                    "desc_ko": "도 단위 FOV로 화면 원근 투영 설정",
+                    "related": [
+                        "setupScreenFov"
+                    ],
+                    "details": "Degree companion: accepts 0 (orthographic) or 0 < fov < 180. Invalid values warn once and are ignored. setupScreenOrtho() and setDefaultScreenOrtho() are the readable orthographic spellings.",
+                    "details_ja": "度数版。0（正投影）または 0 < fov < 180 を受け付け、範囲外は一度だけ警告して無視する。正投影には意図が明確な setupScreenOrtho() と setDefaultScreenOrtho() を使える。",
+                    "details_ko": "도 단위 버전. 0(정사영) 또는 0 < fov < 180을 허용하며 범위 밖 값은 한 번 경고하고 무시한다. 정사영에는 의도가 명확한 setupScreenOrtho()와 setDefaultScreenOrtho()를 사용할 수 있다.",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -13870,10 +13941,10 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setupScreenPerspective",
-                    "params": "fovDeg, nearDist, farDist",
-                    "params_typed": "float fovDeg = 45.0, float nearDist = 0.0, float farDist = 0.0",
+                    "params": "fovRadians, nearDist, farDist",
+                    "params_typed": "float fovRadians = …, float nearDist = 0.0, float farDist = 0.0",
                     "return_type": "void",
-                    "desc": "Set up perspective projection (oF-style default 3D)",
+                    "desc": "Set up screen perspective with FOV in radians (default TAU/8)",
                     "keywords": [
                         "projection",
                         "3d mode",
@@ -13881,12 +13952,37 @@ const TrussCAPI = {
                         "ofSetupScreenPerspective",
                         "fov"
                     ],
-                    "desc_ja": "パースペクティブ投影を設定（oF風デフォルト3D）",
-                    "desc_ko": "원근 투영을 설정 (oF 스타일 기본 3D)",
+                    "desc_ja": "ラジアンのFOVで透視投影を設定（既定 TAU/8）",
+                    "desc_ko": "라디안 FOV로 원근 투영 설정 (기본 TAU/8)",
                     "related": [
                         "setupScreenFov",
                         "Mat4::perspective"
                     ],
+                    "details": "Accepts 0 (orthographic) or 0 < fov < TAU/2 radians. Invalid values warn once and are ignored, preserving the current projection/default. setupScreenOrtho() and setDefaultScreenOrtho() are the readable spellings for orthographic setup and defaults.",
+                    "details_ja": "0（正投影）または 0 < fov < TAU/2 のラジアンを受け付ける。範囲外は一度だけ警告して無視し、現在の投影・デフォルト値を維持する。正投影の設定とデフォルト値には、意図が明確な setupScreenOrtho() と setDefaultScreenOrtho() を使える。",
+                    "details_ko": "0(정사영) 또는 0 < fov < TAU/2 라디안을 허용한다. 범위 밖 값은 한 번 경고하고 무시하여 현재 투영과 기본값을 유지한다. 정사영 설정과 기본값에는 의도가 명확한 setupScreenOrtho()와 setDefaultScreenOrtho()를 사용할 수 있다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "setupScreenPerspectiveDeg",
+                    "params": "fovDeg, nearDist, farDist",
+                    "params_typed": "float fovDeg = 45.0, float nearDist = 0.0, float farDist = 0.0",
+                    "return_type": "void",
+                    "desc": "Set up screen perspective with FOV in degrees (default 45)",
+                    "keywords": [],
+                    "desc_ja": "度数のFOVで透視投影を設定（既定45）",
+                    "desc_ko": "도 단위 FOV로 원근 투영 설정 (기본 45)",
+                    "related": [
+                        "setupScreenPerspective"
+                    ],
+                    "details": "Degree companion: accepts 0 (orthographic) or 0 < fov < 180. Invalid values warn once and are ignored. setupScreenOrtho() and setDefaultScreenOrtho() are the readable orthographic spellings.",
+                    "details_ja": "度数版。0（正投影）または 0 < fov < 180 を受け付け、範囲外は一度だけ警告して無視する。正投影には意図が明確な setupScreenOrtho() と setDefaultScreenOrtho() を使える。",
+                    "details_ko": "도 단위 버전. 0(정사영) 또는 0 < fov < 180을 허용하며 범위 밖 값은 한 번 경고하고 무시한다. 정사영에는 의도가 명확한 setupScreenOrtho()와 setDefaultScreenOrtho()를 사용할 수 있다.",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -13909,8 +14005,12 @@ const TrussCAPI = {
                     "desc_ko": "정사영 투영을 설정 (2D 모드)",
                     "related": [
                         "setupScreenFov",
+                        "setDefaultScreenOrtho",
                         "Mat4::ortho"
                     ],
+                    "details": "Readable spelling of setupScreenFov(0). Use setDefaultScreenOrtho() to make orthographic projection the default.",
+                    "details_ja": "setupScreenFov(0) の意図が明確な表記。正投影をデフォルトにするには setDefaultScreenOrtho() を使う。",
+                    "details_ko": "setupScreenFov(0)의 의도를 명확히 표현한다. 정사영을 기본값으로 설정하려면 setDefaultScreenOrtho()를 사용한다.",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -13920,20 +14020,52 @@ const TrussCAPI = {
                 },
                 {
                     "name": "setDefaultScreenFov",
-                    "params": "fovDeg",
-                    "params_typed": "float fovDeg",
+                    "params": "fovRadians",
+                    "params_typed": "float fovRadians",
                     "return_type": "void",
-                    "desc": "Set default screen FOV (applied at frame start)",
+                    "desc": "Set default screen FOV in radians (frame start and FBO begin)",
                     "keywords": [
                         "field of view",
                         "projection",
                         "perspective"
                     ],
-                    "desc_ja": "デフォルトのスクリーンFOVを設定（フレーム開始時に適用）",
-                    "desc_ko": "기본 스크린 FOV를 설정 (프레임 시작 시 적용)",
+                    "desc_ja": "デフォルトFOVをラジアンで設定（フレーム開始・FBO開始時）",
+                    "desc_ko": "기본 FOV를 라디안으로 설정 (프레임 및 FBO 시작 시)",
                     "related": [
                         "getDefaultScreenFov"
                     ],
+                    "details": "Accepts 0 (orthographic) or 0 < fov < TAU/2 radians. Invalid values warn once and are ignored, preserving the current projection/default. setupScreenOrtho() and setDefaultScreenOrtho() are the readable spellings for orthographic setup and defaults.",
+                    "details_ja": "0（正投影）または 0 < fov < TAU/2 のラジアンを受け付ける。範囲外は一度だけ警告して無視し、現在の投影・デフォルト値を維持する。正投影の設定とデフォルト値には、意図が明確な setupScreenOrtho() と setDefaultScreenOrtho() を使える。",
+                    "details_ko": "0(정사영) 또는 0 < fov < TAU/2 라디안을 허용한다. 범위 밖 값은 한 번 경고하고 무시하여 현재 투영과 기본값을 유지한다. 정사영 설정과 기본값에는 의도가 명확한 setupScreenOrtho()와 setDefaultScreenOrtho()를 사용할 수 있다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "setDefaultScreenOrtho",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Set orthographic projection as the default (frame start and FBO begin)",
+                    "keywords": [
+                        "orthographic",
+                        "2d mode",
+                        "default",
+                        "projection"
+                    ],
+                    "desc_ja": "正投影をデフォルトに設定（フレーム開始・FBO開始時）",
+                    "desc_ko": "정사영을 기본 투영으로 설정 (프레임 및 FBO 시작 시)",
+                    "related": [
+                        "setupScreenOrtho",
+                        "setDefaultScreenFov",
+                        "getDefaultScreenFov"
+                    ],
+                    "details": "Readable spelling of setDefaultScreenFov(0), paired with setupScreenOrtho(). getDefaultScreenFov() returns 0 afterward.",
+                    "details_ja": "setDefaultScreenFov(0) の意図が明確な表記で、setupScreenOrtho() と対になる。呼び出し後は getDefaultScreenFov() が 0 を返す。",
+                    "details_ko": "setDefaultScreenFov(0)의 의도를 명확히 표현하며 setupScreenOrtho()와 짝을 이룬다. 호출 후 getDefaultScreenFov()는 0을 반환한다.",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -13946,15 +14078,56 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "float",
-                    "desc": "Get current default screen FOV",
+                    "desc": "Get default screen FOV in radians",
                     "keywords": [
                         "field of view",
                         "projection"
                     ],
-                    "desc_ja": "現在のデフォルトスクリーンFOVを取得",
-                    "desc_ko": "현재 기본 스크린 FOV를 얻음",
+                    "desc_ja": "デフォルトFOVをラジアンで取得",
+                    "desc_ko": "기본 FOV를 라디안으로 얻음",
                     "related": [
                         "setDefaultScreenFov"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "setDefaultScreenFovDeg",
+                    "params": "fovDeg",
+                    "params_typed": "float fovDeg",
+                    "return_type": "void",
+                    "desc": "Set default screen FOV in degrees",
+                    "keywords": [],
+                    "desc_ja": "デフォルトFOVを度数で設定",
+                    "desc_ko": "기본 FOV를 도 단위로 설정",
+                    "related": [
+                        "setDefaultScreenFov"
+                    ],
+                    "details": "Degree companion: accepts 0 (orthographic) or 0 < fov < 180. Invalid values warn once and are ignored. setupScreenOrtho() and setDefaultScreenOrtho() are the readable orthographic spellings.",
+                    "details_ja": "度数版。0（正投影）または 0 < fov < 180 を受け付け、範囲外は一度だけ警告して無視する。正投影には意図が明確な setupScreenOrtho() と setDefaultScreenOrtho() を使える。",
+                    "details_ko": "도 단위 버전. 0(정사영) 또는 0 < fov < 180을 허용하며 범위 밖 값은 한 번 경고하고 무시한다. 정사영에는 의도가 명확한 setupScreenOrtho()와 setDefaultScreenOrtho()를 사용할 수 있다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "getDefaultScreenFovDeg",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Get default screen FOV in degrees",
+                    "keywords": [],
+                    "desc_ja": "デフォルトFOVを度数で取得",
+                    "desc_ko": "기본 FOV를 도 단위로 얻음",
+                    "related": [
+                        "getDefaultScreenFov"
                     ],
                     "examples": [
                         {
@@ -15425,6 +15598,427 @@ const TrussCAPI = {
             ],
             "name_ja": "ネットワーク",
             "name_ko": "네트워크"
+        },
+        {
+            "name": "MCP",
+            "functions": [
+                {
+                    "name": "mcp::setToolLevel",
+                    "params": "level",
+                    "params_typed": "ToolLevel level",
+                    "return_type": "void",
+                    "desc": "Set the host grant. ReadOnly or Control opens loopback HTTP unless TRUSSC_MCP=0; dev builds retain Control. Registration order is independent; the grant survives hot reload.",
+                    "keywords": [],
+                    "desc_ja": "ホストの許可レベルを設定する。ReadOnly または Control は TRUSSC_MCP=0 を除きループバック HTTP を開く。開発ビルドは Control を維持する。登録順に依存せず、ホットリロード後も保持される。",
+                    "desc_ko": "호스트 허용 수준을 설정한다. TRUSSC_MCP=0이 아니면 ReadOnly 또는 Control이 루프백 HTTP를 연다. 개발 빌드는 Control을 유지한다. 등록 순서와 무관하며 핫 리로드 후에도 유지된다.",
+                    "examples": [
+                        {
+                            "name": "audioDeviceExample",
+                            "group": "sound"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::getToolLevel",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "ToolLevel",
+                    "desc": "Return the current host grant, checked for every tools/list and tools/call.",
+                    "keywords": [],
+                    "desc_ja": "tools/list と tools/call ごとに確認される現在のホスト許可レベルを返す。",
+                    "desc_ko": "tools/list와 tools/call마다 확인하는 현재 호스트 허용 수준을 반환한다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::isDebuggerEnabled",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Compatibility query: true when getToolLevel() is at least Control.",
+                    "keywords": [],
+                    "desc_ja": "互換用の問い合わせ。getToolLevel() が Control 以上なら true。",
+                    "desc_ko": "호환성 조회: getToolLevel()이 Control 이상이면 true이다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::deferToolResultUntilAfterFrame",
+                    "params": "produce, targetWindow",
+                    "params_typed": "std::function<json ()> produce, const void * targetWindow = nullptr",
+                    "return_type": "void",
+                    "desc": "In a tool handler, defer the JSON result producer until after the target window's present; null targets the main window.",
+                    "keywords": [],
+                    "desc_ja": "ツールハンドラー内で JSON 結果の生成を対象ウィンドウの present 後まで遅延する。null はメインウィンドウ。",
+                    "desc_ko": "도구 핸들러에서 JSON 결과 생성을 대상 창의 present 이후로 지연한다. null은 기본 창이다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::deferToolResultTwoStage",
+                    "params": "mainStage, targetWindow",
+                    "params_typed": "std::function<std::function<json ()> ()> mainStage, const void * targetWindow = nullptr",
+                    "return_type": "void",
+                    "desc": "Defer a main-thread stage until after present; its returned JSON producer runs on the HTTP worker for expensive encoding.",
+                    "keywords": [],
+                    "desc_ja": "メインスレッドの処理を present 後に遅延する。返された JSON 生成関数は HTTP ワーカーで実行され、重いエンコードを分離できる。",
+                    "desc_ko": "메인 스레드 단계를 present 이후로 지연한다. 반환된 JSON 생성 함수는 HTTP 작업 스레드에서 실행되어 무거운 인코딩을 처리한다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::stopHttpServer",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Stop the HTTP listener and answer pending requests before joining the worker. No-op on Web.",
+                    "keywords": [],
+                    "desc_ja": "HTTP リスナーを停止し、保留中の要求に応答してからワーカーを終了する。Web では何もしない。",
+                    "desc_ko": "HTTP 리스너를 중지하고 대기 중인 요청에 응답한 뒤 작업 스레드를 종료한다. Web에서는 아무 작업도 하지 않는다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ]
+                },
+                {
+                    "name": "mcp::startHttpServer",
+                    "params": "port, host, token",
+                    "params_typed": "int port = 0, const std::string & host = std::string(\"127.0.0.1\"), const std::string & token = std::string(\"\")",
+                    "return_type": "void",
+                    "desc": "Explicitly open HTTP (default 127.0.0.1, port 0 chooses an OS port); non-loopback requires a token. TRUSSC_MCP=0 closes. Call before setToolLevel() to choose the address: the first opener wins; mismatched later parameters log an Error and change nothing. No-op on Web.",
+                    "keywords": [],
+                    "desc_ja": "HTTP を明示的に開く。既定は 127.0.0.1、ポート 0 は OS が選択する。非ループバックにはトークンが必要。TRUSSC_MCP=0 では開かない。アドレス指定は setToolLevel() より前に行う。最初の指定が有効で、後の不一致は Error を記録して変更しない。Web では何もしない。",
+                    "desc_ko": "HTTP를 명시적으로 연다. 기본 주소는 127.0.0.1이며 포트 0은 OS가 선택한다. 외부 주소에는 토큰이 필요하다. TRUSSC_MCP=0이면 열리지 않는다. 주소를 선택하려면 setToolLevel() 전에 호출한다. 첫 설정을 유지하며 이후 불일치는 Error를 기록하고 변경하지 않는다. Web에서는 아무 작업도 하지 않는다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ]
+                },
+                {
+                    "name": "mcp::processHttpQueue",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Process queued HTTP requests on the main thread; called automatically by the frame loop. No-op on Web.",
+                    "keywords": [],
+                    "desc_ja": "キュー内の HTTP 要求をメインスレッドで処理する。フレームループが自動で呼ぶ。Web では何もしない。",
+                    "desc_ko": "대기 중인 HTTP 요청을 메인 스레드에서 처리한다. 프레임 루프가 자동으로 호출한다. Web에서는 아무 작업도 하지 않는다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ]
+                },
+                {
+                    "name": "mcp::getHttpPort",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "int",
+                    "desc": "Return the bound HTTP port, or 0 when stopped or on Web.",
+                    "keywords": [],
+                    "desc_ja": "バインドされた HTTP ポートを返す。停止中または Web では 0。",
+                    "desc_ko": "바인딩된 HTTP 포트를 반환한다. 중지 상태나 Web에서는 0이다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ]
+                },
+                {
+                    "name": "mcp::enableDebugger",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Deprecated no-op; use setToolLevel(ToolLevel::Control). Removal at v1.0.0.",
+                    "keywords": [],
+                    "desc_ja": "非推奨の無操作関数。setToolLevel(ToolLevel::Control) を使用する。v1.0.0 で削除予定。",
+                    "desc_ko": "사용 중단 예정인 무동작 함수. setToolLevel(ToolLevel::Control)을 사용한다. v1.0.0에서 제거 예정.",
+                    "deprecated": {
+                        "reason": "use setToolLevel(ToolLevel::Control); will be removed in v1.0.0"
+                    },
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "android"
+                    ]
+                },
+                {
+                    "name": "mcp::hasTool",
+                    "params": "name",
+                    "params_typed": "const std::string & name",
+                    "return_type": "bool",
+                    "desc": "Whether a tool is registered, regardless of its current exposure.",
+                    "keywords": [],
+                    "desc_ja": "現在の公開状態によらずツールが登録されているかを返す。",
+                    "desc_ko": "현재 공개 상태와 무관하게 도구 등록 여부를 반환한다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::tool",
+                    "params": "name, desc",
+                    "params_typed": "const std::string & name, const std::string & desc",
+                    "return_type": "ToolBuilder",
+                    "desc": "Build a tool registration. Only tc_ is reserved; tcx_ is free. Registration never starts the listener.",
+                    "keywords": [],
+                    "desc_ja": "ツール登録を組み立てる。予約済み接頭辞は tc_ のみ。tcx_ は自由に使える。登録だけではリスナーは起動しない。",
+                    "desc_ko": "도구 등록을 구성한다. tc_만 예약되어 있고 tcx_는 자유롭게 사용할 수 있다. 등록만으로 리스너가 시작되지 않는다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::resource",
+                    "params": "uri, name",
+                    "params_typed": "const std::string & uri, const std::string & name",
+                    "return_type": "ResourceBuilder",
+                    "desc": "Build a URI-addressed text resource registration; registration alone does not open HTTP.",
+                    "keywords": [],
+                    "desc_ja": "URI で参照するテキストリソースの登録を組み立てる。登録だけでは HTTP は開かない。",
+                    "desc_ko": "URI로 참조하는 텍스트 리소스 등록을 구성한다. 등록만으로 HTTP가 열리지 않는다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::status",
+                    "params": "name, getter",
+                    "params_typed": "const std::string & name, std::function<double ()> getter",
+                    "return_type": "void",
+                    "desc": "Publish a numeric or string getter through ReadOnly tc_get_status; registering the same name replaces it.",
+                    "keywords": [],
+                    "desc_ja": "数値または文字列の取得関数を ReadOnly の tc_get_status で公開する。同名の登録は置き換える。",
+                    "desc_ko": "숫자 또는 문자열 조회 함수를 ReadOnly tc_get_status로 공개한다. 같은 이름을 등록하면 교체된다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::status",
+                    "params": "name, getter",
+                    "params_typed": "const std::string & name, std::function<std::string ()> getter",
+                    "return_type": "void",
+                    "desc": "Publish a numeric or string getter through ReadOnly tc_get_status; registering the same name replaces it.",
+                    "keywords": [],
+                    "desc_ja": "数値または文字列の取得関数を ReadOnly の tc_get_status で公開する。同名の登録は置き換える。",
+                    "desc_ko": "숫자 또는 문자열 조회 함수를 ReadOnly tc_get_status로 공개한다. 같은 이름을 등록하면 교체된다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::statusGraph",
+                    "params": "name, getter",
+                    "params_typed": "const std::string & name, std::function<double ()> getter",
+                    "return_type": "void",
+                    "desc": "Publish a numeric getter marked for time-series plotting through ReadOnly tc_get_status.",
+                    "keywords": [],
+                    "desc_ja": "時系列グラフ用の数値取得関数を ReadOnly の tc_get_status で公開する。",
+                    "desc_ko": "시계열 그래프용 숫자 조회 함수를 ReadOnly tc_get_status로 공개한다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::statusImage",
+                    "params": "name, getter",
+                    "params_typed": "const std::string & name, std::function<trussc::Pixels ()> getter",
+                    "return_type": "void",
+                    "desc": "Publish a Pixels getter through ReadOnly tc_get_status_image, evaluated on demand on the main thread.",
+                    "keywords": [],
+                    "desc_ja": "Pixels の取得関数を ReadOnly の tc_get_status_image で公開する。要求時にメインスレッドで評価する。",
+                    "desc_ko": "Pixels 조회 함수를 ReadOnly tc_get_status_image로 공개한다. 요청 시 메인 스레드에서 평가한다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::alert",
+                    "params": "msg",
+                    "params_typed": "const std::string & msg",
+                    "return_type": "void",
+                    "desc": "Log an operator warning and queue it for ReadOnly tc_get_alerts; thread-safe, retains the latest 100 pending alerts.",
+                    "keywords": [],
+                    "desc_ja": "運用者向けの警告をログに記録し ReadOnly の tc_get_alerts 用にキューへ入れる。スレッドセーフで未取得の最新 100 件を保持する。",
+                    "desc_ko": "운영자 경고를 기록하고 ReadOnly tc_get_alerts용 큐에 넣는다. 스레드 안전하며 최근 미수신 경고 100개를 유지한다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mcp::registerInspectionTools",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Deprecated alias of setToolLevel(ToolLevel::ReadOnly); removal at v1.0.0.",
+                    "keywords": [],
+                    "desc_ja": "setToolLevel(ToolLevel::ReadOnly) の非推奨別名。v1.0.0 で削除予定。",
+                    "desc_ko": "setToolLevel(ToolLevel::ReadOnly)의 사용 중단 예정 별칭. v1.0.0에서 제거 예정.",
+                    "deprecated": {
+                        "reason": "use setToolLevel(ToolLevel::ReadOnly); will be removed in v1.0.0"
+                    }
+                },
+                {
+                    "name": "mcp::registerControlTools",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Deprecated alias of setToolLevel(ToolLevel::Control); removal at v1.0.0.",
+                    "keywords": [],
+                    "desc_ja": "setToolLevel(ToolLevel::Control) の非推奨別名。v1.0.0 で削除予定。",
+                    "desc_ko": "setToolLevel(ToolLevel::Control)의 사용 중단 예정 별칭. v1.0.0에서 제거 예정.",
+                    "deprecated": {
+                        "reason": "use setToolLevel(ToolLevel::Control); will be removed in v1.0.0"
+                    }
+                },
+                {
+                    "name": "mcp::registerDebuggerTools",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Deprecated alias of setToolLevel(ToolLevel::Control); removal at v1.0.0.",
+                    "keywords": [],
+                    "desc_ja": "setToolLevel(ToolLevel::Control) の非推奨別名。v1.0.0 で削除予定。",
+                    "desc_ko": "setToolLevel(ToolLevel::Control)의 사용 중단 예정 별칭. v1.0.0에서 제거 예정.",
+                    "deprecated": {
+                        "reason": "use setToolLevel(ToolLevel::Control); will be removed in v1.0.0"
+                    }
+                }
+            ],
+            "name_ja": "MCP",
+            "name_ko": "MCP"
+        },
+        {
+            "name": "Console",
+            "functions": [
+                {
+                    "name": "console::start",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Opt in to stdin commands: call in setup() for windowed or headless apps. Neither runner starts input automatically (breaking in v0.8.0). Drains pending commands before enabling delivery; the first call creates the process's only detached reader, which reads until EOF. Later starts reuse it. LF/CRLF and a partial last line at EOF are supported. Unavailable on Web.",
+                    "keywords": [],
+                    "desc_ja": "標準入力コマンドを有効にする。ウィンドウ付き・ヘッドレスとも setup() で明示的に呼ぶ。ランナーは自動で開始しない（v0.8.0 の破壊的変更）。保留中のコマンドを破棄してから配信を有効にする。初回のみプロセスで唯一の detached リーダーを作成し、EOF まで読み取る。再開時は同じリーダーを使う。LF・CRLF と EOF 前の改行なし最終行に対応。Web では利用不可。",
+                    "desc_ko": "표준 입력 명령을 명시적으로 활성화한다. 창 앱과 헤드리스 앱 모두 setup()에서 호출해야 하며 러너는 자동 시작하지 않는다(v0.8.0 호환성 변경). 대기 중인 명령을 버린 뒤 전달을 활성화한다. 최초 호출만 프로세스의 유일한 detached 리더를 생성하며 EOF까지 읽는다. 재시작은 같은 리더를 사용한다. LF/CRLF와 EOF 앞의 개행 없는 마지막 줄을 지원한다. Web에서는 사용할 수 없다.",
+                    "examples": [
+                        {
+                            "name": "vectorMathExample",
+                            "group": "math"
+                        }
+                    ]
+                },
+                {
+                    "name": "console::stop",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Disable stdin command delivery and discard queued commands. The detached reader continues consuming stdin until EOF, dropping lines read while stopped. start() enables delivery again. Both runners stop delivery before app exit/cleanup. No-op on Web.",
+                    "keywords": [],
+                    "desc_ja": "標準入力コマンドの配信を無効にしてキューを破棄する。detached リーダーは EOF まで読み取りを続け、停止中に読んだ行を捨てる。start() で配信を再開できる。両ランナーはアプリの exit()/cleanup() 前に配信を停止する。Web では何もしない。",
+                    "desc_ko": "표준 입력 명령 전달을 비활성화하고 큐를 비운다. detached 리더는 EOF까지 계속 읽으며 중지 중에 읽은 줄은 버린다. start()로 전달을 재개한다. 두 러너 모두 앱의 exit()/cleanup() 전에 전달을 중지한다. Web에서는 아무 작업도 하지 않는다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "console::isEnabled",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Whether stdin command delivery is enabled. False until the app calls start(), and after stop(); always false on Web.",
+                    "keywords": [],
+                    "desc_ja": "標準入力コマンドの配信が有効か。アプリが start() を呼ぶまでは false、stop() 後も false。Web では常に false。",
+                    "desc_ko": "표준 입력 명령 전달 활성화 여부. 앱이 start()를 호출하기 전과 stop() 후에는 false이며 Web에서는 항상 false이다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                }
+            ],
+            "name_ja": "コンソール",
+            "name_ko": "콘솔"
         },
         {
             "name": "Other",
@@ -19037,6 +19631,78 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "LoadResult",
+            "desc": "Result of a resource load (Image, SoundBuffer, VideoPlayer, Font, ...). Truthy on success; on failure carries a LoadError and a human-readable message.",
+            "keywords": [
+                "error",
+                "load",
+                "result",
+                "fail"
+            ],
+            "desc_ja": "リソース読み込み（Image、SoundBuffer、VideoPlayer、Font など）の結果。成功時は真、失敗時は LoadError とメッセージを保持",
+            "desc_ko": "리소스 로드(Image, SoundBuffer, VideoPlayer, Font 등)의 결과. 성공 시 참, 실패 시 LoadError와 메시지를 보유",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "LoadError",
+                "loadErrorName"
+            ],
+            "properties": [
+                {
+                    "name": "error",
+                    "type": "LoadError",
+                    "desc": "What went wrong; LoadError::None on success",
+                    "desc_ja": "失敗の種別。成功時は LoadError::None",
+                    "desc_ko": "실패 종류. 성공 시 LoadError::None"
+                },
+                {
+                    "name": "message",
+                    "type": "std::string",
+                    "desc": "Human-readable failure detail (may be empty)",
+                    "desc_ja": "人間可読な失敗の詳細（空のこともある）",
+                    "desc_ko": "사람이 읽을 수 있는 실패 상세(비어 있을 수 있음)"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "ok",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "true if the load succeeded (error == LoadError::None)"
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "success",
+                    "signatures": [
+                        {
+                            "ret": "LoadResult",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Make a success result (static)"
+                },
+                {
+                    "name": "fail",
+                    "signatures": [
+                        {
+                            "ret": "LoadResult",
+                            "params": "LoadError e, std::string msg = std::string()"
+                        }
+                    ],
+                    "desc": "Make a failure result with an error kind and optional message (static)"
+                }
+            ]
+        },
+        {
             "name": "LogEventArgs",
             "desc": "Arguments delivered for each log message (level, text, and timestamp)",
             "keywords": [
@@ -19835,9 +20501,9 @@ const TrussCAPI = {
                 {
                     "name": "h",
                     "type": "float",
-                    "desc": "Hue (0.0-1.0)",
-                    "desc_ja": "色相 (0.0-1.0)",
-                    "desc_ko": "색상 (0.0-1.0)"
+                    "desc": "Hue (0–1 of a turn): color data, not a rotation angle",
+                    "desc_ja": "色相（1周を0〜1で表す）。回転角ではなく色データ",
+                    "desc_ko": "색상 (한 바퀴를 0–1로 표현): 회전각이 아닌 색 데이터"
                 },
                 {
                     "name": "s",
@@ -20076,9 +20742,9 @@ const TrussCAPI = {
                 {
                     "name": "H",
                     "type": "float",
-                    "desc": "Hue (0.0-1.0)",
-                    "desc_ja": "色相 (0.0-1.0)",
-                    "desc_ko": "색상 (0.0-1.0)"
+                    "desc": "Hue (0–1 of a turn): color data, not a rotation angle",
+                    "desc_ja": "色相（1周を0〜1で表す）。回転角ではなく色データ",
+                    "desc_ko": "색상 (한 바퀴를 0–1로 표현): 회전각이 아닌 색 데이터"
                 },
                 {
                     "name": "alpha",
@@ -21653,78 +22319,6 @@ const TrussCAPI = {
             ]
         },
         {
-            "name": "LoadResult",
-            "desc": "Result of a resource load (Image, SoundBuffer, VideoPlayer, Font, ...). Truthy on success; on failure carries a LoadError and a human-readable message.",
-            "keywords": [
-                "error",
-                "load",
-                "result",
-                "fail"
-            ],
-            "desc_ja": "リソース読み込み（Image、SoundBuffer、VideoPlayer、Font など）の結果。成功時は真、失敗時は LoadError とメッセージを保持",
-            "desc_ko": "리소스 로드(Image, SoundBuffer, VideoPlayer, Font 등)의 결과. 성공 시 참, 실패 시 LoadError와 메시지를 보유",
-            "examples": [
-                {
-                    "name": "AllFeaturesExample",
-                    "group": "tests"
-                }
-            ],
-            "related": [
-                "LoadError",
-                "loadErrorName"
-            ],
-            "properties": [
-                {
-                    "name": "error",
-                    "type": "LoadError",
-                    "desc": "What went wrong; LoadError::None on success",
-                    "desc_ja": "失敗の種別。成功時は LoadError::None",
-                    "desc_ko": "실패 종류. 성공 시 LoadError::None"
-                },
-                {
-                    "name": "message",
-                    "type": "std::string",
-                    "desc": "Human-readable failure detail (may be empty)",
-                    "desc_ja": "人間可読な失敗の詳細（空のこともある）",
-                    "desc_ko": "사람이 읽을 수 있는 실패 상세(비어 있을 수 있음)"
-                }
-            ],
-            "methods": [
-                {
-                    "name": "ok",
-                    "signatures": [
-                        {
-                            "ret": "bool",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "true if the load succeeded (error == LoadError::None)"
-                }
-            ],
-            "static_methods": [
-                {
-                    "name": "success",
-                    "signatures": [
-                        {
-                            "ret": "LoadResult",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "Make a success result (static)"
-                },
-                {
-                    "name": "fail",
-                    "signatures": [
-                        {
-                            "ret": "LoadResult",
-                            "params": "LoadError e, std::string msg = std::string()"
-                        }
-                    ],
-                    "desc": "Make a failure result with an error kind and optional message (static)"
-                }
-            ]
-        },
-        {
             "name": "SoundSource",
             "desc": "Abstract base for anything Sound::play() can consume. Two concrete subclasses: SoundBuffer (eager, full PCM in RAM) and SoundStream (decoded on demand from disk). Holds the shared channels / sampleRate fields and the kind() / getDuration() interface.",
             "keywords": [
@@ -21872,7 +22466,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "File the samples were decoded from (for AAC, when loaded through load()); empty for memory, PCM and generated buffers."
+                    "desc": "Resolved path of the last successful file load, including direct loadAac(). Empty after a failed load, a memory/PCM load, or generation."
                 },
                 {
                     "name": "loadOgg",
@@ -21882,7 +22476,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis)."
+                    "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis). Relative paths resolve via getDataPath(); absolute paths pass through."
                 },
                 {
                     "name": "loadWav",
@@ -21892,7 +22486,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Decode a WAV file into PCM."
+                    "desc": "Decode a WAV file into PCM. Relative paths resolve via getDataPath(); absolute paths pass through."
                 },
                 {
                     "name": "loadMp3",
@@ -21902,7 +22496,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Decode an MP3 file into PCM."
+                    "desc": "Decode an MP3 file into PCM. Relative paths resolve via getDataPath(); absolute paths pass through."
                 },
                 {
                     "name": "loadFlac",
@@ -21912,7 +22506,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Decode a FLAC file into PCM."
+                    "desc": "Decode a FLAC file into PCM. Relative paths resolve via getDataPath(); absolute paths pass through."
                 },
                 {
                     "name": "load",
@@ -21922,7 +22516,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Decode a file into PCM, auto-detecting format from the extension (.wav .mp3 .ogg .flac .aac .m4a, case-insensitive). Returns false on failure."
+                    "desc": "Decode a file into PCM, auto-detecting format from the extension (.wav .mp3 .ogg .flac .aac .m4a, case-insensitive). Returns false on failure. Relative paths resolve via getDataPath(); absolute paths pass through."
                 },
                 {
                     "name": "loadWavFromMemory",
@@ -21972,7 +22566,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms).",
+                    "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms). Relative paths resolve via getDataPath(); absolute paths pass through. On Web, load waits for decoded PCM using OfflineAudioContext, including in setup().",
                     "platforms": [
                         "macos",
                         "windows",
@@ -21980,8 +22574,8 @@ const TrussCAPI = {
                         "ios",
                         "web"
                     ],
-                    "platformNote": "AAC/M4A decoding (reached via Sound::load() on .aac/.m4a, or SoundBuffer::loadAac). macOS/iOS use AVFoundation (AVAssetReader), Windows uses Media Foundation, Linux uses GStreamer, wasm uses Web Audio decodeAudioData (deferred until play(), placeholder samples until then). STUBBED on Android: logs 'AAC loading not yet implemented' and returns false (TODO MediaCodec). All other audio formats (WAV/MP3/FLAC via miniaudio, OGG via stb_vorbis) work on all 6 platforms.",
-                    "platformNote_ja": "AAC/M4A デコード (.aac/.m4a を Sound::load()、または SoundBuffer::loadAac で到達)。macOS/iOS は AVFoundation (AVAssetReader)、Windows は Media Foundation、Linux は GStreamer、wasm は Web Audio decodeAudioData (play() まで遅延、それまではプレースホルダ)。Android のみスタブで 'AAC loading not yet implemented' を出して false を返す (TODO MediaCodec)。他フォーマット (WAV/MP3/FLAC=miniaudio、OGG=stb_vorbis) は全6プラットフォームで動作。"
+                    "platformNote": "AAC/M4A decoding (reached via Sound::load() on .aac/.m4a, or SoundBuffer::loadAac). macOS/iOS use AVFoundation (AVAssetReader), Windows uses Media Foundation, Linux uses GStreamer, wasm uses Web Audio decodeAudioData with OfflineAudioContext (load waits for decoded PCM, including in setup()). STUBBED on Android: logs 'AAC loading not yet implemented' and returns false (TODO MediaCodec). All other audio formats (WAV/MP3/FLAC via miniaudio, OGG via stb_vorbis) work on all 6 platforms.",
+                    "platformNote_ja": "AAC/M4A デコード (.aac/.m4a を Sound::load()、または SoundBuffer::loadAac で到達)。macOS/iOS は AVFoundation (AVAssetReader)、Windows は Media Foundation、Linux は GStreamer、wasm は Web Audio decodeAudioData と OfflineAudioContext (setup() 内でも load 時に PCM デコード完了まで待機)。Android のみスタブで 'AAC loading not yet implemented' を出して false を返す (TODO MediaCodec)。他フォーマット (WAV/MP3/FLAC=miniaudio、OGG=stb_vorbis) は全6プラットフォームで動作。"
                 },
                 {
                     "name": "loadAacFromMemory",
@@ -22181,7 +22775,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path, int maxPolyphony = 1"
                         }
                     ],
-                    "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened, the format is unsupported, or the file has no audio frames (DecodeFailed).",
+                    "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened, the format is unsupported, or the file has no audio frames (DecodeFailed). Relative paths resolve via getDataPath(); absolute paths pass through.",
                     "platformNote": "Streaming audio (Sound::loadStream / SoundStream). On wasm it is unsupported (needs std::thread + on-disk file I/O, neither available in the default browser build); Sound::loadStream() logs a warning and silently falls back to eager load(). So you always get a Sound, but it is never actually streamed on web — branch on isStreaming() / __EMSCRIPTEN__ if it matters.",
                     "platformNote_ja": "ストリーミング再生 (Sound::loadStream / SoundStream)。wasm では非対応 (std::thread + ディスクI/O が必要、ブラウザの既定ビルドにはどちらも無い)。Sound::loadStream() は警告を出して eager load() に静かにフォールバックする。Sound 自体は得られるが web では決してストリームされない — 必要なら isStreaming() / __EMSCRIPTEN__ で分岐する。"
                 },
@@ -22203,7 +22797,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Path the stream was opened from."
+                    "desc": "Path the stream was opened from. Relative names are resolved via getDataPath(); empty after a failed load."
                 },
                 {
                     "name": "getMaxPolyphony",
@@ -22681,9 +23275,9 @@ const TrussCAPI = {
                 {
                     "name": "path",
                     "type": "fs::path",
-                    "desc": "Source file (fs::path) as given, the same value as SoundBuffer::getPath() / SoundStream::getPath() and the file name in the logs; empty for generated or in-memory buffers. tc_get_audio_state reports it as UTF-8.",
-                    "desc_ja": "ソースファイル (fs::path)。渡されたままの値で、SoundBuffer::getPath() / SoundStream::getPath() やログのファイル名と同じ。生成したバッファやメモリからのバッファでは空。tc_get_audio_state は UTF-8 で返す",
-                    "desc_ko": "소스 파일 (fs::path). 전달된 그대로의 값으로, SoundBuffer::getPath() / SoundStream::getPath() 및 로그의 파일 이름과 같다. 생성한 버퍼나 메모리 버퍼에서는 비어 있음. tc_get_audio_state 는 UTF-8 로 보고한다"
+                    "desc": "Resolved source file (fs::path), the same value as SoundBuffer::getPath() / SoundStream::getPath() and the file name in the logs; empty for generated or in-memory buffers. tc_get_audio_state reports it as UTF-8.",
+                    "desc_ja": "ソースファイル (fs::path)。解決済みの値で、SoundBuffer::getPath() / SoundStream::getPath() やログのファイル名と同じ。生成したバッファやメモリからのバッファでは空。tc_get_audio_state は UTF-8 で返す",
+                    "desc_ko": "소스 파일 (fs::path). 해석된 값으로, SoundBuffer::getPath() / SoundStream::getPath() 및 로그의 파일 이름과 같다. 생성한 버퍼나 메모리 버퍼에서는 비어 있음. tc_get_audio_state 는 UTF-8 로 보고한다"
                 },
                 {
                     "name": "streaming",
@@ -24302,6 +24896,261 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "mcp::ToolArg",
+            "desc": "One argument in a tool's input schema.",
+            "keywords": [],
+            "desc_ja": "ツール入力スキーマの引数。",
+            "desc_ko": "도구 입력 스키마의 인수 하나.",
+            "properties": [
+                {
+                    "name": "name",
+                    "type": "std::string",
+                    "desc": "Argument name.",
+                    "desc_ja": "引数名。",
+                    "desc_ko": "인수 이름."
+                },
+                {
+                    "name": "type",
+                    "type": "std::string",
+                    "desc": "JSON schema type.",
+                    "desc_ja": "JSON スキーマの型。",
+                    "desc_ko": "JSON 스키마 형식."
+                },
+                {
+                    "name": "description",
+                    "type": "std::string",
+                    "desc": "Argument description.",
+                    "desc_ja": "引数の説明。",
+                    "desc_ko": "인수 설명."
+                },
+                {
+                    "name": "required",
+                    "type": "bool",
+                    "desc": "Whether the argument is required (default true).",
+                    "desc_ja": "引数が必須か。既定は true。",
+                    "desc_ko": "인수 필수 여부. 기본값은 true."
+                }
+            ]
+        },
+        {
+            "name": "mcp::Tool",
+            "desc": "Tool registration data: name, description, level, arguments and handler.",
+            "keywords": [],
+            "desc_ja": "ツール登録データ。名前、説明、レベル、引数、ハンドラーを持つ。",
+            "desc_ko": "도구 등록 데이터: 이름, 설명, 수준, 인수 및 핸들러.",
+            "properties": [
+                {
+                    "name": "name",
+                    "type": "std::string",
+                    "desc": "Tool name.",
+                    "desc_ja": "ツール名。",
+                    "desc_ko": "도구 이름."
+                },
+                {
+                    "name": "description",
+                    "type": "std::string",
+                    "desc": "Tool description.",
+                    "desc_ja": "ツールの説明。",
+                    "desc_ko": "도구 설명."
+                },
+                {
+                    "name": "level",
+                    "type": "ToolLevel",
+                    "desc": "Required grant (default Public).",
+                    "desc_ja": "必要な許可レベル。既定は Public。",
+                    "desc_ko": "필요한 허용 수준. 기본값은 Public."
+                },
+                {
+                    "name": "args",
+                    "type": "std::vector<ToolArg>",
+                    "desc": "Ordered input argument definitions.",
+                    "desc_ja": "入力引数定義の順序付きリスト。",
+                    "desc_ko": "입력 인수 정의의 순서 있는 목록."
+                },
+                {
+                    "name": "handler",
+                    "type": "std::function<json (const json &)>",
+                    "desc": "Main-thread handler receiving JSON arguments and returning tool content.",
+                    "desc_ja": "JSON 引数を受け取りツール内容を返すメインスレッドのハンドラー。",
+                    "desc_ko": "JSON 인수를 받아 도구 콘텐츠를 반환하는 메인 스레드 핸들러."
+                },
+                {
+                    "name": "owner",
+                    "type": "const void *",
+                    "desc": "Framework registration owner for hot-reload cleanup.",
+                    "desc_ja": "ホットリロード時の解放に使うフレームワークの登録所有者。",
+                    "desc_ko": "핫 리로드 정리에 사용하는 프레임워크 등록 소유자."
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getSchema",
+                    "signatures": [
+                        {
+                            "ret": "json",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Build the JSON input schema from the arguments."
+                }
+            ]
+        },
+        {
+            "name": "mcp::Resource",
+            "desc": "URI-addressed resource metadata and content handler.",
+            "keywords": [],
+            "desc_ja": "URI で参照するリソースのメタデータと内容ハンドラー。",
+            "desc_ko": "URI로 참조하는 리소스 메타데이터와 콘텐츠 핸들러.",
+            "properties": [
+                {
+                    "name": "uri",
+                    "type": "std::string",
+                    "desc": "Resource URI.",
+                    "desc_ja": "リソースの URI。",
+                    "desc_ko": "리소스 URI."
+                },
+                {
+                    "name": "name",
+                    "type": "std::string",
+                    "desc": "Resource display name.",
+                    "desc_ja": "リソースの表示名。",
+                    "desc_ko": "리소스 표시 이름."
+                },
+                {
+                    "name": "mimeType",
+                    "type": "std::string",
+                    "desc": "Resource MIME type.",
+                    "desc_ja": "リソースの MIME タイプ。",
+                    "desc_ko": "리소스 MIME 형식."
+                },
+                {
+                    "name": "description",
+                    "type": "std::string",
+                    "desc": "Resource description.",
+                    "desc_ja": "リソースの説明。",
+                    "desc_ko": "리소스 설명."
+                },
+                {
+                    "name": "handler",
+                    "type": "std::function<std::string ()>",
+                    "desc": "Main-thread producer of resource text.",
+                    "desc_ja": "リソースのテキストを生成するメインスレッドの関数。",
+                    "desc_ko": "리소스 텍스트를 생성하는 메인 스레드 함수."
+                },
+                {
+                    "name": "owner",
+                    "type": "const void *",
+                    "desc": "Framework registration owner for hot-reload cleanup.",
+                    "desc_ja": "ホットリロード時の解放に使うフレームワークの登録所有者。",
+                    "desc_ko": "핫 리로드 정리에 사용하는 프레임워크 등록 소유자."
+                }
+            ]
+        },
+        {
+            "name": "mcp::ToolBuilder",
+            "desc": "Fluent tool registration builder; finish with bind(). Tools default to Public.",
+            "keywords": [],
+            "desc_ja": "ツール登録用のビルダー。bind() で完了する。既定レベルは Public。",
+            "desc_ko": "도구 등록 빌더. bind()로 완료하며 기본 수준은 Public이다.",
+            "constructor": {
+                "signatures": [
+                    "const std::string & name, const std::string & desc"
+                ]
+            },
+            "methods": [
+                {
+                    "name": "level",
+                    "signatures": [
+                        {
+                            "ret": "ToolBuilder &",
+                            "params": "ToolLevel value"
+                        }
+                    ],
+                    "desc": "Declare the required grant for this tool. Core and official addons specify every tool's level."
+                },
+                {
+                    "name": "arg",
+                    "signatures": [
+                        {
+                            "ret": "ToolBuilder &",
+                            "params": "const std::string & name, const std::string & desc, bool required = true"
+                        }
+                    ],
+                    "desc": "Add a typed named argument and its description; required defaults to true."
+                },
+                {
+                    "name": "bind",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "std::function<json (const json &)> func"
+                        },
+                        {
+                            "ret": "void",
+                            "params": "std::function<json ()> func"
+                        },
+                        {
+                            "ret": "void",
+                            "params": "std::function<json (T1)> func"
+                        },
+                        {
+                            "ret": "void",
+                            "params": "std::function<json (T1, T2)> func"
+                        },
+                        {
+                            "ret": "void",
+                            "params": "std::function<json (T1, T2, T3)> func"
+                        }
+                    ],
+                    "desc": "Register a handler taking JSON arguments or a typed std::function. Runs on the main thread; exposure follows the current grant."
+                }
+            ]
+        },
+        {
+            "name": "mcp::ResourceBuilder",
+            "desc": "Resource registration builder; finish with bind().",
+            "keywords": [],
+            "desc_ja": "リソース登録用ビルダー。bind() で完了する。",
+            "desc_ko": "리소스 등록 빌더. bind()로 완료한다.",
+            "constructor": {
+                "signatures": [
+                    "const std::string & uri, const std::string & name"
+                ]
+            },
+            "methods": [
+                {
+                    "name": "desc",
+                    "signatures": [
+                        {
+                            "ret": "ResourceBuilder &",
+                            "params": "const std::string & d"
+                        }
+                    ],
+                    "desc": "Set the resource description."
+                },
+                {
+                    "name": "mime",
+                    "signatures": [
+                        {
+                            "ret": "ResourceBuilder &",
+                            "params": "const std::string & m"
+                        }
+                    ],
+                    "desc": "Set the resource MIME type."
+                },
+                {
+                    "name": "bind",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "std::function<std::string ()> func"
+                        }
+                    ],
+                    "desc": "Register the resource's text producer, called on the main thread."
+                }
+            ]
+        },
+        {
             "name": "ShaderVertex",
             "desc": "Standard vertex format for shader drawing (position, normal, texcoord, color).",
             "keywords": [
@@ -24964,7 +25813,25 @@ const TrussCAPI = {
                             "params": "const Vec2 & center, float radius, float angleBegin, float angleEnd, bool clockwise = true"
                         }
                     ],
-                    "desc": "Add an arc (angles in radians)"
+                    "desc": "Add a circular or elliptical arc (all angles in radians)"
+                },
+                {
+                    "name": "arcDeg",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "const Vec3 & center, float radiusX, float radiusY, float angleBegin, float angleEnd, bool clockwise = true, int circleResolution = 20"
+                        },
+                        {
+                            "ret": "void",
+                            "params": "float x, float y, float radiusX, float radiusY, float angleBegin, float angleEnd, int circleResolution = 20"
+                        },
+                        {
+                            "ret": "void",
+                            "params": "const Vec2 & center, float radiusX, float radiusY, float angleBegin, float angleEnd, int circleResolution = 20"
+                        }
+                    ],
+                    "desc": "Add an elliptical arc with angles in degrees (all elliptical overloads)"
                 },
                 {
                     "name": "close",
@@ -27258,7 +28125,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path, bool mipmaps = false"
                         }
                     ],
-                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given."
+                    "desc": "Load image from file. `mipmaps=true` builds a mip chain — recommended when the image will be sampled at varying scales (e.g. mapped onto a 3D surface). Main thread only: it creates a GPU texture. To load in the background, call `Pixels::load` on the worker thread and create the texture on the main thread with `Texture::allocate(pixels)`. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. Returns TooLarge if either dimension exceeds the active GPU texture limit; headless loading keeps CPU pixels."
                 },
                 {
                     "name": "loadFromMemory",
@@ -27268,7 +28135,7 @@ const TrussCAPI = {
                             "params": "const unsigned char * buffer, int len, bool mipmaps = false"
                         }
                     ],
-                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain. Main thread only; decode in the background with `Pixels::loadFromMemory`."
+                    "desc": "Load image from memory. `mipmaps=true` builds a mip chain. Main thread only; decode in the background with `Pixels::loadFromMemory`. Returns TooLarge if either dimension exceeds the active GPU texture limit; headless loading keeps CPU pixels."
                 },
                 {
                     "name": "save",
@@ -28747,7 +29614,7 @@ const TrussCAPI = {
                             "params": "const fs::path & nameOrPath, int size, int faceIndex = 0"
                         }
                     ],
-                    "desc": "Load a font file or a system font name; faceIndex picks the face in a .ttc. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins."
+                    "desc": "Load a font file or a system font name; faceIndex picks the face in a .ttc. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins. On Web, URL loading waits until the font is usable or fetching/decoding fails."
                 },
                 {
                     "name": "isLoaded",
@@ -30875,7 +31742,7 @@ const TrussCAPI = {
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Load a video file"
+                    "desc": "Load a video file On Web, load waits for a decoded first frame instead of returning placeholder dimensions."
                 },
                 {
                     "name": "close",
@@ -35519,7 +36386,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get rotation as Euler angles in degrees (C++ only)"
+                    "desc": "Get rotation as Euler angles in degrees"
                 },
                 {
                     "name": "setEulerDeg",
@@ -35529,7 +36396,7 @@ const TrussCAPI = {
                             "params": "const Vec3 & deg"
                         }
                     ],
-                    "desc": "Set rotation from Euler angles in degrees (C++ only)"
+                    "desc": "Set rotation from Euler angles in degrees"
                 },
                 {
                     "name": "getRot",
@@ -35559,7 +36426,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Get 2D Z-axis rotation in degrees (C++ only)"
+                    "desc": "Get 2D Z-axis rotation in degrees"
                 },
                 {
                     "name": "setRotDeg",
@@ -35569,7 +36436,7 @@ const TrussCAPI = {
                             "params": "float degrees"
                         }
                     ],
-                    "desc": "Set 2D Z-axis rotation in degrees (C++ only)"
+                    "desc": "Set 2D Z-axis rotation in degrees"
                 },
                 {
                     "name": "getScale",
@@ -37907,6 +38774,72 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "LoadError",
+            "desc": "Load failure kind: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown, TooLarge, Cancelled.",
+            "keywords": [
+                "error",
+                "load",
+                "not found",
+                "decode"
+            ],
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0,
+                    "desc": "Success (no error)",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "FileNotFound",
+                    "value": 1,
+                    "desc": "The (resolved) path does not exist or could not be opened",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "UnsupportedFormat",
+                    "value": 2,
+                    "desc": "Extension / container not supported on this platform",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DecodeFailed",
+                    "value": 3,
+                    "desc": "The decoder rejected the data (corrupt, truncated, wrong codec)",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Unknown",
+                    "value": 4,
+                    "desc": "Anything the loader could not classify",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "TooLarge",
+                    "value": 5,
+                    "desc": "Image dimensions exceed the GPU texture limit (CPU Pixels are not limited)",
+                    "desc_ja": "画像サイズが GPU テクスチャ上限を超える（CPU の Pixels には適用しない）",
+                    "desc_ko": "이미지 크기가 GPU 텍스처 한도를 초과함 (CPU Pixels에는 적용하지 않음)"
+                },
+                {
+                    "name": "Cancelled",
+                    "value": 6,
+                    "desc": "Loading was cancelled",
+                    "desc_ja": "読み込みがキャンセルされた",
+                    "desc_ko": "로드가 취소됨"
+                }
+            ],
+            "desc_ja": "読み込み失敗の種別：None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown, TooLarge, Cancelled。",
+            "desc_ko": "로드 실패 종류: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown, TooLarge, Cancelled.",
+            "related": [
+                "LoadResult"
+            ]
+        },
+        {
             "name": "LogLevel",
             "desc": "Log severity, from Verbose (most detailed) to Fatal. Each output (console, file, system) shows lines at its own level and above; Silent as an output's level turns that output off.",
             "keywords": [
@@ -38112,58 +39045,6 @@ const TrussCAPI = {
             "related": [
                 "getMouseButton",
                 "MouseEventArgs"
-            ]
-        },
-        {
-            "name": "LoadError",
-            "desc": "Load failure kind: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown.",
-            "keywords": [
-                "error",
-                "load",
-                "not found",
-                "decode"
-            ],
-            "values": [
-                {
-                    "name": "None",
-                    "value": 0,
-                    "desc": "Success (no error)",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "FileNotFound",
-                    "value": 1,
-                    "desc": "The (resolved) path does not exist or could not be opened",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "UnsupportedFormat",
-                    "value": 2,
-                    "desc": "Extension / container not supported on this platform",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "DecodeFailed",
-                    "value": 3,
-                    "desc": "The decoder rejected the data (corrupt, truncated, wrong codec)",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                },
-                {
-                    "name": "Unknown",
-                    "value": 4,
-                    "desc": "Anything the loader could not classify",
-                    "desc_ja": "",
-                    "desc_ko": ""
-                }
-            ],
-            "desc_ja": "読み込み失敗の種別：None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown。",
-            "desc_ko": "로드 실패 종류: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown.",
-            "related": [
-                "LoadResult"
             ]
         },
         {
@@ -38383,6 +39264,36 @@ const TrussCAPI = {
                 "decompress",
                 "compressBound"
             ]
+        },
+        {
+            "name": "mcp::ToolLevel",
+            "desc": "Tool exposure level: Public < ReadOnly < Control. Tools default to Public; Control includes inspection.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "Public",
+                    "value": 0,
+                    "desc": "Default grant; health is the only Public built-in. Custom tools also default to Public.",
+                    "desc_ja": "既定の許可。組み込みで Public なのはヘルスのみ。カスタムツールも既定は Public。",
+                    "desc_ko": "기본 허용 수준. 내장 도구 중 Public은 상태 확인뿐이다. 사용자 도구의 기본값도 Public이다."
+                },
+                {
+                    "name": "ReadOnly",
+                    "value": 1,
+                    "desc": "Inspection, screenshots, status and alerts; captures may write files.",
+                    "desc_ja": "検査、スクリーンショット、ステータス、アラート。キャプチャはファイルを書き込む場合がある。",
+                    "desc_ko": "조회, 스크린샷, 상태 및 알림. 캡처는 파일을 쓸 수 있다."
+                },
+                {
+                    "name": "Control",
+                    "value": 2,
+                    "desc": "Input, scene changes, recording and quit; includes ReadOnly.",
+                    "desc_ja": "入力、シーン変更、録画、終了。ReadOnly を含む。",
+                    "desc_ko": "입력, 장면 변경, 녹화 및 종료. ReadOnly를 포함한다."
+                }
+            ],
+            "desc_ja": "ツールの公開レベル。Public < ReadOnly < Control。既定は Public。Control は検査も含む。",
+            "desc_ko": "도구 공개 수준: Public < ReadOnly < Control. 기본값은 Public이며 Control에는 조회도 포함된다."
         },
         {
             "name": "BlendMode",
