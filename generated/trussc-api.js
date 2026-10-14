@@ -9776,15 +9776,15 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "const std::filesystem::path & path",
                     "return_type": "bool",
-                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when capture is queued; on native platforms the destination folder is prepared first. This does not mean the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when capture is queued; on native platforms the destination folder is prepared first. This does not mean the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned. Keeps bool on every platform: true means queued. Native entry synchronously checks path, parent creation and bundle refusal through prepareOutputPath; the deferred atomic checked write logs one Error on failure. Web remains a download: encoded output is handed to the browser, with no folders or .tmp and no disk-completion guarantee.",
                     "keywords": [
                         "capture",
                         "png",
                         "export",
                         "save image"
                     ],
-                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueはキャプチャをキューに積めた意味で、ファイル書き込み完了ではない。ネイティブ環境では先に保存先フォルダを準備する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 캡처 큐 등록 성공을 의미하며 파일 기록 완료가 아님. 네이티브 플랫폼에서는 먼저 대상 폴더를 준비한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환",
+                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueはキャプチャをキューに積めた意味で、ファイル書き込み完了ではない。ネイティブ環境では先に保存先フォルダを準備する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す 全プラットフォームで bool を維持し true はキュー受付を意味する。ネイティブは prepareOutputPath でパス・親作成・バンドル拒否を同期確認し、遅延 atomic 書き込みの失敗は Error 1回で報告。Web はブラウザに渡すダウンロードのままで、フォルダ・.tmp は作らずディスク保存完了は保証しない。",
+                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 캡처 큐 등록 성공을 의미하며 파일 기록 완료가 아님. 네이티브 플랫폼에서는 먼저 대상 폴더를 준비한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환 모든 플랫폼에서 bool을 유지하며 true는 큐 등록을 의미한다. 네이티브는 prepareOutputPath로 경로, 부모 생성, 번들 거부를 동기 확인하고 지연 atomic 쓰기 실패는 Error 한 번으로 보고한다. Web은 브라우저에 전달하는 다운로드를 유지하며 폴더나 .tmp를 만들지 않고 디스크 저장 완료를 보장하지 않는다.",
                     "related": [
                         "grabScreen",
                         "startRecording",
@@ -9804,8 +9804,8 @@ const TrussCAPI = {
                     "name": "startRecording",
                     "params": "path, settings",
                     "params_typed": "const fs::path & path, const VideoRecordSettings & settings = {}",
-                    "return_type": "bool",
-                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
+                    "return_type": "SaveResult",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten). Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization.",
                     "keywords": [
                         "record",
                         "video",
@@ -9813,8 +9813,8 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
-                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)",
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き） パス準備とエンコーダ開始結果を SaveResult で返す。成功後は直接ストリーム書き込みを行い、完了結果は close()/stop() で確認する。",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀) 경로 준비와 인코더 열기 결과를 SaveResult로 반환한다. 성공하면 파일에 직접 기록하며 완료 결과는 close()/stop()으로 확인한다.",
                     "related": [
                         "VideoRecordSettings",
                         "stopRecording",
@@ -9828,15 +9828,15 @@ const TrussCAPI = {
                         "android",
                         "ios"
                     ],
-                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter stub returns false).",
-                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter スタブが false）。"
+                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter open returns a failed SaveResult).",
+                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter の open が失敗の SaveResult を返す）。"
                 },
                 {
                     "name": "startRecording",
                     "params": "path, durationSec",
                     "params_typed": "const fs::path & path, float durationSec",
-                    "return_type": "bool",
-                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
+                    "return_type": "SaveResult",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten). Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization.",
                     "keywords": [
                         "record",
                         "video",
@@ -9844,8 +9844,8 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
-                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)",
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き） パス準備とエンコーダ開始結果を SaveResult で返す。成功後は直接ストリーム書き込みを行い、完了結果は close()/stop() で確認する。",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀) 경로 준비와 인코더 열기 결과를 SaveResult로 반환한다. 성공하면 파일에 직접 기록하며 완료 결과는 close()/stop()으로 확인한다.",
                     "related": [
                         "VideoRecordSettings",
                         "stopRecording",
@@ -9859,15 +9859,15 @@ const TrussCAPI = {
                         "android",
                         "ios"
                     ],
-                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter stub returns false).",
-                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter スタブが false）。"
+                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter open returns a failed SaveResult).",
+                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter の open が失敗の SaveResult を返す）。"
                 },
                 {
                     "name": "startRecording",
                     "params": "fbo, path, settings",
                     "params_typed": "const Fbo & fbo, const fs::path & path, const VideoRecordSettings & settings = {}",
-                    "return_type": "bool",
-                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
+                    "return_type": "SaveResult",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten). Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization.",
                     "keywords": [
                         "record",
                         "video",
@@ -9875,8 +9875,8 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
-                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)",
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き） パス準備とエンコーダ開始結果を SaveResult で返す。成功後は直接ストリーム書き込みを行い、完了結果は close()/stop() で確認する。",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀) 경로 준비와 인코더 열기 결과를 SaveResult로 반환한다. 성공하면 파일에 직접 기록하며 완료 결과는 close()/stop()으로 확인한다.",
                     "related": [
                         "VideoRecordSettings",
                         "stopRecording",
@@ -9890,15 +9890,15 @@ const TrussCAPI = {
                         "android",
                         "ios"
                     ],
-                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter stub returns false).",
-                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter スタブが false）。"
+                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter open returns a failed SaveResult).",
+                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter の open が失敗の SaveResult を返す）。"
                 },
                 {
                     "name": "startRecording",
                     "params": "fbo, path, durationSec",
                     "params_typed": "const Fbo & fbo, const fs::path & path, float durationSec",
-                    "return_type": "bool",
-                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
+                    "return_type": "SaveResult",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten). Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization.",
                     "keywords": [
                         "record",
                         "video",
@@ -9906,8 +9906,8 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
-                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)",
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き） パス準備とエンコーダ開始結果を SaveResult で返す。成功後は直接ストリーム書き込みを行い、完了結果は close()/stop() で確認する。",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀) 경로 준비와 인코더 열기 결과를 SaveResult로 반환한다. 성공하면 파일에 직접 기록하며 완료 결과는 close()/stop()으로 확인한다.",
                     "related": [
                         "VideoRecordSettings",
                         "stopRecording",
@@ -9921,23 +9921,23 @@ const TrussCAPI = {
                         "android",
                         "ios"
                     ],
-                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter stub returns false).",
-                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter スタブが false）。"
+                    "platformNote": "Global convenience over the singleton ScreenRecorder; non-functional on web for the same reason (VideoWriter open returns a failed SaveResult).",
+                    "platformNote_ja": "シングルトン ScreenRecorder への薄いラッパ。同じ理由で web では機能しない（VideoWriter の open が失敗の SaveResult を返す）。"
                 },
                 {
                     "name": "stopRecording",
                     "params": "",
                     "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Stop the current recording and finalize the file",
+                    "return_type": "SaveResult",
+                    "desc": "Stop the current recording and finalize the file. Returns SaveResult for backend finalization, retaining the first backend failure. Caller errors and transient readback failures do not fail the take. Repeated calls retain the result without another Error. No temporary/rename is used.",
                     "keywords": [
                         "record",
                         "video",
                         "finish",
                         "movie"
                     ],
-                    "desc_ja": "録画を停止してファイルを確定",
-                    "desc_ko": "녹화를 중지하고 파일을 마무리",
+                    "desc_ja": "録画を停止してファイルを確定 バックエンドの終了処理を SaveResult で返し、バックエンドの最初の失敗を保持する。呼び出しの誤りや一時的な読み出し失敗では録画を失敗扱いにしない。再呼び出しも結果を保持し、Error を重複させない。一時ファイル・rename は使用しない。",
+                    "desc_ko": "녹화를 중지하고 파일을 마무리 백엔드 종료 결과를 SaveResult로 반환하며 첫 백엔드 실패를 유지한다. 호출 오류나 일시적인 읽기 실패는 녹화 전체를 실패로 만들지 않는다. 반복 호출도 결과를 유지하며 Error를 다시 기록하지 않는다. 임시 파일과 rename은 사용하지 않는다.",
                     "related": [
                         "startRecording",
                         "isRecording",
@@ -9975,14 +9975,14 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "int",
-                    "desc": "Number of frames captured so far in the current recording",
+                    "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail.",
                     "keywords": [
                         "record",
                         "frames",
                         "video"
                     ],
-                    "desc_ja": "現在の録画でこれまでにキャプチャしたフレーム数",
-                    "desc_ko": "현재 녹화에서 지금까지 캡처한 프레임 수",
+                    "desc_ja": "バックエンドが受理した映像フレーム数。失敗した追加は含まない。終了処理は別途失敗する可能性がある。",
+                    "desc_ko": "백엔드가 수락한 영상 프레임 수. 실패한 제출은 제외한다. 종료 처리는 별도로 실패할 수 있다.",
                     "related": [
                         "isRecording",
                         "recordingPath",
@@ -10095,16 +10095,42 @@ const TrussCAPI = {
                     "params": "fn",
                     "params_typed": "std::function<void ()> fn",
                     "return_type": "void",
-                    "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame. Each frame runs, in order, what was queued when its drain started; work queued during the drain runs in the next frame. Nothing is dropped and there is no limit (a callback may edit the tree or free something); the tc_get_health MCP tool reports the count as mainQueuePending. Code that may queue faster than the app runs it, and can drop values, keeps its own bounded or latest-value buffer",
+                    "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise enqueue and return without waiting for execution. Each frame drains, in order, the work queued when its drain started; worker submissions during the drain wait until the next frame. There is no queue limit. runOnMainThread(fn, weakToken) accepts the same weak_ptr<atomic<bool>> liveness token as Deliver::Main: at execution time an expired or false token drops the closure. A token does not wait for a callback already running; serialize target teardown with delivery, normally on the main thread. The single-argument form never drops callbacks and the caller owns captured lifetimes. On Web without pthreads both forms run immediately, with the token check for the two-argument form. tc_get_health reports the drain-start count as mainQueuePending. Producers that can drop values use their own bounded or latest-value buffer.",
                     "keywords": [
                         "main thread",
                         "marshal",
                         "queue",
                         "dispatch",
-                        "sync"
+                        "liveness"
                     ],
-                    "desc_ja": "コールバックをメイン（シーン）スレッドで実行。既にメインなら即時、そうでなければ次フレームにキュー。各フレームは、ドレイン開始時点でキューにあったものを順番に実行する。ドレイン中にキューされたものは次のフレームで実行される。何も捨てず、上限もない（コールバックはツリーを編集したり何かを解放したりしうる）。その数は MCP ツール tc_get_health が mainQueuePending として返す。アプリが処理するより速くキューしうるコードで、値を捨ててよいものは、自前で上限付きのバッファか最新値だけのバッファを持つ",
-                    "desc_ko": "콜백을 메인(씬) 스레드에서 실행. 이미 메인이면 즉시, 아니면 다음 프레임으로 큐잉. 각 프레임은 드레인 시작 시점에 큐에 있던 것을 순서대로 실행한다. 드레인 중에 큐잉된 것은 다음 프레임에 실행된다. 아무것도 버리지 않고 상한도 없다(콜백이 트리를 편집하거나 무언가를 해제할 수 있으므로). 그 개수는 MCP 도구 tc_get_health가 mainQueuePending으로 보고한다. 앱이 처리하는 것보다 빠르게 큐잉할 수 있고 값을 버려도 되는 코드는 자체적으로 상한이 있는 버퍼나 최신값 버퍼를 둔다",
+                    "desc_ja": "コールバックをメイン（シーン）スレッドで実行。既にメインなら即時、それ以外では実行を待たずキューに入れて戻る。各フレームはドレイン開始時点の仕事を順番に実行し、ドレイン中のワーカーからの追加は次フレームに回す。キューの上限はない。runOnMainThread(fn, weakToken) は Deliver::Main と同じ weak_ptr<atomic<bool>> の生存トークンを受け取り、実行時にトークンが期限切れか false ならクロージャを捨てる。既に実行中のコールバックは待たないため、通常はメインスレッド上で配送と対象の破棄を直列化する。1引数版はコールバックを捨てず、キャプチャした対象の寿命は呼び出し側が管理する。pthreads なしの Web では両形式とも即時実行し、2引数版はトークンを確認する。tc_get_health は開始時の件数を mainQueuePending として返す。値を捨ててよい生成側は自前の上限付きバッファか最新値バッファを使う。",
+                    "desc_ko": "콜백을 메인(씬) 스레드에서 실행한다. 이미 메인이면 즉시 실행하고, 아니면 실행을 기다리지 않고 큐에 넣어 반환한다. 각 프레임은 드레인 시작 시점의 작업을 순서대로 실행하며 드레인 중 워커가 추가한 작업은 다음 프레임에 실행한다. 큐 상한은 없다. runOnMainThread(fn, weakToken)은 Deliver::Main과 같은 weak_ptr<atomic<bool>> 생존 토큰을 받으며 실행 시 토큰이 만료되었거나 false이면 클로저를 버린다. 이미 실행 중인 콜백을 기다리지 않으므로 보통 메인 스레드에서 전달과 대상 파괴를 직렬화한다. 인수가 하나인 형식은 콜백을 버리지 않으며 캡처 대상의 수명은 호출자가 관리한다. pthreads 없는 Web에서는 두 형식 모두 즉시 실행하고 두 인수 형식은 토큰을 검사한다. tc_get_health는 시작 시 작업 수를 mainQueuePending으로 보고한다. 값을 버릴 수 있는 생성자는 자체 상한 버퍼나 최신값 버퍼를 사용한다.",
+                    "related": [
+                        "isMainThread",
+                        "Node::callAfterAsync"
+                    ],
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "runOnMainThread",
+                    "params": "fn, token",
+                    "params_typed": "std::function<void ()> fn, std::weak_ptr<std::atomic<bool>> token",
+                    "return_type": "void",
+                    "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise enqueue and return without waiting for execution. Each frame drains, in order, the work queued when its drain started; worker submissions during the drain wait until the next frame. There is no queue limit. runOnMainThread(fn, weakToken) accepts the same weak_ptr<atomic<bool>> liveness token as Deliver::Main: at execution time an expired or false token drops the closure. A token does not wait for a callback already running; serialize target teardown with delivery, normally on the main thread. The single-argument form never drops callbacks and the caller owns captured lifetimes. On Web without pthreads both forms run immediately, with the token check for the two-argument form. tc_get_health reports the drain-start count as mainQueuePending. Producers that can drop values use their own bounded or latest-value buffer.",
+                    "keywords": [
+                        "main thread",
+                        "marshal",
+                        "queue",
+                        "dispatch",
+                        "liveness"
+                    ],
+                    "desc_ja": "コールバックをメイン（シーン）スレッドで実行。既にメインなら即時、それ以外では実行を待たずキューに入れて戻る。各フレームはドレイン開始時点の仕事を順番に実行し、ドレイン中のワーカーからの追加は次フレームに回す。キューの上限はない。runOnMainThread(fn, weakToken) は Deliver::Main と同じ weak_ptr<atomic<bool>> の生存トークンを受け取り、実行時にトークンが期限切れか false ならクロージャを捨てる。既に実行中のコールバックは待たないため、通常はメインスレッド上で配送と対象の破棄を直列化する。1引数版はコールバックを捨てず、キャプチャした対象の寿命は呼び出し側が管理する。pthreads なしの Web では両形式とも即時実行し、2引数版はトークンを確認する。tc_get_health は開始時の件数を mainQueuePending として返す。値を捨ててよい生成側は自前の上限付きバッファか最新値バッファを使う。",
+                    "desc_ko": "콜백을 메인(씬) 스레드에서 실행한다. 이미 메인이면 즉시 실행하고, 아니면 실행을 기다리지 않고 큐에 넣어 반환한다. 각 프레임은 드레인 시작 시점의 작업을 순서대로 실행하며 드레인 중 워커가 추가한 작업은 다음 프레임에 실행한다. 큐 상한은 없다. runOnMainThread(fn, weakToken)은 Deliver::Main과 같은 weak_ptr<atomic<bool>> 생존 토큰을 받으며 실행 시 토큰이 만료되었거나 false이면 클로저를 버린다. 이미 실행 중인 콜백을 기다리지 않으므로 보통 메인 스레드에서 전달과 대상 파괴를 직렬화한다. 인수가 하나인 형식은 콜백을 버리지 않으며 캡처 대상의 수명은 호출자가 관리한다. pthreads 없는 Web에서는 두 형식 모두 즉시 실행하고 두 인수 형식은 토큰을 검사한다. tc_get_health는 시작 시 작업 수를 mainQueuePending으로 보고한다. 값을 버릴 수 있는 생성자는 자체 상한 버퍼나 최신값 버퍼를 사용한다.",
                     "related": [
                         "isMainThread",
                         "Node::callAfterAsync"
@@ -10299,19 +10325,22 @@ const TrussCAPI = {
                     "name": "setLogFile",
                     "params": "path",
                     "params_typed": "const fs::path & path",
-                    "return_type": "bool",
-                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "return_type": "SaveResult",
+                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns a failed SaveResult, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned.",
                     "keywords": [
                         "output",
                         "write",
                         "path"
                     ],
-                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して false を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 false를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환",
+                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して 失敗の SaveResult を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して 失敗の SaveResult を返す",
+                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 실패한 SaveResult를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 실패한 SaveResult 반환",
                     "related": [
                         "closeLogFile",
                         "setFileLogLevel"
                     ],
+                    "details": "Returns SaveResult. Writes in place; every write and flush is checked. FileWriter and Logger stop writing and report an Error on the first failure. A failed Logger open preserves the current file. FileWriter write/flush/close keep their existing signatures. See SaveResult for bool migration.",
+                    "details_ja": "SaveResult を返す。その場で書き込み、毎回書き込みと flush を確認する。FileWriter と Logger は最初の失敗で Error を報告し書き込みを停止する。Logger の open 失敗時は現在のファイルを保持する。FileWriter の write/flush/close のシグネチャは維持する。",
+                    "details_ko": "SaveResult를 반환한다. 그 자리에서 쓰며 매번 쓰기와 flush를 확인한다. FileWriter와 Logger는 첫 실패에서 Error를 보고하고 쓰기를 중단한다. Logger 열기 실패 시 현재 파일을 유지한다. FileWriter의 write/flush/close 시그니처는 유지한다.",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -10405,7 +10434,7 @@ const TrussCAPI = {
                     "name": "tcSetLogFile",
                     "params": "path",
                     "params_typed": "const fs::path & path",
-                    "return_type": "bool",
+                    "return_type": "SaveResult",
                     "desc": "Deprecated alias for setLogFile()",
                     "keywords": [
                         "path",
@@ -12567,15 +12596,15 @@ const TrussCAPI = {
                     "name": "saveJson",
                     "params": "j, path, indent",
                     "params_typed": "const Json & j, const fs::path & path, int indent = 2",
-                    "return_type": "bool",
-                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). The JSON is serialized before the file is opened, so a serialization error leaves an existing file untouched. Written in binary mode (LF line endings on every platform). Returns true on success; when serializing, opening, writing or closing fails it logs an error and returns false. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "return_type": "SaveResult",
+                    "desc": "Serialize and save JSON (indent sets the pretty-print width; negative means compact). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss.",
                     "keywords": [
                         "write",
                         "store",
                         "serialize"
                     ],
-                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決し、親フォルダがなければ作る。indentはpretty-print幅を指定(負の値でcompact)。ファイルを開く前にシリアライズするので、シリアライズに失敗しても既存のファイルはそのまま残る。バイナリモードで書く(どのプラットフォームでも改行はLF)。成功時trueを返し、シリアライズ・オープン・書き込み・closeのいずれかに失敗したときはエラーをログに出してfalseを返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. indent는 pretty-print 폭을 지정(음수면 compact). 파일을 열기 전에 직렬화하므로 직렬화에 실패해도 기존 파일은 그대로 남는다. 바이너리 모드로 기록(모든 플랫폼에서 줄바꿈은 LF). 성공 시 true 반환, 직렬화·열기·쓰기·닫기 중 하나라도 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환",
+                    "desc_ja": "SaveResult を返す。<file>.tmp に書き込み、close を確認してから元のファイルを置換する。失敗時は既存ファイルを保持し、一時ファイルを削除する。相対パスは getDataPath() で解決し、親フォルダを作成する。バンドル内は AccessDenied。電源断時の永続性を保証するものではない。",
+                    "desc_ko": "SaveResult를 반환한다. <file>.tmp에 쓰고 닫기를 확인한 뒤 기존 파일을 교체한다. 실패하면 기존 파일을 보존하고 임시 파일을 삭제한다. 상대 경로는 getDataPath()로 해석하고 상위 폴더를 만든다. 번들 내부는 AccessDenied. 전원 차단 시 영속성을 보장하지 않는다.",
                     "related": [
                         "Json",
                         "loadJson",
@@ -12983,14 +13012,14 @@ const TrussCAPI = {
                     "name": "saveTextFile",
                     "params": "path, content",
                     "params_typed": "const fs::path & path, const std::string & content",
-                    "return_type": "bool",
-                    "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "return_type": "SaveResult",
+                    "desc": "Save text bytes unchanged in binary mode. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss.",
                     "keywords": [
                         "write",
                         "store"
                     ],
-                    "desc_ja": "文字列をファイルに保存。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して false を返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "문자열을 텍스트 파일로 저장. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환",
+                    "desc_ja": "SaveResult を返す。<file>.tmp に書き込み、close を確認してから元のファイルを置換する。失敗時は既存ファイルを保持し、一時ファイルを削除する。相対パスは getDataPath() で解決し、親フォルダを作成する。バンドル内は AccessDenied。電源断時の永続性を保証するものではない。",
+                    "desc_ko": "SaveResult를 반환한다. <file>.tmp에 쓰고 닫기를 확인한 뒤 기존 파일을 교체한다. 실패하면 기존 파일을 보존하고 임시 파일을 삭제한다. 상대 경로는 getDataPath()로 해석하고 상위 폴더를 만든다. 번들 내부는 AccessDenied. 전원 차단 시 영속성을 보장하지 않는다.",
                     "related": [
                         "loadTextFile",
                         "appendToFile",
@@ -13007,18 +13036,21 @@ const TrussCAPI = {
                     "name": "appendToFile",
                     "params": "path, content",
                     "params_typed": "const fs::path & path, const std::string & content",
-                    "return_type": "bool",
-                    "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "return_type": "SaveResult",
+                    "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns a failed SaveResult and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned.",
                     "keywords": [
                         "write",
                         "add",
                         "concat"
                     ],
-                    "desc_ja": "ファイルに追記。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して false を返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "파일에 문자열을 추가. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 false 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환",
+                    "desc_ja": "ファイルに追記。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して 失敗の SaveResult を返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して 失敗の SaveResult を返す",
+                    "desc_ko": "파일에 문자열을 추가. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 실패한 SaveResult 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 실패한 SaveResult 반환",
                     "related": [
                         "saveTextFile"
                     ],
+                    "details": "Returns SaveResult. Writes in place; every write and flush is checked. FileWriter and Logger stop writing and report an Error on the first failure. A failed Logger open preserves the current file. FileWriter write/flush/close keep their existing signatures. See SaveResult for bool migration.",
+                    "details_ja": "SaveResult を返す。その場で書き込み、毎回書き込みと flush を確認する。FileWriter と Logger は最初の失敗で Error を報告し書き込みを停止する。Logger の open 失敗時は現在のファイルを保持する。FileWriter の write/flush/close のシグネチャは維持する。",
+                    "details_ko": "SaveResult를 반환한다. 그 자리에서 쓰며 매번 쓰기와 flush를 확인한다. FileWriter와 Logger는 첫 실패에서 Error를 보고하고 쓰기를 중단한다. Logger 열기 실패 시 현재 파일을 유지한다. FileWriter의 write/flush/close 시그니처는 유지한다.",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -15683,14 +15715,14 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "mcp::stopHttpServer",
-                    "params": "",
-                    "params_typed": "",
+                    "name": "mcp::startHttpServer",
+                    "params": "port, host, token",
+                    "params_typed": "int port = 0, const std::string & host = std::string(\"127.0.0.1\"), const std::string & token = std::string(\"\")",
                     "return_type": "void",
-                    "desc": "Stop the HTTP listener and answer pending requests before joining the worker. No-op on Web.",
+                    "desc": "Explicitly open HTTP (default 127.0.0.1, port 0 chooses an OS port); non-loopback requires a token. TRUSSC_MCP=0 closes. Call before setToolLevel() to choose the address: the first opener wins; mismatched later parameters log an Error and change nothing. No-op on Web.",
                     "keywords": [],
-                    "desc_ja": "HTTP リスナーを停止し、保留中の要求に応答してからワーカーを終了する。Web では何もしない。",
-                    "desc_ko": "HTTP 리스너를 중지하고 대기 중인 요청에 응답한 뒤 작업 스레드를 종료한다. Web에서는 아무 작업도 하지 않는다.",
+                    "desc_ja": "HTTP を明示的に開く。既定は 127.0.0.1、ポート 0 は OS が選択する。非ループバックにはトークンが必要。TRUSSC_MCP=0 では開かない。アドレス指定は setToolLevel() より前に行う。最初の指定が有効で、後の不一致は Error を記録して変更しない。Web では何もしない。",
+                    "desc_ko": "HTTP를 명시적으로 연다. 기본 주소는 127.0.0.1이며 포트 0은 OS가 선택한다. 외부 주소에는 토큰이 필요하다. TRUSSC_MCP=0이면 열리지 않는다. 주소를 선택하려면 setToolLevel() 전에 호출한다. 첫 설정을 유지하며 이후 불일치는 Error를 기록하고 변경하지 않는다. Web에서는 아무 작업도 하지 않는다.",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -15706,14 +15738,14 @@ const TrussCAPI = {
                     ]
                 },
                 {
-                    "name": "mcp::startHttpServer",
-                    "params": "port, host, token",
-                    "params_typed": "int port = 0, const std::string & host = std::string(\"127.0.0.1\"), const std::string & token = std::string(\"\")",
+                    "name": "mcp::stopHttpServer",
+                    "params": "",
+                    "params_typed": "",
                     "return_type": "void",
-                    "desc": "Explicitly open HTTP (default 127.0.0.1, port 0 chooses an OS port); non-loopback requires a token. TRUSSC_MCP=0 closes. Call before setToolLevel() to choose the address: the first opener wins; mismatched later parameters log an Error and change nothing. No-op on Web.",
+                    "desc": "Stop the HTTP listener and answer pending requests before joining the worker. No-op on Web.",
                     "keywords": [],
-                    "desc_ja": "HTTP を明示的に開く。既定は 127.0.0.1、ポート 0 は OS が選択する。非ループバックにはトークンが必要。TRUSSC_MCP=0 では開かない。アドレス指定は setToolLevel() より前に行う。最初の指定が有効で、後の不一致は Error を記録して変更しない。Web では何もしない。",
-                    "desc_ko": "HTTP를 명시적으로 연다. 기본 주소는 127.0.0.1이며 포트 0은 OS가 선택한다. 외부 주소에는 토큰이 필요하다. TRUSSC_MCP=0이면 열리지 않는다. 주소를 선택하려면 setToolLevel() 전에 호출한다. 첫 설정을 유지하며 이후 불일치는 Error를 기록하고 변경하지 않는다. Web에서는 아무 작업도 하지 않는다.",
+                    "desc_ja": "HTTP リスナーを停止し、保留中の要求に応答してからワーカーを終了する。Web では何もしない。",
+                    "desc_ko": "HTTP 리스너를 중지하고 대기 중인 요청에 응답한 뒤 작업 스레드를 종료한다. Web에서는 아무 작업도 하지 않는다.",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -19270,7 +19302,7 @@ const TrussCAPI = {
         },
         {
             "name": "Thread",
-            "desc": "Base class for background threads (ofThread compatible). Subclass it, override the protected pure-virtual threadedFunction() with a while (isThreadRunning()) { ... } loop, then control it with startThread()/stopThread()/waitForThread(). A protected mutex dataMutex_ is available for sharing data. A subclass must call waitForThread() in its own destructor: the base destructor also stops and joins, but only after the subclass members are destroyed, and logs a warning if threadedFunction() is still running. A subclass that does not wait may be destroyed before its worker has called threadedFunction() (e.g. right after startThread()), and then it depends on when the worker makes that call: while the subclass destructor runs, the real threadedFunction() runs and may use members that are already destroyed (undefined behaviour, usually without an abort); at about the moment ~Thread() starts, it can still end in \"pure virtual method called\"; after that, threadedFunction() is skipped and the base destructor warns and joins. Only waiting in the subclass destructor (waitForThread()) rules out all three. Hold subclasses via unique_ptr / shared_ptr (moving a Thread is deprecated: it does not move the running thread).",
+            "desc": "Base class for background threads (ofThread compatible). Subclass it, override the protected pure-virtual threadedFunction() with a while (isThreadRunning()) { ... } loop, then control it with startThread()/stopThread()/waitForThread(). A protected mutex dataMutex_ is available for sharing data. A subclass must call waitForThread() in its own destructor: the base destructor also stops and joins, but only after the subclass members are destroyed, and logs a warning if threadedFunction() is still running. A subclass that does not wait may be destroyed before its worker has called threadedFunction() (e.g. right after startThread()), and then it depends on when the worker makes that call: while the subclass destructor runs, the real threadedFunction() runs and may use members that are already destroyed (undefined behaviour, usually without an abort); at about the moment ~Thread() starts, it can still end in \"pure virtual method called\"; after that, threadedFunction() is skipped and the base destructor warns and joins. Only waiting in the subclass destructor (waitForThread()) rules out all three. Hold subclasses via unique_ptr / shared_ptr (moving a Thread is deprecated: it does not move the running thread). When called on the worker itself, waitForThread() returns without joining (requesting stop by default); self-destruction detaches, and the worker must not access members afterward.",
             "keywords": [
                 "background",
                 "worker",
@@ -19278,8 +19310,8 @@ const TrussCAPI = {
                 "concurrent",
                 "ofthread"
             ],
-            "desc_ja": "バックグラウンドスレッドの基底クラス（ofThread 互換）。サブクラス化して protected の純粋仮想 threadedFunction() を while (isThreadRunning()) { ... } ループでオーバーライドし、startThread()/stopThread()/waitForThread() で制御する。データ共有用に protected の mutex dataMutex_ が利用できる。サブクラスは自分のデストラクタで必ず waitForThread() を呼ぶこと: 基底のデストラクタも停止して join するが、それはサブクラスのメンバが破棄された後になる。threadedFunction() がまだ動いていれば警告をログに出す。待機しないサブクラスは、ワーカーが threadedFunction() を呼ぶ前に破棄されうる（例: startThread() の直後）。その場合はワーカーがその呼び出しに達するタイミング次第になる: サブクラスのデストラクタ実行中なら本物の threadedFunction() が走り、破棄済みのメンバを使いうる（未定義動作で、たいてい異常終了もしない）。~Thread() の開始とほぼ同時なら \"pure virtual method called\" で強制終了しうる。それより後なら threadedFunction() はスキップされ、基底のデストラクタが警告を出して join する。3つすべてを防げるのは、サブクラスのデストラクタで待つ（waitForThread()）ことだけ。サブクラスは unique_ptr / shared_ptr で保持する（Thread のムーブは非推奨: 実行中のスレッドは移らない）",
-            "desc_ko": "백그라운드 스레드의 기반 클래스(ofThread 호환). 서브클래싱하여 protected 순수 가상 threadedFunction()을 while (isThreadRunning()) { ... } 루프로 오버라이드한 뒤 startThread()/stopThread()/waitForThread()로 제어. 데이터 공유용 protected mutex dataMutex_가 제공됨. 서브클래스는 자신의 소멸자에서 반드시 waitForThread()를 호출해야 함: 기반 소멸자도 정지 후 join하지만 서브클래스 멤버가 파괴된 뒤에 실행됨. threadedFunction()이 아직 실행 중이면 경고를 로그로 남김. 대기하지 않는 서브클래스는 워커가 threadedFunction()을 호출하기 전에 파괴될 수 있음(예: startThread() 직후). 그 경우 워커가 그 호출에 도달하는 시점에 따라 달라짐: 서브클래스 소멸자 실행 중이면 실제 threadedFunction()이 실행되어 이미 파괴된 멤버를 사용할 수 있음(정의되지 않은 동작이며, 대개 비정상 종료도 없음). ~Thread() 시작과 거의 같은 순간이면 \"pure virtual method called\"로 강제 종료될 수 있음. 그 이후라면 threadedFunction()은 건너뛰고 기반 소멸자가 경고를 남긴 뒤 join함. 세 경우를 모두 막는 방법은 서브클래스 소멸자에서 대기(waitForThread())하는 것뿐임. 서브클래스는 unique_ptr / shared_ptr로 보유(Thread 이동은 deprecated: 실행 중인 스레드는 옮겨지지 않음)",
+            "desc_ja": "バックグラウンドスレッドの基底クラス（ofThread 互換）。サブクラス化して protected の純粋仮想 threadedFunction() を while (isThreadRunning()) { ... } ループでオーバーライドし、startThread()/stopThread()/waitForThread() で制御する。データ共有用に protected の mutex dataMutex_ が利用できる。サブクラスは自分のデストラクタで必ず waitForThread() を呼ぶこと: 基底のデストラクタも停止して join するが、それはサブクラスのメンバが破棄された後になる。threadedFunction() がまだ動いていれば警告をログに出す。待機しないサブクラスは、ワーカーが threadedFunction() を呼ぶ前に破棄されうる（例: startThread() の直後）。その場合はワーカーがその呼び出しに達するタイミング次第になる: サブクラスのデストラクタ実行中なら本物の threadedFunction() が走り、破棄済みのメンバを使いうる（未定義動作で、たいてい異常終了もしない）。~Thread() の開始とほぼ同時なら \"pure virtual method called\" で強制終了しうる。それより後なら threadedFunction() はスキップされ、基底のデストラクタが警告を出して join する。3つすべてを防げるのは、サブクラスのデストラクタで待つ（waitForThread()）ことだけ。サブクラスは unique_ptr / shared_ptr で保持する（Thread のムーブは非推奨: 実行中のスレッドは移らない） ワーカー自身での waitForThread() は join せずに戻る（既定では停止を要求する）。自己破棄時は detach し、その後ワーカーはメンバにアクセスしてはならない。",
+            "desc_ko": "백그라운드 스레드의 기반 클래스(ofThread 호환). 서브클래싱하여 protected 순수 가상 threadedFunction()을 while (isThreadRunning()) { ... } 루프로 오버라이드한 뒤 startThread()/stopThread()/waitForThread()로 제어. 데이터 공유용 protected mutex dataMutex_가 제공됨. 서브클래스는 자신의 소멸자에서 반드시 waitForThread()를 호출해야 함: 기반 소멸자도 정지 후 join하지만 서브클래스 멤버가 파괴된 뒤에 실행됨. threadedFunction()이 아직 실행 중이면 경고를 로그로 남김. 대기하지 않는 서브클래스는 워커가 threadedFunction()을 호출하기 전에 파괴될 수 있음(예: startThread() 직후). 그 경우 워커가 그 호출에 도달하는 시점에 따라 달라짐: 서브클래스 소멸자 실행 중이면 실제 threadedFunction()이 실행되어 이미 파괴된 멤버를 사용할 수 있음(정의되지 않은 동작이며, 대개 비정상 종료도 없음). ~Thread() 시작과 거의 같은 순간이면 \"pure virtual method called\"로 강제 종료될 수 있음. 그 이후라면 threadedFunction()은 건너뛰고 기반 소멸자가 경고를 남긴 뒤 join함. 세 경우를 모두 막는 방법은 서브클래스 소멸자에서 대기(waitForThread())하는 것뿐임. 서브클래스는 unique_ptr / shared_ptr로 보유(Thread 이동은 deprecated: 실행 중인 스레드는 옮겨지지 않음) 워커 자신에서 waitForThread()는 join 없이 반환한다(기본적으로 정지를 요청). 자기 파괴 시 detach하며 이후 워커는 멤버에 접근하면 안 된다.",
             "examples": [
                 {
                     "name": "AllFeaturesExample",
@@ -19331,7 +19363,7 @@ const TrussCAPI = {
                             "params": "bool callStopThread = true"
                         }
                     ],
-                    "desc": "Wait (join) for the thread to finish. If callStopThread is true (default), calls stopThread() first. A subclass must call it in its own destructor. Never call it on the thread itself (e.g. from a destructor that runs inside threadedFunction()): joining itself throws std::system_error."
+                    "desc": "Wait (join) for the thread to finish. If callStopThread is true (default), calls stopThread() first. A subclass must call it in its own destructor. On the worker itself, returns without joining and leaves the handle available for a later join from another thread. Self-destruction detaches in the base destructor; after destroying itself, the worker must not access members."
                 },
                 {
                     "name": "isThreadRunning",
@@ -19703,6 +19735,77 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "SaveResult",
+            "desc": "Result of a checked save, stream open, recorder submission or finalization. Carries SaveError and a failure message.",
+            "keywords": [
+                "error",
+                "load",
+                "result",
+                "fail"
+            ],
+            "desc_ja": "保存、ストリーム開始、録画フレーム追加、終了処理の結果。失敗時は SaveError とメッセージを保持。",
+            "desc_ko": "저장, 스트림 열기, 녹화 제출 또는 종료 처리의 결과. 실패 시 SaveError와 메시지를 보유한다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "SaveError"
+            ],
+            "properties": [
+                {
+                    "name": "error",
+                    "type": "SaveError",
+                    "desc": "What went wrong; SaveError::None on success",
+                    "desc_ja": "失敗の種別。成功時は SaveError::None",
+                    "desc_ko": "실패 종류. 성공 시 SaveError::None"
+                },
+                {
+                    "name": "message",
+                    "type": "std::string",
+                    "desc": "Human-readable failure detail (may be empty)",
+                    "desc_ja": "人間可読な失敗の詳細（空のこともある）",
+                    "desc_ko": "사람이 읽을 수 있는 실패 상세(비어 있을 수 있음)"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "ok",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "true if this operation succeeded (error == SaveError::None); recorder submission is backend acceptance, while close/stop checks finalization."
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "success",
+                    "signatures": [
+                        {
+                            "ret": "SaveResult",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Make a success result (static)"
+                },
+                {
+                    "name": "fail",
+                    "signatures": [
+                        {
+                            "ret": "SaveResult",
+                            "params": "SaveError error, std::string message = std::string()"
+                        }
+                    ],
+                    "desc": "Make a failure result with an error kind and optional message (static)"
+                }
+            ]
+        },
+        {
             "name": "LogEventArgs",
             "desc": "Arguments delivered for each log message (level, text, and timestamp)",
             "keywords": [
@@ -19844,11 +19947,11 @@ const TrussCAPI = {
                     "name": "setLogFile",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path"
+                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns a failed SaveResult, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path"
                 },
                 {
                     "name": "closeFile",
@@ -24538,11 +24641,11 @@ const TrussCAPI = {
                     "name": "save",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path, const std::string & indent = std::string(\"  \")"
                         }
                     ],
-                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the per-level indentation string. Returns true on success; on failure it logs an error and returns false. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+                    "desc": "Serialize and save XML. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
                 },
                 {
                     "name": "toString",
@@ -24660,11 +24763,11 @@ const TrussCAPI = {
                     "name": "open",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path, bool append = false"
                         }
                     ],
-                    "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+                    "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns a failed SaveResult and logs an error when the folder cannot be created or the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned."
                 },
                 {
                     "name": "close",
@@ -27340,11 +27443,11 @@ const TrussCAPI = {
                     "name": "save",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created. The image is encoded in memory before the file is opened, so an encode error leaves an existing file untouched. When encoding fails, the folder cannot be created, or opening, writing or closing the file fails, an error is logged and false returned. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+                    "desc": "Save pixels (JPG/JPEG, BMP, otherwise PNG; preserve the requested filename). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
                 },
                 {
                     "name": "halve",
@@ -28052,11 +28155,11 @@ const TrussCAPI = {
                     "name": "save",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Save the texture contents to a file; return true on success."
+                    "desc": "Save texture contents (subclasses implement saving). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
                 }
             ]
         },
@@ -28141,11 +28244,11 @@ const TrussCAPI = {
                     "name": "save",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Save image to file. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+                    "desc": "Save image pixels. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
                 },
                 {
                     "name": "allocate",
@@ -30416,11 +30519,11 @@ const TrussCAPI = {
                     "name": "save",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path"
                         }
                     ],
-                    "desc": "Save FBO contents to file"
+                    "desc": "Read back and save FBO pixels. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
                 },
                 {
                     "name": "getColorImage",
@@ -32195,8 +32298,8 @@ const TrussCAPI = {
                 "android",
                 "ios"
             ],
-            "platformNote": "Video encoding is a stub on web: openPlatform() logs 'not implemented on web yet' and returns false (WebGPU can't sync-read pixels; a future JS MediaRecorder backend is noted). Real backends: macOS/iOS AVAssetWriter, Windows IMFSinkWriter, Linux GStreamer, Android MediaCodec.",
-            "platformNote_ja": "web はスタブ。openPlatform() が「not implemented」を出して false を返す（WebGPU が同期 pixel readback 不可）。他は実装あり（mac/ios AVAssetWriter, win IMFSinkWriter, linux GStreamer, android MediaCodec）。",
+            "platformNote": "Video encoding is a stub on web: open() reports one Error ('not implemented on web yet') and returns a failed SaveResult (WebGPU can't sync-read pixels; a future JS MediaRecorder backend is noted). Real backends: macOS/iOS AVAssetWriter, Windows IMFSinkWriter, Linux GStreamer, Android MediaCodec.",
+            "platformNote_ja": "web はスタブ。open() が「not implemented」の Error を1回出して失敗の SaveResult を返す（WebGPU が同期 pixel readback 不可）。他は実装あり（mac/ios AVAssetWriter, win IMFSinkWriter, linux GStreamer, android MediaCodec）。",
             "constructor": {
                 "signatures": [
                     ""
@@ -32207,21 +32310,21 @@ const TrussCAPI = {
                     "name": "open",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path, int width, int height, const VideoRecordSettings & settings = {}"
                         }
                     ],
-                    "desc": "Open the encoder at the given size (path resolved via getDataPath). A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+                    "desc": "Open the native encoder. Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization."
                 },
                 {
                     "name": "close",
                     "signatures": [
                         {
-                            "ret": "void",
+                            "ret": "SaveResult",
                             "params": ""
                         }
                     ],
-                    "desc": "Finalize and flush the video file"
+                    "desc": "Finalize and flush the video file. Returns SaveResult for backend finalization, retaining the first backend failure. Caller errors and transient readback failures do not fail the take. Repeated calls retain the result without another Error. No temporary/rename is used."
                 },
                 {
                     "name": "isOpen",
@@ -32241,7 +32344,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of frames written so far"
+                    "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail."
                 },
                 {
                     "name": "getWidth",
@@ -32297,33 +32400,33 @@ const TrussCAPI = {
                     "name": "addFrame",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const Fbo & fbo"
                         },
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const Pixels & pixels"
                         }
                     ],
-                    "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)"
+                    "desc": "Append one frame at the fixed-rate clock (frameIndex/fps). Returns SaveResult for this backend submission, not disk completion: Linux checks gst_app_src_push_buffer and polls bus errors during the take; Apple checks append and AVAssetWriter status/error; Windows checks WriteSample HRESULT. Check close()/stop() for finalization."
                 },
                 {
                     "name": "addFrameAt",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const Fbo & fbo, double timeSec"
                         },
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const Pixels & pixels, double timeSec"
                         },
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const unsigned char * rgba, int w, int h, double timeSec"
                         }
                     ],
-                    "desc": "Append one frame at an explicit presentation time (seconds)"
+                    "desc": "Append one frame at an explicit presentation time (seconds). Returns SaveResult for this backend submission, not disk completion: Linux checks gst_app_src_push_buffer and polls bus errors during the take; Apple checks append and AVAssetWriter status/error; Windows checks WriteSample HRESULT. Check close()/stop() for finalization."
                 },
                 {
                     "name": "lockFrame",
@@ -32342,11 +32445,11 @@ const TrussCAPI = {
                     "name": "submitFrame",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "double timeSec"
                         }
                     ],
-                    "desc": "Append the previously locked frame at the given presentation time (seconds)",
+                    "desc": "Submit the previously locked frame at the given PTS. Returns SaveResult from the append BOOL and AVAssetWriter status/error. Accepted frames increase getFrameCount(); close() checks finalization.",
                     "platforms": [
                         "macos"
                     ]
@@ -32355,11 +32458,11 @@ const TrussCAPI = {
                     "name": "writeAudio",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const float * interleaved, int frames, double timeSec"
                         }
                     ],
-                    "desc": "Append interleaved float32 samples to the audio track at an explicit PTS (seconds, same timeline as addFrameAt). Only meaningful when opened with settings.audio = true and audioSampleRate/audioChannels set; returns false otherwise"
+                    "desc": "Append float32 audio at the given PTS; an absent audio track returns a failed SaveResult. Returns SaveResult for this backend submission, not disk completion: Linux checks gst_app_src_push_buffer and polls bus errors during the take; Apple checks append and AVAssetWriter status/error; Windows checks WriteSample HRESULT. Check close()/stop() for finalization."
                 }
             ]
         },
@@ -32405,33 +32508,33 @@ const TrussCAPI = {
                     "name": "start",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path, const VideoRecordSettings & settings = {}"
                         },
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const Fbo & fbo, const fs::path & path, const VideoRecordSettings & settings = {}"
                         },
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path, float durationSec"
                         },
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const Fbo & fbo, const fs::path & path, float durationSec"
                         }
                     ],
-                    "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically"
+                    "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically. Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization. If the previous take times out waiting for GPU frames, its last completion finalizes it independently of the new take."
                 },
                 {
                     "name": "stop",
                     "signatures": [
                         {
-                            "ret": "void",
+                            "ret": "SaveResult",
                             "params": ""
                         }
                     ],
-                    "desc": "Stop live capture and finalize the file"
+                    "desc": "Disconnect the audio listener and wait up to one second for audio callbacks (a Warning if one is still running), then wait up to 2 seconds for GPU readbacks before finalizing. If GPU frames remain, logs one Error and returns WriteFailed with message recording still has frames in flight. The callbacks retain their State and writer; the last completion drains audio and closes the file. Returns SaveResult for finalization or the retained failure; repeated calls do not repeat the timeout Error. Caller errors and transient readback failures do not fail the take. No temporary/rename is used."
                 },
                 {
                     "name": "isRecording",
@@ -32451,7 +32554,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of frames captured so far"
+                    "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail."
                 },
                 {
                     "name": "getPath",
@@ -35387,7 +35490,7 @@ const TrussCAPI = {
         },
         {
             "name": "AudioRecorder",
-            "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks. Every file has a 36-byte JUNK chunk after the RIFF header, so the samples start at byte 80 (S16) or 92 (F32). A take over 4 GiB of samples (about 3.1 h of 48 kHz stereo F32) is written as RF64 (EBU Tech 3306); older readers without RF64 support can't open it",
+            "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks. Every file has a 36-byte JUNK chunk after the RIFF header, so the samples start at byte 80 (S16) or 92 (F32). A take over 4 GiB of samples (about 3.1 h of 48 kHz stereo F32) is written as RF64 (EBU Tech 3306); older readers without RF64 support can't open it Destroying an active recorder inside an audio callback is a caller mistake: it returns without waiting, logs one Error, and leaves the WAV header unfinalized.",
             "keywords": [
                 "record",
                 "wav",
@@ -35397,8 +35500,8 @@ const TrussCAPI = {
                 "tap",
                 "bounce"
             ],
-            "desc_ja": "エンジンのマスター出力（Sound再生もaudioOut合成も含む、スピーカーに出る音そのもの）をWAVファイルに録音する。audioOutをMonitor優先度でタップし、ファイルIOはバックグラウンドスレッドで行う（オーディオスレッドはブロックしない）。どのファイルも RIFF ヘッダの後に 36 バイトの JUNK チャンクを持つので、サンプルは 80 バイト目 (S16) か 92 バイト目 (F32) から始まる。サンプルが 4 GiB を超えるテイク (48 kHz ステレオ F32 で約 3.1 時間) は RF64 (EBU Tech 3306) で書かれ、RF64 に対応していない古いリーダーでは開けない",
-            "desc_ko": "엔진의 마스터 출력(스피커로 나가는 소리 그대로, Sound 재생과 audioOut 합성 포함)을 WAV 파일로 녹음. audioOut을 Monitor 우선순위로 탭하고 파일 IO는 백그라운드 스레드에서 수행(오디오 스레드는 블록되지 않음). 모든 파일은 RIFF 헤더 뒤에 36바이트 JUNK 청크를 가지므로 샘플은 80바이트째(S16) 또는 92바이트째(F32)부터 시작한다. 샘플이 4 GiB를 넘는 테이크(48 kHz 스테레오 F32로 약 3.1시간)는 RF64(EBU Tech 3306)로 기록되며, RF64를 지원하지 않는 오래된 리더에서는 열 수 없다",
+            "desc_ja": "エンジンのマスター出力（Sound再生もaudioOut合成も含む、スピーカーに出る音そのもの）をWAVファイルに録音する。audioOutをMonitor優先度でタップし、ファイルIOはバックグラウンドスレッドで行う（オーディオスレッドはブロックしない）。どのファイルも RIFF ヘッダの後に 36 バイトの JUNK チャンクを持つので、サンプルは 80 バイト目 (S16) か 92 バイト目 (F32) から始まる。サンプルが 4 GiB を超えるテイク (48 kHz ステレオ F32 で約 3.1 時間) は RF64 (EBU Tech 3306) で書かれ、RF64 に対応していない古いリーダーでは開けない 録音中にオーディオコールバック内で破棄するのは呼び出し側の誤り。待たずに戻り、Error を1回記録し、WAV ヘッダは未確定のままになる。",
+            "desc_ko": "엔진의 마스터 출력(스피커로 나가는 소리 그대로, Sound 재생과 audioOut 합성 포함)을 WAV 파일로 녹음. audioOut을 Monitor 우선순위로 탭하고 파일 IO는 백그라운드 스레드에서 수행(오디오 스레드는 블록되지 않음). 모든 파일은 RIFF 헤더 뒤에 36바이트 JUNK 청크를 가지므로 샘플은 80바이트째(S16) 또는 92바이트째(F32)부터 시작한다. 샘플이 4 GiB를 넘는 테이크(48 kHz 스테레오 F32로 약 3.1시간)는 RF64(EBU Tech 3306)로 기록되며, RF64를 지원하지 않는 오래된 리더에서는 열 수 없다 녹음 중 오디오 콜백 안에서 파괴하는 것은 호출자의 오류다. 기다리지 않고 반환하며 Error를 한 번 기록하고 WAV 헤더를 확정하지 않는다.",
             "examples": [
                 {
                     "name": "AllFeaturesExample",
@@ -35420,21 +35523,21 @@ const TrussCAPI = {
                     "name": "start",
                     "signatures": [
                         {
-                            "ret": "bool",
+                            "ret": "SaveResult",
                             "params": "const fs::path & path, const AudioRecordSettings & settings = {std::vector<std::vector<int>>()}"
                         }
                     ],
-                    "desc": "Start recording the master mix into a WAV file (relative paths resolve via getDataPath). The audio engine must already be initialized; returns false otherwise or when the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+                    "desc": "Start an in-place WAV recording of the master mix. Returns SaveResult after shared path preparation, opening and checked header writing; the AudioEngine must already be initialized. Relative paths use getDataPath, missing parents are created, and app bundle paths are refused. Every subsequent write is checked; the first failure ends the take and logs exactly one Error."
                 },
                 {
                     "name": "stop",
                     "signatures": [
                         {
-                            "ret": "void",
+                            "ret": "SaveResult",
                             "params": ""
                         }
                     ],
-                    "desc": "Stop and finalize the file (patches the WAV header sizes; a take over 4 GiB of samples becomes RF64, logged as a notice; a failed file write, such as a full disk, is logged as an error instead); the buffer a capture was still copying is included. Safe to call when not recording; also runs automatically on destruction. Waits on AudioEngine::waitForAudioCallbacks(): for every audioOut / audioIn listener running at that moment, not only the recorder's (usually well under one buffer). Don't call it while holding a lock that such a listener takes: it would wait up to one second and the audio drops out meanwhile"
+                    "desc": "Stop, drain pending captures and finalize the WAV/RF64 header and file. Disconnects the audio listener and waits up to one second for all audio callbacks already in flight; if one is still running it logs a Warning and finalizes anyway (that callback's last buffer is not in the file). Do not hold a lock needed by an audio listener. Returns SaveResult for checked header patching and close, or the first take failure; repeated calls preserve that result without another Error. Destruction normally calls stop; destroying an active recorder inside an audio callback instead logs one Error and leaves the header unfinalized. Recording writes in place, without a temporary or rename."
                 },
                 {
                     "name": "isRecording",
@@ -35454,7 +35557,7 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Seconds actually written to the file so far"
+                    "desc": "Seconds actually written to the file so far. Counts complete frames actually written divided by sample rate, including a short write; queued or failed frames are excluded."
                 },
                 {
                     "name": "getDroppedFrames",
@@ -38838,6 +38941,50 @@ const TrussCAPI = {
             "related": [
                 "LoadResult"
             ]
+        },
+        {
+            "name": "SaveError",
+            "desc": "Save failure kind: None, AccessDenied (including bundle refusal), NoSpace, WriteFailed, Unknown. Rename failure is always WriteFailed.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "AccessDenied",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "NoSpace",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "WriteFailed",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Unknown",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "保存結果の種別：None、AccessDenied（バンドルへの書き込み拒否を含む）、NoSpace、WriteFailed、Unknown。rename の失敗は常に WriteFailed",
+            "desc_ko": "저장 결과 종류: None, AccessDenied(번들 쓰기 거부 포함), NoSpace, WriteFailed, Unknown. 이름 변경 실패는 항상 WriteFailed"
         },
         {
             "name": "LogLevel",

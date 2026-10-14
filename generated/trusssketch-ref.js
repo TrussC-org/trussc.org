@@ -5246,22 +5246,22 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "path",
                     "return_type": "boolean",
-                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when capture is queued; on native platforms the destination folder is prepared first. This does not mean the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when capture is queued; on native platforms the destination folder is prepared first. This does not mean the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned. Keeps bool on every platform: true means queued. Native entry synchronously checks path, parent creation and bundle refusal through prepareOutputPath; the deferred atomic checked write logs one Error on failure. Web remains a download: encoded output is handed to the browser, with no folders or .tmp and no disk-completion guarantee.",
                     "keywords": [
                         "capture",
                         "png",
                         "export",
                         "save image"
                     ],
-                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueはキャプチャをキューに積めた意味で、ファイル書き込み完了ではない。ネイティブ環境では先に保存先フォルダを準備する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 캡처 큐 등록 성공을 의미하며 파일 기록 완료가 아님. 네이티브 플랫폼에서는 먼저 대상 폴더를 준비한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc_ja": "描画済みフレームのスクショを保存（形式は拡張子で判別し大文字小文字は区別しない。多くのプラットフォームでpng/jpg/bmp、詳細はプラットフォーム注記を参照）。どこから呼んでもよく、キャプチャはpresent()後に遅延実行。戻り値trueはキャプチャをキューに積めた意味で、ファイル書き込み完了ではない。ネイティブ環境では先に保存先フォルダを準備する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す 全プラットフォームで bool を維持し true はキュー受付を意味する。ネイティブは prepareOutputPath でパス・親作成・バンドル拒否を同期確認し、遅延 atomic 書き込みの失敗は Error 1回で報告。Web はブラウザに渡すダウンロードのままで、フォルダ・.tmp は作らずディスク保存完了は保証しない。",
+                    "desc_ko": "렌더링된 프레임의 스크린샷 저장(형식은 확장자로 판별하며 대소문자 무시. 대부분의 플랫폼에서 png/jpg/bmp, 자세한 내용은 플랫폼 노트 참조). 어디서든 호출 가능하며 캡처는 present() 이후로 지연. 반환값 true는 캡처 큐 등록 성공을 의미하며 파일 기록 완료가 아님. 네이티브 플랫폼에서는 먼저 대상 폴더를 준비한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환 모든 플랫폼에서 bool을 유지하며 true는 큐 등록을 의미한다. 네이티브는 prepareOutputPath로 경로, 부모 생성, 번들 거부를 동기 확인하고 지연 atomic 쓰기 실패는 Error 한 번으로 보고한다. Web은 브라우저에 전달하는 다운로드를 유지하며 폴더나 .tmp를 만들지 않고 디스크 저장 완료를 보장하지 않는다."
                 },
                 {
                     "name": "startRecording",
                     "params": "path, settings",
                     "params_typed": "path, settings = {}",
-                    "return_type": "boolean",
-                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
+                    "return_type": "SaveResult",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten). Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization.",
                     "keywords": [
                         "record",
                         "video",
@@ -5269,15 +5269,15 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
-                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)"
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き） パス準備とエンコーダ開始結果を SaveResult で返す。成功後は直接ストリーム書き込みを行い、完了結果は close()/stop() で確認する。",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀) 경로 준비와 인코더 열기 결과를 SaveResult로 반환한다. 성공하면 파일에 직접 기록하며 완료 결과는 close()/stop()으로 확인한다."
                 },
                 {
                     "name": "startRecording",
                     "params": "path, durationSec",
                     "params_typed": "path, durationSec",
-                    "return_type": "boolean",
-                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
+                    "return_type": "SaveResult",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten). Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization.",
                     "keywords": [
                         "record",
                         "video",
@@ -5285,15 +5285,15 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
-                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)"
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き） パス準備とエンコーダ開始結果を SaveResult で返す。成功後は直接ストリーム書き込みを行い、完了結果は close()/stop() で確認する。",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀) 경로 준비와 인코더 열기 결과를 SaveResult로 반환한다. 성공하면 파일에 직접 기록하며 완료 결과는 close()/stop()으로 확인한다."
                 },
                 {
                     "name": "startRecording",
                     "params": "fbo, path, settings",
                     "params_typed": "fbo, path, settings = {}",
-                    "return_type": "boolean",
-                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
+                    "return_type": "SaveResult",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten). Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization.",
                     "keywords": [
                         "record",
                         "video",
@@ -5301,15 +5301,15 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
-                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)"
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き） パス準備とエンコーダ開始結果を SaveResult で返す。成功後は直接ストリーム書き込みを行い、完了結果は close()/stop() で確認する。",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀) 경로 준비와 인코더 열기 결과를 SaveResult로 반환한다. 성공하면 파일에 직접 기록하며 완료 결과는 close()/stop()으로 확인한다."
                 },
                 {
                     "name": "startRecording",
                     "params": "fbo, path, durationSec",
                     "params_typed": "fbo, path, durationSec",
-                    "return_type": "boolean",
-                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)",
+                    "return_type": "SaveResult",
+                    "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten). Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization.",
                     "keywords": [
                         "record",
                         "video",
@@ -5317,23 +5317,23 @@ const TrussCAPI = {
                         "movie",
                         "mp4"
                     ],
-                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き）",
-                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀)"
+                    "desc_ja": "ウィンドウ — または Fbo（GUI無しのクリーン出力）— を動画ファイルに録画開始（ネイティブエンコーダ、ffmpeg不要）。秒数引数（または VideoRecordSettings.duration）を渡すと、その長さで自動停止・確定する固定長クリップになる（0 = 無制限）。録画中にもう一度呼ぶと現在のファイルを確定してから新規開始（同じパスなら前のファイルは上書き） パス準備とエンコーダ開始結果を SaveResult で返す。成功後は直接ストリーム書き込みを行い、完了結果は close()/stop() で確認する。",
+                    "desc_ko": "윈도우 — 또는 Fbo(GUI 없는 클린 출력) — 를 동영상 파일로 녹화 시작 (네이티브 인코더, ffmpeg 불필요). 초 인자(또는 VideoRecordSettings.duration)를 넘기면 그 길이에서 자동 정지·마무리되는 고정 길이 클립이 된다(0 = 무제한). 녹화 중에 다시 호출하면 현재 파일을 마무리한 뒤 새로 시작(같은 경로면 이전 파일 덮어씀) 경로 준비와 인코더 열기 결과를 SaveResult로 반환한다. 성공하면 파일에 직접 기록하며 완료 결과는 close()/stop()으로 확인한다."
                 },
                 {
                     "name": "stopRecording",
                     "params": "",
                     "params_typed": "",
-                    "return_type": "(nothing)",
-                    "desc": "Stop the current recording and finalize the file",
+                    "return_type": "SaveResult",
+                    "desc": "Stop the current recording and finalize the file. Returns SaveResult for backend finalization, retaining the first backend failure. Caller errors and transient readback failures do not fail the take. Repeated calls retain the result without another Error. No temporary/rename is used.",
                     "keywords": [
                         "record",
                         "video",
                         "finish",
                         "movie"
                     ],
-                    "desc_ja": "録画を停止してファイルを確定",
-                    "desc_ko": "녹화를 중지하고 파일을 마무리"
+                    "desc_ja": "録画を停止してファイルを確定 バックエンドの終了処理を SaveResult で返し、バックエンドの最初の失敗を保持する。呼び出しの誤りや一時的な読み出し失敗では録画を失敗扱いにしない。再呼び出しも結果を保持し、Error を重複させない。一時ファイル・rename は使用しない。",
+                    "desc_ko": "녹화를 중지하고 파일을 마무리 백엔드 종료 결과를 SaveResult로 반환하며 첫 백엔드 실패를 유지한다. 호출 오류나 일시적인 읽기 실패는 녹화 전체를 실패로 만들지 않는다. 반복 호출도 결과를 유지하며 Error를 다시 기록하지 않는다. 임시 파일과 rename은 사용하지 않는다."
                 },
                 {
                     "name": "isRecording",
@@ -5355,14 +5355,14 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Number of frames captured so far in the current recording",
+                    "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail.",
                     "keywords": [
                         "record",
                         "frames",
                         "video"
                     ],
-                    "desc_ja": "現在の録画でこれまでにキャプチャしたフレーム数",
-                    "desc_ko": "현재 녹화에서 지금까지 캡처한 프레임 수"
+                    "desc_ja": "バックエンドが受理した映像フレーム数。失敗した追加は含まない。終了処理は別途失敗する可能性がある。",
+                    "desc_ko": "백엔드가 수락한 영상 프레임 수. 실패한 제출은 제외한다. 종료 처리는 별도로 실패할 수 있다."
                 },
                 {
                     "name": "recordingPath",
@@ -5416,16 +5416,32 @@ const TrussCAPI = {
                     "params": "fn",
                     "params_typed": "fn",
                     "return_type": "(nothing)",
-                    "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame. Each frame runs, in order, what was queued when its drain started; work queued during the drain runs in the next frame. Nothing is dropped and there is no limit (a callback may edit the tree or free something); the tc_get_health MCP tool reports the count as mainQueuePending. Code that may queue faster than the app runs it, and can drop values, keeps its own bounded or latest-value buffer",
+                    "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise enqueue and return without waiting for execution. Each frame drains, in order, the work queued when its drain started; worker submissions during the drain wait until the next frame. There is no queue limit. runOnMainThread(fn, weakToken) accepts the same weak_ptr<atomic<bool>> liveness token as Deliver::Main: at execution time an expired or false token drops the closure. A token does not wait for a callback already running; serialize target teardown with delivery, normally on the main thread. The single-argument form never drops callbacks and the caller owns captured lifetimes. On Web without pthreads both forms run immediately, with the token check for the two-argument form. tc_get_health reports the drain-start count as mainQueuePending. Producers that can drop values use their own bounded or latest-value buffer.",
                     "keywords": [
                         "main thread",
                         "marshal",
                         "queue",
                         "dispatch",
-                        "sync"
+                        "liveness"
                     ],
-                    "desc_ja": "コールバックをメイン（シーン）スレッドで実行。既にメインなら即時、そうでなければ次フレームにキュー。各フレームは、ドレイン開始時点でキューにあったものを順番に実行する。ドレイン中にキューされたものは次のフレームで実行される。何も捨てず、上限もない（コールバックはツリーを編集したり何かを解放したりしうる）。その数は MCP ツール tc_get_health が mainQueuePending として返す。アプリが処理するより速くキューしうるコードで、値を捨ててよいものは、自前で上限付きのバッファか最新値だけのバッファを持つ",
-                    "desc_ko": "콜백을 메인(씬) 스레드에서 실행. 이미 메인이면 즉시, 아니면 다음 프레임으로 큐잉. 각 프레임은 드레인 시작 시점에 큐에 있던 것을 순서대로 실행한다. 드레인 중에 큐잉된 것은 다음 프레임에 실행된다. 아무것도 버리지 않고 상한도 없다(콜백이 트리를 편집하거나 무언가를 해제할 수 있으므로). 그 개수는 MCP 도구 tc_get_health가 mainQueuePending으로 보고한다. 앱이 처리하는 것보다 빠르게 큐잉할 수 있고 값을 버려도 되는 코드는 자체적으로 상한이 있는 버퍼나 최신값 버퍼를 둔다"
+                    "desc_ja": "コールバックをメイン（シーン）スレッドで実行。既にメインなら即時、それ以外では実行を待たずキューに入れて戻る。各フレームはドレイン開始時点の仕事を順番に実行し、ドレイン中のワーカーからの追加は次フレームに回す。キューの上限はない。runOnMainThread(fn, weakToken) は Deliver::Main と同じ weak_ptr<atomic<bool>> の生存トークンを受け取り、実行時にトークンが期限切れか false ならクロージャを捨てる。既に実行中のコールバックは待たないため、通常はメインスレッド上で配送と対象の破棄を直列化する。1引数版はコールバックを捨てず、キャプチャした対象の寿命は呼び出し側が管理する。pthreads なしの Web では両形式とも即時実行し、2引数版はトークンを確認する。tc_get_health は開始時の件数を mainQueuePending として返す。値を捨ててよい生成側は自前の上限付きバッファか最新値バッファを使う。",
+                    "desc_ko": "콜백을 메인(씬) 스레드에서 실행한다. 이미 메인이면 즉시 실행하고, 아니면 실행을 기다리지 않고 큐에 넣어 반환한다. 각 프레임은 드레인 시작 시점의 작업을 순서대로 실행하며 드레인 중 워커가 추가한 작업은 다음 프레임에 실행한다. 큐 상한은 없다. runOnMainThread(fn, weakToken)은 Deliver::Main과 같은 weak_ptr<atomic<bool>> 생존 토큰을 받으며 실행 시 토큰이 만료되었거나 false이면 클로저를 버린다. 이미 실행 중인 콜백을 기다리지 않으므로 보통 메인 스레드에서 전달과 대상 파괴를 직렬화한다. 인수가 하나인 형식은 콜백을 버리지 않으며 캡처 대상의 수명은 호출자가 관리한다. pthreads 없는 Web에서는 두 형식 모두 즉시 실행하고 두 인수 형식은 토큰을 검사한다. tc_get_health는 시작 시 작업 수를 mainQueuePending으로 보고한다. 값을 버릴 수 있는 생성자는 자체 상한 버퍼나 최신값 버퍼를 사용한다."
+                },
+                {
+                    "name": "runOnMainThread",
+                    "params": "fn, token",
+                    "params_typed": "fn, token",
+                    "return_type": "(nothing)",
+                    "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise enqueue and return without waiting for execution. Each frame drains, in order, the work queued when its drain started; worker submissions during the drain wait until the next frame. There is no queue limit. runOnMainThread(fn, weakToken) accepts the same weak_ptr<atomic<bool>> liveness token as Deliver::Main: at execution time an expired or false token drops the closure. A token does not wait for a callback already running; serialize target teardown with delivery, normally on the main thread. The single-argument form never drops callbacks and the caller owns captured lifetimes. On Web without pthreads both forms run immediately, with the token check for the two-argument form. tc_get_health reports the drain-start count as mainQueuePending. Producers that can drop values use their own bounded or latest-value buffer.",
+                    "keywords": [
+                        "main thread",
+                        "marshal",
+                        "queue",
+                        "dispatch",
+                        "liveness"
+                    ],
+                    "desc_ja": "コールバックをメイン（シーン）スレッドで実行。既にメインなら即時、それ以外では実行を待たずキューに入れて戻る。各フレームはドレイン開始時点の仕事を順番に実行し、ドレイン中のワーカーからの追加は次フレームに回す。キューの上限はない。runOnMainThread(fn, weakToken) は Deliver::Main と同じ weak_ptr<atomic<bool>> の生存トークンを受け取り、実行時にトークンが期限切れか false ならクロージャを捨てる。既に実行中のコールバックは待たないため、通常はメインスレッド上で配送と対象の破棄を直列化する。1引数版はコールバックを捨てず、キャプチャした対象の寿命は呼び出し側が管理する。pthreads なしの Web では両形式とも即時実行し、2引数版はトークンを確認する。tc_get_health は開始時の件数を mainQueuePending として返す。値を捨ててよい生成側は自前の上限付きバッファか最新値バッファを使う。",
+                    "desc_ko": "콜백을 메인(씬) 스레드에서 실행한다. 이미 메인이면 즉시 실행하고, 아니면 실행을 기다리지 않고 큐에 넣어 반환한다. 각 프레임은 드레인 시작 시점의 작업을 순서대로 실행하며 드레인 중 워커가 추가한 작업은 다음 프레임에 실행한다. 큐 상한은 없다. runOnMainThread(fn, weakToken)은 Deliver::Main과 같은 weak_ptr<atomic<bool>> 생존 토큰을 받으며 실행 시 토큰이 만료되었거나 false이면 클로저를 버린다. 이미 실행 중인 콜백을 기다리지 않으므로 보통 메인 스레드에서 전달과 대상 파괴를 직렬화한다. 인수가 하나인 형식은 콜백을 버리지 않으며 캡처 대상의 수명은 호출자가 관리한다. pthreads 없는 Web에서는 두 형식 모두 즉시 실행하고 두 인수 형식은 토큰을 검사한다. tc_get_health는 시작 시 작업 수를 mainQueuePending으로 보고한다. 값을 버릴 수 있는 생성자는 자체 상한 버퍼나 최신값 버퍼를 사용한다."
                 },
                 {
                     "name": "logLevelToString",
@@ -5516,15 +5532,15 @@ const TrussCAPI = {
                     "name": "setLogFile",
                     "params": "path",
                     "params_typed": "path",
-                    "return_type": "boolean",
-                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "return_type": "SaveResult",
+                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns a failed SaveResult, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned.",
                     "keywords": [
                         "output",
                         "write",
                         "path"
                     ],
-                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して false を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 false를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して 失敗の SaveResult を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して 失敗の SaveResult を返す",
+                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 실패한 SaveResult를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 실패한 SaveResult 반환"
                 },
                 {
                     "name": "closeLogFile",
@@ -6365,15 +6381,15 @@ const TrussCAPI = {
                     "name": "saveJson",
                     "params": "j, path, indent",
                     "params_typed": "j, path, indent = 2",
-                    "return_type": "boolean",
-                    "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). The JSON is serialized before the file is opened, so a serialization error leaves an existing file untouched. Written in binary mode (LF line endings on every platform). Returns true on success; when serializing, opening, writing or closing fails it logs an error and returns false. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "return_type": "SaveResult",
+                    "desc": "Serialize and save JSON (indent sets the pretty-print width; negative means compact). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss.",
                     "keywords": [
                         "write",
                         "store",
                         "serialize"
                     ],
-                    "desc_ja": "Jsonオブジェクトをファイルに書き出す。相対パスはgetDataPathで解決し、親フォルダがなければ作る。indentはpretty-print幅を指定(負の値でcompact)。ファイルを開く前にシリアライズするので、シリアライズに失敗しても既存のファイルはそのまま残る。バイナリモードで書く(どのプラットフォームでも改行はLF)。成功時trueを返し、シリアライズ・オープン・書き込み・closeのいずれかに失敗したときはエラーをログに出してfalseを返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "Json 객체를 파일로 기록. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. indent는 pretty-print 폭을 지정(음수면 compact). 파일을 열기 전에 직렬화하므로 직렬화에 실패해도 기존 파일은 그대로 남는다. 바이너리 모드로 기록(모든 플랫폼에서 줄바꿈은 LF). 성공 시 true 반환, 직렬화·열기·쓰기·닫기 중 하나라도 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc_ja": "SaveResult を返す。<file>.tmp に書き込み、close を確認してから元のファイルを置換する。失敗時は既存ファイルを保持し、一時ファイルを削除する。相対パスは getDataPath() で解決し、親フォルダを作成する。バンドル内は AccessDenied。電源断時の永続性を保証するものではない。",
+                    "desc_ko": "SaveResult를 반환한다. <file>.tmp에 쓰고 닫기를 확인한 뒤 기존 파일을 교체한다. 실패하면 기존 파일을 보존하고 임시 파일을 삭제한다. 상대 경로는 getDataPath()로 해석하고 상위 폴더를 만든다. 번들 내부는 AccessDenied. 전원 차단 시 영속성을 보장하지 않는다."
                 },
                 {
                     "name": "loadXml",
@@ -6574,28 +6590,28 @@ const TrussCAPI = {
                     "name": "saveTextFile",
                     "params": "path, content",
                     "params_typed": "path, content",
-                    "return_type": "boolean",
-                    "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "return_type": "SaveResult",
+                    "desc": "Save text bytes unchanged in binary mode. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss.",
                     "keywords": [
                         "write",
                         "store"
                     ],
-                    "desc_ja": "文字列をファイルに保存。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して false を返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "문자열을 텍스트 파일로 저장. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc_ja": "SaveResult を返す。<file>.tmp に書き込み、close を確認してから元のファイルを置換する。失敗時は既存ファイルを保持し、一時ファイルを削除する。相対パスは getDataPath() で解決し、親フォルダを作成する。バンドル内は AccessDenied。電源断時の永続性を保証するものではない。",
+                    "desc_ko": "SaveResult를 반환한다. <file>.tmp에 쓰고 닫기를 확인한 뒤 기존 파일을 교체한다. 실패하면 기존 파일을 보존하고 임시 파일을 삭제한다. 상대 경로는 getDataPath()로 해석하고 상위 폴더를 만든다. 번들 내부는 AccessDenied. 전원 차단 시 영속성을 보장하지 않는다."
                 },
                 {
                     "name": "appendToFile",
                     "params": "path, content",
                     "params_typed": "path, content",
-                    "return_type": "boolean",
-                    "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
+                    "return_type": "SaveResult",
+                    "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns a failed SaveResult and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned.",
                     "keywords": [
                         "write",
                         "add",
                         "concat"
                     ],
-                    "desc_ja": "ファイルに追記。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して false を返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "파일에 문자열을 추가. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 false 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc_ja": "ファイルに追記。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないとき、ファイルを開けないとき、書き込みや close に失敗したときはエラーをログに出して 失敗の SaveResult を返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して 失敗の SaveResult を返す",
+                    "desc_ko": "파일에 문자열을 추가. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나, 파일을 열 수 없거나, 쓰기 또는 닫기에 실패하면 오류를 로그에 남기고 실패한 SaveResult 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 실패한 SaveResult 반환"
                 }
             ],
             "name_ja": "ファイル",
@@ -9043,7 +9059,7 @@ const TrussCAPI = {
         },
         {
             "name": "AudioRecorder",
-            "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks. Every file has a 36-byte JUNK chunk after the RIFF header, so the samples start at byte 80 (S16) or 92 (F32). A take over 4 GiB of samples (about 3.1 h of 48 kHz stereo F32) is written as RF64 (EBU Tech 3306); older readers without RF64 support can't open it",
+            "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks. Every file has a 36-byte JUNK chunk after the RIFF header, so the samples start at byte 80 (S16) or 92 (F32). A take over 4 GiB of samples (about 3.1 h of 48 kHz stereo F32) is written as RF64 (EBU Tech 3306); older readers without RF64 support can't open it Destroying an active recorder inside an audio callback is a caller mistake: it returns without waiting, logs one Error, and leaves the WAV header unfinalized.",
             "keywords": [
                 "record",
                 "wav",
@@ -9053,8 +9069,8 @@ const TrussCAPI = {
                 "tap",
                 "bounce"
             ],
-            "desc_ja": "エンジンのマスター出力（Sound再生もaudioOut合成も含む、スピーカーに出る音そのもの）をWAVファイルに録音する。audioOutをMonitor優先度でタップし、ファイルIOはバックグラウンドスレッドで行う（オーディオスレッドはブロックしない）。どのファイルも RIFF ヘッダの後に 36 バイトの JUNK チャンクを持つので、サンプルは 80 バイト目 (S16) か 92 バイト目 (F32) から始まる。サンプルが 4 GiB を超えるテイク (48 kHz ステレオ F32 で約 3.1 時間) は RF64 (EBU Tech 3306) で書かれ、RF64 に対応していない古いリーダーでは開けない",
-            "desc_ko": "엔진의 마스터 출력(스피커로 나가는 소리 그대로, Sound 재생과 audioOut 합성 포함)을 WAV 파일로 녹음. audioOut을 Monitor 우선순위로 탭하고 파일 IO는 백그라운드 스레드에서 수행(오디오 스레드는 블록되지 않음). 모든 파일은 RIFF 헤더 뒤에 36바이트 JUNK 청크를 가지므로 샘플은 80바이트째(S16) 또는 92바이트째(F32)부터 시작한다. 샘플이 4 GiB를 넘는 테이크(48 kHz 스테레오 F32로 약 3.1시간)는 RF64(EBU Tech 3306)로 기록되며, RF64를 지원하지 않는 오래된 리더에서는 열 수 없다",
+            "desc_ja": "エンジンのマスター出力（Sound再生もaudioOut合成も含む、スピーカーに出る音そのもの）をWAVファイルに録音する。audioOutをMonitor優先度でタップし、ファイルIOはバックグラウンドスレッドで行う（オーディオスレッドはブロックしない）。どのファイルも RIFF ヘッダの後に 36 バイトの JUNK チャンクを持つので、サンプルは 80 バイト目 (S16) か 92 バイト目 (F32) から始まる。サンプルが 4 GiB を超えるテイク (48 kHz ステレオ F32 で約 3.1 時間) は RF64 (EBU Tech 3306) で書かれ、RF64 に対応していない古いリーダーでは開けない 録音中にオーディオコールバック内で破棄するのは呼び出し側の誤り。待たずに戻り、Error を1回記録し、WAV ヘッダは未確定のままになる。",
+            "desc_ko": "엔진의 마스터 출력(스피커로 나가는 소리 그대로, Sound 재생과 audioOut 합성 포함)을 WAV 파일로 녹음. audioOut을 Monitor 우선순위로 탭하고 파일 IO는 백그라운드 스레드에서 수행(오디오 스레드는 블록되지 않음). 모든 파일은 RIFF 헤더 뒤에 36바이트 JUNK 청크를 가지므로 샘플은 80바이트째(S16) 또는 92바이트째(F32)부터 시작한다. 샘플이 4 GiB를 넘는 테이크(48 kHz 스테레오 F32로 약 3.1시간)는 RF64(EBU Tech 3306)로 기록되며, RF64를 지원하지 않는 오래된 리더에서는 열 수 없다 녹음 중 오디오 콜백 안에서 파괴하는 것은 호출자의 오류다. 기다리지 않고 반환하며 Error를 한 번 기록하고 WAV 헤더를 확정하지 않는다.",
             "related": [
                 "AudioRecordSettings",
                 "AudioEngine",
@@ -9070,25 +9086,25 @@ const TrussCAPI = {
                     "name": "audioRecorder:start",
                     "signatures": [
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "path, settings = {std.vector<std.vector<int>>()}"
                         }
                     ],
-                    "desc": "Start recording the master mix into a WAV file (relative paths resolve via getDataPath). The audio engine must already be initialized; returns false otherwise or when the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
-                    "desc_ja": "マスターミックスのWAV録音を開始（相対パスは getDataPath で解決）。オーディオエンジンが初期化済みであること。未初期化またはファイルが開けない場合は false。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "마스터 믹스의 WAV 녹음을 시작(상대 경로는 getDataPath로 해석). 오디오 엔진이 초기화되어 있어야 하며, 아니면(또는 파일을 열 수 없으면) false 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc": "Start an in-place WAV recording of the master mix. Returns SaveResult after shared path preparation, opening and checked header writing; the AudioEngine must already be initialized. Relative paths use getDataPath, missing parents are created, and app bundle paths are refused. Every subsequent write is checked; the first failure ends the take and logs exactly one Error.",
+                    "desc_ja": "マスターミックスの WAV 録音を直接ファイルに開始する。共通パス準備、オープン、ヘッダ書き込み確認の結果を SaveResult で返す。AudioEngine は初期化済みであること。相対パスは getDataPath、親フォルダは自動作成、バンドル内は拒否。以後の全書き込みを確認し、最初の失敗で録音を終了して Error を1回だけ記録する。",
+                    "desc_ko": "마스터 믹스를 WAV 파일에 직접 녹음한다. 공통 경로 준비, 열기 및 헤더 쓰기 확인 결과를 SaveResult로 반환한다. AudioEngine은 초기화되어 있어야 한다. 상대 경로는 getDataPath로 해석하고 부모 폴더를 생성하며 앱 번들은 거부한다. 이후 모든 쓰기를 확인하고 첫 실패에서 녹음을 끝내며 Error를 한 번만 기록한다."
                 },
                 {
                     "name": "audioRecorder:stop",
                     "signatures": [
                         {
-                            "ret": "(nothing)",
+                            "ret": "SaveResult",
                             "params": ""
                         }
                     ],
-                    "desc": "Stop and finalize the file (patches the WAV header sizes; a take over 4 GiB of samples becomes RF64, logged as a notice; a failed file write, such as a full disk, is logged as an error instead); the buffer a capture was still copying is included. Safe to call when not recording; also runs automatically on destruction. Waits on AudioEngine::waitForAudioCallbacks(): for every audioOut / audioIn listener running at that moment, not only the recorder's (usually well under one buffer). Don't call it while holding a lock that such a listener takes: it would wait up to one second and the audio drops out meanwhile",
-                    "desc_ja": "録音を停止しファイルを確定する（WAVヘッダのサイズを書き戻す。サンプルが 4 GiB を超えたテイクは RF64 にして notice ログを出す。ディスクが一杯などでファイル書き込みが失敗していたら、代わりに error ログを出す）。取り込み途中だったバッファも含まれる。未録音時に呼んでも安全。デストラクタでも自動実行される。AudioEngine::waitForAudioCallbacks() で待つので、レコーダーの分だけでなく、その時点で動いている audioOut / audioIn のリスナーすべてを待つ (通常はバッファ 1 つ分より短い)。そうしたリスナーが取るロックを持ったまま呼ばないこと。最大 1 秒止まり、その間は音が途切れる",
-                    "desc_ko": "녹음을 정지하고 파일을 마무리(WAV 헤더 크기를 기록. 샘플이 4 GiB를 넘은 테이크는 RF64로 만들고 notice 로그를 남긴다. 디스크가 가득 차는 등으로 파일 쓰기가 실패했다면 대신 error 로그를 남긴다). 캡처 도중이던 버퍼도 포함된다. 녹음 중이 아닐 때 호출해도 안전하며 소멸자에서도 자동 실행됨. AudioEngine::waitForAudioCallbacks() 로 기다리므로 레코더 것만이 아니라 그 시점에 실행 중인 audioOut / audioIn 리스너 전부를 기다린다 (보통 버퍼 하나 분량보다 짧다). 그런 리스너가 잡는 락을 쥔 채로 호출하지 말 것. 최대 1 초 멈추고 그동안 소리가 끊긴다"
+                    "desc": "Stop, drain pending captures and finalize the WAV/RF64 header and file. Disconnects the audio listener and waits up to one second for all audio callbacks already in flight; if one is still running it logs a Warning and finalizes anyway (that callback's last buffer is not in the file). Do not hold a lock needed by an audio listener. Returns SaveResult for checked header patching and close, or the first take failure; repeated calls preserve that result without another Error. Destruction normally calls stop; destroying an active recorder inside an audio callback instead logs one Error and leaves the header unfinalized. Recording writes in place, without a temporary or rename.",
+                    "desc_ja": "録音を停止し、取り込み途中のバッファも排出して WAV/RF64 ヘッダとファイルを確定する。リスナーを切り離し、実行中の全オーディオコールバックを最大1秒待つ。まだ実行中のものがあれば Warning を記録してそのまま確定する（そのコールバックの最後のバッファはファイルに入らない）。リスナーが必要とするロックを保持して呼ばないこと。ヘッダ書き戻しとクローズの確認結果、または最初の録音失敗を SaveResult で返す。再呼び出しも結果を保持し Error を重複させない。通常は破棄時にも stop を呼ぶが、オーディオコールバック内で録音中に破棄すると Error を1回記録しヘッダを未確定のまま残す。一時ファイルや rename は使用しない。",
+                    "desc_ko": "녹음을 중지하고 진행 중인 캡처 버퍼도 비운 뒤 WAV/RF64 헤더와 파일을 확정한다. 리스너를 해제하고 실행 중인 모든 오디오 콜백을 최대 1초 기다린다. 아직 실행 중인 콜백이 있으면 Warning을 기록하고 그대로 확정한다 (그 콜백의 마지막 버퍼는 파일에 들어가지 않는다). 리스너에 필요한 잠금을 잡은 채 호출하지 말 것. 헤더 수정과 닫기 확인 결과 또는 첫 녹음 실패를 SaveResult로 반환하며 반복 호출도 결과를 유지하고 Error를 중복 기록하지 않는다. 보통 파괴 시에도 stop을 호출하지만 녹음 중 오디오 콜백 안에서 파괴하면 Error를 한 번 기록하고 헤더를 확정하지 않는다. 임시 파일과 rename은 사용하지 않는다."
                 },
                 {
                     "name": "audioRecorder:isRecording",
@@ -9110,9 +9126,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Seconds actually written to the file so far",
-                    "desc_ja": "ここまでにファイルへ書き込まれた秒数",
-                    "desc_ko": "지금까지 파일에 기록된 초 수"
+                    "desc": "Seconds actually written to the file so far. Counts complete frames actually written divided by sample rate, including a short write; queued or failed frames are excluded.",
+                    "desc_ja": "ここまでにファイルへ書き込まれた秒数 実際に書き込めた完全なフレーム数をサンプルレートで割る。部分書き込みも反映し、待機中・失敗したフレームは含めない。",
+                    "desc_ko": "지금까지 파일에 기록된 초 수 실제로 기록된 완전한 프레임 수를 샘플 레이트로 나눈다. 부분 쓰기도 반영하며 대기 중이거나 실패한 프레임은 제외한다."
                 },
                 {
                     "name": "audioRecorder:getDroppedFrames",
@@ -11467,13 +11483,13 @@ const TrussCAPI = {
                 },
                 {
                     "name": "fbo:save",
-                    "return": "boolean",
+                    "return": "SaveResult",
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Save FBO contents to file",
-                    "desc_ja": "FBOの内容をファイルに保存",
-                    "desc_ko": "FBO 내용을 파일로 저장"
+                    "desc": "Read back and save FBO pixels. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss.",
+                    "desc_ja": "SaveResult を返す。<file>.tmp に書き込み、close を確認してから元のファイルを置換する。失敗時は既存ファイルを保持し、一時ファイルを削除する。相対パスは getDataPath() で解決し、親フォルダを作成する。バンドル内は AccessDenied。電源断時の永続性を保証するものではない。",
+                    "desc_ko": "SaveResult를 반환한다. <file>.tmp에 쓰고 닫기를 확인한 뒤 기존 파일을 교체한다. 실패하면 기존 파일을 보존하고 임시 파일을 삭제한다. 상대 경로는 getDataPath()로 해석하고 상위 폴더를 만든다. 번들 내부는 AccessDenied. 전원 차단 시 영속성을 보장하지 않는다."
                 },
                 {
                     "name": "fbo:draw",
@@ -11717,13 +11733,13 @@ const TrussCAPI = {
                     "name": "fileWriter:open",
                     "signatures": [
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "path, append = false"
                         }
                     ],
-                    "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
-                    "desc_ja": "書き込み用にファイルを開く（append = true で既存ファイルに追記）。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して false を返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "쓰기용으로 파일을 엶 (append = true면 기존 파일에 추가). 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 false 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns a failed SaveResult and logs an error when the folder cannot be created or the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned.",
+                    "desc_ja": "書き込み用にファイルを開く（append = true で既存ファイルに追記）。相対パスは getDataPath で解決し、親フォルダがなければ作る。フォルダを作れないときやファイルを開けないときはエラーをログに出して 失敗の SaveResult を返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して 失敗の SaveResult を返す",
+                    "desc_ko": "쓰기용으로 파일을 엶 (append = true면 기존 파일에 추가). 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 폴더를 만들 수 없거나 파일을 열 수 없으면 오류를 로그에 남기고 실패한 SaveResult 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 실패한 SaveResult 반환"
                 },
                 {
                     "name": "fileWriter:close",
@@ -12867,13 +12883,13 @@ const TrussCAPI = {
                     "name": "hasTexture:save",
                     "signatures": [
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "path"
                         }
                     ],
-                    "desc": "Save the texture contents to a file; return true on success.",
-                    "desc_ja": "テクスチャの内容をファイルに保存する。成功したら true を返す。",
-                    "desc_ko": "텍스처 내용을 파일로 저장하고 성공하면 true를 반환한다."
+                    "desc": "Save texture contents (subclasses implement saving). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss.",
+                    "desc_ja": "SaveResult を返す。<file>.tmp に書き込み、close を確認してから元のファイルを置換する。失敗時は既存ファイルを保持し、一時ファイルを削除する。相対パスは getDataPath() で解決し、親フォルダを作成する。バンドル内は AccessDenied。電源断時の永続性を保証するものではない。",
+                    "desc_ko": "SaveResult를 반환한다. <file>.tmp에 쓰고 닫기를 확인한 뒤 기존 파일을 교체한다. 실패하면 기존 파일을 보존하고 임시 파일을 삭제한다. 상대 경로는 getDataPath()로 해석하고 상위 폴더를 만든다. 번들 내부는 AccessDenied. 전원 차단 시 영속성을 보장하지 않는다."
                 }
             ]
         },
@@ -13070,13 +13086,13 @@ const TrussCAPI = {
                 },
                 {
                     "name": "image:save",
-                    "return": "boolean",
+                    "return": "SaveResult",
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Save image to file. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
-                    "desc_ja": "ファイルに画像を保存。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "이미지를 파일로 저장. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc": "Save image pixels. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss.",
+                    "desc_ja": "SaveResult を返す。<file>.tmp に書き込み、close を確認してから元のファイルを置換する。失敗時は既存ファイルを保持し、一時ファイルを削除する。相対パスは getDataPath() で解決し、親フォルダを作成する。バンドル内は AccessDenied。電源断時の永続性を保証するものではない。",
+                    "desc_ko": "SaveResult를 반환한다. <file>.tmp에 쓰고 닫기를 확인한 뒤 기존 파일을 교체한다. 실패하면 기존 파일을 보존하고 임시 파일을 삭제한다. 상대 경로는 getDataPath()로 해석하고 상위 폴더를 만든다. 번들 내부는 AccessDenied. 전원 차단 시 영속성을 보장하지 않는다."
                 },
                 {
                     "name": "image:loadFromMemory",
@@ -14567,13 +14583,13 @@ const TrussCAPI = {
                     "name": "logger:setLogFile",
                     "signatures": [
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "path"
                         }
                     ],
-                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path",
-                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して false を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す",
-                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 false를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환"
+                    "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns a failed SaveResult, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path",
+                    "desc_ja": "ログ出力を受けるファイルを開く（追記モード）。相対パスはデータフォルダ（getDataPath）で解決し、親フォルダがなければ作る。失敗時はエラーをログに出して 失敗の SaveResult を返し、今のログファイルは開いたまま残る（エラー行もそこに入る）。成功後の getLogFilePath() は解決済みのパスを返す",
+                    "desc_ko": "로그 출력을 받을 파일을 엶 (추가 모드). 상대 경로는 데이터 폴더(getDataPath)로 해석하고, 상위 폴더가 없으면 만든다. 실패하면 오류를 로그에 남기고 실패한 SaveResult를 반환하며, 현재 로그 파일은 열린 채로 남는다 (오류 줄도 거기에 기록됨). 성공 후 getLogFilePath()는 해석된 경로를 반환"
                 },
                 {
                     "name": "logger:closeFile",
@@ -18679,13 +18695,13 @@ const TrussCAPI = {
                 },
                 {
                     "name": "pixels:save",
-                    "return": "boolean",
+                    "return": "SaveResult",
                     "signatures": [
                         "path"
                     ],
-                    "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created. The image is encoded in memory before the file is opened, so an encode error leaves an existing file untouched. When encoding fails, the folder cannot be created, or opening, writing or closing the file fails, an error is logged and false returned. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
-                    "desc_ja": "ファイルに画像を保存。形式は拡張子で決まり、大文字小文字は区別しない: .png, .jpg/.jpeg, .bmp（それ以外はPNGで書く）。ファイル名は指定どおりに使う。相対パスは getDataPath で解決し、親フォルダがなければ作る。ファイルを開く前にメモリ上でエンコードするので、エンコードに失敗しても既存のファイルはそのまま残る。エンコードに失敗したとき、フォルダを作れないとき、ファイルのオープン・書き込み・close に失敗したときはエラーをログに出して false を返す。ファイルはその場で上書きするので、保存中のクラッシュ・電源断・ディスクフルで途中までのファイルが残ることがある。クラッシュに強い保存が必要なアプリは、新しいファイルに書いてから rename するなど自前で対応する。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "이미지를 파일로 저장. 형식은 확장자로 정해지며 대소문자 무시: .png, .jpg/.jpeg, .bmp (그 외는 PNG로 저장). 파일 이름은 지정한 그대로 사용. 상대 경로는 getDataPath로 해석하고, 상위 폴더가 없으면 만든다. 파일을 열기 전에 메모리에서 인코딩하므로 인코딩에 실패해도 기존 파일은 그대로 남는다. 인코딩에 실패하거나, 폴더를 만들 수 없거나, 파일 열기·쓰기·닫기에 실패하면 오류를 로그에 남기고 false 반환. 파일을 그 자리에서 덮어쓰므로 저장 중 크래시, 전원 차단, 디스크 가득 참이 일어나면 잘린 파일이 남을 수 있다. 크래시에 안전한 저장이 필요한 앱은 새 파일에 쓴 뒤 이름을 바꾸는 등 직접 처리한다. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc": "Save pixels (JPG/JPEG, BMP, otherwise PNG; preserve the requested filename). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss.",
+                    "desc_ja": "SaveResult を返す。<file>.tmp に書き込み、close を確認してから元のファイルを置換する。失敗時は既存ファイルを保持し、一時ファイルを削除する。相対パスは getDataPath() で解決し、親フォルダを作成する。バンドル内は AccessDenied。電源断時の永続性を保証するものではない。",
+                    "desc_ko": "SaveResult를 반환한다. <file>.tmp에 쓰고 닫기를 확인한 뒤 기존 파일을 교체한다. 실패하면 기존 파일을 보존하고 임시 파일을 삭제한다. 상대 경로는 getDataPath()로 해석하고 상위 폴더를 만든다. 번들 내부는 AccessDenied. 전원 차단 시 영속성을 보장하지 않는다."
                 }
             ]
         },
@@ -19952,6 +19968,77 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "SaveResult",
+            "desc": "Result of a checked save, stream open, recorder submission or finalization. Carries SaveError and a failure message.",
+            "keywords": [
+                "error",
+                "load",
+                "result",
+                "fail"
+            ],
+            "desc_ja": "保存、ストリーム開始、録画フレーム追加、終了処理の結果。失敗時は SaveError とメッセージを保持。",
+            "desc_ko": "저장, 스트림 열기, 녹화 제출 또는 종료 처리의 결과. 실패 시 SaveError와 메시지를 보유한다.",
+            "related": [
+                "SaveError"
+            ],
+            "properties": [
+                {
+                    "name": "saveResult.error",
+                    "type": "SaveError",
+                    "desc": "What went wrong; SaveError::None on success",
+                    "desc_ja": "失敗の種別。成功時は SaveError::None",
+                    "desc_ko": "실패 종류. 성공 시 SaveError::None"
+                },
+                {
+                    "name": "saveResult.message",
+                    "type": "string",
+                    "desc": "Human-readable failure detail (may be empty)",
+                    "desc_ja": "人間可読な失敗の詳細（空のこともある）",
+                    "desc_ko": "사람이 읽을 수 있는 실패 상세(비어 있을 수 있음)"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "saveResult:ok",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "true if this operation succeeded (error == SaveError::None); recorder submission is backend acceptance, while close/stop checks finalization.",
+                    "desc_ja": "この操作が成功したら true（error == SaveError::None）。録画の追加はバックエンド受理、close/stop は終了処理の結果を表す。",
+                    "desc_ko": "이 작업이 성공하면 true(error == SaveError::None). 녹화 제출은 백엔드 수락이며 close/stop은 종료 처리 결과를 나타낸다."
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "SaveResult.success",
+                    "signatures": [
+                        {
+                            "ret": "SaveResult",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Make a success result (static)",
+                    "desc_ja": "成功の結果を作る（static）",
+                    "desc_ko": "성공 결과를 만듦 (static)"
+                },
+                {
+                    "name": "SaveResult.fail",
+                    "signatures": [
+                        {
+                            "ret": "SaveResult",
+                            "params": "error, message = \"\""
+                        }
+                    ],
+                    "desc": "Make a failure result with an error kind and optional message (static)",
+                    "desc_ja": "エラー種別と任意のメッセージ付きで失敗の結果を作る（static）",
+                    "desc_ko": "오류 종류와 선택적 메시지로 실패 결과를 만듦 (static)"
+                }
+            ]
+        },
+        {
             "name": "ScreenRecorder",
             "desc": "Captures the rendered output to a video file (start/stop recording of the on-screen frames)",
             "keywords": [
@@ -19978,37 +20065,37 @@ const TrussCAPI = {
                     "name": "screenRecorder:start",
                     "signatures": [
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "path, settings = {}"
                         },
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "fbo, path, settings = {}"
                         },
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "path, durationSec"
                         },
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "fbo, path, durationSec"
                         }
                     ],
-                    "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically",
-                    "desc_ja": "ライブ録画開始（ウィンドウ、またはGUIなしのクリーン出力はFbo）。サイズは自動取得。録画中に start を呼ぶと現在のファイルを確定してから新規開始。録画中の Fbo が破棄された場合は自動で停止・確定する",
-                    "desc_ko": "라이브 녹화 시작 (윈도우, 또는 GUI 없는 클린 출력은 Fbo); 크기는 자동 취득. 녹화 중에 start를 호출하면 현재 파일을 마무리한 뒤 새로 시작. 녹화 중인 Fbo가 파괴되면 자동으로 정지·마무리"
+                    "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically. Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization. If the previous take times out waiting for GPU frames, its last completion finalizes it independently of the new take.",
+                    "desc_ja": "ライブ録画開始（ウィンドウ、またはGUIなしのクリーン出力はFbo）。サイズは自動取得。録画中に start を呼ぶと現在のファイルを確定してから新規開始。録画中の Fbo が破棄された場合は自動で停止・確定する パス準備とエンコーダ開始結果を SaveResult で返す。成功後は直接ストリーム書き込みを行い、完了結果は close()/stop() で確認する。 前の録画が GPU フレームの待機上限に達した場合は、新しい録画と独立して最後の完了ハンドラが確定する。",
+                    "desc_ko": "라이브 녹화 시작 (윈도우, 또는 GUI 없는 클린 출력은 Fbo); 크기는 자동 취득. 녹화 중에 start를 호출하면 현재 파일을 마무리한 뒤 새로 시작. 녹화 중인 Fbo가 파괴되면 자동으로 정지·마무리 경로 준비와 인코더 열기 결과를 SaveResult로 반환한다. 성공하면 파일에 직접 기록하며 완료 결과는 close()/stop()으로 확인한다. 이전 녹화가 GPU 프레임 대기 제한에 도달하면 새 녹화와 독립적으로 마지막 완료 핸들러가 이전 파일을 확정한다."
                 },
                 {
                     "name": "screenRecorder:stop",
                     "signatures": [
                         {
-                            "ret": "(nothing)",
+                            "ret": "SaveResult",
                             "params": ""
                         }
                     ],
-                    "desc": "Stop live capture and finalize the file",
-                    "desc_ja": "ライブ録画を停止してファイルを確定",
-                    "desc_ko": "라이브 녹화를 중지하고 파일을 마무리"
+                    "desc": "Disconnect the audio listener and wait up to one second for audio callbacks (a Warning if one is still running), then wait up to 2 seconds for GPU readbacks before finalizing. If GPU frames remain, logs one Error and returns WriteFailed with message recording still has frames in flight. The callbacks retain their State and writer; the last completion drains audio and closes the file. Returns SaveResult for finalization or the retained failure; repeated calls do not repeat the timeout Error. Caller errors and transient readback failures do not fail the take. No temporary/rename is used.",
+                    "desc_ja": "音声リスナーを切り離して実行中の音声コールバックを最大1秒待ち（まだ実行中なら Warning）、その後 GPU 読み戻しを最大2秒待って確定する。GPU フレームが残る場合は Error を1回記録し、メッセージ recording still has frames in flight の WriteFailed を返す。コールバックが State とライターを保持し、最後の完了ハンドラが音声を排出してファイルを閉じる。確定結果または保持した失敗を SaveResult で返し、再呼び出しで待機上限の Error を重複させない。呼び出しの誤りや一時的な読み出し失敗では録画を失敗扱いにしない。一時ファイル・rename は使用しない。",
+                    "desc_ko": "오디오 리스너를 해제하고 실행 중인 오디오 콜백을 최대 1초 기다린 다음 (아직 실행 중이면 Warning) GPU 읽기를 최대 2초 기다려 확정한다. GPU 프레임이 남으면 Error를 한 번 기록하고 메시지 recording still has frames in flight와 함께 WriteFailed를 반환한다. 콜백이 State와 작성기를 유지하며 마지막 완료 핸들러가 오디오를 비우고 파일을 닫는다. 확정 결과 또는 유지된 실패를 SaveResult로 반환하고 반복 호출은 대기 제한 Error를 중복 기록하지 않는다. 호출 오류나 일시적인 읽기 실패는 녹화 전체를 실패로 만들지 않는다. 임시 파일과 rename은 사용하지 않는다."
                 },
                 {
                     "name": "screenRecorder:isRecording",
@@ -20030,9 +20117,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of frames captured so far",
-                    "desc_ja": "これまでにキャプチャしたフレーム数",
-                    "desc_ko": "지금까지 캡처한 프레임 수"
+                    "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail.",
+                    "desc_ja": "バックエンドが受理した映像フレーム数。失敗した追加は含まない。終了処理は別途失敗する可能性がある。",
+                    "desc_ko": "백엔드가 수락한 영상 프레임 수. 실패한 제출은 제외한다. 종료 처리는 별도로 실패할 수 있다."
                 },
                 {
                     "name": "screenRecorder:getPath",
@@ -26844,25 +26931,25 @@ const TrussCAPI = {
                     "name": "videoWriter:open",
                     "signatures": [
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "path, width, height, settings = {}"
                         }
                     ],
-                    "desc": "Open the encoder at the given size (path resolved via getDataPath). A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
-                    "desc_ja": "指定サイズでエンコーダを開く（パスはgetDataPathで解決）。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "지정 크기로 인코더를 엽니다 (경로는 getDataPath로 해석). 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc": "Open the native encoder. Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization.",
+                    "desc_ja": "ネイティブエンコーダを開く。パス準備とエンコーダ開始結果を SaveResult で返す。成功後は直接ストリーム書き込みを行い、完了結果は close()/stop() で確認する。",
+                    "desc_ko": "네이티브 인코더를 연다. 경로 준비와 인코더 열기 결과를 SaveResult로 반환한다. 성공하면 파일에 직접 기록하며 완료 결과는 close()/stop()으로 확인한다."
                 },
                 {
                     "name": "videoWriter:close",
                     "signatures": [
                         {
-                            "ret": "(nothing)",
+                            "ret": "SaveResult",
                             "params": ""
                         }
                     ],
-                    "desc": "Finalize and flush the video file",
-                    "desc_ja": "動画ファイルを確定してフラッシュ",
-                    "desc_ko": "동영상 파일을 마무리하고 플러시"
+                    "desc": "Finalize and flush the video file. Returns SaveResult for backend finalization, retaining the first backend failure. Caller errors and transient readback failures do not fail the take. Repeated calls retain the result without another Error. No temporary/rename is used.",
+                    "desc_ja": "動画ファイルを確定してフラッシュ バックエンドの終了処理を SaveResult で返し、バックエンドの最初の失敗を保持する。呼び出しの誤りや一時的な読み出し失敗では録画を失敗扱いにしない。再呼び出しも結果を保持し、Error を重複させない。一時ファイル・rename は使用しない。",
+                    "desc_ko": "동영상 파일을 마무리하고 플러시 백엔드 종료 결과를 SaveResult로 반환하며 첫 백엔드 실패를 유지한다. 호출 오류나 일시적인 읽기 실패는 녹화 전체를 실패로 만들지 않는다. 반복 호출도 결과를 유지하며 Error를 다시 기록하지 않는다. 임시 파일과 rename은 사용하지 않는다."
                 },
                 {
                     "name": "videoWriter:isOpen",
@@ -26884,9 +26971,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Number of frames written so far",
-                    "desc_ja": "これまでに書き込んだフレーム数",
-                    "desc_ko": "지금까지 작성한 프레임 수"
+                    "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail.",
+                    "desc_ja": "バックエンドが受理した映像フレーム数。失敗した追加は含まない。終了処理は別途失敗する可能性がある。",
+                    "desc_ko": "백엔드가 수락한 영상 프레임 수. 실패한 제출은 제외한다. 종료 처리는 별도로 실패할 수 있다."
                 },
                 {
                     "name": "videoWriter:getWidth",
@@ -26952,45 +27039,45 @@ const TrussCAPI = {
                     "name": "videoWriter:addFrame",
                     "signatures": [
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "fbo"
                         },
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "pixels"
                         }
                     ],
-                    "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)",
-                    "desc_ja": "1フレームを固定レート（frameIndex/fps）で追加",
-                    "desc_ko": "한 프레임을 고정 레이트(frameIndex/fps)로 추가"
+                    "desc": "Append one frame at the fixed-rate clock (frameIndex/fps). Returns SaveResult for this backend submission, not disk completion: Linux checks gst_app_src_push_buffer and polls bus errors during the take; Apple checks append and AVAssetWriter status/error; Windows checks WriteSample HRESULT. Check close()/stop() for finalization.",
+                    "desc_ja": "1フレームを固定レート（frameIndex/fps）で追加 バックエンドへの追加結果を SaveResult で返す。ディスク保存完了ではない。Linux は push_buffer と録画中の bus エラー、Apple は append と writer の status/error、Windows は WriteSample HRESULT を確認する。完了は close()/stop() で確認。",
+                    "desc_ko": "한 프레임을 고정 레이트(frameIndex/fps)로 추가 백엔드 제출 결과를 SaveResult로 반환하며 디스크 저장 완료를 의미하지 않는다. Linux는 push_buffer와 녹화 중 bus 오류, Apple은 append와 writer status/error, Windows는 WriteSample HRESULT를 확인한다. 완료는 close()/stop()으로 확인한다."
                 },
                 {
                     "name": "videoWriter:addFrameAt",
                     "signatures": [
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "fbo, timeSec"
                         },
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "pixels, timeSec"
                         }
                     ],
-                    "desc": "Append one frame at an explicit presentation time (seconds)",
-                    "desc_ja": "1フレームを明示的な表示時刻（秒）で追加",
-                    "desc_ko": "한 프레임을 명시적 표시 시각(초)으로 추가"
+                    "desc": "Append one frame at an explicit presentation time (seconds). Returns SaveResult for this backend submission, not disk completion: Linux checks gst_app_src_push_buffer and polls bus errors during the take; Apple checks append and AVAssetWriter status/error; Windows checks WriteSample HRESULT. Check close()/stop() for finalization.",
+                    "desc_ja": "1フレームを明示的な表示時刻（秒）で追加 バックエンドへの追加結果を SaveResult で返す。ディスク保存完了ではない。Linux は push_buffer と録画中の bus エラー、Apple は append と writer の status/error、Windows は WriteSample HRESULT を確認する。完了は close()/stop() で確認。",
+                    "desc_ko": "한 프레임을 명시적 표시 시각(초)으로 추가 백엔드 제출 결과를 SaveResult로 반환하며 디스크 저장 완료를 의미하지 않는다. Linux는 push_buffer와 녹화 중 bus 오류, Apple은 append와 writer status/error, Windows는 WriteSample HRESULT를 확인한다. 완료는 close()/stop()으로 확인한다."
                 },
                 {
                     "name": "videoWriter:submitFrame",
                     "signatures": [
                         {
-                            "ret": "boolean",
+                            "ret": "SaveResult",
                             "params": "timeSec"
                         }
                     ],
-                    "desc": "Append the previously locked frame at the given presentation time (seconds)",
-                    "desc_ja": "直前にロックしたフレームを指定の表示時刻（秒）で追加",
-                    "desc_ko": "직전에 잠근 프레임을 지정된 표시 시각(초)으로 추가"
+                    "desc": "Submit the previously locked frame at the given PTS. Returns SaveResult from the append BOOL and AVAssetWriter status/error. Accepted frames increase getFrameCount(); close() checks finalization.",
+                    "desc_ja": "直前にロックしたフレームを指定 PTS で追加。append の BOOL と AVAssetWriter の status/error に基づく SaveResult を返す。受理時のみ getFrameCount() が増加し、close() で終了処理を確認する。",
+                    "desc_ko": "직전에 잠근 프레임을 지정 PTS에 제출한다. append BOOL과 AVAssetWriter status/error에 따른 SaveResult를 반환한다. 수락된 프레임만 getFrameCount()를 증가시키며 close()으로 종료 처리를 확인한다."
                 }
             ]
         },
@@ -27486,13 +27573,13 @@ const TrussCAPI = {
                 },
                 {
                     "name": "xml:save",
-                    "return": "boolean",
+                    "return": "SaveResult",
                     "signatures": [
                         "path, indent = \"  \""
                     ],
-                    "desc": "Save the document to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the per-level indentation string. Returns true on success; on failure it logs an error and returns false. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned.",
-                    "desc_ja": "ドキュメントをファイルに保存する。相対パスは getDataPath で解決され、親フォルダがなければ作られる。indent は各レベルのインデント文字列を設定する。成功時に true を返し、失敗時はエラーをログに出して false を返す。アプリバンドル内のパス（macOS / iOS）は拒否され、getUserDataPath() を案内するエラーをログに出して false を返す",
-                    "desc_ko": "문서를 파일에 저장. 상대 경로는 getDataPath로 해석되고, 상위 폴더가 없으면 만들어진다. indent는 레벨별 들여쓰기 문자열을 설정. 성공 시 true 반환, 실패 시 오류를 로그에 남기고 false 반환. 앱 번들 안의 경로(macOS / iOS)는 거부되며, getUserDataPath()를 안내하는 오류를 로그에 남기고 false 반환"
+                    "desc": "Serialize and save XML. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss.",
+                    "desc_ja": "SaveResult を返す。<file>.tmp に書き込み、close を確認してから元のファイルを置換する。失敗時は既存ファイルを保持し、一時ファイルを削除する。相対パスは getDataPath() で解決し、親フォルダを作成する。バンドル内は AccessDenied。電源断時の永続性を保証するものではない。",
+                    "desc_ko": "SaveResult를 반환한다. <file>.tmp에 쓰고 닫기를 확인한 뒤 기존 파일을 교체한다. 실패하면 기존 파일을 보존하고 임시 파일을 삭제한다. 상대 경로는 getDataPath()로 해석하고 상위 폴더를 만든다. 번들 내부는 AccessDenied. 전원 차단 시 영속성을 보장하지 않는다."
                 },
                 {
                     "name": "xml:toString",
@@ -28909,6 +28996,50 @@ const TrussCAPI = {
                 "PrimitiveMode",
                 "Mesh"
             ]
+        },
+        {
+            "name": "SaveError",
+            "desc": "Save failure kind: None, AccessDenied (including bundle refusal), NoSpace, WriteFailed, Unknown. Rename failure is always WriteFailed.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "None",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "AccessDenied",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "NoSpace",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "WriteFailed",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Unknown",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "保存結果の種別：None、AccessDenied（バンドルへの書き込み拒否を含む）、NoSpace、WriteFailed、Unknown。rename の失敗は常に WriteFailed",
+            "desc_ko": "저장 결과 종류: None, AccessDenied(번들 쓰기 거부 포함), NoSpace, WriteFailed, Unknown. 이름 변경 실패는 항상 WriteFailed"
         },
         {
             "name": "SendError",

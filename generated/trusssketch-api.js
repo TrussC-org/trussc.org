@@ -54,7 +54,7 @@ const TrussSketchAPI = {
     {
      "name": "appendToFile",
      "snippet": "appendToFile(${1:path}, ${2:content})",
-     "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns a failed SaveResult and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned."
     },
     {
      "name": "createDirectory",
@@ -174,12 +174,12 @@ const TrussSketchAPI = {
     {
      "name": "saveJson",
      "snippet": "saveJson(${1:j}, ${2:path})",
-     "desc": "Write a Json object to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the pretty-print width (negative for compact). The JSON is serialized before the file is opened, so a serialization error leaves an existing file untouched. Written in binary mode (LF line endings on every platform). Returns true on success; when serializing, opening, writing or closing fails it logs an error and returns false. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "desc": "Serialize and save JSON (indent sets the pretty-print width; negative means compact). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
     },
     {
      "name": "saveTextFile",
      "snippet": "saveTextFile(${1:path}, ${2:content})",
-     "desc": "Save string to text file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "desc": "Save text bytes unchanged in binary mode. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
     },
     {
      "name": "setDataPathRoot",
@@ -1799,7 +1799,7 @@ const TrussSketchAPI = {
     {
      "name": "runOnMainThread",
      "snippet": "runOnMainThread(${1:fn})",
-     "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise queued to the next frame. Each frame runs, in order, what was queued when its drain started; work queued during the drain runs in the next frame. Nothing is dropped and there is no limit (a callback may edit the tree or free something); the tc_get_health MCP tool reports the count as mainQueuePending. Code that may queue faster than the app runs it, and can drop values, keeps its own bounded or latest-value buffer"
+     "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise enqueue and return without waiting for execution. Each frame drains, in order, the work queued when its drain started; worker submissions during the drain wait until the next frame. There is no queue limit. runOnMainThread(fn, weakToken) accepts the same weak_ptr<atomic<bool>> liveness token as Deliver::Main: at execution time an expired or false token drops the closure. A token does not wait for a callback already running; serialize target teardown with delivery, normally on the main thread. The single-argument form never drops callbacks and the caller owns captured lifetimes. On Web without pthreads both forms run immediately, with the token check for the two-argument form. tc_get_health reports the drain-start count as mainQueuePending. Producers that can drop values use their own bounded or latest-value buffer."
     },
     {
      "name": "setConsoleLogLevel",
@@ -1814,7 +1814,7 @@ const TrussSketchAPI = {
     {
      "name": "setLogFile",
      "snippet": "setLogFile(${1:path})",
-     "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns a failed SaveResult, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned."
     },
     {
      "name": "setLogLevel",
@@ -2199,7 +2199,7 @@ const TrussSketchAPI = {
     {
      "name": "recordingFrameCount",
      "snippet": "recordingFrameCount()",
-     "desc": "Number of frames captured so far in the current recording"
+     "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail."
     },
     {
      "name": "recordingPath",
@@ -2214,7 +2214,7 @@ const TrussSketchAPI = {
     {
      "name": "saveScreenshot",
      "snippet": "saveScreenshot(${1:path})",
-     "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when capture is queued; on native platforms the destination folder is prepared first. This does not mean the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when capture is queued; on native platforms the destination folder is prepared first. This does not mean the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned. Keeps bool on every platform: true means queued. Native entry synchronously checks path, parent creation and bundle refusal through prepareOutputPath; the deferred atomic checked write logs one Error on failure. Web remains a download: encoded output is handed to the browser, with no folders or .tmp and no disk-completion guarantee."
     },
     {
      "name": "setClipboardString",
@@ -2274,12 +2274,12 @@ const TrussSketchAPI = {
     {
      "name": "startRecording",
      "snippet": "startRecording(${1:path})",
-     "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten)"
+     "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten). Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization."
     },
     {
      "name": "stopRecording",
      "snippet": "stopRecording()",
-     "desc": "Stop the current recording and finalize the file"
+     "desc": "Stop the current recording and finalize the file. Returns SaveResult for backend finalization, retaining the first backend failure. Caller errors and transient readback failures do not fail the take. Repeated calls retain the result without another Error. No temporary/rename is used."
     },
     {
      "name": "toggleFullscreen",
@@ -2838,7 +2838,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "AudioRecorder",
-   "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks. Every file has a 36-byte JUNK chunk after the RIFF header, so the samples start at byte 80 (S16) or 92 (F32). A take over 4 GiB of samples (about 3.1 h of 48 kHz stereo F32) is written as RF64 (EBU Tech 3306); older readers without RF64 support can't open it",
+   "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks. Every file has a 36-byte JUNK chunk after the RIFF header, so the samples start at byte 80 (S16) or 92 (F32). A take over 4 GiB of samples (about 3.1 h of 48 kHz stereo F32) is written as RF64 (EBU Tech 3306); older readers without RF64 support can't open it Destroying an active recorder inside an audio callback is a caller mistake: it returns without waiting, logs one Error, and leaves the WAV header unfinalized.",
    "constructor": {
     "snippet": "AudioRecorder()"
    },
@@ -2846,14 +2846,14 @@ const TrussSketchAPI = {
     {
      "name": "start",
      "snippet": "start(${1:path})",
-     "return": "bool",
-     "desc": "Start recording the master mix into a WAV file (relative paths resolve via getDataPath). The audio engine must already be initialized; returns false otherwise or when the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "return": "SaveResult",
+     "desc": "Start an in-place WAV recording of the master mix. Returns SaveResult after shared path preparation, opening and checked header writing; the AudioEngine must already be initialized. Relative paths use getDataPath, missing parents are created, and app bundle paths are refused. Every subsequent write is checked; the first failure ends the take and logs exactly one Error."
     },
     {
      "name": "stop",
      "snippet": "stop()",
-     "return": "void",
-     "desc": "Stop and finalize the file (patches the WAV header sizes; a take over 4 GiB of samples becomes RF64, logged as a notice; a failed file write, such as a full disk, is logged as an error instead); the buffer a capture was still copying is included. Safe to call when not recording; also runs automatically on destruction. Waits on AudioEngine::waitForAudioCallbacks(): for every audioOut / audioIn listener running at that moment, not only the recorder's (usually well under one buffer). Don't call it while holding a lock that such a listener takes: it would wait up to one second and the audio drops out meanwhile"
+     "return": "SaveResult",
+     "desc": "Stop, drain pending captures and finalize the WAV/RF64 header and file. Disconnects the audio listener and waits up to one second for all audio callbacks already in flight; if one is still running it logs a Warning and finalizes anyway (that callback's last buffer is not in the file). Do not hold a lock needed by an audio listener. Returns SaveResult for checked header patching and close, or the first take failure; repeated calls preserve that result without another Error. Destruction normally calls stop; destroying an active recorder inside an audio callback instead logs one Error and leaves the header unfinalized. Recording writes in place, without a temporary or rename."
     },
     {
      "name": "isRecording",
@@ -2865,7 +2865,7 @@ const TrussSketchAPI = {
      "name": "getRecordedSeconds",
      "snippet": "getRecordedSeconds()",
      "return": "double",
-     "desc": "Seconds actually written to the file so far"
+     "desc": "Seconds actually written to the file so far. Counts complete frames actually written divided by sample rate, including a short write; queued or failed frames are excluded."
     },
     {
      "name": "getDroppedFrames",
@@ -5555,8 +5555,8 @@ const TrussSketchAPI = {
     {
      "name": "save",
      "snippet": "save(${1:path})",
-     "return": "bool",
-     "desc": "Save FBO contents to file"
+     "return": "SaveResult",
+     "desc": "Read back and save FBO pixels. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
     },
     {
      "name": "draw",
@@ -5678,8 +5678,8 @@ const TrussSketchAPI = {
     {
      "name": "open",
      "snippet": "open(${1:path})",
-     "return": "bool",
-     "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns false and logs an error when the folder cannot be created or the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "return": "SaveResult",
+     "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns a failed SaveResult and logs an error when the folder cannot be created or the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned."
     },
     {
      "name": "close",
@@ -6232,8 +6232,8 @@ const TrussSketchAPI = {
     {
      "name": "save",
      "snippet": "save(${1:path})",
-     "return": "bool",
-     "desc": "Save the texture contents to a file; return true on success."
+     "return": "SaveResult",
+     "desc": "Save texture contents (subclasses implement saving). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
     }
    ]
   },
@@ -6329,8 +6329,8 @@ const TrussSketchAPI = {
     {
      "name": "save",
      "snippet": "save(${1:path})",
-     "return": "bool",
-     "desc": "Save image to file. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "return": "SaveResult",
+     "desc": "Save image pixels. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
     },
     {
      "name": "loadFromMemory",
@@ -7284,8 +7284,8 @@ const TrussSketchAPI = {
     {
      "name": "setLogFile",
      "snippet": "setLogFile(${1:path})",
-     "return": "bool",
-     "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns false, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path"
+     "return": "SaveResult",
+     "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns a failed SaveResult, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path"
     },
     {
      "name": "closeFile",
@@ -9509,8 +9509,8 @@ const TrussSketchAPI = {
     {
      "name": "save",
      "snippet": "save(${1:path})",
-     "return": "bool",
-     "desc": "Save image to file. The format follows the extension, case-insensitive: .png, .jpg/.jpeg, .bmp (anything else is written as PNG), and the file is written under the name as given. Relative paths resolve via getDataPath, and a missing parent folder is created. The image is encoded in memory before the file is opened, so an encode error leaves an existing file untouched. When encoding fails, the folder cannot be created, or opening, writing or closing the file fails, an error is logged and false returned. The file is written in place, so a crash, power loss or full disk during the save can leave it truncated; apps that need a crash-safe save handle it themselves, for example by writing a new file and renaming it. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "return": "SaveResult",
+     "desc": "Save pixels (JPG/JPEG, BMP, otherwise PNG; preserve the requested filename). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
     }
    ]
   },
@@ -10291,6 +10291,80 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "SaveError",
+   "desc": "Save failure kind: None, AccessDenied (including bundle refusal), NoSpace, WriteFailed, Unknown. Rename failure is always WriteFailed.",
+   "static_methods": [
+    {
+     "name": "None",
+     "snippet": "None",
+     "return": "SaveError",
+     "desc": "= 0"
+    },
+    {
+     "name": "AccessDenied",
+     "snippet": "AccessDenied",
+     "return": "SaveError",
+     "desc": "= 1"
+    },
+    {
+     "name": "NoSpace",
+     "snippet": "NoSpace",
+     "return": "SaveError",
+     "desc": "= 2"
+    },
+    {
+     "name": "WriteFailed",
+     "snippet": "WriteFailed",
+     "return": "SaveError",
+     "desc": "= 3"
+    },
+    {
+     "name": "Unknown",
+     "snippet": "Unknown",
+     "return": "SaveError",
+     "desc": "= 4"
+    }
+   ]
+  },
+  {
+   "name": "SaveResult",
+   "desc": "Result of a checked save, stream open, recorder submission or finalization. Carries SaveError and a failure message.",
+   "properties": [
+    {
+     "name": "error",
+     "type": "SaveError",
+     "desc": "What went wrong; SaveError::None on success"
+    },
+    {
+     "name": "message",
+     "type": "std::string",
+     "desc": "Human-readable failure detail (may be empty)"
+    }
+   ],
+   "methods": [
+    {
+     "name": "ok",
+     "snippet": "ok()",
+     "return": "bool",
+     "desc": "true if this operation succeeded (error == SaveError::None); recorder submission is backend acceptance, while close/stop checks finalization."
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "success",
+     "snippet": "success()",
+     "return": "SaveResult",
+     "desc": "Make a success result (static)"
+    },
+    {
+     "name": "fail",
+     "snippet": "fail(${1:error})",
+     "return": "SaveResult",
+     "desc": "Make a failure result with an error kind and optional message (static)"
+    }
+   ]
+  },
+  {
    "name": "ScreenRecorder",
    "desc": "Captures the rendered output to a video file (start/stop recording of the on-screen frames)",
    "constructor": {
@@ -10300,14 +10374,14 @@ const TrussSketchAPI = {
     {
      "name": "start",
      "snippet": "start(${1:path})",
-     "return": "bool",
-     "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically"
+     "return": "SaveResult",
+     "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically. Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization. If the previous take times out waiting for GPU frames, its last completion finalizes it independently of the new take."
     },
     {
      "name": "stop",
      "snippet": "stop()",
-     "return": "void",
-     "desc": "Stop live capture and finalize the file"
+     "return": "SaveResult",
+     "desc": "Disconnect the audio listener and wait up to one second for audio callbacks (a Warning if one is still running), then wait up to 2 seconds for GPU readbacks before finalizing. If GPU frames remain, logs one Error and returns WriteFailed with message recording still has frames in flight. The callbacks retain their State and writer; the last completion drains audio and closes the file. Returns SaveResult for finalization or the retained failure; repeated calls do not repeat the timeout Error. Caller errors and transient readback failures do not fail the take. No temporary/rename is used."
     },
     {
      "name": "isRecording",
@@ -10319,7 +10393,7 @@ const TrussSketchAPI = {
      "name": "getFrameCount",
      "snippet": "getFrameCount()",
      "return": "int",
-     "desc": "Number of frames captured so far"
+     "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail."
     },
     {
      "name": "getPath",
@@ -14159,14 +14233,14 @@ const TrussSketchAPI = {
     {
      "name": "open",
      "snippet": "open(${1:path}, ${2:width}, ${3:height})",
-     "return": "bool",
-     "desc": "Open the encoder at the given size (path resolved via getDataPath). A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "return": "SaveResult",
+     "desc": "Open the native encoder. Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization."
     },
     {
      "name": "close",
      "snippet": "close()",
-     "return": "void",
-     "desc": "Finalize and flush the video file"
+     "return": "SaveResult",
+     "desc": "Finalize and flush the video file. Returns SaveResult for backend finalization, retaining the first backend failure. Caller errors and transient readback failures do not fail the take. Repeated calls retain the result without another Error. No temporary/rename is used."
     },
     {
      "name": "isOpen",
@@ -14178,7 +14252,7 @@ const TrussSketchAPI = {
      "name": "getFrameCount",
      "snippet": "getFrameCount()",
      "return": "int",
-     "desc": "Number of frames written so far"
+     "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail."
     },
     {
      "name": "getWidth",
@@ -14213,20 +14287,20 @@ const TrussSketchAPI = {
     {
      "name": "addFrame",
      "snippet": "addFrame(${1:fbo})",
-     "return": "bool",
-     "desc": "Append one frame at the fixed-rate clock (frameIndex/fps)"
+     "return": "SaveResult",
+     "desc": "Append one frame at the fixed-rate clock (frameIndex/fps). Returns SaveResult for this backend submission, not disk completion: Linux checks gst_app_src_push_buffer and polls bus errors during the take; Apple checks append and AVAssetWriter status/error; Windows checks WriteSample HRESULT. Check close()/stop() for finalization."
     },
     {
      "name": "addFrameAt",
      "snippet": "addFrameAt(${1:fbo}, ${2:timeSec})",
-     "return": "bool",
-     "desc": "Append one frame at an explicit presentation time (seconds)"
+     "return": "SaveResult",
+     "desc": "Append one frame at an explicit presentation time (seconds). Returns SaveResult for this backend submission, not disk completion: Linux checks gst_app_src_push_buffer and polls bus errors during the take; Apple checks append and AVAssetWriter status/error; Windows checks WriteSample HRESULT. Check close()/stop() for finalization."
     },
     {
      "name": "submitFrame",
      "snippet": "submitFrame(${1:timeSec})",
-     "return": "bool",
-     "desc": "Append the previously locked frame at the given presentation time (seconds)"
+     "return": "SaveResult",
+     "desc": "Submit the previously locked frame at the given PTS. Returns SaveResult from the append BOOL and AVAssetWriter status/error. Accepted frames increase getFrameCount(); close() checks finalization."
     }
    ]
   },
@@ -14534,8 +14608,8 @@ const TrussSketchAPI = {
     {
      "name": "save",
      "snippet": "save(${1:path})",
-     "return": "bool",
-     "desc": "Save the document to a file. Relative paths are resolved via getDataPath, and a missing parent folder is created. indent sets the per-level indentation string. Returns true on success; on failure it logs an error and returns false. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned."
+     "return": "SaveResult",
+     "desc": "Serialize and save XML. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
     },
     {
      "name": "toString",
