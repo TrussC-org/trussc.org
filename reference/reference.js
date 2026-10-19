@@ -28,18 +28,18 @@
             for (const fn of cat.functions || []) { pick(fn, 'desc'); pick(fn, 'details'); pick(fn, 'sigDesc'); pick(fn, 'platformNote'); }
         }
         for (const t of api.types || []) {
-            pick(t, 'desc'); pick(t, 'platformNote');
+            pick(t, 'desc'); pick(t, 'details'); pick(t, 'platformNote');
             for (const p of t.properties || []) pick(p, 'desc');
-            for (const m of (t.methods || []).concat(t.static_methods || [])) { pick(m, 'desc'); pick(m, 'platformNote'); }
+            for (const m of (t.methods || []).concat(t.static_methods || [])) { pick(m, 'desc'); pick(m, 'details'); pick(m, 'platformNote'); }
             for (const o of t.operators || []) pick(o, 'desc');
             for (const n of t.nested || []) {
-                pick(n, 'desc');
+                pick(n, 'desc'); pick(n, 'details'); pick(n, 'platformNote');
                 for (const p of n.properties || []) pick(p, 'desc');
-                for (const m of (n.methods || []).concat(n.static_methods || [])) pick(m, 'desc');
+                for (const m of (n.methods || []).concat(n.static_methods || [])) { pick(m, 'desc'); pick(m, 'details'); pick(m, 'platformNote'); }
                 for (const v of n.values || []) pick(v, 'desc');
             }
         }
-        for (const c of api.constants || []) { pick(c, 'desc'); pick(c, 'details'); }
+        for (const c of api.constants || []) { pick(c, 'desc'); pick(c, 'details'); pick(c, 'platformNote'); }
         for (const e of api.enums || []) { pick(e, 'desc'); for (const v of e.values || []) pick(v, 'desc'); for (const o of e.operators || []) pick(o, 'desc'); }
         for (const m of api.macros || []) pick(m, 'desc');
     }
@@ -259,6 +259,13 @@
             if (item.category) meta.push(item.category);
             if (isDeprecated(item)) meta.push('deprecated');
             if (Array.isArray(d.keywords)) for (const kw of d.keywords) if (kw) meta.push(kw);
+            if (item.kind === 'type') {
+                for (const type of [d, ...(d.nested || [])]) {
+                    if (type !== d) for (const kw of type.keywords || []) if (kw) meta.push(kw);
+                    for (const m of (type.methods || []).concat(type.static_methods || []))
+                        for (const kw of m.keywords || []) if (kw) meta.push(kw);
+                }
+            }
             for (const f of meta) { if (identMatchKind(token, f)) { best = 4; break; } }
         }
         // prose (desc): substring only — never fuzz a sentence
@@ -599,6 +606,15 @@
         return out.join('');
     }
 
+    // The same Markdown notes and escaped usage example apply to all symbols.
+    function renderNotes(d) {
+        let html = '';
+        if (d.details) html += `<div class="detail-details" style="color:var(--ref-details,#bbb);font-size:13px;line-height:1.7;margin:6px 0 4px;">${mdToHtml(d.details)}</div>`;
+        const snippet = d.snippet || (d.constructor && d.constructor.snippet);
+        if (snippet) html += `<pre style="${MD.pre}"><code style="${MD.codeBlk}">${esc(snippet)}</code></pre>`;
+        return html;
+    }
+
     function renderFunctionDetail(name, category) {
         const overloads = [];
         for (const cat of TrussCAPI.categories) {
@@ -618,14 +634,10 @@
         html += `<div class="detail-desc">${esc(first.desc || '')}</div>`;
         html += renderDeprecated((overloads.find(o => o.deprecated) || {}).deprecated);
 
-        // Optional long-form details (multi-line), shown only here in the detail pane.
-        const details = (overloads.find(o => o.details) || {}).details;
-        if (details) {
-            html += `<div class="detail-details" style="color:var(--ref-details,#bbb);font-size:13px;line-height:1.7;margin:6px 0 4px;">${mdToHtml(details)}</div>`;
-        }
+        html += renderNotes({ ...first, details: (overloads.find(o => o.details) || {}).details, snippet: (overloads.find(o => o.snippet) || {}).snippet });
 
         // Platform support (only when the symbol is restricted on some platform).
-        html += renderPlatforms(overloads.find(o => Array.isArray(o.platforms)) || {});
+        html += renderPlatforms(overloads.find(o => Array.isArray(o.platforms) || o.platformNote) || {});
 
         html += `<div class="detail-section">`;
         html += `<div class="detail-section-title">${esc(UI.signatures)}</div>`;
@@ -667,6 +679,7 @@
         let html = backButton();
         html += `<div class="detail-title">${esc(t.name)}</div>`;
         html += `<div class="detail-desc">${esc(t.desc || '')}</div>`;
+        html += renderNotes(t);
         html += renderPlatforms(t);
 
         if (t.constructor && t.constructor.signatures) {
@@ -717,6 +730,8 @@
                 }
                 if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
                 if (m.deprecated) html += renderDeprecated(m.deprecated);
+                html += renderNotes(m);
+                html += renderRelated(m.related);
                 html += renderPlatforms(m, true);
                 html += `</div>`;
             }
@@ -735,6 +750,8 @@
                     html += `<div class="detail-sig"><span class="ret">${esc(sig.ret || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig.params)}</span>)</div>`;
                 }
                 if (m.desc) html += `<div class="detail-entry-desc">// ${esc(m.desc)}</div>`;
+                html += renderNotes(m);
+                html += renderRelated(m.related);
                 html += renderPlatforms(m, true);
                 html += `</div>`;
             }
@@ -751,6 +768,9 @@
                 html += `<div class="detail-entry">`;
                 html += `<div class="detail-sig"><span class="ret">${n.kind === 'enum' ? 'enum' : 'struct'}</span> <span class="name">${esc(n.name)}</span></div>`;
                 if (n.desc) html += `<div class="detail-entry-desc">// ${esc(n.desc)}</div>`;
+                html += renderNotes(n);
+                html += renderRelated(n.related);
+                html += renderPlatforms(n);
                 const ind = ' style="margin-left:1.5em;"';
                 for (const p of n.properties || []) {
                     html += `<div class="detail-sig"${ind}><span class="ret">${esc(p.type || '')}</span> <span class="name">${esc(p.name)}</span></div>`;
@@ -760,6 +780,9 @@
                     for (const sig of dedupeSigs(m.signatures))
                         html += `<div class="detail-sig"${ind}><span class="ret">${esc(sig.ret || 'void')}</span> <span class="name">${esc(m.name)}</span>(<span class="params">${esc(sig.params)}</span>)</div>`;
                     if (m.desc) html += `<div class="detail-entry-desc"${ind}>// ${esc(m.desc)}</div>`;
+                    html += renderNotes(m);
+                    html += renderRelated(m.related);
+                    html += renderPlatforms(m, true);
                 }
                 for (const v of n.values || []) {
                     const val = (v.value !== undefined && v.value !== null) ? ` <span class="ov-val">= ${esc(String(v.value))}</span>` : '';
@@ -820,10 +843,8 @@
         let html = backButton();
         html += `<div class="detail-title">${esc(c.name)}</div>`;
         html += `<div class="detail-desc">${esc(c.desc || UI.constantValue)}</div>`;
-        // Long-form notes (e.g. the TAU/PI essays) — Markdown-rendered, same as functions.
-        if (c.details) {
-            html += `<div class="detail-details" style="color:var(--ref-details,#bbb);font-size:13px;line-height:1.7;margin:6px 0 4px;">${mdToHtml(c.details)}</div>`;
-        }
+        html += renderNotes(c);
+        html += renderPlatforms(c);
         if (c.value !== undefined && c.value !== null) {   // don't print the literal word "undefined"
             html += `<div class="detail-section">`;
             html += `<div class="detail-section-title">${esc(UI.value)}</div>`;
