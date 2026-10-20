@@ -73,6 +73,9 @@
     .cw-msg .cw-reflinks { margin-top: 8px; font-size: 12px; color: var(--color-text-muted,#8b8b93); }
     .cw-msg .cw-reflinks a { color: var(--color-accent,#22d3ee); text-decoration: none; }
     .cw-msg .cw-reflinks a:hover { text-decoration: underline; }
+    .cw-msg .cw-research { margin-bottom: 8px; }
+    .cw-msg .cw-research .cw-rs-msg { color: var(--color-text,#e8e8ed); }
+    .cw-msg .cw-research .cw-rs-status { margin-top: 2px; font-size: 12px; color: var(--color-text-muted,#8b8b93); }
     .cw-msg .cw-sources { margin-top: 8px; font-size: 11px; color: var(--color-text-muted,#8b8b93); }
     .cw-msg .cw-sources summary { cursor: pointer; user-select: none; }
     .cw-msg .cw-sources .cw-src { padding: 2px 0; }
@@ -145,6 +148,7 @@
       placeholder: 'e.g. "How do I draw a curve?" "Any shader examples?"',
       more: 'See also: ',
       sources: 'sources',
+      research: function (q) { return 'Searching again for \u201C' + q + '\u201D\u2026'; },
       privacy: '\uD83D\uDD12 Chat history is stored anonymized\nNo personal data is collected.',
     },
     ja: {
@@ -152,6 +156,7 @@
       placeholder: '例:「曲線の書き方は？」「シェーダのサンプルある？」',
       more: '詳しくは: ',
       sources: '出典',
+      research: function (q) { return '\u300C' + q + '\u300Dで再検索中\u2026'; },
       privacy: '\uD83D\uDD12 チャット履歴は匿名化されて保存しています\n（個人情報は含まれません）',
     },
     ko: {
@@ -159,6 +164,7 @@
       placeholder: '예: "곡선은 어떻게 그리나요?" "셰이더 예제 있어요?"',
       more: '자세히: ',
       sources: '출처',
+      research: function (q) { return '"' + q + '"(으)로 다시 검색 중\u2026'; },
       privacy: '\uD83D\uDD12 채팅 기록은 익명화되어 저장됩니다\n(개인정보는 수집하지 않아요)',
     },
   };
@@ -286,72 +292,117 @@
   }
   function hideNote() { if (noteEl) { noteEl.remove(); noteEl = null; } }
 
+  // Re-search rounds (SSE `research` {round, message, queries}): the model's short
+  // filler message plus one status line per round, shown above the streamed answer.
+  // Both come from the model, so only plain strings are kept, length-capped and
+  // escaped when the event arrives; the rendered block is cached.
+  // Bound (security): the server allows at most 10 rounds of a 300-char message and 3 queries of 200 chars; a stream sending more is cut to these sizes. Overflow is cut for display and not counted.
+  var KNOWN_EVENTS = ['token', 'replace', 'sources', 'links', 'done', 'error', 'research'];
+  var RS_ROUNDS = 10, RS_MSG = 300, RS_QUERIES = 3, RS_QUERY = 200;
+  function researchRound(p) {
+    if (!p || typeof p !== 'object') return null;
+    var msg = typeof p.message === 'string' ? p.message.slice(0, RS_MSG) : '';
+    var qs = [];
+    if (Array.isArray(p.queries)) {
+      for (var i = 0; i < p.queries.length && qs.length < RS_QUERIES; i++) {
+        if (typeof p.queries[i] === 'string' && p.queries[i]) qs.push(p.queries[i].slice(0, RS_QUERY));
+      }
+    }
+    if (!msg && !qs.length) return null;
+    return (msg ? '<div class="cw-rs-msg">' + esc(msg) + '</div>' : '') +
+      (qs.length ? '<div class="cw-rs-status">\uD83D\uDD0E ' + esc(STR.research(qs.join(' / '))) + '</div>' : '');
+  }
+  function researchHtml(parts) {
+    return parts.length ? '<div class="cw-research">' + parts.join('') + '</div>' : '';
+  }
+
   async function send() {
     var q = qEl.value.trim();
     if (!q || busy || !online) return;
-    busy = true; sendBtn.disabled = true;
-    hideNote();
-    qEl.value = ''; qEl.style.height = '38px';   // clear input + collapse back to one row
-    addUser(q);
-    var bot = addBot('');
-    var srcs = null, links = null;
-    // What the user is currently viewing (reference deep-link hash) → page context.
-    var hash = (location.hash || '').slice(1);
-    var page = /^(function|type|enum|macro|constant):.+/.test(hash) ? hash : null;
+    busy = true; sendBtn.disabled = true; qEl.disabled = true;
+    // Whatever the server sends, the controls come back in `finally`.
     try {
-      var r = await fetch(API + '/chat', {
-        method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ question: q, history: convo, convId: convId, page: page, pinned: pinned }),
-      });
-      var reader = r.body.getReader(); var dec = new TextDecoder(); var buf = '';
-      for (;;) {
-        var chunk = await reader.read(); if (chunk.done) break;
-        buf += dec.decode(chunk.value, { stream: true });
-        var sep;
-        while ((sep = buf.indexOf('\n\n')) !== -1) {
-          var block = buf.slice(0, sep); buf = buf.slice(sep + 2);
-          var ev = (/event: (.+)/.exec(block) || [])[1];
-          var data = (/data: ([\s\S]+)/.exec(block) || [])[1];
-          if (!ev || data === undefined) continue;
-          var payload = JSON.parse(data);
-          if (ev === 'token') { bot.buf += payload; bot.el.innerHTML = render(bot.buf) + '<span class="cw-blink"></span>'; msgs.scrollTop = msgs.scrollHeight; }
-          else if (ev === 'replace') { bot.buf = payload; bot.el.innerHTML = render(bot.buf) + '<span class="cw-blink"></span>'; msgs.scrollTop = msgs.scrollHeight; }
-          else if (ev === 'sources') { srcs = payload; }
-          else if (ev === 'links') { links = payload; }
-          else if (ev === 'done') {
-            // Fold this turn's curated ids onto the front of the ledger (recent-first,
-            // deduped). The model re-picks each turn, so unused ids drift off the tail.
-            if (payload && payload.usedIds && payload.usedIds.length) {
-              var merged = payload.usedIds.concat(pinned), seen = {}, dedup = [];
-              for (var pi = 0; pi < merged.length; pi++) { if (!seen[merged[pi]]) { seen[merged[pi]] = 1; dedup.push(merged[pi]); } }
-              pinned = dedup.slice(0, 20);
+      hideNote();
+      qEl.value = ''; qEl.style.height = '38px';   // clear input + collapse back to one row
+      addUser(q);
+      var bot = addBot('');
+      var srcs = null, links = null, rounds = [], rsHtml = '';
+      // What the user is currently viewing (reference deep-link hash) → page context.
+      var hash = (location.hash || '').slice(1);
+      var page = /^(function|type|enum|macro|constant):.+/.test(hash) ? hash : null;
+      try {
+        var r = await fetch(API + '/chat', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ question: q, history: convo, convId: convId, page: page, pinned: pinned }),
+        });
+        var reader = r.body.getReader(); var dec = new TextDecoder(); var buf = '';
+        for (;;) {
+          var chunk = await reader.read(); if (chunk.done) break;
+          buf += dec.decode(chunk.value, { stream: true });
+          var sep;
+          while ((sep = buf.indexOf('\n\n')) !== -1) {
+            var block = buf.slice(0, sep); buf = buf.slice(sep + 2);
+            var ev = (/event: (.+)/.exec(block) || [])[1];
+            var data = (/data: ([\s\S]+)/.exec(block) || [])[1];
+            if (!ev || data === undefined) continue;
+            // Only the events the widget uses are decoded; others (e.g. `debug`) are
+            // for tools and are skipped without parsing their data.
+            if (KNOWN_EVENTS.indexOf(ev) < 0) continue;
+            var payload = JSON.parse(data);
+            if ((ev === 'token' || ev === 'replace' || ev === 'error') && typeof payload !== 'string') continue;
+            if (ev === 'token') { bot.buf += payload; bot.el.innerHTML = rsHtml + render(bot.buf) + '<span class="cw-blink"></span>'; msgs.scrollTop = msgs.scrollHeight; }
+            else if (ev === 'replace') { bot.buf = payload; bot.el.innerHTML = rsHtml + render(bot.buf) + '<span class="cw-blink"></span>'; msgs.scrollTop = msgs.scrollHeight; }
+            else if (ev === 'research') {
+              // Input stays disabled (busy) through every round until done/error.
+              var part = rounds.length < RS_ROUNDS ? researchRound(payload) : null;
+              if (part) { rounds.push(part); rsHtml = researchHtml(rounds); }
+              bot.el.innerHTML = rsHtml + render(bot.buf) + '<span class="cw-blink"></span>'; msgs.scrollTop = msgs.scrollHeight;
             }
+            else if (ev === 'sources') { srcs = Array.isArray(payload) ? payload : null; }
+            else if (ev === 'links') { links = Array.isArray(payload) ? payload : null; }
+            else if (ev === 'done') {
+              // Fold this turn's curated ids onto the front of the ledger (recent-first,
+              // deduped). The model re-picks each turn, so unused ids drift off the tail.
+              if (payload && payload.usedIds && payload.usedIds.length) {
+                var merged = payload.usedIds.concat(pinned), seen = {}, dedup = [];
+                for (var pi = 0; pi < merged.length; pi++) { if (!seen[merged[pi]]) { seen[merged[pi]] = 1; dedup.push(merged[pi]); } }
+                pinned = dedup.slice(0, 20);
+              }
+            }
+            else if (ev === 'error') { bot.buf += '\n\n[error: ' + payload + ']'; }
           }
-          else if (ev === 'error') { bot.buf += '\n\n[error: ' + payload + ']'; }
         }
+      } catch (e) {
+        bot.buf += '\n\n[connection error]';
       }
-    } catch (e) {
-      bot.buf += '\n\n[connection error]';
+      // finalize: drop the cursor; append "詳しくは" links + the sources disclosure.
+      try {
+        // Save first: the answer text is kept even if the footer data is malformed.
+        convo.push({ role: 'user', content: q }, { role: 'assistant', content: bot.buf });
+        saveConvo();   // survive tab close
+        var html = rsHtml + render(bot.buf);
+        if (links && links.length) {
+          html += '<div class="cw-reflinks">' + STR.more +
+            links.filter(function (l) { return l && typeof l === 'object'; }).map(function (l) { return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>'; }).join(' · ') +
+            '</div>';
+        }
+        if (srcs && srcs.length) {
+          html += '<details class="cw-sources"><summary>' + STR.sources + ' (' + srcs.length + ')</summary>' +
+            srcs.map(function (s) {
+              if (!s || typeof s !== 'object') return '';
+              var t = s.link ? '<a href="' + esc(s.link) + '" target="_blank" rel="noopener">' + esc(s.title) + '</a>' : esc(s.title);
+              var sc = typeof s.score === 'number' && isFinite(s.score) ? ' · ' + s.score.toFixed(2) : '';
+              return '<div class="cw-src"><span class="cw-tag">[' + esc(s.source) + ']</span> ' + t + sc + '</div>';
+            }).join('') +
+            '</details>';
+        }
+        bot.el.innerHTML = html;
+      } catch (e) {
+        bot.el.textContent = bot.buf + '\n\n[display error]';
+      }
+    } finally {
+      busy = false; sendBtn.disabled = false; qEl.disabled = false; qEl.focus();
     }
-    // finalize: drop the cursor; append "詳しくは" links + the sources disclosure
-    var html = render(bot.buf);
-    if (links && links.length) {
-      html += '<div class="cw-reflinks">' + STR.more +
-        links.map(function (l) { return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>'; }).join(' · ') +
-        '</div>';
-    }
-    if (srcs && srcs.length) {
-      html += '<details class="cw-sources"><summary>' + STR.sources + ' (' + srcs.length + ')</summary>' +
-        srcs.map(function (s) {
-          var t = s.link ? '<a href="' + esc(s.link) + '" target="_blank" rel="noopener">' + esc(s.title) + '</a>' : esc(s.title);
-          return '<div class="cw-src"><span class="cw-tag">[' + esc(s.source) + ']</span> ' + t + ' · ' + s.score.toFixed(2) + '</div>';
-        }).join('') +
-        '</details>';
-    }
-    bot.el.innerHTML = html;
-    convo.push({ role: 'user', content: q }, { role: 'assistant', content: bot.buf });
-    saveConvo();   // survive tab close
-    busy = false; sendBtn.disabled = false; qEl.focus();
   }
 
   sendBtn.addEventListener('click', send);
