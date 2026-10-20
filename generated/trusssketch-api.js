@@ -9,22 +9,22 @@ const TrussSketchAPI = {
     {
      "name": "ease",
      "snippet": "ease(${1:t}, ${2:type}, ${3:mode})",
-     "desc": "Apply easing to a normalized value (0-1) with an EaseType or a custom EaseFunction"
+     "desc": "Evaluates an easing curve."
     },
     {
      "name": "easeIn",
      "snippet": "easeIn(${1:t}, ${2:type})",
-     "desc": "Apply ease-in (accelerate) to value (0-1); takes an EaseType or a custom EaseFunction"
+     "desc": "Evaluate an ease-in curve."
     },
     {
      "name": "easeInOut",
      "snippet": "easeInOut(${1:t}, ${2:type})",
-     "desc": "Apply ease-in-out to value (0-1); takes an EaseType, an asymmetric type pair, or a custom EaseFunction"
+     "desc": "Evaluate an ease-in-out curve."
     },
     {
      "name": "easeOut",
      "snippet": "easeOut(${1:t}, ${2:type})",
-     "desc": "Apply ease-out (decelerate) to value (0-1); takes an EaseType or a custom EaseFunction"
+     "desc": "Evaluate an ease-out curve."
     }
    ]
   },
@@ -34,17 +34,17 @@ const TrussSketchAPI = {
     {
      "name": "getMicInput",
      "snippet": "getMicInput()",
-     "desc": "Get the global MicInput singleton (microphone capture). Call start() on it to open the device."
+     "desc": "Returns the shared microphone input instance."
     },
     {
      "name": "initAudio",
      "snippet": "initAudio()",
-     "desc": "Initialize the global AudioEngine. Sound::load(), loadStream(), loadTestTone() and loadFromBuffer() call it automatically while the engine is not initialized (play() does not), so manual use is only needed to start audio early (e.g. before an audioOut synthesis listener)."
+     "desc": "Initializes the shared audio output engine."
     },
     {
      "name": "shutdownAudio",
      "snippet": "shutdownAudio()",
-     "desc": "Shut down the global AudioEngine and close the audio device. Usually unnecessary (runs at program exit)."
+     "desc": "Shuts down the global audio engine."
     }
    ]
   },
@@ -54,152 +54,152 @@ const TrussSketchAPI = {
     {
      "name": "appendToFile",
      "snippet": "appendToFile(${1:path}, ${2:content})",
-     "desc": "Append string to file. Relative paths resolve via getDataPath, and a missing parent folder is created. Returns a failed SaveResult and logs an error when the folder cannot be created, the file cannot be opened, or writing or closing it fails. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned."
+     "desc": "Appends a string to a file."
     },
     {
      "name": "createDirectory",
      "snippet": "createDirectory(${1:path})",
-     "desc": "Create directory (and parents)"
+     "desc": "Creates a directory and any missing parent directories."
     },
     {
      "name": "directoryExists",
      "snippet": "directoryExists(${1:path})",
-     "desc": "Check if directory exists"
+     "desc": "Checks whether a path refers to an existing directory."
     },
     {
      "name": "fileExists",
      "snippet": "fileExists(${1:path})",
-     "desc": "Check if file exists"
+     "desc": "Checks whether a path refers to an existing regular file."
     },
     {
      "name": "getAbsolutePath",
      "snippet": "getAbsolutePath(${1:path})",
-     "desc": "Get absolute path"
+     "desc": "Returns an absolute path."
     },
     {
      "name": "getBaseName",
      "snippet": "getBaseName(${1:path})",
-     "desc": "Get filename without extension"
+     "desc": "Returns a filename without its final extension."
     },
     {
      "name": "getDataPath",
      "snippet": "getDataPath(${1:filename})",
-     "desc": "Resolve a relative path against the data directory and return it as fs::path. An absolute input is returned unchanged. Only the data-directory base is lexically normalized; filename components are preserved. Safe to call from any thread. This is the bundled data the app reads (bin/data in development, the bundle's Resources/data when packaged); files the app writes and keeps go to getUserDataPath()."
+     "desc": "Resolves a path relative to the application data directory."
     },
     {
      "name": "getDataPathRoot",
      "snippet": "getDataPathRoot()",
-     "desc": "Get the current data path root as fs::path. Unless explicitly set, Apple platforms choose one existing folder on first use, in order: <exe>/data (iOS), <exe>/../Resources/data (macOS release), <exe>/../../../data (macOS development). The choice is kept for the process; missing files never fall back to another folder. Only the release workflow copies bin/data into the macOS bundle; normal builds keep using bin/data."
+     "desc": "Return the current data path root."
     },
     {
      "name": "getExecutableDir",
      "snippet": "getExecutableDir()",
-     "desc": "Get the directory containing the running executable."
+     "desc": "Returns the directory containing the running executable."
     },
     {
      "name": "getExecutablePath",
      "snippet": "getExecutablePath()",
-     "desc": "Get the absolute path of the running executable."
+     "desc": "Returns the path of the running executable."
     },
     {
      "name": "getFileExtension",
      "snippet": "getFileExtension(${1:path})",
-     "desc": "Get file extension without dot, as written (case kept). Compare toLower(getFileExtension(path)) to match it case-insensitively, as TrussC's loaders do."
+     "desc": "Returns a file's final extension without its leading dot."
     },
     {
      "name": "getFileName",
      "snippet": "getFileName(${1:path})",
-     "desc": "Get filename from path"
+     "desc": "Returns the final filename component of a path."
     },
     {
      "name": "getFileSize",
      "snippet": "getFileSize(${1:path})",
-     "desc": "Get file size in bytes"
+     "desc": "Returns a file's size in bytes."
     },
     {
      "name": "getParentDirectory",
      "snippet": "getParentDirectory(${1:path})",
-     "desc": "Get parent directory"
+     "desc": "Returns the parent portion of a path."
     },
     {
      "name": "getTempPath",
      "snippet": "getTempPath()",
-     "desc": "Folder for temporary files, which the OS may delete at any time: $TMPDIR/<bundle id>/ on macOS, %TEMP%\\<app>\\ on Windows, $TMPDIR (or /tmp) /<app>/ on Linux, the app's tmp/ on iOS, the app's cache folder on Android, in-memory /tmp on web. Created on first use. A relative path is joined to it; an absolute path is returned as is."
+     "desc": "Return a path for temporary files."
     },
     {
      "name": "getUserDataPath",
      "snippet": "getUserDataPath()",
-     "desc": "Folder for files the app writes and keeps (settings, presets, logs, recordings): always the OS per-user app folder, in development and in a packaged app alike. macOS ~/Library/Application Support/<bundle id>/, Windows %LOCALAPPDATA%\\<app>\\, Linux $XDG_DATA_HOME/<app>/ (default ~/.local/share/<app>/), iOS the app's Library/Application Support/, Android the app's internal files folder; on web it is in memory and not kept. <app> is the executable name. Created on first use. A relative path is joined to it; an absolute path is returned as is. Write and read back through it: saveJson(j, getUserDataPath(\"settings.json\")) then loadJson(getUserDataPath(\"settings.json\")). setUserDataPathRoot() changes it."
+     "desc": "Return a path for files the app writes and keeps."
     },
     {
      "name": "joinPath",
      "snippet": "joinPath(${1:dir}, ${2:file})",
-     "desc": "Join directory and filename"
+     "desc": "Joins two filesystem paths."
     },
     {
      "name": "listDirectory",
      "snippet": "listDirectory(${1:path})",
-     "desc": "List files in directory"
+     "desc": "Lists the immediate files and directories in a directory."
     },
     {
      "name": "loadErrorName",
      "snippet": "loadErrorName(${1:e})",
-     "desc": "Short label for a LoadError value (\"FileNotFound\", ...). For log messages"
+     "desc": "Returns the short name of a load error."
     },
     {
      "name": "loadJson",
      "snippet": "loadJson(${1:path})",
-     "desc": "Load a JSON file and return it as a Json object. Relative paths are resolved via getDataPath; returns an empty Json on error."
+     "desc": "Loads a JSON value from a file."
     },
     {
      "name": "loadTextFile",
      "snippet": "loadTextFile(${1:path})",
-     "desc": "Load entire text file"
+     "desc": "Loads an entire file into a string."
     },
     {
      "name": "loadXml",
      "snippet": "loadXml(${1:path})",
-     "desc": "Load an XML file and return it as an Xml object. Relative paths are resolved via getDataPath."
+     "desc": "Loads an XML file into an Xml object."
     },
     {
      "name": "pathToUtf8",
      "snippet": "pathToUtf8(${1:p})",
-     "desc": "Convert a path to a UTF-8 std::string, the same on every platform. Use it instead of path.string(), which on Windows converts to the process code page and can throw for characters outside it. On Windows it can still throw for a name that is not valid UTF-16 (an unpaired surrogate); to log a path, use log << path, which does not throw."
+     "desc": "Converts a filesystem path to a UTF-8 string."
     },
     {
      "name": "removeFile",
      "snippet": "removeFile(${1:path})",
-     "desc": "Remove file"
+     "desc": "Removes a file or an empty directory."
     },
     {
      "name": "saveJson",
      "snippet": "saveJson(${1:j}, ${2:path})",
-     "desc": "Serialize and save JSON (indent sets the pretty-print width; negative means compact). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
+     "desc": "Serializes a Json value and saves it to a file."
     },
     {
      "name": "saveTextFile",
      "snippet": "saveTextFile(${1:path}, ${2:content})",
-     "desc": "Save text bytes unchanged in binary mode. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
+     "desc": "Saves a string as a file."
     },
     {
      "name": "setDataPathRoot",
      "snippet": "setDataPathRoot(${1:path})",
-     "desc": "Set the root directory used to resolve relative data paths. A relative root is resolved against the executable directory; an absolute root (fs::path::is_absolute, e.g. C:/ on Windows) is used as-is. Call it before starting threads that load files (e.g. in setup())."
+     "desc": "Set the root for relative data paths."
     },
     {
      "name": "setDataPathToResources",
      "snippet": "setDataPathToResources()",
-     "desc": "Point the data path root at the macOS app bundle's Contents/Resources/data folder for distribution. No-op on non-macOS platforms. Call it before starting threads that load files (e.g. in setup())."
+     "desc": "Sets the data root to the macOS app bundle’s Resources data folder."
     },
     {
      "name": "setUserDataPathRoot",
      "snippet": "setUserDataPathRoot(${1:path})",
-     "desc": "Fix the folder getUserDataPath() returns, for installations, several instances of one app, or tests. Mirrors setDataPathRoot(): a relative root is resolved against the executable directory, an absolute root is used as is. The folder is created on first use. A root inside the app bundle (macOS / iOS) still gets its writes refused."
+     "desc": "Override the user-data root directory."
     },
     {
      "name": "utf8ToPath",
      "snippet": "utf8ToPath(${1:utf8})",
-     "desc": "Convert a UTF-8 string to fs::path, decoding it as UTF-8 on every platform. fs::path(std::string) on Windows decodes in the process code page, which is UTF-8 only in apps built with TrussC's Windows manifest (Windows 10 1903 or later)."
+     "desc": "Converts a UTF-8 string to a filesystem path."
     }
    ]
   },
@@ -209,12 +209,12 @@ const TrussSketchAPI = {
     {
      "name": "listSystemFonts",
      "snippet": "listSystemFonts()",
-     "desc": "Enumerate names of all fonts known to the OS"
+     "desc": "List font family names available to the operating system."
     },
     {
      "name": "systemFontPath",
      "snippet": "systemFontPath(${1:name})",
-     "desc": "Resolve a system font name (PostScript / family) to a file path. Returns empty string if not found. macOS / iOS use CoreText, Linux fontconfig, Windows DirectWrite."
+     "desc": "Resolve a system font name to its file path."
     }
    ]
   },
@@ -224,27 +224,27 @@ const TrussSketchAPI = {
     {
      "name": "getHeight",
      "snippet": "getHeight()",
-     "desc": "Drawing height in active-target coordinate units; see getWidth."
+     "desc": "Returns the current drawing target's height."
     },
     {
      "name": "getProjectionMatrix",
      "snippet": "getProjectionMatrix()",
-     "desc": "Return the active target camera projection matrix by value, in backend-native clip space."
+     "desc": "Returns the current drawing target's camera projection matrix."
     },
     {
      "name": "getSize",
      "snippet": "getSize()",
-     "desc": "Drawing width and height of the active target as Vec2; see getWidth."
+     "desc": "Returns the width and height of the active drawing target as a Vec2."
     },
     {
      "name": "getViewMatrix",
      "snippet": "getViewMatrix()",
-     "desc": "Return the active target camera view matrix by value. Fbo and EasyCam scopes restore the previous camera on exit; Node CameraContexts remain immutable draw-time snapshots."
+     "desc": "Returns the current drawing target's camera view matrix."
     },
     {
      "name": "getWidth",
      "snippet": "getWidth()",
-     "desc": "Drawing width in active-target coordinate units. Fbo: attachment pixels; swapchain: logical units or pixels according to pixelPerfect. Object and window getters keep their own size."
+     "desc": "Returns the current drawing target's width."
     }
    ]
   },
@@ -254,82 +254,82 @@ const TrussSketchAPI = {
     {
      "name": "getDefaultScreenFov",
      "snippet": "getDefaultScreenFov()",
-     "desc": "Get default screen FOV in radians"
+     "desc": "Returns the default screen field of view in radians."
     },
     {
      "name": "getDefaultScreenFovDeg",
      "snippet": "getDefaultScreenFovDeg()",
-     "desc": "Get default screen FOV in degrees"
+     "desc": "Returns the default screen field of view in degrees."
     },
     {
      "name": "screenToWorld",
      "snippet": "screenToWorld(${1:screenPos})",
-     "desc": "Convert screen coordinate to world coordinate on Z plane"
+     "desc": "Converts a screen position to a world position on a constant-Z plane."
     },
     {
      "name": "setDefaultScreenFov",
      "snippet": "setDefaultScreenFov(${1:fovRadians})",
-     "desc": "Set default swapchain FOV in radians (frame start only)"
+     "desc": "Sets the default screen field of view."
     },
     {
      "name": "setDefaultScreenFovDeg",
      "snippet": "setDefaultScreenFovDeg(${1:fovDeg})",
-     "desc": "Set default screen FOV in degrees"
+     "desc": "Sets the default screen field of view in degrees."
     },
     {
      "name": "setDefaultScreenOrtho",
      "snippet": "setDefaultScreenOrtho()",
-     "desc": "Set orthographic projection as the default (frame start and FBO begin)"
+     "desc": "Sets orthographic projection as the screen default."
     },
     {
      "name": "setFarClip",
      "snippet": "setFarClip(${1:farDist})",
-     "desc": "Set the default-screen far clipping plane (0 = auto-calculate)"
+     "desc": "Sets the default screen far clipping distance."
     },
     {
      "name": "setNearClip",
      "snippet": "setNearClip(${1:nearDist})",
-     "desc": "Set the default-screen near clipping plane (0 = auto-calculate)"
+     "desc": "Sets the default screen near clipping distance."
     },
     {
      "name": "setupScreenFov",
      "snippet": "setupScreenFov(${1:fovRadians})",
-     "desc": "Set up screen perspective with FOV in radians"
+     "desc": "Sets the current screen projection from a field of view in radians."
     },
     {
      "name": "setupScreenFovDeg",
      "snippet": "setupScreenFovDeg(${1:fovDeg})",
-     "desc": "Set up screen perspective with FOV in degrees"
+     "desc": "Sets the current screen projection from a field of view in degrees."
     },
     {
      "name": "setupScreenFovWithSize",
      "snippet": "setupScreenFovWithSize(${1:fovRadians}, ${2:viewW}, ${3:viewH})",
-     "desc": "Set up perspective with explicit viewport size and FOV in radians"
+     "desc": "Sets the current projection with an explicit size and a field of view in radians."
     },
     {
      "name": "setupScreenFovWithSizeDeg",
      "snippet": "setupScreenFovWithSizeDeg(${1:fovDeg}, ${2:viewW}, ${3:viewH})",
-     "desc": "Set up perspective with explicit viewport size and FOV in degrees"
+     "desc": "Sets the current projection with an explicit size and a field of view in degrees."
     },
     {
      "name": "setupScreenOrtho",
      "snippet": "setupScreenOrtho()",
-     "desc": "Set up orthographic projection (2D mode)"
+     "desc": "Sets orthographic projection for the current drawing target."
     },
     {
      "name": "setupScreenPerspective",
      "snippet": "setupScreenPerspective()",
-     "desc": "Set up screen perspective with FOV in radians (default TAU/8)"
+     "desc": "Sets screen perspective from a field of view in radians."
     },
     {
      "name": "setupScreenPerspectiveDeg",
      "snippet": "setupScreenPerspectiveDeg()",
-     "desc": "Set up screen perspective with FOV in degrees (default 45)"
+     "desc": "Sets screen perspective from a field of view in degrees."
     },
     {
      "name": "worldToScreen",
      "snippet": "worldToScreen(${1:worldPos})",
-     "desc": "Convert a world coordinate to screen coordinate (x, y = screen pixels, z = depth 0-1)"
+     "desc": "Projects a world position into screen coordinates and depth."
     }
    ]
   },
@@ -339,42 +339,42 @@ const TrussSketchAPI = {
     {
      "name": "createBox",
      "snippet": "createBox(${1:width}, ${2:height}, ${3:depth})",
-     "desc": "Create a box mesh"
+     "desc": "Creates a box mesh."
     },
     {
      "name": "createCapsule",
      "snippet": "createCapsule(${1:radius}, ${2:cylinderHeight})",
-     "desc": "Create a capsule mesh (Y-up: cylinder capped by two hemispheres)"
+     "desc": "Creates a capsule mesh with hemispherical ends."
     },
     {
      "name": "createCone",
      "snippet": "createCone(${1:radius}, ${2:height})",
-     "desc": "Create a cone mesh"
+     "desc": "Creates a cone mesh."
     },
     {
      "name": "createCylinder",
      "snippet": "createCylinder(${1:radius}, ${2:height})",
-     "desc": "Create a cylinder mesh"
+     "desc": "Creates a cylinder mesh."
     },
     {
      "name": "createIcoSphere",
      "snippet": "createIcoSphere(${1:radius})",
-     "desc": "Create an icosphere mesh (geodesic sphere with uniform triangles)"
+     "desc": "Creates a sphere mesh by subdividing an icosahedron."
     },
     {
      "name": "createPlane",
      "snippet": "createPlane(${1:width}, ${2:height})",
-     "desc": "Create a plane mesh (subdivided quad on the XY plane)"
+     "desc": "Creates a subdivided rectangular mesh on the XY plane."
     },
     {
      "name": "createSphere",
      "snippet": "createSphere(${1:radius})",
-     "desc": "Create a sphere mesh"
+     "desc": "Creates a sphere mesh with latitude and longitude divisions."
     },
     {
      "name": "createTorus",
      "snippet": "createTorus(${1:radius}, ${2:tubeRadius})",
-     "desc": "Create a torus (donut) mesh"
+     "desc": "Creates a torus mesh."
     }
    ]
   },
@@ -384,12 +384,12 @@ const TrussSketchAPI = {
     {
      "name": "cleanup",
      "snippet": "cleanup()",
-     "desc": "Shut down sokol_gfx + sokol_gl (called for you by the app loop)"
+     "desc": "Shuts down the graphics backend."
     },
     {
      "name": "setup",
      "snippet": "setup()",
-     "desc": "Initialize sokol_gfx + sokol_gl (called for you by the app loop)"
+     "desc": "Initializes the graphics backend."
     }
    ]
   },
@@ -459,72 +459,72 @@ const TrussSketchAPI = {
     {
      "name": "addLight",
      "snippet": "addLight(${1:light})",
-     "desc": "Add a light to the scene (up to 8 lights per window; a light added past 8 is not registered, with a one-time warning)"
+     "desc": "Registers a light in the current window."
     },
     {
      "name": "beginShadowPass",
      "snippet": "beginShadowPass(${1:light})",
-     "desc": "Begin shadow depth pass from the light's point of view (up to 4 shadow lights per frame)"
+     "desc": "Begins a shadow-depth pass from a light's viewpoint."
     },
     {
      "name": "calculateLighting",
      "snippet": "calculateLighting(${1:worldPos}, ${2:worldNormal}, ${3:material})",
-     "desc": "CPU-side lighting result for a world position and normal, summing all active lights with the given material"
+     "desc": "Calculates a CPU lighting color for a world position, normal, and material."
     },
     {
      "name": "clearEnvironment",
      "snippet": "clearEnvironment()",
-     "desc": "Clear IBL environment"
+     "desc": "Clears the current window's environment selection."
     },
     {
      "name": "clearLights",
      "snippet": "clearLights()",
-     "desc": "Remove all lights from the scene"
+     "desc": "Unregisters all lights from the current window."
     },
     {
      "name": "clearMaterial",
      "snippet": "clearMaterial()",
-     "desc": "Clear material (return to default rendering)"
+     "desc": "Clears the current window's material selection."
     },
     {
      "name": "endShadowPass",
      "snippet": "endShadowPass()",
-     "desc": "End shadow depth pass"
+     "desc": "Ends the active shadow-depth pass."
     },
     {
      "name": "getEnvironment",
      "snippet": "getEnvironment()",
-     "desc": "Get the current environment (IBL/skybox), or nullptr if none is set"
+     "desc": "Returns the current window's selected environment."
     },
     {
      "name": "getNumLights",
      "snippet": "getNumLights()",
-     "desc": "Number of currently active lights"
+     "desc": "Returns the number of registered lights in the current window."
     },
     {
      "name": "removeLight",
      "snippet": "removeLight(${1:light})",
-     "desc": "Remove a light from the scene"
+     "desc": "Unregisters a light from the current window."
     },
     {
      "name": "setCameraPosition",
      "snippet": "setCameraPosition(${1:pos})",
-     "desc": "Set camera position for specular calculation"
+     "desc": "Sets the camera position used for lighting calculations."
     },
     {
      "name": "setEnvironment",
      "snippet": "setEnvironment(${1:env})",
-     "desc": "Set IBL environment for PBR ambient lighting"
+     "desc": "Selects an environment for PBR lighting in the current window."
     },
     {
      "name": "setMaterial",
      "snippet": "setMaterial(${1:material})",
-     "desc": "Set material for subsequent mesh draws (activates PBR)"
+     "desc": "Selects a material for subsequent mesh drawing."
     },
     {
      "name": "shadowDraw",
      "snippet": "shadowDraw(${1:mesh})",
-     "desc": "Draw a mesh into the shadow depth pass (depth only)"
+     "desc": "Draws a mesh's depth into the active shadow pass."
     }
    ]
   },
@@ -534,12 +534,12 @@ const TrussSketchAPI = {
     {
      "name": "popShader",
      "snippet": "popShader()",
-     "desc": "Pop shader from stack"
+     "desc": "Ends the current shader scope."
     },
     {
      "name": "pushShader",
      "snippet": "pushShader(${1:shader})",
-     "desc": "Push shader to stack (subsequent draws use this shader)"
+     "desc": "Begins a shader scope for subsequent drawing."
     }
    ]
   },
@@ -934,142 +934,142 @@ const TrussSketchAPI = {
     {
      "name": "abs",
      "snippet": "abs(${1:x})",
-     "desc": "Absolute value"
+     "desc": "Returns the absolute value of a number."
     },
     {
      "name": "angleDifference",
      "snippet": "angleDifference(${1:angle1}, ${2:angle2})",
-     "desc": "Shortest angle difference in radians [-TAU/2, TAU/2]"
+     "desc": "Returns the shortest signed difference between two angles in radians."
     },
     {
      "name": "angleDifferenceDeg",
      "snippet": "angleDifferenceDeg(${1:deg1}, ${2:deg2})",
-     "desc": "Shortest angle difference in degrees [-180, 180]"
+     "desc": "Returns the shortest signed difference between two angles in degrees."
     },
     {
      "name": "binToFrequency",
      "snippet": "binToFrequency(${1:bin}, ${2:fftSize}, ${3:sampleRate})",
-     "desc": "Convert an FFT bin index to its frequency in Hz"
+     "desc": "Converts an FFT bin index to a frequency."
     },
     {
      "name": "ceil",
      "snippet": "ceil(${1:x})",
-     "desc": "Round up"
+     "desc": "Rounds a number toward positive infinity."
     },
     {
      "name": "exp",
      "snippet": "exp(${1:x})",
-     "desc": "Exponential (e^x)"
+     "desc": "Returns e raised to the given power."
     },
     {
      "name": "fftMagnitude",
      "snippet": "fftMagnitude(${1:spectrum})",
-     "desc": "Return the magnitude (amplitude) of each bin in a spectrum"
+     "desc": "Returns the magnitude of each spectrum bin."
     },
     {
      "name": "fftMagnitudeDb",
      "snippet": "fftMagnitudeDb(${1:spectrum}, ${2:minDb})",
-     "desc": "Return the magnitude of each bin in decibels, clamped to minDb"
+     "desc": "Returns spectrum magnitudes in decibels."
     },
     {
      "name": "fftPhase",
      "snippet": "fftPhase(${1:spectrum})",
-     "desc": "Return the phase angle (radians) of each bin in a spectrum"
+     "desc": "Returns the phase angle of each spectrum bin."
     },
     {
      "name": "fftPower",
      "snippet": "fftPower(${1:spectrum})",
-     "desc": "Return the power spectrum (magnitude squared) of each bin"
+     "desc": "Returns the squared magnitude of each spectrum bin."
     },
     {
      "name": "fftReal",
      "snippet": "fftReal(${1:signal})",
-     "desc": "Compute the FFT of a real-valued signal, optionally applying a window function first"
+     "desc": "Computes the frequency spectrum of a real-valued signal."
     },
     {
      "name": "floor",
      "snippet": "floor(${1:x})",
-     "desc": "Round down"
+     "desc": "Rounds a number toward negative infinity."
     },
     {
      "name": "fmod",
      "snippet": "fmod(${1:x}, ${2:y})",
-     "desc": "Floating-point modulo"
+     "desc": "Returns the floating-point remainder of a division."
     },
     {
      "name": "fract",
      "snippet": "fract(${1:value})",
-     "desc": "Fractional part"
+     "desc": "Returns the fractional part relative to the floor of a value."
     },
     {
      "name": "frequencyToBin",
      "snippet": "frequencyToBin(${1:freq}, ${2:fftSize}, ${3:sampleRate})",
-     "desc": "Convert a frequency in Hz to the nearest FFT bin index"
+     "desc": "Converts a frequency to an FFT bin index."
     },
     {
      "name": "isPowerOfTwo",
      "snippet": "isPowerOfTwo(${1:n})",
-     "desc": "Return true if n is a positive power of two"
+     "desc": "Tests whether an integer is a positive power of two."
     },
     {
      "name": "log",
      "snippet": "log(${1:x})",
-     "desc": "Natural logarithm"
+     "desc": "Returns the natural logarithm of a value."
     },
     {
      "name": "max",
      "snippet": "max(${1:a}, ${2:b})",
-     "desc": "Maximum"
+     "desc": "Returns the greater of two values."
     },
     {
      "name": "min",
      "snippet": "min(${1:a}, ${2:b})",
-     "desc": "Minimum"
+     "desc": "Returns the lesser of two values."
     },
     {
      "name": "nextPowerOfTwo",
      "snippet": "nextPowerOfTwo(${1:n})",
-     "desc": "Return the smallest power of two greater than or equal to n"
+     "desc": "Returns the smallest positive power of two at least as large as a value."
     },
     {
      "name": "pow",
      "snippet": "pow(${1:x}, ${2:y})",
-     "desc": "Power (x^y)"
+     "desc": "Returns a base raised to an exponent."
     },
     {
      "name": "round",
      "snippet": "round(${1:x})",
-     "desc": "Round to nearest"
+     "desc": "Rounds a number to the nearest integer value."
     },
     {
      "name": "sign",
      "snippet": "sign(${1:value})",
-     "desc": "Sign (-1, 0, 1)"
+     "desc": "Returns the sign of a value."
     },
     {
      "name": "sq",
      "snippet": "sq(${1:value})",
-     "desc": "Square (x*x)"
+     "desc": "Returns the square of a value."
     },
     {
      "name": "sqrt",
      "snippet": "sqrt(${1:x})",
-     "desc": "Square root"
+     "desc": "Returns the square root of a value."
     },
     {
      "name": "toComplex",
      "snippet": "toComplex(${1:real})",
-     "desc": "Convert a real-valued signal into a complex array with zero imaginary parts"
+     "desc": "Converts real samples to complex samples with zero imaginary parts."
     },
     {
      "name": "windowFunction",
      "snippet": "windowFunction(${1:type}, ${2:i}, ${3:n})",
-     "desc": "Return the window coefficient for sample i of n for the given window type"
+     "desc": "Returns a window coefficient for a sample."
     },
     {
      "name": "wrap",
      "snippet": "wrap(${1:value}, ${2:min}, ${3:max})",
-     "desc": "Wrap value within range [min, max)"
+     "desc": "Wraps a value around a repeating range."
     }
    ]
   },
@@ -1079,12 +1079,12 @@ const TrussSketchAPI = {
     {
      "name": "dist",
      "snippet": "dist(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
-     "desc": "Distance between points"
+     "desc": "Returns the Euclidean distance between two points."
     },
     {
      "name": "distSquared",
      "snippet": "distSquared(${1:x1}, ${2:y1}, ${3:x2}, ${4:y2})",
-     "desc": "Squared distance"
+     "desc": "Returns the squared distance between two points."
     }
    ]
   },
@@ -1094,17 +1094,17 @@ const TrussSketchAPI = {
     {
      "name": "clamp",
      "snippet": "clamp(${1:value}, ${2:min}, ${3:max})",
-     "desc": "Clamp value to range"
+     "desc": "Limits a value to a range."
     },
     {
      "name": "lerp",
      "snippet": "lerp(${1:a}, ${2:b}, ${3:t})",
-     "desc": "Linear interpolation"
+     "desc": "Linearly interpolates between two numeric values."
     },
     {
      "name": "remap",
      "snippet": "remap(${1:value}, ${2:inMin}, ${3:inMax}, ${4:outMin}, ${5:outMax})",
-     "desc": "Remap value from one range to another"
+     "desc": "Maps a value linearly from one range to another."
     }
    ]
   },
@@ -1114,32 +1114,32 @@ const TrussSketchAPI = {
     {
      "name": "fbm",
      "snippet": "fbm(${1:x}, ${2:y})",
-     "desc": "Fractal Brownian Motion noise"
+     "desc": "Combines Perlin noise layers into fractal Brownian motion noise."
     },
     {
      "name": "noise",
      "snippet": "noise(${1:x})",
-     "desc": "Perlin noise"
+     "desc": "Returns Perlin noise mapped around a midpoint of 0.5."
     },
     {
      "name": "random",
      "snippet": "random()",
-     "desc": "Random number"
+     "desc": "Returns a uniformly distributed random floating-point value."
     },
     {
      "name": "randomInt",
      "snippet": "randomInt(${1:max})",
-     "desc": "Random integer. randomInt(max) returns 0 to max-1 (max exclusive); randomInt(min, max) returns min to max (inclusive)."
+     "desc": "Returns a uniformly distributed random integer."
     },
     {
      "name": "randomSeed",
      "snippet": "randomSeed(${1:seed})",
-     "desc": "Set random seed"
+     "desc": "Sets the random number generator seed."
     },
     {
      "name": "signedNoise",
      "snippet": "signedNoise(${1:x})",
-     "desc": "Perlin noise (-1.0 to 1.0)"
+     "desc": "Returns signed Perlin noise."
     }
    ]
   },
@@ -1149,47 +1149,47 @@ const TrussSketchAPI = {
     {
      "name": "acos",
      "snippet": "acos(${1:x})",
-     "desc": "Arc cosine"
+     "desc": "Returns the inverse cosine of a value."
     },
     {
      "name": "asin",
      "snippet": "asin(${1:x})",
-     "desc": "Arc sine"
+     "desc": "Returns the inverse sine of a value."
     },
     {
      "name": "atan",
      "snippet": "atan(${1:x})",
-     "desc": "Arc tangent"
+     "desc": "Returns the inverse tangent of a value."
     },
     {
      "name": "atan2",
      "snippet": "atan2(${1:y}, ${2:x})",
-     "desc": "Arc tangent of y/x"
+     "desc": "Returns the direction angle of a two-dimensional vector."
     },
     {
      "name": "cos",
      "snippet": "cos(${1:x})",
-     "desc": "Cosine"
+     "desc": "Returns the cosine of an angle."
     },
     {
      "name": "deg2rad",
      "snippet": "deg2rad(${1:deg})",
-     "desc": "Degrees to radians"
+     "desc": "Converts degrees to radians."
     },
     {
      "name": "rad2deg",
      "snippet": "rad2deg(${1:rad})",
-     "desc": "Radians to degrees"
+     "desc": "Converts an angle from radians to degrees."
     },
     {
      "name": "sin",
      "snippet": "sin(${1:x})",
-     "desc": "Sine"
+     "desc": "Returns the sine of an angle."
     },
     {
      "name": "tan",
      "snippet": "tan(${1:x})",
-     "desc": "Tangent"
+     "desc": "Returns the tangent of an angle."
     }
    ]
   },
@@ -1199,27 +1199,27 @@ const TrussSketchAPI = {
     {
      "name": "getFboCount",
      "snippet": "getFboCount()",
-     "desc": "Get number of active FBO objects"
+     "desc": "Returns the number of living Fbo objects."
     },
     {
      "name": "getMemoryUsage",
      "snippet": "getMemoryUsage()",
-     "desc": "Get process memory usage in bytes (platform-specific)"
+     "desc": "Returns the process memory usage."
     },
     {
      "name": "getNodeCount",
      "snippet": "getNodeCount()",
-     "desc": "Get number of active Node objects in scene graph"
+     "desc": "Returns the number of living Node objects."
     },
     {
      "name": "getSokolMemoryAllocs",
      "snippet": "getSokolMemoryAllocs()",
-     "desc": "Number of active allocations in sokol libraries"
+     "desc": "Returns the number of active tracked sokol allocations."
     },
     {
      "name": "getSokolMemoryBytes",
      "snippet": "getSokolMemoryBytes()",
-     "desc": "Total bytes allocated by sokol libraries"
+     "desc": "Returns the current tracked sokol memory usage."
     },
     {
      "name": "getTextureCount",
@@ -1229,7 +1229,7 @@ const TrussSketchAPI = {
     {
      "name": "releaseSglBuffers",
      "snippet": "releaseSglBuffers()",
-     "desc": "Release sokol_gl vertex/command buffers (auto re-allocated on next draw)"
+     "desc": "Releases idle sokol_gl drawing buffers."
     }
    ]
   },
@@ -1239,57 +1239,57 @@ const TrussSketchAPI = {
     {
      "name": "getLocalIp",
      "snippet": "getLocalIp()",
-     "desc": "The most likely LAN address (skips loopback/down, IPv4 preferred). \"\" if none\n"
+     "desc": "Returns a preferred local IP address."
     },
     {
      "name": "getLocalIps",
      "snippet": "getLocalIps()",
-     "desc": "Every non-loopback address (one per interface entry)"
+     "desc": "Returns local IP addresses from active non-loopback interfaces."
     },
     {
      "name": "getOui",
      "snippet": "getOui(${1:mac})",
-     "desc": "The OUI (first 3 bytes) of a MAC, uppercase \"A4:83:E7\". \"\" if unparseable\n"
+     "desc": "Returns the OUI prefix of a MAC address."
     },
     {
      "name": "isLinkLocal",
      "snippet": "isLinkLocal(${1:addr})",
-     "desc": "True if addr is link-local (169.254/16 or fe80::/10)"
+     "desc": "Checks whether an address is link-local."
     },
     {
      "name": "isLocallyAdministered",
      "snippet": "isLocallyAdministered(${1:mac})",
-     "desc": "True if the MAC's locally-administered bit is set (randomized/virtual MAC)"
+     "desc": "Checks whether a MAC address has its locally administered bit set."
     },
     {
      "name": "isLoopback",
      "snippet": "isLoopback(${1:addr})",
-     "desc": "True if addr is a loopback address (127.0.0.0/8 or ::1)"
+     "desc": "Checks whether an address is a loopback address."
     },
     {
      "name": "isPrivate",
      "snippet": "isPrivate(${1:addr})",
-     "desc": "True if addr is a private IPv4 (10/8, 172.16/12, 192.168/16)"
+     "desc": "Checks whether an address is a private IPv4 address."
     },
     {
      "name": "listNetworkInterfaces",
      "snippet": "listNetworkInterfaces()",
-     "desc": "List all network interface address entries (IPv4/IPv6, loopback, up or down)"
+     "desc": "Lists the host's network interface addresses."
     },
     {
      "name": "printNetworkInterfaces",
      "snippet": "printNetworkInterfaces()",
-     "desc": "Log the interface list (one line per entry)"
+     "desc": "Logs the network interface list."
     },
     {
      "name": "sameSubnet",
      "snippet": "sameSubnet(${1:a}, ${2:b}, ${3:netmask})",
-     "desc": "True if IPv4 a and b are on the same subnet under netmask"
+     "desc": "Checks whether two IPv4 addresses share a subnet under a supplied mask."
     },
     {
      "name": "sendErrorName",
      "snippet": "sendErrorName(${1:e})",
-     "desc": "Short label for a SendError value (\"QueueFull\", ...). For log messages"
+     "desc": "Returns a short name for a send error."
     }
    ]
   },
@@ -1299,37 +1299,37 @@ const TrussSketchAPI = {
     {
      "name": "atanh",
      "snippet": "atanh(${1:x})",
-     "desc": "Inverse hyperbolic tangent"
+     "desc": "Returns the inverse hyperbolic tangent."
     },
     {
      "name": "createWindow",
      "snippet": "createWindow()",
-     "desc": "Create a secondary window (macOS / Windows / desktop Linux; returns nullptr on single-window platforms). It ticks on its own display's vsync; closing it leaves the app running. Give it content with Window::setApp()"
+     "desc": "Creates a secondary application window."
     },
     {
      "name": "exp2",
      "snippet": "exp2(${1:x})",
-     "desc": "Base-2 exponential (2^x)"
+     "desc": "Returns two raised to the given power."
     },
     {
      "name": "log10",
      "snippet": "log10(${1:x})",
-     "desc": "Base-10 (common) logarithm"
+     "desc": "Returns the base-ten logarithm."
     },
     {
      "name": "log2",
      "snippet": "log2(${1:x})",
-     "desc": "Base-2 logarithm"
+     "desc": "Returns the base-two logarithm."
     },
     {
      "name": "onScreenshotSave",
      "snippet": "onScreenshotSave()",
-     "desc": "Host-owned screenshot completion event. Fires once per saveScreenshotAsync request on main in a later frame, never inline; expired application runs suppress delivery. Retain the EventListener returned by listen(). Completions are delivered during an app run (runApp / runHeadlessApp); in a bare main() without one, no completion event fires."
+     "desc": "Returns the asynchronous screenshot completion event."
     },
     {
      "name": "operator*",
      "snippet": "operator*(${1:s}, ${2:v})",
-     "desc": "Component-wise multiplication"
+     "desc": "Multiplies values according to their operand types."
     },
     {
      "name": "operator&",
@@ -1344,22 +1344,22 @@ const TrussSketchAPI = {
     {
      "name": "remainder",
      "snippet": "remainder(${1:x}, ${2:y})",
-     "desc": "IEEE floating-point remainder of x/y"
+     "desc": "Returns the IEEE floating-point remainder."
     },
     {
      "name": "saveScreenshotAsync",
      "snippet": "saveScreenshotAsync(${1:path})",
-     "desc": "Capture the requesting window at its next present, then encode/write on a worker. The destination is frozen at submission. At most four pending jobs per window include capture, writing and undelivered results; further requests report WriteFailed with Screenshot queue is full through onScreenshotSave(). Hidden secondary windows wait for their own present without blocking captures in other windows. Native writes use one global FIFO in capture-completion order; a slow write delays later writes. Closing before capture or calling without a render window reports a deferred failure. Native readback still runs on main and may stall that frame. Web snapshots the canvas and submits a PNG/JPEG download; browser download policy and actual disk completion are unobservable. Serialize other saves to the same destination yourself. Completions are delivered during an app run (runApp / runHeadlessApp); in a bare main() without one, no completion event fires."
+     "desc": "Requests an asynchronous screenshot save."
     },
     {
      "name": "tanh",
      "snippet": "tanh(${1:x})",
-     "desc": "Hyperbolic tangent"
+     "desc": "Returns the hyperbolic tangent."
     },
     {
      "name": "trunc",
      "snippet": "trunc(${1:x})",
-     "desc": "Truncate toward zero (drop the fractional part)"
+     "desc": "Discards the fractional part by rounding toward zero."
     }
    ]
   },
@@ -1369,87 +1369,87 @@ const TrussSketchAPI = {
     {
      "name": "captureWindow",
      "snippet": "captureWindow(${1:outPixels})",
-     "desc": "Capture the current window contents into a Pixels object. Returns true on success"
+     "desc": "Copies the current window image into CPU pixels."
     },
     {
      "name": "getAccelerometer",
      "snippet": "getAccelerometer()",
-     "desc": "Get accelerometer reading in g-force (1.0 = Earth gravity). Mobile only; desktop returns zero"
+     "desc": "Returns the latest accelerometer reading."
     },
     {
      "name": "getBatteryLevel",
      "snippet": "getBatteryLevel()",
-     "desc": "Get battery charge level (0.0-1.0), or -1 if unavailable (e.g. desktop without a battery)"
+     "desc": "Returns the battery charge level."
     },
     {
      "name": "getCompassHeading",
      "snippet": "getCompassHeading()",
-     "desc": "Get compass heading in radians (0 = north, clockwise). Mobile only"
+     "desc": "Returns the device compass heading."
     },
     {
      "name": "getDeviceOrientation",
      "snippet": "getDeviceOrientation()",
-     "desc": "Get the fused device attitude (accelerometer + gyroscope + magnetometer) as a quaternion. Mobile only"
+     "desc": "Returns the device attitude as a quaternion."
     },
     {
      "name": "getGyroscope",
      "snippet": "getGyroscope()",
-     "desc": "Get gyroscope angular velocity in rad/s. Mobile only; desktop returns zero"
+     "desc": "Returns the latest gyroscope reading."
     },
     {
      "name": "getImmersiveMode",
      "snippet": "getImmersiveMode()",
-     "desc": "Return whether immersive mode is currently enabled"
+     "desc": "Returns the immersive-mode setting."
     },
     {
      "name": "getLocation",
      "snippet": "getLocation()",
-     "desc": "Get the most recent GPS / WiFi location fix. Starts location updates on the first call"
+     "desc": "Returns the latest location fix."
     },
     {
      "name": "getSystemBrightness",
      "snippet": "getSystemBrightness()",
-     "desc": "Get screen brightness (0.0-1.0). iOS: linear. Android: gamma-corrected (perceptual). Desktop: returns -1 (not supported)"
+     "desc": "Returns the screen brightness."
     },
     {
      "name": "getSystemVolume",
      "snippet": "getSystemVolume()",
-     "desc": "Get system output volume (0.0-1.0)"
+     "desc": "Returns the system output volume."
     },
     {
      "name": "getThermalState",
      "snippet": "getThermalState()",
-     "desc": "Get the coarse-grained device thermal state (Nominal / Fair / Serious / Critical)"
+     "desc": "Returns the device thermal state."
     },
     {
      "name": "getThermalTemperature",
      "snippet": "getThermalTemperature()",
-     "desc": "Get device temperature in Celsius, or -1 if unavailable"
+     "desc": "Queries the device temperature."
     },
     {
      "name": "isBatteryCharging",
      "snippet": "isBatteryCharging()",
-     "desc": "Return true if the battery is currently charging"
+     "desc": "Returns the battery charging status."
     },
     {
      "name": "isProximityClose",
      "snippet": "isProximityClose()",
-     "desc": "Return true when the proximity sensor detects a nearby object (e.g. phone held to the ear)"
+     "desc": "Reports whether the proximity sensor detects a nearby object."
     },
     {
      "name": "setImmersiveMode",
      "snippet": "setImmersiveMode(${1:enabled})",
-     "desc": "Hide system UI for immersive fullscreen. Android: sticky immersive (status + navigation bars). iOS: hides status bar + home indicator. Desktop: no-op"
+     "desc": "Controls whether system bars are hidden for immersive display."
     },
     {
      "name": "setSystemBrightness",
      "snippet": "setSystemBrightness(${1:brightness})",
-     "desc": "Set screen brightness (0.0-1.0). Meaning of the value differs by platform (iOS linear, Android perceptual). Desktop: not supported"
+     "desc": "Sets the screen brightness."
     },
     {
      "name": "setSystemVolume",
      "snippet": "setSystemVolume(${1:volume})",
-     "desc": "Set system output volume (0.0-1.0). iOS: not supported by the OS (logs a warning)"
+     "desc": "Sets the system output volume."
     }
    ]
   },
@@ -1459,12 +1459,12 @@ const TrussSketchAPI = {
     {
      "name": "getRootNode",
      "snippet": "getRootNode()",
-     "desc": "Get the running App as the root of the node tree (set by the framework while the app is alive, null otherwise). Lets tools walk the whole tree without the app passing itself around. Not yet the App inside its own constructor: use it from setup() on."
+     "desc": "Return the current window's App as the root node."
     },
     {
      "name": "getSelectedNode",
      "snippet": "getSelectedNode()",
-     "desc": "Get the currently selected node (the last-clicked node, held by the Node system; null if none or once the node is freed). A tool such as an inspector can read it and drive it via setSelectedNode(). The pointer is for the current call; to keep the node, keep its weak_from_this()."
+     "desc": "Return the currently selected node."
     }
    ]
   },
@@ -1474,12 +1474,12 @@ const TrussSketchAPI = {
     {
      "name": "getBeepVolume",
      "snippet": "getBeepVolume()",
-     "desc": "Get the current beep() output volume (0.0-1.0)."
+     "desc": "Return the current beep volume."
     },
     {
      "name": "setBeepVolume",
      "snippet": "setBeepVolume(${1:vol})",
-     "desc": "Set the output volume for beep() (0.0-1.0)."
+     "desc": "Set the beep volume."
     }
    ]
   },
@@ -1489,37 +1489,37 @@ const TrussSketchAPI = {
     {
      "name": "getDay",
      "snippet": "getDay()",
-     "desc": "Current day (1-31)"
+     "desc": "Returns the current day of the month."
     },
     {
      "name": "getHours",
      "snippet": "getHours()",
-     "desc": "Current hours (0-23)"
+     "desc": "Returns the current hour."
     },
     {
      "name": "getMinutes",
      "snippet": "getMinutes()",
-     "desc": "Current minutes (0-59)"
+     "desc": "Returns the current minute."
     },
     {
      "name": "getMonth",
      "snippet": "getMonth()",
-     "desc": "Current month (1-12)"
+     "desc": "Returns the current month."
     },
     {
      "name": "getSeconds",
      "snippet": "getSeconds()",
-     "desc": "Current seconds (0-59)"
+     "desc": "Returns the current second."
     },
     {
      "name": "getWeekday",
      "snippet": "getWeekday()",
-     "desc": "Weekday (0=Sun, 6=Sat)"
+     "desc": "Returns the current day of the week."
     },
     {
      "name": "getYear",
      "snippet": "getYear()",
-     "desc": "Current year"
+     "desc": "Returns the current year."
     }
    ]
   },
@@ -1529,32 +1529,32 @@ const TrussSketchAPI = {
     {
      "name": "getElapsedTime",
      "snippet": "getElapsedTime()",
-     "desc": "Elapsed seconds (double) since program start, on a steady clock (system clock changes don't affect it). The same clock as getElapsedTimef/Millis/Micros: resetElapsedTimeCounter() restarts all of them, so the difference of two readings is only a duration if nothing resets the counter in between. Keeps full precision where getElapsedTimef() loses it after long uptimes"
+     "desc": "Returns elapsed seconds on the application clock."
     },
     {
      "name": "getElapsedTimef",
      "snippet": "getElapsedTimef()",
-     "desc": "Elapsed seconds (float) since program start. Same clock as getElapsedTime(); a float loses precision after about a day of uptime (7.8 ms steps at 18 h), so use it for animation and display, and getElapsedTime() (double) where precision matters"
+     "desc": "Returns elapsed time in seconds as a float."
     },
     {
      "name": "getElapsedTimeMicros",
      "snippet": "getElapsedTimeMicros()",
-     "desc": "Elapsed microseconds (uint64) since program start. Same clock as getElapsedTime()"
+     "desc": "Returns elapsed time in microseconds."
     },
     {
      "name": "getElapsedTimeMillis",
      "snippet": "getElapsedTimeMillis()",
-     "desc": "Elapsed milliseconds (uint64) since program start. Same clock as getElapsedTime()"
+     "desc": "Returns elapsed time in milliseconds."
     },
     {
      "name": "getFrameElapsedTime",
      "snippet": "getFrameElapsedTime()",
-     "desc": "Elapsed seconds (double) sampled once at the start of the current frame, so every update step and the draw of one frame see the same value (getElapsedTime() moves during the frame). Same clock and reset as getElapsedTime(). Sampled by the main loop and runHeadlessApp; in a secondary window it currently returns the live getElapsedTime()"
+     "desc": "Returns elapsed seconds sampled for the current frame."
     },
     {
      "name": "resetElapsedTimeCounter",
      "snippet": "resetElapsedTimeCounter()",
-     "desc": "Restart the elapsed-time counter: getElapsedTime/f/Millis/Micros and getFrameElapsedTime count from 0 again. Display only: Node timers, the loop, recording and the tc_get_health uptime keep running on the underlying clock. A duration taken as the difference of two of those readings across a reset comes out wrong (negative, or wrapped for the unsigned Millis/Micros); measure durations with getSystemTimeMicros()"
+     "desc": "Restarts the public elapsed-time counter."
     }
    ]
   },
@@ -1564,47 +1564,47 @@ const TrussSketchAPI = {
     {
      "name": "getDeltaTime",
      "snippet": "getDeltaTime()",
-     "desc": "Seconds since the previous update. Measured wall time in VSYNC / setFps modes; in fixed-Hz update mode (setIndependentFps with an update rate) and in runHeadlessApp every step reports exactly 1 / updateFps. Per window; a secondary window still measures its delta with high_resolution_clock (the system clock on Linux) until #307: a forward system clock step (NTP, a manual change) lands in one delta, so that window's due Node timers fire at once, and an uncapped callEveryCatchUp fires once per interval of the step; a backward step makes one delta negative: getDeltaTime() is negative on that tick and the window's Node timers are not counted down on it"
+     "desc": "Returns the current update's time step in seconds."
     },
     {
      "name": "getDrawCount",
      "snippet": "getDrawCount()",
-     "desc": "Get the number of draw() calls since the app started"
+     "desc": "Returns the main window's frame counter."
     },
     {
      "name": "getFps",
      "snippet": "getFps()",
-     "desc": "Get the measured FPS (alias for getFrameRate). In a secondary window it is currently the average of the last 10 calls, like getFrameRate()"
+     "desc": "Returns the measured update rate."
     },
     {
      "name": "getFpsSettings",
      "snippet": "getFpsSettings()",
-     "desc": "Get the current FPS configuration (update/draw target rates, actual VSync rate, sync flag)"
+     "desc": "Returns the main loop's frame-rate configuration."
     },
     {
      "name": "getFrameCount",
      "snippet": "getFrameCount()",
-     "desc": "Total frames rendered"
+     "desc": "Returns the current window's update counter."
     },
     {
      "name": "getFrameRate",
      "snippet": "getFrameRate()",
-     "desc": "Measured update rate (updates per second over the last 10 frames). In fixed-Hz update mode and runHeadlessApp this is the measured rate, not the configured one: the fixed steps are counted by the time they consumed, so it reads steady when the rate isn't a multiple of the frame rate and drops when time is dropped. Recorded by the main loop and runHeadlessApp; in a secondary window each call currently adds the window's last delta and returns the average of the last 10 calls, so reading it once per second gives a ~10 s average"
+     "desc": "Returns the measured number of updates per second."
     },
     {
      "name": "getUpdateCount",
      "snippet": "getUpdateCount()",
-     "desc": "Get the number of update() calls since the app started"
+     "desc": "Return the current window's update counter."
     },
     {
      "name": "sleepMicros",
      "snippet": "sleepMicros(${1:micros})",
-     "desc": "Block the current thread for the given number of microseconds"
+     "desc": "Pauses the calling thread for a duration in microseconds."
     },
     {
      "name": "sleepMillis",
      "snippet": "sleepMillis(${1:millis})",
-     "desc": "Block the current thread for the given number of milliseconds"
+     "desc": "Pauses the calling thread for a duration in milliseconds."
     }
    ]
   },
@@ -1614,22 +1614,22 @@ const TrussSketchAPI = {
     {
      "name": "getSystemTimeMicros",
      "snippet": "getSystemTimeMicros()",
-     "desc": "Unix time in microseconds (wall clock). To measure a duration, take the difference of two readings as int64_t: it follows system clock adjustments, so a clock step can make t1 < t0 and an unsigned difference would wrap. Unlike the getElapsedTime family, resetElapsedTimeCounter() doesn't affect it"
+     "desc": "Returns the current Unix time in microseconds."
     },
     {
      "name": "getSystemTimeMillis",
      "snippet": "getSystemTimeMillis()",
-     "desc": "Unix time in milliseconds (wall clock). It follows system clock adjustments, so take differences as int64_t (see getSystemTimeMicros)"
+     "desc": "Returns the current Unix time in milliseconds."
     },
     {
      "name": "getTimestampString",
      "snippet": "getTimestampString(${1:timestampFormat})",
-     "desc": "Formatted timestamp"
+     "desc": "Formats the current local date and time as a string."
     },
     {
      "name": "getUnixTime",
      "snippet": "getUnixTime()",
-     "desc": "Current Unix timestamp in seconds"
+     "desc": "Returns the current Unix timestamp in seconds."
     }
    ]
   },
@@ -1729,227 +1729,227 @@ const TrussSketchAPI = {
     {
      "name": "beep",
      "snippet": "beep()",
-     "desc": "Play a beep sound"
+     "desc": "Play a short notification sound."
     },
     {
      "name": "closeLogFile",
      "snippet": "closeLogFile()",
-     "desc": "Close the current log file"
+     "desc": "Closes the global logger's current file."
     },
     {
      "name": "compressBound",
      "snippet": "compressBound(${1:nbytes}, ${2:codec})",
-     "desc": "Worst-case compressed size, for sizing a destination buffer"
+     "desc": "Returns an upper bound for the compressed buffer size."
     },
     {
      "name": "fromBase64",
      "snippet": "fromBase64(${1:encoded})",
-     "desc": "Decode a Base64 string back into raw bytes"
+     "desc": "Decode a Base64 string into bytes."
     },
     {
      "name": "getLogger",
      "snippet": "getLogger()",
-     "desc": "Access the global logger instance"
+     "desc": "Returns the global logger."
     },
     {
      "name": "getMainThreadId",
      "snippet": "getMainThreadId()",
-     "desc": "Get the main thread ID. Records the current thread's ID on the first call, so it must first be called from the main thread."
+     "desc": "Returns the recorded main thread identifier."
     },
     {
      "name": "getVersion",
      "snippet": "getVersion()",
-     "desc": "TrussC version string from git describe (e.g. \"v0.6.2\" or \"v0.6.2-14-gabc123\")"
+     "desc": "Returns the TrussC version string."
     },
     {
      "name": "hexToInt",
      "snippet": "hexToInt(${1:hexStr})",
-     "desc": "Parse a hex string into a signed int"
+     "desc": "Parse a hexadecimal string as a signed integer."
     },
     {
      "name": "hexToUInt",
      "snippet": "hexToUInt(${1:hexStr})",
-     "desc": "Parse a hex string into an unsigned int"
+     "desc": "Parse a hexadecimal string as an unsigned integer."
     },
     {
      "name": "isMainThread",
      "snippet": "isMainThread()",
-     "desc": "Whether the calling thread is the main (scene) thread. The main thread ID is recorded on the first call to getMainThreadId()."
+     "desc": "Reports whether the calling thread is the main thread."
     },
     {
      "name": "isStringInString",
      "snippet": "isStringInString(${1:haystack}, ${2:needle})",
-     "desc": "Check whether one string contains another"
+     "desc": "Check whether a string contains a substring."
     },
     {
      "name": "joinString",
      "snippet": "joinString(${1:stringElements}, ${2:delimiter})",
-     "desc": "Join strings with delimiter"
+     "desc": "Join strings with a delimiter."
     },
     {
      "name": "logAt",
      "snippet": "logAt()",
-     "desc": "Stream-based log output at a runtime-selected level"
+     "desc": "Creates a log stream at the selected severity."
     },
     {
      "name": "logError",
      "snippet": "logError()",
-     "desc": "Stream-based error-level log output"
+     "desc": "Creates a stream for error-level logging."
     },
     {
      "name": "logFatal",
      "snippet": "logFatal()",
-     "desc": "Stream-based fatal-level log output"
+     "desc": "Creates a log stream at Fatal severity."
     },
     {
      "name": "logLevelToString",
      "snippet": "logLevelToString(${1:level})",
-     "desc": "Return the uppercase name of a log level (e.g. \"NOTICE\", \"WARNING\")\n"
+     "desc": "Returns the uppercase name of a log level."
     },
     {
      "name": "logNotice",
      "snippet": "logNotice()",
-     "desc": "Print to console"
+     "desc": "Logs a message at Notice level."
     },
     {
      "name": "logVerbose",
      "snippet": "logVerbose()",
-     "desc": "Stream-based verbose-level log output"
+     "desc": "Creates a stream for verbose-level log messages."
     },
     {
      "name": "logWarning",
      "snippet": "logWarning()",
-     "desc": "Stream-based warning-level log output"
+     "desc": "Creates a stream for warning-level logging."
     },
     {
      "name": "nodeToJson",
      "snippet": "nodeToJson(${1:node}, ${2:maxDepth})",
-     "desc": "Serialize a node (and its subtree up to maxDepth; -1 = unlimited) to JSON via reflection. Derived members (e.g. globalPos) are left out unless includeDerived is true; then they are included and named under \"derived\""
+     "desc": "Serializes a node and its subtree to JSON."
     },
     {
      "name": "parseJson",
      "snippet": "parseJson(${1:str})",
-     "desc": "Parse a JSON string into a Json object; returns an empty Json on parse error."
+     "desc": "Parses a JSON string into a Json value."
     },
     {
      "name": "parseXml",
      "snippet": "parseXml(${1:str})",
-     "desc": "Parse an XML string into an Xml object."
+     "desc": "Parses an XML string into an Xml object."
     },
     {
      "name": "runOnMainThread",
      "snippet": "runOnMainThread(${1:fn})",
-     "desc": "Run a callback on the main (scene) thread; immediately if already on it, otherwise enqueue and return without waiting for execution. Each frame drains, in order, the work queued when its drain started; worker submissions during the drain wait until the next frame. There is no queue limit. runOnMainThread(fn, weakToken) accepts the same weak_ptr<atomic<bool>> liveness token as Deliver::Main: at execution time an expired or false token drops the closure. A token does not wait for a callback already running; serialize target teardown with delivery, normally on the main thread. The single-argument form never drops callbacks and the caller owns captured lifetimes. On Web without pthreads both forms run immediately, with the token check for the two-argument form. tc_get_health reports the drain-start count as mainQueuePending. Producers that can drop values use their own bounded or latest-value buffer."
+     "desc": "Dispatches a callback to the main thread."
     },
     {
      "name": "setConsoleLogLevel",
      "snippet": "setConsoleLogLevel(${1:level})",
-     "desc": "Set the minimum log level printed to the console"
+     "desc": "Sets the minimum severity for console output."
     },
     {
      "name": "setFileLogLevel",
      "snippet": "setFileLogLevel(${1:level})",
-     "desc": "Set the minimum log level written to the log file"
+     "desc": "Sets the minimum severity for log file output."
     },
     {
      "name": "setLogFile",
      "snippet": "setLogFile(${1:path})",
-     "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns a failed SaveResult, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned."
+     "desc": "Opens a file for the global logger's output."
     },
     {
      "name": "setLogLevel",
      "snippet": "setLogLevel(${1:level})",
-     "desc": "Set the console, file and system log levels at once (a later per-output call wins)"
+     "desc": "Sets all three log output thresholds together."
     },
     {
      "name": "setSystemLogLevel",
      "snippet": "setSystemLogLevel(${1:level})",
-     "desc": "Set the minimum log level written to the OS log: os_log on macOS, OutputDebugStringW on Windows"
+     "desc": "Sets the minimum severity for system log output."
     },
     {
      "name": "shortTypeName",
      "snippet": "shortTypeName(${1:ti})",
-     "desc": "Short (unqualified) readable name for a type, cached per type"
+     "desc": "Returns a readable type name without its outer qualification."
     },
     {
      "name": "splitString",
      "snippet": "splitString(${1:source}, ${2:delimiter})",
-     "desc": "Split string by delimiter"
+     "desc": "Split a string at a delimiter."
     },
     {
      "name": "stringTimesInString",
      "snippet": "stringTimesInString(${1:haystack}, ${2:needle})",
-     "desc": "Count nonoverlapping occurrences of a substring in a string. An empty substring matches nothing and returns 0."
+     "desc": "Count occurrences of a substring."
     },
     {
      "name": "toBase64",
      "snippet": "toBase64(${1:bytes})",
-     "desc": "Encode raw bytes as a Base64 string"
+     "desc": "Encode bytes as a Base64 string."
     },
     {
      "name": "toBinary",
      "snippet": "toBinary(${1:value})",
-     "desc": "Convert an integer to a binary string"
+     "desc": "Convert integers or string bytes to binary text."
     },
     {
      "name": "toBool",
      "snippet": "toBool(${1:str})",
-     "desc": "Parse a string into a bool"
+     "desc": "Convert a string to a Boolean value."
     },
     {
      "name": "toDouble",
      "snippet": "toDouble(${1:str})",
-     "desc": "Parse a string into a double"
+     "desc": "Parse a string as a double."
     },
     {
      "name": "toFloat",
      "snippet": "toFloat(${1:str})",
-     "desc": "Convert string to float"
+     "desc": "Parse a string as a float."
     },
     {
      "name": "toInt",
      "snippet": "toInt(${1:str})",
-     "desc": "Convert string to int"
+     "desc": "Parse a string as an integer."
     },
     {
      "name": "toInt64",
      "snippet": "toInt64(${1:str})",
-     "desc": "Parse a string into a 64-bit integer"
+     "desc": "Converts a string to a 64-bit integer."
     },
     {
      "name": "toJsonString",
      "snippet": "toJsonString(${1:j})",
-     "desc": "Serialize a Json object to a string. indent sets the pretty-print width (negative for compact)."
+     "desc": "Serializes a Json value to a string."
     },
     {
      "name": "toLower",
      "snippet": "toLower(${1:src})",
-     "desc": "Convert to lower case"
+     "desc": "Return a lowercase copy of a string."
     },
     {
      "name": "toUpper",
      "snippet": "toUpper(${1:src})",
-     "desc": "Convert to upper case"
+     "desc": "Return an uppercase copy of a string."
     },
     {
      "name": "trim",
      "snippet": "trim(${1:src})",
-     "desc": "Trim whitespace from both ends of a string"
+     "desc": "Remove whitespace from both ends of a string."
     },
     {
      "name": "trimBack",
      "snippet": "trimBack(${1:src})",
-     "desc": "Trim trailing whitespace from a string"
+     "desc": "Remove trailing whitespace from a string."
     },
     {
      "name": "trimFront",
      "snippet": "trimFront(${1:src})",
-     "desc": "Trim leading whitespace from a string"
+     "desc": "Returns a string with leading whitespace removed."
     },
     {
      "name": "typeName",
      "snippet": "typeName(${1:ti})",
-     "desc": "Readable (demangled) fully-qualified name for a type, cached per type"
+     "desc": "Returns a readable, fully qualified type name."
     }
    ]
   },
@@ -1959,7 +1959,7 @@ const TrussSketchAPI = {
     {
      "name": "videoCodecName",
      "snippet": "videoCodecName(${1:c})",
-     "desc": "Return a human-readable name for a VideoCodec value (e.g. \"H.264\", \"HEVC\", \"ProRes 422\")\n"
+     "desc": "Returns a readable name for a video codec."
     }
    ]
   },
@@ -1969,27 +1969,27 @@ const TrussSketchAPI = {
     {
      "name": "alertDialog",
      "snippet": "alertDialog(${1:title}, ${2:message})",
-     "desc": "Show alert dialog with OK button"
+     "desc": "Shows an alert dialog."
     },
     {
      "name": "alertDialogAsync",
      "snippet": "alertDialogAsync(${1:title}, ${2:message})",
-     "desc": "Show alert dialog asynchronously. Callback is called when dismissed"
+     "desc": "Shows an alert dialog with a completion callback."
     },
     {
      "name": "bindCursorImage",
      "snippet": "bindCursorImage(${1:cursor}, ${2:image})",
-     "desc": "Bind a custom image to a cursor slot (RGBA pixels or Image)"
+     "desc": "Assigns an image to a mouse cursor slot."
     },
     {
      "name": "confirmDialog",
      "snippet": "confirmDialog(${1:title}, ${2:message})",
-     "desc": "Show Yes/No confirmation dialog. Returns true if Yes clicked"
+     "desc": "Shows a confirmation dialog."
     },
     {
      "name": "confirmDialogAsync",
      "snippet": "confirmDialogAsync(${1:title}, ${2:message}, ${3:callback})",
-     "desc": "Show Yes/No dialog asynchronously. Callback receives true if Yes clicked"
+     "desc": "Shows a confirmation dialog with a result callback."
     },
     {
      "name": "events",
@@ -1999,167 +1999,167 @@ const TrussSketchAPI = {
     {
      "name": "exitApp",
      "snippet": "exitApp()",
-     "desc": "Exit the application with normal cleanup (cannot be cancelled). code defaults to 0. On Windows/Linux, runApp returns this code to its caller; on macOS, the process exits with this code after cleanup without returning from runApp. Use a non-zero code for failures."
+     "desc": "Orders the application to exit with normal cleanup."
     },
     {
      "name": "getCursor",
      "snippet": "getCursor()",
-     "desc": "Get the current mouse cursor shape"
+     "desc": "Returns the selected mouse cursor shape."
     },
     {
      "name": "getGlobalMousePos",
      "snippet": "getGlobalMousePos()",
-     "desc": "Get global mouse position as Vec2"
+     "desc": "Returns the mouse position in the current window."
     },
     {
      "name": "getGlobalMouseX",
      "snippet": "getGlobalMouseX()",
-     "desc": "Get global mouse X (screen coordinates, not window-relative)"
+     "desc": "Returns the current mouse X coordinate in the active window."
     },
     {
      "name": "getGlobalMouseY",
      "snippet": "getGlobalMouseY()",
-     "desc": "Get global mouse Y (screen coordinates, not window-relative)"
+     "desc": "Returns the current mouse Y coordinate in the active window."
     },
     {
      "name": "getGlobalPMouseX",
      "snippet": "getGlobalPMouseX()",
-     "desc": "Get previous frame global mouse X"
+     "desc": "Returns the saved previous mouse X coordinate."
     },
     {
      "name": "getGlobalPMouseY",
      "snippet": "getGlobalPMouseY()",
-     "desc": "Get previous frame global mouse Y"
+     "desc": "Returns the saved previous mouse Y coordinate."
     },
     {
      "name": "getMouseButton",
      "snippet": "getMouseButton()",
-     "desc": "Get currently pressed mouse button"
+     "desc": "Returns the recorded mouse button."
     },
     {
      "name": "getMousePos",
      "snippet": "getMousePos()",
-     "desc": "Get mouse position as Vec2"
+     "desc": "Returns the mouse position in the current window."
     },
     {
      "name": "getMouseX",
      "snippet": "getMouseX()",
-     "desc": "Get mouse X position"
+     "desc": "Return the mouse X coordinate in window space."
     },
     {
      "name": "getMouseY",
      "snippet": "getMouseY()",
-     "desc": "Get mouse Y position"
+     "desc": "Return the mouse Y coordinate in window space."
     },
     {
      "name": "getTouchAsMouse",
      "snippet": "getTouchAsMouse()",
-     "desc": "Get touchAsMouse state"
+     "desc": "Returns whether touch input is mapped to mouse input."
     },
     {
      "name": "getWindowHeight",
      "snippet": "getWindowHeight()",
-     "desc": "Get canvas height"
+     "desc": "Returns the current window height."
     },
     {
      "name": "getWindowSize",
      "snippet": "getWindowSize()",
-     "desc": "Get canvas size as Vec2"
+     "desc": "Returns the current window's drawing dimensions."
     },
     {
      "name": "getWindowWidth",
      "snippet": "getWindowWidth()",
-     "desc": "Get canvas width"
+     "desc": "Returns the current window width."
     },
     {
      "name": "hideCursor",
      "snippet": "hideCursor()",
-     "desc": "Hide the mouse cursor"
+     "desc": "Hides the mouse cursor."
     },
     {
      "name": "isAltPressed",
      "snippet": "isAltPressed()",
-     "desc": "True while either Alt / Option key (left or right) is held"
+     "desc": "Returns whether either Alt or Option key is recorded as pressed."
     },
     {
      "name": "isControlPressed",
      "snippet": "isControlPressed()",
-     "desc": "True while either Control key (left or right) is held"
+     "desc": "Returns whether either Control key is recorded as pressed."
     },
     {
      "name": "isKeyPressed",
      "snippet": "isKeyPressed(${1:key})",
-     "desc": "Is specific key currently pressed"
+     "desc": "Returns whether a key is recorded as pressed."
     },
     {
      "name": "isMousePressed",
      "snippet": "isMousePressed()",
-     "desc": "Is mouse button pressed"
+     "desc": "Returns the recorded mouse press state."
     },
     {
      "name": "isOverlayFocused",
      "snippet": "isOverlayFocused()",
-     "desc": "True when an overlay currently owns keyboard focus (e.g. a text input is active); guard raw key input so typing into a UI field is not also handled by the app"
+     "desc": "Report whether an overlay claims keyboard input."
     },
     {
      "name": "isOverlayHovered",
      "snippet": "isOverlayHovered()",
-     "desc": "True when an overlay currently has the pointer over it (e.g. cursor over a tcxImGui panel); guard raw mouse input so clicks on UI panels are not also handled by the app"
+     "desc": "Report whether an overlay claims mouse input."
     },
     {
      "name": "isShiftPressed",
      "snippet": "isShiftPressed()",
-     "desc": "True while either Shift key (left or right) is held"
+     "desc": "Returns whether either Shift key is recorded as pressed."
     },
     {
      "name": "isSuperPressed",
      "snippet": "isSuperPressed()",
-     "desc": "True while either Super / Cmd / Win key (left or right) is held"
+     "desc": "Returns whether either Super, Command, or Windows key is recorded as pressed."
     },
     {
      "name": "loadDialog",
      "snippet": "loadDialog()",
-     "desc": "Show file open dialog. Returns FileDialogResult with filePath, fileName, success"
+     "desc": "Shows a file or folder selection dialog."
     },
     {
      "name": "loadDialogAsync",
      "snippet": "loadDialogAsync(${1:title}, ${2:message}, ${3:defaultPath}, ${4:folderSelection}, ${5:callback})",
-     "desc": "Show file open dialog asynchronously. Callback receives FileDialogResult"
+     "desc": "Shows a file or folder picker with a result callback."
     },
     {
      "name": "requestExitApp",
      "snippet": "requestExitApp()",
-     "desc": "Request application exit. Can be cancelled by listening to events().exitRequested and setting args.cancel = true"
+     "desc": "Requests a cancellable application exit."
     },
     {
      "name": "saveDialog",
      "snippet": "saveDialog()",
-     "desc": "Show file save dialog. Returns FileDialogResult with filePath, fileName, success"
+     "desc": "Shows a file save dialog."
     },
     {
      "name": "saveDialogAsync",
      "snippet": "saveDialogAsync(${1:title}, ${2:message}, ${3:defaultPath}, ${4:defaultName}, ${5:callback})",
-     "desc": "Show file save dialog asynchronously. Callback receives FileDialogResult"
+     "desc": "Shows a save destination picker with a result callback."
     },
     {
      "name": "setCursor",
      "snippet": "setCursor(${1:cursor})",
-     "desc": "Set the mouse cursor shape"
+     "desc": "Sets the mouse cursor shape."
     },
     {
      "name": "setTouchAsMouse",
      "snippet": "setTouchAsMouse(${1:enabled})",
-     "desc": "Enable/disable touch events firing as mouse events (for Android/iOS)"
+     "desc": "Controls whether touch input also generates mouse events."
     },
     {
      "name": "showCursor",
      "snippet": "showCursor()",
-     "desc": "Show the mouse cursor (default)"
+     "desc": "Shows the mouse cursor."
     },
     {
      "name": "unbindCursorImage",
      "snippet": "unbindCursorImage(${1:cursor})",
-     "desc": "Unbind a custom cursor image, restoring the system default"
+     "desc": "Removes a custom cursor image."
     }
    ]
   },
@@ -2169,162 +2169,162 @@ const TrussSketchAPI = {
     {
      "name": "bringWindowToFront",
      "snippet": "bringWindowToFront()",
-     "desc": "Activate and raise the application window, giving it focus. Desktop only; no-op on mobile/web"
+     "desc": "Requests that the application window move to the foreground and receive focus."
     },
     {
      "name": "getAspectRatio",
      "snippet": "getAspectRatio()",
-     "desc": "Get window aspect ratio (width / height)"
+     "desc": "Returns the current window's aspect ratio."
     },
     {
      "name": "getBackendName",
      "snippet": "getBackendName()",
-     "desc": "Get the active graphics backend name (e.g. \"Metal (macOS)\", \"D3D11\", \"OpenGL\", \"WebGPU\")\n"
+     "desc": "Returns the active graphics backend's name."
     },
     {
      "name": "getClipboardString",
      "snippet": "getClipboardString()",
-     "desc": "Get text from clipboard"
+     "desc": "Returns clipboard text."
     },
     {
      "name": "getDisplayScaleFactor",
      "snippet": "getDisplayScaleFactor()",
-     "desc": "Get the DPI scale of the main display (available before window creation). macOS: 1.0 or 2.0 (Retina); other platforms: 1.0"
+     "desc": "Returns the platform display scale factor."
     },
     {
      "name": "getDpiScale",
      "snippet": "getDpiScale()",
-     "desc": "Get display DPI scale factor (e.g. 2.0 for Retina)"
+     "desc": "Returns the current window's DPI scale factor."
     },
     {
      "name": "getFramebufferHeight",
      "snippet": "getFramebufferHeight()",
-     "desc": "Get framebuffer height in pixels (window height * DPI scale)"
+     "desc": "Returns the current window framebuffer's height."
     },
     {
      "name": "getFramebufferWidth",
      "snippet": "getFramebufferWidth()",
-     "desc": "Get framebuffer width in pixels (window width * DPI scale)"
+     "desc": "Returns the current window framebuffer's width."
     },
     {
      "name": "getKeepScreenOn",
      "snippet": "getKeepScreenOn()",
-     "desc": "Check whether keep-screen-on is currently enabled"
+     "desc": "Returns the keep-screen-on setting."
     },
     {
      "name": "getMaxUpdateSteps",
      "snippet": "getMaxUpdateSteps()",
-     "desc": "The cap on fixed-rate update steps per frame (and per runHeadlessApp loop pass) set by setMaxUpdateSteps(). 10 by default; 0 or less means no cap"
+     "desc": "Returns the limit on fixed-rate update steps."
     },
     {
      "name": "getWindowPosition",
      "snippet": "getWindowPosition()",
-     "desc": "Get window position in screen coordinates (top-left origin). macOS/Windows only; other platforms return (-1, -1)"
+     "desc": "Returns the window position on the screen."
     },
     {
      "name": "grabScreen",
      "snippet": "grabScreen(${1:outPixels})",
-     "desc": "Capture current screen to Pixels"
+     "desc": "Read this window's screen into Pixels. What is captured depends on when you call it"
     },
     {
      "name": "isFullscreen",
      "snippet": "isFullscreen()",
-     "desc": "Check if window is fullscreen"
+     "desc": "Returns whether the current window is fullscreen."
     },
     {
      "name": "isRecording",
      "snippet": "isRecording()",
-     "desc": "Check whether a recording is in progress"
+     "desc": "Returns whether the global screen recorder is capturing."
     },
     {
      "name": "recordingFrameCount",
      "snippet": "recordingFrameCount()",
-     "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail."
+     "desc": "Returns the global recording's accepted video frame count."
     },
     {
      "name": "recordingPath",
      "snippet": "recordingPath()",
-     "desc": "Output file path of the current recording"
+     "desc": "Returns the global recording's output path."
     },
     {
      "name": "redraw",
      "snippet": "redraw()",
-     "desc": "Request extra redraws (useful for event-driven rendering)"
+     "desc": "Requests additional frames in event-driven rendering."
     },
     {
      "name": "saveScreenshot",
      "snippet": "saveScreenshot(${1:path})",
-     "desc": "Save a screenshot of the rendered frame (format picked from the extension, case-insensitive: png/jpg/bmp on most platforms; see the platform note). Safe to call from anywhere; capture is deferred to after present(). Returns true when capture is queued; on native platforms the destination folder is prepared first. This does not mean the file is already written. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and false returned. Keeps bool on every platform: true means queued. Native entry synchronously checks path, parent creation and bundle refusal through prepareOutputPath; the deferred atomic checked write logs one Error on failure. Web remains a download: encoded output is handed to the browser, with no folders or .tmp and no disk-completion guarantee."
+     "desc": "Queues a screenshot of the rendered window."
     },
     {
      "name": "setClipboardString",
      "snippet": "setClipboardString(${1:text})",
-     "desc": "Copy text to clipboard"
+     "desc": "Copies text to the clipboard."
     },
     {
      "name": "setFullscreen",
      "snippet": "setFullscreen(${1:full})",
-     "desc": "Set fullscreen mode"
+     "desc": "Sets the window fullscreen state."
     },
     {
      "name": "setIndependentFps",
      "snippet": "setIndependentFps(${1:updateFps}, ${2:drawFps})",
-     "desc": "Set independent update and draw rates. A fixed update rate runs fixed steps (getDeltaTime() is 1 / updateFps for each), at most setMaxUpdateSteps() per frame (default 10): time beyond that (after a stall, when update() is too slow, or when updateFps is more than that many times the display rate) is dropped with a one-time warning. Switching at runtime starts the new rate from the switch (no catch-up; on the next frame a fixed update rate runs one step, a VSYNC update's getDeltaTime() counts from the call, or from the update's start when called inside an update, and a fixed draw rate draws). Calling it again with the current rates does nothing, and changing only the draw rate keeps the update's phase and drops no time; switching between a synced (setFps) and an independent update counts as an update-mode change even at the same rate (setFps(VSYNC) to setIndependentFps(VSYNC, 30) drops up to a frame). Entering a fixed update rate restarts with one step, which can count more or less than the time since the last update (from a 144 Hz display to a fixed 60, the step is ~9.7 ms longer than the 1/144 s since the last update); entering a VSYNC update drops the time since the last update (under a frame in the usual modes, long only after an idle like EVENT_DRIVEN), and on that frame, called outside update(), its dt counts only from the call"
+     "desc": "Sets separate update and drawing rates."
     },
     {
      "name": "setKeepScreenOn",
      "snippet": "setKeepScreenOn(${1:enabled})",
-     "desc": "Prevent display sleep / auto-lock while the app is running. Supported: Android, iOS, macOS, Windows. Linux / Web: no-op"
+     "desc": "Controls whether display sleep and automatic locking are inhibited."
     },
     {
      "name": "setMaxUpdateSteps",
      "snippet": "setMaxUpdateSteps(${1:steps})",
-     "desc": "Set the most fixed-rate update steps run in one frame (setIndependentFps with an update rate) or in one runHeadlessApp loop pass. More are pending after a stall, when update() is slower than its own rate, or when the update rate is more than this many times the display rate; the time beyond the cap is dropped with a one-time warning instead of replayed. Default 10. 0 or less removes the cap so every step runs (e.g. a deterministic simulation), at the cost of a freeze while a long stall is replayed and of frames that keep growing while update() is slower than its rate"
+     "desc": "Sets the maximum number of fixed update steps per loop pass."
     },
     {
      "name": "setOrientation",
      "snippet": "setOrientation(${1:mask})",
-     "desc": "Set allowed screen orientations (mobile). Values: Orientation::Portrait, Landscape, All"
+     "desc": "Sets the allowed screen orientations."
     },
     {
      "name": "setWindowDecorated",
      "snippet": "setWindowDecorated(${1:decorated})",
-     "desc": "Toggle the window's standard decorations (title bar, borders, buttons). false = borderless but still focusable and closable. Desktop only"
+     "desc": "Controls the main window's standard decorations."
     },
     {
      "name": "setWindowPosition",
      "snippet": "setWindowPosition(${1:x}, ${2:y})",
-     "desc": "Set window position in screen coordinates (top-left origin). macOS/Windows only; no-op on other platforms"
+     "desc": "Moves the window to a screen position."
     },
     {
      "name": "setWindowSize",
      "snippet": "setWindowSize(${1:width}, ${2:height})",
-     "desc": "Set window size. Resizing the main window is not implemented on Linux yet"
+     "desc": "Resizes the window in the current coordinate units."
     },
     {
      "name": "setWindowSizeLogical",
      "snippet": "setWindowSizeLogical(${1:width}, ${2:height})",
-     "desc": "Resize the window to the given logical size (logical pixels)"
+     "desc": "Resizes the main window using logical dimensions."
     },
     {
      "name": "setWindowTitle",
      "snippet": "setWindowTitle(${1:title})",
-     "desc": "Set window title"
+     "desc": "Sets the window title."
     },
     {
      "name": "startRecording",
      "snippet": "startRecording(${1:path})",
-     "desc": "Start recording the window — or an Fbo (clean, GUI-free output) — to a video file (native encoder, no ffmpeg). Pass a seconds argument (or VideoRecordSettings.duration) for a fixed-length clip that auto-stops and finalizes itself; 0 = unlimited. Calling it again while recording finalizes the current file first, then starts fresh (same path = the old file is overwritten). Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization."
+     "desc": "Starts recording a window or Fbo to a video file."
     },
     {
      "name": "stopRecording",
      "snippet": "stopRecording()",
-     "desc": "Stop the current recording and finalize the file. Returns SaveResult for backend finalization, retaining the first backend failure. Caller errors and transient readback failures do not fail the take. Repeated calls retain the result without another Error. No temporary/rename is used."
+     "desc": "Stops the global recording and finalizes its file."
     },
     {
      "name": "toggleFullscreen",
      "snippet": "toggleFullscreen()",
-     "desc": "Toggle fullscreen mode"
+     "desc": "Toggles the window fullscreen state."
     }
    ]
   }
@@ -2333,227 +2333,227 @@ const TrussSketchAPI = {
   {
    "name": "Baseline",
    "value": "",
-   "desc": "Direction shorthand for Direction::Baseline (text baseline)"
+   "desc": "Provides shorthand for text baseline alignment."
   },
   {
    "name": "Bottom",
    "value": "",
-   "desc": "Direction shorthand for Direction::Bottom"
+   "desc": "Provides shorthand for bottom alignment."
   },
   {
    "name": "Center",
    "value": "",
-   "desc": "Direction shorthand for Direction::Center"
+   "desc": "Provides shorthand for center alignment."
   },
   {
    "name": "EVENT_DRIVEN",
    "value": "",
-   "desc": "Frame-rate sentinel: only redraw on demand (event-driven)"
+   "desc": "Selects rendering on demand."
   },
   {
    "name": "HALF_TAU",
    "value": "",
-   "desc": "Half circle (PI)"
+   "desc": "Represents half a turn in radians."
   },
   {
    "name": "KEY_BACKSPACE",
    "value": "",
-   "desc": "Backspace key"
+   "desc": "Identifies the Backspace key."
   },
   {
    "name": "KEY_DELETE",
    "value": "",
-   "desc": "Delete key"
+   "desc": "Identifies the Delete key."
   },
   {
    "name": "KEY_DOWN",
    "value": "",
-   "desc": "Down arrow key"
+   "desc": "Identifies the Down arrow key."
   },
   {
    "name": "KEY_ENTER",
    "value": "",
-   "desc": "Enter/Return key"
+   "desc": "Identifies the Enter/Return key."
   },
   {
    "name": "KEY_ESCAPE",
    "value": "",
-   "desc": "Escape key"
+   "desc": "Identifies the Escape key."
   },
   {
    "name": "KEY_F1",
    "value": "",
-   "desc": "F1 function key"
+   "desc": "Identifies the F1 function key."
   },
   {
    "name": "KEY_F10",
    "value": "",
-   "desc": "F10 function key"
+   "desc": "Identifies the F10 function key."
   },
   {
    "name": "KEY_F11",
    "value": "",
-   "desc": "F11 function key"
+   "desc": "Identifies the F11 function key."
   },
   {
    "name": "KEY_F12",
    "value": "",
-   "desc": "F12 function key"
+   "desc": "Identifies the F12 function key."
   },
   {
    "name": "KEY_F2",
    "value": "",
-   "desc": "F2 function key"
+   "desc": "Identifies the F2 function key."
   },
   {
    "name": "KEY_F3",
    "value": "",
-   "desc": "F3 function key"
+   "desc": "Identifies the F3 function key."
   },
   {
    "name": "KEY_F4",
    "value": "",
-   "desc": "F4 function key"
+   "desc": "Identifies the F4 function key."
   },
   {
    "name": "KEY_F5",
    "value": "",
-   "desc": "F5 function key"
+   "desc": "Identifies the F5 function key."
   },
   {
    "name": "KEY_F6",
    "value": "",
-   "desc": "F6 function key"
+   "desc": "Identifies the F6 function key."
   },
   {
    "name": "KEY_F7",
    "value": "",
-   "desc": "F7 function key"
+   "desc": "Identifies the F7 function key."
   },
   {
    "name": "KEY_F8",
    "value": "",
-   "desc": "F8 function key"
+   "desc": "Identifies the F8 function key."
   },
   {
    "name": "KEY_F9",
    "value": "",
-   "desc": "F9 function key"
+   "desc": "Identifies the F9 function key."
   },
   {
    "name": "KEY_LEFT",
    "value": "",
-   "desc": "Left arrow key"
+   "desc": "Identifies the Left arrow key."
   },
   {
    "name": "KEY_LEFT_ALT",
    "value": "",
-   "desc": "Left Alt/Option key"
+   "desc": "Identifies the left Alt/Option key."
   },
   {
    "name": "KEY_LEFT_CONTROL",
    "value": "",
-   "desc": "Left Control key"
+   "desc": "Identifies the left Control key."
   },
   {
    "name": "KEY_LEFT_SHIFT",
    "value": "",
-   "desc": "Left Shift key"
+   "desc": "Identifies the left Shift key."
   },
   {
    "name": "KEY_LEFT_SUPER",
    "value": "",
-   "desc": "Left Super/Command key"
+   "desc": "Identifies the left Super/Command key."
   },
   {
    "name": "KEY_RIGHT",
    "value": "",
-   "desc": "Right arrow key"
+   "desc": "Identifies the Right arrow key."
   },
   {
    "name": "KEY_RIGHT_ALT",
    "value": "",
-   "desc": "Right Alt/Option key"
+   "desc": "Identifies the right Alt/Option key."
   },
   {
    "name": "KEY_RIGHT_CONTROL",
    "value": "",
-   "desc": "Right Control key"
+   "desc": "Identifies the right Control key."
   },
   {
    "name": "KEY_RIGHT_SHIFT",
    "value": "",
-   "desc": "Right Shift key"
+   "desc": "Identifies the right Shift key."
   },
   {
    "name": "KEY_RIGHT_SUPER",
    "value": "",
-   "desc": "Right Super/Command key"
+   "desc": "Identifies the right Super/Command key."
   },
   {
    "name": "KEY_SPACE",
    "value": "",
-   "desc": "Space key"
+   "desc": "Identifies the Space key."
   },
   {
    "name": "KEY_TAB",
    "value": "",
-   "desc": "Tab key"
+   "desc": "Identifies the Tab key."
   },
   {
    "name": "KEY_UP",
    "value": "",
-   "desc": "Up arrow key"
+   "desc": "Identifies the Up Arrow key."
   },
   {
    "name": "Left",
    "value": "",
-   "desc": "Direction shorthand for Direction::Left"
+   "desc": "Provides shorthand for `Direction::Left`."
   },
   {
    "name": "MOUSE_BUTTON_LEFT",
    "value": "",
-   "desc": "Left mouse button"
+   "desc": "Identifies the left mouse button."
   },
   {
    "name": "MOUSE_BUTTON_MIDDLE",
    "value": "",
-   "desc": "Middle mouse button"
+   "desc": "Identifies the middle mouse button."
   },
   {
    "name": "MOUSE_BUTTON_RIGHT",
    "value": "",
-   "desc": "Right mouse button"
+   "desc": "Identifies the right mouse button."
   },
   {
    "name": "PI",
    "value": "",
-   "desc": "Ratio of circumference to diameter. ≈ 3.14159. Prefer HALF_TAU for half a turn."
+   "desc": "Represents the ratio of a circle's circumference to its diameter."
   },
   {
    "name": "QUARTER_TAU",
    "value": "",
-   "desc": "Quarter circle (PI/2)"
+   "desc": "Defines a quarter turn in radians."
   },
   {
    "name": "Right",
    "value": "",
-   "desc": "Direction shorthand for Direction::Right"
+   "desc": "Provides shorthand for `Direction::Right`."
   },
   {
    "name": "TAU",
    "value": "",
-   "desc": "Ratio of circumference to radius; the radian measure of one full turn. ≈ 6.28318."
+   "desc": "Represents one full turn in radians."
   },
   {
    "name": "Top",
    "value": "",
-   "desc": "Direction shorthand for Direction::Top"
+   "desc": "Provides the shorthand constant for Direction::Top."
   },
   {
    "name": "VSYNC",
    "value": "",
-   "desc": "Frame-rate sentinel: sync to the monitor refresh rate"
+   "desc": "Selects frame scheduling at the display refresh rate."
   }
  ],
  "types": [
@@ -3259,7 +3259,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "AudioBackend",
-   "desc": "Audio backend selection: Default uses the platform backend order; Null explicitly runs the real mixer silently without a device.",
+   "desc": "Selects the audio engine backend.",
    "static_methods": [
     {
      "name": "Default",
@@ -3277,89 +3277,89 @@ const TrussSketchAPI = {
   },
   {
    "name": "AudioDeviceChangedArgs",
-   "desc": "Argument type for the AudioEngine::audioDeviceChanged event, fired after every successful init() (initial and re-init). Reports the resolved device's real name (never empty).",
+   "desc": "Carries information about the audio device opened by the engine.",
    "properties": [
     {
      "name": "bufferSize",
      "type": "int",
-     "desc": "Buffer (period) size the device runs with, in frames at the engine rate (granted by the device; bufferSize / sampleRate = period in seconds). Not the requested value: see AudioEngine::getBufferSize."
+     "desc": "Reports the active output device period size."
     },
     {
      "name": "channels",
      "type": "int",
-     "desc": "Active output channel count"
+     "desc": "Reports the active engine output channel count."
     },
     {
      "name": "deviceName",
      "type": "std::string",
-     "desc": "Actual device name now active (resolved, never empty)"
+     "desc": "Reports the name of the opened output device."
     },
     {
      "name": "isDefaultDevice",
      "type": "bool",
-     "desc": "True when the opened device is the OS's current default playback device"
+     "desc": "Indicates whether the opened output device is treated as the system default."
     },
     {
      "name": "maxPolyphony",
      "type": "int",
-     "desc": "Active max polyphony"
+     "desc": "Reports the active engine voice limit."
     },
     {
      "name": "sampleRate",
      "type": "int",
-     "desc": "Active engine sample rate in Hz"
+     "desc": "Reports the active engine sample rate."
     }
    ]
   },
   {
    "name": "AudioDeviceInfo",
-   "desc": "One entry in the list returned by AudioEngine::listDevices().",
+   "desc": "Describes an available audio playback device.",
    "properties": [
     {
      "name": "isDefault",
      "type": "bool",
-     "desc": "True if this is the system default playback device"
+     "desc": "Indicates whether a listed playback device is the system default."
     },
     {
      "name": "name",
      "type": "std::string",
-     "desc": "Device name (pass to AudioSettings::deviceName)"
+     "desc": "Stores a playback device name."
     }
    ]
   },
   {
    "name": "AudioEngine",
-   "desc": "Singleton miniaudio-based mixer engine. Owns the output device, mixes all playing Sound voices, exposes real-time audioOut / audioIn / audioDeviceChanged events, and an FFT analysis ring buffer. Access via AudioEngine::getInstance(); most apps drive it indirectly through the Sound class and the global initAudio() / shutdownAudio() helpers.",
+   "desc": "Manages the output device and mixes sound playback using miniaudio.",
    "methods": [
     {
      "name": "init",
      "snippet": "init()",
      "return": "bool",
-     "desc": "Initialize the engine, or re-initialize it with an AudioSettings override. init(settings) keeps the sample rate, channels, buffer size and polyphony even when it fails; init() with no arguments reuses the last ones (the defaults if init(settings) was never called) but always opens the system default device on AudioBackend::Default. Re-init on a running engine migrates active voices to the new settings. miniaudio reaches Null only when no real backend context can be created; if a context opens but its device cannot, init() returns false without switching backend. Set AudioSettings::backend = AudioBackend::Null for intentional silent operation (one Notice per init). getStats() retains the last init failure until a successful init. Returns true on success, false when no output device can be opened; the failure is logged through logError(\"AudioEngine\") with the requested device name. A failed re-init leaves the engine stopped: the running device is closed before the new one is tried. It may be called again later; each failed try opens the device and logs again, so retry on a timer (about once a second) or on a user action, not every frame. Sound::load*() calls init() while the engine is not initialized, so after a failed init(settings) it opens the system default device with those settings; call init(settings) again before loading sounds if you want the requested device."
+     "desc": "Initializes or reinitializes the audio output engine."
     },
     {
      "name": "shutdown",
      "snippet": "shutdown()",
      "return": "void",
-     "desc": "Stop and close the audio device."
+     "desc": "Stops and closes the audio output device."
     },
     {
      "name": "getAnalysisBuffer",
      "snippet": "getAnalysisBuffer()",
      "return": "",
-     "desc": "Copy the latest post-clamp output samples (mono, L+R average) into outBuffer. numSamples is capped at 4096; missing startup samples are zero padded. Safe from any thread. Returns the number of samples written, or 0 while stopped or uninitialized. Reuses the previous successful copy if concurrent writes prevent a snapshot. Reads the same two-second, per-channel ring as the MCP-only tc_get_audio_spectrum (full FFT, selectable size/window/channels/frequency range/peak count) and tc_save_audio_capture (recent output as float32 WAV). The audio callback writes the ring without locks. Global wrapper: getAudioAnalysisBuffer."
+     "desc": "Copies recent audio output into a mono analysis buffer."
     },
     {
      "name": "play",
      "snippet": "play(${1:source})",
      "return": "std::shared_ptr<PlayingSound>",
-     "desc": "Start a new mixer voice for the given source (eager SoundBuffer or streaming SoundStream) and return its live PlayingSound handle. Usually called indirectly via Sound::play()."
+     "desc": "Starts a mixer voice for an audio source."
     },
     {
      "name": "mixAudio",
      "snippet": "mixAudio()",
      "return": "",
-     "desc": "Audio output callback: mix all playing sounds into the buffer (internal, called from the audio thread)."
+     "desc": "Mixes audio voices and listeners into an output buffer."
     }
    ],
    "static_methods": [
@@ -3367,39 +3367,39 @@ const TrussSketchAPI = {
      "name": "getInstance",
      "snippet": "getInstance()",
      "return": "AudioEngine &",
-     "desc": "Get the global AudioEngine singleton."
+     "desc": "Returns the global AudioEngine singleton."
     }
    ]
   },
   {
    "name": "AudioInBuffer",
-   "desc": "Argument type for the AudioEngine::audioIn event. Holds the interleaved read-only microphone input for a single capture callback. Process and return quickly; do not call engine APIs from here.",
+   "desc": "Describes a read-only audio input buffer.",
    "properties": [
     {
      "name": "channels",
      "type": "int",
-     "desc": "Channel count (floats per frame)"
+     "desc": "Holds the input channel count."
     },
     {
      "name": "frameCount",
      "type": "int",
-     "desc": "Number of frames in this callback"
+     "desc": "Holds the number of input frames in the buffer."
     },
     {
      "name": "framePosition",
      "type": "uint64_t",
-     "desc": "Monotonic count of input frames received since capture start"
+     "desc": "Holds an input frame position."
     },
     {
      "name": "sampleRate",
      "type": "int",
-     "desc": "Input sample rate in Hz"
+     "desc": "Holds the input sample rate."
     }
    ]
   },
   {
    "name": "AudioInitFailure",
-   "desc": "Initialization failure stage: None, NoBackend (context creation), DeviceOpen, or DeviceStart.",
+   "desc": "Identifies the stage at which audio initialization failed.",
    "static_methods": [
     {
      "name": "None",
@@ -3429,33 +3429,33 @@ const TrussSketchAPI = {
   },
   {
    "name": "AudioOutBuffer",
-   "desc": "Argument type for the AudioEngine::audioOut event. Holds the interleaved mutable output buffer for a single audio callback. Listeners should ADD their contribution to data (voices are already mixed in); do not call engine APIs from here.",
+   "desc": "Provides the writable audio output buffer for a callback.",
    "properties": [
     {
      "name": "channels",
      "type": "int",
-     "desc": "Channel count (floats per frame)"
+     "desc": "Holds the output channel count."
     },
     {
      "name": "frameCount",
      "type": "int",
-     "desc": "Number of frames in this callback"
+     "desc": "Holds the number of output frames in the callback."
     },
     {
      "name": "framePosition",
      "type": "uint64_t",
-     "desc": "Monotonic count of output frames emitted since engine init (sample-accurate time/phase reference)"
+     "desc": "Holds the output frame counter at the start of the buffer."
     },
     {
      "name": "sampleRate",
      "type": "int",
-     "desc": "Engine output sample rate in Hz"
+     "desc": "Holds the engine output sample rate."
     }
    ]
   },
   {
    "name": "AudioRecorder",
-   "desc": "Records the engine's master output (everything the speakers get, Sounds and audioOut synthesis alike) to a WAV file. Taps audioOut at Monitor priority; file IO runs on a background thread, the audio thread never blocks. Every file has a 36-byte JUNK chunk after the RIFF header, so the samples start at byte 80 (S16) or 92 (F32). A take over 4 GiB of samples (about 3.1 h of 48 kHz stereo F32) is written as RF64 (EBU Tech 3306); older readers without RF64 support can't open it Destroying an active recorder inside an audio callback is a caller mistake: it returns without waiting, logs one Error, and leaves the WAV header unfinalized.",
+   "desc": "Records the audio engine's master mix to a WAV file.",
    "constructor": {
     "snippet": "AudioRecorder()"
    },
@@ -3464,176 +3464,176 @@ const TrussSketchAPI = {
      "name": "getDroppedFrames",
      "snippet": "getDroppedFrames()",
      "return": "uint64_t",
-     "desc": "Frames lost to ring-buffer overflow (0 in normal operation; nonzero means the writer thread fell behind)"
+     "desc": "Returns the number of captured audio frames discarded."
     },
     {
      "name": "getPath",
      "snippet": "getPath()",
      "return": "fs::path",
-     "desc": "Resolved path of the file being written"
+     "desc": "Returns the resolved recording file path."
     },
     {
      "name": "getRecordedSeconds",
      "snippet": "getRecordedSeconds()",
      "return": "double",
-     "desc": "Seconds actually written to the file so far. Counts complete frames actually written divided by sample rate, including a short write; queued or failed frames are excluded."
+     "desc": "Returns the duration of audio written to the recording."
     },
     {
      "name": "isRecording",
      "snippet": "isRecording()",
      "return": "bool",
-     "desc": "True while recording"
+     "desc": "Returns whether recording is active."
     },
     {
      "name": "start",
      "snippet": "start(${1:path})",
      "return": "SaveResult",
-     "desc": "Start an in-place WAV recording of the master mix. Returns SaveResult after shared path preparation, opening and checked header writing; the AudioEngine must already be initialized. Relative paths use getDataPath, missing parents are created, and app bundle paths are refused. Every subsequent write is checked; the first failure ends the take and logs exactly one Error."
+     "desc": "Starts recording the master mix to a WAV file."
     },
     {
      "name": "stop",
      "snippet": "stop()",
      "return": "SaveResult",
-     "desc": "Stop, drain pending captures and finalize the WAV/RF64 header and file. Disconnects the audio listener and waits up to one second for all audio callbacks already in flight; if one is still running it logs a Warning and finalizes anyway (that callback's last buffer is not in the file). Do not hold a lock needed by an audio listener. Returns SaveResult for checked header patching and close, or the first take failure; repeated calls preserve that result without another Error. Destruction normally calls stop; destroying an active recorder inside an audio callback instead logs one Error and leaves the header unfinalized. Recording writes in place, without a temporary or rename."
+     "desc": "Stops recording and finalizes the audio file."
     }
    ]
   },
   {
    "name": "AudioRecordSettings",
-   "desc": "Settings for AudioRecorder::start(): sample format (S16/F32) and an optional channel map",
+   "desc": "Configures the sample format and channel routing for audio recording.",
    "properties": [
     {
      "name": "channelMap",
      "type": "std::vector<std::vector<int>>",
-     "desc": "Channel routing, same structure as Sound::setChannelMap(): outer index = file channel, inner list = engine channels summed into it (unnormalized; clipping is the caller's choice). Empty = auto: 1ch engine to mono, 2ch to stereo, 3ch+ to averaged mono"
+     "desc": "Maps engine output channels to recording file channels."
     },
     {
      "name": "format",
      "type": "SampleFormat",
-     "desc": "Sample format written to the file (SampleFormat::S16 default)"
+     "desc": "Specifies the sample format written to the recording."
     }
    ]
   },
   {
    "name": "AudioSettings",
-   "desc": "Configuration passed to AudioEngine::init() to override engine defaults (sample rate, channels, buffer size, polyphony, device). Empty deviceName selects the system default playback device.",
+   "desc": "Configures audio engine initialization.",
    "properties": [
     {
      "name": "backend",
      "type": "AudioBackend",
-     "desc": "Backend to open (Default by default). Set Null and call init(settings) before loading sounds for headless use. Enumeration and native MicInput follow the engine backend; before init, enumeration uses real backends. Zero-argument init() uses Default."
+     "desc": "Specifies the backend used to open the audio engine."
     },
     {
      "name": "bufferSize",
      "type": "int",
-     "desc": "Requested device buffer size in frames; 0 = let miniaudio choose"
+     "desc": "Specifies the requested output device buffer size."
     },
     {
      "name": "channels",
      "type": "int",
-     "desc": "Output channel count (1 = mono, 2 = stereo; default 2)"
+     "desc": "Specifies the engine's output channel count."
     },
     {
      "name": "deviceName",
      "type": "std::string",
-     "desc": "Playback device name; empty = system default. Use AudioEngine::listDevices() to enumerate."
+     "desc": "Specifies the playback device by name."
     },
     {
      "name": "maxPolyphony",
      "type": "int",
-     "desc": "Max simultaneously-playing Sound voices (default 32)"
+     "desc": "Sets the engine's maximum number of simultaneous Sound voices."
     },
     {
      "name": "sampleRate",
      "type": "int",
-     "desc": "Engine output sample rate in Hz (0 = the engine default, 48000)"
+     "desc": "Specifies the engine's output sample rate."
     }
    ]
   },
   {
    "name": "AudioStats",
-   "desc": "Audio engine health counters and meters, returned by AudioEngine::getStats(). Counters are cumulative since the process started (they survive re-init); peak / rms / cpuUsage describe the recent output.",
+   "desc": "Reports audio engine counters, output levels, and processing load.",
    "properties": [
     {
      "name": "clippedSamples",
      "type": "uint64_t",
-     "desc": "Output samples beyond +/-1.0 that the final clamp cut off (counted per channel sample)."
+     "desc": "Counts output samples clipped by the final amplitude clamp."
     },
     {
      "name": "cpuUsage",
      "type": "float",
-     "desc": "Fraction of audio-thread time: time spent mixing the playing sounds and audioOut listeners divided by the audio time produced, averaged over ~0.5 s of audio. 1.0 means the callback took as long as the audio it produced (0.25 = a quarter of the time budget). 0 while the engine is not running or callbacks are stalled."
+     "desc": "Reports the average share of the audio time budget used by mixing."
     },
     {
      "name": "cpuUsagePeak",
      "type": "float",
-     "desc": "CPU usage of the worst single callback in the same window; above 1 the callback took longer than the audio it produced (a dropout). 0 while the engine is not running or callbacks are stalled."
+     "desc": "Reports the highest mixing CPU usage of a single callback."
     },
     {
      "name": "droppedDecoderError",
      "type": "uint64_t",
-     "desc": "Plays refused because a stream's file could not be reopened for the new playback (moved, deleted or unreadable)."
+     "desc": "Counts playback requests rejected because a streaming decoder could not reopen its source."
     },
     {
      "name": "droppedNotRunning",
      "type": "uint64_t",
-     "desc": "Plays refused because no output device was running (init failed, or after shutdown())."
+     "desc": "Counts playback requests rejected while no output device is running."
     },
     {
      "name": "droppedPlays",
      "type": "uint64_t",
-     "desc": "Plays AudioEngine::play() refused since startup (Sound::play() returned false), all reasons: the sum of the four dropped* fields."
+     "desc": "Counts playback requests rejected by the audio engine."
     },
     {
      "name": "droppedPolyphonyLimit",
      "type": "uint64_t",
-     "desc": "Plays refused because every playback slot was busy (AudioSettings::maxPolyphony, default 32)."
+     "desc": "Counts playback requests rejected because all engine playback slots are occupied."
     },
     {
      "name": "droppedStreamLimit",
      "type": "uint64_t",
-     "desc": "Plays refused because a SoundStream already had maxPolyphony playbacks. Only copies of a streamed Sound can hit this: a single Sound stops its previous playback first."
+     "desc": "Counts playback requests rejected because a streaming source reached its playback limit."
     },
     {
      "name": "initFailure",
      "type": "AudioInitFailure",
-     "desc": "Last init failure, retained through shutdown and cleared by successful init. tc_get_audio_state includes initFailure with reason, result, backend and requested device only while a failure is recorded."
+     "desc": "Identifies the most recent audio engine initialization failure."
     },
     {
      "name": "initFailureResult",
      "type": "int",
-     "desc": "miniaudio result code of the last failed init (for example -401 for a device open failure); 0 when no failure is recorded."
+     "desc": "Reports the result code of the most recent initialization failure."
     },
     {
      "name": "peak",
      "type": "float",
-     "desc": "Master output peak over the last ~100 ms, linear (1.0 = full scale). Measured before the clamp, so a value above 1 shows how far the mix overshoots. 0 while the engine is not running or callbacks are stalled."
+     "desc": "Reports the recent peak amplitude of the master output."
     },
     {
      "name": "rms",
      "type": "float",
-     "desc": "Master output RMS over the same ~100 ms window, linear. 0 while the engine is not running or callbacks are stalled."
+     "desc": "Reports the recent RMS amplitude of the master output."
     },
     {
      "name": "stalled",
      "type": "bool",
-     "desc": "True while the engine is running but no mix callback has finished for max(250 ms, four granted device periods). Master meters, CPU usage meters and playing-sound levels read zero while stalled. Clears when a callback finishes or the device stops; the main thread reports stall episodes with rate-limited warnings."
+     "desc": "Indicates that audio mixing callbacks have stopped completing."
     },
     {
      "name": "underrunFrames",
      "type": "uint64_t",
-     "desc": "Cumulative silent output frames per streaming voice because the decoder fell behind. A new voice's wait before its first decoded frame, pauses, pending seeks, refill waits after an applied seek and a normal end are excluded. Warnings are aggregated on the main thread at most once per two seconds, with remaining counts flushed at exit."
+     "desc": "Counts silent streaming output frames caused by decoder delays."
     },
     {
      "name": "voicesStoppedByReinit",
      "type": "uint64_t",
-     "desc": "Cumulative streaming voices stopped because a live sample-rate re-init could not reopen their decoder. Separate from droppedPlays: these voices had already started successfully. Each failure keeps the existing warning with its file path and decoder result on the thread calling init(); this counter adds no summary warning."
+     "desc": "Counts streaming voices stopped by decoder reopening failures during reinitialization."
     }
    ]
   },
   {
    "name": "AxisMode",
-   "desc": "Layout axis sizing: None (fixed), Fill (expand to the parent), Content (fit children).",
+   "desc": "Selects how a layout axis determines sizes.",
    "static_methods": [
     {
      "name": "None",
@@ -3657,7 +3657,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Beep",
-   "desc": "Built-in system beep sounds (ping, success, error, …) for beep().",
+   "desc": "Selects a built-in synthesized notification sound.",
    "static_methods": [
     {
      "name": "ping",
@@ -3729,7 +3729,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "BlendMode",
-   "desc": "Color blend mode: Alpha, Add, Multiply, Screen, Subtract, Disabled.",
+   "desc": "Selects how drawing colors blend with the existing image.",
    "static_methods": [
     {
      "name": "Alpha",
@@ -3771,98 +3771,98 @@ const TrussSketchAPI = {
   },
   {
    "name": "BuildInfo",
-   "desc": "Build timestamp info injected as compile definitions by trussc_app() at CMake configure time. Refreshes when cmake reconfigures. Date/time fields are local time; timestamp is UTC Unix seconds.",
+   "desc": "Provides build configuration timestamps.",
    "static_methods": [
     {
      "name": "date",
      "snippet": "date()",
      "return": "const char *",
-     "desc": "Build date in \"YYYY-MM-DD\" form (local time)\n"
+     "desc": "Returns the build date."
     },
     {
      "name": "dateTime",
      "snippet": "dateTime()",
      "return": "const char *",
-     "desc": "Build date-time in \"YYYY-MM-DD HH:MM:SS\" form (local time)\n"
+     "desc": "Returns the build date and time."
     },
     {
      "name": "day",
      "snippet": "day()",
      "return": "int",
-     "desc": "Build day of month (1-31)"
+     "desc": "Returns the day of the month when the build was configured."
     },
     {
      "name": "hour",
      "snippet": "hour()",
      "return": "int",
-     "desc": "Build hour (0-23)"
+     "desc": "Returns the hour when the build was configured."
     },
     {
      "name": "minute",
      "snippet": "minute()",
      "return": "int",
-     "desc": "Build minute (0-59)"
+     "desc": "Returns the minute when the build was configured."
     },
     {
      "name": "month",
      "snippet": "month()",
      "return": "int",
-     "desc": "Build month (1-12)"
+     "desc": "Returns the month when the build was configured."
     },
     {
      "name": "second",
      "snippet": "second()",
      "return": "int",
-     "desc": "Build second (0-59)"
+     "desc": "Returns the second when the build was configured."
     },
     {
      "name": "time",
      "snippet": "time()",
      "return": "const char *",
-     "desc": "Build time in \"HH:MM:SS\" form (local time)\n"
+     "desc": "Returns the build time."
     },
     {
      "name": "timestamp",
      "snippet": "timestamp()",
      "return": "int64_t",
-     "desc": "Build timestamp as Unix seconds (UTC)"
+     "desc": "Returns the build timestamp."
     },
     {
      "name": "year",
      "snippet": "year()",
      "return": "int",
-     "desc": "Build year (e.g. 2026)"
+     "desc": "Returns the year when the build was configured."
     }
    ]
   },
   {
    "name": "CameraContext",
-   "desc": "A snapshot of the camera (view / projection / viewport) that a part of the scene was drawn under. One is registered per camera scope (screen setup, EasyCam::begin, Fbo::begin) and stamped on each node at draw time, so mouse picking unprojects the cursor through the same camera the node was rendered with.",
+   "desc": "Stores the camera snapshot used to render part of a scene.",
    "properties": [
     {
      "name": "pickable",
      "type": "bool",
-     "desc": "Whether nodes drawn under this context can be hit-tested; false for FBO contexts."
+     "desc": "Controls whether nodes using this context participate in hit testing."
     },
     {
      "name": "projection",
      "type": "Mat4",
-     "desc": "Projection matrix this scene part was drawn under."
+     "desc": "Stores the projection matrix for this camera snapshot."
     },
     {
      "name": "view",
      "type": "Mat4",
-     "desc": "View matrix this scene part was drawn under."
+     "desc": "Stores the view matrix for this camera snapshot."
     },
     {
      "name": "viewH",
      "type": "float",
-     "desc": "Viewport height in pixels for this context."
+     "desc": "Stores the viewport height for this camera snapshot."
     },
     {
      "name": "viewW",
      "type": "float",
-     "desc": "Viewport width in pixels for this context."
+     "desc": "Stores the viewport width for this camera snapshot."
     }
    ],
    "methods": [
@@ -3870,29 +3870,29 @@ const TrussSketchAPI = {
      "name": "screenPointToRay",
      "snippet": "screenPointToRay(${1:screenX}, ${2:screenY})",
      "return": "Ray",
-     "desc": "Unproject a screen point (pixels, top-left origin) into a world-space ray."
+     "desc": "Converts a screen point into a world-space ray."
     },
     {
      "name": "worldToScreen",
      "snippet": "worldToScreen(${1:worldPos})",
      "return": "Vec3",
-     "desc": "Convert world coordinate to screen coordinate (x, y = screen pos, z = depth 0-1)"
+     "desc": "Projects a world position into screen coordinates."
     }
    ]
   },
   {
    "name": "ChipSoundBundle",
-   "desc": "A timeline of chiptune notes (ChipSoundNote + start time) that builds into a single mixed Sound. Add notes at times, then call build() to render the mix with ADSR and clipping applied.",
+   "desc": "Combines timed chiptune notes into a single sound.",
    "properties": [
     {
      "name": "entries",
      "type": "std::vector<Entry>",
-     "desc": "The scheduled notes (each Entry pairs a ChipSoundNote with its start time in seconds)"
+     "desc": "Stores the bundle's scheduled notes."
     },
     {
      "name": "volume",
      "type": "float",
-     "desc": "Master volume multiplier applied when mixing (default 1.0)"
+     "desc": "Controls the bundle's mixing volume multiplier."
     }
    ],
    "methods": [
@@ -3900,31 +3900,31 @@ const TrussSketchAPI = {
      "name": "add",
      "snippet": "add(${1:note}, ${2:time})",
      "return": "ChipSoundBundle &",
-     "desc": "Schedule a note to start at the given time (seconds). The second overload constructs the note inline from wave / frequency / duration."
+     "desc": "Adds a note to the bundle at a specified start time."
     },
     {
      "name": "build",
      "snippet": "build()",
      "return": "Sound",
-     "desc": "Render all scheduled notes into a single mixed, clipped Sound ready to play."
+     "desc": "Renders the bundle into a single mixed Sound."
     },
     {
      "name": "clear",
      "snippet": "clear()",
      "return": "ChipSoundBundle &",
-     "desc": "Remove all scheduled notes."
+     "desc": "Removes every note from the bundle."
     },
     {
      "name": "getDuration",
      "snippet": "getDuration()",
      "return": "float",
-     "desc": "Total duration in seconds, auto-computed from the last note's end."
+     "desc": "Returns the bundle's total duration."
     }
    ]
   },
   {
    "name": "ChipSoundNote",
-   "desc": "One 8-bit-style note: a plain aggregate of public fields (wave, hz, volume, duration, and the ADSR envelope attack/decay/sustain/release). Set fields directly via designated initializers ({ .wave = Wave::Square, .hz = 440, .duration = 0.2f }) or the constructor, then build() it into a Sound (or add() it to a ChipSoundBundle).",
+   "desc": "Defines one synthesized note with a waveform and ADSR envelope.",
    "constructor": {
     "snippet": "ChipSoundNote(${1:w}, ${2:freq}, ${3:dur})"
    },
@@ -3932,42 +3932,42 @@ const TrussSketchAPI = {
     {
      "name": "attack",
      "type": "float",
-     "desc": "ADSR attack time in seconds"
+     "desc": "Controls the ADSR attack time."
     },
     {
      "name": "decay",
      "type": "float",
-     "desc": "ADSR decay time in seconds"
+     "desc": "Controls the ADSR decay time."
     },
     {
      "name": "duration",
      "type": "float",
-     "desc": "Note duration in seconds"
+     "desc": "Controls the note length."
     },
     {
      "name": "hz",
      "type": "float",
-     "desc": "Frequency in Hz (ignored for Noise / Silent)"
+     "desc": "Controls the waveform frequency."
     },
     {
      "name": "release",
      "type": "float",
-     "desc": "ADSR release time in seconds"
+     "desc": "Controls the ADSR release time."
     },
     {
      "name": "sustain",
      "type": "float",
-     "desc": "ADSR sustain level (0.0-1.0)"
+     "desc": "Controls the ADSR sustain level."
     },
     {
      "name": "volume",
      "type": "float",
-     "desc": "Volume (0.0-1.0)"
+     "desc": "Controls the generated waveform amplitude."
     },
     {
      "name": "wave",
      "type": "Wave",
-     "desc": "Waveform (Sin, Square, Triangle, Sawtooth, Noise, PinkNoise, Silent)"
+     "desc": "Selects the note waveform."
     }
    ],
    "methods": [
@@ -3975,36 +3975,36 @@ const TrussSketchAPI = {
      "name": "build",
      "snippet": "build()",
      "return": "Sound",
-     "desc": "Render this note (with its ADSR envelope) into a playable Sound"
+     "desc": "Builds a playable Sound from the note."
     },
     {
      "name": "generateBuffer",
      "snippet": "generateBuffer(${1:buf})",
      "return": "void",
-     "desc": "Write this note's raw waveform (without the ADSR envelope) into buf. Used internally by build() and by ChipSoundBundle mixing."
+     "desc": "Generates the note waveform in a SoundBuffer."
     },
     {
      "name": "getTotalDuration",
      "snippet": "getTotalDuration()",
      "return": "float",
-     "desc": "Total note duration in seconds (used by ChipSoundBundle to lay out note timing)."
+     "desc": "Returns the note duration."
     }
    ]
   },
   {
    "name": "ClipboardPastedEventArgs",
-   "desc": "Arguments for clipboardPasted events; the only reliable way to read the clipboard on the Web platform",
+   "desc": "Carries text received by a clipboard paste event.",
    "properties": [
     {
      "name": "text",
      "type": "std::string",
-     "desc": "Pasted clipboard content (already read for you)"
+     "desc": "Holds the pasted clipboard text."
     }
    ]
   },
   {
    "name": "Codec",
-   "desc": "Compression codec: None (raw) or LZ4.",
+   "desc": "Selects a byte-buffer compression codec.",
    "static_methods": [
     {
      "name": "None",
@@ -4022,7 +4022,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Color",
-   "desc": "RGBA color (0.0-1.0 range)",
+   "desc": "Represents an sRGB color with alpha.",
    "constructor": {
     "snippet": "Color(${1:r}, ${2:g}, ${3:b})"
    },
@@ -4030,22 +4030,22 @@ const TrussSketchAPI = {
     {
      "name": "a",
      "type": "float",
-     "desc": "Alpha component (0.0-1.0)"
+     "desc": "The alpha component of the color."
     },
     {
      "name": "b",
      "type": "float",
-     "desc": "Blue component (0.0-1.0)"
+     "desc": "The blue component of the color."
     },
     {
      "name": "g",
      "type": "float",
-     "desc": "Green component (0.0-1.0)"
+     "desc": "The green component of the color."
     },
     {
      "name": "r",
      "type": "float",
-     "desc": "Red component (0.0-1.0)"
+     "desc": "The red component of the color."
     }
    ],
    "methods": [
@@ -4053,79 +4053,79 @@ const TrussSketchAPI = {
      "name": "clamped",
      "snippet": "clamped()",
      "return": "Color",
-     "desc": "Get clamped copy (0.0-1.0)"
+     "desc": "Returns a copy with all components clamped."
     },
     {
      "name": "lerp",
      "snippet": "lerp(${1:target}, ${2:t})",
      "return": "Color",
-     "desc": "Interpolate in OKLab space"
+     "desc": "Interpolates toward another color in OKLab space."
     },
     {
      "name": "lerpHSB",
      "snippet": "lerpHSB(${1:target}, ${2:t})",
      "return": "Color",
-     "desc": "Interpolate in HSB space"
+     "desc": "Interpolates toward another color in HSB space."
     },
     {
      "name": "lerpLinear",
      "snippet": "lerpLinear(${1:target}, ${2:t})",
      "return": "Color",
-     "desc": "Interpolate in linear RGB space"
+     "desc": "Interpolates toward another color in linear RGB space."
     },
     {
      "name": "lerpOKLCH",
      "snippet": "lerpOKLCH(${1:target}, ${2:t})",
      "return": "Color",
-     "desc": "Interpolate in OKLCH space (shortest hue path)"
+     "desc": "Interpolates toward another color in OKLCH space."
     },
     {
      "name": "lerpOKLab",
      "snippet": "lerpOKLab(${1:target}, ${2:t})",
      "return": "Color",
-     "desc": "Interpolate in OKLab space (perceptually uniform)"
+     "desc": "Interpolates toward another color in OKLab space."
     },
     {
      "name": "lerpRGB",
      "snippet": "lerpRGB(${1:target}, ${2:t})",
      "return": "Color",
-     "desc": "Interpolate in RGB space"
+     "desc": "Interpolates toward another color directly in sRGB space."
     },
     {
      "name": "set",
      "snippet": "set(${1:r}, ${2:g}, ${3:b})",
      "return": "Color &",
-     "desc": "Set color components"
+     "desc": "Sets the color components."
     },
     {
      "name": "toHSB",
      "snippet": "toHSB()",
      "return": "ColorHSB",
-     "desc": "Convert to HSB (H: 0-1, S: 0-1, B: 0-1)"
+     "desc": "Converts the color to HSB."
     },
     {
      "name": "toHex",
      "snippet": "toHex()",
      "return": "uint32_t",
-     "desc": "Convert to hex value"
+     "desc": "Converts the color to a hexadecimal RGB or RGBA value."
     },
     {
      "name": "toLinear",
      "snippet": "toLinear()",
      "return": "ColorLinear",
-     "desc": "Convert to linear RGB color space"
+     "desc": "Converts the color to linear RGB."
     },
     {
      "name": "toOKLCH",
      "snippet": "toOKLCH()",
      "return": "ColorOKLCH",
-     "desc": "Convert to OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
+     "desc": "Converts the color to OKLCH."
     },
     {
      "name": "toOKLab",
      "snippet": "toOKLab()",
      "return": "ColorOKLab",
-     "desc": "Convert to OKLab (perceptually uniform)"
+     "desc": "Converts an sRGB color to OKLab."
     }
    ],
    "static_methods": [
@@ -4133,43 +4133,43 @@ const TrussSketchAPI = {
      "name": "fromBytes",
      "snippet": "fromBytes(${1:r}, ${2:g}, ${3:b})",
      "return": "Color",
-     "desc": "Create from 0-255 values"
+     "desc": "Creates a color from integer RGBA components."
     },
     {
      "name": "fromHSB",
      "snippet": "fromHSB(${1:h}, ${2:s}, ${3:b})",
      "return": "Color",
-     "desc": "Create from HSB (H: 0-1)"
+     "desc": "Creates an sRGB color from HSB components."
     },
     {
      "name": "fromHex",
      "snippet": "fromHex(${1:hex})",
      "return": "Color",
-     "desc": "Create from hex value"
+     "desc": "Creates a color from a hexadecimal RGB or RGBA value."
     },
     {
      "name": "fromLinear",
      "snippet": "fromLinear(${1:r}, ${2:g}, ${3:b})",
      "return": "Color",
-     "desc": "Create from linear RGB"
+     "desc": "Creates an sRGB color from linear RGB components."
     },
     {
      "name": "fromOKLCH",
      "snippet": "fromOKLCH(${1:L}, ${2:C}, ${3:H})",
      "return": "Color",
-     "desc": "Create from OKLCH (L: 0-1, C: 0-0.4, H: 0-1)"
+     "desc": "Creates an sRGB color from OKLCH components."
     },
     {
      "name": "fromOKLab",
      "snippet": "fromOKLab(${1:L}, ${2:a_lab}, ${3:b_lab})",
      "return": "Color",
-     "desc": "Create from OKLab (L: 0-1, a: ~-0.4-0.4, b: ~-0.4-0.4)"
+     "desc": "Creates an sRGB color from OKLab components."
     }
    ]
   },
   {
    "name": "ColorHSB",
-   "desc": "HSB color space (H/S/B: 0-1)",
+   "desc": "Represents a color using hue, saturation, and brightness.",
    "constructor": {
     "snippet": "ColorHSB(${1:h}, ${2:s}, ${3:b})"
    },
@@ -4177,22 +4177,22 @@ const TrussSketchAPI = {
     {
      "name": "a",
      "type": "float",
-     "desc": "Alpha component (0.0-1.0)"
+     "desc": "Stores the alpha component."
     },
     {
      "name": "b",
      "type": "float",
-     "desc": "Brightness (0.0-1.0)"
+     "desc": "Stores the brightness component."
     },
     {
      "name": "h",
      "type": "float",
-     "desc": "Hue (0–1 of a turn): color data, not a rotation angle"
+     "desc": "Stores the hue component."
     },
     {
      "name": "s",
      "type": "float",
-     "desc": "Saturation (0.0-1.0)"
+     "desc": "Stores the saturation component."
     }
    ],
    "methods": [
@@ -4200,37 +4200,37 @@ const TrussSketchAPI = {
      "name": "lerp",
      "snippet": "lerp(${1:target}, ${2:t})",
      "return": "ColorHSB",
-     "desc": "Interpolate in HSB space (shortest hue path)"
+     "desc": "Interpolates between HSB colors."
     },
     {
      "name": "toLinear",
      "snippet": "toLinear()",
      "return": "ColorLinear",
-     "desc": "Convert to linear RGB color space"
+     "desc": "Converts an HSB color to linear RGB."
     },
     {
      "name": "toOKLCH",
      "snippet": "toOKLCH()",
      "return": "ColorOKLCH",
-     "desc": "Convert to OKLCH color space"
+     "desc": "Converts an HSB color to OKLCH."
     },
     {
      "name": "toOKLab",
      "snippet": "toOKLab()",
      "return": "ColorOKLab",
-     "desc": "Convert to OKLab color space"
+     "desc": "Converts an HSB color to OKLab."
     },
     {
      "name": "toRGB",
      "snippet": "toRGB()",
      "return": "Color",
-     "desc": "Convert ColorHSB to Color (RGB)"
+     "desc": "Converts an HSB color to an sRGB Color."
     }
    ]
   },
   {
    "name": "ColorLinear",
-   "desc": "A color in linear RGB space (no gamma encoding), 0.0-1.0 float per channel",
+   "desc": "Represents a color in linear RGB space.",
    "constructor": {
     "snippet": "ColorLinear(${1:r}, ${2:g}, ${3:b})"
    },
@@ -4238,22 +4238,22 @@ const TrussSketchAPI = {
     {
      "name": "a",
      "type": "float",
-     "desc": "Alpha component (0.0-1.0)"
+     "desc": "Stores the alpha component."
     },
     {
      "name": "b",
      "type": "float",
-     "desc": "Blue component (linear, 0.0-1.0)"
+     "desc": "Stores the linear blue component."
     },
     {
      "name": "g",
      "type": "float",
-     "desc": "Green component (linear, 0.0-1.0)"
+     "desc": "Stores the linear green component."
     },
     {
      "name": "r",
      "type": "float",
-     "desc": "Red component (linear, 0.0-1.0)"
+     "desc": "Stores the linear red component."
     }
    ],
    "methods": [
@@ -4261,49 +4261,49 @@ const TrussSketchAPI = {
      "name": "clamped",
      "snippet": "clamped()",
      "return": "ColorLinear",
-     "desc": "Clamp to non-negative RGB (HDR-safe) with alpha in 0-1"
+     "desc": "Returns a copy with nonnegative RGB and bounded alpha."
     },
     {
      "name": "clampedLDR",
      "snippet": "clampedLDR()",
      "return": "ColorLinear",
-     "desc": "Clamp every channel to the 0-1 LDR range"
+     "desc": "Returns a copy with every component clamped to 0–1."
     },
     {
      "name": "lerp",
      "snippet": "lerp(${1:target}, ${2:t})",
      "return": "ColorLinear",
-     "desc": "Interpolate in linear space (physically correct)"
+     "desc": "Interpolates between linear RGB colors."
     },
     {
      "name": "toHSB",
      "snippet": "toHSB()",
      "return": "ColorHSB",
-     "desc": "Convert to HSB color space"
+     "desc": "Converts a linear RGB color to HSB."
     },
     {
      "name": "toOKLCH",
      "snippet": "toOKLCH()",
      "return": "ColorOKLCH",
-     "desc": "Convert to OKLCH color space"
+     "desc": "Converts a linear RGB color to OKLCH."
     },
     {
      "name": "toOKLab",
      "snippet": "toOKLab()",
      "return": "ColorOKLab",
-     "desc": "Convert to OKLab color space"
+     "desc": "Converts a linear RGB color to OKLab."
     },
     {
      "name": "toSRGB",
      "snippet": "toSRGB()",
      "return": "Color",
-     "desc": "Convert to sRGB (gamma-encoded) Color"
+     "desc": "Converts a linear RGB color to a gamma-encoded sRGB Color."
     }
    ]
   },
   {
    "name": "ColorOKLab",
-   "desc": "A color in the OKLab perceptual color space (lightness + two opponent axes)",
+   "desc": "Represents a color in the perceptually uniform OKLab space.",
    "constructor": {
     "snippet": "ColorOKLab(${1:L}, ${2:a}, ${3:b})"
    },
@@ -4311,22 +4311,22 @@ const TrussSketchAPI = {
     {
      "name": "L",
      "type": "float",
-     "desc": "Lightness (0.0-1.0)"
+     "desc": "Stores the OKLab lightness component."
     },
     {
      "name": "a",
      "type": "float",
-     "desc": "Green-Red opponent axis (approx -0.4 to 0.4)"
+     "desc": "Stores the OKLab green–red component."
     },
     {
      "name": "alpha",
      "type": "float",
-     "desc": "Alpha component (0.0-1.0)"
+     "desc": "Stores the OKLab alpha component."
     },
     {
      "name": "b",
      "type": "float",
-     "desc": "Blue-Yellow opponent axis (approx -0.4 to 0.4)"
+     "desc": "Stores the OKLab blue–yellow component."
     }
    ],
    "methods": [
@@ -4334,37 +4334,37 @@ const TrussSketchAPI = {
      "name": "lerp",
      "snippet": "lerp(${1:target}, ${2:t})",
      "return": "ColorOKLab",
-     "desc": "Interpolate in OKLab space (perceptually uniform)"
+     "desc": "Interpolates between colors in OKLab space."
     },
     {
      "name": "toHSB",
      "snippet": "toHSB()",
      "return": "ColorHSB",
-     "desc": "Convert to HSB color space"
+     "desc": "Converts the color to HSB."
     },
     {
      "name": "toLinear",
      "snippet": "toLinear()",
      "return": "ColorLinear",
-     "desc": "Convert to linear RGB color space"
+     "desc": "Converts the color to linear RGB."
     },
     {
      "name": "toOKLCH",
      "snippet": "toOKLCH()",
      "return": "ColorOKLCH",
-     "desc": "Convert to OKLCH color space"
+     "desc": "Converts the color to OKLCH."
     },
     {
      "name": "toRGB",
      "snippet": "toRGB()",
      "return": "Color",
-     "desc": "Convert to sRGB Color"
+     "desc": "Converts the color to an sRGB Color."
     }
    ]
   },
   {
    "name": "ColorOKLCH",
-   "desc": "Perceptually uniform OKLCH color",
+   "desc": "Represents a color using perceptual lightness, chroma, and hue.",
    "constructor": {
     "snippet": "ColorOKLCH(${1:L}, ${2:C}, ${3:H})"
    },
@@ -4372,22 +4372,22 @@ const TrussSketchAPI = {
     {
      "name": "C",
      "type": "float",
-     "desc": "Chroma (0.0 - ~0.4)"
+     "desc": "Stores the OKLCH chroma component."
     },
     {
      "name": "H",
      "type": "float",
-     "desc": "Hue (0–1 of a turn): color data, not a rotation angle"
+     "desc": "Stores the OKLCH hue component."
     },
     {
      "name": "L",
      "type": "float",
-     "desc": "Lightness (0.0-1.0)"
+     "desc": "Stores the OKLCH lightness component."
     },
     {
      "name": "alpha",
      "type": "float",
-     "desc": "Alpha component (0.0-1.0)"
+     "desc": "Stores the OKLCH alpha component."
     }
    ],
    "methods": [
@@ -4395,31 +4395,31 @@ const TrussSketchAPI = {
      "name": "lerp",
      "snippet": "lerp(${1:target}, ${2:t})",
      "return": "ColorOKLCH",
-     "desc": "Interpolate in OKLCH space (shortest hue path, perceptually uniform)"
+     "desc": "Interpolates between colors in OKLCH space."
     },
     {
      "name": "toHSB",
      "snippet": "toHSB()",
      "return": "ColorHSB",
-     "desc": "Convert to HSB color space"
+     "desc": "Converts the color to HSB."
     },
     {
      "name": "toLinear",
      "snippet": "toLinear()",
      "return": "ColorLinear",
-     "desc": "Convert to linear RGB color space"
+     "desc": "Converts the color to linear RGB."
     },
     {
      "name": "toOKLab",
      "snippet": "toOKLab()",
      "return": "ColorOKLab",
-     "desc": "Convert to OKLab color space"
+     "desc": "Converts the color to OKLab."
     },
     {
      "name": "toRGB",
      "snippet": "toRGB()",
      "return": "Color",
-     "desc": "Convert ColorOKLCH to Color (RGB)"
+     "desc": "Converts the color to an sRGB Color."
     }
    ]
   },
@@ -5325,17 +5325,17 @@ const TrussSketchAPI = {
   },
   {
    "name": "ConsoleEventArgs",
-   "desc": "Arguments for the console event (a command line received from stdin)",
+   "desc": "Carries a command line received from standard input.",
    "properties": [
     {
      "name": "args",
      "type": "std::vector<std::string>",
-     "desc": "Input line split on whitespace (e.g. [\"tcdebug\", \"screenshot\", \"/tmp/a.png\"])\n"
+     "desc": "Contains the console input split into argument tokens."
     },
     {
      "name": "raw",
      "type": "std::string",
-     "desc": "Raw input line (e.g. \"tcdebug screenshot /tmp/a.png\")\n"
+     "desc": "Contains the original console input line."
     }
    ]
   },
@@ -5467,7 +5467,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Cursor",
-   "desc": "Mouse cursor shape (Default, Arrow, IBeam, Crosshair, Hand, resize cursors, …).",
+   "desc": "Selects a mouse cursor shape.",
    "static_methods": [
     {
      "name": "Default",
@@ -5635,22 +5635,22 @@ const TrussSketchAPI = {
   },
   {
    "name": "CurveStyle",
-   "desc": "Curve tessellation settings: Mode (Tolerance or Resolution), the pixel tolerance, and the fixed resolution fallback",
+   "desc": "Controls how curves are approximated by line segments.",
    "properties": [
     {
      "name": "mode",
      "type": "Mode",
-     "desc": "Tessellation mode: adaptive Tolerance or fixed Resolution"
+     "desc": "Stores the curve subdivision mode."
     },
     {
      "name": "resolution",
      "type": "int",
-     "desc": "Fixed segment count used in Resolution mode (and as a fallback)"
+     "desc": "Stores the fixed curve segment count."
     },
     {
      "name": "tolerance",
      "type": "float",
-     "desc": "Maximum chord-to-curve error in screen pixels (Tolerance mode)"
+     "desc": "Stores the screen-space error target for adaptive curve subdivision."
     }
    ]
   },
@@ -5690,7 +5690,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Direction",
-   "desc": "Alignment / direction: Left, Center, Right, Top, Bottom, Baseline.",
+   "desc": "Represents a direction or alignment position.",
    "static_methods": [
     {
      "name": "Left",
@@ -5753,7 +5753,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "EaseMode",
-   "desc": "Easing direction: In, Out, or InOut.",
+   "desc": "Selects the direction of an easing curve.",
    "static_methods": [
     {
      "name": "In",
@@ -5777,7 +5777,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "EaseType",
-   "desc": "Easing function family (Linear, Quad, Cubic, Sine, Expo, …) for tweens.",
+   "desc": "Selects an easing curve family.",
    "static_methods": [
     {
      "name": "Linear",
@@ -6026,12 +6026,12 @@ const TrussSketchAPI = {
   },
   {
    "name": "EnumLabelSpan",
-   "desc": "Label table for one enum type: a view over its human-readable enumerator names.",
+   "desc": "Provides a view of an enum's display labels.",
    "properties": [
     {
      "name": "count",
      "type": "int",
-     "desc": "Number of labels in the table."
+     "desc": "Store the number of labels in the table."
     }
    ]
   },
@@ -6203,28 +6203,28 @@ const TrussSketchAPI = {
   },
   {
    "name": "FileDialogResult",
-   "desc": "Result of a load/save file dialog",
+   "desc": "Contains the result of a file selection dialog.",
    "properties": [
     {
      "name": "fileName",
      "type": "fs::path",
-     "desc": "Filename only (no directory)"
+     "desc": "Stores the selected file or folder name."
     },
     {
      "name": "filePath",
      "type": "fs::path",
-     "desc": "Full path to the chosen file"
+     "desc": "Stores the full path selected in the dialog."
     },
     {
      "name": "success",
      "type": "bool",
-     "desc": "true if a file was chosen, false if the dialog was cancelled"
+     "desc": "Indicates whether the dialog returned a selection."
     }
    ]
   },
   {
    "name": "FileReader",
-   "desc": "Streaming file reader for large files",
+   "desc": "Reads files incrementally through an input stream.",
    "constructor": {
     "snippet": "FileReader()"
    },
@@ -6233,61 +6233,61 @@ const TrussSketchAPI = {
      "name": "close",
      "snippet": "close()",
      "return": "void",
-     "desc": "Close file"
+     "desc": "Closes the reader's file."
     },
     {
      "name": "eof",
      "snippet": "eof()",
      "return": "bool",
-     "desc": "Check if at end of file"
+     "desc": "Reports whether the reader is closed or its end-of-file flag is set."
     },
     {
      "name": "isOpen",
      "snippet": "isOpen()",
      "return": "bool",
-     "desc": "Check if file is open"
+     "desc": "Reports whether the reader has an open file."
     },
     {
      "name": "open",
      "snippet": "open(${1:path})",
      "return": "bool",
-     "desc": "Open file for reading"
+     "desc": "Opens a file for reading."
     },
     {
      "name": "readChar",
      "snippet": "readChar()",
      "return": "int",
-     "desc": "Read one character (-1 at EOF)"
+     "desc": "Reads one byte as an integer."
     },
     {
      "name": "readLine",
      "snippet": "readLine()",
      "return": "std::string",
-     "desc": "Read one line"
+     "desc": "Reads one line from the file."
     },
     {
      "name": "remaining",
      "snippet": "remaining()",
      "return": "size_t",
-     "desc": "Get remaining bytes"
+     "desc": "Calculates the bytes remaining after the current read position."
     },
     {
      "name": "seek",
      "snippet": "seek(${1:pos})",
      "return": "void",
-     "desc": "Seek to position"
+     "desc": "Moves the read position to a byte offset."
     },
     {
      "name": "tell",
      "snippet": "tell()",
      "return": "size_t",
-     "desc": "Get current position"
+     "desc": "Returns the current read position."
     }
    ]
   },
   {
    "name": "FileWriter",
-   "desc": "Streaming file writer with immediate flush",
+   "desc": "Writes files incrementally with a flush after each write.",
    "constructor": {
     "snippet": "FileWriter()"
    },
@@ -6296,43 +6296,43 @@ const TrussSketchAPI = {
      "name": "close",
      "snippet": "close()",
      "return": "void",
-     "desc": "Close file"
+     "desc": "Closes the output file."
     },
     {
      "name": "flush",
      "snippet": "flush()",
      "return": "void",
-     "desc": "Flush buffer to disk"
+     "desc": "Flushes buffered output to the file."
     },
     {
      "name": "isOpen",
      "snippet": "isOpen()",
      "return": "bool",
-     "desc": "Check if file is open"
+     "desc": "Returns whether the output file is open."
     },
     {
      "name": "open",
      "snippet": "open(${1:path})",
      "return": "SaveResult",
-     "desc": "Open file for writing (append = true appends to an existing file). Relative paths resolve via getDataPath, and a missing parent folder is created. Returns a failed SaveResult and logs an error when the folder cannot be created or the file cannot be opened. A path inside the app bundle (macOS / iOS) is refused: an error naming getUserDataPath() is logged and a failed SaveResult returned."
+     "desc": "Opens a file for writing."
     },
     {
      "name": "write",
      "snippet": "write(${1:text})",
      "return": "FileWriter &",
-     "desc": "Write data to file"
+     "desc": "Writes text, a character, or binary data to the file."
     },
     {
      "name": "writeLine",
      "snippet": "writeLine()",
      "return": "FileWriter &",
-     "desc": "Write line with newline"
+     "desc": "Writes text followed by a newline."
     }
    ]
   },
   {
    "name": "Font",
-   "desc": "TrueType font for text rendering",
+   "desc": "Provides TrueType font rendering and text layout.",
    "constructor": {
     "snippet": "Font()"
    },
@@ -6340,7 +6340,7 @@ const TrussSketchAPI = {
     {
      "name": "onLoad",
      "type": "Event<LoadResult>",
-     "desc": "LoadResult event delivered once on main after the surviving asynchronous result is applied; cancellation has no event. Retain the listener token."
+     "desc": "Notify listeners when an asynchronous font load completes."
     }
    ],
    "methods": [
@@ -6348,313 +6348,313 @@ const TrussSketchAPI = {
      "name": "clearAtlas",
      "snippet": "clearAtlas()",
      "return": "void",
-     "desc": "Clear font atlas (GPU memory freed, glyphs re-rasterized on next draw)"
+     "desc": "Clears the font's cached glyphs and atlas pages."
     },
     {
      "name": "drawString",
      "snippet": "drawString(${1:text}, ${2:x}, ${3:y})",
      "return": "void",
-     "desc": "Draw text"
+     "desc": "Draws text with the loaded font."
     },
     {
      "name": "enableWrap",
      "snippet": "enableWrap(${1:enabled})",
      "return": "void",
-     "desc": "Enable or disable line wrapping (default off)"
+     "desc": "Enables or disables automatic text wrapping."
     },
     {
      "name": "forEachGlyph",
      "snippet": "forEachGlyph(${1:text}, ${2:x}, ${3:y}, ${4:h}, ${5:v}, ${6:visitor})",
      "return": "void",
-     "desc": "Invoke a visitor once per laid-out glyph (positions follow writing mode, wrap, kinsoku, and TCY). Backend-agnostic layout pass shared by drawing, vector outlines, and hit testing"
+     "desc": "Calls a visitor for each laid-out glyph."
     },
     {
      "name": "getAlignH",
      "snippet": "getAlignH()",
      "return": "Direction",
-     "desc": "Get current horizontal text alignment"
+     "desc": "Returns the font's stored horizontal alignment."
     },
     {
      "name": "getAlignV",
      "snippet": "getAlignV()",
      "return": "Direction",
-     "desc": "Get current vertical text alignment"
+     "desc": "Returns the font's stored vertical alignment."
     },
     {
      "name": "getAscent",
      "snippet": "getAscent()",
      "return": "float",
-     "desc": "Get the font ascent (distance from baseline to top)"
+     "desc": "Returns the font's ascent above the baseline."
     },
     {
      "name": "getAtlas",
      "snippet": "getAtlas(${1:index})",
      "return": "const internal::AtlasState *",
-     "desc": "Return the atlas page at the given index for debug visualization, or nullptr if out of range. Pages are single-channel R8 textures holding glyph coverage in R, so drawing a page's view with the normal pipeline shows it in red."
+     "desc": "Returns a glyph atlas page for inspection."
     },
     {
      "name": "getAtlasCount",
      "snippet": "getAtlasCount()",
      "return": "size_t",
-     "desc": "Get number of atlas pages"
+     "desc": "Returns the number of atlas pages."
     },
     {
      "name": "getAtlasMemoryUsage",
      "snippet": "getAtlasMemoryUsage()",
      "return": "size_t",
-     "desc": "Get atlas memory usage in bytes (alias of getMemoryUsage)"
+     "desc": "Returns atlas memory usage."
     },
     {
      "name": "getBBox",
      "snippet": "getBBox(${1:text})",
      "return": "Rect",
-     "desc": "Get the bounding box of the text (top-left origin)"
+     "desc": "Returns a rectangle containing the text's measured dimensions."
     },
     {
      "name": "getDefaultLineHeight",
      "snippet": "getDefaultLineHeight()",
      "return": "float",
-     "desc": "Get the font's default line height (unaffected by setLineHeight)"
+     "desc": "Returns the font's default line height."
     },
     {
      "name": "getDescent",
      "snippet": "getDescent()",
      "return": "float",
-     "desc": "Get the font descent (distance from baseline to bottom; negative)"
+     "desc": "Returns the font's descent below the baseline."
     },
     {
      "name": "getGlyphPath",
      "snippet": "getGlyphPath(${1:codepoint})",
      "return": "Path",
-     "desc": "Vector outline of a single glyph as one Path with one subpath per contour. Em-normalized (1.0 = em), screen Y-down, baseline at y=0, pen at x=0. Use Path::drawFill() for filled rendering — holes (e, a, O, 日 ...) are auto-detected via earcut."
+     "desc": "Returns a single glyph's vector outline as a Path."
     },
     {
      "name": "getGridFit",
      "snippet": "getGridFit()",
      "return": "bool",
-     "desc": "Return whether vertical grid fit is enabled for this font."
+     "desc": "Return whether baseline grid fitting is enabled."
     },
     {
      "name": "getHangingPunctuation",
      "snippet": "getHangingPunctuation()",
      "return": "bool",
-     "desc": "Check if hanging punctuation is enabled"
+     "desc": "Returns whether hanging punctuation is enabled."
     },
     {
      "name": "getHeight",
      "snippet": "getHeight(${1:text})",
      "return": "float",
-     "desc": "Get text height"
+     "desc": "Returns the text's measured height."
     },
     {
      "name": "getKinsoku",
      "snippet": "getKinsoku()",
      "return": "KinsokuLevel",
-     "desc": "Get the current kinsoku level"
+     "desc": "Returns the current kinsoku level."
     },
     {
      "name": "getLatinHyphenation",
      "snippet": "getLatinHyphenation()",
      "return": "bool",
-     "desc": "Check if Latin hyphenation is enabled"
+     "desc": "Returns whether forced-break hyphen insertion is enabled."
     },
     {
      "name": "getLineHeight",
      "snippet": "getLineHeight()",
      "return": "float",
-     "desc": "Get line height"
+     "desc": "Returns the current line spacing."
     },
     {
      "name": "getLoadedGlyphCount",
      "snippet": "getLoadedGlyphCount()",
      "return": "size_t",
-     "desc": "Get number of loaded glyphs"
+     "desc": "Returns the number of cached glyph entries."
     },
     {
      "name": "getMaxLineLength",
      "snippet": "getMaxLineLength()",
      "return": "float",
-     "desc": "Get the current wrap length"
+     "desc": "Returns the configured wrapping limit."
     },
     {
      "name": "getMemoryUsage",
      "snippet": "getMemoryUsage()",
      "return": "size_t",
-     "desc": "Get atlas memory usage in bytes (one byte per atlas texel: width x height summed over the pages)"
+     "desc": "Returns the CPU atlas pixel storage size."
     },
     {
      "name": "getMipmaps",
      "snippet": "getMipmaps()",
      "return": "bool",
-     "desc": "Return whether the glyph atlas is allowed to build mipmaps."
+     "desc": "Return whether glyph atlas mipmaps are enabled."
     },
     {
      "name": "getOversampling",
      "snippet": "getOversampling()",
      "return": "int",
-     "desc": "Return the oversampling factor this font rasterizes with (1 = off)."
+     "desc": "Return the configured oversampling factor."
     },
     {
      "name": "getSampler",
      "snippet": "getSampler()",
      "return": "sg_sampler",
-     "desc": "Return the shared sokol-gfx sampler used for atlas rendering (advanced interop)."
+     "desc": "Returns the shared sampler for inspecting glyph atlases."
     },
     {
      "name": "getSize",
      "snippet": "getSize()",
      "return": "int",
-     "desc": "Get font size"
+     "desc": "Returns the requested font size."
     },
     {
      "name": "getStringPath",
      "snippet": "getStringPath(${1:text}, ${2:x}, ${3:y}, ${4:h}, ${5:v})",
      "return": "Path",
-     "desc": "Vector outline of the whole string at (x, y) as one Path containing every glyph's contours (one subpath each). Uses the same layout pipeline as drawString (writing mode, alignment, wrap, kinsoku, TCY). Logical pixels — drawStroke / drawFill / transform freely."
+     "desc": "Returns a string's vector outlines as one Path."
     },
     {
      "name": "getTcyDigitMax",
      "snippet": "getTcyDigitMax()",
      "return": "int",
-     "desc": "Get the maximum digit-run length that uses tate-chu-yoko combine mode"
+     "desc": "Returns the digit-run threshold for tate-chu-yoko."
     },
     {
      "name": "getTcyLatinMode",
      "snippet": "getTcyLatinMode()",
      "return": "TcyMode",
-     "desc": "Get the tate-chu-yoko mode for Latin letter runs"
+     "desc": "Returns the tate-chu-yoko mode for Latin letter runs."
     },
     {
      "name": "getWidth",
      "snippet": "getWidth(${1:text})",
      "return": "float",
-     "desc": "Get text width"
+     "desc": "Returns the text's measured width."
     },
     {
      "name": "getWritingMode",
      "snippet": "getWritingMode()",
      "return": "WritingMode",
-     "desc": "Current writing mode"
+     "desc": "Returns the current writing mode."
     },
     {
      "name": "isLoaded",
      "snippet": "isLoaded()",
      "return": "bool",
-     "desc": "Check if loaded"
+     "desc": "Returns whether the font is loaded."
     },
     {
      "name": "isLoading",
      "snippet": "isLoading()",
      "return": "bool",
-     "desc": "Whether the current asynchronous request is preparing or awaiting main-thread application; false before onLoad and after cancellation."
+     "desc": "Return whether an asynchronous font request is pending."
     },
     {
      "name": "isWrapEnabled",
      "snippet": "isWrapEnabled()",
      "return": "bool",
-     "desc": "Check if line wrapping is enabled"
+     "desc": "Returns whether automatic text wrapping is enabled."
     },
     {
      "name": "load",
      "snippet": "load(${1:nameOrPath}, ${2:size})",
      "return": "LoadResult",
-     "desc": "Load a font file or a system font name; faceIndex picks the face in a .ttc. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given. When a file in the data folder and a system font share a name, the data file wins. On Web, URL loading waits until the font is usable or fetching/decoding fails."
+     "desc": "Loads a font from a file, a system font name, or a Web URL."
     },
     {
      "name": "loadAsync",
      "snippet": "loadAsync(${1:nameOrPath}, ${2:size})",
      "return": "void",
-     "desc": "loadAsync(nameOrPath, size, faceIndex = 0): prepare owned font bytes and CPU metrics on a native worker, then publish the shared atlas and notify on main at a later frame, never inline. App exit waits for loads still decoding; cancelling never waits. Completions are delivered during an app run (runApp / runHeadlessApp); in a bare main() without one, no completion event fires."
+     "desc": "Load a font asynchronously and report completion through an event."
     },
     {
      "name": "resetLineHeight",
      "snippet": "resetLineHeight()",
      "return": "void",
-     "desc": "Reset line height to the font default"
+     "desc": "Restores the font's default line spacing."
     },
     {
      "name": "setAlign",
      "snippet": "setAlign(${1:h}, ${2:v})",
      "return": "void",
-     "desc": "Set horizontal (and optional vertical) text alignment"
+     "desc": "Stores horizontal and optional vertical alignment settings."
     },
     {
      "name": "setGridFit",
      "snippet": "setGridFit(${1:enabled})",
      "return": "Font &",
-     "desc": "Snap every baseline to a whole pixel at draw time so horizontal strokes stay sharp, at no memory cost and one rounding per line (on by default; automatically stands down when the transform is not 1:1, where rounding in model space would hurt instead)."
+     "desc": "Set whether drawn baseline offsets are rounded to whole units."
     },
     {
      "name": "setHangingPunctuation",
      "snippet": "setHangingPunctuation(${1:enabled})",
      "return": "void",
-     "desc": "Let prohibited line-start CJK punctuation hang past the line edge instead of wrapping (default off)"
+     "desc": "Controls whether prohibited line-start characters hang beyond the wrapping boundary."
     },
     {
      "name": "setKinsoku",
      "snippet": "setKinsoku(${1:level})",
      "return": "void",
-     "desc": "Choose which CJK kinsoku (line-break prohibition) table to apply during wrap"
+     "desc": "Selects the CJK line-breaking prohibition table."
     },
     {
      "name": "setLatinHyphenation",
      "snippet": "setLatinHyphenation(${1:enabled})",
      "return": "void",
-     "desc": "When wrapping a Latin run with no break point, insert '-' before the forced break (default off)"
+     "desc": "Controls hyphen insertion at forced horizontal line breaks."
     },
     {
      "name": "setLineHeight",
      "snippet": "setLineHeight(${1:pixels})",
      "return": "void",
-     "desc": "Set line height in pixels (0 = use font default)"
+     "desc": "Sets the spacing between text lines or columns."
     },
     {
      "name": "setLineHeightEm",
      "snippet": "setLineHeightEm(${1:multiplier})",
      "return": "void",
-     "desc": "Set line height as a multiple of the font default (1.0 = default, 1.5 = 1.5x)"
+     "desc": "Sets line spacing as a multiple of the font's default line height."
     },
     {
      "name": "setMaxLineLength",
      "snippet": "setMaxLineLength(${1:length})",
      "return": "void",
-     "desc": "Set the wrap length (horizontal: line width; vertical: column height)"
+     "desc": "Sets the length used for automatic text wrapping."
     },
     {
      "name": "setMipmaps",
      "snippet": "setMipmaps(${1:enabled})",
      "return": "Font &",
-     "desc": "Enable mipmapping of the glyph atlas so text stays stable when drawn much smaller than its loaded size (on by default; the chain is built lazily on the first minified draw)."
+     "desc": "Set whether the glyph atlas may generate mipmaps."
     },
     {
      "name": "setOversampling",
      "snippet": "setOversampling(${1:n})",
      "return": "Font &",
-     "desc": "Rasterize glyphs at N x N the target size and box-filter them down, trading N^2 atlas memory for sharper text under arbitrary transforms (1 = off)."
+     "desc": "Set the glyph rasterization oversampling factor."
     },
     {
      "name": "setTcyDigits",
      "snippet": "setTcyDigits(${1:maxDigits}, ${2:inMode}, ${3:overflowMode})",
      "return": "void",
-     "desc": "Tate-chu-yoko config for ASCII digit runs in vertical text. Runs with <= maxDigits use inMode (typically Combine — squeezed into one cell); longer runs fall back to overflowMode (typically Rotate)."
+     "desc": "Configures how ASCII digit runs are placed in vertical text."
     },
     {
      "name": "setTcyLatin",
      "snippet": "setTcyLatin(${1:mode})",
      "return": "void",
-     "desc": "Tate-chu-yoko mode for Latin letter runs in vertical text. Default is Rotate (whole run rotated 90 CW)."
+     "desc": "Sets how ASCII letter runs are placed in vertical text."
     },
     {
      "name": "setWritingMode",
      "snippet": "setWritingMode(${1:mode})",
      "return": "void",
-     "desc": "Switch between horizontal and vertical (tategaki) writing. Default is Horizontal (existing behavior unchanged)."
+     "desc": "Selects horizontal or vertical text layout."
     },
     {
      "name": "stringWidth",
      "snippet": "stringWidth(${1:text})",
      "return": "float",
-     "desc": "Pixel width of the text (alias of getWidth)"
+     "desc": "Returns the text width through the getWidth compatibility alias."
     }
    ],
    "static_methods": [
@@ -6662,51 +6662,51 @@ const TrussSketchAPI = {
      "name": "getDefaultOversampling",
      "snippet": "getDefaultOversampling()",
      "return": "int",
-     "desc": "Return the oversampling factor newly loaded fonts start with."
+     "desc": "Return the oversampling default for newly constructed fonts."
     },
     {
      "name": "getTotalCacheMemoryUsage",
      "snippet": "getTotalCacheMemoryUsage()",
      "return": "size_t",
-     "desc": "Total memory used by the shared font atlas cache across all fonts"
+     "desc": "Returns the shared font cache's total atlas pixel storage size."
     },
     {
      "name": "setDefaultOversampling",
      "snippet": "setDefaultOversampling(${1:n})",
      "return": "void",
-     "desc": "Set the oversampling factor newly loaded fonts start with; does not affect fonts already loaded."
+     "desc": "Set the oversampling default for newly constructed fonts."
     }
    ]
   },
   {
    "name": "FpsSettings",
-   "desc": "FPS configuration returned by getFpsSettings(). Rates use VSYNC (-1) and EVENT_DRIVEN (0) sentinels, or a fixed fps",
+   "desc": "Reports the main loop’s frame-rate configuration.",
    "properties": [
     {
      "name": "actualVsyncFps",
      "type": "float",
-     "desc": "Actual monitor refresh rate (0 if unknown)"
+     "desc": "Holds an estimate of the VSync frame rate."
     },
     {
      "name": "drawFps",
      "type": "float",
-     "desc": "Target draw rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
+     "desc": "Holds the target drawing rate."
     },
     {
      "name": "synced",
      "type": "bool",
-     "desc": "true when update and draw run in sync (1:1)"
+     "desc": "Indicates whether updates are synchronized with drawing."
     },
     {
      "name": "updateFps",
      "type": "float",
-     "desc": "Target update rate: VSYNC (-1), EVENT_DRIVEN (0), or a fixed fps"
+     "desc": "Holds the target update rate."
     }
    ]
   },
   {
    "name": "FullscreenShader",
-   "desc": "Shader specialization for fullscreen post-processing effects (position + texcoord quad). Set uniforms via setParams, then call draw to render a fullscreen quad.",
+   "desc": "Provides a shader for fullscreen post-processing effects.",
    "constructor": {
     "snippet": "FullscreenShader()"
    },
@@ -6715,137 +6715,137 @@ const TrussSketchAPI = {
      "name": "begin",
      "snippet": "begin()",
      "return": "void",
-     "desc": "Begin shader (pushes to stack)"
+     "desc": "Starts a scope for drawing with this shader."
     },
     {
      "name": "clear",
      "snippet": "clear()",
      "return": "void",
-     "desc": "Destroy the shader's GPU resources and reset it to the unloaded state."
+     "desc": "Releases this shader's GPU resources and resets its loaded state."
     },
     {
      "name": "draw",
      "snippet": "draw()",
      "return": "void",
-     "desc": "Draw a fullscreen quad with this shader applied"
+     "desc": "Draws a fullscreen quad with this shader."
     },
     {
      "name": "end",
      "snippet": "end()",
      "return": "void",
-     "desc": "End shader (pops from stack)"
+     "desc": "Ends this shader's active drawing scope."
     },
     {
      "name": "isLoaded",
      "snippet": "isLoaded()",
      "return": "bool",
-     "desc": "Check if shader is loaded"
+     "desc": "Returns whether shader loading succeeded."
     },
     {
      "name": "load",
      "snippet": "load(${1:descFn})",
      "return": "bool",
-     "desc": "Load a sokol-shdc program and capture the subclass pipeline recipe. Target-compatible pipelines are created lazily at drawing; target-specific pipeline failures are reported then."
+     "desc": "Loads a shader from a sokol-shdc descriptor function."
     },
     {
      "name": "setTexture",
      "snippet": "setTexture(${1:slot}, ${2:image}, ${3:sampler})",
      "return": "void",
-     "desc": "Bind texture to slot"
+     "desc": "Stores a texture binding for a shader slot."
     },
     {
      "name": "setUniform",
      "snippet": "setUniform(${1:slot}, ${2:value})",
      "return": "void",
-     "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
+     "desc": "Stores uniform-block data for a shader slot."
     }
    ]
   },
   {
    "name": "GrabberFrame",
-   "desc": "One captured camera frame with its capture-time timestamp: Pixels (RGBA8) plus timestampUs (monotonic steady_clock microseconds, stamped on the capture thread). Returned by VideoGrabber::getQueuedFrames(). Pixels and timestamp travel together so there is no race between reading the pixels and reading the time",
+   "desc": "Pairs a captured camera frame with its capture-time timestamp.",
    "properties": [
     {
      "name": "pixels",
      "type": "Pixels",
-     "desc": "The frame as RGBA8 Pixels (carries its own width/height). Pixels is move-only - use clone() if you need a copy"
+     "desc": "Stores the captured frame's pixels."
     },
     {
      "name": "timestampUs",
      "type": "uint64_t",
-     "desc": "Capture time in microseconds on the monotonic clock (std::chrono::steady_clock), stamped on the capture thread the moment the frame arrived from the driver. Not wall-clock time — use for interval math and cross-source sync only"
+     "desc": "Stores the captured frame's monotonic arrival timestamp."
     }
    ]
   },
   {
    "name": "GraphicsBackend",
-   "desc": "Runtime sokol_gfx backend query. Values are meaningful only after sg_setup() has completed (i.e. after the first setup() call).",
+   "desc": "Queries the active graphics backend.",
    "static_methods": [
     {
      "name": "isD3D11",
      "snippet": "isD3D11()",
      "return": "bool",
-     "desc": "True when running on Direct3D 11"
+     "desc": "Checks whether the active graphics backend is Direct3D 11."
     },
     {
      "name": "isMetal",
      "snippet": "isMetal()",
      "return": "bool",
-     "desc": "True when running on Apple Metal"
+     "desc": "Checks whether the active graphics backend is Apple Metal."
     },
     {
      "name": "isOpenGL",
      "snippet": "isOpenGL()",
      "return": "bool",
-     "desc": "True when running on OpenGL (core or GLES3)"
+     "desc": "Checks whether the active graphics backend belongs to the OpenGL family."
     },
     {
      "name": "isVulkan",
      "snippet": "isVulkan()",
      "return": "bool",
-     "desc": "True when running on Vulkan"
+     "desc": "Checks whether the active graphics backend is Vulkan."
     },
     {
      "name": "isWebGL2",
      "snippet": "isWebGL2()",
      "return": "bool",
-     "desc": "True when running on WebGL2 (GLES3 under Emscripten)"
+     "desc": "Checks whether the active graphics backend is WebGL2."
     },
     {
      "name": "isWebGPU",
      "snippet": "isWebGPU()",
      "return": "bool",
-     "desc": "True when running on WebGPU"
+     "desc": "Checks whether the active graphics backend is WebGPU."
     },
     {
      "name": "name",
      "snippet": "name()",
      "return": "const char *",
-     "desc": "Short backend name: \"opengl\" / \"gles3\" / \"webgl2\" / \"d3d11\" / \"metal\" / \"webgpu\" / \"vulkan\" / \"dummy\" / \"unknown\"\n"
+     "desc": "Returns the short name of the active graphics backend."
     }
    ]
   },
   {
    "name": "HasTexture",
-   "desc": "Base class for objects that own a texture (e.g. Image, Fbo, VideoPlayer); exposes getTexture().",
+   "desc": "Provides a common interface for objects with a texture.",
    "methods": [
     {
      "name": "draw",
      "snippet": "draw(${1:x}, ${2:y})",
      "return": "void",
-     "desc": "Draw the texture at the given position (and optional size)."
+     "desc": "Draws the texture at a specified position and optional size."
     },
     {
      "name": "getMagFilter",
      "snippet": "getMagFilter()",
      "return": "TextureFilter",
-     "desc": "Return the texture magnification filter."
+     "desc": "Returns the texture magnification filter."
     },
     {
      "name": "getMinFilter",
      "snippet": "getMinFilter()",
      "return": "TextureFilter",
-     "desc": "Return the texture minification filter."
+     "desc": "Returns the texture minification filter."
     },
     {
      "name": "getTexture",
@@ -6857,72 +6857,72 @@ const TrussSketchAPI = {
      "name": "getWrapU",
      "snippet": "getWrapU()",
      "return": "TextureWrap",
-     "desc": "Return the texture wrap mode on the U axis."
+     "desc": "Returns the texture wrap mode on the U axis."
     },
     {
      "name": "getWrapV",
      "snippet": "getWrapV()",
      "return": "TextureWrap",
-     "desc": "Return the texture wrap mode on the V axis."
+     "desc": "Returns the texture wrap mode on the V axis."
     },
     {
      "name": "hasTexture",
      "snippet": "hasTexture()",
      "return": "bool",
-     "desc": "Return true if the underlying texture is allocated."
+     "desc": "Returns whether the underlying texture is allocated."
     },
     {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "SaveResult",
-     "desc": "Save texture contents (subclasses implement saving). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
+     "desc": "Provides a virtual interface for saving texture contents."
     },
     {
      "name": "setFilter",
      "snippet": "setFilter(${1:filter})",
      "return": "void",
-     "desc": "Set both the minification and magnification filters."
+     "desc": "Sets both texture minification and magnification filters."
     },
     {
      "name": "setMagFilter",
      "snippet": "setMagFilter(${1:filter})",
      "return": "void",
-     "desc": "Set the texture magnification filter."
+     "desc": "Sets the texture magnification filter."
     },
     {
      "name": "setMinFilter",
      "snippet": "setMinFilter(${1:filter})",
      "return": "void",
-     "desc": "Set the texture minification filter."
+     "desc": "Sets the texture minification filter."
     },
     {
      "name": "setWrap",
      "snippet": "setWrap(${1:wrap})",
      "return": "void",
-     "desc": "Set the texture wrap mode on both the U and V axes."
+     "desc": "Sets texture wrapping on both the U and V axes."
     },
     {
      "name": "setWrapU",
      "snippet": "setWrapU(${1:wrap})",
      "return": "void",
-     "desc": "Set the texture wrap mode on the U (horizontal) axis."
+     "desc": "Sets texture wrapping on the horizontal U axis."
     },
     {
      "name": "setWrapV",
      "snippet": "setWrapV(${1:wrap})",
      "return": "void",
-     "desc": "Set the texture wrap mode on the V (vertical) axis."
+     "desc": "Sets texture wrapping on the vertical V axis."
     }
    ]
   },
   {
    "name": "HeadlessSettings",
-   "desc": "Settings for runHeadlessApp() (no window / graphics). Currently just the target update rate",
+   "desc": "Configures the headless application runner.",
    "properties": [
     {
      "name": "targetFps",
      "type": "float",
-     "desc": "Target update rate (default 60)"
+     "desc": "Holds the target update rate for a headless app."
     }
    ],
    "methods": [
@@ -6930,13 +6930,13 @@ const TrussSketchAPI = {
      "name": "setFps",
      "snippet": "setFps(${1:fps})",
      "return": "HeadlessSettings &",
-     "desc": "Set the target update rate (chainable)"
+     "desc": "Sets the target update rate for a headless app."
     }
    ]
   },
   {
    "name": "IesProfile",
-   "desc": "IESNA LM-63 photometric profile for angular light intensity",
+   "desc": "Stores an IESNA LM-63 angular light-intensity profile.",
    "constructor": {
     "snippet": "IesProfile()"
    },
@@ -6945,49 +6945,49 @@ const TrussSketchAPI = {
      "name": "getMaxCandela",
      "snippet": "getMaxCandela()",
      "return": "float",
-     "desc": "Get maximum candela value in the profile"
+     "desc": "Returns the stored peak candela value."
     },
     {
      "name": "getMaxVerticalAngle",
      "snippet": "getMaxVerticalAngle()",
      "return": "float",
-     "desc": "Get maximum vertical angle in the profile (radians)"
+     "desc": "Returns the stored maximum vertical angle in radians."
     },
     {
      "name": "getSampler",
      "snippet": "getSampler()",
      "return": "sg_sampler",
-     "desc": "Return the sokol-gfx sampler of the IES profile for pipeline binding (advanced interop)."
+     "desc": "Returns the profile's sokol-gfx sampler."
     },
     {
      "name": "getTextureWidth",
      "snippet": "getTextureWidth()",
      "return": "int",
-     "desc": "Get width of the generated 1D lookup texture"
+     "desc": "Returns the width of the generated lookup texture."
     },
     {
      "name": "getView",
      "snippet": "getView()",
      "return": "sg_view",
-     "desc": "Return the sokol-gfx texture view of the IES profile for pipeline binding (advanced interop)."
+     "desc": "Returns the profile's sokol-gfx texture view."
     },
     {
      "name": "isLoaded",
      "snippet": "isLoaded()",
      "return": "bool",
-     "desc": "Check if profile is loaded"
+     "desc": "Returns whether the profile is marked as loaded."
     },
     {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "bool",
-     "desc": "Load IES profile from file"
+     "desc": "Loads an IES profile from a file."
     },
     {
      "name": "loadFromString",
      "snippet": "loadFromString(${1:data})",
      "return": "bool",
-     "desc": "Load IES profile from inline string data"
+     "desc": "Loads an IES profile from string data."
     }
    ]
   },
@@ -7032,7 +7032,7 @@ const TrussSketchAPI = {
      "name": "draw",
      "snippet": "draw(${1:x}, ${2:y})",
      "return": "void",
-     "desc": "Draw the texture at the given position (and optional size)."
+     "desc": "Draws the texture at a specified position and optional size."
     },
     {
      "name": "isAllocated",
@@ -7104,7 +7104,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "ImageType",
-   "desc": "Image type: Color or Grayscale.",
+   "desc": "Defines color and grayscale image types.",
    "static_methods": [
     {
      "name": "Color",
@@ -7122,7 +7122,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "IVec2",
-   "desc": "2D integer vector (x, y)",
+   "desc": "A two-dimensional integer vector.",
    "constructor": {
     "snippet": "IVec2(${1:x}, ${2:y})"
    },
@@ -7130,12 +7130,12 @@ const TrussSketchAPI = {
     {
      "name": "x",
      "type": "int",
-     "desc": "X component"
+     "desc": "Stores the x component."
     },
     {
      "name": "y",
      "type": "int",
-     "desc": "Y component"
+     "desc": "Stores the y component."
     }
    ],
    "methods": [
@@ -7143,13 +7143,13 @@ const TrussSketchAPI = {
      "name": "toVec2",
      "snippet": "toVec2()",
      "return": "Vec2",
-     "desc": "Convert to Vec2 (float)"
+     "desc": "Converts an integer vector to a floating-point vector."
     }
    ]
   },
   {
    "name": "IVec3",
-   "desc": "3D integer vector (x, y, z)",
+   "desc": "A three-dimensional integer vector.",
    "constructor": {
     "snippet": "IVec3(${1:x}, ${2:y}, ${3:z})"
    },
@@ -7157,17 +7157,17 @@ const TrussSketchAPI = {
     {
      "name": "x",
      "type": "int",
-     "desc": "X component"
+     "desc": "Stores the x component."
     },
     {
      "name": "y",
      "type": "int",
-     "desc": "Y component"
+     "desc": "Stores the y component."
     },
     {
      "name": "z",
      "type": "int",
-     "desc": "Z component"
+     "desc": "Stores the z component."
     }
    ],
    "methods": [
@@ -7175,19 +7175,19 @@ const TrussSketchAPI = {
      "name": "toVec3",
      "snippet": "toVec3()",
      "return": "Vec3",
-     "desc": "Convert to Vec3 (float)"
+     "desc": "Converts an integer vector to a floating-point vector."
     },
     {
      "name": "xy",
      "snippet": "xy()",
      "return": "IVec2",
-     "desc": "Get XY components as IVec2"
+     "desc": "Returns the x and y components as an integer vector."
     }
    ]
   },
   {
    "name": "JsonReadReflector",
-   "desc": "Reflector backend that applies a JSON object onto reflected members through their setters.",
+   "desc": "Reads JSON values into reflected members.",
    "constructor": {
     "snippet": "JsonReadReflector(${1:src})"
    },
@@ -7195,17 +7195,17 @@ const TrussSketchAPI = {
     {
      "name": "applied",
      "type": "std::vector<std::string>",
-     "desc": "Keys that matched a member and were written."
+     "desc": "Lists member names whose JSON values were applied."
     },
     {
      "name": "readOnly",
      "type": "std::vector<std::string>",
-     "desc": "Keys that matched a read-only member and were not written."
+     "desc": "Lists member names whose writes were refused as read-only."
     },
     {
      "name": "skipped",
      "type": "std::vector<std::string>",
-     "desc": "Keys that matched a member but had the wrong JSON shape."
+     "desc": "Lists member names whose JSON values were rejected."
     }
    ],
    "methods": [
@@ -7213,70 +7213,70 @@ const TrussSketchAPI = {
      "name": "endGroup",
      "snippet": "endGroup()",
      "return": "void",
-     "desc": "Return from the nested JSON object."
+     "desc": "Returns to the parent source JSON object."
     },
     {
      "name": "isDerived",
      "snippet": "isDerived()",
      "return": "bool",
-     "desc": "Return true if the current member is a derived value (TC_DERIVED): computed from another member, writable, but not saved."
+     "desc": "Reports whether reflection is in a derived-value scope."
     },
     {
      "name": "isReadOnly",
      "snippet": "isReadOnly()",
      "return": "bool",
-     "desc": "Return true if the current reflection scope is read-only."
+     "desc": "Reports whether the current reflection scope is read-only."
     },
     {
      "name": "popDerived",
      "snippet": "popDerived()",
      "return": "void",
-     "desc": "Leave the current derived-value scope."
+     "desc": "Leaves a derived-value reflection scope."
     },
     {
      "name": "popReadOnly",
      "snippet": "popReadOnly()",
      "return": "void",
-     "desc": "Leave the current read-only scope."
+     "desc": "Leaves a read-only reflection scope."
     },
     {
      "name": "pushDerived",
      "snippet": "pushDerived()",
      "return": "void",
-     "desc": "Enter a derived-value scope (TC_DERIVED visits inside it)."
+     "desc": "Enters a derived-value reflection scope."
     },
     {
      "name": "pushReadOnly",
      "snippet": "pushReadOnly()",
      "return": "void",
-     "desc": "Enter a read-only scope (members visited inside cannot be written)."
+     "desc": "Enters a read-only reflection scope."
     },
     {
      "name": "unknownKeys",
      "snippet": "unknownKeys()",
      "return": "std::vector<std::string>",
-     "desc": "Return the source keys that matched no reflected member (typos etc.); valid after reflectMembers runs."
+     "desc": "Returns unrecognized keys from the source JSON object."
     }
    ]
   },
   {
    "name": "JsonWriteReflector",
-   "desc": "Reflector backend that writes reflected members into a JSON object.",
+   "desc": "Writes reflected values into a JSON object.",
    "properties": [
     {
      "name": "derived",
      "type": "std::vector<std::string>",
-     "desc": "Member paths of the derived values encountered (nested groups joined by '.'), whether or not they were written."
+     "desc": "Records the member paths of encountered derived values."
     },
     {
      "name": "includeDerived",
      "type": "bool",
-     "desc": "When true, derived values (TC_DERIVED, e.g. Node's globalPos) are written too; false (default) leaves them out, as a save should."
+     "desc": "Controls whether derived values are included in JSON output."
     },
     {
      "name": "members",
      "type": "Json",
-     "desc": "The accumulated JSON object built from visited members."
+     "desc": "Holds the JSON object built from visited members."
     }
    ],
    "methods": [
@@ -7284,43 +7284,43 @@ const TrussSketchAPI = {
      "name": "endGroup",
      "snippet": "endGroup()",
      "return": "void",
-     "desc": "Close the current nested JSON object."
+     "desc": "Closes the current nested JSON object."
     },
     {
      "name": "isDerived",
      "snippet": "isDerived()",
      "return": "bool",
-     "desc": "Return true if the current member is a derived value (TC_DERIVED): computed from another member, writable, but not saved."
+     "desc": "Reports whether reflection is in a derived-value scope."
     },
     {
      "name": "isReadOnly",
      "snippet": "isReadOnly()",
      "return": "bool",
-     "desc": "Return true if the current reflection scope is read-only."
+     "desc": "Reports whether the current reflection scope is read-only."
     },
     {
      "name": "popDerived",
      "snippet": "popDerived()",
      "return": "void",
-     "desc": "Leave the current derived-value scope."
+     "desc": "Leaves a derived-value reflection scope."
     },
     {
      "name": "popReadOnly",
      "snippet": "popReadOnly()",
      "return": "void",
-     "desc": "Leave the current read-only scope."
+     "desc": "Leaves a read-only reflection scope."
     },
     {
      "name": "pushDerived",
      "snippet": "pushDerived()",
      "return": "void",
-     "desc": "Enter a derived-value scope (TC_DERIVED visits inside it)."
+     "desc": "Enters a derived-value reflection scope."
     },
     {
      "name": "pushReadOnly",
      "snippet": "pushReadOnly()",
      "return": "void",
-     "desc": "Enter a read-only scope (members visited inside cannot be written)."
+     "desc": "Enters a read-only reflection scope."
     }
    ]
   },
@@ -7367,7 +7367,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "KinsokuLevel",
-   "desc": "Line-breaking (kinsoku) strictness for vertical / Japanese text",
+   "desc": "Selects Japanese line-breaking restrictions for text wrapping.",
    "static_methods": [
     {
      "name": "Off",
@@ -7391,7 +7391,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "LayoutDirection",
-   "desc": "Layout axis direction: Vertical or Horizontal.",
+   "desc": "Selects the stacking axis for child layout.",
    "static_methods": [
     {
      "name": "Vertical",
@@ -7409,7 +7409,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "LayoutMod",
-   "desc": "Layout modifier (Mod) that auto-arranges child RectNodes in a vertical or horizontal stack with spacing, padding and axis sizing",
+   "desc": "A Mod that arranges child RectNodes in a vertical or horizontal stack.",
    "constructor": {
     "snippet": "LayoutMod()"
    },
@@ -7418,121 +7418,121 @@ const TrussSketchAPI = {
      "name": "getCrossAxis",
      "snippet": "getCrossAxis()",
      "return": "AxisMode",
-     "desc": "Get the cross-axis sizing mode (LayoutMod method) (C++ only)"
+     "desc": "Returns the cross-axis sizing mode."
     },
     {
      "name": "getDirection",
      "snippet": "getDirection()",
      "return": "LayoutDirection",
-     "desc": "Get the layout direction (Vertical/Horizontal) (LayoutMod method) (C++ only)"
+     "desc": "Returns the layout direction."
     },
     {
      "name": "getMainAxis",
      "snippet": "getMainAxis()",
      "return": "AxisMode",
-     "desc": "Get the main-axis sizing mode (LayoutMod method) (C++ only)"
+     "desc": "Returns the main-axis sizing mode."
     },
     {
      "name": "getOwner",
      "snippet": "getOwner()",
      "return": "Node *",
-     "desc": "Get the owner Node this Mod is attached to."
+     "desc": "Returns the node that owns this Mod."
     },
     {
      "name": "getPaddingBottom",
      "snippet": "getPaddingBottom()",
      "return": "float",
-     "desc": "Get the bottom padding (LayoutMod method) (C++ only)"
+     "desc": "Returns the bottom padding."
     },
     {
      "name": "getPaddingLeft",
      "snippet": "getPaddingLeft()",
      "return": "float",
-     "desc": "Get the left padding (LayoutMod method) (C++ only)"
+     "desc": "Returns the left padding."
     },
     {
      "name": "getPaddingRight",
      "snippet": "getPaddingRight()",
      "return": "float",
-     "desc": "Get the right padding (LayoutMod method) (C++ only)"
+     "desc": "Returns the right padding."
     },
     {
      "name": "getPaddingTop",
      "snippet": "getPaddingTop()",
      "return": "float",
-     "desc": "Get the top padding (LayoutMod method) (C++ only)"
+     "desc": "Returns the top padding."
     },
     {
      "name": "getSpacing",
      "snippet": "getSpacing()",
      "return": "float",
-     "desc": "Get the spacing between children (LayoutMod method) (C++ only)"
+     "desc": "Returns the spacing between children."
     },
     {
      "name": "setCrossAxis",
      "snippet": "setCrossAxis(${1:mode})",
      "return": "LayoutMod &",
-     "desc": "Set the cross-axis sizing mode and re-layout (LayoutMod method) (C++ only)"
+     "desc": "Sets the cross-axis sizing mode."
     },
     {
      "name": "setDirection",
      "snippet": "setDirection(${1:dir})",
      "return": "LayoutMod &",
-     "desc": "Set the layout direction and re-layout (LayoutMod method) (C++ only)"
+     "desc": "Sets the layout direction."
     },
     {
      "name": "setMainAxis",
      "snippet": "setMainAxis(${1:mode})",
      "return": "LayoutMod &",
-     "desc": "Set the main-axis sizing mode and re-layout (LayoutMod method) (C++ only)"
+     "desc": "Sets the main-axis sizing mode."
     },
     {
      "name": "setPadding",
      "snippet": "setPadding(${1:padding})",
      "return": "LayoutMod &",
-     "desc": "Set padding (uniform, vertical/horizontal, or per-side) and re-layout (LayoutMod method) (C++ only)"
+     "desc": "Sets padding around the children."
     },
     {
      "name": "setPaddingBottom",
      "snippet": "setPaddingBottom(${1:v})",
      "return": "LayoutMod &",
-     "desc": "Set the bottom padding and re-layout (LayoutMod method) (C++ only)"
+     "desc": "Sets the bottom padding."
     },
     {
      "name": "setPaddingLeft",
      "snippet": "setPaddingLeft(${1:v})",
      "return": "LayoutMod &",
-     "desc": "Set the left padding and re-layout (LayoutMod method) (C++ only)"
+     "desc": "Sets the left padding."
     },
     {
      "name": "setPaddingRight",
      "snippet": "setPaddingRight(${1:v})",
      "return": "LayoutMod &",
-     "desc": "Set the right padding and re-layout (LayoutMod method) (C++ only)"
+     "desc": "Sets the right padding."
     },
     {
      "name": "setPaddingTop",
      "snippet": "setPaddingTop(${1:v})",
      "return": "LayoutMod &",
-     "desc": "Set the top padding and re-layout (LayoutMod method) (C++ only)"
+     "desc": "Sets the top padding."
     },
     {
      "name": "setSpacing",
      "snippet": "setSpacing(${1:spacing})",
      "return": "LayoutMod &",
-     "desc": "Set the spacing between children and re-layout (LayoutMod method) (C++ only)"
+     "desc": "Sets the spacing between children."
     },
     {
      "name": "updateLayout",
      "snippet": "updateLayout()",
      "return": "void",
-     "desc": "Recalculate layout (call after adding/removing children) (C++ only)"
+     "desc": "Recalculates the child layout."
     }
    ]
   },
   {
    "name": "Light",
-   "desc": "Light source for 3D PBR rendering (directional, point, or spot)",
+   "desc": "Defines a directional, point, or spot light for 3D rendering.",
    "constructor": {
     "snippet": "Light()"
    },
@@ -7541,307 +7541,307 @@ const TrussSketchAPI = {
      "name": "setDirectional",
      "snippet": "setDirectional(${1:direction})",
      "return": "void",
-     "desc": "Set as directional light"
+     "desc": "Configures the light as a directional light."
     },
     {
      "name": "setPoint",
      "snippet": "setPoint(${1:position})",
      "return": "void",
-     "desc": "Set as point light"
+     "desc": "Configures the light as a point light."
     },
     {
      "name": "setSpot",
      "snippet": "setSpot(${1:position}, ${2:direction})",
      "return": "void",
-     "desc": "Set as spot light with cone angles"
+     "desc": "Configures the light as a spot light."
     },
     {
      "name": "getSpotInnerCos",
      "snippet": "getSpotInnerCos()",
      "return": "float",
-     "desc": "Get spot light inner cone cosine"
+     "desc": "Returns the cosine of the spot light's inner half-angle."
     },
     {
      "name": "getSpotOuterCos",
      "snippet": "getSpotOuterCos()",
      "return": "float",
-     "desc": "Get spot light outer cone cosine"
+     "desc": "Returns the cosine of the spot light's outer half-angle."
     },
     {
      "name": "setProjectionTexture",
      "snippet": "setProjectionTexture()",
      "return": "",
-     "desc": "Set texture for projector-style light (gobo) (currently one projector slot: only the first registered Spot light with a texture projects it; further ones light as plain spots and log a one-time warning)"
+     "desc": "Attaches a texture for projector-style lighting."
     },
     {
      "name": "getProjectionTexture",
      "snippet": "getProjectionTexture()",
      "return": "const Texture *",
-     "desc": "Get projection texture (gobo)"
+     "desc": "Returns the projection texture."
     },
     {
      "name": "hasProjectionTexture",
      "snippet": "hasProjectionTexture()",
      "return": "bool",
-     "desc": "Check if a projection texture is set"
+     "desc": "Reports whether a projection texture pointer is attached."
     },
     {
      "name": "setLensShift",
      "snippet": "setLensShift(${1:sx}, ${2:sy})",
      "return": "void",
-     "desc": "Set projector lens shift (-1 to 1, normalized)"
+     "desc": "Sets the projector lens shift."
     },
     {
      "name": "getLensShiftX",
      "snippet": "getLensShiftX()",
      "return": "float",
-     "desc": "Get projector horizontal lens shift"
+     "desc": "Returns the projector's horizontal lens shift."
     },
     {
      "name": "getLensShiftY",
      "snippet": "getLensShiftY()",
      "return": "float",
-     "desc": "Get projector vertical lens shift"
+     "desc": "Returns the projector's vertical lens shift."
     },
     {
      "name": "setProjectorAspect",
      "snippet": "setProjectorAspect(${1:a})",
      "return": "void",
-     "desc": "Set projector aspect ratio"
+     "desc": "Sets the projector aspect ratio."
     },
     {
      "name": "getProjectorAspect",
      "snippet": "getProjectorAspect()",
      "return": "float",
-     "desc": "Get projector aspect ratio"
+     "desc": "Returns the projector aspect ratio."
     },
     {
      "name": "computeProjectorViewProj",
      "snippet": "computeProjectorViewProj()",
      "return": "Mat4",
-     "desc": "Build the projector's view-projection matrix from spot params and lens shift"
+     "desc": "Builds the projector's view-projection matrix."
     },
     {
      "name": "setIesProfile",
      "snippet": "setIesProfile()",
      "return": "",
-     "desc": "Attach IES photometric profile for angular intensity (currently one IES slot: only the first registered light with a profile uses it; further ones log a one-time warning)"
+     "desc": "Attaches an IES angular intensity profile."
     },
     {
      "name": "getIesProfile",
      "snippet": "getIesProfile()",
      "return": "const IesProfile *",
-     "desc": "Get attached IES photometric profile"
+     "desc": "Returns the attached IES photometric profile."
     },
     {
      "name": "hasIesProfile",
      "snippet": "hasIesProfile()",
      "return": "bool",
-     "desc": "Check if an IES profile is attached"
+     "desc": "Reports whether an IES profile pointer is attached."
     },
     {
      "name": "enableShadow",
      "snippet": "enableShadow()",
      "return": "void",
-     "desc": "Enable shadow casting (depth map at given resolution; up to 4 shadow lights per frame)"
+     "desc": "Enables the shadow flag and sets the requested shadow-map resolution."
     },
     {
      "name": "disableShadow",
      "snippet": "disableShadow()",
      "return": "void",
-     "desc": "Disable shadow casting"
+     "desc": "Disables this light's shadow flag."
     },
     {
      "name": "isShadowEnabled",
      "snippet": "isShadowEnabled()",
      "return": "bool",
-     "desc": "Check if shadow casting is enabled"
+     "desc": "Returns the light's shadow enabled flag."
     },
     {
      "name": "getShadowResolution",
      "snippet": "getShadowResolution()",
      "return": "int",
-     "desc": "Get shadow map resolution"
+     "desc": "Returns the requested shadow-map resolution."
     },
     {
      "name": "setShadowBias",
      "snippet": "setShadowBias(${1:bias})",
      "return": "void",
-     "desc": "Set shadow depth bias in world units"
+     "desc": "Sets the shadow depth bias."
     },
     {
      "name": "getShadowBias",
      "snippet": "getShadowBias()",
      "return": "float",
-     "desc": "Get shadow depth bias"
+     "desc": "Returns the shadow depth bias."
     },
     {
      "name": "setShadowSoftness",
      "snippet": "setShadowSoftness(${1:size})",
      "return": "Light &",
-     "desc": "Set shadow softness as the light's emitter size in world units (0 = hard, default); drives PCSS penumbra"
+     "desc": "Sets the light's effective emitter size for soft shadows."
     },
     {
      "name": "getShadowSoftness",
      "snippet": "getShadowSoftness()",
      "return": "float",
-     "desc": "Get shadow softness (emitter size in world units)"
+     "desc": "Returns the shadow softness parameter."
     },
     {
      "name": "setShadowSamples",
      "snippet": "setShadowSamples(${1:taps})",
      "return": "Light &",
-     "desc": "Set the PCSS PCF tap count (clamped 1-36, default 16); only affects soft shadows (softness > 0)"
+     "desc": "Sets the soft-shadow filter sample count."
     },
     {
      "name": "getShadowSamples",
      "snippet": "getShadowSamples()",
      "return": "int",
-     "desc": "Get PCSS PCF tap count"
+     "desc": "Returns the soft-shadow PCF sample count."
     },
     {
      "name": "setShadowArea",
      "snippet": "setShadowArea(${1:center}, ${2:radius})",
      "return": "Light &",
-     "desc": "Set the orthographic shadow volume (center + radius) for a directional light (default radius 500)"
+     "desc": "Sets the directional light's shadow volume."
     },
     {
      "name": "getShadowAreaCenter",
      "snippet": "getShadowAreaCenter()",
      "return": "const Vec3 &",
-     "desc": "Get directional shadow volume center"
+     "desc": "Returns the directional shadow volume's center."
     },
     {
      "name": "getShadowAreaRadius",
      "snippet": "getShadowAreaRadius()",
      "return": "float",
-     "desc": "Get directional shadow volume radius (half-extent)"
+     "desc": "Returns the directional shadow volume's half-extent."
     },
     {
      "name": "computeShadowViewProj",
      "snippet": "computeShadowViewProj()",
      "return": "Mat4",
-     "desc": "Build the light's view-projection matrix for rendering + sampling the shadow map (spot: projector frustum; directional: orthographic box)"
+     "desc": "Builds the view-projection matrix for shadow rendering and sampling."
     },
     {
      "name": "getType",
      "snippet": "getType()",
      "return": "LightType",
-     "desc": "Get light type (Directional, Point, or Spot)"
+     "desc": "Returns the light type."
     },
     {
      "name": "getDirection",
      "snippet": "getDirection()",
      "return": "const Vec3 &",
-     "desc": "Get light direction"
+     "desc": "Returns the light's travel direction."
     },
     {
      "name": "getPosition",
      "snippet": "getPosition()",
      "return": "const Vec3 &",
-     "desc": "Get light position"
+     "desc": "Returns the light's position."
     },
     {
      "name": "setAmbient",
      "snippet": "setAmbient(${1:c})",
      "return": "void",
-     "desc": "Set ambient light color"
+     "desc": "Sets the ambient light color."
     },
     {
      "name": "setDiffuse",
      "snippet": "setDiffuse(${1:c})",
      "return": "void",
-     "desc": "Set diffuse (main) light color"
+     "desc": "Sets the main light color."
     },
     {
      "name": "setSpecular",
      "snippet": "setSpecular(${1:c})",
      "return": "void",
-     "desc": "Set specular light color"
+     "desc": "Sets the specular light color."
     },
     {
      "name": "getAmbient",
      "snippet": "getAmbient()",
      "return": "const Color &",
-     "desc": "Get ambient light color"
+     "desc": "Returns the ambient light color."
     },
     {
      "name": "getDiffuse",
      "snippet": "getDiffuse()",
      "return": "const Color &",
-     "desc": "Get diffuse (main) light color"
+     "desc": "Returns the diffuse light color."
     },
     {
      "name": "getSpecular",
      "snippet": "getSpecular()",
      "return": "const Color &",
-     "desc": "Get specular light color"
+     "desc": "Returns the specular light color."
     },
     {
      "name": "getIntensity",
      "snippet": "getIntensity()",
      "return": "float",
-     "desc": "Get light intensity"
+     "desc": "Returns the light intensity."
     },
     {
      "name": "setIntensity",
      "snippet": "setIntensity(${1:i})",
      "return": "void",
-     "desc": "Set light intensity multiplier"
+     "desc": "Sets the light intensity multiplier."
     },
     {
      "name": "setAttenuation",
      "snippet": "setAttenuation(${1:constant}, ${2:linear}, ${3:quadratic})",
      "return": "void",
-     "desc": "Set distance attenuation factors"
+     "desc": "Sets the distance attenuation coefficients."
     },
     {
      "name": "getConstantAttenuation",
      "snippet": "getConstantAttenuation()",
      "return": "float",
-     "desc": "Get constant attenuation factor"
+     "desc": "Returns the constant attenuation coefficient."
     },
     {
      "name": "getLinearAttenuation",
      "snippet": "getLinearAttenuation()",
      "return": "float",
-     "desc": "Get linear attenuation factor"
+     "desc": "Returns the linear attenuation coefficient."
     },
     {
      "name": "getQuadraticAttenuation",
      "snippet": "getQuadraticAttenuation()",
      "return": "float",
-     "desc": "Get quadratic attenuation factor"
+     "desc": "Returns the quadratic attenuation coefficient."
     },
     {
      "name": "enable",
      "snippet": "enable()",
      "return": "void",
-     "desc": "Enable this light"
+     "desc": "Enables this light."
     },
     {
      "name": "disable",
      "snippet": "disable()",
      "return": "void",
-     "desc": "Disable this light"
+     "desc": "Disables this light."
     },
     {
      "name": "isEnabled",
      "snippet": "isEnabled()",
      "return": "bool",
-     "desc": "Check if light is enabled"
+     "desc": "Returns the light's enabled flag."
     },
     {
      "name": "calculate",
      "snippet": "calculate(${1:worldPos}, ${2:worldNormal}, ${3:material}, ${4:viewPos})",
      "return": "Color",
-     "desc": "Compute the CPU Phong lighting contribution at a world position/normal for a material"
+     "desc": "Calculates this light's CPU Phong lighting contribution."
     }
    ]
   },
   {
    "name": "LightType",
-   "desc": "Light type: Directional, Point, or Spot.",
+   "desc": "Identifies a directional, point, or spot light.",
    "static_methods": [
     {
      "name": "Directional",
@@ -7865,7 +7865,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "LoadError",
-   "desc": "Load failure kind: None, FileNotFound, UnsupportedFormat, DecodeFailed, Unknown, TooLarge, Cancelled.",
+   "desc": "Identifies a resource-loading error.",
    "static_methods": [
     {
      "name": "None",
@@ -7913,17 +7913,17 @@ const TrussSketchAPI = {
   },
   {
    "name": "LoadResult",
-   "desc": "Result of a resource load (Image, SoundBuffer, VideoPlayer, Font, ...). Truthy on success; on failure carries a LoadError and a human-readable message.",
+   "desc": "Represents the result of loading a resource.",
    "properties": [
     {
      "name": "error",
      "type": "LoadError",
-     "desc": "What went wrong; LoadError::None on success"
+     "desc": "Stores the load error category."
     },
     {
      "name": "message",
      "type": "std::string",
-     "desc": "Human-readable failure detail (may be empty)"
+     "desc": "Stores a human-readable load message."
     }
    ],
    "methods": [
@@ -7931,7 +7931,7 @@ const TrussSketchAPI = {
      "name": "ok",
      "snippet": "ok()",
      "return": "bool",
-     "desc": "true if the load succeeded (error == LoadError::None)"
+     "desc": "Reports whether the load result indicates success."
     }
    ],
    "static_methods": [
@@ -7939,45 +7939,45 @@ const TrussSketchAPI = {
      "name": "fail",
      "snippet": "fail(${1:e})",
      "return": "LoadResult",
-     "desc": "Make a failure result with an error kind and optional message (static)"
+     "desc": "Creates a load result from an error and optional message."
     },
     {
      "name": "success",
      "snippet": "success()",
      "return": "LoadResult",
-     "desc": "Make a success result (static)"
+     "desc": "Creates a successful load result."
     }
    ]
   },
   {
    "name": "Location",
-   "desc": "GPS / WiFi location fix returned by getLocation()",
+   "desc": "Holds location data returned by `getLocation()`.",
    "properties": [
     {
      "name": "accuracy",
      "type": "float",
-     "desc": "Horizontal accuracy in meters; -1 if not available yet"
+     "desc": "Represents the horizontal accuracy of a location fix."
     },
     {
      "name": "altitude",
      "type": "double",
-     "desc": "Altitude in meters"
+     "desc": "Represents the altitude of a location fix."
     },
     {
      "name": "latitude",
      "type": "double",
-     "desc": "Latitude in degrees"
+     "desc": "Represents the latitude of a location fix."
     },
     {
      "name": "longitude",
      "type": "double",
-     "desc": "Longitude in degrees"
+     "desc": "Represents the longitude of a location fix."
     }
    ]
   },
   {
    "name": "LogEventArgs",
-   "desc": "Arguments delivered for each log message (level, text, and timestamp)",
+   "desc": "Carries the severity, message and timestamp of a log event.",
    "constructor": {
     "snippet": "LogEventArgs(${1:lvl}, ${2:msg})"
    },
@@ -7985,23 +7985,23 @@ const TrussSketchAPI = {
     {
      "name": "level",
      "type": "LogLevel",
-     "desc": "Severity of the log message"
+     "desc": "Stores the log message's severity."
     },
     {
      "name": "message",
      "type": "std::string",
-     "desc": "The log message text"
+     "desc": "Stores the log message text."
     },
     {
      "name": "timestamp",
      "type": "std::string",
-     "desc": "Timestamp string (HH:MM:SS.mmm) generated when the message was logged"
+     "desc": "Stores the log event's formatted creation time."
     }
    ]
   },
   {
    "name": "Logger",
-   "desc": "Logging core with console, file and system (OS log) output, each with its own level, and an onLog event; access the global instance via getLogger()",
+   "desc": "Routes log messages to console, file and system outputs and an event.",
    "constructor": {
     "snippet": "Logger()"
    },
@@ -8009,7 +8009,7 @@ const TrussSketchAPI = {
     {
      "name": "onLog",
      "type": "Event<LogEventArgs>",
-     "desc": "Event fired for every log message; listen to it to route logs (console/file/custom sink)"
+     "desc": "Notifies listeners of log messages."
     }
    ],
    "methods": [
@@ -8017,79 +8017,79 @@ const TrussSketchAPI = {
      "name": "closeFile",
      "snippet": "closeFile()",
      "return": "void",
-     "desc": "Close the current log file"
+     "desc": "Closes the current log file."
     },
     {
      "name": "getConsoleLogLevel",
      "snippet": "getConsoleLogLevel()",
      "return": "LogLevel",
-     "desc": "Get the current console log level"
+     "desc": "Returns the current console log level."
     },
     {
      "name": "getFileLogLevel",
      "snippet": "getFileLogLevel()",
      "return": "LogLevel",
-     "desc": "Get the current file log level"
+     "desc": "Returns the current file log level."
     },
     {
      "name": "getLogFilePath",
      "snippet": "getLogFilePath()",
      "return": "std::string",
-     "desc": "Get the path of the current log file, as setLogFile resolved it (UTF-8; empty when no file is open). On Windows, unpaired UTF-16 surrogates are replaced with U+FFFD for display"
+     "desc": "Returns the path of the current log file."
     },
     {
      "name": "getSystemLogLevel",
      "snippet": "getSystemLogLevel()",
      "return": "LogLevel",
-     "desc": "Get the current system (OS log) level"
+     "desc": "Returns the current system log level."
     },
     {
      "name": "isFileOpen",
      "snippet": "isFileOpen()",
      "return": "bool",
-     "desc": "Check whether a log file is currently open"
+     "desc": "Reports whether a log file is open."
     },
     {
      "name": "log",
      "snippet": "log(${1:level}, ${2:message})",
      "return": "void",
-     "desc": "Emit a log message at the given level"
+     "desc": "Emits a log message at the specified level."
     },
     {
      "name": "setConsoleLogLevel",
      "snippet": "setConsoleLogLevel(${1:level})",
      "return": "void",
-     "desc": "Set the minimum console log level"
+     "desc": "Sets the minimum console log level."
     },
     {
      "name": "setFileLogLevel",
      "snippet": "setFileLogLevel(${1:level})",
      "return": "void",
-     "desc": "Set the minimum file log level"
+     "desc": "Sets the minimum file log level."
     },
     {
      "name": "setLogFile",
      "snippet": "setLogFile(${1:path})",
      "return": "SaveResult",
-     "desc": "Open a file to receive log output (append mode). A relative path resolves against the data folder (getDataPath), and a missing parent folder is created. On failure it logs an error and returns a failed SaveResult, and the current log file stays open (the error line lands in it). After a successful call, getLogFilePath() returns the resolved path"
+     "desc": "Opens a file for log output."
     },
     {
      "name": "setLogLevel",
      "snippet": "setLogLevel(${1:level})",
      "return": "void",
-     "desc": "Set the console, file and system log levels at once (a later per-output call wins)"
+     "desc": "Sets all three output log levels."
     },
     {
      "name": "setSystemLogLevel",
      "snippet": "setSystemLogLevel(${1:level})",
      "return": "void",
-     "desc": "Set the minimum system (OS log) level: os_log on macOS, OutputDebugStringW on Windows"
+     "desc": "Sets the minimum system log level."
     }
    ]
   },
   {
    "name": "LogLevel",
-   "desc": "Log severity, from Verbose (most detailed) to Fatal. Each output (console, file, system) shows lines at its own level and above; Silent as an output's level turns that output off.",
+   "desc": "Specifies log severity and output filtering thresholds.",
    "static_methods": [
     {
      "name": "Verbose",
@@ -8131,14 +8131,14 @@ const TrussSketchAPI = {
   },
   {
    "name": "LogStream",
-   "desc": "Stream-based log output — the object returned by logNotice() / logWarning() / logError(), accepting values via operator<<.",
+   "desc": "Builds a log message through stream insertion.",
    "constructor": {
     "snippet": "LogStream(${1:level})"
    }
   },
   {
    "name": "Mat3",
-   "desc": "3x3 matrix for 2D affine / homography transforms (row-major). Includes static factories and a homography solver",
+   "desc": "A 3×3 matrix for two-dimensional affine and projective transformations.",
    "constructor": {
     "snippet": "Mat3(${1:m00}, ${2:m01}, ${3:m02}, ${4:m10}, ${5:m11}, ${6:m12}, ${7:m20}, ${8:m21}, ${9:m22})"
    },
@@ -8147,31 +8147,31 @@ const TrussSketchAPI = {
      "name": "at",
      "snippet": "at(${1:row}, ${2:col})",
      "return": "float &",
-     "desc": "Access the element at (row, col)"
+     "desc": "Returns a reference to a matrix element."
     },
     {
      "name": "set",
      "snippet": "set(${1:row}, ${2:col})",
      "return": "float &",
-     "desc": "Access the element at (row, col)"
+     "desc": "Returns a reference to a matrix element."
     },
     {
      "name": "determinant",
      "snippet": "determinant()",
      "return": "float",
-     "desc": "Compute the determinant"
+     "desc": "Returns the determinant of the matrix."
     },
     {
      "name": "transposed",
      "snippet": "transposed()",
      "return": "Mat3",
-     "desc": "Return the transpose of this matrix"
+     "desc": "Returns the transpose of the matrix."
     },
     {
      "name": "inverted",
      "snippet": "inverted()",
      "return": "Mat3",
-     "desc": "Return the inverse matrix (identity if singular)"
+     "desc": "Returns the inverse of the matrix."
     }
    ],
    "static_methods": [
@@ -8179,37 +8179,37 @@ const TrussSketchAPI = {
      "name": "identity",
      "snippet": "identity()",
      "return": "Mat3",
-     "desc": "Return the identity matrix"
+     "desc": "Returns the identity matrix."
     },
     {
      "name": "getHomography",
      "snippet": "getHomography()",
      "return": "",
-     "desc": "Compute the homography matrix mapping 4 source points to 4 destination points (solves H * src = dst)"
+     "desc": "Computes a homography matrix from four pairs of points."
     },
     {
      "name": "translate",
      "snippet": "translate(${1:tx}, ${2:ty})",
      "return": "Mat3",
-     "desc": "Build a 2D translation matrix"
+     "desc": "Creates a 2D translation matrix."
     },
     {
      "name": "rotate",
      "snippet": "rotate(${1:radians})",
      "return": "Mat3",
-     "desc": "Build a 2D rotation matrix (radians)"
+     "desc": "Creates a 2D rotation matrix."
     },
     {
      "name": "scale",
      "snippet": "scale(${1:sx}, ${2:sy})",
      "return": "Mat3",
-     "desc": "Build a 2D scale matrix"
+     "desc": "Creates a 2D scaling matrix."
     }
    ]
   },
   {
    "name": "Mat4",
-   "desc": "4x4 matrix for 3D transformations",
+   "desc": "A 4×4 matrix for three-dimensional transformations and projections.",
    "constructor": {
     "snippet": "Mat4(${1:m00}, ${2:m01}, ${3:m02}, ${4:m03}, ${5:m10}, ${6:m11}, ${7:m12}, ${8:m13}, ${9:m20}, ${10:m21}, ${11:m22}, ${12:m23}, ${13:m30}, ${14:m31}, ${15:m32}, ${16:m33})"
    },
@@ -8218,25 +8218,25 @@ const TrussSketchAPI = {
      "name": "at",
      "snippet": "at(${1:row}, ${2:col})",
      "return": "float &",
-     "desc": "Access the element at (row, col)"
+     "desc": "Accesses a matrix element by row and column."
     },
     {
      "name": "set",
      "snippet": "set(${1:row}, ${2:col})",
      "return": "float &",
-     "desc": "Access the element at (row, col)"
+     "desc": "Accesses a matrix element by row and column."
     },
     {
      "name": "transposed",
      "snippet": "transposed()",
      "return": "Mat4",
-     "desc": "Get transposed matrix"
+     "desc": "Returns the transpose of this matrix."
     },
     {
      "name": "inverted",
      "snippet": "inverted()",
      "return": "Mat4",
-     "desc": "Get inverse matrix (identity when |det| < 1e-10, including valid tiny scales; use tryInvert for a relative check)"
+     "desc": "Returns the inverse of this matrix."
     }
    ],
    "static_methods": [
@@ -8244,79 +8244,79 @@ const TrussSketchAPI = {
      "name": "identity",
      "snippet": "identity()",
      "return": "Mat4",
-     "desc": "Create an identity matrix"
+     "desc": "Creates an identity matrix."
     },
     {
      "name": "fromHomography",
      "snippet": "fromHomography(${1:h})",
      "return": "Mat4",
-     "desc": "Build a Mat4 from a 3x3 homography (for 2D projection)"
+     "desc": "Creates a 4×4 matrix from a 2D homography."
     },
     {
      "name": "translate",
      "snippet": "translate(${1:tx}, ${2:ty}, ${3:tz})",
      "return": "Mat4",
-     "desc": "Create a translation matrix"
+     "desc": "Creates a translation matrix."
     },
     {
      "name": "rotateX",
      "snippet": "rotateX(${1:radians})",
      "return": "Mat4",
-     "desc": "Create X-axis rotation matrix"
+     "desc": "Creates a rotation matrix about the X axis."
     },
     {
      "name": "rotateY",
      "snippet": "rotateY(${1:radians})",
      "return": "Mat4",
-     "desc": "Create Y-axis rotation matrix"
+     "desc": "Creates a rotation matrix about the Y axis."
     },
     {
      "name": "rotateZ",
      "snippet": "rotateZ(${1:radians})",
      "return": "Mat4",
-     "desc": "Create Z-axis rotation matrix"
+     "desc": "Creates a rotation matrix about the Z axis."
     },
     {
      "name": "rotate",
      "snippet": "rotate(${1:radians}, ${2:axis})",
      "return": "Mat4",
-     "desc": "Create a rotation matrix about an arbitrary axis"
+     "desc": "Creates a rotation matrix about an arbitrary axis."
     },
     {
      "name": "scale",
      "snippet": "scale(${1:sx}, ${2:sy}, ${3:sz})",
      "return": "Mat4",
-     "desc": "Create a scaling matrix"
+     "desc": "Creates a scaling matrix."
     },
     {
      "name": "lookAt",
      "snippet": "lookAt(${1:eye}, ${2:target}, ${3:up})",
      "return": "Mat4",
-     "desc": "Create a view matrix"
+     "desc": "Creates a view matrix from an eye position and target."
     },
     {
      "name": "ortho",
      "snippet": "ortho(${1:left}, ${2:right}, ${3:bottom}, ${4:top}, ${5:nearPlane}, ${6:farPlane})",
      "return": "Mat4",
-     "desc": "Create an orthographic projection matrix"
+     "desc": "Creates an orthographic projection matrix."
     },
     {
      "name": "perspective",
      "snippet": "perspective(${1:fovY}, ${2:aspect}, ${3:nearPlane}, ${4:farPlane})",
      "return": "Mat4",
-     "desc": "Create a perspective projection matrix"
+     "desc": "Creates a perspective projection matrix."
     },
     {
      "name": "frustum",
      "snippet": "frustum(${1:left}, ${2:right}, ${3:bottom}, ${4:top}, ${5:nearPlane}, ${6:farPlane})",
      "return": "Mat4",
-     "desc": "Create an asymmetric perspective (frustum) projection matrix"
+     "desc": "Creates an asymmetric perspective projection matrix."
     }
    ]
   },
   {
    "name": "Material",
-   "desc": "PBR material (metallic-roughness workflow, glTF 2.0 compatible). Destruction touches window context state and must run on the main thread, like Light destruction.",
+   "desc": "Represents a PBR surface material using the glTF-compatible metallic-roughness workflow.",
    "constructor": {
     "snippet": "Material()"
    },
@@ -8325,163 +8325,163 @@ const TrussSketchAPI = {
      "name": "getBaseColor",
      "snippet": "getBaseColor()",
      "return": "const Color &",
-     "desc": "Get base color (albedo)"
+     "desc": "Returns the material's base color."
     },
     {
      "name": "setBaseColor",
      "snippet": "setBaseColor(${1:c})",
      "return": "Material &",
-     "desc": "Set base color (albedo)"
+     "desc": "Sets the material's base color."
     },
     {
      "name": "setMetallic",
      "snippet": "setMetallic(${1:m})",
      "return": "Material &",
-     "desc": "Set metallic factor (0=dielectric, 1=metal)"
+     "desc": "Sets the material's metallic factor."
     },
     {
      "name": "getMetallic",
      "snippet": "getMetallic()",
      "return": "float",
-     "desc": "Get metallic factor"
+     "desc": "Returns the metallic factor."
     },
     {
      "name": "setRoughness",
      "snippet": "setRoughness(${1:r})",
      "return": "Material &",
-     "desc": "Set roughness factor (0=mirror, 1=matte)"
+     "desc": "Sets the material's surface roughness."
     },
     {
      "name": "getRoughness",
      "snippet": "getRoughness()",
      "return": "float",
-     "desc": "Get roughness factor"
+     "desc": "Returns the roughness factor."
     },
     {
      "name": "setAo",
      "snippet": "setAo(${1:ao})",
      "return": "Material &",
-     "desc": "Set ambient occlusion factor"
+     "desc": "Sets the ambient occlusion factor."
     },
     {
      "name": "getAo",
      "snippet": "getAo()",
      "return": "float",
-     "desc": "Get ambient occlusion factor"
+     "desc": "Returns the ambient occlusion factor."
     },
     {
      "name": "getEmissiveStrength",
      "snippet": "getEmissiveStrength()",
      "return": "float",
-     "desc": "Get emissive strength multiplier"
+     "desc": "Returns the emissive strength multiplier."
     },
     {
      "name": "setEmissiveStrength",
      "snippet": "setEmissiveStrength(${1:s})",
      "return": "Material &",
-     "desc": "Set emissive strength multiplier"
+     "desc": "Sets the material's emissive strength multiplier."
     },
     {
      "name": "getEmissive",
      "snippet": "getEmissive()",
      "return": "const Color &",
-     "desc": "Get emissive color"
+     "desc": "Returns the emissive color."
     },
     {
      "name": "setEmissive",
      "snippet": "setEmissive(${1:c})",
      "return": "Material &",
-     "desc": "Set emissive color"
+     "desc": "Sets the material's emissive color."
     },
     {
      "name": "setNormalMap",
      "snippet": "setNormalMap()",
      "return": "",
-     "desc": "Set normal map texture for bump mapping"
+     "desc": "Sets the material's normal map for bump mapping."
     },
     {
      "name": "getNormalMap",
      "snippet": "getNormalMap()",
      "return": "const Texture *",
-     "desc": "Get normal map texture"
+     "desc": "Returns the normal map texture pointer."
     },
     {
      "name": "hasNormalMap",
      "snippet": "hasNormalMap()",
      "return": "bool",
-     "desc": "Check if a normal map is set"
+     "desc": "Checks whether a normal map pointer is set."
     },
     {
      "name": "setBaseColorTexture",
      "snippet": "setBaseColorTexture()",
      "return": "",
-     "desc": "Set base color (albedo) texture map"
+     "desc": "Sets the base color texture map."
     },
     {
      "name": "getBaseColorTexture",
      "snippet": "getBaseColorTexture()",
      "return": "const Texture *",
-     "desc": "Get base color texture"
+     "desc": "Returns the base color texture pointer."
     },
     {
      "name": "hasBaseColorTexture",
      "snippet": "hasBaseColorTexture()",
      "return": "bool",
-     "desc": "Check if a base color texture is set"
+     "desc": "Checks whether a base color texture pointer is set."
     },
     {
      "name": "setMetallicRoughnessTexture",
      "snippet": "setMetallicRoughnessTexture()",
      "return": "",
-     "desc": "Set metallic-roughness texture (glTF: G=roughness, B=metallic)"
+     "desc": "Sets the material's combined metallic-roughness texture."
     },
     {
      "name": "getMetallicRoughnessTexture",
      "snippet": "getMetallicRoughnessTexture()",
      "return": "const Texture *",
-     "desc": "Get metallic-roughness texture"
+     "desc": "Returns the metallic-roughness texture pointer."
     },
     {
      "name": "hasMetallicRoughnessTexture",
      "snippet": "hasMetallicRoughnessTexture()",
      "return": "bool",
-     "desc": "Check if a metallic-roughness texture is set"
+     "desc": "Checks whether a metallic-roughness texture pointer is set."
     },
     {
      "name": "setEmissiveTexture",
      "snippet": "setEmissiveTexture()",
      "return": "",
-     "desc": "Set emissive texture map"
+     "desc": "Sets the material's emissive texture."
     },
     {
      "name": "getEmissiveTexture",
      "snippet": "getEmissiveTexture()",
      "return": "const Texture *",
-     "desc": "Get emissive texture"
+     "desc": "Returns the emissive texture pointer."
     },
     {
      "name": "hasEmissiveTexture",
      "snippet": "hasEmissiveTexture()",
      "return": "bool",
-     "desc": "Check if an emissive texture is set"
+     "desc": "Checks whether an emissive texture pointer is set."
     },
     {
      "name": "setOcclusionTexture",
      "snippet": "setOcclusionTexture()",
      "return": "",
-     "desc": "Set occlusion texture map"
+     "desc": "Sets the material's ambient occlusion texture."
     },
     {
      "name": "getOcclusionTexture",
      "snippet": "getOcclusionTexture()",
      "return": "const Texture *",
-     "desc": "Get occlusion texture"
+     "desc": "Returns the occlusion texture pointer."
     },
     {
      "name": "hasOcclusionTexture",
      "snippet": "hasOcclusionTexture()",
      "return": "bool",
-     "desc": "Check if an occlusion texture is set"
+     "desc": "Checks whether an occlusion texture pointer is set."
     }
    ],
    "static_methods": [
@@ -8489,67 +8489,67 @@ const TrussSketchAPI = {
      "name": "gold",
      "snippet": "gold()",
      "return": "Material",
-     "desc": "Gold material preset"
+     "desc": "Creates a gold material preset."
     },
     {
      "name": "silver",
      "snippet": "silver()",
      "return": "Material",
-     "desc": "Silver material preset"
+     "desc": "Returns a silver material preset."
     },
     {
      "name": "copper",
      "snippet": "copper()",
      "return": "Material",
-     "desc": "Copper material preset"
+     "desc": "Creates a copper material preset."
     },
     {
      "name": "iron",
      "snippet": "iron()",
      "return": "Material",
-     "desc": "Iron material preset"
+     "desc": "Creates an iron material preset."
     },
     {
      "name": "bronze",
      "snippet": "bronze()",
      "return": "Material",
-     "desc": "Bronze material preset"
+     "desc": "Creates a bronze material preset."
     },
     {
      "name": "emerald",
      "snippet": "emerald()",
      "return": "Material",
-     "desc": "Emerald material preset"
+     "desc": "Creates an emerald material preset."
     },
     {
      "name": "ruby",
      "snippet": "ruby()",
      "return": "Material",
-     "desc": "Ruby material preset"
+     "desc": "Creates a ruby material preset."
     },
     {
      "name": "plastic",
      "snippet": "plastic(${1:baseColor})",
      "return": "Material",
-     "desc": "Plastic material preset"
+     "desc": "Creates a plastic-like material with the supplied color."
     },
     {
      "name": "rubber",
      "snippet": "rubber(${1:baseColor})",
      "return": "Material",
-     "desc": "Rubber material preset"
+     "desc": "Creates a rubber-like material with the supplied color."
     },
     {
      "name": "fromPhong",
      "snippet": "fromPhong(${1:diffuse}, ${2:specular}, ${3:shininess})",
      "return": "Material",
-     "desc": "Convert Phong material parameters to PBR (roughness from shininess, metallic estimated from specular luminance)"
+     "desc": "Converts Phong material parameters into a PBR material."
     }
    ]
   },
   {
    "name": "Mesh",
-   "desc": "3D mesh with vertices, colors, normals, indices",
+   "desc": "Stores mesh geometry and vertex attributes for drawing.",
    "constructor": {
     "snippet": "Mesh()"
    },
@@ -8558,391 +8558,391 @@ const TrussSketchAPI = {
      "name": "addColor",
      "snippet": "addColor(${1:c})",
      "return": "Mesh &",
-     "desc": "Add a vertex color"
+     "desc": "Appends a vertex color."
     },
     {
      "name": "addColors",
      "snippet": "addColors(${1:cols})",
      "return": "Mesh &",
-     "desc": "Add multiple vertex colors"
+     "desc": "Appends multiple vertex colors."
     },
     {
      "name": "addIndex",
      "snippet": "addIndex(${1:index})",
      "return": "Mesh &",
-     "desc": "Add an index"
+     "desc": "Appends a vertex index."
     },
     {
      "name": "addIndices",
      "snippet": "addIndices(${1:inds})",
      "return": "Mesh &",
-     "desc": "Add multiple indices"
+     "desc": "Appends multiple vertex indices."
     },
     {
      "name": "addNormal",
      "snippet": "addNormal(${1:nx}, ${2:ny}, ${3:nz})",
      "return": "Mesh &",
-     "desc": "Add a normal vector"
+     "desc": "Appends a normal vector."
     },
     {
      "name": "addNormals",
      "snippet": "addNormals(${1:norms})",
      "return": "Mesh &",
-     "desc": "Add multiple normals"
+     "desc": "Appends multiple normal vectors."
     },
     {
      "name": "addTangent",
      "snippet": "addTangent(${1:tx}, ${2:ty}, ${3:tz})",
      "return": "Mesh &",
-     "desc": "Add a tangent vector (xyz direction + w handedness)"
+     "desc": "Appends a tangent vector."
     },
     {
      "name": "addTexCoord",
      "snippet": "addTexCoord(${1:u}, ${2:v})",
      "return": "Mesh &",
-     "desc": "Add a texture coordinate"
+     "desc": "Appends a texture coordinate."
     },
     {
      "name": "addTriangle",
      "snippet": "addTriangle(${1:i0}, ${2:i1}, ${3:i2})",
      "return": "Mesh &",
-     "desc": "Add a triangle (3 indices)"
+     "desc": "Appends three indices for a triangle."
     },
     {
      "name": "addVertex",
      "snippet": "addVertex(${1:x}, ${2:y})",
      "return": "Mesh &",
-     "desc": "Add a vertex"
+     "desc": "Appends a vertex position."
     },
     {
      "name": "addVertices",
      "snippet": "addVertices(${1:verts})",
      "return": "Mesh &",
-     "desc": "Add multiple vertices"
+     "desc": "Appends multiple vertex positions."
     },
     {
      "name": "append",
      "snippet": "append(${1:other})",
      "return": "Mesh &",
-     "desc": "Append another mesh"
+     "desc": "Appends another mesh's data."
     },
     {
      "name": "clear",
      "snippet": "clear()",
      "return": "Mesh &",
-     "desc": "Clear all mesh data"
+     "desc": "Removes all mesh data."
     },
     {
      "name": "clearColors",
      "snippet": "clearColors()",
      "return": "Mesh &",
-     "desc": "Clear colors only"
+     "desc": "Removes all vertex colors."
     },
     {
      "name": "clearIndices",
      "snippet": "clearIndices()",
      "return": "Mesh &",
-     "desc": "Clear indices only"
+     "desc": "Removes all vertex indices."
     },
     {
      "name": "clearNormals",
      "snippet": "clearNormals()",
      "return": "Mesh &",
-     "desc": "Clear normals only"
+     "desc": "Removes all normal vectors."
     },
     {
      "name": "clearTangents",
      "snippet": "clearTangents()",
      "return": "Mesh &",
-     "desc": "Remove all tangents"
+     "desc": "Removes all tangent vectors."
     },
     {
      "name": "clearTexCoords",
      "snippet": "clearTexCoords()",
      "return": "Mesh &",
-     "desc": "Clear texture coordinates only"
+     "desc": "Removes all texture coordinates."
     },
     {
      "name": "clearVertices",
      "snippet": "clearVertices()",
      "return": "Mesh &",
-     "desc": "Clear vertices only"
+     "desc": "Removes all vertex positions."
     },
     {
      "name": "draw",
      "snippet": "draw()",
      "return": "void",
-     "desc": "Draw the mesh"
+     "desc": "Draws the mesh."
     },
     {
      "name": "drawGpuPbr",
      "snippet": "drawGpuPbr()",
      "return": "void",
-     "desc": "Draw the mesh through the GPU PBR pipeline (retained GPU buffer + active lights, material and environment)."
+     "desc": "Draws the mesh with GPU PBR lighting."
     },
     {
      "name": "drawGpuPoints",
      "snippet": "drawGpuPoints()",
      "return": "void",
-     "desc": "Draw a Points-mode mesh as a GPU-resident point cloud (Square/Round splats or 1px Pixel points)."
+     "desc": "Draws the mesh vertices as a GPU point cloud."
     },
     {
      "name": "drawNoLighting",
      "snippet": "drawNoLighting()",
      "return": "void",
-     "desc": "Draw the mesh without lighting"
+     "desc": "Draws the mesh without lighting."
     },
     {
      "name": "drawNoLightingWithTexture",
      "snippet": "drawNoLightingWithTexture(${1:texture})",
      "return": "void",
-     "desc": "Draw the mesh textured without lighting"
+     "desc": "Draws the mesh with a texture and no lighting."
     },
     {
      "name": "drawWireframe",
      "snippet": "drawWireframe()",
      "return": "void",
-     "desc": "Draw mesh as wireframe"
+     "desc": "Draws the mesh's triangle edges."
     },
     {
      "name": "drawWithLighting",
      "snippet": "drawWithLighting()",
      "return": "void",
-     "desc": "Draw the mesh with lighting"
+     "desc": "Draws the mesh with CPU-calculated lighting."
     },
     {
      "name": "getColors",
      "snippet": "getColors()",
      "return": "std::vector<Color> &",
-     "desc": "Get all vertex colors"
+     "desc": "Returns the vertex color array."
     },
     {
      "name": "getDataRevision",
      "snippet": "getDataRevision()",
      "return": "uint64_t",
-     "desc": "Current data revision: changes whenever the mesh data changes (mutators, non-const getters, markGpuDirty). GPU buffers are re-uploaded when it differs from the revision they were uploaded from. Compare with != only."
+     "desc": "Returns the mesh's current data revision."
     },
     {
      "name": "getGpuIndexBuffer",
      "snippet": "getGpuIndexBuffer()",
      "return": "sg_buffer",
-     "desc": "The sokol-gfx buffer handle holding the uploaded list indices (advanced interop). TriangleStrip and TriangleFan expand to triangle lists; LineStrip and LineLoop expand to line lists. If the mesh has no indices, 0..N-1 (N = vertex count) supplies the source sequence, including for Points. Use getGpuIndexCount for the uploaded count. Custom pipelines must draw triangle modes as triangle lists and line modes as line lists."
+     "desc": "Returns the mesh's GPU index buffer handle."
     },
     {
      "name": "getGpuIndexCount",
      "snippet": "getGpuIndexCount()",
      "return": "int",
-     "desc": "Number of indices in the uploaded GPU list; pairs with getGpuIndexBuffer for custom rendering. TriangleStrip and TriangleFan expand to triangle lists; LineStrip and LineLoop expand to line lists. If the mesh has no indices, 0..N-1 (N = vertex count) supplies the source sequence, including for Points. Custom pipelines must draw triangle modes as triangle lists and line modes as line lists."
+     "desc": "Returns the uploaded GPU index count."
     },
     {
      "name": "getGpuPointBuffer",
      "snippet": "getGpuPointBuffer()",
      "return": "sg_buffer",
-     "desc": "The sokol-gfx buffer handle holding the uploaded point data, position + color per point (advanced interop)."
+     "desc": "Returns the mesh's GPU point buffer handle."
     },
     {
      "name": "getGpuPointCount",
      "snippet": "getGpuPointCount()",
      "return": "int",
-     "desc": "Number of points currently uploaded to the GPU point buffer (PrimitiveMode::Points). Pairs with getGpuPointBuffer for custom rendering."
+     "desc": "Returns the uploaded GPU point count."
     },
     {
      "name": "getGpuVertexBuffer",
      "snippet": "getGpuVertexBuffer()",
      "return": "sg_buffer",
-     "desc": "The sokol-gfx vertex buffer handle backing the mesh (advanced interop)."
+     "desc": "Returns the mesh's GPU vertex buffer handle."
     },
     {
      "name": "getGpuVertexCount",
      "snippet": "getGpuVertexCount()",
      "return": "int",
-     "desc": "Number of vertices currently uploaded to the GPU vertex buffer. Pairs with getGpuVertexBuffer (e.g. as the draw count for a custom pipeline)."
+     "desc": "Returns the uploaded GPU vertex count."
     },
     {
      "name": "getIndices",
      "snippet": "getIndices()",
      "return": "std::vector<unsigned int> &",
-     "desc": "Get all indices"
+     "desc": "Returns the mesh's index array."
     },
     {
      "name": "getMode",
      "snippet": "getMode()",
      "return": "PrimitiveMode",
-     "desc": "Get current primitive mode"
+     "desc": "Returns the mesh's primitive mode."
     },
     {
      "name": "getNormal",
      "snippet": "getNormal(${1:index})",
      "return": "Vec3",
-     "desc": "Get normal at index"
+     "desc": "Returns the normal at the specified index."
     },
     {
      "name": "getNormals",
      "snippet": "getNormals()",
      "return": "std::vector<Vec3> &",
-     "desc": "Get all normals"
+     "desc": "Returns the mesh's normal array."
     },
     {
      "name": "getNumColors",
      "snippet": "getNumColors()",
      "return": "int",
-     "desc": "Get vertex color count"
+     "desc": "Returns the number of vertex colors."
     },
     {
      "name": "getNumIndices",
      "snippet": "getNumIndices()",
      "return": "int",
-     "desc": "Get index count"
+     "desc": "Returns the number of indices."
     },
     {
      "name": "getNumNormals",
      "snippet": "getNumNormals()",
      "return": "int",
-     "desc": "Get normal count"
+     "desc": "Returns the number of normals."
     },
     {
      "name": "getNumTangents",
      "snippet": "getNumTangents()",
      "return": "int",
-     "desc": "Number of tangents"
+     "desc": "Returns the number of tangents."
     },
     {
      "name": "getNumTexCoords",
      "snippet": "getNumTexCoords()",
      "return": "int",
-     "desc": "Get texture coordinate count"
+     "desc": "Returns the number of texture coordinates."
     },
     {
      "name": "getNumVertices",
      "snippet": "getNumVertices()",
      "return": "int",
-     "desc": "Get vertex count"
+     "desc": "Returns the number of vertices."
     },
     {
      "name": "getTangents",
      "snippet": "getTangents()",
      "return": "std::vector<Vec4> &",
-     "desc": "Get the tangent array (mutable)"
+     "desc": "Returns the mesh's tangent array."
     },
     {
      "name": "getTexCoords",
      "snippet": "getTexCoords()",
      "return": "std::vector<Vec2> &",
-     "desc": "Get all texture coordinates"
+     "desc": "Returns the mesh's texture coordinate array."
     },
     {
      "name": "getVertices",
      "snippet": "getVertices()",
      "return": "std::vector<Vec3> &",
-     "desc": "Get all vertices"
+     "desc": "Returns the mesh's vertex array."
     },
     {
      "name": "hasColors",
      "snippet": "hasColors()",
      "return": "bool",
-     "desc": "Check if mesh has vertex colors"
+     "desc": "Checks whether the mesh contains vertex colors."
     },
     {
      "name": "hasIndices",
      "snippet": "hasIndices()",
      "return": "bool",
-     "desc": "Check if mesh has indices"
+     "desc": "Checks whether the mesh contains indices."
     },
     {
      "name": "hasNormals",
      "snippet": "hasNormals()",
      "return": "bool",
-     "desc": "Check if mesh has normals"
+     "desc": "Checks whether the mesh contains normals."
     },
     {
      "name": "hasTangents",
      "snippet": "hasTangents()",
      "return": "bool",
-     "desc": "Whether the mesh has tangents"
+     "desc": "Checks whether the mesh contains tangents."
     },
     {
      "name": "hasTexCoords",
      "snippet": "hasTexCoords()",
      "return": "bool",
-     "desc": "Check if mesh has texture coordinates"
+     "desc": "Checks whether the mesh contains texture coordinates."
     },
     {
      "name": "hasValidTexCoords",
      "snippet": "hasValidTexCoords()",
      "return": "bool",
-     "desc": "Check if texture coordinates match vertex count"
+     "desc": "Checks whether the mesh has enough texture coordinates for its vertices."
     },
     {
      "name": "markGpuDirty",
      "snippet": "markGpuDirty()",
      "return": "void",
-     "desc": "Force a GPU re-upload on the next draw (bumps the data revision). Not needed after normal edits: every mutator and non-const getter already does this."
+     "desc": "Marks the mesh for GPU re-upload."
     },
     {
      "name": "rotateX",
      "snippet": "rotateX(${1:radians})",
      "return": "Mesh &",
-     "desc": "Rotate mesh around X axis"
+     "desc": "Rotates the mesh around the X axis."
     },
     {
      "name": "rotateY",
      "snippet": "rotateY(${1:radians})",
      "return": "Mesh &",
-     "desc": "Rotate mesh around Y axis"
+     "desc": "Rotates the mesh around the Y axis."
     },
     {
      "name": "rotateZ",
      "snippet": "rotateZ(${1:radians})",
      "return": "Mesh &",
-     "desc": "Rotate mesh around Z axis"
+     "desc": "Rotates the mesh around the Z axis."
     },
     {
      "name": "scale",
      "snippet": "scale(${1:x}, ${2:y}, ${3:z})",
      "return": "Mesh &",
-     "desc": "Scale mesh"
+     "desc": "Scales the mesh around its local origin."
     },
     {
      "name": "setMode",
      "snippet": "setMode(${1:mode})",
      "return": "Mesh &",
-     "desc": "Set primitive mode (Triangles, Lines, Points, etc.)"
+     "desc": "Sets the mesh's primitive mode."
     },
     {
      "name": "setNormal",
      "snippet": "setNormal(${1:index}, ${2:n})",
      "return": "Mesh &",
-     "desc": "Set normal at index"
+     "desc": "Sets the normal at the specified index."
     },
     {
      "name": "transform",
      "snippet": "transform(${1:m})",
      "return": "Mesh &",
-     "desc": "Apply transformation matrix"
+     "desc": "Applies a matrix to the mesh's vertices and normals."
     },
     {
      "name": "translate",
      "snippet": "translate(${1:x}, ${2:y}, ${3:z})",
      "return": "Mesh &",
-     "desc": "Translate all vertices"
+     "desc": "Translates all vertices in the mesh."
     },
     {
      "name": "uploadPointsToGpu",
      "snippet": "uploadPointsToGpu()",
      "return": "void",
-     "desc": "Upload the point cloud (positions + colors) to its GPU buffer now (for the Points / custom-render path)."
+     "desc": "Uploads vertex positions and colors to the GPU point buffer."
     },
     {
      "name": "uploadToGpu",
      "snippet": "uploadToGpu()",
      "return": "void",
-     "desc": "Upload the mesh's vertex/index data to its GPU buffers now (for the PBR / custom-render path)."
+     "desc": "Uploads mesh data to the GPU vertex and index buffers."
     }
    ]
   },
   {
    "name": "MicInput",
-   "desc": "Microphone capture (miniaudio). Opens an input device and exposes the latest samples through a ring buffer. Use the global getMicInput() to access the shared instance, then start() it; getMicAnalysisBuffer() is a convenience wrapper over getBuffer().",
+   "desc": "Captures microphone samples into a ring buffer.",
    "constructor": {
     "snippet": "MicInput()"
    },
@@ -8951,59 +8951,59 @@ const TrussSketchAPI = {
      "name": "start",
      "snippet": "start()",
      "return": "bool",
-     "desc": "Open the microphone device at the given sample rate and begin capturing. Native start waits for its lifecycle thread startup result, returns false on failure, and emits no onStart. Web start returns true when the request is submitted; use isStarting/isRunning for actual readiness and startAsync/onStart for failure details. Web requires a secure context and a user gesture. On macOS/iOS, undecided microphone consent requests access and returns false immediately with retry guidance; call start() again after granting. Denied/restricted access fails before capture initialization."
+     "desc": "Starts microphone capture."
     },
     {
      "name": "stop",
      "snippet": "stop()",
      "return": "void",
-     "desc": "Cancel capture/startup immediately and post device teardown without waiting. No cancellation event is emitted. Native teardown runs on the thread that opened the device; application exit waits for retirement."
+     "desc": "Stops microphone capture or cancels startup."
     },
     {
      "name": "getBuffer",
      "snippet": "getBuffer()",
      "return": "",
-     "desc": "Copy the latest captured samples into outBuffer. numSamples is capped at the ring buffer size (4096). Returns the number of samples written."
+     "desc": "Copies the latest microphone samples."
     },
     {
      "name": "isRunning",
      "snippet": "isRunning()",
      "return": "bool",
-     "desc": "True while the microphone device is open and capturing."
+     "desc": "Reports whether microphone capture is running."
     },
     {
      "name": "getSampleRate",
      "snippet": "getSampleRate()",
      "return": "int",
-     "desc": "Sample rate the microphone was opened at."
+     "desc": "Returns the stored microphone sample rate."
     },
     {
      "name": "onAudioData",
      "snippet": "onAudioData()",
      "return": "",
-     "desc": "Mic input callback: receive captured input samples (internal, called from the audio thread)."
+     "desc": "Writes input samples into the microphone ring buffer."
     }
    ]
   },
   {
    "name": "MicStartResult",
-   "desc": "Microphone startup outcome. Success requires usable capture; permission denial or a missing device is a failure. Converts explicitly to bool.",
+   "desc": "Reports the outcome of starting microphone capture.",
    "properties": [
     {
      "name": "message",
      "type": "std::string",
-     "desc": "Empty on success; backend error code/detail or browser exception name on failure."
+     "desc": "Stores a diagnostic message for microphone startup."
     },
     {
      "name": "success",
      "type": "bool",
-     "desc": "True after the capture device or Web Audio processor is ready."
+     "desc": "Indicates whether microphone startup succeeded."
     }
    ]
   },
   {
    "name": "MixMode",
-   "desc": "Sound channel mixing: Auto (match the output) or DownmixMono.",
+   "desc": "Selects how source audio channels are routed to output channels.",
    "static_methods": [
     {
      "name": "Auto",
@@ -9021,19 +9021,19 @@ const TrussSketchAPI = {
   },
   {
    "name": "Mod",
-   "desc": "Attachable behavior base class for Node. Subclass it, override the lifecycle and input hooks, and attach with node->addMod<T>(). Lifecycle: setup() on attach, then each frame earlyUpdate() -> Node::update() -> update() -> draw(), and onDestroy() on removal. Override isExclusive() to allow only one instance per Node, and canAttachTo() to restrict attachment.",
+   "desc": "Provides a base class for behaviors attached to a `Node`.",
    "methods": [
     {
      "name": "getOwner",
      "snippet": "getOwner()",
      "return": "Node *",
-     "desc": "Get the owner Node this Mod is attached to."
+     "desc": "Returns the node that owns this Mod."
     }
    ]
   },
   {
    "name": "MouseButton",
-   "desc": "Mouse button: Left, Right, Middle, or None.",
+   "desc": "Defines typed identifiers for mouse buttons.",
    "static_methods": [
     {
      "name": "Left",
@@ -9290,42 +9290,42 @@ const TrussSketchAPI = {
   },
   {
    "name": "NetworkInterface",
-   "desc": "One address entry of a network interface (returned by listNetworkInterfaces)",
+   "desc": "Holds one network interface address returned by `listNetworkInterfaces()`.",
    "properties": [
     {
      "name": "address",
      "type": "std::string",
-     "desc": "IP address (IPv4 dotted-quad or IPv6 textual)"
+     "desc": "Stores the interface entry's IP address."
     },
     {
      "name": "isIPv4",
      "type": "bool",
-     "desc": "True for IPv4, false for IPv6"
+     "desc": "Stores whether the entry represents an IPv4 address."
     },
     {
      "name": "isLoopback",
      "type": "bool",
-     "desc": "True if a loopback interface"
+     "desc": "Stores whether the entry belongs to a loopback interface."
     },
     {
      "name": "isUp",
      "type": "bool",
-     "desc": "True if the interface link is up"
+     "desc": "Stores whether the interface is marked as up."
     },
     {
      "name": "mac",
      "type": "std::string",
-     "desc": "Hardware MAC address (empty if unavailable)"
+     "desc": "Stores the interface's hardware MAC address."
     },
     {
      "name": "name",
      "type": "std::string",
-     "desc": "Interface name (en0 / Ethernet / wlan0)"
+     "desc": "Stores the interface name."
     },
     {
      "name": "netmask",
      "type": "std::string",
-     "desc": "Subnet mask (IPv4)"
+     "desc": "Stores the entry's IPv4 subnet mask."
     }
    ],
    "methods": [
@@ -9333,43 +9333,43 @@ const TrussSketchAPI = {
      "name": "getAddress",
      "snippet": "getAddress()",
      "return": "const std::string &",
-     "desc": "IP address"
+     "desc": "Returns the stored IP address."
     },
     {
      "name": "getIsIPv4",
      "snippet": "getIsIPv4()",
      "return": "bool",
-     "desc": "Whether the address is IPv4"
+     "desc": "Returns whether the entry represents an IPv4 address."
     },
     {
      "name": "getIsLoopback",
      "snippet": "getIsLoopback()",
      "return": "bool",
-     "desc": "Whether this is a loopback interface"
+     "desc": "Returns whether the entry belongs to a loopback interface."
     },
     {
      "name": "getIsUp",
      "snippet": "getIsUp()",
      "return": "bool",
-     "desc": "Whether the link is up"
+     "desc": "Returns whether the interface is marked as up."
     },
     {
      "name": "getMac",
      "snippet": "getMac()",
      "return": "const std::string &",
-     "desc": "MAC address"
+     "desc": "Returns the stored MAC address."
     },
     {
      "name": "getName",
      "snippet": "getName()",
      "return": "const std::string &",
-     "desc": "Interface name"
+     "desc": "Returns the stored interface name."
     },
     {
      "name": "getNetmask",
      "snippet": "getNetmask()",
      "return": "const std::string &",
-     "desc": "Subnet mask"
+     "desc": "Returns the stored subnet mask."
     }
    ]
   },
@@ -9883,7 +9883,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "OnceGate",
-   "desc": "Gate for a log line (or anything else): isFirstTime() is true the first time, and with an interval, again once that much time has passed since the last true",
+   "desc": "Controls whether an action runs once or at a specified interval.",
    "constructor": {
     "snippet": "OnceGate(${1:intervalSeconds})"
    },
@@ -9892,19 +9892,19 @@ const TrussSketchAPI = {
      "name": "isFirstTime",
      "snippet": "isFirstTime()",
      "return": "bool",
-     "desc": "True the first time; with an interval, true again once that much time has passed since the last true. Otherwise false"
+     "desc": "Checks whether the gate allows an action."
     },
     {
      "name": "reset",
      "snippet": "reset()",
      "return": "void",
-     "desc": "Restore the never-fired state so the next isFirstTime() returns true immediately, for both once-only and interval gates. Lock-free and safe from any thread"
+     "desc": "Restores the gate to its initial state."
     }
    ]
   },
   {
    "name": "Orientation",
-   "desc": "Screen orientation mask passed to setOrientation (iOS/Android); values are bit flags and can be combined with |",
+   "desc": "Defines the screen orientations allowed by `setOrientation()`.",
    "static_methods": [
     {
      "name": "Portrait",
@@ -9952,7 +9952,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Path",
-   "desc": "Path/Polyline for lines and curves",
+   "desc": "Stores paths made from straight lines and curves.",
    "constructor": {
     "snippet": "Path(${1:verts})"
    },
@@ -9961,163 +9961,163 @@ const TrussSketchAPI = {
      "name": "addVertex",
      "snippet": "addVertex(${1:x}, ${2:y})",
      "return": "void",
-     "desc": "Add a vertex"
+     "desc": "Appends a vertex to the current subpath."
     },
     {
      "name": "addVertices",
      "snippet": "addVertices(${1:verts})",
      "return": "void",
-     "desc": "Add multiple vertices"
+     "desc": "Appends multiple vertices to the current subpath."
     },
     {
      "name": "arc",
      "snippet": "arc(${1:center}, ${2:radiusX}, ${3:radiusY}, ${4:angleBegin}, ${5:angleEnd})",
      "return": "void",
-     "desc": "Add a circular or elliptical arc (all angles in radians)"
+     "desc": "Appends a circular or elliptical arc."
     },
     {
      "name": "arcDeg",
      "snippet": "arcDeg(${1:center}, ${2:radiusX}, ${3:radiusY}, ${4:angleBegin}, ${5:angleEnd})",
      "return": "void",
-     "desc": "Add an elliptical arc with angles in degrees (all elliptical overloads)"
+     "desc": "Appends an elliptical arc using angles in degrees."
     },
     {
      "name": "bezierTo",
      "snippet": "bezierTo(${1:cp1}, ${2:cp2}, ${3:to}, ${4:resolution})",
      "return": "void",
-     "desc": "Add cubic bezier curve (resolution=-1 uses current curve style)"
+     "desc": "Appends a cubic Bézier curve."
     },
     {
      "name": "buildFillTriangles",
      "snippet": "buildFillTriangles()",
      "return": "std::vector<std::array<float, 2>>",
-     "desc": "Triangulate the path interior into a flat list of 2D triangle vertices"
+     "desc": "Triangulates the path interior into two-dimensional triangle vertices."
     },
     {
      "name": "clear",
      "snippet": "clear()",
      "return": "void",
-     "desc": "Clear all vertices"
+     "desc": "Removes all vertices and resets the subpaths."
     },
     {
      "name": "close",
      "snippet": "close()",
      "return": "void",
-     "desc": "Close the path"
+     "desc": "Closes the current subpath."
     },
     {
      "name": "curveTo",
      "snippet": "curveTo(${1:to}, ${2:resolution})",
      "return": "void",
-     "desc": "Add Catmull-Rom curve segment (needs >=4 consecutive calls; resolution=-1 uses current curve style)"
+     "desc": "Appends Catmull–Rom spline segments."
     },
     {
      "name": "draw",
      "snippet": "draw()",
      "return": "void",
-     "desc": "Draw the polyline (fill + 1px stroke based on current style — fill uses triangle fan, convex only). For concave shapes / holes use drawFill."
+     "desc": "Draws each subpath with the current drawing style."
     },
     {
      "name": "drawFill",
      "snippet": "drawFill()",
      "return": "void",
-     "desc": "Fill the path as a concave polygon with holes (earcut tessellation). Subpaths follow the non-zero winding rule (SVG / PostScript default): a subpath wound opposite to its enclosing ring becomes a hole; same-direction subpaths union (never punch holes). Handles glyphs with holes (e, a, O, 日 ...), overlapping contours, and both TrueType / CFF winding conventions. To cut a hole in a hand-built Path, wind the inner subpath opposite (see reverseWinding)."
+     "desc": "Fills the path, including concave contours and holes."
     },
     {
      "name": "drawStroke",
      "snippet": "drawStroke()",
      "return": "void",
-     "desc": "Thick stroke via StrokeMesh (respects strokeWeight / strokeCap / strokeJoin), per-subpath. Use draw() for 1-pixel lines."
+     "desc": "Draws a thick outline for each subpath."
     },
     {
      "name": "empty",
      "snippet": "empty()",
      "return": "bool",
-     "desc": "Check if polyline is empty"
+     "desc": "Reports whether the path has no stored vertices."
     },
     {
      "name": "getBounds",
      "snippet": "getBounds()",
      "return": "Rect",
-     "desc": "Get bounding box as Rect"
+     "desc": "Returns the path's two-dimensional bounding rectangle."
     },
     {
      "name": "getNumSubpaths",
      "snippet": "getNumSubpaths()",
      "return": "size_t",
-     "desc": "Number of subpaths (contours)"
+     "desc": "Returns the number of subpaths."
     },
     {
      "name": "getPerimeter",
      "snippet": "getPerimeter()",
      "return": "float",
-     "desc": "Get total path length"
+     "desc": "Returns the total length of the stored path segments."
     },
     {
      "name": "getSubpathRange",
      "snippet": "getSubpathRange(${1:i})",
      "return": "std::pair<size_t, size_t>",
-     "desc": "Vertex index range [begin, end) of subpath i"
+     "desc": "Returns the vertex index range of a subpath."
     },
     {
      "name": "getVertices",
      "snippet": "getVertices()",
      "return": "const std::vector<Vec3> &",
-     "desc": "Get all vertices"
+     "desc": "Returns a reference to all stored vertices."
     },
     {
      "name": "isClosed",
      "snippet": "isClosed()",
      "return": "bool",
-     "desc": "Check if path is closed"
+     "desc": "Reports whether the current subpath is closed."
     },
     {
      "name": "isSubpathClosed",
      "snippet": "isSubpathClosed(${1:i})",
      "return": "bool",
-     "desc": "Whether subpath i is closed"
+     "desc": "Reports whether the specified subpath is closed."
     },
     {
      "name": "lineTo",
      "snippet": "lineTo(${1:x}, ${2:y})",
      "return": "void",
-     "desc": "Add line segment to point"
+     "desc": "Appends the endpoint of a straight segment."
     },
     {
      "name": "moveTo",
      "snippet": "moveTo(${1:x}, ${2:y})",
      "return": "void",
-     "desc": "Start a new subpath at (x, y). A single Path can hold multiple disjoint contours (think SVG `<path>` with `M ... M ...`) — used by Font::getGlyphPath to keep an outer ring and its holes in one Path so drawFill can detect holes."
+     "desc": "Starts a subpath at the specified position."
     },
     {
      "name": "quadBezierTo",
      "snippet": "quadBezierTo(${1:cp}, ${2:to}, ${3:resolution})",
      "return": "void",
-     "desc": "Add quadratic bezier curve (resolution=-1 uses current curve style)"
+     "desc": "Appends a quadratic Bézier curve."
     },
     {
      "name": "reverseWinding",
      "snippet": "reverseWinding(${1:i})",
      "return": "Path &",
-     "desc": "Reverse the winding direction (vertex order) of all subpaths, or of one subpath. Under drawFill's non-zero winding rule, reversing a subpath toggles it between filling and cutting — e.g. build a circle contour, then reverseWinding(i) it into a hole punch. Reversing ALL subpaths leaves the render unchanged (only relative direction matters) — handy for imported outlines using the opposite convention."
+     "desc": "Reverses the vertex order within subpaths."
     },
     {
      "name": "setClosed",
      "snippet": "setClosed(${1:closed})",
      "return": "void",
-     "desc": "Set closed state"
+     "desc": "Sets the current subpath's closed state."
     },
     {
      "name": "size",
      "snippet": "size()",
      "return": "int",
-     "desc": "Get vertex count"
+     "desc": "Returns the number of stored vertices."
     },
     {
      "name": "toFillMesh",
      "snippet": "toFillMesh()",
      "return": "Mesh",
-     "desc": "Build a fillable Mesh from the path interior"
+     "desc": "Builds a mesh from the path's filled interior."
     }
    ]
   },
@@ -10288,195 +10288,195 @@ const TrussSketchAPI = {
   },
   {
    "name": "Platform",
-   "desc": "Compile-time OS detection. All methods are constexpr and resolve at compile time based on the target platform.",
+   "desc": "Identifies the operating system targeted by the build.",
    "static_methods": [
     {
      "name": "isAndroid",
      "snippet": "isAndroid()",
      "return": "bool",
-     "desc": "True on Android"
+     "desc": "Reports whether the build targets Android."
     },
     {
      "name": "isApple",
      "snippet": "isApple()",
      "return": "bool",
-     "desc": "True on any Apple platform (macOS or iOS)"
+     "desc": "Reports whether the build targets macOS or iOS."
     },
     {
      "name": "isDesktop",
      "snippet": "isDesktop()",
      "return": "bool",
-     "desc": "True on desktop (macOS, Windows, or Linux)"
+     "desc": "Reports whether the build targets macOS, Windows, or desktop Linux."
     },
     {
      "name": "isIOS",
      "snippet": "isIOS()",
      "return": "bool",
-     "desc": "True on iOS"
+     "desc": "Reports whether the build targets iOS."
     },
     {
      "name": "isLinux",
      "snippet": "isLinux()",
      "return": "bool",
-     "desc": "True on Linux (desktop, excludes Android)"
+     "desc": "Reports whether the build targets desktop Linux."
     },
     {
      "name": "isMacOS",
      "snippet": "isMacOS()",
      "return": "bool",
-     "desc": "True on macOS"
+     "desc": "Reports whether the build targets macOS."
     },
     {
      "name": "isMobile",
      "snippet": "isMobile()",
      "return": "bool",
-     "desc": "True on mobile (iOS or Android)"
+     "desc": "Reports whether the build targets iOS or Android."
     },
     {
      "name": "isWeb",
      "snippet": "isWeb()",
      "return": "bool",
-     "desc": "True on Web (Emscripten / WASM)"
+     "desc": "Reports whether the build targets the Web through Emscripten."
     },
     {
      "name": "isWindows",
      "snippet": "isWindows()",
      "return": "bool",
-     "desc": "True on Windows"
+     "desc": "Reports whether the build targets Windows."
     },
     {
      "name": "name",
      "snippet": "name()",
      "return": "const char *",
-     "desc": "Short platform name: \"web\" / \"macos\" / \"ios\" / \"windows\" / \"android\" / \"linux\" / \"unknown\"\n"
+     "desc": "Returns the short name of the target platform."
     }
    ]
   },
   {
    "name": "PlayingSound",
-   "desc": "A single live mixer voice returned by AudioEngine::play(). Its fields are the real-time playback state the audio thread reads each callback (volume / pan / speed / loop / playing / paused / mixMode / position) plus the channel routing snapshots. Most fields are atomics so the UI thread can mutate them while the audio thread plays; set them directly.",
+   "desc": "Holds the live state of one mixer voice.",
    "properties": [
     {
      "name": "buffer",
      "type": "std::shared_ptr<SoundSource>",
-     "desc": "The polymorphic sound source (eager SoundBuffer or streaming SoundStream) this voice plays."
+     "desc": "Holds the sound source played by this voice."
     },
     {
      "name": "level",
      "type": "std::atomic<float>",
-     "desc": "Peak absolute value of this voice's contribution to the mix over the most recent audio callback (after volume / pan / channel gains). Written by the audio thread; read it for metering."
+     "desc": "Stores the most recent peak output level of this voice."
     },
     {
      "name": "loop",
      "type": "std::atomic<bool>",
-     "desc": "Loop the voice when it reaches the end. Atomic."
+     "desc": "Controls whether this voice repeats."
     },
     {
      "name": "mixMode",
      "type": "std::atomic<int>",
-     "desc": "Channel mix policy when no explicit channelMap is set (Auto / DownmixMono). Stored as an atomic int holding the MixMode value."
+     "desc": "Selects the channel-mixing policy used without an explicit channel map."
     },
     {
      "name": "pan",
      "type": "std::atomic<float>",
-     "desc": "Stereo pan (-1.0 left, 0.0 center, 1.0 right). Atomic."
+     "desc": "Controls the stereo balance of this voice."
     },
     {
      "name": "paused",
      "type": "std::atomic<bool>",
-     "desc": "True while paused (still a live voice, but not advancing). Atomic."
+     "desc": "Indicates whether this voice is paused."
     },
     {
      "name": "playing",
      "type": "std::atomic<bool>",
-     "desc": "True while this voice is active in the mixer. Atomic."
+     "desc": "Indicates whether this voice is active in the mixer."
     },
     {
      "name": "positionF",
      "type": "double",
-     "desc": "Floating-point playback cursor; advances by speed * rateRatio each output frame. An eager voice counts source sample frames; a stream counts frames at the engine rate its decoder outputs at (the voice's position rate, which a re-init at another rate can change), not source samples. Use Sound::getPosition() for seconds."
+     "desc": "Stores the fractional playback cursor in sample frames."
     },
     {
      "name": "rateRatio",
      "type": "float",
-     "desc": "Source-to-engine sample-rate ratio (buffer sampleRate / engine sampleRate), set when queued so the voice plays at correct pitch regardless of engine rate."
+     "desc": "Stores the sample-rate correction factor for buffered playback."
     },
     {
      "name": "speed",
      "type": "std::atomic<float>",
-     "desc": "Playback speed (0.5 half, 1.0 normal, 2.0 double). Atomic."
+     "desc": "Controls the playback speed and pitch of this voice."
     },
     {
      "name": "volume",
      "type": "std::atomic<float>",
-     "desc": "Playback volume (0.0-1.0). Stored as an atomic; safe to set from the UI thread while playing."
+     "desc": "Controls the output volume of this voice."
     }
    ]
   },
   {
    "name": "PlayingSoundInfo",
-   "desc": "One playing (or paused) sound as reported by AudioEngine::getPlayingSounds(): a copy taken under the engine lock, so later changes to the playback are not reflected.",
+   "desc": "Holds a snapshot of one playing or paused sound.",
    "properties": [
     {
      "name": "duration",
      "type": "float",
-     "desc": "Source duration in seconds."
+     "desc": "Stores the source duration in seconds."
     },
     {
      "name": "level",
      "type": "float",
-     "desc": "Peak absolute value of this playback's output in the last audio callback, after volume / pan / channel gains (linear, 1.0 = full scale; can exceed 1). 0 while paused, while the engine is not running, or while callbacks are stalled."
+     "desc": "Stores a snapshot of this playback's peak output level."
     },
     {
      "name": "loop",
      "type": "bool",
-     "desc": "Loop flag of the playback."
+     "desc": "Stores the playback's loop setting."
     },
     {
      "name": "pan",
      "type": "float",
-     "desc": "Pan of the playback (-1 left, 0 center, 1 right)."
+     "desc": "Stores the playback's stereo balance."
     },
     {
      "name": "path",
      "type": "fs::path",
-     "desc": "Resolved source file (fs::path), the same value as SoundBuffer::getPath() / SoundStream::getPath() and the file name in the logs; empty for generated or in-memory buffers. tc_get_audio_state reports it as UTF-8."
+     "desc": "Stores the resolved source file path."
     },
     {
      "name": "paused",
      "type": "bool",
-     "desc": "True while the playback is paused (Sound::pause())."
+     "desc": "Indicates whether the playback was paused when sampled."
     },
     {
      "name": "position",
      "type": "float",
-     "desc": "Playback position in seconds."
+     "desc": "Stores the playback position in seconds."
     },
     {
      "name": "slot",
      "type": "int",
-     "desc": "Playback slot index (0 .. maxPolyphony - 1)."
+     "desc": "Stores the playback slot index."
     },
     {
      "name": "speed",
      "type": "float",
-     "desc": "Playback speed (1.0 = natural pitch)."
+     "desc": "Stores the playback's speed multiplier."
     },
     {
      "name": "streaming",
      "type": "bool",
-     "desc": "True for a SoundStream playback (Sound::loadStream), false for an eager SoundBuffer."
+     "desc": "Indicates whether the playback uses a streaming source."
     },
     {
      "name": "volume",
      "type": "float",
-     "desc": "Volume of the playback."
+     "desc": "Stores the playback's volume multiplier."
     }
    ]
   },
   {
    "name": "PointStyle",
-   "desc": "Shape used to draw points: Square, Round, Pixel.",
+   "desc": "Defines the shape used to draw point-cloud meshes.",
    "static_methods": [
     {
      "name": "Square",
@@ -10500,7 +10500,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "PrimitiveMode",
-   "desc": "Draw primitive mode: Triangles, TriangleStrip, TriangleFan, Lines, LineStrip, LineLoop, Points.",
+   "desc": "Selects how a mesh connects its vertices into drawing primitives.",
    "static_methods": [
     {
      "name": "Triangles",
@@ -10548,7 +10548,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "PrimitiveType",
-   "desc": "Geometry primitive type: Points, Lines, LineStrip, Triangles, TriangleStrip, Quads.",
+   "desc": "Selects the primitive topology used by vertex writers.",
    "static_methods": [
     {
      "name": "Points",
@@ -10590,7 +10590,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Quaternion",
-   "desc": "Unit quaternion for 3D rotations",
+   "desc": "A quaternion for representing three-dimensional rotations.",
    "constructor": {
     "snippet": "Quaternion(${1:w}, ${2:x}, ${3:y}, ${4:z})"
    },
@@ -10598,22 +10598,22 @@ const TrussSketchAPI = {
     {
      "name": "w",
      "type": "float",
-     "desc": "W component"
+     "desc": "Stores the scalar component of the quaternion."
     },
     {
      "name": "x",
      "type": "float",
-     "desc": "X component"
+     "desc": "Stores the X component of the quaternion."
     },
     {
      "name": "y",
      "type": "float",
-     "desc": "Y component"
+     "desc": "Stores the Y component of the quaternion."
     },
     {
      "name": "z",
      "type": "float",
-     "desc": "Z component"
+     "desc": "Stores the Z component of the quaternion."
     }
    ],
    "methods": [
@@ -10621,49 +10621,49 @@ const TrussSketchAPI = {
      "name": "conjugate",
      "snippet": "conjugate()",
      "return": "Quaternion",
-     "desc": "Get conjugate quaternion"
+     "desc": "Returns the conjugate quaternion."
     },
     {
      "name": "length",
      "snippet": "length()",
      "return": "float",
-     "desc": "Get quaternion length"
+     "desc": "Returns the quaternion length."
     },
     {
      "name": "lengthSquared",
      "snippet": "lengthSquared()",
      "return": "float",
-     "desc": "Get the squared length (avoids the sqrt)"
+     "desc": "Returns the squared quaternion length."
     },
     {
      "name": "normalize",
      "snippet": "normalize()",
      "return": "Quaternion &",
-     "desc": "Normalize this quaternion in place and return *this"
+     "desc": "Normalizes this quaternion in place."
     },
     {
      "name": "normalized",
      "snippet": "normalized()",
      "return": "Quaternion",
-     "desc": "Get normalized quaternion"
+     "desc": "Returns a normalized quaternion."
     },
     {
      "name": "rotate",
      "snippet": "rotate(${1:v})",
      "return": "Vec3",
-     "desc": "Rotate a vector"
+     "desc": "Rotates a vector by this quaternion."
     },
     {
      "name": "toEuler",
      "snippet": "toEuler()",
      "return": "Vec3",
-     "desc": "Convert to Euler angles"
+     "desc": "Converts this quaternion to Euler angles."
     },
     {
      "name": "toMatrix",
      "snippet": "toMatrix()",
      "return": "Mat4",
-     "desc": "Convert to rotation matrix"
+     "desc": "Converts this quaternion to a rotation matrix."
     }
    ],
    "static_methods": [
@@ -10671,31 +10671,31 @@ const TrussSketchAPI = {
      "name": "fromAxisAngle",
      "snippet": "fromAxisAngle(${1:axis}, ${2:radians})",
      "return": "Quaternion",
-     "desc": "Create quaternion from axis-angle"
+     "desc": "Creates a quaternion from a rotation axis and angle."
     },
     {
      "name": "fromEuler",
      "snippet": "fromEuler(${1:pitch}, ${2:yaw}, ${3:roll})",
      "return": "Quaternion",
-     "desc": "Create quaternion from Euler angles"
+     "desc": "Creates a quaternion from Euler angles."
     },
     {
      "name": "identity",
      "snippet": "identity()",
      "return": "Quaternion",
-     "desc": "Create an identity quaternion"
+     "desc": "Creates an identity quaternion."
     },
     {
      "name": "slerp",
      "snippet": "slerp(${1:a}, ${2:b}, ${3:t})",
      "return": "Quaternion",
-     "desc": "Spherical linear interpolation"
+     "desc": "Interpolates between quaternion rotations."
     }
    ]
   },
   {
    "name": "Ray",
-   "desc": "A ray with an origin and a normalized direction, used for unified hit testing and picking",
+   "desc": "Represents a ray for hit testing and picking.",
    "constructor": {
     "snippet": "Ray(${1:o}, ${2:d})"
    },
@@ -10703,12 +10703,12 @@ const TrussSketchAPI = {
     {
      "name": "direction",
      "type": "Vec3",
-     "desc": "Ray direction (normalized)"
+     "desc": "Stores the ray's direction vector."
     },
     {
      "name": "origin",
      "type": "Vec3",
-     "desc": "Ray origin point"
+     "desc": "Stores the ray's starting point."
     }
    ],
    "methods": [
@@ -10716,37 +10716,37 @@ const TrussSketchAPI = {
      "name": "at",
      "snippet": "at(${1:t})",
      "return": "Vec3",
-     "desc": "Get the point along the ray at distance t: origin + direction * t"
+     "desc": "Returns a point along the ray."
     },
     {
      "name": "intersectAABB",
      "snippet": "intersectAABB(${1:boxMin}, ${2:boxMax})",
      "return": "Hit",
-     "desc": "Intersect an axis-aligned bounding box and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
+     "desc": "Tests the ray against an axis-aligned bounding box."
     },
     {
      "name": "intersectPlane",
      "snippet": "intersectPlane(${1:planeNormal}, ${2:planeD})",
      "return": "Hit",
-     "desc": "Intersect an arbitrary plane and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
+     "desc": "Tests the ray against an arbitrary plane."
     },
     {
      "name": "intersectSphere",
      "snippet": "intersectSphere(${1:radius})",
      "return": "Hit",
-     "desc": "Intersect a sphere centered at the origin and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
+     "desc": "Tests the ray against a sphere centered at the coordinate origin."
     },
     {
      "name": "intersectZPlane",
      "snippet": "intersectZPlane()",
      "return": "Hit",
-     "desc": "Intersect the Z=0 plane and return a Ray::Hit carrying the distance and hit point. The out-param overload is deprecated and goes away in v1.0.0."
+     "desc": "Tests the ray against the Z=0 plane."
     },
     {
      "name": "transformed",
      "snippet": "transformed(${1:inverseMatrix})",
      "return": "Ray",
-     "desc": "Transform the ray by a matrix (typically an inverse to map into local space)"
+     "desc": "Returns a ray transformed by a matrix."
     }
    ],
    "static_methods": [
@@ -10754,13 +10754,13 @@ const TrussSketchAPI = {
      "name": "fromScreenPoint2D",
      "snippet": "fromScreenPoint2D(${1:screenX}, ${2:screenY})",
      "return": "Ray",
-     "desc": "Build an orthographic Z-parallel ray from a 2D screen point"
+     "desc": "Creates a Z-parallel ray from a 2D screen point."
     }
    ]
   },
   {
    "name": "Rect",
-   "desc": "Rectangle (x, y, width, height)",
+   "desc": "Represents a rectangle using position and size.",
    "constructor": {
     "snippet": "Rect(${1:x}, ${2:y}, ${3:z}, ${4:w}, ${5:h})"
    },
@@ -10768,22 +10768,22 @@ const TrussSketchAPI = {
     {
      "name": "height",
      "type": "float",
-     "desc": "Height"
+     "desc": "Stores the rectangle's height."
     },
     {
      "name": "width",
      "type": "float",
-     "desc": "Width"
+     "desc": "Stores the rectangle's width."
     },
     {
      "name": "x",
      "type": "float",
-     "desc": "X position"
+     "desc": "Stores the rectangle's X position."
     },
     {
      "name": "y",
      "type": "float",
-     "desc": "Y position"
+     "desc": "Stores the rectangle's Y position."
     }
    ],
    "methods": [
@@ -10791,49 +10791,49 @@ const TrussSketchAPI = {
      "name": "contains",
      "snippet": "contains(${1:px}, ${2:py})",
      "return": "bool",
-     "desc": "Check if point is inside"
+     "desc": "Tests whether a point is inside the rectangle."
     },
     {
      "name": "getBottom",
      "snippet": "getBottom()",
      "return": "float",
-     "desc": "Get bottom edge (y + height)"
+     "desc": "Returns the rectangle's bottom coordinate."
     },
     {
      "name": "getCenter",
      "snippet": "getCenter()",
      "return": "Vec2",
-     "desc": "Get the center point of the rectangle"
+     "desc": "Returns the rectangle's center point."
     },
     {
      "name": "getCenterX",
      "snippet": "getCenterX()",
      "return": "float",
-     "desc": "Get center X"
+     "desc": "Returns the rectangle's center X coordinate."
     },
     {
      "name": "getCenterY",
      "snippet": "getCenterY()",
      "return": "float",
-     "desc": "Get center Y"
+     "desc": "Returns the rectangle's center Y coordinate."
     },
     {
      "name": "getRight",
      "snippet": "getRight()",
      "return": "float",
-     "desc": "Get right edge (x + width)"
+     "desc": "Returns the rectangle's right coordinate."
     },
     {
      "name": "intersects",
      "snippet": "intersects(${1:other})",
      "return": "bool",
-     "desc": "Check if intersects with another rect"
+     "desc": "Tests whether the rectangle overlaps another rectangle."
     },
     {
      "name": "set",
      "snippet": "set(${1:x}, ${2:y}, ${3:w}, ${4:h})",
      "return": "Rect &",
-     "desc": "Set rectangle bounds"
+     "desc": "Sets the rectangle's position and size."
     }
    ]
   },
@@ -11448,7 +11448,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "RectNodeButton",
-   "desc": "Simple clickable button node (a RectNode subclass). Set normalColor/hoverColor/pressColor and label; it draws a filled rect that changes color on hover/press and a centered label. Events are enabled on construction. Listen on its inherited mousePressed/mouseReleased events for clicks.",
+   "desc": "Provides a rectangular button with hover and press feedback.",
    "constructor": {
     "snippet": "RectNodeButton()"
    },
@@ -11456,12 +11456,12 @@ const TrussSketchAPI = {
     {
      "name": "hoverColor",
      "type": "Color",
-     "desc": "Fill color when the pointer is over the button."
+     "desc": "Stores the button background color used while hovered."
     },
     {
      "name": "label",
      "type": "std::string",
-     "desc": "Text drawn centered on the button (skipped if empty)."
+     "desc": "Stores the text displayed on the button."
     },
     {
      "name": "localMatrixChanged",
@@ -11491,12 +11491,12 @@ const TrussSketchAPI = {
     {
      "name": "normalColor",
      "type": "Color",
-     "desc": "Fill color when idle (default dark grey)."
+     "desc": "Stores the button background color used while idle."
     },
     {
      "name": "pressColor",
      "type": "Color",
-     "desc": "Fill color while pressed."
+     "desc": "Stores the button background color used while pressed."
     }
    ],
    "methods": [
@@ -11558,7 +11558,7 @@ const TrussSketchAPI = {
      "name": "draw",
      "snippet": "draw()",
      "return": "void",
-     "desc": "Draw the button: fills the rect with the state-dependent color and draws the centered label. (override)"
+     "desc": "Draws the button background and its centered label."
     },
     {
      "name": "enableEvents",
@@ -11882,7 +11882,7 @@ const TrussSketchAPI = {
      "name": "isPressed",
      "snippet": "isPressed()",
      "return": "bool",
-     "desc": "Whether the button is currently pressed."
+     "desc": "Returns whether the button is in its pressed state."
     },
     {
      "name": "isVisible",
@@ -12086,49 +12086,49 @@ const TrussSketchAPI = {
   },
   {
    "name": "Reflector",
-   "desc": "Visitor base for the TC_REFLECT reflection system; backends (inspector, JSON, codec) subclass it with one visit() per supported type.",
+   "desc": "Defines the visitor interface for reflected values.",
    "methods": [
     {
      "name": "endGroup",
      "snippet": "endGroup()",
      "return": "void",
-     "desc": "Leave the current nested group."
+     "desc": "Ends a group of nested reflected members."
     },
     {
      "name": "isDerived",
      "snippet": "isDerived()",
      "return": "bool",
-     "desc": "Return true if the current member is a derived value (TC_DERIVED): computed from another member, writable, but not saved."
+     "desc": "Reports whether reflection is in a derived-value scope."
     },
     {
      "name": "isReadOnly",
      "snippet": "isReadOnly()",
      "return": "bool",
-     "desc": "Return true if the current reflection scope is read-only."
+     "desc": "Reports whether the current reflection scope is read-only."
     },
     {
      "name": "popDerived",
      "snippet": "popDerived()",
      "return": "void",
-     "desc": "Leave the current derived-value scope."
+     "desc": "Leaves a derived-value reflection scope."
     },
     {
      "name": "popReadOnly",
      "snippet": "popReadOnly()",
      "return": "void",
-     "desc": "Leave the current read-only scope."
+     "desc": "Leaves a read-only reflection scope."
     },
     {
      "name": "pushDerived",
      "snippet": "pushDerived()",
      "return": "void",
-     "desc": "Enter a derived-value scope (TC_DERIVED visits inside it)."
+     "desc": "Enters a derived-value reflection scope."
     },
     {
      "name": "pushReadOnly",
      "snippet": "pushReadOnly()",
      "return": "void",
-     "desc": "Enter a read-only scope (members visited inside cannot be written)."
+     "desc": "Enters a read-only reflection scope."
     }
    ]
   },
@@ -12150,7 +12150,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "SaveError",
-   "desc": "Save failure kind: None, AccessDenied (including bundle refusal), NoSpace, WriteFailed, Unknown. Rename failure is always WriteFailed.",
+   "desc": "Identifies a save error.",
    "static_methods": [
     {
      "name": "None",
@@ -12186,17 +12186,17 @@ const TrussSketchAPI = {
   },
   {
    "name": "SaveResult",
-   "desc": "Result of a checked save, stream open, recorder submission or finalization. Carries SaveError and a failure message.",
+   "desc": "Represents the result of a save or recording operation.",
    "properties": [
     {
      "name": "error",
      "type": "SaveError",
-     "desc": "What went wrong; SaveError::None on success"
+     "desc": "Stores the operation's error category."
     },
     {
      "name": "message",
      "type": "std::string",
-     "desc": "Human-readable failure detail (may be empty)"
+     "desc": "Stores a human-readable failure message."
     }
    ],
    "methods": [
@@ -12204,7 +12204,7 @@ const TrussSketchAPI = {
      "name": "ok",
      "snippet": "ok()",
      "return": "bool",
-     "desc": "true if this operation succeeded (error == SaveError::None); recorder submission is backend acceptance, while close/stop checks finalization."
+     "desc": "Returns whether the operation succeeded."
     }
    ],
    "static_methods": [
@@ -12212,19 +12212,19 @@ const TrussSketchAPI = {
      "name": "fail",
      "snippet": "fail(${1:error})",
      "return": "SaveResult",
-     "desc": "Make a failure result with an error kind and optional message (static)"
+     "desc": "Creates an operation result with an error category and message."
     },
     {
      "name": "success",
      "snippet": "success()",
      "return": "SaveResult",
-     "desc": "Make a success result (static)"
+     "desc": "Creates a successful operation result."
     }
    ]
   },
   {
    "name": "ScreenRecorder",
-   "desc": "Captures the rendered output to a video file (start/stop recording of the on-screen frames)",
+   "desc": "Records rendered window or Fbo frames to a video file.",
    "constructor": {
     "snippet": "ScreenRecorder()"
    },
@@ -12233,65 +12233,65 @@ const TrussSketchAPI = {
      "name": "getFrameCount",
      "snippet": "getFrameCount()",
      "return": "int",
-     "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail."
+     "desc": "Returns the number of video frames accepted by the encoder."
     },
     {
      "name": "getPath",
      "snippet": "getPath()",
      "return": "fs::path",
-     "desc": "Output file path of the current recording"
+     "desc": "Returns the recording's output path."
     },
     {
      "name": "getRejectedFrameCount",
      "snippet": "getRejectedFrameCount()",
      "return": "uint64_t",
-     "desc": "Number of frames refused in this take because capture/readback failed or dimensions, pixel format, row layout or byte capacity did not match the take or native buffer. Refused frames are skipped whole and do not fail the take. Resets on VideoWriter::open() (also used by ScreenRecorder::start())."
+     "desc": "Returns the number of frames rejected during capture or layout validation."
     },
     {
      "name": "isRecording",
      "snippet": "isRecording()",
      "return": "bool",
-     "desc": "Check if the screen recorder is currently capturing"
+     "desc": "Returns whether the recorder is capturing frames."
     },
     {
      "name": "start",
      "snippet": "start(${1:path})",
      "return": "SaveResult",
-     "desc": "Start live capture (window, or an Fbo for clean GUI-free output); size is taken automatically. Calling start while recording finalizes the current file first. If the recorded Fbo is destroyed mid-recording, the recording stops and finalizes automatically. Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization. If the previous take times out waiting for GPU frames, its last completion finalizes it independently of the new take."
+     "desc": "Start live capture of the originating window or an Fbo at its actual pixel size at start. The take keeps fixed encoder dimensions and stays open across source resizes: mismatched frames are skipped before copying and counted by getRejectedFrameCount(), and recording resumes when the original size returns. stop() finalizes the take. One capture/encode operation may be pending: busy opportunities are counted and skipped while wall/audio PTS gaps are preserved. Calling start finalizes the previous take first and refuses replacement while an old operation remains pending. Destroying the source Fbo stops/finalizes automatically. Returns SaveResult for path preparation and encoder opening; check stop() for finalization."
     },
     {
      "name": "stop",
      "snippet": "stop()",
      "return": "SaveResult",
-     "desc": "Disconnect the audio listener and wait up to one second for audio callbacks (a Warning if one is still running), then wait up to 2 seconds for GPU readbacks before finalizing. If GPU frames remain, logs one Error and returns WriteFailed with message recording still has frames in flight. The callbacks retain their State and writer; the last completion drains audio and closes the file. Returns SaveResult for finalization or the retained failure; repeated calls do not repeat the timeout Error. Caller errors and transient readback failures do not fail the take. No temporary/rename is used."
+     "desc": "Stops capturing and finalizes the recording file."
     },
     {
      "name": "writer",
      "snippet": "writer()",
      "return": "VideoWriter &",
-     "desc": "Access the underlying VideoWriter for advanced introspection"
+     "desc": "Returns access to the recorder's underlying video writer."
     }
    ]
   },
   {
    "name": "ScreenshotSaveEventArgs",
-   "desc": "Completion of an asynchronous screenshot: the actual destination and save result. Delivered on main in a later frame, including rejected requests.",
+   "desc": "Carries the result of an asynchronous screenshot request.",
    "properties": [
     {
      "name": "path",
      "type": "fs::path",
-     "desc": "Resolved absolute native output path, including extension normalization; on Web, the download filename only."
+     "desc": "Contains the screenshot's resolved output destination."
     },
     {
      "name": "result",
      "type": "SaveResult",
-     "desc": "Checked native write/close/replacement result. Web success means a download click was submitted; browser disk completion cannot be observed."
+     "desc": "Contains the screenshot save result."
     }
    ]
   },
   {
    "name": "ScrollBar",
-   "desc": "Visual scroll indicator RectNode that syncs with a ScrollContainer and supports drag scrolling",
+   "desc": "Displays a draggable scroll indicator for a ScrollContainer.",
    "properties": [
     {
      "name": "localMatrixChanged",
@@ -12402,13 +12402,13 @@ const TrussSketchAPI = {
      "name": "getBarColor",
      "snippet": "getBarColor()",
      "return": "Color",
-     "desc": "Get the scroll-bar color (ScrollBar method) (C++ only)"
+     "desc": "Returns the scroll-bar color."
     },
     {
      "name": "getBarWidth",
      "snippet": "getBarWidth()",
      "return": "float",
-     "desc": "Get the scroll-bar thickness (ScrollBar method) (C++ only)"
+     "desc": "Returns the scroll-bar thickness."
     },
     {
      "name": "getBottom",
@@ -12504,7 +12504,7 @@ const TrussSketchAPI = {
      "name": "getMargin",
      "snippet": "getMargin()",
      "return": "float",
-     "desc": "Get the margin between the bar and the container edge (ScrollBar method) (C++ only)"
+     "desc": "Returns the margin between the bar and the container edges."
     },
     {
      "name": "getModByTypeName",
@@ -12546,7 +12546,7 @@ const TrussSketchAPI = {
      "name": "getOffset",
      "snippet": "getOffset()",
      "return": "float",
-     "desc": "Get the rounded-cap draw offset (round(barWidth/2)) (ScrollBar method) (C++ only)"
+     "desc": "Returns the rounded half-thickness offset."
     },
     {
      "name": "getPMouseX",
@@ -12774,13 +12774,13 @@ const TrussSketchAPI = {
      "name": "setBarColor",
      "snippet": "setBarColor(${1:color})",
      "return": "void",
-     "desc": "Set the scroll-bar color (ScrollBar method) (C++ only)"
+     "desc": "Sets the scroll-bar color."
     },
     {
      "name": "setBarWidth",
      "snippet": "setBarWidth(${1:width})",
      "return": "void",
-     "desc": "Set the scroll-bar thickness (ScrollBar method) (C++ only)"
+     "desc": "Sets the scroll-bar thickness."
     },
     {
      "name": "setCameraContext",
@@ -12822,7 +12822,7 @@ const TrussSketchAPI = {
      "name": "setMargin",
      "snippet": "setMargin(${1:margin})",
      "return": "void",
-     "desc": "Set the margin between the bar and the container edge (ScrollBar method) (C++ only)"
+     "desc": "Sets the margin between the bar and the container edges."
     },
     {
      "name": "setName",
@@ -12936,13 +12936,13 @@ const TrussSketchAPI = {
      "name": "updateFromContainer",
      "snippet": "updateFromContainer()",
      "return": "void",
-     "desc": "Resync the bar size and position from its ScrollContainer (ScrollBar method) (C++ only)"
+     "desc": "Synchronizes the bar's size and position with its scroll container."
     }
    ]
   },
   {
    "name": "ScrollContainer",
-   "desc": "Scrollable RectNode that clips and scrolls a single content node when it overflows the container bounds",
+   "desc": "Provides a clipped viewport for scrollable content.",
    "constructor": {
     "snippet": "ScrollContainer()"
    },
@@ -13092,13 +13092,13 @@ const TrussSketchAPI = {
      "name": "getContent",
      "snippet": "getContent()",
      "return": "Node::Ptr",
-     "desc": "Get the scrollable content node (ScrollContainer method) (C++ only)"
+     "desc": "Returns the scrollable content node."
     },
     {
      "name": "getContentRect",
      "snippet": "getContentRect()",
      "return": "RectNode *",
-     "desc": "Get the content node cast to RectNode (null if not a RectNode) (ScrollContainer method) (C++ only)"
+     "desc": "Returns the content node as a RectNode."
     },
     {
      "name": "getDisplayName",
@@ -13164,13 +13164,13 @@ const TrussSketchAPI = {
      "name": "getMaxScrollX",
      "snippet": "getMaxScrollX()",
      "return": "float",
-     "desc": "Get the maximum horizontal scroll (ScrollContainer method) (C++ only)"
+     "desc": "Returns the maximum horizontal scroll position."
     },
     {
      "name": "getMaxScrollY",
      "snippet": "getMaxScrollY()",
      "return": "float",
-     "desc": "Get the maximum vertical scroll (ScrollContainer method) (C++ only)"
+     "desc": "Returns the maximum vertical scroll position."
     },
     {
      "name": "getModByTypeName",
@@ -13284,25 +13284,25 @@ const TrussSketchAPI = {
      "name": "getScroll",
      "snippet": "getScroll()",
      "return": "Vec2",
-     "desc": "Get the scroll position as a Vec2 (ScrollContainer method) (C++ only)"
+     "desc": "Returns the scroll position as a Vec2."
     },
     {
      "name": "getScrollSpeed",
      "snippet": "getScrollSpeed()",
      "return": "float",
-     "desc": "Get the scroll speed (wheel/trackpad sensitivity) (ScrollContainer method) (C++ only)"
+     "desc": "Returns the wheel and trackpad scroll sensitivity."
     },
     {
      "name": "getScrollX",
      "snippet": "getScrollX()",
      "return": "float",
-     "desc": "Get the horizontal scroll position (ScrollContainer method) (C++ only)"
+     "desc": "Returns the horizontal scroll position."
     },
     {
      "name": "getScrollY",
      "snippet": "getScrollY()",
      "return": "float",
-     "desc": "Get the vertical scroll position (ScrollContainer method) (C++ only)"
+     "desc": "Returns the vertical scroll position."
     },
     {
      "name": "getSize",
@@ -13398,7 +13398,7 @@ const TrussSketchAPI = {
      "name": "isHorizontalScrollEnabled",
      "snippet": "isHorizontalScrollEnabled()",
      "return": "bool",
-     "desc": "Whether horizontal scrolling is enabled (ScrollContainer method) (C++ only)"
+     "desc": "Returns whether horizontal scrolling is enabled."
     },
     {
      "name": "isMouseOver",
@@ -13410,7 +13410,7 @@ const TrussSketchAPI = {
      "name": "isVerticalScrollEnabled",
      "snippet": "isVerticalScrollEnabled()",
      "return": "bool",
-     "desc": "Whether vertical scrolling is enabled (ScrollContainer method) (C++ only)"
+     "desc": "Returns whether vertical scrolling is enabled."
     },
     {
      "name": "isVisible",
@@ -13482,7 +13482,7 @@ const TrussSketchAPI = {
      "name": "setContent",
      "snippet": "setContent(${1:newContent})",
      "return": "void",
-     "desc": "Set content node for ScrollContainer (C++ only)"
+     "desc": "Sets the scrollable content node."
     },
     {
      "name": "setEuler",
@@ -13512,7 +13512,7 @@ const TrussSketchAPI = {
      "name": "setHorizontalScrollEnabled",
      "snippet": "setHorizontalScrollEnabled(${1:enabled})",
      "return": "void",
-     "desc": "Enable or disable horizontal scrolling (ScrollContainer method) (C++ only)"
+     "desc": "Enables or disables horizontal scrolling."
     },
     {
      "name": "setName",
@@ -13578,25 +13578,25 @@ const TrussSketchAPI = {
      "name": "setScroll",
      "snippet": "setScroll(${1:x}, ${2:y})",
      "return": "void",
-     "desc": "Set the scroll position from x/y or a Vec2 (clamped) (ScrollContainer method) (C++ only)"
+     "desc": "Sets the scroll position."
     },
     {
      "name": "setScrollSpeed",
      "snippet": "setScrollSpeed(${1:speed})",
      "return": "void",
-     "desc": "Set the scroll speed (wheel/trackpad sensitivity) (ScrollContainer method) (C++ only)"
+     "desc": "Sets the wheel and trackpad scroll sensitivity."
     },
     {
      "name": "setScrollX",
      "snippet": "setScrollX(${1:x})",
      "return": "void",
-     "desc": "Set the horizontal scroll position (clamped) (ScrollContainer method) (C++ only)"
+     "desc": "Sets the horizontal scroll position."
     },
     {
      "name": "setScrollY",
      "snippet": "setScrollY(${1:y})",
      "return": "void",
-     "desc": "Set vertical scroll position (C++ only)"
+     "desc": "Sets the vertical scroll position."
     },
     {
      "name": "setSize",
@@ -13608,7 +13608,7 @@ const TrussSketchAPI = {
      "name": "setVerticalScrollEnabled",
      "snippet": "setVerticalScrollEnabled(${1:enabled})",
      "return": "void",
-     "desc": "Enable or disable vertical scrolling (ScrollContainer method) (C++ only)"
+     "desc": "Enables or disables vertical scrolling."
     },
     {
      "name": "setVisible",
@@ -13650,7 +13650,7 @@ const TrussSketchAPI = {
      "name": "updateScrollBounds",
      "snippet": "updateScrollBounds()",
      "return": "void",
-     "desc": "Recalculate scroll bounds from the content size (ScrollContainer method) (C++ only)"
+     "desc": "Recalculates the scroll limits from the content size."
     }
    ]
   },
@@ -13720,7 +13720,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "SendError",
-   "desc": "Why a send could not be queued, or how a queued one finished: None, ClientNotFound, Disconnected, Timeout, QueueFull, NotRunning.",
+   "desc": "Describes a send queue rejection or a completed send's outcome.",
    "static_methods": [
     {
      "name": "None",
@@ -13762,17 +13762,17 @@ const TrussSketchAPI = {
   },
   {
    "name": "SendResult",
-   "desc": "Result of sendAsync(). Truthy when the payload was queued; carries the id that onSendComplete reports back.",
+   "desc": "Contains the immediate result of an asynchronous send request.",
    "properties": [
     {
      "name": "error",
      "type": "SendError",
-     "desc": "Why the send was not queued; SendError::None on success"
+     "desc": "Contains the result of attempting to queue the send."
     },
     {
      "name": "id",
      "type": "uint64_t",
-     "desc": "Identifies this send in onSendComplete; 0 when nothing was queued"
+     "desc": "Identifies the queued send."
     }
    ],
    "methods": [
@@ -13780,13 +13780,13 @@ const TrussSketchAPI = {
      "name": "ok",
      "snippet": "ok()",
      "return": "bool",
-     "desc": "true if the payload was queued (error == SendError::None)"
+     "desc": "Returns whether the result has no error."
     }
    ]
   },
   {
    "name": "Serial",
-   "desc": "Cross-platform serial port (USB/COM): connect, read/write bytes",
+   "desc": "Connects to serial ports and reads or writes bytes.",
    "constructor": {
     "snippet": "Serial()"
    },
@@ -13794,7 +13794,7 @@ const TrussSketchAPI = {
     {
      "name": "onDisconnect",
      "type": "Event<SerialDisconnectEventArgs>",
-     "desc": "Event fired once per open connection when it ends: on a detected device loss (wasClean = false) or on close() of an open port (wasClean = true)"
+     "desc": "Reports when a serial connection ends."
     }
    ],
    "methods": [
@@ -13802,85 +13802,85 @@ const TrussSketchAPI = {
      "name": "available",
      "snippet": "available()",
      "return": "int",
-     "desc": "Number of bytes buffered by TrussC to read; 0 when not connected (a lost device also closes the port and fires onDisconnect)"
+     "desc": "Returns the number of received bytes ready to read."
     },
     {
      "name": "close",
      "snippet": "close()",
      "return": "void",
-     "desc": "Disconnect and release resources; fires onDisconnect (wasClean = true) when the port was open"
+     "desc": "Closes the serial connection."
     },
     {
      "name": "drain",
      "snippet": "drain()",
      "return": "void",
-     "desc": "Wait until output transmission completes"
+     "desc": "Waits for pending output transmission to finish."
     },
     {
      "name": "flush",
      "snippet": "flush()",
      "return": "void",
-     "desc": "Clear both input and output buffers"
+     "desc": "Discards buffered input and output."
     },
     {
      "name": "flushInput",
      "snippet": "flushInput()",
      "return": "void",
-     "desc": "Clear the input buffer"
+     "desc": "Discards buffered input."
     },
     {
      "name": "flushOutput",
      "snippet": "flushOutput()",
      "return": "void",
-     "desc": "Clear the output buffer"
+     "desc": "Discards pending output."
     },
     {
      "name": "getDevicePath",
      "snippet": "getDevicePath()",
      "return": "std::string",
-     "desc": "Current device path; a copy, since another thread's setup() may change it. Never waits for setup(), close() or an I/O call"
+     "desc": "Returns the stored device path."
     },
     {
      "name": "getDroppedByteCount",
      "snippet": "getDroppedByteCount()",
      "return": "size_t",
-     "desc": "Received bytes discarded by the 1 MiB TrussC buffer since the last setup(); flush and close preserve the count. Device input or a stalled reader can fill the deque; a fixed cap keeps memory finite. Overflow drops the oldest bytes and increments the discard count."
+     "desc": "Returns the number of received bytes discarded because the receive buffer overflowed."
     },
     {
      "name": "isConnected",
      "snippet": "isConnected()",
      "return": "bool",
-     "desc": "Whether the port is open and working; turns false after close() or when a read/write call finds the device gone"
+     "desc": "Returns the current serial connection state."
     },
     {
      "name": "isInitialized",
      "snippet": "isInitialized()",
      "return": "bool",
-     "desc": "Whether currently connected; same as isConnected()"
+     "desc": "Returns the same connection state as `isConnected()`."
     },
     {
      "name": "readByte",
      "snippet": "readByte()",
      "return": "int",
-     "desc": "Read a single byte; 0-255 on success, -1 no data, -2 error (a lost device also closes the port and fires onDisconnect)"
+     "desc": "Reads one received byte."
     },
     {
      "name": "setup",
      "snippet": "setup(${1:portName}, ${2:baudRate})",
      "return": "bool",
-     "desc": "Connect to a port by path or by index from listDevices()"
+     "desc": "Opens a serial connection by device path or list index."
     },
     {
      "name": "writeByte",
      "snippet": "writeByte(${1:byte})",
      "return": "bool",
-     "desc": "Write a single byte; true on success"
+     "desc": "Writes one byte to the serial connection."
     },
     {
      "name": "writeBytes",
      "snippet": "writeBytes(${1:buffer})",
      "return": "int",
-     "desc": "Write bytes; returns actual count or -1 on error (a lost device also closes the port and fires onDisconnect)"
+     "desc": "Writes bytes from a buffer or string to the serial connection."
     }
    ],
    "static_methods": [
@@ -13888,34 +13888,34 @@ const TrussSketchAPI = {
      "name": "listDevices",
      "snippet": "listDevices()",
      "return": "std::vector<SerialDeviceInfo>",
-     "desc": "List available serial devices"
+     "desc": "Lists serial devices found on the system."
     },
     {
      "name": "printDevices",
      "snippet": "printDevices()",
      "return": "void",
-     "desc": "Log all available serial devices"
+     "desc": "Logs the serial device list."
     }
    ]
   },
   {
    "name": "SerialDeviceInfo",
-   "desc": "Info for one serial device (from Serial::listDevices)",
+   "desc": "Holds information about one enumerated serial device.",
    "properties": [
     {
      "name": "deviceId",
      "type": "int",
-     "desc": "Device index"
+     "desc": "Stores the device's index in an enumerated list."
     },
     {
      "name": "deviceName",
      "type": "std::string",
-     "desc": "Device name"
+     "desc": "Stores the device's display name."
     },
     {
      "name": "devicePath",
      "type": "std::string",
-     "desc": "Device path (e.g. COM3, /dev/tty.usbserial-*)"
+     "desc": "Stores the path used to open the device."
     }
    ],
    "methods": [
@@ -13923,51 +13923,51 @@ const TrussSketchAPI = {
      "name": "getDeviceID",
      "snippet": "getDeviceID()",
      "return": "int",
-     "desc": "Device index"
+     "desc": "Returns the device's list index."
     },
     {
      "name": "getDeviceName",
      "snippet": "getDeviceName()",
      "return": "const std::string &",
-     "desc": "Device name"
+     "desc": "Returns the device's display name."
     },
     {
      "name": "getDevicePath",
      "snippet": "getDevicePath()",
      "return": "const std::string &",
-     "desc": "Device path"
+     "desc": "Returns the device path."
     }
    ]
   },
   {
    "name": "SerialDisconnectEventArgs",
-   "desc": "Event args for Serial::onDisconnect",
+   "desc": "Describes a serial connection that ended.",
    "properties": [
     {
      "name": "baudRate",
      "type": "int",
-     "desc": "The rate the port was open at (the one setup() logged); pass it back to setup() to reconnect"
+     "desc": "Stores the baud rate of the connection that ended."
     },
     {
      "name": "portName",
      "type": "std::string",
-     "desc": "Port name as passed to setup()"
+     "desc": "Stores the port name of the connection that ended."
     },
     {
      "name": "reason",
      "type": "std::string",
-     "desc": "Human-readable reason: \"closed by close()\" (on Android it may go on with \"(the device had already been lost: ...)\"), or the loss warning's text such as \"read: Input/output error\". For display and logs; tell a close from a loss with wasClean"
+     "desc": "Stores a human-readable reason for the disconnection."
     },
     {
      "name": "wasClean",
      "type": "bool",
-     "desc": "true: closed by the app (close()); false: device lost / I/O error"
+     "desc": "Indicates whether the application requested the connection to close."
     }
    ]
   },
   {
    "name": "Shader",
-   "desc": "GPU shader program (vertex + fragment) with a begin/end/setUniform API for custom-shaded drawing",
+   "desc": "Provides a GPU shader program integrated with TrussC drawing.",
    "constructor": {
     "snippet": "Shader()"
    },
@@ -13976,106 +13976,106 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:descFn})",
      "return": "bool",
-     "desc": "Load a sokol-shdc program and capture the subclass pipeline recipe. Target-compatible pipelines are created lazily at drawing; target-specific pipeline failures are reported then."
+     "desc": "Loads a shader from a sokol-shdc descriptor function."
     },
     {
      "name": "clear",
      "snippet": "clear()",
      "return": "void",
-     "desc": "Destroy the shader's GPU resources and reset it to the unloaded state."
+     "desc": "Releases this shader's GPU resources and resets its loaded state."
     },
     {
      "name": "isLoaded",
      "snippet": "isLoaded()",
      "return": "bool",
-     "desc": "Check if shader is loaded"
+     "desc": "Returns whether shader loading succeeded."
     },
     {
      "name": "begin",
      "snippet": "begin()",
      "return": "void",
-     "desc": "Begin shader (pushes to stack)"
+     "desc": "Starts a scope for drawing with this shader."
     },
     {
      "name": "end_shader",
      "snippet": "end_shader()",
      "return": "void",
-     "desc": "End shader (pops from stack)"
+     "desc": "Ends this shader's active drawing scope."
     },
     {
      "name": "setUniform",
      "snippet": "setUniform(${1:slot}, ${2:value})",
      "return": "void",
-     "desc": "Set uniform variable by slot (vector overloads send arrays; Vec3 array is padded to Vec4 per std140)"
+     "desc": "Stores uniform-block data for a shader slot."
     },
     {
      "name": "setTexture",
      "snippet": "setTexture(${1:slot}, ${2:image}, ${3:sampler})",
      "return": "void",
-     "desc": "Bind texture to slot"
+     "desc": "Stores a texture binding for a shader slot."
     },
     {
      "name": "submitVertices",
      "snippet": "submitVertices()",
      "return": "",
-     "desc": "Submit a batch of vertices for deferred drawing with this shader (lines are unsupported)."
+     "desc": "Records vertices for deferred drawing with this shader."
     }
    ]
   },
   {
    "name": "ShaderVertex",
-   "desc": "Standard vertex format for shader drawing (position, normal, texcoord, color).",
+   "desc": "Defines the vertex layout used for custom shader drawing.",
    "properties": [
     {
      "name": "a",
      "type": "float",
-     "desc": "Vertex color alpha component."
+     "desc": "Stores the alpha component of the vertex color."
     },
     {
      "name": "b",
      "type": "float",
-     "desc": "Vertex color blue component."
+     "desc": "Stores the blue component of the vertex color."
     },
     {
      "name": "g",
      "type": "float",
-     "desc": "Vertex color green component."
+     "desc": "Stores the green component of the vertex color."
     },
     {
      "name": "r",
      "type": "float",
-     "desc": "Vertex color red component."
+     "desc": "Stores the red component of the vertex color."
     },
     {
      "name": "u",
      "type": "float",
-     "desc": "Texture coordinate U."
+     "desc": "Stores the U texture coordinate."
     },
     {
      "name": "v",
      "type": "float",
-     "desc": "Texture coordinate V."
+     "desc": "Stores the V texture coordinate."
     },
     {
      "name": "x",
      "type": "float",
-     "desc": "Vertex position X."
+     "desc": "Stores the X coordinate of the vertex position."
     },
     {
      "name": "y",
      "type": "float",
-     "desc": "Vertex position Y."
+     "desc": "Stores the Y coordinate of the vertex position."
     },
     {
      "name": "z",
      "type": "float",
-     "desc": "Vertex position Z."
+     "desc": "Stores the Z coordinate of the vertex position."
     }
    ]
   },
   {
    "name": "Sound",
-   "desc": "Audio playback. A Sound plays only while it, or a copy of it, is alive: copies share the voice, and when the last handle is destroyed or overwritten the voice stops (looping or one-shot) and its slot is freed. Keep Sound objects alive (e.g. as members) to play overlapping one-shots.",
+   "desc": "Loads audio sources and controls their playback.",
    "constructor": {
     "snippet": "Sound()"
    },
@@ -14084,193 +14084,193 @@ const TrussSketchAPI = {
      "name": "clearChannelGains",
      "snippet": "clearChannelGains()",
      "return": "void",
-     "desc": "Clear per-channel gains (back to uniform 1.0)."
+     "desc": "Clear the per-output-channel gains."
     },
     {
      "name": "clearChannelMap",
      "snippet": "clearChannelMap()",
      "return": "void",
-     "desc": "Clear the explicit channel map; routing falls back to setMixMode rules."
+     "desc": "Clear the explicit channel routing."
     },
     {
      "name": "getChannelGains",
      "snippet": "getChannelGains()",
      "return": "std::shared_ptr<const std::vector<float>>",
-     "desc": "Current per-output-channel gain multipliers snapshot, or null if none set."
+     "desc": "Return a snapshot of the per-output-channel gains."
     },
     {
      "name": "getChannelMap",
      "snippet": "getChannelMap()",
      "return": "std::shared_ptr<const std::vector<std::vector<int>>>",
-     "desc": "Current per-output-channel source routing snapshot, or null if mixMode rules apply."
+     "desc": "Return a snapshot of the explicit channel routing."
     },
     {
      "name": "getDuration",
      "snippet": "getDuration()",
      "return": "float",
-     "desc": "Get total duration in seconds"
+     "desc": "Return the total audio duration."
     },
     {
      "name": "getMixMode",
      "snippet": "getMixMode()",
      "return": "MixMode",
-     "desc": "Current channel mix policy (Auto / DownmixMono). Overridden when a non-empty channel map is set."
+     "desc": "Return the stored channel mixing mode."
     },
     {
      "name": "getPan",
      "snippet": "getPan()",
      "return": "float",
-     "desc": "Get current panning"
+     "desc": "Return the stored stereo balance."
     },
     {
      "name": "getPosition",
      "snippet": "getPosition()",
      "return": "float",
-     "desc": "Get playback position in seconds. On a stream, right after setPosition() and until the audio has moved there, this is the requested position. See Sound::setPosition() for measured stream seek latency."
+     "desc": "Return the playback position."
     },
     {
      "name": "getSpeed",
      "snippet": "getSpeed()",
      "return": "float",
-     "desc": "Get current playback speed"
+     "desc": "Return the stored playback speed."
     },
     {
      "name": "getVolume",
      "snippet": "getVolume()",
      "return": "float",
-     "desc": "Get current volume"
+     "desc": "Return the stored volume multiplier."
     },
     {
      "name": "isLoaded",
      "snippet": "isLoaded()",
      "return": "bool",
-     "desc": "Check if loaded"
+     "desc": "Report whether a source is assigned."
     },
     {
      "name": "isLoop",
      "snippet": "isLoop()",
      "return": "bool",
-     "desc": "Check if loop mode is enabled"
+     "desc": "Return the stored loop setting."
     },
     {
      "name": "isPaused",
      "snippet": "isPaused()",
      "return": "bool",
-     "desc": "Check if paused"
+     "desc": "Report the current voice's pause state."
     },
     {
      "name": "isPlaying",
      "snippet": "isPlaying()",
      "return": "bool",
-     "desc": "Check if playing (false while paused). A stream halted by a decoder failure stops after its buffered audio drains, including looping streams. The error is logged once; TrussC does not retry automatically."
+     "desc": "Report whether the current voice is playing."
     },
     {
      "name": "isStreaming",
      "snippet": "isStreaming()",
      "return": "bool",
-     "desc": "True if this Sound was loaded via loadStream() (vs eager load())"
+     "desc": "Report whether the assigned source uses streaming."
     },
     {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "LoadResult",
-     "desc": "Load audio file. Format auto-detected by extension: .wav .mp3 .ogg .flac .aac .m4a (case-insensitive; the file name keeps its case as written). Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given."
+     "desc": "Load an audio file into memory."
     },
     {
      "name": "loadFromBuffer",
      "snippet": "loadFromBuffer(${1:buf})",
      "return": "void",
-     "desc": "Load PCM directly from a pre-generated SoundBuffer (e.g. from ChipSound or a procedural waveform), copying it or adopting the shared_ptr."
+     "desc": "Assign a prepared PCM buffer as the sound source."
     },
     {
      "name": "loadStream",
      "snippet": "loadStream(${1:path})",
      "return": "LoadResult",
-     "desc": "Stream sound from disk (WAV/MP3/FLAC). Best for long files; cuts memory. maxPolyphony = simultaneous play() count. Relative paths resolve against the data folder (getDataPath()); absolute paths are used as given."
+     "desc": "Prepare an audio file for streaming playback."
     },
     {
      "name": "loadTestTone",
      "snippet": "loadTestTone()",
      "return": "void",
-     "desc": "Load a generated sine test tone (no file needed). Handy for verifying audio output."
+     "desc": "Generate a sine-wave test tone as the sound source."
     },
     {
      "name": "pause",
      "snippet": "pause()",
      "return": "void",
-     "desc": "Pause playback"
+     "desc": "Pause the current voice."
     },
     {
      "name": "play",
      "snippet": "play()",
      "return": "bool",
-     "desc": "Play from the beginning (this Sound's previous voice is stopped first). Returns false when nothing will play: not loaded, or the engine dropped the play (every voice busy, the stream's maxPolyphony reached by a copy of a streamed Sound, the stream file could not be reopened, or no output device running). Drops are logged as warnings and counted in AudioEngine::getStats()."
+     "desc": "Start playback from the beginning."
     },
     {
      "name": "resume",
      "snippet": "resume()",
      "return": "void",
-     "desc": "Resume playback"
+     "desc": "Resume the paused voice."
     },
     {
      "name": "setChannelGains",
      "snippet": "setChannelGains(${1:gains})",
      "return": "void",
-     "desc": "Per-output-channel gain multiplier. Entries beyond .size() default to 1.0. No internal normalization (setVolume is the overall gain)."
+     "desc": "Set a gain multiplier for each output channel."
     },
     {
      "name": "setChannelMap",
      "snippet": "setChannelMap(${1:map})",
      "return": "void",
-     "desc": "Per-output-channel routing. 1D: each entry is a src ch index (-1 = silent). 2D: each entry lists src ch indices that sum into that output."
+     "desc": "Set explicit routing from source channels to output channels."
     },
     {
      "name": "setLoop",
      "snippet": "setLoop(${1:loop})",
      "return": "void",
-     "desc": "Set loop mode"
+     "desc": "Enable or disable looping."
     },
     {
      "name": "setMixMode",
      "snippet": "setMixMode(${1:m})",
      "return": "void",
-     "desc": "Channel routing preset. Auto (default) = mono broadcasts / multi 1:1. DownmixMono = average src to all out ch."
+     "desc": "Set the channel routing preset."
     },
     {
      "name": "setPan",
      "snippet": "setPan(${1:pan})",
      "return": "void",
-     "desc": "Set panning (-1.0=left, 0.0=center, 1.0=right)"
+     "desc": "Set the stereo balance."
     },
     {
      "name": "setPosition",
      "snippet": "setPosition(${1:seconds})",
      "return": "void",
-     "desc": "Seek to a specific time in seconds. On streams the audio moves after the decoder seeks and the ring refills. Measured seek to first post-seek output callback on WASAPI/CoreAudio: about 1.5 audio callbacks on average, about 2 at p95 (13–16 ms mean with 10 ms callbacks). PulseAudio on main averaged 25.4 ms. These are callback-level timings, not speaker/DAC latency or silence duration; slow storage or an MP3 several hours long can take longer. See issue #550 for measurements. getPosition() reports the new position at once, the last of several calls wins, and a paused stream resumes from there. A stream whose length is unknown (getDuration() is 0) cannot seek: the call is ignored with a warning."
+     "desc": "Seek to a playback time."
     },
     {
      "name": "setSpeed",
      "snippet": "setSpeed(${1:speed})",
      "return": "void",
-     "desc": "Set playback speed (1.0=normal)"
+     "desc": "Sets the playback speed."
     },
     {
      "name": "setVolume",
      "snippet": "setVolume(${1:vol})",
      "return": "void",
-     "desc": "Set volume (0.0-1.0)"
+     "desc": "Sets the playback volume."
     },
     {
      "name": "stop",
      "snippet": "stop()",
      "return": "void",
-     "desc": "Stop audio and release the voice (a streamed voice also closes its decoder and file). Copies that share the voice see it stopped."
+     "desc": "Stops playback and releases the voice."
     }
    ]
   },
   {
    "name": "SoundBuffer",
-   "desc": "Eager sound source: the full file decoded into interleaved float PCM held in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Also provides waveform generators, an ADSR envelope, and mixing helpers, so it doubles as a procedural-audio scratch buffer. Best for short SFX and zero-latency play / seek / multi-instance.",
+   "desc": "Stores fully decoded audio samples in memory.",
    "constructor": {
     "snippet": "SoundBuffer()"
    },
@@ -14279,109 +14279,109 @@ const TrussSketchAPI = {
      "name": "loadOgg",
      "snippet": "loadOgg(${1:path})",
      "return": "LoadResult",
-     "desc": "Decode an OGG Vorbis file into PCM (via stb_vorbis). Relative paths resolve via getDataPath(); absolute paths pass through."
+     "desc": "Decode an OGG Vorbis file into the buffer."
     },
     {
      "name": "loadWav",
      "snippet": "loadWav(${1:path})",
      "return": "LoadResult",
-     "desc": "Decode a WAV file into PCM. Relative paths resolve via getDataPath(); absolute paths pass through."
+     "desc": "Decode a WAV file into the buffer."
     },
     {
      "name": "loadMp3",
      "snippet": "loadMp3(${1:path})",
      "return": "LoadResult",
-     "desc": "Decode an MP3 file into PCM. Relative paths resolve via getDataPath(); absolute paths pass through."
+     "desc": "Decode an MP3 file into the buffer."
     },
     {
      "name": "loadMp3FromMemory",
      "snippet": "loadMp3FromMemory()",
      "return": "",
-     "desc": "Decode MP3 data from a memory buffer."
+     "desc": "Decode MP3 data from memory."
     },
     {
      "name": "loadAac",
      "snippet": "loadAac(${1:path})",
      "return": "LoadResult",
-     "desc": "Decode an AAC / M4A file into PCM (platform-specific; returns false on unsupported platforms). Relative paths resolve via getDataPath(); absolute paths pass through. On Web, load waits for decoded PCM using OfflineAudioContext, including in setup()."
+     "desc": "Decode an AAC or M4A file into the buffer."
     },
     {
      "name": "loadAacFromMemory",
      "snippet": "loadAacFromMemory()",
      "return": "",
-     "desc": "Decode AAC data from a memory buffer (platform-specific; returns false on unsupported platforms)."
+     "desc": "Decode AAC data from memory."
     },
     {
      "name": "loadPcmFromMemory",
      "snippet": "loadPcmFromMemory()",
      "return": "",
-     "desc": "Load raw interleaved PCM (16-bit signed or 32-bit float) from memory with explicit format. Returns false for unsupported bit depths, a channel count below 1, a data size that is not a whole number of frames, or more samples than a buffer can hold."
+     "desc": "Copy raw interleaved PCM from memory into the buffer."
     },
     {
      "name": "getDuration",
      "snippet": "getDuration()",
      "return": "float",
-     "desc": "Duration in seconds (numSamples / sampleRate)."
+     "desc": "Return the buffer duration in seconds."
     },
     {
      "name": "generateSineWave",
      "snippet": "generateSineWave(${1:frequency}, ${2:duration})",
      "return": "void",
-     "desc": "Fill the buffer with a mono sine wave of the given frequency (Hz) and duration (seconds)."
+     "desc": "Generate a mono sine wave."
     },
     {
      "name": "generateSquareWave",
      "snippet": "generateSquareWave(${1:frequency}, ${2:duration})",
      "return": "void",
-     "desc": "Fill the buffer with a mono square wave."
+     "desc": "Generate a mono square wave."
     },
     {
      "name": "generateTriangleWave",
      "snippet": "generateTriangleWave(${1:frequency}, ${2:duration})",
      "return": "void",
-     "desc": "Fill the buffer with a mono triangle wave."
+     "desc": "Generate a mono triangle wave."
     },
     {
      "name": "generateSawtoothWave",
      "snippet": "generateSawtoothWave(${1:frequency}, ${2:duration})",
      "return": "void",
-     "desc": "Fill the buffer with a mono sawtooth wave."
+     "desc": "Generate a mono sawtooth wave."
     },
     {
      "name": "generateNoise",
      "snippet": "generateNoise(${1:duration})",
      "return": "void",
-     "desc": "Fill the buffer with mono white noise."
+     "desc": "Generate mono white noise."
     },
     {
      "name": "generatePinkNoise",
      "snippet": "generatePinkNoise(${1:duration})",
      "return": "void",
-     "desc": "Fill the buffer with mono pink noise (1/f spectrum, Paul Kellet's method)."
+     "desc": "Generate mono pink noise."
     },
     {
      "name": "generateSilence",
      "snippet": "generateSilence(${1:duration})",
      "return": "void",
-     "desc": "Fill the buffer with silence of the given duration (useful as a base for mixFrom)."
+     "desc": "Resize the buffer for a mono silent segment."
     },
     {
      "name": "applyADSR",
      "snippet": "applyADSR(${1:attack}, ${2:decay}, ${3:sustainLevel}, ${4:release})",
      "return": "void",
-     "desc": "Apply an ADSR amplitude envelope to the buffer in place (attack / decay / release in seconds, sustainLevel 0-1). Cancels any pending loadAsync before editing, including invalid or no-op requests."
+     "desc": "Apply an ADSR amplitude envelope to the buffer."
     },
     {
      "name": "mixFrom",
      "snippet": "mixFrom(${1:other}, ${2:offsetSamples})",
      "return": "void",
-     "desc": "Additively mix another buffer into this one starting at offsetSamples, growing this buffer if needed. offsetSamples is in frames (samples per channel, like numSamples). Both buffers must have the same channel count; otherwise nothing is mixed and an error is logged. Cancels any pending loadAsync before editing, including invalid or no-op requests."
+     "desc": "Add samples from another buffer into this buffer."
     },
     {
      "name": "clip",
      "snippet": "clip()",
      "return": "void",
-     "desc": "Hard-clip all samples into the -1.0 .. 1.0 range. Cancels any pending loadAsync before editing, including invalid or no-op requests."
+     "desc": "Hard-clip all samples to the range −1 to 1."
     }
    ],
    "static_methods": [
@@ -14389,19 +14389,19 @@ const TrussSketchAPI = {
      "name": "getAdtsSampleRateIndex",
      "snippet": "getAdtsSampleRateIndex(${1:sampleRate})",
      "return": "int",
-     "desc": "ADTS sample-rate index for the given rate (AAC-in-MOV container helper)."
+     "desc": "Return the ADTS index for a sample rate."
     },
     {
      "name": "createAdtsHeader",
      "snippet": "createAdtsHeader()",
      "return": "",
-     "desc": "Write a 7-byte ADTS header for one raw AAC frame into header (AAC-in-MOV container helper)."
+     "desc": "Write an ADTS header for one raw AAC frame."
     }
    ]
   },
   {
    "name": "SoundStream",
-   "desc": "Streaming sound source: the file stays open and is decoded on demand into a small per-voice ring buffer instead of full PCM in RAM. Derives from SoundSource (inherits channels / sampleRate / kind() / getDuration()). Best for long files (BGM, podcasts). Trade-offs vs SoundBuffer: setSpeed() is treated as 1.0, setPosition() seeks with a ring-buffer refill (see Sound::setPosition() for measured latency; a file whose length is unknown cannot seek), and each polyphony slot costs one open file handle + decoder + ring buffer.",
+   "desc": "Describes a file audio source decoded on demand during playback.",
    "constructor": {
     "snippet": "SoundStream()"
    },
@@ -14409,12 +14409,12 @@ const TrussSketchAPI = {
     {
      "name": "channels",
      "type": "int",
-     "desc": "Channel count of the source (1 = mono, 2 = stereo, ...)"
+     "desc": "Stores the source's audio channel count."
     },
     {
      "name": "sampleRate",
      "type": "int",
-     "desc": "Source sample rate in Hz"
+     "desc": "Stores the source's audio sample rate."
     }
    ],
    "methods": [
@@ -14422,37 +14422,37 @@ const TrussSketchAPI = {
      "name": "getDuration",
      "snippet": "getDuration()",
      "return": "float",
-     "desc": "Decoded file duration in seconds. 0 when the file does not record its length (e.g. a FLAC encoded to a pipe); such a stream plays to its end but cannot seek, and an engine re-init at another sample rate restarts it from the beginning."
+     "desc": "Returns the stream's recorded audio duration."
     },
     {
      "name": "getMaxPolyphony",
      "snippet": "getMaxPolyphony()",
      "return": "int",
-     "desc": "Number of concurrent decoder slots reserved at loadStream()."
+     "desc": "Returns the stream's concurrent playback limit."
     },
     {
      "name": "getPath",
      "snippet": "getPath()",
      "return": "fs::path",
-     "desc": "Path the stream was opened from. Relative names are resolved via getDataPath(); empty after a failed load."
+     "desc": "Returns the stream's recorded file path."
     },
     {
      "name": "kind",
      "snippet": "kind()",
      "return": "Kind",
-     "desc": "Source kind (Eager for SoundBuffer, Stream for SoundStream). Lets the mixer dispatch without a virtual call per frame."
+     "desc": "Returns the sound source's kind."
     },
     {
      "name": "loadStream",
      "snippet": "loadStream(${1:path})",
      "return": "LoadResult",
-     "desc": "Open the file, validate format (.wav .mp3 .flac .ogg), and populate channels / sampleRate / duration. maxPolyphony reserves that many concurrent decoder slots. Returns false if the file can't be opened, the format is unsupported, or the file has no audio frames (DecodeFailed). Relative paths resolve via getDataPath(); absolute paths pass through."
+     "desc": "Prepares an audio file for streaming playback."
     }
    ]
   },
   {
    "name": "StrokeCap",
-   "desc": "Line cap style for strokes: Butt, Round, Square.",
+   "desc": "Selects the shape of stroke endpoints.",
    "static_methods": [
     {
      "name": "Butt",
@@ -14476,7 +14476,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "StrokeJoin",
-   "desc": "Line join style for strokes: Miter, Round, Bevel.",
+   "desc": "Selects the shape of stroke corners.",
    "static_methods": [
     {
      "name": "Miter",
@@ -14500,7 +14500,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "StrokeMesh",
-   "desc": "Variable-width polyline stroke geometry with caps, joins and miter limit; build it from points or a Path, then update() and draw()",
+   "desc": "Builds triangle geometry for variable-width polyline strokes.",
    "constructor": {
     "snippet": "StrokeMesh(${1:polyline})"
    },
@@ -14509,97 +14509,97 @@ const TrussSketchAPI = {
      "name": "addVertex",
      "snippet": "addVertex(${1:x}, ${2:y})",
      "return": "StrokeMesh &",
-     "desc": "Append a vertex to the stroke path"
+     "desc": "Appends a vertex to the stroke path."
     },
     {
      "name": "addVertexWithWidth",
      "snippet": "addVertexWithWidth(${1:x}, ${2:y}, ${3:width})",
      "return": "StrokeMesh &",
-     "desc": "Append a vertex with a per-vertex width"
+     "desc": "Appends a vertex and a stroke width."
     },
     {
      "name": "clear",
      "snippet": "clear()",
      "return": "StrokeMesh &",
-     "desc": "Remove all vertices"
+     "desc": "Clears the stroke geometry and per-vertex widths."
     },
     {
      "name": "draw",
      "snippet": "draw()",
      "return": "void",
-     "desc": "Draw the stroke mesh"
+     "desc": "Draws the generated stroke mesh."
     },
     {
      "name": "getMesh",
      "snippet": "getMesh()",
      "return": "Mesh &",
-     "desc": "Get a reference to the underlying generated triangle Mesh"
+     "desc": "Returns a reference to the generated triangle mesh."
     },
     {
      "name": "getPolylines",
      "snippet": "getPolylines()",
      "return": "std::vector<Path> &",
-     "desc": "Get a reference to the stroke's source polylines"
+     "desc": "Returns a reference to the source paths."
     },
     {
      "name": "setCapType",
      "snippet": "setCapType(${1:type})",
      "return": "StrokeMesh &",
-     "desc": "Set the line cap shape (StrokeMesh::CapType: Butt, Round, Square)"
+     "desc": "Sets the end-cap shape of the stroke."
     },
     {
      "name": "setClosed",
      "snippet": "setClosed(${1:closed})",
      "return": "StrokeMesh &",
-     "desc": "Set whether the stroke forms a closed loop"
+     "desc": "Sets whether rebuilding closes the source paths."
     },
     {
      "name": "setColor",
      "snippet": "setColor(${1:color})",
      "return": "StrokeMesh &",
-     "desc": "Set the stroke color"
+     "desc": "Sets the stroke color."
     },
     {
      "name": "setJoinType",
      "snippet": "setJoinType(${1:type})",
      "return": "StrokeMesh &",
-     "desc": "Set the line join shape (StrokeMesh::JoinType: Miter, Round, Bevel)"
+     "desc": "Sets the corner shape of the stroke."
     },
     {
      "name": "setMiterLimit",
      "snippet": "setMiterLimit(${1:limit})",
      "return": "StrokeMesh &",
-     "desc": "Set the miter limit for sharp corners"
+     "desc": "Sets the extension limit for miter joins."
     },
     {
      "name": "setShape",
      "snippet": "setShape(${1:polyline})",
      "return": "StrokeMesh &",
-     "desc": "Set the stroke shape from a Path"
+     "desc": "Replaces the stroke shape with a copy of a Path."
     },
     {
      "name": "setWidth",
      "snippet": "setWidth(${1:width})",
      "return": "StrokeMesh &",
-     "desc": "Set the stroke width"
+     "desc": "Sets the default stroke width."
     },
     {
      "name": "setWidths",
      "snippet": "setWidths(${1:w})",
      "return": "StrokeMesh &",
-     "desc": "Set per-vertex widths from a list"
+     "desc": "Replaces the per-vertex stroke widths."
     },
     {
      "name": "update",
      "snippet": "update()",
      "return": "void",
-     "desc": "Rebuild the internal triangle mesh (call before draw after edits)"
+     "desc": "Rebuilds the stroke triangle mesh after changes."
     }
    ]
   },
   {
    "name": "TcpClient",
-   "desc": "TCP client connection (connect, send/receive a stream)",
+   "desc": "Provides a TCP client connection.",
    "constructor": {
     "snippet": "TcpClient()"
    },
@@ -14607,27 +14607,27 @@ const TrussSketchAPI = {
     {
      "name": "onConnect",
      "type": "Event<TcpConnectEventArgs>",
-     "desc": "Fired when the connection completes"
+     "desc": "Reports the result of a connection attempt."
     },
     {
      "name": "onDisconnect",
      "type": "Event<TcpDisconnectEventArgs>",
-     "desc": "Fired when the connection ends: the peer closed it, an error ended it, or disconnect() / connect() on a connected client (not from the destructor)"
+     "desc": "Reports that an established connection has ended."
     },
     {
      "name": "onError",
      "type": "Event<TcpErrorEventArgs>",
-     "desc": "Fired on error"
+     "desc": "Reports network operation errors."
     },
     {
      "name": "onReceive",
      "type": "Event<TcpReceiveEventArgs>",
-     "desc": "Fired when data is received"
+     "desc": "Reports received TCP stream data."
     },
     {
      "name": "onSendComplete",
      "type": "Event<TcpSendCompleteEventArgs>",
-     "desc": "A queued send completed; clientId is -1, sendId identifies the payload"
+     "desc": "Reports completion of a queued send."
     }
    ],
    "methods": [
@@ -14635,248 +14635,248 @@ const TrussSketchAPI = {
      "name": "connect",
      "snippet": "connect(${1:host}, ${2:port})",
      "return": "bool",
-     "desc": "Connect to a server (blocking)"
+     "desc": "Connects to a TCP server."
     },
     {
      "name": "connectAsync",
      "snippet": "connectAsync(${1:host}, ${2:port})",
      "return": "void",
-     "desc": "Start a cancellable connection attempt; the same pending target is a silent no-op, a different target replaces it"
+     "desc": "Starts a cancellable TCP connection attempt."
     },
     {
      "name": "disconnect",
      "snippet": "disconnect()",
      "return": "void",
-     "desc": "Disconnect"
+     "desc": "Closes the connection and cancels pending network work."
     },
     {
      "name": "getRemoteHost",
      "snippet": "getRemoteHost()",
      "return": "std::string",
-     "desc": "Remote host name"
+     "desc": "Returns the stored remote host."
     },
     {
      "name": "getRemotePort",
      "snippet": "getRemotePort()",
      "return": "int",
-     "desc": "Remote port"
+     "desc": "Returns the stored remote port."
     },
     {
      "name": "getSendAsyncBufferSize",
      "snippet": "getSendAsyncBufferSize()",
      "return": "size_t",
-     "desc": "Get the send queue high-water mark in bytes. A stalled network peer can retain queued sends; a high-water mark limits further queue growth. Above the mark, sendAsync refuses with QueueFull and send waits; a single send can exceed the mark."
+     "desc": "Returns the send queue high-water mark."
     },
     {
      "name": "getSendAsyncPendingBytes",
      "snippet": "getSendAsyncPendingBytes()",
      "return": "size_t",
-     "desc": "Bytes queued but not yet completed"
+     "desc": "Returns the byte count of unfinished queued sends."
     },
     {
      "name": "isConnected",
      "snippet": "isConnected()",
      "return": "bool",
-     "desc": "Whether currently connected"
+     "desc": "Returns whether the client is connected."
     },
     {
      "name": "isConnecting",
      "snippet": "isConnecting()",
      "return": "bool",
-     "desc": "Whether a TCP connection attempt or TLS handshake is in progress"
+     "desc": "Returns whether a connection attempt is in progress."
     },
     {
      "name": "isUsingThread",
      "snippet": "isUsingThread()",
      "return": "bool",
-     "desc": "Whether threading is in use"
+     "desc": "Returns whether threading is enabled."
     },
     {
      "name": "processNetwork",
      "snippet": "processNetwork()",
      "return": "void",
-     "desc": "Pump pending TCP I/O; normally auto-driven by the update event, but can be called manually for synchronous polling."
+     "desc": "Processes pending TCP connection, send, and receive work."
     },
     {
      "name": "send",
      "snippet": "send(${1:data})",
      "return": "bool",
-     "desc": "Send data to the server"
+     "desc": "Sends bytes and waits for the write to finish."
     },
     {
      "name": "sendAsync",
      "snippet": "sendAsync(${1:data})",
      "return": "SendResult",
-     "desc": "Queue owned bytes without waiting; returns SendResult and reports once through onSendComplete"
+     "desc": "Queues owned bytes for asynchronous sending."
     },
     {
      "name": "setBlocking",
      "snippet": "setBlocking(${1:blocking})",
      "return": "void",
-     "desc": "Set blocking mode"
+     "desc": "Requests a socket blocking mode."
     },
     {
      "name": "setConnectTimeout",
      "snippet": "setConnectTimeout(${1:seconds})",
      "return": "void",
-     "desc": "Set the TCP connect deadline in seconds; default 0 uses the OS deadline"
+     "desc": "Sets the TCP connection timeout."
     },
     {
      "name": "setReceiveBufferSize",
      "snippet": "setReceiveBufferSize(${1:size})",
      "return": "void",
-     "desc": "Set the receive buffer size. Network reads use finite chunks to bound each receive allocation. Overflow continues in subsequent reads."
+     "desc": "Sets the receive chunk size."
     },
     {
      "name": "setSendAsyncBufferSize",
      "snippet": "setSendAsyncBufferSize(${1:bytes})",
      "return": "void",
-     "desc": "Set the send queue high-water mark; default 16 MB, 0 unlimited. A stalled network peer can retain queued sends; a high-water mark limits further queue growth. Above the mark, sendAsync refuses with QueueFull and send waits; a single send can exceed the mark."
+     "desc": "Sets the send queue high-water mark."
     },
     {
      "name": "setSendTimeout",
      "snippet": "setSendTimeout(${1:seconds})",
      "return": "void",
-     "desc": "Set the idle send timeout in seconds; default 60, 0 waits forever"
+     "desc": "Sets the allowed idle time during a send."
     },
     {
      "name": "setUseThread",
      "snippet": "setUseThread(${1:useThread})",
      "return": "void",
-     "desc": "Whether to use threads (must be false on Wasm)"
+     "desc": "Sets whether network processing uses worker threads."
     }
    ]
   },
   {
    "name": "TcpClientConnectEventArgs",
-   "desc": "Event args for TcpServer::onClientConnect",
+   "desc": "Carries information about a client accepted by TcpServer.",
    "properties": [
     {
      "name": "clientId",
      "type": "int",
-     "desc": "Client ID"
+     "desc": "Identifies the connected client."
     },
     {
      "name": "host",
      "type": "std::string",
-     "desc": "Client IP address"
+     "desc": "Contains the connected client's IP address."
     },
     {
      "name": "port",
      "type": "int",
-     "desc": "Client port"
+     "desc": "Contains the connected client's port number."
     }
    ]
   },
   {
    "name": "TcpClientDisconnectEventArgs",
-   "desc": "Event args for TcpServer::onClientDisconnect",
+   "desc": "Carries information about a TcpServer client's disconnection.",
    "properties": [
     {
      "name": "clientId",
      "type": "int",
-     "desc": "Client ID"
+     "desc": "Identifies the disconnected client."
     },
     {
      "name": "reason",
      "type": "std::string",
-     "desc": "Disconnect reason"
+     "desc": "Contains the reason for the client disconnection."
     },
     {
      "name": "wasClean",
      "type": "bool",
-     "desc": "Whether the disconnect was clean"
+     "desc": "Indicates whether the client closed the connection normally."
     }
    ]
   },
   {
    "name": "TcpConnectEventArgs",
-   "desc": "Event args for TcpClient::onConnect",
+   "desc": "Carries the result of a TcpClient connection attempt.",
    "properties": [
     {
      "name": "message",
      "type": "std::string",
-     "desc": "Connection message"
+     "desc": "Contains a message about the connection result."
     },
     {
      "name": "success",
      "type": "bool",
-     "desc": "Whether the connection succeeded"
+     "desc": "Indicates whether the connection succeeded."
     }
    ]
   },
   {
    "name": "TcpDisconnectEventArgs",
-   "desc": "Event args for TcpClient::onDisconnect",
+   "desc": "Carries the reason a TcpClient connection ended.",
    "properties": [
     {
      "name": "reason",
      "type": "std::string",
-     "desc": "Disconnect reason"
+     "desc": "Contains the reason for the disconnection."
     },
     {
      "name": "wasClean",
      "type": "bool",
-     "desc": "Whether it was a clean disconnect"
+     "desc": "Indicates whether the connection ended normally."
     }
    ]
   },
   {
    "name": "TcpErrorEventArgs",
-   "desc": "Event args for TcpClient::onError",
+   "desc": "Carries diagnostic information for a TcpClient error.",
    "properties": [
     {
      "name": "errorCode",
      "type": "int",
-     "desc": "Error code"
+     "desc": "Contains the numeric error code."
     },
     {
      "name": "message",
      "type": "std::string",
-     "desc": "Error message"
+     "desc": "Contains a message describing the error."
     }
    ]
   },
   {
    "name": "TcpReceiveEventArgs",
-   "desc": "Event args for TcpClient::onReceive",
+   "desc": "Carries a chunk of bytes received by TcpClient.",
    "properties": [
     {
      "name": "data",
      "type": "std::vector<char>",
-     "desc": "Received data"
+     "desc": "Contains the received bytes."
     }
    ]
   },
   {
    "name": "TcpSendCompleteEventArgs",
-   "desc": "A queued send finished. Fires exactly once for every id sendAsync() handed out",
+   "desc": "Reports the final outcome of a queued TCP send.",
    "properties": [
     {
      "name": "bytesSent",
      "type": "size_t",
-     "desc": "How much of the payload got through"
+     "desc": "Contains the number of payload bytes written."
     },
     {
      "name": "clientId",
      "type": "int",
-     "desc": "Which client the send was for (-1 when the sender has no clients)"
+     "desc": "Identifies the destination client of the completed send."
     },
     {
      "name": "error",
      "type": "SendError",
-     "desc": "SendError::None when the whole payload reached the kernel; Disconnected when the client went away, Timeout when it merely stopped reading"
+     "desc": "Contains the final send outcome."
     },
     {
      "name": "sendId",
      "type": "uint64_t",
-     "desc": "Matches the SendResult::id that queued this payload"
+     "desc": "Identifies the send that completed."
     }
    ]
   },
   {
    "name": "TcpServer",
-   "desc": "TCP server (accept clients, send/broadcast)",
+   "desc": "Accepts TCP clients and sends data to them.",
    "constructor": {
     "snippet": "TcpServer()"
    },
@@ -14884,27 +14884,27 @@ const TrussSketchAPI = {
     {
      "name": "onClientConnect",
      "type": "Event<TcpClientConnectEventArgs>",
-     "desc": "Fired when a client connects"
+     "desc": "Occurs when a client connects."
     },
     {
      "name": "onClientDisconnect",
      "type": "Event<TcpClientDisconnectEventArgs>",
-     "desc": "Fired when a client disconnects"
+     "desc": "Reports a detected client disconnection."
     },
     {
      "name": "onError",
      "type": "Event<TcpServerErrorEventArgs>",
-     "desc": "Fired on a server or per-client error"
+     "desc": "Reports server and client send errors."
     },
     {
      "name": "onReceive",
      "type": "Event<TcpServerReceiveEventArgs>",
-     "desc": "Fired when data is received from a client"
+     "desc": "Occurs when data arrives from a client."
     },
     {
      "name": "onSendComplete",
      "type": "Event<TcpSendCompleteEventArgs>",
-     "desc": "Fired when a queued send finishes, successfully or not"
+     "desc": "Reports completion of a queued send."
     }
    ],
    "methods": [
@@ -14912,176 +14912,176 @@ const TrussSketchAPI = {
      "name": "broadcast",
      "snippet": "broadcast(${1:data})",
      "return": "void",
-     "desc": "Broadcast data to all clients and wait for every one of them (blocking)"
+     "desc": "Sends data to all connected clients."
     },
     {
      "name": "broadcastAsync",
      "snippet": "broadcastAsync(${1:data})",
      "return": "int",
-     "desc": "Queue data for every client and return at once; returns how many accepted it"
+     "desc": "Queues data for all connected clients."
     },
     {
      "name": "disconnectAllClients",
      "snippet": "disconnectAllClients()",
      "return": "void",
-     "desc": "Disconnect all clients"
+     "desc": "Disconnects all connected clients."
     },
     {
      "name": "disconnectClient",
      "snippet": "disconnectClient(${1:clientId})",
      "return": "void",
-     "desc": "Disconnect a specific client"
+     "desc": "Disconnects the specified client."
     },
     {
      "name": "getClient",
      "snippet": "getClient(${1:clientId})",
      "return": "const TcpServerClient *",
-     "desc": "Client info (nullptr if not found)"
+     "desc": "Returns information about the specified client."
     },
     {
      "name": "getClientCount",
      "snippet": "getClientCount()",
      "return": "int",
-     "desc": "Number of connected clients"
+     "desc": "Returns the number of connected clients."
     },
     {
      "name": "getClientIds",
      "snippet": "getClientIds()",
      "return": "std::vector<int>",
-     "desc": "IDs of all connected clients"
+     "desc": "Returns the IDs of connected clients."
     },
     {
      "name": "getPort",
      "snippet": "getPort()",
      "return": "int",
-     "desc": "The port the server is bound to. After start(0) this is the port the OS picked; for a fixed port it is that port"
+     "desc": "Returns the server's stored listening port."
     },
     {
      "name": "getSendAsyncBufferSize",
      "snippet": "getSendAsyncBufferSize()",
      "return": "size_t",
-     "desc": "The current high-water mark for one client's send queue, in bytes. A stalled network peer can retain queued sends; a high-water mark limits further queue growth. Above the mark, sendAsync refuses with QueueFull and send waits; a single send can exceed the mark."
+     "desc": "Returns the send queue threshold."
     },
     {
      "name": "getSendAsyncPendingBytes",
      "snippet": "getSendAsyncPendingBytes(${1:clientId})",
      "return": "size_t",
-     "desc": "How much a client has queued and not yet completed, in bytes (0 for an unknown client)"
+     "desc": "Returns a client's unfinished send byte count."
     },
     {
      "name": "isRunning",
      "snippet": "isRunning()",
      "return": "bool",
-     "desc": "Whether the server is running"
+     "desc": "Returns whether the server is running."
     },
     {
      "name": "send",
      "snippet": "send(${1:clientId}, ${2:data})",
      "return": "bool",
-     "desc": "Send data to a specific client (blocking)"
+     "desc": "Sends data to a specified client."
     },
     {
      "name": "sendAsync",
      "snippet": "sendAsync(${1:clientId}, ${2:data})",
      "return": "SendResult",
-     "desc": "Queue data for a client and return at once, without waiting for it to be written"
+     "desc": "Queues data for a specified client."
     },
     {
      "name": "setReceiveBufferSize",
      "snippet": "setReceiveBufferSize(${1:size})",
      "return": "void",
-     "desc": "Set the receive buffer size. Network reads use finite chunks to bound each receive allocation. Overflow continues in subsequent reads."
+     "desc": "Sets the client receive buffer size."
     },
     {
      "name": "setSendAsyncBufferSize",
      "snippet": "setSendAsyncBufferSize(${1:bytes})",
      "return": "void",
-     "desc": "Set the high-water mark for one client's send queue, in bytes (0 = unlimited). Defaults to 16 MB. A stalled network peer can retain queued sends; a high-water mark limits further queue growth. Above the mark, sendAsync refuses with QueueFull and send waits; a single send can exceed the mark."
+     "desc": "Sets the send queue threshold."
     },
     {
      "name": "setSendTimeout",
      "snippet": "setSendTimeout(${1:seconds})",
      "return": "void",
-     "desc": "Set how long a send may stall without progress before giving up, in seconds (0 = wait indefinitely)"
+     "desc": "Sets the send inactivity timeout."
     },
     {
      "name": "start",
      "snippet": "start(${1:port})",
      "return": "bool",
-     "desc": "Start listening on a port. maxClients caps the connected clients (0 = unlimited, the default). Untrusted connection floods can retain clients; an optional cap keeps client memory finite. At the cap, newly accepted sockets are closed."
+     "desc": "Starts listening for TCP connections."
     },
     {
      "name": "stop",
      "snippet": "stop()",
      "return": "void",
-     "desc": "Stop the server"
+     "desc": "Stops the TCP server."
     }
    ]
   },
   {
    "name": "TcpServerClient",
-   "desc": "A client connected to a TcpServer (read-only handle)",
+   "desc": "Provides read-only information about a client connected to TcpServer.",
    "methods": [
     {
      "name": "getHost",
      "snippet": "getHost()",
      "return": "const std::string &",
-     "desc": "Client IP address"
+     "desc": "Returns the client's IP address."
     },
     {
      "name": "getId",
      "snippet": "getId()",
      "return": "int",
-     "desc": "Client ID assigned by the server"
+     "desc": "Returns the client ID assigned by the server."
     },
     {
      "name": "getPort",
      "snippet": "getPort()",
      "return": "int",
-     "desc": "Client port"
+     "desc": "Returns the client's source port."
     }
    ]
   },
   {
    "name": "TcpServerErrorEventArgs",
-   "desc": "Event args for TcpServer::onError",
+   "desc": "Carries diagnostic information for a TcpServer error.",
    "properties": [
     {
      "name": "clientId",
      "type": "int",
-     "desc": "Client ID (-1 = server-level error, not a specific client)"
+     "desc": "Identifies the client associated with the error."
     },
     {
      "name": "errorCode",
      "type": "int",
-     "desc": "Error code"
+     "desc": "Contains the numeric error code."
     },
     {
      "name": "message",
      "type": "std::string",
-     "desc": "Error message"
+     "desc": "Contains the error message."
     }
    ]
   },
   {
    "name": "TcpServerReceiveEventArgs",
-   "desc": "Event args for TcpServer::onReceive",
+   "desc": "Carries bytes received from a TcpServer client.",
    "properties": [
     {
      "name": "clientId",
      "type": "int",
-     "desc": "Client ID"
+     "desc": "Identifies the client that sent the received data."
     },
     {
      "name": "data",
      "type": "std::vector<char>",
-     "desc": "Received data"
+     "desc": "Contains the received TCP bytes."
     }
    ]
   },
   {
    "name": "TcyMode",
-   "desc": "Tate-chu-yoko: how Latin / digit runs are laid out within vertical text",
+   "desc": "Selects how ASCII letters and digits are arranged in vertical text.",
    "static_methods": [
     {
      "name": "Rotate",
@@ -15432,7 +15432,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "TextureUsage",
-   "desc": "Texture update pattern: Immutable, Dynamic, Stream, or RenderTarget.",
+   "desc": "Selects how a GPU texture receives its contents.",
    "static_methods": [
     {
      "name": "Immutable",
@@ -15486,7 +15486,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "ThermalState",
-   "desc": "Device thermal state, from Nominal to Critical.",
+   "desc": "Represents the device's thermal severity level.",
    "static_methods": [
     {
      "name": "Nominal",
@@ -15583,7 +15583,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "TweenColor",
-   "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+   "desc": "Animates a value between two endpoints with easing.",
    "constructor": {
     "snippet": "TweenColor(${1:from}, ${2:to}, ${3:duration})"
    },
@@ -15718,7 +15718,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "TweenFloat",
-   "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+   "desc": "Animates a value between two endpoints with easing.",
    "constructor": {
     "snippet": "TweenFloat(${1:from}, ${2:to}, ${3:duration})"
    },
@@ -15853,7 +15853,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "TweenMod",
-   "desc": "Animation modifier (Mod) that tweens a Node's position, scale and rotation with easing; exposes a complete Event",
+   "desc": "A modifier that animates a node's position, scale, and rotation.",
    "constructor": {
     "snippet": "TweenMod()"
    },
@@ -15861,7 +15861,7 @@ const TrussSketchAPI = {
     {
      "name": "complete",
      "type": "Event<void>",
-     "desc": "Fired once when all tweens finish; subscribe with complete.listen(callback)"
+     "desc": "An event that signals completion of the configured animations."
     }
    ],
    "methods": [
@@ -15869,199 +15869,199 @@ const TrussSketchAPI = {
      "name": "delay",
      "snippet": "delay(${1:seconds})",
      "return": "TweenMod &",
-     "desc": "Set delay before animation starts (TweenMod method) (C++ only)"
+     "desc": "Sets the delay before animation playback."
     },
     {
      "name": "duration",
      "snippet": "duration(${1:seconds})",
      "return": "TweenMod &",
-     "desc": "Set animation duration (TweenMod method) (C++ only)"
+     "desc": "Sets the animation duration."
     },
     {
      "name": "ease",
      "snippet": "ease(${1:type})",
      "return": "TweenMod &",
-     "desc": "Set easing (TweenMod method): a built-in EaseType + EaseMode, or a custom EaseFunction (C++ only)"
+     "desc": "Sets the easing curve for the animations."
     },
     {
      "name": "getDelay",
      "snippet": "getDelay()",
      "return": "float",
-     "desc": "Get the start delay in seconds (TweenMod method) (C++ only)"
+     "desc": "Returns the configured start delay."
     },
     {
      "name": "getDuration",
      "snippet": "getDuration()",
      "return": "float",
-     "desc": "Get the animation duration in seconds (TweenMod method) (C++ only)"
+     "desc": "Returns the configured animation duration."
     },
     {
      "name": "getEaseMode",
      "snippet": "getEaseMode()",
      "return": "EaseMode",
-     "desc": "Get the current easing mode (In/Out/InOut) (TweenMod method) (C++ only)"
+     "desc": "Returns the configured easing mode."
     },
     {
      "name": "getEaseType",
      "snippet": "getEaseType()",
      "return": "EaseType",
-     "desc": "Get the current easing type (TweenMod method) (C++ only)"
+     "desc": "Returns the configured easing type."
     },
     {
      "name": "getOwner",
      "snippet": "getOwner()",
      "return": "Node *",
-     "desc": "Get the owner Node this Mod is attached to."
+     "desc": "Returns the node that owns this Mod."
     },
     {
      "name": "getProgress",
      "snippet": "getProgress()",
      "return": "float",
-     "desc": "Current progress in 0..1 (TweenMod method) (C++ only)"
+     "desc": "Returns the current animation progress."
     },
     {
      "name": "isComplete",
      "snippet": "isComplete()",
      "return": "bool",
-     "desc": "Whether the tween has finished (TweenMod method) (C++ only)"
+     "desc": "Reports whether playback has completed."
     },
     {
      "name": "isPlaying",
      "snippet": "isPlaying()",
      "return": "bool",
-     "desc": "Whether the tween is currently playing (TweenMod method) (C++ only)"
+     "desc": "Reports whether playback is enabled."
     },
     {
      "name": "moveBy",
      "snippet": "moveBy(${1:dx}, ${2:dy})",
      "return": "TweenMod &",
-     "desc": "Animate position by relative amount (TweenMod method) (C++ only)"
+     "desc": "Configures a position animation by a relative offset."
     },
     {
      "name": "moveFrom",
      "snippet": "moveFrom(${1:x}, ${2:y})",
      "return": "TweenMod &",
-     "desc": "Set an explicit start position for the position tween (TweenMod method) (C++ only)"
+     "desc": "Sets an explicit starting position for a position animation."
     },
     {
      "name": "moveTo",
      "snippet": "moveTo(${1:x}, ${2:y})",
      "return": "TweenMod &",
-     "desc": "Animate position to target (TweenMod method) (C++ only)"
+     "desc": "Configures a position animation to a target."
     },
     {
      "name": "pause",
      "snippet": "pause()",
      "return": "TweenMod &",
-     "desc": "Pause playback, keeping the current progress (TweenMod method) (C++ only)"
+     "desc": "Pauses animation playback."
     },
     {
      "name": "reset",
      "snippet": "reset()",
      "return": "TweenMod &",
-     "desc": "Reset progress to the start and stop playback (TweenMod method) (C++ only)"
+     "desc": "Resets playback time and stops the animation."
     },
     {
      "name": "resume",
      "snippet": "resume()",
      "return": "TweenMod &",
-     "desc": "Resume a paused tween (TweenMod method) (C++ only)"
+     "desc": "Resumes animation playback."
     },
     {
      "name": "rotateBy",
      "snippet": "rotateBy(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Animate rotation by relative angle (TweenMod method) (C++ only)"
+     "desc": "Configures a Z-axis rotation animation by a relative angle."
     },
     {
      "name": "rotateFrom",
      "snippet": "rotateFrom(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Set an explicit start rotation (angle or quaternion) for the rotation tween (TweenMod method) (C++ only)"
+     "desc": "Sets an explicit starting rotation for a rotation animation."
     },
     {
      "name": "rotateTo",
      "snippet": "rotateTo(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Animate rotation to target angle or quaternion (TweenMod method) (C++ only)"
+     "desc": "Configures a rotation animation to an angle or quaternion."
     },
     {
      "name": "rotateXBy",
      "snippet": "rotateXBy(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Animate X-axis rotation by a relative angle (TweenMod method) (C++ only)"
+     "desc": "Configures an X-axis rotation animation by a relative angle."
     },
     {
      "name": "rotateXFrom",
      "snippet": "rotateXFrom(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Set an explicit start angle for the X-axis rotation tween (TweenMod method) (C++ only)"
+     "desc": "Sets an explicit starting X-axis rotation angle."
     },
     {
      "name": "rotateXTo",
      "snippet": "rotateXTo(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Animate X-axis rotation to an absolute angle (TweenMod method) (C++ only)"
+     "desc": "Configures an X-axis rotation animation to an absolute angle."
     },
     {
      "name": "rotateYBy",
      "snippet": "rotateYBy(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Animate Y-axis rotation by a relative angle (TweenMod method) (C++ only)"
+     "desc": "Configures a Y-axis rotation animation by a relative angle."
     },
     {
      "name": "rotateYFrom",
      "snippet": "rotateYFrom(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Set an explicit start angle for the Y-axis rotation tween (TweenMod method) (C++ only)"
+     "desc": "Sets an explicit starting Y-axis rotation angle."
     },
     {
      "name": "rotateYTo",
      "snippet": "rotateYTo(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Animate Y-axis rotation to an absolute angle (TweenMod method) (C++ only)"
+     "desc": "Configures a Y-axis rotation animation to an absolute angle."
     },
     {
      "name": "rotateZBy",
      "snippet": "rotateZBy(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Animate Z-axis rotation by a relative angle (same as rotateBy for 2D) (TweenMod method) (C++ only)"
+     "desc": "Configures a Z-axis rotation animation by a relative angle."
     },
     {
      "name": "rotateZTo",
      "snippet": "rotateZTo(${1:radians})",
      "return": "TweenMod &",
-     "desc": "Animate Z-axis rotation to an absolute angle (same as rotateTo for 2D) (TweenMod method) (C++ only)"
+     "desc": "Configures a Z-axis rotation animation to an absolute angle."
     },
     {
      "name": "scaleBy",
      "snippet": "scaleBy(${1:factor})",
      "return": "TweenMod &",
-     "desc": "Animate scale by relative multiplier (TweenMod method) (C++ only)"
+     "desc": "Configure a scale tween using relative multipliers."
     },
     {
      "name": "scaleFrom",
      "snippet": "scaleFrom(${1:uniform})",
      "return": "TweenMod &",
-     "desc": "Set an explicit start scale for the scale tween (TweenMod method) (C++ only)"
+     "desc": "Set an explicit starting scale for a scale tween."
     },
     {
      "name": "scaleTo",
      "snippet": "scaleTo(${1:uniform})",
      "return": "TweenMod &",
-     "desc": "Animate scale to target (TweenMod method) (C++ only)"
+     "desc": "Configure a scale tween toward an absolute target."
     },
     {
      "name": "start",
      "snippet": "start()",
      "return": "TweenMod &",
-     "desc": "Start (or restart) the tween from its configured values (TweenMod method) (C++ only)"
+     "desc": "Start or restart the configured tween."
     }
    ]
   },
   {
    "name": "TweenVec2",
-   "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+   "desc": "Animates a value between two endpoints with easing.",
    "constructor": {
     "snippet": "TweenVec2(${1:from}, ${2:to}, ${3:duration})"
    },
@@ -16196,7 +16196,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "TweenVec3",
-   "desc": "Animates a value of type T with easing. Templated over any lerp-able type (float, Vec2, Vec3, Vec4, Color, etc.). Auto-updates each frame via events().update once start() is called; chainable setters configure it",
+   "desc": "Animates a value between two endpoints with easing.",
    "constructor": {
     "snippet": "TweenVec3(${1:from}, ${2:to}, ${3:duration})"
    },
@@ -16331,44 +16331,44 @@ const TrussSketchAPI = {
   },
   {
    "name": "UdpErrorEventArgs",
-   "desc": "Event args for UdpSocket::onError",
+   "desc": "Carries diagnostic information for a UdpSocket error.",
    "properties": [
     {
      "name": "errorCode",
      "type": "int",
-     "desc": "Error code"
+     "desc": "Contains the numeric error code."
     },
     {
      "name": "message",
      "type": "std::string",
-     "desc": "Error message"
+     "desc": "Contains the error message."
     }
    ]
   },
   {
    "name": "UdpReceiveEventArgs",
-   "desc": "Event args for UdpSocket::onReceive",
+   "desc": "Carries a received UDP datagram and its sender's address.",
    "properties": [
     {
      "name": "data",
      "type": "std::vector<char>",
-     "desc": "Received data"
+     "desc": "Contains the received UDP datagram bytes."
     },
     {
      "name": "remoteHost",
      "type": "std::string",
-     "desc": "Source host"
+     "desc": "Contains the sender's IP address."
     },
     {
      "name": "remotePort",
      "type": "int",
-     "desc": "Source port"
+     "desc": "Contains the sender's UDP port number."
     }
    ]
   },
   {
    "name": "UdpSocket",
-   "desc": "UDP socket (send/receive datagrams, broadcast, multicast)",
+   "desc": "Sends and receives IPv4 UDP datagrams.",
    "constructor": {
     "snippet": "UdpSocket()"
    },
@@ -16376,12 +16376,12 @@ const TrussSketchAPI = {
     {
      "name": "onError",
      "type": "Event<UdpErrorEventArgs>",
-     "desc": "Fired on error"
+     "desc": "Reports UDP socket errors."
     },
     {
      "name": "onReceive",
      "type": "Event<UdpReceiveEventArgs>",
-     "desc": "Fired when data is received"
+     "desc": "Reports received UDP datagrams."
     }
    ],
    "methods": [
@@ -16389,169 +16389,169 @@ const TrussSketchAPI = {
      "name": "bind",
      "snippet": "bind(${1:port})",
      "return": "bool",
-     "desc": "Bind a port for receiving (startReceiving auto-starts the receive thread)"
+     "desc": "Binds the socket to a local UDP port."
     },
     {
      "name": "close",
      "snippet": "close()",
      "return": "void",
-     "desc": "Close the socket"
+     "desc": "Closes the UDP socket."
     },
     {
      "name": "connect",
      "snippet": "connect(${1:host}, ${2:port})",
      "return": "bool",
-     "desc": "Set the destination for send()"
+     "desc": "Sets the UDP destination used by `send()`."
     },
     {
      "name": "create",
      "snippet": "create()",
      "return": "bool",
-     "desc": "Create the socket explicitly (usually auto-created by bind/connect)"
+     "desc": "Creates an IPv4 UDP socket."
     },
     {
      "name": "getConnectedHost",
      "snippet": "getConnectedHost()",
      "return": "const std::string &",
-     "desc": "Destination host from connect()"
+     "desc": "Returns the host stored by `connect()`."
     },
     {
      "name": "getConnectedPort",
      "snippet": "getConnectedPort()",
      "return": "int",
-     "desc": "Destination port from connect()"
+     "desc": "Returns the destination port stored by `connect()`."
     },
     {
      "name": "getLocalPort",
      "snippet": "getLocalPort()",
      "return": "int",
-     "desc": "The bound local port"
+     "desc": "Returns the local port recorded by `bind()`."
     },
     {
      "name": "isReceiving",
      "snippet": "isReceiving()",
      "return": "bool",
-     "desc": "Whether the receive thread is active"
+     "desc": "Returns whether event reception is active."
     },
     {
      "name": "isValid",
      "snippet": "isValid()",
      "return": "bool",
-     "desc": "Whether the socket is valid"
+     "desc": "Returns whether the socket has a valid OS handle."
     },
     {
      "name": "joinMulticastGroup",
      "snippet": "joinMulticastGroup(${1:groupAddr})",
      "return": "bool",
-     "desc": "Join a multicast group for receiving (call after bind; \"\" = default route)\n"
+     "desc": "Joins an IPv4 multicast group for reception."
     },
     {
      "name": "leaveMulticastGroup",
      "snippet": "leaveMulticastGroup(${1:groupAddr})",
      "return": "bool",
-     "desc": "Leave a previously joined multicast group"
+     "desc": "Leaves an IPv4 multicast group."
     },
     {
      "name": "processNetwork",
      "snippet": "processNetwork()",
      "return": "void",
-     "desc": "Pump pending UDP I/O; normally auto-driven by the update event, but can be called manually for synchronous polling."
+     "desc": "Processes pending UDP datagrams."
     },
     {
      "name": "send",
      "snippet": "send(${1:message})",
      "return": "bool",
-     "desc": "Send to the destination set by connect()"
+     "desc": "Sends a UDP datagram to the configured destination."
     },
     {
      "name": "sendTo",
      "snippet": "sendTo(${1:host}, ${2:port}, ${3:message})",
      "return": "bool",
-     "desc": "Send data to a specific host and port"
+     "desc": "Sends a UDP datagram to a specified host and port."
     },
     {
      "name": "setBroadcast",
      "snippet": "setBroadcast(${1:enable})",
      "return": "bool",
-     "desc": "Allow broadcast sending"
+     "desc": "Enables or disables UDP broadcast sending."
     },
     {
      "name": "setMulticastInterface",
      "snippet": "setMulticastInterface(${1:interfaceAddr})",
      "return": "bool",
-     "desc": "Pick the NIC for outgoing multicast (\"\" = default route)\n"
+     "desc": "Selects the outgoing IPv4 multicast interface."
     },
     {
      "name": "setMulticastLoopback",
      "snippet": "setMulticastLoopback(${1:enable})",
      "return": "bool",
-     "desc": "Whether outgoing multicast loops back to local listeners (default on)"
+     "desc": "Controls local loopback of outgoing multicast datagrams."
     },
     {
      "name": "setMulticastTTL",
      "snippet": "setMulticastTTL(${1:ttl})",
      "return": "bool",
-     "desc": "Hop limit for outgoing multicast (default 1 = local subnet)"
+     "desc": "Sets the hop limit for outgoing multicast datagrams."
     },
     {
      "name": "setNonBlocking",
      "snippet": "setNonBlocking(${1:nonBlocking})",
      "return": "bool",
-     "desc": "Set non-blocking mode"
+     "desc": "Sets the socket's non-blocking mode."
     },
     {
      "name": "setReceiveBufferSize",
      "snippet": "setReceiveBufferSize(${1:size})",
      "return": "bool",
-     "desc": "Set the receive buffer size. Untrusted datagram floods can fill the OS queue; the configured buffer keeps queued memory finite. On overflow, the OS drops datagrams."
+     "desc": "Sets the OS socket receive buffer size."
     },
     {
      "name": "setReceiveTimeout",
      "snippet": "setReceiveTimeout(${1:timeoutMs})",
      "return": "bool",
-     "desc": "Set the receive timeout (0 = infinite)"
+     "desc": "Sets the timeout for blocking reception."
     },
     {
      "name": "setReuseAddress",
      "snippet": "setReuseAddress(${1:enable})",
      "return": "bool",
-     "desc": "Allow address reuse (set before bind)"
+     "desc": "Enables or disables local address reuse."
     },
     {
      "name": "setReusePort",
      "snippet": "setReusePort(${1:enable})",
      "return": "bool",
-     "desc": "Allow multiple sockets on the same port (multicast receivers; set before bind)"
+     "desc": "Enables or disables sharing a local UDP port."
     },
     {
      "name": "setSendBufferSize",
      "snippet": "setSendBufferSize(${1:size})",
      "return": "bool",
-     "desc": "Set the send buffer size"
+     "desc": "Sets the OS socket send buffer size."
     },
     {
      "name": "setUseThread",
      "snippet": "setUseThread(${1:useThread})",
      "return": "void",
-     "desc": "Whether to use a receive thread (must be false on Wasm)"
+     "desc": "Selects the execution mode for event reception."
     },
     {
      "name": "startReceiving",
      "snippet": "startReceiving()",
      "return": "void",
-     "desc": "Start the receive thread (auto-called after bind)"
+     "desc": "Starts event reception on the socket."
     },
     {
      "name": "stopReceiving",
      "snippet": "stopReceiving()",
      "return": "void",
-     "desc": "Stop the receive thread"
+     "desc": "Stops automatic UDP receiving."
     }
    ]
   },
   {
    "name": "Vec2",
-   "desc": "2D vector (x, y)",
+   "desc": "Represents a two-dimensional vector with floating-point components.",
    "constructor": {
     "snippet": "Vec2(${1:x}, ${2:y})"
    },
@@ -16559,12 +16559,12 @@ const TrussSketchAPI = {
     {
      "name": "x",
      "type": "float",
-     "desc": "X component"
+     "desc": "Stores the X component of a Vec2."
     },
     {
      "name": "y",
      "type": "float",
-     "desc": "Y component"
+     "desc": "Stores the Y component of a Vec2."
     }
    ],
    "methods": [
@@ -16572,97 +16572,97 @@ const TrussSketchAPI = {
      "name": "angle",
      "snippet": "angle()",
      "return": "float",
-     "desc": "Angle in radians"
+     "desc": "Returns the vector's heading or its signed angle to another vector."
     },
     {
      "name": "cross",
      "snippet": "cross(${1:v})",
      "return": "float",
-     "desc": "Cross product (z component)"
+     "desc": "Returns the z component of the two-dimensional cross product."
     },
     {
      "name": "distance",
      "snippet": "distance(${1:v})",
      "return": "float",
-     "desc": "Distance to another vector"
+     "desc": "Returns the distance to another vector."
     },
     {
      "name": "distanceSquared",
      "snippet": "distanceSquared(${1:v})",
      "return": "float",
-     "desc": "Squared distance (faster)"
+     "desc": "Returns the squared distance to another vector."
     },
     {
      "name": "dot",
      "snippet": "dot(${1:v})",
      "return": "float",
-     "desc": "Dot product"
+     "desc": "Returns the dot product with another vector."
     },
     {
      "name": "length",
      "snippet": "length()",
      "return": "float",
-     "desc": "Get vector length"
+     "desc": "Returns the vector's length."
     },
     {
      "name": "lengthSquared",
      "snippet": "lengthSquared()",
      "return": "float",
-     "desc": "Get squared length (faster, no sqrt)"
+     "desc": "Returns the vector's squared length."
     },
     {
      "name": "lerp",
      "snippet": "lerp(${1:v}, ${2:t})",
      "return": "Vec2",
-     "desc": "Linear interpolation"
+     "desc": "Returns a linear interpolation toward another vector."
     },
     {
      "name": "limit",
      "snippet": "limit(${1:max})",
      "return": "Vec2 &",
-     "desc": "Limit length to max"
+     "desc": "Limits the vector's length in place."
     },
     {
      "name": "normalize",
      "snippet": "normalize()",
      "return": "Vec2 &",
-     "desc": "Normalize in place"
+     "desc": "Normalizes the vector in place."
     },
     {
      "name": "normalized",
      "snippet": "normalized()",
      "return": "Vec2",
-     "desc": "Get normalized copy"
+     "desc": "Returns a normalized copy of the vector."
     },
     {
      "name": "perpendicular",
      "snippet": "perpendicular()",
      "return": "Vec2",
-     "desc": "Get perpendicular vector"
+     "desc": "Returns a perpendicular vector."
     },
     {
      "name": "reflected",
      "snippet": "reflected(${1:normal})",
      "return": "Vec2",
-     "desc": "Get reflected vector"
+     "desc": "Returns the vector reflected off a surface with the given normal."
     },
     {
      "name": "rotate",
      "snippet": "rotate(${1:radians})",
      "return": "Vec2 &",
-     "desc": "Rotate in place"
+     "desc": "Rotates the vector in place."
     },
     {
      "name": "rotated",
      "snippet": "rotated(${1:radians})",
      "return": "Vec2",
-     "desc": "Get rotated copy"
+     "desc": "Returns a rotated copy of the vector."
     },
     {
      "name": "set",
      "snippet": "set(${1:x}, ${2:y})",
      "return": "Vec2 &",
-     "desc": "Set vector components"
+     "desc": "Sets the vector's components."
     }
    ],
    "static_methods": [
@@ -16670,13 +16670,13 @@ const TrussSketchAPI = {
      "name": "fromAngle",
      "snippet": "fromAngle(${1:radians})",
      "return": "Vec2",
-     "desc": "Create Vec2 from angle"
+     "desc": "Creates a vector from an angle and a length."
     }
    ]
   },
   {
    "name": "Vec3",
-   "desc": "3D vector (x, y, z)",
+   "desc": "Represents a three-dimensional vector with floating-point components.",
    "constructor": {
     "snippet": "Vec3(${1:x}, ${2:y}, ${3:z})"
    },
@@ -16684,17 +16684,17 @@ const TrussSketchAPI = {
     {
      "name": "x",
      "type": "float",
-     "desc": "X component"
+     "desc": "Stores the X component of the vector."
     },
     {
      "name": "y",
      "type": "float",
-     "desc": "Y component"
+     "desc": "Stores the Y component of the vector."
     },
     {
      "name": "z",
      "type": "float",
-     "desc": "Z component"
+     "desc": "Stores the Z component of the vector."
     }
    ],
    "methods": [
@@ -16702,85 +16702,85 @@ const TrussSketchAPI = {
      "name": "cross",
      "snippet": "cross(${1:v})",
      "return": "Vec3",
-     "desc": "Cross product"
+     "desc": "Returns the cross product with another vector."
     },
     {
      "name": "distance",
      "snippet": "distance(${1:v})",
      "return": "float",
-     "desc": "Distance to another vector"
+     "desc": "Returns the distance to another vector."
     },
     {
      "name": "distanceSquared",
      "snippet": "distanceSquared(${1:v})",
      "return": "float",
-     "desc": "Squared distance"
+     "desc": "Returns the squared distance to another vector."
     },
     {
      "name": "dot",
      "snippet": "dot(${1:v})",
      "return": "float",
-     "desc": "Dot product"
+     "desc": "Returns the dot product with another vector."
     },
     {
      "name": "length",
      "snippet": "length()",
      "return": "float",
-     "desc": "Get vector length"
+     "desc": "Returns the length of the vector."
     },
     {
      "name": "lengthSquared",
      "snippet": "lengthSquared()",
      "return": "float",
-     "desc": "Get squared length"
+     "desc": "Returns the squared length of the vector."
     },
     {
      "name": "lerp",
      "snippet": "lerp(${1:v}, ${2:t})",
      "return": "Vec3",
-     "desc": "Linear interpolation"
+     "desc": "Returns a linear interpolation between two vectors."
     },
     {
      "name": "limit",
      "snippet": "limit(${1:max})",
      "return": "Vec3 &",
-     "desc": "Limit length to max"
+     "desc": "Limits the length of the vector in place."
     },
     {
      "name": "normalize",
      "snippet": "normalize()",
      "return": "Vec3 &",
-     "desc": "Normalize in place"
+     "desc": "Normalizes the vector in place."
     },
     {
      "name": "normalized",
      "snippet": "normalized()",
      "return": "Vec3",
-     "desc": "Get normalized copy"
+     "desc": "Returns a normalized copy of the vector."
     },
     {
      "name": "reflected",
      "snippet": "reflected(${1:normal})",
      "return": "Vec3",
-     "desc": "Get reflected vector"
+     "desc": "Returns the vector reflected about a surface normal."
     },
     {
      "name": "set",
      "snippet": "set(${1:x}, ${2:y}, ${3:z})",
      "return": "Vec3 &",
-     "desc": "Set vector components"
+     "desc": "Sets the components of the vector."
     },
     {
      "name": "xy",
      "snippet": "xy()",
      "return": "Vec2",
-     "desc": "Get XY components as Vec2"
+     "desc": "Returns the X and Y components as a Vec2."
     }
    ]
   },
   {
    "name": "Vec4",
-   "desc": "4D vector (x, y, z, w). Used for homogeneous coordinates and RGBA-style data",
+   "desc": "A four-dimensional floating-point vector for homogeneous coordinates or RGBA-style data.",
    "constructor": {
     "snippet": "Vec4(${1:x}, ${2:y}, ${3:z}, ${4:w})"
    },
@@ -16788,22 +16788,22 @@ const TrussSketchAPI = {
     {
      "name": "w",
      "type": "float",
-     "desc": "W component"
+     "desc": "Stores the W component."
     },
     {
      "name": "x",
      "type": "float",
-     "desc": "X component"
+     "desc": "Stores the X component."
     },
     {
      "name": "y",
      "type": "float",
-     "desc": "Y component"
+     "desc": "Stores the Y component."
     },
     {
      "name": "z",
      "type": "float",
-     "desc": "Z component"
+     "desc": "Stores the Z component."
     }
    ],
    "methods": [
@@ -16811,61 +16811,61 @@ const TrussSketchAPI = {
      "name": "dot",
      "snippet": "dot(${1:v})",
      "return": "float",
-     "desc": "Dot product with another vector"
+     "desc": "Returns the dot product with another vector."
     },
     {
      "name": "length",
      "snippet": "length()",
      "return": "float",
-     "desc": "Get the vector's magnitude"
+     "desc": "Returns the vector's length."
     },
     {
      "name": "lengthSquared",
      "snippet": "lengthSquared()",
      "return": "float",
-     "desc": "Get the squared magnitude (cheaper than length())"
+     "desc": "Returns the vector's squared length."
     },
     {
      "name": "lerp",
      "snippet": "lerp(${1:v}, ${2:t})",
      "return": "Vec4",
-     "desc": "Linearly interpolate toward v by t (0..1)"
+     "desc": "Returns a linear interpolation toward another vector."
     },
     {
      "name": "normalize",
      "snippet": "normalize()",
      "return": "Vec4 &",
-     "desc": "Normalize this vector in place (chainable)"
+     "desc": "Normalizes this vector in place."
     },
     {
      "name": "normalized",
      "snippet": "normalized()",
      "return": "Vec4",
-     "desc": "Return a unit-length copy of this vector"
+     "desc": "Returns a normalized copy of this vector."
     },
     {
      "name": "set",
      "snippet": "set(${1:x}, ${2:y}, ${3:z}, ${4:w})",
      "return": "Vec4 &",
-     "desc": "Set all components (chainable)"
+     "desc": "Sets all four components."
     },
     {
      "name": "xy",
      "snippet": "xy()",
      "return": "Vec2",
-     "desc": "Get the (x, y) components as a Vec2"
+     "desc": "Returns the X and Y components as a Vec2."
     },
     {
      "name": "xyz",
      "snippet": "xyz()",
      "return": "Vec3",
-     "desc": "Get the (x, y, z) components as a Vec3"
+     "desc": "Returns the X, Y, and Z components as a Vec3."
     }
    ]
   },
   {
    "name": "VideoCodec",
-   "desc": "Video codec: H264, HEVC, ProRes422, ProRes4444.",
+   "desc": "Selects the video compression format used for recording.",
    "static_methods": [
     {
      "name": "H264",
@@ -16895,22 +16895,22 @@ const TrussSketchAPI = {
   },
   {
    "name": "VideoDeviceInfo",
-   "desc": "Information about an available camera device, returned by VideoGrabber::listDevices()",
+   "desc": "Describes a camera returned by VideoGrabber::listDevices().",
    "properties": [
     {
      "name": "deviceId",
      "type": "int",
-     "desc": "Numeric device ID (pass to setDeviceID); -1 if unknown"
+     "desc": "Stores the camera's numeric device identifier."
     },
     {
      "name": "deviceName",
      "type": "std::string",
-     "desc": "Human-readable device name"
+     "desc": "Stores the camera's readable device name."
     },
     {
      "name": "uniqueId",
      "type": "std::string",
-     "desc": "Stable unique identifier for the device"
+     "desc": "Stores the camera's platform-provided identifier."
     }
    ],
    "methods": [
@@ -16918,41 +16918,41 @@ const TrussSketchAPI = {
      "name": "getDeviceID",
      "snippet": "getDeviceID()",
      "return": "int",
-     "desc": "Get the numeric device ID (-1 if unknown)"
+     "desc": "Returns the camera's numeric device identifier."
     },
     {
      "name": "getDeviceName",
      "snippet": "getDeviceName()",
      "return": "const std::string &",
-     "desc": "Get the human-readable device name"
+     "desc": "Returns the camera's readable device name."
     },
     {
      "name": "getUniqueId",
      "snippet": "getUniqueId()",
      "return": "const std::string &",
-     "desc": "Get the stable unique identifier for the device"
+     "desc": "Returns the camera's platform-provided identifier."
     }
    ]
   },
   {
    "name": "VideoErrorEventArgs",
-   "desc": "Runtime video error event payload.",
+   "desc": "Carries a runtime video playback error.",
    "properties": [
     {
      "name": "errorCode",
      "type": "int64_t",
-     "desc": "Backend-specific error code; zero when unavailable. Codes are not portable between backends."
+     "desc": "Contains the backend-specific playback error code."
     },
     {
      "name": "message",
      "type": "std::string",
-     "desc": "Backend error message."
+     "desc": "Contains the runtime playback error message."
     }
    ]
   },
   {
    "name": "VideoGrabber",
-   "desc": "Webcam capture source. Call setup() once, then update() every frame; getTexture() (via HasTexture) gives the live frame. Move-only. Camera permission is requested automatically on macOS",
+   "desc": "Captures live camera frames as pixels and a texture.",
    "constructor": {
     "snippet": "VideoGrabber()"
    },
@@ -16961,205 +16961,205 @@ const TrussSketchAPI = {
      "name": "close",
      "snippet": "close()",
      "return": "void",
-     "desc": "Stop the camera and release its resources"
+     "desc": "Stop camera capture and release its resources."
     },
     {
      "name": "copyToImage",
      "snippet": "copyToImage(${1:image})",
      "return": "void",
-     "desc": "Copy the current frame into an Image (allocating/updating it as needed)"
+     "desc": "Copy the current camera frame into an Image."
     },
     {
      "name": "draw",
      "snippet": "draw(${1:x}, ${2:y})",
      "return": "void",
-     "desc": "Draw the texture at the given position (and optional size)."
+     "desc": "Draws the texture at a specified position and optional size."
     },
     {
      "name": "getDesiredFrameRate",
      "snippet": "getDesiredFrameRate()",
      "return": "int",
-     "desc": "Return the requested frame rate (-1 if unspecified)"
+     "desc": "Return the requested capture frame rate."
     },
     {
      "name": "getDeviceID",
      "snippet": "getDeviceID()",
      "return": "int",
-     "desc": "Return the selected device ID"
+     "desc": "Return the selected camera device ID."
     },
     {
      "name": "getDeviceName",
      "snippet": "getDeviceName()",
      "return": "const std::string &",
-     "desc": "Return the name of the active capture device"
+     "desc": "Return the stored capture device name."
     },
     {
      "name": "getFrameQueueSize",
      "snippet": "getFrameQueueSize()",
      "return": "size_t",
-     "desc": "Return the frame queue capacity (0 = queueing disabled). Camera frames can outpace a stalled reader; an opt-in cap keeps queued frame memory finite. Overflow drops the oldest frame."
+     "desc": "Return the configured frame queue capacity."
     },
     {
      "name": "getHeight",
      "snippet": "getHeight()",
      "return": "int",
-     "desc": "Return the captured frame height in pixels"
+     "desc": "Return the current capture frame height."
     },
     {
      "name": "getMagFilter",
      "snippet": "getMagFilter()",
      "return": "TextureFilter",
-     "desc": "Return the texture magnification filter."
+     "desc": "Returns the texture magnification filter."
     },
     {
      "name": "getMinFilter",
      "snippet": "getMinFilter()",
      "return": "TextureFilter",
-     "desc": "Return the texture minification filter."
+     "desc": "Returns the texture minification filter."
     },
     {
      "name": "getPixels",
      "snippet": "getPixels()",
      "return": "unsigned char *",
-     "desc": "Return a pointer to the current RGBA pixel buffer"
+     "desc": "Return a pointer to the current camera pixel buffer."
     },
     {
      "name": "getTexture",
      "snippet": "getTexture()",
      "return": "Texture &",
-     "desc": "Return the texture holding the live camera frame (HasTexture override)"
+     "desc": "Return the texture used to display the camera frame."
     },
     {
      "name": "getWidth",
      "snippet": "getWidth()",
      "return": "int",
-     "desc": "Return the captured frame width in pixels"
+     "desc": "Return the current capture frame width."
     },
     {
      "name": "getWrapU",
      "snippet": "getWrapU()",
      "return": "TextureWrap",
-     "desc": "Return the texture wrap mode on the U axis."
+     "desc": "Returns the texture wrap mode on the U axis."
     },
     {
      "name": "getWrapV",
      "snippet": "getWrapV()",
      "return": "TextureWrap",
-     "desc": "Return the texture wrap mode on the V axis."
+     "desc": "Returns the texture wrap mode on the V axis."
     },
     {
      "name": "hasTexture",
      "snippet": "hasTexture()",
      "return": "bool",
-     "desc": "Return true if the underlying texture is allocated."
+     "desc": "Returns whether the underlying texture is allocated."
     },
     {
      "name": "isFrameNew",
      "snippet": "isFrameNew()",
      "return": "bool",
-     "desc": "Return true if a new frame arrived during the most recent update()"
+     "desc": "Return the new-frame flag from the latest update."
     },
     {
      "name": "isInitialized",
      "snippet": "isInitialized()",
      "return": "bool",
-     "desc": "Return true once the camera is set up and capturing"
+     "desc": "Return whether camera setup has completed."
     },
     {
      "name": "isPendingPermission",
      "snippet": "isPendingPermission()",
      "return": "bool",
-     "desc": "Return true while waiting for camera permission to be granted"
+     "desc": "Return whether setup is waiting for camera permission."
     },
     {
      "name": "isVerbose",
      "snippet": "isVerbose()",
      "return": "bool",
-     "desc": "Return whether verbose logging is enabled"
+     "desc": "Return whether verbose camera logging is enabled."
     },
     {
      "name": "listDevices",
      "snippet": "listDevices()",
      "return": "std::vector<VideoDeviceInfo>",
-     "desc": "Return the list of available camera devices"
+     "desc": "Return the available camera device list."
     },
     {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "SaveResult",
-     "desc": "Save texture contents (subclasses implement saving). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
+     "desc": "Provides a virtual interface for saving texture contents."
     },
     {
      "name": "setDesiredFrameRate",
      "snippet": "setDesiredFrameRate(${1:fps})",
      "return": "void",
-     "desc": "Request a capture frame rate; call before setup()"
+     "desc": "Set the requested capture frame rate."
     },
     {
      "name": "setDeviceID",
      "snippet": "setDeviceID(${1:deviceId})",
      "return": "void",
-     "desc": "Select which camera to use; call before setup()"
+     "desc": "Select the camera device for setup."
     },
     {
      "name": "setFilter",
      "snippet": "setFilter(${1:filter})",
      "return": "void",
-     "desc": "Set both the minification and magnification filters."
+     "desc": "Sets both texture minification and magnification filters."
     },
     {
      "name": "setFrameQueueSize",
      "snippet": "setFrameQueueSize(${1:maxFrames})",
      "return": "void",
-     "desc": "Enable the timestamped frame queue and set its capacity (0 = disable, the default; zero overhead when off). When full, the oldest frame is dropped so a slow consumer never blocks capture. Sizing hint: at least ceil(cameraFps / appFps) plus headroom; 8-16 is plenty. Can be called before or after setup(). Camera frames can outpace a stalled reader; an opt-in cap keeps queued frame memory finite. Overflow drops the oldest frame."
+     "desc": "Set the capacity of the timestamped camera frame queue."
     },
     {
      "name": "setMagFilter",
      "snippet": "setMagFilter(${1:filter})",
      "return": "void",
-     "desc": "Set the texture magnification filter."
+     "desc": "Sets the texture magnification filter."
     },
     {
      "name": "setMinFilter",
      "snippet": "setMinFilter(${1:filter})",
      "return": "void",
-     "desc": "Set the texture minification filter."
+     "desc": "Sets the texture minification filter."
     },
     {
      "name": "setVerbose",
      "snippet": "setVerbose(${1:verbose})",
      "return": "void",
-     "desc": "Enable or disable verbose logging"
+     "desc": "Enable or disable verbose camera logging."
     },
     {
      "name": "setWrap",
      "snippet": "setWrap(${1:wrap})",
      "return": "void",
-     "desc": "Set the texture wrap mode on both the U and V axes."
+     "desc": "Sets texture wrapping on both the U and V axes."
     },
     {
      "name": "setWrapU",
      "snippet": "setWrapU(${1:wrap})",
      "return": "void",
-     "desc": "Set the texture wrap mode on the U (horizontal) axis."
+     "desc": "Sets texture wrapping on the horizontal U axis."
     },
     {
      "name": "setWrapV",
      "snippet": "setWrapV(${1:wrap})",
      "return": "void",
-     "desc": "Set the texture wrap mode on the V (vertical) axis."
+     "desc": "Sets texture wrapping on the vertical V axis."
     },
     {
      "name": "setup",
      "snippet": "setup()",
      "return": "bool",
-     "desc": "Start the camera at the requested size. Returns false if permission is not yet granted (it is requested asynchronously); keep calling update() and capture begins once granted"
+     "desc": "Initialize camera capture at a requested size."
     },
     {
      "name": "update",
      "snippet": "update()",
      "return": "void",
-     "desc": "Poll for a new frame and upload it to the texture. Call every frame; also completes a setup() that was waiting on permission"
+     "desc": "Process camera updates and upload the latest frame."
     }
    ],
    "static_methods": [
@@ -17167,19 +17167,19 @@ const TrussSketchAPI = {
      "name": "checkCameraPermission",
      "snippet": "checkCameraPermission()",
      "return": "bool",
-     "desc": "Return whether camera access has been granted (macOS 10.14+)"
+     "desc": "Return whether camera permission is granted."
     },
     {
      "name": "requestCameraPermission",
      "snippet": "requestCameraPermission()",
      "return": "void",
-     "desc": "Request camera access asynchronously (macOS)"
+     "desc": "Request camera access permission."
     }
    ]
   },
   {
    "name": "VideoPlayer",
-   "desc": "Plays a video file: load/play/stop, per-frame update, and a texture you can draw each frame",
+   "desc": "Play video files with playback controls and drawable frames.",
    "constructor": {
     "snippet": "VideoPlayer()"
    },
@@ -17187,7 +17187,7 @@ const TrussSketchAPI = {
     {
      "name": "onError",
      "type": "Event<VideoErrorEventArgs>",
-     "desc": "Runtime failure event, delivered once per error stop by update() on the main thread. Playback stops without unloading, rewinding, or replacing the last frame. The app may seek, play again, or reload; there is no automatic retry. Keep calling update() on the main thread to receive errors. Normal EOF and stalls alone are not errors. Isolated invalid packets/frames are warned and skipped. onError listeners are not moved."
+     "desc": "Notify listeners of a runtime playback failure."
     }
    ],
    "methods": [
@@ -17195,490 +17195,490 @@ const TrussSketchAPI = {
      "name": "close",
      "snippet": "close()",
      "return": "void",
-     "desc": "Close the video and release resources"
+     "desc": "Closes the video and releases its resources."
     },
     {
      "name": "draw",
      "snippet": "draw(${1:x}, ${2:y})",
      "return": "void",
-     "desc": "Draw the current video frame at (x, y), optionally scaled to w x h"
+     "desc": "Draws the current video image."
     },
     {
      "name": "firstFrame",
      "snippet": "firstFrame()",
      "return": "void",
-     "desc": "Go to the first frame"
+     "desc": "Seeks to the first video frame."
     },
     {
      "name": "getAudioChannels",
      "snippet": "getAudioChannels()",
      "return": "int",
-     "desc": "Number of audio channels (0 if no audio)"
+     "desc": "Returns the audio channel count."
     },
     {
      "name": "getAudioCodec",
      "snippet": "getAudioCodec()",
      "return": "uint32_t",
-     "desc": "FourCC of the audio codec in the loaded video (0 if none)"
+     "desc": "Returns the source audio codec identifier."
     },
     {
      "name": "getAudioData",
      "snippet": "getAudioData()",
      "return": "std::vector<uint8_t>",
-     "desc": "Raw decoded audio data for the loaded video"
+     "desc": "Extracts the source audio bytes."
     },
     {
      "name": "getAudioSampleRate",
      "snippet": "getAudioSampleRate()",
      "return": "int",
-     "desc": "Audio sample rate in Hz (0 if no audio)"
+     "desc": "Returns the source audio sample rate."
     },
     {
      "name": "getAutoPoster",
      "snippet": "getAutoPoster()",
      "return": "bool",
-     "desc": "Return whether the auto poster is enabled (default true)"
+     "desc": "Returns whether automatic poster frames are enabled."
     },
     {
      "name": "getCurrentFrame",
      "snippet": "getCurrentFrame()",
      "return": "int",
-     "desc": "Get current frame number; 0 when the frame rate is unknown."
+     "desc": "Return the current frame index."
     },
     {
      "name": "getCurrentTime",
      "snippet": "getCurrentTime()",
      "return": "float",
-     "desc": "Get current playback time in seconds"
+     "desc": "Returns the current playback time."
     },
     {
      "name": "getDuration",
      "snippet": "getDuration()",
      "return": "float",
-     "desc": "Get total duration in seconds"
+     "desc": "Returns the total video duration."
     },
     {
      "name": "getErrorMessage",
      "snippet": "getErrorMessage()",
      "return": "const std::string &",
-     "desc": "Last runtime error message, or an empty string when there is no error. Query on the main thread after update()."
+     "desc": "Return the last delivered runtime playback error message."
     },
     {
      "name": "getFrameRate",
      "snippet": "getFrameRate()",
      "return": "float",
-     "desc": "Get the file frame rate in fps, or 0 when unknown or unloaded. Web returns 0."
+     "desc": "Returns the video's frame rate."
     },
     {
      "name": "getGammaCorrection",
      "snippet": "getGammaCorrection()",
      "return": "float",
-     "desc": "Get current gamma correction value"
+     "desc": "Returns the gamma correction setting."
     },
     {
      "name": "getHeight",
      "snippet": "getHeight()",
      "return": "float",
-     "desc": "Get video height in pixels"
+     "desc": "Returns the video height."
     },
     {
      "name": "getHwAccelName",
      "snippet": "getHwAccelName()",
      "return": "std::string",
-     "desc": "Get the name of the active decode backend. Returns 'vaapi', 'v4l2m2m', 'cuda', 'videotoolbox', 'mediafoundation', 'software', or 'none'"
+     "desc": "Returns the reported video decoding backend name."
     },
     {
      "name": "getMagFilter",
      "snippet": "getMagFilter()",
      "return": "TextureFilter",
-     "desc": "Return the texture magnification filter."
+     "desc": "Returns the texture magnification filter."
     },
     {
      "name": "getMinFilter",
      "snippet": "getMinFilter()",
      "return": "TextureFilter",
-     "desc": "Return the texture minification filter."
+     "desc": "Returns the texture minification filter."
     },
     {
      "name": "getPan",
      "snippet": "getPan()",
      "return": "float",
-     "desc": "Get current stereo pan"
+     "desc": "Returns the stored stereo pan."
     },
     {
      "name": "getPath",
      "snippet": "getPath()",
      "return": "fs::path",
-     "desc": "Path of the currently loaded video file (resolved via getDataPath); empty string when nothing is loaded"
+     "desc": "Returns the loaded video's source path."
     },
     {
      "name": "getPixels",
      "snippet": "getPixels()",
      "return": "unsigned char *",
-     "desc": "Pointer to the current RGBA pixel buffer (mutable)"
+     "desc": "Returns a pointer to the RGBA pixel buffer."
     },
     {
      "name": "getPixelsUV",
      "snippet": "getPixelsUV()",
      "return": "unsigned char *",
-     "desc": "Pointer to the interleaved UV (chroma) plane when decoding NV12; null otherwise"
+     "desc": "Returns a pointer to the interleaved NV12 chroma plane."
     },
     {
      "name": "getPixelsY",
      "snippet": "getPixelsY()",
      "return": "unsigned char *",
-     "desc": "Pointer to the Y (luma) plane when decoding NV12/YUV; null otherwise"
+     "desc": "Returns a pointer to the NV12 luma plane."
     },
     {
      "name": "getPosition",
      "snippet": "getPosition()",
      "return": "float",
-     "desc": "Get current position (0.0 to 1.0)"
+     "desc": "Returns the normalized playback position."
     },
     {
      "name": "getResyncThreshold",
      "snippet": "getResyncThreshold()",
      "return": "float",
-     "desc": "Get the current resync threshold in seconds"
+     "desc": "Returns the hard resynchronization threshold."
     },
     {
      "name": "getSpeed",
      "snippet": "getSpeed()",
      "return": "float",
-     "desc": "Get current playback speed"
+     "desc": "Returns the stored playback speed."
     },
     {
      "name": "getTexture",
      "snippet": "getTexture()",
      "return": "Texture &",
-     "desc": "Return the texture holding the current video frame."
+     "desc": "Return the player's video texture."
     },
     {
      "name": "getTotalFrames",
      "snippet": "getTotalFrames()",
      "return": "int",
-     "desc": "Get total frame count; 0 when the frame rate is unknown."
+     "desc": "Return the total frame count."
     },
     {
      "name": "getUseHwAccel",
      "snippet": "getUseHwAccel()",
      "return": "bool",
-     "desc": "Get HW accel preference (not the actual backend — use isUsingHwAccel() for that)"
+     "desc": "Returns the hardware decoding preference."
     },
     {
      "name": "getVolume",
      "snippet": "getVolume()",
      "return": "float",
-     "desc": "Get current volume"
+     "desc": "Returns the stored audio volume."
     },
     {
      "name": "getWidth",
      "snippet": "getWidth()",
      "return": "float",
-     "desc": "Get video width in pixels"
+     "desc": "Returns the video width."
     },
     {
      "name": "getWrapU",
      "snippet": "getWrapU()",
      "return": "TextureWrap",
-     "desc": "Return the texture wrap mode on the U axis."
+     "desc": "Returns the texture wrap mode on the U axis."
     },
     {
      "name": "getWrapV",
      "snippet": "getWrapV()",
      "return": "TextureWrap",
-     "desc": "Return the texture wrap mode on the V axis."
+     "desc": "Returns the texture wrap mode on the V axis."
     },
     {
      "name": "hasAudio",
      "snippet": "hasAudio()",
      "return": "bool",
-     "desc": "Check if the loaded video has an audio track"
+     "desc": "Reports whether an audio track was detected."
     },
     {
      "name": "hasError",
      "snippet": "hasError()",
      "return": "bool",
-     "desc": "Whether update() has delivered a runtime playback failure. Cleared by a successful load() or close(), retained through seek and play()."
+     "desc": "Return whether a runtime playback error has been delivered."
     },
     {
      "name": "hasTexture",
      "snippet": "hasTexture()",
      "return": "bool",
-     "desc": "Return true if the underlying texture is allocated."
+     "desc": "Returns whether the underlying texture is allocated."
     },
     {
      "name": "isAudioStreaming",
      "snippet": "isAudioStreaming()",
      "return": "bool",
-     "desc": "Return the audio streaming preference (default true); on Linux it applies to the next load(). Native OS players ignore the preference."
+     "desc": "Returns the audio streaming preference."
     },
     {
      "name": "isDone",
      "snippet": "isDone()",
      "return": "bool",
-     "desc": "Check if playback has reached the end"
+     "desc": "Reports whether playback completion has been recorded."
     },
     {
      "name": "isFrameNew",
      "snippet": "isFrameNew()",
      "return": "bool",
-     "desc": "Return true if a new frame was decoded since the last update."
+     "desc": "Reports whether a new video frame is marked available."
     },
     {
      "name": "isLoaded",
      "snippet": "isLoaded()",
      "return": "bool",
-     "desc": "Check if a video is loaded"
+     "desc": "Reports whether the player is initialized."
     },
     {
      "name": "isLoop",
      "snippet": "isLoop()",
      "return": "bool",
-     "desc": "Check if looping is enabled"
+     "desc": "Reports whether looping is enabled."
     },
     {
      "name": "isPaused",
      "snippet": "isPaused()",
      "return": "bool",
-     "desc": "Check if video is paused"
+     "desc": "Reports the pause flag."
     },
     {
      "name": "isPlaying",
      "snippet": "isPlaying()",
      "return": "bool",
-     "desc": "Check if video is currently playing (not paused). False after a runtime playback error."
+     "desc": "Reports whether playback is marked active and unpaused."
     },
     {
      "name": "isReady",
      "snippet": "isReady()",
      "return": "bool",
-     "desc": "True while the texture holds a real picture — i.e. drawing shows actual video, not black. With the default auto poster this is true from load() on; false only if the poster failed and no frame has arrived yet"
+     "desc": "Reports whether a video picture has been received."
     },
     {
      "name": "isUsingHwAccel",
      "snippet": "isUsingHwAccel()",
      "return": "bool",
-     "desc": "Check if hardware decoding is currently active (after load)"
+     "desc": "Returns the reported hardware decoding state."
     },
     {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "LoadResult",
-     "desc": "Load a video file On Web, load waits for a decoded first frame instead of returning placeholder dimensions."
+     "desc": "Loads a video source for playback."
     },
     {
      "name": "nextFrame",
      "snippet": "nextFrame()",
      "return": "void",
-     "desc": "Advance one frame; does nothing when the frame rate is unknown (0)."
+     "desc": "Advance one video frame."
     },
     {
      "name": "play",
      "snippet": "play()",
      "return": "void",
-     "desc": "Start or resume playback. With the auto poster (default), a seek made while stopped/paused is bridged with the exact frame at the new position before playback, so it never starts on a stale picture"
+     "desc": "Starts or resumes video playback."
     },
     {
      "name": "previousFrame",
      "snippet": "previousFrame()",
      "return": "void",
-     "desc": "Go back one frame; does nothing when the frame rate is unknown (0)."
+     "desc": "Step back one video frame."
     },
     {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "SaveResult",
-     "desc": "Save texture contents (subclasses implement saving). Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
+     "desc": "Provides a virtual interface for saving texture contents."
     },
     {
      "name": "setAudioStreaming",
      "snippet": "setAudioStreaming(${1:streaming})",
      "return": "void",
-     "desc": "Choose Linux audio streaming (default true). Call before load(); false preloads the whole track for sample-accurate loops and seeks. Changes apply to the next load."
+     "desc": "Sets the audio streaming preference."
     },
     {
      "name": "setAutoPoster",
      "snippet": "setAutoPoster(${1:on})",
      "return": "void",
-     "desc": "Auto poster (default ON): on load/stop/play the player synchronously puts the frame at the current position on the texture, so drawing never shows black or a stale picture. Turn off to skip the one-time synchronous decode"
+     "desc": "Controls automatic still frames that bridge playback transitions."
     },
     {
      "name": "setCurrentTime",
      "snippet": "setCurrentTime(${1:seconds})",
      "return": "void",
-     "desc": "Seek to a specific time in seconds"
+     "desc": "Seeks to a playback time."
     },
     {
      "name": "setFilter",
      "snippet": "setFilter(${1:filter})",
      "return": "void",
-     "desc": "Set both the minification and magnification filters."
+     "desc": "Sets both texture minification and magnification filters."
     },
     {
      "name": "setFrame",
      "snippet": "setFrame(${1:frame})",
      "return": "void",
-     "desc": "Seek to a frame number; does nothing when the frame rate is unknown (0)."
+     "desc": "Seek to a frame index."
     },
     {
      "name": "setGammaCorrection",
      "snippet": "setGammaCorrection(${1:gamma})",
      "return": "void",
-     "desc": "Set gamma correction (1.0 = none). Use ~0.45 to brighten on platforms with dark output (e.g. macOS AVFoundation)"
+     "desc": "Sets the gamma correction exponent."
     },
     {
      "name": "setLoop",
      "snippet": "setLoop(${1:loop})",
      "return": "void",
-     "desc": "Enable/disable looping"
+     "desc": "Sets whether playback repeats."
     },
     {
      "name": "setMagFilter",
      "snippet": "setMagFilter(${1:filter})",
      "return": "void",
-     "desc": "Set the texture magnification filter."
+     "desc": "Sets the texture magnification filter."
     },
     {
      "name": "setMinFilter",
      "snippet": "setMinFilter(${1:filter})",
      "return": "void",
-     "desc": "Set the texture minification filter."
+     "desc": "Sets the texture minification filter."
     },
     {
      "name": "setPan",
      "snippet": "setPan(${1:pan})",
      "return": "void",
-     "desc": "Set stereo pan (-1.0 left, 0.0 center, 1.0 right)"
+     "desc": "Sets the requested stereo pan."
     },
     {
      "name": "setPaused",
      "snippet": "setPaused(${1:paused})",
      "return": "void",
-     "desc": "Pause or resume playback"
+     "desc": "Pauses or resumes playback."
     },
     {
      "name": "setPosition",
      "snippet": "setPosition(${1:pct})",
      "return": "void",
-     "desc": "Seek to a playback position given as a fraction (0-1)."
+     "desc": "Seek to a normalized playback position."
     },
     {
      "name": "setResyncThreshold",
      "snippet": "setResyncThreshold(${1:seconds})",
      "return": "void",
-     "desc": "Set the maximum video/audio drift before hard re-sync (video seeks to the audio position). Set to 0 or negative to disable hard re-sync. Default: 0.5s. Affects the Linux (FFmpeg) backend and tcxHap's HapPlayer. HapPlayer advances by wall-clock dt * speed and slews toward playing audio with a 0.25s time constant; slewing remains enabled when hard re-sync is disabled."
+     "desc": "Sets the threshold for hard playback resynchronization."
     },
     {
      "name": "setSpeed",
      "snippet": "setSpeed(${1:speed})",
      "return": "void",
-     "desc": "Set playback speed (1.0 = normal, 2.0 = double speed)"
+     "desc": "Sets the requested playback speed."
     },
     {
      "name": "setUseHwAccel",
      "snippet": "setUseHwAccel(${1:enable})",
      "return": "void",
-     "desc": "Enable/disable hardware decoding. Must be called before load(). Default: true. When enabled, the player probes available HW backends (VAAPI, V4L2M2M, CUDA, etc.) and falls back to software if none are available. Currently affects the Linux backend only."
+     "desc": "Sets the hardware decoding preference."
     },
     {
      "name": "setVolume",
      "snippet": "setVolume(${1:vol})",
      "return": "void",
-     "desc": "Set audio volume (0.0 to 1.0)"
+     "desc": "Sets the audio volume."
     },
     {
      "name": "setWrap",
      "snippet": "setWrap(${1:wrap})",
      "return": "void",
-     "desc": "Set the texture wrap mode on both the U and V axes."
+     "desc": "Sets texture wrapping on both the U and V axes."
     },
     {
      "name": "setWrapU",
      "snippet": "setWrapU(${1:wrap})",
      "return": "void",
-     "desc": "Set the texture wrap mode on the U (horizontal) axis."
+     "desc": "Sets texture wrapping on the horizontal U axis."
     },
     {
      "name": "setWrapV",
      "snippet": "setWrapV(${1:wrap})",
      "return": "void",
-     "desc": "Set the texture wrap mode on the V (vertical) axis."
+     "desc": "Sets texture wrapping on the vertical V axis."
     },
     {
      "name": "stop",
      "snippet": "stop()",
      "return": "void",
-     "desc": "Stop playback and reset to beginning"
+     "desc": "Stops playback and rewinds to the beginning."
     },
     {
      "name": "togglePause",
      "snippet": "togglePause()",
      "return": "void",
-     "desc": "Toggle pause state"
+     "desc": "Toggles the pause state."
     },
     {
      "name": "update",
      "snippet": "update()",
      "return": "void",
-     "desc": "Update the video frame. Call once per frame in update()"
+     "desc": "Updates the current video frame and playback state."
     }
    ]
   },
   {
    "name": "VideoRecordSettings",
-   "desc": "Encoder settings passed to VideoWriter::open(), ScreenRecorder::start(), and startRecording()",
+   "desc": "Configures video encoding and optional audio recording.",
    "properties": [
     {
      "name": "audio",
      "type": "bool",
-     "desc": "Record the AudioEngine's master mix into the file as an AAC track (macOS/Windows/Linux; other platforms warn and record video only; Linux needs a GStreamer AAC encoder such as gst-libav or gst-plugins-bad). ScreenRecorder also switches the video PTS to the audio device clock, so A/V stay in sync however unstable the frame rate is"
+     "desc": "Enable an AAC audio track in the recording."
     },
     {
      "name": "audioBitrate",
      "type": "int",
-     "desc": "AAC bitrate in bits/sec (default 192000)"
+     "desc": "Set the target AAC audio bitrate."
     },
     {
      "name": "audioChannels",
      "type": "int",
-     "desc": "Channel count of the audio track. ScreenRecorder fills it from the running AudioEngine; set manually only when feeding writeAudio() on a bare VideoWriter"
+     "desc": "Specify the audio track channel count."
     },
     {
      "name": "audioSampleRate",
      "type": "int",
-     "desc": "Sample rate of the audio track. ScreenRecorder fills it from the running AudioEngine; set manually only when feeding writeAudio() on a bare VideoWriter"
+     "desc": "Specify the audio track sample rate."
     },
     {
      "name": "bitrate",
      "type": "int",
-     "desc": "Target bits/sec for H.264/HEVC; 0 = auto. Ignored by ProRes"
+     "desc": "Set the target video bitrate."
     },
     {
      "name": "codec",
      "type": "VideoCodec",
-     "desc": "Output codec (default H264)"
+     "desc": "Select the recording codec."
     },
     {
      "name": "duration",
      "type": "float",
-     "desc": "Recording length in seconds; 0 = unlimited (stop manually). When set, recording auto-stops and the file is finalized at exactly this length; a manual stop before the cutoff still wins"
+     "desc": "Set the automatic recording cutoff."
     },
     {
      "name": "fps",
      "type": "float",
-     "desc": "Capture/output frame rate. For ScreenRecorder this is the capture ceiling; for VideoWriter it is the exact output rate (default 60)"
+     "desc": "Set the recording frame rate."
     },
     {
      "name": "keyframeInterval",
      "type": "int",
-     "desc": "Frames between keyframes; 0 = encoder default"
+     "desc": "Set the requested keyframe spacing."
     }
    ]
   },
   {
    "name": "VideoWriter",
-   "desc": "Encodes frames to a video file: open a path, write frames, then close to finalize the file",
+   "desc": "Encodes supplied frames into a video file.",
    "constructor": {
     "snippet": "VideoWriter()"
    },
@@ -17687,85 +17687,85 @@ const TrussSketchAPI = {
      "name": "addFrame",
      "snippet": "addFrame(${1:fbo})",
      "return": "SaveResult",
-     "desc": "Append one frame at the fixed-rate clock (frameIndex/fps). Returns SaveResult for this backend submission, not disk completion: Linux checks gst_app_src_push_buffer and polls bus errors during the take; Apple checks append and AVAssetWriter status/error; Windows checks WriteSample HRESULT. Check close()/stop() for finalization."
+     "desc": "Appends a frame using the fixed frame-rate clock."
     },
     {
      "name": "addFrameAt",
      "snippet": "addFrameAt(${1:fbo}, ${2:timeSec})",
      "return": "SaveResult",
-     "desc": "Append one frame at an explicit presentation time (seconds). Returns SaveResult for this backend submission, not disk completion: Linux checks gst_app_src_push_buffer and polls bus errors during the take; Apple checks append and AVAssetWriter status/error; Windows checks WriteSample HRESULT. Check close()/stop() for finalization."
+     "desc": "Appends a frame at a specified presentation time."
     },
     {
      "name": "close",
      "snippet": "close()",
      "return": "SaveResult",
-     "desc": "Finalize and flush the video file. Returns SaveResult for backend finalization, retaining the first backend failure. Caller errors and transient readback failures do not fail the take. Repeated calls retain the result without another Error. No temporary/rename is used."
+     "desc": "Finalizes the recording and closes the encoder."
     },
     {
      "name": "getFps",
      "snippet": "getFps()",
      "return": "float",
-     "desc": "Fixed encoding frame rate"
+     "desc": "Returns the configured encoding frame rate."
     },
     {
      "name": "getFrameCount",
      "snippet": "getFrameCount()",
      "return": "int",
-     "desc": "Number of video frames accepted by the backend; failed submissions are excluded. Finalization may still fail."
+     "desc": "Returns the number of accepted video frames."
     },
     {
      "name": "getHeight",
      "snippet": "getHeight()",
      "return": "int",
-     "desc": "Encoder output height in pixels"
+     "desc": "Returns the configured output height."
     },
     {
      "name": "getPath",
      "snippet": "getPath()",
      "return": "fs::path",
-     "desc": "Resolved output file path"
+     "desc": "Returns the resolved output path."
     },
     {
      "name": "getRejectedFrameCount",
      "snippet": "getRejectedFrameCount()",
      "return": "uint64_t",
-     "desc": "Number of frames refused in this take because capture/readback failed or dimensions, pixel format, row layout or byte capacity did not match the take or native buffer. Refused frames are skipped whole and do not fail the take. Resets on VideoWriter::open() (also used by ScreenRecorder::start())."
+     "desc": "Returns the number of frames skipped by capture or buffer validation."
     },
     {
      "name": "getSettings",
      "snippet": "getSettings()",
      "return": "const VideoRecordSettings &",
-     "desc": "Encoder settings the writer was opened with"
+     "desc": "Returns the stored encoder settings."
     },
     {
      "name": "getWidth",
      "snippet": "getWidth()",
      "return": "int",
-     "desc": "Encoder output width in pixels"
+     "desc": "Returns the configured output width."
     },
     {
      "name": "isOpen",
      "snippet": "isOpen()",
      "return": "bool",
-     "desc": "Check if the encoder is open and accepting frames"
+     "desc": "Returns whether the writer is open."
     },
     {
      "name": "open",
      "snippet": "open(${1:path}, ${2:width}, ${3:height})",
      "return": "SaveResult",
-     "desc": "Open the native encoder. Returns SaveResult for path preparation and encoder opening. Success starts an in-place stream; check close()/stop() for finalization."
+     "desc": "Opens an encoder for a video output file."
     },
     {
      "name": "submitFrame",
      "snippet": "submitFrame(${1:timeSec})",
      "return": "SaveResult",
-     "desc": "Submit the previously locked frame at the given PTS. Returns SaveResult from the append BOOL and AVAssetWriter status/error. Accepted frames increase getFrameCount(); close() checks finalization."
+     "desc": "Submits the previously locked encoder frame."
     }
    ]
   },
   {
    "name": "Window",
-   "desc": "A secondary application window (macOS only for now). Owns its own Node tree, events, mouse state and render context; ticks at its display's refresh rate. GPU resources are shared with every other window",
+   "desc": "Represents a secondary application window.",
    "constructor": {
     "snippet": "Window()"
    },
@@ -17774,164 +17774,164 @@ const TrussSketchAPI = {
      "name": "close",
      "snippet": "close()",
      "return": "void",
-     "desc": "Close the native window; the main window and other windows keep running. A request, like exitApp() for the main window: it returns at once and the window closes at its backend's next safe point (after the current run-loop pass on Linux / Windows, after the next main-window tick on macOS), through the same path as its close button. Until then isOpen() is true and getApp() / App::getWindow() still return the App and the window. Safe to call from the window's own App (update() / draw() / keyPressed()). Destroying the Window (its last shared_ptr) still closes it immediately"
+     "desc": "Requests closure of this window."
     },
     {
      "name": "events",
      "snippet": "events()",
      "return": "CoreEvents &",
-     "desc": "This window's own event stream (mousePressed / keyPressed / draw / ...)"
+     "desc": "Returns this window's event collection."
     },
     {
      "name": "getApp",
      "snippet": "getApp()",
      "return": "std::shared_ptr<App>",
-     "desc": "Get the App attached to this window"
+     "desc": "Returns the App currently attached to this window."
     },
     {
      "name": "getFps",
      "snippet": "getFps()",
      "return": "float",
-     "desc": "This window's target frame rate set via setFps (0 = free-run at vsync); not a measured rate"
+     "desc": "Returns this window's target frame rate."
     },
     {
      "name": "getHeight",
      "snippet": "getHeight()",
      "return": "int",
-     "desc": "Window height in logical points (matches its coordinate system)"
+     "desc": "Returns this window's content height."
     },
     {
      "name": "getTitle",
      "snippet": "getTitle()",
      "return": "const std::string &",
-     "desc": "Last title set for this window (via WindowSettings or setTitle)"
+     "desc": "Returns the title stored for this window."
     },
     {
      "name": "getWidth",
      "snippet": "getWidth()",
      "return": "int",
-     "desc": "Window width in logical points (matches its coordinate system)"
+     "desc": "Returns this window's content width."
     },
     {
      "name": "isFullscreen",
      "snippet": "isFullscreen()",
      "return": "bool",
-     "desc": "Whether this window is currently fullscreen (macOS reads the live window state; the transition is animated)"
+     "desc": "Returns this window's fullscreen state."
     },
     {
      "name": "isOccluded",
      "snippet": "isOccluded()",
      "return": "bool",
-     "desc": "Whether the OS reports this window as not visible, so it renders no frames (its update/draw pause until it is visible again): macOS minimized, fully covered or on another Space; Windows minimized or DXGI-occluded; Linux (X11) minimized or fully obscured (without a compositing manager). False for a closed window"
+     "desc": "Returns whether the operating system reports this window as not visible."
     },
     {
      "name": "isOpen",
      "snippet": "isOpen()",
      "return": "bool",
-     "desc": "Whether the native window is still open (true until a requested close() lands)"
+     "desc": "Returns whether this window's native window still exists."
     },
     {
      "name": "setApp",
      "snippet": "setApp(${1:app})",
      "return": "void",
-     "desc": "Attach an App to this window — the only way to give a window content. The App's full lifecycle (setup/update/draw/key/mouse/windowResized + RectNode size sync) runs against this window. One App per window. An App runs once: setup() when first attached, exit() / cleanup() when it leaves its window (close(), setApp(other), or setApp(nullptr)), and leaving also detaches its audioOut() / audioIn() for good. To show it again, create a new App: setApp() refuses an App whose cleanup() already ran, and any App on a window that is not open or is closing (both log an error and leave the window as it is). setApp() is a request: it returns at once and the window applies it at its next frame boundary (before or after one of its ticks or events), wherever it is called from, including the App's own update() / draw() / keyPressed(). Until then getApp() returns the current App. The last setApp() before the boundary wins, a close() requested before it wins over it, and the checks run again when the request is applied"
+     "desc": "Requests an App attachment or replacement for this window."
     },
     {
      "name": "setClearColor",
      "snippet": "setClearColor(${1:c})",
      "return": "void",
-     "desc": "Background clear color for this window"
+     "desc": "Sets this window's background clear color."
     },
     {
      "name": "setFps",
      "snippet": "setFps(${1:fps})",
      "return": "void",
-     "desc": "Set this window's target frame rate; <= 0 (or >= the display rate) free-runs at vsync, otherwise update/draw run at ~fps by skipping display ticks"
+     "desc": "Sets this window's target frame rate."
     },
     {
      "name": "setFullscreen",
      "snippet": "setFullscreen(${1:full})",
      "return": "void",
-     "desc": "Enter or leave fullscreen for this window (macOS native fullscreen, Windows borderless-fullscreen, Linux EWMH _NET_WM_STATE_FULLSCREEN)"
+     "desc": "Sets this window's fullscreen mode."
     },
     {
      "name": "setSize",
      "snippet": "setSize(${1:width}, ${2:height})",
      "return": "void",
-     "desc": "Resize this window's content area to the given logical size (points)"
+     "desc": "Resizes this window's content area."
     },
     {
      "name": "setTitle",
      "snippet": "setTitle(${1:title})",
      "return": "void",
-     "desc": "Set the window title"
+     "desc": "Sets this window's title."
     },
     {
      "name": "toggleFullscreen",
      "snippet": "toggleFullscreen()",
      "return": "void",
-     "desc": "Toggle this window's fullscreen state"
+     "desc": "Toggles this window's fullscreen mode."
     }
    ]
   },
   {
    "name": "WindowSettings",
-   "desc": "Window configuration passed to the app at startup (size, title, DPI, MSAA, fullscreen, decoration, VSync). Setters chain",
+   "desc": "Configures the application window at startup.",
    "properties": [
     {
      "name": "clipboardSize",
      "type": "int",
-     "desc": "Clipboard buffer size in bytes (default 65536). OS clipboard text needs finite storage in the window backend. On reads, macOS and web truncate to size - 1 bytes; Windows fails UTF-8 conversion on overflow; X11 rejects oversized or incremental selections (standalone returns empty, legacy returns null). On writes, macOS and web send the full text to the OS and truncate the local copy; Windows rejects overflowing UTF-16 conversion and truncates the local UTF-8 copy after success; standalone X11 rejects oversized writes, while legacy X11 logs and truncates. Clipboard access is unsupported on iOS and Android."
+     "desc": "Specifies the clipboard buffer capacity."
     },
     {
      "name": "decorated",
      "type": "bool",
-     "desc": "false: borderless/chromeless window with no title bar (default true)"
+     "desc": "Specifies whether the window displays its frame and title bar."
     },
     {
      "name": "fullscreen",
      "type": "bool",
-     "desc": "Start in fullscreen (default false)"
+     "desc": "Specifies whether the main window starts in fullscreen."
     },
     {
      "name": "height",
      "type": "int",
-     "desc": "Window height (default 720)"
+     "desc": "Specifies the initial window height."
     },
     {
      "name": "highDpi",
      "type": "bool",
-     "desc": "High DPI support for sharp rendering on Retina (default true)"
+     "desc": "Specifies whether rendering uses the display's high pixel density."
     },
     {
      "name": "pixelPerfect",
      "type": "bool",
-     "desc": "true: coords match framebuffer size; false: coords use logical size (default false)"
+     "desc": "Specifies whether window coordinates use framebuffer pixels."
     },
     {
      "name": "sampleCount",
      "type": "int",
-     "desc": "MSAA sample count (default 4)"
+     "desc": "Specifies the window's MSAA sample count."
     },
     {
      "name": "swapInterval",
      "type": "int",
-     "desc": "VSync present interval: 1 = on (default), 0 = off, N = every Nth refresh"
+     "desc": "Specifies the requested VSync presentation interval."
     },
     {
      "name": "title",
      "type": "std::string",
-     "desc": "Window title (default \"TrussC App\")\n"
+     "desc": "Specifies the initial window title."
     },
     {
      "name": "uniformBufferReserve",
      "type": "int",
-     "desc": "Per-frame GPU uniform buffer reservation in bytes; 0 = backend default (4MB). Overflow silently corrupts frames in release builds on Metal/WebGPU/Vulkan"
+     "desc": "Stores the initial per-frame GPU uniform buffer capacity."
     },
     {
      "name": "width",
      "type": "int",
-     "desc": "Window width (default 1280)"
+     "desc": "Specifies the initial window width."
     }
    ],
    "methods": [
@@ -17939,67 +17939,67 @@ const TrussSketchAPI = {
      "name": "reserveUniformBuffer",
      "snippet": "reserveUniformBuffer(${1:bytes})",
      "return": "WindowSettings &",
-     "desc": "Reserve the per-frame GPU uniform buffer in bytes, vector::reserve style; 0 = backend default 4MB ≈ 8k draw calls. Metal/WebGPU/Vulkan only — GL/D3D11 have no such cap (chainable)"
+     "desc": "Sets the initial capacity of the per-frame GPU uniform buffer."
     },
     {
      "name": "setClipboardSize",
      "snippet": "setClipboardSize(${1:size})",
      "return": "WindowSettings &",
-     "desc": "Set clipboard buffer size in bytes (chainable). OS clipboard text needs finite storage in the window backend. On reads, macOS and web truncate to size - 1 bytes; Windows fails UTF-8 conversion on overflow; X11 rejects oversized or incremental selections (standalone returns empty, legacy returns null). On writes, macOS and web send the full text to the OS and truncate the local copy; Windows rejects overflowing UTF-16 conversion and truncates the local UTF-8 copy after success; standalone X11 rejects oversized writes, while legacy X11 logs and truncates. Clipboard access is unsupported on iOS and Android."
+     "desc": "Sets the clipboard buffer capacity."
     },
     {
      "name": "setDecorated",
      "snippet": "setDecorated(${1:enabled})",
      "return": "WindowSettings &",
-     "desc": "false = borderless/chromeless window that can still take focus and be closed programmatically (chainable)"
+     "desc": "Sets whether the window displays its frame and title bar."
     },
     {
      "name": "setFullscreen",
      "snippet": "setFullscreen(${1:enabled})",
      "return": "WindowSettings &",
-     "desc": "Enable/disable fullscreen at startup (chainable)"
+     "desc": "Sets whether the main window starts in fullscreen."
     },
     {
      "name": "setHighDpi",
      "snippet": "setHighDpi(${1:enabled})",
      "return": "WindowSettings &",
-     "desc": "Enable/disable high DPI support (chainable)"
+     "desc": "Sets whether rendering uses the display's high pixel density."
     },
     {
      "name": "setPixelPerfect",
      "snippet": "setPixelPerfect(${1:enabled})",
      "return": "WindowSettings &",
-     "desc": "Set pixel-perfect mode: true = framebuffer-size coords, false = logical-size coords (chainable)"
+     "desc": "Sets whether window coordinates use framebuffer pixels."
     },
     {
      "name": "setSampleCount",
      "snippet": "setSampleCount(${1:count})",
      "return": "WindowSettings &",
-     "desc": "Set MSAA sample count (chainable)"
+     "desc": "Sets the window's MSAA sample count."
     },
     {
      "name": "setSize",
      "snippet": "setSize(${1:w}, ${2:h})",
      "return": "WindowSettings &",
-     "desc": "Set window size (chainable)"
+     "desc": "Sets the initial window dimensions."
     },
     {
      "name": "setSwapInterval",
      "snippet": "setSwapInterval(${1:interval})",
      "return": "WindowSettings &",
-     "desc": "Set VSync present interval: 1 = on, 0 = off, N = every Nth refresh (chainable)"
+     "desc": "Sets the requested VSync presentation interval."
     },
     {
      "name": "setTitle",
      "snippet": "setTitle(${1:t})",
      "return": "WindowSettings &",
-     "desc": "Set window title (chainable)"
+     "desc": "Sets the initial window title."
     }
    ]
   },
   {
    "name": "WindowType",
-   "desc": "FFT window function: Rect, Hanning, Hamming, Blackman.",
+   "desc": "Selects a window function for signal processing.",
    "static_methods": [
     {
      "name": "Rect",
@@ -18029,7 +18029,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "WritingMode",
-   "desc": "Text writing mode: Horizontal or VerticalRL (vertical, right-to-left).",
+   "desc": "Selects horizontal or vertical text layout.",
    "static_methods": [
     {
      "name": "Horizontal",
@@ -18047,7 +18047,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Xml",
-   "desc": "XML document wrapper around pugixml. Loads, saves and queries XML; node-level access is via XmlNode returned from root() and child().",
+   "desc": "Wraps a pugixml document for loading, saving, and querying XML.",
    "constructor": {
     "snippet": "Xml()"
    },
@@ -18056,61 +18056,61 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "bool",
-     "desc": "Load an XML document from a file. Relative paths are resolved via getDataPath. Returns true on success."
+     "desc": "Loads an XML document from a file."
     },
     {
      "name": "parse",
      "snippet": "parse(${1:str})",
      "return": "bool",
-     "desc": "Parse an XML document from a string. Returns true on success."
+     "desc": "Parses an XML document from a string."
     },
     {
      "name": "save",
      "snippet": "save(${1:path})",
      "return": "SaveResult",
-     "desc": "Serialize and save XML. Returns SaveResult after checked write, close and atomic replacement using <file>.tmp. Failed writes preserve the previous file and remove the temporary. Relative paths use getDataPath(); missing parents are created; bundle paths return AccessDenied. Atomic replacement does not guarantee durability after power loss."
+     "desc": "Serializes the XML document and saves it to a file."
     },
     {
      "name": "toString",
      "snippet": "toString()",
      "return": "std::string",
-     "desc": "Serialize the document to an XML string. indent sets the per-level indentation string."
+     "desc": "Serializes the XML document to a string."
     },
     {
      "name": "root",
      "snippet": "root()",
      "return": "XmlNode",
-     "desc": "Get the document's root element node."
+     "desc": "Returns the document's first root element."
     },
     {
      "name": "addRoot",
      "snippet": "addRoot(${1:name})",
      "return": "XmlNode",
-     "desc": "Append a new root element with the given name and return it."
+     "desc": "Appends a root element and returns its node handle."
     },
     {
      "name": "child",
      "snippet": "child(${1:name})",
      "return": "XmlNode",
-     "desc": "Find a direct child node of the document by name."
+     "desc": "Finds a direct child of the document by name."
     },
     {
      "name": "document",
      "snippet": "document()",
      "return": "XmlDocument &",
-     "desc": "Access the underlying pugixml document for advanced operations."
+     "desc": "Provides access to the underlying pugixml document."
     },
     {
      "name": "empty",
      "snippet": "empty()",
      "return": "bool",
-     "desc": "Return true if the document has no content."
+     "desc": "Reports whether the underlying document handle is null."
     },
     {
      "name": "addDeclaration",
      "snippet": "addDeclaration()",
      "return": "void",
-     "desc": "Prepend an XML declaration (<?xml ...?>) with the given version and encoding."
+     "desc": "Prepends an XML declaration to the document."
     }
    ]
   }
