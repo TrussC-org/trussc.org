@@ -14996,13 +14996,25 @@ const TrussSketchAPI = {
      "name": "setSendAsyncBufferSize",
      "snippet": "setSendAsyncBufferSize(${1:bytes})",
      "return": "void",
-     "desc": "Sets the send queue threshold."
+     "desc": "Sets the per-client send high-water mark."
+    },
+    {
+     "name": "setSendItemLimit",
+     "snippet": "setSendItemLimit(${1:bytes})",
+     "return": "void",
+     "desc": "Sets the maximum owned send payload capacity."
     },
     {
      "name": "setSendTimeout",
      "snippet": "setSendTimeout(${1:seconds})",
      "return": "void",
      "desc": "Sets the send inactivity timeout."
+    },
+    {
+     "name": "setTotalSendBufferSize",
+     "snippet": "setTotalSendBufferSize(${1:bytes})",
+     "return": "void",
+     "desc": "Sets aggregate TCP server send credits."
     },
     {
      "name": "start",

@@ -29370,9 +29370,21 @@ const TrussCAPI = {
                             "params": "bytes"
                         }
                     ],
-                    "desc": "Sets the send queue threshold.",
-                    "desc_ja": "送信キューのしきい値を設定する。",
-                    "desc_ko": "송신 큐의 기준값을 설정한다."
+                    "desc": "Sets the per-client send high-water mark.",
+                    "desc_ja": "クライアントごとの送信高水位を設定する。",
+                    "desc_ko": "클라이언트별 송신 상한 기준을 설정한다."
+                },
+                {
+                    "name": "tcpServer:setSendItemLimit",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "bytes"
+                        }
+                    ],
+                    "desc": "Sets the maximum owned send payload capacity.",
+                    "desc_ja": "所有する送信データの最大容量を設定する。",
+                    "desc_ko": "소유 송신 데이터의 최대 용량을 설정한다."
                 },
                 {
                     "name": "tcpServer:setSendTimeout",
@@ -29387,11 +29399,23 @@ const TrussCAPI = {
                     "desc_ko": "전송이 진행되지 않을 때의 타임아웃을 설정한다."
                 },
                 {
+                    "name": "tcpServer:setTotalSendBufferSize",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "bytes"
+                        }
+                    ],
+                    "desc": "Sets aggregate TCP server send credits.",
+                    "desc_ja": "TCP サーバー全体の送信クレジットを設定する。",
+                    "desc_ko": "TCP 서버 전체의 송신 크레딧을 설정한다."
+                },
+                {
                     "name": "tcpServer:start",
                     "signatures": [
                         {
                             "ret": "boolean",
-                            "params": "port, maxClients = 0"
+                            "params": "port, maxClients = 64"
                         }
                     ],
                     "desc": "Starts listening for TCP connections.",
