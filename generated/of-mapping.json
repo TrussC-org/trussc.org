@@ -171,6 +171,13 @@
           "notes_ko": ""
         },
         {
+          "of": "ofDrawCurve",
+          "tc": "drawCurve(p0, p1, p2, p3)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
           "of": "ofDrawEllipse",
           "tc": "drawEllipse(center, radii)",
           "notes": "",
@@ -984,30 +991,30 @@
         {
           "of": "ofFbo",
           "tc": "Fbo",
-          "notes": "Framebuffer object for offscreen rendering",
-          "notes_ja": "オフスクリーンレンダリング用FBO",
-          "notes_ko": "오프스크린 렌더링용 프레임버퍼 객체"
+          "notes": "Stores off-screen rendering results in a texture.",
+          "notes_ja": "画面外での描画結果をテクスチャに保持する。",
+          "notes_ko": "오프스크린 렌더링 결과를 텍스처에 보관한다."
         },
         {
           "of": "ofImage",
           "tc": "Image",
-          "notes": "Image with CPU pixels and GPU texture",
-          "notes_ja": "CPUピクセルとGPUテクスチャを持つ画像",
-          "notes_ko": "CPU 픽셀과 GPU 텍스처를 가진 이미지"
+          "notes": "An image containing CPU pixels and a GPU texture.",
+          "notes_ja": "CPU ピクセルと GPU テクスチャを持つ画像を表す。",
+          "notes_ko": "CPU 픽셀과 GPU 텍스처를 가진 이미지를 나타낸다."
         },
         {
           "of": "ofPixels",
           "tc": "Pixels",
-          "notes": "Pixel buffer for image manipulation",
-          "notes_ja": "画像操作用ピクセルバッファ",
-          "notes_ko": "이미지 조작용 픽셀 버퍼"
+          "notes": "Stores image pixels in CPU memory.",
+          "notes_ja": "画像のピクセルを CPU メモリに保持する。",
+          "notes_ko": "이미지 픽셀을 CPU 메모리에 보관한다."
         },
         {
           "of": "ofTexture",
           "tc": "Texture",
-          "notes": "GPU texture for rendering",
-          "notes_ja": "レンダリング用GPUテクスチャ",
-          "notes_ko": "렌더링용 GPU 텍스처"
+          "notes": "Manages a GPU texture and its sampling settings.",
+          "notes_ja": "GPU テクスチャとサンプリング設定を管理する。",
+          "notes_ko": "GPU 텍스처와 샘플링 설정을 관리한다."
         }
       ]
     },
@@ -1053,9 +1060,9 @@
         {
           "of": "ofEasyCam",
           "tc": "EasyCam",
-          "notes": "3D camera with mouse control",
-          "notes_ja": "マウス操作対応3Dカメラ",
-          "notes_ko": "마우스 조작 가능한 3D 카메라"
+          "notes": "A 3D orbit camera with optional mouse control.",
+          "notes_ja": "マウス操作に対応した3D周回カメラ。",
+          "notes_ko": "마우스 조작을 지원하는 3D 궤도 카메라이다."
         }
       ]
     },
