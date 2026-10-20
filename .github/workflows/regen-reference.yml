@@ -15,6 +15,10 @@ name: Regenerate reference data
 #
 # Pushes to the workflow itself run it as a dry run (generate + report, no commit),
 # so a change to this file is tested before the nightly run uses it.
+#
+# A failed run leaves the site on its last good data and does not show on the
+# site itself, so check it after TrussC build or docs changes:
+#   gh run list -R TrussC-org/trussc.org --workflow regen-reference.yml --limit 5
 
 on:
   schedule:
@@ -70,12 +74,13 @@ jobs:
 
       # The headers include the built-in shaders' generated *.glsl.h, which are
       # gitignored and produced by the build. Without them clang stops mid-parse
-      # and generate.js (rightly) refuses to render from a partial AST. Build only
-      # the shader target -- not the library.
+      # and generate.js (rightly) refuses to render from a partial AST. Use
+      # TrussC's own documented bootstrap (docs/reference/README.md) instead of
+      # naming its internal CMake target here: the target was renamed once
+      # (TrussC_shaders -> TrussC_shaders_gen, TrussC #823) and this step failed
+      # every night from 2026-10-16 until it was noticed.
       - name: Generate built-in shader headers
-        run: |
-          cmake -S TrussC/core -B "$RUNNER_TEMP/tc-shaders" -DCMAKE_BUILD_TYPE=Release
-          cmake --build "$RUNNER_TEMP/tc-shaders" --target TrussC_shaders
+        run: TrussC/docs/reference/regenerate.sh --shaders-only
 
       - name: Install doc tooling deps
         run: cd TrussC/docs && npm ci
