@@ -3088,7 +3088,9 @@ const TrussCAPI = {
                         "reason": "Use getCurveResolution() instead. Will be removed in v1.0.0",
                         "replacement": "getCurveResolution"
                     },
-                    "details": "Kept for backward compatibility; new code should call\n[`getCurveResolution`](#getCurveResolution). It only returns the value last\npassed to [`setCircleResolution`](#setCircleResolution) (20 if that was never\ncalled), so it does not reflect a resolution set with\n[`setCurveResolution`](#setCurveResolution). Scheduled for removal in v1.0.0."
+                    "details": "Kept for backward compatibility; new code should call\n[`getCurveResolution`](#getCurveResolution). Returns the current curve resolution,\nincluding values set with [`setCircleResolution`](#setCircleResolution) or\n[`setCurveResolution`](#setCurveResolution). Scheduled for removal in v1.0.0.",
+                    "details_ja": "後方互換性のために残されています。新しいコードでは\n[`getCurveResolution`](#getCurveResolution) を使用してください。\n[`setCircleResolution`](#setCircleResolution) または\n[`setCurveResolution`](#setCurveResolution) で設定した現在の曲線解像度を返します。\nv1.0.0 で削除予定です。",
+                    "details_ko": "하위 호환성을 위해 유지됩니다. 새 코드에서는\n[`getCurveResolution`](#getCurveResolution)을 사용하세요.\n[`setCircleResolution`](#setCircleResolution) 또는\n[`setCurveResolution`](#setCurveResolution)으로 설정한 현재 곡선 해상도를 반환합니다.\nv1.0.0에서 제거될 예정입니다."
                 },
                 {
                     "name": "getColor",
