@@ -17813,6 +17813,12 @@ const TrussSketchAPI = {
      "desc": "Returns this window's content height."
     },
     {
+     "name": "getPosition",
+     "snippet": "getPosition()",
+     "return": "IVec2",
+     "desc": "This window's current position in the same screen-coordinate space as setPosition; (-1, -1) if the native window is gone"
+    },
+    {
      "name": "getTitle",
      "snippet": "getTitle()",
      "return": "const std::string &",
@@ -17865,6 +17871,12 @@ const TrussSketchAPI = {
      "snippet": "setFullscreen(${1:full})",
      "return": "void",
      "desc": "Sets this window's fullscreen mode."
+    },
+    {
+     "name": "setPosition",
+     "snippet": "setPosition(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Move this window on the desktop, in screen coordinates with the primary display's top-left at (0, 0); a display left of or above the primary one has negative coordinates. To fill a second display, move the window there first and then call setFullscreen — fullscreen covers the display the window is currently on"
     },
     {
      "name": "setSize",

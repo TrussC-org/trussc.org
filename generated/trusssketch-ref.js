@@ -34402,6 +34402,18 @@ const TrussCAPI = {
                     "desc_ko": "이 윈도우의 콘텐츠 영역 높이를 반환한다."
                 },
                 {
+                    "name": "window:getPosition",
+                    "signatures": [
+                        {
+                            "ret": "IVec2",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "This window's current position in the same screen-coordinate space as setPosition; (-1, -1) if the native window is gone",
+                    "desc_ja": "setPosition と同じスクリーン座標系での、このウィンドウの現在位置。ネイティブウィンドウが存在しない場合は (-1, -1)",
+                    "desc_ko": "setPosition과 같은 스크린 좌표계에서의 이 윈도우의 현재 위치. 네이티브 윈도우가 없으면 (-1, -1)"
+                },
+                {
                     "name": "window:getTitle",
                     "signatures": [
                         {
@@ -34508,6 +34520,18 @@ const TrussCAPI = {
                     "desc": "Sets this window's fullscreen mode.",
                     "desc_ja": "このウィンドウのフルスクリーンモードを設定する。",
                     "desc_ko": "이 윈도우의 전체화면 모드를 설정한다."
+                },
+                {
+                    "name": "window:setPosition",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y"
+                        }
+                    ],
+                    "desc": "Move this window on the desktop, in screen coordinates with the primary display's top-left at (0, 0); a display left of or above the primary one has negative coordinates. To fill a second display, move the window there first and then call setFullscreen — fullscreen covers the display the window is currently on",
+                    "desc_ja": "このウィンドウをデスクトップ上で移動する。座標はプライマリディスプレイの左上を (0, 0) とするスクリーン座標で、プライマリより左や上にあるディスプレイは負の値になる。2 台目のディスプレイ全体に表示するには、先にそのディスプレイへ移動してから setFullscreen を呼ぶ（フルスクリーンはウィンドウが現在ある ディスプレイを覆う）",
+                    "desc_ko": "이 윈도우를 데스크톱 위에서 이동. 좌표는 주 디스플레이의 좌상단이 (0, 0)인 스크린 좌표이며, 주 디스플레이보다 왼쪽이나 위에 있는 디스플레이는 음수 좌표를 가진다. 두 번째 디스플레이를 채우려면 먼저 그쪽으로 옮긴 뒤 setFullscreen을 부를 것 — 전체화면은 창이 현재 올라가 있는 디스플레이를 덮는다"
                 },
                 {
                     "name": "window:setSize",
