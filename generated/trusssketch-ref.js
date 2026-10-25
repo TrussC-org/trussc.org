@@ -12017,16 +12017,16 @@ const TrussCAPI = {
                 {
                     "name": "coreEvents.draw",
                     "type": "Event",
-                    "desc": "Fires on each drawn frame, just before the App draws. Anything drawn here ends up behind the App's drawing.",
-                    "desc_ja": "描画するフレームごとに、App が描く直前に発火する。ここで描いたものは App の描画の下になる。",
-                    "desc_ko": "그리는 프레임마다 App이 그리기 직전에 발생한다. 여기서 그린 것은 App이 그린 것 아래에 깔린다."
+                    "desc": "Delivers a rendered frame; main/host drawing at 100 separates BeforeApp and AfterApp listeners.",
+                    "desc_ja": "描画フレームを通知する。メインとホストの描画は 100 で、BeforeApp と AfterApp の間に実行する。",
+                    "desc_ko": "렌더링 프레임을 알린다. 메인/호스트 그리기는 100에서 BeforeApp과 AfterApp 사이에 실행된다."
                 },
                 {
                     "name": "coreEvents.exit",
                     "type": "Event",
-                    "desc": "Fires once at shutdown, before the App's exit() and cleanup(). Use it to release addon resources.",
-                    "desc_ja": "終了時に一度、App の exit() と cleanup() より前に発火する。アドオンのリソース解放に使う。",
-                    "desc_ko": "종료 시 한 번, App의 exit()와 cleanup()보다 먼저 발생한다. 애드온 리소스 해제에 쓴다."
+                    "desc": "Delivers shutdown; main/host App::exit runs at 100, followed by AfterApp resource hooks.",
+                    "desc_ja": "終了を通知する。メインとホストでは 100 で App::exit を呼び、AfterApp でリソースを解放する。",
+                    "desc_ko": "종료를 알린다. 메인/호스트 App::exit는 100에서, 리소스 해제 훅은 AfterApp에서 실행한다."
                 },
                 {
                     "name": "coreEvents.exitRequested",
@@ -12143,9 +12143,9 @@ const TrussCAPI = {
                 {
                     "name": "coreEvents.update",
                     "type": "Event",
-                    "desc": "Fires once per update step, just before the App's update tree runs.",
-                    "desc_ja": "update のたびに一度、App の update ツリーが動く直前に発火する。",
-                    "desc_ko": "update 단계마다 한 번, App의 update 트리가 돌기 직전에 발생한다."
+                    "desc": "Delivers one update step, including the main/host App tree at priority 100.",
+                    "desc_ja": "update ごとに一度通知し、メインとホストでは優先度 100 で App ツリーを処理する。",
+                    "desc_ko": "update 단계마다 한 번 알리며 메인/호스트 App 트리를 우선순위 100에서 처리한다."
                 },
                 {
                     "name": "coreEvents.windowResized",
@@ -27198,9 +27198,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns the number of received bytes discarded because the receive buffer overflowed.",
-                    "desc_ja": "受信バッファの容量超過で破棄したバイト数を返す。",
-                    "desc_ko": "수신 버퍼 용량 초과로 버린 바이트 수를 반환한다."
+                    "desc": "Returns the number of received bytes discarded because the receive buffer overflowed or allocation failed.",
+                    "desc_ja": "受信バッファの容量超過や確保失敗で破棄したバイト数を返す。",
+                    "desc_ko": "수신 버퍼 용량 초과나 할당 실패로 버린 바이트 수를 반환한다."
                 },
                 {
                     "name": "serial:isConnected",

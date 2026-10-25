@@ -5366,12 +5366,12 @@ const TrussSketchAPI = {
     {
      "name": "draw",
      "type": "Event<void>",
-     "desc": "Fires on each drawn frame, just before the App draws. Anything drawn here ends up behind the App's drawing."
+     "desc": "Delivers a rendered frame; main/host drawing at 100 separates BeforeApp and AfterApp listeners."
     },
     {
      "name": "exit",
      "type": "Event<void>",
-     "desc": "Fires once at shutdown, before the App's exit() and cleanup(). Use it to release addon resources."
+     "desc": "Delivers shutdown; main/host App::exit runs at 100, followed by AfterApp resource hooks."
     },
     {
      "name": "exitRequested",
@@ -5456,7 +5456,7 @@ const TrussSketchAPI = {
     {
      "name": "update",
      "type": "Event<void>",
-     "desc": "Fires once per update step, just before the App's update tree runs."
+     "desc": "Delivers one update step, including the main/host App tree at priority 100."
     },
     {
      "name": "windowResized",
@@ -13844,7 +13844,7 @@ const TrussSketchAPI = {
      "name": "getDroppedByteCount",
      "snippet": "getDroppedByteCount()",
      "return": "size_t",
-     "desc": "Returns the number of received bytes discarded because the receive buffer overflowed."
+     "desc": "Returns the number of received bytes discarded because the receive buffer overflowed or allocation failed."
     },
     {
      "name": "isConnected",
