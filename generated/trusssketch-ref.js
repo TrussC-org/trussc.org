@@ -24089,9 +24089,9 @@ const TrussCAPI = {
                             "params": "fbo, path, durationSec"
                         }
                     ],
-                    "desc": "Start live capture of the originating window or an Fbo at its actual pixel size at start. The take keeps fixed encoder dimensions and stays open across source resizes: mismatched frames are skipped before copying and counted by getRejectedFrameCount(), and recording resumes when the original size returns. stop() finalizes the take. One capture/encode operation may be pending: busy opportunities are counted and skipped while wall/audio PTS gaps are preserved. Calling start finalizes the previous take first and refuses replacement while an old operation remains pending. Destroying the source Fbo stops/finalizes automatically. Returns SaveResult for path preparation and encoder opening; check stop() for finalization.",
-                    "desc_ja": "開始元のウィンドウまたは Fbo を開始時の実際のピクセル寸法で録画する。録画中のエンコーダ寸法は固定され、ソースのサイズ変更後も録画は開いたままとなる。寸法が一致しないフレームはコピー前にスキップして getRejectedFrameCount() に加算し、元の寸法に戻ると録画を再開する。stop() で録画を確定する。キャプチャ・エンコードは同時に1件までとし、処理中の機会はスキップ数に加算して実時間・音声 PTS の間隔を保つ。start は前の録画を確定し、古い処理が未完了なら再開始を拒否する。ソース Fbo の破棄時は自動停止・確定する。パス準備とエンコーダ開始の SaveResult を返し、確定結果は stop() で確認する。",
-                    "desc_ko": "시작한 윈도우 또는 Fbo의 시작 시점 실제 픽셀 크기로 녹화한다. 인코더 크기는 녹화 동안 고정되며 소스 크기가 바뀌어도 녹화는 열린 상태를 유지한다. 크기가 맞지 않는 프레임은 복사 전에 건너뛰고 getRejectedFrameCount()에 집계하며 원래 크기로 돌아오면 녹화를 재개한다. stop()으로 녹화를 확정한다. 캡처·인코딩 작업은 한 번에 하나만 허용하며 처리 중 기회는 건너뛴 횟수에 포함하고 실제 시간·오디오 PTS 간격을 유지한다. start는 이전 녹화를 확정하고 오래된 작업이 남아 있으면 재시작을 거부한다. 소스 Fbo가 파괴되면 자동 정지·확정한다. 경로 준비와 인코더 열기의 SaveResult를 반환하며 확정 결과는 stop()으로 확인한다."
+                    "desc": "Starts recording the window or an Fbo to a video file.",
+                    "desc_ja": "ウィンドウまたは Fbo の録画を開始する。",
+                    "desc_ko": "윈도우 또는 Fbo의 녹화를 시작한다."
                 },
                 {
                     "name": "screenRecorder:stop",

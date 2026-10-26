@@ -12257,7 +12257,7 @@ const TrussSketchAPI = {
      "name": "start",
      "snippet": "start(${1:path})",
      "return": "SaveResult",
-     "desc": "Start live capture of the originating window or an Fbo at its actual pixel size at start. The take keeps fixed encoder dimensions and stays open across source resizes: mismatched frames are skipped before copying and counted by getRejectedFrameCount(), and recording resumes when the original size returns. stop() finalizes the take. One capture/encode operation may be pending: busy opportunities are counted and skipped while wall/audio PTS gaps are preserved. Calling start finalizes the previous take first and refuses replacement while an old operation remains pending. Destroying the source Fbo stops/finalizes automatically. Returns SaveResult for path preparation and encoder opening; check stop() for finalization."
+     "desc": "Starts recording the window or an Fbo to a video file."
     },
     {
      "name": "stop",
