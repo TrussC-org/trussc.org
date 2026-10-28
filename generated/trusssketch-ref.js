@@ -29351,6 +29351,18 @@ const TrussCAPI = {
                     "desc_ko": "지정한 클라이언트의 큐에 데이터를 넣는다."
                 },
                 {
+                    "name": "tcpServer:setBindAddress",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "address"
+                        }
+                    ],
+                    "desc": "Chooses the local IPv4 address for TCP connections.",
+                    "desc_ja": "TCP の待ち受けに使うローカル IPv4 アドレスを設定する。",
+                    "desc_ko": "TCP 연결 대기에 사용할 로컬 IPv4 주소를 설정한다."
+                },
+                {
                     "name": "tcpServer:setReceiveBufferSize",
                     "signatures": [
                         {
@@ -31777,6 +31789,18 @@ const TrussCAPI = {
                     "desc": "Sends a UDP datagram to a specified host and port.",
                     "desc_ja": "指定したホストとポートに UDP データグラムを送信する。",
                     "desc_ko": "지정한 호스트와 포트로 UDP 데이터그램을 전송한다."
+                },
+                {
+                    "name": "udpSocket:setBindAddress",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "address"
+                        }
+                    ],
+                    "desc": "Chooses the local IPv4 address for receiving UDP datagrams.",
+                    "desc_ja": "UDP の受信に使うローカル IPv4 アドレスを設定する。",
+                    "desc_ko": "UDP 수신에 사용할 로컬 IPv4 주소를 설정한다."
                 },
                 {
                     "name": "udpSocket:setBroadcast",

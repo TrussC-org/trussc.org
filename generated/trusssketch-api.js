@@ -14987,6 +14987,12 @@ const TrussSketchAPI = {
      "desc": "Queues data for a specified client."
     },
     {
+     "name": "setBindAddress",
+     "snippet": "setBindAddress(${1:address})",
+     "return": "void",
+     "desc": "Chooses the local IPv4 address for TCP connections."
+    },
+    {
      "name": "setReceiveBufferSize",
      "snippet": "setReceiveBufferSize(${1:size})",
      "return": "void",
@@ -16480,6 +16486,12 @@ const TrussSketchAPI = {
      "snippet": "sendTo(${1:host}, ${2:port}, ${3:message})",
      "return": "bool",
      "desc": "Sends a UDP datagram to a specified host and port."
+    },
+    {
+     "name": "setBindAddress",
+     "snippet": "setBindAddress(${1:address})",
+     "return": "void",
+     "desc": "Chooses the local IPv4 address for receiving UDP datagrams."
     },
     {
      "name": "setBroadcast",
