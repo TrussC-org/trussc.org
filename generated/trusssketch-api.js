@@ -2274,7 +2274,7 @@ const TrussSketchAPI = {
     {
      "name": "setKeepScreenOn",
      "snippet": "setKeepScreenOn(${1:enabled})",
-     "desc": "Controls whether display sleep and automatic locking are inhibited."
+     "desc": "Requests that the display stay on."
     },
     {
      "name": "setMaxUpdateSteps",

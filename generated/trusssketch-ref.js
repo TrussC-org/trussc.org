@@ -5033,8 +5033,8 @@ const TrussCAPI = {
                         "stay awake",
                         "awake"
                     ],
-                    "desc_ja": "画面のスリープ抑止設定を返す。",
-                    "desc_ko": "화면 절전 방지 설정을 반환한다."
+                    "desc_ja": "画面のスリープ抑止設定を返します。",
+                    "desc_ko": "화면 절전 방지 설정을 반환합니다."
                 },
                 {
                     "name": "getMaxUpdateSteps",
@@ -5221,7 +5221,7 @@ const TrussCAPI = {
                     "params": "enabled",
                     "params_typed": "enabled",
                     "return_type": "(nothing)",
-                    "desc": "Controls whether display sleep and automatic locking are inhibited.",
+                    "desc": "Requests that the display stay on.",
                     "keywords": [
                         "wake lock",
                         "no sleep",
@@ -5229,8 +5229,8 @@ const TrussCAPI = {
                         "prevent lock",
                         "screensaver"
                     ],
-                    "desc_ja": "画面スリープと自動ロックの抑止を切り替える。",
-                    "desc_ko": "화면 절전과 자동 잠금 방지를 전환한다."
+                    "desc_ja": "画面を点灯したままにするよう要求します。",
+                    "desc_ko": "화면을 켜 둔 상태로 유지하도록 요청합니다."
                 },
                 {
                     "name": "setMaxUpdateSteps",
