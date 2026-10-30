@@ -7977,6 +7977,22 @@ const TrussCAPI = {
                     "desc_ko": "현재 렌더 타깃의 카메라 투영 행렬을 반환한다."
                 },
                 {
+                    "name": "getResourceLoadConcurrency",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "number",
+                    "desc": "Returns how many resource loads can prepare at once.",
+                    "keywords": [
+                        "async",
+                        "load",
+                        "concurrency",
+                        "queue",
+                        "worker"
+                    ],
+                    "desc_ja": "リソース読み込みを同時に準備する設定件数を返します。",
+                    "desc_ko": "리소스 로드를 동시에 준비하는 설정 개수를 반환합니다."
+                },
+                {
                     "name": "getSize",
                     "params": "",
                     "params_typed": "",
@@ -8055,6 +8071,22 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "スクリーンショットの非同期保存を要求する。",
                     "desc_ko": "스크린샷의 비동기 저장을 요청한다."
+                },
+                {
+                    "name": "setResourceLoadConcurrency",
+                    "params": "count",
+                    "params_typed": "count",
+                    "return_type": "(nothing)",
+                    "desc": "Sets how many resource loads can prepare at once.",
+                    "keywords": [
+                        "async",
+                        "load",
+                        "concurrency",
+                        "queue",
+                        "worker"
+                    ],
+                    "desc_ja": "リソース読み込みを同時に準備する件数を設定します。",
+                    "desc_ko": "리소스 로드를 동시에 준비하는 개수를 설정합니다."
                 },
                 {
                     "name": "tanh",
@@ -29387,18 +29419,6 @@ const TrussCAPI = {
                     "desc_ko": "클라이언트별 송신 상한 기준을 설정한다."
                 },
                 {
-                    "name": "tcpServer:setSendItemLimit",
-                    "signatures": [
-                        {
-                            "ret": "(nothing)",
-                            "params": "bytes"
-                        }
-                    ],
-                    "desc": "Sets the maximum owned send payload capacity.",
-                    "desc_ja": "所有する送信データの最大容量を設定する。",
-                    "desc_ko": "소유 송신 데이터의 최대 용량을 설정한다."
-                },
-                {
                     "name": "tcpServer:setSendTimeout",
                     "signatures": [
                         {
@@ -29409,18 +29429,6 @@ const TrussCAPI = {
                     "desc": "Sets the send inactivity timeout.",
                     "desc_ja": "送信が進まない場合のタイムアウトを設定する。",
                     "desc_ko": "전송이 진행되지 않을 때의 타임아웃을 설정한다."
-                },
-                {
-                    "name": "tcpServer:setTotalSendBufferSize",
-                    "signatures": [
-                        {
-                            "ret": "(nothing)",
-                            "params": "bytes"
-                        }
-                    ],
-                    "desc": "Sets aggregate TCP server send credits.",
-                    "desc_ja": "TCP サーバー全体の送信クレジットを設定する。",
-                    "desc_ko": "TCP 서버 전체의 송신 크레딧을 설정한다."
                 },
                 {
                     "name": "tcpServer:start",
@@ -34611,7 +34619,10 @@ const TrussCAPI = {
                 "runApp",
                 "setWindowSize",
                 "setWindowTitle",
-                "HeadlessSettings"
+                "HeadlessSettings",
+                "WindowSettings::setResourcePoolSize",
+                "WindowSettings::setShaderPoolSize",
+                "WindowSettings::setPipelinePoolSize"
             ],
             "properties": [
                 {
@@ -34650,6 +34661,13 @@ const TrussCAPI = {
                     "desc_ko": "디스플레이의 높은 픽셀 밀도를 사용하여 렌더링할지 지정한다."
                 },
                 {
+                    "name": "windowSettings.pipelinePoolSize",
+                    "type": "number",
+                    "desc": "Specifies the startup pipeline pool slot count.",
+                    "desc_ja": "起動時のパイプラインプールの枠数を指定します。",
+                    "desc_ko": "시작 시 파이프라인 풀 슬롯 수를 지정합니다."
+                },
+                {
                     "name": "windowSettings.pixelPerfect",
                     "type": "boolean",
                     "desc": "Specifies whether window coordinates use framebuffer pixels.",
@@ -34657,11 +34675,25 @@ const TrussCAPI = {
                     "desc_ko": "윈도우 좌표에 프레임버퍼 픽셀을 사용할지 지정한다."
                 },
                 {
+                    "name": "windowSettings.resourcePoolSize",
+                    "type": "number",
+                    "desc": "Specifies the startup resource pool slot count.",
+                    "desc_ja": "起動時のリソースプールの枠数を指定します。",
+                    "desc_ko": "시작 시 리소스 풀 슬롯 수를 지정합니다."
+                },
+                {
                     "name": "windowSettings.sampleCount",
                     "type": "number",
                     "desc": "Specifies the window's MSAA sample count.",
                     "desc_ja": "ウィンドウの MSAA サンプル数を指定する。",
                     "desc_ko": "윈도우의 MSAA 샘플 수를 지정한다."
+                },
+                {
+                    "name": "windowSettings.shaderPoolSize",
+                    "type": "number",
+                    "desc": "Specifies the startup shader pool slot count.",
+                    "desc_ja": "起動時のシェーダープールの枠数を指定します。",
+                    "desc_ko": "시작 시 셰이더 풀 슬롯 수를 지정합니다."
                 },
                 {
                     "name": "windowSettings.swapInterval",
@@ -34754,6 +34786,18 @@ const TrussCAPI = {
                     "desc_ko": "디스플레이의 높은 픽셀 밀도를 사용하여 렌더링할지 설정한다."
                 },
                 {
+                    "name": "windowSettings:setPipelinePoolSize",
+                    "signatures": [
+                        {
+                            "ret": "WindowSettings",
+                            "params": "count"
+                        }
+                    ],
+                    "desc": "Sets the startup pipeline pool slot count.",
+                    "desc_ja": "パイプラインプールの起動時の枠数を設定します。",
+                    "desc_ko": "파이프라인 풀의 시작 슬롯 수를 설정합니다."
+                },
+                {
                     "name": "windowSettings:setPixelPerfect",
                     "signatures": [
                         {
@@ -34766,6 +34810,18 @@ const TrussCAPI = {
                     "desc_ko": "윈도우 좌표에 프레임버퍼 픽셀을 사용할지 설정한다."
                 },
                 {
+                    "name": "windowSettings:setResourcePoolSize",
+                    "signatures": [
+                        {
+                            "ret": "WindowSettings",
+                            "params": "count"
+                        }
+                    ],
+                    "desc": "Sets the startup slot count for each resource pool.",
+                    "desc_ja": "各リソースプールの起動時の枠数を設定します。",
+                    "desc_ko": "각 리소스 풀의 시작 슬롯 수를 설정합니다."
+                },
+                {
                     "name": "windowSettings:setSampleCount",
                     "signatures": [
                         {
@@ -34776,6 +34832,18 @@ const TrussCAPI = {
                     "desc": "Sets the window's MSAA sample count.",
                     "desc_ja": "ウィンドウの MSAA サンプル数を設定する。",
                     "desc_ko": "윈도우의 MSAA 샘플 수를 설정한다."
+                },
+                {
+                    "name": "windowSettings:setShaderPoolSize",
+                    "signatures": [
+                        {
+                            "ret": "WindowSettings",
+                            "params": "count"
+                        }
+                    ],
+                    "desc": "Sets the startup shader pool slot count.",
+                    "desc_ja": "シェーダープールの起動時の枠数を設定します。",
+                    "desc_ko": "셰이더 풀의 시작 슬롯 수를 설정합니다."
                 },
                 {
                     "name": "windowSettings:setSize",
@@ -36384,6 +36452,13 @@ const TrussCAPI = {
                 {
                     "name": "NotRunning",
                     "value": 5,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "AllocationFailed",
+                    "value": 6,
                     "desc": "",
                     "desc_ja": "",
                     "desc_ko": ""

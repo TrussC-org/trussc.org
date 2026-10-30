@@ -1312,6 +1312,11 @@ const TrussSketchAPI = {
      "desc": "Returns two raised to the given power."
     },
     {
+     "name": "getResourceLoadConcurrency",
+     "snippet": "getResourceLoadConcurrency()",
+     "desc": "Returns how many resource loads can prepare at once."
+    },
+    {
      "name": "log10",
      "snippet": "log10(${1:x})",
      "desc": "Returns the base-ten logarithm."
@@ -1350,6 +1355,11 @@ const TrussSketchAPI = {
      "name": "saveScreenshotAsync",
      "snippet": "saveScreenshotAsync(${1:path})",
      "desc": "Requests an asynchronous screenshot save."
+    },
+    {
+     "name": "setResourceLoadConcurrency",
+     "snippet": "setResourceLoadConcurrency(${1:count})",
+     "desc": "Sets how many resource loads can prepare at once."
     },
     {
      "name": "tanh",
@@ -13757,6 +13767,12 @@ const TrussSketchAPI = {
      "snippet": "NotRunning",
      "return": "SendError",
      "desc": "= 5"
+    },
+    {
+     "name": "AllocationFailed",
+     "snippet": "AllocationFailed",
+     "return": "SendError",
+     "desc": "= 6"
     }
    ]
   },
@@ -15005,22 +15021,10 @@ const TrussSketchAPI = {
      "desc": "Sets the per-client send high-water mark."
     },
     {
-     "name": "setSendItemLimit",
-     "snippet": "setSendItemLimit(${1:bytes})",
-     "return": "void",
-     "desc": "Sets the maximum owned send payload capacity."
-    },
-    {
      "name": "setSendTimeout",
      "snippet": "setSendTimeout(${1:seconds})",
      "return": "void",
      "desc": "Sets the send inactivity timeout."
-    },
-    {
-     "name": "setTotalSendBufferSize",
-     "snippet": "setTotalSendBufferSize(${1:bytes})",
-     "return": "void",
-     "desc": "Sets aggregate TCP server send credits."
     },
     {
      "name": "start",
@@ -17940,14 +17944,29 @@ const TrussSketchAPI = {
      "desc": "Specifies whether rendering uses the display's high pixel density."
     },
     {
+     "name": "pipelinePoolSize",
+     "type": "int",
+     "desc": "Specifies the startup pipeline pool slot count."
+    },
+    {
      "name": "pixelPerfect",
      "type": "bool",
      "desc": "Specifies whether window coordinates use framebuffer pixels."
     },
     {
+     "name": "resourcePoolSize",
+     "type": "int",
+     "desc": "Specifies the startup resource pool slot count."
+    },
+    {
      "name": "sampleCount",
      "type": "int",
      "desc": "Specifies the window's MSAA sample count."
+    },
+    {
+     "name": "shaderPoolSize",
+     "type": "int",
+     "desc": "Specifies the startup shader pool slot count."
     },
     {
      "name": "swapInterval",
@@ -18002,16 +18021,34 @@ const TrussSketchAPI = {
      "desc": "Sets whether rendering uses the display's high pixel density."
     },
     {
+     "name": "setPipelinePoolSize",
+     "snippet": "setPipelinePoolSize(${1:count})",
+     "return": "WindowSettings &",
+     "desc": "Sets the startup pipeline pool slot count."
+    },
+    {
      "name": "setPixelPerfect",
      "snippet": "setPixelPerfect(${1:enabled})",
      "return": "WindowSettings &",
      "desc": "Sets whether window coordinates use framebuffer pixels."
     },
     {
+     "name": "setResourcePoolSize",
+     "snippet": "setResourcePoolSize(${1:count})",
+     "return": "WindowSettings &",
+     "desc": "Sets the startup slot count for each resource pool."
+    },
+    {
      "name": "setSampleCount",
      "snippet": "setSampleCount(${1:count})",
      "return": "WindowSettings &",
      "desc": "Sets the window's MSAA sample count."
+    },
+    {
+     "name": "setShaderPoolSize",
+     "snippet": "setShaderPoolSize(${1:count})",
+     "return": "WindowSettings &",
+     "desc": "Sets the startup shader pool slot count."
     },
     {
      "name": "setSize",
