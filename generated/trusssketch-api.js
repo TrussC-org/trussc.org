@@ -3312,7 +3312,7 @@ const TrussSketchAPI = {
     {
      "name": "maxPolyphony",
      "type": "int",
-     "desc": "Reports the active engine voice limit."
+     "desc": "Reports the engine voice cap, 0 for no cap."
     },
     {
      "name": "sampleRate",
@@ -3551,7 +3551,7 @@ const TrussSketchAPI = {
     {
      "name": "maxPolyphony",
      "type": "int",
-     "desc": "Sets the engine's maximum number of simultaneous Sound voices."
+     "desc": "Sets an optional cap on simultaneous Sound voices; 0 means no cap."
     },
     {
      "name": "sampleRate",
@@ -3597,7 +3597,7 @@ const TrussSketchAPI = {
     {
      "name": "droppedPolyphonyLimit",
      "type": "uint64_t",
-     "desc": "Counts playback requests rejected because all engine playback slots are occupied."
+     "desc": "Counts playback requests rejected because the engine voice cap is reached."
     },
     {
      "name": "droppedStreamLimit",

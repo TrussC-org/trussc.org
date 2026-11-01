@@ -10184,9 +10184,9 @@ const TrussCAPI = {
                 {
                     "name": "audioDeviceChangedArgs.maxPolyphony",
                     "type": "number",
-                    "desc": "Reports the active engine voice limit.",
-                    "desc_ja": "エンジンの現在の最大同時再生数を表す。",
-                    "desc_ko": "엔진의 현재 최대 동시 재생 수를 나타낸다."
+                    "desc": "Reports the engine voice cap, 0 for no cap.",
+                    "desc_ja": "エンジンの同時再生数の上限を表す。0 は上限なし。",
+                    "desc_ko": "엔진의 동시 재생 수 상한을 나타낸다. 0은 상한 없음."
                 },
                 {
                     "name": "audioDeviceChangedArgs.sampleRate",
@@ -10591,9 +10591,9 @@ const TrussCAPI = {
                 {
                     "name": "audioSettings.maxPolyphony",
                     "type": "number",
-                    "desc": "Sets the engine's maximum number of simultaneous Sound voices.",
-                    "desc_ja": "エンジンで同時に再生できる Sound ボイス数の上限を設定する。",
-                    "desc_ko": "엔진에서 동시에 재생할 수 있는 Sound 보이스 수의 상한을 설정한다."
+                    "desc": "Sets an optional cap on simultaneous Sound voices; 0 means no cap.",
+                    "desc_ja": "同時に再生できる Sound ボイス数の上限を任意で設定する。0 は上限なし。",
+                    "desc_ko": "동시에 재생할 수 있는 Sound 보이스 수의 상한을 선택적으로 설정한다. 0은 상한 없음."
                 },
                 {
                     "name": "audioSettings.sampleRate",
@@ -10670,9 +10670,9 @@ const TrussCAPI = {
                 {
                     "name": "audioStats.droppedPolyphonyLimit",
                     "type": "number",
-                    "desc": "Counts playback requests rejected because all engine playback slots are occupied.",
-                    "desc_ja": "エンジンの全再生スロットが使用中で拒否された再生要求数を表す。",
-                    "desc_ko": "엔진의 모든 재생 슬롯이 사용 중이어서 거부된 재생 요청 수를 나타낸다."
+                    "desc": "Counts playback requests rejected because the engine voice cap is reached.",
+                    "desc_ja": "エンジンの同時再生数の上限に達して拒否された再生要求数を表す。",
+                    "desc_ko": "엔진의 동시 재생 수 상한에 도달해 거부된 재생 요청 수를 나타낸다."
                 },
                 {
                     "name": "audioStats.droppedStreamLimit",
