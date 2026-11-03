@@ -2451,30 +2451,14 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "CoreEvents",
-                    "desc": "Returns the current window context's CoreEvents hub.",
+                    "desc": "Returns the events of the window the current App is in.",
                     "keywords": [
                         "callback",
                         "listener",
                         "hub"
                     ],
-                    "desc_ja": "現在のウィンドウコンテキストの CoreEvents を返す。",
-                    "desc_ko": "현재 윈도우 컨텍스트의 CoreEvents를 반환한다."
-                },
-                {
-                    "name": "exitApp",
-                    "params": "code",
-                    "params_typed": "code = 0",
-                    "return_type": "(nothing)",
-                    "desc": "Orders the application to exit with normal cleanup.",
-                    "keywords": [
-                        "quit",
-                        "close",
-                        "terminate",
-                        "shutdown",
-                        "kill"
-                    ],
-                    "desc_ja": "通常のクリーンアップを伴うアプリケーション終了を指示する。",
-                    "desc_ko": "정상 정리를 거쳐 애플리케이션을 종료하도록 지시한다."
+                    "desc_ja": "現在の App がアタッチされているウィンドウのイベントを返す。",
+                    "desc_ko": "현재 App이 연결된 창의 이벤트를 반환한다."
                 },
                 {
                     "name": "getCursor",
@@ -2854,22 +2838,6 @@ const TrussCAPI = {
                     "desc_ko": "결과 콜백이 있는 파일 또는 폴더 선택 대화상자를 표시한다."
                 },
                 {
-                    "name": "requestExitApp",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "(nothing)",
-                    "desc": "Requests a cancellable application exit.",
-                    "keywords": [
-                        "quit",
-                        "close",
-                        "terminate",
-                        "shutdown",
-                        "cancelable"
-                    ],
-                    "desc_ja": "取り消し可能なアプリケーション終了を要求する。",
-                    "desc_ko": "취소 가능한 앱 종료를 요청한다."
-                },
-                {
                     "name": "saveDialog",
                     "params": "title, message, defaultPath, defaultName",
                     "params_typed": "title = \"\", message = \"\", defaultPath = fs.path(), defaultName = fs.path()",
@@ -2987,15 +2955,15 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "number",
-                    "desc": "Returns the main window's frame counter.",
+                    "desc": "Returns the current window's real draw count.",
                     "keywords": [
                         "render",
                         "frame",
                         "number",
                         "total"
                     ],
-                    "desc_ja": "メインウィンドウのフレームカウンタを返す。",
-                    "desc_ko": "메인 윈도우의 프레임 카운터를 반환한다."
+                    "desc_ja": "現在のウィンドウの実際の描画回数を返す。",
+                    "desc_ko": "현재 윈도우의 실제 그리기 횟수를 반환한다."
                 },
                 {
                     "name": "getFps",
@@ -3018,15 +2986,15 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "FpsSettings",
-                    "desc": "Returns the main loop's frame-rate configuration.",
+                    "desc": "Returns the current window's frame-rate configuration.",
                     "keywords": [
                         "framerate",
                         "config",
                         "vsync",
                         "target"
                     ],
-                    "desc_ja": "メインループのフレームレート設定を返す。",
-                    "desc_ko": "메인 루프의 프레임 레이트 설정을 반환한다."
+                    "desc_ja": "現在のウィンドウのフレームレート設定を返す。",
+                    "desc_ko": "현재 윈도우의 프레임 레이트 설정을 반환한다."
                 },
                 {
                     "name": "getFrameCount",
@@ -5089,14 +5057,14 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "boolean",
-                    "desc": "Returns whether the current window is fullscreen.",
+                    "desc": "Returns whether fullscreen currently blocks this window's size and position requests.",
                     "keywords": [
                         "maximized",
                         "borderless",
                         "status"
                     ],
-                    "desc_ja": "現在のウィンドウがフルスクリーンかを返す。",
-                    "desc_ko": "현재 윈도우가 전체 화면인지 반환한다."
+                    "desc_ja": "フルスクリーンによってこのウィンドウのサイズ・位置要求を無視しているかを返す。",
+                    "desc_ko": "전체 화면으로 인해 이 윈도우의 크기·위치 요청을 무시하는지 반환한다."
                 },
                 {
                     "name": "isRecording",
@@ -5270,7 +5238,7 @@ const TrussCAPI = {
                     "params": "decorated",
                     "params_typed": "decorated",
                     "return_type": "(nothing)",
-                    "desc": "Controls the main window's standard decorations.",
+                    "desc": "Controls the resolved Window's standard decorations.",
                     "keywords": [
                         "borderless",
                         "titlebar",
@@ -5278,8 +5246,8 @@ const TrussCAPI = {
                         "frame",
                         "decoration"
                     ],
-                    "desc_ja": "メインウィンドウの標準装飾を切り替える。",
-                    "desc_ko": "메인 윈도우의 표준 장식을 전환한다."
+                    "desc_ja": "対象 Window の標準装飾を切り替える。",
+                    "desc_ko": "대상 Window의 표준 장식을 전환한다."
                 },
                 {
                     "name": "setWindowPosition",
@@ -5317,15 +5285,15 @@ const TrussCAPI = {
                     "params": "width, height",
                     "params_typed": "width, height",
                     "return_type": "(nothing)",
-                    "desc": "Resizes the main window using logical dimensions.",
+                    "desc": "Resizes the current window using logical dimensions.",
                     "keywords": [
                         "resize",
                         "logical pixels",
                         "points",
                         "dimensions"
                     ],
-                    "desc_ja": "論理サイズでメインウィンドウのサイズを変更する。",
-                    "desc_ko": "논리 크기로 메인 윈도우 크기를 변경한다."
+                    "desc_ja": "論理サイズで現在のウィンドウのサイズを変更する。",
+                    "desc_ko": "논리 크기로 현재 윈도우 크기를 변경한다."
                 },
                 {
                     "name": "setWindowTitle",
@@ -7936,15 +7904,25 @@ const TrussCAPI = {
                     "params": "settings",
                     "params_typed": "settings = {}",
                     "return_type": "shared_ptr",
-                    "desc": "Creates a secondary application window.",
+                    "desc": "Opens a new, empty window.",
                     "keywords": [
                         "multi window",
                         "second window",
                         "open window",
                         "display"
                     ],
-                    "desc_ja": "アプリケーションのサブウィンドウを作成する。",
-                    "desc_ko": "애플리케이션의 보조 윈도우를 생성한다."
+                    "desc_ja": "新しい空のウィンドウを開く。",
+                    "desc_ko": "새 빈 창을 연다."
+                },
+                {
+                    "name": "exitApp",
+                    "params": "code",
+                    "params_typed": "code = 0",
+                    "return_type": "(nothing)",
+                    "desc": "Asks the process to quit, with an exit code.",
+                    "keywords": [],
+                    "desc_ja": "終了コードを指定して、プロセスの終了を要求する。",
+                    "desc_ko": "종료 코드를 지정해 프로세스 종료를 요청한다."
                 },
                 {
                     "name": "exp2",
@@ -8023,6 +8001,26 @@ const TrussCAPI = {
                     "desc_ko": "현재 그리기 대상의 너비를 반환한다."
                 },
                 {
+                    "name": "getWindowTitle",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "string",
+                    "desc": "Returns the current Window title.",
+                    "keywords": [],
+                    "desc_ja": "現在の Window のタイトルを返す。",
+                    "desc_ko": "현재 Window의 제목을 반환한다."
+                },
+                {
+                    "name": "isWindowOccluded",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "boolean",
+                    "desc": "Reports whether the current Window is hidden by native visibility signals.",
+                    "keywords": [],
+                    "desc_ja": "現在の Window がネイティブの可視性情報で非表示かを返す。",
+                    "desc_ko": "현재 Window가 네이티브 가시성 정보에서 숨겨졌는지 반환한다."
+                },
+                {
                     "name": "log10",
                     "params": "x",
                     "params_typed": "x",
@@ -8061,6 +8059,16 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "IEEE 方式の浮動小数点剰余を返す。",
                     "desc_ko": "IEEE 방식의 부동소수점 나머지를 반환한다."
+                },
+                {
+                    "name": "runtime",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "Runtime",
+                    "desc": "Returns the object that represents the whole running process.",
+                    "keywords": [],
+                    "desc_ja": "実行中のプロセス全体を表すオブジェクトを返す。",
+                    "desc_ko": "실행 중인 프로세스 전체를 나타내는 객체를 반환한다."
                 },
                 {
                     "name": "saveScreenshotAsync",
@@ -8825,9 +8833,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown.",
-                    "desc_ja": "destroy() したノードがツリーから片付けられるとき（子から順に）と、App の終了時に呼ばれる。",
-                    "desc_ko": "destroy()한 노드가 트리에서 정리될 때(자식부터)와 App 종료 시에 호출된다."
+                    "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first).",
+                    "desc_ja": "destroy() したノードがツリーから外されるときと、App が終わるときにその App のすべてのノードで呼ばれる（子が先）。",
+                    "desc_ko": "destroy()한 노드가 트리에서 제거될 때와, App이 끝날 때 그 App의 모든 노드에서 호출된다(자식이 먼저)."
                 },
                 {
                     "name": "app:destroy",
@@ -8886,8 +8894,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Called once when the App ends, right before cleanup().",
-                    "desc_ja": "App が終わるときに、cleanup() の直前に 1 回呼ばれる。",
-                    "desc_ko": "App이 끝날 때 cleanup() 직전에 한 번 호출된다."
+                    "desc_ja": "App が終わるときに 1 回だけ、cleanup() の直前に呼ばれる。",
+                    "desc_ko": "App이 끝날 때 한 번, cleanup() 직전에 호출된다."
                 },
                 {
                     "name": "app:filesDropped",
@@ -8897,9 +8905,9 @@ const TrussCAPI = {
                             "params": "files"
                         }
                     ],
-                    "desc": "Called when files are dropped onto the main window, with their paths.",
-                    "desc_ja": "メインウィンドウにファイルがドロップされたときに、そのパスを受け取って呼ばれる。",
-                    "desc_ko": "메인 윈도우에 파일이 드롭되었을 때 그 경로를 받아 호출된다."
+                    "desc": "Called when files are dropped onto this Window, with their paths.",
+                    "desc_ja": "対象 Window にファイルがドロップされたときに、そのパスを受け取って呼ばれる。",
+                    "desc_ko": "대상 Window에 파일이 드롭되었을 때 그 경로를 받아 호출된다."
                 },
                 {
                     "name": "app:findByInstanceId",
@@ -9389,9 +9397,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns the Window this App was put into with Window::setApp(), or nullptr.",
-                    "desc_ja": "Window::setApp() でこの App を入れた Window を返す。なければ nullptr。",
-                    "desc_ko": "Window::setApp()으로 이 App을 넣은 Window를 반환한다. 없으면 nullptr."
+                    "desc": "Returns the window this App is attached to, or nullptr.",
+                    "desc_ja": "この App がアタッチされているウィンドウを返す。ない場合は nullptr。",
+                    "desc_ko": "이 App이 연결된 창을 반환한다. 없으면 nullptr다."
                 },
                 {
                     "name": "app:getX",
@@ -9524,18 +9532,6 @@ const TrussCAPI = {
                     "desc": "Returns this node's event-enabled flag.",
                     "desc_ja": "このノードのイベントフラグを返す。",
                     "desc_ko": "이 노드의 이벤트 플래그를 반환한다."
-                },
-                {
-                    "name": "app:isExitRequested",
-                    "signatures": [
-                        {
-                            "ret": "boolean",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "Returns whether requestExit() has been called on this App.",
-                    "desc_ja": "この App で requestExit() が呼ばれたかどうかを返す。",
-                    "desc_ko": "이 App에서 requestExit()가 호출되었는지를 반환한다."
                 },
                 {
                     "name": "app:isMouseOver",
@@ -9756,18 +9752,6 @@ const TrussCAPI = {
                     "desc": "Detaches a child node.",
                     "desc_ja": "子ノードを親から外す。",
                     "desc_ko": "자식 노드를 부모에서 분리한다."
-                },
-                {
-                    "name": "app:requestExit",
-                    "signatures": [
-                        {
-                            "ret": "(nothing)",
-                            "params": ""
-                        }
-                    ],
-                    "desc": "Stops a headless app (runHeadlessApp); a windowed app ignores it.",
-                    "desc_ja": "ヘッドレスアプリ（runHeadlessApp）を止めるもので、ウィンドウのあるアプリでは何も起きない。",
-                    "desc_ko": "헤드리스 앱(runHeadlessApp)을 멈추는 것으로, 윈도우가 있는 앱에서는 아무 일도 일어나지 않는다."
                 },
                 {
                     "name": "app:setActive",
@@ -10073,9 +10057,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here.",
-                    "desc_ja": "ノードが最初に update か draw される直前に、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
-                    "desc_ko": "노드가 처음 update 또는 draw되기 직전에 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
+                    "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here.",
+                    "desc_ja": "ノードが実行中の App のツリーに加わったときに、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
+                    "desc_ko": "노드가 실행 중인 App의 트리에 들어갈 때 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
                 },
                 {
                     "name": "app:touchMoved",
@@ -11184,6 +11168,27 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "CloseRequestEventArgs",
+            "desc": "The argument of closeRequested: whether to keep the window open.",
+            "keywords": [],
+            "desc_ja": "closeRequested の引数。ウィンドウを開いたままにするかどうかを持つ。",
+            "desc_ko": "closeRequested의 인수다. 창을 열린 채로 둘지 여부를 가진다.",
+            "related": [
+                "Window::close",
+                "Window::setQuitOnClose",
+                "CoreEvents::exitRequested"
+            ],
+            "properties": [
+                {
+                    "name": "closeRequestEventArgs.cancel",
+                    "type": "boolean",
+                    "desc": "Set to true to keep the window open.",
+                    "desc_ja": "true にするとウィンドウは開いたままになる。",
+                    "desc_ko": "true로 설정하면 창이 열린 채로 유지된다."
+                }
+            ]
+        },
+        {
             "name": "Color",
             "desc": "Represents an sRGB color with alpha.",
             "keywords": [
@@ -12015,7 +12020,8 @@ const TrussCAPI = {
                 "events",
                 "Event<T>",
                 "EventListener",
-                "Window::events"
+                "Window::events",
+                "CoreEvents::occludedChanged"
             ],
             "properties": [
                 {
@@ -12033,39 +12039,39 @@ const TrussCAPI = {
                     "desc_ko": "클립보드 붙여넣기 동작이 발생하면 알린다."
                 },
                 {
-                    "name": "coreEvents.console",
+                    "name": "coreEvents.closeRequested",
                     "type": "Event",
-                    "desc": "Fired when a command line is received from standard input.",
-                    "desc_ja": "標準入力からコマンド行を受け取ったときに発生する。",
-                    "desc_ko": "표준 입력에서 명령줄을 받으면 발생한다."
+                    "desc": "Called when the user tries to close this window, so you can keep it open.",
+                    "desc_ja": "ユーザーがこのウィンドウを閉じようとしたときに呼ばれ、閉じるのを止められる。",
+                    "desc_ko": "사용자가 이 창을 닫으려 할 때 호출되며, 창을 닫지 않게 할 수 있다."
                 },
                 {
                     "name": "coreEvents.deviceLost",
                     "type": "Event",
-                    "desc": "Fired when the shared Windows D3D11 device is lost.",
-                    "desc_ja": "Windows の共有 D3D11 デバイスが失われたときに発生する。",
-                    "desc_ko": "Windows의 공유 D3D11 장치가 손실되면 발생한다."
+                    "desc": "Called on each App when the graphics device is lost on Windows.",
+                    "desc_ja": "Windows でデバイスロスト（GPU デバイスの消失）が起きたときに各 App で呼ばれる。",
+                    "desc_ko": "Windows에서 디바이스 로스트(GPU 장치 손실)가 발생했을 때 각 App에서 호출된다."
                 },
                 {
                     "name": "coreEvents.draw",
                     "type": "Event",
-                    "desc": "Delivers a rendered frame; main/host drawing at 100 separates BeforeApp and AfterApp listeners.",
-                    "desc_ja": "描画フレームを通知する。メインとホストの描画は 100 で、BeforeApp と AfterApp の間に実行する。",
-                    "desc_ko": "렌더링 프레임을 알린다. 메인/호스트 그리기는 100에서 BeforeApp과 AfterApp 사이에 실행된다."
+                    "desc": "Called once for each frame that is drawn.",
+                    "desc_ja": "フレームが描画されるたびに 1 回呼ばれる。",
+                    "desc_ko": "프레임이 그려질 때마다 한 번 호출된다."
                 },
                 {
                     "name": "coreEvents.exit",
                     "type": "Event",
-                    "desc": "Delivers shutdown; main/host App::exit runs at 100, followed by AfterApp resource hooks.",
-                    "desc_ja": "終了を通知する。メインとホストでは 100 で App::exit を呼び、AfterApp でリソースを解放する。",
-                    "desc_ko": "종료를 알린다. 메인/호스트 App::exit는 100에서, 리소스 해제 훅은 AfterApp에서 실행한다."
+                    "desc": "Called once when this window actually closes.",
+                    "desc_ja": "このウィンドウが実際に閉じるときに 1 回呼ばれる。",
+                    "desc_ko": "이 창이 실제로 닫힐 때 한 번 호출된다."
                 },
                 {
                     "name": "coreEvents.exitRequested",
                     "type": "Event",
-                    "desc": "Fired when application exit is requested.",
-                    "desc_ja": "アプリケーションの終了が要求されたときに発生する。",
-                    "desc_ko": "애플리케이션 종료가 요청되면 발생한다."
+                    "desc": "Called on each App when the process is asked to quit, so the App can cancel it.",
+                    "desc_ja": "プロセスの終了が要求されたときに各 App で呼ばれ、終了を取り消せる。",
+                    "desc_ko": "프로세스 종료가 요청되었을 때 각 App에서 호출되며, 종료를 취소할 수 있다."
                 },
                 {
                     "name": "coreEvents.filesDropped",
@@ -12077,9 +12083,9 @@ const TrussCAPI = {
                 {
                     "name": "coreEvents.hotReloadUnload",
                     "type": "Event",
-                    "desc": "Fired before the current hot-reload guest generation is unloaded.",
-                    "desc_ja": "ホットリロードで現在のゲスト世代をアンロードする前に発生する。",
-                    "desc_ko": "핫 리로드의 현재 게스트 세대를 언로드하기 전에 발생한다."
+                    "desc": "Called on an App just before hot reload replaces it.",
+                    "desc_ja": "ホットリロードで置き換えられる直前に、その App で呼ばれる。",
+                    "desc_ko": "핫 리로드로 교체되기 직전에 그 App에서 호출된다."
                 },
                 {
                     "name": "coreEvents.keyPressed",
@@ -12131,6 +12137,13 @@ const TrussCAPI = {
                     "desc_ko": "마우스 휠이나 트랙패드로 스크롤하면 발생한다."
                 },
                 {
+                    "name": "coreEvents.occludedChanged",
+                    "type": "Event",
+                    "desc": "Fired when a window becomes hidden or visible.",
+                    "desc_ja": "ウィンドウが非表示または表示状態になったときに発生します。",
+                    "desc_ko": "윈도우가 숨겨지거나 표시되면 발생합니다."
+                },
+                {
                     "name": "coreEvents.onRender",
                     "type": "Event",
                     "desc": "Fired while the final window render pass is active.",
@@ -12143,13 +12156,6 @@ const TrussCAPI = {
                     "desc": "Exposes each raw sokol_app event.",
                     "desc_ja": "sokol_app の各イベントをそのまま通知する。",
                     "desc_ko": "각 sokol_app 이벤트를 원래 형태로 알린다."
-                },
-                {
-                    "name": "coreEvents.setup",
-                    "type": "Event",
-                    "desc": "Meant to fire after setup finishes, but nothing in TrussC ever fires it. Do not rely on it.",
-                    "desc_ja": "setup が終わった後に発火するはずのイベントだが、TrussC のどこからも発火されない。頼らないこと。",
-                    "desc_ko": "setup이 끝난 뒤 발생해야 하는 이벤트지만 TrussC 어디에서도 발생시키지 않는다. 의존하지 말 것."
                 },
                 {
                     "name": "coreEvents.touchMoved",
@@ -12175,9 +12181,9 @@ const TrussCAPI = {
                 {
                     "name": "coreEvents.update",
                     "type": "Event",
-                    "desc": "Delivers one update step, including the main/host App tree at priority 100.",
-                    "desc_ja": "update ごとに一度通知し、メインとホストでは優先度 100 で App ツリーを処理する。",
-                    "desc_ko": "update 단계마다 한 번 알리며 메인/호스트 App 트리를 우선순위 100에서 처리한다."
+                    "desc": "Called once for each update step.",
+                    "desc_ja": "更新のステップごとに 1 回呼ばれる。",
+                    "desc_ko": "업데이트 단계마다 한 번 호출된다."
                 },
                 {
                     "name": "coreEvents.windowResized",
@@ -12215,6 +12221,33 @@ const TrussCAPI = {
                     "desc": "Stores the screen-space error target for adaptive curve subdivision.",
                     "desc_ja": "曲線の適応分割で目標とする画面上の誤差を保持する。",
                     "desc_ko": "곡선의 적응형 분할에서 목표로 하는 화면상의 오차를 보관한다."
+                }
+            ]
+        },
+        {
+            "name": "DeviceDisconnectEventArgs",
+            "desc": "Carries the reason a device was reported lost.",
+            "keywords": [
+                "disconnect event",
+                "unplug",
+                "device lost",
+                "on disconnect args",
+                "peripheral"
+            ],
+            "desc_ja": "デバイス喪失が報告された理由を保持する。",
+            "desc_ko": "장치 손실이 보고된 이유를 담는다.",
+            "related": [
+                "Serial::onDisconnect",
+                "VideoGrabber::onDisconnect",
+                "DeviceLostEventArgs"
+            ],
+            "properties": [
+                {
+                    "name": "deviceDisconnectEventArgs.reason",
+                    "type": "string",
+                    "desc": "Describes why the device was reported lost.",
+                    "desc_ja": "デバイスが失われたと報告された理由を保持する。",
+                    "desc_ko": "장치가 손실되었다고 보고된 이유를 담는다."
                 }
             ]
         },
@@ -12650,32 +12683,27 @@ const TrussCAPI = {
         },
         {
             "name": "ExitRequestEventArgs",
-            "desc": "Carries a cancellable application exit request.",
-            "keywords": [
-                "quit",
-                "close",
-                "shutdown"
-            ],
-            "desc_ja": "キャンセル可能なアプリの終了要求を保持する。",
-            "desc_ko": "취소 가능한 앱 종료 요청을 담는다.",
+            "desc": "The argument of exitRequested: whether to cancel the quit, and an optional reason.",
+            "keywords": [],
+            "desc_ja": "exitRequested の引数。終了を取り消すかどうかと、任意の理由を持つ。",
+            "desc_ko": "exitRequested의 인수다. 종료를 취소할지 여부와 선택적인 이유를 가진다.",
             "related": [
-                "requestExitApp",
-                "events"
+                "RuntimeEvents::exitRequested"
             ],
             "properties": [
                 {
                     "name": "exitRequestEventArgs.cancel",
                     "type": "boolean",
-                    "desc": "Controls whether an application exit request is cancelled.",
-                    "desc_ja": "アプリの終了要求をキャンセルするかを制御する。",
-                    "desc_ko": "앱 종료 요청을 취소할지 제어한다."
+                    "desc": "Set to true to keep the process running.",
+                    "desc_ja": "true にするとプロセスは終了せずに動き続ける。",
+                    "desc_ko": "true로 설정하면 프로세스가 종료되지 않고 계속 실행된다."
                 },
                 {
                     "name": "exitRequestEventArgs.reason",
                     "type": "string",
-                    "desc": "Stores an explanation for blocking Windows shutdown.",
-                    "desc_ja": "Windows のシャットダウンを止める理由を保持する。",
-                    "desc_ko": "Windows 종료를 막는 이유를 저장한다."
+                    "desc": "A short text that explains why the quit was cancelled.",
+                    "desc_ja": "終了を取り消した理由を説明する短い文字列。",
+                    "desc_ko": "종료를 취소한 이유를 설명하는 짧은 문자열이다."
                 }
             ]
         },
@@ -13900,15 +13928,15 @@ const TrussCAPI = {
         },
         {
             "name": "FpsSettings",
-            "desc": "Reports the main loop’s frame-rate configuration.",
+            "desc": "Reports the current window’s frame-rate configuration.",
             "keywords": [
                 "framerate",
                 "vsync",
                 "timing",
                 "refresh"
             ],
-            "desc_ja": "メインループのフレームレート設定を表す。",
-            "desc_ko": "메인 루프의 프레임레이트 설정을 나타낸다.",
+            "desc_ja": "現在のウィンドウのフレームレート設定を表す。",
+            "desc_ko": "현재 윈도우의 프레임레이트 설정을 나타낸다.",
             "related": [
                 "getFpsSettings",
                 "setFps",
@@ -18802,9 +18830,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown.",
-                    "desc_ja": "destroy() したノードがツリーから片付けられるとき（子から順に）と、App の終了時に呼ばれる。",
-                    "desc_ko": "destroy()한 노드가 트리에서 정리될 때(자식부터)와 App 종료 시에 호출된다."
+                    "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first).",
+                    "desc_ja": "destroy() したノードがツリーから外されるときと、App が終わるときにその App のすべてのノードで呼ばれる（子が先）。",
+                    "desc_ko": "destroy()한 노드가 트리에서 제거될 때와, App이 끝날 때 그 App의 모든 노드에서 호출된다(자식이 먼저)."
                 },
                 {
                     "name": "node:destroy",
@@ -19710,9 +19738,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here.",
-                    "desc_ja": "ノードが最初に update か draw される直前に、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
-                    "desc_ko": "노드가 처음 update 또는 draw되기 직전에 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
+                    "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here.",
+                    "desc_ja": "ノードが実行中の App のツリーに加わったときに、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
+                    "desc_ko": "노드가 실행 중인 App의 트리에 들어갈 때 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
                 },
                 {
                     "name": "node:update",
@@ -19725,6 +19753,28 @@ const TrussCAPI = {
                     "desc": "Called on every update step while the node is active, before its mods and its children update.",
                     "desc_ja": "ノードがアクティブな間、update のたびに呼ばれる。mod や子の update より先に実行される。",
                     "desc_ko": "노드가 활성인 동안 update 단계마다 호출된다. mod와 자식의 update보다 먼저 실행된다."
+                }
+            ]
+        },
+        {
+            "name": "OccludedEventArgs",
+            "desc": "Describes a change in window visibility.",
+            "keywords": [],
+            "desc_ja": "ウィンドウの可視状態の変化を表します。",
+            "desc_ko": "윈도우 가시성의 변화를 나타냅니다.",
+            "related": [
+                "CoreEvents::occludedChanged",
+                "Window::isOccluded",
+                "CoreEvents::rawEvent",
+                "OccludedEventArgs::occluded"
+            ],
+            "properties": [
+                {
+                    "name": "occludedEventArgs.occluded",
+                    "type": "boolean",
+                    "desc": "Reports whether the window is minimized or completely hidden.",
+                    "desc_ja": "ウィンドウが最小化または完全に隠れているかを表します。",
+                    "desc_ko": "윈도우가 최소화되었거나 완전히 가려졌는지 나타냅니다."
                 }
             ]
         },
@@ -21451,9 +21501,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown.",
-                    "desc_ja": "destroy() したノードがツリーから片付けられるとき（子から順に）と、App の終了時に呼ばれる。",
-                    "desc_ko": "destroy()한 노드가 트리에서 정리될 때(자식부터)와 App 종료 시에 호출된다."
+                    "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first).",
+                    "desc_ja": "destroy() したノードがツリーから外されるときと、App が終わるときにその App のすべてのノードで呼ばれる（子が先）。",
+                    "desc_ko": "destroy()한 노드가 트리에서 제거될 때와, App이 끝날 때 그 App의 모든 노드에서 호출된다(자식이 먼저)."
                 },
                 {
                     "name": "rectNode:destroy",
@@ -22535,9 +22585,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here.",
-                    "desc_ja": "ノードが最初に update か draw される直前に、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
-                    "desc_ko": "노드가 처음 update 또는 draw되기 직전에 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
+                    "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here.",
+                    "desc_ja": "ノードが実行中の App のツリーに加わったときに、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
+                    "desc_ko": "노드가 실행 중인 App의 트리에 들어갈 때 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
                 },
                 {
                     "name": "rectNode:update",
@@ -22720,9 +22770,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown.",
-                    "desc_ja": "destroy() したノードがツリーから片付けられるとき（子から順に）と、App の終了時に呼ばれる。",
-                    "desc_ko": "destroy()한 노드가 트리에서 정리될 때(자식부터)와 App 종료 시에 호출된다."
+                    "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first).",
+                    "desc_ja": "destroy() したノードがツリーから外されるときと、App が終わるときにその App のすべてのノードで呼ばれる（子が先）。",
+                    "desc_ko": "destroy()한 노드가 트리에서 제거될 때와, App이 끝날 때 그 App의 모든 노드에서 호출된다(자식이 먼저)."
                 },
                 {
                     "name": "rectNodeButton:destroy",
@@ -23816,9 +23866,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here.",
-                    "desc_ja": "ノードが最初に update か draw される直前に、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
-                    "desc_ko": "노드가 처음 update 또는 draw되기 직전에 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
+                    "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here.",
+                    "desc_ja": "ノードが実行中の App のツリーに加わったときに、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
+                    "desc_ko": "노드가 실행 중인 App의 트리에 들어갈 때 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
                 },
                 {
                     "name": "rectNodeButton:update",
@@ -23956,6 +24006,119 @@ const TrussCAPI = {
                     "desc": "Stores the new window width.",
                     "desc_ja": "変更後のウィンドウの幅を保持する。",
                     "desc_ko": "변경된 창 너비를 저장한다."
+                }
+            ]
+        },
+        {
+            "name": "Runtime",
+            "desc": "The object that represents the whole running process.",
+            "keywords": [],
+            "desc_ja": "実行中のプロセス全体を表すオブジェクト。",
+            "desc_ko": "실행 중인 프로세스 전체를 나타내는 객체다.",
+            "related": [
+                "runtime",
+                "Runtime::events"
+            ],
+            "methods": [
+                {
+                    "name": "runtime:events",
+                    "signatures": [
+                        {
+                            "ret": "RuntimeEvents",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the events that belong to the whole process.",
+                    "desc_ja": "プロセス全体に属するイベントを返す。",
+                    "desc_ko": "프로세스 전체에 속하는 이벤트를 반환한다."
+                },
+                {
+                    "name": "runtime:setLogoutTimeout",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "seconds"
+                        }
+                    ],
+                    "desc": "Sets the time limit for the normal ending when the OS logs out, restarts or shuts down.",
+                    "desc_ja": "OS のログアウト、再起動、シャットダウンのときに、通常の終了処理にかけられる時間を設定する。",
+                    "desc_ko": "OS 로그아웃, 재시작, 시스템 종료 때 일반 종료 처리에 허용하는 시간을 설정한다."
+                }
+            ]
+        },
+        {
+            "name": "RuntimeEvents",
+            "desc": "Holds the events that belong to the whole process rather than to one window.",
+            "keywords": [],
+            "desc_ja": "ウィンドウ単位ではなく、プロセス全体に属するイベントをまとめたもの。",
+            "desc_ko": "창 단위가 아닌 프로세스 전체에 속하는 이벤트를 모아 둔 것이다.",
+            "related": [
+                "RuntimeEvents::exitRequested",
+                "RuntimeEvents::console"
+            ],
+            "properties": [
+                {
+                    "name": "runtimeEvents.console",
+                    "type": "Event",
+                    "desc": "Called when a command line arrives from standard input.",
+                    "desc_ja": "標準入力からコマンドが 1 行届いたときに呼ばれる。",
+                    "desc_ko": "표준 입력으로 명령 한 줄이 들어왔을 때 호출된다."
+                },
+                {
+                    "name": "runtimeEvents.deviceLost",
+                    "type": "Event",
+                    "desc": "Called when the graphics device is lost on Windows.",
+                    "desc_ja": "Windows でデバイスロスト（GPU デバイスの消失）が起きたときに呼ばれる。",
+                    "desc_ko": "Windows에서 디바이스 로스트(GPU 장치 손실)가 발생했을 때 호출된다."
+                },
+                {
+                    "name": "runtimeEvents.exitRequested",
+                    "type": "Event",
+                    "desc": "Called when the process is asked to quit, so you can cancel it.",
+                    "desc_ja": "プロセスの終了が要求されたときに呼ばれ、終了を取り消せる。",
+                    "desc_ko": "프로세스 종료가 요청되었을 때 호출되며, 종료를 취소할 수 있다."
+                },
+                {
+                    "name": "runtimeEvents.hotReloadUnload",
+                    "type": "Event",
+                    "desc": "Called just before hot reload replaces the App.",
+                    "desc_ja": "ホットリロードで App が置き換わる直前に呼ばれる。",
+                    "desc_ko": "핫 리로드로 App이 교체되기 직전에 호출된다."
+                }
+            ]
+        },
+        {
+            "name": "RuntimeSettings",
+            "desc": "Configures app-wide runtime values at startup.",
+            "keywords": [],
+            "desc_ja": "起動時のアプリケーション全体の実行設定を指定する。",
+            "desc_ko": "시작 시 앱 전체의 런타임 값을 설정한다.",
+            "related": [
+                "runApp",
+                "RuntimeSettings::uniformBufferReserve",
+                "RuntimeSettings::reserveUniformBuffer"
+            ],
+            "properties": [
+                {
+                    "name": "runtimeSettings.uniformBufferReserve",
+                    "type": "number",
+                    "desc": "Specifies the app-wide GPU uniform buffer reservation in bytes.",
+                    "desc_ja": "アプリケーション全体の GPU ユニフォームバッファー予約量をバイトで指定する。",
+                    "desc_ko": "앱 전체의 GPU 유니폼 버퍼 예약량을 바이트로 지정한다."
+                }
+            ],
+            "methods": [
+                {
+                    "name": "runtimeSettings:reserveUniformBuffer",
+                    "signatures": [
+                        {
+                            "ret": "RuntimeSettings",
+                            "params": "bytes"
+                        }
+                    ],
+                    "desc": "Sets the app-wide GPU uniform buffer reservation.",
+                    "desc_ja": "アプリケーション全体の GPU ユニフォームバッファー予約量を設定する。",
+                    "desc_ko": "앱 전체의 GPU 유니폼 버퍼 예약량을 설정한다."
                 }
             ]
         },
@@ -24313,9 +24476,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown.",
-                    "desc_ja": "destroy() したノードがツリーから片付けられるとき（子から順に）と、App の終了時に呼ばれる。",
-                    "desc_ko": "destroy()한 노드가 트리에서 정리될 때(자식부터)와 App 종료 시에 호출된다."
+                    "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first).",
+                    "desc_ja": "destroy() したノードがツリーから外されるときと、App が終わるときにその App のすべてのノードで呼ばれる（子が先）。",
+                    "desc_ko": "destroy()한 노드가 트리에서 제거될 때와, App이 끝날 때 그 App의 모든 노드에서 호출된다(자식이 먼저)."
                 },
                 {
                     "name": "scrollBar:destroy",
@@ -25469,9 +25632,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here.",
-                    "desc_ja": "ノードが最初に update か draw される直前に、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
-                    "desc_ko": "노드가 처음 update 또는 draw되기 직전에 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
+                    "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here.",
+                    "desc_ja": "ノードが実行中の App のツリーに加わったときに、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
+                    "desc_ko": "노드가 실행 중인 App의 트리에 들어갈 때 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
                 },
                 {
                     "name": "scrollBar:update",
@@ -25639,9 +25802,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown.",
-                    "desc_ja": "destroy() したノードがツリーから片付けられるとき（子から順に）と、App の終了時に呼ばれる。",
-                    "desc_ko": "destroy()한 노드가 트리에서 정리될 때(자식부터)와 App 종료 시에 호출된다."
+                    "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first).",
+                    "desc_ja": "destroy() したノードがツリーから外されるときと、App が終わるときにその App のすべてのノードで呼ばれる（子が先）。",
+                    "desc_ko": "destroy()한 노드가 트리에서 제거될 때와, App이 끝날 때 그 App의 모든 노드에서 호출된다(자식이 먼저)."
                 },
                 {
                     "name": "scrollContainer:destroy",
@@ -26931,9 +27094,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here.",
-                    "desc_ja": "ノードが最初に update か draw される直前に、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
-                    "desc_ko": "노드가 처음 update 또는 draw되기 직전에 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
+                    "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here.",
+                    "desc_ja": "ノードが実行中の App のツリーに加わったときに、一度だけ呼ばれる。子ノードやタイマーはここで作る。",
+                    "desc_ko": "노드가 실행 중인 App의 트리에 들어갈 때 한 번만 호출된다. 자식 노드와 타이머는 여기서 만든다."
                 },
                 {
                     "name": "scrollContainer:updateScrollBounds",
@@ -27116,7 +27279,7 @@ const TrussCAPI = {
             "desc_ko": "시리얼 포트에 연결하여 바이트를 읽고 쓴다.",
             "related": [
                 "SerialDeviceInfo",
-                "SerialDisconnectEventArgs",
+                "DeviceDisconnectEventArgs",
                 "TcpClient",
                 "Serial::setup",
                 "Serial::readBytes",
@@ -27132,9 +27295,9 @@ const TrussCAPI = {
                 {
                     "name": "serial.onDisconnect",
                     "type": "Event",
-                    "desc": "Reports when a serial connection ends.",
-                    "desc_ja": "シリアル接続の終了を通知する。",
-                    "desc_ko": "시리얼 연결이 끝났음을 알린다."
+                    "desc": "Reports when the OS says the serial device was lost.",
+                    "desc_ja": "OS がシリアルデバイスの喪失を報告したことを通知する。",
+                    "desc_ko": "OS가 시리얼 장치 손실을 보고했음을 알린다."
                 }
             ],
             "methods": [
@@ -27279,6 +27442,10 @@ const TrussCAPI = {
                         },
                         {
                             "ret": "boolean",
+                            "params": ""
+                        },
+                        {
+                            "ret": "boolean",
                             "params": "deviceIndex, baudRate"
                         }
                     ],
@@ -27411,47 +27578,6 @@ const TrussCAPI = {
                     "desc": "Returns the device path.",
                     "desc_ja": "デバイスパスを返す。",
                     "desc_ko": "장치 경로를 반환한다."
-                }
-            ]
-        },
-        {
-            "name": "SerialDisconnectEventArgs",
-            "desc": "Describes a serial connection that ended.",
-            "keywords": [
-                "disconnect event",
-                "serial unplug",
-                "on disconnect args"
-            ],
-            "desc_ja": "終了したシリアル接続の情報を表す。",
-            "desc_ko": "종료된 시리얼 연결의 정보를 나타낸다.",
-            "properties": [
-                {
-                    "name": "serialDisconnectEventArgs.baudRate",
-                    "type": "number",
-                    "desc": "Stores the baud rate of the connection that ended.",
-                    "desc_ja": "切断された接続のボーレートを保持する。",
-                    "desc_ko": "종료된 연결의 보드레이트를 저장한다."
-                },
-                {
-                    "name": "serialDisconnectEventArgs.portName",
-                    "type": "string",
-                    "desc": "Stores the port name of the connection that ended.",
-                    "desc_ja": "切断された接続のポート名を保持する。",
-                    "desc_ko": "종료된 연결의 포트 이름을 저장한다."
-                },
-                {
-                    "name": "serialDisconnectEventArgs.reason",
-                    "type": "string",
-                    "desc": "Stores a human-readable reason for the disconnection.",
-                    "desc_ja": "人が読める切断理由を保持する。",
-                    "desc_ko": "사람이 읽을 수 있는 연결 종료 사유를 저장한다."
-                },
-                {
-                    "name": "serialDisconnectEventArgs.wasClean",
-                    "type": "boolean",
-                    "desc": "Indicates whether the application requested the connection to close.",
-                    "desc_ja": "アプリの要求による切断かどうかを示す。",
-                    "desc_ko": "앱의 요청으로 연결이 종료되었는지 나타낸다."
                 }
             ]
         },
@@ -32714,13 +32840,26 @@ const TrussCAPI = {
             "desc_ko": "카메라의 실시간 영상을 픽셀과 텍스처로 가져온다.",
             "related": [
                 "VideoDeviceInfo",
-                "Texture"
+                "Texture",
+                "VideoGrabber::isConnected",
+                "VideoGrabber::onDisconnect",
+                "VideoGrabber::setup",
+                "DeviceDisconnectEventArgs"
             ],
             "constructor": {
                 "signatures": [
                     ""
                 ]
             },
+            "properties": [
+                {
+                    "name": "videoGrabber.onDisconnect",
+                    "type": "Event",
+                    "desc": "Reports when the OS says the camera was lost.",
+                    "desc_ja": "OS がカメラの喪失を報告したことを通知する。",
+                    "desc_ko": "OS가 카메라 손실을 보고했음을 알린다."
+                }
+            ],
             "methods": [
                 {
                     "name": "videoGrabber:close",
@@ -32927,6 +33066,18 @@ const TrussCAPI = {
                     "desc_ko": "내부 텍스처가 할당되었는지 반환한다."
                 },
                 {
+                    "name": "videoGrabber:isConnected",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return whether the camera is open.",
+                    "desc_ja": "カメラが開いているかを返す。",
+                    "desc_ko": "카메라가 열려 있는지 반환한다."
+                },
+                {
                     "name": "videoGrabber:isFrameNew",
                     "signatures": [
                         {
@@ -32946,9 +33097,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Return whether camera setup has completed.",
-                    "desc_ja": "カメラのセットアップが完了しているかを返す。",
-                    "desc_ko": "카메라 설정이 완료되었는지 반환한다."
+                    "desc": "Returns the same state as `isConnected()`.",
+                    "desc_ja": "`isConnected()` と同じ状態を返す。",
+                    "desc_ko": "`isConnected()`와 같은 상태를 반환한다."
                 },
                 {
                     "name": "videoGrabber:isPendingPermission",
@@ -33123,12 +33274,16 @@ const TrussCAPI = {
                     "signatures": [
                         {
                             "ret": "boolean",
-                            "params": "width = 640, height = 480"
+                            "params": "width, height"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": ""
                         }
                     ],
-                    "desc": "Initialize camera capture at a requested size.",
-                    "desc_ja": "指定した寸法でカメラのキャプチャを初期化する。",
-                    "desc_ko": "요청한 크기로 카메라 캡처를 초기화한다."
+                    "desc": "Open the camera at a requested size, or reopen the last one.",
+                    "desc_ja": "指定した寸法でカメラを開く、または最後のカメラを開き直す。",
+                    "desc_ko": "요청한 크기로 카메라를 열거나 마지막 카메라를 다시 연다."
                 },
                 {
                     "name": "videoGrabber:update",
@@ -34350,22 +34505,14 @@ const TrussCAPI = {
         },
         {
             "name": "Window",
-            "desc": "Represents a secondary application window.",
-            "keywords": [
-                "multi window",
-                "second window",
-                "secondary",
-                "display"
-            ],
-            "desc_ja": "アプリケーションのサブウィンドウを表す。",
-            "desc_ko": "애플리케이션의 보조 윈도우를 나타낸다.",
+            "desc": "A window on the screen, with its own App, events and drawing state.",
+            "keywords": [],
+            "desc_ja": "画面上の 1 つのウィンドウ。それぞれが自分の App、イベント、描画状態を持つ。",
+            "desc_ko": "화면의 창 하나다. 각각 자신의 App, 이벤트, 그리기 상태를 가진다.",
             "related": [
                 "createWindow",
-                "WindowSettings",
-                "Window::setApp",
-                "Window::isOpen",
-                "Window::isOccluded",
-                "Window::setFps"
+                "Window::close",
+                "Window::setApp"
             ],
             "constructor": {
                 "signatures": [
@@ -34383,7 +34530,19 @@ const TrussCAPI = {
                     ],
                     "desc": "Requests closure of this window.",
                     "desc_ja": "このウィンドウを閉じるよう要求する。",
-                    "desc_ko": "이 윈도우를 닫도록 요청한다."
+                    "desc_ko": "이 창을 닫도록 요청한다."
+                },
+                {
+                    "name": "window:destroyApp",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Removes the App from this window and leaves the window open and empty.",
+                    "desc_ja": "このウィンドウから App を外し、ウィンドウは空のまま開いておく。",
+                    "desc_ko": "이 창에서 App을 제거하고, 창은 빈 채로 열어 둔다."
                 },
                 {
                     "name": "window:events",
@@ -34477,9 +34636,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns this window's fullscreen state.",
-                    "desc_ja": "このウィンドウのフルスクリーン状態を返す。",
-                    "desc_ko": "이 윈도우의 전체화면 상태를 반환한다."
+                    "desc": "Returns whether fullscreen currently blocks this window's size and position requests.",
+                    "desc_ja": "フルスクリーンによってこのウィンドウのサイズ・位置要求を無視しているかを返す。",
+                    "desc_ko": "전체 화면으로 인해 이 윈도우의 크기·위치 요청을 무시하는지 반환한다."
                 },
                 {
                     "name": "window:isOccluded",
@@ -34489,9 +34648,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns whether the operating system reports this window as not visible.",
-                    "desc_ja": "OS がこのウィンドウを非表示と報告しているかを返す。",
-                    "desc_ko": "운영체제가 이 윈도우를 보이지 않는 상태로 보고하는지 반환한다."
+                    "desc": "Returns whether this window is minimized or fully hidden according to trusted operating system observations.",
+                    "desc_ja": "信頼できる OS の情報に基づき、このウィンドウが最小化または完全に隠れているかを返します。",
+                    "desc_ko": "신뢰할 수 있는 운영체제 정보에 따라 이 윈도우가 최소화되었거나 완전히 가려졌는지 반환합니다."
                 },
                 {
                     "name": "window:isOpen",
@@ -34501,21 +34660,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns whether this window's native window still exists.",
-                    "desc_ja": "このウィンドウのネイティブウィンドウが存在するかを返す。",
-                    "desc_ko": "이 윈도우의 네이티브 윈도우가 존재하는지 반환한다."
-                },
-                {
-                    "name": "window:setApp",
-                    "signatures": [
-                        {
-                            "ret": "(nothing)",
-                            "params": "app"
-                        }
-                    ],
-                    "desc": "Requests an App attachment or replacement for this window.",
-                    "desc_ja": "このウィンドウへの App の設定や差し替えを要求する。",
-                    "desc_ko": "이 윈도우에 App을 연결하거나 교체하도록 요청한다."
+                    "desc": "Returns whether this window is open.",
+                    "desc_ja": "このウィンドウが開いているかを返す。",
+                    "desc_ko": "이 윈도우가 열려 있는지 반환한다."
                 },
                 {
                     "name": "window:setClearColor",
@@ -34554,6 +34701,18 @@ const TrussCAPI = {
                     "desc_ko": "이 윈도우의 전체화면 모드를 설정한다."
                 },
                 {
+                    "name": "window:setIndependentFps",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "updateFps, drawFps"
+                        }
+                    ],
+                    "desc": "Sets separate update and drawing rates for this window.",
+                    "desc_ja": "このウィンドウの更新と描画のレートを個別に設定する。",
+                    "desc_ko": "이 윈도우의 업데이트와 그리기 빈도를 개별적으로 설정한다."
+                },
+                {
                     "name": "window:setPosition",
                     "signatures": [
                         {
@@ -34564,6 +34723,18 @@ const TrussCAPI = {
                     "desc": "Move this window on the desktop, in screen coordinates with the primary display's top-left at (0, 0); a display left of or above the primary one has negative coordinates. To fill a second display, move the window there first and then call setFullscreen — fullscreen covers the display the window is currently on",
                     "desc_ja": "このウィンドウをデスクトップ上で移動する。座標はプライマリディスプレイの左上を (0, 0) とするスクリーン座標で、プライマリより左や上にあるディスプレイは負の値になる。2 台目のディスプレイ全体に表示するには、先にそのディスプレイへ移動してから setFullscreen を呼ぶ（フルスクリーンはウィンドウが現在ある ディスプレイを覆う）",
                     "desc_ko": "이 윈도우를 데스크톱 위에서 이동. 좌표는 주 디스플레이의 좌상단이 (0, 0)인 스크린 좌표이며, 주 디스플레이보다 왼쪽이나 위에 있는 디스플레이는 음수 좌표를 가진다. 두 번째 디스플레이를 채우려면 먼저 그쪽으로 옮긴 뒤 setFullscreen을 부를 것 — 전체화면은 창이 현재 올라가 있는 디스플레이를 덮는다"
+                },
+                {
+                    "name": "window:setQuitOnClose",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "enabled"
+                        }
+                    ],
+                    "desc": "Sets whether closing this window also quits the process.",
+                    "desc_ja": "このウィンドウを閉じたときにプロセスも終了するかどうかを設定する。",
+                    "desc_ko": "이 창을 닫을 때 프로세스도 종료할지 설정한다."
                 },
                 {
                     "name": "window:setSize",
@@ -34616,6 +34787,7 @@ const TrussCAPI = {
             "desc_ja": "起動時のアプリケーションウィンドウを設定する。",
             "desc_ko": "시작 시 애플리케이션 윈도우를 설정한다.",
             "related": [
+                "RuntimeSettings",
                 "runApp",
                 "setWindowSize",
                 "setWindowTitle",
@@ -34626,13 +34798,6 @@ const TrussCAPI = {
             ],
             "properties": [
                 {
-                    "name": "windowSettings.clipboardSize",
-                    "type": "number",
-                    "desc": "Specifies the clipboard buffer capacity.",
-                    "desc_ja": "クリップボードバッファの容量を指定する。",
-                    "desc_ko": "클립보드 버퍼 용량을 지정한다."
-                },
-                {
                     "name": "windowSettings.decorated",
                     "type": "boolean",
                     "desc": "Specifies whether the window displays its frame and title bar.",
@@ -34642,9 +34807,9 @@ const TrussCAPI = {
                 {
                     "name": "windowSettings.fullscreen",
                     "type": "boolean",
-                    "desc": "Specifies whether the main window starts in fullscreen.",
-                    "desc_ja": "メインウィンドウをフルスクリーンで起動するか指定する。",
-                    "desc_ko": "메인 윈도우를 전체 화면으로 시작할지 지정한다."
+                    "desc": "Specifies whether the Window starts in fullscreen.",
+                    "desc_ja": "Window をフルスクリーンで起動するか指定する。",
+                    "desc_ko": "Window를 전체 화면으로 시작할지 지정한다."
                 },
                 {
                     "name": "windowSettings.height",
@@ -34673,6 +34838,13 @@ const TrussCAPI = {
                     "desc": "Specifies whether window coordinates use framebuffer pixels.",
                     "desc_ja": "ウィンドウ座標にフレームバッファのピクセルを使うか指定する。",
                     "desc_ko": "윈도우 좌표에 프레임버퍼 픽셀을 사용할지 지정한다."
+                },
+                {
+                    "name": "windowSettings.quitOnClose",
+                    "type": "boolean",
+                    "desc": "Whether closing this window also quits the process.",
+                    "desc_ja": "このウィンドウを閉じたときにプロセスも終了するかどうか。",
+                    "desc_ko": "이 창을 닫을 때 프로세스도 종료할지 여부다."
                 },
                 {
                     "name": "windowSettings.resourcePoolSize",
@@ -34710,13 +34882,6 @@ const TrussCAPI = {
                     "desc_ko": "윈도우의 초기 제목을 지정한다."
                 },
                 {
-                    "name": "windowSettings.uniformBufferReserve",
-                    "type": "number",
-                    "desc": "Stores the initial per-frame GPU uniform buffer capacity.",
-                    "desc_ja": "フレームごとの GPU ユニフォームバッファの初期容量を保持する。",
-                    "desc_ko": "프레임별 GPU 유니폼 버퍼의 초기 용량을 저장한다."
-                },
-                {
                     "name": "windowSettings.width",
                     "type": "number",
                     "desc": "Specifies the initial window width.",
@@ -34725,30 +34890,6 @@ const TrussCAPI = {
                 }
             ],
             "methods": [
-                {
-                    "name": "windowSettings:reserveUniformBuffer",
-                    "signatures": [
-                        {
-                            "ret": "WindowSettings",
-                            "params": "bytes"
-                        }
-                    ],
-                    "desc": "Sets the initial capacity of the per-frame GPU uniform buffer.",
-                    "desc_ja": "フレームごとの GPU ユニフォームバッファの初期容量を設定する。",
-                    "desc_ko": "프레임별 GPU 유니폼 버퍼의 초기 용량을 설정한다."
-                },
-                {
-                    "name": "windowSettings:setClipboardSize",
-                    "signatures": [
-                        {
-                            "ret": "WindowSettings",
-                            "params": "size"
-                        }
-                    ],
-                    "desc": "Sets the clipboard buffer capacity.",
-                    "desc_ja": "クリップボードバッファの容量を設定する。",
-                    "desc_ko": "클립보드 버퍼 용량을 설정한다."
-                },
                 {
                     "name": "windowSettings:setDecorated",
                     "signatures": [
@@ -34769,9 +34910,9 @@ const TrussCAPI = {
                             "params": "enabled"
                         }
                     ],
-                    "desc": "Sets whether the main window starts in fullscreen.",
-                    "desc_ja": "メインウィンドウをフルスクリーンで起動するか設定する。",
-                    "desc_ko": "메인 윈도우를 전체 화면으로 시작할지 설정한다."
+                    "desc": "Sets whether the Window starts in fullscreen.",
+                    "desc_ja": "Window をフルスクリーンで起動するか設定する。",
+                    "desc_ko": "Window를 전체 화면으로 시작할지 설정한다."
                 },
                 {
                     "name": "windowSettings:setHighDpi",
@@ -34808,6 +34949,18 @@ const TrussCAPI = {
                     "desc": "Sets whether window coordinates use framebuffer pixels.",
                     "desc_ja": "ウィンドウ座標にフレームバッファのピクセルを使うか設定する。",
                     "desc_ko": "윈도우 좌표에 프레임버퍼 픽셀을 사용할지 설정한다."
+                },
+                {
+                    "name": "windowSettings:setQuitOnClose",
+                    "signatures": [
+                        {
+                            "ret": "WindowSettings",
+                            "params": "enabled"
+                        }
+                    ],
+                    "desc": "Sets whether closing this window also quits the process.",
+                    "desc_ja": "このウィンドウを閉じたときにプロセスも終了するかどうかを設定する。",
+                    "desc_ko": "이 창을 닫을 때 프로세스도 종료할지 설정한다."
                 },
                 {
                     "name": "windowSettings:setResourcePoolSize",

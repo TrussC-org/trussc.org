@@ -1304,7 +1304,12 @@ const TrussSketchAPI = {
     {
      "name": "createWindow",
      "snippet": "createWindow()",
-     "desc": "Creates a secondary application window."
+     "desc": "Opens a new, empty window."
+    },
+    {
+     "name": "exitApp",
+     "snippet": "exitApp()",
+     "desc": "Asks the process to quit, with an exit code."
     },
     {
      "name": "exp2",
@@ -1315,6 +1320,16 @@ const TrussSketchAPI = {
      "name": "getResourceLoadConcurrency",
      "snippet": "getResourceLoadConcurrency()",
      "desc": "Returns how many resource loads can prepare at once."
+    },
+    {
+     "name": "getWindowTitle",
+     "snippet": "getWindowTitle()",
+     "desc": "Returns the current Window title."
+    },
+    {
+     "name": "isWindowOccluded",
+     "snippet": "isWindowOccluded()",
+     "desc": "Reports whether the current Window is hidden by native visibility signals."
     },
     {
      "name": "log10",
@@ -1350,6 +1365,11 @@ const TrussSketchAPI = {
      "name": "remainder",
      "snippet": "remainder(${1:x}, ${2:y})",
      "desc": "Returns the IEEE floating-point remainder."
+    },
+    {
+     "name": "runtime",
+     "snippet": "runtime()",
+     "desc": "Returns the object that represents the whole running process."
     },
     {
      "name": "saveScreenshotAsync",
@@ -1579,7 +1599,7 @@ const TrussSketchAPI = {
     {
      "name": "getDrawCount",
      "snippet": "getDrawCount()",
-     "desc": "Returns the main window's frame counter."
+     "desc": "Returns the current window's real draw count."
     },
     {
      "name": "getFps",
@@ -1589,7 +1609,7 @@ const TrussSketchAPI = {
     {
      "name": "getFpsSettings",
      "snippet": "getFpsSettings()",
-     "desc": "Returns the main loop's frame-rate configuration."
+     "desc": "Returns the current window's frame-rate configuration."
     },
     {
      "name": "getFrameCount",
@@ -2004,12 +2024,7 @@ const TrussSketchAPI = {
     {
      "name": "events",
      "snippet": "events()",
-     "desc": "Returns the current window context's CoreEvents hub."
-    },
-    {
-     "name": "exitApp",
-     "snippet": "exitApp()",
-     "desc": "Orders the application to exit with normal cleanup."
+     "desc": "Returns the events of the window the current App is in."
     },
     {
      "name": "getCursor",
@@ -2137,11 +2152,6 @@ const TrussSketchAPI = {
      "desc": "Shows a file or folder picker with a result callback."
     },
     {
-     "name": "requestExitApp",
-     "snippet": "requestExitApp()",
-     "desc": "Requests a cancellable application exit."
-    },
-    {
      "name": "saveDialog",
      "snippet": "saveDialog()",
      "desc": "Shows a file save dialog."
@@ -2239,7 +2249,7 @@ const TrussSketchAPI = {
     {
      "name": "isFullscreen",
      "snippet": "isFullscreen()",
-     "desc": "Returns whether the current window is fullscreen."
+     "desc": "Returns whether fullscreen currently blocks this window's size and position requests."
     },
     {
      "name": "isRecording",
@@ -2299,7 +2309,7 @@ const TrussSketchAPI = {
     {
      "name": "setWindowDecorated",
      "snippet": "setWindowDecorated(${1:decorated})",
-     "desc": "Controls the main window's standard decorations."
+     "desc": "Controls the resolved Window's standard decorations."
     },
     {
      "name": "setWindowPosition",
@@ -2314,7 +2324,7 @@ const TrussSketchAPI = {
     {
      "name": "setWindowSizeLogical",
      "snippet": "setWindowSizeLogical(${1:width}, ${2:height})",
-     "desc": "Resizes the main window using logical dimensions."
+     "desc": "Resizes the current window using logical dimensions."
     },
     {
      "name": "setWindowTitle",
@@ -2633,7 +2643,7 @@ const TrussSketchAPI = {
      "name": "cleanup",
      "snippet": "cleanup()",
      "return": "void",
-     "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown."
+     "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first)."
     },
     {
      "name": "destroy",
@@ -2669,7 +2679,7 @@ const TrussSketchAPI = {
      "name": "filesDropped",
      "snippet": "filesDropped(${1:files})",
      "return": "void",
-     "desc": "Called when files are dropped onto the main window, with their paths."
+     "desc": "Called when files are dropped onto this Window, with their paths."
     },
     {
      "name": "findByInstanceId",
@@ -2915,7 +2925,7 @@ const TrussSketchAPI = {
      "name": "getWindow",
      "snippet": "getWindow()",
      "return": "Window *",
-     "desc": "Returns the Window this App was put into with Window::setApp(), or nullptr."
+     "desc": "Returns the window this App is attached to, or nullptr."
     },
     {
      "name": "getX",
@@ -2982,12 +2992,6 @@ const TrussSketchAPI = {
      "snippet": "isEventsEnabled()",
      "return": "bool",
      "desc": "Returns this node's event-enabled flag."
-    },
-    {
-     "name": "isExitRequested",
-     "snippet": "isExitRequested()",
-     "return": "bool",
-     "desc": "Returns whether requestExit() has been called on this App."
     },
     {
      "name": "isMouseOver",
@@ -3084,12 +3088,6 @@ const TrussSketchAPI = {
      "snippet": "removeChild(${1:child})",
      "return": "void",
      "desc": "Detaches a child node."
-    },
-    {
-     "name": "requestExit",
-     "snippet": "requestExit()",
-     "return": "void",
-     "desc": "Stops a headless app (runHeadlessApp); a windowed app ignores it."
     },
     {
      "name": "setActive",
@@ -3233,7 +3231,7 @@ const TrussSketchAPI = {
      "name": "setup",
      "snippet": "setup()",
      "return": "void",
-     "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here."
+     "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here."
     },
     {
      "name": "touchMoved",
@@ -4009,6 +4007,17 @@ const TrussSketchAPI = {
      "name": "text",
      "type": "std::string",
      "desc": "Holds the pasted clipboard text."
+    }
+   ]
+  },
+  {
+   "name": "CloseRequestEventArgs",
+   "desc": "The argument of closeRequested: whether to keep the window open.",
+   "properties": [
+    {
+     "name": "cancel",
+     "type": "bool",
+     "desc": "Set to true to keep the window open."
     }
    ]
   },
@@ -5364,29 +5373,29 @@ const TrussSketchAPI = {
      "desc": "Fired when a clipboard paste gesture occurs."
     },
     {
-     "name": "console",
-     "type": "Event<ConsoleEventArgs>",
-     "desc": "Fired when a command line is received from standard input."
+     "name": "closeRequested",
+     "type": "Event<CloseRequestEventArgs>",
+     "desc": "Called when the user tries to close this window, so you can keep it open."
     },
     {
      "name": "deviceLost",
      "type": "Event<DeviceLostEventArgs>",
-     "desc": "Fired when the shared Windows D3D11 device is lost."
+     "desc": "Called on each App when the graphics device is lost on Windows."
     },
     {
      "name": "draw",
      "type": "Event<void>",
-     "desc": "Delivers a rendered frame; main/host drawing at 100 separates BeforeApp and AfterApp listeners."
+     "desc": "Called once for each frame that is drawn."
     },
     {
      "name": "exit",
      "type": "Event<void>",
-     "desc": "Delivers shutdown; main/host App::exit runs at 100, followed by AfterApp resource hooks."
+     "desc": "Called once when this window actually closes."
     },
     {
      "name": "exitRequested",
      "type": "Event<ExitRequestEventArgs>",
-     "desc": "Fired when application exit is requested."
+     "desc": "Called on each App when the process is asked to quit, so the App can cancel it."
     },
     {
      "name": "filesDropped",
@@ -5396,7 +5405,7 @@ const TrussSketchAPI = {
     {
      "name": "hotReloadUnload",
      "type": "Event<void>",
-     "desc": "Fired before the current hot-reload guest generation is unloaded."
+     "desc": "Called on an App just before hot reload replaces it."
     },
     {
      "name": "keyPressed",
@@ -5434,6 +5443,11 @@ const TrussSketchAPI = {
      "desc": "Fired when the mouse wheel or trackpad scrolls."
     },
     {
+     "name": "occludedChanged",
+     "type": "Event<OccludedEventArgs>",
+     "desc": "Fired when a window becomes hidden or visible."
+    },
+    {
      "name": "onRender",
      "type": "Event<void>",
      "desc": "Fired while the final window render pass is active."
@@ -5442,11 +5456,6 @@ const TrussSketchAPI = {
      "name": "rawEvent",
      "type": "Event<const sapp_event>",
      "desc": "Exposes each raw sokol_app event."
-    },
-    {
-     "name": "setup",
-     "type": "Event<void>",
-     "desc": "Meant to fire after setup finishes, but nothing in TrussC ever fires it. Do not rely on it."
     },
     {
      "name": "touchMoved",
@@ -5466,7 +5475,7 @@ const TrussSketchAPI = {
     {
      "name": "update",
      "type": "Event<void>",
-     "desc": "Delivers one update step, including the main/host App tree at priority 100."
+     "desc": "Called once for each update step."
     },
     {
      "name": "windowResized",
@@ -5679,6 +5688,17 @@ const TrussSketchAPI = {
      "snippet": "Main",
      "return": "Deliver",
      "desc": "= 1"
+    }
+   ]
+  },
+  {
+   "name": "DeviceDisconnectEventArgs",
+   "desc": "Carries the reason a device was reported lost.",
+   "properties": [
+    {
+     "name": "reason",
+     "type": "std::string",
+     "desc": "Describes why the device was reported lost."
     }
    ]
   },
@@ -6068,17 +6088,17 @@ const TrussSketchAPI = {
   },
   {
    "name": "ExitRequestEventArgs",
-   "desc": "Carries a cancellable application exit request.",
+   "desc": "The argument of exitRequested: whether to cancel the quit, and an optional reason.",
    "properties": [
     {
      "name": "cancel",
      "type": "bool",
-     "desc": "Controls whether an application exit request is cancelled."
+     "desc": "Set to true to keep the process running."
     },
     {
      "name": "reason",
      "type": "std::string",
-     "desc": "Stores an explanation for blocking Windows shutdown."
+     "desc": "A short text that explains why the quit was cancelled."
     }
    ]
   },
@@ -6690,7 +6710,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "FpsSettings",
-   "desc": "Reports the main loop’s frame-rate configuration.",
+   "desc": "Reports the current window’s frame-rate configuration.",
    "properties": [
     {
      "name": "actualVsyncFps",
@@ -9437,7 +9457,7 @@ const TrussSketchAPI = {
      "name": "cleanup",
      "snippet": "cleanup()",
      "return": "void",
-     "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown."
+     "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first)."
     },
     {
      "name": "destroy",
@@ -9881,13 +9901,24 @@ const TrussSketchAPI = {
      "name": "setup",
      "snippet": "setup()",
      "return": "void",
-     "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here."
+     "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here."
     },
     {
      "name": "update",
      "snippet": "update()",
      "return": "void",
      "desc": "Called on every update step while the node is active, before its mods and its children update."
+    }
+   ]
+  },
+  {
+   "name": "OccludedEventArgs",
+   "desc": "Describes a change in window visibility.",
+   "properties": [
+    {
+     "name": "occluded",
+     "type": "bool",
+     "desc": "Reports whether the window is minimized or completely hidden."
     }
    ]
   },
@@ -10918,7 +10949,7 @@ const TrussSketchAPI = {
      "name": "cleanup",
      "snippet": "cleanup()",
      "return": "void",
-     "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown."
+     "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first)."
     },
     {
      "name": "destroy",
@@ -11446,7 +11477,7 @@ const TrussSketchAPI = {
      "name": "setup",
      "snippet": "setup()",
      "return": "void",
-     "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here."
+     "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here."
     },
     {
      "name": "update",
@@ -11550,7 +11581,7 @@ const TrussSketchAPI = {
      "name": "cleanup",
      "snippet": "cleanup()",
      "return": "void",
-     "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown."
+     "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first)."
     },
     {
      "name": "destroy",
@@ -12084,7 +12115,7 @@ const TrussSketchAPI = {
      "name": "setup",
      "snippet": "setup()",
      "return": "void",
-     "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here."
+     "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here."
     },
     {
      "name": "update",
@@ -12155,6 +12186,69 @@ const TrussSketchAPI = {
      "name": "width",
      "type": "int",
      "desc": "Stores the new window width."
+    }
+   ]
+  },
+  {
+   "name": "Runtime",
+   "desc": "The object that represents the whole running process.",
+   "methods": [
+    {
+     "name": "events",
+     "snippet": "events()",
+     "return": "RuntimeEvents &",
+     "desc": "Returns the events that belong to the whole process."
+    },
+    {
+     "name": "setLogoutTimeout",
+     "snippet": "setLogoutTimeout(${1:seconds})",
+     "return": "void",
+     "desc": "Sets the time limit for the normal ending when the OS logs out, restarts or shuts down."
+    }
+   ]
+  },
+  {
+   "name": "RuntimeEvents",
+   "desc": "Holds the events that belong to the whole process rather than to one window.",
+   "properties": [
+    {
+     "name": "console",
+     "type": "Event<ConsoleEventArgs>",
+     "desc": "Called when a command line arrives from standard input."
+    },
+    {
+     "name": "deviceLost",
+     "type": "Event<DeviceLostEventArgs>",
+     "desc": "Called when the graphics device is lost on Windows."
+    },
+    {
+     "name": "exitRequested",
+     "type": "Event<ExitRequestEventArgs>",
+     "desc": "Called when the process is asked to quit, so you can cancel it."
+    },
+    {
+     "name": "hotReloadUnload",
+     "type": "Event<void>",
+     "desc": "Called just before hot reload replaces the App."
+    }
+   ]
+  },
+  {
+   "name": "RuntimeSettings",
+   "desc": "Configures app-wide runtime values at startup.",
+   "properties": [
+    {
+     "name": "uniformBufferReserve",
+     "type": "int",
+     "desc": "Specifies the app-wide GPU uniform buffer reservation in bytes."
+    }
+   ],
+   "methods": [
+    {
+     "name": "reserveUniformBuffer",
+     "snippet": "reserveUniformBuffer(${1:bytes})",
+     "return": "RuntimeSettings &",
+     "desc": "Sets the app-wide GPU uniform buffer reservation."
     }
    ]
   },
@@ -12370,7 +12464,7 @@ const TrussSketchAPI = {
      "name": "cleanup",
      "snippet": "cleanup()",
      "return": "void",
-     "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown."
+     "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first)."
     },
     {
      "name": "destroy",
@@ -12934,7 +13028,7 @@ const TrussSketchAPI = {
      "name": "setup",
      "snippet": "setup()",
      "return": "void",
-     "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here."
+     "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here."
     },
     {
      "name": "update",
@@ -13024,7 +13118,7 @@ const TrussSketchAPI = {
      "name": "cleanup",
      "snippet": "cleanup()",
      "return": "void",
-     "desc": "Called when a node you destroy() is removed from the tree (children first), and for the App at shutdown."
+     "desc": "Called when a node you destroy() is removed from the tree, and on every node of an App when the App ends (children first)."
     },
     {
      "name": "destroy",
@@ -13654,7 +13748,7 @@ const TrussSketchAPI = {
      "name": "setup",
      "snippet": "setup()",
      "return": "void",
-     "desc": "Called once, just before the node is first updated or drawn. Build child nodes and timers here."
+     "desc": "Called once, when the node joins the running App's tree. Build child nodes and timers here."
     },
     {
      "name": "updateScrollBounds",
@@ -13809,8 +13903,8 @@ const TrussSketchAPI = {
    "properties": [
     {
      "name": "onDisconnect",
-     "type": "Event<SerialDisconnectEventArgs>",
-     "desc": "Reports when a serial connection ends."
+     "type": "Event<DeviceDisconnectEventArgs>",
+     "desc": "Reports when the OS says the serial device was lost."
     }
    ],
    "methods": [
@@ -13952,32 +14046,6 @@ const TrussSketchAPI = {
      "snippet": "getDevicePath()",
      "return": "const std::string &",
      "desc": "Returns the device path."
-    }
-   ]
-  },
-  {
-   "name": "SerialDisconnectEventArgs",
-   "desc": "Describes a serial connection that ended.",
-   "properties": [
-    {
-     "name": "baudRate",
-     "type": "int",
-     "desc": "Stores the baud rate of the connection that ended."
-    },
-    {
-     "name": "portName",
-     "type": "std::string",
-     "desc": "Stores the port name of the connection that ended."
-    },
-    {
-     "name": "reason",
-     "type": "std::string",
-     "desc": "Stores a human-readable reason for the disconnection."
-    },
-    {
-     "name": "wasClean",
-     "type": "bool",
-     "desc": "Indicates whether the application requested the connection to close."
     }
    ]
   },
@@ -16984,6 +17052,13 @@ const TrussSketchAPI = {
    "constructor": {
     "snippet": "VideoGrabber()"
    },
+   "properties": [
+    {
+     "name": "onDisconnect",
+     "type": "Event<DeviceDisconnectEventArgs>",
+     "desc": "Reports when the OS says the camera was lost."
+    }
+   ],
    "methods": [
     {
      "name": "close",
@@ -17082,6 +17157,12 @@ const TrussSketchAPI = {
      "desc": "Returns whether the underlying texture is allocated."
     },
     {
+     "name": "isConnected",
+     "snippet": "isConnected()",
+     "return": "bool",
+     "desc": "Return whether the camera is open."
+    },
+    {
      "name": "isFrameNew",
      "snippet": "isFrameNew()",
      "return": "bool",
@@ -17091,7 +17172,7 @@ const TrussSketchAPI = {
      "name": "isInitialized",
      "snippet": "isInitialized()",
      "return": "bool",
-     "desc": "Return whether camera setup has completed."
+     "desc": "Returns the same state as `isConnected()`."
     },
     {
      "name": "isPendingPermission",
@@ -17179,9 +17260,9 @@ const TrussSketchAPI = {
     },
     {
      "name": "setup",
-     "snippet": "setup()",
+     "snippet": "setup(${1:width}, ${2:height})",
      "return": "bool",
-     "desc": "Initialize camera capture at a requested size."
+     "desc": "Open the camera at a requested size, or reopen the last one."
     },
     {
      "name": "update",
@@ -17793,7 +17874,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Window",
-   "desc": "Represents a secondary application window.",
+   "desc": "A window on the screen, with its own App, events and drawing state.",
    "constructor": {
     "snippet": "Window()"
    },
@@ -17803,6 +17884,12 @@ const TrussSketchAPI = {
      "snippet": "close()",
      "return": "void",
      "desc": "Requests closure of this window."
+    },
+    {
+     "name": "destroyApp",
+     "snippet": "destroyApp()",
+     "return": "void",
+     "desc": "Removes the App from this window and leaves the window open and empty."
     },
     {
      "name": "events",
@@ -17850,25 +17937,19 @@ const TrussSketchAPI = {
      "name": "isFullscreen",
      "snippet": "isFullscreen()",
      "return": "bool",
-     "desc": "Returns this window's fullscreen state."
+     "desc": "Returns whether fullscreen currently blocks this window's size and position requests."
     },
     {
      "name": "isOccluded",
      "snippet": "isOccluded()",
      "return": "bool",
-     "desc": "Returns whether the operating system reports this window as not visible."
+     "desc": "Returns whether this window is minimized or fully hidden according to trusted operating system observations."
     },
     {
      "name": "isOpen",
      "snippet": "isOpen()",
      "return": "bool",
-     "desc": "Returns whether this window's native window still exists."
-    },
-    {
-     "name": "setApp",
-     "snippet": "setApp(${1:app})",
-     "return": "void",
-     "desc": "Requests an App attachment or replacement for this window."
+     "desc": "Returns whether this window is open."
     },
     {
      "name": "setClearColor",
@@ -17889,10 +17970,22 @@ const TrussSketchAPI = {
      "desc": "Sets this window's fullscreen mode."
     },
     {
+     "name": "setIndependentFps",
+     "snippet": "setIndependentFps(${1:updateFps}, ${2:drawFps})",
+     "return": "void",
+     "desc": "Sets separate update and drawing rates for this window."
+    },
+    {
      "name": "setPosition",
      "snippet": "setPosition(${1:x}, ${2:y})",
      "return": "void",
      "desc": "Move this window on the desktop, in screen coordinates with the primary display's top-left at (0, 0); a display left of or above the primary one has negative coordinates. To fill a second display, move the window there first and then call setFullscreen — fullscreen covers the display the window is currently on"
+    },
+    {
+     "name": "setQuitOnClose",
+     "snippet": "setQuitOnClose(${1:enabled})",
+     "return": "void",
+     "desc": "Sets whether closing this window also quits the process."
     },
     {
      "name": "setSize",
@@ -17919,11 +18012,6 @@ const TrussSketchAPI = {
    "desc": "Configures the application window at startup.",
    "properties": [
     {
-     "name": "clipboardSize",
-     "type": "int",
-     "desc": "Specifies the clipboard buffer capacity."
-    },
-    {
      "name": "decorated",
      "type": "bool",
      "desc": "Specifies whether the window displays its frame and title bar."
@@ -17931,7 +18019,7 @@ const TrussSketchAPI = {
     {
      "name": "fullscreen",
      "type": "bool",
-     "desc": "Specifies whether the main window starts in fullscreen."
+     "desc": "Specifies whether the Window starts in fullscreen."
     },
     {
      "name": "height",
@@ -17952,6 +18040,11 @@ const TrussSketchAPI = {
      "name": "pixelPerfect",
      "type": "bool",
      "desc": "Specifies whether window coordinates use framebuffer pixels."
+    },
+    {
+     "name": "quitOnClose",
+     "type": "bool",
+     "desc": "Whether closing this window also quits the process."
     },
     {
      "name": "resourcePoolSize",
@@ -17979,29 +18072,12 @@ const TrussSketchAPI = {
      "desc": "Specifies the initial window title."
     },
     {
-     "name": "uniformBufferReserve",
-     "type": "int",
-     "desc": "Stores the initial per-frame GPU uniform buffer capacity."
-    },
-    {
      "name": "width",
      "type": "int",
      "desc": "Specifies the initial window width."
     }
    ],
    "methods": [
-    {
-     "name": "reserveUniformBuffer",
-     "snippet": "reserveUniformBuffer(${1:bytes})",
-     "return": "WindowSettings &",
-     "desc": "Sets the initial capacity of the per-frame GPU uniform buffer."
-    },
-    {
-     "name": "setClipboardSize",
-     "snippet": "setClipboardSize(${1:size})",
-     "return": "WindowSettings &",
-     "desc": "Sets the clipboard buffer capacity."
-    },
     {
      "name": "setDecorated",
      "snippet": "setDecorated(${1:enabled})",
@@ -18012,7 +18088,7 @@ const TrussSketchAPI = {
      "name": "setFullscreen",
      "snippet": "setFullscreen(${1:enabled})",
      "return": "WindowSettings &",
-     "desc": "Sets whether the main window starts in fullscreen."
+     "desc": "Sets whether the Window starts in fullscreen."
     },
     {
      "name": "setHighDpi",
@@ -18031,6 +18107,12 @@ const TrussSketchAPI = {
      "snippet": "setPixelPerfect(${1:enabled})",
      "return": "WindowSettings &",
      "desc": "Sets whether window coordinates use framebuffer pixels."
+    },
+    {
+     "name": "setQuitOnClose",
+     "snippet": "setQuitOnClose(${1:enabled})",
+     "return": "WindowSettings &",
+     "desc": "Sets whether closing this window also quits the process."
     },
     {
      "name": "setResourcePoolSize",
