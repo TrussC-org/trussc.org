@@ -7,7 +7,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.7.7 (Lua)",
+    "version": "v0.8.0 (Lua)",
     "lang": "lua",
     "categories": [
         {
