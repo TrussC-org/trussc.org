@@ -149,7 +149,7 @@
       more: 'See also: ',
       sources: 'sources',
       research: function (q) { return 'Searching again for \u201C' + q + '\u201D\u2026'; },
-      privacy: '\uD83D\uDD12 Chat history is stored anonymized\nNo personal data is collected.',
+      privacy: '\uD83D\uDD12 Questions and answers are kept for 6 months to improve the docs.\nYour IP address itself is never stored, only a value derived from it.',
     },
     ja: {
       greeting: '質問ある？',
@@ -157,7 +157,7 @@
       more: '詳しくは: ',
       sources: '出典',
       research: function (q) { return '\u300C' + q + '\u300Dで再検索中\u2026'; },
-      privacy: '\uD83D\uDD12 チャット履歴は匿名化されて保存しています\n（個人情報は含まれません）',
+      privacy: '\uD83D\uDD12 質問と回答は改善のため6か月保存します\nIPアドレスそのものは保存せず、そこから作った値だけを残します',
     },
     ko: {
       greeting: '질문 있어?',
@@ -165,7 +165,7 @@
       more: '자세히: ',
       sources: '출처',
       research: function (q) { return '"' + q + '"(으)로 다시 검색 중\u2026'; },
-      privacy: '\uD83D\uDD12 채팅 기록은 익명화되어 저장됩니다\n(개인정보는 수집하지 않아요)',
+      privacy: '\uD83D\uDD12 질문과 답변은 개선을 위해 6개월간 보관합니다\nIP 주소 자체는 저장하지 않고, 그로부터 만든 값만 남깁니다',
     },
   };
   var STR = I18N[LANG];
