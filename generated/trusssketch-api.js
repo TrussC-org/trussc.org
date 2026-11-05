@@ -5470,7 +5470,7 @@ const TrussSketchAPI = {
     {
      "name": "touchReleased",
      "type": "Event<TouchEventArgs>",
-     "desc": "Fired when a touch ends or is cancelled."
+     "desc": "Fired when a touch ends or is canceled."
     },
     {
      "name": "update",
@@ -6098,7 +6098,7 @@ const TrussSketchAPI = {
     {
      "name": "reason",
      "type": "std::string",
-     "desc": "A short text that explains why the quit was cancelled."
+     "desc": "A short text that explains why the quit was canceled."
     }
    ]
   },

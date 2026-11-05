@@ -12174,7 +12174,7 @@ const TrussCAPI = {
                 {
                     "name": "coreEvents.touchReleased",
                     "type": "Event",
-                    "desc": "Fired when a touch ends or is cancelled.",
+                    "desc": "Fired when a touch ends or is canceled.",
                     "desc_ja": "タッチが終了またはキャンセルされたときに発生する。",
                     "desc_ko": "터치가 끝나거나 취소되면 발생한다."
                 },
@@ -12701,7 +12701,7 @@ const TrussCAPI = {
                 {
                     "name": "exitRequestEventArgs.reason",
                     "type": "string",
-                    "desc": "A short text that explains why the quit was cancelled.",
+                    "desc": "A short text that explains why the quit was canceled.",
                     "desc_ja": "終了を取り消した理由を説明する短い文字列。",
                     "desc_ko": "종료를 취소한 이유를 설명하는 짧은 문자열이다."
                 }
