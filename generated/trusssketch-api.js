@@ -3258,6 +3258,12 @@ const TrussSketchAPI = {
      "desc": "Called on every update step while the node is active, before its mods and its children update."
     },
     {
+     "name": "windowFocusChanged",
+     "snippet": "windowFocusChanged(${1:focused})",
+     "return": "void",
+     "desc": "Called when this App's window gains or loses keyboard focus."
+    },
+    {
      "name": "windowResized",
      "snippet": "windowResized(${1:width}, ${2:height})",
      "return": "void",
@@ -5403,6 +5409,11 @@ const TrussSketchAPI = {
      "desc": "Fired when files are dropped onto the window."
     },
     {
+     "name": "focusChanged",
+     "type": "Event<FocusEventArgs>",
+     "desc": "Fired when a window gains or loses keyboard focus."
+    },
+    {
      "name": "hotReloadUnload",
      "type": "Event<void>",
      "desc": "Called on an App just before hot reload replaces it."
@@ -6357,6 +6368,17 @@ const TrussSketchAPI = {
      "snippet": "writeLine()",
      "return": "FileWriter &",
      "desc": "Writes text followed by a newline."
+    }
+   ]
+  },
+  {
+   "name": "FocusEventArgs",
+   "desc": "Describes a change in keyboard focus of a window.",
+   "properties": [
+    {
+     "name": "focused",
+     "type": "bool",
+     "desc": "Reports whether the window gained or lost keyboard focus."
     }
    ]
   },
@@ -17880,6 +17902,12 @@ const TrussSketchAPI = {
    },
    "methods": [
     {
+     "name": "bringToFront",
+     "snippet": "bringToFront()",
+     "return": "void",
+     "desc": "Brings this window to the front and gives it focus."
+    },
+    {
      "name": "close",
      "snippet": "close()",
      "return": "void",
@@ -17932,6 +17960,12 @@ const TrussSketchAPI = {
      "snippet": "getWidth()",
      "return": "int",
      "desc": "Returns this window's content width."
+    },
+    {
+     "name": "isFocused",
+     "snippet": "isFocused()",
+     "return": "bool",
+     "desc": "Returns whether this window has keyboard focus, as last reported by the operating system."
     },
     {
      "name": "isFullscreen",
@@ -18095,6 +18129,12 @@ const TrussSketchAPI = {
      "snippet": "setHighDpi(${1:enabled})",
      "return": "WindowSettings &",
      "desc": "Sets whether rendering uses the display's high pixel density."
+    },
+    {
+     "name": "setParentWindow",
+     "snippet": "setParentWindow(${1:parent})",
+     "return": "WindowSettings &",
+     "desc": "Keeps a new window above a parent window."
     },
     {
      "name": "setPipelinePoolSize",

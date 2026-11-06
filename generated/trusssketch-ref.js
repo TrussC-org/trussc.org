@@ -10110,6 +10110,18 @@ const TrussCAPI = {
                     "desc_ko": "노드가 활성인 동안 update 단계마다 호출된다. mod와 자식의 update보다 먼저 실행된다."
                 },
                 {
+                    "name": "app:windowFocusChanged",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "focused"
+                        }
+                    ],
+                    "desc": "Called when this App's window gains or loses keyboard focus.",
+                    "desc_ja": "この App のウィンドウがキーボードフォーカスを得たとき、または失ったときに呼ばれる。",
+                    "desc_ko": "이 App의 윈도우가 키보드 포커스를 얻거나 잃을 때 호출된다."
+                },
+                {
                     "name": "app:windowResized",
                     "signatures": [
                         {
@@ -12081,6 +12093,13 @@ const TrussCAPI = {
                     "desc_ko": "윈도우에 파일을 놓으면 발생한다."
                 },
                 {
+                    "name": "coreEvents.focusChanged",
+                    "type": "Event",
+                    "desc": "Fired when a window gains or loses keyboard focus.",
+                    "desc_ja": "ウィンドウがキーボードフォーカスを得たとき、または失ったときに発生します。",
+                    "desc_ko": "윈도우가 키보드 포커스를 얻거나 잃으면 발생합니다."
+                },
+                {
                     "name": "coreEvents.hotReloadUnload",
                     "type": "Event",
                     "desc": "Called on an App just before hot reload replaces it.",
@@ -13212,6 +13231,32 @@ const TrussCAPI = {
                     "desc": "Writes text followed by a newline.",
                     "desc_ja": "テキストの末尾に改行を付けて書き込む。",
                     "desc_ko": "텍스트 뒤에 개행을 붙여 쓴다."
+                }
+            ]
+        },
+        {
+            "name": "FocusEventArgs",
+            "desc": "Describes a change in keyboard focus of a window.",
+            "keywords": [
+                "focus",
+                "blur",
+                "window"
+            ],
+            "desc_ja": "ウィンドウのキーボードフォーカスの変化を表します。",
+            "desc_ko": "윈도우 키보드 포커스의 변화를 나타냅니다.",
+            "related": [
+                "CoreEvents::focusChanged",
+                "Window::isFocused",
+                "App::windowFocusChanged",
+                "FocusEventArgs::focused"
+            ],
+            "properties": [
+                {
+                    "name": "focusEventArgs.focused",
+                    "type": "boolean",
+                    "desc": "Reports whether the window gained or lost keyboard focus.",
+                    "desc_ja": "ウィンドウがキーボードフォーカスを得たか失ったかを表します。",
+                    "desc_ko": "윈도우가 키보드 포커스를 얻었는지 잃었는지 나타냅니다."
                 }
             ]
         },
@@ -24208,7 +24253,9 @@ const TrussCAPI = {
             "related": [
                 "VideoWriter",
                 "startRecording",
-                "Fbo"
+                "Fbo",
+                "Fbo::readPixels",
+                "grabScreen"
             ],
             "constructor": {
                 "signatures": [
@@ -34521,6 +34568,18 @@ const TrussCAPI = {
             },
             "methods": [
                 {
+                    "name": "window:bringToFront",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Brings this window to the front and gives it focus.",
+                    "desc_ja": "このウィンドウを前面に出してフォーカスを与える。",
+                    "desc_ko": "이 윈도우를 앞으로 올리고 포커스를 준다."
+                },
+                {
                     "name": "window:close",
                     "signatures": [
                         {
@@ -34627,6 +34686,18 @@ const TrussCAPI = {
                     "desc": "Returns this window's content width.",
                     "desc_ja": "このウィンドウのコンテンツ領域の幅を返す。",
                     "desc_ko": "이 윈도우의 콘텐츠 영역 너비를 반환한다."
+                },
+                {
+                    "name": "window:isFocused",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns whether this window has keyboard focus, as last reported by the operating system.",
+                    "desc_ja": "OS が最後に報告したとおり、このウィンドウがキーボードフォーカスを持っているかを返します。",
+                    "desc_ko": "운영체제가 마지막으로 보고한 대로 이 윈도우가 키보드 포커스를 가지고 있는지 반환합니다."
                 },
                 {
                     "name": "window:isFullscreen",
@@ -34925,6 +34996,22 @@ const TrussCAPI = {
                     "desc": "Sets whether rendering uses the display's high pixel density.",
                     "desc_ja": "ディスプレイの高い画素密度を使って描画するか設定する。",
                     "desc_ko": "디스플레이의 높은 픽셀 밀도를 사용하여 렌더링할지 설정한다."
+                },
+                {
+                    "name": "windowSettings:setParentWindow",
+                    "signatures": [
+                        {
+                            "ret": "WindowSettings",
+                            "params": "parent"
+                        },
+                        {
+                            "ret": "WindowSettings",
+                            "params": "parent"
+                        }
+                    ],
+                    "desc": "Keeps a new window above a parent window.",
+                    "desc_ja": "新しいウィンドウを親ウィンドウの手前に保つ。",
+                    "desc_ko": "새 윈도우를 부모 윈도우 위에 유지한다."
                 },
                 {
                     "name": "windowSettings:setPipelinePoolSize",
