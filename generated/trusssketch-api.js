@@ -2249,7 +2249,7 @@ const TrussSketchAPI = {
     {
      "name": "isFullscreen",
      "snippet": "isFullscreen()",
-     "desc": "Returns whether fullscreen currently blocks this window's size and position requests."
+     "desc": "Returns this window's observed fullscreen state."
     },
     {
      "name": "isRecording",
@@ -17971,19 +17971,25 @@ const TrussSketchAPI = {
      "name": "isFullscreen",
      "snippet": "isFullscreen()",
      "return": "bool",
-     "desc": "Returns whether fullscreen currently blocks this window's size and position requests."
+     "desc": "Returns this window's observed fullscreen state."
     },
     {
      "name": "isOccluded",
      "snippet": "isOccluded()",
      "return": "bool",
-     "desc": "Returns whether this window is minimized or fully hidden according to trusted operating system observations."
+     "desc": "Returns whether this window is explicitly hidden, minimized or fully occluded."
     },
     {
      "name": "isOpen",
      "snippet": "isOpen()",
      "return": "bool",
      "desc": "Returns whether this window is open."
+    },
+    {
+     "name": "isVisible",
+     "snippet": "isVisible()",
+     "return": "bool",
+     "desc": "Returns this open window's requested visibility."
     },
     {
      "name": "setClearColor",
@@ -18032,6 +18038,12 @@ const TrussSketchAPI = {
      "snippet": "setTitle(${1:title})",
      "return": "void",
      "desc": "Sets this window's title."
+    },
+    {
+     "name": "setVisible",
+     "snippet": "setVisible(${1:visible})",
+     "return": "void",
+     "desc": "Hides or shows this window without closing it."
     },
     {
      "name": "toggleFullscreen",
@@ -18104,6 +18116,11 @@ const TrussSketchAPI = {
      "name": "title",
      "type": "std::string",
      "desc": "Specifies the initial window title."
+    },
+    {
+     "name": "visible",
+     "type": "bool",
+     "desc": "Initial requested visibility; true by default."
     },
     {
      "name": "width",
@@ -18189,6 +18206,12 @@ const TrussSketchAPI = {
      "snippet": "setTitle(${1:t})",
      "return": "WindowSettings &",
      "desc": "Sets the initial window title."
+    },
+    {
+     "name": "setVisible",
+     "snippet": "setVisible(${1:enabled})",
+     "return": "WindowSettings &",
+     "desc": "Sets whether a window starts visible."
     }
    ]
   },

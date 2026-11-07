@@ -5057,14 +5057,14 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "boolean",
-                    "desc": "Returns whether fullscreen currently blocks this window's size and position requests.",
+                    "desc": "Returns this window's observed fullscreen state.",
                     "keywords": [
                         "maximized",
                         "borderless",
                         "status"
                     ],
-                    "desc_ja": "フルスクリーンによってこのウィンドウのサイズ・位置要求を無視しているかを返す。",
-                    "desc_ko": "전체 화면으로 인해 이 윈도우의 크기·위치 요청을 무시하는지 반환한다."
+                    "desc_ja": "このウィンドウの実際のフルスクリーン状態を返す。",
+                    "desc_ko": "이 윈도우의 실제 전체화면 상태를 반환한다."
                 },
                 {
                     "name": "isRecording",
@@ -34707,9 +34707,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns whether fullscreen currently blocks this window's size and position requests.",
-                    "desc_ja": "フルスクリーンによってこのウィンドウのサイズ・位置要求を無視しているかを返す。",
-                    "desc_ko": "전체 화면으로 인해 이 윈도우의 크기·위치 요청을 무시하는지 반환한다."
+                    "desc": "Returns this window's observed fullscreen state.",
+                    "desc_ja": "このウィンドウの実際のフルスクリーン状態を返す。",
+                    "desc_ko": "이 윈도우의 실제 전체화면 상태를 반환한다."
                 },
                 {
                     "name": "window:isOccluded",
@@ -34719,9 +34719,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns whether this window is minimized or fully hidden according to trusted operating system observations.",
-                    "desc_ja": "信頼できる OS の情報に基づき、このウィンドウが最小化または完全に隠れているかを返します。",
-                    "desc_ko": "신뢰할 수 있는 운영체제 정보에 따라 이 윈도우가 최소화되었거나 완전히 가려졌는지 반환합니다."
+                    "desc": "Returns whether this window is explicitly hidden, minimized or fully occluded.",
+                    "desc_ja": "このウィンドウが明示的に非表示、最小化、または完全に遮蔽されているかを返します。",
+                    "desc_ko": "이 윈도우가 명시적으로 숨겨졌거나 최소화되었거나 완전히 가려졌는지 반환합니다."
                 },
                 {
                     "name": "window:isOpen",
@@ -34734,6 +34734,18 @@ const TrussCAPI = {
                     "desc": "Returns whether this window is open.",
                     "desc_ja": "このウィンドウが開いているかを返す。",
                     "desc_ko": "이 윈도우가 열려 있는지 반환한다."
+                },
+                {
+                    "name": "window:isVisible",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns this open window's requested visibility.",
+                    "desc_ja": "開いているウィンドウに要求した表示状態を返します。",
+                    "desc_ko": "열린 윈도우에 요청한 표시 상태를 반환합니다."
                 },
                 {
                     "name": "window:setClearColor",
@@ -34830,6 +34842,18 @@ const TrussCAPI = {
                     "desc": "Sets this window's title.",
                     "desc_ja": "このウィンドウのタイトルを設定する。",
                     "desc_ko": "이 윈도우의 제목을 설정한다."
+                },
+                {
+                    "name": "window:setVisible",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "visible"
+                        }
+                    ],
+                    "desc": "Hides or shows this window without closing it.",
+                    "desc_ja": "このウィンドウを閉じずに、非表示または表示にします。",
+                    "desc_ko": "이 윈도우를 닫지 않고 숨기거나 표시합니다."
                 },
                 {
                     "name": "window:toggleFullscreen",
@@ -34951,6 +34975,13 @@ const TrussCAPI = {
                     "desc": "Specifies the initial window title.",
                     "desc_ja": "ウィンドウの初期タイトルを指定する。",
                     "desc_ko": "윈도우의 초기 제목을 지정한다."
+                },
+                {
+                    "name": "windowSettings.visible",
+                    "type": "boolean",
+                    "desc": "Initial requested visibility; true by default.",
+                    "desc_ja": "作成時に要求する表示状態です。既定値は true です。",
+                    "desc_ko": "생성할 때 요청하는 표시 상태이며 기본값은 true입니다."
                 },
                 {
                     "name": "windowSettings.width",
@@ -35120,6 +35151,18 @@ const TrussCAPI = {
                     "desc": "Sets the initial window title.",
                     "desc_ja": "ウィンドウの初期タイトルを設定する。",
                     "desc_ko": "윈도우의 초기 제목을 설정한다."
+                },
+                {
+                    "name": "windowSettings:setVisible",
+                    "signatures": [
+                        {
+                            "ret": "WindowSettings",
+                            "params": "enabled"
+                        }
+                    ],
+                    "desc": "Sets whether a window starts visible.",
+                    "desc_ja": "ウィンドウを表示状態で作成するか設定します。",
+                    "desc_ko": "윈도우를 표시 상태로 생성할지 설정합니다."
                 }
             ]
         },
