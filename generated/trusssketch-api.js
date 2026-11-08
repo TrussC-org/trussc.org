@@ -1317,6 +1317,11 @@ const TrussSketchAPI = {
      "desc": "Returns two raised to the given power."
     },
     {
+     "name": "getCommandLineArgs",
+     "snippet": "getCommandLineArgs()",
+     "desc": "Returns the process command-line arguments as UTF-8 strings, including the executable."
+    },
+    {
      "name": "getResourceLoadConcurrency",
      "snippet": "getResourceLoadConcurrency()",
      "desc": "Returns how many resource loads can prepare at once."
@@ -2294,7 +2299,7 @@ const TrussSketchAPI = {
     {
      "name": "setKeepScreenOn",
      "snippet": "setKeepScreenOn(${1:enabled})",
-     "desc": "Requests that the display stay on."
+     "desc": "Requests that the display stay on and the screen saver stay inactive."
     },
     {
      "name": "setMaxUpdateSteps",
@@ -6327,6 +6332,17 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "FilesOpenedEventArgs",
+   "desc": "Carries a process-level file-open request with no window or position.",
+   "properties": [
+    {
+     "name": "files",
+     "type": "std::vector<std::filesystem::path>",
+     "desc": "The files and directories requested by the OS, stored as filesystem paths."
+    }
+   ]
+  },
+  {
    "name": "FileWriter",
    "desc": "Writes files incrementally with a flush after each write.",
    "constructor": {
@@ -6780,6 +6796,12 @@ const TrussSketchAPI = {
      "snippet": "draw()",
      "return": "void",
      "desc": "Draws a fullscreen quad with this shader."
+    },
+    {
+     "name": "drawVertices",
+     "snippet": "drawVertices(${1:vertexCount})",
+     "return": "void",
+     "desc": "Draws non-indexed triangles without uploading vertices or indices."
     },
     {
      "name": "end",
@@ -12249,6 +12271,11 @@ const TrussSketchAPI = {
      "desc": "Called when the process is asked to quit, so you can cancel it."
     },
     {
+     "name": "filesOpened",
+     "type": "Event<FilesOpenedEventArgs>",
+     "desc": "Delivers the files the OS asks this process to open, after the launch App's setup."
+    },
+    {
      "name": "hotReloadUnload",
      "type": "Event<void>",
      "desc": "Called just before hot reload replaces the App."
@@ -15569,6 +15596,12 @@ const TrussSketchAPI = {
      "snippet": "RenderTarget",
      "return": "TextureUsage",
      "desc": "= 3"
+    },
+    {
+     "name": "Storage",
+     "snippet": "Storage",
+     "return": "TextureUsage",
+     "desc": "= 4"
     }
    ]
   },

@@ -1897,22 +1897,6 @@ const TrussCAPI = {
                     "desc_ko": "클리핑 사각형을 직접 설정해 현재 사각형을 바꾼다."
                 },
                 {
-                    "name": "setScissor",
-                    "params": "x, y, w, h",
-                    "params_typed": "x, y, w, h",
-                    "return_type": "(nothing)",
-                    "desc": "Sets the clipping rectangle directly, replacing the current one.",
-                    "keywords": [
-                        "clip",
-                        "clipping",
-                        "mask",
-                        "crop",
-                        "region"
-                    ],
-                    "desc_ja": "クリッピング矩形を直接設定し、現在の矩形を置き換える。",
-                    "desc_ko": "클리핑 사각형을 직접 설정해 현재 사각형을 바꾼다."
-                },
-                {
                     "name": "setStrokeCap",
                     "params": "cap",
                     "params_typed": "cap",
@@ -5189,7 +5173,7 @@ const TrussCAPI = {
                     "params": "enabled",
                     "params_typed": "enabled",
                     "return_type": "(nothing)",
-                    "desc": "Requests that the display stay on.",
+                    "desc": "Requests that the display stay on and the screen saver stay inactive.",
                     "keywords": [
                         "wake lock",
                         "no sleep",
@@ -5197,8 +5181,8 @@ const TrussCAPI = {
                         "prevent lock",
                         "screensaver"
                     ],
-                    "desc_ja": "画面を点灯したままにするよう要求します。",
-                    "desc_ko": "화면을 켜 둔 상태로 유지하도록 요청합니다."
+                    "desc_ja": "画面の点灯を維持し、スクリーンセーバーを抑止するよう要求します。",
+                    "desc_ko": "화면 켜짐을 유지하고 화면 보호기를 막도록 요청합니다."
                 },
                 {
                     "name": "setMaxUpdateSteps",
@@ -7933,6 +7917,22 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "2 を指定した指数で累乗した値を返す。",
                     "desc_ko": "2를 지정한 지수로 거듭제곱한 값을 반환한다."
+                },
+                {
+                    "name": "getCommandLineArgs",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "table",
+                    "desc": "Returns the process command-line arguments as UTF-8 strings, including the executable.",
+                    "keywords": [
+                        "argv",
+                        "arguments",
+                        "launch",
+                        "flags",
+                        "command line"
+                    ],
+                    "desc_ja": "実行ファイル名を含むプロセスの起動引数を UTF-8 文字列で返します。",
+                    "desc_ko": "실행 파일 이름을 포함한 프로세스 시작 인수를 UTF-8 문자열로 반환합니다."
                 },
                 {
                     "name": "getHeight",
@@ -13133,6 +13133,26 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "FilesOpenedEventArgs",
+            "desc": "Carries a process-level file-open request with no window or position.",
+            "keywords": [],
+            "desc_ja": "ウィンドウや座標を持たない、プロセス単位のファイルを開く要求を保持します。",
+            "desc_ko": "창이나 좌표가 없는 프로세스 단위 파일 열기 요청을 담습니다.",
+            "related": [
+                "RuntimeEvents::filesOpened",
+                "FilesOpenedEventArgs::files"
+            ],
+            "properties": [
+                {
+                    "name": "filesOpenedEventArgs.files",
+                    "type": "table",
+                    "desc": "The files and directories requested by the OS, stored as filesystem paths.",
+                    "desc_ja": "OS が開くように要求したファイルとディレクトリを filesystem パスで保持します。",
+                    "desc_ko": "OS가 열도록 요청한 파일과 디렉터리를 filesystem 경로로 보관합니다."
+                }
+            ]
+        },
+        {
             "name": "FileWriter",
             "desc": "Writes files incrementally with a flush after each write.",
             "keywords": [
@@ -14075,6 +14095,18 @@ const TrussCAPI = {
                     "desc": "Draws a fullscreen quad with this shader.",
                     "desc_ja": "このシェーダーでフルスクリーンクアッドを描画する。",
                     "desc_ko": "이 셰이더로 전체 화면 쿼드를 그린다."
+                },
+                {
+                    "name": "fullscreenShader:drawVertices",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "vertexCount, instanceCount = 1"
+                        }
+                    ],
+                    "desc": "Draws non-indexed triangles without uploading vertices or indices.",
+                    "desc_ja": "頂点やインデックスを転送せず、非インデックス方式の三角形を描画します。",
+                    "desc_ko": "정점이나 인덱스를 업로드하지 않고 비인덱스 삼각형을 그립니다."
                 },
                 {
                     "name": "fullscreenShader:end",
@@ -24124,6 +24156,13 @@ const TrussCAPI = {
                     "desc_ko": "프로세스 종료가 요청되었을 때 호출되며, 종료를 취소할 수 있다."
                 },
                 {
+                    "name": "runtimeEvents.filesOpened",
+                    "type": "Event",
+                    "desc": "Delivers the files the OS asks this process to open, after the launch App's setup.",
+                    "desc_ja": "OS がこのプロセスに開くように要求したファイルを、起動 App の setup 完了後に通知します。",
+                    "desc_ko": "OS가 이 프로세스에 열도록 요청한 파일을 시작 App의 setup 완료 후 전달합니다."
+                },
+                {
                     "name": "runtimeEvents.hotReloadUnload",
                     "type": "Event",
                     "desc": "Called just before hot reload replaces the App.",
@@ -27638,8 +27677,8 @@ const TrussCAPI = {
                 "effect",
                 "fragment"
             ],
-            "desc_ja": "TrussC の描画に統合された GPU シェーダープログラムを提供する。",
-            "desc_ko": "TrussC 그리기와 통합된 GPU 셰이더 프로그램을 제공한다.",
+            "desc_ja": "TrussC の描画に統合された GPU シェーダープログラムを提供します。",
+            "desc_ko": "TrussC 그리기와 통합된 GPU 셰이더 프로그램을 제공합니다.",
             "related": [
                 "FullscreenShader",
                 "Shader::setUniform",
@@ -36999,8 +37038,8 @@ const TrussCAPI = {
                     "desc_ko": ""
                 }
             ],
-            "desc_ja": "GPU テクスチャのチャンネル構成と成分の精度を指定する。",
-            "desc_ko": "GPU 텍스처의 채널 구성과 성분 정밀도를 지정한다.",
+            "desc_ja": "GPU テクスチャのチャンネル構成と成分の精度を指定します。",
+            "desc_ko": "GPU 텍스처의 채널 구성과 성분 정밀도를 지정합니다.",
             "related": [
                 "channelCount",
                 "bytesPerPixel",
@@ -37046,10 +37085,17 @@ const TrussCAPI = {
                     "desc": "",
                     "desc_ja": "",
                     "desc_ko": ""
+                },
+                {
+                    "name": "Storage",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
-            "desc_ja": "GPU テクスチャの内容の更新方法を指定する。",
-            "desc_ko": "GPU 텍스처의 내용을 갱신하는 방식을 지정한다.",
+            "desc_ja": "GPU テクスチャの内容の更新方法を指定します。",
+            "desc_ko": "GPU 텍스처의 내용을 갱신하는 방식을 지정합니다.",
             "related": [
                 "Texture",
                 "TextureFormat"
