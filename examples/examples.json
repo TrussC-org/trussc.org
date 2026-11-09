@@ -297,6 +297,13 @@
           "webSupported": true
         },
         {
+          "name": "filesOpenedExample",
+          "width": 800,
+          "height": 600,
+          "webSupported": false,
+          "autoScreenshot": false
+        },
+        {
           "name": "imageLoaderExample",
           "width": 960,
           "height": 600,
@@ -661,6 +668,27 @@
           "name": "windowPositionExample",
           "width": 480,
           "height": 320,
+          "webSupported": false,
+          "autoScreenshot": false
+        },
+        {
+          "name": "sharedFboExample",
+          "width": 400,
+          "height": 300,
+          "webSupported": false,
+          "autoScreenshot": false
+        },
+        {
+          "name": "toolPaletteExample",
+          "width": 800,
+          "height": 600,
+          "webSupported": false,
+          "autoScreenshot": false
+        },
+        {
+          "name": "windowGalleryExample",
+          "width": 640,
+          "height": 480,
           "webSupported": false,
           "autoScreenshot": false
         }
