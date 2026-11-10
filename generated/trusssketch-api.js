@@ -1382,6 +1382,11 @@ const TrussSketchAPI = {
      "desc": "Requests an asynchronous screenshot save."
     },
     {
+     "name": "setDrawWhileHidden",
+     "snippet": "setDrawWhileHidden(${1:allow})",
+     "desc": "Sets drawing while hidden for all existing windows and the default for new ones."
+    },
+    {
      "name": "setResourceLoadConcurrency",
      "snippet": "setResourceLoadConcurrency(${1:count})",
      "desc": "Sets how many resource loads can prepare at once."
@@ -18155,6 +18160,12 @@ const TrussSketchAPI = {
      "snippet": "setClearColor(${1:c})",
      "return": "void",
      "desc": "Sets this window's background clear color."
+    },
+    {
+     "name": "setDrawWhileHidden",
+     "snippet": "setDrawWhileHidden(${1:allow})",
+     "return": "void",
+     "desc": "Keeps this window drawing while hidden when enabled."
     },
     {
      "name": "setFps",

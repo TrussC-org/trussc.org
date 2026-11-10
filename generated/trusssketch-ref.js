@@ -8081,6 +8081,24 @@ const TrussCAPI = {
                     "desc_ko": "스크린샷의 비동기 저장을 요청한다."
                 },
                 {
+                    "name": "setDrawWhileHidden",
+                    "params": "allow",
+                    "params_typed": "allow",
+                    "return_type": "(nothing)",
+                    "desc": "Sets drawing while hidden for all existing windows and the default for new ones.",
+                    "keywords": [
+                        "hidden",
+                        "occluded",
+                        "minimized",
+                        "Spout",
+                        "Syphon",
+                        "NDI",
+                        "recorder"
+                    ],
+                    "desc_ja": "非表示中に描画するかを全ウィンドウに設定し、新規ウィンドウの既定値にします。",
+                    "desc_ko": "숨겨진 동안 그릴지 모든 기존 윈도우에 설정하고 새 윈도우의 기본값으로 지정합니다."
+                },
+                {
                     "name": "setResourceLoadConcurrency",
                     "params": "count",
                     "params_typed": "count",
@@ -34909,6 +34927,18 @@ const TrussCAPI = {
                     "desc": "Sets this window's background clear color.",
                     "desc_ja": "このウィンドウの背景クリア色を設定する。",
                     "desc_ko": "이 윈도우의 배경 클리어 색을 설정한다."
+                },
+                {
+                    "name": "window:setDrawWhileHidden",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "allow"
+                        }
+                    ],
+                    "desc": "Keeps this window drawing while hidden when enabled.",
+                    "desc_ja": "有効にすると、非表示中もこのウィンドウの描画を続けます。",
+                    "desc_ko": "활성화하면 숨겨진 동안에도 이 윈도우의 그리기를 계속합니다."
                 },
                 {
                     "name": "window:setFps",
