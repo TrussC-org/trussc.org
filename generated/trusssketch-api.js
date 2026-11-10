@@ -749,7 +749,7 @@ const TrussSketchAPI = {
     {
      "name": "enableDepthTest",
      "snippet": "enableDepthTest()",
-     "desc": "Turns the depth test on for ordinary (blend-mode) drawing, so nearer shapes hide farther ones."
+     "desc": "Turns the depth test on for ordinary (blend-mode) drawing."
     },
     {
      "name": "fill",
@@ -2606,7 +2606,7 @@ const TrussSketchAPI = {
      "name": "audioIn",
      "snippet": "audioIn(${1:buf})",
      "return": "void",
-     "desc": "Meant for reading incoming audio on the audio thread, but currently never called."
+     "desc": "Called inline on the native capture thread for every microphone block."
     },
     {
      "name": "audioOut",
@@ -3291,6 +3291,66 @@ const TrussSketchAPI = {
      "snippet": "Null",
      "return": "AudioBackend",
      "desc": "= 1"
+    },
+    {
+     "name": "WASAPI",
+     "snippet": "WASAPI",
+     "return": "AudioBackend",
+     "desc": "= 2"
+    },
+    {
+     "name": "DirectSound",
+     "snippet": "DirectSound",
+     "return": "AudioBackend",
+     "desc": "= 3"
+    },
+    {
+     "name": "WinMM",
+     "snippet": "WinMM",
+     "return": "AudioBackend",
+     "desc": "= 4"
+    },
+    {
+     "name": "CoreAudio",
+     "snippet": "CoreAudio",
+     "return": "AudioBackend",
+     "desc": "= 5"
+    },
+    {
+     "name": "PulseAudio",
+     "snippet": "PulseAudio",
+     "return": "AudioBackend",
+     "desc": "= 6"
+    },
+    {
+     "name": "ALSA",
+     "snippet": "ALSA",
+     "return": "AudioBackend",
+     "desc": "= 7"
+    },
+    {
+     "name": "JACK",
+     "snippet": "JACK",
+     "return": "AudioBackend",
+     "desc": "= 8"
+    },
+    {
+     "name": "AAudio",
+     "snippet": "AAudio",
+     "return": "AudioBackend",
+     "desc": "= 9"
+    },
+    {
+     "name": "OpenSLES",
+     "snippet": "OpenSLES",
+     "return": "AudioBackend",
+     "desc": "= 10"
+    },
+    {
+     "name": "WebAudio",
+     "snippet": "WebAudio",
+     "return": "AudioBackend",
+     "desc": "= 11"
     }
    ]
   },
@@ -3332,17 +3392,37 @@ const TrussSketchAPI = {
   },
   {
    "name": "AudioDeviceInfo",
-   "desc": "Describes an available audio playback device.",
+   "desc": "Describes a device in an input or output list.",
    "properties": [
+    {
+     "name": "backend",
+     "type": "AudioBackend",
+     "desc": "Identifies the backend that enumerated this device."
+    },
+    {
+     "name": "channels",
+     "type": "int",
+     "desc": "Reports the largest native channel count in this direction."
+    },
     {
      "name": "isDefault",
      "type": "bool",
-     "desc": "Indicates whether a listed playback device is the system default."
+     "desc": "Indicates the OS default for the listed direction."
     },
     {
      "name": "name",
      "type": "std::string",
-     "desc": "Stores a playback device name."
+     "desc": "Stores the device display name."
+    },
+    {
+     "name": "sampleRates",
+     "type": "std::vector<int>",
+     "desc": "Lists distinct reported native sample rates in Hz."
+    },
+    {
+     "name": "uniqueId",
+     "type": "std::string",
+     "desc": "Stores the backend-native device identity."
     }
    ]
   },
@@ -3350,6 +3430,12 @@ const TrussSketchAPI = {
    "name": "AudioEngine",
    "desc": "Manages the output device and mixes sound playback using miniaudio.",
    "methods": [
+    {
+     "name": "listDevices",
+     "snippet": "listDevices()",
+     "return": "",
+     "desc": ""
+    },
     {
      "name": "init",
      "snippet": "init()",
@@ -3392,7 +3478,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "AudioInBuffer",
-   "desc": "Describes a read-only audio input buffer.",
+   "desc": "Describes a borrowed native microphone block.",
    "properties": [
     {
      "name": "channels",
@@ -3551,6 +3637,11 @@ const TrussSketchAPI = {
      "name": "channels",
      "type": "int",
      "desc": "Specifies the engine's output channel count."
+    },
+    {
+     "name": "device",
+     "type": "std::optional<AudioDeviceInfo>",
+     "desc": "Selects output by a device object, ahead of deviceName and backend."
     },
     {
      "name": "deviceName",
@@ -9021,6 +9112,18 @@ const TrussSketchAPI = {
     "snippet": "MicInput()"
    },
    "methods": [
+    {
+     "name": "listDevices",
+     "snippet": "listDevices()",
+     "return": "",
+     "desc": ""
+    },
+    {
+     "name": "setDevice",
+     "snippet": "setDevice(${1:device})",
+     "return": "void",
+     "desc": "Selects a capture device for subsequent startup by its ID."
+    },
     {
      "name": "start",
      "snippet": "start()",
@@ -17061,7 +17164,7 @@ const TrussSketchAPI = {
     {
      "name": "uniqueId",
      "type": "std::string",
-     "desc": "Stores the camera's platform-provided identifier."
+     "desc": "Stores the camera's stable platform identifier."
     }
    ],
    "methods": [
@@ -17266,6 +17369,12 @@ const TrussSketchAPI = {
      "desc": "Select the camera device for setup."
     },
     {
+     "name": "setDeviceUniqueID",
+     "snippet": "setDeviceUniqueID(${1:uniqueId})",
+     "return": "void",
+     "desc": "Selects a camera by its unique ID for the next setup."
+    },
+    {
      "name": "setFilter",
      "snippet": "setFilter(${1:filter})",
      "return": "void",
@@ -17352,6 +17461,11 @@ const TrussSketchAPI = {
      "name": "onError",
      "type": "Event<VideoErrorEventArgs>",
      "desc": "Notify listeners of a runtime playback failure."
+    },
+    {
+     "name": "onLoad",
+     "type": "Event<LoadResult>",
+     "desc": "Reports asynchronous video load completion."
     }
    ],
    "methods": [
@@ -17596,6 +17710,12 @@ const TrussSketchAPI = {
      "desc": "Reports whether the player is initialized."
     },
     {
+     "name": "isLoading",
+     "snippet": "isLoading()",
+     "return": "bool",
+     "desc": "Reports whether a video load is pending for the current App run."
+    },
+    {
      "name": "isLoop",
      "snippet": "isLoop()",
      "return": "bool",
@@ -17629,7 +17749,13 @@ const TrussSketchAPI = {
      "name": "load",
      "snippet": "load(${1:path})",
      "return": "LoadResult",
-     "desc": "Loads a video source for playback."
+     "desc": "Loads a video source synchronously, blocking the caller."
+    },
+    {
+     "name": "loadAsync",
+     "snippet": "loadAsync(${1:path})",
+     "return": "void",
+     "desc": "Starts a video load with completion on a later main-loop pass."
     },
     {
      "name": "nextFrame",

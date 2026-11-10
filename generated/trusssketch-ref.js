@@ -1462,7 +1462,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "(nothing)",
-                    "desc": "Turns the depth test on for ordinary (blend-mode) drawing, so nearer shapes hide farther ones.",
+                    "desc": "Turns the depth test on for ordinary (blend-mode) drawing.",
                     "keywords": [
                         "depth",
                         "z-buffer",
@@ -1471,8 +1471,8 @@ const TrussCAPI = {
                         "blend",
                         "restore"
                     ],
-                    "desc_ja": "通常の（ブレンドモードでの）描画でデプステストを有効にし、手前の図形が奥の図形を隠すようにする。",
-                    "desc_ko": "일반(블렌드 모드) 그리기에서 깊이 테스트를 켜서 가까운 도형이 먼 도형을 가리게 한다."
+                    "desc_ja": "通常の（ブレンドモードでの）描画でデプステストを有効にする。",
+                    "desc_ko": "일반(블렌드 모드) 그리기에서 깊이 테스트를 켠다."
                 },
                 {
                     "name": "fill",
@@ -8749,9 +8749,9 @@ const TrussCAPI = {
                             "params": "buf"
                         }
                     ],
-                    "desc": "Meant for reading incoming audio on the audio thread, but currently never called.",
-                    "desc_ja": "オーディオスレッドで入力の音を読むための関数だが、今は呼ばれない。",
-                    "desc_ko": "오디오 스레드에서 입력 소리를 읽기 위한 함수지만, 지금은 호출되지 않는다."
+                    "desc": "Called inline on the native capture thread for every microphone block.",
+                    "desc_ja": "ネイティブのキャプチャスレッドで、マイクの各ブロックを受け取ります。",
+                    "desc_ko": "네이티브 캡처 스레드에서 마이크의 각 블록을 인라인으로 받습니다."
                 },
                 {
                     "name": "app:audioOut",
@@ -10195,33 +10195,65 @@ const TrussCAPI = {
         },
         {
             "name": "AudioDeviceInfo",
-            "desc": "Describes an available audio playback device.",
+            "desc": "Describes a device in an input or output list.",
             "keywords": [
                 "soundcard",
+                "input",
                 "output",
+                "capture",
                 "playback"
             ],
-            "desc_ja": "利用可能なオーディオ再生デバイスを表す。",
-            "desc_ko": "사용 가능한 오디오 재생 장치를 나타낸다.",
+            "desc_ja": "入力または出力の一覧にあるデバイスを表します。",
+            "desc_ko": "입력 또는 출력 목록의 장치를 나타냅니다.",
             "related": [
                 "AudioEngine",
+                "MicInput",
                 "AudioSettings",
-                "AudioEngine::listDevices"
+                "AudioEngine::listDevices",
+                "MicInput::listDevices"
             ],
             "properties": [
                 {
+                    "name": "audioDeviceInfo.backend",
+                    "type": "AudioBackend",
+                    "desc": "Identifies the backend that enumerated this device.",
+                    "desc_ja": "このデバイスを列挙したバックエンドを示します。",
+                    "desc_ko": "이 장치를 열거한 백엔드를 나타냅니다."
+                },
+                {
+                    "name": "audioDeviceInfo.channels",
+                    "type": "number",
+                    "desc": "Reports the largest native channel count in this direction.",
+                    "desc_ja": "この方向で報告された最大ネイティブチャンネル数を示します。",
+                    "desc_ko": "이 방향에서 보고된 최대 네이티브 채널 수를 나타냅니다."
+                },
+                {
                     "name": "audioDeviceInfo.isDefault",
                     "type": "boolean",
-                    "desc": "Indicates whether a listed playback device is the system default.",
-                    "desc_ja": "一覧の再生デバイスがシステム既定かを表す。",
-                    "desc_ko": "목록의 재생 장치가 시스템 기본 장치인지 나타낸다."
+                    "desc": "Indicates the OS default for the listed direction.",
+                    "desc_ja": "一覧の方向でのOS既定デバイスかどうかを示します。",
+                    "desc_ko": "목록의 방향에서 OS 기본 장치인지 나타냅니다."
                 },
                 {
                     "name": "audioDeviceInfo.name",
                     "type": "string",
-                    "desc": "Stores a playback device name.",
-                    "desc_ja": "再生デバイスの名前を保持する。",
-                    "desc_ko": "재생 장치의 이름을 보관한다."
+                    "desc": "Stores the device display name.",
+                    "desc_ja": "デバイスの表示名を保持します。",
+                    "desc_ko": "장치의 표시 이름을 보관합니다."
+                },
+                {
+                    "name": "audioDeviceInfo.sampleRates",
+                    "type": "table",
+                    "desc": "Lists distinct reported native sample rates in Hz.",
+                    "desc_ja": "報告されたネイティブサンプルレートをHzで重複なく示します。",
+                    "desc_ko": "보고된 네이티브 샘플레이트를 Hz 단위로 중복 없이 나열합니다."
+                },
+                {
+                    "name": "audioDeviceInfo.uniqueId",
+                    "type": "string",
+                    "desc": "Stores the backend-native device identity.",
+                    "desc_ja": "バックエンド固有のデバイスIDを保持します。",
+                    "desc_ko": "백엔드 고유 장치 ID를 보관합니다."
                 }
             ]
         },
@@ -10245,6 +10277,16 @@ const TrussCAPI = {
                 "initAudio"
             ],
             "methods": [
+                {
+                    "name": "audioEngine:listDevices",
+                    "return": "",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
                 {
                     "name": "audioEngine:init",
                     "return": "boolean",
@@ -10313,15 +10355,15 @@ const TrussCAPI = {
         },
         {
             "name": "AudioInBuffer",
-            "desc": "Describes a read-only audio input buffer.",
+            "desc": "Describes a borrowed native microphone block.",
             "keywords": [
                 "microphone",
                 "mic",
                 "input",
                 "capture"
             ],
-            "desc_ja": "読み取り専用のオーディオ入力バッファを表す。",
-            "desc_ko": "읽기 전용 오디오 입력 버퍼를 나타낸다.",
+            "desc_ja": "コールバック中だけ借用するネイティブのマイクブロックです。",
+            "desc_ko": "콜백 중에만 빌려 사용하는 네이티브 마이크 블록입니다.",
             "related": [
                 "MicInput",
                 "AudioOutBuffer",
@@ -10332,29 +10374,29 @@ const TrussCAPI = {
                     "name": "audioInBuffer.channels",
                     "type": "number",
                     "desc": "Holds the input channel count.",
-                    "desc_ja": "入力チャンネル数を保持する。",
-                    "desc_ko": "입력 채널 수를 담는다."
+                    "desc_ja": "入力チャンネル数を保持します。",
+                    "desc_ko": "입력 채널 수를 담습니다."
                 },
                 {
                     "name": "audioInBuffer.frameCount",
                     "type": "number",
                     "desc": "Holds the number of input frames in the buffer.",
-                    "desc_ja": "バッファ内の入力フレーム数を保持する。",
-                    "desc_ko": "버퍼의 입력 프레임 수를 담는다."
+                    "desc_ja": "バッファ内の入力フレーム数を保持します。",
+                    "desc_ko": "버퍼의 입력 프레임 수를 담습니다."
                 },
                 {
                     "name": "audioInBuffer.framePosition",
                     "type": "number",
                     "desc": "Holds an input frame position.",
-                    "desc_ja": "入力のフレーム位置を保持する。",
-                    "desc_ko": "입력 프레임 위치를 담는다."
+                    "desc_ja": "入力のフレーム位置を保持します。",
+                    "desc_ko": "입력 프레임 위치를 담습니다."
                 },
                 {
                     "name": "audioInBuffer.sampleRate",
                     "type": "number",
                     "desc": "Holds the input sample rate.",
-                    "desc_ja": "入力サンプルレートを保持する。",
-                    "desc_ko": "입력 샘플 레이트를 담는다."
+                    "desc_ja": "入力サンプルレートを保持します。",
+                    "desc_ko": "입력 샘플 레이트를 담습니다."
                 }
             ]
         },
@@ -10576,6 +10618,13 @@ const TrussCAPI = {
                     "desc": "Specifies the engine's output channel count.",
                     "desc_ja": "エンジンの出力チャンネル数を指定する。",
                     "desc_ko": "엔진의 출력 채널 수를 지정한다."
+                },
+                {
+                    "name": "audioSettings.device",
+                    "type": "optional",
+                    "desc": "Selects output by a device object, ahead of deviceName and backend.",
+                    "desc_ja": "deviceNameとbackendより優先してデバイスオブジェクトで出力を選択します。",
+                    "desc_ko": "deviceName과 backend보다 우선하여 장치 객체로 출력을 선택합니다."
                 },
                 {
                     "name": "audioSettings.deviceName",
@@ -18140,6 +18189,26 @@ const TrussCAPI = {
                 ]
             },
             "methods": [
+                {
+                    "name": "micInput:listDevices",
+                    "return": "",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "micInput:setDevice",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "device"
+                    ],
+                    "desc": "Selects a capture device for subsequent startup by its ID.",
+                    "desc_ja": "以後の開始時に使う入力デバイスをIDで選択します。",
+                    "desc_ko": "이후 시작에 사용할 캡처 장치를 ID로 선택합니다."
+                },
                 {
                     "name": "micInput:start",
                     "return": "boolean",
@@ -32820,8 +32889,8 @@ const TrussCAPI = {
                 "camera",
                 "webcam"
             ],
-            "desc_ja": "VideoGrabber::listDevices() が返すカメラの情報を表す。",
-            "desc_ko": "VideoGrabber::listDevices()가 반환하는 카메라 정보를 나타낸다.",
+            "desc_ja": "VideoGrabber::listDevices() が返すカメラの情報を表します。",
+            "desc_ko": "VideoGrabber::listDevices()가 반환하는 카메라 정보를 나타냅니다.",
             "related": [
                 "VideoGrabber"
             ],
@@ -32843,9 +32912,9 @@ const TrussCAPI = {
                 {
                     "name": "videoDeviceInfo.uniqueId",
                     "type": "string",
-                    "desc": "Stores the camera's platform-provided identifier.",
-                    "desc_ja": "カメラのプラットフォーム別の識別子を保持する。",
-                    "desc_ko": "카메라의 플랫폼별 식별자를 저장한다."
+                    "desc": "Stores the camera's stable platform identifier.",
+                    "desc_ja": "カメラの安定したプラットフォーム識別子を保持します。",
+                    "desc_ko": "카메라의 안정적인 플랫폼 식별자를 저장합니다."
                 }
             ],
             "methods": [
@@ -33008,8 +33077,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Return the selected camera device ID.",
-                    "desc_ja": "選択したカメラのデバイス ID を返す。",
-                    "desc_ko": "선택한 카메라 디바이스 ID를 반환한다."
+                    "desc_ja": "選択したカメラのデバイス ID を返します。",
+                    "desc_ko": "선택한 카메라 디바이스 ID를 반환합니다."
                 },
                 {
                     "name": "videoGrabber:getDeviceName",
@@ -33220,8 +33289,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Return the available camera device list.",
-                    "desc_ja": "利用可能なカメラデバイスの一覧を返す。",
-                    "desc_ko": "사용 가능한 카메라 디바이스 목록을 반환한다."
+                    "desc_ja": "利用可能なカメラデバイスの一覧を返します。",
+                    "desc_ko": "사용 가능한 카메라 디바이스 목록을 반환합니다."
                 },
                 {
                     "name": "videoGrabber:save",
@@ -33244,8 +33313,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Set the requested capture frame rate.",
-                    "desc_ja": "要求するキャプチャフレームレートを設定する。",
-                    "desc_ko": "요청할 캡처 프레임 레이트를 설정한다."
+                    "desc_ja": "要求するキャプチャフレームレートを設定します。",
+                    "desc_ko": "요청할 캡처 프레임 레이트를 설정합니다."
                 },
                 {
                     "name": "videoGrabber:setDeviceID",
@@ -33256,8 +33325,20 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Select the camera device for setup.",
-                    "desc_ja": "セットアップで使うカメラデバイスを選択する。",
-                    "desc_ko": "설정에 사용할 카메라 디바이스를 선택한다."
+                    "desc_ja": "セットアップで使うカメラデバイスを選択します。",
+                    "desc_ko": "설정에 사용할 카메라 디바이스를 선택합니다."
+                },
+                {
+                    "name": "videoGrabber:setDeviceUniqueID",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "uniqueId"
+                        }
+                    ],
+                    "desc": "Selects a camera by its unique ID for the next setup.",
+                    "desc_ja": "次回のセットアップで使うカメラを一意識別子で選択します。",
+                    "desc_ko": "다음 설정에 사용할 카메라를 고유 식별자로 선택합니다."
                 },
                 {
                     "name": "videoGrabber:setFilter",
@@ -33368,8 +33449,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Open the camera at a requested size, or reopen the last one.",
-                    "desc_ja": "指定した寸法でカメラを開く、または最後のカメラを開き直す。",
-                    "desc_ko": "요청한 크기로 카메라를 열거나 마지막 카메라를 다시 연다."
+                    "desc_ja": "指定した寸法でカメラを開く、または最後のカメラを開き直します。",
+                    "desc_ko": "요청한 크기로 카메라를 열거나 마지막 카메라를 다시 엽니다."
                 },
                 {
                     "name": "videoGrabber:update",
@@ -33438,6 +33519,13 @@ const TrussCAPI = {
                     "desc": "Notify listeners of a runtime playback failure.",
                     "desc_ja": "再生中のエラーをリスナーに通知する。",
                     "desc_ko": "재생 중 발생한 오류를 리스너에 알린다."
+                },
+                {
+                    "name": "videoPlayer.onLoad",
+                    "type": "Event",
+                    "desc": "Reports asynchronous video load completion.",
+                    "desc_ja": "動画の非同期読み込みの完了を通知します。",
+                    "desc_ko": "비디오 비동기 로드의 완료를 알립니다."
                 }
             ],
             "methods": [
@@ -33450,8 +33538,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Closes the video and releases its resources.",
-                    "desc_ja": "動画を閉じてリソースを解放する。",
-                    "desc_ko": "비디오를 닫고 리소스를 해제한다."
+                    "desc_ja": "動画を閉じてリソースを解放します。",
+                    "desc_ko": "비디오를 닫고 리소스를 해제합니다."
                 },
                 {
                     "name": "videoPlayer:draw",
@@ -33934,6 +34022,18 @@ const TrussCAPI = {
                     "desc_ko": "플레이어가 초기화되었는지 반환한다."
                 },
                 {
+                    "name": "videoPlayer:isLoading",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Reports whether a video load is pending for the current App run.",
+                    "desc_ja": "現在の App 実行に属する動画読み込みが保留中かを返します。",
+                    "desc_ko": "현재 App 실행에 속한 비디오 로드가 대기 중인지 반환합니다."
+                },
+                {
                     "name": "videoPlayer:isLoop",
                     "signatures": [
                         {
@@ -34001,9 +34101,21 @@ const TrussCAPI = {
                             "params": "path"
                         }
                     ],
-                    "desc": "Loads a video source for playback.",
-                    "desc_ja": "再生する動画ソースを読み込む。",
-                    "desc_ko": "재생할 비디오 소스를 로드한다."
+                    "desc": "Loads a video source synchronously, blocking the caller.",
+                    "desc_ja": "呼び出し元をブロックして動画ソースを読み込みます。",
+                    "desc_ko": "호출 스레드를 차단하여 비디오 소스를 로드합니다."
+                },
+                {
+                    "name": "videoPlayer:loadAsync",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "path"
+                        }
+                    ],
+                    "desc": "Starts a video load with completion on a later main-loop pass.",
+                    "desc_ja": "後のメインループ処理で完了を通知する動画読み込みを開始します。",
+                    "desc_ko": "이후 메인 루프 처리에서 완료를 알리는 비디오 로드를 시작합니다."
                 },
                 {
                     "name": "videoPlayer:nextFrame",
@@ -34074,8 +34186,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Controls automatic still frames that bridge playback transitions.",
-                    "desc_ja": "再生の切り替わりを補う自動静止フレームを設定する。",
-                    "desc_ko": "재생 전환을 보완하는 자동 정지 프레임을 설정한다."
+                    "desc_ja": "再生の切り替わりを補う自動静止フレームを設定します。",
+                    "desc_ko": "재생 전환을 보완하는 자동 정지 프레임을 설정합니다."
                 },
                 {
                     "name": "videoPlayer:setCurrentTime",
@@ -35349,6 +35461,76 @@ const TrussCAPI = {
                 {
                     "name": "Null",
                     "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "WASAPI",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DirectSound",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "WinMM",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "CoreAudio",
+                    "value": 5,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "PulseAudio",
+                    "value": 6,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "ALSA",
+                    "value": 7,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "JACK",
+                    "value": 8,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "AAudio",
+                    "value": 9,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "OpenSLES",
+                    "value": 10,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "WebAudio",
+                    "value": 11,
                     "desc": "",
                     "desc_ja": "",
                     "desc_ko": ""
