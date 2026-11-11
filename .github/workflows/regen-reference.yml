@@ -79,15 +79,28 @@ jobs:
       # naming its internal CMake target here: the target was renamed once
       # (TrussC_shaders -> TrussC_shaders_gen, TrussC #823) and this step failed
       # every night from 2026-10-16 until it was noticed.
+      # TrussC moved its doc tooling from docs/reference/ to docs/scripts/
+      # (data stays in docs/reference/). Accept both layouts until every
+      # branch this workflow checks out has the new one.
+      - name: Locate the doc tooling
+        run: |
+          if [ -f TrussC/docs/scripts/regenerate.sh ]; then
+            echo "TC_TOOLS=docs/scripts" >> "$GITHUB_ENV"
+          else
+            echo "TC_TOOLS=docs/reference" >> "$GITHUB_ENV"
+          fi
+
       - name: Generate built-in shader headers
-        run: TrussC/docs/reference/regenerate.sh --shaders-only
+        run: TrussC/$TC_TOOLS/regenerate.sh --shaders-only
 
       - name: Install doc tooling deps
-        run: cd TrussC/docs && npm ci
+        run: |
+          if [ -f TrussC/docs/scripts/package.json ]; then cd TrussC/docs/scripts; else cd TrussC/docs; fi
+          npm ci
 
       - name: Build reference-data.json (clang AST + api-reference.toml)
         # /usr/bin/time -l reports the peak RSS: the runner has ~7 GB, the heap cap is 8 GB.
-        run: cd TrussC/docs && /usr/bin/time -l node --max-old-space-size=8192 reference/generate.js
+        run: cd TrussC && /usr/bin/time -l node --max-old-space-size=8192 $TC_TOOLS/generate.js
 
       - name: Emit site data
         run: |
@@ -98,7 +111,7 @@ jobs:
           node scripts/emit-web.js
           node scripts/emit-sketch-reference.js
           node scripts/emit-sketch-api.js
-          node reference/emit-of.js
+          node ../$TC_TOOLS/emit-of.js
 
       - name: Check symbol counts
         working-directory: trussc.org
