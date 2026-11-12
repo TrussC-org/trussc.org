@@ -776,8 +776,7 @@
           "width": 960,
           "height": 540,
           "webSupported": true,
-          "autoScreenshot": false,
-          "additionalFiles": ["shaders/lut.glsl"]
+          "autoScreenshot": false
         }
       ]
     },
