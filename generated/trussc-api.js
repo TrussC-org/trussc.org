@@ -12537,6 +12537,44 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "runProcess",
+                    "params": "args, workingDir",
+                    "params_typed": "const std::vector<std::string> & args, const fs::path & workingDir = fs::path()",
+                    "return_type": "ProcessResult",
+                    "desc": "Runs an external program and waits for it to finish.",
+                    "keywords": [
+                        "system",
+                        "shell",
+                        "exec",
+                        "command",
+                        "external program",
+                        "subprocess",
+                        "spawn",
+                        "ofsystem"
+                    ],
+                    "desc_ja": "外部プログラムを実行し、終了を待ちます。",
+                    "desc_ko": "외부 프로그램을 실행하고 끝날 때까지 기다립니다.",
+                    "related": [
+                        "ProcessResult",
+                        "Process"
+                    ],
+                    "details": "- Embedded NUL in the program, any argument or the working directory is rejected before spawning. The environment is inherited with no per-child override. Windows output bytes are not converted from the child's code page.\n- `runProcess(args, workingDir)` starts `args[0]` with the remaining arguments, blocks the calling thread until the program exits, and returns a `ProcessResult` with the exit code and the output. Like `ofSystem()`, but without a shell: arguments are passed as-is, with no quoting, globbing or redirection. `args[0]` is looked up on PATH.\n- An empty `workingDir` keeps the current directory.\n- stdout and stderr are both captured, as lines in arrival order, each ending in `\\n`. The program's stdin is the null device.\n- It waits for the program, not for children it leaves running.\n- The frame waits too when it is called from `update()` or `draw()`. For anything slow, use `Process`.\n- `started == false` means the program could not be started (not found, not executable, or a platform without processes: Web, iOS, Android); an error is logged.\n- Windows: `args[0]` is found on PATH only as an `.exe`. Run batch scripts through cmd: `{\"cmd\", \"/c\", \"npm\", \"run\", \"build\"}`. Embedded quotes are escaped for CommandLineToArgvW / the MSVC CRT; `cmd /c` uses its own parser and does not receive them verbatim. Console programs run without a console window.",
+                    "details_ja": "- プログラム名、引数、作業ディレクトリに埋め込み NUL があれば起動前に拒否します。環境変数は継承し、子プロセスごとの上書きはありません。Windows の出力バイト列は子プロセスのコードページから変換しません。\n- `runProcess(args, workingDir)` は `args[0]` を残りの引数とともに起動し、プログラムが終了するまで呼び出し元のスレッドをブロックして、終了コードと出力を持つ `ProcessResult` を返します。`ofSystem()` に相当しますが、シェルを経由しません。引数はそのまま渡され、クォート、グロブ、リダイレクトは行われません。`args[0]` は PATH から探します。\n- `workingDir` が空の場合は現在のディレクトリのままです。\n- stdout と stderr の両方を、届いた順に 1 行ずつ `\\n` 付きで取得します。プログラムの stdin は null デバイスです。\n- 待つのはプログラム本体だけで、そのプログラムが残した子プロセスは待ちません。\n- `update()` や `draw()` から呼ぶとフレームも待たされます。時間のかかる処理には `Process` を使ってください。\n- `started == false` はプログラムを起動できなかったことを表します（見つからない、実行できない、またはプロセスのないプラットフォーム: Web、iOS、Android）。エラーがログに出ます。\n- Windows: `args[0]` は PATH 上の `.exe` だけが見つかります。バッチスクリプトは cmd 経由で実行してください: `{\"cmd\", \"/c\", \"npm\", \"run\", \"build\"}`。引数内の引用符は CommandLineToArgvW / MSVC CRT 向けにエスケープされるため、独自のパーサーを使う `cmd /c` にはそのまま渡りません。コンソールプログラムはコンソールウィンドウを開かずに実行されます。",
+                    "details_ko": "- 프로그램 이름, 인자 또는 작업 디렉터리에 포함된 NUL은 시작 전에 거부합니다. 환경 변수는 상속하며 자식별 재정의는 없습니다. Windows 출력 바이트는 자식의 코드 페이지에서 변환하지 않습니다.\n- `runProcess(args, workingDir)`는 `args[0]`을 나머지 인자와 함께 실행하고, 프로그램이 끝날 때까지 호출한 스레드를 블록한 뒤 종료 코드와 출력을 담은 `ProcessResult`를 반환합니다. `ofSystem()`과 비슷하지만 셸을 거치지 않습니다. 인자는 그대로 전달되며 따옴표 처리, 글롭, 리다이렉트는 없습니다. `args[0]`은 PATH에서 찾습니다.\n- `workingDir`가 비어 있으면 현재 디렉터리를 그대로 씁니다.\n- stdout과 stderr를 모두 도착한 순서대로 한 줄씩 `\\n`을 붙여 받습니다. 프로그램의 stdin은 null 장치입니다.\n- 프로그램 자체만 기다리며, 프로그램이 남겨 둔 자식 프로세스는 기다리지 않습니다.\n- `update()`나 `draw()`에서 호출하면 프레임도 함께 멈춥니다. 오래 걸리는 작업에는 `Process`를 사용합니다.\n- `started == false`는 프로그램을 시작하지 못했다는 뜻입니다(찾을 수 없음, 실행할 수 없음, 또는 프로세스가 없는 플랫폼: Web, iOS, Android). 오류가 로그에 남습니다.\n- Windows: `args[0]`은 PATH에 있는 `.exe`만 찾습니다. 배치 스크립트는 cmd를 거쳐 실행합니다: `{\"cmd\", \"/c\", \"npm\", \"run\", \"build\"}`. 인자 안의 따옴표는 CommandLineToArgvW / MSVC CRT에 맞게 이스케이프되므로 자체 파서를 쓰는 `cmd /c`에는 그대로 전달되지 않습니다. 콘솔 프로그램은 콘솔 창을 열지 않고 실행됩니다.",
+                    "snippet": "ProcessResult r = runProcess({\"git\", \"rev-parse\", \"HEAD\"});\nif (r.started && r.exitCode == 0) logNotice() << r.output;\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
                     "name": "setConsoleLogLevel",
                     "params": "level",
                     "params_typed": "LogLevel level",
@@ -17302,6 +17340,99 @@ const TrussCAPI = {
             ],
             "name_ja": "グラフィックス - テクスチャとGPU",
             "name_ko": "그래픽 - 텍스처 & GPU"
+        },
+        {
+            "name": "Graphics - FBO",
+            "functions": [
+                {
+                    "name": "beginStencil",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Borrows all eight stencil bits on the current drawing target.",
+                    "keywords": [
+                        "stencil",
+                        "ownership",
+                        "mask"
+                    ],
+                    "desc_ja": "現在の描画先の stencil の全 8 ビットを借り受けます。",
+                    "desc_ko": "현재 그리기 타깃의 스텐실 전체 8비트를 빌립니다.",
+                    "related": [
+                        "clearStencil",
+                        "endStencil",
+                        "Fbo::readStencil"
+                    ],
+                    "details": "- Returns `true` on success without clearing stored bytes. Pair `endStencil()` only with a successful begin, while that target is current. Ownership is independent per target and may span Fbo end/begin calls and frames. Fbo allocation initializes stencil to zero; reallocation resets ownership.\n- Returns `false` with a warning when there is no stencil attachment, the target is already owned, or a framework stencil clip scope is active. There is no shared user mode.\n- While owned, values are plain bytes 0–255. Framework stencil clipping and draw-once are suspended; scissor still works. Slice 2a provides uniform clearing; geometry writing and value testing come later.\n- endStencil returns the stencil to 0; read it with readStencil before endStencil if you need the values. It restores saved semantic state, without restoring previous pixels. Fbo bytes persist across frames and color/depth clears; screen persistence is not guaranteed.",
+                    "details_ja": "- 保存済みの値をクリアせず、成功時に `true` を返します。成功した場合だけ、その描画先が現在の描画先である間に `endStencil()` を呼びます。所有権は描画先ごとに独立し、Fbo の end/begin やフレームをまたいで保持できます。Fbo の確保時に stencil をゼロで初期化し、再確保時に所有権をリセットします。\n- stencil 添付画像がない場合、すでに所有中の場合、フレームワークの stencil クリップスコープが有効な場合は、警告して `false` を返します。ユーザー用の共有モードはありません。\n- 所有中の値は 0〜255 の通常のバイト値です。フレームワークの stencil クリップと draw-once は停止しますが、scissor は使えます。2a では一様なクリアを提供し、形状の書き込みと値のテストは後の段階で追加します。\n- endStencil は stencil を 0 に戻します。値が必要な場合は、endStencil の前に readStencil で読み取ってください。保存した意味上の状態を復元しますが、以前のピクセル値は復元しません。Fbo の値はフレームや色・深度のクリアをまたいで保持しますが、画面の保持は保証しません。",
+                    "details_ko": "- 저장된 값을 지우지 않고 성공 시 `true`를 반환합니다. 성공한 경우에만 해당 타깃이 현재 타깃일 때 `endStencil()`을 호출합니다. 소유권은 타깃별로 독립적이며 Fbo의 end/begin 호출과 프레임을 넘어 유지할 수 있습니다. Fbo 할당 시 스텐실을 0으로 초기화하고 재할당 시 소유권을 초기화합니다.\n- 스텐실 첨부 이미지가 없거나 이미 소유 중이거나 프레임워크 스텐실 클립 스코프가 활성화된 경우 경고하고 `false`를 반환합니다. 사용자 공유 모드는 없습니다.\n- 소유 중인 값은 0~255의 일반 바이트 값입니다. 프레임워크 스텐실 클립과 draw-once는 중단되지만 scissor는 작동합니다. 2a는 균일한 지우기를 제공하며 도형 쓰기와 값 테스트는 이후 단계에서 추가합니다.\n- endStencil은 스텐실을 0으로 되돌립니다. 값이 필요하면 endStencil 전에 readStencil로 읽어야 합니다. 저장한 의미상 상태를 복원하지만 이전 픽셀 값은 복원하지 않습니다. Fbo 값은 프레임과 색상·깊이 지우기를 넘어 유지하지만 화면의 지속성은 보장하지 않습니다.",
+                    "snippet": "canvas.begin();\nif (beginStencil()) { clearStencil(5); endStencil(); }\ncanvas.end();\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "clearStencil",
+                    "params": "value",
+                    "params_typed": "uint8_t value = 0",
+                    "return_type": "void",
+                    "desc": "Replaces all stencil bytes with a plain value while owned.",
+                    "keywords": [
+                        "stencil",
+                        "clear",
+                        "byte"
+                    ],
+                    "desc_ja": "所有中の stencil の全バイトを通常の値で置き換えます。",
+                    "desc_ko": "소유 중인 스텐실의 모든 바이트를 일반 값으로 바꿉니다.",
+                    "related": [
+                        "beginStencil",
+                        "endStencil",
+                        "clear"
+                    ],
+                    "details": "- `clearStencil(value = 0)` requires successful `beginStencil()` on the current target. Outside ownership, every call warns and does nothing.\n- Replaces all eight bits over the full attachment with a value 0–255. Earlier drawing finishes first; later drawing follows the clear. Color and depth are preserved. Transforms, viewport and scissor do not restrict the clear, and drawing state is restored afterward.\n- See `beginStencil` for target lifetime and handback behavior.",
+                    "details_ja": "- `clearStencil(value = 0)` は現在の描画先での `beginStencil()` の成功を必要とします。所有していない場合は呼び出すたびに警告し、何も変更しません。\n- 添付画像全体の全 8 ビットを 0〜255 の値で置き換えます。それまでの描画を先に実行し、以降の描画はクリアの後に実行します。色と深度を保持します。変換、viewport、scissor はクリア範囲を制限せず、描画状態は呼び出し後に復元します。\n- 描画先の寿命と返却時の動作は `beginStencil` を参照してください。",
+                    "details_ko": "- `clearStencil(value = 0)`은 현재 타깃에서 `beginStencil()`이 성공해야 합니다. 소유권이 없으면 호출할 때마다 경고하고 아무것도 변경하지 않습니다.\n- 첨부 이미지 전체의 8비트를 0~255 값으로 바꿉니다. 이전 그리기를 먼저 실행하며 이후 그리기는 지우기 뒤에 실행합니다. 색상과 깊이를 보존합니다. 변환, viewport, scissor는 지우기 영역을 제한하지 않으며 호출 후 그리기 상태를 복원합니다.\n- 타깃 수명과 반환 동작은 `beginStencil`을 참조합니다.",
+                    "snippet": "canvas.begin();\nif (beginStencil()) { clearStencil(5); endStencil(); }\ncanvas.end();\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "endStencil",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Returns the whole stencil to 0, ends ownership and restores the saved framework state.",
+                    "keywords": [
+                        "stencil",
+                        "restore",
+                        "ownership"
+                    ],
+                    "desc_ja": "stencil 全体を 0 に戻して所有権を返却し、保存したフレームワークの状態を復元します。",
+                    "desc_ko": "스텐실 전체를 0으로 되돌리고 소유권을 반환하며 저장한 프레임워크 상태를 복원합니다.",
+                    "related": [
+                        "beginStencil",
+                        "clearStencil"
+                    ],
+                    "details": "- Call on the target with a successful `beginStencil()`. An unmatched call warns and does nothing.\n- endStencil returns the stencil to 0; read it with readStencil before endStencil if you need the values.\n- Submits earlier drawing, zeroes all eight stencil bits with a colorless draw using write mask `0xFF`, then restores saved semantic state. No pixel snapshot is restored.\n- See `beginStencil` for the complete ownership rules.",
+                    "details_ja": "- `beginStencil()` が成功した描画先で呼びます。対応する開始がない場合は警告し、何もしません。\n- endStencil は stencil を 0 に戻します。値が必要な場合は、endStencil の前に readStencil で読み取ってください。\n- それまでの描画を実行し、書き込みマスク `0xFF` で色を書かずに stencil の全 8 ビットをゼロにしてから、保存した意味上の状態を復元します。ピクセルのスナップショットは復元しません。\n- 所有権の全規則は `beginStencil` を参照してください。",
+                    "details_ko": "- `beginStencil()`이 성공한 타깃에서 호출합니다. 대응하는 시작이 없으면 경고하고 아무것도 하지 않습니다.\n- endStencil은 스텐실을 0으로 되돌립니다. 값이 필요하면 endStencil 전에 readStencil로 읽어야 합니다.\n- 이전 그리기를 실행하고 쓰기 마스크 `0xFF`로 색상을 쓰지 않으면서 스텐실 전체 8비트를 0으로 지운 뒤 저장한 의미상 상태를 복원합니다. 픽셀 스냅샷은 복원하지 않습니다.\n- 전체 소유권 규칙은 `beginStencil`을 참조합니다.",
+                    "snippet": "canvas.begin();\nif (beginStencil()) { clearStencil(5); endStencil(); }\ncanvas.end();\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                }
+            ],
+            "name_ja": "グラフィックス - FBO",
+            "name_ko": "그래픽 - FBO"
         },
         {
             "name": "Graphics - Shader",
@@ -29011,6 +29142,30 @@ const TrussCAPI = {
                     "snippet": "// tcApp.h: Fbo fbo;\nvoid tcApp::setup() { fbo.allocate(256, 256); }\nvoid tcApp::draw() {\n    fbo.begin(0.2f, 0.4f, 0.6f);\n    fbo.end();\n    setColor(1.0f, 1.0f, 1.0f, 1.0f);\n    fbo.draw(20, 20, 128, 128);\n}\n"
                 },
                 {
+                    "name": "drawStencil",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "float x, float y"
+                        }
+                    ],
+                    "desc": "Draws the framebuffer's stencil bytes as an opaque gray image.",
+                    "details": "- `drawStencil(x, y)` reconstructs all eight stencil bits into a cached R8 Fbo using the internal eight-draw path, then draws at attachment size with nearest sampling. Each byte is displayed as gray `value / 255`; no CPU readback is needed. It preserves the source color and stencil.\n- Uses the current target's coordinates, transformations, depth test and scissor. The preview is opaque and ignores the current tint and blend mode; the tint, blend mode and pipeline are restored afterward. Like other image draws, it leaves texturing off, so call `bind()` again on a texture you were drawing with. Repeated calls refresh the capture and reuse the cache.\n- Only allocated, ended, owned single-sample Fbos are supported. Unallocated, active or MSAA sources warn and draw nothing. There is no main-target/free-function form in this slice.\n- The snippet uses the internal round-trip test fixture to write an ended R8 pattern into stencil; `writeGray` is not a public application API. Use `beginStencil` and `clearStencil` for uniform public byte clearing. Geometry writing and main-target capture are later slices.",
+                    "details_ja": "- `drawStencil(x, y)` は内部の 8 回描画の処理で stencil の全 8 ビットをキャッシュした R8 Fbo に復元し、添付画像と同じサイズで最近傍サンプリングして描画します。各バイトを `value / 255` のグレーで表示し、CPU への読み出しは行いません。元の色と stencil は保持します。\n- 現在の描画先の座標、変換、深度テスト、scissor を使います。プレビューは不透明で、現在の色とブレンドモードを使いません。色、ブレンドモード、パイプラインは呼び出し後に復元します。ほかの画像の描画と同じく、テクスチャは無効のままになるので、使っていたテクスチャは `bind()` し直してください。繰り返し呼び出すとキャッシュを再利用して内容を更新します。\n- 確保済みで `end()` 後の、所有するシングルサンプル Fbo のみ対応します。未確保、アクティブ、MSAA の場合は警告して描画しません。この段階ではメイン描画先や自由関数の形式はありません。\n- 使用例は内部の往復テスト用処理で、描画済みの R8 パターンを stencil に書き込みます。`writeGray` は公開アプリ API ではありません。一様なバイト値のクリアには公開 API の `beginStencil` と `clearStencil` を使います。形状の書き込みとメイン描画先の取得は後の段階で扱います。",
+                    "details_ko": "- `drawStencil(x, y)`는 내부의 8회 그리기 경로로 스텐실의 전체 8비트를 캐시된 R8 Fbo에 복원하고 첨부 이미지 크기로 최근접 샘플링하여 그립니다. 각 바이트를 `value / 255` 회색으로 표시하며 CPU로 읽지 않습니다. 원본 색상과 스텐실을 보존합니다.\n- 현재 타깃의 좌표, 변환, 깊이 테스트와 scissor를 사용합니다. 미리보기는 불투명하며 현재 색상과 블렌드 모드를 사용하지 않습니다. 색상, 블렌드 모드, 파이프라인은 호출 후 복원합니다. 다른 이미지 그리기와 마찬가지로 텍스처는 비활성 상태로 남으므로, 사용하던 텍스처는 `bind()`를 다시 호출하세요. 반복 호출하면 캐시를 재사용하고 캡처를 갱신합니다.\n- 할당되었고 `end()`가 끝난 소유 단일 샘플 Fbo만 지원합니다. 미할당, 활성 또는 MSAA 소스는 경고하고 그리지 않습니다. 이 단계에는 메인 타깃이나 자유 함수 형식이 없습니다.\n- 예제는 내부 왕복 테스트용 처리로 렌더링이 끝난 R8 패턴을 스텐실에 기록합니다. `writeGray`는 공개 애플리케이션 API가 아닙니다. 균일한 바이트 값 지우기에는 공개 API인 `beginStencil`과 `clearStencil`을 사용합니다. 도형 쓰기와 메인 타깃 캡처는 이후 단계에서 다룹니다.",
+                    "snippet": "// gray: ended R8 pattern; fbo: equally sized, ended, single-sample Fbo\ninternal::FboStencilAccess::writeGray(gray, fbo); // internal test fixture\nfbo.drawStencil(0, 0);\nPixels values;\nif (fbo.readStencil(values)) values.save(\"stencil.png\");\n",
+                    "keywords": [
+                        "stencil",
+                        "debug",
+                        "gray",
+                        "preview"
+                    ],
+                    "related": [
+                        "Fbo::readStencil",
+                        "Pixels::save"
+                    ]
+                },
+                {
                     "name": "end",
                     "signatures": [
                         {
@@ -29347,6 +29502,39 @@ const TrussCAPI = {
                         "ios",
                         "windows",
                         "linux",
+                        "android",
+                        "web"
+                    ]
+                },
+                {
+                    "name": "readStencil",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": "Pixels & pixels"
+                        }
+                    ],
+                    "desc": "Reads the framebuffer's stencil bytes into one-channel U8 Pixels.",
+                    "details": "- `bool readStencil(Pixels& pixels) const` uses the same cached R8 reconstruction as `drawStencil`, then the existing Fbo color readback. On success it replaces `pixels` with top-left, one-channel U8 bytes and returns `true`. On failure it returns `false` and leaves `pixels` unchanged. The source color and stencil are preserved.\n- Call after `end()` on all active Fbos. Unallocated, active and MSAA sources are refused with a warning. Main-target capture is unavailable. GPU readback synchronizes work and is intended for debugging.\n- Save through `pixels.save(\"stencil.png\")`; the existing PNG writer stores the channel bytes without gamma remapping. WebGL2 uses existing GL readback; WebGPU synchronous readback is unsupported and returns `false` (a later slice adds asynchronous readback).\n- The snippet's `writeGray` is an internal test fixture, not a public stencil-writing API; `gray` contains an ended R8 pattern. Use `beginStencil` and `clearStencil` for uniform clearing while owned.",
+                    "details_ja": "- `bool readStencil(Pixels& pixels) const` は `drawStencil` と同じキャッシュした R8 への復元処理と、既存の Fbo カラー読み出しを使います。成功すると `pixels` を左上原点の 1 チャンネル U8 バイト列に置き換えて `true` を返します。失敗すると `false` を返し、`pixels` は変更しません。元の色と stencil は保持します。\n- すべてのアクティブな Fbo の `end()` 後に呼んでください。未確保、アクティブ、MSAA の場合は警告して拒否します。メイン描画先の取得には対応しません。GPU の読み出しは処理を同期するため、デバッグ用です。\n- `pixels.save(\"stencil.png\")` で保存します。既存の PNG ライターはガンマ変換をせずにチャンネルのバイトを保存します。WebGL2 は既存の GL 読み出しを使います。WebGPU の同期読み出しは非対応で `false` を返します。非同期読み出しは後の段階で扱います。\n- 使用例の `writeGray` は内部テスト用で、公開の stencil 書き込み API ではありません。`gray` には描画済みの R8 パターンを用意します。所有中の一様なクリアには `beginStencil` と `clearStencil` を使います。",
+                    "details_ko": "- `bool readStencil(Pixels& pixels) const`는 `drawStencil`과 같은 캐시된 R8 복원 경로와 기존 Fbo 색상 읽기를 사용합니다. 성공하면 `pixels`를 왼쪽 위 원점의 1채널 U8 바이트로 교체하고 `true`를 반환합니다. 실패하면 `false`를 반환하며 `pixels`를 변경하지 않습니다. 원본 색상과 스텐실을 보존합니다.\n- 모든 활성 Fbo에서 `end()`를 호출한 뒤 사용합니다. 미할당, 활성 또는 MSAA 소스는 경고하고 거부합니다. 메인 타깃 캡처는 지원하지 않습니다. GPU 읽기는 작업을 동기화하므로 디버깅용입니다.\n- `pixels.save(\"stencil.png\")`로 저장합니다. 기존 PNG 작성기는 감마 변환 없이 채널 바이트를 저장합니다. WebGL2는 기존 GL 읽기를 사용합니다. WebGPU의 동기 읽기는 지원하지 않으며 `false`를 반환합니다. 비동기 읽기는 이후 단계에서 다룹니다.\n- 예제의 `writeGray`는 내부 테스트용이며 공개 스텐실 쓰기 API가 아닙니다. `gray`에는 렌더링이 끝난 R8 패턴을 준비합니다. 소유 중인 균일한 지우기에는 `beginStencil`과 `clearStencil`을 사용합니다.",
+                    "snippet": "// gray: ended R8 pattern; fbo: equally sized, ended, single-sample Fbo\ninternal::FboStencilAccess::writeGray(gray, fbo); // internal test fixture\nfbo.drawStencil(0, 0);\nPixels values;\nif (fbo.readStencil(values)) values.save(\"stencil.png\");\n",
+                    "keywords": [
+                        "stencil",
+                        "debug",
+                        "readback",
+                        "png"
+                    ],
+                    "related": [
+                        "Fbo::drawStencil",
+                        "Fbo::readPixels",
+                        "Pixels::save"
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
                         "android",
                         "web"
                     ]
@@ -30249,6 +30437,31 @@ const TrussCAPI = {
                         "metrics",
                         "baseline",
                         "depth"
+                    ]
+                },
+                {
+                    "name": "getGlyphInkBox",
+                    "signatures": [
+                        {
+                            "ret": "Rect",
+                            "params": "uint32_t codepoint"
+                        }
+                    ],
+                    "desc": "Returns a glyph's outline ink rectangle in logical pixels relative to the horizontal baseline.",
+                    "details": "Excludes advance, line metrics, atlas padding and oversampling/filter margins. Y points down; ascenders have negative Y. Rect::getCenter gives the box pivot and Vec2(box.width / 2, box.height / 2) gives half-size. An unloaded font or empty outline returns an empty Rect; missing glyphs follow Font's .notdef fallback. This metric does not rasterize or upload glyphs.",
+                    "details_ja": "送り幅、行メトリクス、アトラスの余白、オーバーサンプリングやフィルターの余白を含みません。Y は下向きで、ベースラインより上の部分は負の Y になります。Rect::getCenter で矩形の基準点、Vec2(box.width / 2, box.height / 2) で半サイズを取得できます。未読み込みや空の輪郭では空の Rect を返し、未収録文字は Font の .notdef に置き換えます。この計測はグリフのラスタライズや転送を行いません。",
+                    "details_ko": "전진 폭, 행 메트릭, 아틀라스 여백 및 오버샘플링/필터 여백을 제외합니다. Y는 아래쪽이며 기준선 위 부분은 음수 Y입니다. Rect::getCenter는 사각형 기준점을, Vec2(box.width / 2, box.height / 2)는 절반 크기를 제공합니다. 로드되지 않은 폰트나 빈 윤곽은 빈 Rect를 반환하며 없는 글리프는 Font의 .notdef로 대체합니다. 이 측정은 글리프를 래스터화하거나 업로드하지 않습니다.",
+                    "keywords": [
+                        "ink",
+                        "glyph",
+                        "pivot",
+                        "bounds",
+                        "half-size"
+                    ],
+                    "related": [
+                        "GlyphBatch::setAlignToInk",
+                        "Font::getGlyphPath",
+                        "Rect"
                     ]
                 },
                 {
@@ -31507,6 +31720,167 @@ const TrussCAPI = {
                     "details": "- Accepts `(const ShaderVertex* data, int count, PrimitiveType type)`. Deferred replay draws `Triangles`, `TriangleStrip`, and `Quads` using generated triangle indices; `Lines` and `LineStrip` are ignored, and `Points` produces no draw.\n- Copies vertices, stored uniform bytes, and binding handles at submission time, and selects a pipeline for the current target. Later setter calls do not alter that submission; no vertex transformation is applied by this function.\n- Calls `setupBindings()` while capturing bindings. The captured draw can execute without accessing the Shader object; resource lifetime is described in `Shader::clear`, and texture ownership in `Shader::setTexture`.\n- Records into the current target for execution during its drawing flush, including FBO flushes and window presentation. Stream capacity behavior is described in `Shader::createVertexBuffer`.\n- Does nothing for zero vertices or an unloaded shader. Invalid vertex data, unrepresentable sizes, or allocation failure logs an error and skips that draw. Earlier recorded draws remain available.\n- If no compatible pipeline is available, skips the submission.",
                     "details_ja": "- `(const ShaderVertex* data, int count, PrimitiveType type)` を受け取ります。遅延実行では三角形のインデックスを生成し、`Triangles`、`TriangleStrip`、`Quads` を描きます。`Lines` と `LineStrip` は無視し、`Points` は描画されません。\n- 送信時に頂点、保存済みユニフォームのバイト列、バインディングのハンドルをコピーし、現在のターゲットに合うパイプラインを選びます。後の設定変更はその送信内容に影響しません。この関数自体は頂点変換を行いません。\n- バインディングの記録時に `setupBindings()` を呼びます。記録後の描画は Shader オブジェクトにアクセスせず実行できます。リソースの寿命は `Shader::clear`、テクスチャの所有権は `Shader::setTexture` を参照してください。\n- 現在のターゲットに記録し、FBO のフラッシュやウィンドウの表示など、ターゲットの描画実行時に処理します。ストリーム容量の扱いは `Shader::createVertexBuffer` を参照してください。\n- 頂点数がゼロの場合や未ロードの場合は何もしません。不正な頂点データ、表現できないサイズ、メモリ確保の失敗では、エラーを記録してその描画を省略します。それまでの描画記録は保持します。\n- 適合するパイプラインが得られない場合は、その送信を省略します。",
                     "details_ko": "- `(const ShaderVertex* data, int count, PrimitiveType type)`를 받습니다. 지연 실행에서는 삼각형 인덱스를 생성하여 `Triangles`, `TriangleStrip`, `Quads`를 그립니다. `Lines`와 `LineStrip`은 무시하며 `Points`는 그려지지 않습니다.\n- 제출 시점에 정점, 저장된 유니폼 바이트 및 바인딩 핸들을 복사하고 현재 타깃에 맞는 파이프라인을 선택합니다. 이후의 설정 변경은 해당 제출 내용에 영향을 주지 않습니다. 이 함수 자체는 정점을 변환하지 않습니다.\n- 바인딩을 기록할 때 `setupBindings()`를 호출합니다. 기록한 그리기는 Shader 객체에 접근하지 않고 실행할 수 있습니다. 리소스 수명은 `Shader::clear`, 텍스처 소유권은 `Shader::setTexture`를 참조하세요.\n- 현재 타깃에 기록하고 FBO 플러시나 창 표시를 포함한 타깃의 그리기 실행 시 처리합니다. 스트림 용량 동작은 `Shader::createVertexBuffer`를 참조하세요.\n- 정점 수가 0이거나 로드되지 않았으면 아무 작업도 하지 않습니다. 잘못된 정점 데이터, 표현할 수 없는 크기 또는 메모리 할당 실패 시 오류를 기록하고 해당 그리기를 생략합니다. 앞서 기록한 그리기는 유지합니다.\n- 호환되는 파이프라인을 얻지 못하면 해당 제출을 생략합니다."
+                }
+            ]
+        },
+        {
+            "name": "GlyphBatch",
+            "desc": "Retains transformed glyph quads for repeated drawing in add order, batching consecutive glyphs on the same atlas page.",
+            "keywords": [
+                "glyph",
+                "batch",
+                "retained",
+                "atlas",
+                "text"
+            ],
+            "desc_ja": "変換済みのグリフを保持し、同じアトラスページが連続する区間をまとめて追加順に繰り返し描画します。",
+            "desc_ko": "변환된 글리프를 유지하고 같은 아틀라스 페이지의 연속 구간을 묶어 추가 순서대로 반복 표시합니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "Font",
+                "Font::getGlyphInkBox",
+                "GlyphBatch::add",
+                "GlyphBatch::draw"
+            ],
+            "details": "Call setFont with a loaded Font. Independent glyphs capture the current model matrix at add time; the explicit Mat4 replaces it. Draw under the intended camera. draw applies the active view/projection once and does not apply the current model again, does not clear, and uploads vertices only after adds change the geometry, reusing grow-only buffers and a shared static quad index buffer. draw(transform) applies transform × recorded positions through a uniform. clear discards geometry; setFont also clears and copies the Font settings, sharing its current atlas. Later source setOversampling/setMipmaps calls replace the source atlas and do not reach this copy; configure first or call setFont again and rebuild.\nGlyphs draw in add order. Each consecutive run sharing an atlas page uses one draw; a single-page batch uses one draw, while A/B/A uses three. Scissor is captured at draw time. Blend is the mode current at draw(), not at add(). Depth, target format and MSAA also come from the draw target. Colors retain unclamped float RGB and normal Color alpha. Output is straight alpha like drawString; Screen/Multiply use the framework's corresponding premultiplied blend equations. Atlas sampling is trilinear with mips when the Font permits them (mip 0 at bilinear-safe rates of at most two texels per pixel, like Font); current page views and dimensions are resolved at draw time, so atlas growth preserves retained quads. Rebuild the batch after Font::clearAtlas.\nWith custom blends (#1436), BlendDesc::addKeepAlpha() uses SRC_ALPHA/ONE for RGB and ZERO/ONE for alpha: light-only addition keeping destination alpha, equivalent to premultiplied ONE/ONE on coverage. That descriptor is not yet part of this branch.",
+            "details_ja": "読み込み済みの Font を setFont に渡します。単独グリフは add 時のモデル行列を記録し、明示した Mat4 はこの行列を置き換えます。使いたいカメラの下で draw してください。draw は現在の view/projection を一度適用し、現在のモデル行列は再適用せず、内容を消去しません。頂点は add で内容が変わったときだけ転送し、拡張時だけ作成するバッファと共有の静的インデックスを再利用します。draw(transform) は uniform で transform × 記録済み座標を適用します。clear は形状を破棄します。setFont も形状を消去し、設定をコピーして現在のアトラスを共有します。元 Font の setOversampling/setMipmaps はアトラスを差し替えるため追従しません。先に設定するか、setFont を再度呼んで再構築してください。\nグリフは追加順に描画します。同じアトラスページが連続する区間ごとに 1 回描画し、単一ページのバッチは 1 回、A/B/A は 3 回になります。scissor は draw 時に記録します。ブレンドは add() 時ではなく draw() 時のモードを使います。深度、描画先の形式、MSAA も draw 時に反映します。RGB は範囲外の float 値を保持し、Color の alpha も有効です。出力は drawString と同じ straight alpha です。Screen・Multiply ではフレームワークの対応する乗算済みブレンド式を使います。Font で有効な場合はミップ付きトライリニア補間を使います。Font と同様に、1 ピクセルあたり 2 テクセル以下の縮小では mip 0 を使います。ページ画像とサイズを描画時に解決するため、アトラス拡張後も座標を保ちます。Font::clearAtlas 後はバッチを作り直してください。\nカスタムブレンド（#1436）の BlendDesc::addKeepAlpha() は RGB に SRC_ALPHA/ONE、alpha に ZERO/ONE を使います。描画先 alpha を保った発光用加算で、カバレッジに対する乗算済み ONE/ONE と等価です。このブランチにはまだこの記述子は含まれません。",
+            "details_ko": "로드된 Font를 setFont에 전달합니다. 독립 글리프는 add 시점의 모델 행렬을 기록하며 명시적 Mat4는 이를 대체합니다. 사용할 카메라 아래에서 draw를 호출합니다. draw는 현재 view/projection을 한 번 적용하고 현재 모델을 다시 적용하거나 내용을 지우지 않으며, add로 형상이 바뀐 경우에만 정점을 업로드하며 확장할 때만 생성하는 버퍼와 공유 정적 인덱스를 재사용합니다. draw(transform)은 uniform으로 transform × 기록된 좌표를 적용합니다. clear는 형상을 버립니다. setFont도 형상을 지우고 설정을 복사하며 현재 아틀라스를 공유합니다. 원본 Font의 setOversampling/setMipmaps는 아틀라스를 교체하므로 반영되지 않습니다. 먼저 설정하거나 setFont를 다시 호출하고 재구성하세요.\n글리프는 추가 순서대로 그립니다. 같은 아틀라스 페이지의 연속 구간마다 한 번 그리므로 단일 페이지 배치는 한 번, A/B/A는 세 번 그립니다. scissor는 draw 시점에 기록합니다. 블렌드는 add()가 아닌 draw() 시점의 모드를 사용합니다. 깊이, 대상 형식 및 MSAA도 draw 시점에 적용합니다. RGB는 범위 밖 float 값을 유지하며 Color alpha도 적용합니다. 출력은 drawString과 같은 straight alpha입니다. Screen/Multiply는 프레임워크의 해당 사전 곱셈 블렌드 식을 사용합니다. Font가 허용하면 밉을 사용하는 삼선형 샘플링을 적용합니다. Font처럼 픽셀당 2텍셀 이하인 경우에는 mip 0을 사용합니다. 현재 페이지 이미지와 크기를 그릴 때 확인하므로 아틀라스가 커져도 유지된 좌표가 맞습니다. Font::clearAtlas 후에는 배치를 다시 만듭니다.\n사용자 지정 블렌드(#1436)의 BlendDesc::addKeepAlpha()는 RGB에 SRC_ALPHA/ONE, alpha에 ZERO/ONE을 사용합니다. 대상 alpha를 유지하는 발광용 가산이며 커버리지에 대한 사전 곱셈 ONE/ONE과 같습니다. 이 브랜치에는 아직 해당 서술자가 포함되지 않습니다.",
+            "snippet": "GlyphBatch batch;\nbatch.setFont(font);\nbatch.add(U'A', Color(2.0f, 1.0f, 0.5f));\nbatch.draw();\n",
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "GlyphBatch batch;\nbatch.setFont(font);\nbatch.add(U'A', Color(2.0f, 1.0f, 0.5f));\nbatch.draw();\n"
+            },
+            "methods": [
+                {
+                    "name": "add",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "uint32_t codepoint, const Color & color"
+                        },
+                        {
+                            "ret": "void",
+                            "params": "uint32_t codepoint, const Mat4 & matrix, const Color & color"
+                        },
+                        {
+                            "ret": "void",
+                            "params": "const std::string & text, const Color & color"
+                        }
+                    ],
+                    "desc": "Appends colored glyph quads at the current matrix or an explicit model matrix.",
+                    "details": "The codepoint overload adds one independent glyph without cursor advance or vertical substitution. The Mat4 overload replaces the current model matrix; the active camera view/projection is applied once at draw time. The UTF-8 string overload uses the retained Font's drawString layout, including wrapping, vertical forms, and TCY. Color floats are copied without clamping. Additions mark GPU geometry dirty; existing recorded draws retain their previous buffers. Empty ink emits no quad. Call on the main thread.",
+                    "details_ja": "コードポイント版は、カーソル送りや縦書き字形への置換を行わず、単独グリフを追加します。Mat4 版は現在のモデル行列を置き換えます。現在のカメラの view/projection は draw 時に一度適用します。UTF-8 文字列版は、保持した Font の drawString と同じ配置を使い、折り返し、縦書き字形、縦中横を反映します。色の float 値は制限せずにコピーします。追加後は GPU 形状を更新対象にしますが、記録済みの描画は以前のバッファを保持します。インクが空の場合は四角形を追加しません。メインスレッドで呼び出してください。",
+                    "details_ko": "코드 포인트 버전은 커서 전진이나 세로쓰기 글리프 대체 없이 독립 글리프를 추가합니다. Mat4 버전은 현재 모델 행렬을 대체합니다. 현재 카메라의 view/projection은 draw 시점에 한 번 적용합니다. UTF-8 문자열 버전은 유지한 Font의 drawString 배치를 사용하며 자동 줄바꿈, 세로쓰기 글리프 및 다테추요코를 반영합니다. 색상의 float 값은 제한 없이 복사합니다. 추가하면 GPU 형상을 갱신 대상으로 표시하지만 기록된 그리기는 이전 버퍼를 유지합니다. 잉크가 비어 있으면 사각형을 추가하지 않습니다. 메인 스레드에서 호출합니다.",
+                    "related": [
+                        "GlyphBatch::draw",
+                        "Font::forEachGlyph"
+                    ]
+                },
+                {
+                    "name": "clear",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Discards retained geometry while keeping the font and batch settings.",
+                    "details": "Keeps CPU/GPU capacity for rebuilding each frame. Already submitted draws keep valid GPU resources until replay. draw does not clear automatically.",
+                    "details_ja": "送信済みの描画は再生まで有効な GPU リソースを保持します。draw は自動で消去しません。",
+                    "details_ko": "제출된 그리기는 재생할 때까지 유효한 GPU 리소스를 유지합니다. draw는 자동으로 지우지 않습니다.",
+                    "related": [
+                        "GlyphBatch::draw"
+                    ]
+                },
+                {
+                    "name": "draw",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": ""
+                        },
+                        {
+                            "ret": "void",
+                            "params": "const Mat4 & transform"
+                        }
+                    ],
+                    "desc": "Draws retained glyphs using the current target and blend; an optional transform applies through a uniform.",
+                    "details": "Uses the blend mode current at draw(), not at add(). draw() uses identity; draw(transform) applies transform × recorded model positions, then the active view/projection. Neither overload reapplies the current model or clears the batch. Draw under the intended camera; camera changes do not re-upload geometry. Unchanged batches reuse their vertex/index buffers across frames. See GlyphBatch for straight alpha, page ordering and mip sampling.",
+                    "details_ja": "draw() は単位変換を使います。draw(transform) は記録済みのモデル座標に transform を左から適用し、続いて現在の view/projection を適用します。どちらも現在のモデルを再適用せず、バッチを消去しません。使いたいカメラの下で描画してください。カメラ変更時も形状を再転送しません。内容が変わらなければ、フレームをまたいで頂点・インデックスバッファを再利用します。straight alpha、ページ順、ミップサンプリングは GlyphBatch を参照してください。",
+                    "details_ko": "draw()는 단위 변환을 사용합니다. draw(transform)은 기록된 모델 좌표에 transform을 왼쪽에서 적용한 뒤 현재 view/projection을 적용합니다. 두 버전 모두 현재 모델을 다시 적용하거나 배치를 지우지 않습니다. 사용할 카메라 아래에서 그리며 카메라 변경은 형상 재업로드를 일으키지 않습니다. 내용이 바뀌지 않으면 프레임 간 정점/인덱스 버퍼를 재사용합니다. straight alpha, 페이지 순서 및 밉 샘플링은 GlyphBatch를 참조합니다.",
+                    "related": [
+                        "GlyphBatch",
+                        "GlyphBatch::clear"
+                    ]
+                },
+                {
+                    "name": "setAlign",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "Direction h, Direction v"
+                        }
+                    ],
+                    "desc": "Sets horizontal and vertical alignment for subsequent adds; defaults to Left/Top like Font.",
+                    "related": [
+                        "GlyphBatch::add",
+                        "GlyphBatch::setAlignToInk"
+                    ]
+                },
+                {
+                    "name": "setAlignToInk",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "bool enabled"
+                        }
+                    ],
+                    "desc": "Centers subsequent independent glyphs on their outline ink box instead of advance and line metrics.",
+                    "details": "Defaults to false. When true, independent codepoint adds ignore setAlign. The pivot excludes raster/filter padding and is a box center, not an optical centroid. String adds keep drawString layout.",
+                    "details_ja": "既定値は false です。true のとき、単独コードポイントの追加は setAlign を使いません。基準点はラスタライズやフィルターの余白を含まない矩形の中心で、見た目の重心ではありません。文字列の追加は drawString の配置を保ちます。",
+                    "details_ko": "기본값은 false입니다. true이면 독립 코드 포인트 추가는 setAlign을 무시합니다. 기준점은 래스터/필터 여백을 제외한 사각형의 중심이며 시각적 무게 중심은 아닙니다. 문자열 추가는 drawString 배치를 유지합니다.",
+                    "related": [
+                        "Font::getGlyphInkBox",
+                        "GlyphBatch::setAlign"
+                    ]
+                },
+                {
+                    "name": "setFont",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "const Font & font"
+                        }
+                    ],
+                    "desc": "Clears the batch and retains a copy of a Font and its current settings.",
+                    "details": "Copies Font settings and shares its current atlas. Later source setOversampling/setMipmaps changes do not propagate: configure first, or call setFont again and rebuild.",
+                    "details_ja": "設定をコピーし、現在のアトラスを共有します。元 Font の setOversampling/setMipmaps の変更は追従しません。先に設定するか、setFont を再度呼んで再構築してください。",
+                    "details_ko": "설정을 복사하고 현재 아틀라스를 공유합니다. 이후 원본의 setOversampling/setMipmaps 변경은 반영되지 않습니다. 먼저 설정하거나 setFont를 다시 호출하고 재구성하세요.",
+                    "related": [
+                        "GlyphBatch",
+                        "Font::load"
+                    ]
+                },
+                {
+                    "name": "setWritingMode",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "WritingMode mode"
+                        }
+                    ],
+                    "desc": "Sets writing mode for subsequent string adds; independent codepoints ignore it.",
+                    "related": [
+                        "Font::setWritingMode",
+                        "GlyphBatch::add"
+                    ]
                 }
             ]
         },
@@ -43388,6 +43762,320 @@ const TrussCAPI = {
                     "desc": "Stores the playback's volume multiplier.",
                     "desc_ja": "再生音量の倍率を保持する。",
                     "desc_ko": "재생 음량 배수를 저장한다."
+                }
+            ]
+        },
+        {
+            "name": "Process",
+            "desc": "Runs an external program in the background and reports its output line by line.",
+            "keywords": [
+                "system",
+                "exec",
+                "command",
+                "external program",
+                "subprocess",
+                "spawn",
+                "async",
+                "ofsystem",
+                "child process"
+            ],
+            "desc_ja": "外部プログラムをバックグラウンドで実行し、出力を 1 行ずつ通知します。",
+            "desc_ko": "외부 프로그램을 백그라운드에서 실행하고 출력을 한 줄씩 알립니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "runProcess",
+                "ProcessLineEventArgs",
+                "ProcessExitEventArgs",
+                "Event<T>"
+            ],
+            "details": "- `startAsync(args, workingDir)` returns at once. A worker thread reads the output, fires `onLine` for every line and `onExit` once at the end.\n- Listeners run inline on the worker thread by default, as with Serial. A listener that touches Nodes, GPU resources, or unguarded app state must use `listen(callback, Deliver::Main)` to run on the main thread.\n- `Deliver::Main` copies the payload and runs the listener at the start of the next frame. Each event supports `setMainThreadDeliveryLimit(count)` for queued and executing Main copies; 0 (the default) is unlimited, and excess copies are dropped.\n- Arguments are passed without a shell, as in `runProcess`. stdout and stderr are read from separate pipes, so neither can fill up and block the program.\n- `kill()` ends the program and every process it started (POSIX: its own process group; Windows: a job object).\n- Destroying a running `Process` kills it and waits for the worker, unless `setKillOnDestroy(false)`. Copying is disabled.\n- macOS, Windows and Linux. Elsewhere `startAsync()` returns false and logs an error.",
+            "details_ja": "- `startAsync(args, workingDir)` はすぐに戻ります。ワーカースレッドが出力を読み、行ごとに `onLine` を、最後に 1 回 `onExit` を発火します。\n- Serial と同じく、リスナーは既定ではワーカースレッドでインライン実行します。Node、GPU リソース、同期していないアプリの状態に触れる場合は、`listen(callback, Deliver::Main)` でメインスレッドで実行してください。\n- `Deliver::Main` は引数をコピーし、次のフレームの先頭でリスナーを実行します。各イベントの `setMainThreadDeliveryLimit(count)` で待機中・実行中の Main コピー数を制限できます。0（既定値）は無制限で、上限を超えるコピーは破棄します。\n- 引数は `runProcess` と同じくシェルを経由せずに渡されます。stdout と stderr は別のパイプから読むので、どちらかが詰まってプログラムが止まることはありません。\n- `kill()` はプログラムと、それが起動したすべてのプロセスを終了します（POSIX: 専用のプロセスグループ、Windows: ジョブオブジェクト）。\n- 実行中の `Process` を破棄すると、`setKillOnDestroy(false)` でない限りプログラムを終了してワーカーを待ちます。コピーはできません。\n- macOS、Windows、Linux に対応します。それ以外では `startAsync()` が false を返し、エラーがログに出ます。",
+            "details_ko": "- `startAsync(args, workingDir)`는 바로 반환합니다. 워커 스레드가 출력을 읽어 줄마다 `onLine`을, 마지막에 한 번 `onExit`를 발생시킵니다.\n- Serial과 같이 리스너는 기본적으로 워커 스레드에서 인라인으로 실행합니다. Node, GPU 리소스 또는 동기화하지 않은 앱 상태에 접근하는 리스너는 `listen(callback, Deliver::Main)`으로 메인 스레드에서 실행해야 합니다.\n- `Deliver::Main`은 인자를 복사하고 다음 프레임 시작 시 리스너를 실행합니다. 각 이벤트의 `setMainThreadDeliveryLimit(count)`로 대기 및 실행 중인 Main 복사본 수를 제한할 수 있습니다. 0(기본값)은 무제한이며, 한도를 넘는 복사본은 버립니다.\n- 인자는 `runProcess`와 같이 셸을 거치지 않고 전달됩니다. stdout과 stderr는 별도의 파이프에서 읽으므로 어느 쪽이 가득 차서 프로그램이 멈추는 일이 없습니다.\n- `kill()`은 프로그램과 그 프로그램이 시작한 모든 프로세스를 종료합니다(POSIX: 전용 프로세스 그룹, Windows: 잡 오브젝트).\n- 실행 중인 `Process`를 파괴하면 `setKillOnDestroy(false)`가 아닌 한 프로그램을 종료하고 워커를 기다립니다. 복사할 수 없습니다.\n- macOS, Windows, Linux를 지원합니다. 그 밖의 플랫폼에서는 `startAsync()`가 false를 반환하고 오류가 로그에 남습니다.",
+            "snippet": "// App members: mutex outputMutex; vector<string> output;\n// Process process; EventListener lineListener, exitListener;\nlineListener = process.onLine.listen([this](ProcessLineEventArgs& e) {\n    lock_guard<mutex> lock(outputMutex);\n    output.push_back(e.line);\n});\nexitListener = process.onExit.listen([this](ProcessExitEventArgs& e) {\n    if (e.exitCode == 0) reload();\n}, Deliver::Main);\nprocess.startAsync({\"node\", \"render.js\", \"--out\", path});\n",
+            "platforms": [
+                "macos",
+                "windows",
+                "linux"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ],
+                "snippet": "// App members: mutex outputMutex; vector<string> output;\n// Process process; EventListener lineListener, exitListener;\nlineListener = process.onLine.listen([this](ProcessLineEventArgs& e) {\n    lock_guard<mutex> lock(outputMutex);\n    output.push_back(e.line);\n});\nexitListener = process.onExit.listen([this](ProcessExitEventArgs& e) {\n    if (e.exitCode == 0) reload();\n}, Deliver::Main);\nprocess.startAsync({\"node\", \"render.js\", \"--out\", path});\n"
+            },
+            "properties": [
+                {
+                    "name": "onExit",
+                    "type": "Event<ProcessExitEventArgs> &",
+                    "desc": "Fires once when the program has exited.",
+                    "desc_ja": "プログラムの終了時に 1 回発火します。",
+                    "desc_ko": "프로그램이 끝났을 때 한 번 발생합니다."
+                },
+                {
+                    "name": "onLine",
+                    "type": "Event<ProcessLineEventArgs> &",
+                    "desc": "Fires for each line the program writes.",
+                    "desc_ja": "プログラムが出力した行ごとに発火します。",
+                    "desc_ko": "프로그램이 출력한 줄마다 발생합니다."
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getExitCode",
+                    "signatures": [
+                        {
+                            "ret": "int",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the exit code of the last finished run.",
+                    "details": "- `-1` before the first run ends. The same value is passed to `onExit` as `exitCode`.",
+                    "details_ja": "- 最初の実行が終わるまでは `-1` です。同じ値が `onExit` の `exitCode` として渡されます。",
+                    "details_ko": "- 첫 실행이 끝나기 전에는 `-1`입니다. 같은 값이 `onExit`의 `exitCode`로 전달됩니다.",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
+                    "name": "getKillOnDestroy",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns whether destroying the Process kills a running program.",
+                    "related": [
+                        "Process::setKillOnDestroy"
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
+                    "name": "isRunning",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns whether the program is running.",
+                    "details": "- True from a successful `startAsync()` until the program has exited and its remaining output has been dispatched, just before `onExit` is dispatched.",
+                    "details_ja": "- 成功した `startAsync()` から、プログラムが終了して残りの出力を配送するまで（`onExit` の配送直前まで）true です。",
+                    "details_ko": "- 성공한 `startAsync()`부터 프로그램이 끝나고 남은 출력의 전달을 예약할 때까지(`onExit` 전달 예약 직전까지) true입니다.",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
+                    "name": "kill",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Ends the program and the processes it started.",
+                    "details": "- POSIX: SIGTERM, then SIGKILL to the group if it is still present 3 seconds later, even if the launcher has exited. Windows: terminated at once.\n- Returns immediately; `onExit` follows with `killed == true`. Does nothing when nothing runs.\n- A process that leaves its process group or job on purpose is not followed.",
+                    "details_ja": "- POSIX: SIGTERM を送り、起動したプロセスの終了後も、3 秒後にグループが残っていればグループへ SIGKILL を送ります。Windows: すぐに終了します。\n- すぐに戻り、その後 `killed == true` の `onExit` が発火します。何も実行していなければ何もしません。\n- 意図的にプロセスグループやジョブから抜けたプロセスは追跡しません。",
+                    "details_ko": "- POSIX: SIGTERM을 보내고, 시작한 프로세스가 종료되어도 3초 뒤에 그룹이 남아 있으면 그룹에 SIGKILL을 보냅니다. Windows: 바로 종료합니다.\n- 바로 반환하며, 이어서 `killed == true`인 `onExit`가 발생합니다. 실행 중인 것이 없으면 아무것도 하지 않습니다.\n- 일부러 프로세스 그룹이나 잡에서 빠져나간 프로세스는 따라가지 않습니다.",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
+                    "name": "setKillOnDestroy",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "bool kill"
+                        }
+                    ],
+                    "desc": "Sets whether destroying the Process kills a running program.",
+                    "details": "- Defaults to `true`. With `false`, the destructor waits until the program exits by itself.\n- If the app is hard-killed, Windows also ends its children (kill-on-close job); POSIX leaves the child group running.",
+                    "details_ja": "- デフォルトは `true` です。`false` にすると、デストラクタはプログラムが自分で終了するまで待ちます。\n- アプリが強制終了されると、Windows では kill-on-close ジョブにより子プロセスも終了します。POSIX では子プロセスのグループが動き続けます。",
+                    "details_ko": "- 기본값은 `true`입니다. `false`이면 소멸자는 프로그램이 스스로 끝날 때까지 기다립니다.\n- 앱이 강제 종료되면 Windows에서는 kill-on-close 잡으로 자식 프로세스도 종료합니다. POSIX에서는 자식 프로세스 그룹이 계속 실행됩니다.",
+                    "related": [
+                        "Process::getKillOnDestroy"
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
+                    "name": "startAsync",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": "const std::vector<std::string> & args, const fs::path & workingDir = fs::path()"
+                        }
+                    ],
+                    "desc": "Starts the program in the background.",
+                    "details": "- `startAsync(args, workingDir)` starts `args[0]` with the remaining arguments; an empty `workingDir` keeps the current directory. The rules for arguments and PATH are those of `runProcess`.\n- Returns false and logs why when it is already running or the program could not be started. A finished `Process` can be started again.\n- Call from the main thread, including before `runApp()`/`runHeadlessApp()`. Calling it from its own listener on the worker thread (`Deliver::Inline`) returns false.",
+                    "details_ja": "- `startAsync(args, workingDir)` は `args[0]` を残りの引数とともに起動します。`workingDir` が空の場合は現在のディレクトリのままです。引数と PATH の扱いは `runProcess` と同じです。\n- すでに実行中の場合やプログラムを起動できなかった場合は false を返し、理由をログに出します。終了した `Process` は再び起動できます。\n- `runApp()`/`runHeadlessApp()` より前も含め、メインスレッドから呼んでください。ワーカースレッド上の自身のリスナー（`Deliver::Inline`）から呼ぶと false を返します。",
+                    "details_ko": "- `startAsync(args, workingDir)`는 `args[0]`을 나머지 인자와 함께 시작합니다. `workingDir`가 비어 있으면 현재 디렉터리를 그대로 씁니다. 인자와 PATH 규칙은 `runProcess`와 같습니다.\n- 이미 실행 중이거나 프로그램을 시작하지 못하면 false를 반환하고 이유를 로그에 남깁니다. 끝난 `Process`는 다시 시작할 수 있습니다.\n- `runApp()`/`runHeadlessApp()` 이전을 포함하여 메인 스레드에서 호출해야 합니다. 워커 스레드에서 실행되는 자신의 리스너(`Deliver::Inline`)에서 호출하면 false를 반환합니다.",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                },
+                {
+                    "name": "waitForExit",
+                    "signatures": [
+                        {
+                            "ret": "int",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Blocks until the program has exited and returns its exit code.",
+                    "details": "- Returns after `onExit` has fired: inline listeners have run, `Deliver::Main` ones are queued. Returns `-1` if nothing was started.\n- From the worker thread, that is from its own inline listeners, it returns `-1` at once and logs an error, since it would wait for itself.",
+                    "details_ja": "- `onExit` の発火後に戻ります。インラインのリスナーは実行済みで、`Deliver::Main` のリスナーはキューに入っています。何も起動していなければ `-1` を返します。\n- ワーカースレッド、つまり自身のインラインリスナーから呼ぶと、自分自身を待つことになるため、すぐに `-1` を返してエラーをログに出します。",
+                    "details_ko": "- `onExit`가 발생한 뒤 반환합니다. 인라인 리스너는 이미 실행되었고 `Deliver::Main` 리스너는 큐에 들어가 있습니다. 시작한 것이 없으면 `-1`을 반환합니다.\n- 워커 스레드, 즉 자신의 인라인 리스너에서 호출하면 자기 자신을 기다리게 되므로 바로 `-1`을 반환하고 오류를 로그에 남깁니다.",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ProcessExitEventArgs",
+            "desc": "Carries the result of a program that has exited.",
+            "keywords": [],
+            "desc_ja": "終了したプログラムの結果を保持します。",
+            "desc_ko": "끝난 프로그램의 결과를 담습니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "Process::onExit"
+            ],
+            "details": "- Passed to `Process::onExit`.",
+            "details_ja": "- `Process::onExit` に渡されます。",
+            "details_ko": "- `Process::onExit`에 전달됩니다.",
+            "properties": [
+                {
+                    "name": "exitCode",
+                    "type": "int",
+                    "desc": "Holds the program's exit code.",
+                    "desc_ja": "プログラムの終了コードを保持します。",
+                    "desc_ko": "프로그램의 종료 코드를 담습니다."
+                },
+                {
+                    "name": "killed",
+                    "type": "bool",
+                    "desc": "Indicates whether the program was ended by `kill()`. Destroying the Process clears listeners, so `onExit` is not delivered on destruction.",
+                    "desc_ja": "プログラムが `kill()` で終了したかどうかを表します。Process の破棄時はリスナーが解除されるため、`onExit` は通知されません。",
+                    "desc_ko": "프로그램이 `kill()`로 종료되었는지 나타냅니다. Process를 파괴할 때는 리스너를 해제하므로 `onExit`는 전달되지 않습니다."
+                },
+                {
+                    "name": "seconds",
+                    "type": "float",
+                    "desc": "Holds the time from `startAsync()` to the exit, in seconds.",
+                    "desc_ja": "`startAsync()` から終了までの時間を秒で保持します。",
+                    "desc_ko": "`startAsync()`부터 종료까지의 시간을 초 단위로 담습니다."
+                }
+            ]
+        },
+        {
+            "name": "ProcessLineEventArgs",
+            "desc": "Carries one line of a program's output.",
+            "keywords": [],
+            "desc_ja": "プログラムの出力 1 行の情報を保持します。",
+            "desc_ko": "프로그램 출력 한 줄의 정보를 담습니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "Process::onLine"
+            ],
+            "details": "- Passed to `Process::onLine`. `line` is the text without its terminator, `isStderr` tells which stream it came from.",
+            "details_ja": "- `Process::onLine` に渡されます。`line` は区切り文字を除いたテキスト、`isStderr` はどちらのストリームから来たかを表します。",
+            "details_ko": "- `Process::onLine`에 전달됩니다. `line`은 줄 끝 문자를 뺀 텍스트이고, `isStderr`는 어느 스트림에서 왔는지 나타냅니다.",
+            "properties": [
+                {
+                    "name": "isStderr",
+                    "type": "bool",
+                    "desc": "Indicates whether the line came from stderr.",
+                    "desc_ja": "行が stderr から来たかどうかを表します。",
+                    "desc_ko": "줄이 stderr에서 왔는지 나타냅니다."
+                },
+                {
+                    "name": "line",
+                    "type": "std::string",
+                    "desc": "Holds the line, without its terminator.",
+                    "desc_ja": "区切り文字を除いた行を保持します。",
+                    "desc_ko": "줄 끝 문자를 뺀 줄을 담습니다."
+                }
+            ]
+        },
+        {
+            "name": "ProcessResult",
+            "desc": "Holds the exit code and output of a finished `runProcess` call.",
+            "keywords": [
+                "exit code",
+                "output",
+                "system"
+            ],
+            "desc_ja": "終了した `runProcess` の終了コードと出力を保持します。",
+            "desc_ko": "끝난 `runProcess` 호출의 종료 코드와 출력을 담습니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "runProcess"
+            ],
+            "details": "- `started` tells whether the program ran at all, `exitCode` is its exit status, and `output` holds stdout and stderr together.",
+            "details_ja": "- `started` はプログラムが実行されたかどうか、`exitCode` は終了ステータス、`output` は stdout と stderr をまとめた出力です。",
+            "details_ko": "- `started`는 프로그램이 실행되었는지, `exitCode`는 종료 상태, `output`은 stdout과 stderr를 합친 출력입니다.",
+            "properties": [
+                {
+                    "name": "exitCode",
+                    "type": "int",
+                    "desc": "Holds the program's exit code.",
+                    "desc_ja": "プログラムの終了コードを保持します。",
+                    "desc_ko": "프로그램의 종료 코드를 담습니다."
+                },
+                {
+                    "name": "output",
+                    "type": "std::string",
+                    "desc": "Holds the program's stdout and stderr lines.",
+                    "desc_ja": "プログラムの stdout と stderr の行を保持します。",
+                    "desc_ko": "프로그램의 stdout과 stderr 줄을 담습니다."
+                },
+                {
+                    "name": "started",
+                    "type": "bool",
+                    "desc": "Indicates whether the program could be started.",
+                    "desc_ja": "プログラムを起動できたかどうかを表します。",
+                    "desc_ko": "프로그램을 시작할 수 있었는지 나타냅니다."
                 }
             ]
         },

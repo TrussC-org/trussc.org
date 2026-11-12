@@ -7641,6 +7641,55 @@ const TrussCAPI = {
             "name_ko": "그래픽 - 텍스처 & GPU"
         },
         {
+            "name": "Graphics - FBO",
+            "functions": [
+                {
+                    "name": "beginStencil",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "boolean",
+                    "desc": "Borrows all eight stencil bits on the current drawing target.",
+                    "keywords": [
+                        "stencil",
+                        "ownership",
+                        "mask"
+                    ],
+                    "desc_ja": "現在の描画先の stencil の全 8 ビットを借り受けます。",
+                    "desc_ko": "현재 그리기 타깃의 스텐실 전체 8비트를 빌립니다."
+                },
+                {
+                    "name": "clearStencil",
+                    "params": "value",
+                    "params_typed": "value = 0",
+                    "return_type": "(nothing)",
+                    "desc": "Replaces all stencil bytes with a plain value while owned.",
+                    "keywords": [
+                        "stencil",
+                        "clear",
+                        "byte"
+                    ],
+                    "desc_ja": "所有中の stencil の全バイトを通常の値で置き換えます。",
+                    "desc_ko": "소유 중인 스텐실의 모든 바이트를 일반 값으로 바꿉니다."
+                },
+                {
+                    "name": "endStencil",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "(nothing)",
+                    "desc": "Returns the whole stencil to 0, ends ownership and restores the saved framework state.",
+                    "keywords": [
+                        "stencil",
+                        "restore",
+                        "ownership"
+                    ],
+                    "desc_ja": "stencil 全体を 0 に戻して所有権を返却し、保存したフレームワークの状態を復元します。",
+                    "desc_ko": "스텐실 전체를 0으로 되돌리고 소유권을 반환하며 저장한 프레임워크 상태를 복원합니다."
+                }
+            ],
+            "name_ja": "グラフィックス - FBO",
+            "name_ko": "그래픽 - FBO"
+        },
+        {
             "name": "Graphics - Shader",
             "functions": [
                 {
@@ -10327,6 +10376,107 @@ const TrussCAPI = {
                     "desc_ko": "오디오 출력 장치를 정지하고 닫는다."
                 },
                 {
+                    "name": "audioEngine:setup",
+                    "return": "boolean",
+                    "signatures": [
+                        "",
+                        "settings"
+                    ],
+                    "desc": "Opens the audio output device (the same as init).",
+                    "desc_ja": "音声出力デバイスを開く（init と同じ）。",
+                    "desc_ko": "오디오 출력 장치를 연다(init과 같다)."
+                },
+                {
+                    "name": "audioEngine:close",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Stops and closes the audio output device (alias of shutdown).",
+                    "desc_ja": "音声出力デバイスを停止して閉じる（shutdown の別名）。",
+                    "desc_ko": "오디오 출력 장치를 정지하고 닫는다(shutdown의 별칭)."
+                },
+                {
+                    "name": "audioEngine:isConnected",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns whether the audio output device is open and running.",
+                    "desc_ja": "音声出力デバイスが開いて動作中かを返す。",
+                    "desc_ko": "오디오 출력 장치가 열려 실행 중인지 반환한다."
+                },
+                {
+                    "name": "audioEngine:isInitialized",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns whether audio output is initialized.",
+                    "desc_ja": "音声出力が初期化済みかを返す。",
+                    "desc_ko": "오디오 출력이 초기화되었는지 반환한다."
+                },
+                {
+                    "name": "audioEngine:getSampleRate",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the engine output sample rate.",
+                    "desc_ja": "エンジンの出力サンプルレートを返す。",
+                    "desc_ko": "엔진의 출력 샘플 레이트를 반환한다."
+                },
+                {
+                    "name": "audioEngine:getChannels",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the engine output channel count.",
+                    "desc_ja": "エンジンの出力チャンネル数を返す。",
+                    "desc_ko": "엔진의 출력 채널 수를 반환한다."
+                },
+                {
+                    "name": "audioEngine:getBufferSize",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the requested audio buffer size.",
+                    "desc_ja": "要求した音声バッファサイズを返す。",
+                    "desc_ko": "요청한 오디오 버퍼 크기를 반환한다."
+                },
+                {
+                    "name": "audioEngine:getPlayingSounds",
+                    "return": "table",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns a snapshot of playing and paused sounds.",
+                    "desc_ja": "再生中と一時停止中のサウンドの情報を返す。",
+                    "desc_ko": "재생 중이거나 일시 정지한 사운드의 정보를 반환한다."
+                },
+                {
+                    "name": "audioEngine:getMaxPolyphony",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the engine's voice cap, 0 for no cap.",
+                    "desc_ja": "エンジンの同時再生数の上限を返す。0 は上限なし。",
+                    "desc_ko": "엔진의 동시 재생 수 상한을 반환한다. 0은 상한 없음."
+                },
+                {
+                    "name": "audioEngine:getStats",
+                    "return": "AudioStats",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns a snapshot of audio engine diagnostics.",
+                    "desc_ja": "オーディオエンジンの診断情報を返す。",
+                    "desc_ko": "오디오 엔진의 진단 정보를 반환한다."
+                },
+                {
                     "name": "audioEngine:getAnalysisBuffer",
                     "return": "number",
                     "signatures": [
@@ -12546,6 +12696,166 @@ const TrussCAPI = {
                     "desc_ko": "카메라의 위치를 반환한다."
                 },
                 {
+                    "name": "easyCam:setAzimuth",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "radians"
+                    ],
+                    "desc": "Sets the camera's orbit azimuth.",
+                    "desc_ja": "カメラの周回の方位角を設定する。",
+                    "desc_ko": "카메라 궤도의 방위각을 설정한다."
+                },
+                {
+                    "name": "easyCam:getAzimuth",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the camera's orbit azimuth.",
+                    "desc_ja": "カメラの周回方位角を返す。",
+                    "desc_ko": "카메라의 궤도 방위각을 반환한다."
+                },
+                {
+                    "name": "easyCam:setElevation",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "radians"
+                    ],
+                    "desc": "Sets the camera's orbit elevation.",
+                    "desc_ja": "カメラの周回の仰角を設定する。",
+                    "desc_ko": "카메라 궤도의 고도각을 설정한다."
+                },
+                {
+                    "name": "easyCam:getElevation",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the camera's orbit elevation.",
+                    "desc_ja": "カメラの周回仰角を返す。",
+                    "desc_ko": "카메라의 궤도 고도각을 반환한다."
+                },
+                {
+                    "name": "easyCam:enableOrtho",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Selects orthographic projection.",
+                    "desc_ja": "正射影を選択する。",
+                    "desc_ko": "정사영을 선택한다."
+                },
+                {
+                    "name": "easyCam:disableOrtho",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Selects perspective projection.",
+                    "desc_ja": "透視投影を選択する。",
+                    "desc_ko": "원근 투영을 선택한다."
+                },
+                {
+                    "name": "easyCam:setOrtho",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "ortho"
+                    ],
+                    "desc": "Selects orthographic or perspective projection.",
+                    "desc_ja": "正射影と透視投影を切り替える。",
+                    "desc_ko": "정사영과 원근 투영을 전환한다."
+                },
+                {
+                    "name": "easyCam:getOrtho",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns whether orthographic projection is selected.",
+                    "desc_ja": "正射影が選択されているかを返す。",
+                    "desc_ko": "정사영이 선택되어 있는지 반환한다."
+                },
+                {
+                    "name": "easyCam:setOrbitButton",
+                    "return": "EasyCam",
+                    "signatures": [
+                        "button"
+                    ],
+                    "desc": "Sets the mouse button used to orbit the camera.",
+                    "desc_ja": "カメラの周回に使うマウスボタンを設定する。",
+                    "desc_ko": "카메라 궤도 회전에 사용할 마우스 버튼을 설정한다."
+                },
+                {
+                    "name": "easyCam:getOrbitButton",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the mouse button assigned to orbit rotation.",
+                    "desc_ja": "周回回転に割り当てられたマウスボタンを返す。",
+                    "desc_ko": "궤도 회전에 할당된 마우스 버튼을 반환한다."
+                },
+                {
+                    "name": "easyCam:setPanButton",
+                    "return": "EasyCam",
+                    "signatures": [
+                        "button"
+                    ],
+                    "desc": "Sets the mouse button used to pan the camera.",
+                    "desc_ja": "カメラのパンに使うマウスボタンを設定する。",
+                    "desc_ko": "카메라 패닝에 사용할 마우스 버튼을 설정한다."
+                },
+                {
+                    "name": "easyCam:getPanButton",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the mouse button assigned to panning.",
+                    "desc_ja": "パンに割り当てられたマウスボタンを返す。",
+                    "desc_ko": "패닝에 할당된 마우스 버튼을 반환한다."
+                },
+                {
+                    "name": "easyCam:setDragModifier",
+                    "return": "EasyCam",
+                    "signatures": [
+                        "m"
+                    ],
+                    "desc": "Sets the modifier required for automatic camera mouse input.",
+                    "desc_ja": "カメラの自動マウス入力に必要な修飾キーを設定する。",
+                    "desc_ko": "카메라의 자동 마우스 입력에 필요한 수정자 키를 설정한다."
+                },
+                {
+                    "name": "easyCam:getDragModifier",
+                    "return": "Modifier",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the modifier selected for camera mouse input.",
+                    "desc_ja": "カメラのマウス入力に設定された修飾キーを返す。",
+                    "desc_ko": "카메라 마우스 입력에 설정된 수정자 키를 반환한다."
+                },
+                {
+                    "name": "easyCam:setOrientation",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "q"
+                    ],
+                    "desc": "Sets the camera's orientation quaternion.",
+                    "desc_ja": "カメラの姿勢をクォータニオンで設定する。",
+                    "desc_ko": "카메라 자세를 쿼터니언으로 설정한다."
+                },
+                {
+                    "name": "easyCam:getOrientation",
+                    "return": "Quaternion",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the camera's orientation quaternion.",
+                    "desc_ja": "カメラの姿勢クォータニオンを返す。",
+                    "desc_ko": "카메라의 자세 쿼터니언을 반환한다."
+                },
+                {
                     "name": "easyCam:setFovDeg",
                     "return": "(nothing)",
                     "signatures": [
@@ -12890,6 +13200,16 @@ const TrussCAPI = {
                     "desc_ko": "프레임버퍼 내용을 CPU float 버퍼로 읽는다."
                 },
                 {
+                    "name": "fbo:readStencil",
+                    "return": "boolean",
+                    "signatures": [
+                        "pixels"
+                    ],
+                    "desc": "Reads the framebuffer's stencil bytes into one-channel U8 Pixels.",
+                    "desc_ja": "フレームバッファの stencil 値を 1 チャンネル U8 の Pixels に読み出します。",
+                    "desc_ko": "프레임버퍼의 스텐실 값을 1채널 U8 Pixels로 읽습니다."
+                },
+                {
                     "name": "fbo:copyTo",
                     "return": "boolean",
                     "signatures": [
@@ -12950,6 +13270,26 @@ const TrussCAPI = {
                     "desc_ko": "프레임버퍼 할당이 성공했는지 반환한다."
                 },
                 {
+                    "name": "fbo:setDebugName",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "name"
+                    ],
+                    "desc": "Sets the Fbo's inspection name.",
+                    "desc_ja": "Fbo の検査用の名前を設定する。",
+                    "desc_ko": "Fbo의 검사 이름을 설정한다."
+                },
+                {
+                    "name": "fbo:getDebugName",
+                    "return": "string",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the Fbo's inspection name.",
+                    "desc_ja": "Fbo の検査用の名前を返す。",
+                    "desc_ko": "Fbo의 검사 이름을 반환한다."
+                },
+                {
                     "name": "fbo:isActive",
                     "return": "boolean",
                     "signatures": [
@@ -12990,6 +13330,16 @@ const TrussCAPI = {
                     "desc": "Draws the framebuffer contents onto the current target.",
                     "desc_ja": "フレームバッファの内容を現在の描画先に描画する。",
                     "desc_ko": "프레임버퍼 내용을 현재 타깃에 그린다."
+                },
+                {
+                    "name": "fbo:drawStencil",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "x, y"
+                    ],
+                    "desc": "Draws the framebuffer's stencil bytes as an opaque gray image.",
+                    "desc_ja": "フレームバッファの stencil 値を不透明なグレー画像として描画します。",
+                    "desc_ko": "프레임버퍼의 스텐실 값을 불투명한 회색 이미지로 그립니다."
                 },
                 {
                     "name": "fbo:getColorImage",
@@ -13541,6 +13891,18 @@ const TrussCAPI = {
                     "desc": "Returns the font's descent below the baseline.",
                     "desc_ja": "ベースラインより下側のディセントを返す。",
                     "desc_ko": "기준선 아래쪽의 디센트를 반환한다."
+                },
+                {
+                    "name": "font:getGlyphInkBox",
+                    "signatures": [
+                        {
+                            "ret": "Rect",
+                            "params": "codepoint"
+                        }
+                    ],
+                    "desc": "Returns a glyph's outline ink rectangle in logical pixels relative to the horizontal baseline.",
+                    "desc_ja": "水平ベースラインを基準に、グリフ輪郭のインク矩形を論理ピクセルで返します。",
+                    "desc_ko": "가로 기준선을 기준으로 글리프 윤곽의 잉크 사각형을 논리 픽셀로 반환합니다."
                 },
                 {
                     "name": "font:getGlyphPath",
@@ -14274,6 +14636,128 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "GlyphBatch",
+            "desc": "Retains transformed glyph quads for repeated drawing in add order, batching consecutive glyphs on the same atlas page.",
+            "keywords": [
+                "glyph",
+                "batch",
+                "retained",
+                "atlas",
+                "text"
+            ],
+            "desc_ja": "変換済みのグリフを保持し、同じアトラスページが連続する区間をまとめて追加順に繰り返し描画します。",
+            "desc_ko": "변환된 글리프를 유지하고 같은 아틀라스 페이지의 연속 구간을 묶어 추가 순서대로 반복 표시합니다.",
+            "related": [
+                "Font",
+                "Font::getGlyphInkBox",
+                "GlyphBatch::add",
+                "GlyphBatch::draw"
+            ],
+            "constructor": {
+                "signatures": [
+                    ""
+                ]
+            },
+            "methods": [
+                {
+                    "name": "glyphBatch:add",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "codepoint, color"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "codepoint, matrix, color"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "text, color"
+                        }
+                    ],
+                    "desc": "Appends colored glyph quads at the current matrix or an explicit model matrix.",
+                    "desc_ja": "現在の行列または明示したモデル行列で、色付きグリフを追加します。",
+                    "desc_ko": "현재 행렬 또는 명시적 모델 행렬로 색상이 있는 글리프를 추가합니다."
+                },
+                {
+                    "name": "glyphBatch:clear",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Discards retained geometry while keeping the font and batch settings.",
+                    "desc_ja": "フォントとバッチ設定を保ったまま、保持した形状を破棄します。",
+                    "desc_ko": "폰트와 배치 설정을 유지하면서 보관한 형상을 버립니다."
+                },
+                {
+                    "name": "glyphBatch:draw",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "transform"
+                        }
+                    ],
+                    "desc": "Draws retained glyphs using the current target and blend; an optional transform applies through a uniform.",
+                    "desc_ja": "保持したグリフを現在の描画先とブレンドで描画し、任意の変換を uniform で適用します。",
+                    "desc_ko": "유지한 글리프를 현재 대상과 블렌드로 그리고 선택적 변환을 uniform으로 적용합니다."
+                },
+                {
+                    "name": "glyphBatch:setAlign",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "h, v"
+                        }
+                    ],
+                    "desc": "Sets horizontal and vertical alignment for subsequent adds; defaults to Left/Top like Font.",
+                    "desc_ja": "以後の追加に使う水平・垂直揃えを設定します。既定値は Font と同じ Left・Top です。",
+                    "desc_ko": "이후 추가에 사용할 가로/세로 정렬을 설정합니다. 기본값은 Font와 같은 Left/Top입니다."
+                },
+                {
+                    "name": "glyphBatch:setAlignToInk",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "enabled"
+                        }
+                    ],
+                    "desc": "Centers subsequent independent glyphs on their outline ink box instead of advance and line metrics.",
+                    "desc_ja": "以後の単独グリフを、送り幅と行メトリクスの代わりに輪郭のインク矩形の中心へ揃えます。",
+                    "desc_ko": "이후 독립 글리프를 전진 폭과 행 메트릭 대신 윤곽 잉크 사각형의 중심에 정렬합니다."
+                },
+                {
+                    "name": "glyphBatch:setFont",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "font"
+                        }
+                    ],
+                    "desc": "Clears the batch and retains a copy of a Font and its current settings.",
+                    "desc_ja": "バッチを消去し、Font と現在の設定のコピーを保持します。",
+                    "desc_ko": "배치를 지우고 Font와 현재 설정의 복사본을 유지합니다."
+                },
+                {
+                    "name": "glyphBatch:setWritingMode",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "mode"
+                        }
+                    ],
+                    "desc": "Sets writing mode for subsequent string adds; independent codepoints ignore it.",
+                    "desc_ja": "以後の文字列追加に使う書字方向を設定します。単独コードポイントには影響しません。",
+                    "desc_ko": "이후 문자열 추가의 쓰기 방향을 설정합니다. 독립 코드 포인트에는 영향을 주지 않습니다."
+                }
+            ]
+        },
+        {
             "name": "GrabberFrame",
             "desc": "Pairs a captured camera frame with its capture-time timestamp.",
             "keywords": [
@@ -14838,6 +15322,66 @@ const TrussCAPI = {
                     "desc_ko": "이미지의 픽셀과 텍스처를 해제한다."
                 },
                 {
+                    "name": "image:crop",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "x, y, w, h"
+                    ],
+                    "desc": "Replaces the image with a rectangular crop.",
+                    "desc_ja": "画像を矩形領域の切り抜きに置き換える。",
+                    "desc_ko": "이미지를 직사각형 영역으로 잘라 대체한다."
+                },
+                {
+                    "name": "image:halve",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Reduces the image with 2×2 averaging.",
+                    "desc_ja": "2×2 の平均で画像を縮小する。",
+                    "desc_ko": "2×2 평균으로 이미지를 축소한다."
+                },
+                {
+                    "name": "image:mirror",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "horizontal, vertical"
+                    ],
+                    "desc": "Flips the image horizontally or vertically.",
+                    "desc_ja": "画像を左右または上下に反転する。",
+                    "desc_ko": "이미지를 좌우 또는 상하로 뒤집는다."
+                },
+                {
+                    "name": "image:mirrorH",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Flips the image horizontally.",
+                    "desc_ja": "画像を左右に反転する。",
+                    "desc_ko": "이미지를 좌우로 뒤집는다."
+                },
+                {
+                    "name": "image:mirrorV",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Flips the image vertically.",
+                    "desc_ja": "画像を上下に反転する。",
+                    "desc_ko": "이미지를 상하로 뒤집는다."
+                },
+                {
+                    "name": "image:resize",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "newW, newH"
+                    ],
+                    "desc": "Resamples the image to a new size.",
+                    "desc_ja": "画像を新しい寸法に再サンプリングする。",
+                    "desc_ko": "이미지를 새 크기로 재샘플링한다."
+                },
+                {
                     "name": "image:draw",
                     "return": "(nothing)",
                     "signatures": [
@@ -14857,6 +15401,26 @@ const TrussCAPI = {
                     "desc": "Reports whether CPU pixels are allocated.",
                     "desc_ja": "CPU ピクセルが確保済みかを返す。",
                     "desc_ko": "CPU 픽셀이 할당되었는지 반환한다."
+                },
+                {
+                    "name": "image:setDebugName",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "name"
+                    ],
+                    "desc": "Sets the image name used for MCP inspection.",
+                    "desc_ja": "MCP 検査で使う画像名を設定する。",
+                    "desc_ko": "MCP 검사에 사용할 이미지 이름을 설정한다."
+                },
+                {
+                    "name": "image:getDebugName",
+                    "return": "string",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the image name used for MCP inspection.",
+                    "desc_ja": "MCP 検査で使う画像名を返す。",
+                    "desc_ko": "MCP 검사에 사용하는 이미지 이름을 반환한다."
                 },
                 {
                     "name": "image:getWidth",
@@ -16790,6 +17354,16 @@ const TrussCAPI = {
                     "desc": "Returns the inverse of this matrix.",
                     "desc_ja": "この行列の逆行列を返す。",
                     "desc_ko": "이 행렬의 역행렬을 반환한다."
+                },
+                {
+                    "name": "mat4:tryInvert",
+                    "return": "boolean",
+                    "signatures": [
+                        "out"
+                    ],
+                    "desc": "Attempts to compute an inverse matrix and reports success.",
+                    "desc_ja": "逆行列の計算を試み、成功したかどうかを返す。",
+                    "desc_ko": "역행렬 계산을 시도하고 성공 여부를 반환한다."
                 }
             ],
             "static_methods": [
@@ -18226,6 +18800,66 @@ const TrussCAPI = {
                     "desc": "Selects a capture device for subsequent startup by its ID.",
                     "desc_ja": "以後の開始時に使う入力デバイスをIDで選択します。",
                     "desc_ko": "이후 시작에 사용할 캡처 장치를 ID로 선택합니다."
+                },
+                {
+                    "name": "micInput:setup",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Reopens the microphone at the last sample rate.",
+                    "desc_ja": "マイクを直前のサンプルレートで開き直す。",
+                    "desc_ko": "마이크를 마지막 샘플 레이트로 다시 연다."
+                },
+                {
+                    "name": "micInput:close",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Stops microphone capture (alias of stop).",
+                    "desc_ja": "マイク入力を停止する（stop の別名）。",
+                    "desc_ko": "마이크 캡처를 중지한다(stop의 별칭)."
+                },
+                {
+                    "name": "micInput:startAsync",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "sampleRate = DEFAULT_SAMPLE_RATE"
+                    ],
+                    "desc": "Starts a microphone capture attempt asynchronously.",
+                    "desc_ja": "マイク入力の起動を非同期に開始する。",
+                    "desc_ko": "마이크 캡처 시작을 비동기로 요청한다."
+                },
+                {
+                    "name": "micInput:getDeviceName",
+                    "return": "string",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the capture device name.",
+                    "desc_ja": "入力デバイスの名前を返す。",
+                    "desc_ko": "캡처 장치 이름을 반환한다."
+                },
+                {
+                    "name": "micInput:isConnected",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns whether the microphone is open and capturing (alias of isRunning).",
+                    "desc_ja": "マイクが開いて入力中かを返す（isRunning の別名）。",
+                    "desc_ko": "마이크가 열려 캡처 중인지 반환한다(isRunning의 별칭)."
+                },
+                {
+                    "name": "micInput:isStarting",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Reports whether microphone startup is pending.",
+                    "desc_ja": "マイクの起動が保留中かどうかを返す。",
+                    "desc_ko": "마이크 시작이 대기 중인지 반환한다."
                 },
                 {
                     "name": "micInput:start",
@@ -20486,6 +21120,66 @@ const TrussCAPI = {
                     "desc": "Releases the pixel buffer.",
                     "desc_ja": "ピクセルバッファを解放する。",
                     "desc_ko": "픽셀 버퍼를 해제한다."
+                },
+                {
+                    "name": "pixels:crop",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "x, y, w, h"
+                    ],
+                    "desc": "Replaces the pixels with a cropped region.",
+                    "desc_ja": "ピクセルを切り出した領域で置き換える。",
+                    "desc_ko": "픽셀을 잘라낸 영역으로 교체한다."
+                },
+                {
+                    "name": "pixels:halve",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Reduces the buffer to half size by averaging pixels.",
+                    "desc_ja": "ピクセルを平均してバッファを半分の寸法に縮小する。",
+                    "desc_ko": "픽셀을 평균하여 버퍼를 절반 크기로 축소한다."
+                },
+                {
+                    "name": "pixels:mirror",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "horizontal, vertical"
+                    ],
+                    "desc": "Flips the pixel buffer horizontally or vertically.",
+                    "desc_ja": "ピクセルバッファを水平または垂直に反転する。",
+                    "desc_ko": "픽셀 버퍼를 수평 또는 수직으로 뒤집는다."
+                },
+                {
+                    "name": "pixels:mirrorH",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Flips the pixel buffer horizontally.",
+                    "desc_ja": "ピクセルバッファを水平に反転する。",
+                    "desc_ko": "픽셀 버퍼를 수평으로 뒤집는다."
+                },
+                {
+                    "name": "pixels:mirrorV",
+                    "return": "(nothing)",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Flips the pixel buffer vertically.",
+                    "desc_ja": "ピクセルバッファを垂直に反転する。",
+                    "desc_ko": "픽셀 버퍼를 수직으로 뒤집는다."
+                },
+                {
+                    "name": "pixels:resize",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "newW, newH"
+                    ],
+                    "desc": "Resamples the pixel buffer to new dimensions.",
+                    "desc_ja": "ピクセルバッファを新しい寸法に再サンプリングする。",
+                    "desc_ko": "픽셀 버퍼를 새 크기로 리샘플링한다."
                 },
                 {
                     "name": "pixels:isAllocated",
@@ -27867,6 +28561,16 @@ const TrussCAPI = {
                     "desc": "Records vertices for deferred drawing with this shader.",
                     "desc_ja": "このシェーダーで遅延描画する頂点を記録する。",
                     "desc_ko": "이 셰이더로 지연 렌더링할 정점을 기록한다."
+                },
+                {
+                    "name": "shader:drawVertices",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "vertexCount, instanceCount = 1"
+                    ],
+                    "desc": "Draws non-indexed triangles without uploading vertices or indices.",
+                    "desc_ja": "頂点やインデックスを転送せず、非インデックス方式の三角形を描画します。",
+                    "desc_ko": "정점이나 인덱스를 업로드하지 않고 비인덱스 삼각형을 그립니다."
                 }
             ]
         },
@@ -28379,7 +29083,53 @@ const TrussCAPI = {
                     ""
                 ]
             },
+            "properties": [
+                {
+                    "name": "soundBuffer.numSamples",
+                    "type": "number",
+                    "desc": "Store the number of frames in the buffer.",
+                    "desc_ja": "バッファのフレーム数を保持する。",
+                    "desc_ko": "버퍼의 프레임 수를 저장한다."
+                },
+                {
+                    "name": "soundBuffer.samples",
+                    "type": "table",
+                    "desc": "Store interleaved floating-point PCM samples.",
+                    "desc_ja": "インターリーブ形式の浮動小数点PCMサンプルを保持する。",
+                    "desc_ko": "인터리브 형식의 부동소수점 PCM 샘플을 저장한다."
+                }
+            ],
             "methods": [
+                {
+                    "name": "soundBuffer:load",
+                    "return": "LoadResult",
+                    "signatures": [
+                        "path"
+                    ],
+                    "desc": "Decode an audio file into the buffer.",
+                    "desc_ja": "音声ファイルをバッファにデコードする。",
+                    "desc_ko": "오디오 파일을 버퍼로 디코딩한다."
+                },
+                {
+                    "name": "soundBuffer:loadFlac",
+                    "return": "LoadResult",
+                    "signatures": [
+                        "path"
+                    ],
+                    "desc": "Decode a FLAC file into the buffer.",
+                    "desc_ja": "FLACファイルをバッファにデコードする。",
+                    "desc_ko": "FLAC 파일을 버퍼로 디코딩한다."
+                },
+                {
+                    "name": "soundBuffer:getPath",
+                    "return": "string",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Return the resolved path of the last successful file load.",
+                    "desc_ja": "最後に成功したファイル読み込みの解決済みパスを返す。",
+                    "desc_ko": "마지막으로 성공한 파일 로드의 해석된 경로를 반환한다."
+                },
                 {
                     "name": "soundBuffer:loadOgg",
                     "return": "LoadResult",
@@ -28581,6 +29331,62 @@ const TrussCAPI = {
                     "desc": "Write an ADTS header for one raw AAC frame.",
                     "desc_ja": "生AACフレーム1個のADTSヘッダーを書き込む。",
                     "desc_ko": "원시 AAC 프레임 하나의 ADTS 헤더를 기록한다."
+                }
+            ]
+        },
+        {
+            "name": "SoundSource",
+            "desc": "Provides the abstract base interface for playable audio sources.",
+            "keywords": [
+                "audio source",
+                "pcm",
+                "sample data",
+                "playable",
+                "base sound"
+            ],
+            "desc_ja": "再生可能な音源の抽象基底インターフェースを提供する。",
+            "desc_ko": "재생 가능한 음원의 추상 기반 인터페이스를 제공한다.",
+            "related": [
+                "SoundBuffer",
+                "SoundStream",
+                "Sound"
+            ],
+            "properties": [
+                {
+                    "name": "soundSource.channels",
+                    "type": "number",
+                    "desc": "Stores the source's audio channel count.",
+                    "desc_ja": "音声ソースのチャンネル数を表す。",
+                    "desc_ko": "음원 소스의 오디오 채널 수를 나타낸다."
+                },
+                {
+                    "name": "soundSource.sampleRate",
+                    "type": "number",
+                    "desc": "Stores the source's audio sample rate.",
+                    "desc_ja": "音声ソースのサンプルレートを表す。",
+                    "desc_ko": "음원 소스의 샘플레이트를 나타낸다."
+                }
+            ],
+            "methods": [
+                {
+                    "name": "soundSource:getDuration",
+                    "return": "number",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the sound source's duration.",
+                    "desc_ja": "音声ソースの長さを返す。",
+                    "desc_ko": "음원 소스의 길이를 반환한다."
+                },
+                {
+                    "name": "soundSource:kind",
+                    "return": "Kind",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns the sound source's kind.",
+                    "desc_ja": "音声ソースの種別を返す。",
+                    "desc_ko": "음원 소스의 종류를 반환한다."
                 }
             ]
         },
@@ -34446,6 +35252,771 @@ const TrussCAPI = {
                     "desc": "Updates the current video frame and playback state.",
                     "desc_ja": "現在の動画フレームと再生状態を更新する。",
                     "desc_ko": "현재 비디오 프레임과 재생 상태를 갱신한다."
+                }
+            ]
+        },
+        {
+            "name": "VideoPlayerBase",
+            "desc": "Provides the abstract interface and shared state for video playback.",
+            "keywords": [
+                "playback",
+                "abstract"
+            ],
+            "desc_ja": "動画再生の抽象インターフェースと共通状態を提供する。",
+            "desc_ko": "동영상 재생의 추상 인터페이스와 공통 상태를 제공한다.",
+            "properties": [
+                {
+                    "name": "videoPlayerBase.onError",
+                    "type": "Event",
+                    "desc": "Notify listeners of a runtime playback failure.",
+                    "desc_ja": "再生中のエラーをリスナーに通知する。",
+                    "desc_ko": "재생 중 발생한 오류를 리스너에 알린다."
+                }
+            ],
+            "methods": [
+                {
+                    "name": "videoPlayerBase:close",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Closes the video and releases its resources.",
+                    "desc_ja": "動画を閉じてリソースを解放する。",
+                    "desc_ko": "비디오를 닫고 리소스를 해제한다."
+                },
+                {
+                    "name": "videoPlayerBase:draw",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "x, y, w, h"
+                        }
+                    ],
+                    "desc": "Draws the texture at a specified position and optional size.",
+                    "desc_ja": "指定した位置と任意のサイズでテクスチャを描画する。",
+                    "desc_ko": "지정한 위치와 선택적 크기로 텍스처를 그린다."
+                },
+                {
+                    "name": "videoPlayerBase:firstFrame",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Seeks to the first video frame.",
+                    "desc_ja": "動画の最初のフレームに移動する。",
+                    "desc_ko": "비디오의 첫 프레임으로 이동한다."
+                },
+                {
+                    "name": "videoPlayerBase:getAudioChannels",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the audio channel count.",
+                    "desc_ja": "音声のチャンネル数を返す。",
+                    "desc_ko": "오디오 채널 수를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getAudioCodec",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the audio codec identifier.",
+                    "desc_ja": "音声コーデックの識別子を返す。",
+                    "desc_ko": "오디오 코덱 식별자를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getAudioData",
+                    "signatures": [
+                        {
+                            "ret": "table",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return audio bytes in their original format.",
+                    "desc_ja": "元の形式の音声データを返す。",
+                    "desc_ko": "원래 형식의 오디오 데이터를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getAudioSampleRate",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the audio sample rate.",
+                    "desc_ja": "音声のサンプルレートを返す。",
+                    "desc_ko": "오디오 샘플 레이트를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getCurrentFrame",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the current frame index.",
+                    "desc_ja": "現在のフレーム番号を返す。",
+                    "desc_ko": "현재 프레임 인덱스를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getCurrentTime",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the current playback time.",
+                    "desc_ja": "現在の再生時間を返す。",
+                    "desc_ko": "현재 재생 시간을 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getDuration",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the video duration in seconds.",
+                    "desc_ja": "動画の長さを秒単位で返す。",
+                    "desc_ko": "비디오 길이를 초 단위로 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getErrorMessage",
+                    "signatures": [
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the last delivered runtime playback error message.",
+                    "desc_ja": "最後に通知した再生中のエラーメッセージを返す。",
+                    "desc_ko": "마지막으로 전달한 재생 중 오류 메시지를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getFrameRate",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the video frame rate.",
+                    "desc_ja": "動画のフレームレートを返す。",
+                    "desc_ko": "비디오 프레임 레이트를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getHeight",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the video height.",
+                    "desc_ja": "動画の高さを返す。",
+                    "desc_ko": "비디오의 높이를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getHwAccelName",
+                    "signatures": [
+                        {
+                            "ret": "string",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the reported decode backend name.",
+                    "desc_ja": "報告されているデコードバックエンド名を返す。",
+                    "desc_ko": "보고된 디코드 백엔드 이름을 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getMagFilter",
+                    "signatures": [
+                        {
+                            "ret": "TextureFilter",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the texture magnification filter.",
+                    "desc_ja": "テクスチャの拡大フィルタを返す。",
+                    "desc_ko": "텍스처 확대 필터를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getMinFilter",
+                    "signatures": [
+                        {
+                            "ret": "TextureFilter",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the texture minification filter.",
+                    "desc_ja": "テクスチャの縮小フィルタを返す。",
+                    "desc_ko": "텍스처 축소 필터를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getPan",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the stored stereo pan.",
+                    "desc_ja": "保存されているステレオパンを返す。",
+                    "desc_ko": "저장된 스테레오 팬을 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getPixels",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        },
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return a pointer to the player's RGBA pixel buffer.",
+                    "desc_ja": "プレイヤーの RGBA ピクセルバッファへのポインターを返す。",
+                    "desc_ko": "플레이어의 RGBA 픽셀 버퍼 포인터를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getPosition",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the normalized playback position.",
+                    "desc_ja": "正規化された再生位置を返す。",
+                    "desc_ko": "정규화된 재생 위치를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getResyncThreshold",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the hard resynchronization threshold.",
+                    "desc_ja": "強制的な同期補正の閾値を返す。",
+                    "desc_ko": "강제 동기화 보정 임계값을 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getSpeed",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the stored playback speed.",
+                    "desc_ja": "保存されている再生速度を返す。",
+                    "desc_ko": "저장된 재생 속도를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getTexture",
+                    "signatures": [
+                        {
+                            "ret": "Texture",
+                            "params": ""
+                        },
+                        {
+                            "ret": "Texture",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the player's video texture.",
+                    "desc_ja": "プレイヤーの動画テクスチャを返す。",
+                    "desc_ko": "플레이어의 비디오 텍스처를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getTotalFrames",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return the total frame count.",
+                    "desc_ja": "総フレーム数を返す。",
+                    "desc_ko": "전체 프레임 수를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getVolume",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the stored audio volume.",
+                    "desc_ja": "保存されている音量を返す。",
+                    "desc_ko": "저장된 음량을 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getWidth",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the video width.",
+                    "desc_ja": "動画の幅を返す。",
+                    "desc_ko": "비디오의 너비를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getWrapU",
+                    "signatures": [
+                        {
+                            "ret": "TextureWrap",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the texture wrap mode on the U axis.",
+                    "desc_ja": "テクスチャの U 軸のラップモードを返す。",
+                    "desc_ko": "텍스처 U축의 래핑 모드를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:getWrapV",
+                    "signatures": [
+                        {
+                            "ret": "TextureWrap",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the texture wrap mode on the V axis.",
+                    "desc_ja": "テクスチャの V 軸のラップモードを返す。",
+                    "desc_ko": "텍스처 V축의 래핑 모드를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:hasAudio",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Report whether the video has an audio track.",
+                    "desc_ja": "動画に音声トラックがあるか返す。",
+                    "desc_ko": "비디오에 오디오 트랙이 있는지 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:hasError",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Return whether a runtime playback error has been delivered.",
+                    "desc_ja": "再生中のエラーが通知済みかを返す。",
+                    "desc_ko": "재생 중 오류가 전달되었는지 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:hasTexture",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns whether the underlying texture is allocated.",
+                    "desc_ja": "内部テクスチャが確保済みかどうかを返す。",
+                    "desc_ko": "내부 텍스처가 할당되었는지 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:isDone",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Reports whether playback completion has been recorded.",
+                    "desc_ja": "再生の完了が記録されているかを返す。",
+                    "desc_ko": "재생 완료가 기록되었는지 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:isFrameNew",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Reports whether a new video frame is marked available.",
+                    "desc_ja": "新しい動画フレームが利用可能と記録されているかを返す。",
+                    "desc_ko": "새 비디오 프레임을 사용할 수 있다고 기록되었는지 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:isLoaded",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Reports whether the player is initialized.",
+                    "desc_ja": "プレイヤーが初期化済みかを返す。",
+                    "desc_ko": "플레이어가 초기화되었는지 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:isLoop",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Reports whether looping is enabled.",
+                    "desc_ja": "ループ再生が有効かを返す。",
+                    "desc_ko": "반복 재생이 활성화되었는지 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:isPaused",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Reports the pause flag.",
+                    "desc_ja": "一時停止のフラグを返す。",
+                    "desc_ko": "일시정지 플래그를 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:isPlaying",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Reports whether playback is marked active and unpaused.",
+                    "desc_ja": "再生中かつ一時停止中ではない状態かを返す。",
+                    "desc_ko": "재생이 활성 상태이고 일시정지 중이 아닌지 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:isReady",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Reports whether a video picture has been received.",
+                    "desc_ja": "動画の映像を受け取った状態かを返す。",
+                    "desc_ko": "비디오 영상을 받은 상태인지 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:isUsingHwAccel",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Report whether the player indicates hardware decoding.",
+                    "desc_ja": "プレイヤーがハードウェアデコードの使用を示しているか返す。",
+                    "desc_ko": "플레이어가 하드웨어 디코딩 사용을 보고하는지 반환한다."
+                },
+                {
+                    "name": "videoPlayerBase:load",
+                    "signatures": [
+                        {
+                            "ret": "LoadResult",
+                            "params": "path"
+                        }
+                    ],
+                    "desc": "Loads a video from a path.",
+                    "desc_ja": "パスで指定した動画を読み込む。",
+                    "desc_ko": "경로로 지정한 비디오를 로드한다."
+                },
+                {
+                    "name": "videoPlayerBase:nextFrame",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Advance one video frame.",
+                    "desc_ja": "動画を 1 フレーム進める。",
+                    "desc_ko": "비디오를 한 프레임 앞으로 이동한다."
+                },
+                {
+                    "name": "videoPlayerBase:play",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Starts or resumes video playback.",
+                    "desc_ja": "動画の再生を開始または再開する。",
+                    "desc_ko": "비디오 재생을 시작하거나 재개한다."
+                },
+                {
+                    "name": "videoPlayerBase:previousFrame",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Step back one video frame.",
+                    "desc_ja": "動画を 1 フレーム戻す。",
+                    "desc_ko": "비디오를 한 프레임 뒤로 이동한다."
+                },
+                {
+                    "name": "videoPlayerBase:save",
+                    "signatures": [
+                        {
+                            "ret": "SaveResult",
+                            "params": "path"
+                        }
+                    ],
+                    "desc": "Provides a virtual interface for saving texture contents.",
+                    "desc_ja": "テクスチャの内容を保存する仮想インターフェースを提供する。",
+                    "desc_ko": "텍스처 내용을 저장하는 가상 인터페이스를 제공한다."
+                },
+                {
+                    "name": "videoPlayerBase:setCurrentTime",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "seconds"
+                        }
+                    ],
+                    "desc": "Seeks to a playback time.",
+                    "desc_ja": "指定した再生時間に移動する。",
+                    "desc_ko": "지정한 재생 시간으로 이동한다."
+                },
+                {
+                    "name": "videoPlayerBase:setFilter",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "filter"
+                        }
+                    ],
+                    "desc": "Sets both texture minification and magnification filters.",
+                    "desc_ja": "テクスチャの縮小・拡大フィルタをまとめて設定する。",
+                    "desc_ko": "텍스처 축소 및 확대 필터를 함께 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:setFrame",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "frame"
+                        }
+                    ],
+                    "desc": "Seek to a frame index.",
+                    "desc_ja": "指定したフレーム番号にシークする。",
+                    "desc_ko": "지정한 프레임 인덱스로 이동한다."
+                },
+                {
+                    "name": "videoPlayerBase:setLoop",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "loop"
+                        }
+                    ],
+                    "desc": "Sets whether playback repeats.",
+                    "desc_ja": "ループ再生の有効・無効を設定する。",
+                    "desc_ko": "반복 재생 여부를 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:setMagFilter",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "filter"
+                        }
+                    ],
+                    "desc": "Sets the texture magnification filter.",
+                    "desc_ja": "テクスチャの拡大フィルタを設定する。",
+                    "desc_ko": "텍스처 확대 필터를 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:setMinFilter",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "filter"
+                        }
+                    ],
+                    "desc": "Sets the texture minification filter.",
+                    "desc_ja": "テクスチャの縮小フィルタを設定する。",
+                    "desc_ko": "텍스처 축소 필터를 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:setPan",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "pan"
+                        }
+                    ],
+                    "desc": "Sets the requested stereo pan.",
+                    "desc_ja": "ステレオパンの設定値を指定する。",
+                    "desc_ko": "요청할 스테레오 팬을 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:setPaused",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "paused"
+                        }
+                    ],
+                    "desc": "Pauses or resumes playback.",
+                    "desc_ja": "再生を一時停止または再開する。",
+                    "desc_ko": "재생을 일시정지하거나 재개한다."
+                },
+                {
+                    "name": "videoPlayerBase:setPosition",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "pct"
+                        }
+                    ],
+                    "desc": "Seek to a normalized playback position.",
+                    "desc_ja": "正規化された再生位置にシークする。",
+                    "desc_ko": "정규화된 재생 위치로 이동한다."
+                },
+                {
+                    "name": "videoPlayerBase:setResyncThreshold",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "seconds"
+                        }
+                    ],
+                    "desc": "Sets the threshold for hard playback resynchronization.",
+                    "desc_ja": "再生位置を強制的に同期補正する閾値を設定する。",
+                    "desc_ko": "재생 위치를 강제로 동기화 보정하는 임계값을 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:setSpeed",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "speed"
+                        }
+                    ],
+                    "desc": "Sets the requested playback speed.",
+                    "desc_ja": "再生速度の設定値を指定する。",
+                    "desc_ko": "요청할 재생 속도를 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:setVolume",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "vol"
+                        }
+                    ],
+                    "desc": "Sets the audio volume.",
+                    "desc_ja": "音量を設定する。",
+                    "desc_ko": "음량을 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:setWrap",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "wrap"
+                        }
+                    ],
+                    "desc": "Sets texture wrapping on both the U and V axes.",
+                    "desc_ja": "テクスチャの U・V 両軸のラップモードを設定する。",
+                    "desc_ko": "텍스처의 U축과 V축 래핑 모드를 함께 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:setWrapU",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "wrap"
+                        }
+                    ],
+                    "desc": "Sets texture wrapping on the horizontal U axis.",
+                    "desc_ja": "テクスチャの水平な U 軸のラップモードを設定する。",
+                    "desc_ko": "텍스처의 수평 U축 래핑 모드를 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:setWrapV",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "wrap"
+                        }
+                    ],
+                    "desc": "Sets texture wrapping on the vertical V axis.",
+                    "desc_ja": "テクスチャの垂直な V 軸のラップモードを設定する。",
+                    "desc_ko": "텍스처의 수직 V축 래핑 모드를 설정한다."
+                },
+                {
+                    "name": "videoPlayerBase:stop",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Stops playback and rewinds to the beginning.",
+                    "desc_ja": "再生を停止して先頭に戻す。",
+                    "desc_ko": "재생을 중지하고 처음으로 되돌린다."
+                },
+                {
+                    "name": "videoPlayerBase:togglePause",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Toggles the pause state.",
+                    "desc_ja": "一時停止の状態を切り替える。",
+                    "desc_ko": "일시정지 상태를 전환한다."
+                },
+                {
+                    "name": "videoPlayerBase:update",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Updates video frames and playback state.",
+                    "desc_ja": "動画のフレームと再生状態を更新する。",
+                    "desc_ko": "비디오 프레임과 재생 상태를 갱신한다."
                 }
             ]
         },

@@ -703,6 +703,13 @@
           "notes_ko": ""
         },
         {
+          "of": "ofSystem",
+          "tc": "runProcess(args, workingDir)",
+          "notes": "",
+          "notes_ja": "",
+          "notes_ko": ""
+        },
+        {
           "of": "ofSplitString",
           "tc": "splitString(source, delimiter, ignoreEmpty, trim)",
           "notes": "",

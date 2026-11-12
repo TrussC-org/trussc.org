@@ -454,6 +454,26 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "graphics_fbo",
+   "functions": [
+    {
+     "name": "beginStencil",
+     "snippet": "beginStencil()",
+     "desc": "Borrows all eight stencil bits on the current drawing target."
+    },
+    {
+     "name": "clearStencil",
+     "snippet": "clearStencil()",
+     "desc": "Replaces all stencil bytes with a plain value while owned."
+    },
+    {
+     "name": "endStencil",
+     "snippet": "endStencil()",
+     "desc": "Returns the whole stencil to 0, ends ownership and restores the saved framework state."
+    }
+   ]
+  },
+  {
    "name": "graphics_lighting",
    "functions": [
     {
@@ -3454,6 +3474,66 @@ const TrussSketchAPI = {
      "desc": "Stops and closes the audio output device."
     },
     {
+     "name": "setup",
+     "snippet": "setup()",
+     "return": "bool",
+     "desc": "Opens the audio output device (the same as init)."
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Stops and closes the audio output device (alias of shutdown)."
+    },
+    {
+     "name": "isConnected",
+     "snippet": "isConnected()",
+     "return": "bool",
+     "desc": "Returns whether the audio output device is open and running."
+    },
+    {
+     "name": "isInitialized",
+     "snippet": "isInitialized()",
+     "return": "bool",
+     "desc": "Returns whether audio output is initialized."
+    },
+    {
+     "name": "getSampleRate",
+     "snippet": "getSampleRate()",
+     "return": "int",
+     "desc": "Returns the engine output sample rate."
+    },
+    {
+     "name": "getChannels",
+     "snippet": "getChannels()",
+     "return": "int",
+     "desc": "Returns the engine output channel count."
+    },
+    {
+     "name": "getBufferSize",
+     "snippet": "getBufferSize()",
+     "return": "int",
+     "desc": "Returns the requested audio buffer size."
+    },
+    {
+     "name": "getPlayingSounds",
+     "snippet": "getPlayingSounds()",
+     "return": "std::vector<PlayingSoundInfo>",
+     "desc": "Returns a snapshot of playing and paused sounds."
+    },
+    {
+     "name": "getMaxPolyphony",
+     "snippet": "getMaxPolyphony()",
+     "return": "int",
+     "desc": "Returns the engine's voice cap, 0 for no cap."
+    },
+    {
+     "name": "getStats",
+     "snippet": "getStats()",
+     "return": "AudioStats",
+     "desc": "Returns a snapshot of audio engine diagnostics."
+    },
+    {
      "name": "getAnalysisBuffer",
      "snippet": "getAnalysisBuffer()",
      "return": "",
@@ -6075,6 +6155,102 @@ const TrussSketchAPI = {
      "desc": "Returns the camera's position."
     },
     {
+     "name": "setAzimuth",
+     "snippet": "setAzimuth(${1:radians})",
+     "return": "void",
+     "desc": "Sets the camera's orbit azimuth."
+    },
+    {
+     "name": "getAzimuth",
+     "snippet": "getAzimuth()",
+     "return": "float",
+     "desc": "Returns the camera's orbit azimuth."
+    },
+    {
+     "name": "setElevation",
+     "snippet": "setElevation(${1:radians})",
+     "return": "void",
+     "desc": "Sets the camera's orbit elevation."
+    },
+    {
+     "name": "getElevation",
+     "snippet": "getElevation()",
+     "return": "float",
+     "desc": "Returns the camera's orbit elevation."
+    },
+    {
+     "name": "enableOrtho",
+     "snippet": "enableOrtho()",
+     "return": "void",
+     "desc": "Selects orthographic projection."
+    },
+    {
+     "name": "disableOrtho",
+     "snippet": "disableOrtho()",
+     "return": "void",
+     "desc": "Selects perspective projection."
+    },
+    {
+     "name": "setOrtho",
+     "snippet": "setOrtho(${1:ortho})",
+     "return": "void",
+     "desc": "Selects orthographic or perspective projection."
+    },
+    {
+     "name": "getOrtho",
+     "snippet": "getOrtho()",
+     "return": "bool",
+     "desc": "Returns whether orthographic projection is selected."
+    },
+    {
+     "name": "setOrbitButton",
+     "snippet": "setOrbitButton(${1:button})",
+     "return": "EasyCam &",
+     "desc": "Sets the mouse button used to orbit the camera."
+    },
+    {
+     "name": "getOrbitButton",
+     "snippet": "getOrbitButton()",
+     "return": "int",
+     "desc": "Returns the mouse button assigned to orbit rotation."
+    },
+    {
+     "name": "setPanButton",
+     "snippet": "setPanButton(${1:button})",
+     "return": "EasyCam &",
+     "desc": "Sets the mouse button used to pan the camera."
+    },
+    {
+     "name": "getPanButton",
+     "snippet": "getPanButton()",
+     "return": "int",
+     "desc": "Returns the mouse button assigned to panning."
+    },
+    {
+     "name": "setDragModifier",
+     "snippet": "setDragModifier(${1:m})",
+     "return": "EasyCam &",
+     "desc": "Sets the modifier required for automatic camera mouse input."
+    },
+    {
+     "name": "getDragModifier",
+     "snippet": "getDragModifier()",
+     "return": "Modifier",
+     "desc": "Returns the modifier selected for camera mouse input."
+    },
+    {
+     "name": "setOrientation",
+     "snippet": "setOrientation(${1:q})",
+     "return": "void",
+     "desc": "Sets the camera's orientation quaternion."
+    },
+    {
+     "name": "getOrientation",
+     "snippet": "getOrientation()",
+     "return": "Quaternion",
+     "desc": "Returns the camera's orientation quaternion."
+    },
+    {
      "name": "setFovDeg",
      "snippet": "setFovDeg(${1:degrees})",
      "return": "void",
@@ -6264,6 +6440,12 @@ const TrussSketchAPI = {
      "desc": "Reads framebuffer contents into a CPU float buffer."
     },
     {
+     "name": "readStencil",
+     "snippet": "readStencil(${1:pixels})",
+     "return": "bool",
+     "desc": "Reads the framebuffer's stencil bytes into one-channel U8 Pixels."
+    },
+    {
      "name": "copyTo",
      "snippet": "copyTo(${1:image})",
      "return": "bool",
@@ -6300,6 +6482,18 @@ const TrussSketchAPI = {
      "desc": "Reports whether framebuffer allocation succeeded."
     },
     {
+     "name": "setDebugName",
+     "snippet": "setDebugName(${1:name})",
+     "return": "void",
+     "desc": "Sets the Fbo's inspection name."
+    },
+    {
+     "name": "getDebugName",
+     "snippet": "getDebugName()",
+     "return": "const std::string &",
+     "desc": "Returns the Fbo's inspection name."
+    },
+    {
      "name": "isActive",
      "snippet": "isActive()",
      "return": "bool",
@@ -6322,6 +6516,12 @@ const TrussSketchAPI = {
      "snippet": "draw(${1:x}, ${2:y})",
      "return": "void",
      "desc": "Draws the framebuffer contents onto the current target."
+    },
+    {
+     "name": "drawStencil",
+     "snippet": "drawStencil(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Draws the framebuffer's stencil bytes as an opaque gray image."
     },
     {
      "name": "getColorImage",
@@ -6585,6 +6785,12 @@ const TrussSketchAPI = {
      "snippet": "getDescent()",
      "return": "float",
      "desc": "Returns the font's descent below the baseline."
+    },
+    {
+     "name": "getGlyphInkBox",
+     "snippet": "getGlyphInkBox(${1:codepoint})",
+     "return": "Rect",
+     "desc": "Returns a glyph's outline ink rectangle in logical pixels relative to the horizontal baseline."
     },
     {
      "name": "getGlyphPath",
@@ -6932,6 +7138,57 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "GlyphBatch",
+   "desc": "Retains transformed glyph quads for repeated drawing in add order, batching consecutive glyphs on the same atlas page.",
+   "constructor": {
+    "snippet": "GlyphBatch()"
+   },
+   "methods": [
+    {
+     "name": "add",
+     "snippet": "add(${1:codepoint}, ${2:color})",
+     "return": "void",
+     "desc": "Appends colored glyph quads at the current matrix or an explicit model matrix."
+    },
+    {
+     "name": "clear",
+     "snippet": "clear()",
+     "return": "void",
+     "desc": "Discards retained geometry while keeping the font and batch settings."
+    },
+    {
+     "name": "draw",
+     "snippet": "draw()",
+     "return": "void",
+     "desc": "Draws retained glyphs using the current target and blend; an optional transform applies through a uniform."
+    },
+    {
+     "name": "setAlign",
+     "snippet": "setAlign(${1:h}, ${2:v})",
+     "return": "void",
+     "desc": "Sets horizontal and vertical alignment for subsequent adds; defaults to Left/Top like Font."
+    },
+    {
+     "name": "setAlignToInk",
+     "snippet": "setAlignToInk(${1:enabled})",
+     "return": "void",
+     "desc": "Centers subsequent independent glyphs on their outline ink box instead of advance and line metrics."
+    },
+    {
+     "name": "setFont",
+     "snippet": "setFont(${1:font})",
+     "return": "void",
+     "desc": "Clears the batch and retains a copy of a Font and its current settings."
+    },
+    {
+     "name": "setWritingMode",
+     "snippet": "setWritingMode(${1:mode})",
+     "return": "void",
+     "desc": "Sets writing mode for subsequent string adds; independent codepoints ignore it."
+    }
+   ]
+  },
+  {
    "name": "GrabberFrame",
    "desc": "Pairs a captured camera frame with its capture-time timestamp.",
    "properties": [
@@ -7199,6 +7456,42 @@ const TrussSketchAPI = {
      "desc": "Releases the image pixels and texture."
     },
     {
+     "name": "crop",
+     "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})",
+     "return": "void",
+     "desc": "Replaces the image with a rectangular crop."
+    },
+    {
+     "name": "halve",
+     "snippet": "halve()",
+     "return": "void",
+     "desc": "Reduces the image with 2×2 averaging."
+    },
+    {
+     "name": "mirror",
+     "snippet": "mirror(${1:horizontal}, ${2:vertical})",
+     "return": "void",
+     "desc": "Flips the image horizontally or vertically."
+    },
+    {
+     "name": "mirrorH",
+     "snippet": "mirrorH()",
+     "return": "void",
+     "desc": "Flips the image horizontally."
+    },
+    {
+     "name": "mirrorV",
+     "snippet": "mirrorV()",
+     "return": "void",
+     "desc": "Flips the image vertically."
+    },
+    {
+     "name": "resize",
+     "snippet": "resize(${1:newW}, ${2:newH})",
+     "return": "void",
+     "desc": "Resamples the image to a new size."
+    },
+    {
      "name": "draw",
      "snippet": "draw(${1:x}, ${2:y})",
      "return": "void",
@@ -7209,6 +7502,18 @@ const TrussSketchAPI = {
      "snippet": "isAllocated()",
      "return": "bool",
      "desc": "Reports whether CPU pixels are allocated."
+    },
+    {
+     "name": "setDebugName",
+     "snippet": "setDebugName(${1:name})",
+     "return": "void",
+     "desc": "Sets the image name used for MCP inspection."
+    },
+    {
+     "name": "getDebugName",
+     "snippet": "getDebugName()",
+     "return": "const std::string &",
+     "desc": "Returns the image name used for MCP inspection."
     },
     {
      "name": "getWidth",
@@ -8407,6 +8712,12 @@ const TrussSketchAPI = {
      "snippet": "inverted()",
      "return": "Mat4",
      "desc": "Returns the inverse of this matrix."
+    },
+    {
+     "name": "tryInvert",
+     "snippet": "tryInvert(${1:out})",
+     "return": "bool",
+     "desc": "Attempts to compute an inverse matrix and reports success."
     }
    ],
    "static_methods": [
@@ -9128,6 +9439,42 @@ const TrussSketchAPI = {
      "snippet": "setDevice(${1:device})",
      "return": "void",
      "desc": "Selects a capture device for subsequent startup by its ID."
+    },
+    {
+     "name": "setup",
+     "snippet": "setup()",
+     "return": "bool",
+     "desc": "Reopens the microphone at the last sample rate."
+    },
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Stops microphone capture (alias of stop)."
+    },
+    {
+     "name": "startAsync",
+     "snippet": "startAsync()",
+     "return": "void",
+     "desc": "Starts a microphone capture attempt asynchronously."
+    },
+    {
+     "name": "getDeviceName",
+     "snippet": "getDeviceName()",
+     "return": "std::string",
+     "desc": "Returns the capture device name."
+    },
+    {
+     "name": "isConnected",
+     "snippet": "isConnected()",
+     "return": "bool",
+     "desc": "Returns whether the microphone is open and capturing (alias of isRunning)."
+    },
+    {
+     "name": "isStarting",
+     "snippet": "isStarting()",
+     "return": "bool",
+     "desc": "Reports whether microphone startup is pending."
     },
     {
      "name": "start",
@@ -10350,6 +10697,42 @@ const TrussSketchAPI = {
      "snippet": "clear()",
      "return": "void",
      "desc": "Releases the pixel buffer."
+    },
+    {
+     "name": "crop",
+     "snippet": "crop(${1:x}, ${2:y}, ${3:w}, ${4:h})",
+     "return": "void",
+     "desc": "Replaces the pixels with a cropped region."
+    },
+    {
+     "name": "halve",
+     "snippet": "halve()",
+     "return": "void",
+     "desc": "Reduces the buffer to half size by averaging pixels."
+    },
+    {
+     "name": "mirror",
+     "snippet": "mirror(${1:horizontal}, ${2:vertical})",
+     "return": "void",
+     "desc": "Flips the pixel buffer horizontally or vertically."
+    },
+    {
+     "name": "mirrorH",
+     "snippet": "mirrorH()",
+     "return": "void",
+     "desc": "Flips the pixel buffer horizontally."
+    },
+    {
+     "name": "mirrorV",
+     "snippet": "mirrorV()",
+     "return": "void",
+     "desc": "Flips the pixel buffer vertically."
+    },
+    {
+     "name": "resize",
+     "snippet": "resize(${1:newW}, ${2:newH})",
+     "return": "void",
+     "desc": "Resamples the pixel buffer to new dimensions."
     },
     {
      "name": "isAllocated",
@@ -14260,6 +14643,12 @@ const TrussSketchAPI = {
      "snippet": "submitVertices()",
      "return": "",
      "desc": "Records vertices for deferred drawing with this shader."
+    },
+    {
+     "name": "drawVertices",
+     "snippet": "drawVertices(${1:vertexCount})",
+     "return": "void",
+     "desc": "Draws non-indexed triangles without uploading vertices or indices."
     }
    ]
   },
@@ -14515,7 +14904,37 @@ const TrussSketchAPI = {
    "constructor": {
     "snippet": "SoundBuffer()"
    },
+   "properties": [
+    {
+     "name": "numSamples",
+     "type": "size_t",
+     "desc": "Store the number of frames in the buffer."
+    },
+    {
+     "name": "samples",
+     "type": "std::vector<float>",
+     "desc": "Store interleaved floating-point PCM samples."
+    }
+   ],
    "methods": [
+    {
+     "name": "load",
+     "snippet": "load(${1:path})",
+     "return": "LoadResult",
+     "desc": "Decode an audio file into the buffer."
+    },
+    {
+     "name": "loadFlac",
+     "snippet": "loadFlac(${1:path})",
+     "return": "LoadResult",
+     "desc": "Decode a FLAC file into the buffer."
+    },
+    {
+     "name": "getPath",
+     "snippet": "getPath()",
+     "return": "fs::path",
+     "desc": "Return the resolved path of the last successful file load."
+    },
     {
      "name": "loadOgg",
      "snippet": "loadOgg(${1:path})",
@@ -14637,6 +15056,36 @@ const TrussSketchAPI = {
      "snippet": "createAdtsHeader()",
      "return": "",
      "desc": "Write an ADTS header for one raw AAC frame."
+    }
+   ]
+  },
+  {
+   "name": "SoundSource",
+   "desc": "Provides the abstract base interface for playable audio sources.",
+   "properties": [
+    {
+     "name": "channels",
+     "type": "int",
+     "desc": "Stores the source's audio channel count."
+    },
+    {
+     "name": "sampleRate",
+     "type": "int",
+     "desc": "Stores the source's audio sample rate."
+    }
+   ],
+   "methods": [
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "float",
+     "desc": "Returns the sound source's duration."
+    },
+    {
+     "name": "kind",
+     "snippet": "kind()",
+     "return": "Kind",
+     "desc": "Returns the sound source's kind."
     }
    ]
   },
@@ -17917,6 +18366,385 @@ const TrussSketchAPI = {
      "snippet": "update()",
      "return": "void",
      "desc": "Updates the current video frame and playback state."
+    }
+   ]
+  },
+  {
+   "name": "VideoPlayerBase",
+   "desc": "Provides the abstract interface and shared state for video playback.",
+   "properties": [
+    {
+     "name": "onError",
+     "type": "Event<VideoErrorEventArgs>",
+     "desc": "Notify listeners of a runtime playback failure."
+    }
+   ],
+   "methods": [
+    {
+     "name": "close",
+     "snippet": "close()",
+     "return": "void",
+     "desc": "Closes the video and releases its resources."
+    },
+    {
+     "name": "draw",
+     "snippet": "draw(${1:x}, ${2:y})",
+     "return": "void",
+     "desc": "Draws the texture at a specified position and optional size."
+    },
+    {
+     "name": "firstFrame",
+     "snippet": "firstFrame()",
+     "return": "void",
+     "desc": "Seeks to the first video frame."
+    },
+    {
+     "name": "getAudioChannels",
+     "snippet": "getAudioChannels()",
+     "return": "int",
+     "desc": "Return the audio channel count."
+    },
+    {
+     "name": "getAudioCodec",
+     "snippet": "getAudioCodec()",
+     "return": "uint32_t",
+     "desc": "Return the audio codec identifier."
+    },
+    {
+     "name": "getAudioData",
+     "snippet": "getAudioData()",
+     "return": "std::vector<uint8_t>",
+     "desc": "Return audio bytes in their original format."
+    },
+    {
+     "name": "getAudioSampleRate",
+     "snippet": "getAudioSampleRate()",
+     "return": "int",
+     "desc": "Return the audio sample rate."
+    },
+    {
+     "name": "getCurrentFrame",
+     "snippet": "getCurrentFrame()",
+     "return": "int",
+     "desc": "Return the current frame index."
+    },
+    {
+     "name": "getCurrentTime",
+     "snippet": "getCurrentTime()",
+     "return": "float",
+     "desc": "Returns the current playback time."
+    },
+    {
+     "name": "getDuration",
+     "snippet": "getDuration()",
+     "return": "float",
+     "desc": "Return the video duration in seconds."
+    },
+    {
+     "name": "getErrorMessage",
+     "snippet": "getErrorMessage()",
+     "return": "const std::string &",
+     "desc": "Return the last delivered runtime playback error message."
+    },
+    {
+     "name": "getFrameRate",
+     "snippet": "getFrameRate()",
+     "return": "float",
+     "desc": "Return the video frame rate."
+    },
+    {
+     "name": "getHeight",
+     "snippet": "getHeight()",
+     "return": "float",
+     "desc": "Returns the video height."
+    },
+    {
+     "name": "getHwAccelName",
+     "snippet": "getHwAccelName()",
+     "return": "std::string",
+     "desc": "Return the reported decode backend name."
+    },
+    {
+     "name": "getMagFilter",
+     "snippet": "getMagFilter()",
+     "return": "TextureFilter",
+     "desc": "Returns the texture magnification filter."
+    },
+    {
+     "name": "getMinFilter",
+     "snippet": "getMinFilter()",
+     "return": "TextureFilter",
+     "desc": "Returns the texture minification filter."
+    },
+    {
+     "name": "getPan",
+     "snippet": "getPan()",
+     "return": "float",
+     "desc": "Returns the stored stereo pan."
+    },
+    {
+     "name": "getPixels",
+     "snippet": "getPixels()",
+     "return": "unsigned char *",
+     "desc": "Return a pointer to the player's RGBA pixel buffer."
+    },
+    {
+     "name": "getPosition",
+     "snippet": "getPosition()",
+     "return": "float",
+     "desc": "Return the normalized playback position."
+    },
+    {
+     "name": "getResyncThreshold",
+     "snippet": "getResyncThreshold()",
+     "return": "float",
+     "desc": "Returns the hard resynchronization threshold."
+    },
+    {
+     "name": "getSpeed",
+     "snippet": "getSpeed()",
+     "return": "float",
+     "desc": "Returns the stored playback speed."
+    },
+    {
+     "name": "getTexture",
+     "snippet": "getTexture()",
+     "return": "Texture &",
+     "desc": "Return the player's video texture."
+    },
+    {
+     "name": "getTotalFrames",
+     "snippet": "getTotalFrames()",
+     "return": "int",
+     "desc": "Return the total frame count."
+    },
+    {
+     "name": "getVolume",
+     "snippet": "getVolume()",
+     "return": "float",
+     "desc": "Returns the stored audio volume."
+    },
+    {
+     "name": "getWidth",
+     "snippet": "getWidth()",
+     "return": "float",
+     "desc": "Returns the video width."
+    },
+    {
+     "name": "getWrapU",
+     "snippet": "getWrapU()",
+     "return": "TextureWrap",
+     "desc": "Returns the texture wrap mode on the U axis."
+    },
+    {
+     "name": "getWrapV",
+     "snippet": "getWrapV()",
+     "return": "TextureWrap",
+     "desc": "Returns the texture wrap mode on the V axis."
+    },
+    {
+     "name": "hasAudio",
+     "snippet": "hasAudio()",
+     "return": "bool",
+     "desc": "Report whether the video has an audio track."
+    },
+    {
+     "name": "hasError",
+     "snippet": "hasError()",
+     "return": "bool",
+     "desc": "Return whether a runtime playback error has been delivered."
+    },
+    {
+     "name": "hasTexture",
+     "snippet": "hasTexture()",
+     "return": "bool",
+     "desc": "Returns whether the underlying texture is allocated."
+    },
+    {
+     "name": "isDone",
+     "snippet": "isDone()",
+     "return": "bool",
+     "desc": "Reports whether playback completion has been recorded."
+    },
+    {
+     "name": "isFrameNew",
+     "snippet": "isFrameNew()",
+     "return": "bool",
+     "desc": "Reports whether a new video frame is marked available."
+    },
+    {
+     "name": "isLoaded",
+     "snippet": "isLoaded()",
+     "return": "bool",
+     "desc": "Reports whether the player is initialized."
+    },
+    {
+     "name": "isLoop",
+     "snippet": "isLoop()",
+     "return": "bool",
+     "desc": "Reports whether looping is enabled."
+    },
+    {
+     "name": "isPaused",
+     "snippet": "isPaused()",
+     "return": "bool",
+     "desc": "Reports the pause flag."
+    },
+    {
+     "name": "isPlaying",
+     "snippet": "isPlaying()",
+     "return": "bool",
+     "desc": "Reports whether playback is marked active and unpaused."
+    },
+    {
+     "name": "isReady",
+     "snippet": "isReady()",
+     "return": "bool",
+     "desc": "Reports whether a video picture has been received."
+    },
+    {
+     "name": "isUsingHwAccel",
+     "snippet": "isUsingHwAccel()",
+     "return": "bool",
+     "desc": "Report whether the player indicates hardware decoding."
+    },
+    {
+     "name": "load",
+     "snippet": "load(${1:path})",
+     "return": "LoadResult",
+     "desc": "Loads a video from a path."
+    },
+    {
+     "name": "nextFrame",
+     "snippet": "nextFrame()",
+     "return": "void",
+     "desc": "Advance one video frame."
+    },
+    {
+     "name": "play",
+     "snippet": "play()",
+     "return": "void",
+     "desc": "Starts or resumes video playback."
+    },
+    {
+     "name": "previousFrame",
+     "snippet": "previousFrame()",
+     "return": "void",
+     "desc": "Step back one video frame."
+    },
+    {
+     "name": "save",
+     "snippet": "save(${1:path})",
+     "return": "SaveResult",
+     "desc": "Provides a virtual interface for saving texture contents."
+    },
+    {
+     "name": "setCurrentTime",
+     "snippet": "setCurrentTime(${1:seconds})",
+     "return": "void",
+     "desc": "Seeks to a playback time."
+    },
+    {
+     "name": "setFilter",
+     "snippet": "setFilter(${1:filter})",
+     "return": "void",
+     "desc": "Sets both texture minification and magnification filters."
+    },
+    {
+     "name": "setFrame",
+     "snippet": "setFrame(${1:frame})",
+     "return": "void",
+     "desc": "Seek to a frame index."
+    },
+    {
+     "name": "setLoop",
+     "snippet": "setLoop(${1:loop})",
+     "return": "void",
+     "desc": "Sets whether playback repeats."
+    },
+    {
+     "name": "setMagFilter",
+     "snippet": "setMagFilter(${1:filter})",
+     "return": "void",
+     "desc": "Sets the texture magnification filter."
+    },
+    {
+     "name": "setMinFilter",
+     "snippet": "setMinFilter(${1:filter})",
+     "return": "void",
+     "desc": "Sets the texture minification filter."
+    },
+    {
+     "name": "setPan",
+     "snippet": "setPan(${1:pan})",
+     "return": "void",
+     "desc": "Sets the requested stereo pan."
+    },
+    {
+     "name": "setPaused",
+     "snippet": "setPaused(${1:paused})",
+     "return": "void",
+     "desc": "Pauses or resumes playback."
+    },
+    {
+     "name": "setPosition",
+     "snippet": "setPosition(${1:pct})",
+     "return": "void",
+     "desc": "Seek to a normalized playback position."
+    },
+    {
+     "name": "setResyncThreshold",
+     "snippet": "setResyncThreshold(${1:seconds})",
+     "return": "void",
+     "desc": "Sets the threshold for hard playback resynchronization."
+    },
+    {
+     "name": "setSpeed",
+     "snippet": "setSpeed(${1:speed})",
+     "return": "void",
+     "desc": "Sets the requested playback speed."
+    },
+    {
+     "name": "setVolume",
+     "snippet": "setVolume(${1:vol})",
+     "return": "void",
+     "desc": "Sets the audio volume."
+    },
+    {
+     "name": "setWrap",
+     "snippet": "setWrap(${1:wrap})",
+     "return": "void",
+     "desc": "Sets texture wrapping on both the U and V axes."
+    },
+    {
+     "name": "setWrapU",
+     "snippet": "setWrapU(${1:wrap})",
+     "return": "void",
+     "desc": "Sets texture wrapping on the horizontal U axis."
+    },
+    {
+     "name": "setWrapV",
+     "snippet": "setWrapV(${1:wrap})",
+     "return": "void",
+     "desc": "Sets texture wrapping on the vertical V axis."
+    },
+    {
+     "name": "stop",
+     "snippet": "stop()",
+     "return": "void",
+     "desc": "Stops playback and rewinds to the beginning."
+    },
+    {
+     "name": "togglePause",
+     "snippet": "togglePause()",
+     "return": "void",
+     "desc": "Toggles the pause state."
+    },
+    {
+     "name": "update",
+     "snippet": "update()",
+     "return": "void",
+     "desc": "Updates video frames and playback state."
     }
    ]
   },
