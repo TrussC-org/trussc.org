@@ -228,20 +228,6 @@
           "webSupported": true
         },
         {
-          "name": "shaderExample",
-          "width": 960,
-          "height": 600,
-          "webSupported": true,
-          "additionalFiles": ["shaders/effect.glsl"]
-        },
-        {
-          "name": "fullscreenShaderExample",
-          "width": 960,
-          "height": 600,
-          "webSupported": true,
-          "additionalFiles": ["shaders/effects.glsl"]
-        },
-        {
           "name": "strokeMeshExample",
           "width": 960,
           "height": 600,
@@ -265,6 +251,58 @@
           "width": 960,
           "height": 760,
           "webSupported": true
+        }
+      ]
+    },
+    "shader": {
+      "visible": true,
+      "items": [
+        {
+          "name": "pushShaderExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true,
+          "additionalFiles": ["shaders/effect.glsl"]
+        },
+        {
+          "name": "fullscreenShaderExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true,
+          "additionalFiles": ["shaders/effects.glsl"]
+        }
+      ]
+    },
+    "compute": {
+      "visible": true,
+      "items": [
+        {
+          "name": "computeTextureExample",
+          "width": 256,
+          "height": 256,
+          "webSupported": true,
+          "additionalFiles": ["texture.compute.glsl"]
+        },
+        {
+          "name": "computeParticlesExample",
+          "width": 640,
+          "height": 480,
+          "webSupported": true,
+          "additionalFiles": ["step.compute.glsl", "particles.compute.glsl"]
+        },
+        {
+          "name": "computeReadbackExample",
+          "width": 480,
+          "height": 100,
+          "webSupported": false,
+          "additionalFiles": ["sum.compute.glsl"]
+        },
+        {
+          "name": "computeReadbackAsyncExample",
+          "width": 480,
+          "height": 100,
+          "webSupported": true,
+          "additionalFiles": ["sum.compute.glsl"]
         }
       ]
     },
