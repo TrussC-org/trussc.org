@@ -7984,6 +7984,16 @@ const TrussCAPI = {
                     "desc_ko": "실행 파일 이름을 포함한 프로세스 시작 인수를 UTF-8 문자열로 반환합니다."
                 },
                 {
+                    "name": "getCustomBlendDesc",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "BlendDesc",
+                    "desc": "Returns a copy of the custom blend slot, regardless of the active mode.",
+                    "keywords": [],
+                    "desc_ja": "有効なモードにかかわらず、カスタムブレンドのスロットのコピーを返します。",
+                    "desc_ko": "활성 모드와 관계없이 사용자 지정 블렌드 슬롯의 복사본을 반환합니다."
+                },
+                {
                     "name": "getHeight",
                     "params": "",
                     "params_typed": "",
@@ -8128,6 +8138,16 @@ const TrussCAPI = {
                     "keywords": [],
                     "desc_ja": "スクリーンショットの非同期保存を要求する。",
                     "desc_ko": "스크린샷의 비동기 저장을 요청한다."
+                },
+                {
+                    "name": "setCustomBlendDesc",
+                    "params": "desc",
+                    "params_typed": "desc",
+                    "return_type": "(nothing)",
+                    "desc": "Stores a blend equation and source-conversion flag; updates an active Custom mode immediately.",
+                    "keywords": [],
+                    "desc_ja": "ブレンド式と描画元変換フラグを保存し、Custom が有効なら直ちに適用します。",
+                    "desc_ko": "블렌드 수식과 소스 변환 플래그를 저장하고 Custom이 활성 상태이면 즉시 적용합니다."
                 },
                 {
                     "name": "setDrawWhileHidden",
@@ -10343,6 +10363,22 @@ const TrussCAPI = {
                 "AudioSettings",
                 "initAudio"
             ],
+            "properties": [
+                {
+                    "name": "audioEngine.onDisconnect",
+                    "type": "Event",
+                    "desc": "Reports when the OS says an audio output device opened by name stopped.",
+                    "desc_ja": "名前で開いた音声出力デバイスの停止を OS が報告したことを通知する。",
+                    "desc_ko": "이름으로 연 오디오 출력 장치의 정지를 OS가 보고했음을 알린다."
+                },
+                {
+                    "name": "audioEngine.audioDeviceChanged",
+                    "type": "Event",
+                    "desc": "Reports a successful audio device initialization.",
+                    "desc_ja": "オーディオデバイスの初期化成功を通知する。",
+                    "desc_ko": "오디오 장치의 초기화 성공을 알린다."
+                }
+            ],
             "methods": [
                 {
                     "name": "audioEngine:listDevices",
@@ -10942,6 +10978,82 @@ const TrussCAPI = {
                     "desc": "Counts streaming voices stopped by decoder reopening failures during reinitialization.",
                     "desc_ja": "再初期化でデコーダーを開き直せず停止したストリーム再生インスタンス数を表す。",
                     "desc_ko": "재초기화 중 디코더를 다시 열지 못해 정지한 스트림 재생 인스턴스 수를 나타낸다."
+                }
+            ]
+        },
+        {
+            "name": "BlendDesc",
+            "desc": "Defines blend equations that standard modes cannot express, such as adding light while keeping destination alpha.",
+            "keywords": [],
+            "desc_ja": "光を加算しながら描画先のアルファを保つなど、標準モードでは表せないブレンド式を指定します。",
+            "desc_ko": "빛을 더하면서 대상 알파를 유지하는 등 표준 모드로 표현할 수 없는 블렌드 수식을 지정합니다.",
+            "related": [
+                "BlendFactor",
+                "BlendOp",
+                "setCustomBlendDesc",
+                "getCustomBlendDesc",
+                "BlendMode",
+                "BlendDesc::premultiplySource"
+            ],
+            "properties": [
+                {
+                    "name": "blendDesc.alpha",
+                    "type": "Component",
+                    "desc": "Sets the alpha equation; defaults to One/OneMinusSrcAlpha/Add.",
+                    "desc_ja": "アルファの式です。既定値は One/OneMinusSrcAlpha/Add です。",
+                    "desc_ko": "알파 수식입니다. 기본값은 One/OneMinusSrcAlpha/Add입니다."
+                },
+                {
+                    "name": "blendDesc.premultiplySource",
+                    "type": "boolean",
+                    "desc": "Multiplies shader source RGB by source alpha before blending; defaults to false.",
+                    "desc_ja": "ブレンド前にシェーダーの描画元 RGB にアルファを掛けます。既定値は false です。",
+                    "desc_ko": "블렌드 전에 셰이더 소스 RGB에 소스 알파를 곱합니다. 기본값은 false입니다."
+                },
+                {
+                    "name": "blendDesc.rgb",
+                    "type": "Component",
+                    "desc": "Sets the RGB equation; defaults to SrcAlpha/OneMinusSrcAlpha/Add.",
+                    "desc_ja": "RGB の式です。既定値は SrcAlpha/OneMinusSrcAlpha/Add です。",
+                    "desc_ko": "RGB 수식입니다. 기본값은 SrcAlpha/OneMinusSrcAlpha/Add입니다."
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "BlendDesc.addKeepAlpha",
+                    "signatures": [
+                        {
+                            "ret": "BlendDesc",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Adds RGB with SrcAlpha/One and preserves destination alpha with Zero/One.",
+                    "desc_ja": "RGB を SrcAlpha/One で加算し、アルファを Zero/One で保持する式を返します。",
+                    "desc_ko": "RGB를 SrcAlpha/One으로 더하고 알파를 Zero/One으로 유지하는 수식을 반환합니다."
+                },
+                {
+                    "name": "BlendDesc.premultipliedAdd",
+                    "signatures": [
+                        {
+                            "ret": "BlendDesc",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Adds RGB and alpha with One/One; leaves source conversion off.",
+                    "desc_ja": "RGB とアルファを One/One で加算し、描画元変換はオフにします。",
+                    "desc_ko": "RGB와 알파를 One/One으로 더하며 소스 변환은 끕니다."
+                },
+                {
+                    "name": "BlendDesc.screenKeepAlpha",
+                    "signatures": [
+                        {
+                            "ret": "BlendDesc",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Screens RGB with OneMinusDstColor/One and preserves destination alpha.",
+                    "desc_ja": "RGB を OneMinusDstColor/One でスクリーン合成し、描画先のアルファを保持します。",
+                    "desc_ko": "RGB를 OneMinusDstColor/One으로 스크린 합성하고 대상 알파를 유지합니다."
                 }
             ]
         },
@@ -14637,7 +14749,7 @@ const TrussCAPI = {
         },
         {
             "name": "GlyphBatch",
-            "desc": "Retains transformed glyph quads for repeated drawing in add order, batching consecutive glyphs on the same atlas page.",
+            "desc": "Stores glyphs for repeated drawing; use it instead of drawString when text or per-glyph placement can be reused.",
             "keywords": [
                 "glyph",
                 "batch",
@@ -14645,13 +14757,17 @@ const TrussCAPI = {
                 "atlas",
                 "text"
             ],
-            "desc_ja": "変換済みのグリフを保持し、同じアトラスページが連続する区間をまとめて追加順に繰り返し描画します。",
-            "desc_ko": "변환된 글리프를 유지하고 같은 아틀라스 페이지의 연속 구간을 묶어 추가 순서대로 반복 표시합니다.",
+            "desc_ja": "グリフを保持して繰り返し描画します。文字列やグリフごとの配置を再利用するときに、drawString の代わりに使います。",
+            "desc_ko": "글리프를 저장하여 반복해서 그립니다. 텍스트나 글리프별 배치를 재사용할 때 drawString 대신 사용합니다.",
             "related": [
                 "Font",
-                "Font::getGlyphInkBox",
+                "Font::drawString",
+                "GlyphBatch::setFont",
                 "GlyphBatch::add",
-                "GlyphBatch::draw"
+                "GlyphBatch::draw",
+                "GlyphBatch::clear",
+                "GlyphBatch::setTransform",
+                "GlyphBatch::setColor"
             ],
             "constructor": {
                 "signatures": [
@@ -14664,6 +14780,14 @@ const TrussCAPI = {
                     "signatures": [
                         {
                             "ret": "(nothing)",
+                            "params": "codepoint"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "codepoint, matrix"
+                        },
+                        {
+                            "ret": "(nothing)",
                             "params": "codepoint, color"
                         },
                         {
@@ -14672,12 +14796,16 @@ const TrussCAPI = {
                         },
                         {
                             "ret": "(nothing)",
+                            "params": "text"
+                        },
+                        {
+                            "ret": "(nothing)",
                             "params": "text, color"
                         }
                     ],
-                    "desc": "Appends colored glyph quads at the current matrix or an explicit model matrix.",
-                    "desc_ja": "現在の行列または明示したモデル行列で、色付きグリフを追加します。",
-                    "desc_ko": "현재 행렬 또는 명시적 모델 행렬로 색상이 있는 글리프를 추가합니다."
+                    "desc": "Appends a glyph or UTF-8 string, using batch settings for omitted arguments.",
+                    "desc_ja": "グリフまたは UTF-8 文字列を追加します。省略した引数にはバッチ設定を使います。",
+                    "desc_ko": "글리프 또는 UTF-8 문자열을 추가하며 생략한 인수에는 배치 설정을 사용합니다."
                 },
                 {
                     "name": "glyphBatch:clear",
@@ -14703,9 +14831,57 @@ const TrussCAPI = {
                             "params": "transform"
                         }
                     ],
-                    "desc": "Draws retained glyphs using the current target and blend; an optional transform applies through a uniform.",
-                    "desc_ja": "保持したグリフを現在の描画先とブレンドで描画し、任意の変換を uniform で適用します。",
-                    "desc_ko": "유지한 글리프를 현재 대상과 블렌드로 그리고 선택적 변환을 uniform으로 적용합니다."
+                    "desc": "Draws the retained glyphs with the current camera, target and blend mode; draw(transform) places the whole batch.",
+                    "desc_ja": "保持したグリフを現在のカメラ、描画先、ブレンドモードで描画します。draw(transform) はバッチ全体を配置します。",
+                    "desc_ko": "유지한 글리프를 현재 카메라, 대상, 블렌드 모드로 그립니다. draw(transform)은 배치 전체를 배치합니다."
+                },
+                {
+                    "name": "glyphBatch:getColor",
+                    "signatures": [
+                        {
+                            "ret": "Color",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the current batch color.",
+                    "desc_ja": "現在のバッチ色を返します。",
+                    "desc_ko": "현재 배치 색상을 반환합니다."
+                },
+                {
+                    "name": "glyphBatch:getTransform",
+                    "signatures": [
+                        {
+                            "ret": "Mat4",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the current batch transform.",
+                    "desc_ja": "現在のバッチ変換を返します。",
+                    "desc_ko": "현재 배치 변환을 반환합니다."
+                },
+                {
+                    "name": "glyphBatch:resetColor",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Resets the batch color to white (1,1,1,1).",
+                    "desc_ja": "バッチ色を白 (1,1,1,1) に戻します。",
+                    "desc_ko": "배치 색상을 흰색 (1,1,1,1)으로 초기화합니다."
+                },
+                {
+                    "name": "glyphBatch:resetTransform",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Resets the batch transform to identity.",
+                    "desc_ja": "バッチ変換を単位行列に戻します。",
+                    "desc_ko": "배치 변환을 단위 행렬로 초기화합니다."
                 },
                 {
                     "name": "glyphBatch:setAlign",
@@ -14732,6 +14908,18 @@ const TrussCAPI = {
                     "desc_ko": "이후 독립 글리프를 전진 폭과 행 메트릭 대신 윤곽 잉크 사각형의 중심에 정렬합니다."
                 },
                 {
+                    "name": "glyphBatch:setColor",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "color"
+                        }
+                    ],
+                    "desc": "Sets the color for later adds that omit a color; defaults to white (1,1,1,1).",
+                    "desc_ja": "色を省略した以後の追加に使う色を設定します。既定値は白 (1,1,1,1) です。",
+                    "desc_ko": "색상을 생략한 이후 추가에 사용할 색상을 설정합니다. 기본값은 흰색 (1,1,1,1)입니다."
+                },
+                {
                     "name": "glyphBatch:setFont",
                     "signatures": [
                         {
@@ -14742,6 +14930,18 @@ const TrussCAPI = {
                     "desc": "Clears the batch and retains a copy of a Font and its current settings.",
                     "desc_ja": "バッチを消去し、Font と現在の設定のコピーを保持します。",
                     "desc_ko": "배치를 지우고 Font와 현재 설정의 복사본을 유지합니다."
+                },
+                {
+                    "name": "glyphBatch:setTransform",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "transform"
+                        }
+                    ],
+                    "desc": "Sets the transform for each later glyph; defaults to identity.",
+                    "desc_ja": "以後の各グリフに使う変換を設定します。既定値は単位行列です。",
+                    "desc_ko": "이후 각 글리프에 사용할 변환을 설정합니다. 기본값은 단위 행렬입니다."
                 },
                 {
                     "name": "glyphBatch:setWritingMode",
@@ -15270,6 +15470,15 @@ const TrussCAPI = {
                     ""
                 ]
             },
+            "properties": [
+                {
+                    "name": "image.onLoad",
+                    "type": "Event",
+                    "desc": "Reports asynchronous image load completion.",
+                    "desc_ja": "画像の非同期読み込みの完了を通知する。",
+                    "desc_ko": "이미지 비동기 로드의 완료를 알린다."
+                }
+            ],
             "methods": [
                 {
                     "name": "image:load",
@@ -15290,6 +15499,26 @@ const TrussCAPI = {
                     "desc": "Saves the CPU image pixels to a file.",
                     "desc_ja": "CPU の画像ピクセルをファイルに保存する。",
                     "desc_ko": "CPU 이미지 픽셀을 파일에 저장한다."
+                },
+                {
+                    "name": "image:loadAsync",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "path, mipmaps = false"
+                    ],
+                    "desc": "Loads an image asynchronously.",
+                    "desc_ja": "画像を非同期に読み込む。",
+                    "desc_ko": "이미지를 비동기로 로드한다."
+                },
+                {
+                    "name": "image:isLoading",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Reports whether an asynchronous image load is pending.",
+                    "desc_ja": "画像の非同期読み込みが保留中かを返す。",
+                    "desc_ko": "이미지 비동기 로드가 대기 중인지 반환한다."
                 },
                 {
                     "name": "image:loadFromMemory",
@@ -18780,6 +19009,22 @@ const TrussCAPI = {
                     ""
                 ]
             },
+            "properties": [
+                {
+                    "name": "micInput.onStart",
+                    "type": "Event",
+                    "desc": "Reports the result of asynchronous microphone startup.",
+                    "desc_ja": "マイクの非同期起動結果を通知する。",
+                    "desc_ko": "마이크의 비동기 시작 결과를 알린다."
+                },
+                {
+                    "name": "micInput.onDisconnect",
+                    "type": "Event",
+                    "desc": "Reports when the OS says the capture device stopped.",
+                    "desc_ja": "OS が入力デバイスの停止を報告したことを通知する。",
+                    "desc_ko": "OS가 캡처 장치 정지를 보고했음을 알린다."
+                }
+            ],
             "methods": [
                 {
                     "name": "micInput:listDevices",
@@ -29085,6 +29330,13 @@ const TrussCAPI = {
             },
             "properties": [
                 {
+                    "name": "soundBuffer.onLoad",
+                    "type": "Event",
+                    "desc": "Reports the result of an asynchronous audio load.",
+                    "desc_ja": "音声の非同期読み込み結果を通知する。",
+                    "desc_ko": "오디오 비동기 로드 결과를 알린다."
+                },
+                {
                     "name": "soundBuffer.numSamples",
                     "type": "number",
                     "desc": "Store the number of frames in the buffer.",
@@ -29100,6 +29352,26 @@ const TrussCAPI = {
                 }
             ],
             "methods": [
+                {
+                    "name": "soundBuffer:loadAsync",
+                    "return": "(nothing)",
+                    "signatures": [
+                        "path"
+                    ],
+                    "desc": "Starts asynchronous loading of decoded audio data.",
+                    "desc_ja": "デコード済み音声データの非同期読み込みを開始する。",
+                    "desc_ko": "디코딩된 오디오 데이터의 비동기 로드를 시작한다."
+                },
+                {
+                    "name": "soundBuffer:isLoading",
+                    "return": "boolean",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "Returns whether an asynchronous audio load is pending.",
+                    "desc_ja": "音声の非同期読み込みが保留中かどうかを返す。",
+                    "desc_ko": "오디오 비동기 로드가 대기 중인지 반환한다."
+                },
                 {
                     "name": "soundBuffer:load",
                     "return": "LoadResult",
@@ -31244,6 +31516,16 @@ const TrussCAPI = {
             },
             "methods": [
                 {
+                    "name": "tweenColor:complete",
+                    "return": "",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
                     "name": "tweenColor:from",
                     "return": "TweenColor",
                     "signatures": [
@@ -31476,6 +31758,16 @@ const TrussCAPI = {
                 ]
             },
             "methods": [
+                {
+                    "name": "tweenFloat:complete",
+                    "return": "",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
                 {
                     "name": "tweenFloat:from",
                     "return": "TweenFloat",
@@ -32183,6 +32475,16 @@ const TrussCAPI = {
             },
             "methods": [
                 {
+                    "name": "tweenVec2:complete",
+                    "return": "",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
                     "name": "tweenVec2:from",
                     "return": "TweenVec2",
                     "signatures": [
@@ -32415,6 +32717,16 @@ const TrussCAPI = {
                 ]
             },
             "methods": [
+                {
+                    "name": "tweenVec3:complete",
+                    "return": "",
+                    "signatures": [
+                        ""
+                    ],
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
                 {
                     "name": "tweenVec3:from",
                     "return": "TweenVec3",
@@ -36673,6 +36985,13 @@ const TrussCAPI = {
                     "desc_ko": "디스플레이의 높은 픽셀 밀도를 사용하여 렌더링할지 지정한다."
                 },
                 {
+                    "name": "windowSettings.maxFrameLatency",
+                    "type": "number",
+                    "desc": "Windows D3D11 maximum frame latency; defaults to 2.",
+                    "desc_ja": "Windows D3D11 の最大フレーム遅延です。既定値は 2 です。",
+                    "desc_ko": "Windows D3D11의 최대 프레임 지연이며 기본값은 2입니다."
+                },
+                {
                     "name": "windowSettings.pipelinePoolSize",
                     "type": "number",
                     "desc": "Specifies the startup pipeline pool slot count.",
@@ -36779,6 +37098,18 @@ const TrussCAPI = {
                     "desc": "Sets whether rendering uses the display's high pixel density.",
                     "desc_ja": "ディスプレイの高い画素密度を使って描画するか設定する。",
                     "desc_ko": "디스플레이의 높은 픽셀 밀도를 사용하여 렌더링할지 설정한다."
+                },
+                {
+                    "name": "windowSettings:setMaxFrameLatency",
+                    "signatures": [
+                        {
+                            "ret": "WindowSettings",
+                            "params": "latency"
+                        }
+                    ],
+                    "desc": "Sets per-window Windows D3D11 CPU/GPU overlap; lower values reduce input latency and back-buffer memory.",
+                    "desc_ja": "Windows D3D11 でウィンドウごとの CPU/GPU の並行処理量を設定します。小さな値は入力遅延とバックバッファのメモリ使用量を抑えます。",
+                    "desc_ko": "Windows D3D11에서 윈도우별 CPU/GPU 병렬 처리량을 설정합니다. 작은 값은 입력 지연과 백 버퍼 메모리 사용량을 줄입니다."
                 },
                 {
                     "name": "windowSettings:setParentWindow",
@@ -37311,6 +37642,89 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "BlendFactor",
+            "desc": "Selects a portable source or destination blend factor.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "Zero",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "One",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "SrcColor",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "OneMinusSrcColor",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "SrcAlpha",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "OneMinusSrcAlpha",
+                    "value": 5,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DstColor",
+                    "value": 6,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "OneMinusDstColor",
+                    "value": 7,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DstAlpha",
+                    "value": 8,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "OneMinusDstAlpha",
+                    "value": 9,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "移植可能な描画元・描画先のブレンド係数を選択します。",
+            "desc_ko": "이식 가능한 소스 및 대상 블렌드 계수를 선택합니다.",
+            "related": [
+                "BlendDesc",
+                "BlendOp"
+            ]
+        },
+        {
             "name": "BlendMode",
             "desc": "Selects how drawing colors blend with the existing image.",
             "keywords": [
@@ -37365,13 +37779,70 @@ const TrussCAPI = {
                     "desc": "",
                     "desc_ja": "",
                     "desc_ko": ""
+                },
+                {
+                    "name": "Custom",
+                    "value": 6,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
                 }
             ],
-            "desc_ja": "描画色と既存の画像を混ぜる方法を指定する。",
-            "desc_ko": "그리기 색상을 기존 이미지와 혼합하는 방식을 지정한다.",
+            "desc_ja": "描画色と既存の画像を混ぜる方法を指定します。",
+            "desc_ko": "그리기 색상을 기존 이미지와 혼합하는 방식을 지정합니다.",
             "related": [
                 "setBlendMode",
-                "getBlendMode"
+                "getBlendMode",
+                "BlendDesc",
+                "setCustomBlendDesc"
+            ]
+        },
+        {
+            "name": "BlendOp",
+            "desc": "Selects Add, Subtract, ReverseSubtract, Minimum or Maximum.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "Add",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Subtract",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "ReverseSubtract",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Minimum",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Maximum",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "Add、Subtract、ReverseSubtract、Minimum、Maximum を選択します。",
+            "desc_ko": "Add, Subtract, ReverseSubtract, Minimum, Maximum을 선택합니다.",
+            "related": [
+                "BlendDesc",
+                "BlendFactor"
             ]
         },
         {

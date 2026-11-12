@@ -222,6 +222,11 @@ const TrussSketchAPI = {
    "name": "graphics",
    "functions": [
     {
+     "name": "getCustomBlendDesc",
+     "snippet": "getCustomBlendDesc()",
+     "desc": "Returns a copy of the custom blend slot, regardless of the active mode."
+    },
+    {
      "name": "getHeight",
      "snippet": "getHeight()",
      "desc": "Returns the current drawing target's height."
@@ -245,6 +250,11 @@ const TrussSketchAPI = {
      "name": "getWidth",
      "snippet": "getWidth()",
      "desc": "Returns the current drawing target's width."
+    },
+    {
+     "name": "setCustomBlendDesc",
+     "snippet": "setCustomBlendDesc(${1:desc})",
+     "desc": "Stores a blend equation and source-conversion flag; updates an active Custom mode immediately."
     }
    ]
   },
@@ -3454,6 +3464,18 @@ const TrussSketchAPI = {
   {
    "name": "AudioEngine",
    "desc": "Manages the output device and mixes sound playback using miniaudio.",
+   "properties": [
+    {
+     "name": "onDisconnect",
+     "type": "Event<DeviceDisconnectEventArgs>",
+     "desc": "Reports when the OS says an audio output device opened by name stopped."
+    },
+    {
+     "name": "audioDeviceChanged",
+     "type": "Event<AudioDeviceChangedArgs>",
+     "desc": "Reports a successful audio device initialization."
+    }
+   ],
    "methods": [
     {
      "name": "listDevices",
@@ -3923,6 +3945,113 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "BlendDesc",
+   "desc": "Defines blend equations that standard modes cannot express, such as adding light while keeping destination alpha.",
+   "properties": [
+    {
+     "name": "alpha",
+     "type": "Component",
+     "desc": "Sets the alpha equation; defaults to One/OneMinusSrcAlpha/Add."
+    },
+    {
+     "name": "premultiplySource",
+     "type": "bool",
+     "desc": "Multiplies shader source RGB by source alpha before blending; defaults to false."
+    },
+    {
+     "name": "rgb",
+     "type": "Component",
+     "desc": "Sets the RGB equation; defaults to SrcAlpha/OneMinusSrcAlpha/Add."
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "addKeepAlpha",
+     "snippet": "addKeepAlpha()",
+     "return": "BlendDesc",
+     "desc": "Adds RGB with SrcAlpha/One and preserves destination alpha with Zero/One."
+    },
+    {
+     "name": "premultipliedAdd",
+     "snippet": "premultipliedAdd()",
+     "return": "BlendDesc",
+     "desc": "Adds RGB and alpha with One/One; leaves source conversion off."
+    },
+    {
+     "name": "screenKeepAlpha",
+     "snippet": "screenKeepAlpha()",
+     "return": "BlendDesc",
+     "desc": "Screens RGB with OneMinusDstColor/One and preserves destination alpha."
+    }
+   ]
+  },
+  {
+   "name": "BlendFactor",
+   "desc": "Selects a portable source or destination blend factor.",
+   "static_methods": [
+    {
+     "name": "Zero",
+     "snippet": "Zero",
+     "return": "BlendFactor",
+     "desc": "= 0"
+    },
+    {
+     "name": "One",
+     "snippet": "One",
+     "return": "BlendFactor",
+     "desc": "= 1"
+    },
+    {
+     "name": "SrcColor",
+     "snippet": "SrcColor",
+     "return": "BlendFactor",
+     "desc": "= 2"
+    },
+    {
+     "name": "OneMinusSrcColor",
+     "snippet": "OneMinusSrcColor",
+     "return": "BlendFactor",
+     "desc": "= 3"
+    },
+    {
+     "name": "SrcAlpha",
+     "snippet": "SrcAlpha",
+     "return": "BlendFactor",
+     "desc": "= 4"
+    },
+    {
+     "name": "OneMinusSrcAlpha",
+     "snippet": "OneMinusSrcAlpha",
+     "return": "BlendFactor",
+     "desc": "= 5"
+    },
+    {
+     "name": "DstColor",
+     "snippet": "DstColor",
+     "return": "BlendFactor",
+     "desc": "= 6"
+    },
+    {
+     "name": "OneMinusDstColor",
+     "snippet": "OneMinusDstColor",
+     "return": "BlendFactor",
+     "desc": "= 7"
+    },
+    {
+     "name": "DstAlpha",
+     "snippet": "DstAlpha",
+     "return": "BlendFactor",
+     "desc": "= 8"
+    },
+    {
+     "name": "OneMinusDstAlpha",
+     "snippet": "OneMinusDstAlpha",
+     "return": "BlendFactor",
+     "desc": "= 9"
+    }
+   ]
+  },
+  {
    "name": "BlendMode",
    "desc": "Selects how drawing colors blend with the existing image.",
    "static_methods": [
@@ -3961,6 +4090,48 @@ const TrussSketchAPI = {
      "snippet": "Disabled",
      "return": "BlendMode",
      "desc": "= 5"
+    },
+    {
+     "name": "Custom",
+     "snippet": "Custom",
+     "return": "BlendMode",
+     "desc": "= 6"
+    }
+   ]
+  },
+  {
+   "name": "BlendOp",
+   "desc": "Selects Add, Subtract, ReverseSubtract, Minimum or Maximum.",
+   "static_methods": [
+    {
+     "name": "Add",
+     "snippet": "Add",
+     "return": "BlendOp",
+     "desc": "= 0"
+    },
+    {
+     "name": "Subtract",
+     "snippet": "Subtract",
+     "return": "BlendOp",
+     "desc": "= 1"
+    },
+    {
+     "name": "ReverseSubtract",
+     "snippet": "ReverseSubtract",
+     "return": "BlendOp",
+     "desc": "= 2"
+    },
+    {
+     "name": "Minimum",
+     "snippet": "Minimum",
+     "return": "BlendOp",
+     "desc": "= 3"
+    },
+    {
+     "name": "Maximum",
+     "snippet": "Maximum",
+     "return": "BlendOp",
+     "desc": "= 4"
     }
    ]
   },
@@ -7139,16 +7310,16 @@ const TrussSketchAPI = {
   },
   {
    "name": "GlyphBatch",
-   "desc": "Retains transformed glyph quads for repeated drawing in add order, batching consecutive glyphs on the same atlas page.",
+   "desc": "Stores glyphs for repeated drawing; use it instead of drawString when text or per-glyph placement can be reused.",
    "constructor": {
     "snippet": "GlyphBatch()"
    },
    "methods": [
     {
      "name": "add",
-     "snippet": "add(${1:codepoint}, ${2:color})",
+     "snippet": "add(${1:codepoint})",
      "return": "void",
-     "desc": "Appends colored glyph quads at the current matrix or an explicit model matrix."
+     "desc": "Appends a glyph or UTF-8 string, using batch settings for omitted arguments."
     },
     {
      "name": "clear",
@@ -7160,7 +7331,31 @@ const TrussSketchAPI = {
      "name": "draw",
      "snippet": "draw()",
      "return": "void",
-     "desc": "Draws retained glyphs using the current target and blend; an optional transform applies through a uniform."
+     "desc": "Draws the retained glyphs with the current camera, target and blend mode; draw(transform) places the whole batch."
+    },
+    {
+     "name": "getColor",
+     "snippet": "getColor()",
+     "return": "const Color &",
+     "desc": "Returns the current batch color."
+    },
+    {
+     "name": "getTransform",
+     "snippet": "getTransform()",
+     "return": "const Mat4 &",
+     "desc": "Returns the current batch transform."
+    },
+    {
+     "name": "resetColor",
+     "snippet": "resetColor()",
+     "return": "void",
+     "desc": "Resets the batch color to white (1,1,1,1)."
+    },
+    {
+     "name": "resetTransform",
+     "snippet": "resetTransform()",
+     "return": "void",
+     "desc": "Resets the batch transform to identity."
     },
     {
      "name": "setAlign",
@@ -7175,10 +7370,22 @@ const TrussSketchAPI = {
      "desc": "Centers subsequent independent glyphs on their outline ink box instead of advance and line metrics."
     },
     {
+     "name": "setColor",
+     "snippet": "setColor(${1:color})",
+     "return": "void",
+     "desc": "Sets the color for later adds that omit a color; defaults to white (1,1,1,1)."
+    },
+    {
      "name": "setFont",
      "snippet": "setFont(${1:font})",
      "return": "void",
      "desc": "Clears the batch and retains a copy of a Font and its current settings."
+    },
+    {
+     "name": "setTransform",
+     "snippet": "setTransform(${1:transform})",
+     "return": "void",
+     "desc": "Sets the transform for each later glyph; defaults to identity."
     },
     {
      "name": "setWritingMode",
@@ -7424,6 +7631,13 @@ const TrussSketchAPI = {
    "constructor": {
     "snippet": "Image()"
    },
+   "properties": [
+    {
+     "name": "onLoad",
+     "type": "Event<LoadResult>",
+     "desc": "Reports asynchronous image load completion."
+    }
+   ],
    "methods": [
     {
      "name": "load",
@@ -7436,6 +7650,18 @@ const TrussSketchAPI = {
      "snippet": "save(${1:path})",
      "return": "SaveResult",
      "desc": "Saves the CPU image pixels to a file."
+    },
+    {
+     "name": "loadAsync",
+     "snippet": "loadAsync(${1:path})",
+     "return": "void",
+     "desc": "Loads an image asynchronously."
+    },
+    {
+     "name": "isLoading",
+     "snippet": "isLoading()",
+     "return": "bool",
+     "desc": "Reports whether an asynchronous image load is pending."
     },
     {
      "name": "loadFromMemory",
@@ -9427,6 +9653,18 @@ const TrussSketchAPI = {
    "constructor": {
     "snippet": "MicInput()"
    },
+   "properties": [
+    {
+     "name": "onStart",
+     "type": "Event<MicStartResult>",
+     "desc": "Reports the result of asynchronous microphone startup."
+    },
+    {
+     "name": "onDisconnect",
+     "type": "Event<DeviceDisconnectEventArgs>",
+     "desc": "Reports when the OS says the capture device stopped."
+    }
+   ],
    "methods": [
     {
      "name": "listDevices",
@@ -14906,6 +15144,11 @@ const TrussSketchAPI = {
    },
    "properties": [
     {
+     "name": "onLoad",
+     "type": "Event<LoadResult>",
+     "desc": "Reports the result of an asynchronous audio load."
+    },
+    {
      "name": "numSamples",
      "type": "size_t",
      "desc": "Store the number of frames in the buffer."
@@ -14917,6 +15160,18 @@ const TrussSketchAPI = {
     }
    ],
    "methods": [
+    {
+     "name": "loadAsync",
+     "snippet": "loadAsync(${1:path})",
+     "return": "void",
+     "desc": "Starts asynchronous loading of decoded audio data."
+    },
+    {
+     "name": "isLoading",
+     "snippet": "isLoading()",
+     "return": "bool",
+     "desc": "Returns whether an asynchronous audio load is pending."
+    },
     {
      "name": "load",
      "snippet": "load(${1:path})",
@@ -16291,6 +16546,12 @@ const TrussSketchAPI = {
    },
    "methods": [
     {
+     "name": "complete",
+     "snippet": "complete()",
+     "return": "",
+     "desc": ""
+    },
+    {
      "name": "from",
      "snippet": "from(${1:value})",
      "return": "TweenColor",
@@ -16425,6 +16686,12 @@ const TrussSketchAPI = {
     "snippet": "TweenFloat(${1:from}, ${2:to}, ${3:duration})"
    },
    "methods": [
+    {
+     "name": "complete",
+     "snippet": "complete()",
+     "return": "",
+     "desc": ""
+    },
     {
      "name": "from",
      "snippet": "from(${1:value})",
@@ -16769,6 +17036,12 @@ const TrussSketchAPI = {
    },
    "methods": [
     {
+     "name": "complete",
+     "snippet": "complete()",
+     "return": "",
+     "desc": ""
+    },
+    {
      "name": "from",
      "snippet": "from(${1:value})",
      "return": "TweenVec2",
@@ -16903,6 +17176,12 @@ const TrussSketchAPI = {
     "snippet": "TweenVec3(${1:from}, ${2:to}, ${3:duration})"
    },
    "methods": [
+    {
+     "name": "complete",
+     "snippet": "complete()",
+     "return": "",
+     "desc": ""
+    },
     {
      "name": "from",
      "snippet": "from(${1:value})",
@@ -19076,6 +19355,11 @@ const TrussSketchAPI = {
      "desc": "Specifies whether rendering uses the display's high pixel density."
     },
     {
+     "name": "maxFrameLatency",
+     "type": "int",
+     "desc": "Windows D3D11 maximum frame latency; defaults to 2."
+    },
+    {
      "name": "pipelinePoolSize",
      "type": "int",
      "desc": "Specifies the startup pipeline pool slot count."
@@ -19144,6 +19428,12 @@ const TrussSketchAPI = {
      "snippet": "setHighDpi(${1:enabled})",
      "return": "WindowSettings &",
      "desc": "Sets whether rendering uses the display's high pixel density."
+    },
+    {
+     "name": "setMaxFrameLatency",
+     "snippet": "setMaxFrameLatency(${1:latency})",
+     "return": "WindowSettings &",
+     "desc": "Sets per-window Windows D3D11 CPU/GPU overlap; lower values reduce input latency and back-buffer memory."
     },
     {
      "name": "setParentWindow",

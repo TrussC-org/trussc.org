@@ -2826,10 +2826,6 @@ const TrussCAPI = {
                     "details_ko": "- 스트로크에서는 각 `vertex()`가 그 시점의 색상·두께·cap·join을 기록하며, 시작과 끝의 cap은 각각 첫 정점과 마지막 정점의 값을, 각 모서리의 join은 해당 정점의 값을 사용하고, 닫힌 스트로크의 닫는 모서리에는 첫 정점의 join을 사용하며 cap은 적용하지 않습니다.\n- 열려 있는 버퍼(`beginShape`, `beginLines`, `beginStroke` 중 하나)에 점을 하나 추가합니다. 어느 것도 열려 있지 않으면 아무 일도 하지 않습니다.\n- 2D 점(`vertex(x, y)`, `vertex(Vec2)`)과 3D 점(`vertex(x, y, z)`, `vertex(Vec3)`)을 전달할 수 있습니다. 2D 점의 z는 0이 됩니다.\n- `beginShape()` 안에서는 위치만 기록합니다. 색은 `endShape()`를 호출한 시점의 색이 사용됩니다.\n- `beginLines()` 안에서는 점마다 **그 시점의 색**도 기록합니다. 점 사이에서 색을 바꾸면 선분마다 색을 줄 수 있습니다.\n- `beginStroke()` 안에서는 점마다 **그 시점의 선 두께와 색상**을 기록하므로 한 선 안에서 두께와 색상을 바꿀 수 있습니다. 조인과 캡에는 해당 정점의 색상을 사용하며 선분에서는 양 끝의 색상을 보간합니다. `beginStroke`를 참조합니다.",
                     "examples": [
                         {
-                            "name": "shaderExample",
-                            "group": "graphics"
-                        },
-                        {
                             "name": "grabExample",
                             "group": "node"
                         },
@@ -2864,10 +2860,6 @@ const TrussCAPI = {
                     "details_ja": "- ストロークでは各 `vertex()` がその時点の色・太さ・cap・join を記録し、始点と終点の cap はそれぞれ最初と最後の頂点の値、各角の join はその頂点の値を使い、閉じたストロークの閉じる角には最初の頂点の join を使って cap は適用しません。\n- 開いているバッファ（`beginShape`、`beginLines`、`beginStroke` のいずれか）に点を 1 つ追加します。どれも開いていないときは何もしません。\n- 2D の点（`vertex(x, y)`、`vertex(Vec2)`）と 3D の点（`vertex(x, y, z)`、`vertex(Vec3)`）を渡せます。2D の点では z は 0 になります。\n- `beginShape()` の中では位置だけを記録します。色は `endShape()` を呼んだ時点のものが使われます。\n- `beginLines()` の中では、点ごとに**その時点の色**も記録します。点の間で色を変えると、線分ごとに色を付けられます。\n- `beginStroke()` の中では、点ごとに**その時点の線の太さと色**を記録するので、1 本の線の中で太さと色を変えられます。接合部とキャップにはその頂点の色を使い、線分では両端の色を補間します。`beginStroke` を参照してください。",
                     "details_ko": "- 스트로크에서는 각 `vertex()`가 그 시점의 색상·두께·cap·join을 기록하며, 시작과 끝의 cap은 각각 첫 정점과 마지막 정점의 값을, 각 모서리의 join은 해당 정점의 값을 사용하고, 닫힌 스트로크의 닫는 모서리에는 첫 정점의 join을 사용하며 cap은 적용하지 않습니다.\n- 열려 있는 버퍼(`beginShape`, `beginLines`, `beginStroke` 중 하나)에 점을 하나 추가합니다. 어느 것도 열려 있지 않으면 아무 일도 하지 않습니다.\n- 2D 점(`vertex(x, y)`, `vertex(Vec2)`)과 3D 점(`vertex(x, y, z)`, `vertex(Vec3)`)을 전달할 수 있습니다. 2D 점의 z는 0이 됩니다.\n- `beginShape()` 안에서는 위치만 기록합니다. 색은 `endShape()`를 호출한 시점의 색이 사용됩니다.\n- `beginLines()` 안에서는 점마다 **그 시점의 색**도 기록합니다. 점 사이에서 색을 바꾸면 선분마다 색을 줄 수 있습니다.\n- `beginStroke()` 안에서는 점마다 **그 시점의 선 두께와 색상**을 기록하므로 한 선 안에서 두께와 색상을 바꿀 수 있습니다. 조인과 캡에는 해당 정점의 색상을 사용하며 선분에서는 양 끝의 색상을 보간합니다. `beginStroke`를 참조합니다.",
                     "examples": [
-                        {
-                            "name": "shaderExample",
-                            "group": "graphics"
-                        },
                         {
                             "name": "grabExample",
                             "group": "node"
@@ -2904,10 +2896,6 @@ const TrussCAPI = {
                     "details_ko": "- 스트로크에서는 각 `vertex()`가 그 시점의 색상·두께·cap·join을 기록하며, 시작과 끝의 cap은 각각 첫 정점과 마지막 정점의 값을, 각 모서리의 join은 해당 정점의 값을 사용하고, 닫힌 스트로크의 닫는 모서리에는 첫 정점의 join을 사용하며 cap은 적용하지 않습니다.\n- 열려 있는 버퍼(`beginShape`, `beginLines`, `beginStroke` 중 하나)에 점을 하나 추가합니다. 어느 것도 열려 있지 않으면 아무 일도 하지 않습니다.\n- 2D 점(`vertex(x, y)`, `vertex(Vec2)`)과 3D 점(`vertex(x, y, z)`, `vertex(Vec3)`)을 전달할 수 있습니다. 2D 점의 z는 0이 됩니다.\n- `beginShape()` 안에서는 위치만 기록합니다. 색은 `endShape()`를 호출한 시점의 색이 사용됩니다.\n- `beginLines()` 안에서는 점마다 **그 시점의 색**도 기록합니다. 점 사이에서 색을 바꾸면 선분마다 색을 줄 수 있습니다.\n- `beginStroke()` 안에서는 점마다 **그 시점의 선 두께와 색상**을 기록하므로 한 선 안에서 두께와 색상을 바꿀 수 있습니다. 조인과 캡에는 해당 정점의 색상을 사용하며 선분에서는 양 끝의 색상을 보간합니다. `beginStroke`를 참조합니다.",
                     "examples": [
                         {
-                            "name": "shaderExample",
-                            "group": "graphics"
-                        },
-                        {
                             "name": "grabExample",
                             "group": "node"
                         },
@@ -2942,10 +2930,6 @@ const TrussCAPI = {
                     "details_ja": "- ストロークでは各 `vertex()` がその時点の色・太さ・cap・join を記録し、始点と終点の cap はそれぞれ最初と最後の頂点の値、各角の join はその頂点の値を使い、閉じたストロークの閉じる角には最初の頂点の join を使って cap は適用しません。\n- 開いているバッファ（`beginShape`、`beginLines`、`beginStroke` のいずれか）に点を 1 つ追加します。どれも開いていないときは何もしません。\n- 2D の点（`vertex(x, y)`、`vertex(Vec2)`）と 3D の点（`vertex(x, y, z)`、`vertex(Vec3)`）を渡せます。2D の点では z は 0 になります。\n- `beginShape()` の中では位置だけを記録します。色は `endShape()` を呼んだ時点のものが使われます。\n- `beginLines()` の中では、点ごとに**その時点の色**も記録します。点の間で色を変えると、線分ごとに色を付けられます。\n- `beginStroke()` の中では、点ごとに**その時点の線の太さと色**を記録するので、1 本の線の中で太さと色を変えられます。接合部とキャップにはその頂点の色を使い、線分では両端の色を補間します。`beginStroke` を参照してください。",
                     "details_ko": "- 스트로크에서는 각 `vertex()`가 그 시점의 색상·두께·cap·join을 기록하며, 시작과 끝의 cap은 각각 첫 정점과 마지막 정점의 값을, 각 모서리의 join은 해당 정점의 값을 사용하고, 닫힌 스트로크의 닫는 모서리에는 첫 정점의 join을 사용하며 cap은 적용하지 않습니다.\n- 열려 있는 버퍼(`beginShape`, `beginLines`, `beginStroke` 중 하나)에 점을 하나 추가합니다. 어느 것도 열려 있지 않으면 아무 일도 하지 않습니다.\n- 2D 점(`vertex(x, y)`, `vertex(Vec2)`)과 3D 점(`vertex(x, y, z)`, `vertex(Vec3)`)을 전달할 수 있습니다. 2D 점의 z는 0이 됩니다.\n- `beginShape()` 안에서는 위치만 기록합니다. 색은 `endShape()`를 호출한 시점의 색이 사용됩니다.\n- `beginLines()` 안에서는 점마다 **그 시점의 색**도 기록합니다. 점 사이에서 색을 바꾸면 선분마다 색을 줄 수 있습니다.\n- `beginStroke()` 안에서는 점마다 **그 시점의 선 두께와 색상**을 기록하므로 한 선 안에서 두께와 색상을 바꿀 수 있습니다. 조인과 캡에는 해당 정점의 색상을 사용하며 선분에서는 양 끝의 색상을 보간합니다. `beginStroke`를 참조합니다.",
                     "examples": [
-                        {
-                            "name": "shaderExample",
-                            "group": "graphics"
-                        },
                         {
                             "name": "grabExample",
                             "group": "node"
@@ -3747,9 +3731,9 @@ const TrussCAPI = {
                         "getBlendMode",
                         "clear"
                     ],
-                    "details": "- `setBlendMode()` chooses how new drawing is combined with what is already on the target. The modes are `BlendMode::Alpha` (the default, normal alpha blending), `Add` (additive), `Multiply`, `Screen`, `Subtract`, and `Disabled` (no blending; the new color simply overwrites the old one).\n- The mode stays in effect until you change it. It works the same way on the main window and inside an `Fbo`, it carries over to later frames, and it is passed on to a later `Fbo::begin()`. A forgotten `Add` or `Multiply` can therefore affect drawing you did not intend. When you are done with a temporary mode, call `resetBlendMode()` or wrap the change in `pushStyle()` and `popStyle()`.\n- With `Add`, the resulting RGB is `sourceRGB * sourceAlpha + destinationRGB` (RGB factors `SRC_ALPHA` and `ONE`). With `Screen`, the source RGB is multiplied by its alpha first, and the RGB factors are `ONE` and `ONE_MINUS_SRC_COLOR`.\n- For the output alpha, `Alpha`, `Multiply` and `Screen` use `sourceAlpha + destinationAlpha * (1 - sourceAlpha)` (alpha factors `ONE` and `ONE_MINUS_SRC_ALPHA`). For example, drawing twice with alpha `0.5` on a transparent target gives `0.75`. `Add` and `Subtract` add the two alpha values (alpha factors `ONE` and `ONE`). `Disabled` overwrites without blending.\n- With depth testing active (compare LESS_EQUAL), `Add`, `Screen`, `Multiply` and `Subtract` test depth without writing it, so previously drawn opaque geometry hides them while draws using the same blend mode can combine in either order. `Alpha` (the default, also used for opaque 3D) and `Disabled` keep writing depth.\n- A translucent `Alpha` shape also writes depth, hiding anything drawn behind it afterwards. For correct transparency, draw opaque objects first, then translucent ones from back to front; TrussC does not sort draws.",
-                    "details_ja": "- `setBlendMode()` は、これから描くものを、すでに描かれている内容とどのように合成するかを選びます。モードは `BlendMode::Alpha`（デフォルト。通常のアルファブレンディング）、`Add`（加算）、`Multiply`（乗算）、`Screen`（スクリーン）、`Subtract`（減算）、`Disabled`（ブレンドせず、新しい色でそのまま上書き）です。\n- 設定したモードは、変更するまで有効です。メインウィンドウでも `Fbo` の中でも同じように働き、次のフレームにも、その後の `Fbo::begin()` にも引き継がれます。そのため、`Add` や `Multiply` を戻し忘れると、意図しない描画にも影響します。一時的なモードが済んだら `resetBlendMode()` を呼ぶか、変更を `pushStyle()` と `popStyle()` で囲んでください。\n- `Add` では、合成後の RGB は `sourceRGB * sourceAlpha + destinationRGB` になります（RGB の係数は `SRC_ALPHA` と `ONE`）。`Screen` では、描画元の RGB にあらかじめアルファを掛け、RGB の係数は `ONE` と `ONE_MINUS_SRC_COLOR` になります。\n- 出力のアルファは、`Alpha`、`Multiply`、`Screen` では `sourceAlpha + destinationAlpha * (1 - sourceAlpha)` です（アルファの係数は `ONE` と `ONE_MINUS_SRC_ALPHA`）。たとえば、透明な描画先にアルファ `0.5` で 2 回重ねると `0.75` になります。`Add` と `Subtract` は両方のアルファを足します（アルファの係数は `ONE` と `ONE`）。`Disabled` はブレンドせずに上書きします。\n- デプステストが有効なとき（LESS_EQUAL 比較）、`Add`、`Screen`、`Multiply`、`Subtract` は深度を判定しますが、書き込みません。そのため、先に描いた不透明な物体には隠れますが、同じモードのブレンド描画同士はどちらの順序でも合成できます。`Alpha`（既定値で、不透明な 3D 描画にも使用します）と `Disabled` は深度を書き込みます。\n- 半透明の `Alpha` の図形も深度を書き込むため、そのあとに奥へ描いたものは隠れます。透明度を正しく合成するには、不透明な物体を先に描き、次に半透明の物体を奥から手前へ描いてください（TrussC は描画順を並べ替えません）。",
-                    "details_ko": "- `setBlendMode()`는 지금부터 그리는 내용을 이미 그려진 내용과 어떻게 합성할지 선택합니다. 모드는 `BlendMode::Alpha`(기본값, 일반 알파 블렌딩), `Add`(가산), `Multiply`(곱셈), `Screen`(스크린), `Subtract`(감산), `Disabled`(블렌딩 없이 새 색으로 그대로 덮어쓰기)입니다.\n- 설정한 모드는 바꾸기 전까지 유지됩니다. 메인 윈도우에서도 `Fbo` 안에서도 똑같이 동작하며, 다음 프레임에도, 이후의 `Fbo::begin()`에도 이어집니다. 그래서 `Add`나 `Multiply`를 되돌리는 것을 잊으면 의도하지 않은 그리기에도 영향을 줍니다. 임시 모드가 끝나면 `resetBlendMode()`를 호출하거나 변경을 `pushStyle()`과 `popStyle()`로 감싸세요.\n- `Add`에서는 합성된 RGB가 `sourceRGB * sourceAlpha + destinationRGB`가 됩니다(RGB 계수는 `SRC_ALPHA`와 `ONE`). `Screen`에서는 소스 RGB에 알파를 미리 곱하며, RGB 계수는 `ONE`과 `ONE_MINUS_SRC_COLOR`입니다.\n- 출력 알파는 `Alpha`, `Multiply`, `Screen`에서는 `sourceAlpha + destinationAlpha * (1 - sourceAlpha)`입니다(알파 계수는 `ONE`과 `ONE_MINUS_SRC_ALPHA`). 예를 들어 투명한 대상에 알파 `0.5`로 두 번 겹쳐 그리면 `0.75`가 됩니다. `Add`와 `Subtract`는 두 알파 값을 더합니다(알파 계수는 `ONE`과 `ONE`). `Disabled`는 블렌딩 없이 덮어씁니다.\n- 깊이 테스트가 활성화되어 있으면(LESS_EQUAL 비교) `Add`, `Screen`, `Multiply`, `Subtract`는 깊이를 판정하지만 기록하지 않습니다. 따라서 먼저 그린 불투명 물체에는 가려지지만 같은 모드의 블렌드 그리기끼리는 어느 순서로든 합성할 수 있습니다. `Alpha`(기본값이며 불투명 3D 그리기에도 사용합니다)와 `Disabled`는 깊이를 기록합니다.\n- 반투명 `Alpha` 도형도 깊이를 기록하므로 이후에 그 뒤에 그린 것은 가려집니다. 투명도를 올바르게 합성하려면 불투명 물체를 먼저 그리고 반투명 물체를 먼 곳에서 가까운 곳 순서로 그려야 하며, TrussC는 그리기 순서를 정렬하지 않습니다.",
+                    "details": "- Applies to shapes, images, Font::drawString and GlyphBatch::draw on windows and Fbos, including MSAA. Text coverage scales source alpha; Multiply and Screen premultiply that covered source automatically. Custom uses BlendDesc::premultiplySource, like shapes and images. The mode persists until changed.\n\nWith a Font loaded in setup(), draw additive text, then restore Alpha:\n```cpp\nsetBlendMode(BlendMode::Add);\nfont.drawString(\"Glow\", 20, 20);\nresetBlendMode();\n```\n\n- `setBlendMode()` chooses how new drawing is combined with what is already on the target. The modes are `BlendMode::Alpha` (the default, normal alpha blending), `Add` (additive), `Multiply`, `Screen`, `Subtract`, and `Disabled` (no blending; the new color simply overwrites the old one).\n- `Custom` selects the slot stored by `setCustomBlendDesc`; `getBlendMode()` then returns `Custom`. See `BlendDesc` for literal equations and the no-depth-write rule.\n- The mode stays in effect until you change it. It works the same way on the main window and inside an `Fbo`, it carries over to later frames, and it is passed on to a later `Fbo::begin()`. A forgotten `Add` or `Multiply` can therefore affect drawing you did not intend. When you are done with a temporary mode, call `resetBlendMode()` or wrap the change in `pushStyle()` and `popStyle()`.\n- With `Add`, the resulting RGB is `sourceRGB * sourceAlpha + destinationRGB` (RGB factors `SRC_ALPHA` and `ONE`). With `Screen`, the source RGB is multiplied by its alpha first, and the RGB factors are `ONE` and `ONE_MINUS_SRC_COLOR`.\n- For the output alpha, `Alpha`, `Multiply` and `Screen` use `sourceAlpha + destinationAlpha * (1 - sourceAlpha)` (alpha factors `ONE` and `ONE_MINUS_SRC_ALPHA`). For example, drawing twice with alpha `0.5` on a transparent target gives `0.75`. `Add` and `Subtract` add the two alpha values (alpha factors `ONE` and `ONE`). `Disabled` overwrites without blending.\n- With depth testing active (compare LESS_EQUAL), `Add`, `Screen`, `Multiply` and `Subtract` test depth without writing it, so previously drawn opaque geometry hides them while draws using the same blend mode can combine in either order. `Alpha` (the default, also used for opaque 3D) and `Disabled` keep writing depth.\n- A translucent `Alpha` shape also writes depth, hiding anything drawn behind it afterwards. For correct transparency, draw opaque objects first, then translucent ones from back to front; TrussC does not sort draws.",
+                    "details_ja": "- ウィンドウと Fbo（MSAA を含む）の図形、画像、Font::drawString、GlyphBatch::draw に適用します。文字の被覆率を描画元のアルファに掛け、Multiply と Screen ではその描画元を自動で乗算済みにします。Custom は図形・画像と同じ BlendDesc::premultiplySource に従います。変更するまでモードは維持されます。\n\nsetup() で読み込んだ Font を使い、加算で文字を描いて Alpha に戻します。\n```cpp\nsetBlendMode(BlendMode::Add);\nfont.drawString(\"Glow\", 20, 20);\nresetBlendMode();\n```\n\n- `setBlendMode()` は、これから描くものを、すでに描かれている内容とどのように合成するかを選びます。モードは `BlendMode::Alpha`（デフォルト。通常のアルファブレンディング）、`Add`（加算）、`Multiply`（乗算）、`Screen`（スクリーン）、`Subtract`（減算）、`Disabled`（ブレンドせず、新しい色でそのまま上書き）です。\n- `Custom` は `setCustomBlendDesc` で保存したスロットを選択し、`getBlendMode()` も `Custom` を返します。式の適用と深度を書き込まない規則は `BlendDesc` を参照してください。\n- 設定したモードは、変更するまで有効です。メインウィンドウでも `Fbo` の中でも同じように働き、次のフレームにも、その後の `Fbo::begin()` にも引き継がれます。そのため、`Add` や `Multiply` を戻し忘れると、意図しない描画にも影響します。一時的なモードが済んだら `resetBlendMode()` を呼ぶか、変更を `pushStyle()` と `popStyle()` で囲んでください。\n- `Add` では、合成後の RGB は `sourceRGB * sourceAlpha + destinationRGB` になります（RGB の係数は `SRC_ALPHA` と `ONE`）。`Screen` では、描画元の RGB にあらかじめアルファを掛け、RGB の係数は `ONE` と `ONE_MINUS_SRC_COLOR` になります。\n- 出力のアルファは、`Alpha`、`Multiply`、`Screen` では `sourceAlpha + destinationAlpha * (1 - sourceAlpha)` です（アルファの係数は `ONE` と `ONE_MINUS_SRC_ALPHA`）。たとえば、透明な描画先にアルファ `0.5` で 2 回重ねると `0.75` になります。`Add` と `Subtract` は両方のアルファを足します（アルファの係数は `ONE` と `ONE`）。`Disabled` はブレンドせずに上書きします。\n- デプステストが有効なとき（LESS_EQUAL 比較）、`Add`、`Screen`、`Multiply`、`Subtract` は深度を判定しますが、書き込みません。そのため、先に描いた不透明な物体には隠れますが、同じモードのブレンド描画同士はどちらの順序でも合成できます。`Alpha`（既定値で、不透明な 3D 描画にも使用します）と `Disabled` は深度を書き込みます。\n- 半透明の `Alpha` の図形も深度を書き込むため、そのあとに奥へ描いたものは隠れます。透明度を正しく合成するには、不透明な物体を先に描き、次に半透明の物体を奥から手前へ描いてください（TrussC は描画順を並べ替えません）。",
+                    "details_ko": "- 창과 Fbo(MSAA 포함)의 도형, 이미지, Font::drawString, GlyphBatch::draw에 적용됩니다. 텍스트 커버리지는 소스 알파에 곱해지며 Multiply와 Screen은 해당 소스를 자동으로 사전 곱셈합니다. Custom은 도형 및 이미지와 같은 BlendDesc::premultiplySource를 따릅니다. 모드는 변경할 때까지 유지됩니다.\n\nsetup()에서 로드한 Font로 가산 텍스트를 그린 다음 Alpha로 복원합니다.\n```cpp\nsetBlendMode(BlendMode::Add);\nfont.drawString(\"Glow\", 20, 20);\nresetBlendMode();\n```\n\n- `setBlendMode()`는 지금부터 그리는 내용을 이미 그려진 내용과 어떻게 합성할지 선택합니다. 모드는 `BlendMode::Alpha`(기본값, 일반 알파 블렌딩), `Add`(가산), `Multiply`(곱셈), `Screen`(스크린), `Subtract`(감산), `Disabled`(블렌딩 없이 새 색으로 그대로 덮어쓰기)입니다.\n- `Custom`은 `setCustomBlendDesc`로 저장한 슬롯을 선택하며 `getBlendMode()`도 `Custom`을 반환합니다. 수식 적용과 깊이를 기록하지 않는 규칙은 `BlendDesc`를 참조하십시오.\n- 설정한 모드는 바꾸기 전까지 유지됩니다. 메인 윈도우에서도 `Fbo` 안에서도 똑같이 동작하며, 다음 프레임에도, 이후의 `Fbo::begin()`에도 이어집니다. 그래서 `Add`나 `Multiply`를 되돌리는 것을 잊으면 의도하지 않은 그리기에도 영향을 줍니다. 임시 모드가 끝나면 `resetBlendMode()`를 호출하거나 변경을 `pushStyle()`과 `popStyle()`로 감싸세요.\n- `Add`에서는 합성된 RGB가 `sourceRGB * sourceAlpha + destinationRGB`가 됩니다(RGB 계수는 `SRC_ALPHA`와 `ONE`). `Screen`에서는 소스 RGB에 알파를 미리 곱하며, RGB 계수는 `ONE`과 `ONE_MINUS_SRC_COLOR`입니다.\n- 출력 알파는 `Alpha`, `Multiply`, `Screen`에서는 `sourceAlpha + destinationAlpha * (1 - sourceAlpha)`입니다(알파 계수는 `ONE`과 `ONE_MINUS_SRC_ALPHA`). 예를 들어 투명한 대상에 알파 `0.5`로 두 번 겹쳐 그리면 `0.75`가 됩니다. `Add`와 `Subtract`는 두 알파 값을 더합니다(알파 계수는 `ONE`과 `ONE`). `Disabled`는 블렌딩 없이 덮어씁니다.\n- 깊이 테스트가 활성화되어 있으면(LESS_EQUAL 비교) `Add`, `Screen`, `Multiply`, `Subtract`는 깊이를 판정하지만 기록하지 않습니다. 따라서 먼저 그린 불투명 물체에는 가려지지만 같은 모드의 블렌드 그리기끼리는 어느 순서로든 합성할 수 있습니다. `Alpha`(기본값이며 불투명 3D 그리기에도 사용합니다)와 `Disabled`는 깊이를 기록합니다.\n- 반투명 `Alpha` 도형도 깊이를 기록하므로 이후에 그 뒤에 그린 것은 가려집니다. 투명도를 올바르게 합성하려면 불투명 물체를 먼저 그리고 반투명 물체를 먼 곳에서 가까운 곳 순서로 그려야 하며, TrussC는 그리기 순서를 정렬하지 않습니다.",
                     "snippet": "void tcApp::draw() {\n    setBlendMode(BlendMode::Add);\n    drawCircle(100, 100, 50);\n    resetBlendMode();  // back to Alpha before drawing anything else\n}\n",
                     "examples": [
                         {
@@ -4004,10 +3988,6 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
-                        },
-                        {
-                            "name": "shaderExample",
-                            "group": "graphics"
                         }
                     ]
                 },
@@ -4039,10 +4019,6 @@ const TrussCAPI = {
                     "examples": [
                         {
                             "name": "strokeExample",
-                            "group": "graphics"
-                        },
-                        {
-                            "name": "shaderExample",
                             "group": "graphics"
                         },
                         {
@@ -5311,10 +5287,6 @@ const TrussCAPI = {
                         {
                             "name": "eventsExample",
                             "group": "events"
-                        },
-                        {
-                            "name": "clipboardExample",
-                            "group": "utils"
                         }
                     ]
                 },
@@ -7553,13 +7525,7 @@ const TrussCAPI = {
                     "details": "- Returns a `double` measured from program start on a steady clock, unaffected by system clock changes; it retains greater precision during long runtimes than `getElapsedTimef()`.\n- Shares its clock and reset offset with `getElapsedTimef`, `getElapsedTimeMillis`, `getElapsedTimeMicros`, and `getFrameElapsedTime`; `resetElapsedTimeCounter()` restarts the reported elapsed time without resetting framework timers or loop timing. Differences between readings represent durations only if no reset occurs between them.\n- Live elapsed-time getters may be called from worker threads; the reset offset is atomic and negative results caused by a concurrent reset are clamped to zero. Frame-sampled behavior is described in `getFrameElapsedTime`.",
                     "details_ja": "- プログラム開始からの経過秒数を steady clock で測り、`double` で返します。システム時刻の変更に影響されず、長時間の実行でも `getElapsedTimef()` より高い精度を保ちます。\n- `getElapsedTimef`、`getElapsedTimeMillis`、`getElapsedTimeMicros`、`getFrameElapsedTime` と時計とリセット用の差し引き値を共有します。`resetElapsedTimeCounter()` は表示する経過時間を数え直しますが、フレームワークのタイマーやループの時刻はリセットしません。2回の値の差が経過時間になるのは、間にリセットがない場合だけです。\n- 現在の経過時間を返す関数はワーカースレッドからも呼び出せます。リセット用の差し引き値はアトミックに扱われ、同時のリセットで結果が負になる場合はゼロになります。フレーム単位で取得する値の扱いは `getFrameElapsedTime` を参照してください。",
                     "details_ko": "- 프로그램 시작부터의 경과 시간을 steady clock으로 측정하여 `double` 초 단위로 반환합니다. 시스템 시각 변경의 영향을 받지 않으며, 장시간 실행에서도 `getElapsedTimef()`보다 높은 정밀도를 유지합니다.\n- `getElapsedTimef`, `getElapsedTimeMillis`, `getElapsedTimeMicros`, `getFrameElapsedTime`과 시계 및 리셋 오프셋을 공유합니다. `resetElapsedTimeCounter()`는 표시되는 경과 시간을 다시 시작하지만 프레임워크 타이머나 루프 타이밍은 리셋하지 않습니다. 두 측정값의 차이는 그 사이에 리셋이 없을 때만 경과 시간을 나타냅니다.\n- 현재 경과 시간을 반환하는 함수는 작업 스레드에서도 호출할 수 있습니다. 리셋 오프셋은 원자적으로 처리되며, 동시 리셋으로 결과가 음수가 되면 0으로 제한됩니다. 프레임별 샘플 값의 동작은 `getFrameElapsedTime`을 참조하세요.",
-                    "snippet": "void tcApp::draw() {\n    float x = 100.0f + 80.0f * cos(float(getElapsedTime()));\n    drawCircle(x, 100.0f, 10.0f);\n}\n",
-                    "examples": [
-                        {
-                            "name": "vectorMathExample",
-                            "group": "math"
-                        }
-                    ]
+                    "snippet": "void tcApp::draw() {\n    float x = 100.0f + 80.0f * cos(float(getElapsedTime()));\n    drawCircle(x, 100.0f, 10.0f);\n}\n"
                 },
                 {
                     "name": "getElapsedTimeMicros",
@@ -9175,10 +9141,6 @@ const TrussCAPI = {
                         {
                             "name": "imageOpsExample",
                             "group": "graphics"
-                        },
-                        {
-                            "name": "micInputExample",
-                            "group": "sound"
                         }
                     ]
                 },
@@ -12167,13 +12129,7 @@ const TrussCAPI = {
                     "details": "- Append values with `<<`; the returned `LogStream` emits one Error message when destroyed, normally at the end of the statement. The optional module string defaults to empty; a nonempty module adds a `[module] ` prefix.\n- Console, file, and system outputs apply their own level thresholds, while `getLogger().onLog` listeners receive every message. Logging an Error does not terminate the application.\n- Separate log streams can be used from any thread. Console and file writes are synchronized, and listeners run outside that output lock on the calling thread by default. Listeners registered with `Deliver::Main` run on the main thread and are queued when logging from a worker; the same rules apply to `logWarning`.",
                     "details_ja": "- `<<` で値を追加します。返された `LogStream` は、通常は文の末尾で破棄されるときに Error メッセージを 1 件出力します。省略可能なモジュール名の既定値は空文字列で、空でない場合は `[module] ` を先頭に付けます。\n- コンソール、ファイル、システムの各出力には個別のレベルしきい値が適用されますが、`getLogger().onLog` のリスナーにはすべてのメッセージが届きます。Error を記録してもアプリは終了しません。\n- 別々のログストリームは、どのスレッドからでも使えます。コンソールとファイルへの書き込みは同期され、既定ではリスナーはその出力ロックの外で呼び出し元のスレッド上で実行されます。`Deliver::Main` で登録したリスナーはメインスレッドで実行され、ワーカースレッドからログを記録した場合は実行を予約します。`logWarning` も同じ規則です。",
                     "details_ko": "- `<<`로 값을 추가합니다. 반환된 `LogStream`은 일반적으로 문장 끝에서 소멸할 때 Error 메시지 한 건을 출력합니다. 선택적 모듈 이름의 기본값은 빈 문자열이며, 비어 있지 않으면 앞에 `[module] `을 붙입니다.\n- 콘솔, 파일, 시스템 출력에는 각각의 수준 임계값을 적용하지만 `getLogger().onLog` 리스너에는 모든 메시지를 전달합니다. Error를 기록해도 앱을 종료하지 않습니다.\n- 별도의 로그 스트림은 어느 스레드에서든 사용할 수 있습니다. 콘솔 및 파일 쓰기는 동기화하며 기본적으로 리스너는 해당 출력 잠금 밖에서 호출한 스레드에서 실행합니다. `Deliver::Main`으로 등록한 리스너는 메인 스레드에서 실행하며 작업 스레드에서 로그를 기록하면 실행을 예약합니다. `logWarning`에도 같은 규칙을 적용합니다.",
-                    "snippet": "void tcApp::setup() {\n    logError(\"App\") << \"Could not load the requested resource\";\n}\n",
-                    "examples": [
-                        {
-                            "name": "fileExample",
-                            "group": "utils"
-                        }
-                    ]
+                    "snippet": "void tcApp::setup() {\n    logError(\"App\") << \"Could not load the requested resource\";\n}\n"
                 },
                 {
                     "name": "logFatal",
@@ -17460,10 +17416,6 @@ const TrussCAPI = {
                     "snippet": "// tcApp member: Shader shader;\nvoid tcApp::draw() {\n    if (!shader.isLoaded()) return;\n    pushShader(shader);\n    drawRect(20, 20, 120, 80);\n    popShader();\n}\n",
                     "examples": [
                         {
-                            "name": "shaderExample",
-                            "group": "graphics"
-                        },
-                        {
                             "name": "AllFeaturesExample",
                             "group": "tests"
                         }
@@ -17493,10 +17445,6 @@ const TrussCAPI = {
                     "details_ko": "- `Shader&`를 받아 해당 객체의 `begin()`을 호출합니다. TrussC의 버텍스 그리기 경로를 사용하는 그리기는 대응하는 `popShader()`까지 이 셰이더를 사용합니다.\n- 로드되지 않은 셰이더는 범위를 추가하지 않으므로 이후 `popShader()`가 이미 활성화된 바깥쪽 셰이더를 종료할 수 있습니다. 조건부로 범위를 시작할 때는 `isLoaded()`를 확인해야 합니다.\n- 범위 중첩, 렌더 타깃 제한, 스레드, 객체 수명은 `Shader`를 참조하세요.",
                     "snippet": "// tcApp member: Shader shader;\nvoid tcApp::draw() {\n    if (!shader.isLoaded()) return;\n    pushShader(shader);\n    drawRect(20, 20, 120, 80);\n    popShader();\n}\n",
                     "examples": [
-                        {
-                            "name": "shaderExample",
-                            "group": "graphics"
-                        },
                         {
                             "name": "AllFeaturesExample",
                             "group": "tests"
@@ -18649,13 +18597,7 @@ const TrussCAPI = {
                     "details": "- `exitApp(code)` sets the exit code (default `0`) and returns at once. Use a nonzero code to report failure. On Windows and Linux, `runApp()` returns this code to `main()`. On macOS, a normal quit does not return from `runApp()`: the process ends after cleanup with this code (see `runApp`).\n- **The quit can be canceled.** At the next safe point, TrussC sends `exitRequested`; if no listener cancels it, every App ends normally (`exit()` and `cleanup()`) and the process ends. See `RuntimeEvents::exitRequested`.\n- This is the one way to quit, in windowed and headless apps alike. `requestExitApp()` and `App::requestExit()` are deprecated aliases that call `exitApp()`.\n- It does not close a particular window and does not send `closeRequested`.\n- You can call it from another thread; the request is passed to the main thread.\n- Inside `App::exit()` or `cleanup()`, and while the process is already shutting down, it does nothing, and the exit code is not changed either.\n- On iOS, the process ends with the requested code after normal App shutdown (`exit()` and `cleanup()`). Apple discourages apps from quitting themselves, so distributed apps usually should not call this on iOS. It is meant for tests, tools and kiosk-style installs.\n- On Android this does nothing: the OS decides when the app ends.\n- On Linux and macOS, while a signal-triggered quit is pending, further SIGTERM signals are ignored so normal cleanup can finish. A further SIGINT (Ctrl+C) immediately exits with code `130`, skipping cleanup, even after SIGTERM. SIGTERM after SIGINT is ignored. A stuck app is left to the supervisor's SIGKILL.",
                     "details_ja": "- `exitApp(code)` は終了コード（既定値 `0`）を設定して、すぐに戻ります。失敗を伝えたいときは 0 以外のコードを使ってください。Windows と Linux では、`runApp()` がこのコードを `main()` に返します。macOS の通常の終了では `runApp()` は戻らず、cleanup のあとにこのコードでプロセスが終了します（`runApp` を参照）。\n- **終了は取り消せます。** 次の安全なタイミングで TrussC が `exitRequested` を送り、どのリスナーも取り消さなければ、すべての App が通常どおり終わり（`exit()` と `cleanup()`）、プロセスが終了します。`RuntimeEvents::exitRequested` を参照してください。\n- 終了する方法はこれ一つで、ウィンドウのあるアプリでもヘッドレスアプリでも同じです。`requestExitApp()` と `App::requestExit()` は、`exitApp()` を呼ぶだけの非推奨の別名です。\n- 特定のウィンドウは閉じず、`closeRequested` も送りません。\n- ほかのスレッドからも呼べます。要求はメインスレッドに渡されます。\n- `App::exit()` や `cleanup()` の中、およびプロセスがすでに終了処理に入っている間は何もせず、終了コードも変わりません。\n- iOS では、通常の App の終了処理（`exit()` と `cleanup()`）のあと、指定したコードでプロセスが終了します。Apple はアプリが自ら終了することを推奨していないため、配布するアプリでは通常 iOS で呼ばないでください。テスト、ツール、キオスク形式の設置向けです。\n- Android では何もしません。アプリをいつ終了させるかは OS が決めます。\n- Linux と macOS では、シグナルによる終了が保留中の間、追加の SIGTERM を無視し、通常の終了処理を続けます。追加の SIGINT（Ctrl+C）は、最初のシグナルが SIGTERM でも、終了処理を省略してコード `130` で即時終了します。SIGINT のあとの SIGTERM は無視します。アプリが応答しない場合は、監視プロセスの SIGKILL に任せます。",
                     "details_ko": "- `exitApp(code)`는 종료 코드(기본값 `0`)를 설정하고 바로 반환합니다. 실패를 알리려면 0이 아닌 코드를 사용하세요. Windows와 Linux에서는 `runApp()`이 이 코드를 `main()`에 반환합니다. macOS의 정상 종료에서는 `runApp()`이 반환되지 않고, cleanup 뒤에 이 코드로 프로세스가 끝납니다(`runApp` 참조).\n- **종료는 취소할 수 있습니다.** 다음 안전한 시점에 TrussC가 `exitRequested`를 보내고, 어떤 리스너도 취소하지 않으면 모든 App이 정상적으로 끝나며(`exit()`와 `cleanup()`) 프로세스가 종료됩니다. `RuntimeEvents::exitRequested`를 참조하세요.\n- 종료하는 방법은 이것 하나이며, 윈도우가 있는 앱과 헤드리스 앱에서 똑같습니다. `requestExitApp()`과 `App::requestExit()`는 `exitApp()`을 호출할 뿐인 사용이 권장되지 않는 별칭입니다.\n- 특정 창을 닫지 않으며 `closeRequested`도 보내지 않습니다.\n- 다른 스레드에서도 호출할 수 있습니다. 요청은 메인 스레드로 전달됩니다.\n- `App::exit()`나 `cleanup()` 안, 그리고 프로세스가 이미 종료 처리 중일 때는 아무 동작도 하지 않으며 종료 코드도 바뀌지 않습니다.\n- iOS에서는 정상적인 App 종료 처리(`exit()`와 `cleanup()`) 뒤에 지정한 코드로 프로세스가 종료됩니다. Apple은 앱이 스스로 종료하는 것을 권장하지 않으므로 배포하는 앱에서는 보통 iOS에서 호출하지 마세요. 테스트, 도구, 키오스크 형태의 설치용입니다.\n- Android에서는 아무 동작도 하지 않습니다. 앱을 언제 끝낼지는 OS가 정합니다.\n- Linux와 macOS에서는 시그널에 의한 종료가 대기 중인 동안 추가 SIGTERM을 무시하고 일반 종료 처리를 계속합니다. 추가 SIGINT(Ctrl+C)는 첫 시그널이 SIGTERM이어도 정리 처리를 생략하고 코드 `130`으로 즉시 종료합니다. SIGINT 뒤의 SIGTERM은 무시합니다. 앱이 멈춘 채로 있으면 감독 프로세스의 SIGKILL에 맡깁니다.",
-                    "snippet": "// tcApp.cpp\nvoid tcApp::keyPressed(int key) {\n    if (key == 'q') exitApp();          // quit normally (exit code 0)\n    if (key == 'e') exitApp(1);         // quit and report failure\n}\n",
-                    "examples": [
-                        {
-                            "name": "AllFeaturesExample",
-                            "group": "tests"
-                        }
-                    ]
+                    "snippet": "// tcApp.cpp\nvoid tcApp::keyPressed(int key) {\n    if (key == 'q') exitApp();          // quit normally (exit code 0)\n    if (key == 'e') exitApp(1);         // quit and report failure\n}\n"
                 },
                 {
                     "name": "exp2",
@@ -18698,6 +18640,30 @@ const TrussCAPI = {
                     "details_ja": "- `vector<string>` を値で返します。要素 0 は実行ファイルで、残りの引数は順序・空文字列・空白・フラグを保持します。テンプレートの `int main()` を変更する必要はありません。フラグの解析やファイルの読み込みは行いません。\n- Windows は `GetCommandLineW` と `CommandLineToArgvW` を使い、UTF-16 を UTF-8 に変換します。不正なサロゲートは U+FFFD に置き換えます。Linux は `/proc/self/cmdline` を NUL 区切りで読みます（利用できない場合は空のリストです）。macOS は `NSProcessInfo.arguments` を使います。\n- iOS・Android・Web では空のリストを返します。モバイルの共有・開く要求やブラウザの URL は対象外です。\n- ファイルドロップと同様に、OS・利用可能なメモリ・文字列と vector の表現上限だけが適用されます。Windows のコマンドラインは終端を含めて UTF-16 の 32767 単位までです。\n- OS から開くように要求されたファイルは `runtime().events().filesOpened` で受け取ります。引数をシェルコマンドとして実行しないでください。",
                     "details_ko": "- `vector<string>`을 값으로 반환합니다. 요소 0은 실행 파일이며 나머지 인수는 순서, 빈 문자열, 공백과 플래그를 유지합니다. 템플릿의 `int main()`을 변경할 필요가 없습니다. 플래그를 해석하거나 파일을 읽지 않습니다.\n- Windows는 `GetCommandLineW`와 `CommandLineToArgvW`로 얻은 UTF-16을 UTF-8로 변환하며 잘못된 서로게이트는 U+FFFD로 대체합니다. Linux는 NUL로 구분된 `/proc/self/cmdline`을 읽습니다(사용할 수 없으면 빈 목록입니다). macOS는 `NSProcessInfo.arguments`를 사용합니다.\n- iOS, Android와 Web에서는 빈 목록을 반환합니다. 모바일 공유 및 열기 요청과 브라우저 URL은 이 API의 범위에 포함하지 않습니다.\n- 파일 드롭과 마찬가지로 OS, 사용 가능한 메모리와 문자열/vector의 표현 한계만 적용합니다. Windows 명령줄은 종료 문자를 포함하여 UTF-16 32767단위로 제한합니다.\n- OS가 열도록 요청한 파일은 `runtime().events().filesOpened`로 받습니다. 인수를 셸 명령으로 실행하지 않습니다.",
                     "snippet": "void tcApp::setup() {\n    for (const auto& arg : getCommandLineArgs()) {\n        if (arg == \"--preview\") previewMode = true; // member: bool previewMode = false;\n    }\n}\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "getCustomBlendDesc",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "BlendDesc",
+                    "desc": "Returns a copy of the custom blend slot, regardless of the active mode.",
+                    "keywords": [],
+                    "desc_ja": "有効なモードにかかわらず、カスタムブレンドのスロットのコピーを返します。",
+                    "desc_ko": "활성 모드와 관계없이 사용자 지정 블렌드 슬롯의 복사본을 반환합니다.",
+                    "related": [
+                        "BlendDesc",
+                        "setCustomBlendDesc",
+                        "getBlendMode"
+                    ],
+                    "details": "- Use to inspect or edit a copy of the stored descriptor, initially BlendDesc{} (straight Alpha). Editing the copy has no effect until setCustomBlendDesc; getBlendMode reports the active mode separately.\n\nEdit the stored RGB operation:\n```cpp\nvoid tcApp::draw() {\n    auto blend = getCustomBlendDesc();\n    blend.rgb.op = BlendOp::Add;\n    setCustomBlendDesc(blend);\n}\n```",
+                    "details_ja": "- 保存済みの式を確認したり、コピーを編集したりするときに使います。初期値は通常の Alpha の式 BlendDesc{} です。コピーの編集は setCustomBlendDesc まで反映されません。有効なモードは getBlendMode で取得します。\n\n保存済みの RGB 演算を変更します。\n```cpp\nvoid tcApp::draw() {\n    auto blend = getCustomBlendDesc();\n    blend.rgb.op = BlendOp::Add;\n    setCustomBlendDesc(blend);\n}\n```",
+                    "details_ko": "- 저장된 수식을 확인하거나 복사본을 편집할 때 사용합니다. 초기값은 일반 Alpha 수식 BlendDesc{}입니다. 복사본 편집은 setCustomBlendDesc까지 반영되지 않습니다. 활성 모드는 getBlendMode로 조회합니다.\n\n저장된 RGB 연산을 변경합니다.\n```cpp\nvoid tcApp::draw() {\n    auto blend = getCustomBlendDesc();\n    blend.rgb.op = BlendOp::Add;\n    setCustomBlendDesc(blend);\n}\n```",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -19036,6 +19002,31 @@ const TrussCAPI = {
                     "details_ja": "- 解決した Window に非同期 capture を予約してフレームを要求します。各 Window は自分の capture queue だけを処理します。\n- メインスレッドで `saveScreenshotAsync(path)` を呼ぶと、要求元ウィンドウの次の画面表示時に撮影します。戻り値は `void` で、結果は `onScreenshotSave()` で受け取ります。\n- 保存先は要求時に確定します。パスと拡張子の規則は、`ScreenshotSaveEventArgs::path` を参照してください。\n- ネイティブではエンコードと書き込みをワーカーで行いますが、GPU からの読み戻しはメインスレッドで行うため、撮影するフレームが停止する場合があります。\n- 非表示の副ウィンドウは自身の次の画面表示を待ち、他のウィンドウの撮影を妨げません。メインウィンドウへの要求は再描画も要求します。\n- ネイティブでは全ウィンドウの書き込みを撮影完了順に 1 件ずつ処理します。遅い書き込みは後続の書き込みを遅らせます。同じ保存先への他の保存処理は、呼び出し側で直列化してください。\n- 撮影前にウィンドウを閉じた場合、描画ウィンドウなしで呼んだ場合、ネイティブで空のパスを渡した場合は、後から失敗を通知します。ヘッドレス実行には描画ウィンドウがありません。\n- Web ではキャンバスを撮影し、PNG または JPEG のダウンロードとして送信します。成功の意味は、`ScreenshotSaveEventArgs::result` を参照してください。\n- 完了通知のタイミング、アプリの実行期間、リスナーの保持については、`onScreenshotSave` を参照してください。\n- App のコードではその App のウィンドウが対象です。それ以外の場所では、開いているウィンドウがちょうど 1 つのときだけ動き、そうでなければエラーを記録して何もしません（`events` を参照）。\n\nウィンドウの読み戻しのアルファ精度と、正確なアルファ値に Fbo を使う方法は `grabScreen` を参照してください。",
                     "details_ko": "- 해석한 Window에 비동기 capture를 예약하고 프레임을 요청합니다. 각 Window는 자신의 capture queue만 처리합니다.\n- 메인 스레드에서 `saveScreenshotAsync(path)`를 호출하면 요청한 창이 다음에 화면을 표시할 때 캡처합니다. 반환형은 `void`이며 결과는 `onScreenshotSave()`로 받습니다.\n- 저장 대상은 요청 시 확정됩니다. 경로와 확장자 규칙은 `ScreenshotSaveEventArgs::path`를 참조하세요.\n- 네이티브에서는 워커가 인코딩과 쓰기를 수행하지만 GPU 읽기는 메인 스레드에서 수행하므로 캡처하는 프레임이 지연될 수 있습니다.\n- 숨겨진 보조 창은 자신의 다음 화면 표시를 기다리며 다른 창의 캡처를 막지 않습니다. 메인 창에 대한 요청은 다시 그리기도 요청합니다.\n- 네이티브에서는 모든 창의 쓰기를 캡처 완료 순서대로 한 건씩 처리합니다. 느린 쓰기는 이후 쓰기를 지연시킵니다. 같은 대상에 대한 다른 저장 작업은 호출자가 직렬화해야 합니다.\n- 캡처 전에 창을 닫거나, 렌더 창 없이 호출하거나, 네이티브에서 빈 경로를 전달하면 나중에 실패를 통지합니다. 헤드리스 실행에는 렌더 창이 없습니다.\n- Web에서는 캔버스를 캡처하여 PNG 또는 JPEG 다운로드로 제출합니다. 성공의 의미는 `ScreenshotSaveEventArgs::result`를 참조하세요.\n- 완료 통지 시점, 앱 실행 기간과 리스너 유지는 `onScreenshotSave`를 참조하세요.\n- App 코드에서는 그 App의 창이 대상입니다. 그 밖의 곳에서는 열린 창이 정확히 하나일 때만 동작하며, 그렇지 않으면 오류를 기록하고 아무 동작도 하지 않습니다(`events` 참조).\n\n윈도우 읽기의 알파 정밀도와 정확한 알파 값을 위해 Fbo를 사용하는 방법은 `grabScreen`을 참조합니다.",
                     "snippet": "void tcApp::setup() {\n    saveScreenshotAsync(\"screenshot.png\");\n}\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "setCustomBlendDesc",
+                    "params": "desc",
+                    "params_typed": "const BlendDesc & desc",
+                    "return_type": "void",
+                    "desc": "Stores a blend equation and source-conversion flag; updates an active Custom mode immediately.",
+                    "keywords": [],
+                    "desc_ja": "ブレンド式と描画元変換フラグを保存し、Custom が有効なら直ちに適用します。",
+                    "desc_ko": "블렌드 수식과 소스 변환 플래그를 저장하고 Custom이 활성 상태이면 즉시 적용합니다.",
+                    "related": [
+                        "BlendDesc",
+                        "getCustomBlendDesc",
+                        "setBlendMode",
+                        "BlendDesc::premultiplySource"
+                    ],
+                    "details": "- Select Custom separately; the setter keeps the current mode. Set both inside draw() because Nodes reset Style before drawing. pushStyle/popStyle restore the mode and descriptor; resetStyle restores Alpha and BlendDesc{}. Invalid descriptors warn and retain the previous state.\n\nRestore with the style stack:\n```cpp\nvoid tcApp::draw() {\n    pushStyle();\n    setBlendMode(BlendMode::Custom);\n    popStyle();\n}\n```\n\nInvalid descriptor keeps the previous state:\n```cpp\nvoid tcApp::draw() {\n    BlendDesc invalid;\n    invalid.rgb.op = BlendOp::Maximum;\n    setCustomBlendDesc(invalid); // Rejected: Maximum needs One/One.\n}\n```",
+                    "details_ja": "- Custom は別に選択します。この関数は現在のモードを変えません。Node は描画前に Style を初期化するため、両方を draw() 内で設定します。pushStyle/popStyle はモードと式を復元し、resetStyle は Alpha と BlendDesc{} に戻します。不正な式は警告し、以前の状態を保持します。\n\nStyle スタックで復元します。\n```cpp\nvoid tcApp::draw() {\n    pushStyle();\n    setBlendMode(BlendMode::Custom);\n    popStyle();\n}\n```\n\n不正な式では以前の状態を保持します。\n```cpp\nvoid tcApp::draw() {\n    BlendDesc invalid;\n    invalid.rgb.op = BlendOp::Maximum;\n    setCustomBlendDesc(invalid); // 拒否されます。Maximum には One/One が必要です。\n}\n```",
+                    "details_ko": "- Custom은 별도로 선택합니다. 이 함수는 현재 모드를 바꾸지 않습니다. Node는 그리기 전에 Style을 초기화하므로 둘 다 draw() 안에서 설정합니다. pushStyle/popStyle은 모드와 수식을 복원하며 resetStyle은 Alpha와 BlendDesc{}로 되돌립니다. 잘못된 수식은 경고하고 이전 상태를 유지합니다.\n\nStyle 스택으로 복원합니다.\n```cpp\nvoid tcApp::draw() {\n    pushStyle();\n    setBlendMode(BlendMode::Custom);\n    popStyle();\n}\n```\n\n잘못된 수식은 이전 상태를 유지합니다.\n```cpp\nvoid tcApp::draw() {\n    BlendDesc invalid;\n    invalid.rgb.op = BlendOp::Maximum;\n    setCustomBlendDesc(invalid); // 거부합니다. Maximum에는 One/One이 필요합니다.\n}\n```",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -24887,6 +24878,146 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "BlendDesc",
+            "desc": "Defines blend equations that standard modes cannot express, such as adding light while keeping destination alpha.",
+            "keywords": [],
+            "desc_ja": "光を加算しながら描画先のアルファを保つなど、標準モードでは表せないブレンド式を指定します。",
+            "desc_ko": "빛을 더하면서 대상 알파를 유지하는 등 표준 모드로 표현할 수 없는 블렌드 수식을 지정합니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "BlendFactor",
+                "BlendOp",
+                "setCustomBlendDesc",
+                "getCustomBlendDesc",
+                "BlendMode",
+                "BlendDesc::premultiplySource"
+            ],
+            "details": "- Use BlendDesc with BlendMode::Custom to write blend equations beyond the standard modes, such as adding light while keeping destination alpha.\n\nText glow:\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::addKeepAlpha());\n    setBlendMode(BlendMode::Custom);\n    drawBitmapString(\"Glow\", 20, 20);\n}\n```\n\n- Use with BlendMode::Custom for separate RGB and alpha equations: `op(source * src, destination * dst)`. Defaults to straight Alpha. Presets leave source conversion off; screenKeepAlpha and premultipliedAdd need it on for straight-alpha text, shapes and images. Fbo sources are already premultiplied. Custom tests depth when enabled but never writes it; windows, Fbos and MSAA support shapes, textures, Font and GlyphBatch.",
+            "details_ja": "- BlendDesc は、光を加算しながら描画先のアルファを保つなど、標準モードでは表せないブレンド式を BlendMode::Custom で使うための設定です。\n\n文字の光を加算します。\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::addKeepAlpha());\n    setBlendMode(BlendMode::Custom);\n    drawBitmapString(\"Glow\", 20, 20);\n}\n```\n\n- BlendMode::Custom で RGB とアルファに別々の式 `op(source * src, destination * dst)` を使います。既定値は通常の Alpha です。プリセットは変換をオフにします。screenKeepAlpha と premultipliedAdd で通常の文字・図形・画像を描くときは変換をオンにします。Fbo は乗算済みです。Custom は有効な深度テストに従いますが、深度は書き込みません。ウィンドウ・Fbo・MSAA で図形、テクスチャ、Font、GlyphBatch に使えます。",
+            "details_ko": "- BlendDesc는 빛을 더하면서 대상 알파를 유지하는 등 표준 모드로 표현할 수 없는 블렌드 수식을 BlendMode::Custom에서 사용하기 위한 설정입니다.\n\n텍스트의 빛을 더합니다.\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::addKeepAlpha());\n    setBlendMode(BlendMode::Custom);\n    drawBitmapString(\"Glow\", 20, 20);\n}\n```\n\n- BlendMode::Custom에서 RGB와 알파에 별도 수식 `op(source * src, destination * dst)`을 사용합니다. 기본값은 일반 Alpha입니다. 프리셋은 변환을 끕니다. screenKeepAlpha와 premultipliedAdd로 일반 텍스트, 도형, 이미지를 그릴 때는 변환을 켭니다. Fbo는 이미 사전 곱셈 상태입니다. Custom은 활성 깊이 테스트를 따르지만 깊이를 기록하지 않습니다. 창, Fbo, MSAA에서 도형, 텍스처, Font, GlyphBatch에 사용합니다.",
+            "properties": [
+                {
+                    "name": "alpha",
+                    "type": "Component",
+                    "desc": "Sets the alpha equation; defaults to One/OneMinusSrcAlpha/Add.",
+                    "desc_ja": "アルファの式です。既定値は One/OneMinusSrcAlpha/Add です。",
+                    "desc_ko": "알파 수식입니다. 기본값은 One/OneMinusSrcAlpha/Add입니다."
+                },
+                {
+                    "name": "premultiplySource",
+                    "type": "bool",
+                    "desc": "Multiplies shader source RGB by source alpha before blending; defaults to false.",
+                    "desc_ja": "ブレンド前にシェーダーの描画元 RGB にアルファを掛けます。既定値は false です。",
+                    "desc_ko": "블렌드 전에 셰이더 소스 RGB에 소스 알파를 곱합니다. 기본값은 false입니다."
+                },
+                {
+                    "name": "rgb",
+                    "type": "Component",
+                    "desc": "Sets the RGB equation; defaults to SrcAlpha/OneMinusSrcAlpha/Add.",
+                    "desc_ja": "RGB の式です。既定値は SrcAlpha/OneMinusSrcAlpha/Add です。",
+                    "desc_ko": "RGB 수식입니다. 기본값은 SrcAlpha/OneMinusSrcAlpha/Add입니다."
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "addKeepAlpha",
+                    "signatures": [
+                        {
+                            "ret": "BlendDesc",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Adds RGB with SrcAlpha/One and preserves destination alpha with Zero/One.",
+                    "details": "- Use for straight-alpha text, shapes and images. Both operations are Add; leave premultiplySource false because SrcAlpha already scales RGB by alpha and glyph coverage. For premultiplied Fbos, use a One source factor instead.\n\nText glow:\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::addKeepAlpha());\n    setBlendMode(BlendMode::Custom);\n    drawBitmapString(\"Glow\", 20, 20);\n}\n```",
+                    "details_ja": "- 通常の文字・図形・画像に使います。両方の演算は Add です。SrcAlpha がアルファとグリフの被覆率を RGB に掛けるため、premultiplySource は false のままにします。乗算済みの Fbo では描画元の係数を One にします。\n\n文字の光を加算します。\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::addKeepAlpha());\n    setBlendMode(BlendMode::Custom);\n    drawBitmapString(\"Glow\", 20, 20);\n}\n```",
+                    "details_ko": "- 일반 텍스트, 도형, 이미지에 사용합니다. 두 연산은 Add입니다. SrcAlpha가 알파와 글리프 커버리지를 RGB에 곱하므로 premultiplySource는 false로 둡니다. 사전 곱셈 Fbo에서는 소스 계수 One을 사용합니다.\n\n텍스트의 빛을 더합니다.\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::addKeepAlpha());\n    setBlendMode(BlendMode::Custom);\n    drawBitmapString(\"Glow\", 20, 20);\n}\n```",
+                    "related": [
+                        "BlendDesc",
+                        "BlendDesc::premultipliedAdd",
+                        "BlendDesc::premultiplySource"
+                    ]
+                },
+                {
+                    "name": "premultipliedAdd",
+                    "signatures": [
+                        {
+                            "ret": "BlendDesc",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Adds RGB and alpha with One/One; leaves source conversion off.",
+                    "details": "- Use for premultiplied Fbo sources; straight-alpha text, shapes and images require premultiplySource = true or transparent quad pixels also add RGB. This preset adds alpha too; use a KeepAlpha preset to preserve destination alpha.\n\nFbo (already premultiplied); draw an allocated tcApp member `Fbo fbo`:\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::premultipliedAdd());\n    setBlendMode(BlendMode::Custom);\n    fbo.draw(0, 0);\n}\n```",
+                    "details_ja": "- 乗算済みの Fbo に使います。通常の文字・図形・画像では premultiplySource = true が必要です。オフのままでは四角形の透明部分も RGB を加算します。アルファも加算するため、描画先のアルファを保つ場合は KeepAlpha プリセットを使います。\n\n乗算済みの Fbo を描画します。確保済みの tcApp メンバー `Fbo fbo` を使います。\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::premultipliedAdd());\n    setBlendMode(BlendMode::Custom);\n    fbo.draw(0, 0);\n}\n```",
+                    "details_ko": "- 사전 곱셈 Fbo에 사용합니다. 일반 텍스트, 도형, 이미지에는 premultiplySource = true가 필요합니다. 끄면 사각형의 투명한 픽셀도 RGB를 더합니다. 알파도 더하므로 대상 알파를 유지하려면 KeepAlpha 프리셋을 사용합니다.\n\n사전 곱셈 Fbo를 그립니다. 할당된 tcApp 멤버 `Fbo fbo`를 사용합니다.\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::premultipliedAdd());\n    setBlendMode(BlendMode::Custom);\n    fbo.draw(0, 0);\n}\n```",
+                    "related": [
+                        "BlendDesc",
+                        "BlendDesc::premultiplySource",
+                        "BlendDesc::addKeepAlpha",
+                        "Fbo::draw"
+                    ]
+                },
+                {
+                    "name": "screenKeepAlpha",
+                    "signatures": [
+                        {
+                            "ret": "BlendDesc",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Screens RGB with OneMinusDstColor/One and preserves destination alpha.",
+                    "details": "- Use for lighter RGB (`S*(1-D)+D`) while keeping alpha (Zero/One); both operations are Add. Conversion defaults off for premultiplied Fbos. Straight-alpha text, shapes and images need premultiplySource = true; see that field for the setup.\n\nFbo (already premultiplied); draw an allocated tcApp member `Fbo fbo`:\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::screenKeepAlpha());\n    setBlendMode(BlendMode::Custom);\n    fbo.draw(0, 0);\n}\n```",
+                    "details_ja": "- RGB を明るく合成し（`S*(1-D)+D`）、アルファを保持します（Zero/One）。両方の演算は Add です。乗算済みの Fbo 用に変換は既定でオフです。通常の文字・図形・画像では premultiplySource = true が必要です。設定はそのフィールドを参照してください。\n\n乗算済みの Fbo を描画します。確保済みの tcApp メンバー `Fbo fbo` を使います。\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::screenKeepAlpha());\n    setBlendMode(BlendMode::Custom);\n    fbo.draw(0, 0);\n}\n```",
+                    "details_ko": "- RGB를 밝게 합성하고(`S*(1-D)+D`) 알파를 유지합니다(Zero/One). 두 연산은 Add입니다. 사전 곱셈 Fbo용으로 변환은 기본적으로 꺼져 있습니다. 일반 텍스트, 도형, 이미지에는 premultiplySource = true가 필요합니다. 설정은 해당 필드를 참조합니다.\n\n사전 곱셈 Fbo를 그립니다. 할당된 tcApp 멤버 `Fbo fbo`를 사용합니다.\n```cpp\nvoid tcApp::draw() {\n    setCustomBlendDesc(BlendDesc::screenKeepAlpha());\n    setBlendMode(BlendMode::Custom);\n    fbo.draw(0, 0);\n}\n```",
+                    "related": [
+                        "BlendDesc",
+                        "BlendDesc::premultiplySource",
+                        "Fbo::draw"
+                    ]
+                }
+            ],
+            "nested": [
+                {
+                    "name": "BlendDesc::Component",
+                    "short": "Component",
+                    "kind": "type",
+                    "desc": "Holds source and destination factors and an operation.",
+                    "desc_ja": "描画元と描画先の係数と演算を保持します。",
+                    "desc_ko": "소스 및 대상 계수와 연산을 보관합니다.",
+                    "details": "Assign `{src, dst, op}` to `BlendDesc::rgb` or `alpha`; omitted `op` means Add.",
+                    "details_ja": "`BlendDesc::rgb` または `alpha` に `{src, dst, op}` を代入します。`op` を省略すると Add です。",
+                    "details_ko": "`BlendDesc::rgb` 또는 `alpha`에 `{src, dst, op}`를 대입합니다. `op`를 생략하면 Add입니다.",
+                    "properties": [
+                        {
+                            "name": "dst",
+                            "type": "BlendFactor",
+                            "desc": "Multiplies the destination component.",
+                            "desc_ja": "描画先の成分に掛ける係数です。",
+                            "desc_ko": "대상 성분에 곱하는 계수입니다."
+                        },
+                        {
+                            "name": "op",
+                            "type": "BlendOp",
+                            "desc": "Combines the components; defaults to Add.",
+                            "desc_ja": "成分を合成する演算です。既定値は Add です。",
+                            "desc_ko": "성분을 합성하는 연산입니다. 기본값은 Add입니다."
+                        },
+                        {
+                            "name": "src",
+                            "type": "BlendFactor",
+                            "desc": "Multiplies the source component.",
+                            "desc_ja": "描画元の成分に掛ける係数です。",
+                            "desc_ko": "소스 성분에 곱하는 계수입니다."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "BuildInfo",
             "desc": "Provides build configuration timestamps.",
             "keywords": [
@@ -30234,9 +30365,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Draws text with the loaded font.",
-                    "details": "- Draws UTF-8 `text` at the alignment anchor `(x, y)` using the current color, transform, and rendering target; an unloaded font or empty string draws nothing.\n- The three-argument overload uses the global alignment set by `setTextAlign`, rather than the values stored by `Font::setAlign`; the five-argument overload uses its explicit `Direction h, Direction v` arguments.\n- Missing characters use glyph index `0` in the loaded font; there is no automatic fallback to OS fonts. Load a font that contains the characters you need.\n- Horizontal writing advances left to right and starts a new row at each newline; `WritingMode::VerticalRL` advances top to bottom and starts successive columns to the left. Horizontal tabs advance by four spaces; vertical tabs are ignored.\n- Wrapping, kinsoku, hanging punctuation, and tate-chu-yoko settings affect placement; see `Font::enableWrap` and `Font::forEachGlyph`.\n- Except for the em-normalized result of `Font::getGlyphPath`, font coordinates, sizes, and metrics use logical pixels before the current transform; rasterization uses the DPI scale captured when loading.\n- New glyphs are rasterized into the shared CPU atlas on demand, and drawing uploads changed atlas textures to the GPU; even const measurement and layout calls can populate this cache.\n- Call Font methods on the main thread. `loadAsync` handles background preparation internally, while shared-cache access, GPU work, and completion delivery occur on the main thread.",
-                    "details_ja": "- UTF-8 の `text` を、揃えの基準点 `(x, y)` に現在の色、変換、描画先で描画します。フォントが未読み込みの場合や文字列が空の場合は何も描画しません。\n- 引数が 3 個の版は、`Font::setAlign` が保持する値ではなく、`setTextAlign` で設定したグローバルな揃えを使います。引数が 5 個の版は、明示した `Direction h, Direction v` を使います。\n- 読み込んだフォントにない文字はグリフ番号 `0` を使い、OS のフォントには自動で切り替わりません。必要な文字を含むフォントを読み込んでください。\n- 横書きは左から右に進み、改行で次の行へ移ります。`WritingMode::VerticalRL` は上から下に進み、改行で左隣の列へ移ります。横書きのタブはスペース 4 個分進み、縦書きのタブは無視します。\n- 折り返し、禁則、ぶら下げ約物、縦中横の設定が配置に反映されます。`Font::enableWrap` と `Font::forEachGlyph` を参照してください。\n- em 単位に正規化される `Font::getGlyphPath` の結果を除き、フォントの座標、サイズ、メトリクスの単位は現在の変換を適用する前の論理ピクセルです。ラスタライズには読み込み時の DPI スケールを使います。\n- 新しいグリフは必要になったときに共有 CPU アトラスへラスタライズし、描画時に変更済みのアトラステクスチャを GPU へアップロードします。const の計測関数や配置関数でも、このキャッシュにグリフを追加する場合があります。\n- Font の関数はメインスレッドで呼び出してください。`loadAsync` は内部でバックグラウンドの準備を行いますが、共有キャッシュへのアクセス、GPU 処理、完了通知はメインスレッドで行います。",
-                    "details_ko": "- UTF-8 `text`를 정렬 기준점 `(x, y)`에 현재 색상, 변환 및 렌더링 대상으로 그립니다. 폰트가 로드되지 않았거나 문자열이 비어 있으면 아무것도 그리지 않습니다.\n- 인수가 세 개인 오버로드는 `Font::setAlign`에 저장된 값 대신 `setTextAlign`으로 설정한 전역 정렬을 사용합니다. 인수가 다섯 개인 오버로드는 명시한 `Direction h, Direction v`를 사용합니다.\n- 로드한 폰트에 없는 문자는 글리프 인덱스 `0`을 사용하며 OS 폰트로 자동 전환하지 않습니다. 필요한 문자가 포함된 폰트를 로드해야 합니다.\n- 가로쓰기는 왼쪽에서 오른쪽으로 진행하고 줄바꿈에서 다음 행으로 이동합니다. `WritingMode::VerticalRL`은 위에서 아래로 진행하고 줄바꿈에서 왼쪽 열로 이동합니다. 가로쓰기의 탭은 공백 네 개만큼 진행하며 세로쓰기의 탭은 무시합니다.\n- 자동 줄바꿈, 금칙, 구두점 내어쓰기 및 다테추요코 설정이 배치에 반영됩니다. `Font::enableWrap`과 `Font::forEachGlyph`를 참조하세요.\n- em 단위로 정규화되는 `Font::getGlyphPath`의 결과를 제외하면 폰트 좌표, 크기 및 메트릭은 현재 변환을 적용하기 전의 논리 픽셀 단위입니다. 래스터화에는 로드 시 기록한 DPI 배율을 사용합니다.\n- 새 글리프는 필요할 때 공유 CPU 아틀라스에 래스터화하며, 그릴 때 변경된 아틀라스 텍스처를 GPU에 업로드합니다. const 측정 함수와 배치 함수도 이 캐시에 글리프를 추가할 수 있습니다.\n- Font 함수는 메인 스레드에서 호출하세요. `loadAsync`는 내부적으로 백그라운드 준비를 수행하지만 공유 캐시 접근, GPU 작업 및 완료 알림은 메인 스레드에서 처리합니다.",
+                    "details": "- Draws UTF-8 `text` at the alignment anchor `(x, y)` using the current color, blend mode, transform, and rendering target; an unloaded font or empty string draws nothing.\n- The three-argument overload uses the global alignment set by `setTextAlign`, rather than the values stored by `Font::setAlign`; the five-argument overload uses its explicit `Direction h, Direction v` arguments.\n- Missing characters use glyph index `0` in the loaded font; there is no automatic fallback to OS fonts. Load a font that contains the characters you need.\n- Horizontal writing advances left to right and starts a new row at each newline; `WritingMode::VerticalRL` advances top to bottom and starts successive columns to the left. Horizontal tabs advance by four spaces; vertical tabs are ignored.\n- Wrapping, kinsoku, hanging punctuation, and tate-chu-yoko settings affect placement; see `Font::enableWrap` and `Font::forEachGlyph`.\n- Except for the em-normalized result of `Font::getGlyphPath`, font coordinates, sizes, and metrics use logical pixels before the current transform; rasterization uses the DPI scale captured when loading.\n- New glyphs are rasterized into the shared CPU atlas on demand, and drawing uploads changed atlas textures to the GPU; even const measurement and layout calls can populate this cache.\n- Call Font methods on the main thread. `loadAsync` handles background preparation internally, while shared-cache access, GPU work, and completion delivery occur on the main thread.",
+                    "details_ja": "- UTF-8 の `text` を、揃えの基準点 `(x, y)` に現在の色、ブレンドモード、変換、描画先で描画します。フォントが未読み込みの場合や文字列が空の場合は何も描画しません。\n- 引数が 3 個の版は、`Font::setAlign` が保持する値ではなく、`setTextAlign` で設定したグローバルな揃えを使います。引数が 5 個の版は、明示した `Direction h, Direction v` を使います。\n- 読み込んだフォントにない文字はグリフ番号 `0` を使い、OS のフォントには自動で切り替わりません。必要な文字を含むフォントを読み込んでください。\n- 横書きは左から右に進み、改行で次の行へ移ります。`WritingMode::VerticalRL` は上から下に進み、改行で左隣の列へ移ります。横書きのタブはスペース 4 個分進み、縦書きのタブは無視します。\n- 折り返し、禁則、ぶら下げ約物、縦中横の設定が配置に反映されます。`Font::enableWrap` と `Font::forEachGlyph` を参照してください。\n- em 単位に正規化される `Font::getGlyphPath` の結果を除き、フォントの座標、サイズ、メトリクスの単位は現在の変換を適用する前の論理ピクセルです。ラスタライズには読み込み時の DPI スケールを使います。\n- 新しいグリフは必要になったときに共有 CPU アトラスへラスタライズし、描画時に変更済みのアトラステクスチャを GPU へアップロードします。const の計測関数や配置関数でも、このキャッシュにグリフを追加する場合があります。\n- Font の関数はメインスレッドで呼び出してください。`loadAsync` は内部でバックグラウンドの準備を行いますが、共有キャッシュへのアクセス、GPU 処理、完了通知はメインスレッドで行います。",
+                    "details_ko": "- UTF-8 `text`를 정렬 기준점 `(x, y)`에 현재 색상, 블렌드 모드, 변환 및 렌더링 대상으로 그립니다. 폰트가 로드되지 않았거나 문자열이 비어 있으면 아무것도 그리지 않습니다.\n- 인수가 세 개인 오버로드는 `Font::setAlign`에 저장된 값 대신 `setTextAlign`으로 설정한 전역 정렬을 사용합니다. 인수가 다섯 개인 오버로드는 명시한 `Direction h, Direction v`를 사용합니다.\n- 로드한 폰트에 없는 문자는 글리프 인덱스 `0`을 사용하며 OS 폰트로 자동 전환하지 않습니다. 필요한 문자가 포함된 폰트를 로드해야 합니다.\n- 가로쓰기는 왼쪽에서 오른쪽으로 진행하고 줄바꿈에서 다음 행으로 이동합니다. `WritingMode::VerticalRL`은 위에서 아래로 진행하고 줄바꿈에서 왼쪽 열로 이동합니다. 가로쓰기의 탭은 공백 네 개만큼 진행하며 세로쓰기의 탭은 무시합니다.\n- 자동 줄바꿈, 금칙, 구두점 내어쓰기 및 다테추요코 설정이 배치에 반영됩니다. `Font::enableWrap`과 `Font::forEachGlyph`를 참조하세요.\n- em 단위로 정규화되는 `Font::getGlyphPath`의 결과를 제외하면 폰트 좌표, 크기 및 메트릭은 현재 변환을 적용하기 전의 논리 픽셀 단위입니다. 래스터화에는 로드 시 기록한 DPI 배율을 사용합니다.\n- 새 글리프는 필요할 때 공유 CPU 아틀라스에 래스터화하며, 그릴 때 변경된 아틀라스 텍스처를 GPU에 업로드합니다. const 측정 함수와 배치 함수도 이 캐시에 글리프를 추가할 수 있습니다.\n- Font 함수는 메인 스레드에서 호출하세요. `loadAsync`는 내부적으로 백그라운드 준비를 수행하지만 공유 캐시 접근, GPU 작업 및 완료 알림은 메인 스레드에서 처리합니다.",
                     "snippet": "void tcApp::draw() {\n    static Font font;\n    if (!font.isLoaded()) font.load(TC_FONT_SANS, 24);\n    font.drawString(\"Hello\", 20, 40, Direction::Left, Direction::Top);\n}\n",
                     "keywords": [
                         "text",
@@ -31725,7 +31856,7 @@ const TrussCAPI = {
         },
         {
             "name": "GlyphBatch",
-            "desc": "Retains transformed glyph quads for repeated drawing in add order, batching consecutive glyphs on the same atlas page.",
+            "desc": "Stores glyphs for repeated drawing; use it instead of drawString when text or per-glyph placement can be reused.",
             "keywords": [
                 "glyph",
                 "batch",
@@ -31733,8 +31864,8 @@ const TrussCAPI = {
                 "atlas",
                 "text"
             ],
-            "desc_ja": "変換済みのグリフを保持し、同じアトラスページが連続する区間をまとめて追加順に繰り返し描画します。",
-            "desc_ko": "변환된 글리프를 유지하고 같은 아틀라스 페이지의 연속 구간을 묶어 추가 순서대로 반복 표시합니다.",
+            "desc_ja": "グリフを保持して繰り返し描画します。文字列やグリフごとの配置を再利用するときに、drawString の代わりに使います。",
+            "desc_ko": "글리프를 저장하여 반복해서 그립니다. 텍스트나 글리프별 배치를 재사용할 때 drawString 대신 사용합니다.",
             "examples": [
                 {
                     "name": "AllFeaturesExample",
@@ -31743,24 +31874,36 @@ const TrussCAPI = {
             ],
             "related": [
                 "Font",
-                "Font::getGlyphInkBox",
+                "Font::drawString",
+                "GlyphBatch::setFont",
                 "GlyphBatch::add",
-                "GlyphBatch::draw"
+                "GlyphBatch::draw",
+                "GlyphBatch::clear",
+                "GlyphBatch::setTransform",
+                "GlyphBatch::setColor"
             ],
-            "details": "Call setFont with a loaded Font. Independent glyphs capture the current model matrix at add time; the explicit Mat4 replaces it. Draw under the intended camera. draw applies the active view/projection once and does not apply the current model again, does not clear, and uploads vertices only after adds change the geometry, reusing grow-only buffers and a shared static quad index buffer. draw(transform) applies transform × recorded positions through a uniform. clear discards geometry; setFont also clears and copies the Font settings, sharing its current atlas. Later source setOversampling/setMipmaps calls replace the source atlas and do not reach this copy; configure first or call setFont again and rebuild.\nGlyphs draw in add order. Each consecutive run sharing an atlas page uses one draw; a single-page batch uses one draw, while A/B/A uses three. Scissor is captured at draw time. Blend is the mode current at draw(), not at add(). Depth, target format and MSAA also come from the draw target. Colors retain unclamped float RGB and normal Color alpha. Output is straight alpha like drawString; Screen/Multiply use the framework's corresponding premultiplied blend equations. Atlas sampling is trilinear with mips when the Font permits them (mip 0 at bilinear-safe rates of at most two texels per pixel, like Font); current page views and dimensions are resolved at draw time, so atlas growth preserves retained quads. Rebuild the batch after Font::clearAtlas.\nWith custom blends (#1436), BlendDesc::addKeepAlpha() uses SRC_ALPHA/ONE for RGB and ZERO/ONE for alpha: light-only addition keeping destination alpha, equivalent to premultiplied ONE/ONE on coverage. That descriptor is not yet part of this branch.",
-            "details_ja": "読み込み済みの Font を setFont に渡します。単独グリフは add 時のモデル行列を記録し、明示した Mat4 はこの行列を置き換えます。使いたいカメラの下で draw してください。draw は現在の view/projection を一度適用し、現在のモデル行列は再適用せず、内容を消去しません。頂点は add で内容が変わったときだけ転送し、拡張時だけ作成するバッファと共有の静的インデックスを再利用します。draw(transform) は uniform で transform × 記録済み座標を適用します。clear は形状を破棄します。setFont も形状を消去し、設定をコピーして現在のアトラスを共有します。元 Font の setOversampling/setMipmaps はアトラスを差し替えるため追従しません。先に設定するか、setFont を再度呼んで再構築してください。\nグリフは追加順に描画します。同じアトラスページが連続する区間ごとに 1 回描画し、単一ページのバッチは 1 回、A/B/A は 3 回になります。scissor は draw 時に記録します。ブレンドは add() 時ではなく draw() 時のモードを使います。深度、描画先の形式、MSAA も draw 時に反映します。RGB は範囲外の float 値を保持し、Color の alpha も有効です。出力は drawString と同じ straight alpha です。Screen・Multiply ではフレームワークの対応する乗算済みブレンド式を使います。Font で有効な場合はミップ付きトライリニア補間を使います。Font と同様に、1 ピクセルあたり 2 テクセル以下の縮小では mip 0 を使います。ページ画像とサイズを描画時に解決するため、アトラス拡張後も座標を保ちます。Font::clearAtlas 後はバッチを作り直してください。\nカスタムブレンド（#1436）の BlendDesc::addKeepAlpha() は RGB に SRC_ALPHA/ONE、alpha に ZERO/ONE を使います。描画先 alpha を保った発光用加算で、カバレッジに対する乗算済み ONE/ONE と等価です。このブランチにはまだこの記述子は含まれません。",
-            "details_ko": "로드된 Font를 setFont에 전달합니다. 독립 글리프는 add 시점의 모델 행렬을 기록하며 명시적 Mat4는 이를 대체합니다. 사용할 카메라 아래에서 draw를 호출합니다. draw는 현재 view/projection을 한 번 적용하고 현재 모델을 다시 적용하거나 내용을 지우지 않으며, add로 형상이 바뀐 경우에만 정점을 업로드하며 확장할 때만 생성하는 버퍼와 공유 정적 인덱스를 재사용합니다. draw(transform)은 uniform으로 transform × 기록된 좌표를 적용합니다. clear는 형상을 버립니다. setFont도 형상을 지우고 설정을 복사하며 현재 아틀라스를 공유합니다. 원본 Font의 setOversampling/setMipmaps는 아틀라스를 교체하므로 반영되지 않습니다. 먼저 설정하거나 setFont를 다시 호출하고 재구성하세요.\n글리프는 추가 순서대로 그립니다. 같은 아틀라스 페이지의 연속 구간마다 한 번 그리므로 단일 페이지 배치는 한 번, A/B/A는 세 번 그립니다. scissor는 draw 시점에 기록합니다. 블렌드는 add()가 아닌 draw() 시점의 모드를 사용합니다. 깊이, 대상 형식 및 MSAA도 draw 시점에 적용합니다. RGB는 범위 밖 float 값을 유지하며 Color alpha도 적용합니다. 출력은 drawString과 같은 straight alpha입니다. Screen/Multiply는 프레임워크의 해당 사전 곱셈 블렌드 식을 사용합니다. Font가 허용하면 밉을 사용하는 삼선형 샘플링을 적용합니다. Font처럼 픽셀당 2텍셀 이하인 경우에는 mip 0을 사용합니다. 현재 페이지 이미지와 크기를 그릴 때 확인하므로 아틀라스가 커져도 유지된 좌표가 맞습니다. Font::clearAtlas 후에는 배치를 다시 만듭니다.\n사용자 지정 블렌드(#1436)의 BlendDesc::addKeepAlpha()는 RGB에 SRC_ALPHA/ONE, alpha에 ZERO/ONE을 사용합니다. 대상 alpha를 유지하는 발광용 가산이며 커버리지에 대한 사전 곱셈 ONE/ONE과 같습니다. 이 브랜치에는 아직 해당 서술자가 포함되지 않습니다.",
-            "snippet": "GlyphBatch batch;\nbatch.setFont(font);\nbatch.add(U'A', Color(2.0f, 1.0f, 0.5f));\nbatch.draw();\n",
+            "details": "- GlyphBatch reuses built text and gives each glyph its own color and matrix (for rotation, for example). Font::drawString normally draws text, but rebuilding its layout on every call can be costly. GlyphBatch builds the text once and draws it repeatedly. Like Mesh, it separates building from drawing with draw().\n\nCreate the batch, set a loaded font, add once, and draw every frame:\n```cpp\n// tcApp members\nGlyphBatch batch;\nFont font;\nvoid tcApp::setup() {\n    font.load(TC_FONT_SANS, 48);\n    batch.setFont(font);\n    batch.add(\"Hello\", Color(1));\n}\nvoid tcApp::draw() {\n    batch.draw();\n}\n```\n\nCall this tcApp member when the text changes; draw() keeps using the rebuilt batch:\n```cpp\nvoid tcApp::rebuildText() {\n    batch.clear();\n    batch.add(\"Updated\", Color(1));\n}\n```\n\nAfter setup(), this alternative rebuild applies transform and color settings to the new glyph:\n```cpp\nvoid tcApp::rebuildText() {\n    batch.clear();\n    batch.setTransform(Mat4::scale(2));\n    batch.setColor(Color(1, 0.5f, 0.2f));\n    batch.add(U'A');\n}\n```\n\n- Transforms and colors are recorded at add(); changing batch settings does not change retained glyphs. Blending uses the mode current at draw().\n\n- Configure Font options before setFont(); see GlyphBatch::setFont for copying behavior. Rebuild after Font::clearAtlas.",
+            "details_ja": "- GlyphBatch は、一度組み立てたテキストを繰り返し描画し、一文字ずつ色や Matrix（回転など）を指定するために使います。通常は Font::drawString で文字を描画しますが、呼び出すたびに配置を再構築するため、処理が重くなる場合があります。GlyphBatch は組み立てたテキストを再利用できます。使い方は Mesh と似ていて、構築するコードと描画するコード（draw）を分けます。\n\nバッチを作り、読み込み済みのフォントを設定して一度追加し、毎フレーム描画します。\n```cpp\n// tcApp members\nGlyphBatch batch;\nFont font;\nvoid tcApp::setup() {\n    font.load(TC_FONT_SANS, 48);\n    batch.setFont(font);\n    batch.add(\"Hello\", Color(1));\n}\nvoid tcApp::draw() {\n    batch.draw();\n}\n```\n\n文字列が変わったときに、この tcApp メンバーを呼びます。draw() は再構築したバッチを使い続けます。\n```cpp\nvoid tcApp::rebuildText() {\n    batch.clear();\n    batch.add(\"Updated\", Color(1));\n}\n```\n\nsetup() 後に使う別の再構築例です。変換と色の設定を新しいグリフに適用します。\n```cpp\nvoid tcApp::rebuildText() {\n    batch.clear();\n    batch.setTransform(Mat4::scale(2));\n    batch.setColor(Color(1, 0.5f, 0.2f));\n    batch.add(U'A');\n}\n```\n\n- 変換と色は add() 時に記録します。バッチ設定を変えても保持済みのグリフは変わりません。ブレンドは draw() 時のモードを使います。\n\n- Font のオプションは setFont() より先に設定します。コピーの動作は GlyphBatch::setFont を参照してください。Font::clearAtlas 後は再構築してください。",
+            "details_ko": "- GlyphBatch는 한 번 구성한 텍스트를 반복해서 그리고 글리프마다 색상과 Matrix(회전 등)를 지정할 때 사용합니다. 보통 Font::drawString으로 텍스트를 그리지만 호출할 때마다 배치를 다시 구성하므로 처리 비용이 커질 수 있습니다. GlyphBatch는 구성한 텍스트를 재사용합니다. Mesh처럼 구성 코드와 그리기 코드(draw)를 분리합니다.\n\n배치를 만들고 로드된 폰트를 설정한 뒤 한 번 추가하고 매 프레임 그립니다.\n```cpp\n// tcApp members\nGlyphBatch batch;\nFont font;\nvoid tcApp::setup() {\n    font.load(TC_FONT_SANS, 48);\n    batch.setFont(font);\n    batch.add(\"Hello\", Color(1));\n}\nvoid tcApp::draw() {\n    batch.draw();\n}\n```\n\n텍스트가 바뀌면 이 tcApp 멤버를 호출합니다. draw()는 재구성된 배치를 계속 사용합니다.\n```cpp\nvoid tcApp::rebuildText() {\n    batch.clear();\n    batch.add(\"Updated\", Color(1));\n}\n```\n\nsetup() 후에 사용하는 다른 재구성 예입니다. 변환과 색상 설정을 새 글리프에 적용합니다.\n```cpp\nvoid tcApp::rebuildText() {\n    batch.clear();\n    batch.setTransform(Mat4::scale(2));\n    batch.setColor(Color(1, 0.5f, 0.2f));\n    batch.add(U'A');\n}\n```\n\n- 변환과 색상은 add() 시점에 기록합니다. 배치 설정을 변경해도 저장된 글리프는 바뀌지 않습니다. 블렌드는 draw() 시점의 모드를 사용합니다.\n\n- Font 옵션은 setFont() 전에 설정합니다. 복사 동작은 GlyphBatch::setFont를 참조합니다. Font::clearAtlas 후에는 재구성합니다.",
+            "snippet": "// tcApp members\nGlyphBatch batch;\nFont font;\nvoid setup() override {\n    font.load(TC_FONT_SANS, 48);\n    batch.setFont(font);\n    batch.add(\"Hello\", Color(1));\n}\nvoid draw() override {\n    batch.draw();\n}\n",
             "constructor": {
                 "signatures": [
                     ""
                 ],
-                "snippet": "GlyphBatch batch;\nbatch.setFont(font);\nbatch.add(U'A', Color(2.0f, 1.0f, 0.5f));\nbatch.draw();\n"
+                "snippet": "// tcApp members\nGlyphBatch batch;\nFont font;\nvoid setup() override {\n    font.load(TC_FONT_SANS, 48);\n    batch.setFont(font);\n    batch.add(\"Hello\", Color(1));\n}\nvoid draw() override {\n    batch.draw();\n}\n"
             },
             "methods": [
                 {
                     "name": "add",
                     "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "uint32_t codepoint"
+                        },
+                        {
+                            "ret": "void",
+                            "params": "uint32_t codepoint, const Mat4 & matrix"
+                        },
                         {
                             "ret": "void",
                             "params": "uint32_t codepoint, const Color & color"
@@ -31771,13 +31914,17 @@ const TrussCAPI = {
                         },
                         {
                             "ret": "void",
+                            "params": "const std::string & text"
+                        },
+                        {
+                            "ret": "void",
                             "params": "const std::string & text, const Color & color"
                         }
                     ],
-                    "desc": "Appends colored glyph quads at the current matrix or an explicit model matrix.",
-                    "details": "The codepoint overload adds one independent glyph without cursor advance or vertical substitution. The Mat4 overload replaces the current model matrix; the active camera view/projection is applied once at draw time. The UTF-8 string overload uses the retained Font's drawString layout, including wrapping, vertical forms, and TCY. Color floats are copied without clamping. Additions mark GPU geometry dirty; existing recorded draws retain their previous buffers. Empty ink emits no quad. Call on the main thread.",
-                    "details_ja": "コードポイント版は、カーソル送りや縦書き字形への置換を行わず、単独グリフを追加します。Mat4 版は現在のモデル行列を置き換えます。現在のカメラの view/projection は draw 時に一度適用します。UTF-8 文字列版は、保持した Font の drawString と同じ配置を使い、折り返し、縦書き字形、縦中横を反映します。色の float 値は制限せずにコピーします。追加後は GPU 形状を更新対象にしますが、記録済みの描画は以前のバッファを保持します。インクが空の場合は四角形を追加しません。メインスレッドで呼び出してください。",
-                    "details_ko": "코드 포인트 버전은 커서 전진이나 세로쓰기 글리프 대체 없이 독립 글리프를 추가합니다. Mat4 버전은 현재 모델 행렬을 대체합니다. 현재 카메라의 view/projection은 draw 시점에 한 번 적용합니다. UTF-8 문자열 버전은 유지한 Font의 drawString 배치를 사용하며 자동 줄바꿈, 세로쓰기 글리프 및 다테추요코를 반영합니다. 색상의 float 값은 제한 없이 복사합니다. 추가하면 GPU 형상을 갱신 대상으로 표시하지만 기록된 그리기는 이전 버퍼를 유지합니다. 잉크가 비어 있으면 사각형을 추가하지 않습니다. 메인 스레드에서 호출합니다.",
+                    "desc": "Appends a glyph or UTF-8 string, using batch settings for omitted arguments.",
+                    "details": "The codepoint overload adds one independent glyph without cursor advance or vertical substitution. add(cp), add(cp, color), add(text), and add(text, color) use current matrix × batch transform. add(cp, M) and add(cp, M, color) use only M. An omitted color uses the batch color; a supplied color replaces it for that add. The Mat4 overload replaces both current and batch matrices; the active camera view/projection is applied once at draw time. The UTF-8 string overload uses the retained Font's drawString layout, including wrapping, vertical forms, and TCY. Color floats are copied without clamping. Additions mark GPU geometry dirty; existing recorded draws retain their previous buffers. Empty ink emits no quad. Call on the main thread.",
+                    "details_ja": "コードポイント版は、カーソル送りや縦書き字形への置換を行わず、単独グリフを追加します。add(cp)、add(cp, color)、add(text)、add(text, color) は現在の行列 × バッチ変換を使います。add(cp, M)、add(cp, M, color) は M だけを使います。色を省略するとバッチ色を使い、指定するとその追加だけ置き換えます。Mat4 版は現在とバッチの両行列を置き換えます。現在のカメラの view/projection は draw 時に一度適用します。UTF-8 文字列版は、保持した Font の drawString と同じ配置を使い、折り返し、縦書き字形、縦中横を反映します。色の float 値は制限せずにコピーします。追加後は GPU 形状を更新対象にしますが、記録済みの描画は以前のバッファを保持します。インクが空の場合は四角形を追加しません。メインスレッドで呼び出してください。",
+                    "details_ko": "코드 포인트 버전은 커서 전진이나 세로쓰기 글리프 대체 없이 독립 글리프를 추가합니다. add(cp), add(cp, color), add(text), add(text, color)는 현재 행렬 × 배치 변환을 사용합니다. add(cp, M), add(cp, M, color)는 M만 사용합니다. 색상을 생략하면 배치 색상을 사용하고 지정하면 해당 추가에서만 대체합니다. Mat4 버전은 현재 행렬과 배치 행렬을 모두 대체합니다. 현재 카메라의 view/projection은 draw 시점에 한 번 적용합니다. UTF-8 문자열 버전은 유지한 Font의 drawString 배치를 사용하며 자동 줄바꿈, 세로쓰기 글리프 및 다테추요코를 반영합니다. 색상의 float 값은 제한 없이 복사합니다. 추가하면 GPU 형상을 갱신 대상으로 표시하지만 기록된 그리기는 이전 버퍼를 유지합니다. 잉크가 비어 있으면 사각형을 추가하지 않습니다. 메인 스레드에서 호출합니다.",
                     "related": [
                         "GlyphBatch::draw",
                         "Font::forEachGlyph"
@@ -31792,9 +31939,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Discards retained geometry while keeping the font and batch settings.",
-                    "details": "Keeps CPU/GPU capacity for rebuilding each frame. Already submitted draws keep valid GPU resources until replay. draw does not clear automatically.",
-                    "details_ja": "送信済みの描画は再生まで有効な GPU リソースを保持します。draw は自動で消去しません。",
-                    "details_ko": "제출된 그리기는 재생할 때까지 유효한 GPU 리소스를 유지합니다. draw는 자동으로 지우지 않습니다.",
+                    "details": "Keeps transform, color, alignment, and CPU/GPU capacity for rebuilding each frame. Already submitted draws keep valid GPU resources until replay. draw does not clear automatically.",
+                    "details_ja": "変換、色、揃えを保持します。送信済みの描画は再生まで有効な GPU リソースを保持します。draw は自動で消去しません。",
+                    "details_ko": "변환, 색상, 정렬을 유지합니다. 제출된 그리기는 재생할 때까지 유효한 GPU 리소스를 유지합니다. draw는 자동으로 지우지 않습니다.",
                     "related": [
                         "GlyphBatch::draw"
                     ]
@@ -31811,13 +31958,66 @@ const TrussCAPI = {
                             "params": "const Mat4 & transform"
                         }
                     ],
-                    "desc": "Draws retained glyphs using the current target and blend; an optional transform applies through a uniform.",
-                    "details": "Uses the blend mode current at draw(), not at add(). draw() uses identity; draw(transform) applies transform × recorded model positions, then the active view/projection. Neither overload reapplies the current model or clears the batch. Draw under the intended camera; camera changes do not re-upload geometry. Unchanged batches reuse their vertex/index buffers across frames. See GlyphBatch for straight alpha, page ordering and mip sampling.",
-                    "details_ja": "draw() は単位変換を使います。draw(transform) は記録済みのモデル座標に transform を左から適用し、続いて現在の view/projection を適用します。どちらも現在のモデルを再適用せず、バッチを消去しません。使いたいカメラの下で描画してください。カメラ変更時も形状を再転送しません。内容が変わらなければ、フレームをまたいで頂点・インデックスバッファを再利用します。straight alpha、ページ順、ミップサンプリングは GlyphBatch を参照してください。",
-                    "details_ko": "draw()는 단위 변환을 사용합니다. draw(transform)은 기록된 모델 좌표에 transform을 왼쪽에서 적용한 뒤 현재 view/projection을 적용합니다. 두 버전 모두 현재 모델을 다시 적용하거나 배치를 지우지 않습니다. 사용할 카메라 아래에서 그리며 카메라 변경은 형상 재업로드를 일으키지 않습니다. 내용이 바뀌지 않으면 프레임 간 정점/인덱스 버퍼를 재사용합니다. straight alpha, 페이지 순서 및 밉 샘플링은 GlyphBatch를 참조합니다.",
+                    "desc": "Draws the retained glyphs with the current camera, target and blend mode; draw(transform) places the whole batch.",
+                    "details": "- draw() does not clear the batch and does not reapply the current model matrix; glyphs draw in add order, one draw per run of glyphs on the same atlas page.\n\nUnder an EasyCam, the current camera applies and moving it does not re-upload the glyphs:\n```cpp\n// tcApp members\nGlyphBatch batch;\nEasyCam cam;\nvoid tcApp::draw() {\n    cam.begin();\n    batch.draw();\n    cam.end();\n}\n```\n\ndraw(transform) draws the same batch at different places:\n```cpp\n// tcApp members\nGlyphBatch batch;\nvoid tcApp::draw() {\n    batch.draw(Mat4::translate(100, 100, 0));\n    batch.draw(Mat4::translate(100, 300, 0));\n}\n```",
+                    "details_ja": "- draw() はバッチを消去せず、現在のモデル行列も再適用しません。グリフは追加順に描画し、同じアトラスページが続く区間ごとに 1 回描画します。\n\nEasyCam の下では現在のカメラが適用され、カメラを動かしてもグリフは再転送されません。\n```cpp\n// tcApp members\nGlyphBatch batch;\nEasyCam cam;\nvoid tcApp::draw() {\n    cam.begin();\n    batch.draw();\n    cam.end();\n}\n```\n\ndraw(transform) で同じバッチを別の場所に描画できます。\n```cpp\n// tcApp members\nGlyphBatch batch;\nvoid tcApp::draw() {\n    batch.draw(Mat4::translate(100, 100, 0));\n    batch.draw(Mat4::translate(100, 300, 0));\n}\n```",
+                    "details_ko": "- draw()는 배치를 지우지 않으며 현재 모델 행렬도 다시 적용하지 않습니다. 글리프는 추가 순서대로 그리며 같은 아틀라스 페이지가 이어지는 구간마다 한 번 그립니다.\n\nEasyCam 아래에서는 현재 카메라가 적용되며 카메라를 움직여도 글리프를 다시 업로드하지 않습니다.\n```cpp\n// tcApp members\nGlyphBatch batch;\nEasyCam cam;\nvoid tcApp::draw() {\n    cam.begin();\n    batch.draw();\n    cam.end();\n}\n```\n\ndraw(transform)으로 같은 배치를 다른 위치에 그릴 수 있습니다.\n```cpp\n// tcApp members\nGlyphBatch batch;\nvoid tcApp::draw() {\n    batch.draw(Mat4::translate(100, 100, 0));\n    batch.draw(Mat4::translate(100, 300, 0));\n}\n```",
                     "related": [
                         "GlyphBatch",
-                        "GlyphBatch::clear"
+                        "GlyphBatch::clear",
+                        "EasyCam"
+                    ]
+                },
+                {
+                    "name": "getColor",
+                    "signatures": [
+                        {
+                            "ret": "const Color &",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the current batch color.",
+                    "related": [
+                        "GlyphBatch::setColor"
+                    ]
+                },
+                {
+                    "name": "getTransform",
+                    "signatures": [
+                        {
+                            "ret": "const Mat4 &",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the current batch transform.",
+                    "related": [
+                        "GlyphBatch::setTransform"
+                    ]
+                },
+                {
+                    "name": "resetColor",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Resets the batch color to white (1,1,1,1).",
+                    "related": [
+                        "GlyphBatch::setColor"
+                    ]
+                },
+                {
+                    "name": "resetTransform",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Resets the batch transform to identity.",
+                    "related": [
+                        "GlyphBatch::setTransform"
                     ]
                 },
                 {
@@ -31852,6 +32052,24 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "setColor",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "const Color & color"
+                        }
+                    ],
+                    "desc": "Sets the color for later adds that omit a color; defaults to white (1,1,1,1).",
+                    "details": "A color passed to add replaces this setting for that add. The setting persists until setColor or resetColor, including across clear().",
+                    "details_ja": "add に色を渡すと、その追加だけこの設定を置き換えます。設定は setColor または resetColor まで保持し、clear() でも残ります。",
+                    "details_ko": "add에 전달한 색상은 해당 추가에서만 이 설정을 대체합니다. 설정은 setColor 또는 resetColor까지 유지하며 clear() 후에도 남습니다.",
+                    "related": [
+                        "GlyphBatch::add",
+                        "GlyphBatch::resetColor",
+                        "GlyphBatch::clear"
+                    ]
+                },
+                {
                     "name": "setFont",
                     "signatures": [
                         {
@@ -31862,10 +32080,30 @@ const TrussCAPI = {
                     "desc": "Clears the batch and retains a copy of a Font and its current settings.",
                     "details": "Copies Font settings and shares its current atlas. Later source setOversampling/setMipmaps changes do not propagate: configure first, or call setFont again and rebuild.",
                     "details_ja": "設定をコピーし、現在のアトラスを共有します。元 Font の setOversampling/setMipmaps の変更は追従しません。先に設定するか、setFont を再度呼んで再構築してください。",
-                    "details_ko": "설정을 복사하고 현재 아틀라스를 공유합니다. 이후 원본의 setOversampling/setMipmaps 변경은 반영되지 않습니다. 먼저 설정하거나 setFont를 다시 호출하고 재구성하세요.",
+                    "details_ko": "설정을 복사하고 현재 아틀라스를 공유합니다. 이후 원본의 setOversampling/setMipmaps 변경은 반영되지 않습니다. 먼저 설정하거나 setFont를 다시 호출하고 재구성합니다.",
                     "related": [
                         "GlyphBatch",
                         "Font::load"
+                    ]
+                },
+                {
+                    "name": "setTransform",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "const Mat4 & transform"
+                        }
+                    ],
+                    "desc": "Sets the transform for each later glyph; defaults to identity.",
+                    "details": "Uses current matrix × transform for later adds without a matrix. An explicit matrix replaces both. Scaling pivots on the align point: the ink center with setAlignToInk(true). A string uses one matrix for its whole layout. Unlike setTransform, draw(transform) moves the whole recorded batch at draw time. clear() keeps transform and color.",
+                    "details_ja": "行列を省略した以後の追加に、現在の行列 × transform を使います。明示した行列は両方を置き換えます。拡大縮小の基準点は揃え位置で、setAlignToInk(true) ではインク中心です。文字列全体には 1 つの行列を使います。setTransform と異なり、draw(transform) は記録済みバッチ全体を描画時に動かします。clear() は変換と色を保持します。",
+                    "details_ko": "행렬을 생략한 이후 추가에 현재 행렬 × transform을 사용합니다. 명시적 행렬은 둘 다 대체합니다. 배율의 기준점은 정렬 위치이며 setAlignToInk(true)에서는 잉크 중심입니다. 문자열 전체에는 하나의 행렬을 사용합니다. setTransform과 달리 draw(transform)은 기록된 배치 전체를 그릴 때 이동합니다. clear()는 변환과 색상을 유지합니다.",
+                    "snippet": "// tcApp.h (inside class tcApp : public App)\nFont font;\nGlyphBatch batch;\nvoid setup() override {\n    font.load(TC_FONT_SANS, 24);\n    batch.setFont(font);\n    batch.setAlignToInk(true);\n    batch.setTransform(Mat4::scale(2));\n    batch.setColor(Color(1, 0.5f, 0.2f));\n}\nvoid draw() override {\n    batch.clear(); // Keeps transform and color.\n    pushMatrix();\n    translate(100, 100);\n    batch.add(U'A');\n    popMatrix();\n    batch.draw();\n}\n",
+                    "related": [
+                        "GlyphBatch::add",
+                        "GlyphBatch::draw",
+                        "GlyphBatch::setAlignToInk",
+                        "GlyphBatch::clear"
                     ]
                 },
                 {
@@ -58438,10 +58676,6 @@ const TrussCAPI = {
             "desc_ko": "TrussC 그리기와 통합된 GPU 셰이더 프로그램을 제공합니다.",
             "examples": [
                 {
-                    "name": "shaderExample",
-                    "group": "graphics"
-                },
-                {
                     "name": "AllFeaturesExample",
                     "group": "tests"
                 }
@@ -72867,6 +73101,13 @@ const TrussCAPI = {
                     "desc_ko": "디스플레이의 높은 픽셀 밀도를 사용하여 렌더링할지 지정한다."
                 },
                 {
+                    "name": "maxFrameLatency",
+                    "type": "int",
+                    "desc": "Windows D3D11 maximum frame latency; defaults to 2.",
+                    "desc_ja": "Windows D3D11 の最大フレーム遅延です。既定値は 2 です。",
+                    "desc_ko": "Windows D3D11의 최대 프레임 지연이며 기본값은 2입니다."
+                },
+                {
                     "name": "parentWindow",
                     "type": "std::weak_ptr<Window>",
                     "desc": "Holds the parent window set by setParentWindow(), without owning it.",
@@ -72983,6 +73224,25 @@ const TrussCAPI = {
                     "details": "- Stores `enabled` in `highDpi`; see `WindowSettings::highDpi` for framebuffer resolution behavior.\n- Returns `WindowSettings&`; see `WindowSettings::setSize` for the shared setter rules.",
                     "details_ja": "- `enabled` を `highDpi` に設定します。フレームバッファの解像度の扱いは `WindowSettings::highDpi` を参照してください。\n- `WindowSettings&` を返します。セッター共通の扱いは `WindowSettings::setSize` を参照してください。",
                     "details_ko": "- `enabled`를 `highDpi`에 설정합니다. 프레임버퍼 해상도의 동작은 `WindowSettings::highDpi`에 설명되어 있습니다.\n- `WindowSettings&`를 반환합니다. 설정 함수의 공통 동작은 `WindowSettings::setSize`에 설명되어 있습니다."
+                },
+                {
+                    "name": "setMaxFrameLatency",
+                    "signatures": [
+                        {
+                            "ret": "WindowSettings &",
+                            "params": "int latency"
+                        }
+                    ],
+                    "desc": "Sets per-window Windows D3D11 CPU/GPU overlap; lower values reduce input latency and back-buffer memory.",
+                    "details": "- Use at window creation to balance CPU/GPU overlap against input latency and GPU memory on Windows D3D11. Accepts 1–16 (default 2); each window holds latency + 1 back buffers, capped at 16 buffers for latency 16. Other backends ignore it.\n- Each extra back buffer uses about 8 MB at 1080p RGBA8. Each out-of-range call logs a Warning and uses 2. Returns the same `WindowSettings&` for chaining.\n- 1 gives the lowest input latency. Higher values let CPU and GPU work overlap for a smoother frame rate, with up to N−1 frames of extra input latency.\n- It does not set the update or draw rate.",
+                    "details_ja": "- Windows D3D11 で CPU/GPU の並行処理、入力遅延、GPU メモリのバランスを調整するため、ウィンドウの作成時に指定します。範囲は 1〜16、既定値は 2 です。各ウィンドウは遅延値 + 1 個のバックバッファを保持しますが、遅延値 16 では 16 個を上限とします。他のバックエンドは無視します。\n- バックバッファ 1 個の追加につき、1080p RGBA8 で約 8 MB を使います。範囲外の呼び出しは毎回 Warning を記録し、2 を使います。連結用に同じ `WindowSettings&` を返します。\n- 1 は入力遅延を最小にします。大きな値では CPU と GPU の処理が重なり、フレームレートが滑らかになりますが、入力遅延が最大 N−1 フレーム増えます。\n- update や draw のレートは設定しません。",
+                    "details_ko": "- Windows D3D11에서 CPU/GPU 병렬 처리, 입력 지연, GPU 메모리의 균형을 조정할 때 윈도우 생성 시 지정합니다. 범위는 1–16이며 기본값은 2입니다. 각 윈도우는 지연 값 + 1개의 백 버퍼를 유지하며 지연 값 16에서는 16개로 제한합니다. 다른 백엔드는 이 설정을 무시합니다.\n- 백 버퍼를 하나 추가할 때마다 1080p RGBA8에서 약 8 MB를 사용합니다. 범위를 벗어난 호출마다 Warning을 기록하고 2를 사용합니다. 연결 호출을 위해 같은 `WindowSettings&`를 반환합니다.\n- 1은 입력 지연을 최소화합니다. 값이 높으면 CPU와 GPU 작업이 겹쳐 프레임 속도가 부드러워지지만 입력 지연이 최대 N−1프레임 늘어납니다.\n- update나 draw 빈도를 설정하지 않습니다.",
+                    "snippet": "class tcApp : public App {\n    void setup() override {\n        auto window = createWindow(WindowSettings().setMaxFrameLatency(1));\n    }\n};\n",
+                    "related": [
+                        "WindowSettings::maxFrameLatency",
+                        "WindowSettings::setSwapInterval",
+                        "createWindow"
+                    ]
                 },
                 {
                     "name": "setParentWindow",
@@ -74047,6 +74307,89 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "BlendFactor",
+            "desc": "Selects a portable source or destination blend factor.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "Zero",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "One",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "SrcColor",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "OneMinusSrcColor",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "SrcAlpha",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "OneMinusSrcAlpha",
+                    "value": 5,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DstColor",
+                    "value": 6,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "OneMinusDstColor",
+                    "value": 7,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "DstAlpha",
+                    "value": 8,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "OneMinusDstAlpha",
+                    "value": 9,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "移植可能な描画元・描画先のブレンド係数を選択します。",
+            "desc_ko": "이식 가능한 소스 및 대상 블렌드 계수를 선택합니다.",
+            "related": [
+                "BlendDesc",
+                "BlendOp"
+            ]
+        },
+        {
             "name": "BlendMode",
             "desc": "Selects how drawing colors blend with the existing image.",
             "keywords": [
@@ -74101,13 +74444,70 @@ const TrussCAPI = {
                     "desc": "No blending (overwrite)",
                     "desc_ja": "",
                     "desc_ko": ""
+                },
+                {
+                    "name": "Custom",
+                    "value": 6,
+                    "desc": "Uses the stored BlendDesc for custom RGB/alpha equations. Select after setCustomBlendDesc; source conversion defaults off (see BlendDesc::premultiplySource).",
+                    "desc_ja": "保存済みの BlendDesc で RGB・アルファの式を指定します。setCustomBlendDesc の後に選択します。描画元変換は既定でオフです（BlendDesc::premultiplySource を参照）。",
+                    "desc_ko": "저장된 BlendDesc로 RGB 및 알파 수식을 지정합니다. setCustomBlendDesc 뒤에 선택합니다. 소스 변환은 기본적으로 꺼져 있습니다(BlendDesc::premultiplySource 참조)."
                 }
             ],
-            "desc_ja": "描画色と既存の画像を混ぜる方法を指定する。",
-            "desc_ko": "그리기 색상을 기존 이미지와 혼합하는 방식을 지정한다.",
+            "desc_ja": "描画色と既存の画像を混ぜる方法を指定します。",
+            "desc_ko": "그리기 색상을 기존 이미지와 혼합하는 방식을 지정합니다.",
             "related": [
                 "setBlendMode",
-                "getBlendMode"
+                "getBlendMode",
+                "BlendDesc",
+                "setCustomBlendDesc"
+            ]
+        },
+        {
+            "name": "BlendOp",
+            "desc": "Selects Add, Subtract, ReverseSubtract, Minimum or Maximum.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "Add",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Subtract",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "ReverseSubtract",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Minimum",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Maximum",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "Add、Subtract、ReverseSubtract、Minimum、Maximum を選択します。",
+            "desc_ko": "Add, Subtract, ReverseSubtract, Minimum, Maximum을 선택합니다.",
+            "related": [
+                "BlendDesc",
+                "BlendFactor"
             ]
         },
         {
