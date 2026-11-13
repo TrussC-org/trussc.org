@@ -991,9 +991,9 @@
         {
           "of": "ofFbo",
           "tc": "Fbo",
-          "notes": "Stores off-screen rendering results in a texture.",
-          "notes_ja": "画面外での描画結果をテクスチャに保持する。",
-          "notes_ko": "오프스크린 렌더링 결과를 텍스처에 보관한다."
+          "notes": "Renders offscreen into a texture with top-first sampling on supported backends.",
+          "notes_ja": "対応バックエンドで上の行からサンプリングできるテクスチャに、オフスクリーン描画します。",
+          "notes_ko": "지원 백엔드에서 위쪽 행부터 샘플링하는 텍스처에 오프스크린 렌더링합니다."
         },
         {
           "of": "ofImage",

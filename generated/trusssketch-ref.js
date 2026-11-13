@@ -7,7 +7,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.8.0 (Lua)",
+    "version": "v0.8.1 (Lua)",
     "lang": "lua",
     "categories": [
         {
@@ -13217,7 +13217,7 @@ const TrussCAPI = {
         },
         {
             "name": "Fbo",
-            "desc": "Stores off-screen rendering results in a texture.",
+            "desc": "Renders offscreen into a texture with top-first sampling on supported backends.",
             "keywords": [
                 "framebuffer",
                 "render target",
@@ -13225,8 +13225,8 @@ const TrussCAPI = {
                 "render texture",
                 "of fbo"
             ],
-            "desc_ja": "画面外での描画結果をテクスチャに保持する。",
-            "desc_ko": "오프스크린 렌더링 결과를 텍스처에 보관한다.",
+            "desc_ja": "対応バックエンドで上の行からサンプリングできるテクスチャに、オフスクリーン描画します。",
+            "desc_ko": "지원 백엔드에서 위쪽 행부터 샘플링하는 텍스처에 오프스크린 렌더링합니다.",
             "related": [
                 "VideoWriter::addFrame",
                 "VideoWriter::addFrameAt",
@@ -13297,9 +13297,9 @@ const TrussCAPI = {
                     "signatures": [
                         "pixels"
                     ],
-                    "desc": "Reads framebuffer contents into a CPU RGBA8 buffer.",
-                    "desc_ja": "フレームバッファの内容を CPU の RGBA8 バッファに読み出す。",
-                    "desc_ko": "프레임버퍼 내용을 CPU RGBA8 버퍼로 읽는다."
+                    "desc": "Reads framebuffer contents into a top-first CPU RGBA8 buffer.",
+                    "desc_ja": "フレームバッファの内容を、上の行から並ぶ CPU RGBA8 バッファに読み出します。",
+                    "desc_ko": "프레임버퍼 내용을 위쪽 행부터 배치한 CPU RGBA8 버퍼로 읽습니다."
                 },
                 {
                     "name": "fbo:readPixelsFloat",
@@ -13418,9 +13418,9 @@ const TrussCAPI = {
                         "",
                         ""
                     ],
-                    "desc": "Returns the framebuffer's current color texture.",
-                    "desc_ja": "フレームバッファの現在のカラーテクスチャを返す。",
-                    "desc_ko": "프레임버퍼의 현재 컬러 텍스처를 반환한다."
+                    "desc": "Returns the resolved color texture; supported backends sample top-first.",
+                    "desc_ja": "解決済みのカラーテクスチャを返します。対応バックエンドでは上の行からサンプリングできます。",
+                    "desc_ko": "리졸브된 컬러 텍스처를 반환하며 지원 백엔드에서는 위쪽 행부터 샘플링합니다."
                 },
                 {
                     "name": "fbo:save",
@@ -13439,9 +13439,9 @@ const TrussCAPI = {
                         "x, y",
                         "x, y, w, h"
                     ],
-                    "desc": "Draws the framebuffer contents onto the current target.",
-                    "desc_ja": "フレームバッファの内容を現在の描画先に描画する。",
-                    "desc_ko": "프레임버퍼 내용을 현재 타깃에 그린다."
+                    "desc": "Draws the Fbo upright using the current color and blend mode.",
+                    "desc_ja": "現在の色とブレンドモードで、Fbo を正しい上下方向で描画します。",
+                    "desc_ko": "현재 색상과 블렌드 모드로 Fbo를 올바른 상하 방향으로 그립니다."
                 },
                 {
                     "name": "fbo:drawStencil",
@@ -13469,9 +13469,9 @@ const TrussCAPI = {
                     "signatures": [
                         ""
                     ],
-                    "desc": "Returns the underlying sokol color texture view handle.",
-                    "desc_ja": "内部の sokol カラーテクスチャビューハンドルを返す。",
-                    "desc_ko": "내부 sokol 컬러 텍스처 뷰 핸들을 반환한다."
+                    "desc": "Returns the color sampling view; supported Fbo inputs need no UV flip.",
+                    "desc_ja": "カラーのサンプリング用ビューを返します。対応する Fbo 入力には UV 反転が不要です。",
+                    "desc_ko": "컬러 샘플링 뷰를 반환하며 지원되는 Fbo 입력에는 UV 반전이 필요하지 않습니다."
                 },
                 {
                     "name": "fbo:getSampler",
@@ -14429,8 +14429,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Set whether the glyph atlas may generate mipmaps.",
-                    "desc_ja": "グリフアトラスのミップマップ生成を許可するか設定する。",
-                    "desc_ko": "글리프 아틀라스의 밉맵 생성을 허용할지 설정한다."
+                    "desc_ja": "グリフアトラスのミップマップ生成を許可するか設定します。",
+                    "desc_ko": "글리프 아틀라스의 밉맵 생성을 허용할지 설정합니다."
                 },
                 {
                     "name": "font:setOversampling",
@@ -14581,15 +14581,15 @@ const TrussCAPI = {
         },
         {
             "name": "FullscreenShader",
-            "desc": "Provides a shader for fullscreen post-processing effects.",
+            "desc": "Applies a fullscreen filter without preparing quad vertices.",
             "keywords": [
                 "postprocess",
                 "effect",
                 "quad",
                 "filter"
             ],
-            "desc_ja": "フルスクリーンのポストプロセス用シェーダーを提供する。",
-            "desc_ko": "전체 화면 후처리용 셰이더를 제공한다.",
+            "desc_ja": "クアッド頂点を用意せず、フルスクリーンのフィルターを実行します。",
+            "desc_ko": "쿼드 정점을 준비하지 않고 전체 화면 필터를 실행합니다.",
             "related": [
                 "Shader",
                 "Fbo",

@@ -6563,7 +6563,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "Fbo",
-   "desc": "Stores off-screen rendering results in a texture.",
+   "desc": "Renders offscreen into a texture with top-first sampling on supported backends.",
    "constructor": {
     "snippet": "Fbo()"
    },
@@ -6602,7 +6602,7 @@ const TrussSketchAPI = {
      "name": "readPixels",
      "snippet": "readPixels()",
      "return": "",
-     "desc": "Reads framebuffer contents into a CPU RGBA8 buffer."
+     "desc": "Reads framebuffer contents into a top-first CPU RGBA8 buffer."
     },
     {
      "name": "readPixelsFloat",
@@ -6674,7 +6674,7 @@ const TrussSketchAPI = {
      "name": "getTexture",
      "snippet": "getTexture()",
      "return": "Texture &",
-     "desc": "Returns the framebuffer's current color texture."
+     "desc": "Returns the resolved color texture; supported backends sample top-first."
     },
     {
      "name": "save",
@@ -6686,7 +6686,7 @@ const TrussSketchAPI = {
      "name": "draw",
      "snippet": "draw(${1:x}, ${2:y})",
      "return": "void",
-     "desc": "Draws the framebuffer contents onto the current target."
+     "desc": "Draws the Fbo upright using the current color and blend mode."
     },
     {
      "name": "drawStencil",
@@ -6704,7 +6704,7 @@ const TrussSketchAPI = {
      "name": "getTextureView",
      "snippet": "getTextureView()",
      "return": "sg_view",
-     "desc": "Returns the underlying sokol color texture view handle."
+     "desc": "Returns the color sampling view; supported Fbo inputs need no UV flip."
     },
     {
      "name": "getSampler",
@@ -7247,7 +7247,7 @@ const TrussSketchAPI = {
   },
   {
    "name": "FullscreenShader",
-   "desc": "Provides a shader for fullscreen post-processing effects.",
+   "desc": "Applies a fullscreen filter without preparing quad vertices.",
    "constructor": {
     "snippet": "FullscreenShader()"
    },

@@ -6,7 +6,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.8.0",
+    "version": "v0.8.1",
     "lang": "all",
     "categories": [
         {
@@ -2826,6 +2826,10 @@ const TrussCAPI = {
                     "details_ko": "- 스트로크에서는 각 `vertex()`가 그 시점의 색상·두께·cap·join을 기록하며, 시작과 끝의 cap은 각각 첫 정점과 마지막 정점의 값을, 각 모서리의 join은 해당 정점의 값을 사용하고, 닫힌 스트로크의 닫는 모서리에는 첫 정점의 join을 사용하며 cap은 적용하지 않습니다.\n- 열려 있는 버퍼(`beginShape`, `beginLines`, `beginStroke` 중 하나)에 점을 하나 추가합니다. 어느 것도 열려 있지 않으면 아무 일도 하지 않습니다.\n- 2D 점(`vertex(x, y)`, `vertex(Vec2)`)과 3D 점(`vertex(x, y, z)`, `vertex(Vec3)`)을 전달할 수 있습니다. 2D 점의 z는 0이 됩니다.\n- `beginShape()` 안에서는 위치만 기록합니다. 색은 `endShape()`를 호출한 시점의 색이 사용됩니다.\n- `beginLines()` 안에서는 점마다 **그 시점의 색**도 기록합니다. 점 사이에서 색을 바꾸면 선분마다 색을 줄 수 있습니다.\n- `beginStroke()` 안에서는 점마다 **그 시점의 선 두께와 색상**을 기록하므로 한 선 안에서 두께와 색상을 바꿀 수 있습니다. 조인과 캡에는 해당 정점의 색상을 사용하며 선분에서는 양 끝의 색상을 보간합니다. `beginStroke`를 참조합니다.",
                     "examples": [
                         {
+                            "name": "pushShaderExample",
+                            "group": "shader"
+                        },
+                        {
                             "name": "grabExample",
                             "group": "node"
                         },
@@ -2860,6 +2864,10 @@ const TrussCAPI = {
                     "details_ja": "- ストロークでは各 `vertex()` がその時点の色・太さ・cap・join を記録し、始点と終点の cap はそれぞれ最初と最後の頂点の値、各角の join はその頂点の値を使い、閉じたストロークの閉じる角には最初の頂点の join を使って cap は適用しません。\n- 開いているバッファ（`beginShape`、`beginLines`、`beginStroke` のいずれか）に点を 1 つ追加します。どれも開いていないときは何もしません。\n- 2D の点（`vertex(x, y)`、`vertex(Vec2)`）と 3D の点（`vertex(x, y, z)`、`vertex(Vec3)`）を渡せます。2D の点では z は 0 になります。\n- `beginShape()` の中では位置だけを記録します。色は `endShape()` を呼んだ時点のものが使われます。\n- `beginLines()` の中では、点ごとに**その時点の色**も記録します。点の間で色を変えると、線分ごとに色を付けられます。\n- `beginStroke()` の中では、点ごとに**その時点の線の太さと色**を記録するので、1 本の線の中で太さと色を変えられます。接合部とキャップにはその頂点の色を使い、線分では両端の色を補間します。`beginStroke` を参照してください。",
                     "details_ko": "- 스트로크에서는 각 `vertex()`가 그 시점의 색상·두께·cap·join을 기록하며, 시작과 끝의 cap은 각각 첫 정점과 마지막 정점의 값을, 각 모서리의 join은 해당 정점의 값을 사용하고, 닫힌 스트로크의 닫는 모서리에는 첫 정점의 join을 사용하며 cap은 적용하지 않습니다.\n- 열려 있는 버퍼(`beginShape`, `beginLines`, `beginStroke` 중 하나)에 점을 하나 추가합니다. 어느 것도 열려 있지 않으면 아무 일도 하지 않습니다.\n- 2D 점(`vertex(x, y)`, `vertex(Vec2)`)과 3D 점(`vertex(x, y, z)`, `vertex(Vec3)`)을 전달할 수 있습니다. 2D 점의 z는 0이 됩니다.\n- `beginShape()` 안에서는 위치만 기록합니다. 색은 `endShape()`를 호출한 시점의 색이 사용됩니다.\n- `beginLines()` 안에서는 점마다 **그 시점의 색**도 기록합니다. 점 사이에서 색을 바꾸면 선분마다 색을 줄 수 있습니다.\n- `beginStroke()` 안에서는 점마다 **그 시점의 선 두께와 색상**을 기록하므로 한 선 안에서 두께와 색상을 바꿀 수 있습니다. 조인과 캡에는 해당 정점의 색상을 사용하며 선분에서는 양 끝의 색상을 보간합니다. `beginStroke`를 참조합니다.",
                     "examples": [
+                        {
+                            "name": "pushShaderExample",
+                            "group": "shader"
+                        },
                         {
                             "name": "grabExample",
                             "group": "node"
@@ -2896,6 +2904,10 @@ const TrussCAPI = {
                     "details_ko": "- 스트로크에서는 각 `vertex()`가 그 시점의 색상·두께·cap·join을 기록하며, 시작과 끝의 cap은 각각 첫 정점과 마지막 정점의 값을, 각 모서리의 join은 해당 정점의 값을 사용하고, 닫힌 스트로크의 닫는 모서리에는 첫 정점의 join을 사용하며 cap은 적용하지 않습니다.\n- 열려 있는 버퍼(`beginShape`, `beginLines`, `beginStroke` 중 하나)에 점을 하나 추가합니다. 어느 것도 열려 있지 않으면 아무 일도 하지 않습니다.\n- 2D 점(`vertex(x, y)`, `vertex(Vec2)`)과 3D 점(`vertex(x, y, z)`, `vertex(Vec3)`)을 전달할 수 있습니다. 2D 점의 z는 0이 됩니다.\n- `beginShape()` 안에서는 위치만 기록합니다. 색은 `endShape()`를 호출한 시점의 색이 사용됩니다.\n- `beginLines()` 안에서는 점마다 **그 시점의 색**도 기록합니다. 점 사이에서 색을 바꾸면 선분마다 색을 줄 수 있습니다.\n- `beginStroke()` 안에서는 점마다 **그 시점의 선 두께와 색상**을 기록하므로 한 선 안에서 두께와 색상을 바꿀 수 있습니다. 조인과 캡에는 해당 정점의 색상을 사용하며 선분에서는 양 끝의 색상을 보간합니다. `beginStroke`를 참조합니다.",
                     "examples": [
                         {
+                            "name": "pushShaderExample",
+                            "group": "shader"
+                        },
+                        {
                             "name": "grabExample",
                             "group": "node"
                         },
@@ -2930,6 +2942,10 @@ const TrussCAPI = {
                     "details_ja": "- ストロークでは各 `vertex()` がその時点の色・太さ・cap・join を記録し、始点と終点の cap はそれぞれ最初と最後の頂点の値、各角の join はその頂点の値を使い、閉じたストロークの閉じる角には最初の頂点の join を使って cap は適用しません。\n- 開いているバッファ（`beginShape`、`beginLines`、`beginStroke` のいずれか）に点を 1 つ追加します。どれも開いていないときは何もしません。\n- 2D の点（`vertex(x, y)`、`vertex(Vec2)`）と 3D の点（`vertex(x, y, z)`、`vertex(Vec3)`）を渡せます。2D の点では z は 0 になります。\n- `beginShape()` の中では位置だけを記録します。色は `endShape()` を呼んだ時点のものが使われます。\n- `beginLines()` の中では、点ごとに**その時点の色**も記録します。点の間で色を変えると、線分ごとに色を付けられます。\n- `beginStroke()` の中では、点ごとに**その時点の線の太さと色**を記録するので、1 本の線の中で太さと色を変えられます。接合部とキャップにはその頂点の色を使い、線分では両端の色を補間します。`beginStroke` を参照してください。",
                     "details_ko": "- 스트로크에서는 각 `vertex()`가 그 시점의 색상·두께·cap·join을 기록하며, 시작과 끝의 cap은 각각 첫 정점과 마지막 정점의 값을, 각 모서리의 join은 해당 정점의 값을 사용하고, 닫힌 스트로크의 닫는 모서리에는 첫 정점의 join을 사용하며 cap은 적용하지 않습니다.\n- 열려 있는 버퍼(`beginShape`, `beginLines`, `beginStroke` 중 하나)에 점을 하나 추가합니다. 어느 것도 열려 있지 않으면 아무 일도 하지 않습니다.\n- 2D 점(`vertex(x, y)`, `vertex(Vec2)`)과 3D 점(`vertex(x, y, z)`, `vertex(Vec3)`)을 전달할 수 있습니다. 2D 점의 z는 0이 됩니다.\n- `beginShape()` 안에서는 위치만 기록합니다. 색은 `endShape()`를 호출한 시점의 색이 사용됩니다.\n- `beginLines()` 안에서는 점마다 **그 시점의 색**도 기록합니다. 점 사이에서 색을 바꾸면 선분마다 색을 줄 수 있습니다.\n- `beginStroke()` 안에서는 점마다 **그 시점의 선 두께와 색상**을 기록하므로 한 선 안에서 두께와 색상을 바꿀 수 있습니다. 조인과 캡에는 해당 정점의 색상을 사용하며 선분에서는 양 끝의 색상을 보간합니다. `beginStroke`를 참조합니다.",
                     "examples": [
+                        {
+                            "name": "pushShaderExample",
+                            "group": "shader"
+                        },
                         {
                             "name": "grabExample",
                             "group": "node"
@@ -3988,6 +4004,10 @@ const TrussCAPI = {
                         {
                             "name": "curvesExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "pushShaderExample",
+                            "group": "shader"
                         }
                     ]
                 },
@@ -4020,6 +4040,10 @@ const TrussCAPI = {
                         {
                             "name": "strokeExample",
                             "group": "graphics"
+                        },
+                        {
+                            "name": "pushShaderExample",
+                            "group": "shader"
                         },
                         {
                             "name": "AllFeaturesExample",
@@ -5377,7 +5401,7 @@ const TrussCAPI = {
                         },
                         {
                             "name": "fullscreenShaderExample",
-                            "group": "graphics"
+                            "group": "shader"
                         },
                         {
                             "name": "hitTestExample",
@@ -5414,7 +5438,7 @@ const TrussCAPI = {
                         },
                         {
                             "name": "fullscreenShaderExample",
-                            "group": "graphics"
+                            "group": "shader"
                         },
                         {
                             "name": "hitTestExample",
@@ -5576,12 +5600,12 @@ const TrussCAPI = {
                     "snippet": "void tcApp::draw() {\n    drawCircle(getMouseX(), getMouseY(), 10);   // follows the mouse\n}\n",
                     "examples": [
                         {
-                            "name": "polylinesExample",
-                            "group": "graphics"
+                            "name": "computeParticlesExample",
+                            "group": "compute"
                         },
                         {
-                            "name": "cursorExample",
-                            "group": "input_output"
+                            "name": "polylinesExample",
+                            "group": "graphics"
                         }
                     ]
                 },
@@ -5610,12 +5634,12 @@ const TrussCAPI = {
                     "snippet": "void tcApp::draw() {\n    drawCircle(getMouseX(), getMouseY(), 10);   // follows the mouse\n}\n",
                     "examples": [
                         {
-                            "name": "polylinesExample",
-                            "group": "graphics"
+                            "name": "computeParticlesExample",
+                            "group": "compute"
                         },
                         {
-                            "name": "cursorExample",
-                            "group": "input_output"
+                            "name": "polylinesExample",
+                            "group": "graphics"
                         }
                     ]
                 },
@@ -7525,7 +7549,13 @@ const TrussCAPI = {
                     "details": "- Returns a `double` measured from program start on a steady clock, unaffected by system clock changes; it retains greater precision during long runtimes than `getElapsedTimef()`.\n- Shares its clock and reset offset with `getElapsedTimef`, `getElapsedTimeMillis`, `getElapsedTimeMicros`, and `getFrameElapsedTime`; `resetElapsedTimeCounter()` restarts the reported elapsed time without resetting framework timers or loop timing. Differences between readings represent durations only if no reset occurs between them.\n- Live elapsed-time getters may be called from worker threads; the reset offset is atomic and negative results caused by a concurrent reset are clamped to zero. Frame-sampled behavior is described in `getFrameElapsedTime`.",
                     "details_ja": "- プログラム開始からの経過秒数を steady clock で測り、`double` で返します。システム時刻の変更に影響されず、長時間の実行でも `getElapsedTimef()` より高い精度を保ちます。\n- `getElapsedTimef`、`getElapsedTimeMillis`、`getElapsedTimeMicros`、`getFrameElapsedTime` と時計とリセット用の差し引き値を共有します。`resetElapsedTimeCounter()` は表示する経過時間を数え直しますが、フレームワークのタイマーやループの時刻はリセットしません。2回の値の差が経過時間になるのは、間にリセットがない場合だけです。\n- 現在の経過時間を返す関数はワーカースレッドからも呼び出せます。リセット用の差し引き値はアトミックに扱われ、同時のリセットで結果が負になる場合はゼロになります。フレーム単位で取得する値の扱いは `getFrameElapsedTime` を参照してください。",
                     "details_ko": "- 프로그램 시작부터의 경과 시간을 steady clock으로 측정하여 `double` 초 단위로 반환합니다. 시스템 시각 변경의 영향을 받지 않으며, 장시간 실행에서도 `getElapsedTimef()`보다 높은 정밀도를 유지합니다.\n- `getElapsedTimef`, `getElapsedTimeMillis`, `getElapsedTimeMicros`, `getFrameElapsedTime`과 시계 및 리셋 오프셋을 공유합니다. `resetElapsedTimeCounter()`는 표시되는 경과 시간을 다시 시작하지만 프레임워크 타이머나 루프 타이밍은 리셋하지 않습니다. 두 측정값의 차이는 그 사이에 리셋이 없을 때만 경과 시간을 나타냅니다.\n- 현재 경과 시간을 반환하는 함수는 작업 스레드에서도 호출할 수 있습니다. 리셋 오프셋은 원자적으로 처리되며, 동시 리셋으로 결과가 음수가 되면 0으로 제한됩니다. 프레임별 샘플 값의 동작은 `getFrameElapsedTime`을 참조하세요.",
-                    "snippet": "void tcApp::draw() {\n    float x = 100.0f + 80.0f * cos(float(getElapsedTime()));\n    drawCircle(x, 100.0f, 10.0f);\n}\n"
+                    "snippet": "void tcApp::draw() {\n    float x = 100.0f + 80.0f * cos(float(getElapsedTime()));\n    drawCircle(x, 100.0f, 10.0f);\n}\n",
+                    "examples": [
+                        {
+                            "name": "computeTextureExample",
+                            "group": "compute"
+                        }
+                    ]
                 },
                 {
                     "name": "getElapsedTimeMicros",
@@ -8377,6 +8407,10 @@ const TrussCAPI = {
                     "snippet": "void tcApp::setup() {\n    float chance = random(1.0f);\n    Vec2 position(random(640.0f), random(480.0f));\n    float angle = random(0.0f, TAU);\n}\n",
                     "examples": [
                         {
+                            "name": "computeParticlesExample",
+                            "group": "compute"
+                        },
+                        {
                             "name": "vectorMathExample",
                             "group": "math"
                         }
@@ -8408,6 +8442,10 @@ const TrussCAPI = {
                     "snippet": "void tcApp::setup() {\n    float chance = random(1.0f);\n    Vec2 position(random(640.0f), random(480.0f));\n    float angle = random(0.0f, TAU);\n}\n",
                     "examples": [
                         {
+                            "name": "computeParticlesExample",
+                            "group": "compute"
+                        },
+                        {
                             "name": "vectorMathExample",
                             "group": "math"
                         }
@@ -8438,6 +8476,10 @@ const TrussCAPI = {
                     "details_ko": "- `random()`은 `[0, 1)` 범위의 `float`를 반환합니다. 경계값이 오름차순이면 `random(max)`의 범위는 `[0, max)`이고 `random(min, max)`의 범위는 `[min, max)`입니다.\n- 경계값을 검사하거나 순서를 바꾸지 않고 그대로 분포에 전달합니다.\n- 각 스레드는 `random_device`로 초기 시드를 설정하는 독립적인 메르센 트위스터 생성기를 가집니다. `random`과 `randomInt`는 같은 스레드 안에서 생성기를 공유하며 `randomSeed`는 호출한 스레드의 생성기만 다시 시드 설정합니다.",
                     "snippet": "void tcApp::setup() {\n    float chance = random(1.0f);\n    Vec2 position(random(640.0f), random(480.0f));\n    float angle = random(0.0f, TAU);\n}\n",
                     "examples": [
+                        {
+                            "name": "computeParticlesExample",
+                            "group": "compute"
+                        },
                         {
                             "name": "vectorMathExample",
                             "group": "math"
@@ -17416,6 +17458,10 @@ const TrussCAPI = {
                     "snippet": "// tcApp member: Shader shader;\nvoid tcApp::draw() {\n    if (!shader.isLoaded()) return;\n    pushShader(shader);\n    drawRect(20, 20, 120, 80);\n    popShader();\n}\n",
                     "examples": [
                         {
+                            "name": "pushShaderExample",
+                            "group": "shader"
+                        },
+                        {
                             "name": "AllFeaturesExample",
                             "group": "tests"
                         }
@@ -17445,6 +17491,10 @@ const TrussCAPI = {
                     "details_ko": "- `Shader&`를 받아 해당 객체의 `begin()`을 호출합니다. TrussC의 버텍스 그리기 경로를 사용하는 그리기는 대응하는 `popShader()`까지 이 셰이더를 사용합니다.\n- 로드되지 않은 셰이더는 범위를 추가하지 않으므로 이후 `popShader()`가 이미 활성화된 바깥쪽 셰이더를 종료할 수 있습니다. 조건부로 범위를 시작할 때는 `isLoaded()`를 확인해야 합니다.\n- 범위 중첩, 렌더 타깃 제한, 스레드, 객체 수명은 `Shader`를 참조하세요.",
                     "snippet": "// tcApp member: Shader shader;\nvoid tcApp::draw() {\n    if (!shader.isLoaded()) return;\n    pushShader(shader);\n    drawRect(20, 20, 120, 80);\n    popShader();\n}\n",
                     "examples": [
+                        {
+                            "name": "pushShaderExample",
+                            "group": "shader"
+                        },
                         {
                             "name": "AllFeaturesExample",
                             "group": "tests"
@@ -26952,6 +27002,16 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "描画パスの間で sokol の compute プログラムを実行します（C++ 専用）。",
             "desc_ko": "그리기 패스 사이에서 sokol compute 프로그램을 실행합니다(C++ 전용).",
+            "examples": [
+                {
+                    "name": "computeReadbackAsyncExample",
+                    "group": "compute"
+                },
+                {
+                    "name": "computeTextureExample",
+                    "group": "compute"
+                }
+            ],
             "related": [
                 "ComputeShader::load",
                 "ComputeShader::dispatch",
@@ -27512,9 +27572,9 @@ const TrussCAPI = {
                 "VideoGrabber::onDisconnect",
                 "DeviceLostEventArgs"
             ],
-            "details": "- The argument of a device class's `onDisconnect` event, such as `Serial::onDisconnect` or `VideoGrabber::onDisconnect`. It has one field, `reason`.\n- It is not `DeviceLostEventArgs`, which belongs to the graphics device (`deviceLost`).\n- `onDisconnect` fires only when the OS or driver reports the device lost. Closing the device yourself never fires it. See the device lifecycle note (`docs/DEVICE_LIFECYCLE.md`).",
-            "details_ja": "- `Serial::onDisconnect` や `VideoGrabber::onDisconnect` など、デバイスクラスの `onDisconnect` イベントの引数です。項目は `reason` だけです。\n- グラフィックスデバイスの `deviceLost` が渡す `DeviceLostEventArgs` とは別の型です。\n- `onDisconnect` が発火するのは、OS やドライバがデバイスの喪失を報告したときだけです。自分で閉じたときは発火しません。詳しくはデバイスのライフサイクルの説明（`docs/DEVICE_LIFECYCLE.md`）を参照してください。",
-            "details_ko": "- `Serial::onDisconnect`나 `VideoGrabber::onDisconnect`와 같은 장치 클래스의 `onDisconnect` 이벤트의 인수입니다. 항목은 `reason` 하나뿐입니다.\n- 그래픽 장치의 `deviceLost`가 전달하는 `DeviceLostEventArgs`와는 다른 타입입니다.\n- `onDisconnect`는 OS나 드라이버가 장치 손실을 보고했을 때만 발생합니다. 직접 닫았을 때는 발생하지 않습니다. 자세한 내용은 장치 수명 주기 설명(`docs/DEVICE_LIFECYCLE.md`)을 참조하세요.",
+            "details": "- The argument of a device class's `onDisconnect` event, such as `Serial::onDisconnect` or `VideoGrabber::onDisconnect`. It has one field, `reason`.\n- It is not `DeviceLostEventArgs`, which belongs to the graphics device (`deviceLost`).\n- `onDisconnect` fires only when the OS or driver reports the device lost. Closing the device yourself never fires it. See the device lifecycle note (`docs/architecture/DEVICE_LIFECYCLE.md`).",
+            "details_ja": "- `Serial::onDisconnect` や `VideoGrabber::onDisconnect` など、デバイスクラスの `onDisconnect` イベントの引数です。項目は `reason` だけです。\n- グラフィックスデバイスの `deviceLost` が渡す `DeviceLostEventArgs` とは別の型です。\n- `onDisconnect` が発火するのは、OS やドライバがデバイスの喪失を報告したときだけです。自分で閉じたときは発火しません。詳しくはデバイスのライフサイクルの説明（`docs/architecture/DEVICE_LIFECYCLE.md`）を参照してください。",
+            "details_ko": "- `Serial::onDisconnect`나 `VideoGrabber::onDisconnect`와 같은 장치 클래스의 `onDisconnect` 이벤트의 인수입니다. 항목은 `reason` 하나뿐입니다.\n- 그래픽 장치의 `deviceLost`가 전달하는 `DeviceLostEventArgs`와는 다른 타입입니다.\n- `onDisconnect`는 OS나 드라이버가 장치 손실을 보고했을 때만 발생합니다. 직접 닫았을 때는 발생하지 않습니다. 자세한 내용은 장치 수명 주기 설명(`docs/architecture/DEVICE_LIFECYCLE.md`)을 참조하세요.",
             "properties": [
                 {
                     "name": "reason",
@@ -29125,7 +29185,7 @@ const TrussCAPI = {
         },
         {
             "name": "Fbo",
-            "desc": "Stores off-screen rendering results in a texture.",
+            "desc": "Renders offscreen into a texture with top-first sampling on supported backends.",
             "keywords": [
                 "framebuffer",
                 "render target",
@@ -29133,8 +29193,8 @@ const TrussCAPI = {
                 "render texture",
                 "of fbo"
             ],
-            "desc_ja": "画面外での描画結果をテクスチャに保持する。",
-            "desc_ko": "오프스크린 렌더링 결과를 텍스처에 보관한다.",
+            "desc_ja": "対応バックエンドで上の行からサンプリングできるテクスチャに、オフスクリーン描画します。",
+            "desc_ko": "지원 백엔드에서 위쪽 행부터 샘플링하는 텍스처에 오프스크린 렌더링합니다.",
             "examples": [
                 {
                     "name": "fboMipmapExample",
@@ -29152,9 +29212,9 @@ const TrussCAPI = {
                 "FullscreenShader",
                 "Shader"
             ],
-            "details": "- Call `allocate()` to create the render target, draw between `begin()` and `end()`, then use `draw()` to display the result. See `Fbo::begin` for rendering state and nesting rules.\n- Inherits from `HasTexture` and exposes its color texture through `getTexture()`.\n- Copying is disabled. Moving an active source, or move-assigning to an active destination, is rejected with a warning. Destroying an active Fbo logs an error and terminates the process; call `end()` before destruction.\n- Draw each Fbo from only one window within a frame; drawing the same object from multiple windows in one frame is unsupported.\n- See `Texture` for GPU resource rules, including main-thread use and resource lifetime.",
-            "details_ja": "- `allocate()` で描画先を確保し、`begin()` と `end()` の間で描画してから、`draw()` で結果を表示します。描画状態と入れ子の規則は `Fbo::begin` を参照してください。\n- `HasTexture` を継承し、`getTexture()` でカラーテクスチャを取得できます。\n- コピーはできません。アクティブな移動元からのムーブや、アクティブな移動先へのムーブ代入は警告を記録して拒否されます。アクティブな Fbo を破棄するとエラーを記録してプロセスを終了するため、破棄する前に `end()` を呼んでください。\n- 1 フレーム内では、各 Fbo を 1 つのウィンドウからだけ描画してください。同じオブジェクトを同一フレーム内で複数のウィンドウから描画することには対応していません。\n- メインスレッドでの使用やリソースの寿命など、GPU リソースの扱いは `Texture` を参照してください。",
-            "details_ko": "- `allocate()`로 렌더 타깃을 할당하고 `begin()`과 `end()` 사이에서 그린 다음 `draw()`로 결과를 표시합니다. 렌더링 상태와 중첩 규칙은 `Fbo::begin`을 참조하세요.\n- `HasTexture`를 상속하며 `getTexture()`로 컬러 텍스처를 제공합니다.\n- 복사할 수 없습니다. 활성 상태인 원본에서 이동하거나 활성 상태인 대상에 이동 대입하면 경고를 기록하고 거부합니다. 활성 Fbo를 파괴하면 오류를 기록하고 프로세스를 종료하므로 파괴하기 전에 `end()`를 호출하세요.\n- 한 프레임에서는 각 Fbo를 하나의 윈도우에서만 그려야 합니다. 같은 객체를 한 프레임에 여러 윈도우에서 그리는 것은 지원하지 않습니다.\n- 메인 스레드 사용과 리소스 수명 등 GPU 리소스 규칙은 `Texture`를 참조하세요.",
+            "details": "- An offscreen render target that produces a sampleable color texture. See `Fbo::begin` for drawing state and nesting rules. Fbo textures sample top-first without a flip on Metal, D3D11, WebGPU, Mesa GL/GLES (Linux, Raspberry Pi), and GL/GLES with clip control. Contexts with neither Mesa flip_y nor clip control (such as WebGL2 without EXT_clip_control or very old GL) retain native storage and require the #1419 input-UV flip in custom shaders.\n\nRender offscreen, then display the result:\n```cpp\nvoid tcApp::draw() {\n    fbo.begin(0, 0, 0, 1);\n    fbo.end();\n    fbo.draw(0, 0);\n}\n```\n\n- Inherits from `HasTexture` and exposes its color texture through `getTexture()`.\n- Copying is disabled. Moving an active source, or move-assigning to an active destination, is rejected with a warning. Destroying an active Fbo logs an error and terminates the process; call `end()` before destruction.\n- Draw each Fbo from only one window within a frame; drawing the same object from multiple windows in one frame is unsupported.\n- See `Texture` for GPU resource rules, including main-thread use and resource lifetime.",
+            "details_ja": "- サンプリング可能なカラーテクスチャを生成するオフスクリーン描画先です。描画状態と入れ子の規則は `Fbo::begin` を参照してください。 Fbo テクスチャは Metal、D3D11、WebGPU、Mesa GL/GLES（Linux、Raspberry Pi）、clip control 対応の GL/GLES で、反転せず上の行からサンプリングできます。Mesa flip_y と clip control のどちらもないコンテキスト（EXT_clip_control のない WebGL2 や非常に古い GL など）はネイティブの格納方向を保つため、独自シェーダーでは #1419 の入力 UV 反転が必要です。\n\nオフスクリーンに描画し、結果を表示します。\n```cpp\nvoid tcApp::draw() {\n    fbo.begin(0, 0, 0, 1);\n    fbo.end();\n    fbo.draw(0, 0);\n}\n```\n\n- `HasTexture` を継承し、`getTexture()` でカラーテクスチャを取得できます。\n- コピーはできません。アクティブな移動元からのムーブや、アクティブな移動先へのムーブ代入は警告を記録して拒否されます。アクティブな Fbo を破棄するとエラーを記録してプロセスを終了するため、破棄する前に `end()` を呼んでください。\n- 1 フレーム内では、各 Fbo を 1 つのウィンドウからだけ描画してください。同じオブジェクトを同一フレーム内で複数のウィンドウから描画することには対応していません。\n- メインスレッドでの使用やリソースの寿命など、GPU リソースの扱いは `Texture` を参照してください。",
+            "details_ko": "- 샘플링 가능한 컬러 텍스처를 생성하는 오프스크린 렌더 타깃입니다. 렌더링 상태와 중첩 규칙은 `Fbo::begin`을 참조합니다. Fbo 텍스처는 Metal, D3D11, WebGPU, Mesa GL/GLES(Linux, Raspberry Pi), clip control을 지원하는 GL/GLES에서 반전 없이 위쪽 행부터 샘플링합니다. Mesa flip_y와 clip control이 모두 없는 컨텍스트(EXT_clip_control이 없는 WebGL2 또는 매우 오래된 GL 등)는 네이티브 저장 방향을 유지하므로 사용자 셰이더에서 #1419의 입력 UV 반전이 필요합니다.\n\n오프스크린에 그린 뒤 결과를 표시합니다.\n```cpp\nvoid tcApp::draw() {\n    fbo.begin(0, 0, 0, 1);\n    fbo.end();\n    fbo.draw(0, 0);\n}\n```\n\n- `HasTexture`를 상속하며 `getTexture()`로 컬러 텍스처를 제공합니다.\n- 복사할 수 없습니다. 활성 상태인 원본에서 이동하거나 활성 상태인 대상에 이동 대입하면 경고를 기록하고 거부합니다. 활성 Fbo를 파괴하면 오류를 기록하고 프로세스를 종료하므로 파괴하기 전에 `end()`를 호출하십시오.\n- 한 프레임에서는 각 Fbo를 하나의 윈도우에서만 그려야 합니다. 같은 객체를 한 프레임에 여러 윈도우에서 그리는 것은 지원하지 않습니다.\n- 메인 스레드 사용과 리소스 수명 등 GPU 리소스 규칙은 `Texture`를 참조하십시오.",
             "constructor": {
                 "signatures": [
                     ""
@@ -29266,11 +29326,10 @@ const TrussCAPI = {
                             "params": "float x, float y, float w, float h"
                         }
                     ],
-                    "desc": "Draws the framebuffer contents onto the current target.",
-                    "details": "- `draw(x, y)` uses the attachment width and height; `draw(x, y, w, h)` scales the result to the requested size. Coordinates and dimensions use the current target's drawing coordinate system and transformations.\n- Draws the GPU texture with the current color and blend mode, handles premultiplied alpha under the default alpha blend mode, and automatically corrects the vertical orientation on GL backends. No CPU readback is performed; an unallocated Fbo draws nothing.\n- Drawing and then rendering into the same Fbo again within one frame uses separate texture versions so earlier Fbo draws retain their earlier contents. Additional versions use GPU memory; if version allocation fails, earlier draws may instead show the final contents.\n- Call after `end()`; see `Fbo::begin` for active-attachment sampling and nesting rules.",
-                    "details_ja": "- `draw(x, y)` は添付画像の幅と高さで描画し、`draw(x, y, w, h)` は指定サイズに拡大・縮小して描画します。座標と寸法には現在の描画先の座標系と変換が適用されます。\n- 現在の色とブレンドモードで GPU テクスチャを描画し、既定のアルファブレンドモードでは乗算済みアルファを扱い、GL バックエンドでは上下の向きを自動補正します。CPU への読み出しは行いません。未確保の Fbo は何も描画しません。\n- 同じフレーム内で Fbo を描画してから再びその Fbo に描き込む場合は、別のテクスチャ版を使って、先の Fbo 描画が以前の内容を保持するようにします。追加の版は GPU メモリを使い、その確保に失敗すると先の描画にも最終的な内容が表示される場合があります。\n- `end()` のあとに呼んでください。アクティブな添付画像のサンプリングと入れ子の規則は `Fbo::begin` を参照してください。",
-                    "details_ko": "- `draw(x, y)`는 첨부 이미지의 너비와 높이로 그리며 `draw(x, y, w, h)`는 지정한 크기로 확대·축소하여 그립니다. 좌표와 크기에는 현재 타깃의 그리기 좌표계와 변환이 적용됩니다.\n- 현재 색상과 블렌드 모드로 GPU 텍스처를 그리며 기본 알파 블렌드 모드에서는 미리 곱한 알파를 처리하고 GL 백엔드에서는 상하 방향을 자동 보정합니다. CPU 읽기는 수행하지 않으며 할당되지 않은 Fbo는 아무것도 그리지 않습니다.\n- 같은 프레임에서 Fbo를 그린 뒤 다시 그 Fbo에 렌더링하면 별도 텍스처 버전을 사용하여 앞선 Fbo 그리기가 이전 내용을 유지하도록 합니다. 추가 버전은 GPU 메모리를 사용하며 할당에 실패하면 앞선 그리기에도 최종 내용이 표시될 수 있습니다.\n- `end()` 이후에 호출해야 합니다. 활성 첨부 이미지 샘플링과 중첩 규칙은 `Fbo::begin`을 참조하세요.",
-                    "snippet": "// tcApp.h: Fbo fbo;\nvoid tcApp::setup() { fbo.allocate(256, 256); }\nvoid tcApp::draw() {\n    fbo.begin(0.2f, 0.4f, 0.6f);\n    fbo.end();\n    setColor(1.0f, 1.0f, 1.0f, 1.0f);\n    fbo.draw(20, 20, 128, 128);\n}\n"
+                    "desc": "Draws the Fbo upright using the current color and blend mode.",
+                    "details": "- `draw(x, y)` uses the attachment width and height; `draw(x, y, w, h)` scales the result to the requested size. Coordinates and dimensions use the current target's drawing coordinate system and transformations.\n\nDisplay the Fbo:\n```cpp\nvoid tcApp::draw() {\n    fbo.draw(20, 20, 128, 128);\n}\n```\n\n- Draws the GPU texture with the current color and blend mode, handles premultiplied alpha under the default alpha blend mode, and keeps the displayed result upright, including native GL contexts without Mesa flip_y or clip control. No CPU readback is performed; an unallocated Fbo draws nothing.\n- Drawing and then rendering into the same Fbo again within one frame uses separate texture versions so earlier Fbo draws retain their earlier contents. Additional versions use GPU memory; if version allocation fails, earlier draws may instead show the final contents.\n- Call after `end()`; see `Fbo::begin` for active-attachment sampling and nesting rules.",
+                    "details_ja": "- `draw(x, y)` は添付画像の幅と高さで描画し、`draw(x, y, w, h)` は指定サイズに拡大・縮小して描画します。座標と寸法には現在の描画先の座標系と変換が適用されます。\n\nFbo を表示します。\n```cpp\nvoid tcApp::draw() {\n    fbo.draw(20, 20, 128, 128);\n}\n```\n\n- 現在の色とブレンドモードで GPU テクスチャを描画し、既定のアルファブレンドモードでは乗算済みアルファを扱い、Mesa flip_y と clip control のどちらもないネイティブ GL を含め、結果を正しい上下方向で表示します。CPU への読み出しは行いません。未確保の Fbo は何も描画しません。\n- 同じフレーム内で Fbo を描画してから再びその Fbo に描き込む場合は、別のテクスチャ版を使って、先の Fbo 描画が以前の内容を保持するようにします。追加の版は GPU メモリを使い、その確保に失敗すると先の描画にも最終的な内容が表示される場合があります。\n- `end()` のあとに呼んでください。アクティブな添付画像のサンプリングと入れ子の規則は `Fbo::begin` を参照してください。",
+                    "details_ko": "- `draw(x, y)`는 첨부 이미지의 너비와 높이로 그리며 `draw(x, y, w, h)`는 지정한 크기로 확대·축소하여 그립니다. 좌표와 크기에는 현재 타깃의 그리기 좌표계와 변환이 적용됩니다.\n\nFbo를 표시합니다.\n```cpp\nvoid tcApp::draw() {\n    fbo.draw(20, 20, 128, 128);\n}\n```\n\n- 현재 색상과 블렌드 모드로 GPU 텍스처를 그리며 기본 알파 블렌드 모드에서는 미리 곱한 알파를 처리하고 Mesa flip_y와 clip control이 모두 없는 네이티브 GL을 포함하여 결과를 올바른 상하 방향으로 표시합니다. CPU 읽기는 수행하지 않으며 할당되지 않은 Fbo는 아무것도 그리지 않습니다.\n- 같은 프레임에서 Fbo를 그린 뒤 다시 그 Fbo에 렌더링하면 별도 텍스처 버전을 사용하여 앞선 Fbo 그리기가 이전 내용을 유지하도록 합니다. 추가 버전은 GPU 메모리를 사용하며 할당에 실패하면 앞선 그리기에도 최종 내용이 표시될 수 있습니다.\n- `end()` 이후에 호출해야 합니다. 활성 첨부 이미지 샘플링과 중첩 규칙은 `Fbo::begin`을 참조하십시오."
                 },
                 {
                     "name": "drawStencil",
@@ -29432,11 +29491,10 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns the framebuffer's current color texture.",
-                    "details": "- Returns a borrowed `Texture&`, or `const Texture&` for a const Fbo, to the current single-sample color texture, including the resolved result when MSAA is enabled. The texture is marked as using premultiplied alpha.\n- The current texture can change when the Fbo is rendered again; obtain it again for the latest version. This provides GPU texture access without copying pixels to the CPU; see `Texture` for resource rules.\n- See `Fbo::begin` for active-attachment sampling rules. For display, `Fbo::draw` also corrects GL vertical orientation; drawing the returned Texture directly does not apply that Fbo-specific correction.",
-                    "details_ja": "- 現在のシングルサンプルのカラーテクスチャを、所有権を移さず `Texture&` で返します。const Fbo では `const Texture&` を返します。MSAA 有効時は解決済みの結果で、テクスチャには乗算済みアルファを使う印が付いています。\n- Fbo に再び描き込むと現在のテクスチャが変わる場合があるため、最新版が必要なときは再取得してください。CPU へピクセルをコピーせずに GPU テクスチャへアクセスします。リソースの扱いは `Texture` を参照してください。\n- アクティブな添付画像のサンプリング規則は `Fbo::begin` を参照してください。表示には GL の上下方向も補正する `Fbo::draw` を使えます。返された Texture を直接描画しても、この Fbo 固有の補正は適用されません。",
-                    "details_ko": "- 현재 단일 샘플 컬러 텍스처에 대한 소유권 없는 `Texture&`를 반환하며 const Fbo에서는 `const Texture&`를 반환합니다. MSAA가 활성화되어 있으면 리졸브된 결과이며 텍스처에는 미리 곱한 알파를 사용한다는 표시가 설정됩니다.\n- Fbo에 다시 렌더링하면 현재 텍스처가 바뀔 수 있으므로 최신 버전이 필요할 때 다시 가져와야 합니다. CPU로 픽셀을 복사하지 않고 GPU 텍스처에 접근하며 리소스 규칙은 `Texture`를 참조하세요.\n- 활성 첨부 이미지 샘플링 규칙은 `Fbo::begin`을 참조하세요. 표시할 때 `Fbo::draw`는 GL의 상하 방향도 보정하지만 반환된 Texture를 직접 그리면 이 Fbo 전용 보정은 적용되지 않습니다.",
-                    "snippet": "// tcApp.h: Fbo fbo;\nvoid tcApp::setup() {\n    fbo.allocate(256, 256);\n    Texture& texture = fbo.getTexture();\n    texture.setFilter(TextureFilter::Linear);\n}\n"
+                    "desc": "Returns the resolved color texture; supported backends sample top-first.",
+                    "details": "- Returns a borrowed `Texture&`, or `const Texture&` for a const Fbo, to the current single-sample color texture, including the resolved result when MSAA is enabled. The texture is marked as using premultiplied alpha. Fbo textures sample top-first without a flip on Metal, D3D11, WebGPU, Mesa GL/GLES (Linux, Raspberry Pi), and GL/GLES with clip control. Contexts with neither Mesa flip_y nor clip control (such as WebGL2 without EXT_clip_control or very old GL) retain native storage and require the #1419 input-UV flip in custom shaders.\n\nDraw the stored texture directly on a supported backend:\n```cpp\nvoid tcApp::draw() {\n    fbo.getTexture().draw(0, 0);\n}\n```\n\n- The current texture can change when the Fbo is rendered again; obtain it again for the latest version. This provides GPU texture access without copying pixels to the CPU; see `Texture` for resource rules.\n- See `Fbo::begin` for active-attachment sampling rules. `Fbo::draw` also handles native storage; drawing the returned Texture directly uses its stored rows.",
+                    "details_ja": "- 現在のシングルサンプルのカラーテクスチャを、所有権を移さず `Texture&` で返します。const Fbo では `const Texture&` を返します。MSAA 有効時は解決済みの結果で、テクスチャには乗算済みアルファを使う印が付いています。 Fbo テクスチャは Metal、D3D11、WebGPU、Mesa GL/GLES（Linux、Raspberry Pi）、clip control 対応の GL/GLES で、反転せず上の行からサンプリングできます。Mesa flip_y と clip control のどちらもないコンテキスト（EXT_clip_control のない WebGL2 や非常に古い GL など）はネイティブの格納方向を保つため、独自シェーダーでは #1419 の入力 UV 反転が必要です。\n\n対応バックエンドで格納済みのテクスチャを直接描画します。\n```cpp\nvoid tcApp::draw() {\n    fbo.getTexture().draw(0, 0);\n}\n```\n\n- Fbo に再び描き込むと現在のテクスチャが変わる場合があるため、最新版が必要なときは再取得してください。CPU へピクセルをコピーせずに GPU テクスチャへアクセスします。リソースの扱いは `Texture` を参照してください。\n- アクティブな添付画像のサンプリング規則は `Fbo::begin` を参照してください。`Fbo::draw` はネイティブの格納方向も補正します。返された Texture を直接描画すると格納済みの行を使います。",
+                    "details_ko": "- 현재 단일 샘플 컬러 텍스처에 대한 소유권 없는 `Texture&`를 반환하며 const Fbo에서는 `const Texture&`를 반환합니다. MSAA가 활성화되어 있으면 리졸브된 결과이며 텍스처에는 미리 곱한 알파를 사용한다는 표시가 설정됩니다. Fbo 텍스처는 Metal, D3D11, WebGPU, Mesa GL/GLES(Linux, Raspberry Pi), clip control을 지원하는 GL/GLES에서 반전 없이 위쪽 행부터 샘플링합니다. Mesa flip_y와 clip control이 모두 없는 컨텍스트(EXT_clip_control이 없는 WebGL2 또는 매우 오래된 GL 등)는 네이티브 저장 방향을 유지하므로 사용자 셰이더에서 #1419의 입력 UV 반전이 필요합니다.\n\n지원 백엔드에서 저장된 텍스처를 직접 그립니다.\n```cpp\nvoid tcApp::draw() {\n    fbo.getTexture().draw(0, 0);\n}\n```\n\n- Fbo에 다시 렌더링하면 현재 텍스처가 바뀔 수 있으므로 최신 버전이 필요할 때 다시 가져와야 합니다. CPU로 픽셀을 복사하지 않고 GPU 텍스처에 접근하며 리소스 규칙은 `Texture`를 참조하십시오.\n- 활성 첨부 이미지 샘플링 규칙은 `Fbo::begin`을 참조하십시오. `Fbo::draw`는 네이티브 저장 방향도 보정하며 반환된 Texture를 직접 그리면 저장된 행을 사용합니다."
                 },
                 {
                     "name": "getTextureFormat",
@@ -29466,10 +29524,10 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns the underlying sokol color texture view handle.",
-                    "details": "- Returns the current color texture's sampling `sg_view` handle for advanced interoperation, including the resolved texture when MSAA is enabled.\n- Does not transfer ownership. The handle can change as texture versions change; see `Fbo::getTexture` for texture access and `Texture` for GPU resource lifetime rules.",
-                    "details_ja": "- 高度な連携処理向けに、現在のカラーテクスチャのサンプリング用 `sg_view` ハンドルを返します。MSAA 有効時は解決済みテクスチャのビューです。\n- 所有権は移りません。テクスチャの版が変わるとハンドルも変わる場合があります。テクスチャへのアクセスは `Fbo::getTexture` を、GPU リソースの寿命は `Texture` を参照してください。",
-                    "details_ko": "- 고급 연동을 위해 현재 컬러 텍스처의 샘플링용 `sg_view` 핸들을 반환하며 MSAA가 활성화되어 있으면 리졸브된 텍스처의 뷰입니다.\n- 소유권은 이전하지 않습니다. 텍스처 버전이 바뀌면 핸들도 바뀔 수 있으며 텍스처 접근은 `Fbo::getTexture`를, GPU 리소스 수명 규칙은 `Texture`를 참조하세요."
+                    "desc": "Returns the color sampling view; supported Fbo inputs need no UV flip.",
+                    "details": "- Returns the current color texture's sampling `sg_view` handle for advanced interoperation, including the resolved texture when MSAA is enabled. Fbo inputs use ordinary UVs on supported backends; only contexts with neither Mesa flip_y nor clip control need the #1419 input flip. See `Fbo` for the backend list.\n\nBind the Fbo and draw the filter:\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(0, fbo.getTextureView(), fbo.getSampler());\n    shader.draw();\n}\n```\n\n- Does not transfer ownership. The handle can change as texture versions change; see `Fbo::getTexture` for texture access and `Texture` for GPU resource lifetime rules.",
+                    "details_ja": "- 高度な連携処理向けに、現在のカラーテクスチャのサンプリング用 `sg_view` ハンドルを返します。MSAA 有効時は解決済みテクスチャのビューです。 対応バックエンドの Fbo 入力は通常の UV を使います。#1419 の入力反転が必要なのは Mesa flip_y と clip control のどちらもないコンテキストだけです。バックエンド一覧は `Fbo` を参照してください。\n\nFbo を割り当て、フィルターを描画します。\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(0, fbo.getTextureView(), fbo.getSampler());\n    shader.draw();\n}\n```\n\n- 所有権は移りません。テクスチャの版が変わるとハンドルも変わる場合があります。テクスチャへのアクセスは `Fbo::getTexture` を、GPU リソースの寿命は `Texture` を参照してください。",
+                    "details_ko": "- 고급 연동을 위해 현재 컬러 텍스처의 샘플링용 `sg_view` 핸들을 반환하며 MSAA가 활성화되어 있으면 리졸브된 텍스처의 뷰입니다. 지원 백엔드의 Fbo 입력에는 일반 UV를 사용합니다. #1419의 입력 반전은 Mesa flip_y와 clip control이 모두 없는 컨텍스트에서만 필요합니다. 백엔드 목록은 `Fbo`를 참조합니다.\n\nFbo를 바인딩하고 필터를 그립니다.\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(0, fbo.getTextureView(), fbo.getSampler());\n    shader.draw();\n}\n```\n\n- 소유권은 이전하지 않습니다. 텍스처 버전이 바뀌면 핸들도 바뀔 수 있으며 텍스처 접근은 `Fbo::getTexture`를, GPU 리소스 수명 규칙은 `Texture`를 참조하십시오."
                 },
                 {
                     "name": "getWidth",
@@ -29586,11 +29644,10 @@ const TrussCAPI = {
                             "params": "unsigned char * pixels"
                         }
                     ],
-                    "desc": "Reads framebuffer contents into a CPU RGBA8 buffer.",
-                    "details": "- `readPixels(unsigned char* pixels)` requires space for `getWidth() * getHeight() * 4` bytes. Returns `true` on success and `false` for an unallocated Fbo, a null pointer, or a readback failure.\n- Call after `end()`, outside every Fbo rendering scope in the current window. Calling inside any such scope logs an error and returns `false`, even when reading a different Fbo.\n- Reads mip level 0 of the current color texture, using the resolved result for MSAA. Output is tightly packed RGBA with the top row first and pixels ordered left to right; GL rows are flipped automatically, so no additional vertical flip is needed.\n- Always converts to RGBA8 regardless of the attachment format: values are clamped to 0–1 and quantized to 8 bits, missing G/B components in R/RG formats become 0, and missing alpha becomes 1. BGRA is reordered to RGBA; see `TextureFormat` for source formats.\n- Conversion rounds to nearest. CPU conversion rounds halfway cases up, while native desktop GL conversion may differ by at most one byte value. Use `readPixelsFloat()` to avoid the RGBA8 conversion.\n- Readback is synchronous: GPU work must complete before CPU pixels are available, which can stall rendering and require staging memory. See `Texture` for main-thread GPU resource rules.\n- Window drawing can continue after readback; an open window pass resumes with its color and depth preserved.\n- WebGL2 supports synchronous readback. WebGPU does not support it and returns `false` with a warning.",
-                    "details_ja": "- `readPixels(unsigned char* pixels)` には `getWidth() * getHeight() * 4` バイト分の領域が必要です。成功時は `true`、未確保の Fbo、null ポインター、読み出し失敗では `false` を返します。\n- `end()` のあと、現在のウィンドウのすべての Fbo 描画スコープの外で呼んでください。読み出し対象が別の Fbo でも、そのようなスコープ内ではエラーを記録して `false` を返します。\n- 現在のカラーテクスチャのミップレベル 0 を読み出し、MSAA では解決済みの結果を使います。出力は隙間のない RGBA 配列で、上の行から順に、各行は左から右へ並びます。GL の行は自動で反転するため、追加の上下反転は不要です。\n- 添付画像の形式にかかわらず RGBA8 に変換します。値は 0〜1 にクランプして 8 ビットに量子化し、R/RG 形式で不足する G/B は 0、アルファは 1 にします。BGRA は RGBA 順に並べ替えます。元の形式は `TextureFormat` を参照してください。\n- 最も近い値に丸めます。CPU 変換では中間値を切り上げ、デスクトップ GL のネイティブ変換との差は最大で 1 バイト値です。RGBA8 への変換を避けるには `readPixelsFloat()` を使ってください。\n- 読み出しは同期処理です。CPU ピクセルが利用可能になる前に GPU 処理の完了を待つため、描画を停止させたり作業用メモリを必要としたりします。メインスレッドでの GPU リソースの扱いは `Texture` を参照してください。\n- 読み出し後もウィンドウへの描画を続けられます。開いていたウィンドウのパスは色と深度を保持して再開します。\n- WebGL2 は同期読み出しに対応しています。WebGPU は対応しておらず、警告を記録して `false` を返します。",
-                    "details_ko": "- `readPixels(unsigned char* pixels)`에는 `getWidth() * getHeight() * 4`바이트의 공간이 필요합니다. 성공하면 `true`를 반환하며 할당되지 않은 Fbo, null 포인터 또는 읽기 실패에서는 `false`를 반환합니다.\n- `end()` 이후 현재 윈도우의 모든 Fbo 렌더링 스코프 밖에서 호출해야 합니다. 다른 Fbo를 읽는 경우에도 이러한 스코프 안에서는 오류를 기록하고 `false`를 반환합니다.\n- 현재 컬러 텍스처의 밉 레벨 0을 읽으며 MSAA에서는 리졸브된 결과를 사용합니다. 출력은 빈틈없이 배치된 RGBA 배열이며 위쪽 행부터 각 행의 왼쪽에서 오른쪽 순서로 저장합니다. GL 행은 자동으로 뒤집으므로 추가 상하 반전이 필요하지 않습니다.\n- 첨부 이미지 형식과 관계없이 항상 RGBA8로 변환합니다. 값을 0–1로 제한하고 8비트로 양자화하며 R/RG 형식에 없는 G/B는 0, 알파는 1로 채웁니다. BGRA는 RGBA 순서로 재배열하며 원본 형식은 `TextureFormat`을 참조하세요.\n- 가장 가까운 값으로 반올림합니다. CPU 변환은 중간값을 올림하며 데스크톱 GL의 네이티브 변환과는 최대 한 바이트 값만큼 차이가 날 수 있습니다. RGBA8 변환을 피하려면 `readPixelsFloat()`를 사용합니다.\n- 읽기는 동기식입니다. CPU 픽셀을 사용할 수 있으려면 GPU 작업이 완료되어야 하므로 렌더링을 멈추게 하거나 작업용 메모리가 필요할 수 있습니다. 메인 스레드의 GPU 리소스 규칙은 `Texture`를 참조하세요.\n- 읽기 이후에도 윈도우에 계속 그릴 수 있으며 열려 있던 윈도우 패스는 색상과 깊이를 유지하여 재개합니다.\n- WebGL2는 동기 읽기를 지원합니다. WebGPU는 지원하지 않으며 경고를 기록하고 `false`를 반환합니다.",
-                    "snippet": "// tcApp.h: Fbo fbo;\nvoid tcApp::setup() { fbo.allocate(256, 256); }\nvoid tcApp::draw() {\n    fbo.begin(0.2f, 0.4f, 0.6f);\n    fbo.end();\n    vector<unsigned char> pixels(256 * 256 * 4);\n    bool ok = fbo.readPixels(pixels.data());\n}\n",
+                    "desc": "Reads framebuffer contents into a top-first CPU RGBA8 buffer.",
+                    "details": "- `readPixels(unsigned char* pixels)` requires space for `getWidth() * getHeight() * 4` bytes. Returns `true` on success and `false` for an unallocated Fbo, a null pointer, or a readback failure.\n\nRead the completed Fbo:\n```cpp\nvoid tcApp::draw() {\n    std::vector<unsigned char> pixels(fbo.getWidth() * fbo.getHeight() * 4);\n    fbo.readPixels(pixels.data());\n}\n```\n\n- Call after `end()`, outside every Fbo rendering scope in the current window. Calling inside any such scope logs an error and returns `false`, even when reading a different Fbo.\n- Reads mip level 0 of the current color texture, using the resolved result for MSAA. Output is tightly packed RGBA with the top row first and pixels ordered left to right; native GL rows are reversed only where needed, so no additional vertical flip is needed.\n- Always converts to RGBA8 regardless of the attachment format: values are clamped to 0–1 and quantized to 8 bits, missing G/B components in R/RG formats become 0, and missing alpha becomes 1. BGRA is reordered to RGBA; see `TextureFormat` for source formats.\n- Conversion rounds to nearest. CPU conversion rounds halfway cases up, while native desktop GL conversion may differ by at most one byte value. Use `readPixelsFloat()` to avoid the RGBA8 conversion.\n- Readback is synchronous: GPU work must complete before CPU pixels are available, which can stall rendering and require staging memory. See `Texture` for main-thread GPU resource rules.\n- Window drawing can continue after readback; an open window pass resumes with its color and depth preserved.\n- WebGL2 supports synchronous readback. WebGPU does not support it and returns `false` with a warning.",
+                    "details_ja": "- `readPixels(unsigned char* pixels)` には `getWidth() * getHeight() * 4` バイト分の領域が必要です。成功時は `true`、未確保の Fbo、null ポインター、読み出し失敗では `false` を返します。\n\n描画を終えた Fbo を読み出します。\n```cpp\nvoid tcApp::draw() {\n    std::vector<unsigned char> pixels(fbo.getWidth() * fbo.getHeight() * 4);\n    fbo.readPixels(pixels.data());\n}\n```\n\n- `end()` のあと、現在のウィンドウのすべての Fbo 描画スコープの外で呼んでください。読み出し対象が別の Fbo でも、そのようなスコープ内ではエラーを記録して `false` を返します。\n- 現在のカラーテクスチャのミップレベル 0 を読み出し、MSAA では解決済みの結果を使います。出力は隙間のない RGBA 配列で、上の行から順に、各行は左から右へ並びます。ネイティブ GL の行は必要な場合だけ反転するため、追加の上下反転は不要です。\n- 添付画像の形式にかかわらず RGBA8 に変換します。値は 0〜1 にクランプして 8 ビットに量子化し、R/RG 形式で不足する G/B は 0、アルファは 1 にします。BGRA は RGBA 順に並べ替えます。元の形式は `TextureFormat` を参照してください。\n- 最も近い値に丸めます。CPU 変換では中間値を切り上げ、デスクトップ GL のネイティブ変換との差は最大で 1 バイト値です。RGBA8 への変換を避けるには `readPixelsFloat()` を使ってください。\n- 読み出しは同期処理です。CPU ピクセルが利用可能になる前に GPU 処理の完了を待つため、描画を停止させたり作業用メモリを必要としたりします。メインスレッドでの GPU リソースの扱いは `Texture` を参照してください。\n- 読み出し後もウィンドウへの描画を続けられます。開いていたウィンドウのパスは色と深度を保持して再開します。\n- WebGL2 は同期読み出しに対応しています。WebGPU は対応しておらず、警告を記録して `false` を返します。",
+                    "details_ko": "- `readPixels(unsigned char* pixels)`에는 `getWidth() * getHeight() * 4`바이트의 공간이 필요합니다. 성공하면 `true`를 반환하며 할당되지 않은 Fbo, null 포인터 또는 읽기 실패에서는 `false`를 반환합니다.\n\n그리기를 마친 Fbo를 읽습니다.\n```cpp\nvoid tcApp::draw() {\n    std::vector<unsigned char> pixels(fbo.getWidth() * fbo.getHeight() * 4);\n    fbo.readPixels(pixels.data());\n}\n```\n\n- `end()` 이후 현재 윈도우의 모든 Fbo 렌더링 스코프 밖에서 호출해야 합니다. 다른 Fbo를 읽는 경우에도 이러한 스코프 안에서는 오류를 기록하고 `false`를 반환합니다.\n- 현재 컬러 텍스처의 밉 레벨 0을 읽으며 MSAA에서는 리졸브된 결과를 사용합니다. 출력은 빈틈없이 배치된 RGBA 배열이며 위쪽 행부터 각 행의 왼쪽에서 오른쪽 순서로 저장합니다. 네이티브 GL 행은 필요한 경우에만 뒤집으므로 추가 상하 반전이 필요하지 않습니다.\n- 첨부 이미지 형식과 관계없이 항상 RGBA8로 변환합니다. 값을 0–1로 제한하고 8비트로 양자화하며 R/RG 형식에 없는 G/B는 0, 알파는 1로 채웁니다. BGRA는 RGBA 순서로 재배열하며 원본 형식은 `TextureFormat`을 참조하십시오.\n- 가장 가까운 값으로 반올림합니다. CPU 변환은 중간값을 올림하며 데스크톱 GL의 네이티브 변환과는 최대 한 바이트 값만큼 차이가 날 수 있습니다. RGBA8 변환을 피하려면 `readPixelsFloat()`를 사용합니다.\n- 읽기는 동기식입니다. CPU 픽셀을 사용할 수 있으려면 GPU 작업이 완료되어야 하므로 렌더링을 멈추게 하거나 작업용 메모리가 필요할 수 있습니다. 메인 스레드의 GPU 리소스 규칙은 `Texture`를 참조하십시오.\n- 읽기 이후에도 윈도우에 계속 그릴 수 있으며 열려 있던 윈도우 패스는 색상과 깊이를 유지하여 재개합니다.\n- WebGL2는 동기 읽기를 지원합니다. WebGPU는 지원하지 않으며 경고를 기록하고 `false`를 반환합니다.",
                     "keywords": [
                         "download",
                         "cpu"
@@ -31225,9 +31282,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Set whether the glyph atlas may generate mipmaps.",
-                    "details": "- Enables or disables mipmap generation and returns this `Font` by reference. The default is `true`; mipmaps reduce flicker when text is drawn small.\n- Generation is requested lazily when drawing exceeds two atlas texels per target pixel, accounting for oversampling, load-time DPI, the drawing transform, and target pixel scale. The chain is generated during a subsequent dirty-atlas texture update.\n- A full chain adds approximately one third to the base atlas texture memory and adds CPU filtering work when dirty atlas textures are rebuilt. Disabling it avoids that chain and its rebuild cost.\n- Atlas replacement, deferred changes for URL fonts, and cancellation of pending loads follow `Font::setOversampling`.",
-                    "details_ja": "- ミップマップ生成を有効または無効にし、この `Font` への参照を返します。既定値は `true` です。ミップマップは文字を小さく描く際のちらつきを抑えます。\n- オーバーサンプリング、読み込み時の DPI、描画変換、描画先のピクセル倍率を考慮し、描画先の 1 ピクセルに対してアトラスのテクセルが 2 個を超える描画で初めて生成を要求します。ミップ列は、その後に行われる更新対象のアトラステクスチャの更新時に生成します。\n- 完全なミップ列は、元のアトラステクスチャに対して約 3 分の 1 のメモリを追加し、更新対象のアトラステクスチャを再構築する際に CPU のフィルター処理を追加します。無効にすると、このミップ列と再構築の負荷を省けます。\n- アトラスの切り替え、URL フォントへの変更の反映時期、進行中の読み込みの取消しは `Font::setOversampling` と同じです。",
-                    "details_ko": "- 밉맵 생성을 활성화하거나 비활성화하고 이 `Font`의 참조를 반환합니다. 기본값은 `true`입니다. 밉맵은 텍스트를 작게 그릴 때 깜박임을 줄입니다.\n- 오버샘플링, 로드 시 DPI, 그리기 변환, 대상 픽셀 배율을 고려하여 대상 픽셀 하나당 아틀라스 텍셀이 두 개를 초과하는 그리기에서 처음 생성을 요청합니다. 밉 체인은 이후 갱신이 필요한 아틀라스 텍스처를 갱신할 때 생성합니다.\n- 전체 밉 체인은 기본 아틀라스 텍스처 메모리의 약 3분의 1을 추가하며, 갱신이 필요한 아틀라스 텍스처를 다시 만들 때 CPU 필터링 작업을 추가합니다. 비활성화하면 이 체인과 재생성 비용을 줄일 수 있습니다.\n- 아틀라스 교체, URL 폰트의 변경 적용 시점, 진행 중인 로드의 취소는 `Font::setOversampling`과 같습니다.",
+                    "details": "- Controls atlas mip generation (enabled by default) for both drawString and GlyphBatch. Mips reduce shimmer in small or foreshortened text, at the cost of atlas memory and dirty-atlas CPU filtering; `false` keeps base-only filtering. Returns this `Font` by reference.\n\nFor a `Font` member named `font`, opt out in `tcApp::setup()` before loading:\n```cpp\nfont.setMipmaps(false);\nfont.load(TC_FONT_SANS, 24);\n```\n- Enabled mip chains are built for dirty atlases at each consuming flush, including 1:1 draws; clean atlases need no rebuild. Font/drawString and GlyphBatch share per-fragment screen-space selection: base level through two atlas texels per target pixel, then a continuous, sharp-leaning trilinear LOD (one level below the unbiased LOD), including perspective, rotation and one-axis scaling. Disabling mipmaps keeps both paths at the base level.\n- A full chain adds approximately one third to the base atlas texture memory and adds CPU filtering work when dirty atlas textures are rebuilt. Disabling it avoids that chain and its rebuild cost.\n- Atlas replacement, deferred changes for URL fonts, and cancellation of pending loads follow `Font::setOversampling`.",
+                    "details_ja": "- drawString と GlyphBatch のアトラスのミップ生成を設定します（既定は有効です）。小さい文字や奥行き方向に縮む文字のちらつきを抑えますが、アトラスのメモリと更新時の CPU フィルター処理が増えます。`false` では基本レベルだけを使います。この `Font` への参照を返します。\n\n`Font` メンバー `font` に対し、`tcApp::setup()` で読み込み前に無効にします。\n```cpp\nfont.setMipmaps(false);\nfont.load(TC_FONT_SANS, 24);\n```\n- 有効なミップ列は、等倍描画を含め、描画を消費する各 flush で更新対象のアトラスに生成します。変更のないアトラスは再構築しません。Font/drawString と GlyphBatch は画面上のフラグメントごとに同じ判定を行います。描画先の 1 ピクセルに対してアトラスのテクセルが 2 個以下なら基本レベル、それを超えると、通常より 1 レベル低い、輪郭の鮮明さを重視したトリリニアの LOD へ連続的に移行します。透視投影・回転・一軸の拡縮も対象です。無効にすると両方とも基本レベルを使います。\n- 完全なミップ列は、元のアトラステクスチャに対して約 3 分の 1 のメモリを追加し、更新対象のアトラステクスチャを再構築する際に CPU のフィルター処理を追加します。無効にすると、このミップ列と再構築の負荷を省けます。\n- アトラスの切り替え、URL フォントへの変更の反映時期、進行中の読み込みの取消しは `Font::setOversampling` と同じです。",
+                    "details_ko": "- drawString과 GlyphBatch의 아틀라스 밉 생성을 설정합니다(기본값은 활성화입니다). 작거나 원근으로 축소된 텍스트의 깜박임을 줄이지만 아틀라스 메모리와 변경 시 CPU 필터링 비용이 추가됩니다. `false`는 기본 레벨만 사용합니다. 이 `Font`의 참조를 반환합니다.\n\n`Font` 멤버 `font`에 대해 `tcApp::setup()`에서 로드 전에 비활성화합니다.\n```cpp\nfont.setMipmaps(false);\nfont.load(TC_FONT_SANS, 24);\n```\n- 활성화된 밉 체인은 1:1 그리기를 포함하여 그리기를 소비하는 각 flush에서 변경된 아틀라스에 생성합니다. 변경이 없는 아틀라스는 다시 만들지 않습니다. Font/drawString과 GlyphBatch는 화면의 프래그먼트마다 같은 규칙을 사용합니다. 대상 픽셀당 아틀라스 텍셀이 두 개 이하이면 기본 레벨, 초과하면 일반 LOD보다 한 레벨 낮게 유지하여 선명함을 살리는 트라이리니어 LOD로 연속적으로 전환하며 원근 투영, 회전, 한 축 배율에도 적용합니다. 비활성화하면 두 경로 모두 기본 레벨을 사용합니다.\n- 전체 밉 체인은 기본 아틀라스 텍스처 메모리의 약 3분의 1을 추가하며, 갱신이 필요한 아틀라스 텍스처를 다시 만들 때 CPU 필터링 작업을 추가합니다. 비활성화하면 이 체인과 재생성 비용을 줄일 수 있습니다.\n- 아틀라스 교체, URL 폰트의 변경 적용 시점, 진행 중인 로드의 취소는 `Font::setOversampling`과 같습니다.",
                     "keywords": [
                         "mipmap",
                         "minification",
@@ -31532,19 +31589,19 @@ const TrussCAPI = {
         },
         {
             "name": "FullscreenShader",
-            "desc": "Provides a shader for fullscreen post-processing effects.",
+            "desc": "Applies a fullscreen filter without preparing quad vertices.",
             "keywords": [
                 "postprocess",
                 "effect",
                 "quad",
                 "filter"
             ],
-            "desc_ja": "フルスクリーンのポストプロセス用シェーダーを提供する。",
-            "desc_ko": "전체 화면 후처리용 셰이더를 제공한다.",
+            "desc_ja": "クアッド頂点を用意せず、フルスクリーンのフィルターを実行します。",
+            "desc_ko": "쿼드 정점을 준비하지 않고 전체 화면 필터를 실행합니다.",
             "examples": [
                 {
                     "name": "fullscreenShaderExample",
-                    "group": "graphics"
+                    "group": "shader"
                 },
                 {
                     "name": "AllFeaturesExample",
@@ -31556,9 +31613,9 @@ const TrussCAPI = {
                 "Fbo",
                 "Shader::setUniform"
             ],
-            "details": "- Inherits `Shader` loading and texture binding, but uses a fullscreen quad with two-component position and two-component texture coordinates.\n- Call `setParams()` before `draw()` to copy a parameter structure; `draw()` uploads those bytes to uniform block slot 0. Stored `setUniform()` values are not applied by this draw method.\n- Use inherited `setTexture()` to bind source textures; `draw()` applies these bindings without requiring a subclass.\n- Call `draw()` directly to render the quad into the current window or FBO; it flushes preceding recorded layers and issues its GPU draw immediately. An unloaded shader performs no drawing.\n- The default pipeline disables blending and overwrites covered pixels; after drawing, the current target's drawing state is reapplied.\n- Threading and GPU resource lifetime rules are described under `Shader`.",
-            "details_ja": "- `Shader` の読み込みとテクスチャ設定を継承し、2 成分の位置と 2 成分のテクスチャ座標を持つフルスクリーンクアッドを使用します。\n- `draw()` の前に `setParams()` を呼び、パラメータ構造体をコピーしてください。`draw()` はそのバイト列を uniform ブロックのスロット 0 に送ります。この描画メソッドでは、`setUniform()` に保存した値は適用しません。\n- 入力テクスチャは継承した `setTexture()` で設定できます。派生クラスを作らなくても `draw()` が設定を適用します。\n- `draw()` を直接呼ぶと、現在のウィンドウまたは FBO にクアッドを描画します。それまでに記録されたレイヤーを描画してから、GPU 描画を即座に実行します。未読み込みの場合は描画しません。\n- 既定のパイプラインはブレンドを無効にし、クアッドが覆うピクセルを上書きします。描画後は現在のターゲットの描画状態を再適用します。\n- スレッドと GPU リソースの寿命の扱いは `Shader` を参照してください。",
-            "details_ko": "- `Shader`의 로드와 텍스처 바인딩을 상속하며 2성분 위치와 2성분 텍스처 좌표를 갖는 전체 화면 쿼드를 사용합니다.\n- `draw()` 전에 `setParams()`를 호출하여 매개변수 구조체를 복사합니다. `draw()`는 해당 바이트를 uniform 블록 슬롯 0에 업로드합니다. 이 그리기 메서드는 `setUniform()`으로 저장한 값을 적용하지 않습니다.\n- 입력 텍스처는 상속한 `setTexture()`로 바인딩할 수 있습니다. 하위 클래스를 만들지 않아도 `draw()`가 이 바인딩을 적용합니다.\n- `draw()`를 직접 호출하면 현재 창이나 FBO에 쿼드를 그립니다. 앞서 기록된 레이어를 먼저 그린 뒤 GPU 그리기를 즉시 실행합니다. 로드되지 않은 셰이더는 그리지 않습니다.\n- 기본 파이프라인은 블렌딩을 비활성화하고 쿼드가 덮는 픽셀을 덮어씁니다. 그린 뒤에는 현재 타깃의 그리기 상태를 다시 적용합니다.\n- 스레드와 GPU 리소스 수명 규칙은 `Shader`를 참조하세요.",
+            "details": "- Use this `Shader` specialization for post-processing without assembling fullscreen quad vertices. Fbo inputs use ordinary UVs on supported backends; only contexts with neither Mesa flip_y nor clip control need the #1419 input flip. See `Fbo` for the backend list.\n\nBind the Fbo and draw the filter:\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(0, fbo.getTextureView(), fbo.getSampler());\n    shader.draw();\n}\n```\n\n- Call `setParams()` before `draw()` to copy a parameter structure; `draw()` uploads those bytes to uniform block slot 0. Stored `setUniform()` values are not applied by this draw method.\n- Call `draw()` directly to render the quad into the current window or FBO; it flushes preceding recorded layers and issues its GPU draw immediately. An unloaded shader performs no drawing.\n- The default pipeline disables blending and overwrites covered pixels; after drawing, the current target's drawing state is reapplied.\n- Quad position and texture-coordinate attributes each have two components. See `Shader` for loading, threading and GPU resource lifetime rules.\n- Only native GL/GLES contexts log a startup Notice with the V-flip workaround; supported paths log nothing, and there is no public orientation switch.\n- Inside a public Fbo, `gl_FragCoord.y` increases downward from the top on Metal, D3D11, WebGPU and clip-control GL/GLES (such as non-Mesa desktop GL on NVIDIA Linux or GLES/WebGL2 with `EXT_clip_control`), and upward from the bottom on Mesa flip_y and native GL; `dFdy(v)` for a value increasing toward the logical bottom is positive on the former paths and negative on the latter. Use texture coordinates rather than `gl_FragCoord`/`dFdy` when a shader must behave the same everywhere.",
+            "details_ja": "- フルスクリーンのクアッド頂点を用意せず、`Shader` の特殊化としてポストプロセスのフィルターを実行できます。対応バックエンドの Fbo 入力は通常の UV を使います。#1419 の入力反転が必要なのは Mesa flip_y と clip control のどちらもないコンテキストだけです。バックエンド一覧は `Fbo` を参照してください。\n\nFbo を割り当て、フィルターを描画します。\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(0, fbo.getTextureView(), fbo.getSampler());\n    shader.draw();\n}\n```\n\n- `draw()` の前に `setParams()` を呼び、パラメータ構造体をコピーしてください。`draw()` はそのバイト列を uniform ブロックのスロット 0 に送ります。この描画メソッドでは、`setUniform()` に保存した値は適用しません。\n- `draw()` を直接呼ぶと、現在のウィンドウまたは FBO にクアッドを描画します。それまでに記録されたレイヤーを描画してから、GPU 描画を即座に実行します。未読み込みの場合は描画しません。\n- 既定のパイプラインはブレンドを無効にし、クアッドが覆うピクセルを上書きします。描画後は現在のターゲットの描画状態を再適用します。\n- クアッドの位置とテクスチャ座標は、それぞれ 2 成分の属性です。読み込み、スレッド、GPU リソースの寿命の扱いは `Shader` を参照してください。\n- ネイティブの GL/GLES コンテキストだけが、V 反転の回避策を含む起動時の Notice を出します。対応パスはログを出さず、公開の向き切り替え設定もありません。\n- public Fbo 内では、`gl_FragCoord.y` は Metal、D3D11、WebGPU、clip control 対応の GL/GLES（NVIDIA Linux の非 Mesa デスクトップ GL や `EXT_clip_control` 対応の GLES/WebGL2 など）では上端から下向きに増え、Mesa flip_y とネイティブ GL では下端から上向きに増えます。論理的な下端に向かって増える値の `dFdy(v)` は前者で正、後者で負になるため、どの環境でも同じ動作が必要なシェーダーでは `gl_FragCoord`/`dFdy` の代わりにテクスチャ座標を使ってください。",
+            "details_ko": "- 전체 화면 쿼드 정점을 준비하지 않고 `Shader`의 특수화로 후처리 필터를 실행합니다. 지원 백엔드의 Fbo 입력에는 일반 UV를 사용합니다. #1419의 입력 반전은 Mesa flip_y와 clip control이 모두 없는 컨텍스트에서만 필요합니다. 백엔드 목록은 `Fbo`를 참조합니다.\n\nFbo를 바인딩하고 필터를 그립니다.\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(0, fbo.getTextureView(), fbo.getSampler());\n    shader.draw();\n}\n```\n\n- `draw()` 전에 `setParams()`를 호출하여 매개변수 구조체를 복사합니다. `draw()`는 해당 바이트를 uniform 블록 슬롯 0에 업로드합니다. 이 그리기 메서드는 `setUniform()`으로 저장한 값을 적용하지 않습니다.\n- `draw()`를 직접 호출하면 현재 창이나 FBO에 쿼드를 그립니다. 앞서 기록된 레이어를 먼저 그린 뒤 GPU 그리기를 즉시 실행합니다. 로드되지 않은 셰이더는 그리지 않습니다.\n- 기본 파이프라인은 블렌딩을 비활성화하고 쿼드가 덮는 픽셀을 덮어씁니다. 그린 뒤에는 현재 타깃의 그리기 상태를 다시 적용합니다.\n- 쿼드 위치와 텍스처 좌표 속성은 각각 2성분입니다. 로드, 스레드 및 GPU 리소스 수명 규칙은 `Shader`를 참조하십시오.\n- 네이티브 GL/GLES 컨텍스트만 V 반전 우회 방법을 담은 시작 Notice를 기록합니다. 지원 경로는 로그를 기록하지 않으며 공개된 방향 전환 설정도 없습니다.\n- public Fbo 안에서 `gl_FragCoord.y`는 Metal, D3D11, WebGPU 및 clip control을 지원하는 GL/GLES(NVIDIA Linux의 비 Mesa 데스크톱 GL 또는 `EXT_clip_control`을 지원하는 GLES/WebGL2 등)에서는 위쪽에서 아래로 증가하고, Mesa flip_y와 네이티브 GL에서는 아래쪽에서 위로 증가합니다. 논리적 아래쪽으로 증가하는 값의 `dFdy(v)`는 전자에서 양수이고 후자에서 음수이므로, 모든 환경에서 같은 동작이 필요한 셰이더에서는 `gl_FragCoord`/`dFdy` 대신 텍스처 좌표를 사용합니다.",
             "constructor": {
                 "signatures": [
                     ""
@@ -44857,6 +44914,10 @@ const TrussCAPI = {
             "desc_ja": "storage 読み取りのスナップショット、または空の失敗結果を所有します（C++ 専用）。",
             "desc_ko": "storage 읽기 스냅샷 또는 빈 실패 결과를 소유합니다(C++ 전용).",
             "examples": [
+                {
+                    "name": "computeReadbackAsyncExample",
+                    "group": "compute"
+                },
                 {
                     "name": "AllFeaturesExample",
                     "group": "tests"
@@ -58676,6 +58737,14 @@ const TrussCAPI = {
             "desc_ko": "TrussC 그리기와 통합된 GPU 셰이더 프로그램을 제공합니다.",
             "examples": [
                 {
+                    "name": "pushShaderExample",
+                    "group": "shader"
+                },
+                {
+                    "name": "computeParticlesExample",
+                    "group": "compute"
+                },
+                {
                     "name": "AllFeaturesExample",
                     "group": "tests"
                 }
@@ -60642,6 +60711,16 @@ const TrussCAPI = {
             "keywords": [],
             "desc_ja": "バイト数で指定する永続 GPU バッファと view を所有します（C++ 専用）。",
             "desc_ko": "바이트 크기로 지정하는 영구 GPU 버퍼와 view를 소유합니다(C++ 전용).",
+            "examples": [
+                {
+                    "name": "computeReadbackAsyncExample",
+                    "group": "compute"
+                },
+                {
+                    "name": "computeParticlesExample",
+                    "group": "compute"
+                }
+            ],
             "related": [
                 "StorageBuffer::allocate",
                 "StorageBuffer::update",
@@ -62921,6 +63000,10 @@ const TrussCAPI = {
             "desc_ko": "GPU 텍스처와 샘플링 설정을 관리한다.",
             "examples": [
                 {
+                    "name": "computeTextureExample",
+                    "group": "compute"
+                },
+                {
                     "name": "AllFeaturesExample",
                     "group": "tests"
                 }
@@ -63087,11 +63170,10 @@ const TrussCAPI = {
                             "params": "float x, float y, float w, float h"
                         }
                     ],
-                    "desc": "Draws the texture with its vertical direction reversed.",
-                    "details": "- `drawFlippedY(x, y, w, h)` draws the entire texture with its vertical texture coordinates reversed; it does not modify the stored pixels.\n- Position and size use the current drawing coordinates, and color, transform, blending, and binding behavior follow `Texture::draw`; an unallocated texture draws nothing.\n- `Fbo::draw` already applies this reversal when required by an OpenGL backend. See `Texture` for GPU resource rules.",
-                    "details_ja": "- `drawFlippedY(x, y, w, h)` は垂直方向のテクスチャ座標を逆にして全体を描画します。保存されているピクセルは変更しません。\n- 位置と大きさは現在の描画座標で指定します。色、変換、ブレンド、バインドの動作は `Texture::draw` と同じで、未確保の場合は何も描画しません。\n- `Fbo::draw` は OpenGL バックエンドで必要な場合にこの反転を適用します。GPU リソースの扱いは `Texture` を参照してください。",
-                    "details_ko": "- `drawFlippedY(x, y, w, h)`는 수직 텍스처 좌표를 뒤집어 전체 텍스처를 그립니다. 저장된 픽셀은 변경하지 않습니다.\n- 위치와 크기는 현재 그리기 좌표로 지정합니다. 색, 변환, 블렌딩, 바인딩 동작은 `Texture::draw`와 같으며, 할당되지 않았으면 아무것도 그리지 않습니다.\n- `Fbo::draw`는 OpenGL 백엔드에서 필요한 경우 이미 이 반전을 적용합니다. GPU 리소스 규칙은 `Texture`를 참조하세요.",
-                    "snippet": "// tcApp.h: Texture texture;\nvoid tcApp::setup() {\n    Pixels pixels;\n    if (pixels.load(\"image.png\")) texture.allocate(pixels);\n}\nvoid tcApp::draw() {\n    setColor(1.0f);\n    texture.drawFlippedY(20, 20, 256, 256);\n}\n",
+                    "desc": "Draws a texture with its vertical texture coordinates reversed.",
+                    "details": "- `drawFlippedY(x, y, w, h)` draws the entire texture with its vertical texture coordinates reversed; it does not modify the stored pixels.\n\nDraw with the vertical coordinates reversed:\n```cpp\nvoid tcApp::draw() {\n    texture.drawFlippedY(20, 20, 256, 256);\n}\n```\n\n- Position and size use the current drawing coordinates, and color, transform, blending, and binding behavior follow `Texture::draw`; an unallocated texture draws nothing.\n- `Fbo::draw` already applies this reversal only on native GL contexts without Mesa flip_y or clip control. See `Texture` for GPU resource rules.",
+                    "details_ja": "- `drawFlippedY(x, y, w, h)` は垂直方向のテクスチャ座標を逆にして全体を描画します。保存されているピクセルは変更しません。\n\n上下の座標を反転して描画します。\n```cpp\nvoid tcApp::draw() {\n    texture.drawFlippedY(20, 20, 256, 256);\n}\n```\n\n- 位置と大きさは現在の描画座標で指定します。色、変換、ブレンド、バインドの動作は `Texture::draw` と同じで、未確保の場合は何も描画しません。\n- `Fbo::draw` は Mesa flip_y と clip control のどちらもないネイティブ GL でのみこの反転を適用します。GPU リソースの扱いは `Texture` を参照してください。",
+                    "details_ko": "- `drawFlippedY(x, y, w, h)`는 수직 텍스처 좌표를 뒤집어 전체 텍스처를 그립니다. 저장된 픽셀은 변경하지 않습니다.\n\n상하 좌표를 반전하여 그립니다.\n```cpp\nvoid tcApp::draw() {\n    texture.drawFlippedY(20, 20, 256, 256);\n}\n```\n\n- 위치와 크기는 현재 그리기 좌표로 지정합니다. 색, 변환, 블렌딩, 바인딩 동작은 `Texture::draw`와 같으며, 할당되지 않았으면 아무것도 그리지 않습니다.\n- `Fbo::draw`는 Mesa flip_y와 clip control이 모두 없는 네이티브 GL에서만 이미 이 반전을 적용합니다. GPU 리소스 규칙은 `Texture`를 참조하십시오.",
                     "keywords": [
                         "flip",
                         "vertical",
@@ -67093,8 +67175,16 @@ const TrussCAPI = {
             "desc_ko": "동차 좌표나 RGBA 형식의 데이터에 사용하는 4차원 부동소수점 벡터이다.",
             "examples": [
                 {
+                    "name": "computeParticlesExample",
+                    "group": "compute"
+                },
+                {
                     "name": "AllFeaturesExample",
                     "group": "tests"
+                },
+                {
+                    "name": "computeTextureExample",
+                    "group": "compute"
                 }
             ],
             "related": [
@@ -67605,9 +67695,9 @@ const TrussCAPI = {
                 "VideoGrabber::setup",
                 "DeviceDisconnectEventArgs"
             ],
-            "details": "- Call `setup(width, height)` once, then `update()` each frame to upload the latest pixels to the texture. Use `getTexture()` or the inherited `draw()` methods to display it.\n- Select a device and desired frame rate before setup. Defaults are device 0, 640 × 480 pixels, and the camera's default frame rate; the actual capture size may differ.\n- `isConnected()` is true only while the camera is open. When the OS reports the camera lost (unplugged), `update()` closes the grabber and fires `onDisconnect` once; `close()` never fires it. To reconnect, call `setup()` with no arguments, which reopens the same device at the last size. See the device lifecycle note (`docs/DEVICE_LIFECYCLE.md`).\n- On macOS and iOS, setup requests missing camera permission and returns `false` while permission is pending. Continue calling `update()` so initialization can finish after permission is granted.\n- Run setup, update, and drawing on the main thread because they create or update GPU resources. Native capture callbacks publish pixels in the background; `getPixels()` exposes a borrowed buffer without locking, so concurrent reads can race with capture writes.\n- The latest-frame path can skip intermediate camera frames. An optional frame queue stores owned `GrabberFrame` values with capture timestamps; it is disabled by default and drops the oldest frame when full. The web backend does not populate this queue.\n- The grabber can be moved but cannot be copied. `close()` and destruction stop capture (neither fires `onDisconnect`); closing clears the texture and pixels while preserving the configured queue capacity. Borrowed pixel pointers must not be retained across resizing, closing, or setup.",
-            "details_ja": "- `setup(width, height)` を一度呼び、各フレームで `update()` を呼んで最新のピクセルをテクスチャへ転送します。表示には `getTexture()` または継承した `draw()` を使ってください。\n- デバイスと希望フレームレートはセットアップ前に指定します。既定値はデバイス 0、640 × 480 ピクセル、カメラの既定フレームレートです。実際のキャプチャサイズは異なる場合があります。\n- `isConnected()` は、カメラを開いている間だけ true です。OS がカメラの喪失（抜かれたこと）を報告すると、`update()` がグラバーを閉じて `onDisconnect` を 1 回発火します。`close()` では発火しません。再接続するには引数なしの `setup()` を呼びます。同じデバイスを、最後に使ったサイズで開き直します。デバイスのライフサイクルの説明（`docs/DEVICE_LIFECYCLE.md`）も参照してください。\n- macOS と iOS では、カメラ権限がなければセットアップ時に要求し、許可待ちの間は `false` を返します。許可後に初期化を完了できるよう、`update()` を呼び続けてください。\n- セットアップ、更新、描画は GPU リソースを作成または更新するため、メインスレッドで実行してください。ネイティブのキャプチャコールバックはバックグラウンドでピクセルを更新します。`getPixels()` はロックせずに借用バッファを公開するため、読み取りとキャプチャの書き込みが競合する場合があります。\n- 最新フレームだけを取得する方法では、途中のカメラフレームを取りこぼす場合があります。任意のフレームキューを使うと、キャプチャ時刻付きの `GrabberFrame` を所有バッファとして保持します。既定では無効で、満杯になると最も古いフレームを破棄します。web バックエンドは、このキューにフレームを追加しません。\n- グラバーはムーブできますが、コピーはできません。`close()` と破棄時にキャプチャを停止します（どちらも `onDisconnect` は発火しません）。閉じるとテクスチャとピクセルを解放し、設定済みのキュー容量は保持します。借用したピクセルポインターは、サイズ変更、クローズ、セットアップをまたいで保持しないでください。",
-            "details_ko": "- `setup(width, height)`를 한 번 호출한 다음 매 프레임 `update()`를 호출하여 최신 픽셀을 텍스처에 업로드합니다. 표시에는 `getTexture()` 또는 상속받은 `draw()`를 사용합니다.\n- 장치와 원하는 프레임 레이트는 설정 전에 지정합니다. 기본값은 장치 0, 640 × 480 픽셀, 카메라의 기본 프레임 레이트입니다. 실제 캡처 크기는 다를 수 있습니다.\n- `isConnected()`는 카메라가 열려 있는 동안만 true입니다. OS가 카메라 손실(뽑힘)을 보고하면 `update()`가 그래버를 닫고 `onDisconnect`를 한 번 발생시킵니다. `close()`는 발생시키지 않습니다. 다시 연결하려면 인수 없는 `setup()`을 호출합니다. 같은 장치를 마지막으로 사용한 크기로 다시 엽니다. 장치 수명 주기 설명(`docs/DEVICE_LIFECYCLE.md`)도 참조하세요.\n- macOS와 iOS에서는 카메라 권한이 없으면 설정 시 요청하고, 권한을 기다리는 동안 `false`를 반환합니다. 허용 후 초기화를 완료할 수 있도록 `update()`를 계속 호출합니다.\n- 설정, 업데이트, 그리기는 GPU 리소스를 생성하거나 갱신하므로 메인 스레드에서 실행합니다. 네이티브 캡처 콜백은 백그라운드에서 픽셀을 갱신합니다. `getPixels()`는 잠금 없이 빌린 버퍼를 노출하므로 읽기와 캡처 쓰기가 경쟁할 수 있습니다.\n- 최신 프레임만 가져오는 경로는 중간 카메라 프레임을 놓칠 수 있습니다. 선택적인 프레임 큐는 캡처 타임스탬프가 있는 `GrabberFrame`을 자체 버퍼로 보관합니다. 기본적으로 비활성화되어 있으며 가득 차면 가장 오래된 프레임을 버립니다. web 백엔드는 이 큐에 프레임을 추가하지 않습니다.\n- 그래버는 이동할 수 있지만 복사할 수 없습니다. `close()`와 소멸 시 캡처를 중지합니다(둘 다 `onDisconnect`를 발생시키지 않습니다). 닫으면 텍스처와 픽셀을 해제하지만 설정된 큐 용량은 유지합니다. 빌린 픽셀 포인터는 크기 변경, 닫기 또는 설정 이후까지 보관하지 않아야 합니다.",
+            "details": "- Call `setup(width, height)` once, then `update()` each frame to upload the latest pixels to the texture. Use `getTexture()` or the inherited `draw()` methods to display it.\n- Select a device and desired frame rate before setup. Defaults are device 0, 640 × 480 pixels, and the camera's default frame rate; the actual capture size may differ.\n- `isConnected()` is true only while the camera is open. When the OS reports the camera lost (unplugged), `update()` closes the grabber and fires `onDisconnect` once; `close()` never fires it. To reconnect, call `setup()` with no arguments, which reopens the same device at the last size. See the device lifecycle note (`docs/architecture/DEVICE_LIFECYCLE.md`).\n- On macOS and iOS, setup requests missing camera permission and returns `false` while permission is pending. Continue calling `update()` so initialization can finish after permission is granted.\n- Run setup, update, and drawing on the main thread because they create or update GPU resources. Native capture callbacks publish pixels in the background; `getPixels()` exposes a borrowed buffer without locking, so concurrent reads can race with capture writes.\n- The latest-frame path can skip intermediate camera frames. An optional frame queue stores owned `GrabberFrame` values with capture timestamps; it is disabled by default and drops the oldest frame when full. The web backend does not populate this queue.\n- The grabber can be moved but cannot be copied. `close()` and destruction stop capture (neither fires `onDisconnect`); closing clears the texture and pixels while preserving the configured queue capacity. Borrowed pixel pointers must not be retained across resizing, closing, or setup.",
+            "details_ja": "- `setup(width, height)` を一度呼び、各フレームで `update()` を呼んで最新のピクセルをテクスチャへ転送します。表示には `getTexture()` または継承した `draw()` を使ってください。\n- デバイスと希望フレームレートはセットアップ前に指定します。既定値はデバイス 0、640 × 480 ピクセル、カメラの既定フレームレートです。実際のキャプチャサイズは異なる場合があります。\n- `isConnected()` は、カメラを開いている間だけ true です。OS がカメラの喪失（抜かれたこと）を報告すると、`update()` がグラバーを閉じて `onDisconnect` を 1 回発火します。`close()` では発火しません。再接続するには引数なしの `setup()` を呼びます。同じデバイスを、最後に使ったサイズで開き直します。デバイスのライフサイクルの説明（`docs/architecture/DEVICE_LIFECYCLE.md`）も参照してください。\n- macOS と iOS では、カメラ権限がなければセットアップ時に要求し、許可待ちの間は `false` を返します。許可後に初期化を完了できるよう、`update()` を呼び続けてください。\n- セットアップ、更新、描画は GPU リソースを作成または更新するため、メインスレッドで実行してください。ネイティブのキャプチャコールバックはバックグラウンドでピクセルを更新します。`getPixels()` はロックせずに借用バッファを公開するため、読み取りとキャプチャの書き込みが競合する場合があります。\n- 最新フレームだけを取得する方法では、途中のカメラフレームを取りこぼす場合があります。任意のフレームキューを使うと、キャプチャ時刻付きの `GrabberFrame` を所有バッファとして保持します。既定では無効で、満杯になると最も古いフレームを破棄します。web バックエンドは、このキューにフレームを追加しません。\n- グラバーはムーブできますが、コピーはできません。`close()` と破棄時にキャプチャを停止します（どちらも `onDisconnect` は発火しません）。閉じるとテクスチャとピクセルを解放し、設定済みのキュー容量は保持します。借用したピクセルポインターは、サイズ変更、クローズ、セットアップをまたいで保持しないでください。",
+            "details_ko": "- `setup(width, height)`를 한 번 호출한 다음 매 프레임 `update()`를 호출하여 최신 픽셀을 텍스처에 업로드합니다. 표시에는 `getTexture()` 또는 상속받은 `draw()`를 사용합니다.\n- 장치와 원하는 프레임 레이트는 설정 전에 지정합니다. 기본값은 장치 0, 640 × 480 픽셀, 카메라의 기본 프레임 레이트입니다. 실제 캡처 크기는 다를 수 있습니다.\n- `isConnected()`는 카메라가 열려 있는 동안만 true입니다. OS가 카메라 손실(뽑힘)을 보고하면 `update()`가 그래버를 닫고 `onDisconnect`를 한 번 발생시킵니다. `close()`는 발생시키지 않습니다. 다시 연결하려면 인수 없는 `setup()`을 호출합니다. 같은 장치를 마지막으로 사용한 크기로 다시 엽니다. 장치 수명 주기 설명(`docs/architecture/DEVICE_LIFECYCLE.md`)도 참조하세요.\n- macOS와 iOS에서는 카메라 권한이 없으면 설정 시 요청하고, 권한을 기다리는 동안 `false`를 반환합니다. 허용 후 초기화를 완료할 수 있도록 `update()`를 계속 호출합니다.\n- 설정, 업데이트, 그리기는 GPU 리소스를 생성하거나 갱신하므로 메인 스레드에서 실행합니다. 네이티브 캡처 콜백은 백그라운드에서 픽셀을 갱신합니다. `getPixels()`는 잠금 없이 빌린 버퍼를 노출하므로 읽기와 캡처 쓰기가 경쟁할 수 있습니다.\n- 최신 프레임만 가져오는 경로는 중간 카메라 프레임을 놓칠 수 있습니다. 선택적인 프레임 큐는 캡처 타임스탬프가 있는 `GrabberFrame`을 자체 버퍼로 보관합니다. 기본적으로 비활성화되어 있으며 가득 차면 가장 오래된 프레임을 버립니다. web 백엔드는 이 큐에 프레임을 추가하지 않습니다.\n- 그래버는 이동할 수 있지만 복사할 수 없습니다. `close()`와 소멸 시 캡처를 중지합니다(둘 다 `onDisconnect`를 발생시키지 않습니다). 닫으면 텍스처와 픽셀을 해제하지만 설정된 큐 용량은 유지합니다. 빌린 픽셀 포인터는 크기 변경, 닫기 또는 설정 이후까지 보관하지 않아야 합니다.",
             "snippet": "// tcApp members: VideoGrabber camera; float lastTry = 0.0f;\nvoid tcApp::setup() { camera.setup(640, 480); }\nvoid tcApp::update() {\n    camera.update();\n    // Reconnect every 2 seconds while the camera is not open (for example after an unplug)\n    if (!camera.isConnected() && !camera.isPendingPermission() && getElapsedTime() - lastTry > 2.0f) {\n        lastTry = getElapsedTime();\n        camera.setup();   // same device, same size as before\n    }\n}\nvoid tcApp::draw() { camera.draw(0, 0); }\n",
             "platforms": [
                 "macos",
