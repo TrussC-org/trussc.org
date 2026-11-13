@@ -59,7 +59,10 @@ for sample_input in "${samples[@]}"; do
     # Clean build (optional, but safer)
     rm -rf build-macos
 
-    if cmake --preset macos && cmake --build --preset macos; then
+    # This native build only feeds screenshot.sh, which needs tc_save_screenshot.
+    # Since v0.8 that tool requires an MCP grant; a dev build (TRUSSC_MCP_DEV=ON)
+    # grants it without touching the example's code. Web builds are unaffected.
+    if cmake --preset macos -DTRUSSC_MCP_DEV=ON && cmake --build --preset macos; then
         log_success "$sample: ビルド完了"
         ((success_count++))
     else
