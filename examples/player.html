@@ -159,6 +159,13 @@
                 if (example.webSupported === false) {
                     loading.style.display = 'none';
 
+                    // The overlay text needs room even when the example window is small
+                    const minHeight = 240;
+                    if (example.height && example.height < minHeight) {
+                        wrapper.style.height = minHeight + 'px';
+                        wrapper.style.maxHeight = minHeight + 'px';
+                    }
+
                     // サムネイル画像を背景に表示
                     const thumbImg = document.createElement('img');
                     thumbImg.className = 'player-thumb-bg';
