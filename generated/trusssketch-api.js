@@ -1072,6 +1072,11 @@ const TrussSketchAPI = {
      "desc": "Rounds a number to the nearest integer value."
     },
     {
+     "name": "sigmoid",
+     "snippet": "sigmoid(${1:x})",
+     "desc": "Returns the scalar logistic function, 1 / (1 + exp(-x))."
+    },
+    {
      "name": "sign",
      "snippet": "sign(${1:value})",
      "desc": "Returns the sign of a value."
@@ -1135,6 +1140,11 @@ const TrussSketchAPI = {
      "name": "remap",
      "snippet": "remap(${1:value}, ${2:inMin}, ${3:inMax}, ${4:outMin}, ${5:outMax})",
      "desc": "Maps a value linearly from one range to another."
+    },
+    {
+     "name": "smoothstep",
+     "snippet": "smoothstep(${1:edge0}, ${2:edge1}, ${3:x})",
+     "desc": "Returns a clamped cubic transition between two edges, as in GLSL."
     }
    ]
   },
@@ -1155,6 +1165,11 @@ const TrussSketchAPI = {
      "name": "random",
      "snippet": "random()",
      "desc": "Returns a uniformly distributed random floating-point value."
+    },
+    {
+     "name": "randomGaussian",
+     "snippet": "randomGaussian(${1:mean}, ${2:stddev})",
+     "desc": "Returns a normally distributed float, with mean 0 and standard deviation 1 by default."
     },
     {
      "name": "randomInt",
@@ -18351,6 +18366,18 @@ const TrussSketchAPI = {
      "snippet": "getResyncThreshold()",
      "return": "float",
      "desc": "Returns the hard resynchronization threshold."
+    },
+    {
+     "name": "getRotation",
+     "snippet": "getRotation()",
+     "return": "float",
+     "desc": "Returns the stream display rotation in radians."
+    },
+    {
+     "name": "getRotationDeg",
+     "snippet": "getRotationDeg()",
+     "return": "int",
+     "desc": "Returns the stream display rotation in degrees."
     },
     {
      "name": "getSpeed",

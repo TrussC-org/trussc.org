@@ -3964,6 +3964,26 @@ const TrussCAPI = {
                     "desc_ko": "균등 분포의 부동소수점 난수를 반환한다."
                 },
                 {
+                    "name": "randomGaussian",
+                    "params": "mean, stddev",
+                    "params_typed": "mean, stddev",
+                    "return_type": "number",
+                    "desc": "Returns a normally distributed float, with mean 0 and standard deviation 1 by default.",
+                    "keywords": [],
+                    "desc_ja": "正規分布の float 乱数を返す。既定の平均は 0、標準偏差は 1。",
+                    "desc_ko": "정규 분포의 float 난수를 반환한다. 기본 평균은 0, 표준 편차는 1이다."
+                },
+                {
+                    "name": "randomGaussian",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "number",
+                    "desc": "Returns a normally distributed float, with mean 0 and standard deviation 1 by default.",
+                    "keywords": [],
+                    "desc_ja": "正規分布の float 乱数を返す。既定の平均は 0、標準偏差は 1。",
+                    "desc_ko": "정규 분포의 float 난수를 반환한다. 기본 평균은 0, 표준 편차는 1이다."
+                },
+                {
                     "name": "randomInt",
                     "params": "max",
                     "params_typed": "max",
@@ -4171,6 +4191,16 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "値を別の範囲へ線形に変換する。",
                     "desc_ko": "값을 다른 범위로 선형 변환한다."
+                },
+                {
+                    "name": "smoothstep",
+                    "params": "edge0, edge1, x",
+                    "params_typed": "edge0, edge1, x",
+                    "return_type": "number",
+                    "desc": "Returns a clamped cubic transition between two edges, as in GLSL.",
+                    "keywords": [],
+                    "desc_ja": "GLSL と同じ、2 つの境界間の滑らかな 3 次補間値を返す。",
+                    "desc_ko": "GLSL과 같이 두 경계 사이의 부드러운 3차 보간값을 반환한다."
                 }
             ],
             "name_ja": "数学 - 補間",
@@ -4654,6 +4684,16 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "数値を最も近い整数値に丸める。",
                     "desc_ko": "수를 가장 가까운 정숫값으로 반올림한다."
+                },
+                {
+                    "name": "sigmoid",
+                    "params": "x",
+                    "params_typed": "x",
+                    "return_type": "number",
+                    "desc": "Returns the scalar logistic function, 1 / (1 + exp(-x)).",
+                    "keywords": [],
+                    "desc_ja": "スカラーのロジスティック関数 1 / (1 + exp(-x)) を返す。",
+                    "desc_ko": "스칼라 로지스틱 함수 1 / (1 + exp(-x))를 반환한다."
                 },
                 {
                     "name": "sign",
@@ -34846,8 +34886,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Returns the video height.",
-                    "desc_ja": "動画の高さを返す。",
-                    "desc_ko": "비디오의 높이를 반환한다."
+                    "desc_ja": "動画の高さを返します。",
+                    "desc_ko": "비디오의 높이를 반환합니다."
                 },
                 {
                     "name": "videoPlayer:getHwAccelName",
@@ -34974,6 +35014,30 @@ const TrussCAPI = {
                     "desc_ko": "강제 동기화 보정 임계값을 반환한다."
                 },
                 {
+                    "name": "videoPlayer:getRotation",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the stream display rotation in radians.",
+                    "desc_ja": "ストリームの表示回転角をラジアンで返します。",
+                    "desc_ko": "스트림의 표시 회전각을 라디안으로 반환합니다."
+                },
+                {
+                    "name": "videoPlayer:getRotationDeg",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the stream display rotation in degrees.",
+                    "desc_ja": "ストリームの表示回転角を度で返します。",
+                    "desc_ko": "스트림의 표시 회전각을 도 단위로 반환합니다."
+                },
+                {
                     "name": "videoPlayer:getSpeed",
                     "signatures": [
                         {
@@ -35046,8 +35110,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Returns the video width.",
-                    "desc_ja": "動画の幅を返す。",
-                    "desc_ko": "비디오의 너비를 반환한다."
+                    "desc_ja": "動画の幅を返します。",
+                    "desc_ko": "비디오의 너비를 반환합니다."
                 },
                 {
                     "name": "videoPlayer:getWrapU",
@@ -35743,8 +35807,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Returns the video height.",
-                    "desc_ja": "動画の高さを返す。",
-                    "desc_ko": "비디오의 높이를 반환한다."
+                    "desc_ja": "動画の高さを返します。",
+                    "desc_ko": "비디오의 높이를 반환합니다."
                 },
                 {
                     "name": "videoPlayerBase:getHwAccelName",
@@ -35895,8 +35959,8 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Returns the video width.",
-                    "desc_ja": "動画の幅を返す。",
-                    "desc_ko": "비디오의 너비를 반환한다."
+                    "desc_ja": "動画の幅を返します。",
+                    "desc_ko": "비디오의 너비를 반환합니다."
                 },
                 {
                     "name": "videoPlayerBase:getWrapU",

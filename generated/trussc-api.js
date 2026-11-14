@@ -2752,9 +2752,9 @@ const TrussCAPI = {
                         "setIndependentFps",
                         "getFpsSettings"
                     ],
-                    "details": "- Sets synchronized update/draw pacing for the current window. `VSYNC` (-1) follows its OS tick source; `EVENT_DRIVEN` (0) waits for `redraw()` or capture; a positive target skips ticks. Targets at or above the native tick rate draw every tick.\n- Under `setFps`, `update()` and `draw()` are called together at the same rate; to run them at independent rates (for example a fast simulation with a slower draw, or the reverse), use `setIndependentFps()` instead.\n- Switching the rate at runtime takes effect immediately from the moment of the call, with no catch-up: on a fixed fps the next frame is drawn right away, and the first `update()` after the switch has a `getDeltaTime()` that excludes time spent in the previous mode. Called between updates, the new timer starts from the call; called from inside an `update()`, it starts from that update's beginning. The time this drops is under one frame in the usual modes, and only grows larger after an idle period such as `EVENT_DRIVEN` waiting for a redraw.\n- Calling `setFps` again with the rate it is already at does nothing, so it is safe to call every frame (for example from a GUI slider). On the one frame where the value actually changes, that update's `getDeltaTime()` is shorter than a normal frame, since it is measured only from the moment of the call.\n- On Linux (X11), all windows share one clock: the display of the earliest-created visible window. If that window is hidden, the next visible one takes over. If none is visible, a timer at about 60 Hz paces them. Mixed-refresh displays can change the rate; use `setFps(…)` for a fixed rate. macOS and Windows pace each window to its own display.",
-                    "details_ja": "- 現在のウィンドウの update/draw を同期して設定します。`VSYNC`（-1）は OS の tick、`EVENT_DRIVEN`（0）は `redraw()` またはキャプチャ要求に従い、正の値では tick を間引きます。native tick 以上の目標値では毎回描画します。\n- `setFps` のもとでは `update()` と `draw()` は同じレートでまとめて呼ばれます。それぞれを独立したレートで動かしたい場合(高速なシミュレーションに低速な描画を組み合わせる場合など)は、代わりに `setIndependentFps()` を使用してください。\n- 実行中にレートを切り替えると、呼び出した瞬間から即座に新しいレートで動き始め、遅れを取り戻す動作はしません。固定fpsの場合、次のフレームはすぐに描画され、切り替え後最初の `update()` の `getDeltaTime()` には前のモードで経過した時間は含まれません。update の外で呼び出した場合はその呼び出し時点から、update の中で呼び出した場合はその update の開始時点から数え始めます。ここで捨てられる時間は通常のモードでは1フレーム未満で、`EVENT_DRIVEN` の待機のようなアイドル期間のあとだけ大きくなります。\n- 現在と同じレートで `setFps` を呼んでも何も起きないため、GUIのスライダー操作中など、毎フレーム呼び出しても安全です。値が実際に変わったそのフレームだけは、その update の `getDeltaTime()` が呼び出し時点からの時間になるため、通常のフレームより短くなります。\n- Linux（X11）では、すべてのウィンドウが、表示中のうち最も早く作成されたウィンドウのディスプレイを共通のクロックに使います。そのウィンドウが非表示になると、次の表示中のウィンドウが引き継ぎます。表示中のウィンドウがなければ、約 60 Hz のタイマーで進みます。リフレッシュレートの異なるディスプレイが混在するとレートが変わるため、固定レートには `setFps(…)` を使います。macOS と Windows では、各ウィンドウがそれぞれのディスプレイに合わせて進みます。",
-                    "details_ko": "- 현재 윈도우의 update/draw를 동기화하여 설정합니다. `VSYNC`(-1)는 OS 틱, `EVENT_DRIVEN`(0)은 `redraw()` 또는 캡처 요청을 따르며 양수는 틱을 건너뜁니다. 네이티브 틱 이상의 목표값은 매 틱 그립니다.\n- `setFps` 아래에서는 `update()`와 `draw()`가 같은 레이트로 함께 호출됩니다. 각각을 독립된 레이트로 돌리고 싶다면(예: 빠른 시뮬레이션에 느린 그리기를 조합하는 경우 등) 대신 `setIndependentFps()`를 사용하세요.\n- 실행 중에 레이트를 전환하면 호출한 순간부터 즉시 새 레이트로 동작하며, 밀린 시간을 따라잡지 않습니다. 고정 fps의 경우 다음 프레임이 바로 그려지며, 전환 후 첫 `update()`의 `getDeltaTime()`에는 이전 모드에서 경과한 시간이 포함되지 않습니다. update 밖에서 호출했다면 호출 시점부터, update 안에서 호출했다면 그 update의 시작 시점부터 셉니다. 여기서 버려지는 시간은 일반적인 모드에서는 1프레임 미만이며, `EVENT_DRIVEN`의 대기처럼 유휴 기간이 있었을 때만 커집니다.\n- 현재와 같은 레이트로 `setFps`를 호출하면 아무 일도 일어나지 않으므로, GUI 슬라이더 조작 중처럼 매 프레임 호출해도 안전합니다. 값이 실제로 바뀐 그 프레임에서만 해당 update의 `getDeltaTime()`이 호출 시점부터의 시간이 되어 일반 프레임보다 짧아집니다.\n- Linux(X11)에서는 모든 윈도우가 표시 중인 윈도우 중 가장 먼저 생성된 윈도우의 디스플레이를 공통 클록으로 사용합니다. 해당 윈도우가 숨겨지면 다음 표시 중인 윈도우가 이어받습니다. 표시 중인 윈도우가 없으면 약 60 Hz의 타이머로 진행합니다. 주사율이 다른 디스플레이가 섞여 있으면 레이트가 달라질 수 있으므로 고정 레이트에는 `setFps(…)`를 사용합니다. macOS와 Windows에서는 각 윈도우가 자신의 디스플레이에 맞춰 진행합니다.",
+                    "details": "- Sets synchronized update/draw pacing for the current window. `VSYNC` (-1) follows its OS tick source; `EVENT_DRIVEN` (0) waits for `redraw()` or capture; a positive target skips ticks. Targets at or above the native tick rate draw every tick.\n- Under `setFps`, `update()` and `draw()` are called together at the same rate; to run them at independent rates (for example a fast simulation with a slower draw, or the reverse), use `setIndependentFps()` instead.\n- Switching the rate at runtime takes effect immediately from the moment of the call, with no catch-up: on a fixed fps the next frame is drawn right away, and the first `update()` after the switch has a `getDeltaTime()` that excludes time spent in the previous mode. Called between updates, the new timer starts from the call; called from inside an `update()`, it starts from that update's beginning. The time this drops is under one frame in the usual modes, and only grows larger after an idle period such as `EVENT_DRIVEN` waiting for a redraw.\n- Calling `setFps` again with the rate it is already at does nothing, so it is safe to call every frame (for example from a GUI slider). On the one frame where the value actually changes, that update's `getDeltaTime()` is shorter than a normal frame, since it is measured only from the moment of the call.\n- On Linux (X11), all windows share one clock: the display of the earliest-created visible window. If that window is hidden, the next visible one takes over. If none is visible, a timer at about 60 Hz paces them. Mixed-refresh displays can change the rate; use `setFps(…)` for a fixed rate. macOS and Windows pace each window to its own display. On X11 compositors that throttle covered windows (e.g. labwc/Xwayland on Raspberry Pi), covering the first-created visible window slows every window to ~1 Hz until it's uncovered or minimized. Keep that window uncovered, or minimize or hide it to hand pacing to another window (`getWindow()->setVisible(false);`). Known issue #1367.",
+                    "details_ja": "- 現在のウィンドウの update/draw を同期して設定します。`VSYNC`（-1）は OS の tick、`EVENT_DRIVEN`（0）は `redraw()` またはキャプチャ要求に従い、正の値では tick を間引きます。native tick 以上の目標値では毎回描画します。\n- `setFps` のもとでは `update()` と `draw()` は同じレートでまとめて呼ばれます。それぞれを独立したレートで動かしたい場合(高速なシミュレーションに低速な描画を組み合わせる場合など)は、代わりに `setIndependentFps()` を使用してください。\n- 実行中にレートを切り替えると、呼び出した瞬間から即座に新しいレートで動き始め、遅れを取り戻す動作はしません。固定fpsの場合、次のフレームはすぐに描画され、切り替え後最初の `update()` の `getDeltaTime()` には前のモードで経過した時間は含まれません。update の外で呼び出した場合はその呼び出し時点から、update の中で呼び出した場合はその update の開始時点から数え始めます。ここで捨てられる時間は通常のモードでは1フレーム未満で、`EVENT_DRIVEN` の待機のようなアイドル期間のあとだけ大きくなります。\n- 現在と同じレートで `setFps` を呼んでも何も起きないため、GUIのスライダー操作中など、毎フレーム呼び出しても安全です。値が実際に変わったそのフレームだけは、その update の `getDeltaTime()` が呼び出し時点からの時間になるため、通常のフレームより短くなります。\n- Linux（X11）では、すべてのウィンドウが、表示中のうち最も早く作成されたウィンドウのディスプレイを共通のクロックに使います。そのウィンドウが非表示になると、次の表示中のウィンドウが引き継ぎます。表示中のウィンドウがなければ、約 60 Hz のタイマーで進みます。リフレッシュレートの異なるディスプレイが混在するとレートが変わるため、固定レートには `setFps(…)` を使います。macOS と Windows では、各ウィンドウがそれぞれのディスプレイに合わせて進みます。覆われたウィンドウを間引く X11 コンポジター（Raspberry Pi の labwc/Xwayland など）では、表示中で最初に作成されたウィンドウを覆うと、覆いを外すか最小化するまですべてのウィンドウが約 1 Hz に落ちます。そのウィンドウを覆わないようにするか、最小化または非表示にして別のウィンドウにペーシングを渡してください（`getWindow()->setVisible(false);`）。既知の問題 #1367 です。",
+                    "details_ko": "- 현재 윈도우의 update/draw를 동기화하여 설정합니다. `VSYNC`(-1)는 OS 틱, `EVENT_DRIVEN`(0)은 `redraw()` 또는 캡처 요청을 따르며 양수는 틱을 건너뜁니다. 네이티브 틱 이상의 목표값은 매 틱 그립니다.\n- `setFps` 아래에서는 `update()`와 `draw()`가 같은 레이트로 함께 호출됩니다. 각각을 독립된 레이트로 돌리고 싶다면(예: 빠른 시뮬레이션에 느린 그리기를 조합하는 경우 등) 대신 `setIndependentFps()`를 사용하세요.\n- 실행 중에 레이트를 전환하면 호출한 순간부터 즉시 새 레이트로 동작하며, 밀린 시간을 따라잡지 않습니다. 고정 fps의 경우 다음 프레임이 바로 그려지며, 전환 후 첫 `update()`의 `getDeltaTime()`에는 이전 모드에서 경과한 시간이 포함되지 않습니다. update 밖에서 호출했다면 호출 시점부터, update 안에서 호출했다면 그 update의 시작 시점부터 셉니다. 여기서 버려지는 시간은 일반적인 모드에서는 1프레임 미만이며, `EVENT_DRIVEN`의 대기처럼 유휴 기간이 있었을 때만 커집니다.\n- 현재와 같은 레이트로 `setFps`를 호출하면 아무 일도 일어나지 않으므로, GUI 슬라이더 조작 중처럼 매 프레임 호출해도 안전합니다. 값이 실제로 바뀐 그 프레임에서만 해당 update의 `getDeltaTime()`이 호출 시점부터의 시간이 되어 일반 프레임보다 짧아집니다.\n- Linux(X11)에서는 모든 윈도우가 표시 중인 윈도우 중 가장 먼저 생성된 윈도우의 디스플레이를 공통 클록으로 사용합니다. 해당 윈도우가 숨겨지면 다음 표시 중인 윈도우가 이어받습니다. 표시 중인 윈도우가 없으면 약 60 Hz의 타이머로 진행합니다. 주사율이 다른 디스플레이가 섞여 있으면 레이트가 달라질 수 있으므로 고정 레이트에는 `setFps(…)`를 사용합니다. macOS와 Windows에서는 각 윈도우가 자신의 디스플레이에 맞춰 진행합니다. 가려진 창을 제한하는 X11 컴포지터(Raspberry Pi의 labwc/Xwayland 등)에서는 표시 중 가장 먼저 생성된 창을 가리면 가림을 해제하거나 최소화할 때까지 모든 창이 약 1Hz로 느려집니다. 그 창을 가리지 않거나 최소화 또는 숨겨서 다른 창에 페이싱을 넘기십시오(`getWindow()->setVisible(false);`). 알려진 문제 #1367입니다.",
                     "snippet": "void tcApp::setup() {\n    setFps(60);        // fixed 60 fps\n    // setFps(VSYNC);        // sync to the display's refresh rate\n    // setFps(EVENT_DRIVEN); // redraw only on request\n}\n",
                     "examples": [
                         {
@@ -8487,6 +8487,46 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "randomGaussian",
+                    "params": "mean, stddev",
+                    "params_typed": "float mean, float stddev",
+                    "return_type": "float",
+                    "desc": "Returns a normally distributed float, with mean 0 and standard deviation 1 by default.",
+                    "keywords": [],
+                    "desc_ja": "正規分布の float 乱数を返す。既定の平均は 0、標準偏差は 1。",
+                    "desc_ko": "정규 분포의 float 난수를 반환한다. 기본 평균은 0, 표준 편차는 1이다.",
+                    "details": "`randomGaussian(mean, stddev)` sets the mean and the standard deviation; a standard deviation of 0 or less returns `mean`. Uses the same thread-local engine as `random()`. With the same standard library, reseeding with `randomSeed()` repeats the same sequence of calls.",
+                    "details_ja": "`randomGaussian(mean, stddev)` で平均と標準偏差を指定します。標準偏差が 0 以下なら `mean` を返します。`random()` と同じスレッド内の生成器を使います。同じ標準ライブラリでは、`randomSeed()` で同じシードを設定し、同じ順序で呼ぶと同じ値を再現します。",
+                    "details_ko": "`randomGaussian(mean, stddev)`로 평균과 표준 편차를 지정합니다. 표준 편차가 0 이하이면 `mean`을 반환합니다. `random()`과 스레드 내 생성기를 공유합니다. 같은 표준 라이브러리에서 `randomSeed()`로 같은 시드를 설정하고 같은 순서로 호출하면 같은 값을 재현합니다.",
+                    "snippet": "randomSeed(42);\nfloat unit = randomGaussian();\nfloat offset = randomGaussian(0.0f, 40.0f);\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "randomGaussian",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "float",
+                    "desc": "Returns a normally distributed float, with mean 0 and standard deviation 1 by default.",
+                    "keywords": [],
+                    "desc_ja": "正規分布の float 乱数を返す。既定の平均は 0、標準偏差は 1。",
+                    "desc_ko": "정규 분포의 float 난수를 반환한다. 기본 평균은 0, 표준 편차는 1이다.",
+                    "details": "`randomGaussian(mean, stddev)` sets the mean and the standard deviation; a standard deviation of 0 or less returns `mean`. Uses the same thread-local engine as `random()`. With the same standard library, reseeding with `randomSeed()` repeats the same sequence of calls.",
+                    "details_ja": "`randomGaussian(mean, stddev)` で平均と標準偏差を指定します。標準偏差が 0 以下なら `mean` を返します。`random()` と同じスレッド内の生成器を使います。同じ標準ライブラリでは、`randomSeed()` で同じシードを設定し、同じ順序で呼ぶと同じ値を再現します。",
+                    "details_ko": "`randomGaussian(mean, stddev)`로 평균과 표준 편차를 지정합니다. 표준 편차가 0 이하이면 `mean`을 반환합니다. `random()`과 스레드 내 생성기를 공유합니다. 같은 표준 라이브러리에서 `randomSeed()`로 같은 시드를 설정하고 같은 순서로 호출하면 같은 값을 재현합니다.",
+                    "snippet": "randomSeed(42);\nfloat unit = randomGaussian();\nfloat offset = randomGaussian(0.0f, 40.0f);\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "randomInt",
                     "params": "max",
                     "params_typed": "int max",
@@ -8563,10 +8603,30 @@ const TrussCAPI = {
                         "random",
                         "noise"
                     ],
-                    "details": "- `randomSeed(seed)` takes an `unsigned int`, resets the engine used by subsequent `random` and `randomInt` calls, and returns no value.\n- Repeating the same seed and the same sequence of calls reproduces the sequence with the same distribution implementation.\n- See `random` for the shared engine and thread-local seeding behavior.",
-                    "details_ja": "- `randomSeed(seed)` は `unsigned int` を受け取り、以降の `random` と `randomInt` が使う生成器をリセットします。戻り値はありません。\n- 同じ分布の実装では、同じシードを設定して同じ順序で呼び出すと乱数列を再現できます。\n- 生成器の共有とスレッドごとのシードの扱いは `random` を参照してください。",
-                    "details_ko": "- `randomSeed(seed)`는 `unsigned int`를 받고 이후의 `random`과 `randomInt`가 사용하는 생성기를 초기화합니다. 반환값은 없습니다.\n- 같은 분포 구현에서는 같은 시드를 설정하고 같은 순서로 호출하면 난수열을 재현할 수 있습니다.\n- 생성기 공유와 스레드별 시드 처리는 `random`을 참조해야 합니다.",
+                    "details": "- `randomSeed(seed)` takes an `unsigned int`, resets the engine used by subsequent `random`, `randomInt`, `randomGaussian` and `shuffle` calls, and returns no value.\n- Repeating the same seed and the same sequence of calls reproduces the sequence with the same distribution implementation.\n- See `random` for the shared engine and thread-local seeding behavior.",
+                    "details_ja": "- `randomSeed(seed)` は `unsigned int` を受け取り、以降の `random`、`randomInt`、`randomGaussian`、`shuffle` が使う生成器をリセットします。戻り値はありません。\n- 同じ分布の実装では、同じシードを設定して同じ順序で呼び出すと乱数列を再現できます。\n- 生成器の共有とスレッドごとのシードの扱いは `random` を参照してください。",
+                    "details_ko": "- `randomSeed(seed)`는 `unsigned int`를 받고 이후의 `random`, `randomInt`, `randomGaussian`, `shuffle`이 사용하는 생성기를 초기화합니다. 반환값은 없습니다.\n- 같은 분포 구현에서는 같은 시드를 설정하고 같은 순서로 호출하면 난수열을 재현할 수 있습니다.\n- 생성기 공유와 스레드별 시드 처리는 `random`을 참조해야 합니다.",
                     "snippet": "void tcApp::setup() {\n    randomSeed(42);\n    float first = random(1.0f);\n    randomSeed(42);\n    float repeated = random(1.0f);\n}\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "shuffle",
+                    "params": "values",
+                    "params_typed": "std::vector<T> & values",
+                    "return_type": "void",
+                    "desc": "Shuffles a vector in place using the shared random engine.",
+                    "keywords": [],
+                    "desc_ja": "共有の乱数生成器を使って vector の要素をその場で並べ替える。",
+                    "desc_ko": "공유 난수 생성기로 vector 요소를 제자리에서 섞는다.",
+                    "details": "Takes `std::vector<T>&` and returns no value. Uses `std::shuffle`; reseeding with `randomSeed()` repeats the order for the same input and standard library.",
+                    "details_ja": "`std::vector<T>&` を受け取り、戻り値はありません。`std::shuffle` を使います。同じ入力と標準ライブラリでは、`randomSeed()` で同じシードを設定すると同じ順序を再現できます。",
+                    "details_ko": "`std::vector<T>&`를 받고 반환값은 없습니다. `std::shuffle`을 사용합니다. 같은 입력과 표준 라이브러리에서 `randomSeed()`로 같은 시드를 설정하면 같은 순서를 재현합니다.",
+                    "snippet": "std::vector<int> cards{1, 2, 3, 4};\nrandomSeed(42);\nshuffle(cards);\n",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -8886,6 +8946,26 @@ const TrussCAPI = {
                     "details_ja": "- `remap(value, inMin, inMax, outMin, outMax)` は `float` を受け取り、`outMin + (outMax - outMin) * ((value - inMin) / (inMax - inMin))` を `float` で返します。入力範囲と出力範囲はどちらも逆順にできます。\n- 入力や出力を範囲に制限しないため、入力範囲外の値は外挿します。\n- `inMin` と `inMax` は異なる値にしてください。同じ値では代替処理なしでゼロ除算が発生します。",
                     "details_ko": "- `remap(value, inMin, inMax, outMin, outMax)`는 `float`를 받고 `outMin + (outMax - outMin) * ((value - inMin) / (inMax - inMin))`을 `float`로 반환합니다. 입력 범위와 출력 범위는 모두 역순으로 지정할 수 있습니다.\n- 입력이나 출력을 범위로 제한하지 않으므로 입력 범위 밖의 값은 외삽합니다.\n- `inMin`과 `inMax`는 서로 달라야 합니다. 같은 값이면 대체 처리 없이 0으로 나누기가 발생합니다.",
                     "snippet": "void tcApp::setup() {\n    float level = remap(75.0f, 0.0f, 100.0f, 0.0f, 1.0f);\n    float reversed = remap(level, 0.0f, 1.0f, 1.0f, 0.0f);\n}\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "smoothstep",
+                    "params": "edge0, edge1, x",
+                    "params_typed": "float edge0, float edge1, float x",
+                    "return_type": "float",
+                    "desc": "Returns a clamped cubic transition between two edges, as in GLSL.",
+                    "keywords": [],
+                    "desc_ja": "GLSL と同じ、2 つの境界間の滑らかな 3 次補間値を返す。",
+                    "desc_ko": "GLSL과 같이 두 경계 사이의 부드러운 3차 보간값을 반환한다.",
+                    "details": "Requires `edge0 < edge1`. Clamps `(x - edge0) / (edge1 - edge0)` to [0, 1], then returns `t * t * (3 - 2 * t)`.",
+                    "details_ja": "`edge0 < edge1` としてください。`(x - edge0) / (edge1 - edge0)` を [0, 1] に制限し、`t * t * (3 - 2 * t)` を返します。",
+                    "details_ko": "`edge0 < edge1`이어야 합니다. `(x - edge0) / (edge1 - edge0)`를 [0, 1]로 제한하고 `t * t * (3 - 2 * t)`를 반환합니다.",
+                    "snippet": "float fade = smoothstep(0.2f, 0.8f, 0.5f); // 0.5\n",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -9847,6 +9927,26 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "mean",
+                    "params": "values",
+                    "params_typed": "std::span<const float> values",
+                    "return_type": "float",
+                    "desc": "Returns the arithmetic mean of the values.",
+                    "keywords": [],
+                    "desc_ja": "値の算術平均を返す。",
+                    "desc_ko": "값의 산술 평균을 반환한다.",
+                    "details": "Accepts `std::span<const float>`; vectors and arrays can be passed directly. Returns 0 for empty input. Uses SIMD where supported, with double accumulation.",
+                    "details_ja": "`std::span<const float>` を受け取り、vector や配列も直接渡せます。空の入力には 0 を返します。対応環境では SIMD を使い、加算は double で行います。",
+                    "details_ko": "`std::span<const float>`를 받으며 vector나 배열을 직접 전달할 수 있습니다. 빈 입력은 0을 반환합니다. 지원 환경에서 SIMD를 사용하고 합산은 double로 수행합니다.",
+                    "snippet": "std::vector<float> values{1.0f, 2.0f, 3.0f};\nfloat result = mean(values);\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "min",
                     "params": "a, b",
                     "params_typed": "float a, float b",
@@ -9876,6 +9976,46 @@ const TrussCAPI = {
                         {
                             "name": "imageOpsExample",
                             "group": "graphics"
+                        }
+                    ]
+                },
+                {
+                    "name": "minMax",
+                    "params": "values",
+                    "params_typed": "std::span<const float> values",
+                    "return_type": "std::pair<float, float>",
+                    "desc": "Returns the minimum and maximum as a pair of floats.",
+                    "keywords": [],
+                    "desc_ja": "最小値と最大値を float のペアで返す。",
+                    "desc_ko": "최솟값과 최댓값을 float 쌍으로 반환한다.",
+                    "details": "Accepts `std::span<const float>`; vectors and arrays can be passed directly. Returns `{minimum, maximum}`, or `{0, 0}` for empty input. Uses SIMD where supported. If any input is NaN, returns `{NaN, NaN}`.",
+                    "details_ja": "`std::span<const float>` を受け取り、vector や配列も直接渡せます。`{最小値, 最大値}` を返し、空の入力には `{0, 0}` を返します。対応環境では SIMD を使います。入力に NaN があれば `{NaN, NaN}` を返します。",
+                    "details_ko": "`std::span<const float>`를 받으며 vector나 배열을 직접 전달할 수 있습니다. `{최솟값, 최댓값}`을 반환하고 빈 입력은 `{0, 0}`을 반환합니다. 지원 환경에서 SIMD를 사용합니다. 입력에 NaN이 있으면 `{NaN, NaN}`을 반환합니다.",
+                    "snippet": "std::vector<float> values{1.0f, 2.0f, 3.0f};\nauto [lowest, highest] = minMax(values); // 1, 3\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "mse",
+                    "params": "a, b",
+                    "params_typed": "std::span<const float> a, std::span<const float> b",
+                    "return_type": "float",
+                    "desc": "Returns the mean squared difference between two inputs.",
+                    "keywords": [],
+                    "desc_ja": "2 つの入力の平均二乗誤差を返す。",
+                    "desc_ko": "두 입력의 평균 제곱 오차를 반환한다.",
+                    "details": "Accepts `std::span<const float>`; vectors and arrays can be passed directly. Returns 0 for empty input. Uses SIMD where supported, with double accumulation. Both spans must have the same length; otherwise logs a warning and returns 0.",
+                    "details_ja": "`std::span<const float>` を受け取り、vector や配列も直接渡せます。空の入力には 0 を返します。対応環境では SIMD を使い、加算は double で行います。 2 つの入力の長さが異なる場合は、警告を出して 0 を返します。",
+                    "details_ko": "`std::span<const float>`를 받으며 vector나 배열을 직접 전달할 수 있습니다. 빈 입력은 0을 반환합니다. 지원 환경에서 SIMD를 사용하고 합산은 double로 수행합니다. 두 입력의 길이가 다르면 경고를 출력하고 0을 반환합니다.",
+                    "snippet": "std::vector<float> values{1.0f, 2.0f, 3.0f};\nstd::vector<float> target{1.0f, 2.0f, 4.0f};\nfloat error = mse(values, target); // about 0.333333\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
                         }
                     ]
                 },
@@ -9937,6 +10077,26 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "rms",
+                    "params": "values",
+                    "params_typed": "std::span<const float> values",
+                    "return_type": "float",
+                    "desc": "Returns the root mean square of the values.",
+                    "keywords": [],
+                    "desc_ja": "値の二乗平均平方根を返す。",
+                    "desc_ko": "값의 제곱 평균 제곱근을 반환한다.",
+                    "details": "Accepts `std::span<const float>`; vectors and arrays can be passed directly. Returns 0 for empty input. Uses SIMD where supported, with double accumulation.",
+                    "details_ja": "`std::span<const float>` を受け取り、vector や配列も直接渡せます。空の入力には 0 を返します。対応環境では SIMD を使い、加算は double で行います。",
+                    "details_ko": "`std::span<const float>`를 받으며 vector나 배열을 직접 전달할 수 있습니다. 빈 입력은 0을 반환합니다. 지원 환경에서 SIMD를 사용하고 합산은 double로 수행합니다.",
+                    "snippet": "std::vector<float> values{1.0f, 2.0f, 3.0f};\nfloat result = rms(values);\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "round",
                     "params": "x",
                     "params_typed": "float x",
@@ -9957,6 +10117,26 @@ const TrussCAPI = {
                     "details": "- The standard-library function `round(x)` rounds halfway cases away from zero; `round(2.5f)` returns `3.0f`, and `round(-2.5f)` returns `-3.0f`.\n- A `float` argument produces a `float` result, not an integer type.",
                     "details_ja": "- 標準ライブラリの関数 `round(x)` は、ちょうど中間の値をゼロから遠ざかる方向に丸めます。`round(2.5f)` は `3.0f`、`round(-2.5f)` は `-3.0f` を返します。\n- 引数が `float` なら戻り値も `float` で、整数型にはなりません。",
                     "details_ko": "- 표준 라이브러리 함수 `round(x)`는 정확히 중간인 값을 0에서 멀어지는 방향으로 반올림합니다. `round(2.5f)`는 `3.0f`를, `round(-2.5f)`는 `-3.0f`를 반환합니다.\n- 인수가 `float`이면 반환값도 `float`이며 정수형으로 바뀌지 않습니다."
+                },
+                {
+                    "name": "sigmoid",
+                    "params": "x",
+                    "params_typed": "float x",
+                    "return_type": "float",
+                    "desc": "Returns the scalar logistic function, 1 / (1 + exp(-x)).",
+                    "keywords": [],
+                    "desc_ja": "スカラーのロジスティック関数 1 / (1 + exp(-x)) を返す。",
+                    "desc_ko": "스칼라 로지스틱 함수 1 / (1 + exp(-x))를 반환한다.",
+                    "details": "Returns 0.5 at zero and approaches 0 or 1 for large negative or positive inputs. Takes and returns a float.",
+                    "details_ja": "0 では 0.5 を返し、入力が負または正に大きくなると 0 または 1 に近づきます。引数と戻り値は float です。",
+                    "details_ko": "0에서 0.5를 반환하며 입력이 음수 또는 양수로 커지면 0 또는 1에 가까워집니다. 인수와 반환값은 float입니다.",
+                    "snippet": "float probability = sigmoid(1.0f); // about 0.731059\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
                 },
                 {
                     "name": "sign",
@@ -10047,6 +10227,46 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "stddev",
+                    "params": "values",
+                    "params_typed": "std::span<const float> values",
+                    "return_type": "float",
+                    "desc": "Returns population standard deviation, the square root of variance.",
+                    "keywords": [],
+                    "desc_ja": "母分散の平方根である母標準偏差を返す。",
+                    "desc_ko": "모분산의 제곱근인 모표준 편차를 반환한다.",
+                    "details": "Accepts `std::span<const float>`; vectors and arrays can be passed directly. Returns 0 for empty input. Uses SIMD where supported, with double accumulation.",
+                    "details_ja": "`std::span<const float>` を受け取り、vector や配列も直接渡せます。空の入力には 0 を返します。対応環境では SIMD を使い、加算は double で行います。",
+                    "details_ko": "`std::span<const float>`를 받으며 vector나 배열을 직접 전달할 수 있습니다. 빈 입력은 0을 반환합니다. 지원 환경에서 SIMD를 사용하고 합산은 double로 수행합니다.",
+                    "snippet": "std::vector<float> values{1.0f, 2.0f, 3.0f};\nfloat result = stddev(values);\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "sum",
+                    "params": "values",
+                    "params_typed": "std::span<const float> values",
+                    "return_type": "float",
+                    "desc": "Returns the sum of the values.",
+                    "keywords": [],
+                    "desc_ja": "値の合計を返す。",
+                    "desc_ko": "값의 합계를 반환한다.",
+                    "details": "Accepts `std::span<const float>`; vectors and arrays can be passed directly. Returns 0 for empty input. Uses SIMD where supported, with double accumulation.",
+                    "details_ja": "`std::span<const float>` を受け取り、vector や配列も直接渡せます。空の入力には 0 を返します。対応環境では SIMD を使い、加算は double で行います。",
+                    "details_ko": "`std::span<const float>`를 받으며 vector나 배열을 직접 전달할 수 있습니다. 빈 입력은 0을 반환합니다. 지원 환경에서 SIMD를 사용하고 합산은 double로 수행합니다.",
+                    "snippet": "std::vector<float> values{1.0f, 2.0f, 3.0f};\nfloat result = sum(values);\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "toComplex",
                     "params": "real",
                     "params_typed": "const std::vector<float> & real",
@@ -10066,6 +10286,26 @@ const TrussCAPI = {
                     "details": "- `toComplex(real)` takes a `vector<float>` and returns a new `vector<complex<float>>` of the same length, with each input value as the real part and `0.0f` as the imaginary part.\n- The input is unchanged. No FFT, windowing, padding, or power-of-two validation is performed; empty input returns an empty vector.",
                     "details_ja": "- `toComplex(real)` は `vector<float>` を受け取り、同じ長さの新しい `vector<complex<float>>` を返します。各入力値を実部とし、虚部を `0.0f` にします。\n- 入力は変更しません。FFT、窓関数の適用、パディング、長さが 2 のべき乗かどうかの検査は行いません。空の入力には空のベクトルを返します。",
                     "details_ko": "- `toComplex(real)`은 `vector<float>`를 받아 길이가 같은 새 `vector<complex<float>>`를 반환합니다. 각 입력값을 실수부로 사용하고 허수부를 `0.0f`로 설정합니다.\n- 입력은 변경하지 않습니다. FFT, 윈도우 적용, 패딩, 길이가 2의 거듭제곱인지 검사를 수행하지 않습니다. 빈 입력에는 빈 벡터를 반환합니다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "variance",
+                    "params": "values",
+                    "params_typed": "std::span<const float> values",
+                    "return_type": "float",
+                    "desc": "Returns population variance, dividing the squared deviations by the number of values.",
+                    "keywords": [],
+                    "desc_ja": "平均との差の二乗和を要素数で割った母分散を返す。",
+                    "desc_ko": "평균과의 차이의 제곱합을 요소 수로 나눈 모분산을 반환한다.",
+                    "details": "Accepts `std::span<const float>`; vectors and arrays can be passed directly. Returns 0 for empty input. Uses SIMD where supported, with double accumulation.",
+                    "details_ja": "`std::span<const float>` を受け取り、vector や配列も直接渡せます。空の入力には 0 を返します。対応環境では SIMD を使い、加算は double で行います。",
+                    "details_ko": "`std::span<const float>`를 받으며 vector나 배열을 직접 전달할 수 있습니다. 빈 입력은 0을 반환합니다. 지원 환경에서 SIMD를 사용하고 합산은 double로 수행합니다.",
+                    "snippet": "std::vector<float> values{1.0f, 2.0f, 3.0f};\nfloat result = variance(values);\n",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -19106,9 +19346,9 @@ const TrussCAPI = {
                         "Window::isOccluded",
                         "setFps"
                     ],
-                    "details": "- Sets every existing window and becomes the default for new windows, even when called from one App's callbacks. The initial default is `false`: hidden windows keep updating and stop drawing.\n- With `true`, hidden windows keep updating and drawing, including while minimized or fully covered. This supports sending frames from `draw()` to Spout, Syphon, NDI or a recorder. Screen output while hidden is up to the OS.\n- While hidden, frames come from the hidden tick at about the display's base rate (~60 Hz); faster pacing and `swapInterval` aren't kept, while `setFps(30)`/`setFps(60)` still hold. To use another rate while hidden, change it yourself from `events().occludedChanged` (see the snippet).\n- `Window::setDrawWhileHidden()` changes one window only. The last global or per-window call wins. Call on the main thread; setup may set the policy before the first draw.\n- On Linux (X11), all windows share one clock: the display of the earliest-created visible window. If that window is hidden, the next visible one takes over. If none is visible, a timer at about 60 Hz paces them. Mixed-refresh displays can change the rate; use `setFps(…)` for a fixed rate. macOS and Windows pace each window to its own display.",
-                    "details_ja": "- ある App のコールバックから呼んだ場合も、既存のすべてのウィンドウに設定し、新規ウィンドウの既定値にします。初期値は `false` で、非表示中も更新を続けますが描画は停止します。\n- `true` にすると、最小化中や完全に覆われている間も更新と描画を続けます。`draw()` から Spout・Syphon・NDI・レコーダーへフレームを送り続ける用途に使います。非表示中に画面へ出力されるかどうかは OS に依存します。\n- 非表示中のフレームは、非表示用の tick によって画面の基本レート（約 60 Hz）で進みます。それより速いペースと `swapInterval` は保たれませんが、`setFps(30)`/`setFps(60)` はそのまま有効です。非表示中に別のレートにしたい場合は、`events().occludedChanged` で自分で切り替えてください（スニペット参照）。\n- `Window::setDrawWhileHidden()` は 1 つのウィンドウだけを変更し、最後の呼び出しが優先されます。メインスレッドで呼び出してください。setup で初回描画の前に設定できます。\n- Linux（X11）では、すべてのウィンドウが、表示中のうち最も早く作成されたウィンドウのディスプレイを共通のクロックに使います。そのウィンドウが非表示になると、次の表示中のウィンドウが引き継ぎます。表示中のウィンドウがなければ、約 60 Hz のタイマーで進みます。リフレッシュレートの異なるディスプレイが混在するとレートが変わるため、固定レートには `setFps(…)` を使います。macOS と Windows では、各ウィンドウがそれぞれのディスプレイに合わせて進みます。",
-                    "details_ko": "- 한 App의 콜백에서 호출해도 모든 기존 윈도우에 설정하고 새 윈도우의 기본값으로 지정합니다. 초기값은 `false`이며 숨겨진 윈도우는 업데이트를 계속하고 그리기는 중지합니다.\n- `true`이면 최소화되거나 완전히 가려진 동안에도 업데이트와 그리기를 계속합니다. `draw()`에서 Spout, Syphon, NDI 또는 레코더로 프레임을 계속 보내는 데 사용합니다. 숨겨진 동안 화면에 출력되는지는 OS에 따라 달라집니다.\n- 숨겨진 동안의 프레임은 숨김용 틱에 의해 화면의 기본 레이트(약 60 Hz)로 진행됩니다. 그보다 빠른 페이스와 `swapInterval`은 유지되지 않지만 `setFps(30)`/`setFps(60)`은 그대로 유효합니다. 숨겨진 동안 다른 레이트를 쓰려면 `events().occludedChanged`에서 직접 전환하세요(스니펫 참조).\n- `Window::setDrawWhileHidden()`는 하나의 윈도우만 변경하며 마지막 호출이 우선합니다. 메인 스레드에서 호출합니다. setup에서 첫 그리기 전에 설정할 수 있습니다.\n- Linux(X11)에서는 모든 윈도우가 표시 중인 윈도우 중 가장 먼저 생성된 윈도우의 디스플레이를 공통 클록으로 사용합니다. 해당 윈도우가 숨겨지면 다음 표시 중인 윈도우가 이어받습니다. 표시 중인 윈도우가 없으면 약 60 Hz의 타이머로 진행합니다. 주사율이 다른 디스플레이가 섞여 있으면 레이트가 달라질 수 있으므로 고정 레이트에는 `setFps(…)`를 사용합니다. macOS와 Windows에서는 각 윈도우가 자신의 디스플레이에 맞춰 진행합니다.",
+                    "details": "- Sets every existing window and becomes the default for new windows, even when called from one App's callbacks. The initial default is `false`: hidden windows keep updating and stop drawing.\n- With `true`, hidden windows keep updating and drawing, including while minimized or fully covered. This supports sending frames from `draw()` to Spout, Syphon, NDI or a recorder. Screen output while hidden is up to the OS.\n- While hidden, frames come from the hidden tick at about the display's base rate (~60 Hz); faster pacing and `swapInterval` aren't kept, while `setFps(30)`/`setFps(60)` still hold. To use another rate while hidden, change it yourself from `events().occludedChanged` (see the snippet).\n- `Window::setDrawWhileHidden()` changes one window only. The last global or per-window call wins. Call on the main thread; setup may set the policy before the first draw.\n- On Linux (X11), all windows share one clock: the display of the earliest-created visible window. If that window is hidden, the next visible one takes over. If none is visible, a timer at about 60 Hz paces them. Mixed-refresh displays can change the rate; use `setFps(…)` for a fixed rate. macOS and Windows pace each window to its own display. On X11 compositors that throttle covered windows (e.g. labwc/Xwayland on Raspberry Pi), covering the first-created visible window slows every window to ~1 Hz until it's uncovered or minimized. Keep that window uncovered, or minimize or hide it to hand pacing to another window (`getWindow()->setVisible(false);`). Known issue #1367.",
+                    "details_ja": "- ある App のコールバックから呼んだ場合も、既存のすべてのウィンドウに設定し、新規ウィンドウの既定値にします。初期値は `false` で、非表示中も更新を続けますが描画は停止します。\n- `true` にすると、最小化中や完全に覆われている間も更新と描画を続けます。`draw()` から Spout・Syphon・NDI・レコーダーへフレームを送り続ける用途に使います。非表示中に画面へ出力されるかどうかは OS に依存します。\n- 非表示中のフレームは、非表示用の tick によって画面の基本レート（約 60 Hz）で進みます。それより速いペースと `swapInterval` は保たれませんが、`setFps(30)`/`setFps(60)` はそのまま有効です。非表示中に別のレートにしたい場合は、`events().occludedChanged` で自分で切り替えてください（スニペット参照）。\n- `Window::setDrawWhileHidden()` は 1 つのウィンドウだけを変更し、最後の呼び出しが優先されます。メインスレッドで呼び出してください。setup で初回描画の前に設定できます。\n- Linux（X11）では、すべてのウィンドウが、表示中のうち最も早く作成されたウィンドウのディスプレイを共通のクロックに使います。そのウィンドウが非表示になると、次の表示中のウィンドウが引き継ぎます。表示中のウィンドウがなければ、約 60 Hz のタイマーで進みます。リフレッシュレートの異なるディスプレイが混在するとレートが変わるため、固定レートには `setFps(…)` を使います。macOS と Windows では、各ウィンドウがそれぞれのディスプレイに合わせて進みます。覆われたウィンドウを間引く X11 コンポジター（Raspberry Pi の labwc/Xwayland など）では、表示中で最初に作成されたウィンドウを覆うと、覆いを外すか最小化するまですべてのウィンドウが約 1 Hz に落ちます。そのウィンドウを覆わないようにするか、最小化または非表示にして別のウィンドウにペーシングを渡してください（`getWindow()->setVisible(false);`）。既知の問題 #1367 です。",
+                    "details_ko": "- 한 App의 콜백에서 호출해도 모든 기존 윈도우에 설정하고 새 윈도우의 기본값으로 지정합니다. 초기값은 `false`이며 숨겨진 윈도우는 업데이트를 계속하고 그리기는 중지합니다.\n- `true`이면 최소화되거나 완전히 가려진 동안에도 업데이트와 그리기를 계속합니다. `draw()`에서 Spout, Syphon, NDI 또는 레코더로 프레임을 계속 보내는 데 사용합니다. 숨겨진 동안 화면에 출력되는지는 OS에 따라 달라집니다.\n- 숨겨진 동안의 프레임은 숨김용 틱에 의해 화면의 기본 레이트(약 60 Hz)로 진행됩니다. 그보다 빠른 페이스와 `swapInterval`은 유지되지 않지만 `setFps(30)`/`setFps(60)`은 그대로 유효합니다. 숨겨진 동안 다른 레이트를 쓰려면 `events().occludedChanged`에서 직접 전환하세요(스니펫 참조).\n- `Window::setDrawWhileHidden()`는 하나의 윈도우만 변경하며 마지막 호출이 우선합니다. 메인 스레드에서 호출합니다. setup에서 첫 그리기 전에 설정할 수 있습니다.\n- Linux(X11)에서는 모든 윈도우가 표시 중인 윈도우 중 가장 먼저 생성된 윈도우의 디스플레이를 공통 클록으로 사용합니다. 해당 윈도우가 숨겨지면 다음 표시 중인 윈도우가 이어받습니다. 표시 중인 윈도우가 없으면 약 60 Hz의 타이머로 진행합니다. 주사율이 다른 디스플레이가 섞여 있으면 레이트가 달라질 수 있으므로 고정 레이트에는 `setFps(…)`를 사용합니다. macOS와 Windows에서는 각 윈도우가 자신의 디스플레이에 맞춰 진행합니다. 가려진 창을 제한하는 X11 컴포지터(Raspberry Pi의 labwc/Xwayland 등)에서는 표시 중 가장 먼저 생성된 창을 가리면 가림을 해제하거나 최소화할 때까지 모든 창이 약 1Hz로 느려집니다. 그 창을 가리지 않거나 최소화 또는 숨겨서 다른 창에 페이싱을 넘기십시오(`getWindow()->setVisible(false);`). 알려진 문제 #1367입니다.",
                     "snippet": "EventListener occListener;  // member\nsetDrawWhileHidden(true);\n// Optional: a slower rate while hidden\noccListener = events().occludedChanged.listen([](OccludedEventArgs& e) {\n    setFps(e.occluded ? 10 : VSYNC);\n});\n",
                     "examples": [
                         {
@@ -69140,9 +69380,9 @@ const TrussCAPI = {
                     ],
                     "desc": "Returns the video height.",
                     "inherited": "VideoPlayerBase",
-                    "details": "- Returns the stored video height in pixels as a `float`, independently of the drawing size.\n- The initial value is `0`; closing a loaded `VideoPlayer` resets it to `0`.",
-                    "details_ja": "- 保存されている動画の高さをピクセル単位の `float` で返します。描画サイズには依存しません。\n- 初期値は `0` です。読み込み済みの `VideoPlayer` を閉じると `0` に戻ります。",
-                    "details_ko": "- 저장된 비디오 높이를 픽셀 단위의 `float`로 반환하며 그리기 크기와는 관계가 없습니다.\n- 초기값은 `0`입니다. 로드된 `VideoPlayer`를 닫으면 `0`으로 돌아갑니다.",
+                    "details": "- Standard VideoPlayer reports the display-oriented size (90/270 degrees swap width and height). HAP ignores rotation metadata.\n- Returns the stored video height in pixels as a `float`, independently of the drawing size.\n- The initial value is `0`; closing a loaded `VideoPlayer` resets it to `0`.",
+                    "details_ja": "- 標準 VideoPlayer は表示向きのサイズを返します（90/270 度では幅と高さを交換します）。HAP は回転メタデータを無視します。\n- 保存されている動画の高さをピクセル単位の `float` で返します。描画サイズには依存しません。\n- 初期値は `0` です。読み込み済みの `VideoPlayer` を閉じると `0` に戻ります。",
+                    "details_ko": "- 표준 VideoPlayer는 표시 방향의 크기를 반환합니다(90/270도에서는 너비와 높이가 바뀝니다). HAP은 회전 메타데이터를 무시합니다.\n- 저장된 비디오 높이를 픽셀 단위의 `float`로 반환하며 그리기 크기와는 관계가 없습니다.\n- 초기값은 `0`입니다. 로드된 `VideoPlayer`를 닫으면 `0`으로 돌아갑니다.",
                     "keywords": [
                         "resolution",
                         "size",
@@ -69306,9 +69546,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Returns a pointer to the RGBA pixel buffer.",
-                    "details": "- Returns tightly packed RGBA U8 data with four bytes per pixel; the non-const overload permits editing, and the const overload returns a const pointer. Returns `nullptr` when no RGBA buffer exists, including Linux NV12 playback.\n- The buffer can exist before a live frame arrives and initially contains zeros; an automatic poster may fill it before playback.\n- The player owns all pointers returned by `getPixels()`, `getPixelsY()`, and `getPixelsUV()`. Do not free them or access them concurrently with buffer updates; copy data that must survive a later update, resize, reload, or `close()`.\n- Editing CPU data does not immediately update the GPU texture.",
-                    "details_ja": "- 1 ピクセルあたり 4 バイトで隙間なく並んだ RGBA U8 データを返します。非 const 版は編集可能で、const 版は const ポインタを返します。Linux の NV12 再生など、RGBA バッファがない場合は `nullptr` を返します。\n- バッファはライブフレームの到着前から存在する場合があり、初期値はゼロです。自動ポスターによって再生前に画像が格納される場合があります。\n- `getPixels()`、`getPixelsY()`、`getPixelsUV()` が返すポインタはプレイヤーが所有します。解放したり、バッファの更新と同時にアクセスしたりしないでください。後の更新、サイズ変更、再読み込み、`close()` を超えて保持するデータはコピーしてください。\n- CPU 上のデータを編集しても、GPU テクスチャには直ちに反映されません。",
-                    "details_ko": "- 픽셀당 4바이트로 빈틈없이 배열된 RGBA U8 데이터를 반환합니다. 비 const 오버로드는 편집할 수 있고 const 오버로드는 const 포인터를 반환합니다. Linux의 NV12 재생 등 RGBA 버퍼가 없으면 `nullptr`를 반환합니다.\n- 버퍼는 실시간 프레임이 도착하기 전부터 존재할 수 있으며 초기값은 0입니다. 자동 포스터가 재생 전에 이미지를 채울 수 있습니다.\n- `getPixels()`, `getPixelsY()`, `getPixelsUV()`가 반환하는 포인터는 플레이어가 소유합니다. 해제하거나 버퍼 갱신과 동시에 접근하지 마세요. 이후 갱신, 크기 변경, 다시 로드, `close()`를 넘어 유지할 데이터는 복사해야 합니다.\n- CPU 데이터를 편집해도 GPU 텍스처에 즉시 반영되지 않습니다.",
+                    "details": "- Returns tightly packed RGBA U8 data with four bytes per pixel; the non-const overload permits editing, and the const overload returns a const pointer. Returns `nullptr` when no RGBA buffer exists, including Linux NV12 hardware playback, rotated or not.\n- The buffer can exist before a live frame arrives and initially contains zeros; an automatic poster may fill it before playback.\n- The player owns all pointers returned by `getPixels()`, `getPixelsY()`, and `getPixelsUV()`. Do not free them or access them concurrently with buffer updates; copy data that must survive a later update, resize, reload, or `close()`.\n- Editing CPU data does not immediately update the GPU texture.",
+                    "details_ja": "- 1 ピクセルあたり 4 バイトで隙間なく並んだ RGBA U8 データを返します。非 const 版は編集可能で、const 版は const ポインタを返します。回転の有無にかかわらず Linux の NV12 ハードウェア再生など、RGBA バッファがない場合は `nullptr` を返します。\n- バッファはライブフレームの到着前から存在する場合があり、初期値はゼロです。自動ポスターによって再生前に画像が格納される場合があります。\n- `getPixels()`、`getPixelsY()`、`getPixelsUV()` が返すポインタはプレイヤーが所有します。解放したり、バッファの更新と同時にアクセスしたりしないでください。後の更新、サイズ変更、再読み込み、`close()` を超えて保持するデータはコピーしてください。\n- CPU 上のデータを編集しても、GPU テクスチャには直ちに反映されません。",
+                    "details_ko": "- 픽셀당 4바이트로 빈틈없이 배열된 RGBA U8 데이터를 반환합니다. 비 const 오버로드는 편집할 수 있고 const 오버로드는 const 포인터를 반환합니다. 회전 여부와 관계없이 Linux의 NV12 하드웨어 재생 등 RGBA 버퍼가 없으면 `nullptr`를 반환합니다.\n- 버퍼는 실시간 프레임이 도착하기 전부터 존재할 수 있으며 초기값은 0입니다. 자동 포스터가 재생 전에 이미지를 채울 수 있습니다.\n- `getPixels()`, `getPixelsY()`, `getPixelsUV()`가 반환하는 포인터는 플레이어가 소유합니다. 해제하거나 버퍼 갱신과 동시에 접근하지 마세요. 이후 갱신, 크기 변경, 다시 로드, `close()`를 넘어 유지할 데이터는 복사해야 합니다.\n- CPU 데이터를 편집해도 GPU 텍스처에 즉시 반영되지 않습니다.",
                     "keywords": [
                         "rgba",
                         "buffer",
@@ -69335,9 +69575,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Returns a pointer to the interleaved NV12 chroma plane.",
-                    "details": "- Returns mutable U8 data containing alternating U and V bytes for Linux NV12 playback, with two bytes per chroma sample at half the video width and height; returns `nullptr` otherwise.\n- The plane is initially filled with `128` for neutral chroma. See `VideoPlayer::getPixels` for ownership, lifetime, and access requirements.",
-                    "details_ja": "- Linux の NV12 再生で、U と V のバイトが交互に並ぶ変更可能な U8 データを返します。幅と高さは動画の半分で、色差サンプルあたり 2 バイトです。それ以外の場合は `nullptr` を返します。\n- プレーンの初期値は中立の色差を表す `128` です。所有権、有効期間、アクセスの要件は `VideoPlayer::getPixels` を参照してください。",
-                    "details_ko": "- Linux의 NV12 재생에서 U와 V 바이트가 번갈아 배열된 수정 가능한 U8 데이터를 반환합니다. 너비와 높이는 비디오의 절반이며 색차 샘플당 2바이트입니다. 그 외에는 `nullptr`를 반환합니다.\n- 평면의 초기값은 중립 색차를 나타내는 `128`입니다. 소유권, 유효 기간, 접근 요구 사항은 `VideoPlayer::getPixels`를 참조하세요.",
+                    "details": "- Returns mutable U8 data containing alternating U and V bytes for Linux NV12 playback, with two bytes per chroma sample at half the encoded video width and height; returns `nullptr` otherwise.\n- The plane is initially filled with `128` for neutral chroma. See `VideoPlayer::getPixels` for ownership, lifetime, and access requirements.",
+                    "details_ja": "- Linux の NV12 再生で、U と V のバイトが交互に並ぶ変更可能な U8 データを返します。幅と高さはエンコードされた動画の半分で、色差サンプルあたり 2 バイトです。それ以外の場合は `nullptr` を返します。\n- プレーンの初期値は中立の色差を表す `128` です。所有権、有効期間、アクセスの要件は `VideoPlayer::getPixels` を参照してください。",
+                    "details_ko": "- Linux의 NV12 재생에서 U와 V 바이트가 번갈아 배열된 수정 가능한 U8 데이터를 반환합니다. 너비와 높이는 인코딩된 비디오의 절반이며 색차 샘플당 2바이트입니다. 그 외에는 `nullptr`를 반환합니다.\n- 평면의 초기값은 중립 색차를 나타내는 `128`입니다. 소유권, 유효 기간, 접근 요구 사항은 `VideoPlayer::getPixels`를 참조하세요.",
                     "keywords": [
                         "chroma",
                         "yuv",
@@ -69363,9 +69603,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Returns a pointer to the NV12 luma plane.",
-                    "details": "- Returns mutable U8 luma data for Linux NV12 playback, with one byte per pixel at the full video width and height; returns `nullptr` otherwise.\n- The plane is initially filled with zero. See `VideoPlayer::getPixels` for ownership, lifetime, and access requirements.",
-                    "details_ja": "- Linux の NV12 再生で、変更可能な U8 の輝度データを返します。幅と高さは動画と同じで、1 ピクセルあたり 1 バイトです。それ以外の場合は `nullptr` を返します。\n- プレーンの初期値はゼロです。所有権、有効期間、アクセスの要件は `VideoPlayer::getPixels` を参照してください。",
-                    "details_ko": "- Linux의 NV12 재생에서 수정 가능한 U8 휘도 데이터를 반환합니다. 너비와 높이는 비디오와 같으며 픽셀당 1바이트입니다. 그 외에는 `nullptr`를 반환합니다.\n- 평면의 초기값은 0입니다. 소유권, 유효 기간, 접근 요구 사항은 `VideoPlayer::getPixels`를 참조하세요.",
+                    "details": "- Returns mutable U8 luma data for Linux NV12 playback, with one byte per pixel at the full encoded video width and height; returns `nullptr` otherwise.\n- The plane is initially filled with zero. See `VideoPlayer::getPixels` for ownership, lifetime, and access requirements.",
+                    "details_ja": "- Linux の NV12 再生で、変更可能な U8 の輝度データを返します。幅と高さはエンコードされた動画と同じで、1 ピクセルあたり 1 バイトです。それ以外の場合は `nullptr` を返します。\n- プレーンの初期値はゼロです。所有権、有効期間、アクセスの要件は `VideoPlayer::getPixels` を参照してください。",
+                    "details_ko": "- Linux의 NV12 재생에서 수정 가능한 U8 휘도 데이터를 반환합니다. 너비와 높이는 인코딩된 비디오와 같으며 픽셀당 1바이트입니다. 그 외에는 `nullptr`를 반환합니다.\n- 평면의 초기값은 0입니다. 소유권, 유효 기간, 접근 요구 사항은 `VideoPlayer::getPixels`를 참조하세요.",
                     "keywords": [
                         "luma",
                         "yuv",
@@ -69430,6 +69670,48 @@ const TrussCAPI = {
                     "related": [
                         "VideoPlayerBase::setResyncThreshold"
                     ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "web"
+                    ]
+                },
+                {
+                    "name": "getRotation",
+                    "signatures": [
+                        {
+                            "ret": "float",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the stream display rotation in radians.",
+                    "details": "Clockwise rotation needed to display the encoded frame: `0`, `TAU/4`, `TAU/2`, or `3*TAU/4`. Frames already use this orientation. Returns zero before load and after close. Reflections are decomposed as a source horizontal flip followed by this rotation. Linux and Apple apply only this quarter turn and the reflection; other matrix parts such as scale or shear are ignored. Web cannot expose stream rotation and returns zero; playback follows browser orientation. Windows ignores a mirrored matrix: frames stay unflipped and the rotation reads zero. HAP is unchanged and ignores rotation metadata. On the Linux software-decode path, rotated clips cost extra CPU per frame (about half a core at 1080p30 on a Raspberry Pi 5); to avoid it, re-encode the clip upright once, e.g. `ffmpeg -i in.mp4 -c:a copy out.mp4`, which applies the rotation while decoding and writes an unrotated file.",
+                    "details_ja": "符号化画像を表示向きにする時計回りの回転です。値は `0`、`TAU/4`、`TAU/2`、`3*TAU/4` です。フレームはこの表示向きになっています。読み込み前とクローズ後はゼロです。鏡像は元画像の左右反転とその後の回転に分解します。Linux と Apple はこの直角回転と鏡像だけを適用し、拡大縮小やせん断など行列の他の成分は無視します。Web は回転メタデータを取得できずゼロを返し、再生はブラウザーの表示向きに従います。Windows は鏡像の行列を無視するため、フレームは反転されず回転はゼロになります。HAP は変更せず、回転メタデータを無視します。Linux のソフトウェアデコードでは、回転した動画はフレームごとに CPU を余分に使います（Raspberry Pi 5 の 1080p30 で約 0.5 コア）。避けるには一度だけ正立に再エンコードします。例: `ffmpeg -i in.mp4 -c:a copy out.mp4`（デコード時に回転を適用し、回転なしのファイルを書き出します）。",
+                    "details_ko": "인코딩된 프레임을 표시 방향으로 만드는 시계 방향 회전이며 `0`, `TAU/4`, `TAU/2`, `3*TAU/4` 중 하나입니다. 프레임은 이미 이 표시 방향을 따릅니다. 로드 전과 닫은 후에는 0입니다. 반사는 원본의 좌우 반전 후 회전으로 분해합니다. Linux와 Apple은 이 직각 회전과 반사만 적용하며, 확대/축소나 전단 같은 행렬의 다른 성분은 무시합니다. Web은 스트림 회전을 읽을 수 없어 0을 반환하며 재생은 브라우저의 표시 방향을 따릅니다. Windows는 반사 행렬을 무시하므로 프레임은 반전되지 않고 회전은 0입니다. HAP은 변경되지 않으며 회전 메타데이터를 무시합니다. Linux 소프트웨어 디코딩에서는 회전된 동영상이 프레임마다 CPU를 추가로 사용합니다(Raspberry Pi 5의 1080p30에서 약 0.5코어). 피하려면 한 번만 똑바로 다시 인코딩합니다. 예: `ffmpeg -i in.mp4 -c:a copy out.mp4`(디코딩할 때 회전을 적용하고 회전 없는 파일을 씁니다).",
+                    "snippet": "void tcApp::setup() {\n    video.load(\"phone.mp4\");\n    float rotation = video.getRotation();\n}\n",
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "web"
+                    ]
+                },
+                {
+                    "name": "getRotationDeg",
+                    "signatures": [
+                        {
+                            "ret": "int",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the stream display rotation in degrees.",
+                    "details": "Returns `0`, `90`, `180`, or `270`, clockwise, describing the rotation applied to frames. See `getRotation()` for reflection and platform limitations.",
+                    "details_ja": "フレームに適用する回転として、時計回りの `0`、`90`、`180`、`270` を返します。鏡像とプラットフォームの制限は `getRotation()` を参照してください。",
+                    "details_ko": "프레임에 적용하는 회전으로 시계 방향 `0`, `90`, `180`, `270`을 반환합니다. 반사 및 플랫폼 제한은 `getRotation()`을 참조합니다.",
+                    "snippet": "void tcApp::setup() {\n    video.load(\"phone.mp4\");\n    int degrees = video.getRotationDeg();\n}\n",
                     "platforms": [
                         "macos",
                         "windows",
@@ -69580,9 +69862,9 @@ const TrussCAPI = {
                     ],
                     "desc": "Returns the video width.",
                     "inherited": "VideoPlayerBase",
-                    "details": "- Returns the stored video width in pixels as a `float`, independently of the drawing size.\n- The initial value is `0`; closing a loaded `VideoPlayer` resets it to `0`.",
-                    "details_ja": "- 保存されている動画の幅をピクセル単位の `float` で返します。描画サイズには依存しません。\n- 初期値は `0` です。読み込み済みの `VideoPlayer` を閉じると `0` に戻ります。",
-                    "details_ko": "- 저장된 비디오 너비를 픽셀 단위의 `float`로 반환하며 그리기 크기와는 관계가 없습니다.\n- 초기값은 `0`입니다. 로드된 `VideoPlayer`를 닫으면 `0`으로 돌아갑니다.",
+                    "details": "- Standard VideoPlayer reports the display-oriented size (90/270 degrees swap width and height). HAP ignores rotation metadata.\n- Returns the stored video width in pixels as a `float`, independently of the drawing size.\n- The initial value is `0`; closing a loaded `VideoPlayer` resets it to `0`.",
+                    "details_ja": "- 標準 VideoPlayer は表示向きのサイズを返します（90/270 度では幅と高さを交換します）。HAP は回転メタデータを無視します。\n- 保存されている動画の幅をピクセル単位の `float` で返します。描画サイズには依存しません。\n- 初期値は `0` です。読み込み済みの `VideoPlayer` を閉じると `0` に戻ります。",
+                    "details_ko": "- 표준 VideoPlayer는 표시 방향의 크기를 반환합니다(90/270도에서는 너비와 높이가 바뀝니다). HAP은 회전 메타데이터를 무시합니다.\n- 저장된 비디오 너비를 픽셀 단위의 `float`로 반환하며 그리기 크기와는 관계가 없습니다.\n- 초기값은 `0`입니다. 로드된 `VideoPlayer`를 닫으면 `0`으로 돌아갑니다.",
                     "keywords": [
                         "resolution",
                         "size",
@@ -70779,9 +71061,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Extracts a video frame at a specified time.",
-                    "details": "- `VideoPlayer::extractFrame(path, output, timeSec, outDuration)` opens a separate decoder synchronously; the instance form `player.extractFrame(output, timeSec, outDuration)` uses `getPath()` and returns `false` if it is empty.\n- `timeSec` is in seconds. Negative values become zero; values beyond a known positive duration become `duration * 0.1f`. A non-null `outDuration` receives the duration in seconds and may be written even if extraction later fails.\n- Returns `true` when a frame is extracted into RGBA U8 `Pixels`; opening or decoding failures return `false`. Static paths are passed directly to the decoder, so use `getDataPath()` when resolving a data-directory path.\n- macOS and iOS request zero time tolerance. Linux and Windows decode forward from a backward seek and select the first frame whose timestamp reaches the target. If the target is not reached, Windows retains the last decoded sample at a clean end-of-stream, while Linux returns `false` when decoding is exhausted.\n- The `Pixels` overloads use independent decode contexts without GPU access and can run on a background thread with separate output storage; keep an instance and its source path stable while using an instance overload.\n- Both forms also accept an `Image`, allocating it and uploading the extracted pixels to its texture. These overloads require the main thread. If allocation or upload fails, they return `false`: On failure the Image is left empty (cleared). Opening or decoding failures return before touching the Image.\n- Each call opens a fresh decode context, so use these helpers for still images rather than continuous playback; use `load()`, `play()`, and `update()` for playback, or `extractKeyFrame()` for a faster approximate thumbnail.",
-                    "details_ja": "- `VideoPlayer::extractFrame(path, output, timeSec, outDuration)` は独立したデコーダを同期的に開きます。インスタンス版の `player.extractFrame(output, timeSec, outDuration)` は `getPath()` を使用し、パスが空の場合は `false` を返します。\n- `timeSec` の単位は秒です。負の値はゼロになり、既知の正の動画長を超える値は `duration * 0.1f` になります。`outDuration` が null でなければ動画長を秒単位で格納し、その後の抽出が失敗しても値が書き込まれている場合があります。\n- RGBA U8 の `Pixels` にフレームを抽出できた場合は `true` を返し、ファイルを開けない場合やデコードに失敗した場合は `false` を返します。静的版のパスはデコーダへ直接渡すため、データディレクトリ内のパスを解決する場合は `getDataPath()` を使用してください。\n- macOS と iOS は時刻の許容誤差をゼロにして要求します。Linux と Windows は後方シーク後に前進デコードし、タイムスタンプが指定時刻に達した最初のフレームを選びます。指定時刻に達しないまま正常にストリーム終端になった場合、Windows は最後にデコードしたサンプルを保持します。Linux は指定時刻に達せずデコードが尽きると `false` を返します。\n- `Pixels` 版は独立したデコードコンテキストを使用し、GPU にアクセスしないため、出力先を分ければバックグラウンドスレッドで実行できます。インスタンス版の実行中は、インスタンスとソースパスを変更しないでください。\n- どちらの形式も `Image` を受け取ることができ、画像を確保して抽出したピクセルをテクスチャへアップロードします。この形式はメインスレッドで呼んでください。確保またはアップロードに失敗すると `false` を返し、Image は空になります（クリアされます）。ファイルを開く処理やデコードの失敗では Image を変更しません。\n- 呼び出すたびにデコードコンテキストを開くため、連続再生ではなく静止画の取得に使用してください。再生には `load()`、`play()`、`update()` を使用し、高速な近似サムネイルには `extractKeyFrame()` を使用してください。",
-                    "details_ko": "- `VideoPlayer::extractFrame(path, output, timeSec, outDuration)`은 별도의 디코더를 동기적으로 엽니다. 인스턴스 형태인 `player.extractFrame(output, timeSec, outDuration)`은 `getPath()`를 사용하며 경로가 비어 있으면 `false`를 반환합니다.\n- `timeSec`의 단위는 초입니다. 음수는 0이 되고, 알려진 양의 재생 시간을 초과하는 값은 `duration * 0.1f`가 됩니다. `outDuration`이 null이 아니면 재생 시간을 초 단위로 저장하며, 이후 추출에 실패해도 값이 기록되어 있을 수 있습니다.\n- RGBA U8 `Pixels`에 프레임을 추출하면 `true`를 반환하고, 파일 열기나 디코딩에 실패하면 `false`를 반환합니다. 정적 형태의 경로는 디코더에 직접 전달하므로 데이터 디렉터리의 경로를 해석하려면 `getDataPath()`를 사용하세요.\n- macOS와 iOS는 시간 허용 오차를 0으로 요청합니다. Linux와 Windows는 뒤로 탐색한 후 앞으로 디코딩하여 타임스탬프가 목표 시각에 도달한 첫 프레임을 선택합니다. 목표에 도달하지 못한 채 정상적으로 스트림 끝에 도달하면 Windows는 마지막으로 디코딩한 샘플을 유지합니다. Linux는 목표에 도달하지 못하고 디코딩이 소진되면 `false`를 반환합니다.\n- `Pixels` 오버로드는 독립된 디코딩 컨텍스트를 사용하고 GPU에 접근하지 않으므로 출력 저장 공간을 분리하면 백그라운드 스레드에서 실행할 수 있습니다. 인스턴스 오버로드를 실행하는 동안 인스턴스와 소스 경로를 변경하지 마세요.\n- 두 형태 모두 `Image`를 받을 수 있으며 이미지를 할당하고 추출한 픽셀을 텍스처에 업로드합니다. 이 오버로드는 메인 스레드에서 호출해야 합니다. 할당 또는 업로드에 실패하면 `false`를 반환하고 Image는 비워집니다(지워집니다). 파일 열기나 디코딩 실패는 Image를 변경하지 않습니다.\n- 호출할 때마다 새 디코딩 컨텍스트를 열므로 연속 재생이 아닌 정지 이미지 추출에 사용하세요. 재생에는 `load()`, `play()`, `update()`를 사용하고 빠른 근사 썸네일에는 `extractKeyFrame()`을 사용하세요.",
+                    "details": "- Returns display-oriented frames, matching playback and posters. Static and instance Pixels/Image overloads apply the stream rotation.\n- `VideoPlayer::extractFrame(path, output, timeSec, outDuration)` opens a separate decoder synchronously; the instance form `player.extractFrame(output, timeSec, outDuration)` uses `getPath()` and returns `false` if it is empty.\n- `timeSec` is in seconds. Negative values become zero; values beyond a known positive duration become `duration * 0.1f`. A non-null `outDuration` receives the duration in seconds and may be written even if extraction later fails.\n- Returns `true` when a frame is extracted into RGBA U8 `Pixels`; opening or decoding failures return `false`. Static paths are passed directly to the decoder, so use `getDataPath()` when resolving a data-directory path.\n- macOS and iOS request zero time tolerance. Linux and Windows decode forward from a backward seek and select the first frame whose timestamp reaches the target. If the target is not reached, Windows retains the last decoded sample at a clean end-of-stream, while Linux returns `false` when decoding is exhausted.\n- The `Pixels` overloads use independent decode contexts without GPU access and can run on a background thread with separate output storage; keep an instance and its source path stable while using an instance overload.\n- Both forms also accept an `Image`, allocating it and uploading the extracted pixels to its texture. These overloads require the main thread. If allocation or upload fails, they return `false`: On failure the Image is left empty (cleared). Opening or decoding failures return before touching the Image.\n- Each call opens a fresh decode context, so use these helpers for still images rather than continuous playback; use `load()`, `play()`, and `update()` for playback, or `extractKeyFrame()` for a faster approximate thumbnail.",
+                    "details_ja": "- 再生とポスターに一致する表示向きのフレームを返します。静的版とインスタンス版の Pixels/Image はストリームの回転を適用します。\n- `VideoPlayer::extractFrame(path, output, timeSec, outDuration)` は独立したデコーダを同期的に開きます。インスタンス版の `player.extractFrame(output, timeSec, outDuration)` は `getPath()` を使用し、パスが空の場合は `false` を返します。\n- `timeSec` の単位は秒です。負の値はゼロになり、既知の正の動画長を超える値は `duration * 0.1f` になります。`outDuration` が null でなければ動画長を秒単位で格納し、その後の抽出が失敗しても値が書き込まれている場合があります。\n- RGBA U8 の `Pixels` にフレームを抽出できた場合は `true` を返し、ファイルを開けない場合やデコードに失敗した場合は `false` を返します。静的版のパスはデコーダへ直接渡すため、データディレクトリ内のパスを解決する場合は `getDataPath()` を使用してください。\n- macOS と iOS は時刻の許容誤差をゼロにして要求します。Linux と Windows は後方シーク後に前進デコードし、タイムスタンプが指定時刻に達した最初のフレームを選びます。指定時刻に達しないまま正常にストリーム終端になった場合、Windows は最後にデコードしたサンプルを保持します。Linux は指定時刻に達せずデコードが尽きると `false` を返します。\n- `Pixels` 版は独立したデコードコンテキストを使用し、GPU にアクセスしないため、出力先を分ければバックグラウンドスレッドで実行できます。インスタンス版の実行中は、インスタンスとソースパスを変更しないでください。\n- どちらの形式も `Image` を受け取ることができ、画像を確保して抽出したピクセルをテクスチャへアップロードします。この形式はメインスレッドで呼んでください。確保またはアップロードに失敗すると `false` を返し、Image は空になります（クリアされます）。ファイルを開く処理やデコードの失敗では Image を変更しません。\n- 呼び出すたびにデコードコンテキストを開くため、連続再生ではなく静止画の取得に使用してください。再生には `load()`、`play()`、`update()` を使用し、高速な近似サムネイルには `extractKeyFrame()` を使用してください。",
+                    "details_ko": "- 재생 및 포스터와 일치하는 표시 방향의 프레임을 반환합니다. 정적 및 인스턴스 Pixels/Image 오버로드는 스트림 회전을 적용합니다.\n- `VideoPlayer::extractFrame(path, output, timeSec, outDuration)`은 별도의 디코더를 동기적으로 엽니다. 인스턴스 형태인 `player.extractFrame(output, timeSec, outDuration)`은 `getPath()`를 사용하며 경로가 비어 있으면 `false`를 반환합니다.\n- `timeSec`의 단위는 초입니다. 음수는 0이 되고, 알려진 양의 재생 시간을 초과하는 값은 `duration * 0.1f`가 됩니다. `outDuration`이 null이 아니면 재생 시간을 초 단위로 저장하며, 이후 추출에 실패해도 값이 기록되어 있을 수 있습니다.\n- RGBA U8 `Pixels`에 프레임을 추출하면 `true`를 반환하고, 파일 열기나 디코딩에 실패하면 `false`를 반환합니다. 정적 형태의 경로는 디코더에 직접 전달하므로 데이터 디렉터리의 경로를 해석하려면 `getDataPath()`를 사용합니다.\n- macOS와 iOS는 시간 허용 오차를 0으로 요청합니다. Linux와 Windows는 뒤로 탐색한 후 앞으로 디코딩하여 타임스탬프가 목표 시각에 도달한 첫 프레임을 선택합니다. 목표에 도달하지 못한 채 정상적으로 스트림 끝에 도달하면 Windows는 마지막으로 디코딩한 샘플을 유지합니다. Linux는 목표에 도달하지 못하고 디코딩이 소진되면 `false`를 반환합니다.\n- `Pixels` 오버로드는 독립된 디코딩 컨텍스트를 사용하고 GPU에 접근하지 않으므로 출력 저장 공간을 분리하면 백그라운드 스레드에서 실행할 수 있습니다. 인스턴스 오버로드를 실행하는 동안 인스턴스와 소스 경로를 변경하지 않아야 합니다.\n- 두 형태 모두 `Image`를 받을 수 있으며 이미지를 할당하고 추출한 픽셀을 텍스처에 업로드합니다. 이 오버로드는 메인 스레드에서 호출해야 합니다. 할당 또는 업로드에 실패하면 `false`를 반환하고 Image는 비워집니다(지워집니다). 파일 열기나 디코딩 실패는 Image를 변경하지 않습니다.\n- 호출할 때마다 새 디코딩 컨텍스트를 열므로 연속 재생이 아닌 정지 이미지 추출에 사용합니다. 재생에는 `load()`, `play()`, `update()`를 사용하고 빠른 근사 썸네일에는 `extractKeyFrame()`을 사용합니다.",
                     "snippet": "Image poster;\nvoid tcApp::setup() {\n    VideoPlayer::extractFrame(getDataPath(\"movie.mp4\"), poster, 1.0f);\n}\n",
                     "keywords": [
                         "thumbnail",
@@ -70831,9 +71113,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Extracts an approximate frame using a backward keyframe seek.",
-                    "details": "- If Image allocation or upload fails, returns `false`: On failure the Image is left empty (cleared). Opening or decoding failures leave it unchanged.\n- Requests a frame at or before `timeSec` for fast thumbnails and scrub previews; the returned time is approximate.\n- Linux and Windows return the first decoded frame after a backward seek instead of decoding forward to the target; macOS and iOS allow an earlier frame with no forward time tolerance.\n- If the fast extraction fails, retries with exact extraction. At time zero, the helper uses the beginning of the video without a forward search for a later target.\n- Static and instance forms accept either `Pixels` or `Image`. See `VideoPlayer::extractFrame` for signatures, seconds, out-of-range handling, return values, path resolution, threading, GPU upload, and the cost of opening a decoder per call.",
-                    "details_ja": "- Image の確保またはアップロードに失敗すると `false` を返し、Image は空になります（クリアされます）。ファイルを開く処理やデコードの失敗では変更しません。\n- 高速なサムネイルやスクラブプレビュー用に、`timeSec` 以前のフレームを要求します。返されるフレームの時刻は近似です。\n- Linux と Windows は指定時刻まで前進デコードせず、後方シーク後に最初にデコードしたフレームを返します。macOS と iOS は指定時刻より後の許容誤差をゼロにし、それ以前のフレームを許可します。\n- 高速な抽出に失敗した場合は、正確な抽出で再試行します。時刻ゼロでは、後の指定時刻を探す前進デコードを行わず、動画の先頭を使用します。\n- 静的版とインスタンス版は、どちらも `Pixels` または `Image` を受け取ります。シグネチャ、秒単位の指定、範囲外の時刻、戻り値、パス解決、スレッド、GPU アップロード、呼び出しごとにデコーダを開くコストは `VideoPlayer::extractFrame` を参照してください。",
-                    "details_ko": "- Image 할당 또는 업로드에 실패하면 `false`를 반환하고 Image는 비워집니다(지워집니다). 파일 열기나 디코딩 실패는 Image를 변경하지 않습니다.\n- 빠른 썸네일과 스크럽 미리보기를 위해 `timeSec` 이전 또는 같은 시각의 프레임을 요청합니다. 반환되는 프레임의 시각은 근사값입니다.\n- Linux와 Windows는 목표 시각까지 앞으로 디코딩하지 않고 뒤로 탐색한 후 처음 디코딩한 프레임을 반환합니다. macOS와 iOS는 이후 시각의 허용 오차를 0으로 설정하고 이전 프레임을 허용합니다.\n- 빠른 추출에 실패하면 정확한 추출로 다시 시도합니다. 시각이 0이면 이후 목표 시각을 찾는 전진 디코딩 없이 비디오의 시작 부분을 사용합니다.\n- 정적 형태와 인스턴스 형태 모두 `Pixels` 또는 `Image`를 받습니다. 시그니처, 초 단위 지정, 범위 밖 시각 처리, 반환값, 경로 해석, 스레드, GPU 업로드, 호출마다 디코더를 여는 비용은 `VideoPlayer::extractFrame`을 참조하세요.",
+                    "details": "- Returns display-oriented frames, matching playback and posters. Static and instance Pixels/Image overloads apply the stream rotation.\n- If Image allocation or upload fails, returns `false`: On failure the Image is left empty (cleared). Opening or decoding failures leave it unchanged.\n- Requests a frame at or before `timeSec` for fast thumbnails and scrub previews; the returned time is approximate.\n- Linux and Windows return the first decoded frame after a backward seek instead of decoding forward to the target; macOS and iOS allow an earlier frame with no forward time tolerance.\n- If the fast extraction fails, retries with exact extraction. At time zero, the helper uses the beginning of the video without a forward search for a later target.\n- Static and instance forms accept either `Pixels` or `Image`. See `VideoPlayer::extractFrame` for signatures, seconds, out-of-range handling, return values, path resolution, threading, GPU upload, and the cost of opening a decoder per call.",
+                    "details_ja": "- 再生とポスターに一致する表示向きのフレームを返します。静的版とインスタンス版の Pixels/Image はストリームの回転を適用します。\n- Image の確保またはアップロードに失敗すると `false` を返し、Image は空になります（クリアされます）。ファイルを開く処理やデコードの失敗では変更しません。\n- 高速なサムネイルやスクラブプレビュー用に、`timeSec` 以前のフレームを要求します。返されるフレームの時刻は近似です。\n- Linux と Windows は指定時刻まで前進デコードせず、後方シーク後に最初にデコードしたフレームを返します。macOS と iOS は指定時刻より後の許容誤差をゼロにし、それ以前のフレームを許可します。\n- 高速な抽出に失敗した場合は、正確な抽出で再試行します。時刻ゼロでは、後の指定時刻を探す前進デコードを行わず、動画の先頭を使用します。\n- 静的版とインスタンス版は、どちらも `Pixels` または `Image` を受け取ります。シグネチャ、秒単位の指定、範囲外の時刻、戻り値、パス解決、スレッド、GPU アップロード、呼び出しごとにデコーダを開くコストは `VideoPlayer::extractFrame` を参照してください。",
+                    "details_ko": "- 재생 및 포스터와 일치하는 표시 방향의 프레임을 반환합니다. 정적 및 인스턴스 Pixels/Image 오버로드는 스트림 회전을 적용합니다.\n- Image 할당 또는 업로드에 실패하면 `false`를 반환하고 Image는 비워집니다(지워집니다). 파일 열기나 디코딩 실패는 Image를 변경하지 않습니다.\n- 빠른 썸네일과 스크럽 미리보기를 위해 `timeSec` 이전 또는 같은 시각의 프레임을 요청합니다. 반환되는 프레임의 시각은 근사값입니다.\n- Linux와 Windows는 목표 시각까지 앞으로 디코딩하지 않고 뒤로 탐색한 후 처음 디코딩한 프레임을 반환합니다. macOS와 iOS는 이후 시각의 허용 오차를 0으로 설정하고 이전 프레임을 허용합니다.\n- 빠른 추출에 실패하면 정확한 추출로 다시 시도합니다. 시각이 0이면 이후 목표 시각을 찾는 전진 디코딩 없이 비디오의 시작 부분을 사용합니다.\n- 정적 형태와 인스턴스 형태 모두 `Pixels` 또는 `Image`를 받습니다. 시그니처, 초 단위 지정, 범위 밖 시각 처리, 반환값, 경로 해석, 스레드, GPU 업로드, 호출마다 디코더를 여는 비용은 `VideoPlayer::extractFrame`을 참조합니다.",
                     "snippet": "Image poster;\nvoid tcApp::setup() {\n    VideoPlayer::extractKeyFrame(getDataPath(\"movie.mp4\"), poster, 0.0f);\n}\n",
                     "keywords": [
                         "thumbnail",
@@ -71115,9 +71397,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Returns the video height.",
-                    "details": "- Returns the stored video height in pixels as a `float`, independently of the drawing size.\n- The initial value is `0`; closing a loaded `VideoPlayer` resets it to `0`.",
-                    "details_ja": "- 保存されている動画の高さをピクセル単位の `float` で返します。描画サイズには依存しません。\n- 初期値は `0` です。読み込み済みの `VideoPlayer` を閉じると `0` に戻ります。",
-                    "details_ko": "- 저장된 비디오 높이를 픽셀 단위의 `float`로 반환하며 그리기 크기와는 관계가 없습니다.\n- 초기값은 `0`입니다. 로드된 `VideoPlayer`를 닫으면 `0`으로 돌아갑니다.",
+                    "details": "- Standard VideoPlayer reports the display-oriented size (90/270 degrees swap width and height). HAP ignores rotation metadata.\n- Returns the stored video height in pixels as a `float`, independently of the drawing size.\n- The initial value is `0`; closing a loaded `VideoPlayer` resets it to `0`.",
+                    "details_ja": "- 標準 VideoPlayer は表示向きのサイズを返します（90/270 度では幅と高さを交換します）。HAP は回転メタデータを無視します。\n- 保存されている動画の高さをピクセル単位の `float` で返します。描画サイズには依存しません。\n- 初期値は `0` です。読み込み済みの `VideoPlayer` を閉じると `0` に戻ります。",
+                    "details_ko": "- 표준 VideoPlayer는 표시 방향의 크기를 반환합니다(90/270도에서는 너비와 높이가 바뀝니다). HAP은 회전 메타데이터를 무시합니다.\n- 저장된 비디오 높이를 픽셀 단위의 `float`로 반환하며 그리기 크기와는 관계가 없습니다.\n- 초기값은 `0`입니다. 로드된 `VideoPlayer`를 닫으면 `0`으로 돌아갑니다.",
                     "keywords": [
                         "resolution",
                         "size",
@@ -71326,9 +71608,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Returns the video width.",
-                    "details": "- Returns the stored video width in pixels as a `float`, independently of the drawing size.\n- The initial value is `0`; closing a loaded `VideoPlayer` resets it to `0`.",
-                    "details_ja": "- 保存されている動画の幅をピクセル単位の `float` で返します。描画サイズには依存しません。\n- 初期値は `0` です。読み込み済みの `VideoPlayer` を閉じると `0` に戻ります。",
-                    "details_ko": "- 저장된 비디오 너비를 픽셀 단위의 `float`로 반환하며 그리기 크기와는 관계가 없습니다.\n- 초기값은 `0`입니다. 로드된 `VideoPlayer`를 닫으면 `0`으로 돌아갑니다.",
+                    "details": "- Standard VideoPlayer reports the display-oriented size (90/270 degrees swap width and height). HAP ignores rotation metadata.\n- Returns the stored video width in pixels as a `float`, independently of the drawing size.\n- The initial value is `0`; closing a loaded `VideoPlayer` resets it to `0`.",
+                    "details_ja": "- 標準 VideoPlayer は表示向きのサイズを返します（90/270 度では幅と高さを交換します）。HAP は回転メタデータを無視します。\n- 保存されている動画の幅をピクセル単位の `float` で返します。描画サイズには依存しません。\n- 初期値は `0` です。読み込み済みの `VideoPlayer` を閉じると `0` に戻ります。",
+                    "details_ko": "- 표준 VideoPlayer는 표시 방향의 크기를 반환합니다(90/270도에서는 너비와 높이가 바뀝니다). HAP은 회전 메타데이터를 무시합니다.\n- 저장된 비디오 너비를 픽셀 단위의 `float`로 반환하며 그리기 크기와는 관계가 없습니다.\n- 초기값은 `0`입니다. 로드된 `VideoPlayer`를 닫으면 `0`으로 돌아갑니다.",
                     "keywords": [
                         "resolution",
                         "size",
@@ -72903,9 +73185,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Keeps this window drawing while hidden when enabled.",
-                    "details": "- With `true`, update and draw keep running while minimized or fully covered. Use this when `draw()` sends frames to Spout, Syphon, NDI or a recorder. Screen output while hidden is up to the OS.\n- While hidden, frames come from the hidden tick at about the display's base rate (~60 Hz); faster pacing and `swapInterval` aren't kept, while `setFps(30)`/`setFps(60)` still hold. To use another rate while hidden, change it yourself from `events().occludedChanged` (see `setDrawWhileHidden`).\n- The default is `false`: hidden windows keep updating and stop drawing. This window inherits the global default at creation; the last global or per-window call wins. A local call does not change the default for future windows.\n- Call on the main thread. The setting survives App replacement on this Window.\n- On Linux (X11), all windows share one clock: the display of the earliest-created visible window. If that window is hidden, the next visible one takes over. If none is visible, a timer at about 60 Hz paces them. Mixed-refresh displays can change the rate; use `setFps(…)` for a fixed rate. macOS and Windows pace each window to its own display.",
-                    "details_ja": "- `true` にすると、最小化中や完全に覆われている間も更新と描画を続けます。`draw()` から Spout・Syphon・NDI・レコーダーへフレームを送る場合に使います。非表示中に画面へ出力されるかどうかは OS に依存します。\n- 非表示中のフレームは、非表示用の tick によって画面の基本レート（約 60 Hz）で進みます。それより速いペースと `swapInterval` は保たれませんが、`setFps(30)`/`setFps(60)` はそのまま有効です。非表示中に別のレートにしたい場合は、`events().occludedChanged` で自分で切り替えてください（`setDrawWhileHidden` を参照）。\n- 既定値は `false` で、非表示中も更新を続けますが描画は停止します。作成時にグローバルの既定値を引き継ぎ、その後はグローバルとウィンドウ単位の最後の呼び出しが優先されます。この呼び出しは今後作成するウィンドウの既定値を変更しません。\n- メインスレッドで呼び出してください。この Window の App を差し替えても設定を保持します。\n- Linux（X11）では、すべてのウィンドウが、表示中のうち最も早く作成されたウィンドウのディスプレイを共通のクロックに使います。そのウィンドウが非表示になると、次の表示中のウィンドウが引き継ぎます。表示中のウィンドウがなければ、約 60 Hz のタイマーで進みます。リフレッシュレートの異なるディスプレイが混在するとレートが変わるため、固定レートには `setFps(…)` を使います。macOS と Windows では、各ウィンドウがそれぞれのディスプレイに合わせて進みます。",
-                    "details_ko": "- `true`이면 최소화되거나 완전히 가려진 동안에도 업데이트와 그리기를 계속합니다. `draw()`에서 Spout, Syphon, NDI 또는 레코더로 프레임을 보낼 때 사용합니다. 숨겨진 동안 화면에 출력되는지는 OS에 따라 달라집니다.\n- 숨겨진 동안의 프레임은 숨김용 틱에 의해 화면의 기본 레이트(약 60 Hz)로 진행됩니다. 그보다 빠른 페이스와 `swapInterval`은 유지되지 않지만 `setFps(30)`/`setFps(60)`은 그대로 유효합니다. 숨겨진 동안 다른 레이트를 쓰려면 `events().occludedChanged`에서 직접 전환하세요(`setDrawWhileHidden` 참조).\n- 기본값은 `false`이며 숨겨진 윈도우는 업데이트를 계속하고 그리기는 중지합니다. 생성 시 전역 기본값을 상속하며 이후에는 전역 호출과 윈도우별 호출 중 마지막 호출이 우선합니다. 이 호출은 앞으로 생성할 윈도우의 기본값을 변경하지 않습니다.\n- 메인 스레드에서 호출합니다. 이 Window의 App을 교체해도 설정을 유지합니다.\n- Linux(X11)에서는 모든 윈도우가 표시 중인 윈도우 중 가장 먼저 생성된 윈도우의 디스플레이를 공통 클록으로 사용합니다. 해당 윈도우가 숨겨지면 다음 표시 중인 윈도우가 이어받습니다. 표시 중인 윈도우가 없으면 약 60 Hz의 타이머로 진행합니다. 주사율이 다른 디스플레이가 섞여 있으면 레이트가 달라질 수 있으므로 고정 레이트에는 `setFps(…)`를 사용합니다. macOS와 Windows에서는 각 윈도우가 자신의 디스플레이에 맞춰 진행합니다.",
+                    "details": "- With `true`, update and draw keep running while minimized or fully covered. Use this when `draw()` sends frames to Spout, Syphon, NDI or a recorder. Screen output while hidden is up to the OS.\n- While hidden, frames come from the hidden tick at about the display's base rate (~60 Hz); faster pacing and `swapInterval` aren't kept, while `setFps(30)`/`setFps(60)` still hold. To use another rate while hidden, change it yourself from `events().occludedChanged` (see `setDrawWhileHidden`).\n- The default is `false`: hidden windows keep updating and stop drawing. This window inherits the global default at creation; the last global or per-window call wins. A local call does not change the default for future windows.\n- Call on the main thread. The setting survives App replacement on this Window.\n- On Linux (X11), all windows share one clock: the display of the earliest-created visible window. If that window is hidden, the next visible one takes over. If none is visible, a timer at about 60 Hz paces them. Mixed-refresh displays can change the rate; use `setFps(…)` for a fixed rate. macOS and Windows pace each window to its own display. On X11 compositors that throttle covered windows (e.g. labwc/Xwayland on Raspberry Pi), covering the first-created visible window slows every window to ~1 Hz until it's uncovered or minimized. Keep that window uncovered, or minimize or hide it to hand pacing to another window (`getWindow()->setVisible(false);`). Known issue #1367.",
+                    "details_ja": "- `true` にすると、最小化中や完全に覆われている間も更新と描画を続けます。`draw()` から Spout・Syphon・NDI・レコーダーへフレームを送る場合に使います。非表示中に画面へ出力されるかどうかは OS に依存します。\n- 非表示中のフレームは、非表示用の tick によって画面の基本レート（約 60 Hz）で進みます。それより速いペースと `swapInterval` は保たれませんが、`setFps(30)`/`setFps(60)` はそのまま有効です。非表示中に別のレートにしたい場合は、`events().occludedChanged` で自分で切り替えてください（`setDrawWhileHidden` を参照）。\n- 既定値は `false` で、非表示中も更新を続けますが描画は停止します。作成時にグローバルの既定値を引き継ぎ、その後はグローバルとウィンドウ単位の最後の呼び出しが優先されます。この呼び出しは今後作成するウィンドウの既定値を変更しません。\n- メインスレッドで呼び出してください。この Window の App を差し替えても設定を保持します。\n- Linux（X11）では、すべてのウィンドウが、表示中のうち最も早く作成されたウィンドウのディスプレイを共通のクロックに使います。そのウィンドウが非表示になると、次の表示中のウィンドウが引き継ぎます。表示中のウィンドウがなければ、約 60 Hz のタイマーで進みます。リフレッシュレートの異なるディスプレイが混在するとレートが変わるため、固定レートには `setFps(…)` を使います。macOS と Windows では、各ウィンドウがそれぞれのディスプレイに合わせて進みます。覆われたウィンドウを間引く X11 コンポジター（Raspberry Pi の labwc/Xwayland など）では、表示中で最初に作成されたウィンドウを覆うと、覆いを外すか最小化するまですべてのウィンドウが約 1 Hz に落ちます。そのウィンドウを覆わないようにするか、最小化または非表示にして別のウィンドウにペーシングを渡してください（`getWindow()->setVisible(false);`）。既知の問題 #1367 です。",
+                    "details_ko": "- `true`이면 최소화되거나 완전히 가려진 동안에도 업데이트와 그리기를 계속합니다. `draw()`에서 Spout, Syphon, NDI 또는 레코더로 프레임을 보낼 때 사용합니다. 숨겨진 동안 화면에 출력되는지는 OS에 따라 달라집니다.\n- 숨겨진 동안의 프레임은 숨김용 틱에 의해 화면의 기본 레이트(약 60 Hz)로 진행됩니다. 그보다 빠른 페이스와 `swapInterval`은 유지되지 않지만 `setFps(30)`/`setFps(60)`은 그대로 유효합니다. 숨겨진 동안 다른 레이트를 쓰려면 `events().occludedChanged`에서 직접 전환하세요(`setDrawWhileHidden` 참조).\n- 기본값은 `false`이며 숨겨진 윈도우는 업데이트를 계속하고 그리기는 중지합니다. 생성 시 전역 기본값을 상속하며 이후에는 전역 호출과 윈도우별 호출 중 마지막 호출이 우선합니다. 이 호출은 앞으로 생성할 윈도우의 기본값을 변경하지 않습니다.\n- 메인 스레드에서 호출합니다. 이 Window의 App을 교체해도 설정을 유지합니다.\n- Linux(X11)에서는 모든 윈도우가 표시 중인 윈도우 중 가장 먼저 생성된 윈도우의 디스플레이를 공통 클록으로 사용합니다. 해당 윈도우가 숨겨지면 다음 표시 중인 윈도우가 이어받습니다. 표시 중인 윈도우가 없으면 약 60 Hz의 타이머로 진행합니다. 주사율이 다른 디스플레이가 섞여 있으면 레이트가 달라질 수 있으므로 고정 레이트에는 `setFps(…)`를 사용합니다. macOS와 Windows에서는 각 윈도우가 자신의 디스플레이에 맞춰 진행합니다. 가려진 창을 제한하는 X11 컴포지터(Raspberry Pi의 labwc/Xwayland 등)에서는 표시 중 가장 먼저 생성된 창을 가리면 가림을 해제하거나 최소화할 때까지 모든 창이 약 1Hz로 느려집니다. 그 창을 가리지 않거나 최소화 또는 숨겨서 다른 창에 페이싱을 넘기십시오(`getWindow()->setVisible(false);`). 알려진 문제 #1367입니다.",
                     "snippet": "window->setDrawWhileHidden(true);\n",
                     "keywords": [
                         "hidden",
@@ -72932,9 +73214,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Sets this window's target frame rate.",
-                    "details": "- Sets synchronized update/draw pacing for this window, including main. `VSYNC` (-1, default) follows the OS tick source, `EVENT_DRIVEN` (0) draws on `redraw()`, and a positive rate skips native ticks as needed. Drawing runs at most once per native tick.\n- From this window's callbacks, `setIndependentFps()` and `redraw()` use the same scheduler. `getFps()` returns the draw target; `getFrameRate()` measures updates without changing its samples.\n- For main-thread requirements, see `Window::setApp`.\n- On Linux (X11), all windows share one clock: the display of the earliest-created visible window. If that window is hidden, the next visible one takes over. If none is visible, a timer at about 60 Hz paces them. Mixed-refresh displays can change the rate; use `setFps(…)` for a fixed rate. macOS and Windows pace each window to its own display.",
-                    "details_ja": "- メインを含むこのウィンドウの update/draw を同期して設定します。`VSYNC`（-1、既定）は OS の tick に従い、`EVENT_DRIVEN`（0）は `redraw()` で描画し、正の値では必要な tick を間引きます。描画は native tick ごとに最大 1 回です。\n- このウィンドウのコールバック内の `setIndependentFps()` と `redraw()` も同じスケジューラを使います。`getFps()` は描画の目標値、`getFrameRate()` はサンプルを変更しない実測の更新レートです。\n- メインスレッドでの使用は `Window::setApp` を参照してください。\n- Linux（X11）では、すべてのウィンドウが、表示中のうち最も早く作成されたウィンドウのディスプレイを共通のクロックに使います。そのウィンドウが非表示になると、次の表示中のウィンドウが引き継ぎます。表示中のウィンドウがなければ、約 60 Hz のタイマーで進みます。リフレッシュレートの異なるディスプレイが混在するとレートが変わるため、固定レートには `setFps(…)` を使います。macOS と Windows では、各ウィンドウがそれぞれのディスプレイに合わせて進みます。",
-                    "details_ko": "- 메인을 포함한 이 윈도우의 update/draw를 동기화하여 설정합니다. `VSYNC`(-1, 기본값)는 OS 틱을 따르고, `EVENT_DRIVEN`(0)은 `redraw()`로 그리며, 양수는 필요한 틱을 건너뜁니다. 네이티브 틱당 최대 한 번 그립니다.\n- 이 윈도우의 콜백에서 `setIndependentFps()`와 `redraw()`도 같은 스케줄러를 사용합니다. `getFps()`는 그리기 목표값이며 `getFrameRate()`는 샘플을 변경하지 않는 실측 업데이트 빈도입니다.\n- 메인 스레드 사용 규칙은 `Window::setApp`을 참조하세요.\n- Linux(X11)에서는 모든 윈도우가 표시 중인 윈도우 중 가장 먼저 생성된 윈도우의 디스플레이를 공통 클록으로 사용합니다. 해당 윈도우가 숨겨지면 다음 표시 중인 윈도우가 이어받습니다. 표시 중인 윈도우가 없으면 약 60 Hz의 타이머로 진행합니다. 주사율이 다른 디스플레이가 섞여 있으면 레이트가 달라질 수 있으므로 고정 레이트에는 `setFps(…)`를 사용합니다. macOS와 Windows에서는 각 윈도우가 자신의 디스플레이에 맞춰 진행합니다.",
+                    "details": "- Sets synchronized update/draw pacing for this window, including main. `VSYNC` (-1, default) follows the OS tick source, `EVENT_DRIVEN` (0) draws on `redraw()`, and a positive rate skips native ticks as needed. Drawing runs at most once per native tick.\n- From this window's callbacks, `setIndependentFps()` and `redraw()` use the same scheduler. `getFps()` returns the draw target; `getFrameRate()` measures updates without changing its samples.\n- For main-thread requirements, see `Window::setApp`.\n- On Linux (X11), all windows share one clock: the display of the earliest-created visible window. If that window is hidden, the next visible one takes over. If none is visible, a timer at about 60 Hz paces them. Mixed-refresh displays can change the rate; use `setFps(…)` for a fixed rate. macOS and Windows pace each window to its own display. On X11 compositors that throttle covered windows (e.g. labwc/Xwayland on Raspberry Pi), covering the first-created visible window slows every window to ~1 Hz until it's uncovered or minimized. Keep that window uncovered, or minimize or hide it to hand pacing to another window (`getWindow()->setVisible(false);`). Known issue #1367.",
+                    "details_ja": "- メインを含むこのウィンドウの update/draw を同期して設定します。`VSYNC`（-1、既定）は OS の tick に従い、`EVENT_DRIVEN`（0）は `redraw()` で描画し、正の値では必要な tick を間引きます。描画は native tick ごとに最大 1 回です。\n- このウィンドウのコールバック内の `setIndependentFps()` と `redraw()` も同じスケジューラを使います。`getFps()` は描画の目標値、`getFrameRate()` はサンプルを変更しない実測の更新レートです。\n- メインスレッドでの使用は `Window::setApp` を参照してください。\n- Linux（X11）では、すべてのウィンドウが、表示中のうち最も早く作成されたウィンドウのディスプレイを共通のクロックに使います。そのウィンドウが非表示になると、次の表示中のウィンドウが引き継ぎます。表示中のウィンドウがなければ、約 60 Hz のタイマーで進みます。リフレッシュレートの異なるディスプレイが混在するとレートが変わるため、固定レートには `setFps(…)` を使います。macOS と Windows では、各ウィンドウがそれぞれのディスプレイに合わせて進みます。覆われたウィンドウを間引く X11 コンポジター（Raspberry Pi の labwc/Xwayland など）では、表示中で最初に作成されたウィンドウを覆うと、覆いを外すか最小化するまですべてのウィンドウが約 1 Hz に落ちます。そのウィンドウを覆わないようにするか、最小化または非表示にして別のウィンドウにペーシングを渡してください（`getWindow()->setVisible(false);`）。既知の問題 #1367 です。",
+                    "details_ko": "- 메인을 포함한 이 윈도우의 update/draw를 동기화하여 설정합니다. `VSYNC`(-1, 기본값)는 OS 틱을 따르고, `EVENT_DRIVEN`(0)은 `redraw()`로 그리며, 양수는 필요한 틱을 건너뜁니다. 네이티브 틱당 최대 한 번 그립니다.\n- 이 윈도우의 콜백에서 `setIndependentFps()`와 `redraw()`도 같은 스케줄러를 사용합니다. `getFps()`는 그리기 목표값이며 `getFrameRate()`는 샘플을 변경하지 않는 실측 업데이트 빈도입니다.\n- 메인 스레드 사용 규칙은 `Window::setApp`을 참조하세요.\n- Linux(X11)에서는 모든 윈도우가 표시 중인 윈도우 중 가장 먼저 생성된 윈도우의 디스플레이를 공통 클록으로 사용합니다. 해당 윈도우가 숨겨지면 다음 표시 중인 윈도우가 이어받습니다. 표시 중인 윈도우가 없으면 약 60 Hz의 타이머로 진행합니다. 주사율이 다른 디스플레이가 섞여 있으면 레이트가 달라질 수 있으므로 고정 레이트에는 `setFps(…)`를 사용합니다. macOS와 Windows에서는 각 윈도우가 자신의 디스플레이에 맞춰 진행합니다. 가려진 창을 제한하는 X11 컴포지터(Raspberry Pi의 labwc/Xwayland 등)에서는 표시 중 가장 먼저 생성된 창을 가리면 가림을 해제하거나 최소화할 때까지 모든 창이 약 1Hz로 느려집니다. 그 창을 가리지 않거나 최소화 또는 숨겨서 다른 창에 페이싱을 넘기십시오(`getWindow()->setVisible(false);`). 알려진 문제 #1367입니다.",
                     "keywords": [
                         "frame rate",
                         "framerate",
