@@ -251,6 +251,19 @@
           "width": 960,
           "height": 760,
           "webSupported": true
+        },
+        {
+          "name": "stencilExample",
+          "width": 960,
+          "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "grabScreenExample",
+          "width": 800,
+          "height": 500,
+          "webSupported": false,
+          "autoScreenshot": false
         }
       ]
     },
@@ -469,6 +482,12 @@
           "name": "uiExample",
           "width": 960,
           "height": 600,
+          "webSupported": true
+        },
+        {
+          "name": "customModExample",
+          "width": 640,
+          "height": 400,
           "webSupported": true
         }
       ]
