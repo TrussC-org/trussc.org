@@ -416,6 +416,13 @@
           "width": 960,
           "height": 600,
           "webSupported": false
+        },
+        {
+          "name": "phonePanelExample",
+          "width": 1280,
+          "height": 720,
+          "webSupported": false,
+          "autoScreenshot": false
         }
       ]
     },
@@ -605,6 +612,13 @@
           "width": 1040,
           "height": 860,
           "webSupported": true
+        },
+        {
+          "name": "colorToolExample",
+          "width": 640,
+          "height": 200,
+          "webSupported": false,
+          "autoScreenshot": false
         }
       ]
     },
