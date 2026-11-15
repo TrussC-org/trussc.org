@@ -7681,55 +7681,6 @@ const TrussCAPI = {
             "name_ko": "그래픽 - 텍스처 & GPU"
         },
         {
-            "name": "Graphics - FBO",
-            "functions": [
-                {
-                    "name": "beginStencil",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "boolean",
-                    "desc": "Borrows all eight stencil bits on the current drawing target.",
-                    "keywords": [
-                        "stencil",
-                        "ownership",
-                        "mask"
-                    ],
-                    "desc_ja": "現在の描画先の stencil の全 8 ビットを借り受けます。",
-                    "desc_ko": "현재 그리기 타깃의 스텐실 전체 8비트를 빌립니다."
-                },
-                {
-                    "name": "clearStencil",
-                    "params": "value",
-                    "params_typed": "value = 0",
-                    "return_type": "(nothing)",
-                    "desc": "Replaces all stencil bytes with a plain value while owned.",
-                    "keywords": [
-                        "stencil",
-                        "clear",
-                        "byte"
-                    ],
-                    "desc_ja": "所有中の stencil の全バイトを通常の値で置き換えます。",
-                    "desc_ko": "소유 중인 스텐실의 모든 바이트를 일반 값으로 바꿉니다."
-                },
-                {
-                    "name": "endStencil",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "(nothing)",
-                    "desc": "Returns the whole stencil to 0, ends ownership and restores the saved framework state.",
-                    "keywords": [
-                        "stencil",
-                        "restore",
-                        "ownership"
-                    ],
-                    "desc_ja": "stencil 全体を 0 に戻して所有権を返却し、保存したフレームワークの状態を復元します。",
-                    "desc_ko": "스텐실 전체를 0으로 되돌리고 소유권을 반환하며 저장한 프레임워크 상태를 복원합니다."
-                }
-            ],
-            "name_ja": "グラフィックス - FBO",
-            "name_ko": "그래픽 - FBO"
-        },
-        {
             "name": "Graphics - Shader",
             "functions": [
                 {
@@ -7802,8 +7753,8 @@ const TrussCAPI = {
                         "lan",
                         "host"
                     ],
-                    "desc_ja": "優先順位に従って選んだローカル IP アドレスを返す。",
-                    "desc_ko": "우선순위에 따라 선택한 로컬 IP 주소를 반환한다."
+                    "desc_ja": "優先順位に従って選んだローカル IP アドレスを返します。",
+                    "desc_ko": "우선순위에 따라 선택한 로컬 IP 주소를 반환합니다."
                 },
                 {
                     "name": "getLocalIps",
@@ -7973,6 +7924,20 @@ const TrussCAPI = {
                     "desc_ko": "역쌍곡탄젠트를 반환한다."
                 },
                 {
+                    "name": "clearStencil",
+                    "params": "value",
+                    "params_typed": "value = 0",
+                    "return_type": "(nothing)",
+                    "desc": "Replaces the entire stencil attachment with a byte, without a begin call.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "desc_ja": "開始呼び出しなしで stencil 添付画像全体を指定バイトに置き換えます。",
+                    "desc_ko": "시작 호출 없이 스텐실 첨부 전체를 지정한 바이트로 바꿉니다."
+                },
+                {
                     "name": "createWindow",
                     "params": "settings",
                     "params_typed": "settings = {}",
@@ -8080,6 +8045,20 @@ const TrussCAPI = {
                     "desc_ko": "현재 그리기 대상의 너비와 높이를 Vec2로 반환한다."
                 },
                 {
+                    "name": "getStencilDesc",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "StencilDesc",
+                    "desc": "Returns the current stencil Style descriptor.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "desc_ja": "現在の Style の stencil 設定を返します。",
+                    "desc_ko": "현재 Style의 스텐실 설정을 반환합니다."
+                },
+                {
                     "name": "getViewMatrix",
                     "params": "",
                     "params_typed": "",
@@ -8160,6 +8139,20 @@ const TrussCAPI = {
                     "desc_ko": "IEEE 방식의 부동소수점 나머지를 반환한다."
                 },
                 {
+                    "name": "resetStencilDesc",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "(nothing)",
+                    "desc": "Restores the default stencil descriptor without clearing stored bytes or other Style state.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "desc_ja": "保存値や Style の他の状態を変えずに stencil 設定を既定に戻します。",
+                    "desc_ko": "저장된 바이트나 다른 Style 상태를 바꾸지 않고 스텐실 설정을 기본값으로 되돌립니다."
+                },
+                {
                     "name": "runtime",
                     "params": "",
                     "params_typed": "",
@@ -8222,6 +8215,20 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "リソース読み込みを同時に準備する件数を設定します。",
                     "desc_ko": "리소스 로드를 동시에 준비하는 개수를 설정합니다."
+                },
+                {
+                    "name": "setStencilDesc",
+                    "params": "desc",
+                    "params_typed": "desc",
+                    "return_type": "(nothing)",
+                    "desc": "Applies one stencil descriptor to subsequent drawing as Style state.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "desc_ja": "以降の描画に使う stencil 設定を Style の状態として適用します。",
+                    "desc_ko": "이후 그리기에 사용할 스텐실 설정을 Style 상태로 적용합니다."
                 },
                 {
                     "name": "tanh",
@@ -13357,9 +13364,9 @@ const TrussCAPI = {
                     "signatures": [
                         "pixels"
                     ],
-                    "desc": "Reads the framebuffer's stencil bytes into one-channel U8 Pixels.",
-                    "desc_ja": "フレームバッファの stencil 値を 1 チャンネル U8 の Pixels に読み出します。",
-                    "desc_ko": "프레임버퍼의 스텐실 값을 1채널 U8 Pixels로 읽습니다."
+                    "desc": "Reads ended single-sample Fbo stencil bytes into one-channel U8 Pixels for debugging.",
+                    "desc_ja": "end 後のシングルサンプル Fbo の stencil 値をデバッグ用の 1 チャンネル U8 Pixels に読み出します。",
+                    "desc_ko": "종료된 단일 샘플 Fbo의 스텐실 바이트를 디버깅용 1채널 U8 Pixels로 읽습니다."
                 },
                 {
                     "name": "fbo:copyTo",
@@ -13489,9 +13496,9 @@ const TrussCAPI = {
                     "signatures": [
                         "x, y"
                     ],
-                    "desc": "Draws the framebuffer's stencil bytes as an opaque gray image.",
-                    "desc_ja": "フレームバッファの stencil 値を不透明なグレー画像として描画します。",
-                    "desc_ko": "프레임버퍼의 스텐실 값을 불투명한 회색 이미지로 그립니다."
+                    "desc": "Draws ended single-sample Fbo stencil bytes as an opaque gray image for debugging.",
+                    "desc_ja": "end 後のシングルサンプル Fbo の stencil 値をデバッグ用の不透明なグレー画像で描きます。",
+                    "desc_ko": "종료된 단일 샘플 Fbo의 스텐실 바이트를 디버깅용 불투명 회색 이미지로 그립니다."
                 },
                 {
                     "name": "fbo:getColorImage",
@@ -13857,8 +13864,8 @@ const TrussCAPI = {
                 "ttf",
                 "of true type font"
             ],
-            "desc_ja": "TrueType フォントによる文字描画とテキストの配置を行う。",
-            "desc_ko": "트루타입 폰트로 텍스트를 렌더링하고 배치한다.",
+            "desc_ja": "TrueType フォントによる文字描画とテキストの配置を行います。",
+            "desc_ko": "트루타입 폰트로 텍스트를 렌더링하고 배치합니다.",
             "related": [
                 "Font::drawString",
                 "Font::getStringPath",
@@ -13891,6 +13898,18 @@ const TrussCAPI = {
                     "desc": "Clears the font's cached glyphs and atlas pages.",
                     "desc_ja": "フォントのキャッシュ済みグリフとアトラスページを消去する。",
                     "desc_ko": "폰트의 캐시된 글리프와 아틀라스 페이지를 지운다."
+                },
+                {
+                    "name": "font:compactAtlas",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Schedules a merge of frozen font atlas pages.",
+                    "desc_ja": "固定済みのフォントアトラスページの結合を予約します。",
+                    "desc_ko": "고정된 폰트 아틀라스 페이지의 병합을 예약합니다."
                 },
                 {
                     "name": "font:drawString",
@@ -29803,6 +29822,113 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "StencilDesc",
+            "desc": "Sets stencil comparison, writing and color output for drawing; the default leaves stencil unchanged.",
+            "keywords": [
+                "stencil",
+                "mask",
+                "style"
+            ],
+            "desc_ja": "描画の stencil 比較・書き込み・色出力を指定します。既定では stencil を変更しません。",
+            "desc_ko": "그리기의 스텐실 비교, 쓰기, 색상 출력을 지정합니다. 기본값은 스텐실을 변경하지 않습니다.",
+            "related": [
+                "setStencilDesc",
+                "clearStencil",
+                "StencilDesc::drawOnce",
+                "StencilDesc::shape",
+                "StencilDesc::inside",
+                "StencilDesc::outside",
+                "Node"
+            ],
+            "properties": [
+                {
+                    "name": "stencilDesc.colorWrite",
+                    "type": "boolean",
+                    "desc": "Enables color output independently of stencil/depth writes; defaults to true.",
+                    "desc_ja": "stencil・深度の書き込みとは独立した色出力の有効指定です。既定値は true です。",
+                    "desc_ko": "스텐실·깊이 쓰기와 별개로 색상 출력을 활성화합니다. 기본값은 true입니다."
+                },
+                {
+                    "name": "stencilDesc.mask",
+                    "type": "number",
+                    "desc": "Shared 8-bit comparison and write mask; defaults to 0xFF.",
+                    "desc_ja": "比較と書き込みに共通の 8 ビットマスクです。既定値は 0xFF です。",
+                    "desc_ko": "비교와 쓰기에 공통으로 사용하는 8비트 마스크입니다. 기본값은 0xFF입니다."
+                },
+                {
+                    "name": "stencilDesc.test",
+                    "type": "StencilTest",
+                    "desc": "Comparison of masked value against the masked stored byte; defaults to Always.",
+                    "desc_ja": "マスク後の value を保存値と比較する方法です。既定値は Always です。",
+                    "desc_ko": "마스크된 value와 저장된 바이트의 비교 방법입니다. 기본값은 Always입니다."
+                },
+                {
+                    "name": "stencilDesc.value",
+                    "type": "number",
+                    "desc": "Reference byte used for comparison and replacement; defaults to 0.",
+                    "desc_ja": "比較と置換に使う参照バイトです。既定値は 0 です。",
+                    "desc_ko": "비교와 교체에 쓰는 참조 바이트입니다. 기본값은 0입니다."
+                },
+                {
+                    "name": "stencilDesc.write",
+                    "type": "boolean",
+                    "desc": "Replaces masked stencil bits on stencil/depth pass when true; defaults to false.",
+                    "desc_ja": "true のとき stencil と深度を通過した場所のビットを置換します。既定値は false です。",
+                    "desc_ko": "true이면 스텐실·깊이 검사를 통과한 곳의 비트를 교체합니다. 기본값은 false입니다."
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "StencilDesc.drawOnce",
+                    "signatures": [
+                        {
+                            "ret": "StencilDesc",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Prevents self-overlapping translucent or additive fills and strokes from double-blending; requires clearStencil and a stencil attachment.",
+                    "desc_ja": "半透明や加算合成の塗り・線の自己重複による二重合成を防ぎます。clearStencil と stencil 添付画像が必要です。",
+                    "desc_ko": "반투명 또는 가산 합성 채우기·선의 자기 겹침으로 인한 이중 합성을 막습니다. clearStencil과 스텐실 첨부가 필요합니다."
+                },
+                {
+                    "name": "StencilDesc.inside",
+                    "signatures": [
+                        {
+                            "ret": "StencilDesc",
+                            "params": "value = 1, mask = 255"
+                        }
+                    ],
+                    "desc": "Creates a read-only stencil descriptor that draws where the masked reference and stored byte match.",
+                    "desc_ja": "マスク後の参照値と保存値が等しい場所に描く、stencil を変更しない設定を作ります。",
+                    "desc_ko": "마스크된 참조 값과 저장 값이 같은 곳에 그리는 읽기 전용 설정을 만듭니다."
+                },
+                {
+                    "name": "StencilDesc.outside",
+                    "signatures": [
+                        {
+                            "ret": "StencilDesc",
+                            "params": "value = 1, mask = 255"
+                        }
+                    ],
+                    "desc": "Creates a read-only stencil descriptor that draws where the masked reference and stored byte differ.",
+                    "desc_ja": "マスク後の参照値と保存値が異なる場所に描く、stencil を変更しない設定を作ります。",
+                    "desc_ko": "마스크된 참조 값과 저장 값이 다른 곳에 그리는 읽기 전용 설정을 만듭니다."
+                },
+                {
+                    "name": "StencilDesc.shape",
+                    "signatures": [
+                        {
+                            "ret": "StencilDesc",
+                            "params": "value = 1, mask = 255"
+                        }
+                    ],
+                    "desc": "Creates a stencil-writing descriptor with color output disabled.",
+                    "desc_ja": "色出力を止め、stencil を書き込む設定を作ります。",
+                    "desc_ko": "색상 출력을 막고 스텐실을 기록하는 설정을 만듭니다."
+                }
+            ]
+        },
+        {
             "name": "StrokeMesh",
             "desc": "Builds triangle geometry for variable-width polyline strokes.",
             "keywords": [
@@ -39112,6 +39238,78 @@ const TrussCAPI = {
                 "TcpSendCompleteEventArgs",
                 "TcpServer::sendAsync",
                 "TcpClient::sendAsync"
+            ]
+        },
+        {
+            "name": "StencilTest",
+            "desc": "Selects the comparison between masked reference and stored stencil bytes.",
+            "keywords": [
+                "stencil",
+                "mask",
+                "style"
+            ],
+            "values": [
+                {
+                    "name": "Always",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Never",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Less",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Equal",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "LessEqual",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Greater",
+                    "value": 5,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "NotEqual",
+                    "value": 6,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "GreaterEqual",
+                    "value": 7,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "マスク後の参照値と保存済み stencil 値の比較を選びます。",
+            "desc_ko": "마스크된 참조 값과 저장된 스텐실 바이트의 비교를 선택합니다.",
+            "related": [
+                "StencilDesc::test"
             ]
         },
         {

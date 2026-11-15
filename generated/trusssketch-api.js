@@ -222,6 +222,11 @@ const TrussSketchAPI = {
    "name": "graphics",
    "functions": [
     {
+     "name": "clearStencil",
+     "snippet": "clearStencil()",
+     "desc": "Replaces the entire stencil attachment with a byte, without a begin call."
+    },
+    {
      "name": "getCustomBlendDesc",
      "snippet": "getCustomBlendDesc()",
      "desc": "Returns a copy of the custom blend slot, regardless of the active mode."
@@ -242,6 +247,11 @@ const TrussSketchAPI = {
      "desc": "Returns the width and height of the active drawing target as a Vec2."
     },
     {
+     "name": "getStencilDesc",
+     "snippet": "getStencilDesc()",
+     "desc": "Returns the current stencil Style descriptor."
+    },
+    {
      "name": "getViewMatrix",
      "snippet": "getViewMatrix()",
      "desc": "Returns the current drawing target's camera view matrix."
@@ -252,9 +262,19 @@ const TrussSketchAPI = {
      "desc": "Returns the current drawing target's width."
     },
     {
+     "name": "resetStencilDesc",
+     "snippet": "resetStencilDesc()",
+     "desc": "Restores the default stencil descriptor without clearing stored bytes or other Style state."
+    },
+    {
      "name": "setCustomBlendDesc",
      "snippet": "setCustomBlendDesc(${1:desc})",
      "desc": "Stores a blend equation and source-conversion flag; updates an active Custom mode immediately."
+    },
+    {
+     "name": "setStencilDesc",
+     "snippet": "setStencilDesc(${1:desc})",
+     "desc": "Applies one stencil descriptor to subsequent drawing as Style state."
     }
    ]
   },
@@ -460,26 +480,6 @@ const TrussSketchAPI = {
      "name": "srgbToLinear",
      "snippet": "srgbToLinear(${1:x})",
      "desc": "Convert a single sRGB channel value to linear RGB."
-    }
-   ]
-  },
-  {
-   "name": "graphics_fbo",
-   "functions": [
-    {
-     "name": "beginStencil",
-     "snippet": "beginStencil()",
-     "desc": "Borrows all eight stencil bits on the current drawing target."
-    },
-    {
-     "name": "clearStencil",
-     "snippet": "clearStencil()",
-     "desc": "Replaces all stencil bytes with a plain value while owned."
-    },
-    {
-     "name": "endStencil",
-     "snippet": "endStencil()",
-     "desc": "Returns the whole stencil to 0, ends ownership and restores the saved framework state."
     }
    ]
   },
@@ -6629,7 +6629,7 @@ const TrussSketchAPI = {
      "name": "readStencil",
      "snippet": "readStencil(${1:pixels})",
      "return": "bool",
-     "desc": "Reads the framebuffer's stencil bytes into one-channel U8 Pixels."
+     "desc": "Reads ended single-sample Fbo stencil bytes into one-channel U8 Pixels for debugging."
     },
     {
      "name": "copyTo",
@@ -6707,7 +6707,7 @@ const TrussSketchAPI = {
      "name": "drawStencil",
      "snippet": "drawStencil(${1:x}, ${2:y})",
      "return": "void",
-     "desc": "Draws the framebuffer's stencil bytes as an opaque gray image."
+     "desc": "Draws ended single-sample Fbo stencil bytes as an opaque gray image for debugging."
     },
     {
      "name": "getColorImage",
@@ -6899,6 +6899,12 @@ const TrussSketchAPI = {
      "snippet": "clearAtlas()",
      "return": "void",
      "desc": "Clears the font's cached glyphs and atlas pages."
+    },
+    {
+     "name": "compactAtlas",
+     "snippet": "compactAtlas()",
+     "return": "void",
+     "desc": "Schedules a merge of frozen font atlas pages."
     },
     {
      "name": "drawString",
@@ -15407,6 +15413,117 @@ const TrussSketchAPI = {
      "snippet": "loadStream(${1:path})",
      "return": "LoadResult",
      "desc": "Prepares an audio file for streaming playback."
+    }
+   ]
+  },
+  {
+   "name": "StencilDesc",
+   "desc": "Sets stencil comparison, writing and color output for drawing; the default leaves stencil unchanged.",
+   "properties": [
+    {
+     "name": "colorWrite",
+     "type": "bool",
+     "desc": "Enables color output independently of stencil/depth writes; defaults to true."
+    },
+    {
+     "name": "mask",
+     "type": "uint8_t",
+     "desc": "Shared 8-bit comparison and write mask; defaults to 0xFF."
+    },
+    {
+     "name": "test",
+     "type": "StencilTest",
+     "desc": "Comparison of masked value against the masked stored byte; defaults to Always."
+    },
+    {
+     "name": "value",
+     "type": "uint8_t",
+     "desc": "Reference byte used for comparison and replacement; defaults to 0."
+    },
+    {
+     "name": "write",
+     "type": "bool",
+     "desc": "Replaces masked stencil bits on stencil/depth pass when true; defaults to false."
+    }
+   ],
+   "static_methods": [
+    {
+     "name": "drawOnce",
+     "snippet": "drawOnce()",
+     "return": "StencilDesc",
+     "desc": "Prevents self-overlapping translucent or additive fills and strokes from double-blending; requires clearStencil and a stencil attachment."
+    },
+    {
+     "name": "inside",
+     "snippet": "inside()",
+     "return": "StencilDesc",
+     "desc": "Creates a read-only stencil descriptor that draws where the masked reference and stored byte match."
+    },
+    {
+     "name": "outside",
+     "snippet": "outside()",
+     "return": "StencilDesc",
+     "desc": "Creates a read-only stencil descriptor that draws where the masked reference and stored byte differ."
+    },
+    {
+     "name": "shape",
+     "snippet": "shape()",
+     "return": "StencilDesc",
+     "desc": "Creates a stencil-writing descriptor with color output disabled."
+    }
+   ]
+  },
+  {
+   "name": "StencilTest",
+   "desc": "Selects the comparison between masked reference and stored stencil bytes.",
+   "static_methods": [
+    {
+     "name": "Always",
+     "snippet": "Always",
+     "return": "StencilTest",
+     "desc": "= 0"
+    },
+    {
+     "name": "Never",
+     "snippet": "Never",
+     "return": "StencilTest",
+     "desc": "= 1"
+    },
+    {
+     "name": "Less",
+     "snippet": "Less",
+     "return": "StencilTest",
+     "desc": "= 2"
+    },
+    {
+     "name": "Equal",
+     "snippet": "Equal",
+     "return": "StencilTest",
+     "desc": "= 3"
+    },
+    {
+     "name": "LessEqual",
+     "snippet": "LessEqual",
+     "return": "StencilTest",
+     "desc": "= 4"
+    },
+    {
+     "name": "Greater",
+     "snippet": "Greater",
+     "return": "StencilTest",
+     "desc": "= 5"
+    },
+    {
+     "name": "NotEqual",
+     "snippet": "NotEqual",
+     "return": "StencilTest",
+     "desc": "= 6"
+    },
+    {
+     "name": "GreaterEqual",
+     "snippet": "GreaterEqual",
+     "return": "StencilTest",
+     "desc": "= 7"
     }
    ]
   },

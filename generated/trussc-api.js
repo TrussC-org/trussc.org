@@ -5570,6 +5570,10 @@ const TrussCAPI = {
                     "snippet": "void tcApp::draw() {\n    Vec2 pos = getMousePos();\n    drawCircle(pos.x, pos.y, 12.0f);\n}\n",
                     "examples": [
                         {
+                            "name": "customModExample",
+                            "group": "node"
+                        },
+                        {
                             "name": "AllFeaturesExample",
                             "group": "tests"
                         }
@@ -8413,6 +8417,10 @@ const TrussCAPI = {
                         {
                             "name": "vectorMathExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "customModExample",
+                            "group": "node"
                         }
                     ]
                 },
@@ -8448,6 +8456,10 @@ const TrussCAPI = {
                         {
                             "name": "vectorMathExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "customModExample",
+                            "group": "node"
                         }
                     ]
                 },
@@ -8483,6 +8495,10 @@ const TrussCAPI = {
                         {
                             "name": "vectorMathExample",
                             "group": "math"
+                        },
+                        {
+                            "name": "customModExample",
+                            "group": "node"
                         }
                     ]
                 },
@@ -17580,99 +17596,6 @@ const TrussCAPI = {
             "name_ko": "그래픽 - 텍스처 & GPU"
         },
         {
-            "name": "Graphics - FBO",
-            "functions": [
-                {
-                    "name": "beginStencil",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "bool",
-                    "desc": "Borrows all eight stencil bits on the current drawing target.",
-                    "keywords": [
-                        "stencil",
-                        "ownership",
-                        "mask"
-                    ],
-                    "desc_ja": "現在の描画先の stencil の全 8 ビットを借り受けます。",
-                    "desc_ko": "현재 그리기 타깃의 스텐실 전체 8비트를 빌립니다.",
-                    "related": [
-                        "clearStencil",
-                        "endStencil",
-                        "Fbo::readStencil"
-                    ],
-                    "details": "- Returns `true` on success without clearing stored bytes. Pair `endStencil()` only with a successful begin, while that target is current. Ownership is independent per target and may span Fbo end/begin calls and frames. Fbo allocation initializes stencil to zero; reallocation resets ownership.\n- Returns `false` with a warning when there is no stencil attachment, the target is already owned, or a framework stencil clip scope is active. There is no shared user mode.\n- While owned, values are plain bytes 0–255. Framework stencil clipping and draw-once are suspended; scissor still works. Slice 2a provides uniform clearing; geometry writing and value testing come later.\n- endStencil returns the stencil to 0; read it with readStencil before endStencil if you need the values. It restores saved semantic state, without restoring previous pixels. Fbo bytes persist across frames and color/depth clears; screen persistence is not guaranteed.",
-                    "details_ja": "- 保存済みの値をクリアせず、成功時に `true` を返します。成功した場合だけ、その描画先が現在の描画先である間に `endStencil()` を呼びます。所有権は描画先ごとに独立し、Fbo の end/begin やフレームをまたいで保持できます。Fbo の確保時に stencil をゼロで初期化し、再確保時に所有権をリセットします。\n- stencil 添付画像がない場合、すでに所有中の場合、フレームワークの stencil クリップスコープが有効な場合は、警告して `false` を返します。ユーザー用の共有モードはありません。\n- 所有中の値は 0〜255 の通常のバイト値です。フレームワークの stencil クリップと draw-once は停止しますが、scissor は使えます。2a では一様なクリアを提供し、形状の書き込みと値のテストは後の段階で追加します。\n- endStencil は stencil を 0 に戻します。値が必要な場合は、endStencil の前に readStencil で読み取ってください。保存した意味上の状態を復元しますが、以前のピクセル値は復元しません。Fbo の値はフレームや色・深度のクリアをまたいで保持しますが、画面の保持は保証しません。",
-                    "details_ko": "- 저장된 값을 지우지 않고 성공 시 `true`를 반환합니다. 성공한 경우에만 해당 타깃이 현재 타깃일 때 `endStencil()`을 호출합니다. 소유권은 타깃별로 독립적이며 Fbo의 end/begin 호출과 프레임을 넘어 유지할 수 있습니다. Fbo 할당 시 스텐실을 0으로 초기화하고 재할당 시 소유권을 초기화합니다.\n- 스텐실 첨부 이미지가 없거나 이미 소유 중이거나 프레임워크 스텐실 클립 스코프가 활성화된 경우 경고하고 `false`를 반환합니다. 사용자 공유 모드는 없습니다.\n- 소유 중인 값은 0~255의 일반 바이트 값입니다. 프레임워크 스텐실 클립과 draw-once는 중단되지만 scissor는 작동합니다. 2a는 균일한 지우기를 제공하며 도형 쓰기와 값 테스트는 이후 단계에서 추가합니다.\n- endStencil은 스텐실을 0으로 되돌립니다. 값이 필요하면 endStencil 전에 readStencil로 읽어야 합니다. 저장한 의미상 상태를 복원하지만 이전 픽셀 값은 복원하지 않습니다. Fbo 값은 프레임과 색상·깊이 지우기를 넘어 유지하지만 화면의 지속성은 보장하지 않습니다.",
-                    "snippet": "canvas.begin();\nif (beginStencil()) { clearStencil(5); endStencil(); }\ncanvas.end();\n",
-                    "examples": [
-                        {
-                            "name": "AllFeaturesExample",
-                            "group": "tests"
-                        }
-                    ]
-                },
-                {
-                    "name": "clearStencil",
-                    "params": "value",
-                    "params_typed": "uint8_t value = 0",
-                    "return_type": "void",
-                    "desc": "Replaces all stencil bytes with a plain value while owned.",
-                    "keywords": [
-                        "stencil",
-                        "clear",
-                        "byte"
-                    ],
-                    "desc_ja": "所有中の stencil の全バイトを通常の値で置き換えます。",
-                    "desc_ko": "소유 중인 스텐실의 모든 바이트를 일반 값으로 바꿉니다.",
-                    "related": [
-                        "beginStencil",
-                        "endStencil",
-                        "clear"
-                    ],
-                    "details": "- `clearStencil(value = 0)` requires successful `beginStencil()` on the current target. Outside ownership, every call warns and does nothing.\n- Replaces all eight bits over the full attachment with a value 0–255. Earlier drawing finishes first; later drawing follows the clear. Color and depth are preserved. Transforms, viewport and scissor do not restrict the clear, and drawing state is restored afterward.\n- See `beginStencil` for target lifetime and handback behavior.",
-                    "details_ja": "- `clearStencil(value = 0)` は現在の描画先での `beginStencil()` の成功を必要とします。所有していない場合は呼び出すたびに警告し、何も変更しません。\n- 添付画像全体の全 8 ビットを 0〜255 の値で置き換えます。それまでの描画を先に実行し、以降の描画はクリアの後に実行します。色と深度を保持します。変換、viewport、scissor はクリア範囲を制限せず、描画状態は呼び出し後に復元します。\n- 描画先の寿命と返却時の動作は `beginStencil` を参照してください。",
-                    "details_ko": "- `clearStencil(value = 0)`은 현재 타깃에서 `beginStencil()`이 성공해야 합니다. 소유권이 없으면 호출할 때마다 경고하고 아무것도 변경하지 않습니다.\n- 첨부 이미지 전체의 8비트를 0~255 값으로 바꿉니다. 이전 그리기를 먼저 실행하며 이후 그리기는 지우기 뒤에 실행합니다. 색상과 깊이를 보존합니다. 변환, viewport, scissor는 지우기 영역을 제한하지 않으며 호출 후 그리기 상태를 복원합니다.\n- 타깃 수명과 반환 동작은 `beginStencil`을 참조합니다.",
-                    "snippet": "canvas.begin();\nif (beginStencil()) { clearStencil(5); endStencil(); }\ncanvas.end();\n",
-                    "examples": [
-                        {
-                            "name": "AllFeaturesExample",
-                            "group": "tests"
-                        }
-                    ]
-                },
-                {
-                    "name": "endStencil",
-                    "params": "",
-                    "params_typed": "",
-                    "return_type": "void",
-                    "desc": "Returns the whole stencil to 0, ends ownership and restores the saved framework state.",
-                    "keywords": [
-                        "stencil",
-                        "restore",
-                        "ownership"
-                    ],
-                    "desc_ja": "stencil 全体を 0 に戻して所有権を返却し、保存したフレームワークの状態を復元します。",
-                    "desc_ko": "스텐실 전체를 0으로 되돌리고 소유권을 반환하며 저장한 프레임워크 상태를 복원합니다.",
-                    "related": [
-                        "beginStencil",
-                        "clearStencil"
-                    ],
-                    "details": "- Call on the target with a successful `beginStencil()`. An unmatched call warns and does nothing.\n- endStencil returns the stencil to 0; read it with readStencil before endStencil if you need the values.\n- Submits earlier drawing, zeroes all eight stencil bits with a colorless draw using write mask `0xFF`, then restores saved semantic state. No pixel snapshot is restored.\n- See `beginStencil` for the complete ownership rules.",
-                    "details_ja": "- `beginStencil()` が成功した描画先で呼びます。対応する開始がない場合は警告し、何もしません。\n- endStencil は stencil を 0 に戻します。値が必要な場合は、endStencil の前に readStencil で読み取ってください。\n- それまでの描画を実行し、書き込みマスク `0xFF` で色を書かずに stencil の全 8 ビットをゼロにしてから、保存した意味上の状態を復元します。ピクセルのスナップショットは復元しません。\n- 所有権の全規則は `beginStencil` を参照してください。",
-                    "details_ko": "- `beginStencil()`이 성공한 타깃에서 호출합니다. 대응하는 시작이 없으면 경고하고 아무것도 하지 않습니다.\n- endStencil은 스텐실을 0으로 되돌립니다. 값이 필요하면 endStencil 전에 readStencil로 읽어야 합니다.\n- 이전 그리기를 실행하고 쓰기 마스크 `0xFF`로 색상을 쓰지 않으면서 스텐실 전체 8비트를 0으로 지운 뒤 저장한 의미상 상태를 복원합니다. 픽셀 스냅샷은 복원하지 않습니다.\n- 전체 소유권 규칙은 `beginStencil`을 참조합니다.",
-                    "snippet": "canvas.begin();\nif (beginStencil()) { clearStencil(5); endStencil(); }\ncanvas.end();\n",
-                    "examples": [
-                        {
-                            "name": "AllFeaturesExample",
-                            "group": "tests"
-                        }
-                    ]
-                }
-            ],
-            "name_ja": "グラフィックス - FBO",
-            "name_ko": "그래픽 - FBO"
-        },
-        {
             "name": "Graphics - Shader",
             "functions": [
                 {
@@ -17794,17 +17717,17 @@ const TrussCAPI = {
                         "lan",
                         "host"
                     ],
-                    "desc_ja": "優先順位に従って選んだローカル IP アドレスを返す。",
-                    "desc_ko": "우선순위에 따라 선택한 로컬 IP 주소를 반환한다.",
+                    "desc_ja": "優先順位に従って選んだローカル IP アドレスを返します。",
+                    "desc_ko": "우선순위에 따라 선택한 로컬 IP 주소를 반환합니다.",
                     "related": [
                         "getLocalIps",
                         "listNetworkInterfaces",
                         "isPrivate"
                     ],
-                    "details": "- Returns a `string` selected from up, non-loopback interfaces: first a private IPv4 address, then any IPv4 address, then any remaining address, including IPv6.\n- Returns the first address in enumeration order within each preference group, or an empty string if none qualifies.\n- Platform availability and enumeration failures follow `listNetworkInterfaces`; the web backend returns an empty string after logging a warning.",
-                    "details_ja": "- 稼働中でループバックではないインターフェースから、プライベート IPv4、その他の IPv4、IPv6 を含む残りのアドレスの順に選び、`string` を返します。\n- 各優先グループでは列挙順で最初のアドレスを返します。条件を満たすものがなければ空文字列を返します。\n- 対応プラットフォームと列挙失敗時の扱いは、`listNetworkInterfaces` に従います。Web バックエンドでは警告をログに出力して空文字列を返します。",
-                    "details_ko": "- 활성 상태이며 루프백이 아닌 인터페이스에서 사설 IPv4, 그 밖의 IPv4, IPv6를 포함한 나머지 주소 순으로 선택하여 `string`을 반환합니다.\n- 각 우선순위 그룹에서 열거 순서상 첫 주소를 반환합니다. 조건에 맞는 주소가 없으면 빈 문자열을 반환합니다.\n- 지원 플랫폼과 열거 실패 시 동작은 `listNetworkInterfaces`를 따릅니다. 웹 백엔드에서는 경고를 기록하고 빈 문자열을 반환합니다.",
-                    "snippet": "void tcApp::setup() {\n    logNotice(\"Network\") << getLocalIp();\n}\n",
+                    "details": "- Returns a `string` selected from up, non-loopback interfaces: first the IPv4 address of the interface that carries the default route, then a private IPv4 address, then any IPv4 address, then any remaining address, including IPv6.\n- Returns the first address in enumeration order within each fallback preference group, or an empty string if none qualifies.\n- Platform availability and enumeration failures follow `listNetworkInterfaces`; the web backend returns an empty string after logging a warning. No browser API exists for local interface lookup.",
+                    "details_ja": "- 稼働中でループバックではないインターフェースから、デフォルトルートを持つインターフェースの IPv4、プライベート IPv4、その他の IPv4、IPv6 を含む残りのアドレスの順に選び、`string` を返します。\n- フォールバック時の各優先グループでは列挙順で最初のアドレスを返します。条件を満たすものがなければ空文字列を返します。\n- 対応プラットフォームと列挙失敗時の扱いは、`listNetworkInterfaces` に従います。Web バックエンドでは警告をログに出力して空文字列を返します。ブラウザーでローカルインターフェースを取得する API はありません。",
+                    "details_ko": "- 활성 상태이며 루프백이 아닌 인터페이스에서 기본 경로를 사용하는 인터페이스의 IPv4, 사설 IPv4, 그 밖의 IPv4, IPv6를 포함한 나머지 주소 순으로 선택하여 `string`을 반환합니다.\n- 대체 주소를 고르는 각 우선순위 그룹에서 열거 순서상 첫 주소를 반환합니다. 조건에 맞는 주소가 없으면 빈 문자열을 반환합니다.\n- 지원 플랫폼과 열거 실패 시 동작은 `listNetworkInterfaces`를 따릅니다. 웹 백엔드에서는 경고를 기록하고 빈 문자열을 반환합니다. 브라우저에서 로컬 인터페이스를 조회하는 API는 없습니다.",
+                    "snippet": "void tcApp::setup() {\n    auto address = getLocalIp();\n    if (address.empty()) address = \"127.0.0.1\";\n    logNotice(\"Network\") << address;\n}\n",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -18771,6 +18694,64 @@ const TrussCAPI = {
                     "details_ko": "- `atanh(x)`는 `tanh`의 역함수를 계산합니다. 유한한 실수 결과를 얻으려면 `-1 < x && x < 1`이어야 합니다.\n- TrussC가 제공하는 C++ 표준 `<cmath>` 함수입니다. 오버로드와 정의역 밖 입력의 처리는 표준 라이브러리를 따릅니다."
                 },
                 {
+                    "name": "beginStencil",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "bool",
+                    "desc": "Deprecated attachment query; leaves stencil unchanged and may lose its desc across Style resets. Removed in v0.9.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "desc_ja": "非推奨の添付画像有無の問い合わせです。stencil は変更せず、Style のリセットで desc が失われる場合があります。v0.9 で削除します。",
+                    "desc_ko": "사용을 권장하지 않는 첨부 유무 조회입니다. 스텐실은 변경하지 않으며 Style 초기화로 desc가 사라질 수 있습니다. v0.9에서 제거합니다.",
+                    "related": [
+                        "StencilDesc",
+                        "setStencilDesc",
+                        "clearStencil",
+                        "resetStencilDesc"
+                    ],
+                    "deprecated": {
+                        "reason": "Use setStencilDesc/clearStencil/resetStencilDesc instead; begin/end may not work correctly with Style because resetStyle/popStyle and the Node reset around each node's draw can drop the desc between them. Will be removed in v0.9"
+                    },
+                    "details": "- Returns whether the current target has a stencil attachment; changes neither stencil bytes nor the desc. Deprecated: may not work correctly with Style because `resetStyle`/`popStyle` and the Node reset around each node's draw can drop the desc between begin and end. Use `setStencilDesc` / `clearStencil` / `resetStencilDesc` instead; will be removed in v0.9.\n\nUse the replacement API in the draw callback:\n```cpp\nvoid tcApp::draw() {\n    clearStencil(0);\n    setStencilDesc(StencilDesc::drawOnce());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "details_ja": "- 現在の描画先に stencil 添付画像があるかを返します。stencil の値も desc も変更しません。 非推奨です。`resetStyle`/`popStyle` と各ノードの draw 前後の Node によるリセットで begin と end の間に desc が失われるため、Style と組み合わせると正しく動作しない場合があります。代わりに `setStencilDesc` / `clearStencil` / `resetStencilDesc` を使います。v0.9 で削除します。\n\ndraw 内では代替 API を使います。\n```cpp\nvoid tcApp::draw() {\n    clearStencil(0);\n    setStencilDesc(StencilDesc::drawOnce());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "details_ko": "- 현재 타깃에 스텐실 첨부가 있는지 반환합니다. 스텐실 바이트와 desc를 모두 변경하지 않습니다. 사용을 권장하지 않습니다. `resetStyle`/`popStyle`과 각 노드 draw 전후의 Node 초기화가 begin과 end 사이에서 desc를 없앨 수 있어 Style과 함께 사용하면 올바르게 작동하지 않을 수 있습니다. 대신 `setStencilDesc` / `clearStencil` / `resetStencilDesc`를 사용합니다. v0.9에서 제거합니다.\n\ndraw에서 대체 API를 사용합니다.\n```cpp\nvoid tcApp::draw() {\n    clearStencil(0);\n    setStencilDesc(StencilDesc::drawOnce());\n    drawRect(20, 20, 100, 100);\n}\n```"
+                },
+                {
+                    "name": "clearStencil",
+                    "params": "value",
+                    "params_typed": "uint8_t value = 0",
+                    "return_type": "void",
+                    "desc": "Replaces the entire stencil attachment with a byte, without a begin call.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "desc_ja": "開始呼び出しなしで stencil 添付画像全体を指定バイトに置き換えます。",
+                    "desc_ko": "시작 호출 없이 스텐실 첨부 전체를 지정한 바이트로 바꿉니다.",
+                    "related": [
+                        "StencilDesc",
+                        "setStencilDesc",
+                        "clearStencil"
+                    ],
+                    "details": "- Replaces the entire stencil attachment with a byte, without a begin call. Defaults to 0. Submits earlier drawing first and preserves color/depth. Ignores transforms, viewport, scissor and StencilDesc (including mask); restores drawing state. Without an attachment, warns once per target and does nothing.\n\nUse in the draw callback:\n```cpp\nvoid tcApp::draw() {\n    clearStencil();\n    setStencilDesc(StencilDesc::drawOnce());\n}\n```",
+                    "details_ja": "- 開始呼び出しなしで stencil 添付画像全体を指定バイトに置き換えます。 既定値は 0 です。それまでの描画を先に実行し、色・深度を保持します。変換・viewport・scissor・StencilDesc の mask などに制限されず、描画状態を復元します。添付画像がなければ描画先ごとに一度警告して何もしません。\n\ndraw 内で使います。\n```cpp\nvoid tcApp::draw() {\n    clearStencil();\n    setStencilDesc(StencilDesc::drawOnce());\n}\n```",
+                    "details_ko": "- 시작 호출 없이 스텐실 첨부 전체를 지정한 바이트로 바꿉니다. 기본값은 0입니다. 이전 그리기를 먼저 제출하고 색상·깊이를 보존합니다. 변환, viewport, scissor, StencilDesc의 mask 등에 제한되지 않으며 그리기 상태를 복원합니다. 첨부가 없으면 타깃마다 한 번 경고하고 아무것도 하지 않습니다.\n\ndraw에서 사용합니다.\n```cpp\nvoid tcApp::draw() {\n    clearStencil();\n    setStencilDesc(StencilDesc::drawOnce());\n}\n```",
+                    "examples": [
+                        {
+                            "name": "stencilExample",
+                            "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "createWindow",
                     "params": "settings",
                     "params_typed": "const WindowSettings & settings = {}",
@@ -18799,6 +18780,32 @@ const TrussCAPI = {
                         "windows",
                         "linux"
                     ]
+                },
+                {
+                    "name": "endStencil",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Deprecated helper that clears stencil to 0 and resets the desc; Style resets can drop the desc before end. Removed in v0.9.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "desc_ja": "非推奨の互換ヘルパーです。stencil を 0 でクリアして desc を既定に戻しますが、end 前の Style リセットで desc が失われる場合があります。v0.9 で削除します。",
+                    "desc_ko": "사용을 권장하지 않는 호환 도우미입니다. 스텐실을 0으로 지우고 desc를 초기화하지만 end 전의 Style 초기화로 desc가 사라질 수 있습니다. v0.9에서 제거합니다.",
+                    "related": [
+                        "StencilDesc",
+                        "setStencilDesc",
+                        "clearStencil",
+                        "resetStencilDesc"
+                    ],
+                    "deprecated": {
+                        "reason": "Use setStencilDesc/clearStencil/resetStencilDesc instead; begin/end may not work correctly with Style because resetStyle/popStyle and the Node reset around each node's draw can drop the desc between them. Will be removed in v0.9"
+                    },
+                    "details": "- Calls `clearStencil(0)` then `resetStencilDesc()`. Deprecated: may not work correctly with Style because `resetStyle`/`popStyle` and the Node reset around each node's draw can drop the desc between begin and end. Use `setStencilDesc` / `clearStencil` / `resetStencilDesc` instead; will be removed in v0.9.\n\nUse the replacement API in the draw callback:\n```cpp\nvoid tcApp::draw() {\n    clearStencil(0);\n    resetStencilDesc();\n}\n```",
+                    "details_ja": "- `clearStencil(0)` の後に `resetStencilDesc()` を呼びます。 非推奨です。`resetStyle`/`popStyle` と各ノードの draw 前後の Node によるリセットで begin と end の間に desc が失われるため、Style と組み合わせると正しく動作しない場合があります。代わりに `setStencilDesc` / `clearStencil` / `resetStencilDesc` を使います。v0.9 で削除します。\n\ndraw 内では代替 API を使います。\n```cpp\nvoid tcApp::draw() {\n    clearStencil(0);\n    resetStencilDesc();\n}\n```",
+                    "details_ko": "- `clearStencil(0)` 다음에 `resetStencilDesc()`를 호출합니다. 사용을 권장하지 않습니다. `resetStyle`/`popStyle`과 각 노드 draw 전후의 Node 초기화가 begin과 end 사이에서 desc를 없앨 수 있어 Style과 함께 사용하면 올바르게 작동하지 않을 수 있습니다. 대신 `setStencilDesc` / `clearStencil` / `resetStencilDesc`를 사용합니다. v0.9에서 제거합니다.\n\ndraw에서 대체 API를 사용합니다.\n```cpp\nvoid tcApp::draw() {\n    clearStencil(0);\n    resetStencilDesc();\n}\n```"
                 },
                 {
                     "name": "enumLabel",
@@ -19055,6 +19062,34 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "getStencilDesc",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "StencilDesc",
+                    "desc": "Returns the current stencil Style descriptor.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "desc_ja": "現在の Style の stencil 設定を返します。",
+                    "desc_ko": "현재 Style의 스텐실 설정을 반환합니다.",
+                    "related": [
+                        "StencilDesc",
+                        "setStencilDesc",
+                        "clearStencil"
+                    ],
+                    "details": "- Returns the current stencil Style descriptor. Returns the requested descriptor, including on a target without stencil, where drawing uses the default instead.\n\nUse in the draw callback:\n```cpp\nvoid tcApp::draw() {\n    auto saved = getStencilDesc();\n    setStencilDesc(saved);\n}\n```",
+                    "details_ja": "- 現在の Style の stencil 設定を返します。 stencil のない描画先でも、要求した設定を返します。その場合の描画には既定値を使います。\n\ndraw 内で使います。\n```cpp\nvoid tcApp::draw() {\n    auto saved = getStencilDesc();\n    setStencilDesc(saved);\n}\n```",
+                    "details_ko": "- 현재 Style의 스텐실 설정을 반환합니다. 스텐실이 없는 타깃에서도 요청된 설정을 반환합니다. 이때 실제 그리기는 기본값을 사용합니다.\n\ndraw에서 사용합니다.\n```cpp\nvoid tcApp::draw() {\n    auto saved = getStencilDesc();\n    setStencilDesc(saved);\n}\n```",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "getViewMatrix",
                     "params": "",
                     "params_typed": "",
@@ -19255,6 +19290,38 @@ const TrussCAPI = {
                     "snippet": "void tcApp::update() {\n    if (isKeyPressed(KEY_ESCAPE)) exitApp();   // use this instead of requestExitApp()\n}\n"
                 },
                 {
+                    "name": "resetStencilDesc",
+                    "params": "",
+                    "params_typed": "",
+                    "return_type": "void",
+                    "desc": "Restores the default stencil descriptor without clearing stored bytes or other Style state.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "desc_ja": "保存値や Style の他の状態を変えずに stencil 設定を既定に戻します。",
+                    "desc_ko": "저장된 바이트나 다른 Style 상태를 바꾸지 않고 스텐실 설정을 기본값으로 되돌립니다.",
+                    "related": [
+                        "StencilDesc",
+                        "setStencilDesc",
+                        "clearStencil"
+                    ],
+                    "details": "- Restores the default stencil descriptor without clearing stored bytes or other Style state. Default means Always, value 0, write=false, mask=0xFF and colorWrite=true. Use clearStencil to erase stored values.\n\nUse in the draw callback:\n```cpp\nvoid tcApp::draw() {\n    resetStencilDesc();\n    drawRect(0, 0, 200, 200);\n}\n```",
+                    "details_ja": "- 保存値や Style の他の状態を変えずに stencil 設定を既定に戻します。 既定値は Always、value 0、write=false、mask=0xFF、colorWrite=true です。保存値を消すには clearStencil を使います。\n\ndraw 内で使います。\n```cpp\nvoid tcApp::draw() {\n    resetStencilDesc();\n    drawRect(0, 0, 200, 200);\n}\n```",
+                    "details_ko": "- 저장된 바이트나 다른 Style 상태를 바꾸지 않고 스텐실 설정을 기본값으로 되돌립니다. 기본값은 Always, value 0, write=false, mask=0xFF, colorWrite=true입니다. 저장된 값을 지우려면 clearStencil을 사용합니다.\n\ndraw에서 사용합니다.\n```cpp\nvoid tcApp::draw() {\n    resetStencilDesc();\n    drawRect(0, 0, 200, 200);\n}\n```",
+                    "examples": [
+                        {
+                            "name": "stencilExample",
+                            "group": "graphics"
+                        },
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "runtime",
                     "params": "",
                     "params_typed": "",
@@ -19383,6 +19450,38 @@ const TrussCAPI = {
                     "details_ko": "- Image, SoundBuffer, Font의 `loadAsync`가 공유하는 준비 슬롯을 설정합니다. 기본값은 4개입니다. 로컬 파일과 URL은 같은 슬롯을 사용합니다.\n- 메인 스레드에서 언제든지 호출합니다. 1 이상의 값은 상한 없이 그대로 적용합니다. 1 미만의 값은 1로 바꾸고 해당 호출에서 Notice를 한 번 기록합니다.\n- 설정을 높이면 대기 중인 준비를 즉시 시작합니다. 낮추면 실행 중인 준비를 완료하고 새 준비는 실행 수가 설정 개수보다 작아질 때까지 기다립니다.\n- 준비 슬롯을 기다린다는 이유로 큐의 로드를 거부하지 않습니다. 로컬 파일 큐는 확장할 수 있습니다. 별도의 URL/네트워크 입력 수락 예산은 대기 요청 64건, 미반영 요청 68건, 보유 결과 1 GiB로 유지합니다. 이 예산을 초과하는 요청이나 결과는 실패할 수 있습니다.\n- 네이티브 환경에서는 실행 중인 준비 슬롯 하나가 워커 스레드 하나에 해당합니다.\n- Web의 슬롯은 OS 스레드가 아니라 실행 중인 가져오기/디코딩 슬롯입니다. CPU 디코딩은 계속 메인 루프에서 수행합니다.",
                     "snippet": "void tcApp::setup() {\n    setResourceLoadConcurrency(8);  // prepare up to 8 images, sounds or fonts at once\n    for (auto& path : imagePaths) images.emplace_back().loadAsync(path);\n}\n",
                     "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "setStencilDesc",
+                    "params": "desc",
+                    "params_typed": "const StencilDesc & desc",
+                    "return_type": "void",
+                    "desc": "Applies one stencil descriptor to subsequent drawing as Style state.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "desc_ja": "以降の描画に使う stencil 設定を Style の状態として適用します。",
+                    "desc_ko": "이후 그리기에 사용할 스텐실 설정을 Style 상태로 적용합니다.",
+                    "related": [
+                        "StencilDesc",
+                        "setStencilDesc",
+                        "clearStencil"
+                    ],
+                    "details": "- Applies one stencil descriptor to subsequent drawing as Style state. Affects shapes, text, textures, Mesh, custom Shader, PBR and points. Without an attachment, warns once per target and draws with default state.\n\nUse in the draw callback:\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::inside());\n    drawRect(0, 0, 200, 200);\n}\n```",
+                    "details_ja": "- 以降の描画に使う stencil 設定を Style の状態として適用します。 図形・文字・テクスチャ・Mesh・独自 Shader・PBR・点に適用します。添付画像がなければ描画先ごとに一度警告し、既定の状態で描画します。\n\ndraw 内で使います。\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::inside());\n    drawRect(0, 0, 200, 200);\n}\n```",
+                    "details_ko": "- 이후 그리기에 사용할 스텐실 설정을 Style 상태로 적용합니다. 도형, 텍스트, 텍스처, Mesh, 사용자 Shader, PBR, 점에 적용합니다. 첨부가 없으면 타깃마다 한 번 경고하고 기본 상태로 그립니다.\n\ndraw에서 사용합니다.\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::inside());\n    drawRect(0, 0, 200, 200);\n}\n```",
+                    "examples": [
+                        {
+                            "name": "stencilExample",
+                            "group": "graphics"
+                        },
                         {
                             "name": "AllFeaturesExample",
                             "group": "tests"
@@ -29579,20 +29678,19 @@ const TrussCAPI = {
                             "params": "float x, float y"
                         }
                     ],
-                    "desc": "Draws the framebuffer's stencil bytes as an opaque gray image.",
-                    "details": "- `drawStencil(x, y)` reconstructs all eight stencil bits into a cached R8 Fbo using the internal eight-draw path, then draws at attachment size with nearest sampling. Each byte is displayed as gray `value / 255`; no CPU readback is needed. It preserves the source color and stencil.\n- Uses the current target's coordinates, transformations, depth test and scissor. The preview is opaque and ignores the current tint and blend mode; the tint, blend mode and pipeline are restored afterward. Like other image draws, it leaves texturing off, so call `bind()` again on a texture you were drawing with. Repeated calls refresh the capture and reuse the cache.\n- Only allocated, ended, owned single-sample Fbos are supported. Unallocated, active or MSAA sources warn and draw nothing. There is no main-target/free-function form in this slice.\n- The snippet uses the internal round-trip test fixture to write an ended R8 pattern into stencil; `writeGray` is not a public application API. Use `beginStencil` and `clearStencil` for uniform public byte clearing. Geometry writing and main-target capture are later slices.",
-                    "details_ja": "- `drawStencil(x, y)` は内部の 8 回描画の処理で stencil の全 8 ビットをキャッシュした R8 Fbo に復元し、添付画像と同じサイズで最近傍サンプリングして描画します。各バイトを `value / 255` のグレーで表示し、CPU への読み出しは行いません。元の色と stencil は保持します。\n- 現在の描画先の座標、変換、深度テスト、scissor を使います。プレビューは不透明で、現在の色とブレンドモードを使いません。色、ブレンドモード、パイプラインは呼び出し後に復元します。ほかの画像の描画と同じく、テクスチャは無効のままになるので、使っていたテクスチャは `bind()` し直してください。繰り返し呼び出すとキャッシュを再利用して内容を更新します。\n- 確保済みで `end()` 後の、所有するシングルサンプル Fbo のみ対応します。未確保、アクティブ、MSAA の場合は警告して描画しません。この段階ではメイン描画先や自由関数の形式はありません。\n- 使用例は内部の往復テスト用処理で、描画済みの R8 パターンを stencil に書き込みます。`writeGray` は公開アプリ API ではありません。一様なバイト値のクリアには公開 API の `beginStencil` と `clearStencil` を使います。形状の書き込みとメイン描画先の取得は後の段階で扱います。",
-                    "details_ko": "- `drawStencil(x, y)`는 내부의 8회 그리기 경로로 스텐실의 전체 8비트를 캐시된 R8 Fbo에 복원하고 첨부 이미지 크기로 최근접 샘플링하여 그립니다. 각 바이트를 `value / 255` 회색으로 표시하며 CPU로 읽지 않습니다. 원본 색상과 스텐실을 보존합니다.\n- 현재 타깃의 좌표, 변환, 깊이 테스트와 scissor를 사용합니다. 미리보기는 불투명하며 현재 색상과 블렌드 모드를 사용하지 않습니다. 색상, 블렌드 모드, 파이프라인은 호출 후 복원합니다. 다른 이미지 그리기와 마찬가지로 텍스처는 비활성 상태로 남으므로, 사용하던 텍스처는 `bind()`를 다시 호출하세요. 반복 호출하면 캐시를 재사용하고 캡처를 갱신합니다.\n- 할당되었고 `end()`가 끝난 소유 단일 샘플 Fbo만 지원합니다. 미할당, 활성 또는 MSAA 소스는 경고하고 그리지 않습니다. 이 단계에는 메인 타깃이나 자유 함수 형식이 없습니다.\n- 예제는 내부 왕복 테스트용 처리로 렌더링이 끝난 R8 패턴을 스텐실에 기록합니다. `writeGray`는 공개 애플리케이션 API가 아닙니다. 균일한 바이트 값 지우기에는 공개 API인 `beginStencil`과 `clearStencil`을 사용합니다. 도형 쓰기와 메인 타깃 캡처는 이후 단계에서 다룹니다.",
-                    "snippet": "// gray: ended R8 pattern; fbo: equally sized, ended, single-sample Fbo\ninternal::FboStencilAccess::writeGray(gray, fbo); // internal test fixture\nfbo.drawStencil(0, 0);\nPixels values;\nif (fbo.readStencil(values)) values.save(\"stencil.png\");\n",
+                    "desc": "Draws ended single-sample Fbo stencil bytes as an opaque gray image for debugging.",
+                    "details": "- Draws ended single-sample Fbo stencil bytes as an opaque gray image for debugging. Requires an allocated, ended, owned single-sample Fbo; unavailable for main targets or MSAA. Preserves source color and stencil.\n\nInspect an ended member Fbo:\n```cpp\nvoid tcApp::draw() {\n    fbo.drawStencil(0, 0);\n}\n```\n\n- Uses a cached eight-draw R8 reconstruction and nearest sampling; gray is value/255. No CPU readback. Uses current coordinates, depth, scissor and StencilDesc; ignores tint and blend. Unavailable sources warn and draw nothing.",
+                    "details_ja": "- end 後のシングルサンプル Fbo の stencil 値をデバッグ用の不透明なグレー画像で描きます。 確保済みで end 後の所有するシングルサンプル Fbo が必要です。メイン描画先・MSAA は非対応です。元の色と stencil を保持します。\n\nメンバーの end 後の Fbo を調べます。\n```cpp\nvoid tcApp::draw() {\n    fbo.drawStencil(0, 0);\n}\n```\n\n- キャッシュした R8 に 8 回の描画で復元し、最近傍で value/255 のグレーを表示します。CPU 読み出しはありません。現在の座標・深度・scissor・StencilDesc を使い、色とブレンド設定は使いません。取得できない場合は警告して描画しません。",
+                    "details_ko": "- 종료된 단일 샘플 Fbo의 스텐실 바이트를 디버깅용 불투명 회색 이미지로 그립니다. 할당되어 종료된 소유 단일 샘플 Fbo가 필요합니다. 메인 타깃과 MSAA는 지원하지 않습니다. 원본 색상과 스텐실을 보존합니다.\n\n멤버인 종료된 Fbo를 확인합니다.\n```cpp\nvoid tcApp::draw() {\n    fbo.drawStencil(0, 0);\n}\n```\n\n- 캐시된 R8에 8번 그려 복원하고 최근접 샘플링으로 value/255 회색을 표시합니다. CPU 읽기는 없습니다. 현재 좌표, 깊이, scissor, StencilDesc를 따르고 색조와 블렌드는 무시합니다. 사용할 수 없는 소스는 경고하고 그리지 않습니다.",
                     "keywords": [
                         "stencil",
-                        "debug",
-                        "gray",
-                        "preview"
+                        "mask",
+                        "style"
                     ],
                     "related": [
-                        "Fbo::readStencil",
-                        "Pixels::save"
+                        "StencilDesc",
+                        "clearStencil",
+                        "Fbo::readStencil"
                     ]
                 },
                 {
@@ -29942,21 +30040,19 @@ const TrussCAPI = {
                             "params": "Pixels & pixels"
                         }
                     ],
-                    "desc": "Reads the framebuffer's stencil bytes into one-channel U8 Pixels.",
-                    "details": "- `bool readStencil(Pixels& pixels) const` uses the same cached R8 reconstruction as `drawStencil`, then the existing Fbo color readback. On success it replaces `pixels` with top-left, one-channel U8 bytes and returns `true`. On failure it returns `false` and leaves `pixels` unchanged. The source color and stencil are preserved.\n- Call after `end()` on all active Fbos. Unallocated, active and MSAA sources are refused with a warning. Main-target capture is unavailable. GPU readback synchronizes work and is intended for debugging.\n- Save through `pixels.save(\"stencil.png\")`; the existing PNG writer stores the channel bytes without gamma remapping. WebGL2 uses existing GL readback; WebGPU synchronous readback is unsupported and returns `false` (a later slice adds asynchronous readback).\n- The snippet's `writeGray` is an internal test fixture, not a public stencil-writing API; `gray` contains an ended R8 pattern. Use `beginStencil` and `clearStencil` for uniform clearing while owned.",
-                    "details_ja": "- `bool readStencil(Pixels& pixels) const` は `drawStencil` と同じキャッシュした R8 への復元処理と、既存の Fbo カラー読み出しを使います。成功すると `pixels` を左上原点の 1 チャンネル U8 バイト列に置き換えて `true` を返します。失敗すると `false` を返し、`pixels` は変更しません。元の色と stencil は保持します。\n- すべてのアクティブな Fbo の `end()` 後に呼んでください。未確保、アクティブ、MSAA の場合は警告して拒否します。メイン描画先の取得には対応しません。GPU の読み出しは処理を同期するため、デバッグ用です。\n- `pixels.save(\"stencil.png\")` で保存します。既存の PNG ライターはガンマ変換をせずにチャンネルのバイトを保存します。WebGL2 は既存の GL 読み出しを使います。WebGPU の同期読み出しは非対応で `false` を返します。非同期読み出しは後の段階で扱います。\n- 使用例の `writeGray` は内部テスト用で、公開の stencil 書き込み API ではありません。`gray` には描画済みの R8 パターンを用意します。所有中の一様なクリアには `beginStencil` と `clearStencil` を使います。",
-                    "details_ko": "- `bool readStencil(Pixels& pixels) const`는 `drawStencil`과 같은 캐시된 R8 복원 경로와 기존 Fbo 색상 읽기를 사용합니다. 성공하면 `pixels`를 왼쪽 위 원점의 1채널 U8 바이트로 교체하고 `true`를 반환합니다. 실패하면 `false`를 반환하며 `pixels`를 변경하지 않습니다. 원본 색상과 스텐실을 보존합니다.\n- 모든 활성 Fbo에서 `end()`를 호출한 뒤 사용합니다. 미할당, 활성 또는 MSAA 소스는 경고하고 거부합니다. 메인 타깃 캡처는 지원하지 않습니다. GPU 읽기는 작업을 동기화하므로 디버깅용입니다.\n- `pixels.save(\"stencil.png\")`로 저장합니다. 기존 PNG 작성기는 감마 변환 없이 채널 바이트를 저장합니다. WebGL2는 기존 GL 읽기를 사용합니다. WebGPU의 동기 읽기는 지원하지 않으며 `false`를 반환합니다. 비동기 읽기는 이후 단계에서 다룹니다.\n- 예제의 `writeGray`는 내부 테스트용이며 공개 스텐실 쓰기 API가 아닙니다. `gray`에는 렌더링이 끝난 R8 패턴을 준비합니다. 소유 중인 균일한 지우기에는 `beginStencil`과 `clearStencil`을 사용합니다.",
-                    "snippet": "// gray: ended R8 pattern; fbo: equally sized, ended, single-sample Fbo\ninternal::FboStencilAccess::writeGray(gray, fbo); // internal test fixture\nfbo.drawStencil(0, 0);\nPixels values;\nif (fbo.readStencil(values)) values.save(\"stencil.png\");\n",
+                    "desc": "Reads ended single-sample Fbo stencil bytes into one-channel U8 Pixels for debugging.",
+                    "details": "- Reads ended single-sample Fbo stencil bytes into one-channel U8 Pixels for debugging. Requires an allocated, ended, owned single-sample Fbo; unavailable for main targets or MSAA. Preserves source color and stencil.\n\nInspect an ended member Fbo:\n```cpp\nvoid tcApp::draw() {\n    Pixels values;\n    fbo.readStencil(values);\n}\n```\n\n- Call after end() on all active Fbos. Success replaces pixels with top-left U8 bytes; failure returns false and leaves pixels unchanged. Unsupported sources warn. Readback synchronizes GPU work. pixels.save stores PNG bytes without gamma remapping. WebGPU synchronous readback is unsupported.",
+                    "details_ja": "- end 後のシングルサンプル Fbo の stencil 値をデバッグ用の 1 チャンネル U8 Pixels に読み出します。 確保済みで end 後の所有するシングルサンプル Fbo が必要です。メイン描画先・MSAA は非対応です。元の色と stencil を保持します。\n\nメンバーの end 後の Fbo を調べます。\n```cpp\nvoid tcApp::draw() {\n    Pixels values;\n    fbo.readStencil(values);\n}\n```\n\n- すべてのアクティブな Fbo の end() 後に呼びます。成功時は左上原点の U8 バイトに置き換え、失敗時は false を返し pixels を保持します。非対応の描画元には警告します。GPU と同期します。pixels.save はガンマ変換なしで PNG を保存します。WebGPU の同期読み出しは非対応です。",
+                    "details_ko": "- 종료된 단일 샘플 Fbo의 스텐실 바이트를 디버깅용 1채널 U8 Pixels로 읽습니다. 할당되어 종료된 소유 단일 샘플 Fbo가 필요합니다. 메인 타깃과 MSAA는 지원하지 않습니다. 원본 색상과 스텐실을 보존합니다.\n\n멤버인 종료된 Fbo를 확인합니다.\n```cpp\nvoid tcApp::draw() {\n    Pixels values;\n    fbo.readStencil(values);\n}\n```\n\n- 활성 Fbo 모두의 end() 후 호출합니다. 성공하면 왼쪽 위 원점의 U8 바이트로 바꾸며 실패하면 false를 반환하고 pixels를 보존합니다. 지원하지 않는 소스는 경고합니다. GPU 작업과 동기화합니다. pixels.save는 감마 변환 없이 PNG를 저장합니다. WebGPU 동기 읽기는 지원하지 않습니다.",
                     "keywords": [
                         "stencil",
-                        "debug",
-                        "readback",
-                        "png"
+                        "mask",
+                        "style"
                     ],
                     "related": [
-                        "Fbo::drawStencil",
-                        "Fbo::readPixels",
-                        "Pixels::save"
+                        "StencilDesc",
+                        "clearStencil",
+                        "Fbo::drawStencil"
                     ],
                     "platforms": [
                         "macos",
@@ -30594,8 +30690,8 @@ const TrussCAPI = {
                 "ttf",
                 "of true type font"
             ],
-            "desc_ja": "TrueType フォントによる文字描画とテキストの配置を行う。",
-            "desc_ko": "트루타입 폰트로 텍스트를 렌더링하고 배치한다.",
+            "desc_ja": "TrueType フォントによる文字描画とテキストの配置を行います。",
+            "desc_ko": "트루타입 폰트로 텍스트를 렌더링하고 배치합니다.",
             "examples": [
                 {
                     "name": "fontWrapExample",
@@ -30616,9 +30712,9 @@ const TrussCAPI = {
                 "Font::load",
                 "Font::loadAsync"
             ],
-            "details": "- Moving a loading Image, or copying, assigning or moving a loading SoundBuffer or Font, is not supported; the destination is not loading. If you keep loading objects in a container, make sure it does not move them: call `reserve()` on a `vector` before loading, or hold them through pointers such as `unique_ptr`.\n- Use `load(nameOrPath, size, faceIndex = 0)` to load a font file or system font name, and check the returned `LoadResult` for success; see `Font::load` for path resolution, collection faces, and Web URL loading.\n- `drawString` draws UTF-8 text using the current drawing color, and `getStringPath` returns its vector outlines; without a loaded font, drawing does nothing and the returned path is empty.\n- The requested font size and reported metrics use logical pixels; glyphs are rasterized using the DPI scale captured when loading.\n- Horizontal writing, no automatic wrapping, and the font's own line height are the defaults.\n- The `drawString` and `getStringPath` overloads without alignment arguments use the current global text alignment; `Font::setAlign` does not change the alignment used by these overloads.\n- Glyphs are rasterized on the CPU as needed, including during `getWidth`; drawing uploads changed atlas textures to the GPU, so the first use of new characters can cost more.\n- Perform Font access, loading, copying, moving, and destruction on the main thread; see `Font::loadAsync` for background preparation and completion delivery.\n- Copies share the loaded glyph atlas, and separate loads with the same resolved path, face, physical size, oversampling, and mipmap setting also share it; `clearAtlas` affects every Font sharing that atlas.\n- Destroying a Font does not evict its atlas from the shared cache; reloading with a different cache key releases the previous cached atlas if no other Font uses it.",
-            "details_ja": "- 読み込み中の Image の移動や、読み込み中の SoundBuffer・Font のコピー・代入・移動はサポートしません。コピー先・移動先は読み込み中にはなりません。読み込み中のオブジェクトをコンテナに入れる場合は、中身が移動しないようにしてください。`vector` なら読み込む前に `reserve()` するか、`unique_ptr` などのポインタで持ちます。\n- `load(nameOrPath, size, faceIndex = 0)` でフォントファイルまたはシステムフォント名を読み込み、戻り値の `LoadResult` で成功を確認します。パスの解決、コレクション内の書体、Web の URL 読み込みについては `Font::load` を参照してください。\n- `drawString` は現在の描画色で UTF-8 テキストを描画し、`getStringPath` はそのベクター輪郭を返します。フォントが読み込まれていない場合、描画は何も行わず、返されるパスは空になります。\n- 指定するフォントサイズと取得するメトリクスの単位は論理ピクセルです。グリフは読み込み時に記録した DPI スケールでラスタライズされます。\n- 既定では横書きで、自動折り返しは無効になり、フォント固有の行の高さを使用します。\n- 配置の引数を省略した `drawString` と `getStringPath` は、現在のグローバルなテキスト配置を使用します。`Font::setAlign` は、これらのオーバーロードで使われる配置を変更しません。\n- グリフは必要に応じて CPU でラスタライズされ、`getWidth` の呼び出しでも生成されます。描画時には変更されたアトラステクスチャを GPU に転送するため、新しい文字を初めて使うときは処理負荷が増える場合があります。\n- Font の参照、読み込み、コピー、移動、破棄はメインスレッドで行ってください。バックグラウンドでの準備と完了通知については `Font::loadAsync` を参照してください。\n- コピーは読み込み済みのグリフアトラスを共有します。別々に読み込んだ場合も、解決後のパス、書体、物理ピクセルでのサイズ、オーバーサンプリング、ミップマップ設定が同じなら共有します。`clearAtlas` は同じアトラスを共有するすべての Font に影響します。\n- Font を破棄しても、アトラスは共有キャッシュから削除されません。異なるキャッシュキーで読み直すと、ほかの Font が使用していない場合に以前のアトラスがキャッシュから解放されます。",
-            "details_ko": "- 로드 중인 Image의 이동, 그리고 로드 중인 SoundBuffer, Font의 복사, 대입 또는 이동은 지원하지 않습니다. 대상은 로드 중인 상태가 되지 않습니다. 로드 중인 객체를 컨테이너에 넣을 때는 내용이 이동하지 않게 하세요. `vector`라면 로드 전에 `reserve()`하거나 `unique_ptr` 같은 포인터로 보관합니다.\n- `load(nameOrPath, size, faceIndex = 0)`로 폰트 파일이나 시스템 폰트 이름을 로드하고 반환된 `LoadResult`로 성공 여부를 확인합니다. 경로 해석, 컬렉션 내 서체, Web URL 로드는 `Font::load`를 참조합니다.\n- `drawString`은 현재 그리기 색상으로 UTF-8 텍스트를 그리며, `getStringPath`는 텍스트의 벡터 윤곽선을 반환합니다. 로드된 폰트가 없으면 그리기는 아무 작업도 하지 않고 반환되는 경로는 비어 있습니다.\n- 지정하는 폰트 크기와 반환되는 메트릭의 단위는 논리 픽셀입니다. 글리프는 로드할 때 기록한 DPI 배율로 래스터화합니다.\n- 기본값은 가로쓰기이며, 자동 줄바꿈을 사용하지 않고 폰트 자체의 줄 높이를 사용합니다.\n- 정렬 인수를 생략한 `drawString`과 `getStringPath`는 현재 전역 텍스트 정렬을 사용합니다. `Font::setAlign`은 이 오버로드에서 사용하는 정렬을 변경하지 않습니다.\n- 글리프는 필요할 때 CPU에서 래스터화하며, `getWidth` 호출 중에도 생성합니다. 그릴 때 변경된 아틀라스 텍스처를 GPU에 업로드하므로 새로운 문자를 처음 사용하면 처리 비용이 증가할 수 있습니다.\n- Font 접근, 로드, 복사, 이동, 소멸은 메인 스레드에서 수행합니다. 백그라운드 준비와 완료 알림은 `Font::loadAsync`를 참조합니다.\n- 복사본은 로드된 글리프 아틀라스를 공유합니다. 별도로 로드해도 해석된 경로, 서체, 물리 픽셀 크기, 오버샘플링, 밉맵 설정이 같으면 공유합니다. `clearAtlas`는 해당 아틀라스를 공유하는 모든 Font에 영향을 줍니다.\n- Font를 소멸해도 아틀라스는 공유 캐시에서 제거되지 않습니다. 다른 캐시 키로 다시 로드하면 다른 Font가 사용하지 않는 이전 아틀라스를 캐시에서 해제합니다.",
+            "details": "- Four frozen atlas pages below the GPU size limit merge automatically after rendering; use `compactAtlas()` to schedule a merge of two or more.\n- Glyphs keep a small gap so mipmapped text stays clean down to small sizes. For perfectly clean, heavily minified text, draw into an Fbo and scale it. Large rasterized sizes use more atlas memory.\n- Moving a loading Image, or copying, assigning or moving a loading SoundBuffer or Font, is not supported; the destination is not loading. If you keep loading objects in a container, make sure it does not move them: call `reserve()` on a `vector` before loading, or hold them through pointers such as `unique_ptr`.\n- Use `load(nameOrPath, size, faceIndex = 0)` to load a font file or system font name, and check the returned `LoadResult` for success; see `Font::load` for path resolution, collection faces, and Web URL loading.\n- `drawString` draws UTF-8 text using the current drawing color, and `getStringPath` returns its vector outlines; without a loaded font, drawing does nothing and the returned path is empty.\n- The requested font size and reported metrics use logical pixels; glyphs are rasterized using the DPI scale captured when loading.\n- Horizontal writing, no automatic wrapping, and the font's own line height are the defaults.\n- The `drawString` and `getStringPath` overloads without alignment arguments use the current global text alignment; `Font::setAlign` does not change the alignment used by these overloads.\n- Glyphs are rasterized on the CPU as needed, including during `getWidth`; drawing uploads changed atlas textures to the GPU, so the first use of new characters can cost more.\n- Perform Font access, loading, copying, moving, and destruction on the main thread; see `Font::loadAsync` for background preparation and completion delivery.\n- Copies share the loaded glyph atlas, and separate loads with the same resolved path, face, physical size, oversampling, and mipmap setting also share it; `clearAtlas` affects every Font sharing that atlas.\n- Destroying a Font does not evict its atlas from the shared cache; reloading with a different cache key releases the previous cached atlas if no other Font uses it.",
+            "details_ja": "- GPU 上限未満の固定済みアトラスページが4枚になると描画後に自動で結合します。`compactAtlas()` では2枚以上の結合を予約できます。\n- グリフの間に小さな余白を設け、小さいサイズまでミップマップ付きの文字をきれいに保ちます。大きく縮小しても完全にきれいに表示したい場合は、文字を Fbo に描いてから縮小してください。大きなサイズでラスタライズすると、アトラスのメモリ使用量が増えます。\n- 読み込み中の Image の移動や、読み込み中の SoundBuffer・Font のコピー・代入・移動はサポートしません。コピー先・移動先は読み込み中にはなりません。読み込み中のオブジェクトをコンテナに入れる場合は、中身が移動しないようにしてください。`vector` なら読み込む前に `reserve()` するか、`unique_ptr` などのポインタで持ちます。\n- `load(nameOrPath, size, faceIndex = 0)` でフォントファイルまたはシステムフォント名を読み込み、戻り値の `LoadResult` で成功を確認します。パスの解決、コレクション内の書体、Web の URL 読み込みについては `Font::load` を参照してください。\n- `drawString` は現在の描画色で UTF-8 テキストを描画し、`getStringPath` はそのベクター輪郭を返します。フォントが読み込まれていない場合、描画は何も行わず、返されるパスは空になります。\n- 指定するフォントサイズと取得するメトリクスの単位は論理ピクセルです。グリフは読み込み時に記録した DPI スケールでラスタライズされます。\n- 既定では横書きで、自動折り返しは無効になり、フォント固有の行の高さを使用します。\n- 配置の引数を省略した `drawString` と `getStringPath` は、現在のグローバルなテキスト配置を使用します。`Font::setAlign` は、これらのオーバーロードで使われる配置を変更しません。\n- グリフは必要に応じて CPU でラスタライズされ、`getWidth` の呼び出しでも生成されます。描画時には変更されたアトラステクスチャを GPU に転送するため、新しい文字を初めて使うときは処理負荷が増える場合があります。\n- Font の参照、読み込み、コピー、移動、破棄はメインスレッドで行ってください。バックグラウンドでの準備と完了通知については `Font::loadAsync` を参照してください。\n- コピーは読み込み済みのグリフアトラスを共有します。別々に読み込んだ場合も、解決後のパス、書体、物理ピクセルでのサイズ、オーバーサンプリング、ミップマップ設定が同じなら共有します。`clearAtlas` は同じアトラスを共有するすべての Font に影響します。\n- Font を破棄しても、アトラスは共有キャッシュから削除されません。異なるキャッシュキーで読み直すと、ほかの Font が使用していない場合に以前のアトラスがキャッシュから解放されます。",
+            "details_ko": "- GPU 한도 미만의 고정 아틀라스 페이지 4개는 렌더링 후 자동 병합합니다. `compactAtlas()`로 2개 이상의 병합을 예약할 수 있습니다.\n- 글리프 사이에 작은 간격을 두어 밉맵 텍스트를 작은 크기까지 깨끗하게 유지합니다. 크게 축소해도 완전히 깨끗한 텍스트가 필요하면 Fbo에 그린 뒤 축소합니다. 큰 크기로 래스터화하면 아틀라스 메모리를 더 사용합니다.\n- 로드 중인 Image의 이동, 그리고 로드 중인 SoundBuffer, Font의 복사, 대입 또는 이동은 지원하지 않습니다. 대상은 로드 중인 상태가 되지 않습니다. 로드 중인 객체를 컨테이너에 넣을 때는 내용이 이동하지 않게 하세요. `vector`라면 로드 전에 `reserve()`하거나 `unique_ptr` 같은 포인터로 보관합니다.\n- `load(nameOrPath, size, faceIndex = 0)`로 폰트 파일이나 시스템 폰트 이름을 로드하고 반환된 `LoadResult`로 성공 여부를 확인합니다. 경로 해석, 컬렉션 내 서체, Web URL 로드는 `Font::load`를 참조합니다.\n- `drawString`은 현재 그리기 색상으로 UTF-8 텍스트를 그리며, `getStringPath`는 텍스트의 벡터 윤곽선을 반환합니다. 로드된 폰트가 없으면 그리기는 아무 작업도 하지 않고 반환되는 경로는 비어 있습니다.\n- 지정하는 폰트 크기와 반환되는 메트릭의 단위는 논리 픽셀입니다. 글리프는 로드할 때 기록한 DPI 배율로 래스터화합니다.\n- 기본값은 가로쓰기이며, 자동 줄바꿈을 사용하지 않고 폰트 자체의 줄 높이를 사용합니다.\n- 정렬 인수를 생략한 `drawString`과 `getStringPath`는 현재 전역 텍스트 정렬을 사용합니다. `Font::setAlign`은 이 오버로드에서 사용하는 정렬을 변경하지 않습니다.\n- 글리프는 필요할 때 CPU에서 래스터화하며, `getWidth` 호출 중에도 생성합니다. 그릴 때 변경된 아틀라스 텍스처를 GPU에 업로드하므로 새로운 문자를 처음 사용하면 처리 비용이 증가할 수 있습니다.\n- Font 접근, 로드, 복사, 이동, 소멸은 메인 스레드에서 수행합니다. 백그라운드 준비와 완료 알림은 `Font::loadAsync`를 참조합니다.\n- 복사본은 로드된 글리프 아틀라스를 공유합니다. 별도로 로드해도 해석된 경로, 서체, 물리 픽셀 크기, 오버샘플링, 밉맵 설정이 같으면 공유합니다. `clearAtlas`는 해당 아틀라스를 공유하는 모든 Font에 영향을 줍니다.\n- Font를 소멸해도 아틀라스는 공유 캐시에서 제거되지 않습니다. 다른 캐시 키로 다시 로드하면 다른 Font가 사용하지 않는 이전 아틀라스를 캐시에서 해제합니다.",
             "snippet": "Font font;\nvoid tcApp::setup() {\n    if (!font.load(\"fonts/Example.ttf\", 24)) logError() << \"Font load failed\";\n}\nvoid tcApp::draw() {\n    font.drawString(\"Hello, TrussC!\", 20, 40);\n}\n",
             "constructor": {
                 "signatures": [
@@ -30648,6 +30744,20 @@ const TrussCAPI = {
                     "details": "- Preserves the loaded font data and metrics, clears cached glyphs, and replaces the atlas pages with one empty 256 × 256 page when a font is loaded.\n- Glyphs are rasterized again when next needed by drawing, layout, or measurement; GPU resource destruction is deferred so previously queued text can finish drawing.\n- Also cancels this Font's pending asynchronous load without delivering its completion event.\n- Other fonts sharing this atlas are affected; see `Font::getMemoryUsage` for sharing rules and `Font::drawString` for thread rules.",
                     "details_ja": "- 読み込んだフォントデータとメトリクスを保持したまま、キャッシュ済みグリフを消去します。フォントが読み込み済みの場合、アトラスページは空の 256 × 256 ページ 1 枚に置き換わります。\n- 次の描画、配置、計測で必要になったグリフを再ラスタライズします。すでに描画キューに入ったテキストを描画できるよう、GPU リソースの破棄は遅延されます。\n- この Font で進行中の非同期読み込みもキャンセルし、その完了イベントは通知しません。\n- 同じアトラスを共有する他のフォントにも影響します。共有の扱いは `Font::getMemoryUsage`、スレッドの扱いは `Font::drawString` を参照してください。",
                     "details_ko": "- 로드된 폰트 데이터와 메트릭은 유지하면서 캐시된 글리프를 지웁니다. 폰트가 로드되어 있으면 아틀라스 페이지를 빈 256 × 256 페이지 하나로 교체합니다.\n- 이후 그리기, 배치 또는 측정에 필요한 글리프를 다시 래스터화합니다. 이미 대기 중인 텍스트 그리기를 완료할 수 있도록 GPU 리소스 해제를 지연합니다.\n- 이 Font에서 진행 중인 비동기 로드도 취소하며 완료 이벤트를 전달하지 않습니다.\n- 같은 아틀라스를 공유하는 다른 폰트에도 영향을 줍니다. 공유 규칙은 `Font::getMemoryUsage`, 스레드 규칙은 `Font::drawString`을 참조하세요."
+                },
+                {
+                    "name": "compactAtlas",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Schedules a merge of frozen font atlas pages.",
+                    "details": "- Call on the main thread. The merge runs at an end-of-frame boundary after all windows and targets have flushed; this call does not merge immediately.\n- Glyphs keep a small gap so mipmapped text stays clean down to small sizes. For perfectly clean, heavily minified text, draw into an Fbo and scale it. Large rasterized sizes use more atlas memory.\n- Copies existing glyph bytes with aligned placement and builds mipmaps on the GPU. The page receiving new glyphs stays separate. Frozen pages already at the GPU limit are excluded.\n- Four eligible pages trigger automatic merging. This method also allows merging two or three pages. Pages that cannot fit together become several pages, each a power of two up to the GPU limit capped at 8192.\n- Shared Font copies see the same atlas change. Recorded draws retain old pages; GlyphBatch refreshes its vertices on its next draw.",
+                    "details_ja": "- メインスレッドで呼びます。すべてのウィンドウと描画先のフラッシュ後、フレーム末尾に結合します。この呼び出しでは即座に結合しません。\n- グリフの間に小さな余白を設け、小さいサイズまでミップマップ付きの文字をきれいに保ちます。大きく縮小しても完全にきれいに表示したい場合は、文字を Fbo に描いてから縮小してください。大きなサイズでラスタライズすると、アトラスのメモリ使用量が増えます。\n- 配置の整列を保って既存のグリフのバイトをコピーし、GPU でミップマップを生成します。新しいグリフを受け取るページは別に保ちます。GPU 上限サイズの固定ページは対象外です。\n- 対象ページが4枚になると自動で結合します。このメソッドでは2〜3枚も結合できます。収まらない場合は複数枚に分け、各ページは GPU 上限（最大8192）までの2の累乗サイズになります。\n- Font のコピーはアトラスの変更を共有します。記録済み描画は旧ページを保持し、GlyphBatch は次の描画時に頂点を更新します。",
+                    "details_ko": "- 메인 스레드에서 호출합니다. 모든 창과 렌더링 대상의 플러시가 끝난 프레임 끝에서 병합하며, 호출 즉시 병합하지 않습니다.\n- 글리프 사이에 작은 간격을 두어 밉맵 텍스트를 작은 크기까지 깨끗하게 유지합니다. 크게 축소해도 완전히 깨끗한 텍스트가 필요하면 Fbo에 그린 뒤 축소합니다. 큰 크기로 래스터화하면 아틀라스 메모리를 더 사용합니다.\n- 정렬된 배치를 유지하며 기존 글리프 바이트를 복사하고 GPU에서 밉맵을 생성합니다. 새 글리프를 받는 페이지는 별도로 유지합니다. GPU 최대 크기의 고정 페이지는 제외합니다.\n- 대상 페이지가 4개이면 자동 병합합니다. 이 메서드는 2~3개도 병합합니다. 한 페이지에 들어가지 않으면 여러 페이지로 나누며, 각 크기는 GPU 한도(최대 8192) 이내의 2의 거듭제곱입니다.\n- Font 복사본은 아틀라스 변경을 공유합니다. 기록된 그리기는 이전 페이지를 유지하고 GlyphBatch는 다음 그리기에서 정점을 갱신합니다.",
+                    "snippet": "void tcApp::update() {\n    font.compactAtlas();\n}\n"
                 },
                 {
                     "name": "drawString",
@@ -30779,9 +30889,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Returns a glyph atlas page for inspection.",
-                    "details": "- Returns a borrowed `const internal::AtlasState*`, or `nullptr` if no font is loaded. A loaded font does not check the index; require `index < getAtlasCount()` before calling.\n- Pages store glyph coverage in the R channel of an R8 texture. Drawing a page view with the normal texture pipeline displays it in red; font drawing uses a coverage pipeline instead.\n- This accessor does not upload textures. Adding glyphs may invalidate page pointers, and atlas updates may replace GPU images and views; reacquire them after changes. Clearing or releasing the owning atlas also invalidates them.",
-                    "details_ja": "- 所有権を渡さずに `const internal::AtlasState*` を返し、フォントが未読み込みなら `nullptr` を返します。読み込み済みの場合はインデックスを検査しないため、呼び出す前に `index < getAtlasCount()` を確認してください。\n- ページは R8 テクスチャの R チャンネルにグリフのカバレッジを保存します。ページのビューを通常のテクスチャ用パイプラインで描くと赤く表示されます。フォント描画ではカバレッジ用パイプラインを使います。\n- この取得処理ではテクスチャをアップロードしません。グリフの追加でページへのポインタが無効になる場合があり、アトラスの更新で GPU 画像やビューが置き換わる場合もあります。変更後は取得し直してください。所有元のアトラスのクリアや解放でも無効になります。",
-                    "details_ko": "- 소유권을 넘기지 않는 `const internal::AtlasState*`를 반환하며, 폰트가 로드되지 않았으면 `nullptr`를 반환합니다. 로드된 폰트는 인덱스를 검사하지 않으므로 호출 전에 `index < getAtlasCount()`를 확인해야 합니다.\n- 페이지는 R8 텍스처의 R 채널에 글리프 커버리지를 저장합니다. 페이지 뷰를 일반 텍스처 파이프라인으로 그리면 빨갛게 표시됩니다. 폰트 그리기는 커버리지 파이프라인을 사용합니다.\n- 이 접근자는 텍스처를 업로드하지 않습니다. 글리프를 추가하면 페이지 포인터가 무효화될 수 있고, 아틀라스를 갱신하면 GPU 이미지와 뷰가 교체될 수 있으므로 변경 후 다시 가져와야 합니다. 소유 아틀라스를 지우거나 해제해도 무효화됩니다."
+                    "details": "- Automatic or scheduled compaction can change page indices and invalidate borrowed pointers at a frame boundary. Reacquire inspection pointers on the next draw.\n- Returns a borrowed `const internal::AtlasState*`, or `nullptr` if no font is loaded. A loaded font does not check the index; require `index < getAtlasCount()` before calling.\n- Pages store glyph coverage in the R channel of an R8 texture. Drawing a page view with the normal texture pipeline displays it in red; font drawing uses a coverage pipeline instead.\n- This accessor does not upload textures. Adding glyphs may invalidate page pointers, and atlas updates may replace GPU images and views; reacquire them after changes. Clearing or releasing the owning atlas also invalidates them.",
+                    "details_ja": "- 自動結合や予約した結合により、フレーム末尾にページのインデックスが変わり、取得済みポインタが無効になる場合があります。次の描画時に確認用ポインタを取得し直してください。\n- 所有権を渡さずに `const internal::AtlasState*` を返し、フォントが未読み込みなら `nullptr` を返します。読み込み済みの場合はインデックスを検査しないため、呼び出す前に `index < getAtlasCount()` を確認してください。\n- ページは R8 テクスチャの R チャンネルにグリフのカバレッジを保存します。ページのビューを通常のテクスチャ用パイプラインで描くと赤く表示されます。フォント描画ではカバレッジ用パイプラインを使います。\n- この取得処理ではテクスチャをアップロードしません。グリフの追加でページへのポインタが無効になる場合があり、アトラスの更新で GPU 画像やビューが置き換わる場合もあります。変更後は取得し直してください。所有元のアトラスのクリアや解放でも無効になります。",
+                    "details_ko": "- 자동 병합이나 예약된 병합은 프레임 끝에서 페이지 인덱스를 바꾸고 빌린 포인터를 무효화할 수 있다. 다음 그리기에서 확인용 포인터를 다시 가져온다.\n- 소유권을 넘기지 않는 `const internal::AtlasState*`를 반환하며, 폰트가 로드되지 않았으면 `nullptr`를 반환합니다. 로드된 폰트는 인덱스를 검사하지 않으므로 호출 전에 `index < getAtlasCount()`를 확인해야 합니다.\n- 페이지는 R8 텍스처의 R 채널에 글리프 커버리지를 저장합니다. 페이지 뷰를 일반 텍스처 파이프라인으로 그리면 빨갛게 표시됩니다. 폰트 그리기는 커버리지 파이프라인을 사용합니다.\n- 이 접근자는 텍스처를 업로드하지 않습니다. 글리프를 추가하면 페이지 포인터가 무효화될 수 있고, 아틀라스를 갱신하면 GPU 이미지와 뷰가 교체될 수 있으므로 변경 후 다시 가져와야 합니다. 소유 아틀라스를 지우거나 해제해도 무효화됩니다."
                 },
                 {
                     "name": "getAtlasCount",
@@ -39412,6 +39522,10 @@ const TrussCAPI = {
             "desc_ja": "`Node` に取り付ける振る舞いの基底クラスを提供する。",
             "desc_ko": "`Node`에 부착하는 동작의 기반 클래스를 제공한다.",
             "examples": [
+                {
+                    "name": "customModExample",
+                    "group": "node"
+                },
                 {
                     "name": "AllFeaturesExample",
                     "group": "tests"
@@ -51558,9 +51672,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Sets the app-wide GPU uniform buffer reservation.",
-                    "details": "- Sets `uniformBufferReserve` and returns the same `RuntimeSettings&`, so calls can be chained. Call it before `runApp`.\n- It is the size, in bytes, of the GPU buffer that holds each frame's shader uniforms. Every draw call takes a 256-byte-aligned slice of it, so scenes with many draw calls per frame need more (about 4 MiB per 8,000 draw calls).\n- `0` or less selects the backend default: 1 MiB on Metal and WebGPU, 4 MiB on Vulkan. GL and D3D11 ignore it, because they have no such limit.\n- On Metal and WebGPU the buffer grows, with a warning in the log, when a frame overflows it; a large enough reservation only avoids that one-time growth. **Vulkan does not grow it**: an overflowing frame is an error there, so reserve generously for scenes with very many draw calls.\n- Metal, WebGPU and Vulkan allocate it twice (for frames in flight), so a larger value costs twice its size in memory.\n- Graphics startup reads it once. Under hot reload it is not applied and the default is used (see `RuntimeSettings`).",
-                    "details_ja": "- `uniformBufferReserve` を設定し、同じ `RuntimeSettings&` を返すため、続けて呼べます。`runApp` の前に呼んでください。\n- 毎フレームのシェーダーのユニフォームを入れる GPU バッファーのサイズを、バイト単位で指定します。描画呼び出しのたびに 256 バイト単位で切り出して使うため、1 フレームの描画呼び出しが多いシーンほど多く必要です（描画呼び出し 8,000 回でおよそ 4 MiB）。\n- `0` 以下では、バックエンドの既定値（Metal と WebGPU は 1 MiB、Vulkan は 4 MiB）になります。GL と D3D11 にはこの上限がないため、無視されます。\n- Metal と WebGPU では、1 フレームで足りなくなるとログに警告を出してバッファーが大きくなります。十分に予約しておけば、その 1 回の拡張が起きないだけです。**Vulkan では大きくなりません。** 足りなくなったフレームはエラーになるため、描画呼び出しがとても多いシーンでは多めに予約してください。\n- Metal、WebGPU、Vulkan では、処理中のフレームの分も含めて 2 つ確保するため、メモリはこの値の 2 倍使います。\n- グラフィックスの起動時に 1 回だけ読まれます。ホットリロードでは適用されず、既定値が使われます（`RuntimeSettings` を参照）。",
-                    "details_ko": "- `uniformBufferReserve`를 설정하고 같은 `RuntimeSettings&`를 반환하므로 이어서 호출할 수 있습니다. `runApp` 전에 호출하세요.\n- 매 프레임의 셰이더 유니폼을 담는 GPU 버퍼의 크기를 바이트 단위로 지정합니다. 그리기 호출마다 256바이트 단위로 잘라 쓰므로, 한 프레임의 그리기 호출이 많은 장면일수록 더 많이 필요합니다(그리기 호출 8,000번에 약 4 MiB).\n- `0` 이하이면 백엔드 기본값(Metal과 WebGPU는 1 MiB, Vulkan은 4 MiB)이 됩니다. GL과 D3D11에는 이런 상한이 없으므로 무시됩니다.\n- Metal과 WebGPU에서는 한 프레임에서 부족해지면 로그에 경고를 남기고 버퍼가 커집니다. 충분히 예약해 두면 그 한 번의 확장이 일어나지 않을 뿐입니다. **Vulkan에서는 커지지 않습니다.** 부족해진 프레임은 오류가 되므로 그리기 호출이 매우 많은 장면에서는 넉넉하게 예약하세요.\n- Metal, WebGPU, Vulkan에서는 처리 중인 프레임 몫까지 2개를 확보하므로 메모리를 이 값의 2배 사용합니다.\n- 그래픽 시작 시 한 번만 읽힙니다. 핫 리로드에서는 적용되지 않고 기본값이 사용됩니다(`RuntimeSettings` 참조).",
+                    "details": "- Sets `uniformBufferReserve` and returns the same `RuntimeSettings&`, so calls can be chained. Call it before `runApp`.\n- It is the size, in bytes, of the GPU buffer that holds each frame's shader uniforms. Every draw call takes a 256-byte-aligned slice of it, so scenes with many draw calls per frame need more (about 4 MiB per 8,000 draw calls).\n- `0` or less selects the backend default: 1 MiB on Metal and WebGPU, 4 MiB on Vulkan. GL and D3D11 ignore it, because they have no such limit.\n- On Metal and WebGPU the buffer grows, with a notice in the log, when a frame overflows it; a large enough reservation only avoids that one-time growth. **Vulkan does not grow it**: an overflowing frame is an error there, so reserve generously for scenes with very many draw calls.\n- Metal, WebGPU and Vulkan allocate it twice (for frames in flight), so a larger value costs twice its size in memory.\n- Graphics startup reads it once. Under hot reload it is not applied and the default is used (see `RuntimeSettings`).",
+                    "details_ja": "- `uniformBufferReserve` を設定し、同じ `RuntimeSettings&` を返すため、続けて呼べます。`runApp` の前に呼んでください。\n- 毎フレームのシェーダーのユニフォームを入れる GPU バッファーのサイズを、バイト単位で指定します。描画呼び出しのたびに 256 バイト単位で切り出して使うため、1 フレームの描画呼び出しが多いシーンほど多く必要です（描画呼び出し 8,000 回でおよそ 4 MiB）。\n- `0` 以下では、バックエンドの既定値（Metal と WebGPU は 1 MiB、Vulkan は 4 MiB）になります。GL と D3D11 にはこの上限がないため、無視されます。\n- Metal と WebGPU では、1 フレームで足りなくなるとログに通知（Notice）を出してバッファーが大きくなります。十分に予約しておけば、その 1 回の拡張が起きないだけです。**Vulkan では大きくなりません。** 足りなくなったフレームはエラーになるため、描画呼び出しがとても多いシーンでは多めに予約してください。\n- Metal、WebGPU、Vulkan では、処理中のフレームの分も含めて 2 つ確保するため、メモリはこの値の 2 倍使います。\n- グラフィックスの起動時に 1 回だけ読まれます。ホットリロードでは適用されず、既定値が使われます（`RuntimeSettings` を参照）。",
+                    "details_ko": "- `uniformBufferReserve`를 설정하고 같은 `RuntimeSettings&`를 반환하므로 이어서 호출할 수 있습니다. `runApp` 전에 호출하세요.\n- 매 프레임의 셰이더 유니폼을 담는 GPU 버퍼의 크기를 바이트 단위로 지정합니다. 그리기 호출마다 256바이트 단위로 잘라 쓰므로, 한 프레임의 그리기 호출이 많은 장면일수록 더 많이 필요합니다(그리기 호출 8,000번에 약 4 MiB).\n- `0` 이하이면 백엔드 기본값(Metal과 WebGPU는 1 MiB, Vulkan은 4 MiB)이 됩니다. GL과 D3D11에는 이런 상한이 없으므로 무시됩니다.\n- Metal과 WebGPU에서는 한 프레임에서 부족해지면 로그에 알림(Notice)을 남기고 버퍼가 커집니다. 충분히 예약해 두면 그 한 번의 확장이 일어나지 않을 뿐입니다. **Vulkan에서는 커지지 않습니다.** 부족해진 프레임은 오류가 되므로 그리기 호출이 매우 많은 장면에서는 넉넉하게 예약하세요.\n- Metal, WebGPU, Vulkan에서는 처리 중인 프레임 몫까지 2개를 확보하므로 메모리를 이 값의 2배 사용합니다.\n- 그래픽 시작 시 한 번만 읽힙니다. 핫 리로드에서는 적용되지 않고 기본값이 사용됩니다(`RuntimeSettings` 참조).",
                     "snippet": "// main.cpp\nint main() {\n    RuntimeSettings runtime;\n    runtime.reserveUniformBuffer(8 * 1024 * 1024);   // many draw calls per frame\n    return runApp<tcApp>(WindowSettings().setSize(1280, 720), runtime);\n}\n",
                     "related": [
                         "RuntimeSettings",
@@ -60941,6 +61055,166 @@ const TrussCAPI = {
                             "desc_ja": "ストリーミングソース (SoundStream): ディスクからオンデマンドにデコード",
                             "desc_ko": "스트리밍 소스 (SoundStream): 디스크에서 on-demand 디코딩"
                         }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "StencilDesc",
+            "desc": "Sets stencil comparison, writing and color output for drawing; the default leaves stencil unchanged.",
+            "keywords": [
+                "stencil",
+                "mask",
+                "style"
+            ],
+            "desc_ja": "描画の stencil 比較・書き込み・色出力を指定します。既定では stencil を変更しません。",
+            "desc_ko": "그리기의 스텐실 비교, 쓰기, 색상 출력을 지정합니다. 기본값은 스텐실을 변경하지 않습니다.",
+            "examples": [
+                {
+                    "name": "stencilExample",
+                    "group": "graphics"
+                },
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "setStencilDesc",
+                "clearStencil",
+                "StencilDesc::drawOnce",
+                "StencilDesc::shape",
+                "StencilDesc::inside",
+                "StencilDesc::outside",
+                "Node"
+            ],
+            "details": "- Use StencilDesc for geometry masks or opt-in draw-once. It is Style state, saved by pushStyle/popStyle and reset by resetStyle/resetStencilDesc. Only drawing and clearing change the stored bytes; a stencil attachment is required.\n\nWrite a circle mask:\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::shape());\n    drawCircle(100, 100, 60);\n}\n```\n\nDraw subsequent content inside that mask:\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::inside());\n    drawRect(0, 0, 200, 200);\n    resetStencilDesc();\n}\n```\n\n- Translucent or additive fills and strokes double-blend where they overlap themselves, such as the center of a pentagram drawn with `drawFill` or a stroke's joins. With `clearStencil`, `StencilDesc::drawOnce()` draws each pixel once; a stencil attachment is required.\n\nDraw each pixel once with the current fill/stroke and color:\n```cpp\nvoid tcApp::draw() {\n    clearStencil();\n    setStencilDesc(StencilDesc::drawOnce());\n    drawRect(20, 20, 100, 100);\n}\n```\n\n- This fixes drawing only. Physics shapes built from the same overlapping fill triangles, such as tcxBox2d compound bodies, still count the overlap in their mass; that is separate and is not solved here.\n\n- All eight bits belong to the application. mask controls both comparison and replacement; unmasked bits survive. Comparison uses masked value against masked stored byte. A passing fragment replaces bits only when write is true and depth also passes. colorWrite=false suppresses color, independently of depth. No automatic draw-once, reserved bits or ImGui exception.\n- Node::drawTree resets Style before and after each node draw. Every node starts with the default desc: a parent inside() does not clip children. Stored stencil values survive these resets.\n- Without a stencil attachment a non-default desc warns once per target and drawing uses the default state, including color output. Fbo bytes persist across frames and color/depth clears; screen persistence is not guaranteed. Fbo entry and return carry the current desc like blend state.",
+            "details_ja": "- StencilDesc は形状マスクや明示的な draw-once に使います。Style の状態として pushStyle/popStyle で保存・復元し、resetStyle/resetStencilDesc で既定に戻します。保存した値を変えるのは描画とクリアだけです。stencil 添付画像が必要です。\n\n円のマスクを書きます。\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::shape());\n    drawCircle(100, 100, 60);\n}\n```\n\n以降の内容をマスクの内側に描きます。\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::inside());\n    drawRect(0, 0, 200, 200);\n    resetStencilDesc();\n}\n```\n\n- 半透明や加算合成の塗り・線は、自分自身と重なる部分で二重に合成されます。例えば `drawFill` で描く五芒星の中心や線の結合部です。`clearStencil` と `StencilDesc::drawOnce()` を使うと各ピクセルを一度だけ描きます。stencil 添付画像が必要です。\n\n現在の塗り・線と色で各ピクセルを一度だけ描きます。\n```cpp\nvoid tcApp::draw() {\n    clearStencil();\n    setStencilDesc(StencilDesc::drawOnce());\n    drawRect(20, 20, 100, 100);\n}\n```\n\n- これは描画だけを修正します。同じ重なった塗りの三角形から作る物理形状（tcxBox2d の複合ボディなど）は、重なりを質量に重複して数えます。これは別の問題であり、ここでは解決しません。\n\n- 全 8 ビットをアプリが使えます。mask は比較と置換の両方に使い、対象外のビットを保持します。マスク後の value と保存値を比較します。write が true で stencil と深度の両方を通過したフラグメントだけがビットを置換します。colorWrite=false は深度とは独立に色出力を止めます。自動 draw-once・予約ビット・ImGui の特例はありません。\n- Node::drawTree は各ノードの draw の前後に Style をリセットします。子も既定の desc から始まるため、親の inside() は子に適用されません。書き込んだ stencil 値はリセット後も残ります。\n- stencil 添付画像がない場合、既定以外の desc は描画先ごとに一度警告し、色出力を含め既定の状態で描画します。Fbo の値はフレームや色・深度クリアをまたいで残りますが、画面の保持は保証しません。Fbo の開始・終了ではブレンド状態と同様に現在の desc を引き継ぎます。",
+            "details_ko": "- StencilDesc는 도형 마스크나 명시적인 draw-once에 사용합니다. Style 상태로 pushStyle/popStyle이 저장·복원하고 resetStyle/resetStencilDesc가 초기화합니다. 저장된 바이트는 그리기와 지우기로만 바뀝니다. 스텐실 첨부가 필요합니다.\n\n원 마스크를 기록합니다.\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::shape());\n    drawCircle(100, 100, 60);\n}\n```\n\n이후 내용을 마스크 안쪽에 그립니다.\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::inside());\n    drawRect(0, 0, 200, 200);\n    resetStencilDesc();\n}\n```\n\n- 반투명 또는 가산 합성 채우기와 선은 스스로 겹치는 부분에서 두 번 합성됩니다. 예를 들어 `drawFill`로 그린 오각별의 중심이나 선의 연결부가 있습니다. `clearStencil`과 `StencilDesc::drawOnce()`를 사용하면 각 픽셀을 한 번만 그립니다. 스텐실 첨부가 필요합니다.\n\n현재 채우기·선 및 색상으로 각 픽셀을 한 번만 그립니다.\n```cpp\nvoid tcApp::draw() {\n    clearStencil();\n    setStencilDesc(StencilDesc::drawOnce());\n    drawRect(20, 20, 100, 100);\n}\n```\n\n- 이 기능은 그리기만 수정합니다. 같은 겹치는 채우기 삼각형으로 만든 물리 도형(예: tcxBox2d 복합 바디)은 여전히 겹침을 질량에 중복 계산합니다. 이는 별개의 문제이며 여기서는 해결하지 않습니다.\n\n- 8비트 모두 앱 소유입니다. mask는 비교와 교체에 함께 쓰이며 마스크 밖 비트는 보존합니다. 마스크된 value를 저장된 바이트와 비교합니다. write가 true이고 스텐실과 깊이 검사를 통과한 조각만 비트를 교체합니다. colorWrite=false는 깊이와 별개로 색상 출력을 막습니다. 자동 draw-once, 예약 비트, ImGui 예외는 없습니다.\n- Node::drawTree는 각 노드 draw 전후에 Style을 초기화합니다. 각 노드는 기본 desc로 시작하므로 부모의 inside()는 자식에 적용되지 않습니다. 기록된 스텐실 값은 초기화 후에도 남습니다.\n- 스텐실 첨부가 없으면 기본값이 아닌 desc에 대해 타깃마다 한 번 경고하고 색상 출력을 포함한 기본 상태로 그립니다. Fbo 값은 프레임과 색상·깊이 지우기를 넘어 유지되지만 화면의 지속성은 보장하지 않습니다. Fbo 시작과 종료 시 블렌드 상태처럼 현재 desc를 이어받습니다.",
+            "properties": [
+                {
+                    "name": "colorWrite",
+                    "type": "bool",
+                    "desc": "Enables color output independently of stencil/depth writes; defaults to true.",
+                    "desc_ja": "stencil・深度の書き込みとは独立した色出力の有効指定です。既定値は true です。",
+                    "desc_ko": "스텐실·깊이 쓰기와 별개로 색상 출력을 활성화합니다. 기본값은 true입니다."
+                },
+                {
+                    "name": "mask",
+                    "type": "uint8_t",
+                    "desc": "Shared 8-bit comparison and write mask; defaults to 0xFF.",
+                    "desc_ja": "比較と書き込みに共通の 8 ビットマスクです。既定値は 0xFF です。",
+                    "desc_ko": "비교와 쓰기에 공통으로 사용하는 8비트 마스크입니다. 기본값은 0xFF입니다."
+                },
+                {
+                    "name": "test",
+                    "type": "StencilTest",
+                    "desc": "Comparison of masked value against the masked stored byte; defaults to Always.",
+                    "desc_ja": "マスク後の value を保存値と比較する方法です。既定値は Always です。",
+                    "desc_ko": "마스크된 value와 저장된 바이트의 비교 방법입니다. 기본값은 Always입니다."
+                },
+                {
+                    "name": "value",
+                    "type": "uint8_t",
+                    "desc": "Reference byte used for comparison and replacement; defaults to 0.",
+                    "desc_ja": "比較と置換に使う参照バイトです。既定値は 0 です。",
+                    "desc_ko": "비교와 교체에 쓰는 참조 바이트입니다. 기본값은 0입니다."
+                },
+                {
+                    "name": "write",
+                    "type": "bool",
+                    "desc": "Replaces masked stencil bits on stencil/depth pass when true; defaults to false.",
+                    "desc_ja": "true のとき stencil と深度を通過した場所のビットを置換します。既定値は false です。",
+                    "desc_ko": "true이면 스텐실·깊이 검사를 통과한 곳의 비트를 교체합니다. 기본값은 false입니다."
+                }
+            ],
+            "static_methods": [
+                {
+                    "name": "drawOnce",
+                    "signatures": [
+                        {
+                            "ret": "StencilDesc",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Prevents self-overlapping translucent or additive fills and strokes from double-blending; requires clearStencil and a stencil attachment.",
+                    "details": "- Translucent or additive fills and strokes double-blend where they overlap themselves, such as the center of a pentagram drawn with `drawFill` or a stroke's joins. With `clearStencil`, `StencilDesc::drawOnce()` draws each pixel once; a stencil attachment is required.\n\nApply the template:\n```cpp\nvoid tcApp::draw() {\n    clearStencil();\n    setStencilDesc(StencilDesc::drawOnce());\n    drawRect(20, 20, 100, 100);\n}\n```\n\n- This fixes drawing only. Physics shapes built from the same overlapping fill triangles, such as tcxBox2d compound bodies, still count the overlap in their mass; that is separate and is not solved here.\n- Creates a value-1 NotEqual descriptor that writes passing fragments. Prevents repeated color contributions within one stroke. For multiple strokes, change value through 1..255 and clearStencil after every 255 strokes before reusing values. The reference is baked into pipelines; many values and draw modes can exceed the default pool. Set WindowSettings::setPipelinePoolSize before runApp for large combinations.",
+                    "details_ja": "- 半透明や加算合成の塗り・線は、自分自身と重なる部分で二重に合成されます。例えば `drawFill` で描く五芒星の中心や線の結合部です。`clearStencil` と `StencilDesc::drawOnce()` を使うと各ピクセルを一度だけ描きます。stencil 添付画像が必要です。\n\nテンプレートを適用します。\n```cpp\nvoid tcApp::draw() {\n    clearStencil();\n    setStencilDesc(StencilDesc::drawOnce());\n    drawRect(20, 20, 100, 100);\n}\n```\n\n- これは描画だけを修正します。同じ重なった塗りの三角形から作る物理形状（tcxBox2d の複合ボディなど）は、重なりを質量に重複して数えます。これは別の問題であり、ここでは解決しません。\n- 通過したフラグメントを書き込む、値 1・NotEqual の設定を作ります。 1 ストローク内の色の重なりを防ぎます。複数ストロークでは value を 1〜255 で変え、値を再利用する前に 255 ストロークごとに clearStencil します。参照値はパイプラインに焼き込むため、値や描画モードの組み合わせが多い場合は runApp 前に WindowSettings::setPipelinePoolSize でプールを増やします。",
+                    "details_ko": "- 반투명 또는 가산 합성 채우기와 선은 스스로 겹치는 부분에서 두 번 합성됩니다. 예를 들어 `drawFill`로 그린 오각별의 중심이나 선의 연결부가 있습니다. `clearStencil`과 `StencilDesc::drawOnce()`를 사용하면 각 픽셀을 한 번만 그립니다. 스텐실 첨부가 필요합니다.\n\n템플릿을 적용합니다.\n```cpp\nvoid tcApp::draw() {\n    clearStencil();\n    setStencilDesc(StencilDesc::drawOnce());\n    drawRect(20, 20, 100, 100);\n}\n```\n\n- 이 기능은 그리기만 수정합니다. 같은 겹치는 채우기 삼각형으로 만든 물리 도형(예: tcxBox2d 복합 바디)은 여전히 겹침을 질량에 중복 계산합니다. 이는 별개의 문제이며 여기서는 해결하지 않습니다.\n- 통과한 조각을 기록하는 값 1, NotEqual 설정을 만듭니다. 한 스트로크 안에서 색상이 중복되는 것을 막습니다. 여러 스트로크에서는 value를 1..255로 바꾸고 재사용 전 255스트로크마다 clearStencil을 호출합니다. 참조 값은 파이프라인에 고정되므로 값과 그리기 모드 조합이 많으면 runApp 전 WindowSettings::setPipelinePoolSize로 풀을 늘립니다.",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "related": [
+                        "StencilDesc",
+                        "clearStencil"
+                    ]
+                },
+                {
+                    "name": "inside",
+                    "signatures": [
+                        {
+                            "ret": "StencilDesc",
+                            "params": "uint8_t value = 1, uint8_t mask = 255"
+                        }
+                    ],
+                    "desc": "Creates a read-only stencil descriptor that draws where the masked reference and stored byte match.",
+                    "details": "- Creates a read-only stencil descriptor that draws where the masked reference and stored byte match. inside(value=1, mask=0xFF) uses Equal, write=false and colorWrite=true.\n\nApply the template:\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::inside());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "details_ja": "- マスク後の参照値と保存値が等しい場所に描く、stencil を変更しない設定を作ります。 inside(value=1, mask=0xFF) は Equal・write=false・colorWrite=true です。\n\nテンプレートを適用します。\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::inside());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "details_ko": "- 마스크된 참조 값과 저장 값이 같은 곳에 그리는 읽기 전용 설정을 만듭니다. inside(value=1, mask=0xFF)는 Equal, write=false, colorWrite=true입니다.\n\n템플릿을 적용합니다.\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::inside());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "related": [
+                        "StencilDesc",
+                        "clearStencil"
+                    ]
+                },
+                {
+                    "name": "outside",
+                    "signatures": [
+                        {
+                            "ret": "StencilDesc",
+                            "params": "uint8_t value = 1, uint8_t mask = 255"
+                        }
+                    ],
+                    "desc": "Creates a read-only stencil descriptor that draws where the masked reference and stored byte differ.",
+                    "details": "- Creates a read-only stencil descriptor that draws where the masked reference and stored byte differ. outside(value=1, mask=0xFF) uses NotEqual, write=false and colorWrite=true.\n\nApply the template:\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::outside());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "details_ja": "- マスク後の参照値と保存値が異なる場所に描く、stencil を変更しない設定を作ります。 outside(value=1, mask=0xFF) は NotEqual・write=false・colorWrite=true です。\n\nテンプレートを適用します。\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::outside());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "details_ko": "- 마스크된 참조 값과 저장 값이 다른 곳에 그리는 읽기 전용 설정을 만듭니다. outside(value=1, mask=0xFF)는 NotEqual, write=false, colorWrite=true입니다.\n\n템플릿을 적용합니다.\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::outside());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "related": [
+                        "StencilDesc",
+                        "clearStencil"
+                    ]
+                },
+                {
+                    "name": "shape",
+                    "signatures": [
+                        {
+                            "ret": "StencilDesc",
+                            "params": "uint8_t value = 1, uint8_t mask = 255"
+                        }
+                    ],
+                    "desc": "Creates a stencil-writing descriptor with color output disabled.",
+                    "details": "- Creates a stencil-writing descriptor with color output disabled. shape(value=1, mask=0xFF) uses Always and write=true. Unmasked bits survive; depth testing still applies.\n\nApply the template:\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::shape());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "details_ja": "- 色出力を止め、stencil を書き込む設定を作ります。 shape(value=1, mask=0xFF) は Always・write=true です。マスク外のビットを保持し、深度テストにも従います。\n\nテンプレートを適用します。\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::shape());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "details_ko": "- 색상 출력을 막고 스텐실을 기록하는 설정을 만듭니다. shape(value=1, mask=0xFF)는 Always, write=true입니다. 마스크 밖 비트를 보존하고 깊이 검사도 따릅니다.\n\n템플릿을 적용합니다.\n```cpp\nvoid tcApp::draw() {\n    setStencilDesc(StencilDesc::shape());\n    drawRect(20, 20, 100, 100);\n}\n```",
+                    "keywords": [
+                        "stencil",
+                        "mask",
+                        "style"
+                    ],
+                    "related": [
+                        "StencilDesc",
+                        "clearStencil"
                     ]
                 }
             ]
@@ -76105,6 +76379,78 @@ const TrussCAPI = {
                 "TcpSendCompleteEventArgs",
                 "TcpServer::sendAsync",
                 "TcpClient::sendAsync"
+            ]
+        },
+        {
+            "name": "StencilTest",
+            "desc": "Selects the comparison between masked reference and stored stencil bytes.",
+            "keywords": [
+                "stencil",
+                "mask",
+                "style"
+            ],
+            "values": [
+                {
+                    "name": "Always",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Never",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Less",
+                    "value": 2,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Equal",
+                    "value": 3,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "LessEqual",
+                    "value": 4,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Greater",
+                    "value": 5,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "NotEqual",
+                    "value": 6,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "GreaterEqual",
+                    "value": 7,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "マスク後の参照値と保存済み stencil 値の比較を選びます。",
+            "desc_ko": "마스크된 참조 값과 저장된 스텐실 바이트의 비교를 선택합니다.",
+            "related": [
+                "StencilDesc::test"
             ]
         },
         {

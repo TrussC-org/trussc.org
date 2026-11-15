@@ -1045,8 +1045,8 @@
           "of": "ofTrueTypeFont",
           "tc": "Font",
           "notes": "Provides TrueType font rendering and text layout.",
-          "notes_ja": "TrueType フォントによる文字描画とテキストの配置を行う。",
-          "notes_ko": "트루타입 폰트로 텍스트를 렌더링하고 배치한다."
+          "notes_ja": "TrueType フォントによる文字描画とテキストの配置を行います。",
+          "notes_ko": "트루타입 폰트로 텍스트를 렌더링하고 배치합니다."
         }
       ]
     },
