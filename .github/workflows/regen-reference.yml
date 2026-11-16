@@ -2,7 +2,8 @@ name: Regenerate reference data
 
 # Rebuilds the API data the site renders -- generated/trussc-api.js (reference),
 # trusssketch-ref.js / trusssketch-api.js (TrussSketch reference + editor) and
-# of-mapping.json -- from TrussC's main branch, and commits it when it changed.
+# of-mapping.json, plus trusscli-help.json -- from TrussC's main branch.
+# Unchanged TrussC revisions skip generation unless manually forced.
 #
 # The pipeline is TrussC's own (docs/reference/README.md): clang reads the C++
 # headers, generate.js joins that with the hand-written api-reference.toml into
@@ -25,6 +26,10 @@ on:
     - cron: '17 18 * * *'          # daily, 03:17 JST
   workflow_dispatch:
     inputs:
+      force:
+        description: 'Regenerate even when the recorded TrussC commit is unchanged'
+        type: boolean
+        default: false
       dry_run:
         description: 'Generate and report the diff, but do not commit'
         type: boolean
@@ -37,13 +42,53 @@ on:
     paths:
       - '.github/workflows/regen-reference.yml'
       - '.github/scripts/check-regen.mjs'
+      - '.github/scripts/trusscli-help.py'
+      - '.github/scripts/test_trusscli_help.py'
 
 concurrency:
   group: regen-reference
   cancel-in-progress: false
 
 jobs:
+  check:
+    # Only a revision compare; no macOS runner needed.
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      should_run: ${{ steps.revision.outputs.should_run }}
+      trussc_commit: ${{ steps.revision.outputs.trussc_commit }}
+    steps:
+      - name: Check out trussc.org
+        uses: actions/checkout@v5
+        with:
+          path: trussc.org
+
+      - name: Check out TrussC (main)
+        uses: actions/checkout@v5
+        with:
+          repository: TrussC-org/TrussC
+          ref: main
+          path: TrussC
+
+      - name: Compare the recorded TrussC revision
+        id: revision
+        env:
+          # A push that edits this workflow is its dry run, so it always runs.
+          FORCE: ${{ inputs.force == true || github.event_name == 'push' }}
+        run: |
+          TC_SHA=$(git -C TrussC rev-parse HEAD)
+          FORCE_ARGS=()
+          if [ "$FORCE" = 'true' ]; then FORCE_ARGS+=(--force); fi
+          SHOULD_RUN=$(python3 trussc.org/.github/scripts/trusscli-help.py should-run \
+            --marker trussc.org/generated/trusscli-help.json --commit "$TC_SHA" "${FORCE_ARGS[@]}")
+          echo "trussc_commit=$TC_SHA" >> "$GITHUB_OUTPUT"
+          echo "should_run=$SHOULD_RUN" >> "$GITHUB_OUTPUT"
+          echo "TrussC $TC_SHA: run nightly = $SHOULD_RUN" >> "$GITHUB_STEP_SUMMARY"
+
   regen:
+    needs: check
+    if: needs.check.outputs.should_run == 'true'
     runs-on: macos-latest
     timeout-minutes: 45
     permissions:
@@ -56,7 +101,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           repository: TrussC-org/TrussC
-          ref: main
+          ref: ${{ needs.check.outputs.trussc_commit }}
           path: TrussC
           # The emitters stamp the version from `git describe --tags`, so the tags
           # and the history leading to them are needed; blobs are fetched lazily.
@@ -71,6 +116,31 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
+
+      - name: Test help capture and revision gate
+        run: python3 trussc.org/.github/scripts/test_trusscli_help.py -v
+
+      - name: Cache the trusscli Release build
+        uses: actions/cache@v4
+        with:
+          path: |
+            TrussC/tools/build-help
+            TrussC/core/build-macos
+          key: trusscli-help-${{ runner.os }}-${{ runner.arch }}-${{ needs.check.outputs.trussc_commit }}
+          restore-keys: |
+            trusscli-help-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Build trusscli (Release only)
+        run: |
+          cmake -S TrussC/tools -B TrussC/tools/build-help -DCMAKE_BUILD_TYPE=Release
+          cmake --build TrussC/tools/build-help --target trusscli --config Release --parallel 3
+
+      - name: Save trusscli help
+        run: |
+          python3 trussc.org/.github/scripts/trusscli-help.py capture \
+            --binary TrussC/tools/bin/trusscli.app/Contents/MacOS/trusscli \
+            --commit '${{ needs.check.outputs.trussc_commit }}' \
+            --output trussc.org/generated/trusscli-help.json
 
       # The headers include the built-in shaders' generated *.glsl.h, which are
       # gitignored and produced by the build. Without them clang stops mid-parse
@@ -123,6 +193,7 @@ jobs:
         working-directory: trussc.org
         run: |
           git status --short
+          git add -N generated/trusscli-help.json
           git diff --stat -- generated/
           {
             echo '### Changed files'
