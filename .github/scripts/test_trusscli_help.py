@@ -30,7 +30,7 @@ class HelpTests(unittest.TestCase):
     def test_capture_nested_help_and_preserve_text(self):
         responses = {
             (): "Commands:\n  group  Group\n  zed  Zed\n\n",
-            ("group",): "Commands:\n  child <arg>  Child\n\n",
+            ("group",): "Usage: cli group\n\nCommands:\n  child <arg>  Child\n\n",
             ("group", "child"): "Usage: cli group child\n\nUnicode: 日本語\n",
             ("zed",): "Usage: cli zed\n",
         }
@@ -44,6 +44,20 @@ class HelpTests(unittest.TestCase):
             data = help_tool.capture(Path("cli"), "abc")
         self.assertEqual(data["trussc_commit"], "abc")
         self.assertEqual(data["commands"], {" ".join(k): v for k, v in responses.items()})
+
+    def test_non_help_output_is_skipped(self):
+        responses = {
+            (): "Commands:\n  version  V\n  zed  Z\n\n",
+            ("version",): "cli v1 (built today) /some/path\n",
+            ("zed",): "Usage: cli zed\n",
+        }
+
+        def run(args, **kwargs):
+            return subprocess.CompletedProcess(args, 0, responses[tuple(args[1:-1])])
+
+        with patch.object(help_tool.subprocess, "run", side_effect=run):
+            data = help_tool.capture(Path("cli"), "abc")
+        self.assertEqual(sorted(data["commands"]), ["", "zed"])
 
     def test_failed_or_empty_help_fails(self):
         with patch.object(help_tool.subprocess, "run", side_effect=subprocess.CalledProcessError(1, "cli")):

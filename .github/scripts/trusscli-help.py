@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import sys
 
 
 def command_names(help_text, *, required=False):
@@ -37,6 +38,12 @@ def capture(binary, commit):
         )
         if not result.stdout.strip():
             raise ValueError(f"Empty help for {' '.join(parts) or 'top level'}")
+        # A command that ignores --help runs instead and may print paths or
+        # dates; keep it out of the file so it can't leak or churn.
+        if parts and not result.stdout.startswith("Usage:"):
+            print(f"::warning::skipped '{' '.join(parts)}': --help output does not start with Usage:",
+                  file=sys.stderr)
+            return
         commands[" ".join(parts)] = result.stdout
         for name in command_names(result.stdout, required=not parts):
             visit([*parts, name])
