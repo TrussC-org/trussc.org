@@ -3888,6 +3888,17 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "BackPressedEventArgs",
+   "desc": "Arguments for the Android backPressed event.",
+   "properties": [
+    {
+     "name": "cancel",
+     "type": "bool",
+     "desc": "Set true to skip Android's default Back behavior."
+    }
+   ]
+  },
+  {
    "name": "Beep",
    "desc": "Selects a built-in synthesized notification sound.",
    "static_methods": [
@@ -5739,6 +5750,11 @@ const TrussSketchAPI = {
      "name": "afterFrame",
      "type": "Event<void>",
      "desc": "Fired after TrussC's `present()` returns and GPU commands are committed."
+    },
+    {
+     "name": "backPressed",
+     "type": "Event<BackPressedEventArgs>",
+     "desc": "Android-only Back event; cancel it to keep the app in front, otherwise TrussC moves the task to the background."
     },
     {
      "name": "clipboardPasted",
@@ -18395,6 +18411,12 @@ const TrussSketchAPI = {
      "desc": "Returns the current playback time."
     },
     {
+     "name": "getDecodeThreads",
+     "snippet": "getDecodeThreads()",
+     "return": "int",
+     "desc": "Returns the stored decoder thread preference."
+    },
+    {
      "name": "getDuration",
      "snippet": "getDuration()",
      "return": "float",
@@ -18675,6 +18697,12 @@ const TrussSketchAPI = {
      "snippet": "setCurrentTime(${1:seconds})",
      "return": "void",
      "desc": "Seeks to a playback time."
+    },
+    {
+     "name": "setDecodeThreads",
+     "snippet": "setDecodeThreads(${1:count})",
+     "return": "void",
+     "desc": "Sets the decoder thread preference for the next load."
     },
     {
      "name": "setFilter",

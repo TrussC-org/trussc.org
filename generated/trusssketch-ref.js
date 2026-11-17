@@ -11029,6 +11029,26 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "BackPressedEventArgs",
+            "desc": "Arguments for the Android backPressed event.",
+            "keywords": [],
+            "desc_ja": "Android の backPressed イベントの引数です。",
+            "desc_ko": "Android의 backPressed 이벤트 인수입니다.",
+            "related": [
+                "CoreEvents::backPressed",
+                "BackPressedEventArgs::cancel"
+            ],
+            "properties": [
+                {
+                    "name": "backPressedEventArgs.cancel",
+                    "type": "boolean",
+                    "desc": "Set true to skip Android's default Back behavior.",
+                    "desc_ja": "true にすると Android の既定の Back 動作を取り消します。",
+                    "desc_ko": "true로 설정하면 Android의 기본 Back 동작을 취소합니다."
+                }
+            ]
+        },
+        {
             "name": "BlendDesc",
             "desc": "Defines blend equations that standard modes cannot express, such as adding light while keeping destination alpha.",
             "keywords": [],
@@ -12418,6 +12438,13 @@ const TrussCAPI = {
                     "desc": "Fired after TrussC's `present()` returns and GPU commands are committed.",
                     "desc_ja": "TrussC の `present()` が戻り、GPU コマンドのコミットが済んだあとに発生する。",
                     "desc_ko": "TrussC의 `present()`가 반환되고 GPU 명령이 커밋된 후 발생한다."
+                },
+                {
+                    "name": "coreEvents.backPressed",
+                    "type": "Event",
+                    "desc": "Android-only Back event; cancel it to keep the app in front, otherwise TrussC moves the task to the background.",
+                    "desc_ja": "Android 専用の Back イベントです。取り消すと前面に留まり、それ以外は TrussC がタスクをバックグラウンドに移します。",
+                    "desc_ko": "Android 전용 Back 이벤트입니다. 취소하면 앱이 전면에 남고, 그렇지 않으면 TrussC가 태스크를 백그라운드로 이동합니다."
                 },
                 {
                     "name": "coreEvents.clipboardPasted",
@@ -34956,6 +34983,18 @@ const TrussCAPI = {
                     "desc_ko": "현재 재생 시간을 반환한다."
                 },
                 {
+                    "name": "videoPlayer:getDecodeThreads",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the stored decoder thread preference.",
+                    "desc_ja": "保存されているデコードスレッド数の設定を返します。",
+                    "desc_ko": "저장된 디코더 스레드 수 설정을 반환합니다."
+                },
+                {
                     "name": "videoPlayer:getDuration",
                     "signatures": [
                         {
@@ -35526,6 +35565,18 @@ const TrussCAPI = {
                     "desc": "Seeks to a playback time.",
                     "desc_ja": "指定した再生時間に移動する。",
                     "desc_ko": "지정한 재생 시간으로 이동한다."
+                },
+                {
+                    "name": "videoPlayer:setDecodeThreads",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "count"
+                        }
+                    ],
+                    "desc": "Sets the decoder thread preference for the next load.",
+                    "desc_ja": "次の読み込みで使うデコードスレッド数を設定します。",
+                    "desc_ko": "다음 로드에 사용할 디코더 스레드 수를 설정합니다."
                 },
                 {
                     "name": "videoPlayer:setFilter",

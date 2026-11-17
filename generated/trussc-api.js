@@ -8405,9 +8405,9 @@ const TrussCAPI = {
                         "randomSeed",
                         "noise"
                     ],
-                    "details": "- `random()` returns a `float` in `[0, 1)`; with increasing bounds, `random(max)` uses `[0, max)` and `random(min, max)` uses `[min, max)`.\n- Bounds are passed directly to the distribution without validation or reordering.\n- Each thread has its own Mersenne Twister engine, initially seeded from `random_device`; `random` and `randomInt` share that engine within the thread, and `randomSeed` reseeds only the calling thread's engine.",
-                    "details_ja": "- `random()` は `[0, 1)` の `float` を返します。上下限が昇順の場合、`random(max)` の範囲は `[0, max)`、`random(min, max)` の範囲は `[min, max)` です。\n- 上下限は検証や並べ替えをせず、そのまま分布に渡します。\n- 各スレッドは `random_device` で初期シードを設定する独立したメルセンヌ・ツイスタ生成器を持ちます。`random` と `randomInt` は同じスレッド内で生成器を共有し、`randomSeed` は呼び出したスレッドの生成器だけを再シードします。",
-                    "details_ko": "- `random()`은 `[0, 1)` 범위의 `float`를 반환합니다. 경계값이 오름차순이면 `random(max)`의 범위는 `[0, max)`이고 `random(min, max)`의 범위는 `[min, max)`입니다.\n- 경계값을 검사하거나 순서를 바꾸지 않고 그대로 분포에 전달합니다.\n- 각 스레드는 `random_device`로 초기 시드를 설정하는 독립적인 메르센 트위스터 생성기를 가집니다. `random`과 `randomInt`는 같은 스레드 안에서 생성기를 공유하며 `randomSeed`는 호출한 스레드의 생성기만 다시 시드 설정합니다.",
+                    "details": "- `random()` returns a `float` in `[0, 1)`; with increasing bounds, `random(max)` uses `[0, max)` and `random(min, max)` uses `[min, max)`.\n- Bounds are passed directly to the distribution without validation or reordering.\n- Each thread has its own Mersenne Twister engine, initially seeded from `random_device`; `random` and `randomInt` share that engine within the thread, and `randomSeed` reseeds only the calling thread's engine.\n\n`random()` without arguments, called without a namespace qualifier, is an ambiguous-call compile error on Linux and macOS with `using namespace std; using namespace tc;`, because POSIX `::random()` is also declared. Use `tc::random()` or pass an argument; `random(max)` and `random(min, max)` are unaffected.\n\n```cpp\nvoid tcApp::setup() {\n    float a = tc::random();   // 0.0 to 1.0\n    float b = random(1.0f);   // same range, no ambiguity\n}\n```",
+                    "details_ja": "- `random()` は `[0, 1)` の `float` を返します。上下限が昇順の場合、`random(max)` の範囲は `[0, max)`、`random(min, max)` の範囲は `[min, max)` です。\n- 上下限は検証や並べ替えをせず、そのまま分布に渡します。\n- 各スレッドは `random_device` で初期シードを設定する独立したメルセンヌ・ツイスタ生成器を持ちます。`random` と `randomInt` は同じスレッド内で生成器を共有し、`randomSeed` は呼び出したスレッドの生成器だけを再シードします。\n\n`random()` を引数なし・名前空間の指定なしで呼ぶと、Linux と macOS では `using namespace std; using namespace tc;` のもとで呼び出しが曖昧になり、コンパイルエラーになります。POSIX の `::random()` も宣言されているためです。`tc::random()` と書くか、引数を渡してください。`random(max)` と `random(min, max)` は影響を受けません。\n\n```cpp\nvoid tcApp::setup() {\n    float a = tc::random();   // 0.0 to 1.0\n    float b = random(1.0f);   // same range, no ambiguity\n}\n```",
+                    "details_ko": "- `random()`은 `[0, 1)` 범위의 `float`를 반환합니다. 경계값이 오름차순이면 `random(max)`의 범위는 `[0, max)`이고 `random(min, max)`의 범위는 `[min, max)`입니다.\n- 경계값을 검사하거나 순서를 바꾸지 않고 그대로 분포에 전달합니다.\n- 각 스레드는 `random_device`로 초기 시드를 설정하는 독립적인 메르센 트위스터 생성기를 가집니다. `random`과 `randomInt`는 같은 스레드 안에서 생성기를 공유하며 `randomSeed`는 호출한 스레드의 생성기만 다시 시드 설정합니다.\n\n`random()`을 인수와 네임스페이스 지정 없이 호출하면 Linux와 macOS에서 `using namespace std; using namespace tc;`를 사용할 때 호출이 모호해져 컴파일 오류가 발생합니다. POSIX의 `::random()`도 선언되어 있기 때문입니다. `tc::random()`을 사용하거나 인수를 전달합니다. `random(max)`와 `random(min, max)`는 영향을 받지 않습니다.\n\n```cpp\nvoid tcApp::setup() {\n    float a = tc::random();   // 0.0 to 1.0\n    float b = random(1.0f);   // same range, no ambiguity\n}\n```",
                     "snippet": "void tcApp::setup() {\n    float chance = random(1.0f);\n    Vec2 position(random(640.0f), random(480.0f));\n    float angle = random(0.0f, TAU);\n}\n",
                     "examples": [
                         {
@@ -8444,9 +8444,9 @@ const TrussCAPI = {
                         "randomSeed",
                         "noise"
                     ],
-                    "details": "- `random()` returns a `float` in `[0, 1)`; with increasing bounds, `random(max)` uses `[0, max)` and `random(min, max)` uses `[min, max)`.\n- Bounds are passed directly to the distribution without validation or reordering.\n- Each thread has its own Mersenne Twister engine, initially seeded from `random_device`; `random` and `randomInt` share that engine within the thread, and `randomSeed` reseeds only the calling thread's engine.",
-                    "details_ja": "- `random()` は `[0, 1)` の `float` を返します。上下限が昇順の場合、`random(max)` の範囲は `[0, max)`、`random(min, max)` の範囲は `[min, max)` です。\n- 上下限は検証や並べ替えをせず、そのまま分布に渡します。\n- 各スレッドは `random_device` で初期シードを設定する独立したメルセンヌ・ツイスタ生成器を持ちます。`random` と `randomInt` は同じスレッド内で生成器を共有し、`randomSeed` は呼び出したスレッドの生成器だけを再シードします。",
-                    "details_ko": "- `random()`은 `[0, 1)` 범위의 `float`를 반환합니다. 경계값이 오름차순이면 `random(max)`의 범위는 `[0, max)`이고 `random(min, max)`의 범위는 `[min, max)`입니다.\n- 경계값을 검사하거나 순서를 바꾸지 않고 그대로 분포에 전달합니다.\n- 각 스레드는 `random_device`로 초기 시드를 설정하는 독립적인 메르센 트위스터 생성기를 가집니다. `random`과 `randomInt`는 같은 스레드 안에서 생성기를 공유하며 `randomSeed`는 호출한 스레드의 생성기만 다시 시드 설정합니다.",
+                    "details": "- `random()` returns a `float` in `[0, 1)`; with increasing bounds, `random(max)` uses `[0, max)` and `random(min, max)` uses `[min, max)`.\n- Bounds are passed directly to the distribution without validation or reordering.\n- Each thread has its own Mersenne Twister engine, initially seeded from `random_device`; `random` and `randomInt` share that engine within the thread, and `randomSeed` reseeds only the calling thread's engine.\n\n`random()` without arguments, called without a namespace qualifier, is an ambiguous-call compile error on Linux and macOS with `using namespace std; using namespace tc;`, because POSIX `::random()` is also declared. Use `tc::random()` or pass an argument; `random(max)` and `random(min, max)` are unaffected.\n\n```cpp\nvoid tcApp::setup() {\n    float a = tc::random();   // 0.0 to 1.0\n    float b = random(1.0f);   // same range, no ambiguity\n}\n```",
+                    "details_ja": "- `random()` は `[0, 1)` の `float` を返します。上下限が昇順の場合、`random(max)` の範囲は `[0, max)`、`random(min, max)` の範囲は `[min, max)` です。\n- 上下限は検証や並べ替えをせず、そのまま分布に渡します。\n- 各スレッドは `random_device` で初期シードを設定する独立したメルセンヌ・ツイスタ生成器を持ちます。`random` と `randomInt` は同じスレッド内で生成器を共有し、`randomSeed` は呼び出したスレッドの生成器だけを再シードします。\n\n`random()` を引数なし・名前空間の指定なしで呼ぶと、Linux と macOS では `using namespace std; using namespace tc;` のもとで呼び出しが曖昧になり、コンパイルエラーになります。POSIX の `::random()` も宣言されているためです。`tc::random()` と書くか、引数を渡してください。`random(max)` と `random(min, max)` は影響を受けません。\n\n```cpp\nvoid tcApp::setup() {\n    float a = tc::random();   // 0.0 to 1.0\n    float b = random(1.0f);   // same range, no ambiguity\n}\n```",
+                    "details_ko": "- `random()`은 `[0, 1)` 범위의 `float`를 반환합니다. 경계값이 오름차순이면 `random(max)`의 범위는 `[0, max)`이고 `random(min, max)`의 범위는 `[min, max)`입니다.\n- 경계값을 검사하거나 순서를 바꾸지 않고 그대로 분포에 전달합니다.\n- 각 스레드는 `random_device`로 초기 시드를 설정하는 독립적인 메르센 트위스터 생성기를 가집니다. `random`과 `randomInt`는 같은 스레드 안에서 생성기를 공유하며 `randomSeed`는 호출한 스레드의 생성기만 다시 시드 설정합니다.\n\n`random()`을 인수와 네임스페이스 지정 없이 호출하면 Linux와 macOS에서 `using namespace std; using namespace tc;`를 사용할 때 호출이 모호해져 컴파일 오류가 발생합니다. POSIX의 `::random()`도 선언되어 있기 때문입니다. `tc::random()`을 사용하거나 인수를 전달합니다. `random(max)`와 `random(min, max)`는 영향을 받지 않습니다.\n\n```cpp\nvoid tcApp::setup() {\n    float a = tc::random();   // 0.0 to 1.0\n    float b = random(1.0f);   // same range, no ambiguity\n}\n```",
                     "snippet": "void tcApp::setup() {\n    float chance = random(1.0f);\n    Vec2 position(random(640.0f), random(480.0f));\n    float angle = random(0.0f, TAU);\n}\n",
                     "examples": [
                         {
@@ -8483,9 +8483,9 @@ const TrussCAPI = {
                         "randomSeed",
                         "noise"
                     ],
-                    "details": "- `random()` returns a `float` in `[0, 1)`; with increasing bounds, `random(max)` uses `[0, max)` and `random(min, max)` uses `[min, max)`.\n- Bounds are passed directly to the distribution without validation or reordering.\n- Each thread has its own Mersenne Twister engine, initially seeded from `random_device`; `random` and `randomInt` share that engine within the thread, and `randomSeed` reseeds only the calling thread's engine.",
-                    "details_ja": "- `random()` は `[0, 1)` の `float` を返します。上下限が昇順の場合、`random(max)` の範囲は `[0, max)`、`random(min, max)` の範囲は `[min, max)` です。\n- 上下限は検証や並べ替えをせず、そのまま分布に渡します。\n- 各スレッドは `random_device` で初期シードを設定する独立したメルセンヌ・ツイスタ生成器を持ちます。`random` と `randomInt` は同じスレッド内で生成器を共有し、`randomSeed` は呼び出したスレッドの生成器だけを再シードします。",
-                    "details_ko": "- `random()`은 `[0, 1)` 범위의 `float`를 반환합니다. 경계값이 오름차순이면 `random(max)`의 범위는 `[0, max)`이고 `random(min, max)`의 범위는 `[min, max)`입니다.\n- 경계값을 검사하거나 순서를 바꾸지 않고 그대로 분포에 전달합니다.\n- 각 스레드는 `random_device`로 초기 시드를 설정하는 독립적인 메르센 트위스터 생성기를 가집니다. `random`과 `randomInt`는 같은 스레드 안에서 생성기를 공유하며 `randomSeed`는 호출한 스레드의 생성기만 다시 시드 설정합니다.",
+                    "details": "- `random()` returns a `float` in `[0, 1)`; with increasing bounds, `random(max)` uses `[0, max)` and `random(min, max)` uses `[min, max)`.\n- Bounds are passed directly to the distribution without validation or reordering.\n- Each thread has its own Mersenne Twister engine, initially seeded from `random_device`; `random` and `randomInt` share that engine within the thread, and `randomSeed` reseeds only the calling thread's engine.\n\n`random()` without arguments, called without a namespace qualifier, is an ambiguous-call compile error on Linux and macOS with `using namespace std; using namespace tc;`, because POSIX `::random()` is also declared. Use `tc::random()` or pass an argument; `random(max)` and `random(min, max)` are unaffected.\n\n```cpp\nvoid tcApp::setup() {\n    float a = tc::random();   // 0.0 to 1.0\n    float b = random(1.0f);   // same range, no ambiguity\n}\n```",
+                    "details_ja": "- `random()` は `[0, 1)` の `float` を返します。上下限が昇順の場合、`random(max)` の範囲は `[0, max)`、`random(min, max)` の範囲は `[min, max)` です。\n- 上下限は検証や並べ替えをせず、そのまま分布に渡します。\n- 各スレッドは `random_device` で初期シードを設定する独立したメルセンヌ・ツイスタ生成器を持ちます。`random` と `randomInt` は同じスレッド内で生成器を共有し、`randomSeed` は呼び出したスレッドの生成器だけを再シードします。\n\n`random()` を引数なし・名前空間の指定なしで呼ぶと、Linux と macOS では `using namespace std; using namespace tc;` のもとで呼び出しが曖昧になり、コンパイルエラーになります。POSIX の `::random()` も宣言されているためです。`tc::random()` と書くか、引数を渡してください。`random(max)` と `random(min, max)` は影響を受けません。\n\n```cpp\nvoid tcApp::setup() {\n    float a = tc::random();   // 0.0 to 1.0\n    float b = random(1.0f);   // same range, no ambiguity\n}\n```",
+                    "details_ko": "- `random()`은 `[0, 1)` 범위의 `float`를 반환합니다. 경계값이 오름차순이면 `random(max)`의 범위는 `[0, max)`이고 `random(min, max)`의 범위는 `[min, max)`입니다.\n- 경계값을 검사하거나 순서를 바꾸지 않고 그대로 분포에 전달합니다.\n- 각 스레드는 `random_device`로 초기 시드를 설정하는 독립적인 메르센 트위스터 생성기를 가집니다. `random`과 `randomInt`는 같은 스레드 안에서 생성기를 공유하며 `randomSeed`는 호출한 스레드의 생성기만 다시 시드 설정합니다.\n\n`random()`을 인수와 네임스페이스 지정 없이 호출하면 Linux와 macOS에서 `using namespace std; using namespace tc;`를 사용할 때 호출이 모호해져 컴파일 오류가 발생합니다. POSIX의 `::random()`도 선언되어 있기 때문입니다. `tc::random()`을 사용하거나 인수를 전달합니다. `random(max)`와 `random(min, max)`는 영향을 받지 않습니다.\n\n```cpp\nvoid tcApp::setup() {\n    float a = tc::random();   // 0.0 to 1.0\n    float b = random(1.0f);   // same range, no ambiguity\n}\n```",
                     "snippet": "void tcApp::setup() {\n    float chance = random(1.0f);\n    Vec2 position(random(640.0f), random(480.0f));\n    float angle = random(0.0f, TAU);\n}\n",
                     "examples": [
                         {
@@ -25267,6 +25267,36 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "BackPressedEventArgs",
+            "desc": "Arguments for the Android backPressed event.",
+            "keywords": [],
+            "desc_ja": "Android の backPressed イベントの引数です。",
+            "desc_ko": "Android의 backPressed 이벤트 인수입니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "CoreEvents::backPressed",
+                "BackPressedEventArgs::cancel"
+            ],
+            "details": "- `cancel` starts false; set it true to skip Android's default Back behavior.\n- Each listener receives fresh arguments, so a later listener cannot undo an earlier cancellation.\n- Use the arguments only inside the callback; retain the listener as shown below.",
+            "details_ja": "- `cancel` は false から始まり、true にすると Android の既定の Back 動作を取り消します。\n- リスナーごとに新しい引数を渡すので、あとのリスナーは先の取り消しを元に戻せません。\n- 引数はコールバック内だけで使い、リスナーは次のように保持します。",
+            "details_ko": "- `cancel`은 false로 시작하며 true로 설정하면 Android의 기본 Back 동작을 취소합니다.\n- 리스너마다 새 인수를 전달하므로 이후 리스너가 앞선 취소를 되돌릴 수 없습니다.\n- 인수는 콜백 안에서만 사용하고 리스너는 다음과 같이 보관합니다.",
+            "snippet": "// tcApp.h (inside class tcApp : public App)\nEventListener backListener;\n\n// tcApp.cpp\nvoid tcApp::setup() {\n    backListener = events().backPressed.listen([](BackPressedEventArgs& e) {\n        e.cancel = true;   // keep the app; skip Android's default\n    });\n}\n",
+            "properties": [
+                {
+                    "name": "cancel",
+                    "type": "bool",
+                    "desc": "Set true to skip Android's default Back behavior.",
+                    "desc_ja": "true にすると Android の既定の Back 動作を取り消します。",
+                    "desc_ko": "true로 설정하면 Android의 기본 Back 동작을 취소합니다."
+                }
+            ]
+        },
+        {
             "name": "BlendDesc",
             "desc": "Defines blend equations that standard modes cannot express, such as adding light while keeping destination alpha.",
             "keywords": [],
@@ -27644,6 +27674,13 @@ const TrussCAPI = {
                     "desc": "Fired after TrussC's `present()` returns and GPU commands are committed.",
                     "desc_ja": "TrussC の `present()` が戻り、GPU コマンドのコミットが済んだあとに発生する。",
                     "desc_ko": "TrussC의 `present()`가 반환되고 GPU 명령이 커밋된 후 발생한다."
+                },
+                {
+                    "name": "backPressed",
+                    "type": "Event<BackPressedEventArgs>",
+                    "desc": "Android-only Back event; cancel it to keep the app in front, otherwise TrussC moves the task to the background.",
+                    "desc_ja": "Android 専用の Back イベントです。取り消すと前面に留まり、それ以外は TrussC がタスクをバックグラウンドに移します。",
+                    "desc_ko": "Android 전용 Back 이벤트입니다. 취소하면 앱이 전면에 남고, 그렇지 않으면 TrussC가 태스크를 백그라운드로 이동합니다."
                 },
                 {
                     "name": "clipboardPasted",
@@ -32165,10 +32202,10 @@ const TrussCAPI = {
                     ],
                     "desc": "Stores a texture binding for a shader slot.",
                     "inherited": "Shader",
-                    "details": "- Accepts `(int slot, sg_view view, sg_sampler sampler)` or `(int slot, sg_image image, sg_sampler sampler)` and replaces the stored binding for that slot; binding to the GPU occurs when drawing.\n- View slots are 0–31. Slots outside this range are ignored with a warning emitted only once.\n- A sampler is bound at the same slot only for slots 0–11. For slots 12–31, a supplied nonzero sampler is ignored with a warning emitted only once; provide a sampler at binding 0–11 through another call or `setupBindings()`.\n- The image overload creates and caches a texture view per slot, recreating it only when the image handle changes. Prefer the view overload when a view is already available.\n- Supplied images, views, and samplers remain externally owned; only views created by the image overload are owned by the shader. Draw submissions copy handles rather than texture contents, so referenced resources must remain valid until execution; see `Shader::clear` for deferred resource retirement.",
-                    "details_ja": "- `(int slot, sg_view view, sg_sampler sampler)` または `(int slot, sg_image image, sg_sampler sampler)` を受け取り、そのスロットの保存済みバインディングを置き換えます。GPU へのバインドは描画時に行います。\n- ビュースロットは 0～31 です。範囲外のスロットは無視し、警告を一度だけログに出します。\n- 同じ番号のスロットにサンプラーを設定するのは 0～11 の場合だけです。12～31 に渡された非ゼロのサンプラーは無視し、警告を一度だけログに出します。別の呼び出しまたは `setupBindings()` で、バインディング 0～11 にサンプラーを設定してください。\n- image 版はスロットごとにテクスチャビューを生成してキャッシュし、画像ハンドルが変わった場合だけ再生成します。既存のビューがある場合は view 版を使用してください。\n- 渡した画像・ビュー・サンプラーの所有権は移りません。シェーダーが所有するのは image 版で生成したビューだけです。描画の送信ではテクスチャの内容ではなくハンドルをコピーするため、参照先のリソースは実行まで有効に保つ必要があります。リソースの遅延解放は `Shader::clear` を参照してください。",
-                    "details_ko": "- `(int slot, sg_view view, sg_sampler sampler)` 또는 `(int slot, sg_image image, sg_sampler sampler)`를 받아 해당 슬롯의 저장된 바인딩을 교체합니다. GPU 바인딩은 그리기 시점에 수행합니다.\n- 뷰 슬롯은 0–31입니다. 범위를 벗어난 슬롯은 무시하고 경고를 한 번만 기록합니다.\n- 같은 번호의 슬롯에 샘플러를 설정하는 범위는 0–11입니다. 슬롯 12–31에 전달된 0이 아닌 샘플러는 무시하고 경고를 한 번만 기록합니다. 다른 호출이나 `setupBindings()`를 통해 바인딩 0–11에 샘플러를 제공해야 합니다.\n- image 오버로드는 슬롯마다 텍스처 뷰를 생성하고 캐시하며 이미지 핸들이 바뀔 때만 다시 생성합니다. 이미 뷰가 있으면 view 오버로드를 사용하세요.\n- 전달한 이미지, 뷰 및 샘플러의 소유권은 이전되지 않습니다. 셰이더는 image 오버로드가 생성한 뷰만 소유합니다. 그리기 제출은 텍스처 내용이 아닌 핸들을 복사하므로 참조하는 리소스는 실행될 때까지 유효해야 합니다. 지연된 리소스 해제는 `Shader::clear`를 참조하세요.",
-                    "snippet": "void bindTexture(Shader& shader, const Texture& texture) {\n    shader.setTexture(0, texture.getView(), texture.getSampler());\n}\n",
+                    "details": "- Accepts `(int slot, sg_view view, sg_sampler sampler)` or `(int slot, sg_image image, sg_sampler sampler)` and replaces the stored binding for that slot; binding to the GPU occurs when drawing.\n- View slots are 0–31. Slots outside this range are ignored with a warning emitted only once.\n- A sampler is bound at the same slot only for slots 0–13. For slots 14–31, a supplied nonzero sampler is ignored with a warning emitted only once; for sampled reads, provide a sampler at binding 0–13 through another call or `setupBindings()`.\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```\n- The image overload creates and caches a texture view per slot, recreating it only when the image handle changes. Prefer the view overload when a view is already available.\n- Supplied images, views, and samplers remain externally owned; only views created by the image overload are owned by the shader. Draw submissions copy handles rather than texture contents, so referenced resources must remain valid until execution; see `Shader::clear` for deferred resource retirement.\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```",
+                    "details_ja": "- `(int slot, sg_view view, sg_sampler sampler)` または `(int slot, sg_image image, sg_sampler sampler)` を受け取り、そのスロットの保存済みバインディングを置き換えます。GPU へのバインドは描画時に行います。\n- ビュースロットは 0～31 です。範囲外のスロットは無視し、警告を一度だけログに出します。\n- 同じ番号のスロットにサンプラーを設定するのは 0～13 の場合だけです。14～31 に渡された非ゼロのサンプラーは無視し、警告を一度だけログに出します。サンプリングには、別の呼び出しまたは `setupBindings()` でバインディング 0～13 にサンプラーを設定してください。\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```\n- image 版はスロットごとにテクスチャビューを生成してキャッシュし、画像ハンドルが変わった場合だけ再生成します。既存のビューがある場合は view 版を使用してください。\n- 渡した画像・ビュー・サンプラーの所有権は移りません。シェーダーが所有するのは image 版で生成したビューだけです。描画の送信ではテクスチャの内容ではなくハンドルをコピーするため、参照先のリソースは実行まで有効に保つ必要があります。リソースの遅延解放は `Shader::clear` を参照してください。\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```",
+                    "details_ko": "- `(int slot, sg_view view, sg_sampler sampler)` 또는 `(int slot, sg_image image, sg_sampler sampler)`를 받아 해당 슬롯의 저장된 바인딩을 교체합니다. GPU 바인딩은 그리기 시점에 수행합니다.\n- 뷰 슬롯은 0–31입니다. 범위를 벗어난 슬롯은 무시하고 경고를 한 번만 기록합니다.\n- 같은 번호의 슬롯에 샘플러를 설정하는 범위는 0–13입니다. 슬롯 14–31에 전달된 0이 아닌 샘플러는 무시하고 경고를 한 번만 기록합니다. 샘플링에는 다른 호출이나 `setupBindings()`를 통해 바인딩 0–13에 샘플러를 제공해야 합니다.\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```\n- image 오버로드는 슬롯마다 텍스처 뷰를 생성하고 캐시하며 이미지 핸들이 바뀔 때만 다시 생성합니다. 이미 뷰가 있으면 view 오버로드를 사용하세요.\n- 전달한 이미지, 뷰 및 샘플러의 소유권은 이전되지 않습니다. 셰이더는 image 오버로드가 생성한 뷰만 소유합니다. 그리기 제출은 텍스처 내용이 아닌 핸들을 복사하므로 참조하는 리소스는 실행될 때까지 유효해야 합니다. 지연된 리소스 해제는 `Shader::clear`를 참조하세요.\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```",
+                    "snippet": "void tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n",
                     "keywords": [
                         "sampler",
                         "image",
@@ -59266,10 +59303,10 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Stores a texture binding for a shader slot.",
-                    "details": "- Accepts `(int slot, sg_view view, sg_sampler sampler)` or `(int slot, sg_image image, sg_sampler sampler)` and replaces the stored binding for that slot; binding to the GPU occurs when drawing.\n- View slots are 0–31. Slots outside this range are ignored with a warning emitted only once.\n- A sampler is bound at the same slot only for slots 0–11. For slots 12–31, a supplied nonzero sampler is ignored with a warning emitted only once; provide a sampler at binding 0–11 through another call or `setupBindings()`.\n- The image overload creates and caches a texture view per slot, recreating it only when the image handle changes. Prefer the view overload when a view is already available.\n- Supplied images, views, and samplers remain externally owned; only views created by the image overload are owned by the shader. Draw submissions copy handles rather than texture contents, so referenced resources must remain valid until execution; see `Shader::clear` for deferred resource retirement.",
-                    "details_ja": "- `(int slot, sg_view view, sg_sampler sampler)` または `(int slot, sg_image image, sg_sampler sampler)` を受け取り、そのスロットの保存済みバインディングを置き換えます。GPU へのバインドは描画時に行います。\n- ビュースロットは 0～31 です。範囲外のスロットは無視し、警告を一度だけログに出します。\n- 同じ番号のスロットにサンプラーを設定するのは 0～11 の場合だけです。12～31 に渡された非ゼロのサンプラーは無視し、警告を一度だけログに出します。別の呼び出しまたは `setupBindings()` で、バインディング 0～11 にサンプラーを設定してください。\n- image 版はスロットごとにテクスチャビューを生成してキャッシュし、画像ハンドルが変わった場合だけ再生成します。既存のビューがある場合は view 版を使用してください。\n- 渡した画像・ビュー・サンプラーの所有権は移りません。シェーダーが所有するのは image 版で生成したビューだけです。描画の送信ではテクスチャの内容ではなくハンドルをコピーするため、参照先のリソースは実行まで有効に保つ必要があります。リソースの遅延解放は `Shader::clear` を参照してください。",
-                    "details_ko": "- `(int slot, sg_view view, sg_sampler sampler)` 또는 `(int slot, sg_image image, sg_sampler sampler)`를 받아 해당 슬롯의 저장된 바인딩을 교체합니다. GPU 바인딩은 그리기 시점에 수행합니다.\n- 뷰 슬롯은 0–31입니다. 범위를 벗어난 슬롯은 무시하고 경고를 한 번만 기록합니다.\n- 같은 번호의 슬롯에 샘플러를 설정하는 범위는 0–11입니다. 슬롯 12–31에 전달된 0이 아닌 샘플러는 무시하고 경고를 한 번만 기록합니다. 다른 호출이나 `setupBindings()`를 통해 바인딩 0–11에 샘플러를 제공해야 합니다.\n- image 오버로드는 슬롯마다 텍스처 뷰를 생성하고 캐시하며 이미지 핸들이 바뀔 때만 다시 생성합니다. 이미 뷰가 있으면 view 오버로드를 사용하세요.\n- 전달한 이미지, 뷰 및 샘플러의 소유권은 이전되지 않습니다. 셰이더는 image 오버로드가 생성한 뷰만 소유합니다. 그리기 제출은 텍스처 내용이 아닌 핸들을 복사하므로 참조하는 리소스는 실행될 때까지 유효해야 합니다. 지연된 리소스 해제는 `Shader::clear`를 참조하세요.",
-                    "snippet": "void bindTexture(Shader& shader, const Texture& texture) {\n    shader.setTexture(0, texture.getView(), texture.getSampler());\n}\n",
+                    "details": "- Accepts `(int slot, sg_view view, sg_sampler sampler)` or `(int slot, sg_image image, sg_sampler sampler)` and replaces the stored binding for that slot; binding to the GPU occurs when drawing.\n- View slots are 0–31. Slots outside this range are ignored with a warning emitted only once.\n- A sampler is bound at the same slot only for slots 0–13. For slots 14–31, a supplied nonzero sampler is ignored with a warning emitted only once; for sampled reads, provide a sampler at binding 0–13 through another call or `setupBindings()`.\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```\n- The image overload creates and caches a texture view per slot, recreating it only when the image handle changes. Prefer the view overload when a view is already available.\n- Supplied images, views, and samplers remain externally owned; only views created by the image overload are owned by the shader. Draw submissions copy handles rather than texture contents, so referenced resources must remain valid until execution; see `Shader::clear` for deferred resource retirement.\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```",
+                    "details_ja": "- `(int slot, sg_view view, sg_sampler sampler)` または `(int slot, sg_image image, sg_sampler sampler)` を受け取り、そのスロットの保存済みバインディングを置き換えます。GPU へのバインドは描画時に行います。\n- ビュースロットは 0～31 です。範囲外のスロットは無視し、警告を一度だけログに出します。\n- 同じ番号のスロットにサンプラーを設定するのは 0～13 の場合だけです。14～31 に渡された非ゼロのサンプラーは無視し、警告を一度だけログに出します。サンプリングには、別の呼び出しまたは `setupBindings()` でバインディング 0～13 にサンプラーを設定してください。\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```\n- image 版はスロットごとにテクスチャビューを生成してキャッシュし、画像ハンドルが変わった場合だけ再生成します。既存のビューがある場合は view 版を使用してください。\n- 渡した画像・ビュー・サンプラーの所有権は移りません。シェーダーが所有するのは image 版で生成したビューだけです。描画の送信ではテクスチャの内容ではなくハンドルをコピーするため、参照先のリソースは実行まで有効に保つ必要があります。リソースの遅延解放は `Shader::clear` を参照してください。\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```",
+                    "details_ko": "- `(int slot, sg_view view, sg_sampler sampler)` 또는 `(int slot, sg_image image, sg_sampler sampler)`를 받아 해당 슬롯의 저장된 바인딩을 교체합니다. GPU 바인딩은 그리기 시점에 수행합니다.\n- 뷰 슬롯은 0–31입니다. 범위를 벗어난 슬롯은 무시하고 경고를 한 번만 기록합니다.\n- 같은 번호의 슬롯에 샘플러를 설정하는 범위는 0–13입니다. 슬롯 14–31에 전달된 0이 아닌 샘플러는 무시하고 경고를 한 번만 기록합니다. 샘플링에는 다른 호출이나 `setupBindings()`를 통해 바인딩 0–13에 샘플러를 제공해야 합니다.\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```\n- image 오버로드는 슬롯마다 텍스처 뷰를 생성하고 캐시하며 이미지 핸들이 바뀔 때만 다시 생성합니다. 이미 뷰가 있으면 view 오버로드를 사용하세요.\n- 전달한 이미지, 뷰 및 샘플러의 소유권은 이전되지 않습니다. 셰이더는 image 오버로드가 생성한 뷰만 소유합니다. 그리기 제출은 텍스처 내용이 아닌 핸들을 복사하므로 참조하는 리소스는 실행될 때까지 유효해야 합니다. 지연된 리소스 해제는 `Shader::clear`를 참조하세요.\n```cpp\nvoid tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n```",
+                    "snippet": "void tcApp::draw() {\n    shader.setTexture(13, texture.getView(), texture.getSampler());\n    shader.setTexture(14, texture.getView(), sg_sampler{});\n}\n",
                     "keywords": [
                         "sampler",
                         "image",
@@ -69538,6 +69575,36 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "getDecodeThreads",
+                    "signatures": [
+                        {
+                            "ret": "int",
+                            "params": ""
+                        }
+                    ],
+                    "desc": "Returns the stored decoder thread preference.",
+                    "details": "- Returns the stored preference, default `0` (FFmpeg automatic), rather than the active decoder's thread count. Negative input to the setter is stored as `0`.\n- Currently only affects the Linux backend. Set the preference before loading as in the snippet; changes after loading apply at the next `load()`. See `setDecodeThreads()` for the measured memory/speed trade-off.",
+                    "details_ja": "- 動作中のデコーダのスレッド数ではなく、保存された設定を返します。既定値は `0`（FFmpeg の自動選択）で、設定時の負の値は `0` になります。\n- この設定を反映するのは Linux バックエンドだけです。スニペットのように読み込み前に設定し、読み込み後の変更は次の `load()` で適用されます。測定されたメモリと速度の関係は `setDecodeThreads()` を参照してください。",
+                    "details_ko": "- 활성 디코더의 스레드 수가 아닌 저장된 설정을 반환합니다. 기본값은 `0`(FFmpeg 자동 선택)이며 설정 시 음수는 `0`으로 저장합니다.\n- 현재 Linux 백엔드에만 적용합니다. 스니펫처럼 로드 전에 설정하며 로드 후 변경은 다음 `load()`에 적용합니다. 측정한 메모리와 속도의 관계는 `setDecodeThreads()`를 참조합니다.",
+                    "snippet": "class tcApp : public App {\n    VideoPlayer player;\n    void setup() override {\n        player.setDecodeThreads(4);\n        player.load(\"movie.mp4\");\n        logNotice(\"VideoPlayer\") << player.getDecodeThreads();\n    }\n};\n",
+                    "keywords": [
+                        "decode",
+                        "threads",
+                        "ffmpeg",
+                        "preference"
+                    ],
+                    "related": [
+                        "VideoPlayer::setDecodeThreads"
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "web"
+                    ]
+                },
+                {
                     "name": "getDuration",
                     "signatures": [
                         {
@@ -70793,6 +70860,38 @@ const TrussCAPI = {
                     ],
                     "related": [
                         "VideoPlayerBase::getCurrentTime"
+                    ],
+                    "platforms": [
+                        "macos",
+                        "windows",
+                        "linux",
+                        "ios",
+                        "web"
+                    ]
+                },
+                {
+                    "name": "setDecodeThreads",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "int count"
+                        }
+                    ],
+                    "desc": "Sets the decoder thread preference for the next load.",
+                    "details": "- Call before `load()`. The default `0` requests FFmpeg's automatic choice and preserves existing behavior; negative values are clamped to `0`.\n- Currently only affects the Linux backend; other platforms ignore it. The snippet sets the preference before loading.\n- One value applies to hardware and software decoding, including software fallback. Changes after loading take effect at the next `load()` and do not reconfigure the loaded decoder, even on fallback.\n- In software decoding measurements on a 20-thread i5-13500 (auto opened 16 threads), choosing `4` instead of `0` cut peak memory to about a third and decode speed by about 40% across 1080p/4K H.264 and 8K H.265. Automatic (`0`) was fastest; choose based on memory and playback needs.",
+                    "details_ja": "- `load()` の前に呼びます。既定値の `0` は FFmpeg の自動選択で、従来の動作を維持します。負の値は `0` に丸められます。\n- この設定を反映するのは Linux バックエンドだけです。他のプラットフォームでは無視されます。スニペットのように読み込み前に設定します。\n- ハードウェアとソフトウェアのデコード、およびソフトウェアへのフォールバックで同じ値を使います。読み込み後の変更は次の `load()` で適用され、フォールバック時もロード済みのデコーダは再設定されません。\n- 20 スレッドの i5-13500（自動選択では 16 スレッド）でのソフトウェアデコード測定では、1080p/4K H.264 と 8K H.265 で `0` から `4` にするとピークメモリが約 3 分の 1 になり、デコード速度は約 40% 低下しました。自動選択（`0`）が最速でした。メモリと再生の要件に合わせて選びます。",
+                    "details_ko": "- `load()` 전에 호출합니다. 기본값 `0`은 FFmpeg의 자동 선택으로 기존 동작을 유지합니다. 음수는 `0`으로 조정합니다.\n- 현재 Linux 백엔드에만 적용하며 다른 플랫폼에서는 무시합니다. 스니펫처럼 로드 전에 설정합니다.\n- 하드웨어 및 소프트웨어 디코딩과 소프트웨어 폴백에 같은 값을 사용합니다. 로드 후 변경은 다음 `load()`에 적용하며 폴백 시에도 로드된 디코더를 다시 설정하지 않습니다.\n- 20스레드 i5-13500(자동 선택 시 16스레드)에서 소프트웨어 디코딩을 측정한 결과, 1080p/4K H.264 및 8K H.265에서 `0` 대신 `4`를 선택하면 최대 메모리는 약 3분의 1로 줄고 디코딩 속도는 약 40% 감소했습니다. 자동 선택(`0`)이 가장 빨랐습니다. 메모리와 재생 요구에 맞게 선택합니다.",
+                    "snippet": "class tcApp : public App {\n    VideoPlayer player;\n    void setup() override {\n        player.setDecodeThreads(4);\n        player.load(\"movie.mp4\");\n    }\n};\n",
+                    "keywords": [
+                        "decode",
+                        "threads",
+                        "ffmpeg",
+                        "memory",
+                        "linux"
+                    ],
+                    "related": [
+                        "VideoPlayer::getDecodeThreads",
+                        "VideoPlayer::setUseHwAccel"
                     ],
                     "platforms": [
                         "macos",
@@ -73939,9 +74038,9 @@ const TrussCAPI = {
                         }
                     ],
                     "desc": "Sets the startup pipeline pool slot count.",
-                    "details": "- The default is 1024 pipeline slots. Each sokol_gfx pipeline slot costs about 1.2 KB of CPU memory; 4096 slots use about 4.9 MB.\n- sokol_gl uses the same slot count, including after its drawing buffers are resized. Its slots are small CPU records (about 32 B), so using the same count avoids a separate hidden limit. One sokol_gl pipeline still needs up to five sokol_gfx pipeline slots. The context pool keeps growing as before.\n- `count` sets the number of slots and returns the same `WindowSettings&` for chaining. Sokol uses 16-bit slot indices, so the backend supports at most 65,535 slots per pool. Larger values log one Error for this setting at graphics startup and use 65,535. Allocation also needs enough memory.\n- `0` selects the default. A negative value logs one Notice for this setting at graphics startup and uses the default.\n- Set this before `runApp()`. Graphics startup reads it once; changing settings later does not resize pools. The hot-reload launcher also forwards this setting. Headless mode has no `sg_setup()`, so this setting does not apply there.\n- Exhaustion logs one Error per pool per process, including its configured size and the setter to increase it before `runApp()`. Affected resource creation fails. Sokol's original line remains at debug verbosity.",
-                    "details_ja": "- 既定値はパイプライン 1024 枠です。sokol_gfx のパイプラインは 1 枠あたり約 1.2 KB の CPU メモリを使います。4096 枠なら約 4.9 MB です。\n- sokol_gl も同じ枠数を使い、描画バッファーのサイズ変更後も維持します。枠は約 32 B の小さな CPU 管理情報なので、同じ数にして別の隠れた制限を避けます。sokol_gl の 1 パイプラインには sokol_gfx の枠が最大 5 個必要です。コンテキストプールは従来どおり拡張します。\n- `count` で枠数を設定し、チェイン用に同じ `WindowSettings&` を返します。sokol は枠の番号を 16 ビットで表すため、バックエンドが扱えるのは各プール 65,535 枠までです。それより大きな値では描画系の起動時にこの設定について Error を一度出し、65,535 を使います。確保には十分なメモリも必要です。\n- `0` は既定値を選びます。負の値では描画系の起動時にこの設定について Notice を一度出し、既定値を使います。\n- `runApp()` の前に設定してください。描画系の起動時に一度だけ読み取るため、後から設定を変えてもプールの大きさは変わりません。ホットリロード用ランチャーにも反映します。ヘッドレスモードには `sg_setup()` がないため、この設定は適用しません。\n- 枠が足りない場合、プロセス内の各プールについて Error を一度出します。設定した枠数と、`runApp()` の前に枠数を増やすセッターを示します。該当するリソースの作成は失敗します。sokol の元の行はデバッグ用のログレベルに残します。",
-                    "details_ko": "- 기본값은 파이프라인 슬롯 1024개입니다. sokol_gfx 파이프라인 슬롯은 각각 약 1.2 KB의 CPU 메모리를 사용합니다. 4096개는 약 4.9 MB를 사용합니다.\n- sokol_gl도 같은 슬롯 수를 사용하며 그리기 버퍼 크기를 바꾼 뒤에도 유지합니다. 슬롯은 약 32 B의 작은 CPU 관리 정보이므로 같은 수를 사용해 별도의 숨은 제한을 피합니다. sokol_gl 파이프라인 하나에는 sokol_gfx 슬롯이 최대 5개 필요합니다. 컨텍스트 풀은 기존처럼 확장합니다.\n- `count`로 슬롯 수를 설정하고 호출을 연결할 수 있도록 같은 `WindowSettings&`를 반환합니다. sokol은 슬롯 번호를 16비트로 표현하므로 백엔드는 풀마다 최대 65,535개 슬롯을 지원합니다. 더 큰 값이면 그래픽 시작 시 이 설정에 대해 Error를 한 번 기록하고 65,535를 사용합니다. 할당에는 충분한 메모리도 필요합니다.\n- `0`은 기본값을 선택합니다. 음수이면 그래픽 시작 시 이 설정에 대해 Notice를 한 번 기록하고 기본값을 사용합니다.\n- `runApp()` 전에 설정해야 합니다. 그래픽 시작 시 한 번만 읽으므로 이후에 설정을 바꿔도 풀 크기는 바뀌지 않습니다. 핫 리로드 실행기도 이 설정을 전달합니다. 헤드리스 모드에는 `sg_setup()`이 없으므로 적용하지 않습니다.\n- 슬롯이 부족하면 프로세스의 각 풀에 대해 Error를 한 번 기록합니다. 설정한 슬롯 수와 `runApp()` 전에 늘릴 수 있는 세터를 표시합니다. 해당 리소스 생성은 실패합니다. sokol의 원래 로그는 디버그 상세 수준으로 유지합니다.",
+                    "details": "- The default is 1024 pipeline slots. Each sokol_gfx pipeline slot costs about 1.2 KB of CPU memory; 4096 slots use about 4.9 MB.\n- sokol_gl uses the same slot count, including after its drawing buffers are resized. Its slots are small CPU records (about 32 B), so using the same count avoids a separate hidden limit. One sokol_gl pipeline still needs up to five sokol_gfx pipeline slots. The context pool keeps growing as before.\n- `count` sets the number of slots and returns the same `WindowSettings&` for chaining. Sokol uses 16-bit slot indices, so the backend supports at most 65,535 slots per pool. Larger values log one Error for this setting at graphics startup and use 65,535. Allocation also needs enough memory.\n- `0` selects the default. A negative value logs one Notice for this setting at graphics startup and uses the default.\n- Set this before `runApp()`. Graphics startup reads it once; changing settings later does not resize pools. The hot-reload launcher also forwards this setting. Headless mode has no `sg_setup()`, so this setting does not apply there.\n- The fuller sg or sokol_gl pipeline pool logs Notice once per run at 50%, Warning on each upward crossing of 80%, and Error on full-pool creation failure (at most once per second, with suppressed failures counted); increase the pool before `runApp()`:\n  ```cpp\n  WindowSettings settings;\n  settings.setPipelinePoolSize(4096);\n  runApp<tcApp>(settings);\n  ```",
+                    "details_ja": "- 既定値はパイプライン 1024 枠です。sokol_gfx のパイプラインは 1 枠あたり約 1.2 KB の CPU メモリを使います。4096 枠なら約 4.9 MB です。\n- sokol_gl も同じ枠数を使い、描画バッファーのサイズ変更後も維持します。枠は約 32 B の小さな CPU 管理情報なので、同じ数にして別の隠れた制限を避けます。sokol_gl の 1 パイプラインには sokol_gfx の枠が最大 5 個必要です。コンテキストプールは従来どおり拡張します。\n- `count` で枠数を設定し、チェイン用に同じ `WindowSettings&` を返します。sokol は枠の番号を 16 ビットで表すため、バックエンドが扱えるのは各プール 65,535 枠までです。それより大きな値では描画系の起動時にこの設定について Error を一度出し、65,535 を使います。確保には十分なメモリも必要です。\n- `0` は既定値を選びます。負の値では描画系の起動時にこの設定について Notice を一度出し、既定値を使います。\n- `runApp()` の前に設定してください。描画系の起動時に一度だけ読み取るため、後から設定を変えてもプールの大きさは変わりません。ホットリロード用ランチャーにも反映します。ヘッドレスモードには `sg_setup()` がないため、この設定は適用しません。\n- sg と sokol_gl のうち使用率が高いプールについて、50% に達すると実行中に一度だけ Notice、80% に達するたびに Warning、満杯による作成失敗では Error を記録します（最大毎秒一度で、抑制した失敗数も示します）。`runApp()` の前に枠数を増やしてください。\n  ```cpp\n  WindowSettings settings;\n  settings.setPipelinePoolSize(4096);\n  runApp<tcApp>(settings);\n  ```",
+                    "details_ko": "- 기본값은 파이프라인 슬롯 1024개입니다. sokol_gfx 파이프라인 슬롯은 각각 약 1.2 KB의 CPU 메모리를 사용합니다. 4096개는 약 4.9 MB를 사용합니다.\n- sokol_gl도 같은 슬롯 수를 사용하며 그리기 버퍼 크기를 바꾼 뒤에도 유지합니다. 슬롯은 약 32 B의 작은 CPU 관리 정보이므로 같은 수를 사용해 별도의 숨은 제한을 피합니다. sokol_gl 파이프라인 하나에는 sokol_gfx 슬롯이 최대 5개 필요합니다. 컨텍스트 풀은 기존처럼 확장합니다.\n- `count`로 슬롯 수를 설정하고 호출을 연결할 수 있도록 같은 `WindowSettings&`를 반환합니다. sokol은 슬롯 번호를 16비트로 표현하므로 백엔드는 풀마다 최대 65,535개 슬롯을 지원합니다. 더 큰 값이면 그래픽 시작 시 이 설정에 대해 Error를 한 번 기록하고 65,535를 사용합니다. 할당에는 충분한 메모리도 필요합니다.\n- `0`은 기본값을 선택합니다. 음수이면 그래픽 시작 시 이 설정에 대해 Notice를 한 번 기록하고 기본값을 사용합니다.\n- `runApp()` 전에 설정해야 합니다. 그래픽 시작 시 한 번만 읽으므로 이후에 설정을 바꿔도 풀 크기는 바뀌지 않습니다. 핫 리로드 실행기도 이 설정을 전달합니다. 헤드리스 모드에는 `sg_setup()`이 없으므로 적용하지 않습니다.\n- sg와 sokol_gl 중 사용률이 높은 풀에 대해 50%에 도달하면 실행 중 한 번만 Notice, 80%를 상향 통과할 때마다 Warning, 풀이 가득 차 생성에 실패하면 Error를 기록합니다(초당 최대 한 번이며 억제된 실패 수도 표시합니다). `runApp()` 전에 슬롯 수를 늘려야 합니다.\n  ```cpp\n  WindowSettings settings;\n  settings.setPipelinePoolSize(4096);\n  runApp<tcApp>(settings);\n  ```",
                     "snippet": "int main() {\n    WindowSettings settings;\n    settings.setSize(1280, 720).setResourcePoolSize(50000).setShaderPoolSize(4096);\n    return runApp<tcApp>(settings);\n}\n",
                     "related": [
                         "WindowSettings",
