@@ -20956,6 +20956,19 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "charInput",
+                    "signatures": [
+                        {
+                            "ret": "void",
+                            "params": "const CharEventArgs & e"
+                        }
+                    ],
+                    "desc": "Called for one typed character in this Window.",
+                    "details": "BeforeApp listeners run first, then this callback, then AfterApp listeners. A consumed event stops before later listeners. ImGui keyboard capture consumes it before ordinary listeners and App. There is no Node character callback. In tcApp:\n```cpp\nvoid charInput(const CharEventArgs& e) override {\n    logNotice() << e.codepoint;\n}\n```",
+                    "details_ja": "BeforeApp リスナー、このコールバック、AfterApp リスナーの順です。consumed は後続への通知を止めます。ImGui がキーボードを捕捉している間は通常のリスナーと App の前で消費されます。Node の文字コールバックはありません。tcApp で使います。\n```cpp\nvoid charInput(const CharEventArgs& e) override {\n    logNotice() << e.codepoint;\n}\n```",
+                    "details_ko": "BeforeApp 리스너, 이 콜백, AfterApp 리스너 순서입니다. consumed는 이후 전달을 멈춥니다. ImGui 키보드 캡처 중에는 일반 리스너와 App 전에 소비됩니다. Node 문자 콜백은 없습니다. tcApp에서 사용합니다.\n```cpp\nvoid charInput(const CharEventArgs& e) override {\n    logNotice() << e.codepoint;\n}\n```"
+                },
+                {
                     "name": "cleanup",
                     "signatures": [
                         {
@@ -21140,13 +21153,17 @@ const TrussCAPI = {
                     "signatures": [
                         {
                             "ret": "void",
+                            "params": "const DragDropEventArgs & e"
+                        },
+                        {
+                            "ret": "void",
                             "params": "const std::vector<std::string> & files"
                         }
                     ],
-                    "desc": "Called when files are dropped onto this Window, with their paths.",
-                    "details": "- Override `filesDropped(const vector<string>& files)` in your tcApp.\n- `events().filesDropped` listeners registered without a priority (`BeforeApp`) run before this function, and `AfterApp` listeners run after it. If an earlier listener changes the file list, this function receives the changed list. Unlike mouse events, a drop is not passed on to child nodes.\n- On desktop, each entry is a full (absolute) path in UTF-8 that you can load as is. On Linux, TrussC has already removed the `file://` prefix and decoded `%20` and similar escapes.\n- It is called on the main thread, so you can load images and other GPU objects right here. To check the file type, compare the extension, for example `toLower(getFileExtension(path)) == \"png\"`.\n- TrussC sets no limit on the number of files or on the length of each UTF-8 path (the file name on the web); memory is allocated to fit the drop. Only the limits of available memory and of the platform apply.\n- The drop position is not passed. `events().filesDropped` listeners receive `DragDropEventArgs` with x/y, but that is the last known mouse position, not the exact drop point.\n- It is called on the App of the window that received the drop. On macOS, Windows and Linux this includes secondary windows. A headless App never receives it.",
-                    "details_ja": "- tcApp で `filesDropped(const vector<string>& files)` をオーバーライドします。\n- 優先度を指定せずに（`BeforeApp` で）登録した `events().filesDropped` のリスナーはこの関数より前に、`AfterApp` のリスナーはあとに呼ばれます。前のリスナーがファイルの一覧を変えると、この関数には変更後の一覧が届きます。マウスのイベントと違い、ドロップは子ノードには渡されません。\n- デスクトップでは、それぞれが UTF-8 のフルパス（絶対パス）なので、そのまま読み込めます。Linux では、`file://` を取り除き、`%20` などの表記も元の文字に戻してあります。\n- メインスレッドで呼ばれるため、ここでそのまま画像や GPU オブジェクトを読み込めます。ファイルの種類は、`toLower(getFileExtension(path)) == \"png\"` のように拡張子で判定できます。\n- ファイルの数や、UTF-8 のパスの長さ（Web ではファイル名の長さ）に TrussC の上限はありません。ドロップの内容に合わせてメモリを確保し、制約になるのは使えるメモリとプラットフォーム側の制限だけです。\n- ドロップした位置は渡されません。`events().filesDropped` のリスナーが受け取る `DragDropEventArgs` には x/y がありますが、これは最後に分かっているマウス位置であり、実際にドロップした位置ではありません。\n- ドロップを受けたウィンドウの App で呼ばれます。macOS、Windows、Linux では 2 つ目以降のウィンドウでも呼ばれます。ヘッドレス App では呼ばれません。",
-                    "details_ko": "- tcApp에서 `filesDropped(const vector<string>& files)`를 오버라이드합니다.\n- 우선순위 없이(`BeforeApp`으로) 등록한 `events().filesDropped` 리스너는 이 함수보다 먼저, `AfterApp` 리스너는 나중에 호출됩니다. 앞선 리스너가 파일 목록을 바꾸면 이 함수에는 바뀐 목록이 전달됩니다. 마우스 이벤트와 달리 드롭은 자식 노드로 전달되지 않습니다.\n- 데스크톱에서는 각각이 UTF-8 전체 경로(절대 경로)이므로 그대로 로드할 수 있습니다. Linux에서는 `file://`를 제거하고 `%20` 같은 표기도 원래 문자로 되돌려 둡니다.\n- 메인 스레드에서 호출되므로 여기서 바로 이미지나 GPU 객체를 로드할 수 있습니다. 파일 종류는 `toLower(getFileExtension(path)) == \"png\"`처럼 확장자로 판별할 수 있습니다.\n- 파일 수나 UTF-8 경로 길이(웹에서는 파일 이름 길이)에 TrussC의 제한은 없습니다. 드롭 내용에 맞춰 메모리를 할당하며, 제약이 되는 것은 사용할 수 있는 메모리와 플랫폼 쪽 제한뿐입니다.\n- 드롭한 위치는 전달되지 않습니다. `events().filesDropped` 리스너가 받는 `DragDropEventArgs`에는 x/y가 있지만, 이것은 마지막으로 알려진 마우스 위치이며 실제로 드롭한 위치가 아닙니다.\n- 드롭을 받은 창의 App에서 호출됩니다. macOS, Windows, Linux에서는 두 번째 이후 창에서도 호출됩니다. 헤드리스 App에서는 호출되지 않습니다.",
+                    "desc": "Receives dropped paths and position in this Window, while preserving path-only overrides.",
+                    "details": "Override the rich form to receive paths and position. Its default calls filesDropped(const vector<string>&), preserving existing overrides. BeforeApp listener edits reach either callback; AfterApp runs afterward. Device drops use the last known mouse position; injected drops preserve the supplied App coordinates. There is no API for a more precise device drop position. Drops are not passed to child nodes. Desktop device paths are absolute UTF-8 paths; injected paths are passed as supplied. In tcApp:\n```cpp\nvoid filesDropped(const DragDropEventArgs& e) override {\n    logNotice() << e.files.size() << e.x << e.y;\n}\n```",
+                    "details_ja": "パスと位置は引数付きの形式で受け取ります。既定の実装は filesDropped(const vector<string>&) を呼び、既存のオーバーライドを保ちます。BeforeApp の編集はどちらにも届き、AfterApp はあとで呼ばれます。デバイスのドロップ位置は最後に分かっているマウス位置で、注入では指定した App 座標を保ちます。より正確なデバイスのドロップ位置を取得する API はありません。子ノードには通知しません。デスクトップのデバイス入力は絶対 UTF-8 パス、注入は指定どおりのパスです。tcApp で使います。\n```cpp\nvoid filesDropped(const DragDropEventArgs& e) override {\n    logNotice() << e.files.size() << e.x << e.y;\n}\n```",
+                    "details_ko": "경로와 위치를 받으려면 인자 형식을 재정의합니다. 기본 구현은 filesDropped(const vector<string>&)를 호출하여 기존 재정의를 유지합니다. BeforeApp 변경은 두 형식 모두에 전달되고 AfterApp은 나중에 호출됩니다. 장치 드롭은 마지막 마우스 위치를 사용하며 주입은 지정 App 좌표를 유지합니다. 더 정확한 장치 드롭 위치 API는 없습니다. 자식 노드에는 전달하지 않습니다. 데스크톱 장치 경로는 절대 UTF-8 경로이며 주입 경로는 지정한 그대로입니다. tcApp에서 사용합니다.\n```cpp\nvoid filesDropped(const DragDropEventArgs& e) override {\n    logNotice() << e.files.size() << e.x << e.y;\n}\n```",
                     "snippet": "// tcApp.h (inside class tcApp : public App)\nvoid filesDropped(const vector<string>& files) override;\nImage previewImage;\n\n// tcApp.cpp\nvoid tcApp::filesDropped(const vector<string>& files) {\n    for (const auto& path : files) {\n        if (toLower(getFileExtension(path)) == \"png\") previewImage.load(path);\n    }\n}\n",
                     "keywords": [
                         "drop",
@@ -21164,9 +21181,9 @@ const TrussCAPI = {
                         "getFileExtension",
                         "Image::load"
                     ],
-                    "platformNote": "Windows, macOS, Linux and Web only; it is never called on iOS or Android. On Web you receive the browser's file names, not paths that you can load, and TrussC has no helper for reading the contents of dropped files.",
-                    "platformNote_ja": "Windows / macOS / Linux / Web のみで、iOS / Android では呼ばれません。Web で届くのはブラウザ上のファイル名であり、読み込めるパスではありません。また、ドロップされたファイルの中身を読む仕組みは TrussC にはありません。",
-                    "platformNote_ko": "Windows / macOS / Linux / Web에서만 호출되며 iOS / Android에서는 호출되지 않습니다. Web에서 전달되는 것은 브라우저의 파일 이름이므로 로드할 수 있는 경로가 아니며, 드롭된 파일 내용을 읽는 기능도 TrussC에는 없습니다."
+                    "platformNote": "Drops from the OS arrive on Windows, macOS, Linux and Web only, never on iOS or Android. On Web those are the browser's file names, not paths that you can load, and TrussC has no helper for reading the contents of dropped files. A drop sent with injectInput arrives on every platform, with the paths exactly as given.",
+                    "platformNote_ja": "OS からのドロップが届くのは Windows / macOS / Linux / Web のみで、iOS / Android では届きません。Web で届くのはブラウザ上のファイル名であり、読み込めるパスではありません。また、ドロップされたファイルの中身を読む仕組みは TrussC にはありません。injectInput で送ったドロップはどのプラットフォームでも届き、パスは指定したとおりです。",
+                    "platformNote_ko": "OS의 드롭은 Windows / macOS / Linux / Web에서만 전달되며 iOS / Android에서는 전달되지 않습니다. Web에서 전달되는 것은 브라우저의 파일 이름이므로 로드할 수 있는 경로가 아니며, 드롭된 파일 내용을 읽는 기능도 TrussC에는 없습니다. injectInput으로 보낸 드롭은 모든 플랫폼에서 전달되며 경로는 지정한 그대로입니다."
                 },
                 {
                     "name": "findByInstanceId",
@@ -25800,6 +25817,87 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "CharEventArgs",
+            "desc": "One typed Unicode scalar, with repeat, modifier, and injection information.",
+            "keywords": [],
+            "desc_ja": "入力された Unicode スカラー 1 文字とリピート・修飾キー・注入情報です。",
+            "desc_ko": "입력된 Unicode 스칼라 하나와 반복, 수식 키, 주입 정보입니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "details": "Text input is separate from key presses and clipboard paste. Device characters have injected=false and an empty sourceTag. One event carries one codepoint; there is no IME composition API. Read it in tcApp:\n```cpp\nvoid charInput(const CharEventArgs& e) override {\n    logNotice() << e.codepoint;\n}\n```",
+            "details_ja": "文字入力はキー押下やクリップボード貼り付けとは別です。デバイスからの文字は injected=false と空の sourceTag を持ちます。1 イベントは 1 codepoint です。IME 変換中の文字列を扱う API はありません。tcApp で受け取ります。\n```cpp\nvoid charInput(const CharEventArgs& e) override {\n    logNotice() << e.codepoint;\n}\n```",
+            "details_ko": "문자 입력은 키 누름 및 클립보드 붙여넣기와 별개입니다. 장치 문자는 injected=false와 빈 sourceTag를 가집니다. 이벤트 하나는 codepoint 하나를 전달하며 IME 조합 API는 없습니다. tcApp에서 받습니다.\n```cpp\nvoid charInput(const CharEventArgs& e) override {\n    logNotice() << e.codepoint;\n}\n```",
+            "properties": [
+                {
+                    "name": "alt",
+                    "type": "bool",
+                    "desc": "Whether Alt was held.",
+                    "desc_ja": "Alt の押下状態です。",
+                    "desc_ko": "Alt를 누른 상태입니다."
+                },
+                {
+                    "name": "codepoint",
+                    "type": "uint32_t",
+                    "desc": "The typed Unicode scalar.",
+                    "desc_ja": "入力された Unicode スカラーです。",
+                    "desc_ko": "입력된 Unicode 스칼라입니다."
+                },
+                {
+                    "name": "consumed",
+                    "type": "bool",
+                    "desc": "Stops delivery to later listeners and App when true.",
+                    "desc_ja": "true で後続リスナーと App への通知を止めます。",
+                    "desc_ko": "true이면 이후 리스너와 App 전달을 멈춥니다."
+                },
+                {
+                    "name": "ctrl",
+                    "type": "bool",
+                    "desc": "Whether Control was held.",
+                    "desc_ja": "Control の押下状態です。",
+                    "desc_ko": "Control을 누른 상태입니다."
+                },
+                {
+                    "name": "injected",
+                    "type": "bool",
+                    "desc": "True for injectInput characters, false for device characters.",
+                    "desc_ja": "injectInput の文字は true、デバイスの文字は false です。",
+                    "desc_ko": "injectInput 문자는 true, 장치 문자는 false입니다."
+                },
+                {
+                    "name": "isRepeat",
+                    "type": "bool",
+                    "desc": "Whether this character repeats a held key.",
+                    "desc_ja": "キーを押し続けたリピート入力かを示します。",
+                    "desc_ko": "키를 누르고 있어 반복된 문자인지 나타냅니다."
+                },
+                {
+                    "name": "shift",
+                    "type": "bool",
+                    "desc": "Whether Shift was held.",
+                    "desc_ja": "Shift の押下状態です。",
+                    "desc_ko": "Shift를 누른 상태입니다."
+                },
+                {
+                    "name": "sourceTag",
+                    "type": "std::string",
+                    "desc": "The tag supplied to injectInput, empty for device characters.",
+                    "desc_ja": "injectInput に指定したタグです。デバイスの文字では空です。",
+                    "desc_ko": "injectInput에 지정한 태그이며 장치 문자에서는 비어 있습니다."
+                },
+                {
+                    "name": "super",
+                    "type": "bool",
+                    "desc": "Whether Super/Command was held.",
+                    "desc_ja": "Super/Command の押下状態です。",
+                    "desc_ko": "Super/Command를 누른 상태입니다."
+                }
+            ]
+        },
+        {
             "name": "ChipSoundBundle",
             "desc": "Combines timed chiptune notes into a single sound.",
             "keywords": [
@@ -27683,6 +27781,13 @@ const TrussCAPI = {
                     "desc_ko": "Android 전용 Back 이벤트입니다. 취소하면 앱이 전면에 남고, 그렇지 않으면 TrussC가 태스크를 백그라운드로 이동합니다."
                 },
                 {
+                    "name": "charInput",
+                    "type": "Event<CharEventArgs>",
+                    "desc": "Delivers typed characters to listeners for the receiving Window.",
+                    "desc_ja": "受信 Window のリスナーに文字入力を通知します。",
+                    "desc_ko": "수신 Window의 리스너에 문자 입력을 전달합니다."
+                },
+                {
                     "name": "clipboardPasted",
                     "type": "Event<ClipboardPastedEventArgs>",
                     "desc": "Fired when a clipboard paste gesture occurs.",
@@ -28012,9 +28117,9 @@ const TrussCAPI = {
             "related": [
                 "ClipboardPastedEventArgs"
             ],
-            "details": "- Passed to `events().filesDropped` with desktop file paths or Web file names in `files`.\n- `x` and `y` contain the last recorded mouse position, which can differ from the actual drop position; see `MouseEventArgs::pos` for coordinate conventions.\n- For listener registration, lifetime, and delivery threads, see `Event<T>`.",
-            "details_ja": "- デスクトップではファイルのパスを、Web ではファイル名のみを `files` に格納して `events().filesDropped` に渡されます。\n- `x` と `y` は最後に記録されたマウス位置で、実際のドロップ位置と異なる場合があります。座標の規則については `MouseEventArgs::pos` を参照してください。\n- リスナーの登録、寿命、呼び出されるスレッドについては `Event<T>` を参照してください。",
-            "details_ko": "- 데스크톱에서는 파일 경로를, Web에서는 파일 이름만 `files`에 담아 `events().filesDropped`에 전달됩니다.\n- `x`와 `y`는 마지막으로 기록된 마우스 위치이며 실제 드롭 위치와 다를 수 있습니다. 좌표 규칙은 `MouseEventArgs::pos`를 참조하세요.\n- 리스너 등록, 수명, 호출 스레드는 `Event<T>`를 참조하세요.",
+            "details": "Paths and App coordinates delivered through events().filesDropped and App::filesDropped. Device drops use the last known mouse position; injected drops preserve the supplied position. There is no API for a more precise device drop position. No injected, sourceTag, or consumed fields are available, and there is no drop-source query or cancellation API. In tcApp:\n```cpp\nvoid filesDropped(const DragDropEventArgs& e) override {\n    logNotice() << e.files.size() << e.x << e.y;\n}\n```",
+            "details_ja": "events().filesDropped と App::filesDropped が渡すパスと App 座標です。デバイスでは最後に分かっているマウス位置、注入では指定位置です。より正確なデバイスのドロップ位置を得る API はありません。injected、sourceTag、consumed はなく、送信元の照会やキャンセルの API もありません。tcApp で受け取ります。\n```cpp\nvoid filesDropped(const DragDropEventArgs& e) override {\n    logNotice() << e.files.size() << e.x << e.y;\n}\n```",
+            "details_ko": "events().filesDropped와 App::filesDropped가 전달하는 경로 및 App 좌표입니다. 장치 드롭은 마지막 마우스 위치, 주입은 지정 위치를 사용합니다. 더 정확한 장치 드롭 위치 API는 없습니다. injected, sourceTag, consumed 필드와 출처 조회 및 취소 API는 없습니다. tcApp에서 받습니다.\n```cpp\nvoid filesDropped(const DragDropEventArgs& e) override {\n    logNotice() << e.files.size() << e.x << e.y;\n}\n```",
             "properties": [
                 {
                     "name": "files",
@@ -28026,16 +28131,16 @@ const TrussCAPI = {
                 {
                     "name": "x",
                     "type": "float",
-                    "desc": "Stores the last recorded mouse x coordinate.",
-                    "desc_ja": "最後に記録されたマウスの x 座標を保持する。",
-                    "desc_ko": "마지막으로 기록된 마우스 x 좌표를 저장한다."
+                    "desc": "The drop x coordinate in App content space.",
+                    "desc_ja": "App のコンテンツ空間でのドロップ x 座標です。",
+                    "desc_ko": "App 콘텐츠 공간의 드롭 x 좌표입니다."
                 },
                 {
                     "name": "y",
                     "type": "float",
-                    "desc": "Stores the last recorded mouse y coordinate.",
-                    "desc_ja": "最後に記録されたマウスの y 座標を保持する。",
-                    "desc_ko": "마지막으로 기록된 마우스 y 좌표를 저장한다."
+                    "desc": "The drop y coordinate in App content space.",
+                    "desc_ja": "App のコンテンツ空間でのドロップ y 座標です。",
+                    "desc_ko": "App 콘텐츠 공간의 드롭 y 좌표입니다."
                 }
             ]
         },
@@ -34294,6 +34399,288 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "InputEvent",
+            "desc": "Copies input to send to a Window with Window::injectInput.",
+            "keywords": [],
+            "desc_ja": "Window::injectInput で Window に送る入力をコピーして保持します。",
+            "desc_ko": "Window::injectInput으로 Window에 보낼 입력을 복사하여 보관합니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "Window::injectInput",
+                "InputModifiers"
+            ],
+            "details": "Use InputEvent to feed external controllers or relay App input to another Window. Builders copy the input values. Key, character, mouse, and touch delivery starts with consumed=false and fresh injected/sourceTag. Drops carry paths and position only. A move while pressed becomes a drag. In tcApp::setup():\n```cpp\ngetWindow()->injectInput(InputEvent::mousePressed({20, 30}, MouseButton::Left), \"tuio\");\ngetWindow()->injectInput(InputEvent::mouseMoved({80, 30}), \"tuio\");\ngetWindow()->injectInput(InputEvent::mouseReleased({80, 30}, MouseButton::Left), \"tuio\");\n```",
+            "details_ja": "InputEvent は外部コントローラーの入力や App 入力の別 Window への中継に使います。builder は入力値をコピーします。キー・文字・マウス・タッチの送信先では consumed=false から始まり、injectInput が injected と sourceTag を新しく設定します。ドロップはパスと位置だけを持ちます。ボタンを押したまま移動するとドラッグになります。tcApp::setup() 内で次のように使います。\n```cpp\ngetWindow()->injectInput(InputEvent::mousePressed({20, 30}, MouseButton::Left), \"tuio\");\ngetWindow()->injectInput(InputEvent::mouseMoved({80, 30}), \"tuio\");\ngetWindow()->injectInput(InputEvent::mouseReleased({80, 30}, MouseButton::Left), \"tuio\");\n```",
+            "details_ko": "InputEvent는 외부 컨트롤러 입력이나 App 입력을 다른 Window로 중계할 때 사용합니다. builder는 입력값을 복사합니다. 키·문자·마우스·터치는 consumed=false로 시작하며 injectInput이 injected와 sourceTag를 새로 설정합니다. 드롭은 경로와 위치만 가집니다. 버튼을 누른 채 이동하면 드래그가 됩니다. tcApp::setup() 안에서 다음과 같이 사용합니다.\n```cpp\ngetWindow()->injectInput(InputEvent::mousePressed({20, 30}, MouseButton::Left), \"tuio\");\ngetWindow()->injectInput(InputEvent::mouseMoved({80, 30}), \"tuio\");\ngetWindow()->injectInput(InputEvent::mouseReleased({80, 30}, MouseButton::Left), \"tuio\");\n```",
+            "static_methods": [
+                {
+                    "name": "charInput",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "uint32_t codepoint, InputModifiers mods = {}, bool repeat = false"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "const CharEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds one character input from a Unicode scalar or received CharEventArgs.",
+                    "details": "Copies codepoint, isRepeat, and modifiers; delivery resets consumed and sets injected=true and the new tag. Invalid Unicode scalars return false from injectInput. Key presses alone produce no text; send characters explicitly. In a live windowed tcApp:\n```cpp\nvoid setup() override {\n    getWindow()->injectInput(InputEvent::charInput(U'é'), \"test\");\n}\n```",
+                    "details_ja": "codepoint、isRepeat、修飾キーをコピーします。送信先では consumed をリセットし injected=true と新しいタグを設定します。不正な Unicode スカラーでは injectInput が false を返します。キー押下だけでは文字を入力しません。文字を明示的に送ります。Window のある tcApp で使います。\n```cpp\nvoid setup() override {\n    getWindow()->injectInput(InputEvent::charInput(U'é'), \"test\");\n}\n```",
+                    "details_ko": "codepoint, isRepeat, 수식 키를 복사합니다. 전달 시 consumed를 초기화하고 injected=true와 새 태그를 설정합니다. 잘못된 Unicode 스칼라는 injectInput에서 false를 반환합니다. 키 누름만으로 문자가 입력되지 않으므로 명시적으로 보냅니다. Window가 있는 tcApp에서 사용합니다.\n```cpp\nvoid setup() override {\n    getWindow()->injectInput(InputEvent::charInput(U'é'), \"test\");\n}\n```"
+                },
+                {
+                    "name": "filesDropped",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "std::vector<std::string> paths, Vec2 pos"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "const DragDropEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds an owned file-path drop at a destination App position.",
+                    "details": "Copies paths from DragDropEventArgs or takes a vector of paths and Vec2. Coordinates are logical points, or framebuffer pixels with pixelPerfect; the supplied position is preserved without moving the cursor. Delivery uses events().filesDropped and App callbacks only. Drops have no injected/sourceTag fields and no drop-source query API; replay tools manage their own recording state. Injection passes paths as data; it creates no files or browser file handles, and no API recreates those handles. In a live windowed tcApp:\n```cpp\nvoid setup() override {\n    getWindow()->injectInput(InputEvent::filesDropped({\"image.png\"}, {20, 30}));\n}\n```",
+                    "details_ja": "DragDropEventArgs からパスをコピーするか、パスの vector と Vec2 を受け取ります。座標は論理ポイント、pixelPerfect ではフレームバッファのピクセルです。カーソルを動かさず指定位置を保ちます。events().filesDropped と App コールバックだけに通知します。ドロップに injected/sourceTag や送信元を調べる API はなく、再生ツールは記録状態を自分で管理します。パスはデータとして渡すだけでファイルやブラウザのファイルハンドルは作りません。ハンドルを再現する API はありません。Window のある tcApp で使います。\n```cpp\nvoid setup() override {\n    getWindow()->injectInput(InputEvent::filesDropped({\"image.png\"}, {20, 30}));\n}\n```",
+                    "details_ko": "DragDropEventArgs의 경로를 복사하거나 경로 vector와 Vec2를 받습니다. 좌표는 논리 포인트이며 pixelPerfect에서는 프레임버퍼 픽셀입니다. 커서를 움직이지 않고 지정 위치를 유지합니다. events().filesDropped와 App 콜백에만 전달합니다. 드롭에는 injected/sourceTag나 출처 조회 API가 없으므로 재생 도구가 기록 상태를 관리합니다. 경로는 데이터로 전달되며 파일이나 브라우저 파일 핸들을 만들지 않습니다. 핸들을 재현하는 API는 없습니다. Window가 있는 tcApp에서 사용합니다.\n```cpp\nvoid setup() override {\n    getWindow()->injectInput(InputEvent::filesDropped({\"image.png\"}, {20, 30}));\n}\n```"
+                },
+                {
+                    "name": "keyPressed",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "int key, InputModifiers mods = {}, bool repeat = false"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "const KeyEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds a keyPressed input from values or received arguments.",
+                    "details": "Copies input values and modifier flags. Received arguments can be passed back in; the delivered copy starts with consumed=false, and injected/sourceTag are set fresh. In tcApp::setup():\n```cpp\ngetWindow()->injectInput(InputEvent::keyPressed('A', {.ctrl = true}), \"osc\");\n```",
+                    "details_ja": "入力値と修飾キーをコピーします。受信した引数を再送できます。送信先では consumed=false から始まり、injected と sourceTag が新しく設定されます。tcApp::setup() 内で使います。\n```cpp\ngetWindow()->injectInput(InputEvent::keyPressed('A', {.ctrl = true}), \"osc\");\n```",
+                    "details_ko": "입력값과 수식 키를 복사합니다. 받은 인자를 다시 보낼 수 있습니다. 전달된 복사본은 consumed=false로 시작하며 injected와 sourceTag가 새로 설정됩니다. tcApp::setup() 안에서 사용합니다.\n```cpp\ngetWindow()->injectInput(InputEvent::keyPressed('A', {.ctrl = true}), \"osc\");\n```",
+                    "related": [
+                        "InputEvent",
+                        "Window::injectInput"
+                    ]
+                },
+                {
+                    "name": "keyReleased",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "int key, InputModifiers mods = {}"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "const KeyEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds a keyReleased input from values or received arguments.",
+                    "details": "Copies input values and modifier flags. Received arguments can be passed back in; the delivered copy starts with consumed=false, and injected/sourceTag are set fresh. In tcApp::setup():\n```cpp\ngetWindow()->injectInput(InputEvent::keyReleased('A', {.ctrl = true}), \"osc\");\n```",
+                    "details_ja": "入力値と修飾キーをコピーします。受信した引数を再送できます。送信先では consumed=false から始まり、injected と sourceTag が新しく設定されます。tcApp::setup() 内で使います。\n```cpp\ngetWindow()->injectInput(InputEvent::keyReleased('A', {.ctrl = true}), \"osc\");\n```",
+                    "details_ko": "입력값과 수식 키를 복사합니다. 받은 인자를 다시 보낼 수 있습니다. 전달된 복사본은 consumed=false로 시작하며 injected와 sourceTag가 새로 설정됩니다. tcApp::setup() 안에서 사용합니다.\n```cpp\ngetWindow()->injectInput(InputEvent::keyReleased('A', {.ctrl = true}), \"osc\");\n```",
+                    "related": [
+                        "InputEvent",
+                        "Window::injectInput"
+                    ]
+                },
+                {
+                    "name": "mouseMoved",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "Vec2 pos, InputModifiers mods = {}"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "const MouseMoveEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds a mouseMoved input from values or received arguments.",
+                    "details": "Copies input values and modifier flags. Received arguments can be passed back in; the delivered copy starts with consumed=false, and injected/sourceTag are set fresh. In tcApp::setup():\n```cpp\ngetWindow()->injectInput(InputEvent::mouseMoved({20, 30}), \"osc\");\n```",
+                    "details_ja": "入力値と修飾キーをコピーします。受信した引数を再送できます。送信先では consumed=false から始まり、injected と sourceTag が新しく設定されます。tcApp::setup() 内で使います。\n```cpp\ngetWindow()->injectInput(InputEvent::mouseMoved({20, 30}), \"osc\");\n```",
+                    "details_ko": "입력값과 수식 키를 복사합니다. 받은 인자를 다시 보낼 수 있습니다. 전달된 복사본은 consumed=false로 시작하며 injected와 sourceTag가 새로 설정됩니다. tcApp::setup() 안에서 사용합니다.\n```cpp\ngetWindow()->injectInput(InputEvent::mouseMoved({20, 30}), \"osc\");\n```",
+                    "related": [
+                        "InputEvent",
+                        "Window::injectInput"
+                    ]
+                },
+                {
+                    "name": "mousePressed",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "Vec2 pos, MouseButton button, InputModifiers mods = {}"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "const MouseEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds a mousePressed input from values or received arguments.",
+                    "details": "Copies input values and modifier flags. Received arguments can be passed back in; the delivered copy starts with consumed=false, and injected/sourceTag are set fresh. In tcApp::setup():\n```cpp\ngetWindow()->injectInput(InputEvent::mousePressed({20, 30}, MouseButton::Left), \"osc\");\n```\n\nRelay received App arguments to an open shared_ptr<Window> otherWindow member:\n```cpp\nvoid mousePressed(const MouseEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::mousePressed(e), \"relay\");\n}\n```",
+                    "details_ja": "入力値と修飾キーをコピーします。受信した引数を再送できます。送信先では consumed=false から始まり、injected と sourceTag が新しく設定されます。tcApp::setup() 内で使います。\n```cpp\ngetWindow()->injectInput(InputEvent::mousePressed({20, 30}, MouseButton::Left), \"osc\");\n```\n\n受信した App の引数を、開いている shared_ptr<Window> 型の otherWindow メンバーへ中継します。\n```cpp\nvoid mousePressed(const MouseEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::mousePressed(e), \"relay\");\n}\n```",
+                    "details_ko": "입력값과 수식 키를 복사합니다. 받은 인자를 다시 보낼 수 있습니다. 전달된 복사본은 consumed=false로 시작하며 injected와 sourceTag가 새로 설정됩니다. tcApp::setup() 안에서 사용합니다.\n```cpp\ngetWindow()->injectInput(InputEvent::mousePressed({20, 30}, MouseButton::Left), \"osc\");\n```\n\n받은 App 인자를 열려 있는 shared_ptr<Window> 형식의 otherWindow 멤버로 중계합니다.\n```cpp\nvoid mousePressed(const MouseEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::mousePressed(e), \"relay\");\n}\n```",
+                    "related": [
+                        "InputEvent",
+                        "Window::injectInput"
+                    ]
+                },
+                {
+                    "name": "mouseReleased",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "Vec2 pos, MouseButton button, InputModifiers mods = {}"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "const MouseEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds a mouseReleased input from values or received arguments.",
+                    "details": "Copies input values and modifier flags. Received arguments can be passed back in; the delivered copy starts with consumed=false, and injected/sourceTag are set fresh. In tcApp::setup():\n```cpp\ngetWindow()->injectInput(InputEvent::mouseReleased({20, 30}, MouseButton::Left), \"osc\");\n```",
+                    "details_ja": "入力値と修飾キーをコピーします。受信した引数を再送できます。送信先では consumed=false から始まり、injected と sourceTag が新しく設定されます。tcApp::setup() 内で使います。\n```cpp\ngetWindow()->injectInput(InputEvent::mouseReleased({20, 30}, MouseButton::Left), \"osc\");\n```",
+                    "details_ko": "입력값과 수식 키를 복사합니다. 받은 인자를 다시 보낼 수 있습니다. 전달된 복사본은 consumed=false로 시작하며 injected와 sourceTag가 새로 설정됩니다. tcApp::setup() 안에서 사용합니다.\n```cpp\ngetWindow()->injectInput(InputEvent::mouseReleased({20, 30}, MouseButton::Left), \"osc\");\n```",
+                    "related": [
+                        "InputEvent",
+                        "Window::injectInput"
+                    ]
+                },
+                {
+                    "name": "mouseScrolled",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "Vec2 scroll, InputModifiers mods = {}"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "const ScrollEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds a mouseScrolled input from values or received arguments.",
+                    "details": "Copies input values and modifier flags. Received arguments can be passed back in; the delivered copy starts with consumed=false, and injected/sourceTag are set fresh. In tcApp::setup():\n```cpp\ngetWindow()->injectInput(InputEvent::mouseScrolled({0, -1}), \"osc\");\n```",
+                    "details_ja": "入力値と修飾キーをコピーします。受信した引数を再送できます。送信先では consumed=false から始まり、injected と sourceTag が新しく設定されます。tcApp::setup() 内で使います。\n```cpp\ngetWindow()->injectInput(InputEvent::mouseScrolled({0, -1}), \"osc\");\n```",
+                    "details_ko": "입력값과 수식 키를 복사합니다. 받은 인자를 다시 보낼 수 있습니다. 전달된 복사본은 consumed=false로 시작하며 injected와 sourceTag가 새로 설정됩니다. tcApp::setup() 안에서 사용합니다.\n```cpp\ngetWindow()->injectInput(InputEvent::mouseScrolled({0, -1}), \"osc\");\n```",
+                    "related": [
+                        "InputEvent",
+                        "Window::injectInput"
+                    ]
+                },
+                {
+                    "name": "touchMoved",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "const TouchEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds a touchMoved input from received touch arguments.",
+                    "details": "Copies touch count, IDs, positions, pressure and changed flags; touchReleased also copies cancellation. The delivered copy starts with consumed=false, and injected/sourceTag are set fresh. Relay from a tcApp callback to an open otherWindow member:\n```cpp\nvoid touchMoved(const TouchEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::touchMoved(e), \"relay\");\n}\n```",
+                    "details_ja": "タッチ数、ID、位置、圧力、changed をコピーします。touchReleased はキャンセル状態もコピーします。送信先では consumed=false から始まり、injected と sourceTag が新しく設定されます。tcApp のコールバックから開いている otherWindow メンバーに中継します。\n```cpp\nvoid touchMoved(const TouchEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::touchMoved(e), \"relay\");\n}\n```",
+                    "details_ko": "터치 수, ID, 위치, 압력, changed를 복사합니다. touchReleased는 취소 상태도 복사합니다. 전달된 복사본은 consumed=false로 시작하며 injected와 sourceTag가 새로 설정됩니다. tcApp 콜백에서 열려 있는 otherWindow 멤버로 중계합니다.\n```cpp\nvoid touchMoved(const TouchEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::touchMoved(e), \"relay\");\n}\n```",
+                    "related": [
+                        "InputEvent",
+                        "TouchEventArgs"
+                    ]
+                },
+                {
+                    "name": "touchPressed",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "const TouchEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds a touchPressed input from received touch arguments.",
+                    "details": "Copies touch count, IDs, positions, pressure and changed flags; touchReleased also copies cancellation. The delivered copy starts with consumed=false, and injected/sourceTag are set fresh. Relay from a tcApp callback to an open otherWindow member:\n```cpp\nvoid touchPressed(const TouchEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::touchPressed(e), \"relay\");\n}\n```",
+                    "details_ja": "タッチ数、ID、位置、圧力、changed をコピーします。touchReleased はキャンセル状態もコピーします。送信先では consumed=false から始まり、injected と sourceTag が新しく設定されます。tcApp のコールバックから開いている otherWindow メンバーに中継します。\n```cpp\nvoid touchPressed(const TouchEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::touchPressed(e), \"relay\");\n}\n```",
+                    "details_ko": "터치 수, ID, 위치, 압력, changed를 복사합니다. touchReleased는 취소 상태도 복사합니다. 전달된 복사본은 consumed=false로 시작하며 injected와 sourceTag가 새로 설정됩니다. tcApp 콜백에서 열려 있는 otherWindow 멤버로 중계합니다.\n```cpp\nvoid touchPressed(const TouchEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::touchPressed(e), \"relay\");\n}\n```",
+                    "related": [
+                        "InputEvent",
+                        "TouchEventArgs"
+                    ]
+                },
+                {
+                    "name": "touchReleased",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "const TouchEventArgs & event"
+                        }
+                    ],
+                    "desc": "Builds a touchReleased input from received touch arguments.",
+                    "details": "Copies touch count, IDs, positions, pressure and changed flags; touchReleased also copies cancellation. The delivered copy starts with consumed=false, and injected/sourceTag are set fresh. Relay from a tcApp callback to an open otherWindow member:\n```cpp\nvoid touchReleased(const TouchEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::touchReleased(e), \"relay\");\n}\n```",
+                    "details_ja": "タッチ数、ID、位置、圧力、changed をコピーします。touchReleased はキャンセル状態もコピーします。送信先では consumed=false から始まり、injected と sourceTag が新しく設定されます。tcApp のコールバックから開いている otherWindow メンバーに中継します。\n```cpp\nvoid touchReleased(const TouchEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::touchReleased(e), \"relay\");\n}\n```",
+                    "details_ko": "터치 수, ID, 위치, 압력, changed를 복사합니다. touchReleased는 취소 상태도 복사합니다. 전달된 복사본은 consumed=false로 시작하며 injected와 sourceTag가 새로 설정됩니다. tcApp 콜백에서 열려 있는 otherWindow 멤버로 중계합니다.\n```cpp\nvoid touchReleased(const TouchEventArgs& e) override {\n    otherWindow->injectInput(InputEvent::touchReleased(e), \"relay\");\n}\n```",
+                    "related": [
+                        "InputEvent",
+                        "TouchEventArgs"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "InputModifiers",
+            "desc": "Modifier flags copied into an injected key, mouse or scroll event.",
+            "keywords": [],
+            "desc_ja": "注入するキー・マウス・スクロール入力にコピーする修飾キーのフラグです。",
+            "desc_ko": "주입할 키, 마우스 또는 스크롤 이벤트에 복사하는 수식 키 플래그입니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "related": [
+                "InputEvent"
+            ],
+            "details": "shift, ctrl, alt and super default to false. Set flags on the builder; this describes that event. In tcApp::setup():\n```cpp\ngetWindow()->injectInput(InputEvent::keyPressed('A', {.ctrl = true}), \"osc\");\ngetWindow()->injectInput(InputEvent::keyReleased('A', {.ctrl = true}), \"osc\");\n```",
+            "details_ja": "shift、ctrl、alt、super の既定値は false です。builder でそのイベントの修飾キーを指定します。tcApp::setup() 内で次のように使います。\n```cpp\ngetWindow()->injectInput(InputEvent::keyPressed('A', {.ctrl = true}), \"osc\");\ngetWindow()->injectInput(InputEvent::keyReleased('A', {.ctrl = true}), \"osc\");\n```",
+            "details_ko": "shift, ctrl, alt, super의 기본값은 false입니다. builder에서 해당 이벤트의 수식 키를 지정합니다. tcApp::setup() 안에서 다음과 같이 사용합니다.\n```cpp\ngetWindow()->injectInput(InputEvent::keyPressed('A', {.ctrl = true}), \"osc\");\ngetWindow()->injectInput(InputEvent::keyReleased('A', {.ctrl = true}), \"osc\");\n```",
+            "properties": [
+                {
+                    "name": "alt",
+                    "type": "bool",
+                    "desc": "The injected event’s alt modifier flag.",
+                    "desc_ja": "注入するイベントの alt 修飾フラグです。",
+                    "desc_ko": "주입할 이벤트의 alt 수식 플래그입니다."
+                },
+                {
+                    "name": "ctrl",
+                    "type": "bool",
+                    "desc": "The injected event’s ctrl modifier flag.",
+                    "desc_ja": "注入するイベントの ctrl 修飾フラグです。",
+                    "desc_ko": "주입할 이벤트의 ctrl 수식 플래그입니다."
+                },
+                {
+                    "name": "shift",
+                    "type": "bool",
+                    "desc": "The injected event’s shift modifier flag.",
+                    "desc_ja": "注入するイベントの shift 修飾フラグです。",
+                    "desc_ko": "주입할 이벤트의 shift 수식 플래그입니다."
+                },
+                {
+                    "name": "super",
+                    "type": "bool",
+                    "desc": "The injected event’s super modifier flag.",
+                    "desc_ja": "注入するイベントの super 修飾フラグです。",
+                    "desc_ko": "주입할 이벤트의 super 수식 플래그입니다."
+                }
+            ]
+        },
+        {
             "name": "JsonReadReflector",
             "desc": "Reads JSON values into reflected members.",
             "keywords": [],
@@ -34801,6 +35188,13 @@ const TrussCAPI = {
                     "desc_ko": "Ctrl 키가 눌려 있는지 나타낸다."
                 },
                 {
+                    "name": "injected",
+                    "type": "bool",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "isRepeat",
                     "type": "bool",
                     "desc": "Identifies repeated key presses.",
@@ -34820,6 +35214,13 @@ const TrussCAPI = {
                     "desc": "Indicates whether Shift is held.",
                     "desc_ja": "Shift キーが押されているかを表す。",
                     "desc_ko": "Shift 키가 눌려 있는지 나타낸다."
+                },
+                {
+                    "name": "sourceTag",
+                    "type": "std::string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "super",
@@ -39691,6 +40092,13 @@ const TrussCAPI = {
                     "desc_ko": "화면 좌표의 커서 위치를 담는다."
                 },
                 {
+                    "name": "injected",
+                    "type": "bool",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "pos",
                     "type": "Vec2",
                     "desc": "Stores the cursor position in local coordinates.",
@@ -39703,6 +40111,13 @@ const TrussCAPI = {
                     "desc": "Indicates whether Shift is held.",
                     "desc_ja": "Shift キーが押されているかを示す。",
                     "desc_ko": "Shift 키가 눌려 있는지 나타낸다."
+                },
+                {
+                    "name": "sourceTag",
+                    "type": "std::string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "super",
@@ -39805,6 +40220,13 @@ const TrussCAPI = {
                     "desc_ko": "스크린 좌표의 커서 위치를 나타낸다."
                 },
                 {
+                    "name": "injected",
+                    "type": "bool",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "pos",
                     "type": "Vec2",
                     "desc": "The cursor position in the receiver's coordinates.",
@@ -39817,6 +40239,13 @@ const TrussCAPI = {
                     "desc": "Indicates whether Shift is held for the mouse event.",
                     "desc_ja": "マウスイベント時に Shift キーが押されているかを表す。",
                     "desc_ko": "마우스 이벤트 시 Shift 키가 눌려 있는지 나타낸다."
+                },
+                {
+                    "name": "sourceTag",
+                    "type": "std::string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "super",
@@ -39943,6 +40372,13 @@ const TrussCAPI = {
                     "desc_ko": "화면 좌표의 커서 위치를 담는다."
                 },
                 {
+                    "name": "injected",
+                    "type": "bool",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "pos",
                     "type": "Vec2",
                     "desc": "Stores the cursor position in local coordinates.",
@@ -39955,6 +40391,13 @@ const TrussCAPI = {
                     "desc": "Indicates whether Shift is held.",
                     "desc_ja": "Shift キーが押されているかを示す。",
                     "desc_ko": "Shift 키가 눌려 있는지 나타낸다."
+                },
+                {
+                    "name": "sourceTag",
+                    "type": "std::string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "super",
@@ -58360,6 +58803,13 @@ const TrussCAPI = {
                     "desc_ko": "스크롤 시 스크린 좌표의 커서 위치를 나타낸다."
                 },
                 {
+                    "name": "injected",
+                    "type": "bool",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "pos",
                     "type": "Vec2",
                     "desc": "The cursor position in the receiver's coordinates during scrolling.",
@@ -58393,6 +58843,13 @@ const TrussCAPI = {
                     "desc": "Indicates whether Shift is held for the scroll event.",
                     "desc_ja": "スクロールイベント時に Shift キーが押されているかを表す。",
                     "desc_ko": "스크롤 이벤트 시 Shift 키가 눌려 있는지 나타낸다."
+                },
+                {
+                    "name": "sourceTag",
+                    "type": "std::string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "super",
@@ -64770,11 +65227,25 @@ const TrussCAPI = {
                     "desc_ko": "시스템 취소로 인한 터치 종료를 나타낸다."
                 },
                 {
+                    "name": "injected",
+                    "type": "bool",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "numTouches",
                     "type": "int",
                     "desc": "Counts the valid touch points in the event.",
                     "desc_ja": "イベント内の有効なタッチ点の数を表す。",
                     "desc_ko": "이벤트에 포함된 유효한 터치 점의 수를 나타낸다."
+                },
+                {
+                    "name": "sourceTag",
+                    "type": "std::string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "touches",
@@ -69997,11 +70468,11 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns the hard resynchronization threshold.",
+                    "desc": "Returns the playback catch-up threshold in seconds.",
                     "inherited": "VideoPlayerBase",
-                    "details": "- Returns the stored threshold in seconds; the default is `0.5`, and values of `0` or less disable hard resynchronization.\n- See `VideoPlayerBase::setResyncThreshold` for the affected players and synchronization behavior.",
-                    "details_ja": "- 保存されている閾値を秒単位で返します。既定値は `0.5` で、`0` 以下は強制的な同期補正を無効にします。\n- 対象のプレイヤーと同期の動作は `VideoPlayerBase::setResyncThreshold` を参照してください。",
-                    "details_ko": "- 저장된 임계값을 초 단위로 반환합니다. 기본값은 `0.5`이며 `0` 이하는 강제 동기화 보정을 비활성화합니다.\n- 적용되는 플레이어와 동기화 동작은 `VideoPlayerBase::setResyncThreshold`를 참조하세요.",
+                    "details": "- Returns the stored threshold in seconds; the default is `0.5`, and values of `0` or less disable automatic Linux keyframe jumps and HapPlayer hard resynchronization.\n- See `VideoPlayerBase::setResyncThreshold` for the affected players and synchronization behavior.",
+                    "details_ja": "- 保存されている閾値を秒単位で返します。既定値は `0.5` で、`0` 以下は Linux の自動キーフレームジャンプと HapPlayer の強制同期補正を無効にします。\n- 対象のプレイヤーと同期の動作は `VideoPlayerBase::setResyncThreshold` を参照してください。",
+                    "details_ko": "- 저장된 임계값을 초 단위로 반환합니다. 기본값은 `0.5`이며 `0` 이하는 Linux의 자동 키프레임 점프와 HapPlayer의 강제 동기화 보정을 비활성화합니다.\n- 적용되는 플레이어와 동기화 동작은 `VideoPlayerBase::setResyncThreshold`를 참조합니다.",
                     "keywords": [
                         "sync",
                         "drift",
@@ -71145,11 +71616,11 @@ const TrussCAPI = {
                             "params": "float seconds"
                         }
                     ],
-                    "desc": "Sets the threshold for hard playback resynchronization.",
+                    "desc": "Sets the Linux playback lag threshold for trying to catch up (default 0.5 seconds), not a maximum lag; keyframe spacing and decoding speed determine the lag. HapPlayer uses it for hard audio resynchronization.",
                     "inherited": "VideoPlayerBase",
-                    "details": "- Stores a threshold in seconds without clamping; the default is `0.5`, and `0` or negative values disable hard resynchronization.\n- Linux `VideoPlayer` seeks when the difference between the current video position and its target clock exceeds the threshold; the target follows playing audio, or wall-clock time when audio is not playing.\n- HapPlayer advances by wall-clock elapsed time multiplied by speed and, while audio is playing at positive speed, gradually corrects toward the audio position with a `0.25`-second time constant.\n- HapPlayer jumps directly to the audio position when the difference exceeds a positive threshold; gradual correction remains enabled when hard resynchronization is disabled.\n- Other `VideoPlayer` platforms do not use this threshold and leave synchronization to their native player.",
-                    "details_ja": "- 秒単位の閾値を制限せずに保存します。既定値は `0.5` で、`0` 以下にすると強制的な同期補正を無効にします。\n- Linux の `VideoPlayer` は、現在の映像位置と基準となる時間の差が閾値を超えるとシークします。基準には再生中の音声位置を使い、音声が再生されていない場合は実時間を使います。\n- HapPlayer は実時間の経過に再生速度を掛けて進み、正の速度で音声が再生されている間は、時定数 `0.25` 秒で音声位置へ徐々に補正します。\n- HapPlayer は位置の差が正の閾値を超えると音声位置へ直接移動します。強制的な同期補正を無効にしても、徐々に行う補正は有効です。\n- その他の `VideoPlayer` プラットフォームではこの閾値を使わず、ネイティブプレイヤーに同期を任せます。",
-                    "details_ko": "- 초 단위 임계값을 제한 없이 저장합니다. 기본값은 `0.5`이며 `0` 또는 음수로 설정하면 강제 동기화 보정을 비활성화합니다.\n- Linux의 `VideoPlayer`는 현재 영상 위치와 기준 시간의 차이가 임계값을 초과하면 탐색합니다. 기준은 재생 중인 오디오 위치를 따르며 오디오가 재생 중이 아니면 실제 경과 시간을 따릅니다.\n- HapPlayer는 실제 경과 시간에 재생 속도를 곱하여 진행하고, 양의 속도에서 오디오가 재생되는 동안 시정수 `0.25`초로 오디오 위치를 향해 점진적으로 보정합니다.\n- HapPlayer는 위치 차이가 양의 임계값을 초과하면 오디오 위치로 직접 이동합니다. 강제 동기화 보정을 비활성화해도 점진적인 보정은 유지합니다.\n- 다른 `VideoPlayer` 플랫폼은 이 임계값을 사용하지 않고 네이티브 플레이어에 동기화를 맡깁니다.",
+                    "details": "- Linux `VideoPlayer` starts trying to catch up after this many seconds of lag (default `0.5`); this is not a maximum lag. Keyframe spacing and decoding speed determine the lag. `0` or less disables automatic catch-up jumps and HapPlayer hard resynchronization.\n\n```cpp\nvoid tcApp::setup() {\n    player.setResyncThreshold(0.5f);\n}\n```\n\nWhen decoding cannot keep up, lag is bounded by the keyframe interval and by how far decoding falls behind; under heavy load it can reach a few times the interval. Encoding with shorter keyframe intervals keeps lag smaller:\n\n```sh\nffmpeg -i in.mp4 -c:v libx264 -g 30 out.mp4\n```\n\nForward catch-up jumps use the container's seek index. A file without one (for example some Matroska files) is only decoded forward, without jumps. Remux it to MP4 without re-encoding:\n\n```sh\nffmpeg -i in.mkv -c copy out.mp4\n```\n\nWhen recording with `VideoWriter`, set `VideoRecordSettings::keyframeInterval` in `tcApp::setup()` before passing the settings to `open()` (in frames; `30` is one second at 30 fps):\n\n```cpp\nVideoRecordSettings settings;\nsettings.keyframeInterval = 30;\n```\n\n- Linux playback shows the newest available picture for the playback time, skipping older pictures. It follows playing audio, or elapsed time when audio is not playing.\n- HapPlayer uses this value for hard audio resynchronization; gradual correction remains enabled even when hard resynchronization is disabled.\n- Other `VideoPlayer` platforms leave synchronization to their native player. No equivalent threshold API exists on those backends.",
+                    "details_ja": "- Linux の `VideoPlayer` は遅れがこの秒数（既定値 `0.5`）を超えると補正を試みます。遅れの上限ではなく、実際の遅れはキーフレーム間隔とデコード速度で決まります。`0` 以下では自動ジャンプと HapPlayer の強制同期補正を無効にします。\n\n```cpp\nvoid tcApp::setup() {\n    player.setResyncThreshold(0.5f);\n}\n```\n\nデコードが再生に追いつかない場合、遅れの上限はキーフレーム間隔とデコードがどれだけ遅れるかで決まります。高負荷時には間隔の数倍に達することがあります。キーフレーム間隔を短くしてエンコードすると、遅れを小さくできます。\n\n```sh\nffmpeg -i in.mp4 -c:v libx264 -g 30 out.mp4\n```\n\n先へのジャンプはコンテナのシーク用インデックスを使います。インデックスのないファイル（一部の Matroska など）ではジャンプせず、先へデコードするだけになります。再エンコードせずに MP4 へ入れ替えてください。\n\n```sh\nffmpeg -i in.mkv -c copy out.mp4\n```\n\n`VideoWriter` で録画する場合は、`tcApp::setup()` で `open()` に設定を渡す前に `VideoRecordSettings::keyframeInterval` を指定します。単位はフレームで、30 fps の場合、`30` は1秒です。\n\n```cpp\nVideoRecordSettings settings;\nsettings.keyframeInterval = 30;\n```\n\n- Linux では、再生時刻に合う最新の準備済み映像を表示し、古い映像を飛ばします。音声の再生中は音声時刻に、それ以外は経過時間に従います。\n- HapPlayer では音声への強制同期補正に使います。強制補正を無効にしても、徐々に行う補正は有効です。\n- その他の `VideoPlayer` プラットフォームではネイティブプレイヤーに同期を任せます。対応する閾値 API はありません。",
+                    "details_ko": "- Linux의 `VideoPlayer`는 지연이 이 초 수(기본값 `0.5`)를 초과하면 보정을 시도합니다. 지연의 상한이 아니며 실제 지연은 키프레임 간격과 디코딩 속도에 따라 달라집니다. `0` 이하는 자동 점프와 HapPlayer의 강제 동기화 보정을 비활성화합니다.\n\n```cpp\nvoid tcApp::setup() {\n    player.setResyncThreshold(0.5f);\n}\n```\n\n디코딩이 재생을 따라가지 못하면 지연의 상한은 키프레임 간격과 디코딩이 뒤처진 정도에 따라 결정됩니다. 부하가 높으면 간격의 몇 배에 이를 수 있습니다. 키프레임 간격을 짧게 인코딩하면 지연을 줄일 수 있습니다.\n\n```sh\nffmpeg -i in.mp4 -c:v libx264 -g 30 out.mp4\n```\n\n앞으로의 점프는 컨테이너의 탐색 인덱스를 사용합니다. 인덱스가 없는 파일(일부 Matroska 등)에서는 점프하지 않고 앞으로 디코딩만 합니다. 재인코딩 없이 MP4로 바꿉니다.\n\n```sh\nffmpeg -i in.mkv -c copy out.mp4\n```\n\n`VideoWriter`로 녹화할 때는 `tcApp::setup()`에서 `open()`에 설정을 전달하기 전에 `VideoRecordSettings::keyframeInterval`을 지정합니다. 단위는 프레임이며 30 fps에서 `30`은 1초입니다.\n\n```cpp\nVideoRecordSettings settings;\nsettings.keyframeInterval = 30;\n```\n\n- Linux에서는 재생 시각에 맞는 최신 준비된 영상을 표시하고 오래된 영상은 건너뜁니다. 오디오가 재생 중이면 오디오 시각을 따르고 그 외에는 경과 시간을 따릅니다.\n- HapPlayer에서는 오디오 강제 동기화 보정에 사용합니다. 강제 보정을 비활성화해도 점진적인 보정은 유지합니다.\n- 다른 `VideoPlayer` 플랫폼은 네이티브 플레이어에 동기화를 맡깁니다. 해당 임계값 API는 없습니다.",
                     "keywords": [
                         "sync",
                         "drift",
@@ -71887,10 +72358,10 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns the hard resynchronization threshold.",
-                    "details": "- Returns the stored threshold in seconds; the default is `0.5`, and values of `0` or less disable hard resynchronization.\n- See `VideoPlayerBase::setResyncThreshold` for the affected players and synchronization behavior.",
-                    "details_ja": "- 保存されている閾値を秒単位で返します。既定値は `0.5` で、`0` 以下は強制的な同期補正を無効にします。\n- 対象のプレイヤーと同期の動作は `VideoPlayerBase::setResyncThreshold` を参照してください。",
-                    "details_ko": "- 저장된 임계값을 초 단위로 반환합니다. 기본값은 `0.5`이며 `0` 이하는 강제 동기화 보정을 비활성화합니다.\n- 적용되는 플레이어와 동기화 동작은 `VideoPlayerBase::setResyncThreshold`를 참조하세요.",
+                    "desc": "Returns the playback catch-up threshold in seconds.",
+                    "details": "- Returns the stored threshold in seconds; the default is `0.5`, and values of `0` or less disable automatic Linux keyframe jumps and HapPlayer hard resynchronization.\n- See `VideoPlayerBase::setResyncThreshold` for the affected players and synchronization behavior.",
+                    "details_ja": "- 保存されている閾値を秒単位で返します。既定値は `0.5` で、`0` 以下は Linux の自動キーフレームジャンプと HapPlayer の強制同期補正を無効にします。\n- 対象のプレイヤーと同期の動作は `VideoPlayerBase::setResyncThreshold` を参照してください。",
+                    "details_ko": "- 저장된 임계값을 초 단위로 반환합니다. 기본값은 `0.5`이며 `0` 이하는 Linux의 자동 키프레임 점프와 HapPlayer의 강제 동기화 보정을 비활성화합니다.\n- 적용되는 플레이어와 동기화 동작은 `VideoPlayerBase::setResyncThreshold`를 참조합니다.",
                     "keywords": [
                         "sync",
                         "drift",
@@ -72481,10 +72952,10 @@ const TrussCAPI = {
                             "params": "float seconds"
                         }
                     ],
-                    "desc": "Sets the threshold for hard playback resynchronization.",
-                    "details": "- Stores a threshold in seconds without clamping; the default is `0.5`, and `0` or negative values disable hard resynchronization.\n- Linux `VideoPlayer` seeks when the difference between the current video position and its target clock exceeds the threshold; the target follows playing audio, or wall-clock time when audio is not playing.\n- HapPlayer advances by wall-clock elapsed time multiplied by speed and, while audio is playing at positive speed, gradually corrects toward the audio position with a `0.25`-second time constant.\n- HapPlayer jumps directly to the audio position when the difference exceeds a positive threshold; gradual correction remains enabled when hard resynchronization is disabled.\n- Other `VideoPlayer` platforms do not use this threshold and leave synchronization to their native player.",
-                    "details_ja": "- 秒単位の閾値を制限せずに保存します。既定値は `0.5` で、`0` 以下にすると強制的な同期補正を無効にします。\n- Linux の `VideoPlayer` は、現在の映像位置と基準となる時間の差が閾値を超えるとシークします。基準には再生中の音声位置を使い、音声が再生されていない場合は実時間を使います。\n- HapPlayer は実時間の経過に再生速度を掛けて進み、正の速度で音声が再生されている間は、時定数 `0.25` 秒で音声位置へ徐々に補正します。\n- HapPlayer は位置の差が正の閾値を超えると音声位置へ直接移動します。強制的な同期補正を無効にしても、徐々に行う補正は有効です。\n- その他の `VideoPlayer` プラットフォームではこの閾値を使わず、ネイティブプレイヤーに同期を任せます。",
-                    "details_ko": "- 초 단위 임계값을 제한 없이 저장합니다. 기본값은 `0.5`이며 `0` 또는 음수로 설정하면 강제 동기화 보정을 비활성화합니다.\n- Linux의 `VideoPlayer`는 현재 영상 위치와 기준 시간의 차이가 임계값을 초과하면 탐색합니다. 기준은 재생 중인 오디오 위치를 따르며 오디오가 재생 중이 아니면 실제 경과 시간을 따릅니다.\n- HapPlayer는 실제 경과 시간에 재생 속도를 곱하여 진행하고, 양의 속도에서 오디오가 재생되는 동안 시정수 `0.25`초로 오디오 위치를 향해 점진적으로 보정합니다.\n- HapPlayer는 위치 차이가 양의 임계값을 초과하면 오디오 위치로 직접 이동합니다. 강제 동기화 보정을 비활성화해도 점진적인 보정은 유지합니다.\n- 다른 `VideoPlayer` 플랫폼은 이 임계값을 사용하지 않고 네이티브 플레이어에 동기화를 맡깁니다.",
+                    "desc": "Sets the Linux playback lag threshold for trying to catch up (default 0.5 seconds), not a maximum lag; keyframe spacing and decoding speed determine the lag. HapPlayer uses it for hard audio resynchronization.",
+                    "details": "- Linux `VideoPlayer` starts trying to catch up after this many seconds of lag (default `0.5`); this is not a maximum lag. Keyframe spacing and decoding speed determine the lag. `0` or less disables automatic catch-up jumps and HapPlayer hard resynchronization.\n\n```cpp\nvoid tcApp::setup() {\n    player.setResyncThreshold(0.5f);\n}\n```\n\nWhen decoding cannot keep up, lag is bounded by the keyframe interval and by how far decoding falls behind; under heavy load it can reach a few times the interval. Encoding with shorter keyframe intervals keeps lag smaller:\n\n```sh\nffmpeg -i in.mp4 -c:v libx264 -g 30 out.mp4\n```\n\nForward catch-up jumps use the container's seek index. A file without one (for example some Matroska files) is only decoded forward, without jumps. Remux it to MP4 without re-encoding:\n\n```sh\nffmpeg -i in.mkv -c copy out.mp4\n```\n\nWhen recording with `VideoWriter`, set `VideoRecordSettings::keyframeInterval` in `tcApp::setup()` before passing the settings to `open()` (in frames; `30` is one second at 30 fps):\n\n```cpp\nVideoRecordSettings settings;\nsettings.keyframeInterval = 30;\n```\n\n- Linux playback shows the newest available picture for the playback time, skipping older pictures. It follows playing audio, or elapsed time when audio is not playing.\n- HapPlayer uses this value for hard audio resynchronization; gradual correction remains enabled even when hard resynchronization is disabled.\n- Other `VideoPlayer` platforms leave synchronization to their native player. No equivalent threshold API exists on those backends.",
+                    "details_ja": "- Linux の `VideoPlayer` は遅れがこの秒数（既定値 `0.5`）を超えると補正を試みます。遅れの上限ではなく、実際の遅れはキーフレーム間隔とデコード速度で決まります。`0` 以下では自動ジャンプと HapPlayer の強制同期補正を無効にします。\n\n```cpp\nvoid tcApp::setup() {\n    player.setResyncThreshold(0.5f);\n}\n```\n\nデコードが再生に追いつかない場合、遅れの上限はキーフレーム間隔とデコードがどれだけ遅れるかで決まります。高負荷時には間隔の数倍に達することがあります。キーフレーム間隔を短くしてエンコードすると、遅れを小さくできます。\n\n```sh\nffmpeg -i in.mp4 -c:v libx264 -g 30 out.mp4\n```\n\n先へのジャンプはコンテナのシーク用インデックスを使います。インデックスのないファイル（一部の Matroska など）ではジャンプせず、先へデコードするだけになります。再エンコードせずに MP4 へ入れ替えてください。\n\n```sh\nffmpeg -i in.mkv -c copy out.mp4\n```\n\n`VideoWriter` で録画する場合は、`tcApp::setup()` で `open()` に設定を渡す前に `VideoRecordSettings::keyframeInterval` を指定します。単位はフレームで、30 fps の場合、`30` は1秒です。\n\n```cpp\nVideoRecordSettings settings;\nsettings.keyframeInterval = 30;\n```\n\n- Linux では、再生時刻に合う最新の準備済み映像を表示し、古い映像を飛ばします。音声の再生中は音声時刻に、それ以外は経過時間に従います。\n- HapPlayer では音声への強制同期補正に使います。強制補正を無効にしても、徐々に行う補正は有効です。\n- その他の `VideoPlayer` プラットフォームではネイティブプレイヤーに同期を任せます。対応する閾値 API はありません。",
+                    "details_ko": "- Linux의 `VideoPlayer`는 지연이 이 초 수(기본값 `0.5`)를 초과하면 보정을 시도합니다. 지연의 상한이 아니며 실제 지연은 키프레임 간격과 디코딩 속도에 따라 달라집니다. `0` 이하는 자동 점프와 HapPlayer의 강제 동기화 보정을 비활성화합니다.\n\n```cpp\nvoid tcApp::setup() {\n    player.setResyncThreshold(0.5f);\n}\n```\n\n디코딩이 재생을 따라가지 못하면 지연의 상한은 키프레임 간격과 디코딩이 뒤처진 정도에 따라 결정됩니다. 부하가 높으면 간격의 몇 배에 이를 수 있습니다. 키프레임 간격을 짧게 인코딩하면 지연을 줄일 수 있습니다.\n\n```sh\nffmpeg -i in.mp4 -c:v libx264 -g 30 out.mp4\n```\n\n앞으로의 점프는 컨테이너의 탐색 인덱스를 사용합니다. 인덱스가 없는 파일(일부 Matroska 등)에서는 점프하지 않고 앞으로 디코딩만 합니다. 재인코딩 없이 MP4로 바꿉니다.\n\n```sh\nffmpeg -i in.mkv -c copy out.mp4\n```\n\n`VideoWriter`로 녹화할 때는 `tcApp::setup()`에서 `open()`에 설정을 전달하기 전에 `VideoRecordSettings::keyframeInterval`을 지정합니다. 단위는 프레임이며 30 fps에서 `30`은 1초입니다.\n\n```cpp\nVideoRecordSettings settings;\nsettings.keyframeInterval = 30;\n```\n\n- Linux에서는 재생 시각에 맞는 최신 준비된 영상을 표시하고 오래된 영상은 건너뜁니다. 오디오가 재생 중이면 오디오 시각을 따르고 그 외에는 경과 시간을 따릅니다.\n- HapPlayer에서는 오디오 강제 동기화 보정에 사용합니다. 강제 보정을 비활성화해도 점진적인 보정은 유지합니다.\n- 다른 `VideoPlayer` 플랫폼은 네이티브 플레이어에 동기화를 맡깁니다. 해당 임계값 API는 없습니다.",
                     "keywords": [
                         "sync",
                         "drift",
@@ -73396,6 +73867,24 @@ const TrussCAPI = {
                     "details": "- Logical sizes truncate framebuffer pixels divided by DPI (for example 1286×967 at 200% becomes 643×483).\n- Returns an integer width in logical points, for main and secondary regardless of `pixelPerfect`, or `0` after the native window closes.\n- Unlike these handle getters, `getWindowWidth()`/`getWindowHeight()` and the attached App size and resize arguments follow `pixelPerfect`.\n- For size units, see `Window::setSize`; for main-thread requirements, see `Window::setApp`.",
                     "details_ja": "- 論理サイズは framebuffer px ÷ DPI の小数部を切り捨てます。例：1286×967、200% は 643×483 です。\n- メイン・サブとも `pixelPerfect` にかかわらず論理ポイント単位の幅を整数で返します。ネイティブウィンドウを閉じたあとは `0` を返します。\n- ハンドルの getter と異なり、`getWindowWidth()`/`getWindowHeight()` と App のサイズ・resize 引数は `pixelPerfect` に従います。\n- サイズの単位は `Window::setSize`、メインスレッドでの使用は `Window::setApp` を参照してください。",
                     "details_ko": "- 논리 크기는 framebuffer 픽셀 ÷ DPI의 소수 부분을 버립니다. 예: 1286×967, 200%는 643×483입니다.\n- 메인과 보조 윈도우 모두 `pixelPerfect`와 관계없이 논리 포인트 단위의 너비를 정수로 반환합니다. 네이티브 윈도우를 닫은 뒤에는 `0`을 반환합니다.\n- 이 핸들 getter와 달리 `getWindowWidth()`/`getWindowHeight()` 및 App 크기와 resize 인자는 `pixelPerfect`를 따릅니다.\n- 크기 단위는 `Window::setSize`, 메인 스레드 사용 규칙은 `Window::setApp`을 참조하세요."
+                },
+                {
+                    "name": "injectInput",
+                    "signatures": [
+                        {
+                            "ret": "bool",
+                            "params": "const InputEvent & event, const std::string & tag = std::string()"
+                        }
+                    ],
+                    "desc": "Sends an input event to this Window as if it came from a device. Returns false when the Window can't take it (closed, or invalid values).",
+                    "details": "Positions use the destination App content coordinates: top-left origin, logical points by default or framebuffer pixels with pixelPerfect. The current destination DPI converts positions exactly once; Window::getWidth/getHeight stay logical. Scroll retains wheel units and the current cursor position; movement deltas use the destination pointer history. Accepted key, character, mouse, and touch events carry injected=true and the supplied tag (empty by default); MCP uses \"mcp\". Input from a device carries false and an empty tag. In tcApp::setup():\n```cpp\nbool accepted = getWindow()->injectInput(InputEvent::mouseMoved({20, 30}), \"osc\");\nlogNotice(\"input\") << accepted;\n```\n- injectInput returns false when the Window cannot receive input or the values are invalid. For optional use on an unattached/headless App or during teardown, getWindow() can be null:\n```cpp\nif (auto* window = getWindow()) window->injectInput(InputEvent::mouseMoved({20, 30}), \"osc\");\n```\n- Relay App callbacks in window content space. Node callbacks use local pos; pass globalPos to a tcApp helper for node-origin positions:\n```cpp\nvoid forwardNodePress(const MouseEventArgs& e) {\n    getWindow()->injectInput(InputEvent::mousePressed(e.globalPos, static_cast<MouseButton>(e.button)), \"relay\");\n}\n```\n- Received arguments can be passed back in; the delivered copy starts with consumed=false, and injected/sourceTag are set fresh.",
+                    "details_ja": "位置は宛先 App のコンテンツ座標です。左上を原点とし、既定では論理ポイント、pixelPerfect ではフレームバッファのピクセルです。宛先の現在の DPI で一度だけ変換し、Window::getWidth/getHeight は論理ポイントのままです。スクロールはホイールの単位と現在のカーソル位置を保ち、移動量は宛先のポインター履歴から求めます。受け入れたキー・文字・マウス・タッチ入力には injected=true と指定タグ（既定は空）を設定し、MCP は \"mcp\" を使います。デバイスからの入力は false と空タグです。tcApp::setup() 内で次のように使います。\n```cpp\nbool accepted = getWindow()->injectInput(InputEvent::mouseMoved({20, 30}), \"osc\");\nlogNotice(\"input\") << accepted;\n```\n- 宛先が利用できない場合や入力が不正な場合は false を返します。未接続・ヘッドレスの App や終了処理中では getWindow() が null になることがあるため、任意の送信では確認します。\n```cpp\nif (auto* window = getWindow()) window->injectInput(InputEvent::mouseMoved({20, 30}), \"osc\");\n```\n- App コールバックはウィンドウのコンテンツ座標です。Node の pos はローカル座標なので、Node からの位置を tcApp のヘルパーに渡す場合は globalPos を使います。\n```cpp\nvoid forwardNodePress(const MouseEventArgs& e) {\n    getWindow()->injectInput(InputEvent::mousePressed(e.globalPos, static_cast<MouseButton>(e.button)), \"relay\");\n}\n```\n- 受信した引数を再送できます。送信先では consumed=false から始まり、injected と sourceTag が新しく設定されます。",
+                    "details_ko": "위치는 대상 App의 콘텐츠 좌표입니다. 왼쪽 위가 원점이며 기본적으로 논리 포인트, pixelPerfect에서는 프레임버퍼 픽셀입니다. 대상의 현재 DPI로 한 번만 변환하며 Window::getWidth/getHeight는 논리 포인트를 유지합니다. 스크롤은 휠 단위와 현재 커서 위치를 유지하고 이동량은 대상의 포인터 이력에서 계산합니다. 수락한 키·문자·마우스·터치 입력에는 injected=true와 지정 태그(기본값은 빈 문자열)를 설정하며 MCP는 \"mcp\"를 사용합니다. 장치에서 받은 입력은 false와 빈 태그를 사용합니다. tcApp::setup() 안에서 다음과 같이 사용합니다.\n```cpp\nbool accepted = getWindow()->injectInput(InputEvent::mouseMoved({20, 30}), \"osc\");\nlogNotice(\"input\") << accepted;\n```\n- 대상을 사용할 수 없거나 입력이 잘못되면 false를 반환합니다. 연결되지 않은 App, 헤드리스 App 또는 종료 처리 중에는 getWindow()가 null일 수 있으므로 선택적으로 전송할 때 확인합니다.\n```cpp\nif (auto* window = getWindow()) window->injectInput(InputEvent::mouseMoved({20, 30}), \"osc\");\n```\n- App 콜백은 윈도 콘텐츠 좌표를 사용합니다. Node의 pos는 로컬 좌표이므로 Node에서 받은 위치를 tcApp 헬퍼에 전달할 때는 globalPos를 사용합니다.\n```cpp\nvoid forwardNodePress(const MouseEventArgs& e) {\n    getWindow()->injectInput(InputEvent::mousePressed(e.globalPos, static_cast<MouseButton>(e.button)), \"relay\");\n}\n```\n- 받은 인자를 다시 보낼 수 있습니다. 전달된 복사본은 consumed=false로 시작하며 injected와 sourceTag가 새로 설정됩니다.",
+                    "related": [
+                        "InputEvent",
+                        "InputModifiers",
+                        "App::getWindow"
+                    ]
                 },
                 {
                     "name": "isFocused",

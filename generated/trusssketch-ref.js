@@ -8960,6 +8960,18 @@ const TrussCAPI = {
                     "desc_ko": "ID로 프레임 타이머를 취소한다."
                 },
                 {
+                    "name": "app:charInput",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "e"
+                        }
+                    ],
+                    "desc": "Called for one typed character in this Window.",
+                    "desc_ja": "この Window に入力された 1 文字を受け取ります。",
+                    "desc_ko": "이 Window에 입력된 문자 하나를 받습니다."
+                },
+                {
                     "name": "app:cleanup",
                     "signatures": [
                         {
@@ -9036,12 +9048,16 @@ const TrussCAPI = {
                     "signatures": [
                         {
                             "ret": "(nothing)",
+                            "params": "e"
+                        },
+                        {
+                            "ret": "(nothing)",
                             "params": "files"
                         }
                     ],
-                    "desc": "Called when files are dropped onto this Window, with their paths.",
-                    "desc_ja": "対象 Window にファイルがドロップされたときに、そのパスを受け取って呼ばれる。",
-                    "desc_ko": "대상 Window에 파일이 드롭되었을 때 그 경로를 받아 호출된다."
+                    "desc": "Receives dropped paths and position in this Window, while preserving path-only overrides.",
+                    "desc_ja": "対象 Window のドロップのパスと位置を受け取り、パスだけの既存オーバーライドも保ちます。",
+                    "desc_ko": "대상 Window의 드롭 경로와 위치를 받으며 기존 경로 전용 재정의도 유지합니다."
                 },
                 {
                     "name": "app:findByInstanceId",
@@ -11343,6 +11359,78 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "CharEventArgs",
+            "desc": "One typed Unicode scalar, with repeat, modifier, and injection information.",
+            "keywords": [],
+            "desc_ja": "入力された Unicode スカラー 1 文字とリピート・修飾キー・注入情報です。",
+            "desc_ko": "입력된 Unicode 스칼라 하나와 반복, 수식 키, 주입 정보입니다.",
+            "properties": [
+                {
+                    "name": "charEventArgs.alt",
+                    "type": "boolean",
+                    "desc": "Whether Alt was held.",
+                    "desc_ja": "Alt の押下状態です。",
+                    "desc_ko": "Alt를 누른 상태입니다."
+                },
+                {
+                    "name": "charEventArgs.codepoint",
+                    "type": "number",
+                    "desc": "The typed Unicode scalar.",
+                    "desc_ja": "入力された Unicode スカラーです。",
+                    "desc_ko": "입력된 Unicode 스칼라입니다."
+                },
+                {
+                    "name": "charEventArgs.consumed",
+                    "type": "boolean",
+                    "desc": "Stops delivery to later listeners and App when true.",
+                    "desc_ja": "true で後続リスナーと App への通知を止めます。",
+                    "desc_ko": "true이면 이후 리스너와 App 전달을 멈춥니다."
+                },
+                {
+                    "name": "charEventArgs.ctrl",
+                    "type": "boolean",
+                    "desc": "Whether Control was held.",
+                    "desc_ja": "Control の押下状態です。",
+                    "desc_ko": "Control을 누른 상태입니다."
+                },
+                {
+                    "name": "charEventArgs.injected",
+                    "type": "boolean",
+                    "desc": "True for injectInput characters, false for device characters.",
+                    "desc_ja": "injectInput の文字は true、デバイスの文字は false です。",
+                    "desc_ko": "injectInput 문자는 true, 장치 문자는 false입니다."
+                },
+                {
+                    "name": "charEventArgs.isRepeat",
+                    "type": "boolean",
+                    "desc": "Whether this character repeats a held key.",
+                    "desc_ja": "キーを押し続けたリピート入力かを示します。",
+                    "desc_ko": "키를 누르고 있어 반복된 문자인지 나타냅니다."
+                },
+                {
+                    "name": "charEventArgs.shift",
+                    "type": "boolean",
+                    "desc": "Whether Shift was held.",
+                    "desc_ja": "Shift の押下状態です。",
+                    "desc_ko": "Shift를 누른 상태입니다."
+                },
+                {
+                    "name": "charEventArgs.sourceTag",
+                    "type": "string",
+                    "desc": "The tag supplied to injectInput, empty for device characters.",
+                    "desc_ja": "injectInput に指定したタグです。デバイスの文字では空です。",
+                    "desc_ko": "injectInput에 지정한 태그이며 장치 문자에서는 비어 있습니다."
+                },
+                {
+                    "name": "charEventArgs.super",
+                    "type": "boolean",
+                    "desc": "Whether Super/Command was held.",
+                    "desc_ja": "Super/Command の押下状態です。",
+                    "desc_ko": "Super/Command를 누른 상태입니다."
+                }
+            ]
+        },
+        {
             "name": "ChipSoundBundle",
             "desc": "Combines timed chiptune notes into a single sound.",
             "keywords": [
@@ -12447,6 +12535,13 @@ const TrussCAPI = {
                     "desc_ko": "Android 전용 Back 이벤트입니다. 취소하면 앱이 전면에 남고, 그렇지 않으면 TrussC가 태스크를 백그라운드로 이동합니다."
                 },
                 {
+                    "name": "coreEvents.charInput",
+                    "type": "Event",
+                    "desc": "Delivers typed characters to listeners for the receiving Window.",
+                    "desc_ja": "受信 Window のリスナーに文字入力を通知します。",
+                    "desc_ko": "수신 Window의 리스너에 문자 입력을 전달합니다."
+                },
+                {
                     "name": "coreEvents.clipboardPasted",
                     "type": "Event",
                     "desc": "Fired when a clipboard paste gesture occurs.",
@@ -12720,16 +12815,16 @@ const TrussCAPI = {
                 {
                     "name": "dragDropEventArgs.x",
                     "type": "number",
-                    "desc": "Stores the last recorded mouse x coordinate.",
-                    "desc_ja": "最後に記録されたマウスの x 座標を保持する。",
-                    "desc_ko": "마지막으로 기록된 마우스 x 좌표를 저장한다."
+                    "desc": "The drop x coordinate in App content space.",
+                    "desc_ja": "App のコンテンツ空間でのドロップ x 座標です。",
+                    "desc_ko": "App 콘텐츠 공간의 드롭 x 좌표입니다."
                 },
                 {
                     "name": "dragDropEventArgs.y",
                     "type": "number",
-                    "desc": "Stores the last recorded mouse y coordinate.",
-                    "desc_ja": "最後に記録されたマウスの y 座標を保持する。",
-                    "desc_ko": "마지막으로 기록된 마우스 y 좌표를 저장한다."
+                    "desc": "The drop y coordinate in App content space.",
+                    "desc_ja": "App のコンテンツ空間でのドロップ y 座標です。",
+                    "desc_ko": "App 콘텐츠 공간의 드롭 y 좌표입니다."
                 }
             ]
         },
@@ -15843,6 +15938,215 @@ const TrussCAPI = {
             ]
         },
         {
+            "name": "InputEvent",
+            "desc": "Copies input to send to a Window with Window::injectInput.",
+            "keywords": [],
+            "desc_ja": "Window::injectInput で Window に送る入力をコピーして保持します。",
+            "desc_ko": "Window::injectInput으로 Window에 보낼 입력을 복사하여 보관합니다.",
+            "related": [
+                "Window::injectInput",
+                "InputModifiers"
+            ],
+            "static_methods": [
+                {
+                    "name": "InputEvent.charInput",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "codepoint, mods = {}, repeat = false"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "event"
+                        }
+                    ],
+                    "desc": "Builds one character input from a Unicode scalar or received CharEventArgs.",
+                    "desc_ja": "Unicode スカラーまたは受信した CharEventArgs から 1 文字の入力を作ります。",
+                    "desc_ko": "Unicode 스칼라 또는 받은 CharEventArgs로 문자 입력 하나를 만듭니다."
+                },
+                {
+                    "name": "InputEvent.filesDropped",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "paths, pos"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "event"
+                        }
+                    ],
+                    "desc": "Builds an owned file-path drop at a destination App position.",
+                    "desc_ja": "宛先 App の指定位置に送るファイルパスを所有して保持します。",
+                    "desc_ko": "대상 App 위치로 보낼 파일 경로를 소유하여 보관합니다."
+                },
+                {
+                    "name": "InputEvent.keyPressed",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "key, mods = {}, repeat = false"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "event"
+                        }
+                    ],
+                    "desc": "Builds a keyPressed input from values or received arguments.",
+                    "desc_ja": "値または受信した引数から keyPressed 入力を作ります。",
+                    "desc_ko": "값 또는 받은 인자로 keyPressed 입력을 만듭니다."
+                },
+                {
+                    "name": "InputEvent.keyReleased",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "key, mods = {}"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "event"
+                        }
+                    ],
+                    "desc": "Builds a keyReleased input from values or received arguments.",
+                    "desc_ja": "値または受信した引数から keyReleased 入力を作ります。",
+                    "desc_ko": "값 또는 받은 인자로 keyReleased 입력을 만듭니다."
+                },
+                {
+                    "name": "InputEvent.mouseMoved",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "pos, mods = {}"
+                        }
+                    ],
+                    "desc": "Builds a mouseMoved input from values or received arguments.",
+                    "desc_ja": "値または受信した引数から mouseMoved 入力を作ります。",
+                    "desc_ko": "값 또는 받은 인자로 mouseMoved 입력을 만듭니다."
+                },
+                {
+                    "name": "InputEvent.mousePressed",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "pos, button, mods = {}"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "event"
+                        }
+                    ],
+                    "desc": "Builds a mousePressed input from values or received arguments.",
+                    "desc_ja": "値または受信した引数から mousePressed 入力を作ります。",
+                    "desc_ko": "값 또는 받은 인자로 mousePressed 입력을 만듭니다."
+                },
+                {
+                    "name": "InputEvent.mouseReleased",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "pos, button, mods = {}"
+                        },
+                        {
+                            "ret": "InputEvent",
+                            "params": "event"
+                        }
+                    ],
+                    "desc": "Builds a mouseReleased input from values or received arguments.",
+                    "desc_ja": "値または受信した引数から mouseReleased 入力を作ります。",
+                    "desc_ko": "값 또는 받은 인자로 mouseReleased 입력을 만듭니다."
+                },
+                {
+                    "name": "InputEvent.mouseScrolled",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "scroll, mods = {}"
+                        }
+                    ],
+                    "desc": "Builds a mouseScrolled input from values or received arguments.",
+                    "desc_ja": "値または受信した引数から mouseScrolled 入力を作ります。",
+                    "desc_ko": "값 또는 받은 인자로 mouseScrolled 입력을 만듭니다."
+                },
+                {
+                    "name": "InputEvent.touchMoved",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "event"
+                        }
+                    ],
+                    "desc": "Builds a touchMoved input from received touch arguments.",
+                    "desc_ja": "受信したタッチ引数から touchMoved 入力を作ります。",
+                    "desc_ko": "받은 터치 인자로 touchMoved 입력을 만듭니다."
+                },
+                {
+                    "name": "InputEvent.touchPressed",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "event"
+                        }
+                    ],
+                    "desc": "Builds a touchPressed input from received touch arguments.",
+                    "desc_ja": "受信したタッチ引数から touchPressed 入力を作ります。",
+                    "desc_ko": "받은 터치 인자로 touchPressed 입력을 만듭니다."
+                },
+                {
+                    "name": "InputEvent.touchReleased",
+                    "signatures": [
+                        {
+                            "ret": "InputEvent",
+                            "params": "event"
+                        }
+                    ],
+                    "desc": "Builds a touchReleased input from received touch arguments.",
+                    "desc_ja": "受信したタッチ引数から touchReleased 入力を作ります。",
+                    "desc_ko": "받은 터치 인자로 touchReleased 입력을 만듭니다."
+                }
+            ]
+        },
+        {
+            "name": "InputModifiers",
+            "desc": "Modifier flags copied into an injected key, mouse or scroll event.",
+            "keywords": [],
+            "desc_ja": "注入するキー・マウス・スクロール入力にコピーする修飾キーのフラグです。",
+            "desc_ko": "주입할 키, 마우스 또는 스크롤 이벤트에 복사하는 수식 키 플래그입니다.",
+            "related": [
+                "InputEvent"
+            ],
+            "properties": [
+                {
+                    "name": "inputModifiers.alt",
+                    "type": "boolean",
+                    "desc": "The injected event’s alt modifier flag.",
+                    "desc_ja": "注入するイベントの alt 修飾フラグです。",
+                    "desc_ko": "주입할 이벤트의 alt 수식 플래그입니다."
+                },
+                {
+                    "name": "inputModifiers.ctrl",
+                    "type": "boolean",
+                    "desc": "The injected event’s ctrl modifier flag.",
+                    "desc_ja": "注入するイベントの ctrl 修飾フラグです。",
+                    "desc_ko": "주입할 이벤트의 ctrl 수식 플래그입니다."
+                },
+                {
+                    "name": "inputModifiers.shift",
+                    "type": "boolean",
+                    "desc": "The injected event’s shift modifier flag.",
+                    "desc_ja": "注入するイベントの shift 修飾フラグです。",
+                    "desc_ko": "주입할 이벤트의 shift 수식 플래그입니다."
+                },
+                {
+                    "name": "inputModifiers.super",
+                    "type": "boolean",
+                    "desc": "The injected event’s super modifier flag.",
+                    "desc_ja": "注入するイベントの super 修飾フラグです。",
+                    "desc_ko": "주입할 이벤트의 super 수식 플래그입니다."
+                }
+            ]
+        },
+        {
             "name": "IVec2",
             "desc": "A two-dimensional integer vector.",
             "keywords": [
@@ -16264,6 +16568,13 @@ const TrussCAPI = {
                     "desc_ko": "Ctrl 키가 눌려 있는지 나타낸다."
                 },
                 {
+                    "name": "keyEventArgs.injected",
+                    "type": "boolean",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "keyEventArgs.isRepeat",
                     "type": "boolean",
                     "desc": "Identifies repeated key presses.",
@@ -16283,6 +16594,13 @@ const TrussCAPI = {
                     "desc": "Indicates whether Shift is held.",
                     "desc_ja": "Shift キーが押されているかを表す。",
                     "desc_ko": "Shift 키가 눌려 있는지 나타낸다."
+                },
+                {
+                    "name": "keyEventArgs.sourceTag",
+                    "type": "string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "keyEventArgs.super",
@@ -19396,6 +19714,13 @@ const TrussCAPI = {
                     "desc_ko": "화면 좌표의 커서 위치를 담는다."
                 },
                 {
+                    "name": "mouseDragEventArgs.injected",
+                    "type": "boolean",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "mouseDragEventArgs.pos",
                     "type": "Vec2",
                     "desc": "Stores the cursor position in local coordinates.",
@@ -19408,6 +19733,13 @@ const TrussCAPI = {
                     "desc": "Indicates whether Shift is held.",
                     "desc_ja": "Shift キーが押されているかを示す。",
                     "desc_ko": "Shift 키가 눌려 있는지 나타낸다."
+                },
+                {
+                    "name": "mouseDragEventArgs.sourceTag",
+                    "type": "string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "mouseDragEventArgs.super",
@@ -19502,6 +19834,13 @@ const TrussCAPI = {
                     "desc_ko": "스크린 좌표의 커서 위치를 나타낸다."
                 },
                 {
+                    "name": "mouseEventArgs.injected",
+                    "type": "boolean",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "mouseEventArgs.pos",
                     "type": "Vec2",
                     "desc": "The cursor position in the receiver's coordinates.",
@@ -19514,6 +19853,13 @@ const TrussCAPI = {
                     "desc": "Indicates whether Shift is held for the mouse event.",
                     "desc_ja": "マウスイベント時に Shift キーが押されているかを表す。",
                     "desc_ko": "마우스 이벤트 시 Shift 키가 눌려 있는지 나타낸다."
+                },
+                {
+                    "name": "mouseEventArgs.sourceTag",
+                    "type": "string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "mouseEventArgs.super",
@@ -19626,6 +19972,13 @@ const TrussCAPI = {
                     "desc_ko": "화면 좌표의 커서 위치를 담는다."
                 },
                 {
+                    "name": "mouseMoveEventArgs.injected",
+                    "type": "boolean",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "mouseMoveEventArgs.pos",
                     "type": "Vec2",
                     "desc": "Stores the cursor position in local coordinates.",
@@ -19638,6 +19991,13 @@ const TrussCAPI = {
                     "desc": "Indicates whether Shift is held.",
                     "desc_ja": "Shift キーが押されているかを示す。",
                     "desc_ko": "Shift 키가 눌려 있는지 나타낸다."
+                },
+                {
+                    "name": "mouseMoveEventArgs.sourceTag",
+                    "type": "string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "mouseMoveEventArgs.super",
@@ -28358,6 +28718,13 @@ const TrussCAPI = {
                     "desc_ko": "스크롤 시 스크린 좌표의 커서 위치를 나타낸다."
                 },
                 {
+                    "name": "scrollEventArgs.injected",
+                    "type": "boolean",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "scrollEventArgs.pos",
                     "type": "Vec2",
                     "desc": "The cursor position in the receiver's coordinates during scrolling.",
@@ -28391,6 +28758,13 @@ const TrussCAPI = {
                     "desc": "Indicates whether Shift is held for the scroll event.",
                     "desc_ja": "スクロールイベント時に Shift キーが押されているかを表す。",
                     "desc_ko": "스크롤 이벤트 시 Shift 키가 눌려 있는지 나타낸다."
+                },
+                {
+                    "name": "scrollEventArgs.sourceTag",
+                    "type": "string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 },
                 {
                     "name": "scrollEventArgs.super",
@@ -31588,11 +31962,25 @@ const TrussCAPI = {
                     "desc_ko": "시스템 취소로 인한 터치 종료를 나타낸다."
                 },
                 {
+                    "name": "touchEventArgs.injected",
+                    "type": "boolean",
+                    "desc": "True for input sent by injectInput; false for input from a device.",
+                    "desc_ja": "injectInput で送った入力では true、デバイスからの入力では false です。",
+                    "desc_ko": "injectInput으로 보낸 입력은 true, 장치에서 받은 입력은 false입니다."
+                },
+                {
                     "name": "touchEventArgs.numTouches",
                     "type": "number",
                     "desc": "Counts the valid touch points in the event.",
                     "desc_ja": "イベント内の有効なタッチ点の数を表す。",
                     "desc_ko": "이벤트에 포함된 유효한 터치 점의 수를 나타낸다."
+                },
+                {
+                    "name": "touchEventArgs.sourceTag",
+                    "type": "string",
+                    "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp.",
+                    "desc_ja": "Window::injectInput で指定した自由なタグです。MCP は mcp を使います。",
+                    "desc_ko": "Window::injectInput에 지정한 자유 형식 태그입니다. MCP는 mcp를 사용합니다."
                 }
             ],
             "methods": [
@@ -35174,9 +35562,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns the hard resynchronization threshold.",
-                    "desc_ja": "強制的な同期補正の閾値を返す。",
-                    "desc_ko": "강제 동기화 보정 임계값을 반환한다."
+                    "desc": "Returns the playback catch-up threshold in seconds.",
+                    "desc_ja": "再生の遅れを補正し始める閾値を秒単位で返します。",
+                    "desc_ko": "재생 지연 보정을 시작할 임계값을 초 단위로 반환합니다."
                 },
                 {
                     "name": "videoPlayer:getRotation",
@@ -35694,9 +36082,9 @@ const TrussCAPI = {
                             "params": "seconds"
                         }
                     ],
-                    "desc": "Sets the threshold for hard playback resynchronization.",
-                    "desc_ja": "再生位置を強制的に同期補正する閾値を設定する。",
-                    "desc_ko": "재생 위치를 강제로 동기화 보정하는 임계값을 설정한다."
+                    "desc": "Sets the Linux playback lag threshold for trying to catch up (default 0.5 seconds), not a maximum lag; keyframe spacing and decoding speed determine the lag. HapPlayer uses it for hard audio resynchronization.",
+                    "desc_ja": "Linux の再生の遅れを補正し始める閾値（既定値0.5秒）を設定します。遅れの上限ではなく、実際の遅れはキーフレーム間隔とデコード速度で決まります。HapPlayer では音声への強制同期補正に使います。",
+                    "desc_ko": "Linux 재생 지연 보정을 시작할 임계값(기본값 0.5초)을 설정합니다. 지연의 상한이 아니며 실제 지연은 키프레임 간격과 디코딩 속도에 따라 달라집니다. HapPlayer는 오디오 강제 동기화 보정에 사용합니다."
                 },
                 {
                     "name": "videoPlayer:setSpeed",
@@ -36071,9 +36459,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "Returns the hard resynchronization threshold.",
-                    "desc_ja": "強制的な同期補正の閾値を返す。",
-                    "desc_ko": "강제 동기화 보정 임계값을 반환한다."
+                    "desc": "Returns the playback catch-up threshold in seconds.",
+                    "desc_ja": "再生の遅れを補正し始める閾値を秒単位で返します。",
+                    "desc_ko": "재생 지연 보정을 시작할 임계값을 초 단위로 반환합니다."
                 },
                 {
                     "name": "videoPlayerBase:getSpeed",
@@ -36471,9 +36859,9 @@ const TrussCAPI = {
                             "params": "seconds"
                         }
                     ],
-                    "desc": "Sets the threshold for hard playback resynchronization.",
-                    "desc_ja": "再生位置を強制的に同期補正する閾値を設定する。",
-                    "desc_ko": "재생 위치를 강제로 동기화 보정하는 임계값을 설정한다."
+                    "desc": "Sets the Linux playback lag threshold for trying to catch up (default 0.5 seconds), not a maximum lag; keyframe spacing and decoding speed determine the lag. HapPlayer uses it for hard audio resynchronization.",
+                    "desc_ja": "Linux の再生の遅れを補正し始める閾値（既定値0.5秒）を設定します。遅れの上限ではなく、実際の遅れはキーフレーム間隔とデコード速度で決まります。HapPlayer では音声への強制同期補正に使います。",
+                    "desc_ko": "Linux 재생 지연 보정을 시작할 임계값(기본값 0.5초)을 설정합니다. 지연의 상한이 아니며 실제 지연은 키프레임 간격과 디코딩 속도에 따라 달라집니다. HapPlayer는 오디오 강제 동기화 보정에 사용합니다."
                 },
                 {
                     "name": "videoPlayerBase:setSpeed",
@@ -36979,6 +37367,18 @@ const TrussCAPI = {
                     "desc": "Returns this window's content width.",
                     "desc_ja": "このウィンドウのコンテンツ領域の幅を返す。",
                     "desc_ko": "이 윈도우의 콘텐츠 영역 너비를 반환한다."
+                },
+                {
+                    "name": "window:injectInput",
+                    "signatures": [
+                        {
+                            "ret": "boolean",
+                            "params": "event, tag = \"\""
+                        }
+                    ],
+                    "desc": "Sends an input event to this Window as if it came from a device. Returns false when the Window can't take it (closed, or invalid values).",
+                    "desc_ja": "入力イベントをデバイスからの入力と同じようにこの Window に送ります。Window が受け取れない場合（閉じている場合や値が不正な場合）は false を返します。",
+                    "desc_ko": "입력 이벤트를 장치에서 받은 입력처럼 이 Window에 보냅니다. Window가 받을 수 없으면(닫혀 있거나 값이 잘못된 경우) false를 반환합니다."
                 },
                 {
                     "name": "window:isFocused",

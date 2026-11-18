@@ -2695,6 +2695,12 @@ const TrussSketchAPI = {
      "desc": "Cancels a frame timer by ID."
     },
     {
+     "name": "charInput",
+     "snippet": "charInput(${1:e})",
+     "return": "void",
+     "desc": "Called for one typed character in this Window."
+    },
+    {
      "name": "cleanup",
      "snippet": "cleanup()",
      "return": "void",
@@ -2732,9 +2738,9 @@ const TrussSketchAPI = {
     },
     {
      "name": "filesDropped",
-     "snippet": "filesDropped(${1:files})",
+     "snippet": "filesDropped(${1:e})",
      "return": "void",
-     "desc": "Called when files are dropped onto this Window, with their paths."
+     "desc": "Receives dropped paths and position in this Window, while preserving path-only overrides."
     },
     {
      "name": "findByInstanceId",
@@ -4273,6 +4279,57 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "CharEventArgs",
+   "desc": "One typed Unicode scalar, with repeat, modifier, and injection information.",
+   "properties": [
+    {
+     "name": "alt",
+     "type": "bool",
+     "desc": "Whether Alt was held."
+    },
+    {
+     "name": "codepoint",
+     "type": "uint32_t",
+     "desc": "The typed Unicode scalar."
+    },
+    {
+     "name": "consumed",
+     "type": "bool",
+     "desc": "Stops delivery to later listeners and App when true."
+    },
+    {
+     "name": "ctrl",
+     "type": "bool",
+     "desc": "Whether Control was held."
+    },
+    {
+     "name": "injected",
+     "type": "bool",
+     "desc": "True for injectInput characters, false for device characters."
+    },
+    {
+     "name": "isRepeat",
+     "type": "bool",
+     "desc": "Whether this character repeats a held key."
+    },
+    {
+     "name": "shift",
+     "type": "bool",
+     "desc": "Whether Shift was held."
+    },
+    {
+     "name": "sourceTag",
+     "type": "std::string",
+     "desc": "The tag supplied to injectInput, empty for device characters."
+    },
+    {
+     "name": "super",
+     "type": "bool",
+     "desc": "Whether Super/Command was held."
+    }
+   ]
+  },
+  {
    "name": "ChipSoundBundle",
    "desc": "Combines timed chiptune notes into a single sound.",
    "properties": [
@@ -5757,6 +5814,11 @@ const TrussSketchAPI = {
      "desc": "Android-only Back event; cancel it to keep the app in front, otherwise TrussC moves the task to the background."
     },
     {
+     "name": "charInput",
+     "type": "Event<CharEventArgs>",
+     "desc": "Delivers typed characters to listeners for the receiving Window."
+    },
+    {
      "name": "clipboardPasted",
      "type": "Event<ClipboardPastedEventArgs>",
      "desc": "Fired when a clipboard paste gesture occurs."
@@ -6166,12 +6228,12 @@ const TrussSketchAPI = {
     {
      "name": "x",
      "type": "float",
-     "desc": "Stores the last recorded mouse x coordinate."
+     "desc": "The drop x coordinate in App content space."
     },
     {
      "name": "y",
      "type": "float",
-     "desc": "Stores the last recorded mouse y coordinate."
+     "desc": "The drop y coordinate in App content space."
     }
    ]
   },
@@ -7859,6 +7921,104 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "InputEvent",
+   "desc": "Copies input to send to a Window with Window::injectInput.",
+   "static_methods": [
+    {
+     "name": "charInput",
+     "snippet": "charInput(${1:codepoint})",
+     "return": "InputEvent",
+     "desc": "Builds one character input from a Unicode scalar or received CharEventArgs."
+    },
+    {
+     "name": "filesDropped",
+     "snippet": "filesDropped(${1:paths}, ${2:pos})",
+     "return": "InputEvent",
+     "desc": "Builds an owned file-path drop at a destination App position."
+    },
+    {
+     "name": "keyPressed",
+     "snippet": "keyPressed(${1:key})",
+     "return": "InputEvent",
+     "desc": "Builds a keyPressed input from values or received arguments."
+    },
+    {
+     "name": "keyReleased",
+     "snippet": "keyReleased(${1:key})",
+     "return": "InputEvent",
+     "desc": "Builds a keyReleased input from values or received arguments."
+    },
+    {
+     "name": "mouseMoved",
+     "snippet": "mouseMoved(${1:pos})",
+     "return": "InputEvent",
+     "desc": "Builds a mouseMoved input from values or received arguments."
+    },
+    {
+     "name": "mousePressed",
+     "snippet": "mousePressed(${1:pos}, ${2:button})",
+     "return": "InputEvent",
+     "desc": "Builds a mousePressed input from values or received arguments."
+    },
+    {
+     "name": "mouseReleased",
+     "snippet": "mouseReleased(${1:pos}, ${2:button})",
+     "return": "InputEvent",
+     "desc": "Builds a mouseReleased input from values or received arguments."
+    },
+    {
+     "name": "mouseScrolled",
+     "snippet": "mouseScrolled(${1:scroll})",
+     "return": "InputEvent",
+     "desc": "Builds a mouseScrolled input from values or received arguments."
+    },
+    {
+     "name": "touchMoved",
+     "snippet": "touchMoved(${1:event})",
+     "return": "InputEvent",
+     "desc": "Builds a touchMoved input from received touch arguments."
+    },
+    {
+     "name": "touchPressed",
+     "snippet": "touchPressed(${1:event})",
+     "return": "InputEvent",
+     "desc": "Builds a touchPressed input from received touch arguments."
+    },
+    {
+     "name": "touchReleased",
+     "snippet": "touchReleased(${1:event})",
+     "return": "InputEvent",
+     "desc": "Builds a touchReleased input from received touch arguments."
+    }
+   ]
+  },
+  {
+   "name": "InputModifiers",
+   "desc": "Modifier flags copied into an injected key, mouse or scroll event.",
+   "properties": [
+    {
+     "name": "alt",
+     "type": "bool",
+     "desc": "The injected event’s alt modifier flag."
+    },
+    {
+     "name": "ctrl",
+     "type": "bool",
+     "desc": "The injected event’s ctrl modifier flag."
+    },
+    {
+     "name": "shift",
+     "type": "bool",
+     "desc": "The injected event’s shift modifier flag."
+    },
+    {
+     "name": "super",
+     "type": "bool",
+     "desc": "The injected event’s super modifier flag."
+    }
+   ]
+  },
+  {
    "name": "IVec2",
    "desc": "A two-dimensional integer vector.",
    "constructor": {
@@ -8082,6 +8242,11 @@ const TrussSketchAPI = {
      "desc": "Indicates whether Ctrl is held."
     },
     {
+     "name": "injected",
+     "type": "bool",
+     "desc": "True for input sent by injectInput; false for input from a device."
+    },
+    {
      "name": "isRepeat",
      "type": "bool",
      "desc": "Identifies repeated key presses."
@@ -8095,6 +8260,11 @@ const TrussSketchAPI = {
      "name": "shift",
      "type": "bool",
      "desc": "Indicates whether Shift is held."
+    },
+    {
+     "name": "sourceTag",
+     "type": "std::string",
+     "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp."
     },
     {
      "name": "super",
@@ -9915,6 +10085,11 @@ const TrussSketchAPI = {
      "desc": "Stores the cursor position in screen coordinates."
     },
     {
+     "name": "injected",
+     "type": "bool",
+     "desc": "True for input sent by injectInput; false for input from a device."
+    },
+    {
      "name": "pos",
      "type": "Vec2",
      "desc": "Stores the cursor position in local coordinates."
@@ -9923,6 +10098,11 @@ const TrussSketchAPI = {
      "name": "shift",
      "type": "bool",
      "desc": "Indicates whether Shift is held."
+    },
+    {
+     "name": "sourceTag",
+     "type": "std::string",
+     "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp."
     },
     {
      "name": "super",
@@ -9979,6 +10159,11 @@ const TrussSketchAPI = {
      "desc": "The cursor position in screen coordinates."
     },
     {
+     "name": "injected",
+     "type": "bool",
+     "desc": "True for input sent by injectInput; false for input from a device."
+    },
+    {
      "name": "pos",
      "type": "Vec2",
      "desc": "The cursor position in the receiver's coordinates."
@@ -9987,6 +10172,11 @@ const TrussSketchAPI = {
      "name": "shift",
      "type": "bool",
      "desc": "Indicates whether Shift is held for the mouse event."
+    },
+    {
+     "name": "sourceTag",
+     "type": "std::string",
+     "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp."
     },
     {
      "name": "super",
@@ -10058,6 +10248,11 @@ const TrussSketchAPI = {
      "desc": "Stores the cursor position in screen coordinates."
     },
     {
+     "name": "injected",
+     "type": "bool",
+     "desc": "True for input sent by injectInput; false for input from a device."
+    },
+    {
      "name": "pos",
      "type": "Vec2",
      "desc": "Stores the cursor position in local coordinates."
@@ -10066,6 +10261,11 @@ const TrussSketchAPI = {
      "name": "shift",
      "type": "bool",
      "desc": "Indicates whether Shift is held."
+    },
+    {
+     "name": "sourceTag",
+     "type": "std::string",
+     "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp."
     },
     {
      "name": "super",
@@ -14598,6 +14798,11 @@ const TrussSketchAPI = {
      "desc": "The cursor position in screen coordinates during scrolling."
     },
     {
+     "name": "injected",
+     "type": "bool",
+     "desc": "True for input sent by injectInput; false for input from a device."
+    },
+    {
      "name": "pos",
      "type": "Vec2",
      "desc": "The cursor position in the receiver's coordinates during scrolling."
@@ -14621,6 +14826,11 @@ const TrussSketchAPI = {
      "name": "shift",
      "type": "bool",
      "desc": "Indicates whether Shift is held for the scroll event."
+    },
+    {
+     "name": "sourceTag",
+     "type": "std::string",
+     "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp."
     },
     {
      "name": "super",
@@ -16629,9 +16839,19 @@ const TrussSketchAPI = {
      "desc": "Identifies a touch release caused by system cancellation."
     },
     {
+     "name": "injected",
+     "type": "bool",
+     "desc": "True for input sent by injectInput; false for input from a device."
+    },
+    {
      "name": "numTouches",
      "type": "int",
      "desc": "Counts the valid touch points in the event."
+    },
+    {
+     "name": "sourceTag",
+     "type": "std::string",
+     "desc": "The free-form tag supplied to Window::injectInput; MCP uses mcp."
     }
    ],
    "methods": [
@@ -18504,7 +18724,7 @@ const TrussSketchAPI = {
      "name": "getResyncThreshold",
      "snippet": "getResyncThreshold()",
      "return": "float",
-     "desc": "Returns the hard resynchronization threshold."
+     "desc": "Returns the playback catch-up threshold in seconds."
     },
     {
      "name": "getRotation",
@@ -18762,7 +18982,7 @@ const TrussSketchAPI = {
      "name": "setResyncThreshold",
      "snippet": "setResyncThreshold(${1:seconds})",
      "return": "void",
-     "desc": "Sets the threshold for hard playback resynchronization."
+     "desc": "Sets the Linux playback lag threshold for trying to catch up (default 0.5 seconds), not a maximum lag; keyframe spacing and decoding speed determine the lag. HapPlayer uses it for hard audio resynchronization."
     },
     {
      "name": "setSpeed",
@@ -18949,7 +19169,7 @@ const TrussSketchAPI = {
      "name": "getResyncThreshold",
      "snippet": "getResyncThreshold()",
      "return": "float",
-     "desc": "Returns the hard resynchronization threshold."
+     "desc": "Returns the playback catch-up threshold in seconds."
     },
     {
      "name": "getSpeed",
@@ -19147,7 +19367,7 @@ const TrussSketchAPI = {
      "name": "setResyncThreshold",
      "snippet": "setResyncThreshold(${1:seconds})",
      "return": "void",
-     "desc": "Sets the threshold for hard playback resynchronization."
+     "desc": "Sets the Linux playback lag threshold for trying to catch up (default 0.5 seconds), not a maximum lag; keyframe spacing and decoding speed determine the lag. HapPlayer uses it for hard audio resynchronization."
     },
     {
      "name": "setSpeed",
@@ -19403,6 +19623,12 @@ const TrussSketchAPI = {
      "snippet": "getWidth()",
      "return": "int",
      "desc": "Returns this window's content width."
+    },
+    {
+     "name": "injectInput",
+     "snippet": "injectInput(${1:event})",
+     "return": "bool",
+     "desc": "Sends an input event to this Window as if it came from a device. Returns false when the Window can't take it (closed, or invalid values)."
     },
     {
      "name": "isFocused",
