@@ -149,7 +149,7 @@ const TrussSketchAPI = {
     {
      "name": "loadJson",
      "snippet": "loadJson(${1:path})",
-     "desc": "Loads a JSON value from a file."
+     "desc": "Loads a JSON file; use the LoadResult overload to distinguish failure from valid null."
     },
     {
      "name": "loadTextFile",
@@ -1914,7 +1914,7 @@ const TrussSketchAPI = {
     {
      "name": "parseJson",
      "snippet": "parseJson(${1:str})",
-     "desc": "Parses a JSON string into a Json value."
+     "desc": "Parses JSON text; use the LoadResult overload to distinguish failure from valid null."
     },
     {
      "name": "parseXml",
@@ -2294,7 +2294,7 @@ const TrussSketchAPI = {
     {
      "name": "getWindowPosition",
      "snippet": "getWindowPosition()",
-     "desc": "Returns the window position on the screen."
+     "desc": "Returns the current window’s position in OS screen coordinates; returns (-1, -1) when unavailable."
     },
     {
      "name": "grabScreen",
@@ -6693,15 +6693,15 @@ const TrussSketchAPI = {
     },
     {
      "name": "readPixels",
-     "snippet": "readPixels()",
-     "return": "",
-     "desc": "Reads framebuffer contents into a top-first CPU RGBA8 buffer."
+     "snippet": "readPixels(${1:pixels})",
+     "return": "bool",
+     "desc": "Reads an ended Fbo as RGBA8 into Pixels with automatic sizing or a byte buffer allocated by the caller."
     },
     {
      "name": "readPixelsFloat",
-     "snippet": "readPixelsFloat()",
-     "return": "",
-     "desc": "Reads framebuffer contents into a CPU float buffer."
+     "snippet": "readPixelsFloat(${1:pixels})",
+     "return": "bool",
+     "desc": "Reads an ended Fbo as F32 into Pixels with automatic sizing or a float buffer allocated by the caller, using the source channel count."
     },
     {
      "name": "readStencil",
@@ -7418,7 +7418,7 @@ const TrussSketchAPI = {
      "name": "add",
      "snippet": "add(${1:codepoint})",
      "return": "void",
-     "desc": "Appends a glyph or UTF-8 string, using batch settings for omitted arguments."
+     "desc": "Appends retained text at a position or with a matrix, avoiding per-string matrix-stack changes."
     },
     {
      "name": "clear",
@@ -19610,7 +19610,7 @@ const TrussSketchAPI = {
      "name": "getPosition",
      "snippet": "getPosition()",
      "return": "IVec2",
-     "desc": "This window's current position in the same screen-coordinate space as setPosition; (-1, -1) if the native window is gone"
+     "desc": "Reads this window’s position in OS screen coordinates; use it on desktop when you need the decorated frame location. Returns (-1, -1) when unavailable."
     },
     {
      "name": "getTitle",

@@ -5049,7 +5049,7 @@ const TrussCAPI = {
                     "params": "",
                     "params_typed": "",
                     "return_type": "IVec2",
-                    "desc": "Returns the window position on the screen.",
+                    "desc": "Returns the current window’s position in OS screen coordinates; returns (-1, -1) when unavailable.",
                     "keywords": [
                         "location",
                         "screen",
@@ -5057,8 +5057,8 @@ const TrussCAPI = {
                         "offset",
                         "x y"
                     ],
-                    "desc_ja": "画面上のウィンドウ位置を返す。",
-                    "desc_ko": "화면에서 윈도우의 위치를 반환한다."
+                    "desc_ja": "現在のウィンドウ位置を OS スクリーン座標で返します。取得できない場合は (-1, -1) を返します。",
+                    "desc_ko": "현재 윈도우 위치를 OS 스크린 좌표로 반환합니다. 조회할 수 없으면 (-1, -1)을 반환합니다."
                 },
                 {
                     "name": "grabScreen",
@@ -5773,13 +5773,13 @@ const TrussCAPI = {
                     "params": "str",
                     "params_typed": "str",
                     "return_type": "Json",
-                    "desc": "Parses a JSON string into a Json value.",
+                    "desc": "Parses JSON text; use the LoadResult overload to distinguish failure from valid null.",
                     "keywords": [
                         "deserialize",
                         "decode"
                     ],
-                    "desc_ja": "JSON 文字列を解析して Json 値に変換する。",
-                    "desc_ko": "JSON 문자열을 파싱하여 Json 값으로 변환한다."
+                    "desc_ja": "JSON 文字列を解析し、LoadResult を返す形式で失敗と正常な null を区別する。",
+                    "desc_ko": "JSON 문자열을 파싱하고 LoadResult 형식으로 실패와 유효한 null을 구분한다."
                 },
                 {
                     "name": "parseXml",
@@ -6503,14 +6503,14 @@ const TrussCAPI = {
                     "params": "path",
                     "params_typed": "path",
                     "return_type": "Json",
-                    "desc": "Loads a JSON value from a file.",
+                    "desc": "Loads a JSON file; use the LoadResult overload to distinguish failure from valid null.",
                     "keywords": [
                         "read",
                         "open",
                         "parse"
                     ],
-                    "desc_ja": "ファイルから JSON 値を読み込む。",
-                    "desc_ko": "파일에서 JSON 값을 읽는다."
+                    "desc_ja": "JSON ファイルを読み込み、LoadResult を返す形式で失敗と正常な null を区別する。",
+                    "desc_ko": "JSON 파일을 읽고 LoadResult 형식으로 실패와 유효한 null을 구분한다."
                 },
                 {
                     "name": "loadTextFile",
@@ -13466,9 +13466,9 @@ const TrussCAPI = {
                     "signatures": [
                         "pixels"
                     ],
-                    "desc": "Reads framebuffer contents into a top-first CPU RGBA8 buffer.",
-                    "desc_ja": "フレームバッファの内容を、上の行から並ぶ CPU RGBA8 バッファに読み出します。",
-                    "desc_ko": "프레임버퍼 내용을 위쪽 행부터 배치한 CPU RGBA8 버퍼로 읽습니다."
+                    "desc": "Reads an ended Fbo as RGBA8 into Pixels with automatic sizing or a byte buffer allocated by the caller.",
+                    "desc_ja": "end 後の Fbo を RGBA8 として、自動サイズ調整する Pixels または呼び出し側で確保したバイト配列に読み出します。",
+                    "desc_ko": "종료된 Fbo를 RGBA8로 자동 크기 조정 Pixels 또는 호출자가 할당한 바이트 버퍼에 읽습니다."
                 },
                 {
                     "name": "fbo:readPixelsFloat",
@@ -13476,9 +13476,9 @@ const TrussCAPI = {
                     "signatures": [
                         "pixels"
                     ],
-                    "desc": "Reads framebuffer contents into a CPU float buffer.",
-                    "desc_ja": "フレームバッファの内容を CPU の float バッファに読み出す。",
-                    "desc_ko": "프레임버퍼 내용을 CPU float 버퍼로 읽는다."
+                    "desc": "Reads an ended Fbo as F32 into Pixels with automatic sizing or a float buffer allocated by the caller, using the source channel count.",
+                    "desc_ja": "end 後の Fbo を元のチャンネル数の F32 として、自動サイズ調整する Pixels または呼び出し側で確保した float 配列に読み出します。",
+                    "desc_ko": "종료된 Fbo를 원본 채널 수의 F32로 자동 크기 조정 Pixels 또는 호출자가 할당한 float 버퍼에 읽습니다."
                 },
                 {
                     "name": "fbo:readStencil",
@@ -14982,11 +14982,23 @@ const TrussCAPI = {
                         {
                             "ret": "(nothing)",
                             "params": "text, color"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "text, x, y"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "text, x, y, color"
+                        },
+                        {
+                            "ret": "(nothing)",
+                            "params": "text, matrix, color"
                         }
                     ],
-                    "desc": "Appends a glyph or UTF-8 string, using batch settings for omitted arguments.",
-                    "desc_ja": "グリフまたは UTF-8 文字列を追加します。省略した引数にはバッチ設定を使います。",
-                    "desc_ko": "글리프 또는 UTF-8 문자열을 추가하며 생략한 인수에는 배치 설정을 사용합니다."
+                    "desc": "Appends retained text at a position or with a matrix, avoiding per-string matrix-stack changes.",
+                    "desc_ja": "文字列ごとの行列スタック操作を省き、位置または行列を指定して保持するテキストを追加します。",
+                    "desc_ko": "문자열마다 행렬 스택을 조작하지 않고 위치 또는 행렬을 지정하여 유지할 텍스트를 추가합니다."
                 },
                 {
                     "name": "glyphBatch:clear",
@@ -37340,9 +37352,9 @@ const TrussCAPI = {
                             "params": ""
                         }
                     ],
-                    "desc": "This window's current position in the same screen-coordinate space as setPosition; (-1, -1) if the native window is gone",
-                    "desc_ja": "setPosition と同じスクリーン座標系での、このウィンドウの現在位置。ネイティブウィンドウが存在しない場合は (-1, -1)",
-                    "desc_ko": "setPosition과 같은 스크린 좌표계에서의 이 윈도우의 현재 위치. 네이티브 윈도우가 없으면 (-1, -1)"
+                    "desc": "Reads this window’s position in OS screen coordinates; use it on desktop when you need the decorated frame location. Returns (-1, -1) when unavailable.",
+                    "desc_ja": "デスクトップで装飾込みの外枠位置が必要なときに使う、OS スクリーン座標での現在位置です。取得できない場合は (-1, -1) を返します。",
+                    "desc_ko": "데스크톱에서 장식을 포함한 외곽 프레임 위치가 필요할 때 OS 스크린 좌표로 현재 위치를 읽습니다. 조회할 수 없으면 (-1, -1)을 반환합니다."
                 },
                 {
                     "name": "window:getTitle",
