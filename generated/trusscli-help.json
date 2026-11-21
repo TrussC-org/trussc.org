@@ -20,5 +20,5 @@
     "upgrade": "Usage: trusscli upgrade [options]\n\nUpgrade TrussC to the latest version by pulling the latest code from\nthe git repository and rebuilding trusscli. The /usr/local/bin symlink\n(if present) automatically points to the new binary.\n\nOn Windows, tools/build_win.bat sets up Visual Studio and rebuilds\ntrusscli. The previous executable is removed on the next start.\n\nOptions:\n      --tc-root <path>       Path to TrussC root directory\n  -j, --jobs <N>             Run at most N compile jobs in the rebuild\n  -h, --help                 Show this help\n",
     "version": "Usage: trusscli version\n\nShow version (trusscli + current TrussC).\n\nOptions:\n  -h, --help                 Show this help\n"
   },
-  "trussc_commit": "883dcceea286982a12933d6c7500ea22a116b912"
+  "trussc_commit": "a4b9fcc503cf4eeb121190d33cb72fef35fa3f8f"
 }
