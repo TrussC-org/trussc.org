@@ -9503,6 +9503,26 @@ const TrussCAPI = {
                     "details_ko": "- 표준 라이브러리 함수 `ceil(x)`는 `x` 이상인 가장 작은 정숫값을 반환합니다. 예를 들어 `ceil(-1.2f)`는 `-1.0f`를 반환합니다.\n- 인수가 `float`이면 반환값도 `float`이며 정수형으로 바뀌지 않습니다."
                 },
                 {
+                    "name": "correlation",
+                    "params": "x, y",
+                    "params_typed": "std::span<const float> x, std::span<const float> y",
+                    "return_type": "std::optional<double>",
+                    "desc": "Returns the Pearson correlation of paired float values.",
+                    "keywords": [],
+                    "desc_ja": "対になる float 値のピアソン相関係数を返します。",
+                    "desc_ko": "쌍을 이루는 float 값의 피어슨 상관계수를 반환합니다.",
+                    "details": "Accepts two `std::span<const float>` inputs and returns `optional<double>`. Uses scalar double accumulation in two passes, subtracting the means before computing moments. Empty input, unequal lengths, fewer than two pairs, any NaN/infinity, or zero variance in either input returns `nullopt`. Check the result before use:",
+                    "details_ja": "2つの `std::span<const float>` を受け取り、`optional<double>` を返します。スカラーの double で2回走査し、平均を引いてからモーメントを計算します。空入力、長さの不一致、2組未満、NaN・無限大の混入、どちらかの分散が0の場合は `nullopt` を返します。使用前に結果を確認します。",
+                    "details_ko": "두 `std::span<const float>` 입력을 받고 `optional<double>`를 반환합니다. 스칼라 double로 두 번 순회하며 평균을 뺀 뒤 모멘트를 계산합니다. 빈 입력, 길이 불일치, 두 쌍 미만, NaN이나 무한대 포함, 어느 한 입력의 분산이 0이면 `nullopt`를 반환합니다. 사용 전에 결과를 확인합니다.",
+                    "snippet": "void tcApp::setup() {\n    std::vector<float> x{0, 1, 2}, y{3, 5, 7};\n    auto result = correlation(x, y);\n    if (result) logNotice(\"Stats\") << *result;\n}\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "exp",
                     "params": "x",
                     "params_typed": "float x",
@@ -9753,6 +9773,26 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "fitLine",
+                    "params": "x, y",
+                    "params_typed": "std::span<const float> x, std::span<const float> y",
+                    "return_type": "std::optional<LineFit>",
+                    "desc": "Fits y = slope * x + intercept by least squares.",
+                    "keywords": [],
+                    "desc_ja": "最小二乗法で y = slope * x + intercept を当てはめます。",
+                    "desc_ko": "최소제곱법으로 y = slope * x + intercept를 맞춥니다.",
+                    "details": "Accepts two `std::span<const float>` inputs and returns `optional<LineFit>` with double slope and intercept to preserve calculation precision. Uses scalar double accumulation in two passes after centering. Empty input, unequal lengths, fewer than two pairs, any NaN/infinity, or zero x variance returns `nullopt`. Constant y gives a horizontal line. Check the result before reading coefficients:",
+                    "details_ja": "2つの `std::span<const float>` を受け取り、計算精度を保つ double の slope と intercept を持つ `optional<LineFit>` を返します。スカラーの double で2回走査し、平均を引いて計算します。空入力、長さの不一致、2組未満、NaN・無限大の混入、x の分散が0の場合は `nullopt` を返します。y が一定なら水平線になります。係数を読む前に結果を確認します。",
+                    "details_ko": "두 `std::span<const float>` 입력을 받고 계산 정밀도를 유지하는 double slope와 intercept를 가진 `optional<LineFit>`를 반환합니다. 스칼라 double로 두 번 순회하며 평균을 뺀 뒤 계산합니다. 빈 입력, 길이 불일치, 두 쌍 미만, NaN이나 무한대 포함, x의 분산이 0이면 `nullopt`를 반환합니다. y가 일정하면 수평선이 됩니다. 계수를 읽기 전에 결과를 확인합니다.",
+                    "snippet": "void tcApp::setup() {\n    std::vector<float> x{0, 1, 2}, y{3, 5, 7};\n    auto line = fitLine(x, y);\n    if (line) logNotice(\"Stats\") << line->slope << \", \" << line->intercept;\n}\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "floor",
                     "params": "x",
                     "params_typed": "float x",
@@ -9872,6 +9912,26 @@ const TrussCAPI = {
                     "details": "- `frequencyToBin(freq, fftSize, sampleRate)` takes `freq` in Hz, the full transform length, and the sampling rate in samples per second. It returns `(int)(freq * fftSize / sampleRate + 0.5f)`, rounding nonnegative bin positions to the nearest integer with halfway cases rounded upward.\n- The result is not clamped to available bins. Negative inputs use the same expression, which truncates toward zero after adding `0.5f`, rather than rounding symmetrically.\n- Supply a positive `sampleRate` and values whose converted result fits in `int`; neither condition is checked.",
                     "details_ja": "- `frequencyToBin(freq, fftSize, sampleRate)` は、Hz 単位の `freq`、変換全体の長さ、1 秒あたりのサンプル数を受け取ります。`(int)(freq * fftSize / sampleRate + 0.5f)` を返し、非負のビン位置を最も近い整数へ丸め、ちょうど中間では大きい方を選びます。\n- 結果を有効なビンの範囲にクランプしません。負の入力にも同じ式を使い、`0.5f` を加えてからゼロの方向に切り捨てるため、正負対称の丸めにはなりません。\n- `sampleRate` には正の値を指定し、変換結果が `int` に収まる値を使用してください。どちらの条件も検査しません。",
                     "details_ko": "- `frequencyToBin(freq, fftSize, sampleRate)`는 Hz 단위의 `freq`, 전체 변환 길이, 초당 샘플 수를 받습니다. `(int)(freq * fftSize / sampleRate + 0.5f)`를 반환하며, 음수가 아닌 빈 위치를 가장 가까운 정수로 반올림하고 정확히 중간이면 큰 쪽을 선택합니다.\n- 결과를 유효한 빈 범위로 제한하지 않습니다. 음수 입력에도 같은 식을 사용하며 `0.5f`를 더한 뒤 0 방향으로 잘라 내므로 양수와 대칭으로 반올림하지 않습니다.\n- `sampleRate`에는 양수를 지정하고 변환 결과가 `int` 범위 안에 들어오는 값을 사용합니다. 두 조건 모두 검사하지 않습니다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "histogram",
+                    "params": "values, bins, low, high",
+                    "params_typed": "std::span<const float> values, std::size_t bins, float low, float high",
+                    "return_type": "std::optional<std::vector<std::size_t>>",
+                    "desc": "Counts values in equal-width bins over [low, high).",
+                    "keywords": [],
+                    "desc_ja": "[low, high) の範囲を等幅のビンに分けて値を数えます。",
+                    "desc_ko": "[low, high) 범위를 같은 너비의 구간으로 나누어 값을 셉니다.",
+                    "details": "Accepts `std::span<const float>` and returns `optional<vector<size_t>>`. Empty input returns a vector containing `bins` zeros. Skips NaN, infinities, and values outside `[low, high)`; low is included and high is excluded. Zero bins, nonfinite bounds, or low >= high returns `nullopt`. Check the result before reading counts:",
+                    "details_ja": "`std::span<const float>` を受け取り、`optional<vector<size_t>>` を返します。空入力では bins 個のゼロを返します。NaN、無限大、`[low, high)` の範囲外の値は数えません。low は含み、high は含みません。bins が0、境界が非有限、または low >= high の場合は `nullopt` を返します。件数を読む前に結果を確認します。",
+                    "details_ko": "`std::span<const float>`를 받고 `optional<vector<size_t>>`를 반환합니다. 빈 입력에는 bins개의 0을 반환합니다. NaN, 무한대, `[low, high)` 밖의 값은 세지 않습니다. low는 포함하고 high는 제외합니다. bins가 0이거나 경계가 유한하지 않거나 low >= high이면 `nullopt`를 반환합니다. 개수를 읽기 전에 결과를 확인합니다.",
+                    "snippet": "void tcApp::setup() {\n    std::vector<float> values{0, 0.25f, 0.5f, 1};\n    auto counts = histogram(values, 4, 0, 1);\n    if (counts) logNotice(\"Stats\") << counts->at(0);\n}\n",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -10017,6 +10077,26 @@ const TrussCAPI = {
                     ]
                 },
                 {
+                    "name": "median",
+                    "params": "values",
+                    "params_typed": "std::span<const float> values",
+                    "return_type": "std::optional<float>",
+                    "desc": "Returns the middle value, averaging the middle pair for an even count.",
+                    "keywords": [],
+                    "desc_ja": "中央の値を返し、偶数個では中央の2値を平均します。",
+                    "desc_ko": "중앙값을 반환하며 짝수 개이면 가운데 두 값을 평균합니다.",
+                    "details": "Accepts `std::span<const float>` and copies the input to preserve its order. Ignores NaN; empty or all-NaN input returns `nullopt`. Equivalent to `percentile(values, 0.5)`. Returns `optional<float>`; infinities are retained, but interpolation between opposite infinities returns `nullopt`. Check the result before use:",
+                    "details_ja": "`std::span<const float>` を受け取り、順序を保つため入力をコピーします。NaN は除外し、空またはすべて NaN の入力には `nullopt` を返します。`percentile(values, 0.5)` と同じです。戻り値は `optional<float>` です。無限大は残しますが、正負の無限大間の補間は `nullopt` になります。使用前に結果を確認します。",
+                    "details_ko": "`std::span<const float>`를 받고 순서를 유지하도록 입력을 복사합니다. NaN은 제외하며 빈 입력이나 모두 NaN인 입력에는 `nullopt`를 반환합니다. `percentile(values, 0.5)`와 같습니다. 반환형은 `optional<float>`입니다. 무한대는 유지하지만 양과 음의 무한대 사이의 보간은 `nullopt`를 반환합니다. 사용 전에 결과를 확인합니다.",
+                    "snippet": "void tcApp::setup() {\n    std::vector<float> values{9, 1, 5, 3};\n    auto result = median(values);\n    if (result) logNotice(\"Stats\") << *result;\n}\n",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
                     "name": "min",
                     "params": "a, b",
                     "params_typed": "float a, float b",
@@ -10110,6 +10190,26 @@ const TrussCAPI = {
                     "details": "- `nextPowerOfTwo(int n)` returns an `int`; for example, `nextPowerOfTwo(1000)` returns `1024`, and an existing power of two is unchanged.\n- All values `n <= 1`, including zero and negative values, return `1`.\n- The required power of two must fit in `int`. Overflow from repeated doubling is not checked.",
                     "details_ja": "- `nextPowerOfTwo(int n)` は `int` を返します。例えば、`nextPowerOfTwo(1000)` は `1024` を返し、すでに 2 のべき乗ならその値を返します。\n- ゼロや負の値を含め、`n <= 1` の場合はすべて `1` を返します。\n- 必要な 2 のべき乗が `int` に収まる必要があります。繰り返し 2 倍にする際のオーバーフローは検査しません。",
                     "details_ko": "- `nextPowerOfTwo(int n)`은 `int`를 반환합니다. 예를 들어 `nextPowerOfTwo(1000)`은 `1024`를 반환하며 이미 2의 거듭제곱이면 그 값을 반환합니다.\n- 0과 음수를 포함하여 `n <= 1`인 모든 값에 대해 `1`을 반환합니다.\n- 필요한 2의 거듭제곱이 `int` 범위 안에 들어와야 합니다. 반복해서 두 배로 늘릴 때의 오버플로는 검사하지 않습니다.",
+                    "examples": [
+                        {
+                            "name": "AllFeaturesExample",
+                            "group": "tests"
+                        }
+                    ]
+                },
+                {
+                    "name": "percentile",
+                    "params": "values, p",
+                    "params_typed": "std::span<const float> values, double p",
+                    "return_type": "std::optional<float>",
+                    "desc": "Returns an interpolated percentile with a fraction p from 0 to 1.",
+                    "keywords": [],
+                    "desc_ja": "0〜1 の割合 p に対応する補間したパーセンタイルを返します。",
+                    "desc_ko": "0부터 1까지의 비율 p에 해당하는 보간된 백분위수를 반환합니다.",
+                    "details": "Accepts `std::span<const float>` and returns `optional<float>`. Copies the input, ignores NaN, and linearly interpolates rank `p * (n - 1)`. Empty/all-NaN input or nonfinite/out-of-range p returns `nullopt`; p is not clamped. Infinities are retained; interpolation between opposite infinities returns `nullopt`. Check the result before use:",
+                    "details_ja": "`std::span<const float>` を受け取り、`optional<float>` を返します。入力をコピーし、NaN を除外して順位 `p * (n - 1)` を線形補間します。空またはすべて NaN の入力、非有限または範囲外の p は `nullopt` になります。p はクランプしません。無限大は残しますが、正負の無限大間の補間は `nullopt` になります。使用前に結果を確認します。",
+                    "details_ko": "`std::span<const float>`를 받고 `optional<float>`를 반환합니다. 입력을 복사하고 NaN을 제외한 뒤 순위 `p * (n - 1)`를 선형 보간합니다. 빈 입력, 모두 NaN인 입력, 유한하지 않거나 범위를 벗어난 p에는 `nullopt`를 반환합니다. p를 제한하지 않습니다. 무한대는 유지하지만 양과 음의 무한대 사이의 보간은 `nullopt`를 반환합니다. 사용 전에 결과를 확인합니다.",
+                    "snippet": "void tcApp::setup() {\n    std::vector<float> values{9, 1, 5, 3};\n    auto result = percentile(values, 0.25);\n    if (result) logNotice(\"Stats\") << *result;\n}\n",
                     "examples": [
                         {
                             "name": "AllFeaturesExample",
@@ -11138,9 +11238,9 @@ const TrussCAPI = {
                     "related": [
                         "setFps"
                     ],
-                    "details": "- Acts on the current window, including secondary setup, event, update and draw callbacks. Each window has its own scheduler; tick-source rate and visibility follow the OS.\n- With `setFps(EVENT_DRIVEN)`, requests `count` draws, defaulting to `1`; the usual synchronized update also runs for each drawn frame.\n- Sets the remaining draw count to the larger of its current value and `count`, rather than adding counts. Zero or negative values do not cancel pending draws, and continuous rendering modes keep their normal pacing.\n- In App code it uses the App's own window; elsewhere it needs exactly one open window, and otherwise logs an error and does nothing (see `events`).",
-                    "details_ja": "- 副窓の setup・event・update・draw 内も含め、現在のウィンドウを対象にします。各窓は個別のスケジューラを持ち、tick の頻度と可視性は OS に従います。\n- `setFps(EVENT_DRIVEN)` のときに、`count` 回の描画を要求します。既定値は `1` で、通常の同期更新も描画フレームごとに実行します。\n- 残りの描画回数は加算せず、現在値と `count` の大きい方にします。`0` や負の値では保留中の描画を取り消せず、連続描画モードでは通常の描画間隔を維持します。\n- App のコードではその App のウィンドウが対象です。それ以外の場所では、開いているウィンドウがちょうど 1 つのときだけ動き、そうでなければエラーを記録して何もしません（`events` を参照）。",
-                    "details_ko": "- `getDrawCount()`는 각 윈도우의 실제 그리기를 셉니다. 동작 변경: 이 모드에서 메인의 `getDrawCount() % N` 주기는 이전 장치 프레임 기준 주기와 다릅니다.\n- `setFps(EVENT_DRIVEN)` 상태에서 `count`회의 그리기를 요청합니다. 기본값은 `1`이며 일반적인 동기 갱신도 그리는 프레임마다 실행합니다.\n- 남은 그리기 횟수에 더하지 않고 현재 값과 `count` 중 큰 값을 설정합니다. `0`이나 음수로 대기 중인 그리기를 취소할 수 없으며 연속 렌더링 모드에서는 기존 그리기 간격을 유지합니다.\n- App 코드에서는 그 App의 창이 대상입니다. 그 밖의 곳에서는 열린 창이 정확히 하나일 때만 동작하며, 그렇지 않으면 오류를 기록하고 아무 동작도 하지 않습니다(`events` 참조).",
+                    "details": "- Acts on the current window, including secondary setup, event, update and draw callbacks. Each window has its own scheduler; tick-source rate and visibility follow the OS.\n- With `setFps(EVENT_DRIVEN)`, requests `count` draws, defaulting to `1`; the usual synchronized update also runs for each drawn frame.\n- TrussC also draws on its own in this mode: once when the window is first shown, twice after a resize, and when a screenshot or an MCP capture needs a frame. Call `redraw()` for every change of your own that should appear on screen.\n- Sets the remaining draw count to the larger of its current value and `count`, rather than adding counts. Zero or negative values do not cancel pending draws, and continuous rendering modes keep their normal pacing.\n- In App code it uses the App's own window; elsewhere it needs exactly one open window, and otherwise logs an error and does nothing (see `events`).",
+                    "details_ja": "- 副窓の setup・event・update・draw 内も含め、現在のウィンドウを対象にします。各窓は個別のスケジューラを持ち、tick の頻度と可視性は OS に従います。\n- `setFps(EVENT_DRIVEN)` のときに、`count` 回の描画を要求します。既定値は `1` で、通常の同期更新も描画フレームごとに実行します。\n- このモードでも、ウィンドウが最初に表示されたとき（1 回）、大きさが変わったとき（2 回）、スクリーンショットや MCP の取り込みでフレームが必要なときは、自動で描画します。画面に出したい自分の変更には、毎回 `redraw()` を呼んでください。\n- 残りの描画回数は加算せず、現在値と `count` の大きい方にします。`0` や負の値では保留中の描画を取り消せず、連続描画モードでは通常の描画間隔を維持します。\n- App のコードではその App のウィンドウが対象です。それ以外の場所では、開いているウィンドウがちょうど 1 つのときだけ動き、そうでなければエラーを記録して何もしません（`events` を参照）。",
+                    "details_ko": "- 보조 창의 setup·event·update·draw 안을 포함해 현재 윈도우를 대상으로 합니다. 각 창은 개별 스케줄러를 가지며 tick 빈도와 가시성은 OS를 따릅니다.\n- `setFps(EVENT_DRIVEN)` 상태에서 `count`회의 그리기를 요청합니다. 기본값은 `1`이며 일반적인 동기 갱신도 그리는 프레임마다 실행합니다.\n- 이 모드에서도 윈도우가 처음 표시될 때(1회), 크기가 바뀐 뒤(2회), 스크린샷이나 MCP 캡처에 프레임이 필요할 때는 자동으로 그립니다. 화면에 반영할 변경에는 매번 `redraw()`를 호출하세요.\n- 남은 그리기 횟수에 더하지 않고 현재 값과 `count` 중 큰 값을 설정합니다. `0`이나 음수로 대기 중인 그리기를 취소할 수 없으며 연속 렌더링 모드에서는 기존 그리기 간격을 유지합니다.\n- App 코드에서는 그 App의 창이 대상입니다. 그 밖의 곳에서는 열린 창이 정확히 하나일 때만 동작하며, 그렇지 않으면 오류를 기록하고 아무 동작도 하지 않습니다(`events` 참조).",
                     "snippet": "void tcApp::setup() {\n    setFps(EVENT_DRIVEN);\n    redraw(2);\n}\n",
                     "examples": [
                         {
@@ -19700,9 +19800,9 @@ const TrussCAPI = {
                 "redraw",
                 "on demand"
             ],
-            "details": "- This float constant is 0. With `setFps(EVENT_DRIVEN)`, the current window updates and draws together when `redraw()` requests a frame.\n- With `setIndependentFps`, an `EVENT_DRIVEN` draw rate waits for `redraw()`, while an `EVENT_DRIVEN` update rate disables independent updates.",
-            "details_ja": "- 値が 0 の float 定数です。`setFps(EVENT_DRIVEN)` を指定すると、現在のウィンドウは `redraw()` でフレームを要求したときに更新と描画を一緒に行います。\n- `setIndependentFps` では、描画レートを `EVENT_DRIVEN` にすると `redraw()` を待ち、更新レートを `EVENT_DRIVEN` にすると独立した更新を行わなくなります。",
-            "details_ko": "- 값이 0인 float 상수입니다. `setFps(EVENT_DRIVEN)`을 지정하면 현재 윈도우는 `redraw()`로 프레임을 요청했을 때 업데이트와 그리기를 함께 수행합니다.\n- `setIndependentFps`에서 그리기 레이트를 `EVENT_DRIVEN`으로 지정하면 `redraw()`를 기다리며, 업데이트 레이트를 `EVENT_DRIVEN`으로 지정하면 독립 업데이트를 수행하지 않습니다."
+            "details": "- This float constant is 0. With `setFps(EVENT_DRIVEN)`, the current window updates and draws together when `redraw()` requests a frame.\n- With `setIndependentFps`, an `EVENT_DRIVEN` draw rate waits for `redraw()`, while an `EVENT_DRIVEN` update rate disables independent updates.\n- Besides `redraw()`, the window also draws once when it is first shown, twice after a resize, and when a screenshot or an MCP capture needs a frame.",
+            "details_ja": "- 値が 0 の float 定数です。`setFps(EVENT_DRIVEN)` を指定すると、現在のウィンドウは `redraw()` でフレームを要求したときに更新と描画を一緒に行います。\n- `setIndependentFps` では、描画レートを `EVENT_DRIVEN` にすると `redraw()` を待ち、更新レートを `EVENT_DRIVEN` にすると独立した更新を行わなくなります。\n- `redraw()` のほかに、ウィンドウが最初に表示されたとき（1 回）、大きさが変わったとき（2 回）、スクリーンショットや MCP の取り込みでフレームが必要なときにも描画します。",
+            "details_ko": "- 값이 0인 float 상수입니다. `setFps(EVENT_DRIVEN)`을 지정하면 현재 윈도우는 `redraw()`로 프레임을 요청했을 때 업데이트와 그리기를 함께 수행합니다.\n- `setIndependentFps`에서 그리기 레이트를 `EVENT_DRIVEN`으로 지정하면 `redraw()`를 기다리며, 업데이트 레이트를 `EVENT_DRIVEN`으로 지정하면 독립 업데이트를 수행하지 않습니다.\n- `redraw()` 외에도 윈도우가 처음 표시될 때(1회), 크기가 바뀐 뒤(2회), 스크린샷이나 MCP 캡처에 프레임이 필요할 때도 그립니다."
         },
         {
             "name": "EventPriority::AfterApp",
@@ -36735,6 +36835,36 @@ const TrussCAPI = {
                         "Light::setAttenuation",
                         "Light::setProjectionTexture"
                     ]
+                }
+            ]
+        },
+        {
+            "name": "LineFit",
+            "desc": "Least-squares line coefficients returned by fitLine, stored as doubles.",
+            "keywords": [],
+            "desc_ja": "fitLine が返す最小二乗直線の係数を double で保持します。",
+            "desc_ko": "fitLine이 반환하는 최소제곱 직선 계수를 double로 저장합니다.",
+            "examples": [
+                {
+                    "name": "AllFeaturesExample",
+                    "group": "tests"
+                }
+            ],
+            "snippet": "void tcApp::setup() {\n    std::vector<float> x{0, 1, 2}, y{3, 5, 7};\n    auto line = fitLine(x, y);\n    if (line) logNotice(\"Stats\") << line->slope << \", \" << line->intercept;\n}\n",
+            "properties": [
+                {
+                    "name": "intercept",
+                    "type": "double",
+                    "desc": "Intercept in y = slope * x + intercept.",
+                    "desc_ja": "y = slope * x + intercept の切片です。",
+                    "desc_ko": "y = slope * x + intercept의 절편입니다."
+                },
+                {
+                    "name": "slope",
+                    "type": "double",
+                    "desc": "Slope in y = slope * x + intercept.",
+                    "desc_ja": "y = slope * x + intercept の傾きです。",
+                    "desc_ko": "y = slope * x + intercept의 기울기입니다."
                 }
             ]
         },
