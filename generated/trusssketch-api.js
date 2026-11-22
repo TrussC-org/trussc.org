@@ -15000,6 +15000,12 @@ const TrussSketchAPI = {
      "desc": "Reads one received byte."
     },
     {
+     "name": "readBytes",
+     "snippet": "readBytes(${1:buffer})",
+     "return": "int",
+     "desc": "Reads received bytes into a buffer or string."
+    },
+    {
      "name": "setup",
      "snippet": "setup(${1:portName}, ${2:baudRate})",
      "return": "bool",
@@ -17805,6 +17811,12 @@ const TrussSketchAPI = {
      "snippet": "processNetwork()",
      "return": "void",
      "desc": "Processes pending UDP datagrams."
+    },
+    {
+     "name": "receive",
+     "snippet": "receive(${1:buffer})",
+     "return": "int",
+     "desc": "Receives one UDP datagram into a buffer."
     },
     {
      "name": "send",

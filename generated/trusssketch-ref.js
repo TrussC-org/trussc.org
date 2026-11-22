@@ -29018,6 +29018,18 @@ const TrussCAPI = {
                     "desc_ko": "수신한 1바이트를 읽는다."
                 },
                 {
+                    "name": "serial:readBytes",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": "buffer"
+                        }
+                    ],
+                    "desc": "Reads received bytes into a buffer or string.",
+                    "desc_ja": "受信したバイト列をバッファまたは文字列に読み取ります。",
+                    "desc_ko": "수신한 바이트를 버퍼나 문자열로 읽습니다."
+                },
+                {
                     "name": "serial:setup",
                     "signatures": [
                         {
@@ -29055,11 +29067,15 @@ const TrussCAPI = {
                         {
                             "ret": "number",
                             "params": "buffer"
+                        },
+                        {
+                            "ret": "number",
+                            "params": "buffer"
                         }
                     ],
                     "desc": "Writes bytes from a buffer or string to the serial connection.",
-                    "desc_ja": "バッファまたは文字列のバイト列をシリアル接続に書き込む。",
-                    "desc_ko": "버퍼나 문자열의 바이트를 시리얼 연결에 쓴다."
+                    "desc_ja": "バッファまたは文字列のバイト列をシリアル接続に書き込みます。",
+                    "desc_ko": "버퍼나 문자열의 바이트를 시리얼 연결에 씁니다."
                 }
             ],
             "static_methods": [
@@ -33785,11 +33801,27 @@ const TrussCAPI = {
                     "desc_ko": "수신 대기 중인 UDP 데이터그램을 처리한다."
                 },
                 {
+                    "name": "udpSocket:receive",
+                    "signatures": [
+                        {
+                            "ret": "number",
+                            "params": "buffer"
+                        }
+                    ],
+                    "desc": "Receives one UDP datagram into a buffer.",
+                    "desc_ja": "UDP データグラムを 1 個バッファに受信します。",
+                    "desc_ko": "UDP 데이터그램 하나를 버퍼로 수신합니다."
+                },
+                {
                     "name": "udpSocket:send",
                     "signatures": [
                         {
                             "ret": "boolean",
                             "params": "message"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": "data"
                         }
                     ],
                     "desc": "Sends a UDP datagram to the configured destination.",
@@ -33802,11 +33834,15 @@ const TrussCAPI = {
                         {
                             "ret": "boolean",
                             "params": "host, port, message"
+                        },
+                        {
+                            "ret": "boolean",
+                            "params": "host, port, data"
                         }
                     ],
                     "desc": "Sends a UDP datagram to a specified host and port.",
-                    "desc_ja": "指定したホストとポートに UDP データグラムを送信する。",
-                    "desc_ko": "지정한 호스트와 포트로 UDP 데이터그램을 전송한다."
+                    "desc_ja": "指定したホストとポートに UDP データグラムを送信します。",
+                    "desc_ko": "지정한 호스트와 포트로 UDP 데이터그램을 전송합니다."
                 },
                 {
                     "name": "udpSocket:setBindAddress",
