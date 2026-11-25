@@ -10,7 +10,11 @@ source "$SCRIPT_DIR/common.sh"
 TRUSSC_REPO_DIR="$SCRIPT_DIR/../../TrussC"
 TRUSSCLI_BIN="$TRUSSC_REPO_DIR/tools/bin/trusscli.app/Contents/MacOS/trusscli"
 
-if [ ! -f "$TRUSSCLI_BIN" ]; then
+# DRY_RUN=1 lists each sample's source directory and upload keys without
+# building or uploading.
+DRY_RUN="${DRY_RUN:-0}"
+
+if [[ "$DRY_RUN" != 1 && ! -f "$TRUSSCLI_BIN" ]]; then
     log_error "trusscli not found at: $TRUSSCLI_BIN"
     log_error "Please build trusscli first: ./tools/build_mac.command"
     exit 1
@@ -131,14 +135,20 @@ for sample_input in "${samples[@]}"; do
 
     if [[ -z "$sample_dir" ]]; then
         log_error "$sample: ディレクトリが見つかりません"
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
+        continue
+    fi
+
+    if [[ "$DRY_RUN" == 1 ]]; then
+        echo "DRY-RUN $sample_input: build $sample_dir -> $WASM_BUCKET/wasm/$sample_type/$sample_group/${sample}.{html,js,wasm,data}"
+        success_count=$((success_count + 1))
         continue
     fi
 
     log_info "$sample: プロジェクト更新 (Web)..."
     if ! "$TRUSSCLI_BIN" update -p "$sample_dir" --web --tc-root "$TRUSSC_REPO_DIR"; then
         log_error "$sample: プロジェクト更新失敗"
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
         continue
     fi
 
@@ -163,7 +173,7 @@ for sample_input in "${samples[@]}"; do
             file="$bin_dir/${sample}.${ext}"
             if [[ -f "$file" ]]; then
                 content_type=$(content_type_for_ext "$ext")
-                if ! wrangler r2 object put "$WASM_BUCKET/$r2_base/${sample}.${ext}" --file "$file" --remote --content-type "$content_type" >/dev/null 2>&1; then
+                if ! wrangler r2 object put "$WASM_BUCKET/$r2_base/${sample}.${ext}" --file "$file" --remote --content-type "$content_type" --cache-control "$WEB_CACHE_CONTROL" >/dev/null 2>&1; then
                     log_error "$sample: ${sample}.${ext} のアップロード失敗"
                     upload_success=false
                 fi
@@ -172,13 +182,13 @@ for sample_input in "${samples[@]}"; do
 
         if $upload_success; then
             log_success "$sample: アップロード完了"
-            ((success_count++))
+            success_count=$((success_count + 1))
         else
-            ((fail_count++))
+            fail_count=$((fail_count + 1))
         fi
     else
         log_error "$sample: WASMビルド失敗"
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
     fi
 done
 
