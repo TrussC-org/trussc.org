@@ -875,18 +875,6 @@
         }
       ]
     },
-    "tcxTcv": {
-      "visible": false,
-      "items": [
-        {
-          "name": "example-tcvPlayer",
-          "width": 960,
-          "height": 600,
-          "webSupported": false,
-          "autoScreenshot": false
-        }
-      ]
-    },
     "tcxImGui": {
       "visible": true,
       "items": [
