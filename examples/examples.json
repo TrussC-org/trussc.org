@@ -971,6 +971,17 @@
           "webSupported": false
         }
       ]
+    },
+    "tcxInputReplay": {
+      "visible": true,
+      "items": [
+        {
+          "name": "example-ringRecording",
+          "width": 960,
+          "height": 600,
+          "webSupported": false
+        }
+      ]
     }
   }
 }
