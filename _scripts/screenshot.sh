@@ -138,7 +138,7 @@ for sample_input in "${samples[@]}"; do
     sample_info=$(get_sample_info "$sample" "$addon_hint")
     if [[ -z "$sample_info" ]]; then
         log_warn "$sample_input: examples.jsonに登録されていません"
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
         continue
     fi
 
@@ -149,7 +149,7 @@ for sample_input in "${samples[@]}"; do
 
     if [[ -z "$sample_dir" ]]; then
         log_error "$sample: ディレクトリが見つかりません"
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
         continue
     fi
 
@@ -165,7 +165,7 @@ for sample_input in "${samples[@]}"; do
 
     if [[ -z "$app_path" || ! -x "$app_path" ]]; then
         log_error "$sample: 実行ファイルが見つかりません（先にビルドしてください）"
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
         continue
     fi
 
@@ -219,14 +219,14 @@ for sample_input in "${samples[@]}"; do
         log_info "$sample: R2にアップロード ($r2_path)..."
         if wrangler r2 object put "$WASM_BUCKET/$r2_path" --file "$thumb_path" --remote >/dev/null 2>&1; then
             log_success "$sample: スクショ完了"
-            ((success_count++))
+            success_count=$((success_count + 1))
         else
             log_error "$sample: R2アップロード失敗"
-            ((fail_count++))
+            fail_count=$((fail_count + 1))
         fi
     else
         log_error "$sample: スクショ撮影失敗"
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
     fi
 done
 

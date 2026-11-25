@@ -41,14 +41,14 @@ for sample_input in "${samples[@]}"; do
 
     if [[ -z "$sample_dir" ]]; then
         log_error "$sample_input: ディレクトリが見つかりません"
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
         continue
     fi
 
     log_info "$sample: プロジェクト更新..."
     if ! "$TRUSSCLI_BIN" update -p "$sample_dir" --tc-root "$TRUSSC_REPO_DIR"; then
         log_error "$sample: プロジェクト更新失敗"
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
         continue
     fi
 
@@ -64,10 +64,10 @@ for sample_input in "${samples[@]}"; do
     # grants it without touching the example's code. Web builds are unaffected.
     if cmake --preset macos -DTRUSSC_MCP_DEV=ON && cmake --build --preset macos; then
         log_success "$sample: ビルド完了"
-        ((success_count++))
+        success_count=$((success_count + 1))
     else
         log_error "$sample: ビルド失敗"
-        ((fail_count++))
+        fail_count=$((fail_count + 1))
     fi
 done
 
