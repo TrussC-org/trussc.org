@@ -71,6 +71,7 @@ while IFS= read -r path; do
         ctype=$(content_type_for_ext "$ext")
         if wrangler r2 object put "${WASM_BUCKET}/${key}" \
                 --file "$local_file" --remote --content-type "$ctype" \
+                --cache-control "$WEB_CACHE_CONTROL" \
                 >/dev/null 2>&1; then
             echo "  fixed ${path}.${ext}  →  $ctype"
             fixed=$((fixed + 1))

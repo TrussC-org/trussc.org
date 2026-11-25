@@ -18,6 +18,9 @@ EXAMPLES_DIR="$TRUSSC_ROOT/examples"
 ADDONS_DIR="$TRUSSC_ROOT/addons"
 SAMPLES_DIR="/tmp/trussc-samples"
 WASM_BUCKET="trussc-wasm"
+# Uploaded web files revalidate on every load, so a re-upload never pairs a new
+# .wasm with a cached older .js (or the reverse) at the edge or in the browser.
+WEB_CACHE_CONTROL="no-cache"
 
 # サンプル名からディレクトリパスを取得
 # 戻り値: フルパス、見つからなければ空文字
@@ -115,11 +118,12 @@ get_all_samples() {
         done
     done
 
-    # addons
+    # addons: "<addon>/<name>", so each sample builds from its own addon's
+    # directory (many addons share names such as example-basic)
     for addon_dir in "$ADDONS_DIR"/*/; do
         for sample_dir in "$addon_dir"*/; do
             if [[ -d "$sample_dir" && -f "$sample_dir/CMakeLists.txt" ]]; then
-                samples+=("$(basename "$sample_dir")")
+                samples+=("$(basename "$addon_dir")/$(basename "$sample_dir")")
             fi
         done
     done
