@@ -88,6 +88,8 @@
       font-family: var(--font-sans,-apple-system,sans-serif); font-size: 13px; outline: none;
     }
     .cw-inp textarea:focus { border-color: var(--color-primary,#6366f1); }
+    /* iOS Safari zooms into focused fields under 16px; touch screens only. */
+    @media (pointer: coarse) { .cw-inp textarea { font-size: 16px; } }
     .cw-inp button { background: var(--color-primary,#6366f1); color: #fff; border: none; border-radius: 9px; padding: 0 14px; cursor: pointer; font-size: 13px; font-weight: 600; }
     .cw-inp button:disabled { opacity: 0.5; cursor: default; }
     .cw-blink::after { content: '▍'; color: var(--color-text-muted,#8b8b93); animation: cw-blink 1s step-end infinite; }
@@ -406,9 +408,11 @@
   }
 
   sendBtn.addEventListener('click', send);
+  // Enter inserts a newline; Cmd+Enter (Mac) or Ctrl+Enter sends.
   // Ignore Enter while the IME is composing (Japanese/Korean confirm key).
+  sendBtn.title = (/Mac|iPhone|iPad/.test(navigator.userAgent) ? '\u2318' : 'Ctrl') + '+Enter';
   qEl.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); send(); }
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey) && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); send(); }
   });
   qEl.addEventListener('input', function (e) {
     e.target.style.height = '38px';
