@@ -23,15 +23,17 @@ def command_names(help_text, *, required=False):
         if entry is None:
             raise ValueError(f"Unrecognized Commands: entry: {line!r}")
         names.append(entry[1])
-    if not names or len(names) != len(set(names)):
-        raise ValueError("Commands: section is empty or contains duplicates")
-    return sorted(names)
+    if not names:
+        raise ValueError("Commands: section is empty")
+    # One command may span several lines (e.g. "cache <command>" and
+    # "cache remove <spec>"); visit each name once.
+    return sorted(set(names))
 
 
 def capture(binary, commit):
     commands = {}
 
-    def visit(parts):
+    def visit(parts, parent_names=None):
         result = subprocess.run(
             [str(binary), *parts, "--help"], check=True,
             stdout=subprocess.PIPE, encoding="utf-8",
@@ -45,8 +47,13 @@ def capture(binary, commit):
                   file=sys.stderr)
             return
         commands[" ".join(parts)] = result.stdout
-        for name in command_names(result.stdout, required=not parts):
-            visit([*parts, name])
+        names = command_names(result.stdout, required=not parts)
+        # A subcommand whose help repeats its parent's command list (e.g.
+        # "cache remove --help") has no subcommands of its own.
+        if names == parent_names:
+            return
+        for name in names:
+            visit([*parts, name], names)
 
     visit([])
     return {"trussc_commit": commit, "commands": commands}
