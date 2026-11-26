@@ -23,9 +23,32 @@ class HelpTests(unittest.TestCase):
         self.assertEqual(help_tool.command_names("Usage: cli zoo\n"), [])
 
     def test_missing_empty_or_changed_command_section_fails(self):
-        for text in ["Usage: cli\n", "Commands:\n\n", "Commands:\n * changed format\n", "Commands:\n  a  A\n  a  A\n"]:
+        for text in ["Usage: cli\n", "Commands:\n\n", "Commands:\n * changed format\n"]:
             with self.subTest(text=text), self.assertRaises(ValueError):
                 help_tool.command_names(text, required=True)
+
+    def test_command_on_several_lines_is_listed_once(self):
+        text = "Commands:\n  cache <command>  C\n  cache remove <spec>  R\n  alpha  A\n\n"
+        self.assertEqual(help_tool.command_names(text, required=True), ["alpha", "cache"])
+
+    def test_subcommand_repeating_parent_list_is_not_descended(self):
+        group = "Usage: cli group\n\nCommands:\n  list  L\n  remove <spec>  R\n  remove --addon <spec>  A\n\n"
+        responses = {
+            (): "Commands:\n  group <command>  G\n  group remove <spec>  R\n\n",
+            ("group",): group,
+            ("group", "list"): group.replace("cli group", "cli group list", 1),
+            ("group", "remove"): group.replace("cli group", "cli group remove", 1),
+        }
+        calls = []
+
+        def run(args, **kwargs):
+            calls.append(tuple(args[1:-1]))
+            return subprocess.CompletedProcess(args, 0, responses[tuple(args[1:-1])])
+
+        with patch.object(help_tool.subprocess, "run", side_effect=run):
+            data = help_tool.capture(Path("cli"), "abc")
+        self.assertEqual(sorted(data["commands"]), ["", "group", "group list", "group remove"])
+        self.assertEqual(calls.count(("group", "remove")), 1)
 
     def test_capture_nested_help_and_preserve_text(self):
         responses = {
