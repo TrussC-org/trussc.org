@@ -7,7 +7,7 @@
 // Do not edit directly.
 
 const TrussCAPI = {
-    "version": "v0.8.1 (Lua)",
+    "version": "v0.8.2 (Lua)",
     "lang": "lua",
     "categories": [
         {
@@ -5262,7 +5262,7 @@ const TrussCAPI = {
                     "params": "decorated",
                     "params_typed": "decorated",
                     "return_type": "(nothing)",
-                    "desc": "Controls the resolved Window's standard decorations.",
+                    "desc": "Shows or hides window decorations while keeping the client size on Windows, macOS and X11.",
                     "keywords": [
                         "borderless",
                         "titlebar",
@@ -5270,8 +5270,8 @@ const TrussCAPI = {
                         "frame",
                         "decoration"
                     ],
-                    "desc_ja": "対象 Window の標準装飾を切り替える。",
-                    "desc_ko": "대상 Window의 표준 장식을 전환한다."
+                    "desc_ja": "Windows・macOS・X11 で内容領域のサイズを保ちながら、ウィンドウの標準装飾を切り替えます。",
+                    "desc_ko": "Windows, macOS, X11에서 클라이언트 영역 크기를 유지하면서 창의 표준 장식을 전환합니다."
                 },
                 {
                     "name": "setWindowPosition",
@@ -8173,6 +8173,23 @@ const TrussCAPI = {
                     "desc_ko": "스크린샷의 비동기 저장을 요청한다."
                 },
                 {
+                    "name": "setAndroidForegroundService",
+                    "params": "enabled",
+                    "params_typed": "enabled",
+                    "return_type": "(nothing)",
+                    "desc": "Opts in to Android mediaPlayback foreground service for background playback; visible opt-in requests notification permission on Android 13+ without delaying the service. No wake lock is acquired.",
+                    "keywords": [
+                        "android",
+                        "background",
+                        "foreground service",
+                        "mediaPlayback",
+                        "audio",
+                        "notification"
+                    ],
+                    "desc_ja": "Android のバックグラウンド再生用 mediaPlayback foreground service を有効にします。Android 13 以降は表示中の有効化で通知権限を要求し、結果を待たずにサービスを開始します。wake lock は取得しません。",
+                    "desc_ko": "Android 백그라운드 재생용 mediaPlayback foreground service를 켭니다. Android 13 이상에서는 표시 중에 활성화하면 알림 권한을 요청하고 결과를 기다리지 않고 서비스를 시작합니다. wake lock은 획득하지 않습니다."
+                },
+                {
                     "name": "setCustomBlendDesc",
                     "params": "desc",
                     "params_typed": "desc",
@@ -8187,7 +8204,7 @@ const TrussCAPI = {
                     "params": "allow",
                     "params_typed": "allow",
                     "return_type": "(nothing)",
-                    "desc": "Sets drawing while hidden for all existing windows and the default for new ones.",
+                    "desc": "Keeps desktop windows drawing while hidden for Spout/Syphon/NDI or recording; has no effect on iOS/Android.",
                     "keywords": [
                         "hidden",
                         "occluded",
@@ -8195,10 +8212,11 @@ const TrussCAPI = {
                         "Spout",
                         "Syphon",
                         "NDI",
-                        "recorder"
+                        "recorder",
+                        "android"
                     ],
-                    "desc_ja": "非表示中に描画するかを全ウィンドウに設定し、新規ウィンドウの既定値にします。",
-                    "desc_ko": "숨겨진 동안 그릴지 모든 기존 윈도우에 설정하고 새 윈도우의 기본값으로 지정합니다."
+                    "desc_ja": "デスクトップの非表示中も Spout/Syphon/NDI への送信や録画用に描画します。iOS/Android では効果がありません。",
+                    "desc_ko": "데스크톱에서 숨겨진 동안 Spout/Syphon/NDI 전송이나 녹화를 위해 그립니다. iOS/Android에서는 효과가 없습니다."
                 },
                 {
                     "name": "setResourceLoadConcurrency",
@@ -8229,6 +8247,24 @@ const TrussCAPI = {
                     ],
                     "desc_ja": "以降の描画に使う stencil 設定を Style の状態として適用します。",
                     "desc_ko": "이후 그리기에 사용할 스텐실 설정을 Style 상태로 적용합니다."
+                },
+                {
+                    "name": "setUpdateWhileHidden",
+                    "params": "allow",
+                    "params_typed": "allow",
+                    "return_type": "(nothing)",
+                    "desc": "Controls updates while hidden: pause desktop work or opt in to Android background CPU work; iOS opt-in is not supported yet.",
+                    "keywords": [
+                        "hidden",
+                        "occluded",
+                        "minimized",
+                        "background",
+                        "android",
+                        "update",
+                        "pause"
+                    ],
+                    "desc_ja": "非表示中の更新を制御します。デスクトップの処理停止や Android の CPU バックグラウンド処理に使い、iOS の有効化は未対応です。",
+                    "desc_ko": "숨김 업데이트를 제어하여 데스크톱 작업을 멈추거나 Android CPU 백그라운드 작업을 켭니다. iOS 활성화는 아직 지원하지 않습니다."
                 },
                 {
                     "name": "tanh",
@@ -10887,6 +10923,13 @@ const TrussCAPI = {
                     "desc_ko": "엔진의 출력 채널 수를 지정한다."
                 },
                 {
+                    "name": "audioSettings.contentType",
+                    "type": "AudioContentType",
+                    "desc": "Labels AAudio output as music for BGM or background playback.",
+                    "desc_ja": "BGMやバックグラウンド再生のAAudio出力を音楽として指定します。",
+                    "desc_ko": "BGM 또는 백그라운드 재생의 AAudio 출력을 음악으로 지정합니다."
+                },
+                {
                     "name": "audioSettings.device",
                     "type": "optional",
                     "desc": "Selects output by a device object, ahead of deviceName and backend.",
@@ -10906,6 +10949,13 @@ const TrussCAPI = {
                     "desc": "Sets an optional cap on simultaneous Sound voices; 0 means no cap.",
                     "desc_ja": "同時に再生できる Sound ボイス数の上限を任意で設定する。0 は上限なし。",
                     "desc_ko": "동시에 재생할 수 있는 Sound 보이스 수의 상한을 선택적으로 설정한다. 0은 상한 없음."
+                },
+                {
+                    "name": "audioSettings.performanceProfile",
+                    "type": "AudioPerformanceProfile",
+                    "desc": "Chooses low latency for instruments or a conservative profile for long BGM playback.",
+                    "desc_ja": "楽器向けの低レイテンシーか、長時間のBGM再生向けの保守的なプロファイルを選びます。",
+                    "desc_ko": "악기용 저지연 또는 장시간 BGM 재생용 보수적 프로파일을 선택합니다."
                 },
                 {
                     "name": "audioSettings.sampleRate",
@@ -37508,9 +37558,9 @@ const TrussCAPI = {
                             "params": "allow"
                         }
                     ],
-                    "desc": "Keeps this window drawing while hidden when enabled.",
-                    "desc_ja": "有効にすると、非表示中もこのウィンドウの描画を続けます。",
-                    "desc_ko": "활성화하면 숨겨진 동안에도 이 윈도우의 그리기를 계속합니다."
+                    "desc": "Keeps desktop windows drawing while hidden for Spout/Syphon/NDI or recording; has no effect on iOS/Android.",
+                    "desc_ja": "デスクトップの非表示中も Spout/Syphon/NDI への送信や録画用に描画します。iOS/Android では効果がありません。",
+                    "desc_ko": "데스크톱에서 숨겨진 동안 Spout/Syphon/NDI 전송이나 녹화를 위해 그립니다. iOS/Android에서는 효과가 없습니다."
                 },
                 {
                     "name": "window:setFps",
@@ -37595,6 +37645,18 @@ const TrussCAPI = {
                     "desc": "Sets this window's title.",
                     "desc_ja": "このウィンドウのタイトルを設定する。",
                     "desc_ko": "이 윈도우의 제목을 설정한다."
+                },
+                {
+                    "name": "window:setUpdateWhileHidden",
+                    "signatures": [
+                        {
+                            "ret": "(nothing)",
+                            "params": "allow"
+                        }
+                    ],
+                    "desc": "Controls updates while hidden: pause desktop work or opt in to Android background CPU work; iOS opt-in is not supported yet.",
+                    "desc_ja": "非表示中の更新を制御します。デスクトップの処理停止や Android の CPU バックグラウンド処理に使い、iOS の有効化は未対応です。",
+                    "desc_ko": "숨김 업데이트를 제어하여 데스크톱 작업을 멈추거나 Android CPU 백그라운드 작업을 켭니다. iOS 활성화는 아직 지원하지 않습니다."
                 },
                 {
                     "name": "window:setVisible",
@@ -38161,6 +38223,32 @@ const TrussCAPI = {
             "desc_ko": "오디오 엔진의 백엔드를 선택한다."
         },
         {
+            "name": "AudioContentType",
+            "desc": "Selects the AAudio output content type for background music.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "Default",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Music",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "BGM向けのAAudio出力のコンテンツ種別を選ぶ。",
+            "desc_ko": "BGM용 AAudio 출력의 콘텐츠 유형을 선택한다.",
+            "related": [
+                "AudioSettings::contentType"
+            ]
+        },
+        {
             "name": "AudioInitFailure",
             "desc": "Identifies the stage at which audio initialization failed.",
             "keywords": [],
@@ -38196,6 +38284,32 @@ const TrussCAPI = {
             ],
             "desc_ja": "オーディオの初期化に失敗した段階を表す。",
             "desc_ko": "오디오 초기화에 실패한 단계를 나타낸다."
+        },
+        {
+            "name": "AudioPerformanceProfile",
+            "desc": "Selects the output performance profile for instruments or BGM.",
+            "keywords": [],
+            "values": [
+                {
+                    "name": "LowLatency",
+                    "value": 0,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                },
+                {
+                    "name": "Conservative",
+                    "value": 1,
+                    "desc": "",
+                    "desc_ja": "",
+                    "desc_ko": ""
+                }
+            ],
+            "desc_ja": "楽器演奏やBGM向けの出力パフォーマンスプロファイルを選ぶ。",
+            "desc_ko": "악기 연주 또는 BGM용 출력 성능 프로파일을 선택한다.",
+            "related": [
+                "AudioSettings::performanceProfile"
+            ]
         },
         {
             "name": "AxisMode",

@@ -1427,14 +1427,24 @@ const TrussSketchAPI = {
      "desc": "Requests an asynchronous screenshot save."
     },
     {
+     "name": "setAndroidForegroundService",
+     "snippet": "setAndroidForegroundService(${1:enabled})",
+     "desc": "Opts in to Android mediaPlayback foreground service for background playback; visible opt-in requests notification permission on Android 13+ without delaying the service. No wake lock is acquired."
+    },
+    {
      "name": "setDrawWhileHidden",
      "snippet": "setDrawWhileHidden(${1:allow})",
-     "desc": "Sets drawing while hidden for all existing windows and the default for new ones."
+     "desc": "Keeps desktop windows drawing while hidden for Spout/Syphon/NDI or recording; has no effect on iOS/Android."
     },
     {
      "name": "setResourceLoadConcurrency",
      "snippet": "setResourceLoadConcurrency(${1:count})",
      "desc": "Sets how many resource loads can prepare at once."
+    },
+    {
+     "name": "setUpdateWhileHidden",
+     "snippet": "setUpdateWhileHidden(${1:allow})",
+     "desc": "Controls updates while hidden: pause desktop work or opt in to Android background CPU work; iOS opt-in is not supported yet."
     },
     {
      "name": "tanh",
@@ -2364,7 +2374,7 @@ const TrussSketchAPI = {
     {
      "name": "setWindowDecorated",
      "snippet": "setWindowDecorated(${1:decorated})",
-     "desc": "Controls the resolved Window's standard decorations."
+     "desc": "Shows or hides window decorations while keeping the client size on Windows, macOS and X11."
     },
     {
      "name": "setWindowPosition",
@@ -3411,6 +3421,24 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "AudioContentType",
+   "desc": "Selects the AAudio output content type for background music.",
+   "static_methods": [
+    {
+     "name": "Default",
+     "snippet": "Default",
+     "return": "AudioContentType",
+     "desc": "= 0"
+    },
+    {
+     "name": "Music",
+     "snippet": "Music",
+     "return": "AudioContentType",
+     "desc": "= 1"
+    }
+   ]
+  },
+  {
    "name": "AudioDeviceChangedArgs",
    "desc": "Carries information about the audio device opened by the engine.",
    "properties": [
@@ -3687,6 +3715,24 @@ const TrussSketchAPI = {
    ]
   },
   {
+   "name": "AudioPerformanceProfile",
+   "desc": "Selects the output performance profile for instruments or BGM.",
+   "static_methods": [
+    {
+     "name": "LowLatency",
+     "snippet": "LowLatency",
+     "return": "AudioPerformanceProfile",
+     "desc": "= 0"
+    },
+    {
+     "name": "Conservative",
+     "snippet": "Conservative",
+     "return": "AudioPerformanceProfile",
+     "desc": "= 1"
+    }
+   ]
+  },
+  {
    "name": "AudioRecorder",
    "desc": "Records the audio engine's master mix to a WAV file.",
    "constructor": {
@@ -3767,6 +3813,11 @@ const TrussSketchAPI = {
      "desc": "Specifies the engine's output channel count."
     },
     {
+     "name": "contentType",
+     "type": "AudioContentType",
+     "desc": "Labels AAudio output as music for BGM or background playback."
+    },
+    {
      "name": "device",
      "type": "std::optional<AudioDeviceInfo>",
      "desc": "Selects output by a device object, ahead of deviceName and backend."
@@ -3780,6 +3831,11 @@ const TrussSketchAPI = {
      "name": "maxPolyphony",
      "type": "int",
      "desc": "Sets an optional cap on simultaneous Sound voices; 0 means no cap."
+    },
+    {
+     "name": "performanceProfile",
+     "type": "AudioPerformanceProfile",
+     "desc": "Chooses low latency for instruments or a conservative profile for long BGM playback."
     },
     {
      "name": "sampleRate",
@@ -19682,7 +19738,7 @@ const TrussSketchAPI = {
      "name": "setDrawWhileHidden",
      "snippet": "setDrawWhileHidden(${1:allow})",
      "return": "void",
-     "desc": "Keeps this window drawing while hidden when enabled."
+     "desc": "Keeps desktop windows drawing while hidden for Spout/Syphon/NDI or recording; has no effect on iOS/Android."
     },
     {
      "name": "setFps",
@@ -19725,6 +19781,12 @@ const TrussSketchAPI = {
      "snippet": "setTitle(${1:title})",
      "return": "void",
      "desc": "Sets this window's title."
+    },
+    {
+     "name": "setUpdateWhileHidden",
+     "snippet": "setUpdateWhileHidden(${1:allow})",
+     "return": "void",
+     "desc": "Controls updates while hidden: pause desktop work or opt in to Android background CPU work; iOS opt-in is not supported yet."
     },
     {
      "name": "setVisible",
