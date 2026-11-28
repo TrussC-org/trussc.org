@@ -2795,7 +2795,7 @@ const TrussCAPI = {
                     "params": "title, message, defaultPath, folderSelection",
                     "params_typed": "title = \"\", message = \"\", defaultPath = fs.path(), folderSelection = false",
                     "return_type": "FileDialogResult",
-                    "desc": "Shows a file or folder selection dialog.",
+                    "desc": "Selects a file or folder, with an extension-list overload for case-insensitive file filtering.",
                     "keywords": [
                         "open",
                         "file",
@@ -2803,52 +2803,112 @@ const TrussCAPI = {
                         "browse",
                         "chooser"
                     ],
-                    "desc_ja": "ファイルまたはフォルダーの選択ダイアログを表示する。",
-                    "desc_ko": "파일 또는 폴더 선택 대화상자를 표시한다."
+                    "desc_ja": "ファイルやフォルダーを選択します。拡張子リストを受け取る形式では、大文字と小文字を区別せずファイルを絞り込みます。",
+                    "desc_ko": "파일이나 폴더를 선택합니다. 확장자 목록을 받는 형식은 대소문자를 구분하지 않고 파일을 필터링합니다."
+                },
+                {
+                    "name": "loadDialog",
+                    "params": "title, message, defaultPath, folderSelection, extensions",
+                    "params_typed": "title, message, defaultPath, folderSelection, extensions",
+                    "return_type": "FileDialogResult",
+                    "desc": "Selects a file or folder, with an extension-list overload for case-insensitive file filtering.",
+                    "keywords": [
+                        "open",
+                        "file",
+                        "picker",
+                        "browse",
+                        "chooser"
+                    ],
+                    "desc_ja": "ファイルやフォルダーを選択します。拡張子リストを受け取る形式では、大文字と小文字を区別せずファイルを絞り込みます。",
+                    "desc_ko": "파일이나 폴더를 선택합니다. 확장자 목록을 받는 형식은 대소문자를 구분하지 않고 파일을 필터링합니다."
                 },
                 {
                     "name": "loadDialogAsync",
                     "params": "title, message, defaultPath, folderSelection, callback",
                     "params_typed": "title, message, defaultPath, folderSelection, callback",
                     "return_type": "(nothing)",
-                    "desc": "Shows a file or folder picker with a result callback.",
+                    "desc": "Selects a file or folder, with an extension-list overload for case-insensitive file filtering.",
                     "keywords": [
                         "open",
                         "file",
                         "picker",
                         "callback"
                     ],
-                    "desc_ja": "結果コールバック付きのファイルまたはフォルダー選択ダイアログを表示する。",
-                    "desc_ko": "결과 콜백이 있는 파일 또는 폴더 선택 대화상자를 표시한다."
+                    "desc_ja": "ファイルやフォルダーを選択します。拡張子リストを受け取る形式では、大文字と小文字を区別せずファイルを絞り込みます。",
+                    "desc_ko": "파일이나 폴더를 선택합니다. 확장자 목록을 받는 형식은 대소문자를 구분하지 않고 파일을 필터링합니다."
+                },
+                {
+                    "name": "loadDialogAsync",
+                    "params": "title, message, defaultPath, folderSelection, extensions, callback",
+                    "params_typed": "title, message, defaultPath, folderSelection, extensions, callback",
+                    "return_type": "(nothing)",
+                    "desc": "Selects a file or folder, with an extension-list overload for case-insensitive file filtering.",
+                    "keywords": [
+                        "open",
+                        "file",
+                        "picker",
+                        "callback"
+                    ],
+                    "desc_ja": "ファイルやフォルダーを選択します。拡張子リストを受け取る形式では、大文字と小文字を区別せずファイルを絞り込みます。",
+                    "desc_ko": "파일이나 폴더를 선택합니다. 확장자 목록을 받는 형식은 대소문자를 구분하지 않고 파일을 필터링합니다."
                 },
                 {
                     "name": "saveDialog",
                     "params": "title, message, defaultPath, defaultName",
                     "params_typed": "title = \"\", message = \"\", defaultPath = fs.path(), defaultName = fs.path()",
                     "return_type": "FileDialogResult",
-                    "desc": "Shows a file save dialog.",
+                    "desc": "Selects a save destination, with an extension-list overload that appends a missing allowed extension before overwrite confirmation.",
                     "keywords": [
                         "file",
                         "picker",
                         "browse",
                         "export"
                     ],
-                    "desc_ja": "ファイルの保存ダイアログを表示する。",
-                    "desc_ko": "파일 저장 대화상자를 표시한다."
+                    "desc_ja": "保存先を選択します。拡張子リストを受け取る形式では、許可された拡張子がなければ上書き確認の前に追加します。",
+                    "desc_ko": "저장 위치를 선택합니다. 확장자 목록을 받는 형식은 허용된 확장자가 없으면 덮어쓰기 확인 전에 추가합니다."
+                },
+                {
+                    "name": "saveDialog",
+                    "params": "title, message, defaultPath, defaultName, extensions",
+                    "params_typed": "title, message, defaultPath, defaultName, extensions",
+                    "return_type": "FileDialogResult",
+                    "desc": "Selects a save destination, with an extension-list overload that appends a missing allowed extension before overwrite confirmation.",
+                    "keywords": [
+                        "file",
+                        "picker",
+                        "browse",
+                        "export"
+                    ],
+                    "desc_ja": "保存先を選択します。拡張子リストを受け取る形式では、許可された拡張子がなければ上書き確認の前に追加します。",
+                    "desc_ko": "저장 위치를 선택합니다. 확장자 목록을 받는 형식은 허용된 확장자가 없으면 덮어쓰기 확인 전에 추가합니다."
                 },
                 {
                     "name": "saveDialogAsync",
                     "params": "title, message, defaultPath, defaultName, callback",
                     "params_typed": "title, message, defaultPath, defaultName, callback",
                     "return_type": "(nothing)",
-                    "desc": "Shows a save destination picker with a result callback.",
+                    "desc": "Selects a save destination, with an extension-list overload that appends a missing allowed extension before overwrite confirmation.",
                     "keywords": [
                         "file",
                         "picker",
                         "callback"
                     ],
-                    "desc_ja": "結果コールバック付きの保存先選択ダイアログを表示する。",
-                    "desc_ko": "결과 콜백이 있는 저장 위치 선택 대화상자를 표시한다."
+                    "desc_ja": "保存先を選択します。拡張子リストを受け取る形式では、許可された拡張子がなければ上書き確認の前に追加します。",
+                    "desc_ko": "저장 위치를 선택합니다. 확장자 목록을 받는 형식은 허용된 확장자가 없으면 덮어쓰기 확인 전에 추가합니다."
+                },
+                {
+                    "name": "saveDialogAsync",
+                    "params": "title, message, defaultPath, defaultName, extensions, callback",
+                    "params_typed": "title, message, defaultPath, defaultName, extensions, callback",
+                    "return_type": "(nothing)",
+                    "desc": "Selects a save destination, with an extension-list overload that appends a missing allowed extension before overwrite confirmation.",
+                    "keywords": [
+                        "file",
+                        "picker",
+                        "callback"
+                    ],
+                    "desc_ja": "保存先を選択します。拡張子リストを受け取る形式では、許可された拡張子がなければ上書き確認の前に追加します。",
+                    "desc_ko": "저장 위치를 선택합니다. 확장자 목록을 받는 형식은 허용된 확장자가 없으면 덮어쓰기 확인 전에 추가합니다."
                 },
                 {
                     "name": "setCursor",
@@ -7957,10 +8017,10 @@ const TrussCAPI = {
                     "params": "code",
                     "params_typed": "code = 0",
                     "return_type": "(nothing)",
-                    "desc": "Asks the process to quit, with an exit code.",
+                    "desc": "Requests orderly app shutdown with an exit code; use exitApp() instead of std::exit.",
                     "keywords": [],
-                    "desc_ja": "終了コードを指定して、プロセスの終了を要求する。",
-                    "desc_ko": "종료 코드를 지정해 프로세스 종료를 요청한다."
+                    "desc_ja": "終了コードを指定してアプリの正常な終了を要求します。std::exit の代わりに exitApp() を使います。",
+                    "desc_ko": "종료 코드로 앱의 정상 종료를 요청합니다. std::exit 대신 exitApp()을 사용합니다."
                 },
                 {
                     "name": "exp2",

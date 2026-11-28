@@ -1354,7 +1354,7 @@ const TrussSketchAPI = {
     {
      "name": "exitApp",
      "snippet": "exitApp()",
-     "desc": "Asks the process to quit, with an exit code."
+     "desc": "Requests orderly app shutdown with an exit code; use exitApp() instead of std::exit."
     },
     {
      "name": "exp2",
@@ -2209,22 +2209,22 @@ const TrussSketchAPI = {
     {
      "name": "loadDialog",
      "snippet": "loadDialog()",
-     "desc": "Shows a file or folder selection dialog."
+     "desc": "Selects a file or folder, with an extension-list overload for case-insensitive file filtering."
     },
     {
      "name": "loadDialogAsync",
      "snippet": "loadDialogAsync(${1:title}, ${2:message}, ${3:defaultPath}, ${4:folderSelection}, ${5:callback})",
-     "desc": "Shows a file or folder picker with a result callback."
+     "desc": "Selects a file or folder, with an extension-list overload for case-insensitive file filtering."
     },
     {
      "name": "saveDialog",
      "snippet": "saveDialog()",
-     "desc": "Shows a file save dialog."
+     "desc": "Selects a save destination, with an extension-list overload that appends a missing allowed extension before overwrite confirmation."
     },
     {
      "name": "saveDialogAsync",
      "snippet": "saveDialogAsync(${1:title}, ${2:message}, ${3:defaultPath}, ${4:defaultName}, ${5:callback})",
-     "desc": "Shows a save destination picker with a result callback."
+     "desc": "Selects a save destination, with an extension-list overload that appends a missing allowed extension before overwrite confirmation."
     },
     {
      "name": "setCursor",
